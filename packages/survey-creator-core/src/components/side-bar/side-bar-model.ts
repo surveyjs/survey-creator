@@ -147,6 +147,7 @@ export class SidebarModel extends Base {
         iconSize: "auto",
         css: "svd-grid-expand",
         needSeparator: true,
+        visibleIndex: 1000,
         action: () => {
           this.expandSidebar();
           if (!this.flyoutMode) {

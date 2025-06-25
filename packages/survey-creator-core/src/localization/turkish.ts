@@ -129,6 +129,7 @@ export var turkishStrings = {
     generateReadableJSON: "Okunabilir JSON oluştur",
     toolbox: "Araç Kutusu",
     "property-grid": "Özellikler",
+    toolboxSearch: "Aramak",
     toolboxFilteredTextPlaceholder: "Aramak için yazın...",
     toolboxNoResultsFound: "Sonuç bulunamadı",
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
@@ -349,6 +350,7 @@ export var turkishStrings = {
       name: "Soru adı",
       title: "Soru başlığı",
       description: "Soru açıklaması",
+      showTitle: "Başlığı ve açıklamayı gösterme",
       visibleIf: "Aşağıdaki durumlarda soruyu görünür hale getirin",
       requiredIf: "Aşağıdaki durumlarda soruyu gerekli hale getirin",
       page: "Ana sayfa",
@@ -754,7 +756,17 @@ export var turkishStrings = {
       labelCount: "Otomatik olarak oluşturulan etiketlerin sayısı",
       minValueExpression: "Minimum değer ifadesi",
       maxValueExpression: "Maksimum değer ifadesi",
-      autoGenerate: "Ölçek etiketleri yapılandırması"
+      autoGenerate: "Ölçek etiketleri yapılandırması",
+      sliderType: "Kaydırıcı türü",
+      minRangeLength: "Minimum aralık uzunluğu",
+      maxRangeLength: "Maksimum aralık uzunluğu",
+      customLabels: "Özel etiketler",
+      labelFormat: "Etiket biçimi",
+      tooltipFormat: "Araç ipucu biçimi"
+    },
+    file: {
+      imageHeight: "Görüntü yüksekliği",
+      imageWidth: "Görüntü genişliği"
     },
     hideIfChoicesEmpty: "Seçenek içermiyorsa soruyu gizleme",
     minWidth: "Minimum genişlik (CSS tarafından kabul edilen değerlerde)",
@@ -1423,7 +1435,12 @@ export var turkishStrings = {
       descriptionLocation: "\"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Panel başlığı altında\") uygular.",
       newPanelPosition: "Yeni eklenen panelin konumunu tanımlar. Varsayılan olarak, sonuna yeni paneller eklenir. Geçerli panelden sonra yeni bir panel eklemek için \"İleri\" yi seçin.",
       copyDefaultValueFromLastEntry: "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar.",
-      keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun."
+      keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun.",
+      confirmDelete: "Paneli kaldırmadan önce bir onay istemini tetikler."
+    },
+    matrixdynamic: {
+      confirmDelete: "Bir satırı kaldırmadan önce bir onay istemini tetikler.",
+      detailPanelShowOnAdding: "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
     },
     copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     defaultValueExpression: "Bu ayar, bir ifadeye göre varsayılan bir yanıt değeri atamanıza olanak tanır. İfade temel hesaplamaları içerebilir - '{q1_id} + {q2_id}', '{age} > 60' gibi Boole ifadeleri ve işlevler: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb. Bu ifade tarafından belirlenen değer, yanıtlayanın manuel girişi tarafından geçersiz kılınabilecek ilk varsayılan değer olarak işlev görür.",
@@ -1460,8 +1477,8 @@ export var turkishStrings = {
       signatureAutoScaleEnabled: "İmza alanının, varsayılan 3:2 en boy oranını korurken soru kutusundaki tüm kullanılabilir alanı doldurmasını isteyip istemediğinizi seçin. Özel genişlik ve yükseklik değerleri ayarlandığında, ayar bu boyutların en boy oranını korur."
     },
     file: {
-      imageHeight: "Anket sonuçlarındaki görüntünün yüksekliğini ayarlar.",
-      imageWidth: "Anket sonuçlarındaki görüntünün genişliğini ayarlar.",
+      imageHeight: "Önizlemede yüklenen görüntülerin görüntülenme yüksekliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek yüksekliğini belirtir. Tek dosya yükleme modunda, ekran yüksekliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır.",
+      imageWidth: "Önizlemede yüklenen görüntülerin görüntülenme genişliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek genişliğini belirtir. Tek dosya yükleme modunda, görüntüleme genişliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır.",
       allowImagesPreview: "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var turkishStrings = {
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
       colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
+    },
+    slider: {
+      min: "Kullanıcıların seçebileceği en düşük sayı.",
+      max: "Kullanıcıların seçebileceği en yüksek sayı.",
+      step: "Seçilebilir ölçek değerleri arasındaki aralık. Örneğin, 5'lik bir adım, kullanıcıların 0, 5, 10 vb. seçmesine olanak tanır.",
+      minRangeLength: "Bir kullanıcının ayarlayabileceği kaydırıcı başparmaklar arasındaki minimum mesafe.",
+      maxRangeLength: "Bir kullanıcının ayarlayabileceği kaydırıcı başparmakları arasındaki maksimum mesafe.",
+      labelCount: "Kaç ölçek etiketinin oluşturulacağını belirtir. -1 değeri, sayının Minimum değer ve Maks değerine göre otomatik olarak hesaplandığı anlamına gelir.",
+      labelFormat: "Gerçek değer için yer tutucu olarak '{0}' kullanın.",
+      customLabels: "Belirli değerlerde özel etiketler tanımlamanıza ve isteğe bağlı olarak bunlara karşılık gelen metni atamanıza olanak tanır (örneğin, 0 = \"Zayıf\", 100 = \"Mükemmel\").",
+      tooltipFormat: "Gerçek değer için yer tutucu olarak '{0}' kullanın.",
+      allowSwap: "Kullanıcıların bir başparmağını diğerinin yanından geçirmesine izin verir.",
+      allowClear: "Seçili kaydırıcı değerini temizleyen ve tanımsız olarak ayarlayan bir düğme görüntüler.",
+      minValueExpression: "Bir ifade kullanarak kaydırıcının minimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler.",
+      maxValueExpression: "Bir ifade kullanarak kaydırıcının maksimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
     },
     isExclusive: "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır.",
     caseInsensitive: "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin.",
@@ -1532,7 +1564,6 @@ export var turkishStrings = {
     detailErrorLocation: "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular.",
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
-    confirmDelete: "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler.",
     keyName: "Belirtilen sütun aynı değerleri içeriyorsa, anket \"Benzersiz olmayan anahtar değeri\" hatasını atar.",
     description: "Bir altyazı yazın.",
     locale: "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin.",
@@ -1700,7 +1731,7 @@ export var turkishStrings = {
     detailElements: "Ayrıntı öğeleri",
     allowAdaptiveActions: "Uyarlamalı eylemlere izin ver",
     defaultRowValue: "Varsayılan satır değeri",
-    detailPanelShowOnAdding: "Ekleme sırasında ayrıntı paneli gösterisi",
+    detailPanelShowOnAdding: "Yeni satır ayrıntılarını otomatik genişletme",
     choicesLazyLoadEnabled: "Tembel yükün etkin olduğu seçenekler",
     choicesLazyLoadPageSize: "Seçenekler tembel yükleme sayfası boyutu",
     inputFieldComponent: "Giriş alanı bileşeni",
@@ -1984,9 +2015,9 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.detailPanelMode: "Detail panel location" => "Ayrıntı paneli konumu"
 // pe.minRowCount: "Minimum row count" => "Minimum satır sayısı"
 // pe.maxRowCount: "Maximum row count" => "Maksimum satır sayısı"
-// pe.confirmDelete: "Confirm row deletion" => "Satır silme işlemini onaylama"
+// pe.confirmDelete: "Confirm row removal" => "Satır silme işlemini onaylama"
 // pe.confirmDeleteText: "Confirmation message" => "Onay mesajı"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Panel silme işlemini onaylama"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Panel silme işlemini onaylama"
 // pe.panelCount: "Initial panel count" => "İlk panel sayısı"
 // pe.minPanelCount: "Minimum panel count" => "Minimum panel sayısı"
 // pe.maxPanelCount: "Maximum panel count" => "Maksimum panel sayısı"
@@ -2676,7 +2707,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Geçersiz girişi olan bir hücreyle ilgili olarak bir hata iletisinin konumunu ayarlar. \"Devral\" seçeneği, ayarı \"Hata iletisi hizalaması\" özelliğinden uygular."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar."
 // pehelp.description: "Type a subtitle." => "Bir altyazı yazın."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin."
@@ -3094,3 +3125,32 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // sliderType.single: "Single-Value" => "Tek Değer"
 // sliderType.range: "Range" => "Aralık"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır."
+// ed.toolboxSearch: "Search" => "Aramak"
+// file.imageHeight: "Image height" => "Görüntü yüksekliği"
+// file.imageWidth: "Image width" => "Görüntü genişliği"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Önizlemede yüklenen görüntülerin görüntülenme yüksekliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek yüksekliğini belirtir. Tek dosya yükleme modunda, ekran yüksekliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Önizlemede yüklenen görüntülerin görüntülenme genişliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek genişliğini belirtir. Tek dosya yükleme modunda, görüntüleme genişliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır."
+// slider.min: "The lowest number that users can select." => "Kullanıcıların seçebileceği en düşük sayı."
+// slider.max: "The highest number that users can select." => "Kullanıcıların seçebileceği en yüksek sayı."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Seçilebilir ölçek değerleri arasındaki aralık. Örneğin, 5'lik bir adım, kullanıcıların 0, 5, 10 vb. seçmesine olanak tanır."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Bir kullanıcının ayarlayabileceği kaydırıcı başparmaklar arasındaki minimum mesafe."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Bir kullanıcının ayarlayabileceği kaydırıcı başparmakları arasındaki maksimum mesafe."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Kaç ölçek etiketinin oluşturulacağını belirtir. -1 değeri, sayının Minimum değer ve Maks değerine göre otomatik olarak hesaplandığı anlamına gelir."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Gerçek değer için yer tutucu olarak '{0}' kullanın."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Belirli değerlerde özel etiketler tanımlamanıza ve isteğe bağlı olarak bunlara karşılık gelen metni atamanıza olanak tanır (örneğin, 0 = \"Zayıf\", 100 = \"Mükemmel\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Gerçek değer için yer tutucu olarak '{0}' kullanın."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Kullanıcıların bir başparmağını diğerinin yanından geçirmesine izin verir."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Seçili kaydırıcı değerini temizleyen ve tanımsız olarak ayarlayan bir düğme görüntüler."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Bir ifade kullanarak kaydırıcının minimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Bir ifade kullanarak kaydırıcının maksimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
+// slider.sliderType: "Slider type" => "Kaydırıcı türü"
+// slider.minRangeLength: "Min range length" => "Minimum aralık uzunluğu"
+// slider.maxRangeLength: "Max range length" => "Maksimum aralık uzunluğu"
+// slider.customLabels: "Custom labels" => "Özel etiketler"
+// slider.labelFormat: "Label format" => "Etiket biçimi"
+// slider.tooltipFormat: "Tooltip format" => "Araç ipucu biçimi"
+// question.showTitle: "Show the title and description" => "Başlığı ve açıklamayı gösterme"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Paneli kaldırmadan önce bir onay istemini tetikler."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Bir satırı kaldırmadan önce bir onay istemini tetikler."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Yeni satır ayrıntılarını otomatik genişletme"

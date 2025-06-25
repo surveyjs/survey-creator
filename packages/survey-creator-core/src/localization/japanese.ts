@@ -129,6 +129,7 @@ export var jaStrings = {
     generateReadableJSON: "読み取り可能なJSONを生成する",
     toolbox: "ツールボックス",
     "property-grid": "プロパティ",
+    toolboxSearch: "捜索",
     toolboxFilteredTextPlaceholder: "「検索」...",
     toolboxNoResultsFound: "結果が見つかりませんでした",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
@@ -349,6 +350,7 @@ export var jaStrings = {
       name: "質問名",
       title: "質問のタイトル",
       description: "質問の説明",
+      showTitle: "タイトルと説明を表示する",
       visibleIf: "次の場合に質問を表示します。",
       requiredIf: "次の場合は質問を必須にします",
       page: "親ページ",
@@ -754,7 +756,17 @@ export var jaStrings = {
       labelCount: "自動生成されたラベルの数",
       minValueExpression: "最小値式",
       maxValueExpression: "最大値の式",
-      autoGenerate: "スケール ラベルの構成"
+      autoGenerate: "スケール ラベルの構成",
+      sliderType: "スライダータイプ",
+      minRangeLength: "最小範囲の長さ",
+      maxRangeLength: "最大範囲の長さ",
+      customLabels: "カスタムラベル",
+      labelFormat: "ラベル形式",
+      tooltipFormat: "ツールチップの形式"
+    },
+    file: {
+      imageHeight: "画像の高さ",
+      imageWidth: "画像の幅"
     },
     hideIfChoicesEmpty: "選択肢がない場合は質問を非表示にする",
     minWidth: "最小幅 (CSS で受け入れられる値)",
@@ -1423,7 +1435,12 @@ export var jaStrings = {
       descriptionLocation: "「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「パネルタイトルの下」)を適用します。",
       newPanelPosition: "新しく追加されたパネルの位置を定義します。デフォルトでは、新しいパネルが最後に追加されます。「次へ」を選択して、現在のパネルの後に新しいパネルを挿入します。",
       copyDefaultValueFromLastEntry: "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。",
-      keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。"
+      keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
+      confirmDelete: "パネルを削除する前に確認プロンプトをトリガーします。"
+    },
+    matrixdynamic: {
+      confirmDelete: "行を削除する前に確認プロンプトをトリガーします。",
+      detailPanelShowOnAdding: "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
     },
     copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     defaultValueExpression: "この設定では、式に基づいてデフォルトの回答値を割り当てることができます。式には、基本的な計算 - '{q1_id} + {q2_id}'、'{age} > 60' などのブール式、関数 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などを含めることができます。この式によって決定される値は、回答者の手動入力で上書きできる初期デフォルト値として機能します。",
@@ -1460,8 +1477,8 @@ export var jaStrings = {
       signatureAutoScaleEnabled: "デフォルトの3:2の縦横比を維持したまま、質問ボックス内の使用可能なすべてのスペースを署名領域に埋める場合に選択します。カスタムの幅と高さの値が設定されている場合、設定ではこれらの寸法の縦横比が維持されます。"
     },
     file: {
-      imageHeight: "アンケート結果の画像の高さを調整します。",
-      imageWidth: "アンケート結果の画像の幅を調整します。",
+      imageHeight: "プレビューでアップロードした画像の表示高さと、カメラで撮影した画像の実際の高さを指定します。単一ファイルのアップロード モードでは、表示の高さはプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。",
+      imageWidth: "プレビューでアップロードした画像の表示幅と、カメラで撮影した画像の実際の幅を指定します。単一ファイルのアップロード モードでは、表示幅はプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。",
       allowImagesPreview: "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
     },
     image: {
@@ -1493,6 +1510,21 @@ export var jaStrings = {
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
       showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
       colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
+    },
+    slider: {
+      min: "ユーザーが選択できる最小の数値。",
+      max: "ユーザーが選択できる最大数。",
+      step: "選択可能なスケール値の間隔。たとえば、ステップを 5 にすると、ユーザーは 0、5、10 などを選択できます。",
+      minRangeLength: "ユーザーが設定できるスライダーの親指間の最小距離。",
+      maxRangeLength: "ユーザーが設定できるスライダーのつまみ間の最大距離。",
+      labelCount: "生成する縮尺ラベルの数を指定します。値 -1 は、数値が [最小] 値と [最大値] に基づいて自動的に計算されることを意味します。",
+      labelFormat: "実際の値のプレースホルダーとして「{0}」を使用します。",
+      customLabels: "特定の値でカスタムラベルを定義し、オプションで対応するテキストを割り当てることができます(例:0 = \"Poor\"、100 = \"Excellent\")。",
+      tooltipFormat: "実際の値のプレースホルダーとして「{0}」を使用します。",
+      allowSwap: "ユーザーは、一方の親指をもう一方の親指を超えて移動できます。",
+      allowClear: "選択したスライダーの値をクリアし、未定義に設定するボタンを表示します。",
+      minValueExpression: "スライダの最小値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。",
+      maxValueExpression: "スライダの最大値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
     },
     isExclusive: "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。",
     caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
@@ -1532,7 +1564,6 @@ export var jaStrings = {
     detailErrorLocation: "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
-    confirmDelete: "行の削除を確認するプロンプトをトリガーします。",
     keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
     description: "字幕を入力します。",
     locale: "言語を選択してアンケートの作成を開始します。翻訳を追加するには、新しい言語に切り替えて、ここまたは [翻訳] タブで元のテキストを翻訳します。",
@@ -1700,7 +1731,7 @@ export var jaStrings = {
     detailElements: "詳細要素",
     allowAdaptiveActions: "アダプティブアクションを許可する",
     defaultRowValue: "既定の行の値",
-    detailPanelShowOnAdding: "追加時の詳細パネル表示",
+    detailPanelShowOnAdding: "新しい行の詳細を自動展開する",
     choicesLazyLoadEnabled: "遅延読み込みの選択肢が有効",
     choicesLazyLoadPageSize: "選択肢遅延読み込みページ・サイズ",
     inputFieldComponent: "入力フィールドコンポーネント",
@@ -1973,9 +2004,9 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.detailPanelMode: "Detail panel location" => "詳細パネルの位置"
 // pe.minRowCount: "Minimum row count" => "最小行数"
 // pe.maxRowCount: "Maximum row count" => "最大行数"
-// pe.confirmDelete: "Confirm row deletion" => "行の削除を確認する"
+// pe.confirmDelete: "Confirm row removal" => "行の削除を確認する"
 // pe.confirmDeleteText: "Confirmation message" => "確認メッセージ"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "パネルの削除を確認する"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "パネルの削除を確認する"
 // pe.panelCount: "Initial panel count" => "初期パネル数"
 // pe.minPanelCount: "Minimum panel count" => "最小パネル数"
 // pe.maxPanelCount: "Maximum panel count" => "最大パネル数"
@@ -2679,7 +2710,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "無効な入力があるセルに関連するエラーメッセージの位置を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。"
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。"
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。"
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "行の削除を確認するプロンプトをトリガーします。"
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "行の削除を確認するプロンプトをトリガーします。"
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "最後の行から回答を複製し、次に追加された動的行に割り当てます。"
 // pehelp.description: "Type a subtitle." => "字幕を入力します。"
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "言語を選択してアンケートの作成を開始します。翻訳を追加するには、新しい言語に切り替えて、ここまたは [翻訳] タブで元のテキストを翻訳します。"
@@ -3098,3 +3129,32 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // sliderType.single: "Single-Value" => "単一値"
 // sliderType.range: "Range" => "範囲"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。"
+// ed.toolboxSearch: "Search" => "捜索"
+// file.imageHeight: "Image height" => "画像の高さ"
+// file.imageWidth: "Image width" => "画像の幅"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "プレビューでアップロードした画像の表示高さと、カメラで撮影した画像の実際の高さを指定します。単一ファイルのアップロード モードでは、表示の高さはプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。"
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "プレビューでアップロードした画像の表示幅と、カメラで撮影した画像の実際の幅を指定します。単一ファイルのアップロード モードでは、表示幅はプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。"
+// slider.min: "The lowest number that users can select." => "ユーザーが選択できる最小の数値。"
+// slider.max: "The highest number that users can select." => "ユーザーが選択できる最大数。"
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "選択可能なスケール値の間隔。たとえば、ステップを 5 にすると、ユーザーは 0、5、10 などを選択できます。"
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "ユーザーが設定できるスライダーの親指間の最小距離。"
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "ユーザーが設定できるスライダーのつまみ間の最大距離。"
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "生成する縮尺ラベルの数を指定します。値 -1 は、数値が [最小] 値と [最大値] に基づいて自動的に計算されることを意味します。"
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "実際の値のプレースホルダーとして「{0}」を使用します。"
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "特定の値でカスタムラベルを定義し、オプションで対応するテキストを割り当てることができます(例:0 = \"Poor\"、100 = \"Excellent\")。"
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "実際の値のプレースホルダーとして「{0}」を使用します。"
+// slider.allowSwap: "Allows users to move one thumb past the other." => "ユーザーは、一方の親指をもう一方の親指を超えて移動できます。"
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "選択したスライダーの値をクリアし、未定義に設定するボタンを表示します。"
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "スライダの最小値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "スライダの最大値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
+// slider.sliderType: "Slider type" => "スライダータイプ"
+// slider.minRangeLength: "Min range length" => "最小範囲の長さ"
+// slider.maxRangeLength: "Max range length" => "最大範囲の長さ"
+// slider.customLabels: "Custom labels" => "カスタムラベル"
+// slider.labelFormat: "Label format" => "ラベル形式"
+// slider.tooltipFormat: "Tooltip format" => "ツールチップの形式"
+// question.showTitle: "Show the title and description" => "タイトルと説明を表示する"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "パネルを削除する前に確認プロンプトをトリガーします。"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "行を削除する前に確認プロンプトをトリガーします。"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "新しい行の詳細を自動展開する"

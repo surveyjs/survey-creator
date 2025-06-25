@@ -129,6 +129,7 @@ var portugueseTranslation = {
     generateReadableJSON: "Gerar JSON legível",
     toolbox: "Ferramentas",
     "property-grid": "Propriedades",
+    toolboxSearch: "Procurar",
     toolboxFilteredTextPlaceholder: "Digite para pesquisar...",
     toolboxNoResultsFound: "Nenhum resultado encontrado",
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
@@ -349,6 +350,7 @@ var portugueseTranslation = {
       name: "Nome da pergunta",
       title: "Título da pergunta",
       description: "Descrição da pergunta",
+      showTitle: "Mostrar o título e a descrição",
       visibleIf: "Torne a pergunta visível se",
       requiredIf: "Faça a pergunta obrigatória se",
       page: "Página principal",
@@ -754,7 +756,17 @@ var portugueseTranslation = {
       labelCount: "Número de rótulos gerados automaticamente",
       minValueExpression: "Expressão de valor mínimo",
       maxValueExpression: "Expressão de valor máximo",
-      autoGenerate: "Configuração de rótulos de escala"
+      autoGenerate: "Configuração de rótulos de escala",
+      sliderType: "Tipo de controle deslizante",
+      minRangeLength: "Comprimento mínimo da faixa",
+      maxRangeLength: "Comprimento máximo da faixa",
+      customLabels: "Rótulos personalizados",
+      labelFormat: "Formato do rótulo",
+      tooltipFormat: "Formato da dica de ferramenta"
+    },
+    file: {
+      imageHeight: "Altura da imagem",
+      imageWidth: "Largura da imagem"
     },
     hideIfChoicesEmpty: "Oculte a pergunta se ela não contiver opções",
     minWidth: "Largura mínima (em valores aceitos pelo CSS)",
@@ -1423,7 +1435,12 @@ var portugueseTranslation = {
       descriptionLocation: "A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Sob o título do painel\" por padrão).",
       newPanelPosition: "Define a posição de um painel recém-adicionado. Por padrão, novos painéis são adicionados ao final. Selecione \"Next\" para inserir um novo painel após o atual.",
       copyDefaultValueFromLastEntry: "Duplica as respostas do último painel e as atribui ao próximo painel dinâmico adicionado.",
-      keyName: "Faça referência a um nome de pergunta para exigir que um usuário forneça uma resposta exclusiva para essa pergunta em cada painel."
+      keyName: "Faça referência a um nome de pergunta para exigir que um usuário forneça uma resposta exclusiva para essa pergunta em cada painel.",
+      confirmDelete: "Aciona um prompt de confirmação antes de remover um painel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Aciona um prompt de confirmação antes de remover uma linha.",
+      detailPanelShowOnAdding: "Expande automaticamente a seção de detalhes quando uma nova linha é adicionada à matriz."
     },
     copyDefaultValueFromLastEntry: "Duplica as respostas da última linha e as atribui à próxima linha dinâmica adicionada.",
     defaultValueExpression: "Essa configuração permite atribuir um valor de resposta padrão com base em uma expressão. A expressão pode incluir cálculos básicos - '{q1_id} + {q2_id}', expressões booleanas, como '{age} > 60', e funções: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. O valor determinado por essa expressão serve como o valor padrão inicial que pode ser substituído pela entrada manual de um respondente.",
@@ -1460,8 +1477,8 @@ var portugueseTranslation = {
       signatureAutoScaleEnabled: "Selecione se deseja que a área de assinatura preencha todo o espaço disponível na caixa de pergunta, mantendo a proporção padrão de 3:2. Quando os valores personalizados de largura e altura são definidos, a configuração manterá a proporção dessas dimensões."
     },
     file: {
-      imageHeight: "Ajusta a altura da imagem nos resultados da pesquisa.",
-      imageWidth: "Ajusta a largura da imagem nos resultados da pesquisa.",
+      imageHeight: "Especifica a altura de exibição das imagens carregadas na visualização e a altura real das imagens tiradas com a câmera. No modo de upload de arquivo único, a altura da tela é limitada pela área de visualização; No modo de upload de vários arquivos, ele é limitado pela área de miniaturas.",
+      imageWidth: "Especifica a largura de exibição das imagens carregadas na visualização e a largura real das imagens tiradas com a câmera. No modo de upload de arquivo único, a largura da tela é limitada pela área de visualização; No modo de upload de vários arquivos, ele é limitado pela área de miniaturas.",
       allowImagesPreview: "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
     },
     image: {
@@ -1493,6 +1510,21 @@ var portugueseTranslation = {
       requiredIf: "Use o ícone de varinha mágica para definir uma regra condicional que impeça o envio de questionários, a menos que pelo menos uma pergunta aninhada tenha uma resposta.",
       showInMultipleColumns: "Quando selecionada, cria uma coluna individual para cada opção de escolha.",
       colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
+    },
+    slider: {
+      min: "O número mais baixo que os usuários podem selecionar.",
+      max: "O número mais alto que os usuários podem selecionar.",
+      step: "O intervalo entre os valores de escala selecionáveis. Por exemplo, uma etapa de 5 permitirá que os usuários selecionem 0, 5, 10 etc.",
+      minRangeLength: "A distância mínima entre os polegares do controle deslizante que um usuário pode definir.",
+      maxRangeLength: "A distância máxima entre os polegares do controle deslizante que um usuário pode definir.",
+      labelCount: "Especifica quantos rótulos de escala devem ser gerados. Um valor de -1 significa que o número é calculado automaticamente com base no valor mínimo e no valor máximo.",
+      labelFormat: "Use '{0}' como um espaço reservado para o valor real.",
+      customLabels: "Permite definir rótulos personalizados em valores específicos e, opcionalmente, atribuir texto correspondente a eles (por exemplo, 0 = \"Ruim\", 100 = \"Excelente\").",
+      tooltipFormat: "Use '{0}' como um espaço reservado para o valor real.",
+      allowSwap: "Permite que os usuários movam um polegar sobre o outro.",
+      allowClear: "Exibe um botão que limpa o valor do controle deslizante selecionado e o define como indefinido.",
+      minValueExpression: "Define o valor mínimo do controle deslizante dinamicamente usando uma expressão. Suporta cálculos básicos (por exemplo, '{q1_id} + {q2_id}'), lógica booleana (por exemplo, '{age} > 60') e funções como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e muito mais.",
+      maxValueExpression: "Define o valor máximo do controle deslizante dinamicamente usando uma expressão. Suporta cálculos básicos (por exemplo, '{q1_id} + {q2_id}'), lógica booleana (por exemplo, '{age} > 60') e funções como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e muito mais."
     },
     isExclusive: "Torna esta escolha exclusiva. Quando selecionado por um usuário, ele desmarcará automaticamente todas as outras opções na pergunta.",
     caseInsensitive: "Selecione se letras maiúsculas e minúsculas na expressão regular devem ser tratadas como equivalentes.",
@@ -1532,7 +1564,6 @@ var portugueseTranslation = {
     detailErrorLocation: "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\".",
     keyDuplicationError: "Quando a propriedade \"Impedir respostas duplicadas\" está habilitada, um respondente tentando enviar uma entrada duplicada receberá a seguinte mensagem de erro.",
     totalExpression: "Permite calcular valores totais com base em uma expressão. A expressão pode incluir cálculos básicos ('{q1_id} + {q2_id}'), expressões booleanas ('{age} > 60') e funções ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Aciona um prompt pedindo para confirmar a exclusão da linha.",
     keyName: "Se a coluna especifica contiver valores idênticos, o questionário lançará o \"Valor de chave não exclusivo\" erro.",
     description: "Digite uma legenda.",
     locale: "Escolha um idioma para começar a criar seu questionário. Para adicionar uma tradução, alterne para um novo idioma e traduza o texto original aqui ou na guia Traduções.",
@@ -1700,7 +1731,7 @@ var portugueseTranslation = {
     detailElements: "Detalhes elementos",
     allowAdaptiveActions: "Permitir ações adaptativas",
     defaultRowValue: "valor default da linha",
-    detailPanelShowOnAdding: "Mostrar ao adicionar painel de detalhes",
+    detailPanelShowOnAdding: "Expandir automaticamente os detalhes da nova linha",
     choicesLazyLoadEnabled: "Escolha carga lenta habilitada",
     choicesLazyLoadPageSize: "Escolha carga lenta tamanho de página",
     inputFieldComponent: "Componente de campo de entrada",
@@ -2349,7 +2380,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Define o local de uma mensagem de erro em relação a uma célula com entrada inválida. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Quando a propriedade \"Impedir respostas duplicadas\" está habilitada, um respondente tentando enviar uma entrada duplicada receberá a seguinte mensagem de erro."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Permite calcular valores totais com base em uma expressão. A expressão pode incluir cálculos básicos ('{q1_id} + {q2_id}'), expressões booleanas ('{age} > 60') e funções ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Aciona um prompt pedindo para confirmar a exclusão da linha."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Aciona um prompt pedindo para confirmar a exclusão da linha."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplica as respostas da última linha e as atribui à próxima linha dinâmica adicionada."
 // pehelp.description: "Type a subtitle." => "Digite uma legenda."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Escolha um idioma para começar a criar seu questionário. Para adicionar uma tradução, alterne para um novo idioma e traduza o texto original aqui ou na guia Traduções."
@@ -2767,3 +2798,32 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // sliderType.single: "Single-Value" => "Valor único"
 // sliderType.range: "Range" => "Gama"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Torna esta escolha exclusiva. Quando selecionado por um usuário, ele desmarcará automaticamente todas as outras opções na pergunta."
+// ed.toolboxSearch: "Search" => "Procurar"
+// file.imageHeight: "Image height" => "Altura da imagem"
+// file.imageWidth: "Image width" => "Largura da imagem"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Especifica a altura de exibição das imagens carregadas na visualização e a altura real das imagens tiradas com a câmera. No modo de upload de arquivo único, a altura da tela é limitada pela área de visualização; No modo de upload de vários arquivos, ele é limitado pela área de miniaturas."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Especifica a largura de exibição das imagens carregadas na visualização e a largura real das imagens tiradas com a câmera. No modo de upload de arquivo único, a largura da tela é limitada pela área de visualização; No modo de upload de vários arquivos, ele é limitado pela área de miniaturas."
+// slider.min: "The lowest number that users can select." => "O número mais baixo que os usuários podem selecionar."
+// slider.max: "The highest number that users can select." => "O número mais alto que os usuários podem selecionar."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "O intervalo entre os valores de escala selecionáveis. Por exemplo, uma etapa de 5 permitirá que os usuários selecionem 0, 5, 10 etc."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "A distância mínima entre os polegares do controle deslizante que um usuário pode definir."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "A distância máxima entre os polegares do controle deslizante que um usuário pode definir."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Especifica quantos rótulos de escala devem ser gerados. Um valor de -1 significa que o número é calculado automaticamente com base no valor mínimo e no valor máximo."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Use '{0}' como um espaço reservado para o valor real."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Permite definir rótulos personalizados em valores específicos e, opcionalmente, atribuir texto correspondente a eles (por exemplo, 0 = \"Ruim\", 100 = \"Excelente\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Use '{0}' como um espaço reservado para o valor real."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Permite que os usuários movam um polegar sobre o outro."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Exibe um botão que limpa o valor do controle deslizante selecionado e o define como indefinido."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Define o valor mínimo do controle deslizante dinamicamente usando uma expressão. Suporta cálculos básicos (por exemplo, '{q1_id} + {q2_id}'), lógica booleana (por exemplo, '{age} > 60') e funções como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e muito mais."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Define o valor máximo do controle deslizante dinamicamente usando uma expressão. Suporta cálculos básicos (por exemplo, '{q1_id} + {q2_id}'), lógica booleana (por exemplo, '{age} > 60') e funções como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e muito mais."
+// slider.sliderType: "Slider type" => "Tipo de controle deslizante"
+// slider.minRangeLength: "Min range length" => "Comprimento mínimo da faixa"
+// slider.maxRangeLength: "Max range length" => "Comprimento máximo da faixa"
+// slider.customLabels: "Custom labels" => "Rótulos personalizados"
+// slider.labelFormat: "Label format" => "Formato do rótulo"
+// slider.tooltipFormat: "Tooltip format" => "Formato da dica de ferramenta"
+// question.showTitle: "Show the title and description" => "Mostrar o título e a descrição"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Aciona um prompt de confirmação antes de remover um painel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Aciona um prompt de confirmação antes de remover uma linha."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expande automaticamente a seção de detalhes quando uma nova linha é adicionada à matriz."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandir automaticamente os detalhes da nova linha"

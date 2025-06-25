@@ -129,6 +129,7 @@ export var nbStrings = {
     generateReadableJSON: "Lag lesbar JSON",
     toolbox: "Verktøyliste",
     "property-grid": "Innstillinger",
+    toolboxSearch: "Søke",
     toolboxFilteredTextPlaceholder: "Skriv for å søke ...",
     toolboxNoResultsFound: "Fant ingen resultater",
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
@@ -349,6 +350,7 @@ export var nbStrings = {
       name: "Spørsmål navn",
       title: "Spørsmål tittel",
       description: "Beskrivelse av spørsmål",
+      showTitle: "Vis tittelen og beskrivelsen",
       visibleIf: "Gjør spørsmålet synlig hvis",
       requiredIf: "Gjør spørsmålet nødvendig hvis",
       page: "Overordnet side",
@@ -754,7 +756,17 @@ export var nbStrings = {
       labelCount: "Antall automatisk genererte etiketter",
       minValueExpression: "Uttrykk for minste verdi",
       maxValueExpression: "Uttrykk for maksverdi",
-      autoGenerate: "Konfigurasjon av skaleringsetiketter"
+      autoGenerate: "Konfigurasjon av skaleringsetiketter",
+      sliderType: "Type glidebryter",
+      minRangeLength: "Min rekkevidde lengde",
+      maxRangeLength: "Maks rekkevidde lengde",
+      customLabels: "Tilpassede etiketter",
+      labelFormat: "Etikett format",
+      tooltipFormat: "Format for verktøytips"
+    },
+    file: {
+      imageHeight: "Høyde på bildet",
+      imageWidth: "Bildets bredde"
     },
     hideIfChoicesEmpty: "Skjul spørsmålet hvis det ikke inneholder noen valg",
     minWidth: "Minimumsbredde (i CSS-godkjente verdier)",
@@ -1423,7 +1435,12 @@ export var nbStrings = {
       descriptionLocation: "Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller innstilling på undersøkelsesnivå (\"Under paneltittelen\" som standard).",
       newPanelPosition: "Definerer posisjonen til et nylig lagt til-panel. Som standard legges nye paneler til slutten. Velg \"Neste\" for å sette inn et nytt panel etter det nåværende.",
       copyDefaultValueFromLastEntry: "Dupliserer svar fra det siste panelet og tilordner dem til det neste dynamiske panelet som er lagt til.",
-      keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel."
+      keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel.",
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner et panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en rad.",
+      detailPanelShowOnAdding: "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
     },
     copyDefaultValueFromLastEntry: "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til.",
     defaultValueExpression: "Med denne innstillingen kan du tilordne en standard svarverdi basert på et uttrykk. Uttrykket kan inneholde grunnleggende beregninger - '{q1_id} + {q2_id}', boolske uttrykk, for eksempel '{alder} > 60', og funksjoner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. Verdien som bestemmes av dette uttrykket, fungerer som den opprinnelige standardverdien som kan overstyres av en respondents manuelle inndata.",
@@ -1460,8 +1477,8 @@ export var nbStrings = {
       signatureAutoScaleEnabled: "Velg dette alternativet hvis du vil at signaturområdet skal fylle all tilgjengelig plass i spørsmålsboksen, samtidig som standardforholdet 3:2 beholdes. Når egendefinerte bredde- og høydeverdier angis, beholdes innstillingen størrelsesforholdet for disse dimensjonene."
     },
     file: {
-      imageHeight: "Justerer høyden på bildet i undersøkelsesresultatene.",
-      imageWidth: "Justerer bredden på bildet i undersøkelsesresultatene.",
+      imageHeight: "Spesifiserer visningshøyden for opplastede bilder i forhåndsvisningen og den faktiske høyden på bilder tatt med kameraet. I enkeltfilopplastingsmodus er visningshøyden begrenset av forhåndsvisningsområdet; I modus for opplasting av flere filer er den begrenset av miniatyrbildeområdet.",
+      imageWidth: "Angir visningsbredden på opplastede bilder i forhåndsvisningen og den faktiske bredden på bilder som er tatt med kameraet. I enkeltfilopplastingsmodus er visningsbredden begrenset av forhåndsvisningsområdet; I modus for opplasting av flere filer er den begrenset av miniatyrbildeområdet.",
       allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var nbStrings = {
       requiredIf: "Bruk tryllestavikonet til å angi en betinget regel som forhindrer innsending av spørreundersøkelser med mindre minst ett nestet spørsmål har et svar.",
       showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
       colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
+    },
+    slider: {
+      min: "Det laveste tallet som brukere kan velge.",
+      max: "Det høyeste tallet som brukere kan velge.",
+      step: "Intervallet mellom valgbare skalaverdier. For eksempel vil et trinn på 5 tillate brukere å velge 0, 5, 10 osv.",
+      minRangeLength: "Minimumsavstanden mellom glidebrytertommelen en bruker kan angi.",
+      maxRangeLength: "Den maksimale avstanden mellom glidetommelen en bruker kan angi.",
+      labelCount: "Angir hvor mange skalaetiketter som skal genereres. En verdi på -1 betyr at tallet beregnes automatisk basert på Min-verdien og Max-verdien.",
+      labelFormat: "Bruk «{0}» som plassholder for den faktiske verdien.",
+      customLabels: "Lar deg definere egendefinerte etiketter med bestemte verdier og eventuelt tilordne tilsvarende tekst til dem (f.eks. 0 = \"Dårlig\", 100 = \"Utmerket\").",
+      tooltipFormat: "Bruk «{0}» som plassholder for den faktiske verdien.",
+      allowSwap: "Lar brukere flytte den ene tommelen forbi den andre.",
+      allowClear: "Viser en knapp som fjerner den valgte glidebryterverdien og setter den til udefinert.",
+      minValueExpression: "Definerer glidebryterens minimumsverdi dynamisk ved hjelp av et uttrykk. Støtter grunnleggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logikk (f.eks. '{age} > 60'), og funksjoner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mer.",
+      maxValueExpression: "Definerer glidebryterens maksimumsverdi dynamisk ved hjelp av et uttrykk. Støtter grunnleggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logikk (f.eks. '{age} > 60'), og funksjoner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mer."
     },
     isExclusive: "Gjør dette valget eksklusivt. Når den velges av en bruker, vil den automatisk velge bort alle andre alternativer i spørsmålet.",
     caseInsensitive: "Velg om store og små bokstaver i det regulære uttrykket må behandles som likeverdige.",
@@ -1532,7 +1564,6 @@ export var nbStrings = {
     detailErrorLocation: "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\".",
     keyDuplicationError: "Når egenskapen \"Forhindre dupliserte svar\" er aktivert, får en svarperson som prøver å sende inn en duplikatoppføring, følgende feilmelding.",
     totalExpression: "Lar deg beregne totalverdier basert på et uttrykk. Uttrykket kan omfatte grunnleggende beregninger ('{q1_id} + {q2_id}'), boolske uttrykk ('{alder} > 60') og funksjoner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Utløser en melding som ber om å bekrefte radslettingen.",
     keyName: "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\".",
     description: "Skriv inn en undertekst.",
     locale: "Velg et språk for å begynne å opprette evalueringen. Hvis du vil legge til en oversettelse, bytter du til et nytt språk og oversetter originalteksten her eller i Oversettelser-fanen.",
@@ -1700,7 +1731,7 @@ export var nbStrings = {
     detailElements: "Detaljelementer",
     allowAdaptiveActions: "Tillat adaptive handlinger",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Detaljpanelet vises når du legger til",
+    detailPanelShowOnAdding: "Utvid nye raddetaljer automatisk",
     choicesLazyLoadEnabled: "Valg lat belastning aktivert",
     choicesLazyLoadPageSize: "Valg lat lastesidestørrelse",
     inputFieldComponent: "Komponent for inntastingsfelt",
@@ -1977,9 +2008,9 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.detailPanelMode: "Detail panel location" => "Plassering av detaljpanelet"
 // pe.minRowCount: "Minimum row count" => "Minimum radantall"
 // pe.maxRowCount: "Maximum row count" => "Maksimalt radantall"
-// pe.confirmDelete: "Confirm row deletion" => "Bekreft radsletting"
+// pe.confirmDelete: "Confirm row removal" => "Bekreft radsletting"
 // pe.confirmDeleteText: "Confirmation message" => "Bekreftelsesmelding"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Bekreft sletting av panel"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Bekreft sletting av panel"
 // pe.panelCount: "Initial panel count" => "Innledende panelopptelling"
 // pe.minPanelCount: "Minimum panel count" => "Minimum antall paneler"
 // pe.maxPanelCount: "Maximum panel count" => "Maksimalt antall paneler"
@@ -2683,7 +2714,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen til en feilmelding i forhold til en celle med ugyldige inndata. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Justering av feilmelding\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Når egenskapen \"Forhindre dupliserte svar\" er aktivert, får en svarperson som prøver å sende inn en duplikatoppføring, følgende feilmelding."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Lar deg beregne totalverdier basert på et uttrykk. Uttrykket kan omfatte grunnleggende beregninger ('{q1_id} + {q2_id}'), boolske uttrykk ('{alder} > 60') og funksjoner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Utløser en melding som ber om å bekrefte radslettingen."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Utløser en melding som ber om å bekrefte radslettingen."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til."
 // pehelp.description: "Type a subtitle." => "Skriv inn en undertekst."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Velg et språk for å begynne å opprette evalueringen. Hvis du vil legge til en oversettelse, bytter du til et nytt språk og oversetter originalteksten her eller i Oversettelser-fanen."
@@ -3101,3 +3132,32 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // sliderType.single: "Single-Value" => "Enkelt verdi"
 // sliderType.range: "Range" => "Rekkevidde"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Gjør dette valget eksklusivt. Når den velges av en bruker, vil den automatisk velge bort alle andre alternativer i spørsmålet."
+// ed.toolboxSearch: "Search" => "Søke"
+// file.imageHeight: "Image height" => "Høyde på bildet"
+// file.imageWidth: "Image width" => "Bildets bredde"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Spesifiserer visningshøyden for opplastede bilder i forhåndsvisningen og den faktiske høyden på bilder tatt med kameraet. I enkeltfilopplastingsmodus er visningshøyden begrenset av forhåndsvisningsområdet; I modus for opplasting av flere filer er den begrenset av miniatyrbildeområdet."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Angir visningsbredden på opplastede bilder i forhåndsvisningen og den faktiske bredden på bilder som er tatt med kameraet. I enkeltfilopplastingsmodus er visningsbredden begrenset av forhåndsvisningsområdet; I modus for opplasting av flere filer er den begrenset av miniatyrbildeområdet."
+// slider.min: "The lowest number that users can select." => "Det laveste tallet som brukere kan velge."
+// slider.max: "The highest number that users can select." => "Det høyeste tallet som brukere kan velge."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Intervallet mellom valgbare skalaverdier. For eksempel vil et trinn på 5 tillate brukere å velge 0, 5, 10 osv."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimumsavstanden mellom glidebrytertommelen en bruker kan angi."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Den maksimale avstanden mellom glidetommelen en bruker kan angi."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Angir hvor mange skalaetiketter som skal genereres. En verdi på -1 betyr at tallet beregnes automatisk basert på Min-verdien og Max-verdien."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Bruk «{0}» som plassholder for den faktiske verdien."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Lar deg definere egendefinerte etiketter med bestemte verdier og eventuelt tilordne tilsvarende tekst til dem (f.eks. 0 = \"Dårlig\", 100 = \"Utmerket\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Bruk «{0}» som plassholder for den faktiske verdien."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Lar brukere flytte den ene tommelen forbi den andre."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Viser en knapp som fjerner den valgte glidebryterverdien og setter den til udefinert."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer glidebryterens minimumsverdi dynamisk ved hjelp av et uttrykk. Støtter grunnleggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logikk (f.eks. '{age} > 60'), og funksjoner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mer."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer glidebryterens maksimumsverdi dynamisk ved hjelp av et uttrykk. Støtter grunnleggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logikk (f.eks. '{age} > 60'), og funksjoner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mer."
+// slider.sliderType: "Slider type" => "Type glidebryter"
+// slider.minRangeLength: "Min range length" => "Min rekkevidde lengde"
+// slider.maxRangeLength: "Max range length" => "Maks rekkevidde lengde"
+// slider.customLabels: "Custom labels" => "Tilpassede etiketter"
+// slider.labelFormat: "Label format" => "Etikett format"
+// slider.tooltipFormat: "Tooltip format" => "Format for verktøytips"
+// question.showTitle: "Show the title and description" => "Vis tittelen og beskrivelsen"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Utløser en bekreftelsesmelding før du fjerner et panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utløser en bekreftelsesmelding før du fjerner en rad."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Utvid nye raddetaljer automatisk"

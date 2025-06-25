@@ -129,6 +129,7 @@ export var fiStrings = {
     generateReadableJSON: "Luo luettava JSON",
     toolbox: "Työkalupakki",
     "property-grid": "Ominaisuudet",
+    toolboxSearch: "Etsiä",
     toolboxFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
@@ -168,10 +169,10 @@ export var fiStrings = {
     translationSource: "Lähde: ",
     translationTarget: "Kohde: ",
     translationYouTubeNotSupported: "YouTube-linkkejä ei tueta.",
-    themeExportButton: "Vienti",
-    themeImportButton: "Tuoda",
-    surveyJsonExportButton: "Vienti",
-    surveyJsonImportButton: "Tuoda",
+    themeExportButton: "Vie",
+    themeImportButton: "Tuo",
+    surveyJsonExportButton: "Vie",
+    surveyJsonImportButton: "Tuo",
     surveyJsonCopyButton: "Kopioi leikepöydälle",
     themeResetButton: "Palauta teema-asetukset oletusasetuksiin",
     themeResetConfirmation: "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään.",
@@ -349,6 +350,7 @@ export var fiStrings = {
       name: "Kysymyksen nimi",
       title: "Kysymyksen otsikko",
       description: "Kysymyksen kuvaus",
+      showTitle: "Näytä otsikko ja kuvaus",
       visibleIf: "Tee kysymys näkyväksi, jos",
       requiredIf: "Tee kysymys pakolliseksi, jos",
       page: "Pääsivu",
@@ -754,7 +756,17 @@ export var fiStrings = {
       labelCount: "Automaattisesti luotujen tarrojen määrä",
       minValueExpression: "Minimiarvon lauseke",
       maxValueExpression: "Maksimiarvon lauseke",
-      autoGenerate: "Skaalausotsikoiden määritys"
+      autoGenerate: "Skaalausotsikoiden määritys",
+      sliderType: "Liukusäätimen tyyppi",
+      minRangeLength: "Alueen vähimmäispituus",
+      maxRangeLength: "Suurin kantaman pituus",
+      customLabels: "Mukautetut tunnisteet",
+      labelFormat: "Etiketin muoto",
+      tooltipFormat: "Työkaluvihjeen muoto"
+    },
+    file: {
+      imageHeight: "Kuvan korkeus",
+      imageWidth: "Kuvan leveys"
     },
     hideIfChoicesEmpty: "Piilota kysymys, jos se ei sisällä vaihtoehtoja",
     minWidth: "Vähimmäisleveys (CSS-hyväksyttyinä arvoina)",
@@ -1423,7 +1435,12 @@ export var fiStrings = {
       descriptionLocation: "\"Peri\" -vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Paneelin otsikon alla\" oletuksena).",
       newPanelPosition: "Määrittää juuri lisätyn paneelin sijainnin. Oletuksena uudet paneelit lisätään loppuun. Valitse \"Seuraava\" lisätäksesi uuden paneelin nykyisen jälkeen.",
       copyDefaultValueFromLastEntry: "Monistaa edellisen paneelin vastaukset ja määrittää ne seuraavaan lisättyyn dynaamiseen paneeliin.",
-      keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa."
+      keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa.",
+      confirmDelete: "Käynnistää vahvistuskehotteen ennen paneelin poistamista."
+    },
+    matrixdynamic: {
+      confirmDelete: "Käynnistää vahvistuskehotteen ennen rivin poistamista.",
+      detailPanelShowOnAdding: "Laajentaa tieto-osan automaattisesti, kun matriisiin lisätään uusi rivi."
     },
     copyDefaultValueFromLastEntry: "Monistaa vastaukset viimeiseltä riviltä ja määrittää ne seuraavalle lisätylle dynaamiselle riville.",
     defaultValueExpression: "Tämän asetuksen avulla voit määrittää oletusarvoisen vastausarvon lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia - '{q1_id} + {q2_id}', totuusarvolausekkeita, kuten '{age} > 60', ja funktioita: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne. Tämän lausekkeen määrittämä arvo toimii alkuperäisenä oletusarvona, jonka vastaajan manuaalinen syöttö voi ohittaa.",
@@ -1460,8 +1477,8 @@ export var fiStrings = {
       signatureAutoScaleEnabled: "Valitse tämä, jos haluat, että allekirjoitusalue täyttää kaiken kysymysruudussa käytettävissä olevan tilan säilyttäen oletusarvoisen 3:2-kuvasuhteen. Kun mukautetut leveys- ja korkeusarvot on määritetty, asetus säilyttää näiden mittojen kuvasuhteen."
     },
     file: {
-      imageHeight: "Säätää kuvan korkeutta kyselyn tuloksissa.",
-      imageWidth: "Säätää kuvan leveyttä kyselyn tuloksissa.",
+      imageHeight: "Määrittää ladattujen kuvien näyttökorkeuden esikatselussa ja kameralla otettujen kuvien todellisen korkeuden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön korkeutta. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue.",
+      imageWidth: "Määrittää ladattujen kuvien näyttöleveyden esikatselussa ja kameralla otettujen kuvien todellisen leveyden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön leveyttä. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue.",
       allowImagesPreview: "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var fiStrings = {
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
       showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
       colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
+    },
+    slider: {
+      min: "Pienin luku, jonka käyttäjät voivat valita.",
+      max: "Suurin luku, jonka käyttäjät voivat valita.",
+      step: "Valittavissa olevien asteikkoarvojen välinen aikaväli. Esimerkiksi vaihe 5 antaa käyttäjille mahdollisuuden valita 0, 5, 10 jne.",
+      minRangeLength: "Liukusäätimen peukaoiden välinen vähimmäisetäisyys, jonka käyttäjä voi asettaa.",
+      maxRangeLength: "Käyttäjän asettamien liukusäätimien peukaloiden välinen enimmäisetäisyys.",
+      labelCount: "Määrittää, kuinka monta asteikon otsikkoa luodaan. Arvo -1 tarkoittaa, että luku lasketaan automaattisesti minimi- ja maksimiarvojen perusteella.",
+      labelFormat: "Käytä \"{0}\" todellisen arvon paikkamerkkinä.",
+      customLabels: "Voit määrittää mukautettuja otsikoita tietyillä arvoilla ja halutessasi määrittää niille vastaavan tekstin (esim. 0 = \"Huono\", 100 = \"Erinomainen\").",
+      tooltipFormat: "Käytä \"{0}\" todellisen arvon paikkamerkkinä.",
+      allowSwap: "Antaa käyttäjien siirtää peukalon toisen ohi.",
+      allowClear: "Näyttää painikkeen, joka tyhjentää valitun liukusäätimen arvon ja asettaa sen määrittämättömäksi.",
+      minValueExpression: "Määrittää liukusäätimen vähimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta.",
+      maxValueExpression: "Määrittää liukusäätimen enimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta."
     },
     isExclusive: "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan.",
     caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
@@ -1532,7 +1564,6 @@ export var fiStrings = {
     detailErrorLocation: "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta.",
     keyDuplicationError: "Kun Estä päällekkäiset vastaukset -ominaisuus on käytössä, vastaaja, joka yrittää lähettää merkinnän kaksoiskappaleen, saa seuraavan virhesanoman.",
     totalExpression: "Voit laskea kokonaisarvot lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia ('{q1_id} + {q2_id}'), totuusarvolausekkeita ('{age} > 60') ja funktioita ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne.).",
-    confirmDelete: "Käynnistää kehotteen, jossa pyydetään vahvistamaan rivin poisto.",
     keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen.",
     description: "Kirjoita tekstitys.",
     locale: "Aloita kyselyn luominen valitsemalla kieli. Jos haluat lisätä käännöksen, vaihda uuteen kieleen ja käännä alkuperäinen teksti täällä tai Käännökset-välilehdessä.",
@@ -1700,7 +1731,7 @@ export var fiStrings = {
     detailElements: "Yksityiskohtaiset elementit",
     allowAdaptiveActions: "Salli mukautuvat toiminnot",
     defaultRowValue: "Rivin oletusarvo",
-    detailPanelShowOnAdding: "Tietopaneeli näyttää lisäyksen yhteydessä",
+    detailPanelShowOnAdding: "Laajenna uuden rivin tiedot automaattisesti",
     choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä",
     choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
     inputFieldComponent: "Syöttökentän komponentti",
@@ -1978,9 +2009,9 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.detailPanelMode: "Detail panel location" => "Yksityiskohtapaneelin sijainti"
 // pe.minRowCount: "Minimum row count" => "Rivien vähimmäismäärä"
 // pe.maxRowCount: "Maximum row count" => "Rivien enimmäismäärä"
-// pe.confirmDelete: "Confirm row deletion" => "Vahvista rivin poisto"
+// pe.confirmDelete: "Confirm row removal" => "Vahvista rivin poisto"
 // pe.confirmDeleteText: "Confirmation message" => "Vahvistussanoma"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Vahvista paneelin poisto"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Vahvista paneelin poisto"
 // pe.panelCount: "Initial panel count" => "Paneelien alkuperäinen määrä"
 // pe.minPanelCount: "Minimum panel count" => "Paneelien vähimmäismäärä"
 // pe.maxPanelCount: "Maximum panel count" => "Paneelien enimmäismäärä"
@@ -2654,7 +2685,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Määrittää virhesanoman sijainnin suhteessa soluun, jonka syöte on virheellinen. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Kun Estä päällekkäiset vastaukset -ominaisuus on käytössä, vastaaja, joka yrittää lähettää merkinnän kaksoiskappaleen, saa seuraavan virhesanoman."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Voit laskea kokonaisarvot lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia ('{q1_id} + {q2_id}'), totuusarvolausekkeita ('{age} > 60') ja funktioita ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Käynnistää kehotteen, jossa pyydetään vahvistamaan rivin poisto."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Käynnistää kehotteen, jossa pyydetään vahvistamaan rivin poisto."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Monistaa vastaukset viimeiseltä riviltä ja määrittää ne seuraavalle lisätylle dynaamiselle riville."
 // pehelp.description: "Type a subtitle." => "Kirjoita tekstitys."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Aloita kyselyn luominen valitsemalla kieli. Jos haluat lisätä käännöksen, vaihda uuteen kieleen ja käännä alkuperäinen teksti täällä tai Käännökset-välilehdessä."
@@ -3073,3 +3104,32 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // sliderType.single: "Single-Value" => "Yksittäinen arvo"
 // sliderType.range: "Range" => "Etäisyys"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan."
+// ed.toolboxSearch: "Search" => "Etsiä"
+// file.imageHeight: "Image height" => "Kuvan korkeus"
+// file.imageWidth: "Image width" => "Kuvan leveys"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Määrittää ladattujen kuvien näyttökorkeuden esikatselussa ja kameralla otettujen kuvien todellisen korkeuden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön korkeutta. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Määrittää ladattujen kuvien näyttöleveyden esikatselussa ja kameralla otettujen kuvien todellisen leveyden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön leveyttä. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue."
+// slider.min: "The lowest number that users can select." => "Pienin luku, jonka käyttäjät voivat valita."
+// slider.max: "The highest number that users can select." => "Suurin luku, jonka käyttäjät voivat valita."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Valittavissa olevien asteikkoarvojen välinen aikaväli. Esimerkiksi vaihe 5 antaa käyttäjille mahdollisuuden valita 0, 5, 10 jne."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Liukusäätimen peukaoiden välinen vähimmäisetäisyys, jonka käyttäjä voi asettaa."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Käyttäjän asettamien liukusäätimien peukaloiden välinen enimmäisetäisyys."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Määrittää, kuinka monta asteikon otsikkoa luodaan. Arvo -1 tarkoittaa, että luku lasketaan automaattisesti minimi- ja maksimiarvojen perusteella."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Käytä \"{0}\" todellisen arvon paikkamerkkinä."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Voit määrittää mukautettuja otsikoita tietyillä arvoilla ja halutessasi määrittää niille vastaavan tekstin (esim. 0 = \"Huono\", 100 = \"Erinomainen\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Käytä \"{0}\" todellisen arvon paikkamerkkinä."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Antaa käyttäjien siirtää peukalon toisen ohi."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Näyttää painikkeen, joka tyhjentää valitun liukusäätimen arvon ja asettaa sen määrittämättömäksi."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Määrittää liukusäätimen vähimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Määrittää liukusäätimen enimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta."
+// slider.sliderType: "Slider type" => "Liukusäätimen tyyppi"
+// slider.minRangeLength: "Min range length" => "Alueen vähimmäispituus"
+// slider.maxRangeLength: "Max range length" => "Suurin kantaman pituus"
+// slider.customLabels: "Custom labels" => "Mukautetut tunnisteet"
+// slider.labelFormat: "Label format" => "Etiketin muoto"
+// slider.tooltipFormat: "Tooltip format" => "Työkaluvihjeen muoto"
+// question.showTitle: "Show the title and description" => "Näytä otsikko ja kuvaus"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Käynnistää vahvistuskehotteen ennen paneelin poistamista."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Käynnistää vahvistuskehotteen ennen rivin poistamista."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Laajentaa tieto-osan automaattisesti, kun matriisiin lisätään uusi rivi."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Laajenna uuden rivin tiedot automaattisesti"

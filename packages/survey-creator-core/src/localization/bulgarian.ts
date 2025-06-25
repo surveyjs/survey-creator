@@ -129,6 +129,7 @@ export var bgStrings = {
     generateReadableJSON: "Генериране на четим JSON",
     toolbox: "Кутия с инструменти",
     "property-grid": "Свойства",
+    toolboxSearch: "Търсене",
     toolboxFilteredTextPlaceholder: "Въведете за търсене...",
     toolboxNoResultsFound: "Няма намерени резултати",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
@@ -349,6 +350,7 @@ export var bgStrings = {
       name: "Име на въпрос",
       title: "Заглавие на въпроса",
       description: "Описание на въпроса",
+      showTitle: "Показване на заглавието и описанието",
       visibleIf: "Направете въпроса видим, ако",
       requiredIf: "Задайте въпроса, който е необходим, ако",
       page: "Родителска страница",
@@ -754,7 +756,17 @@ export var bgStrings = {
       labelCount: "Брой автоматично генерирани етикети",
       minValueExpression: "Минимален израз на стойност",
       maxValueExpression: "Израз на максимална стойност",
-      autoGenerate: "Конфигурация на етикети в мащаба"
+      autoGenerate: "Конфигурация на етикети в мащаба",
+      sliderType: "Тип плъзгач",
+      minRangeLength: "Минимална дължина на диапазона",
+      maxRangeLength: "Максимална дължина на обхвата",
+      customLabels: "Персонализирани етикети",
+      labelFormat: "Формат на етикета",
+      tooltipFormat: "Формат на подсказката"
+    },
+    file: {
+      imageHeight: "Височина на изображението",
+      imageWidth: "Ширина на изображението"
     },
     hideIfChoicesEmpty: "Показване въпроса, ако не съдържа избор",
     minWidth: "Минимална широчина (в CSS-допустими стойности)",
@@ -1423,7 +1435,12 @@ export var bgStrings = {
       descriptionLocation: "Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Под заглавието на панела\" по подразбиране).",
       newPanelPosition: "Определя позицията на новодобавен панел. По подразбиране в края се добавят нови панели. Изберете \"Напред\", за да вмъкнете нов панел след текущия.",
       copyDefaultValueFromLastEntry: "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел.",
-      keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел."
+      keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
+      confirmDelete: "Задейства подкана за потвърждение преди премахване на панел."
+    },
+    matrixdynamic: {
+      confirmDelete: "Задейства подкана за потвърждение, преди да премахнете ред.",
+      detailPanelShowOnAdding: "Автоматично разширява раздела с подробности, когато се добави нов ред към матрицата."
     },
     copyDefaultValueFromLastEntry: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     defaultValueExpression: "Тази настройка ви позволява да присвоите стойност за отговор по подразбиране на базата на израз. Изразът може да включва основни изчисления - '{q1_id} + {q2_id}', булеви изрази, като '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др. Стойността, определена от този израз, служи като начална стойност по подразбиране, която може да бъде заместена от ръчното въвеждане на респондента.",
@@ -1460,8 +1477,8 @@ export var bgStrings = {
       signatureAutoScaleEnabled: "Изберете дали искате областта за подпис да запълни цялото налично пространство в полето за въпроси, като същевременно запазите съотношението по подразбиране 3:2. Когато са зададени стойности за ширина и височина по избор, настройката ще запази пропорциите на тези размери."
     },
     file: {
-      imageHeight: "Регулира височината на изображението в резултатите от проучването.",
-      imageWidth: "Регулира ширината на изображението в резултатите от проучването.",
+      imageHeight: "Указва височината на показване на качените изображения във визуализацията и действителната височина на изображенията, направени с фотоапарата. В режим на качване на един файл височината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите.",
+      imageWidth: "Указва ширината на показване на качените изображения във визуализацията и действителната ширина на изображенията, направени с фотоапарата. В режим на качване на един файл ширината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите.",
       allowImagesPreview: "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var bgStrings = {
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
       showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
       colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+    },
+    slider: {
+      min: "Най-ниското число, което потребителите могат да изберат.",
+      max: "Най-големият брой, който потребителите могат да изберат.",
+      step: "Интервалът между избираемите стойности на мащаба. Например, стъпка от 5 ще позволи на потребителите да изберат 0, 5, 10 и т.н.",
+      minRangeLength: "Минималното разстояние между палците на плъзгача, които потребителят може да зададе.",
+      maxRangeLength: "Максималното разстояние между палците на плъзгача, което потребителят може да зададе.",
+      labelCount: "Указва колко етикета на мащаба да генерирате. Стойност -1 означава, че числото се изчислява автоматично въз основа на минималната стойност и максималната стойност.",
+      labelFormat: "Използвайте \"{0}\" като контейнер за действителната стойност.",
+      customLabels: "Позволява ви да дефинирате персонализирани етикети с конкретни стойности и по желание да им присвоите съответстващ текст (напр. 0 = \"Лошо\", 100 = \"Отлично\").",
+      tooltipFormat: "Използвайте \"{0}\" като контейнер за действителната стойност.",
+      allowSwap: "Позволява на потребителите да движат единия палец покрай другия.",
+      allowClear: "Показва бутон, кой��о изчиства избраната стойност на плъзгача и я задава на undefined.",
+      minValueExpression: "Определя минималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др.",
+      maxValueExpression: "Определя максималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
     },
     isExclusive: "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса.",
     caseInsensitive: "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни.",
@@ -1532,7 +1564,6 @@ export var bgStrings = {
     detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
-    confirmDelete: "Задейства подкана с молба за потвърждаване на изтриването на реда.",
     keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка.",
     description: "Въведете субтитри.",
     locale: "Изберете език, за да започнете да създавате проучването си. За да добавите превод, превключете на нов език и преведете оригиналния текст тук или в раздела Преводи.",
@@ -1700,7 +1731,7 @@ export var bgStrings = {
     detailElements: "Детайлни елементи",
     allowAdaptiveActions: "Позволи адаптивни действия",
     defaultRowValue: "Стойност на реда по подразбиране",
-    detailPanelShowOnAdding: "Панелът с подробности се показва при добавяне.",
+    detailPanelShowOnAdding: "Автоматично разгъване на подробности за нов ред",
     choicesLazyLoadEnabled: "Отложеното зареждане на избора е активирано.",
     choicesLazyLoadPageSize: "Избор на размер на страницата за отложено зареждане",
     inputFieldComponent: "Компонент на полето за въвеждане",
@@ -2243,7 +2274,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задава местоположението на съобщение за грешка по отношение на клетка с невалиден вход. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщение за грешка\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Задейства подкана с молба за потвърждаване на изтриването на реда."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Задейства подкана с молба за потвърждаване на изтриването на реда."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред."
 // pehelp.description: "Type a subtitle." => "Въведете субтитри."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Изберете език, за да започнете да създавате проучването си. За да добавите превод, превключете на нов език и преведете оригиналния текст тук или в раздела Преводи."
@@ -2662,3 +2693,32 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // sliderType.single: "Single-Value" => "Единична стойност"
 // sliderType.range: "Range" => "Диапазон"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса."
+// ed.toolboxSearch: "Search" => "Търсене"
+// file.imageHeight: "Image height" => "Височина на изображението"
+// file.imageWidth: "Image width" => "Ширина на изображението"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указва височината на показване на качените изображения във визуализацията и действителната височина на изображенията, направени с фотоапарата. В режим на качване на един файл височината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указва ширината на показване на качените изображения във визуализацията и действителната ширина на изображенията, направени с фотоапарата. В режим на качване на един файл ширината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите."
+// slider.min: "The lowest number that users can select." => "Най-ниското число, което потребителите могат да изберат."
+// slider.max: "The highest number that users can select." => "Най-големият брой, който потребителите могат да изберат."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Интервалът между избираемите стойности на мащаба. Например, стъпка от 5 ще позволи на потребителите да изберат 0, 5, 10 и т.н."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Минималното разстояние между палците на плъзгача, които потребителят може да зададе."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Максималното разстояние между палците на плъзгача, което потребителят може да зададе."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Указва колко етикета на мащаба да генерирате. Стойност -1 означава, че числото се изчислява автоматично въз основа на минималната стойност и максималната стойност."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Използвайте \"{0}\" като контейнер за действителната стойност."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Позволява ви да дефинирате персонализирани етикети с конкретни стойности и по желание да им присвоите съответстващ текст (напр. 0 = \"Лошо\", 100 = \"Отлично\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Използвайте \"{0}\" като контейнер за действителната стойност."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Позволява на потребителите да движат единия палец покрай другия."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Показва бутон, кой��о изчиства избраната стойност на плъзгача и я задава на undefined."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Определя минималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Определя максималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
+// slider.sliderType: "Slider type" => "Тип плъзгач"
+// slider.minRangeLength: "Min range length" => "Минимална дължина на диапазона"
+// slider.maxRangeLength: "Max range length" => "Максимална дължина на обхвата"
+// slider.customLabels: "Custom labels" => "Персонализирани етикети"
+// slider.labelFormat: "Label format" => "Формат на етикета"
+// slider.tooltipFormat: "Tooltip format" => "Формат на подсказката"
+// question.showTitle: "Show the title and description" => "Показване на заглавието и описанието"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Задейства подкана за потвърждение преди премахване на панел."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Задейства подкана за потвърждение, преди да премахнете ред."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Автоматично разширява раздела с подробности, когато се добави нов ред към матрицата."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Автоматично разгъване на подробности за нов ред"

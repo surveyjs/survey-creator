@@ -149,6 +149,10 @@
             {
               "Name": "end-user-guide-reposition-form-elements",
               "Title": "Reposition Form Elements"
+            },
+            {
+              "Name": "end-user-guide-loop-and-merge-multi-select-dropdown-and-dynamic-matrix",
+              "Title": "Loop and Merge"
             }
           ]
         },
@@ -213,6 +217,10 @@
             {
               "Name": "end-user-guide-how-to-add-image-or-video-choice-question-to-form",
               "Title": "Image and Video Choice Questions"
+            },
+            {
+              "Name": "end-user-guide-sync-range-slider-with-input-fields-javascript",
+              "Title": "Sync a Range Slider with Input Fields"
             },
             {
               "Name": "end-user-guide-dynamic-tab-title-format",

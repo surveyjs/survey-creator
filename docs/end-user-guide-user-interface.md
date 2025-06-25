@@ -158,7 +158,7 @@ The Panel type is a container for other questions and panels. Use this type to g
 
 #### Dynamic Panel
 
-The Dynamic Panel type is a template panel that can contain multiple questions. Respondents can add and remove panels based on the template.
+The Dynamic Panel type is a template panel that can contain multiple questions. Respondents can add and remove panel entries based on the template.
 
 <img src="../images/question-types-dynamic-panel.png" alt="SurveyJS Question types - Dynamic panel" width="75%">
 

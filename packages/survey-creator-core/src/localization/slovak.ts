@@ -129,6 +129,7 @@ export var skStrings = {
     generateReadableJSON: "Vygenerovať načítateľný JSON",
     toolbox: "Súprava nástrojov",
     "property-grid": "Vlastnosti",
+    toolboxSearch: "Hľadať",
     toolboxFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
@@ -349,6 +350,7 @@ export var skStrings = {
       name: "Názov otázky",
       title: "Názov otázky",
       description: "Opis otázky",
+      showTitle: "Zobraziť názov a popis",
       visibleIf: "Zviditeľnite otázku, ak",
       requiredIf: "Urobte otázku povinnou, ak",
       page: "Nadradená stránka",
@@ -754,7 +756,17 @@ export var skStrings = {
       labelCount: "Počet automaticky vygenerovaných štítkov",
       minValueExpression: "Výraz minimálnej hodnoty",
       maxValueExpression: "Vyjadrenie maximálnej hodnoty",
-      autoGenerate: "Konfigurácia štítkov váhy"
+      autoGenerate: "Konfigurácia štítkov váhy",
+      sliderType: "Typ posúvača",
+      minRangeLength: "Minimálna dĺžka rozsahu",
+      maxRangeLength: "Maximálna dĺžka dosahu",
+      customLabels: "Vlastné štítky",
+      labelFormat: "Formát štítku",
+      tooltipFormat: "Formát popisu"
+    },
+    file: {
+      imageHeight: "Výška obrázka",
+      imageWidth: "Šírka obrázka"
     },
     hideIfChoicesEmpty: "Skryť otázku, ak neobsahuje žiadne možnosti",
     minWidth: "Minimálna šírka (v hodnotách akceptovaných CSS)",
@@ -1423,7 +1435,12 @@ export var skStrings = {
       descriptionLocation: "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\").",
       newPanelPosition: "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny.",
       copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
-      keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
+      keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením panela."
+    },
+    matrixdynamic: {
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením riadka.",
+      detailPanelShowOnAdding: "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
     },
     copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     defaultValueExpression: "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta.",
@@ -1460,8 +1477,8 @@ export var skStrings = {
       signatureAutoScaleEnabled: "Vyberte, či chcete, aby oblasť podpisu vyplnila všetok dostupný priestor v poli otázky pri zachovaní predvoleného pomeru strán 3:2. Keď sú nastavené vlastné hodnoty šírky a výšky, nastavenie zachová pomer strán týchto rozmerov."
     },
     file: {
-      imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
-      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu.",
+      imageHeight: "Určuje výšku zobrazenia nahraných snímok v náhľade a skutočnú výšku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je výška zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr.",
+      imageWidth: "Určuje šírku zobrazenia nahraných snímok v náhľade a skutočnú šírku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je šírka zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr.",
       allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var skStrings = {
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
       showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
       colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+    },
+    slider: {
+      min: "Najnižšie číslo, ktoré môžu používatelia vybrať.",
+      max: "Najvyššie číslo, ktoré môžu používatelia vybrať.",
+      step: "Interval medzi voliteľnými hodnotami stupnice. Napríklad krok 5 umožní používateľom vybrať 0, 5, 10 atď.",
+      minRangeLength: "Minimálna vzdialenosť medzi posuvnými palcami, ktorú môže používateľ nastaviť.",
+      maxRangeLength: "Maximálna vzdialenosť medzi palcami posúvača, ktorú môže používateľ nastaviť.",
+      labelCount: "Určuje, koľko označení mierky sa má vygenerovať. Hodnota -1 znamená, že číslo sa vypočíta automaticky na základe hodnoty Min a Max. hodnoty.",
+      labelFormat: "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu.",
+      customLabels: "Umožňuje definovať vlastné štítky pri konkrétnych hodnotách a voliteľne im priradiť zodpovedajúci text (napr. 0 = \"Slabý\", 100 = \"Vynikajúci\").",
+      tooltipFormat: "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu.",
+      allowSwap: "Umožňuje používateľom pohybovať jedným palcom za druhým.",
+      allowClear: "Zobrazí tlačidlo, ktoré vymaže vybratú hodnotu jazdca a nastaví ju na nedefinované.",
+      minValueExpression: "Definuje minimálnu hodnotu jazdca dynamicky pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie.",
+      maxValueExpression: "Dynamicky definuje maximálnu hodnotu jazdca pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
     },
     isExclusive: "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke.",
     caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
@@ -1532,7 +1564,6 @@ export var skStrings = {
     detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
-    confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
     keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
     description: "Zadajte podnadpis.",
     locale: "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady.",
@@ -1700,7 +1731,7 @@ export var skStrings = {
     detailElements: "Detailné prvky",
     allowAdaptiveActions: "Povolenie adaptívnych akcií",
     defaultRowValue: "Predvolená hodnota riadka",
-    detailPanelShowOnAdding: "panel s podrobnosťami – zobrazenie pri pridávaní",
+    detailPanelShowOnAdding: "Automatické rozbalenie podrobností nového riadka",
     choicesLazyLoadEnabled: "Možnosti lenivého zaťaženia povolené",
     choicesLazyLoadPageSize: "Možnosti lenivé načítať veľkosť stránky",
     inputFieldComponent: "Súčasť vstupného poľa",
@@ -1973,9 +2004,9 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.detailPanelMode: "Detail panel location" => "Umiestnenie panela s podrobnosťami"
 // pe.minRowCount: "Minimum row count" => "Minimálny počet riadkov"
 // pe.maxRowCount: "Maximum row count" => "Maximálny počet riadkov"
-// pe.confirmDelete: "Confirm row deletion" => "Potvrdenie odstránenia riadka"
+// pe.confirmDelete: "Confirm row removal" => "Potvrdenie odstránenia riadka"
 // pe.confirmDeleteText: "Confirmation message" => "Potvrdzovacia správa"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Potvrdenie odstránenia panela"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Potvrdenie odstránenia panela"
 // pe.panelCount: "Initial panel count" => "Počiatočný počet panelov"
 // pe.minPanelCount: "Minimum panel count" => "Minimálny počet panelov"
 // pe.maxPanelCount: "Maximum panel count" => "Maximálny počet panelov"
@@ -2634,7 +2665,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k bunke s neplatným vstupom. Možnosť Zdediť použije nastavenie z vlastnosti Zarovnanie chybového hlásenia."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku."
 // pehelp.description: "Type a subtitle." => "Zadajte podnadpis."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady."
@@ -3052,3 +3083,32 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // sliderType.single: "Single-Value" => "Jedna hodnota"
 // sliderType.range: "Range" => "Rozsah"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke."
+// ed.toolboxSearch: "Search" => "Hľadať"
+// file.imageHeight: "Image height" => "Výška obrázka"
+// file.imageWidth: "Image width" => "Šírka obrázka"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Určuje výšku zobrazenia nahraných snímok v náhľade a skutočnú výšku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je výška zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Určuje šírku zobrazenia nahraných snímok v náhľade a skutočnú šírku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je šírka zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr."
+// slider.min: "The lowest number that users can select." => "Najnižšie číslo, ktoré môžu používatelia vybrať."
+// slider.max: "The highest number that users can select." => "Najvyššie číslo, ktoré môžu používatelia vybrať."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interval medzi voliteľnými hodnotami stupnice. Napríklad krok 5 umožní používateľom vybrať 0, 5, 10 atď."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimálna vzdialenosť medzi posuvnými palcami, ktorú môže používateľ nastaviť."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Maximálna vzdialenosť medzi palcami posúvača, ktorú môže používateľ nastaviť."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Určuje, koľko označení mierky sa má vygenerovať. Hodnota -1 znamená, že číslo sa vypočíta automaticky na základe hodnoty Min a Max. hodnoty."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Umožňuje definovať vlastné štítky pri konkrétnych hodnotách a voliteľne im priradiť zodpovedajúci text (napr. 0 = \"Slabý\", 100 = \"Vynikajúci\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Umožňuje používateľom pohybovať jedným palcom za druhým."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Zobrazí tlačidlo, ktoré vymaže vybratú hodnotu jazdca a nastaví ju na nedefinované."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definuje minimálnu hodnotu jazdca dynamicky pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicky definuje maximálnu hodnotu jazdca pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
+// slider.sliderType: "Slider type" => "Typ posúvača"
+// slider.minRangeLength: "Min range length" => "Minimálna dĺžka rozsahu"
+// slider.maxRangeLength: "Max range length" => "Maximálna dĺžka dosahu"
+// slider.customLabels: "Custom labels" => "Vlastné štítky"
+// slider.labelFormat: "Label format" => "Formát štítku"
+// slider.tooltipFormat: "Tooltip format" => "Formát popisu"
+// question.showTitle: "Show the title and description" => "Zobraziť názov a popis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Spustí výzvu na potvrdenie pred odstránením panela."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Spustí výzvu na potvrdenie pred odstránením riadka."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatické rozbalenie podrobností nového riadka"

@@ -129,6 +129,7 @@ var frenchTranslation = {
     generateReadableJSON: "Générer un JSON lisible",
     toolbox: "Boîte à outils",
     "property-grid": "Propriétés",
+    toolboxSearch: "Rechercher",
     toolboxFilteredTextPlaceholder: "Tapez pour rechercher...",
     toolboxNoResultsFound: "Aucun résultat trouvé",
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
@@ -349,6 +350,7 @@ var frenchTranslation = {
       name: "Nom de la question",
       title: "Titre de la question",
       description: "Description de la question",
+      showTitle: "Afficher le titre et la description",
       visibleIf: "Rendez la question visible si",
       requiredIf: "Faites en sorte que la question soit obligatoire si",
       page: "Page parent",
@@ -754,7 +756,17 @@ var frenchTranslation = {
       labelCount: "Nombre d’étiquettes générées automatiquement",
       minValueExpression: "Expression de la valeur min",
       maxValueExpression: "Expression de la valeur maximale",
-      autoGenerate: "Configuration des étiquettes d’échelle"
+      autoGenerate: "Configuration des étiquettes d’échelle",
+      sliderType: "Type de curseur",
+      minRangeLength: "Longueur minimale de la plage",
+      maxRangeLength: "Longueur maximale de la portée",
+      customLabels: "Étiquettes personnalisées",
+      labelFormat: "Format de l’étiquette",
+      tooltipFormat: "Format de l’infobulle"
+    },
+    file: {
+      imageHeight: "Hauteur de l’image",
+      imageWidth: "Largeur de l’image"
     },
     hideIfChoicesEmpty: "Masquer la question si elle ne contient pas de choix",
     minWidth: "Largeur minimale (en valeurs acceptées par CSS)",
@@ -1423,7 +1435,12 @@ var frenchTranslation = {
       descriptionLocation: "L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Sous le titre du panneau » par défaut).",
       newPanelPosition: "Définit la position d’un panneau nouvellement ajouté. Par défaut, de nouveaux panneaux sont ajoutés à la fin. Sélectionnez « Suivant » pour insérer un nouveau panneau après le panneau actuel.",
       copyDefaultValueFromLastEntry: "Duplique les réponses du dernier panneau et les attribue au panneau dynamique suivant.",
-      keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau."
+      keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau.",
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer un panneau."
+    },
+    matrixdynamic: {
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer une ligne.",
+      detailPanelShowOnAdding: "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
     },
     copyDefaultValueFromLastEntry: "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée.",
     defaultValueExpression: "Ce paramètre vous permet d’attribuer une valeur de réponse par défaut en fonction d’une expression. L’expression peut inclure des calculs de base - '{q1_id} + {q2_id}', des expressions booléennes, telles que '{age} > 60', et des fonctions : 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. La valeur déterminée par cette expression sert de valeur par défaut initiale qui peut être remplacée par la saisie manuelle d’une personne interrogée.",
@@ -1460,8 +1477,8 @@ var frenchTranslation = {
       signatureAutoScaleEnabled: "Sélectionnez cette option si vous souhaitez que la zone de signature occupe tout l’espace disponible dans la zone de question tout en conservant le format d’image 3 :2 par défaut. Lorsque des valeurs de largeur et de hauteur personnalisées sont définies, le paramètre conserve les proportions de ces dimensions."
     },
     file: {
-      imageHeight: "Ajuste la hauteur de l’image dans les résultats de l’enquête.",
-      imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête.",
+      imageHeight: "Spécifie la hauteur d’affichage des images téléchargées dans l’aperçu et la hauteur réelle des images prises avec l’appareil photo. En mode de téléchargement d’un seul fichier, la hauteur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes.",
+      imageWidth: "Spécifie la largeur d’affichage des images téléchargées dans l’aperçu et la largeur réelle des images prises avec l’appareil photo. En mode de téléchargement de fichier unique, la largeur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes.",
       allowImagesPreview: "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
     },
     image: {
@@ -1493,6 +1510,21 @@ var frenchTranslation = {
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
       showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix.",
       colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+    },
+    slider: {
+      min: "Le nombre le plus bas que les utilisateurs peuvent sélectionner.",
+      max: "Le nombre le plus élevé que les utilisateurs peuvent sélectionner.",
+      step: "Intervalle entre les valeurs d’échelle sélectionnables. Par exemple, une étape de 5 permettra aux utilisateurs de sélectionner 0, 5, 10, etc.",
+      minRangeLength: "Distance minimale entre les curseurs qu’un utilisateur peut définir.",
+      maxRangeLength: "Distance maximale entre les curseurs qu’un utilisateur peut définir.",
+      labelCount: "Spécifie le nombre d’étiquettes d’échelle à générer. Une valeur de -1 signifie que le nombre est calculé automatiquement en fonction de la valeur minimale et de la valeur maximale.",
+      labelFormat: "Utilisez « {0} » comme espace réservé pour la valeur réelle.",
+      customLabels: "Vous permet de définir des libellés personnalisés à des valeurs spécifiques et éventuellement de leur attribuer le texte correspondant (par exemple, 0 = « Médiocre », 100 = « Excellent »).",
+      tooltipFormat: "Utilisez « {0} » comme espace réservé pour la valeur réelle.",
+      allowSwap: "Permet aux utilisateurs de passer d’un pouce sur l’autre.",
+      allowClear: "Affiche un bouton qui efface la valeur du curseur sélectionnée et la définit sur undefined.",
+      minValueExpression: "Définit la valeur minimale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.",
+      maxValueExpression: "Définit la valeur maximale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
     },
     isExclusive: "Rend ce choix exclusif. Lorsqu’il est sélectionné par un utilisateur, il désélectionne automatiquement toutes les autres options de la question.",
     caseInsensitive: "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes.",
@@ -1532,7 +1564,6 @@ var frenchTranslation = {
     detailErrorLocation: "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur ».",
     keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant.",
     totalExpression: "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Déclenche une invite vous demandant de confirmer la suppression de ligne.",
     keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique ».",
     description: "Saisissez un sous-titre.",
     locale: "Choisissez une langue pour commencer à créer votre sondage. Pour ajouter une traduction, passez à une nouvelle langue et traduisez le texte original ici ou dans l’onglet Traductions.",
@@ -1700,7 +1731,7 @@ var frenchTranslation = {
     detailElements: "Détails de l'élément",
     allowAdaptiveActions: "Autoriser les actions adaptatives",
     defaultRowValue: "Valeur de ligne par défaut",
-    detailPanelShowOnAdding: "Affichage des détails de la section lors de l’ajout",
+    detailPanelShowOnAdding: "Développer automatiquement les détails d’une nouvelle ligne",
     choicesLazyLoadEnabled: "Choix de chargement paresseux activé",
     choicesLazyLoadPageSize: "Choix de taille de page de chargement paresseux",
     inputFieldComponent: "Composant du champ de saisie",
@@ -2013,9 +2044,9 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.detailPanelMode: "Detail panel location" => "Emplacement du panneau de détails"
 // pe.minRowCount: "Minimum row count" => "Nombre minimal de lignes"
 // pe.maxRowCount: "Maximum row count" => "Nombre maximal de lignes"
-// pe.confirmDelete: "Confirm row deletion" => "Confirmer la suppression de lignes"
+// pe.confirmDelete: "Confirm row removal" => "Confirmer la suppression de lignes"
 // pe.confirmDeleteText: "Confirmation message" => "Message de confirmation"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Confirmer la suppression du panneau"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Confirmer la suppression du panneau"
 // pe.panelCount: "Initial panel count" => "Nombre initial de panels"
 // pe.minPanelCount: "Minimum panel count" => "Nombre minimal de panneaux"
 // pe.maxPanelCount: "Maximum panel count" => "Nombre maximal de panneaux"
@@ -2738,7 +2769,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Définit l’emplacement d’un message d’erreur par rapport à une cellule dont l’entrée n’est pas valide. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur »."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Déclenche une invite vous demandant de confirmer la suppression de ligne."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Déclenche une invite vous demandant de confirmer la suppression de ligne."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée."
 // pehelp.description: "Type a subtitle." => "Saisissez un sous-titre."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Choisissez une langue pour commencer à créer votre sondage. Pour ajouter une traduction, passez à une nouvelle langue et traduisez le texte original ici ou dans l’onglet Traductions."
@@ -3158,3 +3189,32 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // sliderType.single: "Single-Value" => "Valeur unique"
 // sliderType.range: "Range" => "Gamme"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Rend ce choix exclusif. Lorsqu’il est sélectionné par un utilisateur, il désélectionne automatiquement toutes les autres options de la question."
+// ed.toolboxSearch: "Search" => "Rechercher"
+// file.imageHeight: "Image height" => "Hauteur de l’image"
+// file.imageWidth: "Image width" => "Largeur de l’image"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Spécifie la hauteur d’affichage des images téléchargées dans l’aperçu et la hauteur réelle des images prises avec l’appareil photo. En mode de téléchargement d’un seul fichier, la hauteur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Spécifie la largeur d’affichage des images téléchargées dans l’aperçu et la largeur réelle des images prises avec l’appareil photo. En mode de téléchargement de fichier unique, la largeur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes."
+// slider.min: "The lowest number that users can select." => "Le nombre le plus bas que les utilisateurs peuvent sélectionner."
+// slider.max: "The highest number that users can select." => "Le nombre le plus élevé que les utilisateurs peuvent sélectionner."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Intervalle entre les valeurs d’échelle sélectionnables. Par exemple, une étape de 5 permettra aux utilisateurs de sélectionner 0, 5, 10, etc."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Distance minimale entre les curseurs qu’un utilisateur peut définir."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Distance maximale entre les curseurs qu’un utilisateur peut définir."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Spécifie le nombre d’étiquettes d’échelle à générer. Une valeur de -1 signifie que le nombre est calculé automatiquement en fonction de la valeur minimale et de la valeur maximale."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Utilisez « {0} » comme espace réservé pour la valeur réelle."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Vous permet de définir des libellés personnalisés à des valeurs spécifiques et éventuellement de leur attribuer le texte correspondant (par exemple, 0 = «Médiocre», 100 = «Excellent»)."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Utilisez « {0} » comme espace réservé pour la valeur réelle."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Permet aux utilisateurs de passer d’un pouce sur l’autre."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Affiche un bouton qui efface la valeur du curseur sélectionnée et la définit sur undefined."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Définit la valeur minimale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Définit la valeur maximale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
+// slider.sliderType: "Slider type" => "Type de curseur"
+// slider.minRangeLength: "Min range length" => "Longueur minimale de la plage"
+// slider.maxRangeLength: "Max range length" => "Longueur maximale de la portée"
+// slider.customLabels: "Custom labels" => "Étiquettes personnalisées"
+// slider.labelFormat: "Label format" => "Format de l’étiquette"
+// slider.tooltipFormat: "Tooltip format" => "Format de l’infobulle"
+// question.showTitle: "Show the title and description" => "Afficher le titre et la description"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Déclenche une invite de confirmation avant de supprimer un panneau."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Déclenche une invite de confirmation avant de supprimer une ligne."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Développer automatiquement les détails d’une nouvelle ligne"

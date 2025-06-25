@@ -129,6 +129,7 @@ export var ruStrings = {
     generateReadableJSON: "Сформировать читаемый JSON",
     toolbox: "Панель инструментов",
     "property-grid": "Свойства",
+    toolboxSearch: "Искать",
     toolboxFilteredTextPlaceholder: "Введите для поиска...",
     toolboxNoResultsFound: "Никаких результатов не найдено",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
@@ -349,6 +350,7 @@ export var ruStrings = {
       name: "Название вопроса",
       title: "Заголовок вопроса",
       description: "Описание вопроса",
+      showTitle: "Показать название и описание",
       visibleIf: "Сделайте вопрос видимым, если",
       requiredIf: "Сделайте вопрос обязательным, если",
       page: "Родительская страница",
@@ -754,7 +756,17 @@ export var ruStrings = {
       labelCount: "Количество автоматически сгенерированных меток",
       minValueExpression: "Выражение минимального значения",
       maxValueExpression: "Выражение максимального значения",
-      autoGenerate: "Настройка этикеток шкалы"
+      autoGenerate: "Настройка этикеток шкалы",
+      sliderType: "Тип слайдера",
+      minRangeLength: "Минимальная длина диапазона",
+      maxRangeLength: "Максимальная длина диапазона",
+      customLabels: "Пользовательские этикетки",
+      labelFormat: "Формат этикетки",
+      tooltipFormat: "Формат всплывающей подсказки"
+    },
+    file: {
+      imageHeight: "Высота изображения",
+      imageWidth: "Ширина изображения"
     },
     hideIfChoicesEmpty: "Скрыть вопрос, если он не содержит вариантов",
     minWidth: "Минимальная ширина (в значениях, принимаемых CSS)",
@@ -1423,7 +1435,12 @@ export var ruStrings = {
       descriptionLocation: "Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Под заголовком панели» по умолчанию).",
       newPanelPosition: "Определяет положение вновь добавляемой панели. По умолчанию новые панели добавляются в конец. Выберите «Далее», чтобы вставить новую панель после текущей.",
       copyDefaultValueFromLastEntry: "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели.",
-      keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели."
+      keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели.",
+      confirmDelete: "Запускает запрос на подтверждение перед удалением панели."
+    },
+    matrixdynamic: {
+      confirmDelete: "Запускает запрос на подтверждение перед удалением строки.",
+      detailPanelShowOnAdding: "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
     },
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     defaultValueExpression: "Этот параметр позволяет назначить значение ответа по умолчанию на основе выражения. Выражение может включать в себя базовые вычисления - '{q1_id} + {q2_id}', логические выражения, такие как '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д. Значение, определяемое этим выражением, служит начальным значением по умолчанию, которое может быть переопределено ручным вводом респондентом.",
@@ -1460,8 +1477,8 @@ export var ruStrings = {
       signatureAutoScaleEnabled: "Выберите, хотите ли вы, чтобы область подписи занимала все доступное пространство в поле вопроса, сохраняя при этом соотношение сторон по умолчанию 3:2. Если заданы пользовательские значения ширины и высоты, при этом будет сохранено соотношение сторон этих размеров."
     },
     file: {
-      imageHeight: "Настройка высоты изображения в результатах съемки.",
-      imageWidth: "Настройка ширины изображения в результатах съемки.",
+      imageHeight: "Указывает высоту отображения загруженных изображений в окне предварительного просмотра и фактическую высоту изображений, сделанных камерой. В режиме загрузки одного файла высота отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов.",
+      imageWidth: "Указывает ширину отображения загруженных изображений в окне предварительного просмотра и фактическую ширину изображений, сделанных камерой. В режиме загрузки одного файла ширина отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов.",
       allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var ruStrings = {
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
       colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
+    },
+    slider: {
+      min: "Наименьшее число, которое могут выбрать пользователи.",
+      max: "Максимальное число, которое могут выбрать пользователи.",
+      step: "Интервал между выбираемыми значениями масштаба. Например, шаг 5 позволит пользователям выбрать 0, 5, 10 и т. д.",
+      minRangeLength: "Минимальное расстояние между ползунками, которое может установить пользователь.",
+      maxRangeLength: "Максимальное расстояние между ползунками, которое может установить пользователь.",
+      labelCount: "Указывает, сколько меток шкалы необходимо создать. Значение -1 означает, что число вычисляется автоматически на основе значений Min и Max.",
+      labelFormat: "Используйте '{0}' в качестве заполнителя для фактического значения.",
+      customLabels: "Позволяет определять пользовательские метки с определенными значениями и при необходимости назначать им соответствующий текст (например, 0 = \"Плохо\", 100 = \"Отлично\").",
+      tooltipFormat: "Используйте '{0}' в качестве заполнителя для фактического значения.",
+      allowSwap: "Позволяет пользователям перемещать один большой палец мимо другого.",
+      allowClear: "Отображает кнопку, которая очищает выбранное значение ползунка и устанавливает его в неопределенное положение.",
+      minValueExpression: "Динамически определяет минимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие.",
+      maxValueExpression: "Динамически определяет максимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
     },
     isExclusive: "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса.",
     caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
@@ -1532,7 +1564,6 @@ export var ruStrings = {
     detailErrorLocation: "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\".",
     keyDuplicationError: "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке.",
     totalExpression: "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.).",
-    confirmDelete: "Запускает запрос на подтверждение удаления строки.",
     keyName: "Если указанный столбец содержит одинаковые значения, опрос выдает ошибку «Неуникальное значение ключа».",
     description: "Введите субтитры.",
     locale: "Выберите язык, чтобы начать создание опроса. Чтобы добавить перевод, переключитесь на новый язык и переведите исходный текст здесь или во вкладке «Переводы».",
@@ -1700,7 +1731,7 @@ export var ruStrings = {
     detailElements: "Детализация элементов",
     allowAdaptiveActions: "Разрешить адаптивные действия",
     defaultRowValue: "Значение строки по умолчанию",
-    detailPanelShowOnAdding: "Панель сведений, отображаемая при добавлении",
+    detailPanelShowOnAdding: "Автоматическое раскрытие сведений о новой строке",
     choicesLazyLoadEnabled: "Выбор отложенной загрузки включен",
     choicesLazyLoadPageSize: "Выбор ленивой загрузки размера страницы",
     inputFieldComponent: "Компонент поля ввода",
@@ -2021,9 +2052,9 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.detailPanelMode: "Detail panel location" => "Расположение панели сведений"
 // pe.minRowCount: "Minimum row count" => "Минимальное количество строк"
 // pe.maxRowCount: "Maximum row count" => "Максимальное количество строк"
-// pe.confirmDelete: "Confirm row deletion" => "Подтверждение удаления строки"
+// pe.confirmDelete: "Confirm row removal" => "Подтверждение удаления строки"
 // pe.confirmDeleteText: "Confirmation message" => "Подтверждающее сообщение"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Подтвердите удаление панели"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Подтвердите удаление панели"
 // pe.panelCount: "Initial panel count" => "Начальное количество панелей"
 // pe.minPanelCount: "Minimum panel count" => "Минимальное количество панелей"
 // pe.maxPanelCount: "Maximum panel count" => "Максимальное количество панелей"
@@ -2740,7 +2771,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задает местоположение сообщения об ошибке по отношению к ячейке с недопустимыми входными данными. Опция «Наследовать» применяет настройку из свойства «Выравнивание сообщений об ошибках»."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Запускает запрос на подтверждение удаления строки."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Запускает запрос на подтверждение удаления строки."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке."
 // pehelp.description: "Type a subtitle." => "Введите субтитры."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Выберите язык, чтобы начать создание опроса. Чтобы добавить перевод, переключитесь на новый язык и переведите исходный текст здесь или во вкладке «Переводы»."
@@ -3154,3 +3185,32 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // sliderType.single: "Single-Value" => "Однозначный"
 // sliderType.range: "Range" => "Диапазон"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса."
+// ed.toolboxSearch: "Search" => "Искать"
+// file.imageHeight: "Image height" => "Высота изображения"
+// file.imageWidth: "Image width" => "Ширина изображения"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указывает высоту отображения загруженных изображений в окне предварительного просмотра и фактическую высоту изображений, сделанных камерой. В режиме загрузки одного файла высота отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указывает ширину отображения загруженных изображений в окне предварительного просмотра и фактическую ширину изображений, сделанных камерой. В режиме загрузки одного файла ширина отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов."
+// slider.min: "The lowest number that users can select." => "Наименьшее число, которое могут выбрать пользователи."
+// slider.max: "The highest number that users can select." => "Максимальное число, которое могут выбрать пользователи."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Интервал между выбираемыми значениями масштаба. Например, шаг 5 позволит пользователям выбрать 0, 5, 10 и т. д."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Минимальное расстояние между ползунками, которое может установить пользователь."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Максимальное расстояние между ползунками, которое может установить пользователь."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Указывает, сколько меток шкалы необходимо создать. Значение -1 означает, что число вычисляется автоматически на основе значений Min и Max."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Используйте '{0}' в качестве заполнителя для фактического значения."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Позволяет определять пользовательские метки с определенными значениями и при необходимости назначать им соответствующий текст (например, 0 = \"Плохо\", 100 = \"Отлично\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Используйте '{0}' в качестве заполнителя для фактического значения."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Позволяет пользователям перемещать один большой палец мимо другого."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Отображает кнопку, которая очищает выбранное значение ползунка и устанавливает его в неопределенное положение."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Динамически определяет минимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Динамически определяет максимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
+// slider.sliderType: "Slider type" => "Тип слайдера"
+// slider.minRangeLength: "Min range length" => "Минимальная длина диапазона"
+// slider.maxRangeLength: "Max range length" => "Максимальная длина диапазона"
+// slider.customLabels: "Custom labels" => "Пользовательские этикетки"
+// slider.labelFormat: "Label format" => "Формат этикетки"
+// slider.tooltipFormat: "Tooltip format" => "Формат всплывающей подсказки"
+// question.showTitle: "Show the title and description" => "Показать название и описание"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Запускает запрос на подтверждение перед удалением панели."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Запускает запрос на подтверждение перед удалением строки."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Автоматическое раскрытие сведений о новой строке"

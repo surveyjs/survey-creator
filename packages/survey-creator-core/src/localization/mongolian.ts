@@ -129,6 +129,7 @@ export var mnStrings = {
     generateReadableJSON: "Ойлгомжтой JSON үүсгэх",
     toolbox: "Хэрэглүүр",
     "property-grid": "Өмнөх",
+    toolboxSearch: "Хайх",
     toolboxFilteredTextPlaceholder: "Хайлт хийх төрөл...",
     toolboxNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
@@ -349,6 +350,7 @@ export var mnStrings = {
       name: "Асуулт нэр",
       title: "Асуулт гарчиг",
       description: "Асуултын тодорхойлолт",
+      showTitle: "Гарчиг, тайлбарыг харуул",
       visibleIf: "Асуултыг ил тод болгох",
       requiredIf: "Шаардлагатай асуултыг тавих",
       page: "Эх хуудас",
@@ -754,7 +756,17 @@ export var mnStrings = {
       labelCount: "Автоматаар үүсгэсэн шошгоны тоо",
       minValueExpression: "Хамгийн бага илэрхийлэл",
       maxValueExpression: "Хамгийн их хэмжээний илэрхийлэл",
-      autoGenerate: "Шошгоны тохиргоог хэмжих"
+      autoGenerate: "Шошгоны тохиргоог хэмжих",
+      sliderType: "Слайдерын төрөл",
+      minRangeLength: "Хамгийн бага диапазонын урт",
+      maxRangeLength: "Хамгийн их зайны урт",
+      customLabels: "Custom labels",
+      labelFormat: "Шошгоны хэлбэр",
+      tooltipFormat: "Tooltip формат"
+    },
+    file: {
+      imageHeight: "Зургийн өндөр",
+      imageWidth: "Зургийн өргөн"
     },
     hideIfChoicesEmpty: "Сонголтгүй бол асуултыг нуух",
     minWidth: "Хамгийн бага өргөн (CSS хүлээн зөвшөөрсөн утга)",
@@ -1423,7 +1435,12 @@ export var mnStrings = {
       descriptionLocation: "\"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Under the panel title\" -ийг default-аар) хэрэгжүүлдэг.",
       newPanelPosition: "Шинээр нэмэгдсэн панелийн байр суурийг тодорхойлно. Default-ээр төгсгөл рүү шинэ панелуудыг нэмдэг. Одоогийн панел дараа нь шинэ панел оруулахын тулд \"Next\"-ийг сонго.",
       copyDefaultValueFromLastEntry: "Сүүлийн панелын хариултыг хувилж, дараагийн нэмэлт динамик хавтанд хуваарилна.",
-      keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат."
+      keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
+      confirmDelete: "Панелийг зайлуулахын өмнө баталгааны өдөөлт үүсгэнэ."
+    },
+    matrixdynamic: {
+      confirmDelete: "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө.",
+      detailPanelShowOnAdding: "Матрицад шинэ мөр нэмэх үед нарийвчилсан хэсгийг автоматаар өргөжүүлнэ."
     },
     copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     defaultValueExpression: "Энэ тохиргоо нь илэрхийллийн үндсэн дээр дефолт хариултын үнэ цэнийг даалгах боломжийг олгодог. Илэрхийлэл нь үндсэн тооцоо - '{q1_id} + {q2_id}', Бөүлийн илэрхийллүүд, тухайлбал '{age} > 60', функц: 'iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м. Энэ илэрхийлэлээр тодорхойлогддог үнэ цэнэ нь хариулагчийн гарын авлагын оролтоор давхардуулан авч болох анхны дефолтын үнэ цэнэ болж өгдөг.",
@@ -1460,8 +1477,8 @@ export var mnStrings = {
       signatureAutoScaleEnabled: "Хэрэв та гарын үсэг зурах талбайгаа асуултын хайрцаг доторх бүх боломжит зайг бөглөж, стандарт 3:2 талын харьцааг хадгалахыг хүсэж байвал сонго. Custom өргөн, өндөр үнэ цэнийг тогтоох үед тохиргоо нь эдгээр хэмжээсийн тал харьцааг хадгална."
     },
     file: {
-      imageHeight: "Судалгааны үр дүнгээр дүрсний өндрийг тохируулна.",
-      imageWidth: "Судалгааны үр дүн дэх зургийн өргөнийг тохируулна.",
+      imageHeight: "Урьдчилан харах хэсэгт оруулсан зургуудын үзүүлэх өндрийг болон камераар авсан зургуудын бодит өндрийг тодорхойлно. Нэг файл upload mode-д дэлгэцийн өндрийг урьдчилан харах талбайгаар хязгаарладаг. Multiple file upload mode-д thumbnail хэсгээр хязгаарлагддаг.",
+      imageWidth: "Урьдчилан харах хэсэгт оруулсан зургуудын дэлгэцийн өргөнийг болон камераар авсан зургуудын бодит өргөнийг тодорхойлно. Нэг файл upload mode-д дэлгэцийн өргөнийг урьдчилан харах талбайгаар хязгаарладаг. Multiple file upload mode-д thumbnail хэсгээр хязгаарлагддаг.",
       allowImagesPreview: "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var mnStrings = {
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
       colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
+    },
+    slider: {
+      min: "Хэрэглэгчдийн сонгож болох хамгийн бага тоо.",
+      max: "Хэрэглэгчдийн сонгож болох хамгийн өндөр тоо.",
+      step: "Сонгож болох масштабын хоорондох интервал. Жишээ нь, 5-ын алхам нь хэрэглэгчдэд 0, 5, 10 гэх мэтийг сонгох боломжийг олгоно.",
+      minRangeLength: "Хэрэглэгчийн тохируулж болох слайдерын эрхий хурууны хоорондох хамгийн бага зай.",
+      maxRangeLength: "Хэрэглэгчийн тохируулж болох слайдер эрхий хурууны хоорондох зай.",
+      labelCount: "Хэдэн хэмжээний шошго үүсгэхийг тодорхойлно. -1 гэдэг нь тоо нь Min value болон Max value дээр үндэслэн автоматаар тооцогдоно гэсэн үг.",
+      labelFormat: "Бодит үнэ цэнийг '{0}' болгон ашигла.",
+      customLabels: "Тодорхой хэмжээгээр тусгай шошго тодорхойлох болон тэдгээрт тохирох текстийг томилох боломжийг олгодог (жишээ нь, 0 = \"Муу\", 100 = \"Маш сайн\").",
+      tooltipFormat: "Бодит үнэ цэнийг '{0}' болгон ашигла.",
+      allowSwap: "Хэрэглэгчдэд нэг эрхий хуруугаа нөгөөгийнхөө хажуугаар өнгөрөх боломжийг олгоно.",
+      allowClear: "Сонгосон слайдерын утгыг цэвэрлэж undefined болгох товчлуурыг харуулна.",
+      minValueExpression: "Слайдерын хамгийн бага үнэ цэнийг илэрхийлэл ашиглан динамик байдлаар тодорхойлно. Үндсэн тооцоолол (жишээ нь, '{q1_id} + {q2_id}'), Boolean logic (жишээ нь, '{age} > 60'), мөн 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' зэрэг функц��удыг дэмждэг.",
+      maxValueExpression: "Слайдерын хамгийн их үнэ цэнийг илэрхийлэл ашиглан динамик байдлаар тодорхойлно. Үндсэн тооцоолол (жишээ нь, '{q1_id} + {q2_id}'), Boolean logic (жишээ нь, '{age} > 60'), мөн 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' зэрэг функцуудыг дэмждэг."
     },
     isExclusive: "Энэ сонголтыг онцгой болгодог. Хэрэглэгч сонговол асуултын бусад бүх сонголтыг автоматаар хасна.",
     caseInsensitive: "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу.",
@@ -1532,7 +1564,6 @@ export var mnStrings = {
     detailErrorLocation: "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ.",
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
-    confirmDelete: "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв.",
     keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна.",
     description: "Дэд гарчиг бичнэ.",
     locale: "Судалгаагаа хийж эхлэх хэл сонго. Орчуулга нэмэхийн тулд шинэ хэл рүү шилжиж, эх бичвэрийг энд эсвэл Translations tab-д орчуулна.",
@@ -1700,7 +1731,7 @@ export var mnStrings = {
     detailElements: "Дэлгэрэнгүй элементүүд",
     allowAdaptiveActions: "Дасан зохицох үйлдлийг зөвшөөрөх",
     defaultRowValue: "Үндсэн мөрийн утга",
-    detailPanelShowOnAdding: "Нэмэж байх үед нарийвчилсан панел харуулах",
+    detailPanelShowOnAdding: "Шинэ мөрийн нарийн ширийн зүйлсийг автоматаар тэлэх",
     choicesLazyLoadEnabled: "Choices lazy load enabled",
     choicesLazyLoadPageSize: "Choices lazy load page size",
     inputFieldComponent: "Оролтын утгын бүрэлдэхүүн",
@@ -2336,7 +2367,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Хүчингүй оруулсан эстэй холбоотой алдааны мессежийн байршлыг тогтооно. \"Өв залгамж\" сонголт нь \"Error message alignment\" өмчийн тохиргоог хэрэгжүүлдэг."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна."
 // pehelp.description: "Type a subtitle." => "Дэд гарчиг бичнэ."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Судалгаагаа хийж эхлэх хэл сонго. Орчуулга нэмэхийн тулд шинэ хэл рүү шилжиж, эх бичвэрийг энд эсвэл Translations tab-д орчуулна."
@@ -2754,3 +2785,32 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // sliderType.single: "Single-Value" => "Ганц үнэ цэнэтэй"
 // sliderType.range: "Range" => "Диапазон"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Энэ сонголтыг онцгой болгодог. Хэрэглэгч сонговол асуултын бусад бүх сонголтыг автоматаар хасна."
+// ed.toolboxSearch: "Search" => "Хайх"
+// file.imageHeight: "Image height" => "Зургийн өндөр"
+// file.imageWidth: "Image width" => "Зургийн өргөн"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Урьдчилан харах хэсэгт оруулсан зургуудын үзүүлэх өндрийг болон камераар авсан зургуудын бодит өндрийг тодорхойлно. Нэг файл upload mode-д дэлгэцийн өндрийг урьдчилан харах талбайгаар хязгаарладаг. Multiple file upload mode-д thumbnail хэсгээр хязгаарлагддаг."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Урьдчилан харах хэсэгт оруулсан зургуудын дэлгэцийн өргөнийг болон камераар авсан зургуудын бодит өргөнийг тодорхойлно. Нэг файл upload mode-д дэлгэцийн өргөнийг урьдчилан харах талбайгаар хязгаарладаг. Multiple file upload mode-д thumbnail хэсгээр хязгаарлагддаг."
+// slider.min: "The lowest number that users can select." => "Хэрэглэгчдийн сонгож болох хамгийн бага тоо."
+// slider.max: "The highest number that users can select." => "Хэрэглэгчдийн сонгож болох хамгийн өндөр тоо."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Сонгож болох масштабын хоорондох интервал. Жишээ нь, 5-ын алхам нь хэрэглэгчдэд 0, 5, 10 гэх мэтийг сонгох боломжийг олгоно."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Хэрэглэгчийн тохируулж болох слайдерын эрхий хурууны хоорондох хамгийн бага зай."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Хэрэглэгчийн тохируулж болох слайдер эрхий хурууны хоорондох зай."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Хэдэн хэмжээний шошго үүсгэхийг тодорхойлно. -1 гэдэг нь тоо нь Min value болон Max value дээр үндэслэн автоматаар тооцогдоно гэсэн үг."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Бодит үнэ цэнийг '{0}' болгон ашигла."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Тодорхой хэмжээгээр тусгай шошго тодорхойлох болон тэдгээрт тохирох текстийг томилох боломжийг олгодог (жишээ нь, 0 = \"Муу\", 100 = \"Маш сайн\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Бодит үнэ цэнийг '{0}' болгон ашигла."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Хэрэглэгчдэд нэг эрхий хуруугаа нөгөөгийнхөө хажуугаар өнгөрөх боломжийг олгоно."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Сонгосон слайдерын утгыг цэвэрлэж undefined болгох товчлуурыг харуулна."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Слайдерын хамгийн бага үнэ цэнийг илэрхийлэл ашиглан динамик байдлаар тодорхойлно. Үндсэн тооцоолол (жишээ нь, '{q1_id} + {q2_id}'), Boolean logic (жишээ нь, '{age} > 60'), мөн 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' зэрэг функц��удыг дэмждэг."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Слайдерын хамгийн их үнэ цэнийг илэрхийлэл ашиглан динамик байдлаар тодорхойлно. Үндсэн тооцоолол (жишээ нь, '{q1_id} + {q2_id}'), Boolean logic (жишээ нь, '{age} > 60'), мөн 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' зэрэг функцуудыг дэмждэг."
+// slider.sliderType: "Slider type" => "Слайдерын төрөл"
+// slider.minRangeLength: "Min range length" => "Хамгийн бага диапазонын урт"
+// slider.maxRangeLength: "Max range length" => "Хамгийн их зайны урт"
+// slider.customLabels: "Custom labels" => "Custom labels"
+// slider.labelFormat: "Label format" => "Шошгоны хэлбэр"
+// slider.tooltipFormat: "Tooltip format" => "Tooltip формат"
+// question.showTitle: "Show the title and description" => "Гарчиг, тайлбарыг харуул"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Панелийг зайлуулахын өмнө баталгааны өдөөлт үүсгэнэ."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Матрицад шинэ мөр нэмэх үед нарийвчилсан хэсгийг автоматаар өргөжүүлнэ."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Шинэ мөрийн нарийн ширийн зүйлсийг автоматаар тэлэх"

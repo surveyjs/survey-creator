@@ -1,5 +1,5 @@
 <template>
-  <div class="svc-tabbed-menu" ref="container" role="tablist">
+  <div class="svc-tabbed-menu" ref="container" role="tablist" :style="model.getRootStyle()">
     <template v-for="action in model.renderedActions" :key="action.renderedId">
       <SvComponent
         :is="'svc-tabbed-menu-item-wrapper'"
@@ -10,19 +10,19 @@
 </template>
 <script setup lang="ts">
 import { SvComponent } from "survey-vue3-ui";
-import { ResponsivityManager } from "survey-core";
 import type { TabbedMenuContainer } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, onUpdated, ref } from "vue";
 const props = defineProps<{ model: TabbedMenuContainer }>();
-let responsivityManager: ResponsivityManager = undefined as any;
 const container = ref();
 useBase(() => props.model);
+onUpdated(() => {
+  props.model.initResponsivityManager(container.value)
+});
 onMounted(() => {
-  responsivityManager = new ResponsivityManager(container.value, props.model);
+  props.model.initResponsivityManager(container.value)
 });
 onUnmounted(() => {
-  responsivityManager.dispose();
-  responsivityManager = undefined as any;
+  props.model.resetResponsivityManager();
 });
 </script>

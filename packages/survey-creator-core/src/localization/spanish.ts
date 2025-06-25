@@ -129,6 +129,7 @@ var spanishTranslation = {
     generateReadableJSON: "Generar JSON legible",
     toolbox: "Caja de herramientas",
     "property-grid": "Propiedades",
+    toolboxSearch: "Buscar",
     toolboxFilteredTextPlaceholder: "Escriba para buscar...",
     toolboxNoResultsFound: "No se han encontrado resultados",
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
@@ -349,6 +350,7 @@ var spanishTranslation = {
       name: "Nombre de la pregunta",
       title: "Título de la pregunta",
       description: "Descripción de la pregunta",
+      showTitle: "Mostrar el título y la descripción",
       visibleIf: "Haz que la pregunta sea visible si",
       requiredIf: "Haga que la pregunta sea obligatoria si:",
       page: "Página padre",
@@ -754,7 +756,17 @@ var spanishTranslation = {
       labelCount: "Número de etiquetas generadas automáticamente",
       minValueExpression: "Expresión de valor mínimo",
       maxValueExpression: "Expresión de valor máximo",
-      autoGenerate: "Configuración de etiquetas de escala"
+      autoGenerate: "Configuración de etiquetas de escala",
+      sliderType: "Tipo de control deslizante",
+      minRangeLength: "Longitud mínima del rango",
+      maxRangeLength: "Longitud máxima del rango",
+      customLabels: "Etiquetas personalizadas",
+      labelFormat: "Formato de etiqueta",
+      tooltipFormat: "Formato de información sobre herramientas"
+    },
+    file: {
+      imageHeight: "Altura de la imagen",
+      imageWidth: "Ancho de la imagen"
     },
     hideIfChoicesEmpty: "Ocultar la pregunta si no contiene opciones",
     minWidth: "Anchura mímima (en valores aceptados CSS)",
@@ -1423,7 +1435,12 @@ var spanishTranslation = {
       descriptionLocation: "La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Debajo del título del panel\" de forma predeterminada).",
       newPanelPosition: "Define la posición de un panel recién añadido. De forma predeterminada, los nuevos paneles se agregan al final. Seleccione \"Siguiente\" para insertar un nuevo panel después del actual.",
       copyDefaultValueFromLastEntry: "Duplica las respuestas del último panel y las asigna al siguiente panel dinámico agregado.",
-      keyName: "Haga referencia a un nombre de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panel."
+      keyName: "Haga referencia a un nombre de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panel.",
+      confirmDelete: "Activa un mensaje de confirmación antes de quitar un panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Desencadena un mensaje de confirmación antes de quitar una fila.",
+      detailPanelShowOnAdding: "Expande automáticamente la sección de detalles cuando se agrega una nueva fila a la matriz."
     },
     copyDefaultValueFromLastEntry: "Duplica las respuestas de la última fila y las asigna a la siguiente fila dinámica agregada.",
     defaultValueExpression: "Esta configuración le permite asignar un valor de respuesta predeterminado basado en una expresión. La expresión puede incluir cálculos básicos: '{q1_id} + {q2_id}', expresiones booleanas, como '{edad} > 60', y funciones: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. El valor determinado por esta expresión sirve como el valor predeterminado inicial que puede ser anulado por la entrada manual de un encuestado.",
@@ -1460,8 +1477,8 @@ var spanishTranslation = {
       signatureAutoScaleEnabled: "Seleccione esta opción si desea que el área de firma ocupe todo el espacio disponible dentro del cuadro de pregunta manteniendo la relación de aspecto predeterminada de 3:2. Cuando se establecen valores de anchura y altura personalizados, la configuración mantendrá la relación de aspecto de estas dimensiones."
     },
     file: {
-      imageHeight: "Ajusta la altura de la imagen en los resultados de la encuesta.",
-      imageWidth: "Ajusta el ancho de la imagen en los resultados de la encuesta.",
+      imageHeight: "Especifica la altura de visualización de las imágenes cargadas en la vista previa y la altura real de las imágenes tomadas con la cámara. En el modo de carga de un solo archivo, la altura de la pantalla está limitada por el área de vista previa; En el modo de carga de archivos múltiples, está limitado por el área de miniaturas.",
+      imageWidth: "Especifica la anchura de visualización de las imágenes cargadas en la vista previa y la anchura real de las imágenes tomadas con la cámara. En el modo de carga de un solo archivo, el ancho de la pantalla está limitado por el área de vista previa; En el modo de carga de archivos múltiples, está limitado por el área de miniaturas.",
       allowImagesPreview: "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar."
     },
     image: {
@@ -1493,6 +1510,21 @@ var spanishTranslation = {
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
       showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción.",
       colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz principal."
+    },
+    slider: {
+      min: "El número más bajo que los usuarios pueden seleccionar.",
+      max: "El número más alto que los usuarios pueden seleccionar.",
+      step: "El intervalo entre los valores de escala seleccionables. Por ejemplo, un paso de 5 permitirá a los usuarios seleccionar 0, 5, 10, etc.",
+      minRangeLength: "La distancia mínima entre los pulgares del control deslizante que un usuario puede establecer.",
+      maxRangeLength: "La distancia máxima entre los pulgares del control deslizante que un usuario puede establecer.",
+      labelCount: "Especifica el número de etiquetas de escala que se van a generar. Un valor de -1 significa que el número se calcula automáticamente en función del valor mínimo y el valor máximo.",
+      labelFormat: "Utilice '{0}' como marcador de posición para el valor real.",
+      customLabels: "Le permite definir etiquetas personalizadas en valores específicos y, opcionalmente, asignarles el texto correspondiente (por ejemplo, 0 = \"Pobre\", 100 = \"Excelente\").",
+      tooltipFormat: "Utilice '{0}' como marcador de posición para el valor real.",
+      allowSwap: "Permite a los usuarios mover un pulgar más allá del otro.",
+      allowClear: "Muestra un botón que borra el valor del control deslizante seleccionado y lo establece en indefinido.",
+      minValueExpression: "Define el valor mínimo del control deslizante de forma dinámica mediante una expresión. Admite cálculos básicos (por ejemplo, '{q1_id} + {q2_id}'), lógica booleana (por ejemplo, '{edad} > 60') y funciones como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' y más.",
+      maxValueExpression: "Define el valor máximo del control deslizante de forma dinámica mediante una expresión. Admite cálculos básicos (por ejemplo, '{q1_id} + {q2_id}'), lógica booleana (por ejemplo, '{edad} > 60') y funciones como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' y más."
     },
     isExclusive: "Hace que esta elección sea exclusiva. Cuando un usuario lo selecciona, anulará automáticamente la selección de todas las demás opciones de la pregunta.",
     caseInsensitive: "Seleccione si las letras mayúsculas y minúsculas de la expresión regular deben tratarse como equivalentes.",
@@ -1532,7 +1564,6 @@ var spanishTranslation = {
     detailErrorLocation: "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\".",
     keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error.",
     totalExpression: "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Activa un mensaje en el que se le pide que confirme la eliminación de filas.",
     keyName: "Si la columna especificada contiene valores idénticos, la encuesta arroja el error \"Valor de clave no única\".",
     description: "Escribe un subtítulo.",
     locale: "Elige un idioma para comenzar a crear tu encuesta. Para agregar una traducción, cambie a un nuevo idioma y traduzca el texto original aquí o en la pestaña Traducciones.",
@@ -1700,7 +1731,7 @@ var spanishTranslation = {
     detailElements: "Elementos de detalle",
     allowAdaptiveActions: "Permitir acciones adaptables",
     defaultRowValue: "Valor por defecto Fila",
-    detailPanelShowOnAdding: "Panel de detalles mostrar sobre la adición",
+    detailPanelShowOnAdding: "Expandir automáticamente los detalles de una nueva fila",
     choicesLazyLoadEnabled: "Opciones de carga diferida habilitadas",
     choicesLazyLoadPageSize: "Opciones de tamaño de página de carga diferida",
     inputFieldComponent: "Componente de campo de entrada",
@@ -2457,7 +2488,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Establece la ubicación de un mensaje de error en relación con una celda con entrada no válida. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Activa un mensaje en el que se le pide que confirme la eliminación de filas."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Activa un mensaje en el que se le pide que confirme la eliminación de filas."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplica las respuestas de la última fila y las asigna a la siguiente fila dinámica agregada."
 // pehelp.description: "Type a subtitle." => "Escribe un subtítulo."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Elige un idioma para comenzar a crear tu encuesta. Para agregar una traducción, cambie a un nuevo idioma y traduzca el texto original aquí o en la pestaña Traducciones."
@@ -2875,3 +2906,32 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // sliderType.single: "Single-Value" => "Valor único"
 // sliderType.range: "Range" => "Gama"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Hace que esta elección sea exclusiva. Cuando un usuario lo selecciona, anulará automáticamente la selección de todas las demás opciones de la pregunta."
+// ed.toolboxSearch: "Search" => "Buscar"
+// file.imageHeight: "Image height" => "Altura de la imagen"
+// file.imageWidth: "Image width" => "Ancho de la imagen"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Especifica la altura de visualización de las imágenes cargadas en la vista previa y la altura real de las imágenes tomadas con la cámara. En el modo de carga de un solo archivo, la altura de la pantalla está limitada por el área de vista previa; En el modo de carga de archivos múltiples, está limitado por el área de miniaturas."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Especifica la anchura de visualización de las imágenes cargadas en la vista previa y la anchura real de las imágenes tomadas con la cámara. En el modo de carga de un solo archivo, el ancho de la pantalla está limitado por el área de vista previa; En el modo de carga de archivos múltiples, está limitado por el área de miniaturas."
+// slider.min: "The lowest number that users can select." => "El número más bajo que los usuarios pueden seleccionar."
+// slider.max: "The highest number that users can select." => "El número más alto que los usuarios pueden seleccionar."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "El intervalo entre los valores de escala seleccionables. Por ejemplo, un paso de 5 permitirá a los usuarios seleccionar 0, 5, 10, etc."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "La distancia mínima entre los pulgares del control deslizante que un usuario puede establecer."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "La distancia máxima entre los pulgares del control deslizante que un usuario puede establecer."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Especifica el número de etiquetas de escala que se van a generar. Un valor de -1 significa que el número se calcula automáticamente en función del valor mínimo y el valor máximo."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Utilice '{0}' como marcador de posición para el valor real."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Le permite definir etiquetas personalizadas en valores específicos y, opcionalmente, asignarles el texto correspondiente (por ejemplo, 0 = \"Pobre\", 100 = \"Excelente\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Utilice '{0}' como marcador de posición para el valor real."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Permite a los usuarios mover un pulgar más allá del otro."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Muestra un botón que borra el valor del control deslizante seleccionado y lo establece en indefinido."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Define el valor mínimo del control deslizante de forma dinámica mediante una expresión. Admite cálculos básicos (por ejemplo, '{q1_id} + {q2_id}'), lógica booleana (por ejemplo, '{edad} > 60') y funciones como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' y más."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Define el valor máximo del control deslizante de forma dinámica mediante una expresión. Admite cálculos básicos (por ejemplo, '{q1_id} + {q2_id}'), lógica booleana (por ejemplo, '{edad} > 60') y funciones como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' y más."
+// slider.sliderType: "Slider type" => "Tipo de control deslizante"
+// slider.minRangeLength: "Min range length" => "Longitud mínima del rango"
+// slider.maxRangeLength: "Max range length" => "Longitud máxima del rango"
+// slider.customLabels: "Custom labels" => "Etiquetas personalizadas"
+// slider.labelFormat: "Label format" => "Formato de etiqueta"
+// slider.tooltipFormat: "Tooltip format" => "Formato de información sobre herramientas"
+// question.showTitle: "Show the title and description" => "Mostrar el título y la descripción"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Activa un mensaje de confirmación antes de quitar un panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Desencadena un mensaje de confirmación antes de quitar una fila."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expande automáticamente la sección de detalles cuando se agrega una nueva fila a la matriz."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandir automáticamente los detalles de una nueva fila"

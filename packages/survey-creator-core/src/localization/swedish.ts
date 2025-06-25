@@ -129,6 +129,7 @@ export let svStrings = {
     generateReadableJSON: "Generera läsbar JSON",
     toolbox: "Verktygslista",
     "property-grid": "Egenskaper",
+    toolboxSearch: "Söka",
     toolboxFilteredTextPlaceholder: "Skriv för att söka...",
     toolboxNoResultsFound: "Inga resultat hittades",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
@@ -349,6 +350,7 @@ export let svStrings = {
       name: "Frågans namn",
       title: "Frågans rubrik",
       description: "Beskrivning av frågan",
+      showTitle: "Visa titel och beskrivning",
       visibleIf: "Gör frågan synlig om",
       requiredIf: "Gör frågan obligatorisk om",
       page: "Överordnad sida",
@@ -754,7 +756,17 @@ export let svStrings = {
       labelCount: "Antal automatiskt genererade etiketter",
       minValueExpression: "Uttryck för minsta värde",
       maxValueExpression: "Uttryck för maximalt värde",
-      autoGenerate: "Konfiguration av skalningsetiketter"
+      autoGenerate: "Konfiguration av skalningsetiketter",
+      sliderType: "Typ av skjutreglage",
+      minRangeLength: "Minsta räckviddslängd",
+      maxRangeLength: "Maximal räckviddslängd",
+      customLabels: "Anpassade etiketter",
+      labelFormat: "Etikettens format",
+      tooltipFormat: "Format för knappbeskrivningar"
+    },
+    file: {
+      imageHeight: "Bildens höjd",
+      imageWidth: "Bildens bredd"
     },
     hideIfChoicesEmpty: "Dölj frågan om den inte innehåller några alternativ",
     minWidth: "Minsta bredd (i CSS-godkända värden)",
@@ -1423,7 +1435,12 @@ export let svStrings = {
       descriptionLocation: "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard).",
       newPanelPosition: "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande.",
       copyDefaultValueFromLastEntry: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
-      keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
+      keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel.",
+      confirmDelete: "Utlöser en bekräftelseprompt innan en panel tas bort."
+    },
+    matrixdynamic: {
+      confirmDelete: "Utlöser en bekräftelseprompt innan en rad tas bort.",
+      detailPanelShowOnAdding: "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
     },
     copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     defaultValueExpression: "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning.",
@@ -1460,8 +1477,8 @@ export let svStrings = {
       signatureAutoScaleEnabled: "Välj om du vill att signaturområdet ska fylla allt tillgängligt utrymme i frågerutan samtidigt som standardproportionerna 3:2 bibehålls. När anpassade bredd- och höjdvärden anges behåller inställningen proportionerna för dessa dimensioner."
     },
     file: {
-      imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
-      imageWidth: "Justerar bredden på bilden i undersökningsresultaten.",
+      imageHeight: "Anger visningshöjden för överförda bilder i förhandsgranskningen och den faktiska höjden för bilder som tagits med kameran. I läget för uppladdning av en fil begränsas visningshöjden av förhandsgranskningsområdet. I läget för uppladdning av flera filer begränsas den av miniatyrbildsområdet.",
+      imageWidth: "Anger visningsbredden för överförda bilder i förhandsgranskningen och den faktiska bredden för bilder som tagits med kameran. I läget för uppladdning av en fil begränsas visningsbredden av förhandsgranskningsområdet. I läget för uppladdning av flera filer begränsas den av miniatyrbildsområdet.",
       allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
     },
     image: {
@@ -1493,6 +1510,21 @@ export let svStrings = {
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
       colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
+    },
+    slider: {
+      min: "Det lägsta tal som användarna kan välja.",
+      max: "Det högsta tal som användarna kan välja.",
+      step: "Intervallet mellan valbara skalvärden. Till exempel kommer ett steg på 5 att tillåta användare att välja 0, 5, 10 osv.",
+      minRangeLength: "Det minsta avståndet mellan skjutreglagets tummar som en användare kan ställa in.",
+      maxRangeLength: "Det maximala avståndet mellan skjutreglagets tummar som en användare kan ställa in.",
+      labelCount: "Anger hur många skalningsetiketter som ska genereras. Värdet -1 innebär att talet beräknas automatiskt baserat på Min-värdet och Max-värdet.",
+      labelFormat: "Använd \"{0}\" som platshållare för det faktiska värdet.",
+      customLabels: "Gör att du kan definiera anpassade etiketter med specifika värden och eventuellt tilldela motsvarande text till dem (t.ex. 0 = \"Dålig\", 100 = \"Utmärkt\").",
+      tooltipFormat: "Använd \"{0}\" som platshållare för det faktiska värdet.",
+      allowSwap: "Gör det möjligt för användare att flytta en tumme förbi den andra.",
+      allowClear: "Visar en knapp som rensar det valda skjutreglagets värde och ställer in det på odefinierat.",
+      minValueExpression: "Definierar skjutreglagets minimivärde dynamiskt med hjälp av ett uttryck. Stöder grundläggande beräkningar (t.ex. {q1_id} + {q2_id}), boolesk logik (t.ex. {age} > 60') och funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' med mera.",
+      maxValueExpression: "Definierar skjutreglagets maximala värde dynamiskt med hjälp av ett uttryck. Stöder grundläggande beräkningar (t.ex. {q1_id} + {q2_id}), boolesk logik (t.ex. {age} > 60') och funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' med mera."
     },
     isExclusive: "Gör detta val exklusivt. När den väljs av en användare kommer den automatiskt att avmarkera alla andra alternativ i frågan.",
     caseInsensitive: "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga.",
@@ -1532,7 +1564,6 @@ export let svStrings = {
     detailErrorLocation: "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden.",
     keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\".",
     description: "Skriv en undertext.",
     locale: "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar.",
@@ -1700,7 +1731,7 @@ export let svStrings = {
     detailElements: "Detaljelement",
     allowAdaptiveActions: "Tillåt anpassningsbara åtgärder",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Detaljpanel visar när du lägger till",
+    detailPanelShowOnAdding: "Expandera automatiskt information om ny rad",
     choicesLazyLoadEnabled: "Val lat belastning aktiverad",
     choicesLazyLoadPageSize: "Val lat ladda sidstorlek",
     inputFieldComponent: "Komponent för inmatningsfält",
@@ -2113,9 +2144,9 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.detailPanelMode: "Detail panel location" => "Placering på detaljpanelen"
 // pe.minRowCount: "Minimum row count" => "Minsta antal rader"
 // pe.maxRowCount: "Maximum row count" => "Maximalt antal rader"
-// pe.confirmDelete: "Confirm row deletion" => "Bekräfta borttagning av rad"
+// pe.confirmDelete: "Confirm row removal" => "Bekräfta borttagning av rad"
 // pe.confirmDeleteText: "Confirmation message" => "Bekräftelsemeddelande"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Bekräfta borttagning av panelen"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Bekräfta borttagning av panelen"
 // pe.panelCount: "Initial panel count" => "Inledande panelantal"
 // pe.minPanelCount: "Minimum panel count" => "Minsta antal paneler"
 // pe.maxPanelCount: "Maximum panel count" => "Maximalt antal paneler"
@@ -2855,7 +2886,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Anger platsen för ett felmeddelande i förhållande till en cell med ogiltiga indata. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad."
 // pehelp.description: "Type a subtitle." => "Skriv en undertext."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar."
@@ -3273,3 +3304,32 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // sliderType.single: "Single-Value" => "Enkelt värde"
 // sliderType.range: "Range" => "Sortiment"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Gör detta val exklusivt. När den väljs av en användare kommer den automatiskt att avmarkera alla andra alternativ i frågan."
+// ed.toolboxSearch: "Search" => "Söka"
+// file.imageHeight: "Image height" => "Bildens höjd"
+// file.imageWidth: "Image width" => "Bildens bredd"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Anger visningshöjden för överförda bilder i förhandsgranskningen och den faktiska höjden för bilder som tagits med kameran. I läget för uppladdning av en fil begränsas visningshöjden av förhandsgranskningsområdet. I läget för uppladdning av flera filer begränsas den av miniatyrbildsområdet."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Anger visningsbredden för överförda bilder i förhandsgranskningen och den faktiska bredden för bilder som tagits med kameran. I läget för uppladdning av en fil begränsas visningsbredden av förhandsgranskningsområdet. I läget för uppladdning av flera filer begränsas den av miniatyrbildsområdet."
+// slider.min: "The lowest number that users can select." => "Det lägsta tal som användarna kan välja."
+// slider.max: "The highest number that users can select." => "Det högsta tal som användarna kan välja."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Intervallet mellan valbara skalvärden. Till exempel kommer ett steg på 5 att tillåta användare att välja 0, 5, 10 osv."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Det minsta avståndet mellan skjutreglagets tummar som en användare kan ställa in."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Det maximala avståndet mellan skjutreglagets tummar som en användare kan ställa in."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Anger hur många skalningsetiketter som ska genereras. Värdet -1 innebär att talet beräknas automatiskt baserat på Min-värdet och Max-värdet."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Använd \"{0}\" som platshållare för det faktiska värdet."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Gör att du kan definiera anpassade etiketter med specifika värden och eventuellt tilldela motsvarande text till dem (t.ex. 0 = \"Dålig\", 100 = \"Utmärkt\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Använd \"{0}\" som platshållare för det faktiska värdet."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Gör det möjligt för användare att flytta en tumme förbi den andra."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Visar en knapp som rensar det valda skjutreglagets värde och ställer in det på odefinierat."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definierar skjutreglagets minimivärde dynamiskt med hjälp av ett uttryck. Stöder grundläggande beräkningar (t.ex. {q1_id} + {q2_id}), boolesk logik (t.ex. {age} > 60') och funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' med mera."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definierar skjutreglagets maximala värde dynamiskt med hjälp av ett uttryck. Stöder grundläggande beräkningar (t.ex. {q1_id} + {q2_id}), boolesk logik (t.ex. {age} > 60') och funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' med mera."
+// slider.sliderType: "Slider type" => "Typ av skjutreglage"
+// slider.minRangeLength: "Min range length" => "Minsta räckviddslängd"
+// slider.maxRangeLength: "Max range length" => "Maximal räckviddslängd"
+// slider.customLabels: "Custom labels" => "Anpassade etiketter"
+// slider.labelFormat: "Label format" => "Etikettens format"
+// slider.tooltipFormat: "Tooltip format" => "Format för knappbeskrivningar"
+// question.showTitle: "Show the title and description" => "Visa titel och beskrivning"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Utlöser en bekräftelseprompt innan en panel tas bort."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utlöser en bekräftelseprompt innan en rad tas bort."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandera automatiskt information om ny rad"

@@ -40,7 +40,7 @@ test("Check states", async (t) => {
     await takeElementScreenshot("logic-button-default.png", sectionContentElement, t, comparer);
 
     await t
-      .hover(sectionContentElement.find(".spg-action-button").nth(2));
+      .hover(sectionContentElement.find(".spg-action-button").nth(1));
     await takeElementScreenshot("logic-button-hovered.png", sectionContentElement, t, comparer);
   });
 });
@@ -69,7 +69,7 @@ test("Check list item styles into logic popup", async (t) => {
 
     const sectionContentElement = Selector("div[id$=ariaTitle][id^=sp]").withText("Conditions").parent().nextSibling();
 
-    await t.click(sectionContentElement.find(".spg-action-button").nth(2))
+    await t.click(sectionContentElement.find(".spg-action-button").nth(1))
       .click(Selector(".sl-dropdown"))
       .click(getListItemByText("region"), { offsetX: 10, offsetY: 20 })
       .wait(1000)

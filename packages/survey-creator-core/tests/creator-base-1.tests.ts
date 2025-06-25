@@ -38,7 +38,7 @@ import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin"
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { isTextInput } from "../src/creator-base";
+import { getRowWrapperComponentData, getRowWrapperComponentName, isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 import {
@@ -1652,7 +1652,13 @@ test("getElementWrapperComponentName for inner component elements", () => {
           {
             "type": "text",
             "name": "question3"
-          }
+          },
+          {
+            type: "panel",
+            name: "panel4",
+            title: "Panel",
+            elements: [{ "type": "text", "name": "question5" }],
+          },
         ]
       }
     });
@@ -1669,11 +1675,21 @@ test("getElementWrapperComponentName for inner component elements", () => {
 
   const panel = q.panels[0] as PanelModel;
   const question = panel.questions[0] as QuestionTextModel;
+  const innerPanel = panel.elements[1] as PanelModel;
 
   expect(getElementWrapperComponentName(qCustom, "", false)).toEqual("svc-question");
   expect(getElementWrapperComponentName(q, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(panel, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(question, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(innerPanel, "", false)).toEqual(undefined);
+  expect(panel.rows.length).toEqual(2);
+  expect(getElementWrapperComponentName(panel.rows[0], "", false)).toEqual(undefined);
+  expect(getRowWrapperComponentName(panel.rows[0])).toEqual(undefined);
+  expect(getRowWrapperComponentData(panel.rows[0], creator)).toEqual(null);
+  expect(innerPanel.rows.length).toEqual(1);
+  expect(getElementWrapperComponentName(innerPanel.rows[0], "", false)).toEqual(undefined);
+  expect(getRowWrapperComponentName(innerPanel.rows[0])).toEqual(undefined);
+  expect(getRowWrapperComponentData(innerPanel.rows[0], creator)).toEqual(null);
   ComponentCollection.Instance.clear();
 });
 
@@ -2017,7 +2033,7 @@ test("Hide property grid is always visible in flyoutMode", (): any => {
 });
 
 test("Check property grid expand action is always last", (): any => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester({ propertyGridNavigationMode: "accordion" });
   creator.JSON = {
     pages: [
       {
@@ -2031,6 +2047,7 @@ test("Check property grid expand action is always last", (): any => {
     ]
   };
 
+  creator.setShowSidebar(false);
   const index = creator.toolbar.renderedActions.length - 1;
   expect(creator.toolbar.renderedActions[index].id).toEqual("svd-grid-expand");
   creator.toolbarItems.push(new Action({
@@ -2334,7 +2351,7 @@ test("ConvertTo, show the current question type selected", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(21);
+  expect(items).toHaveLength(22);
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
@@ -2364,7 +2381,7 @@ test("ConvertTo, show it for a panel", (): any => {
     undefined
   );
   const items = panelModel.getConvertToTypesActions();
-  expect(items).toHaveLength(21);
+  expect(items).toHaveLength(22);
   const popup = panelModel.getActionById("convertTo").popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
@@ -2376,7 +2393,7 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
-test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
+test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
@@ -2407,6 +2424,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(22);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -2416,7 +2434,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(22);
   creator.maxNestedPanels = 2;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2439,7 +2457,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
@@ -2493,21 +2511,21 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   expect(questionTypeSelectorListModel.actions.length).toBe(0);
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(21);
+  expect(convertToAction.data.actions.length).toBe(22);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(22);
   questionTypeSelectorModel.popupModel.hide();
 
   pageModel.addNewQuestion("text", "q2");
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(20);
+  expect(convertToAction.data.actions.length).toBe(21);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(20);
+  expect(questionTypeSelectorListModel.actions.length).toBe(21);
   questionTypeSelectorModel.popupModel.hide();
 
   const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
@@ -2553,7 +2571,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(21);
+  expect(items).toHaveLength(22);
   expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
   expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
   expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
@@ -2568,7 +2586,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items2 = panelModel.getConvertToTypesActions();
-  expect(items2).toHaveLength(21);
+  expect(items2).toHaveLength(22);
 });
 test("convertInputType, change inputType for a text question", (): any => {
   surveySettings.animationEnabled = false;
@@ -3748,6 +3766,21 @@ test("Carry-forward banner", (): any => {
   expect(creator.selectedElementName).toBe("q2");
   params.onClick();
   expect(creator.selectedElementName).toBe("q11");
+});
+test("Carry-forward banner, if useElementTitles is true", (): any => {
+  const creator = new CreatorTester({ useElementTitles: true });
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "714a02f5d68d", title: "Question 1", choices: [1, 2, 3, 4, 5] },
+      { type: "dropdown", name: "q2", title: "Title 2", choicesFromQuestion: "714a02f5d68d" },
+    ]
+  };
+  const q2 = creator.survey.getQuestionByName("q2");
+  const q2AdornerModel = new QuestionAdornerViewModel(creator, q2, undefined);
+  expect(q2AdornerModel.isBannerShowing).toBeTruthy();
+
+  const params = q2AdornerModel.createBannerParams();
+  expect(params.actionText).toBe("Question 1");
 });
 test("Choices restful banner", (): any => {
   const creator = new CreatorTester();

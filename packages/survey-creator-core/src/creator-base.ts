@@ -8,7 +8,8 @@ import {
   CssClassBuilder,
   SvgRegistry,
   addIconsToThemeSet,
-  SvgThemeSets
+  SvgThemeSets,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -82,6 +83,7 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
+import { deprecate } from "util";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -119,7 +121,7 @@ export class ToolbarActionContainer extends FooterToolbarActionContainer {
     super();
   }
   protected getRenderedActions(): Array<Action> {
-    let actions = this.actions;
+    let actions = this.visibleActions;
     const expandAction = this.creator.sidebar.getExpandAction();
     var index = actions.indexOf(expandAction);
     if (index !== -1) {
@@ -264,10 +266,10 @@ export class SurveyCreatorModel extends Base
    *
    * Accepted values:
    *
-   * - `"accordion"`
+   * - `"accordion"`\
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
    *
-   * - `"buttons"` (default)
+   * - `"buttons"` (default)\
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid.
    *
    * [Accordion Mode Demo](https://surveyjs.io/survey-creator/examples/property-grid-accordion-view/ (linkStyle))
@@ -344,7 +346,22 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
-  @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: "" }) _currentAddQuestionType: string;
+  /**
+   * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
+   *
+   * Default value: `true`
+   * @see addNewQuestionLast
+   */
+  rememberLastQuestionType: boolean = true;
+  get currentAddQuestionType(): string {
+    return this._currentAddQuestionType;
+  }
+  set currentAddQuestionType(val: string) {
+    if (this.rememberLastQuestionType) {
+      this._currentAddQuestionType = val;
+    }
+  }
   /**
    * Specifies a default device for survey preview in the Preview tab.
    *
@@ -399,13 +416,13 @@ export class SurveyCreatorModel extends Base
    *
    * Accepted values:
    *
-   * - `"standard"` (default)
+   * - `"standard"` (default)\
    * Questions and panels are divided between pages. Users can scroll the design surface to reach a required page.
    *
-   * - `"single"`
+   * - `"single"`\
    * All questions and panels belong to a single page. Users cannot add or remove pages.
    *
-   * - `"bypage"`
+   * - `"bypage"`\
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
    *
    * [View Page-By-Page Mode Demo](https://surveyjs.io/survey-creator/examples/page-level-editing/ (linkStyle))
@@ -1185,11 +1202,48 @@ export class SurveyCreatorModel extends Base
   public set maximumRateValues(val) { this.maxRateValues = val; }
 
   /**
-   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
-   *
-   * Default value: -1 (unlimited)
+   * @deprecated Use the [`maxPanelNestingLevel`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxPanelNestingLevel) property instead.
    */
   public maxNestedPanels: number = -1;
+
+  /**
+   * Specifies the maximum depth allowed for nested [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model) in the survey.
+   *
+   * This property behaves as follows:
+   *
+   * - A value of -1 applies no restriction on nesting depth.
+   * - A value of 0 means that Panels and Dynamic Panels cannot contain other panels&mdash;only questions are allowed.
+   * - Positive integers specify the maximum nesting level.
+   *
+   * Default value: -1 (unlimited)
+   *
+   * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#forbiddenNestedElements) property.
+   */
+  public maxPanelNestingLevel: number = -1;
+
+  /**
+   * Specifies which element types are forbidden from being nested inside [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model).
+   *
+   * This property is an object with the following structure:
+   *
+   * - `panel`: An array of element types that cannot be nested within a regular panel.
+   * - `paneldynamic`: An array of element types that cannot be nested within a dynamic panel.
+   *
+   * In the following example, dynamic panels are disallowed inside regular panels, and both regular and dynamic panels are disallowed inside a dynamic panel:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = { ... };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   *
+   * creator.forbiddenNestedElements = {
+   *   panel: [ "paneldynamic" ],
+   *   paneldynamic: [ "panel", "paneldynamic" ]
+   * };
+   * ```
+   * @see maxPanelNestingLevel
+   */
+  public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   public showPagesInTestSurveyTab = true;
   /**
@@ -1353,16 +1407,16 @@ export class SurveyCreatorModel extends Base
    *
    * Accepted values:
    *
-   * - `"auto"` (default)
+   * - `"auto"` (default)\
    * Display the language selector only if the survey is translated into more than one language.
    *
-   * - `true`
+   * - `true`\
    * Always display the language selector regardless of how many languages the survey uses.
    *
-   * - `false`
+   * - `false`\
    * Never display the language selector.
    *
-   * - `"all"`
+   * - `"all"`\
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
    * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
@@ -1705,6 +1759,9 @@ export class SurveyCreatorModel extends Base
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  /**
+  * @deprecated showPropertyGrid is deprecated, use showSidebar instead.
+  */
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
     return this.showSidebar;
@@ -2203,10 +2260,6 @@ export class SurveyCreatorModel extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    survey.onDragDropAllow.add((sender, options) => {
-      (<any>options).survey = sender;
-      this.onDragDropAllow.fire(this, options);
-    });
 
     this.setSurvey(survey);
     this.expandCollapseManager.expandCollapseElements("loading", false);
@@ -2253,7 +2306,9 @@ export class SurveyCreatorModel extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.isAllowedToAdd = this.isAllowedToAdd;
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
+    this.dragDropSurveyElements.onGetMaxPanelNestingLevel = (): number => { return this.maxPanelNestingLevel; };
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
@@ -2265,6 +2320,10 @@ export class SurveyCreatorModel extends Base
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
+    });
+    this.dragDropSurveyElements.onDragDropAllow.add((sender, options) => {
+      (<any>options).survey = this.survey;
+      this.onDragDropAllow.fire(this, options);
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
@@ -2476,8 +2535,8 @@ export class SurveyCreatorModel extends Base
     const pType = this.isCopyingPage ? "ELEMENT_COPIED" : "PAGE_ADDED";
     this.setModified({ type: pType, newValue: options.page });
   }
-  private getPageByElement(obj: Base): PageModel {
-    return this.survey.getPageByElement(<IElement>(<any>obj));
+  private getPageByElement(surveyElement: IElement): PageModel {
+    return !!surveyElement && surveyElement.isPage ? surveyElement as PageModel : this.survey.getPageByElement(<IElement>(<any>surveyElement));
   }
 
   private getDefaultSurveyJson(): any {
@@ -2855,11 +2914,9 @@ export class SurveyCreatorModel extends Base
    *
    * Accepted values:
    *
-   * - `true` (default)
-   * New questions are added to the end of a survey page.
-   *
-   * - `false`
-   * New questions are added after the currently selected question on the design surface.
+   * - `true` (default) - New questions are added to the end of a survey page.
+   * - `false` - New questions are added after the currently selected question on the design surface.
+   * @see rememberLastQuestionType
    */
   public addNewQuestionLast: boolean = true;
   protected doClickQuestionCore(
@@ -3191,49 +3248,63 @@ export class SurveyCreatorModel extends Base
       this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  private ensurePagesVisibility(): void {
+    this.survey.pages.forEach(page => {
+      const pageAdorner = SurveyElementAdornerBase.GetAdorner(page) as PageAdorner;
+      if (!!pageAdorner && !pageAdorner.needRenderContent) {
+        pageAdorner.forceCheckVisibility();
+      }
+    });
+  }
   private currentFocusInterval: any;
   private currentFocusTimeout: any;
+  private renderPageTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
     const elementPage = this.getPageByElement(selEl);
-    if (!!elementPage) {
-      const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
-      if (!!pageAdorner && !pageAdorner.needRenderContent) {
-        pageAdorner.needRenderContent = true;
-      }
-    }
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
-    this.currentFocusTimeout = setTimeout(() => {
-      this.currentFocusInterval = setInterval(() => {
-        let el = this.getHtmlElementForScroll(selEl);
-        if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
-          if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
-          clearInterval(this.currentFocusInterval);
-          if (!!el) {
-            const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
-            if (!!isNeedScroll) {
-              const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
-              if (!!elementPage) {
-                this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement);
-              } else {
-                SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+    clearTimeout(this.renderPageTimeout);
+    this.renderPageTimeout = setTimeout(() => {
+      if (!!elementPage) {
+        const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
+        if (!!pageAdorner && !pageAdorner.needRenderContent) {
+          pageAdorner.needRenderContent = true;
+        }
+      }
+      this.currentFocusTimeout = setTimeout(() => {
+        this.currentFocusInterval = setInterval(() => {
+          let el = this.getHtmlElementForScroll(selEl);
+          if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+            if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+            clearInterval(this.currentFocusInterval);
+            if (!!el) {
+              const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
+              if (!!isNeedScroll) {
+                const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+                if (!!elementPage) {
+                  this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement, () => {
+                    this.ensurePagesVisibility();
+                  });
+                } else {
+                  SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+                }
+              }
+              if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
+                let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+                elToFocus && elToFocus.focus({ preventScroll: true });
               }
             }
-            if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
-              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-              elToFocus && elToFocus.focus({ preventScroll: true });
-            }
+          } else {
+            clearInterval(this.currentFocusInterval);
           }
-        } else {
-          clearInterval(this.currentFocusInterval);
-        }
-        if (startEdit && !!element) {
-          StringEditorConnector.get((element as Question).locTitle).activateEditor();
-        }
-      }, 1);
-    }, 100);
+          if (startEdit && !!element) {
+            StringEditorConnector.get((element as Question).locTitle).activateEditor();
+          }
+        }, 1);
+      }, 100);
+    }, 50);
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
@@ -4151,21 +4222,59 @@ export class SurveyCreatorModel extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
+  public isAllowedNestingLevel(element: SurveyElement, childNesting = 0): boolean {
+    const parentNesting = !!element ? SurveyHelper.getElementParentContainers(element, false).length : 0;
+    return this.maxPanelNestingLevel < 0 || this.maxPanelNestingLevel >= childNesting + parentNesting;
+  }
+  public isAllowedNestedPanels(element: SurveyElement, childNesting = 0): boolean {
+    if (!element) return true;
+    return this.maxNestedPanels < 0 || this.maxNestedPanels >= childNesting + SurveyHelper.getElementDeepLength(element);
+  }
+  public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement) => {
+    if (!this.forbiddenNestedElements || !elementType || !container) return true;
+    const forbiddenElements = this.forbiddenNestedElements[container.getType()];
+    if (!forbiddenElements || forbiddenElements.length === 0) return true;
+    return !forbiddenElements.some((forbiddenElement) => {
+      return Serializer.isDescendantOf(elementType, forbiddenElement);
+    });
+  };
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [];
-    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
+    let availableToolboxItems: Array<QuestionToolboxItem> = [];
+    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    if (!element || this.maxNestedPanels < 0) return res;
-    if (!isAddNew && element.isPanel) return res;
-
-    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel) {
-          res.splice(i, 1);
+    if (!this.isAllowedNestingLevel(element)) {
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
+          availableToolboxItems.splice(i, 1);
+        }
+      }
+    } else if (!this.isAllowedNestedPanels(element)) {
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel) {
+          availableToolboxItems.splice(i, 1);
         }
       }
     }
-    return res;
+
+    if (!element) return availableToolboxItems;
+    if (element.isPanel || SurveyHelper.isPanelDynamic(element)) {
+      availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
+    } else {
+      const parentContainers = SurveyHelper.getElementParentContainers(element, false);
+      if (!!parentContainers[0]) {
+        availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, parentContainers[0]));
+      }
+    }
+
+    return availableToolboxItems;
+  }
+  _getActualElementToAddNewElements(element: SurveyElement<any>) {
+    if (!element || !element.isPanel) return element;
+    const parentQuestion = (element as PanelModel).parentQuestion;
+    if (parentQuestion && Serializer.isDescendantOf(parentQuestion.getType(), "paneldynamic") && (parentQuestion as QuestionPanelDynamicModel).template === element) {
+      return parentQuestion;
+    }
+    return element;
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
@@ -4175,7 +4284,8 @@ export class SurveyCreatorModel extends Base
       newAction.popupModel.hide();
     };
     const getActions = () => {
-      const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
+      const ownerElement = this._getActualElementToAddNewElements(element);
+      const availableTypes = this.getAvailableToolboxItems(ownerElement).map((item) => {
         return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
       });
       return availableTypes;
@@ -4192,7 +4302,7 @@ export class SurveyCreatorModel extends Base
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
-    });
+    }, this);
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {
@@ -4566,7 +4676,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
       opt.componentName = getQuestionContentWrapperComponentName(opt.element);
     }
     if (opt.wrapperName === "row") {
-      opt.componentName = "svc-row";
+      opt.componentName = getRowWrapperComponentName(opt.element);
     }
     if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
@@ -4579,7 +4689,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
       opt.data = getElementWrapperComponentData(opt.element, opt.reason, creator);
     }
     if (opt.wrapperName === "row") {
-      opt.data = { creator: creator, row: opt.element };
+      opt.data = getRowWrapperComponentData(opt.element, creator);
     }
     if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
@@ -4613,7 +4723,7 @@ function isContentElement(element: any) {
     if (current.isContentElement) {
       return true;
     }
-    current = current.parentQuestion;
+    current = current.parent || current.parentQuestion;
   }
   return false;
 }
@@ -4656,11 +4766,23 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   return undefined;
 }
+export function getRowWrapperComponentName(row: QuestionRowModel): string {
+  if (isContentElement(row.panel)) {
+    return undefined;
+  }
+  return "svc-row";
+}
 export function getQuestionContentWrapperComponentName(element) {
   if (element.isDescendantOf("rating") && !isContentElement(element)) {
     return "svc-rating-question-content";
   }
   return undefined;
+}
+export function getRowWrapperComponentData(row: QuestionRowModel, creator: SurveyCreatorModel) {
+  if (isContentElement(row.panel)) {
+    return null;
+  }
+  return { creator: creator, row: row };
 }
 export function getElementWrapperComponentData(
   element: any,

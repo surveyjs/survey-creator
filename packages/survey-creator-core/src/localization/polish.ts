@@ -129,6 +129,7 @@ var polishStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Paleta",
     "property-grid": "Właściwości",
+    toolboxSearch: "Szukać",
     toolboxFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
     toolboxNoResultsFound: "Nie znaleziono wyników",
     propertyGridFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
@@ -349,6 +350,7 @@ var polishStrings = {
       name: "Nazwa pytania",
       title: "Tytuł pytania",
       description: "Opis pytania",
+      showTitle: "Pokaż tytuł i opis",
       visibleIf: "Uwidocznij pytanie, jeśli",
       requiredIf: "Zadbaj o to, aby pytanie było wymagane, jeśli",
       page: "Strona nadrzędna",
@@ -754,7 +756,17 @@ var polishStrings = {
       labelCount: "Liczba automatycznie wygenerowanych etykiet",
       minValueExpression: "Wyrażenie wartości minimalnej",
       maxValueExpression: "Wyrażenie wartości maksymalnej",
-      autoGenerate: "Konfiguracja etykiet skalowania"
+      autoGenerate: "Konfiguracja etykiet skalowania",
+      sliderType: "Typ suwaka",
+      minRangeLength: "Minimalna długość zakresu",
+      maxRangeLength: "Maksymalna długość zasięgu",
+      customLabels: "Etykiety niestandardowe",
+      labelFormat: "Format etykiety",
+      tooltipFormat: "Format podpowiedzi"
+    },
+    file: {
+      imageHeight: "Wysokość obrazu",
+      imageWidth: "Szerokość obrazu"
     },
     hideIfChoicesEmpty: "Ukryj pytanie, jeśli nie zawiera opcji wyboru",
     minWidth: "Minimalna szerokość (w wartościach akceptowanych przez CSS)",
@@ -1423,7 +1435,12 @@ var polishStrings = {
       descriptionLocation: "Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Pod tytułem panelu\").",
       newPanelPosition: "Określa położenie nowo dodanego panelu. Domyślnie nowe panele są dodawane na końcu. Wybierz \"Dalej\", aby wstawić nowy panel po bieżącym.",
       copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego panelu i przypisuje je do następnego dodanego panelu dynamicznego.",
-      keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu."
+      keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu.",
+      confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem panelu."
+    },
+    matrixdynamic: {
+      confirmDelete: "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza.",
+      detailPanelShowOnAdding: "Automatycznie rozwija sekcję szczegółów po dodaniu nowego wiersza do macierzy."
     },
     copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego.",
     defaultValueExpression: "To ustawienie umożliwia przypisanie domyślnej wartości odpowiedzi na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia - '{q1_id} + {q2_id}', wyrażenia logiczne, takie jak '{wiek} > 60' oraz funkcje: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp. Wartość określona przez to wyrażenie służy jako początkowa wartość domyślna, która może zostać zastąpiona przez ręczne wprowadzanie danych przez respondenta.",
@@ -1460,8 +1477,8 @@ var polishStrings = {
       signatureAutoScaleEnabled: "Wybierz, czy chcesz, aby obszar podpisu wypełniał całą dostępną przestrzeń w polu pytania, zachowując domyślny współczynnik proporcji 3:2. Po ustawieniu niestandardowych wartości szerokości i wysokości ustawienie zachowa proporcje tych wymiarów."
     },
     file: {
-      imageHeight: "Dostosowuje wysokość obrazu w wynikach ankiety.",
-      imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety.",
+      imageHeight: "Określa wysokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą wysokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku wysokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur.",
+      imageWidth: "Określa szerokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą szerokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku szerokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur.",
       allowImagesPreview: "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
     },
     image: {
@@ -1493,6 +1510,21 @@ var polishStrings = {
       requiredIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która uniemożliwia przesłanie ankiety, chyba że co najmniej jedno zagnieżdżone pytanie ma odpowiedź.",
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
       colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
+    },
+    slider: {
+      min: "Najniższa liczba, jaką mogą wybrać użytkownicy.",
+      max: "Najwyższa liczba, jaką mogą wybrać użytkownicy.",
+      step: "Interwał między możliwymi do wybrania wartościami skali. Na przykład krok 5 pozwoli użytkownikom wybrać 0, 5, 10 itd.",
+      minRangeLength: "Minimalna odległość między kciukami suwaka, jaką może ustawić użytkownik.",
+      maxRangeLength: "Maksymalna odległość między kciukami suwaka, jaką może ustawić użytkownik.",
+      labelCount: "Określa, ile etykiet skali ma zostać wygenerowanych. Wartość -1 oznacza, że liczba jest obliczana automatycznie na podstawie wartości Min. i Wartości Max.",
+      labelFormat: "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości.",
+      customLabels: "Umożliwia definiowanie etykiet niestandardowych o określonych wartościach i opcjonalnie przypisywanie do nich odpowiedniego tekstu (np. 0 = \"Słaby\", 100 = \"Doskonały\").",
+      tooltipFormat: "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości.",
+      allowSwap: "Umożliwia użytkownikom przesuwanie jednego kciuka obok drugiego.",
+      allowClear: "Wyświetla przycisk, który czyści wybraną wartość suwaka i ustawia ją na niezdefiniowaną.",
+      minValueExpression: "Dynamicznie definiuje minimalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne.",
+      maxValueExpression: "Dynamicznie definiuje maksymalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
     },
     isExclusive: "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu.",
     caseInsensitive: "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne.",
@@ -1532,7 +1564,6 @@ var polishStrings = {
     detailErrorLocation: "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\".",
     keyDuplicationError: "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie.",
     totalExpression: "Umożliwia obliczanie wartości całkowitych na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), wyrażenia logiczne ('{age} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.).",
-    confirmDelete: "Wyzwala monit z prośbą o potwierdzenie usunięcia wiersza.",
     keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\".",
     description: "Wpisz napisy.",
     locale: "Wybierz język, aby rozpocząć tworzenie ankiety. Aby dodać tłumaczenie, przełącz się na nowy język i przetłumacz oryginalny tekst tutaj lub na karcie Tłumaczenia.",
@@ -1700,7 +1731,7 @@ var polishStrings = {
     detailElements: "Elementy szczegółowe",
     allowAdaptiveActions: "Zezwalaj na działania adaptacyjne",
     defaultRowValue: "Domyślna wartość wiersza",
-    detailPanelShowOnAdding: "Panel szczegółów pokazuje się po dodaniu",
+    detailPanelShowOnAdding: "Automatyczne rozwijanie szczegółów nowego wiersza",
     choicesLazyLoadEnabled: "Opcje: leniwe ładowanie włączone",
     choicesLazyLoadPageSize: "Opcje: leniwy rozmiar strony ładowania",
     inputFieldComponent: "Składnik pola wejściowego",
@@ -2145,9 +2176,9 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.detailPanelMode: "Detail panel location" => "Położenie panelu szczegółów"
 // pe.minRowCount: "Minimum row count" => "Minimalna liczba wierszy"
 // pe.maxRowCount: "Maximum row count" => "Maksymalna liczba wierszy"
-// pe.confirmDelete: "Confirm row deletion" => "Potwierdź usunięcie wiersza"
+// pe.confirmDelete: "Confirm row removal" => "Potwierdź usunięcie wiersza"
 // pe.confirmDeleteText: "Confirmation message" => "Komunikat potwierdzenia"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Potwierdź usunięcie panelu"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Potwierdź usunięcie panelu"
 // pe.panelCount: "Initial panel count" => "Początkowa liczba paneli"
 // pe.minPanelCount: "Minimum panel count" => "Minimalna liczba paneli"
 // pe.maxPanelCount: "Maximum panel count" => "Maksymalna liczba paneli"
@@ -2946,7 +2977,7 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ustawia lokalizację komunikatu o błędzie w odniesieniu do komórki z nieprawidłowymi danymi wejściowymi. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Umożliwia obliczanie wartości całkowitych na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), wyrażenia logiczne ('{age} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Wyzwala monit z prośbą o potwierdzenie usunięcia wiersza."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Wyzwala monit z prośbą o potwierdzenie usunięcia wiersza."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego."
 // pehelp.description: "Type a subtitle." => "Wpisz napisy."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Wybierz język, aby rozpocząć tworzenie ankiety. Aby dodać tłumaczenie, przełącz się na nowy język i przetłumacz oryginalny tekst tutaj lub na karcie Tłumaczenia."
@@ -3364,3 +3395,32 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // sliderType.single: "Single-Value" => "Pojedyncza wartość"
 // sliderType.range: "Range" => "Zakres"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu."
+// ed.toolboxSearch: "Search" => "Szukać"
+// file.imageHeight: "Image height" => "Wysokość obrazu"
+// file.imageWidth: "Image width" => "Szerokość obrazu"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Określa wysokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą wysokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku wysokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Określa szerokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą szerokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku szerokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur."
+// slider.min: "The lowest number that users can select." => "Najniższa liczba, jaką mogą wybrać użytkownicy."
+// slider.max: "The highest number that users can select." => "Najwyższa liczba, jaką mogą wybrać użytkownicy."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interwał między możliwymi do wybrania wartościami skali. Na przykład krok 5 pozwoli użytkownikom wybrać 0, 5, 10 itd."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimalna odległość między kciukami suwaka, jaką może ustawić użytkownik."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Maksymalna odległość między kciukami suwaka, jaką może ustawić użytkownik."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Określa, ile etykiet skali ma zostać wygenerowanych. Wartość -1 oznacza, że liczba jest obliczana automatycznie na podstawie wartości Min. i Wartości Max."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Umożliwia definiowanie etykiet niestandardowych o określonych wartościach i opcjonalnie przypisywanie do nich odpowiedniego tekstu (np. 0 = \"Słaby\", 100 = \"Doskonały\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Umożliwia użytkownikom przesuwanie jednego kciuka obok drugiego."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Wyświetla przycisk, który czyści wybraną wartość suwaka i ustawia ją na niezdefiniowaną."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicznie definiuje minimalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicznie definiuje maksymalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
+// slider.sliderType: "Slider type" => "Typ suwaka"
+// slider.minRangeLength: "Min range length" => "Minimalna długość zakresu"
+// slider.maxRangeLength: "Max range length" => "Maksymalna długość zasięgu"
+// slider.customLabels: "Custom labels" => "Etykiety niestandardowe"
+// slider.labelFormat: "Label format" => "Format etykiety"
+// slider.tooltipFormat: "Tooltip format" => "Format podpowiedzi"
+// question.showTitle: "Show the title and description" => "Pokaż tytuł i opis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem panelu."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatycznie rozwija sekcję szczegółów po dodaniu nowego wiersza do macierzy."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatyczne rozwijanie szczegółów nowego wiersza"

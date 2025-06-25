@@ -129,6 +129,7 @@ export var htStrings = {
     generateReadableJSON: "Jenere JSON lizib",
     toolbox: "Bwat zouti",
     "property-grid": "Pwopriyete",
+    toolboxSearch: "Fouye",
     toolboxFilteredTextPlaceholder: "Tape pou chèche...",
     toolboxNoResultsFound: "Pa gen rezilta yo jwenn",
     propertyGridFilteredTextPlaceholder: "Tape pou chèche...",
@@ -349,6 +350,7 @@ export var htStrings = {
       name: "Non kesyon an",
       title: "Tit kesyon an",
       description: "Deskripsyon kesyon",
+      showTitle: "Montre la ak deskripsyon an",
       visibleIf: "Fè kesyon an vizib si",
       requiredIf: "Fè kesyon an mande si",
       page: "Deplase kesyon an nan paj la",
@@ -754,7 +756,17 @@ export var htStrings = {
       labelCount: "Nimewo nan etikèt oto-pwodwi",
       minValueExpression: "Min ekspresyon",
       maxValueExpression: "Max ekspresyon valè",
-      autoGenerate: "Echèl etikèt konfigirasyon"
+      autoGenerate: "Echèl etikèt konfigirasyon",
+      sliderType: "kalite koulis",
+      minRangeLength: "Longè ranje min",
+      maxRangeLength: "Max ranje longè",
+      customLabels: "Etikèt koutim",
+      labelFormat: "Fòma etikèt",
+      tooltipFormat: "Fòma zouti"
+    },
+    file: {
+      imageHeight: "Wotè imaj",
+      imageWidth: "Lajè imaj"
     },
     hideIfChoicesEmpty: "Kache kesyon an si li pa gen chwa",
     minWidth: "Lajè minimòm",
@@ -1423,7 +1435,12 @@ export var htStrings = {
       descriptionLocation: "Opsyon \"Eritite\" aplike nivo paj la (si yo tabli) oswa nivo sondaj (\"Anba tit panèl la\" pa default).",
       newPanelPosition: "Defini pozisyon yon panèl ki fèk ajoute. Pa default, nouvo panno yo ajoute nan fen an. Chwazi \"Next\" pou mete yon nouvo panèl apre youn aktyèl la.",
       copyDefaultValueFromLastEntry: "Duplike repons ki soti nan dènye panèl la epi asiyen yo nan pwochen panèl dinamik ajoute a.",
-      keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl."
+      keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl.",
+      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl."
+    },
+    matrixdynamic: {
+      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon ranje.",
+      detailPanelShowOnAdding: "Otomatikman ogmante seksyon an detay lè yon nouvo ranje ajoute nan matris la."
     },
     copyDefaultValueFromLastEntry: "Duplike repons ki soti nan dènye ranje a epi asiyen yo nan pwochen ranje dinamik ajoute a.",
     defaultValueExpression: "Anviwònman sa a pèmèt ou bay yon valè repons default ki baze sou yon ekspresyon. Ekspresyon an ka gen ladan kalkil debaz - `{q1_id} + {q2_id}`, ekspresyon Boolean, tankou `{age} > 60`, ak fonksyon: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, elatriye. Valè ki detèmine pa ekspresyon sa a sèvi kòm valè defo inisyal ki ka pase sou plas pa manyèl yon moun ki reponn.",
@@ -1460,8 +1477,8 @@ export var htStrings = {
       signatureAutoScaleEnabled: "Chwazi si ou vle zòn siyati a ranpli tout espas ki disponib nan bwat kesyon an pandan w ap kenbe rapò aspè 3:2 default la. Lè yo mete valè koutim lajè ak wotè, anviwònman an ap kenbe rapò aspè dimansyon sa yo."
     },
     file: {
-      imageHeight: "Ajiste wotè imaj la nan rezilta sondaj la.",
-      imageWidth: "Ajiste lajè imaj la nan rezilta sondaj la.",
+      imageHeight: "Espesifye wotè a ekspozisyon nan imaj Uploaded nan preview la ak wotè aktyèl la nan imaj pran ak kamera a. Nan yon sèl mòd dosye Upload, wotè a ekspozisyon limite pa zòn nan preview; nan mòd miltip Upload, li limite pa zòn nan thumbnail.",
+      imageWidth: "Espesifye lajè a nan imaj Uploaded nan preview la ak lajè aktyèl la nan imaj pran ak kamera a. Nan yon sèl mòd dosye Upload, lajè a ekspozisyon limite pa zòn nan preview; nan mòd miltip Upload, li limite pa zòn nan thumbnail.",
       allowImagesPreview: "Montre aperçu miniatures pou fichye telechaje lè sa posib. Dezeleksyone si ou vle montre ikon dosye pito."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var htStrings = {
       requiredIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki anpeche soumèt sondaj sòf si omwen yon kesyon anbrike gen yon repons.",
       showInMultipleColumns: "Lè yo chwazi, kreye yon kolòn endividyèl pou chak opsyon chwa.",
       colCount: "Fè aranjman pou chwa chwa nan yon layout milti-kolòn. Lè yo mete sou 0, opsyon yo parèt sou yon sèl liy. Lè yo mete sou -1, valè aktyèl la eritye nan pwopriyete \"Konte kolòn ki nichye\" nan matris paran an."
+    },
+    slider: {
+      min: "Nimewo ki pi ba ke itilizatè yo ka chwazi.",
+      max: "Nimewo ki pi wo ke itilizatè yo ka chwazi.",
+      step: "Entèval la ant valè echèl chwazi. Pou egzanp, yon etap nan 5 pral pèmèt itilizatè yo chwazi 0, 5, 10, elatriye.",
+      minRangeLength: "Distans minimòm ant gwo pous glise yon itilizatè ka mete.",
+      maxRangeLength: "Distans maksimòm ant glise yon itilizatè ka mete.",
+      labelCount: "Espesifye konbyen etikèt echèl jenere. Yon valè de-1 vle di nimewo a kalkile otomatikman ki baze sou valè a Min ak Max valè.",
+      labelFormat: "Sèvi ak '{0}' kòm yon plas pou valè aktyèl la.",
+      customLabels: "Pèmèt ou defini etikèt koutim nan valè espesifik ak opsyonèlman bay tèks korespondan yo (egzanp, 0 = \"Pòv\", 100 = \"Ekselan\").",
+      tooltipFormat: "Sèvi ak '{0}' kòm yon plas pou valè aktyèl la.",
+      allowSwap: "Pèmèt itilizatè yo pou avanse pou pi yon gwo pous sot pase lòt la.",
+      allowClear: "Montre yon bouton ki klè valè a glise chwazi epi li etabli li nan defini.",
+      minValueExpression: "Defini valè minimòm slider a dinamikman lè l sèvi avèk yon ekspresyon. Sipòte kalkil debaz (e.g, '{q1_id} + {q2_id}'), Boolean lojik (tankou g., '{laj} > 60'), ak fonksyon tankou 'iif(), 'jodi a(), 'laj(), 'min(),', 'max(), 'avg(), 'avg(), ak plis ankò.",
+      maxValueExpression: "Defini valè maksimòm slider a dinamikman lè l sèvi avèk yon ekspresyon. Sipòte kalkil debaz (e.g, '{q1_id} + {q2_id}'), Boolean lojik (tankou g., '{laj} > 60'), ak fonksyon tankou 'iif(), 'jodi a(), 'laj(), 'min(),', 'max(), 'avg(), 'avg(), ak plis ankò."
     },
     isExclusive: "Fè chwa sa a san konte. Lè chwazi pa yon itilizatè, li pral otomatikman deselere tout lòt opsyon nan kesyon an.",
     caseInsensitive: "Chwazi si lèt majiskil ak miniskil nan ekspresyon regilye a dwe trete kòm ekivalan.",
@@ -1532,7 +1564,6 @@ export var htStrings = {
     detailErrorLocation: "Fikse kote mesaj erè yo pou kesyon ki enbrike nan seksyon detay yo. Opsyon \"Eritye\" aplike paramèt ki soti nan pwopriyete \"Aliyman mesaj erè\".",
     keyDuplicationError: "Lè pwopriyete \"Anpeche repons kopi\" yo aktive, yon moun ki reponn ap eseye soumèt yon kopi kopi ap resevwa mesaj erè sa a.",
     totalExpression: "Pèmèt ou kalkile valè total ki baze sou yon ekspresyon. Ekspresyon an ka gen ladan kalkil debaz (`{q1_id} + {q2_id}`), ekspresyon booleyen (`{age} > 60`) ak fonksyon ('iif()`, `jodi a ()`, `age ()`, `min()`, `max()`, `avg()`, elatriye).",
-    confirmDelete: "Deklanche yon èd memwa ki mande konfime sipresyon ranje a.",
     keyName: "Referans yon ID kolòn pou mande pou yon itilizatè bay yon repons inik pou chak kesyon nan kolòn espesifye a.",
     description: "Tape yon sous-titre.",
     locale: "Chwazi yon lang pou kòmanse kreye sondaj ou a. Pou ajoute yon tradiksyon, chanje nan yon nouvo lang epi tradui tèks orijinal la isit la oswa nan tab la Tradiksyon.",
@@ -1700,7 +1731,7 @@ export var htStrings = {
     detailElements: "Eleman detay",
     allowAdaptiveActions: "Pèmèt aksyon adaptasyon",
     defaultRowValue: "Valè ranje default",
-    detailPanelShowOnAdding: "Panèl detay montre sou ajoute",
+    detailPanelShowOnAdding: "Oto-elaji nouvo detay ranje",
     choicesLazyLoadEnabled: "Chwa chaj parese pèmèt",
     choicesLazyLoadPageSize: "Chwa gwosè paj chaj parese",
     inputFieldComponent: "Antre eleman jaden",
@@ -1867,3 +1898,32 @@ setupLocale({ localeCode: "ht", strings: htStrings });
 // pehelp.allowEmptyResponse: "Select to allow the service to return an empty response or array." => "Chwazi pou pèmèt sèvis la retounen yon repons vid oswa etalaj."
 // pehelp.choicesVisibleIf: "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options." => "Sèvi ak icon nan majik yo mete yon règ kondisyonèl ki detèmine vizibilite a nan tout opsyon chwa."
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Itilize lè 'Layout sondaj la' mete nan 'yon sèl jaden opinyon pou chak paj'. Nan kouman sa a, matris la se divize pou chak jaden opinyon parèt sou yon paj separe. Use {rowIndex} placeholder to insert auto nimewo, {rowTitle} or {rowName} to referans la row a oswa ID, ak {row.columnid} to include valè a nan yon kolòn matris espesifik."
+// ed.toolboxSearch: "Search" => "Fouye"
+// file.imageHeight: "Image height" => "Wotè imaj"
+// file.imageWidth: "Image width" => "Lajè imaj"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Espesifye wotè a ekspozisyon nan imaj Uploaded nan preview la ak wotè aktyèl la nan imaj pran ak kamera a. Nan yon sèl mòd dosye Upload, wotè a ekspozisyon limite pa zòn nan preview; nan mòd miltip Upload, li limite pa zòn nan thumbnail."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Espesifye lajè a nan imaj Uploaded nan preview la ak lajè aktyèl la nan imaj pran ak kamera a. Nan yon sèl mòd dosye Upload, lajè a ekspozisyon limite pa zòn nan preview; nan mòd miltip Upload, li limite pa zòn nan thumbnail."
+// slider.min: "The lowest number that users can select." => "Nimewo ki pi ba ke itilizatè yo ka chwazi."
+// slider.max: "The highest number that users can select." => "Nimewo ki pi wo ke itilizatè yo ka chwazi."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Entèval la ant valè echèl chwazi. Pou egzanp, yon etap nan 5 pral pèmèt itilizatè yo chwazi 0, 5, 10, elatriye."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Distans minimòm ant gwo pous glise yon itilizatè ka mete."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Distans maksimòm ant glise yon itilizatè ka mete."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Espesifye konbyen etikèt echèl jenere. Yon valè de-1 vle di nimewo a kalkile otomatikman ki baze sou valè a Min ak Max valè."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Sèvi ak '{0}' kòm yon plas pou valè aktyèl la."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Pèmèt ou defini etikèt koutim nan valè espesifik ak opsyonèlman bay tèks korespondan yo (egzanp, 0 = \"Pòv\", 100 = \"Ekselan\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Sèvi ak '{0}' kòm yon plas pou valè aktyèl la."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Pèmèt itilizatè yo pou avanse pou pi yon gwo pous sot pase lòt la."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Montre yon bouton ki klè valè a glise chwazi epi li etabli li nan defini."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Defini valè minimòm slider a dinamikman lè l sèvi avèk yon ekspresyon. Sipòte kalkil debaz (e.g, '{q1_id} + {q2_id}'), Boolean lojik (tankou g., '{laj} > 60'), ak fonksyon tankou 'iif(), 'jodi a(), 'laj(), 'min(),', 'max(), 'avg(), 'avg(), ak plis ankò."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Defini valè maksimòm slider a dinamikman lè l sèvi avèk yon ekspresyon. Sipòte kalkil debaz (e.g, '{q1_id} + {q2_id}'), Boolean lojik (tankou g., '{laj} > 60'), ak fonksyon tankou 'iif(), 'jodi a(), 'laj(), 'min(),', 'max(), 'avg(), 'avg(), ak plis ankò."
+// slider.sliderType: "Slider type" => "kalite koulis"
+// slider.minRangeLength: "Min range length" => "Longè ranje min"
+// slider.maxRangeLength: "Max range length" => "Max ranje longè"
+// slider.customLabels: "Custom labels" => "Etikèt koutim"
+// slider.labelFormat: "Label format" => "Fòma etikèt"
+// slider.tooltipFormat: "Tooltip format" => "Fòma zouti"
+// question.showTitle: "Show the title and description" => "Montre la ak deskripsyon an"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Deklanche yon konfimasyon pouse anvan ou retire yon panèl."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Deklanche yon konfimasyon pouse anvan ou retire yon ranje."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Otomatikman ogmante seksyon an detay lè yon nouvo ranje ajoute nan matris la."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Oto-elaji nouvo detay ranje"

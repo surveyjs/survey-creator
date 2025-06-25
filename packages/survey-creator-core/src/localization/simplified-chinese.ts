@@ -129,6 +129,7 @@ var simplifiedChineseTranslation = {
     generateReadableJSON: "生成易读的 JSON 数据",
     toolbox: "工具箱",
     "property-grid": "性能",
+    toolboxSearch: "搜索",
     toolboxFilteredTextPlaceholder: "键入以搜索...",
     toolboxNoResultsFound: "未找到结果",
     propertyGridFilteredTextPlaceholder: "键入以搜索...",
@@ -349,6 +350,7 @@ var simplifiedChineseTranslation = {
       name: "问题名称",
       title: "问题标题",
       description: "问题描述",
+      showTitle: "显示标题和描述",
       visibleIf: "如果出现以下情况，请使问题可见",
       requiredIf: "如果出现以下情况，则将问题设为必填项",
       page: "父页面",
@@ -754,7 +756,17 @@ var simplifiedChineseTranslation = {
       labelCount: "自动生成的标签数量",
       minValueExpression: "最小值表达式",
       maxValueExpression: "最大值表达式",
-      autoGenerate: "刻度标签配置"
+      autoGenerate: "刻度标签配置",
+      sliderType: "滑块类型",
+      minRangeLength: "最小范围长度",
+      maxRangeLength: "最大范围长度",
+      customLabels: "自定义标签",
+      labelFormat: "标签格式",
+      tooltipFormat: "工具提示格式"
+    },
+    file: {
+      imageHeight: "图像高度",
+      imageWidth: "图像宽度"
     },
     hideIfChoicesEmpty: "如果问题不包含任何选项，则隐藏问题",
     minWidth: "最小宽度（以 CSS 接受的值为单位）",
@@ -1423,7 +1435,12 @@ var simplifiedChineseTranslation = {
       descriptionLocation: "“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“在面板标题下”）。",
       newPanelPosition: "定义新添加的面板的位置。默认情况下，新面板将添加到末尾。选择“下一步”以在当前面板之后插入新面板。",
       copyDefaultValueFromLastEntry: "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。",
-      keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。"
+      keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。",
+      confirmDelete: "在删除面板之前触发确认提示。"
+    },
+    matrixdynamic: {
+      confirmDelete: "在删除行之前触发确认提示。",
+      detailPanelShowOnAdding: "在向矩阵添加新行时自动展开详细信息部分。"
     },
     copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     defaultValueExpression: "此设置允许您根据表达式分配默认答案值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表达式确定的值用作初始默认值，可由响应者的手动输入覆盖。",
@@ -1460,8 +1477,8 @@ var simplifiedChineseTranslation = {
       signatureAutoScaleEnabled: "选择是否希望签名区域填充问题框中的所有可用空间，同时保持默认的 3：2 纵横比。设置自定义宽度和高度值后，该设置将保留这些尺寸的纵横比。"
     },
     file: {
-      imageHeight: "调整调查结果中图像的高度。",
-      imageWidth: "调整调查结果中图像的宽度。",
+      imageHeight: "指定预览中上传图像的显示高度以及使用相机拍摄的图像的实际高度。在单个文件上传模式下，显示高度受预览区域限制;在多文件上传模式下，它受缩略图区域限制。",
+      imageWidth: "指定预览中上传图像的显示宽度以及使用相机拍摄的图像的实际宽度。在单个文件上传模式下，显示宽度受预览区域限制;在多文件上传模式下，它受缩略图区域限制。",
       allowImagesPreview: "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
     },
     image: {
@@ -1493,6 +1510,21 @@ var simplifiedChineseTranslation = {
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
       showInMultipleColumns: "选中后，为每个选项创建一个单独的列。",
       colCount: "在多列布局中排列选项。设置为 0 时，选项将以单行显示。当设置为 -1 时，实际值继承自父矩阵的 “Nested column count” 属性。"
+    },
+    slider: {
+      min: "用户可以选择的最小数字。",
+      max: "用户可以选择的最大数字。",
+      step: "可选刻度值之间的间隔。例如，步长 5 将允许用户选择 0、5、10 等。",
+      minRangeLength: "用户可以设置的滑块块之间的最小距离。",
+      maxRangeLength: "用户可以设置滑块滑块之间的最大距离。",
+      labelCount: "指定要生成的刻度标签数量。值 -1 表示该数字是根据 最小值 和 最大值 自动计算的。",
+      labelFormat: "使用 '{0}' 作为实际值的占位符。",
+      customLabels: "允许您定义特定值的自定义标签，并可选择为其分配相应的文本（例如，0 = “差”，100 = “优秀”）。",
+      tooltipFormat: "使用 '{0}' 作为实际值的占位符。",
+      allowSwap: "允许用户将一个滑块移过另一个滑块。",
+      allowClear: "显示一个按钮，用于清除选定的滑块值并将其设置为 undefined。",
+      minValueExpression: "使用表达式动态定义滑块的最小值。支持基本计算（例如 '{q1_id} + {q2_id}'）、布尔逻辑（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函数。",
+      maxValueExpression: "使用表达式动态定义滑块的最大值。支持基本计算（例如 '{q1_id} + {q2_id}'）、布尔逻辑（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函数。"
     },
     isExclusive: "将此选择设为独占。当用户选择时，它将自动取消选择问题中的所有其他选项。",
     caseInsensitive: "如果必须将正则表达式中的大写字母和小写字母视为等效字母，请选择此项。",
@@ -1532,7 +1564,6 @@ var simplifiedChineseTranslation = {
     detailErrorLocation: "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。",
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
-    confirmDelete: "触发提示，要求确认删除行。",
     keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。",
     description: "键入副标题。",
     locale: "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。",
@@ -1700,7 +1731,7 @@ var simplifiedChineseTranslation = {
     detailElements: "细节元素",
     allowAdaptiveActions: "允许自适应操作",
     defaultRowValue: "默认行值",
-    detailPanelShowOnAdding: "添加时显示的详细信息面板",
+    detailPanelShowOnAdding: "自动展开新行详细信息",
     choicesLazyLoadEnabled: "选项延迟加载已启用",
     choicesLazyLoadPageSize: "选择延迟加载页面大小",
     inputFieldComponent: "输入字段组件",
@@ -2078,9 +2109,9 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.detailPanelMode: "Detail panel location" => "详细信息面板位置"
 // pe.minRowCount: "Minimum row count" => "最小行数"
 // pe.maxRowCount: "Maximum row count" => "最大行数"
-// pe.confirmDelete: "Confirm row deletion" => "确认删除行"
+// pe.confirmDelete: "Confirm row removal" => "确认删除行"
 // pe.confirmDeleteText: "Confirmation message" => "确认消息"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "确认面板删除"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "确认面板删除"
 // pe.panelCount: "Initial panel count" => "初始面板计数"
 // pe.minPanelCount: "Minimum panel count" => "最小面板数"
 // pe.maxPanelCount: "Maximum panel count" => "最大面板数"
@@ -2822,7 +2853,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "设置与输入无效的单元格相关的错误消息的位置。“继承”选项应用“错误消息对齐”属性中的设置。"
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。"
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "触发提示，要求确认删除行。"
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "触发提示，要求确认删除行。"
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "复制最后一行的答案，并将其分配给下一个添加的动态行。"
 // pehelp.description: "Type a subtitle." => "键入副标题。"
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。"
@@ -3240,3 +3271,32 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // sliderType.single: "Single-Value" => "单值"
 // sliderType.range: "Range" => "范围"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "将此选择设为独占。当用户选择时，它将自动取消选择问题中的所有其他选项。"
+// ed.toolboxSearch: "Search" => "搜索"
+// file.imageHeight: "Image height" => "图像高度"
+// file.imageWidth: "Image width" => "图像宽度"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定预览中上传图像的显示高度以及使用相机拍摄的图像的实际高度。在单个文件上传模式下，显示高度受预览区域限制;在多文件上传模式下，它受缩略图区域限制。"
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定预览中上传图像的显示宽度以及使用相机拍摄的图像的实际宽度。在单个文件上传模式下，显示宽度受预览区域限制;在多文件上传模式下，它受缩略图区域限制。"
+// slider.min: "The lowest number that users can select." => "用户可以选择的最小数字。"
+// slider.max: "The highest number that users can select." => "用户可以选择的最大数字。"
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "可选刻度值之间的间隔。例如，步长 5 将允许用户选择 0、5、10 等。"
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "用户可以设置的滑块块之间的最小距离。"
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "用户可以设置滑块滑块之间的最大距离。"
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "指定要生成的刻度标签数量。值 -1 表示该数字是根据 最小值 和 最大值 自动计算的。"
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "使用 '{0}' 作为实际值的占位符。"
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "允许您定义特定值的自定义标签，并可选择为其分配相应的文本（例如，0 = “差”，100 = “优秀”）。"
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "使用 '{0}' 作为实际值的占位符。"
+// slider.allowSwap: "Allows users to move one thumb past the other." => "允许用户将一个滑块移过另一个滑块。"
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "显示一个按钮，用于清除选定的滑块值并将其设置为 undefined。"
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表达式动态定义滑块的最小值。支持基本计算（例如 '{q1_id} + {q2_id}'）、布尔逻辑（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函数。"
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表达式动态定义滑块的最大值。支持基本计算（例如 '{q1_id} + {q2_id}'）、布尔逻辑（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函数。"
+// slider.sliderType: "Slider type" => "滑块类型"
+// slider.minRangeLength: "Min range length" => "最小范围长度"
+// slider.maxRangeLength: "Max range length" => "最大范围长度"
+// slider.customLabels: "Custom labels" => "自定义标签"
+// slider.labelFormat: "Label format" => "标签格式"
+// slider.tooltipFormat: "Tooltip format" => "工具提示格式"
+// question.showTitle: "Show the title and description" => "显示标题和描述"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "在删除面板之前触发确认提示。"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "在删除行之前触发确认提示。"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "在向矩阵添加新行时自动展开详细信息部分。"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "自动展开新行详细信息"

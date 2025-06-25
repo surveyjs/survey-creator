@@ -19,7 +19,8 @@ import {
   surveyLocalization,
   ComputedUpdater,
   AnimationBoolean,
-  IAnimationConsumer
+  IAnimationConsumer,
+  VerticalResponsivityManager
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -587,7 +588,8 @@ export class QuestionToolbox
       iconName: "icon-search",
       iconSize: "auto",
       component: "sv-action-bar-item",
-      tooltip: surveyLocalization.getString("search"),
+      title: surveyLocalization.getString("ed.toolboxSearch"),
+      showTitle: false,
       action: () => {
         (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
@@ -614,13 +616,14 @@ export class QuestionToolbox
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
-    });
+    }, false);
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
       if (!this.creator.readOnly) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
+    this.dotsItem.data.locOwner = this.creator;
     this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
@@ -1234,6 +1237,12 @@ export class QuestionToolbox
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
   }
+  protected getRenderedActions(): Array<QuestionToolboxItem> {
+    const actions = this.actions;
+    if (actions.length === 1 && !!actions[0].iconName)
+      return actions;
+    return actions.concat([<QuestionToolboxItem>this.dotsItem]);
+  }
   private indexOf(name: string) {
     for (var i = 0; i < this.actions.length; i++) {
       if (this.actions[i].name == name) return i;
@@ -1430,6 +1439,17 @@ export class QuestionToolbox
         questions.push(name);
     }
     return questions;
+  }
+  public createResponsivityManager(container: HTMLDivElement): VerticalResponsivityManager {
+    return new VerticalResponsivityManager(container, this);
+  }
+  public afterRender(container: HTMLDivElement) {
+    this.setRootElement(container);
+    this.initResponsivityManager(this.containerElement as HTMLDivElement);
+  }
+  public beforeDestroy() {
+    this.setRootElement(undefined);
+    this.resetResponsivityManager();
   }
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

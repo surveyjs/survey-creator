@@ -129,6 +129,7 @@ var germanTranslation = {
     generateReadableJSON: "Lesbares JSON generieren",
     toolbox: "Werkzeugleiste",
     "property-grid": "Eigenschaften",
+    toolboxSearch: "Suchen",
     toolboxFilteredTextPlaceholder: "Geben Sie ein, um zu suchen...",
     toolboxNoResultsFound: "Keine Ergebnisse gefunden",
     propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
@@ -349,6 +350,7 @@ var germanTranslation = {
       name: "Name der Frage",
       title: "Titel der Frage",
       description: "Beschreibung der Frage",
+      showTitle: "Zeigen Sie den Titel und die Beschreibung an",
       visibleIf: "Frage sichtbar machen, wenn",
       requiredIf: "Frage erforderlich machen, wenn",
       page: "Frage auf die Seite verschieben",
@@ -754,7 +756,17 @@ var germanTranslation = {
       labelCount: "Anzahl der automatisch generierten Beschriftungen",
       minValueExpression: "Min-Wert-Ausdruck",
       maxValueExpression: "Ausdruck des Max. Werts",
-      autoGenerate: "Konfiguration von Skalenbeschriftungen"
+      autoGenerate: "Konfiguration von Skalenbeschriftungen",
+      sliderType: "Typ des Schiebereglers",
+      minRangeLength: "Länge des Min. Bereichs",
+      maxRangeLength: "Maximale Reichweitenlänge",
+      customLabels: "Benutzerdefinierte Etiketten",
+      labelFormat: "Format der Beschriftung",
+      tooltipFormat: "Tooltip-Format"
+    },
+    file: {
+      imageHeight: "Bildhöhe",
+      imageWidth: "Breite des Bildes"
     },
     hideIfChoicesEmpty: "Frage ausblenden, wenn sie keine Auswahlmöglichkeiten enthält",
     minWidth: "Minimale Breite",
@@ -1423,7 +1435,12 @@ var germanTranslation = {
       descriptionLocation: "Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig unter dem Panel-Titel).",
       newPanelPosition: "Definiert die Position eines neu hinzugefügten Panels. Standardmäßig werden neue Panele am Ende hinzugefügt. Wählen Sie \"Weiter\", um ein neues Panel nach dem aktuellen einzufügen.",
       copyDefaultValueFromLastEntry: "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu.",
-      keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben."
+      keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben.",
+      confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor ein Bereich entfernt wird."
+    },
+    matrixdynamic: {
+      confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor eine Zeile entfernt wird.",
+      detailPanelShowOnAdding: "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
     },
     copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     defaultValueExpression: "Mit dieser Einstellung können Sie einen Standardantwortwert basierend auf einem Ausdruck zuweisen. Der Ausdruck kann grundlegende Berechnungen enthalten - '{q1_id} + {q2_id}', boolesche Ausdrücke wie '{age} > 60' und Funktionen: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw. Der durch diesen Ausdruck ermittelte Wert dient als anfänglicher Standardwert, der durch die manuelle Eingabe eines Befragten überschrieben werden kann.",
@@ -1460,8 +1477,8 @@ var germanTranslation = {
       signatureAutoScaleEnabled: "Wählen Sie diese Option aus, wenn der Signaturbereich den gesamten verfügbaren Platz innerhalb des Fragefelds ausfüllen soll, während das Standardseitenverhältnis von 3:2 beibehalten wird. Wenn benutzerdefinierte Werte für Breite und Höhe festgelegt sind, behält die Einstellung das Seitenverhältnis dieser Abmessungen bei."
     },
     file: {
-      imageHeight: "Passt die Höhe des Bildes in den Umfrageergebnissen an.",
-      imageWidth: "Passt die Breite des Bildes in den Umfrageergebnissen an.",
+      imageHeight: "Gibt die Anzeigehöhe der hochgeladenen Bilder in der Vorschau und die tatsächliche Höhe der mit der Kamera aufgenommenen Bilder an. Im Modus zum Hochladen einzelner Dateien wird die Anzeigehöhe durch den Vorschaubereich begrenzt. Im Modus zum Hochladen mehrerer Dateien ist es durch den Miniaturansichtsbereich begrenzt.",
+      imageWidth: "Gibt die Anzeigebreite hochgeladener Bilder in der Vorschau und die tatsächliche Breite von Bildern an, die mit der Kamera aufgenommen wurden. Im Modus zum Hochladen einzelner Dateien wird die Anzeigebreite durch den Vorschaubereich begrenzt. Im Modus zum Hochladen mehrerer Dateien ist es durch den Miniaturansichtsbereich begrenzt.",
       allowImagesPreview: "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten."
     },
     image: {
@@ -1493,6 +1510,21 @@ var germanTranslation = {
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
       showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt.",
       colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
+    },
+    slider: {
+      min: "Die niedrigste Zahl, die Benutzer auswählen können.",
+      max: "Die höchste Zahl, die Benutzer auswählen können.",
+      step: "Das Intervall zwischen den auswählbaren Skalenwerten. In einem Schritt von 5 können Benutzer beispielsweise 0, 5, 10 usw. auswählen.",
+      minRangeLength: "Der Mindestabstand zwischen den Schiebereglern, die ein Benutzer festlegen kann.",
+      maxRangeLength: "Der maximale Abstand zwischen den Schiebereglern, die ein Benutzer festlegen kann.",
+      labelCount: "Gibt an, wie viele Maßstabsbeschriftungen generiert werden sollen. Ein Wert von -1 bedeutet, dass die Zahl automatisch basierend auf dem Min-Wert und dem Max-Wert berechnet wird.",
+      labelFormat: "Verwenden Sie '{0}' als Platzhalter für den tatsächlichen Wert.",
+      customLabels: "Ermöglicht es Ihnen, benutzerdefinierte Beschriftungen bei bestimmten Werten zu definieren und ihnen optional entsprechenden Text zuzuweisen (z. B. 0 = \"Schlecht\", 100 = \"Ausgezeichnet\").",
+      tooltipFormat: "Verwenden Sie '{0}' als Platzhalter für den tatsächlichen Wert.",
+      allowSwap: "Ermöglicht es Benutzern, einen Daumen über den anderen zu bewegen.",
+      allowClear: "Zeigt eine Schaltfläche an, die den ausgewählten Schiebereglerwert löscht und auf undefined setzt.",
+      minValueExpression: "Definiert den Mindestwert des Schiebereglers dynamisch mithilfe eines Ausdrucks. Unterstützt grundlegende Berechnungen (z. B. '{q1_id} + {q2_id}'), boolesche Logik (z. B. '{age} > 60') und Funktionen wie 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' und mehr.",
+      maxValueExpression: "Definiert den Maximalwert des Schiebereglers dynamisch mithilfe eines Ausdrucks. Unterstützt grundlegende Berechnungen (z. B. '{q1_id} + {q2_id}'), boolesche Logik (z. B. '{age} > 60') und Funktionen wie 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' und mehr."
     },
     isExclusive: "Macht diese Wahl exklusiv. Wenn sie von einem Benutzer ausgewählt wird, werden automatisch alle anderen Optionen in der Frage abgewählt.",
     caseInsensitive: "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen.",
@@ -1532,7 +1564,6 @@ var germanTranslation = {
     detailErrorLocation: "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an.",
     keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung.",
     totalExpression: "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten.",
-    confirmDelete: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen.",
     keyName: "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus.",
     description: "Geben Sie einen Untertitel ein.",
     locale: "Wählen Sie eine Sprache aus, um mit der Erstellung Ihrer Umfrage zu beginnen. Um eine Übersetzung hinzuzufügen, wechseln Sie in eine neue Sprache und übersetzen Sie den Originaltext hier oder auf dem Tab \"Übersetzungen\".",
@@ -1700,7 +1731,7 @@ var germanTranslation = {
     detailElements: "Detail-Elemente",
     allowAdaptiveActions: "Adaptive Aktionen zulassen",
     defaultRowValue: "Standardwert für Zeilen",
-    detailPanelShowOnAdding: "Panel für Details beim Hinzufügen anzeigen",
+    detailPanelShowOnAdding: "Neue Zeilendetails automatisch erweitern",
     choicesLazyLoadEnabled: "Auswahlmöglichkeiten Lazy Load aktiviert",
     choicesLazyLoadPageSize: "Auswahlmöglichkeiten Lazy Load-Seitengröße",
     inputFieldComponent: "Eingabefeld-Komponente",
@@ -2391,7 +2422,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Legt die Position einer Fehlermeldung in Bezug auf eine Zelle mit ungültiger Eingabe fest. Die Option \"Vererben\" übernimmt die Einstellung aus der Eigenschaft \"Fehlermeldungsausrichtung\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu."
 // pehelp.description: "Type a subtitle." => "Geben Sie einen Untertitel ein."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Wählen Sie eine Sprache aus, um mit der Erstellung Ihrer Umfrage zu beginnen. Um eine Übersetzung hinzuzufügen, wechseln Sie in eine neue Sprache und übersetzen Sie den Originaltext hier oder auf der Registerkarte Übersetzungen."
@@ -2811,3 +2842,32 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // sliderType.single: "Single-Value" => "Einzelwertig"
 // sliderType.range: "Range" => "Bereich"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Macht diese Wahl exklusiv. Wenn sie von einem Benutzer ausgewählt wird, werden automatisch alle anderen Optionen in der Frage abgewählt."
+// ed.toolboxSearch: "Search" => "Suchen"
+// file.imageHeight: "Image height" => "Bildhöhe"
+// file.imageWidth: "Image width" => "Breite des Bildes"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Gibt die Anzeigehöhe der hochgeladenen Bilder in der Vorschau und die tatsächliche Höhe der mit der Kamera aufgenommenen Bilder an. Im Modus zum Hochladen einzelner Dateien wird die Anzeigehöhe durch den Vorschaubereich begrenzt. Im Modus zum Hochladen mehrerer Dateien ist es durch den Miniaturansichtsbereich begrenzt."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Gibt die Anzeigebreite hochgeladener Bilder in der Vorschau und die tatsächliche Breite von Bildern an, die mit der Kamera aufgenommen wurden. Im Modus zum Hochladen einzelner Dateien wird die Anzeigebreite durch den Vorschaubereich begrenzt. Im Modus zum Hochladen mehrerer Dateien ist es durch den Miniaturansichtsbereich begrenzt."
+// slider.min: "The lowest number that users can select." => "Die niedrigste Zahl, die Benutzer auswählen können."
+// slider.max: "The highest number that users can select." => "Die höchste Zahl, die Benutzer auswählen können."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Das Intervall zwischen den auswählbaren Skalenwerten. In einem Schritt von 5 können Benutzer beispielsweise 0, 5, 10 usw. auswählen."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Der Mindestabstand zwischen den Schiebereglern, die ein Benutzer festlegen kann."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Der maximale Abstand zwischen den Schiebereglern, die ein Benutzer festlegen kann."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Gibt an, wie viele Maßstabsbeschriftungen generiert werden sollen. Ein Wert von -1 bedeutet, dass die Zahl automatisch basierend auf dem Min-Wert und dem Max-Wert berechnet wird."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Verwenden Sie '{0}' als Platzhalter für den tatsächlichen Wert."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Ermöglicht es Ihnen, benutzerdefinierte Beschriftungen bei bestimmten Werten zu definieren und ihnen optional entsprechenden Text zuzuweisen (z. B. 0 = \"Schlecht\", 100 = \"Ausgezeichnet\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Verwenden Sie '{0}' als Platzhalter für den tatsächlichen Wert."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Ermöglicht es Benutzern, einen Daumen über den anderen zu bewegen."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Zeigt eine Schaltfläche an, die den ausgewählten Schiebereglerwert löscht und auf undefined setzt."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definiert den Mindestwert des Schiebereglers dynamisch mithilfe eines Ausdrucks. Unterstützt grundlegende Berechnungen (z. B. '{q1_id} + {q2_id}'), boolesche Logik (z. B. '{age} > 60') und Funktionen wie 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' und mehr."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definiert den Maximalwert des Schiebereglers dynamisch mithilfe eines Ausdrucks. Unterstützt grundlegende Berechnungen (z. B. '{q1_id} + {q2_id}'), boolesche Logik (z. B. '{age} > 60') und Funktionen wie 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' und mehr."
+// slider.sliderType: "Slider type" => "Typ des Schiebereglers"
+// slider.minRangeLength: "Min range length" => "Länge des Min. Bereichs"
+// slider.maxRangeLength: "Max range length" => "Maximale Reichweitenlänge"
+// slider.customLabels: "Custom labels" => "Benutzerdefinierte Etiketten"
+// slider.labelFormat: "Label format" => "Format der Beschriftung"
+// slider.tooltipFormat: "Tooltip format" => "Tooltip-Format"
+// question.showTitle: "Show the title and description" => "Zeigen Sie den Titel und die Beschreibung an"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Löst eine Bestätigungsaufforderung aus, bevor ein Bereich entfernt wird."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Löst eine Bestätigungsaufforderung aus, bevor eine Zeile entfernt wird."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Neue Zeilendetails automatisch erweitern"

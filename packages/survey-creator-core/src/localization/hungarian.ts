@@ -129,6 +129,7 @@ export var huStrings = {
     generateReadableJSON: "Olvasható JSON generálása",
     toolbox: "Eszköztár",
     "property-grid": "Kellékek",
+    toolboxSearch: "Keresés",
     toolboxFilteredTextPlaceholder: "Írja be a kereséshez...",
     toolboxNoResultsFound: "Nincs találat",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
@@ -349,6 +350,7 @@ export var huStrings = {
       name: "Kérdés neve",
       title: "Kérdés címe",
       description: "Kérdés leírása",
+      showTitle: "A cím és a leírás megjelenítése",
       visibleIf: "Tegye láthatóvá a kérdést, ha",
       requiredIf: "Tegye kötelezővé a kérdést, ha",
       page: "Szülőoldal",
@@ -754,7 +756,17 @@ export var huStrings = {
       labelCount: "Automatikusan generált címkék száma",
       minValueExpression: "Minimális érték kifejezés",
       maxValueExpression: "Maximális érték kifejezés",
-      autoGenerate: "Méretezési címkék konfigurálása"
+      autoGenerate: "Méretezési címkék konfigurálása",
+      sliderType: "Csúszka típusa",
+      minRangeLength: "Minimális tartomány hossza",
+      maxRangeLength: "Maximális hatótávolság",
+      customLabels: "Egyéni címkék",
+      labelFormat: "Címke formátuma",
+      tooltipFormat: "Elemleírás formátuma"
+    },
+    file: {
+      imageHeight: "Kép magassága",
+      imageWidth: "Kép szélessége"
     },
     hideIfChoicesEmpty: "A kérdés elrejtése, ha nem tartalmaz választási lehetőségeket",
     minWidth: "Minimális szélesség (CSS által elfogadott értékekben)",
@@ -1423,7 +1435,12 @@ export var huStrings = {
       descriptionLocation: "Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint a panel címe alatt\").",
       newPanelPosition: "Az újonnan hozzáadott panel helyét határozza meg. Alapértelmezés szerint az új panelek hozzáadódnak a végéhez. Válassza a \"Tovább\" lehetőséget, ha új panelt szeretne beilleszteni az aktuális után.",
       copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó panelről, és hozzárendeli őket a következő hozzáadott dinamikus panelhez.",
-      keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen."
+      keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen.",
+      confirmDelete: "Megerősítő üzenetet indít el a panel eltávolítása előtt."
+    },
+    matrixdynamic: {
+      confirmDelete: "Megerősítő kérést indít el a sor eltávolítása előtt.",
+      detailPanelShowOnAdding: "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
     },
     copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     defaultValueExpression: "Ezzel a beállítással alapértelmezett válaszértéket rendelhet hozzá egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat - '{q1_id} + {q2_id}', logikai kifejezéseket, például \"{age} > 60\" és függvényeket: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb. A kifejezés által meghatározott érték a kezdeti alapértelmezett érték, amelyet a válaszadó kézi bevitele felülbírálhat.",
@@ -1460,8 +1477,8 @@ export var huStrings = {
       signatureAutoScaleEnabled: "Jelölje be, ha azt szeretné, hogy az aláírási terület kitöltse a kérdésmezőben rendelkezésre álló összes helyet, miközben megtartja az alapértelmezett 3:2 képarányt. Egyéni szélességi és magassági értékek beállításakor a beállítás megtartja ezeknek a méreteknek a méretarányát."
     },
     file: {
-      imageHeight: "Beállítja a kép magasságát a felmérés eredményeiben.",
-      imageWidth: "Beállítja a kép szélességét a felmérés eredményeiben.",
+      imageHeight: "Megadja a feltöltött képek megjelenítési magasságát az előnézetben és a fényképezőgéppel készített képek tényleges magasságát. Egyfájlfeltöltési módban a megjelenítési magasságot az előnézeti terület korlátozza; Több fájl feltöltési módban a miniatűr terület korlátozza.",
+      imageWidth: "Megadja a feltöltött képek megjelenítési szélességét az előnézetben és a fényképezőgéppel készített képek tényleges szélességét. Egyfájlfeltöltési módban a megjelenítési szélességet az előnézeti terület korlátozza; Több fájl feltöltési módban a miniatűr terület korlátozza.",
       allowImagesPreview: "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var huStrings = {
       requiredIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely megakadályozza a felmérés elküldését, kivéve, ha legalább egy beágyazott kérdésre van válasz.",
       showInMultipleColumns: "Ha be van jelölve, minden választási lehetőséghez külön oszlopot hoz létre.",
       colCount: "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1 értékre van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
+    },
+    slider: {
+      min: "A felhasználók által választható legalacsonyabb szám.",
+      max: "A felhasználók által választható legnagyobb szám.",
+      step: "A választható skálaértékek közötti intervallum. Például egy 5-ös lépés lehetővé teszi a felhasználók számára, hogy 0, 5, 10 stb.",
+      minRangeLength: "A felhasználó által beállítható csúszka hüvelykujjak közötti minimális távolság.",
+      maxRangeLength: "A felhasználó által beállítható csúszka hüvelykujjak közötti maximális távolság.",
+      labelCount: "Megadja, hogy hány léptékcímkét kell létrehozni. A -1 érték azt jelenti, hogy a szám kiszámítása automatikusan megtörténik a Min érték és a Max érték alapján.",
+      labelFormat: "Használja a \"{0}\" szót a tényleges érték helyőrzőjeként.",
+      customLabels: "Lehetővé teszi egyéni címkék meghatározását adott értékeken, és opcionálisan hozzájuk rendelheti a megfelelő szöveget (pl. 0 = \"Gyenge\", 100 = \"Kiváló\").",
+      tooltipFormat: "Használja a \"{0}\" szót a tényleges érték helyőrzőjeként.",
+      allowSwap: "Lehetővé teszi a felhasználók számára, hogy egyik hüvelykujjukat a másik mellett mozgassa.",
+      allowClear: "Megjelenít egy gombot, amely törli a kijelölt csúszka értékét, és nem definiált értékre állítja.",
+      minValueExpression: "Dinamikusan határozza meg a csúszka minimális értékét egy kifejezés segítségével. Támogatja az alapvető számításokat (pl. '{q1_id} + {q2_id}'), a logikai logikát (pl. '{age} > 60'), valamint az olyan függvényeket, mint 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' és még sok más.",
+      maxValueExpression: "Dinamikusan határozza meg a csúszka maximális értékét egy kifejezés segítségével. Támogatja az alapvető számításokat (pl. '{q1_id} + {q2_id}'), a logikai logikát (pl. '{age} > 60'), valamint az olyan függvényeket, mint 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' és még sok más."
     },
     isExclusive: "Kizárólagossá teszi ezt a választást. Ha egy felhasználó kiválasztja, automatikusan törli a kérdés összes többi beállításának kijelölését.",
     caseInsensitive: "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni.",
@@ -1532,7 +1564,6 @@ export var huStrings = {
     detailErrorLocation: "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
     keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja.",
     totalExpression: "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.).",
-    confirmDelete: "Elindít egy kérést, amely a sor törlésének megerősítését kéri.",
     keyName: "Ha a megadott oszlop azonos értékeket tartalmaz, a felmérés a \"Nem egyedi kulcsérték\" hibát adja vissza.",
     description: "Írjon be egy feliratot.",
     locale: "Válassza ki a nyelvet a felmérés létrehozásának megkezdéséhez. Fordítás hozzáadásához váltson új nyelvre, és fordítsa le az eredeti szöveget itt vagy a Fordítások lapon.",
@@ -1700,7 +1731,7 @@ export var huStrings = {
     detailElements: "Részletelemek",
     allowAdaptiveActions: "Adaptív műveletek engedélyezése",
     defaultRowValue: "Sor alapértelmezett értéke",
-    detailPanelShowOnAdding: "A részletek panel megjelenítése hozzáadáskor",
+    detailPanelShowOnAdding: "Új sor részleteinek automatikus kibontása",
     choicesLazyLoadEnabled: "Választási lehetőségek lusta betöltés engedélyezve",
     choicesLazyLoadPageSize: "Választási lehetőségek lusta betöltési oldalméret",
     inputFieldComponent: "Beviteli mező összetevő",
@@ -2091,9 +2122,9 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.detailPanelMode: "Detail panel location" => "A részletek panel helye"
 // pe.minRowCount: "Minimum row count" => "Sorszám minimális száma"
 // pe.maxRowCount: "Maximum row count" => "Sorszám maximális száma"
-// pe.confirmDelete: "Confirm row deletion" => "Sor törlésének megerősítése"
+// pe.confirmDelete: "Confirm row removal" => "Sor törlésének megerősítése"
 // pe.confirmDeleteText: "Confirmation message" => "Megerősítő üzenet"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Panel törlésének megerősítése"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Panel törlésének megerősítése"
 // pe.panelCount: "Initial panel count" => "Kezdeti panelszám"
 // pe.minPanelCount: "Minimum panel count" => "Panelek minimális száma"
 // pe.maxPanelCount: "Maximum panel count" => "Panelek maximális száma"
@@ -2831,7 +2862,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenet helyét egy érvénytelen bevitelű cellával kapcsolatban. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Elindít egy kérést, amely a sor törlésének megerősítését kéri."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Elindít egy kérést, amely a sor törlésének megerősítését kéri."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz."
 // pehelp.description: "Type a subtitle." => "Írjon be egy feliratot."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Válassza ki a nyelvet a felmérés létrehozásának megkezdéséhez. Fordítás hozzáadásához váltson új nyelvre, és fordítsa le az eredeti szöveget itt vagy a Fordítások lapon."
@@ -3250,3 +3281,32 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // sliderType.single: "Single-Value" => "Egyértékű"
 // sliderType.range: "Range" => "Tartomány"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Kizárólagossá teszi ezt a választást. Ha egy felhasználó kiválasztja, automatikusan törli a kérdés összes többi beállításának kijelölését."
+// ed.toolboxSearch: "Search" => "Keresés"
+// file.imageHeight: "Image height" => "Kép magassága"
+// file.imageWidth: "Image width" => "Kép szélessége"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Megadja a feltöltött képek megjelenítési magasságát az előnézetben és a fényképezőgéppel készített képek tényleges magasságát. Egyfájlfeltöltési módban a megjelenítési magasságot az előnézeti terület korlátozza; Több fájl feltöltési módban a miniatűr terület korlátozza."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Megadja a feltöltött képek megjelenítési szélességét az előnézetben és a fényképezőgéppel készített képek tényleges szélességét. Egyfájlfeltöltési módban a megjelenítési szélességet az előnézeti terület korlátozza; Több fájl feltöltési módban a miniatűr terület korlátozza."
+// slider.min: "The lowest number that users can select." => "A felhasználók által választható legalacsonyabb szám."
+// slider.max: "The highest number that users can select." => "A felhasználók által választható legnagyobb szám."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "A választható skálaértékek közötti intervallum. Például egy 5-ös lépés lehetővé teszi a felhasználók számára, hogy 0, 5, 10 stb."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "A felhasználó által beállítható csúszka hüvelykujjak közötti minimális távolság."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "A felhasználó által beállítható csúszka hüvelykujjak közötti maximális távolság."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Megadja, hogy hány léptékcímkét kell létrehozni. A -1 érték azt jelenti, hogy a szám kiszámítása automatikusan megtörténik a Min érték és a Max érték alapján."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Használja a \"{0}\" szót a tényleges érték helyőrzőjeként."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Lehetővé teszi egyéni címkék meghatározását adott értékeken, és opcionálisan hozzájuk rendelheti a megfelelő szöveget (pl. 0 = \"Gyenge\", 100 = \"Kiváló\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Használja a \"{0}\" szót a tényleges érték helyőrzőjeként."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Lehetővé teszi a felhasználók számára, hogy egyik hüvelykujjukat a másik mellett mozgassa."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Megjelenít egy gombot, amely törli a kijelölt csúszka értékét, és nem definiált értékre állítja."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamikusan határozza meg a csúszka minimális értékét egy kifejezés segítségével. Támogatja az alapvető számításokat (pl. '{q1_id} + {q2_id}'), a logikai logikát (pl. '{age} > 60'), valamint az olyan függvényeket, mint 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' és még sok más."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamikusan határozza meg a csúszka maximális értékét egy kifejezés segítségével. Támogatja az alapvető számításokat (pl. '{q1_id} + {q2_id}'), a logikai logikát (pl. '{age} > 60'), valamint az olyan függvényeket, mint 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' és még sok más."
+// slider.sliderType: "Slider type" => "Csúszka típusa"
+// slider.minRangeLength: "Min range length" => "Minimális tartomány hossza"
+// slider.maxRangeLength: "Max range length" => "Maximális hatótávolság"
+// slider.customLabels: "Custom labels" => "Egyéni címkék"
+// slider.labelFormat: "Label format" => "Címke formátuma"
+// slider.tooltipFormat: "Tooltip format" => "Elemleírás formátuma"
+// question.showTitle: "Show the title and description" => "A cím és a leírás megjelenítése"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Megerősítő üzenetet indít el a panel eltávolítása előtt."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Megerősítő kérést indít el a sor eltávolítása előtt."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Új sor részleteinek automatikus kibontása"

@@ -50,7 +50,7 @@ test("Test survey results table expand/collapse", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector(".sd-navigation__complete-btn"))
-    .expect(Selector("h3").withText("Thank you for completing the survey").visible).ok();
+    .expect(Selector(".sd-completedpage").withText("Thank you for completing the survey").visible).ok();
 
   const tableRows = Selector(".svd-test-results__table table tbody tr");
 
@@ -127,7 +127,7 @@ test("Test survey results not visible on mobile", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector(".sd-navigation__complete-btn"))
-    .expect(Selector("h3").withText("Thank you for completing the survey").visible).ok();
+    .expect(Selector(".sd-completedpage").withText("Thank you for completing the survey").visible).ok();
 
   const tableRows = Selector(".svd-test-results__table");
 
@@ -153,7 +153,7 @@ test("Test markdown is processed in result question titles", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector(".sd-navigation__complete-btn"))
-    .expect(Selector("h3").withText("Thank you for completing the survey").visible).ok();
+    .expect(Selector(".sd-completedpage").withText("Thank you for completing the survey").visible).ok();
 
   const questionTitleProcessed = Selector(".svd-test-results__table td .sv-string-viewer").withText("Markdown converted text");
   await t.expect(questionTitleProcessed.visible).ok();

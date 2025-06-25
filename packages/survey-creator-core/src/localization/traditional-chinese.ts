@@ -129,6 +129,7 @@ var traditionalChineseTranslation = {
     generateReadableJSON: "生成易讀的 JSON",
     toolbox: "工具箱",
     "property-grid": "性能",
+    toolboxSearch: "搜索",
     toolboxFilteredTextPlaceholder: "鍵入以搜尋...",
     toolboxNoResultsFound: "未找到結果",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
@@ -349,6 +350,7 @@ var traditionalChineseTranslation = {
       name: "問題名稱",
       title: "問題標題",
       description: "問題描述",
+      showTitle: "顯示標題和描述",
       visibleIf: "如果出現以下情況，請使問題可見",
       requiredIf: "如果出現以下情況，則將問題設為必填項",
       page: "父頁面",
@@ -754,7 +756,17 @@ var traditionalChineseTranslation = {
       labelCount: "自動生成的標籤數量",
       minValueExpression: "最小值表達式",
       maxValueExpression: "最大值表達式",
-      autoGenerate: "刻度標籤配置"
+      autoGenerate: "刻度標籤配置",
+      sliderType: "滑塊類型",
+      minRangeLength: "最小範圍長度",
+      maxRangeLength: "最大範圍長度",
+      customLabels: "自訂標籤",
+      labelFormat: "標籤格式",
+      tooltipFormat: "工具提示格式"
+    },
+    file: {
+      imageHeight: "圖像高度",
+      imageWidth: "圖像寬度"
     },
     hideIfChoicesEmpty: "如果問題不包含任何選項，則隱藏問題",
     minWidth: "最小寬度（以 CSS 接受的值為單位）",
@@ -1423,7 +1435,12 @@ var traditionalChineseTranslation = {
       descriptionLocation: "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。",
       newPanelPosition: "定義新添加的面板的位置。默認情況下，新面板將添加到末尾。選擇「下一步」以在當前面板之後插入新面板。",
       copyDefaultValueFromLastEntry: "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。",
-      keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。"
+      keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。",
+      confirmDelete: "在刪除面板之前觸發確認提示。"
+    },
+    matrixdynamic: {
+      confirmDelete: "在刪除行之前觸發確認提示。",
+      detailPanelShowOnAdding: "在向矩陣添加新行時自動展開詳細資訊部分。"
     },
     copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
     defaultValueExpression: "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。",
@@ -1460,8 +1477,8 @@ var traditionalChineseTranslation = {
       signatureAutoScaleEnabled: "選擇是否希望簽名區域填充問題框中的所有可用空間，同時保持預設的 3：2 縱橫比。設置自定義寬度和高度值后，該設置將保留這些尺寸的縱橫比。"
     },
     file: {
-      imageHeight: "調整調查結果中圖像的高度。",
-      imageWidth: "調整調查結果中圖像的寬度。",
+      imageHeight: "指定預覽中上傳圖像的顯示高度以及使用相機拍攝的圖像的實際高度。在單個檔上傳模式下，顯示高度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
+      imageWidth: "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
       allowImagesPreview: "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
     },
     image: {
@@ -1493,6 +1510,21 @@ var traditionalChineseTranslation = {
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
       colCount: "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
+    },
+    slider: {
+      min: "用戶可以選擇的最小數位。",
+      max: "用戶可以選擇的最大數位。",
+      step: "可選刻度值之間的間隔。例如，步長 5 將允許使用者選擇 0、5、10 等。",
+      minRangeLength: "用戶可以設置的滑塊塊之間的最小距離。",
+      maxRangeLength: "用戶可以設置滑塊滑塊之間的最大距離。",
+      labelCount: "指定要生成的刻度標籤數量。值 -1 表示該數位是根據 最小值 和 最大值 自動計算的。",
+      labelFormat: "使用 『{0}』 作為實際值的佔位元。",
+      customLabels: "允許您定義特定值的自定義標籤，並可選擇為其分配相應的文本（例如，0 = “差”，100 = “優秀”）。",
+      tooltipFormat: "使用 『{0}』 作為實際值的佔位元。",
+      allowSwap: "允許使用者將一個滑塊移過另一個滑塊。",
+      allowClear: "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。",
+      minValueExpression: "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。",
+      maxValueExpression: "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
     },
     isExclusive: "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。",
     caseInsensitive: "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。",
@@ -1532,7 +1564,6 @@ var traditionalChineseTranslation = {
     detailErrorLocation: "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。",
     keyDuplicationError: "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。",
     totalExpression: "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
-    confirmDelete: "觸發提示，要求確認刪除行。",
     keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
     description: "鍵入副標題。",
     locale: "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。",
@@ -1700,7 +1731,7 @@ var traditionalChineseTranslation = {
     detailElements: "細節元素",
     allowAdaptiveActions: "允許自適應操作",
     defaultRowValue: "預設行值",
-    detailPanelShowOnAdding: "添加時顯示的詳細資訊面板",
+    detailPanelShowOnAdding: "自動展開新行詳細資訊",
     choicesLazyLoadEnabled: "選項延遲載入已啟用",
     choicesLazyLoadPageSize: "選擇延遲載入頁面大小",
     inputFieldComponent: "輸入欄位元件",
@@ -2150,9 +2181,9 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.detailPanelMode: "Detail panel location" => "詳細資訊面板位置"
 // pe.minRowCount: "Minimum row count" => "最小行數"
 // pe.maxRowCount: "Maximum row count" => "最大行數"
-// pe.confirmDelete: "Confirm row deletion" => "確認刪除行"
+// pe.confirmDelete: "Confirm row removal" => "確認刪除行"
 // pe.confirmDeleteText: "Confirmation message" => "確認消息"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "確認面板刪除"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "確認面板刪除"
 // pe.panelCount: "Initial panel count" => "初始面板計數"
 // pe.minPanelCount: "Minimum panel count" => "最小面板數"
 // pe.maxPanelCount: "Maximum panel count" => "最大面板數"
@@ -2951,7 +2982,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置與輸入無效的儲存格相關的錯誤訊息的位置。“繼承”選項應用“錯誤消息對齊”屬性中的設置。"
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。"
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "觸發提示，要求確認刪除行。"
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "觸發提示，要求確認刪除行。"
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "複製最後一行的答案，並將其分配給下一個添加的動態行。"
 // pehelp.description: "Type a subtitle." => "鍵入副標題。"
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。"
@@ -3369,3 +3400,32 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // sliderType.single: "Single-Value" => "單值"
 // sliderType.range: "Range" => "範圍"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。"
+// ed.toolboxSearch: "Search" => "搜索"
+// file.imageHeight: "Image height" => "圖像高度"
+// file.imageWidth: "Image width" => "圖像寬度"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定預覽中上傳圖像的顯示高度以及使用相機拍攝的圖像的實際高度。在單個檔上傳模式下，顯示高度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。"
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。"
+// slider.min: "The lowest number that users can select." => "用戶可以選擇的最小數位。"
+// slider.max: "The highest number that users can select." => "用戶可以選擇的最大數位。"
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "可選刻度值之間的間隔。例如，步長 5 將允許使用者選擇 0、5、10 等。"
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "用戶可以設置的滑塊塊之間的最小距離。"
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "用戶可以設置滑塊滑塊之間的最大距離。"
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "指定要生成的刻度標籤數量。值 -1 表示該數位是根據 最小值 和 最大值 自動計算的。"
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "使用 『{0}』 作為實際值的佔位元。"
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "允許您定義特定值的自定義標籤，並可選擇為其分配相應的文本（例如，0 = “差”，100 = “優秀”）。"
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "使用 『{0}』 作為實際值的佔位元。"
+// slider.allowSwap: "Allows users to move one thumb past the other." => "允許使用者將一個滑塊移過另一個滑塊。"
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。"
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
+// slider.sliderType: "Slider type" => "滑塊類型"
+// slider.minRangeLength: "Min range length" => "最小範圍長度"
+// slider.maxRangeLength: "Max range length" => "最大範圍長度"
+// slider.customLabels: "Custom labels" => "自訂標籤"
+// slider.labelFormat: "Label format" => "標籤格式"
+// slider.tooltipFormat: "Tooltip format" => "工具提示格式"
+// question.showTitle: "Show the title and description" => "顯示標題和描述"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "在刪除面板之前觸發確認提示。"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "在刪除行之前觸發確認提示。"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "在向矩陣添加新行時自動展開詳細資訊部分。"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "自動展開新行詳細資訊"

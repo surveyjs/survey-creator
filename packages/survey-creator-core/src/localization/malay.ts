@@ -129,6 +129,7 @@ export var msStrings = {
     generateReadableJSON: "Jana JSON yang Boleh Dibaca",
     toolbox: "Kotak Alat",
     "property-grid": "Ciri",
+    toolboxSearch: "Carian",
     toolboxFilteredTextPlaceholder: "Taip untuk mencari...",
     toolboxNoResultsFound: "Tiada keputusan ditemui",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
@@ -349,6 +350,7 @@ export var msStrings = {
       name: "Nama soalan",
       title: "Tajuk soalan",
       description: "Penerangan soalan",
+      showTitle: "Tunjukkan tajuk dan perihalan",
       visibleIf: "Jadikan soalan kelihatan jika",
       requiredIf: "Jadikan soalan diperlukan jika",
       page: "Halaman induk",
@@ -754,7 +756,17 @@ export var msStrings = {
       labelCount: "Bilangan label yang dijana secara automatik",
       minValueExpression: "Ungkapan nilai min",
       maxValueExpression: "Ungkapan nilai maksimum",
-      autoGenerate: "Konfigurasi label skala"
+      autoGenerate: "Konfigurasi label skala",
+      sliderType: "Jenis gelangsar",
+      minRangeLength: "Panjang julat minimum",
+      maxRangeLength: "Panjang julat maksimum",
+      customLabels: "Label tersuai",
+      labelFormat: "Format label",
+      tooltipFormat: "Format petua alat"
+    },
+    file: {
+      imageHeight: "Ketinggian imej",
+      imageWidth: "Lebar imej"
     },
     hideIfChoicesEmpty: "Sembunyikan soalan jika ia tidak mengandungi pilihan",
     minWidth: "Lebar minimum (dalam nilai diterima CSS)",
@@ -1423,7 +1435,12 @@ export var msStrings = {
       descriptionLocation: "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai).",
       newPanelPosition: "Mentakrifkan kedudukan panel yang baru ditambah. Secara lalai, panel baru ditambahkan ke hujungnya. Pilih \"Seterusnya\" untuk memasukkan panel baru selepas yang semasa.",
       copyDefaultValueFromLastEntry: "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya.",
-      keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
+      keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel.",
+      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar baris.",
+      detailPanelShowOnAdding: "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
     },
     copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     defaultValueExpression: "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden.",
@@ -1460,8 +1477,8 @@ export var msStrings = {
       signatureAutoScaleEnabled: "Pilih jika anda inginkan kawasan tandatangan mengisi semua ruang yang tersedia dalam kotak soalan sambil mengekalkan nisbah aspek 3:2 lalai. Apabila nilai lebar dan ketinggian tersuai ditetapkan, seting akan mengekalkan nisbah aspek dimensi ini."
     },
     file: {
-      imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
-      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan.",
+      imageHeight: "Menentukan ketinggian paparan imej yang dimuat naik dalam pratonton dan ketinggian sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, ketinggian paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil.",
+      imageWidth: "Menentukan lebar paparan imej yang dimuat naik dalam pratonton dan lebar sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, lebar paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil.",
       allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var msStrings = {
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
       colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
+    },
+    slider: {
+      min: "Nombor terendah yang boleh dipilih oleh pengguna.",
+      max: "Nombor tertinggi yang boleh dipilih oleh pengguna.",
+      step: "Selang antara nilai skala yang boleh dipilih. Sebagai contoh, langkah 5 akan membolehkan pengguna memilih 0, 5, 10, dsb.",
+      minRangeLength: "Jarak minimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna.",
+      maxRangeLength: "Jarak maksimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna.",
+      labelCount: "Menentukan bilangan label skala untuk dijana. Nilai -1 bermakna nombor dikira secara automatik berdasarkan nilai Min dan nilai Maks.",
+      labelFormat: "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar.",
+      customLabels: "Membolehkan anda mentakrifkan label tersuai pada nilai tertentu dan secara pilihan menetapkan teks yang sepadan kepada mereka (cth., 0 = \"Miskin\", 100 = \"Cemerlang\").",
+      tooltipFormat: "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar.",
+      allowSwap: "Membolehkan pengguna menggerakkan satu ibu jari melepasi yang lain.",
+      allowClear: "Memaparkan butang yang mengosongkan nilai gelangsar yang dipilih dan menetapkannya kepada tidak ditentukan.",
+      minValueExpression: "Mentakrifkan nilai minimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi.",
+      maxValueExpression: "Mentakrifkan nilai maksimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
     },
     isExclusive: "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik.",
     caseInsensitive: "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara.",
@@ -1532,7 +1564,6 @@ export var msStrings = {
     detailErrorLocation: "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\".",
     keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
     totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
-    confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris.",
     keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
     description: "Taipkan sari kata.",
     locale: "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan.",
@@ -1700,7 +1731,7 @@ export var msStrings = {
     detailElements: "Unsur terperinci",
     allowAdaptiveActions: "Benarkan tindakan penyesuaian",
     defaultRowValue: "Nilai baris lalai",
-    detailPanelShowOnAdding: "Butiran panel tunjukkan pada penambahan",
+    detailPanelShowOnAdding: "Kembangkan butiran baris baharu secara automatik",
     choicesLazyLoadEnabled: "Pilihan beban malas didayakan",
     choicesLazyLoadPageSize: "Pilihan malas memuatkan saiz halaman",
     inputFieldComponent: "Komponen medan input",
@@ -1973,9 +2004,9 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.detailPanelMode: "Detail panel location" => "Lokasi panel terperinci"
 // pe.minRowCount: "Minimum row count" => "Kiraan baris minimum"
 // pe.maxRowCount: "Maximum row count" => "Kiraan baris maksimum"
-// pe.confirmDelete: "Confirm row deletion" => "Sahkan pemadaman baris"
+// pe.confirmDelete: "Confirm row removal" => "Sahkan pemadaman baris"
 // pe.confirmDeleteText: "Confirmation message" => "Mesej pengesahan"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Sahkan penghapusan panel"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Sahkan penghapusan panel"
 // pe.panelCount: "Initial panel count" => "Kiraan panel awal"
 // pe.minPanelCount: "Minimum panel count" => "Kiraan panel minimum"
 // pe.maxPanelCount: "Maximum panel count" => "Kiraan panel maksimum"
@@ -2634,7 +2665,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengesetkan lokasi mesej ralat berhubung dengan sel dengan input tidak sah. Opsyen \"Warisan\" menggunakan seting daripada sifat \"Penjajaran mesej ralat\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya."
 // pehelp.description: "Type a subtitle." => "Taipkan sari kata."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan."
@@ -3053,3 +3084,32 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // sliderType.single: "Single-Value" => "Nilai Tunggal"
 // sliderType.range: "Range" => "Pelbagai"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik."
+// ed.toolboxSearch: "Search" => "Carian"
+// file.imageHeight: "Image height" => "Ketinggian imej"
+// file.imageWidth: "Image width" => "Lebar imej"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Menentukan ketinggian paparan imej yang dimuat naik dalam pratonton dan ketinggian sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, ketinggian paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Menentukan lebar paparan imej yang dimuat naik dalam pratonton dan lebar sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, lebar paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil."
+// slider.min: "The lowest number that users can select." => "Nombor terendah yang boleh dipilih oleh pengguna."
+// slider.max: "The highest number that users can select." => "Nombor tertinggi yang boleh dipilih oleh pengguna."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Selang antara nilai skala yang boleh dipilih. Sebagai contoh, langkah 5 akan membolehkan pengguna memilih 0, 5, 10, dsb."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Jarak minimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Jarak maksimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Menentukan bilangan label skala untuk dijana. Nilai -1 bermakna nombor dikira secara automatik berdasarkan nilai Min dan nilai Maks."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Membolehkan anda mentakrifkan label tersuai pada nilai tertentu dan secara pilihan menetapkan teks yang sepadan kepada mereka (cth., 0 = \"Miskin\", 100 = \"Cemerlang\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Membolehkan pengguna menggerakkan satu ibu jari melepasi yang lain."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Memaparkan butang yang mengosongkan nilai gelangsar yang dipilih dan menetapkannya kepada tidak ditentukan."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Mentakrifkan nilai minimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Mentakrifkan nilai maksimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
+// slider.sliderType: "Slider type" => "Jenis gelangsar"
+// slider.minRangeLength: "Min range length" => "Panjang julat minimum"
+// slider.maxRangeLength: "Max range length" => "Panjang julat maksimum"
+// slider.customLabels: "Custom labels" => "Label tersuai"
+// slider.labelFormat: "Label format" => "Format label"
+// slider.tooltipFormat: "Tooltip format" => "Format petua alat"
+// question.showTitle: "Show the title and description" => "Tunjukkan tajuk dan perihalan"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Mencetuskan gesaan pengesahan sebelum mengalih keluar panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Mencetuskan gesaan pengesahan sebelum mengalih keluar baris."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Kembangkan butiran baris baharu secara automatik"

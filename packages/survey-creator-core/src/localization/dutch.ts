@@ -129,6 +129,7 @@ export var nlStrings = {
     generateReadableJSON: "Genereer leesbare JSON",
     toolbox: "Gereedschap",
     "property-grid": "Eigenschappen",
+    toolboxSearch: "Zoeken",
     toolboxFilteredTextPlaceholder: "Typ om te zoeken...",
     toolboxNoResultsFound: "Geen resultaten gevonden",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
@@ -349,6 +350,7 @@ export var nlStrings = {
       name: "Naam van de vraag",
       title: "Titel van de vraag",
       description: "Beschrijving van de vraag",
+      showTitle: "Toon de titel en beschrijving",
       visibleIf: "Maak de vraag zichtbaar als",
       requiredIf: "Maak de vraag verplicht als",
       page: "Bovenliggende pagina",
@@ -754,7 +756,17 @@ export var nlStrings = {
       labelCount: "Aantal automatisch gegenereerde labels",
       minValueExpression: "Minimale waarde-expressie",
       maxValueExpression: "Maximale waarde expressie",
-      autoGenerate: "Configuratie van schaallabels"
+      autoGenerate: "Configuratie van schaallabels",
+      sliderType: "Type schuifregelaar",
+      minRangeLength: "Min. bereik lengte",
+      maxRangeLength: "Maximale bereiklengte",
+      customLabels: "Aangepaste labels",
+      labelFormat: "Etiket formaat",
+      tooltipFormat: "Tooltip formaat"
+    },
+    file: {
+      imageHeight: "Hoogte afbeelding",
+      imageWidth: "Breedte afbeelding"
     },
     hideIfChoicesEmpty: "Verberg de vraag als deze geen keuzes bevat",
     minWidth: "Minimale breedte (in css-geaccepteerde waarden)",
@@ -1423,7 +1435,12 @@ export var nlStrings = {
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
       newPanelPosition: "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige.",
       copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
-      keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
+      keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag.",
+      confirmDelete: "Activeert een bevestigingsprompt voordat een paneel wordt verwijderd."
+    },
+    matrixdynamic: {
+      confirmDelete: "Activeert een bevestigingsprompt voordat een rij wordt verwijderd.",
+      detailPanelShowOnAdding: "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
     },
     copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     defaultValueExpression: "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent.",
@@ -1460,8 +1477,8 @@ export var nlStrings = {
       signatureAutoScaleEnabled: "Selecteer of u wilt dat het handtekeninggebied alle beschikbare ruimte in het vraagvak vult met behoud van de standaardverhouding van 3:2. Wanneer aangepaste breedte- en hoogtewaarden zijn ingesteld, blijft de hoogte-breedteverhouding van deze afmetingen behouden."
     },
     file: {
-      imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
-      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan.",
+      imageHeight: "Hiermee geeft u de weergavehoogte op van geüploade afbeeldingen in het voorbeeld en de werkelijke hoogte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavehoogte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied.",
+      imageWidth: "Hiermee geeft u de weergavebreedte op van geüploade afbeeldingen in het voorbeeld en de werkelijke breedte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavebreedte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied.",
       allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var nlStrings = {
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
       colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
+    },
+    slider: {
+      min: "Het laagste getal dat gebruikers kunnen selecteren.",
+      max: "Het hoogste aantal dat gebruikers kunnen selecteren.",
+      step: "Het interval tussen selecteerbare schaalwaarden. Met een stap van 5 kunnen gebruikers bijvoorbeeld 0, 5, 10, enz. selecteren.",
+      minRangeLength: "De minimale afstand tussen de schuifknoppen die een gebruiker kan instellen.",
+      maxRangeLength: "De maximale afstand tussen de schuifknoppen die een gebruiker kan instellen.",
+      labelCount: "Geeft aan hoeveel schaallabels moeten worden gegenereerd. Een waarde van -1 betekent dat het getal automatisch wordt berekend op basis van de Min-waarde en de Max-waarde.",
+      labelFormat: "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde.",
+      customLabels: "Hiermee kunt u aangepaste labels met specifieke waarden definiëren en er optioneel overeenkomstige tekst aan toewijzen (bijv. 0 = \"Slecht\", 100 = \"Uitstekend\").",
+      tooltipFormat: "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde.",
+      allowSwap: "Hiermee kunnen gebruikers de ene duim langs de andere bewegen.",
+      allowClear: "Geeft een knop weer waarmee de geselecteerde schuifregelaarwaarde wordt gewist en op niet-gedefinieerd wordt gezet.",
+      minValueExpression: "Definieert de minimumwaarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer.",
+      maxValueExpression: "Definieert de maximale waarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
     },
     isExclusive: "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd.",
     caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
@@ -1532,7 +1564,6 @@ export var nlStrings = {
     detailErrorLocation: "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe.",
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
-    confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
     keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
     description: "Typ een ondertitel.",
     locale: "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen.",
@@ -1700,7 +1731,7 @@ export var nlStrings = {
     detailElements: "Detailelementen",
     allowAdaptiveActions: "Adaptieve acties toestaan",
     defaultRowValue: "Standaard rijwaarde",
-    detailPanelShowOnAdding: "Detailpaneel weergeven bij toevoegen",
+    detailPanelShowOnAdding: "Nieuwe rijdetails automatisch uitvouwen",
     choicesLazyLoadEnabled: "Keuzes lazy load ingeschakeld",
     choicesLazyLoadPageSize: "Keuzes lui laad paginaformaat",
     inputFieldComponent: "Component invoerveld",
@@ -1971,9 +2002,9 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.detailPanelMode: "Detail panel location" => "Locatie van het detailpaneel"
 // pe.minRowCount: "Minimum row count" => "Minimaal aantal rijen"
 // pe.maxRowCount: "Maximum row count" => "Maximaal aantal rijen"
-// pe.confirmDelete: "Confirm row deletion" => "Rijverwijdering bevestigen"
+// pe.confirmDelete: "Confirm row removal" => "Rijverwijdering bevestigen"
 // pe.confirmDeleteText: "Confirmation message" => "Bevestigingsbericht"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Het verwijderen van het deelvenster bevestigen"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Het verwijderen van het deelvenster bevestigen"
 // pe.panelCount: "Initial panel count" => "Initiële paneeltelling"
 // pe.minPanelCount: "Minimum panel count" => "Minimaal aantal panelen"
 // pe.maxPanelCount: "Maximum panel count" => "Maximaal aantal panelen"
@@ -2657,7 +2688,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie van een foutbericht in ten opzichte van een cel met ongeldige invoer. Met de optie 'Overerven' wordt de instelling van de eigenschap 'Uitlijning van foutberichten' toegepast."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij."
 // pehelp.description: "Type a subtitle." => "Typ een ondertitel."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen."
@@ -3077,3 +3108,32 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // sliderType.single: "Single-Value" => "Enkele waarde"
 // sliderType.range: "Range" => "Bereik"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd."
+// ed.toolboxSearch: "Search" => "Zoeken"
+// file.imageHeight: "Image height" => "Hoogte afbeelding"
+// file.imageWidth: "Image width" => "Breedte afbeelding"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Hiermee geeft u de weergavehoogte op van geüploade afbeeldingen in het voorbeeld en de werkelijke hoogte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavehoogte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Hiermee geeft u de weergavebreedte op van geüploade afbeeldingen in het voorbeeld en de werkelijke breedte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavebreedte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied."
+// slider.min: "The lowest number that users can select." => "Het laagste getal dat gebruikers kunnen selecteren."
+// slider.max: "The highest number that users can select." => "Het hoogste aantal dat gebruikers kunnen selecteren."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Het interval tussen selecteerbare schaalwaarden. Met een stap van 5 kunnen gebruikers bijvoorbeeld 0, 5, 10, enz. selecteren."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "De minimale afstand tussen de schuifknoppen die een gebruiker kan instellen."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "De maximale afstand tussen de schuifknoppen die een gebruiker kan instellen."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Geeft aan hoeveel schaallabels moeten worden gegenereerd. Een waarde van -1 betekent dat het getal automatisch wordt berekend op basis van de Min-waarde en de Max-waarde."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Hiermee kunt u aangepaste labels met specifieke waarden definiëren en er optioneel overeenkomstige tekst aan toewijzen (bijv. 0 = \"Slecht\", 100 = \"Uitstekend\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Hiermee kunnen gebruikers de ene duim langs de andere bewegen."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Geeft een knop weer waarmee de geselecteerde schuifregelaarwaarde wordt gewist en op niet-gedefinieerd wordt gezet."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definieert de minimumwaarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definieert de maximale waarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
+// slider.sliderType: "Slider type" => "Type schuifregelaar"
+// slider.minRangeLength: "Min range length" => "Min. bereik lengte"
+// slider.maxRangeLength: "Max range length" => "Maximale bereiklengte"
+// slider.customLabels: "Custom labels" => "Aangepaste labels"
+// slider.labelFormat: "Label format" => "Etiket formaat"
+// slider.tooltipFormat: "Tooltip format" => "Tooltip formaat"
+// question.showTitle: "Show the title and description" => "Toon de titel en beschrijving"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Activeert een bevestigingsprompt voordat een paneel wordt verwijderd."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Activeert een bevestigingsprompt voordat een rij wordt verwijderd."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Nieuwe rijdetails automatisch uitvouwen"

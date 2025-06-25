@@ -129,6 +129,7 @@ export const thStrings = {
     generateReadableJSON: "สร้าง JSON ที่อ่านง่าย",
     toolbox: "กล่องเครื่องมือ",
     "property-grid": "คุณสมบัติ",
+    toolboxSearch: "ค้น",
     toolboxFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
     toolboxNoResultsFound: "ไม่พบผลลัพธ์",
     propertyGridFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
@@ -349,6 +350,7 @@ export const thStrings = {
       name: "ชื่อคำถาม",
       title: "ชื่อคำถาม",
       description: "คำอธิบายคำถาม",
+      showTitle: "แสดงชื่อและคําอธิบาย",
       visibleIf: "ทำให้คำถามมองเห็นได้ถ้า",
       requiredIf: "ทำให้คำถามจำเป็นถ้า",
       page: "ย้ายคำถามไปที่หน้า",
@@ -754,7 +756,17 @@ export const thStrings = {
       labelCount: "จํานวนป้ายกํากับที่สร้างขึ้นโดยอัตโนมัติ",
       minValueExpression: "นิพจน์ค่าต่ําสุด",
       maxValueExpression: "นิพจน์ค่าสูงสุด",
-      autoGenerate: "การกําหนดค่าป้ายชื่อมาตราส่วน"
+      autoGenerate: "การกําหนดค่าป้ายชื่อมาตราส่วน",
+      sliderType: "ประเภทตัวเลื่อน",
+      minRangeLength: "ความยาวช่วงต่ําสุด",
+      maxRangeLength: "ความยาวช่วงสูงสุด",
+      customLabels: "ป้ายกํากับที่กําหนดเอง",
+      labelFormat: "รูปแบบฉลาก",
+      tooltipFormat: "รูปแบบคําแนะนําเครื่องมือ"
+    },
+    file: {
+      imageHeight: "ความสูงของภาพ",
+      imageWidth: "ความกว้างของภาพ"
     },
     hideIfChoicesEmpty: "ซ่อนคำถามหากไม่มีตัวเลือก",
     minWidth: "ความกว้างขั้นต่ำ",
@@ -1423,7 +1435,12 @@ export const thStrings = {
       descriptionLocation: "ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับหน้า (ถ้ามี) หรือการตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ใต้ชื่อแผง\")",
       newPanelPosition: "กำหนดตำแหน่งของแผงที่เพิ่มใหม่ โดยค่าเริ่มต้นแผงใหม่จะถูกเพิ่มไปที่ท้าย เลือก \"ถัดไป\" เพื่อแทรกแผงใหม่หลังจากแผงปัจจุบัน",
       copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแผงสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแผงไดนามิกถัดไป",
-      keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง"
+      keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+    },
+    matrixdynamic: {
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว",
+      detailPanelShowOnAdding: "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
     },
     copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     defaultValueExpression: "การตั้งค่านี้ช่วยให้คุณตั้งค่าคำตอบเริ่มต้นตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน {q1_id} + {q2_id}, นิพจน์บูลีน เช่น {age} > 60, และฟังก์ชัน: iif(), today(), age(), min(), max(), avg() เป็นต้น ค่าที่กำหนดโดยนิพจน์นี้จะเป็นค่าเริ่มต้นที่สามารถถูกแทนที่ได้โดยการป้อนของผู้ตอบ",
@@ -1460,8 +1477,8 @@ export const thStrings = {
       signatureAutoScaleEnabled: "เลือกถ้าคุณต้องการให้พื้นที่ลายเซ็นเติมพื้นที่ทั้งหมดในกล่องคำถามขณะที่รักษาสัดส่วน 3:2 เมื่อกำหนดค่าความกว้างและความสูงที่กำหนดเองแล้ว การตั้งค่านี้จะรักษาสัดส่วนของขนาดนี้"
     },
     file: {
-      imageHeight: "ปรับความสูงของภาพในผลลัพธ์แบบสำรวจ",
-      imageWidth: "ปรับความกว้างของภาพในผลลัพธ์แบบสำรวจ",
+      imageHeight: "ระบุความสูงที่แสดงของภาพที่อัปโหลดในการแสดงตัวอย่างและความสูงจริงของภาพที่ถ่ายด้วยกล้อง ในโหมดอัปโหลดไฟล์เดียว ความสูงของการแสดงผลจะถูกจํากัดโดยพื้นที่แสดงตัวอย่าง ในโหมดอัปโหลดไฟล์หลายไฟล์ จะถูกจํากัดด้วยพื้นที่ภาพขนาดย่อ",
+      imageWidth: "ระบุความกว้างที่แสดงของภาพที่อัปโหลดในการแสดงตัวอย่างและความกว้างจริงของภาพที่ถ่ายด้วยกล้อง ในโหมดอัปโหลดไฟล์เดียว ความกว้างของการแสดงผลจะถูกจํากัดโดยพื้นที่แสดงตัวอย่าง ในโหมดอัปโหลดไฟล์หลายไฟล์ จะถูกจํากัดด้วยพื้นที่ภาพขนาดย่อ",
       allowImagesPreview: "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
     },
     image: {
@@ -1493,6 +1510,21 @@ export const thStrings = {
       requiredIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่ป้องกันการส่งแบบสำรวจถ้าไม่มีคำถามที่ตอบแล้ว",
       showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
       colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
+    },
+    slider: {
+      min: "จํานวนต่ําสุดที่ผู้ใช้สามารถเลือกได้",
+      max: "จํานวนสูงสุดที่ผู้ใช้สามารถเลือกได้",
+      step: "ช่วงเวลาระหว่างค่ามาตราส่วนที่เลือกได้ ตัวอย่างเช่น ขั้นตอน 5 จะอนุญาตให้ผู้ใช้เลือก 0, 5, 10 เป็นต้น",
+      minRangeLength: "ระยะห่างขั้นต่ําระหว่างนิ้วหัวแม่มือของแถบเลื่อนที่ผู้ใช้สามารถตั้งค่าได้",
+      maxRangeLength: "ระยะห่างสูงสุดระหว่างนิ้วหัวแม่มือของแถบเลื่อนที่ผู้ใช้สามารถตั้งค่าได้",
+      labelCount: "ระบุจํานวนป้ายชื่อมาตราส่วนที่จะสร้าง ค่า -1 หมายความว่าตัวเลขจะถูกคํานวณโดยอัตโนมัติตามค่าต่ําสุดและค่าสูงสุด",
+      labelFormat: "ใช้ \"{0}\" เป็นตัวยึดสําหรับค่าจริง",
+      customLabels: "ให้คุณกําหนดป้ายกํากับที่กําหนดเองตามค่าที่เฉพาะเจาะจงและเลือกกําหนดข้อความที่สอดคล้องกัน (เช่น 0 = \"แย่\", 100 = \"ยอดเยี่ยม\")",
+      tooltipFormat: "ใช้ \"{0}\" เป็นต��วยึดสําหรับค่าจริง",
+      allowSwap: "อนุญาตให้ผู้ใช้เลื่อนนิ้วหัวแม่มือข้างหนึ่งผ่านอีกนิ้วหนึ่ง",
+      allowClear: "แสดงปุ่มที่ล้างค่าแถบเลื่อนที่เลือกและตั้งค่าเป็น undefined",
+      minValueExpression: "กําหนดค่าต่ําสุดของแถบเลื่อนแบบไดนามิกโดยใช้นิพจน์ รองรับการคํานวณพื้นฐาน (เช่น '{q1_id} + {q2_id}') ตรรกะบูลีน (เช่น '{age} > 60') และฟังก์ชันต่างๆ เช่น 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' และอื่นๆ",
+      maxValueExpression: "กําหนดค่าสูงสุดของแถบเลื่อนแบบไดนามิกโดยใช้นิพจน์ รองรับการคํานวณพื้นฐาน (เช่น '{q1_id} + {q2_id}') ตรรกะบูลีน (เช่น '{age} > 60') และฟังก์ชันต่างๆ เช่น 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' และอื่นๆ"
     },
     isExclusive: "ทําให้ตัวเลือกนี้พิเศษ เมื่อเลือกโดยผู้ใช้ ระบบจะยกเลิกการเลือกตัวเลือกอื่นๆ ทั้งหมดในคําถามโดยอัตโนมัติ",
     caseInsensitive: "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่",
@@ -1532,7 +1564,6 @@ export const thStrings = {
     detailErrorLocation: "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\"",
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
-    confirmDelete: "เรียกใช้งานพร้อมท์เพื่อยืนยันการลบแถว",
     keyName: "อ้างอิง ID คอลัมน์เพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันสำหรับแต่ละคำถามในคอลัมน์ที่ระบุ",
     description: "พิมพ์คำบรรยาย",
     locale: "เลือกภาษาสำหรับการสร้างแบบสำรวจของคุณ ในการเพิ่มการแปล สลับไปยังภาษาใหม่และแปลข้อความดั้งเดิมที่นี่หรือในแท็บการแปล",
@@ -1700,7 +1731,7 @@ export const thStrings = {
     detailElements: "องค์ประกอบรายละเอียด",
     allowAdaptiveActions: "อนุญาตการดำเนินการที่ปรับตัวได้",
     defaultRowValue: "ค่าเริ่มต้นของแถว",
-    detailPanelShowOnAdding: "แสดงแผงรายละเอียดเมื่อเพิ่ม",
+    detailPanelShowOnAdding: "ขยายรายละเอียดแถวใหม่โดยอัตโนมัติ",
     choicesLazyLoadEnabled: "เปิดใช้งานการโหลดตัวเลือกอย่างขี้เกียจ",
     choicesLazyLoadPageSize: "ขนาดหน้าการโหลดตัวเลือกขี้เกียจ",
     inputFieldComponent: "ส่วนประกอบช่องป้อนข้อมูล",
@@ -2039,3 +2070,32 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // sliderType.single: "Single-Value" => "ค่าเดียว"
 // sliderType.range: "Range" => "เทือก"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "ทําให้ตัวเลือกนี้พิเศษ เมื่อเลือกโดยผู้ใช้ ระบบจะยกเลิกการเลือกตัวเลือกอื่นๆ ทั้งหมดในคําถามโดยอัตโนมัติ"
+// ed.toolboxSearch: "Search" => "ค้น"
+// file.imageHeight: "Image height" => "ความสูงของภาพ"
+// file.imageWidth: "Image width" => "ความกว้างของภาพ"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "ระบุความสูงที่แสดงของภาพที่อัปโหลดในการแสดงตัวอย่างและความสูงจริงของภาพที่ถ่ายด้วยกล้อง ในโหมดอัปโหลดไฟล์เดียว ความสูงของการแสดงผลจะถูกจํากัดโดยพื้นที่แสดงตัวอย่าง ในโหมดอัปโหลดไฟล์หลายไฟล์ จะถูกจํากัดด้วยพื้นที่ภาพขนาดย่อ"
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "ระบุความกว้างที่แสดงของภาพที่อัปโหลดในการแสดงตัวอย่างและความกว้างจริงของภาพที่ถ่ายด้วยกล้อง ในโหมดอัปโหลดไฟล์เดียว ความกว้างของการแสดงผลจะถูกจํากัดโดยพื้นที่แสดงตัวอย่าง ในโหมดอัปโหลดไฟล์หลายไฟล์ จะถูกจํากัดด้วยพื้นที่ภาพขนาดย่อ"
+// slider.min: "The lowest number that users can select." => "จํานวนต่ําสุดที่ผู้ใช้สามารถเลือกได้"
+// slider.max: "The highest number that users can select." => "จํานวนสูงสุดที่ผู้ใช้สามารถเลือกได้"
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "ช่วงเวลาระหว่างค่ามาตราส่วนที่เลือกได้ ตัวอย่างเช่น ขั้นตอน 5 จะอนุญาตให้ผู้ใช้เลือก 0, 5, 10 เป็นต้น"
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "ระยะห่างขั้นต่ําระหว่างนิ้วหัวแม่มือของแถบเลื่อนที่ผู้ใช้สามารถตั้งค่าได้"
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "ระยะห่างสูงสุดระหว่างนิ้วหัวแม่มือของแถบเลื่อนที่ผู้ใช้สามารถตั้งค่าได้"
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "ระบุจํานวนป้ายชื่อมาตราส่วนที่จะสร้าง ค่า -1 หมายความว่าตัวเลขจะถูกคํานวณโดยอัตโนมัติตามค่าต่ําสุดและค่าสูงสุด"
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "ใช้ \"{0}\" เป็นตัวยึดสําหรับค่าจริง"
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "ให้คุณกําหนดป้ายกํากับที่กําหนดเองตามค่าที่เฉพาะเจาะจงและเลือกกําหนดข้อความที่สอดคล้องกัน (เช่น 0 = \"แย่\", 100 = \"ยอดเยี่ยม\")"
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "ใช้ \"{0}\" เป็นต��วยึดสําหรับค่าจริง"
+// slider.allowSwap: "Allows users to move one thumb past the other." => "อนุญาตให้ผู้ใช้เลื่อนนิ้วหัวแม่มือข้างหนึ่งผ่านอีกนิ้วหนึ่ง"
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "แสดงปุ่มที่ล้างค่าแถบเลื่อนที่เลือกและตั้งค่าเป็น undefined"
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "กําหนดค่าต่ําสุดของแถบเลื่อนแบบไดนามิกโดยใช้นิพจน์ รองรับการคํานวณพื้นฐาน (เช่น '{q1_id} + {q2_id}') ตรรกะบูลีน (เช่น '{age} > 60') และฟังก์ชันต่างๆ เช่น 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' และอื่นๆ"
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "กําหนดค่าสูงสุดของแถบเลื่อนแบบไดนามิกโดยใช้นิพจน์ รองรับการคํานวณพื้นฐาน (เช่น '{q1_id} + {q2_id}') ตรรกะบูลีน (เช่น '{age} > 60') และฟังก์ชันต่างๆ เช่น 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' และอื่นๆ"
+// slider.sliderType: "Slider type" => "ประเภทตัวเลื่อน"
+// slider.minRangeLength: "Min range length" => "ความยาวช่วงต่ําสุด"
+// slider.maxRangeLength: "Max range length" => "ความยาวช่วงสูงสุด"
+// slider.customLabels: "Custom labels" => "ป้ายกํากับที่กําหนดเอง"
+// slider.labelFormat: "Label format" => "รูปแบบฉลาก"
+// slider.tooltipFormat: "Tooltip format" => "รูปแบบคําแนะนําเครื่องมือ"
+// question.showTitle: "Show the title and description" => "แสดงชื่อและคําอธิบาย"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "ขยายรายละเอียดแถวใหม่โดยอัตโนมัติ"

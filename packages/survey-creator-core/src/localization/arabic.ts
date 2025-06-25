@@ -129,6 +129,7 @@ export var arStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    toolboxSearch: "بحث",
     toolboxFilteredTextPlaceholder: "اكتب للبحث...",
     toolboxNoResultsFound: "لم يتم العثور على نتائج",
     propertyGridFilteredTextPlaceholder: "Type to search...",
@@ -349,6 +350,7 @@ export var arStrings = {
       name: "اسم السؤال",
       title: "عنوان السؤال",
       description: "وصف السؤال",
+      showTitle: "إظهار العنوان والوصف",
       visibleIf: "اجعل السؤال مرئيا إذا",
       requiredIf: "اجعل السؤال مطلوبا إذا",
       page: "الصفحة الرئيسية",
@@ -754,7 +756,17 @@ export var arStrings = {
       labelCount: "عدد التصنيفات التي يتم إنشاؤها تلقائيا",
       minValueExpression: "الحد الأدنى للقيمة",
       maxValueExpression: "تعبير القيمة القصوى",
-      autoGenerate: "تكوين تسميات المقياس"
+      autoGenerate: "تكوين تسميات المقياس",
+      sliderType: "نوع شريط التمرير",
+      minRangeLength: "الحد الأدنى لطول النطاق",
+      maxRangeLength: "أقصى طول النطاق",
+      customLabels: "تسميات مخصصة",
+      labelFormat: "تنسيق التسمية",
+      tooltipFormat: "تنسيق تلميح الأداة"
+    },
+    file: {
+      imageHeight: "ارتفاع الصورة",
+      imageWidth: "عرض الصورة"
     },
     hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن يحتوي على خيارات",
     minWidth: "الحد الأدنى للعرض (بالقيم المقبولة في CSS)",
@@ -1423,7 +1435,12 @@ export var arStrings = {
       descriptionLocation: "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا).",
       newPanelPosition: "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية.",
       copyDefaultValueFromLastEntry: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
-      keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
+      keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
+      confirmDelete: "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
+    },
+    matrixdynamic: {
+      confirmDelete: "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف.",
+      detailPanelShowOnAdding: "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
     },
     copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     defaultValueExpression: "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب.",
@@ -1460,8 +1477,8 @@ export var arStrings = {
       signatureAutoScaleEnabled: "حدد ما إذا كنت تريد أن تملأ منطقة التوقيع كل المساحة المتوفرة داخل مربع السؤال مع الحفاظ على نسبة العرض إلى الارتفاع الافتراضية 3:2. عند تعيين قيم العرض والارتفاع المخصصة، سيحتفظ الإعداد بنسبة العرض إلى الارتفاع لهذه الأبعاد."
     },
     file: {
-      imageHeight: "يضبط ارتفاع الصورة في نتائج الاستطلاع.",
-      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع.",
+      imageHeight: "يحدد ارتفاع عرض الصور التي تم تحميلها في المعاينة والارتفاع الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون ارتفاع العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
+      imageWidth: "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
       allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
     },
     image: {
@@ -1493,6 +1510,21 @@ export var arStrings = {
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
       colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+    },
+    slider: {
+      min: "أقل رقم يمكن للمستخدمين تحديده.",
+      max: "أعلى رقم يمكن للمستخدمين تحديده.",
+      step: "الفاصل الزمني بين قيم المقياس القابلة للتحديد. على سبيل المثال ، ستسمح الخطوة 5 للمستخدمين بتحديد 0 و 5 و 10 وما إلى ذلك.",
+      minRangeLength: "الحد الأدنى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه.",
+      maxRangeLength: "الحد الأقصى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه.",
+      labelCount: "يحدد عدد تسميات المقياس المطلوب إنشاؤها. تعني القيمة -1 أن الرقم يتم حسابه تلقائيا بناء على القيمة الدنيا والقيمة القصوى.",
+      labelFormat: "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية.",
+      customLabels: "يسمح لك بتحديد تسميات مخصصة بقيم محددة وتعيين النص المقابل لها اختياريا (على سبيل المثال، 0 = \"ضعيف\"، 100 = \"ممتاز\").",
+      tooltipFormat: "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية.",
+      allowSwap: "يسمح للمستخدمين بتحريك إبهام واحد إلى ما بعد الآخر.",
+      allowClear: "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد.",
+      minValueExpression: "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد.",
+      maxValueExpression: "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
     },
     isExclusive: "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا.",
     caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
@@ -1532,7 +1564,6 @@ export var arStrings = {
     detailErrorLocation: "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
-    confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
     keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
     description: "اكتب عنوانا فرعيا.",
     locale: "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات.",
@@ -1700,7 +1731,7 @@ export var arStrings = {
     detailElements: "عناصر التفاصيل",
     allowAdaptiveActions: "السماح بالإجراءات التكيفية",
     defaultRowValue: "قيمة الصف الإفتراضية",
-    detailPanelShowOnAdding: "detailPanelShowOnAdding",
+    detailPanelShowOnAdding: "تفاصيل الصف الجديد للتوسيع التلقائي",
     choicesLazyLoadEnabled: "تمكين التحميل البطيء للاختيارات",
     choicesLazyLoadPageSize: "اختيارات كسول تحميل حجم الصفحة",
     inputFieldComponent: "مكون حقل الإدخال",
@@ -1935,9 +1966,9 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.detailPanelMode: "Detail panel location" => "موقع لوحة التفاصيل"
 // pe.minRowCount: "Minimum row count" => "الحد الأدنى لعدد الصفوف"
 // pe.maxRowCount: "Maximum row count" => "الحد الأقصى لعدد الصفوف"
-// pe.confirmDelete: "Confirm row deletion" => "تأكيد حذف الصف"
+// pe.confirmDelete: "Confirm row removal" => "تأكيد حذف الصف"
 // pe.confirmDeleteText: "Confirmation message" => "رسالة تأكيد"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "تأكيد حذف اللوحة"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "تأكيد حذف اللوحة"
 // pe.panelCount: "Initial panel count" => "عدد اللوحات الأولي"
 // pe.minPanelCount: "Minimum panel count" => "الحد الأدنى لعدد اللوحات"
 // pe.maxPanelCount: "Maximum panel count" => "الحد الأقصى لعدد اللوحات"
@@ -2592,7 +2623,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسالة خطأ فيما يتعلق بخلية ذات إدخال غير صالح. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي."
 // pehelp.description: "Type a subtitle." => "اكتب عنوانا فرعيا."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات."
@@ -3013,3 +3044,32 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // sliderType.single: "Single-Value" => "قيمة واحدة"
 // sliderType.range: "Range" => "نطاق"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا."
+// ed.toolboxSearch: "Search" => "بحث"
+// file.imageHeight: "Image height" => "ارتفاع الصورة"
+// file.imageWidth: "Image width" => "عرض الصورة"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "يحدد ارتفاع عرض الصور التي تم تحميلها في المعاينة والارتفاع الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون ارتفاع العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة."
+// slider.min: "The lowest number that users can select." => "أقل رقم يمكن للمستخدمين تحديده."
+// slider.max: "The highest number that users can select." => "أعلى رقم يمكن للمستخدمين تحديده."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "الفاصل الزمني بين قيم المقياس القابلة للتحديد. على سبيل المثال ، ستسمح الخطوة 5 للمستخدمين بتحديد 0 و 5 و 10 وما إلى ذلك."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "الحد الأدنى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "الحد الأقصى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "يحدد عدد تسميات المقياس المطلوب إنشاؤها. تعني القيمة -1 أن الرقم يتم حسابه تلقائيا بناء على القيمة الدنيا والقيمة القصوى."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "يسمح لك بتحديد تسميات مخصصة بقيم محددة وتعيين النص المقابل لها اختياريا (على سبيل المثال، 0 = \"ضعيف\"، 100 = \"ممتاز\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "يسمح للمستخدمين بتحريك إبهام واحد إلى ما بعد الآخر."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+// slider.sliderType: "Slider type" => "نوع شريط التمرير"
+// slider.minRangeLength: "Min range length" => "الحد الأدنى لطول النطاق"
+// slider.maxRangeLength: "Max range length" => "أقصى طول النطاق"
+// slider.customLabels: "Custom labels" => "تسميات مخصصة"
+// slider.labelFormat: "Label format" => "تنسيق التسمية"
+// slider.tooltipFormat: "Tooltip format" => "تنسيق تلميح الأداة"
+// question.showTitle: "Show the title and description" => "إظهار العنوان والوصف"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "تفاصيل الصف الجديد للتوسيع التلقائي"
