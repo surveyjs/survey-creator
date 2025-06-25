@@ -35,6 +35,13 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
 
+  protected restoreItems(questionItems: QuestionMatrixDynamicModel, questionHiddenItems: QuestionMatrixDynamicModel) {
+    const rowData = questionHiddenItems;
+    const value = questionItems.value ? [...questionItems.value] : [];
+    value.push(rowData);
+    questionItems.value = value;
+  }
+
   protected getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
   }
