@@ -5,16 +5,15 @@ import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-r
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { SurveyHelper } from "../survey-helper";
+import { CreatorPresetEditableList } from "./presets-editable-list";
 
-export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableBase {
+export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
 
-  protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
-  protected defaultItems: any[];
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
@@ -25,16 +24,6 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     // if (name == this.nameMatrix) {
     //   this.fillAutoName(this.getMatrix(model), "name");
     // }
-  }
-  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (this.isItemsMatrix(options.question)) {
-      const survey = this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
-      const isDefault = options.row.getQuestionByName("isDefault");
-      if (survey) {
-        const name = survey.getQuestionByName("name");
-        if (name && isDefault) name.readOnly = isDefault.value;
-      }
-    }
   }
   private editCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const survey = this.showDetailPanelInPopup(this.getQuestionCategories(model), row, model.rootElement, false);
@@ -50,13 +39,10 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
   }
 
-  private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
-    return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
-  }
   protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
 
   protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameMatrix || question.name === this.nameInnerMatrix;
+    return super.isItemsMatrix(question) || question.name === this.nameInnerMatrix;
   }
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const category = row.getValue("category");
@@ -98,29 +84,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     return generalCategory;
   }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (this.isItemsMatrix(options.question)) {
-      const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
-      options.actions.push({
-        id: iconName,
-        iconName: iconName,
-        location: "start",
-        enabled: false
-      });
-      options.question.cssClasses.detailIconExpandedId = "icon-edit";
-      options.question.cssClasses.detailIconId = "icon-edit";
-
-      options.actions.forEach(a => {
-        if (a.id == "show-detail") {
-          a.location = "end";
-          a.iconName = "icon-edit",
-          a.visibleIndex = 10;
-        }
-        if (a.id == "remove-row") {
-          a.visibleIndex = 20;
-          a.iconName = options.question.name == this.nameMatrix ? "icon-add_16x16" : "icon-remove_16x16";
-        }
-      });
-    }
+    super.onGetMatrixRowActionsCore(model, creator, options);
     if (options.question.name === this.nameCategories) {
       options.question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
       options.question.cssClasses.detailIconId = "icon-expand-24x24";
@@ -160,19 +124,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       });
     }
   }
-  public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (this.isItemsMatrix(options.fromMatrix) && this.isItemsMatrix(options.toMatrix)) {
-      options.allow = true;
-    }
-  }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (this.isItemsMatrix(options.question) && options.question.name != this.nameMatrix) {
-      const rowData = options.question.value[options.rowIndex];
-      const hiddenItems = this.getMatrix(model);
-      const value = hiddenItems.value ? [...hiddenItems.value] : [];
-      value.push(rowData);
-      hiddenItems.value = value;
-    }
+    super.onMatrixRowRemoving(model, creator, options);
     if (options.question.name == this.nameCategories) {
       const items = options.question.value[options.rowIndex][this.nameInnerMatrix];
       const hiddenItems = this.getMatrix(model);
@@ -189,11 +142,9 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
+    super.onMatrixRowAdded(model, creator, options);
     if (options.question.name == this.nameCategories) {
       options.row.getQuestionByName("category").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.category })), "category");
-    }
-    if (options.question.name == this.nameMatrix) {
-      options.row.getQuestionByName("name").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.name })), "name");
     }
   }
 }
