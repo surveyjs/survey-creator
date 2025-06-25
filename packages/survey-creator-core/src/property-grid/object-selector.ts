@@ -161,7 +161,11 @@ export class ObjectSelectorModel extends Base {
         listItemRole: "menuitemradio",
         locOwner: this.creator
       });
-      this.listModelValue.setOnFilterStringChangedCallback((text: string) => { this.selector.filterByText(text); });
+      this.listModelValue.setOnFilterStringChangedCallback((text: string) => {
+        this.listModelValue.beginUpdates();
+        this.selector.filterByText(text);
+        this.listModelValue.endUpdates();
+      });
     } else {
       this.listModelValue.setItems(this.selector.items);
       this.listModelValue.selectedItem = selectedItem;
