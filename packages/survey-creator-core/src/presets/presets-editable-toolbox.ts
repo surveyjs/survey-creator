@@ -215,7 +215,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     if (options.question.name == this.nameMatrix) {
       const mode = model.getValue(this.nameCategoriesMode);
       if (mode === "items") {
-        this.restoreItems(this.getQuestionItems(model), options.question);
+        this.restoreItems(this.getQuestionItems(model), options.question, options.rowIndex);
       }
     }
     super.onMatrixRowRemoving(model, creator, options);
