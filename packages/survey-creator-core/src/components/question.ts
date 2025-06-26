@@ -312,7 +312,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
   }
   private updateActionsLocations(): void {
-    const actions = this.actionContainer.visibleActions;
+    const actions = this.actionContainer.getVisibleActions();
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {
       if (actions[i].id === "convertTo") switchToStartLocation = true;
