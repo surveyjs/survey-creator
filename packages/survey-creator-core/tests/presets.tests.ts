@@ -14,7 +14,7 @@ test("show/hidetabs", () => {
   expect(creator.activeTab).toBe("designer");
   const preset = new CreatorPreset({
     tabs: {
-      items: ["preview", "unknown", "designer"],
+      items: [{ name: "preview" }, { name: "unknown" }, { name: "designer" }],
       activeTab: "preview"
     }
   });
@@ -29,7 +29,7 @@ test("Update top toolbars on setting tabs", () => {
   creator.propertyGridNavigationMode = "accordion";
   expect(creator.sidebar.getPageById("propertyGrid").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeTruthy();
-  const preset = new CreatorPreset({ tabs: { items: ["preview"] } });
+  const preset = new CreatorPreset({ tabs: { items: [{ name: "preview" }] } });
   preset.apply(creator);
   expect(creator.tabs).toHaveLength(1);
   expect(creator.tabs[0].id).toBe("preview");
@@ -42,7 +42,7 @@ test("active tab", () => {
   creator.propertyGridNavigationMode = "accordion";
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeTruthy();
   expect(creator.sidebar.getPageById("propertyGrid").visible).toBeTruthy();
-  const preset = new CreatorPreset({ tabs: { items: ["designer", "json"], activeTab: "json" } });
+  const preset = new CreatorPreset({ tabs: { items: [{ name: "designer" }, { name: "json" }], activeTab: "json" } });
   preset.apply(creator);
   expect(creator.tabs).toHaveLength(2);
   expect(creator.activeTab).toBe("json");
@@ -51,7 +51,7 @@ test("active tab", () => {
 });
 test("incorrect active tab", () => {
   const creator = new CreatorTester();
-  const preset = new CreatorPreset({ tabs: { items: ["preview"], activeTab: "designer" } });
+  const preset = new CreatorPreset({ tabs: { items: [{ name: "preview" }], activeTab: "designer" } });
   preset.apply(creator);
   expect(creator.tabs).toHaveLength(1);
   expect(creator.activeTab).toBe("preview");
@@ -61,8 +61,8 @@ test("set toolbox categories", () => {
   const preset = new CreatorPreset({
     toolbox: {
       categories: [
-        { category: "general", items: ["text", "dropdown"] },
-        { category: "matrix", items: ["matrix", "matrixdropdown"] }
+        { category: "general", items: [{ name: "text" }, { name: "dropdown" }] },
+        { category: "matrix", items: [{ name: "matrix" }, { name: "matrixdropdown" }] }
       ]
     }
   });
