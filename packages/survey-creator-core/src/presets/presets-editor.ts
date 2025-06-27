@@ -3,6 +3,7 @@ import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
 import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
+import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
 
@@ -146,6 +147,18 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));
+    });
+    model.onGetMatrixRowActions.add((sender, options) => {
+      editablePresets.forEach(item => item.onGetMatrixRowActions(model, this.creator, options));
+    });
+    model.onMatrixRowDragOver.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixRowDragOver(model, this.creator, options));
+    });
+    model.onMatrixRowRemoving.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixRowRemoving(model, this.creator, options));
+    });
+    model.onMatrixRowAdded.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixRowAdded(model, this.creator, options));
     });
     return model;
   }
@@ -306,6 +319,7 @@ preset.apply(creator);</div></pre></code></div>
     if (fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
+    if (fullPath === "propertyGrid") return new CreatorPresetEditablePropertyGrid(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {

@@ -126,6 +126,8 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   private exportAction: Action;
   private copyAction: Action;
 
+  public static iconName = "icon-codeeditor-24x24";
+
   constructor(private creator: SurveyCreatorModel) {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
