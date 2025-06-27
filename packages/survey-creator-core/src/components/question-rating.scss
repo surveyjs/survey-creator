@@ -112,8 +112,13 @@
     padding: calcSize(0.5) calcSize(2.5);
   }
 }
+.svc-rating-question-content {
+  flex: 1;
+}
 .svc-question__content .svc-rating-question-content  .sd-question__content {
   overflow-x: visible;
+  margin: 0;
+  padding: 0;
 }
 .svc-creator--mobile {
   .svc-rating-question-content {
