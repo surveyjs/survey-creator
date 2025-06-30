@@ -13,16 +13,21 @@ export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> imple
   protected getModel(): TabbedMenuContainer {
     return this.model;
   }
-  ngAfterViewInit(): void {
+  private initResponsivityManager() {
     if (this.container?.nativeElement) {
       this.model.initResponsivityManager(this.container.nativeElement);
     }
   }
+  ngAfterViewInit(): void {
+    this.initResponsivityManager();
+  }
+  protected override afterUpdate(isSync?: boolean): void {
+    super.afterUpdate(isSync);
+    this.initResponsivityManager();
+  }
   override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
-    if (this.container?.nativeElement) {
-      this.model.initResponsivityManager(this.container.nativeElement);
-    }
+    this.initResponsivityManager();
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();
