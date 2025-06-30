@@ -674,6 +674,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
+        listModel.flushUpdates();
       }
     });
     const listModel = newAction.popupModel.contentComponentData.model;
