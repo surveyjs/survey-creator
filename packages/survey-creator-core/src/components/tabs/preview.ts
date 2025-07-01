@@ -68,9 +68,7 @@ export class PreviewViewModel extends Base {
   public get pageActions(): Array<Action> {
     return this.pages.actions;
   }
-  public get isPageToolbarVisible(): boolean {
-    return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
-  }
+  @property({}) isPageToolbarVisible = new ComputedUpdater(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView));
 
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();

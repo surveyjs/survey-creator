@@ -68,6 +68,7 @@ test("set toolbox categories", () => {
   });
   preset.apply(creator);
   const tb = creator.toolbox;
+  creator.toolbox.flushUpdates();
   expect(creator.toolbox.categories).toHaveLength(2);
   expect(creator.toolbox.visibleActions).toHaveLength(4);
   expect(creator.toolbox.hasCategories).toBeTruthy();
@@ -81,6 +82,7 @@ test("set toolbox items", () => {
   });
   preset.apply(creator);
   const tb = creator.toolbox;
+  tb.flushUpdates();
   expect(tb.categories).toHaveLength(1);
   expect(tb.visibleActions).toHaveLength(3);
   expect(tb.hasCategories).toBeFalsy();
@@ -98,6 +100,7 @@ test("set toolbox definition", () => {
   });
   preset.apply(creator);
   const tb = creator.toolbox;
+  tb.flushUpdates();
   const actions = tb.visibleActions;
   expect(tb.categories).toHaveLength(1);
   expect(tb.visibleActions).toHaveLength(4);

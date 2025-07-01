@@ -708,12 +708,14 @@ test("isPageToolbarVisible & firstPage is started, #6624", (): any => {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   const model: TestSurveyTabViewModel = testPlugin.model;
+  model.pages.flushUpdates();
   expect(model.pageListItems).toHaveLength(3);
   expect(model.survey.state).toBe("starting");
   expect(model.isPageToolbarVisible).toBeTruthy();
   expect(model.nextPageAction.enabled).toBeTruthy();
   expect(model.prevPageAction.enabled).toBeFalsy();
   (<any>model.selectPageAction.popupModel).onSelectionChanged(model.pageListItems[1]);
+  model.pages.flushUpdates();
   expect(model.survey.state).toBe("running");
   expect(model.isPageToolbarVisible).toBeTruthy();
   expect(model.nextPageAction.enabled).toBeTruthy();
@@ -798,6 +800,7 @@ test("Creator footer action bar: only preview tab", (): any => {
   expect(creator.activeTab).toEqual("preview");
 
   creator.isMobileView = true;
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.actions.length).toEqual(7);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
@@ -806,6 +809,7 @@ test("Creator footer action bar: only preview tab", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "logic";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.actions.length).toEqual(7);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });

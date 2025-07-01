@@ -2048,6 +2048,7 @@ test("Check property grid expand action is always last", (): any => {
   };
 
   creator.setShowSidebar(false);
+  creator.toolbar.flushUpdates();
   const index = creator.toolbar.renderedActions.length - 1;
   expect(creator.toolbar.renderedActions[index].id).toEqual("svd-grid-expand");
   creator.toolbarItems.push(new Action({
@@ -2056,6 +2057,7 @@ test("Check property grid expand action is always last", (): any => {
     title: "Test action",
     action: function () { }
   }));
+  creator.toolbar.flushUpdates();
   expect(creator.toolbar.renderedActions[index].id).toEqual("test-action");
   expect(creator.toolbar.renderedActions[index + 1].id).toEqual("svd-grid-expand");
 });
@@ -4430,6 +4432,7 @@ test("Creator footer action bar: only designer tab", (): any => {
   expect(creator.activeTab).toEqual("designer");
 
   creator.isMobileView = true;
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.actions.length).toEqual(5);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
@@ -4438,6 +4441,7 @@ test("Creator footer action bar: only designer tab", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
 
   creator.activeTab = "logic";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.actions.length).toEqual(5);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
@@ -4477,6 +4481,7 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.activeTab).toEqual("designer");
 
   creator.isMobileView = true;
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
@@ -4484,6 +4489,7 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
 
   creator.activeTab = "test";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(testTabButtonOrder);
@@ -4491,9 +4497,11 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "logic";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 
   creator.activeTab = "designer";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
