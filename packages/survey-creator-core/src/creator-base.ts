@@ -4308,6 +4308,7 @@ export class SurveyCreatorModel extends Base
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
+        listModel.flushUpdates();
       }
     });
     return newAction;
