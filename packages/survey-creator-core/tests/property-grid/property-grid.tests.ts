@@ -3874,3 +3874,26 @@ test("Pages Collection Editor - The Trash Bin (Remove) button is unavailable whe
   container = <ActionContainer>cell.item.value;
   expect(container.getActionById("remove-row")).toBeTruthy();
 });
+test("If a property becomes in different categories for different question types it can lead to errors, Bug#6997", () => {
+  Serializer.addProperty("matrix", { name: "isRequired:boolean", category: "validation" });
+  expect(Serializer.findProperty("question", "isRequired").category).toBeFalsy();
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "matrix", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  let propertyGrid = new PropertyGridModelTester(q1);
+  let requiredQ = propertyGrid.survey.getQuestionByName("isRequired");
+  expect(requiredQ).toBeTruthy();
+  expect(requiredQ.parent.name).toBe("validation");
+  propertyGrid = new PropertyGridModelTester(q2);
+  requiredQ = propertyGrid.survey.getQuestionByName("isRequired");
+  expect(requiredQ).toBeTruthy();
+  expect(requiredQ.parent.name).toBe("general");
+
+  Serializer.removeProperty("matrix", "isRequired");
+});
