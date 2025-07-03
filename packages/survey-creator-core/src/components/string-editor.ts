@@ -515,7 +515,7 @@ export class StringEditorViewModelBase extends Base {
       selection.deleteFromDocument();
       selection.getRangeAt(0).insertNode(document.createTextNode(text));
       selection.collapseToEnd();
-      event.target.dispatchEvent(new Event("input", { bubbles: true }));
+      this.getEditorElement().dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
