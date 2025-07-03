@@ -58,6 +58,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private _showOneCategoryInPropertyGrid: boolean = true;
   private _advancedModeValue = false;
 
+  public static iconName = "icon-theme";
+
   private tabControlModel: TabControlModel;
   public propertyGrid: PropertyGridModel;
   private propertyGridTab: SidebarPageModel;
@@ -243,7 +245,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "theme", plugin: this, iconName: "icon-theme" });
+    creator.addTab({ name: "theme", plugin: this, iconName: ThemeTabPlugin.iconName });
     this.simulatorCssClasses = surveyCss[defaultThemeName];
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));

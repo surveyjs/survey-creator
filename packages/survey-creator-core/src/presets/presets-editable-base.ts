@@ -1,5 +1,5 @@
-import { Helpers, SurveyModel } from "survey-core";
-import { SurveyCreatorModel, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
+import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel } from "survey-core";
+import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
   creator: SurveyCreatorModel;
@@ -108,6 +108,15 @@ export class CreatorPresetEditableBase {
       item.updateOnMatrixDetailPanelVisibleChanged(model, creator, options);
     });
   }
+  public onGetMatrixRowActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    this.onGetMatrixRowActionsCore(model, creator, options);
+    this.children.forEach(item => {
+      item.onGetMatrixRowActions(model, creator, options);
+    });
+  }
+  public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
+  public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
+  public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
@@ -130,7 +139,62 @@ export class CreatorPresetEditableBase {
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
+  protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
   protected copyJson(json: any): any {
     return Helpers.getUnbindValue(json);
+  }
+
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, hideDetailPanel = true) {
+    if (settings.showDialog) {
+      const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
+      if (hideDetailPanel) row.hideDetailPanel();
+      const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
+      survey.fitToContainer = false;
+      survey.showNavigationButtons = false;
+      survey.data = data;
+      const popupModel = settings.showDialog?.(<IDialogOptions>{
+        componentName: "survey",
+        data: { survey: survey, model: survey },
+        onApply: () => {
+          if (survey.validate()) {
+            const newValue = [...matrix.value];
+            const newRowValue = { ...row.value, ...survey.data };
+            newValue[row.index] = newRowValue;
+            matrix.value = newValue;
+            return true;
+          } else {
+            return false;
+          }
+        },
+        onCancel: () => {
+          return true;
+        },
+        cssClass: "svc-property-editor svc-creator-popup",
+        title: "Detail",
+        displayMode: "popup"
+      }, rootElement);
+      return survey;
+    }
+  }
+  public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
+    if (!localizationName) return undefined;
+    if (!text) return;
+    const presetStrs = editorLocalization.presetStrings;
+    editorLocalization.presetStrings = undefined;
+    if (text !== editorLocalization.getString(localizationName)) {
+      CreatorPresetEditableBase.saveTextInLocStrs(locStrs, text, localizationName);
+    }
+    editorLocalization.presetStrings = presetStrs;
+  }
+  private static saveTextInLocStrs(locStrs: any, text: string, localizationName: string): void {
+    const paths = localizationName.split(".");
+    for (let i = 0; i < paths.length - 1; i ++) {
+      const path = paths[i];
+      if (!locStrs[path]) {
+        locStrs[path] = {};
+      }
+      locStrs = locStrs[path];
+    }
+    locStrs[paths[paths.length - 1]] = text;
   }
 }
