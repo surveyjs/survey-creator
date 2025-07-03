@@ -1,0 +1,1 @@
+export { TabPresetsComponent } from "../presets/Presets";

@@ -3,6 +3,7 @@
 // export * from "../presets/presets-toolbox";
 export * from "../presets/presets-editable-toolbox";
 export * from "../presets/presets-editor";
+export * from "../presets/presets-plugin";
 export * from "../presets/presets-editable-languages";
 export * from "../presets/presets-editable-tabs";
 export * from "../presets/presets-editable-base";
