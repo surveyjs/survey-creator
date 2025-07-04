@@ -1,5 +1,5 @@
 import { test, expect, Page } from "@playwright/test";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText } from "./helper";
+import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot } from "./helper";
 
 const title = "Translation tab Screenshot";
 
@@ -52,15 +52,15 @@ test.describe(title, () => {
     const stringsView = page.locator(".svc-creator-tab__content.svc-translation-tab");
 
     await getTabbedMenuItemByText(page, "Translation").click();
-    await expect(stringsView).toHaveScreenshot("translation-tab.png");
+    await compareScreenshot(page, stringsView, "translation-tab.png");
 
     await page.setViewportSize({ width: 800, height: 1440 });
-    await expect(stringsView).toHaveScreenshot("translation-tab-small-screen.png");
+    await compareScreenshot(page, stringsView, "translation-tab-small-screen.png");
 
     await page.setViewportSize({ width: 2560, height: 1440 });
     await getBarItemByTitle(page, "Used Strings Only").click();
     await getListItemByText(page, "All Strings").click();
-    await expect(stringsView).toHaveScreenshot("translation-tab-show-all-strings.png");
+    await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png");
   });
 
   test("tranlation property grid", async ({ page }) => {
@@ -70,7 +70,7 @@ test.describe(title, () => {
     await page.locator("span", { hasText: "Català" }).click();
     await page.locator(".spg-action-button").first().click();
     await page.locator("span", { hasText: "Bahasa Indonesia" }).click();
-    await expect(page.locator(".spg-root-modern.st-properties")).toHaveScreenshot("translation-property-grid.png");
+    await compareScreenshot(page, page.locator(".spg-root-modern.st-properties"), "translation-property-grid.png");
   });
 
   test("tranlation property grid + onMachineTranslate", async ({ page }) => {
@@ -103,21 +103,22 @@ test.describe(title, () => {
         }
       ]
     });
+    const translationDialog = page.locator(".st-translation-dialog .sv-popup__body-content");
     await getTabbedMenuItemByText(page, "Translation").click();
     await page.locator(".spg-action-button").first().click();
     await page.locator("span", { hasText: "Català" }).click();
     await page.locator("button[title='Auto-translate All']").click();
-    await expect(page.locator(".st-translation-dialog")).toHaveScreenshot("translation-auto-translate-popup.png");
+    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await page.locator("button[title='Apply']").click();
     await page.waitForTimeout(1000);
     await page.locator("textarea").nth(1).type("translated");
     await page.locator(".spg-action-button").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
     await page.locator("button[title='Auto-translate All']").nth(1).click();
-    await expect(page.locator(".st-translation-dialog")).toHaveScreenshot("translation-auto-translate-popup-enabled-dropdown.png");
+    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
     await page.setViewportSize({ width: 1000, height: 1440 });
-    await expect(page.locator(".st-translation-dialog")).toHaveScreenshot("translation-auto-translate-popup-medium-screen.png");
+    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-medium-screen.png");
     await page.setViewportSize({ width: 800, height: 1440 });
-    await expect(page.locator(".st-translation-dialog")).toHaveScreenshot("translation-auto-translate-popup-small-screen.png");
+    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-small-screen.png");
   });
 });
