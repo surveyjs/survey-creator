@@ -17,6 +17,7 @@
           @paste="onPaste"
           @blur="onBlur"
           @input="baseModel?.onInput"
+          @beforeInput="baseModel?.onBeforeInput"
           @keydown="baseModel?.onKeyDown"
           @keyup="baseModel?.onKeyUp"
           @compositionstart="baseModel?.onCompositionStart"
