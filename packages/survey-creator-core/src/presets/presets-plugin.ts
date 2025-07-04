@@ -10,7 +10,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   public activate(): void {
-    this.model = new CreatorPresetEditorModel();
+    this.model = new CreatorPresetEditorModel({}, this.creator);
   }
 
   public deactivate(): boolean {

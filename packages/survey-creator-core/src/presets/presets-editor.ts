@@ -28,16 +28,15 @@ export class NavigationBar extends ActionContainer {
 
 export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
   private presetValue: CreatorPreset;
-  private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
   private resultModelValue: SurveyModel;
   private navigationBarValue: NavigationBar;
   public locTitle: LocalizableString;
-  constructor(json?: ICreatorPresetData) {
+  constructor(json?: ICreatorPresetData, private creatorValue?: SurveyCreatorModel) {
     super();
     editorLocalization.presetStrings = undefined;
     this.presetValue = new CreatorPreset(json);
-    this.creatorValue = this.createCreator({});
+    if (!this.creatorValue)this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
     this.resultModelValue = this.createResultModel();
     this.locTitle = new LocalizableString(undefined, false);
@@ -51,7 +50,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public dispose(): void {
     super.dispose();
-    this.creator.dispose();
+    //this.creator.dispose();
     this.disposeModel();
   }
   private disposeModel(): void {
@@ -126,6 +125,17 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         model.currentPageNo = 0;
       }
     };
+
+    model.addNavigationItem({
+      id: "apply-settings",
+      title: "Apply",
+      action: () => {
+        this.applyFromSurveyModel();
+      },
+      css: "nav-button",
+      innerCss: "sd-btn"
+    });
+
     editablePresets.forEach(item => item.setupQuestions(model, this));
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));

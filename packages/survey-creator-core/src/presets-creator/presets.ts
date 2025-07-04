@@ -54,7 +54,9 @@ export class CreatorPreset extends CreatorPresetBase {
     }
   }
   protected createPresets(): Array<ICreatorPreset> {
-    return [new CreatorPresetLanguages(), new CreatorPresetTabs(), new CreatorPresetToolbox(),
+    // return [new CreatorPresetLanguages(), new CreatorPresetTabs(), new CreatorPresetToolbox(),
+    //   new CreatorPresetPropertyGrid()];
+    return [new CreatorPresetToolbox(),
       new CreatorPresetPropertyGrid()];
   }
 }
