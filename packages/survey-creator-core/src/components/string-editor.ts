@@ -303,13 +303,6 @@ export class StringEditorViewModelBase extends Base {
     this.addCreatorEvents();
   }
   public checkConstraints(event: any) {
-    if (!this.compostionInProgress && this.maxLength > 0 && event.keyCode >= 32) {
-      var text: string = (event.target as any).innerText || "";
-
-      if (text.length >= this.maxLength) {
-        event.preventDefault();
-      }
-    }
     if (event.keyCode == 13 && !this.locString.allowLineBreaks) {
       event.preventDefault();
     }
@@ -365,7 +358,17 @@ export class StringEditorViewModelBase extends Base {
   public onCompositionStart(event: any): void {
     this.compostionInProgress = true;
   }
-
+  public onBeforeInput(event: any): void {
+    if (!this.compostionInProgress && this.maxLength > 0) {
+      const currentValue = event.target.innerText;
+      const insertedData = event.data || "";
+      const selectionLength = window.getSelection().toString().length;
+      const newValueLength = currentValue.length + insertedData.length - selectionLength;
+      if (newValueLength > this.maxLength) {
+        event.preventDefault();
+      }
+    }
+  }
   public onInput(event: any): void {
     if (this.maxLength > 0) {
       var text: string = (event.target as any).innerText || "";
