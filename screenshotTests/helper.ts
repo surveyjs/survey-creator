@@ -1,3 +1,5 @@
+import { Locator, Page } from "playwright/test";
+
 export * from "../e2e/helper";
 
 export const url = "http://127.0.0.1:8080/testCafe/testcafe";
@@ -117,7 +119,7 @@ export const inputMaskSettingsGroupName = "Input Mask Settings";
 // export const logicDetailButtonElement = Selector(".sl-table__detail-button");
 // export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)");
 
-export function getTabbedMenuItemByText(page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes") {
+export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text);
 }
 export function getSelectOptionByText(page, text: string) {
@@ -146,87 +148,74 @@ export function getAddNewQuestionButton(page) {
   return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
 }
 
-// export function getVisibleElement(selector: string | Selector): Selector {
-//   return selectorIsVisibleFilter(Selector(selector));
-// }
-// export function getToolboxItemByText(text: string) {
-//   return getVisibleElement(".svc-toolbox__item-title").withExactText(text);
-// }
-// export function getToolboxItemByAriaLabel(text: string) {
-//   return getVisibleElement(".svc-toolbox__item").withAttribute("aria-label", text);
-// }
-// export function getSubToolboxItemByText(text: string) {
-//   return getVisibleElement(".svc-toolbox__item-subtype").withExactText(text);
-// }
+export function getToolboxItemByText(page, text) {
+  return page.locator(".svc-toolbox__item-title").getByText(text);
+}
+export function getToolboxItemByAriaLabel(page, text) {
+  return page.locator(".svc-toolbox__item").withAttribute("aria-label").getByText(text);
+}
+export function getSubToolboxItemByText(page, text) {
+  return page.locator(".svc-toolbox__item-subtype").getByText(text);
+}
 // export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
 //   await t
 //     .click(Selector(".svc-element__add-new-question .svc-element__question-type-selector"))
 //     .click(Selector(".svc-list__item span").withExactText(text));
 // }
 
-function selectorIsVisibleFilter(selector: Selector) {
-  return selector.filter(visibility).with({ timeout: 1200 });
-}
-
-export function visibility(node: Element, idx: number): boolean {
-  var style = window.getComputedStyle(node);
-  if (style.display === "none" || style.visibility === "hidden") return false;
-  return node.parentElement ? visibility(node.parentElement, idx) : true;
-}
-
 export async function changeToolboxLocation(page, newVal: string) {
   await page.evaluate((newVal) => {
     window["creator"].toolboxLocation = newVal;
-  })(newVal);
+  }, newVal);
 }
 
 export async function changeToolboxScrolling(page, hasScroll: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].toolbox.overflowBehavior = newVal ? "scroll" : "hideInMenu";
-  })(hasScroll);
+  }, hasScroll);
 }
 
 export async function changeToolboxSearchEnabled(page, enabled: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].toolbox.searchEnabled = newVal;
-  })(enabled);
+  }, enabled);
 }
 
 export async function setDirRTL(page) {
   await page.evaluate(() => {
     document.body.setAttribute("dir", "rtl");
-  })();
+  });
 }
 
 export async function setShowToolbox(page, newVal: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].showToolbox = newVal;
-  })(newVal);
+  }, newVal);
 }
 export async function setShowSidebar(page, newVal: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].showSidebar = newVal;
-  })(newVal);
+  }, newVal);
 }
 export async function setShowAddQuestionButton(page, newVal: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].showAddQuestionButton = newVal;
-  })(newVal);
+  }, newVal);
 }
 export async function setAllowEditSurveyTitle(page, newVal: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].allowEditSurveyTitle = newVal;
-  })(newVal);
+  }, newVal);
 }
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {
   await page.evaluate((newVal) => {
     window["creator"].expandCollapseButtonVisibility = newVal;
-  })(newVal);
+  }, newVal);
 }
 export async function setAllowZoom(page, newVal: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].allowZoom = newVal;
-  })(newVal);
+  }, newVal);
 }
 
 // export const explicitErrorHandler = ClientFunction(() => {
