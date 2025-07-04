@@ -10,35 +10,49 @@ export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localize
 export const base64image =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
 
-// export const getPagesLength = ClientFunction(() => {
-//   return window["creator"].survey.pages.length;
-// });
+export const getPagesLength = async (page) => {
+  await page.evaluate(() => {
+    (window as any).creator.survey.pages.length;
+  });
+};
 
-// export const getQuestionsLength = ClientFunction(() => {
-//   return window["creator"].survey.getAllQuestions().length;
-// });
+export const getQuestionsLength = async (page) => {
+  await page.evaluate(() => {
+    (window as any).creator.survey.getAllQuestions().length;
+  });
+};
 
-// export const setJSON = ClientFunction((json) => {
-//   window["creator"].text = JSON.stringify(json);
-// });
+export const setJSON = async (page, json) => {
+  await page.evaluate((json) => {
+    (window as any).creator.text = JSON.stringify(json);
+  }, json);
+};
 
-// export const setSurveyProp = ClientFunction((propName, value) => {
-//   window["creator"].survey[propName] = value;
-// });
+export const setSurveyProp = async (page, propName, value) => {
+  await page.evaluate(([propName, value]) => {
+    (window as any).creator.survey[propName] = value;
+  }, [propName, value]);
+};
 
-// export const getJSON = ClientFunction(() => {
-//   return JSON.parse(window["creator"].text);
-// });
+export const getJSON = async (page) => {
+  await page.evaluate(() => {
+    return JSON.parse((window as any).creator.text);
+  });
+};
 
-// export const getQuestionNameByIndex = ClientFunction((index) => {
-//   return window["creator"].survey.getAllQuestions()[index].name;
-// });
+export const getQuestionNameByIndex = async (page, index) => {
+  await page.evaluate((index) => {
+    return (window as any).creator.survey.getAllQuestions()[index].name;
+  }, index);
+};
 
-// export const getItemValueByIndex = ClientFunction((questionName, index) => {
-//   const question = window["creator"].survey.getQuestionByName(questionName);
-//   const choices = question.visibleChoices;
-//   return choices[index].value;
-// });
+export const getItemValueByIndex = async (page, questionName, index) => {
+  await page.evaluate(([questionName, index]) => {
+    const question = (window as any).survey.getQuestionByName(questionName);
+    const choices = question.visibleChoices;
+    return choices[index].value;
+  }, [questionName, index]);
+};
 
 // export const handleShiftEnter = ClientFunction((selector: string) => {
 //   document.querySelector(selector).addEventListener("keypress", function (e: any) {
@@ -61,14 +75,14 @@ export const base64image =
 // export const SingleInputToolboxItem = Selector("[aria-label='Single-Line Input']");
 // export const RatingToolboxItem = Selector("[aria-label='Rating Scale']");
 
-// export const creatorTabDesignerName = "Designer";
-// export const creatorTabPreviewName = "Preview";
-// export const creatorTabLogicName = "Logic";
-// export const creatorTabTranslationName = "Translation";
-// export const creatorTabThemeName = "Themes";
-// export const generalGroupName = "General";
-// export const logicGroupName = "Conditions";
-// export const inputMaskSettingsGroupName = "Input Mask Settings";
+export const creatorTabDesignerName = "Designer";
+export const creatorTabPreviewName = "Preview";
+export const creatorTabLogicName = "Logic";
+export const creatorTabTranslationName = "Translation";
+export const creatorTabThemeName = "Themes";
+export const generalGroupName = "General";
+export const logicGroupName = "Conditions";
+export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 // export const creatorContentSelector = Selector(".svc-creator__content-holder");
 
@@ -82,55 +96,55 @@ export const base64image =
 // export const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
 // export const questions = Selector(".svc-question__content");
-// export const questionToolbarActions = Selector(".svc-question__content--selected .svc-question__content-actions").filterVisible().find(".sv-action").filterVisible();
-// export const unselectedQuestionToolbarActions = Selector(".svc-question__content-actions").filterVisible().find(".sv-action").filterVisible();
+// export const questionToolbarActions = Selector(".svc-question__content--selected .svc-question__content-actions").find(".sv-action");
+// export const unselectedQuestionToolbarActions = Selector(".svc-question__content-actions").find(".sv-action");
 
-// export const pageNavigator = Selector(".svc-page-navigator__selector").filterVisible();
+// export const pageNavigator = Selector(".svc-page-navigator__selector");
 // export const toolbox = Selector(".svc-toolbox");
-// export const toolboxItems = Selector(".svc-toolbox__tool").filterVisible();
-// export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container").filterVisible();
-// export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
+// export const toolboxItems = Selector(".svc-toolbox__tool");
+// export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container");
+// export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title");
 
 // export const logicAddNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
-// export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
-// export const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
-// export const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
-// export const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
-// export const logicDropdownValueSelector = Selector(".sd-input.sd-dropdown .sd-dropdown__value").filterVisible();
-// export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
-// export const logicActionTriggerEditorElement = Selector(".svc-logic_trigger-editor").filterVisible();
-// export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-questions").filterVisible();
-// export const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
-// export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
+// export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question");
+// export const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)");
+// export const logicActionSelector = Selector(".svc-logic-operator--action");
+// export const logicQuestionValueSelector = Selector(".svc-logic-question-value");
+// export const logicDropdownValueSelector = Selector(".sd-input.sd-dropdown .sd-dropdown__value");
+// export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction");
+// export const logicActionTriggerEditorElement = Selector(".svc-logic_trigger-editor");
+// export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-questions");
+// export const logicDetailButtonElement = Selector(".sl-table__detail-button");
+// export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)");
 
-// export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes") {
-//   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
-// }
-// export function getSelectOptionByText(text: string) {
-//   return Selector("option").withExactText(text).filterVisible();
-// }
-// export function getBarItemByText(text) {
-//   return Selector(".sv-action-bar-item__title").withText(text).parent(".sv-action-bar-item");
-// }
-// export function getPropertyGridCategory(categoryName) {
-//   return Selector(".spg-panel__title span").withText(categoryName).filterVisible();
-// }
+export function getTabbedMenuItemByText(page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes") {
+  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text);
+}
+export function getSelectOptionByText(page, text: string) {
+  return page.locator("option").withExactText(text);
+}
+export function getBarItemByText(page, text) {
+  return page.locator(".sv-action-bar-item").getByText(text);
+}
+export function getPropertyGridCategory(page, categoryName) {
+  return page.locator(".spg-panel__title span").getByText(categoryName);
+}
 
-// export function getBarItemByTitle(text: string) {
-//   return Selector(".sv-action-bar-item[title=\"" + text + "\"]");
-// }
-// export function getQuestionBarItemByTitle(text: string) {
-//   return Selector(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
-// }
-// export function getListItemByText(text) {
-//   return Selector(".sv-popup__content .svc-list .svc-list__item").withText(text).filterVisible();
-// }
-// export function getSurveyListItemByText(text) {
-//   return Selector(".sv-popup__content .sv-list__item").withText(text).filterVisible();
-// }
-// export function getAddNewQuestionButton() {
-//   return Selector(".svc-element__add-new-question > span").withText("Add Question");
-// }
+export function getBarItemByTitle(page, text: string) {
+  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+}
+export function getQuestionBarItemByTitle(page, text: string) {
+  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+}
+export function getListItemByText(page, text) {
+  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text);
+}
+export function getSurveyListItemByText(page, text) {
+  return page.locator(".sv-popup__content .sv-list__item").getByText(text);
+}
+export function getAddNewQuestionButton(page) {
+  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
+}
 
 // export function getVisibleElement(selector: string | Selector): Selector {
 //   return selectorIsVisibleFilter(Selector(selector));
@@ -147,7 +161,7 @@ export const base64image =
 // export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
 //   await t
 //     .click(Selector(".svc-element__add-new-question .svc-element__question-type-selector"))
-//     .click(Selector(".svc-list__item span").withExactText(text).filterVisible());
+//     .click(Selector(".svc-list__item span").withExactText(text));
 // }
 
 function selectorIsVisibleFilter(selector: Selector) {
