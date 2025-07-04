@@ -359,7 +359,7 @@ export class StringEditorViewModelBase extends Base {
     this.compostionInProgress = true;
   }
   public onBeforeInput(event: any): void {
-    if (this.maxLength > 0) {
+    if (!this.compostionInProgress && this.maxLength > 0) {
       const currentValue = event.target.innerText;
       const insertedData = event.data || "";
       const selectionLength = window.getSelection().toString().length;
