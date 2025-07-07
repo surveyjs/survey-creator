@@ -639,6 +639,7 @@ test("Drag Drop inside panel dynamic top indicator", async (t) => {
       })(idx, suffix, remove);
     }
 
+    await t.wait(500);
     await setClass(1, "drag-over-top");
     await takeElementScreenshot("drag-drop-inside-panel-dynamic-top.png", Page1, t, comparer);
     await setClass(1, "drag-over-top", "remove");
