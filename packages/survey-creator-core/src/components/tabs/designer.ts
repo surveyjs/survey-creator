@@ -257,6 +257,7 @@ export class TabDesignerViewModel extends Base {
   }
   public initSurvey() {
     if (!this.survey) return;
+    this.blockAnimations();
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPage(false);
@@ -275,6 +276,7 @@ export class TabDesignerViewModel extends Base {
     }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
+    this.releaseAnimations();
   }
   private checkNewPage(updatePageController: boolean) {
     const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
