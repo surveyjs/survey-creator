@@ -813,7 +813,10 @@ svc-question,
 
 // EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
 
-.svc-hovered > .svc-question__content > .svc-question__drag-area > .svc-question__drag-element {
+.svc-hovered
+  > .svc-question__content.svc-question__content:not(.svc-question__content--dragged)
+  > .svc-question__drag-area
+  > .svc-question__drag-element {
   opacity: var(--ctr-survey-question-panel-drag-area-drag-indicator-opacity, 0.5);
 }
 
