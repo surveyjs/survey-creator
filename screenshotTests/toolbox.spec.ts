@@ -43,7 +43,7 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, creatorTabElement, "toolbox-left-adaptive-compact.png");
 
-    await toolboxItem.first().hover();
+    await toolboxItem.first().hover({ force: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-left-compact-hover-item.png");
 
     await toolboxItemDots.click();
@@ -111,7 +111,7 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, creatorTabElement, "toolbox-right-adaptive-compact.png");
 
-    await toolboxItem.first().hover();
+    await toolboxItem.first().hover({ force: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-right-compact-hover-item.png");
 
     await toolboxItemDots.click();
@@ -152,7 +152,7 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, creatorTabElement, "toolbox-right-rtl-adaptive-compact.png");
 
-    await toolboxItem.first().hover();
+    await toolboxItem.first().hover({ force: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-right-rtl-compact-hover-item.png");
 
     await toolboxItemDots.click();
@@ -321,7 +321,7 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, creatorTabElement, "toolbox-left-scroll-compact.png");
 
-    await toolboxItem.first().hover();
+    await toolboxItem.first().hover({ force: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-left-scroll-compact-hover-item.png");
 
     await page.setViewportSize({ width: 2560, height: 1440 });
@@ -354,7 +354,7 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, creatorTabElement, "toolbox-right-scroll-compact.png");
 
-    await toolboxItem.first().hover();
+    await toolboxItem.first().hover({ force: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-right-scroll-compact-hover-item.png");
   });
 
@@ -384,7 +384,7 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, creatorTabElement, "toolbox-right-rtl-scroll-compact.png");
 
-    await toolboxItem.first().hover();
+    await toolboxItem.first().hover({ force: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-right-rtl-scroll-compact-hover-item.png");
   });
 
