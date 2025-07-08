@@ -86,10 +86,10 @@ export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 // export const creatorContentSelector = Selector(".svc-creator__content-holder");
 
-// export const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
-// export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
-// export const surveySettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Survey settings\"]");
-// export const themeSettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Theme settings\"]");
+export const expandButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Show Panel\"]");
+export const collapseButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
+export const surveySettingsButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Survey settings\"]");
+export const themeSettingsButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Theme settings\"]");
 // export const propertyGridSelector = Selector(".svc-side-bar__container");
 // export const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
 // export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
@@ -262,3 +262,12 @@ export async function setAllowZoom(page, newVal: boolean) {
 //     });
 //   });
 // });
+
+export async function resetFocusToBody(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    if (!!document.activeElement) {
+      document.activeElement.blur();
+    }
+    document.body.focus();
+  });
+}
