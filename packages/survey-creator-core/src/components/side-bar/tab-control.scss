@@ -162,6 +162,8 @@
   gap: var(--ctr-menu-toolbar-button-gap, var(--sjs-spacing-x1));
   border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
   cursor: pointer;
+  border: unset;
+  background: unset;
 }
 .svc-menu-action__button:hover,
 .svc-menu-action__button:focus,

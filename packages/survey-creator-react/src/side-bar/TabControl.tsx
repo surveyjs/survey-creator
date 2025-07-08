@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Action, ActionContainer, Base } from "survey-core";
-import { SurveyElementBase, ReactElementFactory, Scroll } from "survey-react-ui";
+import { SurveyElementBase, ReactElementFactory, Scroll, SurveyActionBar } from "survey-react-ui";
 import { MenuButton, TabControlModel } from "survey-creator-core";
 import { TabButtonComponent } from "./TabButton";
 
@@ -39,7 +39,7 @@ class TabControl extends SurveyElementBase<any, any> {
         </div>
         <div className="svc-sidebar-tabs__bottom-container">
           <div className="svc-sidebar-tabs__items">
-            <TabsComponent model={this.props.model.bottomToolbar}></TabsComponent>
+            <SurveyActionBar model={this.props.model.bottomToolbar}></SurveyActionBar>
           </div>
         </div>
       </div>

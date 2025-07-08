@@ -31,6 +31,19 @@ export class TabControlModel extends Base {
 
   constructor(public sidePanel: SidebarModel) {
     super();
+    let bottomActionBarCss = {
+      root: "sv-action-bar",
+      defaultSizeMode: "",
+      smallSizeMode: "",
+      item: "svc-menu-action__button",
+      itemWithTitle: "",
+      itemAsIcon: "",
+      itemActive: "svc-menu-action__button--selected",
+      itemPressed: "",
+      itemIcon: "svc-menu-action__icon",
+      itemTitleWithIcon: "",
+    };
+    this.bottomToolbar.cssClasses = bottomActionBarCss;
     this.createToggleAction();
     this.updateExpandCollapseAction();
     this.sidePanel.registerFunctionOnPropertyValueChanged("_visible", () => {

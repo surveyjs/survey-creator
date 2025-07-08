@@ -356,7 +356,7 @@ preset.apply(creator);</div></pre></code></div>
     return res;
   }
   private getEditModelJson(editablePresets: Array<CreatorPresetEditableBase>): any {
-    const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false, widthMode: "static", width: "1200px" };
+    const modelJson = { pages: [], showQuestionNumbers: false };
     editablePresets.forEach(preset => {
       const pages = preset.createPages();
       if (Array.isArray(pages)) {

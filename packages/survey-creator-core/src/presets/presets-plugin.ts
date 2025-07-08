@@ -1,5 +1,5 @@
-import { createDropdownActionModel, Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer } from "survey-core";
-import { TabDesignerPluginBase, SurveyCreatorModel, listComponentCss, TabControlModel, SidebarPageModel, PropertyGridViewModel, PropertyGridModel } from "survey-creator-core";
+import { createDropdownActionModel, Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer, IAction } from "survey-core";
+import { TabDesignerPluginBase, SurveyCreatorModel, listComponentCss, saveToFileHandler, TabControlModel, SidebarPageModel, PropertyGridViewModel, PropertyGridModel } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 
 export class TabPresetsPlugin extends TabDesignerPluginBase {
@@ -10,21 +10,55 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
     super(creator);
     creator.addTab({ name: "presets", plugin: this, iconName: TabPresetsPlugin.iconName });
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGridPresets", "svc-property-grid", this.propertyGridViewModel);
+  }
 
-    const settingsAction = createDropdownActionModel({
+  public saveToFileHandler = saveToFileHandler;
+
+  public exportToFile(fileName: string) {
+    if (this.model) {
+      const jsonBlob = new Blob([this.model.jsonText], { type: "application/json" });
+      this.saveToFileHandler(fileName, jsonBlob);
+    }
+  }
+  public importFromFile(file: File, callback?: (json: string) => void) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const surveyJSONText = fileReader.result as string;
+      if (this.model) {
+        try {
+          this.model.json = JSON.parse(surveyJSONText);
+        } catch{ }
+      }
+      callback && callback(surveyJSONText);
+    };
+    fileReader.readAsText(file);
+  }
+
+  public activate(): void {
+    this.model = new CreatorPresetEditorModel({}, this.creator);
+    this.updateActivePage();
+    this.updateTabControl();
+
+    const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.title });
+    const tools = [
+      { id: "save", title: "Save & Exit", markerIconName: "check-24x24", needSeparator: true },
+      { id: "import", title: "Import", markerIconName: "import-24x24" },
+      { id: "export", title: "Export", markerIconName: "download-24x24" },
+      { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true },
+    ];
+    let settingsAction;
+    presets.forEach(p => {
+      p.action = (item)=>{
+        settingsAction.popupModel.contentComponentData.model.selectedItem = item;
+        this.model.model.currentPage = this.model.model.getPageByName(item.id);
+      };
+    });
+    settingsAction = createDropdownActionModel({
       id: "presets-menu",
       locTooltipName: "ed.creatorPresetsTitle",
-      iconName: "gear-24x24",
-      mode: <any>new ComputedUpdater<string>(() => {
-        return this.creator.isMobileView ? "small" : "large";
-      }),
+      iconName: "navmenu-24x24"
     }, {
-      items: [{ id: "show-all-strings", locTitleName: "ed.translationShowAllStrings" }, { id: "show-used-strings-only", locTitleName: "ed.translationShowUsedStringsOnly" }],
-      allowSelection: true,
-      onSelectionChanged: (item: any) => {
-        // this.model.activeLanguage = item.id;
-        // this.languageSelectorAction.title = editorLocalization.getLocaleName(item.id);
-      },
+      items: [...presets, ...tools],
       verticalPosition: "top",
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
@@ -34,12 +68,6 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
     }, this.creator);
 
     this.tabControlModel.bottomToolbar.setItems([settingsAction]);
-  }
-
-  public activate(): void {
-    this.model = new CreatorPresetEditorModel({}, this.creator);
-    this.updateActivePage();
-    this.updateTabControl();
   }
 
   public deactivate(): boolean {
