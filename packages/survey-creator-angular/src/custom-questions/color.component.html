@@ -2,16 +2,21 @@
   <label [class]="model.getSwatchCss()" [style]="model.getSwatchStyle()">
     <svg [iconName]="model.cssClasses.swatchIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     <input type="color" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.colorInput"
-      [value]="model.renderedColorValue" (change)="model.onColorInputChange($event)" tabindex="-1"/>
+      [value]="model.renderedColorValue" (change)="model.onColorInputChange($event)" tabindex="-1"
+      [attr.aria-required]="model.a11y_input_ariaRequired" [attr.aria-labelledby]="model.a11y_input_ariaLabelledBy"
+      [attr.aria-label]="model.a11y_input_ariaLabel" [attr.aria-invalid]="model.a11y_input_ariaInvalid"
+      [attr.aria-describedby]="model.a11y_input_ariaDescribedBy" />
   </label>
   <input autocomplete="off" [disabled]="model.isInputReadOnly" [attr.id]="model.inputId"
-    [placeholder]="model.renderedPlaceholder" [attr.aria-required]="model.ariaRequired"
-    [attr.aria-label]="model.ariaLabel" [attr.aria-invalid]="model.ariaInvalid"
-    [attr.aria-describedby]="model.ariaDescribedBy" (change)="model.onChange($event)" (keyup)="model.onKeyUp($event)"
-    (blur)="model.onBlur($event)" (beforeinput)="model.onBeforeInput($event)" [value]="model.renderedValue"
-    [class]="model.cssClasses.control" />
+    [attr.aria-required]="model.a11y_input_ariaRequired" [attr.aria-labelledby]="model.a11y_input_ariaLabelledBy"
+    [attr.aria-label]="model.a11y_input_ariaLabel" [attr.aria-invalid]="model.a11y_input_ariaInvalid"
+    [attr.aria-describedby]="model.a11y_input_ariaDescribedBy" (change)="model.onChange($event)"
+    (keyup)="model.onKeyUp($event)" (blur)="model.onBlur($event)" (beforeinput)="model.onBeforeInput($event)"
+    [value]="model.renderedValue" [class]="model.cssClasses.control" />
   <ng-container *ngIf="model.showDropdownAction">
-    <sv-action-bar-item [model]="model.dropdownAction"></sv-action-bar-item>
+    <div aria-hidden="true" [class]="model.cssClasses.choicesButtonWrapper">
+      <sv-action-bar-item [model]="model.dropdownAction"></sv-action-bar-item>
+    </div>
     <sv-ng-popup [popupModel]="model.dropdownAction.popupModel"></sv-ng-popup>
   </ng-container>
 </div>

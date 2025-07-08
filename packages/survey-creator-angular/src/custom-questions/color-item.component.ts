@@ -8,7 +8,7 @@ import { ItemValue } from "survey-core";
   styles: [":host { display: none }"]
 })
 export class ColorItemComponent extends BaseAngular<ItemValue> {
-  @Input() model!: ItemValue
+  @Input() model!: ItemValue;
   protected override getModel(): ItemValue {
     return this.model;
   }

@@ -8,21 +8,22 @@ import {
   CustomWidgetCollection,
   Question,
   QuestionButtonGroupModel,
-  DragOrClickHelper
+  DragOrClickHelper,
+  settings as surveySettings
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
 import { settings } from "../src/creator-settings";
-import { QuestionToolbox } from "../src/toolbox";
+import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
+import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
+import { editorLocalization } from "../src/editorLocalization";
+export * from "../src/localization/english";
+export * from "../src/localization/german";
 
 test("toolbox support options", (): any => {
-  var allTypes = ElementFactory.Instance.getAllTypes();
+  var allTypes = ElementFactory.Instance.getAllToolboxTypes();
   var toolbox = new QuestionToolbox();
-  var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
-  if (allTypes.indexOf("linkvalue") > -1) {
-    unregistredCount++;
-  }
-  expect(toolbox.items).toHaveLength(allTypes.length - unregistredCount);
+  expect(toolbox.items).toHaveLength(allTypes.length);
   expect(toolbox.items[0].name).toEqual(toolbox.orderedQuestions[0]);
   expect(toolbox.items[0].json["type"]).toEqual(toolbox.orderedQuestions[0]);
   expect(toolbox.getItemByName("buttongroup")).toBeFalsy();
@@ -130,9 +131,10 @@ test("toolbox default categories calculator", (): any => {
     "matrix"
   ]);
   expect(toolbox["getDefaultQuestionCategories"]()).toEqual({
-    "radiogroup": "Choice Questions",
-    "dropdown": "Choice Questions",
-    "matrix": "Matrix Questions" });
+    "radiogroup": "choice",
+    "dropdown": "choice",
+    "matrix": "matrix"
+  });
 });
 
 test("toolbox default categories actions separator", (): any => {
@@ -155,7 +157,7 @@ test("toolbox default categories actions separator", (): any => {
 test("toolbox default categories", (): any => {
   var toolbox = new QuestionToolbox(undefined, undefined, true);
   expect(toolbox.categories.length).toBe(5);
-  expect(toolbox.categories[0].items.length).toBe(9);
+  expect(toolbox.categories[0].items.length).toBe(10);
   expect(toolbox.categories[1].items.length).toBe(3);
   expect(toolbox.categories[2].items.length).toBe(2);
   expect(toolbox.categories[3].items.length).toBe(3);
@@ -233,7 +235,7 @@ test("toolbox categories + allowExpandMultipleCategories property", (): any => {
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
   ]);
-  expect(toolbox.activeCategory).toEqual("General");
+  expect(toolbox.activeCategory).toEqual("general");
   expect(toolbox.categories[0].collapsed).toBeFalsy();
   toolbox.allowExpandMultipleCategories = true;
   expect(toolbox.categories[0].collapsed).toBeTruthy();
@@ -283,7 +285,7 @@ test("toolbox categories + keepAllCategoriesExpanded property", (): any => {
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
   ]);
-  expect(toolbox.activeCategory).toEqual("General");
+  expect(toolbox.activeCategory).toEqual("general");
   expect(toolbox.canCollapseCategories).toBeTruthy();
   toolbox.keepAllCategoriesExpanded = true;
   expect(toolbox.activeCategory).toBeFalsy();
@@ -347,13 +349,14 @@ test("toolbox categories defineCategories, #2", (): any => {
   expect(items[1].name).toBe("comment");
 
   toolbox.defineCategories([
-    { category: "text", items: [{ name: "text" }, "comment"] },
+    { category: "text", title: "Single text item", items: [{ name: "text" }, "comment"] },
     { category: "select", items: ["dropdown", "checkbox", "radiogroup"] },
   ], true);
   expect(toolbox.categories).toHaveLength(3);
   expect(toolbox.categories[0].name).toBe("text");
+  expect(toolbox.categories[0].title).toBe("Single text item");
   expect(toolbox.categories[1].name).toBe("select");
-  expect(toolbox.categories[2].name).toBe("Misc");
+  expect(toolbox.categories[2].name).toBe("misc");
   items = toolbox.categories[0].items;
   expect(items).toHaveLength(2);
   expect(items[0].name).toBe("text");
@@ -391,13 +394,9 @@ test("toolbox copied questions", (): any => {
   expect(toolbox.items).toHaveLength(2);
 });
 test("Save/Load all toolbox items", (): any => {
-  var allTypes = ElementFactory.Instance.getAllTypes();
-  var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
-  if (allTypes.indexOf("linkvalue") > -1) {
-    unregistredCount++;
-  }
+  var allTypes = ElementFactory.Instance.getAllToolboxTypes();
   var toolbox1 = new QuestionToolbox();
-  expect(toolbox1.items).toHaveLength(allTypes.length - unregistredCount);
+  expect(toolbox1.items).toHaveLength(allTypes.length);
   var toolbox2 = new QuestionToolbox(["text", "dropdown"]);
   toolbox1.jsonText = toolbox2.jsonText;
   expect(toolbox1.items).toHaveLength(2);
@@ -488,7 +487,7 @@ test("Add customWidgets into toolbox", (): any => {
   expect(toolbox.items[0].name).toEqual("radiogroup");
   expect(toolbox.items[1].name).toEqual("dropdown");
   expect(toolbox.items[2].name).toEqual("first");
-  expect(toolbox.items[2].className).toEqual("svc-toolbox__item svc-toolbox__item--firsticon");
+  expect(toolbox.items[2].className).toEqual("svc-toolbox__item svc-toolbox__item--has-icon svc-toolbox__item--firsticon");
   expect(toolbox.items[3].name).toEqual("second");
   expect(toolbox.items[4].name).toEqual("comp1");
   CustomWidgetCollection.Instance.clear();
@@ -672,4 +671,218 @@ test("Use custom widgets in questionTypes array to keep them in correct order in
   expect(toolbox.items[4].name).toEqual("dropdown");
   CustomWidgetCollection.Instance.clear();
   ComponentCollection.Instance.clear();
+});
+
+test("Toolbox search", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  creator.toolbox.searchManager.filterString = "dRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["dropdown", "tagbox", "matrixdropdown"]);
+  creator.toolbox.searchManager.filterString = "xdRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["matrixdropdown"]);
+  creator.toolbox.searchManager.filterString = "read";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["expression"]);
+});
+
+test("Toolbox search within categories with titles", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  creator.toolbox.showCategoryTitles = true;
+  expect(creator.toolbox.getCategoryByName("choice").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").collapsed).toBeTruthy();
+  expect(creator.toolbox.getCategoryByName("choice").empty).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").empty).toBeFalsy();
+  creator.toolbox.searchManager.filterString = "dRoP";
+  expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["dropdown", "tagbox", "matrixdropdown"]);
+  expect(creator.toolbox.getCategoryByName("choice").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("choice").empty).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").empty).toBeTruthy();
+  creator.toolbox.searchManager.filterString = "";
+  expect(creator.toolbox.getCategoryByName("choice").collapsed).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").collapsed).toBeTruthy();
+  expect(creator.toolbox.getCategoryByName("choice").empty).toBeFalsy();
+  expect(creator.toolbox.getCategoryByName("text").empty).toBeFalsy();
+});
+
+test("Toolbox show search depending on items count", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  expect(creator.toolbox.showSearch).toBeTruthy();
+  const old = QuestionToolbox.MINELEMENTCOUNT;
+  QuestionToolbox.MINELEMENTCOUNT = 30;
+  expect(creator.toolbox.showSearch).toBeFalsy();
+  QuestionToolbox.MINELEMENTCOUNT = old;
+  expect(creator.toolbox.showSearch).toBeTruthy();
+  creator.toolbox.searchEnabled = false;
+  expect(creator.toolbox.showSearch).toBeFalsy();
+});
+
+test("Toolbox child items do not get focus", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+
+  const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  const toolboxItemTool = new ToolboxToolViewModel(textItem, creator, creator.toolbox); // init popup model
+  expect(textItem.popupModel.isFocusedContainer).toBeFalsy();
+});
+
+test("Toolbox showSubitems property", (): any => {
+  const creator = new CreatorTester();
+  const textItem = creator.toolbox.getItemByName("text");
+  const toolboxTool = new ToolboxToolViewModel(textItem, creator, creator.toolbox);
+
+  expect(toolboxTool.itemComponent).toBe("svc-toolbox-item-group");
+
+  creator.toolbox.showSubitems = false;
+  expect(toolboxTool.itemComponent).toBe("svc-toolbox-item");
+});
+
+test("Toolbox item clearSubitems function", (): any => {
+  const creator = new CreatorTester();
+  const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+
+  expect(textItem.items.length).toBe(13);
+  expect(textItem.component).toBe("svc-toolbox-item-group");
+
+  textItem.clearSubitems();
+  expect(textItem.items.length).toBe(0);
+  expect(textItem.component).toBe("");
+});
+
+test("Toolbox item addSubitem function", (): any => {
+  const subitemsClassName = "svc-toolbox__item-subtype";
+  const creator = new CreatorTester();
+  const booleanItem = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
+  const radioBooleanItem = <IQuestionToolboxItem>{
+    id: "boolRadio",
+    name: "boolRadio",
+    title: "Radio",
+  };
+
+  const checkboxBooleanItem = <IQuestionToolboxItem>{
+    id: "boolCheckbox",
+    name: "boolCheckbox",
+    title: "Checkbox",
+  };
+
+  const customBooleanItem = <IQuestionToolboxItem>{
+    id: "boolCustom",
+    name: "boolCustom",
+    title: "Custom",
+  };
+  expect(booleanItem.hasSubItems).toBe(false);
+
+  booleanItem.addSubitem(radioBooleanItem);
+  expect(booleanItem.items.length).toBe(1);
+  expect(booleanItem.items[0].id).toBe("boolRadio");
+  expect(booleanItem.items[0].className).toContain(subitemsClassName);
+
+  booleanItem.addSubitem(checkboxBooleanItem);
+  expect(booleanItem.items.length).toBe(2);
+  expect(booleanItem.items[0].id).toBe("boolRadio");
+  expect(booleanItem.items[1].id).toBe("boolCheckbox");
+  expect(booleanItem.items[1].className).toContain(subitemsClassName);
+
+  booleanItem.addSubitem(customBooleanItem, 1);
+  expect(booleanItem.items.length).toBe(3);
+  expect(booleanItem.items[0].id).toBe("boolRadio");
+  expect(booleanItem.items[1].id).toBe("boolCustom");
+  expect(booleanItem.items[2].id).toBe("boolCheckbox");
+  expect(booleanItem.items[1].className).toContain(subitemsClassName);
+});
+
+test("Toolbox item removeSubitem function", (): any => {
+  const creator = new CreatorTester();
+  const ratingItem = creator.toolbox.getItemByName("rating") as QuestionToolboxItem;
+
+  expect(ratingItem.hasSubItems).toBe(true);
+  expect(ratingItem.items.length).toBe(3);
+
+  ratingItem.removeSubitem(ratingItem.items[0]);
+  expect(ratingItem.items.length).toBe(2);
+
+  ratingItem.removeSubitem("stars");
+  expect(ratingItem.items.length).toBe(1);
+  expect(ratingItem.items[0].id).toBe("smileys");
+  expect(ratingItem.component).toBe("svc-toolbox-item-group");
+
+  ratingItem.removeSubitem(ratingItem.items[0]);
+  expect(ratingItem.hasSubItems).toBe(false);
+  expect(ratingItem.component).toBe("");
+});
+
+test("ICustomQuestionTypeConfiguration.title should support a localizable, Bug#5904", (): any => {
+  editorLocalization.locales["en"] = editorLocalization.getLocale();
+  expect(editorLocalization.locales["en"]).toBeTruthy();
+  expect(editorLocalization.locales["de"]).toBeTruthy();
+  ComponentCollection.Instance.clear();
+  ComponentCollection.Instance.add(<any>{
+    name: "newquestion",
+    title: { en: "New Question en", de: "New Question de" },
+    questionJSON: {
+      type: "dropdown",
+      choices: [1, 2, 3, 4, 5]
+    }
+  });
+  const creator = new CreatorTester({ questionTypes: ["text", "checkbox"] });
+  const item = creator.toolbox.getItemByName("newquestion") as QuestionToolboxItem;
+  expect(item.title).toBe("New Question en");
+  creator.locale = "de";
+  expect(item.title).toBe("New Question de");
+  ComponentCollection.Instance.clear();
+});
+
+test("Check toolbox getAnimatedElement methods", (): any => {
+  const creator = new CreatorTester();
+
+  const toolbox = creator.toolbox;
+  const animationOptions = toolbox["getAnimationOptions"]();
+  const rootElement = document.createElement("div");
+  const panelElement = document.createElement("div");
+  panelElement.className = "svc-toolbox__panel";
+  rootElement.appendChild(panelElement);
+  toolbox["_rootElementValue"] = rootElement;
+
+  expect(animationOptions.getAnimatedElement()).toBe(panelElement);
+
+  const leaveClass = "svc-toolbox__panel--leave";
+  const enterClass = "svc-toolbox__panel--enter";
+  const isFlyoutToCompactRunningClass = "svc-toolbox--flyout-to-compact-running";
+  surveySettings.animationEnabled = true;
+  toolbox.enableOnElementRerenderedEvent();
+  expect(animationOptions.isAnimationEnabled()).toBeTruthy();
+  toolbox.blockAnimations();
+  expect(animationOptions.isAnimationEnabled()).toBeFalsy();
+  toolbox.releaseAnimations();
+  expect(animationOptions.isAnimationEnabled()).toBeTruthy();
+  surveySettings.animationEnabled = false;
+  expect(animationOptions.isAnimationEnabled()).toBeFalsy();
+
+  const enterOptions = animationOptions.getEnterOptions && animationOptions.getEnterOptions();
+  expect(enterOptions?.cssClass).toBe(enterClass);
+  const leaveOptions = animationOptions.getLeaveOptions && animationOptions.getLeaveOptions();
+  expect(leaveOptions?.cssClass).toBe(leaveClass);
+
+  surveySettings.animationEnabled = true;
+  toolbox.isCompact = true;
+  toolbox.isFocused = true;
+  expect(toolbox.isFlyoutToCompactRunning).toBeFalsy();
+  expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeFalsy();
+  toolbox.isFocused = false;
+  expect(toolbox.isFlyoutToCompactRunning).toBeTruthy();
+  expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeTruthy();
+  leaveOptions?.onAfterRunAnimation && leaveOptions?.onAfterRunAnimation(panelElement);
+  expect(toolbox.isFlyoutToCompactRunning).toBeFalsy();
+  expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeFalsy();
+  surveySettings.animationEnabled = false;
+});
+test("Update subitems on locale change, Bug#6014", (): any => {
+  const creator = new CreatorTester({ questionTypes: ["text", "checkbox"] });
+  creator.locale = "de";
+  const checkbox = creator.toolbox.getItemByName("checkbox") as QuestionToolboxItem;
+  expect(checkbox.locTitle.renderedHtml).toBe("Auswahl");
+  const text = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  expect(text.getSubitem("color").locTitle.renderedHtml).toBe("Farbe");
+  creator.locale = "en";
 });

@@ -1,0 +1,13 @@
+<ng-template #template>
+    <div *ngIf="model.isVisible" class="svc-search">
+        <div class="svc-search__search-icon">
+            <svg [iconName]="'icon-search'" [size]="'auto'" sv-ng-svg-icon></svg>
+        </div>
+        <input type="text" class="svc-search__input" [(ngModel)]="model.filterString"
+            [attr.aria-label]="model.filterStringPlaceholder" [attr.placeholder]="model.filterStringPlaceholder" />
+        <div class="svc-search__toolbar">
+            <div class="svc-search__toolbar-counter">{{model.matchCounterText}}</div>
+            <sv-action-bar [model]="model.searchActionBar"></sv-action-bar>
+        </div>
+    </div>
+</ng-template>

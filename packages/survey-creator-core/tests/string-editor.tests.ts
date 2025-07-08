@@ -5,15 +5,13 @@ import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
-settings.supportCreatorV2 = true;
-
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),
   sanitizeEditableContent: jest.fn(),
 }));
 test("Test css", (): any => {
-  let creator = new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
+  const creator = new CreatorTester();
+  creator.JSON = {
     pages: [
       {
         elements: [
@@ -21,13 +19,12 @@ test("Test css", (): any => {
         ]
       }
     ]
-  });
-  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
-  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor svc-string-editor--multiline");
+  };
+  const survey = creator.survey;
+  const stringEditorSurveyTitle = new StringEditorViewModelBase(survey.locTitle, creator);
+  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor");
 
-  const locStrQuestion: LocalizableString = new LocalizableString(survey.getQuestionByName("q"), false, "description");
-  var stringEditorQuestion = new StringEditorViewModelBase(locStrQuestion, creator);
+  const stringEditorQuestion = new StringEditorViewModelBase(survey.getQuestionByName("q").locDescription, creator);
 
   expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden svc-string-editor--multiline");
   expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor svc-string-editor--multiline");
@@ -128,20 +125,20 @@ test("Test string editor select questions items readonly", (): any => {
   Serializer.getProperty("dropdown", "choices").readOnly = false;
 
   creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj.getType() === "dropdown" && options.propertyName == "choices")
+    if (options.obj?.isDescendantOf("dropdown") && options.propertyName == "choices")
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
 
   creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
       options.readOnly = false;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
   creator.onGetPropertyReadOnly.clear();
 
   creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, true, true, true, true, true]);
@@ -424,6 +421,7 @@ test("StringEditorConnector for selectbase questions", (): any => {
   };
   const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   creator.selectElement(question);
+  creator.maximumChoicesCount = 3;
 
   const questionAdorner = new QuestionAdornerViewModel(
     creator,
@@ -446,6 +444,8 @@ test("StringEditorConnector for selectbase questions", (): any => {
   expect(question.choices.map(c => c.value)).toEqual(["item1", "item2", "item3"]);
   var connectorItem3 = StringEditorConnector.get(question.choices[2].locText);
   connectorItem3.onDoActivate.add(sender => activeLocString = sender);
+  connectorItem3.onEditComplete.fire(null, {});
+  expect(question.choices.map(c => c.value)).toEqual(["item1", "item2", "item3"]);
 
   connectorItem2.onBackspaceEmptyString.fire(null, {});
   expect(question.choices.map(c => c.value)).toEqual(["item1", "item3"]);
@@ -458,6 +458,43 @@ test("StringEditorConnector for selectbase questions", (): any => {
   connectorItem3.onBackspaceEmptyString.fire(null, {});
   expect(question.choices.map(c => c.value)).toEqual([]);
 });
+
+test("StringEditor backspace and strings with new lines only ", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const itemValue = question.choices[0];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
+  var connectorItem1 = StringEditorConnector.get(itemValue.locText);
+  seChoice.setLocString(itemValue.locText);
+  var event = {
+    keyCode: 8,
+    target: {
+      innerText: "a"
+    },
+    preventDefault: () => { },
+    stopImmediatePropagation: () => { },
+    stopPropagation: () => { }
+  };
+  seChoice.onKeyDown(event as any);
+  expect(question.choices.map(c => c.value)).toEqual(["item1", "item2"]);
+
+  event.target.innerText = "\n";
+  seChoice.onKeyDown(event as any);
+  expect(question.choices.map(c => c.value)).toEqual(["item2"]);
+});
+
 test("StringEditorConnector for new choice, Bug#4292", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -537,6 +574,7 @@ test("StringEditorConnector for multiple text questions", (): any => {
 
 test("StringEditorConnector for matrix questions (columns)", (): any => {
   const creator = new CreatorTester();
+  creator.maximumColumnsCount = 3;
   creator.JSON = {
     elements: [
       { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
@@ -567,6 +605,9 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
   var connectorItem3 = StringEditorConnector.get(question.columns[2].locText);
   connectorItem3.onDoActivate.add(sender => activeLocString = sender);
 
+  connectorItem3.onEditComplete.fire(null, {});
+  expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 2", "Column 3"]);
+
   connectorItem2.onBackspaceEmptyString.fire(null, {});
   expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 3"]);
   expect(activeLocString).toEqual(question.columns[0].locText);
@@ -581,6 +622,7 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
 
 test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
   const creator = new CreatorTester();
+  creator.maximumColumnsCount = 3;
   creator.JSON = {
     elements: [
       { type: "matrixdropdown", name: "q2", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
@@ -615,55 +657,8 @@ test("StringEditorConnector for matrixdropdown questions (columns)", (): any => 
     expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 2", "Column 3"]);
     var connectorItem3 = StringEditorConnector.get(question.columns[2].locTitle);
     connectorItem3.onDoActivate.add(sender => activeLocString = sender);
-
-    connectorItem2.onBackspaceEmptyString.fire(null, {});
-    expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 3"]);
-    expect(activeLocString).toEqual(question.columns[0].locTitle);
-
-    connectorItem1.onBackspaceEmptyString.fire(null, {});
-    expect(question.columns.map(c => c.value)).toEqual(["Column 3"]);
-    expect(activeLocString).toEqual(question.columns[0].locTitle);
-
-    connectorItem3.onBackspaceEmptyString.fire(null, {});
-    expect(question.columns.map(c => c.value)).toEqual([]);
-  }
-});
-
-test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
-  const creator = new CreatorTester();
-  creator.JSON = {
-    elements: [
-      { type: "matrixdropdown", name: "q2", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
-      { type: "matrixdynamic", name: "q3", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] }
-    ]
-  };
-  const allQuestions = creator.survey.getAllQuestions();
-
-  for (var i = 0; i < allQuestions.length; i++) {
-    const question = allQuestions[i] as any;
-    creator.selectElement(question);
-
-    const questionAdorner = new QuestionAdornerViewModel(
-      creator,
-      question,
-      <any>undefined
-    );
-    var connectorTitle = StringEditorConnector.get(question.locTitle);
-    var connectorItem1 = StringEditorConnector.get(question.columns[0].locTitle);
-    var connectorItem2 = StringEditorConnector.get(question.columns[1].locTitle);
-    var activeLocString;
-    connectorTitle.onDoActivate.add(sender => activeLocString = sender);
-    connectorItem1.onDoActivate.add(sender => activeLocString = sender);
-    connectorItem2.onDoActivate.add(sender => activeLocString = sender);
-
-    connectorTitle.onEditComplete.fire(null, {});
-    expect(activeLocString).toEqual(question.columns[0].locTitle);
-    connectorItem1.onEditComplete.fire(null, {});
-    expect(activeLocString).toEqual(question.columns[1].locTitle);
-    connectorItem2.onEditComplete.fire(null, {});
+    connectorItem3.onEditComplete.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 2", "Column 3"]);
-    var connectorItem3 = StringEditorConnector.get(question.columns[2].locTitle);
-    connectorItem3.onDoActivate.add(sender => activeLocString = sender);
 
     connectorItem2.onBackspaceEmptyString.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual(["Column 1", "Column 3"]);
@@ -691,6 +686,7 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
   for (var i = 0; i < allQuestions.length; i++) {
     const question = allQuestions[i] as any;
     creator.selectElement(question);
+    creator.maximumRowsCount = 3;
 
     const questionAdorner = new QuestionAdornerViewModel(
       creator,
@@ -711,6 +707,8 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
     expect(question.rows.map(c => c.value)).toEqual(["Row 1", "Row 2", "Row 3"]);
     var connectorItem3 = StringEditorConnector.get(question.rows[2].locText);
     connectorItem3.onDoActivate.add(sender => activeLocString = sender);
+    connectorItem3.onEditComplete.fire(null, {});
+    expect(question.rows.map(c => c.value)).toEqual(["Row 1", "Row 2", "Row 3"]);
 
     connectorItem2.onBackspaceEmptyString.fire(null, {});
     expect(question.rows.map(c => c.value)).toEqual(["Row 1", "Row 3"]);
@@ -821,39 +819,6 @@ test("StringEditor on property value changing", () => {
   stringEditorQuestion.onBlur(event);
   expect(eventRaised).toEqual(2);
   expect(question.locTitle.text).toEqual("c");
-});
-
-test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator/issues/3568", () => {
-  const creator = new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { name: "q", type: "text" }
-        ]
-      }
-    ]
-  });
-
-  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
-  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-
-  var attrTest, valueTest;
-  var event = {
-    target: {
-      parentElement: { click: () => { } },
-      innerText: "a", setAttribute: (attr, val) => {
-        attrTest = attr;
-        valueTest = val;
-      }, removeAttribute: (attr, val) => { attrTest = attr; }
-    }
-  };
-  stringEditorSurveyTitle.onFocus(event);
-  expect(attrTest).toEqual("tabindex");
-  expect(valueTest).toEqual(-1);
-  attrTest = null;
-  stringEditorSurveyTitle.onBlur(event);
-  expect(attrTest).toEqual("tabindex");
 });
 
 test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com/surveyjs/survey-creator/issues/3658", () => {
@@ -992,7 +957,18 @@ test("StringEditor multiline paste for matrix questions", (): any => {
   connectorItemRow.onTextChanging.fire(null, { value: "a\nb\r\nc" });
   expect(question.rows.map(c => c.text)).toEqual(["a", "b", "c", "Row 2"]);
 });
-
+test("Support for creator.storeSjsVersion", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.JSON["sjsVersion"]).toBeFalsy();
+  expect(creator.text.indexOf("sjsVersion") > 0).toBeFalsy();
+  creator.storeSjsVersion = true;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.JSON["sjsVersion"]).toBeTruthy();
+  expect(creator.text.indexOf("sjsVersion") > 0).toBeTruthy();
+  creator.storeSjsVersion = false;
+  expect(creator.JSON["sjsVersion"]).toBeFalsy();
+  expect(creator.text.indexOf("sjsVersion") > 0).toBeFalsy();
+});
 test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionTextModel("q") })).toBeFalsy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMultipleTextModel("q") })).toBeTruthy();
@@ -1001,4 +977,100 @@ test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMatrixModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionRadiogroupModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionImagePickerModel("q") })).toBeFalsy();
+});
+test("Test string editor inplaceEditForValues without Creator", (): any => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "q0",
+            "choices": [
+              "item1",
+              "item2"
+            ]
+          }
+        ]
+      }
+    ]
+  });
+
+  var itemValue;
+  const q0 = <QuestionRadiogroupModel>survey.getQuestionByName("q0");
+  itemValue = q0.choices[0];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText);
+  expect(itemValue.text).toEqual("item1");
+  expect(seChoice.contentEditable).toBeTruthy();
+  seChoice.onBlur({ target: { innerText: "newItem", innerHTML: "newItem", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.locText.text).toEqual("newItem");
+  expect(itemValue.value).toEqual("item1");
+  expect(itemValue.text).toEqual("newItem");
+
+  var otherItem;
+  const q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q0");
+  otherItem = q1.otherItem;
+  var seChoiceOther = new StringEditorViewModelBase(otherItem.locText);
+  expect(otherItem.text).toEqual("Other (describe)");
+  seChoiceOther.onBlur({ target: { innerText: "Other changed", innerHTML: "Other changed", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(otherItem.locText.text).toEqual("Other changed");
+  expect(q0.otherText).toEqual("Other changed");
+});
+
+test("Test string editor description clear (with EOL)", (): any => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "title": "title",
+            "description": "desc",
+            "name": "q0",
+            "choices": ["i1", "i2"]
+          }
+        ]
+      }
+    ]
+  });
+
+  const q0 = survey.getQuestionByName("q0");
+  const itemValue = q0.choices[0];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText);
+  var seDescription = new StringEditorViewModelBase(q0.locDescription);
+  expect(itemValue.text).toEqual("i1");
+  seChoice.onBlur({ target: { innerText: "new\nTitle", innerHTML: "new\nTitle", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.text).toEqual("newTitle");
+
+  expect(q0.description).toEqual("desc");
+  seDescription.onBlur({ target: { innerText: "new\nDesc", innerHTML: "new\nDesc", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(q0.locDescription.text).toEqual("new\nDesc");
+
+  seDescription.onBlur({ target: { innerText: "\n", innerHTML: "\n", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(q0.locDescription.text).toEqual("");
+});
+
+test("StringEditor multiline paste for selectbase questions should respect creator.maximumChoicesCount", (): any => {
+  const creator = new CreatorTester();
+  creator.maximumChoicesCount = 4;
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  var connectorItem2 = StringEditorConnector.get(question.choices[0].locText);
+
+  connectorItem2.onTextChanging.fire(null, { value: "\na\nb\r\nc\nd\n" });
+  expect(question.choices.map(c => c.text)).toEqual(["a", "b", "c", "item2"]);
+  expect(question.choices.map(c => c.value)).toEqual(["item3", "item4", "item5", "item2"]);
 });

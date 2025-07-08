@@ -8,10 +8,11 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
     super(props);
   }
 
-  protected renderInput(): JSX.Element {
+  protected renderInput(): React.JSX.Element {
     const q = this.question as QuestionDropdownModel;
     initLogicOperator(q);
-    const text = (q.selectedItemLocText) ? this.renderLocString(q.selectedItemLocText) : "";
+    const text = (q.locReadOnlyText) ? this.renderLocString(q.locReadOnlyText) : "";
+    const dropdownListModel = this.question.dropdownListModel;
 
     return (<div
       id={this.question.inputId}
@@ -24,18 +25,23 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
       onChange={this.updateValueOnEvent}
       onInput={this.updateValueOnEvent}
       onKeyUp={this.keyhandler}
-      role={this.question.ariaRole}
-      aria-required={this.question.ariaRequired}
-      aria-label={this.question.ariaLabel}
-      aria-invalid={this.question.ariaInvalid}
-      aria-describedby={this.question.ariaDescribedBy}
+      role={dropdownListModel.ariaQuestionRole}
+      aria-required={dropdownListModel.ariaQuestionRequired}
+      aria-invalid={dropdownListModel.ariaQuestionInvalid}
+      aria-errormessage={dropdownListModel.ariaQuestionErrorMessage}
+      aria-expanded={dropdownListModel.ariaQuestionExpanded}
+      aria-label={dropdownListModel.ariaQuestionLabel}
+      aria-labelledby={dropdownListModel.ariaQuestionLabelledby}
+      aria-controls={dropdownListModel.ariaQuestionControls}
     >
       <div className={this.question.cssClasses.controlValue}>
         {text}
-        <div>{q.readOnlyText}</div>
       </div>
-      {this.createClearButton()}
     </div>);
+  }
+
+  protected renderEditorButtons(): React.JSX.Element | null {
+    return null;
   }
 }
 

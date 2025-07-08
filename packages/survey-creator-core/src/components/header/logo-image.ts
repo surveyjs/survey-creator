@@ -1,7 +1,7 @@
 import { Base, CssClassBuilder, property, Serializer, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getAcceptedTypesByContentMode } from "../../utils/utils";
-require("./logo-image.scss");
+import "./logo-image.scss";
 
 export class LogoImageViewModel extends Base {
   constructor(private creator: SurveyCreatorModel, public root: HTMLDivElement) {
@@ -37,8 +37,7 @@ export class LogoImageViewModel extends Base {
         model.creator.chooseFiles(fileInput, (files: File[]) => {
           model.uploadFile(model, fileInput, files);
         }, { element: this.survey, elementType: this.survey.getType(), propertyName: "logo" });
-      }
-      else model.uploadFile(model, fileInput, [fileInput.files[0]]);
+      } else model.uploadFile(model, fileInput, [fileInput.files[0]]);
     }
   }
   public remove(model: LogoImageViewModel) {

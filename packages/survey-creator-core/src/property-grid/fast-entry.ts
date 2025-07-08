@@ -1,45 +1,10 @@
-import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer } from "survey-core";
+import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, Base, Helpers } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 
 export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected commentValue: QuestionCommentModel;
-
-  protected static calcBeforeApplyItemsArray(
-    dest: Array<any>,
-    src: Array<any>,
-    names: Array<string>
-  ): void {
-    if (!src || src.length == 0) {
-      dest.splice(0, dest.length);
-      return;
-    }
-    if (dest.length > src.length) {
-      dest.splice(src.length, dest.length - src.length);
-    }
-    if (dest.length < src.length) {
-      var insertedArray = [];
-      for (var i = dest.length; i < src.length; i++) {
-        insertedArray.push(src[i]);
-      }
-      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
-    }
-  }
-
-  public static applyItemsArray(
-    dest: Array<any>,
-    src: Array<any>,
-    names: Array<string> = []
-  ): void {
-    this.calcBeforeApplyItemsArray(dest, src, names);
-    for (var i = 0; i < dest.length; i++) {
-      names.forEach((name) => {
-        dest[i][name] = src[i][name];
-      });
-    }
-  }
-
   constructor(
     public choices: Array<any>,
     options: ISurveyCreatorOptions = null,
@@ -54,8 +19,9 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeholder =
       editorLocalization.getString("pe.fastEntryPlaceholder");
     this.editSurvey.onValidateQuestion.add((sender, options) => {
+      if (options.errors.length > 0) return;
       const minChoiceCount = this.options.minimumChoicesCount;
-      if(minChoiceCount > 0) {
+      if (minChoiceCount > 0) {
         const choicesCount = this.getChoicesCount();
         if (minChoiceCount > choicesCount) {
           options.error = editorLocalization
@@ -80,7 +46,30 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       }
     });
   }
-
+  protected calcBeforeApplyItemsArray(dest: Array<any>, src: Array<any>, names: Array<string>): void {
+    if (!src || src.length == 0) {
+      dest.splice(0, dest.length);
+      return;
+    }
+    if (dest.length > src.length) {
+      dest.splice(src.length, dest.length - src.length);
+    }
+    if (dest.length < src.length) {
+      var insertedArray = [];
+      for (var i = dest.length; i < src.length; i++) {
+        insertedArray.push(src[i]);
+      }
+      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
+    }
+  }
+  public applyItemValueArray(dest: Array<any>, src: Array<any>, names: Array<string> = []): void {
+    this.calcBeforeApplyItemsArray(dest, src, names);
+    for (var i = 0; i < dest.length; i++) {
+      names.forEach((name) => {
+        dest[i][name] = src[i][name];
+      });
+    }
+  }
   protected getSurveyJSON(): any {
     return {
       elements: [
@@ -100,17 +89,20 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
 
   public apply(): boolean {
     if (this.comment.isEmpty()) return false;
+    return this.applyCore();
+  }
+  protected applyCore(): boolean {
     if (this.editSurvey.hasErrors(true)) return false;
-    const items = this.convertTextToItemValues(this.comment.value);
-    FastEntryEditorBase.applyItemsArray(<any>this.choices, items, this.names);
+    const text = this.comment.value || "";
+    const texts = text.split("\n") || [];
+    let items = this.convertTextToItemValues(texts);
+    items = this.options.onFastEntryCallback(items, texts);
+    this.applyItemValueArray(<any>this.choices, items, this.names);
     return true;
   }
 
-  protected convertTextToItemValues(text: string): ItemValue[] {
-    var items = [];
-    if (!text) return items;
-
-    var texts = text.split("\n");
+  protected convertTextToItemValues(texts: Array<string>): ItemValue[] {
+    const items = [];
     for (var i = 0; i < texts.length; i++) {
       if (!texts[i]) continue;
       var elements = texts[i].split(ItemValue.Separator);
@@ -162,13 +154,14 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected collectNames(item, type: string, separatorCounter: number): string {
     let text: string = "";
     this.names.forEach((name) => {
+      let str = undefined;
       if (type === "itemvalues") {
         if (name == "value") return;
-        var str = name == "text" ? item.pureText : item[name];
+        str = name == "text" ? item.pureText : item[name];
       } else {
-        var str = item[name];
+        str = item[name];
       }
-      if (!!str) {
+      if (!Helpers.isValueEmpty(str)) {
         for (var i = 0; i < separatorCounter; i++) {
           text += ItemValue.Separator;
         }
@@ -192,24 +185,6 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
 }
 
 export class FastEntryEditor extends FastEntryEditorBase {
-  public static applyItemValueArray(
-    dest: Array<ItemValue>,
-    src: Array<ItemValue>,
-    names: Array<string> = []
-  ): void {
-    this.calcBeforeApplyItemsArray(dest, src, names);
-    for (var i = 0; i < dest.length; i++) {
-      if (dest[i].value != src[i].value) {
-        dest[i].value = src[i].value;
-      }
-      dest[i].text = src[i].hasText ? src[i].text : "";
-      names.forEach((name) => {
-        if (name == "value" || name == "text") return;
-        dest[i][name] = src[i][name];
-      });
-    }
-  }
-
   constructor(
     public choices: Array<ItemValue>,
     options: ISurveyCreatorOptions = null,
@@ -218,15 +193,25 @@ export class FastEntryEditor extends FastEntryEditorBase {
   ) {
     super(choices, options, className, names);
   }
-
   public apply(): boolean {
-    //if (this.comment.isEmpty()) return false;
-    if (this.editSurvey.hasErrors(true)) return false;
-    const items = this.convertTextToItemValues(this.comment.value);
-    FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);
-    return true;
+    return this.applyCore();
   }
-
+  public applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>, names: Array<string> = []): void {
+    if (!Array.isArray(src)) src = [];
+    for (let i = 0; i < src.length; i++) {
+      const item = ItemValue.getItemByValue(dest, src[i].value);
+      if (item) {
+        item.text = src[i].text;
+        names.forEach((name) => {
+          if (name !== "value") {
+            item[name] = src[i][name];
+          }
+        });
+        src.splice(i, 1, item);
+      }
+    }
+    dest.splice.apply(dest, [0, dest.length].concat(<any>src));
+  }
   protected convertItemValuesToText(): string {
     var text = "";
     this.choices.forEach((item) => {

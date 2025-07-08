@@ -1,14 +1,8 @@
-import React from "react";
-import { CSSProperties } from "react";
-import { ITabbedMenuItem, TabbedMenuItem, TabbedMenuContainer } from "survey-creator-core";
-import {
-  Base,
-  IAction,
-  Action,
-  ResponsivityManager,
-  AdaptiveActionContainer
-} from "survey-core";
-import { attachKey2click, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { TabbedMenuItem, TabbedMenuContainer } from "survey-creator-core";
+import { Base, ResponsivityManager } from "survey-core";
+import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 export interface ITabbedMenuComponentProps {
   model: TabbedMenuContainer;
@@ -18,7 +12,6 @@ export class TabbedMenuComponent extends SurveyElementBase<
   ITabbedMenuComponentProps,
   any
 > {
-  private manager: ResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
   private get model() {
@@ -34,27 +27,28 @@ export class TabbedMenuComponent extends SurveyElementBase<
     this.rootRef = React.createRef();
   }
 
-  renderElement(): JSX.Element {
-    const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.id} />);
+  renderElement(): React.JSX.Element {
+    const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.renderedId} />);
     return (
-      <div ref={this.rootRef} className="svc-tabbed-menu">
+      <div ref={this.rootRef} className="svc-tabbed-menu" role="tablist" style={this.model.getRootStyle()}>
         {items}
       </div>
     );
   }
-
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    const container: HTMLDivElement = this.rootRef.current;
+    if (!container) return;
+    this.model.initResponsivityManager(container);
+  }
   componentDidMount() {
     super.componentDidMount();
     const container: HTMLDivElement = this.rootRef.current;
     if (!container) return;
-    this.manager = new ResponsivityManager(
-      container,
-      this.model,
-      ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
-    );
+    this.model.initResponsivityManager(container);
   }
   componentWillUnmount() {
-    this.manager && (this.manager.dispose());
+    this.model.resetResponsivityManager();
     super.componentWillUnmount();
   }
 }
@@ -63,8 +57,13 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   any,
   any
 > {
+  private ref: React.RefObject<HTMLDivElement>;
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+  }
 
-  private get item() {
+  private get item(): TabbedMenuItem {
     return this.props.item;
   }
 
@@ -72,7 +71,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
     return this.item;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     let css: string = "svc-tabbed-menu-item-container";
     if (this.item.css) {
       css += " " + this.item.css;
@@ -85,42 +84,64 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
     );
 
     return (
-      <span key={this.item.id} className={css}>
+      <span key={this.item.id} className={css} ref={this.ref}>
         <div className="sv-action__content">
           {component}
         </div>
       </span>
     );
   }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.item.updateModeCallback = (mode, callback) => {
+      queueMicrotask(() => {
+        if ((ReactDOM as any)["flushSync"]) {
+          (ReactDOM as any)["flushSync"](() => {
+            this.item.mode = mode;
+          });
+        } else {
+          this.item.mode = mode;
+        }
+        queueMicrotask(() => {
+          callback(mode, this.ref.current);
+        });
+      });
+    };
+    this.item.afterRender();
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.item.updateModeCallback = undefined;
+  }
 }
 
 export interface ITabbedMenuItemComponentProps {
-  item: Action;
+  item: TabbedMenuItem;
 }
 export class TabbedMenuItemComponent extends SurveyElementBase<
   ITabbedMenuItemComponentProps,
   any
 > {
-  get item(): Action {
+  get item(): TabbedMenuItem {
     return this.props.item;
   }
   protected getStateElement(): Base {
     return this.item;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const item = this.item;
-    let className: string = "svc-tabbed-menu-item";
-    if (item.active) className += " svc-tabbed-menu-item--selected";
-    if (item.enabled !== undefined && !item.enabled)
-      className += " svc-tabbed-menu-item--disabled";
-    let titleClassName: string =
-      "svc-text svc-tabbed-menu-item__text svc-text--normal";
-    if (item.active) titleClassName += " svc-text--bold";
-
     return (attachKey2click(
-      <div className={className} onClick={() => item.action(item)}>
-        <span className={titleClassName}>{item.title}</span>
+      <div
+        role="tab"
+        id={"tab-" + item.id}
+        aria-selected={item.active}
+        aria-controls={"scrollableDiv-" + item.id}
+        className={item.getRootCss()}
+        onClick={() => item.action(item)}
+      >
+        {item.hasTitle ? <span className={item.getTitleCss()}>{item.title}</span> : null}
+        {item.hasIcon ? <SvgIcon iconName={item.iconName} className={item.getIconCss()} size={"auto"} title={item.tooltip || item.title}></SvgIcon> : null}
       </div>
     )
     );

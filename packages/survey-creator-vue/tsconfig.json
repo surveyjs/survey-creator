@@ -1,5 +1,5 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "env.d.ts",
     "src/**/*",
@@ -11,6 +11,9 @@
     "paths": {
       "@/*": [
         "./src/*",
+      ],
+      "vue": [
+        "./node_modules/vue"
       ],
       "survey-core": [
         "./node_modules/survey-core"

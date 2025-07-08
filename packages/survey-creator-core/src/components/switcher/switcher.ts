@@ -1,6 +1,6 @@
 import { Action, CssClassBuilder, property } from "survey-core";
 
-require("./switcher.scss");
+import "./switcher.scss";
 
 export class Switcher extends Action {
   @property() checked: boolean;

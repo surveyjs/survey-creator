@@ -1,48 +1,53 @@
-@import "../variables.scss";
-
-@import "blocks/spg-action-bar.scss";
-@import "blocks/spg-question.scss";
-@import "blocks/spg-input.scss";
-@import "blocks/spg-dropdown.scss";
-@import "blocks/spg-comment.scss";
-@import "blocks/spg-panel.scss";
-@import "blocks/spg-checkbox.scss";
-@import "blocks/spg-matrixdynamic.scss";
-@import "blocks/spg-table.scss";
-@import "blocks/spg-question-group.scss";
-@import "blocks/spg-color-editor.scss";
-@import "blocks/spg-file-edit.scss";
-@import "blocks/spg-link";
-@import "blocks/spg-theme-builder.scss";
-@import "blocks/spg-overriding.scss";
-@import "blocks/spg-search-editor.scss";
+@use "../variables" as *;
+@use "blocks/spg-action-bar.scss";
+@use "blocks/spg-question.scss";
+@use "blocks/spg-input.scss";
+@use "blocks/spg-dropdown.scss";
+@use "blocks/spg-comment.scss";
+@use "blocks/spg-panel.scss";
+@use "blocks/spg-checkbox.scss";
+@use "blocks/spg-matrixdynamic.scss";
+@use "blocks/spg-table.scss";
+@use "blocks/spg-question-group.scss";
+@use "blocks/spg-color-editor.scss";
+@use "blocks/spg-file-edit.scss";
+@use "blocks/spg-link";
+@use "blocks/spg-theme-builder.scss";
+@use "blocks/spg-overriding.scss";
+@use "blocks/spg-search-editor.scss";
+@use "blocks/spg-buttongroup.scss";
 
 .spg-root-modern {
   position: relative;
   width: 100%;
-  border-right: 1px solid $border;
+  border-inline-end: 1px solid transparent;
+  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
-  @include disableAnimations;
+  height: 0;
+  flex-grow: 1;
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
+  @include disableLibraryAnimations;
 }
 
 .spg-container {
   width: 100%;
-  @include disableTransitionAnimations;
-}
-
-.spg-container.spg-container_search {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.spg-container_search .spg-root-modern {
-  top: calcSize(7);
-  margin-top: 1px;
-  height: calc(100% - 1px - calcSize(7));
-  overflow: auto;
+.spg-root-modern.spg-root--one-category {
+  border-inline-end: unset;
+  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+
+  .spg-page.spg-body__page {
+    box-shadow: unset;
+  }
 }
 
-.sv-popup--modal {
-  &.sv-property-editor .sv-popup__container {
+.sv-popup--modal-popup {
+  &.svc-property-editor .sv-popup__container {
     .sv-popup_shadow {
       background-color: transparent;
     }
@@ -68,10 +73,11 @@
   .sd-body,
   .sl-body {
     min-width: calcSize(78);
+    padding: 0;
   }
 }
 
-.sv-popup.sv-property-editor .sd-root-modern {
+.sv-popup.svc-property-editor .sd-root-modern {
   --sd-mobile-width: 0;
 }
 
@@ -88,12 +94,9 @@
   flex-direction: column;
 }
 
-.spg-title {
-  .spg-action-bar {
-    margin-top: calcSize(-1);
-    margin-bottom: calcSize(-1);
-    margin-right: 1px;
-  }
+.spg-action-title-bar {
+  margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
+  padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
 }
 
 .spg-body {
@@ -104,7 +107,7 @@
   margin: calcSize(3);
 }
 
-.spg-title-toolobar--single-help-action {
+.spg-title-toolbar--single-help-action {
   justify-content: flex-start;
   padding-left: calcSize(0.5);
 
@@ -113,10 +116,14 @@
   // padding-left: 0;
 
   .spg-help-action {
-    flex-grow: 1;
+    margin-inline-end: auto;
+
     .spg-action-button--icon {
-      opacity: 0.5;
-      padding: calcSize(0.5);
+      padding: var(--ctr-actionbar-button-padding-top-small-icon, var(--sjs-spacing-x05))
+        var(--ctr-actionbar-button-padding-right-small-icon, var(--sjs-spacing-x05))
+        var(--ctr-actionbar-button-padding-bottom-small-icon, var(--sjs-spacing-x05))
+        var(--ctr-actionbar-button-padding-left-small-icon, var(--sjs-spacing-x05));
+      opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
     }
 
     .spg-action-button--icon:focus,
@@ -125,11 +132,16 @@
     }
 
     .spg-action-button:active {
-      opacity: 0.5;
+      opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
+    }
+
+    .spg-action-button__icon {
+      width: var(--ctr-actionbar-button-icon-width-small, var(--sjs-font-size-x2));
+      height: var(--ctr-actionbar-button-icon-height-small, var(--sjs-font-size-x2));
     }
 
     svg {
-      fill: $foreground-dim-light;
+      fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
 }

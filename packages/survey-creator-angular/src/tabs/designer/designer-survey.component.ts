@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { SurveyModel } from "survey-core";
+import { PageModel, SurveyModel } from "survey-core";
 import { TabDesignerViewModel } from "survey-creator-core";
 import { BaseAngular } from "survey-angular-ui";
 
@@ -18,5 +18,8 @@ export class DesignerSurveyComponent extends BaseAngular<SurveyModel> {
   }
   public get survey() {
     return this.creator.survey;
+  }
+  public trackPageBy(index: number, page: PageModel): string {
+    return page.id;
   }
 }

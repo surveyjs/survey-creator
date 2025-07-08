@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var arStrings = {
   // survey templates
@@ -15,6 +15,15 @@ export var arStrings = {
     deleteQuestion: "حذف سؤال",
     convertTo: "تحويل إلى",
     drag: "إسحب العنصر",
+  },
+  // Creator tabs
+  tabs: {
+    preview: "تجربة الإستبيان",
+    theme: "المواضيع",
+    translation: "Translation",
+    designer: "تصميم الإستبيان",
+    json: "JSON Editor",
+    logic: "منطق الإستبيان"
   },
   // Question types
   qt: {
@@ -36,11 +45,20 @@ export var arStrings = {
     paneldynamic: "لوحة ديناميكية",
     radiogroup: "إختيار فردي",
     rating: "تقييم",
+    slider: "شريط التمرير",
     text: "مٌدخل فردي",
     boolean: "قيمة منطقية",
     expression: "عملية حسابية (للقرائة فقط)",
     signaturepad: "لوحة توقيع",
     buttongroup: "Button group"
+  },
+  toolboxCategories: {
+    general: "قائمة العام",
+    choice: "أسئلة الاختيار",
+    text: "أسئلة إدخال النص",
+    containers: "حاويات",
+    matrix: "أسئلة المصفوفة",
+    misc: "متفرقات"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -52,6 +70,7 @@ export var arStrings = {
     surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
     themeSettingsTooltip: "إعدادات النسق",
+    creatorSettingTitle: "إعدادات منشئي المحتوى",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -73,29 +92,30 @@ export var arStrings = {
     newQuestionName: "السؤال",
     newPanelName: "اللوحة",
     newTextItemName: "text",
-    testSurvey: "تجربة الإستبيان",
-    themeSurvey: "المواضيع",
     defaultV2Theme: "افتراضي",
     modernTheme: "حديث",
     defaultTheme: "الافتراضي (القديم)",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to:",
-    logic: "منطق الإستبيان",
-    embedSurvey: "Embed Survey",
-    translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
     saveTheme: "حفظ السمة",
     saveThemeTooltip: "حفظ السمة",
-    designer: "تصميم الإستبيان",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
     undo: "Undo",
     redo: "Redo",
     undoTooltip: "Undo last change",
     redoTooltip: "Redo the change",
+    expandTooltip: "ستوسع",
+    collapseTooltip: "تقوض",
+    expandAllTooltip: "توسيع الكل",
+    collapseAllTooltip: "طي الكل",
+    zoomInTooltip: "تكبير",
+    zoom100Tooltip: "تكبير إلى 100٪",
+    zoomOutTooltip: "التصغير",
+    lockQuestionsTooltip: "تأمين حالة التوسيع/الطي للأسئلة",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
     copy: "Copy",
@@ -109,14 +129,13 @@ export var arStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    toolboxSearch: "بحث",
+    toolboxFilteredTextPlaceholder: "اكتب للبحث...",
+    toolboxNoResultsFound: "لم يتم العثور على نتائج",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
-    toolboxGeneralCategory: "قائمة العام",
-    toolboxChoiceCategory: "أسئلة الاختيار",
-    toolboxTextCategory: "أسئلة إدخال النص",
-    toolboxContainersCategory: "حاويات",
-    toolboxMatrixCategory: "أسئلة المصفوفة",
-    toolboxMiscCategory: "متفرقات",
+    propertyGridPlaceholderTitle: "بدء تكوين النموذج الخاص بك",
+    propertyGridPlaceholderDescription: "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم.",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
@@ -132,6 +151,7 @@ export var arStrings = {
     saveError: "Error! Editor content is not saved.",
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "إعدادات النسق",
+    addLanguageTooltip: "إضافة لغة",
     translationLanguages: "Languages",
     translationDeleteLanguage: "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟",
     translationAddLanguage: "Select language to translate",
@@ -148,6 +168,7 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "مصدر: ",
     translationTarget: "هدف: ",
+    translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
     surveyJsonExportButton: "تصدير",
@@ -170,6 +191,22 @@ export var arStrings = {
     surveyPlaceHolder: "الاستطلاع فارغ. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     pagePlaceHolder: "الصفحة فارغة. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
+    surveyPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك.",
+    surveyPlaceholderTitle: "النموذج فارغ",
+    surveyPlaceholderTitleMobile: "النموذج فارغ",
+    surveyPlaceholderDescription: "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    surveyPlaceholderDescriptionMobile: "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
+    previewPlaceholderTitle: "لا معاينة",
+    previewPlaceholderTitleMobile: "لا معاينة",
+    previewPlaceholderDescription: "لا يحتوي الاستطلاع على أي عناصر مرئية.",
+    previewPlaceholderDescriptionMobile: "لا يحتوي الاستطلاع على أي عناصر مرئية.",
+    translationsPlaceholderTitle: "لا توجد سلاسل للترجمة",
+    translationsPlaceholderTitleMobile: "لا توجد سلاسل للترجمة",
+    translationsPlaceholderDescription: "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات.",
+    translationsPlaceholderDescriptionMobile: "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات.",
+    pagePlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة.",
+    panelPlaceHolderMobile: "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة.",
+    imagePlaceHolderMobile: "انقر فوق الزر أدناه واختر صورة لتحميلها",
     imageChooseImage: "اختر صورة",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
@@ -179,6 +216,10 @@ export var arStrings = {
     lg: {
       addNewItem: "إضافة قاعدة جديدة",
       empty_tab: "قم بإنشاء إرتباط لتخصيص تدفق الإستبيان",
+      logicPlaceholderTitle: "لا توجد قواعد منطقية",
+      logicPlaceholderTitleMobile: "لا توجد قواعد منطقية",
+      logicPlaceholderDescription: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
+      logicPlaceholderDescriptionMobile: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
       page_visibilityName: "إظهار (إخفاء) صفحة",
       page_enableName: "تمكين (تعطيل) الصفحة",
       page_requireName: "اجعل الصفحة مطلوبة",
@@ -221,13 +262,13 @@ export var arStrings = {
       question_visibilityText: "جعل السؤال {0} مرئي", //{0} question name
       question_enableText: "جعل السؤال {0} مفعل", //{0} question name
       question_requireText: "جعل السؤال {0} إلزامي", //{0} question name
-      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}",
+      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}", //{0} question name.
       question_setValueText: "تعيين قيمة: {1} السؤال: {0}",
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
-      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}",
-      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}",
+      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}", //{0} column name
+      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
@@ -263,14 +304,18 @@ export var arStrings = {
       description: "وصف اللوحة",
       visibleIf: "اجعل اللوحة مرئية إذا",
       requiredIf: "اجعل اللوحة مطلوبة إذا",
-      questionsOrder: "ترتيب الأسئلة داخل اللوحة",
+      questionOrder: "ترتيب الأسئلة داخل اللوحة",
       page: "الصفحة الرئيسية",
       startWithNewLine: "عرض اللوحة على سطر جديد",
       state: "حالة انهيار اللوحة",
       width: "عرض اللوحة المضمنة",
       minWidth: "الحد الأدنى لعرض اللوحة",
       maxWidth: "الحد الأقصى لعرض اللوحة",
-      showNumber: "لوحات الأرقام"
+      showNumber: "رقم هذه اللوحة"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "العرض الفعال ،٪",
+      questionTitleWidth: "عرض عنوان السؤال، بكسل"
     },
     paneldynamic: {
       name: "اسم اللوحة",
@@ -289,24 +334,28 @@ export var arStrings = {
       templateTitle: "نمط عنوان اللوحة",
       noEntriesText: "نص لوحة فارغ",
       templateTabTitle: "نمط عنوان علامة التبويب",
+      tabTitlePlaceholder: "العنصر النائب لعنوان علامة التبويب",
       templateVisibleIf: "اجعل لوحة فردية مرئية إذا",
-      hideNumber: "إخفاء رقم اللوحة",
+      showNumber: "ترقيم اللوحة",
       titleLocation: "محاذاة عنوان اللوحة",
       descriptionLocation: "محاذاة وصف اللوحة",
-      templateTitleLocation: "محاذاة عنوان السؤال",
+      templateQuestionTitleLocation: "محاذاة عنوان السؤال",
+      templateQuestionTitleWidth: "عرض عنوان السؤال",
       templateErrorLocation: "محاذاة رسالة الخطأ",
       newPanelPosition: "موقع لوحة جديد",
+      showRangeInProgress: "إظهار شريط التقدم",
       keyName: "منع تكرار الردود في السؤال التالي"
     },
     question: {
       name: "اسم السؤال",
       title: "عنوان السؤال",
       description: "وصف السؤال",
+      showTitle: "إظهار العنوان والوصف",
       visibleIf: "اجعل السؤال مرئيا إذا",
       requiredIf: "اجعل السؤال مطلوبا إذا",
       page: "الصفحة الرئيسية",
       state: "حالة طي مربع الأسئلة",
-      hideNumber: "إخفاء رقم السؤال",
+      showNumber: "رقم هذا السؤال",
       titleLocation: "محاذاة عنوان السؤال",
       descriptionLocation: "محاذاة وصف السؤال",
       errorLocation: "محاذاة رسالة الخطأ",
@@ -348,7 +397,8 @@ export var arStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "وصف المسح"
+      description: "وصف المسح",
+      readOnly: "جعل الاستطلاع للقراءة فقط"
     },
     page: {
       name: "اسم الصفحة",
@@ -356,8 +406,8 @@ export var arStrings = {
       description: "وصف الصفحة",
       visibleIf: "اجعل الصفحة مرئية إذا",
       requiredIf: "اجعل الصفحة مطلوبة إذا",
-      maxTimeToFinish: "الحد الزمني لإنهاء الصفحة (بالثواني)",
-      questionsOrder: "ترتيب الأسئلة على الصفحة"
+      timeLimit: "الحد الزمني لإنهاء الصفحة (بالثواني)",
+      questionOrder: "ترتيب الأسئلة على الصفحة"
     },
     matrixdropdowncolumn: {
       name: "اسم العمود",
@@ -396,12 +446,17 @@ export var arStrings = {
       prefix: "بادئة العملة",
       suffix: "لاحقة العملة"
     },
+    isExclusive: "مسح الآخرين عند تحديده",
     imageHeight: "طول الصورة",
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
+    defaultDisplayValue: "قيمة العرض الافتراضية للنصوص الديناميكية",
     rateDescriptionLocation: "محاذاة التسمية",
-    size: "حجم حقل الإدخال (بالأحرف)",
+    size: "عرض حقل الإدخال (بالأحرف)",
     cellErrorLocation: "محاذاة رسالة خطأ الخلية",
+    enabled: "تمكين",
+    disabled: "ذوي الاحتياجات الخاصه",
+    inherit: "ورث",
     apply: "تطبيق",
     ok: "موافق",
     save: "حفظ",
@@ -463,11 +518,13 @@ export var arStrings = {
     listIsEmpty: "No items have been added yet",
     "listIsEmpty@choices": "لم تتم إضافة أي خيارات حتى الآن",
     "listIsEmpty@columns": "ليس لديك أي أعمدة حتى الآن",
+    "listIsEmpty@gridLayoutColumns": "ليس لديك أعمدة تخطيط حتى الآن",
     "listIsEmpty@rows": "ليس لديك أي صفوف حتى الآن",
     "listIsEmpty@validators": "ليس لديك أي قواعد تحقق حتى الآن",
     "listIsEmpty@calculatedValues": "ليس لديك أي متغيرات مخصصة حتى الآن",
     "listIsEmpty@triggers": "ليس لديك أي محفزات حتى الآن",
     "listIsEmpty@navigateToUrlOnCondition": "ليس لديك أي روابط حتى الآن",
+    "listIsEmpty@pages": "ليس لديك أي صفحات حتى الآن",
     "addNew@choices": "إضافة خيار",
     "addNew@columns": "إضافة عمود جديد",
     "addNew@rows": "إضافة صف جديد",
@@ -475,6 +532,7 @@ export var arStrings = {
     "addNew@calculatedValues": "إضافة متغير جديد",
     "addNew@triggers": "إضافة مشغل جديد",
     "addNew@navigateToUrlOnCondition": "إضافة عنوان URL جديد",
+    "addNew@pages": "إضافة صفحة جديدة",
     expressionIsEmpty: "Expression is empty",
     value: "القيمة",
     text: "النص",
@@ -494,6 +552,7 @@ export var arStrings = {
     titlePlaceholder: "Input title here",
     surveyTitlePlaceholder: "أدخل عنوان الإستبيان هنا",
     pageTitlePlaceholder: "أدخل عنوان الصفحة هنا",
+    startPageTitlePlaceholder: "الصفحة الرئيسية",
     descriptionPlaceholder: "Enter a description",
     surveyDescriptionPlaceholder: "أدخل وصف للإستبيان",
     pageDescriptionPlaceholder: "أدخل وصف للصفحة",
@@ -514,11 +573,12 @@ export var arStrings = {
     cellType: "نوع الخلية",
     colCount: "عدد الأعمدة",
     choicesOrder: "إختر ترتيب الإختيارات",
+    allowCustomChoices: "السماح بالخيارات المخصصة",
     visible: "مرئي؟",
     isRequired: "مطلوب؟",
     markRequired: "وضع علامة كمطلوب",
     removeRequiredMark: "إزالة العلامة المطلوبة",
-    isAllRowRequired: "المطالبة بالأجوبة لكل الصفوف",
+    eachRowRequired: "المطالبة بالأجوبة لكل الصفوف",
     eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     requiredErrorText: "نص خطأ إلزامي السؤال",
     startWithNewLine: "إظهار السؤال في صف جديد",
@@ -530,10 +590,11 @@ export var arStrings = {
     maxSize: "أقصى حجم للملف بالبايت",
     rowCount: "عدد الصفوف",
     columnLayout: "تخطيط الأعمدة",
-    addRowLocation: "موقع زر إضافة صف",
+    addRowButtonLocation: "موقع زر إضافة صف",
     transposeData: "تبديل موضع الصفوف إلى أعمدة",
     addRowText: "نص زر إضافة صف",
     removeRowText: "نص زر حذف صف",
+    singleInputTitleTemplate: "نمط عنوان حقل الإدخال",
     rateMin: "أصغر معدل",
     rateMax: "أكبر معدل",
     rateStep: "خطوات المعدل",
@@ -566,10 +627,9 @@ export var arStrings = {
     simulator: "Choose device",
     landscapeOrientation: "Landscape",
     portraitOrientation: "Portrait",
-    mode: "النمط (التعديل، القرائة فقط)",
     clearInvisibleValues: "إمسح القيم الغير مرئية",
     cookieName: "أدخل إسم ملف تعريف الإرتباط (لتعطيل المشاركة بالإستبيان أكثر من مرة)",
-    sendResultOnPageNext: "إرسال نتائج الإستبيان على الصفحة التالية",
+    partialSendEnabled: "إرسال نتائج الإستبيان على الصفحة التالية",
     storeOthersAsComment: "تخزين قيمة 'أخرى' في حقل منفصل",
     showPageTitles: "عرض عنوان الصفحات",
     showPageNumbers: "عرض أرقام الصفحات",
@@ -580,34 +640,38 @@ export var arStrings = {
     editText: "نص زر التعديل",
     startSurveyText: "نص زر بدء المشاركة بالإستبيان",
     showNavigationButtons: "إظهار أزرار الإنتقال (التنقل الإفتراضي)",
+    navigationButtonsLocation: "محاذاة أزرار التنقل",
     showPrevButton: "إظهار زر التنقل السابق (السماح للمستخدم من العودة للصفحة السابقة في الإستبيان)",
-    firstPageIsStarted: "الصفحة الأولى في الإستبيان هي صفحة البدء",
-    showCompletedPage: "إظهار الصفحة المكتملة في النهاية (صفحة ويب مكتملة)",
-    goNextPageAutomatic: "عند الإجابة على جميع الأسئلة، إنتقل إلى الصفحة التالية تلقائياً",
-    allowCompleteSurveyAutomatic: "إكمال الاستطلاع تلقائيا",
+    firstPageIsStartPage: "الصفحة الأولى في الإستبيان هي صفحة البدء",
+    showCompletePage: "إظهار الصفحة المكتملة في النهاية (صفحة ويب مكتملة)",
+    autoAdvanceEnabled: "عند الإجابة على جميع الأسئلة، إنتقل إلى الصفحة التالية تلقائياً",
+    autoAdvanceAllowComplete: "إكمال الاستطلاع تلقائيا",
     showProgressBar: "إظهار شريط التقدم",
+    progressBarLocation: "محاذاة شريط التقدم",
     questionTitleLocation: "موقع عنوان السؤال",
-    requiredText: "رمز السؤال مطلوب",
+    questionTitleWidth: "عرض عنوان السؤال",
+    requiredMark: "رمز السؤال مطلوب",
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "موقع خطأ في السؤال",
-    focusFirstQuestionAutomatic: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
-    questionsOrder: "ترتيب العناصر على الصفحة",
-    maxTimeToFinish: "أقصى وقت لإنهاء الإستبيان",
-    maxTimeToFinishPage: "أقصى وقت لإنهاء الصفحة في الإستبيان",
-    showTimerPanel: "إظهار لوحة المؤقت",
-    showTimerPanelMode: "إظهار نمط لوحة المؤقت",
+    autoFocusFirstQuestion: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
+    questionOrder: "ترتيب العناصر على الصفحة",
+    timeLimit: "أقصى وقت لإنهاء الإستبيان",
+    timeLimitPerPage: "أقصى وقت لإنهاء الصفحة في الإستبيان",
+    showTimer: "استخدام مؤقت",
+    timerLocation: "إظهار لوحة المؤقت",
+    timerInfoMode: "إظهار نمط لوحة المؤقت",
     renderMode: "نمط العرض",
     allowAddPanel: "السماح بإضافة لوحة",
     allowRemovePanel: "السماح بإزالة لوحة",
-    panelAddText: "نص إضافة لوحة",
-    panelRemoveText: "نص إزالة لوحة",
+    addPanelText: "نص إضافة لوحة",
+    removePanelText: "نص إزالة لوحة",
     isSinglePage: "Show all elements on one page",
     html: "صفحة ويب HTML",
     setValue: "جواب",
     dataFormat: "تنسيق الصورة",
     allowAddRows: "السماح بإضافة صفوف",
     allowRemoveRows: "السماح بإزالة الصفوف",
-    allowRowsDragAndDrop: "السماح بسحب الصف وإفلاته",
+    allowRowReorder: "السماح بسحب الصف وإفلاته",
     responsiveImageSizeHelp: "لا ينطبق إذا قمت بتحديد عرض الصورة أو ارتفاعها بالضبط.",
     minImageWidth: "الحد الأدنى لعرض الصورة",
     maxImageWidth: "الحد الأقصى لعرض الصورة",
@@ -615,6 +679,7 @@ export var arStrings = {
     maxImageHeight: "الحد الأقصى لارتفاع الصورة",
     minValue: "أقل قيمة",
     maxValue: "أكبر قيمة",
+    caseInsensitive: "غير حساس لحالة الأحرف",
     minLength: "Minimum length",
     allowDigits: "Allow digits",
     minCount: "Minimum count",
@@ -633,20 +698,15 @@ export var arStrings = {
     logo: "الشعار (عنوان URL أو سلسلة مشفرة base64)",
     questionsOnPageMode: "هيكل المسح",
     maxTextLength: "الحد الأقصى لطول الإجابة (بالأحرف)",
-    maxOthersLength: "الحد الأقصى لطول التعليق (بالأحرف)",
+    maxCommentLength: "الحد الأقصى لطول التعليق (بالأحرف)",
+    commentAreaRows: "ارتفاع منطقة التعليق (في الأسطر)",
     autoGrowComment: "توسيع منطقة التعليق تلقائيا إذا لزم الأمر",
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
     maskType: "نوع قناع الإدخال",
-    maskTypes: {
-      none: "اي",
-      patternmask: "رسم",
-      numericmask: "عددي",
-      datetimemask: "التاريخ والوقت",
-      currencymask: "عملة"
-    },
-    focusOnFirstError: "تعيين التركيز على أول إجابة غير صالحة",
+    autoFocusFirstError: "تعيين التركيز على أول إجابة غير صالحة",
     checkErrorsMode: "تشغيل التحقق من الصحة",
+    validateVisitedEmptyFields: "التحقق من صحة الحقول الفارغة على التركيز المفقود",
     navigateToUrl: "انتقل إلى عنوان URL",
     navigateToUrlOnCondition: "عنوان URL الديناميكي",
     completedBeforeHtml: "الترميز لإظهار ما إذا كان المستخدم قد ملأ هذا الاستطلاع بالفعل",
@@ -657,7 +717,7 @@ export var arStrings = {
     autocomplete: "نوع الإكمال التلقائي",
     labelTrue: "تسمية \"صحيح\"",
     labelFalse: "تسمية \"خطأ\"",
-    allowClear: "Show options caption",
+    allowClear: "إظهار الزر مسح",
     searchMode: "وضع البحث",
     displayStyle: "نمط عرض القيمة",
     format: "سلسلة منسقة",
@@ -678,15 +738,36 @@ export var arStrings = {
     minPanelCount: "الحد الأدنى لعدد اللوحات",
     maxPanelCount: "الحد الأقصى لعدد اللوحات",
     panelsState: "حالة توسيع اللوحة الداخلية",
-    panelPrevText: "تلميح أداة زر اللوحة السابق",
-    panelNextText: "تلميح أداة زر اللوحة التالية",
-    showRangeInProgress: "إظهار شريط التقدم",
-    panelRemoveButtonLocation: "إزالة موقع زر اللوحة",
+    prevPanelText: "تلميح أداة زر اللوحة السابق",
+    nextPanelText: "تلميح أداة زر اللوحة التالية",
+    removePanelButtonLocation: "إزالة موقع زر اللوحة",
     hideIfRowsEmpty: "إخفاء السؤال إذا لم تكن هناك صفوف",
     hideColumnsIfEmpty: "إخفاء الأعمدة في حالة عدم وجود صفوف",
     rateValues: "قيم الأسعار المخصصة",
     rateCount: "عدد الأسعار",
     autoGenerate: "كيفية تحديد قيم المعدل؟",
+    slider: {
+      min: "الحد الأدنى للقيمة",
+      max: "القيمة القصوى",
+      step: "قيمة الخطوة",
+      showLabels: "إظهار تسميات المقياس",
+      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      allowSwap: "السماح بعبور الإبهام",
+      labelCount: "عدد التصنيفات التي يتم إنشاؤها تلقائيا",
+      minValueExpression: "الحد الأدنى للقيمة",
+      maxValueExpression: "تعبير القيمة القصوى",
+      autoGenerate: "تكوين تسميات المقياس",
+      sliderType: "نوع شريط التمرير",
+      minRangeLength: "الحد الأدنى لطول النطاق",
+      maxRangeLength: "أقصى طول النطاق",
+      customLabels: "تسميات مخصصة",
+      labelFormat: "تنسيق التسمية",
+      tooltipFormat: "تنسيق تلميح الأداة"
+    },
+    file: {
+      imageHeight: "ارتفاع الصورة",
+      imageWidth: "عرض الصورة"
+    },
     hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن يحتوي على خيارات",
     minWidth: "الحد الأدنى للعرض (بالقيم المقبولة في CSS)",
     maxWidth: "الحد الأقصى للعرض (بالقيم المقبولة من CSS)",
@@ -703,26 +784,28 @@ export var arStrings = {
     keyDuplicationError: "رسالة الخطأ \"قيمة مفتاح غير فريدة\"",
     minSelectedChoices: "الحد الأدنى من الخيارات المحددة",
     maxSelectedChoices: "الحد الأقصى للخيارات المحددة",
-    showClearButton: "إظهار الزر مسح",
     logoWidth: "عرض الشعار (بالقيم المقبولة من CSS)",
     logoHeight: "ارتفاع الشعار (بالقيم المقبولة من CSS)",
     readOnly: "للقراءة فقط",
     enableIf: "قابل للتحرير إذا",
-    emptyRowsText: "رسالة \"بلا صفوف\"",
+    noRowsText: "رسالة \"بلا صفوف\"",
     separateSpecialChoices: "خيارات خاصة منفصلة (لا شيء، أخرى، تحديد الكل)",
     choicesFromQuestion: "نسخ الاختيارات من السؤال التالي",
     choicesFromQuestionMode: "ما هي الخيارات التي تريد نسخها؟",
+    choiceValuesFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار",
+    choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
     showCommentArea: "إظهار منطقة التعليق",
     commentPlaceholder: "العنصر النائب لمنطقة التعليق",
     displayRateDescriptionsAsExtremeItems: "عرض أوصاف المعدل كقيم قصوى",
-    rowsOrder: "ترتيب الصفوف",
+    rowOrder: "ترتيب الصفوف",
     columnsLayout: "تخطيط العمود",
     columnColCount: "عدد الأعمدة المتداخلة",
     correctAnswer: "الإجابة الصحيحة",
     defaultPanelValue: "القيم الافتراضية",
     cells: "نصوص الخلية",
+    fileInputPlaceholder: "حدد ملفا أو الصق رابط ملف...",
     keyName: "عمود المفتاح",
     itemvalue: {
       visibleIf: "اجعل الخيار مرئيا إذا",
@@ -745,6 +828,12 @@ export var arStrings = {
       top: "في الأعلى",
       bottom: "في الأسفل"
     },
+    previewMode: "وضع المعاينة",
+    gridLayoutEnabled: "تمكين تخطيط الشبكة",
+    gridLayoutColumns: "أعمدة تخطيط الشبكة",
+    maskSettings: "إعدادات القناع",
+    detailErrorLocation: "محاذاة رسالة خطأ توسيع الصف",
+    // Creator tabs
     tabs: {
       panel: {
         layout: "تخطيط اللوحة"
@@ -760,6 +849,7 @@ export var arStrings = {
       enableIf: "مفعل عندما",
       requiredIf: "مطلوب عندما",
       rateValues: "قيم التقييم",
+      sliderSettings: "إعدادات شريط التمرير",
       choicesByUrl: "خيارات من الإنترنت",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
@@ -788,6 +878,12 @@ export var arStrings = {
       slider: "Slider",
       expression: "تعبير",
       questionSettings: "إعدادات السؤال",
+      header: "راس",
+      background: "خلفية",
+      appearance: "مظهر",
+      accentColors: "ألوان مميزة",
+      surfaceBackground: "خلفية السطح",
+      scaling: "القياس",
       others: "غير ذلك"
     },
     editProperty: "Edit property '{0}'",
@@ -797,8 +893,7 @@ export var arStrings = {
     columnsEnableIf: "تكون الأعمدة مرئية إذا",
     rowsEnableIf: "تكون الصفوف مرئية إذا",
     innerIndent: "إضافة مسافات بادئة داخلية",
-    defaultValueFromLastRow: "خذ القيم الافتراضية من الصف الأخير",
-    defaultValueFromLastPanel: "خذ القيم الافتراضية من اللوحة الأخيرة",
+    copyDefaultValueFromLastEntry: "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي",
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
@@ -840,7 +935,52 @@ export var arStrings = {
     minWidth_placeholder: "مثال: 600px",
     maxWidth_placeholder: "مثال: 50٪",
     imageHeight_placeholder: "تلقائي",
-    imageWidth_placeholder: "تلقائي"
+    imageWidth_placeholder: "تلقائي",
+    itemTitleWidth_placeholder: "على سبيل المثال: 100 بكسل",
+    theme: {
+      themeName: "موضوع",
+      isPanelless: "مظهر السؤال",
+      editorPanel: "الخلفية ونصف قطر الزاوية",
+      questionPanel: "الخلفية ونصف قطر الزاوية",
+      primaryColor: "لون التمييز",
+      panelBackgroundTransparency: "عتامة خلفية اللوحة",
+      questionBackgroundTransparency: "عتامة خلفية السؤال",
+      fontSize: "حجم الخط",
+      scale: "مِيزَان",
+      cornerRadius: "نصف قطر الزاوية",
+      advancedMode: "الوضع المتقدم",
+      pageTitle: "خط العنوان",
+      pageDescription: "خط الوصف",
+      questionTitle: "خط العنوان",
+      questionDescription: "خط الوصف",
+      editorFont: "الخط",
+      backgroundOpacity: "العتامه",
+      "--sjs-font-family": "عائلة الخط",
+      "--sjs-general-backcolor-dim": "لون الخلفية",
+      "--sjs-primary-backcolor": "خلفية لهجة",
+      "--sjs-primary-forecolor": "لهجة الصدارة",
+      "--sjs-special-red": "رسائل الخطأ",
+      "--sjs-shadow-small": "تأثيرات الظل",
+      "--sjs-shadow-inner": "تأثيرات الظل",
+      "--sjs-border-default": "الوان"
+    },
+    "header@header": {
+      headerView: "منظر",
+      logoPosition: "موضع الشعار",
+      surveyTitle: "خط عنوان الاستطلاع",
+      surveyDescription: "خط وصف الاستطلاع",
+      headerTitle: "خط عنوان الاستطلاع",
+      headerDescription: "خط وصف الاستطلاع",
+      inheritWidthFrom: "عرض منطقة المحتوى",
+      textAreaWidth: "عرض النص",
+      backgroundColorSwitch: "لون الخلفية",
+      backgroundImage: "صورة الخلفية",
+      backgroundImageOpacity: "العتامه",
+      overlapEnabled: "التداخل",
+      logoPositionX: "موضع الشعار",
+      titlePositionX: "موضع العنوان",
+      descriptionPositionX: "موقف الوصف"
+    }
   },
   // Property values
   pv: {
@@ -869,10 +1009,11 @@ export var arStrings = {
     firstExpanded: "توسيع أول لوح",
     off: "إيقاف",
     list: "قائمة",
+    carousel: "دائري",
+    tab: "علامات التبويب",
     progressTop: "التقدم بالأعلى",
     progressBottom: "التقدم بالأسف",
     progressTopBottom: "التقدم بالأعلى والأسفل معاً",
-    tab: "علامات التبويب",
     horizontal: "عرضي",
     vertical: "عمودي",
     top: "الأعلى",
@@ -930,6 +1071,77 @@ export var arStrings = {
       url: "الرابط",
       week: "أسبوع"
     },
+    sliderType: {
+      single: "قيمة واحدة",
+      range: "نطاق"
+    },
+    autocomplete: {
+      name: "الاسم الكامل",
+      "honorific-prefix": "بادئه",
+      "given-name": "الاسم الأول",
+      "additional-name": "الاسم الأوسط",
+      "family-name": "اسم العائلة",
+      "honorific-suffix": "لاحقه",
+      nickname: "لقب",
+      "organization-title": "المسمى الوظيفي",
+      username: "اسم المستخدم",
+      "new-password": "كلمة مرور جديدة",
+      "current-password": "كلمة المرور الحالية",
+      organization: "اسم المنظمة",
+      "street-address": "عنوان الشارع بالكامل",
+      "address-line1": "سطر العنوان 1",
+      "address-line2": "سطر العنوان 2",
+      "address-line3": "سطر العنوان 3",
+      "address-level4": "عنوان المستوى 4",
+      "address-level3": "عنوان المستوى 3",
+      "address-level2": "عنوان المستوى 2",
+      "address-level1": "عنوان المستوى 1",
+      country: "رمز البلد",
+      "country-name": "اسم البلد",
+      "postal-code": "الرمز البريدي",
+      "cc-name": "اسم حامل البطاقة",
+      "cc-given-name": "الاسم الأول لحامل البطاقة",
+      "cc-additional-name": "الاسم الأوسط لحامل البطاقة",
+      "cc-family-name": "الاسم الأخير لحامل البطاقة",
+      "cc-number": "رقم بطاقة الائتمان",
+      "cc-exp": "تاريخ انتهاء الصلاحية",
+      "cc-exp-month": "شهر انتهاء الصلاحية",
+      "cc-exp-year": "سنة انتهاء الصلاحية",
+      "cc-csc": "رمز أمان البطاقة",
+      "cc-type": "نوع بطاقة الائتمان",
+      "transaction-currency": "عملة المعاملة",
+      "transaction-amount": "مبلغ المعاملة",
+      language: "اللغة المفضلة",
+      bday: "عيد ميلاد",
+      "bday-day": "عيد ميلاد",
+      "bday-month": "شهر عيد الميلاد",
+      "bday-year": "سنة الميلاد",
+      sex: "جنس",
+      url: "رابط الموقع",
+      photo: "صورة الملف الشخصي",
+      tel: "رقم الهاتف",
+      "tel-country-code": "رمز البلد للهاتف",
+      "tel-national": "رقم الهاتف الوطني",
+      "tel-area-code": "رمز المنطقة",
+      "tel-local": "رقم الهاتف المحلي",
+      "tel-local-prefix": "بادئة الهاتف المحلي",
+      "tel-local-suffix": "لاحقة الهاتف المحلي",
+      "tel-extension": "تحويلة الهاتف",
+      email: "عنوان البريد الإلكتروني",
+      impp: "بروتوكول المراسلة الفورية"
+    },
+    maskType: {
+      none: "اي",
+      pattern: "رسم",
+      numeric: "عددي",
+      datetime: "التاريخ والوقت",
+      currency: "عملة"
+    },
+    inputTextAlignment: {
+      auto: "تلقائي",
+      left: "يسار",
+      right: "يمين"
+    },
     all: "الكل",
     page: "الصفحة",
     survey: "الإستبيان",
@@ -939,11 +1151,14 @@ export var arStrings = {
     questionsOnPageMode: {
       standard: "الهيكل الأصلي",
       singlePage: "إظهار جميع الأسئلة في صفحة واحدة",
-      questionPerPage: "إظهار سؤال واحد لكل صفحة"
+      questionPerPage: "إظهار سؤال واحد لكل صفحة",
+      inputPerPage: "إظهار حقل إدخال واحد لكل صفحة"
     },
     noPreview: "بلا عرض",
     showAllQuestions: "المعاينة مع جميع الأسئلة",
     showAnsweredQuestions: "المعاينة مع الأسئلة المجٌابة",
+    allQuestions: "عرض جميع الأسئلة",
+    answeredQuestions: "إظهار الأسئلة التي تمت الإجابة عليها فقط",
     pages: "الصفحات",
     questions: "الأسئلة",
     requiredQuestions: "الأسئلة المطلوبة",
@@ -959,13 +1174,10 @@ export var arStrings = {
     showNavigationButtons: {
       none: "مخفي"
     },
-    showTimerPanel: {
-      none: "مخفي"
+    timerInfoMode: {
+      combined: "كلا"
     },
-    showTimerPanelMode: {
-      all: "كلا"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "يعتمد على تخطيط المصفوفة"
     },
     panelsState: {
@@ -1013,6 +1225,7 @@ export var arStrings = {
       onPage: "إعادة تعيين على كل صفحة",
       onpanel: "إعادة تعيين على كل لوحة",
       onPanel: "إعادة تعيين على كل لوحة",
+      recursive: "الترقيم المتكرر",
       onSurvey: "المتابعة عبر الاستطلاع",
       off: "لا ترقيم"
     },
@@ -1036,17 +1249,19 @@ export var arStrings = {
       percent: "النسبه المئويه",
       date: "تاريخ"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "اللغة الأصلية"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "اللغة الأصلية"
     },
-    showProgressBar: {
-      off: "مخفي",
-      topbottom: "الاعلى والأسفل",
-      aboveheader: "فوق الرأس",
-      belowheader: "أسفل الرأس"
+    progressBarLocation: {
+      top: "أعلى",
+      bottom: "قاع",
+      topbottom: "أعلى وأسفل",
+      aboveheader: "أعلى الرأس",
+      belowheader: "أسفل العنوان",
+      off: "مخفي"
     },
     sum: "مجموع",
     count: "عد",
@@ -1056,6 +1271,42 @@ export var arStrings = {
     searchMode: {
       contains: "يحتوي",
       startsWith: "يبدأ ب"
+    },
+    backgroundImageFit: {
+      auto: "تلقائي",
+      cover: "غطاء",
+      contain: "احتوى",
+      fill: "مد",
+      tile: "بلاط"
+    },
+    backgroundImageAttachment: {
+      fixed: "ثابت",
+      scroll: "طومار"
+    },
+    headerView: {
+      basic: "أساسي",
+      advanced: "متقدم"
+    },
+    inheritWidthFrom: {
+      survey: "نفس المسح",
+      container: "يصلح للحاوية"
+    },
+    backgroundColorSwitch: {
+      none: "اي",
+      accentColor: "لون التمييز",
+      custom: "تقليد"
+    },
+    colorPalette: {
+      light: "ضوء",
+      dark: "داكن"
+    },
+    isPanelless: {
+      "false": "افتراضي",
+      "true": "بدون لوحات"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "نفس المسح",
+      container: "نفس الحاوية"
     }
   },
   // Operators
@@ -1102,7 +1353,9 @@ export var arStrings = {
   ts: {
     selectPage: "Select the page to test it:",
     showInvisibleElements: "إظهار العناصر المخفية",
-    hideInvisibleElements: "إخفاء العناصر غير المرئية"
+    hideInvisibleElements: "إخفاء العناصر غير المرئية",
+    prevPage: "سابق",
+    nextPage: "مقبل"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -1130,6 +1383,13 @@ export var arStrings = {
     currencymask: {
       prefix: "مثال: $",
       suffix: "مثال: الدولار الأمريكي"
+    },
+    panelbase: {
+      questionTitleWidth: "مثال: 200 بكسل"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "مثال: 30٪",
+      questionTitleWidth: "مثال: 200 بكسل"
     }
   },
   pehelp: {
@@ -1140,13 +1400,17 @@ export var arStrings = {
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للوحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       questionTitleLocation: "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
-      questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
+      questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
       page: "تغيير موضع اللوحة إلى نهاية الصفحة المحددة.",
       innerIndent: "يضيف مسافة أو هامش بين محتوى اللوحة والحد الأيسر لمربع اللوحة.",
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
-      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
+      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة.",
+      effectiveColSpan: "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة.",
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
     },
     paneldynamic: {
       name: "معرف لوحة غير مرئي للمستجيبين.",
@@ -1154,7 +1418,8 @@ export var arStrings = {
       visibleIf: "استخدم أيقونة العصا السحرية لضبط قاعدة شرطية تحدد رؤية اللوحة.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للوحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
-      templateTitleLocation: "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      templateQuestionTitleLocation: "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      templateQuestionTitleWidth: "تعيين عرض متسق لعناوين الأسئلة عند محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ).",
       templateErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بسؤال بإدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       errorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
       page: "تغيير موضع اللوحة إلى نهاية الصفحة المحددة.",
@@ -1164,17 +1429,25 @@ export var arStrings = {
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       templateTitle: "اكتب قالبا لعناوين اللوحات الديناميكية. استخدم {panelIndex} للموضع العام لللوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
       templateTabTitle: "اكتب قالبا لعناوين علامات التبويب. استخدم {panelIndex} للموضع العام للوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
+      tabTitlePlaceholder: "نص احتياطي لعناوين علامات التبويب يتم تطبيقه عندما لا ينتج نمط عنوان علامة التبويب قيمة ذات معنى.",
       templateVisibleIf: "يتيح لك هذا الإعداد التحكم في رؤية اللوحات الفردية داخل اللوحة الديناميكية. استخدم العنصر النائب \"{panel}\" للإشارة إلى اللوحة الحالية في تعبيرك.",
       titleLocation: "يتم توريث هذا الإعداد تلقائيا من خلال جميع الأسئلة داخل هذه اللوحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       descriptionLocation: "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا).",
       newPanelPosition: "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية.",
-      defaultValueFromLastPanel: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
-      keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
+      copyDefaultValueFromLastEntry: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
+      keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
+      confirmDelete: "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
     },
+    matrixdynamic: {
+      confirmDelete: "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف.",
+      detailPanelShowOnAdding: "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
+    },
+    copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     defaultValueExpression: "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب.",
     resetValueIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد متى تتم إعادة تعيين إدخال المستجيب إلى القيمة استنادا إلى \"تعبير القيمة الافتراضية\" أو \"تعيين تعبير القيمة\" أو إلى قيمة \"الإجابة الافتراضية\" (إذا تم تعيين أي منهما).",
     setValueIf: "استخدم رمز العصا السحرية لتعيين قاعدة شرطية تحدد وقت تشغيل \"تعيين تعبير القيمة\" وتعيين القيمة الناتجة ديناميكيا كاستجابة.",
     setValueExpression: "حدد تعبيرا يحدد القيمة المراد تعيينها عند استيفاء الشروط الواردة في قاعدة \"تعيين القيمة إذا\". يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. يمكن تجاوز القيمة التي يحددها هذا التعبير بواسطة الإدخال اليدوي للمستجيب.",
+    gridLayoutEnabled: "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\".",
     question: {
       name: "معرف سؤال غير مرئي للمستجيبين.",
       description: "اكتب عنوانا فرعيا للسؤال.",
@@ -1195,7 +1468,8 @@ export var arStrings = {
       textUpdateMode: "اختر من بين: \"عند فقدان التركيز\" - يتم تحديث القيمة عندما يفقد حقل الإدخال التركيز ؛ \"أثناء الكتابة\" - يتم تحديث القيمة في الوقت الفعلي ، حيث يكتب المستخدمون. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند فقدان التركيز\" افتراضيا).",
       url: "يمكنك استخدام أي خدمة ويب كمصدر بيانات لأسئلة الاختيار من متعدد. لتعبئة قيم الاختيار، أدخل عنوان URL للخدمة التي توفر البيانات.",
       searchMode: "عملية مقارنة تستخدم لتصفية القائمة المنسدلة.",
-      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص."
+      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص.",
+      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
     },
     signaturepad: {
       signatureWidth: "يضبط عرض مساحة التوقيع المعروضة والصورة الناتجة.",
@@ -1203,8 +1477,9 @@ export var arStrings = {
       signatureAutoScaleEnabled: "حدد ما إذا كنت تريد أن تملأ منطقة التوقيع كل المساحة المتوفرة داخل مربع السؤال مع الحفاظ على نسبة العرض إلى الارتفاع الافتراضية 3:2. عند تعيين قيم العرض والارتفاع المخصصة، سيحتفظ الإعداد بنسبة العرض إلى الارتفاع لهذه الأبعاد."
     },
     file: {
-      imageHeight: "يضبط ارتفاع الصورة في نتائج الاستطلاع.",
-      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع."
+      imageHeight: "يحدد ارتفاع عرض الصور التي تم تحميلها في المعاينة والارتفاع الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون ارتفاع العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
+      imageWidth: "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
+      allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
     },
     image: {
       contentMode: "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
@@ -1223,7 +1498,8 @@ export var arStrings = {
     },
     // survey templates
     survey: {
-      mode: "اختر بين: \"قابل للتحرير\" - يمكن المستجيبين من ملء الاستبيان الخاص بك ؛ \"للقراءة فقط\" - تعطيل تحرير النموذج."
+      readOnly: "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك.",
+      progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
     matrixdropdowncolumn: {
       name: "معرف عمود غير مرئي للمستجيبين.",
@@ -1232,27 +1508,46 @@ export var arStrings = {
       visibleIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية العمود.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للعمود.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
-      showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار."
+      showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
+      colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
     },
+    slider: {
+      min: "أقل رقم يمكن للمستخدمين تحديده.",
+      max: "أعلى رقم يمكن للمستخدمين تحديده.",
+      step: "الفاصل الزمني بين قيم المقياس القابلة للتحديد. على سبيل المثال ، ستسمح الخطوة 5 للمستخدمين بتحديد 0 و 5 و 10 وما إلى ذلك.",
+      minRangeLength: "الحد الأدنى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه.",
+      maxRangeLength: "الحد الأقصى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه.",
+      labelCount: "يحدد عدد تسميات المقياس المطلوب إنشاؤها. تعني القيمة -1 أن الرقم يتم حسابه تلقائيا بناء على القيمة الدنيا والقيمة القصوى.",
+      labelFormat: "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية.",
+      customLabels: "يسمح لك بتحديد تسميات مخصصة بقيم محددة وتعيين النص المقابل لها اختياريا (على سبيل المثال، 0 = \"ضعيف\"، 100 = \"ممتاز\").",
+      tooltipFormat: "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية.",
+      allowSwap: "يسمح للمستخدمين بتحريك إبهام واحد إلى ما بعد الآخر.",
+      allowClear: "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد.",
+      minValueExpression: "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد.",
+      maxValueExpression: "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+    },
+    isExclusive: "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا.",
+    caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
     widthMode: "اختر من بين: \"ثابت\" - يحدد عرضا ثابتا ؛ \"متجاوب\" - يجعل الاستطلاع يشغل العرض الكامل للشاشة ؛ \"تلقائي\" - ينطبق على أي من الاثنين اعتمادا على أنواع الأسئلة المستخدمة.",
     cookieName: "تمنع ملفات تعريف الارتباط المستخدمين من ملء نفس الاستبيان مرتين.",
     logo: "الصق رابط صورة (بلا حدود للحجم) أو انقر فوق رمز المجلد لاستعراض ملف من جهاز الكمبيوتر الخاص بك (حتى 64 كيلوبايت).",
     logoWidth: "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoHeight: "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
-    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية.",
-    allowCompleteSurveyAutomatic: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
+    autoAdvanceEnabled: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة.",
+    autoAdvanceAllowComplete: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
-    showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
+    navigationButtonsLocation: "لتعيين موقع أزرار التنقل على الصفحة.",
     showPreviewBeforeComplete: "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط.",
     questionTitleLocation: "ينطبق على جميع الأسئلة داخل الاستطلاع. يمكن تجاوز هذا الإعداد من خلال قواعد محاذاة العنوان في المستويات الأدنى: اللوحة أو الصفحة أو السؤال. سيتجاوز إعداد المستوى الأدنى تلك الموجودة في المستوى الأعلى.",
-    requiredText: "رمز أو سلسلة من الرموز تشير إلى أن الإجابة مطلوبة.",
+    requiredMark: "رمز أو سلسلة من الرموز تشير إلى أن الإجابة مطلوبة.",
     questionStartIndex: "أدخل رقما أو حرفا تريد بدء الترقيم به.",
     questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال.",
-    focusFirstQuestionAutomatic: "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص.",
-    questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
+    autoFocusFirstQuestion: "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص.",
+    questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     maxTextLength: "لأسئلة إدخال النص فقط.",
-    maxOthersLength: "لتعليقات الأسئلة فقط.",
+    maxCommentLength: "لتعليقات الأسئلة فقط.",
+    commentAreaRows: "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير.",
     autoGrowComment: "حدد ما إذا كنت تريد زيادة تعليقات الأسئلة وأسئلة النص الطويل تلقائيا في الارتفاع بناء على طول النص الذي تم إدخاله.",
     allowResizeComment: "لتعليقات الأسئلة وأسئلة النص الطويل فقط.",
     calculatedValues: "تعمل المتغيرات المخصصة كمتغيرات وسيطة أو مساعدة تستخدم في حسابات النماذج. يأخذون مدخلات المستجيبين كقيم مصدر. كل متغير مخصص له اسم فريد وتعبير يعتمد عليه.",
@@ -1266,10 +1561,9 @@ export var arStrings = {
     rowTitleWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     totalText: "تكون مرئية فقط عندما يحتوي عمود واحد على الأقل على نوع الإجمالي أو تعبير الإجمالي.",
     cellErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بخلية ذات إدخال غير صالح. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
+    detailErrorLocation: "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
-    confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
-    defaultValueFromLastRow: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
     description: "اكتب عنوانا فرعيا.",
     locale: "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات.",
@@ -1277,19 +1571,25 @@ export var arStrings = {
     imageFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
     autoGrow: "يزيد تدريجيا من ارتفاع حقل الإدخال أثناء إدخال البيانات. يتجاوز إعداد \"ارتفاع حقل الإدخال (في الأسطر)\".",
     allowResize: "يظهر مقبض تغيير الحجم (أو المقبض) في الزاوية ويمكن سحبه لتغيير حجم حقل الإدخال.",
-    maxTimeToFinish: "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر.",
-    maxTimeToFinishPage: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
+    timeLimit: "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر.",
+    timeLimitPerPage: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
+    validateVisitedEmptyFields: "قم بتمكين هذا الخيار لتشغيل التحقق من الصحة عندما يركز المستخدم على حقل إدخال فارغ ثم يتركه دون إجراء أي تغييرات.",
     page: {
-      maxTimeToFinish: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
+      name: "معرف صفحة غير مرئي للمستجيبين.",
+      description: "اكتب عنوانا فرعيا للصفحة.",
+      navigationTitle: "تسمية توضيحية معروضة على زر التنقل في شريط التقدم أو جدول المحتويات (TOC). إذا تركت هذا الحقل فارغا، فسيستخدم زر التنقل عنوان الصفحة أو اسم الصفحة. لتمكين شريط التقدم أو جدول المحتويات، انتقل إلى \"استطلاع\" → \"التنقل\".",
+      timeLimit: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
       visibleIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية الصفحة.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للصفحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       questionTitleLocation: "ينطبق على جميع الأسئلة الواردة في هذه الصفحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة أو اللوحات الفردية. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا).",
-      questionsOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
-      navigationButtonsVisibility: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
+      questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
+      showNavigationButtons: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\".",
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
     },
-    showTimerPanel: "يضبط رؤية وموقع المؤقت على الصفحة.",
+    timerLocation: "يضبط موقع المؤقت على الصفحة.",
     panelsState: "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية.",
     imageLinkName: "أدخل اسم خاصية مشتركة ضمن صفيف الكائنات التي تحتوي على عناوين URL لملفات الصور أو الفيديو التي تريد عرضها في قائمة الاختيارات.",
     choices: "تعمل القيمة اليسرى كمعرف عنصر مستخدم في القواعد الشرطية ، ويتم عرض القيمة الصحيحة للمستجيبين.",
@@ -1299,9 +1599,13 @@ export var arStrings = {
     maxWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     width: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     valueName: "إذا لم تقم بتعيين هذه الخاصية، تخزين الإجابة في حقل محدد بواسطة خاصية الاسم.",
+    defaultDisplayValue: "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة.",
     useDisplayValuesInDynamicTexts: "في أنواع الأسئلة ذات التحديد الفردي والمتعدد، يكون لكل خيار اختيار معرف وقيمة عرض. عند تحديده، يعرض هذا الإعداد قيمة عرض بدلا من قيمة معرف في أسئلة HTML والعناوين الديناميكية وأوصاف عناصر الاستطلاع.",
     clearIfInvisible: "اختر ما إذا كنت تريد مسح قيم الأسئلة المخفية بواسطة المنطق الشرطي أم لا ومتى تفعل ذلك. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند اكتمال الاستطلاع\" افتراضيا).",
     choicesFromQuestionMode: "اختر من بين: \"الكل\" - نسخ جميع خيارات الاختيار من السؤال المحدد ؛ \"محدد\" - ينسخ ديناميكيا خيارات الاختيار المحددة فقط ؛ \"غير محدد\" - ينسخ ديناميكيا خيارات الاختيار غير المحددة فقط. يتم نسخ الخيارين \"بلا\" و \"أخرى\" افتراضيا إذا تم تمكينهما في السؤال المصدر.",
+    choiceValuesFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات.",
+    choiceTextsFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض.",
+    allowCustomChoices: "حدد للسماح للمستجيبين بإضافة خياراتهم الخاصة إذا لم يكن الخيار المطلوب متاحا في القائمة المنسدلة. سيتم تخزين الخيارات المخصصة مؤقتا فقط طوال مدة جلسة المتصفح الحالية.",
     showOtherItem: "عند تحديده، يمكن للمستخدمين تضمين مدخلات إضافية في مربع تعليق منفصل.",
     separateSpecialChoices: "يعرض كل خيار اختيار خاص (\"بلا\" ، \"أخرى\" ، \"تحديد الكل\") على سطر جديد ، حتى عند استخدام تخطيط متعدد الأعمدة.",
     path: "حدد الموقع داخل مجموعة بيانات الخدمة حيث يوجد الصفيف الهدف من الكائنات. اتركه فارغا إذا كان عنوان URL يشير بالفعل إلى المصفوفة.",
@@ -1323,8 +1627,9 @@ export var arStrings = {
     needConfirmRemoveFile: "تشغيل مطالبة تطلب تأكيد حذف الملف.",
     selectToRankEnabled: "تمكين لترتيب الخيارات المحددة فقط. سيقوم المستخدمون بسحب العناصر المحددة من قائمة الاختيار لترتيبها داخل منطقة الترتيب.",
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
-    itemSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
-    itemTitleWidth: "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل",
+    inputSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
+    itemTitleWidth: "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ).",
+    inputTextAlignment: "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك.",
     altText: "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول.",
     rateColorMode: "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف.",
     expression: {
@@ -1340,6 +1645,7 @@ export var arStrings = {
     filePlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة",
     photoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\".",
     fileOrPhotoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\".",
+    colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد.",
     masksettings: {
       saveMaskedValue: "حدد ما إذا كنت تريد تخزين قيمة السؤال باستخدام قناع مطبق في نتائج الاستطلاع."
     },
@@ -1357,7 +1663,23 @@ export var arStrings = {
     currencymask: {
       prefix: "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة.",
       suffix: "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
-    }
+    },
+    theme: {
+      isPanelless: "ينطبق هذا الإعداد فقط على الأسئلة خارج اللوحة.",
+      primaryColor: "يضبط لونا تكميليا يبرز عناصر الاستطلاع الرئيسية.",
+      panelBackgroundTransparency: "يضبط شفافية اللوحات ومربعات الأسئلة المتعلقة بخلفية الاستطلاع.",
+      questionBackgroundTransparency: "يضبط شفافية عناصر الإدخال بالنسبة لخلفية الاستطلاع.",
+      cornerRadius: "يضبط نصف قطر الزاوية لكل العناصر المستطيلة. قم بتمكين الوضع المتقدم إذا كنت تريد تعيين قيم نصف قطر زاوية فردية لعناصر الإدخال أو اللوحات ومربعات الأسئلة.",
+      "--sjs-general-backcolor-dim": "يضبط لون الخلفية الرئيسي للاستطلاع."
+    },
+    header: {
+      inheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة محتوى الرأس تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه.",
+      textAreaWidth: "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل.",
+      overlapEnabled: "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس.",
+      mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
+    },
+    progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه.",
+    singleInputTitleTemplate: "يستخدم عند تعيين \"تخطيط الاستطلاع\" إلى \"حقل إدخال واحد لكل صفحة\". في هذا التخطيط، يتم تقسيم المصفوفة بحيث يظهر كل حقل إدخال في صفحة منفصلة. استخدم العنصر النائب {rowIndex} لإدراج الترقيم التلقائي و{rowTitle} أو {rowName} للإشارة إلى عنوان الصف أو معرفه، و{row.columnid} لتضمين قيمة عمود مصفوفة معين."
   },
   // Properties
   p: {
@@ -1409,7 +1731,7 @@ export var arStrings = {
     detailElements: "عناصر التفاصيل",
     allowAdaptiveActions: "السماح بالإجراءات التكيفية",
     defaultRowValue: "قيمة الصف الإفتراضية",
-    detailPanelShowOnAdding: "detailPanelShowOnAdding",
+    detailPanelShowOnAdding: "تفاصيل الصف الجديد للتوسيع التلقائي",
     choicesLazyLoadEnabled: "تمكين التحميل البطيء للاختيارات",
     choicesLazyLoadPageSize: "اختيارات كسول تحميل حجم الصفحة",
     inputFieldComponent: "مكون حقل الإدخال",
@@ -1420,11 +1742,11 @@ export var arStrings = {
     maxValueExpression: "maxValueExpression",
     step: "step",
     dataList: "قائمة البيانات",
-    itemSize: "itemSize",
+    inputSize: "inputSize",
     itemTitleWidth: "عرض تسمية العنصر (بالبكسل)",
+    inputTextAlignment: "محاذاة قيمة الإدخال",
     elements: "عناصر",
     content: "محتوى",
-    navigationButtonsVisibility: "رؤية أزرار التنقل",
     navigationTitle: "navigationTitle",
     navigationDescription: "navigationDescription",
     longTap: "نقرة طويلة",
@@ -1438,6 +1760,7 @@ export var arStrings = {
     imageFit: "إحتواء الصورة",
     altText: "نص بديل",
     height: "height",
+    mobileHeight: "الارتفاع على الهواتف الذكية",
     penColor: "لون القلم",
     backgroundColor: "لون الخلفية",
     templateElements: "عناصر القالب",
@@ -1460,104 +1783,47 @@ export var arStrings = {
     allowCameraAccess: "السماح بالوصول إلى الكاميرا",
     scaleColorMode: "مقياس وضع اللون",
     rateColorMode: "معدل وضع اللون",
-    copyDisplayValue: "نسخ قيمة العرض"
+    copyDisplayValue: "نسخ قيمة العرض",
+    effectiveColSpan: "امتداد العمود",
+    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم"
   },
   theme: {
-    "--background": "لون الخلفية",
-    "--background-dim-light": "خلفية لون فاتح قاتم",
-    "--primary-foreground": "لون المقدمة الأساسي",
-    "--foreground": "لون المقدمة",
-    "--base-unit": "وحدة القاعدة",
     advancedMode: "الوضع المتقدم",
-    groupGeneral: "عام",
-    groupHeader: "راس",
-    groupBackground: "خلفية",
-    groupAppearance: "مظهر",
-    themeName: "موضوع",
-    themeMode: "مظهر السؤال",
-    themeModePanels: "افتراضي",
-    themeModeLightweight: "بدون لوحات",
-    themePaletteLight: "ضوء",
-    themePaletteDark: "داكن",
-    primaryColor: "لون التمييز",
+    pageTitle: "خط عنوان الصفحة",
+    questionTitle: "خط عنوان السؤال",
+    editorPanel: "عنصر الإدخال",
+    lines: "اسطر",
     primaryDefaultColor: "افتراضي",
     primaryDarkColor: "حم",
     primaryLightColor: "المحدد",
-    coverTitleForecolor: "اللون الأمامي للعنوان",
-    coverDescriptionForecolor: "وصف التلوين الأمامي",
-    coverOverlapEnabled: "التداخل",
     backgroundDimColor: "لون الخلفية",
-    backgroundImage: "صورة الخلفية",
-    backgroundImageFitAuto: "تلقائي",
-    backgroundImageFitCover: "غطاء",
-    backgroundImageFitContain: "احتوى",
-    backgroundImageFitFill: "مد",
-    backgroundImageFitTile: "بلاط",
-    backgroundOpacity: "العتامه",
-    backgroundImageAttachmentFixed: "ثابت",
-    backgroundImageAttachmentScroll: "طومار",
-    panelBackgroundTransparency: "عتامة خلفية اللوحة",
-    questionBackgroundTransparency: "عتامة خلفية السؤال",
-    questionTitle: "خط عنوان السؤال",
-    editorPanel: "عنصر الإدخال",
-    backgroundCornerRadius: "الخلفية ونصف قطر الزاوية",
+    cornerRadius: "نصف قطر الزاوية",
     backcolor: "الخلفية الافتراضية",
     hovercolor: "خلفية التحويم",
     borderDecoration: "زخرفة الحدود",
-    accentBackground: "خلفية لهجة",
-    accentForeground: "لهجة الصدارة",
+    fontColor: "لون الخط",
+    backgroundColor: "لون الخلفية",
     primaryForecolor: "اللون الافتراضي",
     primaryForecolorLight: "لون معطل",
-    colorsTitle: "الوان",
     font: "الخط",
-    lines: "اسطر",
     borderDefault: "اظلم",
     borderLight: "أخف",
     fontFamily: "عائلة الخط",
-    fontSize: "حجم الخط",
-    color: "لون",
-    placeholderColor: "لون العنصر النائب",
-    size: "حجم",
     fontWeightRegular: "منتظم",
     fontWeightHeavy: "ثقيل",
     fontWeightSemiBold: "شبه غامق",
     fontWeightBold: "جريء",
-    scale: "مِيزَان",
-    cornerRadius: "نصف قطر الزاوية",
-    surveyTitle: "خط عنوان الاستطلاع",
-    surveyDescription: "خط وصف الاستطلاع",
-    pageTitle: "خط عنوان الصفحة",
-    titleFont: "خط العنوان",
-    descriptionFont: "خط الوصف",
+    color: "لون",
+    placeholderColor: "لون العنصر النائب",
+    size: "حجم",
+    opacity: "العتامه",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "إضافة تأثير الظل",
-    opacity: "العتامه",
     boxShadowBlur: "طمس",
     boxShadowSpread: "انتشار",
     boxShadowDrop: "قطرة",
     boxShadowInner: "باطن",
-    shadow: "تأثيرات الظل",
-    headerView: "منظر",
-    headerViewBasic: "أساسي",
-    headerViewAdvanced: "متقدم",
-    coverInheritWidthFrom: "عرض منطقة المحتوى",
-    coverInheritWidthFromSurvey: "نفس المسح",
-    coverInheritWidthFromContainer: "يصلح للحاوية",
-    coverTextAreaWidth: "عرض النص",
-    coverBackgroundColorSwitch: "لون الخلفية",
-    coverBackgroundColorNone: "اي",
-    coverBackgroundColorAccentColor: "لون التمييز",
-    coverBackgroundColorCustom: "تقليد",
-    horizontalAlignmentLeft: "يسار",
-    horizontalAlignmentCenter: "مركز",
-    horizontalAlignmentRight: "يمين",
-    verticalAlignmentTop: "أعلى",
-    verticalAlignmentMiddle: "وسط",
-    verticalAlignmentBottom: "قاع",
-    logoPosition: "موضع الشعار",
-    coverTitlePosition: "موضع العنوان",
-    coverDescriptionPosition: "موقف الوصف",
     names: {
       default: "افتراضي",
       sharp: "حاد",
@@ -1577,13 +1843,28 @@ export var arStrings = {
       orchid: "السحلب",
       tulip: "توليب",
       brown: "أسمر",
-      green: "أخضر"
+      green: "أخضر",
+      gray: "رمادي"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "خلفية السطح",
+    "--sjs-primary-background-500": "ابتدائي",
+    "--sjs-secondary-background-500": "ثانوي",
+    surfaceScale: "سطح",
+    userInterfaceBaseUnit: "واجهة المستخدم",
+    fontScale: "الخط",
+    names: {
+      sc2020: "منشئ الاستطلاع 2020",
+      "default-light": "ضوء",
+      "default-dark": "داكن",
+      "default-contrast": "تباين"
     }
   }
 };
 
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
-editorLocalization.locales["ar"] = arStrings;
+setupLocale({ localeCode: "ar", strings: arStrings });
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
 // qt.tagbox: "Multi-Select Dropdown" => "قائمة منسدلة متعددة التحديد"
@@ -1638,14 +1919,14 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.includeIntoResult: "Include into survey results" => "تضمين نتائج الاستطلاع"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "ارتفاع الصورة (بالقيم المقبولة من CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "عرض الصورة (بالقيم المقبولة من CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "الحد الزمني لإنهاء الصفحة (بالثواني)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "الحد الزمني لإنهاء الصفحة (بالثواني)"
 // question.page: "Parent page" => "الصفحة الرئيسية"
 // pe.noEntriesText: "Empty entries text" => "نص إدخالات فارغ"
 // pe.setValue: "Answer" => "جواب"
 // pe.dataFormat: "Image format" => "تنسيق الصورة"
 // pe.allowAddRows: "Allow adding rows" => "السماح بإضافة صفوف"
 // pe.allowRemoveRows: "Allow removing rows" => "السماح بإزالة الصفوف"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "السماح بسحب الصف وإفلاته"
+// pe.allowRowReorder: "Allow row drag and drop" => "السماح بسحب الصف وإفلاته"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "لا ينطبق إذا قمت بتحديد عرض الصورة أو ارتفاعها بالضبط."
 // pe.minImageWidth: "Minimum image width" => "الحد الأدنى لعرض الصورة"
 // pe.maxImageWidth: "Maximum image width" => "الحد الأقصى لعرض الصورة"
@@ -1656,11 +1937,11 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.logo: "Logo (URL or base64-encoded string)" => "الشعار (عنوان URL أو سلسلة مشفرة base64)"
 // pe.questionsOnPageMode: "Survey structure" => "هيكل المسح"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "الحد الأقصى لطول الإجابة (بالأحرف)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "الحد الأقصى لطول التعليق (بالأحرف)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "الحد الأقصى لطول التعليق (بالأحرف)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "توسيع منطقة التعليق تلقائيا إذا لزم الأمر"
 // pe.allowResizeComment: "Allow users to resize text areas" => "السماح للمستخدمين بتغيير حجم مناطق النص"
 // pe.textUpdateMode: "Update text question value" => "تحديث قيمة السؤال النصي"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "تعيين التركيز على أول إجابة غير صالحة"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "تعيين التركيز على أول إجابة غير صالحة"
 // pe.checkErrorsMode: "Run validation" => "تشغيل التحقق من الصحة"
 // pe.navigateToUrl: "Navigate to URL" => "انتقل إلى عنوان URL"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "عنوان URL الديناميكي"
@@ -1685,20 +1966,20 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.detailPanelMode: "Detail panel location" => "موقع لوحة التفاصيل"
 // pe.minRowCount: "Minimum row count" => "الحد الأدنى لعدد الصفوف"
 // pe.maxRowCount: "Maximum row count" => "الحد الأقصى لعدد الصفوف"
-// pe.confirmDelete: "Confirm row deletion" => "تأكيد حذف الصف"
+// pe.confirmDelete: "Confirm row removal" => "تأكيد حذف الصف"
 // pe.confirmDeleteText: "Confirmation message" => "رسالة تأكيد"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "تأكيد حذف اللوحة"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "تأكيد حذف اللوحة"
 // pe.panelCount: "Initial panel count" => "عدد اللوحات الأولي"
 // pe.minPanelCount: "Minimum panel count" => "الحد الأدنى لعدد اللوحات"
 // pe.maxPanelCount: "Maximum panel count" => "الحد الأقصى لعدد اللوحات"
 // pe.panelsState: "Inner panel expand state" => "حالة توسيع اللوحة الداخلية"
 // pe.templateDescription: "Description template" => "قالب الوصف"
 // pe.templateTitle: "Title template" => "قالب العنوان"
-// pe.panelPrevText: "Previous Panel button tooltip" => "تلميح أداة زر اللوحة السابق"
-// pe.panelNextText: "Next Panel button tooltip" => "تلميح أداة زر اللوحة التالية"
+// pe.prevPanelText: "Previous Panel button tooltip" => "تلميح أداة زر اللوحة السابق"
+// pe.nextPanelText: "Next Panel button tooltip" => "تلميح أداة زر اللوحة التالية"
 // pe.showRangeInProgress: "Show progress bar" => "إظهار شريط التقدم"
-// pe.templateTitleLocation: "Question title location" => "موقع عنوان السؤال"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "إزالة موقع زر اللوحة"
+// pe.templateQuestionTitleLocation: "Question title location" => "موقع عنوان السؤال"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "إزالة موقع زر اللوحة"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "إخفاء السؤال إذا لم تكن هناك صفوف"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "إخفاء الأعمدة في حالة عدم وجود صفوف"
 // pe.rateValues: "Custom rate values" => "قيم الأسعار المخصصة"
@@ -1721,13 +2002,13 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "رسالة الخطأ \"قيمة مفتاح غير فريدة\""
 // pe.minSelectedChoices: "Minimum selected choices" => "الحد الأدنى من الخيارات المحددة"
 // pe.maxSelectedChoices: "Maximum selected choices" => "الحد الأقصى للخيارات المحددة"
-// pe.showClearButton: "Show the Clear button" => "إظهار الزر مسح"
+// pe.allowClear: "Show the Clear button" => "إظهار الزر مسح"
 // pe.showNumber: "Show panel number" => "إظهار رقم اللوحة"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "عرض الشعار (بالقيم المقبولة من CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "ارتفاع الشعار (بالقيم المقبولة من CSS)"
 // pe.readOnly: "Read-only" => "للقراءة فقط"
 // pe.enableIf: "Editable if" => "قابل للتحرير إذا"
-// pe.emptyRowsText: "\"No rows\" message" => "رسالة \"بلا صفوف\""
+// pe.noRowsText: "\"No rows\" message" => "رسالة \"بلا صفوف\""
 // pe.size: "Input field size (in characters)" => "حجم حقل الإدخال (بالأحرف)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "خيارات خاصة منفصلة (لا شيء، أخرى، تحديد الكل)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "نسخ الاختيارات من السؤال التالي"
@@ -1735,7 +2016,7 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.showCommentArea: "Show the comment area" => "إظهار منطقة التعليق"
 // pe.commentPlaceholder: "Comment area placeholder" => "العنصر النائب لمنطقة التعليق"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "عرض أوصاف المعدل كقيم قصوى"
-// pe.rowsOrder: "Row order" => "ترتيب الصفوف"
+// pe.rowOrder: "Row order" => "ترتيب الصفوف"
 // pe.columnsLayout: "Column layout" => "تخطيط العمود"
 // pe.columnColCount: "Nested column count" => "عدد الأعمدة المتداخلة"
 // pe.state: "Panel expand state" => "حالة توسيع اللوحة"
@@ -1752,8 +2033,6 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.indent: "Add indents" => "إضافة مسافات بادئة"
 // panel.indent: "Add outer indents" => "إضافة مسافات بادئة خارجية"
 // pe.innerIndent: "Add inner indents" => "إضافة مسافات بادئة داخلية"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "خذ القيم الافتراضية من الصف الأخير"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "خذ القيم الافتراضية من اللوحة الأخيرة"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "اكتب التعبير هنا..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "مسح القيمة إذا أصبح السؤال مخفيا"
 // pe.valuePropertyName: "Value property name" => "اسم خاصية القيمة"
@@ -1810,7 +2089,7 @@ editorLocalization.locales["ar"] = arStrings;
 // showTimerPanel.none: "Hidden" => "مخفي"
 // showTimerPanelMode.all: "Both" => "كلا"
 // detailPanelMode.none: "Hidden" => "مخفي"
-// addRowLocation.default: "Depends on matrix layout" => "يعتمد على تخطيط المصفوفة"
+// addRowButtonLocation.default: "Depends on matrix layout" => "يعتمد على تخطيط المصفوفة"
 // panelsState.default: "Users cannot expand or collapse panels" => "لا يمكن للمستخدمين توسيع اللوحات أو طيها"
 // panelsState.collapsed: "All panels are collapsed" => "جميع اللوحات مطوية"
 // panelsState.expanded: "All panels are expanded" => "يتم توسيع جميع اللوحات"
@@ -1899,12 +2178,11 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.--primary-foreground: "Primary foreground color" => "لون المقدمة الأساسي"
 // theme.--foreground: "Foreground color" => "لون المقدمة"
 // theme.--base-unit: "Base unit" => "وحدة القاعدة"
-// theme.groupGeneral: "General" => "عام"
 // theme.groupAdvanced: "Advanced" => "متقدم"
 // theme.themeName: "Theme" => "موضوع"
-// theme.themeMode: "Question appearance" => "مظهر السؤال"
-// theme.themeModePanels: "Default" => "افتراضي"
-// theme.themeModeLightweight: "Without Panels" => "بدون لوحات"
+// theme.isPanellessss: "Question appearance" => "مظهر السؤال"
+// theme.isPanellessPanels: "Default" => "افتراضي"
+// theme.isPanellessLightweight: "Without Panels" => "بدون لوحات"
 // theme.themePaletteLight: "Light" => "ضوء"
 // theme.themePaletteDark: "Dark" => "داكن"
 // theme.primaryColor: "Accent color" => "لون التمييز"
@@ -1946,7 +2224,7 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.fontWeightBold: "Bold" => "جريء"
 // theme.scale: "Scale" => "مِيزَان"
 // theme.cornerRadius: "Corner radius" => "نصف قطر الزاوية"
-// theme.surveyTitle: "Survey title font" => "خط عنوان الاستطلاع"
+// theme.surveyTitleFont: "Survey title font" => "خط عنوان الاستطلاع"
 // theme.pageTitle: "Page title font" => "خط عنوان الصفحة"
 // theme.pageDescription: "Page description font" => "خط وصف الصفحة"
 // theme.boxShadowX: "X" => "X"
@@ -2008,22 +2286,20 @@ editorLocalization.locales["ar"] = arStrings;
 // survey.title: "Title" => "عنوان"
 // page.title: "Title" => "عنوان"
 // p.setValueIf: "Set value if" => "تعيين قيمة إذا"
-// theme.groupHeader: "Header" => "راس"
-// theme.coverTitleForecolor: "Title forecolor" => "اللون الأمامي للعنوان"
-// theme.coverOverlapEnabled: "Overlap" => "التداخل"
+// theme.header: "Header" => "راس"
 // theme.backgroundImageFitFill: "Stretch" => "مد"
 // theme.backgroundImageFitTile: "Tile" => "بلاط"
 // theme.headerView: "View" => "منظر"
 // theme.headerViewBasic: "Basic" => "أساسي"
 // theme.headerViewAdvanced: "Advanced" => "متقدم"
-// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "نفس المسح"
-// theme.coverInheritWidthFromPage: "Fit to page" => "ملائمة للصفحة"
-// theme.coverTextAreaWidth: "Text width" => "عرض النص"
-// theme.coverBackgroundColorSwitch: "Background color" => "لون الخلفية"
-// theme.coverBackgroundColorNone: "None" => "اي"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "لون التمييز"
-// theme.coverBackgroundColorCustom: "Custom" => "تقليد"
+// theme.headerInheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "نفس المسح"
+// theme.headerInheritWidthFromPage: "Fit to page" => "ملائمة للصفحة"
+// theme.headerTextAreaWidth: "Text width" => "عرض النص"
+// theme.headerBackgroundColorSwitch: "Background color" => "لون الخلفية"
+// theme.headerBackgroundColorNone: "None" => "اي"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "لون التمييز"
+// theme.headerBackgroundColorCustom: "Custom" => "تقليد"
 // theme.horizontalAlignmentLeft: "Left" => "يسار"
 // theme.horizontalAlignmentCenter: "Center" => "مركز"
 // theme.horizontalAlignmentRight: "Right" => "يمين"
@@ -2043,18 +2319,15 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
-// theme.groupBackground: "Background" => "خلفية"
-// theme.groupAppearance: "Appearance" => "مظهر"
-// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.background: "Background" => "خلفية"
+// theme.appearance: "Appearance" => "مظهر"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
-// theme.groupBackground: "Background" => "خلفية"
-// theme.groupAppearance: "Appearance" => "مظهر"
-// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
+// theme.headerDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
 // signaturepad.showPlaceholder: "Show the placeholder" => "إظهار العنصر النائب"
 // signaturepad.placeholder: "Placeholder text" => "نص العنصر النائب"
-// theme.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"
+// theme.surveyDescriptionFont: "Survey description font" => "خط وصف الاستطلاع"
 // ed.prevFocus: "Focus previous" => "التركيز السابق"
 // ed.nextFocus: "Focus next" => "التركيز التالي"
 // ed.saveTheme: "Save Theme" => "حفظ السمة"
@@ -2067,8 +2340,8 @@ editorLocalization.locales["ar"] = arStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "الحد الأدنى لعرض القلم"
 // signaturepad.penMaxWidth: "Maximum pen width" => "الحد الأقصى لعرض القلم"
 // theme.logoPosition: "Logo position" => "موضع الشعار"
-// theme.coverTitlePosition: "Title position" => "موضع العنوان"
-// theme.coverDescriptionPosition: "Description position" => "موقف الوصف"
+// theme.headerTitlePosition: "Title position" => "موضع العنوان"
+// theme.headerDescriptionPosition: "Description position" => "موقف الوصف"
 // ed.propertyGridNoResultsFound: "No results found" => "لم يتم العثور على نتائج"
 // pv.leftRight: "Left and right" => "اليسار واليمين"
 // p.sourceType: "Source type" => "نوع المصدر"
@@ -2104,13 +2377,12 @@ editorLocalization.locales["ar"] = arStrings;
 // panel.description: "Panel description" => "وصف اللوحة"
 // panel.visibleIf: "Make the panel visible if" => "اجعل اللوحة مرئية إذا"
 // panel.requiredIf: "Make the panel required if" => "اجعل اللوحة مطلوبة إذا"
-// panel.questionsOrder: "Question order within the panel" => "ترتيب الأسئلة داخل اللوحة"
+// panel.questionOrder: "Question order within the panel" => "ترتيب الأسئلة داخل اللوحة"
 // panel.startWithNewLine: "Display the panel on a new line" => "عرض اللوحة على سطر جديد"
 // panel.state: "Panel collapse state" => "حالة انهيار اللوحة"
 // panel.width: "Inline panel width" => "عرض اللوحة المضمنة"
 // panel.minWidth: "Minimum panel width" => "الحد الأدنى لعرض اللوحة"
 // panel.maxWidth: "Maximum panel width" => "الحد الأقصى لعرض اللوحة"
-// panel.showNumber: "Number panels" => "لوحات الأرقام"
 // paneldynamic.name: "Panel name" => "اسم اللوحة"
 // paneldynamic.title: "Panel title" => "عنوان اللوحة"
 // paneldynamic.description: "Panel description" => "وصف اللوحة"
@@ -2130,7 +2402,7 @@ editorLocalization.locales["ar"] = arStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "إخفاء رقم اللوحة"
 // paneldynamic.titleLocation: "Panel title alignment" => "محاذاة عنوان اللوحة"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "محاذاة وصف اللوحة"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "محاذاة عنوان السؤال"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "محاذاة عنوان السؤال"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "محاذاة رسالة الخطأ"
 // paneldynamic.newPanelPosition: "New panel location" => "موقع لوحة جديد"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "منع تكرار الردود في السؤال التالي"
@@ -2163,7 +2435,7 @@ editorLocalization.locales["ar"] = arStrings;
 // page.description: "Page description" => "وصف الصفحة"
 // page.visibleIf: "Make the page visible if" => "اجعل الصفحة مرئية إذا"
 // page.requiredIf: "Make the page required if" => "اجعل الصفحة مطلوبة إذا"
-// page.questionsOrder: "Question order on the page" => "ترتيب الأسئلة على الصفحة"
+// page.questionOrder: "Question order on the page" => "ترتيب الأسئلة على الصفحة"
 // matrixdropdowncolumn.name: "Column name" => "اسم العمود"
 // matrixdropdowncolumn.title: "Column title" => "عنوان العمود"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "منع الردود المكررة"
@@ -2237,8 +2509,8 @@ editorLocalization.locales["ar"] = arStrings;
 // totalDisplayStyle.currency: "Currency" => "عملة"
 // totalDisplayStyle.percent: "Percentage" => "النسبه المئويه"
 // totalDisplayStyle.date: "Date" => "تاريخ"
-// rowsOrder.initial: "Original" => "اللغة الأصلية"
-// questionsOrder.initial: "Original" => "اللغة الأصلية"
+// rowOrder.initial: "Original" => "اللغة الأصلية"
+// questionOrder.initial: "Original" => "اللغة الأصلية"
 // showProgressBar.aboveheader: "Above the header" => "فوق الرأس"
 // showProgressBar.belowheader: "Below the header" => "أسفل الرأس"
 // pv.sum: "Sum" => "مجموع"
@@ -2255,7 +2527,7 @@ editorLocalization.locales["ar"] = arStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع."
 // panel.page: "Repositions the panel to the end of a selected page." => "تغيير موضع اللوحة إلى نهاية الصفحة المحددة."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "يضيف مسافة أو هامش بين محتوى اللوحة والحد الأيسر لمربع اللوحة."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك."
@@ -2266,7 +2538,7 @@ editorLocalization.locales["ar"] = arStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "استخدم أيقونة العصا السحرية لضبط قاعدة شرطية تحدد رؤية اللوحة."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للوحة."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "تعيين موقع رسالة خطأ فيما يتعلق بسؤال بإدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "تغيير موضع اللوحة إلى نهاية الصفحة المحددة."
@@ -2280,7 +2552,7 @@ editorLocalization.locales["ar"] = arStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "يتم توريث هذا الإعداد تلقائيا من خلال جميع الأسئلة داخل هذه اللوحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد متى تتم إعادة تعيين إدخال المستجيب إلى القيمة استنادا إلى \"تعبير القيمة الافتراضية\" أو \"تعيين تعبير القيمة\" أو إلى قيمة \"الإجابة الافتراضية\" (إذا تم تعيين أي منهما)."
@@ -2326,18 +2598,17 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "يضبط رؤية وموقع أزرار التنقل على الصفحة."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "ينطبق على جميع الأسئلة داخل الاستطلاع. يمكن تجاوز هذا الإعداد من خلال قواعد محاذاة العنوان في المستويات الأدنى: اللوحة أو الصفحة أو السؤال. سيتجاوز إعداد المستوى الأدنى تلك الموجودة في المستوى الأعلى."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "رمز أو سلسلة من الرموز تشير إلى أن الإجابة مطلوبة."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "رمز أو سلسلة من الرموز تشير إلى أن الإجابة مطلوبة."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "أدخل رقما أو حرفا تريد بدء الترقيم به."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة."
 // pehelp.maxTextLength: "For text entry questions only." => "لأسئلة إدخال النص فقط."
-// pehelp.maxOthersLength: "For question comments only." => "لتعليقات الأسئلة فقط."
+// pehelp.maxCommentLength: "For question comments only." => "لتعليقات الأسئلة فقط."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "حدد ما إذا كنت تريد زيادة تعليقات الأسئلة وأسئلة النص الطويل تلقائيا في الارتفاع بناء على طول النص الذي تم إدخاله."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "لتعليقات الأسئلة وأسئلة النص الطويل فقط."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "تعمل المتغيرات المخصصة كمتغيرات وسيطة أو مساعدة تستخدم في حسابات النماذج. يأخذون مدخلات المستجيبين كقيم مصدر. كل متغير مخصص له اسم فريد وتعبير يعتمد عليه."
@@ -2352,25 +2623,23 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسالة خطأ فيما يتعلق بخلية ذات إدخال غير صالح. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي."
 // pehelp.description: "Type a subtitle." => "اكتب عنوانا فرعيا."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "يضبط موقع قسم التفاصيل بالنسبة إلى صف. اختر من بين: \"لا شيء\" - لم تتم إضافة أي توسيع ؛ \"تحت الصف\" - يتم وضع توسيع الصف تحت كل صف من المصفوفة ؛ \"أسفل الصف ، اعرض توسيع صف واحد فقط\" - يتم عرض توسيع أسفل صف واحد فقط ، ويتم طي توسعات الصف المتبقية."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "يزيد تدريجيا من ارتفاع حقل الإدخال أثناء إدخال البيانات. يتجاوز إعداد \"ارتفاع حقل الإدخال (في الأسطر)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "يظهر مقبض تغيير الحجم (أو المقبض) في الزاوية ويمكن سحبه لتغيير حجم حقل الإدخال."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية الصفحة."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للصفحة."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "ينطبق على جميع الأسئلة الواردة في هذه الصفحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة أو اللوحات الفردية. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "يضبط رؤية وموقع المؤقت على الصفحة."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "أدخل اسم خاصية مشتركة ضمن صفيف الكائنات التي تحتوي على عناوين URL لملفات الصور أو الفيديو التي تريد عرضها في قائمة الاختيارات."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "تعمل القيمة اليسرى كمعرف عنصر مستخدم في القواعد الشرطية ، ويتم عرض القيمة الصحيحة للمستجيبين."
@@ -2398,7 +2667,7 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "تشغيل مطالبة تطلب تأكيد حذف الملف."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "تمكين لترتيب الخيارات المحددة فقط. سيقوم المستخدمون بسحب العناصر المحددة من قائمة الاختيار لترتيبها داخل منطقة الترتيب."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول."
@@ -2411,8 +2680,8 @@ editorLocalization.locales["ar"] = arStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "عرض تسمية العنصر (بالبكسل)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "نص لإظهار ما إذا كانت كل الخيارات محددة"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "نص العنصر النائب لمنطقة الترتيب"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "إكمال الاستطلاع تلقائيا"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "إكمال الاستطلاع تلقائيا"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "حفظ القيمة المقنعة في نتائج الاستطلاع"
 // patternmask.pattern: "Value pattern" => "نمط القيمة"
 // datetimemask.min: "Minimum value" => "الحد الأدنى للقيمة"
@@ -2458,3 +2727,349 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.selectFile: "Select a file" => "حدد ملفا"
 // ed.removeFile: "Remove the file" => "إزالة الملف"
 // pe.searchMode: "Search Mode" => "وضع البحث"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "انقر فوق الزر \"إضافة سؤال\" أدناه لبدء إنشاء النموذج الخاص بك."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى الصفحة."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "انقر فوق الزر \"إضافة سؤال\" أدناه لإضافة عنصر جديد إلى اللوحة."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "انقر فوق الزر أدناه واختر صورة لتحميلها"
+// coloralpha.opacity: "Opacity" => "العتامه"
+// font.family: "Font family" => "عائلة الخط"
+// font.color: "Color" => "لون"
+// font.placeholderColor: "Placeholder color" => "لون العنصر النائب"
+// font.size: "Size" => "حجم"
+// theme.themeName: "Theme" => "موضوع"
+// theme.isPanelless: "Question appearance" => "مظهر السؤال"
+// theme.editorPanel: "Background and corner radius" => "الخلفية ونصف قطر الزاوية"
+// theme.questionPanel: "Background and corner radius" => "الخلفية ونصف قطر الزاوية"
+// theme.primaryColor: "Accent color" => "لون التمييز"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "عتامة خلفية اللوحة"
+// theme.questionBackgroundTransparency: "Question background opacity" => "عتامة خلفية السؤال"
+// theme.fontSize: "Font size" => "حجم الخط"
+// theme.scale: "Scale" => "مِيزَان"
+// theme.cornerRadius: "Corner radius" => "نصف قطر الزاوية"
+// theme.pageTitle: "Title font" => "خط العنوان"
+// theme.pageDescription: "Description font" => "خط الوصف"
+// theme.questionTitle: "Title font" => "خط العنوان"
+// theme.questionDescription: "Description font" => "خط الوصف"
+// theme.editorFont: "Font" => "الخط"
+// theme.backgroundOpacity: "Opacity" => "العتامه"
+// theme.--sjs-font-family: "Font family" => "عائلة الخط"
+// theme.--sjs-general-backcolor-dim: "Background color" => "لون الخلفية"
+// theme.--sjs-primary-backcolor: "Accent background" => "خلفية لهجة"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "لهجة الصدارة"
+// theme.--sjs-shadow-small: "Shadow effects" => "تأثيرات الظل"
+// theme.--sjs-shadow-inner: "Shadow effects" => "تأثيرات الظل"
+// theme.--sjs-border-default: "Colors" => "الوان"
+// header@header.headerView: "View" => "منظر"
+// header@header.logoPosition: "Logo position" => "موضع الشعار"
+// header@header.surveyTitle: "Survey title font" => "خط عنوان الاستطلاع"
+// header@header.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"
+// header@header.headerTitle: "Survey title font" => "خط عنوان الاستطلاع"
+// header@header.headerDescription: "Survey description font" => "خط وصف الاستطلاع"
+// header@header.inheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
+// header@header.textAreaWidth: "Text width" => "عرض النص"
+// header@header.backgroundColorSwitch: "Background color" => "لون الخلفية"
+// header@header.backgroundImage: "Background image" => "صورة الخلفية"
+// header@header.backgroundImageOpacity: "Opacity" => "العتامه"
+// header@header.overlapEnabled: "Overlap" => "التداخل"
+// header@header.logoPositionX: "Logo position" => "موضع الشعار"
+// header@header.titlePositionX: "Title position" => "موضع العنوان"
+// header@header.descriptionPositionX: "Description position" => "موقف الوصف"
+// weight.400: "Regular" => "منتظم"
+// weight.600: "Heavy" => "ثقيل"
+// weight.700: "Semi-bold" => "شبه غامق"
+// weight.800: "Bold" => "جريء"
+// backgroundImageFit.auto: "Auto" => "تلقائي"
+// backgroundImageFit.cover: "Cover" => "غطاء"
+// backgroundImageFit.contain: "Contain" => "احتوى"
+// backgroundImageFit.fill: "Stretch" => "مد"
+// backgroundImageFit.tile: "Tile" => "بلاط"
+// backgroundImageAttachment.fixed: "Fixed" => "ثابت"
+// backgroundImageAttachment.scroll: "Scroll" => "طومار"
+// headerView.basic: "Basic" => "أساسي"
+// headerView.advanced: "Advanced" => "متقدم"
+// inheritWidthFrom.survey: "Same as survey" => "نفس المسح"
+// inheritWidthFrom.container: "Fit to container" => "يصلح للحاوية"
+// backgroundColorSwitch.none: "None" => "اي"
+// backgroundColorSwitch.accentColor: "Accent color" => "لون التمييز"
+// backgroundColorSwitch.custom: "Custom" => "تقليد"
+// colorPalette.light: "Light" => "ضوء"
+// colorPalette.dark: "Dark" => "داكن"
+// isPanelless.false: "Default" => "افتراضي"
+// isPanelless.true: "Without Panels" => "بدون لوحات"
+// theme.cornerRadius: "Corner radius" => "نصف قطر الزاوية"
+// theme.fontFamily: "Font family" => "عائلة الخط"
+// theme.fontWeightRegular: "Regular" => "منتظم"
+// theme.fontWeightHeavy: "Heavy" => "ثقيل"
+// theme.fontWeightSemiBold: "Semi-bold" => "شبه غامق"
+// theme.fontWeightBold: "Bold" => "جريء"
+// theme.color: "Color" => "لون"
+// theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"
+// theme.size: "Size" => "حجم"
+// theme.opacity: "Opacity" => "العتامه"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "اكتب للبحث..."
+// ed.toolboxNoResultsFound: "No results found" => "لم يتم العثور على نتائج"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "العنصر النائب لعنوان علامة التبويب"
+// theme.--sjs-special-red: "Error messages" => "رسائل الخطأ"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "نص احتياطي لعناوين علامات التبويب يتم تطبيقه عندما لا ينتج نمط عنوان علامة التبويب قيمة ذات معنى."
+// theme.fontColor: "Font color" => "لون الخط"
+// theme.backgroundColor: "Background color" => "لون الخلفية"
+// pe.questionTitleWidth: "Question title width" => "عرض عنوان السؤال"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "حدد ملفا أو الصق رابط ملف..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "مثال: 200 بكسل"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "ارتفاع منطقة التعليق (في الأسطر)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "يضبط عدد الأسطر المعروضة في مساحات النص لتعليقات الأسئلة. في الإدخال يأخذ المزيد من الأسطر ، يظهر شريط التمرير."
+// pe.enabled: "Enabled" => "تمكين"
+// pe.disabled: "Disabled" => "ذوي الاحتياجات الخاصه"
+// pe.inherit: "Inherit" => "ورث"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "التحقق من صحة الحقول الفارغة على التركيز المفقود"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "مثال: 30٪"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "مثال: 200 بكسل"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "قم بتمكين هذا الخيار لتشغيل التحقق من الصحة عندما يركز المستخدم على حقل إدخال فارغ ثم يتركه دون إجراء أي تغييرات."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "ينطبق هذا الإعداد فقط على الأسئلة خارج اللوحة."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "يضبط لونا تكميليا يبرز عناصر الاستطلاع الرئيسية."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "يضبط شفافية اللوحات ومربعات الأسئلة المتعلقة بخلفية الاستطلاع."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "يضبط شفافية عناصر الإدخال بالنسبة لخلفية الاستطلاع."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "يضبط نصف قطر الزاوية لكل العناصر المستطيلة. قم بتمكين الوضع المتقدم إذا كنت تريد تعيين قيم نصف قطر زاوية فردية لعناصر الإدخال أو اللوحات ومربعات الأسئلة."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "يضبط لون الخلفية الرئيسي للاستطلاع."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة محتوى الرأس تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "يقبل القيم٪"
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "يقبل القيم px."
+// p.effectiveColSpan: "Column span" => "امتداد العمود"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "نفس المسح"
+// progressBarInheritWidthFrom.container: "Same as container" => "نفس الحاوية"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "عرض منطقة شريط التقدم"
+// maskType.none: "None" => "اي"
+// maskType.pattern: "Pattern" => "رسم"
+// maskType.numeric: "Numeric" => "عددي"
+// maskType.datetime: "Date and Time" => "التاريخ والوقت"
+// maskType.currency: "Currency" => "عملة"
+
+// inputTextAlignment.auto: "Auto" => "تلقائي"
+// inputTextAlignment.left: "Left" => "يسار"
+// inputTextAlignment.right: "Right" => "يمين"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك."
+// p.inputTextAlignment: "Input value alignment" => "محاذاة قيمة الإدخال"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "إظهار شريط التقدم"
+// paneldynamic.showProgressBar: "Show the progress bar" => "إظهار شريط التقدم"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "محاذاة شريط التقدم"
+// pv.carousel: "Carousel" => "دائري"
+// progressBarLocation.top: "Top" => "أعلى"
+// progressBarLocation.bottom: "Bottom" => "قاع"
+// progressBarLocation.topBottom: "Top and bottom" => "أعلى وأسفل"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "روابط يوتيوب غير مدعومة."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "بدء تكوين النموذج الخاص بك"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم."
+// pe.caseInsensitive: "Case insensitive" => "غير حساس لحالة الأحرف"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "النموذج فارغ"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "النموذج فارغ"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه."
+// ed.previewPlaceholderTitle: "No preview" => "لا معاينة"
+// ed.previewPlaceholderTitleMobile: "No preview" => "لا معاينة"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "لا يحتوي الاستطلاع على أي عناصر مرئية."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "لا يحتوي الاستطلاع على أي عناصر مرئية."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "لا توجد سلاسل للترجمة"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "لا توجد سلاسل للترجمة"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "أضف عناصر إلى النموذج أو قم بتغيير عامل تصفية السلاسل في شريط الأدوات."
+// lg.logicPlaceholderTitle: "No logical rules" => "لا توجد قواعد منطقية"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "لا توجد قواعد منطقية"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "إنشاء قاعدة لتخصيص تدفق الاستطلاع."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "إنشاء قاعدة لتخصيص تدفق الاستطلاع."
+// pe.showTimer: "Use a timer" => "استخدام مؤقت"
+// theme.advancedMode: "Advanced mode" => "الوضع المتقدم"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "يضبط موقع المؤقت على الصفحة."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
+// p.mobileHeight: "Height on smartphones" => "الارتفاع على الهواتف الذكية"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس."
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
+// creatortheme.--sjs-special-background: "Surface background" => "خلفية السطح"
+// creatortheme.--sjs-primary-background-500: "Primary" => "ابتدائي"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "ثانوي"
+// creatortheme.surfaceScale: "Surface" => "سطح"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "واجهة المستخدم"
+// creatortheme.fontScale: "Font" => "الخط"
+// names.sc2020: "Survey Creator 2020" => "منشئ الاستطلاع 2020"
+// names.default-light: "Light" => "ضوء"
+// names.default-dark: "Dark" => "داكن"
+// names.default-contrast: "Contrast" => "تباين"
+// panel.showNumber: "Number this panel" => "رقم هذه اللوحة"
+// ed.creatorSettingTitle: "Creator Settings" => "إعدادات منشئي المحتوى"
+// tabs.accentColors: "Accent colors" => "ألوان مميزة"
+// tabs.scaling: "Scaling" => "القياس"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة."
+// autocomplete.name: "Full Name" => "الاسم الكامل"
+// autocomplete.honorific-prefix: "Prefix" => "بادئه"
+// autocomplete.given-name: "First Name" => "الاسم الأول"
+// autocomplete.additional-name: "Middle Name" => "الاسم الأوسط"
+// autocomplete.family-name: "Last Name" => "اسم العائلة"
+// autocomplete.honorific-suffix: "Suffix" => "لاحقه"
+// autocomplete.nickname: "Nickname" => "لقب"
+// autocomplete.organization-title: "Job Title" => "المسمى الوظيفي"
+// autocomplete.username: "User Name" => "اسم المستخدم"
+// autocomplete.new-password: "New Password" => "كلمة مرور جديدة"
+// autocomplete.current-password: "Current Password" => "كلمة المرور الحالية"
+// autocomplete.organization: "Organization Name" => "اسم المنظمة"
+// autocomplete.street-address: "Full Street Address" => "عنوان الشارع بالكامل"
+// autocomplete.address-line1: "Address Line 1" => "سطر العنوان 1"
+// autocomplete.address-line2: "Address Line 2" => "سطر العنوان 2"
+// autocomplete.address-line3: "Address Line 3" => "سطر العنوان 3"
+// autocomplete.address-level4: "Level 4 Address" => "عنوان المستوى 4"
+// autocomplete.address-level3: "Level 3 Address" => "عنوان المستوى 3"
+// autocomplete.address-level2: "Level 2 Address" => "عنوان المستوى 2"
+// autocomplete.address-level1: "Level 1 Address" => "عنوان المستوى 1"
+// autocomplete.country: "Country Code" => "رمز البلد"
+// autocomplete.country-name: "Country Name" => "اسم البلد"
+// autocomplete.postal-code: "Postal Code" => "الرمز البريدي"
+// autocomplete.cc-name: "Cardholder Name" => "اسم حامل البطاقة"
+// autocomplete.cc-given-name: "Cardholder First Name" => "الاسم الأول لحامل البطاقة"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "الاسم الأوسط لحامل البطاقة"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "الاسم الأخير لحامل البطاقة"
+// autocomplete.cc-number: "Credit Card Number" => "رقم بطاقة الائتمان"
+// autocomplete.cc-exp: "Expiration Date" => "تاريخ انتهاء الصلاحية"
+// autocomplete.cc-exp-month: "Expiration Month" => "شهر انتهاء الصلاحية"
+// autocomplete.cc-exp-year: "Expiration Year" => "سنة انتهاء الصلاحية"
+// autocomplete.cc-csc: "Card Security Code" => "رمز أمان البطاقة"
+// autocomplete.cc-type: "Credit Card Type" => "نوع بطاقة الائتمان"
+// autocomplete.transaction-currency: "Transaction Currency" => "عملة المعاملة"
+// autocomplete.transaction-amount: "Transaction Amount" => "مبلغ المعاملة"
+// autocomplete.language: "Preferred Language" => "اللغة المفضلة"
+// autocomplete.bday: "Birthday" => "عيد ميلاد"
+// autocomplete.bday-day: "Birthday Day" => "عيد ميلاد"
+// autocomplete.bday-month: "Birthday Month" => "شهر عيد الميلاد"
+// autocomplete.bday-year: "Birthday Year" => "سنة الميلاد"
+// autocomplete.sex: "Gender" => "جنس"
+// autocomplete.url: "Website URL" => "رابط الموقع"
+// autocomplete.photo: "Profile Photo" => "صورة الملف الشخصي"
+// autocomplete.tel: "Telephone Number" => "رقم الهاتف"
+// autocomplete.tel-country-code: "Country Code for Phone" => "رمز البلد للهاتف"
+// autocomplete.tel-national: "National Telephone Number" => "رقم الهاتف الوطني"
+// autocomplete.tel-area-code: "Area Code" => "رمز المنطقة"
+// autocomplete.tel-local: "Local Phone Number" => "رقم الهاتف المحلي"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "بادئة الهاتف المحلي"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "لاحقة الهاتف المحلي"
+// autocomplete.tel-extension: "Phone Extension" => "تحويلة الهاتف"
+// autocomplete.email: "Email Address" => "عنوان البريد الإلكتروني"
+// autocomplete.impp: "Instant Messaging Protocol" => "بروتوكول المراسلة الفورية"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "تأمين حالة التوسيع/الطي للأسئلة"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "ليس لديك أي صفحات حتى الآن"
+// pe.addNew@pages: "Add new page" => "إضافة صفحة جديدة"
+// ed.zoomInTooltip: "Zoom In" => "تكبير"
+// ed.zoomOutTooltip: "Zoom Out" => "التصغير"
+// tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي"
+// colors.gray: "Gray" => "رمادي"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "محاذاة أزرار التنقل"
+// pv.allQuestions: "Show all questions" => "عرض جميع الأسئلة"
+// pv.answeredQuestions: "Show answered questions only" => "إظهار الأسئلة التي تمت الإجابة عليها فقط"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "لتعيين موقع أزرار التنقل على الصفحة."
+// pe.size: "Input field width (in characters)" => "عرض حقل الإدخال (بالأحرف)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض."
+// pe.progressBarLocation: "Progress bar alignment" => "محاذاة شريط التقدم"
+// progressBarLocation.topbottom: "Top and bottom" => "أعلى وأسفل"
+// progressBarLocation.aboveheader: "Above the header" => "أعلى الرأس"
+// progressBarLocation.belowheader: "Below the header" => "أسفل العنوان"
+// progressBarLocation.off: "Hidden" => "مخفي"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
+// survey.readOnly: "Make the survey read-only" => "جعل الاستطلاع للقراءة فقط"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك."
+// paneldynamic.showNumber: "Number the panel" => "ترقيم اللوحة"
+// question.showNumber: "Number this question" => "رقم هذا السؤال"
+// pe.previewMode: "Preview mode" => "وضع المعاينة"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "تمكين تخطيط الشبكة"
+// pe.maskSettings: "Mask settings" => "إعدادات القناع"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "محاذاة رسالة خطأ توسيع الصف"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "أعمدة تخطيط الشبكة"
+// pe.startPageTitlePlaceholder: "Start Page" => "الصفحة الرئيسية"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "العرض الفعال ،٪"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان السؤال، بكسل"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "ليس لديك أعمدة تخطيط حتى الآن"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+
+// ed.expandTooltip: "Expand" => "ستوسع"
+// ed.collapseTooltip: "Collapse" => "تقوض"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "على سبيل المثال: 100 بكسل"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "تكبير إلى 100٪"
+// ed.addLanguageTooltip: "Add Language" => "إضافة لغة"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "قيمة العرض الافتراضية للنصوص الديناميكية"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة."
+// showQuestionNumbers.recursive: "Recursive numbering" => "الترقيم المتكرر"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "عرض عنوان السؤال"
+// pe.allowCustomChoices: "Allow custom choices" => "السماح بالخيارات المخصصة"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "تعيين عرض متسق لعناوين الأسئلة عند محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
+// page.name: "A page ID that is not visible to respondents." => "معرف صفحة غير مرئي للمستجيبين."
+// page.description: "Type a page subtitle." => "اكتب عنوانا فرعيا للصفحة."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "تسمية توضيحية معروضة على زر التنقل في شريط التقدم أو جدول المحتويات (TOC). إذا تركت هذا الحقل فارغا، فسيستخدم زر التنقل عنوان الصفحة أو اسم الصفحة. لتمكين شريط التقدم أو جدول المحتويات، انتقل إلى \"استطلاع\" → \"التنقل\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "حدد للسماح للمستجيبين بإضافة خياراتهم الخاصة إذا لم يكن الخيار المطلوب متاحا في القائمة المنسدلة. سيتم تخزين الخيارات المخصصة مؤقتا فقط طوال مدة جلسة المتصفح الحالية."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "نمط عنوان حقل الإدخال"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "إظهار حقل إدخال واحد لكل صفحة"
+// ts.prevPage: "Previous" => "سابق"
+// ts.nextPage: "Next" => "مقبل"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "يستخدم عند تعيين \"تخطيط الاستطلاع\" إلى \"حقل إدخال واحد لكل صفحة\". في هذا التخطيط، يتم تقسيم المصفوفة بحيث يظهر كل حقل إدخال في صفحة منفصلة. استخدم العنصر النائب {rowIndex} لإدراج الترقيم التلقائي و{rowTitle} أو {rowName} للإشارة إلى عنوان الصف أو معرفه، و{row.columnid} لتضمين قيمة عمود مصفوفة معين."
+// qt.slider: "Slider" => "شريط التمرير"
+// pe.isExclusive: "Clear others when selected" => "مسح الآخرين عند تحديده"
+// slider.min: "Min value" => "الحد الأدنى للقيمة"
+// slider.max: "Max value" => "القيمة القصوى"
+// slider.step: "Step value" => "قيمة الخطوة"
+// slider.showLabels: "Show scale labels" => "إظهار تسميات المقياس"
+// slider.tooltipVisibilityPG: "Show tooltips" => "عرض تلميحات الأدوات"
+// slider.allowSwap: "Allow thumb crossing" => "السماح بعبور الإبهام"
+// slider.labelCount: "Number of auto-generated labels" => "عدد التصنيفات التي يتم إنشاؤها تلقائيا"
+// slider.minValueExpression: "Min value expression" => "الحد الأدنى للقيمة"
+// slider.maxValueExpression: "Max value expression" => "تعبير القيمة القصوى"
+// slider.autoGenerate: "Scale labels configuration" => "تكوين تسميات المقياس"
+// tabs.sliderSettings: "Slider Settings" => "إعدادات شريط التمرير"
+// sliderType.single: "Single-Value" => "قيمة واحدة"
+// sliderType.range: "Range" => "نطاق"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا."
+// ed.toolboxSearch: "Search" => "بحث"
+// file.imageHeight: "Image height" => "ارتفاع الصورة"
+// file.imageWidth: "Image width" => "عرض الصورة"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "يحدد ارتفاع عرض الصور التي تم تحميلها في المعاينة والارتفاع الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون ارتفاع العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة."
+// slider.min: "The lowest number that users can select." => "أقل رقم يمكن للمستخدمين تحديده."
+// slider.max: "The highest number that users can select." => "أعلى رقم يمكن للمستخدمين تحديده."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "الفاصل الزمني بين قيم المقياس القابلة للتحديد. على سبيل المثال ، ستسمح الخطوة 5 للمستخدمين بتحديد 0 و 5 و 10 وما إلى ذلك."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "الحد الأدنى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "الحد الأقصى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "يحدد عدد تسميات المقياس المطلوب إنشاؤها. تعني القيمة -1 أن الرقم يتم حسابه تلقائيا بناء على القيمة الدنيا والقيمة القصوى."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "يسمح لك بتحديد تسميات مخصصة بقيم محددة وتعيين النص المقابل لها اختياريا (على سبيل المثال، 0 = \"ضعيف\"، 100 = \"ممتاز\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "يسمح للمستخدمين بتحريك إبهام واحد إلى ما بعد الآخر."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+// slider.sliderType: "Slider type" => "نوع شريط التمرير"
+// slider.minRangeLength: "Min range length" => "الحد الأدنى لطول النطاق"
+// slider.maxRangeLength: "Max range length" => "أقصى طول النطاق"
+// slider.customLabels: "Custom labels" => "تسميات مخصصة"
+// slider.labelFormat: "Label format" => "تنسيق التسمية"
+// slider.tooltipFormat: "Tooltip format" => "تنسيق تلميح الأداة"
+// question.showTitle: "Show the title and description" => "إظهار العنوان والوصف"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "تفاصيل الصف الجديد للتوسيع التلقائي"

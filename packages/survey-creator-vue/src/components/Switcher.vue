@@ -22,7 +22,9 @@
     <div :class="item.getSwitcherIconCss()">
       <div class="svc-switcher__icon-thumb"></div>
     </div>
-    <span v-if="item.hasTitle" class="svc-switcher__title">{{ item.title }}</span>
+    <span v-if="item.hasTitle" class="svc-switcher__title">{{
+      item.title
+    }}</span>
   </button>
 </template>
 <script lang="ts">
@@ -31,6 +33,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
 import type { Switcher } from "survey-creator-core";
 const props = defineProps<{ item: Switcher }>();

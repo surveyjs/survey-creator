@@ -1,18 +1,13 @@
 "use strict";
 
-var webpack = require("webpack");
-var path = require("path");
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
-var packageJson = require("./package.json");
-var fs = require("fs");
-var replace = require("replace-in-file");
-var mergeFiles = require("merge-files");
-var svgStoreUtils = require(path.resolve(
-  __dirname,
-  "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
-));
+const webpack = require("webpack");
+const fs = require("fs");
+const path = require("path");
+const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var DashedNamePlugin = require("../../webpack-dashed-name");
+const mergeFiles = require("merge-files");
+const packageJson = require("./package.json");
 
 const today = new Date();
 const year = today.getFullYear();
@@ -22,15 +17,6 @@ var banner = [
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
-].join("\n");
-
-var dts_banner = [
-  "Type definitions for SurveyJS Creator JavaScript library v" +
-  packageJson.version,
-  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
-  "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator",
-  "",
 ].join("\n");
 
 var buildPlatformJson = {
@@ -53,6 +39,7 @@ var buildPlatformJson = {
     "**/*"
   ],
   main: packageJson.name + ".js",
+  module: "fesm/" + packageJson.name + ".mjs",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git",
@@ -60,116 +47,117 @@ var buildPlatformJson = {
   engines: {
     node: ">=0.10.0",
   },
-  typings: packageJson.name + ".d.ts",
+  typings: "./typings/entries/index.d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
+    "survey-core": packageJson.version
   },
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
-    }
+    },
   },
-  dependencies: {
-    "survey-core": packageJson.version
+  "exports": {
+    ".": {
+      "types": "./typings/entries/index.d.ts",
+      "import": "./fesm/survey-creator-core.mjs",
+      "require": "./survey-creator-core.js"
+    },
+    "./*.css": "./*.css",
+    "./survey-creator-core.i18n": {
+      "import": "./fesm/survey-creator-core.i18n.mjs",
+      "require": "./survey-creator-core.i18n.js"
+    },
+    "./i18n": {
+      "import": "./fesm/i18n/index.mjs",
+      "require": "./i18n/index.js"
+    },
+    "./i18n/*": {
+      "import": "./fesm/i18n/*.mjs",
+      "require": "./i18n/*.js"
+    },
+    "./themes": {
+      "types": "./themes/index.d.ts",
+      "import": "./fesm/themes/index.mjs",
+      "require": "./themes/index.js"
+    },
+    "./themes/index": {
+      "types": "./themes/index.d.ts",
+      "import": "./fesm/themes/index.mjs",
+      "require": "./themes/index.js"
+    },
+    "./themes/*": {
+      "types": "./themes/*.d.ts",
+      "require": "./themes/*.js"
+    },
+    "./presets": {
+      "types": "./presets-typings/typings/entries/index.d.ts",
+      "import": "./fesm/survey-creator-core-presets.mjs",
+      "require": "./survey-creator-core-presets.js"
+    },
+    "./presets/*": {
+      "types": "./presets-typings/typings/*.d.ts",
+      "import": "./fesm/survey-creator-core-presets/*.mjs",
+      "require": "./survey-creator-core-presets/*.js"
+    },
   },
   devDependencies: {},
 };
 
-module.exports = function (options) {
-  var buildPath = __dirname + "/build/";
-  var isProductionBuild = options.buildType === "prod";
-
-  function createSVGBundle() {
-    var options = {
-      fileName: path.resolve(__dirname, "./src/svgbundle.html"),
-      template: path.resolve(__dirname, "./svgbundle.pug"),
-      svgoOptions: {
-        plugins: [{ removeTitle: true }],
-      },
-      prefix: "icon-",
-    };
-
-    svgStoreUtils.filesMap(path.join("./src/images/**/*.svg"), (files) => {
-      const fileContent = svgStoreUtils.createSprite(
-        svgStoreUtils.parseFiles(files, options),
-        options.template
-      );
-
-      fs.writeFileSync(options.fileName, fileContent);
-    });
-  }
-
-  function removeLines(fileName, regex) {
-    replace.sync(
-      {
-        files: fileName,
-        from: regex,
-        to: "",
-      },
-      (error, changes) => {
-        if (error) {
-          return console.error("Error occurred:", error);
-        }
-        console.log("check me :     " + fileName);
-        console.log("Modified files:", changes.join(", "));
-      }
-    );
-  }
-
-  async function createStylesBundleWithFonts() {
+function getPercentageHandler(emitNonSourceFiles, emitStyles, buildPath, isProductionBuild) {
+  function createStylesBundleWithFonts() {
     const getdir = (filename) => {
       return buildPath + filename;
+    };
+
+    if (isProductionBuild) {
+      let outputPath = getdir("survey-creator-core.min.css");
+      let inputPathList = [
+        getdir("fonts.fontless.min.css"),
+        getdir("survey-creator-core.fontless.min.css")
+      ];
+      return mergeFiles(inputPathList, outputPath);
+    } else {
+      let outputPath = getdir("survey-creator-core.css");
+      let inputPathList = [
+        getdir("fonts.fontless.css"),
+        getdir("survey-creator-core.fontless.css")
+      ];
+      return mergeFiles(inputPathList, outputPath);
     }
 
-    let outputPath = getdir("survey-creator-core.css");
-    let inputPathList = [
-      getdir("fonts.fontless.css"),
-      getdir("survey-creator-core.fontless.css")
-    ];
-    // status: true or false
-    let status = await mergeFiles(inputPathList, outputPath);
-    // or
-    mergeFiles(inputPathList, outputPath).then((status) => {
-      // next
-    });
-
-    // min verstion
-    outputPath = getdir("survey-creator-core.min.css");
-    inputPathList = [
-      getdir("fonts.fontless.min.css"),
-      getdir("survey-creator-core.fontless.min.css")
-    ];
-    // status: true or false
-    status = await mergeFiles(inputPathList, outputPath);
-    // or
-    mergeFiles(inputPathList, outputPath).then((status) => {
-      // next
-    });
   }
-
-  //var packageName = chunkName || packageJson.name;
-  var packageName = packageJson.name;
-
-  var percentage_handler = function handler(percentage, msg) {
+  return function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
     } else if (1 == percentage) {
-      if (isProductionBuild) {
+      if (emitNonSourceFiles) {
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
         );
-      }
-
-      if (isProductionBuild) {
         fs.writeFileSync(
           buildPath + "package.json",
           JSON.stringify(buildPlatformJson, null, 2),
           "utf8"
         );
       }
-
-      createStylesBundleWithFonts();
+      if (emitStyles) {
+        return createStylesBundleWithFonts();
+      }
     }
+  };
+}
+
+module.exports = function (options) {
+  const emitDeclarations = !!options.emitDeclarations;
+  const emitNonSourceFiles = !!options.emitNonSourceFiles;
+  const emitStyles = !!options.emitStyles;
+  const buildPath = __dirname + "/build/";
+  const isProductionBuild = options.buildType === "prod";
+
+  const compilerOptions = emitDeclarations ? {} : {
+    declaration: false,
+    declarationDir: null
   };
 
   var config = {
@@ -182,6 +170,8 @@ module.exports = function (options) {
       extensions: [".ts", ".js", ".tsx", ".scss"],
       //plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
       alias: {
+        "iconsV1": path.resolve(__dirname, "./src/icons/iconsV1"),
+        "iconsV2": path.resolve(__dirname, "./src/icons/iconsV2"),
         tslib: path.join(__dirname, "./src/entries/helpers.ts"),
       },
     },
@@ -193,23 +183,21 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-        },
-        {
-          test: /\.css$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: options.buildType !== "prod",
-              },
-            },
-          ],
+          options: {
+            configFile: options.tsConfigFile || "tsconfig.json",
+            compilerOptions
+          }
         },
         {
           test: /\.s(c|a)ss$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: "",
+                emit: emitStyles
+              }
+            },
             {
               loader: "css-loader",
               options: {
@@ -219,6 +207,7 @@ module.exports = function (options) {
             {
               loader: "sass-loader",
               options: {
+                api: "modern",
                 sourceMap: options.buildType !== "prod",
               },
             },
@@ -230,63 +219,51 @@ module.exports = function (options) {
         },
         {
           test: /\.svg$/,
-          oneOf: [
-            {
-              exclude: path.resolve(__dirname, "./src/images/simulator/"),
-              use: "svg-inline-loader"
-            },
-            {
-              include: path.resolve(__dirname, "./src/images/simulator/"),
-              use: "url-loader"
-            },
-          ]
+          loader: "svg-inline-loader",
         },
+        {
+          test: /\.(png|jpg)$/,
+          type: "asset/inline" // https://webpack.js.org/guides/asset-modules/
+        }
       ],
     },
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreatorCore",
+      library: {
+        root: options.libraryName || "SurveyCreatorCore",
+        amd: "[dashedname]",
+        commonjs: "[dashedname]",
+      },
       libraryTarget: "umd",
-      globalObject: 'this',
-      umdNamedDefine: true,
+      globalObject: "this",
+      umdNamedDefine: true
     },
     externals: {
-      knockout: {
-        root: "ko",
-        commonjs2: "knockout",
-        commonjs: "knockout",
-        amd: "knockout",
-      },
       "survey-core": {
         root: "Survey",
         commonjs2: "survey-core",
         commonjs: "survey-core",
         amd: "survey-core",
-      },
+      }
     },
     plugins: [
-      new webpack.ProgressPlugin(percentage_handler),
-      new DtsGeneratorPlugin({
-        webpack: webpack,
-        filePath: "build/survey-creator-core.d.ts",
-        moduleName: "survey-creator-core"
-      }),
+      new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, emitStyles, buildPath, isProductionBuild)),
+      new DashedNamePlugin(),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
       }),
-      new FixStyleOnlyEntriesPlugin(),
+      new RemoveEmptyScriptsPlugin(),
       new MiniCssExtractPlugin({
         filename: isProductionBuild ? "[name].fontless.min.css" : "[name].fontless.css",
       }),
-      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
+      new webpack.WatchIgnorePlugin({ paths: [/svgbundle\.html/] }),
       new webpack.BannerPlugin({
         banner: banner,
       }),
     ],
   };
-
   if (isProductionBuild) {
     config.plugins.push = config.plugins.concat([]);
   } else {

@@ -4,6 +4,7 @@ import { PropertyJSONGenerator } from "../../property-grid";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType } from "./logic-types";
+import { PropertyGridEditorCollection } from "../../property-grid/index";
 
 export class LogicActionModelBase {
   public isTrigger: boolean;
@@ -11,7 +12,7 @@ export class LogicActionModelBase {
 
   static createActionModel(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType, selectorElementsHash): LogicActionModelBase {
     if (!!logicType && logicType.hasSelectorChoices) {
-      if(logicType.name.indexOf("_setValue") > -1)
+      if (logicType.name.indexOf("_setValue") > -1)
         return new LogicActionSetValueModel(panel, logicAction, logicType, selectorElementsHash);
       return new LogicActionModel(panel, logicAction, logicType, selectorElementsHash);
     } else {
@@ -92,13 +93,13 @@ export class LogicActionSetValueModel extends LogicActionModel {
   }
   public afterUpdateInitialLogicAction(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
-    if(!!selectedElement) {
+    if (!!selectedElement) {
       (<any>selectedElement).setValueExpression = this.panel.getQuestionByName("setValueExpression").value;
     }
   }
   private setValueExpressionValue(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
-    if(!!selectedElement) {
+    if (!!selectedElement) {
       this.getValueIfQuestion().value = (<any>selectedElement).setValueExpression;
     }
   }
@@ -124,14 +125,20 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     const tempPanel = Serializer.createClass("panel");
     const propGenerator = new PropertyJSONGenerator(obj, options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
-    const newQuestion = tempPanel.getQuestionByName(name);
+    let newQuestion = tempPanel.getQuestionByName(name);
     if (!!newQuestion) {
-      let index = triggerEditorPanel.elements.indexOf(oldQuestion);
-      triggerEditorPanel.addElement(newQuestion, index);
-      oldQuestion.delete();
-    }
-    if (newQuestion.name === "setValue") {
-      this.updateSetValueQuestion(newQuestion);
+      if (!Helpers.isTwoValueEquals(newQuestion.toJSON(), oldQuestion.toJSON())) {
+        let index = triggerEditorPanel.elements.indexOf(oldQuestion);
+        triggerEditorPanel.blockAnimations();
+        triggerEditorPanel.addElement(newQuestion, index);
+        oldQuestion.delete();
+        triggerEditorPanel.releaseAnimations();
+      } else {
+        newQuestion = oldQuestion;
+      }
+      if (newQuestion.name === "setValue") {
+        this.updateSetValueQuestion(newQuestion);
+      }
     }
     this.updateVisibilityPanel(triggerEditorPanel);
     tempPanel.dispose();
@@ -179,6 +186,21 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
       panel.visible = false;
     }
   }
+  public onPanelQuestionValueChanged(panel: PanelModel, qName: string): void {
+    if (this.panelObj) {
+      const prop = Serializer.findProperty(this.panelObj.getType(), qName);
+      const depProps = prop?.getDependedProperties();
+      if (Array.isArray(depProps) && depProps.length > 0) {
+        depProps.forEach(dp => {
+          const dQ = panel.getQuestionByName(dp);
+          const dProp = Serializer.findProperty(this.panelObj.getType(), dp);
+          if (!!dQ && !!dProp) {
+            PropertyGridEditorCollection.onMasterValueChanged(this.panelObj, dProp, dQ);
+          }
+        });
+      }
+    }
+  }
   private updatePanelQuestionsValue(panel: PanelModel) {
     panel.onSurveyLoad();
     panel.questions.forEach(q => {
@@ -203,20 +225,24 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     if (!createNewAction) {
       const el = this.initialLogicAction.element;
       const srcJson = this.panelObj.toJSON();
+      const destJson = el.toJSON();
       const srcKeys = Object.keys(srcJson);
-      const destKeys = Object.keys(el.toJSON());
+      const destKeys = Object.keys(destJson);
       const propsToDelete = [];
-      for(let i = 0; i < destKeys.length; i ++) {
-        const key = destKeys[i];
-        if(srcKeys.indexOf(key) < 0) {
+      const propsToSet = [];
+      destKeys.forEach(key => {
+        if (srcKeys.indexOf(key) < 0) {
           propsToDelete.push(key);
         }
-      }
-      el.fromJSON(srcJson);
+      });
+      srcKeys.forEach(key => {
+        if (!Helpers.isTwoValueEquals(srcJson[key], destJson[key])) {
+          propsToSet.push(key);
+        }
+      });
+      propsToDelete.forEach(prop => el.resetPropertyValue(prop));
+      propsToSet.forEach(prop => el[prop] = srcJson[prop]);
       this.currentLogicAction = this.initialLogicAction;
-      for(let i = 0; i < propsToDelete.length; i ++) {
-        el[propsToDelete[i]] = undefined;
-      }
       return false;
     }
     this.currentLogicAction = new SurveyLogicAction(this.logicType, this.panelObj, survey);

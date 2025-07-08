@@ -4,7 +4,6 @@
     "module": "es2015",
     "sourceMap": true,
     "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
@@ -16,8 +15,16 @@
       ],
       "survey-creator-core": [
         "./node_modules/survey-creator-core"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
       ]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "build/typings/"
   },
   "exclude": [
     "node_modules",
@@ -31,6 +38,6 @@
     "**/*.test.ts"
   ],
   "include": [
-    "src/**/*.ts"
-  ]
+    "./src/entries/index.ts",
+  ],
 }

@@ -5,18 +5,19 @@ import {
   PopupModel,
   IAction,
   QuestionMatrixDynamicModel,
-  _setIsTouch
+  _setIsTouch,
+  QuestionTextModel
 } from "survey-core";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 export { PropertyGridEditorMatrix } from "../../src/property-grid/matrices";
 import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 import { settings } from "../../src/creator-settings";
-
-surveySettings.supportCreatorV2 = true;
+import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 
 test("Generate and update title correctly", () => {
   const creator = new CreatorTester();
+  creator.showOneCategoryInPropertyGrid = false;
   creator.JSON = {
     elements: [
       {
@@ -43,8 +44,30 @@ test("Generate and update title correctly", () => {
   propertyGrid.survey.getQuestionByName("name").value = "Q2";
   expect(model.objectSelectionAction.title).toEqual("Question:Q2");
 });
+test("showOneCategoryInPropertyGrid: Generate and update title correctly", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  const propertyGrid = creator["designerPropertyGrid"];
+  const model = new PropertyGridViewModel(propertyGrid, creator);
+  expect(model.objectSelectionAction.tooltip).toEqual("Survey");
+  propertyGrid.obj = creator.survey.getQuestionByName("question1");
+  expect(model.objectSelectionAction.tooltip).toEqual("question1");
+  propertyGrid.survey.getQuestionByName("name").value = "Q1";
+  expect(model.objectSelectionAction.tooltip).toEqual("Q1");
+  propertyGrid.options.getObjectDisplayName = (
+    obj: Base,
+    area: string,
+    reason: string,
+    displayName: string
+  ) => {
+    return "Question:" + obj["name"];
+  };
+  propertyGrid.survey.getQuestionByName("name").value = "Q2";
+  expect(model.objectSelectionAction.tooltip).toEqual("Question:Q2");
+});
 test("Prev/next correctly, including columns via actions", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = {
     elements: [
       { type: "matrixdynamic", name: "q1", columns: [{ name: "col1" }] }
@@ -163,4 +186,33 @@ test("Check object selector popup's display mode", () => {
   model = new PropertyGridViewModel(propertyGrid, creator);
   expect(model.objectSelectionAction.popupModel.displayMode).toEqual("overlay");
   _setIsTouch(false);
+});
+test("Create the property grid survey on request", () => {
+  const creator = new CreatorTester();
+  const propertyGrid = creator["designerPropertyGrid"];
+  const model = new PropertyGridViewModel(propertyGrid, creator);
+  expect(model.getPropertyValue("survey")).toBeFalsy();
+  expect(model.survey).toBeTruthy();
+});
+
+test("Object selector's title should be leaved unchanged when changing question's name - Bug#6699", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("question1");
+  creator.showOneCategoryInPropertyGrid = true;
+  const propertyGridViewModel = (creator.getPlugin("designer") as TabDesignerPlugin).propertyGridViewModel;
+  const selectorBarItem = propertyGridViewModel.objectSelectionAction;
+  creator.selectElement(question);
+  expect(selectorBarItem.title).toBe("General");
+  expect(selectorBarItem.tooltip).toBe("question1");
+  question.name = "question2";
+  expect(selectorBarItem.title).toBe("General");
+  expect(selectorBarItem.tooltip).toBe("question2");
 });

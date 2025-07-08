@@ -8,12 +8,10 @@ import { QuestionDesignerComponent } from "../question.component";
   templateUrl: "../question.component.html",
   styles: [":host { display: none; }"]
 })
-export class QuestionImageDesignerComponent extends QuestionDesignerComponent implements AfterViewInit {
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
-
+export class QuestionImageDesignerComponent extends QuestionDesignerComponent {
   protected override createModel(): void {
     if (this.componentData) {
-      this.adorner = new QuestionImageAdornerViewModel(this.creator, this.model, <any>null, this.viewContainerRef?.element.nativeElement.nextSibling);
+      this.adorner = new QuestionImageAdornerViewModel(this.creator, this.model, <any>null);
     }
   }
   public override adornerComponent = "svc-image-question-adorner";
@@ -25,9 +23,6 @@ export class QuestionImageDesignerComponent extends QuestionDesignerComponent im
   }
   public override get showPlaceholderComponent(): boolean {
     return !!this.placeholderComponentData;
-  }
-  ngAfterViewInit(): void {
-    (<QuestionImageAdornerViewModel>this.adorner).questionRoot = this.container.nativeElement;
   }
 }
 

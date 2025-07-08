@@ -1,11 +1,12 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText, resetHoverToCreator } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText, resetHoverToCreator, getBarItemByTitle } from "../../helper";
 
 const title = "Test tab Screenshot";
 
 fixture`${title}`.page`${url}`;
 
 const json1 = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -63,7 +64,7 @@ test("mobile iphone", async (t) => {
     await t
       .click(getTabbedMenuItemByText(creatorTabPreviewName))
       .click(Selector("#deviceSelector button"))
-      .click(Selector(".sv-list__item").withText("iPhone SE"));
+      .click(getListItemByText("iPhone SE"));
 
     await takeElementScreenshot("test-tab-iphone.png", Selector(".svd-simulator-wrapper"), t, comparer);
     await takeElementScreenshot("test-tab-iphone-whole-tab.png", Selector(".svc-plugin-tab__content"), t, comparer);
@@ -73,6 +74,7 @@ test("mobile iphone", async (t) => {
 fixture`${title}`.page`${urlPreviewThemeSwitcher}`;
 
 const json2 = {
+  showQuestionNumbers: "on",
   "pages": [
     {
       "name": "page1",
@@ -167,6 +169,7 @@ test("Hidden Question Issue: #3298", async (t) => {
     await explicitErrorHandler();
     await setJSON(
       {
+        showQuestionNumbers: "on",
         "logoPosition": "right",
         "pages": [
           {
@@ -209,7 +212,8 @@ test("Hidden Question Issue: #3298", async (t) => {
 });
 
 const json3 = {
-  focusFirstQuestionAutomatic: true,
+  autoFocusFirstQuestion: true,
+  showQuestionNumbers: "on",
   "width": "755px",
   "widthMode": "static",
   "pages": [
@@ -243,13 +247,15 @@ test("Check survey timer", async (t) => {
 
     await t.resizeWindow(1920, 1080);
     const json = {
-      "focusFirstQuestionAutomatic": true,
+      showQuestionNumbers: "on",
+      headerView: "basic",
+      "autoFocusFirstQuestion": true,
       "title": "American History",
       "showTimerPanel": "bottom",
       "showTimerPanelMode": "survey",
       "maxTimeToFinish": 60,
       "widthMode": "static",
-      "firstPageIsStarted": true,
+      "firstPageIsStartPage": true,
       "pages": [
         {
           "elements": [
@@ -314,9 +320,9 @@ test("Check survey timer", async (t) => {
     await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });
-test("empty survey", async (t) => {
+test("empty survey preview", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const simulator = Selector(".svd-simulator-content");
+    const simulator = Selector(".svc-test-tab__content");
     await t.resizeWindow(800, 600);
 
     await setJSON({});
@@ -328,8 +334,9 @@ test("empty survey", async (t) => {
 test("dropdown popup in simulator", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const simulator = Selector(".svd-simulator-content");
-    await t.resizeWindow(1800, 600);
+    await t.resizeWindow(1200, 1000);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -357,10 +364,9 @@ test("dropdown popup in simulator", async (t) => {
     });
 
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
-    await t.click(Selector('[title="Select device type"]'));
-    await t.click(Selector("span").withText("iPhone SE"));
+    await t.resizeWindow(800, 800);
     await t.click(Selector('[data-name="nps-score"]'));
-    await t.click(Selector("li.sv-list__item.sd-list__item span").withText("2"));
+    await t.click(Selector("li.sd-list__item span").withText("2"));
     await t.click(Selector('[data-name="nps-score"]'));
     await takeElementScreenshot("test-tab-opened-dropdown.png", simulator, t, comparer);
   });
@@ -368,12 +374,10 @@ test("dropdown popup in simulator", async (t) => {
 
 test("dropdown popup in simulator - mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await ClientFunction(() => {
-      window["Survey"]._setIsTouch(true);
-    })();
     const simulator = Selector(".svd-simulator-content");
-    await t.resizeWindow(400, 600);
+    await t.resizeWindow(1200, 1000);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -399,7 +403,10 @@ test("dropdown popup in simulator - mobile", async (t) => {
         }
       ]
     });
-    await t.click(Selector('[title="Preview"]'));
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await t.click(Selector('[title="Select device type"]'));
+    await t.click(Selector("span").withText("iPhone SE"));
+    await t.click(getBarItemByTitle("Switch to portrait orientation"));
     await t.click(Selector('[data-name="nps-score"]'));
     await takeElementScreenshot("test-tab-opened-dropdown-mobile.png", simulator, t, comparer);
   });
@@ -409,6 +416,7 @@ test("background image in preview", async (t) => {
     const previewTab = Selector(".svc-creator-tab").filterVisible();
     await t.resizeWindow(1024, 768);
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -436,5 +444,83 @@ test("background image in preview", async (t) => {
     await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
     await t.click(Selector('input[title="Complete"]'));
     await takeElementScreenshot("test-tab-background-image.png", previewTab, t, comparer);
+  });
+});
+
+test("Page selector with invisible page", async t => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1024, 768);
+    await setJSON({
+      showQuestionNumbers: "on",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1",
+              "title": "Show Page"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "question2"
+            }
+          ],
+          "visibleIf": "{question1} = true"
+        },
+        {
+          "name": "page3",
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "question3",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            }
+          ]
+        }
+      ]
+    });
+    const pageSelectorButton = Selector(".svc-page-selector");
+    await t
+      .click(getTabbedMenuItemByText(creatorTabPreviewName))
+      .click(pageSelectorButton);
+    await takeElementScreenshot("test-tab-page-selector-witn-invisible-page.png", ".svc-page-selector .sv-popup__container", t, comparer);
+  });
+});
+
+test("Tagbox has wrong style on preview tab", async t => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1024, 768);
+    await setJSON({
+      showQuestionNumbers: "on",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "tagbox",
+              "name": "question1",
+              "defaultValue": ["Item 2", "Item 3"],
+              "choices": ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+            }
+          ]
+        }
+      ]
+    });
+
+    const questionTagbox = Selector(".sd-input.sd-tagbox");
+    await t
+      .click(getTabbedMenuItemByText(creatorTabPreviewName))
+      .click(questionTagbox);
+    await takeElementScreenshot("test-tab-tagbox-style.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });

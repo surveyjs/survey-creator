@@ -46,9 +46,9 @@ export class UndoRedoManager {
     return !!prop && prop.isSerializable;
   }
   public tryMergeTransaction(sender: Base, propertyName: string, newValue: any): boolean {
-    if(propertyName === "name") return false; //TODO check on
+    if (propertyName === "name") return false; //TODO check on
     const lastTransaction = this._getCurrentTransaction();
-    if(!lastTransaction || lastTransaction.actions.length == 0) return false;
+    if (!lastTransaction || lastTransaction.actions.length == 0) return false;
     const lastAction = lastTransaction.actions[lastTransaction.actions.length - 1];
     return lastAction.tryMerge(sender, propertyName, newValue);
   }
@@ -71,7 +71,7 @@ export class UndoRedoManager {
     if (transaction.isEmpty()) return;
 
     this._cutOffTail();
-    if(this._transactions[this._currentTransactionIndex] !== transaction) {
+    if (this._transactions[this._currentTransactionIndex] !== transaction) {
       this._transactions.push(transaction);
       this._currentTransactionIndex++;
     }
@@ -97,13 +97,13 @@ export class UndoRedoManager {
   canUndoRedoCallback() { }
   private transactionCounter = 0;
   startTransaction(name: string) {
-    if(this.isIgnoring) return;
+    if (this.isIgnoring) return;
     this.transactionCounter++;
     if (this._preparingTransaction) return;
     this._preparingTransaction = new Transaction(name);
   }
   stopTransaction() {
-    if(this.isIgnoring) return;
+    if (this.isIgnoring) return;
     if (this.transactionCounter > 0) {
       this.transactionCounter--;
     }
@@ -115,7 +115,7 @@ export class UndoRedoManager {
     this._preparingTransaction = null;
   }
   setUndoCallbackForTransaction(callback: () => void) {
-    if(!this._preparingTransaction) return;
+    if (!this._preparingTransaction) return;
     this._preparingTransaction.undoCallback = callback;
   }
   public get isProcessingUndoRedo(): boolean {
@@ -228,18 +228,18 @@ export class UndoRedoAction implements IUndoRedoAction {
     return {
       object: this._sender,
       propertyName: this._propertyName,
-      oldValue: isUndo? this._newValue : this._oldValue,
-      newValue: isUndo? this._oldValue : this._newValue
+      oldValue: isUndo ? this._newValue : this._oldValue,
+      newValue: isUndo ? this._oldValue : this._newValue
     };
   }
   getDeletedElement(isUndo: boolean): any { return undefined; }
   getInsertedElement(isUndo: boolean): any { return undefined; }
   getIndex(): number { return -1; }
   tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
-    if(sender !== this._sender || propertyName !== this._propertyName || newValue == this._oldValue) return false;
+    if (sender !== this._sender || propertyName !== this._propertyName || newValue == this._oldValue) return false;
     const prop = Serializer.getOriginalProperty(sender, propertyName);
-    if(!prop || (prop.type !== "string" && prop.type !== "text")) return false;
-    if(new Date().getTime() - this.tickCount > UndoRedoAction.maximumMergeTime) return false;
+    if (!prop || (prop.type !== "string" && prop.type !== "text")) return false;
+    if (new Date().getTime() - this.tickCount > UndoRedoAction.maximumMergeTime) return false;
     this._newValue = newValue;
     return true;
   }
@@ -266,7 +266,7 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   }
   rollback(): void {
     this._sender = this.getSenderElement();
-    if(!this._sender) return;
+    if (!this._sender) return;
     const array = this._sender[this._propertyName];
     const index = this._index;
     const deleteCount = this._itemsToAdd.length;
@@ -291,25 +291,28 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   getIndex(): number { return this._index; }
   private getMovedElement(items1: any[], items2: any[], isUndo: boolean) : any {
     const items = isUndo ? items2 : items1;
-    if(Array.isArray(items) && items.length === 1) return items[0];
+    if (Array.isArray(items) && items.length === 1) return items[0];
     return undefined;
   }
   tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
     return false;
   }
   private getSenderElement(): Base {
-    if(!this._sender.isDisposed || !this.survey) return this._sender;
+    if (!this._sender.isDisposed || !this.survey) return this._sender;
     const name = this._sender["name"];
-    if(this._sender["isPage"] === true) return this.survey.getPageByName(name);
-    if(this._sender["isPanel"] === true) return this.survey.getPanelByName(name);
-    if(this._sender["isQuestion"] === true) return this.survey.getQuestionByName(name);
+    if (this._sender["isPage"] === true) {
+      if (this.survey.pages.length === 0) return this.survey.addNewPage();
+      return this.survey.getPageByName(name);
+    }
+    if (this._sender["isPanel"] === true) return this.survey.getPanelByName(name);
+    if (this._sender["isQuestion"] === true) return this.survey.getQuestionByName(name);
     return this._sender;
   }
   private getItemsToAdd(): Array<any> {
     const res = [];
-    for(let i = 0; i < this._deletedItems.length; i ++) {
+    for (let i = 0; i < this._deletedItems.length; i ++) {
       let obj = this._deletedItems[i];
-      if(obj.isDisposed && obj.getType) {
+      if (obj.isDisposed && obj.getType) {
         const json = obj.toJSON();
         obj = Serializer.createClass(obj.getType());
         obj.fromJSON(json);

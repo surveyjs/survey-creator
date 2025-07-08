@@ -17,13 +17,14 @@ description: SurveyJS Form Builder for React is an open-source client-side compo
 
 If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
 
-- <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">SurveyJS + React Quickstart Template</a>
 - <a href="https://github.com/surveyjs/surveyjs-nextjs" target="_blank">SurveyJS + Next.js Quickstart Template</a>
 - <a href="https://github.com/surveyjs/surveyjs-remix" target="_blank">SurveyJS + Remix Quickstart Template</a>
 
 > In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for React.
 
-## Install the `survey-creator-react` npm Package
+<div id="install-the-survey-creator-react-npm-package"></div>
+
+## Install the React Form Builder npm Package
 
 Survey Creator for React consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) (rendering code). Run the following command to install `survey-creator-react`. The `survey-creator-core` package will be installed automatically as a dependency.
 
@@ -33,39 +34,57 @@ npm install survey-creator-react --save
 
 ## Configure Styles
 
-Import Survey Creator and SurveyJS Form Library style sheets as shown below:
+Create a React component that will render Survey Creator and import Survey Creator and SurveyJS Form Library style sheets as shown below:
 
 ```js
-import "survey-core/defaultV2.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+// components/SurveyCreator.tsx
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 ```
+
+Survey Creator allows users to customize its interface at runtime using UI themes. Four themes are available out-of-the-box: Light, Dark, Contrast, and Survey Creator 2020. The configuration above applies the Light theme. If you want to apply a different predefined theme or create a custom theme, refer to the following help topic for detailed instructions:
+
+[Themes & Styles](https://surveyjs.io/survey-creator/documentation/survey-creator-interface-themes (linkStyle))
 
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions) in a configuration object. In this tutorial, the object enables the following properties:
 
-- [`showLogicTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showLogicTab)        
-Displays the Logic tab in the tab panel.
-
-- [`isAutoSave`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#isAutoSave)        
+- [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled)        
 Automatically saves the survey JSON schema on every change.
 
+- [`collapseOnDrag`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapseOnDrag)        
+Collapses pages on the design surface when users start dragging a survey element.
+
 ```js
-const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+// components/SurveyCreator.tsx
+import { ICreatorOptions } from "survey-creator-core";
+
+const defaultCreatorOptions: ICreatorOptions = {
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 ```
 
 Pass the configuration object to the `SurveyCreator` constructor as shown in the code below to instantiate Survey Creator. Assign the produced instance to a constant that will be used later to render the component:
 
 ```js
+// components/SurveyCreator.tsx
+// ...
+import { useState } from "react";
 import { SurveyCreator } from "survey-creator-react";
 
-// ...
+const defaultCreatorOptions: ICreatorOptions = { /* ... */ }
 
-export function SurveyCreatorWidget() {
-  const creator = new SurveyCreator(creatorOptions);
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
+  let [creator, setCreator] = useState<SurveyCreator>();
+
+  if (!creator) {
+    creator = new SurveyCreator(props.options || defaultCreatorOptions);
+    setCreator(creator);
+  }
+
+  return "...";
 }
 ```
 
@@ -73,44 +92,76 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
+// components/SurveyCreator.tsx
+import { useState } from "react";
+import { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
-const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+const defaultCreatorOptions: ICreatorOptions = {
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
-export function SurveyCreatorWidget() {
-  const creator = new SurveyCreator(creatorOptions);
-  return (
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
+  let [creator, setCreator] = useState<SurveyCreator>();
 
-  )
+  if (!creator) {
+    creator = new SurveyCreator(props.options || defaultCreatorOptions);
+    setCreator(creator);
+  }
+
+  return "...";
 }
 ```
+
 </details>
 
 ## Render Survey Creator
 
 To render Survey Creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute, as shown below.
 
-> If you are using [Next.js](https://nextjs.org) or another framework that [has adopted React Server Components](https://react.dev/learn/start-a-new-react-project#bleeding-edge-react-frameworks), you need to explicitly mark the React component that renders a SurveyJS component as client code using the ['use client'](https://react.dev/reference/react/use-client) directive.
+SurveyJS components do not support server-side rendering (SSR). If you are using [Next.js](https://nextjs.org) or another framework that has adopted React Server Components, you need to explicitly mark the React component that renders a SurveyJS component as client code using the ['use client'](https://react.dev/reference/react/use-client) directive.
 
 ```js
-// Uncomment the following line if you are using Next.js:
-// 'use client'
-
-import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-
+// components/SurveyCreator.tsx
+'use client'
 // ...
+import { SurveyCreatorComponent } from "survey-creator-react";
+
+const defaultCreatorOptions: ICreatorOptions = { /* ... */ }
 
 export function SurveyCreatorWidget() {
-  const creator = new SurveyCreator(creatorOptions);
+  let [creator, setCreator] = useState<SurveyCreator>();
+
+  if (!creator) {
+    creator = new SurveyCreator(props.options || defaultCreatorOptions);
+    setCreator(creator);
+  }
 
   return (
-    <SurveyCreatorComponent creator={creator} />
-  )
+    <div style={{ height: "100vh", width: "100%" }}>
+      <SurveyCreatorComponent creator={creator} />
+    </div>
+  );
+}
+```
+
+The lack of SSR support may cause hydration errors if a SurveyJS component is pre-rendered on the server. To ensure against those errors, use dynamic imports with `ssr: false` for React components that render SurveyJS components. The following code shows how to do this in Next.js:
+
+```js
+// creator/page.tsx
+import dynamic from 'next/dynamic';
+
+const SurveyCreatorComponent = dynamic(() => import("@/components/SurveyCreator"), {
+  ssr: false
+});
+
+export default function SurveyCreator() {
+  return (
+    <SurveyCreatorComponent />
+  );
 }
 ```
 
@@ -118,30 +169,69 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
-// Uncomment the following line if you are using Next.js:
-// 'use client'
+// components/SurveyCreator.tsx
+'use client'
 
-import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import { useState } from "react";
+import { ICreatorOptions } from "survey-creator-core";
+import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
-const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+const defaultCreatorOptions: ICreatorOptions = {
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
-export function SurveyCreatorWidget() {
-  const creator = new SurveyCreator(creatorOptions);
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
+  let [creator, setCreator] = useState<SurveyCreator>();
+
+  if (!creator) {
+    creator = new SurveyCreator(props.options || defaultCreatorOptions);
+    setCreator(creator);
+  }
+
   return (
-    <SurveyCreatorComponent creator={creator} />
-  )
+    <div style={{ height: "100vh", width: "100%" }}>
+      <SurveyCreatorComponent creator={creator} />
+    </div>
+  );
+}
+```
+
+```js
+// creator/page.tsx
+import dynamic from 'next/dynamic';
+
+const SurveyCreatorComponent = dynamic(() => import("@/components/SurveyCreator"), {
+  ssr: false
+});
+
+export default function SurveyCreator() {
+  return (
+    <SurveyCreatorComponent />
+  );
 }
 ```
 </details>
 
+## Activate a SurveyJS License
+
+Survey Creator is not available for free commercial use. To integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing) for the software developer(s) who will be working with the Survey Creator APIs and implementing the integration. If you use Survey Creator without a license, an alert banner will appear at the bottom of the interface:
+
+<img src="./images/alert-banner.png" alt="Survey Creator: Alert banner" width="1544" height="824">
+
+After purchasing a license, follow the steps below to activate it and remove the alert banner:
+
+1. [Log in](https://surveyjs.io/login) to the SurveyJS website using your email address and password. If you've forgotten your password, [request a reset](https://surveyjs.io/reset-password) and check your inbox for the reset link.
+2. Open the following page: [How to Remove the Alert Banner](https://surveyjs.io/remove-alert-banner). You can also access it by clicking **Set up your license key** in the alert banner itself.
+3. Follow the instructions on that page.
+
+Once you've completed the setup correctly, the alert banner will no longer appear.
+
 ## Save and Load Survey Model Schemas
 
-Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
+Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the [`saveSurveyFunc`](/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function. It accepts two arguments:
 
 - `saveNo`      
 An incremental number of the current change. Since web services are asynchronous, you cannot guarantee that the service receives the changes in the same order as the client sends them. For example, change #11 may arrive to the server faster than change #10. In your web service code, update the storage only if you receive changes with a higher `saveNo`.
@@ -149,13 +239,15 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 
 ```js
-export function SurveyCreatorWidget() {
+// components/SurveyCreator.tsx
+// ...
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
   // ...
-  creator.saveSurveyFunc = (saveNo, callback) => { 
+  creator.saveSurveyFunc = (saveNo: number, callback: (num: number, status: boolean) => void) => {
     // If you use localStorage:
     window.localStorage.setItem("survey-json", creator.text);
     callback(saveNo, true);
@@ -172,7 +264,7 @@ export function SurveyCreatorWidget() {
 }
 
 // If you use a web service:
-function saveSurveyJson(url, json, saveNo, callback) {
+function saveSurveyJson (url: string, json: object, saveNo: number, callback: (num: number, status: boolean) => void) {
   fetch(url, {
     method: 'POST',
     headers: {
@@ -193,6 +285,8 @@ function saveSurveyJson(url, json, saveNo, callback) {
 }
 ```
 
+[View Demo](/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
+
 If you are running a NodeJS server, you can check a survey JSON schema before saving it. On the server, create a `SurveyModel` and call its [`toJSON()`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#toJSON) method. This method deletes unknown properties and incorrect property values from the survey JSON schema:
 
 ```js
@@ -207,10 +301,11 @@ const correctSurveyJson = survey.toJSON();
 // ...
 ```
 
-To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from component props or the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 
 ```js
+// components/SurveyCreator.tsx
 // ...
 const defaultJson = {
   pages: [{
@@ -227,9 +322,9 @@ const defaultJson = {
   }]
 };
 
-export function SurveyCreatorWidget() {
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
   // ...
-  creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
+  creator.text = JSON.stringify(props.json) || window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
   // ...
 }
 ```
@@ -238,16 +333,17 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
-// Uncomment the following line if you are using Next.js:
-// 'use client'
+// components/SurveyCreator.tsx
+'use client'
 
+import { useState } from "react";
+import { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
-const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+const defaultCreatorOptions: ICreatorOptions = {
+  autoSaveEnabled: true
 };
 
 const defaultJson = {
@@ -265,10 +361,15 @@ const defaultJson = {
   }]
 };
 
-export function SurveyCreatorWidget() {
-  const creator = new SurveyCreator(creatorOptions);
-  creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
-  creator.saveSurveyFunc = (saveNo, callback) => { 
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
+  let [creator, setCreator] = useState<SurveyCreator>();
+
+  if (!creator) {
+    creator = new SurveyCreator(props.options || defaultCreatorOptions);
+    setCreator(creator);
+  }
+
+  creator.saveSurveyFunc = (saveNo: number, callback: (num: number, status: boolean) => void) => {
     window.localStorage.setItem("survey-json", creator.text);
     callback(saveNo, true);
     // saveSurveyJson(
@@ -278,12 +379,17 @@ export function SurveyCreatorWidget() {
     //     callback
     // );
   };
+
+  creator.text = JSON.stringify(props.json) || window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
+
   return (
-    <SurveyCreatorComponent creator={creator} />
-  )
+    <div style={{ height: "100vh", width: "100%" }}>
+      <SurveyCreatorComponent creator={creator} />
+    </div>
+  );
 }
 
-// function saveSurveyJson(url, json, saveNo, callback) {
+// function saveSurveyJson (url: string, json: object, saveNo: number, callback: (num: number, status: boolean) => void) {
 //   fetch(url, {
 //     method: 'POST',
 //     headers: {
@@ -303,6 +409,22 @@ export function SurveyCreatorWidget() {
 //   });
 // }
 ```
+
+```js
+// creator/page.tsx
+import dynamic from 'next/dynamic';
+
+const SurveyCreatorComponent = dynamic(() => import("@/components/SurveyCreator"), {
+  ssr: false
+});
+
+export default function SurveyCreator() {
+  return (
+    <SurveyCreatorComponent />
+  );
+}
+```
+
 </details>
 
 ## Manage Image Uploads
@@ -312,11 +434,15 @@ When survey authors design a form or questionnaire, they can add images to use a
 To implement image upload, handle the [`onUploadFile`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onUploadFile) event. Its `options.files` parameter stores the images you should send to your server. Once the server responds with an image link, call the `options.callback(status, imageLink)` method. Pass `"success"` as the `status` parameter and a link to the uploaded image as the `imageLink` parameter.
 
 ```js
-export function SurveyCreatorWidget() {
+// components/SurveyCreator.tsx
+// ...
+import { SurveyCreatorModel, UploadFileEvent } from "survey-creator-core";
+
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
   // ...
-  creator.onUploadFile.add((_, options) => {
+  creator.onUploadFile.add((_: SurveyCreatorModel, options: UploadFileEvent) => {
     const formData = new FormData();
-    options.files.forEach(file => {
+    options.files.forEach((file: File) => {
       formData.append(file.name, file);
     });
     fetch("https://example.com/uploadFiles", {
@@ -338,22 +464,30 @@ export function SurveyCreatorWidget() {
 }
 ```
 
-To view the application, run `npm run start` in a command line and open [http://localhost:3000/](http://localhost:3000/) in your browser.
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/reactjs (linkStyle))
+
+To view the application, run `npm run dev` in a command line and open [http://localhost:3000/](http://localhost:3000/) in your browser.
 
 <details>
   <summary>View Full Code</summary>
 
 ```js
-// Uncomment the following line if you are using Next.js:
-// 'use client'
+// components/SurveyCreator.tsx
+// ...
+'use client'
 
+import { useState } from "react";
+import {
+  ICreatorOptions,
+  // SurveyCreatorModel,
+  // UploadFileEvent
+} from "survey-creator-core";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
-const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+const defaultCreatorOptions: ICreatorOptions = {
+  autoSaveEnabled: true
 };
 
 const defaultJson = {
@@ -371,10 +505,15 @@ const defaultJson = {
   }]
 };
 
-export function SurveyCreatorWidget() {
-  const creator = new SurveyCreator(creatorOptions);
-  creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
-  creator.saveSurveyFunc = (saveNo, callback) => { 
+export default function SurveyCreatorWidget(props: { json?: Object, options?: ICreatorOptions }) {
+  let [creator, setCreator] = useState<SurveyCreator>();
+
+  if (!creator) {
+    creator = new SurveyCreator(props.options || defaultCreatorOptions);
+    setCreator(creator);
+  }
+
+  creator.saveSurveyFunc = (saveNo: number, callback: (num: number, status: boolean) => void) => {
     window.localStorage.setItem("survey-json", creator.text);
     callback(saveNo, true);
     // saveSurveyJson(
@@ -384,9 +523,10 @@ export function SurveyCreatorWidget() {
     //     callback
     // );
   };
-  // creator.onUploadFile.add((_, options) => {
+
+  // creator.onUploadFile.add((_: SurveyCreatorModel, options: UploadFileEvent) => {
   //   const formData = new FormData();
-  //   options.files.forEach(file => {
+  //   options.files.forEach((file: File) => {
   //     formData.append(file.name, file);
   //   });
   //   fetch("https://example.com/uploadFiles", {
@@ -404,12 +544,17 @@ export function SurveyCreatorWidget() {
   //       options.callback('error');
   //     });
   // });
+
+  creator.text = JSON.stringify(props.json) || window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
+
   return (
-    <SurveyCreatorComponent creator={creator} />
-  )
+    <div style={{ height: "100vh", width: "100%" }}>
+      <SurveyCreatorComponent creator={creator} />
+    </div>
+  );
 }
 
-// function saveSurveyJson(url, json, saveNo, callback) {
+// function saveSurveyJson (url: string, json: object, saveNo: number, callback: (num: number, status: boolean) => void) {
 //   fetch(url, {
 //     method: 'POST',
 //     headers: {
@@ -429,9 +574,43 @@ export function SurveyCreatorWidget() {
 //   });
 // }
 ```
+
+```js
+// creator/page.tsx
+import dynamic from 'next/dynamic';
+
+const SurveyCreatorComponent = dynamic(() => import("@/components/SurveyCreator"), {
+  ssr: false
+});
+
+export default function SurveyCreator() {
+  return (
+    <SurveyCreatorComponent />
+  );
+}
+```
+
 </details>
 
-[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/reactjs (linkStyle))
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
+
+## (Optional) Enable Ace Editor in the JSON Editor Tab
+
+The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
+
+```sh
+npm install ace-builds --save
+```
+
+Import Ace and required extensions in a React component that renders Survey Creator. For instance, the following code imports an extension that adds a Find/Replace dialog to Ace:
+
+```js
+// components/SurveyCreator.tsx
+// ...
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/ext-searchbox";
+// ...
+```
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 

@@ -1,9 +1,39 @@
 import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
+import { SurveyCreatorModel } from "../creator-base";
 
-require("./simulator.scss");
+import "./simulator.scss";
 
 export class SurveySimulatorModel extends Base {
-  constructor() {
+  private surveyChanged() {
+    const _this = this;
+    this.survey.onOpenDropdownMenu.add((_, options) => {
+      if (this.surveyProvider.isTouch) return;
+      const device = simulatorDevices[_this.activeDevice];
+      options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
+    });
+  }
+  private updateSimulatorStyle(): void {
+    const device = simulatorDevices[this.activeDevice];
+    const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
+
+    const simulator = this.surveyProvider.rootElement?.getElementsByClassName("svd-simulator-content")[0] as HTMLElement;
+    if (!!simulator) {
+      let overlayHeight = undefined;
+      if (device.deviceType === "tablet") {
+        overlayHeight = `${deviceHeight * this.scale}px`;
+      } else if (device.deviceType === "phone") {
+        overlayHeight = "100%";
+      }
+
+      if (!!overlayHeight) {
+        simulator.style.setProperty("--sv-popup-overlay-height", overlayHeight);
+      } else {
+        simulator.style.removeProperty("--sv-popup-overlay-height");
+      }
+    }
+  }
+
+  constructor(private surveyProvider: SurveyCreatorModel) {
     super();
     // if (!!_toolbarHolder) {
     //   this.simulatorOptions.survey = this._toolbarHolder.koSurvey;
@@ -36,9 +66,19 @@ export class SurveySimulatorModel extends Base {
     // }
   }
 
-  @property({ defaultValue: true }) landscape: boolean;
-  @property() survey: SurveyModel;
-  @property({ defaultValue: "desktop" }) device: string;
+  @property({ defaultValue: true,
+    onSet: (newVal:string, targer: SurveySimulatorModel) => {
+      targer.updateSimulatorStyle();
+    }
+  }) landscape: boolean;
+  @property({
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
+  }) survey: SurveyModel;
+  @property({ defaultValue: "desktop",
+    onSet: (newVal:string, targer: SurveySimulatorModel) => {
+      targer.updateSimulatorStyle();
+    }
+  }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
   @property({ defaultValue: true }) considerDPI: boolean;
   @property({ defaultValue: true }) isRunning: boolean;
@@ -52,11 +92,11 @@ export class SurveySimulatorModel extends Base {
   public activateZoom = () => {
     document.addEventListener("keydown", this.listenTryToZoom);
     document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
-  }
+  };
   public deactivateZoom = () => {
     document.removeEventListener("keydown", this.listenTryToZoom);
     document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
-  }
+  };
   private listenTryToZoomWithWheel = e => this.tryToZoomWithWheel(e, e);
   private tryToZoomWithWheel(data: any, event: any) {
     const diff: number = event.deltaY;
@@ -115,6 +155,10 @@ export class SurveySimulatorModel extends Base {
   //   this.landscape = isLanscape;
   // }
 
+  get scale(): number {
+    return 1;//DEFAULT_MONITOR_DPI / device.ppi
+  }
+
   public get hasFrame(): boolean {
     var device = simulatorDevices[this.activeDevice];
     return this.simulatorEnabled && device.deviceType !== "desktop";
@@ -125,7 +169,7 @@ export class SurveySimulatorModel extends Base {
       return undefined;
     }
     const device = simulatorDevices[this.activeDevice];
-    const scale = 1;//DEFAULT_MONITOR_DPI / device.ppi;
+    const scale = this.scale;
 
     const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
@@ -158,7 +202,18 @@ export class SurveySimulatorModel extends Base {
 }
 
 export var DEFAULT_MONITOR_DPI = (typeof window !== "undefined" ? window.devicePixelRatio : 1) * 96;
-export var simulatorDevices = {
+export var simulatorDevices: {
+  [index: string]: {
+    cssPixelRatio?: number,
+    ppi?: number,
+    width?: number,
+    height?: number,
+    deviceType: string,
+    title: string,
+    cssClass?: string,
+    visibleIndex?: number,
+  },
+} = {
   desktop: {
     deviceType: "desktop",
     title: "Desktop",
@@ -349,13 +404,13 @@ export var simulatorDevices = {
   //   title: "Windows 10 Phone",
   //   cssClass: "svd-simulator-win10phone",
   // },
-  msSurface: {
+  microsoftSurface: {
     cssPixelRatio: 1,
     ppi: 148,
     width: 768,
     height: 1366,
     deviceType: "tablet",
-    title: "MS Surface",
+    title: "Microsoft Surface",
     cssClass: "svd-simulator-mssurface",
   },
   genericPhone: {

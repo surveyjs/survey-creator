@@ -1,9 +1,10 @@
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
 
-require("./page-navigator.scss");
-require("./page-navigator-item.scss");
+import "./page-navigator.scss";
+import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
+import { listComponentCss } from "../list-theme";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;
@@ -25,22 +26,27 @@ export class PageNavigatorViewModel extends Base {
         this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
       }
     }
-  }
+  };
 
   constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();
     this.icon = "icon-select-page";
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
     this.pagesController.onCurrentPageChanged.add(this.currentPagesChangedFunc);
-    this.pageListModel = new ListModel(
-      [],
-      (item) => {
+    this.pageListModel = new ListModel({
+      items: [],
+      onSelectionChanged: (item) => {
         this.pagesController.selectPage(item.data);
-        this.popupModel.toggleVisibility();
+        this.popupModel.hide();
       },
-      true
-    );
-    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
+      cssClasses: listComponentCss,
+      allowSelection: true,
+      listRole: "menu",
+      listItemRole: "menuitemradio",
+      locOwner: pagesController.creator as any
+    });
+    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
+    this.popupModel.focusFirstInputSelector = ".svc-list__item--selected";
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
@@ -102,8 +108,8 @@ export class PageNavigatorViewModel extends Base {
     this.setItems(items);
   }
   private patchContainerOffset(el: HTMLElement) {
-    while (!!el) {
-      if (el.className.indexOf("svc-tab-designer--with-page-navigator") !== -1) {
+    while(!!el) {
+      if (el.className.indexOf("svc-tab-designer--with-surface-tools") !== -1) {
         el.offsetParent.scrollTop = 0;
         return;
       }
@@ -151,8 +157,7 @@ export class PageNavigatorViewModel extends Base {
             this.patchContainerOffset(el);
           }, 50);
         }
-      }
-      else {
+      } else {
         el.scrollIntoView({ block: "start" });
         this.patchContainerOffset(el);
         if (isLastPage) {
@@ -256,6 +261,9 @@ export class PageNavigatorViewModel extends Base {
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
   private _scrollableContainer: HTMLDivElement;
   public setScrollableContainer(scrollableContainer: HTMLDivElement | any) {
+    if (!!this._scrollableContainer) {
+      this._scrollableContainer.onscroll = undefined;
+    }
     this._scrollableContainer = scrollableContainer;
   }
   private _itemsContainer: HTMLDivElement;
@@ -294,12 +302,23 @@ export class PageNavigatorViewModel extends Base {
     // this._updateVisibility();
     setTimeout(() => {
       this._updateVisibility();
-    }, 10);
+    }, 100);
   }
   public get visibleItems() {
     if (this.items.length <= this.visibleItemsCount) {
       return this.items;
     }
     return this.items.slice(this.visibleItemsStartIndex, this.visibleItemsStartIndex + this.visibleItemsCount);
+  }
+  public attachToUI(el: HTMLDivElement) {
+    if (!!el) {
+      const scrollableContainer = el.parentElement.parentElement.parentElement.parentElement.parentElement as HTMLDivElement;
+      const self = this;
+      scrollableContainer.onscroll = function (this: GlobalEventHandlers, ev: Event) {
+        return self.onContainerScroll(ev.currentTarget as HTMLDivElement);
+      };
+      this.setItemsContainer(el.parentElement as HTMLDivElement);
+      this.setScrollableContainer(scrollableContainer);
+    }
   }
 }

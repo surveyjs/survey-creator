@@ -1,11 +1,11 @@
-import { updateBoxShadowSettingsJSON } from "./boxshadow-settings";
-import { updateColorSettingsJSON } from "./color-settings";
-import { updateElementSettingsJSON } from "./element-settings";
+import { updateShadowEffectsJSON } from "./shadow-effects";
+import { updatecoloralphaJSON } from "./color-alpha";
+import { updateBackgroundCornerRadiusJSON } from "./background-corner-radius";
 import { updateFontSettingsJSON } from "./font-settings";
 
 export function updateCustomQuestionJSONs() {
-  updateBoxShadowSettingsJSON();
+  updateShadowEffectsJSON();
   updateFontSettingsJSON();
-  updateColorSettingsJSON();
-  updateElementSettingsJSON();
+  updatecoloralphaJSON();
+  updateBackgroundCornerRadiusJSON();
 }

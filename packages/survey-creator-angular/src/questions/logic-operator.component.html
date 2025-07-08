@@ -6,25 +6,23 @@
         [attr.required]="model.isRequired" 
         [attr.tabindex]= "model.isInputReadOnly ? undefined : 0"
         [attr.disabled]="model.isInputReadOnly"
-        [attr.role]="model.ariaRole"
-        [attr.aria-required]="model.ariaRequired" 
-        [attr.aria-label]="model.ariaLabel" 
-        [attr.aria-invalid]="model.ariaInvalid" 
-        [attr.aria-describedby]= "model.ariaDescribedBy" 
+        [attr.role]="dropdownModel.ariaQuestionRole"
+        [attr.aria-required]="dropdownModel.ariaQuestionRequired"
+        [attr.aria-invalid]="dropdownModel.ariaQuestionInvalid"
+        [attr.aria-errormessage]="dropdownModel.ariaQuestionErrorMessage" 
+        [attr.aria-expanded]="dropdownModel.ariaQuestionExpanded"
+        [attr.aria-label]="dropdownModel.ariaQuestionLabel" 
+        [attr.aria-labelledby]="dropdownModel.ariaQuestionLabelledby"
+        [attr.aria-controls]="dropdownModel.ariaQuestionControls"
       >
         <div [class]="model.cssClasses.controlValue">
-          <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
-          <div>{{model.readOnlyText}}</div>
-        </div>
-        <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear" [visible]="!model.isEmpty()">
-          <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.clearCaption" [size]="24" sv-ng-svg-icon></svg>
+          <sv-ng-string *ngIf="model.locReadOnlyText" [model]="model.locReadOnlyText"></sv-ng-string>
         </div>
       </div>
         <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
     </ng-container>
     <div disabled *ngIf="model.isReadOnly" [class]="model.getControlClass()" [attr.id]="model.inputId">
-      <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
-      <div>{{model.readOnlyText}}</div>
+      <sv-ng-string *ngIf="model.locReadOnlyText" [model]="model.locReadOnlyText"></sv-ng-string>
     </div>
   </div>
 </ng-template>

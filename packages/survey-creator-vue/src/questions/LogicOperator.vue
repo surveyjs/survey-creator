@@ -9,34 +9,24 @@
         :required="question.isRequired"
         :tabindex="question.isInputReadOnly ? undefined : 0"
         :disabled="question.isInputReadOnly"
-        :role="question.ariaRole"
-        :aria-required="question.ariaRequired"
-        :aria-label="question.ariaLabel"
-        :aria-invalid="question.ariaInvalid"
-        :aria-describedby="question.ariaDescribedBy"
+        :role="dropdownModel.ariaQuestionRole"
+        :aria-required="dropdownModel.ariaQuestionRequired"
+        :aria-invalid="dropdownModel.ariaQuestionInvalid"
+        :aria-errormessage="dropdownModel.ariaQuestionErrorMessage" 
+        :aria-expanded="dropdownModel.ariaQuestionExpanded"
+        :aria-label="dropdownModel.ariaQuestionLabel" 
+        :aria-labelledby="dropdownModel.ariaQuestionLabelledby"
+        :aria-controls="dropdownModel.ariaQuestionControls"
       >
         <div :class="question.cssClasses.controlValue">
-          <survey-string
-            v-if="question.selectedItemLocText"
-            :locString="question.selectedItemLocText"
-          ></survey-string>
-          <div>{{ question.readOnlyText }}</div>
-        </div>
-        <div
-          v-if="question.allowClear && question.cssClasses.cleanButtonIconId"
-          :class="question.cssClasses.cleanButton"
-          @click="clear"
-          v-show="!question.isEmpty()"
-        >
-          <sv-svg-icon
-            :class="question.cssClasses.cleanButtonSvg"
-            :iconName="question.cssClasses.cleanButtonIconId"
-            :size="'auto'"
-            :title="question.clearCaption"
-          ></sv-svg-icon>
+          <SvComponent
+            :is="'survey-string'"
+            v-if="question.locReadOnlyText"
+            :locString="question.locReadOnlyText"
+          ></SvComponent>
         </div>
       </div>
-      <sv-popup :model="question.popupModel"></sv-popup>
+      <SvComponent :is="'sv-popup'" :model="question.popupModel"></SvComponent>
     </template>
     <div
       disabled
@@ -44,15 +34,16 @@
       :class="question.getControlClass()"
       :id="question.inputId"
     >
-      <survey-string
-        v-if="question.selectedItemLocText"
-        :locString="question.selectedItemLocText"
-      ></survey-string>
-      <div>{{ question.readOnlyText }}</div>
+      <SvComponent
+        :is="'survey-string'"
+        v-if="question.locReadOnlyText"
+        :locString="question.locReadOnlyText"
+      ></SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import { DropdownListModel, type QuestionDropdownModel } from "survey-core";
 import { initLogicOperator } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
@@ -69,9 +60,6 @@ useQuestion(props, root, (newValue) => {
 });
 const click = (event: Event) => {
   dropdownModel.value?.onClick(event);
-};
-const clear = (event: Event) => {
-  dropdownModel.value?.onClear(event);
 };
 const keyup = (event: Event) => {
   dropdownModel.value?.keyHandler(event);

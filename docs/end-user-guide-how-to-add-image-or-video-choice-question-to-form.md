@@ -33,44 +33,30 @@ The [Image](https://surveyjs.io/form-library/examples/add-image-and-video-to-sur
 
 To add an Image Picker to a form, follow these steps:
 
-1. Drag the **Image Picker** input type from the Toolbox on the left onto the design surface. By default, its **Content mode** property is set to **Image**.
-
+1. Drag the **Image Picker** input type from the Toolbox on the left onto the design surface. By default, its **Content mode** property is set to **Image**.<br><br>
     <img src="../images/eud-content-mode.png" alt='Image picker question: Select content mode' width="332" height="352">
-
 2. Under **Choice Options**, locate the property table **Choices**.
 3. In the first column titled **Value**, assign internal IDs for your choice options.
 4. In the second column titled **Alt text**, add descriptive alternative texts for media files to make your image picker question accessible for respondents using screen readers.
-5. In the third column titled **Image or video file URL**, paste URLs to image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO.
-
+5. In the third column titled **Image or video file URL**, paste URLs to image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO.<br><br>
     <img src="../images/eud-image-picker-choices.png" alt='Image picker question: Configure choice options' width="452" height="526">
-
 6. To specify how to fit the images into their containers, under **General**, locate the **Image and thumbnail fit** property and choose from the following values:
-
    - **None** - Image maintains its original size.
    - **Contain** - Image is resized to fit while maintaining its aspect ratio.
    - **Cover** - Image fills the entire box while maintaining its aspect ratio.
-   - **Fill** - Image is stretched to fill the box without maintaining its aspect ratio.
-
+   - **Fill** - Image is stretched to fill the box without maintaining its aspect ratio.<br><br>
     <img src="../images/eud-image-fit.png" alt='Image picker question: Image fit' width="394" height="448">
-   
 7. Locate and select the **Allow multiple selection** checkbox if you want to enable respondents to choose more than one option.
 8.  To set the number of minimum and maximum answers that a respondent can select, locate the **Validation rules** property under **Validation**.
 9.  In the drop-down menu, select **Answer count**.
 10. Enter the minimum number of answers in the **Minimum count** field.
-11. Enter the maximum number of answers in the **Maximum count** field.
-
+11. Enter the maximum number of answers in the **Maximum count** field.<br><br>
     <img src="../images/eud-min-max.png" alt='Image picker question: Set the minimum and maximum number of answers' width="386" height="519">
-
 12. Under **General**, locate and select the **Show image and video captions** checkbox to display the alternative texts as image captions.
-13. Locate **Display area height** and **Display area width** and specify display area dimensions for image containers. The input fields accept positive numbers and CSS values.
-  
-    > It's not recommended to set **Display area height** and **Display area width** values when the **Survey width mode** property is set to **Responsive**.
-
+13. Locate **Display area height** and **Display area width** and specify display area dimensions for image containers. The input fields accept positive numbers and CSS values. Note that it's not recommended to set **Display area height** and **Display area width** values when the **Survey width mode** property is set to **Responsive**.<br><br>
     <img src="../images/eud-allow-multiple-selection.png" alt='Image picker question: Allow multiple selection' width="394" height="489">
-
 14. To change the order of the choice options, locate **Choice order** under **Choice Options**.
-15. In the drop-down menu, select among available choice order options. 
-
+15. In the drop-down menu, select among available choice order options.<br><br>
     <img src="../images/eud-choice-order.png" alt='Image picker question: Choice order' width="386" height="544">
 
 Values entered in "Display area height" and "Display area width" fields override the values of the following properties:

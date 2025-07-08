@@ -30,6 +30,7 @@ test("new rule", async (t) => {
 });
 
 const jsonOneRule = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -74,6 +75,38 @@ test("one rule view", async (t) => {
   });
 });
 
+test("long question name", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON({
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question with very long name that does not fit into logic"
+            },
+            {
+              "type": "text",
+              "name": "another question with long name that we want to set up",
+              "visibleIf": "{question with very long name that does not fit into logic} = 'a'"
+            }
+          ]
+        }
+      ]
+    });
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement);
+    const tabContent = Selector(".sl-table__row.st-table__row--detail");
+    await takeElementScreenshot("logic-tab-long-question-name-content.png", tabContent.filterVisible(), t, comparer);
+  });
+});
+
 test("Check actions hover states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
@@ -114,6 +147,7 @@ test("Check logic error notifier", async (t) => {
     await t.resizeWindow(1920, 900);
     await patchNotifierLifeTime();
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -147,6 +181,7 @@ test("Check logic dropdown", async (t) => {
     await t.resizeWindow(900, 900);
     await patchNotifierLifeTime();
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -170,7 +205,7 @@ test("Check logic dropdown", async (t) => {
       .click(Selector(".svc-logic-operator--question"));
     await takeElementScreenshot("logic-dropdown.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
     await t
-      .click(Selector(".sv-list__item").withText("q1").filterVisible())
+      .click(getListItemByText("q1").filterVisible())
       .click(Selector(".svc-logic-operator--question"));
     await takeElementScreenshot("logic-dropdown-full.png", Selector(".sl-body").filterVisible(), t, comparer);
   });
@@ -180,6 +215,7 @@ test("Check logic Manual Entry", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -211,6 +247,7 @@ test("Check logic Manual Entry", async (t) => {
 });
 
 const jsonMultipleConditionsMultipleActions = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -299,6 +336,7 @@ test("unsaved rule", async (t) => {
   });
 });
 const jsonAllActionTypes = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "completedHtmlOnCondition": [
     {
@@ -465,6 +503,7 @@ test("Texts overflow the controls when showTitlesInExpressions is enabled #3192"
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(800, 900);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

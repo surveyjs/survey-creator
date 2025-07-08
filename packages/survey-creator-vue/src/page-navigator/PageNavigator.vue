@@ -1,36 +1,43 @@
 <template>
   <div class="svc-page-navigator" v-show="model.visible" ref="root">
-    <div
-      class="svc-page-navigator__selector"
-      @click="model.togglePageSelector($event)"
-      v-key2click
-      :title="model.pageSelectorCaption"
-      :class="{ 'svc-page-navigator__selector--opened': model.isPopupOpened }"
-    >
-      <sv-svg-icon
-        class="svc-page-navigator__navigator-icon"
-        :iconName="model.icon"
-        :size="24"
-      ></sv-svg-icon>
-      <sv-popup :model="model.popupModel"></sv-popup>
+    <div>
+      <div
+        role="button"
+        class="svc-page-navigator__selector svc-page-navigator__button"
+        @click="model.togglePageSelector($event)"
+        v-key2click
+        :title="model.pageSelectorCaption"
+        :class="{ 'svc-page-navigator__button--pressed': model.isPopupOpened }"
+      >
+        <SvComponent
+          :is="'sv-svg-icon'"
+          class="svc-page-navigator__button-icon"
+          :iconName="model.icon"
+          :size="'auto'"
+        ></SvComponent>
+      </div>
+      <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
     </div>
     <div>
-      <svc-page-navigator-item
-        v-for="(item, index) in model.visibleItems"
-        :key="index"
+      <SvComponent
+        :is="'svc-page-navigator-item'"
+        v-for="item in model.visibleItems"
+        :key="item.id"
         :model="item"
-      ></svc-page-navigator-item>
+      ></SvComponent>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import {
   PageNavigatorViewModel,
   type PagesController,
 } from "survey-creator-core";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, onUnmounted, ref } from "vue";
 
 const props = defineProps<{
   pagesController: PagesController;
@@ -46,27 +53,19 @@ onMounted(() => {
   if (props.pageEditMode !== "bypage") {
     const el = root.value;
     const modelValue = model.value;
-    if (!!el && !!el.parentElement?.parentElement?.parentElement) {
-      const scrollableViewPort = el.parentElement.parentElement.parentElement;
-      scrollableViewPort.onscroll = function (
-        this: GlobalEventHandlers,
-        ev: Event
-      ) {
-        return modelValue.onContainerScroll(ev.currentTarget as HTMLDivElement);
-      };
-      modelValue.setScrollableContainer(scrollableViewPort);
-      modelValue.setItemsContainer(el.parentElement);
+    if(el) {
+      modelValue.attachToUI(el);
     }
   }
 });
 
-onUnmounted(() => {
-  const el = root.value;
+onBeforeUnmount(() => {
   const modelValue = model.value;
-  if (!!el && !!el.parentElement?.parentElement?.parentElement) {
-    el.parentElement.parentElement.parentElement.onscroll = undefined as any;
-  }
   modelValue.stopItemsContainerHeightObserver();
+  modelValue.setScrollableContainer(undefined as any);
+});
+onUnmounted(() => {
+  const modelValue = model.value;
   modelValue.dispose();
 });
 </script>

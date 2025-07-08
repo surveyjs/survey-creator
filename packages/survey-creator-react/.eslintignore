@@ -1,0 +1,9 @@
+.vscode
+build/
+example/
+examples/
+node_modules/
+index.js
+copy-vrt-tests.js
+copy-src-tests.js
+webpack.config.js

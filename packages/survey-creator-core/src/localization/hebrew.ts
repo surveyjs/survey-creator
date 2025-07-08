@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var hebrewStrings = {
   // survey templates
@@ -15,6 +15,15 @@ export var hebrewStrings = {
     deleteQuestion: "מחיקת שאלה",
     convertTo: "המרה ל",
     drag: "גרירת אלמנט",
+  },
+  // Creator tabs
+  tabs: {
+    preview: "תצוגה מקדימה",
+    theme: "ערכות נושא",
+    translation: "תרגום",
+    designer: "מעצב",
+    json: "עורך JSON",
+    logic: "לוגיקה"
   },
   // Question types
   qt: {
@@ -36,11 +45,20 @@ export var hebrewStrings = {
     paneldynamic: "לוח דינמי",
     radiogroup: "קבוצת כפתורי רדיו",
     rating: "סולם דירוג",
+    slider: "המחוון",
     text: "קלט בשורה אחת",
     boolean: "כן/לא (בוליאני)",
     expression: "ביטוי (קריאה בלבד)",
     signaturepad: "חתימה",
     buttongroup: "קבוצת כפתורים"
+  },
+  toolboxCategories: {
+    general: "כללי",
+    choice: "שאלות עם בחירה",
+    text: "שאלות טקסטואליות",
+    containers: "מכילים",
+    matrix: "שאלות מטריצה",
+    misc: "שונות"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -52,6 +70,7 @@ export var hebrewStrings = {
     surveySettingsTooltip: "הגדרות סקר",
     themeSettings: "הגדרות ערכת העיצוב",
     themeSettingsTooltip: "הגדרות ערכת נושא",
+    creatorSettingTitle: "הגדרות יוצר",
     showPanel: "הצג לוח",
     hidePanel: "הסתר לוח",
     prevSelected: "בחר קודם",
@@ -73,29 +92,30 @@ export var hebrewStrings = {
     newQuestionName: "שאלה",
     newPanelName: "לוח",
     newTextItemName: "טקסט",
-    testSurvey: "תצוגה מקדימה",
-    themeSurvey: "ערכות נושא",
     defaultV2Theme: "ברירת מחדל",
     modernTheme: "מודרני",
     defaultTheme: "ברירת מחדל (ירושה)",
     testSurveyAgain: "תצוגה מקדימה שוב",
     testSurveyWidth: "רוחב הסקר: ",
     navigateToMsg: "הייתם צריכים לנווט אל",
-    logic: "לוגיקה",
-    embedSurvey: "הטמע סקר",
-    translation: "תרגום",
     saveSurvey: "שמור סקר",
     saveSurveyTooltip: "שמור סקר",
     saveTheme: "שמור ערכת נושא",
     saveThemeTooltip: "שמור ערכת נושא",
-    designer: "מעצב",
-    jsonEditor: "עורך JSON",
     jsonHideErrors: "הסתר שגיאות",
     jsonShowErrors: "הצג שגיאות",
     undo: "בטל",
     redo: "בצע מחדש",
     undoTooltip: "בטל שינוי אחרון",
     redoTooltip: "בצע מחדש את השינוי",
+    expandTooltip: "להרחיב",
+    collapseTooltip: "התמוטטות",
+    expandAllTooltip: "הרחב הכל",
+    collapseAllTooltip: "כווץ הכל",
+    zoomInTooltip: "התקרבות",
+    zoom100Tooltip: "שינוי גודל תצוגה ל- 100%",
+    zoomOutTooltip: "הקטנת התצוגה",
+    lockQuestionsTooltip: "נעילת מצב הרחבה/כיווץ עבור שאלות",
     showMoreChoices: "הצג עוד",
     showLessChoices: "הצג פחות",
     copy: "העתק",
@@ -109,14 +129,13 @@ export var hebrewStrings = {
     generateReadableJSON: "צור JSON קריא",
     toolbox: "ארגז הכלים",
     "property-grid": "מאפיינים",
+    toolboxSearch: "חיפוש",
+    toolboxFilteredTextPlaceholder: "הקלד כדי לחפש...",
+    toolboxNoResultsFound: "לא נמצאו תוצאות",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     propertyGridNoResultsFound: "לא נמצאו תוצאות",
-    toolboxGeneralCategory: "כללי",
-    toolboxChoiceCategory: "שאלות עם בחירה",
-    toolboxTextCategory: "שאלות טקסטואליות",
-    toolboxContainersCategory: "מכילים",
-    toolboxMatrixCategory: "שאלות מטריצה",
-    toolboxMiscCategory: "שונות",
+    propertyGridPlaceholderTitle: "התחל לקבוע את תצורת הטופס שלך",
+    propertyGridPlaceholderDescription: "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב.",
     correctJSON: "אנא תקנו את ה-JSON.",
     surveyResults: "תוצאות הסקר",
     surveyResultsTable: "כטבלה",
@@ -132,6 +151,7 @@ export var hebrewStrings = {
     saveError: "שגיאה! התוכן של העורך לא נשמר.",
     translationPropertyGridTitle: "הגדרות שפה",
     themePropertyGridTitle: "הגדרות ערכת העיצוב",
+    addLanguageTooltip: "הוסף שפה",
     translationLanguages: "שפות",
     translationDeleteLanguage: "האם אתה בטוח שברצונך למחוק את כל המחרוזות לשפה זו?",
     translationAddLanguage: "בחר שפה לתרגום",
@@ -148,6 +168,7 @@ export var hebrewStrings = {
     translationPlaceHolder: "תרגום...",
     translationSource: "מקור: ",
     translationTarget: "יעד: ",
+    translationYouTubeNotSupported: "קישורי YouTube אינם נתמכים.",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
     surveyJsonExportButton: "ייצא",
@@ -170,6 +191,22 @@ export var hebrewStrings = {
     surveyPlaceHolder: "הסקר ריק. גרור אלמנט מארגז הכלים או לחץ על הכפתור למטה.",
     pagePlaceHolder: "הדף ריק. גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
     imagePlaceHolder: "גרור ושחרר תמונה לכאן או לחץ על הכפתור למטה ובחר תמונה להעלאה",
+    surveyPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להתחיל ליצור את הטופס שלך.",
+    surveyPlaceholderTitle: "הטופס שלך ריק",
+    surveyPlaceholderTitleMobile: "הטופס שלך ריק",
+    surveyPlaceholderDescription: "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
+    surveyPlaceholderDescriptionMobile: "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה.",
+    previewPlaceholderTitle: "ללא תצוגה מקדימה",
+    previewPlaceholderTitleMobile: "ללא תצוגה מקדימה",
+    previewPlaceholderDescription: "הסקר אינו מכיל רכיבים גלויים.",
+    previewPlaceholderDescriptionMobile: "הסקר אינו מכיל רכיבים גלויים.",
+    translationsPlaceholderTitle: "אין מחרוזות לתרגם",
+    translationsPlaceholderTitleMobile: "אין מחרוזות לתרגם",
+    translationsPlaceholderDescription: "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים.",
+    translationsPlaceholderDescriptionMobile: "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים.",
+    pagePlaceHolderMobile: "לחץ על כפתור \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לדף.",
+    panelPlaceHolderMobile: "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לחלונית.",
+    imagePlaceHolderMobile: "לחץ על הלחצן למטה ובחר תמונה להעלאה",
     imageChooseImage: "בחר תמונה",
     addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
@@ -179,6 +216,10 @@ export var hebrewStrings = {
     lg: {
       addNewItem: "הוספת כלל חדש",
       empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      logicPlaceholderTitle: "אין כללים לוגיים",
+      logicPlaceholderTitleMobile: "אין כללים לוגיים",
+      logicPlaceholderDescription: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      logicPlaceholderDescriptionMobile: "צור כלל כדי להתאים אישית את זרימת הסקר.",
       page_visibilityName: "הצג (הסתר) עמוד",
       page_enableName: "הפוך דף לזמין (הפוך ללא זמין)",
       page_requireName: "הפיכת הדף לנדרש",
@@ -221,13 +262,13 @@ export var hebrewStrings = {
       question_visibilityText: "הפוך את {0} השאלה לגלויה", //{0} question name
       question_enableText: "הפוך שאלה {0} לזמינה", //{0} question name
       question_requireText: "יש צורך בשאלה {0}", //{0} question name
-      question_resetValueText: "אפס ערך עבור שאלה: {0}",
+      question_resetValueText: "אפס ערך עבור שאלה: {0}", //{0} question name.
       question_setValueText: "הקצאת ערך: {1} לשאלה: {0}",
       column_visibilityText: "הפוך את {0} העמודות של {1} השאלה לגלויות", //{0} column name, {1} question name
       column_enableText: "הפיכת עמודה {0} של שאלה לזמינה {1}", //{0} column name, {1} question name
       column_requireText: "הפוך את {0} העמודות של השאלה {1} לנדרש", //{0} column name, {1} question name
-      column_resetValueText: "איפוס ערך תא עבור עמודה: {0}",
-      column_setValueText: "הקצאת ערך תא: {1} לעמודה: {0}",
+      column_resetValueText: "איפוס ערך תא עבור עמודה: {0}", //{0} column name
+      column_setValueText: "הקצאת ערך תא: {1} לעמודה: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "ביטוי שתוצאתו תוקצה לשאלת היעד.",
       trigger_completeText: "הסקר הושלם",
       trigger_setvalueText: "העמידו בסימן שאלה: ערך {0} {1}", //{0} question name, {1} setValue
@@ -263,14 +304,18 @@ export var hebrewStrings = {
       description: "תיאור הלוח",
       visibleIf: "הפוך את החלונית לגלויה אם",
       requiredIf: "הפוך את החלונית לנדרשת אם",
-      questionsOrder: "סדר השאלות בתוך הפאנל",
+      questionOrder: "סדר השאלות בתוך הפאנל",
       page: "עמוד הורה",
       startWithNewLine: "הצגת החלונית בשורה חדשה",
       state: "מצב כיווץ לוח",
       width: "רוחב החלונית בתוך שורה",
       minWidth: "רוחב לוח מינימלי",
       maxWidth: "רוחב לוח מרבי",
-      showNumber: "חלוניות מספרים"
+      showNumber: "מספר חלונית זו"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "רוחב אפקטיבי, %",
+      questionTitleWidth: "רוחב כותרת השאלה, px"
     },
     paneldynamic: {
       name: "שם החלונית",
@@ -289,24 +334,28 @@ export var hebrewStrings = {
       templateTitle: "תבנית כותרת חלונית",
       noEntriesText: "טקסט ריק בחלונית",
       templateTabTitle: "תבנית כותרת טאב",
+      tabTitlePlaceholder: "מציין מיקום של כותרת טאב",
       templateVisibleIf: "הפיכת חלונית בודדת לגלויה אם",
-      hideNumber: "הסתרת מספר החלונית",
+      showNumber: "מספור החלונית",
       titleLocation: "יישור כותרת חלונית",
       descriptionLocation: "יישור תיאור החלונית",
-      templateTitleLocation: "יישור כותרת שאלה",
+      templateQuestionTitleLocation: "יישור כותרת שאלה",
+      templateQuestionTitleWidth: "רוחב כותרת השאלה",
       templateErrorLocation: "יישור הודעת שגיאה",
       newPanelPosition: "מיקום חדש בלוח",
+      showRangeInProgress: "הצגת מד ההתקדמות",
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
     question: {
       name: "שם שאלה",
       title: "כותרת השאלה",
       description: "תיאור השאלה",
+      showTitle: "הצגת הכותרת והתיאור",
       visibleIf: "הפוך את השאלה לגלויה אם",
       requiredIf: "הפוך את השאלה לנדרשת אם",
       page: "עמוד הורה",
       state: "מצב כיווץ תיבת שאלה",
-      hideNumber: "הסתרת מספר השאלה",
+      showNumber: "מספר שאלה זו",
       titleLocation: "יישור כותרת שאלה",
       descriptionLocation: "יישור תיאור השאלה",
       errorLocation: "יישור הודעת שגיאה",
@@ -348,7 +397,8 @@ export var hebrewStrings = {
     // survey templates
     survey: {
       title: "כותר",
-      description: "תיאור הסקר"
+      description: "תיאור הסקר",
+      readOnly: "הפוך את הסקר לקריאה בלבד"
     },
     page: {
       name: "שם הדף",
@@ -356,8 +406,8 @@ export var hebrewStrings = {
       description: "תיאור הדף",
       visibleIf: "הפוך את הדף לגלוי אם",
       requiredIf: "הפוך את הדף לנדרש אם",
-      maxTimeToFinish: "גבול זמן לסיום העמוד (בשניות)",
-      questionsOrder: "סדר השאלות בדף"
+      timeLimit: "גבול זמן לסיום העמוד (בשניות)",
+      questionOrder: "סדר השאלות בדף"
     },
     matrixdropdowncolumn: {
       name: "שם עמודה",
@@ -396,12 +446,17 @@ export var hebrewStrings = {
       prefix: "קידומת מטבע",
       suffix: "סיומת מטבע"
     },
+    isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
     imageHeight: "גובה התמונה",
     imageWidth: "רוחב התמונה",
     valueName: "אחסן תשובות בשדה JSON הבא",
+    defaultDisplayValue: "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים",
     rateDescriptionLocation: "יישור תוויות",
-    size: "גודל שדה הקלט (בתווים)",
+    size: "רוחב שדה קלט (בתווים)",
     cellErrorLocation: "יישור הודעת שגיאה של תא",
+    enabled: "מופעלת",
+    disabled: "נכים",
+    inherit: "לרשת",
     apply: "החל",
     ok: "אוקי",
     save: "שמור",
@@ -463,11 +518,13 @@ export var hebrewStrings = {
     listIsEmpty: "טרם הוספו פריטים",
     "listIsEmpty@choices": "טרם הוספו ברירות בחירה",
     "listIsEmpty@columns": "עדיין אין לך עמודות",
+    "listIsEmpty@gridLayoutColumns": "עדיין אין לך עמודות פריסה",
     "listIsEmpty@rows": "עדיין אין לך שורות",
     "listIsEmpty@validators": "עדיין אין לך כללי אימות",
     "listIsEmpty@calculatedValues": "עדיין אין לך משתנים מותאמים אישית",
     "listIsEmpty@triggers": "עדיין אין לך טריגרים",
     "listIsEmpty@navigateToUrlOnCondition": "עדיין אין לך קישורים",
+    "listIsEmpty@pages": "עדיין אין לך דפים",
     "addNew@choices": "הוסף ברירת בחירה",
     "addNew@columns": "הוספת עמודה חדשה",
     "addNew@rows": "הוספת שורה חדשה",
@@ -475,6 +532,7 @@ export var hebrewStrings = {
     "addNew@calculatedValues": "הוספת משתנה חדש",
     "addNew@triggers": "הוספת גורם מפעיל חדש",
     "addNew@navigateToUrlOnCondition": "הוספת כתובת URL חדשה",
+    "addNew@pages": "הוספת עמוד חדש",
     expressionIsEmpty: "הביטוי ריק",
     value: "ערך",
     text: "טקסט",
@@ -494,6 +552,7 @@ export var hebrewStrings = {
     titlePlaceholder: "כותרת",
     surveyTitlePlaceholder: "כותרת הסקר",
     pageTitlePlaceholder: "עמוד {num}",
+    startPageTitlePlaceholder: "דף פתיחה",
     descriptionPlaceholder: "תיאור",
     surveyDescriptionPlaceholder: "תיאור הסקר",
     pageDescriptionPlaceholder: "תיאור העמוד",
@@ -514,11 +573,12 @@ export var hebrewStrings = {
     cellType: "סוג התא",
     colCount: "מספר העמודות",
     choicesOrder: "סדר מיון של ברירות הבחירה",
+    allowCustomChoices: "מתן אפשרות לבחירות מותאמות אישית",
     visible: "נראה",
     isRequired: "נדרש",
     markRequired: "סמן כשדה חובה",
     removeRequiredMark: "הסר את הסימון כשדה חובה",
-    isAllRowRequired: "חובה על תשובה בכל השורות",
+    eachRowRequired: "חובה על תשובה בכל השורות",
     eachRowUnique: "מניעת תגובות כפולות בשורות",
     requiredErrorText: "הודעת שגיאה לשדה חובה",
     startWithNewLine: "הצג את השאלה בשורה חדשה",
@@ -530,10 +590,11 @@ export var hebrewStrings = {
     maxSize: "גודל הקובץ המרבי (בבתים)",
     rowCount: "כמות השורות",
     columnLayout: "סידור העמודות",
-    addRowLocation: "מיקום כפתור הוסף שורה",
+    addRowButtonLocation: "מיקום כפתור הוסף שורה",
     transposeData: "ביצוע חילוף שורות לעמודות",
     addRowText: "טקסט לכפתור הוסף שורה",
     removeRowText: "טקסט לכפתור הסר שורה",
+    singleInputTitleTemplate: "תבנית כותרת של שדה קלט",
     rateMin: "ערך מינימלי לדרגה",
     rateMax: "ערך מקסימלי לדרגה",
     rateStep: "צעד דרגה",
@@ -566,10 +627,9 @@ export var hebrewStrings = {
     simulator: "בחר סוג מכשיר",
     landscapeOrientation: "עבור לתצוגה אופקית",
     portraitOrientation: "עבור לתצוגה אנכית",
-    mode: "עריכה או לקריאה בלבד",
     clearInvisibleValues: "נקה ערכים בלתי נראים",
     cookieName: "שם העוגיה",
-    sendResultOnPageNext: "שמור תוצאות סקר חלקיות בתהליך",
+    partialSendEnabled: "שמור תוצאות סקר חלקיות בתהליך",
     storeOthersAsComment: "אחסן את ערך 'אחר' בשדה נפרד",
     showPageTitles: "הצג כותרות עמוד",
     showPageNumbers: "הצג מספרי עמוד",
@@ -580,34 +640,38 @@ export var hebrewStrings = {
     editText: "טקסט לכפתור 'ערוך תשובה'",
     startSurveyText: "טקסט לכפתור 'התחל סקר'",
     showNavigationButtons: "מיקום לכפתורי ניווט",
+    navigationButtonsLocation: "יישור לחצני ניווט",
     showPrevButton: "הצג את לחצן 'עמוד קודם'",
-    firstPageIsStarted: "העמוד הראשון הוא עמוד התחלה",
-    showCompletedPage: "הצג עמוד 'סקר הושלם'",
-    goNextPageAutomatic: "עבור אוטומטית לעמוד הבא",
-    allowCompleteSurveyAutomatic: "השלם את הסקר באופן אוטומטי",
+    firstPageIsStartPage: "העמוד הראשון הוא עמוד התחלה",
+    showCompletePage: "הצג עמוד 'סקר הושלם'",
+    autoAdvanceEnabled: "עבור אוטומטית לעמוד הבא",
+    autoAdvanceAllowComplete: "השלם את הסקר באופן אוטומטי",
     showProgressBar: "מיקום שורת ההתקדמות",
+    progressBarLocation: "יישור מד התקדמות",
     questionTitleLocation: "מיקום כותרת השאלה",
-    requiredText: "סמן נדרש(ים)",
+    questionTitleWidth: "רוחב כותרת השאלה",
+    requiredMark: "סמן נדרש(ים)",
     questionTitleTemplate: "תבנית כותרת השאלה, ברירת המחדל היא: '{no}. {require} {title}'",
     questionErrorLocation: "מיקום הודעת השגיאה",
-    focusFirstQuestionAutomatic: "התמקד על השאלה הראשונה בעמוד חדש",
-    questionsOrder: "סדר הרכיבים בעמוד",
-    maxTimeToFinish: "גבול זמן לסיום הסקר (בשניות)",
-    maxTimeToFinishPage: "גבול זמן לסיום עמוד אחד (בשניות)",
-    showTimerPanel: "מיקום הטיימר",
-    showTimerPanelMode: "מצב הטיימר",
+    autoFocusFirstQuestion: "התמקד על השאלה הראשונה בעמוד חדש",
+    questionOrder: "סדר הרכיבים בעמוד",
+    timeLimit: "גבול זמן לסיום הסקר (בשניות)",
+    timeLimitPerPage: "גבול זמן לסיום עמוד אחד (בשניות)",
+    showTimer: "שימוש בטיימר",
+    timerLocation: "מיקום הטיימר",
+    timerInfoMode: "מצב הטיימר",
     renderMode: "מצב תצוגת הפאנל",
     allowAddPanel: "אפשר הוספת פאנלים",
     allowRemovePanel: "אפשר הסרת פאנלים",
-    panelAddText: "טקסט לכפתור 'הוסף פאנל'",
-    panelRemoveText: "טקסט לכפתור 'הסר פאנל'",
+    addPanelText: "טקסט לכפתור 'הוסף פאנל'",
+    removePanelText: "טקסט לכפתור 'הסר פאנל'",
     isSinglePage: "הצג את כל הרכיבים בעמוד אחד",
     html: "קוד HTML",
     setValue: "תשובה",
     dataFormat: "פורמט תמונה",
     allowAddRows: "אפשר הוספת שורות",
     allowRemoveRows: "אפשר הסרת שורות",
-    allowRowsDragAndDrop: "אפשר גרירה ושחרור שורות",
+    allowRowReorder: "אפשר גרירה ושחרור שורות",
     responsiveImageSizeHelp: "לא יחול אם אתה מציין את רוחב או גובה התמונה באופן ישיר.",
     minImageWidth: "רוחב תמונה מינימלי",
     maxImageWidth: "רוחב תמונה מקסימלי",
@@ -615,6 +679,7 @@ export var hebrewStrings = {
     maxImageHeight: "גובה תמונה מקסימלי",
     minValue: "ערך מינימלי",
     maxValue: "ערך מקסימלי",
+    caseInsensitive: "לא תלוי רישיות",
     minLength: "אורך מינימלי (בתווים)",
     allowDigits: "אפשר ספרות",
     minCount: "מינימום כמות",
@@ -633,20 +698,15 @@ export var hebrewStrings = {
     logo: "לוגו (כתובת URL או מחרוזת base64-מוצפנת)",
     questionsOnPageMode: "מבנה הסקר",
     maxTextLength: "אורך מקסימלי לתשובה (בתווים)",
-    maxOthersLength: "אורך מקסימלי להערות (בתווים)",
+    maxCommentLength: "אורך מקסימלי להערות (בתווים)",
+    commentAreaRows: "גובה אזור הערה (בשורות)",
     autoGrowComment: "הרחבה אוטומטית של אזור ההערות כראוי",
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
     maskType: "סוג מסיכת קלט",
-    maskTypes: {
-      none: "ללא",
-      patternmask: "תבנית",
-      numericmask: "מספריים",
-      datetimemask: "תאריך ושעה",
-      currencymask: "מטבע"
-    },
-    focusOnFirstError: "קפיצה לתשובה השגויה הראשונה",
+    autoFocusFirstError: "קפיצה לתשובה השגויה הראשונה",
     checkErrorsMode: "הפעל את האימות",
+    validateVisitedEmptyFields: "אימות שדות ריקים במיקוד שאבד",
     navigateToUrl: "נווט לכתובת URL",
     navigateToUrlOnCondition: "כתובת URL דינמית",
     completedBeforeHtml: "קוד HTML להצגה אם המשתמש כבר מילא את הסקר הזה",
@@ -678,15 +738,36 @@ export var hebrewStrings = {
     minPanelCount: "מספר פאנלים מינימלי",
     maxPanelCount: "מספר פאנלים מקסימלי",
     panelsState: "מצב הרחבת הפאנל הפנימי",
-    panelPrevText: "טקסט הרחבת הפאנל הקודם",
-    panelNextText: "טקסט הרחבת הפאנל הבא",
-    showRangeInProgress: "הצג את סרגל ההתקדמות",
-    panelRemoveButtonLocation: "מיקום לחצן 'הסר פאנל'",
+    prevPanelText: "טקסט הרחבת הפאנל הקודם",
+    nextPanelText: "טקסט הרחבת הפאנל הבא",
+    removePanelButtonLocation: "מיקום לחצן 'הסר פאנל'",
     hideIfRowsEmpty: "הסתר את השאלה אם אין שורות",
     hideColumnsIfEmpty: "הסתר עמודות אם אין שורות",
     rateValues: "ערכי דירוג מותאמים אישית",
     rateCount: "כמות הדירוגים",
     autoGenerate: "איך לציין ערכי דירוג?",
+    slider: {
+      min: "ערך מינימלי",
+      max: "ערך מקסימלי",
+      step: "ערך שלב",
+      showLabels: "הצגת תוויות קנה מידה",
+      tooltipVisibilityPG: "הצגת תיאורי כלים",
+      allowSwap: "אפשר חציית אגודל",
+      labelCount: "מספר התוויות שנוצרו באופן אוטומטי",
+      minValueExpression: "ביטוי ערך מינימלי",
+      maxValueExpression: "ביטוי ערך מקסימלי",
+      autoGenerate: "שינוי קנה מידה של תצורת תוויות",
+      sliderType: "סוג מחוון",
+      minRangeLength: "אורך טווח מינימלי",
+      maxRangeLength: "אורך טווח מקסימלי",
+      customLabels: "תוויות מותאמות אישית",
+      labelFormat: "תבנית תווית",
+      tooltipFormat: "תבנית תיאור כלי"
+    },
+    file: {
+      imageHeight: "גובה תמונה",
+      imageWidth: "רוחב תמונה"
+    },
     hideIfChoicesEmpty: "הסתר את השאלה אם אין בה בחירות",
     minWidth: "רוחב מינימלי (בערכים שמקובלים ב- CSS)",
     maxWidth: "רוחב מקסימלי (בערכים שמקובלים ב- CSS)",
@@ -703,26 +784,28 @@ export var hebrewStrings = {
     keyDuplicationError: "הודעת שגיאה: 'ערך המפתח אינו ייחודי'",
     minSelectedChoices: "מספר הבחירות המינימלי",
     maxSelectedChoices: "מספר הבחירות המקסימלי",
-    showClearButton: "הצג את לחצן הניקוי",
     logoWidth: "רוחב הלוגו (בערכים שמקובלים ב- CSS)",
     logoHeight: "גובה הלוגו (בערכים שמקובלים ב- CSS)",
     readOnly: "קריאה בלבד",
     enableIf: "ניתן לעריכה אם",
-    emptyRowsText: "הודעה: 'אין שורות'",
+    noRowsText: "הודעה: 'אין שורות'",
     separateSpecialChoices: "הפרד בחירות מיוחדות (אף אחת, אחר, בחר הכול)",
     choicesFromQuestion: "העתק בחירות משאלה זו",
     choicesFromQuestionMode: "אילו בחירות להעתיק?",
+    choiceValuesFromQuestion: "השתמש בערכים משאלת עמודת המטריצה או החלונית הבאה כמזהי בחירה",
+    choiceTextsFromQuestion: "השתמש בערכים מעמודת המטריצה או משאלת החלונית הבאה כטקסטים נבחרים",
     progressBarShowPageTitles: "הצגת כותרות עמודים בסרגל ההתקדמות",
     progressBarShowPageNumbers: "הצגת מספרי עמודים במד ההתקדמות",
     showCommentArea: "הצג את אזור התגובה",
     commentPlaceholder: "טקסט ממלא מקום לאזור התגובה",
     displayRateDescriptionsAsExtremeItems: "הצג תיאורי דירוג כערכים קצה",
-    rowsOrder: "סדר השורות",
+    rowOrder: "סדר השורות",
     columnsLayout: "פריסת עמודות",
     columnColCount: "ספירת עמודות מקוננות",
     correctAnswer: "תשובה נכונה",
     defaultPanelValue: "ערכים ברירת מחדל",
     cells: "טקסטי תאים",
+    fileInputPlaceholder: "בחר קובץ או הדבק קישור לקובץ...",
     keyName: "עמודת מפתח",
     itemvalue: {
       visibleIf: "הפוך את האפשרות לגלויה אם",
@@ -745,6 +828,12 @@ export var hebrewStrings = {
       top: "מלמעלה",
       bottom: "מלמטה"
     },
+    previewMode: "מצב תצוגה מקדימה",
+    gridLayoutEnabled: "הפיכת פריסת הרשת לזמינה",
+    gridLayoutColumns: "עמודות פריסת רשת",
+    maskSettings: "קביעות מסיכה",
+    detailErrorLocation: "יישור הודעת שגיאה של הרחבת שורה",
+    // Creator tabs
     tabs: {
       panel: {
         layout: "פריסת חלונית"
@@ -760,6 +849,7 @@ export var hebrewStrings = {
       enableIf: "ניתן לערוך אם",
       requiredIf: "חובה אם",
       rateValues: "ערכי דירוג",
+      sliderSettings: "הגדרות מחוון",
       choicesByUrl: "בחירות משירות RESTful",
       matrixChoices: "בחירות דיפולטיות",
       multipleTextItems: "קלטי טקסט",
@@ -788,6 +878,12 @@ export var hebrewStrings = {
       slider: "מחוון",
       expression: "ביטוי",
       questionSettings: "הגדרות שאלה",
+      header: "כותרת",
+      background: "רקע",
+      appearance: "מראה",
+      accentColors: "צבעי הדגשה",
+      surfaceBackground: "רקע פני השטח",
+      scaling: "שינוי גודל",
       others: "אחרים"
     },
     editProperty: "עריכת מאפיין '{0}'",
@@ -797,8 +893,7 @@ export var hebrewStrings = {
     columnsEnableIf: "העמודות יוצגו אם",
     rowsEnableIf: "השורות יוצגו אם",
     innerIndent: "הוסף כניסות פנימיות",
-    defaultValueFromLastRow: "קבל ערכי ברירת מחדל מהשורה האחרונה",
-    defaultValueFromLastPanel: "קבל ערכי ברירת מחדל מהפאנל האחרון",
+    copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהפאנל האחרון",
     enterNewValue: "נא להזין את הערך.",
     noquestions: "אין שאלות בשאלון.",
     createtrigger: "יש ליצור מפעיל",
@@ -840,7 +935,52 @@ export var hebrewStrings = {
     minWidth_placeholder: "לדוגמה: 600px",
     maxWidth_placeholder: "לדוגמה: 50%",
     imageHeight_placeholder: "אוטומטי",
-    imageWidth_placeholder: "אוטומטי"
+    imageWidth_placeholder: "אוטומטי",
+    itemTitleWidth_placeholder: "לדוגמה: 100px",
+    theme: {
+      themeName: "ערכת נושא",
+      isPanelless: "מראה השאלה",
+      editorPanel: "רקע ורדיוס פינה",
+      questionPanel: "רקע ורדיוס פינה",
+      primaryColor: "צבע הדגשה",
+      panelBackgroundTransparency: "אטימות רקע של החלונית",
+      questionBackgroundTransparency: "אטימות רקע השאלה",
+      fontSize: "גודל גופן",
+      scale: "סולם",
+      cornerRadius: "רדיוס פינה",
+      advancedMode: "מצב מתקדם",
+      pageTitle: "גופן כותרת",
+      pageDescription: "גופן תיאור",
+      questionTitle: "גופן כותרת",
+      questionDescription: "גופן תיאור",
+      editorFont: "גופן",
+      backgroundOpacity: "אטימות",
+      "--sjs-font-family": "משפחת גופנים",
+      "--sjs-general-backcolor-dim": "צבע רקע",
+      "--sjs-primary-backcolor": "רקע הדגשה",
+      "--sjs-primary-forecolor": "הדגשת החזית",
+      "--sjs-special-red": "הודעות שגיאה",
+      "--sjs-shadow-small": "אפקטי צל",
+      "--sjs-shadow-inner": "אפקטי צל",
+      "--sjs-border-default": "צבעים"
+    },
+    "header@header": {
+      headerView: "נוף",
+      logoPosition: "מיקום הלוגו",
+      surveyTitle: "גופן כותרת סקר",
+      surveyDescription: "גופן תיאור סקר",
+      headerTitle: "גופן כותרת סקר",
+      headerDescription: "גופן תיאור סקר",
+      inheritWidthFrom: "רוחב אזור תוכן",
+      textAreaWidth: "רוחב טקסט",
+      backgroundColorSwitch: "צבע רקע",
+      backgroundImage: "תמונת רקע",
+      backgroundImageOpacity: "אטימות",
+      overlapEnabled: "חופפים",
+      logoPositionX: "מיקום הלוגו",
+      titlePositionX: "מיקום בתפקיד",
+      descriptionPositionX: "תיאור מיקום"
+    }
   },
   // Property values
   pv: {
@@ -869,10 +1009,11 @@ export var hebrewStrings = {
     firstExpanded: "הפאנל הראשון מורחב",
     off: "הסתר מספרי שאלות",
     list: "רשימה",
+    carousel: "קרוסלה",
+    tab: "כרטיסיות",
     progressTop: "ניווט בפאנל + סרגל התקדמות בחלק העליון",
     progressBottom: "ניווט בפאנל + סרגל התקדמות בחלק התחתון",
     progressTopBottom: "ניווט בפאנל + סרגל התקדמות בחלק העליון והתחתון",
-    tab: "כרטיסיות",
     horizontal: "אופקי",
     vertical: "אנכי",
     top: "עליון",
@@ -930,6 +1071,77 @@ export var hebrewStrings = {
       url: "כתובת URL",
       week: "שבוע"
     },
+    sliderType: {
+      single: "ערך יחיד",
+      range: "טווח"
+    },
+    autocomplete: {
+      name: "שם מלא",
+      "honorific-prefix": "קידומת",
+      "given-name": "שם פרטי",
+      "additional-name": "שם אמצעי",
+      "family-name": "שם משפחה",
+      "honorific-suffix": "סיומת",
+      nickname: "כינוי",
+      "organization-title": "תפקיד",
+      username: "שם משתמש",
+      "new-password": "סיסמה חדשה",
+      "current-password": "סיסמה נוכחית",
+      organization: "שם הארגון",
+      "street-address": "כתובת הרחוב המלאה",
+      "address-line1": "כתובת שורה 1",
+      "address-line2": "כתובת שורה 2",
+      "address-line3": "כתובת שורה 3",
+      "address-level4": "כתובת ברמה 4",
+      "address-level3": "כתובת ברמה 3",
+      "address-level2": "כתובת ברמה 2",
+      "address-level1": "כתובת ברמה 1",
+      country: "קוד מדינה",
+      "country-name": "שם מדינה",
+      "postal-code": "מיקוד",
+      "cc-name": "שם בעל הכרטיס",
+      "cc-given-name": "שם פרטי של בעל הכרטיס",
+      "cc-additional-name": "שם אמצעי של בעל הכרטיס",
+      "cc-family-name": "שם משפחה של בעל הכרטיס",
+      "cc-number": "מספר כרטיס אשראי",
+      "cc-exp": "תאריך תפוגה",
+      "cc-exp-month": "חודש תפוגה",
+      "cc-exp-year": "שנת תפוגה",
+      "cc-csc": "קוד אבטחה של כרטיס",
+      "cc-type": "סוג כרטיס אשראי",
+      "transaction-currency": "מטבע עסקה",
+      "transaction-amount": "סכום העסקה",
+      language: "שפה מועדפת",
+      bday: "יום הולדת",
+      "bday-day": "יום הולדת",
+      "bday-month": "חודש יום הולדת",
+      "bday-year": "שנת יום הולדת",
+      sex: "מין",
+      url: "כתובת אתר אינטרנט",
+      photo: "תמונת פרופיל",
+      tel: "מספר טלפון",
+      "tel-country-code": "קידומת מדינה לטלפון",
+      "tel-national": "מספר טלפון ארצי",
+      "tel-area-code": "אזור חיוג",
+      "tel-local": "מספר טלפון מקומי",
+      "tel-local-prefix": "קידומת טלפון מקומי",
+      "tel-local-suffix": "סיומת טלפון מקומי",
+      "tel-extension": "שלוחת טלפון",
+      email: "כתובת דוא\"ל",
+      impp: "פרוטוקול העברת הודעות מיידיות"
+    },
+    maskType: {
+      none: "ללא",
+      pattern: "תבנית",
+      numeric: "מספריים",
+      datetime: "תאריך ושעה",
+      currency: "מטבע"
+    },
+    inputTextAlignment: {
+      auto: "אוטומטי",
+      left: "שמאל",
+      right: "ימין"
+    },
     all: "הכל",
     page: "עמוד",
     survey: "שאלון",
@@ -939,11 +1151,14 @@ export var hebrewStrings = {
     questionsOnPageMode: {
       standard: "מבנה מקורי",
       singlePage: "הצג את כל השאלות בעמוד אחד",
-      questionPerPage: "הצגת שאלה בודדת בכל עמוד"
+      questionPerPage: "הצגת שאלה בודדת בכל עמוד",
+      inputPerPage: "הצגת שדה קלט יחיד בכל עמוד"
     },
     noPreview: "אין תצוגה מקדימה",
     showAllQuestions: "הצג את כל השאלות",
     showAnsweredQuestions: "הצג רק שאלות עם תשובות",
+    allQuestions: "הצג את כל השאלות",
+    answeredQuestions: "הצג שאלות שנענו בלבד",
     pages: "עמודים שהושלמו",
     questions: "שאלות שקיבלו תשובה",
     requiredQuestions: "שאלות חובה שקיבלו תשובה",
@@ -959,13 +1174,10 @@ export var hebrewStrings = {
     showNavigationButtons: {
       none: "מוסתר"
     },
-    showTimerPanel: {
-      none: "מוסתר"
+    timerInfoMode: {
+      combined: "שני הצדדים"
     },
-    showTimerPanelMode: {
-      all: "שני הצדדים"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "תלוי בפריסת המטריצה"
     },
     panelsState: {
@@ -1013,6 +1225,7 @@ export var hebrewStrings = {
       onPage: "איפוס בכל עמוד",
       onpanel: "איפוס בכל חלונית",
       onPanel: "איפוס בכל חלונית",
+      recursive: "מספור רקורסיבי",
       onSurvey: "המשך לאורך הסקר",
       off: "ללא מספור"
     },
@@ -1036,17 +1249,19 @@ export var hebrewStrings = {
       percent: "אחוז",
       date: "תמר"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "מקורי"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "מקורי"
     },
-    showProgressBar: {
-      off: "מוסתר",
+    progressBarLocation: {
+      top: "סביבון",
+      bottom: "ישבן",
       topbottom: "עליון ותחתון",
       aboveheader: "מעל הכותרת העליונה",
-      belowheader: "מתחת לכותרת העליונה"
+      belowheader: "מתחת לכותרת העליונה",
+      off: "מוסתרים"
     },
     sum: "סכום",
     count: "מנה",
@@ -1056,6 +1271,42 @@ export var hebrewStrings = {
     searchMode: {
       contains: "מכיל",
       startsWith: "מתחיל ב"
+    },
+    backgroundImageFit: {
+      auto: "אוטומטי",
+      cover: "כריכה",
+      contain: "להכיל",
+      fill: "מתיחה",
+      tile: "אריח"
+    },
+    backgroundImageAttachment: {
+      fixed: "קבוע",
+      scroll: "לגלול"
+    },
+    headerView: {
+      basic: "בסיסי",
+      advanced: "מתקדמים"
+    },
+    inheritWidthFrom: {
+      survey: "זהה לסקר",
+      container: "התאמה למיכל"
+    },
+    backgroundColorSwitch: {
+      none: "ללא",
+      accentColor: "צבע הדגשה",
+      custom: "מנהג"
+    },
+    colorPalette: {
+      light: "אור",
+      dark: "חשוך"
+    },
+    isPanelless: {
+      "false": "ברירת מחדל",
+      "true": "ללא פאנלים"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "זהה לסקר",
+      container: "זהה למיכל"
     }
   },
   // Operators
@@ -1102,7 +1353,9 @@ export var hebrewStrings = {
   ts: {
     selectPage: "בחר את העמוד לבדיקה",
     showInvisibleElements: "הצג רכיבים בלתי נראים",
-    hideInvisibleElements: "הסתר רכיבים בלתי נראים"
+    hideInvisibleElements: "הסתר רכיבים בלתי נראים",
+    prevPage: "הקודמת",
+    nextPage: "הבא"
   },
   validators: {
     answercountvalidator: "מספר תשובות",
@@ -1130,6 +1383,13 @@ export var hebrewStrings = {
     currencymask: {
       prefix: "לדוגמה: $",
       suffix: "לדוגמה: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "לדוגמה: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "לדוגמה: 30%",
+      questionTitleWidth: "לדוגמה: 200px"
     }
   },
   pehelp: {
@@ -1140,13 +1400,17 @@ export var hebrewStrings = {
       enableIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       questionTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
-      questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
+      questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       page: "מיקום מחדש של החלונית לסוף עמוד שנבחר.",
       innerIndent: "מוסיף רווח או שוליים בין תוכן החלונית לגבול השמאלי של תיבת החלונית.",
       startWithNewLine: "בטל את הבחירה כדי להציג את החלונית בשורה אחת עם השאלה או החלונית הקודמת. ההגדרה אינה חלה אם החלונית היא הרכיב הראשון בטופס.",
       state: "בחר מתוך: \"מורחב\" - הלוח מוצג במלואו וניתן לכווץ; \"מכווץ\" - הלוח מציג רק את הכותרת והתיאור וניתן להרחיבו; \"נעול\" - הלוח מוצג במלואו ולא ניתן לכווץ.",
-      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו')."
+      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
+      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בלוח זה.",
+      effectiveColSpan: "מציין כמה עמודות תפרוס חלונית זו בפריסת הרשת.",
+      gridLayoutColumns: "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
     },
     paneldynamic: {
       name: "מזהה חלונית שאינו גלוי למשיבים.",
@@ -1154,7 +1418,8 @@ export var hebrewStrings = {
       visibleIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת החלונית.",
       enableIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
-      templateTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      templateQuestionTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      templateQuestionTitleWidth: "מגדיר רוחב עקבי לכותרות השאלות כשהן מיושרות לשמאל של תיבות השאלה שלהן. מקבל ערכי CSS (px, %, in, pt וכדומה).",
       templateErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
       errorLocation: "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       page: "מיקום מחדש של החלונית לסוף עמוד שנבחר.",
@@ -1164,17 +1429,25 @@ export var hebrewStrings = {
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
       templateTitle: "הקלד תבנית לכותרות חלוניות דינמיות. השתמש ב- {panelIndex} למיקום הכללי של החלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
       templateTabTitle: "הקלד תבנית עבור כותרות כרטיסיות. השתמש ב- {panelIndex} למיקום הכללי של חלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
+      tabTitlePlaceholder: "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות.",
       templateVisibleIf: "קביעה זו מאפשרת לשלוט בתצוגה של חלוניות בודדות בחלונית הדינמית. השתמש במציין המיקום '{panel}' כדי להפנות לחלונית הנוכחית בביטוי שלך.",
       titleLocation: "הגדרה זו עוברת בירושה אוטומטית לכל השאלות בחלונית זו. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
       descriptionLocation: "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל).",
       newPanelPosition: "מגדיר את המיקום של חלונית חדשה שנוספה. כברירת מחדל, חלוניות חדשות מתווספות לסוף. בחר \"הבא\" כדי להוסיף חלונית חדשה אחרי הנוכחית.",
-      defaultValueFromLastPanel: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
-      keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית."
+      copyDefaultValueFromLastEntry: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
+      keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת חלונית."
     },
+    matrixdynamic: {
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת שורה.",
+      detailPanelShowOnAdding: "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
+    },
+    copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     defaultValueExpression: "הגדרה זו מאפשרת לך להקצות ערך ברירת מחדל לתשובה בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על-ידי ביטוי זה משמש כערך ברירת המחדל הראשוני שניתן לעקוף באמצעות קלט ידני של משיב.",
     resetValueIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי הקלט של המשיב יאופס לערך בהתבסס על \"ביטוי ערך ברירת מחדל\" או \"הגדר ביטוי ערך\" או על הערך \"תשובת ברירת מחדל\" (אם אחד מהם מוגדר).",
     setValueIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי להפעיל את \"Set value expression\" ולהקצות באופן דינמי את הערך המתקבל כתגובה.",
     setValueExpression: "ציין ביטוי המגדיר את הערך שיש להגדיר כשהתנאים בכלל \"הגדר ערך אם\" מתקיימים. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על ידי ביטוי זה ניתן לדריסת קלט ידני של המשיב.",
+    gridLayoutEnabled: "יוצר הסקר מאפשר לך להתאים באופן ידני את רוחב השורה של רכיבי טופס כדי לשלוט בפריסה. אם פעולה זו אינה מפיקה את התוצאה הרצויה, ניתן להפעיל את פריסת הרשת, הבונה רכיבי טופס באמצעות מערכת מבוססת עמודות. כדי להגדיר עמודות פריסה, בחר עמוד או חלונית והשתמש בטבלה \"הגדרות שאלה\" → \"עמודות רשת\". כדי להתאים את מספר העמודות ששאלה משתרעת, בחר אותה והגדר את הערך הרצוי בשדה \"פריסה\" → \"טווח עמודות\".",
     question: {
       name: "מזהה שאלה שאינו גלוי למשיבים.",
       description: "הקלד כותרת משנה של שאלה.",
@@ -1195,7 +1468,8 @@ export var hebrewStrings = {
       textUpdateMode: "בחר מתוך: \"על מיקוד אבוד\" - הערך מתעדכן כאשר שדה הקלט מאבד את המיקוד; \"בעת הקלדה\" - הערך מתעדכן בזמן אמת, כאשר המשתמשים מקלידים. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מיקוד אבוד\" כברירת מחדל).",
       url: "באפשרותך להשתמש בכל שירות אינטרנט כמקור נתונים לשאלות אמריקאיות. כדי לאכלס ערכי בחירה, הזן את כתובת ה- URL של השירות המספק את הנתונים.",
       searchMode: "פעולת השוואה המשמשת לסינון הרשימה הנפתחת.",
-      textWrapEnabled: "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו."
+      textWrapEnabled: "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו.",
+      effectiveColSpan: "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
     },
     signaturepad: {
       signatureWidth: "קובע את רוחב אזור החתימה המוצג ואת התמונה שתיווצר.",
@@ -1203,8 +1477,9 @@ export var hebrewStrings = {
       signatureAutoScaleEnabled: "בחר אם ברצונך שאזור החתימה ימלא את כל השטח הזמין בתיבת השאלה תוך שמירה על יחס הרוחב-גובה המוגדר כברירת מחדל של 3:2. כאשר מוגדרים ערכי רוחב וגובה מותאמים אישית, ההגדרה תשמור על יחס הרוחב-גובה של ממדים אלה."
     },
     file: {
-      imageHeight: "התאמת גובה התמונה בתוצאות הסקר.",
-      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר."
+      imageHeight: "מציין את גובה התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הגובה בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, גובה התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות.",
+      imageWidth: "מציין את רוחב התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הרוחב בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, רוחב התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות.",
+      allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
     },
     image: {
       contentMode: "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
@@ -1223,7 +1498,8 @@ export var hebrewStrings = {
     },
     // survey templates
     survey: {
-      mode: "בחר בין: \"ניתן לעריכה\" - מאפשר למשיבים למלא את הסקר שלך; \"לקריאה בלבד\" - משבית עריכת טפסים."
+      readOnly: "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך.",
+      progressBarLocation: "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
     },
     matrixdropdowncolumn: {
       name: "מזהה עמודה שאינו גלוי למשיבים.",
@@ -1232,27 +1508,46 @@ export var hebrewStrings = {
       visibleIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את נראות העמודה.",
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד עבור העמודה.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
-      showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה."
+      showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
+      colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
     },
+    slider: {
+      min: "המספר הנמוך ביותר שמשתמשים יכולים לבחור.",
+      max: "המספר הגבוה ביותר שמשתמשים יכולים לבחור.",
+      step: "המרווח בין ערכי קנה המידה הניתנים לבחירה. לדוגמה, שלב של 5 יאפשר למשתמשים לבחור 0, 5, 10 וכו'.",
+      minRangeLength: "המרחק המינימלי בין אגודלי המחוון שמשתמש יכול להגדיר.",
+      maxRangeLength: "המרחק המרבי בין אגודלי המחוון שמשתמש יכול להגדיר.",
+      labelCount: "מציין כמה תוויות קנה מידה יש ליצור. ערך של -1 פירושו שהמספר מחושב באופן אוטומטי בהתבסס על ערך המינימום והערך המקסימלי.",
+      labelFormat: "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל.",
+      customLabels: "מאפשר לך להגדיר תוויות מותאמות אישית בערכים ספציפיים ולהקצות להן טקסט מתאים (לדוגמה, 0 = \"גרוע\", 100 = \"מצוין\").",
+      tooltipFormat: "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל.",
+      allowSwap: "מאפשר למשתמשים להזיז אגודל אחד מעבר לשני.",
+      allowClear: "מציג לחצן שמנקה את ערך המחוון שנבחר ומגדיר אותו כלא מוגדר.",
+      minValueExpression: "מגדיר את הערך המינימלי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד.",
+      maxValueExpression: "מגדיר את הערך המרבי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
+    },
+    isExclusive: "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה.",
+    caseInsensitive: "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך.",
     widthMode: "בחר מתוך: \"סטטי\" - קובע רוחב קבוע; \"מגיב\" - עושה את הסקר לתפוס את מלוא רוחב המסך; \"אוטומטי\" - חל על כל אחד מהשניים בהתאם לסוגי השאלות המשמשים.",
     cookieName: "עוגיות מונעות ממשתמשים למלא את אותו סקר פעמיים.",
     logo: "הדבק קישור לתמונה (ללא מגבלות גודל) או לחץ על סמל התיקייה כדי לעיין בקובץ מהמחשב שלך (עד 64KB).",
     logoWidth: "הגדרת רוחב לוגו ביחידות CSS (px, %, in, pt וכו').",
     logoHeight: "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו').",
     logoFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
-    goNextPageAutomatic: "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי.",
-    allowCompleteSurveyAutomatic: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
+    autoAdvanceEnabled: "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות.",
+    autoAdvanceAllowComplete: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
     showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
-    showProgressBar: "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר.",
+    navigationButtonsLocation: "הגדרת המיקום של לחצני ניווט בעמוד.",
     showPreviewBeforeComplete: "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד.",
     questionTitleLocation: "חל על כל השאלות בסקר. ניתן לדרוס הגדרה זו באמצעות כללי יישור כותרות ברמות נמוכות יותר: חלונית, עמוד או שאלה. הגדרה ברמה נמוכה יותר תעקוף את אלה ברמה גבוהה יותר.",
-    requiredText: "סמל או רצף של סמלים המציינים כי נדרשת תשובה.",
+    requiredMark: "סמל או רצף של סמלים המציינים כי נדרשת תשובה.",
     questionStartIndex: "הזן מספר או אות שבאמצעותם ברצונך להתחיל במספור.",
     questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה.",
-    focusFirstQuestionAutomatic: "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט.",
-    questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
+    autoFocusFirstQuestion: "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט.",
+    questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     maxTextLength: "לשאלות הזנת טקסט בלבד.",
-    maxOthersLength: "להערות לשאלה בלבד.",
+    maxCommentLength: "להערות לשאלה בלבד.",
+    commentAreaRows: "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. אם הקלט תופס שורות נוספות, פס הגלילה מופיע.",
     autoGrowComment: "בחר אם ברצונך שהערות שאלה ושאלות טקסט ארוך יגדלו באופן אוטומטי לגובה בהתבסס על אורך הטקסט שהוזנו.",
     allowResizeComment: "להערות לשאלות ולשאלות טקסט ארוך בלבד.",
     calculatedValues: "משתנים מותאמים אישית משמשים כמשתני ביניים או משתני עזר המשמשים בחישובי טפסים. הם לוקחים תשומות משיבים כערכי מקור. לכל משתנה מותאם אישית יש שם ייחודי וביטוי שעליו הוא מבוסס.",
@@ -1266,10 +1561,9 @@ export var hebrewStrings = {
     rowTitleWidth: "מקבל ערכי CSS (px, %, in, pt וכו').",
     totalText: "נראה רק כאשר לפחות עמוד אחד מכיל עמוד סוג או ביטוי סוג.",
     cellErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לתא עם קלט לא חוקי. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
+    detailErrorLocation: "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
-    confirmDelete: "מפעיל בקשה המבקשת לאשר את מחיקת השורות.",
-    defaultValueFromLastRow: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     keyName: "אם העמודה שצוינה מכילה ערכים זהים, הסקר יזרוק את השגיאה \"ערך מפתח לא ייחודי\".",
     description: "הקלד כותרת משנה.",
     locale: "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים.",
@@ -1277,19 +1571,25 @@ export var hebrewStrings = {
     imageFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
     autoGrow: "מגדיל בהדרגה את גובה שדה הקלט בעת הזנת הנתונים. דורס את ההגדרה \"גובה שדה קלט (בקווים)\".",
     allowResize: "נקודת האחיזה לשינוי גודל (או נקודת האחיזה) מופיעה בפינה וניתן לגרור אותה כדי לשנות את גודל שדה הקלט.",
-    maxTimeToFinish: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה.",
-    maxTimeToFinishPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+    timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה.",
+    timeLimitPerPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+    validateVisitedEmptyFields: "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים.",
     page: {
-      maxTimeToFinish: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+      name: "מזהה דף שאינו גלוי למשיבים.",
+      description: "הקלד כותרת משנה של דף.",
+      navigationTitle: "כיתוב המוצג בלחצן ניווט בסרגל ההתקדמות או בתוכן העניינים (TOC). אם תשאיר שדה זה ריק, לחצן הניווט ישתמש בכותרת הדף או בשם הדף. כדי להפעיל את מד ההתקדמות או תוכן העניינים, עבור אל \"סקר\" →\"ניווט\".",
+      timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
       visibleIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת העמוד.",
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       questionTitleLocation: "חל על כל השאלות בדף זה. אם ברצונך לדרוס הגדרה זו, הגדר כללי יישור כותרת לשאלות או חלוניות בודדות. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
-      questionsOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
-      navigationButtonsVisibility: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
+      questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
+      showNavigationButtons: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\".",
+      gridLayoutColumns: "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
     },
-    showTimerPanel: "מגדיר את הניראות והמיקום של טיימר בדף.",
+    timerLocation: "הגדרת המיקום של טיימר בעמוד.",
     panelsState: "בחר מתוך: \"נעול\" - משתמשים אינם יכולים להרחיב או לכווץ חלוניות; \"כווץ הכל\" - כל הלוחות מתחילים במצב מכווץ; \"הרחב הכל\" - כל הלוחות מתחילים במצב מורחב; \"מורחב ראשון\" - רק הלוח הראשון מורחב בתחילה.",
     imageLinkName: "הזן שם מאפיין משותף בתוך מערך האובייקטים המכיל את כתובות ה- URL של תמונות או קבצי וידאו שברצונך להציג ברשימת האפשרויות.",
     choices: "הערך השמאלי משמש כמזהה פריט המשמש בכללי תנאי, הערך הימני מוצג למשיבים.",
@@ -1299,9 +1599,13 @@ export var hebrewStrings = {
     maxWidth: "מקבל ערכי CSS (px, %, in, pt וכו').",
     width: "מקבל ערכי CSS (px, %, in, pt וכו').",
     valueName: "אם אינך מגדיר מאפיין זה, התשובה תאוחסן בשדה המסוים במאפיין השם.",
+    defaultDisplayValue: "ערך המוצג בשאלות HTML ובכותרות ובתיאורים הדינמיים של רכיבי סקר כאשר ערך השאלה ריק.",
     useDisplayValuesInDynamicTexts: "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. כשבוחרים באפשרות זו, הגדרה זו מציגה ערך תצוגה במקום ערך מזהה בשאלות HTML ובכותרות דינמיות ובתיאורים של רכיבי סקר.",
     clearIfInvisible: "בחר אם לנקות או לא לנקות ערכי שאלות המוסתרים על-ידי לוגיקה מותנית ומתי לעשות זאת. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"עם השלמת הסקר\" כברירת מחדל).",
     choicesFromQuestionMode: "בחר מתוך: \"הכל\" - מעתיק את כל אפשרויות הבחירה מהשאלה שנבחרה; \"נבחר\" - מעתיק באופן דינמי רק אפשרויות בחירה שנבחרו; \"לא נבחר\" - מעתיק באופן דינמי רק אפשרויות בחירה שלא נבחרו. האפשרויות \"ללא\" ו\"אחר\" מועתקות כברירת מחדל אם הן מופעלות בשאלת המקור.",
+    choiceValuesFromQuestion: "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו עמודת מטריצה או שאלת חלונית יספקו את המזהים.",
+    choiceTextsFromQuestion: "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו שאלת עמודת מטריצה או חלונית תספק את טקסטי התצוגה.",
+    allowCustomChoices: "בחר כדי לאפשר למשיבים להוסיף אפשרויות משלהם אם האפשרות הרצויה אינה זמינה ברשימה הנפתחת. אפשרויות מותאמות אישית יאוחסנו באופן זמני בלבד למשך הפעלת הדפדפן הנוכחית.",
     showOtherItem: "כשבוחרים באפשרות זו, משתמשים יכולים לכלול קלט נוסף בתיבת הערות נפרדת.",
     separateSpecialChoices: "מציג כל אפשרות בחירה מיוחדת (\"ללא\", \"אחר\", \"בחר הכל\") בשורה חדשה, גם בשעת שימוש בפריסה מרובת עמודות.",
     path: "ציין את המיקום בתוך ערכת נתוני השירות שבו ממוקם מערך האובייקטים המשמש כיעד. השאר ריק אם כתובת ה- URL כבר מצביעה על המערך.",
@@ -1323,8 +1627,9 @@ export var hebrewStrings = {
     needConfirmRemoveFile: "מפעיל בקשה המבקשת לאשר את מחיקת הקובץ.",
     selectToRankEnabled: "אפשר לדרג רק בחירות נבחרות. המשתמשים יגררו פריטים נבחרים מרשימת האפשרויות כדי לסדר אותם באזור הדירוג.",
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
-    itemSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
-    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים",
+    inputSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
+    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו').",
+    inputTextAlignment: "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא.",
     altText: "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות.",
     rateColorMode: "מגדיר את צבע האמוג'י שנבחר כשסוג סמל הדירוג מוגדר ל\"סמיילי\". בחר בין: \"ברירת מחדל\" - האמוג'י שנבחר מופיע בצבע סקר ברירת מחדל; \"קנה מידה\" - האמוג'י שנבחר יורש צבע מסולם הדירוג.",
     expression: {
@@ -1340,6 +1645,7 @@ export var hebrewStrings = {
     filePlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים\" או כאשר המצלמה אינה זמינה",
     photoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"מצלמה\".",
     fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\".",
+    colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת.",
     masksettings: {
       saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
     },
@@ -1357,7 +1663,23 @@ export var hebrewStrings = {
     currencymask: {
       prefix: "סימן אחד או יותר שיוצגו לפני הערך.",
       suffix: "סימן אחד או יותר שיוצגו לאחר הערך."
-    }
+    },
+    theme: {
+      isPanelless: "הגדרה זו חלה רק על שאלות מחוץ לחלונית.",
+      primaryColor: "הגדרת צבע משלים המדגיש רכיבי סקר מרכזיים.",
+      panelBackgroundTransparency: "התאמת השקיפות של חלוניות ותיבות שאלה ביחס לרקע הסקר.",
+      questionBackgroundTransparency: "התאמת השקיפות של רכיבי הקלט ביחס לרקע הסקר.",
+      cornerRadius: "קובע את רדיוס הפינה לכל הרכיבים המלבניים. הפעילו את 'מצב מתקדם' אם ברצונכם להגדיר ערכי רדיוס פינה בודדים לרכיבי קלט או לחלוניות ולתיבות שאלה.",
+      "--sjs-general-backcolor-dim": "מגדיר את צבע הרקע הראשי של הסקר."
+    },
+    header: {
+      inheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
+      textAreaWidth: "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים.",
+      overlapEnabled: "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת.",
+      mobileHeight: "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
+    },
+    progressBarInheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
+    singleInputTitleTemplate: "משמש כאשר 'פריסת הסקר' מוגדרת ל'שדה קלט יחיד לכל עמוד'. בפריסה זו, המטריצה מפוצלת כך שכל שדה קלט מופיע בעמוד נפרד. השתמש במציין המיקום {rowIndex} כדי להוסיף מספור אוטומטי, ב- {rowTitle} או ב- {rowName} כדי להפנות לכותרת או למזהה של השורה, וב- {row.columnid} כדי לכלול את הערך של עמודת מטריצה ספציפית."
   },
   // Properties
   p: {
@@ -1409,7 +1731,7 @@ export var hebrewStrings = {
     detailElements: "רכיבי פרטים",
     allowAdaptiveActions: "אפשר פעולות מותאמות",
     defaultRowValue: "ערך ברירת מחדל לשורה",
-    detailPanelShowOnAdding: "הצג פאנל פרטים בעת הוספה",
+    detailPanelShowOnAdding: "הרחבה אוטומטית של פרטי שורה חדשה",
     choicesLazyLoadEnabled: "אפשר טעינת רשימות עם פריטים עצלים",
     choicesLazyLoadPageSize: "גודל עמוד בטעינת רשימות",
     inputFieldComponent: "רכיב שדה קלט",
@@ -1420,11 +1742,11 @@ export var hebrewStrings = {
     maxValueExpression: "ביטוי ערך מקסימלי",
     step: "צעד",
     dataList: "רשימת נתונים",
-    itemSize: "גודל פריט",
+    inputSize: "גודל פריט",
     itemTitleWidth: "רוחב תווית פריט (בפיקסלים)",
+    inputTextAlignment: "יישור ערך קלט",
     elements: "רכיבים",
     content: "תוכן",
-    navigationButtonsVisibility: "נראות כפתורי ניווט",
     navigationTitle: "כותרת ניווט",
     navigationDescription: "תיאור ניווט",
     longTap: "לחיצה ארוכה",
@@ -1438,6 +1760,7 @@ export var hebrewStrings = {
     imageFit: "התאמת התמונה",
     altText: "טקסט חלופי",
     height: "גובה",
+    mobileHeight: "גובה בסמארטפונים",
     penColor: "צבע העט",
     backgroundColor: "צבע רקע",
     templateElements: "רכיבי תבנית",
@@ -1460,104 +1783,47 @@ export var hebrewStrings = {
     allowCameraAccess: "אפשר גישה למצלמה",
     scaleColorMode: "מצב צבע לסולם",
     rateColorMode: "מצב צבע לדירוג",
-    copyDisplayValue: "העתקת ערך תצוגה"
+    copyDisplayValue: "העתקת ערך תצוגה",
+    effectiveColSpan: "טווח עמודות",
+    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות"
   },
   theme: {
-    "--background": "צבע רקע",
-    "--background-dim-light": "צבע רקע אור",
-    "--primary-foreground": "צבע ראשי",
-    "--foreground": "צבע קדמי",
-    "--base-unit": "יחידת בסיס",
     advancedMode: "מצב מתקדם",
-    groupGeneral: "כללי",
-    groupHeader: "כותרת",
-    groupBackground: "רקע",
-    groupAppearance: "מראה",
-    themeName: "ערכת נושא",
-    themeMode: "מצב שאלון",
-    themeModePanels: "ברירת מחדל",
-    themeModeLightweight: "בלעדי פאנלים",
-    themePaletteLight: "בהיר",
-    themePaletteDark: "אפל",
-    primaryColor: "צבע משנה",
+    pageTitle: "גופן כותרת עמוד",
+    questionTitle: "גופן כותרת שאלה",
+    editorPanel: "רקע אלמנט קלט",
+    lines: "קווים",
     primaryDefaultColor: "ברירת מחדל",
     primaryDarkColor: "עכבר",
     primaryLightColor: "נבחר",
-    coverTitleForecolor: "צביעת כותרת מראש",
-    coverDescriptionForecolor: "תיאור צבע קדמי",
-    coverOverlapEnabled: "חופפים",
     backgroundDimColor: "צבע רקע",
-    backgroundImage: "תמונת רקע",
-    backgroundImageFitAuto: "אוטומטי",
-    backgroundImageFitCover: "כיסוי",
-    backgroundImageFitContain: "התאמה",
-    backgroundImageFitFill: "מתיחה",
-    backgroundImageFitTile: "אריח",
-    backgroundOpacity: "שקיפות רקע",
-    backgroundImageAttachmentFixed: "קבוע",
-    backgroundImageAttachmentScroll: "גלילה",
-    panelBackgroundTransparency: "שקיפות רקע לפאנלים",
-    questionBackgroundTransparency: "שקיפות רקע לשאלות",
-    questionTitle: "גופן כותרת שאלה",
-    editorPanel: "רקע אלמנט קלט",
-    backgroundCornerRadius: "רקע ורדיוס פינה",
+    cornerRadius: "רדיוס פינה",
     backcolor: "רקע ברירת מחדל",
     hovercolor: "רקע העברת עכבר",
     borderDecoration: "קישוט גבול",
-    accentBackground: "רקע הדגשה",
-    accentForeground: "קדמי הדגשה",
+    fontColor: "צבע גופן",
+    backgroundColor: "צבע רקע",
     primaryForecolor: "צבע ברירת מחדל",
     primaryForecolorLight: "צבע כבוי",
-    colorsTitle: "צבעים",
     font: "גופן",
-    lines: "קווים",
     borderDefault: "כהה",
     borderLight: "בהיר",
-    fontFamily: "סוג גופן",
-    fontSize: "גודל גופן",
-    color: "צבע",
-    placeholderColor: "צבע מציין מקום",
-    size: "גודל",
+    fontFamily: "משפחת גופנים",
     fontWeightRegular: "רגיל",
     fontWeightHeavy: "כבד",
-    fontWeightSemiBold: "חצי מודגש",
-    fontWeightBold: "מודגש",
-    scale: "קנה מידה",
-    cornerRadius: "רדיוס פינה",
-    surveyTitle: "גופן כותרת שאלון",
-    surveyDescription: "גופן תיאור סקר",
-    pageTitle: "גופן כותרת עמוד",
-    titleFont: "גופן כותרת",
-    descriptionFont: "גופן תיאור",
+    fontWeightSemiBold: "חצי נועז",
+    fontWeightBold: "נועז",
+    color: "צבע",
+    placeholderColor: "צבע מציין מיקום",
+    size: "גודל",
+    opacity: "אטימות",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "הוספת אפקט צל",
-    opacity: "שקיפות",
     boxShadowBlur: "טשטוש",
     boxShadowSpread: "התפשטות",
     boxShadowDrop: "הטפה",
     boxShadowInner: "פנימי",
-    shadow: "אפקטי צל",
-    headerView: "נוף",
-    headerViewBasic: "בסיסי",
-    headerViewAdvanced: "מתקדמים",
-    coverInheritWidthFrom: "רוחב אזור תוכן",
-    coverInheritWidthFromSurvey: "זהה לסקר",
-    coverInheritWidthFromContainer: "התאמה למיכל",
-    coverTextAreaWidth: "רוחב טקסט",
-    coverBackgroundColorSwitch: "צבע רקע",
-    coverBackgroundColorNone: "ללא",
-    coverBackgroundColorAccentColor: "צבע הדגשה",
-    coverBackgroundColorCustom: "מנהג",
-    horizontalAlignmentLeft: "שמאל",
-    horizontalAlignmentCenter: "מרכז",
-    horizontalAlignmentRight: "ימין",
-    verticalAlignmentTop: "סביבון",
-    verticalAlignmentMiddle: "אמצע",
-    verticalAlignmentBottom: "ישבן",
-    logoPosition: "מיקום הלוגו",
-    coverTitlePosition: "מיקום בתפקיד",
-    coverDescriptionPosition: "תיאור מיקום",
     names: {
       default: "ברירת מחדל",
       sharp: "חד",
@@ -1577,15 +1843,27 @@ export var hebrewStrings = {
       orchid: "אורכידיה",
       tulip: "טוליפ",
       brown: "חום",
-      green: "ירוק"
+      green: "ירוק",
+      gray: "אפור"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "רקע פני השטח",
+    "--sjs-primary-background-500": "הראשי",
+    "--sjs-secondary-background-500": "משני",
+    surfaceScale: "משטח",
+    userInterfaceBaseUnit: "ממשק משתמש",
+    fontScale: "גופן",
+    names: {
+      sc2020: "יוצר הסקר 2020",
+      "default-light": "אור",
+      "default-dark": "חשוך",
+      "default-contrast": "ניגוד"
     }
   }
 };
 
-// Uncomment the line below if you create a custom dictionary.
-// Replace "en" with a custom locale code (for example, "fr" or "de"),
-// Replace `enStrings` with the name of the variable that contains the custom dictionary.
-editorLocalization.locales["he"] = hebrewStrings;
+setupLocale({ localeCode: "he", strings: hebrewStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1704,33 +1982,30 @@ editorLocalization.locales["he"] = hebrewStrings;
 // p.resetValueIf: "Reset value if" => "איפוס ערך אם"
 // p.setValueIf: "Set value if" => "הגדר ערך אם"
 // theme.advancedMode: "Advanced mode" => "מצב מתקדם"
-// theme.groupHeader: "Header" => "כותרת"
-// theme.groupBackground: "Background" => "רקע"
-// theme.groupAppearance: "Appearance" => "מראה"
-// theme.coverTitleForecolor: "Title forecolor" => "צביעת כותרת מראש"
-// theme.coverDescriptionForecolor: "Description forecolor" => "תיאור צבע קדמי"
-// theme.coverOverlapEnabled: "Overlap" => "חופפים"
+// theme.header: "Header" => "כותרת"
+// theme.background: "Background" => "רקע"
+// theme.appearance: "Appearance" => "מראה"
 // theme.backgroundImageFitFill: "Stretch" => "מתיחה"
 // theme.backgroundImageFitTile: "Tile" => "אריח"
 // theme.backgroundCornerRadius: "Background and corner radius" => "רקע ורדיוס פינה"
 // theme.colorsTitle: "Colors" => "צבעים"
 // theme.font: "Font" => "גופן"
 // theme.lines: "Lines" => "קווים"
-// theme.surveyDescription: "Survey description font" => "גופן תיאור סקר"
+// theme.surveyDescriptionFont: "Survey description font" => "גופן תיאור סקר"
 // theme.titleFont: "Title font" => "גופן כותרת"
 // theme.descriptionFont: "Description font" => "גופן תיאור"
 // theme.shadow: "Shadow effects" => "אפקטי צל"
 // theme.headerView: "View" => "נוף"
 // theme.headerViewBasic: "Basic" => "בסיסי"
 // theme.headerViewAdvanced: "Advanced" => "מתקדמים"
-// theme.coverInheritWidthFrom: "Content area width" => "רוחב אזור תוכן"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "זהה לסקר"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "התאמה למיכל"
-// theme.coverTextAreaWidth: "Text width" => "רוחב טקסט"
-// theme.coverBackgroundColorSwitch: "Background color" => "צבע רקע"
-// theme.coverBackgroundColorNone: "None" => "ללא"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "צבע הדגשה"
-// theme.coverBackgroundColorCustom: "Custom" => "מנהג"
+// theme.headerInheritWidthFrom: "Content area width" => "רוחב אזור תוכן"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "זהה לסקר"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "התאמה למיכל"
+// theme.headerTextAreaWidth: "Text width" => "רוחב טקסט"
+// theme.headerBackgroundColorSwitch: "Background color" => "צבע רקע"
+// theme.headerBackgroundColorNone: "None" => "ללא"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "צבע הדגשה"
+// theme.headerBackgroundColorCustom: "Custom" => "מנהג"
 // theme.horizontalAlignmentLeft: "Left" => "שמאל"
 // theme.horizontalAlignmentCenter: "Center" => "מרכז"
 // theme.horizontalAlignmentRight: "Right" => "ימין"
@@ -1738,8 +2013,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "אמצע"
 // theme.verticalAlignmentBottom: "Bottom" => "ישבן"
 // theme.logoPosition: "Logo position" => "מיקום הלוגו"
-// theme.coverTitlePosition: "Title position" => "מיקום בתפקיד"
-// theme.coverDescriptionPosition: "Description position" => "תיאור מיקום"
+// theme.headerTitlePosition: "Title position" => "מיקום בתפקיד"
+// theme.headerDescriptionPosition: "Description position" => "תיאור מיקום"
 // ed.translateUsigAIFrom: "Translate from: " => "תרגם מ: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "אפשר את האפשרות סרב לענות"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "אפשר את האפשרות 'לא יודע'"
@@ -1758,13 +2033,12 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panel.description: "Panel description" => "תיאור הלוח"
 // panel.visibleIf: "Make the panel visible if" => "הפוך את החלונית לגלויה אם"
 // panel.requiredIf: "Make the panel required if" => "הפוך את החלונית לנדרשת אם"
-// panel.questionsOrder: "Question order within the panel" => "סדר השאלות בתוך הפאנל"
+// panel.questionOrder: "Question order within the panel" => "סדר השאלות בתוך הפאנל"
 // panel.startWithNewLine: "Display the panel on a new line" => "הצגת החלונית בשורה חדשה"
 // panel.state: "Panel collapse state" => "מצב כיווץ לוח"
 // panel.width: "Inline panel width" => "רוחב החלונית בתוך שורה"
 // panel.minWidth: "Minimum panel width" => "רוחב לוח מינימלי"
 // panel.maxWidth: "Maximum panel width" => "רוחב לוח מרבי"
-// panel.showNumber: "Number panels" => "חלוניות מספרים"
 // paneldynamic.name: "Panel name" => "שם החלונית"
 // paneldynamic.title: "Panel title" => "כותרת הפאנל"
 // paneldynamic.description: "Panel description" => "תיאור הלוח"
@@ -1784,7 +2058,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "הסתרת מספר החלונית"
 // paneldynamic.titleLocation: "Panel title alignment" => "יישור כותרת חלונית"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "יישור תיאור החלונית"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "יישור כותרת שאלה"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "יישור כותרת שאלה"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "יישור הודעת שגיאה"
 // paneldynamic.newPanelPosition: "New panel location" => "מיקום חדש בלוח"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "מניעת תגובות כפולות בשאלה הבאה"
@@ -1817,7 +2091,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // page.description: "Page description" => "תיאור הדף"
 // page.visibleIf: "Make the page visible if" => "הפוך את הדף לגלוי אם"
 // page.requiredIf: "Make the page required if" => "הפוך את הדף לנדרש אם"
-// page.questionsOrder: "Question order on the page" => "סדר השאלות בדף"
+// page.questionOrder: "Question order on the page" => "סדר השאלות בדף"
 // matrixdropdowncolumn.name: "Column name" => "שם עמודה"
 // matrixdropdowncolumn.title: "Column title" => "כותרת עמודה"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "מניעת תגובות כפולות"
@@ -1891,8 +2165,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // totalDisplayStyle.currency: "Currency" => "מטבע"
 // totalDisplayStyle.percent: "Percentage" => "אחוז"
 // totalDisplayStyle.date: "Date" => "תמר"
-// rowsOrder.initial: "Original" => "מקורי"
-// questionsOrder.initial: "Original" => "מקורי"
+// rowOrder.initial: "Original" => "מקורי"
+// questionOrder.initial: "Original" => "מקורי"
 // showProgressBar.aboveheader: "Above the header" => "מעל הכותרת העליונה"
 // showProgressBar.belowheader: "Below the header" => "מתחת לכותרת העליונה"
 // pv.sum: "Sum" => "סכום"
@@ -1909,7 +2183,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר."
 // panel.page: "Repositions the panel to the end of a selected page." => "מיקום מחדש של החלונית לסוף עמוד שנבחר."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "מוסיף רווח או שוליים בין תוכן החלונית לגבול השמאלי של תיבת החלונית."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "בטל את הבחירה כדי להציג את החלונית בשורה אחת עם השאלה או החלונית הקודמת. ההגדרה אינה חלה אם החלונית היא הרכיב הראשון בטופס."
@@ -1920,7 +2194,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "השתמשו בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת החלונית."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "מיקום מחדש של החלונית לסוף עמוד שנבחר."
@@ -1934,7 +2208,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "הגדרה זו עוברת בירושה אוטומטית לכל השאלות בחלונית זו. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "מגדיר את המיקום של חלונית חדשה שנוספה. כברירת מחדל, חלוניות חדשות מתווספות לסוף. בחר \"הבא\" כדי להוסיף חלונית חדשה אחרי הנוכחית."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "הגדרה זו מאפשרת לך להקצות ערך ברירת מחדל לתשובה בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על-ידי ביטוי זה משמש כערך ברירת המחדל הראשוני שניתן לעקוף באמצעות קלט ידני של משיב."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי הקלט של המשיב יאופס לערך בהתבסס על \"ביטוי ערך ברירת מחדל\" או \"הגדר ביטוי ערך\" או על הערך \"תשובת ברירת מחדל\" (אם אחד מהם מוגדר)."
@@ -1980,18 +2254,17 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "הגדרת רוחב לוגו ביחידות CSS (px, %, in, pt וכו')."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו')."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "חל על כל השאלות בסקר. ניתן לדרוס הגדרה זו באמצעות כללי יישור כותרות ברמות נמוכות יותר: חלונית, עמוד או שאלה. הגדרה ברמה נמוכה יותר תעקוף את אלה ברמה גבוהה יותר."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "סמל או רצף של סמלים המציינים כי נדרשת תשובה."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "סמל או רצף של סמלים המציינים כי נדרשת תשובה."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "הזן מספר או אות שבאמצעותם ברצונך להתחיל במספור."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה."
 // pehelp.maxTextLength: "For text entry questions only." => "לשאלות הזנת טקסט בלבד."
-// pehelp.maxOthersLength: "For question comments only." => "להערות לשאלה בלבד."
+// pehelp.maxCommentLength: "For question comments only." => "להערות לשאלה בלבד."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "בחר אם ברצונך שהערות שאלה ושאלות טקסט ארוך יגדלו באופן אוטומטי לגובה בהתבסס על אורך הטקסט שהוזנו."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "להערות לשאלות ולשאלות טקסט ארוך בלבד."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "משתנים מותאמים אישית משמשים כמשתני ביניים או משתני עזר המשמשים בחישובי טפסים. הם לוקחים תשומות משיבים כערכי מקור. לכל משתנה מותאם אישית יש שם ייחודי וביטוי שעליו הוא מבוסס."
@@ -2006,25 +2279,24 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעת שגיאה ביחס לתא עם קלט לא חוקי. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו')."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "מפעיל בקשה המבקשת לאשר את מחיקת השורות."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "מפעיל בקשה המבקשת לאשר את מחיקת השורות."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה."
 // pehelp.description: "Type a subtitle." => "הקלד כותרת משנה."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "הגדרת המיקום של מקטע פרטים ביחס לשורה. בחר מתוך: \"ללא\" - לא נוספה הרחבה; \"מתחת לשורה\" - הרחבת שורה ממוקמת מתחת לכל שורה של המטריצה; \"מתחת לשורה, הצג הרחבת שורה אחת בלבד\" - הרחבה מוצגת תחת שורה אחת בלבד, הרחבות השורה הנותרות מכווצות."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "מגדיל בהדרגה את גובה שדה הקלט בעת הזנת הנתונים. דורס את ההגדרה \"גובה שדה קלט (בקווים)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "נקודת האחיזה לשינוי גודל (או נקודת האחיזה) מופיעה בפינה וניתן לגרור אותה כדי לשנות את גודל שדה הקלט."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת העמוד."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "חל על כל השאלות בדף זה. אם ברצונך לדרוס הגדרה זו, הגדר כללי יישור כותרת לשאלות או חלוניות בודדות. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "מגדיר את הניראות והמיקום של טיימר בדף."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "בחר מתוך: \"נעול\" - משתמשים אינם יכולים להרחיב או לכווץ חלוניות; \"כווץ הכל\" - כל הלוחות מתחילים במצב מכווץ; \"הרחב הכל\" - כל הלוחות מתחילים במצב מורחב; \"מורחב ראשון\" - רק הלוח הראשון מורחב בתחילה."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "הזן שם מאפיין משותף בתוך מערך האובייקטים המכיל את כתובות ה- URL של תמונות או קבצי וידאו שברצונך להציג ברשימת האפשרויות."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "הערך השמאלי משמש כמזהה פריט המשמש בכללי תנאי, הערך הימני מוצג למשיבים."
@@ -2052,7 +2324,7 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "מפעיל בקשה המבקשת לאשר את מחיקת הקובץ."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "אפשר לדרג רק בחירות נבחרות. המשתמשים יגררו פריטים נבחרים מרשימת האפשרויות כדי לסדר אותם באזור הדירוג."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "האפשרות \"אוטומטי\" קובעת אוטומטית את המצב המתאים לתצוגה - תמונה, וידאו או YouTube - בהתבסס על כתובת האתר המקורית שסופקה."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות."
@@ -2065,8 +2337,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "רוחב תווית פריט (בפיקסלים)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "טקסט שיציג אם כל האפשרויות נבחרו"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "טקסט מציין מיקום עבור אזור הדירוג"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "השלם את הסקר באופן אוטומטי"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "השלם את הסקר באופן אוטומטי"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "שמירת ערך מוסווה בתוצאות הסקר"
 // patternmask.pattern: "Value pattern" => "תבנית ערך"
 // datetimemask.min: "Minimum value" => "ערך מינימלי"
@@ -2112,3 +2384,345 @@ editorLocalization.locales["he"] = hebrewStrings;
 // ed.selectFile: "Select a file" => "בחר קובץ"
 // ed.removeFile: "Remove the file" => "הסרת הקובץ"
 // pe.searchMode: "Search Mode" => "מצב חיפוש"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להתחיל ליצור את הטופס שלך."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "לחץ על כפתור \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לדף."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "לחץ על הלחצן \"הוסף שאלה\" למטה כדי להוסיף אלמנט חדש לחלונית."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "לחץ על הלחצן למטה ובחר תמונה להעלאה"
+// coloralpha.opacity: "Opacity" => "אטימות"
+// font.family: "Font family" => "משפחת גופנים"
+// font.color: "Color" => "צבע"
+// font.placeholderColor: "Placeholder color" => "צבע מציין מיקום"
+// font.size: "Size" => "גודל"
+// theme.themeName: "Theme" => "ערכת נושא"
+// theme.isPanelless: "Question appearance" => "מראה השאלה"
+// theme.editorPanel: "Background and corner radius" => "רקע ורדיוס פינה"
+// theme.questionPanel: "Background and corner radius" => "רקע ורדיוס פינה"
+// theme.primaryColor: "Accent color" => "צבע הדגשה"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "אטימות רקע של החלונית"
+// theme.questionBackgroundTransparency: "Question background opacity" => "אטימות רקע השאלה"
+// theme.fontSize: "Font size" => "גודל גופן"
+// theme.scale: "Scale" => "סולם"
+// theme.cornerRadius: "Corner radius" => "רדיוס פינה"
+// theme.pageTitle: "Title font" => "גופן כותרת"
+// theme.pageDescription: "Description font" => "גופן תיאור"
+// theme.questionTitle: "Title font" => "גופן כותרת"
+// theme.questionDescription: "Description font" => "גופן תיאור"
+// theme.editorFont: "Font" => "גופן"
+// theme.backgroundOpacity: "Opacity" => "אטימות"
+// theme.--sjs-font-family: "Font family" => "משפחת גופנים"
+// theme.--sjs-general-backcolor-dim: "Background color" => "צבע רקע"
+// theme.--sjs-primary-backcolor: "Accent background" => "רקע הדגשה"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "הדגשת החזית"
+// theme.--sjs-shadow-small: "Shadow effects" => "אפקטי צל"
+// theme.--sjs-shadow-inner: "Shadow effects" => "אפקטי צל"
+// theme.--sjs-border-default: "Colors" => "צבעים"
+// header@header.headerView: "View" => "נוף"
+// header@header.logoPosition: "Logo position" => "מיקום הלוגו"
+// header@header.surveyTitle: "Survey title font" => "גופן כותרת סקר"
+// header@header.surveyDescription: "Survey description font" => "גופן תיאור סקר"
+// header@header.headerTitle: "Survey title font" => "גופן כותרת סקר"
+// header@header.headerDescription: "Survey description font" => "גופן תיאור סקר"
+// header@header.inheritWidthFrom: "Content area width" => "רוחב אזור תוכן"
+// header@header.textAreaWidth: "Text width" => "רוחב טקסט"
+// header@header.backgroundColorSwitch: "Background color" => "צבע רקע"
+// header@header.backgroundImage: "Background image" => "תמונת רקע"
+// header@header.backgroundImageOpacity: "Opacity" => "אטימות"
+// header@header.overlapEnabled: "Overlap" => "חופפים"
+// header@header.logoPositionX: "Logo position" => "מיקום הלוגו"
+// header@header.titlePositionX: "Title position" => "מיקום בתפקיד"
+// header@header.descriptionPositionX: "Description position" => "תיאור מיקום"
+// weight.400: "Regular" => "רגיל"
+// weight.600: "Heavy" => "כבד"
+// weight.700: "Semi-bold" => "חצי נועז"
+// weight.800: "Bold" => "נועז"
+// backgroundImageFit.auto: "Auto" => "אוטומטי"
+// backgroundImageFit.cover: "Cover" => "כריכה"
+// backgroundImageFit.contain: "Contain" => "להכיל"
+// backgroundImageFit.fill: "Stretch" => "מתיחה"
+// backgroundImageFit.tile: "Tile" => "אריח"
+// backgroundImageAttachment.fixed: "Fixed" => "קבוע"
+// backgroundImageAttachment.scroll: "Scroll" => "לגלול"
+// headerView.basic: "Basic" => "בסיסי"
+// headerView.advanced: "Advanced" => "מתקדמים"
+// inheritWidthFrom.survey: "Same as survey" => "זהה לסקר"
+// inheritWidthFrom.container: "Fit to container" => "התאמה למיכל"
+// backgroundColorSwitch.none: "None" => "ללא"
+// backgroundColorSwitch.accentColor: "Accent color" => "צבע הדגשה"
+// backgroundColorSwitch.custom: "Custom" => "מנהג"
+// colorPalette.light: "Light" => "אור"
+// colorPalette.dark: "Dark" => "חשוך"
+// isPanelless.false: "Default" => "ברירת מחדל"
+// isPanelless.true: "Without Panels" => "ללא פאנלים"
+// theme.cornerRadius: "Corner radius" => "רדיוס פינה"
+// theme.fontFamily: "Font family" => "משפחת גופנים"
+// theme.fontWeightRegular: "Regular" => "רגיל"
+// theme.fontWeightHeavy: "Heavy" => "כבד"
+// theme.fontWeightSemiBold: "Semi-bold" => "חצי נועז"
+// theme.fontWeightBold: "Bold" => "נועז"
+// theme.color: "Color" => "צבע"
+// theme.placeholderColor: "Placeholder color" => "צבע מציין מיקום"
+// theme.size: "Size" => "גודל"
+// theme.opacity: "Opacity" => "אטימות"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "הקלד כדי לחפש..."
+// ed.toolboxNoResultsFound: "No results found" => "לא נמצאו תוצאות"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "מציין מיקום של כותרת טאב"
+// theme.--sjs-special-red: "Error messages" => "הודעות שגיאה"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "טקסט נסיגה עבור כותרות טאבים שחל כאשר תבנית כותרת הטאב אינה מפיקה ערך בעל משמעות."
+// theme.fontColor: "Font color" => "צבע גופן"
+// theme.backgroundColor: "Background color" => "צבע רקע"
+// pe.questionTitleWidth: "Question title width" => "רוחב כותרת השאלה"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "בחר קובץ או הדבק קישור לקובץ..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "לדוגמה: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו')."
+// pe.commentAreaRows: "Comment area height (in lines)" => "גובה אזור הערה (בשורות)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. בקלט תופס יותר שורות, פס הגלילה מופיע."
+// pe.enabled: "Enabled" => "מופעלת"
+// pe.disabled: "Disabled" => "נכים"
+// pe.inherit: "Inherit" => "לרשת"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "אימות שדות ריקים במיקוד שאבד"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "לדוגמה: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "לדוגמה: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "הגדרה זו חלה רק על שאלות מחוץ לחלונית."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "הגדרת צבע משלים המדגיש רכיבי סקר מרכזיים."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "התאמת השקיפות של חלוניות ותיבות שאלה ביחס לרקע הסקר."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "התאמת השקיפות של רכיבי הקלט ביחס לרקע הסקר."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "קובע את רדיוס הפינה לכל הרכיבים המלבניים. הפעילו את 'מצב מתקדם' אם ברצונכם להגדיר ערכי רדיוס פינה בודדים לרכיבי קלט או לחלוניות ולתיבות שאלה."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "מגדיר את צבע הרקע הראשי של הסקר."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור התוכן של הכותרת העליונה כך שיתאים לרכיב HTML שבו ממוקם הסקר."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "מקבל ערכים %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "מקבל ערכים px."
+// p.effectiveColSpan: "Column span" => "טווח עמודות"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "זהה לסקר"
+// progressBarInheritWidthFrom.container: "Same as container" => "זהה למיכל"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "רוחב אזור מד התקדמות"
+// maskType.none: "None" => "ללא"
+// maskType.pattern: "Pattern" => "תבנית"
+// maskType.numeric: "Numeric" => "מספריים"
+// maskType.datetime: "Date and Time" => "תאריך ושעה"
+// maskType.currency: "Currency" => "מטבע"
+
+// inputTextAlignment.auto: "Auto" => "אוטומטי"
+// inputTextAlignment.left: "Left" => "שמאל"
+// inputTextAlignment.right: "Right" => "ימין"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא."
+// p.inputTextAlignment: "Input value alignment" => "יישור ערך קלט"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "הצגת מד ההתקדמות"
+// paneldynamic.showProgressBar: "Show the progress bar" => "הצגת מד ההתקדמות"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "יישור מד התקדמות"
+// pv.carousel: "Carousel" => "קרוסלה"
+// progressBarLocation.top: "Top" => "סביבון"
+// progressBarLocation.bottom: "Bottom" => "ישבן"
+// progressBarLocation.topBottom: "Top and bottom" => "עליון ותחתון"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "קישורי YouTube אינם נתמכים."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "התחל לקבוע את תצורת הטופס שלך"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב."
+// pe.caseInsensitive: "Case insensitive" => "לא תלוי רישיות"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "הטופס שלך ריק"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "הטופס שלך ריק"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "גרור רכיב מארגז הכלים או לחץ על הלחצן למטה."
+// ed.previewPlaceholderTitle: "No preview" => "ללא תצוגה מקדימה"
+// ed.previewPlaceholderTitleMobile: "No preview" => "ללא תצוגה מקדימה"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "הסקר אינו מכיל רכיבים גלויים."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "הסקר אינו מכיל רכיבים גלויים."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "אין מחרוזות לתרגם"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "אין מחרוזות לתרגם"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "הוסף רכיבים לטופס או שנה את מסנן המחרוזות בסרגל הכלים."
+// lg.logicPlaceholderTitle: "No logical rules" => "אין כללים לוגיים"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "אין כללים לוגיים"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// pe.showTimer: "Use a timer" => "שימוש בטיימר"
+// theme.advancedMode: "Advanced mode" => "מצב מתקדם"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "הגדרת המיקום של טיימר בעמוד."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
+// p.mobileHeight: "Height on smartphones" => "גובה בסמארטפונים"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת."
+// ed.creatorSettingTitle: "Creator Settings" => "הגדרות יוצר"
+// tabs.accentColors: "Accent colors" => "צבעי הדגשה"
+// tabs.scaling: "Scaling" => "שינוי גודל"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "מקצה מספרים לשאלות המקוננות בלוח זה."
+// creatortheme.--sjs-special-background: "Surface background" => "רקע פני השטח"
+// creatortheme.--sjs-primary-background-500: "Primary" => "הראשי"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "משני"
+// creatortheme.surfaceScale: "Surface" => "משטח"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "ממשק משתמש"
+// creatortheme.fontScale: "Font" => "גופן"
+// names.sc2020: "Survey Creator 2020" => "יוצר הסקר 2020"
+// names.default-light: "Light" => "אור"
+// names.default-dark: "Dark" => "חשוך"
+// names.default-contrast: "Contrast" => "ניגוד"
+// panel.showNumber: "Number this panel" => "מספר חלונית זו"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות."
+// autocomplete.name: "Full Name" => "שם מלא"
+// autocomplete.honorific-prefix: "Prefix" => "קידומת"
+// autocomplete.given-name: "First Name" => "שם פרטי"
+// autocomplete.additional-name: "Middle Name" => "שם אמצעי"
+// autocomplete.family-name: "Last Name" => "שם משפחה"
+// autocomplete.honorific-suffix: "Suffix" => "סיומת"
+// autocomplete.nickname: "Nickname" => "כינוי"
+// autocomplete.organization-title: "Job Title" => "תפקיד"
+// autocomplete.username: "User Name" => "שם משתמש"
+// autocomplete.new-password: "New Password" => "סיסמה חדשה"
+// autocomplete.current-password: "Current Password" => "סיסמה נוכחית"
+// autocomplete.organization: "Organization Name" => "שם הארגון"
+// autocomplete.street-address: "Full Street Address" => "כתובת הרחוב המלאה"
+// autocomplete.address-line1: "Address Line 1" => "כתובת שורה 1"
+// autocomplete.address-line2: "Address Line 2" => "כתובת שורה 2"
+// autocomplete.address-line3: "Address Line 3" => "כתובת שורה 3"
+// autocomplete.address-level4: "Level 4 Address" => "כתובת ברמה 4"
+// autocomplete.address-level3: "Level 3 Address" => "כתובת ברמה 3"
+// autocomplete.address-level2: "Level 2 Address" => "כתובת ברמה 2"
+// autocomplete.address-level1: "Level 1 Address" => "כתובת ברמה 1"
+// autocomplete.country: "Country Code" => "קוד מדינה"
+// autocomplete.country-name: "Country Name" => "שם מדינה"
+// autocomplete.postal-code: "Postal Code" => "מיקוד"
+// autocomplete.cc-name: "Cardholder Name" => "שם בעל הכרטיס"
+// autocomplete.cc-given-name: "Cardholder First Name" => "שם פרטי של בעל הכרטיס"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "שם אמצעי של בעל הכרטיס"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "שם משפחה של בעל הכרטיס"
+// autocomplete.cc-number: "Credit Card Number" => "מספר כרטיס אשראי"
+// autocomplete.cc-exp: "Expiration Date" => "תאריך תפוגה"
+// autocomplete.cc-exp-month: "Expiration Month" => "חודש תפוגה"
+// autocomplete.cc-exp-year: "Expiration Year" => "שנת תפוגה"
+// autocomplete.cc-csc: "Card Security Code" => "קוד אבטחה של כרטיס"
+// autocomplete.cc-type: "Credit Card Type" => "סוג כרטיס אשראי"
+// autocomplete.transaction-currency: "Transaction Currency" => "מטבע עסקה"
+// autocomplete.transaction-amount: "Transaction Amount" => "סכום העסקה"
+// autocomplete.language: "Preferred Language" => "שפה מועדפת"
+// autocomplete.bday: "Birthday" => "יום הולדת"
+// autocomplete.bday-day: "Birthday Day" => "יום הולדת"
+// autocomplete.bday-month: "Birthday Month" => "חודש יום הולדת"
+// autocomplete.bday-year: "Birthday Year" => "שנת יום הולדת"
+// autocomplete.sex: "Gender" => "מין"
+// autocomplete.url: "Website URL" => "כתובת אתר אינטרנט"
+// autocomplete.photo: "Profile Photo" => "תמונת פרופיל"
+// autocomplete.tel: "Telephone Number" => "מספר טלפון"
+// autocomplete.tel-country-code: "Country Code for Phone" => "קידומת מדינה לטלפון"
+// autocomplete.tel-national: "National Telephone Number" => "מספר טלפון ארצי"
+// autocomplete.tel-area-code: "Area Code" => "אזור חיוג"
+// autocomplete.tel-local: "Local Phone Number" => "מספר טלפון מקומי"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "קידומת טלפון מקומי"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "סיומת טלפון מקומי"
+// autocomplete.tel-extension: "Phone Extension" => "שלוחת טלפון"
+// autocomplete.email: "Email Address" => "כתובת דוא\"ל"
+// autocomplete.impp: "Instant Messaging Protocol" => "פרוטוקול העברת הודעות מיידיות"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "נעילת מצב הרחבה/כיווץ עבור שאלות"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "עדיין אין לך דפים"
+// pe.addNew@pages: "Add new page" => "הוספת עמוד חדש"
+// ed.zoomInTooltip: "Zoom In" => "התקרבות"
+// ed.zoomOutTooltip: "Zoom Out" => "הקטנת התצוגה"
+// tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
+// colors.gray: "Gray" => "אפור"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "יישור לחצני ניווט"
+// pv.allQuestions: "Show all questions" => "הצג את כל השאלות"
+// pv.answeredQuestions: "Show answered questions only" => "הצג שאלות שנענו בלבד"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "הגדרת המיקום של לחצני ניווט בעמוד."
+// pe.size: "Input field width (in characters)" => "רוחב שדה קלט (בתווים)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "השתמש בערכים משאלת עמודת המטריצה או החלונית הבאה כמזהי בחירה"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "השתמש בערכים מעמודת המטריצה או משאלת החלונית הבאה כטקסטים נבחרים"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו עמודת מטריצה או שאלת חלונית יספקו את המזהים."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו שאלת עמודת מטריצה או חלונית תספק את טקסטי התצוגה."
+// pe.progressBarLocation: "Progress bar alignment" => "יישור מד התקדמות"
+// progressBarLocation.topbottom: "Top and bottom" => "עליון ותחתון"
+// progressBarLocation.aboveheader: "Above the header" => "מעל הכותרת העליונה"
+// progressBarLocation.belowheader: "Below the header" => "מתחת לכותרת העליונה"
+// progressBarLocation.off: "Hidden" => "מוסתרים"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
+// survey.readOnly: "Make the survey read-only" => "הפוך את הסקר לקריאה בלבד"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך."
+// paneldynamic.showNumber: "Number the panel" => "מספור החלונית"
+// question.showNumber: "Number this question" => "מספר שאלה זו"
+// pe.previewMode: "Preview mode" => "מצב תצוגה מקדימה"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "הפיכת פריסת הרשת לזמינה"
+// pe.maskSettings: "Mask settings" => "קביעות מסיכה"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "עמודות פריסת רשת"
+// pe.startPageTitlePlaceholder: "Start Page" => "דף פתיחה"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "רוחב אפקטיבי, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "רוחב כותרת השאלה, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "עדיין אין לך עמודות פריסה"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "מציין כמה עמודות תפרוס חלונית זו בפריסת הרשת."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "יוצר הסקר מאפשר לך להתאים באופן ידני את רוחב השורה של רכיבי טופס כדי לשלוט בפריסה. אם פעולה זו אינה מפיקה את התוצאה הרצויה, ניתן להפעיל את פריסת הרשת, הבונה רכיבי טופס באמצעות מערכת מבוססת עמודות. כדי להגדיר עמודות פריסה, בחר עמוד או חלונית והשתמש בטבלה \"הגדרות שאלה\" → \"עמודות רשת\". כדי להתאים את מספר העמודות ששאלה משתרעת, בחר אותה והגדר את הערך הרצוי בשדה \"פריסה\" → \"טווח עמודות\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+
+// ed.expandTooltip: "Expand" => "להרחיב"
+// ed.collapseTooltip: "Collapse" => "התמוטטות"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "לדוגמה: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו')."
+// ed.zoom100Tooltip: "Zoom to 100%" => "שינוי גודל תצוגה ל- 100%"
+// ed.addLanguageTooltip: "Add Language" => "הוסף שפה"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. אם הקלט תופס שורות נוספות, פס הגלילה מופיע."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "ערך המוצג בשאלות HTML ובכותרות ובתיאורים הדינמיים של רכיבי סקר כאשר ערך השאלה ריק."
+// showQuestionNumbers.recursive: "Recursive numbering" => "מספור רקורסיבי"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "רוחב כותרת השאלה"
+// pe.allowCustomChoices: "Allow custom choices" => "מתן אפשרות לבחירות מותאמות אישית"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "מגדיר רוחב עקבי לכותרות השאלות כשהן מיושרות לשמאל של תיבות השאלה שלהן. מקבל ערכי CSS (px, %, in, pt וכדומה)."
+// page.name: "A page ID that is not visible to respondents." => "מזהה דף שאינו גלוי למשיבים."
+// page.description: "Type a page subtitle." => "הקלד כותרת משנה של דף."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "כיתוב המוצג בלחצן ניווט בסרגל ההתקדמות או בתוכן העניינים (TOC). אם תשאיר שדה זה ריק, לחצן הניווט ישתמש בכותרת הדף או בשם הדף. כדי להפעיל את מד ההתקדמות או תוכן העניינים, עבור אל \"סקר\" →\"ניווט\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "בחר כדי לאפשר למשיבים להוסיף אפשרויות משלהם אם האפשרות הרצויה אינה זמינה ברשימה הנפתחת. אפשרויות מותאמות אישית יאוחסנו באופן זמני בלבד למשך הפעלת הדפדפן הנוכחית."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "תבנית כותרת של שדה קלט"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "הצגת שדה קלט יחיד בכל עמוד"
+// ts.prevPage: "Previous" => "הקודמת"
+// ts.nextPage: "Next" => "הבא"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "משמש כאשר 'פריסת הסקר' מוגדרת ל'שדה קלט יחיד לכל עמוד'. בפריסה זו, המטריצה מפוצלת כך שכל שדה קלט מופיע בעמוד נפרד. השתמש במציין המיקום {rowIndex} כדי להוסיף מספור אוטומטי, ב- {rowTitle} או ב- {rowName} כדי להפנות לכותרת או למזהה של השורה, וב- {row.columnid} כדי לכלול את הערך של עמודת מטריצה ספציפית."
+// qt.slider: "Slider" => "המחוון"
+// pe.isExclusive: "Clear others when selected" => "נקה אחרים כאשר בוחרים באפשרות זו"
+// slider.min: "Min value" => "ערך מינימלי"
+// slider.max: "Max value" => "ערך מקסימלי"
+// slider.step: "Step value" => "ערך שלב"
+// slider.showLabels: "Show scale labels" => "הצגת תוויות קנה מידה"
+// slider.tooltipVisibilityPG: "Show tooltips" => "הצגת תיאורי כלים"
+// slider.allowSwap: "Allow thumb crossing" => "אפשר חציית אגודל"
+// slider.labelCount: "Number of auto-generated labels" => "מספר התוויות שנוצרו באופן אוטומטי"
+// slider.minValueExpression: "Min value expression" => "ביטוי ערך מינימלי"
+// slider.maxValueExpression: "Max value expression" => "ביטוי ערך מקסימלי"
+// slider.autoGenerate: "Scale labels configuration" => "שינוי קנה מידה של תצורת תוויות"
+// tabs.sliderSettings: "Slider Settings" => "הגדרות מחוון"
+// sliderType.single: "Single-Value" => "ערך יחיד"
+// sliderType.range: "Range" => "טווח"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה."
+// ed.toolboxSearch: "Search" => "חיפוש"
+// file.imageHeight: "Image height" => "גובה תמונה"
+// file.imageWidth: "Image width" => "רוחב תמונה"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "מציין את גובה התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הגובה בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, גובה התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "מציין את רוחב התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הרוחב בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, רוחב התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות."
+// slider.min: "The lowest number that users can select." => "המספר הנמוך ביותר שמשתמשים יכולים לבחור."
+// slider.max: "The highest number that users can select." => "המספר הגבוה ביותר שמשתמשים יכולים לבחור."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "המרווח בין ערכי קנה המידה הניתנים לבחירה. לדוגמה, שלב של 5 יאפשר למשתמשים לבחור 0, 5, 10 וכו'."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "המרחק המינימלי בין אגודלי המחוון שמשתמש יכול להגדיר."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "המרחק המרבי בין אגודלי המחוון שמשתמש יכול להגדיר."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "מציין כמה תוויות קנה מידה יש ליצור. ערך של -1 פירושו שהמספר מחושב באופן אוטומטי בהתבסס על ערך המינימום והערך המקסימלי."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "מאפשר לך להגדיר תוויות מותאמות אישית בערכים ספציפיים ולהקצות להן טקסט מתאים (לדוגמה, 0 = \"גרוע\", 100 = \"מצוין\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "מאפשר למשתמשים להזיז אגודל אחד מעבר לשני."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "מציג לחצן שמנקה את ערך המחוון שנבחר ומגדיר אותו כלא מוגדר."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "מגדיר את הערך המינימלי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "מגדיר את הערך המרבי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
+// slider.sliderType: "Slider type" => "סוג מחוון"
+// slider.minRangeLength: "Min range length" => "אורך טווח מינימלי"
+// slider.maxRangeLength: "Max range length" => "אורך טווח מקסימלי"
+// slider.customLabels: "Custom labels" => "תוויות מותאמות אישית"
+// slider.labelFormat: "Label format" => "תבנית תווית"
+// slider.tooltipFormat: "Tooltip format" => "תבנית תיאור כלי"
+// question.showTitle: "Show the title and description" => "הצגת הכותרת והתיאור"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "מפעיל בקשת אישור לפני הסרת חלונית."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "מפעיל בקשת אישור לפני הסרת שורה."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "הרחבה אוטומטית של פרטי שורה חדשה"

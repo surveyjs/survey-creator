@@ -1,4 +1,4 @@
-import { Action, IAction } from "survey-core";
+import { Action, ActionContainer, AdaptiveContainerUpdateOptions, IAction, PopupDropdownViewModel, ResponsivityManager, UpdateResponsivenessMode } from "survey-core";
 import { SurveyElementActionContainer } from "../src/components/action-container-view-model";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -48,16 +48,18 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   ];
 
   actionContainer.setItems(actions.map(a => {
-    const action = new Action({ id: a.id });
+    const action = new Action({
+      id: a.id,
+      visible: !a.hidden,
+      iconName: a.iconName,
+      location: a.location
+    });
     action.minDimension = a.minDimension;
     action.maxDimension = a.maxDimension;
-    action.visible = !a.hidden;
-    action.innerItem.iconName = a.iconName;
-    action.innerItem.location = a.location;
     return action;
   }));
-
-  actionContainer.fit(564, 32);
+  actionContainer.flushUpdates();
+  actionContainer.fit({ availableSpace: 564 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("large");
@@ -65,7 +67,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.getActionById("delete").mode).toBe("large");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
 
-  actionContainer.fit(432, 32);
+  actionContainer.fit({ availableSpace: 432 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -74,7 +76,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(250, 32);
+  actionContainer.fit({ availableSpace: 250 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -83,7 +85,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(192, 32);
+  actionContainer.fit({ availableSpace: 192 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -92,7 +94,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(150, 32);
+  actionContainer.fit({ availableSpace: 150 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("popup");
@@ -147,23 +149,35 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   ];
 
   actionContainer.setItems(actions.map(a => {
-    const action = new Action({ id: a.id });
+    const action = new Action({
+      id: a.id,
+      visible: !a.hidden,
+      iconName: a.iconName,
+      location: a.location
+    });
     action.minDimension = a.minDimension;
     action.maxDimension = a.maxDimension;
-    action.visible = !a.hidden;
-    action.innerItem.iconName = a.iconName;
-    action.innerItem.location = a.location;
     return action;
   }));
-
-  actionContainer.fit(564, 32);
+  actionContainer.flushUpdates();
+  actionContainer.fit({ availableSpace: 564 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("large");
   expect(actionContainer.getActionById("isrequired").mode).toBe("large");
   expect(actionContainer.getActionById("delete").mode).toBe("large");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
 
-  actionContainer.fit(304, 32);
+  actionContainer.alwaysShrink = true;
+  actionContainer.fit({ availableSpace: 564 });
+  expect(actionContainer.getActionById("convertTo").mode).toBe("small");
+  expect(actionContainer.getActionById("duplicate").mode).toBe("small");
+  expect(actionContainer.getActionById("isrequired").mode).toBe("small");
+  expect(actionContainer.getActionById("delete").mode).toBe("small");
+  expect(actionContainer.dotsItem.visible).toBeFalsy();
+
+  actionContainer.alwaysShrink = false;
+
+  actionContainer.fit({ availableSpace: 304 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
   expect(actionContainer.getActionById("isrequired").mode).toBe("small");
@@ -171,7 +185,7 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(192, 32);
+  actionContainer.fit({ availableSpace: 192 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
   expect(actionContainer.getActionById("isrequired").mode).toBe("small");
@@ -179,7 +193,7 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(150 - 81, 32);
+  actionContainer.fit({ availableSpace: 150 - 81 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("duplicate").mode).toBe("popup");
   expect(actionContainer.getActionById("isrequired").mode).toBe("popup");
@@ -193,28 +207,150 @@ test("actions and creator.onPropertyValueChanging", () => {
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   let isRequiredNewValue = false;
   creator.onPropertyValueChanging.add((sender, options) => {
-    if(options.propertyName === "isRequired") {
+    if (options.propertyName === "isRequired") {
       options.newValue = isRequiredNewValue;
     }
-    if(options.propertyName === "inputType" && options.newValue === "tel") {
+    if (options.propertyName === "inputType" && options.newValue === "tel") {
       options.newValue = "date";
     }
   });
   const q1 = creator.survey.getQuestionByName("q1");
+  creator.selectElement(q1);
   const q1Adapter = new QuestionAdornerViewModel(creator, q1, <any>undefined);
   q1Adapter.actionContainer.getActionById("isrequired").action();
   expect(q1.isRequired).toBeFalsy();
   isRequiredNewValue = true;
   q1Adapter.actionContainer.getActionById("isrequired").action();
   expect(q1.isRequired).toBeTruthy();
-
-  let action = q1Adapter.getActionById("convertInputType");
-  expect(action).toBeTruthy();
-  const popup = action.popupModel;
-  expect(popup).toBeTruthy();
-  popup.toggleVisibility();
-  const list = popup.contentComponentData.model;
-  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
-  expect(q1.inputType).toBe("date");
-  expect(action.title).toBe("Date");
 });
+
+class TestSurveyElementActionContainer extends SurveyElementActionContainer {
+  updateCallback: (isResetInitialized: boolean) => void;
+  protected update(options: AdaptiveContainerUpdateOptions): void {
+    if (!!options.updateResponsivenessMode) {
+      this.updateCallback && this.updateCallback(options.updateResponsivenessMode == UpdateResponsivenessMode.Hard);
+    }
+  }
+}
+
+class TestQuestionAdornerViewModel extends QuestionAdornerViewModel {
+  protected createActionContainer(): TestSurveyElementActionContainer {
+    const actionContainer = new TestSurveyElementActionContainer();
+    actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    return actionContainer;
+  }
+}
+
+test("Check actions container responsiveness doesn't run when invisible", () => {
+  const creator = new CreatorTester();
+  class ResizeObserver {
+    constructor(protected callback: () => void) {}
+    observe() {
+      this.callback();
+    }
+    disconnect() { }
+  }
+  const oldResizeObserver = window.ResizeObserver;
+  const oldRequestAnimationFrame = window.requestAnimationFrame;
+  window.ResizeObserver = <any>ResizeObserver;
+  window.requestAnimationFrame = (callback) => { callback(1); return 1; };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }, { type: "text", name: "q3" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const q3 = creator.survey.getQuestionByName("q3");
+  creator.selectElement(q1);
+
+  const spy = jest.spyOn(ResponsivityManager.prototype as any, "updateItemsDimensions");
+  const q1Adapter = new TestQuestionAdornerViewModel(creator, q1, <any>undefined);
+  const q2Adapter = new TestQuestionAdornerViewModel(creator, q2, <any>undefined);
+  const q3Adapter = new TestQuestionAdornerViewModel(creator, q3, <any>undefined);
+  const q1ActionsContainer = q1Adapter.actionContainer as TestSurveyElementActionContainer;
+  const q2ActionsContainer = q2Adapter.actionContainer as TestSurveyElementActionContainer;
+  const q3ActionsContainer = q3Adapter.actionContainer as TestSurveyElementActionContainer;
+  const container = document.createElement("div");
+  jest.spyOn(container, "offsetWidth", "get").mockImplementation(() => {
+    return 100;
+  });
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  q1ActionsContainer.flushUpdates();
+  q1ActionsContainer.initResponsivityManager(container);
+  expect(spy).toHaveBeenCalledTimes(1);
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+
+  expect(q2Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
+  q2ActionsContainer.flushUpdates();
+  q2ActionsContainer.initResponsivityManager(container);
+  expect(spy).toHaveBeenCalledTimes(1);
+  let q2Log = "";
+  q2ActionsContainer.updateCallback = (isResetInitialized) => {
+    q2Log += `->raised:${isResetInitialized}`;
+  };
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+
+  expect(q3Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
+  q3ActionsContainer.flushUpdates();
+  q3ActionsContainer.initResponsivityManager(container);
+  expect(spy).toHaveBeenCalledTimes(1);
+  let q3Log = "";
+  q3ActionsContainer.updateCallback = (isResetInitialized) => {
+    q3Log += `->raised:${isResetInitialized}`;
+  };
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+
+  creator.selectElement(q2);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeFalsy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("");
+
+  creator.selectElement(q1);
+  creator.selectElement(q2);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeFalsy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("");
+
+  q3Adapter.hover(new Event("") as any, null);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("->raised:true");
+
+  q3Adapter.hover(new Event("") as any, null);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("->raised:true");
+  window.ResizeObserver = oldResizeObserver;
+  window.requestAnimationFrame = oldRequestAnimationFrame;
+  spy.mockRestore();
+});
+

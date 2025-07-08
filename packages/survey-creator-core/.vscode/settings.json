@@ -4,21 +4,32 @@
         "node_modules": true
     },
     "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit"
         }
     },
-    // "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    // "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
-    // "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
-    // "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    // "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
-    "editor.tabSize": 2,
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+    },
     "editor.formatOnSave": true,
     "eslint.format.enable": true,
-    "jest.outputConfig": {
-        "revealOn": "run",
-        "revealWithFocus": "test-results",
-        "clearOnRun": "none"
-    }
+    "endOfLine": "crlf",
+    "testing.automaticallyOpenTestResults": "neverOpen",
+    "jest.virtualFolders": [
+        {
+            "name": "tests"
+        },
+        {
+            "name": "tests-preset",
+            "runMode": "on-demand",
+            "jestCommandLine": "npm run test:presets --"
+        }
+    ]
 }

@@ -1,8 +1,9 @@
-import { editorLocalization, defaultStrings } from "../src/editorLocalization";
+import { editorLocalization, defaultStrings, getLocaleStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
-import { Action } from "survey-core";
+import { Action, Serializer } from "survey-core";
 export * from "../src/localization/italian";
 export * from "../src/localization/french";
+import { enStrings } from "../src/localization/english";
 
 test("Get nested property", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
@@ -19,6 +20,9 @@ test("Get property name from pe. based on class name", () => {
   const pe: any = defaultStrings.pe;
   pe.testProperty = "All";
   pe.testProperty2 = "All2";
+  const pe_survey = pe.survey;
+  const pe_question = pe.question;
+  const pe_text = pe.text;
   pe.survey = { testProperty: "Survey" };
   pe.question = { testProperty: "Question", testProperty2: "Question2", testProperty3: "Question3" };
   pe.text = { testProperty: "Text" };
@@ -41,6 +45,9 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty3")).toEqual("Question3");
 
   expect(editorLocalization.getPropertyNameInEditor("expression", "format")).toEqual("Formatted string");
+  pe.survey = pe_survey;
+  pe.question = pe_question;
+  pe.text = pe_text;
 });
 test("Get property description from peHelp. based on class name", () => {
   const peHelp: any = defaultStrings.pehelp;
@@ -83,8 +90,8 @@ test("Get property placeholder", () => {
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;
   pv.testValue = "All";
-  pv.questionsOrder = { testValue: "Question" };
-  expect(editorLocalization.getPropertyValueInEditor("questionsOrder", "testValue")).toEqual("Question");
+  pv.questionOrder = { testValue: "Question" };
+  expect(editorLocalization.getPropertyValueInEditor("questionOrder", "testValue")).toEqual("Question");
   expect(editorLocalization.getPropertyValueInEditor("noQuestionOrder", "testValue")).toEqual("All");
 });
 test("getProperty function breaks on word automatically", () => {
@@ -128,7 +135,7 @@ test("change string to empty string", () => {
 test("getPropertyNameInEditor", () => {
   expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rating value");
   expect(editorLocalization.getPropertyNameInEditor("question", "someGoodProperty")).toEqual("Some good property");
-  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Title");
+  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Question title");
 });
 
 test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
@@ -158,8 +165,8 @@ test("getPropertyValue and spaces", () => {
 test("Update innerItem on changign title", (): any => {
   const item: any = {
     id: "test",
-    locTitleName: "ed.designer",
-    locTooltipName: "ed.designer"
+    locTitleName: "tabs.designer",
+    locTooltipName: "tabs.designer"
   };
   const action = new Action(item);
   expect(action.locTitle.text).toEqual("Designer");
@@ -174,26 +181,35 @@ test("Change Creator locale property", (): any => {
     },
     pe: {
       title: "Titel",
-      format: "Format de"
+      format: "Format de",
+      survey: {
+        title: "Survey titel",
+      }
     },
     qt: {
       text: "Text"
+    },
+    toolboxCategories: {
+      choice: "Choices de"
     }
   };
   editorLocalization.locales["de"] = deutschStrings;
   const creator = new CreatorTester({ showLogicTab: true, showTranslationTab: true });
+  creator.toolbox.showCategoryTitles = true;
   creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2" }] }] };
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
   const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
   const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
   const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single-Line Input")[0];
   const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
+  const choiceCategory = creator.toolbox.categories.filter(item => item.name === "choice")[0];
   expect(tabPreview).toBeTruthy();
+  const surveyTitle = creator.propertyGrid.getQuestionByName("title").title;
 
   creator.locale = "de";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Titel");
+  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey titel");
   expect(tabButton.title).toEqual("Logik");
   expect(textQuestion.title).toEqual("Text");
+  expect(choiceCategory.title).toEqual("Choices de");
   expect(textQuestion.innerItem.title).toEqual("Text");
   expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
   creator.selectElement(creator.survey.getQuestionByName("q2"));
@@ -201,8 +217,9 @@ test("Change Creator locale property", (): any => {
   creator.selectElement(creator.survey);
 
   creator.locale = "";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
+  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual(surveyTitle);
   expect(tabButton.title).toEqual("Logic");
+  expect(choiceCategory.title).toEqual("Choice Questions");
   expect(textQuestion.title).toEqual("Single-Line Input");
   expect(textQuestion.innerItem.title).toEqual("Single-Line Input");
   expect(saveAction.title).toEqual("Save Survey");
@@ -262,5 +279,98 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  editorLocalization.defaultLocale = "en";
+});
+test("Support preset locale strings", () => {
+  editorLocalization.currentLocale = "";
+  editorLocalization.defaultLocale = "en";
+  editorLocalization.reset();
+  expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
+  editorLocalization.getLocale().pe.survey.title = "Survey title";
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getString("qt.text")).toEqual("Champ de saisie");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+
+  editorLocalization.presetStrings = {
+    en: { qt: { text: "Text - en preset" }, pe: { survey: { title: "Survey title - en preset" } } },
+    fr: { qt: { text: "Text - fr preset" }, pe: { survey: { title: "Survey title - fr preset" } } },
+    it: { qt: { text: "Text - it preset" }, pe: { survey: { title: "Survey title - it preset" } } }
+  };
+  editorLocalization.defaultLocale = "";
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - en preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - en preset");
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - fr preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - fr preset");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - it preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - it preset");
+
+  editorLocalization.defaultLocale = "";
+  editorLocalization.presetStrings = undefined;
+  expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getString("qt.text")).toEqual("Champ de saisie");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+
+  editorLocalization.defaultLocale = "";
+});
+test("All properties should be in English translation", () => {
+  const classes = ["survey", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem"];
+  const addClasses = (baseClassName: string): void => {
+    classes.push(baseClassName);
+    Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {
+      if (["linkvalue", "color"].indexOf(qType.name) < 0) {
+        classes.push(qType.name);
+      }
+    });
+  };
+  addClasses("panelbase");
+  addClasses("question");
+  addClasses("expressionitem");
+  addClasses("itemvalue");
+  addClasses("trigger");
+  addClasses("surveyvalidator");
+  addClasses("masksettings");
+  const errors = new Array<any>();
+  const englishStrings = enStrings;
+  const checkPropertyDisplayName = (className: string, propertyName: string): void => {
+    if (!!englishStrings.p[propertyName]) return;
+    if (!!englishStrings.pe[propertyName]) return;
+    let cl: any = Serializer.findClass(className);
+    if (cl.parentName) {
+      if (!!cl.parentName && Serializer.findProperty(cl.parentName, propertyName)) return;
+    }
+    while(!!cl) {
+      const tClass = englishStrings.pe[cl.name];
+      if (tClass && !!tClass[propertyName]) return;
+      cl = !!cl.parentName ? Serializer.findClass(cl.parentName) : undefined;
+    }
+    errors.push({ className: className, propertyName: propertyName });
+  };
+  classes.forEach((className) => {
+    Serializer.getProperties(className).forEach((prop) => {
+      if (prop.visible !== false) {
+        checkPropertyDisplayName(className, prop.name);
+      }
+    });
+  });
+  expect(errors).toHaveLength(0);
+});
+test("getLocaleStrings function, Bug#6754", () => {
+  expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
+  expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
+  editorLocalization.defaultLocale = "it";
+  expect(getLocaleStrings("").qt.text).toEqual("Testo semplice");
+  expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
+  expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
   editorLocalization.defaultLocale = "en";
 });

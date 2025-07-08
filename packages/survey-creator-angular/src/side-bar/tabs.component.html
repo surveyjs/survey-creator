@@ -1,0 +1,5 @@
+<ng-template #template>
+  <ng-container *ngFor="let action of model.actions">
+    <svc-tab-button [model]="action"></svc-tab-button>
+  </ng-container>
+</ng-template>

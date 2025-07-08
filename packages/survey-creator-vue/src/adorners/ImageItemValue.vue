@@ -4,6 +4,11 @@
     :class="adorner.getRootCss()"
     :data-sv-drop-target-item-value="adorner.isDraggable ? item.value : null"
     ref="root"
+    @dragstart="preventDragHandler"
+    @dragenter="adorner.onDragEnter($event)"
+    @dragover="adorner.onDragOver($event)"
+    @dragleave="adorner.onDragLeave($event)"
+    @drop="adorner.onDrop($event)"
   >
     <div
       class="svc-image-item-value-wrapper__ghost"
@@ -21,7 +26,7 @@
 
       <template v-if="!adorner.isNew && !adorner.isUploading">
         <div v-if="!adorner.isNew" class="svc-image-item-value__item">
-          <component :is="componentName" v-bind="componentData"></component>
+          <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
         </div>
         <span
           v-if="adorner.isDraggable && adorner.canRenderControls"
@@ -30,12 +35,16 @@
           :title="undefined"
           :aria-label="undefined"
         >
-          <sv-svg-icon
-            :iconName="'icon-drag-area-indicator'"
-            :size="24"
-          ></sv-svg-icon>
+          <SvComponent
+            :is="'sv-svg-icon'"
+            :iconName="'icon-drag-24x24'"
+            :size="'auto'"
+          ></SvComponent>
         </span>
-        <div v-if="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
+        <div
+          v-if="adorner.canRenderControls"
+          class="svc-context-container svc-image-item-value-controls"
+        >
           <span
             class="svc-context-button"
             @click="adorner.chooseFile(adorner)"
@@ -43,7 +52,13 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon role="button" :iconName="'icon-file'" :size="24" :title="adorner.selectFileTitle"></sv-svg-icon>
+            <SvComponent
+              :is="'sv-svg-icon'"
+              role="button"
+              :iconName="'icon-choosefile'"
+              :size="'auto'"
+              :title="adorner.selectFileTitle"
+            ></SvComponent>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -52,17 +67,19 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon role="button" :iconName="'icon-delete'" :size="24" :title="adorner.removeFileTitle"></sv-svg-icon>
+            <SvComponent
+              :is="'sv-svg-icon'"
+              role="button"
+              :iconName="'icon-delete'"
+              :size="'auto'"
+              :title="adorner.removeFileTitle"
+            ></SvComponent>
           </span>
         </div>
       </template>
-
-      <template v-if="adorner.isNew || adorner.isUploading">
+      <template v-else>
         <div
           class="svc-image-item-value__item"
-          @dragover="adorner.onDragOver($event)"
-          @dragleave="adorner.onDragLeave($event)"
-          @drop="adorner.onDrop($event)"
         >
           <div class="sd-imagepicker__item sd-imagepicker__item--inline">
             <label class="sd-imagepicker__label">
@@ -71,7 +88,7 @@
                   class="svc-image-item-value__loading"
                   v-if="adorner.isUploading"
                 >
-                  <sv-loading-indicator></sv-loading-indicator>
+                  <SvComponent :is="'sv-loading-indicator'"></SvComponent>
                 </div>
               </div>
             </label>
@@ -81,16 +98,18 @@
         <div
           class="svc-image-item-value-controls"
           @pointerdown="(event) => event.stopPropagation()"
+          v-if="adorner.allowAdd && !adorner.isUploading"
         >
-          <span
-            class="svc-context-button svc-image-item-value-controls__add"
-            v-if="adorner.allowAdd && !adorner.isUploading"
-            v-key2click
-            @click="adorner.chooseNewFile(adorner)"
-            :title="undefined"
-            :aria-label="undefined"
-          >
-            <sv-svg-icon :iconName="'icon-add-lg'" :size="24"></sv-svg-icon>
+          <span class="svc-image-item-value__placeholder" v-if="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
+          <span :class="adorner.addButtonCss" @click="adorner.chooseNewFile(adorner)" v-key2click>
+              <SvComponent
+                :is="'sv-svg-icon'"
+                :iconName="'icon-add-lg'"
+                :size="'auto'"
+                :title="adorner.addFileTitle"
+                v-if="adorner.showChooseButtonAsIcon"
+              />
+              <span v-else>{{adorner.chooseImageText}}</span>
           </span>
         </div>
       </template>
@@ -98,6 +117,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {
@@ -121,20 +142,27 @@ const question = computed(() => props.componentData.question);
 const item = computed(() => props.componentData.item);
 const root = ref<HTMLDivElement>();
 const adorner = useCreatorModel(
-  () =>
-    new ImageItemValueWrapperViewModel(
+  () => {
+    const viewModel = new ImageItemValueWrapperViewModel(
       creator.value,
       question.value,
       item.value,
       null as any,
       null as any
-    ),
+    );
+    if (root?.value) {
+      viewModel.itemsRoot = root.value;
+    }
+    return viewModel;
+  },
   [() => creator.value, () => question.value, () => item.value],
   (value) => {
     value.dispose();
   }
 );
-
+const preventDragHandler = (e: Event) => {
+  e.preventDefault();
+}
 const newItemStyle = computed(() => {
   const needStyle = !adorner.value.getIsNewItemSingle();
   return {
@@ -142,7 +170,6 @@ const newItemStyle = computed(() => {
     height: needStyle ? question.value.renderedImageHeight + "px" : undefined,
   };
 });
-
 onMounted(() => {
   if (root.value) {
     adorner.value.itemsRoot = root.value;

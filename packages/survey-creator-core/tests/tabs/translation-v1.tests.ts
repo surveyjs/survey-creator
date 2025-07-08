@@ -244,10 +244,12 @@ test("Default locale name", () => {
   const translation: Translation = new Translation(survey);
   expect(translation.getLocaleName("")).toEqual("Default (English)");
   surveyLocalization.defaultLocale = "de";
+  surveyLocalization.localeNamesInEnglish["de"] = "German";
   survey = new SurveyModel();
   survey.locale = "de";
   translation.survey = survey;
   expect(translation.getLocaleName("")).toEqual("Default (Deutsch)");
+  expect(translation.getLocaleName("", true)).toEqual("Default (German)");
   surveyLocalization.defaultLocale = "en";
 });
 
@@ -705,6 +707,6 @@ test("check LocalizableStrings/dataList property", () => {
 test("Do not translate url properties", () => {
   const survey = new SurveyModel();
   const group: TranslationGroup = new TranslationGroup("root", survey);
-  const logo =group.items.find(item => item.name === "logo");
+  const logo = group.items.find(item => item.name === "logo");
   expect(logo).toBeFalsy();
 });

@@ -1,0 +1,81 @@
+@use "../variables" as *;
+
+.svc-surface-placeholder {
+  display: flex;
+  width: 100%;
+  max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  box-sizing: border-box;
+}
+
+.svc-surface-placeholder__image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 135px 170px;
+}
+
+.svc-surface-placeholder__image--designer {
+  background: url("../images/placeholder-designer.png") 50% / contain no-repeat;
+}
+
+.svc-surface-placeholder__image--preview {
+  background: url("../images/placeholder-preview.png") 50% / contain no-repeat;
+}
+
+.svc-surface-placeholder__image--theme {
+  background: url("../images/placeholder-themes.png") 50% / contain no-repeat;
+}
+
+.svc-surface-placeholder__image--logic {
+  background: url("../images/placeholder-logic.png") 50% / contain no-repeat;
+}
+
+.svc-surface-placeholder__image--translation {
+  background: url("../images/placeholder-translations.png") 50% / contain no-repeat;
+}
+
+.svc-surface-placeholder__text {
+  padding: var(--ctr-surface-placeholder-text-margin-top, var(--sjs-spacing-x4)) 0px
+    var(--ctr-surface-placeholder-text-margin-bottom, var(--sjs-spacing-x6)) 0px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ctr-surface-placeholder-text-gap, var(--sjs-spacing-x1));
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.svc-surface-placeholder__title {
+  @include ctrMediumBoldFont;
+  color: var(--ctr-surface-placeholder-text-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
+  text-align: center;
+  align-self: stretch;
+}
+
+.svc-surface-placeholder__description {
+  @include ctrDefaultFont;
+  color: var(--ctr-surface-placeholder-text-description-color, var(--sjs-layer-3-foreground-50, #00000080));
+  text-align: center;
+  align-self: stretch;
+}
+
+.svc-logic-tab__content-empty,
+.svc-test-tab__content .svc-surface-placeholder,
+.svc-translation-tab--empty .svc-surface-placeholder,
+.svc-designer__placeholder-container {
+  max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
+  padding: var(--ctr-surface-placeholder-padding-top, var(--sjs-spacing-x4))
+    var(--ctr-surface-placeholder-padding-right, var(--sjs-spacing-x6))
+    var(--ctr-surface-placeholder-padding-bottom, var(--sjs-spacing-x16))
+    var(--ctr-surface-placeholder-padding-left, var(--sjs-spacing-x6));
+}

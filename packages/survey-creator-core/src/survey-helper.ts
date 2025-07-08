@@ -8,10 +8,11 @@ import {
   Serializer,
   SurveyModel,
   PageModel,
+  PanelModel,
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export enum ObjType {
   Unknown = "unknown",
@@ -24,9 +25,9 @@ export enum ObjType {
 export class SurveyHelper {
   public static getNewElementName(el: ISurveyElement): string {
     const survey: SurveyModel = (<any>el).getSurvey();
-    if(!survey) return el.name;
-    if(el.isPage) return this.getNewPageName(survey.pages);
-    if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
+    if (!survey) return el.name;
+    if (el.isPage) return this.getNewPageName(survey.pages);
+    if (el.isPanel) return this.getNewPanelName(survey.getAllPanels());
     return this.getNewQuestionName(survey.getAllQuestions(false, false, true));
   }
   public static getNewPageName(objs: Array<any>) {
@@ -61,7 +62,7 @@ export class SurveyHelper {
   }
   public static generateNewName(name: string): string {
     var pos = name.length;
-    while (pos > 0 && name[pos - 1] >= "0" && name[pos - 1] <= "9") {
+    while(pos > 0 && name[pos - 1] >= "0" && name[pos - 1] <= "9") {
       pos--;
     }
     var base = name.substring(0, pos);
@@ -78,7 +79,7 @@ export class SurveyHelper {
       hash[objs[i].name] = true;
     }
     var num = 1;
-    while (true) {
+    while(true) {
       if (!hash[baseName + num.toString()]) break;
       num++;
     }
@@ -139,54 +140,34 @@ export class SurveyHelper {
     }
     return result;
   }
-  public static isPropertyVisible(
-    obj: any,
-    property: JsonObjectProperty,
-    options: ISurveyCreatorOptions = null,
-    showMode: string = null,
-    parentObj: any = null,
-    parentProperty: JsonObjectProperty = null
-  ): boolean {
-    if (!property || !property.visible) return false;
-    if (!!showMode && !!property.showMode && showMode !== property.showMode)
-      return false;
-    if (
-      !!property.isVisible &&
-      !!obj.getLayoutType &&
-      !(<any>property["isVisible"])(obj.getLayoutType(), null)
-    )
-      return false;
-    var canShow = !!options
-      ? (object: any, property: JsonObjectProperty) => {
-        return options.onCanShowPropertyCallback(
-          object,
-          property,
-          showMode,
-          parentObj,
-          parentProperty
-        );
-      }
-      : null;
-    if (!!canShow && !canShow(obj, property)) return false;
-    return true;
+  public static isPropertyVisible(obj: any, prop: JsonObjectProperty, options: ISurveyCreatorOptions = null, showMode: string = null, parentObj: any = null, parentProperty: JsonObjectProperty = null): boolean {
+    if (!prop || !prop.visible) return false;
+    if (!!showMode && !!prop.showMode && showMode !== prop.showMode && prop.locationInTable !== "both") return false;
+    return !options || options.onCanShowPropertyCallback(obj, prop, showMode, parentObj, parentProperty);
   }
-  public static scrollIntoViewIfNeeded(el: HTMLElement) {
+  public static isNeedScrollIntoView(el: HTMLElement, scrollIfElementBiggerThanContainer: boolean = false): undefined | "top" | "bottom" {
     if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
     var scrollableDiv = SurveyHelper.getScrollableDiv(el);
     if (!scrollableDiv) return;
     var height = scrollableDiv.clientHeight;
     if (rect.top < scrollableDiv.offsetTop) {
-      el.scrollIntoView(true);
+      return "top";
     } else {
       let offsetTop = height + scrollableDiv.offsetTop;
-      if (rect.bottom > offsetTop && rect.height < height) {
-        el.scrollIntoView(false);
+      if (rect.bottom > offsetTop && (rect.height < height || scrollIfElementBiggerThanContainer)) {
+        return "bottom";
       }
     }
   }
+  public static scrollIntoViewIfNeeded(el: HTMLElement, getOptions?: (overTop: boolean) => ScrollIntoViewOptions, scrollIfElementBiggerThanContainer: boolean = false) {
+    const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el, scrollIfElementBiggerThanContainer);
+    if (!isNeedScroll) return;
+    const isNeedScrollToTop = isNeedScroll === "top";
+    el.scrollIntoView(getOptions ? getOptions(isNeedScrollToTop) : isNeedScrollToTop);
+  }
   public static getScrollableDiv(el: HTMLElement): HTMLElement {
-    while (!!el) {
+    while(!!el) {
       if (!!el.id && el.id.indexOf("scrollableDiv") > -1) return el;
       if (!el.offsetParent) return null;
       el = <HTMLElement>el.offsetParent;
@@ -265,21 +246,33 @@ export class SurveyHelper {
     delete json["valueName"];
     delete json["choicesVisibleIf"];
     delete json["choicesEnableIf"];
+    delete json["columnsVisibleIf"];
+    delete json["columnsEnableIf"];
+    delete json["rowsVisibleIf"];
+    delete json["rowsEnableIf"];
     delete json["width"];
     delete json["minWidth"];
     delete json["maxWidth"];
+  }
+  private static deleteRandomProperties(json: any) {
+    ["choicesOrder", "rowOrder"].forEach(prop => {
+      if (json[prop] === "random") {
+        delete json[prop];
+      }
+    });
   }
   public static updateQuestionJson(questionJson: any) {
     questionJson.storeOthersAsComment = false;
     delete questionJson.valuePropertyName;
     SurveyHelper.deleteConditionProperties(questionJson);
+    SurveyHelper.deleteRandomProperties(questionJson);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.choices);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rows);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.columns);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rates);
   }
   private static deleteConditionPropertiesFromArray(jsonArray: Array<any>): void {
-    if(!Array.isArray(jsonArray)) return;
+    if (!Array.isArray(jsonArray)) return;
     jsonArray.forEach(item => {
       SurveyHelper.deleteConditionProperties(item);
     });
@@ -334,7 +327,7 @@ export class SurveyHelper {
   public static sortItems(items: Array<any>, propertyName = "text") {
     const getNumber = (str: string, index): number => {
       let strNum = "";
-      while (index < str.length && str[index] >= "0" && str[index] <= "9") {
+      while(index < str.length && str[index] >= "0" && str[index] <= "9") {
         strNum += str[index];
         index++;
       }
@@ -344,9 +337,9 @@ export class SurveyHelper {
       const aVal = !!a[propertyName] ? a[propertyName] : "";
       const bVal = !!b[propertyName] ? b[propertyName] : "";
       let index = 0;
-      while (index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
+      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
       if (index < aVal.length && index < bVal.length) {
-        while (index > 0 && (aVal[index - 1] >= "0" && aVal[index - 1] <= "9")) index--;
+        while(index > 0 && (aVal[index - 1] >= "0" && aVal[index - 1] <= "9")) index--;
         const aNum = getNumber(aVal, index);
         const bNum = getNumber(bVal, index);
         if (aNum < bNum) return -1;
@@ -373,10 +366,36 @@ export class SurveyHelper {
   }
   public static getElementDeepLength(element: SurveyElement): number {
     let res: number = 0;
-    while (!!element) {
+    while(!!element) {
       if (element.isPanel) res++;
       element = <SurveyElement><any>element.parent;
     }
     return res;
+  }
+  public static getMaximumNestedPanelDepth(panel: PanelModel, currentDepth: number): number {
+    let maxDepth = currentDepth;
+    panel.elements.forEach(el => {
+      if (el.isPanel) {
+        const pDeep = SurveyHelper.getMaximumNestedPanelDepth(<PanelModel>el, currentDepth + 1);
+        if (pDeep > maxDepth) {
+          maxDepth = pDeep;
+        }
+      }
+    });
+    return maxDepth;
+  }
+  public static getElementParentContainers(element: SurveyElement, includingPage = true): SurveyElement[] {
+    const containers: SurveyElement[] = [];
+    let current = (element.parent || element.parentQuestion) as SurveyElement;
+    while(!!current) {
+      if (current.isInteractiveDesignElement && (!current.isPage || includingPage)) {
+        containers.push(current);
+      }
+      current = (current.parent || current.parentQuestion) as SurveyElement;
+    }
+    return containers;
+  }
+  public static isPanelDynamic(element: any) {
+    return !!element && (element as Base).isDescendantOf("paneldynamic");
   }
 }

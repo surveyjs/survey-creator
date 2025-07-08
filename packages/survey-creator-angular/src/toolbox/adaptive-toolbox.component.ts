@@ -1,30 +1,50 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { SurveyCreatorModel, QuestionToolbox } from "survey-creator-core";
-import { VerticalResponsivityManager } from "survey-core";
-import { BaseAngular } from "survey-angular-ui";
+import { SurveyCreatorModel, QuestionToolbox, QuestionToolboxItem } from "survey-creator-core";
+import { Action } from "survey-core";
+import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
-  selector: "svc-adaptive-toolbox",
+  selector: "svc-toolbox",
   templateUrl: "./adaptive-toolbox.component.html",
   styles: [":host { display: none; }"]
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
-  @Input() creator!: SurveyCreatorModel;
-  @ViewChild("container") container!: ElementRef<HTMLElement>;
-  private responsivityManager: VerticalResponsivityManager | undefined;
-  public get model() {
-    return this.creator.toolbox;
+  @Input() model!: SurveyCreatorModel;
+  @ViewChild("container") container!: ElementRef<HTMLDivElement>;
+  public get toolbox() {
+    return this.model.toolbox;
   }
-  ngAfterViewInit() {
-    this.responsivityManager =
-      new VerticalResponsivityManager(this.container.nativeElement as HTMLDivElement,
-        this.model, ".svc-toolbox__tool:not(.sv-dots)");
-  }
-  protected getModel(): QuestionToolbox {
+  public get creator() {
     return this.model;
   }
+  public get searchItem() {
+    return this.toolbox.searchItem as Action;
+  }
+  private afterRender() {
+    if (this.container?.nativeElement) {
+      this.toolbox.afterRender(this.container.nativeElement);
+    }
+  }
+  ngAfterViewInit() {
+    this.afterRender();
+  }
+  override ngAfterViewChecked(): void {
+    super.ngAfterViewChecked();
+    this.afterRender();
+  }
+  protected override afterUpdate(isSync?: boolean): void {
+    super.afterUpdate(isSync);
+    this.afterRender();
+  }
+  protected getModel(): QuestionToolbox {
+    return this.toolbox;
+  }
   override ngOnDestroy(): void {
-    this.responsivityManager?.dispose();
+    this.toolbox.beforeDestroy();
     super.ngOnDestroy();
   }
+  trackItemBy(_: number, item: QuestionToolboxItem) {
+    return item.renderedId;
+  }
 }
+AngularComponentFactory.Instance.registerComponent("svc-toolbox", AdaptiveToolboxComponent);

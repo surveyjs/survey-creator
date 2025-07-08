@@ -193,7 +193,7 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo i
   expect(lastUploadOptions.propertyName).toEqual("logo");
 });
 
-test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
+test("Check PropertyGridLinkFileEditor acceptedTypes for matrix cell", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
@@ -211,12 +211,14 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
 });
 
 test("Check file editor placeholder and renderedValue", () => {
+  const placeholder = "test_placeholder";
   const survey = new SurveyModel({
     elements: [
       {
         name: "q1",
         type: "fileedit",
-        storeDataAsText: false
+        storeDataAsText: false,
+        placeholder
       }
     ]
   });
@@ -226,22 +228,22 @@ test("Check file editor placeholder and renderedValue", () => {
 
   question.value = url;
   expect(question.value).toBe("some_url");
-  expect(question.placeholder).toBe("");
+  expect(question.renderedPlaceholder).toBe(placeholder);
   expect(question.renderedValue).toBe("some_url");
 
   question.value = base64Url;
   expect(question.value).toBe(base64Url);
-  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedPlaceholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
 
   survey.setValue("q1", url);
   expect(question.value).toBe("some_url");
-  expect(question.placeholder).toBe("");
+  expect(question.renderedPlaceholder).toBe(placeholder);
   expect(question.renderedValue).toBe("some_url");
 
   survey.setValue("q1", base64Url);
   expect(question.value).toBe(base64Url);
-  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedPlaceholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
 });
 
@@ -281,4 +283,21 @@ test("Check onOpenFileChooser called and onUploadFile context exists", () => {
   expect(lastUploadOptions.element).toEqual(question);
   expect(lastUploadOptions.elementType).toEqual("image");
   expect(lastUploadOptions.propertyName).toEqual("imageLink");
+});
+
+test("Check isTextInputReadOnly", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = creator.survey.getAllQuestions()[0];
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.isTextInputReadOnly).toBe(false);
+  questionEditor.disableInput = true;
+  expect(questionEditor.isTextInputReadOnly).toBe(true);
+  questionEditor.disableInput = false;
+  expect(questionEditor.isTextInputReadOnly).toBe(false);
+  questionEditor.readOnly = true;
+  expect(questionEditor.isTextInputReadOnly).toBe(true);
 });

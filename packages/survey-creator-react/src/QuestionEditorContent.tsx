@@ -1,11 +1,12 @@
 import { Base, Question, SurveyError, SurveyModel } from "survey-core";
 import { ISurveyCreator, ReactElementFactory, ReactQuestionFactory, SurveyQuestion } from "survey-react-ui";
 import { SurveyCreatorModel } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 
 interface IQuestionEditorContentComponentProps {
   creator: SurveyCreatorModel;
   survey: SurveyModel;
+  style: any;
 }
 
 export class QuestionEditorContentComponent extends React.Component<
@@ -15,7 +16,7 @@ export class QuestionEditorContentComponent extends React.Component<
   get survey() {
     return this.props.survey;
   }
-  public createQuestionElement(question: Question): JSX.Element {
+  public createQuestionElement(question: Question): React.JSX.Element {
     return ReactQuestionFactory.Instance.createQuestion(
       !question.isDefaultRendering || question.isDefaultRendering()
         ? question.getTemplate()
@@ -33,16 +34,16 @@ export class QuestionEditorContentComponent extends React.Component<
   public questionErrorLocation(): string {
     return this.survey.questionErrorLocation;
   }
-  renderError(key: string, error: SurveyError, cssClasses: any): JSX.Element {
+  renderError(key: string, error: SurveyError, cssClasses: any): React.JSX.Element {
     return null;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const question = this.survey.getAllQuestions()[0];
     return (
-      <>
+      <div style={this.props.style} >
         <SurveyQuestion creator={this} element={question}></SurveyQuestion>
-      </>
+      </div>
     );
   }
 }

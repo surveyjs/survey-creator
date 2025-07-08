@@ -1,14 +1,12 @@
 <template>
   <span :class="className">
     <span class="svc-string-editor__content">
-      <div class="svc-string-editor__border">
-        <sv-svg-icon
-          class="svc-string-editor__button svc-string-editor__button--edit"
-          @click="edit"
-          :iconName="'icon-edit'"
-          :size="16"
-        ></sv-svg-icon>
-      </div>
+      <div
+        class="svc-string-editor__border svc-string-editor__border--hover"
+      ></div>
+      <div
+        class="svc-string-editor__border svc-string-editor__border--focus"
+      ></div>
       <span class="svc-string-editor__input">
         <span
           role="textbox"
@@ -19,15 +17,18 @@
           @paste="onPaste"
           @blur="onBlur"
           @input="baseModel?.onInput"
+          @beforeinput="baseModel?.onBeforeInput"
           @keydown="baseModel?.onKeyDown"
           @keyup="baseModel?.onKeyUp"
           @compositionstart="baseModel?.onCompositionStart"
           @compositionend="baseModel?.onCompositionEnd"
           @mouseup="baseModel?.onMouseUp"
           @click="edit"
-          :textContent="editValue"
+          :textContent="renderedHtml"
           :aria-placeholder="placeholder"
+          :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
+          :tabindex="baseModel.tabIndex"
           ref="root"
         ></span>
         <span
@@ -44,15 +45,18 @@
           @mouseup="baseModel?.onMouseUp"
           @click="edit"
           :aria-placeholder="placeholder"
+          :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
-          v-html="editValue"
+          :tabindex="baseModel.tabIndex"
+          v-html="renderedHtml"
           ref="root"
         ></span>
-        <sv-character-counter
+        <SvComponent
+          :is="'sv-character-counter'"
           v-if="showCharacterCounter"
           :counter="characterCounter"
           :remainingCharacterCounter="getCharacterCounterClass"
-        ></sv-character-counter>
+        ></SvComponent>
       </span>
     </span>
     <span v-if="errorText" class="svc-string-editor__error">{{
@@ -61,6 +65,7 @@
   </span>
 </template>
 <script setup lang="ts">
+import { SvComponent } from "survey-vue3-ui";
 import type { LocalizableString } from "survey-core";
 import {
   StringEditorViewModelBase,
@@ -107,13 +112,6 @@ const baseModel = useCreatorModel(
   }
 );
 
-const editValue = computed<string>(
-  () =>
-    (baseModel.value?.focused &&
-      baseModel.value.editAsText &&
-      locString.value.text) ||
-    (renderedHtml.value as string)
-);
 const errorText = computed(() => baseModel.value?.errorText);
 const className = computed(() => {
   return baseModel.value?.className(locString.value.renderedHtml);

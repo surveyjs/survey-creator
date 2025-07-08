@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-image-question-controls {
   position: absolute;
@@ -12,10 +12,20 @@
 }
 
 .svc-question__content--image:not(.svc-question__content--loading):not(.svc-question__content--empty) {
-  padding: calcSize(4) 0 calcSize(8) 0;
+  padding-left: 0;
+  padding-right: 0;
 
   .sd-image__image {
     border-radius: 0;
+  }
+  .svc-question__content-actions {
+    padding-left: calcSize(5);
+    width: calc(100% - 2.5 * #{$base-unit});
+    box-sizing: border-box;
+    & > .sv-action-bar {
+      width: calc(100% - #{calcSize(5)});
+      left: calcSize(5);
+    }
   }
 }
 
@@ -49,10 +59,9 @@
 
 .svc-image-question__loading-placeholder {
   position: relative;
-  background-color: $background;
   width: 100%;
   height: calcSize(27.5);
-  border: 1px dashed $border-inside;
+  border: var(--ctr-survey-placeholder-border-width, var(--lbr-stroke-x1)) dashed var(--ctr-survey-placeholder-border-color, var(--sjs-border-25, #D4D4D4));
 }
 
 .svc-image-question__loading {

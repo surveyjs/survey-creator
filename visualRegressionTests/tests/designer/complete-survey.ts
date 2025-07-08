@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "pages": [
     {
       "name": "page1",
@@ -74,7 +75,7 @@ test("Check the upper part of the page", async (t) => {
 
     await t.wait(1000);
 
-    const thankYouMessage = Selector(".sd-completedpage h3");
+    const thankYouMessage = Selector(".sd-completedpage");
     await takeElementScreenshot("complete-tab-thank-message.png", thankYouMessage, t, comparer);
 
     const startAgainButton = Selector(".svc-preview__test-again");

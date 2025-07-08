@@ -4,7 +4,7 @@ import { QuestionConvertMode, settings } from "./creator-settings";
 export class QuestionConverter {
   private static convertInfoValue: any;
   public static get convertInfo() : any {
-    if(!QuestionConverter.convertInfoValue) {
+    if (!QuestionConverter.convertInfoValue) {
       QuestionConverter.convertInfoValue = {};
       QuestionConverter.createDefaultQuestionConverterItems();
     }
@@ -29,7 +29,7 @@ export class QuestionConverter {
   }
   private static getConvertableClasses(className: string): Array<string> {
     let res = QuestionConverter.convertInfo[className];
-    if(!!Array.isArray(res) && res.indexOf(className) < 0) {
+    if (!!Array.isArray(res) && res.indexOf(className) < 0) {
       res.unshift(className);
     }
     return res;
@@ -51,29 +51,36 @@ export class QuestionConverter {
     }
     return !!res ? res : [];
   }
-  public static convertObject(
-    obj: Question,
-    convertToClass: string,
-    defaultObjJSON: any = null,
-    defaultJSON: any = null
-  ): Question {
-    if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
-    let newQuestion = !defaultJSON ? QuestionFactory.Instance.createQuestion(convertToClass, obj.name) : undefined;
-    if(!newQuestion) {
-      newQuestion = Serializer.createClass(convertToClass, {});
-    }
-    newQuestion.name = obj.name;
-    const json = defaultJSON ? Helpers.createCopy(defaultJSON) : newQuestion.toJSON();
-    const qJson = obj.toJSON();
-    if(defaultObjJSON) {
+  public static getObjJSON(obj: Question, defaultObjJSON: any): any {
+    const res = obj.toJSON();
+    if (defaultObjJSON) {
       for (let key in defaultObjJSON) {
-        if(qJson[key] && Helpers.isTwoValueEquals(qJson[key], defaultObjJSON[key])) {
-          delete qJson[key];
+        if (res[key] && Helpers.isTwoValueEquals(res[key], defaultObjJSON[key])) {
+          delete res[key];
         }
       }
     }
+    return res;
+  }
+  public static convertObject(obj: Question, convertToClass: string, objJSON: any, defaultJSON: any = null, jsonToSetAfter = null): Question {
+    if (!obj || !obj.parent || convertToClass == obj.getType() && !defaultJSON) return null;
+    let newQuestion = !defaultJSON ? QuestionFactory.Instance.createQuestion(convertToClass, obj.name) : undefined;
+    if (!newQuestion) {
+      newQuestion = Serializer.createClass(convertToClass, {});
+    }
+    newQuestion.name = obj.name;
+    const sourceJSON = defaultJSON;
+
+    const json = sourceJSON ? Helpers.createCopy(sourceJSON) : newQuestion.toJSON();
+    //const qJson = QuestionConverter.getObjJSON(obj, objJSON);
+    const qJson = objJSON || {};
     for (let key in qJson) {
       json[key] = qJson[key];
+    }
+    if (jsonToSetAfter) {
+      for (let key in jsonToSetAfter) {
+        json[key] = jsonToSetAfter[key];
+      }
     }
     QuestionConverter.updateJSON(json, convertToClass, obj.getType());
     newQuestion.fromJSON(json);
@@ -84,7 +91,7 @@ export class QuestionConverter {
     var isSameLine = index + 1 < panel.elements.length ? panel.elements[index + 1].startWithNewLine === false : false;
     panel.removeElement(obj);
     panel.addElement(newQuestion, index);
-    if(isSameLine) {
+    if (isSameLine) {
       panel.elements[index + 1].startWithNewLine = false;
     }
     delete (<any>panel).isConverting;
@@ -98,7 +105,7 @@ export class QuestionConverter {
     QuestionConverter.updateJSONForBarrating(json, convertToClass);
   }
   private static updateJSONForMatrices(json: any, convertToClass: string, convertFromClass: string): void {
-    if(Serializer.isDescendantOf(convertToClass, "matrix") &&
+    if (Serializer.isDescendantOf(convertToClass, "matrix") &&
        Serializer.isDescendantOf(convertFromClass, "matrixdropdownbase") &&
        json.columns) {
       let num = 0;
@@ -107,7 +114,7 @@ export class QuestionConverter {
         return col.title ? { value: name, text: col.title } : name;
       });
     }
-    if(Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
+    if (Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
        Serializer.isDescendantOf(convertFromClass, "matrix") &&
        json.columns) {
       json.columns = json.columns.map(col => <any>{
@@ -116,30 +123,30 @@ export class QuestionConverter {
     }
   }
   private static getColumnName(val: any): string {
-    if(Helpers.isNumber(val)) return "col" + val;
+    if (Helpers.isNumber(val)) return "col" + val;
     return val;
   }
   private static updateJSONForRating(json: any, convertToClass: string): void {
-    if(convertToClass === "rating" && json.choices) {
+    if (convertToClass === "rating" && json.choices) {
       json.rateValues = json.choices;
     }
-    if(!!json.rateValues && !Serializer.isDescendantOf(convertToClass, "matrixdropdownbase")) {
+    if (!!json.rateValues && !Serializer.isDescendantOf(convertToClass, "matrixdropdownbase")) {
       json.choices = json.rateValues;
     }
   }
   private static updateJSONForBarrating(json: any, convertToClass: string): void {
-    if(convertToClass === "barrating") {
+    if (convertToClass === "barrating") {
       json.choices = [1, 2, 3, 4, 5];
     }
   }
   private static updateJSONForPanels(json: any, convertToClass: string, convertFromClass: string): void {
-    if(Serializer.isDescendantOf(convertToClass, "paneldynamic") &&
+    if (Serializer.isDescendantOf(convertToClass, "paneldynamic") &&
        Serializer.isDescendantOf(convertFromClass, "panel") &&
        json.elements) {
       json.templateElements = json.elements;
       delete json.elements;
     }
-    if(Serializer.isDescendantOf(convertToClass, "panel") &&
+    if (Serializer.isDescendantOf(convertToClass, "panel") &&
        Serializer.isDescendantOf(convertFromClass, "paneldynamic") &&
        json.templateElements) {
       json.elements = json.templateElements;
@@ -148,11 +155,11 @@ export class QuestionConverter {
   }
   private static removeValidators(question: Question): void {
     const validators = question.validators;
-    if(!Array.isArray(validators) || validators.length === 0) return;
+    if (!Array.isArray(validators) || validators.length === 0) return;
     const supported = question.getSupportedValidators();
-    for(var i = validators.length - 1; i >= 0; i --) {
+    for (var i = validators.length - 1; i >= 0; i --) {
       const valType = validators[i].getType().replace("validator", "");
-      if(supported.indexOf(valType) < 0) {
+      if (supported.indexOf(valType) < 0) {
         validators.splice(i, 1);
       }
     }
@@ -166,11 +173,11 @@ function getAllQuestionTypes(className: string, includeCurrent: boolean = false)
       res.push(classes[i].name);
     }
   }
-  if(includeCurrent || className !== "panel") {
+  if (includeCurrent || className !== "panel") {
     res.push("panel");
   }
   const widgets = CustomWidgetCollection.Instance.widgets;
-  for(var i = 0; i < widgets.length; i ++) {
+  for (var i = 0; i < widgets.length; i ++) {
     if (includeCurrent || widgets[i].name !== className) {
       res.push(widgets[i].name);
     }

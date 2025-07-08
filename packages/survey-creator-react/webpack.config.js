@@ -5,10 +5,9 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
+var DashedNamePlugin = require("../../webpack-dashed-name");
 const packageJson = require("./package.json");
 const fs = require("fs");
-const replace = require("replace-in-file");
 
 const year = new Date().getFullYear();
 const banner = [
@@ -37,6 +36,7 @@ const buildPlatformJson = {
   files: [
     "**/*"
   ],
+  module: "fesm/survey-creator-react.mjs",
   main: packageJson.name + ".js",
   repository: {
     type: "git",
@@ -45,47 +45,56 @@ const buildPlatformJson = {
   engines: {
     node: ">=0.10.0"
   },
-  typings: packageJson.name + ".d.ts",
-  peerDependencies: {
-    "ace-builds": "^1.4.12",
-    "react": "^16.5.0 || ^17.0.1 || ^18.1.0",
-    "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0"
-  },
-  peerDependenciesMeta: {
-    "ace-builds": {
-      "optional": true
+  typings: "./typings/entries/index.d.ts",
+  exports: {
+    ".": {
+      "types": "./typings/entries/index.d.ts",
+      "import": "./fesm/survey-creator-react.mjs",
+      "require": "./survey-creator-react.js"
     }
   },
-  dependencies: {
+  peerDependencies: {
+    "ace-builds": "^1.4.12",
+    "react": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
+    "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
     "survey-core": packageJson.version,
     "survey-react-ui": packageJson.version,
     "survey-creator-core": packageJson.version
   },
+  peerDependenciesMeta: {
+    "ace-builds": {
+      "optional": true
+    },
+  },
   devDependencies: {}
 };
+
+function getPercentageHandler(emitNonSourceFiles, buildPath) {
+  return function (percentage, msg) {
+    if (0 == percentage) {
+      console.log("Build started... good luck!");
+    } else if (1 == percentage && emitNonSourceFiles) {
+      fs.createReadStream("./README.md").pipe(
+        fs.createWriteStream(buildPath + "README.md")
+      );
+      fs.writeFileSync(
+        buildPath + "package.json",
+        JSON.stringify(buildPlatformJson, null, 2),
+        "utf8"
+      );
+    }
+  };
+}
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
   const isProductionBuild = options.buildType === "prod";
+  const emitDeclarations = !!options.emitDeclarations;
+  const emitNonSourceFiles = !!options.emitNonSourceFiles;
 
-  const percentage_handler = function handler(percentage, msg) {
-    if (0 == percentage) {
-      console.log("Build started... good luck!");
-    } else if (1 == percentage) {
-      if (isProductionBuild) {
-        fs.createReadStream("./README.md").pipe(
-          fs.createWriteStream(buildPath + "README.md")
-        );
-      }
-
-      if (isProductionBuild) {
-        fs.writeFileSync(
-          buildPath + "package.json",
-          JSON.stringify(buildPlatformJson, null, 2),
-          "utf8"
-        );
-      }
-    }
+  const compilerOptions = emitDeclarations ? {} : {
+    declaration: false,
+    declarationDir: null
   };
 
   const config = {
@@ -108,22 +117,14 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-        },
-        {
-          test: /\.css$/,
-          loader: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: options.buildType !== "prod"
-              }
-            }
-          ]
+          options: {
+            configFile: options.tsConfigFile || "tsconfig.json",
+            compilerOptions
+          }
         },
         {
           test: /\.s(c|a)ss$/,
-          loader: [
+          use: [
             MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
@@ -141,6 +142,7 @@ module.exports = function (options) {
         },
         {
           test: /\.html$/,
+          exclude: [/node_modules/, require.resolve("./index.html")],
           loader: "html-loader"
         },
         {
@@ -155,7 +157,11 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreator",
+      library: {
+        root: options.libraryName || "SurveyCreator",
+        amd: "[dashedname]",
+        commonjs: "[dashedname]",
+      },
       libraryTarget: "umd",
       globalObject: "this",
       umdNamedDefine: true
@@ -193,7 +199,8 @@ module.exports = function (options) {
       }
     },
     plugins: [
-      new webpack.ProgressPlugin(percentage_handler),
+      new DashedNamePlugin(),
+      new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, buildPath)),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version)
@@ -218,17 +225,13 @@ module.exports = function (options) {
         inject: "body",
         template: "index.html"
       }),
-      new DtsGeneratorPlugin({
-        webpack: webpack,
-        filePath: "build/survey-creator-react.d.ts",
-        moduleName: "survey-creator-react"
-      })
     ]);
     config.devServer = {
-      contentBase: __dirname,
+      static: {
+        directory: path.join(__dirname, "."),
+      },
       //host: "0.0.0.0",
       compress: false,
-
       port: 8082
     };
   }

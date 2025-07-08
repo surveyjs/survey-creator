@@ -74,7 +74,7 @@ class CustomDesignerTab extends SurveyCreator.TabDesignerComponent {
     return (
       <React.Fragment>
         <div className="svc-flex-column">
-          {SurveyReact.ReactElementFactory.Instance.createElement('svc-toolbox', { creator: this.creator })}
+          {SurveyReact.ReactElementFactory.Instance.createElement('svc-toolbox', { model: this.creator })}
         </div>
         <div className={designerTabClassName}>
           <div className={survey.css.container}>
@@ -84,7 +84,7 @@ class CustomDesignerTab extends SurveyCreator.TabDesignerComponent {
             <div>Actions below survey header</div>
             <SurveyReact.SurveyActionBar model={this.creator.toolbar}/>
             <SurveyCreator.SurveyNavigation survey={survey} location="top"/>
-            {this.renderPages()}
+            {this.getRenderedPages()}
             <SurveyCreator.SurveyNavigation survey={survey} location="bottom" css={survey.css} />
           </div>
         </div>

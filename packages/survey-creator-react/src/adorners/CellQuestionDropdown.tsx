@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, ItemValue, QuestionSelectBase, SurveyModel } from "survey-core";
 import { ReactElementFactory, ReactSurveyElementsWrapper } from "survey-react-ui";
@@ -25,10 +25,7 @@ export class CellQuestionDropdownAdornerComponent extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): JSX.Element {
-    if (this.model.isDragged) {
-      return null;
-    }
+  render(): React.JSX.Element {
     const question = this.props.question as QuestionSelectBase;
     const textStyle = (this.props.question as any).textStyle;
     return (

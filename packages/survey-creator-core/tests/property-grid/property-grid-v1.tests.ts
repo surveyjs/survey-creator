@@ -42,7 +42,6 @@ import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { DefaultValueEditor } from "../../src/property-grid/values-survey";
 import { PropertyGridValueEditor } from "../../src/property-grid/values";
-import { FastEntryEditor } from "../../src/property-grid/fast-entry";
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 
 export * from "../../src/property-grid/bindings";
@@ -332,6 +331,7 @@ test("SurveyPropertyItemValue", () => {
 
   choicesQuestion.addRow();
   expect(question.choices).toHaveLength(3);
+  expect(question.choices[2].getType()).toEqual("checkboxitem");
   expect(rows[2].cells[0].value).toEqual(4);
   rows[2].cells[1].value = "item4";
   expect(rows[2].cells[1].value).toEqual("item4");
@@ -361,6 +361,7 @@ test("SurveyPropertyItemValue different view type", () => {
   valueQuestion.value = "1|item1\n\n2|item2\n3\ni4";
   valueEditor.apply();
   expect(question.choices).toHaveLength(4);
+  expect(question.choices[0].getType()).toBe("checkboxitem");
 
   var rows = choicesQuestion.visibleRows;
   expect(rows).toHaveLength(4);
@@ -749,9 +750,9 @@ test("extended SurveyPropertyItemValue + custom property - process items with cu
   Serializer.removeClass("itemvalues_ex");
 });
 test("SurveyPropertyItemValuesEditor + locale", () => {
-  var survey = new SurveyModel();
-  var p = survey.addNewPage();
-  var question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
+  const survey = new SurveyModel();
+  const p = survey.addNewPage();
+  const question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
   question.choices = [1, 2, 3];
   survey.locale = "en";
   question.choices[0].text = "English 1";
@@ -760,14 +761,16 @@ test("SurveyPropertyItemValuesEditor + locale", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  var rows = choicesQuestion.visibleRows;
-  expect(rows[0].cells[1].value).toEqual("English 1");
+  const rows = choicesQuestion.visibleRows;
+  const textQuestion = rows[0].getQuestionByColumnName("text");
+  expect(textQuestion.value).toBeFalsy();
+  expect(textQuestion.placeholder).toEqual("English 1");
   rows[0].cells[1].value = "Deutsch 1";
   survey.locale = "en";
   expect(question.choices[0].text).toEqual("English 1");
   survey.locale = "de";
   expect(question.choices[0].text).toEqual("Deutsch 1");
-  expect(rows[0].cells[1].value).toEqual("Deutsch 1");
+  expect(textQuestion.value).toEqual("Deutsch 1");
   survey.locale = "en";
 });
 test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
@@ -777,7 +780,6 @@ test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
     p.addNewQuestion("matrixdynamic", "q1")
   );
   question.addColumn("col1");
-  survey.locale = "en";
   question.columns[0].title = "English 1";
 
   survey.locale = "de";
@@ -785,9 +787,11 @@ test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  var rows = columnsQuestion.visibleRows;
-  expect(rows[0].getQuestionByColumnName("title").value).toEqual("English 1");
-  rows[0].getQuestionByColumnName("title").value = "Deutsch 1";
+  const rows = columnsQuestion.visibleRows;
+  const titleQuestion = rows[0].getQuestionByColumnName("title");
+  expect(titleQuestion.value).toBeFalsy();
+  expect(titleQuestion.placeholder).toBe("English 1");
+  titleQuestion.value = "Deutsch 1";
   survey.locale = "en";
   expect(question.columns[0].title).toEqual("English 1");
   survey.locale = "de";
@@ -1179,7 +1183,7 @@ test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
-  expect(pagesQuestion.addRowText).toEqual("Add New");
+  expect(pagesQuestion.addRowText).toEqual("Add new page");
 
   defaultStrings.pe["addNew@pages"] = "Add New Page";
   propertyGrid = new PropertyGridModelTester(survey);
@@ -1686,42 +1690,6 @@ test("expression editor in question expression validator should has access to su
   expect(conditionEditor.survey.getAllQuestions()).toHaveLength(3);
 });
 
-test("SurveyHelper.applyItemValueArray", () => {
-  var q1 = new QuestionDropdownModel("q1");
-  var q2 = new QuestionDropdownModel("q1");
-  q1.choices = [1];
-  FastEntryEditor.applyItemValueArray(q1.choices, null);
-  expect(q1.choices).toHaveLength(0);
-  q1.choices = [1];
-  q2.choices = [];
-  FastEntryEditor.applyItemValueArray(q1.choices, q2.choices);
-  expect(q1.choices).toHaveLength(0);
-  var testSetFunc = function (val1: Array<any>, val2: Array<any>, num: number) {
-    q1.choices = val1;
-    q2.choices = val2;
-    FastEntryEditor.applyItemValueArray(q1.choices, q2.choices);
-    expect(q1.toJSON()).toEqual(q2.toJSON());
-  };
-  testSetFunc([1, 2, 3], [1, 2, 4], 1);
-  testSetFunc([1, 2, 3], [1, 2, 4, 5], 2);
-  testSetFunc([1, 2, 3], [0, 1, 2, 3], 3);
-  testSetFunc([1, 2, 3], [1, 4, 3], 4);
-  testSetFunc([1, 2, 3], [1, 2, 3, 4, 5, 6], 5);
-  testSetFunc([1, 2, 3, 4, 5, 6], [1, 2, 3], 6);
-  testSetFunc(
-    [1, 2, 3],
-    [1, { value: 2, text: "item 2" }, { value: 4, text: "item 4" }],
-    7
-  );
-  testSetFunc([1, 2, 2, 3, 4, 5, 6], [1, 2, 2, 3], 8);
-  testSetFunc([1, 2, 3, 4, 2, 5, 6], [1, 2, 3, 2], 9);
-  testSetFunc(
-    [1, 2, 13, 14, 5, 6],
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-    10
-  );
-});
-
 test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
@@ -1835,37 +1803,6 @@ test("SurveyPropertyDefaultValueEditor: Default Value Title", () => {
   );
   expect(editorLocalization.getString("pe.defaultValue")).toEqual(defaultValueQuestion.title);
 });
-
-test("Setup choices from FastEntryEditor", () => {
-  var choices = new Array<ItemValue>();
-  var editor = new FastEntryEditor(choices);
-  editor.comment.value = "1|One\n2|Two";
-  editor.apply();
-  expect(choices).toHaveLength(2);
-  expect(choices[0].value).toEqual("1");
-  expect(choices[0].text).toEqual("One");
-  expect(choices[1].value).toEqual("2");
-  expect(choices[1].text).toEqual("Two");
-});
-test("Empty choices from FastEntryEditor, Bug#4733", () => {
-  var choices = new Array<ItemValue>();
-  choices.push(new ItemValue(1));
-  choices.push(new ItemValue(2));
-  var editor = new FastEntryEditor(choices);
-  editor.comment.value = "";
-  editor.apply();
-  expect(choices).toHaveLength(0);
-});
-test("SurveyHelper convertTextToItemValues", () => {
-  var choices = new Array<ItemValue>();
-  choices.push(new ItemValue(1));
-  choices.push(new ItemValue("itemValue", "itemText"));
-  choices.push(new ItemValue("2"));
-
-  var editor = new FastEntryEditor(choices);
-  expect(editor.comment.value).toEqual("1\nitemValue|itemText\n2");
-});
-
 test("SurveyPropertyDefaultValueEditor json properties filtering", () => {
   PropertyGridEditorCollection.register(new PropertyGridValueEditor());
   var question = new QuestionTextModel("q1");

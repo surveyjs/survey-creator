@@ -3,6 +3,7 @@
     class="svc-item-value-wrapper"
     @pointerdown="adorner.onPointerDown($event)"
     :data-sv-drop-target-item-value="adorner.isDraggable ? item.value : null"
+    ref="root"
     :class="{
       'svc-item-value--new': adorner.isNew,
       'svc-item-value--dragging': adorner.isDragging,
@@ -17,24 +18,27 @@
         v-if="adorner.isDraggable"
         class="svc-item-value-controls__button svc-item-value-controls__drag"
       >
-        <sv-svg-icon
+        <SvComponent
+          :is="'sv-svg-icon'"
           class="svc-item-value-controls__drag-icon"
-          :iconName="'icon-drag-area-indicator'"
-          :size="24"
+          :iconName="'icon-drag-24x24'"
+          :size="'auto'"
           :title="adorner.dragTooltip"
-        ></sv-svg-icon>
+        ></SvComponent>
       </span>
       <span
         v-if="adorner.allowAdd"
         class="svc-item-value-controls__button svc-item-value-controls__add"
         v-key2click
         @click="adorner.add(adorner)"
-        :aria-label="undefined"
-        ><sv-svg-icon
+        role="button"
+        :aria-label="adorner.tooltip"
+        ><SvComponent
+          :is="'sv-svg-icon'"
           :iconName="'icon-add_16x16'"
-          :size="16"
-          :title="undefined"
-        ></sv-svg-icon
+          :size="'auto'"
+          :title="adorner.tooltip"
+        ></SvComponent
       ></span>
       <span
         v-if="adorner.allowRemove"
@@ -42,29 +46,41 @@
         v-key2click
         @click="adorner.remove(adorner)"
         @blur="adorner.onFocusOut($event)"
-        :aria-label="undefined"
-        ><sv-svg-icon
+        role="button"
+        :aria-label="adorner.tooltip"
+        ><SvComponent
+          :is="'sv-svg-icon'"
           :iconName="'icon-remove_16x16'"
-          :size="16"
-          :title="undefined"
-        ></sv-svg-icon
+          :size="'auto'"
+          :title="adorner.tooltip"
+        ></SvComponent
       ></span>
     </div>
     <div class="svc-item-value__item" @click="adorner.select(adorner, $event)">
-      <component :is="componentName" v-bind="componentData"></component>
+      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ItemValue, QuestionSelectBase } from "survey-core";
 import {
   ItemValueWrapperViewModel,
   type SurveyCreatorModel,
 } from "survey-creator-core";
-import { computed } from "vue";
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from "vue";
 
+const root = ref<HTMLElement>();
 const props = defineProps<{
   componentName: string;
   componentData: {
@@ -78,6 +94,26 @@ const props = defineProps<{
 const creator = computed(() => props.componentData.data.creator);
 const question = computed(() => props.componentData.question);
 const item = computed(() => props.componentData.item);
+
+const stopWatch = watch(
+  () => item.value,
+  (newValue, oldValue) => {
+    if (newValue && root.value) {
+      newValue.setRootElement(root.value);
+    }
+    if (oldValue) {
+      oldValue.setRootElement(undefined as any);
+    }
+  }
+);
+onMounted(() => {
+  if (root.value && item.value) {
+    item.value.setRootElement(root.value);
+  }
+});
+onUnmounted(() => {
+  item.value.setRootElement(undefined as any);
+});
 const adorner = useCreatorModel(
   () =>
     new ItemValueWrapperViewModel(creator.value, question.value, item.value),
@@ -86,4 +122,8 @@ const adorner = useCreatorModel(
     value.dispose();
   }
 );
+
+onBeforeUnmount(() => {
+  stopWatch();
+});
 </script>

@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
-import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorModel, TabbedMenuItem } from "survey-creator-core";
 
 @Component({
   selector: "survey-creator",
@@ -8,7 +8,7 @@ import { SurveyCreatorModel } from "survey-creator-core";
 })
 export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements AfterViewInit {
   @Input() model!: SurveyCreatorModel;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
 
   constructor(changeDetectorRef: ChangeDetectorRef) {
     super(changeDetectorRef);
@@ -25,10 +25,10 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   }
   protected override onModelChanged(): void {
     this.changeDetectorRef.detectChanges();
-    if(this.previousModel) {
+    if (this.previousModel) {
       this.previousModel.unsubscribeRootElement();
     }
-    if(this.creator && this.container.nativeElement) {
+    if (this.creator && this.container.nativeElement) {
       this.creator.setRootElement(this.container.nativeElement);
     }
   }
@@ -39,6 +39,12 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   public override ngOnDestroy(): void {
     this.creator.unsubscribeRootElement();
     super.ngOnDestroy();
+  }
+  public get visibleTabs(): Array<TabbedMenuItem> {
+    return this.creator.tabs.filter(tab => this.creator.viewType == tab.id && tab.visible);
+  }
+  trackTabBy(_: number, tab: TabbedMenuItem) {
+    return tab.id;
   }
 }
 

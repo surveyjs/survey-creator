@@ -1,0 +1,19 @@
+<div class="spg-boolean-switch" role="checkbox" [attr.aria-checked]="model.booleanValue || false"
+  [attr.aria-required]="model.a11y_input_ariaRequired" [attr.aria-label]="model.a11y_input_ariaLabel"
+  [attr.aria-labelledby]="model.a11y_input_ariaLabelledBy" [attr.aria-invalid]="model.a11y_input_ariaInvalid"
+  [attr.aria-errormessage]="model.a11y_input_ariaErrormessage" (click)="model.value = !model.value">
+  <div class="spg-boolean-switch__button" tabindex="0" [key2click]="{ disableTabStop: true }"
+    [class]="model.value ? 'spg-boolean-switch__button--checked' : ''">
+    <div class="spg-boolean-switch__thumb">
+      <div class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--left"></div>
+    </div>
+    <div class="spg-boolean-switch__thumb">
+      <div class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--right"></div>
+    </div>
+  </div>
+  <div class="spg-boolean-switch__caption">
+    <div class="spg-boolean-switch__title" [id]="model.labelRenderedAriaID">
+      <span [model]="model.locTitle" sv-ng-string></span>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base } from "survey-core";
 import { QuestionRatingAdornerViewModel } from "survey-creator-core";
 import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
@@ -30,24 +30,26 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
   protected getStateElement(): Base {
     return this.model;
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     const model = this.ratingModel;
     return (<>
       <div className="svc-rating-question-content">
         <div className={model.controlsClassNames}>
           {model.allowRemove ? attachKey2click(<span
+            role="button"
             className={model.removeClassNames}
             aria-label={model.removeTooltip}
             onClick={() => model.removeItem(model)}
           >
-            <SvgIcon size={16} iconName={"icon-remove_16x16"} title={model.removeTooltip}></SvgIcon>
+            <SvgIcon size={"auto"} iconName={"icon-remove_16x16"} title={model.removeTooltip}></SvgIcon>
           </span>) : null}
           {model.allowAdd ? attachKey2click(<span
+            role="button"
             className={model.addClassNames}
             aria-label={model.addTooltip}
             onClick={() => model.addItem(model)}
           >
-            <SvgIcon size={16} iconName={"icon-add_16x16"} title={model.addTooltip}></SvgIcon>
+            <SvgIcon size={"auto"} iconName={"icon-add_16x16"} title={model.addTooltip}></SvgIcon>
           </span>) : null}
         </div>
         {this.props.element}

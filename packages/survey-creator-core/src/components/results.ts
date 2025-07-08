@@ -2,7 +2,7 @@ import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-core";
 import { Base, property, propertyArray } from "survey-core";
 
-require("./results.scss");
+import "./results.scss";
 
 export class SurveyResultsItemModel extends Base {
   @property({ defaultValue: true }) collapsed: boolean;
@@ -24,7 +24,7 @@ export class SurveyResultsItemModel extends Base {
 
   public toggle = () => {
     this.collapsed = !this.collapsed;
-  }
+  };
   public get isNode(): boolean {
     return this._data.isNode;
   }
@@ -44,7 +44,7 @@ export class SurveyResultsItemModel extends Base {
     return this._data.getString(data);
   }
 
-  private markerWidth: number = 16
+  private markerWidth: number = 16;
   public get markerMargin(): string {
     return (1.5 + this.lvl) * this.markerWidth + "px";
   }
@@ -104,8 +104,8 @@ export class SurveyResultsModel extends Base {
 
   public selectTableClick = () => {
     this.resultViewType = "table";
-  }
+  };
   public selectJsonClick = () => {
     this.resultViewType = "text";
-  }
+  };
 }

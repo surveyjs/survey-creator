@@ -1,8 +1,8 @@
 import { Action, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
-import { parseColor } from "../utils/utils";
+import { parseColor } from "../utils/color-utils";
+import { listComponentCss } from "../components/list-theme";
 
 const DEFAULT_COLOR: string = "#000000";
-const DEFAULT_SWATCH_COLOR: string = "#FFFFFF";
 export class QuestionColorModel extends QuestionTextModel {
   @property() allowEmptyValue: boolean = false;
   constructor(name: string) {
@@ -14,22 +14,22 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   private getCorrectedValue(newValue: string): string {
-    if(newValue == undefined || newValue == null || (this.allowEmptyValue && !newValue)) return newValue;
+    if (newValue == undefined || newValue == null || (this.allowEmptyValue && !newValue)) return newValue;
     newValue = parseColor(newValue ?? "").color;
-    if(newValue.indexOf("#") < 0) {
+    if (newValue.indexOf("#") < 0) {
       newValue = "#" + newValue;
     }
     newValue = (newValue.match(/#([0-9a-fA-F]){1,6}/) || [DEFAULT_COLOR])[0];
-    if(newValue.length === 4) {
+    if (newValue.length === 4) {
       let value = newValue.slice(0, 1);
-      for(let i = 1; i < 4; i++) {
+      for (let i = 1; i < 4; i++) {
         value += newValue[i] + newValue[i];
       }
       newValue = value;
     }
-    if(newValue.length < 7) {
+    if (newValue.length < 7) {
       const length = newValue.length;
-      for(let i: number = 0; i < 7 - length; i++) {
+      for (let i: number = 0; i < 7 - length; i++) {
         newValue += "0";
       }
     }
@@ -45,7 +45,7 @@ export class QuestionColorModel extends QuestionTextModel {
     this.updateRenderedValue();
   }
   public onBeforeInput(event: InputEvent): void {
-    if(!!event.data && !/[\d\w(),#]/.test(event.data)) {
+    if (!!event.data && !/[\d\w(),#]/.test(event.data)) {
       event.preventDefault();
     }
   }
@@ -60,7 +60,7 @@ export class QuestionColorModel extends QuestionTextModel {
     this._renderedValue = undefined;
   }
   private updateRenderedValue(): void {
-    if(this.value) {
+    if (this.value) {
       const color = parseColor(this.value || "");
       this._renderedValue = color.color;
     } else if (this.allowEmptyValue) {
@@ -70,7 +70,7 @@ export class QuestionColorModel extends QuestionTextModel {
     }
   }
   public get renderedValue(): string {
-    if(!this._renderedValue && this._renderedValue !== "") {
+    if (!this._renderedValue && this._renderedValue !== "") {
       this.updateRenderedValue();
     }
     return this._renderedValue.toUpperCase();
@@ -83,10 +83,10 @@ export class QuestionColorModel extends QuestionTextModel {
       .toString();
   }
   public getSwatchStyle(): {[index: string]: string} {
-    return { backgroundColor: this.renderedValue || DEFAULT_SWATCH_COLOR };
+    return { backgroundColor: this.renderedValue };
   }
   public get renderedColorValue() {
-    return this.renderedValue || DEFAULT_SWATCH_COLOR;
+    return this.renderedValue || DEFAULT_COLOR;
   }
   public get isInputTextUpdate(): boolean {
     return false;
@@ -98,7 +98,7 @@ export class QuestionColorModel extends QuestionTextModel {
   private _dropdownAction: Action;
 
   public get dropdownAction (): Action {
-    if(!this._dropdownAction) {
+    if (!this._dropdownAction) {
       this._dropdownAction = this.createDropdownAction();
     }
     return this._dropdownAction;
@@ -112,10 +112,10 @@ export class QuestionColorModel extends QuestionTextModel {
   }
   protected onTextKeyDownHandler(event: any): void {
     const popupModel = <PopupModel>this.dropdownAction.popupModel;
-    if(event.key === "ArrowDown") {
-      (popupModel).isVisible = true;
+    if (event.key === "ArrowDown") {
+      this.dropdownAction.action();
     }
-    if(!popupModel.isVisible) {
+    if (!popupModel.isVisible) {
       super.onTextKeyDownHandler(event);
     }
   }
@@ -129,11 +129,13 @@ export class QuestionColorModel extends QuestionTextModel {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },
-      items: this.choices
+      items: this.choices,
+      cssClasses: listComponentCss,
     }, {
       showPointer: false,
       verticalPosition: "bottom",
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
     });
     action.disableTabStop = true;
     const popupModel = <PopupModel>action.popupModel;
@@ -141,6 +143,7 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.displayMode = IsTouch ? "overlay" : "popup";
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
+    popupModel.getTargetCallback = undefined;
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }
@@ -150,11 +153,7 @@ export class QuestionColorModel extends QuestionTextModel {
     const dropdownAction = this.dropdownAction;
     dropdownAction.cssClasses = { item: classes.colorDropdown };
     dropdownAction.iconName = classes.colorDropdownIcon;
-    const listModel = <ListModel<ItemValue>>dropdownAction.popupModel.contentComponentData.model;
-    listModel.cssClasses = {};
-    listModel.cssClasses = {
-      itemBody: listModel.cssClasses.itemBody + " " + classes.colorItem
-    };
+    dropdownAction.iconSize = "auto" as any;
     return classes;
   }
 
@@ -176,4 +175,4 @@ Serializer.addClass("color", [
 
 QuestionFactory.Instance.registerQuestion("color", name => {
   return new QuestionColorModel(name);
-});
+}, false);

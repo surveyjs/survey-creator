@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   ReactQuestionFactory,
   SurveyQuestionElementBase
@@ -10,23 +10,21 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
   protected get question(): QuestionLinkValueModel {
     return this.questionBase as QuestionLinkValueModel;
   }
-  protected renderClear(): JSX.Element {
+  protected renderClear(): React.JSX.Element {
     const showClear = (this.questionBase as any).showClear;
     if (!this.questionBase.isReadOnly && showClear) {
       return (
         <ActionButton
           classes={this.question.linkClearButtonCssClasses}
           click={() => this.question.doClearClick()}
-          selected={this.question.isSelected}
           text={editorLocalization.getString("pe.clear")}
         ></ActionButton>
       );
-    }
-    else {
+    } else {
       return null;
     }
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     return (
       <>
         <ActionButton
@@ -36,6 +34,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
           disabled={!this.question.isClickable}
           text={this.question.linkValueText}
           title={this.question.tooltip}
+          iconName={this.question.iconName}
         ></ActionButton>
         {this.renderClear()}
       </>

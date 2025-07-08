@@ -7,7 +7,9 @@ import generatePackageJson from "rollup-plugin-generate-package-json";
 const json = require("./publish/package.json");
 const packageJson = require("./package.json");
 json.version = packageJson.version;
-// json.dependencies["survey-core"] = json.version;
+json.peerDependencies["survey-core"] = json.version;
+json.peerDependencies["survey-vue3-ui"] = json.version;
+json.peerDependencies["survey-creator-core"] = json.version;
 
 const libraryName = "survey-creator-vue";
 
@@ -17,7 +19,7 @@ export default defineConfig(({ mode }) => {
     plugins: [vue()],
 
     build: {
-      // Output compiled files to /dist.
+      emptyOutDir: false,
       sourcemap: mode == "development",
       outDir: "./build",
       lib: {
@@ -60,12 +62,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     resolve: {
-      preserveSymlinks: true,
+      dedupe: ["survey-core", "vue"],
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
-        "survey-core": fileURLToPath(
-          new URL("./node_modules/survey-core", import.meta.url)
-        ),
       },
     },
   };

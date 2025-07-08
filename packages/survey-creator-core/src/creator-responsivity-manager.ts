@@ -1,5 +1,6 @@
 import { SurveyCreatorModel } from "./creator-base";
-require("./responsivity.scss");
+import "./responsivity.scss";
+import { DomWindowHelper } from "./utils/global_variables_utils";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
@@ -9,7 +10,7 @@ export class CreatorResponsivityManager {
     "l": 1200,
     "m": 900,
     "s": 600,
-  }
+  };
   private getScreenWidth(): string {
     let res;
     Object.keys(CreatorResponsivityManager.screenSizeBreakpoints).forEach((mode: string) => {
@@ -36,10 +37,14 @@ export class CreatorResponsivityManager {
   private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
     this.creator.allowShowPageNavigator = this.creator.pageEditMode === "bypage" || pageNavigatorVisibility;
   }
+  private procesShowSurfaceToolbar(toolboxVisible: boolean) {
+    this.creator.allowShowSurfaceToolbar = toolboxVisible;
+  }
 
   private findCorrectParent(container: HTMLElement) {
-    if (!!window?.getComputedStyle) {
-      if (window.getComputedStyle(container.parentElement).display === "inline") {
+    const _window = DomWindowHelper.getWindow();
+    if (!!_window?.getComputedStyle) {
+      if (_window.getComputedStyle(container.parentElement).display === "inline") {
         return this.findCorrectParent(container.parentElement);
       }
     }
@@ -48,20 +53,24 @@ export class CreatorResponsivityManager {
 
   constructor(protected container: HTMLDivElement, private creator: SurveyCreatorModel) {
     if (typeof ResizeObserver !== "undefined") {
-      this.resizeObserver = new ResizeObserver((_) => this.process());
+      this.resizeObserver = new ResizeObserver((_) => {
+        DomWindowHelper.requestAnimationFrame(() => {
+          this.process();
+        });
+      });
       this.resizeObserver.observe(this.findCorrectParent(this.container));
-      this.process();
+      this.process(true);
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
         this.creator.setShowSidebar(false);
       }
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean) {
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean, narrowSidebar: boolean) {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
     this.procesShowToolbox(toolboxVisible);
     this.procesShowPageNavigator(toolboxVisible);
-    this.creator.sidebar.flyoutMode = flyoutSidebar;
+    this.procesShowSurfaceToolbar(toolboxVisible);
 
     if (this.creator.sidebar.visible && !flyoutSidebar) {
       this.creator.sidebar.collapsedManually = false;
@@ -72,24 +81,54 @@ export class CreatorResponsivityManager {
     if (!this.creator.sidebar.visible && !this.creator.sidebar.collapsedManually && !flyoutSidebar && this.creator.toolboxLocation != "right") {
       this.creator.sidebar.expandSidebar();
     }
-
+    this.creator.sidebar.flyoutMode = flyoutSidebar;
+    this.creator.sidebar.narrowMode = narrowSidebar;
   }
-  process() {
+  public process(isFirst: boolean = false) {
+    if (isFirst) {
+      this.creator.sidebar.blockAnimations();
+      this.creator.toolbox.blockAnimations();
+    }
+    this.updateSurveyActualWidth();
     this.currentWidth = this.getScreenWidth();
     if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
-      this._process(false, true, false);
+      this._process(false, true, false, false);
     } else if (this.currentWidth === "l") {
-      this._process(true, true, false);
+      this._process(true, true, false, true);
     } else if (this.currentWidth === "m") {
-      this._process(true, true, true);
+      this._process(true, true, true, false);
     } else {
-      this._process(true, false, true);
+      this._process(true, false, true, false);
     }
 
     if (this.currentWidth == "xs") {
       this.initMobileView();
     } else {
       this.resetMobileView();
+    }
+    if (isFirst) {
+      this.creator.sidebar.releaseAnimations();
+      this.creator.toolbox.releaseAnimations();
+    }
+  }
+  public updateSurveyActualWidth() {
+    if (!!this.container && !!this.container.querySelector) {
+      const surveyContainer = this.container?.querySelector(".svc-tab-designer_content") as HTMLDivElement;
+      const _window = DomWindowHelper.getWindow();
+      if (!!surveyContainer && _window && typeof _window.getComputedStyle === "function") {
+        const conputedStyles = getComputedStyle(surveyContainer);
+        let paddingLeft = 0;
+        let paddingRight = 0;
+        try {
+          paddingLeft = parseFloat((conputedStyles.paddingLeft || "").replace("px", ""));
+          paddingRight = parseFloat((conputedStyles.paddingRight || "").replace("px", ""));
+        } catch(e) { }
+        this.creator.survey.setResponsiveStartWidth(surveyContainer.offsetWidth - paddingLeft - paddingRight);
+        const surveyContent = surveyContainer.querySelector("div") as HTMLDivElement;
+        if (!!surveyContent) {
+          this.creator.survey.setStaticStartWidth(surveyContent.clientWidth / this.creator.survey.widthScale * 100);
+        }
+      }
     }
   }
 

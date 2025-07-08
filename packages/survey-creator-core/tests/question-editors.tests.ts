@@ -44,7 +44,7 @@ test("MatrixCellWrapperViewModel select context", () => {
     selectedElement: undefined,
     selectedProperty: undefined,
     selectElement: undefined,
-    onSelectedElementChanged: new Event()
+    onElementSelected: new Event()
   };
   creator.selectElement = (element: any, property?: string, focus?: boolean) => {
     creator.selectedElement = element;
@@ -91,7 +91,7 @@ test("MatrixCellWrapperViewModel.isSupportCellEditor", () => {
     selectedElement: undefined,
     selectedProperty: undefined,
     selectElement: undefined,
-    onSelectedElementChanged: new Event()
+    onElementSelected: new Event()
   };
   creator.selectElement = (element: any, property?: string, focus?: boolean) => {
     creator.selectedElement = element;
@@ -169,9 +169,11 @@ test("Edit matrix cell question", (): any => {
   let type;
   let columnName;
   creator.onModified.add((sender, options) => {
-    modifiedCounter++;
-    type = options.type;
-    columnName = options.column.name;
+    if (options.type === "MATRIX_CELL_EDITOR") {
+      modifiedCounter++;
+      type = options.type;
+      columnName = options.column.name;
+    }
   });
   creator.onStateChanged.add((sender, options) => {
     stateCounter++;
@@ -195,15 +197,16 @@ test("Edit matrix cell question", (): any => {
   expect(matrix.columns[0].cellType).toEqual("radiogroup");
   expect(creator.state).toBe("modified");
   expect(modifiedCounter).toBe(1);
-  expect(stateCounter).toBe(1);
+  expect(stateCounter).toBeGreaterThan(0);
   expect(type).toBe("MATRIX_CELL_EDITOR");
   expect(columnName).toBe("column1");
 
+  stateCounter = 0;
   question = matrix.visibleRows[0].cells[0].question;
   editSurvey = new MatrixCellWrapperEditSurvey(creator, question, editQuestion.choices[0]);
   editSurvey.apply();
   expect(modifiedCounter).toBe(1);
-  expect(stateCounter).toBe(1);
+  expect(stateCounter).toBe(0);
 });
 test("Edit matrix cell question & selectAll, other and none", (): any => {
   let creator = new CreatorTester();
@@ -262,4 +265,97 @@ test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded ev
   expect(valueFromCallback).toEqual("item4");
   expect(ratingQuestion.rateValues[3].value).toEqual("newItem1");
   expect(ratingQuestion.rateValues[3].text).toEqual("New Item 1");
+});
+test("Edit matrix cell question & showInMultipleColumns, #5750", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1", cellType: "checkbox", showInMultipleColumns: true, choices: [1, 2, 3, 4] }],
+        "rows": ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  let editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.getType()).toEqual("checkbox");
+  editQuestion.choices = [1, 2, 3, 4, 5];
+  editSurvey.apply();
+  const columnQuestion = matrix.columns[0];
+  expect(columnQuestion.cellType).toEqual("checkbox");
+  expect(columnQuestion.showInMultipleColumns).toBeTruthy();
+  expect(columnQuestion.choices).toHaveLength(5);
+});
+test("Edit matrix cell question & showInMultipleColumns, #5750", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1", cellType: "checkbox", showNoneItem: true, choices: [1, 2, 3, 4] }],
+        "rows": ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  creator.selectElement(matrix.columns[0]);
+  expect(creator.propertyGrid.getQuestionByName("showNoneItem").value).toBeTruthy();
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  let editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.getType()).toEqual("checkbox");
+  editQuestion.choices = [1, 2];
+  editQuestion.showNoneItem = false;
+  editSurvey.apply();
+  expect(creator.propertyGrid.getQuestionByName("showNoneItem").value).toBeFalsy();
+  expect(matrix.columns[0].choices).toHaveLength(2);
+});
+test("Edit matrix cell question & default cellType, #5976", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1" }],
+        "rows": ["row1", "row2"],
+        choices: [1, 2, 3, 4]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  creator.selectElement(matrix.columns[0]);
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  let editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.getType()).toEqual("dropdown");
+  editQuestion.choices = [1, 2];
+  editSurvey.apply();
+  expect(matrix.columns[0].cellType).toBe("dropdown");
+  expect(matrix.columns[0].choices).toHaveLength(2);
+});
+test("Edit matrix cell question & survey locale", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    locale: "de",
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1" }],
+        "rows": ["row1", "row2"],
+        choices: [1, 2, 3, 4]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  creator.selectElement(matrix.columns[0]);
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  expect(editSurvey.survey.locale).toEqual("de");
 });

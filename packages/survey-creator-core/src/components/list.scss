@@ -1,0 +1,305 @@
+@use "../variables" as *;
+
+.svc-list {
+  width: 100%;
+  padding: var(--ctr-list-padding-top, var(--sjs-spacing-x1)) var(--ctr-list-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-list-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-list-padding-left, var(--sjs-spacing-x1));
+  margin: 0;
+  overflow-y: auto;
+  list-style-type: none;
+
+  box-sizing: border-box;
+}
+
+.svc-list__item {
+  width: 100%;
+  outline: none;
+}
+
+.svc-list__item-body {
+  @include textEllipsis;
+  @include ctrDefaultFont;
+  text-align: start;
+  color: var(--ctr-list-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  transition: color $creator-transition-duration;
+
+  --thm-list-item-padding-delta: var(--ctr-list-item-padding-left, var(--sjs-spacing-x2));
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--thm-list-item-padding-delta));
+  display: flex;
+  flex: 1 0 0;
+  padding-block-start: var(--ctr-list-item-padding-top, var(--sjs-spacing-x150));
+  padding-block-end: var(--ctr-list-item-padding-bottom, var(--sjs-spacing-x150));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(2));
+  padding-inline-end: var(--ctr-list-item-padding-right, var(--sjs-spacing-x6));
+
+  align-items: center;
+  gap: var(--ctr-list-item-gap, var(--sjs-spacing-x2));
+  border-radius: var(--ctr-list-item-corner-radius, var(--sjs-corner-radius-x075));
+  cursor: pointer;
+
+  transition: background-color $creator-transition-duration;
+
+  & > span,
+  & > sv-ng-string {
+    flex: 1 0 0;
+  }
+}
+
+.svc-list__item:disabled,
+.svc-list__item--disabled {
+  opacity: var(--ctr-list-item-opacity-disabled, 0.25);
+  pointer-events: none;
+}
+
+.svc-list__item:focus,
+.svc-list__item:hover,
+.svc-list__item--focused,
+.svc-list__item--hovered {
+  & > .svc-list__item-body {
+    background: var(--ctr-list-item-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
+    color: var(--ctr-list-item-text-color-hovered, var(--sjs-layer-1-foreground-100, #000000e6));
+
+    .svc-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-hovered, var(--sjs-primary-background-500, #19b394ff));
+    }
+
+    .svc-list-item__marker-icon use {
+      fill: var(--ctr-list-item-submenu-arrow-color-hovered-item, var(--sjs-layer-1-foreground-75, #000000bf));
+    }
+  }
+}
+
+.svc-list__item--selected,
+.svc-list__item--selected:hover,
+.svc-list__item--selected:focus,
+.svc-list__item.svc-list__item--selected:hover {
+  & > .svc-list__item-body {
+    @include ctrDefaultBoldFont;
+    color: var(--ctr-list-item-text-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
+    background: var(--ctr-list-item-background-color-selected, var(--sjs-primary-background-500, #19b394ff));
+
+    .svc-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
+    }
+  }
+}
+
+.svc-list__item--group-selected,
+.svc-list__item--group-selected:hover,
+.svc-list__item--group-selected:focus {
+  & > .svc-list__item-body {
+    @include ctrDefaultFont;
+    color: var(--ctr-list-item-text-color-selected-submenu, var(--sjs-layer-1-foreground-100, #000000e6));
+    background: var(--ctr-list-item-background-color-selected-submenu, var(--sjs-layer-1-background-400, #f5f5f5ff));
+
+    .svc-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected-submenu, var(--sjs-primary-background-500, #19b394ff));
+    }
+
+    .svc-list-item__marker-icon use {
+      fill: var(--ctr-list-item-submenu-arrow-color-selected-item-submenu, var(--sjs-layer-1-foreground-75, #000000bf));
+    }
+  }
+}
+
+.svc-list__item--with-icon > .svc-list__item-body {
+  padding-block-start: var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150));
+  padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, var(--sjs-spacing-x150));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(2));
+  padding-inline-end: var(--ctr-list-item-padding-right, var(--sjs-spacing-x6));
+}
+
+.svc-list__item--group > .svc-list__item-body {
+  padding-block-start: var(--ctr-list-item-padding-top, var(--sjs-spacing-x150));
+  padding-block-end: var(--ctr-list-item-padding-bottom, var(--sjs-spacing-x150));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(1));
+  padding-inline-end: var(--ctr-list-item-padding-right-submenu, var(--sjs-spacing-x1));
+}
+
+.svc-list__item--with-icon.svc-list__item--group > .svc-list__item-body {
+  padding-block-start: var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150));
+  padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, var(--sjs-spacing-x150));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(1));
+  padding-inline-end: var(--ctr-list-item-padding-right-submenu, var(--sjs-spacing-x1));
+}
+
+.svc-list__item--with-icon.svc-list__item--group .sv-popup-inner > .sv-popup__container {
+  margin-top: calc(
+    var(--ctr-list-item-padding-top, var(--sjs-spacing-x150)) -
+      var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150)) -
+      var(--ctr-list-padding-top, var(--sjs-spacing-x1))
+  );
+}
+
+.svc-list__item-separator {
+  width: 100%;
+  height: var(--ctr-separator-width, var(--sjs-stroke-x1));
+  margin: var(--ctr-separator-margin-vertical-small, var(--sjs-spacing-x1)) 0px;
+  background-color: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
+}
+
+.svc-list__item-icon {
+  display: flex;
+  width: var(--ctr-list-item-icon-width, var(--sjs-font-size-x3));
+  height: var(--ctr-list-item-icon-height, var(--sjs-font-size-x3));
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+
+  use {
+    fill: var(--ctr-list-item-icon-color, var(--sjs-primary-background-500, #19b394ff));
+  }
+}
+
+.svc-list-item__marker-icon {
+  display: flex;
+  padding: var(--ctr-list-item-submenu-arrow-padding, var(--sjs-spacing-x05));
+  align-items: flex-start;
+  width: var(--ctr-list-item-submenu-arrow-width, var(--sjs-font-size-x2));
+  height: var(--ctr-list-item-submenu-arrow-height, var(--sjs-font-size-x2));
+  box-sizing: content-box;
+  justify-content: center;
+
+  use {
+    fill: var(--ctr-list-item-submenu-arrow-color, var(--sjs-layer-1-foreground-75, #000000bf));
+  }
+}
+
+.svc-list-item__marker-icon + * {
+  --thm-list-item-gap: var(--ctr-list-item-gap, var(--sjs-spacing-x2));
+  margin-inline-start: calc(0px - var(--thm-list-item-gap));
+}
+
+.svc-list__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.svc-list__filter {
+  display: flex;
+  align-items: flex-start;
+  align-items: center;
+  gap: var(--ctr-list-search-gap, var(--sjs-spacing-x2));
+
+  padding-inline-start: var(--ctr-list-search-padding-left, var(--sjs-spacing-x3));
+  padding-inline-end: var(--ctr-list-search-padding-right, var(--sjs-spacing-x2));
+  padding-block-start: var(--ctr-list-search-padding-top, var(--sjs-spacing-x250));
+  padding-block-end: var(--ctr-list-search-padding-bottom, var(--sjs-spacing-x250));
+
+  border-radius: var(--ctr-toolbox-search-corner-radius, 0px);
+  border-bottom: var(--ctr-list-search-border-width-bottom, var(--sjs-stroke-x1)) solid
+    var(--ctr-list-search-border-color, var(--sjs-border-25, #d4d4d4ff));
+}
+
+.svc-list__filter-icon {
+  opacity: var(--ctr-list-search-icon-opacity, 1);
+  display: flex;
+  width: var(--ctr-list-search-icon-width, var(--sjs-font-size-x3));
+  height: var(--ctr-list-search-icon-height, var(--sjs-font-size-x3));
+  align-items: center;
+
+  .sv-svg-icon {
+    width: var(--ctr-list-search-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-list-search-icon-height, var(--sjs-font-size-x3));
+  }
+
+  use {
+    fill: var(--ctr-list-search-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+  }
+}
+
+.svc-list__input {
+  @include ctrDefaultFont;
+  background-color: transparent;
+  color: var(--ctr-list-search-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--ctr-list-search-text-color-placeholder, var(--sjs-layer-1-foreground-50, #00000080));
+  }
+}
+
+.svc-list__filter-clear-button {
+  display: flex;
+  padding: var(--ctr-search-button-padding-vertical, var(--sjs-spacing-x05))
+    var(--ctr-search-button-padding-horizontal, var(--sjs-spacing-x05));
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ctr-search-button-corner-radius, var(--sjs-corner-radius-x05));
+  appearance: none;
+  border: none;
+  border-radius: 100%;
+  background-color: transparent;
+
+  svg {
+    display: flex;
+    width: var(--ctr-search-button-icon-width, var(--sjs-font-size-x2));
+    height: var(--ctr-search-button-icon-height, var(--sjs-font-size-x2));
+    justify-content: center;
+    align-items: center;
+
+    use {
+      fill: var(--ctr-search-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
+    }
+  }
+
+  &:hover {
+    background: var(
+      --ctr-search-button-background-color-clear-hovered,
+      var(--sjs-semantic-red-background-10, #e50a3e1a)
+    );
+
+    use {
+      fill: var(--ctr-search-button-icon-color-clear-hovered, var(--sjs-semantic-red-background-500, #e50a3eff));
+    }
+  }
+}
+
+.svc-list__empty-container {
+  padding: var(--ctr-list-padding-top-no-data, var(--sjs-spacing-x4))
+    var(--ctr-list-padding-right-no-data, var(--sjs-spacing-x2))
+    var(--ctr-list-padding-bottom-no-data, var(--sjs-spacing-x4))
+    var(--ctr-list-padding-left-no-data, var(--sjs-spacing-x2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.svc-list__empty-text {
+  @include ctrDefaultFont;
+  @include textEllipsis;
+  text-align: center;
+  align-self: stretch;
+  color: var(--ctr-list-no-data-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+}
+
+.sv-popup--menu-phone,
+.sv-popup--menu-tablet {
+  .svc-list-item__marker-icon {
+    display: none;
+  }
+
+  .svc-list__item-body {
+    pointer-events: none;
+  }
+
+  .svc-list__item--group-selected > .svc-list__item-body {
+    @include ctrDefaultBoldFont;
+    color: var(--ctr-list-item-text-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
+    background: var(--ctr-list-item-background-color-selected, var(--sjs-primary-background-500, #19b394ff));
+
+    use {
+      fill: var(--ctr-list-item-icon-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
+    }
+  }
+}

@@ -10,8 +10,12 @@ import { TestDefaultComponent } from "./default.component";
 export class TestLocalizationComponent extends TestDefaultComponent {
   protected override createCreator(): void {
     const loc = localization.getLocale("de");
-    loc.ed.logic = "Miner Logik";
+    loc.tabs.logic = "Miner Logik";
     localization.currentLocale = "de";
-    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

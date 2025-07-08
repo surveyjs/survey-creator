@@ -1,5 +1,5 @@
 import { SurveyModel, settings } from "survey-core";
-import { SearchManager } from "../../src/property-grid/search-manager";
+import { SearchManagerPropertyGrid } from "../../src/property-grid/search-manager";
 
 function createSurvey(): SurveyModel {
   return new SurveyModel({
@@ -23,11 +23,11 @@ function createSurvey(): SurveyModel {
   });
 }
 function getHighlightedEditors(survey: SurveyModel) {
-  const highlightedEditorClass = "spg-editor--highlighted";
+  const highlightedEditorClass = "spg-question--highlighted";
   return survey.getAllQuestions().filter(q => q.getRootCss().indexOf(highlightedEditorClass) !== -1);
 }
 test("SearchManager init state", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
@@ -36,12 +36,13 @@ test("SearchManager init state", () => {
 });
 
 test("SearchManager: highlightedEditorClass", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
 
   expect(getHighlightedEditors(survey)).toHaveLength(0);
   searchManager.filterString = "st";
+  searchManager.searchActionBar.flushUpdates();
 
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
@@ -77,11 +78,11 @@ test("SearchManager: highlightedEditorClass", () => {
 });
 
 test("SearchManager: matchCounterText", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
-
+  searchManager.searchActionBar.flushUpdates();
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
@@ -104,10 +105,11 @@ test("SearchManager: matchCounterText", () => {
 });
 
 test("SearchManager: enabled searchActionBar items", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
+  searchManager.searchActionBar.flushUpdates();
 
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
@@ -120,6 +122,7 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(searchManager.matchCounterText).toBe("1/3");
 
   searchManager.filterString = "aaa";
+  searchManager.searchActionBar.flushUpdates();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
   expect(prevAction.visible).toBeFalsy();
   expect(nextAction.visible).toBeFalsy();
@@ -127,6 +130,7 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(searchManager.matchCounterText).toBe("No results found");
 
   searchManager.filterString = "First";
+  searchManager.searchActionBar.flushUpdates();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
   expect(prevAction.visible).toBeFalsy();
   expect(nextAction.visible).toBeFalsy();
@@ -134,12 +138,13 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(searchManager.matchCounterText).toBe("");
 
   clearAction.action();
+  searchManager.searchActionBar.flushUpdates();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(0);
   expect(searchManager.filterString).toBe("");
 });
 
 test("SearchManager: normalizeTextCallback", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = new SurveyModel({
     "elements": [
       {
@@ -174,7 +179,7 @@ test("SearchManager: normalizeTextCallback", () => {
 });
 
 test("SearchManager: search by name and description", () => {
-  const searchManager = new SearchManager();
+  const searchManager = new SearchManagerPropertyGrid();
   const survey = new SurveyModel({
     "elements": [
       {

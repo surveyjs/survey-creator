@@ -1,15 +1,23 @@
 <ng-template #template>
-  <div *ngIf="adorner" class="svc-question__adorner" [class]="adorner.rootCss()" (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)" [attr.data-sv-drop-target-survey-element]="adorner.element.name || null">
-    <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content" [class]="adorner.css()" [key2click] (click)="adorner.select(adorner, $event)" data-bind="clickBubble: false">
+  <div *ngIf="adorner" class="svc-question__adorner" [class]="adorner.rootCss()"
+    (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
+    [attr.data-sv-drop-target-survey-element]="adorner.element.name || null">
+    <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content" [class]="adorner.css()"
+      [key2click] (click)="adorner.select(adorner, $event)" data-bind="clickBubble: false" #container>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+      <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
       <div *ngIf="adorner.allowDragging" class="svc-question__drag-area" (pointerdown)="adorner.onPointerDown($event)">
-        <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24" sv-ng-svg-icon></svg>
+        <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="'auto'"
+          sv-ng-svg-icon></svg>
       </div>
       <div class="svc-widget__content">
         <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
       </div>
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
-            <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-        </div>
+        <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
+      </div>
       <div class="svc-question__content-actions">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>

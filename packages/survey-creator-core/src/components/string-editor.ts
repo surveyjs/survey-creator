@@ -1,11 +1,12 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, CssClassBuilder } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
-import { clearNewLines, getNextValue, select } from "../utils/utils";
+import { clearNewLines } from "../utils/utils";
+import { getNextItemValue, getNextValue } from "../utils/creator-utils";
+import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
-import { getNextItemValue } from "../utils/utils";
 
 export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
@@ -33,12 +34,15 @@ export abstract class StringItemsNavigatorBase {
 
     newItems.splice(startIndex, 1);
     itemsToAdd.forEach((item, offset) => {
-      newItems.splice(startIndex + offset, 0, createNewItem(item));
+      if (creator.maximumChoicesCount <= 0 || newItems.length < creator.maximumChoicesCount) {
+        newItems.splice(startIndex + offset, 0, createNewItem(item));
+      }
     });
     this.question[this.getItemsPropertyName(items)] = newItems;
   }
   private setEventsForItem(creator: SurveyCreatorModel, items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
+    connector.allowLineBreaksOnEdit = true;
     connector.onEditComplete.clear();
     connector.onEditComplete.add(() => {
       const itemIndex = items.indexOf(item);
@@ -122,6 +126,7 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
     return [this.question.choices];
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    if (creator.maximumChoicesCount && items.length >= creator.maximumChoicesCount) return;
     const itemValue = creator.createNewItemValue(this.question);
     if (!!text) itemValue.value = text;
   }
@@ -158,8 +163,14 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     let titleBase: string;
     let propertyName: string;
-    if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
-    if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
+    if (items == this.question.columns) {
+      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
+      titleBase = "Column "; propertyName = "columns";
+    }
+    if (items == this.question.rows) {
+      if (creator.maximumRowsCount && items.length >= creator.maximumRowsCount) return;
+      titleBase = "Row "; propertyName = "rows";
+    }
     const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
     items.push(text || newItem);
     creator.onItemValueAddedCallback(
@@ -181,6 +192,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     if (items == this.question.columns) {
+      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
       this.question.columns.push(column);
       creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
@@ -191,8 +203,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) {
       let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MatrixDropdownColumn(text))).concat(items.slice(startIndex + 1));
       this.question[this.getItemsPropertyName(items)] = newItems;
-    }
-    else {
+    } else {
       super.addNewItems(creator, items, startIndex, itemsToAdd);
     }
   }
@@ -211,6 +222,8 @@ export class StringEditorConnector {
   public setAutoFocus() { this.focusOnEditor = true; }
 
   public hasEditCompleteHandler = false;
+
+  public allowLineBreaksOnEdit = false;
 
   public focusOnEditor: boolean;
   public activateEditor(): void {
@@ -238,53 +251,58 @@ export class StringEditorViewModelBase extends Base {
   @property({ defaultValue: true }) editAsText: boolean;
   compostionInProgress: boolean;
 
-  constructor(private locString: LocalizableString, private creator: SurveyCreatorModel) {
+  constructor(private locString: LocalizableString, private creator?: SurveyCreatorModel) {
     super();
     this.locString = locString;
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    this.addCreatorEvents();
   }
-
+  private onLocaleChanged = () => {
+    this.resetPropertyValue("placeholderValue");
+  };
   public afterRender() {
     if (this.connector.focusOnEditor) {
-      if (this.activate()) this.connector.focusOnEditor = false;
+      if (this.activate())this.connector.focusOnEditor = false;
     }
   }
 
   public detachFromUI() {
+    this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.getEditorElement = undefined;
     this.blurEditor = undefined;
   }
 
   public dispose(): void {
+    this.creator?.onLocaleChanded.remove(this.onLocaleChanged);
     super.dispose();
     this.detachFromUI();
   }
-
+  private addCreatorEvents() {
+    this.creator?.onLocaleChanded.add(this.onLocaleChanged);
+  }
+  private removeCreatorEvents() {
+    this.creator?.onLocaleChanded.remove(this.onLocaleChanged);
+  }
   public activate = () => {
     const element = this.getEditorElement();
     if (element && element.offsetParent != null) {
-      element.focus();
+      element.focus({ preventScroll: true });
       select(element);
       return true;
     }
     return false;
-  }
+  };
 
   public setLocString(locString: LocalizableString) {
+    this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
+    this.addCreatorEvents();
   }
   public checkConstraints(event: any) {
-    if (!this.compostionInProgress && this.maxLength > 0 && event.keyCode >= 32) {
-      var text: string = (event.target as any).innerText || "";
-
-      if (text.length >= this.maxLength) {
-        event.preventDefault();
-      }
-    }
     if (event.keyCode == 13 && !this.locString.allowLineBreaks) {
       event.preventDefault();
     }
@@ -311,31 +329,46 @@ export class StringEditorViewModelBase extends Base {
     if (this.maxLength > 0) {
       this.characterCounter.updateRemainingCharacterCounter(this.valueBeforeEdit, this.maxLength);
     }
-    this.creator.selectFromStringEditor = true;
+    if (this.creator) {
+      this.creator.selectFromStringEditor = true;
+    }
+
+    if (this.locString.hasHtml && this.editAsText) {
+      event.target.innerText = event.target.textContent = this.locString.calculatedText;
+    }
+
     event.target.parentElement.click();
     event.target.spellcheck = true;
-    event.target.setAttribute("tabindex", -1);
     this.focused = true;
     this.justFocused = true;
   }
 
-  private checkMarkdownToTextConversion(element, name) {
-    var options = {
+  private checkMarkdownToTextConversion(element, name): void {
+    if (!this.creator) return;
+    const options = {
       element: element,
       text: <any>null,
       name: name,
       html: "",
     };
-    if (this.creator) {
-      this.creator.onHtmlToMarkdown.fire(this.creator, options);
-      this.editAsText = (options.text === null);
-    }
+    this.creator.onHtmlToMarkdown.fire(this.creator, options);
+    this.editAsText = (options.text === null);
   }
 
   public onCompositionStart(event: any): void {
     this.compostionInProgress = true;
   }
-
+  public onBeforeInput(event: any): void {
+    if (!this.compostionInProgress && this.maxLength > 0) {
+      const currentValue = event.target.innerText;
+      const insertedData = event.data || "";
+      const selectionLength = window.getSelection().toString().length;
+      const newValueLength = currentValue.length + insertedData.length - selectionLength;
+      if (newValueLength > this.maxLength) {
+        event.preventDefault();
+      }
+    }
+  }
   public onInput(event: any): void {
     if (this.maxLength > 0) {
       var text: string = (event.target as any).innerText || "";
@@ -343,7 +376,7 @@ export class StringEditorViewModelBase extends Base {
     }
     if (this.editAsText && !this.compostionInProgress) {
       const options = { value: event.target?.innerText, cancel: null };
-      if (this.connector) this.connector.onTextChanging.fire(this, options);
+      if (this.connector)this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
@@ -356,13 +389,11 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
-    event.target.removeAttribute("tabindex");
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
         event.target.innerHTML = this.valueBeforeEdit;
-      }
-      else {
+      } else {
         event.target.innerText = this.valueBeforeEdit;
       }
       this.errorText = null;
@@ -371,74 +402,15 @@ export class StringEditorViewModelBase extends Base {
       return;
     }
 
-    let mdText = null;
-    if (!this.editAsText) {
-      var options = {
-        element: <Base><any>this.locString.owner,
-        text: <any>null,
-        name: this.locString.name,
-        html: event.target.innerHTML
-      };
-      this.creator.onHtmlToMarkdown.fire(this.creator, options);
-      mdText = options.text;
-    }
-    let clearedText;
-    if (mdText) {
-      clearedText = mdText;
-    } else {
-      let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
-      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
-      clearedText = txt;
-    }
-    let owner = this.locString.owner as any;
-
-    var changingOptions = {
-      obj: owner,
-      propertyName: this.locString.name,
-      value: this.locString.text,
-      newValue: clearedText,
-      doValidation: false
-    };
-    this.creator.onValueChangingCallback(changingOptions);
-    clearedText = changingOptions.newValue;
-
-    this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
-    if (!this.errorText && !clearedText) {
-      const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
-      if (propJSON && propJSON.isRequired) {
-        this.errorText = editorLocalization.getString("pe.propertyIsEmpty");
-      }
-    }
+    let clearedText = this.getClearedText(event.target);
+    this.errorText = this.getErrorTextOnChanged(clearedText);
 
     if (this.locString.text != clearedText &&
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
-        if (this.locString.owner instanceof ItemValue &&
-          this.creator.inplaceEditForValues &&
-          ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) == -1) {
-          const itemValue = <ItemValue>this.locString.owner;
-          if (itemValue.value !== clearedText) {
-            if (!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
-              const choices = itemValue.locOwner[itemValue.ownerPropertyName];
-              if (Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
-                clearedText = getNextItemValue(clearedText, choices);
-                if (!!event && !!event.target) {
-                  event.target.innerText = clearedText;
-                }
-              }
-            }
-            itemValue.value = clearedText;
-          }
-        }
-        else {
-          const oldStoreDefaultText = this.locString.storeDefaultText;
-          this.locString.storeDefaultText = false;
-          this.locString.text = clearedText;
-          this.locString.storeDefaultText = oldStoreDefaultText;
-        }
-      }
-      else {
-        this.creator.notify(this.errorText, "error");
+        this.setValueIntoLocStr(clearedText, event?.target);
+      } else {
+        this.creator?.notify(this.errorText, "error");
         this.focusedProgram = true;
         event.target.innerText = clearedText;
         event.target.focus();
@@ -447,8 +419,7 @@ export class StringEditorViewModelBase extends Base {
     } else {
       if (this.locString.hasHtml) {
         event.target.innerHTML = this.locString.renderedHtml;
-      }
-      else {
+      } else {
         event.target.innerText = this.locString.renderedHtml;
       }
       this.locString.strChanged();
@@ -456,24 +427,98 @@ export class StringEditorViewModelBase extends Base {
     this.focused = false;
     window?.getSelection().removeAllRanges();
   }
+
+  private getClearedText(target: HTMLElement): string {
+    const html = target.innerHTML;
+    const text = target.innerText;
+    let mdText = null;
+    if (!this.editAsText && this.creator) {
+      const options = {
+        element: <Base><any>this.locString.owner,
+        text: <any>null,
+        name: this.locString.name,
+        html: html
+      };
+      this.creator.onHtmlToMarkdown.fire(this.creator, options);
+      mdText = options.text;
+    }
+    let clearedText;
+    if (mdText) {
+      clearedText = mdText;
+    } else {
+      clearedText = this.locString.hasHtml && !this.editAsText ? html : text;
+      const txt = clearNewLines(clearedText);
+      if (!this.locString.allowLineBreaks || !txt) {
+        clearedText = txt;
+      }
+    }
+    const owner = this.locString.owner as any;
+
+    const changingOptions = {
+      obj: owner,
+      propertyName: this.locString.name,
+      value: this.locString.text,
+      newValue: clearedText,
+      doValidation: false
+    };
+    if (this.creator)this.creator.onValueChangingCallback(changingOptions);
+    return changingOptions.newValue;
+  }
+  private getErrorTextOnChanged(clearedText: string): string {
+    if (!this.creator) return "";
+    const owner = this.locString.owner as any;
+    let res = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
+    if (!!res || !!clearedText) return res;
+    const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
+    if (propJSON && propJSON.isRequired) return editorLocalization.getString("pe.propertyIsEmpty");
+    return "";
+  }
+  private get isInplaceForEditValues(): boolean {
+    return !!this.creator && this.creator.inplaceEditForValues &&
+      this.locString.owner instanceof ItemValue &&
+      this.creator.inplaceEditForValues &&
+      ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) === -1;
+  }
+  private setValueIntoLocStr(clearedText: any, target: HTMLElement): void {
+    if (this.isInplaceForEditValues) {
+      const itemValue = <ItemValue>this.locString.owner;
+      if (itemValue.value !== clearedText) {
+        if (!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
+          const choices = itemValue.locOwner[itemValue.ownerPropertyName];
+          if (Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
+            clearedText = getNextItemValue(clearedText, choices);
+            if (!!target) {
+              target.innerText = clearedText;
+            }
+          }
+        }
+        itemValue.value = clearedText;
+      }
+    } else {
+      const oldStoreDefaultText = this.locString.storeDefaultText;
+      this.locString.storeDefaultText = false;
+      this.locString.text = clearedText;
+      this.locString.storeDefaultText = oldStoreDefaultText;
+    }
+  }
   public done(event: Event): void {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
 
-  public onPaste(event: ClipboardEvent) {
+  public onPaste(event: ClipboardEvent): void {
     if (this.editAsText) {
       event.preventDefault();
       // get text representation of clipboard
       let text = event.clipboardData.getData("text/plain");
-      if (!this.locString.allowLineBreaks) text = clearNewLines(text);
+      if (!this.locString.allowLineBreaks && !this.connector?.allowLineBreaksOnEdit) text = clearNewLines(text);
       // insert text manually
       const selection = window.getSelection();
       if (!selection.rangeCount) return;
       selection.deleteFromDocument();
       selection.getRangeAt(0).insertNode(document.createTextNode(text));
       selection.collapseToEnd();
-      event.target.dispatchEvent(new Event("input", { bubbles: true }));
+      this.getEditorElement().dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
@@ -489,7 +534,7 @@ export class StringEditorViewModelBase extends Base {
       this.blurEditor();
       this.done(event);
     }
-    if (event.keyCode === 8 && !(event.target as any).innerText) {
+    if (event.keyCode === 8 && !clearNewLines((event.target as any).innerText)) {
       this.done(event);
       this.connector.onBackspaceEmptyString.fire(this, {});
     }
@@ -528,29 +573,40 @@ export class StringEditorViewModelBase extends Base {
   }
   @property() placeholderValue: string;
   public get placeholder(): string {
-    if (!!this.placeholderValue) return this.placeholderValue;
-    const property: any = this.findProperty();
-    if (!property || !property.placeholder) return "";
-    let placeholderValue: string = editorLocalization.getString(property.placeholder);
-    if (!!placeholderValue) {
-      var re = /\{([^}]+)\}/g;
-      this.placeholderValue = <any>new ComputedUpdater<string>(() => {
-        let result = placeholderValue;
-        let match = re.exec(result);
-        while (match != null) {
-          result = result.replace(re, propertyName => {
-            const propertyValue = this.locString.owner && this.locString.owner[match[1]];
-            return "" + propertyValue;
-          });
-          match = re.exec(result);
-        }
-        return result;
-      });
+    if (this.placeholderValue !== undefined) return this.placeholderValue;
+    const propPlaceholder = this.findProperty()?.placeholder;
+    if (!!propPlaceholder) {
+      (<any>this.locString).placeholder = propPlaceholder;
     }
+    if (!(<any>this.locString).placeholder) {
+      this.placeholderValue = "";
+      return "";
+    }
+    var re = /\{([^}]+)\}/g;
+    this.placeholderValue = <any>new ComputedUpdater<string>(() => {
+      let locPlaceholder: any = (<any>this.locString).placeholder;
+      if (typeof locPlaceholder === "function") {
+        locPlaceholder = locPlaceholder();
+      }
+      let result = editorLocalization.getString(locPlaceholder);
+      let match = re.exec(result);
+      while(match != null) {
+        result = result.replace(re, propertyName => {
+          const propertyValue = this.locString.owner && this.locString.owner[match[1]];
+          return "" + propertyValue;
+        });
+        match = re.exec(result);
+      }
+      return result;
+    });
     return this.placeholderValue;
   }
   public get contentEditable(): boolean {
+    if (!this.creator) return true;
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
+  }
+  public get tabIndex(): number {
+    return this.contentEditable ? 0 : null;
   }
   public get showCharacterCounter(): boolean {
     return this.maxLength !== -1;

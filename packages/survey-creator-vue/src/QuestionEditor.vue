@@ -1,11 +1,14 @@
 <template>
-  <component :is="componentName" v-bind="componentData"></component>
+  <div :style="props.style">
+    <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
+  </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveyModel } from "survey-core";
 import { computed } from "vue";
 
-const props = defineProps<{ survey: SurveyModel }>();
+const props = defineProps<{ survey: SurveyModel; style: any }>();
 
 const question = computed(() => props.survey?.getAllQuestions()[0]);
 

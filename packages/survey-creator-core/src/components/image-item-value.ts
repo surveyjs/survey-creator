@@ -3,7 +3,8 @@ import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 
-require("./image-item-value.scss");
+import "./image-item-value.scss";
+import { getLocString } from "./../editorLocalization";
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   private isChoosingNewFile = false;
   @property({ defaultValue: false }) isFileDragging: boolean;
@@ -36,6 +37,33 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   public get removeFileTitle() {
     return this.creator.getLocString("ed.removeFile");
+  }
+
+  public get addFileTitle() {
+    return this.creator.getLocString("ed.selectFile");
+  }
+
+  public get placeholderText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.imagePlaceHolderMobile");
+    return getLocString("ed.imagePlaceHolder");
+  }
+
+  public get chooseImageText(): string {
+    return getLocString("ed.imageChooseImage");
+  }
+  public get showChooseButtonAsIcon(): boolean {
+    return !this.getIsNewItemSingle();
+  }
+  public get showPlaceholder(): boolean {
+    return this.getIsNewItemSingle();
+  }
+  public get addButtonCss(): string {
+    return new CssClassBuilder()
+      .append("svc-image-item-value-controls__add")
+      .append("svc-context-button", this.showChooseButtonAsIcon)
+      .append("sd-action", !this.showChooseButtonAsIcon)
+      .toString();
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
@@ -73,26 +101,45 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       model.uploadFiles(files);
     }, { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" });
   }
-  onDragOver = (event: any) => {
-    this.isFileDragging = true;
-    event.dataTransfer.dropEffect = "copy";
-    event.preventDefault();
-  }
-  onDrop = (event: any) => {
-    this.isFileDragging = false;
-    event.preventDefault();
-    let input = event.dataTransfer;
-    if (!input || !input.files || input.files.length < 1) return;
-    let files = [];
-    for (let i = 0; i < input.files.length; i++) {
-      files.push(input.files[i]);
+  private onDragCounter: number = 0;
+  onDragEnter = (event: any) => {
+    if (this.isNew) {
+      this.onDragCounter++;
+      this.isFileDragging = true;
     }
-    this.uploadFiles(files);
-  }
+  };
+  onDragOver = (event: any) => {
+    if (this.isNew) {
+      event.dataTransfer.dropEffect = "copy";
+      event.preventDefault();
+    }
+  };
+  onDrop = (event: any) => {
+    if (this.isNew) {
+      this.onDragCounter = 0;
+      this.isFileDragging = false;
+      event.preventDefault();
+      let input = event.dataTransfer;
+      if (!input || !input.files || input.files.length < 1) return;
+      let files = [];
+      for (let i = 0; i < input.files.length; i++) {
+        files.push(input.files[i]);
+      }
+      this.uploadFiles(files);
+    }
+  };
   onDragLeave = (event: any) => {
-    this.isFileDragging = false;
-  }
+    if (this.isNew) {
+      if (--this.onDragCounter == 0) {
+        this.isFileDragging = false;
+      }
+    }
+  };
   get acceptedTypes() {
     return getAcceptedTypesByContentMode(this.question.contentMode);
+  }
+  public dispose(): void {
+    this.itemsRoot = undefined;
+    super.dispose();
   }
 }

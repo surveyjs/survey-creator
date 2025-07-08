@@ -6,8 +6,6 @@ import { CreatorTester } from "./creator-tester";
 import { UndoRedoAction } from "../src/plugins/undo-redo/undo-redo-manager";
 import { PageAdorner } from "../src/components/page";
 
-surveySettings.supportCreatorV2 = true;
-
 test("canUndo/canRedo functions ", (): any => {
   const creator = new CreatorTester();
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
@@ -107,17 +105,17 @@ test("undo/redo add new page", (): any => {
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
   let newPageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.isGhost = true;
   newPageModel.addNewQuestion(newPageModel, null);
-  expect(newPageModel.isGhost).toBeFalsy();
+  newPageModel.isGhost = false;
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   newPageModel = new PageAdorner(creator, designerPlugin.model.newPage);
-  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.isGhost = true;
   newPageModel.addNewQuestion(newPageModel, null);
-  expect(newPageModel.isGhost).toBeFalsy();
+  newPageModel.isGhost = false;
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
@@ -141,6 +139,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
@@ -149,6 +148,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
@@ -333,6 +333,50 @@ test("undo/redo DnD ", (): any => {
   expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question1", "question2"]);
   expect(creator.survey.pages[0].rows.length).toEqual(1);
 });
+test("undo/redo DnD stops transaction onDragClear", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const q1 = creator.survey.pages[0].elements[0];
+  const q2 = creator.survey.pages[0].elements[1];
+  creator.dragDropSurveyElements.onDragStart.fire({ dropTarget: q2, draggedElement: q1 }, {});
+
+  expect(creator.undoRedoManager["transactionCounter"]).toEqual(1);
+  expect(creator.undoRedoManager["_preparingTransaction"]).toBeDefined();
+
+  creator.dragDropSurveyElements.onDragClear.fire({ dropTarget: q2, draggedElement: q1 }, {});
+
+  expect(creator.undoRedoManager["transactionCounter"]).toEqual(0);
+  expect(creator.undoRedoManager["_preparingTransaction"]).toBe(null);
+});
 test("Undo restore deleted page and question", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -344,6 +388,7 @@ test("Undo restore deleted page and question", (): any => {
   const survey = creator.survey;
   expect(survey.pages).toHaveLength(1);
   const pageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined, "text");
   expect(survey.pages).toHaveLength(2);
   expect(survey.pages[1].questions).toHaveLength(1);
@@ -359,6 +404,7 @@ test("Undo restore deleted page and question", (): any => {
 });
 test("Undo on removing questions in deleted two pages", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
@@ -366,6 +412,7 @@ test("Undo on removing questions in deleted two pages", (): any => {
   expect(survey.pages).toHaveLength(1);
   creator.clickToolboxItem({ type: "text" });
   const pageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageAdorner.isGhost = true;
   pageAdorner.addNewQuestion(pageAdorner, undefined, "text");
   expect(survey.pages).toHaveLength(2);
   creator.selectElement(survey.getQuestionByName("question2"));
@@ -400,4 +447,36 @@ test("Undo changing property on deleting question", (): any => {
   creator.undo();
   question = creator.survey.getQuestionByName("q1");
   expect(question.title).toBe("Question 1");
+});
+test("undo/redo with events", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ name: "q1", type: "dropdown" }]
+  };
+  const mOptions: Array<any> = [];
+  creator.onModified.add(function (sender, options) {
+    mOptions.push({ type: options.type, className: options.className, oldType: options.oldValue.getType(), newType: options.newValue.getType() });
+  });
+
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("checkbox");
+  expect(mOptions).toHaveLength(1);
+  creator.undo();
+  expect(mOptions).toHaveLength(2);
+  expect(mOptions).toStrictEqual([
+    { type: "QUESTION_CONVERTED", className: "checkbox", oldType: "dropdown", newType: "checkbox" },
+    { type: "QUESTION_CONVERTED", className: "dropdown", oldType: "checkbox", newType: "dropdown" }
+  ]);
+});
+test("Clear undo/redo transactions on settings creator.JSON, bug#6208", (): any => {
+  const creator = new CreatorTester();
+  const undoAction = creator.toolbar.getActionById("action-undo");
+  creator.survey.title = "My title";
+  creator.addNewQuestionInPage(() => { });
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(undoAction).toBeTruthy();
+  expect(undoAction.enabled).toBeTruthy();
+  creator.JSON = {};
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(undoAction.enabled).toBeFalsy();
 });

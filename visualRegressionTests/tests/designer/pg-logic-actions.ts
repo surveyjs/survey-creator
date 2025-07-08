@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -33,19 +34,20 @@ test("Check states", async (t) => {
     await t.click(getPropertyGridCategory(generalGroupName));
     await t.click(getPropertyGridCategory(logicGroupName));
 
-    const sectionContentElement = Selector("h4[aria-label=Conditions]").parent().nextSibling();
+    const sectionContentElement = Selector("div[id$=ariaTitle][id^=sp]").withText("Conditions").parent().nextSibling();
 
     await t.expect(sectionContentElement.visible).ok();
     await takeElementScreenshot("logic-button-default.png", sectionContentElement, t, comparer);
 
     await t
-      .hover(sectionContentElement.find(".spg-action-button").nth(2));
+      .hover(sectionContentElement.find(".spg-action-button").nth(1));
     await takeElementScreenshot("logic-button-hovered.png", sectionContentElement, t, comparer);
   });
 });
 test("Check list item styles into logic popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json2 = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -65,16 +67,17 @@ test("Check list item styles into logic popup", async (t) => {
     await t.click(getPropertyGridCategory(generalGroupName));
     await t.click(getPropertyGridCategory(logicGroupName));
 
-    const sectionContentElement = Selector("h4[aria-label=Conditions]").parent().nextSibling();
+    const sectionContentElement = Selector("div[id$=ariaTitle][id^=sp]").withText("Conditions").parent().nextSibling();
 
-    await t.click(sectionContentElement.find(".spg-action-button").nth(2))
+    await t.click(sectionContentElement.find(".spg-action-button").nth(1))
       .click(Selector(".sl-dropdown"))
-      .click(getListItemByText("region"))
+      .click(getListItemByText("region"), { offsetX: 10, offsetY: 20 })
+      .wait(1000)
       .pressKey("tab")
       .pressKey("tab")
       .pressKey("down")
       .pressKey("down");
-    await takeElementScreenshot("pg-logic-popup-dropdown-list-item--focused.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-dropdown-list-item--focused.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 test("Check run expression description", async (t) => {

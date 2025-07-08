@@ -35,13 +35,13 @@ To set up branching logic that redirects a respondent to a specific form questio
 
 1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings.
 1. Under **Conditions**, locate a subsection called **Triggers** and click the **Plus** icon to add a new trigger.
-1. In the trigger drop-down menu, select **Skip to question**.
+1. In the trigger drop-down menu, select **Skip to question**.<br><br>
    <img src="../images/eud-skip-to-question-steps-part-1.png" alt='Survey Creator: How to implement "skip to question" logic, part 1' width="1164" height="710">
 2. Click the **Pen** icon to expand the trigger settings.
 3. Use one of the following ways to specify an expression that, when evaluates to `true`, will take a respondent to the target question (the destination you want to direct a respondent to).
    - Enter the expression in the **Expression** field.
    - Click the **Magic wand** icon to open a popup and build the expression using a GUI. Click **Apply** when you finish.
-4. Select a target question using the drop-down menu of the **Question to skip to** property.
+4. Select a target question using the drop-down menu of the **Question to skip to** property.<br><br>
    <img src="../images/eud-skip-to-question-steps-part-2.png" alt='Survey Creator: How to implement "skip to question" logic, part 2' width="1163" height="709">
 
 ### Show/Hide Questions
@@ -66,12 +66,12 @@ To automatically complete a survey based on a user response, perform the followi
 
 1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings.
 1. Under **Conditions**, locate a subsection called **Triggers** and click the **Plus** icon to add a new trigger.
-1. In the trigger drop-down menu, select **Complete survey**.
+1. In the trigger drop-down menu, select **Complete survey**.<br><br>
    <img src="../images/eud-complete-survey-steps-part-1.png" alt='Survey Creator: How to implement "complete survey" logic, part 1' width="1162" height="710">
 2. Click the **Pen** icon to expand the trigger settings.
 3. Use one of the following ways to specify an expression that, when evaluates to `true`, will activate survey completion.
    - Enter the expression in the **Expression** field.
-   - Click the **Magic wand** icon to open a popup and build the expression using a GUI. Click **Apply** when you finish.
+   - Click the **Magic wand** icon to open a popup and build the expression using a GUI. Click **Apply** when you finish.<br><br>
    <img src="../images/eud-complete-survey-steps-part-2.png" alt='Survey Creator: How to implement "complete survey" logic, part 2' width="1163" height="709">
 
 ### Graphical User Interface for Conditional Forms

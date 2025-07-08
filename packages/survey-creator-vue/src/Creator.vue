@@ -1,15 +1,9 @@
 <template>
   <template v-if="!model.isCreatorDisposed">
-    <survey-popup-modal></survey-popup-modal>
-    <div
-      class="svc-creator"
-      :class="{
-        'svc-creator--mobile': model.isMobileView,
-      }"
-      ref="root"
-    >
+    <SvComponent :is="'survey-popup-modal'"></SvComponent>
+    <div :class="model.getRootCss()" :style="model.themeVariables" ref="root">
       <div>
-        <sv-svg-bundle></sv-svg-bundle>
+        <SvComponent :is="'sv-svg-bundle'"></SvComponent>
       </div>
       <div
         class="svc-full-container svc-creator__area svc-flex-column"
@@ -27,15 +21,21 @@
             class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing"
           >
             <div class="svc-top-bar">
-              <div class="svc-tabbed-menu-wrapper" v-show="model.showTabs">
-                <svc-tabbed-menu :model="model.tabbedMenu"></svc-tabbed-menu>
+              <div class="svc-tabbed-menu-wrapper" v-if="model.showTabs">
+                <SvComponent
+                  :is="'svc-tabbed-menu'"
+                  :model="model.tabbedMenu"
+                ></SvComponent>
               </div>
               <div
                 v-if="model.showToolbar"
                 class="svc-toolbar-wrapper"
                 :v-show="model.showToolbar"
               >
-                <sv-action-bar :model="model.toolbar"></sv-action-bar>
+                <SvComponent
+                  :is="'sv-action-bar'"
+                  :model="model.toolbar"
+                ></SvComponent>
               </div>
             </div>
             <div
@@ -48,35 +48,39 @@
               <div class="svc-creator__content-holder svc-flex-column">
                 <template v-for="tab in model.tabs">
                   <div
+                    role="tabpanel"
                     class="svc-creator-tab"
                     v-bind:key="tab.id"
                     v-if="model.viewType == tab.id && tab.visible"
+                    :aria-labelledby="'tab-' + tab.id"
                     :id="'scrollableDiv-' + tab.id"
                     :class="{
                       'svc-creator__toolbox--right':
                         model.toolboxLocation == 'right',
                     }"
                   >
-                    <component
+                    <SvComponent
                       :is="tab.componentContent"
                       :model="tab.data.model"
-                    ></component>
+                    ></SvComponent>
                   </div>
                 </template>
               </div>
             </div>
             <div v-if="model.isMobileView" class="svc-footer-bar">
               <div class="svc-toolbar-wrapper" :v-show="model.isMobileView">
-                <sv-action-bar :model="model.footerToolbar"></sv-action-bar>
+                <SvComponent
+                  :is="'sv-action-bar'"
+                  :model="model.footerToolbar"
+                ></SvComponent>
               </div>
             </div>
           </div>
-          <div
+          <SvComponent
+            :is="'svc-side-bar'"
+            :model="model.sidebar"
             v-if="model.sidebar"
-            :class="{ 'sv-mobile-side-bar': model.isMobileView }"
-          >
-            <svc-side-bar :model="model.sidebar"></svc-side-bar>
-          </div>
+          ></SvComponent>
         </div>
         <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
           <span
@@ -84,15 +88,16 @@
             v-html="model.licenseText"
           ></span>
         </div>
-        <sv-notifier :model="model.notifier"></sv-notifier>
+        <SvComponent :is="'sv-notifier'" :model="model.notifier"></SvComponent>
       </div>
     </div>
   </template>
 </template>
 <script setup lang="ts">
+import { SvComponent } from "survey-vue3-ui";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUnmounted, ref, toRaw, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const model = computed(() => {
   return toRaw(props.model);

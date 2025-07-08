@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var koreanStrings = {
   // survey templates
@@ -15,6 +15,15 @@ export var koreanStrings = {
     deleteQuestion: "질문 삭제",
     convertTo: "다음으로 변경",
     drag: "항목 끌어오기",
+  },
+  // Creator tabs
+  tabs: {
+    preview: "테스트 설문지",
+    theme: "테마",
+    translation: "번역",
+    designer: "설문지 디자인",
+    json: "JSON 편집기",
+    logic: "논리학"
   },
   // Question types
   qt: {
@@ -36,11 +45,20 @@ export var koreanStrings = {
     paneldynamic: "패널 (동적 패널)",
     radiogroup: "라디오 그룹",
     rating: "등급",
+    slider: "슬라이더",
     text: "텍스트 상자",
     boolean: "불린(boolean)",
     expression: "표현식",
     signaturepad: "서명",
     buttongroup: "단추 그룹"
+  },
+  toolboxCategories: {
+    general: "일반",
+    choice: "선택 질문",
+    text: "텍스트 입력 질문",
+    containers: "컨테이너",
+    matrix: "행렬 질문",
+    misc: "기타"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -52,6 +70,7 @@ export var koreanStrings = {
     surveySettingsTooltip: "설문조사 설정",
     themeSettings: "테마 설정",
     themeSettingsTooltip: "테마 설정",
+    creatorSettingTitle: "크리에이터 설정",
     showPanel: "패널 표시",
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
@@ -73,29 +92,30 @@ export var koreanStrings = {
     newQuestionName: "질문",
     newPanelName: "패널",
     newTextItemName: "문자 메시지",
-    testSurvey: "테스트 설문지",
-    themeSurvey: "테마",
     defaultV2Theme: "기본값",
     modernTheme: "현대의",
     defaultTheme: "기본값(레거시)",
     testSurveyAgain: "테스트 설문지 다시하기",
     testSurveyWidth: "설문지 너비: ",
     navigateToMsg: "다음으로 이동해야 했습니다.",
-    logic: "논리학",
-    embedSurvey: "내장 설문지",
-    translation: "번역",
     saveSurvey: "설문지 저장",
     saveSurveyTooltip: "설문조사 저장",
     saveTheme: "테마 저장",
     saveThemeTooltip: "테마 저장",
-    designer: "설문지 디자인",
-    jsonEditor: "JSON 편집기",
     jsonHideErrors: "오류 숨기기",
     jsonShowErrors: "오류 표시",
     undo: "실행 취소",
     redo: "복원",
     undoTooltip: "마지막 변경 사항 실행 취소",
     redoTooltip: "변경 내용 다시 실행",
+    expandTooltip: "넓히다",
+    collapseTooltip: "무너지다",
+    expandAllTooltip: "모두 확장",
+    collapseAllTooltip: "모두 축소",
+    zoomInTooltip: "확대",
+    zoom100Tooltip: "100%로 확대/축소",
+    zoomOutTooltip: "축소",
+    lockQuestionsTooltip: "질문의 확장/축소 상태 잠금",
     showMoreChoices: "더 보기",
     showLessChoices: "간략하게 표시",
     copy: "복사",
@@ -109,14 +129,13 @@ export var koreanStrings = {
     generateReadableJSON: "생성 JSON 데이터 읽기",
     toolbox: "도구상자",
     "property-grid": "속성",
+    toolboxSearch: "검색",
+    toolboxFilteredTextPlaceholder: "검색하려면 입력...",
+    toolboxNoResultsFound: "결과를 찾을 수 없습니다.",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
     propertyGridNoResultsFound: "결과를 찾을 수 없습니다.",
-    toolboxGeneralCategory: "일반",
-    toolboxChoiceCategory: "선택 질문",
-    toolboxTextCategory: "텍스트 입력 질문",
-    toolboxContainersCategory: "컨테이너",
-    toolboxMatrixCategory: "행렬 질문",
-    toolboxMiscCategory: "기타",
+    propertyGridPlaceholderTitle: "양식 구성 시작",
+    propertyGridPlaceholderDescription: "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다.",
     correctJSON: "JSON 데이터를 수정하십시오.",
     surveyResults: "설문 결과: ",
     surveyResultsTable: "테이블로",
@@ -132,6 +151,7 @@ export var koreanStrings = {
     saveError: "오류! 편집기 컨텐츠는 저장되지 않습니다.",
     translationPropertyGridTitle: "언어 설정",
     themePropertyGridTitle: "테마 설정",
+    addLanguageTooltip: "언어 추가",
     translationLanguages: "언어들",
     translationDeleteLanguage: "이 언어에 대한 모든 문자열을 삭제하시겠습니까?",
     translationAddLanguage: "번역할 언어 선택",
@@ -148,6 +168,7 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     translationSource: "근원: ",
     translationTarget: "과녁: ",
+    translationYouTubeNotSupported: "YouTube 링크는 지원되지 않습니다.",
     themeExportButton: "수출",
     themeImportButton: "수입",
     surveyJsonExportButton: "수출",
@@ -170,6 +191,22 @@ export var koreanStrings = {
     surveyPlaceHolder: "설문 조사가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     pagePlaceHolder: "페이지가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
     imagePlaceHolder: "여기에 이미지를 끌어다 놓거나 아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
+    surveyPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 양식 작성을 시작하십시오.",
+    surveyPlaceholderTitle: "양식이 비어 있습니다.",
+    surveyPlaceholderTitleMobile: "양식이 비어 있습니다.",
+    surveyPlaceholderDescription: "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    surveyPlaceholderDescriptionMobile: "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
+    previewPlaceholderTitle: "미리보기 없음",
+    previewPlaceholderTitleMobile: "미리보기 없음",
+    previewPlaceholderDescription: "설문조사에 가시적인 요소가 포함되어 있지 않습니다.",
+    previewPlaceholderDescriptionMobile: "설문조사에 가시적인 요소가 포함되어 있지 않습니다.",
+    translationsPlaceholderTitle: "번역할 문자열이 없습니다.",
+    translationsPlaceholderTitleMobile: "번역할 문자열이 없습니다.",
+    translationsPlaceholderDescription: "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다.",
+    translationsPlaceholderDescriptionMobile: "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다.",
+    pagePlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 페이지에 새 요소를 추가하세요.",
+    panelPlaceHolderMobile: "아래의 \"질문 추가\" 버튼을 클릭하여 패널에 새 요소를 추가합니다.",
+    imagePlaceHolderMobile: "아래 버튼을 클릭하고 업로드할 이미지를 선택하세요.",
     imageChooseImage: "이미지 선택",
     addNewTypeQuestion: "{0} 추가", //{0} is localizable question type
     chooseLogoPlaceholder: "[로고]",
@@ -179,6 +216,10 @@ export var koreanStrings = {
     lg: {
       addNewItem: "새 규칙 추가",
       empty_tab: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
+      logicPlaceholderTitle: "논리적 규칙 없음",
+      logicPlaceholderTitleMobile: "논리적 규칙 없음",
+      logicPlaceholderDescription: "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
+      logicPlaceholderDescriptionMobile: "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
       page_visibilityName: "페이지 표시(숨기기)",
       page_enableName: "사용(사용 안 함) 페이지",
       page_requireName: "페이지를 필수로 설정",
@@ -221,13 +262,13 @@ export var koreanStrings = {
       question_visibilityText: "질문 {0} 표시", //{0} question name
       question_enableText: "질문 {0} 사용 설정", //{0} question name
       question_requireText: "질문 {0} 필수", //{0} question name
-      question_resetValueText: "질문에 대한 재설정 값: {0}",
+      question_resetValueText: "질문에 대한 재설정 값: {0}", //{0} question name.
       question_setValueText: "할당 값: {1} 질문: {0}",
       column_visibilityText: "질문의 열 {0} {1} 표시", //{0} column name, {1} question name
       column_enableText: "질문의 열 {0} {1} 사용하도록 설정", //{0} column name, {1} question name
       column_requireText: "질문의 열 {0} {1} 필수", //{0} column name, {1} question name
-      column_resetValueText: "열의 셀 값 재설정: {0}",
-      column_setValueText: "셀 값 할당 : {1} 열 : {0}",
+      column_resetValueText: "열의 셀 값 재설정: {0}", //{0} column name
+      column_setValueText: "셀 값 할당 : {1} 열 : {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " 결과가 대상 질문에 할당되는 식입니다.",
       trigger_completeText: "조사가 완료됩니다",
       trigger_setvalueText: "질문으로 설정: {0} 값 {1}", //{0} question name, {1} setValue
@@ -263,14 +304,18 @@ export var koreanStrings = {
       description: "패널 설명",
       visibleIf: "다음과 같은 경우 패널을 표시합니다.",
       requiredIf: "다음과 같은 경우 패널을 필수로 만듭니다.",
-      questionsOrder: "패널 내의 질문 순서",
+      questionOrder: "패널 내의 질문 순서",
       page: "상위 페이지",
       startWithNewLine: "새 줄에 패널 표시",
       state: "패널 축소 상태",
       width: "인라인 패널 너비",
       minWidth: "최소 패널 너비",
       maxWidth: "최대 패널 너비",
-      showNumber: "숫자 패널"
+      showNumber: "이 패널에 번호 매기기"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "유효 폭, %",
+      questionTitleWidth: "질문 제목 너비, px"
     },
     paneldynamic: {
       name: "패널 이름",
@@ -289,24 +334,28 @@ export var koreanStrings = {
       templateTitle: "패널 제목 패턴",
       noEntriesText: "빈 패널 텍스트",
       templateTabTitle: "탭 제목 패턴",
+      tabTitlePlaceholder: "탭 제목 자리 표시자",
       templateVisibleIf: "다음과 같은 경우 개별 패널을 표시합니다.",
-      hideNumber: "패널 번호 숨기기",
+      showNumber: "패널 번호 매기기",
       titleLocation: "패널 제목 정렬",
       descriptionLocation: "패널 설명 정렬",
-      templateTitleLocation: "질문 제목 정렬",
+      templateQuestionTitleLocation: "질문 제목 정렬",
+      templateQuestionTitleWidth: "질문 제목 너비",
       templateErrorLocation: "오류 메시지 맞춤",
       newPanelPosition: "새 패널 위치",
+      showRangeInProgress: "진행률 표시줄 표시",
       keyName: "다음 질문에서 중복 응답 방지"
     },
     question: {
       name: "질문 이름",
       title: "질문 제목",
       description: "질문 설명",
+      showTitle: "제목 및 설명 표시",
       visibleIf: "다음과 같은 경우 질문을 표시합니다.",
       requiredIf: "다음과 같은 경우 질문을 필수로 만듭니다.",
       page: "상위 페이지",
       state: "질문 상자 축소 상태",
-      hideNumber: "질문 번호 숨기기",
+      showNumber: "이 질문에 번호를 매기십시오.",
       titleLocation: "질문 제목 정렬",
       descriptionLocation: "질문 설명 정렬",
       errorLocation: "오류 메시지 맞춤",
@@ -348,7 +397,8 @@ export var koreanStrings = {
     // survey templates
     survey: {
       title: "타이틀",
-      description: "설문조사 설명"
+      description: "설문조사 설명",
+      readOnly: "설문조사를 읽기 전용으로 설정"
     },
     page: {
       name: "페이지 이름",
@@ -356,8 +406,8 @@ export var koreanStrings = {
       description: "페이지 설명",
       visibleIf: "다음과 같은 경우 페이지를 표시합니다.",
       requiredIf: "다음과 같은 경우 페이지를 필수로 만듭니다.",
-      maxTimeToFinish: "페이지 완료 시간 제한(초)",
-      questionsOrder: "페이지의 질문 순서"
+      timeLimit: "페이지 완료 시간 제한(초)",
+      questionOrder: "페이지의 질문 순서"
     },
     matrixdropdowncolumn: {
       name: "열 이름",
@@ -396,12 +446,17 @@ export var koreanStrings = {
       prefix: "통화 접두사",
       suffix: "통화 접미사"
     },
+    isExclusive: "선택하면 다른 항목 지우기",
     imageHeight: "이미지 높이",
     imageWidth: "이미지 너비",
     valueName: "값 이름",
+    defaultDisplayValue: "동적 텍스트에 대한 기본 표시 값",
     rateDescriptionLocation: "레이블 정렬",
-    size: "입력 필드 크기(문자)",
+    size: "입력 필드 너비(문자 단위)",
     cellErrorLocation: "셀 오류 메시지 맞춤",
+    enabled: "사용",
+    disabled: "비활성화",
+    inherit: "물려받다",
     apply: "적용",
     ok: "확인",
     save: "구해내다",
@@ -463,11 +518,13 @@ export var koreanStrings = {
     listIsEmpty: "아직 추가된 항목이 없습니다.",
     "listIsEmpty@choices": "선택 항목이 아직 추가되지 않았습니다",
     "listIsEmpty@columns": "아직 열이 없습니다.",
+    "listIsEmpty@gridLayoutColumns": "레이아웃 열이 아직 없습니다.",
     "listIsEmpty@rows": "아직 행이 없습니다.",
     "listIsEmpty@validators": "아직 유효성 검사 규칙이 없습니다.",
     "listIsEmpty@calculatedValues": "아직 맞춤 변수가 없습니다.",
     "listIsEmpty@triggers": "아직 트리거가 없습니다.",
     "listIsEmpty@navigateToUrlOnCondition": "아직 링크가 없습니다.",
+    "listIsEmpty@pages": "아직 페이지가 없습니다.",
     "addNew@choices": "선택 항목 추가",
     "addNew@columns": "새 열 추가",
     "addNew@rows": "새 행 추가",
@@ -475,6 +532,7 @@ export var koreanStrings = {
     "addNew@calculatedValues": "새 변수 추가",
     "addNew@triggers": "새 트리거 추가",
     "addNew@navigateToUrlOnCondition": "새 URL 추가",
+    "addNew@pages": "새 페이지 추가",
     expressionIsEmpty: "식이 비어 있습니다.",
     value: "값",
     text: "텍스트",
@@ -494,6 +552,7 @@ export var koreanStrings = {
     titlePlaceholder: "타이틀",
     surveyTitlePlaceholder: "설문조사 제목",
     pageTitlePlaceholder: "페이지 {num}",
+    startPageTitlePlaceholder: "시작 페이지",
     descriptionPlaceholder: "묘사",
     surveyDescriptionPlaceholder: "묘사",
     pageDescriptionPlaceholder: "묘사",
@@ -514,11 +573,12 @@ export var koreanStrings = {
     cellType: "셀 유형",
     colCount: "열 개수",
     choicesOrder: "항목 순서 선택",
+    allowCustomChoices: "사용자 지정 선택 허용",
     visible: "보입니까??",
     isRequired: "필수입니까?",
     markRequired: "필요에 따라 표시",
     removeRequiredMark: "필요한 표시를 제거하십시오",
-    isAllRowRequired: "모든 행에 대한 응답 필요",
+    eachRowRequired: "모든 행에 대한 응답 필요",
     eachRowUnique: "행의 중복 응답 방지",
     requiredErrorText: "\"필수\" 오류 메시지",
     startWithNewLine: "새 줄로 시작하겠습니까?",
@@ -530,10 +590,11 @@ export var koreanStrings = {
     maxSize: "최대 파일 크기(bytes)",
     rowCount: "행 수",
     columnLayout: "열 위치",
-    addRowLocation: "행 버튼 위치 추가",
+    addRowButtonLocation: "행 버튼 위치 추가",
     transposeData: "행을 열로 바꾸기",
     addRowText: "행 버튼 텍스트 추가",
     removeRowText: "행 버튼 텍스트 제거",
+    singleInputTitleTemplate: "입력 필드 제목 패턴",
     rateMin: "최소 요금 값",
     rateMax: "최대 속도 값",
     rateStep: "속도 단계",
@@ -566,10 +627,9 @@ export var koreanStrings = {
     simulator: "장치 유형 선택",
     landscapeOrientation: "가로 방향으로 전환",
     portraitOrientation: "세로 방향으로 전환",
-    mode: "모드(편집/읽기전용)",
     clearInvisibleValues: "보이지 않는 값 지우기",
     cookieName: "쿠키 이름(로컬에서 설문 조사를 두 번 사용하지 않도록 설정)",
-    sendResultOnPageNext: "다음 페이지에서 설문 조사 결과 보내기",
+    partialSendEnabled: "다음 페이지에서 설문 조사 결과 보내기",
     storeOthersAsComment: "다른 사용자의 값을 별도의 필드에 저장",
     showPageTitles: "페이지 제목 표시",
     showPageNumbers: "페이지 번호 표시",
@@ -580,34 +640,38 @@ export var koreanStrings = {
     editText: "답변 편집 단추 텍스트",
     startSurveyText: "시작 버튼 텍스트",
     showNavigationButtons: "탐색 버튼 표시 (기본 탐색)",
+    navigationButtonsLocation: "탐색 단추 정렬",
     showPrevButton: "이전 버튼 표시 (사용자가 이전 페이지로 돌아갈 수 있음)",
-    firstPageIsStarted: "설문지의 첫 번째 페이지는 시작 페이지입니다",
-    showCompletedPage: "끝 부분에 완료된 페이지 표시 (완료된 HTML)",
-    goNextPageAutomatic: "모든 질문에 응답 후 자동으로 다음 페이지로 이동",
-    allowCompleteSurveyAutomatic: "설문조사 자동 완성",
+    firstPageIsStartPage: "설문지의 첫 번째 페이지는 시작 페이지입니다",
+    showCompletePage: "끝 부분에 완료된 페이지 표시 (완료된 HTML)",
+    autoAdvanceEnabled: "모든 질문에 응답 후 자동으로 다음 페이지로 이동",
+    autoAdvanceAllowComplete: "설문조사 자동 완성",
     showProgressBar: "진행률 막대 표시",
+    progressBarLocation: "진행률 표시줄 맞춤",
     questionTitleLocation: "질문 제목 위치",
-    requiredText: "질문에 필요한 기호",
+    questionTitleWidth: "질문 제목 너비",
+    requiredMark: "질문에 필요한 기호",
     questionTitleTemplate: "질문 제목 템플릿입니다. 기본값: '{no}. {require} {title}'",
     questionErrorLocation: "질문 위치 오류",
-    focusFirstQuestionAutomatic: "페이지 변경시 첫 번째 질문에 초점",
-    questionsOrder: "페이지의 요소 순서",
-    maxTimeToFinish: "설문 조사를 마칠 수있는 최대 시간",
-    maxTimeToFinishPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
-    showTimerPanel: "타이머 패널 표시",
-    showTimerPanelMode: "타이머 패널 모드 표시",
+    autoFocusFirstQuestion: "페이지 변경시 첫 번째 질문에 초점",
+    questionOrder: "페이지의 요소 순서",
+    timeLimit: "설문 조사를 마칠 수있는 최대 시간",
+    timeLimitPerPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
+    showTimer: "타이머 사용",
+    timerLocation: "타이머 패널 표시",
+    timerInfoMode: "타이머 패널 모드 표시",
     renderMode: "렌더링 모드",
     allowAddPanel: "패널 추가 허용",
     allowRemovePanel: "패널 제거 허용",
-    panelAddText: "패널 텍스트 추가",
-    panelRemoveText: "패널 텍스트 삭제",
+    addPanelText: "패널 텍스트 추가",
+    removePanelText: "패널 텍스트 삭제",
     isSinglePage: "한 페이지에 모든 요소 표시",
     html: "HTML 마크업",
     setValue: "대답",
     dataFormat: "이미지 형식",
     allowAddRows: "행 추가 허용",
     allowRemoveRows: "행 제거 허용",
-    allowRowsDragAndDrop: "행 끌어서 놓기 허용",
+    allowRowReorder: "행 끌어서 놓기 허용",
     responsiveImageSizeHelp: "정확한 이미지 너비 또는 높이를 지정하는 경우에는 적용되지 않습니다.",
     minImageWidth: "최소 이미지 너비",
     maxImageWidth: "최대 이미지 너비",
@@ -615,6 +679,7 @@ export var koreanStrings = {
     maxImageHeight: "최대 이미지 높이",
     minValue: "최소값",
     maxValue: "최대값",
+    caseInsensitive: "대소문자 구분 안 함",
     minLength: "최소 길이(문자)",
     allowDigits: "숫자 허용",
     minCount: "최소 개수",
@@ -633,20 +698,15 @@ export var koreanStrings = {
     logo: "로고(URL 또는 base64로 인코딩된 문자열)",
     questionsOnPageMode: "설문조사 구조",
     maxTextLength: "최대 답변 길이(문자 단위)",
-    maxOthersLength: "최대 주석 길이(문자)",
+    maxCommentLength: "최대 주석 길이(문자)",
+    commentAreaRows: "주석 영역 높이(줄)",
     autoGrowComment: "필요한 경우 주석 영역 자동 확장",
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
-    maskTypes: {
-      none: "없음",
-      patternmask: "무늬",
-      numericmask: "숫자",
-      datetimemask: "날짜 및 시간",
-      currencymask: "통화"
-    },
-    focusOnFirstError: "첫 번째 오답에 포커스 설정",
+    autoFocusFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
+    validateVisitedEmptyFields: "초점이 손실된 빈 필드 유효성 검사",
     navigateToUrl: "URL로 이동합니다.",
     navigateToUrlOnCondition: "동적 URL",
     completedBeforeHtml: "사용자가 이미 이 설문조사를 작성했는지 여부를 표시하는 마크업",
@@ -678,15 +738,36 @@ export var koreanStrings = {
     minPanelCount: "최소 패널 수",
     maxPanelCount: "최대 패널 수",
     panelsState: "내부 패널 확장 상태",
-    panelPrevText: "이전 패널 단추 도구 설명",
-    panelNextText: "다음 패널 단추 도구 설명",
-    showRangeInProgress: "진행률 표시줄 표시",
-    panelRemoveButtonLocation: "패널 단추 위치 제거",
+    prevPanelText: "이전 패널 단추 도구 설명",
+    nextPanelText: "다음 패널 단추 도구 설명",
+    removePanelButtonLocation: "패널 단추 위치 제거",
     hideIfRowsEmpty: "행이 없는 경우 질문 숨기기",
     hideColumnsIfEmpty: "행이 없는 경우 열 숨기기",
     rateValues: "사용자 지정 요금 값",
     rateCount: "비율 개수",
     autoGenerate: "비율 값을 지정하는 방법은 무엇입니까?",
+    slider: {
+      min: "최소값",
+      max: "최대값",
+      step: "단계 값",
+      showLabels: "축척 레이블 표시",
+      tooltipVisibilityPG: "툴팁 표시",
+      allowSwap: "엄지 교차점 허용",
+      labelCount: "자동 생성된 레이블의 수",
+      minValueExpression: "최소값 표현식",
+      maxValueExpression: "최대 값 표현식",
+      autoGenerate: "레이블 구성 크기 조정",
+      sliderType: "슬라이더 유형",
+      minRangeLength: "최소 범위 길이",
+      maxRangeLength: "최대 범위 길이",
+      customLabels: "사용자 지정 레이블",
+      labelFormat: "라벨 형식",
+      tooltipFormat: "툴팁 형식"
+    },
+    file: {
+      imageHeight: "이미지 높이",
+      imageWidth: "이미지 너비"
+    },
     hideIfChoicesEmpty: "선택 항목이 없는 경우 질문 숨기기",
     minWidth: "최소 너비(CSS에서 허용하는 값)",
     maxWidth: "최대 너비(CSS에서 허용하는 값)",
@@ -703,26 +784,28 @@ export var koreanStrings = {
     keyDuplicationError: "\"고유하지 않은 키 값\" 오류 메시지",
     minSelectedChoices: "선택한 최소 선택 항목",
     maxSelectedChoices: "선택한 최대 선택 항목 수",
-    showClearButton: "지우기 단추 표시",
     logoWidth: "로고 너비(CSS에서 허용하는 값)",
     logoHeight: "로고 높이(CSS에서 허용하는 값)",
     readOnly: "읽기 전용",
     enableIf: "다음과 같은 경우 편집 가능",
-    emptyRowsText: "'행 없음' 메시지",
+    noRowsText: "'행 없음' 메시지",
     separateSpecialChoices: "별도의 특수 선택(없음, 기타, 모두 선택)",
     choicesFromQuestion: "다음 질문에서 선택 항목을 복사합니다.",
     choicesFromQuestionMode: "어떤 선택 항목을 복사해야 합니까?",
+    choiceValuesFromQuestion: "다음 행렬 열 또는 패널 질문의 값을 선택 ID로 사용합니다.",
+    choiceTextsFromQuestion: "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다.",
     progressBarShowPageTitles: "진행률 표시줄에 페이지 제목 표시",
     progressBarShowPageNumbers: "진행률 표시줄에 페이지 번호 표시",
     showCommentArea: "주석 영역 표시",
     commentPlaceholder: "주석 영역 자리 표시자",
     displayRateDescriptionsAsExtremeItems: "속도 설명을 극한 값으로 표시",
-    rowsOrder: "행 순서",
+    rowOrder: "행 순서",
     columnsLayout: "열 레이아웃",
     columnColCount: "중첩된 열 개수",
     correctAnswer: "정답",
     defaultPanelValue: "기본값",
     cells: "셀 텍스트",
+    fileInputPlaceholder: "파일 선택 또는 파일 링크 붙여넣기...",
     keyName: "키 열",
     itemvalue: {
       visibleIf: "다음과 같은 경우 옵션을 표시합니다.",
@@ -745,6 +828,12 @@ export var koreanStrings = {
       top: "맨 위에",
       bottom: "하단에"
     },
+    previewMode: "미리보기 모드",
+    gridLayoutEnabled: "그리드 레이아웃 사용Enable the grid layout",
+    gridLayoutColumns: "그리드 레이아웃 열",
+    maskSettings: "마스크 설정",
+    detailErrorLocation: "행 확장 오류 메시지 맞춤",
+    // Creator tabs
     tabs: {
       panel: {
         layout: "패널 레이아웃"
@@ -760,6 +849,7 @@ export var koreanStrings = {
       enableIf: "조건 충족시 허용",
       requiredIf: "다음과 같은 경우 필수입니다.",
       rateValues: "길이 값",
+      sliderSettings: "슬라이더 설정",
       choicesByUrl: "웹에서 선택",
       matrixChoices: "기본 선택",
       multipleTextItems: "텍스트 입력",
@@ -788,6 +878,12 @@ export var koreanStrings = {
       slider: "슬라이더",
       expression: "식",
       questionSettings: "질문 설정",
+      header: "머리글",
+      background: "배경",
+      appearance: "외관",
+      accentColors: "강조 색상",
+      surfaceBackground: "표면 배경",
+      scaling: "스케일링",
       others: "다른"
     },
     editProperty: "편집 속성 '{0}'",
@@ -797,8 +893,7 @@ export var koreanStrings = {
     columnsEnableIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsEnableIf: "다음과 같은 경우 행이 표시됩니다.",
     innerIndent: "내부 들여쓰기 추가",
-    defaultValueFromLastRow: "마지막 행에서 기본값 가져오기",
-    defaultValueFromLastPanel: "마지막 패널에서 기본값 가져 오기",
+    copyDefaultValueFromLastEntry: "마지막 항목의 답변을 기본값으로 사용",
     enterNewValue: "값을 입력하십시오.",
     noquestions: "설문 조사에는 어떤 질문도 없습니다.",
     createtrigger: "트리거를 만드십시오",
@@ -840,7 +935,52 @@ export var koreanStrings = {
     minWidth_placeholder: "예: 600px",
     maxWidth_placeholder: "예: 50%",
     imageHeight_placeholder: "자동",
-    imageWidth_placeholder: "자동"
+    imageWidth_placeholder: "자동",
+    itemTitleWidth_placeholder: "예: 100px",
+    theme: {
+      themeName: "주제",
+      isPanelless: "질문 모양",
+      editorPanel: "배경 및 모서리 반경",
+      questionPanel: "배경 및 모서리 반경",
+      primaryColor: "강조 색상",
+      panelBackgroundTransparency: "패널 배경 불투명도",
+      questionBackgroundTransparency: "질문 배경 불투명도",
+      fontSize: "글꼴 크기",
+      scale: "저울",
+      cornerRadius: "코너 반경",
+      advancedMode: "어드밴스드 모드",
+      pageTitle: "제목 글꼴",
+      pageDescription: "설명 글꼴",
+      questionTitle: "제목 글꼴",
+      questionDescription: "설명 글꼴",
+      editorFont: "글꼴",
+      backgroundOpacity: "불투명도",
+      "--sjs-font-family": "글꼴 모음",
+      "--sjs-general-backcolor-dim": "배경색",
+      "--sjs-primary-backcolor": "강조 배경",
+      "--sjs-primary-forecolor": "강조 전경",
+      "--sjs-special-red": "오류 메시지",
+      "--sjs-shadow-small": "그림자 효과",
+      "--sjs-shadow-inner": "그림자 효과",
+      "--sjs-border-default": "색상"
+    },
+    "header@header": {
+      headerView: "보기",
+      logoPosition: "로고 위치",
+      surveyTitle: "설문조사 제목 글꼴",
+      surveyDescription: "설문조사 설명 글꼴",
+      headerTitle: "설문조사 제목 글꼴",
+      headerDescription: "설문조사 설명 글꼴",
+      inheritWidthFrom: "콘텐츠 영역 너비",
+      textAreaWidth: "텍스트 너비",
+      backgroundColorSwitch: "배경색",
+      backgroundImage: "배경 이미지",
+      backgroundImageOpacity: "불투명도",
+      overlapEnabled: "겹침",
+      logoPositionX: "로고 위치",
+      titlePositionX: "제목 위치",
+      descriptionPositionX: "설명 위치"
+    }
   },
   // Property values
   pv: {
@@ -869,10 +1009,11 @@ export var koreanStrings = {
     firstExpanded: "우선 확장",
     off: "꺼짐",
     list: "목록",
+    carousel: "회전목마",
+    tab: "탭",
     progressTop: "상단 진행률",
     progressBottom: "하단 진행률",
     progressTopBottom: "상하단 진행률",
-    tab: "탭",
     horizontal: "가로",
     vertical: "세로",
     top: "위",
@@ -930,6 +1071,77 @@ export var koreanStrings = {
       url: "URL (영문)",
       week: "주"
     },
+    sliderType: {
+      single: "단일 값",
+      range: "레인지"
+    },
+    autocomplete: {
+      name: "성명",
+      "honorific-prefix": "접두사",
+      "given-name": "이름",
+      "additional-name": "중간 이름",
+      "family-name": "성",
+      "honorific-suffix": "접미사",
+      nickname: "별명",
+      "organization-title": "직책",
+      username: "사용자 이름",
+      "new-password": "새 비밀번호",
+      "current-password": "현재 비밀번호",
+      organization: "조직 이름",
+      "street-address": "전체 주소",
+      "address-line1": "주소란 1",
+      "address-line2": "주소란 2",
+      "address-line3": "주소란 3",
+      "address-level4": "레벨 4 주소",
+      "address-level3": "레벨 3 주소",
+      "address-level2": "레벨 2 주소",
+      "address-level1": "레벨 1 주소",
+      country: "국가 코드",
+      "country-name": "국가 이름",
+      "postal-code": "우편번호",
+      "cc-name": "카드 소지자 이름",
+      "cc-given-name": "카드 소지자 이름",
+      "cc-additional-name": "카드 소지자 중간 이름",
+      "cc-family-name": "카드 소지자의 성",
+      "cc-number": "신용 카드 번호",
+      "cc-exp": "만료 날짜",
+      "cc-exp-month": "만료 월",
+      "cc-exp-year": "만료 연도",
+      "cc-csc": "카드 보안 코드",
+      "cc-type": "신용 카드 유형",
+      "transaction-currency": "거래 통화(Transaction Currency)",
+      "transaction-amount": "거래 금액",
+      language: "선호 언어",
+      bday: "생일",
+      "bday-day": "생일 날",
+      "bday-month": "생일의 달",
+      "bday-year": "생일 연도",
+      sex: "성별",
+      url: "웹 사이트 URL",
+      photo: "프로필 사진",
+      tel: "전화번호",
+      "tel-country-code": "전화의 국가 코드",
+      "tel-national": "국내 전화번호",
+      "tel-area-code": "지역 번호",
+      "tel-local": "현지 전화번호",
+      "tel-local-prefix": "로컬 전화 접두사",
+      "tel-local-suffix": "지역 전화 접미사",
+      "tel-extension": "전화 내선 번호",
+      email: "이메일 주소",
+      impp: "인스턴트 메시징 프로토콜"
+    },
+    maskType: {
+      none: "없음",
+      pattern: "무늬",
+      numeric: "숫자",
+      datetime: "날짜 및 시간",
+      currency: "통화"
+    },
+    inputTextAlignment: {
+      auto: "자동",
+      left: "왼쪽",
+      right: "오른쪽"
+    },
     all: "모두",
     page: "페이지",
     survey: "설문지",
@@ -939,11 +1151,14 @@ export var koreanStrings = {
     questionsOnPageMode: {
       standard: "원래 구조",
       singlePage: "모든 질문을 한 페이지에 표시",
-      questionPerPage: "페이지당 단일 질문 표시"
+      questionPerPage: "페이지당 단일 질문 표시",
+      inputPerPage: "페이지당 단일 입력 필드 표시"
     },
     noPreview: "미리보기 없음",
     showAllQuestions: "모든 질문 표시",
     showAnsweredQuestions: "답변된 질문만 표시",
+    allQuestions: "모든 질문 보기",
+    answeredQuestions: "답변된 질문만 표시",
     pages: "완성된 페이지",
     questions: "답변된 질문",
     requiredQuestions: "필수 질문에 답변했습니다.",
@@ -959,13 +1174,10 @@ export var koreanStrings = {
     showNavigationButtons: {
       none: "숨겨진"
     },
-    showTimerPanel: {
-      none: "숨겨진"
+    timerInfoMode: {
+      combined: "둘다"
     },
-    showTimerPanelMode: {
-      all: "둘다"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "행렬 레이아웃에 따라 다름"
     },
     panelsState: {
@@ -1013,6 +1225,7 @@ export var koreanStrings = {
       onPage: "각 페이지에서 재설정",
       onpanel: "각 패널에서 재설정",
       onPanel: "각 패널에서 재설정",
+      recursive: "재귀 번호 매기기",
       onSurvey: "설문조사 계속하기",
       off: "번호 매기기 없음"
     },
@@ -1036,17 +1249,19 @@ export var koreanStrings = {
       percent: "백분율",
       date: "날짜"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "원문 언어"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "원문 언어"
     },
-    showProgressBar: {
-      off: "숨겨진",
-      topbottom: "위아래",
-      aboveheader: "머리글 위",
-      belowheader: "머리글 아래"
+    progressBarLocation: {
+      top: "맨 위로",
+      bottom: "밑바닥",
+      topbottom: "위쪽 및 아래쪽",
+      aboveheader: "헤더 위",
+      belowheader: "헤더 아래",
+      off: "숨겨진"
     },
     sum: "합계",
     count: "세다",
@@ -1056,6 +1271,42 @@ export var koreanStrings = {
     searchMode: {
       contains: "포함",
       startsWith: "다음으로 시작"
+    },
+    backgroundImageFit: {
+      auto: "자동",
+      cover: "표지",
+      contain: "포함하다",
+      fill: "뻗다",
+      tile: "타일"
+    },
+    backgroundImageAttachment: {
+      fixed: "부정하게 결정된",
+      scroll: "스크롤"
+    },
+    headerView: {
+      basic: "기초의",
+      advanced: "고급"
+    },
+    inheritWidthFrom: {
+      survey: "설문 조사와 동일",
+      container: "컨테이너에 맞추기"
+    },
+    backgroundColorSwitch: {
+      none: "없음",
+      accentColor: "강조 색상",
+      custom: "관습"
+    },
+    colorPalette: {
+      light: "광",
+      dark: "어둠"
+    },
+    isPanelless: {
+      "false": "기본값",
+      "true": "패널 없음"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "설문 조사와 동일",
+      container: "컨테이너와 동일"
     }
   },
   // Operators
@@ -1102,7 +1353,9 @@ export var koreanStrings = {
   ts: {
     selectPage: "테스트 할 페이지를 선택하십시오:",
     showInvisibleElements: "보이지 않는 요소 표시",
-    hideInvisibleElements: "보이지 않는 요소 숨기기"
+    hideInvisibleElements: "보이지 않는 요소 숨기기",
+    prevPage: "이전의",
+    nextPage: "다음"
   },
   validators: {
     answercountvalidator: "답 개수",
@@ -1130,6 +1383,13 @@ export var koreanStrings = {
     currencymask: {
       prefix: "예: $",
       suffix: "예.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "예: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "예: 30%",
+      questionTitleWidth: "예: 200px"
     }
   },
   pehelp: {
@@ -1140,13 +1400,17 @@ export var koreanStrings = {
       enableIf: "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
       questionTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
-      questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
+      questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
       innerIndent: "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다.",
       startWithNewLine: "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다.",
       state: "다음 중에서 선택: \"확장\" - 패널이 전체적으로 표시되며 축소할 수 있습니다. \"축소됨\" - 패널에 제목과 설명만 표시되며 확장할 수 있습니다. \"잠김\" - 패널이 완전히 표시되며 축소할 수 없습니다.",
-      width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+      width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
+      showQuestionNumbers: "이 패널 내에 중첩된 질문에 번호를 할당합니다.",
+      effectiveColSpan: "이 패널이 그리드 레이아웃 내에서 확장되는 열의 수를 지정합니다.",
+      gridLayoutColumns: "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
     },
     paneldynamic: {
       name: "응답자에게 표시되지 않는 패널 ID입니다.",
@@ -1154,7 +1418,8 @@ export var koreanStrings = {
       visibleIf: "마술 지팡이 아이콘을 사용하여 패널 가시성을 결정하는 조건부 규칙을 설정합니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
-      templateTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      templateQuestionTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      templateQuestionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       templateErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       errorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
@@ -1164,17 +1429,25 @@ export var koreanStrings = {
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       templateTitle: "동적 패널 제목에 대한 템플릿을 입력합니다. 패널의 일반 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
       templateTabTitle: "탭 제목에 대한 템플릿을 입력합니다. 패널의 일반적인 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
+      tabTitlePlaceholder: "탭 제목 패턴이 의미 있는 값을 생성하지 않을 때 적용되는 탭 제목에 대한 대체 텍스트입니다.",
       templateVisibleIf: "이 설정을 사용하면 동적 패널 내에서 개별 패널의 가시성을 제어할 수 있습니다. '{panel}' 자리 표시자를 사용하여 표현식의 현재 패널을 참조합니다.",
       titleLocation: "이 설정은 이 패널 내의 모든 질문에 자동으로 상속됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       descriptionLocation: "\"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"패널 제목 아래\")을 적용합니다.",
       newPanelPosition: "새로 추가된 패널의 위치를 정의합니다. 기본적으로 새 패널이 끝에 추가됩니다. \"다음\"을 선택하여 현재 패널 뒤에 새 패널을 삽입합니다.",
-      defaultValueFromLastPanel: "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다.",
-      keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다."
+      copyDefaultValueFromLastEntry: "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다.",
+      keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
+      confirmDelete: "패널을 제거하기 전에 확인 프롬프트를 트리거합니다."
     },
+    matrixdynamic: {
+      confirmDelete: "행을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      detailPanelShowOnAdding: "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
+    },
+    copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     defaultValueExpression: "이 설정을 사용하면 표현식에 따라 기본 답안 값을 할당할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력으로 재정의할 수 있는 초기 기본값으로 사용됩니다.",
     resetValueIf: "마술 지팡이 아이콘을 사용하여 응답자의 입력이 \"기본값 표현식\" 또는 \"설정 값 표현식\" 또는 \"기본 답변\" 값(둘 중 하나가 설정된 경우)에 기반한 값으로 재설정되는 시점을 결정하는 조건부 규칙을 설정합니다.",
     setValueIf: "마술 지팡이 아이콘을 사용하여 \"값 설정 표현식\"을 실행할 시기를 결정하는 조건부 규칙을 설정하고 결과 값을 응답으로 동적으로 할당합니다.",
     setValueExpression: "\"Set value if\" 규칙의 조건이 충족될 때 설정할 값을 정의하는 표현식을 지정합니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력에 의해 재정의될 수 있습니다.",
+    gridLayoutEnabled: "Survey Creator를 사용하면 양식 요소의 인라인 너비를 수동으로 조정하여 레이아웃을 제어할 수 있습니다. 이렇게 해도 원하는 결과가 나오지 않으면 열 기반 시스템을 사용하여 요소를 형성하는 구조체인 그리드 레이아웃을 활성화할 수 있습니다. 레이아웃 열을 구성하려면 페이지 또는 패널을 선택하고 \"질문 설정\" → \"그리드 열\" 테이블을 사용합니다. 질문의 열 수를 조정하려면 질문을 선택하고 \"레이아웃\" → \"열 범위\" 입력란에서 원하는 값을 설정합니다.",
     question: {
       name: "응답자에게 표시되지 않는 질문 ID입니다.",
       description: "질문 부제목을 입력합니다.",
@@ -1195,7 +1468,8 @@ export var koreanStrings = {
       textUpdateMode: "다음 중에서 선택: \"초점을 잃을 때\" - 입력 필드가 초점을 잃을 때 값이 업데이트됩니다. \"While typing\" - 사용자가 입력할 때 값이 실시간으로 업데이트됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"초점 손실 시\")을 적용합니다.",
       url: "모든 웹 서비스를 객관식 질문의 데이터 소스로 사용할 수 있습니다. 선택 항목 값을 채우려면 데이터를 제공하는 서비스의 URL을 입력합니다.",
       searchMode: "드롭다운 목록을 필터링하는 데 사용되는 비교 작업입니다.",
-      textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다."
+      textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다.",
+      effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
     },
     signaturepad: {
       signatureWidth: "표시된 서명 영역과 결과 이미지의 너비를 설정합니다.",
@@ -1203,8 +1477,9 @@ export var koreanStrings = {
       signatureAutoScaleEnabled: "기본 3:2 종횡비를 유지하면서 서명 영역이 질문 상자 내의 사용 가능한 모든 공간을 채우도록 하려면 선택합니다. 사용자 지정 너비 및 높이 값을 설정하면 설정은 이러한 치수의 가로 세로 비율을 유지합니다."
     },
     file: {
-      imageHeight: "현장조사 결과에서 이미지의 높이를 조정합니다.",
-      imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다."
+      imageHeight: "미리보기에 업로드된 이미지의 표시 높이와 카메라로 촬영한 이미지의 실제 높이를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 높이가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다.",
+      imageWidth: "미리보기에 업로드된 이미지의 표시 너비와 카메라로 촬영한 이미지의 실제 너비를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 너비가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다.",
+      allowImagesPreview: "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
     },
     image: {
       contentMode: "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
@@ -1223,7 +1498,8 @@ export var koreanStrings = {
     },
     // survey templates
     survey: {
-      mode: "다음 중 하나를 선택합니다. \"수정 가능\" - 응답자가 설문조사를 작성할 수 있습니다. \"읽기 전용\" - 양식 편집을 비활성화합니다."
+      readOnly: "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다.",
+      progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
     matrixdropdowncolumn: {
       name: "응답자에게 표시되지 않는 열 ID입니다.",
@@ -1232,27 +1508,46 @@ export var koreanStrings = {
       visibleIf: "마술 지팡이 아이콘을 사용하여 열 표시 유형을 결정하는 조건부 규칙을 설정합니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 열에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
-      showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다."
+      showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
+      colCount: "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
     },
+    slider: {
+      min: "사용자가 선택할 수 있는 가장 낮은 숫자입니다.",
+      max: "사용자가 선택할 수 있는 가장 높은 숫자입니다.",
+      step: "선택 가능한 배율 값 사이의 간격입니다. 예를 들어 5단계를 통해 사용자는 0, 5, 10 등을 선택할 수 있습니다.",
+      minRangeLength: "사용자가 설정할 수 있는 슬라이더 엄지 단추 사이의 최소 거리입니다.",
+      maxRangeLength: "사용자가 설정할 수 있는 슬라이더 썸 사이의 최대 거리입니다.",
+      labelCount: "생성할 축척 레이블 수를 지정합니다. 값이 -1이면 숫자가 Min 값과 Max 값을 기준으로 자동으로 계산됩니다.",
+      labelFormat: "'{0}'를 실제 값의 자리 표시자로 사용합니다.",
+      customLabels: "특정 값에서 사용자 지정 레이블을 정의하고 선택적으로 해당 텍스트를 할당할 수 있습니다(예: 0 = \"나쁨\", 100 = \"우수\").",
+      tooltipFormat: "'{0}'를 실제 값의 자리 표시자로 사용합니다.",
+      allowSwap: "사용자가 한 엄지 손가락을 다른 엄지 손가락 뒤로 이동할 수 있습니다.",
+      allowClear: "선택한 슬라이더 값을 지우고 undefined로 설정하는 버튼을 표시합니다.",
+      minValueExpression: "표현식을 사용하여 슬라이더의 최소값을 동적���로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다.",
+      maxValueExpression: "표현식을 사용하여 슬라이더의 최대값을 동적으로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
+    },
+    isExclusive: "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다.",
+    caseInsensitive: "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다.",
     widthMode: "다음 중에서 선택합니다. \"정적\" - 고정 너비를 설정합니다. \"반응형\" - 설문조사가 화면의 전체 너비를 차지하도록 합니다. \"자동\" - 사용된 질문 유형에 따라 둘 중 하나를 적용합니다.",
     cookieName: "쿠키는 사용자가 동일한 설문조사를 두 번 작성하는 것을 방지합니다.",
     logo: "이미지 링크(크기 제한 없음)를 붙여넣거나 폴더 아이콘을 클릭하여 컴퓨터에서 파일을 찾습니다(최대 64KB).",
     logoWidth: "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoHeight: "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
-    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다.",
-    allowCompleteSurveyAutomatic: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
+    autoAdvanceEnabled: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
+    autoAdvanceAllowComplete: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
-    showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
+    navigationButtonsLocation: "페이지에서 탐색 단추의 위치를 설정합니다.",
     showPreviewBeforeComplete: "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다.",
     questionTitleLocation: "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다.",
-    requiredText: "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다.",
+    requiredMark: "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다.",
     questionStartIndex: "번호 매기기를 시작할 숫자 또는 문자를 입력합니다.",
     questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다.",
-    focusFirstQuestionAutomatic: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
-    questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
+    autoFocusFirstQuestion: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
+    questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     maxTextLength: "텍스트 입력 질문에만 해당됩니다.",
-    maxOthersLength: "질문 댓글에만 해당됩니다.",
+    maxCommentLength: "질문 댓글에만 해당됩니다.",
+    commentAreaRows: "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다.",
     autoGrowComment: "질문 댓글과 긴 텍스트 질문의 높이가 입력한 텍스트 길이에 따라 자동으로 커지도록 하려면 선택합니다.",
     allowResizeComment: "질문 댓글 및 긴 텍스트 질문에만 해당됩니다.",
     calculatedValues: "사용자 지정 변수는 양식 계산에 사용되는 중간 또는 보조 변수 역할을 합니다. 응답자 입력을 소스 값으로 사용합니다. 각 맞춤 변수에는 고유한 이름과 기준이 되는 표현식이 있습니다.",
@@ -1266,10 +1561,9 @@ export var koreanStrings = {
     rowTitleWidth: "CSS 값(px, %, in, pt 등)을 허용합니다.",
     totalText: "하나 이상의 열에 Total 유형 또는 Total 표현식이 있는 경우에만 표시됩니다.",
     cellErrorLocation: "잘못된 입력이 있는 셀과 관련하여 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 \"오류 메시지 맞춤\" 속성의 설정을 적용합니다.",
+    detailErrorLocation: "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다.",
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
-    confirmDelete: "행 삭제를 확인하라는 프롬프트를 트리거합니다.",
-    defaultValueFromLastRow: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다.",
     description: "자막을 입력합니다.",
     locale: "설문조사 만들기를 시작할 언어를 선택합니다. 번역을 추가하려면 새 언어로 전환하고 여기 또는 번역 탭에서 원본 텍스트를 번역합니다.",
@@ -1277,19 +1571,25 @@ export var koreanStrings = {
     imageFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
     autoGrow: "데이터가 입력될 때 입력 필드의 높이를 점진적으로 늘립니다. \"입력 필드 높이(줄 단위)\" 설정을 재정의합니다.",
     allowResize: "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다.",
-    maxTimeToFinish: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
-    maxTimeToFinishPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+    timeLimit: "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다.",
+    timeLimitPerPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+    validateVisitedEmptyFields: "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다.",
     page: {
-      maxTimeToFinish: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
+      name: "응답자에게 표시되지 않는 페이지 ID입니다.",
+      description: "페이지 부제목을 입력합니다.",
+      navigationTitle: "진행률 표시줄 또는 목차(TOC)의 탐색 단추에 표시되는 캡션입니다. 이 필드를 비워 두면 탐색 버튼에서 페이지 제목 또는 페이지 이름을 사용합니다. 진행률 표시줄 또는 TOC를 활성화하려면 \"설문 조사\" → \"탐색\"으로 이동합니다.",
+      timeLimit: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
       visibleIf: "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
       questionTitleLocation: "이 페이지 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문 또는 패널에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
-      questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
-      navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
+      questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
+      showNavigationButtons: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다.",
+      gridLayoutColumns: "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
     },
-    showTimerPanel: "페이지에서 타이머의 표시 여부와 위치를 설정합니다.",
+    timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
     panelsState: "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다.",
     imageLinkName: "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다.",
     choices: "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다.",
@@ -1299,9 +1599,13 @@ export var koreanStrings = {
     maxWidth: "CSS 값(px, %, in, pt 등)을 허용합니다.",
     width: "CSS 값(px, %, in, pt 등)을 허용합니다.",
     valueName: "이 속성을 설정하지 않으면 대답이 Name 속성으로 지정된 필드에 저장됩니다.",
+    defaultDisplayValue: "HTML 질문과 설문 요소의 동적 제목 및 설명에 표시되는 값으로, 질문 값이 비어 있을 때 표시됩니다.",
     useDisplayValuesInDynamicTexts: "단답형 및 다중선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정을 선택하면 HTML 질문과 동적 제목 및 현장조사 요소에 대한 설명에서 ID 값 대신 표시 값이 표시됩니다.",
     clearIfInvisible: "조건부 논리에 의해 숨겨진 질문 값을 지울지 여부와 지울 시기를 선택합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"설문조사 완료 시\")을 적용합니다.",
     choicesFromQuestionMode: "다음 중에서 선택: \"모두\" - 선택한 질문의 모든 선택 옵션을 복사합니다. \"선택됨\" - 선택한 선택 옵션만 동적으로 복사합니다. \"선택되지 않음\" - 선택되지 않은 선택 옵션만 동적으로 복사합니다. \"없음\" 및 \"기타\" 옵션은 원본 질문에서 활성화된 경우 기본적으로 복사됩니다.",
+    choiceValuesFromQuestion: "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 ID를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다.",
+    choiceTextsFromQuestion: "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 표시 텍스트를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다.",
+    allowCustomChoices: "드롭다운에서 원하는 옵션을 사용할 수 없는 경우 응답자가 자신의 선택 항목을 추가할 수 있도록 하려면 선택합니다. 사용자 지정 선택 항목은 현재 브라우저 세션 동안 일시적으로만 저장됩니다.",
     showOtherItem: "이 옵션을 선택하면 사용자가 별도의 주석 상자에 추가 입력을 포함할 수 있습니다.",
     separateSpecialChoices: "각 특수 선택 옵션(\"없음\", \"기타\", \"모두 선택\")을 새 줄에 표시합니다(여러 열 레이아웃을 사용하는 경우에도 마찬가지임).",
     path: "서비스 데이터 세트 내에서 대상 객체 배열이 있는 위치를 지정합니다. URL이 이미 배열을 가리키는 경우 비워 둡니다.",
@@ -1323,8 +1627,9 @@ export var koreanStrings = {
     needConfirmRemoveFile: "파일 삭제를 확인하는 프롬프트를 트리거합니다.",
     selectToRankEnabled: "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다.",
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
-    itemSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
-    itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
+    inputSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
+    itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
+    inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
     expression: {
@@ -1340,6 +1645,7 @@ export var koreanStrings = {
     filePlaceholder: "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다.",
     photoPlaceholder: "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다.",
     fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다.",
+    colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다.",
     masksettings: {
       saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
     },
@@ -1357,7 +1663,23 @@ export var koreanStrings = {
     currencymask: {
       prefix: "값 앞에 표시할 하나 또는 여러 개의 기호입니다.",
       suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
-    }
+    },
+    theme: {
+      isPanelless: "이 설정은 패널 외부의 질문에만 적용됩니다.",
+      primaryColor: "주요 측량 요소를 강조하는 보조 색상을 설정합니다.",
+      panelBackgroundTransparency: "설문조사 배경을 기준으로 패널과 질문 상자의 투명도를 조정합니다.",
+      questionBackgroundTransparency: "현장조사 배경에 상대적인 입력 요소의 투명도를 조정합니다.",
+      cornerRadius: "모든 직사각형 요소의 구석 반지름을 설정합니다. Advanced Mode(고급 모드)를 활성화하면 입력 요소 또는 패널 및 질문 상자에 대한 개별 모서리 반경 값을 설정할 수 있습니다.",
+      "--sjs-general-backcolor-dim": "현장조사의 기본 배경색을 설정합니다."
+    },
+    header: {
+      inheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다.",
+      textAreaWidth: "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다.",
+      overlapEnabled: "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다.",
+      mobileHeight: "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
+    },
+    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다.",
+    singleInputTitleTemplate: "'설문조사 레이아웃'이 '페이지당 단일 입력 필드'로 설정된 경우에 사용됩니다. 이 레이아웃에서는 각 입력 필드가 별도의 페이지에 표시되도록 행렬이 분할됩니다. {rowIndex} 자리 표시자를 사용하여 자동 번호 매기기를 삽입하고, {rowTitle} 또는 {rowName}을 사용하여 행의 제목 또는 ID를 참조하고, {row.columnid}를 사용하여 특정 행렬 열의 값을 포함합니다."
   },
   // Properties
   p: {
@@ -1409,7 +1731,7 @@ export var koreanStrings = {
     detailElements: "세부 요소",
     allowAdaptiveActions: "적응형 작업 허용",
     defaultRowValue: "기본 행 값",
-    detailPanelShowOnAdding: "추가 시 세부 정보 패널 표시",
+    detailPanelShowOnAdding: "새 행 세부 정보 자동 확장",
     choicesLazyLoadEnabled: "선택 지연 로드 사용",
     choicesLazyLoadPageSize: "선택 지연 로드 페이지 크기",
     inputFieldComponent: "입력 필드 구성 요소",
@@ -1420,11 +1742,11 @@ export var koreanStrings = {
     maxValueExpression: "최대값 표현식",
     step: "걸음",
     dataList: "데이터 목록",
-    itemSize: "항목 크기",
+    inputSize: "항목 크기",
     itemTitleWidth: "항목 레이블 너비(px)",
+    inputTextAlignment: "입력 값 정렬",
     elements: "요소",
     content: "콘텐츠",
-    navigationButtonsVisibility: "탐색 버튼 선명도",
     navigationTitle: "탐색 제목",
     navigationDescription: "탐색 설명",
     longTap: "길게 탭하기",
@@ -1438,6 +1760,7 @@ export var koreanStrings = {
     imageFit: "이미지 핏",
     altText: "대체 텍스트",
     height: "높이",
+    mobileHeight: "스마트폰의 높이",
     penColor: "펜 색상",
     backgroundColor: "배경색",
     templateElements: "템플릿 요소",
@@ -1460,104 +1783,47 @@ export var koreanStrings = {
     allowCameraAccess: "카메라 액세스 허용",
     scaleColorMode: "스케일 컬러 모드",
     rateColorMode: "비율 색상 모드",
-    copyDisplayValue: "표시 값 복사"
+    copyDisplayValue: "표시 값 복사",
+    effectiveColSpan: "열 범위",
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
   },
   theme: {
-    "--background": "배경색",
-    "--background-dim-light": "배경 희미한 밝은 색",
-    "--primary-foreground": "기본 전경색",
-    "--foreground": "전경색",
-    "--base-unit": "베이스 유닛",
     advancedMode: "어드밴스드 모드",
-    groupGeneral: "일반",
-    groupHeader: "머리글",
-    groupBackground: "배경",
-    groupAppearance: "외관",
-    themeName: "주제",
-    themeMode: "질문 모양",
-    themeModePanels: "기본값",
-    themeModeLightweight: "패널 없음",
-    themePaletteLight: "광",
-    themePaletteDark: "어둠",
-    primaryColor: "강조 색상",
+    pageTitle: "페이지 제목 글꼴",
+    questionTitle: "질문 제목 글꼴",
+    editorPanel: "입력 요소",
+    lines: "라인",
     primaryDefaultColor: "기본값",
     primaryDarkColor: "호버",
     primaryLightColor: "선택한",
-    coverTitleForecolor: "제목 forecolor",
-    coverDescriptionForecolor: "설명 forecolor",
-    coverOverlapEnabled: "겹침",
     backgroundDimColor: "배경색",
-    backgroundImage: "배경 이미지",
-    backgroundImageFitAuto: "자동",
-    backgroundImageFitCover: "표지",
-    backgroundImageFitContain: "포함하다",
-    backgroundImageFitFill: "뻗다",
-    backgroundImageFitTile: "타일",
-    backgroundOpacity: "불투명도",
-    backgroundImageAttachmentFixed: "부정하게 결정된",
-    backgroundImageAttachmentScroll: "스크롤",
-    panelBackgroundTransparency: "패널 배경 불투명도",
-    questionBackgroundTransparency: "질문 배경 불투명도",
-    questionTitle: "질문 제목 글꼴",
-    editorPanel: "입력 요소",
-    backgroundCornerRadius: "배경 및 모서리 반경",
+    cornerRadius: "코너 반경",
     backcolor: "기본 배경",
     hovercolor: "배경 가리키기",
     borderDecoration: "테두리 장식",
-    accentBackground: "악센트 배경",
-    accentForeground: "악센트 전경",
+    fontColor: "글꼴 색상",
+    backgroundColor: "배경색",
     primaryForecolor: "기본 색상",
     primaryForecolorLight: "비활성화 된 색상",
-    colorsTitle: "색상",
     font: "글꼴",
-    lines: "라인",
     borderDefault: "어두운",
     borderLight: "라이터",
-    fontFamily: "글꼴 패밀리",
-    fontSize: "글자 크기",
+    fontFamily: "글꼴 모음",
+    fontWeightRegular: "일반",
+    fontWeightHeavy: "무겁다",
+    fontWeightSemiBold: "세미 볼드(Semi-bold)",
+    fontWeightBold: "대담한",
     color: "색",
     placeholderColor: "자리 표시자 색",
     size: "크기",
-    fontWeightRegular: "일반",
-    fontWeightHeavy: "무겁다",
-    fontWeightSemiBold: "세미 굵게",
-    fontWeightBold: "대담한",
-    scale: "저울",
-    cornerRadius: "코너 반경",
-    surveyTitle: "설문조사 제목 글꼴",
-    surveyDescription: "설문조사 설명 글꼴",
-    pageTitle: "페이지 제목 글꼴",
-    titleFont: "제목 글꼴",
-    descriptionFont: "설명 글꼴",
+    opacity: "불투명도",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "그림자 효과 추가",
-    opacity: "불투명도",
     boxShadowBlur: "흐리게",
     boxShadowSpread: "전파",
     boxShadowDrop: "방울",
     boxShadowInner: "내부",
-    shadow: "그림자 효과",
-    headerView: "보기",
-    headerViewBasic: "기초의",
-    headerViewAdvanced: "고급",
-    coverInheritWidthFrom: "콘텐츠 영역 너비",
-    coverInheritWidthFromSurvey: "설문조사와 동일",
-    coverInheritWidthFromContainer: "콘테이너에 적합",
-    coverTextAreaWidth: "텍스트 너비",
-    coverBackgroundColorSwitch: "배경색",
-    coverBackgroundColorNone: "없음",
-    coverBackgroundColorAccentColor: "강조 색상",
-    coverBackgroundColorCustom: "관습",
-    horizontalAlignmentLeft: "왼쪽",
-    horizontalAlignmentCenter: "중",
-    horizontalAlignmentRight: "오른쪽",
-    verticalAlignmentTop: "맨 위로",
-    verticalAlignmentMiddle: "중간",
-    verticalAlignmentBottom: "밑바닥",
-    logoPosition: "로고 위치",
-    coverTitlePosition: "타이틀 포지션",
-    coverDescriptionPosition: "설명 위치",
     names: {
       default: "기본값",
       sharp: "날카로운",
@@ -1577,11 +1843,26 @@ export var koreanStrings = {
       orchid: "난초",
       tulip: "튤립",
       brown: "갈색",
-      green: "녹색"
+      green: "녹색",
+      gray: "회색"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "표면 배경",
+    "--sjs-primary-background-500": "본래의",
+    "--sjs-secondary-background-500": "보조",
+    surfaceScale: "표면",
+    userInterfaceBaseUnit: "사용자 인터페이스",
+    fontScale: "글꼴",
+    names: {
+      sc2020: "설문조사 작성기 2020",
+      "default-light": "광",
+      "default-dark": "어둠",
+      "default-contrast": "대조"
     }
   }
 };
-editorLocalization.locales["ko"] = koreanStrings;
+setupLocale({ localeCode: "ko", strings: koreanStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1791,7 +2072,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.choicesMin: "Minimum value for auto-generated items" => "자동 생성된 항목의 최소값"
 // pe.choicesMax: "Maximum value for auto-generated items" => "자동 생성된 항목의 최대값"
 // pe.choicesStep: "Step for auto-generated items" => "자동 생성된 항목에 대한 단계"
-// pe.isAllRowRequired: "Require answer for all rows" => "모든 행에 대한 응답 필요"
+// pe.eachRowRequired: "Require answer for all rows" => "모든 행에 대한 응답 필요"
 // pe.requiredErrorText: "\"Required\" error message" => "\"필수\" 오류 메시지"
 // pe.cols: "Columns" => "열"
 // pe.rateMin: "Minimum rate value" => "최소 요금 값"
@@ -1820,7 +2101,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.editText: "Edit Answer button text" => "답변 편집 단추 텍스트"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "이미지 높이(CSS에서 허용하는 값)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "이미지 너비(CSS에서 허용하는 값)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "페이지 완료 시간 제한(초)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "페이지 완료 시간 제한(초)"
 // question.page: "Parent page" => "상위 페이지"
 // pe.noEntriesText: "Empty entries text" => "빈 항목 텍스트"
 // pe.html: "HTML markup" => "HTML 마크업"
@@ -1829,7 +2110,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.dataFormat: "Image format" => "이미지 형식"
 // pe.allowAddRows: "Allow adding rows" => "행 추가 허용"
 // pe.allowRemoveRows: "Allow removing rows" => "행 제거 허용"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "행 끌어서 놓기 허용"
+// pe.allowRowReorder: "Allow row drag and drop" => "행 끌어서 놓기 허용"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "정확한 이미지 너비 또는 높이를 지정하는 경우에는 적용되지 않습니다."
 // pe.minImageWidth: "Minimum image width" => "최소 이미지 너비"
 // pe.maxImageWidth: "Maximum image width" => "최대 이미지 너비"
@@ -1853,11 +2134,11 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.logo: "Logo (URL or base64-encoded string)" => "로고(URL 또는 base64로 인코딩된 문자열)"
 // pe.questionsOnPageMode: "Survey structure" => "설문조사 구조"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "최대 답변 길이(문자 단위)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "최대 주석 길이(문자)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "최대 주석 길이(문자)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "필요한 경우 주석 영역 자동 확장"
 // pe.allowResizeComment: "Allow users to resize text areas" => "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용"
 // pe.textUpdateMode: "Update text question value" => "텍스트 질문 값 업데이트"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "첫 번째 오답에 포커스 설정"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "첫 번째 오답에 포커스 설정"
 // pe.checkErrorsMode: "Run validation" => "유효성 검사 실행"
 // pe.navigateToUrl: "Navigate to URL" => "URL로 이동합니다."
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "동적 URL"
@@ -1883,20 +2164,20 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.detailPanelMode: "Detail panel location" => "세부 정보 패널 위치"
 // pe.minRowCount: "Minimum row count" => "최소 행 개수"
 // pe.maxRowCount: "Maximum row count" => "최대 행 개수"
-// pe.confirmDelete: "Confirm row deletion" => "행 삭제 확인"
+// pe.confirmDelete: "Confirm row removal" => "행 삭제 확인"
 // pe.confirmDeleteText: "Confirmation message" => "확인 메시지"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "패널 삭제 확인"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "패널 삭제 확인"
 // pe.panelCount: "Initial panel count" => "초기 패널 수"
 // pe.minPanelCount: "Minimum panel count" => "최소 패널 수"
 // pe.maxPanelCount: "Maximum panel count" => "최대 패널 수"
 // pe.panelsState: "Inner panel expand state" => "내부 패널 확장 상태"
 // pe.templateDescription: "Description template" => "설명 템플릿"
 // pe.templateTitle: "Title template" => "제목 템플릿"
-// pe.panelPrevText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
-// pe.panelNextText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
+// pe.prevPanelText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
+// pe.nextPanelText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
 // pe.showRangeInProgress: "Show progress bar" => "진행률 표시줄 표시"
-// pe.templateTitleLocation: "Question title location" => "질문 제목 위치"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
+// pe.templateQuestionTitleLocation: "Question title location" => "질문 제목 위치"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "행이 없는 경우 질문 숨기기"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "행이 없는 경우 열 숨기기"
 // pe.rateValues: "Custom rate values" => "사용자 지정 요금 값"
@@ -1919,13 +2200,12 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "\"고유하지 않은 키 값\" 오류 메시지"
 // pe.minSelectedChoices: "Minimum selected choices" => "선택한 최소 선택 항목"
 // pe.maxSelectedChoices: "Maximum selected choices" => "선택한 최대 선택 항목 수"
-// pe.showClearButton: "Show the Clear button" => "지우기 단추 표시"
 // pe.showNumber: "Show panel number" => "패널 번호 표시"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "로고 너비(CSS에서 허용하는 값)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "로고 높이(CSS에서 허용하는 값)"
 // pe.readOnly: "Read-only" => "읽기 전용"
 // pe.enableIf: "Editable if" => "다음과 같은 경우 편집 가능"
-// pe.emptyRowsText: "\"No rows\" message" => "'행 없음' 메시지"
+// pe.noRowsText: "\"No rows\" message" => "'행 없음' 메시지"
 // pe.size: "Input field size (in characters)" => "입력 필드 크기(문자)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "별도의 특수 선택(없음, 기타, 모두 선택)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "다음 질문에서 선택 항목을 복사합니다."
@@ -1933,7 +2213,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.showCommentArea: "Show the comment area" => "주석 영역 표시"
 // pe.commentPlaceholder: "Comment area placeholder" => "주석 영역 자리 표시자"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "속도 설명을 극한 값으로 표시"
-// pe.rowsOrder: "Row order" => "행 순서"
+// pe.rowOrder: "Row order" => "행 순서"
 // pe.columnsLayout: "Column layout" => "열 레이아웃"
 // pe.columnColCount: "Nested column count" => "중첩된 열 개수"
 // pe.state: "Panel expand state" => "패널 확장 상태"
@@ -1972,8 +2252,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.indent: "Add indents" => "들여쓰기 추가"
 // panel.indent: "Add outer indents" => "바깥쪽 들여쓰기 추가"
 // pe.innerIndent: "Add inner indents" => "내부 들여쓰기 추가"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "마지막 행에서 기본값 가져오기"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "마지막 패널에서 기본값 가져 오기"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Enter 버튼을 눌러 편집합니다."
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "항목을 편집하려면 Enter 버튼을 누르고, 항목을 삭제하려면 삭제 버튼을 누르고, 항목을 이동하려면 alt 더하기 화살표 위쪽 또는 아래쪽 화살표를 누릅니다."
 // pe.triggerFromName: "Copy value from: " => "다음에서 값 복사: "
@@ -2056,7 +2334,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // showTimerPanel.none: "Hidden" => "숨겨진"
 // showTimerPanelMode.all: "Both" => "둘다"
 // detailPanelMode.none: "Hidden" => "숨겨진"
-// addRowLocation.default: "Depends on matrix layout" => "행렬 레이아웃에 따라 다름"
+// addRowButtonLocation.default: "Depends on matrix layout" => "행렬 레이아웃에 따라 다름"
 // panelsState.default: "Users cannot expand or collapse panels" => "사용자는 패널을 확장하거나 축소할 수 없습니다."
 // panelsState.collapsed: "All panels are collapsed" => "모든 패널이 축소됩니다"
 // panelsState.expanded: "All panels are expanded" => "모든 패널이 확장됩니다."
@@ -2193,12 +2471,11 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.--primary-foreground: "Primary foreground color" => "기본 전경색"
 // theme.--foreground: "Foreground color" => "전경색"
 // theme.--base-unit: "Base unit" => "베이스 유닛"
-// theme.groupGeneral: "General" => "일반"
 // theme.groupAdvanced: "Advanced" => "고급"
 // theme.themeName: "Theme" => "주제"
-// theme.themeMode: "Question appearance" => "질문 모양"
-// theme.themeModePanels: "Default" => "기본값"
-// theme.themeModeLightweight: "Without Panels" => "패널 없음"
+// theme.isPanellessss: "Question appearance" => "질문 모양"
+// theme.isPanellessPanels: "Default" => "기본값"
+// theme.isPanellessLightweight: "Without Panels" => "패널 없음"
 // theme.themePaletteLight: "Light" => "광"
 // theme.themePaletteDark: "Dark" => "어둠"
 // theme.primaryColor: "Accent color" => "강조 색상"
@@ -2240,7 +2517,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.fontWeightBold: "Bold" => "대담한"
 // theme.scale: "Scale" => "저울"
 // theme.cornerRadius: "Corner radius" => "코너 반경"
-// theme.surveyTitle: "Survey title font" => "설문조사 제목 글꼴"
+// theme.surveyTitleFont: "Survey title font" => "설문조사 제목 글꼴"
 // theme.pageTitle: "Page title font" => "페이지 제목 글꼴"
 // theme.pageDescription: "Page description font" => "페이지 설명 글꼴"
 // theme.boxShadowX: "X" => "X"
@@ -2302,22 +2579,20 @@ editorLocalization.locales["ko"] = koreanStrings;
 // survey.title: "Title" => "타이틀"
 // page.title: "Title" => "타이틀"
 // p.setValueIf: "Set value if" => "다음과 같은 경우 값을 설정합니다."
-// theme.groupHeader: "Header" => "머리글"
-// theme.coverTitleForecolor: "Title forecolor" => "제목 forecolor"
-// theme.coverOverlapEnabled: "Overlap" => "겹침"
+// theme.header: "Header" => "머리글"
 // theme.backgroundImageFitFill: "Stretch" => "뻗다"
 // theme.backgroundImageFitTile: "Tile" => "타일"
 // theme.headerView: "View" => "보기"
 // theme.headerViewBasic: "Basic" => "기초의"
 // theme.headerViewAdvanced: "Advanced" => "고급"
-// theme.coverInheritWidthFrom: "Content area width" => "콘텐츠 영역 너비"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "설문조사와 동일"
-// theme.coverInheritWidthFromPage: "Fit to page" => "페이지에 맞추기"
-// theme.coverTextAreaWidth: "Text width" => "텍스트 너비"
-// theme.coverBackgroundColorSwitch: "Background color" => "배경색"
-// theme.coverBackgroundColorNone: "None" => "없음"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "강조 색상"
-// theme.coverBackgroundColorCustom: "Custom" => "관습"
+// theme.headerInheritWidthFrom: "Content area width" => "콘텐츠 영역 너비"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "설문조사와 동일"
+// theme.headerInheritWidthFromPage: "Fit to page" => "페이지에 맞추기"
+// theme.headerTextAreaWidth: "Text width" => "텍스트 너비"
+// theme.headerBackgroundColorSwitch: "Background color" => "배경색"
+// theme.headerBackgroundColorNone: "None" => "없음"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "강조 색상"
+// theme.headerBackgroundColorCustom: "Custom" => "관습"
 // theme.horizontalAlignmentLeft: "Left" => "왼쪽"
 // theme.horizontalAlignmentCenter: "Center" => "중"
 // theme.horizontalAlignmentRight: "Right" => "오른쪽"
@@ -2325,8 +2600,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "중간"
 // theme.verticalAlignmentBottom: "Bottom" => "밑바닥"
 // theme.logoPosition: "Logo Position" => "로고 위치"
-// theme.coverTitlePosition: "Title Position" => "타이틀 포지션"
-// theme.coverDescriptionPosition: "Description Position" => "설명 위치"
+// theme.headerTitlePosition: "Title Position" => "타이틀 포지션"
+// theme.headerDescriptionPosition: "Description Position" => "설명 위치"
 // lg.question_resetValueText: "reset value for question: {0}" => "질문에 대한 재설정 값: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "할당 값: {1} 질문: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "열의 셀 값 재설정: {0}"
@@ -2340,18 +2615,14 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다."
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
-// theme.groupBackground: "Background" => "배경"
-// theme.groupAppearance: "Appearance" => "외관"
-// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
+// theme.background: "Background" => "배경"
+// theme.appearance: "Appearance" => "외관"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "예, 테마를 재설정합니다."
-// theme.groupBackground: "Background" => "배경"
-// theme.groupAppearance: "Appearance" => "외관"
-// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"
 // signaturepad.showPlaceholder: "Show the placeholder" => "자리 표시자 표시"
 // signaturepad.placeholder: "Placeholder text" => "자리 표시자 텍스트"
-// theme.surveyDescription: "Survey description font" => "설문조사 설명 글꼴"
+// theme.surveyDescriptionFont: "Survey description font" => "설문조사 설명 글꼴"
 // ed.prevFocus: "Focus previous" => "포커스 이전"
 // ed.nextFocus: "Focus next" => "다음 초점"
 // ed.saveTheme: "Save Theme" => "테마 저장"
@@ -2398,13 +2669,12 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panel.description: "Panel description" => "패널 설명"
 // panel.visibleIf: "Make the panel visible if" => "다음과 같은 경우 패널을 표시합니다."
 // panel.requiredIf: "Make the panel required if" => "다음과 같은 경우 패널을 필수로 만듭니다."
-// panel.questionsOrder: "Question order within the panel" => "패널 내의 질문 순서"
+// panel.questionOrder: "Question order within the panel" => "패널 내의 질문 순서"
 // panel.startWithNewLine: "Display the panel on a new line" => "새 줄에 패널 표시"
 // panel.state: "Panel collapse state" => "패널 축소 상태"
 // panel.width: "Inline panel width" => "인라인 패널 너비"
 // panel.minWidth: "Minimum panel width" => "최소 패널 너비"
 // panel.maxWidth: "Maximum panel width" => "최대 패널 너비"
-// panel.showNumber: "Number panels" => "숫자 패널"
 // paneldynamic.name: "Panel name" => "패널 이름"
 // paneldynamic.title: "Panel title" => "패널 제목"
 // paneldynamic.description: "Panel description" => "패널 설명"
@@ -2424,7 +2694,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "패널 번호 숨기기"
 // paneldynamic.titleLocation: "Panel title alignment" => "패널 제목 정렬"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "패널 설명 정렬"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "질문 제목 정렬"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "질문 제목 정렬"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "오류 메시지 맞춤"
 // paneldynamic.newPanelPosition: "New panel location" => "새 패널 위치"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "다음 질문에서 중복 응답 방지"
@@ -2457,7 +2727,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // page.description: "Page description" => "페이지 설명"
 // page.visibleIf: "Make the page visible if" => "다음과 같은 경우 페이지를 표시합니다."
 // page.requiredIf: "Make the page required if" => "다음과 같은 경우 페이지를 필수로 만듭니다."
-// page.questionsOrder: "Question order on the page" => "페이지의 질문 순서"
+// page.questionOrder: "Question order on the page" => "페이지의 질문 순서"
 // matrixdropdowncolumn.name: "Column name" => "열 이름"
 // matrixdropdowncolumn.title: "Column title" => "열 제목"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "중복 응답 방지"
@@ -2531,8 +2801,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // totalDisplayStyle.currency: "Currency" => "통화"
 // totalDisplayStyle.percent: "Percentage" => "백분율"
 // totalDisplayStyle.date: "Date" => "날짜"
-// rowsOrder.initial: "Original" => "원문 언어"
-// questionsOrder.initial: "Original" => "원문 언어"
+// rowOrder.initial: "Original" => "원문 언어"
+// questionOrder.initial: "Original" => "원문 언어"
 // showProgressBar.aboveheader: "Above the header" => "머리글 위"
 // showProgressBar.belowheader: "Below the header" => "머리글 아래"
 // pv.sum: "Sum" => "합계"
@@ -2549,7 +2819,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
 // panel.page: "Repositions the panel to the end of a selected page." => "선택한 페이지의 끝으로 패널의 위치를 변경합니다."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다."
@@ -2560,7 +2830,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "마술 지팡이 아이콘을 사용하여 패널 가시성을 결정하는 조건부 규칙을 설정합니다."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "선택한 페이지의 끝으로 패널의 위치를 변경합니다."
@@ -2574,7 +2844,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 설정은 이 패널 내의 모든 질문에 자동으로 상속됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "\"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"패널 제목 아래\")을 적용합니다."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "새로 추가된 패널의 위치를 정의합니다. 기본적으로 새 패널이 끝에 추가됩니다. \"다음\"을 선택하여 현재 패널 뒤에 새 패널을 삽입합니다."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "이 설정을 사용하면 표현식에 따라 기본 답안 값을 할당할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력으로 재정의할 수 있는 초기 기본값으로 사용됩니다."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "마술 지팡이 아이콘을 사용하여 응답자의 입력이 \"기본값 표현식\" 또는 \"설정 값 표현식\" 또는 \"기본 답변\" 값(둘 중 하나가 설정된 경우)에 기반한 값으로 재설정되는 시점을 결정하는 조건부 규칙을 설정합니다."
@@ -2620,18 +2890,17 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 자동으로 다음 페이지로 넘어가도록 하려면 선택합니다."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "번호 매기기를 시작할 숫자 또는 문자를 입력합니다."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
 // pehelp.maxTextLength: "For text entry questions only." => "텍스트 입력 질문에만 해당됩니다."
-// pehelp.maxOthersLength: "For question comments only." => "질문 댓글에만 해당됩니다."
+// pehelp.maxCommentLength: "For question comments only." => "질문 댓글에만 해당됩니다."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "질문 댓글과 긴 텍스트 질문의 높이가 입력한 텍스트 길이에 따라 자동으로 커지도록 하려면 선택합니다."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "질문 댓글 및 긴 텍스트 질문에만 해당됩니다."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "사용자 지정 변수는 양식 계산에 사용되는 중간 또는 보조 변수 역할을 합니다. 응답자 입력을 소스 값으로 사용합니다. 각 맞춤 변수에는 고유한 이름과 기준이 되는 표현식이 있습니다."
@@ -2646,25 +2915,24 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "잘못된 입력이 있는 셀과 관련하여 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 \"오류 메시지 맞춤\" 속성의 설정을 적용합니다."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "행 삭제를 확인하라는 프롬프트를 트리거합니다."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "행 삭제를 확인하라는 프롬프트를 트리거합니다."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다."
 // pehelp.description: "Type a subtitle." => "자막을 입력합니다."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "설문조사 만들기를 시작할 언어를 선택합니다. 번역을 추가하려면 새 언어로 전환하고 여기 또는 번역 탭에서 원본 텍스트를 번역합니다."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "행을 기준으로 세부 정보 섹션의 위치를 설정합니다. 다음 중에서 선택: \"없음\" - 확장이 추가되지 않습니다. \"행 아래\" - 행 확장이 행렬의 각 행 아래에 배치됩니다. \"행 아래에 한 행 확장만 표시\" - 확장은 단일 행 아래에만 표시되고 나머지 행 확장은 축소됩니다."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "데이터가 입력될 때 입력 필드의 높이를 점진적으로 늘립니다. \"입력 필드 높이(줄 단위)\" 설정을 재정의합니다."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "크기 조정 핸들(또는 그립)이 모서리에 나타나며 드래그하여 입력 필드의 크기를 변경할 수 있습니다."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "설문조사가 감사 인사 페이지로 자동 전환되기까지의 시간 간격(초)입니다."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "이 페이지 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문 또는 패널에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "페이지에서 타이머의 표시 여부와 위치를 설정합니다."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다."
@@ -2692,7 +2960,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "파일 삭제를 확인하는 프롬프트를 트리거합니다."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다."
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다."
@@ -2705,8 +2973,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "항목 레이블 너비(px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "모든 옵션이 선택된 경우 표시할 텍스트"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "순위 영역의 자리 표시자 텍스트"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "설문조사 자동 완성"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "설문조사 자동 완성"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "설문조사 결과에 마스킹된 값 저장"
 // patternmask.pattern: "Value pattern" => "값 패턴"
 // datetimemask.min: "Minimum value" => "최솟값"
@@ -2752,3 +3020,346 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.selectFile: "Select a file" => "파일 선택"
 // ed.removeFile: "Remove the file" => "파일 제거"
 // pe.searchMode: "Search Mode" => "검색 모드"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "아래의 \"질문 추가\" 버튼을 클릭하여 양식 작성을 시작하십시오."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "아래의 \"질문 추가\" 버튼을 클릭하여 페이지에 새 요소를 추가하세요."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "아래의 \"질문 추가\" 버튼을 클릭하여 패널에 새 요소를 추가합니다."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "아래 버튼을 클릭하고 업로드할 이미지를 선택하세요."
+// coloralpha.opacity: "Opacity" => "불투명도"
+// font.family: "Font family" => "글꼴 모음"
+// font.color: "Color" => "색"
+// font.placeholderColor: "Placeholder color" => "자리 표시자 색"
+// font.size: "Size" => "크기"
+// theme.themeName: "Theme" => "주제"
+// theme.isPanelless: "Question appearance" => "질문 모양"
+// theme.editorPanel: "Background and corner radius" => "배경 및 모서리 반경"
+// theme.questionPanel: "Background and corner radius" => "배경 및 모서리 반경"
+// theme.primaryColor: "Accent color" => "강조 색상"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "패널 배경 불투명도"
+// theme.questionBackgroundTransparency: "Question background opacity" => "질문 배경 불투명도"
+// theme.fontSize: "Font size" => "글꼴 크기"
+// theme.scale: "Scale" => "저울"
+// theme.cornerRadius: "Corner radius" => "코너 반경"
+// theme.pageTitle: "Title font" => "제목 글꼴"
+// theme.pageDescription: "Description font" => "설명 글꼴"
+// theme.questionTitle: "Title font" => "제목 글꼴"
+// theme.questionDescription: "Description font" => "설명 글꼴"
+// theme.editorFont: "Font" => "글꼴"
+// theme.backgroundOpacity: "Opacity" => "불투명도"
+// theme.--sjs-font-family: "Font family" => "글꼴 모음"
+// theme.--sjs-general-backcolor-dim: "Background color" => "배경색"
+// theme.--sjs-primary-backcolor: "Accent background" => "강조 배경"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "강조 전경"
+// theme.--sjs-shadow-small: "Shadow effects" => "그림자 효과"
+// theme.--sjs-shadow-inner: "Shadow effects" => "그림자 효과"
+// theme.--sjs-border-default: "Colors" => "색상"
+// header@header.headerView: "View" => "보기"
+// header@header.logoPosition: "Logo position" => "로고 위치"
+// header@header.surveyTitle: "Survey title font" => "설문조사 제목 글꼴"
+// header@header.surveyDescription: "Survey description font" => "설문조사 설명 글꼴"
+// header@header.headerTitle: "Survey title font" => "설문조사 제목 글꼴"
+// header@header.headerDescription: "Survey description font" => "설문조사 설명 글꼴"
+// header@header.inheritWidthFrom: "Content area width" => "콘텐츠 영역 너비"
+// header@header.textAreaWidth: "Text width" => "텍스트 너비"
+// header@header.backgroundColorSwitch: "Background color" => "배경색"
+// header@header.backgroundImage: "Background image" => "배경 이미지"
+// header@header.backgroundImageOpacity: "Opacity" => "불투명도"
+// header@header.overlapEnabled: "Overlap" => "겹침"
+// header@header.logoPositionX: "Logo position" => "로고 위치"
+// header@header.titlePositionX: "Title position" => "제목 위치"
+// header@header.descriptionPositionX: "Description position" => "설명 위치"
+// weight.400: "Regular" => "일반"
+// weight.600: "Heavy" => "무겁다"
+// weight.700: "Semi-bold" => "세미 볼드(Semi-bold)"
+// weight.800: "Bold" => "대담한"
+// backgroundImageFit.auto: "Auto" => "자동"
+// backgroundImageFit.cover: "Cover" => "표지"
+// backgroundImageFit.contain: "Contain" => "포함하다"
+// backgroundImageFit.fill: "Stretch" => "뻗다"
+// backgroundImageFit.tile: "Tile" => "타일"
+// backgroundImageAttachment.fixed: "Fixed" => "부정하게 결정된"
+// backgroundImageAttachment.scroll: "Scroll" => "스크롤"
+// headerView.basic: "Basic" => "기초의"
+// headerView.advanced: "Advanced" => "고급"
+// inheritWidthFrom.survey: "Same as survey" => "설문 조사와 동일"
+// inheritWidthFrom.container: "Fit to container" => "컨테이너에 맞추기"
+// backgroundColorSwitch.none: "None" => "없음"
+// backgroundColorSwitch.accentColor: "Accent color" => "강조 색상"
+// backgroundColorSwitch.custom: "Custom" => "관습"
+// colorPalette.light: "Light" => "광"
+// colorPalette.dark: "Dark" => "어둠"
+// isPanelless.false: "Default" => "기본값"
+// isPanelless.true: "Without Panels" => "패널 없음"
+// theme.cornerRadius: "Corner radius" => "코너 반경"
+// theme.fontFamily: "Font family" => "글꼴 모음"
+// theme.fontWeightRegular: "Regular" => "일반"
+// theme.fontWeightHeavy: "Heavy" => "무겁다"
+// theme.fontWeightSemiBold: "Semi-bold" => "세미 볼드(Semi-bold)"
+// theme.fontWeightBold: "Bold" => "대담한"
+// theme.color: "Color" => "색"
+// theme.placeholderColor: "Placeholder color" => "자리 표시자 색"
+// theme.size: "Size" => "크기"
+// theme.opacity: "Opacity" => "불투명도"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "검색하려면 입력..."
+// ed.toolboxNoResultsFound: "No results found" => "결과를 찾을 수 없습니다."
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "탭 제목 자리 표시자"
+// theme.--sjs-special-red: "Error messages" => "오류 메시지"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "탭 제목 패턴이 의미 있는 값을 생성하지 않을 때 적용되는 탭 제목에 대한 대체 텍스트입니다."
+// theme.fontColor: "Font color" => "글꼴 색상"
+// theme.backgroundColor: "Background color" => "배경색"
+// pe.questionTitleWidth: "Question title width" => "질문 제목 너비"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "파일 선택 또는 파일 링크 붙여넣기..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "예: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// pe.commentAreaRows: "Comment area height (in lines)" => "주석 영역 높이(줄)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."
+// pe.enabled: "Enabled" => "사용"
+// pe.disabled: "Disabled" => "비활성화"
+// pe.inherit: "Inherit" => "물려받다"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "초점이 손실된 빈 필드 유효성 검사"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "예: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "예: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "이 설정은 패널 외부의 질문에만 적용됩니다."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "주요 측량 요소를 강조하는 보조 색상을 설정합니다."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "설문조사 배경을 기준으로 패널과 질문 상자의 투명도를 조정합니다."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "현장조사 배경에 상대적인 입력 요소의 투명도를 조정합니다."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "모든 직사각형 요소의 구석 반지름을 설정합니다. Advanced Mode(고급 모드)를 활성화하면 입력 요소 또는 패널 및 질문 상자에 대한 개별 모서리 반경 값을 설정할 수 있습니다."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "현장조사의 기본 배경색을 설정합니다."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 헤더 콘텐츠 영역 너비를 자동으로 조정합니다."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "% 값을 허용합니다."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "px 값을 허용합니다."
+// p.effectiveColSpan: "Column span" => "열 범위"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "설문 조사와 동일"
+// progressBarInheritWidthFrom.container: "Same as container" => "컨테이너와 동일"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "진행률 표시줄 영역 너비"
+// maskType.none: "None" => "없음"
+// maskType.pattern: "Pattern" => "무늬"
+// maskType.numeric: "Numeric" => "숫자"
+// maskType.datetime: "Date and Time" => "날짜 및 시간"
+// maskType.currency: "Currency" => "통화"
+
+// inputTextAlignment.auto: "Auto" => "자동"
+// inputTextAlignment.left: "Left" => "왼쪽"
+// inputTextAlignment.right: "Right" => "오른쪽"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다."
+// p.inputTextAlignment: "Input value alignment" => "입력 값 정렬"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "진행률 표시줄 표시"
+// paneldynamic.showProgressBar: "Show the progress bar" => "진행률 표시줄 표시"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "진행률 표시줄 맞춤"
+// pv.carousel: "Carousel" => "회전목마"
+// progressBarLocation.top: "Top" => "맨 위로"
+// progressBarLocation.bottom: "Bottom" => "밑바닥"
+// progressBarLocation.topBottom: "Top and bottom" => "위쪽 및 아래쪽"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube 링크는 지원되지 않습니다."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "양식 구성 시작"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다."
+// pe.caseInsensitive: "Case insensitive" => "대소문자 구분 안 함"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "양식이 비어 있습니다."
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "양식이 비어 있습니다."
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다."
+// ed.previewPlaceholderTitle: "No preview" => "미리보기 없음"
+// ed.previewPlaceholderTitleMobile: "No preview" => "미리보기 없음"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "설문조사에 가시적인 요소가 포함되어 있지 않습니다."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "설문조사에 가시적인 요소가 포함되어 있지 않습니다."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "번역할 문자열이 없습니다."
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "번역할 문자열이 없습니다."
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "양식에 요소를 추가하거나 도구 모음에서 문자열 필터를 변경합니다."
+// lg.logicPlaceholderTitle: "No logical rules" => "논리적 규칙 없음"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "논리적 규칙 없음"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "설문조사의 흐름을 사용자 지정하는 규칙을 만듭니다."
+// pe.showTimer: "Use a timer" => "타이머 사용"
+// theme.advancedMode: "Advanced mode" => "어드밴스드 모드"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "페이지에서 타이머의 위치를 설정합니다."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
+// p.mobileHeight: "Height on smartphones" => "스마트폰의 높이"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다."
+// ed.creatorSettingTitle: "Creator Settings" => "크리에이터 설정"
+// tabs.accentColors: "Accent colors" => "강조 색상"
+// tabs.scaling: "Scaling" => "스케일링"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "이 패널 내에 중첩된 질문에 번호를 할당합니다."
+// creatortheme.--sjs-special-background: "Surface background" => "표면 배경"
+// creatortheme.--sjs-primary-background-500: "Primary" => "본래의"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "보조"
+// creatortheme.surfaceScale: "Surface" => "표면"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "사용자 인터페이스"
+// creatortheme.fontScale: "Font" => "글꼴"
+// names.sc2020: "Survey Creator 2020" => "설문조사 작성기 2020"
+// names.default-light: "Light" => "광"
+// names.default-dark: "Dark" => "어둠"
+// names.default-contrast: "Contrast" => "대조"
+// panel.showNumber: "Number this panel" => "이 패널에 번호 매기기"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."
+// autocomplete.name: "Full Name" => "성명"
+// autocomplete.honorific-prefix: "Prefix" => "접두사"
+// autocomplete.given-name: "First Name" => "이름"
+// autocomplete.additional-name: "Middle Name" => "중간 이름"
+// autocomplete.family-name: "Last Name" => "성"
+// autocomplete.honorific-suffix: "Suffix" => "접미사"
+// autocomplete.nickname: "Nickname" => "별명"
+// autocomplete.organization-title: "Job Title" => "직책"
+// autocomplete.username: "User Name" => "사용자 이름"
+// autocomplete.new-password: "New Password" => "새 비밀번호"
+// autocomplete.current-password: "Current Password" => "현재 비밀번호"
+// autocomplete.organization: "Organization Name" => "조직 이름"
+// autocomplete.street-address: "Full Street Address" => "전체 주소"
+// autocomplete.address-line1: "Address Line 1" => "주소란 1"
+// autocomplete.address-line2: "Address Line 2" => "주소란 2"
+// autocomplete.address-line3: "Address Line 3" => "주소란 3"
+// autocomplete.address-level4: "Level 4 Address" => "레벨 4 주소"
+// autocomplete.address-level3: "Level 3 Address" => "레벨 3 주소"
+// autocomplete.address-level2: "Level 2 Address" => "레벨 2 주소"
+// autocomplete.address-level1: "Level 1 Address" => "레벨 1 주소"
+// autocomplete.country: "Country Code" => "국가 코드"
+// autocomplete.country-name: "Country Name" => "국가 이름"
+// autocomplete.postal-code: "Postal Code" => "우편번호"
+// autocomplete.cc-name: "Cardholder Name" => "카드 소지자 이름"
+// autocomplete.cc-given-name: "Cardholder First Name" => "카드 소지자 이름"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "카드 소지자 중간 이름"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "카드 소지자의 성"
+// autocomplete.cc-number: "Credit Card Number" => "신용 카드 번호"
+// autocomplete.cc-exp: "Expiration Date" => "만료 날짜"
+// autocomplete.cc-exp-month: "Expiration Month" => "만료 월"
+// autocomplete.cc-exp-year: "Expiration Year" => "만료 연도"
+// autocomplete.cc-csc: "Card Security Code" => "카드 보안 코드"
+// autocomplete.cc-type: "Credit Card Type" => "신용 카드 유형"
+// autocomplete.transaction-currency: "Transaction Currency" => "거래 통화(Transaction Currency)"
+// autocomplete.transaction-amount: "Transaction Amount" => "거래 금액"
+// autocomplete.language: "Preferred Language" => "선호 언어"
+// autocomplete.bday: "Birthday" => "생일"
+// autocomplete.bday-day: "Birthday Day" => "생일 날"
+// autocomplete.bday-month: "Birthday Month" => "생일의 달"
+// autocomplete.bday-year: "Birthday Year" => "생일 연도"
+// autocomplete.sex: "Gender" => "성별"
+// autocomplete.url: "Website URL" => "웹 사이트 URL"
+// autocomplete.photo: "Profile Photo" => "프로필 사진"
+// autocomplete.tel: "Telephone Number" => "전화번호"
+// autocomplete.tel-country-code: "Country Code for Phone" => "전화의 국가 코드"
+// autocomplete.tel-national: "National Telephone Number" => "국내 전화번호"
+// autocomplete.tel-area-code: "Area Code" => "지역 번호"
+// autocomplete.tel-local: "Local Phone Number" => "현지 전화번호"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "로컬 전화 접두사"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "지역 전화 접미사"
+// autocomplete.tel-extension: "Phone Extension" => "전화 내선 번호"
+// autocomplete.email: "Email Address" => "이메일 주소"
+// autocomplete.impp: "Instant Messaging Protocol" => "인스턴트 메시징 프로토콜"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "질문의 확장/축소 상태 잠금"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "아직 페이지가 없습니다."
+// pe.addNew@pages: "Add new page" => "새 페이지 추가"
+// ed.zoomInTooltip: "Zoom In" => "확대"
+// ed.zoomOutTooltip: "Zoom Out" => "축소"
+// tabs.surfaceBackground: "Surface Background" => "표면 배경"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "마지막 항목의 답변을 기본값으로 사용"
+// colors.gray: "Gray" => "회색"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "탐색 단추 정렬"
+// pv.allQuestions: "Show all questions" => "모든 질문 보기"
+// pv.answeredQuestions: "Show answered questions only" => "답변된 질문만 표시"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "페이지에서 탐색 단추의 위치를 설정합니다."
+// pe.size: "Input field width (in characters)" => "입력 필드 너비(문자 단위)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "다음 행렬 열 또는 패널 질문의 값을 선택 ID로 사용합니다."
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다."
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 ID를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 표시 텍스트를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다."
+// pe.progressBarLocation: "Progress bar alignment" => "진행률 표시줄 맞춤"
+// progressBarLocation.topbottom: "Top and bottom" => "위쪽 및 아래쪽"
+// progressBarLocation.aboveheader: "Above the header" => "헤더 위"
+// progressBarLocation.belowheader: "Below the header" => "헤더 아래"
+// progressBarLocation.off: "Hidden" => "숨겨진"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
+// survey.readOnly: "Make the survey read-only" => "설문조사를 읽기 전용으로 설정"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다."
+// paneldynamic.showNumber: "Number the panel" => "패널 번호 매기기"
+// question.showNumber: "Number this question" => "이 질문에 번호를 매기십시오."
+// pe.previewMode: "Preview mode" => "미리보기 모드"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "그리드 레이아웃 사용Enable the grid layout"
+// pe.maskSettings: "Mask settings" => "마스크 설정"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "행 확장 오류 메시지 맞춤"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다."
+// pe.gridLayoutColumns: "Grid layout columns" => "그리드 레이아웃 열"
+// pe.startPageTitlePlaceholder: "Start Page" => "시작 페이지"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "유효 폭, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "질문 제목 너비, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "레이아웃 열이 아직 없습니다."
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "이 패널이 그리드 레이아웃 내에서 확장되는 열의 수를 지정합니다."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator를 사용하면 양식 요소의 인라인 너비를 수동으로 조정하여 레이아웃을 제어할 수 있습니다. 이렇게 해도 원하는 결과가 나오지 않으면 열 기반 시스템을 사용하여 요소를 형성하는 구조체인 그리드 레이아웃을 활성화할 수 있습니다. 레이아웃 열을 구성하려면 페이지 또는 패널을 선택하고 \"질문 설정\" → \"그리드 열\" 테이블을 사용합니다. 질문의 열 수를 조정하려면 질문을 선택하고 \"레이아웃\" → \"열 범위\" 입력란에서 원하는 값을 설정합니다."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+
+// ed.expandTooltip: "Expand" => "넓히다"
+// ed.collapseTooltip: "Collapse" => "무너지다"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "예: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// ed.zoom100Tooltip: "Zoom to 100%" => "100%로 확대/축소"
+// ed.addLanguageTooltip: "Add Language" => "언어 추가"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "동적 텍스트에 대한 기본 표시 값"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML 질문과 설문 요소의 동적 제목 및 설명에 표시되는 값으로, 질문 값이 비어 있을 때 표시됩니다."
+// showQuestionNumbers.recursive: "Recursive numbering" => "재귀 번호 매기기"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "질문 제목 너비"
+// pe.allowCustomChoices: "Allow custom choices" => "사용자 지정 선택 허용"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// page.name: "A page ID that is not visible to respondents." => "응답자에게 표시되지 않는 페이지 ID입니다."
+// page.description: "Type a page subtitle." => "페이지 부제목을 입력합니다."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "진행률 표시줄 또는 목차(TOC)의 탐색 단추에 표시되는 캡션입니다. 이 필드를 비워 두면 탐색 버튼에서 페이지 제목 또는 페이지 이름을 사용합니다. 진행률 표시줄 또는 TOC를 활성화하려면 \"설문 조사\" → \"탐색\"으로 이동합니다."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "드롭다운에서 원하는 옵션을 사용할 수 없는 경우 응답자가 자신의 선택 항목을 추가할 수 있도록 하려면 선택합니다. 사용자 지정 선택 항목은 현재 브라우저 세션 동안 일시적으로만 저장됩니다."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "입력 필드 제목 패턴"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "페이지당 단일 입력 필드 표시"
+// ts.prevPage: "Previous" => "이전의"
+// ts.nextPage: "Next" => "다음"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'설문조사 레이아웃'이 '페이지당 단일 입력 필드'로 설정된 경우에 사용됩니다. 이 레이아웃에서는 각 입력 필드가 별도의 페이지에 표시되도록 행렬이 분할됩니다. {rowIndex} 자리 표시자를 사용하여 자동 번호 매기기를 삽입하고, {rowTitle} 또는 {rowName}을 사용하여 행의 제목 또는 ID를 참조하고, {row.columnid}를 사용하여 특정 행렬 열의 값을 포함합니다."
+// qt.slider: "Slider" => "슬라이더"
+// pe.isExclusive: "Clear others when selected" => "선택하면 다른 항목 지우기"
+// slider.min: "Min value" => "최소값"
+// slider.max: "Max value" => "최대값"
+// slider.step: "Step value" => "단계 값"
+// slider.showLabels: "Show scale labels" => "축척 레이블 표시"
+// slider.tooltipVisibilityPG: "Show tooltips" => "툴팁 표시"
+// slider.allowSwap: "Allow thumb crossing" => "엄지 교차점 허용"
+// slider.labelCount: "Number of auto-generated labels" => "자동 생성된 레이블의 수"
+// slider.minValueExpression: "Min value expression" => "최소값 표현식"
+// slider.maxValueExpression: "Max value expression" => "최대 값 표현식"
+// slider.autoGenerate: "Scale labels configuration" => "레이블 구성 크기 조정"
+// tabs.sliderSettings: "Slider Settings" => "슬라이더 설정"
+// sliderType.single: "Single-Value" => "단일 값"
+// sliderType.range: "Range" => "레인지"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다."
+// ed.toolboxSearch: "Search" => "검색"
+// file.imageHeight: "Image height" => "이미지 높이"
+// file.imageWidth: "Image width" => "이미지 너비"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "미리보기에 업로드된 이미지의 표시 높이와 카메라로 촬영한 이미지의 실제 높이를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 높이가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "미리보기에 업로드된 이미지의 표시 너비와 카메라로 촬영한 이미지의 실제 너비를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 너비가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다."
+// slider.min: "The lowest number that users can select." => "사용자가 선택할 수 있는 가장 낮은 숫자입니다."
+// slider.max: "The highest number that users can select." => "사용자가 선택할 수 있는 가장 높은 숫자입니다."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "선택 가능한 배율 값 사이의 간격입니다. 예를 들어 5단계를 통해 사용자는 0, 5, 10 등을 선택할 수 있습니다."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "사용자가 설정할 수 있는 슬라이더 엄지 단추 사이의 최소 거리입니다."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "사용자가 설정할 수 있는 슬라이더 썸 사이의 최대 거리입니다."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "생성할 축척 레이블 수를 지정합니다. 값이 -1이면 숫자가 Min 값과 Max 값을 기준으로 자동으로 계산됩니다."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "'{0}'를 실제 값의 자리 표시자로 사용합니다."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "특정 값에서 사용자 지정 레이블을 정의하고 선택적으로 해당 텍스트를 할당할 수 있습니다(예: 0 = \"나쁨\", 100 = \"우수\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "'{0}'를 실제 값의 자리 표시자로 사용합니다."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "사용자가 한 엄지 손가락을 다른 엄지 손가락 뒤로 이동할 수 있습니다."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "선택한 슬라이더 값을 지우고 undefined로 설정하는 버튼을 표시합니다."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "표현식을 사용하여 슬라이더의 최소값을 동적���로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "표현식을 사용하여 슬라이더의 최대값을 동적으로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
+// slider.sliderType: "Slider type" => "슬라이더 유형"
+// slider.minRangeLength: "Min range length" => "최소 범위 길이"
+// slider.maxRangeLength: "Max range length" => "최대 범위 길이"
+// slider.customLabels: "Custom labels" => "사용자 지정 레이블"
+// slider.labelFormat: "Label format" => "라벨 형식"
+// slider.tooltipFormat: "Tooltip format" => "툴팁 형식"
+// question.showTitle: "Show the title and description" => "제목 및 설명 표시"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "패널을 제거하기 전에 확인 프롬프트를 트리거합니다."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "행을 제거하기 전에 확인 프롬프트를 트리거합니다."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "새 행 세부 정보 자동 확장"

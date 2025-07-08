@@ -1,0 +1,16 @@
+<ng-template #template>
+  <div [class]="'svc-element__add-new-question ' + buttonClass" [key2click]
+    (click)="addNewQuestion($event)"
+    (mouseover)="adorner.hoverStopper && adorner.hoverStopper($event, $event.currentTarget)">
+    <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')" [size]="'auto'" sv-ng-svg-icon></svg>
+    <span class="svc-add-new-item-button__text">
+      {{ adorner.addNewQuestionText }}
+    </span>
+    <ng-template *ngIf="renderPopup"
+      [component]="{ name: 'svc-add-question-type-selector', data: { questionTypeSelectorModel: adorner.questionTypeSelectorModel, renderPopup: renderPopup } }">
+    </ng-template>
+  </div>
+  <ng-template *ngIf="!renderPopup"
+    [component]="{ name: 'svc-add-question-type-selector', data: { questionTypeSelectorModel: adorner.questionTypeSelectorModel, renderPopup: renderPopup } }">
+  </ng-template>
+</ng-template>

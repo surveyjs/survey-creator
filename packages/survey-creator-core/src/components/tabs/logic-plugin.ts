@@ -1,18 +1,22 @@
-import { BaseAction, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
+import { Action, IAction, ComputedUpdater, createDropdownActionModelAdvanced } from "survey-core";
 import { getLogicString } from "./logic-types";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";
+import { listComponentCss } from "../list-theme";
 
 export class TabLogicPlugin implements ICreatorPlugin {
   private filterQuestionAction: Action;
   private filterActionTypeAction: Action;
   private fastEntryAction: Action;
   public model: SurveyLogicUI;
+
+  public static iconName = "icon-logic-24x24";
+
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("logic", this);
+    creator.addTab({ name: "logic", plugin: this, iconName: TabLogicPlugin.iconName });
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -41,18 +45,20 @@ export class TabLogicPlugin implements ICreatorPlugin {
   private createFilterTypeTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
       let loc = this.creator.locale;
-      if(!loc) loc = "en";
+      if (!loc) loc = "en";
       const type = this.model.actionTypeFilter;
       const allType = this.showAllActionTypesText;
-      return !!type ? this.model.getTypeByName(type).displayName : allType; });
+      return !!type ? this.model.getTypeByName(type).displayName : allType;
+    });
   }
   private createFilterQuestionTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
       let loc = this.creator.locale;
-      if(!loc) loc = "en";
+      if (!loc) loc = "en";
       const questionFilter = this.model.questionFilter;
       const allQuestions = this.showAllQuestionsText;
-      return !!questionFilter ? questionFilter : allQuestions; });
+      return !!questionFilter ? questionFilter : allQuestions;
+    });
   }
   public update(): void {
     if (!this.model) return;
@@ -61,7 +67,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public canDeactivateAsync(onSuccess: () => void): void {
     if (!!this.model) {
       this.model.tryLeaveUI((res) => {
-        if(!res) {
+        if (!res) {
           this.creator.notify(editorLocalization.getString("ed.lg.expressionInvalid"), "error");
         } else {
           onSuccess();
@@ -95,52 +101,52 @@ export class TabLogicPlugin implements ICreatorPlugin {
     const onQuestionPopupShow = () => {
       const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition", question.name) }; });
       SurveyHelper.sortItems(items, "title");
-      questionPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
+      const listModel = this.filterQuestionAction.popupModel.contentComponentData.model;
+      listModel.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
     };
-    const questionListModel = new ListModel(
-      [{ id: null, title: this.showAllQuestionsText }],
-      (item: IAction) => {
-        this.model.questionFilter = !!item.id ? item.id : "";
-        questionPopupModel.toggleVisibility();
-      }, true);
-    questionListModel.locOwner = this.creator;
-    const questionPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: questionListModel }, "bottom", "center",
-      undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
-    );
 
-    this.filterQuestionAction = new Action({
+    this.filterQuestionAction = createDropdownActionModelAdvanced({
       id: "svc-logic-filter-question",
       visible: false,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: questionPopupModel,
-      action: () => { questionPopupModel.toggleVisibility(); }
+    }, {
+      items: [{ id: null, title: this.showAllQuestionsText }],
+      onSelectionChanged: (item: IAction) => {
+        this.model.questionFilter = !!item.id ? item.id : "";
+      },
+      allowSelection: true,
+      cssClasses: listComponentCss,
+      locOwner: this.creator
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      onShow: onQuestionPopupShow
     });
     items.push(this.filterQuestionAction);
 
     const onActionTypesPopupShow = () => {
       const items = this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; });
       SurveyHelper.sortItems(items, "title");
-      actionTypesPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllActionTypesText }].concat(items));
+      const listModel = this.filterActionTypeAction.popupModel.contentComponentData.model;
+      listModel.setItems([{ id: null, title: this.showAllActionTypesText }].concat(items));
     };
-    const actionTypesListModel = new ListModel(
-      [{ id: null, title: this.showAllActionTypesText }],
-      (item: IAction) => {
-        this.model.actionTypeFilter = !!item.id ? item.id : "";
-        actionTypesPopupModel.toggleVisibility();
-      }, true);
-    actionTypesListModel.locOwner = this.creator;
-    const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
-      "sv-list", { model: actionTypesListModel }, "bottom", "center",
-      undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
-    );
 
-    this.filterActionTypeAction = new Action({
+    this.filterActionTypeAction = createDropdownActionModelAdvanced({
       id: "svc-logic-filter-actiontype",
       visible: false,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: actionTypesPopupModel,
-      action: () => { actionTypesPopupModel.toggleVisibility(); }
+    }, {
+      items: [{ id: null, title: this.showAllActionTypesText }],
+      onSelectionChanged: (item: IAction) => {
+        this.model.actionTypeFilter = !!item.id ? item.id : "";
+      },
+      allowSelection: true,
+      cssClasses: listComponentCss,
+      locOwner: this.creator
+    }, {
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      onShow: onActionTypesPopupShow
     });
     items.push(this.filterActionTypeAction);
 
@@ -148,6 +154,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       this.fastEntryAction = new Action({
         id: "svc-logic-fast-entry",
         iconName: "icon-fast-entry",
+        iconSize: "auto",
         locTitleName: "pe.fastEntry",
         visible: false,
         component: "sv-action-bar-item",

@@ -24,7 +24,6 @@ describe("Creator", () => {
     expect(testInstance.instance.style).toBeUndefined();
     expect(testInstance.props.creator).not.toBeNull();
     expect(creatorElement.props.className.includes("svc-creator")).toBe(true);
-    expect(creatorElement.props.style).toBeUndefined();
   });
 
   test("check creator props with style", () => {
@@ -38,6 +37,6 @@ describe("Creator", () => {
     expect(testInstance.instance.style).toEqual(styleValue);
     expect(testInstance.props.creator).not.toBeNull();
     expect(creatorElement.props.className.includes("svc-creator")).toBe(true);
-    expect(creatorElement.props.style).toEqual(styleValue);
+    expect(creatorElement.props.style["height"]).toEqual("100vh");
   });
 });

@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultV2Css } from "survey-core";
+import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultCss } from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -6,7 +6,8 @@ import { SurveyLogicType, getLogicString } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
-import { assignDefaultV2Classes, copyCssClasses } from "../../utils/utils";
+import { copyCssClasses } from "../../utils/utils";
+import { assignDefaultClasses } from "../../utils/creator-utils";
 import { QuestionLinkValueModel } from "../../components/link-value";
 import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -82,6 +83,15 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
+    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+      const q = options.panel.getQuestionByName(options.name);
+      if (!!q && q.parent?.name === "triggerEditorPanel") {
+        const action = <LogicActionTriggerModel>this.getActionModelByPanel(options.panel);
+        if (action) {
+          action.onPanelQuestionValueChanged(<PanelModel>q.parent, options.name);
+        }
+      }
+    });
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
@@ -130,8 +140,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           name: "panel",
           title: getLogicString("actionsEditorTitle"),
           titleLocation: "hidden",
-          panelAddText: getLogicString("addNewAction"),
-          panelRemoveButtonLocation: "right",
+          addPanelText: getLogicString("addNewAction"),
+          removePanelButtonLocation: "right",
           panelCount: 0,
           minPanelCount: 1,
           maxPanelCount: 1,
@@ -179,7 +189,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               startWithNewLine: false,
               showValueInLink: false,
               allowClear: false,
-              showClear: false
+              showClear: false,
+              iconName: "icon-delete_24x24"
             },
             {
               name: "triggerEditorPanel",
@@ -208,8 +219,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.isModifiedValue = false;
   }
   public isEmpty(): boolean {
-    if(this.panels.length === 0) return true;
-    if(this.panels.length > 1) return false;
+    if (this.panels.length === 0) return true;
+    if (this.panels.length > 1) return false;
     const modelAction = this.getActionModelByPanel(this.panels[0]);
     return !modelAction;
   }
@@ -231,7 +242,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private onUpdateQuestionCssClasses(options: any) {
     const cssClasses = options.cssClasses;
     const question = options.question;
-    cssClasses.answered = "svc-logic-question--answered";
+    if (question.getType() !== "paneldynamic") {
+      cssClasses.answered = "svc-logic-question--answered";
+    }
 
     if (question.name === "logicTypeName") {
       question.allowRootStyle = false;
@@ -251,19 +264,19 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.onError = "svc-logic-operator--error";
     }
     if (question.isContentElement || this.isSetValueInternalQuestion(question)) {
-      assignDefaultV2Classes(cssClasses, question.getType());
+      assignDefaultClasses(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
     const parentName = question.parent?.name;
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
-      assignDefaultV2Classes(cssClasses, qType);
-      if(!defaultV2Css[qType] && propertyGridCss[qType]) {
+      assignDefaultClasses(cssClasses, qType);
+      if (!defaultCss[qType] && propertyGridCss[qType]) {
         copyCssClasses(cssClasses, propertyGridCss.question);
         copyCssClasses(cssClasses, propertyGridCss[qType]);
       }
       const els = question.parent.elements.filter(el => selectorsNames.indexOf(el.name) < 0 && el.name !== "expression");
-      if((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
+      if ((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
         cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       }
     }
@@ -281,8 +294,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private isSetValueInternalQuestion(question: Question): boolean {
-    if(this.isSetValueInternalQuestionCore(question)) return true;
-    if(this.isSetValueInternalQuestionCore(question.parentQuestion)) return true;
+    if (this.isSetValueInternalQuestionCore(question)) return true;
+    if (this.isSetValueInternalQuestionCore(question.parentQuestion)) return true;
     const parent: any = question.parent;
     return parent && this.isSetValueInternalQuestionCore(parent.parentQuestion);
   }
@@ -301,8 +314,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       panel.allowRootStyle = false;
       cssClasses.panel.container += " svc-logic_trigger-questions";
     }
-    if(this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
-      assignDefaultV2Classes(cssClasses, panel.getType());
+    if (this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
+      assignDefaultClasses(cssClasses, panel.getType());
     }
   }
   private onValueChanged(options: any) {
@@ -389,8 +402,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         if (this.isPanelSupportContext(panel)) continue;
         if (i === 0 && this.panels.length === 1) {
           panel.getQuestionByName("logicTypeName").clearValue();
-        }
-        else {
+        } else {
           this.panel.removePanel(i);
         }
       }
@@ -481,7 +493,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!logicType.hasSelectorChoices) return [];
     const elements = logicType.getSelectorChoices(this.survey, this.context);
     const res = [];
-    const showTitles = this.options.showTitlesInExpressions;
+    const showTitles = this.options.useElementTitles || this.options.showTitlesInExpressions;
     for (let i = 0; i < elements.length; i++) {
       let namePrefix = "";
       let textPrefix = "";
@@ -501,7 +513,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       }
       res.push(itemValue);
     }
-    if(settings.logic.questionSortOrder === "asc") {
+    if (settings.logic.questionSortOrder === "asc") {
       SurveyHelper.sortItems(res);
     }
     return res;

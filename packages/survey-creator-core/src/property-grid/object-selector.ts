@@ -1,17 +1,19 @@
 import { SurveyCreatorModel } from "../creator-base";
 import { Base, SurveyModel, property, ListModel, IAction, Action } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
+import { listComponentCss } from "../components/list-theme";
 
 export class ObjectSelectorItem extends Action {
   private textInLow: string;
 
   constructor(
     id: number,
-    public data: Base,
+    data: Base,
     title: string,
     public level: number
   ) {
     super({ id: "sv_item_selector_" + id.toString(), title: title });
+    this.data = data;
   }
   public hasText(filteredTextInLow: string): boolean {
     if (!filteredTextInLow) return true;
@@ -149,11 +151,19 @@ export class ObjectSelectorModel extends Base {
     this.selector = new ObjectSelector(this.creator, survey, this.getObjectDisplayName);
     const selectedItem = this.selector.getItemByObj(selectedObj);
     if (!this.listModelValue) {
-      this.listModelValue = new ListModel<Action>(
-        this.selector.items,
-        (item: IAction) => { onClose(item.data); },
-        true, selectedItem,
-        (text: string) => { this.selector.filterByText(text); });
+      this.listModelValue = new ListModel<Action>({
+        items: this.selector.items,
+        onSelectionChanged: (item: IAction) => { onClose(item.data); },
+        allowSelection: true,
+        cssClasses: listComponentCss,
+        selectedItem: selectedItem,
+        listRole: "menu",
+        listItemRole: "menuitemradio",
+        locOwner: this.creator
+      });
+      this.listModelValue.setOnFilterStringChangedCallback((text: string) => {
+        this.selector.filterByText(text);
+      });
     } else {
       this.listModelValue.setItems(this.selector.items);
       this.listModelValue.selectedItem = selectedItem;

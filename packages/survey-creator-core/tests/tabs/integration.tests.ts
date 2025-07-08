@@ -1,11 +1,13 @@
 import { Action } from "survey-core";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
-import { ThemeEditorModel } from "../../src/components/tabs/theme-builder";
+import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
+export * from "../../src/property-grid/theme-settings";
+export * from "../../src/property-grid/header-settings";
 
 test("saveSurvey and saveTheme actions integration", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, saveSurveyAndTheme: true });
@@ -18,7 +20,7 @@ test("saveSurvey and saveTheme actions integration", (): any => {
     saveThemeCount++;
     callback(saveNo, "success");
   };
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const saveSurveyAction = designerPlugin["saveSurveyAction"] as Action;
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -37,9 +39,8 @@ test("saveSurvey and saveTheme actions integration", (): any => {
   expect(saveThemeAction.visible).toBeTruthy();
   expect(saveThemeAction.enabled).toBeFalsy();
 
-  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
-  const themeEditor = themeSurveyTab.themeEditorSurvey;
-  themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "some val";
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor").value = "some val";
   expect(saveSurveyAction.enabled).toBeTruthy();
   expect(saveThemeAction.enabled).toBeTruthy();
 

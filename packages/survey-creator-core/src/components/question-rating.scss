@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-rating-question-controls {
   position: absolute;
@@ -35,6 +35,9 @@
 
       .sv-string-editor:focus-within {
         white-space: nowrap;
+      }
+      &::after {
+        display: none
       }
     }
 
@@ -109,10 +112,22 @@
     padding: calcSize(0.5) calcSize(2.5);
   }
 }
-
+.svc-rating-question-content {
+  flex: 1;
+}
+.svc-question__content .svc-rating-question-content  .sd-question__content {
+  overflow-x: visible;
+  margin: 0;
+  padding: 0;
+}
 .svc-creator--mobile {
   .svc-rating-question-content {
     position: relative;
+    fieldset::before {
+      content: "";
+      display: block;
+      width: calc(8 * #{$base-unit});
+    }
   }
 
   .svc-rating-question-controls {
@@ -123,22 +138,15 @@
   .svc-question__content {
     .sd-rating {
       margin-inline-start: 0; // margin-left
-      width: 100%;
+      width: fit-content;
       max-width: 100%;
     }
-
-
-    legend+.sd-rating__item,
-    legend+sv-ng-rating-item+.sd-rating__item,
-    legend+.sd-rating__item-smiley,
-    legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley {
-      margin-inline-start: calc(9 * #{$base-unit} + 2px);
-    }
-
-    legend+.sd-rating__item-text,
-    legend+.sd-rating__item-star,
-    legend+sv-ng-rating-item-star+.sd-rating__item-star {
-      margin-inline-start: calc(9 * #{$base-unit});
+    .sd-rating--labels-top,
+    .sd-rating--labels-bottom,
+    .sd-rating--labels-diagonal {
+      .sd-rating__min-text {
+         margin-inline-start: calc(9 * #{$base-unit})
+      }
     }
   }
 }

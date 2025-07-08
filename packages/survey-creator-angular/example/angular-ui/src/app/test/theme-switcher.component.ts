@@ -11,5 +11,7 @@ import { TestDefaultComponent } from "./default.component";
 export class TestThemeSwitcherComponent extends TestDefaultComponent {
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({});
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }
