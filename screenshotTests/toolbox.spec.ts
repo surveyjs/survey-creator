@@ -242,7 +242,7 @@ test.describe(title, () => {
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
     await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
-    const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("..").locator(".svc-toolbox__tool");
+    const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
     await page.setViewportSize({ width: 2560, height: 1440 });
     await page.waitForTimeout(300);
     await itemSelector.hover();
@@ -260,7 +260,7 @@ test.describe(title, () => {
 
     await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
 
-    const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("..").locator(".svc-toolbox__tool");
+    const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
     await page.setViewportSize({ width: 2560, height: 1440 });
     await expect(itemSelector).toBeVisible();
 
@@ -285,7 +285,7 @@ test.describe(title, () => {
 
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
-    const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("..").locator(".svc-toolbox__tool");
+    const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
 
     await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
@@ -446,9 +446,9 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search-compact.png");
     await page.locator(".svc-toolbox__search-button").click();
     await toolboxSearch.type("single");
-    await compareScreenshot(page, toolboxElement, "toolbox-search-compact-entered.png");
+    await compareScreenshot(page, toolboxElement.locator(".svc-toolbox__panel"), "toolbox-search-compact-entered.png");
     await toolboxSearch.type("qwerty");
-    await compareScreenshot(page, toolboxElement, "toolbox-search-compact-placeholder.png");
+    await compareScreenshot(page, toolboxElement.locator(".svc-toolbox__panel"), "toolbox-search-compact-placeholder.png");
   });
 
   test("Toolbox right with search", async ({ page }) => {
@@ -508,9 +508,9 @@ test.describe(title, () => {
     await page.locator(".svc-toolbox__search-button").click();
     await toolboxSearch.click();
     await toolboxSearch.type("single");
-    await compareScreenshot(page, creatorTabElement, "toolbox-search-rtl-compact-entered.png");
+    await compareScreenshot(page, creatorTabElement.locator(".svc-toolbox__panel"), "toolbox-search-rtl-compact-entered.png");
     await toolboxSearch.type("qwerty");
-    await compareScreenshot(page, creatorTabElement, "toolbox-search-rtl-compact-placeholder.png");
+    await compareScreenshot(page, creatorTabElement.locator(".svc-toolbox__panel"), "toolbox-search-rtl-compact-placeholder.png");
   });
 
   test("Toolbox disabled items", async ({ page }) => {
