@@ -41,9 +41,10 @@ test.describe(title, () => {
         { elements: [{ type: "text", name: "question2" }] }
       ]
     });
+    await page.waitForTimeout(300);
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await page.setViewportSize({ width: 380, height: 600 });
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(300);
     const toolbar = page.locator(".svc-footer-bar .svc-toolbar-wrapper");
     await compareScreenshot(page, toolbar, "theme-tab-toolbar-responsive.png");
   });
@@ -66,7 +67,6 @@ test.describe(title, () => {
     await page.mouse.move(x - 150, (height - y) / 2, { steps: 5 });
     await page.mouse.up();
 
-    // await westResizer.dragTo({ x: -150, y: 0 });
     await resetFocusToBody(page);
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-general-group.png");
@@ -90,7 +90,7 @@ test.describe(title, () => {
     await resetFocusToBody(page);
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-appearance-group.png");
 
-    await getPropertyGridCategory(page, "Appearance").locator(".spg-title").locator(".svc-switcher").click();
+    await page.getByRole("checkbox", { name: "Advanced mode" }).click();
     await resetFocusToBody(page);
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-advanced-group.png");
   });
@@ -105,7 +105,7 @@ test.describe(title, () => {
       ]
     });
     await page.getByRole("button", { name: "Preview" }).click();
-    await page.click(themeSettingsButtonSelector(page));
+    await themeSettingsButtonSelector(page).click();
     await resetFocusToBody(page);
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-general-group-mobile.png");
