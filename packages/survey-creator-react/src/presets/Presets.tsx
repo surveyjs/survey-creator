@@ -19,8 +19,8 @@ export class TabPresetsComponent extends SurveyElementBase<ITabPresetsComponentP
     return this.props.creator;
   }
 
-  protected getStateElements(): Array<Base> {
-    return [this.model, this.creator];
+  protected getStateElement(): Base {
+    return this.model;
   }
 
   renderElement(): React.JSX.Element {

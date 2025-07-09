@@ -14,36 +14,16 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
 
   public saveToFileHandler = saveToFileHandler;
 
-  public exportToFile(fileName: string) {
-    if (this.model) {
-      const jsonBlob = new Blob([this.model.jsonText], { type: "application/json" });
-      this.saveToFileHandler(fileName, jsonBlob);
-    }
-  }
-  public importFromFile(file: File, callback?: (json: string) => void) {
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      const surveyJSONText = fileReader.result as string;
-      if (this.model) {
-        try {
-          this.model.json = JSON.parse(surveyJSONText);
-        } catch{ }
-      }
-      callback && callback(surveyJSONText);
-    };
-    fileReader.readAsText(file);
-  }
-
   public activate(): void {
     this.model = new CreatorPresetEditorModel({}, this.creator);
     this.updateActivePage();
     this.updateTabControl();
 
-    const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.title });
+    const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [
       { id: "save", title: "Save & Exit", markerIconName: "check-24x24", needSeparator: true },
-      { id: "import", title: "Import", markerIconName: "import-24x24" },
-      { id: "export", title: "Export", markerIconName: "download-24x24" },
+      { id: "import", title: "Import", markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
+      { id: "export", title: "Export", markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
       { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true },
     ];
     let settingsAction;

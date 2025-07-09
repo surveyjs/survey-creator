@@ -43,10 +43,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locTitle.text = "Creator Presets";
     this.navigationBarValue = new NavigationBar();
     const firstTabName = "preset";
-    this.addNavigationAction(firstTabName, "Edit Preset");
-    this.addNavigationAction("creator", "Preview Survey Creator");
-    this.addNavigationAction("results", "View Preset JSON");
-    this.activeTab = firstTabName;
   }
   public dispose(): void {
     super.dispose();
@@ -64,18 +60,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.upldateResultJson();
     return this.resultModelValue;
   }
-  public get navigationBar(): ActionContainer { return this.navigationBarValue; }
-  public get activeTab(): string {
-    return this.getPropertyValue("activeTab");
-  }
-  public set activeTab(val: string) {
-    this.setPropertyValue("activeTab", val);
-  }
-  public setActiveTab(val: string): boolean {
-    if (this.activeTab === "preset" && !this.model.validate(true, true)) return false;
-    this.activeTab = val;
-    return true;
-  }
   public getLocale(): string { return this.json?.languages?.creator || "en"; }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
@@ -89,24 +73,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
   }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
-    if (name === "activeTab" && oldValue === "preset") {
-      this.applyFromSurveyModel();
-    }
-  }
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
     return new SurveyCreatorModel(options);
   }
-  private addNavigationAction(tabName: string, title: string): void {
-    const id = "action-preset-" + tabName;
-    const actionInfo = {
-      id: id,
-      title: title,
-      active: <any>new ComputedUpdater<boolean>(() => this.activeTab === tabName),
-      action: () => { this.setActiveTab(tabName); }
-    };
-    this.navigationBar.addAction(actionInfo);
-  }
+
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -227,7 +197,8 @@ const preset = new CreatorPreset(presetJson);
 preset.apply(creator);</div></pre></code></div>
 `;
   }
-  private downloadJsonFile(text: string): void {
+  public downloadJsonFile(text?: string): void {
+    if (!text) text = this.jsonText;
     const jsonBlob = new Blob([text], { type: "application/json" });
     const elem = window.document.createElement("a");
     elem.href = window.URL.createObjectURL(jsonBlob);
@@ -237,7 +208,7 @@ preset.apply(creator);</div></pre></code></div>
     document.body.removeChild(elem);
   }
   inputFileElement: HTMLInputElement;
-  private loadJsonFile(): void {
+  public loadJsonFile(): void {
     if (!this.inputFileElement) {
       this.inputFileElement = document.createElement("input");
       this.inputFileElement.type = "file";
