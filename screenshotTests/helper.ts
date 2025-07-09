@@ -218,14 +218,16 @@ export async function setAllowZoom(page, newVal: boolean) {
   }, newVal);
 }
 
-// export const explicitErrorHandler = ClientFunction(() => {
-//   window.addEventListener("error", e => {
-//     if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
-//       e.message === "ResizeObserver loop limit exceeded") {
-//       e.stopImmediatePropagation();
-//     }
-//   });
-// });
+export const explicitErrorHandler = async (page) => {
+  await page.evaluate(() => {
+    window.addEventListener("error", e => {
+      if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
+      e.message === "ResizeObserver loop limit exceeded") {
+        e.stopImmediatePropagation();
+      }
+    });
+  });
+};
 
 // export const patchDragDropToDisableDrop = ClientFunction(() => {
 //   window["creator"].dragDropSurveyElements.drop = () => { };
@@ -238,16 +240,18 @@ export async function setAllowZoom(page, newVal: boolean) {
 //   return Selector(selector).find(".sv-string-viewer").textContent;
 // }
 
-// export async function resetHoverToCreator(t: TestController, offsetX: number = 0, offsetY: number = 0): Promise<void> {
-//   await t.hover(Selector("#survey-creator"), { offsetX: offsetX, offsetY: offsetY });
-// }
+export async function resetHoverToCreator(page: Page, offsetX: number = 0, offsetY: number = 0): Promise<void> {
+  await page.locator("#survey-creator").hover({ position: { x: offsetX, y: offsetY } });
+}
 
-// export const hideAllAdornerActions = ClientFunction(() => {
-//   (<any>window).creator.onElementAllowOperations.add((_, options) => {
-//     Object.keys(options).forEach(key => {
-//       if (key !== "allowDragging" && key !== "allowDrag" && key !== "allowEdit") {
-//         options[key] = false;
-//       }
-//     });
-//   });
-// });
+export const hideAllAdornerActions = async (page) => {
+  await page.evaluate(() => {
+    (<any>window).creator.onElementAllowOperations.add((_, options) => {
+      Object.keys(options).forEach(key => {
+        if (key !== "allowDragging" && key !== "allowDrag" && key !== "allowEdit") {
+          options[key] = false;
+        }
+      });
+    });
+  });
+};
