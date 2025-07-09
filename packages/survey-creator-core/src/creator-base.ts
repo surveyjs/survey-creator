@@ -1904,10 +1904,12 @@ export class SurveyCreatorModel extends Base
     };
   }
   public getAvailableTabs(): Array<any> {
-    const res = [];
+    const res = this.tabs.map(t => ({ name: t.id, iconName: t.iconName }));
     const tabInfo = this.getTabsInfo();
     for (let key in tabInfo) {
-      res.push({ name: key, iconName: tabInfo[key].iconName });
+      if (res.filter(t => t.name == key).length == 0) {
+        res.push({ name: key, iconName: tabInfo[key].iconName });
+      }
     }
     return res;
   }

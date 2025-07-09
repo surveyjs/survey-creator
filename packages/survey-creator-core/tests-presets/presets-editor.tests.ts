@@ -3,7 +3,7 @@ import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
 import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
-import { SurveyCreatorModel } from "../src/creator-base";
+import { CreatorBase, SurveyCreatorModel } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
@@ -70,6 +70,26 @@ test("Preset edit model, tabs page with creator, default items", () => {
   expect(creator.tabs[1].id).toEqual("logic");
   expect(creator.activeTab).toBe("logic");
 });
+
+test("Preset edit model, tabs page with creator, default items with custom", () => {
+  const creator = new CreatorBase();
+  creator.addTab({ name: "custom", plugin: { model: creator, activate: () => { } } });
+  const editor = new CreatorPresetEditorModel({}, creator);
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
+  expect(defultTabs.map(t => t.name)).toEqual(["designer", "preview", "logic", "json", "custom"]);
+
+  itemsQuestion.value = [{ name: "preview" }, { name: "custom" }];
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  activeTabQuestion.value = "custom";
+  editor.applyFromSurveyModel();
+  expect(creator.tabs).toHaveLength(2);
+  expect(creator.tabs[0].id).toEqual("preview");
+  expect(creator.tabs[1].id).toEqual("custom");
+  expect(creator.activeTab).toBe("custom");
+});
+
 test("Preset edit model, tabs page one selected element", () => {
   const editor = new CreatorPresetEditorModel({});
   const survey = editor.model;
