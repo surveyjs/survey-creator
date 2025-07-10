@@ -822,6 +822,11 @@ jobs:
           npx puppeteer browsers install chrome
         displayName: "install chrome"
 
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
       # update 'file' npm dependencies in case of cache
       - task: CopyFiles@2
         inputs:
