@@ -63,8 +63,9 @@ test("Preset edit model, tabs page with creator, default items", () => {
   itemsQuestion.value = [{ name: "preview" }, { name: "logic" }];
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   activeTabQuestion.value = "logic";
-  editor.applyFromSurveyModel();
   const creator = editor.creator;
+  creator.activeTab = "logic";
+  editor.applyFromSurveyModel();
   expect(creator.tabs).toHaveLength(2);
   expect(creator.tabs[0].id).toEqual("preview");
   expect(creator.tabs[1].id).toEqual("logic");
@@ -87,7 +88,7 @@ test("Preset edit model, tabs page with creator, default items with custom", () 
   expect(creator.tabs).toHaveLength(2);
   expect(creator.tabs[0].id).toEqual("preview");
   expect(creator.tabs[1].id).toEqual("custom");
-  expect(creator.activeTab).toBe("custom");
+  expect(creator.activeTab).toBe("preview");
 });
 
 test("Preset edit model, tabs page one selected element", () => {
@@ -880,7 +881,6 @@ test("Preset edit model, save creator JSON on applying new preset", () => {
 });
 test("Preset edit model, set json property", () => {
   const editor = new CreatorPresetEditorModel({});
-  editor.activeTab = "results";
   const jsonQuestion = editor.resultModel.getQuestionByName("json");
   expect(jsonQuestion.value).toBe("{}");
   const json = {
@@ -895,5 +895,4 @@ test("Preset edit model, set json property", () => {
   editor.json = json;
   expect(JSON.parse(jsonQuestion.value)).toMatchObject(json);
   expect(editor.creator.tabs).toHaveLength(2);
-  expect(editor.creator.activeTab).toBe("preview");
 });

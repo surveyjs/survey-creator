@@ -1952,7 +1952,7 @@ export class SurveyCreatorModel extends Base
         this.tabs.splice(i, 0, item);
       }
     }
-    if (this.tabs.length > 0) {
+    if (this.tabs.length > 0 && this.tabs.filter(t => t.id == this.activeTab).length == 0) {
       this.switchTab(this.tabs[0].id);
     }
   }

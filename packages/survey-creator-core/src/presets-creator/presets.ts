@@ -38,8 +38,8 @@ export class CreatorPreset extends CreatorPresetBase {
   public getJson(): ICreatorPresetData {
     return <ICreatorPresetData>this.json;
   }
-  public apply(creator?: SurveyCreatorModel): void {
-    super.apply(creator);
+  public apply(creator: SurveyCreatorModel, internal = false): void {
+    super.apply(creator, internal);
     this.applyLocalization();
     if (!!creator) {
       creator.updateLocalizedStrings();

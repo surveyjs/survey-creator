@@ -241,7 +241,7 @@ preset.apply(creator);</div></pre></code></div>
     // }
     this.preset.setJson(this.getJsonFromSurveyModel());
     this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
-    this.preset.apply(this.creator);
+    this.preset.apply(this.creator, true);
     return true;
   }
   public getJsonFromSurveyModel(): any {
