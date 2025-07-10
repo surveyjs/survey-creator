@@ -153,7 +153,7 @@ test.describe(title, () => {
     // eslint-disable-next-line no-console
     console.log("Open question selector duration: " + duration.toString() + "ms");
     expect(duration).toBeLessThan(timeLimit * 2); // TODO: fix long dropdown opening
-    await page.locator(".sv-action__content > div > .sv-popup > .sv-popup__container > .sv-popup__body-content > .sv-popup__scrolling-content > .sv-popup__content > .svc-list__container > .svc-list__filter").click();
+    await page.locator(".svc-object-selector .svc-list__container > .svc-list__filter").click();
     start = performance.now();
     await page.locator("#svd-grid-object-selector").getByRole("textbox", { name: "Type to search..." }).fill("q3978");
     end = performance.now();
@@ -161,6 +161,7 @@ test.describe(title, () => {
     // eslint-disable-next-line no-console
     console.log("Search question duration: " + duration.toString() + "ms");
     expect(duration).toBeLessThan(timeLimit);
+    await expect(page.locator("[data-name='q3978']")).toBeHidden();
     start = performance.now();
     await page.getByText("q3978").click();
     end = performance.now();
@@ -170,6 +171,6 @@ test.describe(title, () => {
     expect(duration).toBeLessThan(timeLimit);
     await expect(page.getByRole("textbox", { name: "Question name" })).toBeVisible();
     await expect(page.getByRole("textbox", { name: "Question name" })).toHaveValue("q3978");
-    await expect(page.getByText("q3978Mfkwem UkzyogClick to")).toBeVisible();
+    await expect(page.locator("[data-name='q3978']")).toBeVisible();
   }, 10000 * 5);
 });
