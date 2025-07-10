@@ -20,17 +20,21 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
   public get searchItem() {
     return this.toolbox.searchItem as Action;
   }
-  ngAfterViewInit() {
-    this.toolbox.afterRender(this.container.nativeElement);
+  private afterRender() {
     if (this.container?.nativeElement) {
       this.toolbox.afterRender(this.container.nativeElement);
     }
   }
+  ngAfterViewInit() {
+    this.afterRender();
+  }
   override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
-    if (this.container?.nativeElement) {
-      this.toolbox.afterRender(this.container.nativeElement);
-    }
+    this.afterRender();
+  }
+  protected override afterUpdate(isSync?: boolean): void {
+    super.afterUpdate(isSync);
+    this.afterRender();
   }
   protected getModel(): QuestionToolbox {
     return this.toolbox;

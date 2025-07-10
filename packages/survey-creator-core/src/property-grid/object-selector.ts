@@ -162,9 +162,7 @@ export class ObjectSelectorModel extends Base {
         locOwner: this.creator
       });
       this.listModelValue.setOnFilterStringChangedCallback((text: string) => {
-        this.listModelValue.beginUpdates();
         this.selector.filterByText(text);
-        this.listModelValue.endUpdates();
       });
     } else {
       this.listModelValue.setItems(this.selector.items);

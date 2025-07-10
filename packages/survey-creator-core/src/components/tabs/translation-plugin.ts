@@ -19,7 +19,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private tabControlModel: TabControlModel;
 
   public model: Translation;
-
+  public static iconName = "icon-language";
   public get showOneCategoryInPropertyGrid(): boolean {
     return this._showOneCategoryInPropertyGrid;
   }
@@ -40,7 +40,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "translation", plugin: this, iconName: "icon-language" });
+    creator.addTab({ name: "translation", plugin: this, iconName: TabTranslationPlugin.iconName });
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.sidebarTab = this.creator.sidebar.addPage("translation");

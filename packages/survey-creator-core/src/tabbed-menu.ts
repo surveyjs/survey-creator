@@ -1,4 +1,4 @@
-import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property } from "survey-core";
+import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property, UpdateResponsivenessMode } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { ICreatorPlugin } from "./creator-settings";
 import { listComponentCss } from "./components/list-theme";
@@ -78,6 +78,6 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     this.actions.forEach((tab) => {
       tab.disableShrink = this.creator.tabResponsivenessMode == "menu";
     });
-    this.raiseUpdate(true);
+    this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
   }
 }

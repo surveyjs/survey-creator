@@ -84,6 +84,7 @@ import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
 import { deprecate } from "util";
+import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -1894,24 +1895,24 @@ export class SurveyCreatorModel extends Base
   }
   private getTabsInfo(): any {
     return {
-      designer: () => new TabDesignerPlugin(this),
-      preview: () => new TabTestPlugin(this),
-      theme: () => new ThemeTabPlugin(this), //TODO change name
-      logic: () => new TabLogicPlugin(this),
-      json: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this),
-      translation: () => new TabTranslationPlugin(this)
+      designer: { iconName: TabDesignerPlugin.iconName, init: () => new TabDesignerPlugin(this) },
+      preview: { iconName: TabTestPlugin.iconName, init: () => new TabTestPlugin(this) },
+      theme: { iconName: ThemeTabPlugin.iconName, init: () => new ThemeTabPlugin(this) }, //TODO change name
+      logic: { iconName: TabLogicPlugin.iconName, init: () => new TabLogicPlugin(this) },
+      json: { iconName: TabJsonEditorBasePlugin.iconName, init: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this) },
+      translation: { iconName: TabTranslationPlugin.iconName, init: () => new TabTranslationPlugin(this) }
     };
   }
-  public getAvailableTabNames(): Array<string> {
+  public getAvailableTabs(): Array<any> {
     const res = [];
     const tabInfo = this.getTabsInfo();
     for (let key in tabInfo) {
-      res.push(key);
+      res.push({ name: key, iconName: tabInfo[key].iconName });
     }
     return res;
   }
   public getTabNames(): Array<string> {
-    const tabNames = this.getAvailableTabNames();
+    const tabNames = this.getAvailableTabs().map(t => t.name);
     const res = [];
     this.tabs.forEach(tab => {
       const name = this.fixPluginName(tab.id);
@@ -1938,7 +1939,7 @@ export class SurveyCreatorModel extends Base
     }
     tabNames.forEach(id => {
       if (tabInfo[id] && this.getTabIndex(id) < 0) {
-        tabInfo[id]();
+        tabInfo[id].init();
       }
     });
     for (let i = 0; i < tabNames.length; i++) {
@@ -4308,6 +4309,7 @@ export class SurveyCreatorModel extends Base
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
+        listModel.flushUpdates();
       }
     });
     return newAction;

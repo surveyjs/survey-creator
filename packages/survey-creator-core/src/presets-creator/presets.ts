@@ -1,7 +1,7 @@
 import { CreatorPresetBase, ICreatorPreset } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
 import { CreatorPresetLanguages } from "./presets-languages";
-import { CreatorPresetTabs } from "./presets-tabs";
+import { CreatorPresetTabs, ICreatorPresetTab } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";
 import { IToolboxCategoryDefinition } from "../toolbox";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
@@ -18,13 +18,12 @@ export interface ICreatorPresetData {
     definition?: ISurveyPropertyGridDefinition,
   };
   tabs?: {
-    items?: Array<string>,
+    items?: Array<ICreatorPresetTab>,
     activeTab?: string,
   };
   toolbox?: {
     definition?: Array<ICreatorPresetToolboxItem>,
     categories?: Array<IToolboxCategoryDefinition>,
-    items?: Array<string>,
     showCategoryTitles?: boolean,
   };
   localization?: any;

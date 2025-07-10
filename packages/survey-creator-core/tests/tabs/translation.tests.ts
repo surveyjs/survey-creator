@@ -565,23 +565,28 @@ test("A language selector shows 'No data to display'", () => {
 
   const addLanguageAction = translation["addLanguageAction"];
   const list = translation["addLanguageAction"].data;
+  list.flushUpdates();
   expect(translation["isChooseLanguageEnabled"]).toBeTruthy();
   expect(addLanguageAction.popupModel.isVisible).toBeFalsy();
   expect(list.isEmpty).toBeFalsy();
 
   addLanguageAction.action();
+  list.flushUpdates();
   expect(addLanguageAction.popupModel.isVisible).toBeTruthy();
   expect(list.isEmpty).toBeFalsy();
   expect(list.actions[1].visible).toBeTruthy();
 
   list.onItemClick(list.actions[1]);
+  list.flushUpdates();
   expect(addLanguageAction.popupModel.isVisible).toBeFalsy();
   expect(list.isEmpty).toBeTruthy();
 
   question.removeRow(1, false);
+  list.flushUpdates();
   expect(list.isEmpty).toBeFalsy();
 
   addLanguageAction.action();
+  list.flushUpdates();
   expect(addLanguageAction.popupModel.isVisible).toBeTruthy();
   expect(list.isEmpty).toBeFalsy();
   expect(list.actions[1].visible).toBeTruthy();

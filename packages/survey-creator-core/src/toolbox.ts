@@ -20,7 +20,8 @@ import {
   ComputedUpdater,
   AnimationBoolean,
   IAnimationConsumer,
-  VerticalResponsivityManager
+  VerticalResponsivityManager,
+  UpdateResponsivenessMode
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -451,13 +452,13 @@ export class QuestionToolbox
     if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch ||
       this.creator && this.creator.toolboxLocation === "sidebar") {
       this.isResponsivenessDisabled = true;
-      this.updateCallback && this.updateCallback(true);
+      this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
       return;
     }
     if (this.hasCategories && this.showCategoryTitles) {
       if (isCompact) {
         this.isResponsivenessDisabled = false;
-        this.raiseUpdate(true);
+        this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
       } else {
         this.isResponsivenessDisabled = true;
         this.setActionsMode("large");
@@ -465,7 +466,7 @@ export class QuestionToolbox
       return;
     }
     this.isResponsivenessDisabled = false;
-    this.raiseUpdate(true);
+    this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
   }
   /**
    * Indicates whether the Toolbox is currently in [compact mode](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#forceCompact).
@@ -692,7 +693,7 @@ export class QuestionToolbox
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
-      this.visibleActions.forEach((item) => (item.mode = "small"));
+      this.getVisibleActions().forEach((item) => (item.mode = "small"));
     } else {
       this.dotsItem.popupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
     }

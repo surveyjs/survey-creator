@@ -34,6 +34,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private tabControlModel: TabControlModel;
   private prevActivePage: string;
 
+  public static iconName = "icon-config";
+
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
   }
@@ -204,7 +206,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "designer", plugin: this, iconName: "icon-config" });
+    creator.addTab({ name: "designer", plugin: this, iconName: TabDesignerPlugin.iconName });
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.tabControlModel.onTopToolbarItemCreated = (bar) => {
       this.setupPropertyGridTabActions(bar);
