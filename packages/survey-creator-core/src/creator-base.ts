@@ -1928,9 +1928,9 @@ export class SurveyCreatorModel extends Base
   public setTabs(tabNames: Array<string>): void {
     if (!Array.isArray(tabNames)) return;
     const tabInfo = this.getTabsInfo();
-    for (let i = tabNames.length - 1; i >= 0; i--) {
-      if (!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
-    }
+    // for (let i = tabNames.length - 1; i >= 0; i--) {
+    //   if (!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
+    // }
     if (tabNames.length === 0) return;
     for (let i = this.tabs.length - 1; i >= 0; i--) {
       const tabId = this.tabs[i].id;

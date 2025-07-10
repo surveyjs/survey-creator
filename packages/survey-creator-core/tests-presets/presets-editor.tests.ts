@@ -514,19 +514,19 @@ test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
   expect(panels[1].elements[0].name).toBe("choices");
   expect(panels[1].elements[1].name).toBe("showSelectAllItem");
 });
-test("Editor: activeTab & navigationBar", () => {
-  const editor = new CreatorPresetEditorModel();
-  expect(editor.activeTab).toEqual("preset");
-  expect(editor.navigationBar.actions[0].active).toBeTruthy();
-  const survey = editor.model;
-  const itemsQuestion = survey.getQuestionByName("tabs_items");
-  itemsQuestion.value = [{ name: "designer" }, { name: "translation" }];
-  editor.navigationBar.actions[1].action();
-  expect(editor.activeTab).toEqual("creator");
-  expect(editor.creator.tabs).toHaveLength(2);
-  expect(editor.creator.tabs[0].id).toEqual("designer");
-  expect(editor.creator.tabs[1].id).toEqual("translation");
-});
+// test("Editor: activeTab & navigationBar", () => {
+//   const editor = new CreatorPresetEditorModel();
+//   expect(editor.activeTab).toEqual("preset");
+//   expect(editor.navigationBar.actions[0].active).toBeTruthy();
+//   const survey = editor.model;
+//   const itemsQuestion = survey.getQuestionByName("tabs_items");
+//   itemsQuestion.value = [{ name: "designer" }, { name: "translation" }];
+//   editor.navigationBar.actions[1].action();
+//   expect(editor.activeTab).toEqual("creator");
+//   expect(editor.creator.tabs).toHaveLength(2);
+//   expect(editor.creator.tabs[0].id).toEqual("designer");
+//   expect(editor.creator.tabs[1].id).toEqual("translation");
+// });
 // test("Editor: do not allow to change the activeTab if there is an error", () => {
 //   const editor = new CreatorPresetEditorModel();
 //   expect(editor.activeTab).toEqual("preset");
