@@ -232,15 +232,15 @@ jobs:
           npx puppeteer browsers install chrome
         displayName: "install chrome"
 
-        - script: |
-          cd $(Build.SourcesDirectory)/survey-creator
-          npm run postinstall
+      - script: |
+        cd $(Build.SourcesDirectory)/survey-creator
+        npm run postinstall
         displayName: "install chrome playwright"
 
-        - script: |
-            cd $(Build.SourcesDirectory)/survey-creator
-            npm run lint
-          displayName: "check lint"
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run lint
+        displayName: "check lint"
 
       - task: Npm@1
         displayName: "Npm install survey-creator-react"
