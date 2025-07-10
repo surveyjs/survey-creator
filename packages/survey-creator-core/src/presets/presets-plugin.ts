@@ -17,6 +17,7 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
 
   public activate(): void {
     this.model = new CreatorPresetEditorModel({}, this.creator);
+    this.model.model.currentPageNo = this.currentPresetIndex;
     this.updateActivePage();
     this.updateTabControl();
 
@@ -52,6 +53,7 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
   }
 
   public deactivate(): boolean {
+    this.currentPresetIndex = this.model?.model.currentPageNo || 0;
     if (this.model) {
       this.model.dispose();
     }
