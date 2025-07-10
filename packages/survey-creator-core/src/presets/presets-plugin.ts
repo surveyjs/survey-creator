@@ -6,6 +6,7 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
   public model: CreatorPresetEditorModel | undefined;
   public static iconName = "icon-settings";
   public propertyGridViewModel: PropertyGridViewModel;
+  private currentPresetIndex = 0;
   constructor(creator: SurveyCreatorModel) {
     super(creator);
     creator.addTab({ name: "presets", plugin: this, iconName: TabPresetsPlugin.iconName });
@@ -16,6 +17,7 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
 
   public activate(): void {
     this.model = new CreatorPresetEditorModel({}, this.creator);
+    this.model.model.currentPageNo = this.currentPresetIndex;
     this.updateActivePage();
     this.updateTabControl();
 
@@ -51,6 +53,7 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
   }
 
   public deactivate(): boolean {
+    this.currentPresetIndex = this.model?.model.currentPageNo || 0;
     if (this.model) {
       this.model.dispose();
     }
