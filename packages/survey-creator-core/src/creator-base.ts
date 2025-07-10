@@ -1501,9 +1501,9 @@ export class SurveyCreatorModel extends Base
     this.onLocaleChanded.fire(this, { locale: value });
   }
   public onLocaleChanded: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
-  public updateLocalizedStrings(): void {
+  public updateLocalizedStrings(refreshPlugin: boolean = true): void {
     this.toolbox.updateTitles();
-    this.refreshPlugin();
+    if (refreshPlugin)this.refreshPlugin();
     const selEl = this.selectedElement;
     if (!!selEl) {
       this.selectElement(null);

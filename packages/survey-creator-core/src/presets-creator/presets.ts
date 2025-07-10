@@ -42,7 +42,7 @@ export class CreatorPreset extends CreatorPresetBase {
     super.apply(creator, internal);
     this.applyLocalization();
     if (!!creator) {
-      creator.updateLocalizedStrings();
+      creator.updateLocalizedStrings(!internal);
     }
   }
   protected applyLocalization(): void {
