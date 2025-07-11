@@ -144,7 +144,9 @@ export class PageNavigatorViewModel extends Base {
       this.pagesController.creator.selectElement(this.pagesController.currentPage);
       return;
     }
-    const el: any = document.getElementById(page.id);
+    const rootNode = this._itemsContainer?.getRootNode();
+    const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
+    const el: any = doc.getElementById(page.id);
     if (!!el) {
       const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
       if (!!this._scrollableContainer) {
