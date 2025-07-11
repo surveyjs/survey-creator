@@ -55,9 +55,11 @@ export class SurveyQuestionPresetPropertiesDetail {
   private propertyGridValue: PropertyGridModel;
   private propertyGridDefaultValue: PropertyGridModel;
   private allPropertiesNames: Array<string>;
+  private obj;
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls = {};
     const obj = this.createObj();
+    this.obj = obj;
     this.properties = new SurveyQuestionPresetProperties(obj, className, currentJson);
     this.allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
     const objProps = {};
@@ -81,6 +83,9 @@ export class SurveyQuestionPresetPropertiesDetail {
     }
     this.propertyGridValue = this.createPropertyGrid(obj, this.currentJson);
     this.propertyGridDefaultValue = this.createPropertyGrid(obj);
+  }
+  public getObj() {
+    return this.obj;
   }
   private createPropertyGrid(obj: Base, json?: ISurveyPropertyGridDefinition): PropertyGridModel {
     const res = new PropertyGridModel(undefined, undefined, json);
@@ -300,8 +305,10 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.updateCurrentJson(model);
     return { definition: this.currentJson };
   }
+  private propertyGrid: PropertyGridModel;
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
+    this.propertyGrid = creatorSetup.creator["designerPropertyGrid"];
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
     // this.propCreatorValue = creatorSetup.createCreator(options);
@@ -373,6 +380,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.currentClassName = selQuestion.value;
     if (!this.currentClassName) return;
     this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
+    this.propertyGrid["setObj"](this.currentProperties.getObj());
     const categories = this.currentProperties.getInitialJson();
     this.defaultItems = [];
     model.setValue(this.nameCategories, categories);

@@ -5,12 +5,12 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 export class TabPresetsPlugin extends TabDesignerPluginBase {
   public model: CreatorPresetEditorModel | undefined;
   public static iconName = "icon-settings";
-  public propertyGridViewModel: PropertyGridViewModel;
   private currentPresetIndex = 0;
   constructor(creator: SurveyCreatorModel) {
     super(creator);
     creator.addTab({ name: "presets", plugin: this, iconName: TabPresetsPlugin.iconName });
-    this.propertyGridTab = this.creator.sidebar.addPage("propertyGridPresets", "svc-property-grid", this.propertyGridViewModel);
+    //this.propertyGridTab = this.creator.sidebar.addPage("propertyGridPresets", "svc-property-grid", this.propertyGridViewModel);
+    this.propertyGridTab = this.creator.sidebar.getPageById("propertyGrid");
   }
 
   public saveToFileHandler = saveToFileHandler;
