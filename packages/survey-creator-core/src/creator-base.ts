@@ -4243,13 +4243,14 @@ export class SurveyCreatorModel extends Base
     let availableToolboxItems: Array<QuestionToolboxItem> = [];
     this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    if (!this.isAllowedNestingLevel(element)) {
+    const elementNesting = !!element && isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element)) ? 1 : 0;
+    if (!this.isAllowedNestingLevel(element, elementNesting)) {
       for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
         if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
           availableToolboxItems.splice(i, 1);
         }
       }
-    } else if (!this.isAllowedNestedPanels(element)) {
+    } else if (!this.isAllowedNestedPanels(element, elementNesting)) {
       for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
         if (availableToolboxItems[i].isPanel) {
           availableToolboxItems.splice(i, 1);
