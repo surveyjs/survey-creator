@@ -651,8 +651,8 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run visual-regression-tests:ci
-        displayName: "Visual Regression Tests CreatorV2 Vue"
+          npm run test:scr:ci
+        displayName: "Screenshot Tests CreatorV2 Vue"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
