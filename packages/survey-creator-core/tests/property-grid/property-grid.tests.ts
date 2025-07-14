@@ -3897,3 +3897,35 @@ test("If a property becomes in different categories for different question types
 
   Serializer.removeProperty("matrix", "isRequired");
 });
+test("Unique question name property & whitespace, Bug#7022", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+  };
+  const q2 = creator.survey.getQuestionByName("q2");
+  const propertyGrid = new PropertyGridModelTester(q2, creator);
+  const questionName = propertyGrid.survey.getQuestionByName("name");
+  expect(questionName.value).toBe("q2");
+  questionName.value = "q1";
+  expect(questionName.errors).toHaveLength(1);
+  expect(q2.name).toBe("q2");
+  questionName.value = "q1 ";
+  expect(questionName.errors).toHaveLength(1);
+  expect(q2.name).toBe("q2");
+});
+test("Unique page name property & whitespace, Bug#7022", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [{ name: "page1" }, { name: "page2" }]
+  };
+  const page2 = creator.survey.getPageByName("page2");
+  const propertyGrid = new PropertyGridModelTester(page2, creator);
+  const questionName = propertyGrid.survey.getQuestionByName("name");
+  expect(questionName.value).toBe("page2");
+  questionName.value = "page1";
+  expect(questionName.errors).toHaveLength(1);
+  expect(page2.name).toBe("page2");
+  questionName.value = "page1 ";
+  expect(questionName.errors).toHaveLength(1);
+  expect(page2.name).toBe("page2");
+});

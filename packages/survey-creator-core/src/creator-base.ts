@@ -3738,7 +3738,7 @@ export class SurveyCreatorModel extends Base
     newName: string
   ): boolean {
     if (!Array.isArray(elements)) return true;
-    newName = newName.toLowerCase();
+    newName = newName.trim().toLowerCase();
     for (var i = 0; i < elements.length; i++) {
       if (elements[i] != el && elements[i].name.toLowerCase() == newName)
         return false;
