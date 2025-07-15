@@ -1,5 +1,5 @@
-// Uncomment the line below if you create a custom dictionary
-// import { editorLocalization } from "survey-creator-core";
+// Uncomment the line below if you create a custom dictionary:
+// import { setupLocale } from "survey-creator-core";
 
 export var enStrings = {
   // survey templates
@@ -1881,7 +1881,10 @@ export var enStrings = {
   }
 };
 
-// Uncomment the line below if you create a custom dictionary.
-// Replace "en" with a custom locale code (for example, "fr" or "de"),
-// Replace `enStrings` with the name of the variable that contains the custom dictionary.
+/*
+  Uncomment the last line if you create a custom dictionary. This line calls the `setupLocale` method, which supports the following locale settings:
+
+  - `localeCode`: `string` - A short code used as a locale identifier (for example, "en", "de", "fr").
+  - `strings`: `object` - An object with custom translations.
+*/
 // setupLocale({ localeCode: "en", strings: enStrings });
