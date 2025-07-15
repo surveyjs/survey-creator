@@ -607,6 +607,7 @@ export class QuestionToolbox
       }
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
+    this.dotsItem.data.locOwner = this.creator;
     this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {

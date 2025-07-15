@@ -690,7 +690,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
       cssClasses: listComponentCss,
-    });
+    }, this.creator);
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
@@ -701,7 +701,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     // options.updateListModel(listModel);
     if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
     newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
-    newAction.data.locOwner = this.creator;
     return newAction;
   }
 

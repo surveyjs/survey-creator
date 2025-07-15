@@ -241,7 +241,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
       cssClasses: listComponentCss,
-    });
+    }, this.creator);
   }
   private createFilterStringsAction() {
     this.filterStringsAction = createDropdownActionModel({
@@ -258,7 +258,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
       cssClasses: listComponentCss,
-    });
+    }, this.creator);
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {
     const title = this.getFilterStringsActionTitle();

@@ -40,7 +40,8 @@ export class PageNavigatorViewModel extends Base {
         this.popupModel.hide();
       },
       cssClasses: listComponentCss,
-      allowSelection: true
+      allowSelection: true,
+      locOwner: pagesController.creator as any,
     });
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);

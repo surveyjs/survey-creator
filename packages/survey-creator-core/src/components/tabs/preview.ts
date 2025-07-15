@@ -276,7 +276,7 @@ export class PreviewViewModel extends Base {
       cssClasses: listComponentCss,
       verticalPosition: "top",
       horizontalPosition: "center"
-    });
+    }, this.surveyProvider);
     pageActions.push(this.selectPageAction);
     this.selectPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
       return this.survey.state === "running";
