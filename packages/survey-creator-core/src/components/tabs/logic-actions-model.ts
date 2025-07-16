@@ -256,7 +256,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     if (!!this.logicType && this.logicType.dependedOnPropertyName === propertyName) {
       this.recreateQuestion(this.panel, this.panelObj, this.logicType.dynamicPropertyName, options);
     }
-    this.panel.runCondition(survey.getAllValues(), { survey: survey });
+    this.panel.runCondition({ survey: survey });
   }
 
   public setPanelObj(obj: Base): void {
