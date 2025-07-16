@@ -272,7 +272,7 @@ export var huStrings = {
       setValueExpressionPlaceholder: " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
       trigger_completeText: "A felmérés befejeződött",
       trigger_setvalueText: "Kérdéses érték: {0} érték {1}", //{0} question name, {1} setValue
-      trigger_setvalueEmptyText: "Egyértelmű kérdésérték: {0}", //{0} question name
+      trigger_setvalueEmptyText: "Kérdésérték törlése: {0}", //{0} question name
       trigger_copyvalueText: "Másolás kérdésbe: {0} kérdés értéke {1}", //{0} and {1} question names
       trigger_skipText: "felmérés ugrás a kérdésre {0}", //{0} question name
       trigger_runExpressionText1: "Run kifejezés: '{0}'", //{0} the expression
@@ -1973,7 +1973,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // lg.column_requireText: "make column {0} of question {1} required" => "Tegye kötelezővé a kérdés {0} oszlopát {1}"
 // lg.trigger_completeText: "survey becomes completed" => "A felmérés befejeződött"
 // lg.trigger_setvalueText: "set into question: {0} value {1}" => "Kérdéses érték: {0} érték {1}"
-// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "Egyértelmű kérdésérték: {0}"
 // lg.trigger_copyvalueText: "copy into question: {0} value from question {1}" => "Másolás kérdésbe: {0} kérdés értéke {1}"
 // lg.trigger_skipText: "survey skip to the question {0}" => "felmérés ugrás a kérdésre {0}"
 // lg.trigger_runExpressionText1: "run expression: '{0}'" => "Run kifejezés: '{0}'"
