@@ -13,7 +13,7 @@
       <sv-scroll>
         <ng-container *ngIf="!toolbox.showInSingleCategory">
           <ng-container *ngFor="let category of toolbox.categories">
-            <ng-template [component]="{name: 'svc-toolbox-category', data: { category: category }}"></ng-template>
+            <ng-template [component]="{name: 'svc-toolbox-category', data: { category: category, toolbox: toolbox }}"></ng-template>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="toolbox.showInSingleCategory">
