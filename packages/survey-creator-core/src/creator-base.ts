@@ -320,7 +320,7 @@ export class SurveyCreatorModel extends Base
     console.warn("As of v1.9.101, the haveCommercialLicense property is not supported. To activate your license, use the setLicenseKey(key) method as shown on the following page: https://surveyjs.io/remove-alert-banner");
   }
   public get licenseText(): string {
-    const d: any = glc(1);
+    const d: any = !!glc ? glc(1) : false;
     if (!!d && d.toLocaleDateString) return this.getLocString("survey.license2").replace("{date}", d.toLocaleDateString());
     return this.getLocString("survey.license");
   }
