@@ -1472,14 +1472,14 @@ export var enStrings = {
       errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       indent: "Adds space or margin between the question content and the left border of the question box.",
       width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
-      surveyvalidator: {
-        expression: "Use the magic wand icon to set a validation rule for the question."
-      },
       textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
       url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
       searchMode: "A comparison operation used to filter the drop-down list.",
       textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
+    },
+    surveyvalidator: {
+      expression: "Use the magic wand icon to define when the question's value is considered valid."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
