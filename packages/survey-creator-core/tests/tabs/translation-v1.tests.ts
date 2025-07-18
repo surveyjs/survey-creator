@@ -38,9 +38,10 @@ test("Test question choices localization", () => {
     }
   }
   expect(choices).toBeTruthy();
-  expect(choices.items).toHaveLength(2);
+  expect(choices.items).toHaveLength(4);
   expect(choices.items[0].name).toEqual("item1");
-  expect(choices.items[1].name).toEqual("item2");
+  expect(choices.items[1].name).toEqual("item1.commentPlaceholder");
+  expect(choices.items[2].name).toEqual("item2");
 });
 test("Question choices localization with value=0", () => {
   const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");
@@ -54,9 +55,10 @@ test("Question choices localization with value=0", () => {
     }
   }
   expect(choices).toBeTruthy();
-  expect(choices.items).toHaveLength(2);
+  expect(choices.items).toHaveLength(4);
   expect(choices.items[0].name).toEqual(0);
-  expect(choices.items[1].name).toEqual(1);
+  expect(choices.items[1].name).toBe("0.commentPlaceholder");
+  expect(choices.items[2].name).toEqual(1);
 });
 
 test("Survey child groups", () => {
@@ -576,11 +578,13 @@ test("Custom localizable property in itemvalue", () => {
   );
   expect(choicesGroup).toBeTruthy();
   expect(choicesGroup.isGroup).toBeTruthy();
-  expect(choicesGroup.items).toHaveLength(4);
+  expect(choicesGroup.items).toHaveLength(6);
   expect(choicesGroup.items[0].name).toEqual("1");
   expect(choicesGroup.items[1].name).toEqual("1.customProp");
-  expect(choicesGroup.items[2].name).toEqual("2");
-  expect(choicesGroup.items[3].name).toEqual("2.customProp");
+  expect(choicesGroup.items[2].name).toEqual("1.commentPlaceholder");
+  expect(choicesGroup.items[3].name).toEqual("2");
+  expect(choicesGroup.items[4].name).toEqual("2.customProp");
+  expect(choicesGroup.items[5].name).toEqual("2.commentPlaceholder");
   Serializer.removeProperty("itemvalue", "customProp");
 });
 

@@ -305,7 +305,7 @@ test("itemvalue[] property editor", () => {
   expect(choicesQuestion.visibleRows[0].cells[0].value).toEqual(1); //"the first cell value is 3"
   choicesQuestion.addRow();
   expect(question.choices).toHaveLength(4); // "There are 4 items now");
-  expect(question.choices[3].getType()).toEqual("itemvalue"); //correct class created
+  expect(question.choices[3].getType()).toEqual("choiceitem"); //correct class created
   expect(choicesQuestion.visibleRows[3].cells[0].value).toEqual(4);
   expect(question.choices[3].value).toEqual(4); //"The last item value is 4");
   question.choices[1].text = "Item 2";
@@ -423,7 +423,7 @@ test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
   expect(choicesQuestion.columns).toHaveLength(2);
   const row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.elements).toHaveLength(4);
+  expect(row.detailPanel.elements).toHaveLength(7);
   const thirdElement = row.detailPanel.elements[2];
   expect(thirdElement.name).toEqual("prop1");
   expect(thirdElement.getType()).toEqual("dropdown");
@@ -444,7 +444,7 @@ test("itemvalue[] custom add showMode as 'form', create in general category by d
   expect(choicesQuestion.columns).toHaveLength(2);
   const row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.elements).toHaveLength(4);
+  expect(row.detailPanel.elements).toHaveLength(7);
   const thirdElement = row.detailPanel.elements[2];
   expect(thirdElement.name).toEqual("prop1");
 
@@ -2958,8 +2958,8 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   const actions1 = choicesQuestion.renderedTable.rowsActions[0];
   expect(actions1).toHaveLength(2);
 
-  const oldDefinition = SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
+  const oldDefinition = SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = [
     { name: "general", visible: false }
   ];
   const propertyGrid2 = new PropertyGridModelTester(question, options);
@@ -2968,7 +2968,7 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   );
   const actions2 = choicesQuestion2.renderedTable.rowsActions[0];
   expect(actions2).toHaveLength(1);
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = oldDefinition;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = oldDefinition;
 });
 test("choices and onCollectionItemDeleting", () => {
   const question = new QuestionDropdownModel("q1");
