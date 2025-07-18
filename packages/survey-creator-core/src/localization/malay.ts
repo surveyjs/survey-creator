@@ -321,6 +321,7 @@ export var msStrings = {
       name: "Nama panel",
       title: "Tajuk panel",
       description: "Penerangan panel",
+      displayMode: "Mod paparan kemasukan",
       visibleIf: "Jadikan panel kelihatan jika",
       requiredIf: "Buat panel diperlukan jika",
       page: "Mengalihkan panel ke halaman",
@@ -1423,7 +1424,7 @@ export var msStrings = {
       templateErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       errorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
       page: "Meletakkan semula panel di hujung halaman yang dipilih.",
-      innerIndent: "Menambah ruang atau jidar antara kandungan panel dan sempadan kiri kotak panel.",
+      indent: "Menambah ruang atau margin antara kandungan panel dan sempadan kiri kotak panel.",
       startWithNewLine: "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda.",
       state: "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh.",
       width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
@@ -1462,14 +1463,14 @@ export var msStrings = {
       errorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       indent: "Menambah ruang atau jidar antara kandungan soalan dan sempadan kiri kotak soalan.",
       width: "Menetapkan lebar soalan mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
-      surveyvalidator: {
-        expression: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan pengesahan untuk soalan itu."
-      },
       textUpdateMode: "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Pada fokus yang hilang\" secara lalai).",
       url: "Anda boleh menggunakan mana-mana perkhidmatan web sebagai sumber data untuk soalan pelbagai pilihan. Untuk mengisi nilai pilihan, masukkan URL perkhidmatan yang menyediakan data.",
       searchMode: "Operasi perbandingan yang digunakan untuk menapis senarai juntai bawah.",
       textWrapEnabled: "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip.",
       effectiveColSpan: "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid."
+    },
+    surveyvalidator: {
+      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah."
     },
     signaturepad: {
       signatureWidth: "Mengesetkan lebar kawasan tandatangan yang dipaparkan dan imej yang terhasil.",
@@ -3113,3 +3114,6 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Mencetuskan gesaan pengesahan sebelum mengalih keluar baris."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Kembangkan butiran baris baharu secara automatik"
+// paneldynamic.displayMode: "Entry display mode" => "Mod paparan kemasukan"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Menambah ruang atau margin antara kandungan panel dan sempadan kiri kotak panel."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah."

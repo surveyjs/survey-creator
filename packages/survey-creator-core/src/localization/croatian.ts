@@ -321,6 +321,7 @@ export var hrStrings = {
       name: "Naziv ploče",
       title: "Naslov ploče",
       description: "Opis ploče",
+      displayMode: "Način prikaza unosa",
       visibleIf: "Učini ploču vidljivom ako",
       requiredIf: "Učinite ploču potrebnom ako",
       page: "Premještanje ploče na stranicu",
@@ -1423,7 +1424,7 @@ export var hrStrings = {
       templateErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       errorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       page: "Premješta ploču na kraj odabrane stranice.",
-      innerIndent: "Dodaje razmak ili marginu između sadržaja ploče i lijevog obruba okvira ploče.",
+      indent: "Dodaje razmak ili marginu između sadržaja ploče i lijevog ruba okvira prozora.",
       startWithNewLine: "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu.",
       state: "Odaberite između: \"Prošireno\" - ploča je prikazana u cijelosti i može se sažeti; \"Sažeto\" - ploča prikazuje samo naslov i opis i može se proširiti; \"Zaključano\" - ploča je prikazana u cijelosti i ne može se sažeti.",
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
@@ -1462,14 +1463,14 @@ export var hrStrings = {
       errorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       indent: "Dodaje razmak ili marginu između sadržaja pitanja i lijevog obruba okvira pitanja.",
       width: "Postavlja širinu pitanja proporcionalno drugim elementima upitnika u istom retku. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
-      surveyvalidator: {
-        expression: "Pomoću ikone čarobnog štapića postavite pravilo provjere valjanosti za pitanje."
-      },
       textUpdateMode: "Odaberite između: \"Na izgubljenom fokusu\" - vrijednost se ažurira kada polje za unos izgubi fokus; \"Tijekom tipkanja\" - vrijednost se ažurira u stvarnom vremenu, jer korisnici tipkaju. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Pri izgubljenom fokusu\" prema zadanim postavkama).",
       url: "Bilo koju web-uslugu možete koristiti kao izvor podataka za pitanja s višestrukim izborom odgovora. Da biste popunili vrijednosti izbora, unesite URL usluge koja pruža podatke.",
       searchMode: "Operacija usporedbe koja se koristi za filtriranje padajućeg popisa.",
       textWrapEnabled: "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu.",
       effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
+    },
+    surveyvalidator: {
+      expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom."
     },
     signaturepad: {
       signatureWidth: "Postavlja širinu prikazanog područja potpisa i rezultirajuću sliku.",
@@ -3153,3 +3154,6 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Aktivira upit za potvrdu prije uklanjanja retka."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatski proširuje odjeljak s detaljima kada se u matricu doda novi redak."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatsko proširenje pojedinosti o novom retku"
+// paneldynamic.displayMode: "Entry display mode" => "Način prikaza unosa"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Dodaje razmak ili marginu između sadržaja ploče i lijevog ruba okvira prozora."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom."

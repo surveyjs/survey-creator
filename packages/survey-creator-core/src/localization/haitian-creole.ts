@@ -321,6 +321,7 @@ export var htStrings = {
       name: "Non panèl",
       title: "Tit panèl",
       description: "Deskripsyon panèl",
+      displayMode: "Antre ekspozisyon mòd",
       visibleIf: "Fè panèl la vizib si",
       requiredIf: "Fè panèl la mande si",
       page: "Deplase panèl la nan paj",
@@ -1423,7 +1424,7 @@ export var htStrings = {
       templateErrorLocation: "Mete kote yon mesaj erè an relasyon ak yon kesyon ki pa valab. Chwazi ant: \"Top\" - yo mete yon tèks erè nan tèt bwat kesyon an; \"Anba\" - yo mete yon tèks erè nan pati anba bwat kesyon an. Opsyon \"Eritye\" aplike nivo paj (si yo mete) oswa nivo sondaj (\"Top\" pa default).",
       errorLocation: "Mete kote yon mesaj erè an relasyon ak tout kesyon ki nan panèl la. Opsyon \"Eritite\" aplike paramèt nivo paj (si yo tabli) oswa nivo sondaj la.",
       page: "Repositionne panèl la nan fen yon paj chwazi.",
-      innerIndent: "Ajoute espas oswa maj ant kontni panèl la ak fwontyè gòch bwat panèl la.",
+      indent: "Ajoute espas oswa maj ant kontni an panèl ak fwontyè a gòch nan bwat panèl la.",
       startWithNewLine: "Deseleksyone pou montre panèl la nan yon liy ak kesyon oswa panèl anvan an. Anviwònman an pa aplike si panèl la se premye eleman nan fòm ou a.",
       state: "Chwazi nan: \"Elaji\" - panèl la parèt an antye epi yo ka tonbe; \"Efondre\" - panèl la montre sèlman tit la ak deskripsyon epi li ka elaji; \"Kloke\" - panèl la parèt an antye epi yo pa ka tonbe.",
       width: "Mete lajè panèl la an pwopòsyon ak lòt eleman sondaj nan menm liy lan. Aksepte valè CSS (px, %, in, pt, elatriye).",
@@ -1462,14 +1463,14 @@ export var htStrings = {
       errorLocation: "Mete kote yon mesaj erè an relasyon ak kesyon an ki pa valab. Chwazi ant: \"Top\" - yo mete yon tèks erè nan tèt bwat kesyon an; \"Anba\" - yo mete yon tèks erè nan pati anba bwat kesyon an. Opsyon \"Eritite\" aplike anviwònman nivo sondaj la (\"Top\" pa default).",
       indent: "Ajoute espas oswa maj ant kontni kesyon an ak fwontyè gòch bwat kesyon an.",
       width: "Mete lajè kesyon an nan pwopòsyon ak lòt eleman sondaj nan menm liy lan. Aksepte valè CSS (px, %, in, pt, elatriye).",
-      surveyvalidator: {
-        expression: "Sèvi ak icon majik la pou mete yon règ validasyon pou kesyon an."
-      },
       textUpdateMode: "Chwazi nan: \"Sou pèdi konsantre\" - valè a mete ajou lè jaden an opinyon konsantre; \"Pandan ke tape\" - valè a mete ajou nan tan reyèl, kòm itilizatè yo ap tape. Opsyon \"Eritaj\" aplike anviwònman an sondaj-nivo (\"Sou pèdi konsantre\" pa default).",
       url: "Ou ka itilize nenpòt sèvis entènèt kòm yon sous done pou kesyon chwa miltip. Pou popilasyon valè chwa, antre nan URL la nan sèvis la bay done yo.",
       searchMode: "Yon operasyon konparezon itilize pou filtre lis la gout-desann.",
       textWrapEnabled: "Long tèks nan opsyon chwa pral otomatikman jenere liy liy yo anfòm nan meni an gout-desann. Sòf si ou vle tèks yo klip.",
       effectiveColSpan: "Espesifye konbyen kolòn kesyon sa a kouvri nan layout la kadriyaj."
+    },
+    surveyvalidator: {
+      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab."
     },
     signaturepad: {
       signatureWidth: "Mete lajè zòn siyati ki parèt la ak imaj ki kapab lakòz.",
@@ -1927,3 +1928,6 @@ setupLocale({ localeCode: "ht", strings: htStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Deklanche yon konfimasyon pouse anvan ou retire yon ranje."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Otomatikman ogmante seksyon an detay lè yon nouvo ranje ajoute nan matris la."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Oto-elaji nouvo detay ranje"
+// paneldynamic.displayMode: "Entry display mode" => "Antre ekspozisyon mòd"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Ajoute espas oswa maj ant kontni an panèl ak fwontyè a gòch nan bwat panèl la."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab."

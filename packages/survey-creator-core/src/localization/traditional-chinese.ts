@@ -321,6 +321,7 @@ var traditionalChineseTranslation = {
       name: "面板名稱",
       title: "面板標題",
       description: "面板說明",
+      displayMode: "進入顯示模式",
       visibleIf: "如果出現以下情況，則使面板可見",
       requiredIf: "如果出現以下情況，則使面板成為必需的",
       page: "將面板移動到頁面",
@@ -1423,7 +1424,7 @@ var traditionalChineseTranslation = {
       templateErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
       errorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
       page: "將面板重新置放到選頁面的末尾。",
-      innerIndent: "在面板內容和面板框的左邊框之間添加空格或邊距。",
+      indent: "在面板內容與面板框的左邊框之間新增空間或邊界。",
       startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
       state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
@@ -1462,14 +1463,14 @@ var traditionalChineseTranslation = {
       errorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
       indent: "在問題內容和問題框的左邊框之間添加空格或邊距。",
       width: "設置問題的寬度，使其與同一行中的其他調查元素成比例。接受 CSS 值（px、%、in、pt 等）。",
-      surveyvalidator: {
-        expression: "使用魔杖圖示為問題設置驗證規則。"
-      },
       textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。",
       url: "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。",
       searchMode: "用於篩選下拉清單的比較操作。",
       textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。",
       effectiveColSpan: "指定此問題在網格佈局中跨越多少列。"
+    },
+    surveyvalidator: {
+      expression: "使用魔術棒圖示來定義問題值何時被視為有效。"
     },
     signaturepad: {
       signatureWidth: "設置顯示的簽名區域和生成的圖像的寬度。",
@@ -3429,3 +3430,6 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "在刪除行之前觸發確認提示。"
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "在向矩陣添加新行時自動展開詳細資訊部分。"
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "自動展開新行詳細資訊"
+// paneldynamic.displayMode: "Entry display mode" => "進入顯示模式"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容與面板框的左邊框之間新增空間或邊界。"
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "使用魔術棒圖示來定義問題值何時被視為有效。"
