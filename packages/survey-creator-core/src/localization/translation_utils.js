@@ -97,7 +97,7 @@ module.exports = {
       const key = keys[i];
       const hasComma = i < keys.length - 1;
       const commaText = hasComma ? "," : "";
-      if (key === "license" && !isEnglish) continue;
+      if (key.indexOf("license") > -1 && !isEnglish) continue;
       propComment = "";
       const keyName = this.getKeyName(key);
       if (this.isObject(englishJson, key)) {
