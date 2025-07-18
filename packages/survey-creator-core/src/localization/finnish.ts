@@ -321,6 +321,7 @@ export var fiStrings = {
       name: "Paneelin nimi",
       title: "Paneelin otsikko",
       description: "Paneelin kuvaus",
+      displayMode: "Sisääntulon näyttötila",
       visibleIf: "Tee paneeli näkyväksi, jos",
       requiredIf: "Tee paneeli pakolliseksi, jos",
       page: "Paneelin siirtäminen sivulle",
@@ -1423,7 +1424,7 @@ export var fiStrings = {
       templateErrorLocation: "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
       errorLocation: "Määrittää virhesanoman sijainnin suhteessa kaikkiin paneelin kysymyksiin. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta.",
       page: "Siirtää paneelin valitun sivun loppuun.",
-      innerIndent: "Lisää tilaa tai reunuksen paneelin sisällön ja paneeliruudun vasemman reunan väliin.",
+      indent: "Lisää tilaa tai marginaalia paneelin sisällön ja paneeliruudun vasemman reunan väliin.",
       startWithNewLine: "Poista valinta, jos haluat näyttää paneelin yhdellä rivillä edellisen kysymyksen tai paneelin kanssa. Asetusta ei käytetä, jos paneeli on lomakkeen ensimmäinen elementti.",
       state: "Valitse seuraavista: \"Laajennettu\" - paneeli näytetään kokonaisuudessaan ja se voidaan kutistaa; \"Tiivistetty\" - paneeli näyttää vain otsikon ja kuvauksen ja sitä voidaan laajentaa; \"Lukittu\" - paneeli näkyy kokonaisuudessaan eikä sitä voi kutistaa.",
       width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
@@ -1462,14 +1463,14 @@ export var fiStrings = {
       errorLocation: "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Ylin\" oletuksena).",
       indent: "Lisää välilyönnin tai reunuksen kysymyksen sisällön ja kysymysruudun vasemman reunan väliin.",
       width: "Määrittää kysymyksen leveyden suhteessa saman rivin muihin kyselyelementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
-      surveyvalidator: {
-        expression: "Käytä taikasauvakuvaketta asettaaksesi kysymyksen vahvistussäännön."
-      },
       textUpdateMode: "Valitse seuraavista: \"Kadonneessa tarkennuksessa\" - arvo päivitetään, kun syöttökenttä menettää tarkennuksen; \"Kirjoitettaessa\" - arvo päivitetään reaaliajassa, kun käyttäjät kirjoittavat. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Oletusarvoisesti menetetty kohdistus\").",
       url: "Voit käyttää mitä tahansa verkkopalvelua tietolähteenä monivalintakysymyksissä. Voit täyttää valinta-arvot antamalla tiedot tarjoavan palvelun URL-osoitteen.",
       searchMode: "Vertailutoiminto, jota käytetään avattavan luettelon suodattamiseen.",
       textWrapEnabled: "Valintavaihtoehtojen pitkät tekstit luovat automaattisesti rivinvaihdot, jotka mahtuvat avattavaan valikkoon. Poista valinta, jos haluat leikata tekstit.",
       effectiveColSpan: "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa."
+    },
+    surveyvalidator: {
+      expression: "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena"
     },
     signaturepad: {
       signatureWidth: "Määrittää näytettävän allekirjoitusalueen ja tuloksena olevan kuvan leveyden.",
@@ -3133,3 +3134,6 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Käynnistää vahvistuskehotteen ennen rivin poistamista."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Laajentaa tieto-osan automaattisesti, kun matriisiin lisätään uusi rivi."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Laajenna uuden rivin tiedot automaattisesti"
+// paneldynamic.displayMode: "Entry display mode" => "Sisääntulon näyttötila"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Lisää tilaa tai marginaalia paneelin sisällön ja paneeliruudun vasemman reunan väliin."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena"

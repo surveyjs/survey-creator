@@ -321,6 +321,7 @@ var italianTranslation = {
       name: "Nome del pannello",
       title: "Titolo del panel",
       description: "Descrizione del pannello",
+      displayMode: "Modalità di visualizzazione delle voci",
       visibleIf: "Rendi visibile il pannello se",
       requiredIf: "Rendere il pannello richiesto se",
       page: "Sposta il pannello nella pagina",
@@ -1423,7 +1424,7 @@ var italianTranslation = {
       templateErrorLocation: "Imposta la posizione di un messaggio di errore in relazione a una domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"In alto\" per impostazione predefinita).",
       errorLocation: "Imposta la posizione di un messaggio di errore in relazione a tutte le domande all'interno del pannello. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine.",
       page: "Riposiziona il pannello alla fine di una pagina selezionata.",
-      innerIndent: "Aggiunge spazio o margine tra il contenuto del pannello e il bordo sinistro del riquadro del pannello.",
+      indent: "Aggiunge spazio o margine tra il contenuto del pannello e il bordo sinistro della casella del pannello.",
       startWithNewLine: "Deselezionare questa opzione per visualizzare il pannello in una riga con la domanda o il pannello precedente. L'impostazione non si applica se il pannello è il primo elemento del modulo.",
       state: "Scegli tra: \"Espanso\" - il pannello viene visualizzato per intero e può essere compresso; \"Compresso\" - il pannello visualizza solo il titolo e la descrizione e può essere espanso; \"Bloccato\": il pannello viene visualizzato per intero e non può essere compresso.",
       width: "Imposta la larghezza del pannello in proporzione agli altri elementi di rilievo nella stessa linea. Accetta valori CSS (px, %, in, pt, ecc.).",
@@ -1462,14 +1463,14 @@ var italianTranslation = {
       errorLocation: "Imposta la posizione di un messaggio di errore in relazione alla domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita).",
       indent: "Aggiunge uno spazio o un margine tra il contenuto della domanda e il bordo sinistro della casella della domanda.",
       width: "Imposta la larghezza della domanda in proporzione agli altri elementi del sondaggio nella stessa riga. Accetta valori CSS (px, %, in, pt, ecc.).",
-      surveyvalidator: {
-        expression: "Usa l'icona della bacchetta magica per impostare una regola di convalida per la domanda."
-      },
       textUpdateMode: "Scegli tra: \"In caso di perdita di messa a fuoco\" - il valore viene aggiornato quando il campo di immissione perde lo stato attivo; \"Durante la digitazione\": il valore viene aggiornato in tempo reale, mentre gli utenti digitano. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In caso di perdita di focus\" per impostazione predefinita).",
       url: "È possibile utilizzare qualsiasi servizio Web come origine dati per le domande a scelta multipla. Per popolare i valori di scelta, immettere l'URL del servizio che fornisce i dati.",
       searchMode: "Operazione di confronto utilizzata per filtrare l'elenco a discesa.",
       textWrapEnabled: "I testi lunghi nelle opzioni di scelta genereranno automaticamente interruzioni di riga per adattarsi al menu a discesa. Deselezionare questa opzione se si desidera che i testi vengano ritagliati.",
       effectiveColSpan: "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia."
+    },
+    surveyvalidator: {
+      expression: "Usa l'icona della bacchetta magica per definire quando il valore della domanda è considerato valido."
     },
     signaturepad: {
       signatureWidth: "Imposta la larghezza dell'area della firma visualizzata e dell'immagine risultante.",
@@ -2920,3 +2921,6 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Attiva una richiesta di conferma prima di rimuovere una riga."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Espande automaticamente la sezione dei dettagli quando viene aggiunta una nuova riga alla matrice."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Espansione automatica dei dettagli delle nuove righe"
+// paneldynamic.displayMode: "Entry display mode" => "Modalità di visualizzazione delle voci"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Aggiunge spazio o margine tra il contenuto del pannello e il bordo sinistro della casella del pannello."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Usa l'icona della bacchetta magica per definire quando il valore della domanda è considerato valido."

@@ -321,6 +321,7 @@ export var nbStrings = {
       name: "Navn på panel",
       title: "Panelets tittel",
       description: "Beskrivelse av panelet",
+      displayMode: "Inngangsvisningsmodus",
       visibleIf: "Gjør panelet synlig hvis",
       requiredIf: "Gjør panelet nødvendig hvis",
       page: "Flytte panelet til siden",
@@ -1423,7 +1424,7 @@ export var nbStrings = {
       templateErrorLocation: "Angir plasseringen av en feilmelding i forhold til et spørsmål med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå (\"Topp\" som standard).",
       errorLocation: "Angir plasseringen av en feilmelding i forhold til alle spørsmålene i panelet. Alternativet «Arv» bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå.",
       page: "Flytter panelet til slutten av en merket side.",
-      innerIndent: "Legger til mellomrom eller marg mellom panelinnholdet og venstre kant på panelboksen.",
+      indent: "Legger til mellomrom eller marg mellom panelinnholdet og den venstre kanten av panelboksen.",
       startWithNewLine: "Fjern merket for å vise panelet på én linje med forrige spørsmål eller panel. Innstillingen gjelder ikke hvis panelet er det første elementet i skjemaet.",
       state: "Velg mellom: \"Utvidet\" - panelet vises i sin helhet og kan skjules; \"Kollapset\" - panelet viser bare tittelen og beskrivelsen og kan utvides; \"Låst\" - panelet vises i sin helhet og kan ikke skjules.",
       width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
@@ -1462,14 +1463,14 @@ export var nbStrings = {
       errorLocation: "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard).",
       indent: "Legger til mellomrom eller marg mellom spørsmålsinnholdet og venstre kantlinje i spørsmålsboksen.",
       width: "Angir bredden på spørsmålet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
-      surveyvalidator: {
-        expression: "Bruk tryllestavikonet til å angi en valideringsregel for spørsmålet."
-      },
       textUpdateMode: "Velg mellom: \"Ved tapt fokus\" - verdien oppdateres når inntastingsfeltet mister fokus; \"Mens du skriver\" - verdien oppdateres i sanntid, mens brukerne skriver. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Ved tapt fokus\" som standard).",
       url: "Du kan bruke en hvilken som helst webtjeneste som datakilde for flervalgsspørsmål. Hvis du vil fylle ut valgverdier, angir du URL-adressen til tjenesten som leverer dataene.",
       searchMode: "En sammenligningsoperasjon som brukes til å filtrere rullegardinlisten.",
       textWrapEnabled: "Lange tekster i valgalternativer genererer automatisk linjeskift slik at de passer inn i rullegardinmenyen. Fjern merket hvis du vil at tekstene skal klippes ut.",
       effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet."
+    },
+    surveyvalidator: {
+      expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig."
     },
     signaturepad: {
       signatureWidth: "Angir bredden på signaturområdet som vises, og det resulterende bildet.",
@@ -3161,3 +3162,6 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utløser en bekreftelsesmelding før du fjerner en rad."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Utvid nye raddetaljer automatisk"
+// paneldynamic.displayMode: "Entry display mode" => "Inngangsvisningsmodus"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Legger til mellomrom eller marg mellom panelinnholdet og den venstre kanten av panelboksen."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig."

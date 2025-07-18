@@ -321,6 +321,7 @@ export var huStrings = {
       name: "Panel neve",
       title: "Panel címe",
       description: "Panel leírása",
+      displayMode: "Belépési megjelenítési mód",
       visibleIf: "A panel láthatóvá tétele, ha",
       requiredIf: "Tegye szükségessé a panelt, ha",
       page: "A panel áthelyezése oldalra",
@@ -1423,7 +1424,7 @@ export var huStrings = {
       templateErrorLocation: "Beállítja egy érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást (\"Alapértelmezetten felül\") alkalmazza.",
       errorLocation: "Beállítja a hibaüzenet helyét a panelen belüli összes kérdéssel kapcsolatban. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza.",
       page: "A kijelölt oldal végére helyezi a panelt.",
-      innerIndent: "Térközt vagy margót ad a panel tartalma és a paneldoboz bal szegélye közé.",
+      indent: "Helyet vagy margót ad a panel tartalma és a paneldoboz bal szegélye közé.",
       startWithNewLine: "Törölje a jelölést, ha a panel egy sorban jelenik meg az előző kérdéssel vagy panellel. A beállítás nem érvényes, ha a panel az űrlap első eleme.",
       state: "Válasszon a következők közül: \"Kibontott\" - a panel teljes egészében megjelenik és összecsukható; \"Összecsukott\" - a panel csak a címet és a leírást jeleníti meg, és bővíthető; \"Zárolva\" - a panel teljes egészében megjelenik, és nem csukható össze.",
       width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
@@ -1462,14 +1463,14 @@ export var huStrings = {
       errorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint).",
       indent: "Térközt vagy margót ad a kérdés tartalma és a kérdésmező bal szegélye közé.",
       width: "A kérdés szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
-      surveyvalidator: {
-        expression: "A varázspálca ikonnal állítson be érvényességi szabályt a kérdéshez."
-      },
       textUpdateMode: "Válasszon a következők közül: \"Elveszett fókuszban\" - az érték frissül, amikor a beviteli mező elveszíti a fókuszt; \"Gépelés közben\" - az érték valós időben frissül, ahogy a felhasználók gépelnek. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint elveszett fókuszban\").",
       url: "Bármely webszolgáltatást használhat adatforrásként feleletválasztós kérdésekhez. A választási lehetőségek értékeinek feltöltéséhez adja meg az adatokat szolgáltató szolgáltatás URL-címét.",
       searchMode: "A legördülő lista szűrésére szolgáló összehasonlító művelet.",
       textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket.",
       effectiveColSpan: "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
+    },
+    surveyvalidator: {
+      expression: "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek."
     },
     signaturepad: {
       signatureWidth: "Beállítja a megjelenített aláírási terület szélességét és az eredményül kapott képet.",
@@ -3309,3 +3310,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Megerősítő kérést indít el a sor eltávolítása előtt."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Új sor részleteinek automatikus kibontása"
+// paneldynamic.displayMode: "Entry display mode" => "Belépési megjelenítési mód"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Helyet vagy margót ad a panel tartalma és a paneldoboz bal szegélye közé."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek."

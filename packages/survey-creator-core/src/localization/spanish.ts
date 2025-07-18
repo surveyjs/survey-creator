@@ -321,6 +321,7 @@ var spanishTranslation = {
       name: "Nombre del panel",
       title: "Título de la viñeta",
       description: "Descripción del panel",
+      displayMode: "Modo de visualización de entrada",
       visibleIf: "Haga que el panel sea visible si",
       requiredIf: "Haga que el panel sea obligatorio si",
       page: "Mover el panel a la página",
@@ -1423,7 +1424,7 @@ var spanishTranslation = {
       templateErrorLocation: "Establece la ubicación de un mensaje de error en relación con una pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Superior\" de forma predeterminada).",
       errorLocation: "Establece la ubicación de un mensaje de error en relación con todas las preguntas del panel. La opción \"Heredar\" aplica la configuración a nivel de página (si se establece) o a nivel de encuesta.",
       page: "Cambia la posición del panel al final de una página seleccionada.",
-      innerIndent: "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panel.",
+      indent: "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panel.",
       startWithNewLine: "Anule la selección para mostrar el panel en una línea con la pregunta o el panel anterior. La configuración no se aplica si el panel es el primer elemento del formulario.",
       state: "Elija entre: \"Expandido\": el panel se muestra en su totalidad y se puede contraer; \"Contraído\": el panel muestra solo el título y la descripción y se puede expandir; \"Bloqueado\": el panel se muestra en su totalidad y no se puede contraer.",
       width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
@@ -1462,14 +1463,14 @@ var spanishTranslation = {
       errorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
       indent: "Agrega espacio o margen entre el contenido de la pregunta y el borde izquierdo del cuadro de pregunta.",
       width: "Establece el ancho de la pregunta en proporción a otros elementos de la encuesta en la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
-      surveyvalidator: {
-        expression: "Utilice el icono de la varita mágica para establecer una regla de validación para la pregunta."
-      },
       textUpdateMode: "Elija entre: \"Al perder el foco\": el valor se actualiza cuando el campo de entrada pierde el foco; \"Mientras escribes\": el valor se actualiza en tiempo real, a medida que los usuarios escriben. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Al perder el foco\" de forma predeterminada).",
       url: "Puede utilizar cualquier servicio web como fuente de datos para preguntas de opción múltiple. Para rellenar los valores de opción, introduzca la dirección URL del servicio que proporciona los datos.",
       searchMode: "Operación de comparación que se utiliza para filtrar la lista desplegable.",
       textWrapEnabled: "Los textos largos en las opciones de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten.",
       effectiveColSpan: "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
+    },
+    surveyvalidator: {
+      expression: "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta."
     },
     signaturepad: {
       signatureWidth: "Define la anchura del área de firma mostrada y de la imagen resultante.",
@@ -2935,3 +2936,6 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Desencadena un mensaje de confirmación antes de quitar una fila."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expande automáticamente la sección de detalles cuando se agrega una nueva fila a la matriz."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandir automáticamente los detalles de una nueva fila"
+// paneldynamic.displayMode: "Entry display mode" => "Modo de visualización de entrada"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panel."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta."

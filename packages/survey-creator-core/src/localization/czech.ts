@@ -321,6 +321,7 @@ export var czStrings = {
       name: "Název panelu",
       title: "Název panelu",
       description: "Popis panelu",
+      displayMode: "Režim zobrazení vstupu",
       visibleIf: "Zviditelněte panel, pokud",
       requiredIf: "Zajistěte, aby byl panel povinný, pokud",
       page: "Přesunutí panelu na stránku",
@@ -1423,7 +1424,7 @@ export var czStrings = {
       templateErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou. Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
       errorLocation: "Nastaví umístění chybové zprávy ve vztahu ke všem otázkám v panelu. Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu.",
       page: "Přemístí panel na konec vybrané stránky.",
-      innerIndent: "Přidá mezeru nebo okraj mezi obsah panelu a levý okraj rámečku panelu.",
+      indent: "Přidá mezeru nebo okraj mezi obsah panelu a levý okraj rámečku panelu.",
       startWithNewLine: "Zrušte výběr, chcete-li panel zobrazit v jednom řádku s předchozí otázkou nebo panelem. Nastavení se nepoužije, pokud je panel prvním prvkem ve formuláři.",
       state: "Vyberte si z: \"Rozbalený\" - panel se zobrazí celý a lze jej sbalit; \"Sbaleno\" - panel zobrazuje pouze název a popis a lze jej rozbalit; \"Zamčeno\" - obraz je zobrazen celý a nelze jej sbalit.",
       width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
@@ -1462,14 +1463,14 @@ export var czStrings = {
       errorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
       indent: "Přidá mezeru nebo okraj mezi obsah otázky a levý okraj pole otázky.",
       width: "Nastaví šířku otázky v poměru k ostatním prvkům průzkumu ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
-      surveyvalidator: {
-        expression: "Pomocí ikony kouzelné hůlky nastavte ověřovací pravidlo pro otázku."
-      },
       textUpdateMode: "Vyberte si z těchto možností: \"Při ztrátě fokusu\" - hodnota se aktualizuje, když vstupní pole ztratí fokus; \"Při psaní\" - hodnota se aktualizuje v reálném čase, jak uživatelé píší. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Při ztrátě fokusu\").",
       url: "Jako zdroj dat pro otázky s výběrem odpovědí můžete použít libovolnou webovou službu. Pokud chcete naplnit hodnoty voleb, zadejte adresu URL služby, která data poskytuje.",
       searchMode: "Operace porovnání, která se používá k filtrování rozevíracího seznamu.",
       textWrapEnabled: "Dlouhé texty v možnostech volby automaticky vygenerují zalomení řádků, aby se vešly do rozbalovací nabídky. Odznačte, pokud chcete, aby se texty ořízly.",
       effectiveColSpan: "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky."
+    },
+    surveyvalidator: {
+      expression: "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou."
     },
     signaturepad: {
       signatureWidth: "Nastaví šířku zobrazené oblasti podpisu a výsledného obrazu.",
@@ -2736,3 +2737,6 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Spustí výzvu k potvrzení před odstraněním řádku."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automaticky rozbalí podrobnou část, když je do matice přidán nový řádek."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatické rozbalení podrobností o novém řádku"
+// paneldynamic.displayMode: "Entry display mode" => "Režim zobrazení vstupu"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Přidá mezeru nebo okraj mezi obsah panelu a levý okraj rámečku panelu."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou."
