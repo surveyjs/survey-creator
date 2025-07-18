@@ -321,6 +321,7 @@ export const roStrings = {
       name: "Numele panoului",
       title: "Titlul panoului",
       description: "Descrierea panoului",
+      displayMode: "Mod de afișare a intrării",
       visibleIf: "Fă panoul vizibil dacă",
       requiredIf: "Fă panoul obligatoriu dacă",
       page: "Mută panoul la pagina",
@@ -1423,7 +1424,7 @@ export const roStrings = {
       templateErrorLocation: "Setează locația unui mesaj de eroare în raport cu o întrebare cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       errorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
-      innerIndent: "Adaugă spațiu sau margine între conținutul panoului și marginea stângă a casetei panoului.",
+      indent: "Adaugă spațiu sau margine între conținutul panoului și marginea din stânga a casetei panoului.",
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
       state: "Alegeți dintre: „Extins” - panoul este afișat complet și poate fi colapsat; „Colapsat” - panoul afișează doar titlul și descrierea și poate fi extins; „Blocat” - panoul este afișat complet și nu poate fi colapsat.",
       width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
@@ -1462,14 +1463,14 @@ export const roStrings = {
       errorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Sus” implicit).",
       indent: "Adaugă spațiu sau margine între conținutul întrebării și marginea stângă a casetei întrebării.",
       width: "Setează lățimea întrebării în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
-      surveyvalidator: {
-        expression: "Utilizați pictograma bagheta magică pentru a seta o regulă de validare pentru întrebare."
-      },
       textUpdateMode: "Alegeți dintre: „La pierderea focalizării” - valoarea este actualizată când câmpul de intrare pierde focalizarea; „În timp ce se tastează” - valoarea este actualizată în timp real, pe măsură ce utilizatorii tastează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La pierderea focalizării” implicit).",
       url: "Puteți utiliza orice serviciu web ca sursă de date pentru întrebările cu multiple opțiuni de alegere. Pentru a popula valorile opțiunilor, introduceți URL-ul serviciului care furnizează datele.",
       searchMode: "O operație de comparație utilizată pentru a filtra lista derulantă.",
       textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate.",
       effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei."
+    },
+    surveyvalidator: {
+      expression: "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă."
     },
     signaturepad: {
       signatureWidth: "Setează lățimea zonei de semnătură afișate și a imaginii rezultate.",
@@ -2099,3 +2100,6 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Declanșează o solicitare de confirmare înainte de a elimina un rând."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Extinde automat secțiunea de detalii atunci când se adaugă un rând nou la matrice."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Extinderea automată a detaliilor noului rând"
+// paneldynamic.displayMode: "Entry display mode" => "Mod de afișare a intrării"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Adaugă spațiu sau margine între conținutul panoului și marginea din stânga a casetei panoului."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă."

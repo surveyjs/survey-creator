@@ -321,6 +321,7 @@ var portugueseTranslation = {
       name: "Nome do painel",
       title: "Título do painel",
       description: "Descrição do painel",
+      displayMode: "Modo de exibição de entrada",
       visibleIf: "Tornar o painel visível se",
       requiredIf: "Tornar o painel obrigatório se",
       page: "Mover o painel para a página",
@@ -1423,7 +1424,7 @@ var portugueseTranslation = {
       templateErrorLocation: "Define o local de uma mensagem de erro em relação a uma pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Superior\" por padrão).",
       errorLocation: "Define o local de uma mensagem de erro em relação a todas as perguntas no painel. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa.",
       page: "Reposiciona o painel no final de uma página selecionada.",
-      innerIndent: "Adiciona espaço ou margem entre o conteúdo do painel e a borda esquerda da caixa do painel.",
+      indent: "Adiciona espaço ou margem entre o conteúdo do painel e a borda esquerda da caixa do painel.",
       startWithNewLine: "Desmarque para exibir o painel em uma linha com a pergunta ou painel anterior. A configuração não se aplica se o painel for o primeiro elemento do formulário.",
       state: "Escolha entre: \"Expandido\" - o painel é exibido na íntegra e pode ser recolhido; \"Recolhido\" - o painel exibe apenas o título e a descrição e pode ser expandido; \"Bloqueado\" - o painel é exibido na íntegra e não pode ser recolhido.",
       width: "Define a largura do painel proporcionalmente a outros elementos de pesquisa na mesma linha. Aceita valores CSS (px, %, in, pt, etc.).",
@@ -1462,14 +1463,14 @@ var portugueseTranslation = {
       errorLocation: "Define o local de uma mensagem de erro em relação à pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão).",
       indent: "Adiciona espaço ou margem entre o conteúdo da pergunta e a borda esquerda da caixa de perguntas.",
       width: "Define a largura da pergunta proporcionalmente a outros elementos do questionário na mesma linha. Aceita valores CSS (px, %, in, pt, etc.).",
-      surveyvalidator: {
-        expression: "Use o ícone de varinha mágica para definir uma regra de validação para a pergunta."
-      },
       textUpdateMode: "Escolha entre: \"Em foco perdido\" - o valor é atualizado quando o campo de entrada perde o foco; \"Ao digitar\" - o valor é atualizado em tempo real, à medida que os usuários digitam. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Em foco perdido\" por padrão).",
       url: "Você pode usar qualquer serviço Web como uma fonte de dados para perguntas de múltipla escolha. Para preencher valores de escolha, insira a URL do serviço que fornece os dados.",
       searchMode: "Uma operação de comparação usada para filtrar a lista suspensa.",
       textWrapEnabled: "Textos longos nas opções de escolha gerarão automaticamente quebras de linha para caber no menu suspenso. Desmarque se quiser que os textos sejam recortados.",
       effectiveColSpan: "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
+    },
+    surveyvalidator: {
+      expression: "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido."
     },
     signaturepad: {
       signatureWidth: "Define a largura da área de assinatura exibida e a imagem resultante.",
@@ -2827,3 +2828,6 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Aciona um prompt de confirmação antes de remover uma linha."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expande automaticamente a seção de detalhes quando uma nova linha é adicionada à matriz."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandir automaticamente os detalhes da nova linha"
+// paneldynamic.displayMode: "Entry display mode" => "Modo de exibição de entrada"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Adiciona espaço ou margem entre o conteúdo do painel e a borda esquerda da caixa do painel."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido."

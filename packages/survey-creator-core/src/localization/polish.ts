@@ -321,6 +321,7 @@ var polishStrings = {
       name: "Nazwa panelu",
       title: "Tytuł panelu",
       description: "Opis panelu",
+      displayMode: "Podstawowy tryb wyświetlania",
       visibleIf: "Uwidocznij panel, jeśli",
       requiredIf: "Ustaw panel jako wymagany, jeśli",
       page: "Przenieś panel na stronę",
@@ -1423,7 +1424,7 @@ var polishStrings = {
       templateErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Góra\").",
       errorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do wszystkich pytań w panelu. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety.",
       page: "Przesuwa panel na koniec zaznaczonej strony.",
-      innerIndent: "Dodaje odstęp lub margines między zawartością panelu a lewą krawędzią ramki panelu.",
+      indent: "Dodaje odstęp lub margines między zawartością panelu a lewą krawędzią pola panelu.",
       startWithNewLine: "Usuń zaznaczenie, aby wyświetlić panel w jednym wierszu z poprzednim pytaniem lub panelem. To ustawienie nie ma zastosowania, jeśli panel jest pierwszym elementem formularza.",
       state: "Do wyboru: \"Rozwinięty\" - panel wyświetla się w całości i można go zwinąć; \"Zwinięty\" - panel wyświetla tylko tytuł i opis i można go rozwinąć; \"Zablokowany\" - panel jest wyświetlany w całości i nie można go zwinąć.",
       width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
@@ -1462,14 +1463,14 @@ var polishStrings = {
       errorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Góra\").",
       indent: "Dodaje spację lub margines między treścią pytania a lewą krawędzią pola pytania.",
       width: "Ustawia szerokość pytania proporcjonalnie do innych elementów ankiety w tym samym wierszu. Akceptuje wartości CSS (px, %, in, pt itp.).",
-      surveyvalidator: {
-        expression: "Użyj ikony magicznej różdżki, aby ustawić regułę sprawdzania poprawności dla pytania."
-      },
       textUpdateMode: "Do wyboru: \"W przypadku utraty fokusu\" - wartość jest aktualizowana, gdy pole wejściowe traci fokus; \"Podczas pisania\" - wartość jest aktualizowana w czasie rzeczywistym, w miarę pisania przez użytkowników. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Po utracie fokusu\").",
       url: "Możesz użyć dowolnej usługi internetowej jako źródła danych dla pytań wielokrotnego wyboru. Aby wypełnić wartości wyborów, wprowadź adres URL usługi udostępniającej dane.",
       searchMode: "Operacja porównania używana do filtrowania listy rozwijanej.",
       textWrapEnabled: "Długie teksty w opcjach wyboru automatycznie wygenerują podziały wierszy, aby zmieścić się w menu rozwijanym. Usuń zaznaczenie, jeśli chcesz, aby teksty zostały przycięte.",
       effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
+    },
+    surveyvalidator: {
+      expression: "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową."
     },
     signaturepad: {
       signatureWidth: "Ustawia szerokość wyświetlanego obszaru podpisu i wynikowego obrazu.",
@@ -3424,3 +3425,6 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatycznie rozwija sekcję szczegółów po dodaniu nowego wiersza do macierzy."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatyczne rozwijanie szczegółów nowego wiersza"
+// paneldynamic.displayMode: "Entry display mode" => "Podstawowy tryb wyświetlania"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Dodaje odstęp lub margines między zawartością panelu a lewą krawędzią pola panelu."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową."

@@ -321,6 +321,7 @@ export var slStrings = {
       name: "Ime plošče",
       title: "Naslov plošče",
       description: "Opis plošče",
+      displayMode: "Način prikaza vnosa",
       visibleIf: "Naredi ploščo vidno, če",
       requiredIf: "Naredi ploščo obvezno, če",
       page: "Premakni ploščo na stran",
@@ -1423,7 +1424,7 @@ export var slStrings = {
       templateErrorLocation: "Določi lokacijo sporočila o napaki v zvezi z vprašanjem z neveljavnim vnosom. Izberite med: \"Na vrhu\" - sporočilo o napaki je postavljeno na vrh okvira vprašanja; \"Na dnu\" - sporočilo o napaki je postavljeno na dno okvira vprašanja. Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete.",
       errorLocation: "Določi lokacijo sporočila o napaki v zvezi z vsemi vprašanji znotraj panela. Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete.",
       page: "Premakne panel na konec izbrane strani.",
-      innerIndent: "Doda prostor ali rob med vsebino panela in levo mejo panela.",
+      indent: "Doda presledek ali rob med vsebino plošče in levo obrobo polja plošče.",
       startWithNewLine: "Odznači, da bo panel prikazan v eni vrstici s prejšnjim vprašanjem ali panelom. Nastavitev ne velja, če je panel prvi element v obrazcu.",
       state: "Izberite iz: \"Razširjeno\" - panel je prikazan v celoti in ga je mogoče zložiti; \"Zloženo\" - panel prikazuje samo naslov in opis ter ga je mogoče razširiti; \"Zaklenjeno\" - panel je prikazan v celoti in ga ni mogoče zložiti.",
       width: "Določi širino panela v razmerju z drugimi elementi ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
@@ -1462,14 +1463,14 @@ export var slStrings = {
       errorLocation: "Nastavi lokacijo sporočila o napaki v povezavi z vprašanjem z neveljavnim vhodom. Izberite med: \"Zgoraj\" - sporočilo o napaki je postavljeno na vrh vprašalnika; \"Spodaj\" - sporočilo o napaki je postavljeno na dno vprašalnika. Možnost \"Podedovano\" uporablja nastavitev na ravni ankete (\"Zgoraj\" privzeto).",
       indent: "Doda prostor ali rob med vsebino vprašanja in levim robom vprašalnika.",
       width: "Nastavi širino vprašanja glede na druge elemente ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
-      surveyvalidator: {
-        expression: "Uporabite ikono čarobne paličice za nastavitev pravila za preverjanje veljavnosti vprašanja."
-      },
       textUpdateMode: "Izberite med: \"Ob izgubi fokusa\" - vrednost se posodobi, ko vnosno polje izgubi fokus; \"Med tipkanjem\" - vrednost se posodablja v realnem času med tipkanjem uporabnikov. Možnost \"Podedovano\" uporablja nastavitev na ravni ankete (privzeto \"Ob izgubi fokusa\").",
       url: "Kot vir podatkov za vprašanja z več možnimi odgovori lahko uporabite katero koli spletno storitev. Za izpolnitev vrednosti izbire vnesite URL storitve, ki zagotavlja podatke.",
       searchMode: "Primerjalna operacija, ki se uporablja za filtriranje spustnega seznama.",
       textWrapEnabled: "Dolga besedila v možnostih izbire bodo samodejno prelomljena, da se prilegajo v spustni meni. Odznačite, če želite, da se besedila odrežejo.",
       effectiveColSpan: "Določa, koliko stolpcev to vprašanje zavzema v postavitvi mreže."
+    },
+    surveyvalidator: {
+      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno."
     },
     signaturepad: {
       signatureWidth: "Določa širino prikazanega območja podpisa in končne slike.",
@@ -1933,3 +1934,6 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Sproži potrditveni poziv pred odstranitvijo vrstice."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Samodejno razširi razdelek s podrobnostmi, ko je v matriko dodana nova vrstica."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Samodejna razširitev podrobnosti nove vrstice"
+// paneldynamic.displayMode: "Entry display mode" => "Način prikaza vnosa"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Doda presledek ali rob med vsebino plošče in levo obrobo polja plošče."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno."

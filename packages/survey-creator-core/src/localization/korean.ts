@@ -321,6 +321,7 @@ export var koreanStrings = {
       name: "패널 이름",
       title: "패널 제목",
       description: "패널 설명",
+      displayMode: "엔트리 디스플레이 모드",
       visibleIf: "다음과 같은 경우 패널을 표시합니다.",
       requiredIf: "다음과 같은 경우 패널을 필수로 만듭니다.",
       page: "패널을 페이지로 이동",
@@ -1423,7 +1424,7 @@ export var koreanStrings = {
       templateErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       errorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
-      innerIndent: "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다.",
+      indent: "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공간 또는 여백을 추가합니다.",
       startWithNewLine: "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다.",
       state: "다음 중에서 선택: \"확장\" - 패널이 전체적으로 표시되며 축소할 수 있습니다. \"축소됨\" - 패널에 제목과 설명만 표시되며 확장할 수 있습니다. \"잠김\" - 패널이 완전히 표시되며 축소할 수 없습니다.",
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
@@ -1462,14 +1463,14 @@ export var koreanStrings = {
       errorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       indent: "질문 콘텐츠와 질문 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다.",
       width: "같은 줄에 있는 다른 설문조사 요소에 비례하여 질문의 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
-      surveyvalidator: {
-        expression: "마술 지팡이 아이콘을 사용하여 질문에 대한 유효성 검사 규칙을 설정합니다."
-      },
       textUpdateMode: "다음 중에서 선택: \"초점을 잃을 때\" - 입력 필드가 초점을 잃을 때 값이 업데이트됩니다. \"While typing\" - 사용자가 입력할 때 값이 실시간으로 업데이트됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"초점 손실 시\")을 적용합니다.",
       url: "모든 웹 서비스를 객관식 질문의 데이터 소스로 사용할 수 있습니다. 선택 항목 값을 채우려면 데이터를 제공하는 서비스의 URL을 입력합니다.",
       searchMode: "드롭다운 목록을 필터링하는 데 사용되는 비교 작업입니다.",
       textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다.",
       effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
+    },
+    surveyvalidator: {
+      expression: "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다."
     },
     signaturepad: {
       signatureWidth: "표시된 서명 영역과 결과 이미지의 너비를 설정합니다.",
@@ -3363,3 +3364,6 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "행을 제거하기 전에 확인 프롬프트를 트리거합니다."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "새 행 세부 정보 자동 확장"
+// paneldynamic.displayMode: "Entry display mode" => "엔트리 디스플레이 모드"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공간 또는 여백을 추가합니다."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다."
