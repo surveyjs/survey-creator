@@ -53,7 +53,11 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
 
   renderCategories() {
     return this.toolbox.categories.map((category, index) => {
-      return <SurveyCreatorToolboxCategory category={category} toolbox={this.toolbox} key={"category" + index} ></SurveyCreatorToolboxCategory>;
+      return ReactElementFactory.Instance.createElement("svc-toolbox-category", {
+        category,
+        toolbox: this.toolbox,
+        key: "category" + index
+      });
     });
   }
   renderSearch() {
