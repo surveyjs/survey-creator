@@ -163,6 +163,18 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public renameItemValue(item: ItemValue, oldValue: any): void {
     const question = this.getItemValueQuestion(item, oldValue);
     if (!question) return;
+    if (question.isDescendantOf("matrixdropdownbase")) {
+      question.columns.forEach(column => {
+        const choices = column.choices;
+        if (Array.isArray(choices) && choices.length === 0) {
+          this.renamteItemValueCore(column.templateQuestion, item, oldValue);
+        }
+      });
+    } else {
+      this.renamteItemValueCore(question, item, oldValue);
+    }
+  }
+  private renamteItemValueCore(question: Question, item: ItemValue, oldValue: any): void {
     this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
     this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
   }
