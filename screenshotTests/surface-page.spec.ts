@@ -1,5 +1,5 @@
-import { test, expect } from "@playwright/test";
-import { url, setJSON } from "../helper";
+import { expect } from "@playwright/test";
+import { url, compareScreenshot, test, setJSON, setShowSidebar, setShowAddQuestionButton, setAllowEditSurveyTitle, changeToolboxSearchEnabled, changeToolboxScrolling, getTabbedMenuItemByText, changeToolboxLocation, setDirRTL, getToolboxItemByText, setExpandCollapseButtonVisibility, resetHoverToCreator, setShowToolbox, setAllowZoom } from "./helper";
 
 const title = "Page surface";
 
