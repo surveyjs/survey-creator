@@ -321,6 +321,7 @@ var frenchTranslation = {
       name: "Nom du panneau",
       title: "Titre du panneau",
       description: "Description du panneau",
+      displayMode: "Mode d’affichage d’entrée de gamme",
       visibleIf: "Rendre le panneau visible si",
       requiredIf: "Rendez le panneau requis si",
       page: "Déplacer le panneau vers la page",
@@ -1423,7 +1424,7 @@ var frenchTranslation = {
       templateErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à une question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Haut » par défaut).",
       errorLocation: "Définit l’emplacement d’un message d’erreur par rapport à toutes les questions du panneau. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête.",
       page: "Repositionne le panneau à la fin d’une page sélectionnée.",
-      innerIndent: "Ajoute un espace ou une marge entre le contenu du panneau et le bord gauche de la zone du panneau.",
+      indent: "Ajoute un espace ou une marge entre le contenu du panneau et la bordure gauche de la zone de panneau.",
       startWithNewLine: "Désélectionnez cette option pour afficher le panneau sur une seule ligne avec la question ou le panneau précédent. Ce paramètre ne s’applique pas si le panneau est le premier élément de votre formulaire.",
       state: "Choisissez parmi : « Développé » - le panneau s’affiche en entier et peut être réduit ; « Réduit » - le panneau n’affiche que le titre et la description et peut être développé ; « Verrouillé » - le panneau est affiché en entier et ne peut pas être réduit.",
       width: "Définit la largeur du panneau par rapport aux autres éléments de topographie de la même ligne. Accepte les valeurs CSS (px, %, in, pt, etc.).",
@@ -1462,14 +1463,14 @@ var frenchTranslation = {
       errorLocation: "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut).",
       indent: "Ajoute un espace ou une marge entre le contenu de la question et la bordure gauche de la zone de question.",
       width: "Définit la largeur de la question par rapport aux autres éléments de l’enquête sur la même ligne. Accepte les valeurs CSS (px, %, in, pt, etc.).",
-      surveyvalidator: {
-        expression: "Utilisez l’icône de la baguette magique pour définir une règle de validation pour la question."
-      },
       textUpdateMode: "Choisissez parmi : « En cas de perte de focus » - la valeur est mise à jour lorsque le champ de saisie perd le focus ; « Pendant la saisie » - la valeur est mise à jour en temps réel, au fur et à mesure que les utilisateurs tapent. L’option « Hériter » applique le paramètre au niveau de l’enquête (« En cas de perte de focus » par défaut).",
       url: "Vous pouvez utiliser n’importe quel service Web comme source de données pour les questions à choix multiples. Pour renseigner les valeurs de choix, entrez l’URL du service fournissant les données.",
       searchMode: "Opération de comparaison permettant de filtrer la liste déroulante.",
       textWrapEnabled: "Les longs textes dans les options de choix généreront automatiquement des sauts de ligne pour s’adapter au menu déroulant. Désélectionnez cette option si vous souhaitez que les textes soient coupés.",
       effectiveColSpan: "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille."
+    },
+    surveyvalidator: {
+      expression: "Utilisez l’icône de la baguette magique pour définir quand la valeur de la question est considérée comme valide."
     },
     signaturepad: {
       signatureWidth: "Définit la largeur de la zone de signature affichée et l’image résultante.",
@@ -3218,3 +3219,6 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Déclenche une invite de confirmation avant de supprimer une ligne."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Développer automatiquement les détails d’une nouvelle ligne"
+// paneldynamic.displayMode: "Entry display mode" => "Mode d’affichage d’entrée de gamme"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Ajoute un espace ou une marge entre le contenu du panneau et la bordure gauche de la zone de panneau."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Utilisez l’icône de la baguette magique pour définir quand la valeur de la question est considérée comme valide."

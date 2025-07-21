@@ -321,6 +321,7 @@ export var nlStrings = {
       name: "Naam van het paneel",
       title: "Titel van het paneel",
       description: "Beschrijving van het paneel",
+      displayMode: "Weergavemodus bij binnenkomst",
       visibleIf: "Maak het paneel zichtbaar als",
       requiredIf: "Maak het paneel vereist als",
       page: "Het deelvenster naar pagina verplaatsen",
@@ -1423,7 +1424,7 @@ export var nlStrings = {
       templateErrorLocation: "Hiermee stelt u de locatie in van een foutmelding met betrekking tot een vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       errorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
-      innerIndent: "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenstervak.",
+      indent: "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenster.",
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
       state: "Kies uit: \"Uitgevouwen\" - het paneel wordt volledig weergegeven en kan worden ingeklapt; \"Samengevouwen\" - het paneel toont alleen de titel en beschrijving en kan worden uitgevouwen; \"Vergrendeld\" - het paneel wordt volledig weergegeven en kan niet worden ingeklapt.",
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
@@ -1462,14 +1463,14 @@ export var nlStrings = {
       errorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
       indent: "Hiermee voegt u ruimte of marge toe tussen de inhoud van de vraag en de linkerrand van het vraagvak.",
       width: "Hiermee stelt u de breedte van de vraag in verhouding tot andere enquête-elementen in dezelfde regel. Accepteert CSS-waarden (px, %, in, pt, enz.).",
-      surveyvalidator: {
-        expression: "Gebruik het toverstafpictogram om een validatieregel voor de vraag in te stellen."
-      },
       textUpdateMode: "Kies uit: \"Bij verloren focus\" - de waarde wordt bijgewerkt wanneer het invoerveld de focus verliest; \"Tijdens het typen\" - de waarde wordt in realtime bijgewerkt, terwijl gebruikers typen. Met de optie \"Overerven\" wordt de instelling op enquêteniveau toegepast (\"Standaard bij verloren focus\").",
       url: "U kunt elke webservice gebruiken als gegevensbron voor meerkeuzevragen. Als u keuzewaarden wilt invullen, voert u de URL in van de service die de gegevens levert.",
       searchMode: "Een vergelijkingsbewerking die wordt gebruikt om de vervolgkeuzelijst te filteren.",
       textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt.",
       effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
+    },
+    surveyvalidator: {
+      expression: "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd."
     },
     signaturepad: {
       signatureWidth: "Hiermee stelt u de breedte van het weergegeven handtekeninggebied en de resulterende afbeelding in.",
@@ -3137,3 +3138,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Activeert een bevestigingsprompt voordat een rij wordt verwijderd."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Nieuwe rijdetails automatisch uitvouwen"
+// paneldynamic.displayMode: "Entry display mode" => "Weergavemodus bij binnenkomst"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenster."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd."

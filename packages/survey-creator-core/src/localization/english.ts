@@ -1,5 +1,5 @@
-// Uncomment the line below if you create a custom dictionary
-// import { editorLocalization } from "survey-creator-core";
+// Uncomment the line below if you create a custom dictionary:
+// import { setupLocale } from "survey-creator-core";
 
 export var enStrings = {
   // survey templates
@@ -16,7 +16,8 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "To use our library, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the latest version."
+    license: "To use our library, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the latest version.",
+    license2: "Your maintenance subscription expired on {date}. You can continue using <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>versions released up to that date</a>. To access the latest version, please <a href='https://surveyjs.io/manage#license-manager' target='_blank'>renew your subscription</a> and <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>setup a new license key</a>.",
   },
   // Creator tabs
   tabs: {
@@ -450,6 +451,7 @@ export var enStrings = {
       suffix: "Currency suffix"
     },
     isExclusive: "Clear others when selected",
+    isCommentRequired: "Require user to enter a comment",
     imageHeight: "Display area height",
     imageWidth: "Display area width",
     valueName: "Join identifier",
@@ -1471,14 +1473,14 @@ export var enStrings = {
       errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       indent: "Adds space or margin between the question content and the left border of the question box.",
       width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
-      surveyvalidator: {
-        expression: "Use the magic wand icon to set a validation rule for the question."
-      },
       textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
       url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
       searchMode: "A comparison operation used to filter the drop-down list.",
       textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
+    },
+    surveyvalidator: {
+      expression: "Use the magic wand icon to define when the question's value is considered valid."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
@@ -1881,7 +1883,10 @@ export var enStrings = {
   }
 };
 
-// Uncomment the line below if you create a custom dictionary.
-// Replace "en" with a custom locale code (for example, "fr" or "de"),
-// Replace `enStrings` with the name of the variable that contains the custom dictionary.
+/*
+  Uncomment the last line if you create a custom dictionary. This line calls the `setupLocale` method, which supports the following locale settings:
+
+  - `localeCode`: `string` - A short code used as a locale identifier (for example, "en", "de", "fr").
+  - `strings`: `object` - An object with custom translations.
+*/
 // setupLocale({ localeCode: "en", strings: enStrings });

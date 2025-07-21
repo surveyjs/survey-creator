@@ -3,13 +3,14 @@ import { expect, test as baseTest } from "@playwright/test";
 
 export const url = "http://127.0.0.1:8080/testCafe/testcafe";
 
-export async function compareScreenshot(page: Page, elementSelector: string | undefined, screenshotName: string, elementIndex = 0) {
-  await page.addStyleTag({
-    content: "textarea::-webkit-resizer { visibility: hidden !important; }"
-  });
+export async function compareScreenshot(page: Page, elementSelector: string | Locator | undefined, screenshotName: string, elementIndex = 0) {
+  let currentElement = elementSelector;
+  if (!!currentElement && typeof currentElement == "string") {
+    currentElement = page.locator(currentElement);
+  }
 
-  if (!!elementSelector) {
-    const element = page.locator(elementSelector).filter({ visible: true });
+  if (!!currentElement) {
+    const element = (<Locator>currentElement).filter({ visible: true });
     await expect.soft(element.nth(elementIndex)).toBeVisible();
     await expect.soft(element.nth(elementIndex)).toHaveScreenshot(screenshotName, {
       timeout: 10000
@@ -20,6 +21,7 @@ export async function compareScreenshot(page: Page, elementSelector: string | un
     });
   }
 }
+
 export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
   skipJSErrors: [false, { option: false }],
   page: async ({ page, skipJSErrors }, use) => {

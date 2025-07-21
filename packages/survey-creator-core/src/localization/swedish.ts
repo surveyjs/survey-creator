@@ -321,6 +321,7 @@ export let svStrings = {
       name: "Panelens namn",
       title: "Panelens titel",
       description: "Beskrivning av panelen",
+      displayMode: "Visningsläge för inmatning",
       visibleIf: "Gör panelen synlig om",
       requiredIf: "Gör panelen obligatorisk om",
       page: "Flytta panelen till sidan",
@@ -1423,7 +1424,7 @@ export let svStrings = {
       templateErrorLocation: "Anger platsen för ett felmeddelande i förhållande till en fråga med ogiltiga indata. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
       errorLocation: "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       page: "Flyttar panelen till slutet av en markerad sida.",
-      innerIndent: "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant.",
+      indent: "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant.",
       startWithNewLine: "Avmarkera om du vill visa panelen på en rad med föregående fråga eller panel. Inställningen gäller inte om panelen är det första elementet i formuläret.",
       state: "Välj mellan: \"Expanderad\" - panelen visas i sin helhet och kan fällas ihop; \"Komprimerad\" - panelen visar endast titel och beskrivning och kan expanderas; \"Låst\" - panelen visas i sin helhet och kan inte fällas ihop.",
       width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
@@ -1462,14 +1463,14 @@ export let svStrings = {
       errorLocation: "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard).",
       indent: "Lägger till utrymme eller marginal mellan frågeinnehållet och frågerutans vänstra kant.",
       width: "Anger frågans bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
-      surveyvalidator: {
-        expression: "Använd trollstavsikonen för att ställa in ett valideringsuttryck för frågan."
-      },
       textUpdateMode: "Välj mellan: \"Vid förlorat fokus\" - värdet uppdateras när inmatningsfältet tappar fokus; \"Medan du skriver\" - värdet uppdateras i realtid när användarna skriver. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Vid förlorat fokus\" som standard).",
       url: "Du kan använda valfri webbtjänst som datakälla för flervalsfrågor. Om du vill fylla i alternativvärden anger du URL:en för den tjänst som tillhandahåller data.",
       searchMode: "En jämförelseåtgärd som används för att filtrera listrutan.",
       textWrapEnabled: "Långa texter i valalternativ genererar automatiskt radbrytningar för att passa in i rullgardinsmenyn. Avmarkera om du vill att texterna ska klippas.",
       effectiveColSpan: "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten."
+    },
+    surveyvalidator: {
+      expression: "Använd trollstavsikonen för att definiera när frågans värde anses vara giltigt."
     },
     signaturepad: {
       signatureWidth: "Anger bredden på det visade signaturområdet och den resulterande bilden.",
@@ -3333,3 +3334,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utlöser en bekräftelseprompt innan en rad tas bort."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandera automatiskt information om ny rad"
+// paneldynamic.displayMode: "Entry display mode" => "Visningsläge för inmatning"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Använd trollstavsikonen för att definiera när frågans värde anses vara giltigt."

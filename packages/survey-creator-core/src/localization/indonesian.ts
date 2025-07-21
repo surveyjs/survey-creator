@@ -321,6 +321,7 @@ export var indonesianStrings = {
       name: "Nama panel",
       title: "Judul panel",
       description: "Deskripsi panel",
+      displayMode: "Mode tampilan entri",
       visibleIf: "Buat panel terlihat jika",
       requiredIf: "Buat panel diperlukan jika",
       page: "Memindahkan panel ke halaman",
@@ -1423,7 +1424,7 @@ export var indonesianStrings = {
       templateErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
       errorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan semua pertanyaan dalam panel. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       page: "Memposisikan ulang panel ke akhir halaman yang dipilih.",
-      innerIndent: "Menambahkan spasi atau margin antara konten panel dan batas kiri kotak panel.",
+      indent: "Menambahkan ruang atau margin antara konten panel dan batas kiri kotak panel.",
       startWithNewLine: "Batalkan pilihan untuk menampilkan panel dalam satu baris dengan pertanyaan atau panel sebelumnya. Pengaturan tidak berlaku jika panel adalah elemen pertama dalam formulir Anda.",
       state: "Pilih dari: \"Diperluas\" - panel ditampilkan secara penuh dan dapat diciutkan; \"Collapsed\" - panel hanya menampilkan judul dan deskripsi dan dapat diperluas; \"Terkunci\" - panel ditampilkan secara penuh dan tidak dapat diciutkan.",
       width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
@@ -1462,14 +1463,14 @@ export var indonesianStrings = {
       errorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default).",
       indent: "Menambahkan spasi atau margin antara konten pertanyaan dan batas kiri kotak pertanyaan.",
       width: "Mengatur lebar pertanyaan secara proporsional dengan elemen survei lain di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
-      surveyvalidator: {
-        expression: "Gunakan ikon tongkat ajaib untuk menetapkan aturan validasi untuk pertanyaan."
-      },
       textUpdateMode: "Pilih dari: \"On lost focus\" - nilai diperbarui ketika bidang input kehilangan fokus; \"Saat mengetik\" - nilainya diperbarui secara real-time, saat pengguna mengetik. Opsi \"Warisi\" menerapkan pengaturan tingkat survei (\"Pada fokus yang hilang\" secara default).",
       url: "Anda dapat menggunakan layanan web apa pun sebagai sumber data untuk pertanyaan pilihan ganda. Untuk mengisi nilai pilihan, masukkan URL layanan yang menyediakan data.",
       searchMode: "Operasi perbandingan yang digunakan untuk memfilter daftar turun bawah.",
       textWrapEnabled: "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong.",
       effectiveColSpan: "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
+    },
+    surveyvalidator: {
+      expression: "Gunakan ikon tongkat ajaib untuk menentukan kapan nilai pertanyaan dianggap valid."
     },
     signaturepad: {
       signatureWidth: "Mengatur lebar area tanda tangan yang ditampilkan dan gambar yang dihasilkan.",
@@ -3313,3 +3314,6 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Memicu perintah konfirmasi sebelum menghapus baris."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Secara otomatis memperluas bagian detail saat baris baru ditambahkan ke matriks."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Perluas detail baris baru secara otomatis"
+// paneldynamic.displayMode: "Entry display mode" => "Mode tampilan entri"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Menambahkan ruang atau margin antara konten panel dan batas kiri kotak panel."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Gunakan ikon tongkat ajaib untuk menentukan kapan nilai pertanyaan dianggap valid."

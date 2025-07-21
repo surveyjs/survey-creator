@@ -321,6 +321,7 @@ export var jaStrings = {
       name: "パネル名",
       title: "パネルタイトル",
       description: "パネルの説明",
+      displayMode: "エントリー表示モード",
       visibleIf: "パネルを表示するのは、次の場合です",
       requiredIf: "次の場合は、パネルを必須にします",
       page: "パネルをページに移動する",
@@ -1423,7 +1424,7 @@ export var jaStrings = {
       templateErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
       errorLocation: "パネル内のすべての質問に関連するエラーメッセージの位置を設定します。[継承] オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
       page: "パネルを選択したページの末尾に再配置します。",
-      innerIndent: "パネルの内容とパネルボックスの左の境界線の間にスペースまたは余白を追加します。",
+      indent: "パネルコンテンツとパネルボックスの左境界線の間にスペースまたは余白を追加します。",
       startWithNewLine: "選択を解除すると、前の質問またはパネルと 1 行でパネルが表示されます。パネルがフォームの最初の要素である場合、この設定は適用されません。",
       state: "次から選択します: 「展開」 - パネルは完全に表示され、折りたたむことができます。「折りたたまれた」 - パネルにはタイトルと説明のみが表示され、展開できます。「ロック」 - パネルは完全に表示され、折りたたむことはできません。",
       width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
@@ -1462,14 +1463,14 @@ export var jaStrings = {
       errorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。",
       indent: "質問の内容と質問ボックスの左の境界線の間にスペースまたは余白を追加します。",
       width: "同じ行内の他のアンケート要素に比例して質問の幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
-      surveyvalidator: {
-        expression: "魔法の杖アイコンを使用して、質問の検証ルールを設定します。"
-      },
       textUpdateMode: "次から選択します: \"On lost focus\" - 入力フィールドがフォーカスを失ったときに値が更新されます。「入力中」 - ユーザーが入力しているときに、値がリアルタイムで更新されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「フォーカスを失ったとき」)を適用します。",
       url: "任意の Web サービスを多肢選択式の質問のデータ ソースとして使用できます。選択肢の値を入力するには、データを提供するサービスの URL を入力します。",
       searchMode: "ドロップダウン リストをフィルター処理するために使用される比較演算。",
       textWrapEnabled: "選択肢オプションのテキスト(長い)は、ドロップダウンメニュー内に収まるように改行を自動的に生成します。テキストをクリップする場合は、選択を解除します。",
       effectiveColSpan: "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。"
+    },
+    surveyvalidator: {
+      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。"
     },
     signaturepad: {
       signatureWidth: "表示される署名領域と結果の画像の幅を設定します。",
@@ -3158,3 +3159,6 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "行を削除する前に確認プロンプトをトリガーします。"
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "新しい行の詳細を自動展開する"
+// paneldynamic.displayMode: "Entry display mode" => "エントリー表示モード"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "パネルコンテンツとパネルボックスの左境界線の間にスペースまたは余白を追加します。"
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。"

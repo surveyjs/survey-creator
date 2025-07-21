@@ -1,4 +1,4 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn, QuestionDropdownModel, EventBase } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn, QuestionDropdownModel, EventBase, JsonObjectProperty } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -379,7 +379,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     var itemValues = q[propName];
     if (!itemValues) return;
     var prop = Serializer.findProperty(q.getType(), propName);
-    if (!prop || prop.type !== "itemvalue[]") return;
+    if (!this.isItemValueProp(prop)) return;
     for (var i = 0; i < itemValues.length; i++) {
       var itemValue = itemValues[i];
       if (itemValue instanceof ItemValue) {
@@ -387,6 +387,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       }
     }
     this.AddElements(itemValues, res);
+  }
+  private isItemValueProp(prop: JsonObjectProperty): boolean {
+    return prop && ["itemvalue[]", "choiceitem[]", "checkboxitem[]"].indexOf(prop.type) > -1;
   }
   private AddElements(src: Array<any>, dest: Array<any>) {
     for (var i = 0; i < src.length; i++) {

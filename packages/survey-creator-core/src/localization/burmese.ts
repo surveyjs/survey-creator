@@ -321,6 +321,7 @@ export var mmStrings = {
       name: "ပန်းနယ်အမည်",
       title: "ပန်းနယ်ခေါင်းစဉ်",
       description: "ပန်းနယ်ဖော်ပြချက်",
+      // displayMode: "Entry display mode",
       visibleIf: "ပန်းနယ်ကိုမြင်သာစေပါ",
       requiredIf: "ပန်းနယ်လိုအပ်မှုအခြေအနေ",
       page: "ပန်းနယ်ကိုစာမျက်နှာသို့ရွှေ့ပါ",
@@ -1418,12 +1419,12 @@ export var mmStrings = {
       visibleIf: "Panel မြင်သာမှုကိုသတ်မှတ်သည့်အခြေအနေစည်းကမ်းကို Magic Wand နိုင်ငံကိစ္စပုံစံကိုအသုံးပြုပါ",
       enableIf: "Panel ကို Read-only mode မဟုတ်စေရန်အခြေအနေစည်းကမ်းကို Magic Wand နိုင်ငံကိစ္စပုံစံကိုအသုံးပြုပါ",
       requiredIf: "Nested မေးခွန်းများတွင်ဖြေဆိုမှုမရှိပါက စစ်တမ်းတင်သွင်းမှုကိုတားဆီးရန်အခြေအနေစည်းကမ်းကို Magic Wand နိုင်ငံကိစ္စပုံစံကိုအသုံးပြုပါ",
-      // templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      // templateQuestionTitleLocation: "Applies to all questions within this dynamic panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       // templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       templateErrorLocation: "မမှန်သောအဝင်ရှိသောမေးခွန်းနှင့်ဆက်စပ်သော အမှားစာသားတည်နေရာကို သတ်မှတ်ပါ။",
       errorLocation: "Panel အတွင်းမေးခွန်းများနှင့်ဆက်စပ်သော အမှားစာသားတည်နေရာကို သတ်မှတ်ပါ။",
       page: "ရွေးချယ်ထားသောစာမျက်နှာ၏ အဆုံးသို့ Panel ကိုပြောင်းသွားပါ",
-      innerIndent: "Panel content နှင့် Panel box ဘောင်ဘေးကြားတွင် Margin ထည့်ပါ",
+      // indent: "Adds space or margin between the panel content and the left border of the panel box.",
       startWithNewLine: "Panel ကိုတစ်လိုင်းတည်းတွင် ဖော်ပြရန် unselect လုပ်ပါ",
       state: "\"Expanded\" - Panel ကိုအပြည့်အဝပြပြီး ချုံ့နိုင်သည်၊ \"Collapsed\" - Panel ကို ခေါင်းစဉ်နှင့် ဖော်ပြချက်သာပြပြီး ချဲ့နိုင်သည်၊ \"Locked\" - Panel ကိုအပြည့်အဝပြပြီး ချုံ့လို့မရပါ",
       width: "Panel ၏အကျယ်ကို CSS တန်ဖိုး (px, %, in, pt, စသည်ဖြင့်) အသုံးပြု၍ သတ်မှတ်ပါ",
@@ -1434,9 +1435,9 @@ export var mmStrings = {
       titleLocation: "ဒီ Panel အတွင်းရှိမေးခွန်းအားလုံးအတွက် title alignment ကိုအလိုအလျောက် သက်ဆိုင်သည်။",
       descriptionLocation: "Page-level သို့မဟုတ် Survey-level သတ်မှတ်ချက်ကို သက်ဆိုင်သည်",
       newPanelPosition: "အသစ်ထည့်သွင်းထားသော panel ၏တည်နေရာကို သတ်မှတ်ပါ",
-      // copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
+      // copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "အသုံးပြုသူကို တစ်ခုချင်း panel တွင် unique ဖြေဆိုမှုပေးရန် ပြုလုပ်ရန် question name ကိုဖော်ပြပါ",
-      // confirmDelete: "Triggers a confirmation prompt before removing a panel."
+      // confirmDelete: "Triggers a confirmation prompt before removing an entry."
     },
     matrixdynamic: {
       // confirmDelete: "Triggers a confirmation prompt before removing a row.",
@@ -1462,14 +1463,14 @@ export var mmStrings = {
       errorLocation: "မေးခွန်းအမှားတည်နေရာကို သတ်မှတ်ပါ",
       indent: "မေးခွန်း content နှင့် box ဘောင်ဘေးကြား Margin ထည့်ပါ",
       width: "မေးခွန်း box ၏ အကျယ်ကို သတ်မှတ်ပါ",
-      surveyvalidator: {
-        expression: "မေးခွန်းအတွက် Validation စည်းမျဉ်းကို သတ်မှတ်ပါ"
-      },
       textUpdateMode: "\"On lost focus\" - input field focus ပြောင်းလဲသည့်အချိန်၊ \"While typing\" - အသုံးပြုသူရိုက်နေစဉ် Value ကို real-time update ပြုလုပ်ပါ",
       url: "Multi-choice မေးခွန်းများအတွက် Web service URL ကို သတ်မှတ်ပါ",
       searchMode: "Drop-down list ကို filter ပြုလုပ်ရန် Operation တစ်ခုကိုရွေးချယ်ပါ",
       textWrapEnabled: "Long text ကို drop-down menu အတွင်းမှ line break များဖြင့် ဖော်ပြပါ",
       // effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
+    },
+    surveyvalidator: {
+      // expression: "Use the magic wand icon to define when the question's value is considered valid."
     },
     signaturepad: {
       signatureWidth: "ထိုးထွင်းရယူထားသော ပုံရိပ်၏ အကျယ်ကို သတ်မှတ်ပါ",
@@ -2808,6 +2809,133 @@ setupLocale({ localeCode: "mm", strings: mmStrings });
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => undefined
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => undefined
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => undefined
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => undefined
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => undefined
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => undefined
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => undefined
+// slider.min: "The lowest number that users can select." => undefined
+// slider.max: "The highest number that users can select." => undefined
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => undefined
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => undefined
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => undefined
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => undefined
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => undefined
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => undefined
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => undefined
+// slider.allowSwap: "Allows users to move one thumb past the other." => undefined
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => undefined
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => undefined
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => undefined
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => undefined
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => undefined
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => undefined
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => undefined
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => undefined
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => undefined
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => undefined
+// pehelp.maxCommentLength: "For question comments only." => undefined
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => undefined
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => undefined
+// page.name: "A page ID that is not visible to respondents." => undefined
+// page.description: "Type a page subtitle." => undefined
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => undefined
+// page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => undefined
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => undefined
+// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => undefined
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => undefined
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => undefined
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => undefined
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => undefined
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => undefined
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => undefined
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => undefined
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => undefined
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => undefined
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => undefined
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => undefined
+// p.inputSize: "Input field width (in characters)" => undefined
+// qt.slider: "Slider" => undefined
+// ed.expandTooltip: "Expand" => undefined
+// ed.collapseTooltip: "Collapse" => undefined
+// ed.zoom100Tooltip: "Zoom to 100%" => undefined
+// ed.toolboxSearch: "Search" => undefined
+// ed.addLanguageTooltip: "Add Language" => undefined
+// panel.questionOrder: "Question order within the panel" => undefined
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => undefined
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => undefined
+// paneldynamic.displayMode: "Entry display mode" => undefined
+// paneldynamic.showNumber: "Number the panel" => undefined
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => undefined
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => undefined
+// question.showTitle: "Show the title and description" => undefined
+// question.showNumber: "Number this question" => undefined
+// survey.readOnly: "Make the survey read-only" => undefined
+// page.questionOrder: "Question order on the page" => undefined
+// pe.isExclusive: "Clear others when selected" => undefined
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => undefined
+// pe.size: "Input field width (in characters)" => undefined
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => undefined
+// pe.startPageTitlePlaceholder: "Start Page" => undefined
+// pe.allowCustomChoices: "Allow custom choices" => undefined
+// pe.singleInputTitleTemplate: "Input field title pattern" => undefined
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => undefined
+// pe.progressBarLocation: "Progress bar alignment" => undefined
+// slider.min: "Min value" => undefined
+// slider.max: "Max value" => undefined
+// slider.step: "Step value" => undefined
+// slider.showLabels: "Show scale labels" => undefined
+// slider.tooltipVisibilityPG: "Show tooltips" => undefined
+// slider.allowSwap: "Allow thumb crossing" => undefined
+// slider.labelCount: "Number of auto-generated labels" => undefined
+// slider.minValueExpression: "Min value expression" => undefined
+// slider.maxValueExpression: "Max value expression" => undefined
+// slider.autoGenerate: "Scale labels configuration" => undefined
+// slider.sliderType: "Slider type" => undefined
+// slider.minRangeLength: "Min range length" => undefined
+// slider.maxRangeLength: "Max range length" => undefined
+// slider.customLabels: "Custom labels" => undefined
+// slider.labelFormat: "Label format" => undefined
+// slider.tooltipFormat: "Tooltip format" => undefined
+// file.imageHeight: "Image height" => undefined
+// file.imageWidth: "Image width" => undefined
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => undefined
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => undefined
+// pe.previewMode: "Preview mode" => undefined
+// pe.gridLayoutEnabled: "Enable grid layout" => undefined
+// pe.gridLayoutColumns: "Grid columns" => undefined
+// pe.maskSettings: "Mask settings" => undefined
+// pe.detailErrorLocation: "Row details error message alignment" => undefined
+// tabs.sliderSettings: "Slider Settings" => undefined
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => undefined
+// sliderType.single: "Single-Value" => undefined
+// sliderType.range: "Range" => undefined
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => undefined
+// pv.allQuestions: "Show all questions" => undefined
+// pv.answeredQuestions: "Show answered questions only" => undefined
+// addRowButtonLocation.default: "Based on matrix layout" => undefined
+// showQuestionNumbers.recursive: "Recursive numbering" => undefined
+// rowOrder.initial: "Original" => undefined
+// questionOrder.initial: "Original" => undefined
+// progressBarLocation.topbottom: "Top and bottom" => undefined
+// progressBarLocation.aboveheader: "Above the header" => undefined
+// progressBarLocation.belowheader: "Below the header" => undefined
+// progressBarLocation.off: "Hidden" => undefined
+// ts.prevPage: "Previous" => undefined
+// ts.nextPage: "Next" => undefined
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => undefined
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => undefined
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => undefined
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this dynamic panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => undefined
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => undefined
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => undefined
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry." => undefined
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing an entry." => undefined
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => undefined
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => undefined
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => undefined
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => undefined
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => undefined
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => undefined
 // file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => undefined
 // file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => undefined
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => undefined

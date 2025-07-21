@@ -321,6 +321,7 @@ var germanTranslation = {
       name: "Name des Panels",
       title: "Titel des Panels",
       description: "Beschreibung des Panels",
+      displayMode: "Anzeigemodus für den Einstieg",
       visibleIf: "Panel sichtbar machen, wenn",
       requiredIf: "Panel erforderlich machen, wenn",
       page: "Panel auf die Seite verschieben",
@@ -1423,7 +1424,7 @@ var germanTranslation = {
       templateErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf eine Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       errorLocation: "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
       page: "Positioniert das Panel am Ende einer ausgewählten Seite.",
-      innerIndent: "Fügt Abstand oder Rand zwischen dem Inhalt des Panels und dem linken Rand des Panels hinzu.",
+      indent: "Fügt Platz oder Rand zwischen dem Bedienfeldinhalt und dem linken Rand des Bedienfelds hinzu.",
       startWithNewLine: "Deaktivieren Sie diese Option, um den Bereich in einer Zeile mit der vorherigen Frage oder dem vorherigen Bereich anzuzeigen. Die Einstellung gilt nicht, wenn der Bereich das erste Element in Ihrem Formular ist.",
       state: "Wählen Sie aus: \"Erweitert\" - das Panel wird vollständig angezeigt und kann eingeklappt werden; \"Reduziert\" - das Panel zeigt nur den Titel und die Beschreibung an und kann erweitert werden; \"Gesperrt\" - das Panel wird vollständig angezeigt und kann nicht eingeklappt werden.",
       width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
@@ -1462,14 +1463,14 @@ var germanTranslation = {
       errorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\").",
       indent: "Fügt Leerzeichen oder Ränder zwischen dem Inhalt der Frage und dem linken Rand des Fragefelds hinzu.",
       width: "Legt die Breite der Frage im Verhältnis zu anderen Umfrageelementen in derselben Zeile fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
-      surveyvalidator: {
-        expression: "Verwenden Sie das Zauberstabsymbol, um eine Validierungsregel für die Frage festzulegen."
-      },
       textUpdateMode: "Wählen Sie aus: \"Bei Fokusverlust\" - der Wert wird aktualisiert, wenn das Eingabefeld den Fokus verliert; \"Während der Eingabe\" - der Wert wird in Echtzeit aktualisiert, während Benutzer tippen. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (\"Standardmäßig bei verlorenem Fokus\").",
       url: "Sie können einen beliebigen Webdienst als Datenquelle für Multiple-Choice-Fragen verwenden. Um Auswahlwerte aufzufüllen, geben Sie die URL des Diensts ein, der die Daten bereitstellt.",
       searchMode: "Ein Vergleichsvorgang, der zum Filtern der Dropdownliste verwendet wird.",
       textWrapEnabled: "Lange Texte in Auswahloptionen generieren automatisch Zeilenumbrüche, die in das Dropdown-Menü passen. Deaktivieren Sie diese Option, wenn die Texte abgeschnitten werden sollen.",
       effectiveColSpan: "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt."
+    },
+    surveyvalidator: {
+      expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt."
     },
     signaturepad: {
       signatureWidth: "Legt die Breite des angezeigten Signaturbereichs und des resultierenden Bildes fest.",
@@ -2871,3 +2872,6 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Löst eine Bestätigungsaufforderung aus, bevor eine Zeile entfernt wird."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Neue Zeilendetails automatisch erweitern"
+// paneldynamic.displayMode: "Entry display mode" => "Anzeigemodus für den Einstieg"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Fügt Platz oder Rand zwischen dem Bedienfeldinhalt und dem linken Rand des Bedienfelds hinzu."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt."

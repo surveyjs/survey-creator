@@ -321,6 +321,7 @@ export var turkishStrings = {
       name: "Panel adı",
       title: "Panel başlığı",
       description: "Panel açıklaması",
+      displayMode: "Giriş görüntüleme modu",
       visibleIf: "Aşağıdaki durumlarda paneli görünür hale getirin",
       requiredIf: "Aşağıdaki durumlarda paneli gerekli hale getirin",
       page: "Paneli sayfaya taşıma",
@@ -1423,7 +1424,7 @@ export var turkishStrings = {
       templateErrorLocation: "Geçersiz girişi olan bir soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       errorLocation: "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       page: "Paneli seçili sayfanın sonuna yeniden konumlandırır.",
-      innerIndent: "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler.",
+      indent: "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler.",
       startWithNewLine: "Panelin önceki soru veya panelle aynı satırda görüntülenmesi için seçimi kaldırın. Panel formunuzdaki ilk öğeyse bu ayar uygulanmaz.",
       state: "Şunlar arasından seçim yapın: \"Genişletilmiş\" - panel tam olarak görüntülenir ve daraltılabilir; \"Daraltılmış\" - panel yalnızca başlığı ve açıklamayı görüntüler ve genişletilebilir; \"Kilitli\" - panel tam olarak görüntülenir ve daraltılamaz.",
       width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
@@ -1462,14 +1463,14 @@ export var turkishStrings = {
       errorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
       indent: "Soru içeriği ile soru kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler.",
       width: "Sorunun genişliğini, aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
-      surveyvalidator: {
-        expression: "Soru için bir doğrulama kuralı ayarlamak için sihirli değnek simgesini kullanın."
-      },
       textUpdateMode: "Şunlar arasından seçim yapın: \"Odak kaybolduğunda\" - giriş alanı odağı kaybettiğinde değer güncellenir; \"Yazarken\" - değer, kullanıcılar yazarken gerçek zamanlı olarak güncellenir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Odak kaybolduğunda\").",
       url: "Çoktan seçmeli sorular için herhangi bir web hizmetini veri kaynağı olarak kullanabilirsiniz. Seçim değerlerini doldurmak için, verileri sağlayan hizmetin URL'sini girin.",
       searchMode: "Açılan listeyi filtrelemek için kullanılan bir karşılaştırma işlemi.",
       textWrapEnabled: "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın.",
       effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
+    },
+    surveyvalidator: {
+      expression: "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın."
     },
     signaturepad: {
       signatureWidth: "Görüntülenen imza alanının ve elde edilen görüntünün genişliğini ayarlar.",
@@ -3154,3 +3155,6 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Bir satırı kaldırmadan önce bir onay istemini tetikler."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Yeni satır ayrıntılarını otomatik genişletme"
+// paneldynamic.displayMode: "Entry display mode" => "Giriş görüntüleme modu"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın."

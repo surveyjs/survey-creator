@@ -321,6 +321,7 @@ export var danishStrings = {
       name: "Panelets navn",
       title: "Panelets titel",
       description: "Beskrivelse af panelet",
+      displayMode: "Indtastningsvisningstilstand",
       visibleIf: "Gør panelet synligt, hvis",
       requiredIf: "Gør panelet påkrævet, hvis",
       page: "Flyt panelet til siden",
@@ -1423,7 +1424,7 @@ export var danishStrings = {
       templateErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til et spørgsmål med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
       errorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
       page: "Flytter panelet til slutningen af en markeret side.",
-      innerIndent: "Tilføjer mellemrum eller margen mellem panelindholdet og panelboksens venstre kant.",
+      indent: "Tilføjer plads eller margen mellem panelindholdet og panelboksens venstre kant.",
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
@@ -1462,14 +1463,14 @@ export var danishStrings = {
       errorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard).",
       indent: "Tilføjer mellemrum eller margen mellem spørgsmålsindholdet og spørgsmålsfeltets venstre kant.",
       width: "Angiver bredden af spørgsmålet i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
-      surveyvalidator: {
-        expression: "Brug tryllestavsikonet til at angive en valideringsregel for spørgsmålet."
-      },
       textUpdateMode: "Vælg mellem: \"Ved tabt fokus\" - værdien opdateres, når indtastningsfeltet mister fokus; \"Mens du skriver\" - værdien opdateres i realtid, da brugerne skriver. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved mistet fokus\" som standard).",
       url: "Du kan bruge enhver webtjeneste som datakilde til multiple choice-spørgsmål. Hvis du vil udfylde valgværdier, skal du angive URL-adressen på den tjeneste, der leverer dataene.",
       searchMode: "En sammenligningshandling, der bruges til at filtrere rullelisten.",
       textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes.",
       effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
+    },
+    surveyvalidator: {
+      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig."
     },
     signaturepad: {
       signatureWidth: "Indstiller bredden på det viste signaturområde og det resulterende billede.",
@@ -3343,3 +3344,6 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Udløser en bekræftelsesprompt, før en række fjernes."
 // matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Udvider automatisk detaljesektionen, når en ny række føjes til matrixen."
 // p.detailPanelShowOnAdding: "Auto-expand new row details" => "Udvid automatisk nye rækkedetaljer"
+// paneldynamic.displayMode: "Entry display mode" => "Indtastningsvisningstilstand"
+// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Tilføjer plads eller margen mellem panelindholdet og panelboksens venstre kant."
+// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig."
