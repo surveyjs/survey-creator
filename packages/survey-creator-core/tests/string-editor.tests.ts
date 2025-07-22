@@ -409,7 +409,7 @@ test("Maxlen and required", (): any => {
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
-  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  var target = { innerText: "t", focus: () => { }, setAttribute: () => { }, removeAttribute: () => { }, parentElement: { click: () => { } } };
   stringEditorSurveyTitle.onFocus({ target: target });
   target.innerText = "title";
   stringEditorSurveyTitle.onInput({ target: target });
@@ -435,7 +435,7 @@ test("Maxlen and EOL", (): any => {
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
-  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  var target = { innerText: "t", focus: () => { }, setAttribute: () => { }, removeAttribute: () => { }, parentElement: { click: () => { } } };
 
   stringEditorSurveyTitle.onFocus({ target: target });
   target.innerText = "\n";
