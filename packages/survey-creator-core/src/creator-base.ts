@@ -2701,6 +2701,9 @@ export class SurveyCreatorModel extends Base
 
     survey.onPopupVisibleChanged.add((_, options) => {
       if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+      if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase")) {
+        options.popup.setWidthByTarget = false;
+      }
     });
     return survey;
   }
