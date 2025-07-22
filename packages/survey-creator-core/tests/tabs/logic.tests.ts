@@ -2678,6 +2678,37 @@ test("Rename the name for matrix dropdown rows, bug#6910", () => {
   expect(matrix.rows[0].visibleIf).toEqual("{question1} = 1");
   expect(matrix.rows[1].enableIf).toEqual("{question1} = 2");
 });
+test("Rename the item value for matrix dropdown, bug#7039", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row1.col1} != 'item1'" },
+      { type: "text", name: "q2", visibleIf: "{matrix.row1.col2} != 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [
+          { name: "col1", cellType: "dropdown", choices: ["item1"] },
+          { name: "col2" }],
+        rows: ["row1", "row2"],
+        choices: ["item1"]
+      }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("matrix");
+  const item1 = matrix.columns[0].choices[0];
+  item1.value = "Item 1";
+  logic.renameItemValue(item1, "item1");
+  expect(q1.visibleIf).toEqual("{matrix.row1.col1} != 'Item 1'");
+  expect(q2.visibleIf).toEqual("{matrix.row1.col2} != 'item1'");
+  const item2 = matrix.choices[0];
+  item2.value = "Item 1!";
+  logic.renameItemValue(item2, "item1");
+  expect(q1.visibleIf).toEqual("{matrix.row1.col1} != 'Item 1'");
+  expect(q2.visibleIf).toEqual("{matrix.row1.col2} != 'Item 1!'");
+});
 test("Do not reacreate logic for updating expressions for every change", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
