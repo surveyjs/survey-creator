@@ -115,6 +115,12 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   private getAllTabs(creator: SurveyCreatorModel) {
     return creator.getAvailableTabs().map(t => ({ name: t.name, title: editorLocalization.getString("tabs." + t.name), iconName: t.iconName }));
   }
+
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    creator.toolbox.forceCompact = false;
+    creator.setShowSidebar(false);
+  }
+
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     let items = json["items"] || [];

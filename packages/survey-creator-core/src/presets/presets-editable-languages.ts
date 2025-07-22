@@ -1,7 +1,32 @@
-import { Helpers, ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Base, Serializer, ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 
+class LocalizationPreview extends Base {
+  public get locale(): string {
+    return this.getPropertyValueWithoutDefault("locale") || surveyLocalization.currentLocale;
+  }
+  public set locale(value: string) {
+    if (value === surveyLocalization.defaultLocale && !surveyLocalization.currentLocale) {
+      value = "";
+    }
+    this.setPropertyValue("locale", value);
+  }
+}
+
+Serializer.addClass("localizationPreview", [
+  {
+    name: "locale",
+    category: "general",
+    choices: () => {
+      return surveyLocalization.getLocales(true);
+    },
+    onGetValue: (obj: any): any => {
+      return obj.locale == surveyLocalization.defaultLocale ? null : obj.locale;
+    },
+  }], ()=> new LocalizationPreview(), "base");
+
+const locPreview = Serializer.createClass("localizationPreview");
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
@@ -69,6 +94,11 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     } else {
       question.selectAll();
     }
+  }
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.propertyGridSetObj(locPreview);
+    creator.toolbox.forceCompact = true;
+    creator.setShowSidebar(true);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.surveyUseEnglishNames) {

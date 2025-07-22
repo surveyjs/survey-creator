@@ -220,6 +220,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     super.onMatrixRowRemoving(model, creator, options);
   }
+
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    creator.toolbox.forceCompact = false;
+    creator.setShowSidebar(false);
+  }
+
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupPageQuestions(model, creatorSetup.creator);
   }

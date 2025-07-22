@@ -1,25 +1,28 @@
 import { createDropdownActionModel, Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer, IAction } from "survey-core";
-import { TabDesignerPluginBase, SurveyCreatorModel, listComponentCss, saveToFileHandler, TabControlModel, SidebarPageModel, PropertyGridViewModel, PropertyGridModel } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, listComponentCss, saveToFileHandler, TabControlModel, SidebarPageModel, PropertyGridViewModel, PropertyGridModel } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 
-export class TabPresetsPlugin extends TabDesignerPluginBase {
+export class TabPresetsPlugin implements ICreatorPlugin {
   public model: CreatorPresetEditorModel | undefined;
   public static iconName = "icon-settings";
   private currentPresetIndex = 0;
-  constructor(creator: SurveyCreatorModel) {
-    super(creator);
+  private currentValue;
+  private designerPlugin;
+
+  constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "presets", plugin: this, iconName: TabPresetsPlugin.iconName });
-    //this.propertyGridTab = this.creator.sidebar.addPage("propertyGridPresets", "svc-property-grid", this.propertyGridViewModel);
-    this.propertyGridTab = this.creator.sidebar.getPageById("propertyGrid");
+    this.designerPlugin = creator.getPlugin("designer");
   }
 
   public saveToFileHandler = saveToFileHandler;
 
   public activate(): void {
     this.model = new CreatorPresetEditorModel({}, this.creator);
+    if (this.currentValue) {
+      this.model.model.data = this.currentValue;
+    }
     this.model.model.currentPageNo = this.currentPresetIndex;
-    this.updateActivePage();
-    this.updateTabControl();
+    this.designerPlugin.activateSidebar();
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [
@@ -32,6 +35,7 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
     presets.forEach(p => {
       p.action = (item)=>{
         settingsAction.popupModel.contentComponentData.model.selectedItem = item;
+        settingsAction.popupModel.show();
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });
@@ -48,11 +52,16 @@ export class TabPresetsPlugin extends TabDesignerPluginBase {
       // onHide: () => { this.languageSelectorAction.enabled = true; },
       // onShow: () => { this.languageSelectorAction.enabled = false; }
     }, this.creator);
-
-    this.tabControlModel.bottomToolbar.setItems([settingsAction]);
+    const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
+    bottomActions.forEach(a => a.visible = false);
+    bottomActions.unshift(settingsAction);
   }
 
   public deactivate(): boolean {
+    this.currentValue = this.model?.model.data;
+    const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
+    bottomActions.forEach(a => a.visible = true);
+    bottomActions.splice(0, 1);
     this.currentPresetIndex = this.model?.model.currentPageNo || 0;
     if (this.model) {
       this.model.dispose();
