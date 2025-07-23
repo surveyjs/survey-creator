@@ -157,7 +157,7 @@ export class SidebarModel extends Base {
         },
         locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.hasVisiblePages, !this.visible, !this.hideSideBarVisibilityControlActions);
+          return notShortCircuitAnd(!this.creator.showOneCategoryInPropertyGrid, this.hasVisiblePages, !this.visible, !this.hideSideBarVisibilityControlActions);
         }),
         showTitle: false
       });
