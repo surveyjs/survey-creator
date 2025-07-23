@@ -99,7 +99,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     }
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.propertyGridSetObj(locPreview);
+    //this.propertyGridSetObj(locPreview);
     creator.toolbox.forceCompact = true;
     creator.setShowSidebar(true);
   }

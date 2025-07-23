@@ -32,6 +32,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private resultModelValue: SurveyModel;
   private navigationBarValue: NavigationBar;
   public locTitle: LocalizableString;
+  private applying = false;
   constructor(json?: ICreatorPresetData, private creatorValue?: SurveyCreatorModel) {
     super();
     editorLocalization.presetStrings = undefined;
@@ -124,6 +125,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       if (options.name === "languages_creator") {
         editorLocalization.currentLocale = options.value;
         editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
+      }
+      if (!this.applying) {
+        this.applying = true;
+        this.applyFromSurveyModel();
+        this.applying = false;
       }
     });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
