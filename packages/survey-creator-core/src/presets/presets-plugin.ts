@@ -8,10 +8,12 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   private currentPresetIndex = 0;
   private currentValue;
   private designerPlugin;
+  private toolboxCompact;
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "presets", plugin: this, iconName: TabPresetsPlugin.iconName });
     this.designerPlugin = creator.getPlugin("designer");
+    this.toolboxCompact = creator.toolbox.forceCompact;
   }
 
   public saveToFileHandler = saveToFileHandler;
@@ -58,6 +60,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   public deactivate(): boolean {
+    this.creator.toolbox.forceCompact = this.toolboxCompact;
     this.currentValue = this.model?.model.data;
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = true);

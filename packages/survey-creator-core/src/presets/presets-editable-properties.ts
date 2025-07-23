@@ -331,6 +331,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
 
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.propertyGridSetObj(this.currentProperties?.getObj());
     creator.toolbox.forceCompact = true;
     creator.setShowSidebar(true);
   }

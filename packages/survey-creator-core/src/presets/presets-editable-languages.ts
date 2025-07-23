@@ -3,6 +3,9 @@ import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-
 import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 
 class LocalizationPreview extends Base {
+  public getType(): string {
+    return "localizationpreview";
+  }
   public get locale(): string {
     return this.getPropertyValueWithoutDefault("locale") || surveyLocalization.currentLocale;
   }
@@ -14,7 +17,7 @@ class LocalizationPreview extends Base {
   }
 }
 
-Serializer.addClass("localizationPreview", [
+Serializer.addClass("localizationpreview", [
   {
     name: "locale",
     category: "general",
@@ -26,7 +29,7 @@ Serializer.addClass("localizationPreview", [
     },
   }], ()=> new LocalizationPreview(), "base");
 
-const locPreview = Serializer.createClass("localizationPreview");
+const locPreview = Serializer.createClass("localizationpreview");
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {

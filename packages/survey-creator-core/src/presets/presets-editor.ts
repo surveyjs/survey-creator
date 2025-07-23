@@ -110,6 +110,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
     this.updateJsonLocalizationStrings(editablePresets);
+    editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     model.onCurrentPageChanged.add((sender, options) => {
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     });
