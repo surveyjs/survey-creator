@@ -322,12 +322,13 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onFocus(event: any): void {
+    const text = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
     if (!this.focusedProgram) {
-      this.valueBeforeEdit = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
+      this.valueBeforeEdit = text;
       this.focusedProgram = false;
     }
     if (this.maxLength > 0) {
-      this.characterCounter.updateRemainingCharacterCounter(this.valueBeforeEdit, this.maxLength);
+      this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength);
     }
     if (this.creator) {
       this.creator.selectFromStringEditor = true;
@@ -371,7 +372,7 @@ export class StringEditorViewModelBase extends Base {
   }
   public onInput(event: any): void {
     if (this.maxLength > 0) {
-      var text: string = (event.target as any).innerText || "";
+      var text: string = this.getClearedText(event.target);
       this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength);
     }
     if (this.editAsText && !this.compostionInProgress) {

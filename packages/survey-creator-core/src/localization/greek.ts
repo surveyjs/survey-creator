@@ -1864,7 +1864,7 @@ export var grStrings = {
   }
 };
 
-setupLocale({ localeCode: "gr", strings: grStrings });
+setupLocale({ localeCode: "el", strings: grStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
