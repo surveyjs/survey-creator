@@ -35,6 +35,7 @@
   border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid var(--ctr-toolbox-border-color, var(--sjs-border-25, #d4d4d4ff));
   background: var(--ctr-toolbox-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   min-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
+  box-sizing: content-box;
 }
 
 .svc-toolbox {
