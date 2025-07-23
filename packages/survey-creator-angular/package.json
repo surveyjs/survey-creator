@@ -68,6 +68,9 @@
     "survey-creator-core": "../survey-creator-core/build",
     "standard-version": "^9.5.0"
   },
+  "overrides": {
+    "stylus": "github:stylus/stylus#0.54.8"
+  },
   "scripts": {
     "build": "ng build && node ./update-version.js",
     "build:example:prod": "ng build  angular-ui",
