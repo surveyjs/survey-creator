@@ -98,7 +98,7 @@ creator.locale = "customlocale";
 If any translation strings are missing in your custom locale, they will be taken from the default English locale. You can specify the `defaultLocale` property to use another locale as default:
 
 ```js
-editorLocalization.defaultLocale = "fr";
+surveyLocalization.defaultLocale = "fr";
 ```
 
 ## Localize Survey Contents
