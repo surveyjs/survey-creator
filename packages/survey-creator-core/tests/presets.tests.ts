@@ -77,15 +77,35 @@ test("set toolbox items", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
     toolbox: {
-      definition: [{ name: "text" }, { name: "dropdown" }, { name: "matrix" }],
+      definition: [{ name: "text" }, { name: "dropdown" }, { name: "radiogroup" }],
     }
   });
   preset.apply(creator);
   const tb = creator.toolbox;
   tb.flushUpdates();
-  expect(tb.categories).toHaveLength(1);
+  expect(tb.categories).toHaveLength(2);
   expect(tb.visibleActions).toHaveLength(3);
-  expect(tb.hasCategories).toBeFalsy();
+  expect(tb.hasCategories).toBeTruthy();
+});
+test("set toolbox items and categories", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [{ name: "text", iconName: "i-text" }, { name: "dropdown" }, { name: "matrix" }],
+      categories: [
+        { category: "general", items: ["text", "dropdown"] },
+        { category: "matrix", items: ["matrix"] }
+      ]
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  expect(tb.categories).toHaveLength(2);
+  expect(tb.visibleActions).toHaveLength(3);
+  expect(tb.hasCategories).toBeTruthy();
+  expect(tb.visibleActions[0].name).toBe("text");
+  expect(tb.visibleActions[0].iconName).toBe("i-text");
 });
 test("set toolbox definition", () => {
   const creator = new CreatorTester();
@@ -96,6 +116,9 @@ test("set toolbox definition", () => {
         { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
         { name: "dropdown" },
         { name: "matrix" },
+      ],
+      categories: [
+        { category: "general", items: ["text-number", "text-date", "dropdown", "matrix"] }
       ]
     }
   });
