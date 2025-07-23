@@ -11,7 +11,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   private toolboxCompact;
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", plugin: this, iconName: TabPresetsPlugin.iconName });
+    creator.addTab({ name: "presets", title: "Presets", plugin: this, iconName: TabPresetsPlugin.iconName });
     this.designerPlugin = creator.getPlugin("designer");
     this.toolboxCompact = creator.toolbox.forceCompact;
   }
