@@ -129,6 +129,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       if (!this.applying) {
         this.applying = true;
         this.applyFromSurveyModel();
+        editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
         this.applying = false;
       }
     });

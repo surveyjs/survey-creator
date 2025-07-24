@@ -2,7 +2,7 @@ import { Base, Serializer, ItemValue, QuestionCheckboxBase, QuestionCheckboxMode
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 
-class LocalizationPreview extends Base {
+class LocalizationPreview extends SurveyModel {
   public getType(): string {
     return "localizationpreview";
   }
@@ -27,9 +27,12 @@ Serializer.addClass("localizationpreview", [
     onGetValue: (obj: any): any => {
       return obj.locale == surveyLocalization.defaultLocale ? null : obj.locale;
     },
-  }], ()=> new LocalizationPreview(), "base");
-
+  }], ()=> new LocalizationPreview(), "survey");
 const locPreview = Serializer.createClass("localizationpreview");
+Serializer.getProperties("localizationpreview").forEach(p => {
+  const property = Serializer.getProperty("localizationpreview", p.name);
+  property.visible = p.name == "locale";
+});
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
@@ -99,7 +102,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     }
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    //this.propertyGridSetObj(locPreview);
+    this.propertyGridSetObj(locPreview);
     creator.toolbox.forceCompact = true;
     creator.setShowSidebar(true);
   }
