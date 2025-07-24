@@ -119,6 +119,30 @@ test("Preset edit, toolbox - change item", () => {
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].tooltip).toEqual("tooltip-test");
 });
 
+test("Preset edit, toolbox - reorder items", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  expect(categQuestion.visibleRows).toHaveLength(5);
+  const row = categQuestion.visibleRows[1];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  const value = itemsQuestion.value;
+  value.push(value[0]);
+  value.splice(0, 1);
+  itemsQuestion.value = value;
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.toolbox).toBeDefined();
+  const length = editor.json.toolbox.definition.length;
+  expect(editor.json.toolbox.definition.map(i => i.name)).toContain("text");
+  expect(editor.json.toolbox.definition.map(i => i.name)).not.toContain("comment");
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["comment", "multipletext", "text"]);
+});
+
 test("Preset edit, toolbox - change category", () => {
   const editor = new CreatorPresetEditorModel();
   expect(editor.applyFromSurveyModel()).toBeTruthy();
