@@ -69,7 +69,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.preset.setJson(val);
     this.modelValue = this.createModel();
     this.upldateResultJson();
-    this.applyFromSurveyModel(true);
+    this.applyFromSurveyModel();
   }
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
@@ -117,7 +117,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     model.onValueChanging.add((sender, options) => {
       if (options.name === "languages_creator") {
-        this.applyFromSurveyModel(true);
+        this.applyFromSurveyModel();
       }
     });
     model.onValueChanged.add((sender, options) => {
@@ -128,7 +128,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       }
       if (!this.applying) {
         this.applying = true;
-        this.applyFromSurveyModel();
+        this.applyFromSurveyModel(false);
         editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
         this.applying = false;
       }
@@ -240,8 +240,8 @@ preset.apply(creator);</div></pre></code></div>
   private upldateResultJson(): void {
     this.resultModelValue.getQuestionByName("json").value = this.jsonText;
   }
-  public applyFromSurveyModel(reCreateCretor: boolean = true): boolean {
-    if (!this.validateEditableModel(this.model)) return false;
+  public applyFromSurveyModel(validate = true): boolean {
+    if (validate && !this.validateEditableModel(this.model)) return false;
     // if (reCreateCretor) {
     //   const json = this.creator?.JSON || {};
     //   this.creatorValue = this.createCreator({});
