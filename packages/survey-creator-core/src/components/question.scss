@@ -947,6 +947,7 @@ svc-question,
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: content-box;
 }
 
 .svc-question__drag-element {

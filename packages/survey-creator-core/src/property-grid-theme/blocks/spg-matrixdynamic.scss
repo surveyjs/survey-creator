@@ -21,7 +21,7 @@
   padding-inline-end: var(--ctr-data-table-row-drag-area-padding-right, var(--sjs-spacing-x1));
   padding-bottom: var(--ctr-data-table-row-drag-area-padding-bottom, var(--sjs-spacing-x1));
   padding-inline-start: var(--ctr-data-table-row-drag-area-padding-left, var(--sjs-spacing-x1));
-
+  box-sizing: content-box;
   display: block;
   opacity: 0.5;
 
