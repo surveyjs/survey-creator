@@ -1915,7 +1915,7 @@ export class SurveyCreatorModel extends Base
     }
     return res;
   }
-  public getTabs(): Array<string> {
+  public getTabs(): Array<any> {
     const tabs = this.getAvailableTabs();
     const res = [];
     this.tabs.forEach(tab => {

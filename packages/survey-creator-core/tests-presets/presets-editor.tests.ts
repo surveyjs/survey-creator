@@ -244,7 +244,6 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   expect(question.visibleRows).toHaveLength(defaultItems.length);
   expect(question.value).toHaveLength(defaultItems.length);
   question.value = question.value.filter(r => ["boolean", "text", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const etalon: ICreatorPresetData = {
     toolbox: {
       definition: [{ name: "text" }, { name: "checkbox" }, { name: "boolean" }]
@@ -559,7 +558,6 @@ test("Change localization strings for tabs", () => {
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const item = itemsQuestion.visibleRows[0];
   item.getQuestionByName("title").value = "Designer edit";
-  editor.applyFromSurveyModel();
   let loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
@@ -610,7 +608,6 @@ test("Change localization strings for toolbox categories", () => {
   expect(row1.getQuestionByName("title").value).toBe("Choice Questions");
   expect(row1.getQuestionByName("title").isReadOnly).toBeFalsy();
   row1.getQuestionByName("title").value = "Choice Questions edit";
-  editor.applyFromSurveyModel();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.toolboxCategories.text).toBeFalsy();
