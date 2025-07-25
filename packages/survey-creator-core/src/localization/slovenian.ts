@@ -448,6 +448,7 @@ export var slStrings = {
       suffix: "Zaimek valute"
     },
     isExclusive: "Brisanje drugih, ko so izbrane",
+    isCommentRequired: "Zahteva, da uporabnik vnese komentar",
     imageHeight: "Višina območja za prikaz",
     imageWidth: "Širina območja za prikaz",
     valueName: "Povezovalni identifikator",
@@ -1057,6 +1058,7 @@ export var slStrings = {
     clearIfInvisible: {
       none: "Nikoli"
     },
+    radio: "Izbirni gumbi",
     inputType: {
       color: "Barva",
       date: "Datum",
@@ -1937,3 +1939,5 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Način prikaza vnosa"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Doda presledek ali rob med vsebino plošče in levo obrobo polja plošče."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno."
+// pe.isCommentRequired: "Require user to enter a comment" => "Zahteva, da uporabnik vnese komentar"
+// pv.radio: "Radio Buttons" => "Izbirni gumbi"

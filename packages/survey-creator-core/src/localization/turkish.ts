@@ -448,6 +448,7 @@ export var turkishStrings = {
       suffix: "Para birimi son eki"
     },
     isExclusive: "Seçildiğinde diğerlerini temizleme",
+    isCommentRequired: "Kullanıcının bir açıklama girmesini gerektir",
     imageHeight: "Resim yüksekliği",
     imageWidth: "Resim genişliği",
     valueName: "Değer adı",
@@ -1057,6 +1058,7 @@ export var turkishStrings = {
     clearIfInvisible: {
       none: "Hiç"
     },
+    radio: "Radyo Düğmeleri",
     inputType: {
       color: "Renk",
       date: "Tarih",
@@ -3158,3 +3160,5 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Giriş görüntüleme modu"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın."
+// pe.isCommentRequired: "Require user to enter a comment" => "Kullanıcının bir açıklama girmesini gerektir"
+// pv.radio: "Radio Buttons" => "Radyo Düğmeleri"

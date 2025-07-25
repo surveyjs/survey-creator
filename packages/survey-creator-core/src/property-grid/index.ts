@@ -1980,7 +1980,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     }
     if (prop.name === "cellType") {
       let text = editorLocalization.getString("qt." + value);
-      if (text) return text;
+      if (text && text !== value) return text;
     }
     if (value === null) return null;
     return editorLocalization.getPropertyValueInEditor(prop.name, value);

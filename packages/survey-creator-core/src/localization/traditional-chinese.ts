@@ -448,6 +448,7 @@ var traditionalChineseTranslation = {
       suffix: "貨幣後綴"
     },
     isExclusive: "選中時清除其他",
+    isCommentRequired: "要求使用者輸入註釋",
     imageHeight: "圖片高度",
     imageWidth: "圖片寬度",
     valueName: "Value name",
@@ -1057,6 +1058,7 @@ var traditionalChineseTranslation = {
     clearIfInvisible: {
       none: "從不"
     },
+    radio: "單選按鈕",
     inputType: {
       color: "顏色",
       date: "日期",
@@ -3433,3 +3435,5 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // paneldynamic.displayMode: "Entry display mode" => "進入顯示模式"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容與面板框的左邊框之間新增空間或邊界。"
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "使用魔術棒圖示來定義問題值何時被視為有效。"
+// pe.isCommentRequired: "Require user to enter a comment" => "要求使用者輸入註釋"
+// pv.radio: "Radio Buttons" => "單選按鈕"

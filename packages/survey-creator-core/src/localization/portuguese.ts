@@ -448,6 +448,7 @@ var portugueseTranslation = {
       suffix: "Sufixo de moeda"
     },
     isExclusive: "Limpar outros quando selecionado",
+    isCommentRequired: "Exigir que o usuário insira um comentário",
     imageHeight: "Altura da imagem",
     imageWidth: "Largura da imagem",
     valueName: "Nome do valor",
@@ -1057,6 +1058,7 @@ var portugueseTranslation = {
     clearIfInvisible: {
       none: "Nunca"
     },
+    radio: "Botões",
     inputType: {
       color: "Cor",
       date: "Data",
@@ -2831,3 +2833,5 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // paneldynamic.displayMode: "Entry display mode" => "Modo de exibição de entrada"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Adiciona espaço ou margem entre o conteúdo do painel e a borda esquerda da caixa do painel."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido."
+// pe.isCommentRequired: "Require user to enter a comment" => "Exigir que o usuário insira um comentário"
+// pv.radio: "Radio Buttons" => "Botões"

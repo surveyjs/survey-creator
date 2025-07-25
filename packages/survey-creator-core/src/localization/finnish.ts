@@ -448,6 +448,7 @@ export var fiStrings = {
       suffix: "Valuutan jälkiliite"
     },
     isExclusive: "Poista muut, kun se on valittuna",
+    isCommentRequired: "Vaadi käyttäjää kirjoittamaan kommentti",
     imageHeight: "Kuvan korkeus",
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
@@ -1057,6 +1058,7 @@ export var fiStrings = {
     clearIfInvisible: {
       none: "Ei koskaan"
     },
+    radio: "Valintanapit",
     inputType: {
       color: "Väri",
       date: "Päivämäärä",
@@ -3137,3 +3139,5 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Sisääntulon näyttötila"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Lisää tilaa tai marginaalia paneelin sisällön ja paneeliruudun vasemman reunan väliin."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena"
+// pe.isCommentRequired: "Require user to enter a comment" => "Vaadi käyttäjää kirjoittamaan kommentti"
+// pv.radio: "Radio Buttons" => "Valintanapit"

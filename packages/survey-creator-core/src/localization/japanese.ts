@@ -448,6 +448,7 @@ export var jaStrings = {
       suffix: "通貨の接尾辞"
     },
     isExclusive: "選択時に他のユーザーをクリアする",
+    isCommentRequired: "ユーザーにコメントの入力を要求する",
     imageHeight: "イメージの高さ",
     imageWidth: "イメージの幅",
     valueName: "値名",
@@ -1057,6 +1058,7 @@ export var jaStrings = {
     clearIfInvisible: {
       none: "一度もない"
     },
+    radio: "ラジオボタン",
     inputType: {
       color: "色",
       date: "日付",
@@ -3162,3 +3164,5 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // paneldynamic.displayMode: "Entry display mode" => "エントリー表示モード"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "パネルコンテンツとパネルボックスの左境界線の間にスペースまたは余白を追加します。"
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。"
+// pe.isCommentRequired: "Require user to enter a comment" => "ユーザーにコメントの入力を要求する"
+// pv.radio: "Radio Buttons" => "ラジオボタン"

@@ -448,6 +448,7 @@ export var skStrings = {
       suffix: "Prípona meny"
     },
     isExclusive: "Vymažte ostatné, keď sú vybraté",
+    isCommentRequired: "Vyžadovať od používateľa zadanie komentára",
     imageHeight: "Výška obrázka",
     imageWidth: "Šírka obrázka",
     valueName: "Názov hodnoty",
@@ -1057,6 +1058,7 @@ export var skStrings = {
     clearIfInvisible: {
       none: "Nikdy"
     },
+    radio: "Prepínače",
     inputType: {
       color: "Farba",
       date: "Dátum",
@@ -3116,3 +3118,5 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Režim vstupného zobrazenia"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Pridá medzeru alebo okraj medzi obsah panela a ľavý okraj rámčeka panela."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Pomocou ikony čarovného prútika definujte, kedy sa hodnota otázky považuje za platnú."
+// pe.isCommentRequired: "Require user to enter a comment" => "Vyžadovať od používateľa zadanie komentára"
+// pv.radio: "Radio Buttons" => "Prepínače"
