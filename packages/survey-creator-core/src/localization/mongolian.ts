@@ -448,6 +448,7 @@ export var mnStrings = {
       suffix: "Валютын suffix"
     },
     isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
+    isCommentRequired: "Хэрэглэгчээс тайлбар оруулахыг шаардах",
     imageHeight: "Зургийн өндөр",
     imageWidth: "Зургийн өргөн",
     valueName: "Хариултыг дараагийн JSON талбарт хадгалах",
@@ -1057,6 +1058,7 @@ export var mnStrings = {
     clearIfInvisible: {
       none: "Хэзээ ч"
     },
+    radio: "Радио товчлуур",
     inputType: {
       color: "Өнгө",
       date: "Огноо",
@@ -2818,3 +2820,5 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Оролт үзүүлэх режим"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Панелийн агуулга болон панелийн хайрцгийн зүүн хилийн хооронд зай эсвэл зай нэмнэ."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла."
+// pe.isCommentRequired: "Require user to enter a comment" => "Хэрэглэгчээс тайлбар оруулахыг шаардах"
+// pv.radio: "Radio Buttons" => "Радио товчлуур"

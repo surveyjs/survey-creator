@@ -448,6 +448,7 @@ export var htStrings = {
       suffix: "Sifiks lajan"
     },
     isExclusive: "Klè lòt moun lè yo chwazi yo",
+    isCommentRequired: "Mande pou itilizatè antre nan yon kòmantè",
     imageHeight: "Montre wotè zòn nan",
     imageWidth: "Montre lajè zòn nan",
     valueName: "Antre nan idantifyan",
@@ -1057,6 +1058,7 @@ export var htStrings = {
     clearIfInvisible: {
       none: "Pa janm"
     },
+    radio: "Bouton radyo",
     inputType: {
       color: "Koulè",
       date: "Dat",
@@ -1931,3 +1933,5 @@ setupLocale({ localeCode: "ht", strings: htStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Antre ekspozisyon mòd"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Ajoute espas oswa maj ant kontni an panèl ak fwontyè a gòch nan bwat panèl la."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab."
+// pe.isCommentRequired: "Require user to enter a comment" => "Mande pou itilizatè antre nan yon kòmantè"
+// pv.radio: "Radio Buttons" => "Bouton radyo"

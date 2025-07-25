@@ -1064,6 +1064,7 @@ export var enStrings = {
     clearIfInvisible: {
       none: "Never"
     },
+    radio: "Radio Buttons",
     inputType: {
       color: "Color",
       date: "Date",

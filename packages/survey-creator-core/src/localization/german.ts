@@ -448,6 +448,7 @@ var germanTranslation = {
       suffix: "Währungs-Suffix"
     },
     isExclusive: "Andere löschen, wenn ausgewählt",
+    isCommentRequired: "Benutzer zur Eingabe eines Kommentars auffordern",
     imageHeight: "Bildhöhe",
     imageWidth: "Bildbreite",
     valueName: "Name der Antwort",
@@ -1057,6 +1058,7 @@ var germanTranslation = {
     clearIfInvisible: {
       none: "Nie"
     },
+    radio: "Optionsfelder",
     inputType: {
       color: "Farbe",
       date: "Datum",
@@ -2875,3 +2877,5 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // paneldynamic.displayMode: "Entry display mode" => "Anzeigemodus für den Einstieg"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Fügt Platz oder Rand zwischen dem Bedienfeldinhalt und dem linken Rand des Bedienfelds hinzu."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt."
+// pe.isCommentRequired: "Require user to enter a comment" => "Benutzer zur Eingabe eines Kommentars auffordern"
+// pv.radio: "Radio Buttons" => "Optionsfelder"

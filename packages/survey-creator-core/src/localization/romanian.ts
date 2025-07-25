@@ -448,6 +448,7 @@ export const roStrings = {
       suffix: "Sufix valutar"
     },
     isExclusive: "Ștergeți altele când este selectat",
+    isCommentRequired: "Solicitați utilizatorului să introducă un comentariu",
     imageHeight: "Înălțimea zonei de afișare",
     imageWidth: "Lățimea zonei de afișare",
     valueName: "Identificator de îmbinare",
@@ -1057,6 +1058,7 @@ export const roStrings = {
     clearIfInvisible: {
       none: "Niciodată"
     },
+    radio: "Butoane radio",
     inputType: {
       color: "Culoare",
       date: "Dată",
@@ -2103,3 +2105,5 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Mod de afișare a intrării"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Adaugă spațiu sau margine între conținutul panoului și marginea din stânga a casetei panoului."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă."
+// pe.isCommentRequired: "Require user to enter a comment" => "Solicitați utilizatorului să introducă un comentariu"
+// pv.radio: "Radio Buttons" => "Butoane radio"

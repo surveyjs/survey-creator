@@ -448,6 +448,7 @@ export var hrStrings = {
       suffix: "Sufiks valute"
     },
     isExclusive: "Brisanje drugih kada je odabrano",
+    isCommentRequired: "Zahtijevanje od korisnika da unese komentar",
     imageHeight: "Visina slike",
     imageWidth: "Širina slike",
     valueName: "Naziv vrijednosti",
@@ -1057,6 +1058,7 @@ export var hrStrings = {
     clearIfInvisible: {
       none: "Nikada"
     },
+    radio: "Radio tipke",
     inputType: {
       color: "Boja",
       date: "Datum",
@@ -3157,3 +3159,5 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Način prikaza unosa"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Dodaje razmak ili marginu između sadržaja ploče i lijevog ruba okvira prozora."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom."
+// pe.isCommentRequired: "Require user to enter a comment" => "Zahtijevanje od korisnika da unese komentar"
+// pv.radio: "Radio Buttons" => "Radio tipke"

@@ -448,6 +448,7 @@ export var arStrings = {
       suffix: "لاحقة العملة"
     },
     isExclusive: "مسح الآخرين عند تحديده",
+    isCommentRequired: "مطالبة المستخدم بإدخال تعليق",
     imageHeight: "طول الصورة",
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
@@ -1057,6 +1058,7 @@ export var arStrings = {
     clearIfInvisible: {
       none: "أبدا"
     },
+    radio: "ازرار",
     inputType: {
       color: "لون",
       date: "تاريخ",
@@ -3077,3 +3079,5 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // paneldynamic.displayMode: "Entry display mode" => "وضع عرض الدخول"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "يضيف مسافة أو هامشا بين محتوى اللوحة والحد الأيسر لمربع اللوحة."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة."
+// pe.isCommentRequired: "Require user to enter a comment" => "مطالبة المستخدم بإدخال تعليق"
+// pv.radio: "Radio Buttons" => "ازرار"

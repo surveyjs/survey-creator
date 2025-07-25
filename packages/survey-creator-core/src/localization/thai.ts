@@ -448,6 +448,7 @@ export const thStrings = {
       suffix: "คำต่อท้ายสกุลเงิน"
     },
     isExclusive: "ล้างรายการอื่นเมื่อเลือก",
+    isCommentRequired: "กําหนดให้ผู้ใช้ป้อนความคิดเห็น",
     imageHeight: "ความสูงของพื้นที่แสดงผล",
     imageWidth: "ความกว้างของพื้นที่แสดงผล",
     valueName: "ตัวระบุที่เชื่อมต่อ",
@@ -1057,6 +1058,7 @@ export const thStrings = {
     clearIfInvisible: {
       none: "ไม่เคย"
     },
+    radio: "ปุ่มตัวเลือก",
     inputType: {
       color: "สี",
       date: "วันที่",
@@ -2103,3 +2105,5 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // paneldynamic.displayMode: "Entry display mode" => "โหมดแสดงรายการ"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "เพิ่มช่องว่างหรือระยะขอบระหว่างเนื้อหาของแผงและเส้นขอบด้านซ้ายของกล่องแผง"
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด"
+// pe.isCommentRequired: "Require user to enter a comment" => "กําหนดให้ผู้ใช้ป้อนความคิดเห็น"
+// pv.radio: "Radio Buttons" => "ปุ่มตัวเลือก"

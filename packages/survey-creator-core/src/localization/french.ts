@@ -448,6 +448,7 @@ var frenchTranslation = {
       suffix: "Suffixe de devise"
     },
     isExclusive: "Effacer les autres lorsque vous êtes sélectionné",
+    isCommentRequired: "Demander à l’utilisateur de saisir un commentaire",
     imageHeight: "Hauteur de l'image",
     imageWidth: "Largeur de l'image",
     valueName: "Variable de stockage",
@@ -1057,6 +1058,7 @@ var frenchTranslation = {
     clearIfInvisible: {
       none: "Jamais"
     },
+    radio: "Boutons radio",
     inputType: {
       color: "Couleur",
       date: "Date",
@@ -3222,3 +3224,5 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // paneldynamic.displayMode: "Entry display mode" => "Mode d’affichage d’entrée de gamme"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Ajoute un espace ou une marge entre le contenu du panneau et la bordure gauche de la zone de panneau."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Utilisez l’icône de la baguette magique pour définir quand la valeur de la question est considérée comme valide."
+// pe.isCommentRequired: "Require user to enter a comment" => "Demander à l’utilisateur de saisir un commentaire"
+// pv.radio: "Radio Buttons" => "Boutons radio"

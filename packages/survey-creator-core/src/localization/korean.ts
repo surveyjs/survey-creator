@@ -448,6 +448,7 @@ export var koreanStrings = {
       suffix: "통화 접미사"
     },
     isExclusive: "선택하면 다른 항목 지우기",
+    isCommentRequired: "사용자에게 주석 입력 요구",
     imageHeight: "이미지 높이",
     imageWidth: "이미지 너비",
     valueName: "값 이름",
@@ -1057,6 +1058,7 @@ export var koreanStrings = {
     clearIfInvisible: {
       none: "결코"
     },
+    radio: "라디오 버튼",
     inputType: {
       color: "색",
       date: "날짜",
@@ -3367,3 +3369,5 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // paneldynamic.displayMode: "Entry display mode" => "엔트리 디스플레이 모드"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공간 또는 여백을 추가합니다."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다."
+// pe.isCommentRequired: "Require user to enter a comment" => "사용자에게 주석 입력 요구"
+// pv.radio: "Radio Buttons" => "라디오 버튼"

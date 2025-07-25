@@ -448,6 +448,7 @@ export var nbStrings = {
       suffix: "Valutasuffiks"
     },
     isExclusive: "Fjern andre når det er valgt",
+    isCommentRequired: "Krev at brukeren skriver inn en kommentar",
     imageHeight: "Bildehøyde",
     imageWidth: "Bildebredde",
     valueName: "Verdinavn",
@@ -1057,6 +1058,7 @@ export var nbStrings = {
     clearIfInvisible: {
       none: "Aldri"
     },
+    radio: "Alternativknapper",
     inputType: {
       color: "Farge",
       date: "Daddel",
@@ -3165,3 +3167,5 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Inngangsvisningsmodus"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Legger til mellomrom eller marg mellom panelinnholdet og den venstre kanten av panelboksen."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig."
+// pe.isCommentRequired: "Require user to enter a comment" => "Krev at brukeren skriver inn en kommentar"
+// pv.radio: "Radio Buttons" => "Alternativknapper"

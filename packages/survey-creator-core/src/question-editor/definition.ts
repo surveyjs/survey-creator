@@ -202,6 +202,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   matrix: {
     properties: [
+      "cellType",
       { name: "eachRowRequired", tab: "validation" },
       { name: "eachRowUnique", tab: "validation" },
       { name: "columnMinWidth", tab: "layout" },

@@ -3929,3 +3929,23 @@ test("Unique page name property & whitespace, Bug#7022", () => {
   expect(questionName.errors).toHaveLength(1);
   expect(page2.name).toBe("page2");
 });
+test("Single matrix cellType property editor", () => {
+  const prop = Serializer.findProperty("matrix", "cellType");
+  if (!prop) {
+    //Do nothing
+    expect(true).toBeTruthy();
+    return;
+  }
+  const survey = new SurveyModel({
+    elements: [{ type: "matrix", name: "q1" }]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const questionCellType = propertyGrid.survey.getQuestionByName("cellType");
+  expect(questionCellType.getType()).toBe("buttongroup");
+  expect(questionCellType.choices).toHaveLength(2);
+  expect(questionCellType.choices[0].value).toBe("radio");
+  expect(questionCellType.choices[1].value).toBe("checkbox");
+  expect(questionCellType.choices[0].text).toBe("Radio Buttons");
+  expect(questionCellType.choices[1].text).toBe("Checkboxes");
+});

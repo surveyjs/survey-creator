@@ -448,6 +448,7 @@ export var grStrings = {
       suffix: "Επίθεμα νομίσματος"
     },
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
+    isCommentRequired: "Απαίτηση από το χρήστη να εισαγάγει ένα σχόλιο",
     imageHeight: "Ύψος περιοχής εμφάνισης",
     imageWidth: "Πλάτος περιοχής εμφάνισης",
     valueName: "Αναγνωριστικό συσχέτισης",
@@ -1057,6 +1058,7 @@ export var grStrings = {
     clearIfInvisible: {
       none: "Ποτέ"
     },
+    radio: "Κουμπιά",
     inputType: {
       color: "Χρώμα",
       date: "Ημερομηνία",
@@ -1917,3 +1919,5 @@ setupLocale({ localeCode: "el", strings: grStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Λειτουργία εμφάνισης εισόδου"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Προσθέτει κενό διάστημα ή περιθώριο μεταξύ του περιεχομένου του πίνακα και του αριστερού περιγράμματος του πλαισίου του πίνακα."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Χρησιμοποιήστε το εικονίδιο με το μαγικό ραβδί για να ορίσετε πότε η τιμή της ερώτησης θεωρείται έγκυρη."
+// pe.isCommentRequired: "Require user to enter a comment" => "Απαίτηση από το χρήστη να εισαγάγει ένα σχόλιο"
+// pv.radio: "Radio Buttons" => "Κουμπιά"
