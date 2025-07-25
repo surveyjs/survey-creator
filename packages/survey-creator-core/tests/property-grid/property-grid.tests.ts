@@ -3930,12 +3930,6 @@ test("Unique page name property & whitespace, Bug#7022", () => {
   expect(page2.name).toBe("page2");
 });
 test("Single matrix cellType property editor", () => {
-  const prop = Serializer.findProperty("matrix", "cellType");
-  if (!prop) {
-    //Do nothing
-    expect(true).toBeTruthy();
-    return;
-  }
   const survey = new SurveyModel({
     elements: [{ type: "matrix", name: "q1" }]
   });
