@@ -36,6 +36,7 @@ export class CreatorPresetEditableBase {
     });
     return res;
   }
+  public get questionNames(): string[] { return []; }
   public validate(model: SurveyModel): boolean {
     if (!this.validateCore(model)) return false;
     for (let i = 0; i < this.children.length; i ++) {

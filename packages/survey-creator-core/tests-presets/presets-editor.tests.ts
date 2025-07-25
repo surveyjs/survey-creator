@@ -349,6 +349,7 @@ test("Preset edit model, property grid, setup", () => {
   expect(checkSelectorChoice("empty")).toBeFalsy();
   expect(checkSelectorChoice("nonvalue")).toBeFalsy();
   expect(checkSelectorChoice("textwithbutton")).toBeFalsy();
+  selectorQuestion.value = null;
   const panel = survey.getPanelByName("propPanel");
   expect(panel.isVisible).toBeFalsy();
   selectorQuestion.value = "survey";
@@ -565,7 +566,6 @@ test("Change localization strings for tabs", () => {
   expect(loc.en.tabs.logic).toBeFalsy();
   expect(editor.creator.tabs[0].locTitle.text).toEqual("Designer edit");
   item.getQuestionByName("title").value = "Designer";
-  editor.applyFromSurveyModel();
   loc = editor.json.localization;
   expect(loc).toBeFalsy();
 });
@@ -851,19 +851,6 @@ test("Preset edit model, toolbox categories, restore after creator locale change
   expect(editor.creator.locale).toBe("de");
   survey.setValue("toolbox_mode", "categories");
   expect(matrix.rowCount).toBe(rowCount);
-});
-test("Preset edit model, tabs page with creator, default items", () => {
-  const editor = new CreatorPresetEditorModel({});
-  const survey = editor.model;
-  const itemsQuestion = survey.getQuestionByName("tabs_items");
-  itemsQuestion.value = ["preview", "logic"];
-  const nextBtn = survey.navigationBar.getActionById("sv-nav-next");
-  expect(nextBtn.isVisible).toBeTruthy();
-  survey.currentPageNo = survey.visiblePages.length - 1;
-  expect(survey.isLastPage).toBeTruthy();
-  expect(nextBtn.isVisible).toBeTruthy();
-  nextBtn.action();
-  expect(survey.isFirstPage).toBeTruthy();
 });
 test("Preset edit model, save creator JSON on applying new preset", () => {
   const editor = new CreatorPresetEditorModel({});

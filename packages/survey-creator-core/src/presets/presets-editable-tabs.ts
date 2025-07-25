@@ -66,11 +66,17 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       ]
     };
   }
+
+  public get questionNames() {
+    return [this.nameItems, this.nameActiveTab];
+  }
+
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     let items = model.getValue(this.nameItems);
     if (!Array.isArray(items)) return undefined;
-    let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName }));
-    if (Helpers.isArraysEqual(activeTabChoices.map(i => i.name), creator.getTabNames(), false)) {
+    const creatorTabs = creator.getTabs();
+    let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName || creatorTabs.filter(t => t.name == i.name)[0]?.iconName }));
+    if (Helpers.isArraysEqual(activeTabChoices, creatorTabs, false)) {
       activeTabChoices = undefined;
     }
     let activeTab = model.getValue(this.nameActiveTab);

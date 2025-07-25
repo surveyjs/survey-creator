@@ -1915,14 +1915,13 @@ export class SurveyCreatorModel extends Base
     }
     return res;
   }
-  public getTabNames(): Array<string> {
-    const tabNames = this.getAvailableTabs().map(t => t.name);
+  public getTabs(): Array<string> {
+    const tabs = this.getAvailableTabs();
     const res = [];
     this.tabs.forEach(tab => {
       const name = this.fixPluginName(tab.id);
-      if (tabNames.indexOf(name) > -1) {
-        res.push(name);
-      }
+      const newtab = tabs.filter(t => t.name === name)[0];
+      if (newtab) res.push(newtab);
     });
     return res;
   }

@@ -58,7 +58,7 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
       categories = creator.toolbox.categories
         .map(c => ({
           category: c.name,
-          items: c.items.map(i => i.name).filter(name => !itemNames || itemNames.indexOf(name) != -1)
+          items: c.items?.map(i => i.name).filter(name => !itemNames || itemNames.indexOf(name) != -1)
         })).filter(c => c.items.length > 0);
     }
     creator.toolbox.defineCategories(categories);

@@ -148,6 +148,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   public get nameCategoriesMode() { return this.fullPath + "_mode"; }
   protected get nameItems() { return this.fullPath + "_items"; }
   protected get nameShowCategoryTitles() { return this.fullPath + "_showCategoryTitles"; }
+  public get questionNames() {
+    return [this.nameCategories, this.nameItems, this.nameShowCategoryTitles];
+  }
 
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     const res: any = {};
@@ -173,9 +176,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     for (let i = 0; i < categories.length; i++) {
       if (categories[i].category !== toolboxCategories[i].name) return false;
       if (categories[i].title !== toolboxCategories[i].title) return false;
-      const toolboxItems = toolboxCategories[i].items.map(item => item.name);
+      const toolboxItems = toolboxCategories[i].items?.map(item => item.name);
       const categoryItems = categories[i].items;
-      if (!Helpers.isTwoValueEquals(categoryItems, toolboxItems, true)) return false;
+      if (!Helpers.isTwoValueEquals(categoryItems, toolboxItems)) return false;
     }
     return true;
   }
@@ -183,7 +186,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private getCategoriesJson(model: SurveyModel): any {
     const categories = model.getValue(this.nameCategories);
     if (!Array.isArray(categories)) return undefined;
-    return categories.map(c => ({ category: c.category, title: c.title, items: c.items.map(i => i.name) }));
+    return categories.map(c => ({ category: c.category, title: c.title, items: c.items?.map(i => i.name) }));
   }
   private cleanIfNotDiffers(item, defaultItem) {
     if (!defaultItem) return true;

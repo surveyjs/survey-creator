@@ -17,6 +17,10 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
+  public get questionNames() {
+    return [this.nameCategories];
+  }
+
   protected updateOnValueChangedCore(model: SurveyModel, name: string) {
     // if (name == this.nameCategories) {
     //   this.fillAutoName(this.getQuestionCategories(model), "category");
