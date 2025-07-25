@@ -448,6 +448,7 @@ export var bgStrings = {
       suffix: "Валутен суфикс"
     },
     isExclusive: "Изчистване на другите, когато е избрано",
+    isCommentRequired: "Изискване от потребителя да въведе коментар",
     imageHeight: "Височина на изображението",
     imageWidth: "Широчина на изображението",
     valueName: "Съхранявай отговорите в следното JSON поле.",
@@ -1057,6 +1058,7 @@ export var bgStrings = {
     clearIfInvisible: {
       none: "Никога"
     },
+    radio: "Радио бутони",
     inputType: {
       color: "Цвят",
       date: "Дата",
@@ -2726,3 +2728,5 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Режим на показване на влизане"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Добавя разстояние или поле между съдържанието на панела и лявата граница на полето на панела."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна."
+// pe.isCommentRequired: "Require user to enter a comment" => "Изискване от потребителя да въведе коментар"
+// pv.radio: "Radio Buttons" => "Радио бутони"

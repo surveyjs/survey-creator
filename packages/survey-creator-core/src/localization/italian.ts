@@ -448,6 +448,7 @@ var italianTranslation = {
       suffix: "Suffisso valuta"
     },
     isExclusive: "Cancella gli altri quando selezionato",
+    isCommentRequired: "Richiedi all'utente di inserire un commento",
     imageHeight: "Altezza immagine",
     imageWidth: "Larghezza immagine",
     valueName: "Nome Valore",
@@ -1057,6 +1058,7 @@ var italianTranslation = {
     clearIfInvisible: {
       none: "Mai"
     },
+    radio: "Pulsanti",
     inputType: {
       color: "Colore",
       date: "Dattero",
@@ -2924,3 +2926,5 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // paneldynamic.displayMode: "Entry display mode" => "Modalità di visualizzazione delle voci"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Aggiunge spazio o margine tra il contenuto del pannello e il bordo sinistro della casella del pannello."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Usa l'icona della bacchetta magica per definire quando il valore della domanda è considerato valido."
+// pe.isCommentRequired: "Require user to enter a comment" => "Richiedi all'utente di inserire un commento"
+// pv.radio: "Radio Buttons" => "Pulsanti"

@@ -448,6 +448,7 @@ export var ruStrings = {
       suffix: "Суффикс валюты"
     },
     isExclusive: "Удалить другие при выборе",
+    isCommentRequired: "Требовать от пользователя ввода комментария",
     imageHeight: "Высота изображения",
     imageWidth: "Ширина изображения",
     valueName: "Название пункта",
@@ -1057,6 +1058,7 @@ export var ruStrings = {
     clearIfInvisible: {
       none: "Никогда"
     },
+    radio: "Переключатели",
     inputType: {
       color: "Цвет",
       date: "Дата",
@@ -3218,3 +3220,5 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Режим отображения входа"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Добавляет пространство или поле между содержимым панели и левой границей рамки панели."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным."
+// pe.isCommentRequired: "Require user to enter a comment" => "Требовать от пользователя ввода комментария"
+// pv.radio: "Radio Buttons" => "Переключатели"

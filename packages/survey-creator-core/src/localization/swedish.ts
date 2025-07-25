@@ -448,6 +448,7 @@ export let svStrings = {
       suffix: "Valutasuffix"
     },
     isExclusive: "Rensa andra när du väljer det här alternativet",
+    isCommentRequired: "Kräv att användaren anger en kommentar",
     imageHeight: "Bild höjd",
     imageWidth: "Bild bredd",
     valueName: "Värde namn",
@@ -1057,6 +1058,7 @@ export let svStrings = {
     clearIfInvisible: {
       none: "Aldrig"
     },
+    radio: "Alternativknappar",
     inputType: {
       color: "Färg",
       date: "Datum",
@@ -3337,3 +3339,5 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Visningsläge för inmatning"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Använd trollstavsikonen för att definiera när frågans värde anses vara giltigt."
+// pe.isCommentRequired: "Require user to enter a comment" => "Kräv att användaren anger en kommentar"
+// pv.radio: "Radio Buttons" => "Alternativknappar"

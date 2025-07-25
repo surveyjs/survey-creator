@@ -1,5 +1,5 @@
 import { url, compareScreenshot, test, setJSON } from "./helper";
-const title = "Design Surface Screenshot";
+const title = "Property Grid Screenshot";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -54,5 +54,39 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Select", exact: true }).click();
 
     await compareScreenshot(page, page.getByRole("group", { name: "Validation" }), "pg-matrix-dropdown-width.png");
+  });
+  test("PG: tagbox editor", async ({ page }) => {
+    await page.evaluate(() => {
+      (window as any).Survey.Serializer.addProperty("question", {
+        category: "general",
+        type: "multiplevalues",
+        displayName: "Acceptable identity verifications:",
+        name: "acceptableIdentityVerificationTypes",
+        visibleIndex: 10,
+        choices: ["Type 1", "Type 2", "Type 3"],
+      });
+    });
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "tagbox",
+              "name": "tagbox",
+              "acceptableIdentityVerificationTypes": ["Type 1", "Type 2"],
+              "choices": ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+            }
+          ]
+        }
+      ]
+    });
+
+    const tagbox = page.locator(".spg-tagbox");
+    await page.getByText("tagbox").click();
+    await compareScreenshot(page, tagbox, "pg-tagbox.png");
+
+    await tagbox.getByRole("button", { name: "Clear" }).click();
+    await compareScreenshot(page, tagbox, "pg-tagbox-empty.png");
   });
 });

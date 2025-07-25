@@ -448,6 +448,7 @@ export var indonesianStrings = {
       suffix: "Akhiran mata uang"
     },
     isExclusive: "Hapus yang lain saat dipilih",
+    isCommentRequired: "Mengharuskan pengguna untuk memasukkan komentar",
     imageHeight: "Tinggi gambar",
     imageWidth: "Lebar gambar",
     valueName: "Nama nilai",
@@ -1057,6 +1058,7 @@ export var indonesianStrings = {
     clearIfInvisible: {
       none: "Tidak pernah"
     },
+    radio: "Tombol Radio",
     inputType: {
       color: "Warna",
       date: "Tanggal",
@@ -3317,3 +3319,5 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Mode tampilan entri"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Menambahkan ruang atau margin antara konten panel dan batas kiri kotak panel."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Gunakan ikon tongkat ajaib untuk menentukan kapan nilai pertanyaan dianggap valid."
+// pe.isCommentRequired: "Require user to enter a comment" => "Mengharuskan pengguna untuk memasukkan komentar"
+// pv.radio: "Radio Buttons" => "Tombol Radio"

@@ -448,6 +448,7 @@ var polishStrings = {
       suffix: "Sufiks waluty"
     },
     isExclusive: "Wyczyść inne po wybraniu",
+    isCommentRequired: "Wymagaj od użytkownika wprowadzenia komentarza",
     imageHeight: "Image height",
     imageWidth: "Image width",
     valueName: "Value name",
@@ -1057,6 +1058,7 @@ var polishStrings = {
     clearIfInvisible: {
       none: "Nigdy"
     },
+    radio: "Przycisków",
     inputType: {
       color: "Kolor",
       date: "Data",
@@ -3428,3 +3430,5 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Podstawowy tryb wyświetlania"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Dodaje odstęp lub margines między zawartością panelu a lewą krawędzią pola panelu."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową."
+// pe.isCommentRequired: "Require user to enter a comment" => "Wymagaj od użytkownika wprowadzenia komentarza"
+// pv.radio: "Radio Buttons" => "Przycisków"

@@ -448,6 +448,7 @@ export var nlStrings = {
       suffix: "Valuta achtervoegsel"
     },
     isExclusive: "Anderen wissen wanneer geselecteerd",
+    isCommentRequired: "Vereisen dat de gebruiker een opmerking invoert",
     imageHeight: "Afbeelding hoogte",
     imageWidth: "Afbeelding breedte",
     valueName: "Waardenaam",
@@ -1057,6 +1058,7 @@ export var nlStrings = {
     clearIfInvisible: {
       none: "Nooit"
     },
+    radio: "Keuzerondjes",
     inputType: {
       color: "Kleur",
       date: "Datum",
@@ -3141,3 +3143,5 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Weergavemodus bij binnenkomst"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenster."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd."
+// pe.isCommentRequired: "Require user to enter a comment" => "Vereisen dat de gebruiker een opmerking invoert"
+// pv.radio: "Radio Buttons" => "Keuzerondjes"

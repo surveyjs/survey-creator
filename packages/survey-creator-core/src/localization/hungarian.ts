@@ -448,6 +448,7 @@ export var huStrings = {
       suffix: "Pénznem utótagja"
     },
     isExclusive: "Mások törlése, ha ki van jelölve",
+    isCommentRequired: "Megjegyzés megadásának megkövetelése a felhasználótól",
     imageHeight: "Kép magassága",
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
@@ -1057,6 +1058,7 @@ export var huStrings = {
     clearIfInvisible: {
       none: "Soha"
     },
+    radio: "Választógombokkal",
     inputType: {
       color: "Szín",
       date: "Dátum",
@@ -3313,3 +3315,5 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Belépési megjelenítési mód"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Helyet vagy margót ad a panel tartalma és a paneldoboz bal szegélye közé."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek."
+// pe.isCommentRequired: "Require user to enter a comment" => "Megjegyzés megadásának megkövetelése a felhasználótól"
+// pv.radio: "Radio Buttons" => "Választógombokkal"

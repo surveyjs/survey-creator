@@ -448,6 +448,7 @@ var persianStrings = {
       suffix: "پسوند ارز"
     },
     isExclusive: "هنگام انتخاب دیگران را پاک کنید",
+    isCommentRequired: "نیاز به وارد کردن نظر کاربر",
     imageHeight: "ارتفاع تصویر",
     imageWidth: "عرض تصویر",
     valueName: "نام مقدار",
@@ -1057,6 +1058,7 @@ var persianStrings = {
     clearIfInvisible: {
       none: "هرگز"
     },
+    radio: "دکمه های رادیویی",
     inputType: {
       color: "رنگ",
       date: "تاریخ",
@@ -3118,3 +3120,5 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // paneldynamic.displayMode: "Entry display mode" => "حالت نمایش ورودی"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "فاصله یا حاشیه بین محتوای پانل و حاشیه سمت چپ کادر پانل اضافه می کند."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید."
+// pe.isCommentRequired: "Require user to enter a comment" => "نیاز به وارد کردن نظر کاربر"
+// pv.radio: "Radio Buttons" => "دکمه های رادیویی"

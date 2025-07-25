@@ -448,6 +448,7 @@ export var czStrings = {
       suffix: "Přípona měny"
     },
     isExclusive: "Vymazat ostatní při výběru",
+    isCommentRequired: "Požadovat po uživateli zadání komentáře",
     imageHeight: "Výška obrázku",
     imageWidth: "Šířka obrázku",
     valueName: "Název hodnoty",
@@ -1057,6 +1058,7 @@ export var czStrings = {
     clearIfInvisible: {
       none: "Nikdy"
     },
+    radio: "Přepínače",
     inputType: {
       color: "Barva",
       date: "Datum",
@@ -2740,3 +2742,5 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Režim zobrazení vstupu"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Přidá mezeru nebo okraj mezi obsah panelu a levý okraj rámečku panelu."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou."
+// pe.isCommentRequired: "Require user to enter a comment" => "Požadovat po uživateli zadání komentáře"
+// pv.radio: "Radio Buttons" => "Přepínače"

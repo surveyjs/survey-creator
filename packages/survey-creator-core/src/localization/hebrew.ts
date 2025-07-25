@@ -448,6 +448,7 @@ export var hebrewStrings = {
       suffix: "סיומת מטבע"
     },
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
+    isCommentRequired: "דרישת המשתמש להזין הערה",
     imageHeight: "גובה התמונה",
     imageWidth: "רוחב התמונה",
     valueName: "אחסן תשובות בשדה JSON הבא",
@@ -1057,6 +1058,7 @@ export var hebrewStrings = {
     clearIfInvisible: {
       none: "אף פעם"
     },
+    radio: "לחצני בחירה",
     inputType: {
       color: "צבע",
       date: "תאריך",
@@ -2730,3 +2732,5 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // paneldynamic.displayMode: "Entry display mode" => "מצב תצוגת כניסה"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "מוסיף רווח או שוליים בין תוכן החלונית לגבול השמאלי של תיבת החלונית."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "השתמש בסמל שרביט הקסמים כדי להגדיר מתי ערך השאלה נחשב חוקי."
+// pe.isCommentRequired: "Require user to enter a comment" => "דרישת המשתמש להזין הערה"
+// pv.radio: "Radio Buttons" => "לחצני בחירה"

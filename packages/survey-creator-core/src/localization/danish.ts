@@ -448,6 +448,7 @@ export var danishStrings = {
       suffix: "Suffiks for valuta"
     },
     isExclusive: "Ryd andre, når det er valgt",
+    isCommentRequired: "Kræv, at brugeren indtaster en kommentar",
     imageHeight: "Billedhøjde",
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
@@ -1057,6 +1058,7 @@ export var danishStrings = {
     clearIfInvisible: {
       none: "Aldrig"
     },
+    radio: "Alternativknapper",
     inputType: {
       color: "Farve",
       date: "Dato",
@@ -3347,3 +3349,5 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // paneldynamic.displayMode: "Entry display mode" => "Indtastningsvisningstilstand"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "Tilføjer plads eller margen mellem panelindholdet og panelboksens venstre kant."
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig."
+// pe.isCommentRequired: "Require user to enter a comment" => "Kræv, at brugeren indtaster en kommentar"
+// pv.radio: "Radio Buttons" => "Alternativknapper"

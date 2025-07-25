@@ -448,6 +448,7 @@ var simplifiedChineseTranslation = {
       suffix: "货币后缀"
     },
     isExclusive: "选中时清除其他",
+    isCommentRequired: "要求用户输入注释",
     imageHeight: "图片高度",
     imageWidth: "图片宽度",
     valueName: "值名",
@@ -1057,6 +1058,7 @@ var simplifiedChineseTranslation = {
     clearIfInvisible: {
       none: "从不"
     },
+    radio: "单选按钮",
     inputType: {
       color: "颜色",
       date: "日期",
@@ -3304,3 +3306,5 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // paneldynamic.displayMode: "Entry display mode" => "入口显示模式"
 // paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板内容和面板框的左边框之间添加空间或边距。"
 // surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "使用魔杖图标定义问题值何时被视为有效。"
+// pe.isCommentRequired: "Require user to enter a comment" => "要求用户输入注释"
+// pv.radio: "Radio Buttons" => "单选按钮"
