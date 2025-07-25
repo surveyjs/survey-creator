@@ -28,6 +28,7 @@
   border: var(--ctr-preview-device-border-width, var(--sjs-stroke-x4)) solid
     var(--ctr-preview-device-border-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
   background: var(--ctr-preview-device-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  box-sizing: content-box;
 }
 
 .svd-simulator-main {

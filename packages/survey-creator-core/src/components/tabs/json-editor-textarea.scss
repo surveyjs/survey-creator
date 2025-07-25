@@ -19,6 +19,7 @@ svc-tab-json-editor-textarea {
   height: 100%;
   border: none;
   outline: none;
+  box-sizing: content-box;
 }
 /*
 .svc-json-editor-tab__errros_button {

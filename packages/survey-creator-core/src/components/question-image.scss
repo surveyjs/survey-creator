@@ -62,6 +62,7 @@
   width: 100%;
   height: calcSize(27.5);
   border: var(--ctr-survey-placeholder-border-width, var(--lbr-stroke-x1)) dashed var(--ctr-survey-placeholder-border-color, var(--sjs-border-25, #D4D4D4));
+  box-sizing: content-box;
 }
 
 .svc-image-question__loading {

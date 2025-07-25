@@ -233,6 +233,7 @@ svc-tab-designer {
     padding: 0px var(--ctr-separator-margin-vertical-small, var(--sjs-spacing-x1));
     margin-bottom: var(--ctr-surface-toolbar-gap, var(--sjs-spacing-x1));
     margin-right: 0;
+    box-sizing: content-box;
   }
 
   .sv-action__content {
