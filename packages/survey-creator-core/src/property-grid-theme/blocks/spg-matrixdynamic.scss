@@ -100,6 +100,7 @@
   justify-content: center;
   align-items: center;
   margin-right: calcSize(4);
+  box-sizing: content-box;
 
   svg {
     width: calcSize(1.5);
