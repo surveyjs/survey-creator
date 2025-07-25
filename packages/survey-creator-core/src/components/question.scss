@@ -49,6 +49,7 @@ svc-question {
     padding-left: var(--lbr-page-layout-gap-medium, var(--lbr-spacing-x2));
     bottom: 0;
     right: 0;
+    box-sizing: content-box;
   }
 }
 
