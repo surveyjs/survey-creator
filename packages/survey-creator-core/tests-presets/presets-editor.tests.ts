@@ -727,6 +727,19 @@ test("Preset edit model, Change localization strings title&description", () => {
   const propGridSurvey = creator.propertyGrid;
   expect(propGridSurvey.getPageByName("general").title).toEqual("General Edit");
 });
+test("Change presets multiple times", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  let itemsQuestion = survey.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  let defaultTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  defaultTabQuestion.value = "preview";
+  expect(editor.json.tabs.activeTab).toBe("preview");
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+  expect(editor.json.tabs.items.map(t => t.name)).toEqual(["designer", "preview", "logic"]);
+  expect(editor.json.tabs.activeTab).toBe("preview");
+});
 test("Change localization strings and then change locale for tabs", () => {
   addLocales();
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
