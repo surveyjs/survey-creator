@@ -741,6 +741,20 @@ test("Change tabs presets multiple times", () => {
   expect(editor.json.tabs.activeTab).toBe("preview");
   expect(editor.json.tabs.items.map(t => t.name)).toEqual(["designer", "preview", "logic"]);
 });
+test("Change toolbox presets multiple times", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  let categoriesQuestion = survey.getQuestionByName("toolbox_categories");
+  const categoriesValue = [...categoriesQuestion.value];
+  categoriesQuestion.value = [categoriesValue[1], categoriesValue[2]];
+  expect(editor.json.toolbox.categories.map(t => t.category)).toEqual(["text", "containers"]);
+  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "panel", "paneldynamic"]);
+
+  let defaultTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  defaultTabQuestion.value = "preview";
+  expect(editor.json.toolbox.categories.map(t => t.category)).toEqual(["text", "containers"]);
+  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "panel", "paneldynamic"]);
+});
 test("Use default preset json", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;

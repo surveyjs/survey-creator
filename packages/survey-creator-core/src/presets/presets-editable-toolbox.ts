@@ -160,9 +160,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     const mode = model.getValue(this.nameCategoriesMode);
     const toolbox = creator.toolbox;
+    const toolboxCategories = defaultJson?.categories;
     if (mode === "categories") {
       const categories = this.getCategoriesJson(model);
-      if (Array.isArray(categories) && categories.length > 0 && (!toolbox.hasCategories || !this.isCategoriesSame(categories, toolbox.categories))) {
+      if (Array.isArray(categories) && categories.length > 0 && (!toolbox.hasCategories || !this.isCategoriesSame(categories, toolboxCategories))) {
         res.categories = this.getCategoriesJson(model);
       }
     }
@@ -170,6 +171,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       res.showCategoryTitles = true;
     }
     return Object.keys(res).length > 0 ? res : undefined;
+  }
+  protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
+    return {
+      categories: creator.toolbox.categories.map(c => ({ name: c.name, title: c.title, items: c.items.map(i => i.name) }))
+    };
   }
   private isCategoriesSame(categories: any, toolboxCategories: Array<QuestionToolboxCategory>): boolean {
     if (categories.length !== toolboxCategories.length) return false;
