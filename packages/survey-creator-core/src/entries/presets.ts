@@ -13,7 +13,7 @@ export * from "../presets/presets-editable-base";
 export * from "../presets/preset-question-ranking";
 export * from "../presets/preset-question-json";
 import { checkLibraryVersion } from "survey-core";
-
+import "../presets/presets-theme/presets.scss";
 export let Version: string;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore

@@ -1,0 +1,101 @@
+@use "../../../variables.scss" as *;
+
+.sps-action-bar {
+  display: flex;
+  box-sizing: content-box;
+  position: relative;
+  align-items: center;
+  margin-left: auto;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sps-action-button {
+  @include ctrDefaultBoldFont;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: flex;
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-right-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
+  box-sizing: border-box;
+  border: none;
+  color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
+  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+  background-color: transparent;
+  cursor: pointer;
+  transition:
+    background-color $creator-transition-duration,
+    opacity $creator-transition-duration;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    outline: none;
+    background-color: var(
+      --ctr-actionbar-button-background-color-hovered,
+      var(--sjs-layer-1-background-400, #f5f5f5ff)
+    );
+
+    use {
+      fill: var(--ctr-actionbar-button-icon-color-hovered, var(--sjs-layer-1-foreground-75, #000000bf));
+    }
+  }
+}
+
+.sps-action-button--icon {
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-right-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
+}
+.sps-action-button__icon {
+  display: block;
+  width: var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3));
+  height: var(--ctr-actionbar-button-icon-height, var(--sjs-font-size-x3));
+
+  use {
+    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    transition: fill $creator-transition-duration;
+  }
+}
+
+.sps-action-button--danger {
+  color: var(--ctr-library-action-button-text-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
+
+  &:hover,
+  &:focus {
+    background-color: var(
+      --ctr-library-action-button-background-color-negative-hovered,
+      var(--sjs-semantic-red-background-10, #e50a3e1a)
+    );
+
+    use {
+      fill: var(--ctr-library-action-button-icon-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
+    }
+  }
+}
+
+button.sps-action-button--large {
+  padding: calcSize(0.5) calcSize(2);
+}
+
+.sps-action-button:disabled {
+  opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
+  pointer-events: none;
+  cursor: default;
+}
+
+.sps-action-button--muted {
+  opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
+}
+
+.sps-action-button:active {
+  opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
+}
+
+.sps-action-button--text {
+  padding: calcSize(0.5) calcSize(2);
+}

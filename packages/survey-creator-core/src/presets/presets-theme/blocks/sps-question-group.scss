@@ -1,0 +1,10 @@
+@use "../../../variables.scss" as *;
+
+.sps-question-group {
+  .sps-row {
+    margin-top: 0;
+    &:not(:first-of-type) {
+      margin-top: calcSize(1);
+    }
+  }
+}

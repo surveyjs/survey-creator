@@ -1,0 +1,138 @@
+@use "../../../variables" as *;
+
+.sps-checkbox {
+  cursor: pointer;
+  margin-top: var(--ctr-checkbox-list-gap-vertical, var(--sjs-spacing-x2));
+}
+
+.sps-checkbox--disabled {
+  cursor: default;
+
+  .sps-checkbox {
+    cursor: default;
+  }
+
+  .sps-checkbox__caption {
+    color: var(--ctr-checkbox-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
+  }
+
+  .sps-checkbox__rectangle,
+  &.sps-checkbox:active .sps-checkbox__rectangle,
+  &.sps-checkbox__control:focus + .sps-checkbox__rectangle {
+    border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid
+      var(--ctr-checkbox-border-color-disabled, var(--sjs-border-10, #dcdcdcff));
+    background: var(--ctr-checkbox-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
+    outline: none;
+  }
+}
+
+.sps-checkbox__caption {
+  @include ctrDefaultFont;
+  color: var(--ctr-checkbox-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+}
+
+.sps-checkbox__rectangle {
+  background: var(--ctr-checkbox-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+  border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid
+    var(--ctr-checkbox-border-color, var(--sjs-border-10, #dcdcdcff));
+  border-radius: var(--ctr-checkbox-corner-radius, var(--sjs-corner-radius-x05));
+  box-sizing: border-box;
+  width: var(--ctr-checkbox-button-width, var(--sjs-font-size-x3));
+  height: var(--ctr-checkbox-button-height, var(--sjs-font-size-x3));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  // padding: calcSize(0.5);
+  padding: 1px 1px;
+  outline: 2px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background $creator-transition-duration,
+    background-color $creator-transition-duration,
+    outline $creator-transition-duration;
+}
+
+.sps-checkbox:not(.sps-checkbox--checked):hover {
+  .sps-checkbox__rectangle {
+    background-color: var(--ctr-checkbox-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
+  }
+}
+
+.sps-checkbox:active .sps-checkbox__rectangle,
+.sps-checkbox__control:focus:not(:disabled) + .sps-checkbox__rectangle {
+  outline: 2px solid var(--ctr-checkbox-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+  outline-offset: -2px;
+}
+
+.sps-checkbox .sps-checkbox__svg {
+  display: block;
+  opacity: 0;
+  fill: transparent;
+  width: var(--ctr-checkbox-button-check-mark-width, var(--sjs-font-size-x2));
+  height: var(--ctr-checkbox-button-check-mark-height, var(--sjs-font-size-x2));
+  background-repeat: no-repeat;
+  background-size: calcSize(2) calcSize(2);
+  transition:
+    opacity $creator-transition-duration,
+    fill $creator-transition-duration;
+}
+
+.sps-checkbox--checked {
+  .sps-checkbox__rectangle {
+    background: var(--ctr-checkbox-background-color-selected, var(--sjs-layer-1-background-500, #ffffffff));
+  }
+
+  .sps-checkbox__svg {
+    opacity: 1;
+    fill: var(--ctr-checkbox-button-check-mark-color, var(--sjs-primary-background-500, #19b394ff));
+  }
+}
+
+.sps-checkbox--disabled.sps-checkbox--checked .sps-checkbox__svg {
+  fill: var(--ctr-checkbox-button-check-mark-color-disabled, var(--sjs-border-25, #d4d4d4ff));
+}
+
+.sps-checkbox__control {
+  position: fixed;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+//todo: need to hide unneeded icons
+.sps-checkbox__hidden {
+  display: none;
+}
+
+.sps-selectbase {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sps-selectbase__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ctr-checkbox-gap, var(--sjs-spacing-x1));
+  cursor: pointer;
+}
+
+.sps-checkbox {
+  .sps-question__description {
+    padding: 0;
+    padding-top: var(--ctr-checkbox-description-text-margin-top, var(--sjs-spacing-x1));
+    padding-inline-start: var(--ctr-checkbox-description-text-margin-left, var(--sjs-font-size-x4));
+    color: var(--ctr-checkbox-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+  }
+
+  .sps-help-action {
+    use {
+      pointer-events: none;
+    }
+  }
+}

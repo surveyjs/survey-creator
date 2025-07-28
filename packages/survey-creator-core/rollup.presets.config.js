@@ -40,6 +40,12 @@ export default {
         content: banner,
         commentStyle: "ignored",
       }
-    })
+    }),
+    {
+      name: "remove-scss-imports",
+      load: (id) => {
+        if (id.match(/\.scss$/)) return "";
+      }
+    },
   ]
 };

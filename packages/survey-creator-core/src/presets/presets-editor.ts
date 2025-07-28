@@ -6,6 +6,7 @@ import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-too
 import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
+import { presetsCss } from "./presets-theme/presets";
 
 export class NavigationBar extends ActionContainer {
   constructor() {
@@ -84,6 +85,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
+    model.css = presetsCss;
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
     model.showPrevButton = false;
