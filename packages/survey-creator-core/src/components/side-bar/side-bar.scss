@@ -16,6 +16,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   border-inline-start: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
     var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
+    box-sizing: content-box;
 }
 
 .svc-side-bar--narrow {
