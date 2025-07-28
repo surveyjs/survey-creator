@@ -61,7 +61,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.upldateResultJson();
     return this.resultModelValue;
   }
-  public getLocale(): string { return this.json?.languages?.creator || "en"; }
+  public getLocale(): string { return editorLocalization.currentLocale || "en"; }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
   }
@@ -114,11 +114,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     model.onCurrentPageChanged.add((sender, options) => {
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
-    });
-    model.onValueChanging.add((sender, options) => {
-      if (options.name === "languages_creator") {
-        this.applyFromSurveyModel();
-      }
     });
     const questionNames = editablePresets.map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
     model.onValueChanged.add((sender, options) => {

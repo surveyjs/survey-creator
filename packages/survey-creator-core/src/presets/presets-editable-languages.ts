@@ -96,7 +96,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
     if (Array.isArray(locales) && locales.length > 0) {
-      question.valule = locales;
+      question.valule = locales; // TODO: sheck spell
     } else {
       question.selectAll();
     }
