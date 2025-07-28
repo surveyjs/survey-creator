@@ -33,7 +33,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private navigationBarValue: NavigationBar;
   public locTitle: LocalizableString;
   private applying = false;
-  constructor(json?: ICreatorPresetData, private creatorValue?: SurveyCreatorModel) {
+  constructor(json?: ICreatorPresetData, private creatorValue?: SurveyCreatorModel, private defaultJsonValue?: ICreatorPresetData) {
     super();
     editorLocalization.presetStrings = undefined;
     this.presetValue = new CreatorPreset(json);
@@ -74,6 +74,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
   }
+  public get defaultJson(): ICreatorPresetData {
+    return this.defaultJsonValue;
+  }
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
     return new SurveyCreatorModel(options);
   }
@@ -108,6 +111,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
 
     editablePresets.forEach(item => item.setupQuestions(model, this));
+    if (!this.defaultJsonValue) {
+      this.defaultJsonValue = {};
+      editablePresets.forEach(item => this.defaultJsonValue[item.path] = item.getDefaultJsonValue(this.creator));
+    }
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
     this.updateJsonLocalizationStrings(editablePresets);
@@ -254,7 +261,7 @@ preset.apply(creator);</div></pre></code></div>
   public getJsonFromSurveyModel(): any {
     const res: ICreatorPresetData = {};
     this.model.editablePresets.forEach(preset => {
-      const val = preset.getJsonValue(this.model, this.creator);
+      const val = preset.getJsonValue(this.model, this.creator, this.defaultJsonValue?.[preset.path]);
       if (!!val) {
         res[preset.path] = val;
       }

@@ -58,9 +58,9 @@ export class CreatorPresetEditableBase {
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val + "'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
-  public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel): any {
+  public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {
     const page = model.getPageByName(this.pageName);
-    const core = page && page.isVisible ? this.getJsonValueCore(model, creator) : undefined;
+    const core = page && page.isVisible ? this.getJsonValueCore(model, creator, defaultJson) : undefined;
     let hasValue = !!core;
     const res = hasValue ? core : {};
     this.children.forEach(item => {
@@ -71,6 +71,11 @@ export class CreatorPresetEditableBase {
       }
     });
     return hasValue ? res : undefined;
+  }
+  public getDefaultJsonValue(creator: SurveyCreatorModel) {
+    const json = this.getDefaultJsonValueCore(creator);
+    this.children.forEach(item => json[item.path] = item.getDefaultJsonValueCore(creator));
+    return json;
   }
   public setJsonLocalizationStrings(model: SurveyModel, locStrs: any): void {
     this.setJsonLocalizationStringsCore(model, locStrs);
@@ -138,7 +143,8 @@ export class CreatorPresetEditableBase {
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
-  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any { return undefined; }
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any { return undefined; }
+  protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any { return {}; }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected updateJsonLocalizationStringsCore(locStrs: any): void {}
   protected disposeCore(): void {}

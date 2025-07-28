@@ -71,16 +71,16 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     return [this.nameItems, this.nameActiveTab];
   }
 
-  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     let items = model.getValue(this.nameItems);
     if (!Array.isArray(items)) return undefined;
-    const creatorTabs = creator.getTabs();
+    const creatorTabs = defaultJson?.items || creator.getTabs();
     let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName || creatorTabs.filter(t => t.name == i.name)[0]?.iconName }));
     if (Helpers.isArraysEqual(activeTabChoices, creatorTabs, false)) {
       activeTabChoices = undefined;
     }
     let activeTab = model.getValue(this.nameActiveTab);
-    if (!activeTabChoices && activeTab === creator.activeTab) {
+    if (!activeTabChoices && activeTab === (defaultJson?.activeTab || creator.activeTab)) {
       activeTab = undefined;
     }
     if (!activeTabChoices && !activeTab) return undefined;
@@ -92,6 +92,14 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       val.activeTab = activeTab;
     }
     return val;
+  }
+
+  protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
+    const creatorTabs = creator.getTabs();
+    return {
+      activeTab: creator.activeTab,
+      items: creator.getTabs(),
+    };
   }
 
   private getQuestionItems(model: SurveyModel): QuestionMatrixDynamicModel {

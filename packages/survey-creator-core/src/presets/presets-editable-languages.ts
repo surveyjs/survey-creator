@@ -70,7 +70,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
         }
       ] };
   }
-  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);

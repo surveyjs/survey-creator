@@ -152,7 +152,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return [this.nameCategories, this.nameItems, this.nameShowCategoryTitles];
   }
 
-  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const res: any = {};
     const definition = this.getJsonItemsDefinition(model);
     if (definition) {

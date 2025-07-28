@@ -301,7 +301,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     };
   }
 
-  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     if (!this.isModified) return undefined;
     this.updateCurrentJson(model);
     return { definition: this.currentJson };
