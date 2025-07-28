@@ -34,9 +34,10 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true },
     ];
     let settingsAction;
+    let presetsList;
     presets.forEach(p => {
       p.action = (item)=>{
-        settingsAction.popupModel.contentComponentData.model.selectedItem = item;
+        presetsList.selectedItem = item;
         settingsAction.popupModel.show();
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
@@ -57,6 +58,11 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
     bottomActions.unshift(settingsAction);
+    presetsList = settingsAction.popupModel.contentComponentData.model;
+    presetsList.selectedItem = presetsList.actions[0];
+    this.model.model.onCurrentPageChanged.add((_, options) => {
+      presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo];
+    });
   }
 
   public deactivate(): boolean {
