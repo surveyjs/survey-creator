@@ -9,6 +9,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   private currentValue;
   private designerPlugin;
   private toolboxCompact;
+  private defaultJson;
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "presets", title: "Presets", plugin: this, iconName: TabPresetsPlugin.iconName });
@@ -19,7 +20,8 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   public saveToFileHandler = saveToFileHandler;
 
   public activate(): void {
-    this.model = new CreatorPresetEditorModel({}, this.creator);
+    this.model = new CreatorPresetEditorModel({}, this.creator, this.defaultJson);
+    this.defaultJson = { ...this.model.defaultJson };
     if (this.currentValue) {
       this.model.model.data = this.currentValue;
     }

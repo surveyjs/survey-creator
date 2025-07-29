@@ -45,6 +45,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locTitle.text = "Creator Presets";
     this.navigationBarValue = new NavigationBar();
     const firstTabName = "preset";
+    this.preset.setJson(this.getJsonFromSurveyModel());
   }
   public dispose(): void {
     super.dispose();
