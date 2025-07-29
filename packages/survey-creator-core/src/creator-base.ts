@@ -1878,9 +1878,12 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
-      page.questions.forEach(question => {
-        this.doOnQuestionAdded(question, page);
-      });
+      const dd = this.dragDropSurveyElements;
+      if (!dd || !dd.isDraggingExistingElement) {
+        page.questions.forEach(question => {
+          this.doOnQuestionAdded(question, page);
+        });
+      }
     }
     if (changeSelection) {
       this.selectElement(page);
