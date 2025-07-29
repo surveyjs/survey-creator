@@ -73,6 +73,7 @@ function translateLanguage(name) {
     utils.reportMessage("MS translator doesn't support: " + name + ".");
     return;
   }
+  updateKeysAndCommentsBeforeTranslation(name, locale);
   const json = utils.readJson(name);
   if (!json) return;
   utils.updateAlternativeNamesInJSON(json);
@@ -138,4 +139,22 @@ function translateStrings(locale, stringsToTranslate, callback) {
 }
 function UUIDGenerator() {
   return crypto.randomBytes(16).toString("hex");
+}
+function updateKeysAndCommentsBeforeTranslation(name, locale) {
+  const json = utils.readJson(name);
+  if (!json) return;
+  const comments = utils.readComments(name);
+  const commentHash = {};
+  for (let i = comments.length - 1; i >= 0; i--) {
+    const item = comments[i];
+    if (commentHash[item.key]) {
+      utils.reportMessage("Duplicate comment for key: " + item.key + ", locale: " + locale);
+      comments.splice(i, 1);
+    } else {
+      commentHash[item.key] = item;
+    }
+  }
+  comments.forEach(com => {
+
+  });
 }
