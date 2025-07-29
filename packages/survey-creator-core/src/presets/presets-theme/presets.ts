@@ -198,7 +198,7 @@ export var presetsCss = {
     root: "sps-selectbase",
     popup: "sps-dropdown-popup svc-creator-popup",
     small: "sps-row__question--small sd-row__question--small",
-    control: "sps-input sps-dropdown sd-input sd-dropdown",
+    control: "sps-input sps-dropdown",
     controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
     controlValue: "sps-dropdown__value",
     filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",

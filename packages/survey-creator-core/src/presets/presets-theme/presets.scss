@@ -1,4 +1,5 @@
 @use "../../variables" as *;
+@use "./fonts" as *;
 @use "blocks/sps-action-bar.scss";
 @use "blocks/sps-question.scss";
 @use "blocks/sps-input.scss";
@@ -20,14 +21,33 @@
 .sps-root-modern {
   position: relative;
   width: 100%;
-  border-inline-end: 1px solid transparent;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
   height: 0;
   flex-grow: 1;
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
+  background: white;
   @include disableLibraryAnimations;
+  display: flex;
+  flex-direction: column;
+
+  :has(.sps-question__content--main) {
+    max-height: 100%;
+    height: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    align-items: stretch;
+    height: 0;
+    flex-grow: 1;
+    .sv-components-row > .sv-components-column--expandable {
+      width: 100%;
+    }
+  }
+}
+.sps-question__content--main {
+  overflow: auto;
 }
 
 .sps-container {
@@ -37,61 +57,29 @@
   flex-direction: column;
 }
 
-.sps-root-modern.sps-root--one-category {
-  border-inline-end: unset;
-  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-
-  .sps-page.sps-body__page {
-    box-shadow: unset;
-  }
-}
-
-.sv-popup--modal-popup {
-  &.svc-property-editor .sv-popup__container {
-    .sv-popup_shadow {
-      background-color: transparent;
-    }
-
-    .sd-root-modern {
-      background-color: transparent;
-    }
-
-    .sd-page {
-      margin: 0;
-      padding: 0;
-    }
-
-    .sv-components-column--expandable {
-      min-width: calcSize(78);
-    }
-  }
-
-  .sv-popup__footer {
-    padding-bottom: 2px;
-  }
-
-  .sd-body,
-  .sl-body {
-    min-width: calcSize(78);
-    padding: 0;
-  }
-}
-
-.sv-popup.svc-property-editor .sd-root-modern {
-  --sd-mobile-width: 0;
-}
-
-.svc-object-selector .sv-popup__container {
-  margin-left: calcSize(1);
-  margin-right: calcSize(1);
-}
-
-.svc-object-selector__content {
-  position: relative;
-  height: 100%;
-  min-height: 0;
+.sps-page {
   display: flex;
+  padding: var(--sjs2-spacing-x400, 32px);
   flex-direction: column;
+  align-items: stretch;
+  flex: 1 0 0;
+  align-self: stretch;
+  gap: var(--sjs2-spacing-x150, 12px);
+  background: var(--sjs2-color-utility-plain, rgba(28, 27, 32, 0.05));
+}
+
+.sps-page__title {
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+
+  @include sjs2--typography--medium-strong;
+}
+
+.sps-page__description {
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+
+  @include sjs2--typography--default;
+
+  padding-bottom: var(--sjs2-spacing-x150, 12px);
 }
 
 .sps-action-title-bar {
@@ -101,47 +89,10 @@
 
 .sps-body {
   width: 100%;
-}
 
-.sps-body--empty {
-  margin: calcSize(3);
-}
-
-.sps-title-toolbar--single-help-action {
-  justify-content: flex-start;
-  padding-left: calcSize(0.5);
-
-  // flex-grow: 0;
-  // margin-left: 0;
-  // padding-left: 0;
-
-  .sps-help-action {
-    margin-inline-end: auto;
-
-    .sps-action-button--icon {
-      padding: var(--ctr-actionbar-button-padding-top-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-right-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-bottom-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-left-small-icon, var(--sjs-spacing-x05));
-      opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
-    }
-
-    .sps-action-button--icon:focus,
-    .sps-action-button--icon:hover {
-      opacity: 1;
-    }
-
-    .sps-action-button:active {
-      opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
-    }
-
-    .sps-action-button__icon {
-      width: var(--ctr-actionbar-button-icon-width-small, var(--sjs-font-size-x2));
-      height: var(--ctr-actionbar-button-icon-height-small, var(--sjs-font-size-x2));
-    }
-
-    svg {
-      fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-    }
+  .sv-components-container-contentBottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 }

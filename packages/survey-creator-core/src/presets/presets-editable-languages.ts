@@ -37,39 +37,37 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
       title: "Select Languages",
+      description: "Select the language of the Survey Creator UI and target languages for the survey being configured.",
       navigationTitle: "Languages",
       elements: [
-        { type: "panel", name: "languages_main_panel",
-          description: "Select the language of the Survey Creator UI and target languages for the survey being configured.",
-          elements: [
-            {
-              type: "dropdown",
-              titleLocation: "left",
-              title: " UI language:",
-              placeholder: editorLocalization.getLocaleName(""),
-              name: this.creatorLocaleName,
-              choices: this.getCreatorLocales()
-            },
-            {
-              type: "boolean",
-              name: this.surveyUseEnglishNames,
-              title: "Translate Survey language names to Engish",
-              titleLocation: "hidden",
-              renderAs: "checkbox"
-            },
-            {
-              type: "checkbox",
-              name: this.surveyLocalesName,
-              title: "Survey languages",
-              minSelectedChoices: 1,
-              colCount: 3,
-              showSelectAllItem: true,
-              choices: this.getSurveyLocales()
-            }
-          ]
-        }
+        {
+          type: "dropdown",
+          title: "Creator UI language",
+          placeholder: editorLocalization.getLocaleName(""),
+          name: this.creatorLocaleName,
+          searchEnabled: false,
+          choices: this.getCreatorLocales()
+        },
+        {
+          type: "checkbox",
+          name: this.surveyLocalesName,
+          title: "Survey languages",
+          minSelectedChoices: 1,
+          colCount: 3,
+          showSelectAllItem: true,
+          choices: this.getSurveyLocales()
+        },
+        {
+          type: "boolean",
+          name: this.surveyUseEnglishNames,
+          title: "Translate Survey language names to Engish",
+          titleLocation: "hidden",
+          renderAs: "checkbox"
+        },
       ] };
   }
+  public getMainElementName() : any { return this.surveyLocalesName; }
+
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;

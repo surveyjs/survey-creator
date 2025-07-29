@@ -1,39 +1,41 @@
 @use "../../../variables" as *;
 
 .sps-dropdown {
-    display: flex;
 
-    padding-top: calc(var(--ctr-editor-padding-top, var(--sjs-spacing-x05)));
-    padding-right: calc(var(--ctr-editor-padding-right, var(--sjs-spacing-x05)));
-    padding-bottom: calc(var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05)));
-    padding-left: calc(
-        var(--ctr-editor-padding-left, var(--sjs-spacing-x05)) +
-            var(--ctr-editor-content-margin-left, var(--sjs-spacing-x150))
-    );
+    display: flex;
+    padding: var(--sjs2-layout-control-formbox-medium-vertical, 4px) var(--sjs2-layout-control-formbox-medium-horizontal, 4px);
+    align-items: flex-start;
+    gap: var(--sjs2-layout-control-formbox-medium-gap, 4px);
+    align-self: stretch;
+
+    border-radius: var(--sjs2-radius-semantic-form, 8px);
+    background: var(--sjs2-color-control-formbox-default-bg, rgba(28, 27, 32, 0.05));
+
+    /* sjs2/shadow/inner */
+    box-shadow: var(--sjs2-shadow-size-inner-offset-x, 0) var(--sjs2-shadow-size-inner-offset-y, 0) var(--sjs2-shadow-size-inner-blur, 0) var(--sjs2-shadow-size-inner-spread, 1px) var(--sjs2-shadow-color-inner, #D4D4D4) inset;
+
+    .sps-dropdown__filter-string-input {
+        display: flex;
+        padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px) var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
+        align-items: flex-start;
+        flex: 1 0 0;
+    }
 }
 
 .sps-dropdown__value {
-    @include ctrDefaultFont;
     display: flex;
-    align-items: center;
-    width: 100%;
-    position: relative;
-
-    margin-top: var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1));
-    margin-right: var(--ctr-editor-content-margin-right, var(--sjs-spacing-x150));
-    margin-bottom: var(--ctr-editor-content-margin-bottom, var(--sjs-spacing-x1));
-    margin-left: 0;
-}
-.sps-dropdown__filter-string-input {
-    @include ctrDefaultFont;
-
-    color: var(--ctr-editor-content-text-color, var(--sjs-layer-3-foreground-100, #000000e6));
+    padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px) var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
+    align-items: flex-start;
+    flex: 1 0 0;
 }
 
 .sps-dropdown-popup.sv-popup--menu-popup {
     height: 0;
 }
 
+.sps-dropdown_select-wrapper {
+    flex-grow: 1;
+}
 .sps-dropdown__clean-button {
     --thm-ctr-editor-content-margin-top: var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1));
     --thm-ctr-editor-content-margin-bottom: var(--ctr-editor-content-margin-bottom, var(--sjs-spacing-x1));
@@ -46,16 +48,21 @@
 
 .sps-dropdown {
     .sd-dropdown-action-bar {
-        margin-inline-start: var(--ctr-editor-gap, var(--sjs-spacing-x05));
-        gap: var(--ctr-editor-buttons-gap, var(--sjs-spacing-x05));
+        display: flex;
+        align-items: flex-start;
+        gap: var(--sjs2-layout-control-input-medium-group-gap, 4px);
+        align-self: stretch;
     }
 
     .sd-editor-button-item {
-        padding-top: var(--ctr-editor-button-padding-top, var(--sjs-spacing-x1));
-        padding-right: var(--ctr-editor-button-padding-right, var(--sjs-spacing-x1));
-        padding-bottom: var(--ctr-editor-button-padding-bottom, var(--sjs-spacing-x1));
-        padding-left: var(--ctr-editor-button-padding-left, var(--sjs-spacing-x1));
-        transform: none;
+        display: flex;
+        padding: var(--sjs2-layout-control-action-small-box-vertical, 8px) var(--sjs2-layout-control-action-small-box-horizontal, 8px);
+        justify-content: center;
+        align-items: center;
+        gap: var(--sjs2-layout-control-action-small-box-gap, 0);
+
+        border-radius: var(--sjs2-radius-semantic-form-item, 4px);
+        background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0.00));
 
         &:hover,
         &:focus {
@@ -78,8 +85,12 @@
     }
 
     .sv-editor-button-item__icon {
-        width: var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3));
-        height: var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3));
+        display: flex;
+        width: var(--sjs2-size-icon-medium, 24px);
+        height: var(--sjs2-size-icon-medium, 24px);
+        padding: var(--sjs2-layout-control-action-small-icon-vertical, 0) var(--sjs2-layout-control-action-small-icon-horizontal, 0);
+        justify-content: center;
+        align-items: center;
     }
 }
 

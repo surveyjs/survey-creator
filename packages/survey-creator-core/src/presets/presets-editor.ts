@@ -90,6 +90,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.keepIncorrectValues = true;
     model.showPrevButton = false;
     model.showCompleteButton = false;
+    model.fitToContainer = false;
     model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
       model.setPropertyValue("isShowNextButton", true);
     });
@@ -151,6 +152,14 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onMatrixRowAdded.add((sender, options) => {
       editablePresets.forEach(item => item.onMatrixRowAdded(model, this.creator, options));
     });
+    model.onUpdateQuestionCssClasses.add(function(_, options) {
+      editablePresets.forEach(item => {
+        if (options.question.name === item.getMainElementName()) {
+          options.cssClasses.content += " sps-question__content--main";
+        }
+      });
+    });
+
     return model;
   }
   protected createResultModel(): SurveyModel {

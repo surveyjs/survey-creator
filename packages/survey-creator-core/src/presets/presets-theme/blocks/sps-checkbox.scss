@@ -113,6 +113,12 @@
   border: none;
   padding: 0;
   margin: 0;
+  align-self: stretch;
+  display: flex;
+}
+
+.sps-selectbase__column {
+  flex-grow: 1;
 }
 
 .sps-selectbase__label {

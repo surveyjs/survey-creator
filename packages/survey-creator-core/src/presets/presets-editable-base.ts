@@ -58,6 +58,7 @@ export class CreatorPresetEditableBase {
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val + "'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
+  public getMainElementName() : any { return undefined; }
   public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {
     const page = model.getPageByName(this.pageName);
     const core = page && page.isVisible ? this.getJsonValueCore(model, creator, defaultJson) : undefined;
