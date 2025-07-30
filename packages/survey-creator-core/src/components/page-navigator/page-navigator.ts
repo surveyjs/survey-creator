@@ -129,6 +129,10 @@ export class PageNavigatorViewModel extends Base {
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = (item: any) => {
+      const survey = this.pagesController.survey;
+      if (this.pageEditMode === "bypage" && survey.pages.indexOf(page) < 0) {
+        this.pagesController.addNewPage(page);
+      }
       this.scrollToPage(page);
     };
     item.data = page;
