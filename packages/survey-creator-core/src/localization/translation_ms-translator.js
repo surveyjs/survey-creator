@@ -154,7 +154,28 @@ function updateKeysAndCommentsBeforeTranslation(name, locale) {
       commentHash[item.key] = item;
     }
   }
-  comments.forEach(com => {
-
-  });
+  for (let i = comments.length - 1; i >= 0; i--) {
+    const item = comments[i];
+    const trPath = utils.getFullPath(json, com.key);
+    if (!trPath) {
+      comments.splice(i, 1);
+    } else {
+      const engPath = utils.getFullPath(englishJSON, com.key);
+      if (!engPath) {
+        utils.reportMessage("There is no english path for key: " + item.key + ", locale: " + locale);
+        comments.splice(i, 1);
+      } else {
+        const trValue = utils.getValueByPath(json, trPath);
+        const engValue = utils.getValueByPath(englishJSON, engPath);
+        if (trValue === item.tranlsated && engValue !== item.englishString) {
+          utils.reportMessage("There is no translation for key: " + item.key + ", locale: " + locale + ". English value: " + engValue);
+          comments.splice(i, 1);
+          const key = trPath[trPath.length - 1];
+          trPath.splice(trPath.length - 1, 1);
+          const trNode = utils.getNodeByPath(json, trPath);
+          delete trNode[key];
+        }
+      }
+    }
+  }
 }

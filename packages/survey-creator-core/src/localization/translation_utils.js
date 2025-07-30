@@ -191,21 +191,19 @@ module.exports = {
           if (match) {
             const englishString = match[1];
             const translated = match[2];
-            translations.push({ key, englishString, translated });
+            translations.push({ key, english, translation });
           }
         }
       }
     });
     return translations;
   },
-  findFullPaths: function(json, key) {
+  findFullPath: function(json, key) {
     const segments = key.split(".");
-    if (segments.length < 2) return [];
+    if (segments.length < 2) return undefined; // As per the requirement, key contains at least the last node and the previous one
 
     function search(obj, currentPath) {
-      if (typeof obj !== "object" || obj === null) return [];
-
-      const results = [];
+      if (typeof obj !== "object" || obj === null) return undefined;
 
       // Try matching the segments from the current object
       let temp = obj;
@@ -219,21 +217,204 @@ module.exports = {
       }
 
       if (i === segments.length) {
-        results.push([...currentPath, ...segments]);
+        return [...currentPath, ...segments];
       }
 
       // Recurse into sub-objects
       for (const k in obj) {
         if (typeof obj[k] === "object" && obj[k] !== null) {
-          const subResults = search(obj[k], [...currentPath, k]);
-          results.push(...subResults);
+          const result = search(obj[k], [...currentPath, k]);
+          if (result !== undefined) return result;
         }
       }
 
-      return results;
+      return undefined;
     }
 
     return search(json, []);
+  },
+  getJsonValue: function(json, path) {
+    for (let i = 0; i < path.length; i++) {
+      const key = path[i];
+      if (json && typeof json === "object" && key in json) {
+        json = json[key];
+      } else {
+        return undefined;
+      }
+    }
+    return json;
+  },
+  collectJsonComments: function(code) {
+    const result = [];
+    let i = 0;
+    const len = code.length;
+
+    function skipWhitespace() {
+      while(i < len && /\s/.test(code[i])) i++;
+    }
+
+    function skipSpace() {
+      while(i < len && (code[i] === " " || code[i] === "\t")) i++;
+    }
+
+    function skipComment() {
+      if (code[i] === "/" && code[i + 1] === "/") {
+        i += 2;
+        skipSpace();
+        let start = i;
+        while(i < len && code[i] !== "\n" && code[i] !== "\r") i++;
+        let comment = code.substring(start, i).trim();
+        if (code[i] === "\r") i++;
+        if (code[i] === "\n") i++;
+        return comment;
+      }
+      return null;
+    }
+
+    function parseString() {
+      let quote = code[i];
+      i++;
+      let start = i;
+      let str = "";
+      while(i < len) {
+        if (code[i] === "\\") {
+          str += code.substring(start, i);
+          i++;
+          if (i < len) {
+            str += code[i];
+            i++;
+          }
+          start = i;
+        } else if (code[i] === quote) {
+          str += code.substring(start, i);
+          i++;
+          return str;
+        } else {
+          i++;
+        }
+      }
+      throw new Error("Unterminated string");
+    }
+
+    function parseNumber() {
+      if (code[i] === "-" || /\d/.test(code[i])) {
+        while(i < len && /[\d.eE+-]/.test(code[i])) i++;
+      } else {
+        throw new Error("Expected number");
+      }
+    }
+
+    function parseValue() {
+      skipWhitespace();
+      if (code[i] === "{") {
+        return "object";
+      } else if (code[i] === '"' || code[i] === "'") {
+        parseString();
+        return "string";
+      } else if (code[i] === "-" || /\d/.test(code[i])) {
+        parseNumber();
+        return "number";
+      } else if (code.substr(i, 4) === "true") {
+        i += 4;
+        return "boolean";
+      } else if (code.substr(i, 5) === "false") {
+        i += 5;
+        return "boolean";
+      } else if (code.substr(i, 4) === "null") {
+        i += 4;
+        return "null";
+      } else {
+        throw new Error("Unexpected value");
+      }
+    }
+
+    function parseObject(currentPath) {
+      skipWhitespace();
+      if (code[i] !== "{") throw new Error("Expected {");
+      i++; // skip {
+      while(true) {
+        skipWhitespace();
+        let leadingComments = [];
+        let comment;
+        while((comment = skipComment())) {
+          if (comment) leadingComments.push(comment);
+        }
+        skipWhitespace();
+        if (code[i] === "}") {
+          i++;
+          break;
+        }
+        // Parse key
+        let key;
+        if (code[i] === '"' || code[i] === "'") {
+          key = parseString();
+        } else {
+          let start = i;
+          while(i < len && /[a-zA-Z0-9_$]/.test(code[i])) i++;
+          key = code.substring(start, i);
+          if (!key) throw new Error("Expected key");
+        }
+        let fullPath = currentPath ? currentPath + "." + key : key;
+        skipWhitespace();
+        if (code[i] !== ":") throw new Error("Expected :");
+        i++; // skip :
+        const valueType = parseValue();
+        if (valueType === "object") {
+          parseObject(fullPath);
+        }
+        // Trailing comment (same line)
+        skipSpace();
+        let trailingComment = skipComment();
+        // Add comments to result
+        leadingComments.forEach(c => {
+          result.push({ key: fullPath, comment: c, position: "top" });
+        });
+        if (trailingComment) {
+          result.push({ key: fullPath, comment: trailingComment, position: "right" });
+        }
+        skipWhitespace();
+        if (code[i] === ",") {
+          i++;
+        } else if (code[i] === "}") {
+          i++;
+          break;
+        } else {
+          throw new Error("Expected , or }");
+        }
+      }
+    }
+
+    // Find the start of the exported object
+    while(i < len) {
+      skipWhitespace();
+      if (code.substr(i, 6) === "export") {
+        i += 6;
+        skipWhitespace();
+        // Skip var/let/const
+        if (code.substr(i, 5) === "const") {
+          i += 5;
+        } else if (code.substr(i, 3) === "let" || code.substr(i, 3) === "var") {
+          i += 3;
+        } else {
+          continue;
+        }
+        skipWhitespace();
+        // Skip variable name
+        while(i < len && /[a-zA-Z0-9_$]/.test(code[i])) i++;
+        skipWhitespace();
+        if (code[i] === "=") {
+          i++;
+          skipWhitespace();
+          if (code[i] === "{") {
+            parseObject("");
+            return result;
+          }
+        }
+      } else {
+        i++;
+      }
+    }
+    throw new Error("No exported object found");
   },
   autoGeneratedStr: "Auto-generated string",
   autoGeneratedEnglishKeys: {},
