@@ -65,6 +65,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
             {
               type: "text",
               name: this.searchLocalesName,
+              placeholder: "Type to search...",
               titleLocation: "hidden",
               textUpdateMode: "onTyping"
             }, {

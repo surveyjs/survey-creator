@@ -2,9 +2,13 @@
 @use "../fonts" as *;
 
 .sps-question {
+  background: var(--sjs2-color-bg-basic-primary, #FFF);
+}
+
+.sps-question--with-frame {
   border-radius: var(--sjs2-radius-x250, 20px);
   border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
-  background: var(--sjs2-color-bg-basic-primary, #FFF);
+  overflow: hidden;
 }
 
 .sps-question__header {

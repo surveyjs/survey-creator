@@ -26,6 +26,7 @@ export var presetsCss = {
     withFrame: "",
     nested: "",
     expandableAnimating: "",
+    header: "sps-panel__header",
     title: "sps-title sps-panel__title",
     titleBar: "sd-action-title-bar sps-action-title-bar",
     contentEnter: "sps-panel__content--enter",
@@ -85,8 +86,8 @@ export var presetsCss = {
   rowDelayedEnter: "sps-row--delayed-fade-in",
   rowMultiple: "sps-row--multiple",
   question: {
-    withFrame: "",
-    nested: "",
+    withFrame: "sps-question--with-frame",
+    nested: "sps-question--nested",
     mainRoot: "sps-question sps-row__question",
     flowRoot: "sps-question sps-row__question sps-row__question--flow",
     asCell: "sps-table__cell",
