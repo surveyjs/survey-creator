@@ -887,3 +887,45 @@ test("Helper action not hidden", async (t) => {
     await takeElementScreenshot("helper-action.png", questionHeader, t, comparer);
   });
 });
+
+test("Character counter in property grid", async t => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const showSidebarButton = Selector("[title='Show Panel']");
+
+    await t.resizeWindow(1120, 900);
+
+    await ClientFunction(() => {
+      window["Survey"].Serializer.findProperty("question", "name").maxLength = 10;
+      window["Survey"].Serializer.findProperty("question", "title").maxLength = 20;
+    })();
+    await setJSON({
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ],
+              "showOtherItem": true
+            }
+          ]
+        }
+      ]
+    });
+    await t
+      .click(Selector(".svc-question__content"))
+      .click(showSidebarButton)
+      .click(Selector("[data-name='name']").find("input"));
+    await takeElementScreenshot("pg-maxLength-text.png", Selector(".spg-question__content").nth(0), t, comparer);
+
+    await t.click(Selector("[data-name='title']").find("textarea"));
+    await takeElementScreenshot("pg-maxLength-comment.png", Selector(".spg-question__content").nth(1), t, comparer);
+  });
+});
