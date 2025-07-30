@@ -1,7 +1,17 @@
 import { Base, Serializer, ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
-
+function searchItem(params) {
+  const questionInstance = this.survey.getQuestionByName(params[0]);
+  let itemvalue = params[1];
+  let text = params[2];
+  if (!text) return true;
+  const item = questionInstance.choices.filter(c => c.value == itemvalue)[0];
+  if (!item) return true;
+  return item.text.toUpperCase().indexOf(text.toUpperCase()) != -1;
+}
+import { FunctionFactory } from "survey-core";
+FunctionFactory.Instance.register("searchItem", searchItem);
 class LocalizationPreview extends SurveyModel {
   public getType(): string {
     return "localizationpreview";
@@ -49,13 +59,24 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
           choices: this.getCreatorLocales()
         },
         {
-          type: "checkbox",
-          name: this.surveyLocalesName,
+          type: "panel",
           title: "Survey languages",
-          minSelectedChoices: 1,
-          colCount: 3,
-          showSelectAllItem: true,
-          choices: this.getSurveyLocales()
+          elements: [
+            {
+              type: "text",
+              name: this.searchLocalesName,
+              titleLocation: "hidden",
+              textUpdateMode: "onTyping"
+            }, {
+              type: "checkbox",
+              name: this.surveyLocalesName,
+              titleLocation: "hidden",
+              minSelectedChoices: 1,
+              colCount: 3,
+              showSelectAllItem: true,
+              choices: this.getSurveyLocales(),
+              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}"
+            }]
         },
         {
           type: "boolean",
@@ -111,6 +132,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
+  private get searchLocalesName(): string { return this.path + "_searchLocales"; }
   private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }
   public get questionNames() {
     return [this.surveyLocalesName, this.surveyUseEnglishNames];
