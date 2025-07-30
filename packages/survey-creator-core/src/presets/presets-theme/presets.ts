@@ -13,6 +13,7 @@ export var presetsCss = {
   logoImage: "sps-logo__image",
   headerText: "sps-header__text",
   navigationButton: "",
+  bodyNavigationButton: "",
   completedPage: "sps-completedpage",
   navigation: {
     complete: "sps-btn sps-footer__complete-btn",

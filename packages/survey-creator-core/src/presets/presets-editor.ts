@@ -90,7 +90,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
     model.showPrevButton = false;
-    model.showCompleteButton = false;
+    model.showNavigationButtons = false;
     model.fitToContainer = false;
     model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
       model.setPropertyValue("isShowNextButton", true);
@@ -103,16 +103,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         model.currentPageNo = 0;
       }
     };
-
-    model.addNavigationItem({
-      id: "apply-settings",
-      title: "Apply",
-      action: () => {
-        this.applyFromSurveyModel();
-      },
-      css: "nav-button",
-      innerCss: "sd-btn"
-    });
 
     editablePresets.forEach(item => item.setupQuestions(model, this));
     if (!this.defaultJsonValue) {
@@ -137,6 +127,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         this.applyFromSurveyModel(false);
         editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
       }
+    });
+    model.onGetQuestionTitleActions.add((_, options) => {
+      editablePresets.forEach(item => {
+        if (options.question.name == item.getNavigationElementName()) {
+          options.actions = model.navigationBar.actions;
+        }
+      });
     });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));

@@ -1,4 +1,5 @@
 @use "../../../variables.scss" as *;
+@use "../fonts.scss" as *;
 
 .sps-action-bar {
   display: flex;
@@ -8,6 +9,32 @@
   margin-left: auto;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.sps-btn {
+  appearance: none;
+  border: none;
+  display: flex;
+  padding: var(--sjs2-layout-control-action-medium-box-vertical, 12px) var(--sjs2-layout-control-action-medium-box-horizontal, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--sjs2-layout-control-action-medium-box-gap, 0);
+  margin: var(--sjs2-layout-control-action-medium-label-vertical, 0) var(--sjs2-layout-control-action-medium-label-horizontal, 12px);
+  border-radius: var(--sjs2-radius-control-button, 8px);
+  background: var(--sjs2-color-bg-brand-primary, #19B394);
+
+  color: var(--sjs2-color-fg-static-main-primary, #FFF);
+  text-align: center;
+
+  @include sjs2--typography--default-strong;
+
+  &:hover {
+    background: var(--sjs2-color-bg-brand-primary-dim, #15987E);
+  }
+  &:active {
+    background: var(--sjs2-color-bg-brand-primary, #19B394);
+  }
+
 }
 
 .sps-action-button {
