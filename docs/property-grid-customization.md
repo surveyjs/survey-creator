@@ -70,6 +70,10 @@ engLocale.pageNextText = "Forward";
 engLocale.completeText = "Send";
 ```
 
+> Default values set through either `Serializer` or localization methods are not stored in the survey JSON schema. To ensure these defaults are applied when the survey runs, you must include the same code in your runtime application. Alternatively, you can use Survey Creator's events to assign initial values when elements are created. For more information, refer to the following help topic:
+>
+> [Customize Survey Elements on Creation](/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
+
 ## Add Help Texts to Property Editors
 
 Property editors can display hints or tooltips that help survey authors specify correct property values. For example, the following image illustrates a hint for the [`acceptedTypes`](https://surveyjs.io/form-library/documentation/api-reference/file-model#acceptedTypes) property editor in a [File Upload](https://surveyjs.io/form-library/examples/file-upload/) question: 

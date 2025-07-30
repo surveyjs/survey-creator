@@ -169,7 +169,7 @@ When [using standalone components](https://github.com/surveyjs/code-examples/tre
 ```js
 // survey-creator.component.ts
 // ...
-import { SurveyCreatorModule } from 'survey-angular-ui';
+import { SurveyCreatorModule } from 'survey-creator-angular';
 
 @Component({
   // ...
