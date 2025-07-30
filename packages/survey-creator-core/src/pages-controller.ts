@@ -48,9 +48,6 @@ export class PagesController extends Base {
     this.page2Display = this.survey.currentPage;
     this.surveyValue.onCurrentPageChanged.add(this.currentPageChangedFunc);
   }
-  public addNewPage(page: PageModel): void {
-    this.survey.addPage(page);
-  }
   public dispose(): void {
     super.dispose();
     this.removeFunctions();
