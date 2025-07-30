@@ -833,6 +833,7 @@ test("Drag indicator for custom widget", async (t) => {
         afterRender: (question, element) => {
           const input = element.getElementsByTagName("input")[0];
           input.style.width = "100%";
+          input.style.boxSizing = "content-box";
           input.style.padding = "8px auto";
         },
       };

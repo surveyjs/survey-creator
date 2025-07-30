@@ -209,6 +209,12 @@ export var propertyGridCss = {
     cleanButton: "spg-dropdown__clean-button spg-input__edit-button",
     controlReadOnly: "sd-input--disabled sd-input--readonly"
   },
+  tagbox: {
+    cleanItemButton: "sd-tagbox-item_clean-button spg-tagbox-item_clean-button",
+    cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg spg-tagbox-item_clean-button-svg",
+    control: "sd-input sd-tagbox sd-dropdown spg-tagbox spg-dropdown",
+    controlValue: "sd-tagbox__value sd-dropdown__value spg-tagbox__value",
+  },
   buttongroup: {
     root: "sd-button-group-scrollable-container spg-button-group",
     item: "spg-button-group__item",

@@ -97,6 +97,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     draggedElement.toolboxItemIconName = toolboxItemModel.iconName;
     this.startDrag(event, draggedElement);
   }
+  public get isDraggingExistingElement(): boolean {
+    return !!this.draggedElement && this.isDraggedElementSelected;
+  }
 
   public startDragSurveyElement(
     event: PointerEvent,
@@ -585,6 +588,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   public clear(): void {
     this.insideElement = null;
+    this.isDraggedElementSelected = false;
     this.removeDragOverMarker(this.prevDropTarget);
     this.removeDragOverMarker(this.dropTarget);
     this.removeDragOverMarker(this.dragOverIndicatorElement);

@@ -577,6 +577,79 @@ test("Check minimal height", async ({ page }) => {
   await expect(root).toHaveScreenshot("creator-min-height.png");
 });
 
+test("Multiple questions in one row, row content has scrolling", async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.evaluate(() => {
+    window["creator"].JSON = {
+      "title": "WELD SHOP CHECKLIST",
+      "pages": [
+        {
+          "name": "introInfo",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel3",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "uctPartNum",
+                  "title": "UCT Part Number"
+                },
+                {
+                  "type": "text",
+                  "name": "rev",
+                  "startWithNewLine": false,
+                  "title": "Rev"
+                },
+                {
+                  "type": "text",
+                  "name": "qty",
+                  "startWithNewLine": false,
+                  "title": "Qty"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "name": "date",
+              "startWithNewLine": false,
+              "title": "Date",
+              "maskType": "datetime",
+              "maskSettings": {
+                "pattern": "mm-dd-yyyy"
+              }
+            },
+            {
+              "type": "panel",
+              "name": "panel5",
+              "startWithNewLine": false,
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "woNum",
+                  "title": "WO Number"
+                },
+                {
+                  "type": "comment",
+                  "name": "customer",
+                  "title": "Customer"
+                }
+              ]
+            },
+            {
+              "type": "boolean",
+              "name": "fairRequires",
+              "title": "If requires FAIR"
+            }
+          ]
+        },
+      ],
+      "questionsOnPageMode": "singlePage"
+    };
+  });
+  await compareScreenshot(page, ".sd-page__row.sd-row--multiple", "row-multiple-questions.png");
+});
+
 test("Check adorner actions responsivity after convert", async ({ page }) => {
   await page.setViewportSize({ width: 1432, height: 900 });
   const root = page.locator(".sd-page.sd-body__page");

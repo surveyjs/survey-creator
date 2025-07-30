@@ -1,6 +1,8 @@
 <ng-template #template>
   <div class="svc-flex-column">
-    <svc-toolbox *ngIf="model.isToolboxVisible" [model]="creator"></svc-toolbox>
+    <ng-container *ngIf="model.isToolboxVisible">
+      <ng-template [component]="{name: 'svc-toolbox', data: { model: creator }}"></ng-template>
+    </ng-container>
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
     <sv-scroll>

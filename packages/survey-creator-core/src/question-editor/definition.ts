@@ -202,6 +202,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   matrix: {
     properties: [
+      "cellType",
       { name: "eachRowRequired", tab: "validation" },
       { name: "eachRowUnique", tab: "validation" },
       { name: "columnMinWidth", tab: "layout" },
@@ -365,7 +366,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ]
   },
   "itemvalue[]@choices": {
-    properties: [{ name: "visibleIf" }, { name: "enableIf" }],
+    properties: ["visibleIf", "enableIf"],
+    tabs: [{ name: "general" }]
+  },
+  "choiceitem[]@choices": {
+    properties: ["visibleIf", "enableIf", "showCommentArea", "isCommentRequired", "commentPlaceholder"],
     tabs: [{ name: "general" }]
   },
   "imageitemvalue[]@choices": {

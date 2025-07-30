@@ -46,6 +46,7 @@ test.before(async t => {
   await setOptions();
 })("Drag Drop Toolbox Item and Empty Page ({pageEditMode: 'bypage'})", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const emptyPage = Selector("[data-sv-drop-target-survey-element='page2']");
 
   await t
     .hover(RatingToolboxItem)
@@ -54,7 +55,7 @@ test.before(async t => {
 
   await t
     .hover(RatingToolboxItem)
-    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(RatingToolboxItem, emptyPage, { speed: 0.5 });
 
   const pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(2);

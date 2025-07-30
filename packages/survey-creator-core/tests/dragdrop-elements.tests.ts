@@ -4,6 +4,7 @@ import { DropIndicatorPosition } from "../src/drag-drop-enums";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageAdorner } from "../src/components/page";
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
   let ddHelper = new DragDropSurveyElements(null);
@@ -1562,6 +1563,55 @@ test("onQuestionAdded doesn't fire when drag drop existing element", () => {
     ],
   });
   expect(log).toBe("");
+});
+test("onQuestionAdded doesn't fire when drag drop existing element on new page, Bug#7051", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "q1", },
+      { "type": "text", "name": "q2", },
+      { "type": "text", "name": "q3", },
+    ]
+  };
+  let log = "";
+
+  const creator = new CreatorTester();
+  creator.JSON = json;
+  creator.onQuestionAdded.add((s, o) => {
+    log += "->added:" + o.question.name;
+  });
+  const survey = creator.survey;
+  const q1 = survey.getQuestionByName("q1");
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  new PageAdorner(creator, desigerTab.newPage);
+  creator.selectElement(q1);
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.draggedElement = q1;
+  ddHelper["isDraggedElementSelected"] = true;
+
+  ddHelper.dragOverCore(desigerTab.newPage, DropIndicatorPosition.Inside);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q2", "type": "text", },
+          { "name": "q3", "type": "text", },
+        ],
+      },
+      {
+        "name": "page2",
+        "elements": [
+          { "name": "q1", "type": "text", },
+        ],
+      },
+    ],
+  });
+  expect(log).toBe("");
+  ddHelper.clear();
+  expect(ddHelper["isDraggedElementSelected"]).toBeFalsy();
 });
 test("onQuestionAdded fires when drag drop new element", () => {
   const json = {

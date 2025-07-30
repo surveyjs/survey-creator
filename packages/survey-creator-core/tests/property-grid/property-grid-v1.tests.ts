@@ -1540,8 +1540,8 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   var question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
   question.choices = [1, 2, 3];
   var tabs =
-    SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
+    SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = [
     { name: "general", visible: false }
   ];
 
@@ -1552,7 +1552,7 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   expect(
     choicesQuestion.hasDetailPanel(choicesQuestion.visibleRows[0])
   ).toBeFalsy();
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = tabs;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = tabs;
 });
 
 test("SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invisible", () => {
@@ -1570,17 +1570,15 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invi
   var panel = rows[0].detailPanel;
   expect(panel.getQuestionByName("visibleIf").isVisible).toBeTruthy();
   expect(panel.getQuestionByName("enableIf").isVisible).toBeTruthy();
-
-  Serializer.findProperty("itemvalue", "visibleIf").visible = false;
-  Serializer.findProperty("itemvalue", "enableIf").visible = false;
+  const props = ["visibleIf", "enableIf", "showCommentArea", "isCommentRequired", "commentPlaceholder"];
+  props.forEach((propName) => { Serializer.findProperty("choiceitem", propName).visible = false; });
   propertyGrid = new PropertyGridModelTester(question);
   choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
   rows = choicesQuestion.visibleRows;
   expect(choicesQuestion.hasDetailPanel(rows[0])).toBeFalsy();
-  Serializer.findProperty("itemvalue", "visibleIf").visible = true;
-  Serializer.findProperty("itemvalue", "enableIf").visible = true;
+  props.forEach((propName) => { Serializer.findProperty("choiceitem", propName).visible = true; });
 });
 test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   var survey = new SurveyModel();
