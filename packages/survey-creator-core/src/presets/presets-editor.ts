@@ -135,6 +135,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         }
       });
     });
+    model.onGetPanelTitleActions.add((_, options) => {
+      editablePresets.forEach(item => {
+        if (options.panel.name == item.getNavigationElementName()) {
+          options.actions = model.navigationBar.actions;
+        }
+      });
+    });
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));
     });
@@ -154,6 +161,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => {
         if (options.question.name === item.getMainElementName()) {
           options.cssClasses.content += " sps-question__content--main";
+        }
+      });
+    });
+    model.onUpdatePanelCssClasses.add(function(_, options) {
+      editablePresets.forEach(item => {
+        if (options.panel.name === item.getNavigationElementName()) {
+          options.cssClasses.panel.container += " sps-panel--navigation";
         }
       });
     });

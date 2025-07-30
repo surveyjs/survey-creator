@@ -15,7 +15,14 @@
     }
   }
 }
-
+.sps-panel--navigation {
+  position: relative;
+  .sps-panel__header {
+    width: auto;
+    position: absolute;
+    right: 0;
+  }
+}
 .sps-panel__header {
   width: 100%;
   display: flex;
