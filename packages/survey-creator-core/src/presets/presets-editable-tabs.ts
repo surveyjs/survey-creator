@@ -58,8 +58,18 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
             {
               type: "dropdown",
               name: this.nameActiveTab,
-              title: "Default tab",
-              startWithNewLine: false
+              title: "Default tab"
+            }
+          ]
+        },
+        {
+          type: "panel",
+          title: " ",
+          name: this.navigationPanelName,
+          elements: [
+            {
+              type: "html",
+              html: "&nbsp"
             }
           ]
         }

@@ -17,10 +17,20 @@
 }
 .sps-panel--navigation {
   position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: var(--sjs2-spacing-x250, 20px);
+  align-items: center;
+  gap: var(--sjs2-spacing-x150, 12px);
   .sps-panel__header {
-    width: auto;
-    position: absolute;
-    right: 0;
+     width: auto;
+     flex-grow: 1;
+     padding: 0;
+     display: flex;
+     justify-content: flex-end;
+   }
+  .sps-question__content {
+    padding: 0;
   }
 }
 .sps-panel__header {

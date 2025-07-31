@@ -89,12 +89,11 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               name: this.surveyUseEnglishNames,
               title: "Translate Survey language names to Engish",
               titleLocation: "hidden",
-              renderAs: "checkbox"
+              renderAs: "switch"
             }] }
       ] };
   }
   public getMainElementName() : any { return this.surveyLocalesName; }
-  public getNavigationElementName() : any { return this.navigationPanelName; }
 
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
@@ -141,7 +140,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
   private get searchLocalesName(): string { return this.path + "_searchLocales"; }
   private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }
-  private get navigationPanelName(): string { return this.path + "_navigation"; }
+
   public get questionNames() {
     return [this.surveyLocalesName, this.surveyUseEnglishNames];
   }

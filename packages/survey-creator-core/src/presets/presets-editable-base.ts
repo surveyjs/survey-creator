@@ -9,6 +9,7 @@ export interface ICreatorPresetEditorSetup {
 export class CreatorPresetEditableBase {
   private propertyGrid: PropertyGridModel;
   public parent: CreatorPresetEditableBase;
+  protected get navigationPanelName(): string { return this.path + "_navigation"; }
   public children: Array<CreatorPresetEditableBase> = [];
   public constructor(public preset: CreatorPresetBase) {
   }
@@ -59,7 +60,7 @@ export class CreatorPresetEditableBase {
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
   public getMainElementName() : any { return undefined; }
-  public getNavigationElementName() : any { return undefined; }
+  public getNavigationElementName() : any { return this.navigationPanelName; }
   public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {
     const page = model.getPageByName(this.pageName);
     const core = page && page.isVisible ? this.getJsonValueCore(model, creator, defaultJson) : undefined;
