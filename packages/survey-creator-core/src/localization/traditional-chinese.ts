@@ -1,3439 +1,3480 @@
 import { setupLocale } from "survey-creator-core";
 
-var traditionalChineseTranslation = {
+export var traditionalChineseTranslation = {
   // survey templates
   survey: {
+    // "Edit"
     edit: "編輯",
+    // [Auto-translated] "Watch and learn how to create surveys"
     externalHelpLink: "觀看並瞭解如何創建調查",
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
+    // "Please drop a question here from the Toolbox."
     dropQuestion: "請將問題放置於此",
+    // [Auto-translated] "Create a rule to customize the flow of the survey."
     addLogicItem: "創建規則以自定義調查流。",
+    // "Copy"
     copy: "複製",
+    // [Auto-translated] "Duplicate"
     duplicate: "重複",
+    // "Add to toolbox"
     addToToolbox: "添加到工具箱",
+    // "Delete Panel"
     deletePanel: "刪除面板",
+    // "Delete Question"
     deleteQuestion: "刪除題目",
+    // "Convert to"
     convertTo: "轉變為",
-    drag: "拖動元素",
+    // [Auto-translated] "Drag element"
+    drag: "拖動元素"
   },
   // Creator tabs
   tabs: {
+    // "Preview"
     preview: "測試問卷",
+    // "Themes"
     theme: "主題",
+    // "Translations"
     translation: "譯本",
+    // "Designer"
     designer: "問卷設計器",
+    // "JSON Editor"
     json: "JSON 編輯器",
+    // [Auto-translated] "Logic"
     logic: "邏輯"
   },
   // Question types
   qt: {
+    // [Auto-translated] "Default"
     default: "違約",
+    // "Checkboxes"
     checkbox: "多項選擇",
+    // "Long Text"
     comment: "多行文本框",
+    // [Auto-translated] "Image Picker"
     imagepicker: "圖像選取器",
+    // [Auto-translated] "Ranking"
     ranking: "排名",
+    // [Auto-translated] "Image"
     image: "圖像",
+    // "Dropdown"
     dropdown: "下拉框",
+    // [Auto-translated] "Multi-Select Dropdown"
     tagbox: "多選下拉清單",
+    // "File Upload"
     file: "文件上傳",
+    // "HTML"
     html: "Html 代碼",
+    // "Single-Select Matrix"
     matrix: "矩陣 (單選題)",
+    // "Multi-Select Matrix"
     matrixdropdown: "矩陣 (下拉框)",
+    // "Dynamic Matrix"
     matrixdynamic: "矩陣 (動態問題)",
+    // "Multiple Textboxes"
     multipletext: "文本框組",
+    // "Panel"
     panel: "面板",
+    // "Dynamic Panel"
     paneldynamic: "面板(動態)",
+    // "Radio Button Group"
     radiogroup: "單項選擇",
+    // "Rating Scale"
     rating: "評分",
+    // [Auto-translated] "Slider"
     slider: "滑塊",
+    // "Single-Line Input"
     text: "文本框",
+    // "Yes/No (Boolean)"
     boolean: "布林選項",
+    // "Expression (read-only)"
     expression: "表達式",
+    // [Auto-translated] "Signature"
     signaturepad: "簽名",
+    // [Auto-translated] "Button Group"
     buttongroup: "按鈕組"
   },
   toolboxCategories: {
+    // "General"
     general: "常規",
+    // "Choice Questions"
     choice: "選擇題",
+    // "Text Input Questions"
     text: "文本輸入問題",
+    // "Containers"
     containers: "器皿",
+    // "Matrix Questions"
     matrix: "矩陣問題",
+    // "Misc"
     misc: "雜項"
   },
   // Strings in SurveyJS Creator
   ed: {
+    // [Auto-translated] "Default ({0})"
     defaultLocale: "預設值 （{0}）",
+    // "Survey"
     survey: "調查問卷",
+    // [Auto-translated] "Settings"
     settings: "設置",
+    // [Auto-translated] "Open settings"
     settingsTooltip: "打開設置",
+    // [Auto-translated] "Survey Settings"
     surveySettings: "調查設置",
+    // [Auto-translated] "Open survey settings"
     surveySettingsTooltip: "調查設置",
+    // [Auto-translated] "Theme Settings"
     themeSettings: "主題設置",
+    // [Auto-translated] "Open theme settings"
     themeSettingsTooltip: "主題設置",
+    // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Creator 設置",
+    // [Auto-translated] "Show Panel"
     showPanel: "顯示面板",
+    // [Auto-translated] "Hide Panel"
     hidePanel: "“隱藏”面板",
+    // [Auto-translated] "Select previous"
     prevSelected: "選擇上一個",
+    // [Auto-translated] "Select next"
     nextSelected: "選擇下一步",
+    // [Auto-translated] "Focus previous"
     prevFocus: "焦點 上一頁",
+    // [Auto-translated] "Focus next"
     nextFocus: "接下來的重點",
+    // [Auto-translated] "Survey"
     surveyTypeName: "調查",
+    // [Auto-translated] "Page"
     pageTypeName: "頁",
+    // [Auto-translated] "Panel"
     panelTypeName: "面板",
+    // [Auto-translated] "Question"
     questionTypeName: "問題",
+    // [Auto-translated] "Column"
     columnTypeName: "列",
+    // "Add New Page"
     addNewPage: "添加新頁面",
+    // [Auto-translated] "Scroll to the Right"
     moveRight: "向右滾動",
+    // [Auto-translated] "Scroll to the Left"
     moveLeft: "向左滾動",
+    // "Delete Page"
     deletePage: "刪除頁面",
+    // "Edit Page"
     editPage: "編輯頁面",
+    // [Auto-translated] "Edit"
     edit: "編輯",
+    // "page"
     newPageName: "頁面",
+    // "question"
     newQuestionName: "問題",
+    // "panel"
     newPanelName: "面板",
+    // [Auto-translated] "text"
     newTextItemName: "發簡訊",
+    // [Auto-translated] "Default"
     defaultV2Theme: "違約",
+    // [Auto-translated] "Modern"
     modernTheme: "摩登",
+    // [Auto-translated] "Default (legacy)"
     defaultTheme: "預設（舊版）",
+    // "Preview Survey Again"
     testSurveyAgain: "再次測試問卷",
+    // "Survey width: "
     testSurveyWidth: "問卷寬度: ",
+    // [Auto-translated] "You had to navigate to"
     navigateToMsg: "你必須導航到",
+    // "Save Survey"
     saveSurvey: "保存問卷",
+    // [Auto-translated] "Save Survey"
     saveSurveyTooltip: "保存調查",
+    // [Auto-translated] "Save Theme"
     saveTheme: "保存主題",
+    // [Auto-translated] "Save Theme"
     saveThemeTooltip: "保存主題",
+    // [Auto-translated] "Hide errors"
     jsonHideErrors: "隱藏錯誤",
+    // [Auto-translated] "Show errors"
     jsonShowErrors: "顯示錯誤",
+    // "Undo"
     undo: "還原",
+    // "Redo"
     redo: "重做",
+    // [Auto-translated] "Undo last change"
     undoTooltip: "恢復上次更改",
+    // [Auto-translated] "Redo the change"
     redoTooltip: "重做更改",
+    // [Auto-translated] "Expand"
     expandTooltip: "擴大",
+    // [Auto-translated] "Collapse"
     collapseTooltip: "崩潰",
+    // "Expand All"
     expandAllTooltip: "全部展開",
+    // "Collapse All"
     collapseAllTooltip: "全部摺疊",
+    // [Auto-translated] "Zoom In"
     zoomInTooltip: "放大",
+    // [Auto-translated] "Zoom to 100%"
     zoom100Tooltip: "縮放到 100%",
+    // [Auto-translated] "Zoom Out"
     zoomOutTooltip: "縮小",
+    // [Auto-translated] "Lock expand/collapse state for questions"
     lockQuestionsTooltip: "鎖定問題的展開/摺疊狀態",
+    // [Auto-translated] "Show more"
     showMoreChoices: "顯示更多",
+    // [Auto-translated] "Show less"
     showLessChoices: "顯示更少",
+    // [Auto-translated] "Copy"
     copy: "複製",
+    // [Auto-translated] "Cut"
     cut: "切",
+    // [Auto-translated] "Paste"
     paste: "糊",
+    // [Auto-translated] "Copy selection to clipboard"
     copyTooltip: "將選取內容複製到剪貼簿",
+    // [Auto-translated] "Cut selection to clipboard"
     cutTooltip: "將所選取內容剪下剪貼簿",
+    // [Auto-translated] "Paste from clipboard"
     pasteTooltip: "從剪貼簿粘貼",
+    // "Options"
     options: "選項",
+    // "Generate Valid JSON"
     generateValidJSON: "生成 JSON",
+    // "Generate Readable JSON"
     generateReadableJSON: "生成易讀的 JSON",
+    // "Toolbox"
     toolbox: "工具箱",
+    // [Auto-translated] "Properties"
     "property-grid": "性能",
+    // [Auto-translated] "Search"
     toolboxSearch: "搜索",
+    // [Auto-translated] "Type to search..."
     toolboxFilteredTextPlaceholder: "鍵入以搜尋...",
+    // [Auto-translated] "No results found"
     toolboxNoResultsFound: "未找到結果",
+    // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
+    // [Auto-translated] "No results found"
     propertyGridNoResultsFound: "未找到結果",
+    // [Auto-translated] "Start configuring your form"
     propertyGridPlaceholderTitle: "開始配置表單",
+    // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。",
+    // "Please correct JSON."
     correctJSON: "修正 JSON",
+    // "Survey Results "
     surveyResults: "問卷結果: ",
+    // [Auto-translated] "As Table"
     surveyResultsTable: "如表",
+    // [Auto-translated] "As JSON"
     surveyResultsJson: "作為 JSON",
+    // [Auto-translated] "Question Title"
     resultsTitle: "問題標題",
+    // [Auto-translated] "Question Name"
     resultsName: "問題名稱",
+    // [Auto-translated] "Answer Value"
     resultsValue: "答案值",
+    // [Auto-translated] "Display Value"
     resultsDisplayValue: "顯示值",
+    // "Modified"
     modified: "已修改",
+    // "Saving"
     saving: "保存中...",
+    // "Saved"
     saved: "已保存",
+    // [Auto-translated] "Error"
     propertyEditorError: "錯誤",
+    // [Auto-translated] "Error! Editor content is not saved."
     saveError: "錯誤！不保存編輯器內容。",
+    // [Auto-translated] "Language Settings"
     translationPropertyGridTitle: "語言設置",
+    // [Auto-translated] "Theme Settings"
     themePropertyGridTitle: "主題設置",
+    // [Auto-translated] "Add Language"
     addLanguageTooltip: "添加語言",
+    // [Auto-translated] "Languages"
     translationLanguages: "語言",
+    // [Auto-translated] "Are you certain you wish to delete all strings for this language?"
     translationDeleteLanguage: "您確定要刪除此語言的所有字串嗎？",
+    // [Auto-translated] "Select language to translate"
     translationAddLanguage: "選擇要翻譯的語言",
+    // [Auto-translated] "All Strings"
     translationShowAllStrings: "所有字串",
+    // [Auto-translated] "Used Strings Only"
     translationShowUsedStringsOnly: "僅使用的字串",
+    // [Auto-translated] "All Pages"
     translationShowAllPages: "所有頁面",
+    // [Auto-translated] "No strings to translate. Please, change the filter."
     translationNoStrings: "沒有要翻譯的字串。請更換過濾器。",
+    // [Auto-translated] "Export to CSV"
     translationExportToSCVButton: "匯出為CSV",
+    // [Auto-translated] "Import from CSV"
     translationImportFromSCVButton: "從 CSV 導入",
+    // [Auto-translated] "Auto-translate All"
     translateUsigAI: "自動翻譯全部",
+    // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "翻譯語言組合：",
+    // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "未翻譯的字串",
+    // [Auto-translated] "Merge {0} with default locale"
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
+    // [Auto-translated] "Translation..."
     translationPlaceHolder: "譯本。。。",
+    // [Auto-translated] "Source: "
     translationSource: "源：",
+    // [Auto-translated] "Target: "
     translationTarget: "目標：",
+    // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "不支援YouTube連結。",
+    // [Auto-translated] "Export"
     themeExportButton: "出口",
+    // [Auto-translated] "Import"
     themeImportButton: "進口",
+    // [Auto-translated] "Export"
     surveyJsonExportButton: "出口",
+    // [Auto-translated] "Import"
     surveyJsonImportButton: "進口",
+    // [Auto-translated] "Copy to clipboard"
     surveyJsonCopyButton: "複製到剪貼板",
+    // [Auto-translated] "Reset theme settings to default"
     themeResetButton: "將主題設置重置為預設值",
+    // [Auto-translated] "Do you really want to reset the theme? All your customizations will be lost."
     themeResetConfirmation: "你真的要重置主題嗎？您的所有自定義項都將丟失。",
+    // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "是，重置主題",
+    // [Auto-translated] "Bold"
     bold: "大膽",
+    // [Auto-translated] "Italic"
     italic: "斜體的",
+    // [Auto-translated] "Underline"
     underline: "下劃線",
+    // [Auto-translated] "Add Question"
     addNewQuestion: "添加問題",
+    // [Auto-translated] "Select page..."
     selectPage: "選擇頁面...",
+    // [Auto-translated] "Choices are copied from"
     carryForwardChoicesCopied: "選擇是從",
+    // [Auto-translated] "Choices are loaded from a web service."
     choicesLoadedFromWebText: "選項是從 Web 服務載入的。",
+    // [Auto-translated] "Go to settings"
     choicesLoadedFromWebLinkText: "前往“設置”",
+    // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "載入選項的預覽",
+    // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML內容將在這裡。",
+    // [Auto-translated] "Drop a question from the toolbox here."
     panelPlaceHolder: "在此處從工具箱中刪除問題。",
+    // [Auto-translated] "The survey is empty. Drag an element from the toolbox or click the button below."
     surveyPlaceHolder: "調查為空。從工具箱中拖動元素或按下下面的按鈕。",
+    // [Auto-translated] "The page is empty. Drag an element from the toolbox or click the button below."
     pagePlaceHolder: "頁面為空。從工具箱中拖動元素或按下下面的按鈕。",
+    // [Auto-translated] "Drag and drop an image here or click the button below and choose an image to upload"
     imagePlaceHolder: "將圖像拖放到此處或按下下面的按鈕並選擇要上傳的圖像",
+    // "Click the \"Add Question\" button below to start creating your form."
     surveyPlaceHolderMobile: "按兩下下面的「添加問題」 按鈕開始創建表單。",
+    // [Auto-translated] "Your form is empty"
     surveyPlaceholderTitle: "您的表單為空",
+    // [Auto-translated] "Your form is empty"
     surveyPlaceholderTitleMobile: "您的表單為空",
+    // [Auto-translated] "Drag an element from the toolbox or click the button below."
     surveyPlaceholderDescription: "從工具箱中拖動元素或按下下面的按鈕。",
+    // [Auto-translated] "Drag an element from the toolbox or click the button below."
     surveyPlaceholderDescriptionMobile: "從工具箱中拖動元素或按下下面的按鈕。",
+    // [Auto-translated] "No preview"
     previewPlaceholderTitle: "無預覽",
+    // [Auto-translated] "No preview"
     previewPlaceholderTitleMobile: "無預覽",
+    // [Auto-translated] "The survey doesn't contain any visible elements."
     previewPlaceholderDescription: "調查不包含任何可見元素。",
+    // [Auto-translated] "The survey doesn't contain any visible elements."
     previewPlaceholderDescriptionMobile: "調查不包含任何可見元素。",
+    // [Auto-translated] "No strings to translate"
     translationsPlaceholderTitle: "無需翻譯字串",
+    // [Auto-translated] "No strings to translate"
     translationsPlaceholderTitleMobile: "無需翻譯字串",
+    // [Auto-translated] "Add elements to your form or change the strings filter in the toolbar."
     translationsPlaceholderDescription: "將元素添加到表單或更改工具列中的字串篩選器。",
+    // [Auto-translated] "Add elements to your form or change the strings filter in the toolbar."
     translationsPlaceholderDescriptionMobile: "將元素添加到表單或更改工具列中的字串篩選器。",
+    // "Click the \"Add Question\" button below to add a new element to the page."
     pagePlaceHolderMobile: "按兩下下面的「添加問題」 按鈕，向頁面添加新元素。",
+    // "Click the \"Add Question\" button below to add a new element to the panel."
     panelPlaceHolderMobile: "按下下面的「添加問題」 按鈕，將新元素添加到面板中。",
+    // [Auto-translated] "Click the button below and choose an image to upload"
     imagePlaceHolderMobile: "點擊下面的按鈕，選擇要上傳的圖片",
+    // [Auto-translated] "Choose Image"
     imageChooseImage: "選擇圖像",
-    addNewTypeQuestion: "新增{0}", //{0} is localizable question type
+    // [Auto-translated] "Add {0}"
+    addNewTypeQuestion: "新增{0}", // {0} is localizable question type
+    // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[徽標]",
+    // [Auto-translated] "Item "
     choices_Item: "專案",
+    // [Auto-translated] "Select a file"
     selectFile: "選擇檔案",
+    // [Auto-translated] "Remove the file"
     removeFile: "刪除檔案",
     lg: {
+      // [Auto-translated] "Add New Rule"
       addNewItem: "添加新規則",
+      // [Auto-translated] "Create a rule to customize the flow of the survey."
       empty_tab: "創建規則以自定義調查流。",
+      // [Auto-translated] "No logical rules"
       logicPlaceholderTitle: "無邏輯規則",
+      // [Auto-translated] "No logical rules"
       logicPlaceholderTitleMobile: "無邏輯規則",
+      // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescription: "創建規則以自定義調查流程。",
+      // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescriptionMobile: "創建規則以自定義調查流程。",
+      // [Auto-translated] "Show (hide) page"
       page_visibilityName: "顯示（隱藏）頁面",
+      // [Auto-translated] "Enable (disable) page"
       page_enableName: "啟用（禁用）頁面",
+      // [Auto-translated] "Make page required"
       page_requireName: "將頁面設為必填項",
+      // [Auto-translated] "Show (hide) panel"
       panel_visibilityName: "“顯示（隱藏）”面板",
+      // [Auto-translated] "Enable (disable) panel"
       panel_enableName: "啟用（禁用）面板",
+      // [Auto-translated] "Make page required"
       panel_requireName: "將頁面設為必填項",
+      // [Auto-translated] "Show (hide) question"
       question_visibilityName: "顯示（隱藏）問題",
+      // [Auto-translated] "Enable (disable) question"
       question_enableName: "啟用（禁用）問題",
+      // [Auto-translated] "Make question required"
       question_requireName: "提出必填題",
+      // [Auto-translated] "Reset question value"
       question_resetValueName: "重置問題值",
+      // [Auto-translated] "Set question value"
       question_setValueName: "設置問題值",
+      // [Auto-translated] "Show (hide) column"
       column_visibilityName: "顯示（隱藏）列",
+      // [Auto-translated] "Enable (disable) column"
       column_enableName: "啟用（禁用）列",
+      // [Auto-translated] "Make column required"
       column_requireName: "使列成為必填項",
+      // [Auto-translated] "Reset column value"
       column_resetValueName: "重置列值",
+      // [Auto-translated] "Set column value"
       column_setValueName: "設置列值",
+      // [Auto-translated] "Complete survey"
       trigger_completeName: "完成調查",
+      // [Auto-translated] "Set answer"
       trigger_setvalueName: "設置答案",
+      // [Auto-translated] "Copy answer"
       trigger_copyvalueName: "複製答案",
+      // [Auto-translated] "Skip to question"
       trigger_skipName: "跳至問題",
+      // [Auto-translated] "Run expression"
       trigger_runExpressionName: "運行表達式",
+      // "Set \"Thank You\" page markup"
       completedHtmlOnConditionName: "設置「調查完成」頁面標記",
+      // [Auto-translated] "Make the page visible when the logic expression returns true. Otherwise keep it invisible."
       page_visibilityDescription: "使頁面在邏輯表示式返回 true 時可見。否則保持不可見。",
+      // [Auto-translated] "Make the panel visible when the logic expression returns true. Otherwise keep it invisible."
       panel_visibilityDescription: "使面板在邏輯表達式返回 true 時可見。否則保持不可見。",
+      // [Auto-translated] "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled."
       panel_enableDescription: "使面板及其中的所有元素在邏輯表達式返回 true 時啟用。否則，請禁用它們。",
+      // [Auto-translated] "Make the question visible when the logic expression returns true. Otherwise keep it invisible."
       question_visibilityDescription: "使問題在邏輯表達式返回 true 時可見。否則保持不可見。",
+      // [Auto-translated] "Make the question enable when the logic expression returns true. Otherwise keep it disabled."
       question_enableDescription: "使問題在邏輯表達式返回 true 時啟用。否則將其禁用。",
+      // [Auto-translated] "Question becomes required when the logic expression returns true."
       question_requireDescription: "當邏輯表達式返回 true 時，問題變為必需。",
+      // [Auto-translated] "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'."
       trigger_completeDescription: "當邏輯表達式返回 true 時，調查將完成，最終使用者將看到“謝謝頁面”。",
+      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question."
       trigger_setvalueDescription: "當邏輯表達式中使用的問題值發生更改並且邏輯表達式返回 true 時，該值將設置為所選問題。",
+      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question."
       trigger_copyvalueDescription: "當邏輯表達式中使用的問題值發生更改並且邏輯表達式返回 true 時，一個選定問題的值將複製到另一個選定問題。",
+      // [Auto-translated] "When the logic expression returns true then the survey skip to / focus the selected question."
       trigger_skipDescription: "當邏輯表達式返回 true 時，調查將跳到/聚焦所選問題。",
+      // [Auto-translated] "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question"
       trigger_runExpressionDescription: "當邏輯表達式返回 true 時，將執行自定義表示式。您可以選擇將此表示式結果設置為選取問題",
+      // [Auto-translated] "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one."
       completedHtmlOnConditionDescription: "如果邏輯表達式返回 true，則「感謝頁面」的預設文本將更改為給定的文本。",
-      itemExpressionText: "當表達式：「{0}」返回 true", //{0} - the expression
+      // [Auto-translated] "When expression: '{0}' returns true"
+      itemExpressionText: "當表達式：「{0}」返回 true", // {0} - the expression
+      // [Auto-translated] "New rule"
       itemEmptyExpressionText: "新規則",
-      page_visibilityText: "使頁面{0}可見", //{0} page name
-      panel_visibilityText: "使面板{0}可見", //{0} panel name
-      panel_enableText: "使面板{0}啟用", //{0} panel name
-      question_visibilityText: "使問題{0}可見", //{0} question name
-      question_enableText: "使問題{0}啟用", //{0} question name
-      question_requireText: "將問題{0}為必填項", //{0} question name
-      question_resetValueText: "重置問題的值：{0}", //{0} question name.
+      // [Auto-translated] "make page {0} visible"
+      page_visibilityText: "使頁面{0}可見", // {0} page name
+      // [Auto-translated] "make panel {0} visible"
+      panel_visibilityText: "使面板{0}可見", // {0} panel name
+      // [Auto-translated] "make panel {0} enable"
+      panel_enableText: "使面板{0}啟用", // {0} panel name
+      // [Auto-translated] "make question {0} visible"
+      question_visibilityText: "使問題{0}可見", // {0} question name
+      // [Auto-translated] "make question {0} enable"
+      question_enableText: "使問題{0}啟用", // {0} question name
+      // [Auto-translated] "make question {0} required"
+      question_requireText: "將問題{0}為必填項", // {0} question name
+      // [Auto-translated] "reset value for question: {0}"
+      question_resetValueText: "重置問題的值：{0}", // {0} question name.
+      // [Auto-translated] "assign value: {1} to question: {0}"
       question_setValueText: "分配值：{1}問題：{0}",
-      column_visibilityText: "使問題{1}的列{0}可見", //{0} column name, {1} question name
-      column_enableText: "使問題{1}列{0}啟用", //{0} column name, {1} question name
-      column_requireText: "{0}將問題{1}列為必填項", //{0} column name, {1} question name
-      column_resetValueText: "重置列的儲存格值：{0}", //{0} column name
-      column_setValueText: "將儲存格值：{1}分配給列：{0}", //{0} column name and {1} setValueExpression
+      // [Auto-translated] "make column {0} of question {1} visible"
+      column_visibilityText: "使問題{1}的列{0}可見", // {0} column name, {1} question name
+      // [Auto-translated] "make column {0} of question {1} enable"
+      column_enableText: "使問題{1}列{0}啟用", // {0} column name, {1} question name
+      // [Auto-translated] "make column {0} of question {1} required"
+      column_requireText: "{0}將問題{1}列為必填項", // {0} column name, {1} question name
+      // [Auto-translated] "reset cell value for column: {0}"
+      column_resetValueText: "重置列的儲存格值：{0}", // {0} column name
+      // [Auto-translated] "assign cell value: {1} to column: {0}"
+      column_setValueText: "將儲存格值：{1}分配給列：{0}", // {0} column name and {1} setValueExpression
+      // [Auto-translated] " An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "其結果將分配給目標問題的表達式。",
+      // [Auto-translated] "survey becomes completed"
       trigger_completeText: "調查完成",
-      trigger_setvalueText: "受到質疑：{0}價值{1}", //{0} question name, {1} setValue
-      trigger_setvalueEmptyText: "明確問題值：{0}", //{0} question name
-      trigger_copyvalueText: "複製到問題：{0}問題 {1} 的值", //{0} and {1} question names
-      trigger_skipText: "調查 跳至問題{0}", //{0} question name
-      trigger_runExpressionText1: "運行表達式：“{0}”", //{0} the expression
-      trigger_runExpressionText2: "並質疑其結果：{0}", //{0} question name
+      // [Auto-translated] "set into question: {0} value {1}"
+      trigger_setvalueText: "受到質疑：{0}價值{1}", // {0} question name, {1} setValue
+      // [Auto-translated] "clear question value: {0}"
+      trigger_setvalueEmptyText: "明確問題值：{0}", // {0} question name
+      // [Auto-translated] "copy into question: {0} value from question {1}"
+      trigger_copyvalueText: "複製到問題：{0}問題 {1} 的值", // {0} and {1} question names
+      // [Auto-translated] "survey skip to the question {0}"
+      trigger_skipText: "調查 跳至問題{0}", // {0} question name
+      // [Auto-translated] "run expression: '{0}'"
+      trigger_runExpressionText1: "運行表達式：“{0}”", // {0} the expression
+      // [Auto-translated] " and set its result into question: {0}"
+      trigger_runExpressionText2: "並質疑其結果：{0}", // {0} question name
+      // [Auto-translated] "show custom text for the 'Thank you page'."
       completedHtmlOnConditionText: "顯示「感謝頁面」的自定義文字。",
+      // [Auto-translated] "All Questions"
       showAllQuestions: "所有問題",
+      // [Auto-translated] "All Action Types"
       showAllActionTypes: "所有操作類型",
+      // [Auto-translated] "Condition(s)"
       conditions: "條件",
+      // [Auto-translated] "Action(s)"
       actions: "操作 （s）",
+      // [Auto-translated] "Define condition(s)"
       expressionEditorTitle: "定義條件",
+      // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "定義操作",
+      // [Auto-translated] "Delete Action"
       deleteAction: "刪除操作",
+      // [Auto-translated] "Add Action"
       addNewAction: "添加操作",
+      // [Auto-translated] "Select action..."
       selectedActionCaption: "選擇操作...",
+      // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "邏輯表達式為空或無效。請更正。",
+      // [Auto-translated] "Please, add at least one action."
       noActionError: "請至少添加一個操作。",
+      // [Auto-translated] "Please, fix problems in your action(s)."
       actionInvalid: "請解決操作中的問題。",
+      // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "邏輯規則不完整",
+      // [Auto-translated] "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?"
       uncompletedRule_text: "您尚未完成某些邏輯規則。如果現在離開該選項卡，更改將丟失。是否仍要離開選項卡而不完成更改？",
+      // [Auto-translated] "Yes"
       uncompletedRule_apply: "是的",
+      // [Auto-translated] "No, I want to complete the rules"
       uncompletedRule_cancel: "不，我想完成規則"
     }
   },
   // Property Editors
   pe: {
     panel: {
+      // [Auto-translated] "Panel name"
       name: "面板名稱",
+      // [Auto-translated] "Panel title"
       title: "面板標題",
+      // [Auto-translated] "Panel description"
       description: "面板說明",
+      // [Auto-translated] "Make the panel visible if"
       visibleIf: "如果出現以下情況，則使面板可見",
+      // [Auto-translated] "Make the panel required if"
       requiredIf: "如果出現以下情況，則使面板成為必需的",
+      // [Auto-translated] "Question order within the panel"
       questionOrder: "小組內的問題順序",
+      // [Auto-translated] "Repositions the panel to the end of a selected page."
       page: "父頁面",
+      // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "在新行上顯示面板",
+      // [Auto-translated] "Panel expand state"
       state: "面板摺疊狀態",
+      // [Auto-translated] "Width (in CSS-accepted values)"
       width: "內嵌面板寬度",
+      // [Auto-translated] "Minimum width (in CSS-accepted values)"
       minWidth: "最小面板寬度",
+      // [Auto-translated] "Maximum width (in CSS-accepted values)"
       maxWidth: "最大面板寬度",
+      // [Auto-translated] "Show panel number"
       showNumber: "為此面板編號"
     },
     panellayoutcolumn: {
+      // [Auto-translated] "Ex.: 30%"
       effectiveWidth: "有效寬度，%",
+      // [Auto-translated] "Question title width"
       questionTitleWidth: "問題標題寬度，px"
     },
     paneldynamic: {
+      // [Auto-translated] "Panel name"
       name: "面板名稱",
+      // [Auto-translated] "Panel title"
       title: "面板標題",
+      // [Auto-translated] "Panel description"
       description: "面板說明",
+      // [Auto-translated] "Entry display mode"
       displayMode: "進入顯示模式",
+      // [Auto-translated] "Make the panel visible if"
       visibleIf: "如果出現以下情況，則使面板可見",
+      // [Auto-translated] "Make the panel required if"
       requiredIf: "如果出現以下情況，則使面板成為必需的",
+      // [Auto-translated] "Move the panel to page"
       page: "將面板移動到頁面",
+      // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "在新行上顯示面板",
+      // [Auto-translated] "Panel collapse state"
       state: "面板摺疊狀態",
+      // [Auto-translated] "Inline panel width"
       width: "內嵌面板寬度",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "最小面板寬度",
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "最大面板寬度",
+      // [Auto-translated] "Confirm row removal"
       confirmDelete: "確認面板刪除",
+      // [Auto-translated] "Description template"
       templateDescription: "面板描述模式",
+      // [Auto-translated] "Title template"
       templateTitle: "面板標題模式",
+      // [Auto-translated] "Empty entries text"
       noEntriesText: "空面板文本",
+      // [Auto-translated] "Tab title pattern"
       templateTabTitle: "選項卡標題模式",
+      // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "選項卡標題佔位元",
+      // [Auto-translated] "Make an individual panel visible if"
       templateVisibleIf: "如果出現以下情況，則使單個面板可見",
+      // [Auto-translated] "Number the panel"
       showNumber: "為面板編號",
+      // [Auto-translated] "Panel title alignment"
       titleLocation: "面板標題對齊方式",
+      // [Auto-translated] "Panel description alignment"
       descriptionLocation: "面板描述對齊方式",
+      // [Auto-translated] "Question title location"
       templateQuestionTitleLocation: "問題標題對齊方式",
+      // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "問題標題寬度",
+      // [Auto-translated] "Error message alignment"
       templateErrorLocation: "錯誤消息對齊",
+      // [Auto-translated] "New panel location"
       newPanelPosition: "新面板位置",
+      // [Auto-translated] "Show progress bar"
       showRangeInProgress: "顯示進度條",
+      // [Auto-translated] "Key column"
       keyName: "防止在以下問題中重複回答"
     },
     question: {
+      // [Auto-translated] "Question name"
       name: "問題名稱",
+      // [Auto-translated] "Question title"
       title: "問題標題",
+      // [Auto-translated] "Question description"
       description: "問題描述",
+      // [Auto-translated] "Show the title and description"
       showTitle: "顯示標題和描述",
+      // [Auto-translated] "Make the question visible if"
       visibleIf: "如果出現以下情況，請使問題可見",
+      // [Auto-translated] "Make the question required if"
       requiredIf: "如果出現以下情況，則將問題設為必填項",
+      // [Auto-translated] "Parent page"
       page: "父頁面",
+      // [Auto-translated] "Question box collapse state"
       state: "問題框摺疊狀態",
+      // [Auto-translated] "Number this question"
       showNumber: "為這個問題編號",
+      // [Auto-translated] "Question title alignment"
       titleLocation: "問題標題對齊方式",
+      // [Auto-translated] "Question description alignment"
       descriptionLocation: "問題描述對齊方式",
+      // [Auto-translated] "Error message alignment"
       errorLocation: "錯誤消息對齊",
+      // [Auto-translated] "Add indents"
       indent: "增加內部縮進",
+      // [Auto-translated] "Inline question width"
       width: "內聯問題寬度",
+      // [Auto-translated] "Minimum question width"
       minWidth: "最小問題寬度",
+      // [Auto-translated] "Maximum question width"
       maxWidth: "最大問題寬度",
+      // [Auto-translated] "Update text question value"
       textUpdateMode: "更新輸入欄位值"
     },
     signaturepad: {
+      // [Auto-translated] "Signature width"
       signatureWidth: "簽名區域寬度",
+      // [Auto-translated] "Signature height"
       signatureHeight: "簽名區域高度",
+      // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "自動縮放簽名區域",
+      // [Auto-translated] "Show the placeholder"
       showPlaceholder: "顯示佔位元",
+      // [Auto-translated] "Placeholder text"
       placeholder: "佔位元文本",
+      // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "唯讀或預覽模式下的佔位元文本",
+      // [Auto-translated] "Show the Clear button"
       allowClear: "在簽名區域內顯示「清除」 按鈕",
+      // [Auto-translated] "Minimum pen width"
       penMinWidth: "最小筆寬",
+      // [Auto-translated] "Maximum pen width"
       penMaxWidth: "最大筆寬",
+      // [Auto-translated] "Stroke color"
       penColor: "描邊顏色"
     },
     comment: {
+      // [Auto-translated] "Input field height (in lines)"
       rows: "輸入欄位高度（以行為單位）"
     },
+    // "Question numbering"
     showQuestionNumbers: "顯示問題編號",
+    // "Question indexing type"
     questionStartIndex: "問題起始標誌 (1, 2 or 'A', 'a')",
+    // [Auto-translated] "Expression"
     expression: {
+      // [Auto-translated] "Expression name"
       name: "表達式名稱",
+      // [Auto-translated] "Expression title"
       title: "表達式標題",
+      // [Auto-translated] "Expression description"
       description: "表達式說明",
+      // [Auto-translated] "Expression"
       expression: "表達"
     },
     trigger: {
+      // [Auto-translated] "Expression"
       expression: "表達"
     },
     calculatedvalue: {
+      // [Auto-translated] "Expression"
       expression: "表達"
     },
     // survey templates
     survey: {
+      // [Auto-translated] "Title"
       title: "標題",
+      // [Auto-translated] "Survey description"
       description: "調查說明",
+      // [Auto-translated] "Read-only"
       readOnly: "將調查設為唯讀"
     },
     page: {
+      // [Auto-translated] "Page name"
       name: "頁面名稱",
+      // [Auto-translated] "Title"
       title: "標題",
+      // [Auto-translated] "Page description"
       description: "頁面描述",
+      // [Auto-translated] "Make the page visible if"
       visibleIf: "如果出現以下情況，則使頁面可見",
+      // [Auto-translated] "Make the page required if"
       requiredIf: "如果出現以下情況，則使頁面為必填項",
+      // [Auto-translated] "Time limit to finish the page (in seconds)"
       timeLimit: "完成頁面的時間限制（秒為單位 ）",
+      // [Auto-translated] "Question order on the page"
       questionOrder: "頁面上的問題順序"
     },
     matrixdropdowncolumn: {
+      // [Auto-translated] "Column name"
       name: "列名稱",
+      // [Auto-translated] "Column title"
       title: "專欄標題",
+      // [Auto-translated] "Prevent duplicate responses"
       isUnique: "防止重複回應",
+      // [Auto-translated] "Column width"
       width: "列寬",
+      // [Auto-translated] "Minimum column width"
       minWidth: "最小列寬",
+      // [Auto-translated] "Input field height (in lines)"
       rows: "輸入欄位高度（以行為單位）",
+      // [Auto-translated] "Make the column visible if"
       visibleIf: "如果出現以下情況，則使列可見",
+      // [Auto-translated] "Make the column required if"
       requiredIf: "如果滿足以下條件，則使該列為必填項",
+      // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每個選項都在單獨的列中"
     },
     multipletextitem: {
+      // [Auto-translated] "Name"
       name: "名字",
+      // [Auto-translated] "Title"
       title: "標題"
     },
     masksettings: {
+      // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "在調查結果中保存掩碼值"
     },
     patternmask: {
+      // [Auto-translated] "Value pattern"
       pattern: "價值模式"
     },
     datetimemask: {
+      // [Auto-translated] "Minimum value"
       min: "最小值",
+      // [Auto-translated] "Maximum value"
       max: "最大值"
     },
     numericmask: {
+      // [Auto-translated] "Allow negative values"
       allowNegativeValues: "允許負值",
+      // [Auto-translated] "Thousands separator"
       thousandsSeparator: "千分隔符",
+      // [Auto-translated] "Decimal separator"
       decimalSeparator: "小數點分隔符",
+      // [Auto-translated] "Value precision"
       precision: "值精度",
+      // [Auto-translated] "Minimum value"
       min: "最小值",
+      // [Auto-translated] "Maximum value"
       max: "最大值"
     },
     currencymask: {
+      // [Auto-translated] "Currency prefix"
       prefix: "貨幣前綴",
+      // [Auto-translated] "Currency suffix"
       suffix: "貨幣後綴"
     },
+    // [Auto-translated] "Clear others when selected"
     isExclusive: "選中時清除其他",
+    // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "要求使用者輸入註釋",
+    // "Display area height"
     imageHeight: "圖片高度",
+    // "Display area width"
     imageWidth: "圖片寬度",
+    // "Join identifier"
     valueName: "Value name",
+    // [Auto-translated] "Default display value for dynamic texts"
     defaultDisplayValue: "動態文字的預設顯示值",
+    // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "標籤對齊",
+    // [Auto-translated] "Input field size (in characters)"
     size: "輸入欄位大小（以字元為單位 ）",
+    // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "單元格錯誤消息對齊方式",
+    // [Auto-translated] "Enabled"
     enabled: "啟用",
+    // [Auto-translated] "Disabled"
     disabled: "禁用",
+    // [Auto-translated] "Inherit"
     inherit: "繼承",
+    // "Apply"
     apply: "應用",
+    // "OK"
     ok: "確定",
+    // [Auto-translated] "Save"
     save: "救",
+    // [Auto-translated] "Clear"
     clear: "清楚",
+    // [Auto-translated] "Save"
     saveTooltip: "救",
+    // "Cancel"
     cancel: "取消",
+    // [Auto-translated] "Set"
     set: "設置",
+    // "Reset"
     reset: "重置",
+    // [Auto-translated] "Change"
     change: "改變",
+    // [Auto-translated] "Refresh"
     refresh: "刷新",
+    // "Close"
     close: "關閉",
+    // "Delete"
     delete: "刪除",
+    // [Auto-translated] "Add"
     add: "加",
+    // "Add New"
     addNew: "新建",
+    // [Auto-translated] "Click to add an item..."
     addItem: "點選以新增專案...",
+    // [Auto-translated] "Click to remove the item..."
     removeItem: "按下以刪除該專案...",
+    // [Auto-translated] "Drag the item"
     dragItem: "拖動專案",
+    // [Auto-translated] "Other"
     addOther: "其他",
+    // [Auto-translated] "Select All"
     addSelectAll: "全選",
+    // [Auto-translated] "None"
     addNone: "沒有",
+    // "Remove All"
     removeAll: "全部刪除",
+    // "Edit"
     edit: "編輯器",
+    // [Auto-translated] "Return without saving"
     back: "退貨而不保存",
+    // [Auto-translated] "Return without saving"
     backTooltip: "退貨而不保存",
+    // [Auto-translated] "Save and return"
     saveAndBack: "保存並返回",
+    // [Auto-translated] "Save and return"
     saveAndBackTooltip: "保存並返回",
+    // [Auto-translated] "Done"
     doneEditing: "做",
+    // [Auto-translated] "Edit Choices"
     editChoices: "編輯選項",
+    // [Auto-translated] "Show Choices"
     showChoices: "顯示選項",
+    // [Auto-translated] "Move"
     move: "移動",
+    // "<empty>"
     empty: "<空>",
+    // [Auto-translated] "Value is empty"
     emptyValue: "值為空",
+    // "Manual Entry"
     fastEntry: "快速輸入",
+    // [Auto-translated] "Value '{0}' is not unique"
     fastEntryNonUniqueError: "值“{0}”不是唯一的",
+    // [Auto-translated] "Please limit the number of items from {0} to {1}"
     fastEntryChoicesCountError: "請將項目數量限制在{0}到{1}",
+    // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "請輸入至少{0}專案",
+    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
     fastEntryPlaceholder: "您可以按以下格式設定資料：\n值 1|文本\n值2",
+    // "Form Entry"
     formEntry: "表單輸入",
+    // "Test the service"
     testService: "測試服務",
+    // [Auto-translated] "Please select the element"
     itemSelectorEmpty: "請選擇元素",
+    // [Auto-translated] "Please select the action"
     conditionActionEmpty: "請選擇操作",
+    // [Auto-translated] "Select question..."
     conditionSelectQuestion: "選擇問題...",
+    // [Auto-translated] "Select page..."
     conditionSelectPage: "選擇頁面...",
+    // [Auto-translated] "Select panel..."
     conditionSelectPanel: "選擇面板...",
+    // [Auto-translated] "Please enter/select the value"
     conditionValueQuestionTitle: "請輸入/選擇值",
+    // [Auto-translated] "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "按 ctrl+空格鍵獲取表達式完成提示",
+    // [Auto-translated] "Current row"
     aceEditorRowTitle: "當前行",
+    // [Auto-translated] "Current panel"
     aceEditorPanelTitle: "當前面板",
+    // "For more details please check the documentation"
     showMore: "更多細節...",
+    // [Auto-translated] "Available questions"
     assistantTitle: "可用問題",
+    // [Auto-translated] "There is should be at least one column or row"
     cellsEmptyRowsColumns: "至少應該有一列或一行",
+    // [Auto-translated] "Preview answers before submitting the survey"
     showPreviewBeforeComplete: "在提交調查之前預覽答案",
+    // [Auto-translated] "Set by "
     overridingPropertyPrefix: "設置者",
+    // [Auto-translated] "Reset"
     resetToDefaultCaption: "重置",
+    // "Please enter a value"
     propertyIsEmpty: "請為該屬性設定一個值",
+    // [Auto-translated] "Please enter a unique value"
     propertyIsNoUnique: "請輸入唯一值",
+    // [Auto-translated] "Please enter a unique name"
     propertyNameIsNotUnique: "請輸入唯一名稱",
+    // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "不要使用保留字：「專案」、「選項」、「面板」、“行”。",
+    // [Auto-translated] "No items have been added yet"
     listIsEmpty: "尚未添加任何專案",
+    // [Auto-translated] "No choices have been added yet"
     "listIsEmpty@choices": "尚未添加任何選項",
+    // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "您還沒有任何列",
+    // [Auto-translated] "You don't have layout columns yet"
     "listIsEmpty@gridLayoutColumns": "您還沒有佈局列",
+    // [Auto-translated] "You don't have any rows yet"
     "listIsEmpty@rows": "您還沒有任何行",
+    // [Auto-translated] "You don't have any validation rules yet"
     "listIsEmpty@validators": "尚無任何驗證規則",
+    // [Auto-translated] "You don't have any custom variables yet"
     "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
+    // [Auto-translated] "You don't have any triggers yet"
     "listIsEmpty@triggers": "您還沒有任何觸發器",
+    // [Auto-translated] "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "您還沒有任何連結",
+    // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "您還沒有任何頁面",
+    // [Auto-translated] "Add a choice"
     "addNew@choices": "添加選項",
+    // [Auto-translated] "Add new column"
     "addNew@columns": "添加新列",
+    // [Auto-translated] "Add new row"
     "addNew@rows": "添加新行",
+    // [Auto-translated] "Add new rule"
     "addNew@validators": "添加新規則",
+    // [Auto-translated] "Add new variable"
     "addNew@calculatedValues": "添加新變數",
+    // [Auto-translated] "Add new trigger"
     "addNew@triggers": "添加新觸發器",
+    // [Auto-translated] "Add new URL"
     "addNew@navigateToUrlOnCondition": "添加新 URL",
+    // [Auto-translated] "Add new page"
     "addNew@pages": "添加新頁面",
+    // [Auto-translated] "Expression is empty"
     expressionIsEmpty: "表達式為空",
+    // "Value"
     value: "值",
+    // "Text"
     text: "顯示文本",
+    // [Auto-translated] "Row ID"
     rowid: "行標識",
+    // [Auto-translated] "Image or video URL"
     imageLink: "圖片或視頻網址",
+    // "Edit column: {0}"
     columnEdit: "編輯列: {0}",
+    // "Edit item: {0}"
     itemEdit: "編輯選項: {0}",
+    // "URL"
     url: "URL",
+    // "Path to data"
     path: "Path",
     choicesbyurl: {
+      // [Auto-translated] "Web service's URL"
       url: "Web 服務的 URL",
+      // [Auto-translated] "Get values from the following JSON field"
       valueName: "從以下 JSON 欄位中獲取值"
     },
+    // "Get value to display from the following property"
     titleName: "Title name",
+    // [Auto-translated] "Get image URLs from the following JSON field"
     imageLinkName: "從以下 JSON 欄位獲取影像網址",
+    // [Auto-translated] "Allow empty response"
     allowEmptyResponse: "允許空回應",
+    // [Auto-translated] "Title"
     titlePlaceholder: "標題",
+    // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "調查標題",
+    // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "頁數 {num}",
+    // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "起始頁",
+    // [Auto-translated] "Description"
     descriptionPlaceholder: "描述",
+    // [Auto-translated] "Description"
     surveyDescriptionPlaceholder: "描述",
+    // [Auto-translated] "Description"
     pageDescriptionPlaceholder: "描述",
+    // [Auto-translated] "Wrap choices"
     textWrapEnabled: "換行選項",
+    // "Enable the \"Other\" option"
     showOtherItem: "可添加其他答案?",
+    // "Rename the \"Other\" option"
     otherText: "其他答案文本",
+    // [Auto-translated] "Allow the None option"
     showNoneItem: "允許“無”選項",
+    // [Auto-translated] "Allow the Refuse to Answer option"
     showRefuseItem: "允許「拒絕應答」選項",
+    // [Auto-translated] "Allow the Don't Know option"
     showDontKnowItem: "允許“不知道”選項",
+    // [Auto-translated] "None option text"
     noneText: "無選項文字",
+    // [Auto-translated] "Allow the Select All option"
     showSelectAllItem: "允許「全選」選項",
+    // [Auto-translated] "Select All option text"
     selectAllText: "全選選項文本",
+    // [Auto-translated] "Minimum value for auto-generated items"
     choicesMin: "自動生成項的最小值",
+    // [Auto-translated] "Maximum value for auto-generated items"
     choicesMax: "自動生成項的最大值",
+    // [Auto-translated] "Step for auto-generated items"
     choicesStep: "自動生成項的步驟",
+    // "Name"
     name: "題目名",
+    // "Title"
     title: "題目文本",
+    // "Cell input type"
     cellType: "單元格類型",
+    // "Column count"
     colCount: "列數",
+    // "Choice order"
     choicesOrder: "設置選項順序",
+    // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "允許自訂選項",
+    // "Visible"
     visible: "是否可見?",
+    // "Required"
     isRequired: "是否為必填項?",
+    // [Auto-translated] "Mark as required"
     markRequired: "標記為必填",
+    // [Auto-translated] "Remove the required mark"
     removeRequiredMark: "刪除所需的標記",
+    // [Auto-translated] "Require answer for all rows"
     eachRowRequired: "要求所有行都回答",
+    // [Auto-translated] "Prevent duplicate responses in rows"
     eachRowUnique: "防止行中出現重複回應",
+    // "Error message for required questions"
     requiredErrorText: "“必需”錯誤消息",
+    // "Display the question on a new line"
     startWithNewLine: "問題是否新起一行?",
+    // "Rows"
     rows: "文本框行數",
+    // [Auto-translated] "Columns"
     cols: "列",
+    // "Placeholder text within input field"
     placeholder: "占位文本",
+    // "Show preview area"
     showPreview: "是否顯示圖像預覽?",
+    // "Store file content in JSON result as text"
     storeDataAsText: "以 JSON 文本方式存儲文件",
+    // "Maximum file size (in bytes)"
     maxSize: "文件最大尺寸 (Bytes)",
+    // "Row count"
     rowCount: "默認行數",
+    // [Auto-translated] "Columns layout"
     columnLayout: "列佈局",
+    // [Auto-translated] "Add Row button location"
     addRowButtonLocation: "“添加行”按鈕位置",
+    // [Auto-translated] "Transpose rows to columns"
     transposeData: "將行轉置為列",
+    // "\"Add Row\" button text"
     addRowText: "添加條目按鈕文本",
+    // "\"Remove Row\" button text"
     removeRowText: "刪除條目按鈕文本",
+    // [Auto-translated] "Input field title pattern"
     singleInputTitleTemplate: "輸入欄位標題模式",
+    // [Auto-translated] "Minimum rate value"
     rateMin: "最低速率值",
+    // [Auto-translated] "Maximum rate value"
     rateMax: "最大速率值",
+    // [Auto-translated] "Rate step"
     rateStep: "速率步長",
+    // "Minimum value label"
     minRateDescription: "最小值提示",
+    // "Maximum value label"
     maxRateDescription: "最大值提示",
+    // "Input type"
     inputType: "文本框類型",
+    // "Option placeholder"
     optionsCaption: "下拉框提示語",
+    // [Auto-translated] "Default Answer"
     defaultValue: "默認答案",
+    // [Auto-translated] "Default texts"
     cellsDefaultRow: "預設文字",
+    // [Auto-translated] "Edit survey settings"
     surveyEditorTitle: "編輯調查設置",
+    // "Edit: {0}"
     qEditorTitle: "編輯問題: {0}",
+    // [Auto-translated] "Maximum length (in characters)"
     maxLength: "最大長度（字元）",
+    // [Auto-translated] "Build"
     buildExpression: "建",
+    // [Auto-translated] "Edit"
     editExpression: "編輯",
+    // [Auto-translated] "and"
     and: "和",
+    // [Auto-translated] "or"
     or: "或",
+    // [Auto-translated] "Remove"
     remove: "刪除",
+    // [Auto-translated] "Add Condition"
     addCondition: "添加條件",
+    // [Auto-translated] "Select a question to start configuring conditions."
     emptyLogicPopupMessage: "選擇一個問題以開始配置條件。",
+    // [Auto-translated] "If"
     if: "如果",
+    // [Auto-translated] "then"
     then: "然後",
+    // [Auto-translated] "Target question"
     setToName: "目標問題",
+    // [Auto-translated] "Question to copy answer from"
     fromName: "要從中複製答案的問題",
+    // [Auto-translated] "Question to skip to"
     gotoName: "要跳到的問題",
+    // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "規則不正確",
+    // [Auto-translated] "Include into survey results"
     includeIntoResult: "包含在調查結果中",
+    // "Make the title and description visible"
     showTitle: "顯示/隱藏 標題",
+    // [Auto-translated] "Expand/collapse title"
     expandCollapseTitle: "展開/摺疊標題",
+    // "Select a survey language"
     locale: "默認語言",
+    // [Auto-translated] "Select device type"
     simulator: "選擇設備類型",
+    // [Auto-translated] "Switch to landscape orientation"
     landscapeOrientation: "切換到橫向",
+    // [Auto-translated] "Switch to portrait orientation"
     portraitOrientation: "切換到縱向",
+    // "Clear hidden question values"
     clearInvisibleValues: "清除隱藏值",
+    // "Limit to one response"
     cookieName: "Cookie name (to disable run survey two times locally)",
+    // "Auto-save survey progress on page change"
     partialSendEnabled: "Send survey results on page next",
+    // "Save the \"Other\" option value as a separate property"
     storeOthersAsComment: "Store 'others' value in separate field",
+    // "Show page titles"
     showPageTitles: "顯示頁面標題",
+    // "Show page numbers"
     showPageNumbers: "顯示頁數",
+    // "\"Previous Page\" button text"
     pagePrevText: "前一頁按鈕文本",
+    // "\"Next Page\" button text"
     pageNextText: "後一頁按鈕文本",
+    // "\"Complete Survey\" button text"
     completeText: "完成按鈕文本",
+    // [Auto-translated] "Preview Answers button text"
     previewText: "「預覽答案」按鈕文本",
+    // [Auto-translated] "Edit Answer button text"
     editText: "編輯應答按鈕文本",
+    // "\"Start Survey\" button text"
     startSurveyText: "開始按鈕文本",
+    // "Show navigation buttons"
     showNavigationButtons: "顯示導航按鈕 (默認導航)",
+    // [Auto-translated] "Navigation buttons alignment"
     navigationButtonsLocation: "導航按鈕對齊",
+    // "Show the \"Previous Page\" button"
     showPrevButton: "顯示前一頁按鈕 (用戶可返回至前一頁面)",
+    // "First page is a start page"
     firstPageIsStartPage: "調查的第一頁面為起始頁.",
+    // "Show the \"Thank You\" page"
     showCompletePage: "結尾展示完成後的頁面 (completedHtml)",
+    // "Auto-advance to the next page"
     autoAdvanceEnabled: "回答本頁所有問題後，自動跳轉到下一頁",
+    // [Auto-translated] "Complete the survey automatically"
     autoAdvanceAllowComplete: "自動完成調查",
+    // "Show the progress bar"
     showProgressBar: "顯示進度條",
+    // [Auto-translated] "Progress bar alignment"
     progressBarLocation: "進度條對齊",
+    // "Question title alignment"
     questionTitleLocation: "問題的標題位置",
+    // "Question title width"
     questionTitleWidth: "問題標題寬度",
+    // "Required symbol(s)"
     requiredMark: "The question required symbol(s)",
+    // "Question title template, default is: '{no}. {require} {title}'"
     questionTitleTemplate: "問題標題模板, 默認為: '{no}. {require} {title}'",
+    // "Error message alignment"
     questionErrorLocation: "問題錯誤定位",
+    // "Focus first question on a new page"
     autoFocusFirstQuestion: "改變頁面時聚焦在第一個問題",
+    // "Question order"
     questionOrder: "Elements order on the page",
+    // "Time limit to complete the survey"
     timeLimit: "完成調查的最長時間",
+    // "Time limit to complete one page"
     timeLimitPerPage: "完成調查中頁面的最長時間",
+    // [Auto-translated] "Use a timer"
     showTimer: "使用計時器",
+    // "Timer alignment"
     timerLocation: "顯示計時器面板",
+    // "Timer mode"
     timerInfoMode: "顯示計時器面板模式",
+    // "Panel display mode"
     renderMode: "渲染模式",
+    // "Enable entry addition"
     allowAddPanel: "允許添加面板",
+    // "Enable entry removal"
     allowRemovePanel: "允許刪除面板",
+    // "\"Add Entry\" button text"
     addPanelText: "添加面板文本",
+    // "\"Remove Entry\" button text"
     removePanelText: "刪除面板文本",
+    // "Show all elements on one page"
     isSinglePage: "在一個頁面上展示所有元素",
+    // [Auto-translated] "HTML markup"
     html: "網頁標記",
+    // [Auto-translated] "Answer"
     setValue: "答",
+    // [Auto-translated] "Image format"
     dataFormat: "圖像格式",
+    // [Auto-translated] "Allow adding rows"
     allowAddRows: "允許添加行",
+    // [Auto-translated] "Allow removing rows"
     allowRemoveRows: "允許刪除行",
+    // [Auto-translated] "Allow row drag and drop"
     allowRowReorder: "允許行拖放",
+    // [Auto-translated] "Does not apply if you specify the exact image width or height."
     responsiveImageSizeHelp: "如果指定確切的圖像寬度或高度，則不適用。",
+    // [Auto-translated] "Minimum image width"
     minImageWidth: "最小圖像寬度",
+    // [Auto-translated] "Maximum image width"
     maxImageWidth: "最大圖像寬度",
+    // [Auto-translated] "Minimum image height"
     minImageHeight: "最小圖像高度",
+    // [Auto-translated] "Maximum image height"
     maxImageHeight: "最大圖像高度",
+    // [Auto-translated] "Minimum value"
     minValue: "最小值",
+    // [Auto-translated] "Maximum value"
     maxValue: "最大值",
+    // [Auto-translated] "Case insensitive"
     caseInsensitive: "不區分大小寫",
+    // [Auto-translated] "Minimum length (in characters)"
     minLength: "最小長度（以字元為單位）",
+    // [Auto-translated] "Allow digits"
     allowDigits: "允許數位",
+    // [Auto-translated] "Minimum count"
     minCount: "最小計數",
+    // [Auto-translated] "Maximum count"
     maxCount: "最大計數",
+    // [Auto-translated] "Regular expression"
     regex: "正則表達式",
     surveyvalidator: {
+      // [Auto-translated] "Error message"
       text: "錯誤資訊",
+      // [Auto-translated] "Validation expression"
       expression: "驗證表達式"
     },
+    // [Auto-translated] "Total row text"
     totalText: "總計行文本",
+    // [Auto-translated] "Total type"
     totalType: "總類型",
+    // [Auto-translated] "Total expression"
     totalExpression: "總表達",
+    // [Auto-translated] "Total value display style"
     totalDisplayStyle: "總值顯示樣式",
+    // [Auto-translated] "Currency"
     totalCurrency: "貨幣",
+    // [Auto-translated] "Formatted string"
     totalFormat: "帶格式的字串",
+    // [Auto-translated] "Logo (URL or base64-encoded string)"
     logo: "徽標（URL 或base64 編碼的字串）",
+    // [Auto-translated] "Survey structure"
     questionsOnPageMode: "調查結構",
+    // [Auto-translated] "Maximum answer length (in characters)"
     maxTextLength: "最大答案長度（以字元為單位）",
+    // [Auto-translated] "Maximum comment length (in characters)"
     maxCommentLength: "最大註解長度（以字元為單位）",
+    // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "評論區高度（以行為單位）",
+    // [Auto-translated] "Auto-expand comment area if necessary"
     autoGrowComment: "如有必要，自動展開評論區域",
+    // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "允許用戶調整文字區域的大小",
+    // "Update input field values"
     textUpdateMode: "更新文字問題值",
+    // [Auto-translated] "Input mask type"
     maskType: "輸入掩碼類型",
+    // [Auto-translated] "Set focus on the first invalid answer"
     autoFocusFirstError: "將焦點放在第一個無效答案上",
+    // [Auto-translated] "Run validation"
     checkErrorsMode: "運行驗證",
+    // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "驗證失去焦點時的空欄位",
+    // [Auto-translated] "Navigate to URL"
     navigateToUrl: "導航到網址",
+    // [Auto-translated] "Dynamic URL"
     navigateToUrlOnCondition: "動態網址",
+    // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "用於顯示使用者是否已填寫此調查的標記",
+    // [Auto-translated] "Survey Complete page markup"
     completedHtml: "調查完成頁面標記",
+    // [Auto-translated] "Dynamic Survey Complete page markup"
     completedHtmlOnCondition: "動態調查完成頁面標記",
+    // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "載入調查模型時要顯示的標記",
+    // [Auto-translated] "Comment area text"
     commentText: "註釋區文本",
+    // [Auto-translated] "Autocomplete type"
     autocomplete: "自動完成類型",
+    // "Label for \"True\""
     labelTrue: "“真實”標籤",
+    // "Label for \"False\""
     labelFalse: "“虛假”標籤",
+    // "Show the Clear button"
     allowClear: "顯示“清除”按鈕",
+    // [Auto-translated] "Search Mode"
     searchMode: "搜索模式",
+    // [Auto-translated] "Value display style"
     displayStyle: "值顯示樣式",
+    // [Auto-translated] "Formatted string"
     format: "帶格式的字串",
+    // [Auto-translated] "Maximum fractional digits"
     maximumFractionDigits: "最大小數位數",
+    // [Auto-translated] "Minimum fractional digits"
     minimumFractionDigits: "最小小數位數",
+    // [Auto-translated] "Display grouping separators"
     useGrouping: "顯示分組分隔符",
+    // [Auto-translated] "Allow multiple files"
     allowMultiple: "允許多個檔",
+    // [Auto-translated] "Preview images"
     allowImagesPreview: "預覽圖像",
+    // [Auto-translated] "Accepted file types"
     acceptedTypes: "接受的文件類型",
+    // [Auto-translated] "Wait for the upload to complete"
     waitForUpload: "等待上傳完成",
+    // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "確認文件刪除",
+    // [Auto-translated] "Detail panel location"
     detailPanelMode: "詳細資訊面板位置",
+    // [Auto-translated] "Minimum row count"
     minRowCount: "最小行數",
+    // [Auto-translated] "Maximum row count"
     maxRowCount: "最大行數",
+    // "Confirm row removal"
     confirmDelete: "確認刪除行",
+    // [Auto-translated] "Confirmation message"
     confirmDeleteText: "確認消息",
+    // [Auto-translated] "Initial panel count"
     panelCount: "初始面板計數",
+    // [Auto-translated] "Minimum panel count"
     minPanelCount: "最小面板數",
+    // [Auto-translated] "Maximum panel count"
     maxPanelCount: "最大面板數",
+    // [Auto-translated] "Inner panel expand state"
     panelsState: "內面板展開狀態",
+    // [Auto-translated] "Previous Panel button tooltip"
     prevPanelText: "“上一個面板”按鈕工具提示",
+    // [Auto-translated] "Next Panel button tooltip"
     nextPanelText: "“下一個面板”按鈕工具提示",
+    // [Auto-translated] "Remove Panel button location"
     removePanelButtonLocation: "“刪除面板”按鈕位置",
+    // [Auto-translated] "Hide the question if there are no rows"
     hideIfRowsEmpty: "如果沒有行，則隱藏問題",
+    // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "如果沒有行，則隱藏列",
+    // [Auto-translated] "Custom rate values"
     rateValues: "自定義費率值",
+    // [Auto-translated] "Rate count"
     rateCount: "速率計數",
+    // [Auto-translated] "How to specify rate values?"
     autoGenerate: "如何指定速率值？",
     slider: {
+      // [Auto-translated] "Min value"
       min: "最小值",
+      // [Auto-translated] "Max value"
       max: "最大值",
+      // [Auto-translated] "Step value"
       step: "步長值",
+      // [Auto-translated] "Show scale labels"
       showLabels: "顯示刻度標籤",
+      // [Auto-translated] "Show tooltips"
       tooltipVisibilityPG: "顯示工具提示",
+      // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允許 Thumb Crossing",
+      // [Auto-translated] "Number of auto-generated labels"
       labelCount: "自動生成的標籤數量",
+      // [Auto-translated] "Min value expression"
       minValueExpression: "最小值表達式",
+      // [Auto-translated] "Max value expression"
       maxValueExpression: "最大值表達式",
+      // [Auto-translated] "Scale labels configuration"
       autoGenerate: "刻度標籤配置",
+      // [Auto-translated] "Slider type"
       sliderType: "滑塊類型",
+      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
       minRangeLength: "最小範圍長度",
+      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
       maxRangeLength: "最大範圍長度",
+      // [Auto-translated] "Custom labels"
       customLabels: "自訂標籤",
+      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
       labelFormat: "標籤格式",
+      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
       tooltipFormat: "工具提示格式"
     },
     file: {
+      // [Auto-translated] "Adjusts the height of the image in the survey results."
       imageHeight: "圖像高度",
+      // [Auto-translated] "Adjusts the width of the image in the survey results."
       imageWidth: "圖像寬度"
     },
+    // [Auto-translated] "Hide the question if it contains no choices"
     hideIfChoicesEmpty: "如果問題不包含任何選項，則隱藏問題",
+    // "Minimum width"
     minWidth: "最小寬度（以 CSS 接受的值為單位）",
+    // "Maximum width"
     maxWidth: "最大寬度（以 CSS 接受的值為單位）",
+    // "Width"
     width: "寬度（以 CSS 接受的值為單位）",
+    // [Auto-translated] "Show column headers"
     showHeader: "顯示列標題",
+    // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "顯示水平滾動條",
+    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
     columnMinWidth: "最小列寬（以 CSS 接受的值為單位）",
+    // [Auto-translated] "Row header width (in CSS-accepted values)"
     rowTitleWidth: "行標題寬度（以 CSS 接受的值為單位）",
+    // "Value to store when \"True\" is selected"
     valueTrue: "“真”值",
+    // "Value to store when \"False\" is selected"
     valueFalse: "“假”值",
+    // "\"Value is below minimum\" error message"
     minErrorText: "“值低於最小值”錯誤消息",
+    // "\"Value exceeds maximum\" error message"
     maxErrorText: "“值超過最大值”錯誤消息",
+    // "\"Empty comment\" error message"
     otherErrorText: "“空評論”錯誤消息",
+    // "Error message for duplicate responses"
     keyDuplicationError: "“非唯一鍵值”錯誤消息",
+    // [Auto-translated] "Minimum selected choices"
     minSelectedChoices: "最少選擇的選項",
+    // [Auto-translated] "Maximum selected choices"
     maxSelectedChoices: "最大選定選項數",
+    // [Auto-translated] "Logo width (in CSS-accepted values)"
     logoWidth: "徽標寬度（以 CSS 接受的值為單位）",
+    // [Auto-translated] "Logo height (in CSS-accepted values)"
     logoHeight: "徽標高度（以 CSS 接受的值為單位）",
+    // "Read-only"
     readOnly: "唯讀",
+    // [Auto-translated] "Editable if"
     enableIf: "可編輯，如果",
+    // "\"No rows\" message"
     noRowsText: "“無行”消息",
+    // [Auto-translated] "Separate special choices (None, Other, Select All)"
     separateSpecialChoices: "單獨的特殊選項（無、其他、全選）",
+    // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "複製以下問題的選項",
+    // [Auto-translated] "Which choices to copy?"
     choicesFromQuestionMode: "要複製哪些選項？",
+    // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "使用以下矩陣、列或面板問題中的值作為選項ID",
+    // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "使用以下矩陣、列或面板問題中的值作為選擇文本",
+    // [Auto-translated] "Display page titles in progress bar"
     progressBarShowPageTitles: "在進度條中顯示頁面標題",
+    // [Auto-translated] "Display page numbers in progress bar"
     progressBarShowPageNumbers: "在進度條中顯示頁碼",
+    // [Auto-translated] "Show the comment area"
     showCommentArea: "顯示評論區域",
+    // [Auto-translated] "Comment area placeholder"
     commentPlaceholder: "註釋區佔位元",
+    // [Auto-translated] "Display rate descriptions as extreme values"
     displayRateDescriptionsAsExtremeItems: "將速率描述顯示為極值",
+    // [Auto-translated] "Row order"
     rowOrder: "行順序",
+    // [Auto-translated] "Column layout"
     columnsLayout: "列佈局",
+    // [Auto-translated] "Nested column count"
     columnColCount: "嵌套列計數",
+    // [Auto-translated] "Correct Answer"
     correctAnswer: "正確答案",
+    // [Auto-translated] "Default Values"
     defaultPanelValue: "預設值",
+    // [Auto-translated] "Cell Texts"
     cells: "單元格文本",
+    // [Auto-translated] "Select a file or paste a file link..."
     fileInputPlaceholder: "選擇檔案或貼上檔案連結...",
+    // "Prevent duplicate responses in the following column"
     keyName: "鍵列",
     itemvalue: {
+      // [Auto-translated] "Make the option visible if"
       visibleIf: "如果出現以下情況，則使該選項可見",
+      // [Auto-translated] "Make the option selectable if"
       enableIf: "如果出現以下情況，則使該選項可選"
     },
     "itemvalue@rows": {
+      // [Auto-translated] "Make the row visible if"
       visibleIf: "如果出現以下情況，則使行可見",
+      // [Auto-translated] "Make the row editable if"
       enableIf: "如果出現以下情況，則使行可編輯"
     },
     imageitemvalue: {
+      // "Alt text"
       text: "可選文字"
     },
+    // [Auto-translated] "Logo position"
     logoPosition: "徽標位置",
+    // [Auto-translated] "Add logo..."
     addLogo: "新增徽標...",
+    // [Auto-translated] "Change logo..."
     changeLogo: "變更徽標...",
     logoPositions: {
+      // [Auto-translated] "Remove logo"
       none: "刪除徽標",
+      // [Auto-translated] "Left"
       left: "左",
+      // [Auto-translated] "Right"
       right: "右",
+      // [Auto-translated] "On the top"
       top: "在頂部",
+      // [Auto-translated] "In the bottom"
       bottom: "在底部"
     },
+    // [Auto-translated] "Preview mode"
     previewMode: "預覽模式",
+    // [Auto-translated] "Enable the grid layout"
     gridLayoutEnabled: "啟用網格佈局",
+    // [Auto-translated] "Grid layout columns"
     gridLayoutColumns: "網格佈局列",
+    // [Auto-translated] "Mask settings"
     maskSettings: "蒙版設置",
+    // [Auto-translated] "Row expansion error message alignment"
     detailErrorLocation: "行擴展錯誤消息對齊",
     // Creator tabs
     tabs: {
       panel: {
+        // [Auto-translated] "Layout"
         layout: "面板佈局"
       },
+      // "General"
       general: "通用項",
+      // "Options"
       fileOptions: "選項",
+      // "HTML Editor"
       html: "HTML 編輯器",
+      // "Columns"
       columns: "設置列",
+      // "Rows"
       rows: "設置行",
+      // "Choice Options"
       choices: "設置選項",
+      // [Auto-translated] "Items"
       items: "專案",
+      // "Visible If"
       visibleIf: "設置可見條件",
+      // "Editable If"
       enableIf: "Enable If",
+      // [Auto-translated] "Required If"
       requiredIf: "如果",
+      // "Rating Values"
       rateValues: "設置評分值",
+      // [Auto-translated] "Slider Settings"
       sliderSettings: "滑塊設置",
+      // "Choices from a Web Service"
       choicesByUrl: "通過 URL 導入選項",
+      // "Default Choices"
       matrixChoices: "默認選項",
+      // "Text Inputs"
       multipleTextItems: "文本輸入",
+      // [Auto-translated] "Numbering"
       numbering: "編號",
+      // "Validators"
       validators: "校驗規則",
+      // "Navigation"
       navigation: "導航",
+      // "Question Settings"
       question: "問題",
+      // [Auto-translated] "Pages"
       pages: "頁面",
+      // "Quiz Mode"
       timer: "問卷計時器",
+      // [Auto-translated] "Calculated Values"
       calculatedValues: "計算值",
+      // [Auto-translated] "Triggers"
       triggers: "觸發器",
+      // [Auto-translated] "Title template"
       templateTitle: "標題範本",
+      // [Auto-translated] "Totals"
       totals: "總數",
+      // "Conditions"
       logic: "邏輯",
+      // [Auto-translated] "Input Mask Settings"
       mask: "輸入掩碼設置",
       layout: {
+        // [Auto-translated] "Layout"
         panel: "佈局",
+        // [Auto-translated] "Layout"
         question: "佈局",
+        // [Auto-translated] "Layout"
         base: "佈局"
       },
+      // [Auto-translated] "Data"
       data: "數據",
+      // [Auto-translated] "Validation"
       validation: "驗證",
+      // [Auto-translated] "Cell Texts"
       cells: "單元格文本",
+      // [Auto-translated] "Survey Complete"
       showOnCompleted: "調查完成",
+      // [Auto-translated] "Logo in Survey Title"
       logo: "調查標題中的徽標",
+      // [Auto-translated] "Slider"
       slider: "滑塊",
+      // [Auto-translated] "Expression"
       expression: "表達",
+      // [Auto-translated] "Question Settings"
       questionSettings: "問題設置",
+      // "Header"
       header: "頁眉",
+      // "Background"
       background: "背景",
+      // "Appearance"
       appearance: "外觀",
+      // [Auto-translated] "Accent colors"
       accentColors: "強調色",
+      // [Auto-translated] "Surface Background"
       surfaceBackground: "表面背景",
+      // [Auto-translated] "Scaling"
       scaling: "縮放",
+      // [Auto-translated] "Others"
       others: "別人"
     },
+    // "Edit property '{0}'"
     editProperty: "編輯屬性: '{0}'",
+    // "Items"
     items: "[ 項目數量: {0} ]",
+    // [Auto-translated] "Choices are visible if"
     choicesVisibleIf: "在以下情況下，選項可見",
+    // [Auto-translated] "Choices are selectable if"
     choicesEnableIf: "在以下情況下，可以選擇選項",
+    // [Auto-translated] "Columns are visible if"
     columnsEnableIf: "在以下情況下，列可見",
+    // [Auto-translated] "Rows are visible if"
     rowsEnableIf: "在以下情況下，行可見",
+    // [Auto-translated] "Add inner indents"
     innerIndent: "添加內部縮進",
+    // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "使用最後一個條目中的答案作為預設值",
+    // "Please enter a value."
     enterNewValue: "請設定值",
+    // "There are no questions in the survey."
     noquestions: "問卷中還沒有創建任何問題",
+    // "Please create a trigger"
     createtrigger: "請創建觸發器",
+    // [Auto-translated] "Press enter button to edit"
     titleKeyboardAdornerTip: "按回車鍵編輯",
+    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
     keyboardAdornerTip: "按回車鍵編輯專案，按刪除按鈕刪除專案，按Alt加向上箭頭或向下箭頭移動專案",
+    // "On "
     triggerOn: "當 ",
+    // "Make pages visible"
     triggerMakePagesVisible: "使頁面可見:",
+    // "Make elements visible"
     triggerMakeQuestionsVisible: "使問題可見:",
+    // "Complete the survey if successful."
     triggerCompleteText: "如果滿足條件，則完成問卷",
+    // "The trigger is not set"
     triggerNotSet: "觸發器尚未設置",
+    // "Run if"
     triggerRunIf: "滿足下列條件時執行",
+    // "Change value of: "
     triggerSetToName: "修改下列問題值: ",
+    // [Auto-translated] "Copy value from: "
     triggerFromName: "從以下位置複製值：",
+    // [Auto-translated] "Run this Expression"
     triggerRunExpression: "運行此表達式",
+    // "to: "
     triggerSetValue: "修改為: ",
+    // [Auto-translated] "Go to the question"
     triggerGotoName: "轉到問題",
+    // "Do not put the variable into the survey result."
     triggerIsVariable: "在問卷提交結果中不要包含該變量",
+    // [Auto-translated] "Please enter a valid expression"
     triggerRunExpressionEmpty: "請輸入有效的表達式",
+    // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "在這裡鍵入表示式...",
+    // [Auto-translated] "No file choosen"
     noFile: "未選擇任何檔",
+    // [Auto-translated] "Clear the value if the question becomes hidden"
     clearIfInvisible: "如果問題被隱藏，則清除該值",
+    // [Auto-translated] "Value property name"
     valuePropertyName: "值屬性名稱",
+    // [Auto-translated] "Enable search"
     searchEnabled: "啟用搜索",
+    // [Auto-translated] "Hide selected items"
     hideSelectedItems: "隱藏選取選取專案",
+    // [Auto-translated] "Close the dropdown after selection"
     closeOnSelect: "選擇後關閉下拉清單",
+    // [Auto-translated] "Vertical alignment"
     verticalAlign: "垂直對齊",
+    // [Auto-translated] "Alternate rows"
     alternateRows: "交替行",
+    // [Auto-translated] "Columns are visible if"
     columnsVisibleIf: "在以下情況下，列可見",
+    // [Auto-translated] "Rows are visible if"
     rowsVisibleIf: "在以下情況下，行可見",
+    // [Auto-translated] "Comment area placeholder"
     otherPlaceholder: "註釋區佔位元",
+    // [Auto-translated] "File placeholder text"
     filePlaceholder: "檔佔位元文本",
+    // [Auto-translated] "Photo placeholder text"
     photoPlaceholder: "照片占位元文本",
+    // [Auto-translated] "File or photo placeholder text"
     fileOrPhotoPlaceholder: "檔或照片佔位元文字",
+    // [Auto-translated] "Rate type"
     rateType: "費率類型",
+    // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "例如：https://api.example.com/books",
+    // [Auto-translated] "Ex.: categories.fiction"
     path_placeholder: "例如：categories.fiction",
+    // [Auto-translated] "Ex.: a)"
     questionStartIndex_placeholder: "例如：a）",
+    // [Auto-translated] "Ex.: 6in"
     width_placeholder: "例：6in",
+    // [Auto-translated] "Ex.: 600px"
     minWidth_placeholder: "例如：600px",
+    // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "例：50%",
+    // "auto"
     imageHeight_placeholder: "自動",
+    // "auto"
     imageWidth_placeholder: "自動",
+    // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "例：100px",
     theme: {
+      // [Auto-translated] "Theme"
       themeName: "主題",
+      // [Auto-translated] "Question appearance"
       isPanelless: "問題外觀",
+      // [Auto-translated] "Input element"
       editorPanel: "背景和拐角半徑",
+      // [Auto-translated] "Panel background and corner radius"
       questionPanel: "背景和拐角半徑",
+      // [Auto-translated] "Accent color"
       primaryColor: "強調色",
+      // [Auto-translated] "Panel background opacity"
       panelBackgroundTransparency: "面板背景不透明度",
+      // [Auto-translated] "Question background opacity"
       questionBackgroundTransparency: "問題背景不透明度",
+      // [Auto-translated] "Font size"
       fontSize: "字體大小",
+      // [Auto-translated] "Scale"
       scale: "規模",
+      // [Auto-translated] "Corner radius"
       cornerRadius: "拐角半徑",
+      // [Auto-translated] "Advanced mode"
       advancedMode: "高級模式",
+      // [Auto-translated] "Page title font"
       pageTitle: "標題字體",
+      // [Auto-translated] "Page description font"
       pageDescription: "描述字體",
+      // [Auto-translated] "Question title font"
       questionTitle: "標題字體",
+      // [Auto-translated] "Question description font"
       questionDescription: "描述字體",
+      // [Auto-translated] "Input element font"
       editorFont: "字體",
+      // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度",
+      // [Auto-translated] "Font family"
       "--sjs-font-family": "字體家族",
+      // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "背景顏色",
+      // [Auto-translated] "Accent background"
       "--sjs-primary-backcolor": "重音背景",
+      // [Auto-translated] "Accent foreground"
       "--sjs-primary-forecolor": "重音前景",
+      // [Auto-translated] "Error messages"
       "--sjs-special-red": "錯誤消息",
+      // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "陰影效果",
+      // [Auto-translated] "Shadow effects"
       "--sjs-shadow-inner": "陰影效果",
+      // [Auto-translated] "Colors"
       "--sjs-border-default": "顏色"
     },
     "header@header": {
+      // [Auto-translated] "View"
       headerView: "視圖",
+      // [Auto-translated] "Logo position"
       logoPosition: "徽標位置",
+      // [Auto-translated] "Survey title font"
       surveyTitle: "調查標題字體",
+      // [Auto-translated] "Survey description font"
       surveyDescription: "調查描述字體",
+      // [Auto-translated] "Survey title font"
       headerTitle: "調查標題字體",
+      // [Auto-translated] "Survey description font"
       headerDescription: "調查描述字體",
+      // [Auto-translated] "Content area width"
       inheritWidthFrom: "內容區寬度",
+      // [Auto-translated] "Text width"
       textAreaWidth: "文本寬度",
+      // [Auto-translated] "Background color"
       backgroundColorSwitch: "背景顏色",
+      // [Auto-translated] "Background image"
       backgroundImage: "背景圖片",
+      // [Auto-translated] "Opacity"
       backgroundImageOpacity: "不透明度",
+      // [Auto-translated] "Overlap"
       overlapEnabled: "重疊",
+      // [Auto-translated] "Logo position"
       logoPositionX: "徽標位置",
+      // [Auto-translated] "Title position"
       titlePositionX: "標題位置",
+      // [Auto-translated] "Description position"
       descriptionPositionX: "描述位置"
     }
   },
   // Property values
   pv: {
+    // [Auto-translated] "true"
     "true": "真",
+    // [Auto-translated] "false"
     "false": "假",
+    // [Auto-translated] "Local files"
     file: "本地檔",
+    // [Auto-translated] "Camera"
     camera: "照相機",
+    // [Auto-translated] "Local files or camera"
     "file-camera": "本地檔或相機",
+    // [Auto-translated] "Inherit"
     inherit: "繼承",
+    // [Auto-translated] "Visible"
     show: "可見",
+    // [Auto-translated] "Hidden"
     hide: "隱藏",
+    // [Auto-translated] "Inherit"
     default: "繼承",
+    // [Auto-translated] "Initial"
     initial: "初",
+    // [Auto-translated] "Random"
     random: "隨機",
+    // [Auto-translated] "Collapsed"
     collapsed: "倒塌",
+    // [Auto-translated] "Expanded"
     expanded: "擴大",
+    // [Auto-translated] "None"
     none: "沒有",
+    // [Auto-translated] "Ascending"
     asc: "上升",
+    // [Auto-translated] "Descending"
     desc: "降",
+    // [Auto-translated] "Indeterminate"
     indeterminate: "定",
+    // [Auto-translated] "Selected"
     selected: "選擇",
+    // [Auto-translated] "Unselected"
     unselected: "未選中",
+    // [Auto-translated] "decimal"
     decimal: "十進位",
+    // [Auto-translated] "currency"
     currency: "貨幣",
+    // [Auto-translated] "percent"
     percent: "百分之",
+    // [Auto-translated] "First panel is expanded"
     firstExpanded: "第一個面板展開",
+    // [Auto-translated] "Hide question numbers"
     off: "隱藏問題編號",
+    // [Auto-translated] "List"
     list: "清單",
+    // [Auto-translated] "Carousel"
     carousel: "旋轉 木馬",
+    // [Auto-translated] "Tabs"
     tab: "製表元",
+    // [Auto-translated] "Panel navigator + Progress bar at the top"
     progressTop: "面板導航器 + 頂部的進度條",
+    // [Auto-translated] "Panel navigator + Progress bar at the bottom"
     progressBottom: "面板導航器 + 底部的進度條",
+    // [Auto-translated] "Panel navigator + Progress bar at the top and bottom"
     progressTopBottom: "面板導航器 + 頂部和底部的進度條",
+    // [Auto-translated] "Horizontal"
     horizontal: "水準",
+    // [Auto-translated] "Vertical"
     vertical: "垂直",
+    // [Auto-translated] "Top"
     top: "返回頁首",
+    // [Auto-translated] "Bottom"
     bottom: "底",
+    // [Auto-translated] "Top and bottom"
     topBottom: "頂部和底部",
+    // [Auto-translated] "Both"
     both: "雙",
+    // [Auto-translated] "Left"
     left: "左",
+    // [Auto-translated] "Right"
     right: "右",
+    // [Auto-translated] "Center"
     center: "中心",
+    // [Auto-translated] "Left and right"
     leftRight: "左和右",
+    // [Auto-translated] "Middle"
     middle: "中間",
+    // [Auto-translated] "color"
     color: "顏色",
+    // [Auto-translated] "date"
     date: "日期",
+    // [Auto-translated] "datetime"
     datetime: "日期時間",
+    // [Auto-translated] "datetime-local"
     "datetime-local": "日期時間-本地",
+    // [Auto-translated] "email"
     email: "電子郵件",
+    // [Auto-translated] "month"
     month: "月",
+    // [Auto-translated] "number"
     number: "數",
+    // [Auto-translated] "password"
     password: "密碼",
+    // [Auto-translated] "range"
     range: "範圍",
+    // [Auto-translated] "tel"
     tel: "電話",
+    // [Auto-translated] "text"
     text: "發簡訊",
+    // [Auto-translated] "time"
     time: "時間",
+    // [Auto-translated] "url"
     url: "網址",
+    // [Auto-translated] "week"
     week: "周",
+    // [Auto-translated] "Hidden"
     hidden: "隱藏",
+    // [Auto-translated] "Editable"
     edit: "編輯",
+    // [Auto-translated] "Read-only"
     display: "唯讀",
+    // [Auto-translated] "Contain"
     contain: "包含",
+    // [Auto-translated] "Cover"
     cover: "蓋",
+    // [Auto-translated] "Fill"
     fill: "填補",
+    // [Auto-translated] "Next"
     next: "下一個",
+    // [Auto-translated] "Last"
     last: "最後",
+    // [Auto-translated] "When the survey is completed"
     onComplete: "調查完成時",
+    // [Auto-translated] "When the question becomes hidden"
     onHidden: "當問題變得隱藏時",
+    // [Auto-translated] "When the question or its panel/page becomes hidden"
     onHiddenContainer: "當問題或其面板/頁面被隱藏時",
     clearInvisibleValues: {
+      // [Auto-translated] "Never"
       none: "從不"
     },
     clearIfInvisible: {
+      // [Auto-translated] "Never"
       none: "從不"
     },
+    // [Auto-translated] "Radio Buttons"
     radio: "單選按鈕",
     inputType: {
+      // [Auto-translated] "Color"
       color: "顏色",
+      // [Auto-translated] "Date"
       date: "日期",
+      // [Auto-translated] "Date and Time"
       "datetime-local": "日期和時間",
+      // [Auto-translated] "Email"
       email: "電子郵件",
+      // [Auto-translated] "Month"
       month: "月",
+      // [Auto-translated] "Number"
       number: "數",
+      // [Auto-translated] "Password"
       password: "密碼",
+      // [Auto-translated] "Range"
       range: "範圍",
+      // [Auto-translated] "Phone Number"
       tel: "電話號碼",
+      // [Auto-translated] "Text"
       text: "發簡訊",
+      // [Auto-translated] "Time"
       time: "時間",
+      // [Auto-translated] "URL"
       url: "網址",
+      // [Auto-translated] "Week"
       week: "周"
     },
     sliderType: {
+      // [Auto-translated] "Single-Value"
       single: "單值",
+      // [Auto-translated] "Range"
       range: "範圍"
     },
     autocomplete: {
+      // [Auto-translated] "Full Name"
       name: "全名",
+      // [Auto-translated] "Prefix"
       "honorific-prefix": "前綴",
+      // [Auto-translated] "First Name"
       "given-name": "名字",
+      // [Auto-translated] "Middle Name"
       "additional-name": "中間名",
+      // [Auto-translated] "Last Name"
       "family-name": "姓",
+      // [Auto-translated] "Suffix"
       "honorific-suffix": "後綴",
+      // [Auto-translated] "Nickname"
       nickname: "昵稱",
+      // [Auto-translated] "Job Title"
       "organization-title": "職稱",
+      // [Auto-translated] "User Name"
       username: "使用者名",
+      // [Auto-translated] "New Password"
       "new-password": "新密碼",
+      // [Auto-translated] "Current Password"
       "current-password": "當前密碼",
+      // [Auto-translated] "Organization Name"
       organization: "組織名稱",
+      // [Auto-translated] "Full Street Address"
       "street-address": "全街位址",
+      // [Auto-translated] "Address Line 1"
       "address-line1": "位址行 1",
+      // [Auto-translated] "Address Line 2"
       "address-line2": "位址行 2",
+      // [Auto-translated] "Address Line 3"
       "address-line3": "位址行 3",
+      // [Auto-translated] "Level 4 Address"
       "address-level4": "4 級位址",
+      // [Auto-translated] "Level 3 Address"
       "address-level3": "3 級位址",
+      // [Auto-translated] "Level 2 Address"
       "address-level2": "2 級位址",
+      // [Auto-translated] "Level 1 Address"
       "address-level1": "1 級位址",
+      // [Auto-translated] "Country Code"
       country: "國家代碼",
+      // [Auto-translated] "Country Name"
       "country-name": "國家/地區名稱",
+      // [Auto-translated] "Postal Code"
       "postal-code": "郵遞區號",
+      // [Auto-translated] "Cardholder Name"
       "cc-name": "持卡人姓名",
+      // [Auto-translated] "Cardholder First Name"
       "cc-given-name": "持卡人名字",
+      // [Auto-translated] "Cardholder Middle Name"
       "cc-additional-name": "持卡人中間名",
+      // [Auto-translated] "Cardholder Last Name"
       "cc-family-name": "持卡人姓氏",
+      // [Auto-translated] "Credit Card Number"
       "cc-number": "信用卡號",
+      // [Auto-translated] "Expiration Date"
       "cc-exp": "有效期",
+      // [Auto-translated] "Expiration Month"
       "cc-exp-month": "到期月份",
+      // [Auto-translated] "Expiration Year"
       "cc-exp-year": "到期年份",
+      // [Auto-translated] "Card Security Code"
       "cc-csc": "卡安全碼",
+      // [Auto-translated] "Credit Card Type"
       "cc-type": "信用卡類型",
+      // [Auto-translated] "Transaction Currency"
       "transaction-currency": "交易貨幣",
+      // [Auto-translated] "Transaction Amount"
       "transaction-amount": "交易金額",
+      // [Auto-translated] "Preferred Language"
       language: "首選語言",
+      // [Auto-translated] "Birthday"
       bday: "生日",
+      // [Auto-translated] "Birthday Day"
       "bday-day": "生日",
+      // [Auto-translated] "Birthday Month"
       "bday-month": "生日月份",
+      // [Auto-translated] "Birthday Year"
       "bday-year": "生日年份",
+      // [Auto-translated] "Gender"
       sex: "性",
+      // [Auto-translated] "Website URL"
       url: "網站 URL",
+      // [Auto-translated] "Profile Photo"
       photo: "個人頭像",
+      // [Auto-translated] "Telephone Number"
       tel: "電話號碼",
+      // [Auto-translated] "Country Code for Phone"
       "tel-country-code": "電話的國家代碼",
+      // [Auto-translated] "National Telephone Number"
       "tel-national": "全國電話號碼",
+      // [Auto-translated] "Area Code"
       "tel-area-code": "區號",
+      // [Auto-translated] "Local Phone Number"
       "tel-local": "本地電話號碼",
+      // [Auto-translated] "Local Phone Prefix"
       "tel-local-prefix": "本地電話前綴",
+      // [Auto-translated] "Local Phone Suffix"
       "tel-local-suffix": "本地電話後綴",
+      // [Auto-translated] "Phone Extension"
       "tel-extension": "電話分機",
+      // [Auto-translated] "Email Address"
       email: "電子郵件位址",
+      // [Auto-translated] "Instant Messaging Protocol"
       impp: "即時通訊協定"
     },
     maskType: {
+      // [Auto-translated] "None"
       none: "沒有",
+      // [Auto-translated] "Pattern"
       pattern: "模式",
+      // [Auto-translated] "Numeric"
       numeric: "數值的",
+      // [Auto-translated] "Date and Time"
       datetime: "日期和時間",
+      // [Auto-translated] "Currency"
       currency: "貨幣"
     },
     inputTextAlignment: {
+      // [Auto-translated] "Auto"
       auto: "自動",
+      // [Auto-translated] "Left"
       left: "左",
+      // [Auto-translated] "Right"
       right: "右"
     },
+    // [Auto-translated] "All"
     all: "都",
+    // [Auto-translated] "Page"
     page: "頁",
+    // [Auto-translated] "Survey"
     survey: "調查",
+    // [Auto-translated] "When switching to the next page"
     onNextPage: "切換到下一頁時",
+    // [Auto-translated] "After an answer is changed"
     onValueChanged: "更改答案後",
+    // [Auto-translated] "Before an answer is changed"
     onValueChanging: "更改答案之前",
     questionsOnPageMode: {
+      // [Auto-translated] "Original structure"
       standard: "原始結構",
+      // [Auto-translated] "All questions on a single page"
       singlePage: "在一個頁面上顯示所有問題",
+      // [Auto-translated] "Each question on an individual page"
       questionPerPage: "每頁顯示一個問題",
+      // [Auto-translated] "Show single input field per page"
       inputPerPage: "每頁顯示單個輸入欄位"
     },
+    // [Auto-translated] "No preview"
     noPreview: "無預覽",
+    // [Auto-translated] "Show all questions"
     showAllQuestions: "顯示所有問題",
+    // [Auto-translated] "Show answered questions only"
     showAnsweredQuestions: "僅顯示已回答的問題",
+    // [Auto-translated] "Show all questions"
     allQuestions: "顯示所有問題",
+    // [Auto-translated] "Show answered questions only"
     answeredQuestions: "僅顯示已回答的問題",
+    // [Auto-translated] "Completed pages"
     pages: "已完成的頁面",
+    // [Auto-translated] "Answered questions"
     questions: "已回答的問題",
+    // [Auto-translated] "Answered required questions"
     requiredQuestions: "回答必填問題",
+    // [Auto-translated] "Valid answers"
     correctQuestions: "有效答案",
+    // [Auto-translated] "Completed pages (button UI)"
     buttons: "已完成的頁面（按鈕 UI）",
+    // [Auto-translated] "Under the input"
     underInput: "在輸入下",
+    // [Auto-translated] "Under the title"
     underTitle: "在標題下",
+    // [Auto-translated] "On blur"
     onBlur: "模糊時",
+    // [Auto-translated] "While typing"
     onTyping: "打字時",
+    // [Auto-translated] "Under the row"
     underRow: "在行下",
+    // [Auto-translated] "Under the row, only one panel is visible"
     underRowSingle: "在該行下，只有一個面板可見",
+    // "Auto"
     auto: "自動",
     showNavigationButtons: {
+      // [Auto-translated] "Hidden"
       none: "隱藏"
     },
     timerInfoMode: {
+      // "Both"
       combined: "雙"
     },
     addRowButtonLocation: {
+      // [Auto-translated] "Depends on matrix layout"
       default: "取決於矩陣佈局"
     },
     panelsState: {
+      // [Auto-translated] "Users cannot expand or collapse panels"
       default: "使用者無法展開或摺疊面板",
+      // [Auto-translated] "All panels are collapsed"
       collapsed: "所有面板均已摺疊",
+      // [Auto-translated] "All panels are expanded"
       expanded: "所有面板均已展開",
+      // [Auto-translated] "First expanded"
       firstExpanded: "首次擴展"
     },
     widthMode: {
+      // [Auto-translated] "Static"
       static: "靜態的",
+      // [Auto-translated] "Responsive"
       responsive: "回應"
     },
     contentMode: {
+      // [Auto-translated] "Image"
       image: "圖像",
+      // [Auto-translated] "Video"
       video: "視頻",
+      // [Auto-translated] "YouTube"
       youtube: "優酷"
     },
     displayMode: {
+      // [Auto-translated] "Buttons"
       buttons: "按鈕",
+      // [Auto-translated] "Dropdown"
       dropdown: "下拉清單"
     },
     rateColorMode: {
+      // [Auto-translated] "Default"
       default: "違約",
+      // [Auto-translated] "Scale"
       scale: "規模"
     },
     scaleColorMode: {
+      // [Auto-translated] "Monochrome"
       monochrome: "單色",
+      // [Auto-translated] "Colored"
       colored: "彩色"
     },
     autoGenerate: {
+      // [Auto-translated] "Generate"
       "true": "生成",
+      // [Auto-translated] "Enter manually"
       "false": "手動輸入"
     },
     rateType: {
+      // [Auto-translated] "Labels"
       labels: "標籤",
+      // [Auto-translated] "Stars"
       stars: "星星",
+      // [Auto-translated] "Smileys"
       smileys: "笑臉"
     },
     state: {
+      // [Auto-translated] "Locked"
       default: "鎖"
     },
     showQuestionNumbers: {
+      // [Auto-translated] "Auto-numbering"
       default: "自動編號",
+      // [Auto-translated] "Continue from the previous page"
       on: "自動編號",
+      // [Auto-translated] "Start on each page"
       onPage: "在每個頁面上重置",
+      // [Auto-translated] "Start on each panel"
       onpanel: "在每個面板上重置",
+      // [Auto-translated] "Start on each panel"
       onPanel: "在每個面板上重置",
+      // [Auto-translated] "Recursive numbering"
       recursive: "遞歸編號",
+      // [Auto-translated] "Continue throughout the survey"
       onSurvey: "在整個調查中繼續",
+      // [Auto-translated] "No numbering"
       off: "無編號"
     },
     descriptionLocation: {
+      // [Auto-translated] "Under the question title"
       underTitle: "在問題標題下",
+      // [Auto-translated] "Under the input field"
       underInput: "在輸入欄位下"
     },
     selectToRankAreasLayout: {
+      // [Auto-translated] "Next to choices"
       horizontal: "在選項旁邊",
+      // [Auto-translated] "Above choices"
       vertical: "以上選擇"
     },
     displayStyle: {
+      // [Auto-translated] "Decimal"
       decimal: "十進位",
+      // [Auto-translated] "Currency"
       currency: "貨幣",
+      // [Auto-translated] "Percentage"
       percent: "百分比",
+      // [Auto-translated] "Date"
       date: "日期"
     },
     totalDisplayStyle: {
+      // [Auto-translated] "Decimal"
       decimal: "十進位",
+      // [Auto-translated] "Currency"
       currency: "貨幣",
+      // [Auto-translated] "Percentage"
       percent: "百分比",
+      // [Auto-translated] "Date"
       date: "日期"
     },
     rowOrder: {
+      // [Auto-translated] "Original"
       initial: "源語言"
     },
     questionOrder: {
+      // [Auto-translated] "Original"
       initial: "源語言"
     },
     progressBarLocation: {
+      // [Auto-translated] "Top"
       top: "返回頁首",
+      // [Auto-translated] "Bottom"
       bottom: "底",
+      // [Auto-translated] "Top and bottom"
       topbottom: "頂部和底部",
+      // [Auto-translated] "Above the header"
       aboveheader: "標題上方",
+      // [Auto-translated] "Below the header"
       belowheader: "標題下方",
+      // [Auto-translated] "Hidden"
       off: "隱藏"
     },
+    // [Auto-translated] "Sum"
     sum: "和",
+    // [Auto-translated] "Count"
     count: "計數",
+    // [Auto-translated] "Min"
     min: "最小值",
+    // [Auto-translated] "Max"
     max: "麥克斯",
+    // [Auto-translated] "Avg"
     avg: "平均",
     searchMode: {
+      // [Auto-translated] "Contains"
       contains: "包含",
+      // [Auto-translated] "Starts with"
       startsWith: "開頭為"
     },
     backgroundImageFit: {
+      // [Auto-translated] "Auto"
       auto: "自動",
+      // [Auto-translated] "Cover"
       cover: "蓋",
+      // [Auto-translated] "Contain"
       contain: "包含",
+      // [Auto-translated] "Stretch"
       fill: "伸展",
+      // [Auto-translated] "Tile"
       tile: "瓦"
     },
     backgroundImageAttachment: {
+      // [Auto-translated] "Fixed"
       fixed: "固定",
+      // [Auto-translated] "Scroll"
       scroll: "滾動"
     },
     headerView: {
+      // [Auto-translated] "Basic"
       basic: "基本",
+      // [Auto-translated] "Advanced"
       advanced: "高深"
     },
     inheritWidthFrom: {
+      // [Auto-translated] "Same as survey"
       survey: "與調查相同",
+      // [Auto-translated] "Fit to container"
       container: "適合容器"
     },
     backgroundColorSwitch: {
+      // [Auto-translated] "None"
       none: "沒有",
+      // [Auto-translated] "Accent color"
       accentColor: "強調色",
+      // [Auto-translated] "Custom"
       custom: "習慣"
     },
     colorPalette: {
+      // [Auto-translated] "Light"
       light: "光",
+      // [Auto-translated] "Dark"
       dark: "黑暗"
     },
     isPanelless: {
+      // [Auto-translated] "Default"
       "false": "違約",
+      // [Auto-translated] "Without Panels"
       "true": "不帶面板"
     },
     progressBarInheritWidthFrom: {
+      // [Auto-translated] "Same as survey"
       survey: "與調查相同",
+      // [Auto-translated] "Same as container"
       container: "與容器相同"
     }
   },
   // Operators
   op: {
+    // "Empty"
     empty: "為空",
+    // "Not empty"
     notempty: "不為空",
+    // "Equals"
     equal: "等於",
+    // "Does not equal"
     notequal: "不等於",
+    // "Contains"
     contains: "包含",
+    // "Does not contain"
     notcontains: "不包含",
+    // [Auto-translated] "Any of"
     anyof: "任何",
+    // [Auto-translated] "All of"
     allof: "全部",
+    // "Greater than"
     greater: "大於",
+    // "Less than"
     less: "小於",
+    // "Greater than or equal to"
     greaterorequal: "大於等於",
+    // "Less than or equal to"
     lessorequal: "小於等於",
+    // [Auto-translated] "and"
     and: "和",
+    // [Auto-translated] "or"
     or: "或"
   },
   // Embed window
   ew: {
+    // "Use Angular version"
     angular: "使用 Angular 時",
+    // "Use jQuery version"
     jquery: "使用 JQuery 時",
+    // "Use Knockout version"
     knockout: "使用 Knockout 時",
+    // "Use React version"
     react: "使用 React 時",
+    // "Use Vue version"
     vue: "使用 Vue 時",
+    // "For bootstrap framework"
     bootstrap: "使用 Bootstrap 時",
+    // [Auto-translated] "Modern theme"
     modern: "現代主題",
+    // [Auto-translated] "Default theme"
     default: "默認主題",
+    // [Auto-translated] "Orange theme"
     orange: "橙色主題",
+    // [Auto-translated] "Darkblue theme"
     darkblue: "深藍色主題",
+    // [Auto-translated] "Darkrose theme"
     darkrose: "“暗玫瑰”主題",
+    // [Auto-translated] "Stone theme"
     stone: "“石頭”主題",
+    // [Auto-translated] "Winter theme"
     winter: "“冬季”主題",
+    // [Auto-translated] "Winter-Stone theme"
     winterstone: "“冬日之石”主題",
+    // "Show survey on a page"
     showOnPage: "嵌入頁面顯示",
+    // "Show survey in a window"
     showInWindow: "使用單獨的問卷視窗",
+    // "Load Survey JSON from server"
     loadFromServer: "從服務器加載問卷 JSON 數據",
+    // "Scripts and styles"
     titleScript: "腳本和樣式",
+    // "HTML"
     titleHtml: "HTML",
+    // "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
+    // [Auto-translated] "Select the page to test it"
     selectPage: "選擇要測試的頁面",
+    // [Auto-translated] "Show invisible elements"
     showInvisibleElements: "顯示不可見元素",
+    // [Auto-translated] "Hide invisible elements"
     hideInvisibleElements: "隱藏不可見元素",
+    // [Auto-translated] "Previous"
     prevPage: "以前",
+    // [Auto-translated] "Next"
     nextPage: "下一個"
   },
   validators: {
+    // "Answer count"
     answercountvalidator: "數量檢查",
+    // "Email"
     emailvalidator: "Email",
+    // [Auto-translated] "Expression"
     expressionvalidator: "表達",
+    // "Number"
     numericvalidator: "數字",
+    // "Regex"
     regexvalidator: "正則表達式",
+    // "Text"
     textvalidator: "文本"
   },
   triggers: {
+    // "Complete survey"
     completetrigger: "完成問卷",
+    // "Set answer"
     setvaluetrigger: "設置問題值",
+    // [Auto-translated] "Copy answer"
     copyvaluetrigger: "複製答案",
+    // [Auto-translated] "Skip to question"
     skiptrigger: "跳至問題",
+    // [Auto-translated] "Run expression"
     runexpressiontrigger: "運行表達式",
+    // "change visibility (deprecated)"
     visibletrigger: "修改可見性"
   },
   peplaceholder: {
     patternmask: {
+      // "Ex.: +1(999)-999-99-99"
       pattern: "例如：+1（999）-999-99-99"
     },
     datetimemask: {
+      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
       pattern: "例：mm/dd/yyyy"
     },
     currencymask: {
+      // "Ex.: $"
       prefix: "例：$",
+      // "Ex.: USD"
       suffix: "例如：美元"
     },
     panelbase: {
+      // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "例如：200px"
     },
     panellayoutcolumn: {
+      // "Ex.: 30%"
       effectiveWidth: "例如：30%",
+      // "Ex.: 200px"
       questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
     panel: {
+      // "A panel ID that is not visible to respondents."
       name: "受訪者不可見的面板ID。",
+      // [Auto-translated] "Type a subtitle."
       description: "鍵入面板字幕。",
+      // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "使用魔棒圖示設置確定面板可見性的條件規則。",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "使用魔棒圖示設置禁用面板唯讀模式的條件規則。",
+      // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
       questionTitleLocation: "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
+      // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
       questionOrder: "保持問題的原始順序或隨機化問題。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
+      // "Repositions the panel to the end of a selected page."
       page: "將面板重新置放到選頁面的末尾。",
+      // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
       innerIndent: "在面板內容和面板框的左邊框之間添加空格或邊距。",
+      // "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form."
       startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
+      // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
+      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
+      // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "為嵌套在此面板中的問題分配編號。",
+      // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "指定此面板在網格佈局中跨越的列數。",
+      // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
       gridLayoutColumns: "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
     },
     paneldynamic: {
+      // "A panel ID that is not visible to respondents."
       name: "受訪者不可見的面板ID。",
+      // "Type a panel subtitle."
       description: "鍵入面板字幕。",
+      // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "使用魔棒圖示設置確定面板可見性的條件規則。",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "使用魔棒圖示設置禁用面板唯讀模式的條件規則。",
+      // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      // "Applies to all questions within this dynamic panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)."
       templateQuestionTitleLocation: "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      // "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       templateQuestionTitleWidth: "當問題標題與問題框的左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
+      // "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)."
       templateErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       errorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
+      // "Repositions the panel to the end of a selected page."
       page: "將面板重新置放到選頁面的末尾。",
+      // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
       indent: "在面板內容與面板框的左邊框之間新增空間或邊界。",
+      // "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form."
       startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
+      // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
+      // "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
+      // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
       tabTitlePlaceholder: "選項卡標題的回退文本，當選項卡標題模式未生成有意義的值時應用。",
+      // "This setting allows you to control the visibility of individual entries within the dynamic panel. Use the `{panel}` placeholder to reference the current entry in your expression."
       templateVisibleIf: "此設置允許您控制動態面板中各個面板的可見性。使用“{panel}”佔位符在運算式中引用當前面板。",
+      // "This setting is automatically inherited by all questions within this dynamic panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)."
       titleLocation: "此面板中的所有問題都會自動繼承此設置。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      // "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)."
       descriptionLocation: "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。",
+      // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "定義新添加的面板的位置。默認情況下，新面板將添加到末尾。選擇「下一步」以在當前面板之後插入新面板。",
+      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
       copyDefaultValueFromLastEntry: "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。",
+      // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。",
+      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
       confirmDelete: "在刪除面板之前觸發確認提示。"
     },
     matrixdynamic: {
+      // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "在刪除行之前觸發確認提示。",
+      // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "在向矩陣添加新行時自動展開詳細資訊部分。"
     },
+    // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
+    // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
     defaultValueExpression: "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。",
+    // "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)."
     resetValueIf: "使用魔杖圖示設置條件規則，該規則確定何時將受訪者的輸入重置為基於“預設值表達式”或“設置值表達式”的值，或重置為“預設答案”值（如果設置了其中任何一個）。",
+    // "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response."
     setValueIf: "使用魔杖圖示設置條件規則，該規則確定何時運行「設置值表達式」 ，並將結果值動態分配為回應。",
+    // "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input."
     setValueExpression: "指定一個表達式，該運算式定義在滿足「如果設置值」規則中的條件時要設置的值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表達式確定的值可以被受訪者的手動輸入覆蓋。",
+    // "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field."
     gridLayoutEnabled: "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。",
     question: {
+      // "A question ID that is not visible to respondents."
       name: "受訪者不可見的問題ID。",
+      // "Type a question subtitle."
       description: "鍵入問題副標題。",
+      // "Use the magic wand icon to set a conditional rule that determines question visibility."
       visibleIf: "使用魔杖圖示設置確定問題可見性的條件規則。",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the question."
       enableIf: "使用魔杖圖示設置條件規則，以禁用問題的唯讀模式。",
+      // "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer."
       requiredIf: "使用魔杖圖標設置條件規則，除非問題得到答案，否則阻止調查推進或提交。",
+      // [Auto-translated] "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form."
       startWithNewLine: "取消選擇以將問題與上一個問題或面板顯示在一行中。如果問題是表單中的第一個元素，則該設置不適用。",
+      // "Repositions the question to the end of a selected page."
       page: "將問題重新置放到選頁面的末尾。",
+      // "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed."
       state: "從以下選項中選擇：「展開」 - 問題框完整顯示，可以摺疊;“已摺疊” - 問題框僅顯示標題和描述，可以展開;“已鎖定” - 問題框完整顯示，無法摺疊。",
+      // "Overrides title alignment rules defined on a panel, page, or survey level. When set to \"Hidden\", it also hides question descriptions. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default)."
       titleLocation: "覆蓋在面板、頁面或調查級別上定義的標題對齊規則。“繼承”選項將應用任何更高級別的設置（如果已設置）或調查級別的設置（預設為“頂部”）。",
+      // "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default)."
       descriptionLocation: "“繼承”選項應用調查級別設置（預設為“在問題標題下”）。",
+      // "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)."
       errorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      // "Adds space or margin between the question content and the left border of the question box."
       indent: "在問題內容和問題框的左邊框之間添加空格或邊距。",
+      // "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
       width: "設置問題的寬度，使其與同一行中的其他調查元素成比例。接受 CSS 值（px、%、in、pt 等）。",
+      // "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)."
       textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。",
+      // [Auto-translated] "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data."
       url: "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。",
+      // [Auto-translated] "A comparison operation used to filter the drop-down list."
       searchMode: "用於篩選下拉清單的比較操作。",
+      // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。",
+      // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "指定此問題在網格佈局中跨越多少列。"
     },
     surveyvalidator: {
+      // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "使用魔術棒圖示來定義問題值何時被視為有效。"
     },
     signaturepad: {
+      // "Sets the width of the displayed signature area and the resulting image."
       signatureWidth: "設置顯示的簽名區域和生成的圖像的寬度。",
+      // "Sets the height of the displayed signature area and the resulting image."
       signatureHeight: "設置顯示的簽名區域和生成的圖像的高度。",
+      // "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions."
       signatureAutoScaleEnabled: "選擇是否希望簽名區域填充問題框中的所有可用空間，同時保持預設的 3：2 縱橫比。設置自定義寬度和高度值后，該設置將保留這些尺寸的縱橫比。"
     },
     file: {
+      // "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageHeight: "指定預覽中上傳圖像的顯示高度以及使用相機拍攝的圖像的實際高度。在單個檔上傳模式下，顯示高度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
+      // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
+      // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
       allowImagesPreview: "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
     },
     image: {
+      // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
       contentMode: "“自動”選項會根據提供的源URL自動確定適合的顯示模式 - 圖像、視頻或YouTube。"
     },
     imagepicker: {
+      // [Auto-translated] "Overrides the minimum and maximum height values."
       imageHeight: "覆蓋最小和最大高度值。",
+      // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "覆蓋最小和最大寬度值。",
+      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
       choices: "“值”用作條件規則中使用的專案ID;向受訪者顯示“文本”。",
+      // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "在「圖像」和「視頻」之間進行選擇以設置媒體選擇器的內容模式。如果選擇「圖像」，請確保提供的所有選項都是以下格式的圖像檔：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同樣，如果選擇「視頻」，請確保所有選項都是指向以下格式的視頻檔的直接連結：MP4、MOV、WMV、FLV、AVI、MKV。請注意，視頻選項不支援 YouTube 連結。"
     },
     text: {
+      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
       size: "此設置僅調整輸入欄位的大小，不會影響問題框的寬度。要限制接受的輸入長度，請轉到<b>驗證→最大字元限制</b>。"
     },
     comment: {
+      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
       rows: "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。"
     },
     // survey templates
     survey: {
+      // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "選擇是否要阻止受訪者填寫您的調查。",
+      // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
     matrixdropdowncolumn: {
+      // "A column ID that is not visible to respondents."
       name: "受訪者不可見的列ID。",
+      // "When enabled for a column, a respondent is required to provide a unique response for each question within this column."
       isUnique: "為列啟用后，受訪者需要為此列中的每個問題提供唯一的回答。",
+      // "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
       rows: "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。",
+      // "Use the magic wand icon to set a conditional rule that determines column visibility."
       visibleIf: "使用魔杖圖示設置確定列可見性的條件規則。",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column."
       enableIf: "使用魔杖圖示設置禁用列唯讀模式的條件規則。",
+      // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
       colCount: "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
     },
     slider: {
+      // "The lowest number that users can select."
       min: "用戶可以選擇的最小數位。",
+      // "The highest number that users can select."
       max: "用戶可以選擇的最大數位。",
+      // "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc."
       step: "可選刻度值之間的間隔。例如，步長 5 將允許使用者選擇 0、5、10 等。",
+      // "The minimum distance between the slider thumbs a user can set."
       minRangeLength: "用戶可以設置的滑塊塊之間的最小距離。",
+      // "The maximum distance between the slider thumbs a user can set."
       maxRangeLength: "用戶可以設置滑塊滑塊之間的最大距離。",
+      // "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value."
       labelCount: "指定要生成的刻度標籤數量。值 -1 表示該數位是根據 最小值 和 最大值 自動計算的。",
+      // "Use `{0}` as a placeholder for the actual value."
       labelFormat: "使用 『{0}』 作為實際值的佔位元。",
+      // "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")."
       customLabels: "允許您定義特定值的自定義標籤，並可選擇為其分配相應的文本（例如，0 = “差”，100 = “優秀”）。",
+      // "Use `{0}` as a placeholder for the actual value."
       tooltipFormat: "使用 『{0}』 作為實際值的佔位元。",
+      // "Allows users to move one thumb past the other."
       allowSwap: "允許使用者將一個滑塊移過另一個滑塊。",
+      // [Auto-translated] "Displays a button that clears the selected slider value and sets it to undefined."
       allowClear: "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。",
+      // "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
       minValueExpression: "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。",
+      // "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
       maxValueExpression: "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
     },
+    // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。",
+    // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。",
+    // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。",
+    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
     cookieName: "Cookie 可防止使用者兩次填寫同一調查問卷。",
+    // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "粘貼圖像連結（無大小限制）或按下資料夾圖示以瀏覽電腦中的檔（最大 64KB）。",
+    // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
     logoWidth: "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。",
+    // [Auto-translated] "Sets a logo height in CSS units (px, %, in, pt, etc.)."
     logoHeight: "以 CSS 單位（px、%、in、pt 等）設置徽標高度。",
+    // "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio."
     logoFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
+    // [Auto-translated] "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers."
     autoAdvanceEnabled: "選擇是否希望調查在受訪者回答了當前頁面上的所有問題後自動前進到下一頁。如果頁面上的最後一個問題是開放式的或允許多個答案，則此功能將不適用。",
+    // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "選擇是否希望在受訪者回答所有問題後自動完成調查。",
+    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
     showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
+    // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "設置頁面上導航按鈕的位置。",
+    // [Auto-translated] "Enable the preview page with all or answered questions only."
     showPreviewBeforeComplete: "啟用僅包含所有問題或已回答問題的預覽頁面。",
+    // "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
     questionTitleLocation: "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。",
+    // [Auto-translated] "A symbol or a sequence of symbols indicating that an answer is required."
     requiredMark: "一個符號或一系列符號，表示需要答案。",
+    // [Auto-translated] "Enter a number or letter with which you want to start numbering."
     questionStartIndex: "輸入要開始編號的數位或字母。",
+    // "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box."
     questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。",
+    // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "選擇是否希望每個頁面上的第一個輸入字段準備好進行文本輸入。",
+    // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。",
+    // [Auto-translated] "For text entry questions only."
     maxTextLength: "僅適用於文本輸入問題。",
+    // [Auto-translated] "For question comments only."
     maxCommentLength: "僅供問題評論。",
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
     commentAreaRows: "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。",
+    // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "選擇是否希望問題註釋和長文本問題根據輸入的文字長度自動增加高度。",
+    // [Auto-translated] "For question comments and Long Text questions only."
     allowResizeComment: "僅適用於問題評論和長文本問題。",
+    // [Auto-translated] "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on."
     calculatedValues: "自訂變數用作表單計算中使用的中間變數或輔助變數。他們將受訪者的輸入作為源值。每個自定義變數都有一個唯一的名稱和它所基於的表達式。",
+    // [Auto-translated] "Select if you wish the calculated value of the expression to be saved along with survey results."
     includeIntoResult: "選擇是否希望將表達式的計算值與調查結果一起保存。",
+    // "A trigger is an event or condition that is based on an expression. Once the expression is evaluated to \"true\", a trigger sets off an action. Such an action can optionally have a target question it affects."
     triggers: "觸發器是基於表達式的事件或條件。一旦表達式被計算為「true」，觸發器就會觸發一個操作。這樣的操作可以選擇性地影響它的目標問題。",
+    // [Auto-translated] "Choose whether or not to clear values for questions hidden by conditional logic and when to do it."
     clearInvisibleValues: "選擇是否清除條件邏輯隱藏的問題的值以及何時清除。",
+    // "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing."
     textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。",
+    // [Auto-translated] "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents."
     columns: "左邊的值用作條件規則中使用的列ID，右邊的值顯示給受訪者。",
+    // "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
     rows: "左邊的值用作條件規則中使用的行ID，右邊的值顯示給受訪者。",
+    // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     columnMinWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
     totalText: "僅當至少一列具有 Total 類型或 Total 運算式時才可見。",
+    // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "設置與輸入無效的儲存格相關的錯誤訊息的位置。“繼承”選項應用“錯誤消息對齊”屬性中的設置。",
+    // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     detailErrorLocation: "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。",
+    // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。",
+    // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
+    // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
     keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
+    // "Type a subtitle."
     description: "鍵入副標題。",
+    // [Auto-translated] "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab."
     locale: "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。",
+    // "Sets the location of a detail section in relation to a row. Choose from: \"None\" - no detail section is added; \"Under the row\" - a detail section is placed under each row of the matrix; \"Under the row, display one detail section only\" - a detail section is displayed under a single row only, the remaining sections are collapsed."
     detailPanelMode: "設置詳細資訊部分相對於行的位置。從中選擇：「無」 - 不添加擴展;“Under the row” - 矩陣的每一行下都放置一個行擴展;“在行下，僅顯示一行擴展” - 僅在單行下顯示擴展，其餘行展開將摺疊。",
+    // "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio."
     imageFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
+    // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "在輸入數據時逐漸增加輸入欄位的高度。覆蓋「輸入欄位高度（以行為單位）」設置。",
+    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
     allowResize: "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
     timeLimit: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
     timeLimitPerPage: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+    // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "啟用此選項可在使用者將焦點放在空輸入欄位上，然後離開該欄位而不進行任何更改時觸發驗證。",
     page: {
+      // "A page ID that is not visible to respondents."
       name: "受訪者不可見的頁面ID。",
+      // "Type a page subtitle."
       description: "鍵入頁面副標題。",
+      // "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"."
       navigationTitle: "顯示在進度條或目錄 （TOC） 中的導航按鈕上的說明。如果將此欄位留空，則導航按鈕將使用頁面標題或頁面名稱。要啟用進度條或 TOC，請轉到“調查”→“導航”。",
+      // "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
       timeLimit: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+      // "Use the magic wand icon to set a conditional rule that determines page visibility."
       visibleIf: "使用魔杖圖示設置確定頁面可見性的條件規則。",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page."
       enableIf: "使用魔杖圖示設置禁用頁面只讀模式的條件規則。",
+      // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      // "Applies to all questions within this page. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)."
       questionTitleLocation: "適用於本頁中的所有問題。如果要覆蓋此設置，請為單個問題或面板定義標題對齊規則。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
+      // "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)."
       questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      // "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab."
       questionOrder: "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。",
+      // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。",
+      // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
       gridLayoutColumns: "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
     },
+    // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "設置計時器在頁面上的位置。",
+    // "Choose from: \"Locked\" - users cannot expand or collapse entries; \"Collapse all\" - all entries start in a collapsed state; \"Expand all\" - all entries start in an expanded state; \"First expanded\" - only the first entry is initially expanded. Applies if \"Entry display mode\" is set to \"List\" and the \"Entry title pattern\" property is specified."
     panelsState: "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。",
+    // [Auto-translated] "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list."
     imageLinkName: "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。",
+    // "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
     choices: "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。",
+    // [Auto-translated] "Type a user-friendly title to display."
     title: "鍵入要顯示的使用者友好標題。",
+    // [Auto-translated] "Ensures that users won't complete the survey until files are uploaded."
     waitForUpload: "確保使用者在上傳檔之前不會完成調查。",
+    // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     minWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     maxWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "接受 CSS 值（px、%、in、pt 等）。",
+    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
     valueName: "如果未設置此屬性，則答案將存儲在 Name 屬性指定的欄位中。",
+    // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "當問題值為空時，顯示在 HTML 問題以及調查元素的動態標題和描述中的值。",
+    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
     useDisplayValuesInDynamicTexts: "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。",
+    // "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default)."
     clearIfInvisible: "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。",
+    // "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question."
     choicesFromQuestionMode: "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。",
+    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs."
     choiceValuesFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。",
+    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts."
     choiceTextsFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。",
+    // [Auto-translated] "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session."
     allowCustomChoices: "如果下拉清單中沒有所需的選項，則選擇以允許受訪者添加自己的選擇。自訂選項將僅在當前瀏覽器會話期間臨時存儲。",
+    // [Auto-translated] "When selected, users can include additional input in a separate comment box."
     showOtherItem: "選取後，使用者可以在單獨的註釋框中包含其他輸入。",
+    // "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout."
     separateSpecialChoices: "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。",
+    // [Auto-translated] "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array."
     path: "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。",
     choicesbyurl: {
+      // "Enter a uniform property name within the array of objects whose value will be stored as a response in survey results."
       valueName: " "
     },
+    // [Auto-translated] "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list."
     titleName: "在物件陣列中輸入一個統一的屬性名稱，該陣列包含要在選項清單中顯示的值。",
+    // [Auto-translated] "Select to allow the service to return an empty response or array."
     allowEmptyResponse: "選擇此選項可允許服務傳回空回應或陣列。",
+    // [Auto-translated] "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options."
     choicesVisibleIf: "使用魔杖圖示設置條件規則，以確定所有選項的可見性。",
+    // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
     rateValues: "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。",
     rating: {
+      // "\"Auto\" selects between the \"Buttons\" and \"Dropdown\" modes based on the available width. When the width is insufficient to display buttons, the question displays a dropdown."
       displayMode: "“自動”根據可用寬度在“按鈕”和“下拉”模式之間進行選擇。當寬度不足以顯示按鈕時，問題將顯示一個下拉清單。"
     },
+    // [Auto-translated] "Allows you to connect questions that produce results in different formats. When such questions are linked together using a join identifier, this shared property stores selected question values."
     valuePropertyName: "允許您連接以不同格式生成結果的問題。當使用聯接標識碼將此類問題連結在一起時，此共用屬性將存儲選定的問題值。",
+    // [Auto-translated] "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field."
     searchEnabled: "選擇是否要更新下拉功能表內容以匹配使用者在輸入欄位中鍵入的搜索查詢。",
+    // [Auto-translated] "A value to save in survey results when respondents give a positive answer."
     valueTrue: "當受訪者給出肯定答案時保存在調查結果中的值。",
+    // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "當受訪者給出否定答案時保存在調查結果中的值。",
+    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "不建議禁用此選項，因為它會覆蓋預覽圖像，並使用戶難以了解檔是否已上傳。",
+    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "觸發提示，要求確認文件刪除。",
+    // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。",
+    // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
     dataList: "輸入將在輸入期間向受訪者建議的選項清單。",
+    // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。",
+    // [Auto-translated] "Sets consistent width for all item labels in pixels"
     itemTitleWidth: "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
+    // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。",
+    // [Auto-translated] "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes."
     altText: "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。",
+    // "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale."
     rateColorMode: "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。",
     expression: {
+      // "An expression ID that is not visible to respondents."
       name: "受訪者不可見的表達式ID。",
+      // "Type an expression subtitle."
       description: "鍵入表達式副標題。",
+      // "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
       expression: "表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、條件 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
     },
+    // "Select to store the \"Other\" option value as a separate property in survey results."
     storeOthersAsComment: "選擇此選項可將「其他」選項值作為單獨的屬性存儲在調查結果中。",
+    // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "使用 {0} 作為實際值的佔位元。",
+    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "有關詳細資訊，請參閱 [accept]（https://www.w3schools.com/tags/att_input_accept.asp） 屬性說明。",
+    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
     columnColCount: "僅適用於單選組和複選框單元類型。",
+    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
     autocomplete: "有關詳細資訊，請參閱 [autocomplete]（https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete） 屬性說明。",
+    // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "當「源類型」為「本地檔」或相機不可用時適用",
+    // "Applies when \"File source type\" is \"Camera\"."
     photoPlaceholder: "當「源類型」為「相機」時適用。",
+    // "Applies when \"File source type\" is \"Local file or camera\"."
     fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。",
+    // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "在多列佈局中排列選項。當設置為 0 時，選項將顯示在一行中。",
     masksettings: {
+      // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
     },
     patternmask: {
+      // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "該模式可以包含字串文字和以下佔位元： '9' - 表示數位;“a” - 表示大寫或小寫字母;'#' - 表示數位或大寫或小寫字母。使用反斜杠“\\”轉義字元。"
     },
     datetimemask: {
+      // "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm)."
       pattern: "模式可以包含分隔符和以下佔位元：“<br>m”- 月份編號。<br>'mm' - 月份編號，前導零表示個位數值。<br>'d' - 月份中的某一天。<br>'dd' - 月份的某一天，個位數值的前導為零。<br>'yy' - 年份的最後兩位數位。<br>'yyyy' - 四位數年份。<br>“H” - 24 小時制的小時數。<br>“HH” - 24 小時制的小時數，個位數值的前導為零。<br>'h' - 以 12 小時為制的小時數。<br>'hh' - 12 小時制的小時數，個位數值的前導為零。<br>'MM' - 分鐘。<br>'ss' - 秒。<br>“TT” - 大寫 （AM/PM） 的 12 小時制週期。<br>'tt' - 小寫 （am/pm） 的 12 小時制週期。"
     },
     numericmask: {
+      // "A symbol used to separate the fractional part from the integer part of a displayed number."
       decimalSeparator: "用於將顯示數位的小數部分與整數部分分開的符號。",
+      // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "用於將大數的數位分成三組的符號。",
+      // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "限制顯示數位的小數點後要保留的位數。"
     },
     currencymask: {
+      // "One or several symbols to be displayed before the value."
       prefix: "要在值之前顯示的一個或多個符號。",
+      // "One or several symbols to be displayed after the value."
       suffix: "要在值后顯示的一個或多個符號。"
     },
     theme: {
+      // "This setting applies only to questions outside of a panel."
       isPanelless: "此設置僅適用於面板之外的問題。",
+      // "Sets a supplementary color that highlights key survey elements."
       primaryColor: "設置一種補充顏色，用於突出顯示關鍵調查元素。",
+      // "Adjusts the transparency of panels and question boxes relative to the survey background."
       panelBackgroundTransparency: "調整面板和問題框相對於調查背景的透明度。",
+      // "Adjusts the transparency of input elements relative to the survey background."
       questionBackgroundTransparency: "調整輸入元素相對於調查背景的透明度。",
+      // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "設置所有矩形元素的圓角半徑。如果要為輸入元素或面板和問題框設置單獨的角半徑值，請啟用高級模式。",
+      // "Sets the main background color of the survey."
       "--sjs-general-backcolor-dim": "設置調查的主要背景顏色。"
     },
     header: {
+      // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
       inheritWidthFrom: "“與容器相同”選項會自動調整標題內容區域的寬度，以適應放置調查的 HTML 元素。",
+      // [Auto-translated] "The width of the header area that contains the survey title and description, measured in pixels."
       textAreaWidth: "包含調查標題和描述的標題區域的寬度，以像素為單位。",
+      // [Auto-translated] "When enabled, the top of the survey overlays the bottom of the header."
       overlapEnabled: "啟用后，調查的頂部將覆蓋頁眉的底部。",
+      // [Auto-translated] "When set to 0, the height is calculated automatically to accommodate the header's content."
       mobileHeight: "設置為 0 時，將自動計算高度以適應標題的內容。"
     },
+    // "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
     progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。",
+    // [Auto-translated] "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column."
     singleInputTitleTemplate: "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"
   },
   // Properties
   p: {
     title: {
+      // "title"
       name: "標題",
+      // "Leave it empty, if it is the same as 'Name'"
       title: "如果與名字相同，請設置為空值"
     },
+    // [Auto-translated] "Allow multiple selection"
     multiSelect: "允許多項選擇",
+    // [Auto-translated] "Show image captions"
     showLabel: "顯示圖像標題",
+    // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "交換“是”和“否”的順序",
+    // [Auto-translated] "Value"
     value: "價值",
+    // [Auto-translated] "Tab alignment"
     tabAlign: "製表元對齊方式",
+    // [Auto-translated] "Source type"
     sourceType: "源類型",
+    // [Auto-translated] "Fit to container"
     fitToContainer: "適合容器",
+    // [Auto-translated] "Set value expression"
     setValueExpression: "設置值表達式",
+    // "Description"
     description: "說明",
+    // [Auto-translated] "Logo fit"
     logoFit: "徽標合身",
+    // [Auto-translated] "Pages"
     pages: "頁面",
+    // [Auto-translated] "Questions"
     questions: "問題",
+    // [Auto-translated] "Triggers"
     triggers: "觸發器",
+    // [Auto-translated] "Calculated values"
     calculatedValues: "計算值",
+    // [Auto-translated] "Survey id"
     surveyId: "調查編號",
+    // [Auto-translated] "Survey post id"
     surveyPostId: "調查帖子編號",
+    // [Auto-translated] "Survey show data saving"
     surveyShowDataSaving: "調查顯示數據保存",
+    // [Auto-translated] "Question description location"
     questionDescriptionLocation: "問題描述位置",
+    // [Auto-translated] "Progress bar type"
     progressBarType: "進度條類型",
+    // [Auto-translated] "Show TOC"
     showTOC: "顯示目錄",
+    // [Auto-translated] "Toc location"
     tocLocation: "目錄位置",
+    // [Auto-translated] "Question title pattern"
     questionTitlePattern: "問題標題模式",
+    // [Auto-translated] "Width mode"
     widthMode: "寬度模式",
+    // [Auto-translated] "Show brand info"
     showBrandInfo: "顯示品牌資訊",
+    // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "在動態文字中使用顯示值",
+    // [Auto-translated] "Visible if"
     visibleIf: "可見，如果",
+    // [Auto-translated] "Default value expression"
     defaultValueExpression: "預設值表達式",
+    // [Auto-translated] "Required if"
     requiredIf: "在以下情況下是必需的",
+    // [Auto-translated] "Reset value if"
     resetValueIf: "如果出現以下情況，則重置值",
+    // [Auto-translated] "Set value if"
     setValueIf: "設置值，如果",
+    // [Auto-translated] "Validators"
     validators: "驗證者",
+    // [Auto-translated] "Bindings"
     bindings: "綁定",
+    // [Auto-translated] "Render as"
     renderAs: "渲染為",
+    // [Auto-translated] "Attach original items"
     attachOriginalItems: "附加原始專案",
+    // "Choices"
     choices: "選項",
+    // "Choices by url"
     choicesByUrl: "Url選項",
+    // [Auto-translated] "Currency"
     currency: "貨幣",
+    // [Auto-translated] "Cell hint"
     cellHint: "單元格提示",
+    // [Auto-translated] "Total maximum fraction digits"
     totalMaximumFractionDigits: "最大小數位數總數",
+    // [Auto-translated] "Total minimum fraction digits"
     totalMinimumFractionDigits: "最小小數位數總數",
+    // [Auto-translated] "Columns"
     columns: "列",
+    // [Auto-translated] "Detail elements"
     detailElements: "細節元素",
+    // [Auto-translated] "Allow adaptive actions"
     allowAdaptiveActions: "允許自適應操作",
+    // [Auto-translated] "Default row value"
     defaultRowValue: "預設行值",
+    // [Auto-translated] "Detail panel show on adding"
     detailPanelShowOnAdding: "自動展開新行詳細資訊",
+    // [Auto-translated] "Choices lazy load enabled"
     choicesLazyLoadEnabled: "選項延遲載入已啟用",
+    // [Auto-translated] "Choices lazy load page size"
     choicesLazyLoadPageSize: "選擇延遲載入頁面大小",
+    // [Auto-translated] "Input field component"
     inputFieldComponent: "輸入欄位元件",
+    // [Auto-translated] "Item component"
     itemComponent: "項目元件",
+    // [Auto-translated] "Min"
     min: "最小值",
+    // [Auto-translated] "Max"
     max: "麥克斯",
+    // [Auto-translated] "Min value expression"
     minValueExpression: "最小值表達式",
+    // [Auto-translated] "Max value expression"
     maxValueExpression: "最大值表達式",
+    // [Auto-translated] "Step"
     step: "步",
+    // [Auto-translated] "Data list"
     dataList: "數據清單",
+    // [Auto-translated] "Item size"
     inputSize: "專案大小",
+    // [Auto-translated] "Item label width (in px)"
     itemTitleWidth: "項目標籤寬度（以 px 為單位）",
+    // [Auto-translated] "Input value alignment"
     inputTextAlignment: "輸入值對齊",
+    // [Auto-translated] "Elements"
     elements: "元素",
+    // [Auto-translated] "Content"
     content: "內容",
+    // [Auto-translated] "Navigation title"
     navigationTitle: "導航標題",
+    // [Auto-translated] "Navigation description"
     navigationDescription: "導航說明",
+    // [Auto-translated] "Long tap"
     longTap: "長按",
+    // [Auto-translated] "Auto grow"
     autoGrow: "自動增長",
+    // [Auto-translated] "Allow resizing"
     allowResize: "允許調整大小",
+    // [Auto-translated] "Accept carriage return"
     acceptCarriageReturn: "接受回車",
+    // [Auto-translated] "Display mode"
     displayMode: "顯示模式",
+    // [Auto-translated] "Rate type"
     rateType: "費率類型",
+    // [Auto-translated] "Label"
     label: "標籤",
+    // [Auto-translated] "Content mode"
     contentMode: "內容模式",
+    // [Auto-translated] "Image fit"
     imageFit: "圖像貼合",
+    // [Auto-translated] "Alt text"
     altText: "可選文字",
+    // [Auto-translated] "Height"
     height: "高度",
+    // [Auto-translated] "Height on smartphones"
     mobileHeight: "智能手機上的身高",
+    // [Auto-translated] "Pen color"
     penColor: "筆顏色",
+    // [Auto-translated] "Background color"
     backgroundColor: "背景色",
+    // [Auto-translated] "Template elements"
     templateElements: "範本元素",
+    // [Auto-translated] "Operator"
     operator: "算子",
+    // [Auto-translated] "Is variable"
     isVariable: "是可變的",
+    // [Auto-translated] "Run expression"
     runExpression: "運行表達式",
+    // [Auto-translated] "Show caption"
     showCaption: "顯示標題",
+    // [Auto-translated] "Icon name"
     iconName: "圖示名稱",
+    // [Auto-translated] "Icon size"
     iconSize: "圖示大小",
+    // [Auto-translated] "Precision"
     precision: "精度",
+    // [Auto-translated] "Matrix drag handle area"
     matrixDragHandleArea: "矩陣拖動手柄區域",
+    // [Auto-translated] "Background image"
     backgroundImage: "背景圖片",
+    // [Auto-translated] "Background image fit"
     backgroundImageFit: "背景圖像適合",
+    // [Auto-translated] "Background image attachment"
     backgroundImageAttachment: "背景圖像附件",
+    // [Auto-translated] "Background opacity"
     backgroundOpacity: "背景不透明度",
+    // [Auto-translated] "Select to rank enabled"
     selectToRankEnabled: "選擇啟用排名",
+    // [Auto-translated] "Select to rank areas layout"
     selectToRankAreasLayout: "選擇以對區域佈局進行排名",
+    // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "顯示是否選擇了所有選項的文字",
+    // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "排名區域的佔位元文本",
+    // [Auto-translated] "Allow camera access"
     allowCameraAccess: "允許攝像頭訪問",
+    // [Auto-translated] "Scale color mode"
     scaleColorMode: "縮放顏色模式",
+    // [Auto-translated] "Rate color mode"
     rateColorMode: "評價顏色模式",
+    // [Auto-translated] "Copy display value"
     copyDisplayValue: "複製顯示值",
+    // [Auto-translated] "Column span"
     effectiveColSpan: "柱跨度",
+    // [Auto-translated] "Progress bar area width"
     progressBarInheritWidthFrom: "進度條區域寬度"
   },
   theme: {
+    // "Advanced mode"
     advancedMode: "高級模式",
+    // "Page"
     pageTitle: "頁面標題字體",
+    // "Question box"
     questionTitle: "問題標題字體",
+    // "Input element"
     editorPanel: "輸入元素",
+    // [Auto-translated] "Lines"
     lines: "線",
+    // [Auto-translated] "Default"
     primaryDefaultColor: "違約",
+    // [Auto-translated] "Hover"
     primaryDarkColor: "懸停",
+    // [Auto-translated] "Selected"
     primaryLightColor: "選擇",
+    // [Auto-translated] "Background color"
     backgroundDimColor: "背景色",
+    // "Corner radius"
     cornerRadius: "拐角半徑",
+    // [Auto-translated] "Default background"
     backcolor: "默認背景",
+    // [Auto-translated] "Hover background"
     hovercolor: "懸停背景",
+    // [Auto-translated] "Border decoration"
     borderDecoration: "邊框裝飾",
+    // [Auto-translated] "Font color"
     fontColor: "字體顏色",
+    // [Auto-translated] "Background color"
     backgroundColor: "背景顏色",
+    // [Auto-translated] "Default color"
     primaryForecolor: "默認顏色",
+    // [Auto-translated] "Disabled color"
     primaryForecolorLight: "禁用顏色",
+    // [Auto-translated] "Font"
     font: "字體",
+    // [Auto-translated] "Darker"
     borderDefault: "暗",
+    // [Auto-translated] "Lighter"
     borderLight: "打火機",
+    // [Auto-translated] "Font family"
     fontFamily: "字體家族",
+    // [Auto-translated] "Regular"
     fontWeightRegular: "定期",
+    // [Auto-translated] "Heavy"
     fontWeightHeavy: "重",
+    // [Auto-translated] "Semi-bold"
     fontWeightSemiBold: "半粗體",
+    // [Auto-translated] "Bold"
     fontWeightBold: "大膽",
+    // [Auto-translated] "Color"
     color: "顏色",
+    // [Auto-translated] "Placeholder color"
     placeholderColor: "佔位元顏色",
+    // [Auto-translated] "Size"
     size: "大小",
+    // [Auto-translated] "Opacity"
     opacity: "不透明度",
+    // [Auto-translated] "X"
     boxShadowX: "X",
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
+    // [Auto-translated] "Add Shadow Effect"
     boxShadowAddRule: "添加陰影效果",
+    // [Auto-translated] "Blur"
     boxShadowBlur: "模糊",
+    // [Auto-translated] "Spread"
     boxShadowSpread: "傳播",
+    // [Auto-translated] "Drop"
     boxShadowDrop: "落",
+    // [Auto-translated] "Inner"
     boxShadowInner: "內",
     names: {
+      // [Auto-translated] "Default"
       default: "違約",
+      // [Auto-translated] "Sharp"
       sharp: "鋒利",
+      // [Auto-translated] "Borderless"
       borderless: "無國界",
+      // [Auto-translated] "Flat"
       flat: "平",
+      // [Auto-translated] "Plain"
       plain: "平原",
+      // [Auto-translated] "Double Border"
       doubleborder: "雙邊框",
+      // [Auto-translated] "Layered"
       layered: "分層的",
+      // [Auto-translated] "Solid"
       solid: "固體",
+      // [Auto-translated] "3D"
       threedimensional: "。.3D",
+      // [Auto-translated] "Contrast"
       contrast: "反差"
     },
     colors: {
+      // [Auto-translated] "Teal"
       teal: "水鴨",
+      // [Auto-translated] "Blue"
       blue: "藍",
+      // [Auto-translated] "Purple"
       purple: "紫色",
+      // [Auto-translated] "Orchid"
       orchid: "蘭花",
+      // [Auto-translated] "Tulip"
       tulip: "鬱金香",
+      // [Auto-translated] "Brown"
       brown: "棕色",
+      // [Auto-translated] "Green"
       green: "綠",
+      // [Auto-translated] "Gray"
       gray: "灰色"
     }
   },
   creatortheme: {
+    // [Auto-translated] "Surface background"
     "--sjs-special-background": "表面背景",
+    // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "主要",
+    // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "二 次",
+    // [Auto-translated] "Surface"
     surfaceScale: "表面",
+    // [Auto-translated] "User interface"
     userInterfaceBaseUnit: "用戶介面",
+    // [Auto-translated] "Font"
     fontScale: "字體",
     names: {
+      // [Auto-translated] "Survey Creator 2020"
       sc2020: "調查建立者 2020",
+      // [Auto-translated] "Light"
       "default-light": "光",
+      // [Auto-translated] "Dark"
       "default-dark": "黑暗",
+      // [Auto-translated] "Contrast"
       "default-contrast": "反差"
     }
   }
 };
 
 setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
-
-// The following strings have been translated by a machine translation service
-// Remove those strings that you have corrected manually
-// survey.externalHelpLink: "Watch and learn how to create surveys" => "觀看並瞭解如何創建調查"
-// survey.externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber" => "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-// survey.addLogicItem: "Create a rule to customize the flow of the survey." => "創建規則以自定義調查流。"
-// survey.duplicate: "Duplicate" => "重複"
-// survey.drag: "Drag element" => "拖動元素"
-// qt.default: "Default" => "違約"
-// qt.imagepicker: "Image Picker" => "圖像選取器"
-// qt.ranking: "Ranking" => "排名"
-// qt.image: "Image" => "圖像"
-// qt.tagbox: "Multi-Select Dropdown" => "多選下拉清單"
-// qt.signaturepad: "Signature" => "簽名"
-// qt.buttongroup: "Button Group" => "按鈕組"
-// ed.defaultLocale: "Default ({0})" => "預設值 （{0}）"
-// ed.settings: "Settings" => "設置"
-// ed.settingsTooltip: "Open settings" => "打開設置"
-// ed.surveySettings: "Survey Settings" => "調查設置"
-// ed.surveySettingsTooltip: "Open survey settings" => "打開調查設置"
-// ed.showPanel: "Show Panel" => "顯示面板"
-// ed.hidePanel: "Hide Panel" => "“隱藏”面板"
-// ed.prevSelected: "Select previous" => "選擇上一個"
-// ed.nextSelected: "Select next" => "選擇下一步"
-// ed.surveyTypeName: "Survey" => "調查"
-// ed.pageTypeName: "Page" => "頁"
-// ed.panelTypeName: "Panel" => "面板"
-// ed.questionTypeName: "Question" => "問題"
-// ed.columnTypeName: "Column" => "列"
-// ed.moveRight: "Scroll to the Right" => "向右滾動"
-// ed.moveLeft: "Scroll to the Left" => "向左滾動"
-// ed.edit: "Edit" => "編輯"
-// ed.newTextItemName: "text" => "發簡訊"
-// ed.themeSurvey: "Themes" => "主題"
-// ed.defaultV2Theme: "Default" => "違約"
-// ed.modernTheme: "Modern" => "摩登"
-// ed.defaultTheme: "Default (legacy)" => "預設（舊版）"
-// ed.navigateToMsg: "You had to navigate to" => "你必須導航到"
-// ed.logic: "Logic" => "邏輯"
-// ed.translation: "Translation" => "譯本"
-// ed.saveSurveyTooltip: "Save Survey" => "保存調查"
-// ed.jsonHideErrors: "Hide errors" => "隱藏錯誤"
-// ed.jsonShowErrors: "Show errors" => "顯示錯誤"
-// ed.undoTooltip: "Undo last change" => "恢復上次更改"
-// ed.redoTooltip: "Redo the change" => "重做更改"
-// ed.showMoreChoices: "Show more" => "顯示更多"
-// ed.showLessChoices: "Show less" => "顯示更少"
-// ed.copy: "Copy" => "複製"
-// ed.cut: "Cut" => "切"
-// ed.paste: "Paste" => "糊"
-// ed.copyTooltip: "Copy selection to clipboard" => "將選取內容複製到剪貼簿"
-// ed.cutTooltip: "Cut selection to clipboard" => "將所選取內容剪下剪貼簿"
-// ed.pasteTooltip: "Paste from clipboard" => "從剪貼簿粘貼"
-// ed.property-grid: "Properties" => "性能"
-// ed.propertyGridFilteredTextPlaceholder: "Type to search..." => "鍵入以搜尋..."
-// ed.surveyResultsTable: "As Table" => "如表"
-// ed.surveyResultsJson: "As JSON" => "作為 JSON"
-// ed.resultsTitle: "Question Title" => "問題標題"
-// ed.resultsName: "Question Name" => "問題名稱"
-// ed.resultsValue: "Answer Value" => "答案值"
-// ed.resultsDisplayValue: "Display Value" => "顯示值"
-// ed.propertyEditorError: "Error" => "錯誤"
-// ed.saveError: "Error! Editor content is not saved." => "錯誤！不保存編輯器內容。"
-// ed.translationPropertyGridTitle: "Language Settings" => "語言設置"
-// ed.themePropertyGridTitle: "Theme Settings" => "主題設置"
-// ed.translationLanguages: "Languages" => "語言"
-// ed.translationAddLanguage: "Select language to translate" => "選擇要翻譯的語言"
-// ed.translationShowAllStrings: "All Strings" => "所有字串"
-// ed.translationShowUsedStringsOnly: "Used Strings Only" => "僅使用的字串"
-// ed.translationShowAllPages: "All Pages" => "所有頁面"
-// ed.translationNoStrings: "No strings to translate. Please, change the filter." => "沒有要翻譯的字串。請更換過濾器。"
-// ed.translationExportToSCVButton: "Export to CSV" => "匯出為CSV"
-// ed.translationImportFromSCVButton: "Import from CSV" => "從 CSV 導入"
-// ed.translationMergeLocaleWithDefault: "Merge {0} with default locale" => "將{0}與預設區域設置合併"
-// ed.translationPlaceHolder: "Translation..." => "譯本。。。"
-// ed.themeExportButton: "Export" => "出口"
-// ed.themeImportButton: "Import" => "進口"
-// ed.bold: "Bold" => "大膽"
-// ed.italic: "Italic" => "斜體的"
-// ed.underline: "Underline" => "下劃線"
-// ed.addNewQuestion: "Add Question" => "添加問題"
-// ed.selectPage: "Select page..." => "選擇頁面..."
-// ed.carryForwardChoicesCopied: "Choices are copied from" => "選擇是從"
-// ed.htmlPlaceHolder: "HTML content will be here." => "HTML內容將在這裡。"
-// ed.panelPlaceHolder: "Drop a question from the toolbox here." => "在此處從工具箱中刪除問題。"
-// ed.surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below." => "調查為空。從工具箱中拖動元素或按下下面的按鈕。"
-// ed.imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload" => "將圖像拖放到此處或按下下面的按鈕並選擇要上傳的圖像"
-// ed.imageChooseImage: "Choose Image" => "選擇圖像"
-// ed.addNewTypeQuestion: "Add {0}" => "新增{0}"
-// ed.chooseLogoPlaceholder: "[LOGO]" => "[徽標]"
-// ed.auto: "auto" => "自動"
-// ed.choices_Item: "Item " => "專案"
-// lg.addNewItem: "Add New Rule" => "添加新規則"
-// lg.empty_tab: "Create a rule to customize the flow of the survey." => "創建規則以自定義調查流。"
-// lg.page_visibilityName: "Show (hide) page" => "顯示（隱藏）頁面"
-// lg.page_enableName: "Enable (disable) page" => "啟用（禁用）頁面"
-// lg.panel_visibilityName: "Show (hide) panel" => "“顯示（隱藏）”面板"
-// lg.panel_enableName: "Enable (disable) panel" => "啟用（禁用）面板"
-// lg.question_visibilityName: "Show (hide) question" => "顯示（隱藏）問題"
-// lg.question_enableName: "Enable (disable) question" => "啟用（禁用）問題"
-// lg.question_requireName: "Make question required" => "提出必填題"
-// lg.column_visibilityName: "Show (hide) column" => "顯示（隱藏）列"
-// lg.column_enableName: "Enable (disable) column" => "啟用（禁用）列"
-// lg.column_requireName: "Make column required" => "使列成為必填項"
-// lg.trigger_completeName: "Complete survey" => "完成調查"
-// lg.trigger_setvalueName: "Set answer" => "設置答案"
-// lg.trigger_copyvalueName: "Copy answer" => "複製答案"
-// lg.trigger_skipName: "Skip to question" => "跳至問題"
-// lg.trigger_runExpressionName: "Run expression" => "運行表達式"
-// lg.completedHtmlOnConditionName: "Set \"Survey Complete\" page markup" => "設置「調查完成」頁面標記"
-// lg.page_visibilityDescription: "Make the page visible when the logic expression returns true. Otherwise keep it invisible." => "使頁面在邏輯表示式返回 true 時可見。否則保持不可見。"
-// lg.panel_visibilityDescription: "Make the panel visible when the logic expression returns true. Otherwise keep it invisible." => "使面板在邏輯表達式返回 true 時可見。否則保持不可見。"
-// lg.panel_enableDescription: "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled." => "使面板及其中的所有元素在邏輯表達式返回 true 時啟用。否則，請禁用它們。"
-// lg.question_visibilityDescription: "Make the question visible when the logic expression returns true. Otherwise keep it invisible." => "使問題在邏輯表達式返回 true 時可見。否則保持不可見。"
-// lg.question_enableDescription: "Make the question enable when the logic expression returns true. Otherwise keep it disabled." => "使問題在邏輯表達式返回 true 時啟用。否則將其禁用。"
-// lg.question_requireDescription: "Question becomes required when the logic expression returns true." => "當邏輯表達式返回 true 時，問題變為必需。"
-// lg.trigger_completeDescription: "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'." => "當邏輯表達式返回 true 時，調查將完成，最終使用者將看到“謝謝頁面”。"
-// lg.trigger_setvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question." => "當邏輯表達式中使用的問題值發生更改並且邏輯表達式返回 true 時，該值將設置為所選問題。"
-// lg.trigger_copyvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question." => "當邏輯表達式中使用的問題值發生更改並且邏輯表達式返回 true 時，一個選定問題的值將複製到另一個選定問題。"
-// lg.trigger_skipDescription: "When the logic expression returns true then the survey skip to / focus the selected question." => "當邏輯表達式返回 true 時，調查將跳到/聚焦所選問題。"
-// lg.trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question" => "當邏輯表達式返回 true 時，將執行自定義表示式。您可以選擇將此表示式結果設置為選取問題"
-// lg.completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one." => "如果邏輯表達式返回 true，則「感謝頁面」的預設文本將更改為給定的文本。"
-// lg.itemExpressionText: "When expression: '{0}' returns true" => "當表達式：「{0}」返回 true"
-// lg.itemEmptyExpressionText: "New rule" => "新規則"
-// lg.page_visibilityText: "make page {0} visible" => "使頁面{0}可見"
-// lg.panel_visibilityText: "make panel {0} visible" => "使面板{0}可見"
-// lg.panel_enableText: "make panel {0} enable" => "使面板{0}啟用"
-// lg.question_visibilityText: "make question {0} visible" => "使問題{0}可見"
-// lg.question_enableText: "make question {0} enable" => "使問題{0}啟用"
-// lg.question_requireText: "make question {0} required" => "將問題{0}為必填項"
-// lg.column_visibilityText: "make column {0} of question {1} visible" => "使問題{1}的列{0}可見"
-// lg.column_enableText: "make column {0} of question {1} enable" => "使問題{1}列{0}啟用"
-// lg.column_requireText: "make column {0} of question {1} required" => "{0}將問題{1}列為必填項"
-// lg.trigger_completeText: "survey becomes completed" => "調查完成"
-// lg.trigger_setvalueText: "set into question: {0} value {1}" => "受到質疑：{0}價值{1}"
-// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "明確問題值：{0}"
-// lg.trigger_copyvalueText: "copy into question: {0} value from question {1}" => "複製到問題：{0}問題 {1} 的值"
-// lg.trigger_skipText: "survey skip to the question {0}" => "調查 跳至問題{0}"
-// lg.trigger_runExpressionText1: "run expression: '{0}'" => "運行表達式：“{0}”"
-// lg.trigger_runExpressionText2: " and set its result into question: {0}" => "並質疑其結果：{0}"
-// lg.completedHtmlOnConditionText: "show custom text for the 'Thank you page'." => "顯示「感謝頁面」的自定義文字。"
-// lg.showAllQuestions: "All Questions" => "所有問題"
-// lg.showAllActionTypes: "All Action Types" => "所有操作類型"
-// lg.conditions: "Condition(s)" => "條件"
-// lg.actions: "Action(s)" => "操作 （s）"
-// lg.expressionEditorTitle: "Define condition(s)" => "定義條件"
-// lg.actionsEditorTitle: "Define action(s)" => "定義操作"
-// lg.deleteAction: "Delete Action" => "刪除操作"
-// lg.addNewAction: "Add Action" => "添加操作"
-// lg.selectedActionCaption: "Select action..." => "選擇操作..."
-// lg.expressionInvalid: "The logic expression is empty or invalid. Please correct it." => "邏輯表達式為空或無效。請更正。"
-// lg.noActionError: "Please, add at least one action." => "請至少添加一個操作。"
-// lg.actionInvalid: "Please, fix problems in your action(s)." => "請解決操作中的問題。"
-// lg.uncompletedRule_title: "Logical rules are incomplete" => "邏輯規則不完整"
-// lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "您尚未完成某些邏輯規則。如果現在離開該選項卡，更改將丟失。是否仍要離開選項卡而不完成更改？"
-// lg.uncompletedRule_apply: "Yes" => "是的"
-// lg.uncompletedRule_cancel: "No, I want to complete the rules" => "不，我想完成規則"
-// pe.save: "Save" => "救"
-// pe.clear: "Clear" => "清楚"
-// pe.saveTooltip: "Save" => "救"
-// pe.set: "Set" => "設置"
-// pe.change: "Change" => "改變"
-// pe.refresh: "Refresh" => "刷新"
-// pe.add: "Add" => "加"
-// pe.addItem: "Click to add an item..." => "點選以新增專案..."
-// pe.removeItem: "Click to remove the item..." => "按下以刪除該專案..."
-// pe.dragItem: "Drag the item" => "拖動專案"
-// pe.addOther: "Other" => "其他"
-// pe.addSelectAll: "Select All" => "全選"
-// pe.addNone: "None" => "沒有"
-// pe.back: "Return without saving" => "退貨而不保存"
-// pe.backTooltip: "Return without saving" => "退貨而不保存"
-// pe.saveAndBack: "Save and return" => "保存並返回"
-// pe.saveAndBackTooltip: "Save and return" => "保存並返回"
-// pe.doneEditing: "Done" => "做"
-// pe.editChoices: "Edit Choices" => "編輯選項"
-// pe.showChoices: "Show Choices" => "顯示選項"
-// pe.move: "Move" => "移動"
-// pe.emptyValue: "Value is empty" => "值為空"
-// pe.fastEntryNonUniqueError: "Value '{0}' is not unique" => "值“{0}”不是唯一的"
-// pe.fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}" => "請將項目數量限制在{0}到{1}"
-// pe.fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2" => "您可以按以下格式設定資料：\n值 1|文本\n值2"
-// pe.itemSelectorEmpty: "Please select the element" => "請選擇元素"
-// pe.conditionActionEmpty: "Please select the action" => "請選擇操作"
-// pe.conditionSelectQuestion: "Select question..." => "選擇問題..."
-// pe.conditionSelectPage: "Select page..." => "選擇頁面..."
-// pe.conditionSelectPanel: "Select panel..." => "選擇面板..."
-// pe.conditionValueQuestionTitle: "Please enter/select the value" => "請輸入/選擇值"
-// pe.aceEditorHelp: "Press ctrl+space to get expression completion hint" => "按 ctrl+空格鍵獲取表達式完成提示"
-// pe.aceEditorRowTitle: "Current row" => "當前行"
-// pe.aceEditorPanelTitle: "Current panel" => "當前面板"
-// pe.assistantTitle: "Available questions" => "可用問題"
-// pe.cellsEmptyRowsColumns: "There is should be at least one column or row" => "至少應該有一列或一行"
-// pe.showPreviewBeforeComplete: "Preview answers before submitting the survey" => "在提交調查之前預覽答案"
-// pe.overridingPropertyPrefix: "Set by " => "設置者"
-// pe.propertyIsNoUnique: "Please enter a unique value" => "請輸入唯一值"
-// pe.propertyNameIsNotUnique: "Please enter a unique name" => "請輸入唯一名稱"
-// pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "不要使用保留字：「專案」、「選項」、「面板」、“行”。"
-// pe.listIsEmpty: "No items have been added yet" => "尚未添加任何專案"
-// pe.listIsEmpty@choices: "No choices have been added yet" => "尚未添加任何選項"
-// pe.addNew@choices: "Add a choice" => "添加選項"
-// pe.expressionIsEmpty: "Expression is empty" => "表達式為空"
-// pe.rowid: "Row ID" => "行標識"
-// pe.imageLink: "Image or video URL" => "圖片或視頻網址"
-// choicesbyurl.valueName: "Get values from the following JSON field" => "從以下 JSON 欄位中獲取值"
-// pe.imageLinkName: "Get image URLs from the following JSON field" => "從以下 JSON 欄位獲取影像網址"
-// pe.allowEmptyResponse: "Allow empty response" => "允許空回應"
-// pe.titlePlaceholder: "Title" => "標題"
-// pe.surveyTitlePlaceholder: "Survey Title" => "調查標題"
-// pe.pageTitlePlaceholder: "Page {num}" => "頁數 {num}"
-// pe.descriptionPlaceholder: "Description" => "描述"
-// pe.surveyDescriptionPlaceholder: "Description" => "描述"
-// pe.pageDescriptionPlaceholder: "Description" => "描述"
-// pe.showNoneItem: "Allow the None option" => "允許“無”選項"
-// pe.noneText: "None option text" => "無選項文字"
-// pe.showSelectAllItem: "Allow the Select All option" => "允許「全選」選項"
-// pe.selectAllText: "Select All option text" => "全選選項文本"
-// pe.choicesMin: "Minimum value for auto-generated items" => "自動生成項的最小值"
-// pe.choicesMax: "Maximum value for auto-generated items" => "自動生成項的最大值"
-// pe.choicesStep: "Step for auto-generated items" => "自動生成項的步驟"
-// pe.eachRowRequired: "Require answer for all rows" => "要求所有行都回答"
-// pe.requiredErrorText: "\"Required\" error message" => "“必需”錯誤消息"
-// pe.cols: "Columns" => "列"
-// pe.columnLayout: "Columns layout" => "列佈局"
-// pe.addRowButtonLocation: "Add Row button location" => "“添加行”按鈕位置"
-// pe.rateMin: "Minimum rate value" => "最低速率值"
-// pe.rateMax: "Maximum rate value" => "最大速率值"
-// pe.rateStep: "Rate step" => "速率步長"
-// pe.defaultValue: "Default Answer" => "默認答案"
-// pe.cellsDefaultRow: "Default texts" => "預設文字"
-// pe.surveyEditorTitle: "Edit survey settings" => "編輯調查設置"
-// pe.maxLength: "Maximum length (in characters)" => "最大長度（字元）"
-// pe.buildExpression: "Build" => "建"
-// pe.editExpression: "Edit" => "編輯"
-// pe.and: "and" => "和"
-// pe.or: "or" => "或"
-// pe.remove: "Remove" => "刪除"
-// pe.addCondition: "Add Condition" => "添加條件"
-// pe.emptyLogicPopupMessage: "Select a question to start configuring conditions." => "選擇一個問題以開始配置條件。"
-// pe.if: "If" => "如果"
-// pe.then: "then" => "然後"
-// pe.setToName: "Target question" => "目標問題"
-// pe.fromName: "Question to copy answer from" => "要從中複製答案的問題"
-// pe.gotoName: "Question to skip to" => "要跳到的問題"
-// pe.ruleIsNotSet: "Rule is incorrect" => "規則不正確"
-// pe.includeIntoResult: "Include into survey results" => "包含在調查結果中"
-// pe.expandCollapseTitle: "Expand/collapse title" => "展開/摺疊標題"
-// pe.simulator: "Select device type" => "選擇設備類型"
-// pe.landscapeOrientation: "Switch to landscape orientation" => "切換到橫向"
-// pe.portraitOrientation: "Switch to portrait orientation" => "切換到縱向"
-// pe.previewText: "Preview Answers button text" => "「預覽答案」按鈕文本"
-// pe.editText: "Edit Answer button text" => "編輯應答按鈕文本"
-// image.imageHeight: "Image height (in CSS-accepted values)" => "圖片高度（以 CSS 接受的值為單位）"
-// image.imageWidth: "Image width (in CSS-accepted values)" => "影像寬度（以 CSS 接受的值為單位）"
-// page.timeLimit: "Time limit to finish the page (in seconds)" => "完成頁面的時間限制（秒為單位 ）"
-// question.page: "Parent page" => "父頁面"
-// pe.noEntriesText: "Empty entries text" => "空條目文本"
-// pe.html: "HTML markup" => "網頁標記"
-// pe.expression: "Expression" => "表達"
-// pe.setValue: "Answer" => "答"
-// pe.dataFormat: "Image format" => "圖像格式"
-// pe.allowAddRows: "Allow adding rows" => "允許添加行"
-// pe.allowRemoveRows: "Allow removing rows" => "允許刪除行"
-// pe.allowRowReorder: "Allow row drag and drop" => "允許行拖放"
-// pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "如果指定確切的圖像寬度或高度，則不適用。"
-// pe.minImageWidth: "Minimum image width" => "最小圖像寬度"
-// pe.maxImageWidth: "Maximum image width" => "最大圖像寬度"
-// pe.minImageHeight: "Minimum image height" => "最小圖像高度"
-// pe.maxImageHeight: "Maximum image height" => "最大圖像高度"
-// pe.minValue: "Minimum value" => "最小值"
-// pe.maxValue: "Maximum value" => "最大值"
-// pe.minLength: "Minimum length (in characters)" => "最小長度（以字元為單位）"
-// pe.allowDigits: "Allow digits" => "允許數位"
-// pe.minCount: "Minimum count" => "最小計數"
-// pe.maxCount: "Maximum count" => "最大計數"
-// pe.regex: "Regular expression" => "正則表達式"
-// surveyvalidator.text: "Error message" => "錯誤資訊"
-// surveyvalidator.expression: "Validation expression" => "驗證表達式"
-// pe.totalText: "Total row text" => "總計行文本"
-// pe.totalType: "Total type" => "總類型"
-// pe.totalExpression: "Total expression" => "總表達"
-// pe.totalDisplayStyle: "Total value display style" => "總值顯示樣式"
-// pe.totalCurrency: "Currency" => "貨幣"
-// pe.totalFormat: "Formatted string" => "帶格式的字串"
-// pe.logo: "Logo (URL or base64-encoded string)" => "徽標（URL 或base64 編碼的字串）"
-// pe.questionsOnPageMode: "Survey structure" => "調查結構"
-// pe.maxTextLength: "Maximum answer length (in characters)" => "最大答案長度（以字元為單位）"
-// pe.maxCommentLength: "Maximum comment length (in characters)" => "最大註解長度（以字元為單位）"
-// pe.autoGrowComment: "Auto-expand comment area if necessary" => "如有必要，自動展開評論區域"
-// pe.allowResizeComment: "Allow users to resize text areas" => "允許用戶調整文字區域的大小"
-// pe.textUpdateMode: "Update text question value" => "更新文字問題值"
-// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "將焦點放在第一個無效答案上"
-// pe.checkErrorsMode: "Run validation" => "運行驗證"
-// pe.navigateToUrl: "Navigate to URL" => "導航到網址"
-// pe.navigateToUrlOnCondition: "Dynamic URL" => "動態網址"
-// pe.completedBeforeHtml: "Markup to show if the user already filled out this survey" => "用於顯示使用者是否已填寫此調查的標記"
-// pe.completedHtml: "Survey Complete page markup" => "調查完成頁面標記"
-// pe.completedHtmlOnCondition: "Dynamic Survey Complete page markup" => "動態調查完成頁面標記"
-// pe.loadingHtml: "Markup to show while survey model is loading" => "載入調查模型時要顯示的標記"
-// pe.commentText: "Comment area text" => "註釋區文本"
-// pe.autocomplete: "Autocomplete type" => "自動完成類型"
-// pe.labelTrue: "\"True\" label" => "“真實”標籤"
-// pe.labelFalse: "\"False\" label" => "“虛假”標籤"
-// pe.allowClear: "Show the Clear button" => "顯示“清除”按鈕"
-// pe.displayStyle: "Value display style" => "值顯示樣式"
-// pe.format: "Formatted string" => "帶格式的字串"
-// pe.maximumFractionDigits: "Maximum fractional digits" => "最大小數位數"
-// pe.minimumFractionDigits: "Minimum fractional digits" => "最小小數位數"
-// pe.useGrouping: "Display grouping separators" => "顯示分組分隔符"
-// pe.allowMultiple: "Allow multiple files" => "允許多個檔"
-// pe.allowImagesPreview: "Preview images" => "預覽圖像"
-// pe.acceptedTypes: "Accepted file types" => "接受的文件類型"
-// pe.waitForUpload: "Wait for the upload to complete" => "等待上傳完成"
-// pe.needConfirmRemoveFile: "Confirm file deletion" => "確認文件刪除"
-// pe.detailPanelMode: "Detail panel location" => "詳細資訊面板位置"
-// pe.minRowCount: "Minimum row count" => "最小行數"
-// pe.maxRowCount: "Maximum row count" => "最大行數"
-// pe.confirmDelete: "Confirm row removal" => "確認刪除行"
-// pe.confirmDeleteText: "Confirmation message" => "確認消息"
-// paneldynamic.confirmDelete: "Confirm panel removal" => "確認面板刪除"
-// pe.panelCount: "Initial panel count" => "初始面板計數"
-// pe.minPanelCount: "Minimum panel count" => "最小面板數"
-// pe.maxPanelCount: "Maximum panel count" => "最大面板數"
-// pe.panelsState: "Inner panel expand state" => "內面板展開狀態"
-// pe.templateDescription: "Description template" => "描述範本"
-// pe.templateTitle: "Title template" => "標題範本"
-// pe.prevPanelText: "Previous Panel button tooltip" => "“上一個面板”按鈕工具提示"
-// pe.nextPanelText: "Next Panel button tooltip" => "“下一個面板”按鈕工具提示"
-// pe.showRangeInProgress: "Show progress bar" => "顯示進度條"
-// pe.templateQuestionTitleLocation: "Question title location" => "問題標題位置"
-// pe.removePanelButtonLocation: "Remove Panel button location" => "“刪除面板”按鈕位置"
-// pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "如果沒有行，則隱藏問題"
-// pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "如果沒有行，則隱藏列"
-// pe.rateValues: "Custom rate values" => "自定義費率值"
-// pe.rateCount: "Rate count" => "速率計數"
-// pe.autoGenerate: "How to specify rate values?" => "如何指定速率值？"
-// pe.hideIfChoicesEmpty: "Hide the question if it contains no choices" => "如果問題不包含任何選項，則隱藏問題"
-// pe.hideNumber: "Hide question number" => "隱藏問題編號"
-// pe.minWidth: "Minimum width (in CSS-accepted values)" => "最小寬度（以 CSS 接受的值為單位）"
-// pe.maxWidth: "Maximum width (in CSS-accepted values)" => "最大寬度（以 CSS 接受的值為單位）"
-// pe.width: "Width (in CSS-accepted values)" => "寬度（以 CSS 接受的值為單位）"
-// pe.showHeader: "Show column headers" => "顯示列標題"
-// pe.horizontalScroll: "Show horizontal scrollbar" => "顯示水平滾動條"
-// pe.columnMinWidth: "Minimum column width (in CSS-accepted values)" => "最小列寬（以 CSS 接受的值為單位）"
-// pe.rowTitleWidth: "Row header width (in CSS-accepted values)" => "行標題寬度（以 CSS 接受的值為單位）"
-// pe.valueTrue: "\"True\" value" => "“真”值"
-// pe.valueFalse: "\"False\" value" => "“假”值"
-// pe.minErrorText: "\"Value is below minimum\" error message" => "“值低於最小值”錯誤消息"
-// pe.maxErrorText: "\"Value exceeds maximum\" error message" => "“值超過最大值”錯誤消息"
-// pe.otherErrorText: "\"Empty comment\" error message" => "“空評論”錯誤消息"
-// pe.keyDuplicationError: "\"Non-unique key value\" error message" => "“非唯一鍵值”錯誤消息"
-// pe.minSelectedChoices: "Minimum selected choices" => "最少選擇的選項"
-// pe.maxSelectedChoices: "Maximum selected choices" => "最大選定選項數"
-// pe.showNumber: "Show panel number" => "顯示面板編號"
-// pe.logoWidth: "Logo width (in CSS-accepted values)" => "徽標寬度（以 CSS 接受的值為單位）"
-// pe.logoHeight: "Logo height (in CSS-accepted values)" => "徽標高度（以 CSS 接受的值為單位）"
-// pe.readOnly: "Read-only" => "唯讀"
-// pe.enableIf: "Editable if" => "可編輯，如果"
-// pe.noRowsText: "\"No rows\" message" => "“無行”消息"
-// pe.size: "Input field size (in characters)" => "輸入欄位大小（以字元為單位 ）"
-// pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "單獨的特殊選項（無、其他、全選）"
-// pe.choicesFromQuestion: "Copy choices from the following question" => "複製以下問題的選項"
-// pe.choicesFromQuestionMode: "Which choices to copy?" => "要複製哪些選項？"
-// pe.showCommentArea: "Show the comment area" => "顯示評論區域"
-// pe.commentPlaceholder: "Comment area placeholder" => "註釋區佔位元"
-// pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "將速率描述顯示為極值"
-// pe.rowOrder: "Row order" => "行順序"
-// pe.columnsLayout: "Column layout" => "列佈局"
-// pe.columnColCount: "Nested column count" => "嵌套列計數"
-// pe.state: "Panel expand state" => "面板展開狀態"
-// pe.correctAnswer: "Correct Answer" => "正確答案"
-// pe.defaultPanelValue: "Default Values" => "預設值"
-// pe.cells: "Cell Texts" => "單元格文本"
-// pe.keyName: "Key column" => "鍵列"
-// itemvalue.text: "Alt text" => "可選文字"
-// pe.logoPosition: "Logo position" => "徽標位置"
-// pe.addLogo: "Add logo..." => "新增徽標..."
-// pe.changeLogo: "Change logo..." => "變更徽標..."
-// logoPositions.none: "Remove logo" => "刪除徽標"
-// logoPositions.left: "Left" => "左"
-// logoPositions.right: "Right" => "右"
-// logoPositions.top: "On the top" => "在頂部"
-// logoPositions.bottom: "In the bottom" => "在底部"
-// tabs.items: "Items" => "專案"
-// tabs.requiredIf: "Required If" => "如果"
-// tabs.numbering: "Numbering" => "編號"
-// tabs.pages: "Pages" => "頁面"
-// tabs.calculatedValues: "Calculated Values" => "計算值"
-// tabs.triggers: "Triggers" => "觸發器"
-// tabs.templateTitle: "Title template" => "標題範本"
-// tabs.totals: "Totals" => "總數"
-// tabs.logic: "Logic" => "邏輯"
-// tabs.layout: "Layout" => "佈局"
-// tabs.data: "Data" => "數據"
-// tabs.validation: "Validation" => "驗證"
-// tabs.cells: "Cell Texts" => "單元格文本"
-// tabs.showOnCompleted: "Survey Complete" => "調查完成"
-// tabs.logo: "Logo in Survey Title" => "調查標題中的徽標"
-// tabs.slider: "Slider" => "滑塊"
-// tabs.expression: "Expression" => "表達"
-// tabs.others: "Others" => "別人"
-// pe.choicesVisibleIf: "Choices are visible if" => "在以下情況下，選項可見"
-// pe.choicesEnableIf: "Choices are selectable if" => "在以下情況下，可以選擇選項"
-// pe.columnsEnableIf: "Columns are visible if" => "在以下情況下，列可見"
-// pe.rowsEnableIf: "Rows are visible if" => "在以下情況下，行可見"
-// pe.indent: "Add indents" => "添加縮進"
-// panel.indent: "Add outer indents" => "添加外部縮進"
-// pe.innerIndent: "Add inner indents" => "添加內部縮進"
-// pe.titleKeyboardAdornerTip: "Press enter button to edit" => "按回車鍵編輯"
-// pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "按回車鍵編輯專案，按刪除按鈕刪除專案，按Alt加向上箭頭或向下箭頭移動專案"
-// pe.triggerFromName: "Copy value from: " => "從以下位置複製值："
-// pe.triggerRunExpression: "Run this Expression" => "運行此表達式"
-// pe.triggerGotoName: "Go to the question" => "轉到問題"
-// pe.triggerRunExpressionEmpty: "Please enter a valid expression" => "請輸入有效的表達式"
-// pe.emptyExpressionPlaceHolder: "Type expression here..." => "在這裡鍵入表示式..."
-// pe.noFile: "No file choosen" => "未選擇任何檔"
-// pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "如果問題被隱藏，則清除該值"
-// pe.valuePropertyName: "Value property name" => "值屬性名稱"
-// pe.searchEnabled: "Enable search" => "啟用搜索"
-// pe.hideSelectedItems: "Hide selected items" => "隱藏選取選取專案"
-// pe.closeOnSelect: "Close the dropdown after selection" => "選擇後關閉下拉清單"
-// pe.signatureWidth: "Signature width" => "簽名寬度"
-// pe.signatureHeight: "Signature height" => "標誌性高度"
-// pe.verticalAlign: "Vertical alignment" => "垂直對齊"
-// pe.alternateRows: "Alternate rows" => "交替行"
-// pe.columnsVisibleIf: "Columns are visible if" => "在以下情況下，列可見"
-// pe.rowsVisibleIf: "Rows are visible if" => "在以下情況下，行可見"
-// pe.otherPlaceholder: "Comment area placeholder" => "註釋區佔位元"
-// pe.rateType: "Rate type" => "費率類型"
-// pv.true: "true" => "真"
-// pv.false: "false" => "假"
-// pv.inherit: "Inherit" => "繼承"
-// pv.show: "Visible" => "可見"
-// pv.hide: "Hidden" => "隱藏"
-// pv.default: "Inherit" => "繼承"
-// pv.initial: "Initial" => "初"
-// pv.random: "Random" => "隨機"
-// pv.collapsed: "Collapsed" => "倒塌"
-// pv.expanded: "Expanded" => "擴大"
-// pv.none: "None" => "沒有"
-// pv.asc: "Ascending" => "上升"
-// pv.desc: "Descending" => "降"
-// pv.indeterminate: "Indeterminate" => "定"
-// pv.decimal: "decimal" => "十進位"
-// pv.currency: "currency" => "貨幣"
-// pv.percent: "percent" => "百分之"
-// pv.firstExpanded: "First panel is expanded" => "第一個面板展開"
-// pv.off: "Hide question numbers" => "隱藏問題編號"
-// pv.onpanel: "Start on each panel" => "在每個面板上開始"
-// pv.onPanel: "Start on each panel" => "在每個面板上開始"
-// pv.onSurvey: "Continue throughout the survey" => "在整個調查過程中繼續"
-// pv.list: "List" => "清單"
-// pv.progressTop: "Panel navigator + Progress bar at the top" => "面板導航器 + 頂部的進度條"
-// pv.progressBottom: "Panel navigator + Progress bar at the bottom" => "面板導航器 + 底部的進度條"
-// pv.progressTopBottom: "Panel navigator + Progress bar at the top and bottom" => "面板導航器 + 頂部和底部的進度條"
-// pv.tab: "Tabs" => "製表元"
-// pv.horizontal: "Horizontal" => "水準"
-// pv.vertical: "Vertical" => "垂直"
-// pv.top: "Top" => "返回頁首"
-// pv.bottom: "Bottom" => "底"
-// pv.topBottom: "Top and bottom" => "頂部和底部"
-// pv.both: "Both" => "雙"
-// pv.left: "Left" => "左"
-// pv.right: "Right" => "右"
-// pv.color: "color" => "顏色"
-// pv.date: "date" => "日期"
-// pv.datetime: "datetime" => "日期時間"
-// pv.datetime-local: "datetime-local" => "日期時間-本地"
-// pv.email: "email" => "電子郵件"
-// pv.month: "month" => "月"
-// pv.number: "number" => "數"
-// pv.password: "password" => "密碼"
-// pv.range: "range" => "範圍"
-// pv.tel: "tel" => "電話"
-// pv.text: "text" => "發簡訊"
-// pv.time: "time" => "時間"
-// pv.url: "url" => "網址"
-// pv.week: "week" => "周"
-// pv.hidden: "Hidden" => "隱藏"
-// pv.on: "Continue from the previous page" => "從上一頁繼續"
-// pv.onPage: "Start on each page" => "從每個頁面開始"
-// pv.edit: "Editable" => "編輯"
-// pv.display: "Read-only" => "唯讀"
-// pv.onComplete: "When the survey is completed" => "調查完成時"
-// pv.onHidden: "When the question becomes hidden" => "當問題變得隱藏時"
-// pv.onHiddenContainer: "When the question or its panel/page becomes hidden" => "當問題或其面板/頁面被隱藏時"
-// clearInvisibleValues.none: "Never" => "從不"
-// inputType.color: "Color" => "顏色"
-// inputType.date: "Date" => "日期"
-// inputType.datetime-local: "Date and Time" => "日期和時間"
-// inputType.email: "Email" => "電子郵件"
-// inputType.month: "Month" => "月"
-// inputType.number: "Number" => "數"
-// inputType.password: "Password" => "密碼"
-// inputType.range: "Range" => "範圍"
-// inputType.tel: "Phone Number" => "電話號碼"
-// inputType.text: "Text" => "發簡訊"
-// inputType.time: "Time" => "時間"
-// inputType.url: "URL" => "網址"
-// inputType.week: "Week" => "周"
-// pv.all: "All" => "都"
-// pv.page: "Page" => "頁"
-// pv.survey: "Survey" => "調查"
-// pv.onNextPage: "When switching to the next page" => "切換到下一頁時"
-// pv.onValueChanged: "After an answer is changed" => "更改答案後"
-// pv.onValueChanging: "Before an answer is changed" => "更改答案之前"
-// pv.standard: "Original structure" => "原始結構"
-// pv.singlePage: "All questions on a single page" => "所有問題都在一個頁面上"
-// pv.questionPerPage: "Each question on an individual page" => "單個頁面上的每個問題"
-// pv.noPreview: "No preview" => "無預覽"
-// pv.showAllQuestions: "Show all questions" => "顯示所有問題"
-// pv.showAnsweredQuestions: "Show answered questions only" => "僅顯示已回答的問題"
-// pv.pages: "Completed pages" => "已完成的頁面"
-// pv.questions: "Answered questions" => "已回答的問題"
-// pv.requiredQuestions: "Answered required questions" => "回答必填問題"
-// pv.correctQuestions: "Valid answers" => "有效答案"
-// pv.buttons: "Completed pages (button UI)" => "已完成的頁面（按鈕 UI）"
-// pv.underInput: "Under the input" => "在輸入下"
-// pv.underTitle: "Under the title" => "在標題下"
-// pv.onBlur: "On blur" => "模糊時"
-// pv.onTyping: "While typing" => "打字時"
-// pv.underRow: "Under the row" => "在行下"
-// pv.underRowSingle: "Under the row, only one panel is visible" => "在該行下，只有一個面板可見"
-// showNavigationButtons.none: "Hidden" => "隱藏"
-// showProgressBar.off: "Hidden" => "隱藏"
-// showTimerPanel.none: "Hidden" => "隱藏"
-// showTimerPanelMode.all: "Both" => "雙"
-// detailPanelMode.none: "Hidden" => "隱藏"
-// addRowButtonLocation.default: "Depends on matrix layout" => "取決於矩陣佈局"
-// panelsState.default: "Users cannot expand or collapse panels" => "使用者無法展開或摺疊面板"
-// panelsState.collapsed: "All panels are collapsed" => "所有面板均已摺疊"
-// panelsState.expanded: "All panels are expanded" => "所有面板均已展開"
-// widthMode.auto: "Auto" => "自動"
-// widthMode.static: "Static" => "靜態的"
-// widthMode.responsive: "Responsive" => "回應"
-// imageFit.none: "None" => "沒有"
-// imageFit.contain: "Contain" => "包含"
-// imageFit.cover: "Cover" => "蓋"
-// imageFit.fill: "Fill" => "填補"
-// contentMode.auto: "Auto" => "自動"
-// contentMode.image: "Image" => "圖像"
-// contentMode.video: "Video" => "視頻"
-// contentMode.youtube: "YouTube" => "優酷"
-// displayMode.auto: "Auto" => "自動"
-// displayMode.buttons: "Buttons" => "按鈕"
-// displayMode.dropdown: "Dropdown" => "下拉清單"
-// rateColorMode.default: "Default" => "違約"
-// autoGenerate.true: "Generate" => "生成"
-// autoGenerate.false: "Enter manually" => "手動輸入"
-// rateType.labels: "Labels" => "標籤"
-// rateType.stars: "Stars" => "星星"
-// rateType.smileys: "Smileys" => "笑臉"
-// op.anyof: "Any of" => "任何"
-// op.allof: "All of" => "全部"
-// op.and: "and" => "和"
-// op.or: "or" => "或"
-// ew.modern: "Modern theme" => "現代主題"
-// ew.default: "Default theme" => "默認主題"
-// ew.orange: "Orange theme" => "橙色主題"
-// ew.darkblue: "Darkblue theme" => "深藍色主題"
-// ew.darkrose: "Darkrose theme" => "“暗玫瑰”主題"
-// ew.stone: "Stone theme" => "“石頭”主題"
-// ew.winter: "Winter theme" => "“冬季”主題"
-// ew.winterstone: "Winter-Stone theme" => "“冬日之石”主題"
-// ts.selectPage: "Select the page to test it" => "選擇要測試的頁面"
-// ts.showInvisibleElements: "Show invisible elements" => "顯示不可見元素"
-// ts.hideInvisibleElements: "Hide invisible elements" => "隱藏不可見元素"
-// validators.expressionvalidator: "Expression" => "表達"
-// triggers.copyvaluetrigger: "Copy answer" => "複製答案"
-// triggers.skiptrigger: "Skip to question" => "跳至問題"
-// triggers.runexpressiontrigger: "Run expression" => "運行表達式"
-// pehelp.cookieName: "Cookies prevent users from filling out the same survey twice." => "Cookie 可防止使用者兩次填寫同一調查問卷。"
-// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "調整輸入欄位的可見區域的大小。請使用<b>「驗證→最大長度</b>」設置來限制輸入長度。"
-// pehelp.format: "Use {0} as a placeholder for the actual value." => "使用 {0} 作為實際值的佔位元。"
-// pehelp.totalText: "Visible only when at least one column has Total type or Total expression." => "僅當至少一列具有 Total 類型或 Total 運算式時才可見。"
-// pehelp.acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information." => "有關詳細資訊，請參閱 [accept]（https://www.w3schools.com/tags/att_input_accept.asp） 屬性說明。"
-// pehelp.columnColCount: "Applicable only to Radiogroup and Checkbox cell types." => "僅適用於單選組和複選框單元類型。"
-// pehelp.autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information." => "有關詳細資訊，請參閱 [autocomplete]（https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete） 屬性說明。"
-// pehelp.valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property." => "如果未設置此屬性，則答案將存儲在 Name 屬性指定的欄位中。"
-// choicesbyurl.valueName: " " => " "
-// pehelp.keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error." => "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。"
-// p.multiSelect: "Allow multiple selection" => "允許多項選擇"
-// p.showLabel: "Show image captions" => "顯示圖像標題"
-// p.value: "Value" => "價值"
-// p.tabAlign: "Tab alignment" => "製表元對齊方式"
-// p.logoFit: "Logo fit" => "徽標合身"
-// p.pages: "Pages" => "頁面"
-// p.questions: "Questions" => "問題"
-// p.triggers: "Triggers" => "觸發器"
-// p.calculatedValues: "Calculated values" => "計算值"
-// p.surveyId: "Survey id" => "調查編號"
-// p.surveyPostId: "Survey post id" => "調查帖子編號"
-// p.surveyShowDataSaving: "Survey show data saving" => "調查顯示數據保存"
-// p.questionDescriptionLocation: "Question description location" => "問題描述位置"
-// p.progressBarType: "Progress bar type" => "進度條類型"
-// p.showTOC: "Show TOC" => "顯示目錄"
-// p.tocLocation: "Toc location" => "目錄位置"
-// p.questionTitlePattern: "Question title pattern" => "問題標題模式"
-// p.widthMode: "Width mode" => "寬度模式"
-// p.showBrandInfo: "Show brand info" => "顯示品牌資訊"
-// p.useDisplayValuesInDynamicTexts: "Use display values in dynamic texts" => "在動態文字中使用顯示值"
-// p.visibleIf: "Visible if" => "可見，如果"
-// p.titleLocation: "Title location" => "標題位置"
-// p.descriptionLocation: "Description location" => "描述位置"
-// p.defaultValueExpression: "Default value expression" => "預設值表達式"
-// p.requiredIf: "Required if" => "在以下情況下是必需的"
-// p.validators: "Validators" => "驗證者"
-// p.bindings: "Bindings" => "綁定"
-// p.renderAs: "Render as" => "渲染為"
-// p.attachOriginalItems: "Attach original items" => "附加原始專案"
-// p.currency: "Currency" => "貨幣"
-// p.cellHint: "Cell hint" => "單元格提示"
-// p.isUnique: "Is unique" => "是獨一無二的"
-// p.showInMultipleColumns: "Show in multiple columns" => "在多列中顯示"
-// p.totalMaximumFractionDigits: "Total maximum fraction digits" => "最大小數位數總數"
-// p.totalMinimumFractionDigits: "Total minimum fraction digits" => "最小小數位數總數"
-// p.columns: "Columns" => "列"
-// p.detailElements: "Detail elements" => "細節元素"
-// p.allowAdaptiveActions: "Allow adaptive actions" => "允許自適應操作"
-// p.defaultRowValue: "Default row value" => "預設行值"
-// p.detailPanelShowOnAdding: "Detail panel show on adding" => "添加時顯示的詳細資訊面板"
-// p.choicesLazyLoadEnabled: "Choices lazy load enabled" => "選項延遲載入已啟用"
-// p.choicesLazyLoadPageSize: "Choices lazy load page size" => "選擇延遲載入頁面大小"
-// p.inputFieldComponent: "Input field component" => "輸入欄位元件"
-// p.itemComponent: "Item component" => "項目元件"
-// p.min: "Min" => "最小值"
-// p.max: "Max" => "麥克斯"
-// p.minValueExpression: "Min value expression" => "最小值表達式"
-// p.maxValueExpression: "Max value expression" => "最大值表達式"
-// p.step: "Step" => "步"
-// p.dataList: "Data list" => "數據清單"
-// p.inputSize: "Item size" => "專案大小"
-// p.elements: "Elements" => "元素"
-// p.content: "Content" => "內容"
-// p.navigationTitle: "Navigation title" => "導航標題"
-// p.navigationDescription: "Navigation description" => "導航說明"
-// p.longTap: "Long tap" => "長按"
-// p.autoGrow: "Auto grow" => "自動增長"
-// p.allowResize: "Allow resizing" => "允許調整大小"
-// p.acceptCarriageReturn: "Accept carriage return" => "接受回車"
-// p.displayMode: "Display mode" => "顯示模式"
-// p.rateType: "Rate type" => "費率類型"
-// p.label: "Label" => "標籤"
-// p.contentMode: "Content mode" => "內容模式"
-// p.imageFit: "Image fit" => "圖像貼合"
-// p.altText: "Alt text" => "可選文字"
-// p.height: "Height" => "高度"
-// p.penColor: "Pen color" => "筆顏色"
-// p.backgroundColor: "Background color" => "背景色"
-// p.templateElements: "Template elements" => "範本元素"
-// p.operator: "Operator" => "算子"
-// p.isVariable: "Is variable" => "是可變的"
-// p.runExpression: "Run expression" => "運行表達式"
-// p.showCaption: "Show caption" => "顯示標題"
-// p.iconName: "Icon name" => "圖示名稱"
-// p.iconSize: "Icon size" => "圖示大小"
-// p.precision: "Precision" => "精度"
-// p.matrixDragHandleArea: "Matrix drag handle area" => "矩陣拖動手柄區域"
-// p.backgroundImage: "Background image" => "背景圖片"
-// p.backgroundImageFit: "Background image fit" => "背景圖像適合"
-// p.backgroundImageAttachment: "Background image attachment" => "背景圖像附件"
-// p.backgroundOpacity: "Background opacity" => "背景不透明度"
-// p.selectToRankEnabled: "Select to rank enabled" => "選擇啟用排名"
-// p.selectToRankAreasLayout: "Select to rank areas layout" => "選擇以對區域佈局進行排名"
-// p.allowCameraAccess: "Allow camera access" => "允許攝像頭訪問"
-// p.scaleColorMode: "Scale color mode" => "縮放顏色模式"
-// p.rateColorMode: "Rate color mode" => "評價顏色模式"
-// p.templateTabTitle: "Template tab title" => "範本選項卡標題"
-// p.templateVisibleIf: "Template visible if" => "範本可見，如果"
-// p.copyDisplayValue: "Copy display value" => "複製顯示值"
-// theme.--background: "Background color" => "背景色"
-// theme.--background-dim-light: "Background dim light color" => "背景昏暗的光線顏色"
-// theme.--primary-foreground: "Primary foreground color" => "原色前景色"
-// theme.--foreground: "Foreground color" => "前景色"
-// theme.--base-unit: "Base unit" => "基本單元"
-// theme.groupAdvanced: "Advanced" => "高深"
-// theme.themeName: "Theme" => "主題"
-// theme.isPanellessss: "Question appearance" => "問題外觀"
-// theme.isPanellessPanels: "Default" => "違約"
-// theme.isPanellessLightweight: "Without Panels" => "不帶面板"
-// theme.themePaletteLight: "Light" => "光"
-// theme.themePaletteDark: "Dark" => "黑暗"
-// theme.primaryColor: "Accent color" => "強調文字顏色"
-// theme.primaryDefaultColor: "Default" => "違約"
-// theme.primaryDarkColor: "Hover" => "懸停"
-// theme.primaryLightColor: "Selected" => "選擇"
-// theme.backgroundDimColor: "Background color" => "背景色"
-// theme.backgroundImage: "Background image" => "背景圖片"
-// theme.backgroundImageFitAuto: "Auto" => "自動"
-// theme.backgroundImageFitCover: "Cover" => "蓋"
-// theme.backgroundImageFitContain: "Contain" => "包含"
-// theme.backgroundOpacity: "Opacity" => "不透明度"
-// theme.backgroundImageAttachmentFixed: "Fixed" => "固定"
-// theme.backgroundImageAttachmentScroll: "Scroll" => "滾動"
-// theme.panelBackgroundTransparency: "Panel background opacity" => "面板背景不透明度"
-// theme.questionBackgroundTransparency: "Question background opacity" => "問題背景不透明度"
-// theme.questionPanel: "Panel background and corner radius" => "面板背景和角半徑"
-// theme.questionTitle: "Question title font" => "問題標題字體"
-// theme.questionDescription: "Question description font" => "問題描述字體"
-// theme.editorPanel: "Input element" => "輸入元素"
-// theme.editorFont: "Input element font" => "輸入元素字體"
-// theme.backcolor: "Default background" => "默認背景"
-// theme.hovercolor: "Hover background" => "懸停背景"
-// theme.borderDecoration: "Border decoration" => "邊框裝飾"
-// theme.accentBackground: "Accent background" => "強調文字背景"
-// theme.accentForeground: "Accent foreground" => "強調文字前景"
-// theme.primaryForecolor: "Default color" => "默認顏色"
-// theme.primaryForecolorLight: "Disabled color" => "禁用顏色"
-// theme.linesColors: "Minor line colors" => "次要線條顏色"
-// theme.borderDefault: "Darker" => "暗"
-// theme.borderLight: "Lighter" => "打火機"
-// theme.fontFamily: "Font family" => "字體系列"
-// theme.fontSize: "Font size" => "字體大小"
-// theme.color: "Color" => "顏色"
-// theme.size: "Size" => "大小"
-// theme.fontWeightRegular: "Regular" => "定期"
-// theme.fontWeightHeavy: "Heavy" => "重"
-// theme.fontWeightSemiBold: "Semi-bold" => "半粗體"
-// theme.fontWeightBold: "Bold" => "大膽"
-// theme.scale: "Scale" => "規模"
-// theme.cornerRadius: "Corner radius" => "拐角半徑"
-// theme.surveyTitleFont: "Survey title font" => "調查標題字體"
-// theme.pageTitle: "Page title font" => "頁面標題字體"
-// theme.pageDescription: "Page description font" => "頁面描述字體"
-// theme.boxShadowX: "X" => "X"
-// theme.boxShadowY: "Y" => "Y"
-// theme.boxShadowAddRule: "Add Shadow Effect" => "添加陰影效果"
-// theme.opacity: "Opacity" => "不透明度"
-// theme.boxShadowBlur: "Blur" => "模糊"
-// theme.boxShadowSpread: "Spread" => "傳播"
-// theme.boxShadowDrop: "Drop" => "落"
-// theme.boxShadowInner: "Inner" => "內"
-// theme.questionShadow: "Shadow effects" => "陰影效果"
-// theme.editorShadow: "Input element shadow effects" => "輸入元素陰影效果"
-// names.default: "Default" => "違約"
-// names.contrast: "Contrast" => "反差"
-// names.plain: "Plain" => "平原"
-// names.simple: "Simple" => "簡單"
-// names.blank: "Blank" => "空白"
-// names.double: "Double" => "雙"
-// names.bulk: "Bulk" => "散裝"
-// names.pseudo-3d: "Pseudo 3D" => "偽 3D"
-// names.playful: "Playful" => "好玩"
-// names.ultra: "Ultra" => "超"
-// colors.teal: "Teal" => "水鴨"
-// colors.blue: "Blue" => "藍"
-// colors.purple: "Purple" => "紫色"
-// colors.orchid: "Orchid" => "蘭花"
-// colors.tulip: "Tulip" => "鬱金香"
-// colors.brown: "Brown" => "棕色"
-// colors.green: "Green" => "綠"
-// names.sharp: "Sharp" => "鋒利"
-// names.borderless: "Borderless" => "無國界"
-// names.flat: "Flat" => "平"
-// names.doubleborder: "Double Border" => "雙邊框"
-// names.layered: "Layered" => "分層的"
-// names.solid: "Solid" => "固體"
-// names.threedimensional: "3D" => "。.3D"
-// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "您確定要刪除此語言的所有字串嗎？"
-// ed.themeResetButton: "Reset theme settings to default" => "將主題設置重置為預設值"
-// theme.placeholderColor: "Placeholder color" => "佔位元顏色"
-// ed.themeSettings: "Theme Settings" => "主題設置"
-// ed.themeSettingsTooltip: "Open theme settings" => "打開主題設置"
-// pe.resetToDefaultCaption: "Reset" => "重置"
-// pv.file: "Local files" => "本地檔"
-// pv.camera: "Camera" => "照相機"
-// pv.file-camera: "Local files or camera" => "本地檔或相機"
-// ed.translateUsigAI: "Auto-translate All" => "自動翻譯全部"
-// ed.translationDialogTitle: "Untranslated strings" => "未翻譯的字串"
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "請輸入至少{0}專案"
-// lg.question_resetValueName: "Reset question value" => "重置問題值"
-// lg.column_resetValue: "Reset column value" => "重置列值"
-// pe.markRequired: "Mark as required" => "標記為必填"
-// pe.removeRequiredMark: "Remove the required mark" => "刪除所需的標記"
-// p.resetValueIf: "Reset value if" => "如果出現以下情況，則重置值"
-// lg.question_setValueName: "Set question value" => "設置問題值"
-// lg.column_resetValueName: "Reset column value" => "重置列值"
-// lg.column_setValueName: "Set column value" => "設置列值"
-// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => "其結果將分配給目標問題的表達式。"
-// survey.title: "Title" => "標題"
-// page.title: "Title" => "標題"
-// p.setValueIf: "Set value if" => "設置值，如果"
-// theme.header: "Header" => "頁眉"
-// theme.backgroundImageFitFill: "Stretch" => "伸展"
-// theme.backgroundImageFitTile: "Tile" => "瓦"
-// theme.headerView: "View" => "視圖"
-// theme.headerViewBasic: "Basic" => "基本"
-// theme.headerViewAdvanced: "Advanced" => "高深"
-// theme.headerInheritWidthFrom: "Content area width" => "內容區域寬度"
-// theme.headerInheritWidthFromSurvey: "Same as survey" => "與調查相同"
-// theme.headerInheritWidthFromPage: "Fit to page" => "適合頁面"
-// theme.headerTextAreaWidth: "Text width" => "文本寬度"
-// theme.headerBackgroundColorSwitch: "Background color" => "背景色"
-// theme.headerBackgroundColorNone: "None" => "沒有"
-// theme.headerBackgroundColorAccentColor: "Accent color" => "強調文字顏色"
-// theme.headerBackgroundColorCustom: "Custom" => "習慣"
-// theme.horizontalAlignmentLeft: "Left" => "左"
-// theme.horizontalAlignmentCenter: "Center" => "中心"
-// theme.horizontalAlignmentRight: "Right" => "右"
-// theme.verticalAlignmentTop: "Top" => "返回頁首"
-// theme.verticalAlignmentMiddle: "Middle" => "中間"
-// theme.verticalAlignmentBottom: "Bottom" => "底"
-// lg.question_resetValueText: "reset value for question: {0}" => "重置問題的值：{0}"
-// lg.question_setValueText: "assign value: {1} to question: {0}" => "分配值：{1}問題：{0}"
-// lg.column_resetValueText: "reset cell value for column: {0}" => "重置列的儲存格值：{0}"
-// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "將儲存格值：{1}分配給列：{0}"
-// ed.surveyJsonExportButton: "Export" => "出口"
-// ed.surveyJsonImportButton: "Import" => "進口"
-// ed.surveyJsonCopyButton: "Copy to clipboard" => "複製到剪貼板"
-// pe.filePlaceholder: "File placeholder text" => "檔佔位元文本"
-// pe.photoPlaceholder: "Photo placeholder text" => "照片占位元文本"
-// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "檔或照片佔位元文字"
-// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "當「源類型」為「本地檔」或相機不可用時適用"
-// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "當「源類型」為「相機」時適用。"
-// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "當「源類型」為「本地檔或相機」時適用。"
-// theme.background: "Background" => "背景"
-// theme.appearance: "Appearance" => "外觀"
-// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主題嗎？您的所有自定義項都將丟失。"
-// ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主題"
-// theme.headerInheritWidthFromContainer: "Fit to container" => "適合容器"
-// signaturepad.showPlaceholder: "Show the placeholder" => "顯示佔位元"
-// signaturepad.placeholder: "Placeholder text" => "佔位元文本"
-// theme.surveyDescriptionFont: "Survey description font" => "調查描述字體"
-// ed.prevFocus: "Focus previous" => "焦點 上一頁"
-// ed.nextFocus: "Focus next" => "接下來的重點"
-// ed.saveTheme: "Save Theme" => "保存主題"
-// ed.saveThemeTooltip: "Save Theme" => "保存主題"
-// lg.page_requireName: "Make page required" => "將頁面設為必填項"
-// lg.panel_requireName: "Make page required" => "將頁面設為必填項"
-// signaturepad.signatureWidth: "Signature area width" => "簽名區域寬度"
-// signaturepad.signatureHeight: "Signature area height" => "簽名區域高度"
-// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "自動縮放簽名區域"
-// signaturepad.penMinWidth: "Minimum pen width" => "最小筆寬"
-// signaturepad.penMaxWidth: "Maximum pen width" => "最大筆寬"
-// theme.logoPosition: "Logo position" => "徽標位置"
-// theme.headerTitlePosition: "Title position" => "職稱位置"
-// theme.headerDescriptionPosition: "Description position" => "描述位置"
-// ed.propertyGridNoResultsFound: "No results found" => "未找到結果"
-// pv.leftRight: "Left and right" => "左和右"
-// p.sourceType: "Source type" => "源類型"
-// p.fitToContainer: "Fit to container" => "適合容器"
-// p.setValueExpression: "Set value expression" => "設置值表達式"
-// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "選項是從 Web 服務載入的。"
-// ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“設置”"
-// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "載入選項的預覽"
-// pe.eachRowUnique: "Prevent duplicate responses in rows" => "防止行中出現重複回應"
-// theme.advancedMode: "Advanced mode" => "高級模式"
-// theme.backgroundCornerRadius: "Background and corner radius" => "背景和圓角半徑"
-// theme.colorsTitle: "Colors" => "顏色"
-// theme.font: "Font" => "字體"
-// theme.lines: "Lines" => "線"
-// theme.titleFont: "Title font" => "標題字體"
-// theme.descriptionFont: "Description font" => "描述字體"
-// theme.shadow: "Shadow effects" => "陰影效果"
-// ed.translateUsigAIFrom: "Translate from: " => "翻譯語言組合："
-// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
-// pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
-// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
-// pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
-// pv.contain: "Contain" => "包含"
-// pv.cover: "Cover" => "蓋"
-// pv.fill: "Fill" => "填補"
-
-// pe.transposeData: "Transpose rows to columns" => "將行轉置為列"
-// layout.panel: "Layout" => "佈局"
-// layout.question: "Layout" => "佈局"
-// layout.base: "Layout" => "佈局"
-// panel.name: "Panel name" => "面板名稱"
-// panel.title: "Panel title" => "面板標題"
-// panel.description: "Panel description" => "面板說明"
-// panel.visibleIf: "Make the panel visible if" => "如果出現以下情況，則使面板可見"
-// panel.requiredIf: "Make the panel required if" => "如果出現以下情況，則使面板成為必需的"
-// panel.questionOrder: "Question order within the panel" => "小組內的問題順序"
-// panel.startWithNewLine: "Display the panel on a new line" => "在新行上顯示面板"
-// panel.state: "Panel collapse state" => "面板摺疊狀態"
-// panel.width: "Inline panel width" => "內嵌面板寬度"
-// panel.minWidth: "Minimum panel width" => "最小面板寬度"
-// panel.maxWidth: "Maximum panel width" => "最大面板寬度"
-// paneldynamic.name: "Panel name" => "面板名稱"
-// paneldynamic.title: "Panel title" => "面板標題"
-// paneldynamic.description: "Panel description" => "面板說明"
-// paneldynamic.visibleIf: "Make the panel visible if" => "如果出現以下情況，則使面板可見"
-// paneldynamic.requiredIf: "Make the panel required if" => "如果出現以下情況，則使面板成為必需的"
-// paneldynamic.page: "Move the panel to page" => "將面板移動到頁面"
-// paneldynamic.startWithNewLine: "Display the panel on a new line" => "在新行上顯示面板"
-// paneldynamic.state: "Panel collapse state" => "面板摺疊狀態"
-// paneldynamic.width: "Inline panel width" => "內嵌面板寬度"
-// paneldynamic.minWidth: "Minimum panel width" => "最小面板寬度"
-// paneldynamic.maxWidth: "Maximum panel width" => "最大面板寬度"
-// paneldynamic.templateDescription: "Panel description pattern" => "面板描述模式"
-// paneldynamic.templateTitle: "Panel title pattern" => "面板標題模式"
-// paneldynamic.noEntriesText: "Empty panel text" => "空面板文本"
-// paneldynamic.templateTabTitle: "Tab title pattern" => "選項卡標題模式"
-// paneldynamic.templateVisibleIf: "Make an individual panel visible if" => "如果出現以下情況，則使單個面板可見"
-// paneldynamic.hideNumber: "Hide the panel number" => "隱藏面板編號"
-// paneldynamic.titleLocation: "Panel title alignment" => "面板標題對齊方式"
-// paneldynamic.descriptionLocation: "Panel description alignment" => "面板描述對齊方式"
-// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "問題標題對齊方式"
-// paneldynamic.templateErrorLocation: "Error message alignment" => "錯誤消息對齊"
-// paneldynamic.newPanelPosition: "New panel location" => "新面板位置"
-// paneldynamic.keyName: "Prevent duplicate responses in the following question" => "防止在以下問題中重複回答"
-// question.name: "Question name" => "問題名稱"
-// question.title: "Question title" => "問題標題"
-// question.description: "Question description" => "問題描述"
-// question.visibleIf: "Make the question visible if" => "如果出現以下情況，請使問題可見"
-// question.requiredIf: "Make the question required if" => "如果出現以下情況，則將問題設為必填項"
-// question.state: "Question box collapse state" => "問題框摺疊狀態"
-// question.hideNumber: "Hide the question number" => "隱藏問題編號"
-// question.titleLocation: "Question title alignment" => "問題標題對齊方式"
-// question.descriptionLocation: "Question description alignment" => "問題描述對齊方式"
-// question.errorLocation: "Error message alignment" => "錯誤消息對齊"
-// question.indent: "Increase the inner indent" => "增加內部縮進"
-// question.width: "Inline question width" => "內聯問題寬度"
-// question.minWidth: "Minimum question width" => "最小問題寬度"
-// question.maxWidth: "Maximum question width" => "最大問題寬度"
-// question.textUpdateMode: "Update input field value" => "更新輸入欄位值"
-// signaturepad.allowClear: "Show the Clear button within signature area" => "在簽名區域內顯示「清除」 按鈕"
-// signaturepad.penColor: "Stroke color" => "描邊顏色"
-// comment.rows: "Input field height (in lines)" => "輸入欄位高度（以行為單位）"
-// expression.name: "Expression name" => "表達式名稱"
-// expression.title: "Expression title" => "表達式標題"
-// expression.description: "Expression description" => "表達式說明"
-// expression.expression: "Expression" => "表達"
-// trigger.expression: "Expression" => "表達"
-// calculatedvalue.expression: "Expression" => "表達"
-// survey.description: "Survey description" => "調查說明"
-// page.name: "Page name" => "頁面名稱"
-// page.description: "Page description" => "頁面描述"
-// page.visibleIf: "Make the page visible if" => "如果出現以下情況，則使頁面可見"
-// page.requiredIf: "Make the page required if" => "如果出現以下情況，則使頁面為必填項"
-// page.questionOrder: "Question order on the page" => "頁面上的問題順序"
-// matrixdropdowncolumn.name: "Column name" => "列名稱"
-// matrixdropdowncolumn.title: "Column title" => "專欄標題"
-// matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "防止重複回應"
-// matrixdropdowncolumn.width: "Column width" => "列寬"
-// matrixdropdowncolumn.minWidth: "Minimum column width" => "最小列寬"
-// matrixdropdowncolumn.rows: "Input field height (in lines)" => "輸入欄位高度（以行為單位）"
-// matrixdropdowncolumn.visibleIf: "Make the column visible if" => "如果出現以下情況，則使列可見"
-// matrixdropdowncolumn.requiredIf: "Make the column required if" => "如果滿足以下條件，則使該列為必填項"
-// matrixdropdowncolumn.showInMultipleColumns: "Each option in a separate column" => "每個選項都在單獨的列中"
-// multipletextitem.name: "Name" => "名字"
-// multipletextitem.title: "Title" => "標題"
-// pe.rateDescriptionLocation: "Label alignment" => "標籤對齊"
-// pe.cellErrorLocation: "Cell error message alignment" => "單元格錯誤消息對齊方式"
-// pe.listIsEmpty@columns: "You don't have any columns yet" => "您還沒有任何列"
-// pe.listIsEmpty@rows: "You don't have any rows yet" => "您還沒有任何行"
-// pe.listIsEmpty@validators: "You don't have any validation rules yet" => "尚無任何驗證規則"
-// pe.listIsEmpty@calculatedValues: "You don't have any custom variables yet" => "您還沒有任何自訂變數"
-// pe.listIsEmpty@triggers: "You don't have any triggers yet" => "您還沒有任何觸發器"
-// pe.listIsEmpty@navigateToUrlOnCondition: "You don't have any links yet" => "您還沒有任何連結"
-// pe.addNew@columns: "Add new column" => "添加新列"
-// pe.addNew@rows: "Add new row" => "添加新行"
-// pe.addNew@validators: "Add new rule" => "添加新規則"
-// pe.addNew@calculatedValues: "Add new variable" => "添加新變數"
-// pe.addNew@triggers: "Add new trigger" => "添加新觸發器"
-// pe.addNew@navigateToUrlOnCondition: "Add new URL" => "添加新 URL"
-// choicesbyurl.url: "Web service's URL" => "Web 服務的 URL"
-// pe.progressBarShowPageTitles: "Display page titles in progress bar" => "在進度條中顯示頁面標題"
-// pe.progressBarShowPageNumbers: "Display page numbers in progress bar" => "在進度條中顯示頁碼"
-// itemvalue.visibleIf: "Make the option visible if" => "如果出現以下情況，則使該選項可見"
-// itemvalue.enableIf: "Make the option selectable if" => "如果出現以下情況，則使該選項可選"
-// panel.layout: "Panel Layout" => "面板佈局"
-// tabs.questionSettings: "Question Settings" => "問題設置"
-// pe.url_placeholder: "Ex.: https://api.example.com/books" => "例如：https://api.example.com/books"
-// pe.path_placeholder: "Ex.: categories.fiction" => "例如：categories.fiction"
-// pe.questionStartIndex_placeholder: "Ex.: a)" => "例如：a）"
-// pe.width_placeholder: "Ex.: 6in" => "例：6in"
-// pe.minWidth_placeholder: "Ex.: 600px" => "例如：600px"
-// pe.maxWidth_placeholder: "Ex.: 50%" => "例：50%"
-// pv.selected: "Selected" => "選擇"
-// pv.unselected: "Unselected" => "未選中"
-// pv.center: "Center" => "中心"
-// pv.middle: "Middle" => "中間"
-// pv.next: "Next" => "下一個"
-// pv.last: "Last" => "最後"
-// clearIfInvisible.none: "Never" => "從不"
-// questionsOnPageMode.standard: "Original structure" => "原始結構"
-// questionsOnPageMode.singlePage: "Show all questions on one page" => "在一個頁面上顯示所有問題"
-// questionsOnPageMode.questionPerPage: "Show single question per page" => "每頁顯示一個問題"
-// pv.auto: "Auto" => "自動"
-// panelsState.firstExpanded: "First expanded" => "首次擴展"
-// rateColorMode.scale: "Scale" => "規模"
-// scaleColorMode.monochrome: "Monochrome" => "單色"
-// scaleColorMode.colored: "Colored" => "彩色"
-// state.default: "Locked" => "鎖"
-// showQuestionNumbers.default: "Auto-numbering" => "自動編號"
-// showQuestionNumbers.on: "Auto-numbering" => "自動編號"
-// showQuestionNumbers.onPage: "Reset on each page" => "在每個頁面上重置"
-// showQuestionNumbers.onpanel: "Reset on each panel" => "在每個面板上重置"
-// showQuestionNumbers.onPanel: "Reset on each panel" => "在每個面板上重置"
-// showQuestionNumbers.onSurvey: "Continue across the survey" => "在整個調查中繼續"
-// showQuestionNumbers.off: "No numbering" => "無編號"
-// descriptionLocation.underTitle: "Under the question title" => "在問題標題下"
-// descriptionLocation.underInput: "Under the input field" => "在輸入欄位下"
-// selectToRankAreasLayout.horizontal: "Next to choices" => "在選項旁邊"
-// selectToRankAreasLayout.vertical: "Above choices" => "以上選擇"
-// displayStyle.decimal: "Decimal" => "十進位"
-// displayStyle.currency: "Currency" => "貨幣"
-// displayStyle.percent: "Percentage" => "百分比"
-// displayStyle.date: "Date" => "日期"
-// totalDisplayStyle.decimal: "Decimal" => "十進位"
-// totalDisplayStyle.currency: "Currency" => "貨幣"
-// totalDisplayStyle.percent: "Percentage" => "百分比"
-// totalDisplayStyle.date: "Date" => "日期"
-// rowOrder.initial: "Original" => "源語言"
-// questionOrder.initial: "Original" => "源語言"
-// showProgressBar.aboveheader: "Above the header" => "標題上方"
-// showProgressBar.belowheader: "Below the header" => "在標題下方"
-// pv.sum: "Sum" => "和"
-// pv.count: "Count" => "計數"
-// pv.min: "Min" => "最小值"
-// pv.max: "Max" => "麥克斯"
-// pv.avg: "Avg" => "平均"
-// searchMode.contains: "Contains" => "包含"
-// searchMode.startsWith: "Starts with" => "開頭為"
-// panel.name: "A panel ID that is not visible to respondents." => "受訪者不可見的面板ID。"
-// panel.description: "Type a panel subtitle." => "鍵入面板字幕。"
-// panel.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "使用魔棒圖示設置確定面板可見性的條件規則。"
-// panel.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "使用魔棒圖示設置禁用面板唯讀模式的條件規則。"
-// panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
-// panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
-// panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。"
-// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "保持問題的原始順序或隨機化問題。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。"
-// panel.page: "Repositions the panel to the end of a selected page." => "將面板重新置放到選頁面的末尾。"
-// panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容和面板框的左邊框之間添加空格或邊距。"
-// panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。"
-// panel.state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed." => "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。"
-// panel.width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。"
-// paneldynamic.name: "A panel ID that is not visible to respondents." => "受訪者不可見的面板ID。"
-// paneldynamic.description: "Type a panel subtitle." => "鍵入面板字幕。"
-// paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "使用魔棒圖示設置確定面板可見性的條件規則。"
-// paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "使用魔棒圖示設置禁用面板唯讀模式的條件規則。"
-// paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
-// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
-// paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
-// paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。"
-// paneldynamic.page: "Repositions the panel to the end of a selected page." => "將面板重新置放到選頁面的末尾。"
-// paneldynamic.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容和面板框的左邊框之間添加空格或邊距。"
-// paneldynamic.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。"
-// paneldynamic.state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed." => "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。"
-// paneldynamic.width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。"
-// paneldynamic.templateTitle: "Type in a template for dynamic panel titles. Use {panelIndex} for the panel's general position and {visiblePanelIndex} for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering." => "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。"
-// paneldynamic.templateTabTitle: "Type in a template for tab titles. Use {panelIndex} for a panel's general position and {visiblePanelIndex} for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering." => "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。"
-// paneldynamic.templateVisibleIf: "This setting allows you to control the visibility of individual panels within the dynamic panel. Use the `{panel}` placeholder to reference the current panel in your expression." => "此設置允許您控制動態面板中各個面板的可見性。使用“{panel}”佔位符在運算式中引用當前面板。"
-// paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "此面板中的所有問題都會自動繼承此設置。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
-// paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。"
-// paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "定義新添加的面板的位置。默認情況下，新面板將添加到末尾。選擇「下一步」以在當前面板之後插入新面板。"
-// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。"
-// paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。"
-// pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。"
-// pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "使用魔杖圖示設置條件規則，該規則確定何時將受訪者的輸入重置為基於“預設值表達式”或“設置值表達式”的值，或重置為“預設答案”值（如果設置了其中任何一個）。"
-// pehelp.setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response." => "使用魔杖圖示設置條件規則，該規則確定何時運行「設置值表達式」 ，並將結果值動態分配為回應。"
-// pehelp.setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input." => "指定一個表達式，該運算式定義在滿足「如果設置值」規則中的條件時要設置的值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表達式確定的值可以被受訪者的手動輸入覆蓋。"
-// question.name: "A question ID that is not visible to respondents." => "受訪者不可見的問題ID。"
-// question.description: "Type a question subtitle." => "鍵入問題副標題。"
-// question.visibleIf: "Use the magic wand icon to set a conditional rule that determines question visibility." => "使用魔杖圖示設置確定問題可見性的條件規則。"
-// question.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the question." => "使用魔杖圖示設置條件規則，以禁用問題的唯讀模式。"
-// question.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer." => "使用魔杖圖標設置條件規則，除非問題得到答案，否則阻止調查推進或提交。"
-// question.startWithNewLine: "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form." => "取消選擇以將問題與上一個問題或面板顯示在一行中。如果問題是表單中的第一個元素，則該設置不適用。"
-// question.page: "Repositions the question to the end of a selected page." => "將問題重新置放到選頁面的末尾。"
-// question.state: "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed." => "從以下選項中選擇：「展開」 - 問題框完整顯示，可以摺疊;“已摺疊” - 問題框僅顯示標題和描述，可以展開;“已鎖定” - 問題框完整顯示，無法摺疊。"
-// question.titleLocation: "Overrides title alignment rules defined on a panel, page or survey level. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default)." => "覆蓋在面板、頁面或調查級別上定義的標題對齊規則。“繼承”選項將應用任何更高級別的設置（如果已設置）或調查級別的設置（預設為“頂部”）。"
-// question.descriptionLocation: "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default)." => "“繼承”選項應用調查級別設置（預設為“在問題標題下”）。"
-// question.errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
-// question.indent: "Adds space or margin between the question content and the left border of the question box." => "在問題內容和問題框的左邊框之間添加空格或邊距。"
-// question.width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "設置問題的寬度，使其與同一行中的其他調查元素成比例。接受 CSS 值（px、%、in、pt 等）。"
-// surveyvalidator.expression: "Use the magic wand icon to set a validation rule for the question." => "使用魔杖圖示為問題設置驗證規則。"
-// question.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)." => "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。"
-// question.url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data." => "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。"
-// question.searchMode: "A comparison operation used to filter the drop-down list." => "用於篩選下拉清單的比較操作。"
-// signaturepad.signatureWidth: "Sets the width of the displayed signature area and the resulting image." => "設置顯示的簽名區域和生成的圖像的寬度。"
-// signaturepad.signatureHeight: "Sets the height of the displayed signature area and the resulting image." => "設置顯示的簽名區域和生成的圖像的高度。"
-// signaturepad.signatureAutoScaleEnabled: "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions." => "選擇是否希望簽名區域填充問題框中的所有可用空間，同時保持預設的 3：2 縱橫比。設置自定義寬度和高度值后，該設置將保留這些尺寸的縱橫比。"
-// file.imageHeight: "Adjusts the height of the image in the survey results." => "調整調查結果中圖像的高度。"
-// file.imageWidth: "Adjusts the width of the image in the survey results." => "調整調查結果中圖像的寬度。"
-// imagepicker.imageHeight: "Overrides the minimum and maximum height values." => "覆蓋最小和最大高度值。"
-// imagepicker.imageWidth: "Overrides the minimum and maximum width values." => "覆蓋最小和最大寬度值。"
-// imagepicker.choices: "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents." => "“值”用作條件規則中使用的專案ID;向受訪者顯示“文本”。"
-// text.size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>." => "此設置僅調整輸入欄位的大小，不會影響問題框的寬度。要限制接受的輸入長度，請轉到<b>驗證→最大字元限制</b>。"
-// comment.rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear." => "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。"
-// survey.mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing." => "選擇：「可編輯」 - 使受訪者能夠填寫您的調查;“只讀” - 禁用表單編輯。"
-// matrixdropdowncolumn.name: "A column ID that is not visible to respondents." => "受訪者不可見的列ID。"
-// matrixdropdowncolumn.isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column." => "為列啟用后，受訪者需要為此列中的每個問題提供唯一的回答。"
-// matrixdropdowncolumn.rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear." => "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。"
-// matrixdropdowncolumn.visibleIf: "Use the magic wand icon to set a conditional rule that determines column visibility." => "使用魔杖圖示設置確定列可見性的條件規則。"
-// matrixdropdowncolumn.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column." => "使用魔杖圖示設置禁用列唯讀模式的條件規則。"
-// matrixdropdowncolumn.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
-// matrixdropdowncolumn.showInMultipleColumns: "When selected, creates an individual column for each choice option." => "選取後，為每個選項創建一個單獨的列。"
-// pehelp.widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used." => "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。"
-// pehelp.logo: "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)." => "粘貼圖像連結（無大小限制）或按下資料夾圖示以瀏覽電腦中的檔（最大 64KB）。"
-// pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。"
-// pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標高度。"
-// pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
-// pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "設置導航按鈕在頁面上的可見性和位置。"
-// pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。"
-// pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "啟用僅包含所有問題或已回答問題的預覽頁面。"
-// pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。"
-// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "一個符號或一系列符號，表示需要答案。"
-// pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "輸入要開始編號的數位或字母。"
-// pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。"
-// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "選擇是否希望每個頁面上的第一個輸入字段準備好進行文本輸入。"
-// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。"
-// pehelp.maxTextLength: "For text entry questions only." => "僅適用於文本輸入問題。"
-// pehelp.maxCommentLength: "For question comments only." => "僅供問題評論。"
-// pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "選擇是否希望問題註釋和長文本問題根據輸入的文字長度自動增加高度。"
-// pehelp.allowResizeComment: "For question comments and Long Text questions only." => "僅適用於問題評論和長文本問題。"
-// pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "自訂變數用作表單計算中使用的中間變數或輔助變數。他們將受訪者的輸入作為源值。每個自定義變數都有一個唯一的名稱和它所基於的表達式。"
-// pehelp.includeIntoResult: "Select if you wish the calculated value of the expression to be saved along with survey results." => "選擇是否希望將表達式的計算值與調查結果一起保存。"
-// pehelp.triggers: "A trigger is an event or condition that is based on an expression. Once the expression is evaluated to \"true\", a trigger sets off an action. Such an action can optionally have a target question it affects." => "觸發器是基於表達式的事件或條件。一旦表達式被計算為「true」，觸發器就會觸發一個操作。這樣的操作可以選擇性地影響它的目標問題。"
-// pehelp.clearInvisibleValues: "Choose whether or not to clear values for questions hidden by conditional logic and when to do it." => "選擇是否清除條件邏輯隱藏的問題的值以及何時清除。"
-// pehelp.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing." => "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。"
-// pehelp.columns: "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的列ID，右邊的值顯示給受訪者。"
-// pehelp.rows: "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的行ID，右邊的值顯示給受訪者。"
-// pehelp.columnMinWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
-// pehelp.rowTitleWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
-// pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置與輸入無效的儲存格相關的錯誤訊息的位置。“繼承”選項應用“錯誤消息對齊”屬性中的設置。"
-// pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。"
-// pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "觸發提示，要求確認刪除行。"
-// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "複製最後一行的答案，並將其分配給下一個添加的動態行。"
-// pehelp.description: "Type a subtitle." => "鍵入副標題。"
-// pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。"
-// pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "設置詳細資訊部分相對於行的位置。從中選擇：「無」 - 不添加擴展;“Under the row” - 矩陣的每一行下都放置一個行擴展;“在行下，僅顯示一行擴展” - 僅在單行下顯示擴展，其餘行展開將摺疊。"
-// pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
-// pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "在輸入數據時逐漸增加輸入欄位的高度。覆蓋「輸入欄位高度（以行為單位）」設置。"
-// pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。"
-// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。"
-// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
-// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
-// page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "使用魔杖圖示設置確定頁面可見性的條件規則。"
-// page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "使用魔杖圖示設置禁用頁面只讀模式的條件規則。"
-// page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
-// page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "適用於本頁中的所有問題。如果要覆蓋此設置，請為單個問題或面板定義標題對齊規則。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
-// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
-// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。"
-// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
-// pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。"
-// pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。"
-// pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。"
-// pehelp.title: "Type a user-friendly title to display." => "鍵入要顯示的使用者友好標題。"
-// pehelp.waitForUpload: "Ensures that users won't complete the survey until files are uploaded." => "確保使用者在上傳檔之前不會完成調查。"
-// pehelp.minWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
-// pehelp.maxWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
-// pehelp.width: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
-// pehelp.useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements." => "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。"
-// pehelp.clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default)." => "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。"
-// pehelp.choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question." => "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。"
-// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "選取後，使用者可以在單獨的註釋框中包含其他輸入。"
-// pehelp.separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout." => "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。"
-// pehelp.path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array." => "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。"
-// pehelp.titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list." => "在物件陣列中輸入一個統一的屬性名稱，該陣列包含要在選項清單中顯示的值。"
-// pehelp.allowEmptyResponse: "Select to allow the service to return an empty response or array." => "選擇此選項可允許服務傳回空回應或陣列。"
-// pehelp.choicesVisibleIf: "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options." => "使用魔杖圖示設置條件規則，以確定所有選項的可見性。"
-// pehelp.rateValues: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。"
-// rating.displayMode: "\"Auto\" selects between the \"Buttons\" and \"Dropdown\" modes based on the available width. When the width is insufficient to display buttons, the question displays a dropdown." => "“自動”根據可用寬度在“按鈕”和“下拉”模式之間進行選擇。當寬度不足以顯示按鈕時，問題將顯示一個下拉清單。"
-// pehelp.valuePropertyName: "Allows you to connect questions that produce results in different formats. When such questions are linked together using a join identifier, this shared property stores selected question values." => "允許您連接以不同格式生成結果的問題。當使用聯接標識碼將此類問題連結在一起時，此共用屬性將存儲選定的問題值。"
-// pehelp.searchEnabled: "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field." => "選擇是否要更新下拉功能表內容以匹配使用者在輸入欄位中鍵入的搜索查詢。"
-// pehelp.valueTrue: "A value to save in survey results when respondents give a positive answer." => "當受訪者給出肯定答案時保存在調查結果中的值。"
-// pehelp.valueFalse: "A value to save in survey results when respondents give a negative answer." => "當受訪者給出否定答案時保存在調查結果中的值。"
-// pehelp.showPreview: "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded." => "不建議禁用此選項，因為它會覆蓋預覽圖像，並使用戶難以了解檔是否已上傳。"
-// pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "觸發提示，要求確認文件刪除。"
-// pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。"
-// pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "輸入將在輸入期間向受訪者建議的選項清單。"
-// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。"
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "為所有項目標籤設定一致的寬度（以像素為單位）"
-// pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自動”選項會根據提供的源URL自動確定合適的顯示模式 - 圖像、視頻或YouTube。"
-// pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。"
-// pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。"
-// expression.name: "An expression ID that is not visible to respondents." => "受訪者不可見的表達式ID。"
-// expression.description: "Type an expression subtitle." => "鍵入表達式副標題。"
-// expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、條件 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
-// pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "選擇此選項可將「其他」選項值作為單獨的屬性存儲在調查結果中。"
-// p.swapOrder: "Swap the order of Yes and No" => "交換“是”和“否”的順序"
-// p.itemTitleWidth: "Item label width (in px)" => "項目標籤寬度（以 px 為單位）"
-// p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "顯示是否選擇了所有選項的文字"
-// p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "排名區域的佔位元文本"
-// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "自動完成調查"
-// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "選擇是否希望在受訪者回答所有問題後自動完成調查。"
-// masksettings.saveMaskedValue: "Save masked value in survey results" => "在調查結果中保存掩碼值"
-// patternmask.pattern: "Value pattern" => "價值模式"
-// datetimemask.min: "Minimum value" => "最小值"
-// datetimemask.max: "Maximum value" => "最大值"
-// numericmask.allowNegativeValues: "Allow negative values" => "允許負值"
-// numericmask.thousandsSeparator: "Thousands separator" => "千分隔符"
-// numericmask.decimalSeparator: "Decimal separator" => "小數點分隔符"
-// numericmask.precision: "Value precision" => "值精度"
-// numericmask.min: "Minimum value" => "最小值"
-// numericmask.max: "Maximum value" => "最大值"
-// currencymask.prefix: "Currency prefix" => "貨幣前綴"
-// currencymask.suffix: "Currency suffix" => "貨幣後綴"
-// pe.maskType: "Input mask type" => "輸入掩碼類型"
-// maskTypes.patternmask: "Pattern" => "模式"
-// maskTypes.numericmask: "Numeric" => "數值的"
-// maskTypes.datetimemask: "Date and Time" => "日期和時間"
-// maskTypes.currencymask: "Currency" => "貨幣"
-// tabs.mask: "Input Mask Settings" => "輸入掩碼設置"
-// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "例如：+1（999）-999-99-99"
-// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "例：mm/dd/yyyy"
-// pe.currencyprefix_placeholder: "Ex.: $" => "例：$"
-// pe.currencysuffix_placeholder: "Ex.: USD" => "例如：美元"
-// pv.textWrapEnabled: "Wrap choices" => "包裝選擇"
-// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。"
-// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
-// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "該模式可以包含字串文字和以下佔位元： '9' - 表示數位;“a” - 表示大寫或小寫字母;'#' - 表示數位或大寫或小寫字母。使用反斜杠“\\”轉義字元。"
-// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "該模式可以包含分隔符和以下佔位元：“m” - 表示月份數;'mm' - 表示月份數位，前導零表示個位數;'d' - 表示月份中的某一天;'dd' - 表示月份中的某一天，前導零表示個位數值;'yy' - 一年的最後兩位數位;'yyyy' - 表示四位數的年份。"
-// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "用於將顯示數位的小數部分與整數部分分開的符號。"
-// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "用於將大數的數位分成三組的符號。"
-// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "限制顯示數位的小數點後要保留的位數。"
-// currencymask.prefix: "One or several symbols to be displayed before the value." => "要在值之前顯示的一個或多個符號。"
-// currencymask.suffix: "One or several symbols to be displayed after the value." => "要在值后顯示的一個或多個符號。"
-// ed.translationSource: "Source: " => "源："
-// ed.translationTarget: "Target: " => "目標："
-// ed.pagePlaceHolder: "The page is empty. Drag an element from the toolbox or click the button below." => "頁面為空。從工具箱中拖動元素或按下下面的按鈕。"
-// maskTypes.none: "None" => "沒有"
-// itemvalue@rows.visibleIf: "Make the row visible if" => "如果出現以下情況，則使行可見"
-// itemvalue@rows.enableIf: "Make the row editable if" => "如果出現以下情況，則使行可編輯"
-// signaturepad.placeholderReadOnly: "Placeholder text in read-only or preview mode" => "唯讀或預覽模式下的佔位元文本"
-// pe.textWrapEnabled: "Wrap choices" => "換行選項"
-// image.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自動”選項會根據提供的源URL自動確定適合的顯示模式 - 圖像、視頻或YouTube。"
-// imagepicker.contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options." => "在「圖像」和「視頻」之間進行選擇以設置媒體選擇器的內容模式。如果選擇「圖像」，請確保提供的所有選項都是以下格式的圖像檔：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同樣，如果選擇「視頻」，請確保所有選項都是指向以下格式的視頻檔的直接連結：MP4、MOV、WMV、FLV、AVI、MKV。請注意，視頻選項不支援 YouTube 連結。"
-// ed.selectFile: "Select a file" => "選擇檔案"
-// ed.removeFile: "Remove the file" => "刪除檔案"
-// pe.searchMode: "Search Mode" => "搜索模式"
-// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "按兩下下面的「添加問題」 按鈕開始創建表單。"
-// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "按兩下下面的「添加問題」 按鈕，向頁面添加新元素。"
-// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "按下下面的「添加問題」 按鈕，將新元素添加到面板中。"
-// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "點擊下面的按鈕，選擇要上傳的圖片"
-// coloralpha.opacity: "Opacity" => "不透明度"
-// font.family: "Font family" => "字體家族"
-// font.color: "Color" => "顏色"
-// font.placeholderColor: "Placeholder color" => "佔位元顏色"
-// font.size: "Size" => "大小"
-// theme.themeName: "Theme" => "主題"
-// theme.isPanelless: "Question appearance" => "問題外觀"
-// theme.editorPanel: "Background and corner radius" => "背景和拐角半徑"
-// theme.questionPanel: "Background and corner radius" => "背景和拐角半徑"
-// theme.primaryColor: "Accent color" => "強調色"
-// theme.panelBackgroundTransparency: "Panel background opacity" => "面板背景不透明度"
-// theme.questionBackgroundTransparency: "Question background opacity" => "問題背景不透明度"
-// theme.fontSize: "Font size" => "字體大小"
-// theme.scale: "Scale" => "規模"
-// theme.cornerRadius: "Corner radius" => "拐角半徑"
-// theme.pageTitle: "Title font" => "標題字體"
-// theme.pageDescription: "Description font" => "描述字體"
-// theme.questionTitle: "Title font" => "標題字體"
-// theme.questionDescription: "Description font" => "描述字體"
-// theme.editorFont: "Font" => "字體"
-// theme.backgroundOpacity: "Opacity" => "不透明度"
-// theme.--sjs-font-family: "Font family" => "字體家族"
-// theme.--sjs-general-backcolor-dim: "Background color" => "背景顏色"
-// theme.--sjs-primary-backcolor: "Accent background" => "重音背景"
-// theme.--sjs-primary-forecolor: "Accent foreground" => "重音前景"
-// theme.--sjs-shadow-small: "Shadow effects" => "陰影效果"
-// theme.--sjs-shadow-inner: "Shadow effects" => "陰影效果"
-// theme.--sjs-border-default: "Colors" => "顏色"
-// header@header.headerView: "View" => "視圖"
-// header@header.logoPosition: "Logo position" => "徽標位置"
-// header@header.surveyTitle: "Survey title font" => "調查標題字體"
-// header@header.surveyDescription: "Survey description font" => "調查描述字體"
-// header@header.headerTitle: "Survey title font" => "調查標題字體"
-// header@header.headerDescription: "Survey description font" => "調查描述字體"
-// header@header.inheritWidthFrom: "Content area width" => "內容區寬度"
-// header@header.textAreaWidth: "Text width" => "文本寬度"
-// header@header.backgroundColorSwitch: "Background color" => "背景顏色"
-// header@header.backgroundImage: "Background image" => "背景圖片"
-// header@header.backgroundImageOpacity: "Opacity" => "不透明度"
-// header@header.overlapEnabled: "Overlap" => "重疊"
-// header@header.logoPositionX: "Logo position" => "徽標位置"
-// header@header.titlePositionX: "Title position" => "標題位置"
-// header@header.descriptionPositionX: "Description position" => "描述位置"
-// weight.400: "Regular" => "定期"
-// weight.600: "Heavy" => "重"
-// weight.700: "Semi-bold" => "半粗體"
-// weight.800: "Bold" => "大膽"
-// backgroundImageFit.auto: "Auto" => "自動"
-// backgroundImageFit.cover: "Cover" => "蓋"
-// backgroundImageFit.contain: "Contain" => "包含"
-// backgroundImageFit.fill: "Stretch" => "伸展"
-// backgroundImageFit.tile: "Tile" => "瓦"
-// backgroundImageAttachment.fixed: "Fixed" => "固定"
-// backgroundImageAttachment.scroll: "Scroll" => "滾動"
-// headerView.basic: "Basic" => "基本"
-// headerView.advanced: "Advanced" => "高深"
-// inheritWidthFrom.survey: "Same as survey" => "與調查相同"
-// inheritWidthFrom.container: "Fit to container" => "適合容器"
-// backgroundColorSwitch.none: "None" => "沒有"
-// backgroundColorSwitch.accentColor: "Accent color" => "強調色"
-// backgroundColorSwitch.custom: "Custom" => "習慣"
-// colorPalette.light: "Light" => "光"
-// colorPalette.dark: "Dark" => "黑暗"
-// isPanelless.false: "Default" => "違約"
-// isPanelless.true: "Without Panels" => "不帶面板"
-// theme.cornerRadius: "Corner radius" => "拐角半徑"
-// theme.fontFamily: "Font family" => "字體家族"
-// theme.fontWeightRegular: "Regular" => "定期"
-// theme.fontWeightHeavy: "Heavy" => "重"
-// theme.fontWeightSemiBold: "Semi-bold" => "半粗體"
-// theme.fontWeightBold: "Bold" => "大膽"
-// theme.color: "Color" => "顏色"
-// theme.placeholderColor: "Placeholder color" => "佔位元顏色"
-// theme.size: "Size" => "大小"
-// theme.opacity: "Opacity" => "不透明度"
-// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "鍵入以搜尋..."
-// ed.toolboxNoResultsFound: "No results found" => "未找到結果"
-// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "選項卡標題佔位元"
-// theme.--sjs-special-red: "Error messages" => "錯誤消息"
-// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "選項卡標題的回退文本，當選項卡標題模式未生成有意義的值時應用。"
-// theme.fontColor: "Font color" => "字體顏色"
-// theme.backgroundColor: "Background color" => "背景顏色"
-// pe.questionTitleWidth: "Question title width" => "問題標題寬度"
-// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "選擇檔案或貼上檔案連結..."
-// panelbase.questionTitleWidth: "Ex.: 200px" => "例如：200px"
-// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
-// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
-// pe.commentAreaRows: "Comment area height (in lines)" => "評論區高度（以行為單位）"
-// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。在輸入佔用更多行時，將出現滾動條。"
-// pe.enabled: "Enabled" => "啟用"
-// pe.disabled: "Disabled" => "禁用"
-// pe.inherit: "Inherit" => "繼承"
-// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "驗證失去焦點時的空欄位"
-// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "例如：30%"
-// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "例如：200px"
-// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "啟用此選項可在使用者將焦點放在空輸入欄位上，然後離開該欄位而不進行任何更改時觸發驗證。"
-// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "在多列佈局中排列選項。當設置為 0 時，選項將顯示在一行中。"
-// theme.isPanelless: "This setting applies only to questions outside of a panel." => "此設置僅適用於面板之外的問題。"
-// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "設置一種補充顏色，用於突出顯示關鍵調查元素。"
-// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "調整面板和問題框相對於調查背景的透明度。"
-// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "調整輸入元素相對於調查背景的透明度。"
-// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "設置所有矩形元素的圓角半徑。如果要為輸入元素或面板和問題框設置單獨的角半徑值，請啟用高級模式。"
-// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "設置調查的主要背景顏色。"
-// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整標題內容區域的寬度，以適應放置調查的 HTML 元素。"
-// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "包含調查標題和描述的標題區域的寬度，以像素為單位。"
-// panellayoutcolumn.effectiveWidth: "Accepts values %." => "接受值 。"
-// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "接受值 px。"
-// p.effectiveColSpan: "Column span" => "柱跨度"
-// progressBarInheritWidthFrom.survey: "Same as survey" => "與調查相同"
-// progressBarInheritWidthFrom.container: "Same as container" => "與容器相同"
-// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
-// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
-// p.progressBarInheritWidthFrom: "Progress bar area width" => "進度條區域寬度"
-// maskType.none: "None" => "沒有"
-// maskType.pattern: "Pattern" => "模式"
-// maskType.numeric: "Numeric" => "數值的"
-// maskType.datetime: "Date and Time" => "日期和時間"
-// maskType.currency: "Currency" => "貨幣"
-
-// inputTextAlignment.auto: "Auto" => "自動"
-// inputTextAlignment.left: "Left" => "左"
-// inputTextAlignment.right: "Right" => "右"
-// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。"
-// p.inputTextAlignment: "Input value alignment" => "輸入值對齊"
-// paneldynamic.showRangeInProgress: "Show the progress bar" => "顯示進度條"
-// paneldynamic.showProgressBar: "Show the progress bar" => "顯示進度條"
-// paneldynamic.progressBarLocation: "Progress bar alignment" => "進度條對齊"
-// pv.carousel: "Carousel" => "旋轉 木馬"
-// progressBarLocation.top: "Top" => "返回頁首"
-// progressBarLocation.bottom: "Bottom" => "底"
-// progressBarLocation.topBottom: "Top and bottom" => "頂部和底部"
-// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
-// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "不支援YouTube連結。"
-// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "開始配置表單"
-// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "按兩下任何類別圖示以瀏覽調查設置。將測量元素添加到設計圖面后，其他設置將變為可用。"
-// pe.caseInsensitive: "Case insensitive" => "不區分大小寫"
-// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。"
-
-// ed.surveyPlaceholderTitle: "Your form is empty" => "您的表單為空"
-// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "您的表單為空"
-// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "從工具箱中拖動元素或按下下面的按鈕。"
-// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "從工具箱中拖動元素或按下下面的按鈕。"
-// ed.previewPlaceholderTitle: "No preview" => "無預覽"
-// ed.previewPlaceholderTitleMobile: "No preview" => "無預覽"
-// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "調查不包含任何可見元素。"
-// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "調查不包含任何可見元素。"
-// ed.translationsPlaceholderTitle: "No strings to translate" => "無需翻譯字串"
-// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "無需翻譯字串"
-// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "將元素添加到表單或更改工具列中的字串篩選器。"
-// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "將元素添加到表單或更改工具列中的字串篩選器。"
-// lg.logicPlaceholderTitle: "No logical rules" => "無邏輯規則"
-// lg.logicPlaceholderTitleMobile: "No logical rules" => "無邏輯規則"
-// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "創建規則以自定義調查流程。"
-// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "創建規則以自定義調查流程。"
-// pe.showTimer: "Use a timer" => "使用計時器"
-// theme.advancedMode: "Advanced mode" => "高級模式"
-// pehelp.timerLocation: "Sets the location of a timer on a page." => "設置計時器在頁面上的位置。"
-// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "設置為 0 時，將自動計算高度以適應標題的內容。"
-// p.mobileHeight: "Height on smartphones" => "智能手機上的身高"
-// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "啟用后，調查的頂部將覆蓋頁眉的底部。"
-// ed.creatorSettingTitle: "Creator Settings" => "Creator 設置"
-// tabs.accentColors: "Accent colors" => "強調色"
-// tabs.scaling: "Scaling" => "縮放"
-// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "為嵌套在此面板中的問題分配編號。"
-// creatortheme.--sjs-special-background: "Surface background" => "表面背景"
-// creatortheme.--sjs-primary-background-500: "Primary" => "主要"
-// creatortheme.--sjs-secondary-background-500: "Secondary" => "二 次"
-// creatortheme.surfaceScale: "Surface" => "表面"
-// creatortheme.userInterfaceBaseUnit: "User interface" => "用戶介面"
-// creatortheme.fontScale: "Font" => "字體"
-// names.sc2020: "Survey Creator 2020" => "調查建立者 2020"
-// names.default-light: "Light" => "光"
-// names.default-dark: "Dark" => "黑暗"
-// names.default-contrast: "Contrast" => "反差"
-// panel.showNumber: "Number this panel" => "為此面板編號"
-// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "選擇是否希望調查在受訪者回答了當前頁面上的所有問題後自動前進到下一頁。如果頁面上的最後一個問題是開放式的或允許多個答案，則此功能將不適用。"
-// autocomplete.name: "Full Name" => "全名"
-// autocomplete.honorific-prefix: "Prefix" => "前綴"
-// autocomplete.given-name: "First Name" => "名字"
-// autocomplete.additional-name: "Middle Name" => "中間名"
-// autocomplete.family-name: "Last Name" => "姓"
-// autocomplete.honorific-suffix: "Suffix" => "後綴"
-// autocomplete.nickname: "Nickname" => "昵稱"
-// autocomplete.organization-title: "Job Title" => "職稱"
-// autocomplete.username: "User Name" => "使用者名"
-// autocomplete.new-password: "New Password" => "新密碼"
-// autocomplete.current-password: "Current Password" => "當前密碼"
-// autocomplete.organization: "Organization Name" => "組織名稱"
-// autocomplete.street-address: "Full Street Address" => "全街位址"
-// autocomplete.address-line1: "Address Line 1" => "位址行 1"
-// autocomplete.address-line2: "Address Line 2" => "位址行 2"
-// autocomplete.address-line3: "Address Line 3" => "位址行 3"
-// autocomplete.address-level4: "Level 4 Address" => "4 級位址"
-// autocomplete.address-level3: "Level 3 Address" => "3 級位址"
-// autocomplete.address-level2: "Level 2 Address" => "2 級位址"
-// autocomplete.address-level1: "Level 1 Address" => "1 級位址"
-// autocomplete.country: "Country Code" => "國家代碼"
-// autocomplete.country-name: "Country Name" => "國家/地區名稱"
-// autocomplete.postal-code: "Postal Code" => "郵遞區號"
-// autocomplete.cc-name: "Cardholder Name" => "持卡人姓名"
-// autocomplete.cc-given-name: "Cardholder First Name" => "持卡人名字"
-// autocomplete.cc-additional-name: "Cardholder Middle Name" => "持卡人中間名"
-// autocomplete.cc-family-name: "Cardholder Last Name" => "持卡人姓氏"
-// autocomplete.cc-number: "Credit Card Number" => "信用卡號"
-// autocomplete.cc-exp: "Expiration Date" => "有效期"
-// autocomplete.cc-exp-month: "Expiration Month" => "到期月份"
-// autocomplete.cc-exp-year: "Expiration Year" => "到期年份"
-// autocomplete.cc-csc: "Card Security Code" => "卡安全碼"
-// autocomplete.cc-type: "Credit Card Type" => "信用卡類型"
-// autocomplete.transaction-currency: "Transaction Currency" => "交易貨幣"
-// autocomplete.transaction-amount: "Transaction Amount" => "交易金額"
-// autocomplete.language: "Preferred Language" => "首選語言"
-// autocomplete.bday: "Birthday" => "生日"
-// autocomplete.bday-day: "Birthday Day" => "生日"
-// autocomplete.bday-month: "Birthday Month" => "生日月份"
-// autocomplete.bday-year: "Birthday Year" => "生日年份"
-// autocomplete.sex: "Gender" => "性"
-// autocomplete.url: "Website URL" => "網站 URL"
-// autocomplete.photo: "Profile Photo" => "個人頭像"
-// autocomplete.tel: "Telephone Number" => "電話號碼"
-// autocomplete.tel-country-code: "Country Code for Phone" => "電話的國家代碼"
-// autocomplete.tel-national: "National Telephone Number" => "全國電話號碼"
-// autocomplete.tel-area-code: "Area Code" => "區號"
-// autocomplete.tel-local: "Local Phone Number" => "本地電話號碼"
-// autocomplete.tel-local-prefix: "Local Phone Prefix" => "本地電話前綴"
-// autocomplete.tel-local-suffix: "Local Phone Suffix" => "本地電話後綴"
-// autocomplete.tel-extension: "Phone Extension" => "電話分機"
-// autocomplete.email: "Email Address" => "電子郵件位址"
-// autocomplete.impp: "Instant Messaging Protocol" => "即時通訊協定"
-// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "鎖定問題的展開/摺疊狀態"
-// pe.listIsEmpty@pages: "You don't have any pages yet" => "您還沒有任何頁面"
-// pe.addNew@pages: "Add new page" => "添加新頁面"
-// ed.zoomInTooltip: "Zoom In" => "放大"
-// ed.zoomOutTooltip: "Zoom Out" => "縮小"
-// tabs.surfaceBackground: "Surface Background" => "表面背景"
-// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最後一個條目中的答案作為預設值"
-// colors.gray: "Gray" => "灰色"
-// pe.navigationButtonsLocation: "Navigation buttons alignment" => "導航按鈕對齊"
-// pv.allQuestions: "Show all questions" => "顯示所有問題"
-// pv.answeredQuestions: "Show answered questions only" => "僅顯示已回答的問題"
-// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "設置頁面上導航按鈕的位置。"
-// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "使用以下矩陣、列或面板問題中的值作為選項ID"
-// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "使用以下矩陣、列或面板問題中的值作為選擇文本"
-// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。"
-// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。"
-// pe.progressBarLocation: "Progress bar alignment" => "進度條對齊"
-// progressBarLocation.topbottom: "Top and bottom" => "頂部和底部"
-// progressBarLocation.aboveheader: "Above the header" => "標題上方"
-// progressBarLocation.belowheader: "Below the header" => "標題下方"
-// progressBarLocation.off: "Hidden" => "隱藏"
-// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
-// survey.readOnly: "Make the survey read-only" => "將調查設為唯讀"
-// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "選擇是否要阻止受訪者填寫您的調查。"
-// paneldynamic.showNumber: "Number the panel" => "為面板編號"
-// question.showNumber: "Number this question" => "為這個問題編號"
-// pe.previewMode: "Preview mode" => "預覽模式"
-// pe.gridLayoutEnabled: "Enable the grid layout" => "啟用網格佈局"
-// pe.maskSettings: "Mask settings" => "蒙版設置"
-// pe.detailErrorLocation: "Row expansion error message alignment" => "行擴展錯誤消息對齊"
-// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。"
-// pe.gridLayoutColumns: "Grid layout columns" => "網格佈局列"
-// pe.startPageTitlePlaceholder: "Start Page" => "起始頁"
-// panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效寬度，%"
-// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "問題標題寬度，px"
-// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您還沒有佈局列"
-// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "指定此面板在網格佈局中跨越的列數。"
-// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
-// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。"
-// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此問題在網格佈局中跨越多少列。"
-// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
-
-// ed.expandTooltip: "Expand" => "擴大"
-// ed.collapseTooltip: "Collapse" => "崩潰"
-// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
-// ed.zoom100Tooltip: "Zoom to 100%" => "縮放到 100%"
-// ed.addLanguageTooltip: "Add Language" => "添加語言"
-// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。"
-// pe.defaultDisplayValue: "Default display value for dynamic texts" => "動態文字的預設顯示值"
-// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "當問題值為空時，顯示在 HTML 問題以及調查元素的動態標題和描述中的值。"
-// showQuestionNumbers.recursive: "Recursive numbering" => "遞歸編號"
-// paneldynamic.templateQuestionTitleWidth: "Question title width" => "問題標題寬度"
-// pe.allowCustomChoices: "Allow custom choices" => "允許自訂選項"
-// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框的左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
-// page.name: "A page ID that is not visible to respondents." => "受訪者不可見的頁面ID。"
-// page.description: "Type a page subtitle." => "鍵入頁面副標題。"
-// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "顯示在進度條或目錄 （TOC） 中的導航按鈕上的說明。如果將此欄位留空，則導航按鈕將使用頁面標題或頁面名稱。要啟用進度條或 TOC，請轉到“調查”→“導航”。"
-// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "如果下拉清單中沒有所需的選項，則選擇以允許受訪者添加自己的選擇。自訂選項將僅在當前瀏覽器會話期間臨時存儲。"
-// pe.singleInputTitleTemplate: "Input field title pattern" => "輸入欄位標題模式"
-// questionsOnPageMode.inputPerPage: "Show single input field per page" => "每頁顯示單個輸入欄位"
-// ts.prevPage: "Previous" => "以前"
-// ts.nextPage: "Next" => "下一個"
-// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"
-// qt.slider: "Slider" => "滑塊"
-// pe.isExclusive: "Clear others when selected" => "選中時清除其他"
-// slider.min: "Min value" => "最小值"
-// slider.max: "Max value" => "最大值"
-// slider.step: "Step value" => "步長值"
-// slider.showLabels: "Show scale labels" => "顯示刻度標籤"
-// slider.tooltipVisibilityPG: "Show tooltips" => "顯示工具提示"
-// slider.allowSwap: "Allow thumb crossing" => "允許 Thumb Crossing"
-// slider.labelCount: "Number of auto-generated labels" => "自動生成的標籤數量"
-// slider.minValueExpression: "Min value expression" => "最小值表達式"
-// slider.maxValueExpression: "Max value expression" => "最大值表達式"
-// slider.autoGenerate: "Scale labels configuration" => "刻度標籤配置"
-// tabs.sliderSettings: "Slider Settings" => "滑塊設置"
-// sliderType.single: "Single-Value" => "單值"
-// sliderType.range: "Range" => "範圍"
-// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。"
-// ed.toolboxSearch: "Search" => "搜索"
-// file.imageHeight: "Image height" => "圖像高度"
-// file.imageWidth: "Image width" => "圖像寬度"
-// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定預覽中上傳圖像的顯示高度以及使用相機拍攝的圖像的實際高度。在單個檔上傳模式下，顯示高度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。"
-// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。"
-// slider.min: "The lowest number that users can select." => "用戶可以選擇的最小數位。"
-// slider.max: "The highest number that users can select." => "用戶可以選擇的最大數位。"
-// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "可選刻度值之間的間隔。例如，步長 5 將允許使用者選擇 0、5、10 等。"
-// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "用戶可以設置的滑塊塊之間的最小距離。"
-// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "用戶可以設置滑塊滑塊之間的最大距離。"
-// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "指定要生成的刻度標籤數量。值 -1 表示該數位是根據 最小值 和 最大值 自動計算的。"
-// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "使用 『{0}』 作為實際值的佔位元。"
-// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "允許您定義特定值的自定義標籤，並可選擇為其分配相應的文本（例如，0 = “差”，100 = “優秀”）。"
-// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "使用 『{0}』 作為實際值的佔位元。"
-// slider.allowSwap: "Allows users to move one thumb past the other." => "允許使用者將一個滑塊移過另一個滑塊。"
-// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。"
-// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
-// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
-// slider.sliderType: "Slider type" => "滑塊類型"
-// slider.minRangeLength: "Min range length" => "最小範圍長度"
-// slider.maxRangeLength: "Max range length" => "最大範圍長度"
-// slider.customLabels: "Custom labels" => "自訂標籤"
-// slider.labelFormat: "Label format" => "標籤格式"
-// slider.tooltipFormat: "Tooltip format" => "工具提示格式"
-// question.showTitle: "Show the title and description" => "顯示標題和描述"
-// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "在刪除面板之前觸發確認提示。"
-// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "在刪除行之前觸發確認提示。"
-// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "在向矩陣添加新行時自動展開詳細資訊部分。"
-// p.detailPanelShowOnAdding: "Auto-expand new row details" => "自動展開新行詳細資訊"
-// paneldynamic.displayMode: "Entry display mode" => "進入顯示模式"
-// paneldynamic.indent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容與面板框的左邊框之間新增空間或邊界。"
-// surveyvalidator.expression: "Use the magic wand icon to define when the question's value is considered valid." => "使用魔術棒圖示來定義問題值何時被視為有效。"
-// pe.isCommentRequired: "Require user to enter a comment" => "要求使用者輸入註釋"
-// pv.radio: "Radio Buttons" => "單選按鈕"
