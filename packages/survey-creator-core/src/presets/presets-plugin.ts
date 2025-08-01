@@ -1,6 +1,7 @@
 import { createDropdownActionModel, Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer, IAction } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, listComponentCss, saveToFileHandler, TabControlModel, SidebarPageModel, PropertyGridViewModel, PropertyGridModel } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, listComponentCss, saveToFileHandler, extendCreatorTheme } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
+import { darkTheme } from "sjs-design-tokens";
 
 export class TabPresetsPlugin implements ICreatorPlugin {
   public model: CreatorPresetEditorModel | undefined;
@@ -20,6 +21,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   public saveToFileHandler = saveToFileHandler;
 
   public activate(): void {
+    extendCreatorTheme(darkTheme);
     this.model = new CreatorPresetEditorModel({}, this.creator, this.defaultJson);
     this.defaultJson = { ...this.model.defaultJson };
     if (this.currentValue) {
