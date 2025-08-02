@@ -278,7 +278,7 @@ test("Get property name from pe. based on class name", () => {
   editorLocalization.defaultLocale = "fr";
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
   editorLocalization.defaultLocale = "en";
 });
 test("Support preset locale strings", () => {
@@ -293,7 +293,7 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
 
   editorLocalization.presetStrings = {
     en: { qt: { text: "Text - en preset" }, pe: { survey: { title: "Survey title - en preset" } } },
@@ -319,7 +319,7 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
 
   editorLocalization.defaultLocale = "";
 });
