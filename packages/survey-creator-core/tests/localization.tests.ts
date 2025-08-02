@@ -319,7 +319,7 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
 
   editorLocalization.defaultLocale = "";
 });
