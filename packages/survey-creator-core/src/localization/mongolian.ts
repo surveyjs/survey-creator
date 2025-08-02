@@ -124,7 +124,7 @@ export var mnStrings = {
     surveySettingsTooltip: "Судалгааны тохиргоо",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Сэдвийн тохиргоо",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Сэдвийн тохиргоо",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Зохион бүтээгчийн тохиргуулууд",
@@ -435,8 +435,8 @@ export var mnStrings = {
       panel_visibilityName: "Панел (нуух) харуулах",
       // "Enable/disable panel"
       panel_enableName: "Панел (идэвхгүй болгох) идэвхжүүлэх",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Шаардлагатай хуудас хийх",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Панелийг шаардлагатай болго",
       // "Show/hide question"
       question_visibilityName: "Асуулт харуулах (нуух)",
       // "Enable/disable question"
@@ -512,7 +512,7 @@ export var mnStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "асуултын үнэ цэнийг дахин тогтоох нь: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "үнэ цэнийг даалгах нь: {1} асуулт: {0}",
+      question_setValueText: "үнэ цэнийг даалгах нь: {1} асуулт: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var mnStrings = {
       column_resetValueText: "баганын эсийн үнэ цэнийг дахин тогтоох: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "эсийн үнэ цэнийг хуваарил: {1} багана: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Үр дүн нь бай асуултанд оногдох илэрхийлэлт.",
       // "survey becomes completed"
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
       // "set into question: {0} value {1}"
@@ -590,8 +590,8 @@ export var mnStrings = {
       requiredIf: "Шаардлагатай бол панел хий",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Хяналтын шатны доторх асуултын дараалал",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Эх хуудас",
+      // [Auto-translated] "Move the panel to page"
+      page: "Панелийг хуудас руу шилжүүл",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Самбарыг шинэ шугам дээр үзүүл",
       // [Auto-translated] "Panel collapse state"
@@ -606,9 +606,9 @@ export var mnStrings = {
       showNumber: "Энэ хавсралтыг дугаарлах"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Үр дүнтэй өргөн, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Асуултын гарчиг өргөн, px"
     },
     paneldynamic: {
@@ -636,20 +636,20 @@ export var mnStrings = {
       minWidth: "Хамгийн бага хавтан өргөн",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Хамгийн их хавтан өргөн",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "Панел устгахыг батлах",
-      // [Auto-translated] "Panel description pattern"
-      templateDescription: "Панел дүрслэлийн загвар",
-      // [Auto-translated] "Panel title pattern"
-      templateTitle: "Панелийн нэрийн загвар",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Оролтыг устгахыг баталгаажуулах",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Оролтын тодорхойлолтын загвар",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Оролт гарчгийн загвар",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Хоосон хавтан текст",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Таб нэрийн загвар",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Таб нэрийн хуудас эзэмшигч",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Хувь хүний панелыг ил гаргах",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Хэрэв хувь хүний оролтыг ил харагдах болго",
       // [Auto-translated] "Number the panel"
       showNumber: "Хавтангийн дугаар",
       // [Auto-translated] "Panel title alignment"
@@ -662,8 +662,8 @@ export var mnStrings = {
       templateQuestionTitleWidth: "Асуултын гарчгийн өргөн",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Шинэ панелийн байршил",
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Шинэ оролцооны байршил",
       // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
       // [Auto-translated] "Prevent duplicate responses in the following question"
@@ -682,8 +682,8 @@ export var mnStrings = {
       visibleIf: "Асуултыг ил тод болгох",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Шаардлагатай асуултыг тавих",
-      // [Auto-translated] "Repositions the question to the end of a selected page."
-      page: "Эх хуудас",
+      // [Auto-translated] "Move the question to page"
+      page: "Асуултыг хуудас руу шилжүүл",
       // [Auto-translated] "Question box collapse state"
       state: "Асуултын хайрцаг нурах байдал",
       // [Auto-translated] "Number this question"
@@ -712,18 +712,18 @@ export var mnStrings = {
       signatureHeight: "Гарын үсэг зурах хэсгийн өндөр",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Авто замын тэмдэг тэмдэглэгээний талбай",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Эзэмшигчийг үзүүл",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Гарын үсгийн талбайн дотор байрлуулагчийг үзүүлэх",
       // [Auto-translated] "Placeholder text"
       placeholder: "Placeholder текст",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Зөвхөн унших эсвэл урьдчилан харах хэлбэрээр placeholder текст",
       // [Auto-translated] "Show the Clear button within signature area"
       allowClear: "Гарын үсэг зурах хэсэгт Clear товчийг харуул",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Хамгийн бага үзэгний өргөн",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Хамгийн их үзэгний өргөн",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Хамгийн бага хэмжээний өргөнүүд",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Stroke-ийн хамгийн их өргөнүүд",
       // [Auto-translated] "Stroke color"
       penColor: "Судасны өнгө"
     },
@@ -755,8 +755,8 @@ export var mnStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Нүүр",
+      // [Auto-translated] "Survey title"
+      title: "Судалгааны гарчиг",
       // [Auto-translated] "Survey description"
       description: "Судалгааны тодорхойлолт",
       // [Auto-translated] "Make the survey read-only"
@@ -765,16 +765,16 @@ export var mnStrings = {
     page: {
       // [Auto-translated] "Page name"
       name: "Хуудасны нэр",
-      // [Auto-translated] "Title"
-      title: "Нүүр",
+      // [Auto-translated] "Page title"
+      title: "Хуудасны гарчиг",
       // [Auto-translated] "Page description"
       description: "Хуудасны тодорхойлолт",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Хуудсыг ил тод болгох",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Шаардлагатай хуудсыг хий",
-      // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-      timeLimit: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Хуудсыг үзэж дуусгах хугацаа",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Асуулт самбар хуудсан дээр"
     },
@@ -966,8 +966,8 @@ export var mnStrings = {
     cellsEmptyRowsColumns: "Багадаа нэг багана эсвэл мөр байх ёстой",
     // "Review before submit"
     showPreviewBeforeComplete: "Санал асуулга явуулхаас өмнө хариултуудыг урьдчилж харах",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Дэргэд нь ",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Нөхцөлөөр боломжтой",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Дахин тохируулах",
     // "Please enter a value"
@@ -1033,7 +1033,7 @@ export var mnStrings = {
     // "Path to data"
     path: "Үйлчилгэний хүрээнд өгөгдөлд хүрэх зам",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "Вэб үйлчилгээний URL",
       // "Get value to store from the following property"
       valueName: "Утгуудыг дарагийн JSON талбараас авах"
@@ -1066,10 +1066,10 @@ export var mnStrings = {
     otherText: "Өөр сонголтын текст",
     // "Enable the \"None\" option"
     showNoneItem: "None сонголтыг зөвшөөрөх",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Хариулах татгалзах боломжийг олго",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Бүү мэд сонголтыг зөвшөөр",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "\"Хариулахаас татгалзах\" сонголтыг идэвхжүүл",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "\"Don't Know\" сонголтыг идэвхжүүл",
     // "Rename the \"None\" option"
     noneText: "None сонголтын текст",
     // "Enable the \"Select All\" option"
@@ -1319,8 +1319,8 @@ export var mnStrings = {
     surveyvalidator: {
       // "Error message"
       text: "Алдаа",
-      // [Auto-translated] "Use the magic wand icon to set a validation rule for the question."
-      expression: "Баталгаажуулах илэрхийлэл"
+      // [Auto-translated] "Validation expression"
+      expression: "Баталгаажуулалтын илэрхийлэл"
     },
     // "Total row header"
     totalText: "Нийт мөр",
@@ -1432,10 +1432,10 @@ export var mnStrings = {
     hideColumnsIfEmpty: "Мөр байхгүй тохиолдолд баганыг нуух",
     // "Custom rating values"
     rateValues: "Хэрэглэгчийн үнэлгээний утгууд",
-    // [Auto-translated] "Rate count"
-    rateCount: "Үнэ тогтоох",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Үнэ цэнийг хэрхэн тодорхойлох вэ?",
+    // [Auto-translated] "Rating count"
+    rateCount: "Рейтингийн тоо",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Рейтингийн тохиргоо",
     slider: {
       // [Auto-translated] "Min value"
       min: "Хамгийн бага үнэ",
@@ -1459,21 +1459,21 @@ export var mnStrings = {
       autoGenerate: "Шошгоны тохиргоог хэмжих",
       // [Auto-translated] "Slider type"
       sliderType: "Слайдерын төрөл",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Хамгийн бага диапазонын урт",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Хамгийн их зайны урт",
       // [Auto-translated] "Custom labels"
       customLabels: "Custom labels",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Шошгоны хэлбэр",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Tooltip формат"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Зургийн өндөр",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Зургийн өргөн"
     },
     // "Hide the question if it has no choices"
@@ -1504,8 +1504,8 @@ export var mnStrings = {
     otherErrorText: "Хоосон санал хүсэлт! алдааны мэдэгдэл",
     // "Error message for duplicate responses"
     keyDuplicationError: "Давтагдсан утга! алдааны мэдэгдэл",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Хамгийн бага сонгосон сонголт",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Хамгийн бага сонголтууд",
     // "Maximum choices to select"
     maxSelectedChoices: "Хамгийн ихдээ сонгох боломжийн тоо",
     // "Logo width"
@@ -1528,10 +1528,10 @@ export var mnStrings = {
     choiceValuesFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла",
-    // [Auto-translated] "Display page titles in progress bar"
-    progressBarShowPageTitles: "Хөгжил дэвшлийн тавцан дахь хуудасны гарчгыг харуул",
-    // [Auto-translated] "Display page numbers in progress bar"
-    progressBarShowPageNumbers: "Хуудасны дугааруудыг progress bar-д харуулах",
+    // [Auto-translated] "Display page titles in the progress bar"
+    progressBarShowPageTitles: "Явцын самбар дээр хуудасны гарчгийг харуул",
+    // [Auto-translated] "Display page numbers in the progress bar"
+    progressBarShowPageNumbers: "Явцын самбар дээр хуудасны дугаарыг харуул",
     // "Add a comment box"
     showCommentArea: "Санал хүсэлтийн хэсэг харуулах",
     // "Placeholder text for the comment box"
@@ -1590,14 +1590,14 @@ export var mnStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Урьдчилан харах хэлбэр",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "Grid layout-ийг идэвхжүүлэх",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Grid layout columns",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Хүснэгтийн баганууд",
     // [Auto-translated] "Mask settings"
     maskSettings: "Маскийн тохиргоо",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Мөр өргөтгөлийн алдаа мессежийн тохируулга",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Мөрийн нарийн ширийн зүйлс error message alignment",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var mnStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Оролт Маск тохиргоо",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Layout",
+        // [Auto-translated] "Panel Layout"
+        panel: "Хавтангийн загвар",
         // [Auto-translated] "Layout"
         question: "Layout",
         // [Auto-translated] "Layout"
@@ -1690,8 +1690,8 @@ export var mnStrings = {
       appearance: "Харагдах байдал",
       // [Auto-translated] "Accent colors"
       accentColors: "Акцентын өнгө",
-      // [Auto-translated] "Surface Background"
-      surfaceBackground: "Гадаргуугийн фон",
+      // [Auto-translated] "Surface background"
+      surfaceBackground: "Гадаргуу��ийн фон",
       // [Auto-translated] "Scaling"
       scaling: "Масштаблах",
       // "Others"
@@ -1773,14 +1773,14 @@ export var mnStrings = {
     rowsVisibleIf: "Мөрнүүд харагдана хэрэв",
     // "Placeholder text for the comment box"
     otherPlaceholder: "Санал асуулгын хэсэг",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Файл байршуулагчийн текст",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Гэрэл зураг байршуулагч бичвэр",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Файл эсвэл гэрэл зураг байршуулагч текст",
-    // [Auto-translated] "Rate type"
-    rateType: "Rate төрөл",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Local file-ийн placeholder text",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Camera-ийн placeholder text",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Local file эсвэл Camera-ийн placeholder text",
+    // [Auto-translated] "Rating icon"
+    rateType: "Рейтингийн тэмдэг",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Экс.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var mnStrings = {
       themeName: "Сэдэв",
       // [Auto-translated] "Question appearance"
       isPanelless: "Асуулт хариултын төрх",
-      // [Auto-translated] "Input element"
-      editorPanel: "Ар талын болон булангийн радиус",
-      // [Auto-translated] "Panel background and corner radius"
-      questionPanel: "Ар талын болон булангийн радиус",
+      // [Auto-translated] "Background and corner radius"
+      editorPanel: "Ар тал ба булангийн радиус",
+      // [Auto-translated] "Background and corner radius"
+      questionPanel: "Ар тал ба булангийн радиус",
       // [Auto-translated] "Accent color"
       primaryColor: "Акцент өнгө",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Панелийн ар талын харанхуй байдал",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Асуулт хариултын нөхцөл байдал",
-      // [Auto-translated] "Font size"
-      fontSize: "Фонтын хэмжээ",
-      // [Auto-translated] "Scale"
-      scale: "Хэмжүүр",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Панел болон асуултын хайрцгийн тунгалаг байдал",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Оролт элементийн тунгалаг байдал",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Судалгааны фонтын хэмжээ",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Судалгааны масштабын фактор",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Булангийн радиус",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Дэвшилтэт режим",
-      // [Auto-translated] "Page title font"
-      pageTitle: "Нүүр фонт",
-      // [Auto-translated] "Page description font"
-      pageDescription: "Дүрслэлийн фонт",
-      // [Auto-translated] "Question title font"
-      questionTitle: "Нүүр фонт",
-      // [Auto-translated] "Question description font"
-      questionDescription: "Дүрслэлийн фонт",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Title font"
+      pageTitle: "Гарчиг фонт",
+      // [Auto-translated] "Description font"
+      pageDescription: "Тайлбар фонт",
+      // [Auto-translated] "Title font"
+      questionTitle: "Гарчиг фонт",
+      // [Auto-translated] "Description font"
+      questionDescription: "Тайлбар фонт",
+      // [Auto-translated] "Font"
       editorFont: "Фонт",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Бүдүүлэг байдал",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Фонтын гэр бүл",
+      backgroundOpacity: "Бүдүүлэг байдал", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Судалгааны фонтын гэр бүл",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Ар талын өнгө",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Акцентийн гарал үүсэл",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Акцентийн өмнө",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Алдааны мессеж",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Фон өнгөнүүдийг акцентлах",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Урд талын өнгүүдийг тодруулах",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Алдаа мэйсийн өнгө",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Сүүдрийн нөлөө",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var mnStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Үзэх",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Лого байрлал",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Логог тохируулах",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Судалгааны нэрийн фонт",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var mnStrings = {
       backgroundImageOpacity: "Бүдүүлэг байдал",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Давхар",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Лого байрлал",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Нүүр албан тушаал",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Тодорхойлолтын байрлал"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Логог тохируулах",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Судалгааны нэрийн тохируулга",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Судалгааны тодорхойлолт тохируулга"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var mnStrings = {
     "true": "Үнэн",
     // "false"
     "false": "Худал",
-    // [Auto-translated] "Local files"
-    file: "Орон нутгийн файлууд",
+    // [Auto-translated] "Local file"
+    file: "Орон нутгийн файл",
     // [Auto-translated] "Camera"
     camera: "Камер",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Орон нутгийн файлууд эсвэл камер",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Орон нутгийн файл эсвэл Камер",
     // "Inherit"
     inherit: "Удамших",
     // "Visible"
@@ -2301,10 +2301,10 @@ export var mnStrings = {
       colored: "Өнгөлсөн"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Үүсгэх",
-      // [Auto-translated] "Enter manually"
-      "false": "Гараар оруул"
+      // [Auto-translated] "Auto-generate"
+      "true": "Автоматаар үүсгэх",
+      // [Auto-translated] "Manual"
+      "false": "Гарын авлага"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2433,8 +2433,8 @@ export var mnStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Судалгаатай адил",
-      // [Auto-translated] "Fit to container"
-      container: "Сав баглаа боодолд тохирно"
+      // [Auto-translated] "Same as container"
+      container: "Контейнертэй адил"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2584,8 +2584,8 @@ export var mnStrings = {
       pattern: "Экс.: +1(999)-999-99-99"
     },
     datetimemask: {
-      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
-      pattern: "Экс.: мм/д/yyy"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
+      pattern: "Жишээ нь: мм/дд/гггг ХХ:ММ:сс"
     },
     currencymask: {
       // "Ex.: $"
@@ -2608,22 +2608,22 @@ export var mnStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Хариулагчдад харагдахгүй панелийн ID.",
-      // [Auto-translated] "Type a subtitle."
-      description: "Панелийн дэд гарчиг бичнэ.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "Панелийн дэд гарчиг гэж бич.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Ид шидийн wand зургыг ашиглан панелийн харагдах байдлыг тодорхойлох нөхцөлийн дүрмийг тогтоо.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "Зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултанд хамаарна. \"Hidden\" гэж тохируулбал асуултын тайлбарыг бас нуудаг. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл асуулт бүрийн гарчиг тохируулах дүрмийг тодорхойл. \"Өвлөх\" сонголт нь хуудасны түвшинд (хэрэв тохирсон бол) эсвэл судалгааны түвшинд (\"Top\" default) тохируулгыг хэрэглэнэ. ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Асуултын анхны дарааллыг хадгалах эсвэл санамсаргүй болгоно. \"Өвлөх\" сонголт нь хуудасны түвшинд (хэрэв тохируулсан бол) эсвэл судалгааны түвшинд тохируулгыг хэрэглэнэ.",
       // "Repositions the panel to the end of a selected page."
       page: "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var mnStrings = {
       startWithNewLine: "Өмнөх асуулт эсвэл панелтай нэг мөрт үзүүлэхээр сонгогдоогүй. Хэрэв панел нь таны маягт дахь анхны элемент бол тохиргоо хамаарахгүй.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Сонголтоос: \"Өргөтгөсөн\" - хавтанг бүрэн харуулж, нурааж болно; \"Нурсан\" - панел нь зөвхөн гарчиг, тодорхойлолтыг харуулж, өргөтгөх боломжтой; \"Цоожтой\" - панелыг бүрэн харуулсан бөгөөд нурааж болохгүй.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Хавтангийн өргөнийг нэг шугамын бусад судалгааны элементүүдтэй пропорциональ байдлаар тохируулна. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна.",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var mnStrings = {
       descriptionLocation: "\"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Under the panel title\" -ийг default-аар) хэрэгжүүлдэг.",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Шинээр нэмэгдсэн панелийн байр суурийг тодорхойлно. Default-ээр төгсгөл рүү шинэ панелуудыг нэмдэг. Одоогийн панел дараа нь шинэ панел оруулахын тулд \"Next\"-ийг сонго.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Сүүлийн панелын хариултыг хувилж, дараагийн нэмэлт динамик хавтанд хуваарилна.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Сүүлийн тайлбарын хариултуудыг хувилж дараагийн нэмж оруулсан тайлбарт онооно.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Панелийг зайлуулахын өмнө баталгааны өдөөлт үүсгэнэ."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var mnStrings = {
       imageHeight: "Хамгийн бага болон хамгийн их өндөр үнэ цэнийг давхардна.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Хамгийн бага, хамгийн их өргөний үнэ цэнийг давхардалд оруулах.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Үнэ цэнэ\" гэж нөхцөлийн дүрэмд хэрэглэгддэг эд зүйлийн ID-ээр үйлчилдэг; \"Текст\" гэж хариулагчдад тавигддаг.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Value\" нь нөхцөлийн дүрэмд хэрэглэгддэг item ID юм; \"Текст\" нь хариулагчдад харагдана.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Хэвлэл мэдээллийн хэрэгслийн сонгогчийн агуулгын хэв маягийг тогтоохын тулд \"Image\" болон \"Video\" хоёрын аль нэгийг сонго. Хэрэв \"Зураг\" гэж сонгосон бол өгөгдсөн бүх хувилбарууд нь дараах форматаар зургийн файлууд болохыг анхаарна уу: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Үүнтэй адилаар \"Video\" нь сонгогдвол бүх сонголт нь дараах форматаар видео файлуудын шууд холбоосууд болох MP4, MOV, WMV, FLV, AVI, MKV гэсэн форматаар байгаа эсэхийг баталгаажуулаарай. YouTube-ийн холбоосууд видео хувилбараар дэмжигдээгүйг анхаарна уу."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Энэ тохиргоо нь зөвхөн оролтын талбарыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй. Хүлээн зөвшөөрөгдсөн оролтын уртыг хязгаарлахын тулд <b>Validation→ Maximum character limit</b> руу орно уу."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Энэ тохиргоо нь зөвхөн оролт талбарын хэмжээг өөрчилдөг бөгөөд асуултын хайрцгийн өргөнд нөлөөлөхгүй. Хүлээн зөвшөөрөгдсөн оролтын уртыг хязгаарлахын тулд \"Validation\" → \"Maximum character limit\" руу орно."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "Оролтын талбар дахь харуулсан мөрүүдийн тоог тогтооно. Хэрэв оролт нь илүү олон мөртэй бол хуйлмал тавиур гарч ирнэ."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Оролт талбарт харагдах мөрүүдийн тоог тохируулна. Хэрвээ оролт илүү олон мөр эзэлбэл гүйлгэх бар гарч ирнэ."
     },
     // survey templates
     survey: {
@@ -2811,8 +2811,8 @@ export var mnStrings = {
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
-      colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "Сонголтын хувилбаруудыг олон баганатай загвараар байрлуулна. 0 болговол сонголтууд нэг мөр хэлбэрээр харагдана. -1 болговол бодит үнэ нь эцэг матрицын \"Nested column count\" шинж чанараас өвлөгдэнэ."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2862,8 +2862,8 @@ export var mnStrings = {
     autoAdvanceEnabled: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Хуудас дээрх навигацийн товчлууруудын харагдах байдлыг тохируулна.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var mnStrings = {
     maxTextLength: "Зөвхөн текст оруулах асуултуудад зориулна.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Асуулт хариултын хувьд зөвхөн.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Асуултын тайлбар бичвэрийн хэсэгт харагдах мөрийн тоог тогтооно. Хэрвээ оролт илүү олон мөр эзэлбэл гүйлгэх бар гарч ирнэ.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Асуулт хариулт болон Урт Текст асуултыг орсон текст урт дээр үндэслэн өндрөөс автоматаар өсгөхийг хүсвэл сонгоно уу.",
@@ -2930,12 +2930,12 @@ export var mnStrings = {
     imageFit: "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Өгөгдлийг оруулж байгаа үед оролтын талбайн өндрийг аажмаар нэмэгдүүлдэг. \"Input талбарын өндрийг (in lines)\" тохиргоог давхардна.",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Resize бариул (эсвэл бариул) буланд гарч, оролтын талбарын хэмжээг өөрчлөхийн тулд чирэгдэж болно.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "\"Inherit\" сонголт нь судалгааны түвшинд тохируулгыг хэрэглэдэг (\"Enabled\" default).",
     // "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
     timeLimit: "Цаг хугацааны интервал секундын дотор. Үүний дараа судалгаа автоматаар \"Thank You\" хуудас руу орж байна.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Секундын хугацааны дараа судалгаа автоматаар дараагийн хуудас руу шилждэг. \"Өмнөх\" навигацийн товчийг нууна. 0 болговол тухайн хуудсанд зарцуулсан хугацааг тооцно.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Хэрэглэгч хоосон оролтын талбар дээр төвлөрч, дараа нь ямар нэгэн өөрчлөлт хийхгүйгээр орхих үед баталгаажуулалтыг өдөөх боломжийг энэ боломжийг олго.",
     page: {
@@ -3030,8 +3030,8 @@ export var mnStrings = {
     valueTrue: "Асуултад хариулсан хүмүүс эерэг хариулт өгөхөд судалгааны үр дүнг хадгалах нь үнэ цэнэтэй.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Судалгаанд оролцогчдын сөрөг хариулт өгөхөд судалгааны үр дүнг хадгалах үнэ цэнэ.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Preview зургийг давхардуулдаг тул энэ сонголтыг хүчингүй болгохыг санал болгодоггүй бөгөөд хэрэглэгчид файлуудыг татаж авсан эсэхийг ойлгоход хэцүү болгодог.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Энэ сонголтыг унтраахыг зөвлөхгүй. Учир нь энэ нь Preview зургийг давамгайлж, файлуудыг оруулсан эсэхийг ойлгоход хэрэглэгчдэд хэцүү болгодог.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Файлын устгалыг батлахыг хүссэн өдөөлтийг өдөөж байна.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var mnStrings = {
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Бүх барааны шошгоны өргөнийг тогтвортой болгоно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна.",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна.",
@@ -3147,52 +3147,52 @@ export var mnStrings = {
     value: "Утга",
     // "Tab alignment"
     tabAlign: "Хавтас байрлуулах",
-    // [Auto-translated] "Source type"
-    sourceType: "Эх сурвалжийн төрөл",
+    // [Auto-translated] "File source type"
+    sourceType: "Файлын эх сурвалжийн төрөл",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Сав баглаа боодолд тохирно",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Эрхэмлэх чанарыг илэрхийлэхийг тогтоо",
     // "Description"
-    description: "Тайлбар",
+    description: "Тайлбар", // Auto-generated string
     // "Logo fit"
     logoFit: "Лого",
     // "Pages"
-    pages: "Хуудаснууд",
+    pages: "Хуудаснууд", // Auto-generated string
     // "Questions"
-    questions: "Асуултууд",
+    questions: "Асуултууд", // Auto-generated string
     // "Triggers"
     triggers: "Схемүүд",
     // "Custom variables"
     calculatedValues: "Тооцоолсон утгууд",
     // "Survey id"
-    surveyId: "Санал асуулгын ID",
+    surveyId: "Санал асуулгын ID", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "Санал асуулгын нийтлэлийн ID",
+    surveyPostId: "Санал асуулгын нийтлэлийн ID", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "Санал асуулга өгөгдөл хадгалж байхад харуулах",
+    surveyShowDataSaving: "Санал асуулга өгөгдөл хадгалж байхад харуулах", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Асуултын тайлбарын байршил",
     // "Progress bar type"
-    progressBarType: "Явцын мөрний төрөл",
+    progressBarType: "Явцын мөрний төрөл", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "TOC харуулах",
     // "TOC alignment"
     tocLocation: "Toc байршил",
     // "Question title pattern"
-    questionTitlePattern: "Асуултын гарчгийн загвар",
+    questionTitlePattern: "Асуултын гарчгийн загвар", // Auto-generated string
     // "Survey width mode"
     widthMode: "Өргөн горим",
     // "Show brand info"
-    showBrandInfo: "Брэнд мэдээллийг харуулах",
+    showBrandInfo: "Брэнд мэдээллийг харуулах", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Динамик текстэд харуулах утгыг хэрэглэх",
     // "Visible if"
-    visibleIf: "Харагдана хэрэв",
+    visibleIf: "Харагдана хэрэв", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "Үндсэн утгын илэрхийлэл",
     // "Required if"
-    requiredIf: "Заавал бөглөх хэрэв",
+    requiredIf: "Заавал бөглөх хэрэв", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Хэрэв үнэ цэнээ дахин тогтоох",
     // [Auto-translated] "Set value if"
@@ -3200,81 +3200,81 @@ export var mnStrings = {
     // "Validation rules"
     validators: "Батлагч",
     // "Bindings"
-    bindings: "Холбогч",
+    bindings: "Холбогч", // Auto-generated string
     // "Render as"
-    renderAs: "руу хөрвүүлэх",
+    renderAs: "руу хөрвүүлэх", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Эх элементүүдийг хавсаргах",
+    attachOriginalItems: "Эх элементүүдийг хавсаргах", // Auto-generated string
     // "Choices"
     choices: "Сонголтууд",
     // "Choices by url"
-    choicesByUrl: "Url сонолтууд",
+    choicesByUrl: "Url сонолтууд", // Auto-generated string
     // "Currency"
-    currency: "Мөнгөн тэмдэгт",
+    currency: "Мөнгөн тэмдэгт", // Auto-generated string
     // "Cell hint"
-    cellHint: "Жишээ утга",
+    cellHint: "Жишээ утга", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Нийт хамгийн их бутархай тоонууд",
+    totalMaximumFractionDigits: "Нийт хамгийн их бутархай тоонууд", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Нийт хамгийн бага бутархай тоонууд",
+    totalMinimumFractionDigits: "Нийт хамгийн бага бутархай тоонууд", // Auto-generated string
     // "Columns"
-    columns: "Баганууд",
+    columns: "Баганууд", // Auto-generated string
     // "Detail elements"
-    detailElements: "Дэлгэрэнгүй элементүүд",
+    detailElements: "Дэлгэрэнгүй элементүүд", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "Дасан зохицох үйлдлийг зөвшөөрөх",
+    allowAdaptiveActions: "Дасан зохицох үйлдлийг зөвшөөрөх", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Үндсэн мөрийн утга",
+    defaultRowValue: "Үндсэн мөрийн утга", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Шинэ мөрийн нарийн ширийн зүйлсийг автоматаар тэлэх",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Choices lazy load enabled",
+    choicesLazyLoadEnabled: "Choices lazy load enabled", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Choices lazy load page size",
+    choicesLazyLoadPageSize: "Choices lazy load page size", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "Оролтын утгын бүрэлдэхүүн",
+    inputFieldComponent: "Оролтын утгын бүрэлдэхүүн", // Auto-generated string
     // "Item component"
-    itemComponent: "Элементийн бүрэлдэхүүн",
+    itemComponent: "Элементийн бүрэлдэхүүн", // Auto-generated string
     // "Min"
-    min: "Хамгийн бага",
+    min: "Хамгийн бага", // Auto-generated string
     // "Max"
-    max: "Хамгийн их",
+    max: "Хамгийн их", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "Хамгийн бага утгын илэрхийлэл",
+    minValueExpression: "Хамгийн бага утгын илэрхийлэл", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "Хамгийн их утгын илэрхийлэл",
+    maxValueExpression: "Хамгийн их утгын илэрхийлэл", // Auto-generated string
     // "Step"
-    step: "Алхам",
+    step: "Алхам", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "Өгөгдлийн жагсаалт",
     // "Input field width (in characters)"
     inputSize: "Элементийн хэмжээ",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Барааны шошгоны өргөн (px-д)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Элементийн шошгоны өргөнийг",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     // "Elements"
-    elements: "Элементүүд",
+    elements: "Элементүүд", // Auto-generated string
     // "Content"
-    content: "Контент",
+    content: "Контент", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "Чиглүүлэгчийн гарчиг",
+    navigationTitle: "Чиглүүлэгчийн гарчиг", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "Чиглүүлэгчийн тайлбар",
+    navigationDescription: "Чиглүүлэгчийн тайлбар", // Auto-generated string
     // "Long tap"
-    longTap: "Long tap",
+    longTap: "Long tap", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Автоматаар нэмэх",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Дахин сэргээх боломж олго",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Дахин хэмжээ өөрчлөх хандлагыг идэвхжүүлэх",
     // "Accept carriage return"
-    acceptCarriageReturn: "Accept carriage return",
+    acceptCarriageReturn: "Accept carriage return", // Auto-generated string
     // "Display mode"
     displayMode: "Дэлгэцийн горим",
     // "Rate type"
-    rateType: "Дамжуулах хурд",
+    rateType: "Дамжуулах хурд", // Auto-generated string
     // "Label"
-    label: "Шошго",
+    label: "Шошго", // Auto-generated string
     // "Content mode"
     contentMode: "Контентийн горим",
     // "Image and thumbnail fit"
@@ -3282,55 +3282,55 @@ export var mnStrings = {
     // "Alt text"
     altText: "Тайлбар",
     // "Height"
-    height: "Өндөр",
+    height: "Өндөр", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Ухаалаг гар утасны өндөр",
     // "Pen color"
-    penColor: "Балны өнгө",
+    penColor: "Балны өнгө", // Auto-generated string
     // "Background color"
     backgroundColor: "Дэвсгэр өнгө",
     // "Template elements"
-    templateElements: "Загварын элементүүд",
+    templateElements: "Загварын элементүүд", // Auto-generated string
     // "Operator"
-    operator: "Operator",
+    operator: "Operator", // Auto-generated string
     // "Is variable"
-    isVariable: "Хувьсах чадвартай",
+    isVariable: "Хувьсах чадвартай", // Auto-generated string
     // "Run expression"
-    runExpression: "илэрхийлэлг ажиллуулах",
+    runExpression: "илэрхийлэлг ажиллуулах", // Auto-generated string
     // "Show caption"
-    showCaption: "Тайлбар харуулах",
+    showCaption: "Тайлбар харуулах", // Auto-generated string
     // "Icon name"
-    iconName: "Дүрсийн нэр",
+    iconName: "Дүрсийн нэр", // Auto-generated string
     // "Icon size"
-    iconSize: "Дүрсийн хэмжээ",
+    iconSize: "Дүрсийн хэмжээ", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Нарийвчлал",
+    precision: "Нарийвчлал", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Матриц чирэх бариулын талбай",
+    matrixDragHandleArea: "Матриц чирэх бариулын талбай", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Ар талын зураг",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Ар талын зураг тохирно",
+    backgroundImageFit: "Ар талын зураг тохирно", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Ар талын зургийн хавсралт",
+    backgroundImageAttachment: "Ар талын зургийн хавсралт", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Ар талын харанхуй байдал",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Боломжтой зэрэглэлийг сонгох",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Бүсүүдийн загварыг сонгох",
+    backgroundOpacity: "Ар талын харанхуй байдал", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Сонгон шалгаруулах боломж олгох",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Рейтингийн бүсийн тохиролцоо",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Бүх сонголтыг сонгосон эсэхийг харуулах текст",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Хаягийн бүсэд байрлах газар эзэмшигчийн текст",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Камераар нэвтрэх боломж олгох",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Масштабын өнгө загвар",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Хэмжээ өнгөний хэв маяг",
+    allowCameraAccess: "Камераар нэвтрэх боломж олгох", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Үнэлгээний тэмдгийн өнгөний режим",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Смайликийн өнгийн схем",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Copy display value",
+    copyDisplayValue: "Copy display value", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Баганын хугацаа",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var mnStrings = {
     "--sjs-secondary-background-500": "Хоёрдугаар зэргийн",
     // [Auto-translated] "Surface"
     surfaceScale: "Гадаргуу",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Хэрэглэгчийн интерфейс",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "UI элементүүд",
     // [Auto-translated] "Font"
     fontScale: "Фонт",
     names: {

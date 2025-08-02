@@ -512,7 +512,7 @@ export var slStrings = {
       // "reset value for question: {0}"
       question_resetValueText: "ponastavi vrednost vprašanja: {0}", // {0} question name.
       // "assign value: {1} to question: {0}"
-      question_setValueText: "dodeli vrednost: {1} vprašanju: {0}",
+      question_setValueText: "dodeli vrednost: {1} vprašanju: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "naredi stolpec {0} vprašanja {1} viden", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -636,8 +636,8 @@ export var slStrings = {
       minWidth: "Minimalna širina plošče",
       // "Maximum panel width"
       maxWidth: "Maksimalna širina plošče",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "Potrdite brisanje plošče",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Potrdi odstranitev vnosa",
       // "Entry description pattern"
       templateDescription: "Vzorec opisa plošče",
       // "Entry title pattern"
@@ -763,11 +763,11 @@ export var slStrings = {
       readOnly: "Naredi anketo samo za branje"
     },
     page: {
-      // [Auto-translated] "A page ID that is not visible to respondents."
+      // [Auto-translated] "Page name"
       name: "Ime strani",
       // "Page title"
       title: "Naslov strani",
-      // [Auto-translated] "Type a page subtitle."
+      // [Auto-translated] "Page description"
       description: "Opis strani",
       // "Make the page visible if"
       visibleIf: "Naredi stran vidno, če",
@@ -1319,8 +1319,8 @@ export var slStrings = {
     surveyvalidator: {
       // "Error message"
       text: "Sporočilo o napaki",
-      // [Auto-translated] "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Izraz za preverjanje"
+      // [Auto-translated] "Validation expression"
+      expression: "Validacijski izraz"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",
@@ -1459,15 +1459,15 @@ export var slStrings = {
       autoGenerate: "Konfiguracija nalepk merila",
       // [Auto-translated] "Slider type"
       sliderType: "Vrsta drsnika",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Najmanjša dolžina razpona",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Največja dolžina območja",
       // [Auto-translated] "Custom labels"
       customLabels: "Oznake po meri",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Oblika nalepke",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Oblika opisa orodja"
     },
     file: {
@@ -1833,7 +1833,7 @@ export var slStrings = {
       // "Font"
       editorFont: "Pisava",
       // "Opacity"
-      backgroundOpacity: "Prosojnost",
+      backgroundOpacity: "Prosojnost", // Auto-generated string
       // "Survey font family"
       "--sjs-font-family": "Pisava ankete",
       // "Background color"
@@ -3154,45 +3154,45 @@ export var slStrings = {
     // "Set value expression"
     setValueExpression: "Nastavi izraz vrednosti",
     // "Description"
-    description: "Opis",
+    description: "Opis", // Auto-generated string
     // "Logo fit"
     logoFit: "Prilagajanje logotipa",
     // "Pages"
-    pages: "Strani",
+    pages: "Strani", // Auto-generated string
     // "Questions"
-    questions: "Vprašanja",
+    questions: "Vprašanja", // Auto-generated string
     // "Triggers"
     triggers: "Sprožilci",
     // "Custom variables"
     calculatedValues: "Prilagojene spremenljivke",
     // "Survey id"
-    surveyId: "ID ankete",
+    surveyId: "ID ankete", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "ID objave ankete",
+    surveyPostId: "ID objave ankete", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "Prikaz shranjevanja podatkov ankete",
+    surveyShowDataSaving: "Prikaz shranjevanja podatkov ankete", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Poravnava opisa vprašanja",
     // "Progress bar type"
-    progressBarType: "Vrsta napredovanja",
+    progressBarType: "Vrsta napredovanja", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "Prikaz vsebine (TOC)",
     // "TOC alignment"
     tocLocation: "Poravnava vsebine",
     // "Question title pattern"
-    questionTitlePattern: "Vzorec naslova vprašanja",
+    questionTitlePattern: "Vzorec naslova vprašanja", // Auto-generated string
     // "Survey width mode"
     widthMode: "Način širine ankete",
     // "Show brand info"
-    showBrandInfo: "Prikaz informacij o blagovni znamki",
+    showBrandInfo: "Prikaz informacij o blagovni znamki", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Uporabi prikazane vrednosti v dinamičnih besedilih",
     // "Visible if"
-    visibleIf: "Vidno, če",
+    visibleIf: "Vidno, če", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "Privzeti izraz vrednosti",
     // "Required if"
-    requiredIf: "Obvezno, če",
+    requiredIf: "Obvezno, če", // Auto-generated string
     // "Reset value if"
     resetValueIf: "Ponastavi vrednost, če",
     // "Set value if"
@@ -3200,51 +3200,51 @@ export var slStrings = {
     // "Validation rules"
     validators: "Pravila za preverjanje",
     // "Bindings"
-    bindings: "Povezave",
+    bindings: "Povezave", // Auto-generated string
     // "Render as"
-    renderAs: "Upodobi kot",
+    renderAs: "Upodobi kot", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Poveži izvirne predmete",
+    attachOriginalItems: "Poveži izvirne predmete", // Auto-generated string
     // "Choices"
     choices: "Izbire",
     // "Choices by url"
-    choicesByUrl: "Izbire prek URL-ja",
+    choicesByUrl: "Izbire prek URL-ja", // Auto-generated string
     // "Currency"
-    currency: "Valuta",
+    currency: "Valuta", // Auto-generated string
     // "Cell hint"
-    cellHint: "Namig za celico",
+    cellHint: "Namig za celico", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Skupaj največje decimalne številke",
+    totalMaximumFractionDigits: "Skupaj največje decimalne številke", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Skupaj najmanjše decimalne številke",
+    totalMinimumFractionDigits: "Skupaj najmanjše decimalne številke", // Auto-generated string
     // "Columns"
-    columns: "Stolpci",
+    columns: "Stolpci", // Auto-generated string
     // "Detail elements"
-    detailElements: "Podrobnosti elementov",
+    detailElements: "Podrobnosti elementov", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "Dovoli prilagodljive akcije",
+    allowAdaptiveActions: "Dovoli prilagodljive akcije", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Privzeta vrednost vrstice",
+    defaultRowValue: "Privzeta vrednost vrstice", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Samodejna razširitev podrobnosti nove vrstice",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Omogoči počasno nalaganje izbir",
+    choicesLazyLoadEnabled: "Omogoči počasno nalaganje izbir", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Velikost strani za počasno nalaganje izbir",
+    choicesLazyLoadPageSize: "Velikost strani za počasno nalaganje izbir", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "Komponenta vhodnega polja",
+    inputFieldComponent: "Komponenta vhodnega polja", // Auto-generated string
     // "Item component"
-    itemComponent: "Komponenta predmeta",
+    itemComponent: "Komponenta predmeta", // Auto-generated string
     // "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "Izraz najmanjše vrednosti",
+    minValueExpression: "Izraz najmanjše vrednosti", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "Izraz največje vrednosti",
+    maxValueExpression: "Izraz največje vrednosti", // Auto-generated string
     // "Step"
-    step: "Korak",
+    step: "Korak", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "Predmeti za samodejni predlog",
     // "Input field width (in characters)"
@@ -3254,27 +3254,27 @@ export var slStrings = {
     // "Input value alignment"
     inputTextAlignment: "Poravnava vnosa",
     // "Elements"
-    elements: "Elementi",
+    elements: "Elementi", // Auto-generated string
     // "Content"
-    content: "Vsebina",
+    content: "Vsebina", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "Naslov navigacije",
+    navigationTitle: "Naslov navigacije", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "Opis navigacije",
+    navigationDescription: "Opis navigacije", // Auto-generated string
     // "Long tap"
-    longTap: "Dolgo tapkanje",
+    longTap: "Dolgo tapkanje", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Samodejno širjenje vhodnega polja",
     // "Enable resize handle"
     allowResize: "Omogoči ročico za spreminjanje velikosti",
     // "Accept carriage return"
-    acceptCarriageReturn: "Sprejmi prenos vrstice",
+    acceptCarriageReturn: "Sprejmi prenos vrstice", // Auto-generated string
     // "Display mode"
     displayMode: "Način prikaza",
     // "Rate type"
-    rateType: "Vrsta ocene",
+    rateType: "Vrsta ocene", // Auto-generated string
     // "Label"
-    label: "Oznaka",
+    label: "Oznaka", // Auto-generated string
     // "Content mode"
     contentMode: "Način vsebine",
     // "Image and thumbnail fit"
@@ -3282,39 +3282,39 @@ export var slStrings = {
     // "Alt text"
     altText: "Alternativno besedilo",
     // "Height"
-    height: "Višina",
+    height: "Višina", // Auto-generated string
     // "Height on smartphones"
     mobileHeight: "Višina na pametnih telefonih",
     // "Pen color"
-    penColor: "Barva peresa",
+    penColor: "Barva peresa", // Auto-generated string
     // "Background color"
     backgroundColor: "Barva ozadja",
     // "Template elements"
-    templateElements: "Elementi predloge",
+    templateElements: "Elementi predloge", // Auto-generated string
     // "Operator"
-    operator: "Operater",
+    operator: "Operater", // Auto-generated string
     // "Is variable"
-    isVariable: "Je spremenljivka",
+    isVariable: "Je spremenljivka", // Auto-generated string
     // "Run expression"
-    runExpression: "Zaženi izraz",
+    runExpression: "Zaženi izraz", // Auto-generated string
     // "Show caption"
-    showCaption: "Prikaz besedila",
+    showCaption: "Prikaz besedila", // Auto-generated string
     // "Icon name"
-    iconName: "Ime ikone",
+    iconName: "Ime ikone", // Auto-generated string
     // "Icon size"
-    iconSize: "Velikost ikone",
+    iconSize: "Velikost ikone", // Auto-generated string
     // "Precision"
-    precision: "Natančnost",
+    precision: "Natančnost", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "Območje za povleci ročaj matrične tabele",
+    matrixDragHandleArea: "Območje za povleci ročaj matrične tabele", // Auto-generated string
     // "Background image"
     backgroundImage: "Slika ozadja",
     // "Background image fit"
-    backgroundImageFit: "Prilagoditev slike ozadja",
+    backgroundImageFit: "Prilagoditev slike ozadja", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "Pripenjanje slike ozadja",
+    backgroundImageAttachment: "Pripenjanje slike ozadja", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "Prosojnost ozadja",
+    backgroundOpacity: "Prosojnost ozadja", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "Omogoči selektivno razvrščanje",
     // "Ranking area alignment"
@@ -3324,13 +3324,13 @@ export var slStrings = {
     // "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Besedilni prostor za območje razvrščanja",
     // "Allow camera access"
-    allowCameraAccess: "Dovoli dostop do kamere",
+    allowCameraAccess: "Dovoli dostop do kamere", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "Način barve ikone za oceno",
     // "Smileys color scheme"
     rateColorMode: "Barvna shema smeškotov",
     // "Copy display value"
-    copyDisplayValue: "Kopiraj prikazano vrednost",
+    copyDisplayValue: "Kopiraj prikazano vrednost", // Auto-generated string
     // "Column span"
     effectiveColSpan: "Razpon stolpca",
     // "Progress bar area width"

@@ -120,11 +120,11 @@ export var polishStrings = {
     settingsTooltip: "Otwórz ustawienia",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Ustawienia ankiety",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "Ustawienia ankiety",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Ustawienia motywu",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Ustawienia motywu",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Ustawienia twórcy",
@@ -302,8 +302,8 @@ export var polishStrings = {
     translationShowUsedStringsOnly: "Tylko używane ciągi",
     // [Auto-translated] "All Pages"
     translationShowAllPages: "Wszystkie strony",
-    // [Auto-translated] "No strings to translate. Please, change the filter."
-    translationNoStrings: "Brak ciągów do przetłumaczenia. Proszę zmienić filtr.",
+    // [Auto-translated] "No strings to translate. Please change the filter."
+    translationNoStrings: "Nie ma żadnych zobowiązań do tłumaczenia. Zmień filtr.",
     // [Auto-translated] "Export to CSV"
     translationExportToSCVButton: "Eksport do pliku CSV",
     // [Auto-translated] "Import from CSV"
@@ -425,32 +425,32 @@ export var polishStrings = {
       logicPlaceholderDescription: "Utwórz regułę, aby dostosować przepływ ankiety.",
       // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescriptionMobile: "Utwórz regułę, aby dostosować przepływ ankiety.",
-      // [Auto-translated] "Show (hide) page"
-      page_visibilityName: "Pokaż (ukryj) stronę",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Włącz (wyłącz) stronę",
+      // [Auto-translated] "Show/hide page"
+      page_visibilityName: "Pokaż/ukryj stronę",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Włącz/wyłącz stronę",
       // [Auto-translated] "Make page required"
       page_requireName: "Ustaw stronę jako wymaganą",
-      // [Auto-translated] "Show (hide) panel"
-      panel_visibilityName: "Pokaż (ukryj) panel",
-      // [Auto-translated] "Enable (disable) panel"
-      panel_enableName: "Włącz (wyłącz) panel",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Ustaw stronę jako wymaganą",
-      // [Auto-translated] "Show (hide) question"
-      question_visibilityName: "Pokaż (ukryj) pytanie",
-      // [Auto-translated] "Enable (disable) question"
-      question_enableName: "Włącz (wyłącz) pytanie",
+      // [Auto-translated] "Show/hide panel"
+      panel_visibilityName: "Pokaż/ukryj panel",
+      // [Auto-translated] "Enable/disable panel"
+      panel_enableName: "Panel włączania/wyłączania",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Ustaw panel jako wymagany",
+      // [Auto-translated] "Show/hide question"
+      question_visibilityName: "Pokaż/ukryj pytanie",
+      // [Auto-translated] "Enable/disable question"
+      question_enableName: "Włącz/wyłącz pytanie",
       // [Auto-translated] "Make question required"
       question_requireName: "Zadbaj o pytanie wymagane",
       // [Auto-translated] "Reset question value"
       question_resetValueName: "Zresetuj wartość pytania",
       // [Auto-translated] "Set question value"
       question_setValueName: "Ustawianie wartości pytania",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Pokaż (ukryj) kolumnę",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Włącz (wyłącz) kolumnę",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Pokaż/ukryj kolumnę",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Kolumna Włącz/wyłącz",
       // [Auto-translated] "Make column required"
       column_requireName: "Ustaw kolumnę jako wymaganą",
       // [Auto-translated] "Reset column value"
@@ -469,28 +469,28 @@ export var polishStrings = {
       trigger_runExpressionName: "Uruchom wyrażenie",
       // "Set \"Thank You\" page markup"
       completedHtmlOnConditionName: "Ustaw znaczniki strony \"Ankieta ukończona\"",
-      // [Auto-translated] "Make the page visible when the logic expression returns true. Otherwise keep it invisible."
-      page_visibilityDescription: "Spraw, aby strona była widoczna, gdy wyrażenie logiczne zwróci wartość true. W przeciwnym razie zachowaj go niewidocznym.",
-      // [Auto-translated] "Make the panel visible when the logic expression returns true. Otherwise keep it invisible."
-      panel_visibilityDescription: "Uczyń panel widocznym, gdy wyrażenie logiczne zwróci wartość true. W przeciwnym razie zachowaj go niewidocznym.",
-      // [Auto-translated] "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled."
-      panel_enableDescription: "Włącz panel i wszystkie znajdujące się w nim elementy, gdy wyrażenie logiczne zwróci wartość true. W przeciwnym razie pozostaw je wyłączone.",
-      // [Auto-translated] "Make the question visible when the logic expression returns true. Otherwise keep it invisible."
-      question_visibilityDescription: "Uczyń pytanie widocznym, gdy wyrażenie logiczne zwróci wartość true. W przeciwnym razie zachowaj go niewidocznym.",
-      // [Auto-translated] "Make the question enable when the logic expression returns true. Otherwise keep it disabled."
-      question_enableDescription: "Włącz pytanie, gdy wyrażenie logiczne zwróci wartość true. W przeciwnym razie pozostaw go wyłączonym.",
-      // [Auto-translated] "Question becomes required when the logic expression returns true."
-      question_requireDescription: "Pytanie staje się wymagane, gdy wyrażenie logiczne zwraca wartość true.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the page invisible."
+      page_visibilityDescription: "Ustawianie strony jako widocznej, gdy wyrażenie logiczne ma wartość true. W przeciwnym razie strona powinna być niewidoczna.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the panel invisible."
+      panel_visibilityDescription: "Ustawianie strony jako widocznej, gdy wyrażenie logiczne ma wartość true. W przeciwnym razie panel powinien pozostać niewidoczny.",
+      // [Auto-translated] "Make the panel and all elements inside it enabled when the logical expression evaluates to true. Otherwise, keep them disabled."
+      panel_enableDescription: "Włącz panel i wszystkie znajdujące się w nim elementy, gdy wyrażenie logiczne ma wartość true. W przeciwnym razie pozostaw je wyłączone.",
+      // [Auto-translated] "Make the question visible when the logical expression evaluates to true. Otherwise, keep the question invisible."
+      question_visibilityDescription: "Uwidocznij pytanie, gdy wyrażenie logiczne ma wartość true. W przeciwnym razie pytanie powinno być niewidoczne.",
+      // [Auto-translated] "Make the question enabled when the logical expression evaluates to true. Otherwise, keep the question disabled."
+      question_enableDescription: "Włącz pytanie, gdy wyrażenie logiczne ma wartość true. W przeciwnym razie pozostaw to pytanie wyłączone.",
+      // [Auto-translated] "Question becomes required when the logical expression evaluates to true."
+      question_requireDescription: "Pytanie staje się wymagane, gdy wyrażenie logiczne ma wartość true.",
       // "When the logical expression evaluates to true, the survey ends, and the respondent sees the \"Thank you\" page."
       trigger_completeDescription: "Gdy wyrażenie logiczne zwraca wartość true, ankieta zostaje wypełniona, a użytkownik końcowy zobaczy stronę \"Dziękuję\".",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question."
-      trigger_setvalueDescription: "Gdy wartości pytań, które są używane w wyrażeniu logicznym, zostaną zmienione, a wyrażenie logiczne zwróci wartość true, wartość zostanie ustawiona na wybrane pytanie.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question."
-      trigger_copyvalueDescription: "Gdy wartości pytania, które są używane w wyrażeniu logicznym, zostaną zmienione, a wyrażenie logiczne zwróci wartość true, wartość jednego wybranego pytania zostanie skopiowana do innego wybranego pytania.",
-      // [Auto-translated] "When the logic expression returns true then the survey skip to / focus the selected question."
-      trigger_skipDescription: "Gdy wyrażenie logiczne zwraca wartość true, ankieta przechodzi do / fokus wybranego pytania.",
-      // [Auto-translated] "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question"
-      trigger_runExpressionDescription: "Gdy wyrażenie logiczne zwraca wartość true, wykonywane jest wyrażenie niestandardowe. Opcjonalnie można ustawić wynik tego wyrażenia w wybranym pytaniu",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the specified value is assigned to the selected question."
+      trigger_setvalueDescription: "Gdy wartości pytania użyte w wyrażeniu logicznym zostaną zmienione, a wyrażenie ma wartość true, określona wartość zostanie przypisana do wybranego pytania.",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the value of the selected question is copied to another question."
+      trigger_copyvalueDescription: "Gdy wartości pytania użyte w wyrażeniu logicznym zostaną zmienione, a wyrażenie zostanie obliczone na wartość true, wartość wybranego pytania zostanie skopiowana do innego pytania.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey focuses/jumps to the selected question."
+      trigger_skipDescription: "Gdy wyrażenie logiczne ma wartość true, ankieta skupia się na wybranym pytaniu/przeskakuje do niego.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey evaluates another expression. Optionally, the result of the latter expression can be assigned as a value to the selected question"
+      trigger_runExpressionDescription: "Gdy wyrażenie logiczne ma wartość true, ankieta oblicza wartość innego wyrażenia. Opcjonalnie wynik tego ostatniego wyrażenia może zostać przypisany jako wartość do wybranego pytania",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Jeśli wyrażenie logiczne zwróci wartość true, domyślny tekst strony \"Dziękuję\" zostanie zmieniony na podany.",
       // "When expression: '{0}' returns true"
@@ -512,7 +512,7 @@ export var polishStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Zresetuj wartość dla pytania: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Przypisz wartość: {1} do pytania: {0}",
+      question_setValueText: "Przypisz wartość: {1} do pytania: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Uwidocznienie {0}  {1}pytania", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var polishStrings = {
       column_resetValueText: "Zresetuj wartość komórki dla kolumny: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Przypisz wartość komórki: {1} do kolumny: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Wyrażenie, którego wynik zostanie przypisany do pytania docelowego.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Wyrażenie, którego wynik zostanie przypisany do pytania docelowego.",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Ankieta zostaje zakończona",
       // [Auto-translated] "set into question: {0} value {1}"
@@ -561,10 +561,10 @@ export var polishStrings = {
       selectedActionCaption: "Wybierz akcję...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Wyrażenie logiczne jest puste lub nieprawidłowe. Proszę to poprawić.",
-      // [Auto-translated] "Please, add at least one action."
+      // [Auto-translated] "Please add at least one action."
       noActionError: "Dodaj co najmniej jedną akcję.",
-      // [Auto-translated] "Please, fix problems in your action(s)."
-      actionInvalid: "Proszę, napraw problemy w swoich działaniach.",
+      // [Auto-translated] "Please fix issues in your action(s)."
+      actionInvalid: "Rozwiąż problemy z działaniami.",
       // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "Reguły logiczne są niekompletne",
       // [Auto-translated] "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?"
@@ -590,25 +590,25 @@ export var polishStrings = {
       requiredIf: "Ustaw panel jako wymagany, jeśli",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Kolejność pytań w panelu",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Strona nadrzędna",
+      // [Auto-translated] "Move the panel to page"
+      page: "Przenoszenie panelu na stronę",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Wyświetlanie panelu w nowym wierszu",
-      // [Auto-translated] "Panel expand state"
-      state: "Stan zwijania panelu",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Szerokość panelu w linii",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Stan zwinięcia panelu",
+      // [Auto-translated] "Inline panel width"
+      width: "Szerokość panelu w wierszu",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Minimalna szerokość panelu",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Maksymalna szerokość panelu",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "Numeruj ten panel"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Szerokość efektywna, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Szerokość tytułu pytania, px"
     },
     paneldynamic: {
@@ -636,37 +636,37 @@ export var polishStrings = {
       minWidth: "Minimalna szerokość panelu",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Maksymalna szerokość panelu",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Potwierdź usunięcie panelu",
-      // [Auto-translated] "Description template"
-      templateDescription: "Wzorzec opisu panelu",
-      // [Auto-translated] "Title template"
-      templateTitle: "Wzorzec tytułu panelu",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "Pusty tekst panelu",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Potwierdź usunięcie wpisu",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Wzorzec opisu wpisu",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Wzorzec tytułu wpisu",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "Pusty tekst w panelu",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Wzorzec tytułu tabulatora",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Symbol zastępczy tytułu tabulatora",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Uwidocznij pojedynczy panel, jeśli",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Uwidocznij pojedynczy wpis, jeśli",
       // [Auto-translated] "Number the panel"
       showNumber: "Numerowanie panelu",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Wyrównanie tytułu panelu",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Wyrównanie opisu panelu",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "Wyrównanie tytułu pytania",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Szerokość tytułu pytania",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Nowa lokalizacja panelu",
-      // [Auto-translated] "Show progress bar"
-      showRangeInProgress: "Pokazywanie paska postępu",
-      // [Auto-translated] "Key column"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Nowa lokalizacja wejścia",
+      // [Auto-translated] "Show the progress bar"
+      showRangeInProgress: "Wyświetlanie paska postępu",
+      // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
     question: {
@@ -682,8 +682,8 @@ export var polishStrings = {
       visibleIf: "Uwidocznij pytanie, jeśli",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Zadbaj o to, aby pytanie było wymagane, jeśli",
-      // [Auto-translated] "Parent page"
-      page: "Strona nadrzędna",
+      // [Auto-translated] "Move the question to page"
+      page: "Przenoszenie pytania na stronę",
       // [Auto-translated] "Question box collapse state"
       state: "Stan zwinięcia pola pytania",
       // [Auto-translated] "Number this question"
@@ -694,7 +694,7 @@ export var polishStrings = {
       descriptionLocation: "Wyrównanie opisu pytania",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Wyrównanie komunikatu o błędzie",
-      // [Auto-translated] "Add indents"
+      // [Auto-translated] "Increase the inner indent"
       indent: "Zwiększ wcięcie wewnętrzne",
       // [Auto-translated] "Inline question width"
       width: "Szerokość pytania w tekście",
@@ -702,28 +702,28 @@ export var polishStrings = {
       minWidth: "Minimalna szerokość pytania",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Maksymalna szerokość pytania",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "Aktualizowanie wartości pola wejściowego"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "Szerokość obszaru podpisu",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "Wysokość obszaru podpisu",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Automatyczne skalowanie obszaru podpisu",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Pokazywanie symbolu zastępczego",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Pokazywanie symbolu zastępczego w obszarze podpisu",
       // [Auto-translated] "Placeholder text"
       placeholder: "Tekst zastępczy",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Tekst zastępczy w trybie tylko do odczytu lub podglądu",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "Pokaż przycisk Wyczyść w obszarze podpisu",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Minimalna szerokość pisaka",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Maksymalna szerokość pisaka",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "Pokazywanie przycisku Wyczyść w obszarze podpisu",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Minimalna szerokość obrysu",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Maksymalna szerokość obrysu",
       // [Auto-translated] "Stroke color"
       penColor: "Kolor obrysu"
     },
@@ -756,26 +756,26 @@ export var polishStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Tytuł",
+      // [Auto-translated] "Survey title"
+      title: "Tytuł ankiety",
       // [Auto-translated] "Survey description"
       description: "Opis ankiety",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "Ustawianie ankiety jako tylko do odczytu"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Nazwa strony",
-      // [Auto-translated] "Title"
-      title: "Tytuł",
+      // [Auto-translated] "Page title"
+      title: "Tytuł strony",
       // [Auto-translated] "Page description"
       description: "Opis strony",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Spraw, aby strona była widoczna, jeśli",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Ustaw stronę jako wymaganą, jeśli",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Limit czasu na zakończenie strony (w sekundach)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Limit czasu na ukończenie strony",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Kolejność pytań na stronie"
     },
@@ -853,8 +853,8 @@ export var polishStrings = {
     defaultDisplayValue: "Domyślna wartość wyświetlana dla tekstów dynamicznych",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Wyrównanie etykiety",
-    // [Auto-translated] "Input field size (in characters)"
-    size: "Rozmiar pola wejściowego (w znakach)",
+    // [Auto-translated] "Input field width (in characters)"
+    size: "Szerokość pola wejściowego (w znakach)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Wyrównanie komunikatu o błędzie komórki",
     // [Auto-translated] "Enabled"
@@ -935,8 +935,8 @@ export var polishStrings = {
     fastEntryChoicesCountError: "Ogranicz liczbę przedmiotów od {0} do {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Podaj co najmniej {0} przedmiotów",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Dane można ustawić w następującym formacie:\nwartość1|tekst\nwartość2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Wprowadź listę opcji wyboru i ich identyfikatory w następującym formacie:\n\nid|opcja\n\nIdentyfikator opcji wyboru nie jest widoczny dla respondentów i może być używany w regułach warunkowych.",
     // "Form Entry"
     formEntry: "Formularz",
     // "Test the service"
@@ -945,11 +945,11 @@ export var polishStrings = {
     itemSelectorEmpty: "Proszę wybrać element",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "Wybierz akcję",
-    // [Auto-translated] "Select question..."
+    // [Auto-translated] "Select a question..."
     conditionSelectQuestion: "Wybierz pytanie...",
-    // [Auto-translated] "Select page..."
+    // [Auto-translated] "Select a page..."
     conditionSelectPage: "Wybierz stronę...",
-    // [Auto-translated] "Select panel..."
+    // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Wybierz panel...",
     // [Auto-translated] "Please enter/select the value"
     conditionValueQuestionTitle: "Wpisz/wybierz wartość",
@@ -965,10 +965,10 @@ export var polishStrings = {
     assistantTitle: "Available questions:",
     // [Auto-translated] "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Powinna istnieć co najmniej jedna kolumna lub wiersz",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Podgląd odpowiedzi przed wysłaniem ankiety",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Ustaw przez ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Przejrzyj przed przesłaniem",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Włączone przez warunek",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Resetować",
     // "Please enter a value"
@@ -979,10 +979,10 @@ export var polishStrings = {
     propertyNameIsNotUnique: "Podaj unikalną nazwę",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Nie używaj zastrzeżonych słów: \"element\", \"wybór\", \"panel\", \"wiersz\".",
-    // [Auto-translated] "No items have been added yet"
-    listIsEmpty: "Nie dodano jeszcze żadnych przedmiotów",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Nie dodano jeszcze żadnych opcji",
+    // [Auto-translated] "You don't have any items yet"
+    listIsEmpty: "Nie masz jeszcze żadnych przedmiotów",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Nie masz jeszcze żadnego wyboru",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Nie masz jeszcze żadnych kolumn",
     // [Auto-translated] "You don't have layout columns yet"
@@ -999,8 +999,8 @@ export var polishStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Nie masz jeszcze żadnych linków",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Nie masz jeszcze żadnych stron",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Dodaj wybór",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Dodaj nowy wybór",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Dodaj nową kolumnę",
     // [Auto-translated] "Add new row"
@@ -1023,8 +1023,8 @@ export var polishStrings = {
     text: "Etykieta",
     // [Auto-translated] "Row ID"
     rowid: "Identyfikator wiersza",
-    // [Auto-translated] "Image or video URL"
-    imageLink: "Adres URL obrazu lub filmu",
+    // [Auto-translated] "Image or video file URL"
+    imageLink: "Adres URL obrazu lub pliku wideo",
     // "Edit column: {0}"
     columnEdit: "Edit column: {0}",
     // "Edit item: {0}"
@@ -1034,17 +1034,17 @@ export var polishStrings = {
     // "Path to data"
     path: "Path",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "Adres URL usługi sieci Web",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Pobierz wartości z następującego pola JSON:"
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Pobierz wartość do przechowywania z następującej właściwości"
     },
     // "Get value to display from the following property"
     titleName: "Title name",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Pobierz adresy URL obrazów z następującego pola JSON:",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Zezwalaj na pustą odpowiedź",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Pobierz adresy URL plików z następującej właściwości",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Zaakceptuj pustą odpowiedź",
     // [Auto-translated] "Title"
     titlePlaceholder: "Tytuł",
     // [Auto-translated] "Survey Title"
@@ -1065,24 +1065,24 @@ export var polishStrings = {
     showOtherItem: "Czy możliwa własna odpowiedź",
     // "Rename the \"Other\" option"
     otherText: "Other item text",
-    // [Auto-translated] "Allow the None option"
-    showNoneItem: "Zezwalaj na opcję Brak",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Zezwól na opcję Odmów odpowiedzi",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Zezwól na opcję Nie wiem",
-    // [Auto-translated] "None option text"
-    noneText: "Tekst opcji Brak",
-    // [Auto-translated] "Allow the Select All option"
-    showSelectAllItem: "Zezwalaj na opcję Zaznacz wszystko",
-    // [Auto-translated] "Select All option text"
-    selectAllText: "Zaznacz tekst opcji Wszystkie",
+    // [Auto-translated] "Enable the \"None\" option"
+    showNoneItem: "Włącz opcję \"Brak\"",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Włącz opcję \"Nie odpowiadaj\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Włącz opcję \"Nie wiem\"",
+    // [Auto-translated] "Rename the \"None\" option"
+    noneText: "Zmień nazwę opcji \"Brak\"",
+    // [Auto-translated] "Enable the \"Select All\" option"
+    showSelectAllItem: "Włącz opcję \"Zaznacz wszystko\"",
+    // [Auto-translated] "Rename the \"Select All\" option"
+    selectAllText: "Zmień nazwę opcji \"Zaznacz wszystko\"",
     // [Auto-translated] "Minimum value for auto-generated items"
     choicesMin: "Minimalna wartość dla automatycznie wygenerowanych elementów",
     // [Auto-translated] "Maximum value for auto-generated items"
     choicesMax: "Maksymalna wartość dla automatycznie wygenerowanych elementów",
-    // [Auto-translated] "Step for auto-generated items"
-    choicesStep: "Krok dla automatycznie wygenerowanych elementów",
+    // [Auto-translated] "Step value for auto-generated items"
+    choicesStep: "Wartość kroku dla elementów generowanych automatycznie",
     // "Name"
     name: "Nazwa",
     // "Title"
@@ -1103,8 +1103,8 @@ export var polishStrings = {
     markRequired: "Oznacz jako wymagane",
     // [Auto-translated] "Remove the required mark"
     removeRequiredMark: "Usuń wymagany znacznik",
-    // [Auto-translated] "Require answer for all rows"
-    eachRowRequired: "Wymagaj odpowiedzi dla wszystkich wierszy",
+    // [Auto-translated] "Require an answer in each row"
+    eachRowRequired: "Wymagaj odpowiedzi w każdym wierszu",
     // [Auto-translated] "Prevent duplicate responses in rows"
     eachRowUnique: "Zapobieganie zduplikowanym odpowiedziom w wierszach",
     // "Error message for required questions"
@@ -1127,8 +1127,8 @@ export var polishStrings = {
     rowCount: "Row count",
     // [Auto-translated] "Columns layout"
     columnLayout: "Układ kolumn",
-    // [Auto-translated] "Add Row button location"
-    addRowButtonLocation: "Lokalizacja przycisku Dodaj wiersz",
+    // [Auto-translated] "\"Add Row\" button alignment"
+    addRowButtonLocation: "Wyrównanie przycisku \"Dodaj wiersz\"",
     // [Auto-translated] "Transpose rows to columns"
     transposeData: "Transponowanie wierszy do kolumn",
     // "\"Add Row\" button text"
@@ -1137,12 +1137,12 @@ export var polishStrings = {
     removeRowText: "Remove row button text",
     // [Auto-translated] "Input field title pattern"
     singleInputTitleTemplate: "Wzorzec tytułu pola wejściowego",
-    // [Auto-translated] "Minimum rate value"
-    rateMin: "Minimalna wartość stawki",
-    // [Auto-translated] "Maximum rate value"
-    rateMax: "Maksymalna wartość stawki",
-    // [Auto-translated] "Rate step"
-    rateStep: "Krok stawki",
+    // [Auto-translated] "Minimum rating value"
+    rateMin: "Minimalna wartość oceny",
+    // [Auto-translated] "Maximum rating value"
+    rateMax: "Maksymalna wartość oceny",
+    // [Auto-translated] "Step value"
+    rateStep: "Wartość kroku",
     // "Minimum value label"
     minRateDescription: "Opis najniższej oceny",
     // "Maximum value label"
@@ -1159,8 +1159,8 @@ export var polishStrings = {
     surveyEditorTitle: "Edytuj ankietę",
     // "Edit: {0}"
     qEditorTitle: "Edytuj: {0}",
-    // [Auto-translated] "Maximum length (in characters)"
-    maxLength: "Maksymalna długość (w znakach)",
+    // [Auto-translated] "Maximum character limit"
+    maxLength: "Maksymalny limit znaków",
     // [Auto-translated] "Build"
     buildExpression: "Budować",
     // [Auto-translated] "Edit"
@@ -1187,8 +1187,8 @@ export var polishStrings = {
     gotoName: "Pytanie, do którego należy przejść",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Reguła jest nieprawidłowa",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Uwzględnij w wynikach ankiety",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Dodaj do wyników ankiety",
     // "Make the title and description visible"
     showTitle: "Pokaż/ukryj tytuł",
     // [Auto-translated] "Expand/collapse title"
@@ -1219,10 +1219,10 @@ export var polishStrings = {
     pageNextText: "Page next button text",
     // "\"Complete Survey\" button text"
     completeText: "Complete button text",
-    // [Auto-translated] "Preview Answers button text"
-    previewText: "Tekst przycisku Podgląd odpowiedzi",
-    // [Auto-translated] "Edit Answer button text"
-    editText: "Tekst przycisku Edytuj odpowiedź",
+    // [Auto-translated] "\"Review Answers\" button text"
+    previewText: "Tekst przycisku \"Przejrzyj odpowiedzi\"",
+    // [Auto-translated] "\"Edit Answer\" button text"
+    editText: "Tekst przycisku \"Edytuj odpowiedź\"",
     // "\"Start Survey\" button text"
     startSurveyText: "Start button text",
     // "Show navigation buttons"
@@ -1283,24 +1283,24 @@ export var polishStrings = {
     html: "Znaczniki HTML",
     // [Auto-translated] "Answer"
     setValue: "Odpowiedź",
-    // [Auto-translated] "Image format"
-    dataFormat: "Format obrazu",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Zezwalaj na dodawanie wierszy",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Zezwalaj na usuwanie wierszy",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Zezwalaj na przeciąganie i upuszczanie wierszy",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Nie ma zastosowania, jeśli określisz dokładną szerokość lub wysokość obrazu.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Minimalna szerokość obrazu",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Maksymalna szerokość obrazu",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Minimalna wysokość obrazu",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Maksymalna wysokość obrazu",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Format przechowywania",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Włącz dodawanie wierszy",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Włącz usuwanie wierszy",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Włącz zmianę kolejności wierszy",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Nie ma zastosowania, jeśli określisz dokładną szerokość lub wysokość obszaru wyświetlania.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Minimalna szerokość obszaru wyświetlania",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Maksymalna szerokość obszaru wyświetlania",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Minimalna wysokość obszaru wyświetlania",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Maksymalna wysokość obszaru wyświetlania",
     // [Auto-translated] "Minimum value"
     minValue: "Wartość minimalna",
     // [Auto-translated] "Maximum value"
@@ -1323,30 +1323,30 @@ export var polishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Wyrażenie sprawdzania poprawności"
     },
-    // [Auto-translated] "Total row text"
-    totalText: "Tekst wiersza sumy",
-    // [Auto-translated] "Total type"
-    totalType: "Typ sumy",
-    // [Auto-translated] "Total expression"
-    totalExpression: "Wyrażenie całkowite",
-    // [Auto-translated] "Total value display style"
-    totalDisplayStyle: "Styl wyświetlania łącznej wartości",
+    // [Auto-translated] "Total row header"
+    totalText: "Nagłówek wiersza sumy",
+    // [Auto-translated] "Aggregation method"
+    totalType: "Metoda agregacji",
+    // [Auto-translated] "Total value expression"
+    totalExpression: "Wyrażenie wartości sumy",
+    // [Auto-translated] "Total value display format"
+    totalDisplayStyle: "Format wyświetlania wartości całkowitej",
     // [Auto-translated] "Currency"
     totalCurrency: "Waluta",
     // [Auto-translated] "Formatted string"
     totalFormat: "Sformatowany ciąg znaków",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logo (adres URL lub ciąg znaków zakodowany w formacie base64)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Struktura badania",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Maksymalna długość odpowiedzi (w znakach)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Maksymalna długość komentarza (w znakach)",
+    // [Auto-translated] "Survey logo"
+    logo: "Logo ankiety",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Układ ankiety",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Ogranicz długość odpowiedzi",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Ogranicz długość komentarza",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Wysokość obszaru komentarza (w wierszach)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "W razie potrzeby automatycznie rozwiń obszar komentarza",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Automatyczne rozwijanie obszarów tekstowych",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Zezwalaj użytkownikom na zmianę rozmiaru obszarów tekstu",
     // "Update input field values"
@@ -1359,16 +1359,16 @@ export var polishStrings = {
     checkErrorsMode: "Sprawdzanie poprawności uruchamiania",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Weryfikowanie pustych pól w przypadku utraty fokusu",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Przejdź do adresu URL",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Dynamiczny adres URL",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Przekieruj do linku zewnętrznego po przesłaniu",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Dynamiczny link zewnętrzny",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Znaczniki, aby pokazać, czy użytkownik już wypełnił tę ankietę",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Znaczniki strony Survey Complete",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Znaczniki strony Dynamic Survey Complete",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "Znacznik strony \"Dziękujemy\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Dynamiczne znaczniki strony z podziękowaniem",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Znaczniki do pokazania podczas ładowania modelu ankiety",
     // [Auto-translated] "Comment area text"
@@ -1383,8 +1383,8 @@ export var polishStrings = {
     allowClear: "Pokaż przycisk Wyczyść",
     // [Auto-translated] "Search Mode"
     searchMode: "Tryb wyszukiwania",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Styl wyświetlania wartości",
+    // [Auto-translated] "Display format"
+    displayStyle: "Format wyświetlania",
     // [Auto-translated] "Formatted string"
     format: "Sformatowany ciąg znaków",
     // [Auto-translated] "Maximum fractional digits"
@@ -1393,18 +1393,18 @@ export var polishStrings = {
     minimumFractionDigits: "Minimalne cyfry ułamkowe",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Wyświetlanie separatorów grupujących",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Zezwalaj na wiele plików",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Podgląd obrazów",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Włącz przesyłanie wielu plików",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Podgląd przesłanych obrazów",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Akceptowane typy plików",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Poczekaj na zakończenie przesyłania",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Potwierdź usunięcie pliku",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Położenie panelu szczegółów",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Wyrównanie szczegółów wiersza",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Minimalna liczba wierszy",
     // [Auto-translated] "Maximum row count"
@@ -1413,30 +1413,30 @@ export var polishStrings = {
     confirmDelete: "Potwierdź usunięcie wiersza",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Komunikat potwierdzenia",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Początkowa liczba paneli",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Minimalna liczba paneli",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Maksymalna liczba paneli",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Stan rozwinięcia panelu wewnętrznego",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Poprzednia etykietka przycisku panelu",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Przycisk Następny panel — etykietka narzędzia",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Usuń położenie przycisku panelu",
-    // [Auto-translated] "Hide the question if there are no rows"
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Początkowa liczba wpisów",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Minimalna liczba zgłoszeń",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Maksymalna liczba wpisów",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Początkowy stan wpisu",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Tekst przycisku \"Poprzedni wpis\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Tekst przycisku \"Następny wpis\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Wyrównanie przycisku \"Usuń wpis\"",
+    // [Auto-translated] "Hide the question if it has no rows"
     hideIfRowsEmpty: "Ukryj pytanie, jeśli nie ma wierszy",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Ukryj kolumny, jeśli nie ma wierszy",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Niestandardowe wartości stawek",
-    // [Auto-translated] "Rate count"
-    rateCount: "Liczba stawek",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Jak określić wartości stawek?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Niestandardowe wartości ocen",
+    // [Auto-translated] "Rating count"
+    rateCount: "Liczba ocen",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Konfiguracja oceny",
     slider: {
       // [Auto-translated] "Min value"
       min: "Wartość minimalna",
@@ -1460,9 +1460,9 @@ export var polishStrings = {
       autoGenerate: "Konfiguracja etykiet skalowania",
       // [Auto-translated] "Slider type"
       sliderType: "Typ suwaka",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Minimalna długość zakresu",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Maksymalna długość zasięgu",
       // [Auto-translated] "Custom labels"
       customLabels: "Etykiety niestandardowe",
@@ -1472,13 +1472,13 @@ export var polishStrings = {
       tooltipFormat: "Format podpowiedzi"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Wysokość obrazu",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Szerokość obrazu"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Ukryj pytanie, jeśli nie zawiera opcji wyboru",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Ukryj pytanie, jeśli nie ma opcji",
     // "Minimum width"
     minWidth: "Minimalna szerokość (w wartościach akceptowanych przez CSS)",
     // "Maximum width"
@@ -1489,10 +1489,10 @@ export var polishStrings = {
     showHeader: "Pokaż nagłówki kolumn",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Pokaż poziomy pasek przewijania",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Minimalna szerokość kolumny (w wartościach akceptowanych przez CSS)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Szerokość nagłówka wiersza (w wartościach akceptowanych przez CSS)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Minimalna szerokość kolumny",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Szerokość nagłówka wiersza",
     // "Value to store when \"True\" is selected"
     valueTrue: "\"Prawdziwa\" wartość",
     // "Value to store when \"False\" is selected"
@@ -1505,40 +1505,40 @@ export var polishStrings = {
     otherErrorText: "Komunikat o błędzie \"Pusty komentarz\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "Komunikat o błędzie \"Nieunikalna wartość klucza\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Minimalna wybrana opcja",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Maksymalna liczba wybranych opcji",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Szerokość logo (w wartościach akceptowanych przez CSS)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Wysokość logo (w wartościach akceptowanych przez CSS)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Minimalne opcje do wyboru",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Maksymalna liczba wyborów do wyboru",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Szerokość logo",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Wysokość logo",
     // "Read-only"
     readOnly: "Tylko do odczytu",
-    // [Auto-translated] "Editable if"
-    enableIf: "Edytowalne, jeśli",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Wyłącz tryb tylko do odczytu, jeśli",
     // "\"No rows\" message"
     noRowsText: "Komunikat \"Brak wierszy\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Oddzielne opcje specjalne (Brak, Inne, Wybierz wszystko)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Oddzielne wybory specjalne",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Kopiowanie opcji z następującego pytania",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Które opcje skopiować?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Które opcje wyboru należy skopiować",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Użyj wartości z poniższego pytania typu matrix, kolumna lub pytanie panelowe jako identyfikatory wyborów",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Użyj wartości z poniższego pytania macierzowego, kolumnowego lub panelowego jako tekstów wyboru",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Wyświetlanie tytułów stron na pasku postępu",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Wyświetlanie numerów stron na pasku postępu",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Pokaż obszar komentarza",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Symbol zastępczy obszaru komentarza",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Wyświetlanie opisów szybkości jako wartości ekstremalnych",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Dodawanie pola komentarza",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Tekst zastępczy dla pola komentarza",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Pokazywanie etykiet jako wartości skrajnych",
     // [Auto-translated] "Row order"
     rowOrder: "Kolejność wierszy",
     // [Auto-translated] "Column layout"
@@ -1571,8 +1571,8 @@ export var polishStrings = {
       // "Alt text"
       text: "Tekst alternatywny"
     },
-    // [Auto-translated] "Logo position"
-    logoPosition: "Pozycja logo",
+    // [Auto-translated] "Logo alignment"
+    logoPosition: "Wyrównanie logo",
     // [Auto-translated] "Add logo..."
     addLogo: "Dodaj logo...",
     // [Auto-translated] "Change logo..."
@@ -1591,18 +1591,18 @@ export var polishStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Tryb podglądu",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "Włączanie układu siatki",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Kolumny układu siatki",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Kolumny siatki",
     // [Auto-translated] "Mask settings"
     maskSettings: "Ustawienia maski",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Wyrównanie komunikatu o błędzie rozwijania wiersza",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Wyrównanie komunikatu o błędzie szczegółów wiersza",
     // Creator tabs
     tabs: {
       panel: {
-        // [Auto-translated] "Layout"
+        // [Auto-translated] "Panel Layout"
         layout: "Układ panelu"
       },
       // "General"
@@ -1660,8 +1660,8 @@ export var polishStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Ustawienia maski wprowadzania",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Układ",
+        // [Auto-translated] "Panel Layout"
+        panel: "Układ panelu",
         // [Auto-translated] "Layout"
         question: "Układ",
         // [Auto-translated] "Layout"
@@ -1671,12 +1671,12 @@ export var polishStrings = {
       data: "Dane",
       // [Auto-translated] "Validation"
       validation: "Walidacja",
-      // [Auto-translated] "Cell Texts"
-      cells: "Teksty komórek",
-      // [Auto-translated] "Survey Complete"
-      showOnCompleted: "Ankieta zakończona",
-      // [Auto-translated] "Logo in Survey Title"
-      logo: "Logo w tytule ankiety",
+      // [Auto-translated] "Individual Cell Texts"
+      cells: "Teksty poszczególnych komórek",
+      // [Auto-translated] "\"Thank You\" Page"
+      showOnCompleted: "Strona z podziękowaniami",
+      // [Auto-translated] "Logo in the Survey Header"
+      logo: "Logo w nagłówku ankiety",
       // [Auto-translated] "Slider"
       slider: "Suwak",
       // [Auto-translated] "Expression"
@@ -1691,7 +1691,7 @@ export var polishStrings = {
       appearance: "Wygląd",
       // [Auto-translated] "Accent colors"
       accentColors: "Akcenty kolorystyczne",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "Tło powierzchni",
       // [Auto-translated] "Scaling"
       scaling: "Skalowanie",
@@ -1702,16 +1702,16 @@ export var polishStrings = {
     editProperty: "Edit property '{0}'",
     // "Items"
     items: "Items",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Wybory są widoczne, jeśli",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Wybory można wybrać, jeśli:",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Kolumny są widoczne, jeśli",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Wiersze są widoczne, jeśli",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Dodawanie wcięć wewnętrznych",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Uwidocznij wybory, jeśli",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Dokonaj wyboru opcji, jeśli",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Uwidocznij kolumny, jeśli",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Uwidocznij wiersze, jeśli",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Zwiększ wcięcie wewnętrzne",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Domyślnie używaj odpowiedzi z ostatniego wpisu",
     // "Please enter a value."
@@ -1752,36 +1752,36 @@ export var polishStrings = {
     triggerRunExpressionEmpty: "Wpisz poprawne wyrażenie",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Wpisz wyrażenie tutaj...",
-    // [Auto-translated] "No file choosen"
+    // [Auto-translated] "No file chosen"
     noFile: "Nie wybrano pliku",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Wyczyść wartość, jeśli pytanie zostanie ukryte",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Nazwa właściwości Value",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Włącz wyszukiwanie",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Wyczyść ukryte wartości pytań",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Przechowuj wartości w następującej właściwości",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Włącz wyszukiwanie podczas pisania",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Ukrywanie zaznaczonych elementów",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Zamknij listę rozwijaną po dokonaniu wyboru",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Wyrównanie w pionie",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Alternatywne wiersze",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Kolumny są widoczne, jeśli",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Wiersze są widoczne, jeśli",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Symbol zastępczy obszaru komentarza",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Tekst zastępczy pliku",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Tekst zastępczy zdjęcia",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Tekst zastępczy pliku lub zdjęcia",
-    // [Auto-translated] "Rate type"
-    rateType: "Rodzaj stawki",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Zwiń listę rozwijaną po wybraniu",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Wyrównanie pionowe w komórkach",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Alternatywne kolory wierszy",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Uwidocznij kolumny, jeśli",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Uwidocznij wiersze, jeśli",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Tekst zastępczy dla pola komentarza",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Tekst zastępczy dla pliku lokalnego",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Tekst zastępczy dla aparatu",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Tekst zastępczy dla pliku lokalnego lub kamery",
+    // [Auto-translated] "Rating icon"
+    rateType: "Ikona oceny",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Przykład: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1805,46 +1805,46 @@ export var polishStrings = {
       themeName: "Kompozycja",
       // [Auto-translated] "Question appearance"
       isPanelless: "Wygląd pytania",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "Tło i promień narożnika",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "Tło i promień narożnika",
       // [Auto-translated] "Accent color"
       primaryColor: "Kolor akcentujący",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Krycie tła panelu",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Nieprzezroczystość tła pytania",
-      // [Auto-translated] "Font size"
-      fontSize: "Rozmiar czcionki",
-      // [Auto-translated] "Scale"
-      scale: "Skala",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Przezroczystość panelu i pola pytania",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Przezroczystość elementu wejściowego",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Rozmiar czcionki ankiety",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Współczynnik skali ankiety",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Promień naroża",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Tryb zaawansowany",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Czcionka tytułu",
-      // [Auto-translated] "Page description font"
+      // [Auto-translated] "Description font"
       pageDescription: "Czcionka opisu",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Title font"
       questionTitle: "Czcionka tytułu",
-      // [Auto-translated] "Question description font"
+      // [Auto-translated] "Description font"
       questionDescription: "Czcionka opisu",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Font"
       editorFont: "Czcionka",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Nieprzezroczystość",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Rodzina czcionek",
+      backgroundOpacity: "Nieprzezroczystość", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Rodzina czcionek ankietowych",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Kolor tła",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Tło akcentu",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Akcent na pierwszym planie",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Komunikaty o błędach",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Akcentujące kolory tła",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Akcentujące kolory pierwszego planu",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Kolory komunikatów o błędach",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Efekty cienia",
       // [Auto-translated] "Shadow effects"
@@ -1855,8 +1855,8 @@ export var polishStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Widok",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Pozycja logo",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Wyrównanie logo",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Czcionka tytułu ankiety",
       // [Auto-translated] "Survey description font"
@@ -1877,12 +1877,12 @@ export var polishStrings = {
       backgroundImageOpacity: "Nieprzezroczystość",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Zachodzić na siebie",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Pozycja logo",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Pozycja tytułu",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Opis pozycja"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Wyrównanie logo",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Wyrównanie tytułu ankiety",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Wyrównanie opisu ankiety"
     }
   },
   // Property values
@@ -1891,12 +1891,12 @@ export var polishStrings = {
     "true": "prawdziwy",
     // [Auto-translated] "false"
     "false": "fałszywy",
-    // [Auto-translated] "Local files"
-    file: "Pliki lokalne",
+    // [Auto-translated] "Local file"
+    file: "Plik lokalny",
     // [Auto-translated] "Camera"
     camera: "Kamera",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Pliki lokalne lub aparat",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Plik lokalny lub kamera",
     // [Auto-translated] "Inherit"
     inherit: "Odziedziczyć",
     // [Auto-translated] "Visible"
@@ -2013,11 +2013,11 @@ export var polishStrings = {
     next: "Następny",
     // [Auto-translated] "Last"
     last: "Ostatni",
-    // [Auto-translated] "When the survey is completed"
-    onComplete: "Po zakończeniu ankiety",
-    // [Auto-translated] "When the question becomes hidden"
-    onHidden: "Gdy pytanie zostanie ukryte",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
+    // [Auto-translated] "Upon survey completion"
+    onComplete: "Po wypełnieniu ankiety",
+    // [Auto-translated] "When question gets hidden"
+    onHidden: "Gdy pytanie staje się ukryte",
+    // [Auto-translated] "When question or its panel/page gets hidden"
     onHiddenContainer: "Gdy pytanie lub jego panel/strona zostaną ukryte",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
@@ -2206,9 +2206,9 @@ export var polishStrings = {
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Oryginalna struktura",
-      // [Auto-translated] "All questions on a single page"
+      // [Auto-translated] "Show all questions on one page"
       singlePage: "Pokaż wszystkie pytania na jednej stronie",
-      // [Auto-translated] "Each question on an individual page"
+      // [Auto-translated] "Show single question per page"
       questionPerPage: "Pokaż pojedyncze pytanie na stronie",
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Pokaż pojedyncze pole wejściowe na stronę"
@@ -2233,18 +2233,18 @@ export var polishStrings = {
     correctQuestions: "Prawidłowe odpowiedzi",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Ukończone strony (interfejs użytkownika)",
-    // [Auto-translated] "Under the input"
-    underInput: "Pod wejściem",
-    // [Auto-translated] "Under the title"
-    underTitle: "Pod tytułem",
-    // [Auto-translated] "On blur"
-    onBlur: "Na rozmyciu",
+    // [Auto-translated] "Under the input field"
+    underInput: "W polu wprowadzania danych",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Pod tytułem pytania",
+    // [Auto-translated] "On lost focus"
+    onBlur: "O utracie koncentracji",
     // [Auto-translated] "While typing"
     onTyping: "Podczas pisania",
     // [Auto-translated] "Under the row"
     underRow: "Pod rzędem",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Pod wierszem widoczny jest tylko jeden panel",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Pod wierszem wyświetl tylko jedną sekcję",
     // "Auto"
     auto: "Automatycznie",
     showNavigationButtons: {
@@ -2256,16 +2256,16 @@ export var polishStrings = {
       combined: "Obie"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Zależy od układu macierzy"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Na podstawie układu macierzy"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Użytkownicy nie mogą rozwijać ani zwijać paneli",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Wszystkie panele są zwinięte",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Wszystkie panele są rozszerzone",
+      // [Auto-translated] "Locked"
+      default: "Zablokowany",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Zwiń wszystko",
+      // [Auto-translated] "Expand all"
+      expanded: "Rozwiń wszystko",
       // [Auto-translated] "First expanded"
       firstExpanded: "Pierwsze rozszerzone"
     },
@@ -2302,10 +2302,10 @@ export var polishStrings = {
       colored: "Kolorowe"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Stworzyć",
-      // [Auto-translated] "Enter manually"
-      "false": "Wprowadź ręcznie"
+      // [Auto-translated] "Auto-generate"
+      "true": "Automatyczne generowanie",
+      // [Auto-translated] "Manual"
+      "false": "Ręcznie"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2322,17 +2322,17 @@ export var polishStrings = {
     showQuestionNumbers: {
       // [Auto-translated] "Auto-numbering"
       default: "Automatyczne numerowanie",
-      // [Auto-translated] "Continue from the previous page"
+      // [Auto-translated] "Auto-numbering"
       on: "Automatyczne numerowanie",
-      // [Auto-translated] "Start on each page"
+      // [Auto-translated] "Reset on each page"
       onPage: "Resetuj na każdej stronie",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "Resetuj na każdym panelu",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onPanel: "Resetuj na każdym panelu",
       // [Auto-translated] "Recursive numbering"
       recursive: "Numeracja rekurencyjna",
-      // [Auto-translated] "Continue throughout the survey"
+      // [Auto-translated] "Continue across the survey"
       onSurvey: "Kontynuuj badanie",
       // [Auto-translated] "No numbering"
       off: "Brak numeracji"
@@ -2434,8 +2434,8 @@ export var polishStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Tak samo jak ankieta",
-      // [Auto-translated] "Fit to container"
-      container: "Pasuje do pojemnika"
+      // [Auto-translated] "Same as container"
+      container: "Tak samo jak kontener"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2609,7 +2609,7 @@ export var polishStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Identyfikator panelu, który nie jest widoczny dla respondentów.",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "Wpisz podtytuł panelu.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa widoczność panelu.",
@@ -2617,14 +2617,14 @@ export var polishStrings = {
       enableIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która wyłącza tryb tylko do odczytu dla panelu.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która uniemożliwia przesłanie ankiety, chyba że co najmniej jedno zagnieżdżone pytanie ma odpowiedź.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Dotyczy wszystkich pytań w tym panelu. Jeśli chcesz zastąpić to ustawienie, zdefiniuj reguły wyrównania tytułów dla poszczególnych pytań. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Góra\").",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Dotyczy wszystkich pytań w tym panelu. Po ustawieniu na \"Ukryte\" ukrywa również opisy pytań. Jeśli chcesz zastąpić to ustawienie, zdefiniuj reguły wyrównania tytułów dla poszczególnych pytań. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (\"Domyślne Góra\"). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Ustawia spójną szerokość tytułów pytań, gdy są one wyrównane do lewej strony pól pytań. Akceptuje wartości CSS (px, %, in, pt itp.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do wszystkich pytań w panelu. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Zachowuje pierwotną kolejność pytań lub losuje je. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Zachowuje oryginalną kolejność pytań lub dobiera je losowo. Opcja \"Dziedzicz\" powoduje zastosowanie ustawienia na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety.",
       // "Repositions the panel to the end of a selected page."
       page: "Przesuwa panel na koniec zaznaczonej strony.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2633,8 +2633,8 @@ export var polishStrings = {
       startWithNewLine: "Usuń zaznaczenie, aby wyświetlić panel w jednym wierszu z poprzednim pytaniem lub panelem. To ustawienie nie ma zastosowania, jeśli panel jest pierwszym elementem formularza.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Do wyboru: \"Rozwinięty\" - panel wyświetla się w całości i można go zwinąć; \"Zwinięty\" - panel wyświetla tylko tytuł i opis i można go rozwinąć; \"Zablokowany\" - panel jest wyświetlany w całości i nie można go zwinąć.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tym samym wierszu. Akceptuje wartości CSS (px, %, in, pt itd.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w tym panelu.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2685,12 +2685,12 @@ export var polishStrings = {
       descriptionLocation: "Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Pod tytułem panelu\").",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Określa położenie nowo dodanego panelu. Domyślnie nowe panele są dodawane na końcu. Wybierz \"Dalej\", aby wstawić nowy panel po bieżącym.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego panelu i przypisuje je do następnego dodanego panelu dynamicznego.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wpisu i przypisuje je do następnego dodanego wpisu.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem panelu."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem wpisu."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2777,17 +2777,17 @@ export var polishStrings = {
       imageHeight: "Zastępuje minimalne i maksymalne wartości wysokości.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Zastępuje minimalne i maksymalne wartości szerokości.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Wartość\" służy jako identyfikator elementu używany w regułach warunkowych; Respondentom wyświetla się \"Tekst\".",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Wartość\" służy jako identyfikator elementu używany w regułach warunkowych; Respondentom wyświetlany jest \"Tekst\".",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Wybierz pomiędzy \"Obraz\" i \"Wideo\", aby ustawić tryb zawartości selektora multimediów. W przypadku wybrania opcji \"Obraz\" upewnij się, że wszystkie dostępne opcje są plikami graficznymi w następujących formatach: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobnie, jeśli wybrana jest opcja \"Wideo\", upewnij się, że wszystkie opcje są bezpośrednimi linkami do plików wideo w następujących formatach: MP4, MOV, WMV, FLV, AVI, MKV. Należy pamiętać, że linki do YouTube nie są obsługiwane w przypadku opcji wideo."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "To ustawienie zmienia tylko rozmiar pola wejściowego i nie wpływa na szerokość pola pytania. Aby ograniczyć akceptowaną długość danych wejściowych, przejdź do <b>sekcji Walidacja → Maksymalny limit znaków</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "To ustawienie zmienia tylko rozmiar pola wejściowego i nie ma wpływu na szerokość pola pytania. Aby ograniczyć akceptowaną długość danych wejściowych, przejdź do \"Walidacja\" → \"Maksymalny limit znaków\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
       rows: "Ustawia liczbę wyświetlanych wierszy w polu wprowadzania. Jeśli dane wejściowe zajmują więcej wierszy, pojawi się pasek przewijania."
     },
     // survey templates
@@ -2812,7 +2812,7 @@ export var polishStrings = {
       requiredIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która uniemożliwia przesłanie ankiety, chyba że co najmniej jedno zagnieżdżone pytanie ma odpowiedź.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
     },
     slider: {
@@ -2849,8 +2849,8 @@ export var polishStrings = {
     caseInsensitive: "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Do wyboru: \"Statyczny\" - ustawia stałą szerokość; \"Responsywny\" - sprawia, że ankieta zajmuje całą szerokość ekranu; \"Auto\" – stosuje jedną z tych dwóch opcji w zależności od użytych typów pytań.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Pliki cookie uniemożliwiają użytkownikom dwukrotne wypełnienie tej samej ankiety.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Przypisz unikalną wartość pliku cookie do swojej ankiety. Plik cookie zostanie umieszczony w przeglądarce respondenta po wypełnieniu ankiety, aby zapobiec powtarzającemu się przesyłaniu ankiety.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Wklej link do obrazu (bez ograniczeń rozmiaru) lub kliknij ikonę folderu, aby przeglądać plik z komputera (do 64 KB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2863,8 +2863,8 @@ export var polishStrings = {
     autoAdvanceEnabled: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony, gdy respondent odpowie na wszystkie pytania na bieżącej stronie. Ta funkcja nie będzie miała zastosowania, jeśli ostatnie pytanie na stronie jest otwarte lub umożliwia udzielenie wielu odpowiedzi.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Ustawia widoczność przycisków nawigacyjnych na stronie.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Określa położenie przycisków nawigacyjnych na stronie.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2885,7 +2885,7 @@ export var polishStrings = {
     maxTextLength: "Tylko w przypadku pytań tekstowych.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Tylko w przypadku komentarzy do pytań.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Ustawia liczbę wierszy wyświetlanych w obszarach tekstowych dla komentarzy do pytań. Jeśli dane wejściowe zajmują więcej wierszy, pojawi się pasek przewijania.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Zaznacz, jeśli chcesz, aby komentarze do pytań i pytania z długim tekstem automatycznie zwiększały się na podstawie wprowadzonej długości tekstu.",
@@ -2909,8 +2909,8 @@ export var polishStrings = {
     columnMinWidth: "Akceptuje wartości CSS (px, %, in, pt itp.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Akceptuje wartości CSS (px, %, in, pt itp.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Opcja widoczna tylko wtedy, gdy co najmniej jedna kolumna zawiera wyrażenie typu Total lub Total.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Widoczne tylko wtedy, gdy co najmniej jedna kolumna wyświetla łączne wartości ustawione za pomocą opcji \"Metoda agregacji\" lub \"Wyrażenie wartości całkowitej\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do komórki z nieprawidłowymi danymi wejściowymi. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\".",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2931,12 +2931,12 @@ export var polishStrings = {
     imageFit: "Do wyboru: \"Brak\" - obraz zachowuje swój oryginalny rozmiar; \"Zawieraj\" - rozmiar obrazu jest zmieniany tak, aby pasował przy zachowaniu proporcji; \"Okładka\" - obraz wypełnia całe pole z zachowaniem proporcji; \"Wypełnij\" - obraz jest rozciągany w celu wypełnienia pola bez zachowania jego proporcji.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Stopniowo zwiększa wysokość pola wprowadzania danych podczas wprowadzania danych. Zastępuje ustawienie \"Wysokość pola wprowadzania (w wierszach)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Uchwyt zmiany rozmiaru pojawi się w rogu i można go przeciągnąć, aby zmienić rozmiar pola wejściowego.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Przedział czasu w sekundach, po przekroczeniu którego ankieta automatycznie przechodzi do strony z podziękowaniem.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Przedział czasu w sekundach, po którym ankieta automatycznie przechodzi do następnej strony.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (\"domyślnie włączone\").",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Przedział czasu w sekundach, po przekroczeniu którego ankieta automatycznie przechodzi do strony \"Dziękujemy\". Po ustawieniu wartości 0 zlicza czas spędzony na ankiecie.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Przedział czasu w sekundach, po przekroczeniu którego ankieta automatycznie przechodzi do następnej strony. Ukrywa przycisk nawigacyjny \"Poprzedni\". Po ustawieniu wartości 0 zlicza czas spędzony na bieżącej stronie.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Włącz tę opcję, aby wyzwolić walidację, gdy użytkownik skupi się na pustym polu wejściowym, a następnie opuści je bez wprowadzania żadnych zmian.",
     page: {
@@ -2985,8 +2985,8 @@ export var polishStrings = {
     maxWidth: "Akceptuje wartości CSS (px, %, in, pt itp.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Akceptuje wartości CSS (px, %, in, pt itp.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Jeśli ta właściwość nie zostanie ustawiona, odpowiedź będzie przechowywana w polu określonym przez właściwość Name.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Identyfikator sprzężenia to klucz niestandardowy, który można przypisać do kilku pytań, aby połączyć je ze sobą i zsynchronizować ich wartości. Wartości te zostaną scalone w pojedynczą tablicę lub obiekt i będą przechowywane w wynikach ankiety przy użyciu klucza jako nazwy właściwości.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Wartość wyświetlana w pytaniach HTML oraz w dynamicznych tytułach i opisach elementów ankiety, gdy wartość pytania jest pusta.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3031,7 +3031,7 @@ export var polishStrings = {
     valueTrue: "Wartość, którą należy zapisać w wynikach ankiety, gdy respondenci udzielą pozytywnej odpowiedzi.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Wartość, która ma zostać zapisana w wynikach ankiety, gdy respondenci udzielą odpowiedzi negatywnej.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nie zaleca się wyłączania tej opcji, ponieważ zastępuje ona obraz podglądu i utrudnia użytkownikowi zrozumienie, czy pliki zostały przekazane.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Uruchamia monit z prośbą o potwierdzenie usunięcia pliku.",
@@ -3041,7 +3041,7 @@ export var polishStrings = {
     dataList: "Wprowadź listę opcji, które zostaną zasugerowane respondentowi podczas wprowadzania danych.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "To ustawienie zmienia tylko rozmiar pól wejściowych i nie wpływa na szerokość pola pytania.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Wybierz sposób wyrównania wartości wejściowej w polu. Ustawienie domyślne \"Auto\" wyrównuje wartość wejściową do prawej, jeśli stosowane jest maskowanie walutowe lub numeryczne, i do lewej, jeśli nie.",
@@ -3063,10 +3063,10 @@ export var polishStrings = {
     format: "Użyj {0} jako symbolu zastępczego dla rzeczywistej wartości.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Więcej informacji można znaleźć w opisie atrybutu [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Dotyczy tylko komórek typu Radiogroup i Checkbox.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Więcej informacji można znaleźć w opisie atrybutu [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Dotyczy tylko kolumn z ustawioną opcją \"Typ danych wejściowych komórki\" na Grupa przycisków radiowych lub Pola wyboru.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Wybierz typ danych, który może zostać pobrany przez przeglądarkę użytkownika. Dane te pochodzą albo z poprzednich wartości wprowadzonych przez użytkownika, albo ze wstępnie skonfigurowanych wartości, jeśli takie zostały zapisane przez użytkownika do automatycznego uzupełniania.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3140,198 +3140,198 @@ export var polishStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Zezwalaj na wielokrotny wybór",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Pokaż podpisy pod obrazami",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Pokazywanie podpisów obrazów i filmów",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Zamień kolejność Tak i Nie",
     // [Auto-translated] "Value"
     value: "Wartość",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Wyrównanie tabulatorów",
-    // [Auto-translated] "Source type"
-    sourceType: "Typ źródła",
+    // [Auto-translated] "File source type"
+    sourceType: "Typ źródła pliku",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Pasuje do pojemnika",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Wyrażenie wartości zadanej",
     // [Auto-translated] "Description"
-    description: "Opis",
+    description: "Opis", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Dopasowanie logo",
     // [Auto-translated] "Pages"
-    pages: "Stron",
+    pages: "Stron", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Pytania",
+    questions: "Pytania", // Auto-generated string
     // [Auto-translated] "Triggers"
     triggers: "Wyzwalaczy",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Obliczone wartości",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Zmienne niestandardowe",
     // [Auto-translated] "Survey id"
-    surveyId: "Identyfikator ankiety",
+    surveyId: "Identyfikator ankiety", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "Identyfikator posta ankiety",
+    surveyPostId: "Identyfikator posta ankiety", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Ankieta pokazuje zapisywanie danych",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Lokalizacja opisu pytania",
+    surveyShowDataSaving: "Ankieta pokazuje zapisywanie danych", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Wyrównanie opisu pytania",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Typ paska postępu",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Pokaż spis treści",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Lokalizacja spisu treści",
+    progressBarType: "Typ paska postępu", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Pokaż spis treści (spis treści)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Wyrównanie TOC",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Wzorzec tytułu pytania",
-    // [Auto-translated] "Width mode"
-    widthMode: "Tryb szerokości",
+    questionTitlePattern: "Wzorzec tytułu pytania", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Tryb szerokości ankiety",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Pokaż informacje o marce",
+    showBrandInfo: "Pokaż informacje o marce", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Używanie wartości wyświetlanych w tekstach dynamicznych",
     // [Auto-translated] "Visible if"
-    visibleIf: "Widoczne, jeśli",
+    visibleIf: "Widoczne, jeśli", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Wyrażenie wartości domyślnej",
     // [Auto-translated] "Required if"
-    requiredIf: "Wymagane, jeśli:",
+    requiredIf: "Wymagane, jeśli:", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Zresetuj wartość, jeśli",
     // [Auto-translated] "Set value if"
     setValueIf: "Ustaw wartość, jeśli",
-    // [Auto-translated] "Validators"
-    validators: "Walidatory",
+    // [Auto-translated] "Validation rules"
+    validators: "Reguły walidacji",
     // [Auto-translated] "Bindings"
-    bindings: "Powiązania",
+    bindings: "Powiązania", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Renderuj jako",
+    renderAs: "Renderuj jako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Dołączanie oryginalnych elementów",
+    attachOriginalItems: "Dołączanie oryginalnych elementów", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "Wyborów",
     // [Auto-translated] "Choices by url"
-    choicesByUrl: "Opcje według adresu URL",
+    choicesByUrl: "Opcje według adresu URL", // Auto-generated string
     // [Auto-translated] "Currency"
-    currency: "Waluta",
+    currency: "Waluta", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Wskazówka do komórki",
+    cellHint: "Wskazówka do komórki", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Łączne maksymalne cyfry ułamkowe",
+    totalMaximumFractionDigits: "Łączne maksymalne cyfry ułamkowe", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Łączne minimalne cyfry ułamkowe",
+    totalMinimumFractionDigits: "Łączne minimalne cyfry ułamkowe", // Auto-generated string
     // [Auto-translated] "Columns"
-    columns: "Kolumny",
+    columns: "Kolumny", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Elementy szczegółowe",
+    detailElements: "Elementy szczegółowe", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Zezwalaj na działania adaptacyjne",
+    allowAdaptiveActions: "Zezwalaj na działania adaptacyjne", // Auto-generated string
     // [Auto-translated] "Default row value"
-    defaultRowValue: "Domyślna wartość wiersza",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "Domyślna wartość wiersza", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Automatyczne rozwijanie szczegółów nowego wiersza",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Opcje: leniwe ładowanie włączone",
+    choicesLazyLoadEnabled: "Opcje: leniwe ładowanie włączone", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Opcje: leniwy rozmiar strony ładowania",
+    choicesLazyLoadPageSize: "Opcje: leniwy rozmiar strony ładowania", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Składnik pola wejściowego",
+    inputFieldComponent: "Składnik pola wejściowego", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Składnik elementu",
+    itemComponent: "Składnik elementu", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Minimalne wyrażenie wartości",
+    minValueExpression: "Minimalne wyrażenie wartości", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Wyrażenie wartości maksymalnej",
+    maxValueExpression: "Wyrażenie wartości maksymalnej", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Krok",
-    // [Auto-translated] "Data list"
-    dataList: "Lista danych",
-    // [Auto-translated] "Item size"
-    inputSize: "Rozmiar produktu",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Szerokość etykiety elementu (w pikselach)",
+    step: "Krok", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Elementy do automatycznego sugerowania",
+    // [Auto-translated] "Input field width (in characters)"
+    inputSize: "Szerokość pola wejściowego (w znakach)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Szerokość etykiety produktu",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Wyrównanie wartości wejściowej",
     // [Auto-translated] "Elements"
-    elements: "Pierwiastki",
+    elements: "Pierwiastki", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Zawartość",
+    content: "Zawartość", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Tytuł nawigacji",
+    navigationTitle: "Tytuł nawigacji", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Opis nawigacji",
+    navigationDescription: "Opis nawigacji", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Długie dotknięcie",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Automatyczny wzrost",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Zezwalaj na zmianę rozmiaru",
+    longTap: "Długie dotknięcie", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Dynamiczne rozszerzanie pola wejściowego",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Włącz uchwyt zmiany rozmiaru",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Zaakceptuj zwrot karetki",
+    acceptCarriageReturn: "Zaakceptuj zwrot karetki", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Tryb wyświetlania",
     // [Auto-translated] "Rate type"
-    rateType: "Rodzaj stawki",
+    rateType: "Rodzaj stawki", // Auto-generated string
     // [Auto-translated] "Label"
-    label: "Etykieta",
+    label: "Etykieta", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Tryb zawartości",
-    // [Auto-translated] "Image fit"
-    imageFit: "Dopasowanie obrazu",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Dopasowanie obrazu i miniatury",
     // [Auto-translated] "Alt text"
     altText: "Tekst alternatywny",
     // [Auto-translated] "Height"
-    height: "Wysokość",
+    height: "Wysokość", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Wysokość na smartfonach",
     // [Auto-translated] "Pen color"
-    penColor: "Kolor pióra",
+    penColor: "Kolor pióra", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Kolor tła",
     // [Auto-translated] "Template elements"
-    templateElements: "Elementy szablonu",
+    templateElements: "Elementy szablonu", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Operator",
+    operator: "Operator", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Jest zmienna",
+    isVariable: "Jest zmienna", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Uruchom wyrażenie",
+    runExpression: "Uruchom wyrażenie", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Pokaż podpis",
+    showCaption: "Pokaż podpis", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Nazwa ikony",
+    iconName: "Nazwa ikony", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Rozmiar ikony",
+    iconSize: "Rozmiar ikony", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Precyzja",
+    precision: "Precyzja", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Obszar uchwytu przeciągania macierzy",
+    matrixDragHandleArea: "Obszar uchwytu przeciągania macierzy", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Obraz tła",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Dopasowanie obrazu tła",
+    backgroundImageFit: "Dopasowanie obrazu tła", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Załącznik obrazu tła",
+    backgroundImageAttachment: "Załącznik obrazu tła", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Krycie tła",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Wybierz, aby ranga była włączona",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Wybierz, aby uszeregować układ obszarów",
+    backgroundOpacity: "Krycie tła", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Zezwalaj na selektywne klasyfikowanie",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Wyrównanie obszaru klasyfikacji",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Tekst pokazujący, czy wszystkie opcje są zaznaczone",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Tekst zastępczy dla obszaru klasyfikacji",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Zezwalaj na dostęp do kamery",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Tryb skalowania kolorów",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Oceń tryb kolorów",
+    allowCameraAccess: "Zezwalaj na dostęp do kamery", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Ikona oceny, tryb koloru",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Schemat kolorów uśmieszków",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Kopiowanie wyświetlanej wartości",
+    copyDisplayValue: "Kopiowanie wyświetlanej wartości", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpiętość kolumn",
     // [Auto-translated] "Progress bar area width"
@@ -3460,8 +3460,8 @@ export var polishStrings = {
     "--sjs-secondary-background-500": "Wtórny",
     // [Auto-translated] "Surface"
     surfaceScale: "Powierzchnia",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Interfejs użytkownika",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Elementy interfejsu użytkownika",
     // [Auto-translated] "Font"
     fontScale: "Czcionka",
     names: {

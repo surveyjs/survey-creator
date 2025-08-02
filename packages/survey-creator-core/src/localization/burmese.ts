@@ -500,7 +500,7 @@ export var mmStrings = {
       // "reset value for question: {0}"
       question_resetValueText: "မေးခွန်း: {0} အတွက်တန်ဖိုးကိုပြန်စဉ်ဆင်ပါ", // {0} question name.
       // "assign value: {1} to question: {0}"
-      question_setValueText: "မေးခွန်း: {0} သို့တန်ဖိုး: {1} ကိုထည့်ပါ",
+      question_setValueText: "မေးခွန်း: {0} သို့တန်ဖိုး: {1} ကိုထည့်ပါ", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "မေးခွန်း {1} ၏ကော်လံ {0} ကိုမြင်နိုင်စေပါ", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -1729,7 +1729,7 @@ export var mmStrings = {
       // "Font"
       editorFont: "Font",
       // "Opacity"
-      backgroundOpacity: "Transparency",
+      backgroundOpacity: "Transparency", // Auto-generated string
       // "Survey font family"
       "--sjs-font-family": "စစ်တမ်း font မျိုးစုံ",
       // "Background color"
@@ -2914,45 +2914,45 @@ export var mmStrings = {
     // "Set value expression"
     setValueExpression: "တန်ဖိုးဖော်ပြချက်ကိုသတ်မှတ်ပါ",
     // "Description"
-    description: "ဖော်ပြချက်",
+    description: "ဖော်ပြချက်", // Auto-generated string
     // "Logo fit"
     logoFit: "လိုဂိုကိုက်ညီမှု",
     // "Pages"
-    pages: "စာမျက်နှာများ",
+    pages: "စာမျက်နှာများ", // Auto-generated string
     // "Questions"
-    questions: "မေးခွန်းများ",
+    questions: "မေးခွန်းများ", // Auto-generated string
     // "Triggers"
     triggers: "ထိန်းချုပ်မှုများ",
     // "Custom variables"
     calculatedValues: "စိတ်ကြိုက်အပြောင်းအလဲများ",
     // "Survey id"
-    surveyId: "စစ်တမ်း ID",
+    surveyId: "စစ်တမ်း ID", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "စစ်တမ်း Post ID",
+    surveyPostId: "စစ်တမ်း Post ID", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "စစ်တမ်းဒေတာသိမ်းဆည်းမှုပြပါ",
+    surveyShowDataSaving: "စစ်တမ်းဒေတာသိမ်းဆည်းမှုပြပါ", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "မေးခွန်းဖော်ပြချက်တည်နေရာ",
     // "Progress bar type"
-    progressBarType: "တိုးတက်မှုဘားအမျိုးအစား",
+    progressBarType: "တိုးတက်မှုဘားအမျိုးအစား", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "အကြောင်းအရာဇယား (TOC) ပြပါ",
     // "TOC alignment"
     tocLocation: "TOC တည်နေရာ",
     // "Question title pattern"
-    questionTitlePattern: "မေးခွန်းခေါင်းစဉ်ပုံစံ",
+    questionTitlePattern: "မေးခွန်းခေါင်းစဉ်ပုံစံ", // Auto-generated string
     // "Survey width mode"
     widthMode: "စစ်တမ်းအကျယ်အဝန်း",
     // "Show brand info"
-    showBrandInfo: "အမှတ်တံဆိပ်အချက်အလက်ပြပါ",
+    showBrandInfo: "အမှတ်တံဆိပ်အချက်အလက်ပြပါ", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "ဒိုင်နမစ်စာသားများတွင် ပြသထားသောတန်ဖိုးများကိုသုံးပါ",
     // "Visible if"
-    visibleIf: "မြင်နိုင်ပါက",
+    visibleIf: "မြင်နိုင်ပါက", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "ပုံမှန်တန်ဖိုးဖော်ပြချက်",
     // "Required if"
-    requiredIf: "လိုအပ်ပါက",
+    requiredIf: "လိုအပ်ပါက", // Auto-generated string
     // "Reset value if"
     resetValueIf: "တန်ဖိုးပြန်သတ်မှတ်ပါက",
     // "Set value if"
@@ -2960,49 +2960,49 @@ export var mmStrings = {
     // "Validation rules"
     validators: "အတည်ပြုချက်များ",
     // "Bindings"
-    bindings: "ချိတ်ဆက်မှုများ",
+    bindings: "ချိတ်ဆက်မှုများ", // Auto-generated string
     // "Render as"
-    renderAs: "အဖြစ်ဖော်ပြပါ",
+    renderAs: "အဖြစ်ဖော်ပြပါ", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "မူရင်းအချက်အလက်များကိုထည့်ပါ",
+    attachOriginalItems: "မူရင်းအချက်အလက်များကိုထည့်ပါ", // Auto-generated string
     // "Choices"
     choices: "ရွေးချယ်မှုများ",
     // "Choices by url"
-    choicesByUrl: "URL ဖြင့်ရွေးချယ်မှုများ",
+    choicesByUrl: "URL ဖြင့်ရွေးချယ်မှုများ", // Auto-generated string
     // "Currency"
-    currency: "ငွေကြေး",
+    currency: "ငွေကြေး", // Auto-generated string
     // "Cell hint"
-    cellHint: "ဆဲလ်အကြံပြုချက်",
+    cellHint: "ဆဲလ်အကြံပြုချက်", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "စုစုပေါင်းအများဆုံးဒစ်ဂျစ်များ",
+    totalMaximumFractionDigits: "စုစုပေါင်းအများဆုံးဒစ်ဂျစ်များ", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "စုစုပေါင်းအနည်းဆုံးဒစ်ဂျစ်များ",
+    totalMinimumFractionDigits: "စုစုပေါင်းအနည်းဆုံးဒစ်ဂျစ်များ", // Auto-generated string
     // "Columns"
-    columns: "ကော်လံများ",
+    columns: "ကော်လံများ", // Auto-generated string
     // "Detail elements"
-    detailElements: "အသေးစိတ်အချက်အလက်များ",
+    detailElements: "အသေးစိတ်အချက်အလက်များ", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "အလိုက်သင့်ပြုလုပ်ချက်များကိုခွင့်ပြုပါ",
+    allowAdaptiveActions: "အလိုက်သင့်ပြုလုပ်ချက်များကိုခွင့်ပြုပါ", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "ပုံမှန်တန်းတန်ဖိုး",
+    defaultRowValue: "ပုံမှန်တန်းတန်ဖိုး", // Auto-generated string
     // detailPanelShowOnAdding: "Auto-expand new row details",
-    choicesLazyLoadEnabled: "ရွေးချယ်မှုများကိုအလေးချိန်ဖြင့်တင်ပါ",
+    choicesLazyLoadEnabled: "ရွေးချယ်မှုများကိုအလေးချိန်ဖြင့်တင်ပါ", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "ရွေးချယ်မှုများအရွယ်အစား",
+    choicesLazyLoadPageSize: "ရွေးချယ်မှုများအရွယ်အစား", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "အဝင်အကွက်အစိတ်အပိုင်း",
+    inputFieldComponent: "အဝင်အကွက်အစိတ်အပိုင်း", // Auto-generated string
     // "Item component"
-    itemComponent: "အချက်အလက်အစိတ်အပိုင်း",
+    itemComponent: "အချက်အလက်အစိတ်အပိုင်း", // Auto-generated string
     // "Min"
-    min: "အနည်းဆုံး",
+    min: "အနည်းဆုံး", // Auto-generated string
     // "Max"
-    max: "အများဆုံး",
+    max: "အများဆုံး", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "အနည်းဆုံးတန်ဖိုးဖော်ပြချက်",
+    minValueExpression: "အနည်းဆုံးတန်ဖိုးဖော်ပြချက်", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "အများဆုံးတန်ဖိုးဖော်ပြချက်",
+    maxValueExpression: "အများဆုံးတန်ဖိုးဖော်ပြချက်", // Auto-generated string
     // "Step"
-    step: "အဆင့်",
+    step: "အဆင့်", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "အလိုအလျောက်အကြံပြုချက်များ",
     // inputSize: "Input field width (in characters)",
@@ -3010,27 +3010,27 @@ export var mmStrings = {
     // "Input value alignment"
     inputTextAlignment: "အဝင်တန်ဖိုး alignment",
     // "Elements"
-    elements: "အချက်အလက်များ",
+    elements: "အချက်အလက်များ", // Auto-generated string
     // "Content"
-    content: "အကြောင်းအရာ",
+    content: "အကြောင်းအရာ", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "လမ်းညွှန်ခေါင်းစဉ်",
+    navigationTitle: "လမ်းညွှန်ခေါင်းစဉ်", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "လမ်းညွှန်ဖော်ပြချက်",
+    navigationDescription: "လမ်းညွှန်ဖော်ပြချက်", // Auto-generated string
     // "Long tap"
-    longTap: "ကြာရှည်ထိပါ",
+    longTap: "ကြာရှည်ထိပါ", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "အဝင်အကွက်ကိုအလိုအလျောက်ချဲ့ပါ",
     // "Enable resize handle"
     allowResize: "ပြန်လည်ချဲ့နိုင်မှုကိုခွင့်ပြုပါ",
     // "Accept carriage return"
-    acceptCarriageReturn: "Carriage return ကိုလက်ခံပါ",
+    acceptCarriageReturn: "Carriage return ကိုလက်ခံပါ", // Auto-generated string
     // "Display mode"
     displayMode: "ပြသမှု mode",
     // "Rate type"
-    rateType: "အဆင့်သတ်မှတ်မှုအမျိုးအစား",
+    rateType: "အဆင့်သတ်မှတ်မှုအမျိုးအစား", // Auto-generated string
     // "Label"
-    label: "တံဆိပ်",
+    label: "တံဆိပ်", // Auto-generated string
     // "Content mode"
     contentMode: "အကြောင်းအရာ mode",
     // "Image and thumbnail fit"
@@ -3038,39 +3038,39 @@ export var mmStrings = {
     // "Alt text"
     altText: "အခြားစာသား",
     // "Height"
-    height: "အမြင့်",
+    height: "အမြင့်", // Auto-generated string
     // "Height on smartphones"
     mobileHeight: "မိုဘိုင်းအမြင့်",
     // "Pen color"
-    penColor: "ခဲတံအရောင်",
+    penColor: "ခဲတံအရောင်", // Auto-generated string
     // "Background color"
     backgroundColor: "နောက်ခံအရောင်",
     // "Template elements"
-    templateElements: "နမူနာအချက်အလက်များ",
+    templateElements: "နမူနာအချက်အလက်များ", // Auto-generated string
     // "Operator"
-    operator: "စစ်ဆင်ရေး",
+    operator: "စစ်ဆင်ရေး", // Auto-generated string
     // "Is variable"
-    isVariable: "အပြောင်းအလဲဖြစ်ပါသလား",
+    isVariable: "အပြောင်းအလဲဖြစ်ပါသလား", // Auto-generated string
     // "Run expression"
-    runExpression: "ဖော်ပြချက်ကိုပြေးပါ",
+    runExpression: "ဖော်ပြချက်ကိုပြေးပါ", // Auto-generated string
     // "Show caption"
-    showCaption: "အကြောင်းပြချက်ကိုပြပါ",
+    showCaption: "အကြောင်းပြချက်ကိုပြပါ", // Auto-generated string
     // "Icon name"
-    iconName: "အိုင်ကွန်နာမည်",
+    iconName: "အိုင်ကွန်နာမည်", // Auto-generated string
     // "Icon size"
-    iconSize: "အိုင်ကွန်အရွယ်အစား",
+    iconSize: "အိုင်ကွန်အရွယ်အစား", // Auto-generated string
     // "Precision"
-    precision: "တိကျမှု",
+    precision: "တိကျမှု", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "Matrix ဆွဲယူမှု handle အကျယ်",
+    matrixDragHandleArea: "Matrix ဆွဲယူမှု handle အကျယ်", // Auto-generated string
     // "Background image"
     backgroundImage: "နောက်ခံပုံ",
     // "Background image fit"
-    backgroundImageFit: "နောက်ခံပုံကိုက်ညီမှု",
+    backgroundImageFit: "နောက်ခံပုံကိုက်ညီမှု", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "နောက်ခံပုံဆက်စပ်မှု",
+    backgroundImageAttachment: "နောက်ခံပုံဆက်စပ်မှု", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "နောက်ခံ opacity",
+    backgroundOpacity: "နောက်ခံ opacity", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "ရွေးချယ်မှုအဆင့်သတ်မှတ်မှုကိုခွင့်ပြုပါ",
     // "Ranking area alignment"
@@ -3080,13 +3080,13 @@ export var mmStrings = {
     // "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "အဆင့်သတ်မှတ်မှုနေရာအတွက် placeholder စာသား",
     // "Allow camera access"
-    allowCameraAccess: "ကင်မရာဝင်ရောက်ခွင့်ပြုပါ",
+    allowCameraAccess: "ကင်မရာဝင်ရောက်ခွင့်ပြုပါ", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "အဆင့်သတ်မှတ်မှုအိုင်ကွန်အရောင် mode",
     // "Smileys color scheme"
     rateColorMode: "အပြုံးအရောင်စနစ်",
     // "Copy display value"
-    copyDisplayValue: "ပြသမှုတန်ဖိုးကိုကူးယူပါ",
+    copyDisplayValue: "ပြသမှုတန်ဖိုးကိုကူးယူပါ", // Auto-generated string
     // "Column span"
     effectiveColSpan: "အကျိုးရှိသောကော်လံ span",
     // "Progress bar area width"

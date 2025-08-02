@@ -120,11 +120,11 @@ export let svStrings = {
     settingsTooltip: "Öppna inställningar",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Inställningar för undersökning",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "Inställningar för undersökning",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Tema Inställningar",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Inställningar för tema",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Inställningar för kreatör",
@@ -425,32 +425,32 @@ export let svStrings = {
       logicPlaceholderDescription: "Skapa en regel för att anpassa flödet i undersökningen.",
       // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescriptionMobile: "Skapa en regel för att anpassa flödet i undersökningen.",
-      // [Auto-translated] "Show (hide) page"
-      page_visibilityName: "Visa (dölj) sida",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Aktivera (inaktivera) sida",
+      // [Auto-translated] "Show/hide page"
+      page_visibilityName: "Visa/dölj sida",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Aktivera/inaktivera sida",
       // [Auto-translated] "Make page required"
       page_requireName: "Gör sidan obligatorisk",
-      // [Auto-translated] "Show (hide) panel"
-      panel_visibilityName: "Visa (dölj) panelen",
-      // [Auto-translated] "Enable (disable) panel"
-      panel_enableName: "Aktivera (inaktivera) panelen",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Gör sidan obligatorisk",
-      // [Auto-translated] "Show (hide) question"
-      question_visibilityName: "Visa (dölj) fråga",
-      // [Auto-translated] "Enable (disable) question"
-      question_enableName: "Aktivera (inaktivera) fråga",
+      // [Auto-translated] "Show/hide panel"
+      panel_visibilityName: "Visa/dölj panel",
+      // [Auto-translated] "Enable/disable panel"
+      panel_enableName: "Aktivera/inaktivera panel",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Gör panel obligatorisk",
+      // [Auto-translated] "Show/hide question"
+      question_visibilityName: "Visa/dölj fråga",
+      // [Auto-translated] "Enable/disable question"
+      question_enableName: "Aktivera/inaktivera fråga",
       // [Auto-translated] "Make question required"
       question_requireName: "Gör frågan obligatorisk",
       // [Auto-translated] "Reset question value"
       question_resetValueName: "Återställ frågevärde",
       // [Auto-translated] "Set question value"
       question_setValueName: "Ange frågevärde",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Visa (dölj) kolumn",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Aktivera (inaktivera) kolumn",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Visa/dölj kolumn",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Aktivera/inaktivera kolumn",
       // [Auto-translated] "Make column required"
       column_requireName: "Gör kolumnen obligatorisk",
       // [Auto-translated] "Reset column value"
@@ -469,30 +469,30 @@ export let svStrings = {
       trigger_runExpressionName: "Kör uttryck",
       // "Set \"Thank You\" page markup"
       completedHtmlOnConditionName: "Ställ in sidmarkeringen \"Undersökningen slutförd\"",
-      // [Auto-translated] "Make the page visible when the logic expression returns true. Otherwise keep it invisible."
-      page_visibilityDescription: "Gör sidan synlig när logikuttrycket returnerar true. Håll den annars osynlig.",
-      // [Auto-translated] "Make the panel visible when the logic expression returns true. Otherwise keep it invisible."
-      panel_visibilityDescription: "Gör panelen synlig när logikuttrycket returnerar true. Håll den annars osynlig.",
-      // [Auto-translated] "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled."
-      panel_enableDescription: "Aktivera panelen och alla element inuti den när logikuttrycket returnerar true. Håll dem annars inaktiverade.",
-      // [Auto-translated] "Make the question visible when the logic expression returns true. Otherwise keep it invisible."
-      question_visibilityDescription: "Gör frågan synlig när logikuttrycket returnerar true. Håll den annars osynlig.",
-      // [Auto-translated] "Make the question enable when the logic expression returns true. Otherwise keep it disabled."
-      question_enableDescription: "Aktivera frågan när logikuttrycket returnerar true. Annars ska du hålla den inaktiverad.",
-      // [Auto-translated] "Question becomes required when the logic expression returns true."
-      question_requireDescription: "Frågan blir obligatorisk när logikuttrycket returnerar true.",
-      // [Auto-translated] "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'."
-      trigger_completeDescription: "När logikuttrycket returnerar true slutförs undersökningen och en slutanvändare ser tacksidan.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question."
-      trigger_setvalueDescription: "När frågevärden, som används i logikuttrycket, ändras och logikuttrycket returnerar true, anges värdet till den valda frågan.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question."
-      trigger_copyvalueDescription: "När frågevärden, som används i logikuttrycket, ändras och logikuttrycket returnerar true, kopieras värdet för en markerad fråga till en annan markerad fråga.",
-      // [Auto-translated] "When the logic expression returns true then the survey skip to / focus the selected question."
-      trigger_skipDescription: "När logikuttrycket returnerar true hoppar undersökningen till / fokuserar den valda frågan.",
-      // [Auto-translated] "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question"
-      trigger_runExpressionDescription: "När logikuttrycket returnerar true utförs det anpassade uttrycket. Om du vill kan du ange detta uttrycksresultat i den valda frågan",
-      // [Auto-translated] "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one."
-      completedHtmlOnConditionDescription: "Om logikuttrycket returnerar true ändras standardtexten för tacksidan till den angivna.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the page invisible."
+      page_visibilityDescription: "Gör sidan synlig när det logiska uttrycket utvärderas till sant. Annars kan du hålla sidan osynlig.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the panel invisible."
+      panel_visibilityDescription: "Gör sidan synlig när det logiska uttrycket utvärderas till sant. Annars, håll panelen osynlig.",
+      // [Auto-translated] "Make the panel and all elements inside it enabled when the logical expression evaluates to true. Otherwise, keep them disabled."
+      panel_enableDescription: "Gör panelen och alla element i den aktiverade när det logiska uttrycket utvärderas till sant. Annars, håll dem inaktiverade.",
+      // [Auto-translated] "Make the question visible when the logical expression evaluates to true. Otherwise, keep the question invisible."
+      question_visibilityDescription: "Gör frågan synlig när det logiska uttrycket utvärderas till sant. Annars kan du hålla frågan osynlig.",
+      // [Auto-translated] "Make the question enabled when the logical expression evaluates to true. Otherwise, keep the question disabled."
+      question_enableDescription: "Gör frågan aktiverad när det logiska uttrycket utvärderas till sant. Annars håller du frågan inaktiverad.",
+      // [Auto-translated] "Question becomes required when the logical expression evaluates to true."
+      question_requireDescription: "Frågan blir obligatorisk när det logiska uttrycket utvärderas till sant.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey ends, and the respondent sees the \"Thank you\" page."
+      trigger_completeDescription: "När det logiska uttrycket utvärderas till sant avslutas undersökningen och den svarande ser sidan \"Tack\".",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the specified value is assigned to the selected question."
+      trigger_setvalueDescription: "När frågevärden som används i det logiska uttrycket ändras, och uttrycket utvärderas till sant, tilldelas det angivna värdet till den valda frågan.",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the value of the selected question is copied to another question."
+      trigger_copyvalueDescription: "När frågevärden som används i det logiska uttrycket ändras, och uttrycket utvärderas till sant, kopieras värdet för den valda frågan till en annan fråga.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey focuses/jumps to the selected question."
+      trigger_skipDescription: "När det logiska uttrycket utvärderas till sant, fokuserar/hoppar undersökningen till den valda frågan.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey evaluates another expression. Optionally, the result of the latter expression can be assigned as a value to the selected question"
+      trigger_runExpressionDescription: "När det logiska uttrycket utvärderas till true utvärderar undersökningen ett annat uttryck. Du kan också tilldela resultatet av det senare uttrycket som ett värde till den valda frågan",
+      // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
+      completedHtmlOnConditionDescription: "Om det logiska uttrycket utvärderas till true visas det angivna innehållet på sidan \"Tack\".",
       // "When expression: '{0}' returns true"
       itemExpressionText: "När uttryck: \"{0}\" returnerar true", // {0} - the expression
       // [Auto-translated] "New rule"
@@ -512,7 +512,7 @@ export let svStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Återställ värde för fråga: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Tilldela värde: {1} till fråga: {0}",
+      question_setValueText: "Tilldela värde: {1} till fråga: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Synliggör kolumn {0} av fråga {1}", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export let svStrings = {
       column_resetValueText: "Återställ cellvärde för kolumn: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Ett uttryck vars resultat kommer att tilldelas målfrågan.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Ett uttryck vars resultat kommer att tilldelas målfrågan.",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Undersökningen blir slutförd",
       // [Auto-translated] "set into question: {0} value {1}"
@@ -539,8 +539,8 @@ export let svStrings = {
       trigger_runExpressionText1: "kör uttryck: '{0}'", // {0} the expression
       // [Auto-translated] " and set its result into question: {0}"
       trigger_runExpressionText2: " och ifrågasatte resultatet: {0}", // {0} question name
-      // [Auto-translated] "show custom text for the 'Thank you page'."
-      completedHtmlOnConditionText: "visa anpassad text för tacksidan.",
+      // [Auto-translated] "show custom text for the \"Thank You\" page."
+      completedHtmlOnConditionText: "visa anpassad text för sidan \"Tack\".",
       // [Auto-translated] "All Questions"
       showAllQuestions: "Alla frågor",
       // [Auto-translated] "All Action Types"
@@ -561,10 +561,10 @@ export let svStrings = {
       selectedActionCaption: "Välj åtgärd...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Logikuttrycket är tomt eller ogiltigt. Var snäll och rätta till det.",
-      // [Auto-translated] "Please, add at least one action."
+      // [Auto-translated] "Please add at least one action."
       noActionError: "Lägg till minst en åtgärd.",
-      // [Auto-translated] "Please, fix problems in your action(s)."
-      actionInvalid: "Snälla, åtgärda problem i dina åtgärder.",
+      // [Auto-translated] "Please fix issues in your action(s)."
+      actionInvalid: "Åtgärda problem i din(a) åtgärd(er).",
       // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "Logiska regler är ofullständiga",
       // [Auto-translated] "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?"
@@ -590,25 +590,25 @@ export let svStrings = {
       requiredIf: "Gör panelen obligatorisk om",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Frågeordning i panelen",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Överordnad sida",
+      // [Auto-translated] "Move the panel to page"
+      page: "Flytta panelen till sidan",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Visa panelen på en ny rad",
-      // [Auto-translated] "Panel expand state"
-      state: "Panelens komprimerade tillstånd",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Bredd på infogad panel",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Panelens komprimerade läge",
+      // [Auto-translated] "Inline panel width"
+      width: "Bredd på den infogade panelen",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Minsta panelbredd",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Maximal panelbredd",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "Numrera den här panelen"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Effektiv bredd, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Frågans titelbredd, px"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export let svStrings = {
       minWidth: "Minsta panelbredd",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Maximal panelbredd",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Bekräfta borttagning av panelen",
-      // [Auto-translated] "Description template"
-      templateDescription: "Mönster för panelbeskrivning",
-      // [Auto-translated] "Title template"
-      templateTitle: "Mönster för panelrubrik",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "Tom paneltext",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Bekräfta borttagning av post",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Mönster för postbeskrivning",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Mönster för posttitel",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "Tomma paneltext",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Mönster för flikrubrik",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Platshållare för flikrubrik",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Gör en enskild panel synlig om",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Gör en enskild post synlig om",
       // [Auto-translated] "Number the panel"
       showNumber: "Numrera panelen",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Justering av panelrubrik",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Justering av panelbeskrivning",
-      // [Auto-translated] "Question title location"
-      templateQuestionTitleLocation: "Justering av frågerubrik",
+      // [Auto-translated] "Question title alignment"
+      templateQuestionTitleLocation: "Justering av frågetitel",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Bredd på frågetitel",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Justering av felmeddelande",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Ny panelplats",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Ny plats för inresa",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "Visa förloppsindikatorn",
-      // [Auto-translated] "Key column"
-      keyName: "Förhindra dubbletter av svar i följande fråga"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "Förhindra dubbla svar i följande fråga"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export let svStrings = {
       visibleIf: "Gör frågan synlig om",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Gör frågan obligatorisk om",
-      // [Auto-translated] "Parent page"
-      page: "Överordnad sida",
+      // [Auto-translated] "Move the question to page"
+      page: "Flytta frågan till sidan",
       // [Auto-translated] "Question box collapse state"
       state: "Komprimeringstillstånd för frågeruta",
       // [Auto-translated] "Number this question"
@@ -694,7 +694,7 @@ export let svStrings = {
       descriptionLocation: "Justering av frågebeskrivning",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Justering av felmeddelande",
-      // [Auto-translated] "Add indents"
+      // [Auto-translated] "Increase the inner indent"
       indent: "Öka det inre indraget",
       // [Auto-translated] "Inline question width"
       width: "Bredd på infogade frågor",
@@ -702,28 +702,28 @@ export let svStrings = {
       minWidth: "Minsta frågebredd",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Maximal frågebredd",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "Uppdatera indatafältsvärde"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
-      signatureWidth: "Signaturområdets bredd",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area width"
+      signatureWidth: "Bredd på signaturområdet",
+      // [Auto-translated] "Signature area height"
       signatureHeight: "Signaturområdets höjd",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Skala signaturområdet automatiskt",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Visa platshållaren",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Visa en platshållare i signaturområdet",
       // [Auto-translated] "Placeholder text"
       placeholder: "Platshållartext",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Platshållartext i skrivskyddat läge eller förhandsgranskningsläge",
-      // [Auto-translated] "Show the Clear button"
+      // [Auto-translated] "Show the Clear button within signature area"
       allowClear: "Visa knappen Rensa i signaturområdet",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Minsta pennbredd",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Maximal pennbredd",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Minsta linjebredd",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Maximal linjebredd",
       // [Auto-translated] "Stroke color"
       penColor: "Linjefärg"
     },
@@ -756,26 +756,26 @@ export let svStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Survey title"
+      title: "Undersökningens titel",
       // [Auto-translated] "Survey description"
       description: "Beskrivning av undersökningen",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "Gör undersökningen skrivskyddad"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Sidans namn",
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Page title"
+      title: "Sidans titel",
       // [Auto-translated] "Page description"
       description: "Beskrivning av sidan",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Gör sidan synlig om",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Gör sidan obligatorisk om",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Tidsgräns för att avsluta sidan (i sekunder)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Tidsgräns för att slutföra sidan",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Frågeordning på sidan"
     },
@@ -853,8 +853,8 @@ export let svStrings = {
     defaultDisplayValue: "Standardvisningsvärde för dynamiska texter",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Justering av etiketter",
-    // [Auto-translated] "Input field size (in characters)"
-    size: "Inmatningsfältets storlek (i tecken)",
+    // [Auto-translated] "Input field width (in characters)"
+    size: "Inmatningsfältets bredd (i tecken)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Justering av cellfelmeddelande",
     // [Auto-translated] "Enabled"
@@ -935,8 +935,8 @@ export let svStrings = {
     fastEntryChoicesCountError: "Begränsa antalet artiklar från {0} till {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Ange minst {0} artiklar",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Du kan ange data i följande format:\nvärde1|text\nvärde2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Ange listan med alternativ och deras ID:n i följande format:\n\nid|alternativ\n\nEtt alternativalternativ-ID är inte synligt för respondenterna och kan användas i villkorsregler.",
     // "Form Entry"
     formEntry: "Ifyllning i enkäten",
     // "Test the service"
@@ -947,10 +947,10 @@ export let svStrings = {
     conditionActionEmpty: "Välj åtgärd",
     // "Select a question..."
     conditionSelectQuestion: "Välj fråga...",
-    // [Auto-translated] "Select page..."
-    conditionSelectPage: "Välj sida...",
-    // [Auto-translated] "Select panel..."
-    conditionSelectPanel: "Välj panel...",
+    // [Auto-translated] "Select a page..."
+    conditionSelectPage: "Välj en sida...",
+    // [Auto-translated] "Select a panel..."
+    conditionSelectPanel: "Välj en panel...",
     // "Please enter/select the value"
     conditionValueQuestionTitle: "Vänligen skriv in/välj värdet",
     // "Press ctrl+space to get expression completion hint"
@@ -965,10 +965,10 @@ export let svStrings = {
     assistantTitle: "Tillgängliga frågor:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Det bör vara minst 1 kolumn eller rad",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Förhandsgranska svar innan du skickar in undersökningen",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Inställd av ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Granska innan du skickar in",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Aktiveras av ett villkor",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Nollställa",
     // "Please enter a value"
@@ -979,10 +979,10 @@ export let svStrings = {
     propertyNameIsNotUnique: "Ange ett unikt namn",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Använd inte reserverade ord: \"objekt\", \"val\", \"panel\", \"rad\".",
-    // [Auto-translated] "No items have been added yet"
-    listIsEmpty: "Inga objekt har lagts till ännu",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Inga alternativ har lagts till ännu",
+    // [Auto-translated] "You don't have any items yet"
+    listIsEmpty: "Du har inga objekt ännu",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Du har inga val ännu",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Du har inga kolumner ännu",
     // [Auto-translated] "You don't have layout columns yet"
@@ -999,8 +999,8 @@ export let svStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Du har inga länkar ännu",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Du har inga sidor ännu",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Lägg till ett val",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Lägg till nytt val",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Lägg till ny kolumn",
     // [Auto-translated] "Add new row"
@@ -1034,17 +1034,17 @@ export let svStrings = {
     // "Path to data"
     path: "Sökväg",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
-      url: "Webbtjänstens URL",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Hämta värden från följande JSON-fält"
+      // [Auto-translated] "Web service URL"
+      url: "URL för webbtjänst",
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Hämta värde att lagra från följande egenskap"
     },
     // "Get value to display from the following property"
     titleName: "Titel namn",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Hämta bild-URL:er från följande JSON-fält",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Tillåt tomt svar",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Hämta fil-URL:er från följande egenskap",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Acceptera tomt svar",
     // [Auto-translated] "Title"
     titlePlaceholder: "Titel",
     // [Auto-translated] "Survey Title"
@@ -1065,24 +1065,24 @@ export let svStrings = {
     showOtherItem: "Har annat element",
     // "Rename the \"Other\" option"
     otherText: "Annat",
-    // [Auto-translated] "Allow the None option"
-    showNoneItem: "Tillåt alternativet Ingen",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Tillåt alternativet Vägra svara",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Tillåt alternativet Vet ej",
-    // [Auto-translated] "None option text"
-    noneText: "Alternativtext för Ingen",
-    // [Auto-translated] "Allow the Select All option"
-    showSelectAllItem: "Tillåt alternativet Markera allt",
-    // [Auto-translated] "Select All option text"
-    selectAllText: "Markera all alternativtext",
+    // [Auto-translated] "Enable the \"None\" option"
+    showNoneItem: "Aktivera alternativet \"Ingen\"",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Aktivera alternativet \"Vägra svara\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Aktivera alternativet \"Vet inte\"",
+    // [Auto-translated] "Rename the \"None\" option"
+    noneText: "Byt namn på alternativet \"Ingen\"",
+    // [Auto-translated] "Enable the \"Select All\" option"
+    showSelectAllItem: "Aktivera alternativet \"Välj alla\"",
+    // [Auto-translated] "Rename the \"Select All\" option"
+    selectAllText: "Byt namn på alternativet \"Välj alla\"",
     // [Auto-translated] "Minimum value for auto-generated items"
     choicesMin: "Minimivärde för automatiskt genererade objekt",
     // [Auto-translated] "Maximum value for auto-generated items"
     choicesMax: "Maximalt värde för automatiskt genererade objekt",
-    // [Auto-translated] "Step for auto-generated items"
-    choicesStep: "Steg för automatiskt genererade objekt",
+    // [Auto-translated] "Step value for auto-generated items"
+    choicesStep: "Stegvärde för automatiskt genererade artiklar",
     // "Name"
     name: "Namn",
     // "Title"
@@ -1103,8 +1103,8 @@ export let svStrings = {
     markRequired: "Markera efter behov",
     // [Auto-translated] "Remove the required mark"
     removeRequiredMark: "Ta bort det obligatoriska märket",
-    // [Auto-translated] "Require answer for all rows"
-    eachRowRequired: "Kräv svar för alla rader",
+    // [Auto-translated] "Require an answer in each row"
+    eachRowRequired: "Kräv ett svar på varje rad",
     // [Auto-translated] "Prevent duplicate responses in rows"
     eachRowUnique: "Förhindra dubbletter av svar i rader",
     // "Error message for required questions"
@@ -1137,12 +1137,12 @@ export let svStrings = {
     removeRowText: "Ta bort rad knapp text",
     // [Auto-translated] "Input field title pattern"
     singleInputTitleTemplate: "Titelmönster för inmatningsfält",
-    // [Auto-translated] "Minimum rate value"
-    rateMin: "Minsta räntevärde",
-    // [Auto-translated] "Maximum rate value"
-    rateMax: "Högsta taxa",
-    // [Auto-translated] "Rate step"
-    rateStep: "Betygsätt steg",
+    // [Auto-translated] "Minimum rating value"
+    rateMin: "Lägsta betygsvärde",
+    // [Auto-translated] "Maximum rating value"
+    rateMax: "Maximalt betygsvärde",
+    // [Auto-translated] "Step value"
+    rateStep: "Steg-värde",
     // "Minimum value label"
     minRateDescription: "Minsta betyg beskrivning",
     // "Maximum value label"
@@ -1187,8 +1187,8 @@ export let svStrings = {
     gotoName: "Fråga att hoppa till",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Regeln är felaktig",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Inkludera i undersökningsresultat",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Lägg till i undersökningsresultaten",
     // "Make the title and description visible"
     showTitle: "Visa/dölj titel",
     // [Auto-translated] "Expand/collapse title"
@@ -1219,10 +1219,10 @@ export let svStrings = {
     pageNextText: "Nästa",
     // "\"Complete Survey\" button text"
     completeText: "Färdig",
-    // [Auto-translated] "Preview Answers button text"
-    previewText: "Text för knappen Förhandsgranska svar",
-    // [Auto-translated] "Edit Answer button text"
-    editText: "Text för knappen Redigera svar",
+    // [Auto-translated] "\"Review Answers\" button text"
+    previewText: "Knapptexten \"Granska svar\"",
+    // [Auto-translated] "\"Edit Answer\" button text"
+    editText: "Knapptexten \"Redigera svar\"",
     // "\"Start Survey\" button text"
     startSurveyText: "Start knapp text",
     // "Show navigation buttons"
@@ -1283,24 +1283,24 @@ export let svStrings = {
     html: "HTML-kod",
     // [Auto-translated] "Answer"
     setValue: "Svar",
-    // [Auto-translated] "Image format"
-    dataFormat: "Bildformat",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Tillåt att rader läggs till",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Tillåt borttagning av rader",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Tillåt dra och släpp rader",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Gäller inte om du anger bildens exakta bredd eller höjd.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Minsta bildbredd",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Maximal bildbredd",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Minsta bildhöjd",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Maximal bildhöjd",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Format för lagring",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Aktivera radtillägg",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Aktivera borttagning av rader",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Aktivera omordning av rader",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Gäller inte om du anger det exakta visningsområdet, bredden eller höjden.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Minsta bredd på visningsområdet",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Maximal bredd på visningsområdet",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Minsta visningsområdeshöjd",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Maximal visningsområdeshöjd",
     // [Auto-translated] "Minimum value"
     minValue: "Minsta värde",
     // [Auto-translated] "Maximum value"
@@ -1323,30 +1323,30 @@ export let svStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Uttryck för validering"
     },
-    // [Auto-translated] "Total row text"
-    totalText: "Text för summarad",
-    // [Auto-translated] "Total type"
-    totalType: "Total typ",
-    // [Auto-translated] "Total expression"
-    totalExpression: "Totalt uttryck",
-    // [Auto-translated] "Total value display style"
+    // [Auto-translated] "Total row header"
+    totalText: "Radrubrik för totalt antal",
+    // [Auto-translated] "Aggregation method"
+    totalType: "Metod för aggregering",
+    // [Auto-translated] "Total value expression"
+    totalExpression: "Uttryck för totalt värde",
+    // [Auto-translated] "Total value display format"
     totalDisplayStyle: "Visningsformat för totalt värde",
     // [Auto-translated] "Currency"
     totalCurrency: "Valuta",
     // [Auto-translated] "Formatted string"
     totalFormat: "Formaterad sträng",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logotyp (URL eller base64-kodad sträng)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Undersökningens struktur",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Maximal svarslängd (i tecken)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Maximal kommentarslängd (i tecken)",
+    // [Auto-translated] "Survey logo"
+    logo: "Logotyp för undersökning",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Undersökningens layout",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Begränsa svarslängden",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Begränsa kommentarlängden",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Kommentarsfältets höjd (i rader)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "Expandera kommentarsområdet automatiskt om det behövs",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Expandera textområden automatiskt",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     // "Update input field values"
@@ -1359,16 +1359,16 @@ export let svStrings = {
     checkErrorsMode: "Kör validering",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Navigera till URL",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Dynamisk URL",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Omdirigera till en extern länk efter inlämning",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Dynamisk extern länk",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Markering för att visa om användaren redan har fyllt i undersökningen",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Undersökning slutförd sidmarkering",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Dynamisk undersökning Fullständig sidmarkering",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "Markering på sidan \"Tack\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Dynamisk markering av \"Tack\"-sidor",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Markering som ska visas medan undersökningsmodellen läses in",
     // [Auto-translated] "Comment area text"
@@ -1383,8 +1383,8 @@ export let svStrings = {
     allowClear: "Visa knappen Rensa",
     // [Auto-translated] "Search Mode"
     searchMode: "Sökläge",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Visningsformat för värde",
+    // [Auto-translated] "Display format"
+    displayStyle: "Visningsformat",
     // [Auto-translated] "Formatted string"
     format: "Formaterad sträng",
     // [Auto-translated] "Maximum fractional digits"
@@ -1393,18 +1393,18 @@ export let svStrings = {
     minimumFractionDigits: "Minsta bråktal",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Visa grupperingsavgränsare",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Tillåt flera filer",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Förhandsgranska bilder",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Aktivera uppladdning av flera filer",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Förhandsgranska uppladdade bilder",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Godkända filtyper",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vänta tills uppladdningen är klar",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Bekräfta borttagning av fil",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Placering på detaljpanelen",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Justering av raddetaljer",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Minsta antal rader",
     // [Auto-translated] "Maximum row count"
@@ -1413,30 +1413,30 @@ export let svStrings = {
     confirmDelete: "Bekräfta borttagning av rad",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Bekräftelsemeddelande",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Inledande panelantal",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Minsta antal paneler",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Maximalt antal paneler",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Expanderingsläge för innerpanelen",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Knappbeskrivning för föregående panel",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Knappbeskrivning för knappen Nästa panel",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Ta bort panelknappens placering",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "Dölj frågan om det inte finns några rader",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Ursprungligt antal anmälningar",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Minsta antal anmälningar",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Maximalt antal anmälningar",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Ursprungligt starttillstånd",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Texten på knappen \"Föregående inmatning\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Knapptexten \"Nästa post\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Knappjustering \"Ta bort post\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "Dölj frågan om den inte har några rader",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Dölj kolumner om det inte finns några rader",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Anpassade prisvärden",
-    // [Auto-translated] "Rate count"
-    rateCount: "Antal priser",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Hur anger jag hastighetsvärden?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Anpassade betygsvärden",
+    // [Auto-translated] "Rating count"
+    rateCount: "Antal betyg",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Konfiguration av klassificering",
     slider: {
       // [Auto-translated] "Min value"
       min: "Minsta värde",
@@ -1460,9 +1460,9 @@ export let svStrings = {
       autoGenerate: "Konfiguration av skalningsetiketter",
       // [Auto-translated] "Slider type"
       sliderType: "Typ av skjutreglage",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Minsta räckviddslängd",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Maximal räckviddslängd",
       // [Auto-translated] "Custom labels"
       customLabels: "Anpassade etiketter",
@@ -1472,13 +1472,13 @@ export let svStrings = {
       tooltipFormat: "Format för knappbeskrivningar"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Bildens höjd",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Bildens bredd"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Dölj frågan om den inte innehåller några alternativ",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Dölj frågan om den inte har några val",
     // "Minimum width"
     minWidth: "Minsta bredd (i CSS-godkända värden)",
     // "Maximum width"
@@ -1489,10 +1489,10 @@ export let svStrings = {
     showHeader: "Visa kolumnrubriker",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Visa vågrät rullningslist",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Minsta kolumnbredd (i CSS-godkända värden)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Radrubrikbredd (i CSS-godkända värden)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Minsta kolumnbredd",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Bredd på radhuvud",
     // "Value to store when \"True\" is selected"
     valueTrue: "\"Sant\" värde",
     // "Value to store when \"False\" is selected"
@@ -1505,40 +1505,40 @@ export let svStrings = {
     otherErrorText: "Felmeddelandet \"Tom kommentar\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "Felmeddelandet \"Icke-unikt nyckelvärde\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Minsta valda val",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Maximalt antal valda val",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Logotypbredd (i CSS-godkända värden)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Logotypens höjd (i CSS-godkända värden)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Minsta val att välja",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Maximalt antal val",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Logotypens bredd",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Logotypens höjd",
     // "Read-only"
     readOnly: "Skrivskyddad",
-    // [Auto-translated] "Editable if"
-    enableIf: "Redigerbar om",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Inaktivera det skrivskyddade läget om",
     // "\"No rows\" message"
     noRowsText: "Meddelandet \"Inga rader\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Avgränsa specialval (Ingen, Annat, Markera alla)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Separata specialval",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Kopiera alternativ från följande fråga",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Vilka val ska du kopiera?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Vilka alternativ som ska kopieras?",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som val-ID:t",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som valtexter",
-    // [Auto-translated] "Display page titles in progress bar"
-    progressBarShowPageTitles: "Visa sidrubriker i förloppsindikatorn",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
+    progressBarShowPageTitles: "Visa sidtitlar i förloppsindikatorn",
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Visa sidnummer i förloppsindikatorn",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Visa kommentarsområdet",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Platshållare för kommentarsområde",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Visa hastighetsbeskrivningar som extremvärden",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Lägga till en kommentarsruta",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Platshållartext för kommentarsrutan",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Visa etiketterna som extrema värden",
     // [Auto-translated] "Row order"
     rowOrder: "Radordning",
     // [Auto-translated] "Column layout"
@@ -1571,8 +1571,8 @@ export let svStrings = {
       // "Alt text"
       text: "Alt-text"
     },
-    // [Auto-translated] "Logo position"
-    logoPosition: "Logotypens placering",
+    // [Auto-translated] "Logo alignment"
+    logoPosition: "Justering av logotyp",
     // [Auto-translated] "Add logo..."
     addLogo: "Lägg till logotyp...",
     // [Auto-translated] "Change logo..."
@@ -1591,18 +1591,18 @@ export let svStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Förhandsgranska läge",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "Aktivera rutnätslayouten",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Kolumner för rutnätslayout",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "Aktivera rutnätslayout",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Rutnät kolumner",
     // [Auto-translated] "Mask settings"
     maskSettings: "Inställningar för mask",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Felmeddelande om radexpansion",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Justering av felmeddelande med radinformation",
     // Creator tabs
     tabs: {
       panel: {
-        // [Auto-translated] "Layout"
+        // [Auto-translated] "Panel Layout"
         layout: "Panelens layout"
       },
       // "General"
@@ -1660,8 +1660,8 @@ export let svStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Inställningar för inmatningsmask",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Layout",
+        // [Auto-translated] "Panel Layout"
+        panel: "Panelens layout",
         // [Auto-translated] "Layout"
         question: "Layout",
         // [Auto-translated] "Layout"
@@ -1671,12 +1671,12 @@ export let svStrings = {
       data: "Data",
       // [Auto-translated] "Validation"
       validation: "Validering",
-      // [Auto-translated] "Cell Texts"
-      cells: "Cell texter",
-      // [Auto-translated] "Survey Complete"
-      showOnCompleted: "Undersökningen slutförd",
-      // [Auto-translated] "Logo in Survey Title"
-      logo: "Logotyp i undersökningens titel",
+      // [Auto-translated] "Individual Cell Texts"
+      cells: "Enskilda celltexter",
+      // [Auto-translated] "\"Thank You\" Page"
+      showOnCompleted: "Sidan \"Tack\"",
+      // [Auto-translated] "Logo in the Survey Header"
+      logo: "Logotyp i undersökningens sidhuvud",
       // [Auto-translated] "Slider"
       slider: "Skjutreglage",
       // [Auto-translated] "Expression"
@@ -1691,8 +1691,8 @@ export let svStrings = {
       appearance: "Utseende",
       // [Auto-translated] "Accent colors"
       accentColors: "Accentfärger",
-      // [Auto-translated] "Surface Background"
-      surfaceBackground: "Yta Bakgrund",
+      // [Auto-translated] "Surface background"
+      surfaceBackground: "Bakgrund på ytan",
       // [Auto-translated] "Scaling"
       scaling: "Skalning",
       // [Auto-translated] "Others"
@@ -1702,16 +1702,16 @@ export let svStrings = {
     editProperty: "Redigera egenskap '{0}'",
     // "Items"
     items: "[ Element: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Alternativen är synliga om",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Alternativen kan väljas om",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Kolumner visas om",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Raderna visas om",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Lägga till inre indrag",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Gör valen synliga om",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Gör valbara val om",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Gör kolumner synliga om",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Gör rader synliga om",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Öka det inre indraget",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Använd svar från den senaste posten som standard",
     // "Please enter a value."
@@ -1752,36 +1752,36 @@ export let svStrings = {
     triggerRunExpressionEmpty: "Ange ett giltigt uttryck",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Skriv uttryck här...",
-    // [Auto-translated] "No file choosen"
+    // [Auto-translated] "No file chosen"
     noFile: "Ingen fil har valts",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Rensa värdet om frågan döljs",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Egenskapsnamn för värde",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Aktivera sökning",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Rensa dolda frågevärden",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Lagra värden i följande egenskap",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Aktivera sökning medan du skriver",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Dölja markerade objekt",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Stäng listrutan efter val",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Vertikal inriktning",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Varannan rad",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Kolumner visas om",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Raderna visas om",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Platshållare för kommentarsområde",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Text för filplatshållare",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Text för platshållare för foton",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Platshållartext för fil eller foto",
-    // [Auto-translated] "Rate type"
-    rateType: "Typ av hastighet",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Komprimera rullgardinsmenyn när du väljer",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Lodrät justering i celler",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Alternativa radfärger",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Gör kolumner synliga om",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Gör rader synliga om",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Platshållartext för kommentarsrutan",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Platshållartext för lokal fil",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Platshållartext för Kamera",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Platshållartext för lokal fil eller kamera",
+    // [Auto-translated] "Rating icon"
+    rateType: "Ikon för betyg",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Ex.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1805,46 +1805,46 @@ export let svStrings = {
       themeName: "Tema",
       // [Auto-translated] "Question appearance"
       isPanelless: "Frågans utseende",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "Bakgrund och hörnradie",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "Bakgrund och hörnradie",
       // [Auto-translated] "Accent color"
       primaryColor: "Accentfärg",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Opacitet för panelbakgrund",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Opacitet för frågebakgrund",
-      // [Auto-translated] "Font size"
-      fontSize: "Teckenstorlek",
-      // [Auto-translated] "Scale"
-      scale: "Skala",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Opacitet för panel och frågelåda",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Opacitet för indataelement",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Teckenstorlek för undersökning",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Skalfaktor för undersökning",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Hörn radie",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Avancerat läge",
-      // [Auto-translated] "Page title font"
-      pageTitle: "Titel typsnitt",
-      // [Auto-translated] "Page description font"
-      pageDescription: "Beskrivning teckensnitt",
-      // [Auto-translated] "Question title font"
-      questionTitle: "Titel typsnitt",
-      // [Auto-translated] "Question description font"
-      questionDescription: "Beskrivning teckensnitt",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Title font"
+      pageTitle: "Typsnitt för titel",
+      // [Auto-translated] "Description font"
+      pageDescription: "Beskrivning typsnitt",
+      // [Auto-translated] "Title font"
+      questionTitle: "Typsnitt för titel",
+      // [Auto-translated] "Description font"
+      questionDescription: "Beskrivning typsnitt",
+      // [Auto-translated] "Font"
       editorFont: "Teckensnitt",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Ogenomskinlighet",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Teckensnitt familj",
+      backgroundOpacity: "Ogenomskinlighet", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Familj av undersökningsteckensnitt",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Bakgrundsfärg",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Accent bakgrund",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Accent förgrund",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Felmeddelanden",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Accentuerade bakgrundsfärger",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Accentuerade förgrundsfärger",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Färger för felmeddelanden",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Skugga effekter",
       // [Auto-translated] "Shadow effects"
@@ -1855,8 +1855,8 @@ export let svStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Utsikt",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Logotypens placering",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Justering av logotyp",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Teckensnitt för undersökningens titel",
       // [Auto-translated] "Survey description font"
@@ -1877,12 +1877,12 @@ export let svStrings = {
       backgroundImageOpacity: "Ogenomskinlighet",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Överlappa",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Logotypens placering",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Titel position",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Beskrivning position"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Justering av logotyp",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Justering av undersökningstitel",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Justering av undersökningsbeskrivning"
     }
   },
   // Property values
@@ -1891,12 +1891,12 @@ export let svStrings = {
     "true": "sann",
     // [Auto-translated] "false"
     "false": "falsk",
-    // [Auto-translated] "Local files"
-    file: "Lokala filer",
+    // [Auto-translated] "Local file"
+    file: "Lokal fil",
     // [Auto-translated] "Camera"
     camera: "Kamera",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Lokala filer eller kamera",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Lokal fil eller kamera",
     // "Inherit"
     inherit: "inherit",
     // "Visible"
@@ -2017,7 +2017,7 @@ export let svStrings = {
     onComplete: "onComplete",
     // "When question gets hidden"
     onHidden: "onHidden",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
+    // [Auto-translated] "When question or its panel/page gets hidden"
     onHiddenContainer: "När frågan eller dess panel/sida döljs",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
@@ -2206,9 +2206,9 @@ export let svStrings = {
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Ursprunglig struktur",
-      // [Auto-translated] "All questions on a single page"
+      // [Auto-translated] "Show all questions on one page"
       singlePage: "Visa alla frågor på en sida",
-      // [Auto-translated] "Each question on an individual page"
+      // [Auto-translated] "Show single question per page"
       questionPerPage: "Visa en fråga per sida",
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Visa ett enskilt inmatningsfält per sida"
@@ -2233,18 +2233,18 @@ export let svStrings = {
     correctQuestions: "Giltiga svar",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Slutförda sidor (knappgränssnitt)",
-    // [Auto-translated] "Under the input"
-    underInput: "Under ingången",
-    // [Auto-translated] "Under the title"
-    underTitle: "Under rubriken",
-    // [Auto-translated] "On blur"
-    onBlur: "Vid oskärpa",
+    // [Auto-translated] "Under the input field"
+    underInput: "Under inmatningsfältet",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Under frågans titel",
+    // [Auto-translated] "On lost focus"
+    onBlur: "Om tappat fokus",
     // [Auto-translated] "While typing"
     onTyping: "Medan du skriver",
     // [Auto-translated] "Under the row"
     underRow: "Under raden",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Under raden syns bara en panel",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Under raden visas endast ett avsnitt",
     // "Auto"
     auto: "Automatisk",
     showNavigationButtons: {
@@ -2256,16 +2256,16 @@ export let svStrings = {
       combined: "Båda"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Beror på matrislayout"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Baserat på matrislayout"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Användare kan inte expandera eller komprimera paneler",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Alla paneler är komprimerade",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Alla paneler är expanderade",
+      // [Auto-translated] "Locked"
+      default: "Låst",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Komprimera alla",
+      // [Auto-translated] "Expand all"
+      expanded: "Expandera alla",
       // [Auto-translated] "First expanded"
       firstExpanded: "Först utökad"
     },
@@ -2302,10 +2302,10 @@ export let svStrings = {
       colored: "Färgad"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Generera",
-      // [Auto-translated] "Enter manually"
-      "false": "Ange manuellt"
+      // [Auto-translated] "Auto-generate"
+      "true": "Generera automatiskt",
+      // [Auto-translated] "Manual"
+      "false": "Handbok"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2326,7 +2326,7 @@ export let svStrings = {
       on: "Automatisk numrering",
       // [Auto-translated] "Reset on each page"
       onPage: "Återställ på varje sida",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "Återställ på varje panel",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Återställ på varje panel",
@@ -2434,8 +2434,8 @@ export let svStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Samma som enkät",
-      // [Auto-translated] "Fit to container"
-      container: "Passa till behållare"
+      // [Auto-translated] "Same as container"
+      container: "Samma som behållare"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2609,21 +2609,21 @@ export let svStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Ett panel-ID som inte är synligt för svarande.",
-      // [Auto-translated] "Type a subtitle."
-      description: "Skriv en panelundertext.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "Skriv en underrubrik för panelen.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer panelens synlighet.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för panelen.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Gäller för alla frågor i den här panelen. När den är inställd på \"Dold\" döljer den också frågebeskrivningar. Om du vill åsidosätta den här inställningen definierar du regler för titeljustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Överst\" som standard). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       // "Repositions the panel to the end of a selected page."
       page: "Flyttar panelen till slutet av en markerad sida.",
@@ -2633,8 +2633,8 @@ export let svStrings = {
       startWithNewLine: "Avmarkera om du vill visa panelen på en rad med föregående fråga eller panel. Inställningen gäller inte om panelen är det första elementet i formuläret.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Välj mellan: \"Expanderad\" - panelen visas i sin helhet och kan fällas ihop; \"Komprimerad\" - panelen visar endast titel och beskrivning och kan expanderas; \"Låst\" - panelen visas i sin helhet och kan inte fällas ihop.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Ställer in panelens bredd i proportion till andra mätelement på samma linje. Accepterar CSS-värden (px, %, in, pt, etc.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den här panelen.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2685,12 +2685,12 @@ export let svStrings = {
       descriptionLocation: "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Duplicerar svar från den senaste posten och tilldelar dem till nästa tillagda post.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Utlöser en bekräftelseprompt innan en panel tas bort."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2777,17 +2777,17 @@ export let svStrings = {
       imageHeight: "Åsidosätter värdena för lägsta och högsta höjd.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Åsidosätter värdena för minsta och största bredd.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Värde\" fungerar som ett objekt-ID som används i villkorsregler. \"Text\" visas för respondenterna.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Värde\" fungerar som ett objekt-ID som används i villkorsregler. \"Text\" visas för de svarande.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Välj mellan \"Bild\" och \"Video\" för att ställa in innehållsläget för medieväljaren. Om \"Bild\" är valt, se till att alla alternativ som tillhandahålls är bildfiler i följande format: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samma sätt, om \"Video\" är valt, se till att alla alternativ är direktlänkar till videofiler i följande format: MP4, MOV, WMV, FLV, AVI, MKV. Observera att YouTube-länkar inte stöds för videoalternativ."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Den här inställningen ändrar bara storleken på inmatningsfältet och påverkar inte frågerutans bredd. Om du vill begränsa den godkända indatalängden går du till <b>Validering → Maximal teckengräns</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Den här inställningen ändrar bara storleken på inmatningsfältet och påverkar inte bredden på frågerutan. Om du vill begränsa den tillåtna inmatningsl��ngden går du till \"Validering\" → \"Gräns för maximalt antal tecken\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
       rows: "Ställer in antalet rader som visas i inmatningsfältet. Om inmatningen tar upp fler rader visas rullningslisten."
     },
     // survey templates
@@ -2812,7 +2812,7 @@ export let svStrings = {
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
     },
     slider: {
@@ -2849,8 +2849,8 @@ export let svStrings = {
     caseInsensitive: "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Välj mellan: \"Statisk\" - ställer in en fast bredd; \"Responsiv\" - gör att undersökningen upptar hela skärmens bredd; \"Auto\" - gäller någon av de två beroende på vilka frågetyper som används.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Cookies hindrar användare från att fylla i samma undersökning två gånger.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Tilldela ett unikt cookie-värde för din undersökning. Cookien kommer att ställas in i en respondents webbläsare när undersökningen är klar för att förhindra upprepade undersökningsinlämningar.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Klistra in en bildlänk (inga storleksbegränsningar) eller klicka på mappikonen för att bläddra i en fil från din dator (upp till 64 kB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2863,8 +2863,8 @@ export let svStrings = {
     autoAdvanceEnabled: "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Ställer in synligheten för navigeringsknappar på en sida.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Anger placeringen av navigeringsknapparna på en sida.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2885,7 +2885,7 @@ export let svStrings = {
     maxTextLength: "Endast för textinmatningsfrågor.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Endast för frågekommentarer.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Välj om du vill att frågekommentarer och långa textfrågor automatiskt ska öka i höjd baserat på den angivna textlängden.",
@@ -2909,8 +2909,8 @@ export let svStrings = {
     columnMinWidth: "Accepterar CSS-värden (px, %, in, pt, etc.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Accepterar CSS-värden (px, %, in, pt, etc.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Visas bara när minst en kolumn har Total type eller Total uttryck.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Visas endast om minst en kolumn visar totalvärden som ställts in med \"Aggregeringsmetod\" eller \"Uttryck för totalvärde\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Anger platsen för ett felmeddelande i förhållande till en cell med ogiltiga indata. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2931,12 +2931,12 @@ export let svStrings = {
     imageFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Ökar gradvis höjden på inmatningsfältet när data matas in. Åsidosätter inställningen \"Inmatningsfältets höjd (i rader)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Storlekshandtaget (eller greppet) visas i hörnet och kan dras för att ändra storleken på inmatningsfältet.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Alternativet \"Ärv\" tillämpar en inställning på undersökningsnivå (\"Aktiverad\" som standard).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Ett tidsintervall i sekunder efter vilket undersökningen automatiskt går vidare till sidan \"Tack\". När värdet är 0 räknas den tid som spenderas på undersökningen.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida. Döljer navigeringsknappen \"Föregående\". När värdet är 0 räknas den tid som spenderas på den aktuella sidan.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar.",
     page: {
@@ -2985,8 +2985,8 @@ export let svStrings = {
     maxWidth: "Accepterar CSS-värden (px, %, in, pt, etc.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Accepterar CSS-värden (px, %, in, pt, etc.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Om du inte anger den här egenskapen lagras svaret i ett fält som anges av egenskapen Name.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "En kopplingsidentifierare är en anpassad nyckel som du kan tilldela till flera frågor för att länka ihop dem och synkronisera deras värden. Dessa värden kommer att sammanfogas till en enda matris eller ett objekt och lagras i undersökningsresultat med hjälp av nyckeln som egenskapsnamn.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Ett värde som visas i HTML-frågor och i dynamiska titlar och beskrivningar av undersökningselement när frågevärdet är tomt.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3031,7 +3031,7 @@ export let svStrings = {
     valueTrue: "Ett värde att spara i undersökningsresultaten när respondenterna ger ett positivt svar.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Ett värde att spara i undersökningsresultaten när respondenterna ger ett negativt svar.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Vi rekommenderar inte att du inaktiverar det här alternativet eftersom det åsidosätter förhandsgranskningsbilden och gör det svårt för en användare att förstå om filerna har laddats upp.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Utlöser en uppmaning om att bekräfta borttagningen av filen.",
@@ -3041,7 +3041,7 @@ export let svStrings = {
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte.",
@@ -3063,10 +3063,10 @@ export let svStrings = {
     format: "Använd {0} som platshållare för det faktiska värdet.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Mer information finns i attributbeskrivningen [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Gäller endast för Radiogroup- och Checkbox-celltyper.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Mer information finns i attributbeskrivningen [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. Gäller endast för kolumner med \"Cellindatatyp\" inställt på Alternativknappsgrupp eller Kryssrutor.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Välj den datatyp som användarens webbläsare kan hämta. Dessa data hämtas antingen från tidigare värden som angetts av användaren eller från förkonfigurerade värden om sådana har sparats av användaren för automatisk komplettering.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3140,60 +3140,60 @@ export let svStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Tillåt flera val",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Visa bildtexter",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Visa bildtexter för bilder och videor",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Byt ordning på Ja och Nej",
     // [Auto-translated] "Value"
     value: "Värde",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Justering av tabb",
-    // [Auto-translated] "Source type"
-    sourceType: "Typ av källa",
+    // [Auto-translated] "File source type"
+    sourceType: "Typ av filkälla",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Passa till behållare",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Ange värde-uttryck",
     // "Description"
-    description: "description",
+    description: "description", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Logotyp passform",
     // [Auto-translated] "Pages"
-    pages: "Sidor",
+    pages: "Sidor", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Frågor",
+    questions: "Frågor", // Auto-generated string
     // "Triggers"
     triggers: "triggers",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Beräknade värden",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Anpassade variabler",
     // [Auto-translated] "Survey id"
-    surveyId: "Undersöknings-id",
+    surveyId: "Undersöknings-id", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "Post-id för undersökning",
+    surveyPostId: "Post-id för undersökning", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Undersökning visar datasparande",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Plats för frågebeskrivning",
+    surveyShowDataSaving: "Undersökning visar datasparande", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Justering av frågebeskrivning",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Typ av förloppsindikator",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Visa innehållsförteckning",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Toc-plats",
+    progressBarType: "Typ av förloppsindikator", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Visa innehållsförteckning (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Justering av innehållsförteckning",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Mönster för frågerubrik",
-    // [Auto-translated] "Width mode"
-    widthMode: "Bredd, läge",
+    questionTitlePattern: "Mönster för frågerubrik", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Läge för undersökningsbredd",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Visa varumärkesinformation",
+    showBrandInfo: "Visa varumärkesinformation", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Använda visningsvärden i dynamiska texter",
     // "Visible if"
-    visibleIf: "visibleIf",
+    visibleIf: "visibleIf", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Uttryck för standardvärde",
     // [Auto-translated] "Required if"
-    requiredIf: "Obligatoriskt om",
+    requiredIf: "Obligatoriskt om", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Återställ värde om",
     // [Auto-translated] "Set value if"
@@ -3201,137 +3201,137 @@ export let svStrings = {
     // "Validation rules"
     validators: "validators",
     // [Auto-translated] "Bindings"
-    bindings: "Bindningar",
+    bindings: "Bindningar", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Återge som",
+    renderAs: "Återge som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Bifoga originalföremål",
+    attachOriginalItems: "Bifoga originalföremål", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"
-    choicesByUrl: "choicesByUrl",
+    choicesByUrl: "choicesByUrl", // Auto-generated string
     // "Currency"
-    currency: "currency",
+    currency: "currency", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Cell tips",
+    cellHint: "Cell tips", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Totalt antal maximala bråksiffror",
+    totalMaximumFractionDigits: "Totalt antal maximala bråksiffror", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Totala minsta bråksiffror",
+    totalMinimumFractionDigits: "Totala minsta bråksiffror", // Auto-generated string
     // "Columns"
-    columns: "columns",
+    columns: "columns", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Detaljelement",
+    detailElements: "Detaljelement", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Tillåt anpassningsbara åtgärder",
+    allowAdaptiveActions: "Tillåt anpassningsbara åtgärder", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "defaultRowValue",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "defaultRowValue", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Expandera automatiskt information om ny rad",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Val lat belastning aktiverad",
+    choicesLazyLoadEnabled: "Val lat belastning aktiverad", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Val lat ladda sidstorlek",
+    choicesLazyLoadPageSize: "Val lat ladda sidstorlek", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Komponent för inmatningsfält",
+    inputFieldComponent: "Komponent för inmatningsfält", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Komponent för objekt",
+    itemComponent: "Komponent för objekt", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Minsta värdeuttryck",
+    minValueExpression: "Minsta värdeuttryck", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Uttryck för maximalt värde",
+    maxValueExpression: "Uttryck för maximalt värde", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Steg",
-    // [Auto-translated] "Data list"
-    dataList: "Lista över uppgifter",
+    step: "Steg", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Objekt för automatiska förslag",
     // "Input field width (in characters)"
     inputSize: "inputSize",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Bredd på objektetikett (i px)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Bredd på objektetikett",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Justering av indatavärde",
     // [Auto-translated] "Elements"
-    elements: "Element",
+    elements: "Element", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Innehåll",
+    content: "Innehåll", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Navigering titel",
+    navigationTitle: "Navigering titel", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Beskrivning av navigering",
+    navigationDescription: "Beskrivning av navigering", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Långt tryck",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Väx automatiskt",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Tillåt storleksändring",
+    longTap: "Långt tryck", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Expandera inmatningsfältet dynamiskt",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Aktivera handtag för att ändra storlek",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Acceptera retur av transport",
+    acceptCarriageReturn: "Acceptera retur av transport", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Visningsläge",
     // [Auto-translated] "Rate type"
-    rateType: "Typ av hastighet",
+    rateType: "Typ av hastighet", // Auto-generated string
     // "Label"
-    label: "label",
+    label: "label", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Innehållsläge",
-    // [Auto-translated] "Image fit"
-    imageFit: "Bildens anpassning",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Bild och miniatyrbild passar",
     // [Auto-translated] "Alt text"
     altText: "Alt-text",
     // [Auto-translated] "Height"
-    height: "Höjd",
+    height: "Höjd", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Höjd på smartphones",
     // [Auto-translated] "Pen color"
-    penColor: "Pennans färg",
+    penColor: "Pennans färg", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Bakgrundsfärg",
     // [Auto-translated] "Template elements"
-    templateElements: "Mallelement",
+    templateElements: "Mallelement", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Operatör",
+    operator: "Operatör", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Är variabel",
+    isVariable: "Är variabel", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Kör uttryck",
+    runExpression: "Kör uttryck", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Visa bildtext",
+    showCaption: "Visa bildtext", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Ikonens namn",
+    iconName: "Ikonens namn", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Ikonens storlek",
+    iconSize: "Ikonens storlek", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Precision",
+    precision: "Precision", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Matrisens draghandtagsområde",
+    matrixDragHandleArea: "Matrisens draghandtagsområde", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Bakgrundsbild",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Anpassa bakgrundsbild",
+    backgroundImageFit: "Anpassa bakgrundsbild", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Bilaga till bakgrundsbild",
+    backgroundImageAttachment: "Bilaga till bakgrundsbild", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Bakgrunds opacitet",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Välj att rangordna aktiverad",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Välj för att rangordna områdeslayout",
+    backgroundOpacity: "Bakgrunds opacitet", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Tillåt selektiv rangordning",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Justering av rankningsområde",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Text som ska visas om alla alternativ är markerade",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Platshållartext för rangordningsområdet",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Tillåt kameraåtkomst",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Färgläge för skala",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Betygsätt färgläge",
+    allowCameraAccess: "Tillåt kameraåtkomst", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Färgläge för betygsikon",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Smileys färgschema",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Kopiera visningsvärde",
+    copyDisplayValue: "Kopiera visningsvärde", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolumn spännvidd",
     // [Auto-translated] "Progress bar area width"
@@ -3460,8 +3460,8 @@ export let svStrings = {
     "--sjs-secondary-background-500": "Sekundär",
     // [Auto-translated] "Surface"
     surfaceScale: "Yta",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Användargränssnitt",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Element i användargränssnittet",
     // [Auto-translated] "Font"
     fontScale: "Teckensnitt",
     names: {

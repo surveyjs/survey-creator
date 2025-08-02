@@ -512,7 +512,7 @@ export const thStrings = {
       // "reset value for question: {0}"
       question_resetValueText: "รีเซ็ตค่าคำถาม: {0}", // {0} question name.
       // "assign value: {1} to question: {0}"
-      question_setValueText: "กำหนดค่า: {1} ให้คำถาม: {0}",
+      question_setValueText: "กำหนดค่า: {1} ให้คำถาม: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "ทำให้คอลัมน์ {0} ของคำถาม {1} แสดง", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -636,8 +636,8 @@ export const thStrings = {
       minWidth: "ความกว้างขั้นต่ำของแผง",
       // "Maximum panel width"
       maxWidth: "ความกว้างสูงสุดของแผง",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "ยืนยันการลบแผง",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "ยืนยันการลบรายการ",
       // "Entry description pattern"
       templateDescription: "รูปแบบคำอธิบายแผง",
       // "Entry title pattern"
@@ -763,12 +763,12 @@ export const thStrings = {
       readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
     },
     page: {
-      // [Auto-translated] "A page ID that is not visible to respondents."
+      // [Auto-translated] "Page name"
       name: "ชื่อหน้า",
       // "Page title"
       title: "ชื่อหน้า",
-      // [Auto-translated] "Type a page subtitle."
-      description: "คำอธิบายหน้า",
+      // [Auto-translated] "Page description"
+      description: "คําอธิบายหน้า",
       // "Make the page visible if"
       visibleIf: "ทำให้หน้ามองเห็นได้ถ้า",
       // "Make the page required if"
@@ -1319,8 +1319,8 @@ export const thStrings = {
     surveyvalidator: {
       // "Error message"
       text: "ข้อความข้อผิดพลาด",
-      // [Auto-translated] "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "นิพจน์การตรวจสอบ"
+      // [Auto-translated] "Validation expression"
+      expression: "นิพจน์การตรวจสอบความถูกต้อง"
     },
     // "Total row header"
     totalText: "หัวแถวรวม",
@@ -1459,9 +1459,9 @@ export const thStrings = {
       autoGenerate: "การกําหนดค่าป้ายชื่อมาตราส่วน",
       // [Auto-translated] "Slider type"
       sliderType: "ประเภทตัวเลื่อน",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "ความยาวช่วงต่ําสุด",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "ความยาวช่วงสูงสุด",
       // [Auto-translated] "Custom labels"
       customLabels: "ป้ายกํากับที่กําหนดเอง",
@@ -1590,14 +1590,14 @@ export const thStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "โหมดแสดงตัวอย่าง",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "เปิดใช้งานเค้าโครงกริด",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "คอลัมน์เค้าโครงกริด",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "คอลัมน์กริด",
     // [Auto-translated] "Mask settings"
     maskSettings: "การตั้งค่าหน้ากาก",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดรายละเอียดแถว",
     // Creator tabs
     tabs: {
       panel: {
@@ -1690,7 +1690,7 @@ export const thStrings = {
       appearance: "การปรากฏ",
       // [Auto-translated] "Accent colors"
       accentColors: "สีเน้นเสียง",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "พื้นหลังพื้นผิว",
       // [Auto-translated] "Scaling"
       scaling: "มาตรา ส่วน",
@@ -1833,7 +1833,7 @@ export const thStrings = {
       // "Font"
       editorFont: "ฟอนต์",
       // "Opacity"
-      backgroundOpacity: "ความทึบ",
+      backgroundOpacity: "ความทึบ", // Auto-generated string
       // "Survey font family"
       "--sjs-font-family": "ฟอนต์แบบสำรวจ",
       // "Background color"
@@ -3154,45 +3154,45 @@ export const thStrings = {
     // "Set value expression"
     setValueExpression: "ตั้งค่านิพจน์",
     // "Description"
-    description: "คำอธิบาย",
+    description: "คำอธิบาย", // Auto-generated string
     // "Logo fit"
     logoFit: "ความพอดีของโลโก้",
     // "Pages"
-    pages: "หน้า",
+    pages: "หน้า", // Auto-generated string
     // "Questions"
-    questions: "คำถาม",
+    questions: "คำถาม", // Auto-generated string
     // "Triggers"
     triggers: "ทริกเกอร์",
     // "Custom variables"
     calculatedValues: "ตัวแปรที่กำหนดเอง",
     // "Survey id"
-    surveyId: "ID แบบสำรวจ",
+    surveyId: "ID แบบสำรวจ", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "ID โพสต์แบบสำรวจ",
+    surveyPostId: "ID โพสต์แบบสำรวจ", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "แสดงการบันทึกข้อมูลแบบสำรวจ",
+    surveyShowDataSaving: "แสดงการบันทึกข้อมูลแบบสำรวจ", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "การจัดตำแหน่งคำอธิบายคำถาม",
     // "Progress bar type"
-    progressBarType: "ประเภทแถบความคืบหน้า",
+    progressBarType: "ประเภทแถบความคืบหน้า", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "แสดงสารบัญ (TOC)",
     // "TOC alignment"
     tocLocation: "การจัดตำแหน่ง TOC",
     // "Question title pattern"
-    questionTitlePattern: "รูปแบบชื่อคำถาม",
+    questionTitlePattern: "รูปแบบชื่อคำถาม", // Auto-generated string
     // "Survey width mode"
     widthMode: "โหมดความกว้างแบบสำรวจ",
     // "Show brand info"
-    showBrandInfo: "แสดงข้อมูลแบรนด์",
+    showBrandInfo: "แสดงข้อมูลแบรนด์", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "ใช้ค่าที่แสดงในข้อความไดนามิก",
     // "Visible if"
-    visibleIf: "มองเห็นถ้า",
+    visibleIf: "มองเห็นถ้า", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "นิพจน์ค่าเริ่มต้น",
     // "Required if"
-    requiredIf: "จำเป็นถ้า",
+    requiredIf: "จำเป็นถ้า", // Auto-generated string
     // "Reset value if"
     resetValueIf: "รีเซ็ตค่าเมื่อ",
     // "Set value if"
@@ -3200,51 +3200,51 @@ export const thStrings = {
     // "Validation rules"
     validators: "กฎการตรวจสอบ",
     // "Bindings"
-    bindings: "การผูก",
+    bindings: "การผูก", // Auto-generated string
     // "Render as"
-    renderAs: "แสดงผลเป็น",
+    renderAs: "แสดงผลเป็น", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "แนบรายการเดิม",
+    attachOriginalItems: "แนบรายการเดิม", // Auto-generated string
     // "Choices"
     choices: "ตัวเลือก",
     // "Choices by url"
-    choicesByUrl: "ตัวเลือกโดย URL",
+    choicesByUrl: "ตัวเลือกโดย URL", // Auto-generated string
     // "Currency"
-    currency: "สกุลเงิน",
+    currency: "สกุลเงิน", // Auto-generated string
     // "Cell hint"
-    cellHint: "คำแนะนำเซลล์",
+    cellHint: "คำแนะนำเซลล์", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "จำนวนหลักเศษสูงสุดทั้งหมด",
+    totalMaximumFractionDigits: "จำนวนหลักเศษสูงสุดทั้งหมด", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "จำนวนหลักเศษต่ำสุดทั้งหมด",
+    totalMinimumFractionDigits: "จำนวนหลักเศษต่ำสุดทั้งหมด", // Auto-generated string
     // "Columns"
-    columns: "คอลัมน์",
+    columns: "คอลัมน์", // Auto-generated string
     // "Detail elements"
-    detailElements: "องค์ประกอบรายละเอียด",
+    detailElements: "องค์ประกอบรายละเอียด", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "อนุญาตการดำเนินการที่ปรับตัวได้",
+    allowAdaptiveActions: "อนุญาตการดำเนินการที่ปรับตัวได้", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "ค่าเริ่มต้นของแถว",
+    defaultRowValue: "ค่าเริ่มต้นของแถว", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "ขยายรายละเอียดแถวใหม่โดยอัตโนมัติ",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "เปิดใช้งานการโหลดตัวเลือกอย่างขี้เกียจ",
+    choicesLazyLoadEnabled: "เปิดใช้งานการโหลดตัวเลือกอย่างขี้เกียจ", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "ขนาดหน้าการโหลดตัวเลือกขี้เกียจ",
+    choicesLazyLoadPageSize: "ขนาดหน้าการโหลดตัวเลือกขี้เกียจ", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "ส่วนประกอบช่องป้อนข้อมูล",
+    inputFieldComponent: "ส่วนประกอบช่องป้อนข้อมูล", // Auto-generated string
     // "Item component"
-    itemComponent: "ส่วนประกอบรายการ",
+    itemComponent: "ส่วนประกอบรายการ", // Auto-generated string
     // "Min"
-    min: "ต่ำสุด",
+    min: "ต่ำสุด", // Auto-generated string
     // "Max"
-    max: "สูงสุด",
+    max: "สูงสุด", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "นิพจน์ค่าน้อยสุด",
+    minValueExpression: "นิพจน์ค่าน้อยสุด", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "นิพจน์ค่าสูงสุด",
+    maxValueExpression: "นิพจน์ค่าสูงสุด", // Auto-generated string
     // "Step"
-    step: "ขั้นตอน",
+    step: "ขั้นตอน", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "รายการสำหรับการเสนอแนะ",
     // "Input field width (in characters)"
@@ -3254,27 +3254,27 @@ export const thStrings = {
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "การจัดตําแหน่งค่าอินพุต",
     // "Elements"
-    elements: "องค์ประกอบ",
+    elements: "องค์ประกอบ", // Auto-generated string
     // "Content"
-    content: "เนื้อหา",
+    content: "เนื้อหา", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "ชื่อเรื่องนำทาง",
+    navigationTitle: "ชื่อเรื่องนำทาง", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "คำอธิบายนำทาง",
+    navigationDescription: "คำอธิบายนำทาง", // Auto-generated string
     // "Long tap"
-    longTap: "แตะค้าง",
+    longTap: "แตะค้าง", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "ขยายช่องป้อนข้อมูลอัตโนมัติ",
     // "Enable resize handle"
     allowResize: "อนุญาตการย่อขยาย",
     // "Accept carriage return"
-    acceptCarriageReturn: "ยอมรับการคืนรถเข็น",
+    acceptCarriageReturn: "ยอมรับการคืนรถเข็น", // Auto-generated string
     // "Display mode"
     displayMode: "โหมดการแสดงผล",
     // "Rate type"
-    rateType: "ประเภทการให้คะแนน",
+    rateType: "ประเภทการให้คะแนน", // Auto-generated string
     // "Label"
-    label: "ป้ายชื่อ",
+    label: "ป้ายชื่อ", // Auto-generated string
     // "Content mode"
     contentMode: "โหมดเนื้อหา",
     // "Image and thumbnail fit"
@@ -3282,39 +3282,39 @@ export const thStrings = {
     // "Alt text"
     altText: "ข้อความสำรอง",
     // "Height"
-    height: "ความสูง",
+    height: "ความสูง", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "ความสูงบนสมาร์ทโฟน",
     // "Pen color"
-    penColor: "สีปากกา",
+    penColor: "สีปากกา", // Auto-generated string
     // "Background color"
     backgroundColor: "สีพื้นหลัง",
     // "Template elements"
-    templateElements: "องค์ประกอบเทมเพลต",
+    templateElements: "องค์ประกอบเทมเพลต", // Auto-generated string
     // "Operator"
-    operator: "ตัวดำเนินการ",
+    operator: "ตัวดำเนินการ", // Auto-generated string
     // "Is variable"
-    isVariable: "เป็นตัวแปร",
+    isVariable: "เป็นตัวแปร", // Auto-generated string
     // "Run expression"
-    runExpression: "รันนิพจน์",
+    runExpression: "รันนิพจน์", // Auto-generated string
     // "Show caption"
-    showCaption: "แสดงคำบรรยาย",
+    showCaption: "แสดงคำบรรยาย", // Auto-generated string
     // "Icon name"
-    iconName: "ชื่อไอคอน",
+    iconName: "ชื่อไอคอน", // Auto-generated string
     // "Icon size"
-    iconSize: "ขนาดไอคอน",
+    iconSize: "ขนาดไอคอน", // Auto-generated string
     // "Precision"
-    precision: "ความแม่นยำ",
+    precision: "ความแม่นยำ", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "พื้นที่จับลากเมทริกซ์",
+    matrixDragHandleArea: "พื้นที่จับลากเมทริกซ์", // Auto-generated string
     // "Background image"
     backgroundImage: "ภาพพื้นหลัง",
     // "Background image fit"
-    backgroundImageFit: "ความพอดีของภาพพื้นหลัง",
+    backgroundImageFit: "ความพอดีของภาพพื้นหลัง", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "การแนบภาพพื้นหลัง",
+    backgroundImageAttachment: "การแนบภาพพื้นหลัง", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "ความโปร่งใสของพื้นหลัง",
+    backgroundOpacity: "ความโปร่งใสของพื้นหลัง", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "อนุญาตการจัดอันดับแบบเลือกได้",
     // "Ranking area alignment"
@@ -3324,13 +3324,13 @@ export const thStrings = {
     // "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "ข้อความสำรองสำหรับพื้นที่การจัดอันดับ",
     // "Allow camera access"
-    allowCameraAccess: "อนุญาตการเข้าถึงกล้อง",
+    allowCameraAccess: "อนุญาตการเข้าถึงกล้อง", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "โหมดสีไอคอนการให้คะแนน",
     // "Smileys color scheme"
     rateColorMode: "โทนสีของสไมลี่",
     // "Copy display value"
-    copyDisplayValue: "คัดลอกค่าที่แสดง",
+    copyDisplayValue: "คัดลอกค่าที่แสดง", // Auto-generated string
     // "Column span"
     effectiveColSpan: "การขยายคอลัมน์",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export const thStrings = {
     "--sjs-secondary-background-500": "รอง",
     // [Auto-translated] "Surface"
     surfaceScale: "พื้นผิว",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "ส่วนติดต่อผู้ใช้",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "องค์ประกอบ UI",
     // [Auto-translated] "Font"
     fontScale: "แบบอักษร",
     names: {

@@ -120,11 +120,11 @@ export var hrStrings = {
     settingsTooltip: "Otvaranje postavki ankete",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Postavke upitnika",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "Postavke upitnika",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Postavke teme",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Postavke teme",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Postavke autora",
@@ -427,16 +427,16 @@ export var hrStrings = {
       logicPlaceholderDescriptionMobile: "Stvorite pravilo za prilagodbu tijeka upitnika.",
       // "Show/hide page"
       page_visibilityName: "Vidljivost stranice",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Omogući (onemogući stranicu)",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Omogući/onemogući stranicu",
       // [Auto-translated] "Make page required"
       page_requireName: "Učini stranicu obaveznom",
       // "Show/hide panel"
       panel_visibilityName: "Vidljivost panela",
       // "Enable/disable panel"
       panel_enableName: "Omogući/onemogući panel",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Učini stranicu obaveznom",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Potrebna je ploča za izradu",
       // "Show/hide question"
       question_visibilityName: "Vidljivost pitanja",
       // "Enable/disable question"
@@ -447,10 +447,10 @@ export var hrStrings = {
       question_resetValueName: "Vrati izvornu vrijednost pitanja",
       // [Auto-translated] "Set question value"
       question_setValueName: "Postavljanje vrijednosti pitanja",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Pokaži (sakrij) stupac",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Omogući (onemogući stupac)",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Prikaži/sakrij stupac",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Stupac Omogući/onemogući",
       // [Auto-translated] "Make column required"
       column_requireName: "Učini stupac obaveznim",
       // [Auto-translated] "Reset column value"
@@ -512,7 +512,7 @@ export var hrStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Dodijeli vrijednost: {1} pitanje: {0}",
+      question_setValueText: "Dodijeli vrijednost: {1} pitanje: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var hrStrings = {
       column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
       // "survey becomes completed"
       trigger_completeText: "Anketa se dovrša",
       // "set into question: {0} value {1}"
@@ -590,25 +590,25 @@ export var hrStrings = {
       requiredIf: "Učinite ploču potrebnom ako",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Redoslijed pitanja unutar ploče",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Nadređena stranica",
+      // [Auto-translated] "Move the panel to page"
+      page: "Premještanje ploče na stranicu",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Prikaz ploče na novom retku",
-      // [Auto-translated] "Panel expand state"
-      state: "Stanje sažimanja ploče",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Širina umetnute ploče",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Stanje urušavanja ploče",
+      // [Auto-translated] "Inline panel width"
+      width: "Ugrađena širina ploče",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Minimalna širina ploče",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
-      maxWidth: "Maksimalna širina ploče",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Maximum panel width"
+      maxWidth: "Maksimalna širina panela",
+      // [Auto-translated] "Number this panel"
       showNumber: "Numerirajte ovu ploču"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Efektivna širina, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Širina naslova pitanja, px"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export var hrStrings = {
       minWidth: "Minimalna širina ploče",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Maksimalna širina ploče",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Potvrda brisanja ploče",
-      // [Auto-translated] "Description template"
-      templateDescription: "Uzorak opisa ploče",
-      // [Auto-translated] "Title template"
-      templateTitle: "Uzorak naslova ploče",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "Prazan tekst ploče",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Potvrdite uklanjanje unosa",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Uzorak opisa unosa",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Uzorak naslova unosa",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "Prazan tekst na ploči",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Uzorak naslova kartice",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Rezervirano mjesto naslova tabulatora",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Učinite pojedinačnu ploču vidljivom ako",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Učinite pojedinačni unos vidljivim ako",
       // [Auto-translated] "Number the panel"
       showNumber: "Numerirajte ploču",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Poravnanje naslova ploče",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Poravnanje opisa ploče",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "Poravnanje naslova pitanja",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Širina naslova pitanja",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Poravnanje poruke o pogrešci",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Novo mjesto ploče",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Nova lokacija ulaska",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "Prikaz trake napretka",
-      // [Auto-translated] "Key column"
-      keyName: "Spriječite dvostruke odgovore u sljedećem pitanju"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var hrStrings = {
       visibleIf: "Učinite pitanje vidljivim ako",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Neka pitanje bude potrebno ako:",
-      // [Auto-translated] "Parent page"
-      page: "Nadređena stranica",
+      // [Auto-translated] "Move the question to page"
+      page: "Premještanje pitanja na stranicu",
       // [Auto-translated] "Question box collapse state"
       state: "Stanje sažimanja okvira pitanja",
       // [Auto-translated] "Number this question"
@@ -694,7 +694,7 @@ export var hrStrings = {
       descriptionLocation: "Poravnanje opisa pitanja",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Poravnanje poruke o pogrešci",
-      // [Auto-translated] "Add indents"
+      // [Auto-translated] "Increase the inner indent"
       indent: "Povećajte unutarnju uvlaku",
       // [Auto-translated] "Inline question width"
       width: "Širina umetnutog pitanja",
@@ -702,28 +702,28 @@ export var hrStrings = {
       minWidth: "Minimalna širina pitanja",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Maksimalna širina pitanja",
-      // [Auto-translated] "Update text question value"
-      textUpdateMode: "Ažuriranje vrijednosti polja unosa"
+      // [Auto-translated] "Update input field value"
+      textUpdateMode: "Ažuriranje vrijednosti polja za unos"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "Širina područja potpisa",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "Visina područja potpisa",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Automatsko mijenjanje područja potpisa",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Pokaži rezervirano mjesto",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Prikaz rezerviranog mjesta unutar područja za potpis",
       // [Auto-translated] "Placeholder text"
       placeholder: "Tekst rezerviranog mjesta",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Tekst rezerviranog mjesta u načinu samo za čitanje ili pretpregledu",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "Prikaz gumba Očisti unutar područja za potpis",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Minimalna širina olovke",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Maksimalna širina olovke",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "Prikaz gumba Očisti unutar područja potpisa",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Minimalna širina hoda",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Maksimalna širina hoda",
       // [Auto-translated] "Stroke color"
       penColor: "Boja poteza"
     },
@@ -755,26 +755,26 @@ export var hrStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Naslov",
+      // [Auto-translated] "Survey title"
+      title: "Naziv ankete",
       // [Auto-translated] "Survey description"
       description: "Opis upitnika",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "Neka anketa bude samo za čitanje"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Naziv stranice",
-      // [Auto-translated] "Title"
-      title: "Naslov",
+      // [Auto-translated] "Page title"
+      title: "Naslov stranice",
       // [Auto-translated] "Page description"
       description: "Opis stranice",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Učini stranicu vidljivom ako",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Učini stranicu potrebnom ako",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Vremensko ograničenje za dovršetak stranice (u sekundama)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Vremensko ograničenje za dovršetak stranice",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Redoslijed pitanja na stranici"
     },
@@ -852,7 +852,7 @@ export var hrStrings = {
     defaultDisplayValue: "Zadana vrijednost prikaza za dinamičke tekstove",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Poravnanje natpisa",
-    // [Auto-translated] "Input field size (in characters)"
+    // [Auto-translated] "Input field width (in characters)"
     size: "Širina polja za unos (u znakovima)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
@@ -934,8 +934,8 @@ export var hrStrings = {
     fastEntryChoicesCountError: "Ograničite broj stavki s {0} na {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Unesite najmanje {0} stavki",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Podatke možete postaviti u sljedećem obliku:\nvrijednost1|tekst\nvrijednost2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Unesite popis opcija izbora i njihove ID-ove u sljedećem formatu:\n\nid|opcija\n\nID opcije izbora nije vidljiv ispitanicima i može se koristiti u uvjetnim pravilima.",
     // "Form Entry"
     formEntry: "Unos obrasca",
     // "Test the service"
@@ -964,10 +964,10 @@ export var hrStrings = {
     assistantTitle: "Dostupna pitanja:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Trebao bi postojati barem jedan stupac ili red",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Pregled odgovora prije slanja ankete",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Postavio ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Pregledajte prije slanja",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Omogućeno uvjetom",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Brisanje",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var hrStrings = {
     propertyNameIsIncorrect: "Nemojte koristiti rezervirane riječi: \"stavka\", \"izbor\", \"ploča\", \"red\".",
     // "You don't have any items yet"
     listIsEmpty: "Dodavanje nove stavke",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Još nema izbora",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Još nemate izbora",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Još nemate kolumne",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var hrStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Još nemate stranice",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Dodavanje izbora",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Dodavanje novog izbora",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Dodaj novi stupac",
     // [Auto-translated] "Add new row"
@@ -1033,17 +1033,17 @@ export var hrStrings = {
     // "Path to data"
     path: "Put",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
-      url: "URL web-usluge",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Dohvaćanje vrijednosti iz sljedećeg JSON polja"
+      // [Auto-translated] "Web service URL"
+      url: "URL web servisa",
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Dobivanje vrijednosti za pohranu iz sljedećeg svojstva"
     },
     // "Get value to display from the following property"
     titleName: "Naziv naslova",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Dohvaćanje URL-ova slika iz sljedećeg JSON polja",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Dopusti prazan odgovor",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Dohvaćanje URL-ova datoteka iz sljedećeg entiteta",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Prihvati prazan odgovor",
     // "Title"
     titlePlaceholder: "Ulazni naslov ovdje",
     // "Survey Title"
@@ -1066,10 +1066,10 @@ export var hrStrings = {
     otherText: "Tekst druge stavke",
     // "Enable the \"None\" option"
     showNoneItem: "Nema stavku",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Dopusti mogućnost Odbij odgovoriti",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Dopusti mogućnost Ne znam",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Omogućite opciju \"Odbij odgovor\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Omogućite opciju \"Ne znam\"",
     // "Rename the \"None\" option"
     noneText: "Nijedan tekst stavke",
     // "Enable the \"Select All\" option"
@@ -1186,8 +1186,8 @@ export var hrStrings = {
     gotoName: "Pitanje na koje treba preskočiti",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Pravilo nije ispravno",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Uključi u rezultate ankete",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Dodaj u rezultate ankete",
     // "Make the title and description visible"
     showTitle: "Pokaži/sakrij naslov",
     // "Expand/collapse title"
@@ -1282,24 +1282,24 @@ export var hrStrings = {
     html: "Html",
     // [Auto-translated] "Answer"
     setValue: "Odgovor",
-    // [Auto-translated] "Image format"
-    dataFormat: "Oblik slike",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Dopusti dodavanje redaka",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Dopusti uklanjanje redaka",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Dopusti povlačenje i ispuštanje retka",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Ne primjenjuje se ako navedete točnu širinu ili visinu slike.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Minimalna širina slike",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Maksimalna širina slike",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Minimalna visina slike",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Maksimalna visina slike",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Format pohrane",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Omogućivanje dodavanja redaka",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Omogućivanje uklanjanja redaka",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Omogućivanje promjene redoslijeda redaka",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Ne primjenjuje se ako odredite točnu širinu ili visinu područja prikaza.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Minimalna širina područja prikaza",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Maksimalna širina područja prikaza",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Minimalna visina površine prikaza",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Maksimalna visina površine prikaza",
     // "Minimum value"
     minValue: "Minimalna vrijednost",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var hrStrings = {
     totalCurrency: "Ukupna valuta",
     // "Formatted string"
     totalFormat: "Ukupan format",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logotip (URL ili niz kodiran base64)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Struktura upitnika",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Maksimalna duljina odgovora (u znakovima)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Maksimalna duljina komentara (u znakovima)",
+    // [Auto-translated] "Survey logo"
+    logo: "Logotip ankete",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Izgled ankete",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Ograničite duljinu odgovora",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Ograničite duljinu komentara",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Visina područja komentara (u recima)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "Ako je potrebno, automatsko proširivanje područja komentara",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Automatsko proširivanje područja teksta",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var hrStrings = {
     checkErrorsMode: "Pokreni provjeru valjanosti",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Provjera valjanosti praznih polja pri izgubljenom fokusu",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Navigacija do URL-a",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Dinamički URL",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Preusmjeravanje na vanjsku poveznicu nakon slanja",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Dinamička vanjska poveznica",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Oznaka koja pokazuje je li korisnik već ispunio ovu anketu",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Označavanje stranice dovršeno u anketi",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Oznaka stranice Dynamic Survey Completed",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "Oznaka stranice \"Hvala\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Dinamička oznaka stranice \"Zahvala\"",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Oznaka za prikaz tijekom učitavanja modela upitnika",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var hrStrings = {
     allowClear: "Prikaz gumba Očisti",
     // [Auto-translated] "Search Mode"
     searchMode: "Način pretraživanja",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Stil prikaza vrijednosti",
+    // [Auto-translated] "Display format"
+    displayStyle: "Format prikaza",
     // [Auto-translated] "Formatted string"
     format: "Oblikovani niz",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var hrStrings = {
     minimumFractionDigits: "Minimalne djelomične znamenke",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Prikaži razdjelnike grupiranja",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Dopusti više datoteka",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Pretpregled slika",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Omogućivanje prijenosa više datoteka",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Pregled prenesenih slika",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Prihvaćene vrste datoteka",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Pričekajte da se prijenos dovrši",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Potvrda brisanja datoteke",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Mjesto ploče s detaljima",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Poravnanje pojedinosti retka",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Najmanji broj redaka",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var hrStrings = {
     confirmDelete: "Potvrda brisanja retka",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Potvrdna poruka",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Početni broj ploča",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Najmanji broj ploča",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Maksimalan broj ploča",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Stanje proširenja unutarnje ploče",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Opis alata gumba Prethodna ploča",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Opis alata gumba Sljedeća ploča",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Ukloni mjesto gumba ploče",
-    // [Auto-translated] "Hide the question if there are no rows"
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Početni broj unosa",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Najmanji broj unosa",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Maksimalan broj unosa",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Početno stanje unosa",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Tekst gumba \"Prethodni unos\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Tekst gumba \"Sljedeći unos\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Poravnanje gumba \"Ukloni unos\"",
+    // [Auto-translated] "Hide the question if it has no rows"
     hideIfRowsEmpty: "Sakrij pitanje ako nema redaka",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Sakrij stupce ako nema redaka",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Vrijednosti prilagođene stope",
-    // [Auto-translated] "Rate count"
-    rateCount: "Broj stopa",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Kako odrediti vrijednosti stope?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Prilagođene vrijednosti ocjene",
+    // [Auto-translated] "Rating count"
+    rateCount: "Broj ocjena",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Konfiguracija ocjene",
     slider: {
       // [Auto-translated] "Min value"
       min: "Minimalna vrijednost",
@@ -1459,25 +1459,25 @@ export var hrStrings = {
       autoGenerate: "Konfiguracija naljepnica vage",
       // [Auto-translated] "Slider type"
       sliderType: "Vrsta klizača",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Minimalna duljina raspona",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Maksimalna duljina dometa",
       // [Auto-translated] "Custom labels"
       customLabels: "Prilagođene naljepnice",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Format naljepnice",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format opisa alata"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Visina slike",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Širina slike"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Sakrij pitanje ako ne sadrži izbora",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Sakrij pitanje ako nema izbora",
     // "Minimum width"
     minWidth: "Minimalna širina (u CSS-prihvaćenim vrijednostima)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var hrStrings = {
     showHeader: "Pokaži zaglavlja stupaca",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Pokaži vodoravni klizač",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Minimalna širina stupca (u CSS-prihvaćenim vrijednostima)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Širina zaglavlja retka (u CSS-prihvaćenim vrijednostima)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Minimalna širina stupca",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Širina zaglavlja retka",
     // "Value to store when \"True\" is selected"
     valueTrue: "Vrijednost \"True\"",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var hrStrings = {
     otherErrorText: "Poruka o pogrešci \"Prazan komentar\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "Poruka o pogrešci \"Nejedinstvena vrijednost ključa\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Minimalno odabrani odabiri",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Maksimalan broj odabranih izbora",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Širina logotipa (u CSS-prihvaćenim vrijednostima)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Visina logotipa (u CSS-prihvaćenim vrijednostima)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Minimalni izbori za odabir",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Maksimalan izbor za odabir",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Širina logotipa",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Visina logotipa",
     // "Read-only"
     readOnly: "Samo za čitanje",
-    // [Auto-translated] "Editable if"
-    enableIf: "Može se uređivati ako",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Onemogućite način rada samo za čitanje ako",
     // "\"No rows\" message"
     noRowsText: "Poruka \"Bez redaka\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Razdvoji posebne odabire (Ništa, Ostalo, Odaberi sve)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Zasebni posebni izbori",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Kopiraj odabire iz sljedećeg pitanja",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Koje izbore kopirati?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Koje opcije izbora kopirati",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja panela kao ID-ove izbora",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora",
-    // [Auto-translated] "Display page titles in progress bar"
-    progressBarShowPageTitles: "Prikaz naslova stranica na traci tijeka",
-    // [Auto-translated] "Display page numbers in progress bar"
-    progressBarShowPageNumbers: "Prikaz brojeva stranica na traci tijeka",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Prikaz područja komentara",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Rezervirano mjesto područja komentara",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Opisi brzine prikaza kao ekstremne vrijednosti",
+    // [Auto-translated] "Display page titles in the progress bar"
+    progressBarShowPageTitles: "Prikaz naslova stranica na traci napretka",
+    // [Auto-translated] "Display page numbers in the progress bar"
+    progressBarShowPageNumbers: "Prikaz brojeva stranica na traci napretka",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Dodavanje okvira za komentare",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Tekst rezerviranog mjesta za okvir za komentare",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Prikaz oznaka kao ekstremnih vrijednosti",
     // [Auto-translated] "Row order"
     rowOrder: "Redoslijed redaka",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var hrStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Način pregleda",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "Omogućivanje izgleda rešetke",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Stupci rasporeda rešetke",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Stupci rešetke",
     // [Auto-translated] "Mask settings"
     maskSettings: "Postavke maske",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Poravnanje poruke o pogrešci proširenja retka",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Poravnanje poruke o pogrešci s pojedinostima retka",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var hrStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Postavke maske za unos",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Tlocrt",
+        // [Auto-translated] "Panel Layout"
+        panel: "Izgled ploče",
         // [Auto-translated] "Layout"
         question: "Tlocrt",
         // [Auto-translated] "Layout"
@@ -1690,7 +1690,7 @@ export var hrStrings = {
       appearance: "Izgled",
       // [Auto-translated] "Accent colors"
       accentColors: "Naglašavajuće boje",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "Pozadina površine",
       // [Auto-translated] "Scaling"
       scaling: "Skaliranje",
@@ -1701,16 +1701,16 @@ export var hrStrings = {
     editProperty: "Uređivanje objekta '{0}'",
     // "Items"
     items: "[ Stavke: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Izbori su vidljivi ako",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Izbori se mogu odabrati ako",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Stupci su vidljivi ako",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Reci su vidljivi ako",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Dodavanje unutarnjih uvlaka",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Učinite izbore vidljivima ako",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Mogućnost odabira odabira ako",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Učinite stupce vidljivima ako",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Učinite redove vidljivima ako",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Povećajte unutarnju uvlaku",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Koristite odgovore iz posljednjeg unosa kao standardne",
     // "Please enter a value."
@@ -1753,34 +1753,34 @@ export var hrStrings = {
     emptyExpressionPlaceHolder: "Ovdje upišite izraz...",
     // "No file chosen"
     noFile: "Nema odabira datoteke",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Očisti vrijednost ako pitanje postane skriveno",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Naziv svojstva Vrijednost",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Omogući pretraživanje",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Brisanje skrivenih vrijednosti pitanja",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Pohranite vrijednosti u sljedeće svojstvo",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Omogućite pretraživanje dok upisujete",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Sakrij odabrane stavke",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Zatvaranje padajućeg izbornika nakon odabira",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Okomito poravnanje",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Zamjenski reci",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Stupci su vidljivi ako",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Reci su vidljivi ako",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Rezervirano mjesto područja komentara",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Tekst rezerviranog mjesta datoteke",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Tekst rezerviranog mjesta za fotografije",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Tekst rezerviranog mjesta za datoteku ili fotografiju",
-    // [Auto-translated] "Rate type"
-    rateType: "Vrsta stope",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Sažmi padajući izbornik nakon odabira",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Okomito poravnanje unutar ćelija",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Alternativne boje redaka",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Učinite stupce vidljivima ako",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Učinite redove vidljivima ako",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Tekst rezerviranog mjesta za okvir za komentare",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Rezervirano mjesto za tekst za lokalnu datoteku",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Rezervirano mjesto za tekst za kameru",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Tekst rezerviranog mjesta za lokalnu datoteku ili kameru",
+    // [Auto-translated] "Rating icon"
+    rateType: "Ikona ocjenjivanja",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Npr.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var hrStrings = {
       themeName: "Tema",
       // [Auto-translated] "Question appearance"
       isPanelless: "Izgled pitanja",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "Polumjer pozadine i kuta",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "Polumjer pozadine i kuta",
       // [Auto-translated] "Accent color"
       primaryColor: "Boja isticanja",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Neprozirnost pozadine ploče",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Pitanje neprozirnosti pozadine",
-      // [Auto-translated] "Font size"
-      fontSize: "Veličina fonta",
-      // [Auto-translated] "Scale"
-      scale: "Vaga",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Neprozirnost panela i okvira za pitanja",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Neprozirnost ulaznog elementa",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Veličina fonta upitnika",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Faktor skale ankete",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Kutni radijus",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Napredni način rada",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Font naslova",
-      // [Auto-translated] "Page description font"
-      pageDescription: "Font opisa",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Description font"
+      pageDescription: "Opisni font",
+      // [Auto-translated] "Title font"
       questionTitle: "Font naslova",
-      // [Auto-translated] "Question description font"
-      questionDescription: "Font opisa",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Description font"
+      questionDescription: "Opisni font",
+      // [Auto-translated] "Font"
       editorFont: "Krstionica",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Neprozirnost",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Obitelj fontova",
+      backgroundOpacity: "Neprozirnost", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Obitelj fontova upitnika",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Boja pozadine",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Pozadina isticanja",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Isticanje u prvom planu",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Poruke o pogreškama",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Naglašavajuće boje pozadine",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Naglašene boje prednjeg plana",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Boje poruka o pogrešci",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Efekti sjene",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var hrStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Pogled",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Položaj logotipa",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Poravnanje logotipa",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Font naslova upitnika",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var hrStrings = {
       backgroundImageOpacity: "Neprozirnost",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Preklapanje",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Položaj logotipa",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Položaj naslova",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Položaj opisa"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Poravnanje logotipa",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Poravnanje naslova upitnika",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Poravnanje opisa upitnika"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var hrStrings = {
     "true": "istinit",
     // [Auto-translated] "false"
     "false": "lažan",
-    // [Auto-translated] "Local files"
-    file: "Lokalne datoteke",
+    // [Auto-translated] "Local file"
+    file: "Lokalna datoteka",
     // [Auto-translated] "Camera"
     camera: "Kamera",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Lokalne datoteke ili kamera",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Lokalna datoteka ili kamera",
     // "Inherit"
     inherit: "naslijediti",
     // "Visible"
@@ -2016,8 +2016,8 @@ export var hrStrings = {
     onComplete: "onComplete",
     // "When question gets hidden"
     onHidden: "onHidden",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
-    onHiddenContainer: "Kada se pitanje ili njegova ploča/stranica sakriju",
+    // [Auto-translated] "When question or its panel/page gets hidden"
+    onHiddenContainer: "Kada se pitanje ili njegova ploča/stranica sakrije",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
       none: "Nikada"
@@ -2232,18 +2232,18 @@ export var hrStrings = {
     correctQuestions: "Valjani odgovori",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Dovršene stranice (korisničko sučelje gumba)",
-    // [Auto-translated] "Under the input"
-    underInput: "Ispod ulaza",
-    // [Auto-translated] "Under the title"
-    underTitle: "Pod naslovom",
-    // [Auto-translated] "On blur"
-    onBlur: "Na zamućenju",
+    // [Auto-translated] "Under the input field"
+    underInput: "Ispod polja za unos",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Pod naslovom pitanja",
+    // [Auto-translated] "On lost focus"
+    onBlur: "O izgubljenom fokusu",
     // [Auto-translated] "While typing"
     onTyping: "Tijekom tipkanja",
     // [Auto-translated] "Under the row"
     underRow: "Ispod retka",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Ispod retka vidljiva je samo jedna ploča",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Ispod retka prikažite samo jedan odjeljak",
     // "Auto"
     auto: "Automobil",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var hrStrings = {
       combined: "Oba"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Ovisi o izgledu matrice"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Na temelju matričnog izgleda"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Korisnici ne mogu proširiti ili sažeti ploče",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Sve ploče su urušene",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Sve ploče su proširene",
+      // [Auto-translated] "Locked"
+      default: "Zaključan",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Sažmi sve",
+      // [Auto-translated] "Expand all"
+      expanded: "Proširi sve",
       // [Auto-translated] "First expanded"
       firstExpanded: "Prvo prošireno"
     },
@@ -2301,10 +2301,10 @@ export var hrStrings = {
       colored: "Boji"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Generirati",
-      // [Auto-translated] "Enter manually"
-      "false": "Ručno unesite"
+      // [Auto-translated] "Auto-generate"
+      "true": "Automatsko generiranje",
+      // [Auto-translated] "Manual"
+      "false": "Priručnik"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,8 +2325,8 @@ export var hrStrings = {
       on: "Automatsko numeriranje",
       // [Auto-translated] "Reset on each page"
       onPage: "Vrati izvorno na svaku stranicu",
-      // [Auto-translated] "Start on each panel"
-      onpanel: "Vrati izvorno na svaku ploču",
+      // [Auto-translated] "Reset on each panel"
+      onpanel: "Resetirajte na svakoj ploči",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Vrati izvorno na svaku ploču",
       // [Auto-translated] "Recursive numbering"
@@ -2433,8 +2433,8 @@ export var hrStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Isto kao i anketa",
-      // [Auto-translated] "Fit to container"
-      container: "Prilagodi spremniku"
+      // [Auto-translated] "Same as container"
+      container: "Isto kao spremnik"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2608,7 +2608,7 @@ export var hrStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "ID ploče koji nije vidljiv ispitanicima.",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "Upišite podnaslov ploče.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost ploče.",
@@ -2616,14 +2616,14 @@ export var hrStrings = {
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje ploče.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Kada je postavljeno na \"Skriveno\", također skriva opise pitanja. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Zadržava izvorni redoslijed pitanja ili ih nasumično razvrstava. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       // "Repositions the panel to the end of a selected page."
       page: "Premješta ploču na kraj odabrane stranice.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var hrStrings = {
       startWithNewLine: "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Odaberite između: \"Prošireno\" - ploča je prikazana u cijelosti i može se sažeti; \"Sažeto\" - ploča prikazuje samo naslov i opis i može se proširiti; \"Zaključano\" - ploča je prikazana u cijelosti i ne može se sažeti.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Postavlja širinu ploče proporcionalno drugim elementima upitnika u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt, itd.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var hrStrings = {
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg unosa i dodjeljuje ih sljedećem dodanom unosu.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja ploče."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var hrStrings = {
       imageHeight: "Nadjačava vrijednosti minimalne i maksimalne visine.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Nadjačava vrijednosti minimalne i maksimalne širine.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
       choices: "\"Vrijednost\" služi kao ID stavke koji se koristi u uvjetnim pravilima; \"Tekst\" se prikazuje ispitanicima.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Odaberite između \"Slika\" i \"Videozapis\" da biste postavili način sadržaja birača medija. Ako je odabrana opcija \"Slika\", provjerite jesu li sve ponuđene opcije slikovne datoteke u sljedećim formatima: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Slično tome, ako je odabran \"Video\", provjerite jesu li sve opcije izravne veze na video datoteke u sljedećim formatima: MP4, MOV, WMV, FLV, AVI, MKV. Napominjemo da veze na YouTube nisu podržane za opcije videozapisa."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Ova postavka samo mijenja veličinu polja unosa i ne utječe na širinu okvira pitanja. Da biste ograničili prihvaćenu duljinu unosa, idite na <b>Provjera valjanosti → Maksimalno ograničenje znaka</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Ova postavka samo mijenja veličinu polja za unos i ne utječe na širinu okvira pitanja. Da biste ograničili prihvaćenu duljinu unosa, idite na \"Provjera valjanosti\" → \"Maksimalno ograničenje broja znakova\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "Postavlja broj prikazanih redaka u polju za unos. Ako ulaz zauzima više redaka, pojavit će se klizač."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Postavlja broj prikazanih redaka u polju za unos. Ako ulaz zauzima više linija, pojavit će se traka za pomicanje."
     },
     // survey templates
     survey: {
@@ -2811,7 +2811,7 @@ export var hrStrings = {
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
     },
     slider: {
@@ -2848,8 +2848,8 @@ export var hrStrings = {
     caseInsensitive: "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Odaberite između: \"Statika\" - postavlja fiksnu širinu; \"Responsive\" - čini da anketa zauzima punu širinu zaslona; \"Auto\" - primjenjuje se bilo koji od dva ovisno o korištenim vrstama pitanja.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Kolačići sprječavaju korisnike da dvaput ispune istu anketu.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Dodijelite jedinstvenu vrijednost kolačića za svoju anketu. Kolačić će se postaviti u preglednik ispitanika nakon završetka ankete kako bi se spriječilo ponavljanje ankete.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Zalijepite slikovnu vezu (bez ograničenja veličine) ili kliknite ikonu mape da biste pregledali datoteku s računala (do 64 KB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var hrStrings = {
     autoAdvanceEnabled: "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Postavlja mjesto navigacijskih gumba na stranici.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var hrStrings = {
     maxTextLength: "Samo za pitanja o unosu teksta.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Samo za komentare pitanja.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. Ako ulaz zauzima više linija, pojavit će se klizač.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Odaberite želite li da komentari pitanja i pitanja dugog teksta automatski rastu u visinu na temelju unesene duljine teksta.",
@@ -2908,8 +2908,8 @@ export var hrStrings = {
     columnMinWidth: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Vidljivo samo ako barem jedan stupac ima izraz Vrsta zbroja ili Ukupno.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Vidljivo samo ako barem jedan stupac prikazuje ukupne vrijednosti postavljene pomoću \"Metode agregacije\" ili \"Izraza ukupne vrijednosti\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na ćeliju s unosom koji nije valjan. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var hrStrings = {
     imageFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Postupno povećava visinu polja unosa tijekom unosa podataka. Nadjačava postavku \"Visina polja unosa (u crtama)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Ručica za promjenu veličine (ili držač) pojavljuje se u kutu i može se povući kako bi se promijenila veličina polja za unos.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Omogućeno\" prema zadanim postavkama).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu \"Zahvala\". Kada je postavljeno na 0, broji vrijeme provedeno u upitniku.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu. Skriva navigacijski gumb \"Prethodna\". Kada je postavljen na 0, broji vrijeme provedeno na trenutnoj stranici.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Omogućite ovu mogućnost da biste pokrenuli provjeru valjanosti kada se korisnik usredotoči na prazno polje za unos, a zatim ga napusti bez ikakvih promjena.",
     page: {
@@ -2984,8 +2984,8 @@ export var hrStrings = {
     maxWidth: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Ako ne postavite ovo svojstvo, odgovor će biti pohranjen u polju određenom svojstvom Naziv .",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Identifikator spoja prilagođeni je ključ koji možete dodijeliti nekoliko pitanja da biste ih povezali i sinkronizirali njihove vrijednosti. Te će se vrijednosti spojiti u jedan niz ili objekt i pohraniti u rezultate ankete koristeći ključ kao naziv svojstva.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Vrijednost koja se prikazuje u HTML pitanjima te u dinamičkim naslovima i opisima elemenata upitnika kada je vrijednost pitanja prazna.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var hrStrings = {
     valueTrue: "Vrijednost koju treba uštedjeti u rezultatima ankete kada ispitanici daju pozitivan odgovor.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Vrijednost koju treba spremiti u rezultatima ankete kada ispitanici daju negativan odgovor.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Ne preporučuje se onemogućavanje ove mogućnosti jer nadjačava sliku pretpregleda i otežava korisniku razumijevanje jesu li datoteke prenesene.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Ne preporučuje se da onemogućite ovu opciju jer ona nadjačava sliku pretpregleda i otežava korisniku da shvati jesu li datoteke prenesene.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Pokreće upit u kojem se traži potvrda brisanja datoteke.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var hrStrings = {
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije.",
@@ -3062,10 +3062,10 @@ export var hrStrings = {
     format: "Koristite {0} kao rezervirano mjesto za stvarnu vrijednost.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Dodatne informacije potražite u opisu atributa [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Primjenjivo samo na vrste ćelija Radiogrupa i Potvrdni okvir.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Dodatne informacije potražite u opisu atributa [samodovršetak](https://developer.mozilla.org/en-US/docs/Web/HTML/atributi/samodovršetak).",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Primjenjuje se samo na stupce s opcijom \"Vrsta unosa ćelije\" postavljenom na Grupa izbornih gumba ili Potvrdne okvire.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Odaberite vrstu podataka koju korisnikov preglednik može dohvatiti. Ti se podaci dobivaju iz prošlih vrijednosti koje je unio korisnik ili iz unaprijed konfiguriranih vrijednosti ako ih je korisnik spremio za automatsko dovršavanje.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,60 +3139,60 @@ export var hrStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Dopusti višestruki odabir",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Pokaži opise slika",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Prikaz opisa slika i videozapisa",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Zamjena redoslijeda Da i Ne",
     // [Auto-translated] "Value"
     value: "Vrijednost",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Poravnanje tabulatora",
-    // [Auto-translated] "Source type"
-    sourceType: "Vrsta izvora",
+    // [Auto-translated] "File source type"
+    sourceType: "Vrsta izvora datoteke",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Prilagodi spremniku",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Postavljanje izraza vrijednosti",
     // "Description"
-    description: "description",
+    description: "description", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Prilagođavanje logotipa",
     // [Auto-translated] "Pages"
-    pages: "Stranice",
+    pages: "Stranice", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Pitanja",
+    questions: "Pitanja", // Auto-generated string
     // "Triggers"
     triggers: "triggers",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Izračunate vrijednosti",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Prilagođene varijable",
     // [Auto-translated] "Survey id"
-    surveyId: "ID upitnika",
+    surveyId: "ID upitnika", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "ID objave upitnika",
+    surveyPostId: "ID objave upitnika", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Anketa pokazuje spremanje podataka",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Mjesto opisa pitanja",
+    surveyShowDataSaving: "Anketa pokazuje spremanje podataka", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Usklađivanje opisa pitanja",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Vrsta trake napretka",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Pokaži tablicu sadržaja",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Mjesto tablice sadržaja",
+    progressBarType: "Vrsta trake napretka", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Prikaži sadržaj (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Usklađivanje TOC-a",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Uzorak naslova pitanja",
-    // [Auto-translated] "Width mode"
-    widthMode: "Način širine",
+    questionTitlePattern: "Uzorak naslova pitanja", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Način prikaza širine",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Pokaži informacije o robnoj marki",
+    showBrandInfo: "Pokaži informacije o robnoj marki", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Korištenje vrijednosti prikaza u dinamičkim tekstovima",
     // "Visible if"
-    visibleIf: "visibleIf",
+    visibleIf: "visibleIf", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Zadani izraz vrijednosti",
     // "Required if"
-    requiredIf: "requiredIf",
+    requiredIf: "requiredIf", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Vrati izvornu vrijednost ako",
     // [Auto-translated] "Set value if"
@@ -3200,137 +3200,137 @@ export var hrStrings = {
     // "Validation rules"
     validators: "validators",
     // [Auto-translated] "Bindings"
-    bindings: "Vezovi",
+    bindings: "Vezovi", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Iscrtaj kao",
+    renderAs: "Iscrtaj kao", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloži izvorne stavke",
+    attachOriginalItems: "Priloži izvorne stavke", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"
-    choicesByUrl: "choicesByUrl",
+    choicesByUrl: "choicesByUrl", // Auto-generated string
     // "Currency"
-    currency: "currency",
+    currency: "currency", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Savjet za ćeliju",
+    cellHint: "Savjet za ćeliju", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Ukupan maksimalni broj znamenki razlomka",
+    totalMaximumFractionDigits: "Ukupan maksimalni broj znamenki razlomka", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Ukupan minimum znamenki razlomka",
+    totalMinimumFractionDigits: "Ukupan minimum znamenki razlomka", // Auto-generated string
     // "Columns"
-    columns: "columns",
+    columns: "columns", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Elementi detalja",
+    detailElements: "Elementi detalja", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Dopusti prilagodljive radnje",
+    allowAdaptiveActions: "Dopusti prilagodljive radnje", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "defaultRowValue",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "defaultRowValue", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Automatsko proširenje pojedinosti o novom retku",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Omogućeno lijeno opterećenje izbora",
+    choicesLazyLoadEnabled: "Omogućeno lijeno opterećenje izbora", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Odabiri lijeno učitavanje veličine stranice",
+    choicesLazyLoadPageSize: "Odabiri lijeno učitavanje veličine stranice", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Komponenta polja za unos",
+    inputFieldComponent: "Komponenta polja za unos", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Komponenta artikla",
+    itemComponent: "Komponenta artikla", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Izraz minimalne vrijednosti",
+    minValueExpression: "Izraz minimalne vrijednosti", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Izraz maksimalne vrijednosti",
+    maxValueExpression: "Izraz maksimalne vrijednosti", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Korak",
-    // [Auto-translated] "Data list"
-    dataList: "Popis podataka",
+    step: "Korak", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Stavke za automatsko predlaganje",
     // "Input field width (in characters)"
     inputSize: "inputSize",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Širina natpisa stavke (u px)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Širina naljepnice artikla",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Usklađivanje ulaznih vrijednosti",
     // [Auto-translated] "Elements"
-    elements: "Elemenata",
+    elements: "Elemenata", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Sadržaj",
+    content: "Sadržaj", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Naslov navigacije",
+    navigationTitle: "Naslov navigacije", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Opis navigacije",
+    navigationDescription: "Opis navigacije", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Dugi dodir",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Automatski rast",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Dopusti promjenu veličine",
+    longTap: "Dugi dodir", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Dinamičko proširivanje polja za unos",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Omogući ručicu za promjenu veličine",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Prihvati povratak prijevoza",
+    acceptCarriageReturn: "Prihvati povratak prijevoza", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Način prikaza",
     // [Auto-translated] "Rate type"
-    rateType: "Vrsta stope",
+    rateType: "Vrsta stope", // Auto-generated string
     // "Label"
-    label: "label",
+    label: "label", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Način sadržaja",
-    // [Auto-translated] "Image fit"
-    imageFit: "Prilagodba slike",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Slika i sličica se uklapaju",
     // [Auto-translated] "Alt text"
     altText: "Zamjenski tekst",
     // [Auto-translated] "Height"
-    height: "Visina",
+    height: "Visina", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Visina na pametnim telefonima",
     // [Auto-translated] "Pen color"
-    penColor: "Boja olovke",
+    penColor: "Boja olovke", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Boja pozadine",
     // [Auto-translated] "Template elements"
-    templateElements: "Elementi predloška",
+    templateElements: "Elementi predloška", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Operator",
+    operator: "Operator", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Je promjenjivo",
+    isVariable: "Je promjenjivo", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Pokreni izraz",
+    runExpression: "Pokreni izraz", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Pokaži opis",
+    showCaption: "Pokaži opis", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Naziv ikone",
+    iconName: "Naziv ikone", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Veličina ikone",
+    iconSize: "Veličina ikone", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Preciznost",
+    precision: "Preciznost", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Područje držača za povlačenje matrice",
+    matrixDragHandleArea: "Područje držača za povlačenje matrice", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Pozadinska slika",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Prilagodba pozadinske slike",
+    backgroundImageFit: "Prilagodba pozadinske slike", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Privitak pozadinske slike",
+    backgroundImageAttachment: "Privitak pozadinske slike", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Neprozirnost pozadine",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Odaberite za omogućen rang",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Odabir za rangiranje izgleda područja",
+    backgroundOpacity: "Neprozirnost pozadine", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Dopusti selektivno rangiranje",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Poravnanje područja rangiranja",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Tekst koji prikazuje jesu li odabrane sve mogućnosti",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Tekst rezerviranog mjesta za područje rangiranja",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Dopusti pristup kameri",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Način skaliranja boje",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Način ocjenjivanja boja",
+    allowCameraAccess: "Dopusti pristup kameri", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Način boje ikone ocjenjivanja",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Shema boja smajlića",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Kopiraj vrijednost prikaza",
+    copyDisplayValue: "Kopiraj vrijednost prikaza", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Raspon stupaca",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var hrStrings = {
     "--sjs-secondary-background-500": "Sekundaran",
     // [Auto-translated] "Surface"
     surfaceScale: "Površina",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Korisničko sučelje",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Elementi korisničkog sučelja",
     // [Auto-translated] "Font"
     fontScale: "Krstionica",
     names: {

@@ -120,11 +120,11 @@ export var ruStrings = {
     settingsTooltip: "Открыть настройки",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Настройки опроса",
-    // [Auto-translated] "Open survey settings"
-    surveySettingsTooltip: "Настройки съемки",
+    // [Auto-translated] "Survey settings"
+    surveySettingsTooltip: "Настройки опроса",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Настройки темы",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Настройки темы",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Настройки создателя контента",
@@ -427,16 +427,16 @@ export var ruStrings = {
       logicPlaceholderDescriptionMobile: "Создайте правило для настройки потока опроса.",
       // "Show/hide page"
       page_visibilityName: "Видимость страницы",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Включить (отключить) страницу",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Включить/выключить страницу",
       // [Auto-translated] "Make page required"
       page_requireName: "Сделать страницу обязательной",
       // "Show/hide panel"
       panel_visibilityName: "Видимость панели",
       // "Enable/disable panel"
       panel_enableName: "Панель включена/выключена",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Сделать страницу обязательной",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Сделайте панель обязательной",
       // "Show/hide question"
       question_visibilityName: "Видимость вопроса",
       // "Enable/disable question"
@@ -447,10 +447,10 @@ export var ruStrings = {
       question_resetValueName: "Сбросить значение вопроса",
       // [Auto-translated] "Set question value"
       question_setValueName: "Задать значение вопроса",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Показать (скрыть) столбец",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Включить (отключить) столбец",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Показать/скрыть столбец",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Включить/выключить колонку",
       // [Auto-translated] "Make column required"
       column_requireName: "Сделать столбец обязательным",
       // [Auto-translated] "Reset column value"
@@ -512,7 +512,7 @@ export var ruStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Сброс значения для вопроса: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "присвоить значение: {1} к вопросу: {0}",
+      question_setValueText: "присвоить значение: {1} к вопросу: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Сделайте видимым {0} {1} в столбце вопроса", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var ruStrings = {
       column_resetValueText: "Сброс значения ячейки для столбца: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Присвойте значение ячейки: {1} столбцу: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Выражение, результат которого будет присвоен целевому вопросу.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Выражение, результат которого будет присвоен целевому вопросу.",
       // "survey becomes completed"
       trigger_completeText: "Опрос становится завершенным",
       // "set into question: {0} value {1}"
@@ -561,9 +561,9 @@ export var ruStrings = {
       selectedActionCaption: "Выберите действие...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Логическое выражение пустое или недействительное. Пожалуйста, исправьте его.",
-      // [Auto-translated] "Please, add at least one action."
+      // [Auto-translated] "Please add at least one action."
       noActionError: "Пожалуйста, добавьте хотя бы одно действие.",
-      // [Auto-translated] "Please, fix problems in your action(s)."
+      // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "Пожалуйста, исправьте проблемы в ваших действиях.",
       // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "Логические правила неполны",
@@ -590,25 +590,25 @@ export var ruStrings = {
       requiredIf: "Сделайте панель обязательной, если",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Порядок вопросов на панели",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Родительская страница",
+      // [Auto-translated] "Move the panel to page"
+      page: "Переместите панель на страницу",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Отображение панели на новой строке",
-      // [Auto-translated] "Panel expand state"
-      state: "Состояние свертывания панели",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Встроенная ширина панели",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Состояние сворачивания панели",
+      // [Auto-translated] "Inline panel width"
+      width: "Ширина встроенной панели",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Минимальная ширина панели",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Максимальная ширина панели",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "Пронумеруйте эту панель"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Полезная ширина, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Ширина заголовка вопроса, px"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export var ruStrings = {
       minWidth: "Минимальная ширина панели",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Максимальная ширина панели",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Подтвердите удаление панели",
-      // [Auto-translated] "Description template"
-      templateDescription: "Шаблон описания панели",
-      // [Auto-translated] "Title template"
-      templateTitle: "Шаблон заголовка панели",
-      // [Auto-translated] "Empty entries text"
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Подтвердите удаление записи",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Шаблон описания входа",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Шаблон заголовка записи",
+      // [Auto-translated] "Empty panel text"
       noEntriesText: "Пустой текст на панели",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Шаблон заголовка вкладки",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Заполнитель заголовка вкладки",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Сделать отдельную панель видимой, если",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Сделайте отдельную запись видимой, если",
       // [Auto-translated] "Number the panel"
       showNumber: "Пронумеруйте панель",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Выравнивание заголовков панелей",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Выравнивание описания панели",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "Выравнивание заголовка вопроса",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Ширина заголовка вопроса",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Выравнивание сообщений об ошибках",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Новое расположение панели",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Новое место входа",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "Отображение индикатора выполнения",
-      // [Auto-translated] "Key column"
-      keyName: "Предотвращение дублирования ответов в следующем вопросе"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var ruStrings = {
       visibleIf: "Сделайте вопрос видимым, если",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Сделайте вопрос обязательным, если",
-      // [Auto-translated] "Parent page"
-      page: "Родительская страница",
+      // [Auto-translated] "Move the question to page"
+      page: "Переместите вопрос на страницу",
       // [Auto-translated] "Question box collapse state"
       state: "Состояние сворачивания окна вопроса",
       // [Auto-translated] "Number this question"
@@ -694,7 +694,7 @@ export var ruStrings = {
       descriptionLocation: "Выравнивание описания вопроса",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Выравнивание сообщений об ошибках",
-      // [Auto-translated] "Add indents"
+      // [Auto-translated] "Increase the inner indent"
       indent: "Увеличьте внутренний отступ",
       // [Auto-translated] "Inline question width"
       width: "Ширина встроенного вопроса",
@@ -702,28 +702,28 @@ export var ruStrings = {
       minWidth: "Минимальная ширина вопроса",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Максимальная ширина вопроса",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "Обновление значения поля ввода"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "Ширина области подписи",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "Высота области подписи",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Автоматическое масштабирование области подписи",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Показать замещающий текст",
-      // [Auto-translated] "Input area placeholder"
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Отображение заполнителя в области подписи",
+      // [Auto-translated] "Placeholder text"
       placeholder: "Замещающий текст",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Замещающий текст в режиме только для чтения или предварительного просмотра",
-      // [Auto-translated] "Show the Clear button"
+      // [Auto-translated] "Show the Clear button within signature area"
       allowClear: "Отображение кнопки «Очистить» в области подписи",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Минимальная ширина пера",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Максимальная ширина пера",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Минимальная ширина мазка",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Максимальная ширина мазка",
       // [Auto-translated] "Stroke color"
       penColor: "Цвет обводки"
     },
@@ -755,26 +755,26 @@ export var ruStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Титул",
+      // [Auto-translated] "Survey title"
+      title: "Название опроса",
       // [Auto-translated] "Survey description"
       description: "Описание опроса",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "Сделайте опрос доступным только для чтения"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Название страницы",
-      // [Auto-translated] "Title"
-      title: "Титул",
+      // [Auto-translated] "Page title"
+      title: "Заголовок страницы",
       // [Auto-translated] "Page description"
       description: "Описание страницы",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Сделайте страницу видимой, если",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Сделайте страницу обязательной, если",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Ограничение по времени завершения страницы (в секундах)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Ограничение по времени на заполнение страницы",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Порядок вопросов на странице"
     },
@@ -842,18 +842,18 @@ export var ruStrings = {
     isExclusive: "Удалить другие при выборе",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Требовать от пользователя ввода комментария",
-    // [Auto-translated] "Image height"
-    imageHeight: "Высота изображения",
-    // [Auto-translated] "Image width"
-    imageWidth: "Ширина изображения",
+    // [Auto-translated] "Display area height"
+    imageHeight: "Высота области отображения",
+    // [Auto-translated] "Display area width"
+    imageWidth: "Ширина области отображения",
     // "Join identifier"
     valueName: "Название пункта",
     // [Auto-translated] "Default display value for dynamic texts"
     defaultDisplayValue: "Отображаемое значение по умолчанию для динамических текстов",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Выравнивание меток",
-    // [Auto-translated] "Input field size (in characters)"
-    size: "Размер поля ввода (в символах)",
+    // [Auto-translated] "Input field width (in characters)"
+    size: "Ширина поля ввода (в символах)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Выравнивание сообщений об ошибках ячеек",
     // [Auto-translated] "Enabled"
@@ -934,8 +934,8 @@ export var ruStrings = {
     fastEntryChoicesCountError: "Пожалуйста, ограничьте количество предметов от {0} до {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Пожалуйста, введите не менее {0} пунктов",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Вы можете задать данные в следующем формате:\nзначение1|текст\nзначение2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Введите список вариантов выбора и их идентификаторы в следующем формате:\n\nid|option\n\nИдентификатор варианта выбора не виден респондентам и может использоваться в условных правилах.",
     // "Form Entry"
     formEntry: "Форма входа",
     // "Test the service"
@@ -964,10 +964,10 @@ export var ruStrings = {
     assistantTitle: "Доступные вопросы",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Должен быть хотя бы один столбец или строка",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Предварительный просмотр ответов перед отправкой опроса",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Откладывать ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Проверка перед отправкой",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Включается условием",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Сброс",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var ruStrings = {
     propertyNameIsIncorrect: "Не используйте зарезервированные слова: «элемент», «выбор», «панель», «строка».",
     // "You don't have any items yet"
     listIsEmpty: "Добавьте новое условие",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Варианты еще не добавлены",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "У вас пока нет выбора",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "У вас еще нет столбцов",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var ruStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "У вас еще нет ссылок",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "У вас еще нет страниц",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Добавить выбор",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Добавить новый вариант",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Добавить новый столбец",
     // [Auto-translated] "Add new row"
@@ -1033,17 +1033,17 @@ export var ruStrings = {
     // "Path to data"
     path: "Путь",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
-      url: "URL-адрес веб-службы",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Получение значений из следующего поля JSON"
+      // [Auto-translated] "Web service URL"
+      url: "URL веб-сервиса",
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Получение значения для хранения из следующего свойства"
     },
     // "Get value to display from the following property"
     titleName: "Заголовок пункта",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Получение URL-адресов изображений из следующего поля JSON",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Разрешить пустой ответ",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Получение URL-адресов файлов из следующего свойства",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Принять пустой ответ",
     // "Title"
     titlePlaceholder: "Введите заголовок",
     // "Survey Title"
@@ -1066,10 +1066,10 @@ export var ruStrings = {
     otherText: "Текст пункта 'Другое'",
     // "Enable the \"None\" option"
     showNoneItem: "Нет ни одного пункта",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Разрешить опцию «Отказаться от ответа»",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Разрешить опцию «Не знаю»",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Включите опцию \"Отказаться от ответа\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Включите опцию «Не знаю»",
     // "Rename the \"None\" option"
     noneText: "Текст пункта 'Ничего'",
     // "Enable the \"Select All\" option"
@@ -1186,8 +1186,8 @@ export var ruStrings = {
     gotoName: "Вопрос, к которому нужно перейти",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Правило неверно",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Включить в результаты опроса",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Добавить к результатам опроса",
     // "Make the title and description visible"
     showTitle: "Показать/скрыть заголовок",
     // [Auto-translated] "Expand/collapse title"
@@ -1218,10 +1218,10 @@ export var ruStrings = {
     pageNextText: "Текст в кнопке 'Следующая страница'",
     // "\"Complete Survey\" button text"
     completeText: "Текст в кнопке 'Завершить'",
-    // [Auto-translated] "Preview Answers button text"
-    previewText: "Текст кнопки «Предварительный просмотр ответов»",
-    // [Auto-translated] "Edit Answer button text"
-    editText: "Редактировать текст кнопки «Ответ»",
+    // [Auto-translated] "\"Review Answers\" button text"
+    previewText: "Текст кнопки \"Просмотреть ответы\"",
+    // [Auto-translated] "\"Edit Answer\" button text"
+    editText: "Текст кнопки \"Редактировать ответ\"",
     // "\"Start Survey\" button text"
     startSurveyText: "Текст в кнопке 'Начать'",
     // "Show navigation buttons"
@@ -1282,24 +1282,24 @@ export var ruStrings = {
     html: "HTML-разметка",
     // [Auto-translated] "Answer"
     setValue: "Ответ",
-    // [Auto-translated] "Image format"
-    dataFormat: "Формат изображения",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Разрешить добавление строк",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Разрешить удаление строк",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Разрешить перетаскивание строк",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Не применяется, если указана точная ширина или высота изображения.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Минимальная ширина изображения",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Максимальная ширина изображения",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Минимальная высота изображения",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Максимальная высота изображения",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Формат хранения",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Включение добавления строк",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Включение удаления строк",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Включение изменения порядка строк",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Не применяется, если указана точная ширина или высота области отображения.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Минимальная ширина области отображения",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Максимальная ширина области отображения",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Минимальная высота области отображения",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Максимальная высота области отображения",
     // "Minimum value"
     minValue: "Минимальное значение",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var ruStrings = {
     totalCurrency: "Общая валюта",
     // "Formatted string"
     totalFormat: "Общий формат",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Логотип (URL-адрес или строка в кодировке base64)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Структура опроса",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Максимальная длина ответа (в символах)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Максимальная длина комментария (в символах)",
+    // [Auto-translated] "Survey logo"
+    logo: "Логотип опроса",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Схема съемки",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Ограничение длины ответа",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Ограничение длины комментария",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Высота области комментариев (в строках)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "При необходимости автоматически разверните область комментариев",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Автоматическое расширение текстовых областей",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var ruStrings = {
     checkErrorsMode: "Запуск проверки",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Проверка пустых полей при потере фокуса",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Перейдите по URL-адресу",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Динамический URL-адрес",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Перенаправление на внешнюю ссылку после отправки",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Динамическая внешняя ссылка",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Разметка, показывающая, заполнил ли пользователь уже этот опрос",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Опрос Полная разметка страницы",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Динамический опрос Полная разметка страницы",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "Разметка страницы \"Спасибо\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Динамическая разметка страницы \"Спасибо\"",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Разметка, отображаемая при загрузке модели опроса",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var ruStrings = {
     allowClear: "Показать кнопку «Очистить»",
     // [Auto-translated] "Search Mode"
     searchMode: "Режим поиска",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Стиль отображения значений",
+    // [Auto-translated] "Display format"
+    displayStyle: "Формат отображения",
     // [Auto-translated] "Formatted string"
     format: "Форматированная строка",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var ruStrings = {
     minimumFractionDigits: "Минимальные дробные цифры",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Разделители группировки дисплеев",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Разрешить несколько файлов",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Предварительный просмотр изображений",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Как включить загрузку нескольких файлов",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Предварительный просмотр загруженных изображений",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Допустимые типы файлов",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Дождитесь завершения загрузки",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Подтвердите удаление файла",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Расположение панели сведений",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Выравнивание сведений о строке",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Минимальное количество строк",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var ruStrings = {
     confirmDelete: "Подтверждение удаления строки",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Подтверждающее сообщение",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Начальное количество панелей",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Минимальное количество панелей",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Максимальное количество панелей",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Состояние расширения внутренней панели",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Предыдущая всплывающая подсказка кнопки «Панель»",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Всплывающая подсказка кнопки «Следующая панель»",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Удалить расположение кнопки «Панель»",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "Скрыть вопрос, если нет строк",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Начальное количество заявок",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Минимальное количество входов",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Максимальное количество входов",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Начальное состояние входа",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Текст кнопки \"Предыдущая запись\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Текст кнопки \"Следующая запись\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Выравнивание кнопки \"Удалить вход\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "Скройте вопрос, если в нем нет строк",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Скрытие столбцов, если строк нет",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Пользовательские значения тарифов",
-    // [Auto-translated] "Rate count"
-    rateCount: "Количество ставок",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Как указать значения тарифов?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Пользовательские значения рейтинга",
+    // [Auto-translated] "Rating count"
+    rateCount: "Количество оценок",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Настройка рейтинга",
     slider: {
       // [Auto-translated] "Min value"
       min: "Минимальная стоимость",
@@ -1459,25 +1459,25 @@ export var ruStrings = {
       autoGenerate: "Настройка этикеток шкалы",
       // [Auto-translated] "Slider type"
       sliderType: "Тип слайдера",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Минимальная длина диапазона",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Максимальная длина диапазона",
       // [Auto-translated] "Custom labels"
       customLabels: "Пользовательские этикетки",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Формат этикетки",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Формат всплывающей подсказки"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Высота изображения",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Ширина изображения"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Скрыть вопрос, если он не содержит вариантов",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Скройте вопрос, если у него нет вариантов",
     // "Minimum width"
     minWidth: "Минимальная ширина (в значениях, принимаемых CSS)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var ruStrings = {
     showHeader: "Показать заголовки столбцов",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Показать горизонтальную полосу прокрутки",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Минимальная ширина столбца (в значениях, принимаемых CSS)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Ширина заголовка строки (в значениях, принимаемых CSS)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Минимальная ширина столбца",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Ширина заголовка строки",
     // "Value to store when \"True\" is selected"
     valueTrue: "Значение \"True\"",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var ruStrings = {
     otherErrorText: "Сообщение об ошибке «Пустой комментарий»",
     // "Error message for duplicate responses"
     keyDuplicationError: "Сообщение об ошибке \"Неуникальное значение ключа\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Минимальное количество выбранных вариантов",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Максимальное количество выбранных вариантов",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Ширина логотипа (в значениях, принимаемых CSS)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Высота логотипа (в значениях, принимаемых CSS)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Минимальные варианты выбора",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Максимальное количество вариантов выбора",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Ширина логотипа",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Высота логотипа",
     // "Read-only"
     readOnly: "Только для чтения",
-    // [Auto-translated] "Editable if"
-    enableIf: "Редактируется, если",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Отключите режим только для чтения, если",
     // "\"No rows\" message"
     noRowsText: "Сообщение \"Нет строк\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Отдельные специальные варианты («Нет», «Другое», «Выбрать все»)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Отдельные специальные варианты",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Копирование вариантов из следующего вопроса",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Какие варианты скопировать?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Какие варианты выбора копировать",
     // "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Используйте значения из следующего столбца матрицы или вопроса панели в качестве идентификаторов выбора",
     // "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Используйте значения из следующего столбца матрицы или панельного вопроса в качестве текстов для выбора",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Отображение заголовков страниц в индикаторе выполнения",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Отображение номеров страниц в индикаторе выполнения",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Показать область комментариев",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Заполнитель области комментариев",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Отображение описаний скоростей в виде экстремальных значений",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Добавить поле для комментариев",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Замещающий текст для поля комментария",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Отображение надписей в виде крайних значений",
     // [Auto-translated] "Row order"
     rowOrder: "Порядок строк",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var ruStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Режим предварительного просмотра",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "Включение макета сетки",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Столбцы макета сетки",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Столбцы сетки",
     // [Auto-translated] "Mask settings"
     maskSettings: "Настройки маски",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Выравнивание сообщения об ошибке расширения строк",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Выравнивание сообщений об ошибках в строках",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var ruStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Настройки входной маски",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Схема",
+        // [Auto-translated] "Panel Layout"
+        panel: "Компоновка панелей",
         // [Auto-translated] "Layout"
         question: "Схема",
         // [Auto-translated] "Layout"
@@ -1690,7 +1690,7 @@ export var ruStrings = {
       appearance: "Внешний вид",
       // [Auto-translated] "Accent colors"
       accentColors: "Акцентные цвета",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "Фон поверхности",
       // [Auto-translated] "Scaling"
       scaling: "Масштабирование",
@@ -1701,16 +1701,16 @@ export var ruStrings = {
     editProperty: "Редактировать свойство '{0}'",
     // "Items"
     items: "[Элементы: {0}]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Варианты доступны в следующих случаях:",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Варианты можно выбрать, если:",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Столбцы видны, если",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Строки видны, если",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Добавление внутренних отступов",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Сделайте варианты видимыми, если",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Сделайте выбор выбираемым, если",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Сделать столбцы видимыми, если",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Сделайте строки видимыми, если",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Увеличьте внутренний отступ",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Используйте ответы из последней записи по умолчанию",
     // "Please enter a value."
@@ -1751,36 +1751,36 @@ export var ruStrings = {
     triggerRunExpressionEmpty: "Пожалуйста, введите корректное выражение",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Введите выражение здесь...",
-    // [Auto-translated] "No file choosen"
+    // [Auto-translated] "No file chosen"
     noFile: "Файл не выбран",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Очистите значение, если вопрос становится скрытым",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Имя свойства value",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Включить поиск",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Очистка скрытых значений вопросов",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Храните значения в следующем свойстве",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Включение поиска по мере ввода",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Скрытие выбранных элементов",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Закрыть раскрывающийся список после выбора",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Выравнивание по вертикали",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Чередующиеся строки",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Столбцы видны, если",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Строки видны, если",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Заполнитель области комментариев",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Замещающий текст файла",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Замещающий текст фотографии",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Замещающий текст файла или фотографии",
-    // [Auto-translated] "Rate type"
-    rateType: "Тип тарифа",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Сворачивание раскрывающегося списка при выборе",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Вертикальное выравнивание внутри ячеек",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Чередование цветов строк",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Сделать столбцы видимыми, если",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Сделайте строки видимыми, если",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Замещающий текст для поля комментария",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Замещающий текст для локального файла",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Замещающий текст для камеры",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Замещающий текст для локального файла или камеры",
+    // [Auto-translated] "Rating icon"
+    rateType: "Иконка рейтинга",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Пример: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var ruStrings = {
       themeName: "Тема",
       // [Auto-translated] "Question appearance"
       isPanelless: "Внешний вид вопроса",
-      // [Auto-translated] "Input element"
-      editorPanel: "Радиус фона и угла",
-      // [Auto-translated] "Panel background and corner radius"
-      questionPanel: "Радиус фона и угла",
+      // [Auto-translated] "Background and corner radius"
+      editorPanel: "Фон и радиус угла",
+      // [Auto-translated] "Background and corner radius"
+      questionPanel: "Фон и радиус угла",
       // [Auto-translated] "Accent color"
       primaryColor: "Акцентный цвет",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Непрозрачность фона панели",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Непрозрачность фона вопроса",
-      // [Auto-translated] "Font size"
-      fontSize: "Размер шрифта",
-      // [Auto-translated] "Scale"
-      scale: "Шкала",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Непрозрачность панели и поля вопросов",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Непрозрачность входного элемента",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Размер шрифта опроса",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Масштабный коэффициент съемки",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Радиус закругления угла",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Расширенный режим",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Шрифт заголовка",
-      // [Auto-translated] "Page description font"
+      // [Auto-translated] "Description font"
       pageDescription: "Описание шрифта",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Title font"
       questionTitle: "Шрифт заголовка",
-      // [Auto-translated] "Question description font"
+      // [Auto-translated] "Description font"
       questionDescription: "Описание шрифта",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Font"
       editorFont: "Шрифт",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Непрозрачность",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Семейство шрифтов",
+      backgroundOpacity: "Непрозрачность", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Семейство шрифтов Survey",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Цвет фона",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Акцентный фон",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Акцент на переднем плане",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Сообщения об ошибках",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Акцентные цвета фона",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Акцентные цвета переднего плана",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Цвета сообщений об ошибках",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Эффекты теней",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var ruStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Вид",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Расположение логотипа",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Выравнивание логотипа",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Шрифт заголовка опроса",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var ruStrings = {
       backgroundImageOpacity: "Непрозрачность",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Перекрытие",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Расположение логотипа",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Титульная позиция",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Описание позиции"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Выравнивание логотипа",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Выравнивание заголовка опроса",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Выравнивание описания съемки"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var ruStrings = {
     "true": "истинный",
     // [Auto-translated] "false"
     "false": "ложный",
-    // [Auto-translated] "Local files"
-    file: "Локальные файлы",
+    // [Auto-translated] "Local file"
+    file: "Локальный файл",
     // [Auto-translated] "Camera"
     camera: "Камера",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Локальные файлы или камера",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Локальный файл или камера",
     // "Inherit"
     inherit: "Наследовать",
     // "Visible"
@@ -2016,8 +2016,8 @@ export var ruStrings = {
     onComplete: "По завершению",
     // "When question gets hidden"
     onHidden: "По скрытию",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
-    onHiddenContainer: "Когда вопрос или его панель/страница становятся скрытыми",
+    // [Auto-translated] "When question or its panel/page gets hidden"
+    onHiddenContainer: "Когда вопрос или его панель/страница скрывается",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
       none: "Никогда"
@@ -2205,9 +2205,9 @@ export var ruStrings = {
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Оригинальная структура",
-      // [Auto-translated] "All questions on a single page"
+      // [Auto-translated] "Show all questions on one page"
       singlePage: "Показать все вопросы на одной странице",
-      // [Auto-translated] "Each question on an individual page"
+      // [Auto-translated] "Show single question per page"
       questionPerPage: "Показывать один вопрос на странице",
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Показывать одно поле ввода на странице"
@@ -2232,18 +2232,18 @@ export var ruStrings = {
     correctQuestions: "Правильные ответы",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Завершенные страницы (пользовательский интерфейс кнопки)",
-    // [Auto-translated] "Under the input"
-    underInput: "Под входом",
-    // [Auto-translated] "Under the title"
-    underTitle: "Под заголовком",
-    // [Auto-translated] "On blur"
-    onBlur: "О размытии",
+    // [Auto-translated] "Under the input field"
+    underInput: "Под полем ввода",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Под заголовком вопроса",
+    // [Auto-translated] "On lost focus"
+    onBlur: "О потере фокуса",
     // [Auto-translated] "While typing"
     onTyping: "При наборе текста",
     // [Auto-translated] "Under the row"
     underRow: "Под строкой",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Под строкой видна только одна панель",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var ruStrings = {
       combined: "Оба"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Зависит от компоновки матрицы"
+      // [Auto-translated] "Based on matrix layout"
+      default: "На основе макета матрицы"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Пользователи не могут разворачивать или сворачивать панели",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Все панели свернуты",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Все панели расширены",
+      // [Auto-translated] "Locked"
+      default: "Запертый",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Свернуть все",
+      // [Auto-translated] "Expand all"
+      expanded: "Развернуть все",
       // [Auto-translated] "First expanded"
       firstExpanded: "Первый расширенный"
     },
@@ -2301,10 +2301,10 @@ export var ruStrings = {
       colored: "Цветной"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Порождать",
-      // [Auto-translated] "Enter manually"
-      "false": "Ввод вручную"
+      // [Auto-translated] "Auto-generate"
+      "true": "Автогенерация",
+      // [Auto-translated] "Manual"
+      "false": "Вручную"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,7 +2325,7 @@ export var ruStrings = {
       on: "Автоматическая нумерация",
       // [Auto-translated] "Reset on each page"
       onPage: "Сброс на каждой странице",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "Сброс на каждой панели",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Сброс на каждой панели",
@@ -2433,8 +2433,8 @@ export var ruStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "То же, что и опрос",
-      // [Auto-translated] "Fit to container"
-      container: "Подходит для контейнера"
+      // [Auto-translated] "Same as container"
+      container: "То же, что и контейнер"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2584,8 +2584,8 @@ export var ruStrings = {
       pattern: "Пример: +1(999)-999-99-99"
     },
     datetimemask: {
-      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
-      pattern: "Пример: мм/дд/гггг"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
+      pattern: "Пример: мм/дд/гггг чч:мм:сс"
     },
     currencymask: {
       // "Ex.: $"
@@ -2608,22 +2608,22 @@ export var ruStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Идентификатор панели, который не виден респондентам.",
-      // [Auto-translated] "Type a subtitle."
-      description: "Введите субтитры панели.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "��ведите панельный субтитр.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее видимость панели.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для панели.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Относится ко всем вопросам в рамках этой панели. Если установлено значение \"Скрыто\", он также скрывает описания вопросов. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задана) или на уровне опроса («Вверх» по умолчанию). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Задает расположение сообщения об ошибке по отношению ко всем вопросам на панели. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция \"Наследовать\" применяет настройку на уровне страницы (если задана) или на уровне опроса.",
       // "Repositions the panel to the end of a selected page."
       page: "Перемещает панель в конец выбранной страницы.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var ruStrings = {
       startWithNewLine: "Снимите флажок, чтобы отобразить панель в одной строке с предыдущим вопросом или панелью. Этот параметр не применяется, если панель является первым элементом формы.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Выберите из: «Развернутая» - панель отображается полностью и может быть свернута; «Свернутая» - панель отображает только заголовок и описание и может быть развернута; «Заблокировано» - панель отображается полностью и не может быть свернута.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Задает ширину панели пропорционально другим элементам съемки на той же линии. Принимает значения CSS (px, %, in, pt и т.д.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в эту панель.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var ruStrings = {
       descriptionLocation: "Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Под заголовком панели» по умолчанию).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Определяет положение вновь добавляемой панели. По умолчанию новые панели добавляются в конец. Выберите «Далее», чтобы вставить новую панель после текущей.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Дублирует ответы из последней записи и присваивает их следующей добавленной записи.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Запускает запрос на подтверждение перед удалением панели."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Запускает запрос на подтверждение перед удалением записи."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,17 +2776,17 @@ export var ruStrings = {
       imageHeight: "Переопределяет минимальное и максимальное значения высоты.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Переопределяет минимальное и максимальное значения ширины.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "«Значение» служит идентификатором элемента, используемым в условных правилах; Респондентам отображается «Текст».",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Значение\" - это идентификатор элемента, используемый в условных правилах; Респондентам отображается «Текст».",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Выберите между «Изображением» и «Видео», чтобы установить режим содержимого селектора мультимедиа. Если выбран параметр «Изображение», убедитесь, что все предоставленные параметры представляют собой файлы изображений в следующих форматах: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Точно так же, если выбран «Видео», убедитесь, что все параметры являются прямыми ссылками на видеофайлы в следующих форматах: MP4, MOV, WMV, FLV, AVI, MKV. Обратите внимание, что ссылки на YouTube не поддерживаются для параметров видео."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Этот параметр изменяет только размер поля ввода и не влияет на ширину поля вопроса. Чтобы ограничить допустимую длину ввода, перейдите в <b>раздел Проверка → Ограничение максимального количества символов</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Этот параметр только изменяет размер поля ввода и не влияет на ширину поля вопроса. Чтобы ограничить допустимую длину ввода, перейдите в раздел «Проверка» → «Максимальное ограничение символов»."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
       rows: "Задает количество отображаемых строк в поле ввода. Если ввод занимает больше строк, появится полоса прокрутки."
     },
     // survey templates
@@ -2811,7 +2811,7 @@ export var ruStrings = {
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
     },
     slider: {
@@ -2848,8 +2848,8 @@ export var ruStrings = {
     caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Выберите один из: \"Статический\" - задает фиксированную ширину; «Отзывчивый» - заставляет опрос занимать всю ширину экрана; \"Авто\" - применяет любой из двух вариантов в зависимости от используемых типов вопросов.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Файлы cookie не позволяют пользователям заполнять один и тот же опрос дважды.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Назначьте уникальное значение файла cookie для вашего опроса. Файл cookie будет установлен в браузере респондента после завершения опроса, чтобы предотвратить повторное отправление опроса.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Вставьте ссылку на изображение (без ограничений по размеру) или нажмите значок папки, чтобы просмотреть файл с компьютера (до 64 КБ).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var ruStrings = {
     autoAdvanceEnabled: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Настройка видимости кнопок навигации на странице.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Задает расположение кнопок навигации на странице.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var ruStrings = {
     maxTextLength: "Только для вопросов с вводом текста.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Только для комментариев к вопросам.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Задает количество отображаемых строк в текстовых полях для комментариев к вопросам. Если ввод занимает больше строк, появляется полоса прокрутки.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Выберите, хотите ли вы, чтобы комментарии к вопросам и вопросы с длинным текстом автоматически увеличивались в высоту в зависимости от введенной длины текста.",
@@ -2908,8 +2908,8 @@ export var ruStrings = {
     columnMinWidth: "Принимает значения CSS (px, %, in, pt и т. д.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Принимает значения CSS (px, %, in, pt и т. д.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Отображается только в том случае, если хотя бы один столбец имеет тип Total или выражение Total.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Отображается только в том случае, если хотя бы в одном столбце отображаются итоговые значения, заданные с помощью \"Метода агрегирования\" или \"Выражения общего значения\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Задает местоположение сообщения об ошибке по отношению к ячейке с недопустимыми входными данными. Опция «Наследовать» применяет настройку из свойства «Выравнивание сообщений об ошибках».",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var ruStrings = {
     imageFit: "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Постепенно увеличивает высоту поля ввода по мере ввода данных. Переопределяет настройку «Высота поля ввода (в строках)».",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Маркер изменения размера (или ручка) отображается в углу, и его можно перетащить, чтобы изменить размер поля ввода.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на страницу благодарности.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Опция «Наследовать» применяет настройку на уровне опроса («Включено» по умолчанию).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на страницу «Спасибо». Если установлено значение 0, подсчитывается время, затраченное на опрос.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Интервал времени в секундах, по истечении которого опрос автоматически переходит на следующую страницу. Скрывает кнопку навигации \"Предыдущая\". Если задано значение 0, подсчитывается время, проведенное на текущей странице.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Включите этот параметр, чтобы активировать проверку, когда пользователь фокусируется на пустом поле ввода, а затем покидает его, не внося никаких изменений.",
     page: {
@@ -2984,8 +2984,8 @@ export var ruStrings = {
     maxWidth: "Принимает значения CSS (px, %, in, pt и т. д.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Принимает значения CSS (px, %, in, pt и т. д.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Если это свойство не задано, ответ будет сохранен в поле, указанном свойством Name.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Идентификатор соединения — это пользовательский ключ, который можно назначить нескольким вопросам, чтобы связать их вместе и синхронизировать их значения. Эти значения будут объединены в один массив или объект и сохранены в результатах опроса с использованием ключа в качестве имени свойства.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Значение, отображаемое в вопросах в формате HTML, а также в динамических заголовках и описаниях элементов опроса, когда значение вопроса пусто.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var ruStrings = {
     valueTrue: "Значение, сохраняемое в результатах опроса, когда респонденты дают положительный ответ.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Значение, сохраняемое в результатах опроса, когда респонденты дают отрицательный ответ.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Не рекомендуется отключать этот параметр, так как он переопределяет изображение предварительного просмотра и затрудняет понимание пользователем, были ли файлы загружены.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Не рекомендуется отключать эту опцию, так как она переопределяет изображение предварительного просмотра и затрудняет понимание пользователем того, были ли файлы загружены.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Запускает запрос на подтверждение удаления файла.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var ruStrings = {
     dataList: "Введите список вариантов, которые будут предложены респонденту во время ввода.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Задает одинаковую ширину для всех меток товаров. Принимает значения CSS (px, %, in, pt и т.д.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Выберите способ выравнивания вводимого значения в поле. Настройка по умолчанию \"Auto\" выравнивает вводимое значение по правому краю, если применяется маскирование валюты или число, то по левому краю.",
@@ -3062,10 +3062,10 @@ export var ruStrings = {
     format: "Используйте {0} в качестве заполнителя для фактического значения.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Дополнительные сведения см. в описании атрибута [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Применимо только к типам ячеек «Радиогруппа» и «Флажок».",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Дополнительные сведения см. в описании атрибута [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. Применяется только к столбцам с параметром \"Тип ввода ячейки\" как \"Группа переключателей\" или \"Флажки\".",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Выберите тип данных, которые может получить браузер пользователя. Эти данные берутся либо из прошлых значений, введенных пользователем, либо из предварительно настроенных значений, если таковые были сохранены пользователем для автозаполнения.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,60 +3139,60 @@ export var ruStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Разрешить множественный выбор",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Показать подписи к изображениям",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Показ подписей к изображениям и видео",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Поменяйте местами «Да» и «Нет»",
     // [Auto-translated] "Value"
     value: "Ценность",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Выравнивание табуляции",
-    // [Auto-translated] "Source type"
-    sourceType: "Тип источника",
+    // [Auto-translated] "File source type"
+    sourceType: "Тип источника файла",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Подходит для контейнера",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Выражение заданного значения",
     // "Description"
-    description: "Описание",
+    description: "Описание", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Подходит под логотип",
     // [Auto-translated] "Pages"
-    pages: "Страниц",
+    pages: "Страниц", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Вопросы",
+    questions: "Вопросы", // Auto-generated string
     // "Triggers"
     triggers: "триггеры",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Вычисляемые значения",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Пользовательские переменные",
     // [Auto-translated] "Survey id"
-    surveyId: "Идентификатор опроса",
+    surveyId: "Идентификатор опроса", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "Идентификатор записи опроса",
+    surveyPostId: "Идентификатор записи опроса", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Опрос показывает сохранение данных",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Описание вопроса Местоположение",
+    surveyShowDataSaving: "Опрос показывает сохранение данных", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Выравнивание описания вопроса",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Тип индикатора выполнения",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Показать оглавление",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Расположение оглавления",
+    progressBarType: "Тип индикатора выполнения", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Показать оглавление (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Выравнивание оглавления",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Шаблон заголовка вопроса",
-    // [Auto-translated] "Width mode"
-    widthMode: "Режим ширины",
+    questionTitlePattern: "Шаблон заголовка вопроса", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Режим ширины съемки",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Показать информацию о бренде",
+    showBrandInfo: "Показать информацию о бренде", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Использование отображаемых значений в динамических текстах",
     // "Visible if"
-    visibleIf: "Отображать, если",
+    visibleIf: "Отображать, если", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Выражение значения по умолчанию",
     // "Required if"
-    requiredIf: "Обязателен если",
+    requiredIf: "Обязателен если", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Сбросьте значение, если",
     // [Auto-translated] "Set value if"
@@ -3200,137 +3200,137 @@ export var ruStrings = {
     // "Validation rules"
     validators: "Валидаторы",
     // [Auto-translated] "Bindings"
-    bindings: "Привязки",
+    bindings: "Привязки", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Рендеринг как",
+    renderAs: "Рендеринг как", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Прикрепите оригинальные элементы",
+    attachOriginalItems: "Прикрепите оригинальные элементы", // Auto-generated string
     // "Choices"
     choices: "Выбор",
     // "Choices by url"
-    choicesByUrl: "Выбрать из интернета",
+    choicesByUrl: "Выбрать из интернета", // Auto-generated string
     // "Currency"
-    currency: "Валюта",
+    currency: "Валюта", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Подсказка по ячейке",
+    cellHint: "Подсказка по ячейке", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Общее количество максимальных дробных цифр",
+    totalMaximumFractionDigits: "Общее количество максимальных дробных цифр", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Общее количество минимальных дробных цифр",
+    totalMinimumFractionDigits: "Общее количество минимальных дробных цифр", // Auto-generated string
     // "Columns"
-    columns: "Столбцы",
+    columns: "Столбцы", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Детализация элементов",
+    detailElements: "Детализация элементов", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Разрешить адаптивные действия",
+    allowAdaptiveActions: "Разрешить адаптивные действия", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Значение строки по умолчанию",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "Значение строки по умолчанию", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Автоматическое раскрытие сведений о новой строке",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Выбор отложенной загрузки включен",
+    choicesLazyLoadEnabled: "Выбор отложенной загрузки включен", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Выбор ленивой загрузки размера страницы",
+    choicesLazyLoadPageSize: "Выбор ленивой загрузки размера страницы", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Компонент поля ввода",
+    inputFieldComponent: "Компонент поля ввода", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Компонент предмета",
+    itemComponent: "Компонент предмета", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Мин",
+    min: "Мин", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Макс",
+    max: "Макс", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Выражение минимального значения",
+    minValueExpression: "Выражение минимального значения", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Выражение максимального значения",
+    maxValueExpression: "Выражение максимального значения", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Шаг",
-    // [Auto-translated] "Data list"
-    dataList: "Список данных",
+    step: "Шаг", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Элементы для автоподсказок",
     // "Input field width (in characters)"
     inputSize: "Размер элементов",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Ширина метки элемента (в пикселях)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Ширина метки товара",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Выравнивание вводимого значения",
     // [Auto-translated] "Elements"
-    elements: "Азы",
+    elements: "Азы", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Содержание",
+    content: "Содержание", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Навигационный заголовок",
+    navigationTitle: "Навигационный заголовок", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Навигационное описание",
+    navigationDescription: "Навигационное описание", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Длительное нажатие",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Автоматическое выращивание",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Разрешить изменение размера",
+    longTap: "Длительное нажатие", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Динамическое расширение поля ввода",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Включить маркер изменения размера",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Принять возврат каретки",
+    acceptCarriageReturn: "Принять возврат каретки", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Режим отображения",
     // [Auto-translated] "Rate type"
-    rateType: "Тип тарифа",
+    rateType: "Тип тарифа", // Auto-generated string
     // "Label"
-    label: "Ярлык",
+    label: "Ярлык", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Режим содержимого",
-    // [Auto-translated] "Image fit"
-    imageFit: "Подгонка под изображение",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Подгонка изображения и миниатюры",
     // [Auto-translated] "Alt text"
     altText: "Замещающий текст",
     // [Auto-translated] "Height"
-    height: "Высота",
+    height: "Высота", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Высота на смартфонах",
     // [Auto-translated] "Pen color"
-    penColor: "Цвет пера",
+    penColor: "Цвет пера", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Цвет фона",
     // [Auto-translated] "Template elements"
-    templateElements: "Элементы шаблона",
+    templateElements: "Элементы шаблона", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Оператор",
+    operator: "Оператор", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Является вариативным",
+    isVariable: "Является вариативным", // Auto-generated string
     // "Run expression"
-    runExpression: "Выражение \"Выполнить\"",
+    runExpression: "Выражение \"Выполнить\"", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Показать подпись",
+    showCaption: "Показать подпись", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Название значка",
+    iconName: "Название значка", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Размер значка",
+    iconSize: "Размер значка", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Точность",
+    precision: "Точность", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Область маркера перетаскивания матрицы",
+    matrixDragHandleArea: "Область маркера перетаскивания матрицы", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Фоновое изображение",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Подгонка фонового изображения",
+    backgroundImageFit: "Подгонка фонового изображения", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Вложение фонового изображения",
+    backgroundImageAttachment: "Вложение фонового изображения", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Непрозрачность фона",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Выберите, чтобы ранжирование включено",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Выберите, чтобы ранжировать макет областей",
+    backgroundOpacity: "Непрозрачность фона", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Разрешить выборочное ранжирование",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Выравнивание областей ранжирования",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Текст, показывающий, если выбраны все параметры",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Замещающий текст для области ранжирования",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Разрешить доступ к камере",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Цветовой режим масштабирования",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Оцените цветовой режим",
+    allowCameraAccess: "Разрешить доступ к камере", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Цветовой режим иконки рейтинга",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Цветовая гамма смайликов",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Копирование отображаемого значения",
+    copyDisplayValue: "Копирование отображаемого значения", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Пролет колонны",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var ruStrings = {
     "--sjs-secondary-background-500": "Вторичный",
     // [Auto-translated] "Surface"
     surfaceScale: "Поверхность",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Пользовательский интерфейс",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Элементы пользовательского интерфейса",
     // [Auto-translated] "Font"
     fontScale: "Шрифт",
     names: {

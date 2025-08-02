@@ -425,32 +425,32 @@ export var hebrewStrings = {
       logicPlaceholderDescription: "צור כלל כדי להתאים אישית את זרימת הסקר.",
       // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescriptionMobile: "צור כלל כדי להתאים אישית את זרימת הסקר.",
-      // [Auto-translated] "Show (hide) page"
-      page_visibilityName: "הצג (הסתר) עמוד",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "הפוך דף לזמין (הפוך ללא זמין)",
+      // [Auto-translated] "Show/hide page"
+      page_visibilityName: "הצגה/הסתרה של עמוד",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "הפעלה/השבתה של דף",
       // [Auto-translated] "Make page required"
       page_requireName: "הפיכת הדף לנדרש",
-      // [Auto-translated] "Show (hide) panel"
-      panel_visibilityName: "הצג (הסתר) החלונית",
-      // [Auto-translated] "Enable (disable) panel"
-      panel_enableName: "הפעל (השבית) את החלונית",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "הפיכת הדף לנדרש",
-      // [Auto-translated] "Show (hide) question"
-      question_visibilityName: "הצג (הסתר) שאלה",
-      // [Auto-translated] "Enable (disable) question"
-      question_enableName: "הפיכת שאלה לזמינה (השבתה",
+      // [Auto-translated] "Show/hide panel"
+      panel_visibilityName: "הצגה/הסתרה של החלונית",
+      // [Auto-translated] "Enable/disable panel"
+      panel_enableName: "הפעלה/השבתה של החלונית",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "הפיכת החלונית לחובה",
+      // [Auto-translated] "Show/hide question"
+      question_visibilityName: "הצג/הסתר שאלה",
+      // [Auto-translated] "Enable/disable question"
+      question_enableName: "הפעל/השבת את השאלה",
       // [Auto-translated] "Make question required"
       question_requireName: "הפוך את השאלה לנדרשת",
       // [Auto-translated] "Reset question value"
       question_resetValueName: "איפוס ערך שאלה",
       // [Auto-translated] "Set question value"
       question_setValueName: "הגדרת ערך שאלה",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "הצג (הסתר) עמודה",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "הפיכת עמודה לזמינה (ללא זמינה)",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "הצגה/הסתרה של עמודה",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "הפעלה/השבתה של העמודה",
       // [Auto-translated] "Make column required"
       column_requireName: "הפיכת עמודה לנדרשת",
       // [Auto-translated] "Reset column value"
@@ -469,30 +469,30 @@ export var hebrewStrings = {
       trigger_runExpressionName: "הפעל ביטוי",
       // "Set \"Thank You\" page markup"
       completedHtmlOnConditionName: "הגדרת סימון דף \"סקר הושלם\"",
-      // [Auto-translated] "Make the page visible when the logic expression returns true. Otherwise keep it invisible."
-      page_visibilityDescription: "הפוך את הדף לגלוי כאשר ביטוי הלוגיקה מחזיר True. אחרת, שמור אותו בלתי נראה.",
-      // [Auto-translated] "Make the panel visible when the logic expression returns true. Otherwise keep it invisible."
-      panel_visibilityDescription: "הפוך את החלונית לגלויה כשביטוי הלוגיקה מחזיר True. אחרת, שמור אותו בלתי נראה.",
-      // [Auto-translated] "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled."
-      panel_enableDescription: "הפוך את החלונית, ואת כל הרכיבים בתוכה, לזמינים כאשר ביטוי הלוגיקה מחזיר True. אחרת, השאר אותם מושבתים.",
-      // [Auto-translated] "Make the question visible when the logic expression returns true. Otherwise keep it invisible."
-      question_visibilityDescription: "הפוך את השאלה לגלויה כאשר ביטוי הלוגיקה חוזר True. אחרת, שמור אותו בלתי נראה.",
-      // [Auto-translated] "Make the question enable when the logic expression returns true. Otherwise keep it disabled."
-      question_enableDescription: "הפוך את השאלה לזמינה כאשר ביטוי הלוגיקה מחזיר True. אחרת, השאר אותו מושבת.",
-      // [Auto-translated] "Question becomes required when the logic expression returns true."
-      question_requireDescription: "השאלה הופכת לנדרשת כאשר ביטוי הלוגיקה מחזיר True.",
-      // [Auto-translated] "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'."
-      trigger_completeDescription: "כאשר ביטוי הלוגיקה חוזר True, הסקר הושלם ומשתמש קצה רואה את 'דף התודה'.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question."
-      trigger_setvalueDescription: "כאשר ערכי שאלה, המשמשים בביטוי הלוגי, משתנים וביטוי הלוגיקה מחזיר True, הערך מוגדר לשאלה שנבחרה.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question."
-      trigger_copyvalueDescription: "כאשר ערכי שאלה, המשמשים בביטוי הלוגי, משתנים וביטוי הלוגיקה מחזיר True, הערך של שאלה נבחרת אחת מועתק לשאלה נבחרת אחרת.",
-      // [Auto-translated] "When the logic expression returns true then the survey skip to / focus the selected question."
-      trigger_skipDescription: "כאשר ביטוי הלוגיקה חוזר True אז הסקר מדלג / ממקד את השאלה שנבחרה.",
-      // [Auto-translated] "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question"
-      trigger_runExpressionDescription: "כאשר ביטוי הלוגיקה מחזיר true, הביטוי המותאם אישית מתבצע. באפשרותך להגדיר תוצאת ביטוי זו בשאלה שנבחרה",
-      // [Auto-translated] "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one."
-      completedHtmlOnConditionDescription: "אם ביטוי הלוגיקה מחזיר true, טקסט ברירת המחדל עבור 'דף תודה' משתנה לטקסט הנתון.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the page invisible."
+      page_visibilityDescription: "הפוך את העמוד לגלוי כאשר הביטוי הלוגי מוערך כ- true. אחרת, השאר את הדף בלתי נראה.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the panel invisible."
+      panel_visibilityDescription: "הפוך את העמוד לגלוי כאשר הביטוי הלוגי מוערך כ- true. אחרת, השאר את החלונית בלתי נראית.",
+      // [Auto-translated] "Make the panel and all elements inside it enabled when the logical expression evaluates to true. Otherwise, keep them disabled."
+      panel_enableDescription: "הפוך את החלונית וכל הרכיבים שבתוכה לזמינים כאשר הביטוי הלוגי מוערך כ- true. אחרת, השאר אותם מושבתים.",
+      // [Auto-translated] "Make the question visible when the logical expression evaluates to true. Otherwise, keep the question invisible."
+      question_visibilityDescription: "הפוך את השאלה לגלויה כאשר הביטוי הלוגי מוערך כנכון. אחרת, שמור את השאלה בלתי נראית.",
+      // [Auto-translated] "Make the question enabled when the logical expression evaluates to true. Otherwise, keep the question disabled."
+      question_enableDescription: "הפוך את השאלה לזמינה כאשר הביטוי הלוגי מוערך כ- true. אחרת, השאר את השאלה מושבתת.",
+      // [Auto-translated] "Question becomes required when the logical expression evaluates to true."
+      question_requireDescription: "השאלה הופכת לנדרשת כאשר הביטוי הלוגי מוערך כנכון.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey ends, and the respondent sees the \"Thank you\" page."
+      trigger_completeDescription: "כאשר הביטוי הלוגי מוערך כ- true, הסקר מסתיים והמשיב רואה את הדף \"תודה\".",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the specified value is assigned to the selected question."
+      trigger_setvalueDescription: "כאשר ערכי השאלה המשמשים בביטוי הלוגי משתנים, והביטוי מוערך כ- true, הערך שצוין מוקצה לשאלה שנבחרה.",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the value of the selected question is copied to another question."
+      trigger_copyvalueDescription: "כאשר ערכי השאלה המשמשים בביטוי הלוגי משתנים, והביטוי מוערך כ- true, הערך של השאלה שנבחרה מועתק לשאלה אחרת.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey focuses/jumps to the selected question."
+      trigger_skipDescription: "כאשר הביטוי הלוגי מוערך כ- true, הסקר מתמקד/קופץ לשאלה שנבחרה.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey evaluates another expression. Optionally, the result of the latter expression can be assigned as a value to the selected question"
+      trigger_runExpressionDescription: "כאשר הביטוי הלוגי מוערך כ- true, הסקר מעריך ביטוי אחר. לחלופין, ניתן להקצות את התוצאה של הביטוי האחרון כערך לשאלה שנבחרה",
+      // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
+      completedHtmlOnConditionDescription: "אם הביטוי הלוגי מוערך כ- true, הדף \"תודה\" מציג את התוכן שצוין.",
       // [Auto-translated] "When expression: '{0}' returns true"
       itemExpressionText: "כאשר expression: '{0}' מחזיר ערך True", // {0} - the expression
       // [Auto-translated] "New rule"
@@ -512,7 +512,7 @@ export var hebrewStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "אפס ערך עבור שאלה: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "הקצאת ערך: {1} לשאלה: {0}",
+      question_setValueText: "הקצאת ערך: {1} לשאלה: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "הפוך את {0} העמודות של {1} השאלה לגלויות", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -539,8 +539,8 @@ export var hebrewStrings = {
       trigger_runExpressionText1: "ביטוי הפעלה: '{0}'", // {0} the expression
       // [Auto-translated] " and set its result into question: {0}"
       trigger_runExpressionText2: " ולהעמיד את תוצאתו בסימן שאלה: {0}", // {0} question name
-      // [Auto-translated] "show custom text for the 'Thank you page'."
-      completedHtmlOnConditionText: "הצג טקסט מותאם אישית עבור 'דף תודה'.",
+      // [Auto-translated] "show custom text for the \"Thank You\" page."
+      completedHtmlOnConditionText: "הצג טקסט מותאם אישית עבור הדף \"תודה\".",
       // [Auto-translated] "All Questions"
       showAllQuestions: "כל השאלות",
       // [Auto-translated] "All Action Types"
@@ -561,10 +561,10 @@ export var hebrewStrings = {
       selectedActionCaption: "בחר פעולה...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "ביטוי הלוגיקה ריק או לא חוקי. אנא תקן זאת.",
-      // [Auto-translated] "Please, add at least one action."
-      noActionError: "אנא, הוסף לפחות פעולה אחת.",
-      // [Auto-translated] "Please, fix problems in your action(s)."
-      actionInvalid: "אנא, תקן בעיות בפעולות שלך.",
+      // [Auto-translated] "Please add at least one action."
+      noActionError: "אנא הוסף פעולה אחת לפחות.",
+      // [Auto-translated] "Please fix issues in your action(s)."
+      actionInvalid: "אנא תקן בעיות בפעולות שלך.",
       // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "כללים לוגיים אינם שלמים",
       // [Auto-translated] "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?"
@@ -590,8 +590,8 @@ export var hebrewStrings = {
       requiredIf: "הפוך את החלונית לנדרשת אם",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "סדר השאלות בתוך הפאנל",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "עמוד הורה",
+      // [Auto-translated] "Move the panel to page"
+      page: "הזזת החלונית לעמוד",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "הצגת החלונית בשורה חדשה",
       // [Auto-translated] "Panel collapse state"
@@ -606,10 +606,10 @@ export var hebrewStrings = {
       showNumber: "מספר חלונית זו"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "רוחב אפקטיבי, %",
-      // [Auto-translated] "Question title width"
-      questionTitleWidth: "רוחב כותרת השאלה, px"
+      // [Auto-translated] "Question title width, px"
+      questionTitleWidth: "רוחב כותרת השאלה, פיקסלים"
     },
     paneldynamic: {
       // [Auto-translated] "Panel name"
@@ -636,20 +636,20 @@ export var hebrewStrings = {
       minWidth: "רוחב לוח מינימלי",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "רוחב לוח מרבי",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "אישור מחיקת פאנל",
-      // [Auto-translated] "Panel description pattern"
-      templateDescription: "תבנית תיאור חלונית",
-      // [Auto-translated] "Panel title pattern"
-      templateTitle: "תבנית כותרת חלונית",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "אישור הסרת הכניסה",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "תבנית תיאור הערך",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "תבנית כות��ת ערך",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "טקסט ריק בחלונית",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "תבנית כותרת טאב",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "מציין מיקום של כותרת טאב",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "הפיכת חלונית בודדת לגלויה אם",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "הפיכת ער�� בודד לגלוי אם",
       // [Auto-translated] "Number the panel"
       showNumber: "מספור החלונית",
       // [Auto-translated] "Panel title alignment"
@@ -662,8 +662,8 @@ export var hebrewStrings = {
       templateQuestionTitleWidth: "רוחב כותרת השאלה",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "יישור הודעת שגיאה",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "מיקום חדש בלוח",
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "מיקום כניסה חדש",
       // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "הצגת מד ההתקדמות",
       // [Auto-translated] "Prevent duplicate responses in the following question"
@@ -682,8 +682,8 @@ export var hebrewStrings = {
       visibleIf: "הפוך את השאלה לגלויה אם",
       // [Auto-translated] "Make the question required if"
       requiredIf: "הפוך את השאלה לנדרשת אם",
-      // [Auto-translated] "Repositions the question to the end of a selected page."
-      page: "עמוד הורה",
+      // [Auto-translated] "Move the question to page"
+      page: "העברת השאלה לדף",
       // [Auto-translated] "Question box collapse state"
       state: "מצב כיווץ תיבת שאלה",
       // [Auto-translated] "Number this question"
@@ -712,18 +712,18 @@ export var hebrewStrings = {
       signatureHeight: "גובה אזור חתימה",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "שינוי גודל אוטומטי של אזור החתימה",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "הצגת מציין המיקום",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "הצגת מציין מיקום בתוך אזור החתימה",
       // [Auto-translated] "Placeholder text"
       placeholder: "טקסט מציין מיקום",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "טקסט מציין מיקום במצב קריאה בלבד או תצוגה מקדימה",
       // [Auto-translated] "Show the Clear button within signature area"
       allowClear: "הצגת לחצן 'נקה' בתוך אזור החתימה",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "רוחב עט מינימלי",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "רוחב עט מרבי",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "רוחב קו מינימלי",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "רוחב קו מרבי",
       // [Auto-translated] "Stroke color"
       penColor: "צבע קו"
     },
@@ -755,8 +755,8 @@ export var hebrewStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "כותר",
+      // [Auto-translated] "Survey title"
+      title: "כותרת הסקר",
       // [Auto-translated] "Survey description"
       description: "תיאור הסקר",
       // [Auto-translated] "Make the survey read-only"
@@ -765,16 +765,16 @@ export var hebrewStrings = {
     page: {
       // [Auto-translated] "Page name"
       name: "שם הדף",
-      // [Auto-translated] "Title"
-      title: "כותר",
+      // [Auto-translated] "Page title"
+      title: "כותרת הדף",
       // [Auto-translated] "Page description"
       description: "תיאור הדף",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "הפוך את הדף לגלוי אם",
       // [Auto-translated] "Make the page required if"
       requiredIf: "הפוך את הדף לנדרש אם",
-      // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-      timeLimit: "גבול זמן לסיום העמוד (בשניות)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "מגבלת זמן להשלמת הדף",
       // [Auto-translated] "Question order on the page"
       questionOrder: "סדר השאלות בדף"
     },
@@ -1033,7 +1033,7 @@ export var hebrewStrings = {
     // "Path to data"
     path: "נתיב למידע במקור השירות",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "כתובת URL של שירות אינטרנט",
       // "Get value to store from the following property"
       valueName: "קבל ערכים משדה JSON הבא"
@@ -1066,10 +1066,10 @@ export var hebrewStrings = {
     otherText: "טקסט לאפשרות אחרת",
     // "Enable the \"None\" option"
     showNoneItem: "אפשר אפשרות 'אף אחד'",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "אפשר את האפשרות סרב לענות",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "אפשר את האפשרות 'לא יודע'",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "הפעל את האפשרות \"סירוב לענות\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "הפעל את האפשרות \"לא יודע\"",
     // "Rename the \"None\" option"
     noneText: "טקסט לאפשרות 'אף אחד'",
     // "Enable the \"Select All\" option"
@@ -1319,7 +1319,7 @@ export var hebrewStrings = {
     surveyvalidator: {
       // "Error message"
       text: "הודעת שגיאה",
-      // [Auto-translated] "Use the magic wand icon to set a validation rule for the question."
+      // [Auto-translated] "Validation expression"
       expression: "ביטוי אימות"
     },
     // "Total row header"
@@ -1459,21 +1459,21 @@ export var hebrewStrings = {
       autoGenerate: "שינוי קנה מידה של תצורת תוויות",
       // [Auto-translated] "Slider type"
       sliderType: "סוג מחוון",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "אורך טווח מינימלי",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "אורך טווח מקסימלי",
       // [Auto-translated] "Custom labels"
       customLabels: "תוויות מותאמות אישית",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "תבנית תווית",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "תבנית תיאור כלי"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "גובה תמונה",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "רוחב תמונה"
     },
     // "Hide the question if it has no choices"
@@ -1528,10 +1528,10 @@ export var hebrewStrings = {
     choiceValuesFromQuestion: "השתמש בערכים משאלת עמודת המטריצה או החלונית הבאה כמזהי בחירה",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "השתמש בערכים מעמודת המטריצה או משאלת החלונית הבאה כטקסטים נבחרים",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "הצגת כותרות עמודים בסרגל ההתקדמות",
-    // [Auto-translated] "Display page numbers in progress bar"
-    progressBarShowPageNumbers: "הצגת מספרי עמודים במד ההתקדמות",
+    // [Auto-translated] "Display page numbers in the progress bar"
+    progressBarShowPageNumbers: "הצגת מספרי עמודים בסרגל ההתקדמות",
     // "Add a comment box"
     showCommentArea: "הצג את אזור התגובה",
     // "Placeholder text for the comment box"
@@ -1590,14 +1590,14 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "מצב תצוגה מקדימה",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "הפיכת פריסת הרשת לזמינה",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "עמודות פריסת רשת",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "הפיכת פריסת רשת לזמינה",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "עמודות רשת",
     // [Auto-translated] "Mask settings"
     maskSettings: "קביעות מסיכה",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "יישור הודעת שגיאה של הרחבת שורה",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "יישור הודעת שגיאה של פרטי שורה",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var hebrewStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "הגדרות מסיכת קלט",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "פריסה",
+        // [Auto-translated] "Panel Layout"
+        panel: "פריסת חלונית",
         // [Auto-translated] "Layout"
         question: "פריסה",
         // [Auto-translated] "Layout"
@@ -1690,7 +1690,7 @@ export var hebrewStrings = {
       appearance: "מראה",
       // [Auto-translated] "Accent colors"
       accentColors: "צבעי הדגשה",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "רקע פני השטח",
       // [Auto-translated] "Scaling"
       scaling: "שינוי גודל",
@@ -1773,12 +1773,12 @@ export var hebrewStrings = {
     rowsVisibleIf: "השורות יוצגו אם",
     // "Placeholder text for the comment box"
     otherPlaceholder: "מציין מקום לתגובה",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "טקסט מציין מיקום קובץ",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "טקסט מציין מיקום תמונה",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "טקסט מציין מיקום של קובץ או תמונה",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "טקסט מציין מיקום עבור קובץ מקומי",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "טקסט מציין מיקום עבור מצלמה",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "טקסט מציין מיקום עבור קובץ מקומי או מצלמה",
     // "Rating icon"
     rateType: "סוג דירוג",
     // [Auto-translated] "Ex.: https://api.example.com/books"
@@ -1810,14 +1810,14 @@ export var hebrewStrings = {
       questionPanel: "רקע ורדיוס פינה",
       // [Auto-translated] "Accent color"
       primaryColor: "צבע הדגשה",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "אטימות רקע של החלונית",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "אטימות רקע השאלה",
-      // [Auto-translated] "Font size"
-      fontSize: "גודל גופן",
-      // [Auto-translated] "Scale"
-      scale: "סולם",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "אטימות פאנל ותיבת שאלות",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "אטימות רכיב קלט",
+      // [Auto-translated] "Survey font size"
+      fontSize: "גודל גופן סקר",
+      // [Auto-translated] "Survey scale factor"
+      scale: "גורם קנה המידה של הסקר",
       // [Auto-translated] "Corner radius"
       cornerRadius: "רדיוס פינה",
       // [Auto-translated] "Advanced mode"
@@ -1833,17 +1833,17 @@ export var hebrewStrings = {
       // [Auto-translated] "Font"
       editorFont: "גופן",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "אטימות",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "משפחת גופנים",
+      backgroundOpacity: "אטימות", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "משפחת גופני סקר",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "צבע רקע",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "רקע הדגשה",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "הדגשת החזית",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "הודעות שגיאה",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "צבעי רקע מודגשים",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "צבעי חזית מודגשים",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "צבעי הודעת שגיאה",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "אפקטי צל",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var hebrewStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "נוף",
-      // [Auto-translated] "Logo position"
-      logoPosition: "מיקום הלוגו",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "יישור לוגו",
       // [Auto-translated] "Survey title font"
       surveyTitle: "גופן כותרת סקר",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var hebrewStrings = {
       backgroundImageOpacity: "אטימות",
       // [Auto-translated] "Overlap"
       overlapEnabled: "חופפים",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "מיקום הלוגו",
-      // [Auto-translated] "Title position"
-      titlePositionX: "מיקום בתפקיד",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "תיאור מיקום"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "יישור לוגו",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "יישור כותרת הסקר",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "יישור תיאור הסקר"
     }
   },
   // Property values
@@ -2433,8 +2433,8 @@ export var hebrewStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "זהה לסקר",
-      // [Auto-translated] "Fit to container"
-      container: "התאמה למיכל"
+      // [Auto-translated] "Same as container"
+      container: "זהה למיכל"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2584,8 +2584,8 @@ export var hebrewStrings = {
       pattern: "לדוגמה: +1(999)-999-99-99"
     },
     datetimemask: {
-      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
-      pattern: "לדוגמה: mm/dd/yyyy"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
+      pattern: "לדוגמה: mm/dd/yyyy HH:MM:ss"
     },
     currencymask: {
       // "Ex.: $"
@@ -2608,22 +2608,22 @@ export var hebrewStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "מזהה חלונית שאינו גלוי למשיבים.",
-      // [Auto-translated] "Type a subtitle."
-      description: "הקלד כותרת משנה של חלונית.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "הקלד כותרת משנה בחלונית.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת החלונית.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "חל על כל השאלות בפאנל זה. כאשר הוא מוגדר ל\"מוסתר\", הוא גם מסתיר תיאורי שאלות. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרות עבור שאלות בודדות. האפשרות \"קבל בירושה\" מחילה את ההגדרה ברמת הדף (אם מוגדרת) או ברמת הסקר (\"עליון\" כברירת מחדל). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"קבל בירושה\" מחילה את ההגדרה ברמת הדף (אם מוגדרת) או ברמת הסקר.",
       // "Repositions the panel to the end of a selected page."
       page: "מיקום מחדש של החלונית לסוף עמוד שנבחר.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var hebrewStrings = {
       startWithNewLine: "בטל את הבחירה כדי להציג את החלונית בשורה אחת עם השאלה או החלונית הקודמת. ההגדרה אינה חלה אם החלונית היא הרכיב הראשון בטופס.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "בחר מתוך: \"מורחב\" - הלוח מוצג במלואו וניתן לכווץ; \"מכווץ\" - הלוח מציג רק את הכותרת והתיאור וניתן להרחיבו; \"נעול\" - הלוח מוצג במלואו ולא ניתן לכווץ.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "מגדיר את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכדומה).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בלוח זה.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var hebrewStrings = {
       descriptionLocation: "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "מגדיר את המיקום של חלונית חדשה שנוספה. כברירת מחדל, חלוניות חדשות מתווספות לסוף. בחר \"הבא\" כדי להוסיף חלונית חדשה אחרי הנוכחית.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "שכפול תשובות מהערך האחרון והקצאתן לערך הבא שנוסף.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "מפעיל בקשת אישור לפני הסרת חלונית."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var hebrewStrings = {
       imageHeight: "דורס את ערכי הגובה המינימליים והמרביים.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "דורס את ערכי הרוחב המינימליים והמרביים.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
       choices: "\"ערך\" משמש כמזהה פריט המשמש בכללים מותנים; \"טקסט\" מוצג למשיבים.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "בחר בין \"תמונה\" ו\"וידאו\" כדי להגדיר את מצב התוכן של בורר המדיה. אם נבחרה האפשרות \"תמונה\", ודא שכל האפשרויות שסופקו הן קובצי תמונה בתבניות הבאות: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. באופן דומה, אם נבחר \"וידאו\", ודא שכל האפשרויות הן קישורים ישירים לקבצי וידאו בפורמטים הבאים: MP4, MOV, WMV, FLV, AVI, MKV. שים לב שקישורי YouTube אינם נתמכים עבור אפשרויות וידאו."
     },
     text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>."
-      size: "הגדרה זו משנה את גודל שדה הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה. כדי להגביל את אורך הקלט המקובל, עבור אל <b>אימות → מגבלת תווים מרבית</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "הגדרה זו משנה רק את גודל שדה הקלט ואינה משפיעה על רוחב תיבת השאלה. כדי להגביל את אורך הקלט המקובל, עבור אל \"אימות\" →\"מגבלת תווים מקסימלית\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "מגדיר את מספר השורות המוצגות בשדה הקלט. אם הקלט תופס שורות נוספות, פס הגלילה יופיע."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "מגדיר את מספר השורות המוצגות בשדה הקלט. אם הקלט תופס יותר שורות, פס הגלילה יופיע."
     },
     // survey templates
     survey: {
@@ -2811,8 +2811,8 @@ export var hebrewStrings = {
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
-      colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "סידור אפשרויות בחירה בפריסה מרובת עמודות. כאשר האפשרויות מוגדרות ל- 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננות\" של מטריצת האב."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2862,8 +2862,8 @@ export var hebrewStrings = {
     autoAdvanceEnabled: "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "מגדיר את הניראות של לחצני ניווט בדף.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "הגדרת המיקום של לחצני ניווט בעמוד.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,8 +2884,8 @@ export var hebrewStrings = {
     maxTextLength: "לשאלות הזנת טקסט בלבד.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "להערות לשאלה בלבד.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
-    commentAreaRows: "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. אם הקלט תופס שורות נוספות, פס הגלילה מופיע.",
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
+    commentAreaRows: "מגדיר את מספר השורות המוצגות באזורי טקסט עבור הערות לשאלה. אם הקלט תופס יותר שורות, פס הגלילה מופיע.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "בחר אם ברצונך שהערות שאלה ושאלות טקסט ארוך יגדלו באופן אוטומטי לגובה בהתבסס על אורך הטקסט שהוזנו.",
     // [Auto-translated] "For question comments and Long Text questions only."
@@ -2930,12 +2930,12 @@ export var hebrewStrings = {
     imageFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "מגדיל בהדרגה את גובה שדה הקלט בעת הזנת הנתונים. דורס את ההגדרה \"גובה שדה קלט (בקווים)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "נקודת האחיזה לשינוי גודל (או נקודת האחיזה) מופיעה בפינה וניתן לגרור אותה כדי לשנות את גודל שדה הקלט.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף התודה.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "האפשרות \"קבל בירושה\" מחילה הגדרה ברמת הסקר (\"זמין\" כברירת מחדל).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף \"תודה\". כאשר הוא מוגדר ל- 0, סופר את הזמן שהוקדש לסקר.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לדף הבא. מסתיר את כפתור הניווט \"הקודם\". כאשר היא מוגדרת ל- 0, סופרת את הזמן שהוקדש לדף הנוכחי.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים.",
     page: {
@@ -3030,8 +3030,8 @@ export var hebrewStrings = {
     valueTrue: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה חיובית.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה שלילית.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "לא מומלץ להפוך אפשרות זו ללא זמינה מכיוון שהיא דורסת את תמונת התצוגה המקדימה ומקשה על המשתמש להבין אם הקבצים הועלו.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "לא מומלץ להשבית אפשרות זו מכיוון שהיא עוקפת את תמונת התצוגה המקדימה ומקשה על המשתמש להבין אם הקבצים הועלו.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "מפעיל בקשה המבקשת לאשר את מחיקת הקובץ.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,8 +3040,8 @@ export var hebrewStrings = {
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
-    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו').",
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
+    itemTitleWidth: "מגדיר רוחב עקבי עבור כל תוויות הפריטים. מקבל ערכי CSS (px, %, in, pt וכדומה).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא.",
     // [Auto-translated] "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes."
@@ -3147,52 +3147,52 @@ export var hebrewStrings = {
     value: "ערך",
     // "Tab alignment"
     tabAlign: "יישור לשונית",
-    // [Auto-translated] "Source type"
-    sourceType: "סוג מקור",
+    // [Auto-translated] "File source type"
+    sourceType: "סוג מקור הקובץ",
     // [Auto-translated] "Fit to container"
     fitToContainer: "התאמה למיכל",
     // [Auto-translated] "Set value expression"
     setValueExpression: "הגדרת ביטוי ערך",
     // "Description"
-    description: "תיאור",
+    description: "תיאור", // Auto-generated string
     // "Logo fit"
     logoFit: "התאמת הלוגו",
     // "Pages"
-    pages: "עמודים",
+    pages: "עמודים", // Auto-generated string
     // "Questions"
-    questions: "שאלות",
+    questions: "שאלות", // Auto-generated string
     // "Triggers"
     triggers: "מפעילים",
     // "Custom variables"
     calculatedValues: "ערכים מחושבים",
     // "Survey id"
-    surveyId: "מזהה סקר",
+    surveyId: "מזהה סקר", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "מזהה פוסט סקר",
+    surveyPostId: "מזהה פוסט סקר", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "הצגת שמירת נתונים",
+    surveyShowDataSaving: "הצגת שמירת נתונים", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "מיקום תיאור השאלה",
     // "Progress bar type"
-    progressBarType: "סוג סרגל התקדמות",
+    progressBarType: "סוג סרגל התקדמות", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "הצגת תוכן הקריאה",
     // "TOC alignment"
     tocLocation: "מיקום תוכן הקריאה",
     // "Question title pattern"
-    questionTitlePattern: "תבנית כותרת השאלה",
+    questionTitlePattern: "תבנית כותרת השאלה", // Auto-generated string
     // "Survey width mode"
     widthMode: "מצב רוחב",
     // "Show brand info"
-    showBrandInfo: "הצגת מידע על המותג",
+    showBrandInfo: "הצגת מידע על המותג", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "שימוש בערכי תצוגה בטקסטים דינמיים",
     // "Visible if"
-    visibleIf: "נראה אם",
+    visibleIf: "נראה אם", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "ביטוי ערך ברירת מחדל",
     // "Required if"
-    requiredIf: "נדרש אם",
+    requiredIf: "נדרש אם", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "איפוס ערך אם",
     // [Auto-translated] "Set value if"
@@ -3200,81 +3200,81 @@ export var hebrewStrings = {
     // "Validation rules"
     validators: "מאמתים",
     // "Bindings"
-    bindings: "קישורים",
+    bindings: "קישורים", // Auto-generated string
     // "Render as"
-    renderAs: "תצוגה כ",
+    renderAs: "תצוגה כ", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "צרף פריטים מקוריים",
+    attachOriginalItems: "צרף פריטים מקוריים", // Auto-generated string
     // "Choices"
     choices: "בחירות",
     // "Choices by url"
-    choicesByUrl: "בחירות דרך URL",
+    choicesByUrl: "בחירות דרך URL", // Auto-generated string
     // "Currency"
-    currency: "מטבע",
+    currency: "מטבע", // Auto-generated string
     // "Cell hint"
-    cellHint: "רמז לתא",
+    cellHint: "רמז לתא", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "מספר ספרות עשרוניות מרבי",
+    totalMaximumFractionDigits: "מספר ספרות עשרוניות מרבי", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "מספר ספרות עשרוניות מינימלי",
+    totalMinimumFractionDigits: "מספר ספרות עשרוניות מינימלי", // Auto-generated string
     // "Columns"
-    columns: "עמודות",
+    columns: "עמודות", // Auto-generated string
     // "Detail elements"
-    detailElements: "רכיבי פרטים",
+    detailElements: "רכיבי פרטים", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "אפשר פעולות מותאמות",
+    allowAdaptiveActions: "אפשר פעולות מותאמות", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "ערך ברירת מחדל לשורה",
+    defaultRowValue: "ערך ברירת מחדל לשורה", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "הרחבה אוטומטית של פרטי שורה חדשה",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "אפשר טעינת רשימות עם פריטים עצלים",
+    choicesLazyLoadEnabled: "אפשר טעינת רשימות עם פריטים עצלים", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "גודל עמוד בטעינת רשימות",
+    choicesLazyLoadPageSize: "גודל עמוד בטעינת רשימות", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "רכיב שדה קלט",
+    inputFieldComponent: "רכיב שדה קלט", // Auto-generated string
     // "Item component"
-    itemComponent: "רכיב פריט",
+    itemComponent: "רכיב פריט", // Auto-generated string
     // "Min"
-    min: "מינימום",
+    min: "מינימום", // Auto-generated string
     // "Max"
-    max: "מקסימום",
+    max: "מקסימום", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "ביטוי ערך מינימלי",
+    minValueExpression: "ביטוי ערך מינימלי", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "ביטוי ערך מקסימלי",
+    maxValueExpression: "ביטוי ערך מקסימלי", // Auto-generated string
     // "Step"
-    step: "צעד",
+    step: "צעד", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "רשימת נתונים",
     // "Input field width (in characters)"
     inputSize: "גודל פריט",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "רוחב תווית פריט (בפיקסלים)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "רוחב תווית הפריט",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "יישור ערך קלט",
     // "Elements"
-    elements: "רכיבים",
+    elements: "רכיבים", // Auto-generated string
     // "Content"
-    content: "תוכן",
+    content: "תוכן", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "כותרת ניווט",
+    navigationTitle: "כותרת ניווט", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "תיאור ניווט",
+    navigationDescription: "תיאור ניווט", // Auto-generated string
     // "Long tap"
-    longTap: "לחיצה ארוכה",
+    longTap: "לחיצה ארוכה", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "התרחבות אוטומטית",
     // "Enable resize handle"
     allowResize: "אפשר שינוי גודל",
     // "Accept carriage return"
-    acceptCarriageReturn: "קבלת Enter",
+    acceptCarriageReturn: "קבלת Enter", // Auto-generated string
     // "Display mode"
     displayMode: "מצב תצוגה",
     // "Rate type"
-    rateType: "סוג דירוג",
+    rateType: "סוג דירוג", // Auto-generated string
     // "Label"
-    label: "תווית",
+    label: "תווית", // Auto-generated string
     // "Content mode"
     contentMode: "מצב תוכן",
     // "Image and thumbnail fit"
@@ -3282,39 +3282,39 @@ export var hebrewStrings = {
     // "Alt text"
     altText: "טקסט חלופי",
     // "Height"
-    height: "גובה",
+    height: "גובה", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "גובה בסמארטפונים",
     // "Pen color"
-    penColor: "צבע העט",
+    penColor: "צבע העט", // Auto-generated string
     // "Background color"
     backgroundColor: "צבע רקע",
     // "Template elements"
-    templateElements: "רכיבי תבנית",
+    templateElements: "רכיבי תבנית", // Auto-generated string
     // "Operator"
-    operator: "אופרטור",
+    operator: "אופרטור", // Auto-generated string
     // "Is variable"
-    isVariable: "משתנה",
+    isVariable: "משתנה", // Auto-generated string
     // "Run expression"
-    runExpression: "הפעל ביטוי",
+    runExpression: "הפעל ביטוי", // Auto-generated string
     // "Show caption"
-    showCaption: "הצג כיתוב",
+    showCaption: "הצג כיתוב", // Auto-generated string
     // "Icon name"
-    iconName: "שם סמל",
+    iconName: "שם סמל", // Auto-generated string
     // "Icon size"
-    iconSize: "גודל סמל",
+    iconSize: "גודל סמל", // Auto-generated string
     // "Precision"
-    precision: "דיוק",
+    precision: "דיוק", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "אזור גרירה במטריצה",
+    matrixDragHandleArea: "אזור גרירה במטריצה", // Auto-generated string
     // "Background image"
     backgroundImage: "תמונת רקע",
     // "Background image fit"
-    backgroundImageFit: "התאמת תמונת רקע",
+    backgroundImageFit: "התאמת תמונת רקע", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "קשר תמונת רקע",
+    backgroundImageAttachment: "קשר תמונת רקע", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "שקיפות רקע",
+    backgroundOpacity: "שקיפות רקע", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "אפשר בחירה לדירוג",
     // "Ranking area alignment"
@@ -3324,13 +3324,13 @@ export var hebrewStrings = {
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "טקסט מציין מיקום עבור אזור הדירוג",
     // "Allow camera access"
-    allowCameraAccess: "אפשר גישה למצלמה",
+    allowCameraAccess: "אפשר גישה למצלמה", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "מצב צבע לסולם",
     // "Smileys color scheme"
     rateColorMode: "מצב צבע לדירוג",
     // "Copy display value"
-    copyDisplayValue: "העתקת ערך תצוגה",
+    copyDisplayValue: "העתקת ערך תצוגה", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "טווח עמודות",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var hebrewStrings = {
     "--sjs-secondary-background-500": "משני",
     // [Auto-translated] "Surface"
     surfaceScale: "משטח",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "ממשק משתמש",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "רכיבי ממשק משתמש",
     // [Auto-translated] "Font"
     fontScale: "גופן",
     names: {

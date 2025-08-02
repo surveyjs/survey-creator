@@ -120,11 +120,11 @@ export var jaStrings = {
     settingsTooltip: "アンケートの設定を開く",
     // [Auto-translated] "Survey Settings"
     surveySettings: "アンケート設定",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "アンケート設定",
     // [Auto-translated] "Theme Settings"
     themeSettings: "テーマ設定",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "テーマ設定",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "クリエイター設定",
@@ -427,16 +427,16 @@ export var jaStrings = {
       logicPlaceholderDescriptionMobile: "調査のフローをカスタマイズするルールを作成します。",
       // "Show/hide page"
       page_visibilityName: "ページの可視性",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "有効 (無効) ページ",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "ページの有効化/無効化",
       // [Auto-translated] "Make page required"
       page_requireName: "ページを必須にする",
       // "Show/hide panel"
       panel_visibilityName: "パネルの可視性",
       // "Enable/disable panel"
       panel_enableName: "パネルの有効化/無効化",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "ページを必須にする",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "パネルを必須にする",
       // "Show/hide question"
       question_visibilityName: "質問の可視性",
       // "Enable/disable question"
@@ -447,10 +447,10 @@ export var jaStrings = {
       question_resetValueName: "質問値のリセット",
       // [Auto-translated] "Set question value"
       question_setValueName: "質問値の設定",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "列を表示 (非表示)",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "有効 (無効) 列",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "列の表示/非表示",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "列の有効化/無効化",
       // [Auto-translated] "Make column required"
       column_requireName: "列を必須にする",
       // [Auto-translated] "Reset column value"
@@ -512,7 +512,7 @@ export var jaStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "質問のリセット値:{0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "値の割り当て: 質問への{1}: {0}",
+      question_setValueText: "値の割り当て: 質問への{1}: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "質問{1}の列{0}を表示する", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,7 +523,7 @@ export var jaStrings = {
       column_resetValueText: "列のセル値をリセット:{0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "セル値の割り当て:列への{1}:{0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
       // "survey becomes completed"
       trigger_completeText: "アンケートが完了する",
@@ -590,25 +590,25 @@ export var jaStrings = {
       requiredIf: "次の場合は、パネルを必須にします",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "パネル内の質問の順序",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "親ページ",
+      // [Auto-translated] "Move the panel to page"
+      page: "パネルをページに移動する",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "パネルを新しい行に表示する",
-      // [Auto-translated] "Panel expand state"
-      state: "パネル折りたたみ状態",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "インラインパネルの幅",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "パネルの折りたたみ状態",
+      // [Auto-translated] "Inline panel width"
+      width: "インラインパネル幅",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "最小パネル幅",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
-      maxWidth: "最大パネル幅",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Maximum panel width"
+      maxWidth: "パネル幅の最大幅",
+      // [Auto-translated] "Number this panel"
       showNumber: "このパネルに番号を付ける"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "有効幅、%",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "質問タイトルの幅、px"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export var jaStrings = {
       minWidth: "最小パネル幅",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "最大パネル幅",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "パネルの削除を確認する",
-      // [Auto-translated] "Description template"
-      templateDescription: "パネル記述パターン",
-      // [Auto-translated] "Title template"
-      templateTitle: "パネル・タイトル・パターン",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "空のパネル・テキスト",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "エントリの削除を確認する",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "エントリの説明パターン",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "エントリータイトルパターン",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "空のパネルテキスト",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "タブ タイトルのパターン",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "タブ タイトルのプレースホルダー",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "個々のパネルを表示するのは、次の場合です",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "次の場合、個々のエントリを表示する",
       // [Auto-translated] "Number the panel"
       showNumber: "パネルに番号を付ける",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "パネルタイトルの配置",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "パネル記述の位置合わせ",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "質問タイトルの配置",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "質問タイトルの幅",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "エラー・メッセージのアライメント",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "新しいパネルの位置",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "新しいエントリー場所",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "進行状況バーを表示する",
-      // [Auto-translated] "Key column"
-      keyName: "次の質問で回答の重複を防ぐ"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "次の質問の重複回答の防止"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var jaStrings = {
       visibleIf: "次の場合に質問を表示します。",
       // [Auto-translated] "Make the question required if"
       requiredIf: "次の場合は質問を必須にします",
-      // [Auto-translated] "Parent page"
-      page: "親ページ",
+      // [Auto-translated] "Move the question to page"
+      page: "質問をページに移動する",
       // [Auto-translated] "Question box collapse state"
       state: "質問ボックスの折りたたみ状態",
       // [Auto-translated] "Number this question"
@@ -694,7 +694,7 @@ export var jaStrings = {
       descriptionLocation: "質問の説明の配置",
       // [Auto-translated] "Error message alignment"
       errorLocation: "エラー・メッセージのアライメント",
-      // [Auto-translated] "Add indents"
+      // [Auto-translated] "Increase the inner indent"
       indent: "内側のインデントを増やす",
       // [Auto-translated] "Inline question width"
       width: "インラインの質問の幅",
@@ -702,28 +702,28 @@ export var jaStrings = {
       minWidth: "質問の最小幅",
       // [Auto-translated] "Maximum question width"
       maxWidth: "質問の最大幅",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "入力フィールド値の更新"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "署名領域の幅",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "署名領域の高さ",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "署名領域の自動スケーリング",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "プレースホルダーを表示する",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "署名領域内にプレースホルダーを表示する",
       // [Auto-translated] "Placeholder text"
       placeholder: "プレースホルダテキスト",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "読み取り専用モードまたはプレビューモードのプレースホルダーテキスト",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "署名領域内に [クリア] ボタンを表示する",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "最小ペン幅",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "ペンの最大幅",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "署名領域内にクリアボタンを表示する",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "最小ストローク幅",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "最大ストローク幅",
       // [Auto-translated] "Stroke color"
       penColor: "ストロークの色"
     },
@@ -755,26 +755,26 @@ export var jaStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "タイトル",
+      // [Auto-translated] "Survey title"
+      title: "調査タイトル",
       // [Auto-translated] "Survey description"
       description: "調査内容",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "調査を読み取り専用にする"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "ページ名",
-      // [Auto-translated] "Title"
-      title: "タイトル",
+      // [Auto-translated] "Page title"
+      title: "ページタイトル",
       // [Auto-translated] "Page description"
       description: "ページの説明",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "次の場合にページを表示します",
       // [Auto-translated] "Make the page required if"
       requiredIf: "次の場合は、ページを必須にします",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "ページを終了するための制限時間 (秒単位)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "ページを完成させるための制限時間",
       // [Auto-translated] "Question order on the page"
       questionOrder: "ページ上の質問の順序"
     },
@@ -852,8 +852,8 @@ export var jaStrings = {
     defaultDisplayValue: "ダイナミックテキストのデフォルトの表示値",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "ラベルの配置",
-    // [Auto-translated] "Input field size (in characters)"
-    size: "入力フィールドの幅 (文字単位)",
+    // [Auto-translated] "Input field width (in characters)"
+    size: "入力フィールド幅 (文字)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "セル・エラー・メッセージの配置",
     // [Auto-translated] "Enabled"
@@ -934,8 +934,8 @@ export var jaStrings = {
     fastEntryChoicesCountError: "アイテムの数は{0}から{1}に制限してください",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "{0}項目以上入力してください",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "次の形式でデータを設定できます。\n値 1|テキスト\n値 2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "選択肢のリストとその ID を次の形式で入力します。\n\nid|オプション\n\n選択肢 ID は回答者には表示されず、条件付きルールで使用できます。",
     // "Form Entry"
     formEntry: "フォーム入力",
     // "Test the service"
@@ -964,10 +964,10 @@ export var jaStrings = {
     assistantTitle: "利用できる質問:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "少なくとも1つの列または行を含む必要があります",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "アンケートを送信する前に回答をプレビューする",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "設定者",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "提出前に確認する",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "条件によって有効にされる",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "リセット",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var jaStrings = {
     propertyNameIsIncorrect: "予約語は使用しないでください: \"アイテム\"、 \"選択肢\"、 \"パネル\"、 \"行\"。",
     // "You don't have any items yet"
     listIsEmpty: "新しいアイテムを追加",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "選択肢はまだ追加されていません",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "まだ選択肢はありません",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "まだ列がありません",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var jaStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "リンクはまだありません",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "まだページがありません",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "選択肢を追加する",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "新しい選択肢を追加する",
     // [Auto-translated] "Add new column"
     "addNew@columns": "新しい列を追加",
     // [Auto-translated] "Add new row"
@@ -1033,15 +1033,15 @@ export var jaStrings = {
     // "Path to data"
     path: "パス",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
-      url: "Web サービスの URL",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "次の JSON フィールドから値を取得する"
+      // [Auto-translated] "Web service URL"
+      url: "Web サービス URL",
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "次のプロパティから格納する値を取得します"
     },
     // "Get value to display from the following property"
     titleName: "タイトル名",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "次の JSON フィールドから画像の URL を取得する",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "次のプロパティからファイル URL を取得する",
     // "Accept empty response"
     allowEmptyResponse: "空の応答を許可",
     // "Title"
@@ -1066,10 +1066,10 @@ export var jaStrings = {
     otherText: "他のアイテムのテキスト",
     // "Enable the \"None\" option"
     showNoneItem: "ノーアイテム",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "[回答を拒否] オプションを許可する",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "[わからない] オプションを許可する",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "「応答を拒否」オプションを有効にする",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "「わからない」オプションを有効にする",
     // "Rename the \"None\" option"
     noneText: "ノーアイテムのテキスト",
     // "Enable the \"Select All\" option"
@@ -1186,8 +1186,8 @@ export var jaStrings = {
     gotoName: "スキップする質問",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "ルールが正しくありません",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "アンケート結果に含める",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "アンケート結果に追加する",
     // "Make the title and description visible"
     showTitle: "タイトルの表示/非表示",
     // "Expand/collapse title"
@@ -1282,24 +1282,24 @@ export var jaStrings = {
     html: "HTML",
     // [Auto-translated] "Answer"
     setValue: "答える",
-    // [Auto-translated] "Image format"
-    dataFormat: "画像フォーマット",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "行の追加を許可する",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "行の削除を許可する",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "行のドラッグ アンド ドロップを許可する",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "正確な画像の幅または高さを指定した場合には適用されません。",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "最小画像幅",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "最大画像幅",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "最小画像の高さ",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "最大画像の高さ",
+    // [Auto-translated] "Storage format"
+    dataFormat: "ストレージ形式",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "行の追加を有効にする",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "行の削除を有効にする",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "行の並べ替えを有効にする",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "正確な表示領域の幅または高さを指定した場合は適用されません。",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "最小表示領域幅",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "最大表示領域幅",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "最小表示領域の高さ",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "最大表示領域高さ",
     // "Minimum value"
     minValue: "最小値",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var jaStrings = {
     totalCurrency: "通貨の合計",
     // "Formatted string"
     totalFormat: "形式の合計",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "ロゴ (URL または base64 でエンコードされた文字列)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "調査体制",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "回答の最大長 (文字数)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "コメントの最大長 (文字数)",
+    // [Auto-translated] "Survey logo"
+    logo: "調査ロゴ",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "調査レイアウト",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "回答の長さを制限する",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "コメントの長さを制限する",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "コメント領域の高さ (行単位)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "必要に応じてコメント領域を自動展開する",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "テキスト領域の自動展開",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "ユーザーがテキスト領域のサイズを変更できるようにする",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var jaStrings = {
     checkErrorsMode: "検証の実行",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "フォーカスを失った空のフィールドの検証",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "URL に移動します。",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "ダイナミック URL",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "送信後に外部リンクにリダイレクトする",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "動的外部リンク",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "ユーザーがこのアンケートに既に記入しているかどうかを示すマークアップ",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "アンケート完了ページのマークアップ",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "動的調査 完全なページ マークアップ",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "「ありがとう」ページのマークアップ",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "動的な「ありがとう」ページマークアップ",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "アンケートモデルの読み込み中に表示するマークアップ",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var jaStrings = {
     allowClear: "オプションのキャプションを表示する",
     // [Auto-translated] "Search Mode"
     searchMode: "検索モード",
-    // [Auto-translated] "Value display style"
-    displayStyle: "値の表示スタイル",
+    // [Auto-translated] "Display format"
+    displayStyle: "表示形式",
     // [Auto-translated] "Formatted string"
     format: "書式設定された文字列",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var jaStrings = {
     minimumFractionDigits: "小数部の最小桁数",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "グループ化区切りの表示",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "複数のファイルを許可する",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "プレビュー画像",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "複数のファイルのアップロードを有効にする",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "アップロードされた画像をプレビューする",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "受け入れられるファイルの種類",
-    // [Auto-translated] "Wait for the upload to complete"
-    waitForUpload: "アップロードが完了するのを待ちます",
+    // [Auto-translated] "Wait for upload to complete"
+    waitForUpload: "アップロードが完了するまで待ちます",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "ファイルの削除を確認する",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "詳細パネルの位置",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "行の詳細の配置",
     // [Auto-translated] "Minimum row count"
     minRowCount: "最小行数",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var jaStrings = {
     confirmDelete: "行の削除を確認する",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "確認メッセージ",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "初期パネル数",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "最小パネル数",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "最大パネル数",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "内側パネルの展開状態",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "前のパネルボタンのツールチップ",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "[次へ] パネル ボタンのツールチップ",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "[パネルを削除] ボタンの位置",
-    // [Auto-translated] "Hide the question if there are no rows"
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "初期エントリー数",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "最小エントリー数",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "最大エントリー数",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "初期エントリ状態",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "「前のエントリ」ボタンのテキスト",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "「次のエントリ」ボタンのテキスト",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "「エントリを削除」ボタンの配置",
+    // [Auto-translated] "Hide the question if it has no rows"
     hideIfRowsEmpty: "行がない場合は質問を非表示にする",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "行がない場合は列を非表示にする",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "カスタムレート値",
-    // [Auto-translated] "Rate count"
-    rateCount: "レート数",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "レート値を指定する方法は?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "カスタム評価値",
+    // [Auto-translated] "Rating count"
+    rateCount: "評価数",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "評価構成",
     slider: {
       // [Auto-translated] "Min value"
       min: "最小値",
@@ -1459,24 +1459,24 @@ export var jaStrings = {
       autoGenerate: "スケール ラベルの構成",
       // [Auto-translated] "Slider type"
       sliderType: "スライダータイプ",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
-      minRangeLength: "最小範囲の長さ",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
-      maxRangeLength: "最大範囲の長さ",
+      // [Auto-translated] "Min range length"
+      minRangeLength: "最小範囲長",
+      // [Auto-translated] "Max range length"
+      maxRangeLength: "最大範囲長",
       // [Auto-translated] "Custom labels"
       customLabels: "カスタムラベル",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
-      labelFormat: "ラベル形式",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
+      labelFormat: "ラベルの形式",
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "ツールチップの形式"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "画像の高さ",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
-      imageWidth: "画像の幅"
+      // [Auto-translated] "Image width"
+      imageWidth: "画像幅"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
+    // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "選択肢がない場合は質問を非表示にする",
     // "Minimum width"
     minWidth: "最小幅 (CSS で受け入れられる値)",
@@ -1488,10 +1488,10 @@ export var jaStrings = {
     showHeader: "列ヘッダーを表示する",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "水平スクロールバーを表示",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "最小列幅 (CSS で受け入れられる値)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "行ヘッダーの幅 (CSS で受け入れられる値)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "最小列幅",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "行ヘッダーの幅",
     // "Value to store when \"True\" is selected"
     valueTrue: "「真」の値",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var jaStrings = {
     otherErrorText: "「コメントを空にしました」というエラーメッセージ",
     // "Error message for duplicate responses"
     keyDuplicationError: "\"一意でないキー値\" エラー メッセージ",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "選択される最小選択肢",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "最大選択選択肢数",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "ロゴの幅 (CSS で受け入れられる値)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "ロゴの高さ (CSS で受け入れられる値)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "選択する最小限の選択肢",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "選択できる最大選択肢",
+    // [Auto-translated] "Logo width"
+    logoWidth: "ロゴの幅",
+    // [Auto-translated] "Logo height"
+    logoHeight: "ロゴの高さ",
     // "Read-only"
     readOnly: "読み取り専用",
-    // [Auto-translated] "Editable if"
-    enableIf: "次の場合に編集可能",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "次の場合は読み取り専用モードを無効にします。",
     // "\"No rows\" message"
     noRowsText: "\"行なし\" メッセージ",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "個別の特別な選択肢 (なし、その他、すべて選択)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "個別の特別な選択肢",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "次の質問から選択肢をコピーする",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "どの選択肢をコピーするか?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "コピーする選択肢オプション",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "次の行列列またはパネルの質問の値を選択肢IDとして使用します",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "次の行列の列またはパネルの質問の値を選択テキストとして使用します",
-    // [Auto-translated] "Display page titles in progress bar"
-    progressBarShowPageTitles: "プログレスバーにページタイトルを表示する",
-    // [Auto-translated] "Display page numbers in progress bar"
-    progressBarShowPageNumbers: "プログレスバーにページ番号を表示する",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "コメント領域を表示する",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "コメント領域のプレースホルダー",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "レートの説明を極値として表示する",
+    // [Auto-translated] "Display page titles in the progress bar"
+    progressBarShowPageTitles: "進行状況バーにページタイトルを表示する",
+    // [Auto-translated] "Display page numbers in the progress bar"
+    progressBarShowPageNumbers: "進行状況バーにページ番号を表示する",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "コメントボックスを追加する",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "コメントボックスのプレースホルダテキスト",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "ラベルを極値として表示する",
     // [Auto-translated] "Row order"
     rowOrder: "行の順序",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var jaStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "プレビューモード",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "グリッド レイアウトの有効化",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "グリッド レイアウト列",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "グリッドレイアウトを有効にする",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "グリッド列",
     // [Auto-translated] "Mask settings"
     maskSettings: "マスク設定",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "行拡張エラーメッセージの配置",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "行の詳細エラーメッセージの配置",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var jaStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "定型入力設定",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "レイアウト",
+        // [Auto-translated] "Panel Layout"
+        panel: "パネルレイアウト",
         // [Auto-translated] "Layout"
         question: "レイアウト",
         // [Auto-translated] "Layout"
@@ -1690,8 +1690,8 @@ export var jaStrings = {
       appearance: "様子",
       // [Auto-translated] "Accent colors"
       accentColors: "アクセントカラー",
-      // [Auto-translated] "Surface Background"
-      surfaceBackground: "サーフェスの背景",
+      // [Auto-translated] "Surface background"
+      surfaceBackground: "表面の背景",
       // [Auto-translated] "Scaling"
       scaling: "スケーリング",
       // "Others"
@@ -1701,16 +1701,16 @@ export var jaStrings = {
     editProperty: "プロパティ'{0}'を編集",
     // "Items"
     items: "[ アイテム: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "選択肢は次の場合に表示されます。",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "次の場合に選択肢を選択できます。",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "列は次の場合に表示されます。",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "行は次の場合に表示されます。",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "内側のインデントを追加する",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "次の場合に選択肢を表示する",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "次の場合に選択肢を選択可能にする",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "次の場合に列を表示する",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "次の場合に行を表示する",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "内側のインデントを増やす",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "最後のエントリの回答をデフォルトとして使用する",
     // "Please enter a value."
@@ -1753,34 +1753,34 @@ export var jaStrings = {
     emptyExpressionPlaceHolder: "ここに式を入力してください...",
     // "No file chosen"
     noFile: "ファイルが選択されていません",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "質問が非表示になった場合は値をクリアする",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "値プロパティ名",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "検索を有効にする",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "非表示の質問値をクリアする",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "次のプロパティに値を格納します",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "入力時の検索を有効にする",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "選択した項目を非表示にする",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "選択後にドロップダウンを閉じる",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "垂直方向の配置",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "代替行",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "列は次の場合に表示されます。",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "行は次の場合に表示されます。",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "コメント領域のプレースホルダー",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "ファイル プレースホルダー テキスト",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "写真の代替テキスト",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "ファイルまたは写真のプレースホルダーテキスト",
-    // [Auto-translated] "Rate type"
-    rateType: "レートタイプ",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "選択時にドロップダウンを折りたたむ",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "セル内の垂直方向の配置",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "代替行の色",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "次の場合に列を表示する",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "次の場合に行を表示する",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "コメントボックスのプレースホルダテキスト",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "ローカルファイルのプレースホルダテキスト",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "カメラのプレースホルダテキスト",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "ローカルファイルまたはカメラのプレースホルダテキスト",
+    // [Auto-translated] "Rating icon"
+    rateType: "評価アイコン",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "例:https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var jaStrings = {
       themeName: "テーマ",
       // [Auto-translated] "Question appearance"
       isPanelless: "質問の表示設定",
-      // [Auto-translated] "Input element"
-      editorPanel: "背景と角の半径",
-      // [Auto-translated] "Panel background and corner radius"
-      questionPanel: "背景と角の半径",
+      // [Auto-translated] "Background and corner radius"
+      editorPanel: "背景とコーナー半径",
+      // [Auto-translated] "Background and corner radius"
+      questionPanel: "背景とコーナー半径",
       // [Auto-translated] "Accent color"
       primaryColor: "アクセントカラー",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "パネル背景の不透明度",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "質問の背景の不透明度",
-      // [Auto-translated] "Font size"
-      fontSize: "フォントサイズ",
-      // [Auto-translated] "Scale"
-      scale: "規模",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "パネルと質問ボックスの不透明度",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "入力要素の不透明度",
+      // [Auto-translated] "Survey font size"
+      fontSize: "アンケートのフォントサイズ",
+      // [Auto-translated] "Survey scale factor"
+      scale: "調査スケールファクター",
       // [Auto-translated] "Corner radius"
       cornerRadius: "コーナR(Corner Radius)",
       // [Auto-translated] "Advanced mode"
       advancedMode: "詳細モード",
-      // [Auto-translated] "Page title font"
-      pageTitle: "タイトルのフォント",
-      // [Auto-translated] "Page description font"
+      // [Auto-translated] "Title font"
+      pageTitle: "タイトルフォント",
+      // [Auto-translated] "Description font"
       pageDescription: "説明フォント",
-      // [Auto-translated] "Question title font"
-      questionTitle: "タイトルのフォント",
-      // [Auto-translated] "Question description font"
+      // [Auto-translated] "Title font"
+      questionTitle: "タイトルフォント",
+      // [Auto-translated] "Description font"
       questionDescription: "説明フォント",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Font"
       editorFont: "フォント",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "不透明",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "フォントファミリー",
+      backgroundOpacity: "不透明", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "調査フォント ファミリ",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "背景色",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "アクセントの背景",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "アクセントの前景",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "エラーメッセージ",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "アクセントの背景色",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "前景色のアクセント",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "エラーメッセージの色",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "影の効果",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var jaStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "眺める",
-      // [Auto-translated] "Logo position"
-      logoPosition: "ロゴの位置",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "ロゴの配置",
       // [Auto-translated] "Survey title font"
       surveyTitle: "調査タイトルのフォント",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var jaStrings = {
       backgroundImageOpacity: "不透明",
       // [Auto-translated] "Overlap"
       overlapEnabled: "オーバーラップ",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "ロゴの位置",
-      // [Auto-translated] "Title position"
-      titlePositionX: "タイトルの位置",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "記述の位置"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "ロゴの配置",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "調査タイトルの配置",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "調査の説明の配置"
     }
   },
   // Property values
@@ -1890,11 +1890,11 @@ export var jaStrings = {
     "true": "真",
     // [Auto-translated] "false"
     "false": "偽",
-    // [Auto-translated] "Local files"
+    // [Auto-translated] "Local file"
     file: "ローカルファイル",
     // [Auto-translated] "Camera"
     camera: "カメラ",
-    // [Auto-translated] "Local files or camera"
+    // [Auto-translated] "Local file or Camera"
     "file-camera": "ローカルファイルまたはカメラ",
     // "Inherit"
     inherit: "継承する",
@@ -2016,8 +2016,8 @@ export var jaStrings = {
     onComplete: "onComplete",
     // "When question gets hidden"
     onHidden: "onHidden",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
-    onHiddenContainer: "質問またはそのパネル/ページが非表示になったとき",
+    // [Auto-translated] "When question or its panel/page gets hidden"
+    onHiddenContainer: "質問またはそのパネル/ページが非表示になった場合",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
       none: "なし"
@@ -2236,14 +2236,14 @@ export var jaStrings = {
     underInput: "インプットの下",
     // "Under the question title"
     underTitle: "タイトルの下",
-    // [Auto-translated] "On blur"
-    onBlur: "ぼかし時",
+    // [Auto-translated] "On lost focus"
+    onBlur: "焦点の喪失について",
     // [Auto-translated] "While typing"
     onTyping: "入力中",
     // [Auto-translated] "Under the row"
     underRow: "行の下",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "行の下には、1つのパネルのみが表示されます",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "行の下には、1 つのセクションのみを表示します",
     // "Auto"
     auto: "自動",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var jaStrings = {
       combined: "両方とも"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "マトリックスレイアウトに依存"
+      // [Auto-translated] "Based on matrix layout"
+      default: "マトリックスレイアウトに基づく"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "ユーザーはパネルを展開または折りたたむことはできません",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "すべてのパネルが折りたたまれている",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "すべてのパネルが展開されます",
+      // [Auto-translated] "Locked"
+      default: "締まる",
+      // [Auto-translated] "Collapse all"
+      collapsed: "すべて折りたたむ",
+      // [Auto-translated] "Expand all"
+      expanded: "すべて展開",
       // [Auto-translated] "First expanded"
       firstExpanded: "最初の展開"
     },
@@ -2301,10 +2301,10 @@ export var jaStrings = {
       colored: "有色"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "生成する",
-      // [Auto-translated] "Enter manually"
-      "false": "手動で入力する"
+      // [Auto-translated] "Auto-generate"
+      "true": "自動生成",
+      // [Auto-translated] "Manual"
+      "false": "手動"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,7 +2325,7 @@ export var jaStrings = {
       on: "自動番号付け",
       // [Auto-translated] "Reset on each page"
       onPage: "各ページでリセット",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "各パネルでリセット",
       // [Auto-translated] "Reset on each panel"
       onPanel: "各パネルでリセット",
@@ -2433,8 +2433,8 @@ export var jaStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "調査と同じ",
-      // [Auto-translated] "Fit to container"
-      container: "コンテナにフィット"
+      // [Auto-translated] "Same as container"
+      container: "コンテナと同じ"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2584,8 +2584,8 @@ export var jaStrings = {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
-      pattern: "Ex.: mm/dd/yyyy"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
+      pattern: "例:mm / dd / yyyy HH:MM:ss"
     },
     currencymask: {
       // "Ex.: $"
@@ -2608,7 +2608,7 @@ export var jaStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "回答者には表示されないパネルID。",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "パネルのサブタイトルを入力します。",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "魔法の杖アイコンを使用して、パネルの表示を決定する条件付きルールを設定します。",
@@ -2616,14 +2616,14 @@ export var jaStrings = {
       enableIf: "魔法の杖アイコンを使用して、パネルの読み取り専用モードを無効にする条件付きルールを設定します。",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "このパネル内のすべての質問に適用されます。この設定を上書きする場合は、個々の質問のタイトル配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "このパネル内のすべての質問に適用されます。「非表示」に設定すると、質問の説明も非表示になります。この設定を上書きする場合は、個々の質問のタイトルの配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「トップ」)���適���します。",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "パネル内のすべての質問に関連するエラーメッセージの位置を設定します。[継承] オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "質問の元の順序を維持するか、ランダム化します。[継承] オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
       // "Repositions the panel to the end of a selected page."
       page: "パネルを選択したページの末尾に再配置します。",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var jaStrings = {
       startWithNewLine: "選択を解除すると、前の質問またはパネルと 1 行でパネルが表示されます。パネルがフォームの最初の要素である場合、この設定は適用されません。",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "次から選択します: 「展開」 - パネルは完全に表示され、折りたたむことができます。「折りたたまれた」 - パネルにはタイトルと説明のみが表示され、展開できます。「ロック」 - パネルは完全に表示され、折りたたむことはできません。",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "同じ線内の他の測量要素に比例してパネルの幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "このパネル内にネストされた質問に番号を割り当てます。",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var jaStrings = {
       descriptionLocation: "「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「パネルタイトルの下」)を適用します。",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "新しく追加されたパネルの位置を定義します。デフォルトでは、新しいパネルが最後に追加されます。「次へ」を選択して、現在のパネルの後に新しいパネルを挿入します。",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "最後のエントリの回答を複製し、次に追加されたエントリに割り当てます。",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "パネルを削除する前に確認プロンプトをトリガーします。"
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var jaStrings = {
       imageHeight: "高さの最小値と最大値の値を上書きします。",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "幅の最小値と最大値を上書きします。",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Value\" は、条件付きルールで使用される項目 ID として機能します。回答者に「テキスト」が表示されます。",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "「値」は、条件付きルールで使用されるアイテム ID として機能します。回答者には「テキスト」が表示されます。",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "「画像」と「動画」のどちらかを選択して、メディアセレクタのコンテンツモードを設定します。「画像」を選択した場合は、提供されるすべてのオプションが、JPEG、GIF、PNG、APNG、SVG、BMP、ICO形式の画像ファイルであることを確認してください。同様に、「ビデオ」を選択した場合は、すべてのオプションがMP4、MOV、WMV、FLV、AVI、MKV形式のビデオファイルへの直接リンクであることを確認してください。YouTubeのリンクは動画オプションではサポートされていませんのでご注意ください。"
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。許容される入力長を制限するには、<b>検証→最大文字数制限</b>に移動します。"
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "この設定は入力フィールドのサイズを変更するだけで、質問ボックスの幅には影響しません。受け入れられる入力長を制限するには、「検証」→「最大文字数制限」に移動します。"
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "入力欄に表示する行数を設定します。入力の行数が多い場合は、スクロールバーが表示されます。"
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "入力欄に表示される行数を設定します。入力がより多くの行を占めると、スクロールバーが表示されます。"
     },
     // survey templates
     survey: {
@@ -2811,8 +2811,8 @@ export var jaStrings = {
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
-      colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "選択肢を複数列のレイアウトに配置します。0 に設定すると、オプションが 1 行に表示されます。-1 に設定すると、実際の値は親行列の \"入れ子になった列数\" プロパティから継承されます。"
     },
     slider: {
       // "The lowest number that users can select."
@@ -2848,8 +2848,8 @@ export var jaStrings = {
     caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "次から選択します: \"Static\" - 固定幅を設定します。「レスポンシブ」 - アンケートを画面の全幅に表示します。「自動」 - 使用する質問タイプに応じて、2つのいずれかを適用します。",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Cookieは、ユーザーが同じアンケートに2回記入するのを防ぎます。",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "アンケートに一意の Cookie 値を割り当てます。Cookieは、アンケートの繰り返し送信を防ぐために、アンケートの完了時に回答者のブラウザに設定されます。",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "画像リンクを貼り付けるか(サイズ制限なし)、フォルダアイコンをクリックして、コンピューターからファイルを参照します(最大64KB)。",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var jaStrings = {
     autoAdvanceEnabled: "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "ページ上のナビゲーションボタンの表示設定を設定します。",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "ページ上のナビゲーション ボタンの位置を設定します。",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,8 +2884,8 @@ export var jaStrings = {
     maxTextLength: "テキスト入力の質問専用です。",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "質問コメント専用です。",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
-    commentAreaRows: "質問コメントのテキストエリアに表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。",
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
+    commentAreaRows: "質問コメントのテキスト領域に表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "質問のコメントと長いテキストの質問の高さを、入力したテキストの長さに基づいて自動的に拡大する場合に選択します。",
     // [Auto-translated] "For question comments and Long Text questions only."
@@ -2908,8 +2908,8 @@ export var jaStrings = {
     columnMinWidth: "CSS 値 (px、%、in、pt など) を受け入れます。",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "CSS 値 (px、%、in、pt など) を受け入れます。",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "少なくとも 1 つの列に [合計型] または [合計式] がある場合にのみ表示されます。",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "少なくとも 1 つの列に「集計方法」または「合計値式」で設定された合計値が表示されている場合にのみ表示されます。",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "無効な入力があるセルに関連するエラーメッセージの位置を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var jaStrings = {
     imageFit: "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "データの入力中に入力フィールドの高さを徐々に増やします。「入力フィールドの高さ(行単位)」の設定を上書きします。",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "サイズ変更ハンドル(またはグリップ)が隅に表示され、ドラッグして入力フィールドのサイズを変更できます。",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "アンケートが [ありがとうございます] ページに自動移動するまでの時間間隔 (秒単位)。",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "「継承」オプションは、アンケートレベルの設定を適用します(デフォルトでは「有効」)。",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "アンケートが「ありがとう」ページに自動的に進むまでの秒単位の時間間隔。0 に設定すると、アンケートに費やされた時間をカウントします。",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "アンケートが自動的に次のページに進むまでの時間間隔(秒単位)。「前へ」ナビゲーションボタンを非表示にします。0 に設定すると、現在のページで費やされた時間をカウントします。",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "このオプションを有効にすると、ユーザーが空の入力フィールドに注目し、変更を加えずにそのフィールドを離れたときに検証がトリガーされます。",
     page: {
@@ -2984,8 +2984,8 @@ export var jaStrings = {
     maxWidth: "CSS 値 (px、%、in、pt など) を受け入れます。",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "CSS 値 (px、%、in、pt など) を受け入れます。",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "このプロパティを設定しない場合、回答は Name プロパティで指定されたフィールドに格納されます。",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "結合識別子は、複数の質問に割り当ててリンクし、値を同期できるカスタム キーです。これらの値は 1 つの配列またはオブジェクトにマージされ、キーをプロパティ名として使用して調査結果に格納されます。",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "HTML の質問、および質問の値が空の場合にアンケート要素の動的なタイトルと説明に表示される値。",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var jaStrings = {
     valueTrue: "回答者が肯定的な回答をした場合にアンケート結果に保存する値。",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "回答者が否定的な回答をした場合にアンケート結果に保存する値。",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "このオプションを無効にすると、プレビュー画像が上書きされ、ファイルがアップロードされたかどうかをユーザーが理解しにくくなるため、無効にすることはお勧めしません。",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "このオプションはプレビュー画像を上書きし、ファイルがアップロードされたかどうかをユーザーが理解しにくくなるため、無効にすることはお勧めしません。",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "ファイルの削除を確認するプロンプトを表示します。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,8 +3040,8 @@ export var jaStrings = {
     dataList: "入力時に回答者に提案される選択肢のリストを入力します。",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
-    itemTitleWidth: "すべてのアイテム ラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
+    itemTitleWidth: "すべてのアイテムラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。",
     // [Auto-translated] "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes."
@@ -3062,10 +3062,10 @@ export var jaStrings = {
     format: "{0} を実際の値のプレースホルダーとして使用します。",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "詳細については、[accept](https://www.w3schools.com/tags/att_input_accept.asp) 属性の説明を参照してください。",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "ラジオグループとチェックボックスのセルタイプにのみ適用されます。",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "詳細については、[オートコンプリート](https://developer.mozilla.org/en-US/docs/Web/HTML/属性/オートコンプリート) 属性の説明を参照してください。",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "選択肢を複数列のレイアウトに配置します。0 に設定すると、オプションが 1 行に表示されます。「���ル���力タイプ」がラジオボタングループまたはチェックボックスに設定されている列にのみ適用されます。",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "ユーザーのブラウザーが取得できるデータ型を選択します。このデータは、ユーザーが入力した過去の値、またはオートコンプリート用にユーザーが保存した事前構成された値から取得されます。",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,198 +3139,198 @@ export var jaStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "複数選択を許可",
-    // [Auto-translated] "Show image captions"
-    showLabel: "画像のキャプションを表示する",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "画像と動画のキャプションを表示する",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "「はい」と「いいえ」の順序を入れ替える",
     // [Auto-translated] "Value"
     value: "価値",
     // [Auto-translated] "Tab alignment"
     tabAlign: "タブの配置",
-    // [Auto-translated] "Source type"
-    sourceType: "ソースの種類",
+    // [Auto-translated] "File source type"
+    sourceType: "ファイルソースタイプ",
     // [Auto-translated] "Fit to container"
     fitToContainer: "コンテナにフィット",
     // [Auto-translated] "Set value expression"
     setValueExpression: "設定値式",
     // [Auto-translated] "Description"
-    description: "形容",
+    description: "形容", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "ロゴフィット",
     // [Auto-translated] "Pages"
-    pages: "ページ",
+    pages: "ページ", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "問",
+    questions: "問", // Auto-generated string
     // [Auto-translated] "Triggers"
     triggers: "トリガー",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "計算値",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "カスタム変数",
     // [Auto-translated] "Survey id"
-    surveyId: "アンケート ID",
+    surveyId: "アンケート ID", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "アンケート投稿 ID",
+    surveyPostId: "アンケート投稿 ID", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "測量ショーのデータ保存",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "質問の説明の場所",
+    surveyShowDataSaving: "測量ショーのデータ保存", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "質問の説明の配置",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "進行状況バーの種類",
-    // [Auto-translated] "Show TOC"
-    showTOC: "目次を表示",
-    // [Auto-translated] "Toc location"
-    tocLocation: "目次 場所",
+    progressBarType: "進行状況バーの種類", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "目次 (TOC) を表示",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "目次アライメント",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "質問のタイトルパターン",
-    // [Auto-translated] "Width mode"
-    widthMode: "幅モード",
+    questionTitlePattern: "質問のタイトルパターン", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "測量幅モード",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "ブランド情報を表示する",
+    showBrandInfo: "ブランド情報を表示する", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "ダイナミックテキストでの表示値の使用",
     // [Auto-translated] "Visible if"
-    visibleIf: "次の場合に表示",
+    visibleIf: "次の場合に表示", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "デフォルト値式",
     // [Auto-translated] "Required if"
-    requiredIf: "次の場合に必要",
+    requiredIf: "次の場合に必要", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "次の場合に値をリセット",
     // [Auto-translated] "Set value if"
     setValueIf: "次の場合に値を設定します",
-    // [Auto-translated] "Validators"
-    validators: "バリデータ",
+    // [Auto-translated] "Validation rules"
+    validators: "検証ルール",
     // [Auto-translated] "Bindings"
-    bindings: "バインド",
+    bindings: "バインド", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "レンダリング形式",
+    renderAs: "レンダリング形式", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "オリジナルアイテムを添付する",
+    attachOriginalItems: "オリジナルアイテムを添付する", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "選択肢",
     // [Auto-translated] "Choices by url"
-    choicesByUrl: "URL による選択肢",
+    choicesByUrl: "URL による選択肢", // Auto-generated string
     // [Auto-translated] "Currency"
-    currency: "通貨",
+    currency: "通貨", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "セルヒント",
+    cellHint: "セルヒント", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "最大小数部の合計桁数",
+    totalMaximumFractionDigits: "最大小数部の合計桁数", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "最小小数桁の合計",
+    totalMinimumFractionDigits: "最小小数桁の合計", // Auto-generated string
     // [Auto-translated] "Columns"
-    columns: "列",
+    columns: "列", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "詳細要素",
+    detailElements: "詳細要素", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "アダプティブアクションを許可する",
+    allowAdaptiveActions: "アダプティブアクションを許可する", // Auto-generated string
     // [Auto-translated] "Default row value"
-    defaultRowValue: "既定の行の値",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "既定の行の値", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "新しい行の詳細を自動展開する",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "遅延読み込みの選択肢が有効",
+    choicesLazyLoadEnabled: "遅延読み込みの選択肢が有効", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "選択肢遅延読み込みページ・サイズ",
+    choicesLazyLoadPageSize: "選択肢遅延読み込みページ・サイズ", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "入力フィールドコンポーネント",
+    inputFieldComponent: "入力フィールドコンポーネント", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "アイテムコンポーネント",
+    itemComponent: "アイテムコンポーネント", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "分",
+    min: "分", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "マックス",
+    max: "マックス", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "最小値の式",
+    minValueExpression: "最小値の式", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "最大値式",
+    maxValueExpression: "最大値式", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "歩",
-    // [Auto-translated] "Data list"
-    dataList: "データ一覧",
-    // [Auto-translated] "Item size"
-    inputSize: "アイテムサイズ",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "アイテムラベルの幅 (px)",
+    step: "歩", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "自動提案の項目",
+    // [Auto-translated] "Input field width (in characters)"
+    inputSize: "入力フィールド幅 (文字)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "アイテムラベルの幅",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "入力値の配置",
     // [Auto-translated] "Elements"
-    elements: "元素",
+    elements: "元素", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "コンテンツ",
+    content: "コンテンツ", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "ナビゲーション タイトル",
+    navigationTitle: "ナビゲーション タイトル", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "ナビゲーションの説明",
+    navigationDescription: "ナビゲーションの説明", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "ロングタップ",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "自動拡張",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "サイズ変更を許可する",
+    longTap: "ロングタップ", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "入力フィールドを動的に展開する",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "サイズ変更ハンドルを有効にする",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "キャリッジリターンを受け入れる",
+    acceptCarriageReturn: "キャリッジリターンを受け入れる", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "表示モード",
     // [Auto-translated] "Rate type"
-    rateType: "レートタイプ",
+    rateType: "レートタイプ", // Auto-generated string
     // [Auto-translated] "Label"
-    label: "ラベル",
+    label: "ラベル", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "コンテンツモード",
-    // [Auto-translated] "Image fit"
-    imageFit: "画像のフィット",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "画像とサムネイルのフィット感",
     // [Auto-translated] "Alt text"
     altText: "代替テキスト",
     // [Auto-translated] "Height"
-    height: "高さ",
+    height: "高さ", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "スマートフォンでの高さ",
     // [Auto-translated] "Pen color"
-    penColor: "ペンの色",
+    penColor: "ペンの色", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "背景色",
     // [Auto-translated] "Template elements"
-    templateElements: "テンプレート要素",
+    templateElements: "テンプレート要素", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "演算子",
+    operator: "演算子", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "可変",
+    isVariable: "可変", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "実行式",
+    runExpression: "実行式", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "キャプションを表示",
+    showCaption: "キャプションを表示", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "アイコン名",
+    iconName: "アイコン名", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "アイコンのサイズ",
+    iconSize: "アイコンのサイズ", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "精度",
+    precision: "精度", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "マトリックスドラッグハンドル領域",
+    matrixDragHandleArea: "マトリックスドラッグハンドル領域", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "背景画像",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "背景画像のフィット",
+    backgroundImageFit: "背景画像のフィット", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "背景画像の添付",
+    backgroundImageAttachment: "背景画像の添付", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "背景の不透明度",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "選択してランク付けを有効にする",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "エリアレイアウトをランク付けするために選択する",
+    backgroundOpacity: "背景の不透明度", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "選択的ランク付けを許可する",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "ランキングエリアの配置",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "すべてのオプションが選択されている場合に表示されるテキスト",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "ランキングエリアのプレースホルダーテキスト",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "カメラへのアクセスを許可する",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "スケールカラーモード",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "レートカラーモード",
+    allowCameraAccess: "カメラへのアクセスを許可する", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "レーティングアイコンのカラーモード",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "スマイリーの配色",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "表示値をコピー",
+    copyDisplayValue: "表示値をコピー", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "列スパン",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var jaStrings = {
     "--sjs-secondary-background-500": "付帯",
     // [Auto-translated] "Surface"
     surfaceScale: "表面",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "ユーザーインターフェース",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "UI 要素",
     // [Auto-translated] "Font"
     fontScale: "フォント",
     names: {

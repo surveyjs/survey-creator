@@ -120,12 +120,12 @@ export var persianStrings = {
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
     // [Auto-translated] "Survey Settings"
     surveySettings: "تنظیمات نظرسنجی",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "تنظیمات نظرسنجی",
     // [Auto-translated] "Theme Settings"
     themeSettings: "تنظیمات تم",
-    // [Auto-translated] "Open theme settings"
-    themeSettingsTooltip: "تنظیمات تم",
+    // [Auto-translated] "Theme settings"
+    themeSettingsTooltip: "تنظیمات قالب",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "تنظیمات سازنده",
     // "Show Panel"
@@ -435,8 +435,8 @@ export var persianStrings = {
       panel_visibilityName: "قابلیت رویت پنل",
       // "Enable/disable panel"
       panel_enableName: "فعال/غیرفعال کردن پنل ",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "ایجاد صفحه مورد نیاز است",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "پانل مورد نیاز است",
       // "Show/hide question"
       question_visibilityName: " قابلیت رویت سوال",
       // "Enable/disable question"
@@ -512,7 +512,7 @@ export var persianStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "بازنشانی مقدار برای سوال: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "اختصاص مقدار: {1} به سوال: {0}",
+      question_setValueText: "اختصاص مقدار: {1} به سوال: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var persianStrings = {
       column_resetValueText: "تنظیم مجدد مقدار سلول برای ستون: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "اختصاص مقدار سلول: {1} به ستون: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "عبارتی که نتیجه آن به سوال هدف اختصاص داده می شود.",
       // "survey becomes completed"
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       // "set into question: {0} value {1}"
@@ -590,25 +590,25 @@ export var persianStrings = {
       requiredIf: "ایجاد پنل مورد نیاز اگر",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "سفارش سوال در داخل پنل",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "صفحه اصلی",
+      // [Auto-translated] "Move the panel to page"
+      page: "انتقال پانل به صفحه",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "نمایش تابلو در یک خط جدید",
-      // [Auto-translated] "Panel expand state"
-      state: "دولت فروپاشی پانل",
-      // [Auto-translated] "Width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "حالت فروپاشی پنل",
+      // [Auto-translated] "Inline panel width"
       width: "عرض پانل درون خطی",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Minimum panel width"
       minWidth: "حداقل عرض پانل",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "حداکثر عرض پانل",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "شماره گذاری این پانل"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "عرض موثر، ٪",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "عرض عنوان سوال، px"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export var persianStrings = {
       minWidth: "حداقل عرض پانل",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "حداکثر عرض پانل",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "تایید حذف پانل",
-      // [Auto-translated] "Description template"
-      templateDescription: "الگوی توصیف پنل",
-      // [Auto-translated] "Title template"
-      templateTitle: "الگوی عنوان پنل",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "متن تابلوی خالی",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "حذف ورود را تأیید کنید",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "الگوی توضیحات ورودی",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "الگوی عنوان ورودی",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "متن پانل خالی",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "الگوی عنوان زبانه",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "ذی نفع عنوان تب",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "ایجاد یک پنل منفرد مرئی اگر",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "یک ورودی فردی را قابل مشاهده کنید اگر",
       // [Auto-translated] "Number the panel"
       showNumber: "شماره گذاری پانل",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "ترازبندی عنوان پنل",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "ترازبندی توضیحات پنل",
-      // [Auto-translated] "Question title location"
-      templateQuestionTitleLocation: "هم ترازی عنوان پرسش",
+      // [Auto-translated] "Question title alignment"
+      templateQuestionTitleLocation: "تراز عنوان سوال",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "عرض عنوان سوال",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "همترازسازی پیام خطا",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "محل جدید پنل",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "محل ورود جدید",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "نمایش نوار پیشرفت",
-      // [Auto-translated] "Key column"
-      keyName: "جلوگیری از پاسخ های تکراری در سوال زیر"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var persianStrings = {
       visibleIf: "سؤال را قابل مشاهده کنید اگر",
       // [Auto-translated] "Make the question required if"
       requiredIf: "سؤال مورد نیاز را مطرح کنید اگر",
-      // [Auto-translated] "Parent page"
-      page: "صفحه اصلی",
+      // [Auto-translated] "Move the question to page"
+      page: "انتقال سوال به صفحه",
       // [Auto-translated] "Question box collapse state"
       state: "جعبه سوال دولت فروپاشی",
       // [Auto-translated] "Number this question"
@@ -694,36 +694,36 @@ export var persianStrings = {
       descriptionLocation: "هم ترازی توضیحات سؤال",
       // [Auto-translated] "Error message alignment"
       errorLocation: "همترازسازی پیام خطا",
-      // [Auto-translated] "Add indents"
-      indent: "افزایش تورفتگی داخلی",
+      // [Auto-translated] "Increase the inner indent"
+      indent: "تورفتگی داخلی را افزایش دهید",
       // [Auto-translated] "Inline question width"
       width: "عرض پرسش درون خطی",
       // [Auto-translated] "Minimum question width"
       minWidth: "حداقل عرض سوال",
       // [Auto-translated] "Maximum question width"
       maxWidth: "حداکثر عرض سؤال",
-      // [Auto-translated] "Update text question value"
-      textUpdateMode: "بهروزرسانی مقدار فیلد ورودی"
+      // [Auto-translated] "Update input field value"
+      textUpdateMode: "به روز رسانی مقدار فیلد ورودی"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "عرض منطقه امضا",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "ارتفاع منطقه امضا",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "مقیاس خودکار منطقه امضا",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "نشان دادن نگهدارندهی مکان",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "نمایش یک مکان نگهدارنده در ناحیه امضا",
       // [Auto-translated] "Placeholder text"
       placeholder: "متن ذی نفع",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "متن نگهدارنده در حالت فقط خواندنی یا پیشنمایش",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "نمایش دکمه پاک کردن در منطقه امضا",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "حداقل عرض قلم",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "حداکثر عرض قلم",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "نمایش دکمه پاک کردن در ناحیه امضا",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "حداقل عرض سکته مغزی",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "حداکثر عرض سکته مغزی",
       // [Auto-translated] "Stroke color"
       penColor: "رنگ سکته مغزی"
     },
@@ -755,26 +755,26 @@ export var persianStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "عنوان",
+      // [Auto-translated] "Survey title"
+      title: "عنوان نظرسنجی",
       // [Auto-translated] "Survey description"
       description: "توضیحات نظرسنجی",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "نظرسنجی را فقط خواندنی کنید"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "نام صفحه",
-      // [Auto-translated] "Title"
-      title: "عنوان",
+      // [Auto-translated] "Page title"
+      title: "عنوان صفحه",
       // [Auto-translated] "Page description"
       description: "توضیحات صفحه",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "صفحه را مرئی کنید اگر",
       // [Auto-translated] "Make the page required if"
       requiredIf: "ایجاد صفحه مورد نیاز اگر",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "محدودیت زمانی برای تکمیل صفحه",
       // [Auto-translated] "Question order on the page"
       questionOrder: "سفارش سوال در صفحه"
     },
@@ -852,8 +852,8 @@ export var persianStrings = {
     defaultDisplayValue: "مقدار نمایش پیش فرض برای متون پویا",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "تراز برچسب",
-    // [Auto-translated] "Input field size (in characters)"
-    size: "اندازه فیلد ورودی (در نویسه ها)",
+    // [Auto-translated] "Input field width (in characters)"
+    size: "عرض فیلد ورودی (به نویسه)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "همراستاسازی پیام خطای سلولی",
     // [Auto-translated] "Enabled"
@@ -934,8 +934,8 @@ export var persianStrings = {
     fastEntryChoicesCountError: "لطفا تعداد موارد را از {0} به {1} محدود کنید",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "لطفا حداقل {0} مورد را وارد کنید",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "شما می توانید داده ها را در قالب زیر تنظیم کنید:\nvalue1|متن\nارزش 2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "لیست گزینه های انتخابی و شناسه آنها را در قالب زیر وارد کنید:\n\nid|گزینه\n\nشناسه گزینه انتخاب برای پاسخ دهندگان قابل مشاهده نیست و می تواند در قوانین شرطی استفاده شود.",
     // "Form Entry"
     formEntry: "تکمیل فرم",
     // "Test the service"
@@ -964,10 +964,10 @@ export var persianStrings = {
     assistantTitle: "سوالات موجود:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "حداقل باید یک سطر یا ستون وجود داشته باشد.",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "پیش نمایش پاسخ قبل از ارسال نظرسنجی",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "تنظیم بر اساس ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "قبل از ارسال مرور کنید",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "فعال شده توسط یک شرط",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "تنظیم مجدد",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var persianStrings = {
     propertyNameIsIncorrect: "از کلمات رزرو شده استفاده نکنید: \"item\"، \"choice\"، \"panel\"، \"row\".",
     // "You don't have any items yet"
     listIsEmpty: "یک آیتم جدید اضافه کنید",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "هنوز هیچ انتخابی اضافه نشده است",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "شما هنوز هیچ انتخابی ندارید",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "شما هنوز هیچ ستونی ندارید",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var persianStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "شما هنوز هیچ لینکی ندارید",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "شما هنوز هیچ صفحه ای ندارید",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "اضافه کردن یک انتخاب",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "اضافه کردن انتخاب جدید",
     // [Auto-translated] "Add new column"
     "addNew@columns": "افزودن ستون جدید",
     // [Auto-translated] "Add new row"
@@ -1033,17 +1033,17 @@ export var persianStrings = {
     // "Path to data"
     path: "آدرس",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
-      url: "نشانی وب سرویس",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "دریافت مقادیر از فیلد JSON زیر"
+      // [Auto-translated] "Web service URL"
+      url: "URL وب سرویس",
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "از ملک زیر ارزش ذخیره را دریافت کنید"
     },
     // "Get value to display from the following property"
     titleName: "نام عنوان",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "URL های تصویر را از فیلد JSON زیر دریافت کنید",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "اجازه دادن پاسخ خالی",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "URL های فایل را از ویژگی زیر دریافت کنید",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "پاسخ خالی را بپذیرید",
     // "Title"
     titlePlaceholder: "عنوان را اینجا وارد کنید",
     // "Survey Title"
@@ -1066,10 +1066,10 @@ export var persianStrings = {
     otherText: "سایر آیتم های متن",
     // "Enable the \"None\" option"
     showNoneItem: "هیچ آیتمی ندارد",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "اجازه دهید گزینه امتناع از پاسخ",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "گزینه Don't Know را انتخاب کنید",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "گزینه \"امتناع از پاسخ\" را فعال کنید",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "گزینه \"نمی دانم\" را فعال کنید",
     // "Rename the \"None\" option"
     noneText: "هیچ آیتم متنی وجود ندارد",
     // "Enable the \"Select All\" option"
@@ -1186,8 +1186,8 @@ export var persianStrings = {
     gotoName: "سؤال برای پرش به",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "قانون نادرست است",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "شامل نتایج نظرسنجی",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "به نتایج نظرسنجی اضافه کنید",
     // "Make the title and description visible"
     showTitle: "نمایش/پنهان کردن عنوان",
     // "Expand/collapse title"
@@ -1282,24 +1282,24 @@ export var persianStrings = {
     html: "Html",
     // [Auto-translated] "Answer"
     setValue: "پاسخ",
-    // [Auto-translated] "Image format"
-    dataFormat: "قالب تصویر",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "اجازه اضافه کردن سطرها",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "اجازه حذف سطرها",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "اجازه دادن به کشیدن و رها کردن ردیف",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "اگر عرض یا ارتفاع تصویر دقیق را مشخص کنید اعمال نمی شود.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "حداقل عرض تصویر",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "حداکثر عرض تصویر",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "حداقل ارتفاع تصویر",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "حداکثر ارتفاع تصویر",
+    // [Auto-translated] "Storage format"
+    dataFormat: "فرمت ذخیره سازی",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "افزودن ردیف را فعال کنید",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "حذف ردیف را فعال کنید",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "مرتب سازی مجدد ردیف را فعال کنید",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "اگر عرض یا ارتفاع دقیق ناحیه نمایش را مشخص کنید، اعمال نمی شود.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "حداقل عرض منطقه نمایش",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "حداکثر عرض منطقه نمایش",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "حداقل ارتفاع مساحت نمایش",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "حداکثر ارتفاع منطقه نمایش",
     // "Minimum value"
     minValue: "حداقل مقدار",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var persianStrings = {
     totalCurrency: "مجموع ارز",
     // "Formatted string"
     totalFormat: "مجموع فرمت",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "لوگو (URL یا رشته کدگذاری شده base64)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "ساختار نظرسنجی",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "حداکثر طول پاسخ (در کاراکترها)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "حداکثر طول توضیحات (در نویسهها)",
+    // [Auto-translated] "Survey logo"
+    logo: "لوگوی نظرسنجی",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "طرح نظرسنجی",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "محدود کردن طول پاسخ",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "محدود کردن طول نظر",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "ارتفاع منطقه نظر (در خطوط)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "گسترش خودکار منطقه نظر در صورت لزوم",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "گسترش خودکار نواحی متن",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var persianStrings = {
     checkErrorsMode: "اجرای اعتبارسنجی",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "حرکت به نشانی وب",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "نشانی وب پویا",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "پس از ارسال به یک پیوند خارجی تغییر مسیر دهید",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "پیوند خارجی پویا",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "نشانهگذاری برای نشان دادن اینکه ایا کاربر قبلا این بررسی را پر کرده است",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "بررسی نشانه گذاری صفحه کامل",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "بررسی دینامیکی نشانه گذاری صفحه کامل",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "نشانه گذاری صفحه \"متشکرم\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "نشانه گذاری پویا صفحه \"متشکرم\"",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "نشانه گذاری برای نشان دادن در حالی که مدل بررسی در حال بارگذاری است",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var persianStrings = {
     allowClear: "نشان دادن دکمهی Clear",
     // [Auto-translated] "Search Mode"
     searchMode: "حالت جستجو",
-    // [Auto-translated] "Value display style"
-    displayStyle: "سبک نمایش ارزش",
+    // [Auto-translated] "Display format"
+    displayStyle: "فرمت نمایش",
     // [Auto-translated] "Formatted string"
     format: "رشتۀ قالببندی شده",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var persianStrings = {
     minimumFractionDigits: "حداقل رقم کسری",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "نمایش جداسازهای گروهبندی",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "اجازه دادن به چندین پرونده",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "پیشنمایش تصاویر",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "فعال کردن آپلود چند فایل",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "پیش نمایش تصاویر آپلود شده",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "انواع فایل های پذیرفته شده",
-    // [Auto-translated] "Wait for the upload to complete"
-    waitForUpload: "منتظر بمانید تا بارگذاری کامل شود",
+    // [Auto-translated] "Wait for upload to complete"
+    waitForUpload: "منتظر بمانید تا آپلود کامل شود",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "تایید حذف پرونده",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "جزئیات محل پانل",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "تراز جزئیات ردیف",
     // [Auto-translated] "Minimum row count"
     minRowCount: "حداقل تعداد سطرها",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var persianStrings = {
     confirmDelete: "تایید حذف سطر",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "پیام تایید",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "شمارش اولیه پانل",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "حداقل تعداد پانل",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "حداکثر تعداد پانل",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "پانل داخلی گسترش دولت",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "قبلی دکمه پنل tooltip",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "بعدی دکمه پنل tooltip",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "حذف محل دکمه پنل",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "مخفی کردن سؤال اگر سطری وجود نداشته باشد",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "تعداد اولیه ورودی ها",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "حداقل تعداد ورودی ها",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "حداکثر تعداد ورودی ها",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "حالت ورود اولیه",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "متن دکمه \"ورودی قبلی\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "متن دکمه \"ورودی بعدی\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "تراز دکمه \"حذف ورود\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "اگر سؤال بدون ردیف است پنهان کنید",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "مخفی کردن ستونها اگر سطری وجود نداشته باشد",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "مقادیر نرخ سفارشی",
-    // [Auto-translated] "Rate count"
-    rateCount: "شمارش نرخ",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "چگونه مقادیر نرخ را مشخص کنیم؟",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "مقادیر رتبه بندی سفارشی",
+    // [Auto-translated] "Rating count"
+    rateCount: "تعداد رتبه بندی",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "پیکربندی رتبه بندی",
     slider: {
       // [Auto-translated] "Min value"
       min: "حداقل مقدار",
@@ -1459,25 +1459,25 @@ export var persianStrings = {
       autoGenerate: "پیکربندی برچسب های مقیاس بندی",
       // [Auto-translated] "Slider type"
       sliderType: "نوع کشویی",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "حداقل طول محدوده",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "حداکثر طول برد",
       // [Auto-translated] "Custom labels"
       customLabels: "برچسب های سفارشی",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "فرمت برچسب",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "فرمت راهنمای ابزار"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "ارتفاع تصویر",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "عرض تصویر"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "مخفی کردن سؤال در صورتی که هیچ انتخابی نداشته باشد",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "اگر گزینه ای ندارد سوال را پنهان کنید",
     // "Minimum width"
     minWidth: "حداقل عرض (در مقادیر پذیرفته شده CSS)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var persianStrings = {
     showHeader: "نمایش سرایندهای ستون",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "نمایش میله لغزش افقی",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "اس",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "عرض سرصفحه سطر) در مقادیر پذیرفته شده CSS (",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "حداقل عرض ستون",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "عرض هدر ردیف",
     // "Value to store when \"True\" is selected"
     valueTrue: "مقدار » درست",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var persianStrings = {
     otherErrorText: "پیام خطای \"نظر خالی\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "پیام خطای \"مقدار کلید غیر منحصر به فرد\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "حداقل انتخاب های انتخاب شده",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "حداکثر انتخابهای انتخاب شده",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "عرض لوگو (در مقادیر پذیرفته شده CSS)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "حداقل انتخاب ها برای انتخاب",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "حداکثر انتخاب ها برای انتخاب",
+    // [Auto-translated] "Logo width"
+    logoWidth: "عرض لوگو",
+    // [Auto-translated] "Logo height"
+    logoHeight: "ارتفاع لوگو",
     // "Read-only"
     readOnly: "فقط خواندنی",
-    // [Auto-translated] "Editable if"
-    enableIf: "قابل ویرایش اگر",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "حالت فقط خواندنی را غیرفعال کنید اگر",
     // "\"No rows\" message"
     noRowsText: "پیام \"بدون ردیف\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "انتخاب های ویژه جداگانه",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "کپی کردن انتخابها از سؤال زیر",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "کدام گزینه ها را کپی کنید؟",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "کدام گزینه های انتخابی را کپی کنید",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید.",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "نمایش عناوین صفحه در نوار پیشرفت",
-    // [Auto-translated] "Display page numbers in progress bar"
-    progressBarShowPageNumbers: "نمایش شمارههای صفحه در نوار پیشرفت",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "نمایش ناحیهی نظرات",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "ذی نفع منطقه نظر",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "نمایش توضیحات نرخ به عنوان مقادیر شدید",
+    // [Auto-translated] "Display page numbers in the progress bar"
+    progressBarShowPageNumbers: "نمایش شماره صفحات در نوار پیشرفت",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "یک کادر نظر اضافه کنید",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "متن نگهدارنده مکان برای کادر نظر",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "نمایش برچسب ها به عنوان مقادیر شدید",
     // [Auto-translated] "Row order"
     rowOrder: "سفارش ردیف",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var persianStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "حالت پیش نمایش",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "طرح بندی شبکه را فعال کنید",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "ستون های طرح بندی شبکه ای",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "ستون های شبکه ای",
     // [Auto-translated] "Mask settings"
     maskSettings: "تنظیمات ماسک",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "تراز پیام خطای گسترش ردیف",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "جزئیات ردیف تراز پیام خطا",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var persianStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "تنظیمات ماسک ورودی",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "طرح",
+        // [Auto-translated] "Panel Layout"
+        panel: "چیدمان پنل",
         // [Auto-translated] "Layout"
         question: "طرح",
         // [Auto-translated] "Layout"
@@ -1690,7 +1690,7 @@ export var persianStrings = {
       appearance: "ظاهر",
       // [Auto-translated] "Accent colors"
       accentColors: "رنگ های تاکیدی",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "زمینه سطح",
       // [Auto-translated] "Scaling"
       scaling: "توزین",
@@ -1701,16 +1701,16 @@ export var persianStrings = {
     editProperty: "ویرایش خصوصیت '{0}'",
     // "Items"
     items: "[ آیتم ها: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "انتخاب ها قابل مشاهده هستند اگر",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "انتخاب ها قابل انتخاب هستند اگر",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "ستونها مرئی هستند اگر",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "سطرها مرئی هستند اگر",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "اضافه کردن تورفتات داخلی",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "انتخاب ها را قابل مشاهده کنید اگر",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "انتخاب ها را قابل انتخاب کنید اگر",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "ستون ها را قابل مشاهده کنید اگر",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "ردیف ها را قابل مشاهده کنید اگر",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "تورفتگی داخلی را افزایش دهید",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید",
     // "Please enter a value."
@@ -1753,34 +1753,34 @@ export var persianStrings = {
     emptyExpressionPlaceHolder: "عبارت را در اینجا تایپ کنید...",
     // "No file chosen"
     noFile: "هیچ فایلی انتخاب نشده است",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "پاک کردن مقدار اگر سؤال مخفی شود",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "ارزش نام ملک",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "فعالسازی جستجو",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "مقادیر سوال پنهان را پاک کنید",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "مقادیر را در ویژگی زیر ذخیره کنید",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "فعال کردن جستجو همانطور که تایپ می کنید",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "مخفی کردن فقرههای انتخاب شده",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "بستن کشویی پس از انتخاب",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "تراز عمودی",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "ردیفهای جایگزین",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "ستونها مرئی هستند اگر",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "سطرها مرئی هستند اگر",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "ذی نفع منطقه نظر",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "متن نگهدارنده پرونده",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "متن نگهدارنده عکس",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "متن جایدار پرونده یا عکس",
-    // [Auto-translated] "Rate type"
-    rateType: "نوع نرخ",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "جمع کردن منوی کشویی پس از انتخاب",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "تراز عمودی در سلول ها",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "رنگ های ردیف جایگزین",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "ستون ها را قابل مشاهده کنید اگر",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "ردیف ها را قابل مشاهده کنید اگر",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "متن نگهدارنده مکان برای کادر نظر",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "متن نگهدارنده مکان برای فایل محلی",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "متن نگهدارنده مکان برای دوربین",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "متن نگهدارنده مکان برای فایل محلی یا دوربین",
+    // [Auto-translated] "Rating icon"
+    rateType: "نماد رتبه بندی",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "سابق: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var persianStrings = {
       themeName: "تم",
       // [Auto-translated] "Question appearance"
       isPanelless: "ظاهر سوال",
-      // [Auto-translated] "Input element"
-      editorPanel: "پس زمینه و شعاع گوشه",
-      // [Auto-translated] "Panel background and corner radius"
-      questionPanel: "پس زمینه و شعاع گوشه",
+      // [Auto-translated] "Background and corner radius"
+      editorPanel: "شعاع زمینه و گوشه",
+      // [Auto-translated] "Background and corner radius"
+      questionPanel: "شعاع زمینه و گوشه",
       // [Auto-translated] "Accent color"
       primaryColor: "رنگ لهجه",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "تاری پسزمینه پانل",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "تاری پسزمینۀ سؤال",
-      // [Auto-translated] "Font size"
-      fontSize: "اندازه قلم",
-      // [Auto-translated] "Scale"
-      scale: "مقیاس",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "کدورت پانل و جعبه سوال",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "کدورت عنصر ورودی",
+      // [Auto-translated] "Survey font size"
+      fontSize: "اندازه فونت نظرسنجی",
+      // [Auto-translated] "Survey scale factor"
+      scale: "عامل مقیاس پیمایشی",
       // [Auto-translated] "Corner radius"
       cornerRadius: "شعاع گوشه",
       // [Auto-translated] "Advanced mode"
       advancedMode: "حالت پیشرفته",
-      // [Auto-translated] "Page title font"
-      pageTitle: "قلم عنوان",
-      // [Auto-translated] "Page description font"
-      pageDescription: "قلم توصیف",
-      // [Auto-translated] "Question title font"
-      questionTitle: "قلم عنوان",
-      // [Auto-translated] "Question description font"
-      questionDescription: "قلم توصیف",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Title font"
+      pageTitle: "فونت عنوان",
+      // [Auto-translated] "Description font"
+      pageDescription: "توضیحات فونت",
+      // [Auto-translated] "Title font"
+      questionTitle: "فونت عنوان",
+      // [Auto-translated] "Description font"
+      questionDescription: "توضیحات فونت",
+      // [Auto-translated] "Font"
       editorFont: "فونت",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "کدورت",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "خانواده قلم",
+      backgroundOpacity: "کدورت", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "خانواده فونت نظرسنجی",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "رنگ پسزمینه",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "پسزمینۀ لهجه",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "پیشزمینه لهجه",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "پیغامهای خطا",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "رنگ های پس زمینه برجسته",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "رنگ های پیش زمینه لهجه",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "رنگ های پیام خطا",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "جلوه های سایه",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var persianStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "مشاهده",
-      // [Auto-translated] "Logo position"
-      logoPosition: "موقعیت لوگو",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "تراز لوگو",
       // [Auto-translated] "Survey title font"
       surveyTitle: "قلم عنوان نظرسنجی",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var persianStrings = {
       backgroundImageOpacity: "کدورت",
       // [Auto-translated] "Overlap"
       overlapEnabled: "همپوشانی",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "موقعیت لوگو",
-      // [Auto-translated] "Title position"
-      titlePositionX: "موقعیت عنوان",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "شرح موقعیت"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "تراز لوگو",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "تراز عنوان نظرسنجی",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "همسویی توضیحات نظرسنجی"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var persianStrings = {
     "true": "واقعی",
     // [Auto-translated] "false"
     "false": "نادرست",
-    // [Auto-translated] "Local files"
-    file: "پروندههای محلی",
+    // [Auto-translated] "Local file"
+    file: "فایل محلی",
     // [Auto-translated] "Camera"
     camera: "دوربین",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "فایل های محلی یا دوربین",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "فایل محلی یا دوربین",
     // "Inherit"
     inherit: "ارث بری",
     // "Visible"
@@ -2016,8 +2016,8 @@ export var persianStrings = {
     onComplete: "به محض تمام شدن",
     // "When question gets hidden"
     onHidden: "به محض مخفی شدن",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
-    onHiddenContainer: "هنگامی که سوال یا پانل / صفحه ان پنهان می شود",
+    // [Auto-translated] "When question or its panel/page gets hidden"
+    onHiddenContainer: "وقتی سوال یا پانل/صفحه آن پنهان می شود",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
       none: "هرگز"
@@ -2232,18 +2232,18 @@ export var persianStrings = {
     correctQuestions: "پاسخ های معتبر",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "صفحات تکمیل شده(دکمه UI)",
-    // [Auto-translated] "Under the input"
-    underInput: "زیر ورودی",
-    // [Auto-translated] "Under the title"
-    underTitle: "تحت عنوان",
-    // [Auto-translated] "On blur"
-    onBlur: "در تاری",
+    // [Auto-translated] "Under the input field"
+    underInput: "در زیر فیلد ورودی",
+    // [Auto-translated] "Under the question title"
+    underTitle: "زیر عنوان سوال",
+    // [Auto-translated] "On lost focus"
+    onBlur: "در فوکوس از دست رفته",
     // [Auto-translated] "While typing"
     onTyping: "هنگام تایپ",
     // [Auto-translated] "Under the row"
     underRow: "زیر ردیف",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "در زیر ردیف، تنها یک پانل قابل مشاهده است",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "در زیر ردیف، فقط یک بخش نمایش داده می شود",
     // "Auto"
     auto: "خودکار",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var persianStrings = {
       combined: "هر دو"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "بستگی به طرح ماتریس دارد"
+      // [Auto-translated] "Based on matrix layout"
+      default: "بر اساس چیدمان ماتریس"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "کاربران نمی توانند پانل ها را گسترش یا سقوط کنند",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "تمام پانل ها جمع شوند",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "تمام پانل ها باز شوند",
+      // [Auto-translated] "Locked"
+      default: "قفل",
+      // [Auto-translated] "Collapse all"
+      collapsed: "جمع کردن همه",
+      // [Auto-translated] "Expand all"
+      expanded: "گسترش همه",
       // [Auto-translated] "First expanded"
       firstExpanded: "اولین گسترش"
     },
@@ -2301,10 +2301,10 @@ export var persianStrings = {
       colored: "رنگی"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "تولید",
-      // [Auto-translated] "Enter manually"
-      "false": "به صورت دستی وارد کنید"
+      // [Auto-translated] "Auto-generate"
+      "true": "تولید خودکار",
+      // [Auto-translated] "Manual"
+      "false": "دستی"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,8 +2325,8 @@ export var persianStrings = {
       on: "شماره خودکار",
       // [Auto-translated] "Reset on each page"
       onPage: "بازنشانی در هر صفحه",
-      // [Auto-translated] "Start on each panel"
-      onpanel: "بازنشانی در هر پنل",
+      // [Auto-translated] "Reset on each panel"
+      onpanel: "تنظیم مجدد در هر پنل",
       // [Auto-translated] "Reset on each panel"
       onPanel: "بازنشانی در هر پنل",
       // [Auto-translated] "Recursive numbering"
@@ -2433,8 +2433,8 @@ export var persianStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "همانند نظرسنجی",
-      // [Auto-translated] "Fit to container"
-      container: "مناسب برای ظرف"
+      // [Auto-translated] "Same as container"
+      container: "همانند کانتینر"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2608,22 +2608,22 @@ export var persianStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "یک شناسه پانل که برای پاسخ دهندگان قابل مشاهده نیست.",
-      // [Auto-translated] "Type a subtitle."
-      description: "یک زیرنویس پانل تایپ کنید.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "زیرنویس پانل را تایپ کنید.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی که دید پانل را تعیین می کند استفاده کنید.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای پانل غیرفعال می کند.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "برای تمام سوالات موجود در این پانل اعمال می شود. هنگامی که روی \"Hidden\" تنظیم می شود، توضیحات سؤال را نیز پنهان می کند. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سؤالات فردی تعریف کنید. گزینه \"وراثت\" تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (به طور پیش فرض \"بالا\" را اعمال می کند). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "ترتیب اصلی سوالات را حفظ می کند یا آنها را تصادفی می کند. گزینه \"وراثت\" تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی را اعمال می کند.",
       // "Repositions the panel to the end of a selected page."
       page: "پانل را به انتهای صفحه انتخاب شده تغییر می دهد.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var persianStrings = {
       startWithNewLine: "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "را انتخاب کنید از: \"گسترش یافته\" - پانل به طور کامل نمایش داده می شود و می تواند سقوط کند؛ \"سقوط\" - پانل تنها عنوان و توضیحات را نمایش می دهد و می تواند گسترش یابد. \"Locked\" - پانل به طور کامل نمایش داده می شود و نمی تواند سقوط کند.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "عرض پانل را متناسب با سایر عناصر نظرسنجی در همان خط تنظیم می کند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد.",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var persianStrings = {
       descriptionLocation: "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود.",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "موقعیت یک پانل تازه اضافه شده را تعریف می کند. به طور پیش فرض، پانل های جدید به پایان اضافه می شوند. \"Next\" را انتخاب کنید تا یک پانل جدید پس از پانل فعلی وارد شود.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "پاسخ های آخرین ورودی را تکراری می کند و آنها را به ورودی اضافه شده بعدی اختصاص می دهد.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "قبل از حذف پانل، یک اعلان تأیید را فعال می کند."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var persianStrings = {
       imageHeight: "مقادیر حداقل و حداکثر ارتفاع را نادیده می گیرد.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "مقادیر حداقل و حداکثر عرض را نادیده می گیرد.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"ارزش\" به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند. \"متن\" به پاسخ دهندگان نمایش داده می شود.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"مقدار\" به عنوان شناسه مورد استفاده در قوانین شرطی عمل می کند. \"متن\" برای پاسخ دهندگان نمایش داده می شود.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "بین \"تصویر\" و \"ویدئو\" را انتخاب کنید تا حالت محتوا را انتخاب کنید. اگر \"تصویر\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه های ارائه شده فایل های تصویری در فرمت های زیر هستند: JPEG، GIF، PNG، APNG، SVG، BMP، ICO. به طور مشابه، اگر \"ویدئو\" انتخاب شده است، اطمینان حاصل کنید که تمام گزینه ها لینک مستقیم به فایل های ویدئویی در فرمت های زیر هستند: MP4، MOV، WMV، FLV، AVI، MKV. لطفا توجه داشته باشید که پیوندهای YouTube برای گزینه های ویدیویی پشتیبانی نمی شوند."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "این تنظیم فقط فیلد ورودی را تغییر اندازه می دهد و روی عرض جعبه پرسش تاثیر نمی گذارد. برای محدود کردن طول ورودی پذیرفته شده، به <b>Validation → Maximum character limit</b> بروید."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "این تنظیم فقط اندازه فیلد ورودی را تغییر می دهد و بر عرض کادر سوال تأثیر نمی گذارد. برای محدود کردن طول ورودی پذیرفته شده، به «اعتبارسنجی» → «حداکثر محدودیت کاراکتر» بروید."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "تعداد خطوط نمایش داده شده در فیلد ورودی را تنظیم می کند. اگر ورودی خطوط بیشتری را بگیرد، نوار اسکرول ظاهر می شود."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "تعداد خطوط نمایش داده شده را در قسمت ورودی تنظیم می کند. اگر ورودی خطوط بیشتری را اشغال کند، نوار اسکرول ظاهر می شود."
     },
     // survey templates
     survey: {
@@ -2811,7 +2811,7 @@ export var persianStrings = {
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "هنگامی که انتخاب می شود، یک ستون فردی برای هر گزینه انتخاب ایجاد می کند.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
     },
     slider: {
@@ -2848,8 +2848,8 @@ export var persianStrings = {
     caseInsensitive: "انتخاب کنید که آیا حروف بزرگ و کوچک در عبارت منظم باید معادل در نظر گرفته شوند.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "را انتخاب کنید از: \"استاتیک\" - مجموعه عرض ثابت؛ \"پاسخگو\" - باعث می شود نظرسنجی عرض کامل صفحه نمایش را اشغال کند؛ \"Auto\" - هر یک از این دو را بسته به نوع سوال مورد استفاده اعمال می کند.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "کوکی ها کاربران را از پر کردن همان نظرسنجی دو بار جلوگیری می کند.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "یک مقدار کوکی منحصر به فرد برای نظرسنجی خود اختصاص دهید. کوکی پس از اتمام نظرسنجی در مرورگر پاسخ دهنده تنظیم می شود تا از ارسال نظرسنجی های تکراری جلوگیری شود.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "چسباندن یک پیوند تصویر (بدون محدودیت اندازه) یا روی نماد پوشه کلیک کنید تا یک فایل را از رایانه خود مرور کنید (تا 64KB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var persianStrings = {
     autoAdvanceEnabled: "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "قابلیت مشاهده دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,8 +2884,8 @@ export var persianStrings = {
     maxTextLength: "فقط برای سوالات ورودی متن.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "فقط برای نظرات سوال.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
-    commentAreaRows: "تعداد خطوط نمایش داده شده در قسمت های متنی را برای نظرات سؤال تنظیم می کند. اگر ورودی خطوط بیشتری را اشغال کند، نوار اسکرول ظاهر می شود.",
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
+    commentAreaRows: "تعداد خطوط نمایش داده شده در قسمت های متنی را برای نظرات سؤال تنظیم می کند. اگر ورودی خطوط بیشتر�� را اشغال کند، نوار اسکرول ظاهر می شود.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "انتخاب کنید اگر شما می خواهید نظرات سوال و سوالات متن بلند به رشد خودکار در ارتفاع بر اساس طول متن وارد شده است.",
     // [Auto-translated] "For question comments and Long Text questions only."
@@ -2908,8 +2908,8 @@ export var persianStrings = {
     columnMinWidth: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "تنها زمانی قابل مشاهده است که حداقل یک ستون دارای عبارت Total type یا Total باشد.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "فقط در صورتی قابل مشاهده است که حداقل یک ستون مقادیر کل تنظیم شده با \"روش تجمیع\" یا \"عبارت مقدار کل\" را نشان دهد.",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "محل یک پیام خطا را در رابطه با یک سلول با ورودی نامعتبر تنظیم می کند. گزینه \"Inherit\" تنظیمات را از ویژگی \"Error message alignment\" اعمال می کند.",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var persianStrings = {
     imageFit: "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "به تدریج ارتفاع میدان ورودی را افزایش می دهد زیرا داده ها وارد می شوند. تنظیم \"ارتفاع میدان ورودی (در خطوط)\" را لغو می کند.",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "دسته تغییر اندازه (یا گرفتن) در گوشه ظاهر می شود و می تواند برای تغییر اندازه میدان ورودی کشیده شود.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه تشکر از شما پیش می رود.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "گزینه \"وراثت\" یک تنظیم در سطح نظرسنجی را اعمال می کند (به طور پیش فرض \"Enabled\").",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "یک فاصله زمانی در ثانیه که پس از آن نظرسنجی به طور خودکار به صفحه \"متشکرم\" پیش می رود. وقتی روی 0 تنظیم می شود، زمان صرف شده برای نظرسنجی را می شمارد.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "یک فاصله زمانی در ثانیه که پس از آن نظرسنجی به طور خودکار به صفحه بعدی پیش می رود. دکمه پیمایش \"قبلی\" را پنهان می کند. وقتی روی 0 تنظیم شود، زمان صرف شده در صفحه فعلی را می شمارد.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "این گزینه را فعال کنید تا زمانی که کاربر روی یک فیلد ورودی خالی تمرکز می کند و سپس بدون ایجاد هیچ تغییری آن را ترک می کند، اعتبارسنجی را فعال کنید.",
     page: {
@@ -2984,8 +2984,8 @@ export var persianStrings = {
     maxWidth: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "اگر این ویژگی را تنظیم نکنید، پاسخ در زمینه ای که توسط ویژگی Name مشخص شده است ذخیره می شود.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "شناسه join یک کلید سفارشی است که می توانید به چندین سؤال اختصاص دهید تا آن ها را به هم پیوند دهید و مقادیر آن ها را همگام سازی کنید. این مقادیر در یک آرایه یا شی ادغام می شوند و با استفاده از کلید به عنوان نام ویژگی در نتایج نظرسنجی ذخیره می شوند.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "مقداری که در سؤالات HTML و در عناوین پویا و توضیحات عناصر نظرسنجی زمانی که مقدار سوال خالی است، نمایش داده می شود.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var persianStrings = {
     valueTrue: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ مثبت می دهند.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ منفی می دهند.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "توصیه نمی شود این گزینه را غیرفعال کنید زیرا تصویر Preview را نادیده می گیرد و درک اینکه ایا فایل ها اپلود شده اند را برای کاربر دشوار می کند.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "توصیه نمی شود که این گزینه را غیرفعال کنید زیرا تصویر پیش نمایش را لغو می کند و درک اینکه آیا فایل ها آپلود شده اند یا خیر را برای کاربر دشوار می کند.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "یک اعلان برای تایید حذف پرونده ایجاد می کند.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var persianStrings = {
     dataList: "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "عرض ثابت را برای همه برچسب های مورد تنظیم می کند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد.",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند.",
@@ -3062,10 +3062,10 @@ export var persianStrings = {
     format: "از {0} به عنوان نگهدارنده برای ارزش واقعی استفاده کنید.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "برای اطلاعات بیشتر به [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description مراجعه کنید.",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "فقط برای انواع سلول های Radiogroup و Checkbox قابل اجرا است.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "برای اطلاعات بیشتر به شرح ویژگی [autocomplete] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) مراجعه کنید.",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. فقط برای ستون هایی اعمال می شود که \"نوع ورودی سلولی\" روی گروه دکمه های رادیویی یا کادرهای تأیید تنظیم شده است.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "نوع داده ای را که مرورگر کاربر می تواند بازیابی کند انتخاب کنید. این داده ها یا از مقادیر گذشته وارد شده توسط کاربر یا از مقادیر از پیش پیکربندی شده در صورت ذخیره توسط کاربر برای تکمیل خودکار تهیه می شوند.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,60 +3139,60 @@ export var persianStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "اجازه دادن به چند گزینش",
-    // [Auto-translated] "Show image captions"
-    showLabel: "نمایش زیرنویسهای تصویر",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "نمایش زیرنویس تصویر و ویدیو",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "تعویض سفارش بله و خیر",
     // [Auto-translated] "Value"
     value: "ارزش",
     // [Auto-translated] "Tab alignment"
     tabAlign: "ترازبندی زبانه",
-    // [Auto-translated] "Source type"
-    sourceType: "نوع منبع",
+    // [Auto-translated] "File source type"
+    sourceType: "نوع منبع فایل",
     // [Auto-translated] "Fit to container"
     fitToContainer: "مناسب برای ظرف",
     // [Auto-translated] "Set value expression"
     setValueExpression: "تنظیم عبارت مقدار",
     // "Description"
-    description: "توضیحات",
+    description: "توضیحات", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "لوگو مناسب است",
     // [Auto-translated] "Pages"
-    pages: "صفحات",
+    pages: "صفحات", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "سوالات",
+    questions: "سوالات", // Auto-generated string
     // "Triggers"
     triggers: "فعال سازی",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "مقادیر محاسبه شده",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "متغیرهای سفارشی",
     // [Auto-translated] "Survey id"
-    surveyId: "شناسه نظرسنجی",
+    surveyId: "شناسه نظرسنجی", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "شناسه نظرسنجی",
+    surveyPostId: "شناسه نظرسنجی", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "نظرسنجی نشان می دهد صرفه جویی در داده ها",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "توضیحات سوال محل",
+    surveyShowDataSaving: "نظرسنجی نشان می دهد صرفه جویی در داده ها", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "هم ترازی توضیحات سوال",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "نوع نوار پیشرفت",
-    // [Auto-translated] "Show TOC"
-    showTOC: "نمایش TOC",
-    // [Auto-translated] "Toc location"
-    tocLocation: "محل Toc",
+    progressBarType: "نوع نوار پیشرفت", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "نمایش فهرست مطالب (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "تراز TOC",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "الگوی عنوان سوال",
-    // [Auto-translated] "Width mode"
-    widthMode: "حالت عرض",
+    questionTitlePattern: "الگوی عنوان سوال", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "حالت عرض نظرسنجی",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "نمایش اطلاعات برند",
+    showBrandInfo: "نمایش اطلاعات برند", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "استفاده از مقادیر نمایش در متون پویا",
     // "Visible if"
-    visibleIf: "آشکار اگر",
+    visibleIf: "آشکار اگر", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "عبارت مقدار پیشفرض",
     // "Required if"
-    requiredIf: "اجبار اگر؟",
+    requiredIf: "اجبار اگر؟", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "بازنشانی مقدار اگر",
     // [Auto-translated] "Set value if"
@@ -3200,137 +3200,137 @@ export var persianStrings = {
     // "Validation rules"
     validators: "اعتبارسنج ها",
     // [Auto-translated] "Bindings"
-    bindings: "پیوندها",
+    bindings: "پیوندها", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Render به عنوان",
+    renderAs: "Render به عنوان", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "پیوست موارد اصلی",
+    attachOriginalItems: "پیوست موارد اصلی", // Auto-generated string
     // "Choices"
     choices: "گزینه ها",
     // "Choices by url"
-    choicesByUrl: "گزینه ها با لینک",
+    choicesByUrl: "گزینه ها با لینک", // Auto-generated string
     // "Currency"
-    currency: "ارز",
+    currency: "ارز", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "راهنمایی سلول",
+    cellHint: "راهنمایی سلول", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "مجموع رقم کسری بیشینه",
+    totalMaximumFractionDigits: "مجموع رقم کسری بیشینه", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "مجموع حداقل رقم کسری",
+    totalMinimumFractionDigits: "مجموع حداقل رقم کسری", // Auto-generated string
     // "Columns"
-    columns: "ستون ها",
+    columns: "ستون ها", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "عناصر جزئیات",
+    detailElements: "عناصر جزئیات", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "اجازه دادن به کنشهای انطباقی",
+    allowAdaptiveActions: "اجازه دادن به کنشهای انطباقی", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "مقدار پیش فرض سطر",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "مقدار پیش فرض سطر", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "گسترش خودکار جزئیات ردیف جدید",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "انتخاب بار تنبل فعال است",
+    choicesLazyLoadEnabled: "انتخاب بار تنبل فعال است", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "انتخاب تنبل بار اندازه صفحه",
+    choicesLazyLoadPageSize: "انتخاب تنبل بار اندازه صفحه", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "مؤلفه فیلد ورودی",
+    inputFieldComponent: "مؤلفه فیلد ورودی", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "مؤلفۀ مورد",
+    itemComponent: "مؤلفۀ مورد", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "دقیقه",
+    min: "دقیقه", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "حداکثر",
+    max: "حداکثر", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "بیان مقدار مین",
+    minValueExpression: "بیان مقدار مین", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "عبارت بیشینه مقدار",
+    maxValueExpression: "عبارت بیشینه مقدار", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "گام",
-    // [Auto-translated] "Data list"
-    dataList: "لیست داده ها",
+    step: "گام", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "موارد برای پیشنهاد خودکار",
     // "Input field width (in characters)"
     inputSize: "ابعاد مورد",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "عرض برچسب مورد (در پیکسل)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "عرض برچسب مورد",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "تراز مقدار ورودی",
     // [Auto-translated] "Elements"
-    elements: "عناصر",
+    elements: "عناصر", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "محتوای",
+    content: "محتوای", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "عنوان ناوش",
+    navigationTitle: "عنوان ناوش", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "توضیحات ناوبری",
+    navigationDescription: "توضیحات ناوبری", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "ضربه طولانی",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "رشد خودکار",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "اجازه دادن به تغییر اندازه",
+    longTap: "ضربه طولانی", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "فیلد ورودی را به صورت پویا گسترش دهید",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "دسته تغییر اندازه را فعال کنید",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "پذیرش بازگشت کالسکه",
+    acceptCarriageReturn: "پذیرش بازگشت کالسکه", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "حالت نمایش",
     // [Auto-translated] "Rate type"
-    rateType: "نوع نرخ",
+    rateType: "نوع نرخ", // Auto-generated string
     // "Label"
-    label: "برچسب",
+    label: "برچسب", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "حالت محتوا",
-    // [Auto-translated] "Image fit"
-    imageFit: "متناسب با تصویر",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "تناسب تصویر و تصویر کوچک",
     // [Auto-translated] "Alt text"
     altText: "متن دگرساز",
     // [Auto-translated] "Height"
-    height: "ارتفاع",
+    height: "ارتفاع", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "ارتفاع در گوشی های هوشمند",
     // [Auto-translated] "Pen color"
-    penColor: "رنگ قلم",
+    penColor: "رنگ قلم", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "رنگ پسزمینه",
     // [Auto-translated] "Template elements"
-    templateElements: "عناصر قالب",
+    templateElements: "عناصر قالب", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "اپراتور",
+    operator: "اپراتور", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "متغیر است",
+    isVariable: "متغیر است", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "اجرای عبارت",
+    runExpression: "اجرای عبارت", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "نمایش عنوان",
+    showCaption: "نمایش عنوان", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "نام شمایل",
+    iconName: "نام شمایل", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "اندازه شمایل",
+    iconSize: "اندازه شمایل", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "دقت",
+    precision: "دقت", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "ماتریکس منطقه دسته کشیدن",
+    matrixDragHandleArea: "ماتریکس منطقه دسته کشیدن", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "تصویر زمینه",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "مناسبسازی تصویر پسزمینه",
+    backgroundImageFit: "مناسبسازی تصویر پسزمینه", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "پیوست تصویر پسزمینه",
+    backgroundImageAttachment: "پیوست تصویر پسزمینه", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "تاری پسزمینه",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "انتخاب برای رتبه فعال",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "انتخاب برای رتبه بندی طرح مناطق",
+    backgroundOpacity: "تاری پسزمینه", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "اجازه رتبه ��ندی انتخابی",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "تراز منطقه رتبه بندی",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "متن برای نشان دادن اینکه ایا همه گزینهها انتخاب شدهاند",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "متن نگهدارنده برای منطقه رتبه بندی",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "اجازه دسترسی به دوربین",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "مقیاس حالت رنگ",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "نرخ حالت رنگ",
+    allowCameraAccess: "اجازه دسترسی به دوربین", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "حالت رنگ نماد رتبه بندی",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "طرح رنگ شکلک",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "رونوشت مقدار نمایش",
+    copyDisplayValue: "رونوشت مقدار نمایش", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "دهانه ستون",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var persianStrings = {
     "--sjs-secondary-background-500": "ثانویه",
     // [Auto-translated] "Surface"
     surfaceScale: "سطح",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "رابط کاربری",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "عناصر رابط کاربری",
     // [Auto-translated] "Font"
     fontScale: "فونت",
     names: {

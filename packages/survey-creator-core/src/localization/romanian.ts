@@ -512,7 +512,7 @@ export const roStrings = {
       // "reset value for question: {0}"
       question_resetValueText: "resetează valoarea pentru întrebarea: {0}", // {0} question name.
       // "assign value: {1} to question: {0}"
-      question_setValueText: "atribuiți valoarea: {1} întrebării: {0}",
+      question_setValueText: "atribuiți valoarea: {1} întrebării: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "face coloana {0} a întrebării {1} vizibilă", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -636,8 +636,8 @@ export const roStrings = {
       minWidth: "Lățimea minimă a panoului",
       // "Maximum panel width"
       maxWidth: "Lățimea maximă a panoului",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "Confirmă ștergerea panoului",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Confirmați eliminarea intrării",
       // "Entry description pattern"
       templateDescription: "Model de descriere a panoului",
       // "Entry title pattern"
@@ -763,11 +763,11 @@ export const roStrings = {
       readOnly: "Faceți chestionarul doar în citire"
     },
     page: {
-      // [Auto-translated] "A page ID that is not visible to respondents."
+      // [Auto-translated] "Page name"
       name: "Numele paginii",
       // "Page title"
       title: "Titlul paginii",
-      // [Auto-translated] "Type a page subtitle."
+      // [Auto-translated] "Page description"
       description: "Descrierea paginii",
       // "Make the page visible if"
       visibleIf: "Fă pagina vizibilă dacă",
@@ -1319,7 +1319,7 @@ export const roStrings = {
     surveyvalidator: {
       // "Error message"
       text: "Mesaj de eroare",
-      // [Auto-translated] "Use the magic wand icon to define when the question's value is considered valid."
+      // [Auto-translated] "Validation expression"
       expression: "Expresie de validare"
     },
     // "Total row header"
@@ -1459,9 +1459,9 @@ export const roStrings = {
       autoGenerate: "Configurarea etichetelor de scară",
       // [Auto-translated] "Slider type"
       sliderType: "Tip glisor",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Lungimea minimă a intervalului",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Lungimea maximă a intervalului",
       // [Auto-translated] "Custom labels"
       customLabels: "Etichete personalizate",
@@ -1590,14 +1590,14 @@ export const roStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Modul de previzualizare",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "Activarea aspectului grilei",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Coloane de aspect grilă",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "Activați aspectul grilei",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Coloane grilă",
     // [Auto-translated] "Mask settings"
     maskSettings: "Setările măștii",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Alinierea mesajelor de eroare de extindere a rândurilor",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Alinierea mesajelor de eroare cu detaliile rândului",
     // Creator tabs
     tabs: {
       panel: {
@@ -1690,7 +1690,7 @@ export const roStrings = {
       appearance: "Aspect",
       // [Auto-translated] "Accent colors"
       accentColors: "Culori de accent",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "Fundal de suprafață",
       // [Auto-translated] "Scaling"
       scaling: "Scalare",
@@ -1833,7 +1833,7 @@ export const roStrings = {
       // "Font"
       editorFont: "Font",
       // "Opacity"
-      backgroundOpacity: "Opacitate",
+      backgroundOpacity: "Opacitate", // Auto-generated string
       // "Survey font family"
       "--sjs-font-family": "Familia fontului chestionarului",
       // "Background color"
@@ -3154,45 +3154,45 @@ export const roStrings = {
     // "Set value expression"
     setValueExpression: "Setează expresia valorii",
     // "Description"
-    description: "Descriere",
+    description: "Descriere", // Auto-generated string
     // "Logo fit"
     logoFit: "Potrivirea logo-ului",
     // "Pages"
-    pages: "Pagini",
+    pages: "Pagini", // Auto-generated string
     // "Questions"
-    questions: "Întrebări",
+    questions: "Întrebări", // Auto-generated string
     // "Triggers"
     triggers: "Declanșatori",
     // "Custom variables"
     calculatedValues: "Variabile personalizate",
     // "Survey id"
-    surveyId: "ID-ul chestionarului",
+    surveyId: "ID-ul chestionarului", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "ID-ul postării chestionarului",
+    surveyPostId: "ID-ul postării chestionarului", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "Afișează salvarea datelor chestionarului",
+    surveyShowDataSaving: "Afișează salvarea datelor chestionarului", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Alinierea descrierii întrebării",
     // "Progress bar type"
-    progressBarType: "Tipul barei de progres",
+    progressBarType: "Tipul barei de progres", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "Arată tabelul de conținut (TOC)",
     // "TOC alignment"
     tocLocation: "Alinierea TOC",
     // "Question title pattern"
-    questionTitlePattern: "Modelul titlului întrebării",
+    questionTitlePattern: "Modelul titlului întrebării", // Auto-generated string
     // "Survey width mode"
     widthMode: "Modul de lățime al chestionarului",
     // "Show brand info"
-    showBrandInfo: "Arată informații despre marcă",
+    showBrandInfo: "Arată informații despre marcă", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Utilizați valorile afișate în textele dinamice",
     // "Visible if"
-    visibleIf: "Vizibil dacă",
+    visibleIf: "Vizibil dacă", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "Expresia valorii implicite",
     // "Required if"
-    requiredIf: "Necesar dacă",
+    requiredIf: "Necesar dacă", // Auto-generated string
     // "Reset value if"
     resetValueIf: "Resetați valoarea dacă",
     // "Set value if"
@@ -3200,51 +3200,51 @@ export const roStrings = {
     // "Validation rules"
     validators: "Reguli de validare",
     // "Bindings"
-    bindings: "Legături",
+    bindings: "Legături", // Auto-generated string
     // "Render as"
-    renderAs: "Renderizare ca",
+    renderAs: "Renderizare ca", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Atașați elementele originale",
+    attachOriginalItems: "Atașați elementele originale", // Auto-generated string
     // "Choices"
     choices: "Opțiuni",
     // "Choices by url"
-    choicesByUrl: "Opțiuni de la URL",
+    choicesByUrl: "Opțiuni de la URL", // Auto-generated string
     // "Currency"
-    currency: "Valută",
+    currency: "Valută", // Auto-generated string
     // "Cell hint"
-    cellHint: "Sugestie celulă",
+    cellHint: "Sugestie celulă", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Numărul maxim de zecimale totale",
+    totalMaximumFractionDigits: "Numărul maxim de zecimale totale", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Numărul minim de zecimale totale",
+    totalMinimumFractionDigits: "Numărul minim de zecimale totale", // Auto-generated string
     // "Columns"
-    columns: "Coloane",
+    columns: "Coloane", // Auto-generated string
     // "Detail elements"
-    detailElements: "Elemente detaliate",
+    detailElements: "Elemente detaliate", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "Permite acțiuni adaptive",
+    allowAdaptiveActions: "Permite acțiuni adaptive", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Valoarea implicită a rândului",
+    defaultRowValue: "Valoarea implicită a rândului", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Extinderea automată a detaliilor noului rând",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Încărcare întârziată activată pentru opțiuni",
+    choicesLazyLoadEnabled: "Încărcare întârziată activată pentru opțiuni", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Dimensiunea paginii pentru încărcarea întârziată a opțiunilor",
+    choicesLazyLoadPageSize: "Dimensiunea paginii pentru încărcarea întârziată a opțiunilor", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "Componenta câmpului de intrare",
+    inputFieldComponent: "Componenta câmpului de intrare", // Auto-generated string
     // "Item component"
-    itemComponent: "Componentă element",
+    itemComponent: "Componentă element", // Auto-generated string
     // "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "Expresia valorii minime",
+    minValueExpression: "Expresia valorii minime", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "Expresia valorii maxime",
+    maxValueExpression: "Expresia valorii maxime", // Auto-generated string
     // "Step"
-    step: "Pas",
+    step: "Pas", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "Elemente pentru sugestii automate",
     // "Input field width (in characters)"
@@ -3254,27 +3254,27 @@ export const roStrings = {
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Alinierea valorilor de intrare",
     // "Elements"
-    elements: "Elemente",
+    elements: "Elemente", // Auto-generated string
     // "Content"
-    content: "Conținut",
+    content: "Conținut", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "Titlul navigării",
+    navigationTitle: "Titlul navigării", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "Descrierea navigării",
+    navigationDescription: "Descrierea navigării", // Auto-generated string
     // "Long tap"
-    longTap: "Apăsare lungă",
+    longTap: "Apăsare lungă", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Extinderea dinamică a câmpului de intrare",
     // "Enable resize handle"
     allowResize: "Permite redimensionarea",
     // "Accept carriage return"
-    acceptCarriageReturn: "Acceptă întoarcerea la linie",
+    acceptCarriageReturn: "Acceptă întoarcerea la linie", // Auto-generated string
     // "Display mode"
     displayMode: "Mod de afișare",
     // "Rate type"
-    rateType: "Tip de evaluare",
+    rateType: "Tip de evaluare", // Auto-generated string
     // "Label"
-    label: "Etichetă",
+    label: "Etichetă", // Auto-generated string
     // "Content mode"
     contentMode: "Mod de conținut",
     // "Image and thumbnail fit"
@@ -3282,39 +3282,39 @@ export const roStrings = {
     // "Alt text"
     altText: "Text alternativ",
     // "Height"
-    height: "Înălțime",
+    height: "Înălțime", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Înălțimea pe smartphone-uri",
     // "Pen color"
-    penColor: "Culoarea stiloului",
+    penColor: "Culoarea stiloului", // Auto-generated string
     // "Background color"
     backgroundColor: "Culoarea fundalului",
     // "Template elements"
-    templateElements: "Elemente template",
+    templateElements: "Elemente template", // Auto-generated string
     // "Operator"
-    operator: "Operator",
+    operator: "Operator", // Auto-generated string
     // "Is variable"
-    isVariable: "Este variabil",
+    isVariable: "Este variabil", // Auto-generated string
     // "Run expression"
-    runExpression: "Rulează expresia",
+    runExpression: "Rulează expresia", // Auto-generated string
     // "Show caption"
-    showCaption: "Arată subtitlul",
+    showCaption: "Arată subtitlul", // Auto-generated string
     // "Icon name"
-    iconName: "Nume pictogramă",
+    iconName: "Nume pictogramă", // Auto-generated string
     // "Icon size"
-    iconSize: "Dimensiunea pictogramei",
+    iconSize: "Dimensiunea pictogramei", // Auto-generated string
     // "Precision"
-    precision: "Precizie",
+    precision: "Precizie", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "Zona de manipulare a matricei",
+    matrixDragHandleArea: "Zona de manipulare a matricei", // Auto-generated string
     // "Background image"
     backgroundImage: "Imagine de fundal",
     // "Background image fit"
-    backgroundImageFit: "Potrivirea imaginii de fundal",
+    backgroundImageFit: "Potrivirea imaginii de fundal", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "Atașament imagine de fundal",
+    backgroundImageAttachment: "Atașament imagine de fundal", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "Opacitatea fundalului",
+    backgroundOpacity: "Opacitatea fundalului", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "Permite clasificarea selectivă",
     // "Ranking area alignment"
@@ -3324,13 +3324,13 @@ export const roStrings = {
     // "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Textul substitut pentru zona de clasificare",
     // "Allow camera access"
-    allowCameraAccess: "Permite accesul la cameră",
+    allowCameraAccess: "Permite accesul la cameră", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "Modul de culoare al pictogramei de evaluare",
     // "Smileys color scheme"
     rateColorMode: "Schema de culori a pictogramelor Smileys",
     // "Copy display value"
-    copyDisplayValue: "Copiază valoarea afișată",
+    copyDisplayValue: "Copiază valoarea afișată", // Auto-generated string
     // "Column span"
     effectiveColSpan: "Span de coloană eficient",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export const roStrings = {
     "--sjs-secondary-background-500": "Secundar",
     // [Auto-translated] "Surface"
     surfaceScale: "Suprafață",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Interfață cu utilizatorul",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Elemente de interfață",
     // [Auto-translated] "Font"
     fontScale: "Font",
     names: {

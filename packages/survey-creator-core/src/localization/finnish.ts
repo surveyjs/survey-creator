@@ -120,11 +120,11 @@ export var fiStrings = {
     settingsTooltip: "Avaa kyselyn asetukset",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Kyselyn asetukset",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "Kyselyn asetukset",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Teeman asetukset",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Teeman asetukset",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Luontiasetukset",
@@ -427,16 +427,16 @@ export var fiStrings = {
       logicPlaceholderDescriptionMobile: "Luo sääntö kyselyn kulun mukauttamista varten.",
       // "Show/hide page"
       page_visibilityName: "Sivun näkyvyys",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Ota käyttöön (poista käytöstä) sivu",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Ota sivu käyttöön/poista se käytöstä",
       // [Auto-translated] "Make page required"
       page_requireName: "Tee sivusta pakollinen",
       // "Show/hide panel"
       panel_visibilityName: "Paneelin näkyvyys",
       // "Enable/disable panel"
       panel_enableName: "Paneeli käytössä/Ei käytössä",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Tee sivusta pakollinen",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Tee paneelista pakollinen",
       // "Show/hide question"
       question_visibilityName: "Kysymyksen näkyvyys",
       // "Enable/disable question"
@@ -447,10 +447,10 @@ export var fiStrings = {
       question_resetValueName: "Palauta kysymyksen arvo",
       // [Auto-translated] "Set question value"
       question_setValueName: "Aseta kysymyksen arvo",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Näytä (piilota) -sarake",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Ota käyttöön (poista käytöstä) sarake",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Sarakkeen näyttäminen/piilottaminen",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Ota sarake käyttöön/poista se käytöstä",
       // [Auto-translated] "Make column required"
       column_requireName: "Tee sarakkeesta pakollinen",
       // [Auto-translated] "Reset column value"
@@ -512,7 +512,7 @@ export var fiStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Nollaa kysymyksen arvo: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Määritä arvo: {1} kysymykseen: {0}",
+      question_setValueText: "Määritä arvo: {1} kysymykseen: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var fiStrings = {
       column_resetValueText: "Palauta sarakkeen soluarvo: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Määritä solun arvo: {1} sarakkeeseen: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Lauseke, jonka tulos määritetään kohdekysymykselle.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Lauseke, jonka tulos määritetään kohdekysymykseen.",
       // "survey becomes completed"
       trigger_completeText: "Kyselystä tulee täytetty",
       // "set into question: {0} value {1}"
@@ -590,25 +590,25 @@ export var fiStrings = {
       requiredIf: "Tee paneeli pakolliseksi, jos",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Kysymysjärjestys paneelissa",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Pääsivu",
+      // [Auto-translated] "Move the panel to page"
+      page: "Siirrä paneeli sivulle",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Näytä paneeli uudella rivillä",
-      // [Auto-translated] "Panel expand state"
-      state: "Paneelin tiivistystila",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Tekstiin sidotun paneelin leveys",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Paneelin kutistustila",
+      // [Auto-translated] "Inline panel width"
+      width: "Sidotun paneelin leveys",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Paneelin vähimmäisleveys",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Paneelin enimmäisleveys",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "Numeroi tämä paneeli"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Tehollinen leveys, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Kysymyksen otsikon leveys, px"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export var fiStrings = {
       minWidth: "Paneelin vähimmäisleveys",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Paneelin enimmäisleveys",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Vahvista paneelin poisto",
-      // [Auto-translated] "Description template"
-      templateDescription: "Paneelin kuvauskuvio",
-      // [Auto-translated] "Title template"
-      templateTitle: "Paneelin otsikkomalli",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "Tyhjä paneelin teksti",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Vahvista merkinnän poisto",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Merkinnän kuvausmalli",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Merkinnän otsikon malli",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "Tyhjä paneeliteksti",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Välilehden otsikkomalli",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Välilehden otsikon paikkamerkki",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Tee yksittäinen paneeli näkyväksi, jos",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Tee yksittäinen merkintä näkyväksi, jos",
       // [Auto-translated] "Number the panel"
       showNumber: "Paneelin numerointi",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Paneelin otsikon tasaus",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Paneelin kuvauksen tasaus",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "Kysymyksen otsikon tasaus",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Kysymyksen otsikon leveys",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Virhesanoman tasaus",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Uusi paneelin sijainti",
-      // [Auto-translated] "Show progress bar"
-      showRangeInProgress: "Edistymispalkin näyttäminen",
-      // [Auto-translated] "Key column"
-      keyName: "Päällekkäisten vastausten estäminen seuraavassa kysymyksessä"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Uusi sisääntulopaikka",
+      // [Auto-translated] "Show the progress bar"
+      showRangeInProgress: "Näytä edistymispalkki",
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "Estä päällekkäiset vastaukset seuraavassa kysymyksessä"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var fiStrings = {
       visibleIf: "Tee kysymys näkyväksi, jos",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Tee kysymys pakolliseksi, jos",
-      // [Auto-translated] "Parent page"
-      page: "Pääsivu",
+      // [Auto-translated] "Move the question to page"
+      page: "Siirrä kysymys sivulle",
       // [Auto-translated] "Question box collapse state"
       state: "Kysymysruudun tiivistystila",
       // [Auto-translated] "Number this question"
@@ -694,36 +694,36 @@ export var fiStrings = {
       descriptionLocation: "Kysymyksen kuvauksen tasaus",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Virhesanoman tasaus",
-      // [Auto-translated] "Add indents"
-      indent: "Suurentaa sisintä sisennystä",
+      // [Auto-translated] "Increase the inner indent"
+      indent: "Suurenna sisemmän sisennyksen",
       // [Auto-translated] "Inline question width"
       width: "Tekstiin sitoutuvan kysymyksen leveys",
       // [Auto-translated] "Minimum question width"
       minWidth: "Kysymyksen vähimmäisleveys",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Kysymyksen enimmäisleveys",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "Päivitä syöttökentän arvo"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "Allekirjoitusalueen leveys",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "Allekirjoitusalueen korkeus",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Allekirjoitusalueen automaattinen skaalaus",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Paikkamerkin näyttäminen",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Paikkamerkin näyttäminen allekirjoitusalueella",
       // [Auto-translated] "Placeholder text"
       placeholder: "Paikkamerkkiteksti",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Paikkamerkkiteksti vain luku -tilassa tai esikatselutilassa",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "Näytä Tyhjennä-painike allekirjoitusalueella",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Kynän vähimmäisleveys",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Kynän enimmäisleveys",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "Tyhjennä-painikkeen näyttäminen allekirjoitusalueella",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Viivan vähimmäisleveys",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Viivan enimmäisleveys",
       // [Auto-translated] "Stroke color"
       penColor: "Kynän väri"
     },
@@ -755,17 +755,17 @@ export var fiStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
+      // [Auto-translated] "Survey title"
       title: "Kyselyn otsikko",
       // [Auto-translated] "Survey description"
       description: "Kyselyn kuvaus",
-      // [Auto-translated] "Read-only"
-      readOnly: "Tee kyselystä vain luku -muotoinen"
+      // [Auto-translated] "Make the survey read-only"
+      readOnly: "Kyselyn tekeminen vain luku -muotoiseksi"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Sivun nimi",
-      // [Auto-translated] "Title"
+      // [Auto-translated] "Page title"
       title: "Sivun otsikko",
       // [Auto-translated] "Page description"
       description: "Sivun kuvaus",
@@ -773,8 +773,8 @@ export var fiStrings = {
       visibleIf: "Tee sivusta näkyvä, jos",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Tee sivusta pakollinen, jos",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Sivun viimeistelyn aikaraja (sekunteina)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Sivun valmistumisen aikaraja",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Kysymysjärjestys sivulla"
     },
@@ -852,7 +852,7 @@ export var fiStrings = {
     defaultDisplayValue: "Dynaamisten tekstien oletusnäyttöarvo",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Otsikon tasaus",
-    // [Auto-translated] "Input field size (in characters)"
+    // [Auto-translated] "Input field width (in characters)"
     size: "Syöttökentän leveys (merkkeinä)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Solun virhesanoman tasaus",
@@ -934,8 +934,8 @@ export var fiStrings = {
     fastEntryChoicesCountError: "Rajoita tuotteiden määrä {0} {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Anna vähintään {0} kohdetta",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Voit asettaa tiedot seuraavassa muodossa:\narvo1|teksti\narvo2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Kirjoita valintavaihtoehtojen luettelo ja niiden tunnukset seuraavassa muodossa:\n\nid|vaihtoehto\n\nValintavaihtoehdon tunnus ei näy vastaajille, ja sitä voidaan käyttää ehdollisissa säännöissä.",
     // "Form Entry"
     formEntry: "Lomakkeen pääsy",
     // "Test the service"
@@ -964,10 +964,10 @@ export var fiStrings = {
     assistantTitle: "Saatavilla olevat kysymykset:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Sarakkeita tai rivejä on oltava vähintään yksi",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Esikatsele vastauksia ennen kyselyn lähettämistä",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Asettaja ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Tarkista ennen lähettämistä",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Ehto ottaa käyttöön",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Nollata",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var fiStrings = {
     propertyNameIsIncorrect: "Älä käytä varattuja sanoja: \"kohde\", \"valinta\", \"paneeli\", \"rivi\".",
     // "You don't have any items yet"
     listIsEmpty: "Lisää uusi kohde",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Vaihtoehtoja ei ole vielä lisätty",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Sinulla ei ole vielä vaihtoehtoja",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Sinulla ei ole vielä sarakkeita",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var fiStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Sinulla ei ole vielä linkkejä",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Sinulla ei ole vielä sivuja",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Lisää vaihtoehto",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Lisää uusi valinta",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Lisää uusi sarake",
     // [Auto-translated] "Add new row"
@@ -1033,17 +1033,17 @@ export var fiStrings = {
     // "Path to data"
     path: "Polku",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "Verkkopalvelun URL-osoite",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Hae arvot seuraavasta JSON-kentästä"
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Hanki tallennettavaa arvoa seuraavasta ominaisuudesta"
     },
     // "Get value to display from the following property"
     titleName: "Otsikon nimi",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Hae kuvien URL-osoitteet seuraavasta JSON-kentästä",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Salli tyhjä vastaus",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Hae tiedostojen URL-osoitteet seuraavasta omaisuudesta",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Hyväksy tyhjä vastaus",
     // "Title"
     titlePlaceholder: "Syötä otsikko tähän",
     // "Survey Title"
@@ -1066,10 +1066,10 @@ export var fiStrings = {
     otherText: "Muu teksti",
     // "Enable the \"None\" option"
     showNoneItem: "Ei mitään",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Salli Kieltäydy vastaamasta -vaihtoehto",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Salli En tiedä -vaihtoehto",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Ota käyttöön \"Kieltäydy vastaamasta\" -vaihtoehto",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Ota käyttöön \"En tiedä\" -vaihtoehto",
     // "Rename the \"None\" option"
     noneText: "Ei mitään tekstiä",
     // "Enable the \"Select All\" option"
@@ -1186,8 +1186,8 @@ export var fiStrings = {
     gotoName: "Kysymys, johon kannattaa siirtyä",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Sääntö on virheellinen",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Sisällytä kyselyn tuloksiin",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Lisää kyselyn tuloksiin",
     // "Make the title and description visible"
     showTitle: "Näytä/piilota otsikko",
     // "Expand/collapse title"
@@ -1282,24 +1282,24 @@ export var fiStrings = {
     html: "Html",
     // [Auto-translated] "Answer"
     setValue: "Vastata",
-    // [Auto-translated] "Image format"
-    dataFormat: "Kuvan muoto",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Salli rivien lisääminen",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Salli rivien poistaminen",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Salli rivin siirtäminen ja pudottaminen",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Ei sovelleta, jos määrität kuvan tarkan leveyden tai korkeuden.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Kuvan vähimmäisleveys",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Kuvan enimmäisleveys",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Kuvan vähimmäiskorkeus",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Kuvan enimmäiskorkeus",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Tallennustilan muoto",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Ota rivien lisäys käyttöön",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Ota rivin poisto käyttöön",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Ota rivien uudelleenjärjestäminen käyttöön",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Ei koske, jos määrität tarkan näyttöalueen leveyden tai korkeuden.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Näyttöalueen vähimmäisleveys",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Näyttöalueen enimmäisleveys",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Näyttöalueen vähimmäiskorkeus",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Näyttöalueen enimmäiskorkeus",
     // "Minimum value"
     minValue: "Vähimmäisarvo",
     // "Maximum value"
@@ -1322,30 +1322,30 @@ export var fiStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Vahvistuksen lauseke"
     },
-    // [Auto-translated] "Total row text"
-    totalText: "Rivin teksti yhteensä",
-    // [Auto-translated] "Total type"
-    totalType: "Tyyppi yhteensä",
-    // [Auto-translated] "Total expression"
-    totalExpression: "Kokonaislauseke",
-    // [Auto-translated] "Total value display style"
-    totalDisplayStyle: "Kokonaisarvon näyttötyyli",
+    // [Auto-translated] "Total row header"
+    totalText: "Rivin otsikon kokonaissumma",
+    // [Auto-translated] "Aggregation method"
+    totalType: "Yhdistämismenetelmä",
+    // [Auto-translated] "Total value expression"
+    totalExpression: "Kokonaisarvon lauseke",
+    // [Auto-translated] "Total value display format"
+    totalDisplayStyle: "Kokonaisarvon näyttömuoto",
     // [Auto-translated] "Currency"
     totalCurrency: "Valuutta",
     // [Auto-translated] "Formatted string"
     totalFormat: "Muotoiltu merkkijono",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logo (URL-osoite tai base64-koodattu merkkijono)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Kyselyn rakenne",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Vastauksen enimmäispituus (merkkeinä)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Kommentin enimmäispituus (merkkeinä)",
+    // [Auto-translated] "Survey logo"
+    logo: "Kyselyn logo",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Kyselyn asettelu",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Vastauksen pituuden rajoittaminen",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Kommenttien pituuden rajoittaminen",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Kommenttialueen korkeus (riveinä)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "Laajenna kommenttialue tarvittaessa automaattisesti",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Laajenna tekstialueet automaattisesti",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Salli käyttäjien muuttaa tekstialueiden kokoa",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var fiStrings = {
     checkErrorsMode: "Suorita vahvistus",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Vahvista tyhjät kentät, kun kohdistus on kadonnut",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Siirry URL-osoitteeseen",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Dynaaminen URL-osoite",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Uudelleenohjaus ulkoiseen linkkiin lähettämisen jälkeen",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Dynaaminen ulkoinen linkki",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Merkintä, joka osoittaa, onko käyttäjä jo täyttänyt tämän kyselyn",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Kyselyn sivujen merkinnät suoritettu",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Dynaaminen kysely viimeistelee sivun merkinnät",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "\"Kiitos\"-sivun merkintä",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Dynaaminen \"Kiitos\"-sivun merkintä",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Merkintä, joka näkyy, kun kyselymalli latautuu",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var fiStrings = {
     allowClear: "Näytä Tyhjennä-painike",
     // [Auto-translated] "Search Mode"
     searchMode: "Hakutila",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Arvon näyttötyyli",
+    // [Auto-translated] "Display format"
+    displayStyle: "Näytön muoto",
     // [Auto-translated] "Formatted string"
     format: "Muotoiltu merkkijono",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var fiStrings = {
     minimumFractionDigits: "Murtolukujen vähimmäismäärä",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Näytä ryhmittelyerottimet",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Salli useita tiedostoja",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Esikatsele kuvia",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Ota käyttöön useiden tiedostojen lataus",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Esikatsele ladattuja kuvia",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Hyväksytyt tiedostotyypit",
-    // [Auto-translated] "Wait for the upload to complete"
-    waitForUpload: "Odota, että lataus on valmis",
+    // [Auto-translated] "Wait for upload to complete"
+    waitForUpload: "Odota latauksen valmistumista",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Vahvista tiedoston poistaminen",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Yksityiskohtapaneelin sijainti",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Rivin tietojen tasaus",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Rivien vähimmäismäärä",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var fiStrings = {
     confirmDelete: "Vahvista rivin poisto",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Vahvistussanoma",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Paneelien alkuperäinen määrä",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Paneelien vähimmäismäärä",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Paneelien enimmäismäärä",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Paneelin tila",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Edellinen paneeli-painikkeen teksti",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Seuraava paneeli-painikkeen teksti",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Poista paneelipainikkeen sijainti",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "Piilota kysymys, jos rivejä ei ole",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Alkuperäisten merkintöjen määrä",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Osallistumisten vähimmäismäärä",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Osallistumisten enimmäismäärä",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Alkuperäinen saapumistila",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "\"Edellinen merkintä\" -painikkeen teksti",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "\"Seuraava merkintä\" -painikkeen teksti",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "\"Poista merkintä\" -painikkeen kohdistus",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "Piilota kysymys, jos siinä ei ole rivejä",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Piilota sarakkeet, jos rivejä ei ole",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Muokatut vastausarvot",
-    // [Auto-translated] "Rate count"
-    rateCount: "Valintojen määrä",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Miten vastausvaihtoehtojen arvot määritetään?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Mukautetut luokitusarvot",
+    // [Auto-translated] "Rating count"
+    rateCount: "Luokitusten määrä",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Luokituksen määritys",
     slider: {
       // [Auto-translated] "Min value"
       min: "Minimiarvo",
@@ -1459,9 +1459,9 @@ export var fiStrings = {
       autoGenerate: "Skaalausotsikoiden määritys",
       // [Auto-translated] "Slider type"
       sliderType: "Liukusäätimen tyyppi",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Alueen vähimmäispituus",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Suurin kantaman pituus",
       // [Auto-translated] "Custom labels"
       customLabels: "Mukautetut tunnisteet",
@@ -1471,13 +1471,13 @@ export var fiStrings = {
       tooltipFormat: "Työkaluvihjeen muoto"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Kuvan korkeus",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Kuvan leveys"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Piilota kysymys, jos se ei sisällä vaihtoehtoja",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Piilota kysymys, jos sillä ei ole vaihtoehtoja",
     // "Minimum width"
     minWidth: "Vähimmäisleveys (CSS-hyväksyttyinä arvoina)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var fiStrings = {
     showHeader: "Näytä sarakeotsikot",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Näytä vaakasuora vierityspalkki",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Sarakkeen vähimmäisleveys (CSS-hyväksytyissä arvoissa)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Riviotsikon leveys (CSS-hyväksytyissä arvoissa)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Sarakkeen vähimmäisleveys",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Rivin otsikon leveys",
     // "Value to store when \"True\" is selected"
     valueTrue: "Tosi-arvo",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var fiStrings = {
     otherErrorText: "Tyhjä kommentti -virhesanoma",
     // "Error message for duplicate responses"
     keyDuplicationError: "Ei-yksilöllinen avainarvo -virhesanoma",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Valitut valinnat vähintään:",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Valittujen vaihtoehtojen enimmäismäärä",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Logon leveys (CSS-hyväksytyissä arvoissa)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Logon korkeus (CSS:n hyväksymissä arvoissa)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Valittavat vähimmäisvalinnat",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Valittavien valintojen enimmäismäärä",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Logon leveys",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Logon korkeus",
     // "Read-only"
     readOnly: "Vain luku -tilassa",
-    // [Auto-translated] "Editable if"
-    enableIf: "Muokattavissa, jos",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Poista vain luku -tila käytöstä, jos",
     // "\"No rows\" message"
     noRowsText: "Ei rivejä -viesti",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Erilliset erikoisvalinnat (Ei mitään, Muu, Valitse kaikki)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Erilliset erikoisvalinnat",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Kopioi valinnat seuraavasta kysymyksestä",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Mitkä vaihtoehdot kopioidaan?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Kopioitavat vaihtoehdot",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintatunnuksina",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",
-    // [Auto-translated] "Display page titles in progress bar"
-    progressBarShowPageTitles: "Sivujen otsikoiden näyttäminen edistymispalkissa",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
+    progressBarShowPageTitles: "Näytä sivujen otsikot edistymispalkissa",
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Sivunumeroiden näyttäminen edistymispalkissa",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Näytä kommenttialue",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Kommenttialueen paikkamerkki",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Näytä nopeuskuvaukset ääriarvoina",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Lisää kommenttiruutu",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Kommenttiruudun paikkamerkkiteksti",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Otsikoiden näyttäminen ääriarvoina",
     // [Auto-translated] "Row order"
     rowOrder: "Rivien järjestys",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var fiStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Esikatselu-tila",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "Ota ruudukkoasettelu käyttöön",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Ruudukkoasettelun sarakkeet",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "Ota ruudukon asettelu käyttöön",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Ruudukon sarakkeet",
     // [Auto-translated] "Mask settings"
     maskSettings: "Maskin asetukset",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Rivin laajennuksen virhesanoman tasaus",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Rivin tietojen virhesanoman tasaus",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var fiStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Syöttörajoitteen asetukset",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Asettelu",
+        // [Auto-translated] "Panel Layout"
+        panel: "Paneelin asettelu",
         // [Auto-translated] "Layout"
         question: "Asettelu",
         // [Auto-translated] "Layout"
@@ -1690,8 +1690,8 @@ export var fiStrings = {
       appearance: "Ulkonäkö",
       // [Auto-translated] "Accent colors"
       accentColors: "Korostusvärit",
-      // [Auto-translated] "Surface Background"
-      surfaceBackground: "Surfacen tausta",
+      // [Auto-translated] "Surface background"
+      surfaceBackground: "Pinnan tausta",
       // [Auto-translated] "Scaling"
       scaling: "Skaalaus",
       // "Others"
@@ -1701,16 +1701,16 @@ export var fiStrings = {
     editProperty: "Muokkaa ominaisuutta'{0}'",
     // "Items"
     items: "[ Kohteet: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Valinnat näkyvät, jos",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Valinnat ovat valittavissa, jos",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Sarakkeet ovat näkyvissä, jos",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Rivit ovat näkyvissä, jos",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Sisäisten sisennysten lisääminen",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Tee valinnat näkyviksi, jos",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Tee valinnoista valittavia, jos",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Tee sarakkeet näkyviksi, jos",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Tee rivit näkyviksi, jos",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Suurenna sisemmän sisennyksen",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Käytä viimeisimmän merkinnän arvoja oletuksena",
     // "Please enter a value."
@@ -1753,34 +1753,34 @@ export var fiStrings = {
     emptyExpressionPlaceHolder: "Kirjoita lauseke tähän...",
     // "No file chosen"
     noFile: "Tiedostoa ei ole valittuna",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Poista arvo, jos kysymys piilotetaan",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Arvo-ominaisuuden nimi",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Ota haku käyttöön",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Tyhjennä piilokysymysten arvot",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Tallenna arvot seuraavaan ominaisuuteen",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Ota haku käyttöön kirjoittaessasi",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Piilota valitut kohteet",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Sulkee valinnan jälkeisen avattavan valikon.",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Pystysuuntainen tasaus",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Vaihtoehtoiset rivit",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Sarakkeet ovat näkyvissä, jos",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Rivit ovat näkyvissä, jos",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Kommenttialueen paikkamerkki",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Tiedoston paikkamerkkiteksti",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Valokuvan paikkamerkkiteksti",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Tiedoston tai valokuvan paikkamerkkiteksti",
-    // [Auto-translated] "Rate type"
-    rateType: "Hinnan tyyppi",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Kutista avattava valikko valinnan yhteydessä",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Pystysuuntainen tasaus solujen sisällä",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Vaihtoehtoiset rivivärit",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Tee sarakkeet näkyviksi, jos",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Tee rivit näkyviksi, jos",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Kommenttiruudun paikkamerkkiteksti",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Paikallisen tiedoston paikkamerkkiteksti",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Kameran paikkamerkkiteksti",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Paikanvaraajateksti paikalliselle tiedostolle tai kameralle",
+    // [Auto-translated] "Rating icon"
+    rateType: "Rating-kuvake",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Esimerkki: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var fiStrings = {
       themeName: "Teema",
       // [Auto-translated] "Question appearance"
       isPanelless: "Kysymyksen ulkonäkö",
-      // [Auto-translated] "Input element"
-      editorPanel: "Taustan ja kulman säde",
-      // [Auto-translated] "Panel background and corner radius"
-      questionPanel: "Taustan ja kulman säde",
+      // [Auto-translated] "Background and corner radius"
+      editorPanel: "Tausta ja kulmasäde",
+      // [Auto-translated] "Background and corner radius"
+      questionPanel: "Tausta ja kulmasäde",
       // [Auto-translated] "Accent color"
       primaryColor: "Korostusväri",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Paneelin taustan peittävyys",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Taustan peittävyyden kyseenalaistaminen",
-      // [Auto-translated] "Font size"
-      fontSize: "Kirjasinkoko",
-      // [Auto-translated] "Scale"
-      scale: "Mittakaava",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Paneelin ja kysymyslaatikon peittävyys",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Syöttöelementin peittävyys",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Kyselyn fonttikoko",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Kyselyn mittakaavakerroin",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Kulman säde",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Edistynyt tila",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Otsikon fontti",
-      // [Auto-translated] "Page description font"
-      pageDescription: "Kuvauksen fontti",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Description font"
+      pageDescription: "Kuvaus fontti",
+      // [Auto-translated] "Title font"
       questionTitle: "Otsikon fontti",
-      // [Auto-translated] "Question description font"
-      questionDescription: "Kuvauksen fontti",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Description font"
+      questionDescription: "Kuvaus fontti",
+      // [Auto-translated] "Font"
       editorFont: "Fontti",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Läpikuultamattomuus",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Fonttiperhe",
+      backgroundOpacity: "Läpikuultamattomuus", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Kyselyn fonttiperhe",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Taustaväri",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Aksentti tausta",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Aksentti etualalla",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Virhesanomista",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Korosta taustavärejä",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Korosta etualan värejä",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Virheilmoituksen värit",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Varjo-tehosteet",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var fiStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Näkymä",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Logon sijainti",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Logon kohdistus",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Kyselyn otsikon fontti",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var fiStrings = {
       backgroundImageOpacity: "Läpikuultamattomuus",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Limittyä",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Logon sijainti",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Otsikon sijainti",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Kuvauksen sijainti"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Logon kohdistus",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Kyselyn otsikon tasaus",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Kyselyn kuvauksen tasaus"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var fiStrings = {
     "true": "tosi",
     // [Auto-translated] "false"
     "false": "epätosi",
-    // [Auto-translated] "Local files"
-    file: "Paikalliset tiedostot",
+    // [Auto-translated] "Local file"
+    file: "Paikallinen tiedosto",
     // [Auto-translated] "Camera"
     camera: "Kamera",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Paikalliset tiedostot tai kamera",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Paikallinen tiedosto tai kamera",
     // "Inherit"
     inherit: "Peri",
     // "Visible"
@@ -2016,7 +2016,7 @@ export var fiStrings = {
     onComplete: "Valmistuessa",
     // "When question gets hidden"
     onHidden: "Piilotettaessa",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
+    // [Auto-translated] "When question or its panel/page gets hidden"
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
@@ -2232,18 +2232,18 @@ export var fiStrings = {
     correctQuestions: "Oikeat vastaukset",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Valmiit sivut (painike Käyttöliittymä)",
-    // [Auto-translated] "Under the input"
-    underInput: "Tulon alla",
-    // [Auto-translated] "Under the title"
-    underTitle: "Otsikon alla",
-    // [Auto-translated] "On blur"
-    onBlur: "Sumennuksessa",
+    // [Auto-translated] "Under the input field"
+    underInput: "Syöttökentän alla",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Kysymyksen otsikon alla",
+    // [Auto-translated] "On lost focus"
+    onBlur: "Keskittymisen menetyksestä",
     // [Auto-translated] "While typing"
     onTyping: "Kirjoittamisen aikana",
     // [Auto-translated] "Under the row"
     underRow: "Rivin alla",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Rivin alla näkyy vain yksi paneeli",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Näytä rivin alla vain yksi osio",
     // "Auto"
     auto: "Automaattinen",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var fiStrings = {
       combined: "Molemmat"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Riippuu matriisin asettelusta"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Matriisiasettelun perusteella"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Käyttäjät eivät voi laajentaa tai kutistaa paneeleja",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Kaikki paneelit on tiivistetty",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Kaikki paneelit on laajennettu",
+      // [Auto-translated] "Locked"
+      default: "Lukittu",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Kutista kaikki",
+      // [Auto-translated] "Expand all"
+      expanded: "Laajenna kaikki",
       // [Auto-translated] "First expanded"
       firstExpanded: "Ensimmäinen laajennettu"
     },
@@ -2303,8 +2303,8 @@ export var fiStrings = {
     autoGenerate: {
       // "Auto-generate"
       "true": "Luo automaattisesti",
-      // [Auto-translated] "Enter manually"
-      "false": "Kirjoita manuaalisesti"
+      // [Auto-translated] "Manual"
+      "false": "Manuaalinen"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,7 +2325,7 @@ export var fiStrings = {
       on: "Automaattinen numerointi",
       // [Auto-translated] "Reset on each page"
       onPage: "Nollaa jokaisella sivulla",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "Nollaa jokaisessa paneelissa",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Nollaa jokaisessa paneelissa",
@@ -2433,8 +2433,8 @@ export var fiStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Sama kuin kyselyssä",
-      // [Auto-translated] "Fit to container"
-      container: "Sovita säiliöön"
+      // [Auto-translated] "Same as container"
+      container: "Sama kuin kontti"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2608,7 +2608,7 @@ export var fiStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Paneelin tunnus, joka ei näy vastaajille.",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "Kirjoita paneelin tekstitys.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää paneelin näkyvyyden.",
@@ -2616,14 +2616,14 @@ export var fiStrings = {
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa paneelin vain luku -tilan käytöstä.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Koskee kaikkia tämän paneelin kysymyksiä. Jos haluat ohittaa tämän asetuksen, määritä otsikon tasaussäännöt yksittäisille kysymyksille. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Koskee kaikkia tämän paneelin kysymyksiä. Kun asetuksena on \"Piilotettu\", se piilottaa myös kysymysten kuvaukset. Jos haluat ohittaa tämän asetuksen, määritä otsikon tasaussäännöt yksittäisille kysymyksille. \"Peri\" -vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Top\" oletuksena). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Määrittää kysymysten otsikoiden tasaisen leveyden, kun ne tasataan kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Määrittää virhesanoman sijainnin suhteessa kaikkiin paneelin kysymyksiin. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. \"Peri\" -vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta.",
       // "Repositions the panel to the end of a selected page."
       page: "Siirtää paneelin valitun sivun loppuun.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var fiStrings = {
       startWithNewLine: "Poista valinta, jos haluat näyttää paneelin yhdellä rivillä edellisen kysymyksen tai paneelin kanssa. Asetusta ei käytetä, jos paneeli on lomakkeen ensimmäinen elementti.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Valitse seuraavista: \"Laajennettu\" - paneeli näytetään kokonaisuudessaan ja se voidaan kutistaa; \"Tiivistetty\" - paneeli näyttää vain otsikon ja kuvauksen ja sitä voidaan laajentaa; \"Lukittu\" - paneeli näkyy kokonaisuudessaan eikä sitä voi kutistaa.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Määrittää paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Määrittää numerot tässä paneelissa sisäkkäisille kysymyksille.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var fiStrings = {
       descriptionLocation: "\"Peri\" -vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Paneelin otsikon alla\" oletuksena).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Määrittää juuri lisätyn paneelin sijainnin. Oletuksena uudet paneelit lisätään loppuun. Valitse \"Seuraava\" lisätäksesi uuden paneelin nykyisen jälkeen.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Monistaa edellisen paneelin vastaukset ja määrittää ne seuraavaan lisättyyn dynaamiseen paneeliin.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Kopioi vastaukset viimeisestä merkinnästä ja liittää ne seuraavaan lisättyyn merkintään.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Käynnistää vahvistuskehotteen ennen paneelin poistamista."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Käynnistää vahvistuskehotteen ennen merkinnän poistamista."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var fiStrings = {
       imageHeight: "Ohittaa vähimmäis- ja enimmäiskorkeusarvot.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Ohittaa vähimmäis- ja enimmäisleveysarvot.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Arvo\" toimii ehdollisissa säännöissä käytettynä tuotetunnuksena; \"Teksti\" näkyy vastaajille.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Arvo\" toimii ehdollisissa säännöissä käytettävänä nimiketunnuksena; \"Teksti\" näytetään vastaajille.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Valitse \"Kuva\" tai \"Video\" asettaaksesi mediavalitsimen sisältötilan. Jos \"Kuva\" on valittuna, varmista, että kaikki annetut vaihtoehdot ovat kuvatiedostoja seuraavissa muodoissa: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Samoin, jos \"Video\" on valittuna, varmista, että kaikki vaihtoehdot ovat suoria linkkejä videotiedostoihin seuraavissa muodoissa: MP4, MOV, WMV, FLV, AVI, MKV. Huomaa, että YouTube-linkkejä ei tueta videoasetuksissa."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Tämä asetus muuttaa vain syöttökentän kokoa eikä vaikuta kysymysruudun leveyteen. Jos haluat rajoittaa hyväksyttyä syötteen pituutta, siirry kohtaan <b>Vahvistus → merkkien enimmäismäärä</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Tämä asetus muuttaa vain syöttökentän kokoa, eikä se vaikuta kysymysruudun leveyteen. Voit rajoittaa hyväksyttyä syötteen pituutta siirtymällä kohtaan \"Vahvistus\" → \"Merkkien enimmäisrajoitus\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "Määrittää syöttökentässä näytettävien rivien määrän. Jos tulo vie enemmän rivejä, vierityspalkki tulee näkyviin."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Määrittää syöttökentässä näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin."
     },
     // survey templates
     survey: {
@@ -2811,8 +2811,8 @@ export var fiStrings = {
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
-      colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, vaihtoehdot näkyvät yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin Sisäkkäisten sarakkeiden määrä -ominaisuudesta."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2848,8 +2848,8 @@ export var fiStrings = {
     caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Valitse seuraavista: \"Staattinen\" - asettaa kiinteän leveyden; \"Reagoiva\" - tekee kyselystä koko näytön leveyden; \"Auto\" - soveltaa jompaakumpaa näistä kahdesta riippuen käytetyistä kysymystyypeistä.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Evästeet estävät käyttäjiä täyttämästä samaa kyselyä kahdesti.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Määritä kyselyllesi yksilöllinen evästearvo. Eväste asetetaan vastaajan selaimeen kyselyn päätyttyä, jotta kyselyyn ei lähetetä toistuvia.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Liitä kuvalinkki (ei kokorajoituksia) tai napsauta kansiokuvaketta selataksesi tiedostoa tietokoneeltasi (enintään 64 kt).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var fiStrings = {
     autoAdvanceEnabled: "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Määrittää navigointipainikkeiden näkyvyyden sivulla.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Määrittää navigointipainikkeiden sijainnin sivulla.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var fiStrings = {
     maxTextLength: "Vain tekstinsyöttökysymykset.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Vain kysymysten kommentit.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Valitse tämä, jos haluat, että kysymysten kommentit ja pitkät tekstit -kysymykset kasvavat automaattisesti syötetyn tekstin pituuden perusteella.",
@@ -2908,8 +2908,8 @@ export var fiStrings = {
     columnMinWidth: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Näkyy vain, kun vähintään yhdessä sarakkeessa on Summa-tyyppi tai Summa-lauseke.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Näkyy vain, jos vähintään yhdessä sarakkeessa näkyvät kokonaisarvot, jotka on määritetty \"Koostemenetelmällä\" tai \"Kokonaisarvon lausekkeella\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Määrittää virhesanoman sijainnin suhteessa soluun, jonka syöte on virheellinen. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta.",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var fiStrings = {
     imageFit: "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Lisää vähitellen syöttökentän korkeutta, kun tietoja syötetään. Ohittaa \"Syöttökentän korkeus (viivoina)\" -asetuksen.",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Koonmuuttokahva (tai kahva) tulee näkyviin kulmaan, ja sitä vetämällä voit muuttaa syöttökentän kokoa.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Sekunteina oleva aikaväli, jonka jälkeen kysely etenee automaattisesti Kiitos-sivulle.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "\"Peri\" -vaihtoehto käyttää kyselytason asetusta (\"Käytössä\" oletuksena).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Aikaväli sekunteina, jonka jälkeen kysely siirtyy automaattisesti \"Kiitos\"-sivulle. Kun arvoksi on määritetty 0, laskee kyselyyn käytetyn ajan.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Aikaväli sekunteina, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle. Piilottaa \"Edellinen\"-navigointipainikkeen. Kun arvoksi on määritetty 0, laskee nykyisellä sivulla vietetyn ajan.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Ota tämä asetus käyttöön, jos haluat käynnistää vahvistuksen, kun käyttäjä keskittyy tyhjään syöttökenttään ja poistuu siitä tekemättä muutoksia.",
     page: {
@@ -2984,8 +2984,8 @@ export var fiStrings = {
     maxWidth: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Jos et määritä tätä ominaisuutta, vastaus tallennetaan Name-ominaisuuden määrittämään kenttään.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Liitostunniste on mukautettu avain, jonka voit määrittää useille kysymyksille linkittääksesi ne toisiinsa ja synkronoidaksesi niiden arvot. Nämä arvot yhdistetään yhdeksi taulukoksi tai objektiksi ja tallennetaan mittaustuloksiin käyttämällä avainta ominaisuuden nimenä.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Arvo, joka näkyy HTML-kysymyksissä ja kyselyn elementtien dynaamisissa otsikoissa ja kuvauksissa, kun kysymyksen arvo on tyhjä.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var fiStrings = {
     valueTrue: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat myönteisen vastauksen.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat kielteisen vastauksen.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Tätä asetusta ei suositella poistamaan käytöstä, koska se ohittaa esikatselukuvan ja vaikeuttaa käyttäjän ymmärtämistä, onko tiedostot ladattu.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Tätä asetusta ei suositella poistettavaksi käytöstä, koska se ohittaa esikatselukuvan ja vaikeuttaa käyttäjän ymmärtämistä, onko tiedostot ladattu.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Käynnistää kehotteen, jossa pyydetään vahvistamaan tiedoston poistaminen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,8 +3040,8 @@ export var fiStrings = {
     dataList: "Kirjoita luettelo vaihtoehdoista, joita vastaajalle ehdotetaan syötteen aikana.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Asetus muuttaa vain syöttökenttien kokoa eikä vaikuta kysymysruudun leveyteen.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
-    itemTitleWidth: "Määrittää yhdenmukaisen leveyden kaikille nimikeotsikoille. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
+    itemTitleWidth: "Määrittää yhtenäisen leveyden kaikille nimikkeiden otsikoille. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Valitse, miten syötteen arvo tasataan kenttään. Oletusasetus \"Auto\" kohdistaa syöttöarvon oikealle, jos valuuttaa tai numeerista peittoa käytetään, ja vasemmalle, jos ei.",
     // [Auto-translated] "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes."
@@ -3062,10 +3062,10 @@ export var fiStrings = {
     format: "Käytä {0} todellisen arvon paikkamerkkinä.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Katso lisätietoja määritteen [accept](https://www.w3schools.com/tags/att_input_accept.asp) kuvauksesta.",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Koskee vain radioryhmä- ja valintaruutusolutyyppejä.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Lisätietoja on [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) -määritteen kuvauksessa.",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, vaihtoehdot näkyvät yhdellä rivillä. Koskee vain sarakkeita, joiden Solusyötteen tyyppi -asetuksena on Valintanappiryhmä tai Valintaneliöt.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Valitse tietotyyppi, jonka käyttäjän selain voi noutaa. Nämä tiedot ovat peräisin joko käyttäjän syöttämistä aiemmista arvoista tai ennalta määritetyistä arvoista, jos käyttäjä on tallentanut sellaisia automaattista täydennystä varten.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,60 +3139,60 @@ export var fiStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Salli monivalinta",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Näytä kuvatekstit",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Näytä kuva- ja videotekstitykset",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Kyllä- ja Ei-järjestyksen vaihtaminen",
     // [Auto-translated] "Value"
     value: "Arvo",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Sarkaimen tasaus",
-    // [Auto-translated] "Source type"
-    sourceType: "Lähteen tyyppi",
+    // [Auto-translated] "File source type"
+    sourceType: "Tiedostolähteen tyyppi",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Sovita konttiin",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Arvolausekkeen määrittäminen",
     // "Description"
-    description: "Kuvaus",
+    description: "Kuvaus", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Logon sopivuus",
     // [Auto-translated] "Pages"
-    pages: "Sivut",
+    pages: "Sivut", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Kysymyksiä",
+    questions: "Kysymyksiä", // Auto-generated string
     // "Triggers"
     triggers: "Triggerit",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Lasketut arvot",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Mukautetut muuttujat",
     // [Auto-translated] "Survey id"
-    surveyId: "Kyselyn tunnus",
+    surveyId: "Kyselyn tunnus", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "Kyselyn viestin tunnus",
+    surveyPostId: "Kyselyn viestin tunnus", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Kysely näyttää tietojen tallennuksen",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Kysymyksen kuvauksen sijainti",
+    surveyShowDataSaving: "Kysely näyttää tietojen tallennuksen", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Kysymyksen kuvauksen kohdistus",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Edistymispalkin tyyppi",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Näytä sisällysluettelo",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Sisällysluettelon sijainti",
+    progressBarType: "Edistymispalkin tyyppi", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Näytä sisällysluettelo (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Sisällysluettelon kohdistus",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Kysymyksen otsikkomalli",
-    // [Auto-translated] "Width mode"
-    widthMode: "Leveys-tila",
+    questionTitlePattern: "Kysymyksen otsikkomalli", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Mittauksen leveystila",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Näytä brändin tiedot",
+    showBrandInfo: "Näytä brändin tiedot", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Näyttöarvojen käyttäminen dynaamisissa teksteissä",
     // "Visible if"
-    visibleIf: "Näkyvissä jos",
+    visibleIf: "Näkyvissä jos", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Oletusarvon lauseke",
     // "Required if"
-    requiredIf: "Vaadittu jos",
+    requiredIf: "Vaadittu jos", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Nollaa arvo, jos",
     // [Auto-translated] "Set value if"
@@ -3200,137 +3200,137 @@ export var fiStrings = {
     // "Validation rules"
     validators: "Validoijat",
     // [Auto-translated] "Bindings"
-    bindings: "Siteet",
+    bindings: "Siteet", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Hahmonna muodossa",
+    renderAs: "Hahmonna muodossa", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Alkuperäisten kohteiden liittäminen",
+    attachOriginalItems: "Alkuperäisten kohteiden liittäminen", // Auto-generated string
     // "Choices"
     choices: "Valinnat",
     // "Choices by url"
-    choicesByUrl: "Valintoja verkosta",
+    choicesByUrl: "Valintoja verkosta", // Auto-generated string
     // "Currency"
-    currency: "Valuutta",
+    currency: "Valuutta", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Solun vihje",
+    cellHint: "Solun vihje", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Murtolukujen enimmäismäärä yhteensä",
+    totalMaximumFractionDigits: "Murtolukujen enimmäismäärä yhteensä", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Murtolukujen vähimmäismäärä",
+    totalMinimumFractionDigits: "Murtolukujen vähimmäismäärä", // Auto-generated string
     // "Columns"
-    columns: "Sarakkeet",
+    columns: "Sarakkeet", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Yksityiskohtaiset elementit",
+    detailElements: "Yksityiskohtaiset elementit", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Salli mukautuvat toiminnot",
+    allowAdaptiveActions: "Salli mukautuvat toiminnot", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Rivin oletusarvo",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "Rivin oletusarvo", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Laajenna uuden rivin tiedot automaattisesti",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä",
+    choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
+    choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Syöttökentän komponentti",
+    inputFieldComponent: "Syöttökentän komponentti", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Kohteen osa",
+    itemComponent: "Kohteen osa", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min.",
+    min: "Min.", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Maks.",
+    max: "Maks.", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Pienin arvon lauseke",
+    minValueExpression: "Pienin arvon lauseke", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Enimmäisarvon lauseke",
+    maxValueExpression: "Enimmäisarvon lauseke", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Askel",
-    // [Auto-translated] "Data list"
-    dataList: "Tietoluettelo",
+    step: "Askel", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Kohteet automaattiseen ehdotukseen",
     // "Input field width (in characters)"
     inputSize: "Kohteen koko",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Kohteen otsikon leveys (px)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Nimikkeen etiketin leveys",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Syöttöarvon tasaus",
     // [Auto-translated] "Elements"
-    elements: "Elementit",
+    elements: "Elementit", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Sisältö",
+    content: "Sisältö", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Navigoinnin otsikko",
+    navigationTitle: "Navigoinnin otsikko", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Navigoinnin kuvaus",
+    navigationDescription: "Navigoinnin kuvaus", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Pitkä napautus",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Automaattinen kasvu",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Salli koon muuttaminen",
+    longTap: "Pitkä napautus", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Laajenna syöttökenttä dynaamisesti",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Ota koon muuttamiskahva käyttöön",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Hyväksy kursorin palautus",
+    acceptCarriageReturn: "Hyväksy kursorin palautus", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Näyttötila",
     // [Auto-translated] "Rate type"
-    rateType: "Hinnan tyyppi",
+    rateType: "Hinnan tyyppi", // Auto-generated string
     // "Label"
-    label: "Merkintä",
+    label: "Merkintä", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Sisältö-tila",
-    // [Auto-translated] "Image fit"
-    imageFit: "Kuva sopii",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Kuvan ja pikkukuvan sovitus",
     // [Auto-translated] "Alt text"
     altText: "Vaihtoehtoinen teksti",
     // [Auto-translated] "Height"
-    height: "Korkeus",
+    height: "Korkeus", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Korkeus älypuhelimissa",
     // [Auto-translated] "Pen color"
-    penColor: "Kynän väri",
+    penColor: "Kynän väri", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Taustaväri",
     // [Auto-translated] "Template elements"
-    templateElements: "Mallin elementit",
+    templateElements: "Mallin elementit", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Operaattori",
+    operator: "Operaattori", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "On vaihteleva",
+    isVariable: "On vaihteleva", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Suorita lauseke",
+    runExpression: "Suorita lauseke", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Näytä kuvateksti",
+    showCaption: "Näytä kuvateksti", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Kuvakkeen nimi",
+    iconName: "Kuvakkeen nimi", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Kuvakkeen koko",
+    iconSize: "Kuvakkeen koko", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Tarkkuus",
+    precision: "Tarkkuus", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Matriisin vetokahva-alue",
+    matrixDragHandleArea: "Matriisin vetokahva-alue", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Taustakuvan",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Taustakuvan sovitus",
+    backgroundImageFit: "Taustakuvan sovitus", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Taustakuvan liite",
+    backgroundImageAttachment: "Taustakuvan liite", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Taustan peittävyys",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Valitse sijoitus käytössä",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Valitse alueiden asettelu",
+    backgroundOpacity: "Taustan peittävyys", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Salli valikoiva sijoitus",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Sijoitusalueen linjaus",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Teksti, joka näyttää, onko kaikki asetukset valittu",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Sijoitusalueen paikkamerkkiteksti",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Salli kameran käyttö",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Skaalaa väriä -tila",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Arvioi väritila",
+    allowCameraAccess: "Salli kameran käyttö", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Luokituskuvakkeen väritila",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Hymiöiden värimaailma",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Kopioi näyttöarvo",
+    copyDisplayValue: "Kopioi näyttöarvo", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Sarakkeen jänneväli",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var fiStrings = {
     "--sjs-secondary-background-500": "Toissijainen",
     // [Auto-translated] "Surface"
     surfaceScale: "Pinta",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Käyttöliittymä",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Käyttöliittymän elementit",
     // [Auto-translated] "Font"
     fontScale: "Fontti",
     names: {

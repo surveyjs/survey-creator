@@ -120,12 +120,12 @@ export var nlStrings = {
     settingsTooltip: "Open enquête-instellingen",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Enquête-instellingen",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "Enquête instellingen",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Thema-instellingen",
-    // [Auto-translated] "Open theme settings"
-    themeSettingsTooltip: "Thema-instellingen",
+    // [Auto-translated] "Theme settings"
+    themeSettingsTooltip: "Thema instellingen",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Creator-instellingen",
     // "Show Panel"
@@ -427,16 +427,16 @@ export var nlStrings = {
       logicPlaceholderDescriptionMobile: "Maak een regel om de stroom van de enquête aan te passen.",
       // "Show/hide page"
       page_visibilityName: "Pagina zichtbaarheid",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Pagina inschakelen (uitschakelen)",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Pagina in-/uitschakelen",
       // [Auto-translated] "Make page required"
       page_requireName: "Pagina verplicht maken",
       // "Show/hide panel"
       panel_visibilityName: "Paneel zichtbaarheid",
       // "Enable/disable panel"
       panel_enableName: "Paneel inschakelen/uitschakelen",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Pagina verplicht maken",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Paneel verplicht maken",
       // "Show/hide question"
       question_visibilityName: "Vraag zichtbaarheid",
       // "Enable/disable question"
@@ -447,10 +447,10 @@ export var nlStrings = {
       question_resetValueName: "Vraagwaarde opnieuw instellen",
       // [Auto-translated] "Set question value"
       question_setValueName: "Vraagwaarde instellen",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Kolom weergeven (verbergen)",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Kolom Inschakelen (uitschakelen)",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Kolom Tonen/verbergen",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Kolom in-/uitschakelen",
       // [Auto-translated] "Make column required"
       column_requireName: "Kolom verplicht maken",
       // [Auto-translated] "Reset column value"
@@ -512,7 +512,7 @@ export var nlStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Resetwaarde voor vraag: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Waarde: {1} toewijzen aan vraag: {0}",
+      question_setValueText: "Waarde: {1} toewijzen aan vraag: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Kolom {0} van vraag {1} zichtbaar maken", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var nlStrings = {
       column_resetValueText: "Celwaarde voor kolom opnieuw instellen: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       // "survey becomes completed"
       trigger_completeText: "Enquête wordt voltooid",
       // "set into question: {0} value {1}"
@@ -590,26 +590,26 @@ export var nlStrings = {
       requiredIf: "Maak het paneel vereist als",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Volgorde van de vragen binnen het panel",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Bovenliggende pagina",
+      // [Auto-translated] "Move the panel to page"
+      page: "Het deelvenster naar pagina verplaatsen",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Het paneel op een nieuwe regel weergeven",
-      // [Auto-translated] "Panel expand state"
+      // [Auto-translated] "Panel collapse state"
       state: "Status van paneel samenvouwen",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Inline paneelbreedte",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Inline panel width"
+      width: "Breedte inline paneel",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Minimale paneelbreedte",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Maximale paneelbreedte",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "Nummer dit paneel"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Effectieve breedte, %",
-      // [Auto-translated] "Question title width"
-      questionTitleWidth: "Breedte vraagtitel, px"
+      // [Auto-translated] "Question title width, px"
+      questionTitleWidth: "Breedte van de vraagtitel, px"
     },
     paneldynamic: {
       // [Auto-translated] "Panel name"
@@ -636,38 +636,38 @@ export var nlStrings = {
       minWidth: "Minimale paneelbreedte",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Maximale paneelbreedte",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Het verwijderen van het deelvenster bevestigen",
-      // [Auto-translated] "Description template"
-      templateDescription: "Patroon van paneelbeschrijving",
-      // [Auto-translated] "Title template"
-      templateTitle: "Patroon voor paneeltitel",
-      // [Auto-translated] "Empty entries text"
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Bevestig de verwijdering van de invoer",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Patroon invoerbeschrijving",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Patroon voor de titel van het item",
+      // [Auto-translated] "Empty panel text"
       noEntriesText: "Lege paneeltekst",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Patroon voor tabbladtitel",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Tijdelijke aanduiding voor tabtitel",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Maak een afzonderlijk paneel zichtbaar als",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Maak een individuele invoer zichtbaar als",
       // [Auto-translated] "Number the panel"
       showNumber: "Nummer het paneel",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Uitlijning van paneeltitels",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Uitlijning van paneelbeschrijving",
-      // [Auto-translated] "Question title location"
-      templateQuestionTitleLocation: "Uitlijning van vraagtitels",
+      // [Auto-translated] "Question title alignment"
+      templateQuestionTitleLocation: "Uitlijning van vraagtitel",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Breedte van de vraagtitel",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Uitlijning van foutmeldingen",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Nieuwe paneellocatie",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Nieuwe ingangslocatie",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "De voortgangsbalk weergeven",
-      // [Auto-translated] "Key column"
-      keyName: "Voorkom dubbele antwoorden in de volgende vraag"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var nlStrings = {
       visibleIf: "Maak de vraag zichtbaar als",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Maak de vraag verplicht als",
-      // [Auto-translated] "Parent page"
-      page: "Bovenliggende pagina",
+      // [Auto-translated] "Move the question to page"
+      page: "Verplaats de vraag naar pagina",
       // [Auto-translated] "Question box collapse state"
       state: "Samenvouwen van vragenvak",
       // [Auto-translated] "Number this question"
@@ -694,8 +694,8 @@ export var nlStrings = {
       descriptionLocation: "Uitlijning van vraagbeschrijvingen",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Uitlijning van foutmeldingen",
-      // [Auto-translated] "Add indents"
-      indent: "Vergroot de binnenste inspringing",
+      // [Auto-translated] "Increase the inner indent"
+      indent: "Vergroot de binnenste inkeping",
       // [Auto-translated] "Inline question width"
       width: "Breedte inline vraag",
       // [Auto-translated] "Minimum question width"
@@ -706,24 +706,24 @@ export var nlStrings = {
       textUpdateMode: "Invoerveldwaarde bijwerken"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
-      signatureWidth: "Breedte van het handtekeninggebied",
-      // [Auto-translated] "Signature height"
-      signatureHeight: "Hoogte van het handtekeninggebied",
+      // [Auto-translated] "Signature area width"
+      signatureWidth: "Breedte van het signatuurgebied",
+      // [Auto-translated] "Signature area height"
+      signatureHeight: "Hoogte van het kenmerkende gebied",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Het handtekeninggebied automatisch schalen",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "De tijdelijke aanduiding weergeven",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Een tijdelijke aanduiding weergeven in het ondertekeningsgebied",
       // [Auto-translated] "Placeholder text"
       placeholder: "Tijdelijke aanduiding voor tekst",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Tijdelijke tekst in de modus Alleen-lezen of voorvertoning",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "De knop Wissen weergeven in het handtekeninggebied",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Minimale penbreedte",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Maximale breedte van het hok",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "Toon de knop Wissen in het handtekeninggebied",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Minimale lijndikte",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Maximale lijnbreedte",
       // [Auto-translated] "Stroke color"
       penColor: "Kleur van de lijn"
     },
@@ -755,26 +755,26 @@ export var nlStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Survey title"
+      title: "Titel van de enquête",
       // [Auto-translated] "Survey description"
       description: "Beschrijving van de enquête",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "De enquête alleen-lezen maken"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Paginanaam",
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Page title"
+      title: "Titel van de pagina",
       // [Auto-translated] "Page description"
       description: "Pagina beschrijving",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Maak de pagina zichtbaar als",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Maak de pagina vereist als",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Tijdslimiet om de pagina te voltooien (in seconden)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Tijdslimiet om de pagina te voltooien",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Volgorde van vragen op de pagina"
     },
@@ -852,7 +852,7 @@ export var nlStrings = {
     defaultDisplayValue: "Standaardweergavewaarde voor dynamische teksten",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Etiket uitlijnen",
-    // [Auto-translated] "Input field size (in characters)"
+    // [Auto-translated] "Input field width (in characters)"
     size: "Breedte invoerveld (in tekens)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Uitlijning van celfoutmeldingen",
@@ -934,8 +934,8 @@ export var nlStrings = {
     fastEntryChoicesCountError: "Beperk het aantal objecten van {0} tot {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Voer ten minste {0} objecten in",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "U kunt gegevens instellen in de volgende indeling:\nwaarde1|tekst\nwaarde2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Voer de lijst met keuzeopties en hun ID's in de volgende indeling in:\n\nid|optie\n\nEen keuzeoptie-id is niet zichtbaar voor respondenten en kan worden gebruikt in voorwaardelijke regels.",
     // "Form Entry"
     formEntry: "Formulierinvoer",
     // "Test the service"
@@ -966,8 +966,8 @@ export var nlStrings = {
     cellsEmptyRowsColumns: "Er moet minimaal één kolom of rij zijn",
     // "Review before submit"
     showPreviewBeforeComplete: "Voorbeeldweergave voor afronden",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Ingesteld door ",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Ingeschakeld door een voorwaarde",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Terugstellen",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var nlStrings = {
     propertyNameIsIncorrect: "Gebruik geen gereserveerde woorden: \"item\", \"keuze\", \"paneel\", \"rij\".",
     // "You don't have any items yet"
     listIsEmpty: "Voeg een nieuw item toe",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Er zijn nog geen keuzes toegevoegd",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Je hebt nog geen keuze",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Je hebt nog geen kolommen",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var nlStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Je hebt nog geen links",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Je hebt nog geen pagina's",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Een keuze toevoegen",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Nieuwe keuze toevoegen",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Nieuwe kolom toevoegen",
     // [Auto-translated] "Add new row"
@@ -1033,15 +1033,15 @@ export var nlStrings = {
     // "Path to data"
     path: "Pad",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "URL van de webservice",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Haal waarden op uit het volgende JSON-veld"
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Haal waarde op om op te slaan uit de volgende eigenschap"
     },
     // "Get value to display from the following property"
     titleName: "Titel",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Afbeeldings-URL's ophalen uit het volgende JSON-veld",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Bestands-URL's ophalen van de volgende eigenschap",
     // "Accept empty response"
     allowEmptyResponse: "Leeg respons toestaan",
     // "Title"
@@ -1066,10 +1066,10 @@ export var nlStrings = {
     otherText: "Titel 'Anders:'-optie",
     // "Enable the \"None\" option"
     showNoneItem: "De optie 'Geen' tonen",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "De optie Weigeren om te antwoorden toestaan",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "De optie 'Weet niet' toestaan",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Schakel de optie \"Weigeren te antwoorden\" in",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Schakel de optie \"Niet weten\" in",
     // "Rename the \"None\" option"
     noneText: "Titel 'Geen'-optie",
     // "Enable the \"Select All\" option"
@@ -1186,8 +1186,8 @@ export var nlStrings = {
     gotoName: "Vraag om naar over te slaan",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Regel is onjuist",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Opnemen in enquêteresultaten",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Toevoegen aan de enquêteresultaten",
     // "Make the title and description visible"
     showTitle: "Titel weergeven/verbergen",
     // "Expand/collapse title"
@@ -1282,24 +1282,24 @@ export var nlStrings = {
     html: "Html",
     // [Auto-translated] "Answer"
     setValue: "Antwoorden",
-    // [Auto-translated] "Image format"
-    dataFormat: "Beeldformaat",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Het toevoegen van rijen toestaan",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Het verwijderen van rijen toestaan",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Rij slepen en neerzetten toestaan",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Is niet van toepassing als u de exacte breedte of hoogte van de afbeelding opgeeft.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Minimale afbeeldingsbreedte",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Maximale afbeeldingsbreedte",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Minimale beeldhoogte",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Maximale beeldhoogte",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Opslag formaat",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Rij toevoegen inschakelen",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Rij verwijderen inschakelen",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Rij herschikken inschakelen",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Is niet van toepassing als u de exacte breedte of hoogte van het weergavegebied opgeeft.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Minimale breedte van het weergavegebied",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Maximale breedte van het weergavegebied",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Minimale hoogte van het weergavegebied",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Maximale hoogte van het weergavegebied",
     // "Minimum value"
     minValue: "Minimale waarde",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var nlStrings = {
     totalCurrency: "Totale valuta",
     // "Formatted string"
     totalFormat: "Totaal formaat",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logo (URL of base64-gecodeerde tekenreeks)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Structuur van de enquête",
+    // [Auto-translated] "Survey logo"
+    logo: "Enquête logo",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Enquête lay-out",
     // "Restrict answer length"
     maxTextLength: "Maximale tekstlengte",
     // "Restrict comment length"
     maxCommentLength: "Maximale tekstlengte optie 'Anders:'",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Hoogte commentaargebied (in lijnen)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "Commentaargebied indien nodig automatisch uitvouwen",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Tekstgebieden automatisch uitvouwen",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var nlStrings = {
     checkErrorsMode: "Validatie uitvoeren",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Lege velden valideren bij verloren focus",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Navigeer naar URL",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Dynamische URL",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Omleiden naar een externe link na indiening",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Dynamische externe link",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Markering om aan te geven of de gebruiker deze enquête al heeft ingevuld",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Paginaopmaak voor voltooide enquête",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Dynamische enquête volledige paginaopmaak",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "\"Bedankt\" pagina opmaak",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Dynamische opmaak van de pagina \"Bedankt\"",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Markeringen om weer te geven terwijl het enquêtemodel wordt geladen",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var nlStrings = {
     allowClear: "De knop Wissen weergeven",
     // [Auto-translated] "Search Mode"
     searchMode: "Zoekmodus",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Waarde weergavestijl",
+    // [Auto-translated] "Display format"
+    displayStyle: "Weergave formaat",
     // [Auto-translated] "Formatted string"
     format: "Opgemaakte tekenreeks",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var nlStrings = {
     minimumFractionDigits: "Minimale fractionele cijfers",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Scheidingstekens voor groeperingen weergeven",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Meerdere bestanden toestaan",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Afbeeldingen bekijken",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Uploaden van meerdere bestanden inschakelen",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Bekijk een voorbeeld van geüploade afbeeldingen",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Geaccepteerde bestandstypen",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Wacht tot het uploaden is voltooid",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Bevestig het verwijderen van bestanden",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Locatie van het detailpaneel",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Uitlijning van rijdetails",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Minimaal aantal rijen",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var nlStrings = {
     confirmDelete: "Rijverwijdering bevestigen",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Bevestigingsbericht",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Initiële paneeltelling",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Minimaal aantal panelen",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Maximaal aantal panelen",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Uitvouwstatus binnenpaneel",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Knopinfo vorige deelvensterknop",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "knopinfo voor het volgende deelvenster",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Locatie van de knop Deelvenster verwijderen",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "Verberg de vraag als er geen rijen zijn",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Initieel aantal inzendingen",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Minimum aantal inzendingen",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Maximaal aantal inzendingen",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Status van eerste binnenkomst",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Tekst van de knop \"Vorige invoer\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Tekst van de knop \"Volgende invoer\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Uitlijning van de knop \"Invoer verwijderen\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "Verberg de vraag als deze geen rijen heeft",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Kolommen verbergen als er geen rijen zijn",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Aangepaste tariefwaarden",
-    // [Auto-translated] "Rate count"
-    rateCount: "Aantal tarieven",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Hoe geef ik tariefwaarden op?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Aangepaste beoordelingswaarden",
+    // [Auto-translated] "Rating count"
+    rateCount: "Aantal beoordelingen",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Classificatie configuratie",
     slider: {
       // [Auto-translated] "Min value"
       min: "Minimale waarde",
@@ -1459,25 +1459,25 @@ export var nlStrings = {
       autoGenerate: "Configuratie van schaallabels",
       // [Auto-translated] "Slider type"
       sliderType: "Type schuifregelaar",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Min. bereik lengte",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Maximale bereiklengte",
       // [Auto-translated] "Custom labels"
       customLabels: "Aangepaste labels",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Etiket formaat",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Tooltip formaat"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Hoogte afbeelding",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Breedte afbeelding"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Verberg de vraag als deze geen keuzes bevat",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Verberg de vraag als er geen keuzes in zitten",
     // "Minimum width"
     minWidth: "Minimale breedte (in css-geaccepteerde waarden)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var nlStrings = {
     showHeader: "Kolomkoppen weergeven",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Horizontale schuifbalk weergeven",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Minimale kolombreedte (in css-geaccepteerde waarden)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Breedte van rijkoptekst (in css-geaccepteerde waarden)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Minimale kolombreedte",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Breedte van de koptekst",
     // "Value to store when \"True\" is selected"
     valueTrue: "Waarde 'Waar'",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var nlStrings = {
     otherErrorText: "Foutbericht 'Lege opmerking'",
     // "Error message for duplicate responses"
     keyDuplicationError: "Foutbericht 'Niet-unieke sleutelwaarde'",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Minimaal geselecteerde keuzes",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Maximum aantal geselecteerde keuzes",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Minimale keuzes om te selecteren",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Maximale keuze om te selecteren",
     // "Logo width"
     logoWidth: "Breedte logo",
     // "Logo height"
     logoHeight: "Hoogte logo",
     // "Read-only"
     readOnly: "Alleen-lezen",
-    // [Auto-translated] "Editable if"
-    enableIf: "Bewerkbaar als",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Schakel de alleen-lezen modus uit als",
     // "\"No rows\" message"
     noRowsText: "Bericht 'Geen rijen'",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Speciale keuzes afzonderlijk (Geen, Overig, Alles selecteren)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Aparte speciale keuzes",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Kopieer keuzes uit de volgende vraag",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Welke keuzes kopiëren?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Welke keuzeopties u wilt kopiëren",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Paginatitels weergeven in de voortgangsbalk",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Paginanummers weergeven in de voortgangsbalk",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Het opmerkingenveld weergeven",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Beschrijvingen van tarieven weergeven als extreme waarden",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Een opmerkingenveld toevoegen",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Tijdelijke tekst voor het opmerkingenvak",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "De labels weergeven als extreme waarden",
     // [Auto-translated] "Row order"
     rowOrder: "Rijvolgorde",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var nlStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Preview-modus",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "De rasterlay-out inschakelen",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Kolommen voor rasterlay-out",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "Rasterlay-out inschakelen",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Raster kolommen",
     // [Auto-translated] "Mask settings"
     maskSettings: "Masker-instellingen",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Uitlijning van foutmeldingen bij rijuitbreiding",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Uitlijning van foutberichten in rijen",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var nlStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Instellingen voor invoermasker",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Indeling",
+        // [Auto-translated] "Panel Layout"
+        panel: "Paneel lay-out",
         // [Auto-translated] "Layout"
         question: "Indeling",
         // [Auto-translated] "Layout"
@@ -1690,8 +1690,8 @@ export var nlStrings = {
       appearance: "Uiterlijk",
       // [Auto-translated] "Accent colors"
       accentColors: "Accent kleuren",
-      // [Auto-translated] "Surface Background"
-      surfaceBackground: "Oppervlakte Achtergrond",
+      // [Auto-translated] "Surface background"
+      surfaceBackground: "Oppervlakte achtergrond",
       // [Auto-translated] "Scaling"
       scaling: "Schalen",
       // "Others"
@@ -1701,16 +1701,16 @@ export var nlStrings = {
     editProperty: "Eigenschap '{0}' bewerken",
     // "Items"
     items: "Items",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Keuzes zijn zichtbaar als",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Keuzes kunnen worden geselecteerd als",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Kolommen zijn zichtbaar als",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Rijen zijn zichtbaar als",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Binnenste inspringingen toevoegen",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Maak keuzes zichtbaar als",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Maak keuzes selecteerbaar als",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Maak kolommen zichtbaar als",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Maak rijen zichtbaar als",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Vergroot de binnenste inkeping",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Gebruik antwoorden van de laatste invoer als standaard",
     // "Please enter a value."
@@ -1753,34 +1753,34 @@ export var nlStrings = {
     emptyExpressionPlaceHolder: "Typ hier expressie...",
     // "No file chosen"
     noFile: "Geen bestand gekozen",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Wis de waarde als de vraag verborgen wordt",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Naam van de eigenschap Value",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Zoeken inschakelen",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Waarden voor verborgen vragen wissen",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Sla waarden op in de volgende woning",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Zoeken terwijl u typt inschakelen",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Geselecteerde items verbergen",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Sluit de vervolgkeuzelijst na selectie",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Verticale uitlijning",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Alternatieve rijen",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Kolommen zijn zichtbaar als",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Rijen zijn zichtbaar als",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Plaatshouder tekst voor het invulveld",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Plaatshouder tekst voor bestanden",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Plaatshouder tekst voor foto's",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Plaatshouder tekst voor bestanden of foto's",
-    // [Auto-translated] "Rate type"
-    rateType: "Type tarief",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "De vervolgkeuzelijst samenvouwen bij selectie",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Verticale uitlijning binnen cellen",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Alternatieve rijkleuren",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Maak kolommen zichtbaar als",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Maak rijen zichtbaar als",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Tijdelijke tekst voor het opmerkingenvak",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Tijdelijke tekst voor lokaal bestand",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Tijdelijke tekst voor camera",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Tijdelijke tekst voor lokaal bestand of camera",
+    // [Auto-translated] "Rating icon"
+    rateType: "Beoordeling icoon",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Vb.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var nlStrings = {
       themeName: "Thema",
       // [Auto-translated] "Question appearance"
       isPanelless: "Weergave van de vraag",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "Achtergrond en hoekradius",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "Achtergrond en hoekradius",
       // [Auto-translated] "Accent color"
       primaryColor: "Accent kleur",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Dekking van de achtergrond van het deelvenster",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Ondoorzichtigheid van de achtergrond van de vraag",
-      // [Auto-translated] "Font size"
-      fontSize: "Tekengrootte",
-      // [Auto-translated] "Scale"
-      scale: "Schub",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Dekking van paneel en vraagbox",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Opaciteit van het invoerelement",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Lettergrootte van enquête",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Enquête schaalfactor",
       // [Auto-translated] "Corner radius"
       cornerRadius: "De straal van de hoek",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Geavanceerde modus",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Titel lettertype",
-      // [Auto-translated] "Page description font"
+      // [Auto-translated] "Description font"
       pageDescription: "Beschrijving lettertype",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Title font"
       questionTitle: "Titel lettertype",
-      // [Auto-translated] "Question description font"
+      // [Auto-translated] "Description font"
       questionDescription: "Beschrijving lettertype",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Font"
       editorFont: "Lettertype",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Dekking",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Lettertype familie",
+      backgroundOpacity: "Dekking", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Familie van enquêtelettertypen",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Achtergrondkleur",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "De achtergrond van het accent",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Accent voorgrond",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Foutberichten",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Accent achtergrondkleuren",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Accent voorgrondkleuren",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Foutmelding kleuren",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Schaduweffecten",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var nlStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Bekijken",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Positie van het logo",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Uitlijning van het logo",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Lettertype van de titel van de enquête",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var nlStrings = {
       backgroundImageOpacity: "Dekking",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Overlappen",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Positie van het logo",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Titel positie",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Beschrijving positie"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Uitlijning van het logo",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Uitlijning van de titel van de enquête",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Uitlijning van de enquêtebeschrijving"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var nlStrings = {
     "true": "waar",
     // [Auto-translated] "false"
     "false": "vals",
-    // [Auto-translated] "Local files"
-    file: "Lokale bestanden",
+    // [Auto-translated] "Local file"
+    file: "Lokaal bestand",
     // [Auto-translated] "Camera"
     camera: "Fototoestel",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Lokale bestanden of camera",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Lokaal bestand of camera",
     // "Inherit"
     inherit: "Erven",
     // "Visible"
@@ -2016,8 +2016,8 @@ export var nlStrings = {
     onComplete: "Bij afronden",
     // "When question gets hidden"
     onHidden: "Bij verbergen",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
-    onHiddenContainer: "Wanneer de vraag of het bijbehorende paneel/de bijbehorende pagina verborgen raakt",
+    // [Auto-translated] "When question or its panel/page gets hidden"
+    onHiddenContainer: "Wanneer de vraag of het paneel/de pagina ervan wordt verborgen",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
       none: "Nooit"
@@ -2242,8 +2242,8 @@ export var nlStrings = {
     onTyping: "Tijdens het typen",
     // [Auto-translated] "Under the row"
     underRow: "Onder de rij",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Onder de rij is slechts één paneel zichtbaar",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Geef onder de rij slechts één sectie weer",
     // "Auto"
     auto: "Auto",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var nlStrings = {
       combined: "Beide"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Afhankelijk van de matrixindeling"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Gebaseerd op matrixlay-out"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Gebruikers kunnen deelvensters niet uitvouwen of samenvouwen",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Alle panelen zijn samengevouwen",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Alle panelen zijn uitgebreid",
+      // [Auto-translated] "Locked"
+      default: "Op slot",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Alles samenvouwen",
+      // [Auto-translated] "Expand all"
+      expanded: "Alles uitvouwen",
       // [Auto-translated] "First expanded"
       firstExpanded: "Eerst uitgebreid"
     },
@@ -2301,10 +2301,10 @@ export var nlStrings = {
       colored: "Gekleurd"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Genereren",
-      // [Auto-translated] "Enter manually"
-      "false": "Handmatig invoeren"
+      // [Auto-translated] "Auto-generate"
+      "true": "Automatisch genereren",
+      // [Auto-translated] "Manual"
+      "false": "Handmatig"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,7 +2325,7 @@ export var nlStrings = {
       on: "Automatische nummering",
       // [Auto-translated] "Reset on each page"
       onPage: "Reset op elke pagina",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "Reset op elk paneel",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Reset op elk paneel",
@@ -2433,8 +2433,8 @@ export var nlStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Zelfde als enquête",
-      // [Auto-translated] "Fit to container"
-      container: "Aanpassen aan container"
+      // [Auto-translated] "Same as container"
+      container: "Zelfde als container"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2608,21 +2608,21 @@ export var nlStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Een panel-ID die niet zichtbaar is voor respondenten.",
-      // [Auto-translated] "Type a subtitle."
-      description: "Typ een ondertitel in het deelvenster.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "Typ een deelvenster ondertiteling.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de zichtbaarheid van het deelvenster bepaalt.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de alleen-lezen modus voor het deelvenster uitschakelt.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Geldt voor alle vragen in dit panel. Als het is ingesteld op \"Verborgen\", worden ook vraagbeschrijvingen verborgen. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Bovenaan\" standaard) toe. ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       // "Repositions the panel to the end of a selected page."
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
@@ -2632,8 +2632,8 @@ export var nlStrings = {
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Kies uit: \"Uitgevouwen\" - het paneel wordt volledig weergegeven en kan worden ingeklapt; \"Samengevouwen\" - het paneel toont alleen de titel en beschrijving en kan worden uitgevouwen; \"Vergrendeld\" - het paneel wordt volledig weergegeven en kan niet worden ingeklapt.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Hiermee stelt u de breedte van het deelvenster in verhouding tot andere meetelementen in dezelfde lijn. Accepteert CSS-waarden (px, %, %, in, pt, enz.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var nlStrings = {
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Dupliceert antwoorden van de laatste invoer en wijst ze toe aan de volgende toegevoegde invoer.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Activeert een bevestigingsprompt voordat een paneel wordt verwijderd."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,17 +2776,17 @@ export var nlStrings = {
       imageHeight: "Hiermee worden de minimum- en maximumhoogtewaarden overschreven.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Hiermee worden de waarden voor de minimum- en maximumbreedte overschreven.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt getoond aan respondenten.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt weergegeven aan respondenten.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Deze instelling wijzigt alleen de grootte van het invoerveld en heeft geen invloed op de breedte van het vraagvak. Als u de geaccepteerde invoerlengte wilt beperken, gaat u naar <b>Validatie → Maximale tekenlimiet</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Met deze instelling wordt alleen het formaat van het invoerveld gewijzigd en wordt de breedte van het vraagvak niet beïnvloed. Om de geaccepteerde invoerlengte te beperken, gaat u naar \"Validatie\" → \"Maximale tekenlimiet\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
       rows: "Hiermee stelt u het aantal weergegeven regels in het invoerveld in. Als de invoer meer regels in beslag neemt, verschijnt de schuifbalk."
     },
     // survey templates
@@ -2811,8 +2811,8 @@ export var nlStrings = {
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
-      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Wanneer deze instelling is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap 'Aantal geneste kolommen' van de bovenliggende matrix."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2848,8 +2848,8 @@ export var nlStrings = {
     caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Kies uit: \"Statisch\" - stelt een vaste breedte in; \"Responsief\" - zorgt ervoor dat de enquête de volledige breedte van het scherm in beslag neemt; \"Auto\" - past een van de twee toe, afhankelijk van de gebruikte vraagtypen.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Cookies voorkomen dat gebruikers dezelfde enquête twee keer invullen.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Wijs een unieke cookiewaarde toe aan uw enquête. De cookie wordt na voltooiing van de enquête in de browser van een respondent geplaatst om herhaling van de enquête te voorkomen.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Plak een afbeeldingslink (geen maximale grootte) of klik op het mappictogram om door een bestand vanaf uw computer te bladeren (maximaal 64 KB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var nlStrings = {
     autoAdvanceEnabled: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op een pagina in.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Hiermee stelt u de locatie van navigatieknoppen op een pagina in.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var nlStrings = {
     maxTextLength: "Alleen voor vragen over tekstinvoer.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Alleen voor opmerkingen over vragen.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. Als de invoer meer regels in beslag neemt, wordt de schuifbalk weergegeven.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte.",
@@ -2908,8 +2908,8 @@ export var nlStrings = {
     columnMinWidth: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Alleen zichtbaar als ten minste één kolom het type Totaal of de expressie Totaal heeft.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Alleen zichtbaar als ten minste één kolom de totale waarden weergeeft die zijn ingesteld met \"Aggregatiemethode\" of \"Totale waarde-expressie\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Hiermee stelt u de locatie van een foutbericht in ten opzichte van een cel met ongeldige invoer. Met de optie 'Overerven' wordt de instelling van de eigenschap 'Uitlijning van foutberichten' toegepast.",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var nlStrings = {
     imageFit: "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Verhoogt geleidelijk de hoogte van het invoerveld terwijl gegevens worden ingevoerd. Hiermee wordt de instelling \"Invoerveldhoogte (in lijnen)\" overschreven.",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "De formaatgreep (of greep) verschijnt in de hoek en kan worden gesleept om de grootte van het invoerveld te wijzigen.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de bedankpagina.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "De optie \"Overnemen\" past een instelling op enquêteniveau toe (\"Standaard ingeschakeld\").",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Een tijdsinterval in seconden, waarna de enquête automatisch naar de pagina 'Bedankt' gaat. Als deze instelling is ingesteld op 0, wordt de tijd geteld die aan de enquête is besteed.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Een tijdsinterval in seconden waarna de enquête automatisch naar de volgende pagina gaat. Verbergt de navigatieknop \"Vorige\". Indien ingesteld op 0, telt de tijd die op de huidige pagina is doorgebracht.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Schakel deze optie in om validatie te activeren wanneer een gebruiker zich richt op een leeg invoerveld en dit vervolgens verlaat zonder wijzigingen aan te brengen.",
     page: {
@@ -2984,8 +2984,8 @@ export var nlStrings = {
     maxWidth: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Als u deze eigenschap niet instelt, wordt het antwoord opgeslagen in een veld dat is opgegeven door de eigenschap Name.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Een join-ID is een aangepaste sleutel die u aan verschillende vragen kunt toewijzen om ze aan elkaar te koppelen en hun waarden te synchroniseren. Deze waarden worden samengevoegd tot één matrix of object en opgeslagen in enquêteresultaten met de sleutel als eigenschapsnaam.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Een waarde die wordt weergegeven in HTML-vragen en in de dynamische titels en beschrijvingen van enquête-elementen wanneer de vraagwaarde leeg is.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,7 +3030,7 @@ export var nlStrings = {
     valueTrue: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een positief antwoord geven.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een negatief antwoord geven.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Het wordt niet aanbevolen om deze optie uit te schakelen, omdat deze de voorbeeldafbeelding overschrijft en het voor een gebruiker moeilijk maakt om te begrijpen of de bestanden zijn geüpload.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Hiermee wordt een prompt geactiveerd waarin wordt gevraagd om het verwijderen van het bestand te bevestigen.",
@@ -3040,8 +3040,8 @@ export var nlStrings = {
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
-    itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.).",
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
+    itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, %, in, pt, enz.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is.",
     // [Auto-translated] "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes."
@@ -3062,10 +3062,10 @@ export var nlStrings = {
     format: "Gebruik {0} als tijdelijke aanduiding voor de werkelijke waarde.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Raadpleeg de beschrijving van het kenmerk [accepteren](https://www.w3schools.com/tags/att_input_accept.asp) voor meer informatie.",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Alleen van toepassing op de celtypen Radiogroep en selectievakje.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Raadpleeg de [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) kenmerkbeschrijving voor meer informatie.",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Is alleen van toepassing op kolommen waarvoor \"Type celinvoer\" is ingesteld op Keuzerondje, Groep of selectievakjes.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Selecteer het gegevenstype dat de browser van de gebruiker kan ophalen. Deze gegevens zijn afkomstig van waarden die in het verleden door de gebruiker zijn ingevoerd of van vooraf geconfigureerde waarden, indien van toepassing, die door de gebruiker zijn opgeslagen voor automatische aanvulling.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,60 +3139,60 @@ export var nlStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Meerdere selecties toestaan",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Afbeeldingsbijschriften weergeven",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Afbeeldings- en videobijschriften weergeven",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Verwissel de volgorde van Ja en Nee",
     // [Auto-translated] "Value"
     value: "Waarde",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Uitlijning van tabbladen",
-    // [Auto-translated] "Source type"
-    sourceType: "Type bron",
+    // [Auto-translated] "File source type"
+    sourceType: "Type bestandsbron",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Aanpassen aan container",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Expressie van ingestelde waarde",
     // "Description"
-    description: "Omschrijving",
+    description: "Omschrijving", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Logo past",
     // [Auto-translated] "Pages"
-    pages: "Bladzijden",
+    pages: "Bladzijden", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Vragen",
+    questions: "Vragen", // Auto-generated string
     // "Triggers"
     triggers: "Triggers",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Berekende waarden",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Aangepaste variabelen",
     // [Auto-translated] "Survey id"
-    surveyId: "Enquête-id",
+    surveyId: "Enquête-id", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "Enquête post-ID",
+    surveyPostId: "Enquête post-ID", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Enquête toont gegevensbesparing",
+    surveyShowDataSaving: "Enquête toont gegevensbesparing", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Plek vraagomschrijving",
     // "Progress bar type"
-    progressBarType: "Type voortgangsbalk",
-    // [Auto-translated] "Show TOC"
+    progressBarType: "Type voortgangsbalk", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
     showTOC: "Inhoudsopgave weergeven",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Toc locatie",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "TOC uitlijning",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Patroon van de vraagtitel",
-    // [Auto-translated] "Width mode"
-    widthMode: "Breedte-modus",
+    questionTitlePattern: "Patroon van de vraagtitel", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Modus voor enquêtebreedte",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Toon merkinformatie",
+    showBrandInfo: "Toon merkinformatie", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Waardes in titel gebruiken",
     // "Visible if"
-    visibleIf: "Zichtbaar als",
+    visibleIf: "Zichtbaar als", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Standaardwaarde-expressie",
     // "Required if"
-    requiredIf: "Vereist als",
+    requiredIf: "Vereist als", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Waarde opnieuw instellen als",
     // [Auto-translated] "Set value if"
@@ -3200,137 +3200,137 @@ export var nlStrings = {
     // "Validation rules"
     validators: "Validators",
     // [Auto-translated] "Bindings"
-    bindings: "Bindings",
+    bindings: "Bindings", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Renderen als",
+    renderAs: "Renderen als", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Voeg originele items toe",
+    attachOriginalItems: "Voeg originele items toe", // Auto-generated string
     // "Choices"
     choices: "Keuzes",
     // "Choices by url"
-    choicesByUrl: "Keuzes per url",
+    choicesByUrl: "Keuzes per url", // Auto-generated string
     // "Currency"
-    currency: "Valuta",
+    currency: "Valuta", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Hint voor cel",
+    cellHint: "Hint voor cel", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Totaal maximum fractiecijfers",
+    totalMaximumFractionDigits: "Totaal maximum fractiecijfers", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Totaal minimum breukcijfers",
+    totalMinimumFractionDigits: "Totaal minimum breukcijfers", // Auto-generated string
     // "Columns"
-    columns: "Kolommen",
+    columns: "Kolommen", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Detailelementen",
+    detailElements: "Detailelementen", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Adaptieve acties toestaan",
+    allowAdaptiveActions: "Adaptieve acties toestaan", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Standaard rijwaarde",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "Standaard rijwaarde", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Nieuwe rijdetails automatisch uitvouwen",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Keuzes lazy load ingeschakeld",
+    choicesLazyLoadEnabled: "Keuzes lazy load ingeschakeld", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Keuzes lui laad paginaformaat",
+    choicesLazyLoadPageSize: "Keuzes lui laad paginaformaat", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Component invoerveld",
+    inputFieldComponent: "Component invoerveld", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Onderdeel Item",
+    itemComponent: "Onderdeel Item", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Expressie van de min-waarde",
+    minValueExpression: "Expressie van de min-waarde", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Maximale waarde-expressie",
+    maxValueExpression: "Maximale waarde-expressie", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Stap",
-    // [Auto-translated] "Data list"
-    dataList: "Gegevenslijst",
+    step: "Stap", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Items voor automatische suggestie",
     // "Input field width (in characters)"
     inputSize: "Item grootte",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Breedte artikellabel (in px)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Breedte artikellabel",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Uitlijning van invoerwaarden",
     // [Auto-translated] "Elements"
-    elements: "Elementen",
+    elements: "Elementen", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Tevreden",
+    content: "Tevreden", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Titel navigatie",
+    navigationTitle: "Titel navigatie", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Navigatie beschrijving",
+    navigationDescription: "Navigatie beschrijving", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Lange tik",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Automatisch groeien",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Formaat wijzigen toestaan",
+    longTap: "Lange tik", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Invoerveld dynamisch uitbreiden",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Formaatgreep inschakelen",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Accepteer retour vervoer",
+    acceptCarriageReturn: "Accepteer retour vervoer", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Weergavemodus",
     // [Auto-translated] "Rate type"
-    rateType: "Type tarief",
+    rateType: "Type tarief", // Auto-generated string
     // "Label"
-    label: "Etiket",
+    label: "Etiket", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Inhoudsmodus",
-    // [Auto-translated] "Image fit"
-    imageFit: "Passend bij het beeld",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Afbeelding en miniatuur passen",
     // [Auto-translated] "Alt text"
     altText: "Alternatieve tekst",
     // [Auto-translated] "Height"
-    height: "Hoogte",
+    height: "Hoogte", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Hoogte op smartphones",
     // [Auto-translated] "Pen color"
-    penColor: "Kleur van de pen",
+    penColor: "Kleur van de pen", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Achtergrondkleur",
     // [Auto-translated] "Template elements"
-    templateElements: "Sjabloonelementen",
+    templateElements: "Sjabloonelementen", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Bediener",
+    operator: "Bediener", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Is variabel",
+    isVariable: "Is variabel", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Expressie uitvoeren",
+    runExpression: "Expressie uitvoeren", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Toon bijschrift",
+    showCaption: "Toon bijschrift", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Naam van pictogram",
+    iconName: "Naam van pictogram", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Pictogramgrootte",
+    iconSize: "Pictogramgrootte", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Precisie",
+    precision: "Precisie", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Matrix sleepgreep gebied",
+    matrixDragHandleArea: "Matrix sleepgreep gebied", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Achtergrondafbeelding",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Passend op de achtergrondafbeelding",
+    backgroundImageFit: "Passend op de achtergrondafbeelding", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Bijlage bij achtergrondafbeelding",
+    backgroundImageAttachment: "Bijlage bij achtergrondafbeelding", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Dekking op de achtergrond",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Selecteer om te rangschikken ingeschakeld",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Selecteer om de indeling van gebieden te rangschikken",
+    backgroundOpacity: "Dekking op de achtergrond", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Selectieve rangschikking toestaan",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Uitlijning van het rangschikkingsgebied",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Tekst om aan te geven of alle opties zijn geselecteerd",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Tijdelijke tekst voor het rangschikkingsgebied",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Toegang tot de camera toestaan",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Kleurmodus schalen",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Kleurmodus beoordelen",
+    allowCameraAccess: "Toegang tot de camera toestaan", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Classificatiepictogram kleurmodus",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Smileys kleurenschema",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Weergavewaarde kopiëren",
+    copyDisplayValue: "Weergavewaarde kopiëren", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolom spanwijdte",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var nlStrings = {
     "--sjs-secondary-background-500": "Secundair",
     // [Auto-translated] "Surface"
     surfaceScale: "Oppervlak",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Gebruikersinterface",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "UI-elementen",
     // [Auto-translated] "Font"
     fontScale: "Lettertype",
     names: {

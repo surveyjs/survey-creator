@@ -512,7 +512,7 @@ export var grStrings = {
       // "reset value for question: {0}"
       question_resetValueText: "επαναφορά τιμής για την ερώτηση: {0}", // {0} question name.
       // "assign value: {1} to question: {0}"
-      question_setValueText: "ορισμός τιμής: {1} στην ερώτηση: {0}",
+      question_setValueText: "ορισμός τιμής: {1} στην ερώτηση: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "κάνε τη στήλη {0} της ερώτησης {1} ορατή", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -636,8 +636,8 @@ export var grStrings = {
       minWidth: "Ελάχιστο πλάτος πλαισίου",
       // "Maximum panel width"
       maxWidth: "Μέγιστο πλάτος πλαισίου",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "Επιβεβαίωση διαγραφής πλαισίου",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Επιβεβαίωση κατάργησης καταχώρισης",
       // "Entry description pattern"
       templateDescription: "Πρότυπο περιγραφής πλαισίου",
       // "Entry title pattern"
@@ -1319,8 +1319,8 @@ export var grStrings = {
     surveyvalidator: {
       // "Error message"
       text: "Μήνυμα σφάλματος",
-      // [Auto-translated] "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Έκφραση επικύρωσης"
+      // [Auto-translated] "Validation expression"
+      expression: "Παράσταση επικύρωσης"
     },
     // "Total row header"
     totalText: "Επικεφαλίδα συνολικής σειράς",
@@ -1459,15 +1459,15 @@ export var grStrings = {
       autoGenerate: "Διαμόρφωση ετικετών κλίμακας",
       // [Auto-translated] "Slider type"
       sliderType: "Τύπος ρυθμιστικού",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Ελάχιστο μήκος εύρους",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Μέγιστο μήκος εύρους",
       // [Auto-translated] "Custom labels"
       customLabels: "Προσαρμοσμένες ετικέτες",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Μορφή ετικέτας",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Μορφή συμβουλής εργαλείου"
     },
     file: {
@@ -1833,7 +1833,7 @@ export var grStrings = {
       // "Font"
       editorFont: "Γραμματοσειρά επεξεργαστή",
       // "Opacity"
-      backgroundOpacity: "Διαφάνεια",
+      backgroundOpacity: "Διαφάνεια", // Auto-generated string
       // "Survey font family"
       "--sjs-font-family": "Γραμματοσειρά έρευνας",
       // "Background color"
@@ -3154,45 +3154,45 @@ export var grStrings = {
     // "Set value expression"
     setValueExpression: "Έκφραση καθορισμού τιμής",
     // "Description"
-    description: "Περιγραφή",
+    description: "Περιγραφή", // Auto-generated string
     // "Logo fit"
     logoFit: "Προσαρμογή λογότυπου",
     // "Pages"
-    pages: "Σελίδες",
+    pages: "Σελίδες", // Auto-generated string
     // "Questions"
-    questions: "Ερωτήσεις",
+    questions: "Ερωτήσεις", // Auto-generated string
     // "Triggers"
     triggers: "Ενεργοποιητές",
     // "Custom variables"
     calculatedValues: "Προσαρμοσμένες μεταβλητές",
     // "Survey id"
-    surveyId: "ID έρευνας",
+    surveyId: "ID έρευνας", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "ID ανάρτησης έρευνας",
+    surveyPostId: "ID ανάρτησης έρευνας", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "Εμφάνιση αποθήκευσης δεδομένων έρευνας",
+    surveyShowDataSaving: "Εμφάνιση αποθήκευσης δεδομένων έρευνας", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Στοίχιση περιγραφής ερώτησης",
     // "Progress bar type"
-    progressBarType: "Τύπος γραμμής προόδου",
+    progressBarType: "Τύπος γραμμής προόδου", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "Εμφάνιση πίνακα περιεχομένων (TOC)",
     // "TOC alignment"
     tocLocation: "Στοίχιση TOC",
     // "Question title pattern"
-    questionTitlePattern: "Πρότυπο τίτλου ερώτησης",
+    questionTitlePattern: "Πρότυπο τίτλου ερώτησης", // Auto-generated string
     // "Survey width mode"
     widthMode: "Λειτουργία πλάτους έρευνας",
     // "Show brand info"
-    showBrandInfo: "Εμφάνιση πληροφοριών μάρκας",
+    showBrandInfo: "Εμφάνιση πληροφοριών μάρκας", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Χρησιμοποιήστε τις τιμές εμφάνισης στα δυναμικά κείμενα",
     // "Visible if"
-    visibleIf: "Ορατό αν",
+    visibleIf: "Ορατό αν", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "Έκφραση προεπιλεγμένης τιμής",
     // "Required if"
-    requiredIf: "Απαιτείται αν",
+    requiredIf: "Απαιτείται αν", // Auto-generated string
     // "Reset value if"
     resetValueIf: "Επαναφορά τιμής αν",
     // "Set value if"
@@ -3200,51 +3200,51 @@ export var grStrings = {
     // "Validation rules"
     validators: "Κανόνες επικύρωσης",
     // "Bindings"
-    bindings: "Συνδέσεις",
+    bindings: "Συνδέσεις", // Auto-generated string
     // "Render as"
-    renderAs: "Απόδοση ως",
+    renderAs: "Απόδοση ως", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Επισύναψη αρχικών στοιχείων",
+    attachOriginalItems: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
     // "Choices"
     choices: "Επιλογές",
     // "Choices by url"
-    choicesByUrl: "Επιλογές μέσω url",
+    choicesByUrl: "Επιλογές μέσω url", // Auto-generated string
     // "Currency"
-    currency: "Νόμισμα",
+    currency: "Νόμισμα", // Auto-generated string
     // "Cell hint"
-    cellHint: "Υπόδειξη κελιού",
+    cellHint: "Υπόδειξη κελιού", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Μέγιστος αριθμός δεκαδικών ψηφίων",
+    totalMaximumFractionDigits: "Μέγιστος αριθμός δεκαδικών ψηφίων", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Ελάχιστος αριθμός δεκαδικών ψηφίων",
+    totalMinimumFractionDigits: "Ελάχιστος αριθμός δεκαδικών ψηφίων", // Auto-generated string
     // "Columns"
-    columns: "Στήλες",
+    columns: "Στήλες", // Auto-generated string
     // "Detail elements"
-    detailElements: "Στοιχεία λεπτομέρειας",
+    detailElements: "Στοιχεία λεπτομέρειας", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "Επιτρέψτε προσαρμοστικές ενέργειες",
+    allowAdaptiveActions: "Επιτρέψτε προσαρμοστικές ενέργειες", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Προεπιλεγμένη τιμή σειράς",
+    defaultRowValue: "Προεπιλεγμένη τιμή σειράς", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Αυτόματη ανάπτυξη λεπτομερειών νέας γραμμής",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Ενεργοποίηση φόρτωσης επιλογών με καθυστέρηση",
+    choicesLazyLoadEnabled: "Ενεργοποίηση φόρτωσης επιλογών με καθυστέρηση", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Μέγεθος σελίδας φόρτωσης επιλογών με καθυστέρηση",
+    choicesLazyLoadPageSize: "Μέγεθος σελίδας φόρτωσης επιλογών με καθυστέρηση", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "Συστατικό πεδίου εισαγωγής",
+    inputFieldComponent: "Συστατικό πεδίου εισαγωγής", // Auto-generated string
     // "Item component"
-    itemComponent: "Συστατικό στοιχείου",
+    itemComponent: "Συστατικό στοιχείου", // Auto-generated string
     // "Min"
-    min: "Ελάχιστο",
+    min: "Ελάχιστο", // Auto-generated string
     // "Max"
-    max: "Μέγιστο",
+    max: "Μέγιστο", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "Έκφραση ελάχιστης τιμής",
+    minValueExpression: "Έκφραση ελάχιστης τιμής", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "Έκφραση μέγιστης τιμής",
+    maxValueExpression: "Έκφραση μέγιστης τιμής", // Auto-generated string
     // "Step"
-    step: "Βήμα",
+    step: "Βήμα", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "Στοιχεία για αυτόματη πρόταση",
     // "Input field width (in characters)"
@@ -3254,27 +3254,27 @@ export var grStrings = {
     // "Input value alignment"
     inputTextAlignment: "Στοίχιση τιμής εισόδου",
     // "Elements"
-    elements: "Στοιχεία",
+    elements: "Στοιχεία", // Auto-generated string
     // "Content"
-    content: "Περιεχόμενο",
+    content: "Περιεχόμενο", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "Τίτλος πλοήγησης",
+    navigationTitle: "Τίτλος πλοήγησης", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "Περιγραφή πλοήγησης",
+    navigationDescription: "Περιγραφή πλοήγησης", // Auto-generated string
     // "Long tap"
-    longTap: "Παράταση πατήματος",
+    longTap: "Παράταση πατήματος", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Αυτόματη ανάπτυξη πεδίου εισαγωγής",
     // "Enable resize handle"
     allowResize: "Ενεργοποίηση χειριστηρίου αλλαγής μεγέθους",
     // "Accept carriage return"
-    acceptCarriageReturn: "Αποδοχή επιστροφής καροτσιού",
+    acceptCarriageReturn: "Αποδοχή επιστροφής καροτσιού", // Auto-generated string
     // "Display mode"
     displayMode: "Λειτουργία εμφάνισης",
     // "Rate type"
-    rateType: "Τύπος αξιολόγησης",
+    rateType: "Τύπος αξιολόγησης", // Auto-generated string
     // "Label"
-    label: "Ετικέτα",
+    label: "Ετικέτα", // Auto-generated string
     // "Content mode"
     contentMode: "Λειτουργία περιεχομένου",
     // "Image and thumbnail fit"
@@ -3282,39 +3282,39 @@ export var grStrings = {
     // "Alt text"
     altText: "Εναλλακτικό κείμενο",
     // "Height"
-    height: "Ύψος",
+    height: "Ύψος", // Auto-generated string
     // "Height on smartphones"
     mobileHeight: "Ύψος σε κινητά τηλέφωνα",
     // "Pen color"
-    penColor: "Χρώμα πένας",
+    penColor: "Χρώμα πένας", // Auto-generated string
     // "Background color"
     backgroundColor: "Χρώμα φόντου",
     // "Template elements"
-    templateElements: "Στοιχεία προτύπου",
+    templateElements: "Στοιχεία προτύπου", // Auto-generated string
     // "Operator"
-    operator: "Τελεστής",
+    operator: "Τελεστής", // Auto-generated string
     // "Is variable"
-    isVariable: "Είναι μεταβλητή",
+    isVariable: "Είναι μεταβλητή", // Auto-generated string
     // "Run expression"
-    runExpression: "Εκτέλεση έκφρασης",
+    runExpression: "Εκτέλεση έκφρασης", // Auto-generated string
     // "Show caption"
-    showCaption: "Εμφάνιση λεζάντας",
+    showCaption: "Εμφάνιση λεζάντας", // Auto-generated string
     // "Icon name"
-    iconName: "Όνομα εικονιδίου",
+    iconName: "Όνομα εικονιδίου", // Auto-generated string
     // "Icon size"
-    iconSize: "Μέγεθος εικονιδίου",
+    iconSize: "Μέγεθος εικονιδίου", // Auto-generated string
     // "Precision"
-    precision: "Ακρίβεια",
+    precision: "Ακρίβεια", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "Περιοχή χειριστηρίου μεταφοράς πίνακα",
+    matrixDragHandleArea: "Περιοχή χειριστηρίου μεταφοράς πίνακα", // Auto-generated string
     // "Background image"
     backgroundImage: "Εικόνα φόντου",
     // "Background image fit"
-    backgroundImageFit: "Προσαρμογή εικόνας φόντου",
+    backgroundImageFit: "Προσαρμογή εικόνας φόντου", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "Συνημμένο εικόνας φόντου",
+    backgroundImageAttachment: "Συνημμένο εικόνας φόντου", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "Διαφάνεια φόντου",
+    backgroundOpacity: "Διαφάνεια φόντου", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "Επιτρέψτε την επιλεκτική κατάταξη",
     // "Ranking area alignment"
@@ -3324,13 +3324,13 @@ export var grStrings = {
     // "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Κείμενο τοποθεσίας για την περιοχή κατάταξης",
     // "Allow camera access"
-    allowCameraAccess: "Επιτρέψτε την πρόσβαση στην κάμερα",
+    allowCameraAccess: "Επιτρέψτε την πρόσβαση στην κάμερα", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "Χρωματική κλίμακα για το εικονίδιο αξιολόγησης",
     // "Smileys color scheme"
     rateColorMode: "Χρωματική κλίμακα χαμογελαστών προσώπων",
     // "Copy display value"
-    copyDisplayValue: "Αντιγραφή τιμής εμφάνισης",
+    copyDisplayValue: "Αντιγραφή τιμής εμφάνισης", // Auto-generated string
     // "Column span"
     effectiveColSpan: "Εύρος στήλης",
     // "Progress bar area width"

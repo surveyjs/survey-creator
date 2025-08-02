@@ -120,12 +120,12 @@ export var arStrings = {
     settingsTooltip: "Open survey settings",
     // [Auto-translated] "Survey Settings"
     surveySettings: "إعدادات الاستطلاع",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "إعدادات الاستطلاع",
     // [Auto-translated] "Theme Settings"
     themeSettings: "إعدادات النسق",
-    // [Auto-translated] "Open theme settings"
-    themeSettingsTooltip: "إعدادات النسق",
+    // [Auto-translated] "Theme settings"
+    themeSettingsTooltip: "إعدادات السمة",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "إعدادات منشئي المحتوى",
     // "Show Panel"
@@ -427,16 +427,16 @@ export var arStrings = {
       logicPlaceholderDescriptionMobile: "إنشاء قاعدة لتخصيص تدفق الاستطلاع.",
       // "Show/hide page"
       page_visibilityName: "إظهار (إخفاء) صفحة",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "تمكين (تعطيل) الصفحة",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "تمكين/تعطيل الصفحة",
       // [Auto-translated] "Make page required"
       page_requireName: "اجعل الصفحة مطلوبة",
       // "Show/hide panel"
       panel_visibilityName: "إظهار (إخفاء) لوحة",
       // "Enable/disable panel"
       panel_enableName: "تفعيل (تعطيل) لوحة",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "اجعل الصفحة مطلوبة",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "اجعل اللوحة مطلوبة",
       // "Show/hide question"
       question_visibilityName: "إظهار (إخفاء) سؤال",
       // "Enable/disable question"
@@ -447,10 +447,10 @@ export var arStrings = {
       question_resetValueName: "إعادة تعيين قيمة السؤال",
       // [Auto-translated] "Set question value"
       question_setValueName: "تعيين قيمة السؤال",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "إظهار (إخفاء) العمود",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "تمكين (تعطيل) العمود",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "إظهار/إخفاء العمود",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "تمكين/تعطيل العمود",
       // [Auto-translated] "Make column required"
       column_requireName: "جعل العمود مطلوبا",
       // [Auto-translated] "Reset column value"
@@ -512,7 +512,7 @@ export var arStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "إعادة تعيين قيمة السؤال: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "تعيين قيمة: {1} السؤال: {0}",
+      question_setValueText: "تعيين قيمة: {1} السؤال: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var arStrings = {
       column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       // "survey becomes completed"
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       // "set into question: {0} value {1}"
@@ -590,25 +590,25 @@ export var arStrings = {
       requiredIf: "اجعل اللوحة مطلوبة إذا",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "ترتيب الأسئلة داخل اللوحة",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "الصفحة الرئيسية",
+      // [Auto-translated] "Move the panel to page"
+      page: "نقل اللوحة إلى الصفحة",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "عرض اللوحة على سطر جديد",
-      // [Auto-translated] "Panel expand state"
-      state: "حالة انهيار اللوحة",
-      // [Auto-translated] "Width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "حالة طي اللوحة",
+      // [Auto-translated] "Inline panel width"
       width: "عرض اللوحة المضمنة",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Minimum panel width"
       minWidth: "الحد الأدنى لعرض اللوحة",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "الحد الأقصى لعرض اللوحة",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "رقم هذه اللوحة"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "العرض الفعال ،٪",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "عرض عنوان السؤال، بكسل"
     },
     paneldynamic: {
@@ -636,38 +636,38 @@ export var arStrings = {
       minWidth: "الحد الأدنى لعرض اللوحة",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "الحد الأقصى لعرض اللوحة",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "تأكيد حذف اللوحة",
-      // [Auto-translated] "Description template"
-      templateDescription: "نمط وصف اللوحة",
-      // [Auto-translated] "Title template"
-      templateTitle: "نمط عنوان اللوحة",
-      // [Auto-translated] "Empty entries text"
-      noEntriesText: "نص لوحة فارغ",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "تأكيد إزالة الدخول",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "نمط وصف الإدخال",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "نمط عنوان الإدخال",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "نص اللوحة الفارغ",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "نمط عنوان علامة التبويب",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "العنصر النائب لعنوان علامة التبويب",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "اجعل لوحة فردية مرئية إذا",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "جعل إدخال فردي مرئيا إذا",
       // [Auto-translated] "Number the panel"
       showNumber: "ترقيم اللوحة",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "محاذاة عنوان اللوحة",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "محاذاة وصف اللوحة",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "محاذاة عنوان السؤال",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "عرض عنوان السؤال",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "محاذاة رسالة الخطأ",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "موقع لوحة جديد",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "موقع دخول جديد",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "إظهار شريط التقدم",
-      // [Auto-translated] "Key column"
-      keyName: "منع تكرار الردود في السؤال التالي"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
+      keyName: "منع الردود المكررة في السؤال التالي"
     },
     question: {
       // [Auto-translated] "Question name"
@@ -682,8 +682,8 @@ export var arStrings = {
       visibleIf: "اجعل السؤال مرئيا إذا",
       // [Auto-translated] "Make the question required if"
       requiredIf: "اجعل السؤال مطلوبا إذا",
-      // [Auto-translated] "Parent page"
-      page: "الصفحة الرئيسية",
+      // [Auto-translated] "Move the question to page"
+      page: "نقل السؤال إلى الصفحة",
       // [Auto-translated] "Question box collapse state"
       state: "حالة طي مربع الأسئلة",
       // [Auto-translated] "Number this question"
@@ -694,7 +694,7 @@ export var arStrings = {
       descriptionLocation: "محاذاة وصف السؤال",
       // [Auto-translated] "Error message alignment"
       errorLocation: "محاذاة رسالة الخطأ",
-      // [Auto-translated] "Add indents"
+      // [Auto-translated] "Increase the inner indent"
       indent: "زيادة المسافة البادئة الداخلية",
       // [Auto-translated] "Inline question width"
       width: "عرض السؤال المضمن",
@@ -702,28 +702,28 @@ export var arStrings = {
       minWidth: "الحد الأدنى لعرض السؤال",
       // [Auto-translated] "Maximum question width"
       maxWidth: "الحد الأقصى لعرض السؤال",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "تحديث قيمة حقل الإدخال"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "عرض منطقة التوقيع",
-      // [Auto-translated] "Signature height"
-      signatureHeight: "ارتفاع منطقة التوقيع",
+      // [Auto-translated] "Signature area height"
+      signatureHeight: "ارتفاع المنطقة المميزة",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "تغيير حجم منطقة التوقيع تلقائيا",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "إظهار العنصر النائب",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "إظهار عنصر نائب داخل منطقة التوقيع",
       // [Auto-translated] "Placeholder text"
       placeholder: "نص العنصر النائب",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "نص العنصر النائب في وضع القراءة فقط أو المعاينة",
-      // [Auto-translated] "Show the Clear button"
+      // [Auto-translated] "Show the Clear button within signature area"
       allowClear: "إظهار الزر مسح داخل منطقة التوقيع",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "الحد الأدنى لعرض القلم",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "الحد الأقصى لعرض القلم",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "الحد الأدنى لعرض السكتة الدماغية",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "الحد الأقصى لعرض السكتة الدماغية",
       // [Auto-translated] "Stroke color"
       penColor: "لون الحد"
     },
@@ -755,26 +755,26 @@ export var arStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "عنوان",
+      // [Auto-translated] "Survey title"
+      title: "عنوان الاستطلاع",
       // [Auto-translated] "Survey description"
       description: "وصف المسح",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "جعل الاستطلاع للقراءة فقط"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "اسم الصفحة",
-      // [Auto-translated] "Title"
-      title: "عنوان",
+      // [Auto-translated] "Page title"
+      title: "عنوان الصفحة",
       // [Auto-translated] "Page description"
       description: "وصف الصفحة",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "اجعل الصفحة مرئية إذا",
       // [Auto-translated] "Make the page required if"
       requiredIf: "اجعل الصفحة مطلوبة إذا",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "الحد الزمني لإنهاء الصفحة (بالثواني)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "الحد الزمني لإكمال الصفحة",
       // [Auto-translated] "Question order on the page"
       questionOrder: "ترتيب الأسئلة على الصفحة"
     },
@@ -852,7 +852,7 @@ export var arStrings = {
     defaultDisplayValue: "قيمة العرض الافتراضية للنصوص الديناميكية",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "محاذاة التسمية",
-    // [Auto-translated] "Input field size (in characters)"
+    // [Auto-translated] "Input field width (in characters)"
     size: "عرض حقل الإدخال (بالأحرف)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "محاذاة رسالة خطأ الخلية",
@@ -934,8 +934,8 @@ export var arStrings = {
     fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "الرجاء إدخال {0} العناصر على الأقل",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "يمكنك تعيين البيانات بالتنسيق التالي:\nالقيمة1|النص\nقيمة2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "أدخل قائمة خيارات الاختيار ومعرفاتها بالتنسيق التالي:\n\nمعرف |خيار\n\nمعرف خيار الاختيار غير مرئي للمستجيبين ويمكن استخدامه في القواعد الشرطية.",
     // "Form Entry"
     formEntry: "Form Entry",
     // "Test the service"
@@ -964,10 +964,10 @@ export var arStrings = {
     assistantTitle: "Available questions:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "There is should be at least one column or row",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "معاينة الإجابات قبل إرسال الاستطلاع",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "تم تعيينه بواسطة ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "مراجعة قبل الإرسال",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "ممكن بواسطة شرط",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "اعاده تعيين",
     // "Please enter a value"
@@ -980,8 +980,8 @@ export var arStrings = {
     propertyNameIsIncorrect: "لا تستخدم الكلمات المحجوزة: \"عنصر\" ، \"اختيار\" ، \"لوحة\" ، \"صف\".",
     // "You don't have any items yet"
     listIsEmpty: "No items have been added yet",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "لم تتم إضافة أي خيارات حتى الآن",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "ليس لديك أي خيارات حتى الآن",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "ليس لديك أي أعمدة حتى الآن",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var arStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "ليس لديك أي روابط حتى الآن",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "ليس لديك أي صفحات حتى الآن",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "إضافة خيار",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "إضافة خيار جديد",
     // [Auto-translated] "Add new column"
     "addNew@columns": "إضافة عمود جديد",
     // [Auto-translated] "Add new row"
@@ -1033,10 +1033,10 @@ export var arStrings = {
     // "Path to data"
     path: "المسار",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "عنوان URL لخدمة الويب",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "الحصول على قيم من حقل JSON التالي"
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "احصل على قيمة للتخزين من العقار التالي"
     },
     // "Get value to display from the following property"
     titleName: "اسم العنوان",
@@ -1066,8 +1066,8 @@ export var arStrings = {
     otherText: "نص خيار أخرى",
     // "Enable the \"None\" option"
     showNoneItem: "هل هناك خيار بلا",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "السماح بخيار رفض الإجابة",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "قم بتمكين خيار \"رفض الإجابة\"",
     // "Enable the \"Don't Know\" option"
     showDontKnowItem: "السماح بالخيار \"لا أعرف\"",
     // "Rename the \"None\" option"
@@ -1186,8 +1186,8 @@ export var arStrings = {
     gotoName: "سؤال للتخطي إليه",
     // "Rule is incorrect"
     ruleIsNotSet: "Rule is incorrect",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "تضمين نتائج الاستطلاع",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "أضف إلى نتائج الاستطلاع",
     // "Make the title and description visible"
     showTitle: "إظهار/إخفاء العنوان",
     // "Expand/collapse title"
@@ -1282,24 +1282,24 @@ export var arStrings = {
     html: "صفحة ويب HTML",
     // [Auto-translated] "Answer"
     setValue: "جواب",
-    // [Auto-translated] "Image format"
-    dataFormat: "تنسيق الصورة",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "السماح بإضافة صفوف",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "السماح بإزالة الصفوف",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "السماح بسحب الصف وإفلاته",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "لا ينطبق إذا قمت بتحديد عرض الصورة أو ارتفاعها بالضبط.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "الحد الأدنى لعرض الصورة",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "الحد الأقصى لعرض الصورة",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "الحد الأدنى لارتفاع الصورة",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "الحد الأقصى لارتفاع الصورة",
+    // [Auto-translated] "Storage format"
+    dataFormat: "تنسيق التخزين",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "تمكين إضافة الصف",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "تمكين إزالة الصف",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "تمكين إعادة ترتيب الصفوف",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "لا ينطبق إذا قمت بتحديد عرض منطقة العرض أو ارتفاعها بالضبط.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "الحد الأدنى لعرض مساحة العرض",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "الحد الأقصى لعرض مساحة العرض",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "الحد الأدنى لارتفاع مساحة العرض",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "أقصى ارتفاع لمساحة العرض",
     // "Minimum value"
     minValue: "أقل قيمة",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var arStrings = {
     totalCurrency: "Total currency",
     // "Formatted string"
     totalFormat: "Total format",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "الشعار (عنوان URL أو سلسلة مشفرة base64)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "هيكل المسح",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "الحد الأقصى لطول الإجابة (بالأحرف)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "الحد الأقصى لطول التعليق (بالأحرف)",
+    // [Auto-translated] "Survey logo"
+    logo: "شعار الاستطلاع",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "تخطيط المسح",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "تقييد طول الإجابة",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "تقييد طول التعليق",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "ارتفاع منطقة التعليق (في الأسطر)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "توسيع منطقة التعليق تلقائيا إذا لزم الأمر",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "توسيع مناطق النص تلقائيا",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var arStrings = {
     checkErrorsMode: "تشغيل التحقق من الصحة",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "التحقق من صحة الحقول الفارغة على التركيز المفقود",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "انتقل إلى عنوان URL",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "عنوان URL الديناميكي",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "إعادة التوجيه إلى رابط خارجي بعد التقديم",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "رابط خارجي ديناميكي",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "الترميز لإظهار ما إذا كان المستخدم قد ملأ هذا الاستطلاع بالفعل",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "ترميز صفحة الاستطلاع الكامل",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "الاستطلاع الديناميكي إكمال ترميز الصفحة",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "ترميز صفحة \"شكرا لك\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "ترميز صفحة \"شكرا لك\" الديناميكي",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "الترميز لإظهاره أثناء تحميل نموذج الاستطلاع",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var arStrings = {
     allowClear: "إظهار الزر مسح",
     // [Auto-translated] "Search Mode"
     searchMode: "وضع البحث",
-    // [Auto-translated] "Value display style"
-    displayStyle: "نمط عرض القيمة",
+    // [Auto-translated] "Display format"
+    displayStyle: "تنسيق العرض",
     // [Auto-translated] "Formatted string"
     format: "سلسلة منسقة",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var arStrings = {
     minimumFractionDigits: "الحد الأدنى من الأرقام الكسرية",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "عرض فواصل التجميع",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "السماح بملفات متعددة",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "معاينة الصور",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "تمكين تحميل ملفات متعددة",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "معاينة الصور التي تم تحميلها",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "أنواع الملفات المقبولة",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "انتظر حتى يكتمل التحميل",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "تأكيد حذف الملف",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "موقع لوحة التفاصيل",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "محاذاة تفاصيل الصف",
     // [Auto-translated] "Minimum row count"
     minRowCount: "الحد الأدنى لعدد الصفوف",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var arStrings = {
     confirmDelete: "تأكيد حذف الصف",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "رسالة تأكيد",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "عدد اللوحات الأولي",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "الحد الأدنى لعدد اللوحات",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "الحد الأقصى لعدد اللوحات",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "حالة توسيع اللوحة الداخلية",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "تلميح أداة زر اللوحة السابق",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "تلميح أداة زر اللوحة التالية",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "إزالة موقع زر اللوحة",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "إخفاء السؤال إذا لم تكن هناك صفوف",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "العدد الأولي للإدخالات",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "الحد الأدنى لعدد الإدخالات",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "الحد الأقصى لعدد الإدخالات",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "حالة الدخول الأولية",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "نص الزر \"الإدخال السابق\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "نص الزر \"الإدخال التالي\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "محاذاة زر \"إزالة الإدخال\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "إخفاء السؤال إذا لم يكن يحتوي على صفوف",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "إخفاء الأعمدة في حالة عدم وجود صفوف",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "قيم الأسعار المخصصة",
-    // [Auto-translated] "Rate count"
-    rateCount: "عدد الأسعار",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "كيفية تحديد قيم المعدل؟",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "قيم التصنيف المخصصة",
+    // [Auto-translated] "Rating count"
+    rateCount: "عدد التقييمات",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "تكوين التصنيف",
     slider: {
       // [Auto-translated] "Min value"
       min: "الحد الأدنى للقيمة",
@@ -1459,9 +1459,9 @@ export var arStrings = {
       autoGenerate: "تكوين تسميات المقياس",
       // [Auto-translated] "Slider type"
       sliderType: "نوع شريط التمرير",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "الحد الأدنى لطول النطاق",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "أقصى طول النطاق",
       // [Auto-translated] "Custom labels"
       customLabels: "تسميات مخصصة",
@@ -1471,13 +1471,13 @@ export var arStrings = {
       tooltipFormat: "تنسيق تلميح الأداة"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "ارتفاع الصورة",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "عرض الصورة"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن يحتوي على خيارات",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن لديه خيارات",
     // "Minimum width"
     minWidth: "الحد الأدنى للعرض (بالقيم المقبولة في CSS)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var arStrings = {
     showHeader: "إظهار رؤوس الأعمدة",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "إظهار شريط التمرير الأفقي",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "الحد الأدنى لعرض العمود (بالقيم المقبولة من CSS)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "عرض رأس الصف (بالقيم المقبولة من CSS)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "الحد الأدنى لعرض العمود",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "عرض رأس الصف",
     // "Value to store when \"True\" is selected"
     valueTrue: "القيمة \"الحقيقية\"",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var arStrings = {
     otherErrorText: "رسالة الخطأ \"تعليق فارغ\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "رسالة الخطأ \"قيمة مفتاح غير فريدة\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "الحد الأدنى من الخيارات المحددة",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "الحد الأقصى للخيارات المحددة",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "عرض الشعار (بالقيم المقبولة من CSS)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "ارتفاع الشعار (بالقيم المقبولة من CSS)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "الحد الأدنى من الخيارات للاختيار",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "الحد الأقصى للخيارات للاختيار",
+    // [Auto-translated] "Logo width"
+    logoWidth: "عرض الشعار",
+    // [Auto-translated] "Logo height"
+    logoHeight: "ارتفاع الشعار",
     // "Read-only"
     readOnly: "للقراءة فقط",
-    // [Auto-translated] "Editable if"
-    enableIf: "قابل للتحرير إذا",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "قم بتعطيل وضع القراءة فقط إذا",
     // "\"No rows\" message"
     noRowsText: "رسالة \"بلا صفوف\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "خيارات خاصة منفصلة (لا شيء، أخرى، تحديد الكل)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "خيارات خاصة منفصلة",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "نسخ الاختيارات من السؤال التالي",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "ما هي الخيارات التي تريد نسخها؟",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "خيارات الاختيار المراد نسخها",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "إظهار منطقة التعليق",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "العنصر النائب لمنطقة التعليق",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "عرض أوصاف المعدل كقيم قصوى",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "إضافة مربع تعليق",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "نص العنصر النائب لمربع التعليق",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "إظهار التسميات كقيم قصوى",
     // [Auto-translated] "Row order"
     rowOrder: "ترتيب الصفوف",
     // [Auto-translated] "Column layout"
@@ -1590,14 +1590,14 @@ export var arStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "وضع المعاينة",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "تمكين تخطيط الشبكة",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "أعمدة تخطيط الشبكة",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "أعمدة الشبكة",
     // [Auto-translated] "Mask settings"
     maskSettings: "إعدادات القناع",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "محاذاة رسالة خطأ توسيع الصف",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "محاذاة رسالة خطأ تفاصيل الصف",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var arStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "إعدادات قناع الإدخال",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "تخطيط",
+        // [Auto-translated] "Panel Layout"
+        panel: "تخطيط اللوحة",
         // [Auto-translated] "Layout"
         question: "تخطيط",
         // [Auto-translated] "Layout"
@@ -1690,7 +1690,7 @@ export var arStrings = {
       appearance: "مظهر",
       // [Auto-translated] "Accent colors"
       accentColors: "ألوان مميزة",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "خلفية السطح",
       // [Auto-translated] "Scaling"
       scaling: "القياس",
@@ -1701,16 +1701,16 @@ export var arStrings = {
     editProperty: "Edit property '{0}'",
     // "Items"
     items: "Items",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "تكون الخيارات مرئية إذا",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "يمكن تحديد الخيارات إذا",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "تكون الأعمدة مرئية إذا",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "تكون الصفوف مرئية إذا",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "إضافة مسافات بادئة داخلية",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "اجعل الخيارات مرئية إذا",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "اجعل الخيارات قابلة للتحديد إذا",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "جعل الأعمدة مرئية إذا",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "جعل الصفوف مرئية إذا",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "زيادة المسافة البادئة الداخلية",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي",
     // "Please enter a value."
@@ -1753,34 +1753,34 @@ export var arStrings = {
     emptyExpressionPlaceHolder: "اكتب التعبير هنا...",
     // "No file chosen"
     noFile: "No file choosen",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "مسح القيمة إذا أصبح السؤال مخفيا",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "اسم خاصية القيمة",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "تمكين البحث",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "مسح قيم الأسئلة المخفية",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "تخزين القيم في الخاصية التالية",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "تمكين البحث حسب الكتابة",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "إخفاء العناصر المحددة",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "أغلق القائمة المنسدلة بعد التحديد",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "المحاذاة الرأسية",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "صفوف بديلة",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "تكون الأعمدة مرئية إذا",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "تكون الصفوف مرئية إذا",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "العنصر النائب لمنطقة التعليق",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "نص العنصر النائب للملف",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "نص العنصر النائب للصورة",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "نص العنصر النائب للملف أو الصورة",
-    // [Auto-translated] "Rate type"
-    rateType: "نوع السعر",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "طي القائمة المنسدلة عند التحديد",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "المحاذاة الرأسية داخل الخلايا",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "ألوان الصفوف البديلة",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "جعل الأعمدة مرئية إذا",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "جعل الصفوف مرئية إذا",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "نص العنصر النائب لمربع التعليق",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "نص العنصر النائب للملف المحلي",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "نص العنصر النائب للكاميرا",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "نص العنصر النائب للملف المحلي أو الكاميرا",
+    // [Auto-translated] "Rating icon"
+    rateType: "أيقونة التصنيف",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "مثال: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var arStrings = {
       themeName: "موضوع",
       // [Auto-translated] "Question appearance"
       isPanelless: "مظهر السؤال",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "الخلفية ونصف قطر الزاوية",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "الخلفية ونصف قطر الزاوية",
       // [Auto-translated] "Accent color"
       primaryColor: "لون التمييز",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "عتامة خلفية اللوحة",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "عتامة خلفية السؤال",
-      // [Auto-translated] "Font size"
-      fontSize: "حجم الخط",
-      // [Auto-translated] "Scale"
-      scale: "مِيزَان",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "عتامة اللوحة ومربع الأسئلة",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "عتامة عنصر الإدخال",
+      // [Auto-translated] "Survey font size"
+      fontSize: "حجم خط الاستطلاع",
+      // [Auto-translated] "Survey scale factor"
+      scale: "عامل مقياس المسح",
       // [Auto-translated] "Corner radius"
       cornerRadius: "نصف قطر الزاوية",
       // [Auto-translated] "Advanced mode"
       advancedMode: "الوضع المتقدم",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "خط العنوان",
-      // [Auto-translated] "Page description font"
-      pageDescription: "خط الوصف",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Description font"
+      pageDescription: "وصف الخط",
+      // [Auto-translated] "Title font"
       questionTitle: "خط العنوان",
-      // [Auto-translated] "Question description font"
-      questionDescription: "خط الوصف",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Description font"
+      questionDescription: "وصف الخط",
+      // [Auto-translated] "Font"
       editorFont: "الخط",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "العتامه",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "عائلة الخط",
+      backgroundOpacity: "العتامه", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "عائلة خطوط الاستطلاع",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "لون الخلفية",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "خلفية لهجة",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "لهجة الصدارة",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "رسائل الخطأ",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "ألوان خلفية مميزة",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "ألوان مميزة في المقدمة",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "ألوان رسالة الخطأ",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "تأثيرات الظل",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var arStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "منظر",
-      // [Auto-translated] "Logo position"
-      logoPosition: "موضع الشعار",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "محاذاة الشعار",
       // [Auto-translated] "Survey title font"
       surveyTitle: "خط عنوان الاستطلاع",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var arStrings = {
       backgroundImageOpacity: "العتامه",
       // [Auto-translated] "Overlap"
       overlapEnabled: "التداخل",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "موضع الشعار",
-      // [Auto-translated] "Title position"
-      titlePositionX: "موضع العنوان",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "موقف الوصف"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "محاذاة الشعار",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "محاذاة عنوان الاستطلاع",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "محاذاة وصف الاستطلاع"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var arStrings = {
     "true": "صحيح",
     // [Auto-translated] "false"
     "false": "خطأ",
-    // [Auto-translated] "Local files"
-    file: "الملفات المحلية",
+    // [Auto-translated] "Local file"
+    file: "ملف محلي",
     // [Auto-translated] "Camera"
     camera: "كاميرا",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "الملفات المحلية أو الكاميرا",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "ملف محلي أو كاميرا",
     // "Inherit"
     inherit: "يَرث",
     // "Visible"
@@ -2242,8 +2242,8 @@ export var arStrings = {
     onTyping: "عند الكتابة",
     // [Auto-translated] "Under the row"
     underRow: "تحت الصف",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "أسفل الصف ، تكون لوحة واحدة فقط مرئية",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "أسفل الصف، اعرض قسما واحدا فقط",
     // "Auto"
     auto: "تلقائي",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var arStrings = {
       combined: "كلا"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "يعتمد على تخطيط المصفوفة"
+      // [Auto-translated] "Based on matrix layout"
+      default: "بناء على تخطيط المصفوفة"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "لا يمكن للمستخدمين توسيع اللوحات أو طيها",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "جميع اللوحات مطوية",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "يتم توسيع جميع اللوحات",
+      // [Auto-translated] "Locked"
+      default: "مقفل",
+      // [Auto-translated] "Collapse all"
+      collapsed: "طي الكل",
+      // [Auto-translated] "Expand all"
+      expanded: "توسيع الكل",
       // [Auto-translated] "First expanded"
       firstExpanded: "توسعت لأول مرة"
     },
@@ -2301,10 +2301,10 @@ export var arStrings = {
       colored: "الملونه"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "ولد",
-      // [Auto-translated] "Enter manually"
-      "false": "أدخل يدويا"
+      // [Auto-translated] "Auto-generate"
+      "true": "التوليد التلقائي",
+      // [Auto-translated] "Manual"
+      "false": "يدوي"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,8 +2325,8 @@ export var arStrings = {
       on: "الترقيم التلقائي",
       // [Auto-translated] "Reset on each page"
       onPage: "إعادة تعيين على كل صفحة",
-      // [Auto-translated] "Start on each panel"
-      onpanel: "إعادة تعيين على كل لوحة",
+      // [Auto-translated] "Reset on each panel"
+      onpanel: "إعادة التعيين على كل لوحة",
       // [Auto-translated] "Reset on each panel"
       onPanel: "إعادة تعيين على كل لوحة",
       // [Auto-translated] "Recursive numbering"
@@ -2433,8 +2433,8 @@ export var arStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "نفس المسح",
-      // [Auto-translated] "Fit to container"
-      container: "يصلح للحاوية"
+      // [Auto-translated] "Same as container"
+      container: "مثل الحاوية"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2608,7 +2608,7 @@ export var arStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "معرف لوحة غير مرئي للمستجيبين.",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "اكتب عنوانا فرعيا للوحة.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "استخدم أيقونة العصا السحرية لضبط قاعدة شرطية تحدد رؤية اللوحة.",
@@ -2616,14 +2616,14 @@ export var arStrings = {
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للوحة.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "ينطبق على جميع الأسئلة الواردة في هذه اللوحة. عند التعيين على \"مخفي\" ، فإنه يخفي أيضا أوصاف الأسئلة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو الإعداد على مستوى الاستطلاع (\"أعلى\" بشكل افتراضي). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "يحتفظ بالترتيب الأصلي للأسئلة أو يصنفها بشكل عشوائي. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
       // "Repositions the panel to the end of a selected page."
       page: "تغيير موضع اللوحة إلى نهاية الصفحة المحددة.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var arStrings = {
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "لتعيين عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var arStrings = {
       descriptionLocation: "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "يكرر الإجابات من الإدخال الأخير ويعينها إلى الإدخال المضاف التالي.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var arStrings = {
       imageHeight: "يتخطى قيم الحد الأدنى والحد الأقصى للارتفاع.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "يتخطى قيم الحد الأدنى والحد الأقصى للعرض.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "تعمل \"القيمة\" كمعرف عنصر مستخدم في القواعد الشرطية ؛ يتم عرض \"النص\" للمستجيبين.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"القيمة\" بمثابة معرف عنصر يستخدم في القواعد الشرطية؛ يتم عرض \"النص\" للمستجيبين.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "اختر بين \"صورة\" و \"فيديو\" لتعيين وضع المحتوى لمحدد الوسائط. إذا تم تحديد \"صورة\" ، فتأكد من أن جميع الخيارات المتوفرة هي ملفات صور بالتنسيقات التالية: JPEG و GIF و PNG و APNG و SVG و BMP و ICO. وبالمثل ، إذا تم تحديد \"فيديو\" ، فتأكد من أن جميع الخيارات هي روابط مباشرة لملفات الفيديو بالتنسيقات التالية: MP4 و MOV و WMV و FLV و AVI و MKV. يرجى ملاحظة أن روابط YouTube غير مدعومة لخيارات الفيديو."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "يغير هذا الإعداد حجم حقل الإدخال فقط ولا يؤثر على عرض مربع السؤال. للحد من طول الإدخال المقبول، انتقل إلى <b>التحقق من الصحة → الحد الأقصى لعدد الأحرف</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "يقوم هذا الإعداد بتغيير حجم حقل الإدخال فقط ولا يؤثر على عرض مربع الأسئلة. للحد من طول الإدخال المقبول ، انتقل إلى \"التحقق من الصحة\" → \"الحد الأقصى لعدد الأحرف\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "يضبط عدد الأسطر المعروضة في حقل الإدخال. إذا كان الإدخال يشغل المزيد من الأسطر ، فسيظهر شريط التمرير."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "لتعيين عدد الخطوط المعروضة في حقل الإدخال. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير."
     },
     // survey templates
     survey: {
@@ -2811,8 +2811,8 @@ export var arStrings = {
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
-      colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من الخاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصلية."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2848,8 +2848,8 @@ export var arStrings = {
     caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "اختر من بين: \"ثابت\" - يحدد عرضا ثابتا ؛ \"متجاوب\" - يجعل الاستطلاع يشغل العرض الكامل للشاشة ؛ \"تلقائي\" - ينطبق على أي من الاثنين اعتمادا على أنواع الأسئلة المستخدمة.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "تمنع ملفات تعريف الارتباط المستخدمين من ملء نفس الاستبيان مرتين.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "قم بتعيين قيمة ملف تعريف ارتباط فريدة للاستطلاع الخاص بك. سيتم تعيين ملف تعريف الارتباط في متصفح المستجيب عند اكتمال الاستطلاع لمنع عمليات إرسال الاستطلاع المتكررة.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "الصق رابط صورة (بلا حدود للحجم) أو انقر فوق رمز المجلد لاستعراض ملف من جهاز الكمبيوتر الخاص بك (حتى 64 كيلوبايت).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var arStrings = {
     autoAdvanceEnabled: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "لتعيين رؤية أزرار التنقل على الصفحة.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "لتعيين موقع أزرار التنقل على الصفحة.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var arStrings = {
     maxTextLength: "لأسئلة إدخال النص فقط.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "لتعليقات الأسئلة فقط.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "حدد ما إذا كنت تريد زيادة تعليقات الأسئلة وأسئلة النص الطويل تلقائيا في الارتفاع بناء على طول النص الذي تم إدخاله.",
@@ -2908,8 +2908,8 @@ export var arStrings = {
     columnMinWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "تكون مرئية فقط عندما يحتوي عمود واحد على الأقل على نوع الإجمالي أو تعبير الإجمالي.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "مرئي فقط إذا كان عمود واحد على الأقل يعرض القيم الإجمالية التي تم تعيينها باستخدام \"أسلوب التجميع\" أو \"تعبير القيمة الإجمالية\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بخلية ذات إدخال غير صالح. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var arStrings = {
     imageFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "يزيد تدريجيا من ارتفاع حقل الإدخال أثناء إدخال البيانات. يتجاوز إعداد \"ارتفاع حقل الإدخال (في الأسطر)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "يظهر مقبض تغيير الحجم (أو المقبض) في الزاوية ويمكن سحبه لتغيير حجم حقل الإدخال.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى صفحة الشكر.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "يطبق خيار \"الوراثة\" إعدادا على مستوى الاستطلاع (\"ممكن\" بشكل افتراضي).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى صفحة \"شكرا لك\". عند التعيين إلى 0، يحسب الوقت المستغرق في الاستطلاع.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "فاصل زمني بالثواني وبعد ذلك يتقدم الاستطلاع تلقائيا إلى الصفحة التالية. يخفي زر التنقل \"السابق\". عند التعيين على 0، يحسب الوقت المستغرق في الصفحة الحالية.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "قم بتمكين هذا الخيار لتشغيل التحقق من الصحة عندما يركز المستخدم على حقل إدخال فارغ ثم يتركه دون إجراء أي تغييرات.",
     page: {
@@ -2984,8 +2984,8 @@ export var arStrings = {
     maxWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "إذا لم تقم بتعيين هذه الخاصية، تخزين الإجابة في حقل محدد بواسطة خاصية الاسم.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "معرف الانضمام هو مفتاح مخصص يمكنك تعيينه لعدة أسئلة لربطها معا ومزامنة قيمها. سيتم دمج هذه القيم في صفيف أو كائن واحد وتخزينها في نتائج الاستطلاع باستخدام المفتاح كاسم الخاصية.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var arStrings = {
     valueTrue: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة إيجابية.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة سلبية.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "لا يوصى بتعطيل هذا الخيار لأنه يتجاوز صورة المعاينة ويجعل من الصعب على المستخدم فهم ما إذا كان قد تم تحميل الملفات أم لا.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "لا يوصى بتعطيل هذا الخيار لأنه يتجاوز صورة المعاينة ويجعل من الصعب على المستخدم فهم ما إذا كان قد تم تحميل الملفات.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "تشغيل مطالبة تطلب تأكيد حذف الملف.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var arStrings = {
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك.",
@@ -3062,10 +3062,10 @@ export var arStrings = {
     format: "استخدم {0} كعنصر نائب للقيمة الفعلية.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "يرجى الرجوع إلى وصف السمة [قبول] (https://www.w3schools.com/tags/att_input_accept.asp) للحصول على مزيد من المعلومات.",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "ينطبق فقط على أنواع خلايا المجموعة الراديوية وخانة الاختيار.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "راجع وصف السمة [الإكمال التلقائي] (https://developer.mozilla.org/en-US/docs/Web/HTML/السمات/الإكمال التلقائي) للحصول على مزيد من المعلومات.",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. ينطبق فقط على الأعمدة التي تم تعيين \"نوع إدخال الخلية\" عليها على مجموعة أزرار الاختيار أو خانات الاختيار.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "حدد نوع البيانات التي يمكن لمتصفح المستخدم استردادها. يتم الحصول على هذه البيانات إما من القيم السابقة التي أدخلها المستخدم أو من القيم التي تم تكوينها مسبقا إذا تم حفظ أي منها بواسطة المستخدم لإكمالها التلقائي.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3147,52 +3147,52 @@ export var arStrings = {
     value: "القيمة",
     // [Auto-translated] "Tab alignment"
     tabAlign: "محاذاة علامات التبويب",
-    // [Auto-translated] "Source type"
-    sourceType: "نوع المصدر",
+    // [Auto-translated] "File source type"
+    sourceType: "نوع مصدر الملف",
     // [Auto-translated] "Fit to container"
     fitToContainer: "يصلح للحاوية",
     // [Auto-translated] "Set value expression"
     setValueExpression: "تعيين تعبير القيمة",
     // "Description"
-    description: "الوصف",
+    description: "الوصف", // Auto-generated string
     // "Logo fit"
     logoFit: "تناسب الشعار",
     // "Pages"
-    pages: "الصفحات",
+    pages: "الصفحات", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "الاسئله",
+    questions: "الاسئله", // Auto-generated string
     // "Triggers"
     triggers: "المحفزات",
     // "Custom variables"
     calculatedValues: "القيم المحسوبة",
     // [Auto-translated] "Survey id"
-    surveyId: "معرف الاستطلاع",
+    surveyId: "معرف الاستطلاع", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "معرف وظيفة الاستطلاع",
+    surveyPostId: "معرف وظيفة الاستطلاع", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "يظهر الاستطلاع توفير البيانات",
+    surveyShowDataSaving: "يظهر الاستطلاع توفير البيانات", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "موقع وصف السؤال",
     // "Progress bar type"
-    progressBarType: "نوع شريط التقدم",
-    // [Auto-translated] "Show TOC"
-    showTOC: "إظهار جدول المحتويات",
-    // [Auto-translated] "Toc location"
-    tocLocation: "موقع جدول المحتويات",
+    progressBarType: "نوع شريط التقدم", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "إظهار جدول المحتويات (جدول المحتويات)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "محاذاة جدول المحتويات",
     // "Question title pattern"
-    questionTitlePattern: "تنسيق عنوان السؤال",
+    questionTitlePattern: "تنسيق عنوان السؤال", // Auto-generated string
     // "Survey width mode"
     widthMode: "نمط عٌرض الشاشة",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "عرض معلومات العلامة التجارية",
+    showBrandInfo: "عرض معلومات العلامة التجارية", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "إستخدم عرض القيم في العنوان",
     // "Visible if"
-    visibleIf: "مرئي عندما",
+    visibleIf: "مرئي عندما", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "العملية الحسابية الإفتراضية",
     // "Required if"
-    requiredIf: "مطلوب عندما",
+    requiredIf: "مطلوب عندما", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "إعادة تعيين القيمة إذا",
     // [Auto-translated] "Set value if"
@@ -3200,81 +3200,81 @@ export var arStrings = {
     // "Validation rules"
     validators: "المدققات",
     // "Bindings"
-    bindings: "الإرتباطات",
+    bindings: "الإرتباطات", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "عرض ك",
+    renderAs: "عرض ك", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "إرفاق العناصر الأصلية",
+    attachOriginalItems: "إرفاق العناصر الأصلية", // Auto-generated string
     // "Choices"
     choices: "الإختيارات",
     // "Choices by url"
-    choicesByUrl: "خيار عن طريق رابط إلكتروني URL",
+    choicesByUrl: "خيار عن طريق رابط إلكتروني URL", // Auto-generated string
     // "Currency"
-    currency: "currency",
+    currency: "currency", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "تلميح الخلية",
+    cellHint: "تلميح الخلية", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "إجمالي الحد الأقصى لأرقام الكسور",
+    totalMaximumFractionDigits: "إجمالي الحد الأقصى لأرقام الكسور", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "إجمالي الحد الأدنى لأرقام الكسور",
+    totalMinimumFractionDigits: "إجمالي الحد الأدنى لأرقام الكسور", // Auto-generated string
     // "Columns"
-    columns: "الأعمدة",
+    columns: "الأعمدة", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "عناصر التفاصيل",
+    detailElements: "عناصر التفاصيل", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "السماح بالإجراءات التكيفية",
+    allowAdaptiveActions: "السماح بالإجراءات التكيفية", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "قيمة الصف الإفتراضية",
+    defaultRowValue: "قيمة الصف الإفتراضية", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "تفاصيل الصف الجديد للتوسيع التلقائي",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "تمكين التحميل البطيء للاختيارات",
+    choicesLazyLoadEnabled: "تمكين التحميل البطيء للاختيارات", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "اختيارات كسول تحميل حجم الصفحة",
+    choicesLazyLoadPageSize: "اختيارات كسول تحميل حجم الصفحة", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "مكون حقل الإدخال",
+    inputFieldComponent: "مكون حقل الإدخال", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "مكون العنصر",
+    itemComponent: "مكون العنصر", // Auto-generated string
     // "Min"
-    min: "أقل",
+    min: "أقل", // Auto-generated string
     // "Max"
-    max: "أكبر",
+    max: "أكبر", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "minValueExpression",
+    minValueExpression: "minValueExpression", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "maxValueExpression",
+    maxValueExpression: "maxValueExpression", // Auto-generated string
     // "Step"
-    step: "step",
+    step: "step", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "قائمة البيانات",
     // "Input field width (in characters)"
     inputSize: "inputSize",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "عرض تسمية العنصر (بالبكسل)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "عرض ملصق العنصر",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "محاذاة قيمة الإدخال",
     // [Auto-translated] "Elements"
-    elements: "عناصر",
+    elements: "عناصر", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "محتوى",
+    content: "محتوى", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "navigationTitle",
+    navigationTitle: "navigationTitle", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "navigationDescription",
+    navigationDescription: "navigationDescription", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "نقرة طويلة",
+    longTap: "نقرة طويلة", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "تمدد تلقائي",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "السماح بتغيير الحجم",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "تمكين مقبض تغيير الحجم",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "قبول إرجاع النقل",
+    acceptCarriageReturn: "قبول إرجاع النقل", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "وضع العرض",
     // [Auto-translated] "Rate type"
-    rateType: "نوع السعر",
+    rateType: "نوع السعر", // Auto-generated string
     // "Label"
-    label: "المسمى",
+    label: "المسمى", // Auto-generated string
     // "Content mode"
     contentMode: "نمط عرض المحتوى",
     // "Image and thumbnail fit"
@@ -3282,55 +3282,55 @@ export var arStrings = {
     // [Auto-translated] "Alt text"
     altText: "نص بديل",
     // "Height"
-    height: "height",
+    height: "height", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "الارتفاع على الهواتف الذكية",
     // "Pen color"
-    penColor: "لون القلم",
+    penColor: "لون القلم", // Auto-generated string
     // "Background color"
     backgroundColor: "لون الخلفية",
     // [Auto-translated] "Template elements"
-    templateElements: "عناصر القالب",
+    templateElements: "عناصر القالب", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "المشغل",
+    operator: "المشغل", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "متغير",
+    isVariable: "متغير", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "تشغيل التعبير",
+    runExpression: "تشغيل التعبير", // Auto-generated string
     // "Show caption"
-    showCaption: "showCaption",
+    showCaption: "showCaption", // Auto-generated string
     // "Icon name"
-    iconName: "iconName",
+    iconName: "iconName", // Auto-generated string
     // "Icon size"
-    iconSize: "iconSize",
+    iconSize: "iconSize", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "دقة",
+    precision: "دقة", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "منطقة مقبض سحب المصفوفة",
+    matrixDragHandleArea: "منطقة مقبض سحب المصفوفة", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "صورة الخلفية",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "ملاءمة صورة الخلفية",
+    backgroundImageFit: "ملاءمة صورة الخلفية", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "مرفق صورة الخلفية",
+    backgroundImageAttachment: "مرفق صورة الخلفية", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "عتامة الخلفية",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "حدد للترتيب ممكن",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "حدد لترتيب تخطيط المناطق",
+    backgroundOpacity: "عتامة الخلفية", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "السماح بالترتيب الانتقائي",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "ترتيب محاذاة المنطقة",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "نص لإظهار ما إذا كانت كل الخيارات محددة",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "نص العنصر النائب لمنطقة الترتيب",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "السماح بالوصول إلى الكاميرا",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "مقياس وضع اللون",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "معدل وضع اللون",
+    allowCameraAccess: "السماح بالوصول إلى الكاميرا", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "وضع لون أيقونة التصنيف",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "نظام ألوان الوجوه الضاحكة",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "نسخ قيمة العرض",
+    copyDisplayValue: "نسخ قيمة العرض", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "امتداد العمود",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var arStrings = {
     "--sjs-secondary-background-500": "ثانوي",
     // [Auto-translated] "Surface"
     surfaceScale: "سطح",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "واجهة المستخدم",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "عناصر واجهة المستخدم",
     // [Auto-translated] "Font"
     fontScale: "الخط",
     names: {

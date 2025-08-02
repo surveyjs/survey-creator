@@ -120,12 +120,12 @@ export var danishStrings = {
     settingsTooltip: "Åbn indstillinger",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Indstillinger for undersøgelse",
-    // [Auto-translated] "Open survey settings"
+    // [Auto-translated] "Survey settings"
     surveySettingsTooltip: "Indstillinger for undersøgelse",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Temaindstillinger",
-    // [Auto-translated] "Open theme settings"
-    themeSettingsTooltip: "Temaindstillinger",
+    // [Auto-translated] "Theme settings"
+    themeSettingsTooltip: "Indstillinger for tema",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Indstillinger for skabere",
     // [Auto-translated] "Show Panel"
@@ -425,32 +425,32 @@ export var danishStrings = {
       logicPlaceholderDescription: "Opret en regel for at tilpasse undersøgelsens flow.",
       // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescriptionMobile: "Opret en regel for at tilpasse undersøgelsens flow.",
-      // [Auto-translated] "Show (hide) page"
-      page_visibilityName: "Vis (skjul) side",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Aktivér (deaktiver) side",
+      // [Auto-translated] "Show/hide page"
+      page_visibilityName: "Vis/skjul side",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Aktiver/deaktiver side",
       // [Auto-translated] "Make page required"
       page_requireName: "Gør siden påkrævet",
-      // [Auto-translated] "Show (hide) panel"
-      panel_visibilityName: "Panelet Vis (skjul)",
-      // [Auto-translated] "Enable (disable) panel"
-      panel_enableName: "Aktivér (deaktiver) panel",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Gør siden påkrævet",
-      // [Auto-translated] "Show (hide) question"
-      question_visibilityName: "Vis (skjul) spørgsmål",
-      // [Auto-translated] "Enable (disable) question"
-      question_enableName: "Aktivér (deaktiver) spørgsmål",
+      // [Auto-translated] "Show/hide panel"
+      panel_visibilityName: "Vis/skjul panel",
+      // [Auto-translated] "Enable/disable panel"
+      panel_enableName: "Aktiver/deaktiver panel",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Gør panelet påkrævet",
+      // [Auto-translated] "Show/hide question"
+      question_visibilityName: "Vis/skjul spørgsmål",
+      // [Auto-translated] "Enable/disable question"
+      question_enableName: "Aktiver/deaktiver spørgsmål",
       // [Auto-translated] "Make question required"
       question_requireName: "Gør spørgsmål påkrævet",
       // [Auto-translated] "Reset question value"
       question_resetValueName: "Nulstil spørgsmålsværdi",
       // [Auto-translated] "Set question value"
       question_setValueName: "Angiv spørgsmålsværdi",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Vis (skjul) kolonne",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Aktivér (deaktiver) kolonne",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Vis/skjul kolonne",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Aktiver/deaktiver kolonne",
       // [Auto-translated] "Make column required"
       column_requireName: "Gør kolonne påkrævet",
       // [Auto-translated] "Reset column value"
@@ -469,30 +469,30 @@ export var danishStrings = {
       trigger_runExpressionName: "Kør udtryk",
       // "Set \"Thank You\" page markup"
       completedHtmlOnConditionName: "Indstil sidemarkering af \"Undersøgelse fuldført\"",
-      // [Auto-translated] "Make the page visible when the logic expression returns true. Otherwise keep it invisible."
-      page_visibilityDescription: "Gør siden synlig, når det logiske udtryk returnerer sand. Ellers skal du holde det usynligt.",
-      // [Auto-translated] "Make the panel visible when the logic expression returns true. Otherwise keep it invisible."
-      panel_visibilityDescription: "Gør panelet synligt, når det logiske udtryk returnerer sand. Ellers skal du holde det usynligt.",
-      // [Auto-translated] "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled."
-      panel_enableDescription: "Få panelet og alle elementer i det til at aktivere, når det logiske udtryk returnerer sand. Ellers skal du holde dem deaktiveret.",
-      // [Auto-translated] "Make the question visible when the logic expression returns true. Otherwise keep it invisible."
-      question_visibilityDescription: "Gør spørgsmålet synligt, når det logiske udtryk returnerer sand. Ellers skal du holde det usynligt.",
-      // [Auto-translated] "Make the question enable when the logic expression returns true. Otherwise keep it disabled."
-      question_enableDescription: "Få spørgsmålet til at aktivere, når det logiske udtryk returnerer sand. Ellers skal du holde det deaktiveret.",
-      // [Auto-translated] "Question becomes required when the logic expression returns true."
-      question_requireDescription: "Spørgsmål bliver påkrævet, når det logiske udtryk returnerer sandt.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the page invisible."
+      page_visibilityDescription: "Gør siden synlig, når det logiske udtryk evalueres til sand. Ellers skal du holde siden usynlig.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the panel invisible."
+      panel_visibilityDescription: "Gør siden synlig, når det logiske udtryk evalueres til sand. Ellers skal du holde panelet usynligt.",
+      // [Auto-translated] "Make the panel and all elements inside it enabled when the logical expression evaluates to true. Otherwise, keep them disabled."
+      panel_enableDescription: "Gør panelet og alle elementer i det aktiveret, når det logiske udtryk evalueres til sand. Ellers skal du holde dem deaktiveret.",
+      // [Auto-translated] "Make the question visible when the logical expression evaluates to true. Otherwise, keep the question invisible."
+      question_visibilityDescription: "Gør spørgsmålet synligt, når det logiske udtryk evalueres til sandt. Ellers skal du holde spørgsmålet usynligt.",
+      // [Auto-translated] "Make the question enabled when the logical expression evaluates to true. Otherwise, keep the question disabled."
+      question_enableDescription: "Gør spørgsmålet aktiveret, når det logiske udtryk evalueres til sandt. Ellers skal du holde spørgsmålet deaktiveret.",
+      // [Auto-translated] "Question becomes required when the logical expression evaluates to true."
+      question_requireDescription: "Spørgsmålet bliver påkrævet, når det logiske udtryk evalueres til sandt.",
       // "When the logical expression evaluates to true, the survey ends, and the respondent sees the \"Thank you\" page."
       trigger_completeDescription: "Når det logiske udtryk returnerer sand, afsluttes undersøgelsen, og en slutbruger ser siden \"Tak\".",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question."
-      trigger_setvalueDescription: "Når spørgsmålsværdier, der bruges i det logiske udtryk, ændres, og det logiske udtryk returnerer sand, angives værdien til det valgte spørgsmål.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question."
-      trigger_copyvalueDescription: "Når spørgsmålsværdier, der bruges i det logiske udtryk, ændres, og det logiske udtryk returnerer sand, kopieres værdien af et markeret spørgsmål til et andet markeret spørgsmål.",
-      // [Auto-translated] "When the logic expression returns true then the survey skip to / focus the selected question."
-      trigger_skipDescription: "Når det logiske udtryk returnerer sandt, springer undersøgelsen til / fokuserer det valgte spørgsmål.",
-      // [Auto-translated] "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question"
-      trigger_runExpressionDescription: "Når det logiske udtryk returnerer sand, udføres det brugerdefinerede udtryk. Du kan eventuelt angive dette udtryksresultat i det valgte spørgsmål",
-      // [Auto-translated] "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one."
-      completedHtmlOnConditionDescription: "Hvis det logiske udtryk returnerer sandt, ændres standardteksten for 'Tak-siden' til den givne.",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the specified value is assigned to the selected question."
+      trigger_setvalueDescription: "Når spørgsmålsværdier, der bruges i det logiske udtryk, ændres, og udtrykket evalueres til sand, tildeles den angivne værdi til det valgte spørgsmål.",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the value of the selected question is copied to another question."
+      trigger_copyvalueDescription: "Når spørgsmålsværdier, der bruges i det logiske udtryk, ændres, og udtrykket evalueres til sand, kopieres værdien af det valgte spørgsmål til et andet spørgsmål.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey focuses/jumps to the selected question."
+      trigger_skipDescription: "Når det logiske udtryk evalueres til sand, fokuserer/springer undersøgelsen til det valgte spørgsmål.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey evaluates another expression. Optionally, the result of the latter expression can be assigned as a value to the selected question"
+      trigger_runExpressionDescription: "Når det logiske udtryk evalueres til sand, evaluerer undersøgelsen et andet udtryk. Resultatet af sidstnævnte udtryk kan eventuelt tildeles som en værdi til det valgte spørgsmål",
+      // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
+      completedHtmlOnConditionDescription: "Hvis det logiske udtryk evalueres til sand, viser siden \"Tak\" det angivne indhold.",
       // [Auto-translated] "When expression: '{0}' returns true"
       itemExpressionText: "Når udtrykket: '{0}' returnerer sandt", // {0} - the expression
       // [Auto-translated] "New rule"
@@ -512,7 +512,7 @@ export var danishStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "Nulstil værdi for spørgsmål: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Tildel værdi: {1} til spørgsmål: {0}",
+      question_setValueText: "Tildel værdi: {1} til spørgsmål: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Gør kolonne {0} af spørgsmål {1} synlig", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var danishStrings = {
       column_resetValueText: "Nulstil celleværdi for kolonne: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Et udtryk, hvis resultat vil blive tildelt målspørgsmålet.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Et udtryk, hvis resultat tildeles målspørgsmålet.",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Undersøgelsen bliver afsluttet",
       // [Auto-translated] "set into question: {0} value {1}"
@@ -561,9 +561,9 @@ export var danishStrings = {
       selectedActionCaption: "Vælg handling...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Det logiske udtryk er tomt eller ugyldigt. Vær venlig at rette det.",
-      // [Auto-translated] "Please, add at least one action."
+      // [Auto-translated] "Please add at least one action."
       noActionError: "Tilføj mindst én handling.",
-      // [Auto-translated] "Please, fix problems in your action(s)."
+      // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "Løs venligst problemer i din(e) handling(er).",
       // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "Logiske regler er ufuldstændige",
@@ -590,25 +590,25 @@ export var danishStrings = {
       requiredIf: "Gør panelet påkrævet, hvis",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Spørgsmålsrækkefølge i panelet",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Overordnet side",
+      // [Auto-translated] "Move the panel to page"
+      page: "Flyt panelet til side",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Få vist panelet på en ny linje",
-      // [Auto-translated] "Panel expand state"
-      state: "Panelets sammenbrudstilstand",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Indlejret panelbredde",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Tilstand for panelskjul",
+      // [Auto-translated] "Inline panel width"
+      width: "Indbygget panelbredde",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Mindste panelbredde",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Maksimal panelbredde",
-      // [Auto-translated] "Show panel number"
+      // [Auto-translated] "Number this panel"
       showNumber: "Nummerer dette panel"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Effektiv bredde, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Spørgsmålets titelbredde, px"
     },
     paneldynamic: {
@@ -636,37 +636,37 @@ export var danishStrings = {
       minWidth: "Mindste panelbredde",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Maksimal panelbredde",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Bekræft sletning af panel",
-      // [Auto-translated] "Description template"
-      templateDescription: "Panel beskrivelse mønster",
-      // [Auto-translated] "Title template"
-      templateTitle: "Panelets titelmønster",
-      // [Auto-translated] "Empty entries text"
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Bekræft fjernelse af post",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Indgangsbeskrivelse mønster",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Mønster for indgangstitel",
+      // [Auto-translated] "Empty panel text"
       noEntriesText: "Tom paneltekst",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Fanetitel mønster",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Pladsholder til fanetitel",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Gør et individuelt panel synligt, hvis",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Gør en individuel post synlig, hvis",
       // [Auto-translated] "Number the panel"
       showNumber: "Nummerer panelet",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Justering af paneltitel",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Justering af panelbeskrivelse",
-      // [Auto-translated] "Question title location"
-      templateQuestionTitleLocation: "Tilpasning af spørgsmålets titel",
+      // [Auto-translated] "Question title alignment"
+      templateQuestionTitleLocation: "Tilpasning af spørgsm��lets titel",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Spørgsmålets titelbredde",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Justering af fejlmeddelelse",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Ny panelplacering",
-      // [Auto-translated] "Show progress bar"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Ny indgangsplacering",
+      // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "Vis statuslinjen",
-      // [Auto-translated] "Key column"
+      // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
     question: {
@@ -682,8 +682,8 @@ export var danishStrings = {
       visibleIf: "Gør spørgsmålet synligt, hvis",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Foretag spørgsmålet påkrævet, hvis",
-      // [Auto-translated] "Parent page"
-      page: "Overordnet side",
+      // [Auto-translated] "Move the question to page"
+      page: "Flyt spørgsmålet til side",
       // [Auto-translated] "Question box collapse state"
       state: "Tilstand for sammenbrud af spørgsmålsfelt",
       // [Auto-translated] "Number this question"
@@ -694,36 +694,36 @@ export var danishStrings = {
       descriptionLocation: "Tilpasning af spørgsmålsbeskrivelse",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Justering af fejlmeddelelse",
-      // [Auto-translated] "Add indents"
-      indent: "Forøg det indre indryk",
+      // [Auto-translated] "Increase the inner indent"
+      indent: "Forøg den indre indrykning",
       // [Auto-translated] "Inline question width"
       width: "Indbygget spørgsmålsbredde",
       // [Auto-translated] "Minimum question width"
       minWidth: "Mindste spørgsmålsbredde",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Maksimal spørgsmålsbredde",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "Opdater inputfeltværdi"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "Bredde på signaturområde",
-      // [Auto-translated] "Signature height"
-      signatureHeight: "Højde på signaturområde",
+      // [Auto-translated] "Signature area height"
+      signatureHeight: "Signaturområdets højde",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Skaler signaturområdet automatisk",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Vis pladsholderen",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Vise en pladsholder i signaturområdet",
       // [Auto-translated] "Placeholder text"
       placeholder: "Pladsholdertekst",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Pladsholdertekst i skrivebeskyttet tilstand eller eksempeltilstand",
-      // [Auto-translated] "Show the Clear button"
+      // [Auto-translated] "Show the Clear button within signature area"
       allowClear: "Vis knappen Ryd i signaturområdet",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Mindste bredde på pennen",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Maksimal bredde på pennen",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Mindste stregbredde",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Maksimal stregbredde",
       // [Auto-translated] "Stroke color"
       penColor: "Stregfarve"
     },
@@ -756,26 +756,26 @@ export var danishStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Survey title"
+      title: "Undersøgelsens titel",
       // [Auto-translated] "Survey description"
       description: "Beskrivelse af undersøgelsen",
-      // [Auto-translated] "Read-only"
+      // [Auto-translated] "Make the survey read-only"
       readOnly: "Gør undersøgelsen skrivebeskyttet"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Sidenavn",
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Page title"
+      title: "Sidens titel",
       // [Auto-translated] "Page description"
       description: "Sidebeskrivelse",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Gør siden synlig, hvis",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Gør siden påkrævet, hvis",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Tidsgrænse for at afslutte siden (i sekunder)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Frist for at færdiggøre siden",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Spørgsmålsrækkefølge på siden"
     },
@@ -853,7 +853,7 @@ export var danishStrings = {
     defaultDisplayValue: "Standardvisningsværdi for dynamiske tekster",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Justering af etiketter",
-    // [Auto-translated] "Input field size (in characters)"
+    // [Auto-translated] "Input field width (in characters)"
     size: "Bredde på inputfelt (i tegn)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Justering af cellefejlmeddelelse",
@@ -935,8 +935,8 @@ export var danishStrings = {
     fastEntryChoicesCountError: "Begræns antallet af varer fra {0} til {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Indtast mindst {0} punkter",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Du kan indstille data i følgende format:\nværdi1|tekst\nværdi2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Angiv listen over valgmuligheder og deres id'er i følgende format:\n\nid|mulighed\n\nEt id for valgmulighed er ikke synligt for svarpersoner og kan bruges i betingede regler.",
     // "Form Entry"
     formEntry: "Form Entry",
     // "Test the service"
@@ -947,10 +947,10 @@ export var danishStrings = {
     conditionActionEmpty: "Vælg handlingen",
     // "Select a question..."
     conditionSelectQuestion: "Vælg spørgsmål...",
-    // [Auto-translated] "Select page..."
-    conditionSelectPage: "Vælg side...",
-    // [Auto-translated] "Select panel..."
-    conditionSelectPanel: "Vælg panel...",
+    // [Auto-translated] "Select a page..."
+    conditionSelectPage: "Vælg en side...",
+    // [Auto-translated] "Select a panel..."
+    conditionSelectPanel: "Vælg et panel...",
     // "Please enter/select the value"
     conditionValueQuestionTitle: "Indtast/vælg værdi",
     // "Press ctrl+space to get expression completion hint"
@@ -965,10 +965,10 @@ export var danishStrings = {
     assistantTitle: "Tilgængelige spørgsmål:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Der skal være mindst én kolonne eller række",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Få vist et eksempel på svarene, før du indsender undersøgelsen",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Indstillet af ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Gennemgå før indsendelse",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Aktiveret af en betingelse",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Nulstille",
     // "Please enter a value"
@@ -979,10 +979,10 @@ export var danishStrings = {
     propertyNameIsNotUnique: "Indtast et unikt navn",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Brug ikke reserverede ord: \"element\", \"valg\", \"panel\", \"række\".",
-    // [Auto-translated] "No items have been added yet"
-    listIsEmpty: "Der er endnu ikke tilføjet nogen varer",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Der er endnu ikke tilføjet nogen valgmuligheder",
+    // [Auto-translated] "You don't have any items yet"
+    listIsEmpty: "Du har ingen varer endnu",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Du har ingen valg endnu",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Du har ikke nogen kolonner endnu",
     // [Auto-translated] "You don't have layout columns yet"
@@ -999,8 +999,8 @@ export var danishStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Du har ingen links endnu",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Du har ingen sider endnu",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Tilføj et valg",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Tilføj nyt valg",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Tilføj ny kolonne",
     // [Auto-translated] "Add new row"
@@ -1034,17 +1034,17 @@ export var danishStrings = {
     // "Path to data"
     path: "Sti",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
-      url: "Webtjenestens URL-adresse",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Hent værdier fra følgende JSON-felt"
+      // [Auto-translated] "Web service URL"
+      url: "URL-adresse til webtjeneste",
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Få værdi til at gemme fra følgende egenskab"
     },
     // "Get value to display from the following property"
     titleName: "Titelnavn",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Hent URL-adresser til billeder fra følgende JSON-felt",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Tillad tomt svar",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Hent fil-URL-adresser fra følgende ejendom",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Accepter tomt svar",
     // [Auto-translated] "Title"
     titlePlaceholder: "Titel",
     // [Auto-translated] "Survey Title"
@@ -1065,24 +1065,24 @@ export var danishStrings = {
     showOtherItem: "Har andet element",
     // "Rename the \"Other\" option"
     otherText: "Andet element tekst",
-    // [Auto-translated] "Allow the None option"
-    showNoneItem: "Tillad indstillingen Ingen",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Tillad indstillingen Afvis at svare",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Tillad indstillingen Ved ikke",
-    // [Auto-translated] "None option text"
-    noneText: "Ingen tekst til valgmulighed",
-    // [Auto-translated] "Allow the Select All option"
-    showSelectAllItem: "Tillad indstillingen Vælg alt",
-    // [Auto-translated] "Select All option text"
-    selectAllText: "Vælg tekst med valgmuligheden Alle",
+    // [Auto-translated] "Enable the \"None\" option"
+    showNoneItem: "Aktiver indstillingen \"Ingen\"",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Aktiver indstillingen \"Afvis at svare\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Aktiver indstillingen \"Ved ikke\"",
+    // [Auto-translated] "Rename the \"None\" option"
+    noneText: "Omdøb indstillingen \"Ingen\"",
+    // [Auto-translated] "Enable the \"Select All\" option"
+    showSelectAllItem: "Aktiver indstillingen \"Vælg alle\"",
+    // [Auto-translated] "Rename the \"Select All\" option"
+    selectAllText: "Omdøb indstillingen \"Vælg alle\"",
     // [Auto-translated] "Minimum value for auto-generated items"
     choicesMin: "Minimumsværdi for automatisk genererede varer",
     // [Auto-translated] "Maximum value for auto-generated items"
     choicesMax: "Maksimal værdi for automatisk genererede varer",
-    // [Auto-translated] "Step for auto-generated items"
-    choicesStep: "Trin for automatisk genererede elementer",
+    // [Auto-translated] "Step value for auto-generated items"
+    choicesStep: "Trinværdi for automatisk genererede varer",
     // "Name"
     name: "Navn",
     // "Title"
@@ -1103,8 +1103,8 @@ export var danishStrings = {
     markRequired: "Markér efter behov",
     // [Auto-translated] "Remove the required mark"
     removeRequiredMark: "Fjern det påkrævede mærke",
-    // [Auto-translated] "Require answer for all rows"
-    eachRowRequired: "Kræv svar for alle rækker",
+    // [Auto-translated] "Require an answer in each row"
+    eachRowRequired: "Kræv et svar i hver række",
     // [Auto-translated] "Prevent duplicate responses in rows"
     eachRowUnique: "Undgå dublerede svar i rækker",
     // "Error message for required questions"
@@ -1137,12 +1137,12 @@ export var danishStrings = {
     removeRowText: "Fjern række knaptekst",
     // [Auto-translated] "Input field title pattern"
     singleInputTitleTemplate: "Titelmønster for inputfelt",
-    // [Auto-translated] "Minimum rate value"
-    rateMin: "Mindste sats værdi",
-    // [Auto-translated] "Maximum rate value"
-    rateMax: "Maksimal sats værdi",
-    // [Auto-translated] "Rate step"
-    rateStep: "Sats trin",
+    // [Auto-translated] "Minimum rating value"
+    rateMin: "Mindste bedømmelsesværdi",
+    // [Auto-translated] "Maximum rating value"
+    rateMax: "Maksimal bedømmelsesværdi",
+    // [Auto-translated] "Step value"
+    rateStep: "Trinværdi",
     // "Minimum value label"
     minRateDescription: "Beskriv laveste vurdering",
     // "Maximum value label"
@@ -1187,8 +1187,8 @@ export var danishStrings = {
     gotoName: "Spørgsmål at springe til",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Reglen er forkert",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Medtag i undersøgelsesresultater",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Føj til undersøgelsesresultaterne",
     // "Make the title and description visible"
     showTitle: "Vis/skjul titel",
     // [Auto-translated] "Expand/collapse title"
@@ -1219,10 +1219,10 @@ export var danishStrings = {
     pageNextText: "Næste side knaptekst",
     // "\"Complete Survey\" button text"
     completeText: "Færdig knaptekst",
-    // [Auto-translated] "Preview Answers button text"
-    previewText: "Tekst til knappen Vis svar",
-    // [Auto-translated] "Edit Answer button text"
-    editText: "Tekst til knappen Rediger svar",
+    // [Auto-translated] "\"Review Answers\" button text"
+    previewText: "Knapteksten \"Gennemgå svar\"",
+    // [Auto-translated] "\"Edit Answer\" button text"
+    editText: "Knapteksten \"Rediger svar\"",
     // "\"Start Survey\" button text"
     startSurveyText: "Start knaptekst",
     // "Show navigation buttons"
@@ -1283,24 +1283,24 @@ export var danishStrings = {
     html: "HTML-markering",
     // [Auto-translated] "Answer"
     setValue: "Svare",
-    // [Auto-translated] "Image format"
-    dataFormat: "Billedformat",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Tillad tilføjelse af rækker",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Tillad fjernelse af rækker",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Tillad træk og slip af rækker",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Gælder ikke, hvis du angiver den nøjagtige billedbredde eller -højde.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Mindste billedbredde",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Maksimal billedbredde",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Mindste billedhøjde",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Maksimal billedhøjde",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Opbevaring format",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Aktiver tilføjelse af rækker",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Aktivér fjernelse af rækker",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Aktivere omarrangering af rækker",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Gælder ikke, hvis du angiver den nøjagtige bredde eller højde for visningsområdet.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Mindste bredde på visningsområdet",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Maksimal bredde på visningsområdet",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Mindste visningsområdehøjde",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Maksimal visningsområdehøjde",
     // [Auto-translated] "Minimum value"
     minValue: "Mindste værdi",
     // [Auto-translated] "Maximum value"
@@ -1323,30 +1323,30 @@ export var danishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Valideringsudtryk"
     },
-    // [Auto-translated] "Total row text"
-    totalText: "Tekst i samlet række",
-    // [Auto-translated] "Total type"
-    totalType: "Samlet type",
-    // [Auto-translated] "Total expression"
-    totalExpression: "Samlet udtryk",
-    // [Auto-translated] "Total value display style"
-    totalDisplayStyle: "Visningstypografi for samlet værdi",
+    // [Auto-translated] "Total row header"
+    totalText: "Rækkeoverskrift i total",
+    // [Auto-translated] "Aggregation method"
+    totalType: "Aggregeringsmetode",
+    // [Auto-translated] "Total value expression"
+    totalExpression: "Udtryk for samlet værdi",
+    // [Auto-translated] "Total value display format"
+    totalDisplayStyle: "Visningsformat for samlet værdi",
     // [Auto-translated] "Currency"
     totalCurrency: "Valuta",
     // [Auto-translated] "Formatted string"
     totalFormat: "Formateret streng",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logo (URL eller base64-kodet streng)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Undersøgelsens opbygning",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Maksimal svarlængde (med tegn)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Maksimal kommentarlængde (i tegn)",
+    // [Auto-translated] "Survey logo"
+    logo: "Logo for undersøgelse",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Undersøgelsens layout",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Begræns svarlængden",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Begræns kommentarlængden",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Højde på kommentarområdet (i linjer)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "Udvid automatisk kommentarområdet, hvis det er nødvendigt",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Udvid automatisk tekstområder",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Tillad brugere at ændre størrelsen på tekstområder",
     // "Update input field values"
@@ -1359,16 +1359,16 @@ export var danishStrings = {
     checkErrorsMode: "Kør validering",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Validere tomme felter ved mistet fokus",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Naviger til URL",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "Dynamisk webadresse",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Omdiriger til et eksternt link efter indsendelse",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Dynamisk eksternt link",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Markering for at vise, om brugeren allerede har udfyldt denne undersøgelse",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Opmærkning af siden Undersøgelse fuldført",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Dynamisk undersøgelse fuldført sidemarkering",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "\"Tak\"-sidemarkering",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Dynamisk \"Tak\"-sidemarkering",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Markering, der skal vises, mens undersøgelsesmodellen indlæses",
     // [Auto-translated] "Comment area text"
@@ -1383,8 +1383,8 @@ export var danishStrings = {
     allowClear: "Vis knappen Ryd",
     // [Auto-translated] "Search Mode"
     searchMode: "Søgetilstand",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Værdi visningsstil",
+    // [Auto-translated] "Display format"
+    displayStyle: "Visningsformat",
     // [Auto-translated] "Formatted string"
     format: "Formateret streng",
     // [Auto-translated] "Maximum fractional digits"
@@ -1393,18 +1393,18 @@ export var danishStrings = {
     minimumFractionDigits: "Mindste brøkdele",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Vis grupperingsseparatorer",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Tillad flere filer",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Se eksempler på billeder",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Aktivér upload af flere filer",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Se eksempler på uploadede billeder",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Accepterede filtyper",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vent på, at overførslen er fuldført",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Bekræft sletning af fil",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Placering af panelet Detaljer",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Justering af rækkedetaljer",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Mindste antal rækker",
     // [Auto-translated] "Maximum row count"
@@ -1413,30 +1413,30 @@ export var danishStrings = {
     confirmDelete: "Bekræft sletning af række",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Bekræftelsesmeddelelse",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Indledende antal paneler",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Mindste antal paneler",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Maksimalt antal paneler",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Udvid tilstand for indvendigt panel",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Forrige værktøjstip til panelknap",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Værktøjstip til knappen Næste panel",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Fjern placering af panelknap",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "Skjul spørgsmålet, hvis der ikke er nogen rækker",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Oprindelig antal poster",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Mindste antal tilmeldinger",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Maksimalt antal tilmeldinger",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Indledende indtastningstilstand",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Knapteksten \"Forrige indtastning\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Knapteksten \"Næste indtastning\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Justering af knappen \"Fjern indtastning\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "Skjul spørgsmålet, hvis det ikke har nogen linjer",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Skjule kolonner, hvis der ikke er nogen rækker",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Tilpassede satsværdier",
-    // [Auto-translated] "Rate count"
-    rateCount: "Antal satser",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Hvordan angives satsværdier?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Brugerdefinerede vurderingsværdier",
+    // [Auto-translated] "Rating count"
+    rateCount: "Antal bedømmelser",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Konfiguration af bedømmelse",
     slider: {
       // [Auto-translated] "Min value"
       min: "Min. værdi",
@@ -1460,9 +1460,9 @@ export var danishStrings = {
       autoGenerate: "Konfiguration af skaleringsetiketter",
       // [Auto-translated] "Slider type"
       sliderType: "Skyder type",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Min. rækkevidde længde",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Maks. rækkevidde længde",
       // [Auto-translated] "Custom labels"
       customLabels: "Brugerdefinerede etiketter",
@@ -1472,13 +1472,13 @@ export var danishStrings = {
       tooltipFormat: "Værktøjstip-format"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Billedets højde",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Billedets bredde"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Skjul spørgsmålet, hvis det ikke indeholder nogen valgmuligheder",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Skjul spørgsmålet, hvis det ikke har nogen valgmuligheder",
     // "Minimum width"
     minWidth: "Minimumbredde (i CSS-accepterede værdier)",
     // "Maximum width"
@@ -1489,10 +1489,10 @@ export var danishStrings = {
     showHeader: "Vis kolonneoverskrifter",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Vis vandret rullepanel",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Mindste kolonnebredde (i CSS-accepterede værdier)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Bredde på rækkeoverskrift (i CSS-accepterede værdier)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Mindste kolonnebredde",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Rækkeoverskriftens bredde",
     // "Value to store when \"True\" is selected"
     valueTrue: "\"Sand\" værdi",
     // "Value to store when \"False\" is selected"
@@ -1505,40 +1505,40 @@ export var danishStrings = {
     otherErrorText: "Fejlmeddelelsen \"Tom kommentar\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "Fejlmeddelelsen \"Ikke-entydig nøgleværdi\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Minimum valgte valg",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Maksimalt antal valgte valg",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Logobredde (i CSS-accepterede værdier)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Logohøjde (i CSS-accepterede værdier)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Mindste valgmuligheder at vælge",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Maksimalt antal valgmuligheder at vælge",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Logo bredde",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Logo højde",
     // "Read-only"
     readOnly: "Skrivebeskyttet",
-    // [Auto-translated] "Editable if"
-    enableIf: "Redigerbar, hvis",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Deaktiver skrivebeskyttet tilstand, hvis",
     // "\"No rows\" message"
     noRowsText: "Meddelelsen \"Ingen rækker\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Adskil særlige valg (Ingen, Andet, Vælg alle)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Separate særlige valg",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Kopiér valg fra følgende spørgsmål",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Hvilke valgmuligheder skal kopieres?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Hvilke valgmuligheder der skal kopieres",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster",
-    // [Auto-translated] "Display page titles in progress bar"
-    progressBarShowPageTitles: "Vis sidetitler på statuslinjen",
-    // [Auto-translated] "Display page numbers in progress bar"
-    progressBarShowPageNumbers: "Vis sidetal på statuslinjen",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Vis kommentarområdet",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Pladsholder til kommentarområde",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Beskrivelser af visningshastighed som ekstreme værdier",
+    // [Auto-translated] "Display page titles in the progress bar"
+    progressBarShowPageTitles: "Vise sidetitler på statuslinjen",
+    // [Auto-translated] "Display page numbers in the progress bar"
+    progressBarShowPageNumbers: "Vise sidetal på statuslinjen",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Tilføj et kommentarfelt",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Pladsholdertekst til kommentarfeltet",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Vise etiketterne som ekstreme værdier",
     // [Auto-translated] "Row order"
     rowOrder: "Rækkefølge af rækker",
     // [Auto-translated] "Column layout"
@@ -1571,8 +1571,8 @@ export var danishStrings = {
       // "Alt text"
       text: "Alternativ tekst"
     },
-    // [Auto-translated] "Logo position"
-    logoPosition: "Logo position",
+    // [Auto-translated] "Logo alignment"
+    logoPosition: "Justering af logo",
     // [Auto-translated] "Add logo..."
     addLogo: "Tilføj logo...",
     // [Auto-translated] "Change logo..."
@@ -1591,19 +1591,19 @@ export var danishStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Forhåndsvisning tilstand",
-    // [Auto-translated] "Enable the grid layout"
-    gridLayoutEnabled: "Aktivere gitterlayoutet",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Kolonner med gitterlayout",
+    // [Auto-translated] "Enable grid layout"
+    gridLayoutEnabled: "Aktivere gitterlayout",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Gitterkolonner",
     // [Auto-translated] "Mask settings"
     maskSettings: "Indstillinger for maske",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Justering af fejlmeddelelse om rækkeudvidelse",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Justering af fejlmeddelelser for rækkedetaljer",
     // Creator tabs
     tabs: {
       panel: {
-        // [Auto-translated] "Layout"
-        layout: "Panel Layout"
+        // [Auto-translated] "Panel Layout"
+        layout: "Panellayout"
       },
       // "General"
       general: "Generelt",
@@ -1660,8 +1660,8 @@ export var danishStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Indstillinger for inputmaske",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Layout",
+        // [Auto-translated] "Panel Layout"
+        panel: "Panellayout",
         // [Auto-translated] "Layout"
         question: "Layout",
         // [Auto-translated] "Layout"
@@ -1671,12 +1671,12 @@ export var danishStrings = {
       data: "Data",
       // [Auto-translated] "Validation"
       validation: "Validering",
-      // [Auto-translated] "Cell Texts"
-      cells: "Celle tekster",
-      // [Auto-translated] "Survey Complete"
-      showOnCompleted: "Undersøgelsen er fuldført",
-      // [Auto-translated] "Logo in Survey Title"
-      logo: "Logo i undersøgelsens titel",
+      // [Auto-translated] "Individual Cell Texts"
+      cells: "Individuelle celletekster",
+      // [Auto-translated] "\"Thank You\" Page"
+      showOnCompleted: "\"Tak\"-side",
+      // [Auto-translated] "Logo in the Survey Header"
+      logo: "Logo i undersøgelsesoverskriften",
       // [Auto-translated] "Slider"
       slider: "Skyderen",
       // [Auto-translated] "Expression"
@@ -1691,7 +1691,7 @@ export var danishStrings = {
       appearance: "Udseende",
       // [Auto-translated] "Accent colors"
       accentColors: "Accentfarver",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "Overflade baggrund",
       // [Auto-translated] "Scaling"
       scaling: "Skalering",
@@ -1702,16 +1702,16 @@ export var danishStrings = {
     editProperty: "Rediger egenskab '{0}'",
     // "Items"
     items: "[ Element: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Valg er synlige, hvis",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Valg kan vælges, hvis:",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Kolonner er synlige, hvis",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Rækker er synlige, hvis",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Tilføj indre indrykninger",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Gør valgene synlige, hvis",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Gør valgmuligheder valgbare, hvis",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Gør kolonner synlige, hvis",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Gør rækker synlige, hvis",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Forøg den indre indrykning",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Brug svar fra sidste post som standard",
     // "Please enter a value."
@@ -1752,36 +1752,36 @@ export var danishStrings = {
     triggerRunExpressionEmpty: "Indtast et gyldigt udtryk",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Skriv udtryk her...",
-    // [Auto-translated] "No file choosen"
+    // [Auto-translated] "No file chosen"
     noFile: "Ingen fil valgt",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Ryd værdien, hvis spørgsmålet bliver skjult",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Egenskabsnavn for værdi",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Aktivér søgning",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Ryd skjulte spørgsmålsværdier",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Gem værdier i følgende egenskab",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Aktivér søgning, mens du skriver",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Skjule markerede elementer",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Luk rullemenuen efter markering",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Lodret justering",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Alternative rækker",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Kolonner er synlige, hvis",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Rækker er synlige, hvis",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Pladsholder til kommentarområde",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Filpladsholdertekst",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Eksempeltekst til billeder",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Arkiv- eller fotopladsholdertekst",
-    // [Auto-translated] "Rate type"
-    rateType: "Sats type",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Skjul rullemenuen ved valg",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Lodret justering i celler",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Alternative rækkefarver",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Gør kolonner synlige, hvis",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Gør rækker synlige, hvis",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Pladsholdertekst til kommentarfeltet",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Pladsholdertekst til lokal fil",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Pladsholdertekst til kamera",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Pladsholdertekst til lokal fil eller kamera",
+    // [Auto-translated] "Rating icon"
+    rateType: "Bedømmelse ikon",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Eks.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1805,46 +1805,46 @@ export var danishStrings = {
       themeName: "Tema",
       // [Auto-translated] "Question appearance"
       isPanelless: "Spørgsmål udseende",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "Baggrund og hjørneradius",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "Baggrund og hjørneradius",
       // [Auto-translated] "Accent color"
       primaryColor: "Accent farve",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Opacitet af panelets baggrund",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
-      // [Auto-translated] "Font size"
-      fontSize: "Skrifttypestørrelse",
-      // [Auto-translated] "Scale"
-      scale: "Skæl",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Panel- og spørgsmålsboksopacitet",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Opacitet for inputelement",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Skriftstørrelse på undersøgelse",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Skalafaktor for undersøgelse",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Hjørne radius",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Avanceret tilstand",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Titel skrifttype",
-      // [Auto-translated] "Page description font"
+      // [Auto-translated] "Description font"
       pageDescription: "Beskrivelse skrifttype",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Title font"
       questionTitle: "Titel skrifttype",
-      // [Auto-translated] "Question description font"
+      // [Auto-translated] "Description font"
       questionDescription: "Beskrivelse skrifttype",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Font"
       editorFont: "Skrifttype",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Opacitet",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Skrifttypefamilie",
+      backgroundOpacity: "Opacitet", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Skrifttypefamilie til undersøgelser",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Baggrundsfarve",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Accent baggrund",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Accent forgrund",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Fejlmeddelelser",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Baggrundsfarver med accent",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Accentfarver i forgrunden",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Farver på fejlmeddelelser",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Skyggeeffekter",
       // [Auto-translated] "Shadow effects"
@@ -1855,8 +1855,8 @@ export var danishStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Udsigt",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Logo position",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Justering af logo",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Skrifttype for undersøgelsestitel",
       // [Auto-translated] "Survey description font"
@@ -1877,12 +1877,12 @@ export var danishStrings = {
       backgroundImageOpacity: "Opacitet",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Overlapning",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Logo position",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Titel position",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Beskrivelse position"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Justering af logo",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Justering af undersøgelsens titel",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Justering af undersøgelsesbeskrivelse"
     }
   },
   // Property values
@@ -1891,12 +1891,12 @@ export var danishStrings = {
     "true": "sand",
     // [Auto-translated] "false"
     "false": "falsk",
-    // [Auto-translated] "Local files"
-    file: "Lokale filer",
+    // [Auto-translated] "Local file"
+    file: "Lokal fil",
     // [Auto-translated] "Camera"
     camera: "Kamera",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Lokale filer eller kamera",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Lokal fil eller kamera",
     // "Inherit"
     inherit: "inherit",
     // "Visible"
@@ -2017,7 +2017,7 @@ export var danishStrings = {
     onComplete: "onComplete",
     // "When question gets hidden"
     onHidden: "onHidden",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
+    // [Auto-translated] "When question or its panel/page gets hidden"
     onHiddenContainer: "Når spørgsmålet eller dets panel/side bliver skjult",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
@@ -2206,9 +2206,9 @@ export var danishStrings = {
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Oprindelig struktur",
-      // [Auto-translated] "All questions on a single page"
+      // [Auto-translated] "Show all questions on one page"
       singlePage: "Vis alle spørgsmål på én side",
-      // [Auto-translated] "Each question on an individual page"
+      // [Auto-translated] "Show single question per page"
       questionPerPage: "Vis et enkelt spørgsmål pr. side",
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Vis et enkelt indtastningsfelt pr. side"
@@ -2233,18 +2233,18 @@ export var danishStrings = {
     correctQuestions: "Gyldige svar",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Afsluttede sider (knapbrugergrænseflade)",
-    // [Auto-translated] "Under the input"
-    underInput: "Under indgangen",
-    // [Auto-translated] "Under the title"
-    underTitle: "Under titlen",
-    // [Auto-translated] "On blur"
-    onBlur: "På sløring",
+    // [Auto-translated] "Under the input field"
+    underInput: "Under indtastningsfeltet",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Under spørgsmålets titel",
+    // [Auto-translated] "On lost focus"
+    onBlur: "Om mistet fokus",
     // [Auto-translated] "While typing"
     onTyping: "Mens du skriver",
     // [Auto-translated] "Under the row"
     underRow: "Under rækken",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Under rækken er kun ét panel synligt",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Under rækken skal du kun få vist én sektion",
     // "Auto"
     auto: "Auto",
     showNavigationButtons: {
@@ -2256,16 +2256,16 @@ export var danishStrings = {
       combined: "Begge"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Afhænger af matrixlayout"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Baseret på matrixlayout"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Brugere kan ikke udvide eller skjule paneler",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Alle paneler er skjult",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Alle paneler er udvidet",
+      // [Auto-translated] "Locked"
+      default: "Låst",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Skjul alle",
+      // [Auto-translated] "Expand all"
+      expanded: "Udvid alle",
       // [Auto-translated] "First expanded"
       firstExpanded: "Først udvidet"
     },
@@ -2302,10 +2302,10 @@ export var danishStrings = {
       colored: "Farvet"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Frembringe",
-      // [Auto-translated] "Enter manually"
-      "false": "Indtast manuelt"
+      // [Auto-translated] "Auto-generate"
+      "true": "Automatisk generering",
+      // [Auto-translated] "Manual"
+      "false": "Manual"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2326,7 +2326,7 @@ export var danishStrings = {
       on: "Automatisk nummerering",
       // [Auto-translated] "Reset on each page"
       onPage: "Nulstil på hver side",
-      // [Auto-translated] "Start on each panel"
+      // [Auto-translated] "Reset on each panel"
       onpanel: "Nulstil på hvert panel",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Nulstil på hvert panel",
@@ -2434,8 +2434,8 @@ export var danishStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Samme som undersøgelse",
-      // [Auto-translated] "Fit to container"
-      container: "Passer til beholder"
+      // [Auto-translated] "Same as container"
+      container: "Samme som container"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2585,8 +2585,8 @@ export var danishStrings = {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
-      pattern: "Ex.: mm/dd/yyyy"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
+      pattern: "Eks.: mm / dd / åååå HH: MM: ss"
     },
     currencymask: {
       // "Ex.: $"
@@ -2609,22 +2609,22 @@ export var danishStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Et panel-id, der ikke er synligt for svarpersonerne.",
-      // [Auto-translated] "Type a subtitle."
-      description: "Skriv en undertitel til panelet.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "Skriv en panelundertitel.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer panelets synlighed.",
       // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
       enableIf: "Brug tryllestavsikonet til at indstille en betinget regel, der deaktiverer panelets skrivebeskyttede tilstand.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Gælder for alle spørgsmål i dette panel. Når den er indstillet til \"Skjult\", skjuler den også beskrivelser af spørgsmål. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller tilfældiggør dem. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau.",
       // "Repositions the panel to the end of a selected page."
       page: "Flytter panelet til slutningen af en markeret side.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2633,7 +2633,7 @@ export var danishStrings = {
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel.",
@@ -2685,12 +2685,12 @@ export var danishStrings = {
       descriptionLocation: "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Definerer placeringen af et nyligt tilføjet panel. Som standard tilføjes nye paneler til slutningen. Vælg \"Næste\" for at indsætte et nyt panel efter det aktuelle.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Duplikerer svar fra den sidste post og tildeler dem til den næste tilføjede post.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Udløser en bekræftelsesprompt, før du fjerner et panel."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Udløser en bekræftelsesprompt, før en post fjernes."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2777,18 +2777,18 @@ export var danishStrings = {
       imageHeight: "Tilsidesætter minimum- og maksimumhøjdeværdierne.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Tilsidesætter værdierne for minimum- og maksimumbredde.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Værdi\" fungerer som et vare-id, der bruges i betingede regler; \"Tekst\" vises til respondenterne.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Værdi\" fungerer som et vare-id, der bruges i betingede regler. \"Tekst\" vises for respondenterne.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Vælg mellem \"Billede\" og \"Video\" for at indstille medievælgerens indholdstilstand. Hvis \"Billede\" er valgt, skal du sikre dig, at alle angivne indstillinger er billedfiler i følgende formater: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Tilsvarende, hvis \"Video\" er valgt, skal du sikre dig, at alle indstillinger er direkte links til videofiler i følgende formater: MP4, MOV, WMV, FLV, AVI, MKV. Bemærk, at YouTube-links ikke understøttes for videoindstillinger."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Denne indstilling ændrer kun størrelsen på inputfeltet og påvirker ikke bredden af spørgsmålsfeltet. Hvis du vil begrænse den accepterede inputlængde, skal du gå til <b>Validering → Maksimal tegngrænse</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Denne indstilling ændrer kun størrelsen på indtastningsfeltet og påvirker ikke bredden af spørgsmålsfeltet. For at begrænse den accepterede inputlængde skal du gå til \"Validering\" → \"Maksimal tegngrænse\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "Indstiller antallet af viste linjer i indtastningsfeltet. Hvis indgangen fylder flere linjer, vises rullepanelet."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Indstiller antallet af viste linjer i indtastningsfeltet. Hvis inputtet optager flere linjer, vises rullepanelet."
     },
     // survey templates
     survey: {
@@ -2812,7 +2812,7 @@ export var danishStrings = {
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
     },
     slider: {
@@ -2849,8 +2849,8 @@ export var danishStrings = {
     caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Vælg mellem: \"Statisk\" - indstiller en fast bredde; \"Responsive\" - får undersøgelsen til at optage skærmens fulde bredde; \"Auto\" - gælder for en af de to afhængigt af de anvendte spørgsmålstyper.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Cookies forhindrer brugere i at udfylde den samme undersøgelse to gange.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Tildel en unik cookieværdi til din undersøgelse. Cookien vil blive indstillet i en respondents browser, når undersøgelsen er afsluttet, for at forhindre gentagne undersøgelsesindsendelser.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Indsæt et billedlink (ingen størrelsesbegrænsninger), eller klik på mappeikonet for at gennemse en fil fra din computer (op til 64 KB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2863,8 +2863,8 @@ export var danishStrings = {
     autoAdvanceEnabled: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Angiver synligheden af navigationsknapper på en side.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Angiver placeringen af navigationsknapper på en side.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2885,7 +2885,7 @@ export var danishStrings = {
     maxTextLength: "Kun til spørgsmål om indtastning af tekst.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Kun til kommentarer til spørgsmål.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Vælg, om spørgsmålskommentarer og lange tekstspørgsmål automatisk skal vokse i højden baseret på den indtastede tekstlængde.",
@@ -2909,8 +2909,8 @@ export var danishStrings = {
     columnMinWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Kun synlig, når mindst én kolonne har typen Total eller Totaludtryk.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Vises kun, hvis mindst én kolonne viser samlede værdier, der er angivet med \"Sammenlægningsmetode\" eller \"Samlet værdiudtryk\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til en celle med ugyldigt input. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelse\".",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2931,12 +2931,12 @@ export var danishStrings = {
     imageFit: "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Øger gradvist inputfeltets højde, efterhånden som data indtastes. Tilsidesætter indstillingen \"Inputfelthøjde (i linjer)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Størrelseshåndtaget (eller grebet) vises i hjørnet og kan trækkes for at ændre størrelsen på indtastningsfeltet.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Indstillingen \"Nedarv\" anvender en indstilling på undersøgelsesniveau (\"Aktiveret\" som standard).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden \"Tak\". Når den er indstillet til 0, tæller den tid, der er brugt på undersøgelsen.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side. Skjuler navigationsknappen \"Forrige\". Når den er indstillet til 0, tæller den tid, der er brugt på den aktuelle side.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer.",
     page: {
@@ -2985,8 +2985,8 @@ export var danishStrings = {
     maxWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Accepterer CSS-værdier (px, %, in, pt osv.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Hvis du ikke angiver denne egenskab, gemmes svaret i et felt, der er angivet af egenskaben Navn.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Et join-id er en brugerdefineret nøgle, som du kan tildele til flere spørgsmål for at knytte dem sammen og synkronisere deres værdier. Disse værdier flettes ind i en enkelt matrix eller et enkelt objekt og gemmes i undersøgelsesresultater ved hjælp af nøglen som egenskabsnavn.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "En værdi, der vises i HTML-spørgsmål og i de dynamiske titler og beskrivelser af undersøgelseselementer, når spørgsmålsværdien er tom.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3031,8 +3031,8 @@ export var danishStrings = {
     valueTrue: "En værdi, der skal gemmes i undersøgelsesresultater, når respondenterne giver et positivt svar.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "En værdi, der skal gemmes i undersøgelsesresultater, når respondenterne giver et negativt svar.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Det anbefales ikke at deaktivere denne indstilling, da den tilsidesætter eksempelbilledet og gør det svært for en bruger at forstå, om filerne er blevet uploadet.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Det anbefales ikke, at du deaktiverer denne indstilling, da den tilsidesætter eksempelbilledet og gør det svært for en bruger at forstå, om filerne er blevet uploadet.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Udløser en prompt, der beder om at bekræfte filsletningen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3041,7 +3041,7 @@ export var danishStrings = {
     dataList: "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke.",
@@ -3063,10 +3063,10 @@ export var danishStrings = {
     format: "Brug {0} som pladsholder for den faktiske værdi.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Se beskrivelsen af attributten [accept](https://www.w3schools.com/tags/att_input_accept.asp) for at få flere oplysninger.",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Gælder kun for celletyperne Radiogruppe og afkrydsningsfelt.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Se beskrivelsen af attributten [autofuldførelse](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for at få flere oplysninger.",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Gælder kun for kolonner, hvor \"Celleinputtype\" er indstillet til Alternativknapgruppe eller afkrydsningsfelter.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Vælg den datatype, som brugerens browser kan hente. Disse data stammer enten fra tidligere værdier, der er indtastet af brugeren, eller fra forudkonfigurerede værdier, hvis nogen er blevet gemt af brugeren til automatisk fuldførelse.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3140,60 +3140,60 @@ export var danishStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Tillad flere valg",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Vis billedtekster",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Vis billed- og videotekster",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Skift rækkefølgen Ja og Nej",
     // [Auto-translated] "Value"
     value: "Værdi",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Tabulatorjustering",
-    // [Auto-translated] "Source type"
-    sourceType: "Kilde type",
+    // [Auto-translated] "File source type"
+    sourceType: "Filkilde type",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Passer til beholder",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Angiv værdiudtryk",
     // "Description"
-    description: "description",
+    description: "description", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Logo pasform",
     // [Auto-translated] "Pages"
-    pages: "Sider",
+    pages: "Sider", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Spørgsmål",
+    questions: "Spørgsmål", // Auto-generated string
     // "Triggers"
     triggers: "triggers",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Beregnede værdier",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Brugerdefinerede variabler",
     // [Auto-translated] "Survey id"
-    surveyId: "Undersøgelses-id",
+    surveyId: "Undersøgelses-id", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "Id for undersøgelsespost",
+    surveyPostId: "Id for undersøgelsespost", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Undersøgelse viser lagring af data",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Placering af spørgsmålsbeskrivelse",
+    surveyShowDataSaving: "Undersøgelse viser lagring af data", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Justering af spørgsmålsbeskrivelse",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Type af statuslinje",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Vis indholdsfortegnelse",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Toc placering",
+    progressBarType: "Type af statuslinje", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Vis indholdsfortegnelse (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Justering af indholdsfortegnelse",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Mønster for spørgsmålets titel",
-    // [Auto-translated] "Width mode"
-    widthMode: "Bredde-tilstand",
+    questionTitlePattern: "Mønster for spørgsmålets titel", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Tilstand for opmålingsbredde",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Vis brandoplysninger",
+    showBrandInfo: "Vis brandoplysninger", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Brug visningsværdier i dynamiske tekster",
     // "Visible if"
-    visibleIf: "visibleIf",
+    visibleIf: "visibleIf", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Standardværdiudtryk",
     // [Auto-translated] "Required if"
-    requiredIf: "Påkrævet, hvis",
+    requiredIf: "Påkrævet, hvis", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Nulstil værdi, hvis",
     // [Auto-translated] "Set value if"
@@ -3201,137 +3201,137 @@ export var danishStrings = {
     // "Validation rules"
     validators: "validators",
     // [Auto-translated] "Bindings"
-    bindings: "Bindings",
+    bindings: "Bindings", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Gengiv som",
+    renderAs: "Gengiv som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Vedhæft originale elementer",
+    attachOriginalItems: "Vedhæft originale elementer", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"
-    choicesByUrl: "choicesByUrl",
+    choicesByUrl: "choicesByUrl", // Auto-generated string
     // "Currency"
-    currency: "currency",
+    currency: "currency", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Celle tip",
+    cellHint: "Celle tip", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Maksimale brøkdele i alt",
+    totalMaximumFractionDigits: "Maksimale brøkdele i alt", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Mindste brøkdele i alt",
+    totalMinimumFractionDigits: "Mindste brøkdele i alt", // Auto-generated string
     // "Columns"
-    columns: "columns",
+    columns: "columns", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Detaljeelementer",
+    detailElements: "Detaljeelementer", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Tillad adaptive handlinger",
+    allowAdaptiveActions: "Tillad adaptive handlinger", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "defaultRowValue",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "defaultRowValue", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Udvid automatisk nye rækkedetaljer",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Valg doven belastning aktiveret",
+    choicesLazyLoadEnabled: "Valg doven belastning aktiveret", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Valg doven indlæsningssidestørrelse",
+    choicesLazyLoadPageSize: "Valg doven indlæsningssidestørrelse", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Inputfeltkomponent",
+    inputFieldComponent: "Inputfeltkomponent", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Element komponent",
+    itemComponent: "Element komponent", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min.",
+    min: "Min.", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Maks",
+    max: "Maks", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Min værdi udtryk",
+    minValueExpression: "Min værdi udtryk", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Maks. værdiudtryk",
+    maxValueExpression: "Maks. værdiudtryk", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Skridt",
-    // [Auto-translated] "Data list"
-    dataList: "Dataliste",
+    step: "Skridt", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Elementer til automatisk forslag",
     // "Input field width (in characters)"
     inputSize: "inputSize",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Bredde på vareetiket (i px)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Bredde på emnelabel",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Justering af inputværdi",
     // [Auto-translated] "Elements"
-    elements: "Elementer",
+    elements: "Elementer", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Indhold",
+    content: "Indhold", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Navigation titel",
+    navigationTitle: "Navigation titel", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Beskrivelse af navigation",
+    navigationDescription: "Beskrivelse af navigation", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Langt tryk",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Automatisk vækst",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Tillad ændring af størrelse",
+    longTap: "Langt tryk", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Udvid indtastningsfeltet dynamisk",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Aktiver størrelseshåndtag",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Accepter retur af transport",
+    acceptCarriageReturn: "Accepter retur af transport", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Visningstilstand",
     // [Auto-translated] "Rate type"
-    rateType: "Sats type",
+    rateType: "Sats type", // Auto-generated string
     // "Label"
-    label: "label",
+    label: "label", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Indholdstilstand",
-    // [Auto-translated] "Image fit"
-    imageFit: "Billede passer",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Billede og miniaturetilpasning",
     // [Auto-translated] "Alt text"
     altText: "Alternativ tekst",
     // [Auto-translated] "Height"
-    height: "Højde",
+    height: "Højde", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Højde på smartphones",
     // [Auto-translated] "Pen color"
-    penColor: "Pen farve",
+    penColor: "Pen farve", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Baggrundsfarve",
     // [Auto-translated] "Template elements"
-    templateElements: "Skabelon elementer",
+    templateElements: "Skabelon elementer", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Operatør",
+    operator: "Operatør", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Er variabel",
+    isVariable: "Er variabel", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Kør udtryk",
+    runExpression: "Kør udtryk", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Vis billedtekst",
+    showCaption: "Vis billedtekst", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Ikon navn",
+    iconName: "Ikon navn", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Ikon størrelse",
+    iconSize: "Ikon størrelse", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Præcision",
+    precision: "Præcision", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Området for matrix-trækhåndtaget",
+    matrixDragHandleArea: "Området for matrix-trækhåndtaget", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Baggrundsbillede",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Tilpasning af baggrundsbillede",
+    backgroundImageFit: "Tilpasning af baggrundsbillede", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Vedhæftet fil til baggrundsbillede",
+    backgroundImageAttachment: "Vedhæftet fil til baggrundsbillede", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Opacitet i baggrunden",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Vælg at rangere aktiveret",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Vælg for at rangere områdelayout",
+    backgroundOpacity: "Opacitet i baggrunden", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Tillad selektiv rangering",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Justering af rangordning af område",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Tekst, der viser, om alle indstillinger er markeret",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Pladsholdertekst for rangeringsområdet",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Tillad kameraadgang",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Skaler farvetilstand",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Bedøm farvetilstand",
+    allowCameraAccess: "Tillad kameraadgang", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Farvetilstand for bedømmelsesikon",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Smileys farveskema",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Kopiér visningsværdi",
+    copyDisplayValue: "Kopiér visningsværdi", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Søjlespænd",
     // [Auto-translated] "Progress bar area width"
@@ -3460,8 +3460,8 @@ export var danishStrings = {
     "--sjs-secondary-background-500": "Sekundær",
     // [Auto-translated] "Surface"
     surfaceScale: "Overflade",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Brugergrænseflade",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Elementer i brugergrænsefladen",
     // [Auto-translated] "Font"
     fontScale: "Skrifttype",
     names: {

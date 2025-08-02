@@ -124,8 +124,8 @@ export var bgStrings = {
     surveySettingsTooltip: "Настройки на проучването",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Настройки на тема",
-    // [Auto-translated] "Open theme settings"
-    themeSettingsTooltip: "Настройки на тема",
+    // [Auto-translated] "Theme settings"
+    themeSettingsTooltip: "Настройки на темата",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Настройки на създателя",
     // "Show Panel"
@@ -435,8 +435,8 @@ export var bgStrings = {
       panel_visibilityName: "Показване (скриване) на панел",
       // "Enable/disable panel"
       panel_enableName: "Активиране (деактивиране) на панел",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Направи страницата задължителна",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Направете панела задължителен",
       // "Show/hide question"
       question_visibilityName: "Показване (скриване) на въпрос",
       // "Enable/disable question"
@@ -512,7 +512,7 @@ export var bgStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "нулиране на стойността за въпрос: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "присвояване на стойност: {1} на въпрос: {0}",
+      question_setValueText: "присвояване на стойност: {1} на въпрос: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "направи колона {0} на въпрос {1} видима", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var bgStrings = {
       column_resetValueText: "Нулиране на стойността на клетката за колона: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Присвояване на стойност на клетка: {1} на колона: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Израз, чийто резултат ще бъде присвоен на целевия въпрос.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Израз, чийто резултат ще бъде присвоен на целевия въпрос.",
       // "survey becomes completed"
       trigger_completeText: "анкетата е завършена",
       // "set into question: {0} value {1}"
@@ -590,8 +590,8 @@ export var bgStrings = {
       requiredIf: "Направете панела необходим, ако",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Ред на въпросите в рамките на панела",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Родителска страница",
+      // [Auto-translated] "Move the panel to page"
+      page: "Преместване на панела на страница",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Показване на панела на нов ред",
       // [Auto-translated] "Panel collapse state"
@@ -606,9 +606,9 @@ export var bgStrings = {
       showNumber: "Номерирайте този панел"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Ефективна ширина, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Ширина на заглавието на въпроса, px"
     },
     paneldynamic: {
@@ -636,20 +636,20 @@ export var bgStrings = {
       minWidth: "Минимална ширина на панела",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Максимална ширина на панела",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "Потвърждаване изтриването на панел",
-      // [Auto-translated] "Panel description pattern"
-      templateDescription: "Модел за описание на панела",
-      // [Auto-translated] "Panel title pattern"
-      templateTitle: "Модел на заглавие на панел",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Потвърдете премахването на записа",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Модел на описание на записа",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Модел на заглавие на записа",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Празен текст на панел",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Шаблон на заглавие на раздел",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Контейнер за заглавие на раздел",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Направете отделен панел видим, ако",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Направете отделен запис видим, ако",
       // [Auto-translated] "Number the panel"
       showNumber: "Номерирайте панела",
       // [Auto-translated] "Panel title alignment"
@@ -662,8 +662,8 @@ export var bgStrings = {
       templateQuestionTitleWidth: "Ширина на заглавието на въпроса",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Подравняване на съобщение за грешка",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Ново местоположение на панела",
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Ново място за влизане",
       // [Auto-translated] "Show the progress bar"
       showRangeInProgress: "Показване на лентата за напредъка",
       // [Auto-translated] "Prevent duplicate responses in the following question"
@@ -682,8 +682,8 @@ export var bgStrings = {
       visibleIf: "Направете въпроса видим, ако",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Задайте въпроса, който е необходим, ако",
-      // [Auto-translated] "Repositions the question to the end of a selected page."
-      page: "Родителска страница",
+      // [Auto-translated] "Move the question to page"
+      page: "Преместване на въпроса на страница",
       // [Auto-translated] "Question box collapse state"
       state: "Състояние на свиване на полето за въпроси",
       // [Auto-translated] "Number this question"
@@ -712,18 +712,18 @@ export var bgStrings = {
       signatureHeight: "Височина на областта за подпис",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Автоматично мащабиране на областта за подписи",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Показване на контейнера",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Показване на контейнер в областта за подпис",
       // [Auto-translated] "Placeholder text"
       placeholder: "Текст в контейнер",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Текст в контейнер в режим само за четене или визуализация",
       // "Show the Clear button within signature area"
       allowClear: "Показване на бутона \"Изчисти\" в областта за подписи",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Минимална ширина на писалката",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Максимална ширина на перото",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Минимална ширина на хода",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Максимална ширина на хода",
       // [Auto-translated] "Stroke color"
       penColor: "Цвят на щрихите"
     },
@@ -755,8 +755,8 @@ export var bgStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Заглавие",
+      // [Auto-translated] "Survey title"
+      title: "Заглавие на проучването",
       // [Auto-translated] "Survey description"
       description: "Описание на проучването",
       // [Auto-translated] "Make the survey read-only"
@@ -765,16 +765,16 @@ export var bgStrings = {
     page: {
       // [Auto-translated] "Page name"
       name: "Име на страница",
-      // [Auto-translated] "Title"
-      title: "Заглавие",
+      // [Auto-translated] "Page title"
+      title: "Заглавие на страница",
       // [Auto-translated] "Page description"
       description: "Описание на страницата",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Направете страницата видима, ако",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Направете страницата задължителна, ако",
-      // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-      timeLimit: "Времево ограничение за завършване на страницата (в секунди)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Срок за завършване на страницата",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Ред на въпросите на страницата"
     },
@@ -966,8 +966,8 @@ export var bgStrings = {
     cellsEmptyRowsColumns: "Трябва да има поне една колона или ред.",
     // "Review before submit"
     showPreviewBeforeComplete: "Визуализирай отговорите, преди да изпратиш анкетата.",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Зададено от ",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Активирано от условие",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Проучване",
     // "Please enter a value"
@@ -1033,7 +1033,7 @@ export var bgStrings = {
     // "Path to data"
     path: "Път до данни в услугата",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "URL адрес на уеб услуга",
       // "Get value to store from the following property"
       valueName: "Вземи стойности от следното JSON поле."
@@ -1319,8 +1319,8 @@ export var bgStrings = {
     surveyvalidator: {
       // "Error message"
       text: "Съобщение за грешка",
-      // [Auto-translated] "Use the magic wand icon to set a validation rule for the question."
-      expression: "Израз за валидиране"
+      // [Auto-translated] "Validation expression"
+      expression: "Валидиращ израз"
     },
     // "Total row header"
     totalText: "Общ текст в реда",
@@ -1459,9 +1459,9 @@ export var bgStrings = {
       autoGenerate: "Конфигурация на етикети в мащаба",
       // [Auto-translated] "Slider type"
       sliderType: "Тип плъзгач",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Минимална дължина на диапазона",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Максимална дължина на обхвата",
       // [Auto-translated] "Custom labels"
       customLabels: "Персонализирани етикети",
@@ -1471,9 +1471,9 @@ export var bgStrings = {
       tooltipFormat: "Формат на подсказката"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Височина на изображението",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Ширина на изображението"
     },
     // "Hide the question if it has no choices"
@@ -1504,8 +1504,8 @@ export var bgStrings = {
     otherErrorText: "\"Празен коментар\" съобщение за грешка",
     // "Error message for duplicate responses"
     keyDuplicationError: "\"Неуникална стойност на ключ\" съобщение за грешка",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Минимален избор",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Минимален избор за избор",
     // "Maximum choices to select"
     maxSelectedChoices: "Максимален брой избрани",
     // "Logo width"
@@ -1528,9 +1528,9 @@ export var bgStrings = {
     choiceValuesFromQuestion: "Използване на стойности от следната матрична колона или въпрос на панела като идентификатори на избор",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Използване на стойности от следната матрична колона или панелен въпрос като текстове за избор",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Показване на заглавията на страниците в лентата за напредъка",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Показване на номерата на страниците в лентата за напредъка",
     // "Add a comment box"
     showCommentArea: "Показване на областта за коментари",
@@ -1590,14 +1590,14 @@ export var bgStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Режим на визуализация",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "Разрешаване на оформлението на мрежата",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Колони за оформление на мрежата",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Колони на мрежата",
     // [Auto-translated] "Mask settings"
     maskSettings: "Настройки на маската",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Подравняване на съобщението за грешка при разгъване на реда",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Подравняване на съобщенията за грешка на подробните редове",
     // Creator tabs
     tabs: {
       panel: {
@@ -1659,8 +1659,8 @@ export var bgStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Настройки на маската за въвеждане",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Оформление",
+        // [Auto-translated] "Panel Layout"
+        panel: "Оформление на панела",
         // [Auto-translated] "Layout"
         question: "Оформление",
         // [Auto-translated] "Layout"
@@ -1690,7 +1690,7 @@ export var bgStrings = {
       appearance: "Външен вид",
       // [Auto-translated] "Accent colors"
       accentColors: "Акцентни цветове",
-      // [Auto-translated] "Surface Background"
+      // [Auto-translated] "Surface background"
       surfaceBackground: "Повърхностен фон",
       // [Auto-translated] "Scaling"
       scaling: "Мащабиране",
@@ -1773,14 +1773,14 @@ export var bgStrings = {
     rowsVisibleIf: "Редовете се виждат, ако",
     // "Placeholder text for the comment box"
     otherPlaceholder: "Заместител на областта за коментари",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Текст в контейнер за файл",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Текст в контейнер за снимка",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Текст в контейнер за файл или снимка",
-    // [Auto-translated] "Rate type"
-    rateType: "Тип на тарифата",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Контейнер за текст за локален файл",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Контейнер за текст за камера",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Контейнер за текст за локален файл или камера",
+    // [Auto-translated] "Rating icon"
+    rateType: "Икона за оценка",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Напр.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1810,14 +1810,14 @@ export var bgStrings = {
       questionPanel: "Фон и радиус на ъгъла",
       // [Auto-translated] "Accent color"
       primaryColor: "Цвят за акцентиране",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Непрозрачност на фона на панела",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Непрозрачност на фона на въпроса",
-      // [Auto-translated] "Font size"
-      fontSize: "Размер на шрифта",
-      // [Auto-translated] "Scale"
-      scale: "Мащаб",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Непрозрачност на панела и полето з�� въпроси",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Непрозрачност на входния елемент",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Размер на шрифта на анкетата",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Коефициент на мащаба на проучването",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Радиус на ъгъла",
       // [Auto-translated] "Advanced mode"
@@ -1833,17 +1833,17 @@ export var bgStrings = {
       // [Auto-translated] "Font"
       editorFont: "Шрифт",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Непрозрачност",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Семейство шрифтове",
+      backgroundOpacity: "Непрозрачност", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Семейство шрифтове за проучване",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Цвят на фона",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Фон за акцентиране",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Акцентиране на преден план",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Съобщения за грешки",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Акцентни цветове на фона",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Акцентни цветове на преден план",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Цветове на съобщението за грешка",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Ефекти на сянка",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var bgStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Изглед",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Позиция на логото",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Подравняване на логото",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Шрифт за заглавие на проучване",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var bgStrings = {
       backgroundImageOpacity: "Непрозрачност",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Припокриване",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Позиция на логото",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Позиция на заглавието",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Описание позиция"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Подравняване на логото",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Подравняване на заглавието на проучването",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Подравняване на описанието на проучването"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var bgStrings = {
     "true": "вярно",
     // "false"
     "false": "невярно",
-    // [Auto-translated] "Local files"
-    file: "Локални файлове",
+    // [Auto-translated] "Local file"
+    file: "Локален файл",
     // [Auto-translated] "Camera"
     camera: "Камера",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "Локални файлове или камера",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "Локален файл или камера",
     // "Inherit"
     inherit: "Наследяване",
     // "Visible"
@@ -2433,8 +2433,8 @@ export var bgStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Същото като проучването",
-      // [Auto-translated] "Fit to container"
-      container: "Побиране в контейнера"
+      // [Auto-translated] "Same as container"
+      container: "Същото като контейнера"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2608,7 +2608,7 @@ export var bgStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "ИД на панел, който не е видим за респондентите.",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "Въведете подзаглавие на панела.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на панела.",
@@ -2616,14 +2616,14 @@ export var bgStrings = {
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за панела.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Отнася се за всички въпроси в този панел. Когато е зададено на \"Скрито\", той също скрива описанията на въпросите. Ако искате да замените тази настройка, дефинирайте правила за подравняване на заглавието за отделни въпроси. Опцията \"Наследяване\" прилага настройката на ниво страница (ако е зададена) или на ниво проучване (\"Отгоре\" по подразбиране). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с всички въпроси в панела. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво страница (ако е зададена) или на ниво проучване.",
       // "Repositions the panel to the end of a selected page."
       page: "Премества панела в края на избрана страница.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var bgStrings = {
       startWithNewLine: "Премахнете отметката, за да покажете панела в един ред с предишния въпрос или панел. Настройката не се прилага, ако панелът е първият елемент във вашия формуляр.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Изберете от: \"Разширен\" - панелът се показва изцяло и може да бъде свит; \"Свит\" - панелът показва само заглавието и описанието и може да бъде разширен; \"Заключен\" - панелът се показва изцяло и не може да се свива.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Задава ширината на панела пропорционално на други елементи на проучването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Присвоява номера на въпроси, вложени в този панел.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var bgStrings = {
       descriptionLocation: "Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Под заглавието на панела\" по подразбиране).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Определя позицията на новодобавен панел. По подразбиране в края се добавят нови панели. Изберете \"Напред\", за да вмъкнете нов панел след текущия.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Дублира отговорите от последния запис и ги присвоява на следващия добавен запис.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Задейства подкана за потвърждение преди премахване на панел."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var bgStrings = {
       imageHeight: "Отменя минималните и максималните стойности на височината.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Отменя минималните и максималните стойности на ширината.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
-      choices: "\"Стойност\" служи като ИД на артикул, използван в условни правила; \"Текст\" се показва на респондентите.",
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
+      choices: "\"Стойност\" служи като идентификатор на елемента, използван в условни правила; \"Текст\" се показва на респондентите.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Изберете между \"Изображение\" и \"Видео\", за да зададете режима на съдържание на селектора на мултимедия. Ако е избрано \"Изображение\", уверете се, че всички предоставени опции са файлове с изображения в следните формати: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. По същия начин, ако е избрано \"Видео\", уверете се, че всички опции са директни връзки към видео файлове в следните формати: MP4, MOV, WMV, FLV, AVI, MKV. Моля, имайте предвид, че връзките в YouTube не се поддържат за опции за видео."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Тази настройка само преоразмерява входното поле и не влияе на ширината на полето за въпроси. За да ограничите приетата дължина на въвеждане, отидете на <b>Проверка → Максимален брой знаци</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Тази настройка само преоразмерява полето за въвеждане и не засяга ширината на полето за въпроси. За да ограничите приетата дължина на въвеждане, отидете на \"Валидиране\" → \"Максимално ограничение на знаците\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "Задава броя на показваните редове в полето за въвеждане. Ако входът заема повече редове, ще се появи плъзгачът."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Задава броя на показаните редове в полето за въвеждане. Ако входът заема повече редове, ще се появи лентата за превъртане."
     },
     // survey templates
     survey: {
@@ -2811,7 +2811,7 @@ export var bgStrings = {
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
     },
     slider: {
@@ -2862,8 +2862,8 @@ export var bgStrings = {
     autoAdvanceEnabled: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Задава видимостта на бутоните за навигация на страницата.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Задава местоположението на бутоните за навигация на страница.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,7 +2884,7 @@ export var bgStrings = {
     maxTextLength: "Само за въпроси за въвеждане на текст.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Само за въпросителни коментари.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
     commentAreaRows: "Задава броя на показваните редове в текстовите области за коментари на въпроси. Ако входът заема повече редове, се появява лентата за превъртане.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Изберете дали искате коментарите за въпроси и въпросите с дълъг текст автоматично да нарастват на височина въз основа на въведената дължина на текста.",
@@ -2930,12 +2930,12 @@ export var bgStrings = {
     imageFit: "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Постепенно увеличава височината на входното поле при въвеждане на данни. Замества настройката \"Височина на входното поле (в редове)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Манипулаторът за преоразмеряване (или ръкохватката) се появява в ъгъла и може да се плъзга, за да се промени размерът на входното поле.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Опцията \"Наследяване\" прилага настройка на ниво проучване (\"Активирано\" по подразбиране).",
     // "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
     timeLimit: "Интервал от време в секунди, след което проучването автоматично преминава към страницата \"Благодаря\".",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Интервал от време в секунди, след който проучването автоматично преминава към следващата страница. Скрива бутона за навигация \"Предишен\". Когато е зададено на 0, отчита времето, прекарано на текущата страница.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Активирайте тази опция, за да задействате проверка, когато потребителят се фокусира върху празно поле за въвеждане и след това го напусне, без да прави никакви промени.",
     page: {
@@ -3030,8 +3030,8 @@ export var bgStrings = {
     valueTrue: "Стойност, която трябва да се спести в резултатите от проучването, когато респондентите дадат положителен отговор.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Стойност, която трябва да се спести в резултатите от проучването, когато респондентите дадат отрицателен отговор.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Не се препоръчва да деактивирате тази опция, тъй като тя отменя изображението за визуализация и затруднява потребителя да разбере дали файловете са качени.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Не се препоръчва да деактивирате тази опция, тъй като тя игнорира изображението за визуализация и затруднява потребителя да разбере дали файловете са качени.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Задейства подкана с молба за потвърждаване на изтриването на файла.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var bgStrings = {
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Задава постоянна ширина за всички етикети на елементите. Приема CSS стойности (px, %, in, pt и т.н.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не.",
@@ -3147,52 +3147,52 @@ export var bgStrings = {
     value: "Стойност",
     // "Tab alignment"
     tabAlign: "Подравняване на раздели",
-    // [Auto-translated] "Source type"
-    sourceType: "Тип източник",
+    // [Auto-translated] "File source type"
+    sourceType: "Тип източник на файлове",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Побиране в контейнера",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Задаване на израз за стойност",
     // "Description"
-    description: "Описание",
+    description: "Описание", // Auto-generated string
     // "Logo fit"
     logoFit: "Подходящо за лого",
     // "Pages"
-    pages: "Страници",
+    pages: "Страници", // Auto-generated string
     // "Questions"
-    questions: "Въпроси",
+    questions: "Въпроси", // Auto-generated string
     // "Triggers"
     triggers: "Тригери",
     // "Custom variables"
     calculatedValues: "Изчислени стойности",
     // "Survey id"
-    surveyId: "Идентификационен номер на анкетата",
+    surveyId: "Идентификационен номер на анкетата", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "Идентификационен номер на публикацията в проучването",
+    surveyPostId: "Идентификационен номер на публикацията в проучването", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "Проучването показва спестяване на данни.",
+    surveyShowDataSaving: "Проучването показва спестяване на данни.", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Местоположение на описанието на въпроса",
     // "Progress bar type"
-    progressBarType: "Тип лента за напредък",
+    progressBarType: "Тип лента за напредък", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "Показване на съдържание",
     // "TOC alignment"
     tocLocation: "Местоположение на съдържанието",
     // "Question title pattern"
-    questionTitlePattern: "Шаблон на заглавието на въпроса",
+    questionTitlePattern: "Шаблон на заглавието на въпроса", // Auto-generated string
     // "Survey width mode"
     widthMode: "Режим на широчина",
     // "Show brand info"
-    showBrandInfo: "Показване на информация за марката (бранда)",
+    showBrandInfo: "Показване на информация за марката (бранда)", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Стойности за показване на динамични текстове",
     // "Visible if"
-    visibleIf: "Видим, ако",
+    visibleIf: "Видим, ако", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "Стойност по подразбиране на израза",
     // "Required if"
-    requiredIf: "Задължителен, ако",
+    requiredIf: "Задължителен, ако", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Нулиране на стойността, ако",
     // [Auto-translated] "Set value if"
@@ -3200,81 +3200,81 @@ export var bgStrings = {
     // "Validation rules"
     validators: "Валидатори",
     // "Bindings"
-    bindings: "Обвързване",
+    bindings: "Обвързване", // Auto-generated string
     // "Render as"
-    renderAs: "Представяне като",
+    renderAs: "Представяне като", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Прикрепяне на оригиналните елементи",
+    attachOriginalItems: "Прикрепяне на оригиналните елементи", // Auto-generated string
     // "Choices"
     choices: "Избори",
     // "Choices by url"
-    choicesByUrl: "Избори като url",
+    choicesByUrl: "Избори като url", // Auto-generated string
     // "Currency"
-    currency: "Валута",
+    currency: "Валута", // Auto-generated string
     // "Cell hint"
-    cellHint: "Подсказка за клетка",
+    cellHint: "Подсказка за клетка", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Общо максимални дробни цифри",
+    totalMaximumFractionDigits: "Общо максимални дробни цифри", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Общо минимални дробни цифри",
+    totalMinimumFractionDigits: "Общо минимални дробни цифри", // Auto-generated string
     // "Columns"
-    columns: "Колони",
+    columns: "Колони", // Auto-generated string
     // "Detail elements"
-    detailElements: "Детайлни елементи",
+    detailElements: "Детайлни елементи", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "Позволи адаптивни действия",
+    allowAdaptiveActions: "Позволи адаптивни действия", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Стойност на реда по подразбиране",
+    defaultRowValue: "Стойност на реда по подразбиране", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Автоматично разгъване на подробности за нов ред",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Отложеното зареждане на избора е активирано.",
+    choicesLazyLoadEnabled: "Отложеното зареждане на избора е активирано.", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Избор на размер на страницата за отложено зареждане",
+    choicesLazyLoadPageSize: "Избор на размер на страницата за отложено зареждане", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "Компонент на полето за въвеждане",
+    inputFieldComponent: "Компонент на полето за въвеждане", // Auto-generated string
     // "Item component"
-    itemComponent: "Компонент на елемента",
+    itemComponent: "Компонент на елемента", // Auto-generated string
     // "Min"
-    min: "Минимум",
+    min: "Минимум", // Auto-generated string
     // "Max"
-    max: "Максимум",
+    max: "Максимум", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "Минимална стойност на израза",
+    minValueExpression: "Минимална стойност на израза", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "Максимална стойност на израза",
+    maxValueExpression: "Максимална стойност на израза", // Auto-generated string
     // "Step"
-    step: "Стъпка",
+    step: "Стъпка", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "Списък с данни",
     // "Input field width (in characters)"
     inputSize: "Размер на елемента",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Ширина на етикета на елемента (в пиксели)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Ширина на етикета на артикула",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Подравняване на входните стойности",
     // "Elements"
-    elements: "Елементи",
+    elements: "Елементи", // Auto-generated string
     // "Content"
-    content: "Съдържание",
+    content: "Съдържание", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "Навигационно заглавие",
+    navigationTitle: "Навигационно заглавие", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "Описание на навигацията",
+    navigationDescription: "Описание на навигацията", // Auto-generated string
     // "Long tap"
-    longTap: "Дълго докосване",
+    longTap: "Дълго докосване", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Автоматичен растеж",
     // "Enable resize handle"
     allowResize: "Разреши преоразмеряване.",
     // "Accept carriage return"
-    acceptCarriageReturn: "Приеми връщане на каретка.",
+    acceptCarriageReturn: "Приеми връщане на каретка.", // Auto-generated string
     // "Display mode"
     displayMode: "Режим на показване",
     // "Rate type"
-    rateType: "Тип на оценката",
+    rateType: "Тип на оценката", // Auto-generated string
     // "Label"
-    label: "Етикет",
+    label: "Етикет", // Auto-generated string
     // "Content mode"
     contentMode: "Съдържателен режим",
     // "Image and thumbnail fit"
@@ -3282,55 +3282,55 @@ export var bgStrings = {
     // "Alt text"
     altText: "Алтернативен текст",
     // "Height"
-    height: "Височина",
+    height: "Височина", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Височина на смартфони",
     // "Pen color"
-    penColor: "Цвят на писалката",
+    penColor: "Цвят на писалката", // Auto-generated string
     // "Background color"
     backgroundColor: "Цвят на фона",
     // "Template elements"
-    templateElements: "Елементи на шаблона",
+    templateElements: "Елементи на шаблона", // Auto-generated string
     // "Operator"
-    operator: "Оператор",
+    operator: "Оператор", // Auto-generated string
     // "Is variable"
-    isVariable: "Променлива",
+    isVariable: "Променлива", // Auto-generated string
     // "Run expression"
-    runExpression: "Стартиване на израза",
+    runExpression: "Стартиване на израза", // Auto-generated string
     // "Show caption"
-    showCaption: "Показване на надпис",
+    showCaption: "Показване на надпис", // Auto-generated string
     // "Icon name"
-    iconName: "Име на икона",
+    iconName: "Име на икона", // Auto-generated string
     // "Icon size"
-    iconSize: "Размер на иконата",
+    iconSize: "Размер на иконата", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Точност",
+    precision: "Точност", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Област на манипулатора за плъзгане на матрицата",
+    matrixDragHandleArea: "Област на манипулатора за плъзгане на матрицата", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Фоново изображение",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Побиране на фоново изображение",
+    backgroundImageFit: "Побиране на фоново изображение", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Прикачен файл с фоново изображение",
+    backgroundImageAttachment: "Прикачен файл с фоново изображение", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Непрозрачност на фона",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Изберете за класиране разрешено",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Изберете оформление за класиране на области",
+    backgroundOpacity: "Непрозрачност на фона", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Позволете селективно класиране",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Подравняване на площта за класиране",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Текст, който да се показва, ако са избрани всички опции",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Текст в контейнер за областта за класиране",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Разреши достъп до камерата",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Режим на мащабиране на цветовете",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Режим на оценяване на цветовете",
+    allowCameraAccess: "Разреши достъп до камерата", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Цветови режим на иконата за оценка",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Цветова схема на усмивки",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Копиране на показваната стойност",
+    copyDisplayValue: "Копиране на показваната стойност", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Обхват на колоната",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var bgStrings = {
     "--sjs-secondary-background-500": "Вторичен",
     // [Auto-translated] "Surface"
     surfaceScale: "Повърхност",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Потребителски интерфейс",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Елементи на потребителския интерфейс",
     // [Auto-translated] "Font"
     fontScale: "Шрифт",
     names: {

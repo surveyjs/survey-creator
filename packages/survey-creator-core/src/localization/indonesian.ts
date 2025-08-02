@@ -120,11 +120,11 @@ export var indonesianStrings = {
     settingsTooltip: "Buka pengaturan",
     // [Auto-translated] "Survey Settings"
     surveySettings: "Pengaturan Survei",
-    // [Auto-translated] "Open survey settings"
-    surveySettingsTooltip: "Pengaturan survei",
+    // [Auto-translated] "Survey settings"
+    surveySettingsTooltip: "Setelan survei",
     // [Auto-translated] "Theme Settings"
     themeSettings: "Pengaturan Tema",
-    // [Auto-translated] "Open theme settings"
+    // [Auto-translated] "Theme settings"
     themeSettingsTooltip: "Pengaturan tema",
     // [Auto-translated] "Creator Settings"
     creatorSettingTitle: "Pengaturan Kreator",
@@ -425,32 +425,32 @@ export var indonesianStrings = {
       logicPlaceholderDescription: "Buat aturan untuk menyesuaikan alur survei.",
       // [Auto-translated] "Create a rule to customize the flow of the survey."
       logicPlaceholderDescriptionMobile: "Buat aturan untuk menyesuaikan alur survei.",
-      // [Auto-translated] "Show (hide) page"
-      page_visibilityName: "Tampilkan (sembunyikan) halaman",
-      // [Auto-translated] "Enable (disable) page"
-      page_enableName: "Aktifkan (nonaktifkan) halaman",
+      // [Auto-translated] "Show/hide page"
+      page_visibilityName: "Menampilkan/menyembunyikan halaman",
+      // [Auto-translated] "Enable/disable page"
+      page_enableName: "Mengaktifkan/menonaktifkan halaman",
       // [Auto-translated] "Make page required"
       page_requireName: "Buat halaman diperlukan",
-      // [Auto-translated] "Show (hide) panel"
-      panel_visibilityName: "Tampilkan (sembunyikan) panel",
-      // [Auto-translated] "Enable (disable) panel"
-      panel_enableName: "Aktifkan (nonaktifkan) panel",
-      // [Auto-translated] "Make page required"
-      panel_requireName: "Buat halaman diperlukan",
-      // [Auto-translated] "Show (hide) question"
-      question_visibilityName: "Tampilkan (sembunyikan) pertanyaan",
-      // [Auto-translated] "Enable (disable) question"
-      question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
+      // [Auto-translated] "Show/hide panel"
+      panel_visibilityName: "Tampilkan/sembunyikan panel",
+      // [Auto-translated] "Enable/disable panel"
+      panel_enableName: "Aktifkan/nonaktifkan panel",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Membuat panel diperlukan",
+      // [Auto-translated] "Show/hide question"
+      question_visibilityName: "Tampilkan/sembunyikan pertanyaan",
+      // [Auto-translated] "Enable/disable question"
+      question_enableName: "Mengaktifkan/menonaktifkan pertanyaan",
       // [Auto-translated] "Make question required"
       question_requireName: "Buat pertanyaan diperlukan",
       // [Auto-translated] "Reset question value"
       question_resetValueName: "Mereset nilai pertanyaan",
       // [Auto-translated] "Set question value"
       question_setValueName: "Tetapkan nilai pertanyaan",
-      // [Auto-translated] "Show (hide) column"
-      column_visibilityName: "Perlihatkan (sembunyikan) kolom",
-      // [Auto-translated] "Enable (disable) column"
-      column_enableName: "Mengaktifkan (menonaktifkan) kolom",
+      // [Auto-translated] "Show/hide column"
+      column_visibilityName: "Tampilkan/sembunyikan kolom",
+      // [Auto-translated] "Enable/disable column"
+      column_enableName: "Aktifkan/nonaktifkan kolom",
       // [Auto-translated] "Make column required"
       column_requireName: "Buat kolom diperlukan",
       // [Auto-translated] "Reset column value"
@@ -469,30 +469,30 @@ export var indonesianStrings = {
       trigger_runExpressionName: "Menjalankan ekspresi",
       // "Set \"Thank You\" page markup"
       completedHtmlOnConditionName: "Mengatur markup halaman \"Survei Selesai\"",
-      // [Auto-translated] "Make the page visible when the logic expression returns true. Otherwise keep it invisible."
-      page_visibilityDescription: "Membuat halaman terlihat saat ekspresi logika mengembalikan true. Jika tidak, jaga agar tidak terlihat.",
-      // [Auto-translated] "Make the panel visible when the logic expression returns true. Otherwise keep it invisible."
-      panel_visibilityDescription: "Buat panel terlihat saat ekspresi logika mengembalikan true. Jika tidak, jaga agar tidak terlihat.",
-      // [Auto-translated] "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled."
-      panel_enableDescription: "Buat panel, dan semua elemen di dalamnya, aktifkan saat ekspresi logika mengembalikan true. Jika tidak, biarkan mereka dinonaktifkan.",
-      // [Auto-translated] "Make the question visible when the logic expression returns true. Otherwise keep it invisible."
-      question_visibilityDescription: "Buat pertanyaan terlihat saat ekspresi logika mengembalikan true. Jika tidak, jaga agar tidak terlihat.",
-      // [Auto-translated] "Make the question enable when the logic expression returns true. Otherwise keep it disabled."
-      question_enableDescription: "Aktifkan pertanyaan saat ekspresi logika mengembalikan true. Jika tidak, tetap nonaktifkan.",
-      // [Auto-translated] "Question becomes required when the logic expression returns true."
-      question_requireDescription: "Pertanyaan menjadi diperlukan saat ekspresi logika mengembalikan true.",
-      // [Auto-translated] "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'."
-      trigger_completeDescription: "Ketika ekspresi logika mengembalikan true maka survei menjadi selesai dan pengguna akhir melihat 'Halaman terima kasih'.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question."
-      trigger_setvalueDescription: "Ketika nilai pertanyaan, yang digunakan dalam ekspresi logika, diubah dan ekspresi logika mengembalikan true, maka nilai diatur ke pertanyaan yang dipilih.",
-      // [Auto-translated] "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question."
-      trigger_copyvalueDescription: "Ketika nilai pertanyaan, yang digunakan dalam ekspresi logika, diubah dan ekspresi logika mengembalikan true, maka nilai satu pertanyaan yang dipilih disalin ke pertanyaan lain yang dipilih.",
-      // [Auto-translated] "When the logic expression returns true then the survey skip to / focus the selected question."
-      trigger_skipDescription: "Ketika ekspresi logika mengembalikan true maka survei melompat ke / memfokuskan pertanyaan yang dipilih.",
-      // [Auto-translated] "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question"
-      trigger_runExpressionDescription: "Ketika ekspresi logika mengembalikan true, maka ekspresi kustom dilakukan. Anda dapat secara opsional mengatur hasil ekspresi ini ke dalam pertanyaan yang dipilih",
-      // [Auto-translated] "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one."
-      completedHtmlOnConditionDescription: "Jika ekspresi logika mengembalikan true, maka teks default untuk 'Halaman terima kasih' diubah ke yang diberikan.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the page invisible."
+      page_visibilityDescription: "Jadikan halaman terlihat saat ekspresi logis dievaluasi menjadi true. Jika tidak, jaga agar halaman tidak terlihat.",
+      // [Auto-translated] "Make the page visible when the logical expression evaluates to true. Otherwise, keep the panel invisible."
+      panel_visibilityDescription: "Jadikan halaman terlihat saat ekspresi logis dievaluasi menjadi true. Jika tidak, jaga agar panel tidak terlihat.",
+      // [Auto-translated] "Make the panel and all elements inside it enabled when the logical expression evaluates to true. Otherwise, keep them disabled."
+      panel_enableDescription: "Buat panel dan semua elemen di dalamnya diaktifkan saat ekspresi logis dievaluasi menjadi true. Jika tidak, biarkan mereka tetap nonaktif.",
+      // [Auto-translated] "Make the question visible when the logical expression evaluates to true. Otherwise, keep the question invisible."
+      question_visibilityDescription: "Buat pertanyaan terlihat saat ekspresi logis dievaluasi menjadi true. Jika tidak, jaga agar pertanyaan tidak terlihat.",
+      // [Auto-translated] "Make the question enabled when the logical expression evaluates to true. Otherwise, keep the question disabled."
+      question_enableDescription: "Aktifkan pertanyaan saat ekspresi logis dievaluasi menjadi true. Jika tidak, biarkan pertanyaan tetap dinonaktifkan.",
+      // [Auto-translated] "Question becomes required when the logical expression evaluates to true."
+      question_requireDescription: "Pertanyaan menjadi diperlukan ketika ekspresi logis dievaluasi menjadi true.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey ends, and the respondent sees the \"Thank you\" page."
+      trigger_completeDescription: "Saat ekspresi logis dievaluasi menjadi true, survei berakhir, dan responden melihat halaman \"Terima kasih\".",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the specified value is assigned to the selected question."
+      trigger_setvalueDescription: "Ketika nilai pertanyaan yang digunakan dalam ekspresi logis diubah, dan ekspresi dievaluasi menjadi true, nilai yang ditentukan ditetapkan ke pertanyaan yang dipilih.",
+      // [Auto-translated] "When question values used in the logical expression are changed, and the expression evaluates to true, the value of the selected question is copied to another question."
+      trigger_copyvalueDescription: "Ketika nilai pertanyaan yang digunakan dalam ekspresi logis diubah, dan ekspresi dievaluasi menjadi true, nilai pertanyaan yang dipilih disalin ke pertanyaan lain.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey focuses/jumps to the selected question."
+      trigger_skipDescription: "Ketika ekspresi logis dievaluasi menjadi true, survei memfokuskan/melompat ke pertanyaan yang dipilih.",
+      // [Auto-translated] "When the logical expression evaluates to true, the survey evaluates another expression. Optionally, the result of the latter expression can be assigned as a value to the selected question"
+      trigger_runExpressionDescription: "Ketika ekspresi logis dievaluasi menjadi true, survei mengevaluasi ekspresi lain. Secara opsional, hasil dari ekspresi terakhir dapat ditetapkan sebagai nilai untuk pertanyaan yang dipilih",
+      // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
+      completedHtmlOnConditionDescription: "Jika ekspresi logis dievaluasi menjadi true, halaman \"Terima kasih\" menampilkan konten yang ditentukan.",
       // [Auto-translated] "When expression: '{0}' returns true"
       itemExpressionText: "Ketika ekspresi: '{0}' mengembalikan true", // {0} - the expression
       // [Auto-translated] "New rule"
@@ -512,7 +512,7 @@ export var indonesianStrings = {
       // [Auto-translated] "reset value for question: {0}"
       question_resetValueText: "reset nilai untuk pertanyaan: {0}", // {0} question name.
       // [Auto-translated] "assign value: {1} to question: {0}"
-      question_setValueText: "Tetapkan nilai: {1} pertanyaan: {0}",
+      question_setValueText: "Tetapkan nilai: {1} pertanyaan: {0}", // {0} question name and {1} setValueExpression
       // [Auto-translated] "make column {0} of question {1} visible"
       column_visibilityText: "Membuat kolom {0} pertanyaan {1} terlihat", // {0} column name, {1} question name
       // [Auto-translated] "make column {0} of question {1} enable"
@@ -523,8 +523,8 @@ export var indonesianStrings = {
       column_resetValueText: "Setel ulang nilai sel untuk kolom: {0}", // {0} column name
       // [Auto-translated] "assign cell value: {1} to column: {0}"
       column_setValueText: "Menetapkan nilai sel: {1} ke kolom: {0}", // {0} column name and {1} setValueExpression
-      // [Auto-translated] " An expression whose result will be assigned to the target question."
-      setValueExpressionPlaceholder: " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
+      // [Auto-translated] "An expression whose result will be assigned to the target question."
+      setValueExpressionPlaceholder: "Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Survei menjadi selesai",
       // [Auto-translated] "set into question: {0} value {1}"
@@ -561,10 +561,10 @@ export var indonesianStrings = {
       selectedActionCaption: "Pilih tindakan...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Ekspresi logika kosong atau tidak valid. Mohon koreksinya.",
-      // [Auto-translated] "Please, add at least one action."
-      noActionError: "Tolong, tambahkan setidaknya satu tindakan.",
-      // [Auto-translated] "Please, fix problems in your action(s)."
-      actionInvalid: "Tolong, perbaiki masalah dalam tindakan Anda.",
+      // [Auto-translated] "Please add at least one action."
+      noActionError: "Silakan tambahkan setidaknya satu tindakan.",
+      // [Auto-translated] "Please fix issues in your action(s)."
+      actionInvalid: "Harap perbaiki masalah dalam tindakan Anda.",
       // [Auto-translated] "Logical rules are incomplete"
       uncompletedRule_title: "Aturan logis tidak lengkap",
       // [Auto-translated] "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?"
@@ -590,25 +590,25 @@ export var indonesianStrings = {
       requiredIf: "Buat panel diperlukan jika",
       // [Auto-translated] "Question order within the panel"
       questionOrder: "Urutan pertanyaan dalam panel",
-      // [Auto-translated] "Repositions the panel to the end of a selected page."
-      page: "Halaman induk",
+      // [Auto-translated] "Move the panel to page"
+      page: "Memindahkan panel ke halaman",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Menampilkan panel pada baris baru",
-      // [Auto-translated] "Panel expand state"
-      state: "Status keruntuhan panel",
-      // [Auto-translated] "Width (in CSS-accepted values)"
-      width: "Lebar panel sejajar",
-      // [Auto-translated] "Minimum width (in CSS-accepted values)"
+      // [Auto-translated] "Panel collapse state"
+      state: "Status penciwunan panel",
+      // [Auto-translated] "Inline panel width"
+      width: "Lebar panel sebaris",
+      // [Auto-translated] "Minimum panel width"
       minWidth: "Lebar panel minimum",
-      // [Auto-translated] "Maximum width (in CSS-accepted values)"
+      // [Auto-translated] "Maximum panel width"
       maxWidth: "Lebar panel maksimum",
-      // [Auto-translated] "Show panel number"
-      showNumber: "Nomor panel ini"
+      // [Auto-translated] "Number this panel"
+      showNumber: "Beri nomor panel ini"
     },
     panellayoutcolumn: {
-      // [Auto-translated] "Ex.: 30%"
+      // [Auto-translated] "Effective width, %"
       effectiveWidth: "Lebar efektif, %",
-      // [Auto-translated] "Question title width"
+      // [Auto-translated] "Question title width, px"
       questionTitleWidth: "Lebar judul pertanyaan, px"
     },
     paneldynamic: {
@@ -636,37 +636,37 @@ export var indonesianStrings = {
       minWidth: "Lebar panel minimum",
       // [Auto-translated] "Maximum panel width"
       maxWidth: "Lebar panel maksimum",
-      // [Auto-translated] "Confirm row removal"
-      confirmDelete: "Konfirmasi penghapusan panel",
-      // [Auto-translated] "Description template"
-      templateDescription: "Pola deskripsi panel",
-      // [Auto-translated] "Title template"
-      templateTitle: "Pola judul panel",
-      // [Auto-translated] "Empty entries text"
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Konfirmasi penghapusan entri",
+      // [Auto-translated] "Entry description pattern"
+      templateDescription: "Pola deskripsi entri",
+      // [Auto-translated] "Entry title pattern"
+      templateTitle: "Pola judul entri",
+      // [Auto-translated] "Empty panel text"
       noEntriesText: "Teks panel kosong",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Pola judul tab",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Tempat penampung judul tab",
-      // [Auto-translated] "Make an individual panel visible if"
-      templateVisibleIf: "Membuat panel individual terlihat jika",
+      // [Auto-translated] "Make an individual entry visible if"
+      templateVisibleIf: "Membuat entri individual terlihat jika",
       // [Auto-translated] "Number the panel"
       showNumber: "Nomor panel",
       // [Auto-translated] "Panel title alignment"
       titleLocation: "Perataan judul panel",
       // [Auto-translated] "Panel description alignment"
       descriptionLocation: "Perataan deskripsi panel",
-      // [Auto-translated] "Question title location"
+      // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "Perataan judul pertanyaan",
       // [Auto-translated] "Question title width"
       templateQuestionTitleWidth: "Lebar judul pertanyaan",
       // [Auto-translated] "Error message alignment"
       templateErrorLocation: "Perataan pesan kesalahan",
-      // [Auto-translated] "New panel location"
-      newPanelPosition: "Lokasi panel baru",
-      // [Auto-translated] "Show progress bar"
-      showRangeInProgress: "Menampilkan bilah kemajuan",
-      // [Auto-translated] "Key column"
+      // [Auto-translated] "New entry location"
+      newPanelPosition: "Lokasi entri baru",
+      // [Auto-translated] "Show the progress bar"
+      showRangeInProgress: "Tampilkan bilah kemajuan",
+      // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
     question: {
@@ -682,8 +682,8 @@ export var indonesianStrings = {
       visibleIf: "Buat pertanyaan terlihat jika",
       // [Auto-translated] "Make the question required if"
       requiredIf: "Buat pertanyaan diperlukan jika",
-      // [Auto-translated] "Parent page"
-      page: "Halaman induk",
+      // [Auto-translated] "Move the question to page"
+      page: "Memindahkan pertanyaan ke halaman",
       // [Auto-translated] "Question box collapse state"
       state: "Status ciutkan kotak pertanyaan",
       // [Auto-translated] "Number this question"
@@ -694,36 +694,36 @@ export var indonesianStrings = {
       descriptionLocation: "Perataan deskripsi pertanyaan",
       // [Auto-translated] "Error message alignment"
       errorLocation: "Perataan pesan kesalahan",
-      // [Auto-translated] "Add indents"
-      indent: "Tingkatkan indentasi batin",
+      // [Auto-translated] "Increase the inner indent"
+      indent: "Tingkatkan lekukan bagian dalam",
       // [Auto-translated] "Inline question width"
       width: "Lebar pertanyaan sebaris",
       // [Auto-translated] "Minimum question width"
       minWidth: "Lebar pertanyaan minimum",
       // [Auto-translated] "Maximum question width"
       maxWidth: "Lebar pertanyaan maksimum",
-      // [Auto-translated] "Update text question value"
+      // [Auto-translated] "Update input field value"
       textUpdateMode: "Perbarui nilai bidang input"
     },
     signaturepad: {
-      // [Auto-translated] "Signature width"
+      // [Auto-translated] "Signature area width"
       signatureWidth: "Lebar area tanda tangan",
-      // [Auto-translated] "Signature height"
+      // [Auto-translated] "Signature area height"
       signatureHeight: "Tinggi area tanda tangan",
       // [Auto-translated] "Auto-scale the signature area"
       signatureAutoScaleEnabled: "Menskalakan area tanda tangan secara otomatis",
-      // [Auto-translated] "Show the placeholder"
-      showPlaceholder: "Memperlihatkan tempat penampung",
+      // [Auto-translated] "Show a placeholder within signature area"
+      showPlaceholder: "Tampilkan placeholder dalam area tanda tangan",
       // [Auto-translated] "Placeholder text"
       placeholder: "Teks tempat penampung",
       // [Auto-translated] "Placeholder text in read-only or preview mode"
       placeholderReadOnly: "Teks tempat penampung dalam mode baca-saja atau pratinjau",
-      // [Auto-translated] "Show the Clear button"
-      allowClear: "Perlihatkan tombol Hapus di dalam area tanda tangan",
-      // [Auto-translated] "Minimum pen width"
-      penMinWidth: "Lebar pena minimum",
-      // [Auto-translated] "Maximum pen width"
-      penMaxWidth: "Lebar pena maksimum",
+      // [Auto-translated] "Show the Clear button within signature area"
+      allowClear: "Tampilkan tombol Hapus dalam area tanda tangan",
+      // [Auto-translated] "Minimum stroke width"
+      penMinWidth: "Lebar goresan minimum",
+      // [Auto-translated] "Maximum stroke width"
+      penMaxWidth: "Lebar goresan maksimum",
       // [Auto-translated] "Stroke color"
       penColor: "Warna goresan"
     },
@@ -755,26 +755,26 @@ export var indonesianStrings = {
     },
     // survey templates
     survey: {
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Survey title"
+      title: "Judul survei",
       // [Auto-translated] "Survey description"
       description: "Deskripsi survei",
-      // [Auto-translated] "Read-only"
-      readOnly: "Membuat survei hanya baca"
+      // [Auto-translated] "Make the survey read-only"
+      readOnly: "Jadikan survei baca-saja"
     },
     page: {
       // [Auto-translated] "Page name"
       name: "Nama halaman",
-      // [Auto-translated] "Title"
-      title: "Titel",
+      // [Auto-translated] "Page title"
+      title: "Judul halaman",
       // [Auto-translated] "Page description"
       description: "Deskripsi halaman",
       // [Auto-translated] "Make the page visible if"
       visibleIf: "Membuat halaman terlihat jika",
       // [Auto-translated] "Make the page required if"
       requiredIf: "Buat halaman diperlukan jika",
-      // [Auto-translated] "Time limit to finish the page (in seconds)"
-      timeLimit: "Batas waktu untuk menyelesaikan halaman (dalam detik)",
+      // [Auto-translated] "Time limit to complete the page"
+      timeLimit: "Batas waktu untuk menyelesaikan halaman",
       // [Auto-translated] "Question order on the page"
       questionOrder: "Urutan pertanyaan di halaman"
     },
@@ -852,7 +852,7 @@ export var indonesianStrings = {
     defaultDisplayValue: "Nilai tampilan default untuk teks dinamis",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Perataan label",
-    // [Auto-translated] "Input field size (in characters)"
+    // [Auto-translated] "Input field width (in characters)"
     size: "Lebar bidang input (dalam karakter)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Perataan pesan kesalahan sel",
@@ -934,8 +934,8 @@ export var indonesianStrings = {
     fastEntryChoicesCountError: "Harap batasi jumlah item dari {0} ke {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "Harap masukkan setidaknya {0} item",
-    // [Auto-translated] "You can set data in the following format:\nvalue1|text\nvalue2"
-    fastEntryPlaceholder: "Anda dapat mengatur data dalam format berikut:\nvalue1|text\nnilai2",
+    // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
+    fastEntryPlaceholder: "Masukkan daftar opsi pilihan dan ID-nya dalam format berikut:\n\nid|opsi\n\nID opsi pilihan tidak terlihat oleh responden dan dapat digunakan dalam aturan bersyarat.",
     // "Form Entry"
     formEntry: "Entri Form",
     // "Test the service"
@@ -946,9 +946,9 @@ export var indonesianStrings = {
     conditionActionEmpty: "Silakan pilih tindakan",
     // "Select a question..."
     conditionSelectQuestion: "Pilih pertanyaan...",
-    // [Auto-translated] "Select page..."
+    // [Auto-translated] "Select a page..."
     conditionSelectPage: "Pilih halaman...",
-    // [Auto-translated] "Select panel..."
+    // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Pilih panel...",
     // "Please enter/select the value"
     conditionValueQuestionTitle: "Silahkan masukkan/pilih nilai",
@@ -964,10 +964,10 @@ export var indonesianStrings = {
     assistantTitle: "Pertanyaan tersedia:",
     // "There is should be at least one column or row"
     cellsEmptyRowsColumns: "Harus ada setidaknya satu kolom atau baris",
-    // [Auto-translated] "Preview answers before submitting the survey"
-    showPreviewBeforeComplete: "Melihat pratinjau jawaban sebelum mengirimkan survei",
-    // [Auto-translated] "Set by "
-    overridingPropertyPrefix: "Ditetapkan oleh ",
+    // [Auto-translated] "Review before submit"
+    showPreviewBeforeComplete: "Tinjau sebelum mengirimkan",
+    // [Auto-translated] "Enabled by a condition"
+    overridingPropertyPrefix: "Diaktifkan oleh kondisi",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "Reset",
     // "Please enter a value"
@@ -978,10 +978,10 @@ export var indonesianStrings = {
     propertyNameIsNotUnique: "Silakan masukkan nama yang unik",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Jangan gunakan kata-kata khusus: \"item\", \"pilihan\", \"panel\", \"baris\".",
-    // [Auto-translated] "No items have been added yet"
-    listIsEmpty: "Belum ada item yang ditambahkan",
-    // [Auto-translated] "No choices have been added yet"
-    "listIsEmpty@choices": "Belum ada pilihan yang ditambahkan",
+    // [Auto-translated] "You don't have any items yet"
+    listIsEmpty: "Anda belum memiliki item apa pun",
+    // [Auto-translated] "You don't have any choices yet"
+    "listIsEmpty@choices": "Anda belum punya pilihan",
     // [Auto-translated] "You don't have any columns yet"
     "listIsEmpty@columns": "Anda belum memiliki kolom apa pun",
     // [Auto-translated] "You don't have layout columns yet"
@@ -998,8 +998,8 @@ export var indonesianStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Anda belum memiliki tautan apa pun",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Anda belum memiliki halaman apa pun",
-    // [Auto-translated] "Add a choice"
-    "addNew@choices": "Menambahkan pilihan",
+    // [Auto-translated] "Add new choice"
+    "addNew@choices": "Tambahkan pilihan baru",
     // [Auto-translated] "Add new column"
     "addNew@columns": "Tambahkan kolom baru",
     // [Auto-translated] "Add new row"
@@ -1033,17 +1033,17 @@ export var indonesianStrings = {
     // "Path to data"
     path: "Path",
     choicesbyurl: {
-      // [Auto-translated] "Web service's URL"
+      // [Auto-translated] "Web service URL"
       url: "URL layanan web",
-      // [Auto-translated] "Get values from the following JSON field"
-      valueName: "Dapatkan nilai dari bidang JSON berikut"
+      // [Auto-translated] "Get value to store from the following property"
+      valueName: "Dapatkan nilai untuk disimpan dari properti berikut"
     },
     // "Get value to display from the following property"
     titleName: "Nama judul",
-    // [Auto-translated] "Get image URLs from the following JSON field"
-    imageLinkName: "Dapatkan URL gambar dari bidang JSON berikut",
-    // [Auto-translated] "Allow empty response"
-    allowEmptyResponse: "Izinkan respons kosong",
+    // [Auto-translated] "Get file URLs from the following property"
+    imageLinkName: "Mendapatkan URL file dari properti berikut",
+    // [Auto-translated] "Accept empty response"
+    allowEmptyResponse: "Terima respons kosong",
     // [Auto-translated] "Title"
     titlePlaceholder: "Titel",
     // [Auto-translated] "Survey Title"
@@ -1064,24 +1064,24 @@ export var indonesianStrings = {
     showOtherItem: "Memiliki item lain",
     // "Rename the \"Other\" option"
     otherText: "Teks item lain",
-    // [Auto-translated] "Allow the None option"
-    showNoneItem: "Perbolehkan opsi Tidak Ada",
-    // [Auto-translated] "Allow the Refuse to Answer option"
-    showRefuseItem: "Perbolehkan opsi Tolak Jawab",
-    // [Auto-translated] "Allow the Don't Know option"
-    showDontKnowItem: "Perbolehkan opsi Tidak Tahu",
-    // [Auto-translated] "None option text"
-    noneText: "Tidak ada teks opsi",
-    // [Auto-translated] "Allow the Select All option"
-    showSelectAllItem: "Perbolehkan opsi Pilih Semua",
-    // [Auto-translated] "Select All option text"
-    selectAllText: "Pilih Semua teks opsi",
+    // [Auto-translated] "Enable the \"None\" option"
+    showNoneItem: "Aktifkan opsi \"Tidak Ada\"",
+    // [Auto-translated] "Enable the \"Refuse to Answer\" option"
+    showRefuseItem: "Aktifkan opsi \"Tolak Menjawab\"",
+    // [Auto-translated] "Enable the \"Don't Know\" option"
+    showDontKnowItem: "Aktifkan opsi \"Tidak Tahu\"",
+    // [Auto-translated] "Rename the \"None\" option"
+    noneText: "Ganti nama opsi \"Tidak Ada\"",
+    // [Auto-translated] "Enable the \"Select All\" option"
+    showSelectAllItem: "Aktifkan opsi \"Pilih Semua\"",
+    // [Auto-translated] "Rename the \"Select All\" option"
+    selectAllText: "Ganti nama opsi \"Pilih Semua\"",
     // [Auto-translated] "Minimum value for auto-generated items"
     choicesMin: "Nilai minimum untuk item yang dibuat secara otomatis",
     // [Auto-translated] "Maximum value for auto-generated items"
     choicesMax: "Nilai maksimum untuk item yang dibuat secara otomatis",
-    // [Auto-translated] "Step for auto-generated items"
-    choicesStep: "Langkah untuk item yang dibuat secara otomatis",
+    // [Auto-translated] "Step value for auto-generated items"
+    choicesStep: "Nilai langkah untuk item yang dibuat secara otomatis",
     // "Name"
     name: "Nama",
     // "Title"
@@ -1102,8 +1102,8 @@ export var indonesianStrings = {
     markRequired: "Tandai sesuai kebutuhan",
     // [Auto-translated] "Remove the required mark"
     removeRequiredMark: "Hapus tanda yang diperlukan",
-    // [Auto-translated] "Require answer for all rows"
-    eachRowRequired: "Memerlukan jawaban untuk semua baris",
+    // [Auto-translated] "Require an answer in each row"
+    eachRowRequired: "Memerlukan jawaban di setiap baris",
     // [Auto-translated] "Prevent duplicate responses in rows"
     eachRowUnique: "Mencegah respons duplikat dalam baris",
     // "Error message for required questions"
@@ -1136,12 +1136,12 @@ export var indonesianStrings = {
     removeRowText: "Teks hapus tombol baris",
     // [Auto-translated] "Input field title pattern"
     singleInputTitleTemplate: "Pola judul bidang input",
-    // [Auto-translated] "Minimum rate value"
-    rateMin: "Nilai tarif minimum",
-    // [Auto-translated] "Maximum rate value"
-    rateMax: "Nilai tarif maksimum",
-    // [Auto-translated] "Rate step"
-    rateStep: "Langkah tingkat",
+    // [Auto-translated] "Minimum rating value"
+    rateMin: "Nilai peringkat minimum",
+    // [Auto-translated] "Maximum rating value"
+    rateMax: "Nilai peringkat maksimum",
+    // [Auto-translated] "Step value"
+    rateStep: "Nilai langkah",
     // "Minimum value label"
     minRateDescription: "Deskripsi nilai minimum",
     // "Maximum value label"
@@ -1186,8 +1186,8 @@ export var indonesianStrings = {
     gotoName: "Pertanyaan untuk dilewati",
     // [Auto-translated] "Rule is incorrect"
     ruleIsNotSet: "Aturan salah",
-    // [Auto-translated] "Include into survey results"
-    includeIntoResult: "Sertakan ke dalam hasil survei",
+    // [Auto-translated] "Add to the survey results"
+    includeIntoResult: "Tambahkan ke hasil survei",
     // "Make the title and description visible"
     showTitle: "Tampilkan/sembunyikan judul",
     // [Auto-translated] "Expand/collapse title"
@@ -1218,10 +1218,10 @@ export var indonesianStrings = {
     pageNextText: "Teks halaman tombol selanjutnya",
     // "\"Complete Survey\" button text"
     completeText: "Teks tombol selesai",
-    // [Auto-translated] "Preview Answers button text"
-    previewText: "Teks tombol Pratinjau Jawaban",
-    // [Auto-translated] "Edit Answer button text"
-    editText: "Teks tombol Edit Jawaban",
+    // [Auto-translated] "\"Review Answers\" button text"
+    previewText: "Teks tombol \"Tinjau Jawaban\"",
+    // [Auto-translated] "\"Edit Answer\" button text"
+    editText: "Teks tombol \"Edit Jawaban\"",
     // "\"Start Survey\" button text"
     startSurveyText: "Teks tombol mulai",
     // "Show navigation buttons"
@@ -1282,24 +1282,24 @@ export var indonesianStrings = {
     html: "Html",
     // [Auto-translated] "Answer"
     setValue: "Menjawab",
-    // [Auto-translated] "Image format"
-    dataFormat: "Format gambar",
-    // [Auto-translated] "Allow adding rows"
-    allowAddRows: "Perbolehkan menambahkan baris",
-    // [Auto-translated] "Allow removing rows"
-    allowRemoveRows: "Perbolehkan menghapus baris",
-    // [Auto-translated] "Allow row drag and drop"
-    allowRowReorder: "Perbolehkan baris seret dan lepas",
-    // [Auto-translated] "Does not apply if you specify the exact image width or height."
-    responsiveImageSizeHelp: "Tidak berlaku jika Anda menentukan lebar atau tinggi gambar yang tepat.",
-    // [Auto-translated] "Minimum image width"
-    minImageWidth: "Lebar gambar minimum",
-    // [Auto-translated] "Maximum image width"
-    maxImageWidth: "Lebar gambar maksimum",
-    // [Auto-translated] "Minimum image height"
-    minImageHeight: "Tinggi gambar minimum",
-    // [Auto-translated] "Maximum image height"
-    maxImageHeight: "Tinggi gambar maksimum",
+    // [Auto-translated] "Storage format"
+    dataFormat: "Format penyimpanan",
+    // [Auto-translated] "Enable row addition"
+    allowAddRows: "Mengaktifkan penambahan baris",
+    // [Auto-translated] "Enable row removal"
+    allowRemoveRows: "Mengaktifkan penghapusan baris",
+    // [Auto-translated] "Enable row reordering"
+    allowRowReorder: "Mengaktifkan penyusunan ulang baris",
+    // [Auto-translated] "Does not apply if you specify the exact display area width or height."
+    responsiveImageSizeHelp: "Tidak berlaku jika Anda menentukan lebar atau tinggi area tampilan yang tepat.",
+    // [Auto-translated] "Minimum display area width"
+    minImageWidth: "Lebar area tampilan minimum",
+    // [Auto-translated] "Maximum display area width"
+    maxImageWidth: "Lebar area tampilan maksimum",
+    // [Auto-translated] "Minimum display area height"
+    minImageHeight: "Tinggi area tampilan minimum",
+    // [Auto-translated] "Maximum display area height"
+    maxImageHeight: "Tinggi area tampilan maksimum",
     // "Minimum value"
     minValue: "Nilai minimum",
     // "Maximum value"
@@ -1334,18 +1334,18 @@ export var indonesianStrings = {
     totalCurrency: "Total mata uang",
     // "Formatted string"
     totalFormat: "Total format",
-    // [Auto-translated] "Logo (URL or base64-encoded string)"
-    logo: "Logo (URL atau string yang dikodekan base64)",
-    // [Auto-translated] "Survey structure"
-    questionsOnPageMode: "Struktur survei",
-    // [Auto-translated] "Maximum answer length (in characters)"
-    maxTextLength: "Panjang jawaban maksimum (dalam karakter)",
-    // [Auto-translated] "Maximum comment length (in characters)"
-    maxCommentLength: "Panjang komentar maksimum (dalam karakter)",
+    // [Auto-translated] "Survey logo"
+    logo: "Logo survei",
+    // [Auto-translated] "Survey layout"
+    questionsOnPageMode: "Tata letak survei",
+    // [Auto-translated] "Restrict answer length"
+    maxTextLength: "Membatasi panjang jawaban",
+    // [Auto-translated] "Restrict comment length"
+    maxCommentLength: "Membatasi panjang komentar",
     // [Auto-translated] "Comment area height (in lines)"
     commentAreaRows: "Tinggi area komentar (dalam baris)",
-    // [Auto-translated] "Auto-expand comment area if necessary"
-    autoGrowComment: "Perluas area komentar secara otomatis jika perlu",
+    // [Auto-translated] "Auto-expand text areas"
+    autoGrowComment: "Perluas area teks secara otomatis",
     // [Auto-translated] "Allow users to resize text areas"
     allowResizeComment: "Mengizinkan pengguna mengubah ukuran area teks",
     // "Update input field values"
@@ -1358,16 +1358,16 @@ export var indonesianStrings = {
     checkErrorsMode: "Jalankan validasi",
     // [Auto-translated] "Validate empty fields on lost focus"
     validateVisitedEmptyFields: "Memvalidasi bidang kosong saat fokus hilang",
-    // [Auto-translated] "Navigate to URL"
-    navigateToUrl: "Arahkan ke URL",
-    // [Auto-translated] "Dynamic URL"
-    navigateToUrlOnCondition: "URL dinamis",
+    // [Auto-translated] "Redirect to an external link after submission"
+    navigateToUrl: "Mengalihkan ke pranala eksternal setelah pengiriman",
+    // [Auto-translated] "Dynamic external link"
+    navigateToUrlOnCondition: "Tautan eksternal dinamis",
     // [Auto-translated] "Markup to show if the user already filled out this survey"
     completedBeforeHtml: "Markup untuk menunjukkan apakah pengguna sudah mengisi survei ini",
-    // [Auto-translated] "Survey Complete page markup"
-    completedHtml: "Markup halaman Survei Selesai",
-    // [Auto-translated] "Dynamic Survey Complete page markup"
-    completedHtmlOnCondition: "Survei Dinamis Markup halaman lengkap",
+    // [Auto-translated] "\"Thank You\" page markup"
+    completedHtml: "Markup halaman \"Terima kasih\"",
+    // [Auto-translated] "Dynamic \"Thank You\" page markup"
+    completedHtmlOnCondition: "Markup halaman \"Terima kasih\" dinamis",
     // [Auto-translated] "Markup to show while survey model is loading"
     loadingHtml: "Markup untuk ditampilkan saat model survei dimuat",
     // [Auto-translated] "Comment area text"
@@ -1382,8 +1382,8 @@ export var indonesianStrings = {
     allowClear: "Tampilkan tombol Hapus",
     // [Auto-translated] "Search Mode"
     searchMode: "Mode Pencarian",
-    // [Auto-translated] "Value display style"
-    displayStyle: "Gaya tampilan nilai",
+    // [Auto-translated] "Display format"
+    displayStyle: "Format tampilan",
     // [Auto-translated] "Formatted string"
     format: "String yang diformat",
     // [Auto-translated] "Maximum fractional digits"
@@ -1392,18 +1392,18 @@ export var indonesianStrings = {
     minimumFractionDigits: "Digit pecahan minimum",
     // [Auto-translated] "Display grouping separators"
     useGrouping: "Menampilkan pemisah pengelompokan",
-    // [Auto-translated] "Allow multiple files"
-    allowMultiple: "Izinkan beberapa file",
-    // [Auto-translated] "Preview images"
-    allowImagesPreview: "Pratinjau gambar",
+    // [Auto-translated] "Enable multiple file upload"
+    allowMultiple: "Mengaktifkan pengunggahan beberapa file",
+    // [Auto-translated] "Preview uploaded images"
+    allowImagesPreview: "Pratinjau gambar yang diunggah",
     // [Auto-translated] "Accepted file types"
     acceptedTypes: "Jenis file yang diterima",
-    // [Auto-translated] "Wait for the upload to complete"
+    // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Tunggu hingga upload selesai",
     // [Auto-translated] "Confirm file deletion"
     needConfirmRemoveFile: "Konfirmasi penghapusan file",
-    // [Auto-translated] "Detail panel location"
-    detailPanelMode: "Lokasi panel detail",
+    // [Auto-translated] "Row details alignment"
+    detailPanelMode: "Perataan detail baris",
     // [Auto-translated] "Minimum row count"
     minRowCount: "Jumlah baris minimum",
     // [Auto-translated] "Maximum row count"
@@ -1412,30 +1412,30 @@ export var indonesianStrings = {
     confirmDelete: "Mengonfirmasi penghapusan baris",
     // [Auto-translated] "Confirmation message"
     confirmDeleteText: "Pesan konfirmasi",
-    // [Auto-translated] "Initial panel count"
-    panelCount: "Jumlah panel awal",
-    // [Auto-translated] "Minimum panel count"
-    minPanelCount: "Jumlah panel minimum",
-    // [Auto-translated] "Maximum panel count"
-    maxPanelCount: "Jumlah panel maksimum",
-    // [Auto-translated] "Inner panel expand state"
-    panelsState: "Status perluasan panel dalam",
-    // [Auto-translated] "Previous Panel button tooltip"
-    prevPanelText: "Tooltip tombol Panel sebelumnya",
-    // [Auto-translated] "Next Panel button tooltip"
-    nextPanelText: "Tooltip tombol Panel Berikutnya",
-    // [Auto-translated] "Remove Panel button location"
-    removePanelButtonLocation: "Hapus lokasi tombol Panel",
-    // [Auto-translated] "Hide the question if there are no rows"
-    hideIfRowsEmpty: "Menyembunyikan pertanyaan jika tidak ada baris",
+    // [Auto-translated] "Initial number of entries"
+    panelCount: "Jumlah awal entri",
+    // [Auto-translated] "Minimum number of entries"
+    minPanelCount: "Jumlah minimum entri",
+    // [Auto-translated] "Maximum number of entries"
+    maxPanelCount: "Jumlah maksimum entri",
+    // [Auto-translated] "Initial entry state"
+    panelsState: "Status entri awal",
+    // [Auto-translated] "\"Previous Entry\" button text"
+    prevPanelText: "Teks tombol \"Entri Sebelumnya\"",
+    // [Auto-translated] "\"Next Entry\" button text"
+    nextPanelText: "Teks tombol \"Entri Berikutnya\"",
+    // [Auto-translated] "\"Remove Entry\" button alignment"
+    removePanelButtonLocation: "Perataan tombol \"Hapus Entri\"",
+    // [Auto-translated] "Hide the question if it has no rows"
+    hideIfRowsEmpty: "Sembunyikan pertanyaan jika tidak memiliki baris",
     // [Auto-translated] "Hide columns if there are no rows"
     hideColumnsIfEmpty: "Menyembunyikan kolom jika tidak ada baris",
-    // [Auto-translated] "Custom rate values"
-    rateValues: "Nilai tarif kustom",
-    // [Auto-translated] "Rate count"
-    rateCount: "Jumlah tarif",
-    // [Auto-translated] "How to specify rate values?"
-    autoGenerate: "Bagaimana cara menentukan nilai tarif?",
+    // [Auto-translated] "Custom rating values"
+    rateValues: "Nilai rating kustom",
+    // [Auto-translated] "Rating count"
+    rateCount: "Jumlah peringkat",
+    // [Auto-translated] "Rating configuration"
+    autoGenerate: "Konfigurasi peringkat",
     slider: {
       // [Auto-translated] "Min value"
       min: "Nilai minimum",
@@ -1459,25 +1459,25 @@ export var indonesianStrings = {
       autoGenerate: "Konfigurasi label skala",
       // [Auto-translated] "Slider type"
       sliderType: "Jenis penggeser",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Panjang rentang min",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Panjang rentang maks",
       // [Auto-translated] "Custom labels"
       customLabels: "Label khusus",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Format label",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format tooltip"
     },
     file: {
-      // [Auto-translated] "Adjusts the height of the image in the survey results."
+      // [Auto-translated] "Image height"
       imageHeight: "Tinggi gambar",
-      // [Auto-translated] "Adjusts the width of the image in the survey results."
+      // [Auto-translated] "Image width"
       imageWidth: "Lebar gambar"
     },
-    // [Auto-translated] "Hide the question if it contains no choices"
-    hideIfChoicesEmpty: "Sembunyikan pertanyaan jika tidak berisi pilihan",
+    // [Auto-translated] "Hide the question if it has no choices"
+    hideIfChoicesEmpty: "Sembunyikan pertanyaan jika tidak punya pilihan",
     // "Minimum width"
     minWidth: "Lebar minimum (dalam nilai yang diterima CSS)",
     // "Maximum width"
@@ -1488,10 +1488,10 @@ export var indonesianStrings = {
     showHeader: "Perlihatkan header kolom",
     // [Auto-translated] "Show horizontal scrollbar"
     horizontalScroll: "Tampilkan scrollbar horizontal",
-    // [Auto-translated] "Minimum column width (in CSS-accepted values)"
-    columnMinWidth: "Lebar kolom minimum (dalam nilai yang diterima CSS)",
-    // [Auto-translated] "Row header width (in CSS-accepted values)"
-    rowTitleWidth: "Lebar header baris (dalam nilai yang diterima CSS)",
+    // [Auto-translated] "Minimum column width"
+    columnMinWidth: "Lebar kolom minimum",
+    // [Auto-translated] "Row header width"
+    rowTitleWidth: "Lebar header baris",
     // "Value to store when \"True\" is selected"
     valueTrue: "Nilai \"Benar\"",
     // "Value to store when \"False\" is selected"
@@ -1504,40 +1504,40 @@ export var indonesianStrings = {
     otherErrorText: "Pesan kesalahan \"Komentar kosong\"",
     // "Error message for duplicate responses"
     keyDuplicationError: "Pesan galat \"Nilai kunci tidak unik\"",
-    // [Auto-translated] "Minimum selected choices"
-    minSelectedChoices: "Pilihan minimum yang dipilih",
-    // [Auto-translated] "Maximum selected choices"
-    maxSelectedChoices: "Pilihan maksimum yang dipilih",
-    // [Auto-translated] "Logo width (in CSS-accepted values)"
-    logoWidth: "Lebar logo (dalam nilai yang diterima CSS)",
-    // [Auto-translated] "Logo height (in CSS-accepted values)"
-    logoHeight: "Tinggi logo (dalam nilai yang diterima CSS)",
+    // [Auto-translated] "Minimum choices to select"
+    minSelectedChoices: "Pilihan minimum untuk dipilih",
+    // [Auto-translated] "Maximum choices to select"
+    maxSelectedChoices: "Pilihan maksimum untuk dipilih",
+    // [Auto-translated] "Logo width"
+    logoWidth: "Lebar logo",
+    // [Auto-translated] "Logo height"
+    logoHeight: "Tinggi logo",
     // "Read-only"
     readOnly: "Baca-saja",
-    // [Auto-translated] "Editable if"
-    enableIf: "Dapat diedit jika",
+    // [Auto-translated] "Disable the read-only mode if"
+    enableIf: "Nonaktifkan mode baca-saja jika",
     // "\"No rows\" message"
     noRowsText: "Pesan \"Tidak ada baris\"",
-    // [Auto-translated] "Separate special choices (None, Other, Select All)"
-    separateSpecialChoices: "Pisahkan pilihan khusus (Tidak Ada, Lainnya, Pilih Semua)",
+    // [Auto-translated] "Separate special choices"
+    separateSpecialChoices: "Pilihan khusus terpisah",
     // [Auto-translated] "Copy choices from the following question"
     choicesFromQuestion: "Salin pilihan dari pertanyaan berikut",
-    // [Auto-translated] "Which choices to copy?"
-    choicesFromQuestionMode: "Pilihan mana yang harus disalin?",
+    // [Auto-translated] "Which choice options to copy"
+    choicesFromQuestionMode: "Opsi pilihan mana yang akan disalin",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
     choiceValuesFromQuestion: "Gunakan nilai dari matriks, kolom atau pertanyaan panel berikut sebagai ID pilihan",
     // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
     choiceTextsFromQuestion: "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan",
-    // [Auto-translated] "Display page titles in progress bar"
+    // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Menampilkan judul halaman di bilah kemajuan",
-    // [Auto-translated] "Display page numbers in progress bar"
+    // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Menampilkan nomor halaman di bilah kemajuan",
-    // [Auto-translated] "Show the comment area"
-    showCommentArea: "Tampilkan area komentar",
-    // [Auto-translated] "Comment area placeholder"
-    commentPlaceholder: "Tempat penampung area komentar",
-    // [Auto-translated] "Display rate descriptions as extreme values"
-    displayRateDescriptionsAsExtremeItems: "Menampilkan deskripsi tingkat sebagai nilai ekstrem",
+    // [Auto-translated] "Add a comment box"
+    showCommentArea: "Menambahkan kotak komentar",
+    // [Auto-translated] "Placeholder text for the comment box"
+    commentPlaceholder: "Teks placeholder untuk kotak komentar",
+    // [Auto-translated] "Show the labels as extreme values"
+    displayRateDescriptionsAsExtremeItems: "Menampilkan label sebagai nilai ekstrem",
     // [Auto-translated] "Row order"
     rowOrder: "Urutan baris",
     // [Auto-translated] "Column layout"
@@ -1570,8 +1570,8 @@ export var indonesianStrings = {
       // "Alt text"
       text: "Teks alternatif"
     },
-    // [Auto-translated] "Logo position"
-    logoPosition: "Posisi logo",
+    // [Auto-translated] "Logo alignment"
+    logoPosition: "Perataan logo",
     // [Auto-translated] "Add logo..."
     addLogo: "Tambahkan logo...",
     // [Auto-translated] "Change logo..."
@@ -1590,18 +1590,18 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Preview mode"
     previewMode: "Mode pratinjau",
-    // [Auto-translated] "Enable the grid layout"
+    // [Auto-translated] "Enable grid layout"
     gridLayoutEnabled: "Mengaktifkan tata letak kisi",
-    // [Auto-translated] "Grid layout columns"
-    gridLayoutColumns: "Kolom tata letak kisi",
+    // [Auto-translated] "Grid columns"
+    gridLayoutColumns: "Kolom kisi",
     // [Auto-translated] "Mask settings"
     maskSettings: "Pengaturan topeng",
-    // [Auto-translated] "Row expansion error message alignment"
-    detailErrorLocation: "Perataan pesan kesalahan perluasan baris",
+    // [Auto-translated] "Row details error message alignment"
+    detailErrorLocation: "Perataan pesan kesalahan detail baris",
     // Creator tabs
     tabs: {
       panel: {
-        // [Auto-translated] "Layout"
+        // [Auto-translated] "Panel Layout"
         layout: "Tata Letak Panel"
       },
       // "General"
@@ -1659,8 +1659,8 @@ export var indonesianStrings = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Pengaturan Masker Input",
       layout: {
-        // [Auto-translated] "Layout"
-        panel: "Tata letak",
+        // [Auto-translated] "Panel Layout"
+        panel: "Tata Letak Panel",
         // [Auto-translated] "Layout"
         question: "Tata letak",
         // [Auto-translated] "Layout"
@@ -1670,12 +1670,12 @@ export var indonesianStrings = {
       data: "Data",
       // [Auto-translated] "Validation"
       validation: "Validasi",
-      // [Auto-translated] "Cell Texts"
-      cells: "Teks Sel",
-      // [Auto-translated] "Survey Complete"
-      showOnCompleted: "Survei Selesai",
-      // [Auto-translated] "Logo in Survey Title"
-      logo: "Logo dalam Judul Survei",
+      // [Auto-translated] "Individual Cell Texts"
+      cells: "Teks Sel Individu",
+      // [Auto-translated] "\"Thank You\" Page"
+      showOnCompleted: "Halaman \"Terima kasih\"",
+      // [Auto-translated] "Logo in the Survey Header"
+      logo: "Logo di Header Survei",
       // [Auto-translated] "Slider"
       slider: "Slider",
       // [Auto-translated] "Expression"
@@ -1690,8 +1690,8 @@ export var indonesianStrings = {
       appearance: "Rupa",
       // [Auto-translated] "Accent colors"
       accentColors: "Warna aksen",
-      // [Auto-translated] "Surface Background"
-      surfaceBackground: "Latar Belakang Permukaan",
+      // [Auto-translated] "Surface background"
+      surfaceBackground: "Latar belakang permukaan",
       // [Auto-translated] "Scaling"
       scaling: "Scaling",
       // [Auto-translated] "Others"
@@ -1701,16 +1701,16 @@ export var indonesianStrings = {
     editProperty: "Ubah properti '{0}'",
     // "Items"
     items: "[ Barang: {0} ]",
-    // [Auto-translated] "Choices are visible if"
-    choicesVisibleIf: "Pilihan terlihat jika",
-    // [Auto-translated] "Choices are selectable if"
-    choicesEnableIf: "Pilihan dapat dipilih jika",
-    // [Auto-translated] "Columns are visible if"
-    columnsEnableIf: "Kolom terlihat jika",
-    // [Auto-translated] "Rows are visible if"
-    rowsEnableIf: "Baris terlihat jika",
-    // [Auto-translated] "Add inner indents"
-    innerIndent: "Menambahkan inden dalam",
+    // [Auto-translated] "Make choices visible if"
+    choicesVisibleIf: "Buat pilihan terlihat jika",
+    // [Auto-translated] "Make choices selectable if"
+    choicesEnableIf: "Buat pilihan yang dapat dipilih jika",
+    // [Auto-translated] "Make columns visible if"
+    columnsEnableIf: "Membuat kolom terlihat jika",
+    // [Auto-translated] "Make rows visible if"
+    rowsEnableIf: "Membuat baris terlihat jika",
+    // [Auto-translated] "Increase the inner indent"
+    innerIndent: "Tingkatkan lekukan bagian dalam",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Gunakan jawaban dari entri terakhir sebagai default",
     // "Please enter a value."
@@ -1751,36 +1751,36 @@ export var indonesianStrings = {
     triggerRunExpressionEmpty: "Silakan masukkan ekspresi yang valid",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Ketik ekspresi di sini...",
-    // [Auto-translated] "No file choosen"
+    // [Auto-translated] "No file chosen"
     noFile: "Tidak ada file yang dipilih",
-    // [Auto-translated] "Clear the value if the question becomes hidden"
-    clearIfInvisible: "Hapus nilai jika pertanyaan menjadi tersembunyi",
-    // [Auto-translated] "Value property name"
-    valuePropertyName: "Nama properti nilai",
-    // [Auto-translated] "Enable search"
-    searchEnabled: "Aktifkan pencarian",
+    // [Auto-translated] "Clear hidden question values"
+    clearIfInvisible: "Hapus nilai pertanyaan tersembunyi",
+    // [Auto-translated] "Store values in the following property"
+    valuePropertyName: "Simpan nilai di properti berikut",
+    // [Auto-translated] "Enable search-as-you-type"
+    searchEnabled: "Mengaktifkan pencarian saat Anda mengetik",
     // [Auto-translated] "Hide selected items"
     hideSelectedItems: "Menyembunyikan item yang dipilih",
-    // [Auto-translated] "Close the dropdown after selection"
-    closeOnSelect: "Tutup menu turun bawah setelah pemilihan",
-    // [Auto-translated] "Vertical alignment"
-    verticalAlign: "Perataan vertikal",
-    // [Auto-translated] "Alternate rows"
-    alternateRows: "Baris alternatif",
-    // [Auto-translated] "Columns are visible if"
-    columnsVisibleIf: "Kolom terlihat jika",
-    // [Auto-translated] "Rows are visible if"
-    rowsVisibleIf: "Baris terlihat jika",
-    // [Auto-translated] "Comment area placeholder"
-    otherPlaceholder: "Tempat penampung area komentar",
-    // [Auto-translated] "File placeholder text"
-    filePlaceholder: "Teks tempat penampung file",
-    // [Auto-translated] "Photo placeholder text"
-    photoPlaceholder: "Teks placeholder foto",
-    // [Auto-translated] "File or photo placeholder text"
-    fileOrPhotoPlaceholder: "Teks placeholder file atau foto",
-    // [Auto-translated] "Rate type"
-    rateType: "Jenis tarif",
+    // [Auto-translated] "Collapse the dropdown upon selection"
+    closeOnSelect: "Ciutkan dropdown saat memilih",
+    // [Auto-translated] "Vertical alignment within cells"
+    verticalAlign: "Perataan vertikal di dalam sel",
+    // [Auto-translated] "Alternate row colors"
+    alternateRows: "Warna baris alternatif",
+    // [Auto-translated] "Make columns visible if"
+    columnsVisibleIf: "Membuat kolom terlihat jika",
+    // [Auto-translated] "Make rows visible if"
+    rowsVisibleIf: "Membuat baris terlihat jika",
+    // [Auto-translated] "Placeholder text for the comment box"
+    otherPlaceholder: "Teks placeholder untuk kotak komentar",
+    // [Auto-translated] "Placeholder text for Local file"
+    filePlaceholder: "Teks placeholder untuk file lokal",
+    // [Auto-translated] "Placeholder text for Camera"
+    photoPlaceholder: "Teks placeholder untuk Kamera",
+    // [Auto-translated] "Placeholder text for Local file or Camera"
+    fileOrPhotoPlaceholder: "Teks placeholder untuk file lokal atau Kamera",
+    // [Auto-translated] "Rating icon"
+    rateType: "Ikon peringkat",
     // [Auto-translated] "Ex.: https://api.example.com/books"
     url_placeholder: "Mis.: https://api.example.com/books",
     // [Auto-translated] "Ex.: categories.fiction"
@@ -1804,46 +1804,46 @@ export var indonesianStrings = {
       themeName: "Tema",
       // [Auto-translated] "Question appearance"
       isPanelless: "Penampilan pertanyaan",
-      // [Auto-translated] "Input element"
+      // [Auto-translated] "Background and corner radius"
       editorPanel: "Latar belakang dan radius sudut",
-      // [Auto-translated] "Panel background and corner radius"
+      // [Auto-translated] "Background and corner radius"
       questionPanel: "Latar belakang dan radius sudut",
       // [Auto-translated] "Accent color"
       primaryColor: "Warna aksen",
-      // [Auto-translated] "Panel background opacity"
-      panelBackgroundTransparency: "Opasitas latar belakang panel",
-      // [Auto-translated] "Question background opacity"
-      questionBackgroundTransparency: "Opasitas latar belakang pertanyaan",
-      // [Auto-translated] "Font size"
-      fontSize: "Ukuran font",
-      // [Auto-translated] "Scale"
-      scale: "Sisik",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Opasitas panel dan kotak pertanyaan",
+      // [Auto-translated] "Input element opacity"
+      questionBackgroundTransparency: "Opasitas elemen input",
+      // [Auto-translated] "Survey font size"
+      fontSize: "Ukuran font survei",
+      // [Auto-translated] "Survey scale factor"
+      scale: "Faktor skala survei",
       // [Auto-translated] "Corner radius"
       cornerRadius: "Radius sudut",
       // [Auto-translated] "Advanced mode"
       advancedMode: "Mode lanjutan",
-      // [Auto-translated] "Page title font"
+      // [Auto-translated] "Title font"
       pageTitle: "Font judul",
-      // [Auto-translated] "Page description font"
+      // [Auto-translated] "Description font"
       pageDescription: "Font deskripsi",
-      // [Auto-translated] "Question title font"
+      // [Auto-translated] "Title font"
       questionTitle: "Font judul",
-      // [Auto-translated] "Question description font"
+      // [Auto-translated] "Description font"
       questionDescription: "Font deskripsi",
-      // [Auto-translated] "Input element font"
+      // [Auto-translated] "Font"
       editorFont: "Font",
       // [Auto-translated] "Opacity"
-      backgroundOpacity: "Opacity",
-      // [Auto-translated] "Font family"
-      "--sjs-font-family": "Keluarga font",
+      backgroundOpacity: "Opacity", // Auto-generated string
+      // [Auto-translated] "Survey font family"
+      "--sjs-font-family": "Keluarga font survei",
       // [Auto-translated] "Background color"
       "--sjs-general-backcolor-dim": "Warna latar belakang",
-      // [Auto-translated] "Accent background"
-      "--sjs-primary-backcolor": "Latar belakang aksen",
-      // [Auto-translated] "Accent foreground"
-      "--sjs-primary-forecolor": "Latar depan aksen",
-      // [Auto-translated] "Error messages"
-      "--sjs-special-red": "Pesan kesalahan",
+      // [Auto-translated] "Accent background colors"
+      "--sjs-primary-backcolor": "Warna latar belakang aksen",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs-primary-forecolor": "Warna latar depan aksen",
+      // [Auto-translated] "Error message colors"
+      "--sjs-special-red": "Warna pesan kesalahan",
       // [Auto-translated] "Shadow effects"
       "--sjs-shadow-small": "Efek bayangan",
       // [Auto-translated] "Shadow effects"
@@ -1854,8 +1854,8 @@ export var indonesianStrings = {
     "header@header": {
       // [Auto-translated] "View"
       headerView: "Melihat",
-      // [Auto-translated] "Logo position"
-      logoPosition: "Posisi logo",
+      // [Auto-translated] "Logo alignment"
+      logoPosition: "Perataan logo",
       // [Auto-translated] "Survey title font"
       surveyTitle: "Font judul survei",
       // [Auto-translated] "Survey description font"
@@ -1876,12 +1876,12 @@ export var indonesianStrings = {
       backgroundImageOpacity: "Opacity",
       // [Auto-translated] "Overlap"
       overlapEnabled: "Tumpang tindih",
-      // [Auto-translated] "Logo position"
-      logoPositionX: "Posisi logo",
-      // [Auto-translated] "Title position"
-      titlePositionX: "Posisi judul",
-      // [Auto-translated] "Description position"
-      descriptionPositionX: "Deskripsi posisi"
+      // [Auto-translated] "Logo alignment"
+      logoPositionX: "Perataan logo",
+      // [Auto-translated] "Survey title alignment"
+      titlePositionX: "Penyelarasan judul survei",
+      // [Auto-translated] "Survey description alignment"
+      descriptionPositionX: "Penyelarasan deskripsi survei"
     }
   },
   // Property values
@@ -1890,12 +1890,12 @@ export var indonesianStrings = {
     "true": "benar",
     // [Auto-translated] "false"
     "false": "palsu",
-    // [Auto-translated] "Local files"
+    // [Auto-translated] "Local file"
     file: "File lokal",
     // [Auto-translated] "Camera"
     camera: "Kamera",
-    // [Auto-translated] "Local files or camera"
-    "file-camera": "File atau kamera lokal",
+    // [Auto-translated] "Local file or Camera"
+    "file-camera": "File lokal atau Kamera",
     // "Inherit"
     inherit: "inherit",
     // "Visible"
@@ -2016,7 +2016,7 @@ export var indonesianStrings = {
     onComplete: "saat selesai",
     // "When question gets hidden"
     onHidden: "saat tersembunyi",
-    // [Auto-translated] "When the question or its panel/page becomes hidden"
+    // [Auto-translated] "When question or its panel/page gets hidden"
     onHiddenContainer: "Ketika pertanyaan atau panel/halamannya disembunyikan",
     clearInvisibleValues: {
       // [Auto-translated] "Never"
@@ -2205,10 +2205,10 @@ export var indonesianStrings = {
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Struktur asli",
-      // [Auto-translated] "All questions on a single page"
+      // [Auto-translated] "Show all questions on one page"
       singlePage: "Tampilkan semua pertanyaan di satu halaman",
-      // [Auto-translated] "Each question on an individual page"
-      questionPerPage: "Tampilkan pertanyaan tunggal per halaman",
+      // [Auto-translated] "Show single question per page"
+      questionPerPage: "Tampilkan satu pertanyaan per halaman",
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Tampilkan satu bidang input per halaman"
     },
@@ -2232,18 +2232,18 @@ export var indonesianStrings = {
     correctQuestions: "Jawaban yang valid",
     // [Auto-translated] "Completed pages (button UI)"
     buttons: "Halaman selesai (tombol UI)",
-    // [Auto-translated] "Under the input"
-    underInput: "Di bawah input",
-    // [Auto-translated] "Under the title"
-    underTitle: "Di bawah judul",
-    // [Auto-translated] "On blur"
-    onBlur: "Saat buram",
+    // [Auto-translated] "Under the input field"
+    underInput: "Di bawah bidang input",
+    // [Auto-translated] "Under the question title"
+    underTitle: "Di bawah judul pertanyaan",
+    // [Auto-translated] "On lost focus"
+    onBlur: "Tentang fokus yang hilang",
     // [Auto-translated] "While typing"
     onTyping: "Saat mengetik",
     // [Auto-translated] "Under the row"
     underRow: "Di bawah baris",
-    // [Auto-translated] "Under the row, only one panel is visible"
-    underRowSingle: "Di bawah baris, hanya satu panel yang terlihat",
+    // [Auto-translated] "Under the row, display one section only"
+    underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
     // "Auto"
     auto: "Auto",
     showNavigationButtons: {
@@ -2255,16 +2255,16 @@ export var indonesianStrings = {
       combined: "Keduanya"
     },
     addRowButtonLocation: {
-      // [Auto-translated] "Depends on matrix layout"
-      default: "Tergantung pada tata letak matriks"
+      // [Auto-translated] "Based on matrix layout"
+      default: "Berdasarkan tata letak matriks"
     },
     panelsState: {
-      // [Auto-translated] "Users cannot expand or collapse panels"
-      default: "Pengguna tidak dapat memperluas atau menciutkan panel",
-      // [Auto-translated] "All panels are collapsed"
-      collapsed: "Semua panel diciutkan",
-      // [Auto-translated] "All panels are expanded"
-      expanded: "Semua panel diperluas",
+      // [Auto-translated] "Locked"
+      default: "Terkunci",
+      // [Auto-translated] "Collapse all"
+      collapsed: "Ciutkan semua",
+      // [Auto-translated] "Expand all"
+      expanded: "Perluas semua",
       // [Auto-translated] "First expanded"
       firstExpanded: "Pertama diperluas"
     },
@@ -2301,10 +2301,10 @@ export var indonesianStrings = {
       colored: "Berwarna"
     },
     autoGenerate: {
-      // [Auto-translated] "Generate"
-      "true": "Menghasilkan",
-      // [Auto-translated] "Enter manually"
-      "false": "Masukkan secara manual"
+      // [Auto-translated] "Auto-generate"
+      "true": "Hasilkan otomatis",
+      // [Auto-translated] "Manual"
+      "false": "Manual"
     },
     rateType: {
       // [Auto-translated] "Labels"
@@ -2325,8 +2325,8 @@ export var indonesianStrings = {
       on: "Penomoran otomatis",
       // [Auto-translated] "Reset on each page"
       onPage: "Setel ulang di setiap halaman",
-      // [Auto-translated] "Start on each panel"
-      onpanel: "Setel ulang pada setiap panel",
+      // [Auto-translated] "Reset on each panel"
+      onpanel: "Atur ulang di setiap panel",
       // [Auto-translated] "Reset on each panel"
       onPanel: "Setel ulang pada setiap panel",
       // [Auto-translated] "Recursive numbering"
@@ -2433,8 +2433,8 @@ export var indonesianStrings = {
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
       survey: "Sama seperti survei",
-      // [Auto-translated] "Fit to container"
-      container: "Sesuai dengan kontainer"
+      // [Auto-translated] "Same as container"
+      container: "Sama seperti kontainer"
     },
     backgroundColorSwitch: {
       // [Auto-translated] "None"
@@ -2584,8 +2584,8 @@ export var indonesianStrings = {
       pattern: "Contoh: +1(999)-999-99-99"
     },
     datetimemask: {
-      // [Auto-translated] "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year."
-      pattern: "Contoh: mm/dd/yyyy"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
+      pattern: "Contoh: mm / dd / yyyy HH: MM: ss"
     },
     currencymask: {
       // "Ex.: $"
@@ -2608,7 +2608,7 @@ export var indonesianStrings = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "ID panel yang tidak terlihat oleh responden.",
-      // [Auto-translated] "Type a subtitle."
+      // [Auto-translated] "Type a panel subtitle."
       description: "Ketik subtitle panel.",
       // "Use the magic wand icon to set a conditional rule that determines panel visibility."
       visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang menentukan visibilitas panel.",
@@ -2616,14 +2616,14 @@ export var indonesianStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk panel.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
-      // [Auto-translated] "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level."
-      questionTitleLocation: "Berlaku untuk semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "Berlaku untuk semua pertanyaan dalam panel ini. Saat diatur ke \"Tersembunyi\", itu juga menyembunyikan deskripsi pertanyaan. Jika Anda ingin mengganti pengaturan ini, tentukan aturan perataan judul untuk setiap pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.).",
       // "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan semua pertanyaan dalam panel. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
-      questionOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Menjaga urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       // "Repositions the panel to the end of a selected page."
       page: "Memposisikan ulang panel ke akhir halaman yang dipilih.",
       // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
@@ -2632,8 +2632,8 @@ export var indonesianStrings = {
       startWithNewLine: "Batalkan pilihan untuk menampilkan panel dalam satu baris dengan pertanyaan atau panel sebelumnya. Pengaturan tidak berlaku jika panel adalah elemen pertama dalam formulir Anda.",
       // "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed."
       state: "Pilih dari: \"Diperluas\" - panel ditampilkan secara penuh dan dapat diciutkan; \"Collapsed\" - panel hanya menampilkan judul dan deskripsi dan dapat diperluas; \"Terkunci\" - panel ditampilkan secara penuh dan tidak dapat diciutkan.",
-      // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Mengatur lebar panel sebanding dengan elemen survei lain di garis yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
       // [Auto-translated] "Assigns numbers to questions nested within this panel."
       showQuestionNumbers: "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini.",
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
@@ -2684,12 +2684,12 @@ export var indonesianStrings = {
       descriptionLocation: "Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Di bawah judul panel\" secara default).",
       // "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one."
       newPanelPosition: "Menentukan posisi panel yang baru ditambahkan. Secara default, panel baru ditambahkan ke akhir. Pilih \"Next\" untuk memasukkan panel baru setelah yang sekarang.",
-      // [Auto-translated] "Duplicates answers from the last panel and assigns them to the next added dynamic panel."
-      copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya.",
+      // [Auto-translated] "Duplicates answers from the last entry and assigns them to the next added entry."
+      copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari entri terakhir dan menetapkannya ke entri tambahan berikutnya.",
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel.",
-      // [Auto-translated] "Triggers a prompt asking to confirm the row removal."
-      confirmDelete: "Memicu perintah konfirmasi sebelum menghapus panel."
+      // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2776,18 +2776,18 @@ export var indonesianStrings = {
       imageHeight: "Mengganti nilai tinggi minimum dan maksimum.",
       // [Auto-translated] "Overrides the minimum and maximum width values."
       imageWidth: "Mengganti nilai lebar minimum dan maksimum.",
-      // [Auto-translated] "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents."
+      // [Auto-translated] "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents."
       choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam aturan bersyarat; \"Teks\" ditampilkan kepada responden.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Pilih antara \"Gambar\" dan \"Video\" untuk mengatur mode konten pemilih media. Jika \"Gambar\" dipilih, pastikan bahwa semua opsi yang disediakan adalah file gambar dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Demikian pula, jika \"Video\" dipilih, pastikan bahwa semua opsi adalah tautan langsung ke file video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Perhatikan bahwa tautan YouTube tidak didukung untuk opsi video."
     },
     text: {
-      // [Auto-translated] "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length."
-      size: "Pengaturan ini hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan. Untuk membatasi panjang input yang diterima, buka <b>Validasi → Batas karakter maksimum</b>."
+      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
+      size: "Pengaturan ini hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan. Untuk membatasi panjang input yang diterima, buka \"Validasi\" → \"Batas karakter maksimum\"."
     },
     comment: {
-      // [Auto-translated] "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents."
-      rows: "Mengatur jumlah baris yang ditampilkan di bidang input. Jika input mengambil lebih banyak baris, bilah gulir akan muncul."
+      // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Mengatur jumlah baris yang ditampilkan di bidang input. Jika input memakan lebih banyak baris, bilah gulir akan muncul."
     },
     // survey templates
     survey: {
@@ -2811,7 +2811,7 @@ export var indonesianStrings = {
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Saat dipilih, buat kolom individual untuk setiap opsi pilihan.",
-      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
+      // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
       colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
     },
     slider: {
@@ -2848,8 +2848,8 @@ export var indonesianStrings = {
     caseInsensitive: "Pilih apakah huruf besar dan kecil dalam ekspresi reguler harus diperlakukan sebagai setara.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
     widthMode: "Pilih dari: \"Statis\" - menetapkan lebar tetap; \"Responsif\" - membuat survei menempati lebar penuh layar; \"Otomatis\" - berlaku salah satu dari keduanya tergantung pada jenis pertanyaan yang digunakan.",
-    // [Auto-translated] "Cookies prevent users from filling out the same survey twice."
-    cookieName: "Cookie mencegah pengguna mengisi survei yang sama dua kali.",
+    // [Auto-translated] "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions."
+    cookieName: "Tetapkan nilai cookie unik untuk survei Anda. Cookie akan diatur di browser responden setelah survei selesai untuk mencegah pengiriman survei yang berulang.",
     // [Auto-translated] "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
     logo: "Tempel tautan gambar (tanpa batas ukuran) atau klik ikon folder untuk menelusuri file dari komputer Anda (hingga 64 KB).",
     // [Auto-translated] "Sets a logo width in CSS units (px, %, in, pt, etc.)."
@@ -2862,8 +2862,8 @@ export var indonesianStrings = {
     autoAdvanceEnabled: "Pilih apakah Anda ingin survei maju secara otomatis ke halaman berikutnya setelah responden menjawab semua pertanyaan di halaman saat ini. Fitur ini tidak akan berlaku jika pertanyaan terakhir di halaman bersifat terbuka atau mengizinkan banyak jawaban.",
     // [Auto-translated] "Select if you want the survey to complete automatically after a respondent answers all questions."
     autoAdvanceAllowComplete: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
-    // [Auto-translated] "Sets the visibility and location of navigation buttons on a page."
-    showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
+    // [Auto-translated] "Sets the visibility of navigation buttons on a page."
+    showNavigationButtons: "Mengatur visibilitas tombol navigasi pada halaman.",
     // [Auto-translated] "Sets the location of navigation buttons on a page."
     navigationButtonsLocation: "Mengatur lokasi tombol navigasi pada halaman.",
     // [Auto-translated] "Enable the preview page with all or answered questions only."
@@ -2884,8 +2884,8 @@ export var indonesianStrings = {
     maxTextLength: "Hanya untuk pertanyaan entri teks.",
     // [Auto-translated] "For question comments only."
     maxCommentLength: "Hanya untuk komentar pertanyaan.",
-    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears."
-    commentAreaRows: "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input memakan lebih banyak baris, bilah gulir akan muncul.",
+    // [Auto-translated] "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears."
+    commentAreaRows: "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input mengambil lebih banyak baris, bilah gulir akan muncul.",
     // [Auto-translated] "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length."
     autoGrowComment: "Pilih apakah Anda ingin komentar pertanyaan dan pertanyaan Teks Panjang bertambah tinggi secara otomatis berdasarkan panjang teks yang dimasukkan.",
     // [Auto-translated] "For question comments and Long Text questions only."
@@ -2908,8 +2908,8 @@ export var indonesianStrings = {
     columnMinWidth: "Menerima nilai CSS (px, %, in, pt, dll.).",
     // [Auto-translated] "Accepts CSS values (px, %, in, pt, etc.)."
     rowTitleWidth: "Menerima nilai CSS (px, %, in, pt, dll.).",
-    // [Auto-translated] "Visible only when at least one column has Total type or Total expression."
-    totalText: "Hanya terlihat bila setidaknya satu kolom memiliki Tipe total atau Ekspresi total.",
+    // [Auto-translated] "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\"."
+    totalText: "Hanya terlihat jika setidaknya satu kolom menampilkan nilai total yang ditetapkan dengan \"Metode agregasi\" atau \"Ekspresi nilai total\".",
     // "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
     cellErrorLocation: "Mengatur lokasi pesan kesalahan dalam kaitannya dengan sel dengan input yang tidak valid. Opsi \"Warisi\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\".",
     // "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property."
@@ -2930,12 +2930,12 @@ export var indonesianStrings = {
     imageFit: "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya.",
     // "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Secara bertahap meningkatkan ketinggian bidang input saat data dimasukkan. Mengganti setelan \"Tinggi bidang input (dalam baris)\".",
-    // [Auto-translated] "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field."
-    allowResize: "Gagang pengubah ukuran (atau pegangan) muncul di sudut dan dapat diseret untuk mengubah ukuran bidang input.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the Thank You page."
-    timeLimit: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman Terima Kasih.",
-    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page."
-    timeLimitPerPage: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "Opsi \"Warisi\" menerapkan pengaturan tingkat survei (\"Diaktifkan\" secara default).",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
+    timeLimit: "Interval waktu dalam hitungan detik setelah survei otomatis maju ke halaman \"Terima kasih\". Jika diatur ke 0, menghitung waktu yang dihabiskan untuk survei.",
+    // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
+    timeLimitPerPage: "Interval waktu dalam hitungan detik setelah survei otomatis maju ke halaman berikutnya. Menyembunyikan tombol navigasi \"Sebelumnya\". Saat diatur ke 0, menghitung waktu yang dihabiskan di halaman saat ini.",
     // [Auto-translated] "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes."
     validateVisitedEmptyFields: "Aktifkan opsi ini untuk memicu validasi saat pengguna berfokus pada bidang input kosong dan kemudian meninggalkannya tanpa membuat perubahan apa pun.",
     page: {
@@ -2984,8 +2984,8 @@ export var indonesianStrings = {
     maxWidth: "Menerima nilai CSS (px, %, in, pt, dll.).",
     // "Accepts CSS values (px, %, in, pt, etc.)."
     width: "Menerima nilai CSS (px, %, in, pt, dll.).",
-    // [Auto-translated] "If you do not set this property, the answer will be stored in a field specified by the Name property."
-    valueName: "Jika Anda tidak mengatur properti ini, jawabannya akan disimpan dalam bidang yang ditentukan oleh properti Name.",
+    // [Auto-translated] "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name."
+    valueName: "Pengidentifikasi gabungan adalah kunci kustom yang dapat Anda tetapkan ke beberapa pertanyaan untuk menautkannya bersama dan menyinkronkan nilainya. Nilai-nilai ini akan digabungkan menjadi satu array atau objek dan disimpan dalam hasil survei menggunakan kunci sebagai nama properti.",
     // [Auto-translated] "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty."
     defaultDisplayValue: "Nilai yang ditampilkan dalam pertanyaan HTML dan dalam judul dinamis dan deskripsi elemen survei saat nilai pertanyaan kosong.",
     // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements."
@@ -3030,8 +3030,8 @@ export var indonesianStrings = {
     valueTrue: "Nilai yang harus disimpan dalam hasil survei ketika responden memberikan jawaban positif.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Nilai untuk disimpan dalam hasil survei ketika responden memberikan jawaban negatif.",
-    // [Auto-translated] "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
-    showPreview: "Tidak disarankan untuk menonaktifkan opsi ini karena menimpa gambar Pratinjau dan menyulitkan pengguna untuk memahami apakah file telah diunggah.",
+    // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
+    showPreview: "Anda tidak disarankan untuk menonaktifkan opsi ini karena menggantikan gambar Pratinjau dan menyulitkan pengguna untuk memahami apakah file telah diunggah.",
     // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
     needConfirmRemoveFile: "Memicu prompt yang meminta konfirmasi penghapusan file.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3040,7 +3040,7 @@ export var indonesianStrings = {
     dataList: "Masukkan daftar pilihan yang akan disarankan kepada responden saat masukan.",
     // [Auto-translated] "The setting only resizes the input fields and doesn't affect the width of the question box."
     inputSize: "Pengaturan hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan.",
-    // [Auto-translated] "Sets consistent width for all item labels in pixels"
+    // [Auto-translated] "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)."
     itemTitleWidth: "Mengatur lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.).",
     // "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not."
     inputTextAlignment: "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak.",
@@ -3062,10 +3062,10 @@ export var indonesianStrings = {
     format: "Gunakan {0} sebagai placeholder untuk nilai aktual.",
     // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Lihat deskripsi atribut [accept](https://www.w3schools.com/tags/att_input_accept.asp) untuk informasi selengkapnya.",
-    // [Auto-translated] "Applicable only to Radiogroup and Checkbox cell types."
-    columnColCount: "Hanya berlaku untuk jenis sel Radiogroup dan Checkbox.",
-    // [Auto-translated] "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information."
-    autocomplete: "Lihat deskripsi atribut [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) untuk informasi selengkapnya.",
+    // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
+    columnColCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Hanya berlaku untuk kolom dengan \"Jenis input sel\" yang diatur ke Grup Tombol Radio atau Kotak Centang.",
+    // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
+    autocomplete: "Pilih jenis data yang dapat diambil oleh browser pengguna. Data ini bersumber baik dari nilai sebelumnya yang dimasukkan oleh pengguna atau dari nilai yang telah dikonfigurasi sebelumnya jika ada yang telah disimpan oleh pengguna untuk pelengkapan otomatis.",
     // "Applies when \"File source type\" is \"Local file\" or when camera is unavailable"
     filePlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia",
     // "Applies when \"File source type\" is \"Camera\"."
@@ -3139,60 +3139,60 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Allow multiple selection"
     multiSelect: "Perbolehkan beberapa pilihan",
-    // [Auto-translated] "Show image captions"
-    showLabel: "Tampilkan keterangan gambar",
+    // [Auto-translated] "Show image and video captions"
+    showLabel: "Tampilkan keterangan gambar dan video",
     // [Auto-translated] "Swap the order of Yes and No"
     swapOrder: "Tukar urutan Ya dan Tidak",
     // [Auto-translated] "Value"
     value: "Nilai",
     // [Auto-translated] "Tab alignment"
     tabAlign: "Perataan tab",
-    // [Auto-translated] "Source type"
-    sourceType: "Jenis sumber",
+    // [Auto-translated] "File source type"
+    sourceType: "Jenis sumber file",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Sesuai dengan kontainer",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Mengatur ekspresi nilai",
     // "Description"
-    description: "deskripsi",
+    description: "deskripsi", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Kecocokan logo",
     // [Auto-translated] "Pages"
-    pages: "Halaman",
+    pages: "Halaman", // Auto-generated string
     // [Auto-translated] "Questions"
-    questions: "Pertanyaan",
+    questions: "Pertanyaan", // Auto-generated string
     // "Triggers"
     triggers: "Trigger",
-    // [Auto-translated] "Calculated values"
-    calculatedValues: "Nilai terhitung",
+    // [Auto-translated] "Custom variables"
+    calculatedValues: "Variabel kustom",
     // [Auto-translated] "Survey id"
-    surveyId: "ID survei",
+    surveyId: "ID survei", // Auto-generated string
     // [Auto-translated] "Survey post id"
-    surveyPostId: "ID pos survei",
+    surveyPostId: "ID pos survei", // Auto-generated string
     // [Auto-translated] "Survey show data saving"
-    surveyShowDataSaving: "Survei menunjukkan penghematan data",
-    // [Auto-translated] "Question description location"
-    questionDescriptionLocation: "Lokasi deskripsi pertanyaan",
+    surveyShowDataSaving: "Survei menunjukkan penghematan data", // Auto-generated string
+    // [Auto-translated] "Question description alignment"
+    questionDescriptionLocation: "Perataan deskripsi pertanyaan",
     // [Auto-translated] "Progress bar type"
-    progressBarType: "Jenis bilah kemajuan",
-    // [Auto-translated] "Show TOC"
-    showTOC: "Tampilkan TOC",
-    // [Auto-translated] "Toc location"
-    tocLocation: "Lokasi Toc",
+    progressBarType: "Jenis bilah kemajuan", // Auto-generated string
+    // [Auto-translated] "Show table of contents (TOC)"
+    showTOC: "Tampilkan daftar isi (TOC)",
+    // [Auto-translated] "TOC alignment"
+    tocLocation: "Penyelarasan TOC",
     // [Auto-translated] "Question title pattern"
-    questionTitlePattern: "Pola judul pertanyaan",
-    // [Auto-translated] "Width mode"
-    widthMode: "Mode lebar",
+    questionTitlePattern: "Pola judul pertanyaan", // Auto-generated string
+    // [Auto-translated] "Survey width mode"
+    widthMode: "Mode lebar survei",
     // [Auto-translated] "Show brand info"
-    showBrandInfo: "Tampilkan info merek",
+    showBrandInfo: "Tampilkan info merek", // Auto-generated string
     // [Auto-translated] "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Menggunakan nilai tampilan dalam teks dinamis",
     // "Visible if"
-    visibleIf: "terlihat jika",
+    visibleIf: "terlihat jika", // Auto-generated string
     // [Auto-translated] "Default value expression"
     defaultValueExpression: "Ekspresi nilai default",
     // "Required if"
-    requiredIf: "wajib jika",
+    requiredIf: "wajib jika", // Auto-generated string
     // [Auto-translated] "Reset value if"
     resetValueIf: "Reset nilai jika",
     // [Auto-translated] "Set value if"
@@ -3200,137 +3200,137 @@ export var indonesianStrings = {
     // "Validation rules"
     validators: "validator",
     // [Auto-translated] "Bindings"
-    bindings: "Binding",
+    bindings: "Binding", // Auto-generated string
     // [Auto-translated] "Render as"
-    renderAs: "Render sebagai",
+    renderAs: "Render sebagai", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Melampirkan item asli",
+    attachOriginalItems: "Melampirkan item asli", // Auto-generated string
     // "Choices"
     choices: "pilihan",
     // "Choices by url"
-    choicesByUrl: "pilihan dari URL",
+    choicesByUrl: "pilihan dari URL", // Auto-generated string
     // "Currency"
-    currency: "mata uang",
+    currency: "mata uang", // Auto-generated string
     // [Auto-translated] "Cell hint"
-    cellHint: "Petunjuk sel",
+    cellHint: "Petunjuk sel", // Auto-generated string
     // [Auto-translated] "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Total digit pecahan maksimum",
+    totalMaximumFractionDigits: "Total digit pecahan maksimum", // Auto-generated string
     // [Auto-translated] "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Total digit pecahan minimum",
+    totalMinimumFractionDigits: "Total digit pecahan minimum", // Auto-generated string
     // "Columns"
-    columns: "kolom",
+    columns: "kolom", // Auto-generated string
     // [Auto-translated] "Detail elements"
-    detailElements: "Elemen detail",
+    detailElements: "Elemen detail", // Auto-generated string
     // [Auto-translated] "Allow adaptive actions"
-    allowAdaptiveActions: "Izinkan tindakan adaptif",
+    allowAdaptiveActions: "Izinkan tindakan adaptif", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "nilai baris default",
-    // [Auto-translated] "Detail panel show on adding"
+    defaultRowValue: "nilai baris default", // Auto-generated string
+    // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Perluas detail baris baru secara otomatis",
     // [Auto-translated] "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Pilihan lazy load diaktifkan",
+    choicesLazyLoadEnabled: "Pilihan lazy load diaktifkan", // Auto-generated string
     // [Auto-translated] "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Pilihan malas memuat ukuran halaman",
+    choicesLazyLoadPageSize: "Pilihan malas memuat ukuran halaman", // Auto-generated string
     // [Auto-translated] "Input field component"
-    inputFieldComponent: "Komponen bidang input",
+    inputFieldComponent: "Komponen bidang input", // Auto-generated string
     // [Auto-translated] "Item component"
-    itemComponent: "Komponen item",
+    itemComponent: "Komponen item", // Auto-generated string
     // [Auto-translated] "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // [Auto-translated] "Max"
-    max: "Maks",
+    max: "Maks", // Auto-generated string
     // [Auto-translated] "Min value expression"
-    minValueExpression: "Ekspresi nilai min",
+    minValueExpression: "Ekspresi nilai min", // Auto-generated string
     // [Auto-translated] "Max value expression"
-    maxValueExpression: "Ekspresi nilai maksimum",
+    maxValueExpression: "Ekspresi nilai maksimum", // Auto-generated string
     // [Auto-translated] "Step"
-    step: "Langkah",
-    // [Auto-translated] "Data list"
-    dataList: "Daftar data",
+    step: "Langkah", // Auto-generated string
+    // [Auto-translated] "Items for auto-suggest"
+    dataList: "Item untuk saran otomatis",
     // "Input field width (in characters)"
     inputSize: "ukuranBarang",
-    // [Auto-translated] "Item label width (in px)"
-    itemTitleWidth: "Lebar label item (dalam px)",
+    // [Auto-translated] "Item label width"
+    itemTitleWidth: "Lebar label item",
     // [Auto-translated] "Input value alignment"
     inputTextAlignment: "Penyelarasan nilai input",
     // [Auto-translated] "Elements"
-    elements: "Elemen",
+    elements: "Elemen", // Auto-generated string
     // [Auto-translated] "Content"
-    content: "Puas",
+    content: "Puas", // Auto-generated string
     // [Auto-translated] "Navigation title"
-    navigationTitle: "Judul navigasi",
+    navigationTitle: "Judul navigasi", // Auto-generated string
     // [Auto-translated] "Navigation description"
-    navigationDescription: "Deskripsi navigasi",
+    navigationDescription: "Deskripsi navigasi", // Auto-generated string
     // [Auto-translated] "Long tap"
-    longTap: "Ketuk lama",
-    // [Auto-translated] "Auto grow"
-    autoGrow: "Tumbuh otomatis",
-    // [Auto-translated] "Allow resizing"
-    allowResize: "Izinkan pengubahan ukuran",
+    longTap: "Ketuk lama", // Auto-generated string
+    // [Auto-translated] "Expand input field dynamically"
+    autoGrow: "Perluas bidang input secara dinamis",
+    // [Auto-translated] "Enable resize handle"
+    allowResize: "Aktifkan pegangan pengubahan ukuran",
     // [Auto-translated] "Accept carriage return"
-    acceptCarriageReturn: "Terima pengembalian kereta",
+    acceptCarriageReturn: "Terima pengembalian kereta", // Auto-generated string
     // [Auto-translated] "Display mode"
     displayMode: "Mode tampilan",
     // [Auto-translated] "Rate type"
-    rateType: "Jenis tarif",
+    rateType: "Jenis tarif", // Auto-generated string
     // "Label"
-    label: "label",
+    label: "label", // Auto-generated string
     // [Auto-translated] "Content mode"
     contentMode: "Mode konten",
-    // [Auto-translated] "Image fit"
-    imageFit: "Kecocokan gambar",
+    // [Auto-translated] "Image and thumbnail fit"
+    imageFit: "Gambar dan thumbnail cocok",
     // [Auto-translated] "Alt text"
     altText: "Teks alternatif",
     // [Auto-translated] "Height"
-    height: "Tinggi",
+    height: "Tinggi", // Auto-generated string
     // [Auto-translated] "Height on smartphones"
     mobileHeight: "Tinggi di smartphone",
     // [Auto-translated] "Pen color"
-    penColor: "Warna pena",
+    penColor: "Warna pena", // Auto-generated string
     // [Auto-translated] "Background color"
     backgroundColor: "Warna latar belakang",
     // [Auto-translated] "Template elements"
-    templateElements: "Elemen template",
+    templateElements: "Elemen template", // Auto-generated string
     // [Auto-translated] "Operator"
-    operator: "Operator",
+    operator: "Operator", // Auto-generated string
     // [Auto-translated] "Is variable"
-    isVariable: "Adalah variabel",
+    isVariable: "Adalah variabel", // Auto-generated string
     // [Auto-translated] "Run expression"
-    runExpression: "Menjalankan ekspresi",
+    runExpression: "Menjalankan ekspresi", // Auto-generated string
     // [Auto-translated] "Show caption"
-    showCaption: "Tampilkan caption",
+    showCaption: "Tampilkan caption", // Auto-generated string
     // [Auto-translated] "Icon name"
-    iconName: "Nama ikon",
+    iconName: "Nama ikon", // Auto-generated string
     // [Auto-translated] "Icon size"
-    iconSize: "Ukuran ikon",
+    iconSize: "Ukuran ikon", // Auto-generated string
     // [Auto-translated] "Precision"
-    precision: "Presisi",
+    precision: "Presisi", // Auto-generated string
     // [Auto-translated] "Matrix drag handle area"
-    matrixDragHandleArea: "Area gagang seret matriks",
+    matrixDragHandleArea: "Area gagang seret matriks", // Auto-generated string
     // [Auto-translated] "Background image"
     backgroundImage: "Gambar latar belakang",
     // [Auto-translated] "Background image fit"
-    backgroundImageFit: "Kecocokan gambar latar belakang",
+    backgroundImageFit: "Kecocokan gambar latar belakang", // Auto-generated string
     // [Auto-translated] "Background image attachment"
-    backgroundImageAttachment: "Lampiran gambar latar belakang",
+    backgroundImageAttachment: "Lampiran gambar latar belakang", // Auto-generated string
     // [Auto-translated] "Background opacity"
-    backgroundOpacity: "Opasitas latar belakang",
-    // [Auto-translated] "Select to rank enabled"
-    selectToRankEnabled: "Pilih untuk peringkat diaktifkan",
-    // [Auto-translated] "Select to rank areas layout"
-    selectToRankAreasLayout: "Pilih untuk memberi peringkat tata letak area",
+    backgroundOpacity: "Opasitas latar belakang", // Auto-generated string
+    // [Auto-translated] "Allow selective ranking"
+    selectToRankEnabled: "Izinkan peringkat selektif",
+    // [Auto-translated] "Ranking area alignment"
+    selectToRankAreasLayout: "Perataan area peringkat",
     // [Auto-translated] "Text to show if all options are selected"
     selectToRankEmptyRankedAreaText: "Teks untuk memperlihatkan jika semua opsi dipilih",
     // [Auto-translated] "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Teks tempat penampung untuk area peringkat",
     // [Auto-translated] "Allow camera access"
-    allowCameraAccess: "Izinkan akses kamera",
-    // [Auto-translated] "Scale color mode"
-    scaleColorMode: "Mode skala warna",
-    // [Auto-translated] "Rate color mode"
-    rateColorMode: "Mode warna tingkat",
+    allowCameraAccess: "Izinkan akses kamera", // Auto-generated string
+    // [Auto-translated] "Rating icon color mode"
+    scaleColorMode: "Mode warna ikon peringkat",
+    // [Auto-translated] "Smileys color scheme"
+    rateColorMode: "Skema warna Smileys",
     // [Auto-translated] "Copy display value"
-    copyDisplayValue: "Salin nilai tampilan",
+    copyDisplayValue: "Salin nilai tampilan", // Auto-generated string
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rentang kolom",
     // [Auto-translated] "Progress bar area width"
@@ -3459,8 +3459,8 @@ export var indonesianStrings = {
     "--sjs-secondary-background-500": "Sekunder",
     // [Auto-translated] "Surface"
     surfaceScale: "Permukaan",
-    // [Auto-translated] "User interface"
-    userInterfaceBaseUnit: "Antarmuka pengguna",
+    // [Auto-translated] "UI elements"
+    userInterfaceBaseUnit: "Elemen UI",
     // [Auto-translated] "Font"
     fontScale: "Font",
     names: {

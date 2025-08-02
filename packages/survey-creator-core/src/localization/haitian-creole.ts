@@ -512,7 +512,7 @@ export var htStrings = {
       // "reset value for question: {0}"
       question_resetValueText: "Reyajiste valè pou kesyon: {0}", // {0} question name.
       // "assign value: {1} to question: {0}"
-      question_setValueText: "bay valè: {1} poze kesyon: {0}",
+      question_setValueText: "bay valè: {1} poze kesyon: {0}", // {0} question name and {1} setValueExpression
       // "make column {0} of question {1} visible"
       column_visibilityText: "fè kolòn {0} nan kesyon {1} vizib", // {0} column name, {1} question name
       // "make column {0} of question {1} enable"
@@ -636,8 +636,8 @@ export var htStrings = {
       minWidth: "Minimòm lajè panèl",
       // "Maximum panel width"
       maxWidth: "Maksimòm lajè panèl",
-      // [Auto-translated] "Triggers a confirmation prompt before removing a panel."
-      confirmDelete: "Konfime efase panèl la",
+      // [Auto-translated] "Confirm entry removal"
+      confirmDelete: "Konfime retire antre konfime",
       // "Entry description pattern"
       templateDescription: "Modèl deskripsyon panèl",
       // "Entry title pattern"
@@ -1319,8 +1319,8 @@ export var htStrings = {
     surveyvalidator: {
       // "Error message"
       text: "Mesaj erè",
-      // [Auto-translated] "Use the magic wand icon to set a validation rule for the question."
-      expression: "Validasyon ekspresyon"
+      // [Auto-translated] "Validation expression"
+      expression: "Ekspresyon validasyon"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -1459,15 +1459,15 @@ export var htStrings = {
       autoGenerate: "Echèl etikèt konfigirasyon",
       // [Auto-translated] "Slider type"
       sliderType: "kalite koulis",
-      // [Auto-translated] "The minimum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Min range length"
       minRangeLength: "Longè ranje min",
-      // [Auto-translated] "The maximum distance between the slider thumbs a user can set."
+      // [Auto-translated] "Max range length"
       maxRangeLength: "Max ranje longè",
       // [Auto-translated] "Custom labels"
       customLabels: "Etikèt koutim",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Label format"
       labelFormat: "Fòma etikèt",
-      // [Auto-translated] "Use `{0}` as a placeholder for the actual value."
+      // [Auto-translated] "Tooltip format"
       tooltipFormat: "Fòma zouti"
     },
     file: {
@@ -1833,7 +1833,7 @@ export var htStrings = {
       // "Font"
       editorFont: "Font",
       // "Opacity"
-      backgroundOpacity: "Opakite",
+      backgroundOpacity: "Opakite", // Auto-generated string
       // "Survey font family"
       "--sjs-font-family": "Fanmi font sondaj",
       // "Background color"
@@ -3154,45 +3154,45 @@ export var htStrings = {
     // "Set value expression"
     setValueExpression: "Mete ekspresyon valè",
     // "Description"
-    description: "Deskripsyon",
+    description: "Deskripsyon", // Auto-generated string
     // "Logo fit"
     logoFit: "Logo anfòm",
     // "Pages"
-    pages: "Paj",
+    pages: "Paj", // Auto-generated string
     // "Questions"
-    questions: "Kesyon",
+    questions: "Kesyon", // Auto-generated string
     // "Triggers"
     triggers: "Deklanche",
     // "Custom variables"
     calculatedValues: "Varyab koutim",
     // "Survey id"
-    surveyId: "Sondaj id",
+    surveyId: "Sondaj id", // Auto-generated string
     // "Survey post id"
-    surveyPostId: "ID pòs sondaj la",
+    surveyPostId: "ID pòs sondaj la", // Auto-generated string
     // "Survey show data saving"
-    surveyShowDataSaving: "Sondaj montre ekonomize done",
+    surveyShowDataSaving: "Sondaj montre ekonomize done", // Auto-generated string
     // "Question description alignment"
     questionDescriptionLocation: "Kesyon deskripsyon aliyman",
     // "Progress bar type"
-    progressBarType: "Kalite ba pwogrè",
+    progressBarType: "Kalite ba pwogrè", // Auto-generated string
     // "Show table of contents (TOC)"
     showTOC: "Montre tab la (TOC)",
     // "TOC alignment"
     tocLocation: "TOC aliyman",
     // "Question title pattern"
-    questionTitlePattern: "Kesyon tit modèl",
+    questionTitlePattern: "Kesyon tit modèl", // Auto-generated string
     // "Survey width mode"
     widthMode: "Mòd lajè sondaj",
     // "Show brand info"
-    showBrandInfo: "Montre enfòmasyon sou mak",
+    showBrandInfo: "Montre enfòmasyon sou mak", // Auto-generated string
     // "Use display values in dynamic texts"
     useDisplayValuesInDynamicTexts: "Sèvi ak valè ekspozisyon nan tèks dinamik",
     // "Visible if"
-    visibleIf: "Vizib si",
+    visibleIf: "Vizib si", // Auto-generated string
     // "Default value expression"
     defaultValueExpression: "Ekspresyon valè default",
     // "Required if"
-    requiredIf: "Obligatwa si",
+    requiredIf: "Obligatwa si", // Auto-generated string
     // "Reset value if"
     resetValueIf: "Reyajiste valè si",
     // "Set value if"
@@ -3200,51 +3200,51 @@ export var htStrings = {
     // "Validation rules"
     validators: "Règ validation",
     // "Bindings"
-    bindings: "Liaisons",
+    bindings: "Liaisons", // Auto-generated string
     // "Render as"
-    renderAs: "Rann kòm",
+    renderAs: "Rann kòm", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Tache atik orijinal yo",
+    attachOriginalItems: "Tache atik orijinal yo", // Auto-generated string
     // "Choices"
     choices: "Chwa",
     // "Choices by url"
-    choicesByUrl: "Chwa pa url",
+    choicesByUrl: "Chwa pa url", // Auto-generated string
     // "Currency"
-    currency: "Lajan",
+    currency: "Lajan", // Auto-generated string
     // "Cell hint"
-    cellHint: "Sijesyon selilè",
+    cellHint: "Sijesyon selilè", // Auto-generated string
     // "Total maximum fraction digits"
-    totalMaximumFractionDigits: "Total maksimòm chif fraksyon",
+    totalMaximumFractionDigits: "Total maksimòm chif fraksyon", // Auto-generated string
     // "Total minimum fraction digits"
-    totalMinimumFractionDigits: "Total chif fraksyon minimòm",
+    totalMinimumFractionDigits: "Total chif fraksyon minimòm", // Auto-generated string
     // "Columns"
-    columns: "Kolòn",
+    columns: "Kolòn", // Auto-generated string
     // "Detail elements"
-    detailElements: "Eleman detay",
+    detailElements: "Eleman detay", // Auto-generated string
     // "Allow adaptive actions"
-    allowAdaptiveActions: "Pèmèt aksyon adaptasyon",
+    allowAdaptiveActions: "Pèmèt aksyon adaptasyon", // Auto-generated string
     // "Default row value"
-    defaultRowValue: "Valè ranje default",
+    defaultRowValue: "Valè ranje default", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Oto-elaji nouvo detay ranje",
     // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Chwa chaj parese pèmèt",
+    choicesLazyLoadEnabled: "Chwa chaj parese pèmèt", // Auto-generated string
     // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Chwa gwosè paj chaj parese",
+    choicesLazyLoadPageSize: "Chwa gwosè paj chaj parese", // Auto-generated string
     // "Input field component"
-    inputFieldComponent: "Antre eleman jaden",
+    inputFieldComponent: "Antre eleman jaden", // Auto-generated string
     // "Item component"
-    itemComponent: "Eleman atik",
+    itemComponent: "Eleman atik", // Auto-generated string
     // "Min"
-    min: "Min",
+    min: "Min", // Auto-generated string
     // "Max"
-    max: "Max",
+    max: "Max", // Auto-generated string
     // "Min value expression"
-    minValueExpression: "Min valè ekspresyon",
+    minValueExpression: "Min valè ekspresyon", // Auto-generated string
     // "Max value expression"
-    maxValueExpression: "Ekspresyon valè maksimòm",
+    maxValueExpression: "Ekspresyon valè maksimòm", // Auto-generated string
     // "Step"
-    step: "Etap",
+    step: "Etap", // Auto-generated string
     // "Items for auto-suggest"
     dataList: "Atik pou oto-sijere",
     // "Input field width (in characters)"
@@ -3254,27 +3254,27 @@ export var htStrings = {
     // "Input value alignment"
     inputTextAlignment: "Antre valè aliyman",
     // "Elements"
-    elements: "Eleman",
+    elements: "Eleman", // Auto-generated string
     // "Content"
-    content: "Kontni",
+    content: "Kontni", // Auto-generated string
     // "Navigation title"
-    navigationTitle: "Tit navigasyon",
+    navigationTitle: "Tit navigasyon", // Auto-generated string
     // "Navigation description"
-    navigationDescription: "Deskripsyon navigasyon",
+    navigationDescription: "Deskripsyon navigasyon", // Auto-generated string
     // "Long tap"
-    longTap: "Tape long",
+    longTap: "Tape long", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Elaji jaden opinyon dinamik",
     // "Enable resize handle"
     allowResize: "Pèmèt manch redimensionner",
     // "Accept carriage return"
-    acceptCarriageReturn: "Aksepte retounen cha",
+    acceptCarriageReturn: "Aksepte retounen cha", // Auto-generated string
     // "Display mode"
     displayMode: "Mòd ekspozisyon",
     // "Rate type"
-    rateType: "Kalite pousantaj",
+    rateType: "Kalite pousantaj", // Auto-generated string
     // "Label"
-    label: "Mete etikèt sou",
+    label: "Mete etikèt sou", // Auto-generated string
     // "Content mode"
     contentMode: "Mòd kontni",
     // "Image and thumbnail fit"
@@ -3282,39 +3282,39 @@ export var htStrings = {
     // "Alt text"
     altText: "Alt tèks",
     // "Height"
-    height: "Wotè",
+    height: "Wotè", // Auto-generated string
     // "Height on smartphones"
     mobileHeight: "Wotè sou smartphones",
     // "Pen color"
-    penColor: "Koulè plim",
+    penColor: "Koulè plim", // Auto-generated string
     // "Background color"
     backgroundColor: "Koulè background",
     // "Template elements"
-    templateElements: "Eleman modèl",
+    templateElements: "Eleman modèl", // Auto-generated string
     // "Operator"
-    operator: "Operatè",
+    operator: "Operatè", // Auto-generated string
     // "Is variable"
-    isVariable: "Èske varyab",
+    isVariable: "Èske varyab", // Auto-generated string
     // "Run expression"
-    runExpression: "Kouri ekspresyon",
+    runExpression: "Kouri ekspresyon", // Auto-generated string
     // "Show caption"
-    showCaption: "Montre tit",
+    showCaption: "Montre tit", // Auto-generated string
     // "Icon name"
-    iconName: "Non ikon",
+    iconName: "Non ikon", // Auto-generated string
     // "Icon size"
-    iconSize: "Gwosè ikon",
+    iconSize: "Gwosè ikon", // Auto-generated string
     // "Precision"
-    precision: "Presizyon",
+    precision: "Presizyon", // Auto-generated string
     // "Matrix drag handle area"
-    matrixDragHandleArea: "Zòn manch trennen matris",
+    matrixDragHandleArea: "Zòn manch trennen matris", // Auto-generated string
     // "Background image"
     backgroundImage: "Imaj background",
     // "Background image fit"
-    backgroundImageFit: "Imaj background anfòm",
+    backgroundImageFit: "Imaj background anfòm", // Auto-generated string
     // "Background image attachment"
-    backgroundImageAttachment: "Tachman imaj background",
+    backgroundImageAttachment: "Tachman imaj background", // Auto-generated string
     // "Background opacity"
-    backgroundOpacity: "Opakite background",
+    backgroundOpacity: "Opakite background", // Auto-generated string
     // "Allow selective ranking"
     selectToRankEnabled: "Pèmèt klasman selektif",
     // "Ranking area alignment"
@@ -3324,13 +3324,13 @@ export var htStrings = {
     // "Placeholder text for the ranking area"
     selectToRankEmptyUnrankedAreaText: "Tèks anplasman pou zòn klasman an",
     // "Allow camera access"
-    allowCameraAccess: "Pèmèt aksè kamera",
+    allowCameraAccess: "Pèmèt aksè kamera", // Auto-generated string
     // "Rating icon color mode"
     scaleColorMode: "Rating mòd koulè icon",
     // "Smileys color scheme"
     rateColorMode: "Konplo koulè Smileys",
     // "Copy display value"
-    copyDisplayValue: "Kopi valè ekspozisyon",
+    copyDisplayValue: "Kopi valè ekspozisyon", // Auto-generated string
     // "Column span"
     effectiveColSpan: "span kolòn",
     // "Progress bar area width"
