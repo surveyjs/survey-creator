@@ -27,18 +27,21 @@
 }
 
 .sps-checkbox__caption {
-  @include ctrDefaultFont;
-  color: var(--ctr-checkbox-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
 }
 
 .sps-checkbox__rectangle {
-  background: var(--ctr-checkbox-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
-  border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid
-    var(--ctr-checkbox-border-color, var(--sjs-border-10, #dcdcdcff));
-  border-radius: var(--ctr-checkbox-corner-radius, var(--sjs-corner-radius-x05));
+  border-radius: var(--sjs2-radius-control-checkbox, 4px);
+  border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-false-default-border, #D4D4D4);
+  background: var(--sjs2-color-control-check-false-default-bg, rgba(28, 27, 32, 0.05));
+
+  /* sjs2/shadow/inner */
+  //box-shadow: var(--sjs2-shadow-size-inner-offset-x, 0) var(--sjs2-shadow-size-inner-offset-y, 0) var(--sjs2-shadow-size-inner-blur, 0) var(--sjs2-shadow-size-inner-spread, 1px) var(--sjs2-shadow-color-inner, #D4D4D4) inset;
   box-sizing: border-box;
-  width: var(--ctr-checkbox-button-width, var(--sjs-font-size-x3));
-  height: var(--ctr-checkbox-button-height, var(--sjs-font-size-x3));
+  width: var(--sjs2-size-x300, 24px);
+  height: var(--sjs2-size-x300, 24px);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +60,7 @@
 
 .sps-checkbox:not(.sps-checkbox--checked):hover {
   .sps-checkbox__rectangle {
-    background-color: var(--ctr-checkbox-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
+    background: var(--sjs2-color-control-check-true-hovered-bg, #15987E);
   }
 }
 
@@ -71,8 +74,8 @@
   display: block;
   opacity: 0;
   fill: transparent;
-  width: var(--ctr-checkbox-button-check-mark-width, var(--sjs-font-size-x2));
-  height: var(--ctr-checkbox-button-check-mark-height, var(--sjs-font-size-x2));
+  width: var(--ctr-checkbox-button-check-mark-width, 16px);
+  height: var(--ctr-checkbox-button-check-mark-height, 16px);
   background-repeat: no-repeat;
   background-size: calcSize(2) calcSize(2);
   transition:
@@ -82,12 +85,13 @@
 
 .sps-checkbox--checked {
   .sps-checkbox__rectangle {
-    background: var(--ctr-checkbox-background-color-selected, var(--sjs-layer-1-background-500, #ffffffff));
+    background: var(--sjs2-color-control-check-true-default-bg, #19B394);
+    border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-true-default-border, #19B394);
   }
 
   .sps-checkbox__svg {
     opacity: 1;
-    fill: var(--ctr-checkbox-button-check-mark-color, var(--sjs-primary-background-500, #19b394ff));
+    fill: var(--sjs2-color-control-check-true-default-icon, #ffffff);
   }
 }
 

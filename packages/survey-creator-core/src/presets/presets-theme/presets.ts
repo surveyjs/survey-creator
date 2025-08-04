@@ -137,7 +137,7 @@ export var presetsCss = {
     itemInline: "sps-selectbase__item--inline",
     label: "sps-selectbase__label",
     // label: "sps-checkbox",
-    itemSvgIconId: "#icon-v2check",
+    itemSvgIconId: "#icon-check-16x16",
     labelChecked: "",
     //itemControl: "sps-visuallyhidden sps-item__control",
     itemControl: "sps-checkbox__control",
