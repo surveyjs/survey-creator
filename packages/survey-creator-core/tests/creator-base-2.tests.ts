@@ -49,7 +49,7 @@ import {
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
-import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
+import { EditorLocalization, editorLocalization, setupLocale } from "../src/editorLocalization";
 import { ICreatorPlugin, settings } from "../src/creator-settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
@@ -769,4 +769,31 @@ test("Preserve defaultAddQuestionType", (): any => {
   expect(pageAdorner.currentAddQuestionType).toEqual("");
   expect(creator.currentAddQuestionType).toEqual("");
   expect(creator.addNewQuestionText).toEqual("Add Question");
+});
+
+test("License text for default locale and another default locale", (): any => {
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+  let creator = new CreatorTester();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  editorLocalization.defaultLocale = "fr";
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  setupLocale({ localeCode: "fr", strings: { survey: {} } });
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  setupLocale({ localeCode: "fr", strings: { survey: { license: "My license string" } } });
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe("My license string");
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe("My license string");
+
+  editorLocalization.defaultLocale = "en";
 });

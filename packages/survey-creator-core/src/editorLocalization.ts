@@ -70,6 +70,7 @@ export class EditorLocalization {
     if (!!presetLoc) {
       locs.unshift(presetLoc);
     }
+    locs.push(defaultStrings);
     for (let i = 0; i < locs.length; i ++) {
       const res = this.getStringByLocale(path, locs[i]);
       if (!!res || res === "") return res;
@@ -271,7 +272,7 @@ export class EditorLocalization {
   }
   public getLocale(locale?: string): any {
     if (!locale) locale = this.currentLocale;
-    return (locale ? this.getLocaleStrings(locale) : this.getDefaultStrings()) || this.getDefaultStrings();
+    return (locale ? this.getLocaleStrings(locale) : this.getDefaultStrings()) || this.getLocaleStrings("en");
   }
   public getLocaleStrings(loc: string): any {
     if (!loc) loc = this.defaultLocale;
