@@ -789,5 +789,11 @@ test("License text for default locale and another default locale", (): any => {
   expect(editorLocalization.getLocale()).toBeDefined();
   expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
 
+  setupLocale({ localeCode: "fr", strings: { survey: { license: "My license string" } } });
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe("My license string");
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe("My license string");
+
   editorLocalization.defaultLocale = "en";
 });
