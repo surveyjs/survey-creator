@@ -109,4 +109,34 @@ test.describe(title, () => {
     });
     await compareScreenshot(page, ".sd-page__row.sd-row--multiple", "row-multiple-questions.png");
   });
+  test("String editor - long strings in short space", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.evaluate(() => {
+      window["creator"].JSON = {
+        "pages": [
+          {
+            "name": "page1",
+            "elements": [
+              {
+                "type": "multipletext",
+                "name": "question3",
+                "maxWidth": "300px",
+                "title": "Participant details",
+                "items": [
+                  {
+                    "name": "item",
+                    "title": "LongUnbreakableItem"
+                  }
+                ],
+                "itemTitleWidth": "100"
+              }
+            ]
+          }
+        ],
+        "widthMode": "static",
+        "width": "800px"
+      };
+    });
+    await compareScreenshot(page, ".sd-multipletext__item-container", "string-editor-long-string-short-space.png");
+  });
 });

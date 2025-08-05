@@ -19,6 +19,7 @@
     position: relative;
     outline: none;
     z-index: 12;
+    max-width: 100%;
 
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
