@@ -41,20 +41,6 @@ creator.onElementAllowOperations.add((_, options) => {
   }
 });
 ```
-<!--
-DEPENDS ON THE FOLLOWING ISSUE: https://github.com/surveyjs/survey-creator/issues/2843
-
-You may register your own adorner or remove an existing adorner or remove all of them.
-
-```js
-//Register a new adorner
-SurveyCreator.registerAdorner("adornerName", adornerInstance);
-//Remove two existing adorners
-SurveyCreator.removeAdorners(["adornerName1", "adornerName2"]);
-//The removeAdorners function without parameters, will remove all adorners
-SurveyCreator.removeAdorners();
-```
--->
 
 [View Demo](https://surveyjs.io/survey-creator/examples/customadorner/ (linkStyle))
 
