@@ -1,4 +1,5 @@
 @use "../../../variables" as *;
+@use "../fonts" as *;
 
 .sps-checkbox {
   cursor: pointer;
@@ -58,7 +59,13 @@
     outline $creator-transition-duration;
 }
 
-.sps-checkbox:not(.sps-checkbox--checked):hover {
+.sps-checkbox:hover {
+  .sps-checkbox__rectangle {
+    background: var(--sjs2-color-control-check-false-hovered-bg, rgba(28, 27, 32, 0.10));
+  }
+}
+
+.sps-checkbox.sps-checkbox--checked:hover {
   .sps-checkbox__rectangle {
     background: var(--sjs2-color-control-check-true-hovered-bg, #15987E);
   }

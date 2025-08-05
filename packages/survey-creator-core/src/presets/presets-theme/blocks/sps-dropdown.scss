@@ -9,16 +9,14 @@
     align-self: stretch;
 
     border-radius: var(--sjs2-radius-semantic-form, 8px);
-    background: var(--sjs2-color-control-formbox-default-bg, rgba(28, 27, 32, 0.05));
-
-    /* sjs2/shadow/inner */
-    box-shadow: var(--sjs2-shadow-size-inner-offset-x, 0) var(--sjs2-shadow-size-inner-offset-y, 0) var(--sjs2-shadow-size-inner-blur, 0) var(--sjs2-shadow-size-inner-spread, 1px) var(--sjs2-shadow-color-inner, #D4D4D4) inset;
 
     .sps-dropdown__filter-string-input {
         display: flex;
         padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px) var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
         align-items: flex-start;
         flex: 1 0 0;
+        box-shadow: none;
+        border: none;
     }
 }
 

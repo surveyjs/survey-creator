@@ -203,7 +203,7 @@ export var presetsCss = {
     control: "sps-input sps-dropdown",
     controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
     controlValue: "sps-dropdown__value",
-    filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
+    filterStringInput: "sps-input sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
     other: "sps-comment sps-question__other",
     onError: "sps-input--error",
     selectWrapper: "sv-dropdown_select-wrapper sps-dropdown_select-wrapper",
@@ -393,7 +393,14 @@ export var presetsCss = {
       buttonCollapsed: ""
     }
   },
-  //list: JSON.parse(JSON.stringify(listComponentCss)),
+  list: {
+    root: "sv-list__container sps-list",
+    item: "sv-list__item sps-list__item",
+    itemBody: "sv-list__item-body sps-list__item-body",
+    itemSelected: "sv-list__item--selected sps-list__item--selected",
+    itemFocused: "sv-list__item--focused sps-list__item--focused",
+    itemHovered: "sv-list__item--hovered sps-list__item--hovered",
+  },
   actionBar: {
     root: "sps-action-bar",
     item: "sps-action-button",
