@@ -4469,7 +4469,7 @@ test("Creator footer action bar: only designer tab", (): any => {
 
   creator.isMobileView = true;
   creator.footerToolbar.flushUpdates();
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
@@ -4478,7 +4478,7 @@ test("Creator footer action bar: only designer tab", (): any => {
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 test("Creator footer action bar: add custom action", (): any => {
