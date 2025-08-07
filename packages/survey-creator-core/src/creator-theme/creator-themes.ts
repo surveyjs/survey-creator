@@ -22,9 +22,9 @@ export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> 
 }
 
 const defaultVariables = {
-  "--sjs-special-background": "#EDF9F7",
-  "--sjs-primary-background-500": "#19B394",
-  "--sjs-secondary-background-500": "#19B394",
+  "--sjs2-color-utility-surface": "#EDF9F7",
+  "--sjs2-color-project-brand-600": "#19B394",
+  "--sjs2-color-project-accent-600": "#19B394",
 };
 
 export const CreatorThemes: { [index: string]: ICreatorTheme } = {

@@ -72,6 +72,7 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTokens.defaultTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;

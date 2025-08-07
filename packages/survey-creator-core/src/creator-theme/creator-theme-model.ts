@@ -31,7 +31,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   private isSpecialBackgroundFromCurrentTheme() {
     const currentTheme = CreatorThemes[this.themeName];
-    return colorsAreEqual(currentTheme && currentTheme.cssVariables && currentTheme.cssVariables["--sjs-special-background"], this["--sjs-special-background"]);
+    return colorsAreEqual(currentTheme && currentTheme.cssVariables && currentTheme.cssVariables["--sjs2-color-utility-surface"], this["--sjs2-color-utility-surface"]);
   }
   private findAppropriateSpecialBackground(primaryColorValue: string) {
     let primaryColorName: string;
@@ -47,10 +47,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     if (!this.isLight) {
       return;
     }
-    const canCalculateSpecialBackgroundColor = this.isSpecialBackgroundFromCurrentTheme() || colorsAreEqual(this.findAppropriateSpecialBackground(primaryColorOldValue), this["--sjs-special-background"]);
+    const canCalculateSpecialBackgroundColor = this.isSpecialBackgroundFromCurrentTheme() || colorsAreEqual(this.findAppropriateSpecialBackground(primaryColorOldValue), this["--sjs2-color-utility-surface"]);
     if (canCalculateSpecialBackgroundColor) {
       const newSpecialBackgroundColor = this.findAppropriateSpecialBackground(primaryColorNewValue);
-      this["--sjs-special-background"] = newSpecialBackgroundColor || PredefinedBackgroundColors["light"]["gray"];
+      this["--sjs2-color-utility-surface"] = newSpecialBackgroundColor || PredefinedBackgroundColors["light"]["gray"];
     }
   }
 
@@ -107,11 +107,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.resetColorThemeCssVariablesChanges();
       this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
-    } else if (name === "--sjs-primary-background-500") {
+    } else if (name === "--sjs2-color-project-brand-600") {
       this.setThemeCssVariablesChanges(name, newValue);
       this.setPropertyValue(name, newValue);
       this.updateBackgroundColor(newValue, oldValue);
-    } else if (name === "--sjs-secondary-background-500" || name === "--sjs-special-background") {
+    } else if (name === "--sjs2-color-project-accent-600" || name === "--sjs2-color-utility-surface") {
       this.setThemeCssVariablesChanges(name, newValue);
       this.setPropertyValue(name, newValue);
     } else if (name.indexOf("--") === 0) {
@@ -259,7 +259,7 @@ Serializer.addClass(
 Serializer.addProperties("creatortheme", [
   {
     type: "color",
-    name: "--sjs-special-background",
+    name: "--sjs2-color-utility-surface",
     default: "#EDF9F7",
     enableIf: (obj: CreatorThemeModel): boolean => {
       return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
@@ -272,7 +272,7 @@ Serializer.addProperties("creatortheme", [
     }
   }, {
     type: "color",
-    name: "--sjs-primary-background-500",
+    name: "--sjs2-color-project-brand-600",
     default: "#19B394",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -282,7 +282,7 @@ Serializer.addProperties("creatortheme", [
     },
   }, {
     type: "color",
-    name: "--sjs-secondary-background-500",
+    name: "--sjs2-color-project-accent-600",
     default: "#19B394",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
