@@ -29,8 +29,7 @@
     "lint:fix": "eslint . --max-warnings=0 --fix"
   },
   "dependencies": {
-    "survey-core": "../../../survey-library/packages/survey-core/build",
-    "sjs-design-tokens": "../../../sjs-design-tokens/build"
+    "survey-core": "../../../survey-library/packages/survey-core/build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
