@@ -12,7 +12,7 @@
   --sjs-layer-3-foreground-50: var(--sjs2-color-fg-basic-secondary);
   --sjs-layer-2-background-500: #f8f8f8ff; //?
   --sjs-layer-2-background-400: #eeeeeeff; //?
-  --sjs-special-haze: color(srgb 0.800112 0.933371 0.933371 / 0.35);//var(--sjs2-color-utility-overlay-screen);
+  --sjs-special-haze: var(--sjs2-color-utility-overlay-screen);
   --sjs-border-25: var(--sjs2-color-border-basic-secondary);
   --sjs-border-10: var(--sjs2-color-border-basic-secondary);
   --sjs-primary-background-500: var(--sjs2-color-bg-brand-primary);
