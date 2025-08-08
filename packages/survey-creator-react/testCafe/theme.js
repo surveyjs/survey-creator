@@ -4058,7 +4058,8 @@
             "--sjs2-opacity-disabled": "var(--sjs2-opacity-x025)",
             "--sjs2-opacity-hidden": "var(--sjs2-opacity-x000)",
             "--sjs2-border-width-default": "var(--sjs2-border-width-x100)",
-            "--sjs2-border-width-a11y": "var(--sjs2-border-width-x400)"
+            "--sjs2-border-width-a11y": "var(--sjs2-border-width-x400)",
+            "--sjs2-color-border-basic-secondary-for-tests-only": "#d4d4d4ff"
           }
         };
         /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (testTheme);
