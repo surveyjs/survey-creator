@@ -40,17 +40,24 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
 
   public createMainPageCore(): any {
     return {
-      title: "Set Up the Tabs",
+      title: "Configure the Tabs",
+      description: "Select the tabs you want to show, reorder them, change their titles, and choose the tab that will be active by default.",
       navigationTitle: "Tabs",
       elements: [
-        this.createItemsMatrixJSON({
-          name: this.nameItems
-        }),
-        this.createItemsMatrixJSON({
-          startWithNewLine: false,
-          name: this.nameMatrix,
-          "descriptionLocation": "underInput",
-        }),
+        {
+          type: "panel",
+          name: "panel_tabs_matrix",
+          elements: [
+            this.createItemsMatrixJSON({
+              name: this.nameItems
+            }),
+            this.createItemsMatrixJSON({
+              startWithNewLine: false,
+              name: this.nameMatrix,
+              "descriptionLocation": "underInput",
+            }),
+          ]
+        },
         {
           type: "panel",
           name: "panel_tabs_controls",
