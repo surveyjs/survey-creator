@@ -33,9 +33,9 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyTokens.defaultTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTokens.testTheme);
     const loc = SurveyCreatorCore.localization.getLocale("de");
-    creator.applyCreatorTheme(SurveyTokens.defaultTheme);
+    creator.applyCreatorTheme(SurveyTokens.testTheme);
     loc.ed.logic = "Miner Logik";
     SurveyCreatorCore.localization.currentLocale = "de";
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
