@@ -13,12 +13,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   themeCssVariablesChanges?: { [index: string]: string } = {};
 
   unitDictionary: { [index: string]: number } = {
-    "--ctr-font-unit": 8,
-    "--ctr-line-height-unit": 8,
-    "--ctr-size-unit": 8,
-    "--ctr-spacing-unit": 8,
-    "--ctr-corner-radius-unit": 8,
-    "--ctr-stroke-unit": 1,
+    "--sjs2-base-unit-size": 8,
+    "--sjs2-base-unit-line-height": 8,
+    "--sjs2-base-unit-size": 8,
+    "--sjs2-base-unit-spacing": 8,
+    "--sjs2-base-unit-radius": 8,
+    "--sjs2-base-unit-border-width": 1,
   };
 
   @property() themeName: string = CreatorThemeModel.defaultThemeName;
@@ -122,12 +122,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private scalePropertiesChanged(propertyName: string, newValue: number) {
     if (propertyName == "fontScale") {
-      this.scalingProperties("--ctr-font-unit", newValue);
-      this.scalingProperties("--ctr-line-height-unit", newValue);
+      this.scalingProperties("--sjs2-base-unit-size", newValue);
+      this.scalingProperties("--sjs2-base-unit-line-height", newValue);
     } else if (propertyName == "scale") {
-      this.scalingProperties("--ctr-size-unit", newValue);
-      this.scalingProperties("--ctr-spacing-unit", newValue);
-      this.scalingProperties("--ctr-corner-radius-unit", newValue);
+      this.scalingProperties("--sjs2-base-unit-size", newValue);
+      this.scalingProperties("--sjs2-base-unit-spacing", newValue);
+      this.scalingProperties("--sjs2-base-unit-radius", newValue);
     }
   }
   private scalingProperties(cssName: string, newValue: number) {
@@ -140,13 +140,13 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private scaleCssVariables() {
     if (this.fontScale !== undefined) {
-      this.scaleValue("--ctr-font-unit", this.fontScale);
-      this.scaleValue("--ctr-line-height-unit", this.fontScale);
+      this.scaleValue("--sjs2-base-unit-size", this.fontScale);
+      this.scaleValue("--sjs2-base-unit-line-height", this.fontScale);
     }
     if (this.scale !== undefined) {
-      this.scaleValue("--ctr-size-unit", this.scale);
-      this.scaleValue("--ctr-spacing-unit", this.scale);
-      this.scaleValue("--ctr-corner-radius-unit", this.scale);
+      this.scaleValue("--sjs2-base-unit-size", this.scale);
+      this.scaleValue("--sjs2-base-unit-spacing", this.scale);
+      this.scaleValue("--sjs2-base-unit-radius", this.scale);
     }
   }
   private getScaleFactor(cssName: string): number {
@@ -155,8 +155,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private updateScaleProperties() {
     this.blockThemeChangedNotifications += 1;
     try {
-      this.fontScale = this.getScaleFactor("--ctr-font-unit");
-      this.scale = this.getScaleFactor("--ctr-size-unit");
+      this.fontScale = this.getScaleFactor("--sjs2-base-unit-size");
+      this.scale = this.getScaleFactor("--sjs2-base-unit-size");
     } finally {
       this.blockThemeChangedNotifications -= 1;
     }
@@ -292,11 +292,11 @@ Serializer.addProperties("creatortheme", [
       }
     },
   }, {
-    name: "--ctr-font-unit",
+    name: "--sjs2-base-unit-size",
     default: "8px",
     visible: false,
   }, {
-    name: "--ctr-line-height-unit",
+    name: "--sjs2-base-unit-line-height",
     default: "8px",
     visible: false,
   }, {
@@ -320,15 +320,15 @@ Serializer.addProperties("creatortheme", [
       }
     }
   }, {
-    name: "--ctr-spacing-unit",
+    name: "--sjs2-base-unit-spacing",
     default: "8px",
     visible: false,
   }, {
-    name: "--ctr-size-unit",
+    name: "--sjs2-base-unit-size",
     default: "8px",
     visible: false,
   }, {
-    name: "--ctr-corner-radius-unit",
+    name: "--sjs2-base-unit-radius",
     default: "8px",
     visible: false,
   }, {
