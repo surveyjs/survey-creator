@@ -1,5 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "./variables.scss" as *;
+@use "../fonts" as *;
 
 .sps-table-wrapper {
   overflow: hidden;
@@ -12,9 +13,15 @@
 
   tr {
       background-color: var(--sjs2-color-bg-basic-primary, #FFF);
+      td:last-of-type button {
+        opacity: 0;
+      }
       &:hover {
         td > div {
-          background: red;
+          background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
+        }
+        td:last-of-type button {
+          opacity: 1;
         }
       }
   }
@@ -226,4 +233,10 @@
   .sps-table__row--leave {
     animation: none;
   }
+}
+
+.sps-table__row--empty {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  text-align: center;
 }

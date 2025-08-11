@@ -309,6 +309,7 @@ export var presetsCss = {
     cellQuestionWrapper: "sps-table__question-wrapper",
     draggedRow: "sps-matrixdynamic__dragged-row",
     emptyCell: "sps-table__cell--empty",
+    rowEmpty: "sps-table__row--empty",
     rowEnter: "sps-table__row--enter",
     rowLeave: "sps-table__row--leave",
   },

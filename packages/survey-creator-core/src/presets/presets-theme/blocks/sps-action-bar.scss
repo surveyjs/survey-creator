@@ -60,10 +60,8 @@
   &:focus {
     opacity: 1;
     outline: none;
-    background-color: var(
-      --ctr-actionbar-button-background-color-hovered,
-      var(--sjs-layer-1-background-400, #f5f5f5ff)
-    );
+
+    background: var(--sjs2-color-bg-neutral-tertiary-dim, rgba(28, 27, 32, 0.05));
 
     use {
       fill: var(--ctr-actionbar-button-icon-color-hovered, var(--sjs-layer-1-foreground-75, #000000bf));

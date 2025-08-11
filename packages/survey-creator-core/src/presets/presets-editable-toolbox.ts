@@ -74,46 +74,50 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       title: "Set Up the Toolbox",
       navigationTitle: "Toolbox",
       elements: [
-
         {
-          type: "matrixdynamic",
-          name: this.nameCategories,
-          titleLocation: "hidden",
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-          minRowCount: 1,
-          allowRowReorder: true,
-          addRowButtonLocation: "top",
-          addRowText: "Add Custom Category",
-          showHeader: false,
-          columns: [
-            { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
-            { name: "isDefault", type: "boolean", defaultValue: false, visible: false },
-            { cellType: "text", name: "title" }
-          ],
-          detailPanelMode: "underRow",
-          detailElements: [
-            { type: "text", name: "category", isRequired: true, visible: false },
-            { type: "text", name: "tooltip", visible: false },
+          type: "panel",
+          name: "panel_toolbox_matrix",
+          elements: [
+            {
+              type: "matrixdynamic",
+              name: this.nameCategories,
+              titleLocation: "hidden",
+              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+              minRowCount: 1,
+              allowRowReorder: true,
+              addRowButtonLocation: "top",
+              addRowText: "Add Custom Category",
+              showHeader: false,
+              columns: [
+                { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
+                { name: "isDefault", type: "boolean", defaultValue: false, visible: false },
+                { cellType: "text", name: "title" }
+              ],
+              detailPanelMode: "underRow",
+              detailElements: [
+                { type: "text", name: "category", isRequired: true, visible: false },
+                { type: "text", name: "tooltip", visible: false },
+                this.createItemsMatrixJSON({
+                  name: this.nameInnerMatrix,
+                  valueName: "items"
+                })
+              ]
+            },
             this.createItemsMatrixJSON({
-              name: this.nameInnerMatrix,
-              valueName: "items"
-            })
-          ]
+              name: this.nameItems,
+              startWithNewLine: false,
+              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
+            }),
+            this.createItemsMatrixJSON({
+              allowAddRows: true,
+              addRowButtonLocation: "top",
+              addRowText: "Add Custom Item",
+              startWithNewLine: false,
+              name: this.nameMatrix,
+              "descriptionLocation": "underInput",
+              description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+            })]
         },
-        this.createItemsMatrixJSON({
-          name: this.nameItems,
-          startWithNewLine: false,
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-        }),
-        this.createItemsMatrixJSON({
-          allowAddRows: true,
-          addRowButtonLocation: "top",
-          addRowText: "Add Custom Item",
-          startWithNewLine: false,
-          name: this.nameMatrix,
-          "descriptionLocation": "underInput",
-          description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
-        }),
         {
           type: "panel",
           name: "panel_toolbox_controls",

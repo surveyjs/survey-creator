@@ -101,7 +101,6 @@
 .sps-row--multiple {
   display: flex;
   align-items: stretch;
-
   & > div {
     display: flex;
     padding: var(--sjs2-spacing-x150, 12px);
@@ -109,5 +108,9 @@
     align-items: flex-start;
     gap: var(--sjs2-spacing-x075, 6px);
     align-self: stretch;
+    border-right: var(--sjs2-border-width-static-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+    &:last-child {
+      border: none;
+    }
   }
 }

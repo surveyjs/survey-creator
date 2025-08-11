@@ -80,7 +80,8 @@
 .sps-matrixdynamic__row-icon {
   width: var(--sjs2-size-icon-medium, 24px);
   height: var(--sjs2-size-icon-medium, 24px);
-  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
+  padding: 0;
+  margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
     0
     var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
     0;

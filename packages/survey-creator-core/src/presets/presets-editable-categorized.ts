@@ -125,7 +125,12 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
           a.iconName = "icon-expand-24x24",
           a.visibleIndex = 10;
         }
-        if (a.id == "remove-row") a.visibleIndex = 20;
+        if (a.id == "remove-row") {
+          a.visibleIndex = 20;
+          a.component = "sv-action-bar-item";
+          a.action = () => options.question.removeRowUI(options.row);
+          a.iconName = options.question.name == this.nameMatrix ? "icon-add_24x24" : "icon-remove_24x24";
+        }
       });
     }
   }
