@@ -804,6 +804,21 @@ test("LogicItemEditorUI: remove item", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
 });
+test("LogicItemEditorUI: remove setValueIf & setValueExpression, Bug#7075", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", setValueIf: "{q1} = 1", setValueExpression: "abc" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(survey.getQuestionByName("q2").setValueIf).toBeFalsy();
+  expect(survey.getQuestionByName("q2").setValueExpression).toBeFalsy();
+});
 test("Create setValue trigger in logic", () => {
   PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());
   var survey = new SurveyModel({

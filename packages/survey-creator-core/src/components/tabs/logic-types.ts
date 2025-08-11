@@ -41,6 +41,7 @@ export interface ISurveyLogicType {
   getSelectorChoices?: (survey: SurveyModel, context: Question) => Array<SurveyElement<any>>;
   supportContext?: (question: Base) => boolean;
   getParentElement?(element: Base): Base;
+  remove?: (element: Base) => void;
 }
 
 export class SurveyLogicType {
@@ -182,6 +183,10 @@ export class SurveyLogicType {
     }
     return str;
   }
+  public remove(el: Base): void {
+    const f = this.logicType.remove;
+    f && f(el);
+  }
   private getElementDisplayName(element: Base): string {
     if (!element) return "";
     let res = "";
@@ -228,6 +233,12 @@ function hasMatrixColumns(survey: SurveyModel): boolean {
     }
   }
   return false;
+}
+function removeElement(items: Array<any>, element: any): void {
+  const index = items.indexOf(element);
+  if (index > -1) {
+    items.splice(index, 1);
+  }
 }
 
 export class SurveyLogicTypes {
@@ -380,6 +391,9 @@ export class SurveyLogicTypes {
       propertyName: "setValueIf",
       getDisplayText: (element: Base, formatStr: string, lt: SurveyLogicType): string => {
         return getDisplayTextForSetValueIf(element, formatStr, lt);
+      },
+      remove: (element: Base) => {
+        (<any>element).setValueExpression = "";
       }
     },
     {
@@ -516,6 +530,12 @@ export class SurveyLogicTypes {
       getCollection: (survey: SurveyModel): Array<Base> => {
         return survey.completedHtmlOnCondition;
       },
+      remove: (element: Base): void => {
+        const survey: any = element.getSurvey();
+        if (!!survey) {
+          removeElement(survey.completedHtmlOnCondition, element);
+        }
+      }
     },
     {
       name: "trigger_runExpression_Expression",
