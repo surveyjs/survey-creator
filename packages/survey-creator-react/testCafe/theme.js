@@ -3828,7 +3828,7 @@
             "--sjs2-color-utility-surface": "#EDF9F7",
             "--sjs2-color-utility-plain": "var(--sjs2-color-bg-basic-secondary)",
             "--sjs2-color-utility-sheet": "var(--sjs2-palette-gray-000)",
-            "--sjs2-color-utility-scrollbar": "rgba(from var(--sjs2-palette-gray-999) r g b / var(--sjs2-opacity-x015))",
+            "--sjs2-color-utility-scrollbar": "#00000026",
             "--sjs2-color-utility-a11y": "rgba(from var(--sjs2-palette-blue-400) r g b / var(--sjs2-opacity-x040))",
             "--sjs2-color-utility-overlay-screen": "color(srgb 0.800112 0.933371 0.933371 / 0.35)",
             "--sjs2-color-utility-overlay-border": "rgba(from var(--sjs2-palette-gray-900) r g b / var(--sjs2-opacity-x040))",
@@ -4059,7 +4059,7 @@
             "--sjs2-opacity-hidden": "var(--sjs2-opacity-x000)",
             "--sjs2-border-width-default": "var(--sjs2-border-width-x100)",
             "--sjs2-border-width-a11y": "var(--sjs2-border-width-x400)",
-            "--sjs2-color-border-basic-secondary-for-tests-only": "#d4d4d4ff"
+            "--sjs2-color-border-basic-secondary-for-tests-only": "#d4d4d4"
           }
         };
         /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (testTheme);
