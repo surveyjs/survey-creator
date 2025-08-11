@@ -49,8 +49,8 @@
   box-sizing: border-box;
   border: none;
   color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
-  background-color: transparent;
+  border-radius: var(--sjs2-radius-control-action-icon, 8px);
+  background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0.00));
   cursor: pointer;
   transition:
     background-color $creator-transition-duration,

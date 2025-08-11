@@ -55,6 +55,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       options.actions.push({
         id: iconName,
         iconName: iconName,
+        innerCss: "sps-matrixdynamic__row-icon",
         location: "start",
         enabled: false
       });
@@ -69,7 +70,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         }
         if (a.id == "remove-row") {
           a.visibleIndex = 20;
-          a.iconName = options.question.name == this.nameMatrix ? "icon-add_16x16" : "icon-remove_16x16";
+          a.component = "sv-action-bar-item";
+          a.action = () => options.question.removeRowUI(options.row);
+          a.iconName = options.question.name == this.nameMatrix ? "icon-add_24x24" : "icon-remove_24x24";
         }
       });
     }

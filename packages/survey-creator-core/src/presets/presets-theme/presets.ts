@@ -297,7 +297,7 @@ export var presetsCss = {
     buttonAdd: "sps-matrixdynamic__add-btn sps-action-button sps-action-button--large",
     buttonRemove: "sps-matrixdynamic__remove-btn",
     iconAdd: "",
-    iconRemove: "",
+    iconRemove: "xxx",
     dragElementDecorator: "sps-drag-element__svg",
     iconDragElement: "#icon-drag-24x24",
     iconDrag: "sps-matrixdynamic__drag-element",

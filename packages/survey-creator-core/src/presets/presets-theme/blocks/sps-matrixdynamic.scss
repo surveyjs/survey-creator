@@ -15,18 +15,15 @@
 // }
 
 .sps-drag-element__svg {
-  width: var(--ctr-data-table-row-drag-area-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-data-table-row-drag-area-icon-height, var(--sjs-font-size-x3));
-  padding-top: var(--ctr-data-table-row-drag-area-padding-top, var(--sjs-spacing-x1));
-  padding-inline-end: var(--ctr-data-table-row-drag-area-padding-right, var(--sjs-spacing-x1));
-  padding-bottom: var(--ctr-data-table-row-drag-area-padding-bottom, var(--sjs-spacing-x1));
-  padding-inline-start: var(--ctr-data-table-row-drag-area-padding-left, var(--sjs-spacing-x1));
-
-  display: block;
-  opacity: 0.5;
-
+  width: var(--sjs2-size-icon-medium, 24px);
+  height: var(--sjs2-size-icon-medium, 24px);
+  display: flex;
+  padding: var(--sjs2-spacing-x100, 8px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   use {
-    fill: var(--ctr-data-table-row-drag-area-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
+    fill: var(--sjs2-color-fg-basic-tertiary, rgba(from #1C1B20 r g b / 0.4));
   }
 }
 
@@ -78,6 +75,22 @@
   @include ctrDefaultFont;
   color: var(--ctr-survey-placeholder-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
+}
+
+.sps-matrixdynamic__row-icon {
+  width: var(--sjs2-size-icon-medium, 24px);
+  height: var(--sjs2-size-icon-medium, 24px);
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
+    0
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
+    0;
+  margin-inline-end: var(--sjs2-spacing-x100, 8px);
+  &:disabled {
+    opacity: 1;
+  }
+  use {
+    fill: var(--sjs2-color-fg-brand-primary, #19B394);
+  }
 }
 
 .sps-matrixdynamic__add-btn {

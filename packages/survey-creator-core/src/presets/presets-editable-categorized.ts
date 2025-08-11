@@ -98,6 +98,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         options.actions.push({
           id: iconName,
           iconName: iconName,
+          innerCss: "sps-matrix-row-icon",
           location: "start",
           enabled: false
         });
