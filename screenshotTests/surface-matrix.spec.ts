@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom } from "./helper";
 
 const title = "Matrix surface";
 
@@ -9,38 +9,28 @@ test.describe(title, () => {
 
   test("Matrix column editor", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
-    await page.evaluate(() => {
-      window["creator"].addQuestion("Multi-Select Matrix");
-    });
-    const row1Column1Cell = page.locator(".sd-table__row").nth(0).locator(".svc-matrix-cell").nth(1);
-    const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button");
+    await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
+    const row1Column1Cell = page.locator(".sv-dropdown_select-wrapper").first();
+    const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button").first();
 
-    await expect(page.locator(".svc-question__content")).toBeVisible();
     await row1Column1Cell.hover({ force: true });
-
     await editColumnButton.click();
     await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png");
   });
 
   test("Matrix column editor with design surface zoomed out", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
-    await page.evaluate(() => {
-      window["creator"].allowZoom = true;
-    });
-    await page.evaluate(() => {
-      window["creator"].addQuestion("Multi-Select Matrix");
-    });
+    await setAllowZoom(page, true);
+    await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     for (let i = 0; i < 5; i++) {
       await page.locator("#zoomOut button").click();
     }
-    const row1Column1Cell = page.locator(".sd-table__row").nth(0).locator(".svc-matrix-cell").nth(1);
-    const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button");
+    const row1Column1Cell = page.locator(".sv-dropdown_select-wrapper").first();
+    const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button").first();
 
-    await expect(page.locator(".svc-question__content")).toBeVisible();
     await row1Column1Cell.hover({ force: true });
-
     await editColumnButton.click();
-    await page.locator(".sv-popup__body-content").hover({ position: { x: 10, y: 10 } });
+    // await page.locator(".sv-popup__body-content").hover({ position: { x: 10, y: 10 } });
     await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png");
   });
 
@@ -71,7 +61,7 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, surveyJSON);
-    const columnCell = page.locator(".sd-table__cell--column-title").locator(".svc-matrix-cell");
+    const columnCell = page.locator(".sd-table__cell--column-title").locator(".svc-matrix-cell").first();
     const matrix = page.locator(".sd-matrixdropdown");
     await columnCell.hover({ force: true, position: { x: 1, y: 1 } });
     await page.waitForTimeout(100);
@@ -112,7 +102,7 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, surveyJSON);
-    const columnCell = page.locator(".sd-table__cell--column-title").locator(".svc-matrix-cell");
+    const columnCell = page.locator(".sd-table__cell--column-title").locator(".svc-matrix-cell").first();
     const matrix = page.locator(".sd-matrixdropdown");
     await columnCell.hover({ force: true, position: { x: 1, y: 1 } });
     await page.waitForTimeout(100);
@@ -248,7 +238,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
-    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click({ position: { x: -25, y: -25 } });
+    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click();
     await expect(page.locator(".svc-question__content--selected")).toBeVisible();
     await compareScreenshot(page, page.locator(".svc-question__content"), "surface-matrix-detail-two-questions-select.png");
   });
@@ -279,17 +269,19 @@ test.describe(title, () => {
         }
       ]
     });
+    const dropdownButton = page.locator(".svc-matrix-cell").nth(3).locator(".svc-matrix-cell__question-controls-button");
+    const ratingButton = page.locator(".svc-matrix-cell").nth(4).locator(".svc-matrix-cell__question-controls-button");
 
-    await page.locator(".svc-matrix-cell .sd-dropdown").hover();
-    await expect(page.locator(".svc-matrix-cell__question-controls-button")).toBeVisible();
-    await page.locator(".svc-matrix-cell__question-controls-button").click();
-    await resetHoverToCreator(page);
+    await page.locator(".svc-matrix-cell").nth(3).hover({ force: true });
+    await expect(dropdownButton).toBeVisible();
+    await dropdownButton.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png");
     await page.locator("button").filter({ hasText: "Cancel" }).click();
-    await page.locator(".svc-matrix-cell .sd-rating").hover();
-    await expect(page.locator(".svc-matrix-cell__question-controls-button")).toBeVisible();
-    await page.locator(".svc-matrix-cell__question-controls-button").nth(1).click();
-    await resetHoverToCreator(page);
+    await page.waitForTimeout(500);
+
+    await page.locator(".svc-matrix-cell").nth(4).hover({ force: true });
+    await expect(ratingButton).toBeVisible();
+    await ratingButton.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-rating.png");
   });
 
