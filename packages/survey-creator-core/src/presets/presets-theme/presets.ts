@@ -118,14 +118,6 @@ export var presetsCss = {
     confirmDialog: "sps-popup--confirm sv-popup--confirm svc-creator-popup",
     errorsContainerBottom: "sps-question__erbox--below-question",
   },
-  image: { root: "sps-image", image: "sv_image_image" },
-  error: {
-    root: "sps-question__erbox",
-    icon: "sps-question__erbox-icon",
-    item: "",
-    locationTop: "sps-question__erbox--location--top",
-    locationBottom: "sps-question__erbox--location--bottom"
-  },
   checkbox: {
     root: "sps-selectbase",
     item: "sps-item sps-checkbox sps-selectbase__item",
@@ -188,14 +180,6 @@ export var presetsCss = {
     remainingCharacterCounter: "sps-remaining-character-counter",
     onError: "sps-input--error"
   },
-  multipletext: {
-    root: "sps-multipletext",
-    item: "sps-multipletext__item",
-    itemTitle: "sps-multipletext__item-title",
-    content: "sps-multipletext__content sps-text__content",
-    row: "sps-multipletext__row",
-    cell: "sps-multipletext__cell"
-  },
   dropdown: {
     root: "sps-selectbase",
     popup: "sps-dropdown-popup svc-creator-popup",
@@ -210,46 +194,6 @@ export var presetsCss = {
     chevronButtonIconId: "icon-chevron",
     cleanButton: "sps-dropdown__clean-button sps-input__edit-button",
     controlReadOnly: "sd-input--disabled sd-input--readonly"
-  },
-  buttongroup: {
-    root: "sd-button-group-scrollable-container sps-button-group",
-    item: "sps-button-group__item",
-    itemIcon: "sps-button-group__item-icon",
-    itemDecorator: "sps-button-group__item-decorator",
-    itemCaption: "sps-button-group__item-caption",
-    itemHover: "sps-button-group__item--hover",
-    itemSelected: "sps-button-group__item--selected",
-    itemDisabled: "sps-button-group__item--disabled",
-    itemControl: "sv-visuallyhidden",
-    readOnly: "sps-question--disabled",
-
-    rootDropdown: "sd-button-group-scrollable-container sd-scrollable-container--compact sd-selectbase",
-    selectWrapper: "sv-dropdown_select-wrapper sps-dropdown_select-wrapper",
-    control: "sps-input sps-dropdown sd-input sd-dropdown",
-    controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
-    controlValue: "sps-dropdown__value",
-    controlDisabled: "sps-input--disabled sd-input--disabled",
-    controlReadOnly: "sps-input--readonly sd-input--readonly",
-    controlPreview: "sps-input--preview sd-input--preview",
-    filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
-    chevronButton: "sd-dropdown_chevron-button sps-dropdown_chevron-button",
-    chevronButtonSvg: "sd-dropdown_chevron-button-svg sps-dropdown_chevron-button-svg",
-    chevronButtonIconId: "icon-chevron",
-    popup: "sps-dropdown-popup svc-creator-popup",
-  },
-  imagepicker: {
-    root: "sps-imagepicker",
-    item: "sps-imagepicker__item",
-    itemInline: "sps-imagepicker__item--inline",
-    itemChecked: "sps-imagepicker__item--checked",
-    itemReadOnly: "sps-imagepicker__item--disabled",
-    itemHover: "sps-imagepicker__item--allowhover",
-    label: "sps-imagepicker__label",
-    itemControl: "sps-imagepicker__control",
-    image: "sps-imagepicker__image",
-    itemText: "sps-imagepicker__text",
-    clearButton: "sps-btn",
-    other: "sps-comment sps-question__other"
   },
   matrix: {
     tableWrapper: "sps-matrix sps-table-wrapper",
@@ -313,95 +257,7 @@ export var presetsCss = {
     rowEnter: "sps-table__row--enter",
     rowLeave: "sps-table__row--leave",
   },
-  rating: {
-    root: "sps-rating",
-    item: "sps-rating__item",
-    selected: "sps-rating__item--selected",
-    minText: "sps-rating__min-text",
-    itemText: "sps-rating__item-text",
-    maxText: "sps-rating__max-text",
-    readOnly: "sps-rating--disabled"
-  },
-  comment: {
-    root: "sps-input sps-comment",
-    content: "sps-question__content sps-comment__content",
-    remainingCharacterCounter: "sps-remaining-character-counter",
-    small: "sps-row__question--small",
-    onError: "sps-input--error"
-  },
-  expression: "",
-  file: {
-    root: "sps-file",
-    other: "sps-comment sps-question__other",
-    placeholderInput: "sps-visuallyhidden",
-    preview: "sps-file__preview",
-    fileSign: "sps-hidden",
-    fileSignBottom: "sps-file__sign",
-    fileDecorator: "sps-file__decorator",
-    fileInput: "sps-visuallyhidden",
-    noFileChosen: "sps-description sps-file__no-file-chosen",
-    chooseFile: "sps-btn sps-file__choose-btn",
-    readOnly: "sps-file__choose-btn--disabled",
-    removeButton: "sps-hidden",
-    removeButtonBottom: "sps-btn sps-file__clean-btn",
-    removeFile: "sps-hidden",
-    removeFileSvg: "sps-file__remove-svg",
-    wrapper: "sps-file__wrapper"
-  },
-  signaturepad: {
-    root: "sps-signaturepad sjs_sp_container",
-    small: "sps-row__question--small",
-    controls: "sjs_sp_controls",
-    clearButton: "sjs_sp_clear"
-  },
-  propertygrid_bindings: {
-    content: "sps-question__content sps-question__nopadding sps-question-group"
-  },
-  propertygrid_restfull: {
-    content: "sps-question__content sps-question__nopadding sps-restfull"
-  },
-  propertygrid_masksettings: {
-    content: "sps-question__content sps-question__nopadding sps-masksettings"
-  },
-  propertygrid_header: {
-    mainRoot: "sps-header",
-    content: "sps-question__content sps-question__nopadding"
-  },
-  coloralpha: {
-    content: "sps-question__content sps-question__nopadding sps-question__content-coloralpha"
-  },
-  font: {
-    content: "sps-question__content sps-question__nopadding sps-question-composite__content"
-  },
-  backgroundcornerradius: {
-    content: "sps-question__content sps-question__nopadding sps-question-composite__content"
-  },
-  saveData: {
-    root: "",
-    saving: "",
-    error: "",
-    success: "",
-    saveAgainButton: ""
-  },
-  window: {
-    root: "sv_window",
-    body: "sv_window_content",
-    header: {
-      root: "sv_window_title",
-      title: "",
-      button: "",
-      buttonExpanded: "",
-      buttonCollapsed: ""
-    }
-  },
-  list: {
-    root: "sv-list__container sps-list",
-    item: "sv-list__item sps-list__item",
-    itemBody: "sv-list__item-body sps-list__item-body",
-    itemSelected: "sv-list__item--selected sps-list__item--selected",
-    itemFocused: "sv-list__item--focused sps-list__item--focused",
-    itemHovered: "sv-list__item--hovered sps-list__item--hovered",
-  },
+
   actionBar: {
     root: "sps-action-bar",
     item: "sps-action-button",
@@ -409,50 +265,5 @@ export var presetsCss = {
     itemAsIcon: "sps-action-button--icon",
     itemIcon: "sps-action-button__icon",
     itemTitle: "sps-action-button__title",
-  },
-  spinedit: {
-    root: "sps-input sps-spin-editor sps-input-container",
-    control: "sps-spin-editor__input sps-input-container__input",
-    buttonsContainer: "sps-input-container__buttons-container",
-    arrowButton: "sps-input__edit-button",
-    increaseButtonIcon: "icon-arrow-up",
-    decreaseButtonIcon: "icon-arrow-down"
-  },
-  color: {
-    root: "sps-input sps-color-editor sps-input-container",
-    swatch: "sps-color-editor__color-swatch",
-    swatchDefault: "sps-color-editor__color-swatch--default",
-    swatchDisabled: "sps-color-editor__color-swatch--disabled",
-    colorInput: "sps-color-editor__color-input",
-    control: "sps-color-editor__input sps-input-container__input",
-    colorDropdown: "sps-input__edit-button",
-    colorDropdownIcon: "icon-drop-down-arrow",
-    swatchIcon: "icon-color-picker",
-    choicesButtonWrapper: "sps-color-editor__button-wrapper"
-  },
-  textwithreset: {
-    root: "sps-input sps-input-container",
-    rootMultiline: "sps-input-container--multiline",
-    control: "sps-input-container__input",
-    controlMultiline: "sps-input-container__input sps-comment",
-    resetButton: "sps-input__edit-button",
-    resetButtonIcon: "icon-reset",
-    content: "sps-question__content sps-text__content",
-    remainingCharacterCounter: "sps-remaining-character-counter",
-    onError: "sps-input--error"
-  },
-  fileedit: {
-    root: "sps-input sps-input-container sps-file-edit",
-    control: "sps-input-container__input",
-    buttonsContainer: "sps-input-container__buttons-container",
-    chooseButtonIcon: "icon-choosefile",
-    clearButtonIcon: "icon-cancel-24x24",
-    fileInput: "sd-visuallyhidden",
-    clearButton: "sps-input__edit-button",
-    chooseButton: "sps-input__edit-button sps-file-edit__choose-button",
-    chooseButtonDisabled: "sps-input__edit-button--disabled"
-  },
-  linkvalue: {
-    content: "sps-link"
   }
 };
