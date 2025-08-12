@@ -4,20 +4,10 @@
 @use "blocks/sps-question.scss";
 @use "blocks/sps-input.scss";
 @use "blocks/sps-dropdown.scss";
-@use "blocks/sps-comment.scss";
 @use "blocks/sps-panel.scss";
 @use "blocks/sps-checkbox.scss";
 @use "blocks/sps-matrixdynamic.scss";
 @use "blocks/sps-table.scss";
-@use "blocks/sps-question-group.scss";
-@use "blocks/sps-color-editor.scss";
-@use "blocks/sps-file-edit.scss";
-@use "blocks/sps-link";
-@use "blocks/sps-theme-builder.scss";
-@use "blocks/sps-overriding.scss";
-@use "blocks/sps-search-editor.scss";
-@use "blocks/sps-buttongroup.scss";
-@use "blocks/sps-list.scss";
 
 .sps-root-modern {
   position: relative;

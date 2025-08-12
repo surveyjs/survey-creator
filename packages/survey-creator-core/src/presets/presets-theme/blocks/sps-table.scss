@@ -91,53 +91,15 @@
   .sps-input {
     appearance: none;
     box-shadow: none;
-    border-radius: var(--ctr-data-table-cell-corner-radius-focused, var(--sjs-corner-radius-x075));
+    border-radius: var(--sjs2-radius-semantic-form, 8px);
+    border: var(--sjs2-border-width-focused, 2px) solid transparent;
     background-color: transparent;
     height: auto;
-    padding: var(--ctr-data-table-cell-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
-      var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
-
-    &[type="color"] {
-      padding-right: 0;
-    }
+    padding: calc(var(--sjs2-spacing-x100, 8px) - var(--sjs2-border-width-focused, 2px));
 
     &:focus,
     &:focus-within {
-      box-shadow: inset 0 0 0 2px
-        var(--ctr-data-table-cell-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-    }
-  }
-
-  .sps-dropdown {
-    width: max-content;
-    min-height: auto;
-  }
-
-  .sps-dropdown_chevron-button {
-    position: static;
-  }
-  .sps-dropdown_select-wrapper {
-    display: flex;
-    align-items: center;
-    width: max-content;
-    max-width: 100%;
-  }
-
-  .sps-dropdown__value {
-    margin: 0;
-  }
-
-  .sd-editor-button-item {
-    padding: 0;
-  }
-
-  .sv-editor-button-item__icon {
-    opacity: var(--ctr-data-table-cell-drop-down-arrow-opacity, 0.5);
-
-    use {
-      fill: var(--ctr-data-table-cell-drop-down-arrow-color, var(--sjs-layer-1-foreground-50, #00000080));
+      border-color: var(--sjs2-color-border-brand-primary, #19B394);
     }
   }
 }
@@ -164,31 +126,6 @@
 //   margin-top: calcSize(0.5);
 //   cursor: move;
 // }
-
-.sps-table__cell--header {
-  background: var(--ctr-data-table-row-background-color-header, var(--sjs-layer-3-background-500, #f4f4f4ff));
-  text-align: left;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 100px;
-  padding: var(--ctr-data-table-row-padding-top-header, var(--sjs-spacing-x1))
-    var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-data-table-row-padding-bottom-header, var(--sjs-spacing-x1))
-    var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
-
-  @include ctrSmallFont;
-  color: var(--ctr-data-table-cell-text-color-header, var(--sjs-layer-3-foreground-50, #00000080));
-
-  span {
-    display: none;
-  }
-
-  .sv-string-viewer {
-    display: inline;
-    white-space: unset;
-  }
-}
 
 .sps-table__row--leave,
 .sps-table__row--enter {
