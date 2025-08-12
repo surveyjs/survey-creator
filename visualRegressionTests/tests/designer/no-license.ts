@@ -14,7 +14,7 @@ test("Check no license banner", async (t) => {
     await setJSON(json);
     const root = Selector(".svc-creator");
     await takeElementScreenshot("no-license.png", root, t, comparer);
-    await t.resizeWindow(375, 600);
+    await t.resizeWindow(375, 650);
     await takeElementScreenshot("no-license-mobile.png", root, t, comparer);
   });
 });
