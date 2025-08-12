@@ -23,6 +23,9 @@ export class CreatorPresetEditableBase {
     return prefix + this.path;
   }
   public get pageName(): string { return "page_" + this.fullPath; }
+  protected get mainPanelName() { return this.path + "_mainPanel"; }
+  public getMainElementName() : any { return this.mainPanelName; }
+  public getMainPanelName() : any { return this.mainPanelName; }
   public createPages(): Array<any> {
     const res = [];
     const mainPage = this.createMainPage();
@@ -59,7 +62,6 @@ export class CreatorPresetEditableBase {
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val + "'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
-  public getMainElementName() : any { return undefined; }
   public getNavigationElementName() : any { return this.navigationPanelName; }
   public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {
     const page = model.getPageByName(this.pageName);

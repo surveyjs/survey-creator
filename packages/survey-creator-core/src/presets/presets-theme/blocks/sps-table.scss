@@ -11,16 +11,16 @@
   background-color: var(--sjs2-color-bg-basic-primary, #FFF);
   border-collapse: collapse;
 
-  tr {
+  &>tbody>tr {
       background-color: var(--sjs2-color-bg-basic-primary, #FFF);
-      td:last-of-type button {
+      &> td:last-of-type > .sps-action-bar {
         opacity: 0;
       }
       &:hover {
-        td > div {
+        &> td > div {
           background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
         }
-        td:last-of-type button {
+        &> td:last-of-type > .sps-action-bar {
           opacity: 1;
         }
       }
@@ -56,10 +56,25 @@
 }
 
 .sps-table__cell--detail-panel {
-  background: var(--ctr-data-table-background-color, var(--sjs-layer-1-background-400, #f5f5f5ff));
+  padding: 0;
 
   .sps-panel__content {
     box-shadow: none;
+  }
+
+  .sps-row .sps-question--nested {
+    overflow: initial;
+  }
+
+  .sps-panel {
+    border: none;
+  }
+
+  .sps-table__cell {
+    padding: 0;
+    padding-bottom: var(--sjs2-spacing-x075, 6px);
+    padding-top: var(--sjs2-spacing-x075, 6px);
+    border-bottom: none;
   }
 }
 .sps-table__cell:where(:not(.sps-table__cell--detail-panel)) {
@@ -239,4 +254,5 @@
   @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-primary, #1C1B20);
   text-align: center;
+  height: 300px;
 }

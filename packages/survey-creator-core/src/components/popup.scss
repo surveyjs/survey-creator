@@ -226,3 +226,14 @@
   //   color: var(--ctr-popup-message-color, var(--sjs-layer-1-foreground-100, #000000e6));
   // }
 }
+
+.svc-creator-popup--large-markers {
+  .svc-list__item-body {
+    padding-inline-end: var(--sjs-spacing-x150, 12px);
+  }
+  .svc-list-item__marker-icon {
+    padding: 0;
+    width: var(--sjs-font-size-x3, 24px);
+    height: var(--sjs-font-size-x3, 24px);
+  }
+}

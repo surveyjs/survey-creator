@@ -259,7 +259,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
         },
         {
           type: "panel",
-          name: "propPanel",
+          name: this.mainPanelName,
           visibleIf: this.getNotEmptyVisibleIf(this.nameSelector),
           elements: [
             {
@@ -290,9 +290,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               //addRowButtonLocation: "top",
               //addRowText: "Add Custom Item",
               startWithNewLine: false,
-              name: this.nameMatrix,
-              "descriptionLocation": "underInput",
-              description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+              name: this.nameMatrix
             })
           ]
         },

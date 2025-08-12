@@ -1,4 +1,4 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -76,7 +76,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       elements: [
         {
           type: "panel",
-          name: "panel_toolbox_matrix",
+          name: this.mainPanelName,
           elements: [
             {
               type: "matrixdynamic",
@@ -113,14 +113,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               addRowButtonLocation: "top",
               addRowText: "Add Custom Item",
               startWithNewLine: false,
-              name: this.nameMatrix,
-              "descriptionLocation": "underInput",
-              description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+              name: this.nameMatrix
             })]
         },
         {
           type: "panel",
-          name: "panel_toolbox_controls",
+          title: " ",
+          name: this.navigationPanelName,
           elements: [
             {
               type: "boolean",
@@ -132,7 +131,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               valueFalse: "items",
               clearIfInvisible: "onHidden",
               startWithNewLine: false,
-              renderAs: "checkbox"
+              renderAs: "switch"
             },
             {
               type: "boolean",
@@ -143,8 +142,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               clearIfInvisible: "onHidden",
               startWithNewLine: false,
-              renderAs: "checkbox"
-            }]
+              renderAs: "switch"
+            }
+          ]
         }
       ]
     };
@@ -240,6 +240,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.getQuestionCategories(model).onCreateDetailPanelRenderedRowCallback = (
+      renderedRow: QuestionMatrixDropdownRenderedRow
+    ) => {
+      renderedRow.cells = [renderedRow.cells[1]];
+      renderedRow.cells[0].colSpans += 2;
+    };
     this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {

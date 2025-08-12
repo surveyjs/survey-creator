@@ -37,7 +37,6 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     };
     return { ...defaultJSON, ...props };
   }
-
   public createMainPageCore(): any {
     return {
       title: "Configure the Tabs",
@@ -46,7 +45,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       elements: [
         {
           type: "panel",
-          name: "panel_tabs_matrix",
+          name: this.mainPanelName,
           elements: [
             this.createItemsMatrixJSON({
               name: this.nameItems

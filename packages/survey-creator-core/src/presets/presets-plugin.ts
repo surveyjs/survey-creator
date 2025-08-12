@@ -54,7 +54,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       items: [...presets, ...tools],
       verticalPosition: "top",
       horizontalPosition: "center",
-      cssClass: "svc-creator-popup",
+      cssClass: "svc-creator-popup svc-creator-popup--large-markers",
       cssClasses: listComponentCss,
       // onHide: () => { this.languageSelectorAction.enabled = true; },
       // onShow: () => { this.languageSelectorAction.enabled = false; }
