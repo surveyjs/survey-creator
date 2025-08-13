@@ -45,11 +45,9 @@ export class SurveyLogicAction {
     if (!!this.element && !!this.logicType) {
       this.element[this.logicType.propertyName] = expression;
       if (!expression) {
+        this.logicType.remove(this.element);
         if (Serializer.isDescendantOf(this.element.getType(), "surveytrigger")) {
           this.removeElement(this.survey.triggers, this.element);
-        }
-        if (Serializer.isDescendantOf(this.element.getType(), "htmlconditionitem")) {
-          this.removeElement(this.survey.completedHtmlOnCondition, this.element);
         }
       }
     }

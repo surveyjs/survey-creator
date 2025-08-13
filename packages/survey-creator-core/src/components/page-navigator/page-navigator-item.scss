@@ -60,6 +60,7 @@ svc-page-navigator-item,
   flex-shrink: 0;
   background: var(--ctr-page-navigator-item-dot-color-default, var(--sjs-layer-3-foreground-75, #000000bf));
   border-radius: var(--ctr-page-navigator-item-dot-radius-small, var(--sjs-font-size-x075));
+  box-sizing: content-box;
 }
 
 .svc-page-navigator-item__banner {

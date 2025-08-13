@@ -1878,9 +1878,12 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
-      page.questions.forEach(question => {
-        this.doOnQuestionAdded(question, page);
-      });
+      const dd = this.dragDropSurveyElements;
+      if (!dd || !dd.isDraggingExistingElement) {
+        page.questions.forEach(question => {
+          this.doOnQuestionAdded(question, page);
+        });
+      }
     }
     if (changeSelection) {
       this.selectElement(page);
@@ -2702,6 +2705,9 @@ export class SurveyCreatorModel extends Base
 
     survey.onPopupVisibleChanged.add((_, options) => {
       if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+      if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase")) {
+        options.popup.setWidthByTarget = false;
+      }
     });
     return survey;
   }
@@ -3194,6 +3200,9 @@ export class SurveyCreatorModel extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
+    if (!obj || obj.isDisposed) return;
+    const allowedOperations = this.getElementAllowOperations(obj);
+    if (!allowedOperations.allowDelete) return;
     if (!this.checkOnElementDeleting(obj)) return;
     this.deleteObjectCore(obj);
   }

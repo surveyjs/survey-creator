@@ -449,18 +449,36 @@ test("PageNavigatorViewModel bypage mode", (): any => {
   expect(model.currentPage).toEqual(pages[0]);
 
   model.items[1].action();
-  expect(model.items).toHaveLength(2);
-  expect(model.items[0].active).toBeFalsy();
-  expect(model.items[1].active).toBeTruthy();
-  expect(model.currentPage).toEqual(desigerTab.newPage);
-
-  creator.addPage(desigerTab.newPage);
   expect(model.items).toHaveLength(3);
   expect(model.items[0].active).toBeFalsy();
   expect(model.items[1].active).toBeTruthy();
   expect(model.items[2].active).toBeFalsy();
-  expect(model.currentPage).toEqual(pages[1]);
-  expect(model.items[2].data).toEqual(desigerTab.newPage);
+  expect(model.currentPage).not.toEqual(desigerTab.newPage);
+
+  creator.addPage(desigerTab.newPage);
+  expect(model.items).toHaveLength(4);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.items[2].active).toBeTruthy();
+  expect(model.items[3].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[2]);
+  expect(model.items[3].data).toEqual(desigerTab.newPage);
+});
+test("PageNavigatorViewModel bypage mode - create new page on selected ghost page, Bug#7053", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(creator.survey.pages).toHaveLength(1);
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "bypage");
+  expect(model.items).toHaveLength(2);
+  let act = model.items[1].action;
+  act && act();
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.selectedElementName).toEqual("page2");
+  expect(model.items).toHaveLength(3);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
 });
 
 test("Creator bypage edit mode - add question to a new page", (): any => {
@@ -4451,7 +4469,7 @@ test("Creator footer action bar: only designer tab", (): any => {
 
   creator.isMobileView = true;
   creator.footerToolbar.flushUpdates();
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
@@ -4460,7 +4478,7 @@ test("Creator footer action bar: only designer tab", (): any => {
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 test("Creator footer action bar: add custom action", (): any => {

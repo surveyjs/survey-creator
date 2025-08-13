@@ -494,6 +494,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public addFooterActions() {
     this.creator.footerToolbar.actions.push(this.designerAction);
     this.creator.footerToolbar.actions.push(this.previewAction);
+    this.creator.footerToolbar.actions.push(this.saveSurveyAction);
     this.creator.footerToolbar.actions.push(this.surveySettingsAction);
   }
 

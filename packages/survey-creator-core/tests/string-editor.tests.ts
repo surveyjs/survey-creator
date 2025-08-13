@@ -399,6 +399,50 @@ test("Maxlen check", (): any => {
   Serializer.findProperty("survey", "title").maxLength = -1;
 });
 
+test("Maxlen and required", (): any => {
+  Serializer.findProperty("survey", "title").maxLength = 12;
+  Serializer.findProperty("survey", "title").isRequired = true;
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({ "title": "t" });
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
+  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  stringEditorSurveyTitle.onFocus({ target: target });
+  target.innerText = "title";
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("5/12");
+  stringEditorSurveyTitle.onBlur({ target: target });
+
+  stringEditorSurveyTitle.onFocus({ target: target });
+  target.innerText = "";
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("0/12");
+
+  stringEditorSurveyTitle.onBlur({ target: target });
+  stringEditorSurveyTitle.onFocus({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("0/12");
+  Serializer.findProperty("survey", "title").maxLength = -1;
+  Serializer.findProperty("survey", "title").required = false;
+});
+
+test("Maxlen and EOL", (): any => {
+  Serializer.findProperty("survey", "title").maxLength = 12;
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({ "title": "t" });
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
+  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+
+  stringEditorSurveyTitle.onFocus({ target: target });
+  target.innerText = "\n";
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("0/12");
+
+  Serializer.findProperty("survey", "title").maxLength = -1;
+});
+
 test("StringEditorConnector activate test", (): any => {
   let creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({});

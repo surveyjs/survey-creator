@@ -1502,3 +1502,24 @@ test("Theme settings action visibility", (): any => {
   creator.isMobileView = true;
   expect(themePlugin["themeSettingsAction"].visible).toBeTruthy();
 });
+
+test("Update default font family", (): any => {
+  const oldFontFamily = "Open Sans";
+  const newFontFamily = "Georgia, serif";
+  settings.themeEditor.defaultFontFamily = newFontFamily;
+  SurveyThemes.DefaultLight.cssVariables["--sjs-font-family"] = newFontFamily;
+
+  try {
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    creator.themeEditor.activate();
+    const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+    expect(propertyGridSurvey.getQuestionByName("--sjs-font-family").value).toBe(newFontFamily);
+    expect(propertyGridSurvey.getQuestionByName("questionTitle").value.family).toBe(newFontFamily);
+
+  } finally {
+    settings.themeEditor.defaultFontFamily = oldFontFamily;
+    SurveyThemes.DefaultLight.cssVariables["--sjs-font-family"] = oldFontFamily;
+  }
+});

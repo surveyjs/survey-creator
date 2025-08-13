@@ -63,6 +63,7 @@
   white-space: pre-wrap;
   background: var(--ctr-code-viewer-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   color: var(--ctr-code-viewer-text-color, var(--sjs-code-gray-300, #505050ff));
+  box-sizing: content-box;
 }
 
 .svd-test-results__table {

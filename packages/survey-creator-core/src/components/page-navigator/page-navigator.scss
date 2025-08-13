@@ -15,6 +15,7 @@ svc-page-navigator,
   border-radius: var(--ctr-page-navigator-button-corner-radius, var(--sjs-corner-radius-x1));
   overflow: visible;
   transition: background-color $creator-transition-duration;
+  box-sizing: content-box;
 
   .sv-svg-icon {
     width: var(--ctr-page-navigator-button-icon-width, var(--sjs-font-size-x3));

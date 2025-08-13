@@ -805,6 +805,21 @@ test("LogicItemEditorUI: remove item", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
 });
+test("LogicItemEditorUI: remove setValueIf & setValueExpression, Bug#7075", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", setValueIf: "{q1} = 1", setValueExpression: "abc" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(survey.getQuestionByName("q2").setValueIf).toBeFalsy();
+  expect(survey.getQuestionByName("q2").setValueExpression).toBeFalsy();
+});
 test("Create setValue trigger in logic", () => {
   PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());
   var survey = new SurveyModel({
@@ -2703,6 +2718,37 @@ test("Rename the name for matrix dropdown rows, bug#6910", () => {
   expect(matrix.columns[0].visibleIf).toEqual("{question1} = 3");
   expect(matrix.rows[0].visibleIf).toEqual("{question1} = 1");
   expect(matrix.rows[1].enableIf).toEqual("{question1} = 2");
+});
+test("Rename the item value for matrix dropdown, bug#7039", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row1.col1} != 'item1'" },
+      { type: "text", name: "q2", visibleIf: "{matrix.row1.col2} != 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [
+          { name: "col1", cellType: "dropdown", choices: ["item1"] },
+          { name: "col2" }],
+        rows: ["row1", "row2"],
+        choices: ["item1"]
+      }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("matrix");
+  const item1 = matrix.columns[0].choices[0];
+  item1.value = "Item 1";
+  logic.renameItemValue(item1, "item1");
+  expect(q1.visibleIf).toEqual("{matrix.row1.col1} != 'Item 1'");
+  expect(q2.visibleIf).toEqual("{matrix.row1.col2} != 'item1'");
+  const item2 = matrix.choices[0];
+  item2.value = "Item 1!";
+  logic.renameItemValue(item2, "item1");
+  expect(q1.visibleIf).toEqual("{matrix.row1.col1} != 'Item 1'");
+  expect(q2.visibleIf).toEqual("{matrix.row1.col2} != 'Item 1!'");
 });
 test("Do not reacreate logic for updating expressions for every change", (): any => {
   const creator = new CreatorTester();
