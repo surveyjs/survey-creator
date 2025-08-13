@@ -32,8 +32,14 @@
   .sps-question__content {
     padding: 0;
   }
-  .sps-row--multiple .sps-question--nested {
-      overflow-y: visible;
+  .sps-row--multiple {
+    & > div {
+      padding: 0;
+      border: none;
+    }
+    .sps-question--nested {
+        overflow-y: visible;
+    }
   }
 }
 .sps-panel__header {
