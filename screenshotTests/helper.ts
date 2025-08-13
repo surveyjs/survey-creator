@@ -157,11 +157,10 @@ export function getToolboxItemByAriaLabel(page, text) {
 export function getSubToolboxItemByText(page, text) {
   return page.locator(".svc-toolbox__item-subtype").getByText(text);
 }
-// export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
-//   await t
-//     .click(Selector(".svc-element__add-new-question .svc-element__question-type-selector"))
-//     .click(Selector(".svc-list__item span").withExactText(text));
-// }
+export async function addQuestionByAddQuestionButton(page, text) {
+  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
+  await page.locator(".svc-list__item span").getByText(text).click();
+}
 
 export async function changeToolboxLocation(page, newVal: string) {
   await page.evaluate((newVal) => {
