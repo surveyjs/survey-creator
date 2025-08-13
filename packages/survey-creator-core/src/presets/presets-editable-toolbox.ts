@@ -170,6 +170,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       if (Array.isArray(categories) && categories.length > 0 && (!toolbox.hasCategories || !this.isCategoriesSame(categories, toolboxCategories))) {
         res.categories = this.getCategoriesJson(model);
       }
+    } else {
+      res.categories = [];
     }
     if (model.getValue(this.nameShowCategoryTitles)) {
       res.showCategoryTitles = true;

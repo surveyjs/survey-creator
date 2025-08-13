@@ -50,6 +50,14 @@ test("Preset edit, toolbox - remove whole category from categories", () => {
   expect(editor.json.toolbox.categories.length).toBe(4);
 });
 
+test("Preset edit, toolbox - no categories", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  expect(editor.json.toolbox).toBeDefined();
+  expect(editor.json.toolbox.categories.length).toBe(0);
+});
+
 test("Preset edit, toolbox - remove item from flat items", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
