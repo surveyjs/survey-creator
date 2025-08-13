@@ -12,6 +12,7 @@ This help topic describes how you can customize the following aspects of Survey 
 - [Access Survey Instances Within Survey Creator](#access-survey-instances-within-survey-creator)
   - [Design Mode Survey Instance](#design-mode-survey-instance)
   - [Preview Mode Survey Instance](#preview-mode-survey-instance)
+  - [Attach Event Handlers](#attach-event-handlers)
 
 ## Specify Adorner Availability
 
@@ -30,6 +31,7 @@ You can control the visibility of adorners using the [`onElementAllowOperations`
 | `allowDelete` | Shows or hides the adorner that deletes the survey element. |
 | `allowDrag` | Shows or hides the adorner that allows users to drag and drop survey elements. |
 | `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
+| `allowExpandCollapse` | Shows or hides the adorners that allow users to collapse and expand the survey element. |
 | `allowShowSettings` | Shows or hides the adorner that allow users to open the Property Grid for survey element configuration. |
 
 The following code hides the "Change Type" adorner for Dropdown questions:
@@ -106,6 +108,26 @@ The preview mode survey instance is recreated each time a user opens the Preview
 creator.onSurveyInstanceCreated.add((_, options) => {
   if (options.area === "preview-tab") {
     options.survey.title = "You started previewing the survey at: " + new Date().toLocaleTimeString();
+  }
+});
+```
+
+### Attach Event Handlers
+
+To customize a survey instance, you use the [`SurveyModel` API](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model), which includes various survey events. Although you can attach event handlers using the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event, keep in mind that this event is triggered *after* the survey instance has been initialized with a JSON schema. As a result, some survey events may not fire as expected.
+
+To ensure that all survey events are raised properly, attach your handlers using the [`onSurveyInstanceSetupHandlers`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceSetupHandlers) event instead. The following example demonstrates how to handle the [`onProcessText`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#onProcessHtml) event:
+
+```js
+creator.onSurveyInstanceSetupHandlers.add((_, options) => {
+  if (options.area === "preview-tab") {
+    options.survey.onProcessHtml.add((_, options) => {
+      if (options.reason === "html-question") {
+        // ...
+        // Encode `options.html` here with your favorite sanitizing tool
+        // ...
+      }
+    });
   }
 });
 ```
