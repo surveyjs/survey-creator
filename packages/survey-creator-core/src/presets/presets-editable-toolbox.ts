@@ -240,12 +240,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.getQuestionCategories(model).onCreateDetailPanelRenderedRowCallback = (
-      renderedRow: QuestionMatrixDropdownRenderedRow
-    ) => {
-      renderedRow.cells = [renderedRow.cells[1]];
-      renderedRow.cells[0].colSpans += 2;
-    };
+    super.setupQuestionsCore(model, creatorSetup);
     this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {

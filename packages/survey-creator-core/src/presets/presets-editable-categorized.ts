@@ -1,4 +1,4 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -42,7 +42,14 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameInnerMatrix);
     }
   }
-
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.getQuestionCategories(model).onCreateDetailPanelRenderedRowCallback = (
+      renderedRow: QuestionMatrixDropdownRenderedRow
+    ) => {
+      renderedRow.cells = [renderedRow.cells[1]];
+      renderedRow.cells[0].colSpans += 2;
+    };
+  }
   protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
 
   protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
@@ -129,7 +136,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
           a.visibleIndex = 20;
           a.component = "sv-action-bar-item";
           a.action = () => options.question.removeRowUI(options.row);
-          a.iconName = options.question.name == this.nameMatrix ? "icon-add_24x24" : "icon-remove_24x24";
+          a.iconName = "icon-delete_24x24";
         }
       });
     }

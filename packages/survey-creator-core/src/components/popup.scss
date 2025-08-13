@@ -230,6 +230,7 @@
 .svc-creator-popup--large-markers {
   .svc-list__item-body {
     padding-inline-end: var(--sjs-spacing-x150, 12px);
+    gap: var(--sjs-spacing-x6, 48px);
   }
   .svc-list-item__marker-icon {
     padding: 0;

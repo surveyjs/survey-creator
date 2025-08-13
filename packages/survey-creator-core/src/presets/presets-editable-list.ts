@@ -52,13 +52,16 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
       const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
-      options.actions.push({
-        id: iconName,
-        iconName: iconName,
-        innerCss: "sps-matrixdynamic__row-icon",
-        location: "start",
-        enabled: false
-      });
+      if (iconName) {
+        options.actions.push({
+          id: iconName,
+          iconName: iconName,
+          innerCss: "sps-matrixdynamic__row-icon",
+          location: "start",
+          enabled: false
+        });
+
+      }
       options.question.cssClasses.detailIconExpandedId = "icon-edit";
       options.question.cssClasses.detailIconId = "icon-edit";
 

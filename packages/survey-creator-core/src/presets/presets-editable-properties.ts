@@ -294,6 +294,17 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             })
           ]
         },
+        {
+          type: "panel",
+          title: " ",
+          name: this.navigationPanelName,
+          elements: [
+            {
+              type: "html",
+              html: "&nbsp"
+            }
+          ]
+        }
       ]
 
     };
@@ -306,6 +317,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    super.setupQuestionsCore(model, creatorSetup);
     this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;

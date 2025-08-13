@@ -42,7 +42,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     presets.forEach(p => {
       p.action = (item)=>{
         presetsList.selectedItem = item;
-        settingsAction.popupModel.show();
+        //settingsAction.popupModel.show();
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });

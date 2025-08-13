@@ -84,6 +84,10 @@
 .sps-action-title-bar {
   margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
   padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
+  gap: var(--sjs2-spacing-x150, 12px);
+  .sv-action--hidden {
+    display: none;
+  }
 
   &.sps-action-title-bar {
     margin-top: 0;

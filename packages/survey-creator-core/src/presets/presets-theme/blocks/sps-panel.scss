@@ -32,6 +32,9 @@
   .sps-question__content {
     padding: 0;
   }
+  .sps-row--multiple .sps-question--nested {
+      overflow-y: visible;
+  }
 }
 .sps-panel__header {
   width: 100%;
