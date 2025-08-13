@@ -186,7 +186,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     for (let i = 0; i < categories.length; i++) {
       if (categories[i].category !== toolboxCategories[i].name) return false;
       if (categories[i].title !== toolboxCategories[i].title) return false;
-      const toolboxItems = toolboxCategories[i].items?.map(item => item.name);
+      const toolboxItems = toolboxCategories[i].items;
       const categoryItems = categories[i].items;
       if (!Helpers.isTwoValueEquals(categoryItems, toolboxItems)) return false;
     }

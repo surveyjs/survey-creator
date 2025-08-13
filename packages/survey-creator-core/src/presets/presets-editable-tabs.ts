@@ -153,7 +153,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
-    let items = json["items"] || [];
+    let items = (json["items"] || []).map(i => typeof i === "string" ? { name: i } : i);
     const tabNames = creator.tabbedMenu.actions.map(a => a.id);
 
     const allTabs = this.getAllTabs(creator);

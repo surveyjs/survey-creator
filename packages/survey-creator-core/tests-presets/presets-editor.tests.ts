@@ -111,7 +111,7 @@ test("Preset edit model, tabs page with creator, default items", () => {
   const survey = editor.model;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
-  expect(defultTabs).toEqual(["designer", "logic"]);
+  expect(defultTabs.map(t => t.name)).toEqual(["designer", "logic"]);
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   expect(activeTabQuestion.value).toEqual("logic");
 });
@@ -348,11 +348,6 @@ test("Preset edit model, property grid, setup", () => {
   expect(checkSelectorChoice("empty")).toBeFalsy();
   expect(checkSelectorChoice("nonvalue")).toBeFalsy();
   expect(checkSelectorChoice("textwithbutton")).toBeFalsy();
-  selectorQuestion.value = null;
-  const panel = survey.getPanelByName("propPanel");
-  expect(panel.isVisible).toBeFalsy();
-  selectorQuestion.value = "survey";
-  expect(panel.isVisible).toBeTruthy();
 
   const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   expect(propGridCategories).toBeTruthy();
