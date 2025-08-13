@@ -36,6 +36,12 @@
     .sv-components-row > .sv-components-column--expandable {
       width: 100%;
     }
+    .sps-row--multiple {
+      flex-direction: row;
+      &>div {
+        height: auto;
+      }
+    }
   }
 }
 .sps-question__content--main {
@@ -122,7 +128,7 @@
       padding-right: var(--sjs2-spacing-x150, 12px);
     }
   }
-  .sps-question--nested {
+  .sps-question--nested > .sps-question__content--main {
     overflow-y: scroll;
   }
 }

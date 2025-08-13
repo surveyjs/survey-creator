@@ -14,6 +14,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
+  public getMainElementName() : any { return this.nameCategories; }
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
