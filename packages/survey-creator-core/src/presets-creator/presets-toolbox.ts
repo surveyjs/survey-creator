@@ -52,7 +52,7 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
     super.applyCore(creator);
     creator.toolbox.showCategoryTitles = this.json.showCategoryTitles;
     const items = this.json["definition"];
-    const itemNames = items?.map(i => i.name) || [];
+    const itemNames = items?.map(i => i.name);
     let categories = this.json["categories"];
     if (!categories) {
       categories = creator.toolbox.categories
@@ -60,6 +60,12 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
           category: c.name,
           items: c.items?.map(i => i.name).filter(name => !itemNames || itemNames.indexOf(name) != -1)
         })).filter(c => c.items.length > 0);
+    } else if (categories.length === 0) {
+      const category = {
+        category: "general",
+        items: itemNames || creator.toolbox.itemNames
+      };
+      categories = [category];
     }
     creator.toolbox.defineCategories(categories);
   }

@@ -134,6 +134,42 @@ test("set toolbox definition", () => {
   expect(actions[1].title).toEqual("Date");
   expect(actions[1].json.inputType).toEqual("date");
 });
+
+test("set toolbox definition - no categories", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [
+        { name: "text-number", title: "Number", json: { type: "text", inputType: "number" } },
+        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
+        { name: "dropdown" },
+        { name: "matrix" },
+      ],
+      categories: []
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  const actions = tb.visibleActions;
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions).toHaveLength(4);
+});
+
+test("set toolbox definition - no categories, no definition", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      categories: []
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions.length).toBeGreaterThan(0);
+});
+
 test("Override toolbox JSON", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
