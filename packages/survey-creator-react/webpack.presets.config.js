@@ -89,7 +89,7 @@ module.exports = function (options) {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: {
-        root: options.libraryName || "SurveyCreator",
+        root: options.libraryName || "SurveyCreatorPresets",
         amd: "[dashedname]",
         commonjs: "[dashedname]",
       },
