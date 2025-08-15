@@ -5918,7 +5918,7 @@
             "--sjs2-color-bg-static-sub-secondary-dim": "rgba(from var(--sjs2-palette-gray-000) r g b / var(--sjs2-opacity-x015))",
             "--sjs2-color-bg-state-common-disabled": "var(--sjs2-palette-gray-250)",
             "--sjs2-color-fg-basic-primary": "#000000e6",
-            "--sjs2-color-fg-basic-primary-muted": "var(--sjs2-palette-gray-700)",
+            "--sjs2-color-fg-basic-primary-muted": "#000000bf",
             "--sjs2-color-fg-basic-secondary": "#00000080",
             "--sjs2-color-fg-basic-tertiary": "rgba(from var(--sjs2-palette-gray-900) r g b / var(--sjs2-opacity-x040))",
             "--sjs2-color-fg-neutral-primary": "var(--sjs2-palette-gray-000)",
@@ -6187,7 +6187,6 @@
             "--sjs2-border-offset-y-surface-disabled": "0",
             "--sjs2-border-offset-y-elevated-default": "4",
             "--sjs2-border-offset-y-floating-default": "6",
-            "--sjs2-color-fg-basic-primary-alt": "#000000bf",
             "--sjs2-color-border-basic-secondary-for-tests-only": "#d4d4d4",
             "--sjs2-color-utility-shadow-medium": "#004c441a"
           }
