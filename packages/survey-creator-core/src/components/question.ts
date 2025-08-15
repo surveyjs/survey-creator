@@ -315,7 +315,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const actions = this.actionContainer.getVisibleActions();
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {
-      if (actions[i].id === "convertTo") switchToStartLocation = true;
+      if (actions[i].id === "convertTo" || actions[i].id === "convertInputType") {
+        actions[i].css = "svc-dropdown-action--convertTo";
+        if (!switchToStartLocation) {
+          actions[i].css += " svc-dropdown-action--convertTo-last";
+        }
+        switchToStartLocation = true;
+      }
       if (!actions[i].innerItem.location) actions[i].innerItem.location = switchToStartLocation ? "start" : "end";
     }
   }
@@ -488,7 +494,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     newAction.disableHide = true;
     return newAction;
   }
-
   public static checkForNeedDefaultSubitems(items: QuestionToolboxItem[]) {
     items.filter(i => i.needDefaultSubitem === undefined).forEach((item: QuestionToolboxItem) => {
       item.needDefaultSubitem = false;
@@ -653,7 +658,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
-      css: "svc-dropdown-action--convertTo",
       iconName: options.actionData.iconName,
       iconSize: "auto",
       title: options.actionData.title,
@@ -739,7 +743,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
-    items[items.length - 1].css += " svc-dropdown-action--convertTo-last";
     if (typeof element["isRequired"] !== "undefined" && !!element.getType
       && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());
