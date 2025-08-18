@@ -39,8 +39,8 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   }
   public createMainPageCore(): any {
     return {
-      title: "Configure the Tabs",
-      description: "Select the tabs you want to show, reorder them, change their titles, and choose the tab that will be active by default.",
+      title: "Configure tabs",
+      description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
       navigationTitle: "Tabs",
       elements: [
         {

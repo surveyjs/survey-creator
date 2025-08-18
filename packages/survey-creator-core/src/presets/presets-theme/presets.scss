@@ -67,7 +67,7 @@
 }
 
 .sps-page__description {
-  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
 
   @include sjs2--typography--default;
 

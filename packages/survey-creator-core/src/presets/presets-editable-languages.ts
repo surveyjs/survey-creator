@@ -46,8 +46,8 @@ Serializer.getProperties("localizationpreview").forEach(p => {
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
-      title: "Select Languages",
-      description: "Select the language of the Survey Creator UI and target languages for the survey being configured.",
+      title: "Languages",
+      description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
       navigationTitle: "Languages",
       elements: [
         {

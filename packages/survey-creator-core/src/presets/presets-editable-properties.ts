@@ -247,8 +247,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
   public createMainPageCore(): any {
     return {
-      title: "Set Up the Property Grid",
+      title: "Customize the Property Grid",
       navigationTitle: "Property Grid",
+      description: "Select an element to customize its settings available in the Property Grid.",
       elements: [
         {
           type: "dropdown",

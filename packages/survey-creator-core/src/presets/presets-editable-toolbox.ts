@@ -71,7 +71,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   public createMainPageCore(): any {
     return {
-      title: "Set Up the Toolbox",
+      title: "Set up the Toolbox",
+      description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
       navigationTitle: "Toolbox",
       elements: [
         {
