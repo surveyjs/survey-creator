@@ -104,12 +104,10 @@ export class CreatorPresetEditableBase {
       item.setupQuestions(model, creatorSetup);
     });
   }
-  public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel): void {
-    if (model.currentPage.name === this.pageName) {
-      this.setupOnCurrentPageCore(model, creator);
-    }
+  public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    this.setupOnCurrentPageCore(model, creator, active);
     this.children.forEach(item => {
-      item.setupOnCurrentPage(model, creator);
+      item.setupOnCurrentPage(model, creator, active);
     });
   }
   public updateOnValueChanged(model: SurveyModel, name: string): void {
@@ -153,7 +151,7 @@ export class CreatorPresetEditableBase {
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected updateJsonLocalizationStringsCore(locStrs: any): void {}
   protected disposeCore(): void {}
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {}
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}

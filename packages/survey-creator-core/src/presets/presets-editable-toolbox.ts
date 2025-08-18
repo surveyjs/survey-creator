@@ -236,9 +236,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     super.onMatrixRowRemoving(model, creator, options);
   }
 
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    creator.toolbox.forceCompact = false;
-    creator.setShowSidebar(false);
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    creator.toolbox.forceCompact = !active;
+    creator.toolbox.isCompact = !active;
+    creator.toolbox.items.forEach(i => i.enabled = active);
+    creator.readOnly = active;
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {

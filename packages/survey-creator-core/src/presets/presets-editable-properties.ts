@@ -339,11 +339,10 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   protected updateJsonLocalizationStringsCore(locStrs: any): void {
     this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
   }
-
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.propertyGridSetObj(this.currentProperties?.getObj());
-    creator.toolbox.forceCompact = true;
-    creator.setShowSidebar(true);
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    (creator.getPlugin("designer") as any).tabControlModel.expandCollapseAction.enabled = active;
+    creator.setShowSidebar(active);
+    this.propertyGridSetObj(active ? this.currentProperties?.getObj() : null);
   }
 
   //   private isPropCreatorChanged: boolean;

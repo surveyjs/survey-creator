@@ -146,9 +146,8 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     return creator.getAvailableTabs().map(t => ({ name: t.name, title: editorLocalization.getString("tabs." + t.name), iconName: t.iconName }));
   }
 
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    creator.toolbox.forceCompact = false;
-    creator.setShowSidebar(false);
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    creator.tabs.forEach(i => i.enabled = active);
   }
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {

@@ -83,6 +83,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return new SurveyCreatorModel(options);
   }
 
+  private activatePage (model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {
+    const inactivePresets = editablePresets.filter(item => model.currentPage.name !== item.pageName);
+    const activePreset = editablePresets.filter(item => model.currentPage.name === item.pageName)[0];
+    inactivePresets.forEach(item => item.setupOnCurrentPage(model, this.creator, false));
+    activePreset.setupOnCurrentPage(model, this.creator, true);
+  }
+
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -111,9 +118,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const json = this.preset.getJson() || {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
     this.updateJsonLocalizationStrings(editablePresets);
-    editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
+    this.activatePage(model, this.creator, editablePresets);
     model.onCurrentPageChanged.add((sender, options) => {
-      editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
+      this.activatePage(model, this.creator, editablePresets);
     });
     const questionNames = editablePresets.map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
     model.onValueChanged.add((sender, options) => {
@@ -124,7 +131,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       }
       if (questionNames.indexOf(options.name) != -1 && !this.applying) {
         this.applyFromSurveyModel(false);
-        editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
+        this.activatePage(model, this.creator, editablePresets);
       }
     });
     model.onGetQuestionTitleActions.add((_, options) => {

@@ -126,10 +126,9 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
       question.selectAll();
     }
   }
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.propertyGridSetObj(locPreview);
-    creator.toolbox.forceCompact = true;
-    creator.setShowSidebar(true);
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    creator.setShowSidebar(active);
+    this.propertyGridSetObj(active ? locPreview : null);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.surveyUseEnglishNames) {
