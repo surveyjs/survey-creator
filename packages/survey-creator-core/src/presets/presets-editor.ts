@@ -91,7 +91,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.keepIncorrectValues = true;
     model.showCompleteButton = false;
     model.showNavigationButtons = false;
-    model.fitToContainer = false;
     model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
       model.setPropertyValue("isShowNextButton", true);
     });
