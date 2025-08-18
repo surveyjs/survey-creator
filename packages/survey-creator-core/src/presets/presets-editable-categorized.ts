@@ -138,6 +138,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
           a.component = "sv-action-bar-item";
           a.action = () => options.question.removeRowUI(options.row);
           a.iconName = "icon-delete_24x24";
+          a.innerCss = "sps-action-button sps-action-button--icon sps-action-button--danger";
         }
       });
     }

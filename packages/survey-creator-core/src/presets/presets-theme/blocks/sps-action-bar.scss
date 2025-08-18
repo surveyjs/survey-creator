@@ -15,25 +15,41 @@
   appearance: none;
   border: none;
   display: flex;
-  padding: var(--sjs2-layout-control-action-medium-box-vertical, 12px) var(--sjs2-layout-control-action-medium-box-horizontal, 12px);
+  padding: calc(
+      var(--sjs2-layout-control-action-medium-box-vertical, 12px) +
+        var(--sjs2-layout-control-action-medium-label-vertical, 0px)
+    )
+    calc(
+      var(--sjs2-layout-control-action-medium-box-horizontal, 12px) +
+        var(--sjs2-layout-control-action-medium-label-horizontal, 12px)
+    );
+
   justify-content: center;
   align-items: center;
   gap: var(--sjs2-layout-control-action-medium-box-gap, 0);
   border-radius: var(--sjs2-radius-control-button, 8px);
-  background: var(--sjs2-color-bg-brand-primary, #19B394);
+  background: var(--sjs2-color-bg-brand-primary, #19b394);
 
-  color: var(--sjs2-color-fg-static-main-primary, #FFF);
+  color: var(--sjs2-color-fg-static-main-primary, #fff);
   text-align: center;
 
   @include sjs2--typography--default-strong;
 
   &:hover {
-    background: var(--sjs2-color-bg-brand-primary-dim, #15987E);
+    background: var(--sjs2-color-bg-brand-primary-dim, #15987e);
   }
   &:active {
-    background: var(--sjs2-color-bg-brand-primary, #19B394);
+    background: var(--sjs2-color-bg-brand-primary, #19b394);
   }
+}
 
+.sps-footer__prev-btn {
+  background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
+  color: var(--sjs2-color-fg-brand-primary, #19b394);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-brand-secondary-dim, rgba(25, 179, 148, 0.15));
+  }
 }
 
 .sps-action-button {
@@ -50,7 +66,7 @@
   border: none;
   color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
   border-radius: var(--sjs2-radius-control-action-icon, 8px);
-  background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0.00));
+  background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0));
   cursor: pointer;
   transition:
     background-color $creator-transition-duration,
