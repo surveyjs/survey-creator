@@ -131,7 +131,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               valueTrue: "categories",
               valueFalse: "items",
               clearIfInvisible: "onHidden",
-              startWithNewLine: false,
               renderAs: "switch"
             },
             {
@@ -142,7 +141,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               titleLocation: "hidden",
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               clearIfInvisible: "onHidden",
-              startWithNewLine: false,
               renderAs: "switch"
             }
           ]
