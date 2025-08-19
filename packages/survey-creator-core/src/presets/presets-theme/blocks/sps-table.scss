@@ -43,7 +43,6 @@
 }
 .sd-table__row--expanded {
   & > td {
-    padding-bottom: 0;
     &> div {
         background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
       }
@@ -66,7 +65,7 @@
 }
 
 .sps-table__cell--detail-panel {
-  padding: var(--sjs2-spacing-x075, 6px) 0;
+  padding: 0 0 var(--sjs2-spacing-x075, 6px) 0;
   border-top: none;
 
   .sps-panel__content {
@@ -79,6 +78,7 @@
 
   .sps-panel {
     border: none;
+    margin-top: calc(-1 * var(--sjs2-spacing-x075, 6px));
   }
 
   .sps-table__cell {
