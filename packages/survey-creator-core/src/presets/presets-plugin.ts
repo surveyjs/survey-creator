@@ -49,15 +49,16 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     settingsAction = createDropdownActionModel({
       id: "presets-menu",
       locTooltipName: "ed.creatorPresetsTitle",
-      iconName: "navmenu-24x24"
+      iconName: "navmenu-24x24",
+      css: "sps-menu-floating-action"
     }, {
       items: [...presets, ...tools],
       verticalPosition: "top",
       horizontalPosition: "center",
       cssClass: "svc-creator-popup svc-creator-popup--large-markers",
       cssClasses: listComponentCss,
-      // onHide: () => { this.languageSelectorAction.enabled = true; },
-      // onShow: () => { this.languageSelectorAction.enabled = false; }
+      onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
+      onShow: () => { settingsAction.iconName = "close-24x24"; }
     }, this.creator);
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
