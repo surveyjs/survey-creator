@@ -8,6 +8,7 @@
 @use "blocks/sps-checkbox.scss";
 @use "blocks/sps-matrixdynamic.scss";
 @use "blocks/sps-table.scss";
+@use "blocks/sps-launch.scss";
 
 .sps-root-modern {
   position: relative;
@@ -120,4 +121,8 @@
       border: none;
     }
   }
+}
+
+.svc-tabbed-menu-item-container--presets {
+  display: none;
 }

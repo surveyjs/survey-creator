@@ -236,8 +236,6 @@ if(window.SurveyCreatorCorePresets) {
   window.editor = new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
 }
 
-creator.activeTab = "presets";
-
 ReactDOM.render(
   <React.StrictMode>
     <SurveyCreator.SurveyCreatorComponent creator={creator} />

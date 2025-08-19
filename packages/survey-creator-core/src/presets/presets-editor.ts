@@ -53,6 +53,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.disposeModel();
   }
   private disposeModel(): void {
+    this.resetAllPages();
     this.model.editablePresets.forEach(preset => preset.dispose());
     this.model.dispose();
   }
@@ -81,6 +82,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
     return new SurveyCreatorModel(options);
+  }
+
+  private resetAllPages() {
+    this.model.editablePresets.forEach(item => item.setupOnCurrentPage(this.model, this.creator, true));
+    this.creator.readOnly = false;
   }
 
   private activatePage (model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {

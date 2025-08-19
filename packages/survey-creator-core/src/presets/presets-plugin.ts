@@ -6,15 +6,29 @@ import { darkTheme } from "sjs-design-tokens";
 export class TabPresetsPlugin implements ICreatorPlugin {
   public model: CreatorPresetEditorModel | undefined;
   public static iconName = "icon-settings";
+  private activeTab;
   private currentPresetIndex = 0;
   private currentValue;
   private designerPlugin;
   private toolboxCompact;
   private defaultJson;
 
+  private showPresets() {
+    this.activeTab = this.creator.activeTab;
+    this.creator.activeTab = "presets";
+  }
+
+  private hidePresets() {
+    this.creator.activeTab = this.activeTab;
+  }
+
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "presets", title: "Presets", plugin: this, iconName: TabPresetsPlugin.iconName });
+    creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
+    const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
+    settingsPage.componentData.showPresets = () => this.showPresets();
+    settingsPage.componentName = "svc-presets-property-grid";
     this.toolboxCompact = creator.toolbox.forceCompact;
   }
 
@@ -32,7 +46,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [
-      { id: "save", title: "Save & Exit", markerIconName: "check-24x24", needSeparator: true },
+      { id: "save", title: "Save & Exit", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
       { id: "import", title: "Import", markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
       { id: "export", title: "Export", markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
       { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true },
@@ -42,7 +56,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     presets.forEach(p => {
       p.action = (item)=>{
         presetsList.selectedItem = item;
-        //settingsAction.popupModel.show();
+        settingsAction.popupModel.show();
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });
