@@ -489,7 +489,7 @@ The JSON Editor tab enables users to edit survey JSON schemas as text. To make t
 npm install ace-builds --save
 ```
 
-Import Ace and required extensions in a Vue component that renders Survey Creator. For instance, the following code imports an extension that adds a Find/Replace dialog to Ace:
+Import Ace and required extensions in a Vue component that renders Survey Creator. For instance, the following code imports the extensions that enable the Find/Replace dialog in Ace and add support for the dark theme:
 
 ```html
 <!-- components/SurveyCreator.vue -->
@@ -497,6 +497,7 @@ Import Ace and required extensions in a Vue component that renders Survey Creato
 // ...
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/ext-searchbox";
+import "ace-builds/src-noconflict/theme-clouds_midnight";
 // ...
 </script>
 <template>
