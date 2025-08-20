@@ -34,7 +34,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       }
     }
   }
-
+  private resetItems(model: SurveyModel, row: MatrixDynamicRowModel) {
+  }
   protected restoreItems(questionItems: QuestionMatrixDynamicModel, questionHiddenItems: QuestionMatrixDynamicModel, rowIndex: number) {
     const rowData = questionHiddenItems.value[rowIndex];
     const value = questionItems.value ? [...questionItems.value] : [];
@@ -59,6 +60,13 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
           innerCss: "sps-matrixdynamic__row-icon",
           location: "start",
           enabled: false
+        });
+        options.actions.push({
+          id: "reset-to-default",
+          iconName: "icon-reset",
+          location: "end",
+          visibleIndex: 15,
+          action: ()=>{ this.resetItems(model, options.row); }
         });
 
       }

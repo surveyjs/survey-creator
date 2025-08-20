@@ -101,6 +101,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                 { type: "text", name: "tooltip", visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
+                  titleLocation: "hidden",
                   valueName: "items"
                 })
               ]

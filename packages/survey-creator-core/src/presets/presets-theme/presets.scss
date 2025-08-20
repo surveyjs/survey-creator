@@ -72,7 +72,7 @@
 
   @include sjs2--typography--default;
 
-  padding-bottom: var(--sjs2-spacing-x150, 12px);
+  padding-bottom: calc(var(--sjs2-spacing-x400, 32px) - var(--sjs2-spacing-x150, 12px));
 }
 
 .sps-action-title-bar {
@@ -99,11 +99,16 @@
   }
 }
 
+.sps-row {
+  max-width: 854px;
+}
+
 .sps-row:has(.sps-panel--navigation) {
   position: sticky;
   margin: calc(-1 * var(--sjs2-spacing-x400, 32px));
   margin-top: 0;
   bottom: 0;
+  max-width: initial;
 }
 
 .sps-row--multiple {

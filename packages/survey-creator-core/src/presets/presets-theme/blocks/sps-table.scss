@@ -105,6 +105,10 @@
     background-color: transparent;
     height: auto;
     padding: var(--sjs2-spacing-x100, 8px) 0;
+    
+    width: calc(100% + var(--action-container-width));
+    margin-right: calc(-1 * var(--action-container-width));
+    text-overflow: ellipsis;
 
     &:focus,
     &:focus-within {
@@ -114,6 +118,27 @@
         var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
         var(--sjs2-color-control-formbox-focused-border, #19b394) inset;
       padding: var(--sjs2-spacing-x100, 8px);
+    }
+  }
+}
+
+.sps-table__row {
+  --action-width: calc(2 * var(--ctr-actionbar-button-padding-top-large-icon, 8px) + var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3)));
+  --action-container-width: calc(3 * var(--action-width));
+}
+
+.sps-table__row:has(> .sps-table__cell:last-of-type .sv-action:nth-child(4)) {
+   --action-container-width: calc(4 * var(--action-width));
+}
+
+.sps-table__row {
+  &:hover,
+  &:focus-within{
+    .sps-table__cell:not(.sps-table__cell--detail-panel) {
+      .sps-input {
+        width: 100%;
+        margin-right: 0;
+      }
     }
   }
 }
