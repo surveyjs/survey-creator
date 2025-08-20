@@ -221,7 +221,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       cellType: "text",
       showHeader: false,
       rowCount: 0,
-      allowAddRows: false,
+      allowAddRows: true,
       addRowButtonLocation: "top",
       addRowText: "Add Custom Item",
       "noRowsText": "There are no items",
@@ -266,10 +266,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              titleLocation: "hidden",
+              title: "Add custom category",
               minRowCount: 1,
               allowRowReorder: true,
               addRowButtonLocation: "top",
+              allowAddRows: true,
               addRowText: "Add Custom Category",
               showHeader: false,
               columns: [

@@ -21,7 +21,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const defaultJSON = {
       type: "matrixdynamic",
       name: "items",
-      titleLocation: "hidden",
+      title: "Add custom item",
       allowRowReorder: true,
       cellType: "text",
       showHeader: false,
@@ -82,10 +82,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              titleLocation: "hidden",
+              title: "Add custom category",
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               minRowCount: 1,
               allowRowReorder: true,
+              allowAddRows: true,
               addRowButtonLocation: "top",
               addRowText: "Add Custom Category",
               showHeader: false,
@@ -106,6 +107,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             },
             this.createItemsMatrixJSON({
               name: this.nameItems,
+              titleLocation: "hidden",
               startWithNewLine: false,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
             }),

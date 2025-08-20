@@ -2,12 +2,12 @@
 @use "../fonts" as *;
 
 .sps-question {
-  background: var(--sjs2-color-bg-basic-primary, #FFF);
+  background: var(--sjs2-color-bg-basic-primary, #fff);
 }
 
 .sps-question--with-frame {
   border-radius: var(--sjs2-radius-x250, 20px);
-  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   overflow: hidden;
 }
 
@@ -19,15 +19,32 @@
   align-self: stretch;
 }
 
+.sps-question--nested .sps-question__header {
+  padding: var(--sjs2-spacing-x150, 12px);
+  border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  box-sizing: border-box;
+}
+
 .sps-question__title {
-  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
 
   @include sjs2--typography--default-strong;
+
+  .sv-title-actions {
+    flex-direction: row-reverse;
+    @include sjs2--typography--default;
+  }
+  .sps-action-title-bar {
+    margin: 0;
+    padding: 0;
+    min-width: initial;
+  }
 }
 
 .sps-question__content {
   display: flex;
-  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px);
+  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px)
+    var(--sjs2-spacing-x250, 20px);
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;

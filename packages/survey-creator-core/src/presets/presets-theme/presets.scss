@@ -111,7 +111,6 @@
   align-items: stretch;
   & > div {
     display: flex;
-    padding: var(--sjs2-spacing-x150, 12px);
     flex-direction: column;
     align-items: flex-start;
     gap: var(--sjs2-spacing-x075, 6px);

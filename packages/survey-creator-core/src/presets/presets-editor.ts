@@ -1,6 +1,6 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
-import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
+import { Action, ActionContainer, Base, ComputedUpdater, LocalizableString, QuestionMatrixDynamicModel, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
@@ -144,6 +144,14 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => {
         if (options.question.name == item.getNavigationElementName()) {
           options.actions = model.navigationBar.actions;
+        }
+        if (options.question instanceof QuestionMatrixDynamicModel && options.question.allowAddRows) {
+          options.actions = [new Action({
+            iconName: "add-24x24",
+            action: () => {
+              options.question.addRowUI();
+            }
+          })];
         }
       });
     });
