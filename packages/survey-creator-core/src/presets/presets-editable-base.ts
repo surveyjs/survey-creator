@@ -160,7 +160,7 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, hideDetailPanel = true) {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, hideDetailPanel = true, width = "") {
     if (settings.showDialog) {
       const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
       if (hideDetailPanel) row.hideDetailPanel();
@@ -190,8 +190,12 @@ export class CreatorPresetEditableBase {
         title: "Edit",
         displayMode: "popup"
       }, rootElement);
-      if (survey.calculatedWidthMode == "responsive") {
-        popupModel.width = "100%";
+      if (!width) {
+        if (survey.calculatedWidthMode == "responsive") {
+          popupModel.width = "100%";
+        }
+      } else {
+        popupModel.width = width;
       }
       return survey;
     }

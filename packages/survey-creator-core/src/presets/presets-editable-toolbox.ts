@@ -45,6 +45,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           "type": "panel",
           "name": "details",
+          "maxWidth": "30%",
           "elements": [
             { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
             { type: "text", name: "iconName", title: "Icon name" },

@@ -31,7 +31,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     // }
   }
   private editCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
-    const survey = this.showDetailPanelInPopup(this.getQuestionCategories(model), row, model.rootElement, false);
+    const survey = this.showDetailPanelInPopup(this.getQuestionCategories(model), row, model.rootElement, false, "auto");
     if (survey) {
       const category = survey.getQuestionByName("category");
       const isDefault = row.getQuestionByName("isDefault");

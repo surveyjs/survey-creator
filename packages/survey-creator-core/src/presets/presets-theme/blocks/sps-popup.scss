@@ -32,6 +32,9 @@
     gap: var(--sjs2-spacing-x200, 16px);
     background: initial;
   }
+  .sps-row {
+    max-width: initial;
+  }
   .sps-question--with-frame {
     border: none;
     border-radius: 0;
@@ -49,6 +52,7 @@
   }
   
   .sps-row--multiple > div {
+    align-items: stretch;
     padding-left: var(--sjs2-spacing-x400, 32px);
     padding-right: var(--sjs2-spacing-x400, 32px);
     &:first-of-type {
@@ -63,11 +67,13 @@
     border: none;
     border-radius: 0;
     align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sjs2-spacing-x200, 16px);
     .sps-row {
        border: none;
     }
+  }
+  .sps-panel__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sjs2-spacing-x200, 16px);
   }
 }
