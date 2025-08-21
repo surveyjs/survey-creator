@@ -482,30 +482,30 @@ test("Choices (Checkbox): Layout small screen", async (t) => {
   });
 });
 
-test("Placeholder", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1767, 900);
-    const designerTabContent = Selector(".svc-tab-designer");
-    await ClientFunction(() => {
-      (<any>window).creator.toolbox.isCompact = true;
-    })();
+// test("Placeholder", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(1767, 900);
+//     const designerTabContent = Selector(".svc-tab-designer");
+//     await ClientFunction(() => {
+//       (<any>window).creator.toolbox.isCompact = true;
+//     })();
 
-    await takeElementScreenshot("surface-placeholder.png", designerTabContent, t, comparer);
-  });
-});
+//     await takeElementScreenshot("surface-placeholder.png", designerTabContent, t, comparer);
+//   });
+// });
 
-test("Placeholder with survey header", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1767, 900);
-    const designerTabContent = Selector(".svc-tab-designer");
-    await ClientFunction(() => {
-      (<any>window).creator.toolbox.isCompact = true;
-      (<any>window).creator.showHeaderInEmptySurvey = true;
-    })();
+// test("Placeholder with survey header", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(1767, 900);
+//     const designerTabContent = Selector(".svc-tab-designer");
+//     await ClientFunction(() => {
+//       (<any>window).creator.toolbox.isCompact = true;
+//       (<any>window).creator.showHeaderInEmptySurvey = true;
+//     })();
 
-    await takeElementScreenshot("surface-placeholder-with-header.png", designerTabContent, t, comparer);
-  });
-});
+//     await takeElementScreenshot("surface-placeholder-with-header.png", designerTabContent, t, comparer);
+//   });
+// });
 
 test("Question borders", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -545,49 +545,49 @@ test("Question borders", async (t) => {
   });
 });
 
-test("Page borders", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1232, 900);
-    const json = {
-      showQuestionNumbers: "on",
-      "logoPosition": "right",
-      "pages": [
-        {
-          "name": "page1",
-          "elements": [
-            {
-              "type": "text",
-              "name": "question1"
-            }
-          ]
-        }
-      ]
-    };
-    await setShowToolbox(false);
-    await setAllowEditSurveyTitle(false);
-    await setJSON(json);
-    await setShowSidebar(false);
-    await ClientFunction(() => {
-      (<any>window).creator.toolbox.isCompact = true;
-    })();
-    const designerTabContent = Selector(".svc-tab-designer");
-    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+// test("Page borders", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(1232, 900);
+//     const json = {
+//       showQuestionNumbers: "on",
+//       "logoPosition": "right",
+//       "pages": [
+//         {
+//           "name": "page1",
+//           "elements": [
+//             {
+//               "type": "text",
+//               "name": "question1"
+//             }
+//           ]
+//         }
+//       ]
+//     };
+//     await setShowToolbox(false);
+//     await setAllowEditSurveyTitle(false);
+//     await setJSON(json);
+//     await setShowSidebar(false);
+//     await ClientFunction(() => {
+//       (<any>window).creator.toolbox.isCompact = true;
+//     })();
+//     const designerTabContent = Selector(".svc-tab-designer");
+//     const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
 
-    await takeElementScreenshot("page-content.png", designerTabContent, t, comparer);
-    await t.hover(pageContent, { offsetX: 5, offsetY: 5 }).wait(300);
-    await takeElementScreenshot("page-content-hover.png", designerTabContent, t, comparer);
+//     await takeElementScreenshot("page-content.png", designerTabContent, t, comparer);
+//     await t.hover(pageContent, { offsetX: 5, offsetY: 5 }).wait(300);
+//     await takeElementScreenshot("page-content-hover.png", designerTabContent, t, comparer);
 
-    await t.hover(pageContent.find(".svc-element__add-new-question"));
-    await takeElementScreenshot("question-add-hover.png", pageContent, t, comparer);
+//     await t.hover(pageContent.find(".svc-element__add-new-question"));
+//     await takeElementScreenshot("question-add-hover.png", pageContent, t, comparer);
 
-    await t.click(pageContent, { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("page-content-click.png", designerTabContent, t, comparer);
+//     await t.click(pageContent, { offsetX: 5, offsetY: 5 });
+//     await takeElementScreenshot("page-content-click.png", designerTabContent, t, comparer);
 
-    await t.click(pageContent.find(".sd-page__title"), { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("page-title-click.png", designerTabContent, t, comparer);
+//     await t.click(pageContent.find(".sd-page__title"), { offsetX: 5, offsetY: 5 });
+//     await takeElementScreenshot("page-title-click.png", designerTabContent, t, comparer);
 
-  });
-});
+//   });
+// });
 
 test("Question borders in panels", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -1093,53 +1093,53 @@ test("Panel (small) with questions in row", async (t) => {
 //   });
 // });
 
-test("Check survey layout in mobile mode", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(550, 900);
-    const designerTabContent = Selector(".svc-tab-designer");
-    await setJSON({
-      "title": "Survey title",
-      "description": "Survey description",
-      "showQuestionNumbers": "off",
-      "pages": [
-        {
-          "name": "page1",
-          "elements": [
-            {
-              "type": "text",
-              "name": "question11"
-            },
-            {
-              "type": "matrix",
-              "name": "question1",
-              "columns": [
-                "Column 1",
-                "Column 2",
-              ],
-              "rows": [
-                "Row 1",
-                "Row 2"
-              ]
-            }
-          ],
-        }
-      ]
-    });
-    await takeElementScreenshot("designer-survey-layout-mobile.png", designerTabContent, t, comparer);
-  });
-});
+// test("Check survey layout in mobile mode", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(550, 900);
+//     const designerTabContent = Selector(".svc-tab-designer");
+//     await setJSON({
+//       "title": "Survey title",
+//       "description": "Survey description",
+//       "showQuestionNumbers": "off",
+//       "pages": [
+//         {
+//           "name": "page1",
+//           "elements": [
+//             {
+//               "type": "text",
+//               "name": "question11"
+//             },
+//             {
+//               "type": "matrix",
+//               "name": "question1",
+//               "columns": [
+//                 "Column 1",
+//                 "Column 2",
+//               ],
+//               "rows": [
+//                 "Row 1",
+//                 "Row 2"
+//               ]
+//             }
+//           ],
+//         }
+//       ]
+//     });
+//     await takeElementScreenshot("designer-survey-layout-mobile.png", designerTabContent, t, comparer);
+//   });
+// });
 
-test("Check property grid flyout", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await setShowToolbox(false);
-    await setShowAddQuestionButton(false);
-    await t.resizeWindow(1120, 900);
-    const root = Selector(".svc-creator");
-    await setJSON({});
-    await t.click(surveySettingsButtonSelector);
-    await takeElementScreenshot("propery-grid-flyout.png", root, t, comparer);
-  });
-});
+// test("Check property grid flyout", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await setShowToolbox(false);
+//     await setShowAddQuestionButton(false);
+//     await t.resizeWindow(1120, 900);
+//     const root = Selector(".svc-creator");
+//     await setJSON({});
+//     await t.click(surveySettingsButtonSelector);
+//     await takeElementScreenshot("propery-grid-flyout.png", root, t, comparer);
+//   });
+// });
 
 test("Check question adorner width", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -1380,38 +1380,38 @@ test("Character counter on surface", async t => {
     await takeElementScreenshot("surface-question-title-maxLength.png", stringEditorSelector.nth(4), t, comparer);
   });
 });
-test("Check string editor on isRequired", async (t) => {
-  const msg = "Please enter a value";
-  await ClientFunction((json, msg) => {
-    window["Survey"].Serializer.findProperty("survey", "title").isRequired = true;
-    window["creator"].JSON = json;
-  })({
-    showQuestionNumbers: "on",
-    title: "title",
-    questions: [
-      {
-        type: "text",
-        name: "q1"
-      }
-    ]
-  }, msg);
+// test("Check string editor on isRequired", async (t) => {
+//   const msg = "Please enter a value";
+//   await ClientFunction((json, msg) => {
+//     window["Survey"].Serializer.findProperty("survey", "title").isRequired = true;
+//     window["creator"].JSON = json;
+//   })({
+//     showQuestionNumbers: "on",
+//     title: "title",
+//     questions: [
+//       {
+//         type: "text",
+//         name: "q1"
+//       }
+//     ]
+//   }, msg);
 
-  const hideCursor = ClientFunction(() => {
-    const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
-    el.style.color = "transparent";
-  });
+//   const hideCursor = ClientFunction(() => {
+//     const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
+//     el.style.color = "transparent";
+//   });
 
-  const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
-  await hideCursor();
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t
-      .click(svStringSelector)
-      .pressKey("delete")
-      .pressKey("enter")
-      .expect((svStringSelector).hasClass("svc-string-editor--error")).ok();
-    await takeElementScreenshot("surface-string-editor-error.png", Selector(".svc-designer-header .sd-title"), t, comparer);
-  });
-});
+//   const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
+//   await hideCursor();
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t
+//       .click(svStringSelector)
+//       .pressKey("delete")
+//       .pressKey("enter")
+//       .expect((svStringSelector).hasClass("svc-string-editor--error")).ok();
+//     await takeElementScreenshot("surface-string-editor-error.png", Selector(".svc-designer-header .sd-title"), t, comparer);
+//   });
+// });
 
 test("Question actions", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -2181,39 +2181,39 @@ test("Panel title editor is fully visible", async (t) => {
   });
 });
 
-test("Page placeholder without elements", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(770, 900);
-    await setJSON({
-      showQuestionNumbers: "on",
-      "pages": [
-        {
-          "name": "page1",
-          "title": "Page1"
-        }
-      ]
-    });
+// test("Page placeholder without elements", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(770, 900);
+//     await setJSON({
+//       showQuestionNumbers: "on",
+//       "pages": [
+//         {
+//           "name": "page1",
+//           "title": "Page1"
+//         }
+//       ]
+//     });
 
-    await takeElementScreenshot("page-placeholder-without-elements.png", Selector(".svc-page"), t, comparer);
-  });
-});
+//     await takeElementScreenshot("page-placeholder-without-elements.png", Selector(".svc-page"), t, comparer);
+//   });
+// });
 
-test("Check minimal height", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
-    await changeToolboxSearchEnabled(false);
-    await t.resizeWindow(1120, 900);
-    const root = Selector(".svc-creator");
-    await setJSON({});
-    await ClientFunction(() => {
-      const creator = document.getElementById("survey-creator");
+// test("Check minimal height", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     changeToolboxScrolling(false);
+//     await changeToolboxSearchEnabled(false);
+//     await t.resizeWindow(1120, 900);
+//     const root = Selector(".svc-creator");
+//     await setJSON({});
+//     await ClientFunction(() => {
+//       const creator = document.getElementById("survey-creator");
 
-      creator.style.bottom = "";
-      creator.style.height = "1px";
-    })();
-    await takeElementScreenshot("creator-min-height.png", root, t, comparer);
-  });
-});
+//       creator.style.bottom = "";
+//       creator.style.height = "1px";
+//     })();
+//     await takeElementScreenshot("creator-min-height.png", root, t, comparer);
+//   });
+// });
 
 test("Composite question - check no scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -2538,32 +2538,32 @@ test("Question types with subtypes", async (t) => {
   });
 });
 
-test("Check page selection when width mode is responsive", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t
-      .resizeWindow(1920, 1080);
-    const json = {
-      showQuestionNumbers: "on",
-      widthMode: "responsive",
-      "pages": [
-        {
-          "name": "page1",
-          "elements": [
-            {
-              "type": "text",
-              "name": "text",
-            }
-          ]
-        }
-      ]
-    };
-    await setAllowEditSurveyTitle(false);
-    await setJSON(json);
-    const rootSelector = Selector(".svc-tab-designer");
-    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
-  });
-});
+// test("Check page selection when width mode is responsive", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t
+//       .resizeWindow(1920, 1080);
+//     const json = {
+//       showQuestionNumbers: "on",
+//       widthMode: "responsive",
+//       "pages": [
+//         {
+//           "name": "page1",
+//           "elements": [
+//             {
+//               "type": "text",
+//               "name": "text",
+//             }
+//           ]
+//         }
+//       ]
+//     };
+//     await setAllowEditSurveyTitle(false);
+//     await setJSON(json);
+//     const rootSelector = Selector(".svc-tab-designer");
+//     await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+//     await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
+//   });
+// });
 
 // test("Collapse all and expand all toolbar", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
@@ -2667,77 +2667,77 @@ test("Question description bottom", async (t) => {
   });
 });
 
-test("Scaling design surface", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await ClientFunction(() => {
-      window["creator"].allowZoom = true;
-      window["creator"].showToolbox = false;
-      window["creator"].showSidebar = false;
-    })();
-    const json = {
-      showQuestionNumbers: "on",
-      "pages": [
-        {
-          "name": "page1",
-          "elements": [
-            { "type": "rating", "name": "question1" },
-            {
-              "type": "dropdown",
-              "name": "question2",
-              "choices": ["Item 1", "Item 2", "Item 3"]
-            },
-            { "type": "boolean", "name": "question3" },
-            { "type": "file", "name": "question4" },
-            {
-              "type": "panel",
-              "name": "panel1"
-            }
-          ]
-        }
-      ]
-    };
-    await setJSON(json);
-    const surfaceSelector = Selector(".svc-tab-designer_content > div");
-    const qContent = Selector(".svc-question__content");
-    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+// test("Scaling design surface", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await ClientFunction(() => {
+//       window["creator"].allowZoom = true;
+//       window["creator"].showToolbox = false;
+//       window["creator"].showSidebar = false;
+//     })();
+//     const json = {
+//       showQuestionNumbers: "on",
+//       "pages": [
+//         {
+//           "name": "page1",
+//           "elements": [
+//             { "type": "rating", "name": "question1" },
+//             {
+//               "type": "dropdown",
+//               "name": "question2",
+//               "choices": ["Item 1", "Item 2", "Item 3"]
+//             },
+//             { "type": "boolean", "name": "question3" },
+//             { "type": "file", "name": "question4" },
+//             {
+//               "type": "panel",
+//               "name": "panel1"
+//             }
+//           ]
+//         }
+//       ]
+//     };
+//     await setJSON(json);
+//     const surfaceSelector = Selector(".svc-tab-designer_content > div");
+//     const qContent = Selector(".svc-question__content");
+//     await t.click(qContent, { offsetX: 5, offsetY: 5 });
 
-    await t.resizeWindow(1024, 3700);
-    for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
-    await t.resizeWindow(600, 1900);
-    await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
-  });
-});
+//     await t.resizeWindow(1024, 3700);
+//     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
+//     await t.resizeWindow(600, 1900);
+//     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
+//   });
+// });
 
-test("Page hidden header and top toolbar", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t
-      .resizeWindow(1920, 1080);
-    const json = {
-      showQuestionNumbers: "on",
-      "logoPosition": "right",
-      "pages": [
-        {
-          "name": "page1",
-          "elements": [
-            {
-              "type": "text",
-              "name": "question1"
-            }
-          ]
-        }
-      ]
-    };
+// test("Page hidden header and top toolbar", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t
+//       .resizeWindow(1920, 1080);
+//     const json = {
+//       showQuestionNumbers: "on",
+//       "logoPosition": "right",
+//       "pages": [
+//         {
+//           "name": "page1",
+//           "elements": [
+//             {
+//               "type": "text",
+//               "name": "question1"
+//             }
+//           ]
+//         }
+//       ]
+//     };
 
-    await ClientFunction((json) => {
-      (window as any).Survey.settings.designMode.showEmptyTitles = false;
-      (window as any).updateCreatorModel({ expandCollapseButtonVisibility: "never" }, json);
-    })(json);
+//     await ClientFunction((json) => {
+//       (window as any).Survey.settings.designMode.showEmptyTitles = false;
+//       (window as any).updateCreatorModel({ expandCollapseButtonVisibility: "never" }, json);
+//     })(json);
 
-    const rootSelector = Selector(".svc-tab-designer");
-    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("page-selected-hidden-header.png", rootSelector, t, comparer);
-  });
-});
+//     const rootSelector = Selector(".svc-tab-designer");
+//     await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+//     await takeElementScreenshot("page-selected-hidden-header.png", rootSelector, t, comparer);
+//   });
+// });
 
 test("Check question button states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -2793,54 +2793,54 @@ test("Check question button states", async (t) => {
   });
 });
 
-test("Check page button states", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
-    await ClientFunction(() => {
-      window["creator"].onDefineElementMenuItems.add((_, options) => {
-        if (!options.obj["isPage"]) return;
-        options.items.push({
-          id: "duplicate2",
-          title: "Duplicate",
-          enabled: false,
-          iconSize: 16,
-          iconName: "icon-copy-16x16",
-          action: () => { }
-        });
-      });
-    })();
-    await setJSON({
-      showQuestionNumbers: "on",
-      "logoPosition": "right",
-      "elements": [
-        {
-          type: "text",
-          name: "q1",
-          title: "Question Title"
-        }
-      ]
-    });
-    const button = Selector(".svc-page-toolbar__item");
-    const buttonDisabled = Selector(".svc-page-toolbar__item:disabled");
-    await t.click(Selector(".svc-page__content"), { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("page-button.png", button, t, comparer);
-    await t.hover(button);
-    await takeElementScreenshot("page-button-hover.png", button, t, comparer);
-    await t.pressKey("tab");
-    await takeElementScreenshot("page-button-focused.png", button, t, comparer);
-    await takeElementScreenshot("page-button-disabled.png", buttonDisabled, t, comparer);
-    await t.hover(buttonDisabled);
-    await takeElementScreenshot("page-button-disabled-hover.png", buttonDisabled, t, comparer);
-    await ClientFunction(() => {
-      const page = window["creator"].survey.getPageByName("page1");
-      const adorner = window["SurveyCreatorCore"].PageAdorner.GetAdorner(page);
-      adorner.actionContainer.actions[0].pressed = true;
-      adorner.actionContainer.actions[2].pressed = true;
-    })();
-    await takeElementScreenshot("page-button-pressed.png", button, t, comparer);
-    await takeElementScreenshot("page-button-pressed-disabled.png", buttonDisabled, t, comparer);
-  });
-});
+// test("Check page button states", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(1920, 1080);
+//     await ClientFunction(() => {
+//       window["creator"].onDefineElementMenuItems.add((_, options) => {
+//         if (!options.obj["isPage"]) return;
+//         options.items.push({
+//           id: "duplicate2",
+//           title: "Duplicate",
+//           enabled: false,
+//           iconSize: 16,
+//           iconName: "icon-copy-16x16",
+//           action: () => { }
+//         });
+//       });
+//     })();
+//     await setJSON({
+//       showQuestionNumbers: "on",
+//       "logoPosition": "right",
+//       "elements": [
+//         {
+//           type: "text",
+//           name: "q1",
+//           title: "Question Title"
+//         }
+//       ]
+//     });
+//     const button = Selector(".svc-page-toolbar__item");
+//     const buttonDisabled = Selector(".svc-page-toolbar__item:disabled");
+//     await t.click(Selector(".svc-page__content"), { offsetX: 5, offsetY: 5 });
+//     await takeElementScreenshot("page-button.png", button, t, comparer);
+//     await t.hover(button);
+//     await takeElementScreenshot("page-button-hover.png", button, t, comparer);
+//     await t.pressKey("tab");
+//     await takeElementScreenshot("page-button-focused.png", button, t, comparer);
+//     await takeElementScreenshot("page-button-disabled.png", buttonDisabled, t, comparer);
+//     await t.hover(buttonDisabled);
+//     await takeElementScreenshot("page-button-disabled-hover.png", buttonDisabled, t, comparer);
+//     await ClientFunction(() => {
+//       const page = window["creator"].survey.getPageByName("page1");
+//       const adorner = window["SurveyCreatorCore"].PageAdorner.GetAdorner(page);
+//       adorner.actionContainer.actions[0].pressed = true;
+//       adorner.actionContainer.actions[2].pressed = true;
+//     })();
+//     await takeElementScreenshot("page-button-pressed.png", button, t, comparer);
+//     await takeElementScreenshot("page-button-pressed-disabled.png", buttonDisabled, t, comparer);
+//   });
+// });
 
 // test("Selected matrix-in-panel", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {

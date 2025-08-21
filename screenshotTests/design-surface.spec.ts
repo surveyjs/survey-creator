@@ -1,10 +1,277 @@
-import { url, compareScreenshot, test, setJSON } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect } from "./helper";
 
-const title = "Surface header";
+const title = "Design Surface";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
+  });
+
+  test("Check minimal height", async ({ page }) => {
+    await page.setViewportSize({ width: 1120, height: 900 });
+    const root = page.locator(".svc-creator");
+    await setJSON(page, {});
+    await page.evaluate(() => {
+      const creator = document.getElementById("survey-creator");
+      if (creator) {
+        creator.style.bottom = "";
+        creator.style.height = "1px";
+      }
+    });
+    await compareScreenshot(page, root, "creator-min-height.png");
+  });
+
+  test("Check survey layout in mobile mode", async ({ page }) => {
+    await page.setViewportSize({ width: 550, height: 900 });
+    const designerTabContent = page.locator(".svc-tab-designer");
+    await setJSON(page, {
+      "title": "Survey title",
+      "description": "Survey description",
+      "showQuestionNumbers": "off",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question11"
+            },
+            {
+              "type": "matrix",
+              "name": "question1",
+              "columns": [
+                "Column 1",
+                "Column 2",
+              ],
+              "rows": [
+                "Row 1",
+                "Row 2"
+              ]
+            }
+          ],
+        }
+      ]
+    });
+    await compareScreenshot(page, designerTabContent, "designer-survey-layout-mobile.png");
+  });
+
+  test("Check property grid flyout", async ({ page }) => {
+    await page.setViewportSize({ width: 1120, height: 900 });
+    const root = page.locator(".svc-creator");
+    await setJSON(page, {});
+    await page.click('[data-sv-drop-target-survey-element="survey"]');
+    await compareScreenshot(page, root, "propery-grid-flyout.png");
+  });
+
+  test("Scaling design surface", async ({ page }) => {
+    await page.evaluate(() => {
+      window["creator"].allowZoom = true;
+      window["creator"].showToolbox = false;
+      window["creator"].showSidebar = false;
+    });
+    const json = {
+      showQuestionNumbers: "on",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "rating", "name": "question1" },
+            {
+              "type": "dropdown",
+              "name": "question2",
+              "choices": ["Item 1", "Item 2", "Item 3"]
+            },
+            { "type": "boolean", "name": "question3" },
+            { "type": "file", "name": "question4" },
+            {
+              "type": "panel",
+              "name": "panel1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    const surfaceSelector = page.locator(".svc-tab-designer_content > div");
+    const qContent = page.locator(".svc-question__content");
+    await qContent.click({ position: { x: 5, y: 5 } });
+
+    await page.setViewportSize({ width: 1024, height: 3700 });
+    for (let i = 0; i < 5; i++) {
+      await page.click("#zoomOut button");
+    }
+    await page.setViewportSize({ width: 600, height: 1900 });
+    await compareScreenshot(page, surfaceSelector, "design-surface-zoom-out.png");
+  });
+
+  test("Placeholder", async ({ page }) => {
+    await page.setViewportSize({ width: 1767, height: 900 });
+    const designerTabContent = page.locator(".svc-tab-designer");
+    await page.evaluate(() => {
+      (window as any).creator.toolbox.isCompact = true;
+    });
+
+    await compareScreenshot(page, designerTabContent, "surface-placeholder.png");
+  });
+
+  test("Placeholder with survey header", async ({ page }) => {
+    await page.setViewportSize({ width: 1767, height: 900 });
+    const designerTabContent = page.locator(".svc-tab-designer");
+    await page.evaluate(() => {
+      (window as any).creator.toolbox.isCompact = true;
+      (window as any).creator.showHeaderInEmptySurvey = true;
+    });
+
+    await compareScreenshot(page, designerTabContent, "surface-placeholder-with-header.png");
+  });
+
+  test("Page borders", async ({ page }) => {
+    await page.setViewportSize({ width: 1232, height: 900 });
+    const json = {
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    const designerTabContent = page.locator(".svc-tab-designer");
+    const pageContent = page.locator(".svc-page__content:not(.svc-page__content--new)");
+
+    await compareScreenshot(page, designerTabContent, "page-content.png");
+    await pageContent.hover({ position: { x: 5, y: 5 } });
+    await page.waitForTimeout(300);
+    await compareScreenshot(page, designerTabContent, "page-content-hover.png");
+
+    await pageContent.locator(".svc-element__add-new-question").hover();
+    await compareScreenshot(page, pageContent, "question-add-hover.png");
+
+    await pageContent.click({ position: { x: 5, y: 5 } });
+    await compareScreenshot(page, designerTabContent, "page-content-click.png");
+
+    await pageContent.locator(".sd-page__title").click({ position: { x: 5, y: 5 } });
+    await compareScreenshot(page, designerTabContent, "page-title-click.png");
+  });
+
+  test("Page placeholder without elements", async ({ page }) => {
+    await page.setViewportSize({ width: 770, height: 900 });
+    await setJSON(page, {
+      showQuestionNumbers: "on",
+      "pages": [
+        {
+          "name": "page1",
+          "title": "Page1"
+        }
+      ]
+    });
+
+    await compareScreenshot(page, page.locator(".svc-page"), "page-placeholder-without-elements.png");
+  });
+
+  test("Check page selection when width mode is responsive", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    const json = {
+      showQuestionNumbers: "on",
+      widthMode: "responsive",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "text",
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    const rootSelector = page.locator(".svc-tab-designer");
+    await page.click(".svc-page", { position: { x: 5, y: 5 } });
+    await compareScreenshot(page, rootSelector, "page-selected-responsive.png");
+  });
+
+  test("Page hidden header and top toolbar", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    const json = {
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+
+    await page.evaluate((json) => {
+      (window as any).Survey.settings.designMode.showEmptyTitles = false;
+      (window as any).updateCreatorModel({ expandCollapseButtonVisibility: "never" }, json);
+    }, json);
+
+    const rootSelector = page.locator(".svc-tab-designer");
+    await page.click(".svc-page", { position: { x: 5, y: 5 } });
+    await compareScreenshot(page, rootSelector, "page-selected-hidden-header.png");
+  });
+
+  test("Check page button states", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.evaluate(() => {
+      window["creator"].onDefineElementMenuItems.add((_, options) => {
+        if (!options.obj["isPage"]) return;
+        options.items.push({
+          id: "duplicate2",
+          title: "Duplicate",
+          enabled: false,
+          iconSize: 16,
+          iconName: "icon-copy-16x16",
+          action: () => { }
+        });
+      });
+    });
+    await setJSON(page, {
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "elements": [
+        {
+          type: "text",
+          name: "q1",
+          title: "Question Title"
+        }
+      ]
+    });
+    const button = page.locator(".svc-page-toolbar__item");
+    const buttonDisabled = page.locator(".svc-page-toolbar__item:disabled");
+    await page.locator(".svc-page__content").click({ position: { x: 5, y: 5 } });
+    await compareScreenshot(page, button, "page-button.png");
+    await button.hover();
+    await compareScreenshot(page, button, "page-button-hover.png");
+    await page.keyboard.press("Tab");
+    await compareScreenshot(page, button, "page-button-focused.png");
+    await compareScreenshot(page, buttonDisabled, "page-button-disabled.png");
+    await buttonDisabled.hover();
+    await compareScreenshot(page, buttonDisabled, "page-button-disabled-hover.png");
+    await page.evaluate(() => {
+      const page = window["creator"].survey.getPageByName("page1");
+      const adorner = window["SurveyCreatorCore"].PageAdorner.GetAdorner(page);
+      adorner.actionContainer.actions[0].pressed = true;
+      adorner.actionContainer.actions[2].pressed = true;
+    });
+    await compareScreenshot(page, button, "page-button-pressed.png");
+    await compareScreenshot(page, buttonDisabled, "page-button-pressed-disabled.png");
   });
 
   test("Logo big image", async ({ page }) => {
@@ -97,5 +364,35 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-choose-hover.png");
     await page.hover(".svc-logo-image-container .svc-context-button--danger");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-clear-hover.png");
+  });
+
+  test("Check string editor on isRequired", async ({ page }) => {
+    await page.evaluate((json) => {
+      window["Survey"].Serializer.findProperty("survey", "title").isRequired = true;
+      window["creator"].JSON = json;
+    }, {
+      showQuestionNumbers: "on",
+      title: "title",
+      questions: [
+        {
+          type: "text",
+          name: "q1"
+        }
+      ]
+    });
+
+    await page.evaluate(() => {
+      const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
+      if (el) {
+        el.style.color = "transparent";
+      }
+    });
+
+    const svStringSelector = page.locator(".svc-designer-header .sd-title .svc-string-editor");
+    await svStringSelector.click();
+    await page.keyboard.press("Delete");
+    await page.keyboard.press("Enter");
+    await expect(svStringSelector).toHaveClass(/svc-string-editor--error/);
+    await compareScreenshot(page, ".svc-designer-header .sd-title", "surface-string-editor-error.png");
   });
 });
