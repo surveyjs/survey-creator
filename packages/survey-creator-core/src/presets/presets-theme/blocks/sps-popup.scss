@@ -1,0 +1,24 @@
+@use "../../../variables.scss" as *;
+@use "./variables.scss" as *;
+@use "../fonts" as *;
+
+.sps-popup-menu.sv-popup--menu-popup {
+  .sv-popup__container {
+    border: initial;
+    padding: var(--sjs2-spacing-x150, 12px);
+    box-shadow: initial;
+    background: initial;
+    box-sizing: border-box;
+
+    .sv-popup__body-content {
+      border-radius: var(--sjs2-radius-container-menu, 20px);
+      border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+      background: var(--sjs2-color-utility-sheet, #fff);
+  
+      /* sjs2/border-effect/floating/default */
+      box-shadow: var(--sjs2-border-offset-x-floating-default, 0) var(--sjs2-border-offset-y-floating-default, 6px)
+        var(--sjs2-border-blur-floating-default, 12px) var(--sjs2-border-spread-floating-default, 4px)
+        var(--sjs2-color-utility-shadow-floating-default, rgba(0, 76, 68, 0.2));
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { createDropdownActionModel, Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer, IAction } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, listComponentCss, saveToFileHandler, extendCreatorTheme } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, extendCreatorTheme } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
+import { listComponentCss } from "./presets-theme/list-theme";
 import { darkTheme } from "sjs-design-tokens";
 
 export class TabPresetsPlugin implements ICreatorPlugin {
@@ -46,7 +47,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [
-      { id: "save", title: "Save & Exit", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
+      { id: "save", title: "Save & Exit", css: "sps-list__item--positive", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
       { id: "import", title: "Import", markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
       { id: "export", title: "Export", markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
       { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true },
@@ -67,9 +68,10 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       css: "sps-menu-floating-action"
     }, {
       items: [...presets, ...tools],
+      showPointer: false,
       verticalPosition: "top",
       horizontalPosition: "center",
-      cssClass: "svc-creator-popup svc-creator-popup--large-markers",
+      cssClass: "sps-popup-menu",
       cssClasses: listComponentCss,
       onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
       onShow: () => { settingsAction.iconName = "close-24x24"; }
