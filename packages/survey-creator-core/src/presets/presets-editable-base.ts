@@ -1,5 +1,6 @@
 import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel } from "survey-core";
 import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
+import { presetsCss } from "./presets-theme/presets";
 
 export interface ICreatorPresetEditorSetup {
   creator: SurveyCreatorModel;
@@ -167,6 +168,7 @@ export class CreatorPresetEditableBase {
       survey.fitToContainer = false;
       survey.showNavigationButtons = false;
       survey.data = data;
+      survey.css = presetsCss;
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: survey, model: survey },
@@ -184,10 +186,13 @@ export class CreatorPresetEditableBase {
         onCancel: () => {
           return true;
         },
-        cssClass: "svc-property-editor svc-creator-popup",
-        title: "Detail",
+        cssClass: "sps-popup svc-property-editor svc-creator-popup",
+        title: "Edit",
         displayMode: "popup"
       }, rootElement);
+      if (survey.calculatedWidthMode == "responsive") {
+        popupModel.width = "100%";
+      }
       return survey;
     }
   }

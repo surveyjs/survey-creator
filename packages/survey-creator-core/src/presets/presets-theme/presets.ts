@@ -222,6 +222,7 @@ export var presetsCss = {
     rowLeave: "sps-table__row--leave",
   },
   matrixdynamic: {
+    mainRoot: "sps-question sps-question--matrixdynamic sd-element sd-question sd-row__question sd-element--complex sd-question--complex sd-question--table",
     tableWrapper: "sps-table-wrapper",
     root: "sps-table sps-matrixdynamic",
     content: "sps-matrixdynamic__content sps-text__content",

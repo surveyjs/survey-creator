@@ -19,12 +19,6 @@
   align-self: stretch;
 }
 
-.sps-question--nested .sps-question__header {
-  padding: var(--sjs2-spacing-x150, 12px);
-  border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
-  box-sizing: border-box;
-}
-
 .sps-question__title {
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);
 

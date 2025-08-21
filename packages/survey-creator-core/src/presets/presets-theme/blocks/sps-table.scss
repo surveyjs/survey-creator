@@ -13,7 +13,7 @@
 
   & > tbody > tr {
     background-color: var(--sjs2-color-bg-basic-primary, #fff);
-    & > td:last-of-type > .sps-action-bar .sps-action-button  {
+    & > td:last-of-type > .sps-action-bar .sps-action-button {
       opacity: 0;
     }
     &:hover {
@@ -43,9 +43,9 @@
 }
 .sd-table__row--expanded {
   & > td {
-    &> div {
-        background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
-      }
+    & > div {
+      background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
+    }
   }
 }
 
@@ -105,7 +105,7 @@
     background-color: transparent;
     height: auto;
     padding: var(--sjs2-spacing-x100, 8px) 0;
-    
+
     width: calc(100% + var(--action-container-width));
     margin-right: calc(-1 * var(--action-container-width));
     text-overflow: ellipsis;
@@ -123,17 +123,20 @@
 }
 
 .sps-table__row {
-  --action-width: calc(2 * var(--ctr-actionbar-button-padding-top-large-icon, 8px) + var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3)));
+  --action-width: calc(
+    2 * var(--ctr-actionbar-button-padding-top-large-icon, 8px) +
+      var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3))
+  );
   --action-container-width: calc(3 * var(--action-width));
 }
 
 .sps-table__row:has(> .sps-table__cell:last-of-type .sv-action:nth-child(4)) {
-   --action-container-width: calc(4 * var(--action-width));
+  --action-container-width: calc(4 * var(--action-width));
 }
 
 .sps-table__row {
   &:hover,
-  &:focus-within{
+  &:focus-within {
     .sps-table__cell:not(.sps-table__cell--detail-panel) {
       .sps-input {
         width: 100%;
@@ -172,7 +175,8 @@
       animation-direction: var(--animation-direction);
       animation-timing-function: var(--animation-timing-function);
       animation-fill-mode: forwards;
-      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-duration:
+        var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
       animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
     }
   }

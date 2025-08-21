@@ -22,3 +22,52 @@
     }
   }
 }
+
+.sps-popup {
+  .sps-root-modern {
+    height: initial;
+  }
+  .sps-page {
+    padding: 0;
+    gap: var(--sjs2-spacing-x200, 16px);
+    background: initial;
+  }
+  .sps-question--with-frame {
+    border: none;
+    border-radius: 0;
+  }
+
+  .sps-question__header {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  } 
+  .sps-question__content {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+  
+  .sps-row--multiple > div {
+    padding-left: var(--sjs2-spacing-x400, 32px);
+    padding-right: var(--sjs2-spacing-x400, 32px);
+    &:first-of-type {
+      padding-left: 0;
+    }
+    &:last-of-type {
+      padding-right: 0;
+    }
+  }
+
+  .sps-panel {
+    border: none;
+    border-radius: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sjs2-spacing-x200, 16px);
+    .sps-row {
+       border: none;
+    }
+  }
+}
