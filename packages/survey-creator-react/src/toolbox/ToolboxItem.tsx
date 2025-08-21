@@ -155,7 +155,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
     const item = attachKey2click(
       <div
         className={this.item.renderedCss}
-        tabIndex={0}
+        tabIndex={this.model.getTabIndex()}
         role="button"
         aria-label={this.item.tooltip}
         onClick={(event: any) => {
@@ -171,7 +171,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
           :
           <span className="svc-toolbox__item-title">{this.item.title}</span>
         )}
-      </div>);
+      </div>, undefined, undefined, this.model.getTabIndex());
     return (
       <>
         {item}

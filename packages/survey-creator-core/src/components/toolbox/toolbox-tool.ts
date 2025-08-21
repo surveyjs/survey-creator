@@ -35,6 +35,10 @@ export class ToolboxToolViewModel extends Base {
     this.hidePopup();
   };
 
+  public getTabIndex():number {
+    return this.toolboxItem.enabled ? 0 : -1;
+  }
+
   public get toolboxItem() {
     return this.item as QuestionToolboxItem;
   }
