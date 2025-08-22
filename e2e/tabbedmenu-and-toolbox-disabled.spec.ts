@@ -21,7 +21,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].toolbox.enabled = false;
     });
-    await page.getByText("Radio Button Group").click({ force: true });
+    await page.locator("[aria-label='Radio Button Group']").click({ force: true });
     await expect(page.getByText("Your form is empty")).toBeVisible();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Space");
@@ -52,7 +52,7 @@ test.describe(title, () => {
     });
     await page.locator(".svc-toolbox .svc-search__input").first().click({ force: true });
     await page.keyboard.press("z");
-    await expect(page.getByText("Rating Scale")).toBeVisible();
+    await expect(page.locator("[aria-label='Rating Scale']")).toBeVisible();
     await page.setViewportSize({ width: 1000, height: 800 });
     await page.locator(".svc-toolbox__search-button").first().click({ force: true });
     await expect(page.locator(".svc-toolbox .svc-search__input")).toBeHidden();
