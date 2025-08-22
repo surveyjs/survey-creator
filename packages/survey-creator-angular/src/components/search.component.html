@@ -3,7 +3,7 @@
         <div class="svc-search__search-icon">
             <svg [iconName]="'icon-search'" [size]="'auto'" sv-ng-svg-icon></svg>
         </div>
-        <input type="text" class="svc-search__input" [(ngModel)]="model.filterString"
+        <input type="text" class="svc-search__input" [(ngModel)]="model.filterString" [attr.tabindex]= "model.getTabIndex()" 
             [attr.aria-label]="model.filterStringPlaceholder" [attr.placeholder]="model.filterStringPlaceholder" />
         <div class="svc-search__toolbar">
             <div class="svc-search__toolbar-counter">{{model.matchCounterText}}</div>

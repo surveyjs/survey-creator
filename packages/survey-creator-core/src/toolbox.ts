@@ -689,7 +689,9 @@ export class QuestionToolbox
       .append("svc-toolbox--flyout-to-compact-running", this.isFlyoutToCompactRunning)
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
-      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
+      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll")
+      .append("svc-toolbox--disabled", !this.enabled)
+      .toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
@@ -1174,6 +1176,13 @@ export class QuestionToolbox
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
+  @property({
+    defaultValue: true,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      target.items.forEach(i => i.enabled = val);
+      target.searchManager.enabled = val;
+    }
+  }) enabled: boolean;
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
