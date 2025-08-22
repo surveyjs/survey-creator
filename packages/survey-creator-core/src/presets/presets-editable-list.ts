@@ -16,6 +16,54 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
+
+  protected createResetAction(model: SurveyModel, row: MatrixDynamicRowModel, action: () => void): IAction {
+    return {
+      id: "reset-to-default",
+      iconName: "icon-reset",
+      location: "end",
+      visibleIndex: 15,
+      action: action
+    };
+  }
+
+  protected createEditAction(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): IAction {
+    return {
+      id: "edit-category",
+      iconName: "icon-edit",
+      location: "end",
+      visibleIndex: 13,
+      action: () => { this.editItem(model, creator, question, row); }
+    };
+  }
+
+  protected createIconAction(iconName: string, cssClass: string = "sps-matrixdynamic__row-icon"): IAction {
+    return {
+      id: iconName,
+      iconName: iconName,
+      innerCss: cssClass,
+      location: "start",
+      enabled: false
+    };
+  }
+
+  protected setupStandardActions(actions: IAction[], question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, isItemsMatrix: boolean = false): void {
+    actions.forEach(a => {
+      if (a.id == "show-detail") {
+        a.location = "end";
+        a.iconName = "icon-edit";
+        a.visible = false;
+        a.visibleIndex = 10;
+      }
+      if (a.id == "remove-row") {
+        a.visibleIndex = 20;
+        a.component = "sv-action-bar-item";
+        a.action = () => question.removeRowUI(row);
+        a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
+      }
+    });
+  }
+
   protected updateOnValueChangedCore(model: SurveyModel, name: string) {
     // if (name == this.nameCategories) {
     //   this.fillAutoName(this.getQuestionCategories(model), "category");
@@ -61,48 +109,18 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.isItemsMatrix(options.question)) {
       const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
       if (iconName) {
-        options.actions.push({
-          id: iconName,
-          iconName: iconName,
-          innerCss: "sps-matrixdynamic__row-icon",
-          location: "start",
-          enabled: false
-        });
+        options.actions.push(this.createIconAction(iconName));
       }
-      const resetAction = {
-        id: "reset-to-default",
-        iconName: "icon-reset",
-        title: "Reset to defaults",
-        location: "end",
-        visibleIndex: 15,
-        action: ()=>{ this.resetItem(model, options.row); }
-      };
-      const resetActionForRow = { ...resetAction, ...{ title: undefined } };
-      options.actions.push(resetActionForRow);
+
+      const resetAction = this.createResetAction(model, options.row, () => { this.resetItem(model, options.row); });
+      options.actions.push(resetAction);
 
       options.question.cssClasses.detailIconExpandedId = "icon-edit";
       options.question.cssClasses.detailIconId = "icon-edit";
-      options.actions.push({
-        id: "edit-category",
-        iconName: "icon-edit",
-        location: "end",
-        visibleIndex: 13,
-        action: ()=>{ this.editItem(model, creator, options.question, options.row); }
-      });
-      options.actions.forEach(a => {
-        if (a.id == "show-detail") {
-          a.location = "end";
-          a.iconName = "icon-edit",
-          a.visible = false,
-          a.visibleIndex = 10;
-        }
-        if (a.id == "remove-row") {
-          a.visibleIndex = 20;
-          a.component = "sv-action-bar-item";
-          a.action = () => options.question.removeRowUI(options.row);
-          a.iconName = options.question.name == this.nameMatrix ? "icon-add_24x24" : "icon-remove_24x24";
-        }
-      });
+
+      options.actions.push(this.createEditAction(model, creator, options.question, options.row));
+
+      this.setupStandardActions(options.actions, options.question, options.row, options.question.name == this.nameMatrix);
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {

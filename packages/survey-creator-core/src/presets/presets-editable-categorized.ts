@@ -16,7 +16,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected get nameCategories() { return this.fullPath + "_categories"; }
   public getMainElementName() : any { return this.nameCategories; }
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
-  //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
+  //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v.category = this.replaceNonLettersWithDash(v.title));
   //}
   public get questionNames() {
     return [this.nameCategories];
@@ -30,6 +30,39 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     //   this.fillAutoName(this.getMatrix(model), "name");
     // }
   }
+
+  protected createCategoryEditAction(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): IAction {
+    return {
+      id: "edit-category",
+      iconName: "icon-edit",
+      location: "end",
+      visibleIndex: 13,
+      action: () => { this.editCategory(model, creator, question, row); }
+    };
+  }
+
+  protected setupCategoryCssClasses(question: QuestionMatrixDynamicModel): void {
+    question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
+    question.cssClasses.detailIconId = "icon-expand-24x24";
+  }
+
+  protected setupCategoryActions(actions: IAction[], question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): void {
+    actions.forEach(a => {
+      if (a.id == "show-detail") {
+        a.location = "end";
+        a.iconName = "icon-expand-24x24";
+        a.visibleIndex = 10;
+      }
+      if (a.id == "remove-row") {
+        a.visibleIndex = 20;
+        a.component = "sv-action-bar-item";
+        a.action = () => question.removeRowUI(row);
+        a.iconName = "icon-delete_24x24";
+        a.innerCss = "sps-action-button sps-action-button--icon sps-action-button--danger";
+      }
+    });
+  }
+
   private editCategory(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const resetAction = {
       id: "reset-to-default",
@@ -110,49 +143,19 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     super.onGetMatrixRowActionsCore(model, creator, options);
     if (options.question.name === this.nameCategories) {
-      options.question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
-      options.question.cssClasses.detailIconId = "icon-expand-24x24";
+      this.setupCategoryCssClasses(options.question);
 
       const iconName = options.question.value?.filter(v => v.category == options.row.getValue("category"))[0]?.iconName;
       if (iconName) {
-        options.actions.push({
-          id: iconName,
-          iconName: iconName,
-          innerCss: "sps-matrix-row-icon",
-          location: "start",
-          enabled: false
-        });
+        options.actions.push(super.createIconAction(iconName, "sps-matrix-row-icon"));
       }
-      const resetAction = {
-        id: "reset-to-default",
-        iconName: "icon-reset",
-        location: "end",
-        visibleIndex: 15,
-        action: ()=>{ this.resetCategory(model, options.row); }
-      };
+
+      const resetAction = super.createResetAction(model, options.row, () => { this.resetCategory(model, options.row); });
       options.actions.push(resetAction);
 
-      options.actions.push({
-        id: "edit-category",
-        iconName: "icon-edit",
-        location: "end",
-        visibleIndex: 13,
-        action: ()=>{ this.editCategory(model, creator, options.question, options.row); }
-      });
-      options.actions.forEach(a => {
-        if (a.id == "show-detail") {
-          a.location = "end";
-          a.iconName = "icon-expand-24x24",
-          a.visibleIndex = 10;
-        }
-        if (a.id == "remove-row") {
-          a.visibleIndex = 20;
-          a.component = "sv-action-bar-item";
-          a.action = () => options.question.removeRowUI(options.row);
-          a.iconName = "icon-delete_24x24";
-          a.innerCss = "sps-action-button sps-action-button--icon sps-action-button--danger";
-        }
-      });
+      options.actions.push(this.createCategoryEditAction(model, creator, options.question, options.row));
+
+      this.setupCategoryActions(options.actions, options.question, options.row);
     }
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
