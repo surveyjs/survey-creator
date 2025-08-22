@@ -592,9 +592,11 @@ export class QuestionToolbox
       title: surveyLocalization.getString("ed.toolboxSearch"),
       showTitle: false,
       action: () => {
+        if (!this.enabled) return;
         (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
-      }
+      },
+      enabled: this.enabled
     });
     this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
@@ -613,13 +615,14 @@ export class QuestionToolbox
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper<IQuestionToolboxItem>((pointerDownEvent, _targets, itemModel) => {
+      if (!this.enabled) return;
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     }, false);
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
-      if (!this.creator.readOnly) {
+      if (!this.creator.readOnly && this.enabled) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
@@ -1181,6 +1184,7 @@ export class QuestionToolbox
     onSet: (val: boolean, target: QuestionToolbox) => {
       target.items.forEach(i => i.enabled = val);
       target.searchManager.enabled = val;
+      target.searchItem.enabled = val;
     }
   }) enabled: boolean;
   private expandCollapseAllCategories(isCollapsed: boolean) {

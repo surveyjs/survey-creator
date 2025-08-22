@@ -45,38 +45,16 @@ test.describe(title, () => {
     await expect(opacity).toBe("0");
   });
 
-  // test("Toolbox:Search", async ({ page }) => {
-  //   await page.setViewportSize({ width: 1500, height: 800 });
-  //   await page.evaluate(() => {
-  //     window["creator"].toolbox.enabled = false;
-  //   });
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("z");
-  //   //  await page.locator(".svc-toolbox .svc-search__input").first().fill("Radio");
-  //   await expect(page.getByText("Rating Scale")).toBeVisible();
-  // });
+  test("Toolbox:Search", async ({ page }) => {
+    await page.setViewportSize({ width: 1500, height: 800 });
+    await page.evaluate(() => {
+      window["creator"].toolbox.enabled = false;
+    });
+    await page.locator(".svc-toolbox .svc-search__input").first().click({ force: true });
+    await page.keyboard.press("z");
+    await expect(page.getByText("Rating Scale")).toBeVisible();
+    await page.setViewportSize({ width: 1000, height: 800 });
+    await page.locator(".svc-toolbox__search-button").first().click({ force: true });
+    await expect(page.locator(".svc-toolbox .svc-search__input")).toBeHidden();
+  });
 });
