@@ -11,6 +11,7 @@ export interface ITabbedMenuItem extends IAction {
 export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
+    this.enabled = true;
   }
   componentContent: string;
   renderTab?: () => any;
@@ -36,6 +37,11 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   public get hasIcon(): boolean {
     return !this.disableShrink && this.iconName && this.mode == "small";
   }
+  public doAction(): boolean {
+    if (!this.enabled) return false;
+    this.action();
+    return true;
+  }
 }
 export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
   constructor(private creator: CreatorBase) {
@@ -56,6 +62,9 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     index?: number) {
     const tabName = name === "test" ? "preview" : name;
     const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
+    const actionHandler = function(name) {
+      this.creator.switchTab(name);
+    };
     const tab = new TabbedMenuItem({
       id: name,
       locTitleName: locStrName,
@@ -63,7 +72,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       iconName: iconName || "icon-undefined-24x24",
-      action: () => { this.creator.switchTab(name); },
+      action: actionHandler.bind(this, name),
       active: this.creator.viewType === name,
       disableHide: this.creator.viewType === name
     });

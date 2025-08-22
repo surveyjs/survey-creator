@@ -13,6 +13,7 @@
       v-model="filterString"
       :aria-label="model.filterStringPlaceholder"
       :placeholder="model.filterStringPlaceholder"
+      :tabindex="model.getTabIndex()"
     />
     <div class="svc-search__toolbar">
       <div class="svc-search__toolbar-counter">

@@ -299,3 +299,8 @@
   margin-inline-end: auto;
   color: var(--ctr-property-grid-placeholder-text-description-color, var(--sjs-layer-1-foreground-50, #00000080));
 }
+
+.svc-toolbox--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

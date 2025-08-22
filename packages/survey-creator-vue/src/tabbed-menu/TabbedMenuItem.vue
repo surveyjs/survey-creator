@@ -6,7 +6,7 @@
     :aria-controls="'scrollableDiv-' + item.id"
     class="svc-tabbed-menu-item"
     :class="item.getRootCss()"
-    @click="item.action"
+    @click="item.doAction"
     v-key2click
   >
     <span v-if="item.hasTitle" :class="item.getTitleCss()">

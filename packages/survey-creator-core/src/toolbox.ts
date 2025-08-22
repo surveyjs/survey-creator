@@ -592,9 +592,11 @@ export class QuestionToolbox
       title: surveyLocalization.getString("ed.toolboxSearch"),
       showTitle: false,
       action: () => {
+        if (!this.enabled) return;
         (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
-      }
+      },
+      enabled: this.enabled
     });
     this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
@@ -613,13 +615,14 @@ export class QuestionToolbox
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper<IQuestionToolboxItem>((pointerDownEvent, _targets, itemModel) => {
+      if (!this.enabled) return;
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     }, false);
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
-      if (!this.creator.readOnly) {
+      if (!this.creator.readOnly && this.enabled) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
@@ -689,7 +692,9 @@ export class QuestionToolbox
       .append("svc-toolbox--flyout-to-compact-running", this.isFlyoutToCompactRunning)
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
-      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
+      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll")
+      .append("svc-toolbox--disabled", !this.enabled)
+      .toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
@@ -1174,6 +1179,14 @@ export class QuestionToolbox
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
+  @property({
+    defaultValue: true,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      target.items.forEach(i => i.enabled = val);
+      target.searchManager.enabled = val;
+      target.searchItem.enabled = val;
+    }
+  }) enabled: boolean;
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {

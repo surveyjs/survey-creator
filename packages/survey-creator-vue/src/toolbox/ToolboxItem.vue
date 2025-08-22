@@ -6,7 +6,7 @@
     :title="item.tooltip"
     :class="item.renderedCss"
     @click="viewModel.click($event)"
-    v-key2click
+    v-key2click="{ disableTabStop: !viewModel.toolboxItem.enabled }"
   >
     <span class="svc-toolbox__item-container">
       <SvComponent
