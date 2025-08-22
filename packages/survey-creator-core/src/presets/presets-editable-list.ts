@@ -1,4 +1,4 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel, Action, IAction } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -24,17 +24,24 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     //   this.fillAutoName(this.getMatrix(model), "name");
     // }
   }
-  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (this.isItemsMatrix(options.question)) {
-      const survey = this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
-      const isDefault = options.row.getQuestionByName("isDefault");
-      if (survey) {
-        const name = survey.getQuestionByName("name");
-        if (name && isDefault) name.readOnly = isDefault.value;
-      }
+  private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const resetAction = {
+      id: "reset-to-default",
+      title: "Reset to default",
+      css: "sps-action--grow",
+      innerCss: "sps-btn sps-btn--secondary-alert",
+      visibleIndex: 15,
+      action: (a)=>{ creator.notify(a.title); }
+    };
+    const survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
+    const isDefault = row.getQuestionByName("isDefault");
+    if (survey) {
+      const name = survey.getQuestionByName("name");
+      if (name && isDefault) name.readOnly = isDefault.value;
     }
   }
-  private resetItems(model: SurveyModel, row: MatrixDynamicRowModel) {
+
+  private resetItem(model: SurveyModel, row: MatrixDynamicRowModel) {
   }
   protected restoreItems(questionItems: QuestionMatrixDynamicModel, questionHiddenItems: QuestionMatrixDynamicModel, rowIndex: number) {
     const rowData = questionHiddenItems.value[rowIndex];
@@ -61,22 +68,32 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
           location: "start",
           enabled: false
         });
-        options.actions.push({
-          id: "reset-to-default",
-          iconName: "icon-reset",
-          location: "end",
-          visibleIndex: 15,
-          action: ()=>{ this.resetItems(model, options.row); }
-        });
-
       }
+      const resetAction = {
+        id: "reset-to-default",
+        iconName: "icon-reset",
+        title: "Reset to defaults",
+        location: "end",
+        visibleIndex: 15,
+        action: ()=>{ this.resetItem(model, options.row); }
+      };
+      const resetActionForRow = { ...resetAction, ...{ title: undefined } };
+      options.actions.push(resetActionForRow);
+
       options.question.cssClasses.detailIconExpandedId = "icon-edit";
       options.question.cssClasses.detailIconId = "icon-edit";
-
+      options.actions.push({
+        id: "edit-category",
+        iconName: "icon-edit",
+        location: "end",
+        visibleIndex: 13,
+        action: ()=>{ this.editItem(model, creator, options.question, options.row); }
+      });
       options.actions.forEach(a => {
         if (a.id == "show-detail") {
           a.location = "end";
           a.iconName = "icon-edit",
+          a.visible = false,
           a.visibleIndex = 10;
         }
         if (a.id == "remove-row") {

@@ -16,9 +16,9 @@ export var presetsCss = {
   bodyNavigationButton: "",
   completedPage: "sps-completedpage",
   navigation: {
-    complete: "sps-btn sps-footer__complete-btn",
-    prev: "sps-btn sps-footer__prev-btn",
-    next: "sps-btn sps-footer__next-btn",
+    complete: "sps-btn sps-btn--primary-brand sps-footer__complete-btn",
+    prev: "sps-btn sps-btn--secondary-brand sps-footer__prev-btn",
+    next: "sps-btn sps-btn--primary-brand sps-footer__next-btn",
     start: "sps-btn sps-footer__start-btn",
     preview: "sps-btn sps-footer__preview-btn",
     edit: "sps-btn sps-footer__edit-btn"

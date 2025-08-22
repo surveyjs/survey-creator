@@ -27,6 +27,12 @@
   .sps-root-modern {
     height: initial;
   }
+
+  .sv-action-bar {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
   .sps-page {
     padding: 0;
     gap: var(--sjs2-spacing-x200, 16px);

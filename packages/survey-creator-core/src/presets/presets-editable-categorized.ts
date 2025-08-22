@@ -1,4 +1,4 @@
-import { Action, FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { Action, FunctionFactory, Helpers, IAction, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -30,8 +30,20 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     //   this.fillAutoName(this.getMatrix(model), "name");
     // }
   }
-  private editCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
-    const survey = this.showDetailPanelInPopup(this.getQuestionCategories(model), row, model.rootElement, false, "auto");
+  private editCategory(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const resetAction = {
+      id: "reset-to-default",
+      title: "Reset to default",
+      css: "sps-action--grow",
+      innerCss: "sps-btn sps-btn--secondary-alert",
+      visibleIndex: 15,
+      action: (a)=>{ creator.notify(a.title); }
+    };
+    const survey = this.showDetailPanelInPopup(question, row, model.rootElement, {
+      hideDetailPanel: false,
+      width: "auto",
+      actions: [new Action(resetAction)]
+    });
     if (survey) {
       const category = survey.getQuestionByName("category");
       const isDefault = row.getQuestionByName("isDefault");
@@ -111,21 +123,21 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
           enabled: false
         });
       }
-
-      options.actions.push({
+      const resetAction = {
         id: "reset-to-default",
         iconName: "icon-reset",
         location: "end",
         visibleIndex: 15,
         action: ()=>{ this.resetCategory(model, options.row); }
-      });
+      };
+      options.actions.push(resetAction);
 
       options.actions.push({
         id: "edit-category",
         iconName: "icon-edit",
         location: "end",
         visibleIndex: 13,
-        action: ()=>{ this.editCategory(model, options.row); }
+        action: ()=>{ this.editCategory(model, creator, options.question, options.row); }
       });
       options.actions.forEach(a => {
         if (a.id == "show-detail") {

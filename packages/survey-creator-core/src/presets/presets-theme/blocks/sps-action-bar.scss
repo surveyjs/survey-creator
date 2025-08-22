@@ -11,6 +11,14 @@
   white-space: nowrap;
 }
 
+.sps-action {
+  display: flex;
+}
+
+.sps-action--grow {
+  flex-grow: 1;
+}
+
 .sps-btn {
   appearance: none;
   border: none;
@@ -35,7 +43,8 @@
 
   @include sjs2--typography--default-strong;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--sjs2-color-bg-brand-primary-dim, #15987e);
   }
   &:active {
@@ -43,12 +52,27 @@
   }
 }
 
-.sps-footer__prev-btn {
+.sps-btn--secondary-brand {
   background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
   color: var(--sjs2-color-fg-brand-primary, #19b394);
   &:hover,
   &:focus {
     background: var(--sjs2-color-bg-brand-secondary-dim, rgba(25, 179, 148, 0.15));
+  }
+  &:active{
+     background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
+  }
+}
+
+.sps-btn--secondary-alert {
+  background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.10));
+  color: var(--sjs2-color-fg-alert-primary, #C30935);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-alert-secondary-dim, rgba(229, 10, 62, 0.15));
+  }
+  &:active{
+    background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.10));
   }
 }
 

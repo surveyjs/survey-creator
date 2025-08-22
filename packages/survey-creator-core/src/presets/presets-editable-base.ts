@@ -1,4 +1,4 @@
-import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel } from "survey-core";
+import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, ActionBarCssClasses } from "survey-core";
 import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 
@@ -160,7 +160,8 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, hideDetailPanel = true, width = "") {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {hideDetailPanel?: boolean, width?: string, actions?: IAction[]}) {
+    const hideDetailPanel = options.hideDetailPanel !== false;
     if (settings.showDialog) {
       const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
       if (hideDetailPanel) row.hideDetailPanel();
@@ -190,12 +191,22 @@ export class CreatorPresetEditableBase {
         title: "Edit",
         displayMode: "popup"
       }, rootElement);
-      if (!width) {
+      if (!options.width) {
         if (survey.calculatedWidthMode == "responsive") {
           popupModel.width = "100%";
         }
       } else {
-        popupModel.width = width;
+        popupModel.width = options.width;
+      }
+
+      const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
+      defaultActionBarCss.item = "sps-btn";
+      popupModel.footerToolbar.cssClasses = defaultActionBarCss;
+      popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
+      popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
+
+      if (options.actions) {
+        popupModel.footerToolbar.actions.unshift(...options.actions);
       }
       return survey;
     }
