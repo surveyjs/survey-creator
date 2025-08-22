@@ -147,8 +147,8 @@
   text-overflow: ellipsis;
 }
 
-.svc-toolbox__tool:hover,
-.svc-toolbox__tool:focus-within {
+.svc-toolbox__tool:hover:not(.svc-toolbox__tool--disabled),
+.svc-toolbox__tool:focus-within:not(.svc-toolbox__tool--disabled) {
   .svc-toolbox__item-banner {
     display: var(--ctr-toolbox-item-banner-display, flex);
     opacity: 1;
@@ -172,9 +172,11 @@
   }
 }
 
-.svc-toolbox__item:focus,
-.svc-toolbox__tool--has-subitems:hover > .svc-toolbox__tool-content > .svc-toolbox__item,
-.svc-toolbox__item:hover {
+.svc-toolbox__tool:not(.svc-toolbox__tool--disabled) .svc-toolbox__item:focus,
+.svc-toolbox__tool--has-subitems:hover:not(.svc-toolbox__tool--disabled)
+  > .svc-toolbox__tool-content
+  > .svc-toolbox__item,
+.svc-toolbox__tool:not(.svc-toolbox__tool--disabled) .svc-toolbox__item:hover {
   overflow: visible;
   background-color: var(--ctr-toolbox-item-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
 
@@ -268,7 +270,7 @@
   }
 }
 
-.svc-toolbox__tool.svc-toolbox__tool--pressed {
+.svc-toolbox__tool.svc-toolbox__tool--pressed:not(.svc-toolbox__tool--disabled) {
   .svc-toolbox__item {
     background: var(--ctr-toolbox-item-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
     box-shadow: var(--ctr-toolbox-item-shadow-pressed-offset-x, 0px)

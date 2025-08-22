@@ -27,17 +27,15 @@ export class ToolboxToolViewModel extends Base {
         popup.isFocusedContent = false;
       }
     }
+    item.enabled = true;
   }
 
   public click = (event) => {
     if (!this.allowAdd) return;
+    if (!this.toolboxItem.enabled) return;
     this.creator.clickToolboxItem(this.item.json);
     this.hidePopup();
   };
-
-  public getTabIndex():number {
-    return this.toolboxItem.enabled ? 0 : -1;
-  }
 
   public get toolboxItem() {
     return this.item as QuestionToolboxItem;
