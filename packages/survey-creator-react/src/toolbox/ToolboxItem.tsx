@@ -171,7 +171,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
           :
           <span className="svc-toolbox__item-title">{this.item.title}</span>
         )}
-      </div>, undefined, undefined, this.model.getTabIndex());
+      </div>, undefined, { disableTabStop: !this.model.toolboxItem.enabled });
     return (
       <>
         {item}
