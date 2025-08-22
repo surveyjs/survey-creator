@@ -280,7 +280,8 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               ],
               detailPanelMode: "underRow",
               detailElements: [
-                { type: "text", name: "category", title: "Category", isRequired: true, visible: false },
+                { type: "text", name: "category", title: "Name", isRequired: true, visible: false },
+                { type: "text", name: "title", title: "Title", visible: false },
                 { type: "text", name: "iconName", title: "Icon Name", visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
