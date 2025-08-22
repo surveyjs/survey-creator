@@ -27,7 +27,9 @@ export class ToolboxToolViewModel extends Base {
         popup.isFocusedContent = false;
       }
     }
-    item.enabled = true;
+    if (typeof item.enabled === "undefined") {
+      item.enabled = true;
+    }
   }
 
   public click = (event) => {
