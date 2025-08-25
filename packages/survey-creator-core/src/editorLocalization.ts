@@ -41,6 +41,7 @@ export class EditorLocalization {
       this.reset();
     }
   }
+  public get locale(): string { return this.currentLocale || this.defaultLocale; }
   public get presetStrings(): any { return this.presetStringsValues; }
   public set presetStrings(val: any) {
     this.presetStringsValues = val;

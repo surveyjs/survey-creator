@@ -827,9 +827,12 @@ test("ICustomQuestionTypeConfiguration.title should support a localizable, Bug#5
   });
   const creator = new CreatorTester({ questionTypes: ["text", "checkbox"] });
   const item = creator.toolbox.getItemByName("newquestion") as QuestionToolboxItem;
+  expect(item.titles).toBeTruthy();
   expect(item.title).toBe("New Question en");
+  expect(item.locTitle.renderedHtml).toBe("New Question en");
   creator.locale = "de";
   expect(item.title).toBe("New Question de");
+  expect(item.locTitle.renderedHtml).toBe("New Question de");
   ComponentCollection.Instance.clear();
 });
 
@@ -885,4 +888,23 @@ test("Update subitems on locale change, Bug#6014", (): any => {
   const text = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
   expect(text.getSubitem("color").locTitle.renderedHtml).toBe("Farbe");
   creator.locale = "en";
+});
+test("Update subitems on locale change, Bug#6014", (): any => {
+  const creator = new CreatorTester({ questionTypes: ["text"] });
+  creator.toolbox.addItem({ name: "test1", json: {}, titles: { de: "Test-de", en: "Test" } });
+  expect(creator.toolbox.getItemByName("test1").title).toBe("Test");
+  creator.locale = "de";
+  expect(creator.toolbox.getItemByName("test1").title).toBe("Test-de");
+
+  creator.toolbox.addItem({ name: "test2", json: {}, titles: { de: "Test2-de", default: "Test2" } });
+  expect(creator.toolbox.getItemByName("test2").title).toBe("Test2-de");
+  creator.locale = "en";
+  expect(creator.toolbox.getItemByName("test2").title).toBe("Test2");
+  creator.toolbox.addItem({ name: "test3", json: {}, title: "Test3" });
+  expect(creator.toolbox.getItemByName("test3").title).toBe("Test3");
+  creator.locale = "de";
+  expect(creator.toolbox.getItemByName("test3").title).toBe("Test3");
+  creator.locale = "en";
+  creator.toolbox.addItem({ name: "test4", json: {} });
+  expect(creator.toolbox.getItemByName("test4").title).toBe("test4");
 });
