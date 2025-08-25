@@ -152,7 +152,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
       const iconName = options.question.value?.filter(v => v.category == options.row.getValue("category"))[0]?.iconName;
       if (iconName) {
-        options.actions.push(super.createIconAction(iconName, "sps-matrix-row-icon"));
+        options.actions.push(super.createIconAction(iconName));
       }
 
       const resetAction = super.createResetAction(model, options.row, () => { this.resetCategory(model, options.row); });
