@@ -431,13 +431,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     (defaultJsons[type] || []).forEach((djson) => {
       if (this.jsonIsCorresponded(djson)) {
         newJson = { ...json };
-        const objJson = this.element.toJSON();
-        const cleanJson = this.cleanDefaultsFromJson(type, djson);
         Object.keys(djson).forEach(p => {
-          if (p != "type" && !newJson[p]) newJson[p] = undefined;
-        });
-        Object.keys(json || {}).forEach(p => {
-          if (p != "type" && !(!objJson[p] || cleanJson[p])) newJson[p] = undefined;
+          if (p != "type" && newJson[p] === undefined) newJson[p] = undefined;
         });
       }
     });
