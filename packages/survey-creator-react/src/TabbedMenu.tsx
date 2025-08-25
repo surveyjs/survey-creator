@@ -138,7 +138,7 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
         aria-selected={item.active}
         aria-controls={"scrollableDiv-" + item.id}
         className={item.getRootCss()}
-        onClick={() => item.action(item)}
+        onClick={() => item.doAction()}
       >
         {item.hasTitle ? <span className={item.getTitleCss()}>{item.title}</span> : null}
         {item.hasIcon ? <SvgIcon iconName={item.iconName} className={item.getIconCss()} size={"auto"} title={item.tooltip || item.title}></SvgIcon> : null}

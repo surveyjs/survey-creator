@@ -39,7 +39,7 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
           aria-label={this.model.filterStringPlaceholder}
           placeholder={this.model.filterStringPlaceholder}
           value={this.state.filterString}
-          onChange={onChange}></input>
+          onChange={onChange} tabIndex={this.model.getTabIndex()}></input>
         <div className="svc-search__toolbar">
           <div className="svc-search__toolbar-counter">{(this.model as any).matchCounterText}</div>
           <SurveyActionBar model={this.model.searchActionBar}></SurveyActionBar>

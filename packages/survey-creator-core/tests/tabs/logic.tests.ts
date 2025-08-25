@@ -820,6 +820,36 @@ test("LogicItemEditorUI: remove setValueIf & setValueExpression, Bug#7075", () =
   expect(survey.getQuestionByName("q2").setValueIf).toBeFalsy();
   expect(survey.getQuestionByName("q2").setValueExpression).toBeFalsy();
 });
+test("LogicItemEditorUI: remove setValueIf & setValueExpression, Bug#7097", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  logic.itemEditor.panels[0].getQuestionByName("logicTypeName").value = "question_setValue";
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q2";
+  logic.itemEditor.panels[0].getQuestionByName("setValueExpression").value = "abc";
+  logic.saveEditableItem();
+  expect(q2.setValueIf).toBe("{q1} = 1");
+  expect(q2.setValueExpression).toBe("abc");
+
+  logic.editItem(logic.items[0]);
+  expect(logic.expressionEditor.text).toBe("{q1} = 1");
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("question_setValue");
+  expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
+  expect(panel.getQuestionByName("setValueExpression").value).toBe("abc");
+
+  panel.getQuestionByName("setValueExpression").value = "abc!";
+  logic.saveEditableItem();
+  expect(q2.setValueIf).toBe("{q1} = 1");
+  expect(q2.setValueExpression).toBe("abc!");
+});
 test("Create setValue trigger in logic", () => {
   PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());
   var survey = new SurveyModel({
