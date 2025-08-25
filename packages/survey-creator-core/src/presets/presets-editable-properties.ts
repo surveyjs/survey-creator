@@ -232,7 +232,8 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
         },
         {
           "name": "title"
-        }
+        },
+        { name: "isModified", type: "boolean", defaultValue: true, visible: false }
       ],
       detailPanelMode: "underRow",
       detailElements: [

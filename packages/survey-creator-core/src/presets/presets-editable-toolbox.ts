@@ -38,7 +38,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           "name": "title"
         },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        { name: "isDefault", type: "boolean", defaultValue: false, visible: false },
+        { name: "isModified", type: "boolean", defaultValue: true, visible: false }
       ],
       detailPanelMode: "underRow",
       detailElements: [

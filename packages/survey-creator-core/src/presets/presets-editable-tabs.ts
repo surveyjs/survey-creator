@@ -27,7 +27,8 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
         {
           "name": "title"
         },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        { name: "isDefault", type: "boolean", defaultValue: false, visible: false },
+        { name: "isModified", type: "boolean", defaultValue: true, visible: false }
       ],
       detailPanelMode: "underRow",
       detailElements: [
@@ -177,6 +178,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     activeQ.choices = this.defaultItems.map(t => new ItemValue(t.name, t.title));
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    super.updateOnValueChangedCore(model, name);
     if (name === this.nameItems) {
       const val = model.getValue(name) || [];
       model.getQuestionByName(this.nameActiveTab).visible = val.length > 1;
