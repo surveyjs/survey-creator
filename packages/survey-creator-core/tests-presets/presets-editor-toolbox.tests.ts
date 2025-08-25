@@ -241,6 +241,22 @@ test("Preset edit, toolbox - reset category", () => {
   expect(hiddenQuestion.value.map(i => i.name)).toEqual(["comment", "paneldynamic"]);
 });
 
+test("Preset edit, toolbox - reset item", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  const itemQuestion = survey.getQuestionByName("toolbox_items");
+  const itemsValue = itemQuestion.value;
+
+  itemsValue.filter(c => c.name == "text")[0].title = "TextChanged";
+
+  const row = itemQuestion.visibleRows.filter(r => r.getValue("name") == "text")[0];
+  const renderedRow = itemQuestion.renderedTable.rows.filter(r => r.row == row)[0];
+  renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "reset-to-default")[0].action();
+
+  expect(itemsValue.filter(c => c.name == "text")[0].title).toEqual("Single-Line Input");
+});
+
 test("Preset edit, toolbox - default names in categories", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
@@ -339,11 +355,17 @@ test("Preset edit, toolbox - edit item", () => {
     itemsQuestion.addRow();
     expect(itemsQuestion.visibleRows).toHaveLength(2);
 
-    matrixQuestion.visibleRows[0].showDetailPanel();
+    const renderedRow = itemsQuestion.renderedTable.rows.filter(r => r.row == itemsQuestion.visibleRows[0])[0];
+    const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+    editItemAction.action();
+
     const nameQuestion = popupSurvey!.getQuestionByName("name");
     expect(nameQuestion.readOnly).toBeTruthy();
 
-    matrixQuestion.visibleRows[1].showDetailPanel();
+    const renderedRow2 = matrixQuestion.renderedTable.rows.filter(r => r.row == matrixQuestion.visibleRows[1])[0];
+    const editItemAction2 = renderedRow2.cells[renderedRow2.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+    editItemAction2.action();
+
     const nameQuestion2 = popupSurvey!.getQuestionByName("name");
     expect(nameQuestion2.readOnly).toBeFalsy();
 

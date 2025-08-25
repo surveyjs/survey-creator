@@ -44,6 +44,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     }
     this.model.model.currentPageNo = this.currentPresetIndex;
     this.designerPlugin.activateSidebar();
+    this.model.model.onComplete.add(() => this.hidePresets());
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [

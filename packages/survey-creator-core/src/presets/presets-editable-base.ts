@@ -199,14 +199,16 @@ export class CreatorPresetEditableBase {
         popupModel.width = options.width;
       }
 
-      const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-      defaultActionBarCss.item = "sps-btn";
-      popupModel.footerToolbar.cssClasses = defaultActionBarCss;
-      popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
-      popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
+      if (popupModel.footerToolbar) {
+        const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
+        defaultActionBarCss.item = "sps-btn";
+        popupModel.footerToolbar.cssClasses = defaultActionBarCss;
+        popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
+        popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
 
-      if (options.actions) {
-        popupModel.footerToolbar.actions.unshift(...options.actions);
+        if (options.actions) {
+          popupModel.footerToolbar.actions.unshift(...options.actions);
+        }
       }
       return survey;
     }

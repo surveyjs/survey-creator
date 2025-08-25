@@ -246,6 +246,7 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   question.value = question.value.filter(r => ["boolean", "text", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
   const etalon: ICreatorPresetData = {
     toolbox: {
+      categories: [],
       definition: [{ name: "text" }, { name: "checkbox" }, { name: "boolean" }]
     }
   };

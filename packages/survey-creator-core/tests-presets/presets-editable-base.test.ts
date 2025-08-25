@@ -65,25 +65,35 @@ describe("CreatorPresetEditableBase", () => {
 
   describe("showDetailPanelInPopup", () => {
     it("should hide detail panel and create popup with survey", () => {
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: jest.fn() };
+      });
+
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
 
       // Assert
       expect(mockRow.isDetailPanelShowing).toBeFalsy();
       expect(mockShowDialog).toHaveBeenCalledWith(
         expect.objectContaining({
           componentName: "survey",
-          cssClass: "svc-property-editor svc-creator-popup",
-          title: "Detail",
-          displayMode: "popup"
+          cssClass: "sps-popup svc-property-editor svc-creator-popup",
+          title: "Edit",
+          displayMode: "popup",
+          data: expect.any(Object),
+          onApply: expect.any(Function),
+          onCancel: expect.any(Function)
         }),
         mockRootElement
       );
     });
 
     it("should create survey with correct configuration", () => {
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: jest.fn() };
+      });
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
 
       // Assert
       const dialogOptions = mockShowDialog.mock.calls[0][0];
@@ -106,7 +116,7 @@ describe("CreatorPresetEditableBase", () => {
       });
 
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
       const survey = mockShowDialog.mock.calls[0][0].data.survey;
       survey.data = newValue;
 
@@ -126,7 +136,7 @@ describe("CreatorPresetEditableBase", () => {
       });
 
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
       const survey = mockShowDialog.mock.calls[0][0].data.survey;
       survey.data = { question1: "" }; // Empty value will fail validation
 
@@ -146,7 +156,7 @@ describe("CreatorPresetEditableBase", () => {
       });
 
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
 
       // Assert
       expect(onCancelCallback).toBeDefined();

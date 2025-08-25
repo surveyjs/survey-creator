@@ -89,7 +89,17 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
 
-  private resetItem(model: SurveyModel, row: MatrixDynamicRowModel) {
+  private resetItem(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const name = row.getValue("name");
+    const defaultItems = this.defaultItems.filter(i => i.name == name)[0];
+    if (defaultItems) {
+      const value = question.value;
+      const itemRow = value.filter(v => v.name == name)[0];
+      Object.keys(itemRow).forEach((key) => {
+        itemRow[key] = defaultItems[key];
+      });
+      question.value = value;
+    }
   }
   protected restoreItems(questionItems: QuestionMatrixDynamicModel, questionHiddenItems: QuestionMatrixDynamicModel, rowIndex: number) {
     const rowData = questionHiddenItems.value[rowIndex];
@@ -112,7 +122,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         options.actions.push(this.createIconAction(iconName));
       }
 
-      const resetAction = this.createResetAction(model, options.row, () => { this.resetItem(model, options.row); });
+      const resetAction = this.createResetAction(model, options.row, () => { this.resetItem(model, options.question, options.row); });
       options.actions.push(resetAction);
 
       options.question.cssClasses.detailIconExpandedId = "icon-edit";

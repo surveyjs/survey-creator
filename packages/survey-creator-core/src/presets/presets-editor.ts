@@ -102,19 +102,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.css = presetsCss;
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
-    model.showCompleteButton = false;
     model.showNavigationButtons = false;
-    model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
-      model.setPropertyValue("isShowNextButton", true);
-    });
-    const nextButton = model.navigationBar.getActionById("sv-nav-next");
-    nextButton.action = (): void => {
-      if (!model.isLastPage) {
-        model.nextPageUIClick();
-      } else {
-        model.currentPageNo = 0;
-      }
-    };
+    model.completeText = "Save & Exit";
+    model.pagePrevText = "Back";
 
     editablePresets.forEach(item => item.setupQuestions(model, this));
     if (!this.defaultJsonValue) {
