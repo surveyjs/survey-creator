@@ -64,15 +64,20 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
 
   private editCategory(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    let survey;
     const resetAction = {
       id: "reset-to-default",
       title: "Reset to default",
       css: "sps-action--grow",
       innerCss: "sps-btn sps-btn--secondary-alert",
       visibleIndex: 15,
-      action: (a)=>{ creator.notify(a.title); }
+      action: (a)=>{
+        const defaultItem = this.defaultItems.filter(i => i.name == survey.getQuestionByName("category").value)[0];
+        survey.data = defaultItem;
+        creator.notify(a.title);
+      }
     };
-    const survey = this.showDetailPanelInPopup(question, row, model.rootElement, {
+    survey = this.showDetailPanelInPopup(question, row, model.rootElement, {
       hideDetailPanel: false,
       width: "auto",
       actions: [new Action(resetAction)]

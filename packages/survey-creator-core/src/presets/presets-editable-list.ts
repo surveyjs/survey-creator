@@ -84,17 +84,22 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     // }
   }
   private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    let survey;
     const resetAction = {
       id: "reset-to-default",
       title: "Reset to default",
       css: "sps-action--grow",
       innerCss: "sps-btn sps-btn--secondary-alert",
       visibleIndex: 15,
-      action: (a)=>{ creator.notify(a.title); }
+      action: (a)=>{
+        const defaultItem = this.defaultItems.filter(i => i.name == survey.getQuestionByName("name").value)[0];
+        survey.data = defaultItem;
+        creator.notify(a.title);
+      }
     };
-    const survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
-    const isDefault = row.getQuestionByName("isDefault");
+    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
     if (survey) {
+      const isDefault = row.getQuestionByName("isDefault");
       const name = survey.getQuestionByName("name");
       if (name && isDefault) name.readOnly = isDefault.value;
     }
