@@ -6,45 +6,6 @@
 // fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 // });
 
-// const json = {
-//   showQuestionNumbers: "on",
-//   "logoPosition": "right",
-//   "pages": [
-//     {
-//       "name": "page1",
-//       "elements": [
-//         {
-//           "type": "text",
-//           "name": "question1",
-//           "title": "Question 1"
-//         },
-//         {
-//           "type": "radiogroup",
-//           "name": "question3",
-//           "choices": [
-//             "Item 1",
-//             "Item 2",
-//             "Item 3"
-//           ]
-//         },
-//         {
-//           "type": "checkbox",
-//           "name": "question2",
-//           "title": {
-//             "default": "Question 3",
-//             "ru": "Вопрос 3"
-//           },
-//           "choices": [
-//             "Item 1",
-//             "Item 2",
-//             "Item 3"
-//           ]
-//         }
-//       ]
-//     }
-//   ]
-// };
-
 // test("strings view", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(2560, 1440);

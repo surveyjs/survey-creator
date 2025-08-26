@@ -103,11 +103,21 @@ editorLocalization.defaultLocale = "fr";
 
 ## Localize Survey Contents
 
-If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select a default language different from English:
+If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select different languages and provide translations for them:
 
 <img src="./images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Default Language dropdown" width="50%">
 
-If you want to restrict the list of available languages, specify the `supportedLocales` array:
+The default language is English, so text properties that support translations (such as `title`, `description`, etc.) are supposed to store English strings. To use another language as the default (for example, if surveys are primarily authored in German or French), set the `surveyLocalization.defaultLocale` property. Text properties will then store strings in the specified language.
+
+```js
+Survey.surveyLocalization.defaultLocale = "fr";
+
+// In modular applications
+import { surveyLocalization } from 'survey-core';
+surveyLocalization.defaultLocale = "fr";
+```
+
+To limit the list of languages available for translation in the Survey Creator UI, specify the `surveyLocalization.supportedLocales` array:
 
 ```js
 Survey.surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];

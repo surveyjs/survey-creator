@@ -13,6 +13,10 @@ resources:
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/azure-pipelines-repo-dont-remove-please
+    - repository: Utils
+      type: github
+      endpoint: github.com_surveyjsdeveloper
+      name: surveyjs/survey-utils
 
 trigger:
   batch: true
@@ -30,7 +34,12 @@ jobs:
   - job: CreatorV2Core
     steps:
       - checkout: self
+        persistCredentials: true
       - checkout: Service
+        persistCredentials: true
+        clean: true
+        fetchDepth: 1
+      - checkout: Utils
         persistCredentials: true
         clean: true
         fetchDepth: 1
@@ -238,6 +247,35 @@ jobs:
       #     git pull origin V2
       #     git push origin V2
       #   displayName: "git surveyjs/service push updated V2 docs"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-utils
+          npm install
+        displayName: "NPM install survey-utils"
+    
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-utils
+          npm run build
+        displayName: "survey-utils build"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-utils
+          node ./dist/translateCreator.js
+        displayName: "survey-utils translate creator"
+
+      - powershell: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          $env:GIT_REDIRECT_STDERR = '2>&1'
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
+          git pull origin master
+          git fetch origin master --tags --force
+          git checkout master
+          git add packages/survey-creator-core/src/localization
+          git commit -m "updated survey-creator translation [azurepipelines skip]"
+          git pull origin master
+          git push origin master
+        displayName: "Creator - push updated translation to github"
 
   - job: CreatorV2React
     dependsOn: CreatorV2Core

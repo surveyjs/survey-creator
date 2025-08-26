@@ -1,7 +1,7 @@
 <ng-template #template>
   <div
     [class]="model.getRootCss()"
-    (click)="model.action()"
+    (click)="model.doAction()"
     [key2click]
     role="tab"
     [attr.id]="'tab-' + model.id"

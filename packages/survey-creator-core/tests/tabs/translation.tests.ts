@@ -1124,7 +1124,7 @@ test("localize placeholders", () => {
   const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
   expect(surveyProps.name).toEqual("survey_props0");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Translation...");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод...");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод..."); // eslint-disable-line i18n/no-russian-character
   const pagePanel = <PanelModel>page.elements[11];
   expect(pagePanel.elements).toHaveLength(5);
   expect(pagePanel.elements[0].name).toEqual("page1_props0");
@@ -1140,7 +1140,7 @@ test("localize placeholders", () => {
   const cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
   expect(cellQuestion1.placeholder).toEqual("Translation...");
   expect(cellQuestion1.value).toEqual(null);
-  expect(cellQuestion2.placeholder).toEqual("Перевод...");
+  expect(cellQuestion2.placeholder).toEqual("Перевод..."); // eslint-disable-line i18n/no-russian-character
   expect(cellQuestion2.value).toEqual(null);
 
   const survey_props0 = <QuestionMatrixDropdownModel>page.elements[0];
@@ -1157,7 +1157,7 @@ test("localize placeholders", () => {
   const surveyCell2 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[1].question;
   expect(surveyCell1.placeholder).toEqual("Edit");
   expect(surveyCell1.value).toEqual(null);
-  expect(surveyCell2.placeholder).toEqual("Редактирование");
+  expect(surveyCell2.placeholder).toEqual("Редактирование"); // eslint-disable-line i18n/no-russian-character
   expect(surveyCell2.value).toEqual(null);
 });
 test("localize placeholders, default locale is 'fr'", () => {

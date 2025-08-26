@@ -36,7 +36,7 @@ test.describe(title, () => {
               "name": "question2",
               "title": {
                 "default": "Question 3",
-                "ru": "Вопрос 3"
+                "ru": "Вопрос 3" // eslint-disable-line i18n/no-russian-character
               },
               "choices": [
                 "Item 1",

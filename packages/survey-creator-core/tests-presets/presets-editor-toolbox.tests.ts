@@ -196,23 +196,23 @@ test("Preset edit, toolbox - switch to categories mode", () => {
 
   survey.getQuestionByName("toolbox_mode").value = "categories";
   const categQuestion = survey.getQuestionByName("toolbox_categories");
-  expect(categQuestion.value.filter(с => с.category == "text")[0].items.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test");
+  expect(categQuestion.value.filter(c => c.category == "text")[0].items.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test");
 
   survey.getQuestionByName("toolbox_mode").value = "items";
   allItemsValue.splice(0, 8);
   allItemsQuestion.value = allItemsValue;
   survey.getQuestionByName("toolbox_mode").value = "categories";
-  expect(categQuestion.value.filter(с => с.category == "choice")[0].items.map(i => i.name)).toStrictEqual(["imagepicker", "ranking"]);
+  expect(categQuestion.value.filter(c => c.category == "choice")[0].items.map(i => i.name)).toStrictEqual(["imagepicker", "ranking"]);
 
   survey.getQuestionByName("toolbox_mode").value = "items";
   allItemsValue.push({ name: "custom" });
   survey.getQuestionByName("toolbox_mode").value = "categories";
-  expect(categQuestion.value.filter(с => с.category == "general")[0].items.map(i => i.name)).toStrictEqual(["custom"]);
+  expect(categQuestion.value.filter(c => c.category == "general")[0].items.map(i => i.name)).toStrictEqual(["custom"]);
 
   survey.getQuestionByName("toolbox_mode").value = "items";
   allItemsValue.push({ name: "custom2" });
   survey.getQuestionByName("toolbox_mode").value = "categories";
-  expect(categQuestion.value.filter(с => с.category == "general")[0].items.map(i => i.name)).toStrictEqual(["custom", "custom2"]);
+  expect(categQuestion.value.filter(c => c.category == "general")[0].items.map(i => i.name)).toStrictEqual(["custom", "custom2"]);
 });
 
 test("Preset edit, toolbox - reset category", () => {

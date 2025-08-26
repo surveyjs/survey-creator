@@ -2696,6 +2696,39 @@ test("convertInputType, hide it for readOnly creator", (): any => {
   questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
 });
+test("convertInputType styles with event", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "boolean", name: "q3" },
+    ]
+  };
+
+  creator.onElementGetActions.add((sender, options) => {
+    if (options.element.getType() === "rating") {
+      const convertInputTypeActionIndex = options.actions.findIndex(
+        (x) => x.id === "convertInputType"
+      );
+      if (!!convertInputTypeActionIndex) {
+        options.actions.splice(convertInputTypeActionIndex, 1);
+      }
+    }
+  });
+
+  let questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeFalsy();
+  expect(questionModel.getActionById("convertInputType").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertInputType").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q3"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+});
 test("convertInputType, check locale", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

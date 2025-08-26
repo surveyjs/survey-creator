@@ -4,14 +4,14 @@ export class ColorCalculator {
   colorSettings: Array<{ colorAlpha: number, colorDelta: number }> = [];
   isInitialized = false;
 
-  initializeColorSettings(baseColor: string, dependentСolorValues: Array<string>) {
+  initializeColorSettings(baseColor: string, dependentColorValues: Array<string>) {
     const baseColorRgba = getRGBaChannelValues(baseColor);
-    dependentСolorValues.forEach((dependentСolor: string) => {
-      const dependentСolorRgba = getRGBaChannelValues(dependentСolor);
-      const colorAlpha = dependentСolorRgba[3];
+    dependentColorValues.forEach((dependentColor: string) => {
+      const dependentColorRgba = getRGBaChannelValues(dependentColor);
+      const colorAlpha = dependentColorRgba[3];
 
       const baseColorHSB = RGBToHSB(baseColorRgba[0], baseColorRgba[1], baseColorRgba[2]);
-      const colorHSB = RGBToHSB(dependentСolorRgba[0], dependentСolorRgba[1], dependentСolorRgba[2]);
+      const colorHSB = RGBToHSB(dependentColorRgba[0], dependentColorRgba[1], dependentColorRgba[2]);
       const colorDelta = baseColorHSB[2] - colorHSB[2];
       this.colorSettings.push({ colorAlpha, colorDelta });
     });

@@ -45,6 +45,52 @@ test("create locales question for edit translation", () => {
   expect(itemsGroup.groups).toHaveLength(0);
   expect(itemsGroup.items).toHaveLength(2);
 });
+test("onTranslationStringVisibility for editor, Bug#7094", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "title": "Survey title",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+        "title": "Page1 title"
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onTranslationStringVisibility.add((sender, options) => {
+    if (options.element.getType() == "survey" && options.propertyName === "title") {
+      options.visible = false;
+    } else if (options.element["name"] === "question1" && options.propertyName === "title") {
+      options.visible = false;
+    } else {
+      options.visible = true;
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model.createTranslationEditor("fr").translation;
+
+  expect(translation.root.items).toHaveLength(2);
+  expect(translation.root.groups).toHaveLength(2);
+  expect(translation.root.groups[0].name).toEqual("page1");
+  expect(translation.root.groups[0].items).toHaveLength(1);
+  expect(translation.root.groups[0].items[0].name).toEqual("title");
+  expect(translation.root.groups[1].name).toEqual("page2");
+});
 test("Apply changes on apply only", () => {
   const survey = new SurveyModel({
     pages: [
