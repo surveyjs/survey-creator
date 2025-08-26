@@ -1751,7 +1751,7 @@ export class SurveyCreatorModel extends Base
   public setSidebarEnabled(value: boolean) {
     this.setShowSidebar(value, true);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
-    designerPlugin.setSidebarEnabled(value);
+    designerPlugin?.setSidebarEnabled(value);
   }
   public setShowSidebar(value: boolean, isManualMode = false) {
     this.showSidebarValue = value;
