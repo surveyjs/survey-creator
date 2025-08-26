@@ -1,4 +1,4 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel, Action, IAction, ComputedUpdater } from "survey-core";
+import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel, Action, IAction } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -22,7 +22,6 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       id: "reset-to-default",
       iconName: "icon-reset",
       location: "end",
-      enabled: new ComputedUpdater(() => row.getQuestionByName("isModified")?.value),
       visibleIndex: 15,
       action: action
     };
@@ -65,17 +64,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     });
   }
 
-  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
-    // const question = model.getQuestionByName(name);
-    // if (this.isItemsMatrix(question as any)) {
-    //   const value = { ...question.value };
-    //   question.value?.forEach((row) => {
-    //     const defaultItem = this.defaultItems.filter(i => i.name == row.name)[0];
-    //     row.isModified = Helpers.isTwoValueEquals(row, defaultItem);
-    //   });
-    //   question.value = { value };
-    // }
-
+  protected updateOnValueChangedCore(model: SurveyModel, name: string) {
     // if (name == this.nameCategories) {
     //   this.fillAutoName(this.getQuestionCategories(model), "category");
     // }
