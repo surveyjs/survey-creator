@@ -55,7 +55,7 @@ import { SurveyQuestionEditorDefinition } from "../../src/question-editor/defini
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
 import { CreatorTester } from "../creator-tester";
-import { QuestionButtonGroupModel } from "survey-core";
+import { setupLocale } from "../../src/editorLocalization";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -3942,4 +3942,24 @@ test("Single matrix cellType property editor", () => {
   expect(questionCellType.choices[1].value).toBe("checkbox");
   expect(questionCellType.choices[0].text).toBe("Radio Buttons");
   expect(questionCellType.choices[1].text).toBe("Checkboxes");
+});
+test("The progressBarLocation property values appear unlocalized when applying a custom locale, Bug#7110", () => {
+  const localeStringsEn = {
+    pe: {
+      questionOrder: "Form field order",
+      questionTitleLocation: "Field title location",
+    },
+  };
+  setupLocale({ localeCode: "customlocale", strings: localeStringsEn });
+
+  const creator = new CreatorTester();
+  creator.locale = "customlocale";
+  const propertyGrid = new PropertyGridModelTester(creator.survey, creator);
+  const questionOrder = propertyGrid.survey.getQuestionByName("questionOrder");
+  expect(questionOrder.title).toBe("Form field order");
+  const progressBarLocation = propertyGrid.survey.getQuestionByName("progressBarLocation");
+  expect(progressBarLocation.choices[0].text).toBe("Auto");
+  expect(progressBarLocation.choices[1].text).toBe("Above the header");
+
+  creator.locale = "en";
 });
