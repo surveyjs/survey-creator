@@ -1748,6 +1748,11 @@ export class SurveyCreatorModel extends Base
       this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
     }
   }
+  public setSidebarEnabled(value: boolean) {
+    this.setShowSidebar(value, true);
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    designerPlugin.setSidebarEnabled(value);
+  }
   public setShowSidebar(value: boolean, isManualMode = false) {
     this.showSidebarValue = value;
     if (isManualMode) {

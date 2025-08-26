@@ -245,8 +245,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
     creator.toolbox.forceCompact = !active;
     creator.toolbox.isCompact = !active;
-    creator.toolbox.items.forEach(i => i.enabled = active);
     creator.readOnly = active;
+    creator.toolbox.items.forEach(i => i.enabled = active);
+    creator.toolbox.enabled = active;
+    this.propertyGridSetObj(null);
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {

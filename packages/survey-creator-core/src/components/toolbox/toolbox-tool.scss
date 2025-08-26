@@ -408,6 +408,9 @@
     align-self: flex-start;
     pointer-events: all;
   }
+  .svc-toolbox__tool--disabled {
+    pointer-events: none;
+  }
   .svc-toolbox__search-button {
     padding-inline-start: var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05));
   }

@@ -94,6 +94,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.updateTabControl();
   }
 
+  public setSidebarEnabled(value: boolean) {
+    this.tabControlModel.expandCollapseAction.enabled = value;
+  }
+
   private updateActivePage(showPlaceholder = true) {
     if (this.showOneCategoryInPropertyGrid) {
       this.setActivePage(this.creator.survey.pageCount || !showPlaceholder ? this.propertyGridTab.id : this.propertyGridPlaceholderPage.id);

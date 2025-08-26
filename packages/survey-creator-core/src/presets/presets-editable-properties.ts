@@ -344,7 +344,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
-    creator.setShowSidebar(active);
+    creator.setSidebarEnabled(active);
     this.propertyGridSetObj(active ? this.currentProperties?.getObj() : null);
   }
 

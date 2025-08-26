@@ -127,7 +127,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     }
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
-    creator.setShowSidebar(active);
+    creator.setSidebarEnabled(active);
     this.propertyGridSetObj(active ? locPreview : null);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
