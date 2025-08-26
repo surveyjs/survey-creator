@@ -20,6 +20,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   private hidePresets() {
+    this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
   }
 
@@ -35,8 +36,13 @@ export class TabPresetsPlugin implements ICreatorPlugin {
 
   public saveToFileHandler = saveToFileHandler;
 
+  private preventTabSwitch = (_, options) => {
+    options.allow = false;
+  };
+
   public activate(): void {
     extendCreatorTheme(darkTheme);
+    this.creator.onActiveTabChanging.add(this.preventTabSwitch);
     this.model = new CreatorPresetEditorModel({}, this.creator, this.defaultJson);
     this.defaultJson = { ...this.model.defaultJson };
     if (this.currentValue) {
