@@ -12,6 +12,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //}
 
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
+  public getMainElementName() : any { return this.nameMatrix; }
   protected defaultItems: any[];
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));

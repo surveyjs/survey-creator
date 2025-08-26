@@ -88,10 +88,14 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     return [this.nameItems, this.nameActiveTab];
   }
 
+  private filterTabs(tabs: any) {
+    return tabs.filter(t => t.name != "presets");
+  }
+
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     let items = model.getValue(this.nameItems);
     if (!Array.isArray(items)) return undefined;
-    const creatorTabs = defaultJson?.items || creator.getTabs();
+    const creatorTabs = this.filterTabs(defaultJson?.items || creator.getTabs());
     let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName || creatorTabs.filter(t => t.name == i.name)[0]?.iconName }));
     if (Helpers.isArraysEqual(activeTabChoices, creatorTabs, false)) {
       activeTabChoices = undefined;
@@ -112,10 +116,9 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   }
 
   protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
-    const creatorTabs = creator.getTabs();
     return {
       activeTab: creator.activeTab,
-      items: creator.getTabs(),
+      items: this.filterTabs(creator.getTabs()),
     };
   }
 
@@ -144,7 +147,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   }
 
   private getAllTabs(creator: SurveyCreatorModel) {
-    return creator.getAvailableTabs().map(t => ({ name: t.name, title: editorLocalization.getString("tabs." + t.name), iconName: t.iconName }));
+    return this.filterTabs(creator.getAvailableTabs().map(t => ({ name: t.name, title: editorLocalization.getString("tabs." + t.name), iconName: t.iconName })));
   }
 
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
