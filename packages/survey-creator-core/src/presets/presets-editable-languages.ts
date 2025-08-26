@@ -55,7 +55,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
           title: "Creator UI language",
           placeholder: editorLocalization.getLocaleName(""),
           name: this.creatorLocaleName,
-          searchEnabled: false,
+          searchEnabled: true,
           choices: this.getCreatorLocales()
         },
         {

@@ -1,18 +1,19 @@
 @use "../../../variables" as *;
 
 .sps-dropdown {
-
     display: flex;
-    padding: var(--sjs2-layout-control-formbox-medium-vertical, 4px) var(--sjs2-layout-control-formbox-medium-horizontal, 4px);
-    align-items: flex-start;
-    gap: var(--sjs2-layout-control-formbox-medium-gap, 4px);
+    padding: var(--sjs2-layout-control-formbox-medium-vertical, 4px)
+        var(--sjs2-layout-control-formbox-medium-horizontal, 4px);
+    align-items: stretch;
+    //gap: var(--sjs2-layout-control-formbox-medium-gap, 4px);
     align-self: stretch;
 
     border-radius: var(--sjs2-radius-semantic-form, 8px);
 
     .sps-dropdown__filter-string-input {
         display: flex;
-        padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px) var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
+        padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px)
+            var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
         align-items: flex-start;
         flex: 1 0 0;
         box-shadow: none;
@@ -22,9 +23,11 @@
 
 .sps-dropdown__value {
     display: flex;
-    padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px) var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
+    padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px)
+        var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
     align-items: flex-start;
     flex: 1 0 0;
+    position: relative;
 }
 
 .sps-dropdown-popup.sv-popup--menu-popup {
@@ -54,13 +57,14 @@
 
     .sd-editor-button-item {
         display: flex;
-        padding: var(--sjs2-layout-control-action-small-box-vertical, 8px) var(--sjs2-layout-control-action-small-box-horizontal, 8px);
+        padding: var(--sjs2-layout-control-action-small-box-vertical, 8px)
+            var(--sjs2-layout-control-action-small-box-horizontal, 8px);
         justify-content: center;
         align-items: center;
         gap: var(--sjs2-layout-control-action-small-box-gap, 0);
 
         border-radius: var(--sjs2-radius-semantic-form-item, 4px);
-        background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0.00));
+        background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0));
 
         &:hover,
         &:focus {
@@ -86,9 +90,20 @@
         display: flex;
         width: var(--sjs2-size-icon-medium, 24px);
         height: var(--sjs2-size-icon-medium, 24px);
-        padding: var(--sjs2-layout-control-action-small-icon-vertical, 0) var(--sjs2-layout-control-action-small-icon-horizontal, 0);
+        padding: var(--sjs2-layout-control-action-small-icon-vertical, 0)
+            var(--sjs2-layout-control-action-small-icon-horizontal, 0);
         justify-content: center;
         align-items: center;
+    }
+
+    .sd-dropdown__hint-prefix {
+        padding-left: var(--sjs2-layout-control-input-medium-content-horizontal, 12px);
+        & + .sps-dropdown__value {
+            padding-left: 0;
+            & .sps-dropdown__filter-string-input {
+                padding-left: 0;
+            }
+        }
     }
 }
 

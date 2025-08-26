@@ -187,7 +187,7 @@ export var presetsCss = {
     control: "sps-input sps-dropdown",
     controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
     controlValue: "sps-dropdown__value",
-    filterStringInput: "sps-input sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
+    filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
     other: "sps-comment sps-question__other",
     onError: "sps-input--error",
     selectWrapper: "sv-dropdown_select-wrapper sps-dropdown_select-wrapper",
