@@ -11,7 +11,7 @@ test.describe(title, () => {
     await changeToolboxScrolling(page, false);
     await changeToolboxSearchEnabled(page, false);
     await page.setViewportSize({ width: 1120, height: 900 });
-    const root = page.locator(".svc-creator__side-bar--right");
+    const root = page.locator(".svc-full-container").nth(1);
     await setJSON(page, {});
     await page.evaluate(() => {
       const creator = document.getElementById("survey-creator");
@@ -112,12 +112,12 @@ test.describe(title, () => {
   });
 
   test("Placeholder with survey header", async ({ page }) => {
-    await page.setViewportSize({ width: 1767, height: 900 });
     const designerTabContent = page.locator(".svc-tab-designer");
     await page.evaluate(() => {
       (window as any).creator.toolbox.isCompact = true;
       (window as any).creator.showHeaderInEmptySurvey = true;
     });
+    await page.setViewportSize({ width: 1767, height: 900 });
 
     await compareScreenshot(page, designerTabContent, "surface-placeholder-with-header.png");
   });
