@@ -45,6 +45,9 @@
   & > td {
     & > div {
       background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
+      .sps-input {
+        @include sjs2--typography--default-strong;
+      }
     }
   }
 }
