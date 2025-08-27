@@ -17,7 +17,7 @@ function validateToolboxJson (params) {
 FunctionFactory.Instance.register("validateToolboxJson", validateToolboxJson);
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableCaregorizedListConfigurator {
   private allItems: ICreatorPresetToolboxItem[];
-  private createItemsMatrixJSON(props: any): any {
+  private createItemsMatrixJSON(props: any, addSubitems: boolean): any {
     const defaultJSON = {
       type: "matrixdynamic",
       name: "items",
@@ -51,7 +51,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             { type: "text", name: "title", title: "Title" },
             { type: "text", name: "iconName", title: "Icon name" },
             { type: "text", name: "tooltip", title: "Tooltip" },
-          ]
+          ],
+          visible: !addSubitems
         },
         {
           type: "presetjson",
@@ -64,11 +65,21 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             text: "JSON should be correct",
             expression: "validateToolboxJson({json})"
           }],
-          rows: 15
+          rows: 15,
+          visible: !addSubitems
         }
       ]
     };
-    return { ...defaultJSON, ...props };
+    const newJson = { ...defaultJSON, ...props };
+    if (addSubitems) {
+      newJson.detailElements.push(this.createItemsMatrixJSON({
+        name: this.nameSubitems,
+        valueName: "subitems",
+        titleLocation: "hidden",
+        startWithNewLine: false
+      }, false));
+    }
+    return newJson;
   }
 
   public createMainPageCore(): any {
@@ -106,7 +117,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   name: this.nameInnerMatrix,
                   titleLocation: "hidden",
                   valueName: "items"
-                })
+                }, true)
               ]
             },
             this.createItemsMatrixJSON({
@@ -114,14 +125,14 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               titleLocation: "hidden",
               startWithNewLine: false,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-            }),
+            }, false),
             this.createItemsMatrixJSON({
               allowAddRows: true,
               addRowButtonLocation: "top",
               addRowText: "Add Custom Item",
               startWithNewLine: false,
               name: this.nameMatrix
-            })]
+            }, false)]
         },
         {
           type: "panel",
@@ -229,7 +240,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return differs ? items : undefined;
   }
   protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameItems || super.isItemsMatrix(question);
+    return question.name === this.nameItems || question.name === this.nameSubitems || super.isItemsMatrix(question);
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (options.question.name == this.nameMatrix) {
@@ -387,6 +398,15 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> { name: item.name, isDefault: true, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
+    return <ICreatorPresetToolboxItem> {
+      name: item.name,
+      isDefault: true,
+      title: item.title,
+      iconName: item.iconName,
+      tooltip: item.tooltip,
+      json: item.json,
+      category: item.category,
+      subitems: item.items?.map(i => this.createToolboxItemRow(i))
+    };
   }
 }

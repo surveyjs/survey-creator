@@ -12,6 +12,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //}
 
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
+  protected get nameSubitems() { return "subitems"; }
   public getMainElementName() : any { return this.nameMatrix; }
   protected defaultItems: any[];
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
@@ -52,8 +53,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     actions.forEach(a => {
       if (a.id == "show-detail") {
         a.location = "end";
-        a.iconName = "icon-edit";
-        a.visible = false;
+        a.iconName = "icon-expand-24x24";
         a.visibleIndex = 10;
       }
       if (a.id == "remove-row") {
@@ -92,6 +92,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       const isDefault = row.getQuestionByName("isDefault");
       const name = survey.getQuestionByName("name");
       if (name && isDefault) name.readOnly = isDefault.value;
+      survey.getAllPanels().forEach(q => q.visible = true);
+      survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameSubitems);
     }
   }
 
