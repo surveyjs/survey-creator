@@ -112,13 +112,13 @@ test.describe(title, () => {
   });
 
   test("Placeholder with survey header", async ({ page }) => {
-    const designerTabContent = page.locator(".svc-tab-designer");
     await page.evaluate(() => {
       (window as any).creator.toolbox.isCompact = true;
       (window as any).creator.showHeaderInEmptySurvey = true;
     });
     await page.setViewportSize({ width: 1767, height: 900 });
 
+    const designerTabContent = page.locator(".svc-tab-designer");
     await compareScreenshot(page, designerTabContent, "surface-placeholder-with-header.png");
   });
 
