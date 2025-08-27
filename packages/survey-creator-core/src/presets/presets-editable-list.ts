@@ -11,6 +11,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
 
+  protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected get nameSubitems() { return "subitems"; }
   public getMainElementName() : any { return this.nameMatrix; }
@@ -19,7 +20,17 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
 
-  protected createResetAction(model: SurveyModel, row: MatrixDynamicRowModel, action: () => void): IAction {
+  protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
+    const rowData = question.value.filter(r => row.value.name == r.name)[0];
+    const defaultItem = this.defaultItems.filter(i => i.name == rowData.name)[0];
+    const defaultData = {};
+    Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
+    defaultData["isDefault"] = true;
+    const resetAction = actions.filter(a => a.id == "reset-to-default")[0];
+    resetAction.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
+  }
+
+  protected createResetAction(model: SurveyModel, row: MatrixDynamicRowModel, action: (action: Action) => void): IAction {
     return {
       id: "reset-to-default",
       iconName: "icon-reset",
@@ -129,8 +140,10 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       if (iconName) {
         options.actions.push(this.createIconAction(iconName));
       }
-
-      const resetAction = this.createResetAction(model, options.row, () => { this.resetItem(model, options.question, options.row); });
+      const resetAction = this.createResetAction(model, options.row, (action: Action) => {
+        this.resetItem(model, options.question, options.row);
+        action.enabled = false;
+      });
       options.actions.push(resetAction);
 
       options.question.cssClasses.detailIconExpandedId = "icon-edit";
@@ -139,6 +152,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       options.actions.push(this.createEditAction(model, creator, options.question, options.row));
 
       this.setupStandardActions(options.actions, options.question, options.row, options.question.name == this.nameMatrix);
+      this.updateResetAction(options.question, options.row, options.actions);
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
@@ -158,6 +172,13 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (options.question.name == this.nameMatrix) {
       options.row.getQuestionByName("name").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.name })), "name");
+    }
+  }
+  public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
+    if (options.question.name == this.nameMatrix || options.question.name == this.nameItems) {
+      const renderedRow = options.question.renderedTable.rows.find(r => r.row == options.row);
+      const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
+      this.updateResetAction(options.question, options.row, actions);
     }
   }
 }

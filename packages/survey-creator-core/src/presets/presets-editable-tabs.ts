@@ -27,7 +27,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
         {
           "name": "title"
         },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        { name: "isDefault", type: "boolean", defaultValue: true, visible: false }
       ],
       detailPanelMode: "underRow",
       detailElements: [
@@ -187,6 +187,5 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       model.getQuestionByName(this.nameActiveTab).choices = val.map(v => new ItemValue(v.name, v.title));
     }
   }
-  private get nameItems() { return this.path + "_items"; }
   private get nameActiveTab() { return this.path + "_activeTab"; }
 }

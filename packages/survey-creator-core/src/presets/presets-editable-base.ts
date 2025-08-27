@@ -132,6 +132,7 @@ export class CreatorPresetEditableBase {
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
+  public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {

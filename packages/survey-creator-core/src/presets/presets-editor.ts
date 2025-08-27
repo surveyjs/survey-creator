@@ -167,6 +167,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onMatrixRowAdded.add((sender, options) => {
       editablePresets.forEach(item => item.onMatrixRowAdded(model, this.creator, options));
     });
+    model.onMatrixCellValueChanged.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixCellValueChanged(model, this.creator, options));
+    });
     model.onUpdateQuestionCssClasses.add(function(_, options) {
       editablePresets.forEach(item => {
         if (options.question.name === item.getMainElementName()) {
