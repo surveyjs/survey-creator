@@ -513,4 +513,3 @@ import "ace-builds/src-noconflict/theme-clouds_midnight";
 - [Property Grid Customization](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid)
 - [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox)
 - [Survey Customization](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization)
-- [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
