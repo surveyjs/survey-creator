@@ -169,9 +169,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (options.question.name == this.nameMatrix || options.question.name == this.nameItems) {
-      const renderedRow = options.question.renderedTable.rows.find(r => r.row == options.row);
-      const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
-      this.updateResetAction(options.question, options.row, actions);
+      //const renderedRow = options.question.renderedTable.rows.find(r => r.row == options.row);
+      //const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
+      //this.updateResetAction(options.question, options.row, actions);
     }
   }
 }

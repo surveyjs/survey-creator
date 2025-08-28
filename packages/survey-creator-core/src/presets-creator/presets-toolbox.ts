@@ -70,15 +70,17 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
     }
     creator.toolbox.defineCategories(categories);
     // TODO: check if defineCategories incorrectly resets subitems
-    items.forEach(item => {
-      const tItem = creator.toolbox.getItemByName(item.name);
-      if (tItem) {
-        if (item.subitems) {
-          tItem.items = [];
-          item.subitems.forEach(si => tItem.addSubitem(si as any));
+    if (items) {
+      items.forEach(item => {
+        const tItem = creator.toolbox.getItemByName(item.name);
+        if (tItem) {
+          if (item.subitems) {
+            tItem.items = [];
+            item.subitems.forEach(si => tItem.addSubitem(si as any));
+          }
         }
-      }
-    });
+      });
+    }
   }
 }
 export class CreatorPresetToolbox extends CreatorPresetBase {

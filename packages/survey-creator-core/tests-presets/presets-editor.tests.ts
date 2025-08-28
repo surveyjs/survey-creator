@@ -243,11 +243,11 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
   expect(question.visibleRows).toHaveLength(defaultItems.length);
   expect(question.value).toHaveLength(defaultItems.length);
-  question.value = question.value.filter(r => ["boolean", "text", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
+  question.value = question.value.filter(r => ["boolean", "comment", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
   const etalon: ICreatorPresetData = {
     toolbox: {
       categories: [],
-      definition: [{ name: "text" }, { name: "checkbox" }, { name: "boolean" }]
+      definition: [{ name: "comment" }, { name: "checkbox" }, { name: "boolean" }]
     }
   };
   const testJson = editor.preset.getJson();

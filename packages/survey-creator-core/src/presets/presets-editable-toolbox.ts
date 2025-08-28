@@ -265,7 +265,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.defaultItems = creator.toolbox.getDefaultItems([], true, true, true);
+    this.defaultItems = creator.toolbox.getDefaultItems([], true, true, true).map(i => this.createToolboxItemRow(i));
     this.setQuestionItemsRows(model);
   }
   private setQuestionItemsRows(model: SurveyModel): void {
@@ -397,7 +397,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> {
+    const obj:ICreatorPresetToolboxItem = {
       name: item.name,
       title: item.title,
       iconName: item.iconName,
@@ -406,5 +406,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       category: item.category,
       subitems: item.items?.map(i => this.createToolboxItemRow(i))
     };
+
+    for (const key in obj) {
+      if (obj[key] === undefined) {
+        delete obj[key];
+      }
+    }
+    return obj;
   }
 }

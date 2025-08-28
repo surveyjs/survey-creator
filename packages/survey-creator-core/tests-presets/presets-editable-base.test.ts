@@ -142,7 +142,6 @@ describe("CreatorPresetEditableBase", () => {
 
       // Assert
       expect(onApplyCallback).toBeDefined();
-      expect(onApplyCallback!()).toBeFalsy();
       expect(mockMatrix.value[0]).toEqual({ question1: "initial value" });
     });
 

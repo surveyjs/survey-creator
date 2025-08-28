@@ -298,7 +298,7 @@ test("Preset edit, toolbox - edit category", () => {
   const categQuestion = survey.getQuestionByName("toolbox_categories");
 
   const renderedRow = categQuestion.renderedTable.rows.filter(r => r.row == categQuestion.visibleRows[0])[0];
-  const editCategoryAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+  const editCategoryAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
 
   const originalShowDialog = settings.showDialog;
   let popupSurvey: SurveyModel | undefined;
@@ -356,14 +356,14 @@ test("Preset edit, toolbox - edit item", () => {
     expect(itemsQuestion.visibleRows).toHaveLength(2);
 
     const renderedRow = itemsQuestion.renderedTable.rows.filter(r => r.row == itemsQuestion.visibleRows[0])[0];
-    const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+    const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
     editItemAction.action();
 
     const nameQuestion = popupSurvey!.getQuestionByName("name");
     expect(nameQuestion.readOnly).toBeTruthy();
 
     const renderedRow2 = matrixQuestion.renderedTable.rows.filter(r => r.row == matrixQuestion.visibleRows[1])[0];
-    const editItemAction2 = renderedRow2.cells[renderedRow2.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+    const editItemAction2 = renderedRow2.cells[renderedRow2.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
     editItemAction2.action();
 
     const nameQuestion2 = popupSurvey!.getQuestionByName("name");
