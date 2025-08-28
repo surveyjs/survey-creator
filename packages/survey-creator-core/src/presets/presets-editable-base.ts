@@ -1,4 +1,4 @@
-import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, ActionBarCssClasses } from "survey-core";
+import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, ActionBarCssClasses, PanelModel } from "survey-core";
 import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 
@@ -161,11 +161,9 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {hideDetailPanel?: boolean, width?: string, actions?: IAction[]}) {
-    const hideDetailPanel = options.hideDetailPanel !== false;
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {width?: string, actions?: IAction[]}) {
     if (settings.showDialog) {
       const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
-      if (hideDetailPanel) row.hideDetailPanel();
       const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
       survey.fitToContainer = false;
       survey.showNavigationButtons = false;
@@ -211,6 +209,9 @@ export class CreatorPresetEditableBase {
           popupModel.footerToolbar.actions.unshift(...options.actions);
         }
       }
+      survey.getAllPanels().forEach(q => (q as PanelModel).visible = !(q as PanelModel).visible);
+      survey.getAllQuestions().forEach(q => q.visible = !q.visible);
+
       return survey;
     }
   }

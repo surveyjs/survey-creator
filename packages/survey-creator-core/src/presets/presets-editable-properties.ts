@@ -235,10 +235,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       ],
       detailPanelMode: "underRow",
       detailElements: [
-        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-        { type: "text", name: "title", title: "Title", isUnique: true, isRequired: true },
-        { type: "comment", name: "description", title: "Description" },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true, visible: false },
+        { type: "text", name: "title", title: "Title", isUnique: true, isRequired: true, visible: false },
+        { type: "comment", name: "description", title: "Description", visible: false }
       ]
     };
     return { ...defaultJSON, ...props };

@@ -30,9 +30,9 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       ],
       detailPanelMode: "underRow",
       detailElements: [
-        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true, readOnly: true },
-        { type: "text", name: "title", title: "Title" },
-        { type: "text", name: "iconName", title: "Icon name" }
+        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true, readOnly: true, visible: false },
+        { type: "text", name: "title", title: "Title", visible: false },
+        { type: "text", name: "iconName", title: "Icon name", visible: false }
       ]
     };
     return { ...defaultJSON, ...props };

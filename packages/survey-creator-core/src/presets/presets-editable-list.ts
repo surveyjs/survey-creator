@@ -13,8 +13,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
 
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
-  protected get nameSubitems() { return "subitems"; }
   public getMainElementName() : any { return this.nameMatrix; }
+  protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return "name"; }
   protected defaultItems: any[];
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
@@ -43,7 +43,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
 
   protected createEditAction(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): IAction {
     return {
-      id: "edit-category",
+      id: "edit-item",
       iconName: "icon-edit",
       location: "end",
       visibleIndex: 13,
@@ -53,7 +53,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
 
   protected createIconAction(iconName: string, cssClass: string = "sps-matrixdynamic__row-icon"): IAction {
     return {
-      id: iconName,
+      id: "icon-action",
       iconName: iconName,
       innerCss: cssClass,
       location: "start",
@@ -61,12 +61,13 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     };
   }
 
-  protected setupStandardActions(actions: IAction[], question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, isItemsMatrix: boolean = false): void {
+  protected setupStandardActions(actions: IAction[], question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, allowExpand: boolean, isItemsMatrix: boolean): void {
     actions.forEach(a => {
       if (a.id == "show-detail") {
         a.location = "end";
         a.iconName = "icon-expand-24x24";
         a.visibleIndex = 10;
+        a.visible = allowExpand;
       }
       if (a.id == "remove-row") {
         a.visibleIndex = 20;
@@ -77,14 +78,6 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     });
   }
 
-  protected updateOnValueChangedCore(model: SurveyModel, name: string) {
-    // if (name == this.nameCategories) {
-    //   this.fillAutoName(this.getQuestionCategories(model), "category");
-    // }
-    // if (name == this.nameMatrix) {
-    //   this.fillAutoName(this.getMatrix(model), "name");
-    // }
-  }
   private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     let survey;
     const resetAction = {
@@ -94,19 +87,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       innerCss: "sps-btn sps-btn--secondary-alert",
       visibleIndex: 15,
       action: (a)=>{
-        const defaultItem = this.defaultItems.filter(i => i.name == survey.getQuestionByName("name").value)[0];
+        const defaultItem = this.defaultItems.filter(i => i.name == survey.getQuestionByName(this.getMatrixKeyColumnName(question)).value)[0];
         survey.data = defaultItem;
         creator.notify(a.title);
       }
     };
     survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
-    if (survey) {
-      // const isDefault = row.getQuestionByName("isDefault");
-      // const name = survey.getQuestionByName("name");
-      // if (name && isDefault) name.readOnly = isDefault.value;
-      survey.getAllPanels().forEach(q => q.visible = true);
-      survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameSubitems);
-    }
   }
 
   private resetItem(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
@@ -135,25 +121,31 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
     return question.name === this.nameMatrix;
   }
+  protected needToSetActions(question: QuestionMatrixDynamicModel) {
+    return this.isItemsMatrix(question);
+  }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (this.isItemsMatrix(options.question)) {
-      const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
+    if (this.needToSetActions(options.question)) {
+      const question = options.question as QuestionMatrixDynamicModel;
+      const allowExpand = question.detailElements.filter(e => e.visible).length > 0;
+      const keyColumn = this.getMatrixKeyColumnName(options.question);
+      const iconName = question.value?.filter(v => v[keyColumn] == options.row.getValue(keyColumn))[0]?.iconName;
       if (iconName) {
         options.actions.push(this.createIconAction(iconName));
       }
       const resetAction = this.createResetAction(model, options.row, (action: Action) => {
-        this.resetItem(model, options.question, options.row);
+        this.resetItem(model, question, options.row);
         action.enabled = false;
       });
       options.actions.push(resetAction);
 
-      options.question.cssClasses.detailIconExpandedId = "icon-edit";
-      options.question.cssClasses.detailIconId = "icon-edit";
+      question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
+      question.cssClasses.detailIconId = "icon-expand-24x24";
 
-      options.actions.push(this.createEditAction(model, creator, options.question, options.row));
+      options.actions.push(this.createEditAction(model, creator, question, options.row));
 
-      this.setupStandardActions(options.actions, options.question, options.row, options.question.name == this.nameMatrix);
-      this.updateResetAction(options.question, options.row, options.actions);
+      this.setupStandardActions(options.actions, question, options.row, allowExpand, question.name == this.nameMatrix);
+      this.updateResetAction(question, options.row, options.actions);
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {

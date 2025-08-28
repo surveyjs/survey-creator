@@ -46,12 +46,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           "name": "details",
           "maxWidth": "30%",
           "elements": [
-            { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-            { type: "text", name: "title", title: "Title" },
-            { type: "text", name: "iconName", title: "Icon name" },
-            { type: "text", name: "tooltip", title: "Tooltip" },
+            { type: "text", name: "name", title: "Name", isUnique: true, visible: false, isRequired: true },
+            { type: "text", name: "title", title: "Title", visible: false },
+            { type: "text", name: "iconName", title: "Icon name", visible: false },
+            { type: "text", name: "tooltip", title: "Tooltip", visible: false },
           ],
-          visible: !addSubitems
+          visible: false
         },
         {
           type: "presetjson",
@@ -65,7 +65,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             expression: "validateToolboxJson({json})"
           }],
           rows: 15,
-          visible: !addSubitems
+          visible: false
         }
       ]
     };
@@ -165,6 +165,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   public get nameCategoriesMode() { return this.fullPath + "_mode"; }
   protected get nameItems() { return this.fullPath + "_items"; }
+  protected get nameSubitems() { return "subitems"; }
   protected get nameShowCategoryTitles() { return this.fullPath + "_showCategoryTitles"; }
   public get questionNames() {
     return [this.nameCategories, this.nameItems, this.nameShowCategoryTitles];
