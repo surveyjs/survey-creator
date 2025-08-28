@@ -9,7 +9,8 @@ import {
   SvgRegistry,
   addIconsToThemeSet,
   SvgThemeSets,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  matrixDropdownColumnTypes
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -83,8 +84,9 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
-import { deprecate } from "util";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
+
+matrixDropdownColumnTypes.slider = {};
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
