@@ -41,7 +41,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!this.options) {
       this.options = new EmptySurveyCreatorOptions();
     }
-    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+    this.editSurvey.onDynamicPanelValueChanged.add((sender, options) => {
       if (options.name == "logicTypeName") {
         this.onLogicTypeChanged(options.panel);
       }
@@ -83,7 +83,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+    this.editSurvey.onDynamicPanelValueChanged.add((sender, options) => {
       const q = options.panel.getQuestionByName(options.name);
       if (!!q && q.parent?.name === "triggerEditorPanel") {
         const action = <LogicActionTriggerModel>this.getActionModelByPanel(options.panel);
