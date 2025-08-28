@@ -93,14 +93,6 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameInnerMatrix);
     }
   }
-  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.getQuestionCategories(model).onCreateDetailPanelRenderedRowCallback = (
-      renderedRow: QuestionMatrixDropdownRenderedRow
-    ) => {
-      renderedRow.cells = [renderedRow.cells[1]];
-      renderedRow.cells[0].colSpans += 2;
-    };
-  }
   protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
 
   protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {

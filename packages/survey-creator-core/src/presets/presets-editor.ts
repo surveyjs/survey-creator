@@ -1,6 +1,6 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
-import { Action, ActionContainer, Base, ComputedUpdater, LocalizableString, QuestionMatrixDynamicModel, SurveyModel, createDropdownActionModel } from "survey-core";
+import { Action, ActionContainer, Base, ComputedUpdater, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
@@ -152,6 +152,19 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         }
       });
     });
+    function adjustMatrixAlignment(question: Question) {
+      if (question.isDescendantOf("matrixdynamic")) {
+        question.onCreateDetailPanelRenderedRowCallback = (
+          renderedRow: QuestionMatrixDropdownRenderedRow
+        ) => {
+          renderedRow.cells = [renderedRow.cells[1]];
+          renderedRow.cells[0].colSpans += 2;
+        };
+      }
+    }
+    model.getAllQuestions().forEach(question => adjustMatrixAlignment(question));
+    model.onQuestionCreated.add((_, options) => { adjustMatrixAlignment(options.question); });
+
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));
     });
