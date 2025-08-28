@@ -329,11 +329,15 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     }
 
     triggerEditorPanel.getElementByName(this.logicType.propertyName).visible = false;
-    this.updateVisibilityPanel(triggerQuestionsPanel);
-    this.updatePanelQuestionsValue(triggerQuestionsPanel);
-    this.updateVisibilityPanel(triggerEditorPanel);
-    this.updatePanelQuestionsValue(triggerEditorPanel);
+    [triggerQuestionsPanel, triggerEditorPanel].forEach(panel => {
+      this.updateVisibilityPanel(panel);
+      this.updatePanelQuestionsValue(panel);
+    });
     this.updateParentQuestions();
+    const setValueQ = triggerEditorPanel.getQuestionByName("setValue");
+    if (!!setValueQ) {
+      this.updateSetValueQuestion(setValueQ);
+    }
     const questions = this.getQuestions();
     if (!!questions && !!selectedElement) {
       questions.forEach(question => {
