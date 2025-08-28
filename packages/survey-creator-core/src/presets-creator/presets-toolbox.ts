@@ -8,6 +8,7 @@ export interface ICreatorPresetToolboxItem {
   json?: any;
   title?: string;
   tooltip?: string;
+  subitems?: ICreatorPresetToolboxItem[];
 }
 
 export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
@@ -21,7 +22,7 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
     toolbox.presetDefaultItems = this.getPresetDefaultItems(definition);
     if (Array.isArray(definition)) {
       definition.forEach(item => {
-        const tItem = toolbox.getActionById(item.name);
+        const tItem = toolbox.getItemByName(item.name);
         if (tItem) {
           ["iconName", "title", "tooltip", "json"].forEach(propName => {
             if (item[propName]) {
@@ -68,6 +69,16 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
       categories = [category];
     }
     creator.toolbox.defineCategories(categories);
+    // TODO: check if defineCategories incorrectly resets subitems
+    items.forEach(item => {
+      const tItem = creator.toolbox.getItemByName(item.name);
+      if (tItem) {
+        if (item.subitems) {
+          tItem.items = [];
+          item.subitems.forEach(si => tItem.addSubitem(si as any));
+        }
+      }
+    });
   }
 }
 export class CreatorPresetToolbox extends CreatorPresetBase {
