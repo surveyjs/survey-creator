@@ -84,11 +84,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     });
     if (survey) {
       const category = survey.getQuestionByName("category");
-      const isDefault = row.getQuestionByName("isDefault");
+      //const isDefault = row.getQuestionByName("isDefault");
 
       if (category) {
         category.visible = true;
-        if (isDefault) category.readOnly = isDefault.value;
+        //if (isDefault) category.readOnly = isDefault.value;
       }
       survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameInnerMatrix);
     }

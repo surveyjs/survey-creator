@@ -37,8 +37,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         },
         {
           "name": "title"
-        },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        }
       ],
       detailPanelMode: "underRow",
       detailElements: [
@@ -105,7 +104,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               showHeader: false,
               columns: [
                 { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
-                { name: "isDefault", type: "boolean", defaultValue: false, visible: false },
                 { cellType: "text", name: "title" }
               ],
               detailPanelMode: "underRow",
@@ -231,7 +229,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private getJsonItemsDefinition(model: SurveyModel): any {
     const mode = model.getValue(this.nameCategoriesMode);
     const itemsRaw = (mode === "items") ? model.getValue(this.nameItems) : model.getValue(this.nameCategories).map(c => c.items).flat();
-    const items = itemsRaw.map(i => ({ ...i, isDefault: undefined }));
+    const items = itemsRaw.map(i => ({ ...i }));
     let differs = false;
     items.forEach(item => {
       if (this.cleanIfNotDiffers(item, this.defaultItems.filter(i => i.name == item.name)[0])) differs = true;
@@ -289,7 +287,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
     this.getQuestionItems(model).value = creator.toolbox.items.map(i => this.createToolboxItemRow(i));
-    const categories = creator.toolbox.categories.map(c => ({ category: c.name, isDefault: true, items: c.items.map(i => this.createToolboxItemRow(i)) }));
+    const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createToolboxItemRow(i)) }));
     model.setValue(this.nameCategories, categories);
     this.updateShowCategoriesTitlesElements(model);
   }
@@ -400,7 +398,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
     return <ICreatorPresetToolboxItem> {
       name: item.name,
-      isDefault: true,
       title: item.title,
       iconName: item.iconName,
       tooltip: item.tooltip,

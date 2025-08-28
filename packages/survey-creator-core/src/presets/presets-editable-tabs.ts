@@ -26,8 +26,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
         },
         {
           "name": "title"
-        },
-        { name: "isDefault", type: "boolean", defaultValue: true, visible: false }
+        }
       ],
       detailPanelMode: "underRow",
       detailElements: [

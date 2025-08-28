@@ -116,8 +116,7 @@ export class SurveyQuestionPresetPropertiesDetail {
         properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => ({
           name: e.name,
           title: e.title,
-          description: e.description,
-          isDefault: true
+          description: e.description
         }))
       };
     });

@@ -23,11 +23,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
     const rowData = question.value.filter(r => row.value.name == r.name)[0];
     const defaultItem = this.defaultItems.filter(i => i.name == rowData.name)[0];
-    const defaultData = {};
-    Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
-    defaultData["isDefault"] = true;
-    const resetAction = actions.filter(a => a.id == "reset-to-default")[0];
-    resetAction.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
+    if (defaultItem) {
+      const defaultData = {};
+      Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
+      const resetAction = actions.filter(a => a.id == "reset-to-default")[0];
+      resetAction.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
+    }
   }
 
   protected createResetAction(model: SurveyModel, row: MatrixDynamicRowModel, action: (action: Action) => void): IAction {
@@ -100,9 +101,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     };
     survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
     if (survey) {
-      const isDefault = row.getQuestionByName("isDefault");
-      const name = survey.getQuestionByName("name");
-      if (name && isDefault) name.readOnly = isDefault.value;
+      // const isDefault = row.getQuestionByName("isDefault");
+      // const name = survey.getQuestionByName("name");
+      // if (name && isDefault) name.readOnly = isDefault.value;
       survey.getAllPanels().forEach(q => q.visible = true);
       survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameSubitems);
     }

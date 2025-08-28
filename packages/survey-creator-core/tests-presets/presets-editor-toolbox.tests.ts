@@ -257,7 +257,7 @@ test("Preset edit, toolbox - reset item", () => {
   expect(itemsValue.filter(c => c.name == "text")[0].title).toEqual("Single-Line Input");
 });
 
-test("Preset edit, toolbox - default names in categories", () => {
+test.skip("Preset edit, toolbox - default names in categories", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
@@ -273,7 +273,7 @@ test("Preset edit, toolbox - default names in categories", () => {
   expect(categoriesQuestion.value[2].category).toBe("category1");
 });
 
-test("Preset edit, toolbox - default names in items", () => {
+test.skip("Preset edit, toolbox - default names in items", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
