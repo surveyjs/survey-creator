@@ -3963,3 +3963,21 @@ test("The progressBarLocation property values appear unlocalized when applying a
 
   creator.locale = "en";
 });
+test("The property is not translated for the custom question, Bug#7118", () => {
+  ComponentCollection.Instance.add({
+    name: "customsignature",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "signaturepad"
+    },
+  });
+
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "customsignature", name: "q1" }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionShowPlaceHolder = propertyGrid.survey.getQuestionByName("showPlaceholder");
+  expect(questionShowPlaceHolder.title).toBe("Show a placeholder within signature area");
+
+  ComponentCollection.Instance.clear();
+});
