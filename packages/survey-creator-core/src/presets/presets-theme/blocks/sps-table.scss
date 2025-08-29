@@ -83,12 +83,20 @@
     border: none;
     margin-top: calc(-1 * var(--sjs2-spacing-x075, 6px));
   }
+  .sps-table__cell--detail-panel .sps-panel {
+    margin-top: 0;
+    margin-left: 32px;
+  }
 
   .sps-table__cell {
     padding: 0;
     padding-bottom: var(--sjs2-spacing-x075, 6px);
     padding-top: 0;
     border-top: none;
+  }
+
+  .sps-table__row--empty {
+    height: 40px;
   }
 }
 .sps-table__cell:where(:not(.sps-table__cell--detail-panel)) {
