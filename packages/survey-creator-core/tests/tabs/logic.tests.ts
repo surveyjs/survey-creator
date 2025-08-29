@@ -178,7 +178,10 @@ test("LogicUI: isModified for new item", () => {
   const triggerQuestionsPanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
   const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
   triggerQuestionsPanel.getQuestionByName("setToName").value = "q2";
-  triggerEditorPanel.getQuestionByName("setValue").value = 2;
+  const setValueQ = triggerEditorPanel.getQuestionByName("setValue");
+  setValueQ.value = 2;
+  expect(setValueQ.getTitleLocation()).toBe("top");
+
   row.detailPanel.footerActions[0].action();
   expect(row.isDetailPanelShowing).toBeFalsy();
   expect(survey.triggers).toHaveLength(1);

@@ -41,6 +41,17 @@ export class LogicActionModelBase {
       question.value = !!action && action.logicType == this.logicType ? action.elementName : undefined;
     }
   }
+  protected getDPQuestion(): Question {
+    return <Question>this.panel.survey.getQuestionByName("panel");
+  }
+  protected updateParentQuestions(): void {
+    const dp = this.getDPQuestion();
+    this.panel.questions.forEach(q => {
+      if (!q.parentQuestion) {
+        q.setParentQuestion(dp);
+      }
+    });
+  }
 }
 
 export class LogicActionModel extends LogicActionModelBase {
@@ -129,7 +140,6 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
     if (!oldQuestion) return;
     const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
-
     const tempPanel = Serializer.createClass("panel");
     const propGenerator = new PropertyJSONGenerator(obj, options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
@@ -148,6 +158,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
         this.updateSetValueQuestion(newQuestion);
       }
     }
+    this.updateParentQuestions();
     this.updateVisibilityPanel(triggerEditorPanel);
     tempPanel.dispose();
   }
@@ -318,11 +329,15 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     }
 
     triggerEditorPanel.getElementByName(this.logicType.propertyName).visible = false;
-    this.updateVisibilityPanel(triggerQuestionsPanel);
-    this.updatePanelQuestionsValue(triggerQuestionsPanel);
-    this.updateVisibilityPanel(triggerEditorPanel);
-    this.updatePanelQuestionsValue(triggerEditorPanel);
-
+    [triggerQuestionsPanel, triggerEditorPanel].forEach(panel => {
+      this.updateVisibilityPanel(panel);
+      this.updatePanelQuestionsValue(panel);
+    });
+    this.updateParentQuestions();
+    const setValueQ = triggerEditorPanel.getQuestionByName("setValue");
+    if (!!setValueQ) {
+      this.updateSetValueQuestion(setValueQ);
+    }
     const questions = this.getQuestions();
     if (!!questions && !!selectedElement) {
       questions.forEach(question => {
