@@ -1712,7 +1712,7 @@ test("DefaultValue editor & matrix dropdown vs rowsVisibleIf, Bug#6902", () => {
   const editQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("defaultValue");
   const property = <JsonObjectProperty>(<any>editQuestion).property;
   const editor = <PropertyGridValueEditor>(
-  PropertyGridEditorCollection.getEditor(property)
+    PropertyGridEditorCollection.getEditor(property)
   );
   const valueEditor = editor.createPropertyEditorSetup(
     question,
@@ -3787,4 +3787,22 @@ test("Pages Collection Editor - The Trash Bin (Remove) button is unavailable whe
   expect(cell.isActionsCell).toBeTruthy();
   container = <ActionContainer>cell.item.value;
   expect(container.getActionById("remove-row")).toBeTruthy();
+});
+test("The property is not translated for the custom question, Bug#7118", () => {
+  ComponentCollection.Instance.add({
+    name: "customsignature",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "signaturepad"
+    },
+  });
+
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "customsignature", name: "q1" }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionShowPlaceHolder = propertyGrid.survey.getQuestionByName("showPlaceholder");
+  expect(questionShowPlaceHolder.title).toBe("Show a placeholder within signature area");
+
+  ComponentCollection.Instance.clear();
 });
