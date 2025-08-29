@@ -1322,6 +1322,21 @@ export class QuestionToolbox
     }
     return res;
   }
+  public getDefaultCategories(): Array<QuestionToolboxCategory> {
+    const items = this.getDefaultItems(this.supportedQuestions, false, true, true);
+    const itemsHash = {};
+    items.forEach(item => {
+      itemsHash[item.id] = item;
+    });
+    return Object.keys(QuestionToolbox.defaultCategories).map(cName=>{
+      const category = new QuestionToolboxCategory(this);
+      category.name = cName;
+      category.title = this.getCategoryTitle(cName);
+      category.items = QuestionToolbox.defaultCategories[cName].map(iName => itemsHash[iName]);
+      return category;
+    });
+  }
+
   private getDefaultQuestionItems(supportedQuestions: Array<string>, useDefaultCategories: boolean): Array<QuestionToolboxItem> {
     const res = [];
     const questions = this.getQuestionTypes(supportedQuestions);

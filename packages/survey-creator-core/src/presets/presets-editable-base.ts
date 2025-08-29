@@ -162,13 +162,13 @@ export class CreatorPresetEditableBase {
   }
 
   protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {width?: string, actions?: IAction[]}) {
+    const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
+    const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
+    survey.fitToContainer = false;
+    survey.showNavigationButtons = false;
+    survey.data = data;
+    survey.css = presetsCss;
     if (settings.showDialog) {
-      const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
-      const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
-      survey.fitToContainer = false;
-      survey.showNavigationButtons = false;
-      survey.data = data;
-      survey.css = presetsCss;
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: survey, model: survey },
@@ -211,9 +211,8 @@ export class CreatorPresetEditableBase {
       }
       survey.getAllPanels().forEach(q => (q as PanelModel).visible = !(q as PanelModel).visible);
       survey.getAllQuestions().forEach(q => q.visible = !q.visible);
-
-      return survey;
     }
+    return survey;
   }
   public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
     if (!localizationName) return undefined;

@@ -252,7 +252,8 @@ test("Preset edit, toolbox - reset item", () => {
 
   const row = itemQuestion.visibleRows.filter(r => r.getValue("name") == "text")[0];
   const renderedRow = itemQuestion.renderedTable.rows.filter(r => r.row == row)[0];
-  renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "reset-to-default")[0].action();
+  const resetAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "reset-to-default")[0];
+  resetAction.action(resetAction);
 
   expect(itemsValue.filter(c => c.name == "text")[0].title).toEqual("Single-Line Input");
 });
@@ -296,9 +297,13 @@ test("Preset edit, toolbox - edit category", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
+  categQuestion.addRow();
+  categQuestion.visibleRows[categQuestion.visibleRows.length - 1].getQuestionByName("category").value = "New_category";
 
   const renderedRow = categQuestion.renderedTable.rows.filter(r => r.row == categQuestion.visibleRows[0])[0];
   const editCategoryAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
+  const renderedCustomRow = categQuestion.renderedTable.rows.filter(r => r.row == categQuestion.visibleRows[categQuestion.visibleRows.length - 1])[0];
+  const editCustomCategoryAction = renderedCustomRow.cells[renderedCustomRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
 
   const originalShowDialog = settings.showDialog;
   let popupSurvey: SurveyModel | undefined;
@@ -324,8 +329,7 @@ test("Preset edit, toolbox - edit category", () => {
 
     expect(popupSurvey!.getQuestionByName("category").readOnly).toBeTruthy();
 
-    renderedRow.row.getQuestionByName("isDefault").value = false;
-    editCategoryAction.action();
+    editCustomCategoryAction.action();
     expect(popupSurvey!.getQuestionByName("category").readOnly).toBeFalsy();
   } finally {
     settings.showDialog = originalShowDialog;

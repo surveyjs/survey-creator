@@ -5,6 +5,7 @@ import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-r
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
+import { IToolboxCategoryDefinition } from "../toolbox";
 
 const LocCategoriesName = "toolboxCategories";
 
@@ -265,7 +266,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.defaultItems = creator.toolbox.getDefaultItems([], true, true, true).map(i => this.createToolboxItemRow(i));
+    const toolboxDefaultItems = creator.toolbox.getDefaultItems([], true, true, true);
+    const toolboxDefaultCategories = creator.toolbox.getDefaultCategories();
+    this.defaultItems = toolboxDefaultItems.map(i => this.createToolboxItemRow(i));
+    this.defaultCategories = toolboxDefaultCategories.map(i => this.createToolboxCategoryRow(i));
     this.setQuestionItemsRows(model);
   }
   private setQuestionItemsRows(model: SurveyModel): void {
@@ -288,7 +292,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
     this.getQuestionItems(model).value = creator.toolbox.items.map(i => this.createToolboxItemRow(i));
-    const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createToolboxItemRow(i)) }));
+    const categories = creator.toolbox.categories.map(c => this.createToolboxCategoryRow(c));
     model.setValue(this.nameCategories, categories);
     this.updateShowCategoriesTitlesElements(model);
   }
@@ -403,8 +407,21 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       iconName: item.iconName,
       tooltip: item.tooltip,
       json: item.json,
-      category: item.category,
       subitems: item.items?.map(i => this.createToolboxItemRow(i))
+    };
+
+    for (const key in obj) {
+      if (obj[key] === undefined) {
+        delete obj[key];
+      }
+    }
+    return obj;
+  }
+  private createToolboxCategoryRow(item: QuestionToolboxCategory) {
+    const obj = {
+      category: item.name,
+      title: item.title,
+      items: item.items?.map(i => this.createToolboxItemRow(i))
     };
 
     for (const key in obj) {

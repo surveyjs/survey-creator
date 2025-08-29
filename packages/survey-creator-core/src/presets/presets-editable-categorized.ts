@@ -11,7 +11,10 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
-
+  protected defaultCategories: any;
+  protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
+    return question?.name === this.nameCategories ? this.defaultCategories : this.defaultItems;
+  }
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
   public getMainElementName() : any { return this.nameCategories; }
@@ -39,7 +42,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const category = row.getValue("category");
-    const defaultItems = this.defaultItems.filter(i => i.category == category);
+    const defaultItems = this.defaultCategories.filter(i => i.category == category)[0]?.items;
+    if (!defaultItems) return;
     const categoriesQuestion = this.getQuestionCategories(model);
     const hiddenItemsQuestion = this.getMatrix(model);
     const hiddenValue = hiddenItemsQuestion.value || [];

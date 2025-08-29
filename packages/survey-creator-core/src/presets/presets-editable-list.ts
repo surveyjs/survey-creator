@@ -15,14 +15,23 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   public getMainElementName() : any { return this.nameMatrix; }
   protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return "name"; }
-  protected defaultItems: any[];
+  protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
+    return this.defaultItems;
+  }
+  protected getDefaultItem(question: QuestionMatrixDynamicModel, key: string) {
+    const keyColumn = this.getMatrixKeyColumnName(question);
+    return this.getDefaultItems(question).filter(i => i[keyColumn] == key)[0];
+  }
+
+  protected defaultItems: any;
   //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
 
   protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
-    const rowData = question.value.filter(r => row.value.name == r.name)[0];
-    const defaultItem = this.defaultItems.filter(i => i.name == rowData.name)[0];
+    const keyColumn = this.getMatrixKeyColumnName(question);
+    const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
+    const defaultItem = this.getDefaultItem(question, rowData[keyColumn]);
     if (defaultItem) {
       const defaultData = {};
       Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
@@ -79,25 +88,30 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   }
 
   private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
-    let survey;
+    let survey: SurveyModel;
+    const itemKey = this.getMatrixKeyColumnName(question);
     const resetAction = {
       id: "reset-to-default",
       title: "Reset to default",
       css: "sps-action--grow",
       innerCss: "sps-btn sps-btn--secondary-alert",
       visibleIndex: 15,
-      action: (a)=>{
-        const defaultItem = this.defaultItems.filter(i => i.name == survey.getQuestionByName(this.getMatrixKeyColumnName(question)).value)[0];
+      action: (a) => {
+        const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
         survey.data = defaultItem;
         creator.notify(a.title);
       }
     };
     survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
+    const keyQuestion = survey.getQuestionByName(itemKey);
+    if (this.getDefaultItem(question, keyQuestion.value)) {
+      keyQuestion.readOnly = true;
+    }
   }
 
   private resetItem(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const name = row.getValue("name");
-    const defaultItems = this.defaultItems.filter(i => i.name == name)[0];
+    const defaultItems = this.getDefaultItem(question, name);
     if (defaultItems) {
       const value = question.value;
       const itemRow = value.filter(v => v.name == name)[0];

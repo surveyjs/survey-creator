@@ -399,6 +399,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.propertyGridSetObj(this.currentProperties.getObj());
     const categories = this.currentProperties.getInitialJson();
     this.defaultItems = [];
+    this.defaultCategories = [];
     model.setValue(this.nameCategories, categories);
     this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
