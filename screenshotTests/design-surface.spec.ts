@@ -105,9 +105,9 @@ test.describe(title, () => {
   });
 
   test("Placeholder", async ({ page }) => {
+    await setIsCompact(page, true);
     await page.setViewportSize({ width: 1767, height: 900 });
     const designerTabContent = page.locator(".svc-tab-designer");
-    await setIsCompact(page, true);
     await compareScreenshot(page, designerTabContent, "surface-placeholder.png");
   });
 
