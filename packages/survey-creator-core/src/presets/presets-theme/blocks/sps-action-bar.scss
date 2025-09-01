@@ -107,6 +107,11 @@
       fill: var(--ctr-actionbar-button-icon-color-hovered, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
+  &:disabled {
+    use {
+      fill: var(--sjs2-color-fg-state-common-disabled, rgba(28, 27, 32, 0.40));
+    }
+  }
 }
 
 .sps-action-button--icon {
