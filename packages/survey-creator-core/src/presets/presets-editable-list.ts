@@ -102,8 +102,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
 
   private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     let survey: SurveyModel;
+    let resetAction;
     const itemKey = this.getMatrixKeyColumnName(question);
-    const resetAction = {
+    const resetActionParams = {
       id: "reset-to-default",
       title: "Reset to default",
       css: "sps-action--grow",
@@ -112,10 +113,14 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       action: (a) => {
         const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
         survey.data = defaultItem;
+        resetAction.enabled = false;
         creator.notify(a.title);
       }
     };
-    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [new Action(resetAction)] });
+    resetAction = new Action(resetActionParams);
+    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [resetAction] });
+    resetAction.enabled = !Helpers.isTwoValueEquals(survey.data, this.getDefaultItem(question, survey.getValue(itemKey)));
+    survey.onValueChanged.add(()=>resetAction.enabled = true);
     const keyQuestion = survey.getQuestionByName(itemKey);
     if (this.getDefaultItem(question, keyQuestion.value)) {
       keyQuestion.readOnly = true;

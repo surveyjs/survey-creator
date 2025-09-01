@@ -50,6 +50,13 @@
   &:active {
     background: var(--sjs2-color-bg-brand-primary, #19b394);
   }
+  &:disabled {
+    opacity: var(--sjs2-opacity-disabled, 0.25);
+    background: var(--sjs2-color-bg-state-common-disabled, #D4D4D4);
+
+    color: var(--sjs2-color-fg-state-common-disabled, rgba(28, 27, 32, 0.40));
+    pointer-events: none;
+  }
 }
 
 .sps-btn--secondary-brand {
