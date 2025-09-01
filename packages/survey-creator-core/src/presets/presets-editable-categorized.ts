@@ -42,7 +42,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const category = row.getValue("category");
-    const defaultItems = this.defaultCategories.filter(i => i.category == category)[0]?.items;
+    const defaultItems = this.defaultCategories.filter(i => i.category == category)[0]?.[this.nameInnerMatrix];
     if (!defaultItems) return;
     const categoriesQuestion = this.getQuestionCategories(model);
     const hiddenItemsQuestion = this.getMatrix(model);

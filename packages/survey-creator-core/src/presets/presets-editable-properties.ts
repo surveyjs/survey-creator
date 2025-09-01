@@ -106,18 +106,25 @@ export class SurveyQuestionPresetPropertiesDetail {
     return res;
   }
   public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
-  public getInitialJson() {
-    const pgJSON = this.propertyGridValue.survey.toJSON();
+  public getInitialJson(useDefaults: boolean) {
+    const pgJSON = (useDefaults ? this.propertyGridDefaultValue : this.propertyGridValue).survey.toJSON();
     return pgJSON.pages.map(p => {
       return {
         category: p.name,
         title: p.title,
         iconName: p.iconName,
-        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => ({
-          name: e.name,
-          title: e.title,
-          description: e.description
-        }))
+        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => {
+          const property: any = {
+            name: e.name,
+            title: e.title
+          };
+
+          if (e.description !== undefined) {
+            property.description = e.description;
+          }
+
+          return property;
+        })
       };
     });
   }
@@ -396,14 +403,20 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.currentClassName = selQuestion.value;
     if (!this.currentClassName) return;
     this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
+    this.setupDefaults(model);
     this.propertyGridSetObj(this.currentProperties.getObj());
-    const categories = this.currentProperties.getInitialJson();
-    this.defaultItems = [];
-    this.defaultCategories = [];
+    const categories = this.currentProperties.getInitialJson(false);
     model.setValue(this.nameCategories, categories);
     this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     //this.setupCreatorToolbox(this.propCreator);
+  }
+
+  private setupDefaults(model: SurveyModel): void {
+    const categories = this.currentProperties?.getInitialJson(false) || [];
+    this.defaultCategories = [...categories];
+    this.defaultItems = [];
+    categories.forEach(c => this.defaultItems.push(...c.properties));
   }
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {

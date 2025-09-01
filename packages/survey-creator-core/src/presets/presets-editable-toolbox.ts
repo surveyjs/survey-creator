@@ -263,9 +263,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     super.setupQuestionsCore(model, creatorSetup);
-    this.setupPageQuestions(model, creatorSetup.creator);
+    this.setupDefaults(model, creatorSetup.creator);
   }
-  private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+  private setupDefaults(model: SurveyModel, creator: SurveyCreatorModel): void {
     const toolboxDefaultItems = creator.toolbox.getDefaultItems([], true, true, true);
     const toolboxDefaultCategories = creator.toolbox.getDefaultCategories();
     this.defaultItems = toolboxDefaultItems.map(i => this.createToolboxItemRow(i));
@@ -275,12 +275,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       }
     });
     this.defaultCategories = toolboxDefaultCategories.map(i => this.createToolboxCategoryRow(i));
-    this.setQuestionItemsRows(model);
-  }
-  private setQuestionItemsRows(model: SurveyModel): void {
-    //this.allItems = this.getDefaultToolboxItems(model);
-    //const q = this.getMatrix(model);
-    //q.value = this.allItems.filter(i => !i.category);
   }
   // private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
   //   if (!a || !b || a.length !== b.length) return false;
@@ -304,7 +298,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     const newCreator = new SurveyCreatorModel({});
     newCreator.locale = creator.locale;
-    this.setupPageQuestions(model, newCreator);
+    this.setupDefaults(model, newCreator);
     this.setupQuestionsValueCore(model, json, newCreator);
   }
   // private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
