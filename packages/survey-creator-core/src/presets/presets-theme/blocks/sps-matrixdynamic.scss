@@ -92,9 +92,9 @@
   margin-inline-end: var(--sjs2-spacing-x100, 8px);
   &:disabled {
     opacity: 1;
-  }
-  use {
-    fill: var(--sjs2-color-fg-brand-primary, #19b394);
+    use {
+      fill: var(--sjs2-color-fg-brand-primary, #19b394);
+    }
   }
 }
 
