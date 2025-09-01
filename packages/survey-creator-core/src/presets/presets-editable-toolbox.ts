@@ -269,6 +269,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const toolboxDefaultItems = creator.toolbox.getDefaultItems([], true, true, true);
     const toolboxDefaultCategories = creator.toolbox.getDefaultCategories();
     this.defaultItems = toolboxDefaultItems.map(i => this.createToolboxItemRow(i));
+    toolboxDefaultItems.forEach(i => {
+      if (i.items) {
+        this.defaultItems.push(...i.items.map(si => this.createToolboxItemRow(si)));
+      }
+    });
     this.defaultCategories = toolboxDefaultCategories.map(i => this.createToolboxCategoryRow(i));
     this.setQuestionItemsRows(model);
   }
