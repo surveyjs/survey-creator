@@ -239,8 +239,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     if (!differs && !Helpers.isTwoValueEquals(items.map(i=>i.name), this.defaultItems.map(i=>i.name))) differs = true;
     return differs ? items : undefined;
   }
-  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameItems || question.name === this.nameSubitems || super.isItemsMatrix(question);
+  protected isItemsMatrix(name: string): boolean {
+    return name === this.nameItems || name === this.nameSubitems || super.isItemsMatrix(name);
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (options.question.name == this.nameMatrix) {

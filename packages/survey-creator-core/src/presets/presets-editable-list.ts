@@ -28,16 +28,29 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
   //}
 
+  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    if (this.needToSetActions(name)) {
+      const matrix = model.getQuestionByName(name) as QuestionMatrixDynamicModel;
+      matrix.renderedTable.rows.forEach(r => {
+        if (!r.row) return;
+        const actions = r.cells[r.cells.length - 1].item?.value.actions;
+        if (!actions) return;
+        this.updateResetAction(matrix, r.row as MatrixDynamicRowModel, actions);
+      });
+    }
+  }
+
   protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
     const keyColumn = this.getMatrixKeyColumnName(question);
+    if (!question.value) return;
     const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
+    if (!rowData) return;
     const defaultItem = this.getDefaultItem(question, rowData[keyColumn]);
-    if (defaultItem) {
-      const defaultData = {};
-      Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
-      const resetAction = actions.filter(a => a.id == "reset-to-default")[0];
-      resetAction.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
-    }
+    if (!defaultItem) return;
+    const defaultData = {};
+    Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
+    const resetAction = actions.filter(a => a.id == "reset-to-default")[0];
+    resetAction.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
   }
 
   protected createResetAction(model: SurveyModel, row: MatrixDynamicRowModel, action: (action: Action) => void): IAction {
@@ -132,14 +145,14 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
   }
 
-  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameMatrix;
+  protected isItemsMatrix(name: string): boolean {
+    return name === this.nameMatrix;
   }
-  protected needToSetActions(question: QuestionMatrixDynamicModel) {
-    return this.isItemsMatrix(question);
+  protected needToSetActions(name: string) {
+    return this.isItemsMatrix(name);
   }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (this.needToSetActions(options.question)) {
+    if (this.needToSetActions(options.question.name)) {
       const question = options.question as QuestionMatrixDynamicModel;
       const allowExpand = question.detailElements.filter(e => e.visible).length > 0;
       const keyColumn = this.getMatrixKeyColumnName(options.question);
@@ -163,12 +176,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (this.isItemsMatrix(options.fromMatrix) && this.isItemsMatrix(options.toMatrix)) {
+    if (this.isItemsMatrix(options.fromMatrix.name) && this.isItemsMatrix(options.toMatrix.name)) {
       options.allow = true;
     }
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (this.isItemsMatrix(options.question) && options.question.name != this.nameMatrix) {
+    if (this.isItemsMatrix(options.question.name) && options.question.name != this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];
       const hiddenItems = this.getMatrix(model);
       const value = hiddenItems.value ? [...hiddenItems.value] : [];
@@ -182,10 +195,10 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (options.question.name == this.nameMatrix || options.question.name == this.nameItems) {
-      //const renderedRow = options.question.renderedTable.rows.find(r => r.row == options.row);
-      //const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
-      //this.updateResetAction(options.question, options.row, actions);
+    if (this.needToSetActions(options.question.name)) {
+      const renderedRow = options.question.renderedTable.rows.find(r => r.row == options.row);
+      const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
+      this.updateResetAction(options.question, options.row, actions);
     }
   }
 }

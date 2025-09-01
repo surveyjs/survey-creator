@@ -37,8 +37,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
   protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
 
-  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return super.isItemsMatrix(question) || question.name === this.nameInnerMatrix;
+  protected isItemsMatrix(name: string): boolean {
+    return super.isItemsMatrix(name) || name === this.nameInnerMatrix;
   }
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const category = row.getValue("category");
@@ -80,8 +80,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
     return generalCategory;
   }
-  protected needToSetActions(question: QuestionMatrixDynamicModel) {
-    return this.isItemsMatrix(question) || question.name === this.nameCategories;
+  protected needToSetActions(name: string) {
+    return this.isItemsMatrix(name) || name === this.nameCategories;
   }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     super.onGetMatrixRowActionsCore(model, creator, options);

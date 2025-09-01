@@ -132,8 +132,8 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     super.onMatrixRowRemoving(model, creator, options);
   }
 
-  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameItems || super.isItemsMatrix(question);
+  protected isItemsMatrix(name: string): boolean {
+    return name === this.nameItems || super.isItemsMatrix(name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
     const rows = this.getQuestionItems(model).visibleRows;
@@ -179,6 +179,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     activeQ.choices = this.defaultItems.map(t => new ItemValue(t.name, t.title));
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    super.updateOnValueChangedCore(model, name);
     if (name === this.nameItems) {
       const val = model.getValue(name) || [];
       model.getQuestionByName(this.nameActiveTab).visible = val.length > 1;
