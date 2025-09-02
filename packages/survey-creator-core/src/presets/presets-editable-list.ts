@@ -202,7 +202,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (this.needToSetActions(options.question.name)) {
       const renderedRow = options.question.renderedTable.rows.find(r => r.row == options.row);
+      if (!renderedRow) return;
       const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
+      if (!actions) return;
       this.updateResetAction(options.question, options.row, actions);
     }
   }

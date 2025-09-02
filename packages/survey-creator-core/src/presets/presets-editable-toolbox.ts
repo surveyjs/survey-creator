@@ -18,6 +18,7 @@ function validateToolboxJson (params) {
 FunctionFactory.Instance.register("validateToolboxJson", validateToolboxJson);
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableCaregorizedListConfigurator {
   private allItems: ICreatorPresetToolboxItem[];
+  protected defaultSubitems: any;
   private createItemsMatrixJSON(props: any, addSubitems: boolean): any {
     const defaultJSON = {
       type: "matrixdynamic",
@@ -172,6 +173,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return [this.nameCategories, this.nameItems, this.nameShowCategoryTitles];
   }
 
+  protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
+    return question?.name === this.nameCategories ? this.defaultCategories : [...this.defaultItems, ...this.defaultSubitems];
+  }
+
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const res: any = {};
     const definition = this.getJsonItemsDefinition(model);
@@ -269,9 +274,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const toolboxDefaultItems = creator.toolbox.getDefaultItems([], true, true, true);
     const toolboxDefaultCategories = creator.toolbox.getDefaultCategories();
     this.defaultItems = toolboxDefaultItems.map(i => this.createToolboxItemRow(i));
+    this.defaultSubitems = [];
     toolboxDefaultItems.forEach(i => {
       if (i.items) {
-        this.defaultItems.push(...i.items.map(si => this.createToolboxItemRow(si)));
+        this.defaultSubitems.push(...i.items.map(si => this.createToolboxItemRow(si)));
       }
     });
     this.defaultCategories = toolboxDefaultCategories.map(i => this.createToolboxCategoryRow(i));
