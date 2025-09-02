@@ -1,4 +1,4 @@
-import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, ActionBarCssClasses, PanelModel } from "survey-core";
+import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, PanelModel } from "survey-core";
 import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 

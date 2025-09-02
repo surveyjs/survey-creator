@@ -1,11 +1,8 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { FunctionFactory, Helpers, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
-import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
+import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization } from "survey-creator-core";
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
-import { CreatorPresetEditorModel } from "./presets-editor";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
-import { IToolboxCategoryDefinition } from "../toolbox";
 
 const LocCategoriesName = "toolboxCategories";
 

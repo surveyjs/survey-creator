@@ -1,10 +1,5 @@
-import { Action, FunctionFactory, Helpers, IAction, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
-import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
-import { ICreatorPresetToolboxItem } from "survey-creator-core";
-import { CreatorPresetEditorModel } from "./presets-editor";
-import { SurveyHelper } from "../survey-helper";
+import { IAction, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
+import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
 
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {

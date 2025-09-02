@@ -1,4 +1,4 @@
-import { QuestionCommentModel, ItemValue, Serializer, ElementFactory, ITextArea, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
+import { QuestionCommentModel, Serializer, ElementFactory, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
 import { SurveyJSON5 } from "survey-creator-core";
 
 export class QuestionPresetJsonModel extends QuestionCommentModel {

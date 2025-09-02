@@ -10,7 +10,7 @@ export * from "../presets/presets-editable-base";
 //export * from "../presets/presets-tabs";
 //export * from "../presets/presets-languages";
 //export * from "../presets/presets-properties";
-export * from "../presets/preset-question-ranking";
+//export * from "../presets/preset-question-ranking";
 export * from "../presets/preset-question-json";
 import { checkLibraryVersion } from "survey-core";
 import "../presets/presets-theme/presets.scss";

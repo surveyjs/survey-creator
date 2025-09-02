@@ -1,4 +1,4 @@
-import { createDropdownActionModel, Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer, IAction } from "survey-core";
+import { createDropdownActionModel, IAction } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, extendCreatorTheme } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";

@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { Base, SurveyModel, PageModel } from "survey-core";
 import {
   ReactElementFactory,
@@ -10,14 +9,8 @@ import {
 import { PropertyGridViewModel } from "survey-creator-core";
 interface IPresetsPropertyGridWrapperProps {
   model: PropertyGridViewModel;
-
 }
-export class PresetsPropertyGridWrapper extends React.Component {
-  static propTypes = {
-    model: PropTypes.object.isRequired,
-
-  };
-
+export class PresetsPropertyGridWrapper extends React.Component<any, any> {
   constructor(props: IPresetsPropertyGridWrapperProps) {
     super(props);
   }

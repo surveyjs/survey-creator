@@ -1,5 +1,5 @@
-import { Base, Serializer, ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
+import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
+import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 function searchItem(params) {
   const questionInstance = this.survey.getQuestionByName(params[0]);

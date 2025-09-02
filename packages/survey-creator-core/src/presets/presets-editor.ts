@@ -1,6 +1,6 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
-import { Action, ActionContainer, Base, ComputedUpdater, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel, createDropdownActionModel } from "survey-core";
+import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";

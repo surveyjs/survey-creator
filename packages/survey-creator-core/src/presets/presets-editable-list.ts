@@ -1,11 +1,6 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel, Action, IAction } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
-import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
-import { ICreatorPresetToolboxItem } from "survey-creator-core";
-import { CreatorPresetEditorModel } from "./presets-editor";
-import { SurveyHelper } from "../survey-helper";
-
+import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction } from "survey-core";
+import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
 export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");

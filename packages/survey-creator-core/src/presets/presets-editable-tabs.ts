@@ -1,9 +1,7 @@
 import { Helpers, ItemValue, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel } from "survey-creator-core";
-import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
+import { SurveyCreatorModel, editorLocalization } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
-import { editorLocalization } from "../editorLocalization";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   private createItemsMatrixJSON(props: any): any {

@@ -1,16 +1,13 @@
 import {
   JsonObjectProperty, ItemValue, QuestionDropdownModel,
-  Base, Serializer, SurveyModel, matrixDropdownColumnTypes, PageModel,
-  LocalizableString,
-  Question } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes
+} from "survey-core";
+import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
-  SurveyQuestionProperties, editorLocalization, PropertyGridModel, TabDesignerPlugin,
-  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper, calculateDragOverLocation, PageAdorner
-} from "survey-creator-core";
+  SurveyQuestionProperties, editorLocalization, PropertyGridModel,
+  settings } from "survey-creator-core";
 
-import { ElementFactory, QuestionMatrixDynamicModel, QuestionPanelDynamicModel } from "survey-core";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 
 //   private allTypes: string[];
