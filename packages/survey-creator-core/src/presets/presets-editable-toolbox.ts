@@ -47,7 +47,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           "elements": [
             { type: "text", name: "name", title: "Name", isUnique: true, visible: false, isRequired: true },
             { type: "text", name: "title", title: "Title", visible: false },
-            { type: "text", name: "iconName", title: "Icon name", visible: false },
+            { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
             { type: "text", name: "tooltip", title: "Tooltip", visible: false },
           ],
           visible: false

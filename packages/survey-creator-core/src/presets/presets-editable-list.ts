@@ -1,4 +1,4 @@
-import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction } from "survey-core";
+import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
 export class CreatorPresetEditableList extends CreatorPresetEditableBase {
@@ -9,6 +9,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   public getMainElementName() : any { return this.nameMatrix; }
+  protected get iconList() { return Object.keys(SvgRegistry.icons).map(name => "icon-" + name); }
   protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return "name"; }
   protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
     return this.defaultItems;

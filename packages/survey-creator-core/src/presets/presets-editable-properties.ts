@@ -284,7 +284,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               detailElements: [
                 { type: "text", name: "category", title: "Name", isRequired: true, visible: false },
                 { type: "text", name: "title", title: "Title", visible: false },
-                { type: "text", name: "iconName", title: "Icon Name", visible: false },
+                { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
                 })

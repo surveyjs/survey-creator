@@ -28,6 +28,9 @@
     align-items: flex-start;
     flex: 1 0 0;
     position: relative;
+    &.sv-string-viewer {
+        white-space: nowrap;
+    }
 }
 
 .sps-dropdown-popup.sv-popup--menu-popup {
@@ -121,4 +124,19 @@
             fill: var(--ctr-editor-button-icon-color-disabled, var(--sjs-layer-3-foreground-75, #000000bf));
         }
     }
+}
+.sps-icon-item {
+    display: flex;
+    gap: var(--sjs2-spacing-x100, 8px);
+}
+svg.sps-icon-item__icon, svg.sps-icon-item__icon use {
+    width: var(--sjs2-size-icon-medium, 24px);
+    height: var(--sjs2-size-icon-medium, 24px);
+    fill: var(--sjs2-color-fg-brand-primary, #19b394);
+}
+.sv-list__item--selected svg.sps-icon-item__icon use {
+    fill: currentColor;
+}
+.sps-icon-item__text {
+    white-space: nowrap;
 }

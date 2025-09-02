@@ -30,7 +30,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       detailElements: [
         { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true, readOnly: true, visible: false },
         { type: "text", name: "title", title: "Title", visible: false },
-        { type: "text", name: "iconName", title: "Icon name", visible: false }
+        { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false }
       ]
     };
     return { ...defaultJSON, ...props };
