@@ -640,6 +640,28 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [{ name: "rateValues", index: 5 }]
   },
+  "matrixdropdowncolumn@slider": {
+    properties: [
+      { name: "sliderType", tab: "sliderSettings" },
+      { name: "min", tab: "sliderSettings" },
+      { name: "max", tab: "sliderSettings" },
+      { name: "step", tab: "sliderSettings" },
+      { name: "minRangeLength", tab: "sliderSettings" },
+      { name: "maxRangeLength", tab: "sliderSettings" },
+      { name: "showLabels", tab: "sliderSettings" },
+      { name: "autoGenerate", tab: "sliderSettings" },
+      { name: "labelCount", tab: "sliderSettings" },
+      { name: "customLabels", tab: "sliderSettings" },
+      { name: "labelFormat", tab: "sliderSettings" },
+      { name: "tooltipVisibilityPG", tab: "sliderSettings" },
+      { name: "tooltipFormat", tab: "sliderSettings" },
+      { name: "allowSwap", tab: "sliderSettings" },
+      { name: "allowClear", tab: "sliderSettings" },
+      { name: "minValueExpression", tab: "logic", index: 410 },
+      { name: "maxValueExpression", tab: "logic", index: 420 },
+    ],
+    tabs: [{ name: "sliderSettings", index: 10 }]
+  },
   multipletextitem: {
     properties: [
       "name",
