@@ -1360,6 +1360,29 @@ test("advanced header disable inheritWidthFrom and reset it to 'container' if sh
   expect(inheritWidthFromQuestion.value).toBe("container");
   expect(inheritWidthFromQuestion.isVisible).toBe(true);
 });
+test("header background image/backgroundImageFit/backgroundImageOpacity, Bug#7124", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { title: "Survey Title", headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  const headerViewContainer = groupHeader.elements[0].contentPanel;
+  const backgroundImage = headerViewContainer.getQuestionByName("backgroundImage");
+  const backgroundImageFit = headerViewContainer.getQuestionByName("backgroundImageFit");
+  const backgroundImageOpacity = headerViewContainer.getQuestionByName("backgroundImageOpacity");
+  expect(backgroundImage.isEmpty()).toBeTruthy();
+  expect(backgroundImageFit.readOnly).toBeTruthy();
+  expect(backgroundImageOpacity.readOnly).toBeTruthy();
+  expect(backgroundImageFit.enableIf).toBeTruthy();
+  expect(backgroundImageOpacity.enableIf).toBeTruthy();
+  backgroundImage.value = "url('image.jpg')";
+  expect(backgroundImageFit.readOnly).toBeFalsy();
+  expect(backgroundImageOpacity.readOnly).toBeFalsy();
+  backgroundImage.clearValue();
+  expect(backgroundImageFit.readOnly).toBeTruthy();
+  expect(backgroundImageOpacity.readOnly).toBeTruthy();
+});
 
 test("Theme builder: set custom font", (): any => {
   const customFont = "RobotoMono-Regular, monospace";
