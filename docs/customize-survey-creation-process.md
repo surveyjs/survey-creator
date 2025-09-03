@@ -18,7 +18,7 @@ This help topic describes how you can customize the following aspects of Survey 
 
 Adorners are design-surface controls that allow Survey Creator users to manipulate survey elements. Each element type has an associated set of default adorners. The following image highlights adorners on a Dropdown question:
 
-<img src="./images/survey-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
+<img src="./images/survey-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="772" height="663">
 
 You can control the visibility of adorners using the [`onElementAllowOperations`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementAllowOperations) event. As the second parameter, the event handler accepts an object that exposes the following Boolean properties:
 

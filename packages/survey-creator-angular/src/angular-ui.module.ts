@@ -80,6 +80,7 @@ import { JsonErrorItemComponent } from "./tabs/json/json-error-item.component";
 import { TranslateFromAction } from "./tabs/translation/translate-from-action.component";
 import { QuestionElementContentComponent } from "./question-element-content.component";
 import { PageElementContentComponent } from "./page-element-content.component";
+import { PageWrapperComponent } from "./page-wrapper.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarPageComponent, SidebarDefaultHeaderComponent, ObjectSelectorComponent, SidebarPropertyGridHeaderComponent, PropertyGridPlaceholderComponent, SidebarHeaderComponent, TabControlComponent, TabsComponent, TabButtonComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, QuestionPgErrorComponent, SurfacePlaceholderComponent, SwitcherComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
@@ -87,7 +88,7 @@ import { PageElementContentComponent } from "./page-element-content.component";
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, QuestionTextWithResetComponent,
-    BooleanSwitchComponent, TranslateFromAction, AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent],
+    BooleanSwitchComponent, TranslateFromAction, AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent],
 
   imports: [
     CommonModule, FormsModule, SurveyModule

@@ -613,6 +613,18 @@ import "ace-builds/src-noconflict/theme-clouds_midnight";
 // ...
 ```
 
+To enable code highlighting, set the path to the directory containing the `ace.js` script using the `AceJsonEditorModel.aceBasePath` property. If you host `ace.js` on your server, specify your server path. If you use a CDN or installed Ace via npm, you can use the following path:
+
+```js
+// components/SurveyCreator.tsx
+// ...
+import { AceJsonEditorModel } from "survey-creator-core";
+AceJsonEditorModel.aceBasePath = "https://unpkg.com/ace-builds/src-min-noconflict/";
+// ...
+```
+
+[View Demo](/survey-creator/examples/ace-editor-integration/reactjs (linkStyle))
+
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 
 ## Further Reading
