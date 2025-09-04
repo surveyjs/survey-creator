@@ -20,6 +20,7 @@ export class TabControlModel extends Base {
       visible: true,
       pressed: false,
       action: () => {
+        if (!this.expandCollapseAction.enabled) return;
         if (this.sidePanel.visible) {
           this.sidePanel.collapseSidebar();
         } else {
