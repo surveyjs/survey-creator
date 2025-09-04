@@ -933,3 +933,18 @@ test("Reset all changes", () => {
   editor.resetToDefaults();
   expect(editor.json).toEqual({});
 });
+test("Icon change", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const tabs = (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel);
+  const row = tabs.visibleRows.filter(r => r.value.name == "designer")[0];
+  const renderedRow = tabs.renderedTable.rows.filter(r => r.row == row)[0];
+  const iconAction = renderedRow.cells[1].item.value.actions[0];
+  expect(iconAction.id).toBe("icon-action");
+  expect(iconAction.iconName).toBe("icon-config");
+
+  const tabsValue = JSON.parse(JSON.stringify(tabs.value));
+  tabsValue.filter(v => v.name == "designer")[0].iconName = "icon-test";
+  tabs.value = tabsValue;
+  expect(iconAction.iconName).toBe("icon-test");
+});

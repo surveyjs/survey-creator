@@ -29,14 +29,25 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       const matrix = model.getQuestionByName(name) as QuestionMatrixDynamicModel;
       matrix.renderedTable.rows.forEach(r => {
         if (!r.row) return;
+        const iconActions = r.cells[1].item?.value.actions;
+        this.updateIconAction(matrix, r.row as MatrixDynamicRowModel, iconActions);
         const actions = r.cells[r.cells.length - 1].item?.value.actions;
-        if (!actions) return;
         this.updateResetAction(matrix, r.row as MatrixDynamicRowModel, actions);
       });
     }
   }
 
+  protected updateIconAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
+    if (!actions) return;
+    const keyColumn = this.getMatrixKeyColumnName(question);
+    if (!question.value) return;
+    const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
+    if (!rowData) return;
+    const iconAction = actions.filter(a => a.id == "icon-action")[0];
+    iconAction.iconName = rowData.iconName;
+  }
   protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
+    if (!actions) return;
     const keyColumn = this.getMatrixKeyColumnName(question);
     if (!question.value) return;
     const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
