@@ -177,7 +177,7 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {width?: string, actions?: IAction[]}) {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[]}) {
     const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
     const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
     survey.fitToContainer = false;
@@ -207,12 +207,8 @@ export class CreatorPresetEditableBase {
         title: "Edit",
         displayMode: "popup"
       }, rootElement);
-      if (!options.width) {
-        if (survey.calculatedWidthMode == "responsive") {
-          popupModel.width = "100%";
-        }
-      } else {
-        popupModel.width = options.width;
+      if (survey.getAllQuestions().filter(q => !q.startWithNewLine).length > 0) {
+        popupModel.width = "100%";
       }
 
       if (popupModel.footerToolbar) {
