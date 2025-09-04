@@ -105,6 +105,12 @@ export class CreatorPresetEditableBase {
       item.setupQuestions(model, creatorSetup);
     });
   }
+  public resetToDefaults(model: SurveyModel): void {
+    this.restoreValuesFromDefault(model);
+    this.children.forEach(item => {
+      item.resetToDefaults(model);
+    });
+  }
   public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
     this.setupOnCurrentPageCore(model, creator, active);
     this.children.forEach(item => {
@@ -135,6 +141,7 @@ export class CreatorPresetEditableBase {
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
+    this.saveValuesAsDefault(model);
     this.children.forEach(item => {
       item.setupQuestionsValue(model, !!json ? json[item.path] : undefined, creator);
     });
@@ -145,7 +152,16 @@ export class CreatorPresetEditableBase {
       item.setupQuestionsValue(model, !!json ? json[item.path] : undefined, creator);
     });
   }
+
+  private saveValuesAsDefault(model: SurveyModel) {
+    this.questionNames.forEach(name => model.getQuestionByName(name).defaultValue = model.getValue(name) && JSON.parse(JSON.stringify(model.getValue(name))));
+  }
+  private restoreValuesFromDefault(model: SurveyModel) {
+    this.questionNames.forEach(name => model.getQuestionByName(name).value = model.getQuestionByName(name).defaultValue && JSON.parse(JSON.stringify(model.getQuestionByName(name).defaultValue)));
+  }
+
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
+  protected resetToDefaultsCore(model: SurveyModel): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any { return undefined; }
