@@ -184,6 +184,7 @@ export class CreatorPresetEditableBase {
     survey.showNavigationButtons = false;
     survey.data = data;
     survey.css = presetsCss;
+    survey.enterKeyAction = "loseFocus";
     if (settings.showDialog) {
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",

@@ -109,6 +109,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.showNavigationButtons = false;
     model.completeText = "Save & Exit";
     model.pagePrevText = "Back";
+    model.enterKeyAction = "loseFocus";
 
     editablePresets.forEach(item => item.setupQuestions(model, this));
     if (!this.defaultJsonValue) {
