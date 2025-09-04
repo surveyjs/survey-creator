@@ -917,3 +917,19 @@ test("Preset edit model, set json property", () => {
   expect(JSON.parse(jsonQuestion.value)).toMatchObject(json);
   expect(editor.creator.tabs).toHaveLength(2);
 });
+test("Reset all changes", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  expect(editor.json).toEqual({});
+  (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel).removeRowByIndex(1);
+  expect(editor.json.tabs).toBeDefined();
+
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  expect(editor.json.toolbox.categories).toBeDefined();
+  survey.getQuestionByName("toolbox_showCategoryTitles").value = true;
+  expect(editor.json.toolbox.showCategoryTitles).toBeDefined();
+  (survey.getQuestionByName("toolbox_items") as QuestionMatrixDynamicModel).removeRowByIndex(1);
+
+  editor.resetToDefaults();
+  expect(editor.json).toEqual({});
+});

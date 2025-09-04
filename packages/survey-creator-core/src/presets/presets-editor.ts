@@ -89,6 +89,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.creator.readOnly = false;
   }
 
+  public resetToDefaults() {
+    this.model.editablePresets.forEach(item => item.resetToDefaults(this.model));
+  }
+
   private activatePage (model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {
     const inactivePresets = editablePresets.filter(item => model.currentPage.name !== item.pageName);
     const activePreset = editablePresets.filter(item => model.currentPage.name === item.pageName)[0];

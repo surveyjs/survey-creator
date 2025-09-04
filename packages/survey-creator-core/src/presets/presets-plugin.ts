@@ -57,7 +57,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       { id: "save", title: "Save & Exit", css: "sps-list__item--positive", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
       { id: "import", title: "Import", markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
       { id: "export", title: "Export", markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
-      { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true },
+      { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true, action: () => { this.model?.resetToDefaults(); } },
     ];
     let settingsAction;
     let presetsList;
