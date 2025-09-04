@@ -3,6 +3,7 @@
 @use "../fonts" as *;
 
 .sps-popup-menu.sv-popup--menu-popup {
+  height: unset;
   .sv-popup__container {
     border: initial;
     padding: var(--sjs2-spacing-x150, 12px);

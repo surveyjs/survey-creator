@@ -80,6 +80,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       horizontalPosition: "center",
       cssClass: "sps-popup-menu",
       cssClasses: listComponentCss,
+      onBlur: () => { settingsAction.popupModel.hide(); },
       onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
       onShow: () => { settingsAction.iconName = "close-24x24"; }
     }, this.creator);
@@ -91,6 +92,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.model.model.onCurrentPageChanged.add((_, options) => {
       presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo];
     });
+    setTimeout(() => settingsAction.action(), 100);
   }
 
   public deactivate(): boolean {
