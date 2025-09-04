@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact } from "./helper";
+import { url, compareScreenshot, test, expect, setJSON, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator } from "./helper";
 
 const title = "Designer surface";
 
@@ -478,22 +478,8 @@ test.describe(title, () => {
     const DragZoneQuestion1 = Question1.locator(".svc-question__drag-element");
 
     await Question1.click({ position: { x: 0, y: 20 } });
-    await DragZoneQuestion1.hover();
-
-    // Note: Drag and drop functionality may need special handling in Playwright
-    // For now, we'll simulate the selection state
-    await Question1.click();
-    /*
-    await t.click(Question1, { speed: 0.1, offsetY: 20 });
-    await t.hover(DragZoneQuestion1, { speed: 0.1 });
-    await t.dragToElement(DragZoneQuestion1, Question2, {
-      offsetX: 5,
-      offsetY: 5,
-      destinationOffsetX: -80,
-      speed: 0.5
-    });
-    await resetHoverToCreator(t);
-    */
+    await doDragDrop({ page, element: DragZoneQuestion1, target: Question2, options: { destinationOffsetX: 80 } });
+    await resetHoverToCreator(page);
     await compareScreenshot(page, ".svc-question__content", "surface-panel-multi-row-question-selected.png");
   });
 
@@ -1432,6 +1418,7 @@ test.describe(title, () => {
     await page.locator(".svc-question__adorner").nth(1).click({ position: { x: 10, y: 10 } });
     await page.locator(".svc-question__adorner").nth(2).hover({ position: { x: 10, y: 10 } });
     await page.locator(".svc-question__adorner").nth(2).click({ position: { x: 10, y: 10 } });
+    await page.locator(".svc-question__adorner").nth(2).scrollIntoViewIfNeeded();
     await page.hover(".svc-creator", { position: { x: 10, y: 10 } });
     await page.evaluate(() => { document.body.focus(); });
     await page.waitForTimeout(100);
