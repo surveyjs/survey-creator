@@ -3334,7 +3334,9 @@ export var skStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpätie stĺpca",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu"
+    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu",
+    // [Auto-translated] "Theme name"
+    themeName: "Názov témy"
   },
   theme: {
     // "Advanced mode"

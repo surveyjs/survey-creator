@@ -3334,7 +3334,9 @@ export var mnStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Баганын хугацаа",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн"
+    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн",
+    // [Auto-translated] "Theme name"
+    themeName: "Сэдвийн нэр"
   },
   theme: {
     // "Advanced mode"

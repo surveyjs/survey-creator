@@ -3334,7 +3334,9 @@ export var hrStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Raspon stupaca",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Širina područja trake napretka"
+    progressBarInheritWidthFrom: "Širina područja trake napretka",
+    // [Auto-translated] "Theme name"
+    themeName: "Naziv teme"
   },
   theme: {
     // "Advanced mode"

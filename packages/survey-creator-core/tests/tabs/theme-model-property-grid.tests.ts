@@ -16,6 +16,8 @@ export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
+export * from "../../src/localization/french";
+
 registerSurveyTheme(SurveyThemes);
 
 test("Theme builder initialization", (): any => {
@@ -302,7 +304,7 @@ test("advancedModeSwitcher state after switch tabs", (): any => {
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
   const propertyGridGroups = propertyGridSurvey.pages[0].elements;
   expect(propertyGridGroups.length).toBe(4);
   const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
@@ -317,6 +319,7 @@ test("advancedModeSwitcher state after switch tabs", (): any => {
   creator.activeTab = "designer";
   creator.activeTab = "theme";
   expect(actions[0].checked).toBeTruthy();
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
   expect(propertyGridSurvey.getQuestionByName("advancedMode").value).toBeTruthy();
 });
 
@@ -326,13 +329,13 @@ test("advancedModeSwitcher state after switch tabs (property grid buttons)", ():
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  const advancedModeQuestion = propertyGridSurvey.getQuestionByName("advancedMode");
+  let advancedModeQuestion = themePlugin.propertyGrid.survey.getQuestionByName("advancedMode");
   expect(advancedModeQuestion.value).toBeFalsy();
 
   advancedModeQuestion.value = true;
   creator.activeTab = "designer";
   creator.activeTab = "theme";
+  advancedModeQuestion = themePlugin.propertyGrid.survey.getQuestionByName("advancedMode");
   expect(advancedModeQuestion.value).toBeTruthy();
 });
 
@@ -1339,16 +1342,22 @@ test("advanced header disable inheritWidthFrom and reset it to 'container' if sh
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
-  const headerViewContainer = groupHeader.elements[0].contentPanel;
-  const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
-
+  let groupHeader: any = undefined;
+  let headerViewContainer: any = undefined;
+  let inheritWidthFromQuestion: any = undefined;
+  function updateHeaderViewContainer() {
+    groupHeader = themePlugin.propertyGrid.survey.pages[1];
+    headerViewContainer = groupHeader.elements[0].contentPanel;
+    inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
+  }
+  updateHeaderViewContainer();
   expect(inheritWidthFromQuestion.isVisible).toBe(true);
   expect(inheritWidthFromQuestion.value).toBe("survey");
 
   themePlugin.deactivate();
   creator.survey.showTOC = true;
   themePlugin.activate();
+  updateHeaderViewContainer();
   expect(headerViewContainer.getElementByName("headerView").value).toBe("advanced");
   expect(inheritWidthFromQuestion.value).toBe("container");
   expect(inheritWidthFromQuestion.isVisible).toBe(false);
@@ -1356,6 +1365,7 @@ test("advanced header disable inheritWidthFrom and reset it to 'container' if sh
   themePlugin.deactivate();
   creator.survey.showTOC = false;
   themePlugin.activate();
+  updateHeaderViewContainer();
   expect(headerViewContainer.getElementByName("headerView").value).toBe("advanced");
   expect(inheritWidthFromQuestion.value).toBe("container");
   expect(inheritWidthFromQuestion.isVisible).toBe(true);
@@ -1404,3 +1414,13 @@ test("Theme builder: set custom font", (): any => {
     expect(DefaultFonts.length).toEqual(10);
   }
 });
+test("creator theme & theme property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showThemeTab: true });
+  creator.activeTab = "theme";
+  const themePlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Theme");
+  creator.locale = "fr";
+  expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Thème");
+  creator.locale = "en";
+});
+

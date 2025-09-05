@@ -3334,7 +3334,9 @@ export var huStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Oszlop fesztávolsága",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "A folyamatjelző sáv területének szélessége"
+    progressBarInheritWidthFrom: "A folyamatjelző sáv területének szélessége",
+    // [Auto-translated] "Theme name"
+    themeName: "Téma neve"
   },
   theme: {
     // "Advanced mode"

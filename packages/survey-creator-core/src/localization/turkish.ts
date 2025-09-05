@@ -3334,7 +3334,9 @@ export var turkishStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Sütun aralığı",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "İlerleme çubuğu alanı genişliği"
+    progressBarInheritWidthFrom: "İlerleme çubuğu alanı genişliği",
+    // [Auto-translated] "Theme name"
+    themeName: "Tema adı"
   },
   theme: {
     // "Advanced mode"

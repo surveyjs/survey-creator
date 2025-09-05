@@ -374,3 +374,14 @@ test("getLocaleStrings function, Bug#6754", () => {
   expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
   editorLocalization.defaultLocale = "en";
 });
+test("creator.sidebar.header.title & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  expect(creator.sidebar.header.title).toBe("Survey Settings");
+  creator.locale = "fr";
+  creator.JSON = {};
+  expect(creator.sidebar.header.title).toBe("Paramètres du sondage");
+  creator.activeTab = "translation";
+  expect(creator.sidebar.header.title).toBe("Traduction");
+  creator.locale = "en";
+  expect(creator.sidebar.header.title).toBe("Language Settings");
+});

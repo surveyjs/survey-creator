@@ -3334,7 +3334,9 @@ export const thStrings = {
     // "Column span"
     effectiveColSpan: "การขยายคอลัมน์",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "ความกว้างของพื้นที่แถบความคืบหน้า"
+    progressBarInheritWidthFrom: "ความกว้างของพื้นที่แถบความคืบหน้า",
+    // [Auto-translated] "Theme name"
+    themeName: "ชื่อธีม"
   },
   theme: {
     // "Advanced mode"

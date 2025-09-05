@@ -3334,7 +3334,9 @@ export var msStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rentang lajur",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan"
+    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan",
+    // [Auto-translated] "Theme name"
+    themeName: "Nama tema"
   },
   theme: {
     // "Advanced mode"

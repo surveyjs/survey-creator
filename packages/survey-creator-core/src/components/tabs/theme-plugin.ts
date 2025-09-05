@@ -37,7 +37,6 @@ import { MenuButton } from "../../utils/actions";
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
   public static DefaultTheme = Themes["default-light"];
-  private allowModifyTheme: boolean = true;
   private previewAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
@@ -255,7 +254,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);
-    this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
+    this.propertyGridTab.locTileName = "ed.themePropertyGridTitle";
     this.themeModel = new ThemeModel();
 
     creator.registerShortcut("undo_theme", {
@@ -297,6 +296,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.update();
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.propertyGrid.survey.onOpenFileChooser.clear();
+    this.propertyGrid.obj = undefined;
     this.propertyGrid.obj = this.themeModel;
     this.propertyGrid.survey.mode = "edit";
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);

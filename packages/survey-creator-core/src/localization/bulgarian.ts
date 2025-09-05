@@ -3334,7 +3334,9 @@ export var bgStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Обхват на колоната",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък"
+    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък",
+    // [Auto-translated] "Theme name"
+    themeName: "Име на темата"
   },
   theme: {
     // "Advanced mode"

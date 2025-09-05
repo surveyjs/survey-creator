@@ -3334,7 +3334,9 @@ export var htStrings = {
     // "Column span"
     effectiveColSpan: "span kolòn",
     // "Progress bar area width"
-    progressBarInheritWidthFrom: "Lajè zòn ba pwogrè"
+    progressBarInheritWidthFrom: "Lajè zòn ba pwogrè",
+    // [Auto-translated] "Theme name"
+    themeName: "Non tèm"
   },
   theme: {
     // "Advanced mode"

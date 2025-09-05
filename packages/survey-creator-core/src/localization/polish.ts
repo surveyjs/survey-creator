@@ -3335,7 +3335,9 @@ export var polishStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpiętość kolumn",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu"
+    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu",
+    // [Auto-translated] "Theme name"
+    themeName: "Nazwa motywu"
   },
   theme: {
     // "Advanced mode"

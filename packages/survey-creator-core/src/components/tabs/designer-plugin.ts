@@ -135,6 +135,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   updateThemeSettings() {
     if (this.creator.showCreatorThemeSettings) {
       this.themeModel.loadTheme(this.creator.creatorTheme);
+      this.themePropertyGrid.obj = undefined;
       this.themePropertyGrid.obj = this.themeModel;
     }
   }
@@ -143,7 +144,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.themeModel.setTheme(this.creator.creatorTheme);
     }
   }
-
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
     this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);
@@ -155,7 +155,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     };
     themePropertyGridViewModel.searchEnabled = false;
     this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-property-grid", themePropertyGridViewModel);
-    this.themePropertyGridTab.caption = editorLocalization.getString("ed.creatorSettingTitle");
+    this.themePropertyGridTab.locTileName = "ed.creatorSettingTitle";
     this.themePropertyGridTab.activateCallback = () => {
       settingsAction.active = true;
     };
@@ -220,7 +220,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.updateTabControlActions();
     };
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
-    this.propertyGridPlaceholderPage.caption = editorLocalization.getString("ed.surveySettings");
+    this.propertyGridPlaceholderPage.locTileName = "ed.surveySettings";
 
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGrid", "svc-property-grid", this.propertyGridViewModel, () => {
       const result = [];

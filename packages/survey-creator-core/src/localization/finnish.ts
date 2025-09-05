@@ -3334,7 +3334,9 @@ export var fiStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Sarakkeen jänneväli",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Edistymispalkin alueen leveys"
+    progressBarInheritWidthFrom: "Edistymispalkin alueen leveys",
+    // [Auto-translated] "Theme name"
+    themeName: "Teeman nimi"
   },
   theme: {
     // "Advanced mode"

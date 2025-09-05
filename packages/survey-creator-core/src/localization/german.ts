@@ -3334,7 +3334,9 @@ export var germanTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Spaltenbereich",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Breite des Fortschrittsbalkenbereichs"
+    progressBarInheritWidthFrom: "Breite des Fortschrittsbalkenbereichs",
+    // [Auto-translated] "Theme name"
+    themeName: "Name des Themas"
   },
   theme: {
     // "Advanced mode"

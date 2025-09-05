@@ -3334,7 +3334,9 @@ export var ruStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Пролет колонны",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Ширина области индикатора выполнения"
+    progressBarInheritWidthFrom: "Ширина области индикатора выполнения",
+    // [Auto-translated] "Theme name"
+    themeName: "Название темы"
   },
   theme: {
     // "Advanced mode"

@@ -3334,7 +3334,9 @@ export var grStrings = {
     // "Column span"
     effectiveColSpan: "Εύρος στήλης",
     // "Progress bar area width"
-    progressBarInheritWidthFrom: "Πλάτος περιοχής γραμμής προόδου"
+    progressBarInheritWidthFrom: "Πλάτος περιοχής γραμμής προόδου",
+    // [Auto-translated] "Theme name"
+    themeName: "Όνομα θέματος"
   },
   theme: {
     // "Advanced mode"

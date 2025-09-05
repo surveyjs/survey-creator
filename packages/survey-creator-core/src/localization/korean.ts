@@ -3335,7 +3335,9 @@ export var koreanStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "열 범위",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비",
+    // [Auto-translated] "Theme name"
+    themeName: "테마 이름"
   },
   theme: {
     // "Advanced mode"

@@ -3335,7 +3335,9 @@ export let svStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolumn spännvidd",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area"
+    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area",
+    // [Auto-translated] "Theme name"
+    themeName: "Temats namn"
   },
   theme: {
     // "Advanced mode"
