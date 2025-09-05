@@ -8,6 +8,11 @@ export default defineConfig({
   },
   snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}{ext}",
   reporter: [["junit", { outputFile: "test-results/e2e-junit-results.xml" }], ["html", { open: "never" }]],
+  use: {
+    launchOptions: {
+      ignoreDefaultArgs: ["--hide-scrollbars"],
+    }
+  },
   projects: [
     {
       name: "a11y",
