@@ -17,22 +17,22 @@ test("Creator theme model de/serialization", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--ctr-size-unit": "6px",
-      "--ctr-corner-radius-unit": "6px",
-      "--ctr-spacing-unit": "6px",
-      "--sjs-special-background": "rgba(253, 255, 148, 0.5)",
-      "--sjs-primary-background-500": "rgba(248, 248, 248, 1)",
-      "--sjs-secondary-background-500": "#0b864b",
+      "--sjs2-base-unit-size": "6px",
+      "--sjs2-base-unit-radius": "6px",
+      "--sjs2-base-unit-spacing": "6px",
+      "--sjs2-color-utility-surface": "rgba(253, 255, 148, 0.5)",
+      "--sjs2-color-project-brand-600": "rgba(248, 248, 248, 1)",
+      "--sjs2-color-project-accent-600": "#0b864b",
     }
   };
   themeModel.fromJSON(themeJson);
   expect(themeModel.scale).toBe(75);
   expect(themeModel.themeName).toBe("custom");
 
-  expect(themeModel["--ctr-size-unit"]).toBe("6px");
-  expect(themeModel["--sjs-special-background"]).toBe("rgba(253, 255, 148, 0.5)");
-  expect(themeModel["--sjs-primary-background-500"]).toBe("rgba(248, 248, 248, 1)");
-  expect(themeModel["--sjs-secondary-background-500"]).toBe("#0b864b");
+  expect(themeModel["--sjs2-base-unit-size"]).toBe("6px");
+  expect(themeModel["--sjs2-color-utility-surface"]).toBe("rgba(253, 255, 148, 0.5)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("rgba(248, 248, 248, 1)");
+  expect(themeModel["--sjs2-color-project-accent-600"]).toBe("#0b864b");
 
   const themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual(themeJson);
@@ -46,9 +46,9 @@ test("Default theme serialization", (): any => {
   themeModel.loadTheme();
   expect(themeModel.themeName).toBe("default-light");
   expect(themeModel.scale).toBe(100);
-  expect(themeModel["--sjs-special-background"]).toBe("#EDF9F7");
-  expect(themeModel["--sjs-primary-background-500"]).toBe("#19B394");
-  expect(themeModel["--sjs-secondary-background-500"]).toBe("#19B394");
+  expect(themeModel["--sjs2-color-utility-surface"]).toBe("#EDF9F7");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("#19B394");
+  expect(themeModel["--sjs2-color-project-accent-600"]).toBe("#19B394");
 
   const themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual({ themeName: "default-light" });
@@ -58,16 +58,16 @@ test("Creator theme: sync css variables", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
-  let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
+  let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-utility-surface");
 
-  expect(creator.themeVariables["--sjs-special-background"]).toEqual(undefined);
-  expect((themeModel.cssVariables || {})["--sjs-special-background"]).toEqual(undefined);
+  expect(creator.themeVariables["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
+  expect((themeModel.cssVariables || {})["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
 
   const newValue = "#c95ae7";
   surfaceBackgroundColor.value = newValue;
-  expect(creator.themeVariables["--sjs-special-background"]).toEqual(newValue);
-  expect((themeModel.cssVariables || {})["--sjs-special-background"]).toEqual(newValue);
+  expect(creator.themeVariables["--sjs2-color-utility-surface"]).toEqual(newValue);
+  expect((themeModel.cssVariables || {})["--sjs2-color-utility-surface"]).toEqual(newValue);
   expect(surfaceBackgroundColor.value).toEqual(newValue);
 });
 
@@ -77,12 +77,12 @@ test("Creator theme: reset color variables after change theme", (): any => {
     "isLight": false,
     "cssVariables": {
       "--sjs-special-haze": "#000000BF",
-      "--sjs-special-background": "#0C0C0CFF",
+      "--sjs2-color-utility-surface": "#0C0C0CFF",
       "--sjs-special-glow": "#000000BF",
-      "--sjs-primary-background-500": "#3EDFD5FF",
+      "--sjs2-color-project-brand-600": "#3EDFD5FF",
       "--sjs-primary-background-10": "#3EDFD51A",
       "--sjs-primary-background-400": "#29DCD1FF",
-      "--sjs-secondary-background-500": "#EDA925FF",
+      "--sjs2-color-project-accent-600": "#EDA925FF",
       "--sjs-secondary-background-400": "#EDBE1E",
       "--sjs-secondary-background-25": "#EDA92540",
       "--sjs-secondary-background-10": "#EDA9251A",
@@ -94,9 +94,9 @@ test("Creator theme: reset color variables after change theme", (): any => {
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
     const themeModel = designerPlugin["themeModel"];
     const themeName = designerPlugin["themePropertyGrid"].survey.findQuestionByName("themeName");
-    const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
-    const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-primary-background-500");
-    const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-secondary-background-500");
+    const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-utility-surface");
+    const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-brand-600");
+    const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-accent-600");
 
     expect(themeName.value).toEqual("default-light");
     expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
@@ -107,9 +107,9 @@ test("Creator theme: reset color variables after change theme", (): any => {
     secondaryBackgroundColor.value = "rgba(30, 30, 30, 0.1)";
     surfaceBackgroundColor.value = "rgba(10, 10, 10, 1)";
     expect(themeModel.themeCssVariablesChanges).toStrictEqual({
-      "--sjs-primary-background-500": "#141414",
-      "--sjs-secondary-background-500": "#1e1e1e",
-      "--sjs-special-background": "#0a0a0a",
+      "--sjs2-color-project-brand-600": "#141414",
+      "--sjs2-color-project-accent-600": "#1e1e1e",
+      "--sjs2-color-utility-surface": "#0a0a0a",
     });
 
     themeName.value = "dark";
@@ -127,9 +127,9 @@ test("creator.applyCreatorTheme", () => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs-special-background": "rgba(253, 255, 148, 0.5)",
-      "--sjs-primary-background-500": "rgba(248, 248, 248, 1)",
-      "--sjs-secondary-background-500": "#0b864b",
+      "--sjs2-color-utility-surface": "rgba(253, 255, 148, 0.5)",
+      "--sjs2-color-project-brand-600": "rgba(248, 248, 248, 1)",
+      "--sjs2-color-project-accent-600": "#0b864b",
       "--ctr-font-unit": "18px",
       "--ctr-line-height-unit": "18px",
       "--ctr-size-unit": "6px",
@@ -161,11 +161,11 @@ test("Creator theme check scale", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--ctr-font-unit": "10px",
-      "--ctr-line-height-unit": "10px",
-      "--ctr-spacing-unit": "12px",
-      "--ctr-size-unit": "12px",
-      "--ctr-corner-radius-unit": "12px",
+      "--sjs2-base-unit-font-size": "10px",
+      "--sjs2-base-unit-line-height": "10px",
+      "--sjs2-base-unit-spacing": "12px",
+      "--sjs2-base-unit-size": "12px",
+      "--sjs2-base-unit-radius": "12px",
     }
   };
   themeModel.fromJSON(themeJson);
@@ -176,14 +176,14 @@ test("Creator theme check scale", (): any => {
   fontScale.value = 150;
 
   let themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
-  expect(themeModelJsonCssVariables["--ctr-font-unit"]).toEqual("12px");
-  expect(themeModelJsonCssVariables["--ctr-line-height-unit"]).toEqual("12px");
+  expect(themeModelJsonCssVariables["--sjs2-base-unit-font-size"]).toEqual("12px");
+  expect(themeModelJsonCssVariables["--sjs2-base-unit-line-height"]).toEqual("12px");
 
   scale.value = 225; // max = 200
   themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
-  expect(themeModelJsonCssVariables["--ctr-size-unit"]).toEqual("16px");
-  expect(themeModelJsonCssVariables["--ctr-spacing-unit"]).toEqual("16px");
-  expect(themeModelJsonCssVariables["--ctr-corner-radius-unit"]).toEqual("16px");
+  expect(themeModelJsonCssVariables["--sjs2-base-unit-size"]).toEqual("16px");
+  expect(themeModelJsonCssVariables["--sjs2-base-unit-spacing"]).toEqual("16px");
+  expect(themeModelJsonCssVariables["--sjs2-base-unit-radius"]).toEqual("16px");
 });
 
 test("Creator theme: apply custom theme", (): any => {
@@ -194,9 +194,9 @@ test("Creator theme: apply custom theme", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs-special-background": "rgba(253, 255, 148, 0.5)",
-      "--sjs-primary-background-500": "rgba(248, 248, 248, 1)",
-      "--sjs-secondary-background-500": "#0b864b",
+      "--sjs2-color-utility-surface": "rgba(253, 255, 148, 0.5)",
+      "--sjs2-color-project-brand-600": "rgba(248, 248, 248, 1)",
+      "--sjs2-color-project-accent-600": "#0b864b",
       "--ctr-font-unit": "18px",
       "--ctr-line-height-unit": "18px",
       "--ctr-size-unit": "6px",
@@ -207,41 +207,41 @@ test("Creator theme: apply custom theme", (): any => {
   };
   creator.applyCreatorTheme(themeJson);
 
-  const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
-  const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-primary-background-500");
-  const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-secondary-background-500");
+  const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-utility-surface");
+  const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-brand-600");
+  const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-accent-600");
   expect(surfaceBackgroundColor.value).toEqual("rgba(253, 255, 148, 0.5)");
-  expect(themeModel["--sjs-special-background"]).toBe("rgba(253, 255, 148, 0.5)");
+  expect(themeModel["--sjs2-color-utility-surface"]).toBe("rgba(253, 255, 148, 0.5)");
 
   expect(primaryBackgroundColor.value).toEqual("rgba(248, 248, 248, 1)");
-  expect(themeModel["--sjs-primary-background-500"]).toBe("rgba(248, 248, 248, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("rgba(248, 248, 248, 1)");
 
   expect(secondaryBackgroundColor.value).toEqual("#0b864b");
-  expect(themeModel["--sjs-secondary-background-500"]).toBe("#0b864b");
+  expect(themeModel["--sjs2-color-project-accent-600"]).toBe("#0b864b");
 });
 
 test("sjs-special-background calculations on primary background changed", (): any => {
   const themeModel = new CreatorThemeModel();
 
-  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394");
-  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("#19B394");
+  expect(themeModel["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
 
   themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
-  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394");
-  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("#19B394");
+  expect(themeModel["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
 
-  themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["teal"];
-  themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["teal"];
-  expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], PredefinedColors["light"]["teal"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
+  themeModel["--sjs2-color-project-brand-600"] = PredefinedColors["light"]["teal"];
+  themeModel["--sjs2-color-project-brand-600"] = PredefinedColors["light"]["teal"];
+  expect(colorsAreEqual(themeModel["--sjs2-color-project-brand-600"], PredefinedColors["light"]["teal"])).toBeTruthy();
+  expect(colorsAreEqual(themeModel["--sjs2-color-utility-surface"], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
 
-  themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["orchid"];
-  expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], PredefinedColors["light"]["orchid"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
+  themeModel["--sjs2-color-project-brand-600"] = PredefinedColors["light"]["orchid"];
+  expect(colorsAreEqual(themeModel["--sjs2-color-project-brand-600"], PredefinedColors["light"]["orchid"])).toBeTruthy();
+  expect(colorsAreEqual(themeModel["--sjs2-color-utility-surface"], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
 
-  themeModel["--sjs-primary-background-500"] = "#fefefe";
-  expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], "#fefefe")).toBeTruthy();
-  expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
+  themeModel["--sjs2-color-project-brand-600"] = "#fefefe";
+  expect(colorsAreEqual(themeModel["--sjs2-color-project-brand-600"], "#fefefe")).toBeTruthy();
+  expect(colorsAreEqual(themeModel["--sjs2-color-utility-surface"], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
 });
 
 test("Creator theme model isLight de/serialization", (): any => {
