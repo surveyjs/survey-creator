@@ -35,3 +35,12 @@ export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> 
 //   }
 // };
 export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": Default };
+// let stylesStr = "";
+// if (Object.keys(Default.cssVariables).length) {
+//   Object.keys(Default.cssVariables).forEach((varName) => {
+//     try {
+//       stylesStr += `${varName}: ${Default.cssVariables[varName]};`;
+//     } catch(e) { }
+//   });
+// }
+// CreatorStylesManager.insertStylesRulesIntoDocument([{ selector: "survey-creator,.svc-creator", styles: stylesStr }]);

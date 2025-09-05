@@ -95,7 +95,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private resetColorThemeCssVariablesChanges(): void {
     Object.keys(this.themeCssVariablesChanges).forEach(key => {
-      if (key.indexOf("--sjs-") === 0) {
+      if (key.indexOf("--sjs2-") === 0) {
         delete this.themeCssVariablesChanges[key];
       }
     });

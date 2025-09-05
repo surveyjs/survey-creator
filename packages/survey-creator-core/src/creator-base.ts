@@ -85,6 +85,7 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
 import { deprecate } from "util";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
+import Default from "./themes/default-light";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -1660,6 +1661,7 @@ export class SurveyCreatorModel extends Base
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
+    this.applyCreatorTheme(Default);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
