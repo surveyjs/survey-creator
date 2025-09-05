@@ -360,7 +360,7 @@ export const Test = {
     "--sjs2-color-bg-accent-secondary": "rgba(from var(--sjs2-color-project-accent-600) r g b / var(--sjs2-opacity-x010))",
     "--sjs2-color-bg-accent-tertiary": "rgba(from var(--sjs2-color-project-accent-600) r g b / var(--sjs2-opacity-x000))",
     "--sjs2-color-bg-accent-primary-dim": "var(--sjs2-color-project-accent-700)",
-    "--sjs2-color-bg-accent-secondary-dim": "rgba(from var(--sjs2-color-project-accent-600) r g b / var(--sjs2-opacity-x015))",
+    "--sjs2-color-bg-accent-secondary-dim": "#19b39440",
     "--sjs2-color-bg-accent-tertiary-dim": "rgba(from var(--sjs2-color-project-accent-600) r g b / var(--sjs2-opacity-x010))",
     "--sjs2-color-bg-note-primary": "var(--sjs2-palette-blue-600)",
     "--sjs2-color-bg-note-secondary": "rgba(from var(--sjs2-palette-blue-600) r g b / var(--sjs2-opacity-x010))",
