@@ -4,6 +4,7 @@ import { Action, Serializer } from "survey-core";
 export * from "../src/localization/italian";
 export * from "../src/localization/french";
 import { enStrings } from "../src/localization/english";
+import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 
 test("Get nested property", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
@@ -373,4 +374,22 @@ test("getLocaleStrings function, Bug#6754", () => {
   expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
   expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
   editorLocalization.defaultLocale = "en";
+});
+test("creator.sidebar.header.title & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  expect(creator.sidebar.header.title).toBe("Survey Settings");
+  creator.locale = "fr";
+  creator.JSON = {};
+  expect(creator.sidebar.header.title).toBe("Paramètres du sondage");
+  creator.activeTab = "translation";
+  expect(creator.sidebar.header.title).toBe("Traduction");
+  creator.locale = "en";
+  expect(creator.sidebar.header.title).toBe("Language Settings");
+});
+test("creator theme & settings property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showThemeTab: true });
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
+  creator.locale = "fr";
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
 });

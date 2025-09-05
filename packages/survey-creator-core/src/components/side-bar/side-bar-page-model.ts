@@ -1,8 +1,9 @@
 import { Base, property } from "survey-core";
 import { SidebarModel } from "./side-bar-model";
+import { editorLocalization } from "../../editorLocalization";
 
 export class SidebarPageModel extends Base {
-  @property() caption: string;
+  @property() locTileName: string;
   @property({
     onSet: (newVal, target: SidebarPageModel) => {
       target.sidePanel.updateHasVisiblePages();
@@ -18,5 +19,8 @@ export class SidebarPageModel extends Base {
     super();
     !!componentName && (this.componentName = componentName);
     !!componentData && (this.componentData = componentData);
+  }
+  public get caption(): string {
+    return editorLocalization.getString(this.locTileName);
   }
 }

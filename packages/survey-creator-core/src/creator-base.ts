@@ -1517,6 +1517,7 @@ export class SurveyCreatorModel extends Base
     super.locStrsChanged();
     this.tabbedMenu.locStrsChanged();
     this.toolbar.locStrsChanged();
+    this.sidebar.locStrsChanged();
   }
   private refreshPlugin() {
     const plugin = this.currentPlugin;

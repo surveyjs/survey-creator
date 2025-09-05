@@ -1796,7 +1796,8 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
-    progressBarInheritWidthFrom: "Progress bar area width"
+    progressBarInheritWidthFrom: "Progress bar area width",
+    themeName: "Theme name",
   },
   theme: {
     advancedMode: "Advanced mode",
