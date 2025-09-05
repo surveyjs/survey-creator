@@ -140,7 +140,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private scaleCssVariables() {
     if (this.fontScale !== undefined) {
-      this.scaleValue("--sjs2-base-unit-size", this.fontScale);
+      this.scaleValue("--sjs2-base-unit-font-size", this.fontScale);
       this.scaleValue("--sjs2-base-unit-line-height", this.fontScale);
     }
     if (this.scale !== undefined) {
