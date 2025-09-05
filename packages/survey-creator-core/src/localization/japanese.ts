@@ -3334,7 +3334,9 @@ export var jaStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "列スパン",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "プログレスバー領域の幅"
+    progressBarInheritWidthFrom: "プログレスバー領域の幅",
+    // [Auto-translated] "Theme name"
+    themeName: "テーマ名"
   },
   theme: {
     // "Advanced mode"

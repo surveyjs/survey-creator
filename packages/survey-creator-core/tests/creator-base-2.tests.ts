@@ -59,6 +59,8 @@ import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 
+export * from "../src/localization/french";
+
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -331,6 +333,14 @@ test("Set propertyGridNavigationMode property by options", (): any => {
   expect(designerPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(themePlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(translationPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+});
+test("creator theme & settings property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
+  creator.locale = "fr";
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème");
+  creator.locale = "en";
 });
 
 test("showSurfaceTools", (): any => {

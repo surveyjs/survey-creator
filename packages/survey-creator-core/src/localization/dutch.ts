@@ -3334,7 +3334,9 @@ export var nlStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolom spanwijdte",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied"
+    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied",
+    // [Auto-translated] "Theme name"
+    themeName: "Naam van het thema"
   },
   theme: {
     // "Advanced mode"

@@ -3334,7 +3334,9 @@ export var indonesianStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rentang kolom",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lebar area bilah kemajuan"
+    progressBarInheritWidthFrom: "Lebar area bilah kemajuan",
+    // [Auto-translated] "Theme name"
+    themeName: "Nama tema"
   },
   theme: {
     // "Advanced mode"

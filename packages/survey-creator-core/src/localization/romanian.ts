@@ -3334,7 +3334,9 @@ export const roStrings = {
     // "Column span"
     effectiveColSpan: "Span de coloană eficient",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lățimea zonei barei de progres"
+    progressBarInheritWidthFrom: "Lățimea zonei barei de progres",
+    // [Auto-translated] "Theme name"
+    themeName: "Numele temei"
   },
   theme: {
     // "Advanced mode"

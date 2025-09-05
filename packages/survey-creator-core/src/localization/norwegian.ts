@@ -3334,7 +3334,9 @@ export var nbStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Spaltespenn",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde"
+    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde",
+    // [Auto-translated] "Theme name"
+    themeName: "Tema navn"
   },
   theme: {
     // "Advanced mode"

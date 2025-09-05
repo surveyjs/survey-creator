@@ -3334,7 +3334,9 @@ export var arStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "امتداد العمود",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم"
+    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم",
+    // [Auto-translated] "Theme name"
+    themeName: "اسم الموضوع"
   },
   theme: {
     // "Advanced mode"

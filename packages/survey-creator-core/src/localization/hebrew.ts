@@ -3334,7 +3334,9 @@ export var hebrewStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "טווח עמודות",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות"
+    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות",
+    // [Auto-translated] "Theme name"
+    themeName: "שם ערכת נושא"
   },
   theme: {
     // "Advanced mode"

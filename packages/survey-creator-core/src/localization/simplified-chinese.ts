@@ -3334,7 +3334,9 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "柱跨度",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "进度条区域宽度"
+    progressBarInheritWidthFrom: "进度条区域宽度",
+    // [Auto-translated] "Theme name"
+    themeName: "主题名称"
   },
   theme: {
     // "Advanced mode"

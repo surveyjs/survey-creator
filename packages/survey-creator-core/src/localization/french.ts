@@ -3334,7 +3334,9 @@ export var frenchTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Portée de poteau",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Largeur de la zone de la barre de progression"
+    progressBarInheritWidthFrom: "Largeur de la zone de la barre de progression",
+    // [Auto-translated] "Theme name"
+    themeName: "Nom du thème"
   },
   theme: {
     // "Advanced mode"

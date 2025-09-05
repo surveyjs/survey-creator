@@ -3334,7 +3334,9 @@ export var persianStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "دهانه ستون",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "عرض مساحت نوار پیشرفت"
+    progressBarInheritWidthFrom: "عرض مساحت نوار پیشرفت",
+    // [Auto-translated] "Theme name"
+    themeName: "نام قالب"
   },
   theme: {
     // "Advanced mode"

@@ -37,7 +37,6 @@ import { MenuButton } from "../../utils/actions";
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
   public static DefaultTheme = Themes["default-light"];
-  private allowModifyTheme: boolean = true;
   private previewAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;

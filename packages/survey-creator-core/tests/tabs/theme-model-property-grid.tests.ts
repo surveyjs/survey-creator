@@ -16,6 +16,8 @@ export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
+export * from "../../src/localization/french";
+
 registerSurveyTheme(SurveyThemes);
 
 test("Theme builder initialization", (): any => {
@@ -1404,3 +1406,13 @@ test("Theme builder: set custom font", (): any => {
     expect(DefaultFonts.length).toEqual(10);
   }
 });
+test("creator theme & theme property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showThemeTab: true });
+  creator.activeTab = "theme";
+  const themePlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Theme");
+  creator.locale = "fr";
+  expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Thème");
+  creator.locale = "en";
+});
+

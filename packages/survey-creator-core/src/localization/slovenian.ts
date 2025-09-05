@@ -3334,7 +3334,9 @@ export var slStrings = {
     // "Column span"
     effectiveColSpan: "Razpon stolpca",
     // "Progress bar area width"
-    progressBarInheritWidthFrom: "Širina območja napredka"
+    progressBarInheritWidthFrom: "Širina območja napredka",
+    // [Auto-translated] "Theme name"
+    themeName: "Ime teme"
   },
   theme: {
     // "Advanced mode"

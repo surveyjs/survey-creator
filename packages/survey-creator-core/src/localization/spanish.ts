@@ -3334,7 +3334,9 @@ export var spanishTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Tramo de columna",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Ancho del área de la barra de progreso"
+    progressBarInheritWidthFrom: "Ancho del área de la barra de progreso",
+    // [Auto-translated] "Theme name"
+    themeName: "Nombre del tema"
   },
   theme: {
     // "Advanced mode"

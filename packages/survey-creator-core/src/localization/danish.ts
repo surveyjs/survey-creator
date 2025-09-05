@@ -3335,7 +3335,9 @@ export var danishStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Søjlespænd",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Bredde på statuslinjeområde"
+    progressBarInheritWidthFrom: "Bredde på statuslinjeområde",
+    // [Auto-translated] "Theme name"
+    themeName: "Tema navn"
   },
   theme: {
     // "Advanced mode"

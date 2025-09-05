@@ -3334,7 +3334,9 @@ export var czStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpětí sloupců",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Šířka oblasti indikátoru průběhu"
+    progressBarInheritWidthFrom: "Šířka oblasti indikátoru průběhu",
+    // [Auto-translated] "Theme name"
+    themeName: "Název motivu"
   },
   theme: {
     // "Advanced mode"
