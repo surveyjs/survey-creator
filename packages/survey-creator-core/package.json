@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack --env buildType=dev --env emitDeclarations --env emitStyles --env emitNonSourceFiles && webpack --env buildType=prod --env emitStyles && rollup -c",
     "build:i18n": "webpack --config ./webpack.i18n.js --env buildType=dev && webpack --config ./webpack.i18n.js --env buildType=prod && rollup -c rollup.i18n.config.js",
-    "build:themes": "node creator-themes-import.js && webpack --config ./webpack.themes.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.themes.config.js --env buildType=prod && rollup -c rollup.themes.config.js",
+    "build:themes": "webpack --config ./webpack.themes.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.themes.config.js --env buildType=prod && rollup -c rollup.themes.config.js",
     "build:all": "npm run build && npm run build:i18n && npm run build:themes",
     "build:presets": "webpack --config ./webpack.presets.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.presets.config.js --env buildType=prod && rollup -c rollup.presets.config.js --bundleConfigAsCjs",
     "test": "jest",

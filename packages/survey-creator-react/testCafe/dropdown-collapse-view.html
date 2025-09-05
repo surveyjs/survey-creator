@@ -23,7 +23,7 @@
   <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
   <script src="../build/survey-creator-react.js" defer></script>
   <script src="./sc.js" defer></script>
-  <script src="./theme.js"></script>
+  <script src="../node_modules/survey-creator-core/themes/test.js" defer></script>
 </head>
 
 <body spellcheck="false">
@@ -33,9 +33,9 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyTokens.testTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", maxVisibleChoices: 5 });
-    creator.applyCreatorTheme(SurveyTokens.testTheme);
+    creator.applyCreatorTheme(SurveyCreatorTheme.Test);
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
     creator.showOneCategoryInPropertyGrid = false;

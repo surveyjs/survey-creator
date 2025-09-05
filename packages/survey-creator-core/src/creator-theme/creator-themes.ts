@@ -1,5 +1,5 @@
 import { CreatorStylesManager } from "./styles-manager";
-import { DefaultLightColorCssVariables } from "../themes/default-light-color-css-variables";
+import { Default } from "../themes/default-light";
 import { registerTheme, ThemesHash, sortDefaultThemes } from "../utils/themes";
 
 export interface ICreatorTheme {
@@ -34,13 +34,4 @@ export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> 
 //     iconSet: "v2"
 //   }
 // };
-export const CreatorThemes: { [index: string]: ICreatorTheme } = {};
-let stylesStr = "";
-if (Object.keys(DefaultLightColorCssVariables).length) {
-  Object.keys(DefaultLightColorCssVariables).forEach((varName) => {
-    try {
-      stylesStr += `${varName}: ${DefaultLightColorCssVariables[varName]};`;
-    } catch(e) { }
-  });
-}
-CreatorStylesManager.insertStylesRulesIntoDocument([{ selector: "survey-creator,.svc-creator", styles: stylesStr }]);
+export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": Default };
