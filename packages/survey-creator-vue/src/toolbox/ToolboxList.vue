@@ -1,6 +1,6 @@
 <template>
   <div :class="model.cssClasses.root">
-    <template v-for="(item, index) in renderedActions" :key="index">
+    <template v-for="(item, index) in model.renderedActions" :key="index">
       <SvComponent
         :is="'svc-toolbox-tool'"
         :creator="creator"
@@ -12,7 +12,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { SvComponent, useBase, useComputedArray } from "survey-vue3-ui";
+import { SvComponent, useBase } from "survey-vue3-ui";
 import type { ListModel } from "survey-core";
 import type { CreatorBase } from "survey-creator-core";
 
@@ -20,6 +20,5 @@ const props = defineProps<{
   model: ListModel;
   creator: CreatorBase;
 }>();
-const renderedActions = useComputedArray(() => props.model.renderedActions);
 useBase(() => props.model);
 </script>
