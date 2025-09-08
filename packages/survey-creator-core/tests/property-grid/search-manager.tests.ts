@@ -103,6 +103,58 @@ test("SearchManager: matchCounterText", () => {
   expect(searchManager.matchCounterText).toBe("3/3");
 });
 
+test("SearchManager: matchCounterText with visibility", () => {
+  const searchManager = new SearchManagerPropertyGrid();
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1",
+        "title": "First"
+      },
+      {
+        "type": "text",
+        "name": "q2",
+        "title": "Test",
+        "visible": "false",
+      },
+      {
+        "type": "text",
+        "name": "q3",
+        "title": "Last"
+      },
+      {
+        "type": "panel",
+        "name": "p1",
+        "visible": "false",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q4",
+            "title": "Best"
+          },
+        ]
+      },
+    ]
+  });
+  searchManager.setSurvey(survey);
+  searchManager.filterString = "st";
+  searchManager.searchActionBar.flushUpdates();
+  const prevAction = searchManager.searchActionBar.visibleActions[0];
+  const nextAction = searchManager.searchActionBar.visibleActions[1];
+  expect(searchManager.searchActionBar.actions).toHaveLength(3);
+  expect(searchManager.searchActionBar.visibleActions).toHaveLength(3);
+  expect(prevAction.visible).toBeTruthy();
+  expect(nextAction.visible).toBeTruthy();
+  expect(searchManager.matchCounterText).toBe("1/2");
+
+  nextAction.action();
+  expect(searchManager.matchCounterText).toBe("2/2");
+
+  nextAction.action();
+  expect(searchManager.matchCounterText).toBe("1/2");
+});
+
 test("SearchManager: enabled searchActionBar items", () => {
   const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
