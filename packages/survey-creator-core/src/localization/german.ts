@@ -102,7 +102,7 @@ export var germanTranslation = {
     // "Text Input Questions"
     text: "Text-Eingabe-Fragen",
     // "Containers"
-    containers: "Kontainer",
+    containers: "Bereiche",
     // "Matrix Questions"
     matrix: "Matrix-Fragen",
     // "Misc"
