@@ -155,18 +155,6 @@ jobs:
           npm run test:postcss
         displayName: "check postcss compatibility"
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
-          targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
-          ArtifactName: "SurveyJSCreatorV2BuildCore"
-          publishLocation: "Container"
-        displayName: "publish artifact SurveyJSCreatorV2BuildCore for release"
-
       # - task: CopyFiles@2
       #   inputs:
       #     SourceFolder: "$(Build.SourcesDirectory)/Temp/"
@@ -185,13 +173,6 @@ jobs:
       #   inputs:
       #     folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
       #     fileType: 'json'
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
-          ArtifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
-          publishLocation: "Container"
-        displayName: "publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs"
 
       - task: PublishCodeCoverageResults@1
         inputs:
@@ -223,6 +204,35 @@ jobs:
           OverWrite: true
           CleanTargetFolder: false
         displayName: "Copy generated docs to the local surveyjs/service repo"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs"
+          Contents: |
+            surveyjs_definition.json
+          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+          OverWrite: true
+          CleanTargetFolder: false
+        displayName: "put surveyjs_definition.json into build"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+          targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
+          ArtifactName: "SurveyJSCreatorV2BuildCore"
+          publishLocation: "Container"
+        displayName: "publish artifact SurveyJSCreatorV2BuildCore for release"
+        
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
+          ArtifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
+          publishLocation: "Container"
+        displayName: "publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs"
 
       # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
       # https://github.com/microsoft/azure-pipelines-yaml/issues/248
