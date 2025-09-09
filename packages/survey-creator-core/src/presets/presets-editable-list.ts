@@ -1,13 +1,14 @@
-import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry } from "survey-core";
+import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry, Question } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
 export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
-
+  private defaultIcon = "icon-pg-undefined-24x24";
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
+  protected hasIcon(_: string) { return false; }
   public getMainElementName() : any { return this.nameMatrix; }
   protected get iconList() { return Object.keys(SvgRegistry.icons).map(name => "icon-" + name); }
   protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return "name"; }
@@ -44,7 +45,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
     if (!rowData) return;
     const iconAction = actions.filter(a => a.id == "icon-action")[0];
-    iconAction.iconName = rowData.iconName;
+    iconAction.iconName = rowData.iconName || this.defaultIcon;
   }
   protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
     if (!actions) return;
@@ -167,9 +168,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.needToSetActions(options.question.name)) {
       const question = options.question as QuestionMatrixDynamicModel;
       const allowExpand = question.detailElements.filter(e => e.visible).length > 0;
-      const keyColumn = this.getMatrixKeyColumnName(options.question);
-      const iconName = question.value?.filter(v => v[keyColumn] == options.row.getValue(keyColumn))[0]?.iconName;
-      if (iconName) {
+      if (this.hasIcon(options.question.name)) {
+        const keyColumn = this.getMatrixKeyColumnName(options.question);
+        const iconName = question.value?.filter(v => v[keyColumn] == options.row.getValue(keyColumn))[0]?.iconName || this.defaultIcon;
         options.actions.push(this.createIconAction(iconName));
       }
       const resetAction = this.createResetAction(model, options.row, (action: Action) => {

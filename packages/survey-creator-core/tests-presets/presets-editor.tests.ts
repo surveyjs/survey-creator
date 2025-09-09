@@ -948,3 +948,15 @@ test("Icon change", () => {
   tabs.value = tabsValue;
   expect(iconAction.iconName).toBe("icon-test");
 });
+
+test("Icon default", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const matrix = (survey.getQuestionByName("toolbox_matrix") as QuestionMatrixDynamicModel);
+  matrix.addRow();
+
+  const renderedRow = matrix.renderedTable.rows.filter(r => r.row == matrix.visibleRows[0])[0];
+  const iconAction = renderedRow.cells[1].item.value.actions[0];
+  expect(iconAction.id).toBe("icon-action");
+  expect(iconAction.iconName).toBe("icon-pg-undefined-24x24");
+});

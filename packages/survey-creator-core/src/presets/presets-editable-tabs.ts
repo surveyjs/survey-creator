@@ -88,7 +88,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   private filterTabs(tabs: any) {
     return tabs.filter(t => t.name != "presets");
   }
-
+  protected hasIcon(name: string) { return true; }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     let items = model.getValue(this.nameItems);
     if (!Array.isArray(items)) return undefined;

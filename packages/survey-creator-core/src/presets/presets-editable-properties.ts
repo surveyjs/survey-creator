@@ -315,6 +315,8 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     };
   }
 
+  protected hasIcon(name: string) { return name == this.nameCategories; }
+
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     if (!this.isModified) return undefined;
     this.updateCurrentJson(model);
