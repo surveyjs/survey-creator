@@ -97,7 +97,23 @@ test("Preset edit, toolbox - remove item from hidden items to flat items", () =>
   expect(itemsQuestion.value.filter(i => i.name == "name1")[0].title).toBe("Name1");
 });
 
-test("Preset edit, toolbox - remove item from hidden items to general category", () => {
+test("Preset edit, toolbox - remove new item from hidden items to its default category", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.getQuestionByName("toolbox_mode").value = "categories";
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  categQuestion.visibleRows[1].showDetailPanel();
+  let items = categQuestion.visibleRows[1].detailPanel.getQuestionByName("items");
+  expect(items.value.map(i => i.name)).toEqual(["text", "comment", "multipletext"]);
+  items.removeRow(2);
+  expect(items.value.map(i => i.name)).toEqual(["text", "comment"]);
+
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  matrixQuestion.removeRow(0);
+  expect(categQuestion.value[1].items.map(i => i.name)).toEqual(["text", "comment", "multipletext"]);
+});
+
+test("Preset edit, toolbox - remove new item from hidden items to general category", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.getQuestionByName("toolbox_mode").value = "categories";

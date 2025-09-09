@@ -67,8 +67,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     hiddenItemsQuestion.value = hiddenValue;
     categoriesQuestion.value = value;
   }
-  protected findOrCreateGeneralCategory(categories: any) {
-    let generalCategory = categories.filter(c => c.category == "general")[0];
+  protected findOrCreateCategory(categories: any, category = null) {
+    let generalCategory = categories.filter(c => c.category == category)[0];
+    if (!generalCategory) {
+      generalCategory = categories.filter(c => c.category == "general")[0];
+    }
     if (!generalCategory) {
       generalCategory = { category: "general", title: "General", [this.nameInnerMatrix]: [] };
       categories.push(generalCategory);
@@ -96,11 +99,12 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
     if (options.question.name == this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];
+      const defaultCategory = this.defaultCategories.filter(c => c[this.nameInnerMatrix].filter(i => i.name == rowData.name).length > 0)[0];
       const categories = this.getQuestionCategories(model);
       const catValue = categories.value;
-      const general = this.findOrCreateGeneralCategory(catValue);
+      const general = this.findOrCreateCategory(catValue, defaultCategory.category);
       general[this.nameInnerMatrix].push(rowData);
-      categories.value = catValue;
+      categories.value = [...catValue];
     }
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
