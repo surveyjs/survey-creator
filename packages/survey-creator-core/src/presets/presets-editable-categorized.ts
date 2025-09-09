@@ -88,9 +88,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     super.onMatrixRowRemoving(model, creator, options);
     if (options.question.name == this.nameCategories) {
       const items = options.question.value[options.rowIndex][this.nameInnerMatrix];
-      const hiddenItems = this.getMatrix(model);
-      const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
-      hiddenItems.value = value;
+      if (items) {
+        const hiddenItems = this.getMatrix(model);
+        const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
+        hiddenItems.value = value;
+      }
     }
     if (options.question.name == this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];

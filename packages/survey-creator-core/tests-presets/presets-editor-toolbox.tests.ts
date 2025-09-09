@@ -50,6 +50,18 @@ test("Preset edit, toolbox - remove whole category from categories", () => {
   expect(editor.json.toolbox.categories.length).toBe(4);
 });
 
+test("Preset edit, toolbox - remove empty category from categories, when there is some items in matrix", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  expect(categQuestion.visibleRows).toHaveLength(5);
+  matrixQuestion.addRow();
+  categQuestion.addRow();
+  categQuestion.removeRow(categQuestion.visibleRows.length - 1);
+});
+
 test("Preset edit, toolbox - no categories", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
