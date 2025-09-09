@@ -7,10 +7,7 @@
 
     <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
       <ng-container *ngFor="let page of model.pages; trackBy: trackPageBy ">
-        <ng-container>
-          <ng-container
-            *ngTemplateOutlet="pageContainer; context: { page, isGhost: model.newPage == page }"></ng-container>
-        </ng-container>
+        <svc-page-wrapper [page]="page" [creator]="creator" [isGhost]="model.newPage == page" [className]="'svc-page'"></svc-page-wrapper>
       </ng-container>
     </ng-container>
     <ng-container *ngIf="model.pagesController.page2Display && creator.pageEditMode === 'bypage'">
@@ -27,13 +24,5 @@
     <div *ngIf="model.showSurfaceToolbar" class="svc-tab-designer__toolbar">
       <sv-action-bar [model]="model.surfaceToolbar"></sv-action-bar>
     </div>
-  </div>
-</ng-template>
-
-<ng-template let-page="page" let-isGhost="isGhost" #pageContainer>
-  <div class="svc-page" [attr.data-sv-drop-target-survey-element]="isGhost ? 'newGhostPage' : page.name"
-    [attr.data-sv-drop-target-page]="page.name">
-    <ng-template
-      [component]="{ name: 'svc-page', data: { model: page, creator, survey, isGhost: isGhost }}"></ng-template>
   </div>
 </ng-template>

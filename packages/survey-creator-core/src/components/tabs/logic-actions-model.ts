@@ -61,7 +61,7 @@ export class LogicActionModel extends LogicActionModelBase {
   public updateCurrentLogicAction(survey: SurveyModel): boolean {
     const selectedElement = this.getElementBySelectorName(this.panel);
     const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType || (!!selectedElement && this.initialLogicAction.element != selectedElement);
-    if (!createNewAction) { return false; }
+    if (!createNewAction) return false;
     this.currentLogicAction = new SurveyLogicAction(this.logicType, selectedElement, survey);
     return true;
   }
@@ -96,6 +96,14 @@ export class LogicActionSetValueModel extends LogicActionModel {
     if(!!selectedElement) {
       (<any>selectedElement).setValueExpression = this.panel.getQuestionByName("setValueExpression").value;
     }
+  }
+  public updateCurrentLogicAction(survey: SurveyModel): boolean {
+    const selectedElement = this.getElementBySelectorName(this.panel);
+    if (selectedElement && !!(<any>selectedElement).setValueExpression) {
+      this.afterUpdateInitialLogicAction();
+      return false;
+    }
+    return super.updateCurrentLogicAction(survey);
   }
   private setValueExpressionValue(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);

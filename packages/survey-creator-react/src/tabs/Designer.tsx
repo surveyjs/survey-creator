@@ -62,42 +62,19 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     if (this.creator.pageEditMode !== "bypage") {
       const pages = this.model.pages;
       pages.forEach((page) => {
-        renderedPages.push(this.createRenderedPage(page, page == this.model.newPage));
+        renderedPages.push(this.createRenderedPage(page, "svc-page", page == this.model.newPage));
       });
     } else {
       const page2Display = this.model.pagesController.page2Display;
       if (!!page2Display) {
-        renderedPages.push(this.createRenderedPage(page2Display, this.model.newPage === page2Display));
+        renderedPages.push(this.createRenderedPage(page2Display, "svc-page", this.model.newPage === page2Display));
       }
     }
 
     return renderedPages;
   }
-  protected createRenderedPage(page: PageModel, isGhostPage?: boolean): any {
-    return (
-      <div
-        className={"svc-page"}
-        data-sv-drop-target-page={page.name}
-        data-sv-drop-target-survey-element={isGhostPage ? "newGhostPage" : page.name}
-        key={page.id}
-      >
-        {this.renderPage(page, isGhostPage)}
-      </div>
-    );
-  }
-  private renderNewPage(className: string, key: string = "") {
-    return (
-      <React.Fragment key={key}>
-        <div
-          className={className}
-          data-sv-drop-target-survey-element={"newGhostPage"}
-        >
-          {!!this.model.newPage ? this.renderPage(this.model.newPage, true) : null}
-        </div>
-      </React.Fragment>);
-  }
-  protected renderPage(pageV: PageModel, isGhost: boolean): React.JSX.Element {
-    return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator, isGhost });
+  protected createRenderedPage(page: PageModel | undefined, className: string, isGhostPage?: boolean): any {
+    return <PageWrapperComponent key={page?.id} page={page} isGhost={isGhostPage} creator={this.creator} className={className}></PageWrapperComponent>;
   }
   renderElement(): React.JSX.Element {
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
@@ -135,7 +112,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       {surveyHeader}
       <div className="svc-designer__placeholder-container" data-sv-drop-target-survey-element={"newGhostPage"}>
         {this.renderPlaceHolderContent()}
-        {this.renderNewPage("svc-designer-placeholder-page")}
+        {this.createRenderedPage(this.model.newPage, "svc-designer-placeholder-page", true)}
       </div>
     </React.Fragment>);
   }
@@ -191,3 +168,50 @@ ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {
     props as ITabDesignerComponentProps
   );
 });
+
+interface IPageWrapperComponentProps {
+  page?: PageModel;
+  isGhost: boolean;
+  creator: SurveyCreatorModel;
+  className: string;
+}
+class PageWrapperComponent extends React.Component<IPageWrapperComponentProps, any> {
+  private static ID = 0;
+  private id = `PageWrapperCallback_${++PageWrapperComponent.ID}`;
+  constructor(props: IPageWrapperComponentProps) {
+    super(props);
+    this.state = { changed: 0 };
+  }
+  render() {
+    const pageContent = !!this.props.page ? ReactElementFactory.Instance.createElement("svc-page", { survey: this.props.creator.survey, page: this.props.page, creator: this.props.creator, isGhost: this.props.isGhost }) : null;
+    return <div
+      className={this.props.className}
+      data-sv-drop-target-page={this.props.page?.name}
+      data-sv-drop-target-survey-element={this.props.isGhost ? "newGhostPage" : this.props.page?.name}
+    >
+      {pageContent}
+    </div>;
+  }
+  setupCallback(page?: PageModel) {
+    if (!page) return;
+    page.registerFunctionOnPropertyValueChanged("name", () => {
+      this.setState({ changed: !!this.state && this.state.changed ? this.state.changed + 1 : 1 });
+    }, this.id);
+  }
+  clearCallback(page?: PageModel) {
+    if (!page) return;
+    page.unRegisterFunctionOnPropertyValueChanged("name");
+  }
+  componentDidUpdate(prevProps: IPageWrapperComponentProps, prevState: any): void {
+    if (prevProps.page !== this.props.page) {
+      this.clearCallback(prevProps.page);
+      this.setupCallback(this.props.page);
+    }
+  }
+  componentDidMount(): void {
+    this.setupCallback(this.props.page);
+  }
+  componentWillUnmount(): void {
+    this.clearCallback(this.props.page);
+  }
+}

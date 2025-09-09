@@ -819,6 +819,36 @@ test("LogicItemEditorUI: remove setValueIf & setValueExpression, Bug#7075", () =
   expect(survey.getQuestionByName("q2").setValueIf).toBeFalsy();
   expect(survey.getQuestionByName("q2").setValueExpression).toBeFalsy();
 });
+test("LogicItemEditorUI: remove setValueIf & setValueExpression, Bug#7097", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  logic.itemEditor.panels[0].getQuestionByName("logicTypeName").value = "question_setValue";
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q2";
+  logic.itemEditor.panels[0].getQuestionByName("setValueExpression").value = "abc";
+  logic.saveEditableItem();
+  expect(q2.setValueIf).toBe("{q1} = 1");
+  expect(q2.setValueExpression).toBe("abc");
+
+  logic.editItem(logic.items[0]);
+  expect(logic.expressionEditor.text).toBe("{q1} = 1");
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("question_setValue");
+  expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
+  expect(panel.getQuestionByName("setValueExpression").value).toBe("abc");
+
+  panel.getQuestionByName("setValueExpression").value = "abc!";
+  logic.saveEditableItem();
+  expect(q2.setValueIf).toBe("{q1} = 1");
+  expect(q2.setValueExpression).toBe("abc!");
+});
 test("Create setValue trigger in logic", () => {
   PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());
   var survey = new SurveyModel({
@@ -2873,6 +2903,30 @@ test("Do not rename questions for another matrix", (): any => {
   expect(matrix1.columns[1].visibleIf).toEqual("{row.col1} = 'Item 1'");
   expect(matrix2.columns[1].visibleIf).toEqual("{row.col1} = 'item1'");
 });
+test("Update setValueExpression, setValueIf and defaultValueExpression on changing the name, Bug#7142", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+      {
+        type: "text",
+        name: "question2",
+        defaultValueExpression: "{question1} + 1",
+        setValueIf: "{question1} > 2",
+        setValueExpression: "{question1} + 3"
+      }
+    ],
+  };
+  creator.survey.getQuestionByName("question1").name = "newQuestion1";
+  const question2 = <Question>creator.survey.getQuestionByName("question2");
+  expect(question2.defaultValueExpression).toEqual("{newQuestion1} + 1");
+  expect(question2.setValueIf).toEqual("{newQuestion1} > 2");
+  expect(question2.setValueExpression).toEqual("{newQuestion1} + 3");
+});
+
 test("Modify choice and question name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
