@@ -403,6 +403,12 @@ export class SurveyLogicTypes {
       showInUI: false,
     },
     {
+      name: "question_defaultValueExpression",
+      baseClass: "question",
+      propertyName: "defaultValueExpression",
+      showInUI: false,
+    },
+    {
       name: "column_visibility",
       baseClass: "matrixdropdowncolumn",
       propertyName: "visibleIf",
