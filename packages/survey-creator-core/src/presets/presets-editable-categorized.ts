@@ -102,9 +102,9 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       const defaultCategory = this.defaultCategories.filter(c => c[this.nameInnerMatrix].filter(i => i.name == rowData.name).length > 0)[0];
       const categories = this.getQuestionCategories(model);
       const catValue = categories.value;
-      const general = this.findOrCreateCategory(catValue, defaultCategory.category);
+      const general = this.findOrCreateCategory(catValue, defaultCategory?.category);
       general[this.nameInnerMatrix].push(rowData);
-      categories.value = [...catValue];
+      categories.value = catValue;
     }
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
