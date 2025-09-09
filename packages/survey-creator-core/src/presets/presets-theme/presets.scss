@@ -24,6 +24,7 @@
   @include disableLibraryAnimations;
   display: flex;
   flex-direction: column;
+  @include sjs2--typography--default;
 
   :has(.sps-question__content--main),
   :has(.sps-panel__content--main) {
