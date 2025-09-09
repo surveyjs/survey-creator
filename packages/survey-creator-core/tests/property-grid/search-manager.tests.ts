@@ -139,7 +139,6 @@ test("SearchManager: matchCounterText with visibility", () => {
   });
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
-  searchManager.searchActionBar.flushUpdates();
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
