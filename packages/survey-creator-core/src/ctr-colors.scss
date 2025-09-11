@@ -10,8 +10,8 @@
   --sjs-layer-3-background-400: var(--sjs2-color-bg-basic-secondary-dim);
   --sjs-layer-3-foreground-100: var(--sjs2-color-fg-basic-primary);
   --sjs-layer-3-foreground-50: var(--sjs2-color-fg-basic-secondary);
-  --sjs-layer-2-background-500: #f8f8f8ff; //?
-  --sjs-layer-2-background-400: #eeeeeeff; //?
+  --sjs-layer-2-background-500: var(--sjs2-color-control-formbox-design-bg);
+  --sjs-layer-2-background-400: #eeeeeeff; //never shown on design surface
   --sjs-special-haze: var(--sjs2-color-utility-overlay-screen);
   --sjs-border-25: var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   --sjs-border-10: var(--sjs2-color-border-basic-secondary);
@@ -23,8 +23,8 @@
   --sjs-secondary-background-500: var(--sjs2-color-bg-accent-primary);
   --sjs-secondary-background-25: var(--sjs2-color-bg-accent-secondary-dim);
   --sjs-secondary-background-10: var(--sjs2-color-bg-accent-secondary);
-  --sjs-secondary-foreground-100: #ffffffff;
-  --sjs-secondary-forecolor-25: #ffffff40; //?
+  --sjs-secondary-foreground-100: #ffffffff; //used in license banner
+  --sjs-secondary-forecolor-25: #ffffff40; //never used
   --sjs-semantic-red-background-500: var(--sjs2-color-bg-alert-primary);
   --sjs-semantic-red-background-10: var(--sjs2-color-bg-alert-secondary);
   --sjs-semantic-red-foreground-100: var(--sjs2-color-fg-static-main-primary);
