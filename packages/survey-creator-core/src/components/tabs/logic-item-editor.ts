@@ -168,6 +168,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "elementSelector",
               type: "dropdown",
               renderAs: "logicoperator",
+              searchEnabled: false,
               allowClear: false,
               titleLocation: "hidden",
               isRequired: true,

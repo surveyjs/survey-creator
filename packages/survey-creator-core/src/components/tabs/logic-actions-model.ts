@@ -322,6 +322,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
         const question = q as QuestionDropdownModel;
         if (question.getType() === "dropdown") {
           question.allowClear = false;
+          question.searchEnabled = false;
           question.renderAs = "logicoperator";
         }
         triggerQuestionsPanel.addQuestion(question);

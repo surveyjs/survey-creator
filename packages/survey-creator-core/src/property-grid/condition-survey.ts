@@ -357,6 +357,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "questionName",
               type: "dropdown",
               renderAs: "logicoperator",
+              searchEnabled: false,
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
               showOptionsCaption: false,
