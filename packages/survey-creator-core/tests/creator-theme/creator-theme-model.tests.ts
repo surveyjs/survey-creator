@@ -17,22 +17,22 @@ test("Creator theme model de/serialization", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs2-base-unit-size": "6px",
-      "--sjs2-base-unit-radius": "6px",
-      "--sjs2-base-unit-spacing": "6px",
-      "--sjs2-color-utility-surface": "rgba(253, 255, 148, 0.5)",
-      "--sjs2-color-project-brand-600": "rgba(248, 248, 248, 1)",
-      "--sjs2-color-project-accent-600": "#0b864b",
+      [CreatorThemeModel.varBaseUnitSize]: "6px",
+      [CreatorThemeModel.varBaseUnitRadius]: "6px",
+      [CreatorThemeModel.varBaseUnitSpacing]: "6px",
+      [CreatorThemeModel.varColorUtilitySurface]: "rgba(253, 255, 148, 0.5)",
+      [CreatorThemeModel.varColorProjectBrand]: "rgba(248, 248, 248, 1)",
+      [CreatorThemeModel.varColorProjectAccent]: "#0b864b",
     }
   };
   themeModel.fromJSON(themeJson);
   expect(themeModel.scale).toBe(75);
   expect(themeModel.themeName).toBe("custom");
 
-  expect(themeModel["--sjs2-base-unit-size"]).toBe("6px");
-  expect(themeModel["--sjs2-color-utility-surface"]).toBe("rgba(253, 255, 148, 0.5)");
-  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("rgba(248, 248, 248, 1)");
-  expect(themeModel["--sjs2-color-project-accent-600"]).toBe("#0b864b");
+  expect(themeModel[CreatorThemeModel.varBaseUnitSize]).toBe("6px");
+  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toBe("rgba(253, 255, 148, 0.5)");
+  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toBe("rgba(248, 248, 248, 1)");
+  expect(themeModel[CreatorThemeModel.varColorProjectAccent]).toBe("#0b864b");
 
   const themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual(themeJson);
@@ -46,9 +46,9 @@ test("Default theme serialization", (): any => {
   themeModel.loadTheme();
   expect(themeModel.themeName).toBe("default-light");
   expect(themeModel.scale).toBe(100);
-  expect(themeModel["--sjs2-color-utility-surface"]).toBe("#EDF9F7");
-  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("#19B394");
-  expect(themeModel["--sjs2-color-project-accent-600"]).toBe("#19B394");
+  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toBe("#EDF9F7");
+  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toBe("#19B394");
+  expect(themeModel[CreatorThemeModel.varColorProjectAccent]).toBe("#19B394");
 
   const themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual({ themeName: "default-light" });
@@ -58,16 +58,16 @@ test("Creator theme: sync css variables", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
-  let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-utility-surface");
+  let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
 
-  expect(creator.themeVariables["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
-  expect((themeModel.cssVariables || {})["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
+  expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+  expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
 
   const newValue = "#c95ae7";
   surfaceBackgroundColor.value = newValue;
-  expect(creator.themeVariables["--sjs2-color-utility-surface"]).toEqual(newValue);
-  expect((themeModel.cssVariables || {})["--sjs2-color-utility-surface"]).toEqual(newValue);
+  expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual(newValue);
+  expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual(newValue);
   expect(surfaceBackgroundColor.value).toEqual(newValue);
 });
 
@@ -77,12 +77,12 @@ test("Creator theme: reset color variables after change theme", (): any => {
     "isLight": false,
     "cssVariables": {
       "--sjs-special-haze": "#000000BF",
-      "--sjs2-color-utility-surface": "#0C0C0CFF",
+      [CreatorThemeModel.varColorUtilitySurface]: "#0C0C0CFF",
       "--sjs-special-glow": "#000000BF",
-      "--sjs2-color-project-brand-600": "#3EDFD5FF",
+      [CreatorThemeModel.varColorProjectBrand]: "#3EDFD5FF",
       "--sjs-primary-background-10": "#3EDFD51A",
       "--sjs-primary-background-400": "#29DCD1FF",
-      "--sjs2-color-project-accent-600": "#EDA925FF",
+      [CreatorThemeModel.varColorProjectAccent]: "#EDA925FF",
       "--sjs-secondary-background-400": "#EDBE1E",
       "--sjs-secondary-background-25": "#EDA92540",
       "--sjs-secondary-background-10": "#EDA9251A",
@@ -94,9 +94,9 @@ test("Creator theme: reset color variables after change theme", (): any => {
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
     const themeModel = designerPlugin["themeModel"];
     const themeName = designerPlugin["themePropertyGrid"].survey.findQuestionByName("themeName");
-    const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-utility-surface");
-    const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-brand-600");
-    const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-accent-600");
+    const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
+    const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
+    const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectAccent);
 
     expect(themeName.value).toEqual("default-light");
     expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
@@ -107,9 +107,9 @@ test("Creator theme: reset color variables after change theme", (): any => {
     secondaryBackgroundColor.value = "rgba(30, 30, 30, 0.1)";
     surfaceBackgroundColor.value = "rgba(10, 10, 10, 1)";
     expect(themeModel.themeCssVariablesChanges).toStrictEqual({
-      "--sjs2-color-project-brand-600": "#141414",
-      "--sjs2-color-project-accent-600": "#1e1e1e",
-      "--sjs2-color-utility-surface": "#0a0a0a",
+      [CreatorThemeModel.varColorProjectBrand]: "#141414",
+      [CreatorThemeModel.varColorProjectAccent]: "#1e1e1e",
+      [CreatorThemeModel.varColorUtilitySurface]: "#0a0a0a",
     });
 
     themeName.value = "dark";
@@ -127,9 +127,9 @@ test("creator.applyCreatorTheme", () => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs2-color-utility-surface": "rgba(253, 255, 148, 0.5)",
-      "--sjs2-color-project-brand-600": "rgba(248, 248, 248, 1)",
-      "--sjs2-color-project-accent-600": "#0b864b",
+      [CreatorThemeModel.varColorUtilitySurface]: "rgba(253, 255, 148, 0.5)",
+      [CreatorThemeModel.varColorProjectBrand]: "rgba(248, 248, 248, 1)",
+      [CreatorThemeModel.varColorProjectAccent]: "#0b864b",
       "--ctr-font-unit": "18px",
       "--ctr-line-height-unit": "18px",
       "--ctr-size-unit": "6px",
@@ -161,11 +161,11 @@ test("Creator theme check scale", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs2-base-unit-font-size": "10px",
-      "--sjs2-base-unit-line-height": "10px",
-      "--sjs2-base-unit-spacing": "12px",
-      "--sjs2-base-unit-size": "12px",
-      "--sjs2-base-unit-radius": "12px",
+      [CreatorThemeModel.varBaseUnitFontSize]: "10px",
+      [CreatorThemeModel.varBaseUnitLineHeight]: "10px",
+      [CreatorThemeModel.varBaseUnitSpacing]: "12px",
+      [CreatorThemeModel.varBaseUnitSize]: "12px",
+      [CreatorThemeModel.varBaseUnitRadius]: "12px",
     }
   };
   themeModel.fromJSON(themeJson);
@@ -176,14 +176,14 @@ test("Creator theme check scale", (): any => {
   fontScale.value = 150;
 
   let themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
-  expect(themeModelJsonCssVariables["--sjs2-base-unit-font-size"]).toEqual("12px");
-  expect(themeModelJsonCssVariables["--sjs2-base-unit-line-height"]).toEqual("12px");
+  expect(themeModelJsonCssVariables[CreatorThemeModel.varBaseUnitFontSize]).toEqual("12px");
+  expect(themeModelJsonCssVariables[CreatorThemeModel.varBaseUnitLineHeight]).toEqual("12px");
 
   scale.value = 225; // max = 200
   themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
-  expect(themeModelJsonCssVariables["--sjs2-base-unit-size"]).toEqual("16px");
-  expect(themeModelJsonCssVariables["--sjs2-base-unit-spacing"]).toEqual("16px");
-  expect(themeModelJsonCssVariables["--sjs2-base-unit-radius"]).toEqual("16px");
+  expect(themeModelJsonCssVariables[CreatorThemeModel.varBaseUnitSize]).toEqual("16px");
+  expect(themeModelJsonCssVariables[CreatorThemeModel.varBaseUnitSpacing]).toEqual("16px");
+  expect(themeModelJsonCssVariables[CreatorThemeModel.varBaseUnitRadius]).toEqual("16px");
 });
 
 test("Creator theme: apply custom theme", (): any => {
@@ -194,9 +194,9 @@ test("Creator theme: apply custom theme", (): any => {
   const themeJson: ICreatorTheme = {
     themeName: "custom",
     cssVariables: {
-      "--sjs2-color-utility-surface": "rgba(253, 255, 148, 0.5)",
-      "--sjs2-color-project-brand-600": "rgba(248, 248, 248, 1)",
-      "--sjs2-color-project-accent-600": "#0b864b",
+      [CreatorThemeModel.varColorUtilitySurface]: "rgba(253, 255, 148, 0.5)",
+      [CreatorThemeModel.varColorProjectBrand]: "rgba(248, 248, 248, 1)",
+      [CreatorThemeModel.varColorProjectAccent]: "#0b864b",
       "--ctr-font-unit": "18px",
       "--ctr-line-height-unit": "18px",
       "--ctr-size-unit": "6px",
@@ -207,41 +207,41 @@ test("Creator theme: apply custom theme", (): any => {
   };
   creator.applyCreatorTheme(themeJson);
 
-  const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-utility-surface");
-  const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-brand-600");
-  const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs2-color-project-accent-600");
+  const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
+  const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
+  const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectAccent);
   expect(surfaceBackgroundColor.value).toEqual("rgba(253, 255, 148, 0.5)");
-  expect(themeModel["--sjs2-color-utility-surface"]).toBe("rgba(253, 255, 148, 0.5)");
+  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toBe("rgba(253, 255, 148, 0.5)");
 
   expect(primaryBackgroundColor.value).toEqual("rgba(248, 248, 248, 1)");
-  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("rgba(248, 248, 248, 1)");
+  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toBe("rgba(248, 248, 248, 1)");
 
   expect(secondaryBackgroundColor.value).toEqual("#0b864b");
-  expect(themeModel["--sjs2-color-project-accent-600"]).toBe("#0b864b");
+  expect(themeModel[CreatorThemeModel.varColorProjectAccent]).toBe("#0b864b");
 });
 
 test("sjs-special-background calculations on primary background changed", (): any => {
   const themeModel = new CreatorThemeModel();
 
-  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("#19B394");
-  expect(themeModel["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
+  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
+  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
 
   themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
-  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("#19B394");
-  expect(themeModel["--sjs2-color-utility-surface"]).toEqual("#EDF9F7");
+  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
+  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
 
-  themeModel["--sjs2-color-project-brand-600"] = PredefinedColors["light"]["teal"];
-  themeModel["--sjs2-color-project-brand-600"] = PredefinedColors["light"]["teal"];
-  expect(colorsAreEqual(themeModel["--sjs2-color-project-brand-600"], PredefinedColors["light"]["teal"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel["--sjs2-color-utility-surface"], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
+  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
+  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
+  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["teal"])).toBeTruthy();
+  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
 
-  themeModel["--sjs2-color-project-brand-600"] = PredefinedColors["light"]["orchid"];
-  expect(colorsAreEqual(themeModel["--sjs2-color-project-brand-600"], PredefinedColors["light"]["orchid"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel["--sjs2-color-utility-surface"], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
+  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["orchid"];
+  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["orchid"])).toBeTruthy();
+  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
 
-  themeModel["--sjs2-color-project-brand-600"] = "#fefefe";
-  expect(colorsAreEqual(themeModel["--sjs2-color-project-brand-600"], "#fefefe")).toBeTruthy();
-  expect(colorsAreEqual(themeModel["--sjs2-color-utility-surface"], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
+  themeModel[CreatorThemeModel.varColorProjectBrand] = "#fefefe";
+  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], "#fefefe")).toBeTruthy();
+  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
 });
 
 test("Creator theme model isLight de/serialization", (): any => {

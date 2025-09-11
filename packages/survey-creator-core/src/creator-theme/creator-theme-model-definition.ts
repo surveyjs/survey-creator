@@ -1,12 +1,13 @@
 import { ISurveyPropertiesDefinition, ISurveyPropertyGridDefinition } from "../question-editor/definition";
+import { CreatorThemeModel } from "./creator-theme-model";
 
 const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
   "creatortheme": {
     properties: [
       { name: "themeName", index: 1 },
-      { name: "--sjs2-color-project-brand-600", index: 10, tab: "accentColors" },
-      { name: "--sjs2-color-project-accent-600", index: 20, tab: "accentColors" },
-      { name: "--sjs2-color-utility-surface", index: 30, tab: "surfaceBackground" },
+      { name: CreatorThemeModel.varColorProjectBrand, index: 10, tab: "accentColors" },
+      { name: CreatorThemeModel.varColorProjectAccent, index: 20, tab: "accentColors" },
+      { name: CreatorThemeModel.varColorUtilitySurface, index: 30, tab: "surfaceBackground" },
       { name: "fontScale", index: 40, tab: "scaling" },
       { name: "scale", index: 50, tab: "scaling" },
     ],

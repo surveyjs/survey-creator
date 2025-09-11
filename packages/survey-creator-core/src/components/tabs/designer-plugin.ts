@@ -124,10 +124,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private updatePredefinedColorChoices() {
     this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
-      if (question.name === "--sjs2-color-utility-surface") {
+      if (question.name === CreatorThemeModel.varColorUtilitySurface) {
         (question as any).choices = this.themeModel && this.themeModel.isLight ? getPredefinedBackgoundColorsChoices() : [];
       }
-      if (question.name === "--sjs2-color-project-brand-600" || question.name === "--sjs2-color-project-accent-600") {
+      if (question.name === CreatorThemeModel.varColorProjectBrand || question.name === CreatorThemeModel.varColorProjectAccent) {
         (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
       }
     });
