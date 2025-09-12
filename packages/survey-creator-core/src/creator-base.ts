@@ -4682,7 +4682,7 @@ export class SurveyCreatorModel extends Base
   public onGetIsStringInplacelyEditable: EventBase<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }> = this.addCreatorEvent<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }>();
 
   public isStringInplacelyEditable(element: Base, stringName: string) {
-    const options = { element, name: stringName, allowEdit: !this.readOnly && isStringEditable(element, stringName) };
+    const options = { element, name: stringName, allowEdit: !this.readOnly && !!isStringEditable(element, stringName) };
     this.onGetIsStringInplacelyEditable.fire(this, options);
     return options.allowEdit;
   }

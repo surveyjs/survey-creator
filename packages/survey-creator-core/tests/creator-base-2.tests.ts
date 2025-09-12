@@ -847,12 +847,12 @@ test("onGetIsStringEditable", (): any => {
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(1);
 
-  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeFalsy();
+  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
   expect(lastEditableValue).toBeTruthy();
   expect(callCount).toBe(2);
 
   newValue = true;
-  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeFalsy();
-  expect(lastEditableValue).toBeTruthy();
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(3);
 });
