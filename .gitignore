@@ -55,12 +55,6 @@ screenshotLegacyTests/*.ts
 
 junit.xml
 packages/survey-creator-core/.vscode/launch.json
-packages/survey-creator-core/src/themes/default.ts
-packages/survey-creator-core/src/themes/default-contrast.ts
-packages/survey-creator-core/src/themes/default-dark.ts
-packages/survey-creator-core/src/themes/default-light.ts
-packages/survey-creator-core/src/themes/index.ts
-packages/survey-creator-core/src/themes/sc2020.ts
 
 **/test-results/
 **/playwright-report/
