@@ -10,7 +10,8 @@ export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.setWidthByTarget = false;
   question.popupModel.positionMode = "flex";
   question.popupModel.showPointer = true;
-  question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
+  question.searchEnabled = false;
+  question.dropdownListModel["listModel"].searchEnabled = ["operator", "conjunction", "logicTypeName"].indexOf(question.name) === -1;
 }
 
 export class LogicEvent extends EventBase<SurveyLogic, any> { }
