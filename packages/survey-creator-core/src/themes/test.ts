@@ -339,7 +339,7 @@ export const Test = {
     "--sjs2-color-utility-a11y": "rgba(from var(--sjs2-palette-blue-400) r g b / var(--sjs2-opacity-x060))",
     "--sjs2-color-utility-overlay-screen": "color(srgb 0.800112 0.933371 0.933371 / 0.35)",
     "--sjs2-color-utility-overlay-border": "rgba(from var(--sjs2-palette-gray-900) r g b / var(--sjs2-opacity-x040))",
-    "--sjs2-color-utility-shadow-surface-default": "rgba(from var(--sjs2-palette-gray-999) r g b / var(--sjs2-opacity-x010))",
+    "--sjs2-color-utility-shadow-surface-default": "#00000040",
     "--sjs2-color-utility-shadow-surface-hovered": "rgba(from var(--sjs2-color-project-brand-600) r g b / var(--sjs2-opacity-x040))",
     "--sjs2-color-utility-shadow-surface-pressed": "var(--sjs2-color-project-brand-600)",
     "--sjs2-color-utility-shadow-surface-focused": "var(--sjs2-color-project-brand-600)",
