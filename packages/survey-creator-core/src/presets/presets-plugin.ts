@@ -2,8 +2,6 @@ import { createDropdownActionModel, IAction } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, extendCreatorTheme } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
-import { darkTheme } from "sjs-design-tokens";
-
 export class TabPresetsPlugin implements ICreatorPlugin {
   public model: CreatorPresetEditorModel | undefined;
   public static iconName = "icon-settings";
@@ -41,7 +39,6 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   };
 
   public activate(): void {
-    extendCreatorTheme(darkTheme);
     this.creator.onActiveTabChanging.add(this.preventTabSwitch);
     this.model = new CreatorPresetEditorModel({}, this.creator, this.defaultJson);
     this.defaultJson = { ...this.model.defaultJson };
