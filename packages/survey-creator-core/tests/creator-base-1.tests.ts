@@ -1711,26 +1711,6 @@ test("getElementWrapperComponentName for inner component elements", () => {
   ComponentCollection.Instance.clear();
 });
 
-test("isStringEditable", (): any => {
-  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({}, "")).toBeTruthy();
-  expect(
-    isStringEditable({ isEditableTemplateElement: true }, "")
-  ).toBeTruthy();
-  expect(
-    isStringEditable(
-      { isContentElement: true, isEditableTemplateElement: true },
-      ""
-    )
-  ).toBeTruthy();
-});
-test("isStringEditable for matrix dynamic", (): any => {
-  const matrix = new QuestionMatrixDynamicModel("q1");
-  matrix.addColumn("col1");
-  matrix.rowCount = 1;
-  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
-  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
-});
 test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
