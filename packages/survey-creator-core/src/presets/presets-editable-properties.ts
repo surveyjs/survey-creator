@@ -406,13 +406,22 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.propertyGridSetObj(this.currentProperties.getObj());
     const categories = this.currentProperties.getInitialJson(false);
     model.setValue(this.nameCategories, categories);
+    const items = this.getCurrentlyHiddenItems(categories);
+    model.setValue(this.nameMatrix, items);
     this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     //this.setupCreatorToolbox(this.propCreator);
   }
 
+  private getCurrentlyHiddenItems(categories: any) {
+    const itemsMap: any = {};
+    this.defaultItems.forEach((i: any) => itemsMap[i.name] = i);
+    categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));
+    return Object.keys(itemsMap).map(key => itemsMap[key]);
+  }
+
   private setupDefaults(model: SurveyModel): void {
-    const categories = this.currentProperties?.getInitialJson(false) || [];
+    const categories = this.currentProperties?.getInitialJson(true) || [];
     this.defaultCategories = [...categories];
     this.defaultItems = [];
     categories.forEach(c => this.defaultItems.push(...c.properties));
