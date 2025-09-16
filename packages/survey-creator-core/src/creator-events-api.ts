@@ -1105,3 +1105,9 @@ export interface CreatorThemeSelectedEvent {
    */
   theme: ICreatorTheme;
 }
+export interface CreatorAllowInplaceEditEvent {
+  element: Base;
+  item?: ItemValue;
+  propertyName: string;
+  allow: boolean;
+}

@@ -67,7 +67,8 @@ import {
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
-  CreatorThemeSelectedEvent
+  CreatorThemeSelectedEvent,
+  CreatorAllowInplaceEditEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -4679,12 +4680,12 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when creator decides whether certain string is inplace editable on design surface or not.
    */
-  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, { element: Base, item?: ItemValue, propertyName: string, allowEdit: boolean }> = this.addCreatorEvent<SurveyCreatorModel, { element: Base, item?: ItemValue, propertyName: string, allowEdit: boolean }>();
+  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, CreatorAllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorAllowInplaceEditEvent>();
 
   public isStringInplacelyEditable(element: Base, stringName: string, item?: ItemValue) {
-    const options = { element, item, propertyName: stringName, allowEdit: !this.readOnly && !!isStringEditable(element, stringName) };
+    const options = { element, item, propertyName: stringName, allow: !this.readOnly && !!isStringEditable(element, stringName) };
     this.onAllowInplaceEdit.fire(this, options);
-    return options.allowEdit;
+    return options.allow;
   }
 }
 

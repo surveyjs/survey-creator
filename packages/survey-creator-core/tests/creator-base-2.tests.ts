@@ -834,10 +834,10 @@ test("onGetIsStringEditable", (): any => {
   let callCount = 0;
   let newValue;
   creator.onAllowInplaceEdit.add((s, o) => {
-    lastEditableValue = o.allowEdit;
+    lastEditableValue = o.allow;
     callCount++;
     if (newValue !== undefined) {
-      o.allowEdit = newValue;
+      o.allow = newValue;
     }
   });
   expect(lastEditableValue).toBeUndefined();
