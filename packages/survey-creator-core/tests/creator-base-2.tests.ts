@@ -833,11 +833,11 @@ test("onGetIsStringEditable", (): any => {
   let lastEditableValue;
   let callCount = 0;
   let newValue;
-  creator.onGetIsStringInplacelyEditable.add((s, o) => {
-    lastEditableValue = o.allowEdit;
+  creator.onAllowInplaceEdit.add((s, o) => {
+    lastEditableValue = o.allow;
     callCount++;
     if (newValue !== undefined) {
-      o.allowEdit = newValue;
+      o.allow = newValue;
     }
   });
   expect(lastEditableValue).toBeUndefined();
