@@ -68,7 +68,7 @@ import {
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
   CreatorThemeSelectedEvent,
-  CreatorAllowInplaceEditEvent
+  AllowInplaceEditEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -231,6 +231,7 @@ export class SurveyCreatorModel extends Base
    *
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
    * @see useElementTitles
+   * @see onAllowInplaceEdit
    */
   @property({ defaultValue: false }) inplaceEditChoiceValues: boolean;
   /**
@@ -4678,9 +4679,10 @@ export class SurveyCreatorModel extends Base
   public clearTranslationsOnSourceTextChange: boolean = false;
 
   /**
-   * An event that is raised when creator decides whether certain string is inplace editable on design surface or not.
+   * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
+   * @see inplaceEditChoiceValues
    */
-  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, CreatorAllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorAllowInplaceEditEvent>();
+  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();
 
   public isStringInplacelyEditable(element: Base, stringName: string, item?: ItemValue) {
     const options = { element, item, propertyName: stringName, allow: !this.readOnly && !!isStringEditable(element, stringName) };
