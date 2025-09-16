@@ -15,12 +15,17 @@ export class SidebarPageModel extends Base {
   activateCallback: () => void;
   deactivateCallback: () => void;
 
+  private captionValue: string;
+
   constructor(public id: string, public sidePanel: SidebarModel, componentName?: string, componentData?: any) {
     super();
     !!componentName && (this.componentName = componentName);
     !!componentData && (this.componentData = componentData);
   }
   public get caption(): string {
-    return editorLocalization.getString(this.locTileName);
+    return this.captionValue || editorLocalization.getString(this.locTileName);
+  }
+  public set caption(val: string) {
+    this.captionValue = val;
   }
 }

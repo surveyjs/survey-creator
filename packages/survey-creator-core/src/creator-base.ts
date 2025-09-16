@@ -4675,6 +4675,17 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+
+  /**
+   * An event that is raised when creator decides whether certain string is inplace editable on design surface or not.
+   */
+  public onGetIsStringInplacelyEditable: EventBase<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }> = this.addCreatorEvent<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }>();
+
+  public isStringInplacelyEditable(element: Base, stringName: string) {
+    const options = { element, name: stringName, allowEdit: !this.readOnly && !!isStringEditable(element, stringName) };
+    this.onGetIsStringInplacelyEditable.fire(this, options);
+    return options.allowEdit;
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
@@ -4712,14 +4723,14 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     opt.data = opt.data || data;
   });
   model.getRendererForString = (element: Base, name: string): string => {
-    if (!creator.readOnly && isStringEditable(element, name)) {
+    if (creator.isStringInplacelyEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;
   };
 
   model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-    if (!creator.readOnly && isStringEditable(element, locStr.name)) {
+    if (creator.isStringInplacelyEditable(element, locStr.name)) {
       return {
         creator: creator,
         element,

@@ -2730,7 +2730,7 @@ test("Rename the name for detail panel in matrix dynamic", () => {
   expect((<Question>question1.detailElements[1]).visibleIf).toEqual("{row.question5} = 'a'");
   expect(question1.columns[0].visibleIf).toEqual("{row.question5} = 'a'");
 });
-test("Rename the name for matrix dropdown rows, bug#6910", () => {
+test("Rename the name for single matrix columns rows, bug#6910", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
