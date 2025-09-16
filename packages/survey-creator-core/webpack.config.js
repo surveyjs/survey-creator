@@ -88,7 +88,8 @@ var buildPlatformJson = {
     },
     "./themes/*": {
       "types": "./themes/*.d.ts",
-      "require": "./themes/*.js"
+      "require": "./themes/*.js",
+      "default": "./themes/*.js",
     },
     "./presets": {
       "types": "./presets-typings/typings/entries/index.d.ts",
