@@ -4679,11 +4679,11 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when creator decides whether certain string is inplace editable on design surface or not.
    */
-  public onGetIsStringInplacelyEditable: EventBase<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }> = this.addCreatorEvent<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }>();
+  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, { element: Base, item?: ItemValue, propertyName: string, allowEdit: boolean }> = this.addCreatorEvent<SurveyCreatorModel, { element: Base, item?: ItemValue, propertyName: string, allowEdit: boolean }>();
 
-  public isStringInplacelyEditable(element: Base, stringName: string) {
-    const options = { element, name: stringName, allowEdit: !this.readOnly && !!isStringEditable(element, stringName) };
-    this.onGetIsStringInplacelyEditable.fire(this, options);
+  public isStringInplacelyEditable(element: Base, stringName: string, item?: ItemValue) {
+    const options = { element, item, propertyName: stringName, allowEdit: !this.readOnly && !!isStringEditable(element, stringName) };
+    this.onAllowInplaceEdit.fire(this, options);
     return options.allowEdit;
   }
 }
@@ -4722,15 +4722,15 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     }
     opt.data = opt.data || data;
   });
-  model.getRendererForString = (element: Base, name: string): string => {
-    if (creator.isStringInplacelyEditable(element, name)) {
+  model.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
+    if (creator.isStringInplacelyEditable(element, name, item)) {
       return editableStringRendererName;
     }
     return undefined;
   };
 
-  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-    if (creator.isStringInplacelyEditable(element, locStr.name)) {
+  model.getRendererContextForString = (element: Base, locStr: LocalizableString, item?: ItemValue): any => {
+    if (creator.isStringInplacelyEditable(element, locStr.name, item)) {
       return {
         creator: creator,
         element,
