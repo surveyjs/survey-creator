@@ -174,9 +174,9 @@ test("disable locales", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -361,7 +361,7 @@ test("Import from array", () => {
   const translation: Translation = new Translation(survey);
 
   translation.importFromNestedArray([
-    ["description ↓ - language →", "default", "de"],
+    ["description ↓ - language →", "default", "de"], // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     ["survey.page1.question1.title", "question1_1", ""],
     ["survey.page1.question1.col1.title", "col1 en1", "col1 de1"]
   ]);
@@ -430,7 +430,7 @@ test("Export to array", () => {
   });
 
   expect(exported).toHaveLength(7);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(exported[1]).toEqual([
     "survey.page1.question1.title",
     "question1",

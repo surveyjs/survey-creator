@@ -105,7 +105,7 @@ test("getProperty function breaks on word automatically", () => {
 test("add de localization", () => {
   const deutschStrings = {
     p: {
-      isRequired: "Wird benötigt",
+      isRequired: "Wird benötigt", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     },
   };
   editorLocalization.locales["de"] = deutschStrings;
@@ -379,7 +379,7 @@ test("creator.sidebar.header.title & creator.locale, bug#7130", () => {
   expect(creator.sidebar.header.title).toBe("Survey Settings");
   creator.locale = "fr";
   creator.JSON = {};
-  expect(creator.sidebar.header.title).toBe("Paramètres du sondage");
+  expect(creator.sidebar.header.title).toBe("Paramètres du sondage"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   creator.activeTab = "translation";
   expect(creator.sidebar.header.title).toBe("Traduction");
   creator.locale = "en";
