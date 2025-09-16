@@ -3,10 +3,11 @@ import { SurveyCreatorModel } from "survey-creator-core";
 import * as SurveyCreatorCore from "survey-creator-core";
 import * as Survey from "survey-core";
 import SurveyThemes from "survey-core/themes";
+import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 SurveyCreatorCore.registerSurveyTheme(SurveyThemes);
-
+SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTestTheme);
 @Component({
   selector: "test-default",
   templateUrl: "./test.component.html",
@@ -28,6 +29,7 @@ export class TestDefaultComponent implements OnInit {
         this.creator.showOneCategoryInPropertyGrid = false;
         this.creator.allowZoom = false;
         this.creator.JSON = json;
+        this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
         (<any>window).creator = this.creator;
       });
     };
@@ -43,5 +45,6 @@ export class TestDefaultComponent implements OnInit {
     this.creator["animationEnabled"] = false;
     this.creator.showOneCategoryInPropertyGrid = false;
     this.creator.allowZoom = false;
+    this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
   }
 }
