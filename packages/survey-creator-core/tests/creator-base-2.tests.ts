@@ -894,4 +894,6 @@ test("Restrict users from adding more than a specified number of questions to a 
   expect(action.enabled).toBeFalsy();
   expect(duplicateAction.isVisible).toBeFalsy();
   expect(pAdorner.currentAddQuestionType).toBe("");
+  creator.JSON = { };
+  expect(action.enabled).toBeTruthy();
 });

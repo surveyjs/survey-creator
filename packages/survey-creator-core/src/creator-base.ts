@@ -2535,7 +2535,7 @@ export class SurveyCreatorModel extends Base
   private doOnElementsChanged(type: string): void {
     if (this.onCanAddElement.isEmpty) return;
     const operations = ["ADDED_FROM_TOOLBOX", "ADDED_FROM_PAGEBUTTON", "ELEMENT_COPIED", "QUESTION_CONVERTED", "OBJECT_DELETED"];
-    if (!type || operations.indexOf(type) < 0) return;
+    if (!!type && operations.indexOf(type) < 0) return;
     this.toolbox.items.forEach(item => {
       const options = { name: item.name, toolboxItem: item, json: item.json, allow: true };
       this.onCanAddElement.fire(this, options);
