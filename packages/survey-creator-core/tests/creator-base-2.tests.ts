@@ -872,8 +872,26 @@ test("Restrict users from adding more than a specified number of questions to a 
   expect(action.enabled).toBeTruthy();
   creator.clickToolboxItem((action.json));
   expect(creator.survey.getAllQuestions().length).toBe(1);
+  const qAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const duplicateAction = qAdorner.actionContainer.getActionById("duplicate");
+  expect(duplicateAction).toBeTruthy();
+  expect(duplicateAction.isVisible).toBeTruthy();
   expect(action.enabled).toBeTruthy();
   creator.clickToolboxItem((action.json));
   expect(creator.survey.getAllQuestions().length).toBe(2);
   expect(action.enabled).toBeFalsy();
+  expect(duplicateAction.isVisible).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getAllQuestions()[0]);
+  expect(action.enabled).toBeTruthy();
+  expect(duplicateAction.isVisible).toBeTruthy();
+
+  const pAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  pAdorner.currentAddQuestionType = "comment";
+  pAdorner.addNewQuestion(pAdorner, undefined);
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(duplicateAction.isVisible).toBeFalsy();
+  expect(pAdorner.currentAddQuestionType).toBe("");
 });

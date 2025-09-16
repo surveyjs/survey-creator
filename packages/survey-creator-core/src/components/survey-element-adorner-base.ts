@@ -275,6 +275,14 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   };
+  private creatorElementTypeRestrictionChanged: (sender: Base, options: any) => void = (_, options) => {
+    this.onElementTypeRestrictionChanged(options.elType);
+  };
+  protected onElementTypeRestrictionChanged(elType: string): void {
+    if (!!this.surveyElement && this.surveyElement.getType() === elType) {
+      this.updateActionsProperties();
+    }
+  }
   public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: Base): V {
     return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
   }
@@ -336,6 +344,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if (this.surveyElement != surveyElement) {
       this.setSurveyElement(surveyElement);
       this.creator.onLocaleChanded.add(this.creatorOnLocaleChanged);
+      this.creator.onElementTypeRestrictionChanged.add(this.creatorElementTypeRestrictionChanged);
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     }
   }
@@ -349,6 +358,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.detachOnlyMyElement();
     this.surveyElement = undefined;
     this.creator.onLocaleChanded.remove(this.creatorOnLocaleChanged);
+    this.creator.onElementTypeRestrictionChanged.remove(this.creatorElementTypeRestrictionChanged);
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
   }
   public dispose(): void {

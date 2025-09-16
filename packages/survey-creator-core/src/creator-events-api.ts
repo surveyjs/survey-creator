@@ -173,11 +173,9 @@ export interface ElementAllowOperationsEvent {
   allowShowSettings: boolean | undefined;
 }
 export interface CanAddElementOptionsEvent {
-  //"toolbox" | "convert" | "add-button" | "copy";
-  reason: string;
-  name?: string;
+  name: string;
+  toolboxItem?: IAction;
   json?: any;
-  element?: Base; //Question | PanelModel
   allow: boolean;
 }
 export interface DefineElementMenuItemsEvent {

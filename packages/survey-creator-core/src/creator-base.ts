@@ -2531,15 +2531,25 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
   }
-  private doOnElementsChanged(type: string) {
+  public onElementTypeRestrictionChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  private doOnElementsChanged(type: string): void {
     if (this.onCanAddElement.isEmpty) return;
     const operations = ["ADDED_FROM_TOOLBOX", "ADDED_FROM_PAGEBUTTON", "ELEMENT_COPIED", "QUESTION_CONVERTED", "OBJECT_DELETED"];
     if (!type || operations.indexOf(type) < 0) return;
     this.toolbox.items.forEach(item => {
-      const options = { reason: "toolbox", json: item.json, allow: true, name: item.name };
+      const options = { name: item.name, toolboxItem: item, json: item.json, allow: true };
       this.onCanAddElement.fire(this, options);
-      item.isRestricted = !options.allow;
+      const restricted = !options.allow;
+      if (item.isDisabledByRestriction !== restricted) {
+        item.isDisabledByRestriction = restricted;
+        this.onElementTypeRestrictionChanged.fire(this, { elType: item.name });
+      }
     });
+  }
+  private isToolboxItemDisabledByRestriction(name: string): boolean {
+    if (!name || this.onCanAddElement.isEmpty) return false;
+    const item = this.toolbox.getActionById(name);
+    return !!item && item.isDisabledByRestriction;
   }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
@@ -4409,11 +4419,12 @@ export class SurveyCreatorModel extends Base
   }
   public getElementAllowOperations(element: SurveyElement): any {
     const allowDragDefault = !!element && (!element.isPage || element.isPage && this.allowDragPages);
+    const elType = element?.getType();
     var options = {
       obj: element,
       element: element,
       allowDelete: true,
-      allowCopy: true,
+      allowCopy: !this.isToolboxItemDisabledByRestriction(elType),
       allowDragging: allowDragDefault,
       allowDrag: allowDragDefault,
       allowChangeType: true,
