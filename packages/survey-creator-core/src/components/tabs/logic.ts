@@ -402,7 +402,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.AddElements(itemValues, res);
   }
   private isItemValueProp(prop: JsonObjectProperty): boolean {
-    return prop && ["itemvalue[]", "choiceitem[]", "checkboxitem[]"].indexOf(prop.type) > -1;
+    return prop && ["itemvalue[]", "choiceitem[]", "checkboxitem[]", "matrixcolumn[]"].indexOf(prop.type) > -1;
   }
   private AddElements(src: Array<any>, dest: Array<any>) {
     for (var i = 0; i < src.length; i++) {
