@@ -856,3 +856,24 @@ test("onGetIsStringEditable", (): any => {
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(3);
 });
+test("Restrict users from adding more than a specified number of questions to a survey Issue#7122", (): any => {
+  const creator = new CreatorTester();
+  creator.onCanAddElement.add((sender, options) => {
+    if (options.name === "comment") {
+      const qs = creator.survey.getAllQuestions(true, true, true);
+      qs.filter(q => q.getType() === "comment");
+      options.allow = qs.length < 2;
+    }
+  });
+  creator.JSON = { };
+  const action = creator.toolbox.getActionById("comment");
+  expect(action).toBeTruthy();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+});

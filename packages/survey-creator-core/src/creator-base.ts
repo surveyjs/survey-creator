@@ -67,7 +67,8 @@ import {
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
-  CreatorThemeSelectedEvent
+  CreatorThemeSelectedEvent,
+  CanAddElementOptionsEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -670,6 +671,7 @@ export class SurveyCreatorModel extends Base
    * @see onCollectionItemAllowOperations
    */
   public onElementAllowOperations: EventBase<SurveyCreatorModel, ElementAllowOperationsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementAllowOperationsEvent>();
+  public onCanAddElement: EventBase<SurveyCreatorModel, CanAddElementOptionsEvent> = this.addCreatorEvent<SurveyCreatorModel, CanAddElementOptionsEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains [adorners](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#specify-adorner-availability) for a survey element. Use this event to hide and modify predefined adorners or add a custom adorner.
@@ -2277,6 +2279,7 @@ export class SurveyCreatorModel extends Base
     if (!!this.undoRedoController) {
       this.undoRedoController.updateSurvey();
     }
+    this.doOnElementsChanged("");
   }
   private updatePlugin(name: string): void {
     const plugin = this.getPlugin(this.activeTab);
@@ -2528,6 +2531,16 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
   }
+  private doOnElementsChanged(type: string) {
+    if (this.onCanAddElement.isEmpty) return;
+    const operations = ["ADDED_FROM_TOOLBOX", "ADDED_FROM_PAGEBUTTON", "ELEMENT_COPIED", "QUESTION_CONVERTED", "OBJECT_DELETED"];
+    if (!type || operations.indexOf(type) < 0) return;
+    this.toolbox.items.forEach(item => {
+      const options = { reason: "toolbox", json: item.json, allow: true, name: item.name };
+      this.onCanAddElement.fire(this, options);
+      item.isRestricted = !options.allow;
+    });
+  }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
     var page = this.getPageByElement(panel);
@@ -2778,6 +2791,7 @@ export class SurveyCreatorModel extends Base
   public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
+    this.doOnElementsChanged(options.type);
     this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {

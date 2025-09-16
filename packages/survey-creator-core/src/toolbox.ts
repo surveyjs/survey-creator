@@ -143,6 +143,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propValue: string;
   public showInToolboxOnly: boolean = false;
   public needDefaultSubitem: boolean = undefined;
+  @property() isRestricted: boolean;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -191,6 +192,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   public set enabled(val: boolean) {
     this.setEnabled(val);
+  }
+  public getEnabled(): boolean {
+    if (this.isRestricted) return false;
+    return super.getEnabled() !== false;
   }
   className: string;
 
