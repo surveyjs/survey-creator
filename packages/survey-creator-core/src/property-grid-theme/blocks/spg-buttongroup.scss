@@ -47,9 +47,8 @@
   flex-grow: 1;
 
   border-radius: var(--ctr-button-group-item-corner-radius, var(--sjs-corner-radius-x075));
-  box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width, 0px)
-    var(--ctr-button-group-item-border-color, var(--sjs-border-10, #dcdcdcff));
-  background-color: transparent;
+  box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width, 0px) var(--ctr-button-group-item-border-color, var(--sjs-border-10, #dcdcdcff));
+  background-color: var(--ctr-button-group-item-background-color, transparent);
 
   transition:
     background $creator-transition-duration,
