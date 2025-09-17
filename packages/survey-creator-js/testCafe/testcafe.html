@@ -49,6 +49,7 @@
       window.updateCreatorModel = (options, json) => {
         window.prevCreator = window.creator;
         const creator = new SurveyCreator.SurveyCreator(options);
+        creator.applyCreatorTheme(SurveyCreatorTheme.Test);
         creator.JSON = json;
         this.setState({ creator });
         creator.tabResponsivenessMode = "menu";
