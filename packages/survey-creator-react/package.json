@@ -90,7 +90,6 @@
     "react-dom": "^17.0.1",
     "survey-core": "../../../survey-library/packages/survey-core/build",
     "survey-react-ui": "../../../survey-library/packages/survey-react-ui/build",
-    "survey-creator-core": "../survey-creator-core/build",
-    "sjs-design-tokens": "../../../sjs-design-tokens/build"
+    "survey-creator-core": "../survey-creator-core/build"
   }
 }
