@@ -2546,10 +2546,18 @@ export class SurveyCreatorModel extends Base
       }
     });
   }
-  private isToolboxItemDisabledByRestriction(name: string): boolean {
+  private isToolboxItemDisabledByRestriction(element: SurveyElement): boolean {
+    const name = element?.getType();
     if (!name || this.onCanAddElement.isEmpty) return false;
     const item = this.toolbox.getActionById(name);
-    return !!item && item.isDisabledByRestriction;
+    if (!!item && item.isDisabledByRestriction) return true;
+    const elements = element["elements"] || element["templateElements"];
+    if (Array.isArray(elements)) {
+      for (let i = 0; i < elements.length; i++) {
+        if (this.isToolboxItemDisabledByRestriction(elements[i])) return true;
+      }
+    }
+    return false;
   }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
@@ -4419,12 +4427,11 @@ export class SurveyCreatorModel extends Base
   }
   public getElementAllowOperations(element: SurveyElement): any {
     const allowDragDefault = !!element && (!element.isPage || element.isPage && this.allowDragPages);
-    const elType = element?.getType();
     var options = {
       obj: element,
       element: element,
       allowDelete: true,
-      allowCopy: !this.isToolboxItemDisabledByRestriction(elType),
+      allowCopy: !this.isToolboxItemDisabledByRestriction(element),
       allowDragging: allowDragDefault,
       allowDrag: allowDragDefault,
       allowChangeType: true,

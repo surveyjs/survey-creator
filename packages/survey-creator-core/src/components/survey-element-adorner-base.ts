@@ -279,7 +279,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.onElementTypeRestrictionChanged(options.elType);
   };
   protected onElementTypeRestrictionChanged(elType: string): void {
-    if (!!this.surveyElement && this.surveyElement.getType() === elType) {
+    const el = this.surveyElement;
+    if (!el) return;
+    const elements = el["elements"] || el["templateElements"];
+    if (el.getType() === elType || (Array.isArray(elements) && elements.length > 0)) {
       this.updateActionsProperties();
     }
   }

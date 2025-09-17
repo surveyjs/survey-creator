@@ -1327,6 +1327,22 @@ export class QuestionToolbox
     }
     return res;
   }
+  private actionsHash: { [index: string]: QuestionToolboxItem };
+  protected patchAction(action: QuestionToolboxItem) {
+    super.patchAction(action);
+    this.actionsHash = undefined;
+  }
+  public getActionById(name : string): QuestionToolboxItem {
+    if (!this.actionsHash) {
+      this.actionsHash = {};
+    }
+    let res = this.actionsHash[name];
+    if (!res) {
+      res = super.getActionById(name);
+      this.actionsHash[name] = res;
+    }
+    return res;
+  }
   private getDefaultQuestionItems(supportedQuestions: Array<string>, useDefaultCategories: boolean): Array<QuestionToolboxItem> {
     const res = [];
     const questions = this.getQuestionTypes(supportedQuestions);
