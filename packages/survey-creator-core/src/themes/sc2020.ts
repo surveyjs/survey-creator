@@ -170,7 +170,7 @@ export default {
     "--ctr-property-grid-form-background-color": "var(--sjs-layer-3-background-500)",
     "--ctr-button-group-item-border-color": "var(--sjs-border-25)",
     "--ctr-button-group-item-border-width": "var(--sjs-stroke-x1)",
-    "--ctr-button-group-item-background-color": "#f4f4f4ff",
+    "--ctr-button-group-item-background-color": "#ffffffff",
     "--ctr-button-group-item-text-color": "var(--sjs-layer-1-foreground-100)",
     "--ctr-menu-item-icon-color": "var(--sjs-layer-1-foreground-50)",
     "--ctr-button-group-item-icon-color": "var(--sjs-layer-1-foreground-50)",
