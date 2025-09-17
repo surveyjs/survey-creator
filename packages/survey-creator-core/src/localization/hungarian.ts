@@ -798,6 +798,10 @@ export var huStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Minden beállítás külön oszlopban"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Törölje az ugyanabban a sorban lévő többi elemet"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Név",
@@ -2844,6 +2848,10 @@ export var huStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Kizárólagossá teszi ezt a választást. Ha egy felhasználó kiválasztja, automatikusan törli a kérdés összes többi beállításának kijelölését.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Az oszlopban lévő jelölőnégyzetek kizárólagossá válnak. Ha a felhasználó kiválasztja, automatikusan törli az összes többi jelölőnégyzet jelölését ugyanabban a sorban."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

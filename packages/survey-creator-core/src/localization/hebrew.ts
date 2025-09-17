@@ -798,6 +798,10 @@ export var hebrewStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "כל אפשרות בעמודה נפרדת"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "ניקוי אחרים באותה שורה"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "שם",
@@ -2844,6 +2848,10 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "הפיכת תיבות הסימון בעמודה זו לבלעדיות. כאשר הוא נבחר על-ידי משתמש, הוא יבטל באופן אוטומטי את הבחירה בכל תיבות הסימון האחרות באותה שורה."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
