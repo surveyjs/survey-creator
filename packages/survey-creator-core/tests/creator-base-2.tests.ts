@@ -59,6 +59,8 @@ import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 
+export * from "../src/localization/french";
+
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -331,6 +333,14 @@ test("Set propertyGridNavigationMode property by options", (): any => {
   expect(designerPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(themePlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(translationPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+});
+test("creator theme & settings property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
+  creator.locale = "fr";
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  creator.locale = "en";
 });
 
 test("showSurfaceTools", (): any => {
@@ -796,4 +806,53 @@ test("License text for default locale and another default locale", (): any => {
   expect(editorLocalization.getString("survey.license")).toBe("My license string");
 
   editorLocalization.defaultLocale = "en";
+});
+
+test("isStringEditable", (): any => {
+  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
+  expect(isStringEditable({}, "")).toBeTruthy();
+  expect(
+    isStringEditable({ isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
+  expect(
+    isStringEditable(
+      { isContentElement: true, isEditableTemplateElement: true },
+      ""
+    )
+  ).toBeTruthy();
+});
+test("isStringEditable for matrix dynamic", (): any => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  matrix.addColumn("col1");
+  matrix.rowCount = 1;
+  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
+  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
+});
+test("onGetIsStringEditable", (): any => {
+  const creator = new CreatorTester();
+  let lastEditableValue;
+  let callCount = 0;
+  let newValue;
+  creator.onAllowInplaceEdit.add((s, o) => {
+    lastEditableValue = o.allow;
+    callCount++;
+    if (newValue !== undefined) {
+      o.allow = newValue;
+    }
+  });
+  expect(lastEditableValue).toBeUndefined();
+  expect(callCount).toBe(0);
+
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeFalsy();
+  expect(lastEditableValue).toBeFalsy();
+  expect(callCount).toBe(1);
+
+  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeTruthy();
+  expect(callCount).toBe(2);
+
+  newValue = true;
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeFalsy();
+  expect(callCount).toBe(3);
 });

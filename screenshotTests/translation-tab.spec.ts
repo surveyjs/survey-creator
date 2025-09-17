@@ -36,7 +36,7 @@ test.describe(title, () => {
               "name": "question2",
               "title": {
                 "default": "Question 3",
-                "ru": "Вопрос 3"
+                "ru": "Вопрос 3" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
               },
               "choices": [
                 "Item 1",
@@ -67,7 +67,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await getTabbedMenuItemByText(page, "Translation").click();
     await page.locator(".spg-action-button").first().click();
-    await page.locator("span", { hasText: "Català" }).click();
+    await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     await page.locator(".spg-action-button").first().click();
     await page.locator("span", { hasText: "Bahasa Indonesia" }).click();
     await compareScreenshot(page, page.locator(".spg-root-modern.st-properties"), "translation-property-grid.png");
@@ -106,7 +106,7 @@ test.describe(title, () => {
     const translationDialog = page.locator(".st-translation-dialog .sv-popup__body-content");
     await getTabbedMenuItemByText(page, "Translation").click();
     await page.locator(".spg-action-button").first().click();
-    await page.locator("span", { hasText: "Català" }).click();
+    await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     await page.locator("button[title='Auto-translate All']").click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await page.locator("button[title='Apply']").click();

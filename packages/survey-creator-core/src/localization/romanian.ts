@@ -798,6 +798,10 @@ export const roStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Fiecare opțiune într-o coloană separată"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Ștergeți altele din același rând"
+    },
     multipletextitem: {
       // "Name"
       name: "Nume",
@@ -2844,6 +2848,10 @@ export const roStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Face ca această alegere să fie exclusivă. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte opțiuni din întrebare.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Face casetele de selectare din această coloană exclusive. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte casete de selectare din același rând."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export const roStrings = {
     // "Column span"
     effectiveColSpan: "Span de coloană eficient",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lățimea zonei barei de progres"
+    progressBarInheritWidthFrom: "Lățimea zonei barei de progres",
+    // [Auto-translated] "Theme name"
+    themeName: "Numele temei"
   },
   theme: {
     // "Advanced mode"

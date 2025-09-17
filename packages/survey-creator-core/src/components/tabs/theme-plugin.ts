@@ -37,7 +37,6 @@ import { MenuButton } from "../../utils/actions";
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
   public static DefaultTheme = Themes["default-light"];
-  private allowModifyTheme: boolean = true;
   private previewAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
@@ -255,7 +254,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);
-    this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
+    this.propertyGridTab.locTileName = "ed.themePropertyGridTitle";
     this.themeModel = new ThemeModel();
 
     creator.registerShortcut("undo_theme", {
@@ -289,6 +288,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public previewDevice: string = "desktop";
 
   public activate(): void {
+    updateThemeEditorsDefaultFontFamily();
     this.model = new ThemeTabViewModel(this.creator, this.simulatorCssClasses);
     this.model.simulator.device = this.previewDevice;
     this.themeModel.initialize(this.creator.theme, this.creator.survey, this.creator);
@@ -296,6 +296,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.update();
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.propertyGrid.survey.onOpenFileChooser.clear();
+    this.propertyGrid.obj = undefined;
     this.propertyGrid.obj = this.themeModel;
     this.propertyGrid.survey.mode = "edit";
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
@@ -972,5 +973,20 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public set advancedModeEnabled(newValue: boolean) {
     this._advancedModeValue = newValue;
     this.updateAdvancedModeQuestion(newValue);
+  }
+}
+
+export function updateThemeEditorsDefaultFontFamily() {
+  const getPropertyUpdater = className => propertyName => {
+    const property = Serializer.getProperty(className, propertyName);
+    if (property) {
+      property.defaultValue.family = settings.themeEditor.defaultFontFamily;
+    }
+  };
+  ["surveyTitle", "headerTitle", "surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
+  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "editorFont"].forEach(getPropertyUpdater("theme"));
+  const fontFamilyProperty = Serializer.getProperty("theme", "--sjs-font-family");
+  if (fontFamilyProperty) {
+    fontFamilyProperty.defaultValue = settings.themeEditor.defaultFontFamily;
   }
 }

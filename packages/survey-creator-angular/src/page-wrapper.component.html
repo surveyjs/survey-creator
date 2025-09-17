@@ -1,0 +1,11 @@
+<ng-template #template>
+    <div
+      [class]="className"
+      [attr.data-sv-drop-target-page]="page?.name"
+      [attr.data-sv-drop-target-survey-element]="isGhost ? 'newGhostPage' : page?.name"
+    >
+      <ng-container *ngIf="!!page">
+           <ng-template [component]="{ name: 'svc-page', data: { model: page, creator, survey: creator.survey, isGhost }}"></ng-template>
+      </ng-container>
+    </div>
+</ng-template>

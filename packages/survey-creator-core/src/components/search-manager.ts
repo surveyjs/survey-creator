@@ -31,6 +31,17 @@ export abstract class SearchManager extends Base {
     this.filterString = "";
   }
 
+  private _enabled = true;
+  public get enabled():boolean {
+    return this._enabled;
+  }
+  public set enabled(value: boolean) {
+    this._enabled = value;
+  }
+  public getTabIndex():number {
+    return this.enabled ? 0 : -1;
+  }
+
   protected abstract setFiterString(newValue: string, oldValue: string);
   protected abstract getFilterStringPlaceholder(): string;
 

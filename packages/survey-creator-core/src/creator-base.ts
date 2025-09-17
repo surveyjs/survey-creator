@@ -67,7 +67,8 @@ import {
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
-  CreatorThemeSelectedEvent
+  CreatorThemeSelectedEvent,
+  AllowInplaceEditEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -231,6 +232,7 @@ export class SurveyCreatorModel extends Base
    *
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
    * @see useElementTitles
+   * @see onAllowInplaceEdit
    */
   @property({ defaultValue: false }) inplaceEditChoiceValues: boolean;
   /**
@@ -1518,6 +1520,7 @@ export class SurveyCreatorModel extends Base
     super.locStrsChanged();
     this.tabbedMenu.locStrsChanged();
     this.toolbar.locStrsChanged();
+    this.sidebar.locStrsChanged();
   }
   private refreshPlugin() {
     const plugin = this.currentPlugin;
@@ -3201,6 +3204,9 @@ export class SurveyCreatorModel extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
+    if (!obj || obj.isDisposed) return;
+    const allowedOperations = this.getElementAllowOperations(obj);
+    if (!allowedOperations.allowDelete) return;
     if (!this.checkOnElementDeleting(obj)) return;
     this.deleteObjectCore(obj);
   }
@@ -4673,6 +4679,18 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+
+  /**
+   * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
+   * @see inplaceEditChoiceValues
+   */
+  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();
+
+  public isStringInplacelyEditable(element: Base, stringName: string, item?: ItemValue) {
+    const options = { element, item, propertyName: stringName, allow: !this.readOnly && !!isStringEditable(element, stringName) };
+    this.onAllowInplaceEdit.fire(this, options);
+    return options.allow;
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
@@ -4709,15 +4727,15 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     }
     opt.data = opt.data || data;
   });
-  model.getRendererForString = (element: Base, name: string): string => {
-    if (!creator.readOnly && isStringEditable(element, name)) {
+  model.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
+    if (creator.isStringInplacelyEditable(element, name, item)) {
       return editableStringRendererName;
     }
     return undefined;
   };
 
-  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-    if (!creator.readOnly && isStringEditable(element, locStr.name)) {
+  model.getRendererContextForString = (element: Base, locStr: LocalizableString, item?: ItemValue): any => {
+    if (creator.isStringInplacelyEditable(element, locStr.name, item)) {
       return {
         creator: creator,
         element,

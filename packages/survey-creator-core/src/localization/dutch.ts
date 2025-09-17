@@ -798,6 +798,10 @@ export var nlStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Elke optie in een aparte kolom"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Anderen in dezelfde rij wissen"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Naam",
@@ -2844,6 +2848,10 @@ export var nlStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Maakt selectievakjes in deze kolom exclusief. Wanneer een gebruiker deze selecteert, worden alle andere selectievakjes in dezelfde rij automatisch uitgeschakeld."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export var nlStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolom spanwijdte",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied"
+    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied",
+    // [Auto-translated] "Theme name"
+    themeName: "Naam van het thema"
   },
   theme: {
     // "Advanced mode"

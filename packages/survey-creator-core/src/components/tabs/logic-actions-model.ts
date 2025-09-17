@@ -41,6 +41,17 @@ export class LogicActionModelBase {
       question.value = !!action && action.logicType == this.logicType ? action.elementName : undefined;
     }
   }
+  protected getDPQuestion(): Question {
+    return <Question>this.panel.survey.getQuestionByName("panel");
+  }
+  protected updateParentQuestions(): void {
+    const dp = this.getDPQuestion();
+    this.panel.questions.forEach(q => {
+      if (!q.parentQuestion) {
+        q.setParentQuestion(dp);
+      }
+    });
+  }
 }
 
 export class LogicActionModel extends LogicActionModelBase {
@@ -61,7 +72,7 @@ export class LogicActionModel extends LogicActionModelBase {
   public updateCurrentLogicAction(survey: SurveyModel): boolean {
     const selectedElement = this.getElementBySelectorName(this.panel);
     const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType || (!!selectedElement && this.initialLogicAction.element != selectedElement);
-    if (!createNewAction) { return false; }
+    if (!createNewAction) return false;
     this.currentLogicAction = new SurveyLogicAction(this.logicType, selectedElement, survey);
     return true;
   }
@@ -97,6 +108,14 @@ export class LogicActionSetValueModel extends LogicActionModel {
       (<any>selectedElement).setValueExpression = this.panel.getQuestionByName("setValueExpression").value;
     }
   }
+  public updateCurrentLogicAction(survey: SurveyModel): boolean {
+    const selectedElement = this.getElementBySelectorName(this.panel);
+    if (selectedElement && !!(<any>selectedElement).setValueExpression) {
+      this.afterUpdateInitialLogicAction();
+      return false;
+    }
+    return super.updateCurrentLogicAction(survey);
+  }
   private setValueExpressionValue(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
     if (!!selectedElement) {
@@ -121,7 +140,6 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
     if (!oldQuestion) return;
     const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
-
     const tempPanel = Serializer.createClass("panel");
     const propGenerator = new PropertyJSONGenerator(obj, options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
@@ -140,6 +158,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
         this.updateSetValueQuestion(newQuestion);
       }
     }
+    this.updateParentQuestions();
     this.updateVisibilityPanel(triggerEditorPanel);
     tempPanel.dispose();
   }
@@ -310,11 +329,15 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     }
 
     triggerEditorPanel.getElementByName(this.logicType.propertyName).visible = false;
-    this.updateVisibilityPanel(triggerQuestionsPanel);
-    this.updatePanelQuestionsValue(triggerQuestionsPanel);
-    this.updateVisibilityPanel(triggerEditorPanel);
-    this.updatePanelQuestionsValue(triggerEditorPanel);
-
+    [triggerQuestionsPanel, triggerEditorPanel].forEach(panel => {
+      this.updateVisibilityPanel(panel);
+      this.updatePanelQuestionsValue(panel);
+    });
+    this.updateParentQuestions();
+    const setValueQ = triggerEditorPanel.getQuestionByName("setValue");
+    if (!!setValueQ) {
+      this.updateSetValueQuestion(setValueQ);
+    }
     const questions = this.getQuestions();
     if (!!questions && !!selectedElement) {
       questions.forEach(question => {

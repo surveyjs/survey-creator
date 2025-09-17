@@ -296,7 +296,7 @@ test("header custom background color and theme changes", (): any => {
   creator.activeTab = "theme";
   let themeModel = themePlugin.themeModel as ThemeModel;
   let header = themeModel.header as HeaderModel;
-  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
   let themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 
@@ -314,6 +314,7 @@ test("header custom background color and theme changes", (): any => {
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
 
   creator.activeTab = "theme";
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
   themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 
@@ -334,6 +335,7 @@ test("header custom background color and theme changes", (): any => {
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
 
   creator.activeTab = "theme";
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
   themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
 

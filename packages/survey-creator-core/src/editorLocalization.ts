@@ -41,6 +41,7 @@ export class EditorLocalization {
       this.reset();
     }
   }
+  public get locale(): string { return this.currentLocale || this.defaultLocale; }
   public get presetStrings(): any { return this.presetStringsValues; }
   public set presetStrings(val: any) {
     this.presetStringsValues = val;
@@ -254,11 +255,8 @@ export class EditorLocalization {
     return this.convertToCamelCase(propName);
   }
   public getPropertyValueInEditor(propName: string, value: any): string {
-    const loc = this.getLocale();
-    if (!!loc && !!loc.pv && !!loc.pv[propName]) {
-      const res = loc.pv[propName][value];
-      if (!!res) return res;
-    }
+    const res = this.getStringByPath(["pv", propName, value]);
+    if (!!res && res !== value) return res;
     return this.getPropertyValue(value);
   }
   public getPropertyValue(value: any, locale: string = null): string {

@@ -11,13 +11,14 @@ The `dateDiff()` function allows you to calculate the difference between two dat
 
 ## Supported Types of Duration
 
-SurveyJS Form Builder supports five built-in duration types:
+SurveyJS Form Builder supports the following built-in duration types:
 
-- Minutes
-- Hours
-- Days
-- Months
 - Years
+- Months
+- Days
+- Hours
+- Minutes
+- Seconds
 
 They can be used separately ("10 days", "5 months", "6 years") or together to form a combined value ("4 years 6 months").
 
@@ -41,11 +42,12 @@ If you want the calculations to happen behind the scenes, you can create a hidde
 
 For single values ("10 days", "5 months", "6 years"), use the following syntax to estimate duration:
 
+- Years &mdash; `dateDiff({firstDate}, {secondDate}, 'years')`
+- Months &mdash; `dateDiff({firstDate}, {secondDate}, 'months')`
 - Days &mdash; `dateDiff({firstDate}, {secondDate}, 'days')`
 - Hours &mdash; `dateDiff({firstDateTime}, {secondDateTime}, 'hours')`
 - Minutes &mdash; `dateDiff({firstDateTime}, {secondDateTime}, 'minutes')`
-- Months &mdash; `dateDiff({firstDate}, {secondDate}, 'months')`
-- Years &mdash; `dateDiff({firstDate}, {secondDate}, 'years')`
+- Seconds &mdash; `dateDiff({firstDateTime}, {secondDateTime}, 'seconds')`
 
 If you want to calculate the duration between any date and a survey completion date, replace `{secondDate}` with `today()` without curly brackets.
 

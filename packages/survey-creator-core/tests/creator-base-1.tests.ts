@@ -1711,26 +1711,6 @@ test("getElementWrapperComponentName for inner component elements", () => {
   ComponentCollection.Instance.clear();
 });
 
-test("isStringEditable", (): any => {
-  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({}, "")).toBeTruthy();
-  expect(
-    isStringEditable({ isEditableTemplateElement: true }, "")
-  ).toBeTruthy();
-  expect(
-    isStringEditable(
-      { isContentElement: true, isEditableTemplateElement: true },
-      ""
-    )
-  ).toBeTruthy();
-});
-test("isStringEditable for matrix dynamic", (): any => {
-  const matrix = new QuestionMatrixDynamicModel("q1");
-  matrix.addColumn("col1");
-  matrix.rowCount = 1;
-  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
-  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
-});
 test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -2695,6 +2675,39 @@ test("convertInputType, hide it for readOnly creator", (): any => {
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
   questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
+});
+test("convertInputType styles with event", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "boolean", name: "q3" },
+    ]
+  };
+
+  creator.onElementGetActions.add((sender, options) => {
+    if (options.element.getType() === "rating") {
+      const convertInputTypeActionIndex = options.actions.findIndex(
+        (x) => x.id === "convertInputType"
+      );
+      if (!!convertInputTypeActionIndex) {
+        options.actions.splice(convertInputTypeActionIndex, 1);
+      }
+    }
+  });
+
+  let questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeFalsy();
+  expect(questionModel.getActionById("convertInputType").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertInputType").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q3"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
 });
 test("convertInputType, check locale", (): any => {
   const creator = new CreatorTester();
@@ -4469,7 +4482,7 @@ test("Creator footer action bar: only designer tab", (): any => {
 
   creator.isMobileView = true;
   creator.footerToolbar.flushUpdates();
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
@@ -4478,7 +4491,7 @@ test("Creator footer action bar: only designer tab", (): any => {
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 test("Creator footer action bar: add custom action", (): any => {

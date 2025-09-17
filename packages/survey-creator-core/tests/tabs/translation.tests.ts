@@ -72,9 +72,9 @@ test("create available locales", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -102,9 +102,9 @@ test("create locales question", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -136,9 +136,9 @@ test("stringsSurvey - one question in survey", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -174,7 +174,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(choicesProps1.columns[0].name).toEqual("default");
   expect(choicesProps1.columns[0].title).toEqual("Default (English)");
   expect(choicesProps1.columns[1].name).toEqual("fr");
-  expect(choicesProps1.columns[1].title).toEqual("Français");
+  expect(choicesProps1.columns[1].title).toEqual("Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(choicesProps1.rows).toHaveLength(1);
   expect(choicesProps1.rows[0].value).toEqual("item1");
   expect(choicesProps1.rows[0].text).toEqual("Item 1");
@@ -185,15 +185,15 @@ test("stringsSurvey - one question in survey", () => {
   expect(question1Props.value).toEqual({
     title: {
       default: "question 1",
-      fr: "quéstion 1",
-      it: "quéstion 1",
-      es: "quéstion 1"
+      fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     }
   });
   expect(question1Props.visibleRows[0].cells[1].question.getType()).toEqual("comment");
-  expect(question1Props.visibleRows[0].cells[1].question.value).toEqual("quéstion 1");
+  expect(question1Props.visibleRows[0].cells[1].question.value).toEqual("quéstion 1"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   const translationItem: TranslationItem = question1Props.rows[0]["translationData"];
-  expect(translationItem.getLocText("fr")).toEqual("quéstion 1");
+  expect(translationItem.getLocText("fr")).toEqual("quéstion 1"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   question1Props.visibleRows[0].cells[1].question.value = "changed fr";
   expect(translationItem.getLocText("fr")).toEqual("changed fr");
 });
@@ -1124,7 +1124,7 @@ test("localize placeholders", () => {
   const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
   expect(surveyProps.name).toEqual("survey_props0");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Translation...");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод...");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод..."); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   const pagePanel = <PanelModel>page.elements[11];
   expect(pagePanel.elements).toHaveLength(5);
   expect(pagePanel.elements[0].name).toEqual("page1_props0");
@@ -1140,7 +1140,7 @@ test("localize placeholders", () => {
   const cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
   expect(cellQuestion1.placeholder).toEqual("Translation...");
   expect(cellQuestion1.value).toEqual(null);
-  expect(cellQuestion2.placeholder).toEqual("Перевод...");
+  expect(cellQuestion2.placeholder).toEqual("Перевод..."); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(cellQuestion2.value).toEqual(null);
 
   const survey_props0 = <QuestionMatrixDropdownModel>page.elements[0];
@@ -1157,7 +1157,7 @@ test("localize placeholders", () => {
   const surveyCell2 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[1].question;
   expect(surveyCell1.placeholder).toEqual("Edit");
   expect(surveyCell1.value).toEqual(null);
-  expect(surveyCell2.placeholder).toEqual("Редактирование");
+  expect(surveyCell2.placeholder).toEqual("Редактирование"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(surveyCell2.value).toEqual(null);
 });
 test("localize placeholders, default locale is 'fr'", () => {
@@ -1443,7 +1443,7 @@ test("Import from array, onTraslationItemImport", () => {
   const translation: Translation = tabTranslationPlugin.model;
 
   translation.importFromNestedArray([
-    ["description ↓ - language →", "default", "dex", "de"],
+    ["description ↓ - language →", "default", "dex", "de"], // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     ["survey.page1.title", "page en", "test", "page de"],
     ["survey.page1.q1.title", "q1 en", "test", "q1 de"]
   ]);
@@ -1584,7 +1584,7 @@ test("Export dialect languages", () => {
   });
 
   expect(exported).toHaveLength(3);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default", "en-GB", "de", "pt", "pt-br"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "en-GB", "de", "pt", "pt-br"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(exported[1]).toEqual([
     "survey.page1.question1.title",
     "Question 1",
@@ -1640,7 +1640,7 @@ test("creator.onTranslationExportItem", () => {
   });
 
   expect(exported).toHaveLength(3);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de", "pt"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de", "pt"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(exported[1]).toEqual([
     "survey.page1.question1.title",
     "Question 1",
@@ -2110,7 +2110,7 @@ test("Complex value text in TranslationItem", () => {
 
   const itemValueJson = {
     value:
-      "Les attentes concernant l'évaluation ont été clairement expliquées (type d'évaluation, durée, délais, critères d'évaluation, etc.)",
+      "Les attentes concernant l'évaluation ont été clairement expliquées (type d'évaluation, durée, délais, critères d'évaluation, etc.)", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     text: {
       en: "Expectations regarding assessment have been explained (assessment mode, length, deadlines, correction criteria, etc.).",
     },
@@ -2139,9 +2139,9 @@ test("Store locales order", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -2177,11 +2177,11 @@ test("Store locales order", () => {
             type: "checkbox",
             name: "question1",
             title: {
-              es: "quéstion 1",
+              es: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
               default: "question 1",
               de: "question de",
-              fr: "quéstion 1",
-              it: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -2360,4 +2360,14 @@ test("Merge undo/redo into one transaction", () => {
   expect(creator.undoRedoManager.canUndo()).toBeTruthy();
   creator.undoRedoManager.undo();
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+});
+test("Change translation sidebar caption in the code, Bug#7154", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  const sidebar = creator.sidebar.addPage("translation");
+  sidebar.locTileName = "ed.translationPropertyGridTitle";
+  expect(sidebar.caption).toBe("Language Settings");
+  sidebar.caption = "test title";
+  expect(sidebar.caption).toBe("test title");
+  sidebar.caption = "";
+  expect(sidebar.caption).toBe("Language Settings");
 });

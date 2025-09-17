@@ -798,6 +798,10 @@ export var msStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsyen dalam lajur berasingan"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Kosongkan yang lain dalam baris yang sama"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nama",
@@ -2844,6 +2848,10 @@ export var msStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Menjadikan kotak semak dalam lajur ini eksklusif. Apabila dipilih oleh pengguna, mereka akan menyahpilih semua kotak semak lain dalam baris yang sama secara automatik."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export var msStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rentang lajur",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan"
+    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan",
+    // [Auto-translated] "Theme name"
+    themeName: "Nama tema"
   },
   theme: {
     // "Advanced mode"

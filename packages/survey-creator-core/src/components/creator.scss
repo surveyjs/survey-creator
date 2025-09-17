@@ -136,6 +136,8 @@ survey-creator,
   max-height: 100%;
   overflow-y: auto;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .sv-popup__content {

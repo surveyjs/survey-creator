@@ -798,6 +798,10 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每个选项都在单独的列中"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "清除同一行中的其他人"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "名字",
@@ -2844,6 +2848,10 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "将此选择设为独占。当用户选择时，它将自动取消选择问题中的所有其他选项。",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "使此列中的复选框独占。当用户选择时，他们将自动取消选中同一行中的所有其他复选框。"
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "如果必须将正则表达式中的大写字母和小写字母视为等效字母，请选择此项。",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "柱跨度",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "进度条区域宽度"
+    progressBarInheritWidthFrom: "进度条区域宽度",
+    // [Auto-translated] "Theme name"
+    themeName: "主题名称"
   },
   theme: {
     // "Advanced mode"

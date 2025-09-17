@@ -774,9 +774,13 @@ export class PropertyJSONGenerator {
     if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
-    if (this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
-      if (!Serializer.findProperty(this.obj.getType(), prop.name)) {
-        titleClass = (<any>this.obj).getDynamicType();
+    const dynamicFunc = (<any>this.obj).getDynamicType;
+    const isDynamicFunc = !!dynamicFunc && typeof dynamicFunc === "function";
+    if (isDynamicFunc) {
+      const dType = (<any>this.obj).getDynamicType();
+      if (dType !== "question" && !Serializer.findProperty(this.obj.getType(), prop.name) &&
+      Serializer.findProperty(dType, prop.name)) {
+        titleClass = dType;
       }
     }
     return editorLocalization.getPropertyNameInEditor(titleClass, prop.name);

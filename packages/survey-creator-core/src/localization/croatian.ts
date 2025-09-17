@@ -798,6 +798,10 @@ export var hrStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Brisanje ostalih u istom retku"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Ime",
@@ -2844,6 +2848,10 @@ export var hrStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Čini ovaj izbor ekskluzivnim. Kada korisnik odabere, automatski će poništiti odabir svih ostalih opcija u pitanju.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Čini potvrdne okvire u ovom stupcu isključivim. Kada korisnik odabere, automatski će poništiti odabir svih ostalih potvrdnih okvira u istom retku."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export var hrStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Raspon stupaca",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Širina područja trake napretka"
+    progressBarInheritWidthFrom: "Širina područja trake napretka",
+    // [Auto-translated] "Theme name"
+    themeName: "Naziv teme"
   },
   theme: {
     // "Advanced mode"

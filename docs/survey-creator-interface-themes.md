@@ -44,7 +44,7 @@ registerCreatorTheme(SurveyCreatorTheme);
 
 Run your application, open Survey Creator settings using the **gear** button in the bottom right, and ensure that the predefined themes are added to the **Theme name** dropdown.
 
-<img src="images/creator-settings-button.png" alt="Survey Creator: Predefined themes in a drop-down list" width="1250" height="698">
+<img src="images/creator-settings-button.png" alt="Survey Creator: Predefined themes in a drop-down list" width="1544" height="698">
 
 If you want to add only specific predefined themes, use the following code:
 

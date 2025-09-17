@@ -286,7 +286,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               startWithNewLine: false,
               name: this.nameMatrix,
               "descriptionLocation": "underInput",
-              description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+              description: "Drag an item from this column to the left one - it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
             })
           ]
         },

@@ -315,7 +315,7 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
 });
-test("Test string editor inplaceEditForValues + сorrect non-unique value", (): any => {
+test("Test string editor inplaceEditForValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [

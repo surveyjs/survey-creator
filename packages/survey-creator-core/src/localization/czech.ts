@@ -798,6 +798,10 @@ export var czStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnost v samostatném sloupci"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Vymazání ostatních ve stejném řádku"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Jméno",
@@ -2844,6 +2848,10 @@ export var czStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Díky tomu je tato volba exkluzivní. Když je vybrán uživatelem, automaticky zruší výběr všech ostatních možností v otázce.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Nastaví zaškrtávací políčka v tomto sloupci jako výhradní. Když je uživatel vybere, automaticky zruší zaškrtnutí všech ostatních políček ve stejném řádku."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export var czStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpětí sloupců",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Šířka oblasti indikátoru průběhu"
+    progressBarInheritWidthFrom: "Šířka oblasti indikátoru průběhu",
+    // [Auto-translated] "Theme name"
+    themeName: "Název motivu"
   },
   theme: {
     // "Advanced mode"

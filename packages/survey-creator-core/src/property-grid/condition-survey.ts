@@ -292,7 +292,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       if (this.panel.panelCount > 0)
         this.panel.panels[0].getQuestionByName("questionName").titleLocation = "left";
     });
-    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+    this.editSurvey.onDynamicPanelValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
     this.editSurvey.css = logicCss;
@@ -344,7 +344,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "conjunction",
               type: "dropdown",
               renderAs: "logicoperator",
-              searchEnabled: false,
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
@@ -367,7 +366,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "operator",
               type: "dropdown",
               renderAs: "logicoperator",
-              searchEnabled: false,
               titleLocation: "hidden",
               startWithNewLine: false,
               showOptionsCaption: false,

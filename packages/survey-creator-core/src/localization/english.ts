@@ -16,8 +16,8 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "To use our library, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the latest version.",
-    license2: "Your maintenance subscription expired on {date}. You can continue using <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>versions released up to that date</a>. To access the latest version, please <a href='https://surveyjs.io/manage#license-manager' target='_blank'>renew your subscription</a> and <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>setup a new license key</a>."
+    license: "To use the Survey Creator library in your application, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, please <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>latest version</a>.",
+    license2: "Your maintenance subscription expired on {date}. You may continue using all <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>versions released up to that date</a>. To remove this banner in the latest version, please <a href='https://surveyjs.io/manage#license-manager' target='_blank'>renew your subscription</a> and <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up a new license key</a>."
   },
   // Creator tabs
   tabs: {
@@ -423,6 +423,9 @@ export var enStrings = {
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column"
+    },
+    matrixcolumn: {
+      isExclusive: "Clear others in the same row"
     },
     multipletextitem: {
       name: "Name",
@@ -1537,6 +1540,9 @@ export var enStrings = {
       maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
     },
     isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
+    matrixcolumn: {
+      isExclusive: "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+    },
     caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
@@ -1796,7 +1802,8 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
-    progressBarInheritWidthFrom: "Progress bar area width"
+    progressBarInheritWidthFrom: "Progress bar area width",
+    themeName: "Theme name",
   },
   theme: {
     advancedMode: "Advanced mode",

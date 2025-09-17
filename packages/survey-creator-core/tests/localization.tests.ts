@@ -105,7 +105,7 @@ test("getProperty function breaks on word automatically", () => {
 test("add de localization", () => {
   const deutschStrings = {
     p: {
-      isRequired: "Wird benötigt",
+      isRequired: "Wird benötigt", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     },
   };
   editorLocalization.locales["de"] = deutschStrings;
@@ -373,4 +373,15 @@ test("getLocaleStrings function, Bug#6754", () => {
   expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
   expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
   editorLocalization.defaultLocale = "en";
+});
+test("creator.sidebar.header.title & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  expect(creator.sidebar.header.title).toBe("Survey Settings");
+  creator.locale = "fr";
+  creator.JSON = {};
+  expect(creator.sidebar.header.title).toBe("Paramètres du sondage"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  creator.activeTab = "translation";
+  expect(creator.sidebar.header.title).toBe("Traduction");
+  creator.locale = "en";
+  expect(creator.sidebar.header.title).toBe("Language Settings");
 });

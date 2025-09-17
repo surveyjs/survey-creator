@@ -798,6 +798,10 @@ export var turkishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Her seçenek ayrı bir sütunda"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Aynı satırdaki diğerlerini temizleme"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Ad",
@@ -2844,6 +2848,10 @@ export var turkishStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Bu sütundaki onay kutularını özel yapar. Bir kullanıcı tarafından seçildiğinde, aynı satırdaki diğer tüm onay kutularının seçimini otomatik olarak kaldırır."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3342,9 @@ export var turkishStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Sütun aralığı",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "İlerleme çubuğu alanı genişliği"
+    progressBarInheritWidthFrom: "İlerleme çubuğu alanı genişliği",
+    // [Auto-translated] "Theme name"
+    themeName: "Tema adı"
   },
   theme: {
     // "Advanced mode"
