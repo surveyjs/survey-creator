@@ -27,7 +27,8 @@
   @include sjs2--typography--default;
 
   :has(.sps-question__content--main),
-  :has(.sps-panel__content--main) {
+  :has(.sps-panel__content--main),
+  .sps-question__content--main {
     flex-grow: 1;
     display: flex;
     flex-direction: column;

@@ -93,7 +93,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
             }] }
       ] };
   }
-  public getMainElementName() : any { return this.surveyLocalesName; }
+  public getMainElementNames() : any { return [this.surveyLocalesName]; }
 
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);

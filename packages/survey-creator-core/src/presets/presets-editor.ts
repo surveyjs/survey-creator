@@ -190,7 +190,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     model.onUpdateQuestionCssClasses.add(function(_, options) {
       editablePresets.forEach(item => {
-        if (options.question.name === item.getMainElementName()) {
+        if (item.getMainElementNames().indexOf(options.question.name) >= 0) {
           options.cssClasses.content += " sps-question__content--main";
         }
       });

@@ -52,6 +52,14 @@
 
 .sps-matrixdynamic__content {
   padding: var(--sjs2-spacing-x150, 12px);
+  &,
+  &>div,
+  &>div>.sps-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
 }
 .sps-table__row--detail .sps-matrixdynamic__content {
   padding: 0;

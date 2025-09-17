@@ -25,7 +25,7 @@ export class CreatorPresetEditableBase {
   }
   public get pageName(): string { return "page_" + this.fullPath; }
   protected get mainPanelName() { return this.path + "_mainPanel"; }
-  public getMainElementName() : any { return this.mainPanelName; }
+  public getMainElementNames() : any { return [this.mainPanelName]; }
   public getMainPanelName() : any { return this.mainPanelName; }
   public createPages(): Array<any> {
     const res = [];

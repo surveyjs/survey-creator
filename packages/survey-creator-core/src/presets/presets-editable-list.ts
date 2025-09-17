@@ -9,7 +9,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected hasIcon(_: string) { return false; }
-  public getMainElementName() : any { return this.nameMatrix; }
+  public getMainElementNames() : any { return [this.nameItems, this.nameMatrix]; }
   protected get iconList() { return Object.keys(SvgRegistry.icons).map(name => "icon-" + name); }
   protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return "name"; }
   protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
