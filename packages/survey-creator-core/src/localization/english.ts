@@ -424,6 +424,9 @@ export var enStrings = {
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column"
     },
+    matrixcolumn: {
+      isExclusive: "Clear others in the same row"
+    },
     multipletextitem: {
       name: "Name",
       title: "Title"
@@ -1537,6 +1540,9 @@ export var enStrings = {
       maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
     },
     isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
+    matrixcolumn: {
+      isExclusive: "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+    },
     caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
