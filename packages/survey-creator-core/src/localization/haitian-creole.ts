@@ -798,6 +798,10 @@ export var htStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Chak opsyon nan yon kolòn separe"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Klè lòt moun nan menm ranje a"
+    },
     multipletextitem: {
       // "Name"
       name: "Non",
@@ -2844,6 +2848,10 @@ export var htStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Fè chwa sa a san konte. Lè chwazi pa yon itilizatè, li pral otomatikman deselere tout lòt opsyon nan kesyon an.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Fè kaz chèk nan kolòn sa a san konte Lè yo chwazi pa yon itilizatè, yo pral otomatikman deklase, tout lòt bwat nan ranje a menm."
+    },
     // "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Chwazi si lèt majiskil ak miniskil nan ekspresyon regilye a dwe trete kòm ekivalan.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

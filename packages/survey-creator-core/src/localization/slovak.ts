@@ -798,6 +798,10 @@ export var skStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnosť v samostatnom stĺpci"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Vymazanie ostatných v rovnakom riadku"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Meno",
@@ -2844,6 +2848,10 @@ export var skStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Začiarkavacie políčka v tomto stĺpci sú exkluzívne. Keď používateľ vyberie, automaticky zruší začiarknutie všetkých ostatných políčok v rovnakom riadku."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

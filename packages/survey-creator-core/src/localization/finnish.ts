@@ -798,6 +798,10 @@ export var fiStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Poista muut samalla rivillä olevat"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nimi",
@@ -2844,6 +2848,10 @@ export var fiStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Tekee tämän sarakkeen valintaruuduista eksklusiivisia. Kun käyttäjä valitsee sen, hän poistaa automaattisesti kaikkien muiden saman rivin valintaruutujen valinnan."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

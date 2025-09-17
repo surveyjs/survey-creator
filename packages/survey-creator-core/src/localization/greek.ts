@@ -798,6 +798,10 @@ export var grStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Διαγράψτε τους άλλους στην ίδια σειρά"
+    },
     multipletextitem: {
       // "Name"
       name: "Όνομα",
@@ -2844,6 +2848,10 @@ export var grStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Κάνει αυτή την επιλογή αποκλειστική. Όταν επιλεγεί από έναν χρήστη, θα αποεπιλέξει αυτόματα όλες τις άλλες επιλογές στην ερώτηση.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Κάνει τα πλαίσια ελέγχου σε αυτήν τη στήλη αποκλειστικά. Όταν επιλεγεί από έναν χρήστη, θα καταργήσει αυτόματα την επιλογή όλων των άλλων πλαισίων ελέγχου στην ίδια σειρά."
+    },
     // "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Επιλέξτε αν τα κεφαλαία και πεζά γράμματα στην κανονική έκφραση πρέπει να αντιμετωπίζονται ως ισοδύναμα.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

@@ -798,6 +798,10 @@ export var slStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Vsaka možnost v ločenem stolpcu"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Počisti druge v isti vrstici"
+    },
     multipletextitem: {
       // "Name"
       name: "Ime",
@@ -2844,6 +2848,10 @@ export var slStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Zaradi tega je ta izbira ekskluzivna. Ko uporabnik izbere, bo samodejno preklical izbiro vseh drugih možnosti v vprašanju.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Potrditvena polja v tem stolpcu so izključna. Ko uporabnik izbere, samodejno prekliče izbor vseh drugih potrditvenih polj v isti vrstici."
+    },
     // "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Izberite, če naj bodo velike in male črke v regularnem izrazu obravnavane kot enake",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
