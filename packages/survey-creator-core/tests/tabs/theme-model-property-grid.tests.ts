@@ -1420,7 +1420,7 @@ test("creator theme & theme property grids & creator.locale, bug#7130", () => {
   const themePlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Theme");
   creator.locale = "fr";
-  expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Thème");
+  expect(themePlugin.propertyGrid.survey.getQuestionByName("themeName").title).toBe("Thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   creator.locale = "en";
 });
 

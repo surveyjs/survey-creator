@@ -28,7 +28,7 @@ test("Change survey locale", async t => {
 
   await t.expect(placeholder).eql("Select...");
   await setSurveyProp("locale", "de");
-  await t.expect(placeholder).eql("Bitte auswählen...");
+  await t.expect(placeholder).eql("Bitte auswählen..."); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   await setSurveyProp("locale", "es");
   await t.expect(placeholder).eql("Seleccione...");
   await setSurveyProp("locale", "it");

@@ -1266,7 +1266,7 @@ export class Translation extends Base implements ITranslationLocales {
     let res = [];
     let headerRow = [];
     const visibleLocales = this.locales;
-    headerRow.push("description ↓ - language →");
+    headerRow.push("description ↓ - language →"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     for (let i = 0; i < visibleLocales.length; i++) {
       headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }
