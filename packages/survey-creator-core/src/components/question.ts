@@ -258,6 +258,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
       }
     }
+    this.resetPropertyValue("isEmptyElement");
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
