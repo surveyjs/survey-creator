@@ -1968,6 +1968,30 @@ test("set showSidebar is equivalent to action", (): any => {
   expect(creator.sidebar.collapsedManually).toBeTruthy();
   expect(creator.sidebar.expandedManually).toBeFalsy();
 });
+test("set showSidebar in init and check manual flags", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.collapsedManually).toBeFalsy();
+  expect(creator.sidebar.expandedManually).toBeFalsy();
+
+  creator.showSidebar = true;
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.collapsedManually).toBeFalsy();
+  expect(creator.sidebar.expandedManually).toBeTruthy();
+});
 test("Show/hide property grid by collapse/expand actions", (): any => {
   const creator = new CreatorTester();
   creator.propertyGridNavigationMode = "accordion";

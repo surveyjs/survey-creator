@@ -445,3 +445,28 @@ test("CreatorResponsivityManager: page navigator visibility works correctly afte
   responsivityManager.process();
   expect(creator.showPageNavigator).toBe(true);
 });
+
+test("CreatorResponsivityManager shold not change showSidebar on init", (): any => {
+  class ResizeObserver {
+    constructor(protected callback: () => void) {}
+    observe() {
+      this.callback();
+    }
+    disconnect() { }
+  }
+  const oldResizeObserver = window.ResizeObserver;
+  const oldGetComputedStyle = window.getComputedStyle;
+  window.ResizeObserver = <any>ResizeObserver;
+  window.getComputedStyle = <any>jest.fn((element) => ({
+    display: "block"
+  }));
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  container.offsetWidth = 1000;
+  creator.showSidebar = true;
+  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+  expect(creator.showSidebar).toBeTruthy();
+
+  window.ResizeObserver = oldResizeObserver;
+  window.getComputedStyle = oldGetComputedStyle;
+});
