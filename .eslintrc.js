@@ -8,7 +8,7 @@ module.exports = {
   "plugins": [
     "@typescript-eslint",
     "surveyjs",
-    "i18n"
+    "surveyjs/eslint-plugin-i18n",
   ],
   "extends": [
     "eslint:recommended",
@@ -101,7 +101,7 @@ module.exports = {
     // "@typescript-eslint/no-inferrable-types": "off",
     // "@typescript-eslint/no-empty-interface": "off",
     // "@typescript-eslint/no-empty-function": "off",
-    "i18n/no-russian-character": [
+    "surveyjs/eslint-plugin-i18n/only-english-or-code": [
       "error",
       {
         "includeIdentifier": true,
@@ -122,7 +122,7 @@ module.exports = {
     {
       "files": ["packages/survey-creator-core/src/localization/*.ts"],
       "rules": {
-        "i18n/no-russian-character": "off"
+        "surveyjs/eslint-plugin-i18n/only-english-or-code": "off"
       }
     }
   ]

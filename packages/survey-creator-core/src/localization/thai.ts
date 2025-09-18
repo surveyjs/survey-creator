@@ -798,6 +798,10 @@ export const thStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "ล้างคนอื่นในแถวเดียวกัน"
+    },
     multipletextitem: {
       // "Name"
       name: "ชื่อ",
@@ -2844,6 +2848,10 @@ export const thStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "ทําให้ตัวเลือกนี้พิเศษ เมื่อเลือกโดยผู้ใช้ ระบบจะยกเลิกการเลือกตัวเลือกอื่นๆ ทั้งหมดในคําถามโดยอัตโนมัติ",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "ทําให้ช่องทําเครื่องหมายในคอลัมน์นี้เป็นเอกสิทธิ์เฉพาะบุคคล เมื่อผู้ใช้เลือก ผู้ใช้จะยกเลิกการเลือกช่องทําเครื่องหมายอื่นๆ ทั้งหมดในแถวเดียวกันโดยอัตโนมัติ"
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

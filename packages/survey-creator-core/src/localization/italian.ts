@@ -798,6 +798,10 @@ export var italianTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Ogni opzione in una colonna separata"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Cancella gli altri nella stessa riga"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nome",
@@ -2844,6 +2848,10 @@ export var italianTranslation = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Rende questa scelta esclusiva. Quando viene selezionato da un utente, deseleziona automaticamente tutte le altre opzioni nella domanda.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Rende esclusive le caselle di controllo in questa colonna. Quando viene selezionato da un utente, deseleziona automaticamente tutte le altre caselle di controllo nella stessa riga."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Selezionare se le lettere maiuscole e minuscole nell'espressione regolare devono essere considerate equivalenti.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

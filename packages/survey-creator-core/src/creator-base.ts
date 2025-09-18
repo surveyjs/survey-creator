@@ -66,8 +66,11 @@ import {
   ElementSelectingEvent,
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
+  
+  
   CreatorThemePropertyChangedEvent,
   CreatorThemeSelectedEvent,
+  AllowInplaceEditEvent,
   AllowAddElementEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
@@ -231,6 +234,7 @@ export class SurveyCreatorModel extends Base
    *
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
    * @see useElementTitles
+   * @see onAllowInplaceEdit
    */
   @property({ defaultValue: false }) inplaceEditChoiceValues: boolean;
   /**
@@ -4712,14 +4716,15 @@ export class SurveyCreatorModel extends Base
   public clearTranslationsOnSourceTextChange: boolean = false;
 
   /**
-   * An event that is raised when creator decides whether certain string is inplace editable on design surface or not.
+   * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
+   * @see inplaceEditChoiceValues
    */
-  public onGetIsStringInplacelyEditable: EventBase<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }> = this.addCreatorEvent<SurveyCreatorModel, { element: Base, name: string, allowEdit: boolean }>();
+  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();
 
-  public isStringInplacelyEditable(element: Base, stringName: string) {
-    const options = { element, name: stringName, allowEdit: !this.readOnly && !!isStringEditable(element, stringName) };
-    this.onGetIsStringInplacelyEditable.fire(this, options);
-    return options.allowEdit;
+  public isStringInplacelyEditable(element: Base, stringName: string, item?: ItemValue) {
+    const options = { element, item, propertyName: stringName, allow: !this.readOnly && !!isStringEditable(element, stringName) };
+    this.onAllowInplaceEdit.fire(this, options);
+    return options.allow;
   }
 }
 
@@ -4757,15 +4762,15 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     }
     opt.data = opt.data || data;
   });
-  model.getRendererForString = (element: Base, name: string): string => {
-    if (creator.isStringInplacelyEditable(element, name)) {
+  model.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
+    if (creator.isStringInplacelyEditable(element, name, item)) {
       return editableStringRendererName;
     }
     return undefined;
   };
 
-  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-    if (creator.isStringInplacelyEditable(element, locStr.name)) {
+  model.getRendererContextForString = (element: Base, locStr: LocalizableString, item?: ItemValue): any => {
+    if (creator.isStringInplacelyEditable(element, locStr.name, item)) {
       return {
         creator: creator,
         element,

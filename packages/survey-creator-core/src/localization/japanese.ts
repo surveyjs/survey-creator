@@ -798,6 +798,10 @@ export var jaStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "個別の列に各オプション"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "同じ行の他のものをクリアする"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "名前",
@@ -2844,6 +2848,10 @@ export var jaStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "この列のチェックボックスを排他的にします。ユーザーが選択すると、同じ行内の他のすべてのチェックボックスが自動的に選択解除されます。"
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

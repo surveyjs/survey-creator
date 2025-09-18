@@ -1123,3 +1123,21 @@ export interface CreatorThemeSelectedEvent {
    */
   theme: ICreatorTheme;
 }
+export interface AllowInplaceEditEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   */
+  element: Base;
+  /**
+   * A choice item being edited. Defined only when in-place editing targets a choice option.
+   */
+  item?: ItemValue;
+  /**
+   * The name of the property being edited.
+   */
+  propertyName: string;
+  /**
+   * A Boolean property that you can set to `false` if you want to disable in-place editing.
+   */
+  allow: boolean;
+}

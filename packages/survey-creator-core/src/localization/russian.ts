@@ -798,6 +798,10 @@ export var ruStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Каждый вариант в отдельной колонке"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Удаление других объектов в том же ряду"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Имя",
@@ -2844,6 +2848,10 @@ export var ruStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Делает чекбоксы в этой колонке эксклюзивными. Когда пользователь выбирает их, он автоматически снимает выбор со всех остальных флажков в той же строке."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

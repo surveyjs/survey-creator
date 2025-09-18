@@ -202,7 +202,7 @@ test("SearchManager: normalizeTextCallback", () => {
       {
         "type": "text",
         "name": "q1",
-        "title": "brouillé"
+        "title": "brouillé" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
       },
       {
         "type": "text",

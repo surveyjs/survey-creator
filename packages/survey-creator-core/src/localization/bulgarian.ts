@@ -798,6 +798,10 @@ export var bgStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Всяка опция в отделна колона"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Изчистване на другите в същия ред"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Име",
@@ -2844,6 +2848,10 @@ export var bgStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Прави квадратчетата за отметка в тази колона изключителни. Когато бъде избран от потребител, той автоматично ще премахне отметката от всички останали квадратчета в същия ред."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."

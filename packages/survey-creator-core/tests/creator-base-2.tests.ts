@@ -339,7 +339,7 @@ test("creator theme & settings property grids & creator.locale, bug#7130", () =>
   const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
   creator.locale = "fr";
-  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème");
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   creator.locale = "en";
 });
 
@@ -833,11 +833,11 @@ test("onGetIsStringEditable", (): any => {
   let lastEditableValue;
   let callCount = 0;
   let newValue;
-  creator.onGetIsStringInplacelyEditable.add((s, o) => {
-    lastEditableValue = o.allowEdit;
+  creator.onAllowInplaceEdit.add((s, o) => {
+    lastEditableValue = o.allow;
     callCount++;
     if (newValue !== undefined) {
-      o.allowEdit = newValue;
+      o.allow = newValue;
     }
   });
   expect(lastEditableValue).toBeUndefined();

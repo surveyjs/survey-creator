@@ -1645,4 +1645,30 @@ test.describe(title, () => {
     });
     await compareScreenshot(page, ".sd-multipletext__item-container", "string-editor-long-string-short-space.png");
   });
+  test("String editor focused - multiple text", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.evaluate(() => {
+      window["creator"].JSON = {
+        "pages": [
+          {
+            "name": "page1",
+            "elements": [
+              {
+                "type": "multipletext",
+                "name": "question1",
+                "items": [
+                  {
+                    "name": "text1"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "headerView": "advanced"
+      };
+    });
+    await page.locator(".sd-multipletext__item-container .sv-string-editor").click();
+    await compareScreenshot(page, ".sd-multipletext__item-container", "string-editor-focused-multiple-text.png");
+  });
 });
