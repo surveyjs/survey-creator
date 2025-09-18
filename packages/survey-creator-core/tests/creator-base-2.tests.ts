@@ -858,7 +858,7 @@ test("onGetIsStringEditable", (): any => {
 });
 test("Restrict users from adding more than a specified number of questions to a survey Issue#7122", (): any => {
   const creator = new CreatorTester();
-  creator.onCanAddElement.add((sender, options) => {
+  creator.onAllowAddElement.add((sender, options) => {
     if (options.name === "comment") {
       const qs = creator.survey.getAllQuestions(true, true, true);
       qs.filter(q => q.getType() === "comment");

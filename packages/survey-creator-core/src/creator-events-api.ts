@@ -5,6 +5,7 @@ import {
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
+import { QuestionToolboxItem } from "./toolbox";
 
 export interface ElementDeletingEvent {
   /**
@@ -172,10 +173,22 @@ export interface ElementAllowOperationsEvent {
    */
   allowShowSettings: boolean | undefined;
 }
-export interface CanAddElementOptionsEvent {
+export interface AllowAddElementEvent {
+  /**
+   * The name of the toolbox item used to create the element. Usually matches the element's [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
   name: string;
-  toolboxItem?: IAction;
+  /**
+   * The [toolbox item instance](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) that corresponds to the element.
+   */
+  toolboxItem?: QuestionToolboxItem;
+  /**
+   * The element's JSON definition.
+   */
   json?: any;
+  /**
+   * A Boolean property that you can set to `false` to prevent the element from being added.
+   */
   allow: boolean;
 }
 export interface DefineElementMenuItemsEvent {

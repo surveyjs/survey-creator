@@ -68,7 +68,7 @@ import {
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
   CreatorThemeSelectedEvent,
-  CanAddElementOptionsEvent
+  AllowAddElementEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -671,7 +671,10 @@ export class SurveyCreatorModel extends Base
    * @see onCollectionItemAllowOperations
    */
   public onElementAllowOperations: EventBase<SurveyCreatorModel, ElementAllowOperationsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementAllowOperationsEvent>();
-  public onCanAddElement: EventBase<SurveyCreatorModel, CanAddElementOptionsEvent> = this.addCreatorEvent<SurveyCreatorModel, CanAddElementOptionsEvent>();
+  /**
+   * An event that is raised before adding an element to the survey. Use it to control which elements can be added by allowing or preventing the action.
+   */
+  public onAllowAddElement: EventBase<SurveyCreatorModel, AllowAddElementEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowAddElementEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains [adorners](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#specify-adorner-availability) for a survey element. Use this event to hide and modify predefined adorners or add a custom adorner.
@@ -2533,12 +2536,12 @@ export class SurveyCreatorModel extends Base
   }
   public onElementTypeRestrictionChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   private doOnElementsChanged(type: string): void {
-    if (this.onCanAddElement.isEmpty) return;
+    if (this.onAllowAddElement.isEmpty) return;
     const operations = ["ADDED_FROM_TOOLBOX", "ADDED_FROM_PAGEBUTTON", "ELEMENT_COPIED", "QUESTION_CONVERTED", "OBJECT_DELETED"];
     if (!!type && operations.indexOf(type) < 0) return;
     this.toolbox.items.forEach(item => {
       const options = { name: item.name, toolboxItem: item, json: item.json, allow: true };
-      this.onCanAddElement.fire(this, options);
+      this.onAllowAddElement.fire(this, options);
       const restricted = !options.allow;
       if (item.isDisabledByRestriction !== restricted) {
         item.isDisabledByRestriction = restricted;
@@ -2548,7 +2551,7 @@ export class SurveyCreatorModel extends Base
   }
   private isToolboxItemDisabledByRestriction(element: SurveyElement): boolean {
     const name = element?.getType();
-    if (!name || this.onCanAddElement.isEmpty) return false;
+    if (!name || this.onAllowAddElement.isEmpty) return false;
     const item = this.toolbox.getActionById(name);
     if (!!item && item.isDisabledByRestriction) return true;
     const elements = element["elements"] || element["templateElements"];
