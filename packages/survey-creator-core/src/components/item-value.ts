@@ -2,7 +2,6 @@ import {
   Base,
   ItemValue,
   property,
-  QuestionCheckboxModel,
   QuestionSelectBase,
   Serializer,
   JsonObjectProperty,
@@ -256,5 +255,24 @@ export class ItemValueWrapperViewModel extends Base {
     const max = this.question.choicesMax;
     if (!Helpers.isNumber(min) || !Helpers.isNumber(max) || min === max && min === 0) return false;
     return val >= min && val <= max;
+  }
+  public canShowPanel(): boolean {
+    if (!this.item.supportElements) return false;
+    return !this.question.isBuiltInChoice(this.item);
+  }
+  public get showPanel(): boolean {
+    return this.getPropertyValue("showPanel", false);
+  }
+  public set showPanel(val: boolean) {
+    if (val && !this.canShowPanel()) return;
+    this.item.showPanel = val;
+    this.setPropertyValue("showPanel", val);
+  }
+  public togglePanel(): void {
+    this.showPanel = !this.showPanel;
+  }
+  private panelAdornerValue: any; // TODO fix it later, add correct type
+  public get panelAdorner(): any {
+    return this.panelAdornerValue;
   }
 }

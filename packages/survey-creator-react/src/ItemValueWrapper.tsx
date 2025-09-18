@@ -118,8 +118,23 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
         <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div>
 
         <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event.nativeEvent)}>{this.props.element}</div>
+        {this.renderPanelAction()}
       </div>
     );
+  }
+  private renderPanelAction(): React.JSX.Element | null {
+    if (!this.model.canShowPanel()) return null;
+    const icName = this.model.showPanel ? "icon-remove_16x16" : "icon-add_16x16";
+    const btn = attachKey2click(<span
+      role="button"
+      className="svc-item-value-controls__button svc-item-value-controls__add"
+      onClick={() => {
+        this.model.togglePanel();
+      }}
+    >
+      <SvgIcon size={"auto"} iconName={icName}></SvgIcon>
+    </span>);
+    return <div className="svc-item-value-controls">{btn}</div>;
   }
 }
 

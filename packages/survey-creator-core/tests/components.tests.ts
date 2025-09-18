@@ -1,6 +1,7 @@
 import {
   Base, ImageItemValue, ItemValue, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel,
+  QuestionDropdownModel
 } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
@@ -1115,4 +1116,25 @@ test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
   expect(imageAdorner.question).toBeUndefined();
   imageAdorner.imageLinkValueChangedHandler();
   expect(imageAdorner.isEmptyImageLink).toBeTruthy();
+});
+test("Show/hide choiceitem panel", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] },
+      { type: "dropdown", name: "q2", choices: [1, 2, 3] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
+
+  const selectAllItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.selectAllItem);
+  const firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[1]);
+  expect(firstItemAdorner.canShowPanel()).toBeTruthy();
+  expect(selectAllItemAdorner.canShowPanel()).toBeFalsy();
+  const secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  expect(secondItemAdorner.canShowPanel()).toBeFalsy();
+  expect(firstItemAdorner.isPanelShowing).toBeFalsy();
+  firstItemAdorner.togglePanel();
+  expect(firstItemAdorner.isPanelShowing).toBeTruthy();
+  firstItemAdorner.togglePanel();
+  expect(firstItemAdorner.isPanelShowing).toBeFalsy();
 });
