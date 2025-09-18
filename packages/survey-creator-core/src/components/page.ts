@@ -295,7 +295,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
       .append("svc-page__content--animation-running", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
       .append("svc-page__content--new", !!this.isGhost)
-      .append("svc-page__content--selected", !this.isGhost && !!this.creator.isElementSelected(this.page))
+      .append("svc-page__content--selected", !this.isGhost && !!this.isSelected)
       .append("svc-page__content--no-header", !this.isGhost && SurveySettings.designMode.showEmptyTitles === false)
       .toString();
 
