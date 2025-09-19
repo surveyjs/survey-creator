@@ -45,7 +45,6 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     if (this.currentValue) {
       this.model.model.data = this.currentValue;
     }
-    this.model.model.currentPageNo = this.currentPresetIndex;
     this.designerPlugin.activateSidebar();
     this.model.model.onComplete.add(() => this.hidePresets());
 
@@ -54,7 +53,8 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       { id: "save", title: "Save & Exit", css: "sps-list__item--positive", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
       { id: "import", title: "Import", markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
       { id: "export", title: "Export", markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
-      { id: "reset", title: "Reset all changes", markerIconName: "restore-24x24", needSeparator: true, action: () => { this.model?.resetToDefaults(); } },
+      { id: "reset-current", title: "Reset Languages to default", needSeparator: true, action: () => { this.model?.resetToDefaults("page_languages"); } },
+      { id: "reset", title: "Reset all changes", action: () => { this.model?.resetToDefaults(); } },
     ];
     let settingsAction;
     let presetsList;
@@ -85,10 +85,14 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     bottomActions.forEach(a => a.visible = false);
     bottomActions.unshift(settingsAction);
     presetsList = settingsAction.popupModel.contentComponentData.model;
+    const resetCurrentAction = presetsList.getActionById("reset-current");
     presetsList.selectedItem = presetsList.actions[0];
     this.model.model.onCurrentPageChanged.add((_, options) => {
       presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo];
+      resetCurrentAction.title = "Reset " + this.model.model.currentPage.navigationTitle + " to defaults";
+      resetCurrentAction.action = () => { this.model?.resetToDefaults(presetsList.selectedItem.id); };
     });
+    presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
     setTimeout(() => settingsAction.action(), 100);
   }
 

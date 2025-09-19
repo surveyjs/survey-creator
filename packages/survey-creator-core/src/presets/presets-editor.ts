@@ -89,8 +89,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.creator.readOnly = false;
   }
 
-  public resetToDefaults() {
-    this.model.editablePresets.forEach(item => item.resetToDefaults(this.model));
+  public resetToDefaults(page?: string) {
+    this.model.editablePresets.forEach(item => {
+      if (!page || item.pageName == page) item.resetToDefaults(this.model);
+    });
   }
 
   private activatePage (model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {
