@@ -1751,15 +1751,9 @@ export class SurveyCreatorModel extends Base
       SurveyHelper.warnText("showSidebar is a boolean property now.");
       return;
     }
-    if (this.showSidebar === val) return;
     this.setShowSidebar(val, true);
-    if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
-      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
-      this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
-    }
   }
   public setShowSidebar(value: boolean, isManualMode = false) {
-    this.showSidebarValue = value;
     if (isManualMode) {
       if (value) {
         this.sidebar.expandedManually = true;
@@ -1767,8 +1761,14 @@ export class SurveyCreatorModel extends Base
         this.sidebar.collapsedManually = true;
       }
     }
+    if (this.showSidebar === value) return;
+    this.showSidebarValue = value;
     this.updateToolboxIsCompact();
     this.onShowSidebarVisibilityChanged.fire(this, { show: value });
+    if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
+      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
+      this.onShowPropertyGridVisiblityChanged.fire(this, { show: value });
+    }
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
