@@ -53,13 +53,12 @@
 .sps-matrixdynamic__content {
   padding: var(--sjs2-spacing-x150, 12px);
   &,
-  &>div,
-  &>div>.sps-table-wrapper {
+  & > div,
+  & > div > .sps-table-wrapper {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
-
 }
 .sps-table__row--detail .sps-matrixdynamic__content {
   padding: 0;
@@ -97,7 +96,6 @@
   padding: 0;
   margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1)) 0
     var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;
-  margin-inline-end: var(--sjs2-spacing-x100, 8px);
   &:disabled {
     opacity: 1;
     use {

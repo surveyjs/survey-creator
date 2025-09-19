@@ -120,15 +120,27 @@
     width: calc(100% + var(--action-container-width));
     margin-right: calc(-1 * var(--action-container-width));
     text-overflow: ellipsis;
+    
+    border-radius: var(--sjs2-radius-semantic-form, 8px);
+    padding: var(--sjs2-spacing-x100, 8px);
+    margin-left: 0;
+    transition: margin-left $creator-transition-duration;
+    
+    &:hover {
+      background: var(--sjs2-color-control-formbox-hovered-bg, #F5F5F5);
+      box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0) 
+        var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px) 
+        var(--sjs2-color-control-formbox-hovered-border, #D4D4D4) inset;
+    }
+
 
     &:focus,
     &:focus-within {
-      border-radius: var(--sjs2-radius-semantic-form, 8px);
       background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
       box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
         var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
         var(--sjs2-color-control-formbox-focused-border, #19b394) inset;
-      padding: var(--sjs2-spacing-x100, 8px);
+      margin-left: var(--sjs2-spacing-x100, 8px);
     }
   }
 }
@@ -150,7 +162,7 @@
   &:focus-within {
     .sps-table__cell:not(.sps-table__cell--detail-panel) {
       .sps-input {
-        width: 100%;
+        width: calc(100% - var(--sjs2-spacing-x100, 8px));
         margin-right: 0;
       }
     }
