@@ -66,8 +66,6 @@ import {
   ElementSelectingEvent,
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
-  
-  
   CreatorThemePropertyChangedEvent,
   CreatorThemeSelectedEvent,
   AllowInplaceEditEvent,
