@@ -856,3 +856,48 @@ test("onGetIsStringEditable", (): any => {
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(3);
 });
+test("Restrict users from adding more than a specified number of questions to a survey Issue#7122", (): any => {
+  const creator = new CreatorTester();
+  creator.onAllowAddElement.add((sender, options) => {
+    if (options.name === "comment") {
+      const qs = creator.survey.getAllQuestions(true, true, true);
+      qs.filter(q => q.getType() === "comment");
+      options.allow = qs.length < 2;
+    }
+  });
+  const action = creator.toolbox.getActionById("comment");
+  expect(action).toBeTruthy();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  const pAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const pDuplicateAction = pAdorner.actionContainer.getActionById("duplicate");
+  const qAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const qDuplicateAction = qAdorner.actionContainer.getActionById("duplicate");
+  expect(qDuplicateAction).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pDuplicateAction.isVisible).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getAllQuestions()[0]);
+  expect(action.enabled).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  pAdorner.currentAddQuestionType = "comment";
+  pAdorner.addNewQuestion(pAdorner, undefined);
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  creator.JSON = { };
+  expect(action.enabled).toBeTruthy();
+});

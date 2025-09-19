@@ -50,6 +50,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.creator.onPropertyChanged.remove(this.creatorPropertyChanged);
     super.dispose();
   }
+  protected onElementTypeRestrictionChanged(elType: string): void {
+    super.onElementTypeRestrictionChanged(elType);
+    if (this.currentAddQuestionType === elType) {
+      this.currentAddQuestionType = "";
+    }
+  }
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
   }
