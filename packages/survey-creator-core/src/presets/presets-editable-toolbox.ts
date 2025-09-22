@@ -93,7 +93,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              title: "Add custom category",
+              title: "Toolbox",
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               minRowCount: 1,
               allowRowReorder: true,
@@ -113,20 +113,28 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
                   titleLocation: "hidden",
+                  allowAddRows: true,
+                  addRowButtonLocation: "bottom",
+                  addRowText: "Add a new item",
                   valueName: "items"
                 }, true)
               ]
             },
             this.createItemsMatrixJSON({
               name: this.nameItems,
-              titleLocation: "hidden",
+              title: "Toolbox",
+              addRowButtonLocation: "top",
+              addRowText: "Add Custom Item",
               startWithNewLine: false,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
             }, false),
             this.createItemsMatrixJSON({
               allowAddRows: true,
-              addRowButtonLocation: "top",
-              addRowText: "Add Custom Item",
+              title: "Unsorted items",
+              description: "Drag an item from this column to the left one — it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
+              descriptionLocation: "underInput",
+              addRowButtonLocation: "bottom",
+              addRowText: "Add a new item",
               startWithNewLine: false,
               name: this.nameMatrix
             }, false)]

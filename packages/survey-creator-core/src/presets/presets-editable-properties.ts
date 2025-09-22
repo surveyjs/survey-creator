@@ -219,12 +219,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   protected createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
       type: "matrixdynamic",
-      titleLocation: "hidden",
       allowRowReorder: true,
       cellType: "text",
       showHeader: false,
       rowCount: 0,
-      allowAddRows: true,
+      allowAddRows: false,
       addRowButtonLocation: "top",
       addRowText: "Add Custom Item",
       "noRowsText": "There are no items",
@@ -268,7 +267,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              title: "Add custom category",
+              title: "Property Grid",
               minRowCount: 1,
               allowRowReorder: true,
               addRowButtonLocation: "top",
@@ -287,15 +286,16 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                 { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
+                  titleLocation: "hidden",
                 })
               ]
             },
             this.createItemsMatrixJSON({
-              //allowAddRows: true,
-              //addRowButtonLocation: "top",
-              //addRowText: "Add Custom Item",
+              title: "Unsorted items",
+              name: this.nameMatrix,
+              description: "Drag an item from this column to the left one — it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
+              descriptionLocation: "underInput",
               startWithNewLine: false,
-              name: this.nameMatrix
             })
           ]
         },

@@ -8,7 +8,6 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     const defaultJSON = {
       type: "matrixdynamic",
       name: "items",
-      titleLocation: "hidden",
       allowRowReorder: true,
       cellType: "text",
       showHeader: false,
@@ -46,12 +45,15 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
           name: this.mainPanelName,
           elements: [
             this.createItemsMatrixJSON({
+              title: "Tabs",
               name: this.nameItems
             }),
             this.createItemsMatrixJSON({
               startWithNewLine: false,
+              title: "Unsorted items",
               name: this.nameMatrix,
-              "descriptionLocation": "underInput",
+              description: "Drag an item from this column to the left one — it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
+              descriptionLocation: "underInput",
             }),
           ]
         },

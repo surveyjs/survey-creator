@@ -1,4 +1,5 @@
 @use "../../../variables.scss" as *;
+@use "../fonts.scss" as *;
 
 // .sps-matrixdynamic__drag-element {
 //   padding: calcSize(2);
@@ -59,6 +60,9 @@
     flex-direction: column;
     flex-grow: 1;
   }
+  .sps-question__description--under {
+    flex-grow: 0;
+  }
 }
 .sps-table__row--detail .sps-matrixdynamic__content {
   padding: 0;
@@ -103,15 +107,23 @@
     }
   }
 }
-
+.sps-matrixdynamic__footer {
+  margin: 0 calc(-1 * var(--sjs2-spacing-x150, 12px)) var(--sjs2-spacing-x150, 12px);
+  padding: 0 var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px);
+  border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+}
+.sps-table-wrapper ~ .sps-matrixdynamic__footer {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .sps-matrixdynamic__add-btn {
-  @include ctrDefaultBoldFont;
-  display: none;
+  @include sjs2--typography--default;
+  //display: none;
   appearance: none;
   border: none;
-  margin-top: calcSize(0.5);
   background: transparent;
-  color: var(--ctr-survey-action-button-text-color-positive, var(--sjs-primary-background-500, #19b394ff));
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
 }
 
 .sps-smiley-icon {
@@ -134,7 +146,8 @@
 
 .sps-question--matrixdynamic.sps-question--nested {
   .sps-question__header {
-    padding: var(--sjs2-spacing-x150, 12px);
+    padding: var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x100, 8px)
+      var(--sjs2-spacing-x250, 20px);
     border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
     box-sizing: border-box;
   }

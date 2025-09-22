@@ -149,14 +149,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         if (options.question.name == item.getNavigationElementName()) {
           options.actions = model.navigationBar.actions;
         }
-        if (options.question instanceof QuestionMatrixDynamicModel && options.question.allowAddRows) {
-          options.actions = [new Action({
-            iconName: "add-24x24",
-            action: () => {
-              options.question.addRowUI();
-            }
-          })];
-        }
       });
     });
     model.onGetPanelTitleActions.add((_, options) => {
