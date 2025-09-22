@@ -84,7 +84,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     StringItemsNavigatorBase.setQuestion(this);
   }
-
+  protected onElementTypeRestrictionChanged(elType: string): void {
+    super.onElementTypeRestrictionChanged(elType);
+    if (this.currentAddQuestionType === elType) {
+      this.currentAddQuestionType = "";
+    }
+  }
   protected canSelectElement(): boolean {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
