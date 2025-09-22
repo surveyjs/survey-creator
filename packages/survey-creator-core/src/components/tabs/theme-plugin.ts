@@ -298,6 +298,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.onOpenFileChooser.clear();
     this.propertyGrid.obj = undefined;
     this.propertyGrid.obj = this.themeModel;
+    this.initPropertyGridSurvey();
+    this.creator.sidebar.activePage = this.propertyGridTab.id;
+    this.propertyGridTab.visible = true;
+    this.updateTabControl();
+    this.expandCategoryIfNeeded();
+  }
+
+  private initPropertyGridSurvey() {
     this.propertyGrid.survey.mode = "edit";
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
@@ -358,11 +366,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updatePropertyGridEditorsAvailability();
     this.updateVisibilityOfPropertyGridGroups();
     this.updatePropertyGridColorEditorWithPredefinedColors();
-    this.creator.sidebar.activePage = this.propertyGridTab.id;
-    this.propertyGridTab.visible = true;
-    this.updateTabControl();
-    this.expandCategoryIfNeeded();
   }
+
   private expandCategoryIfNeeded() {
     if (!this.model.survey.isEmpty) {
       this.propertyGrid.expandCategoryIfNeeded();
@@ -618,7 +623,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         surveySettings.confirmActionAsync(getLocString("ed.themeResetConfirmation"),
           (confirm) => {
             if (confirm) {
+              this.propertyGrid.survey.onOpenFileChooser.clear();
+              this.propertyGrid.obj = undefined;
               this.themeModel.resetTheme();
+              this.propertyGrid.obj = this.themeModel;
+              this.initPropertyGridSurvey();
+              this.updateTabControl();
             }
           },
           {
