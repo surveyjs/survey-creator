@@ -695,7 +695,8 @@ export var enStrings = {
     regex: "Regular expression",
     surveyvalidator: {
       text: "Error message",
-      expression: "Validation expression"
+      expression: "Validation expression",
+      notificationType: "Notification Type"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",
@@ -1084,6 +1085,11 @@ export var enStrings = {
     sliderType: {
       single: "Single-Value",
       range: "Range"
+    },
+    notificationType: {
+      error: "Error",
+      warning: "Warning",
+      info: "Info"
     },
     autocomplete: {
       name: "Full Name",
