@@ -24,6 +24,7 @@ export class CreatorPresetEditableBase {
     return prefix + this.path;
   }
   public get pageName(): string { return "page_" + this.fullPath; }
+  public getPageTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).title; }
   protected get mainPanelName() { return this.path + "_mainPanel"; }
   public getMainElementNames() : any { return [this.mainPanelName]; }
   public getMainPanelName() : any { return this.mainPanelName; }
@@ -42,6 +43,7 @@ export class CreatorPresetEditableBase {
     return res;
   }
   public get questionNames(): string[] { return []; }
+  public notifyCallback = (message: string) => {};
   public validate(model: SurveyModel): boolean {
     if (!this.validateCore(model)) return false;
     for (let i = 0; i < this.children.length; i ++) {
@@ -105,10 +107,11 @@ export class CreatorPresetEditableBase {
       item.setupQuestions(model, creatorSetup);
     });
   }
-  public resetToDefaults(model: SurveyModel): void {
+  public resetToDefaults(model: SurveyModel, notify = true): void {
     this.restoreValuesFromDefault(model);
+    this.notifyCallback(this.getPageTitle(model) + " resored to default");
     this.children.forEach(item => {
-      item.resetToDefaults(model);
+      item.resetToDefaults(model, notify);
     });
   }
   public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {

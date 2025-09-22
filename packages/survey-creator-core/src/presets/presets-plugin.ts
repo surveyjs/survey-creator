@@ -1,5 +1,5 @@
 import { createDropdownActionModel, IAction } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, extendCreatorTheme } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 export class TabPresetsPlugin implements ICreatorPlugin {

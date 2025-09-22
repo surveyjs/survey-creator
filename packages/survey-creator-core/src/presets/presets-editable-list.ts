@@ -122,7 +122,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
         survey.data = defaultItem;
         resetAction.enabled = false;
-        creator.notify(a.title);
+        this.notifyCallback("Item restored to default");
       }
     };
     resetAction = new Action(resetActionParams);
@@ -146,6 +146,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       });
       question.value = value;
     }
+    this.notifyCallback("Item restored to default");
   }
   protected restoreItems(questionItems: QuestionMatrixDynamicModel, questionHiddenItems: QuestionMatrixDynamicModel, rowIndex: number) {
     const rowData = questionHiddenItems.value[rowIndex];

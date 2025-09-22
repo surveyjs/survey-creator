@@ -66,6 +66,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
     hiddenItemsQuestion.value = hiddenValue;
     categoriesQuestion.value = value;
+    this.notifyCallback("Category restored to default");
   }
   protected findOrCreateCategory(categories: any, category = null) {
     let generalCategory = categories.filter(c => c.category == category)[0];

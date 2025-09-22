@@ -90,8 +90,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
 
   public resetToDefaults(page?: string) {
+    if (!page) {
+      this.notify("All settings restored to default");
+    }
     this.model.editablePresets.forEach(item => {
-      if (!page || item.pageName == page) item.resetToDefaults(this.model);
+      if (!page || item.pageName == page) item.resetToDefaults(this.model, !!page);
     });
   }
 
@@ -102,6 +105,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     activePreset.setupOnCurrentPage(model, this.creator, true);
   }
 
+  private notify(message: string) {
+    this.creator.notify(message);
+  }
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -113,6 +119,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.pagePrevText = "Back";
     model.enterKeyAction = "loseFocus";
 
+    editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
     editablePresets.forEach(item => item.setupQuestions(model, this));
     if (!this.defaultJsonValue) {
       this.defaultJsonValue = {};
