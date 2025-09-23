@@ -12,7 +12,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
-  public getMainElementNames() : any { return [this.nameCategories, this.nameMatrix]; }
+  public getMainElementNames() : any { return [this.nameCategories]; }
   protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return question.name === this.nameCategories ? "category" : "name"; }
   public get questionNames() {
     return [this.nameCategories];

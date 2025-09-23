@@ -54,9 +54,9 @@
 
 .sps-table__cell {
   padding: 0;
-  padding-bottom: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
-  padding-top: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
-  border-top: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  padding-bottom: var(--sjs2-spacing-x075, 6px);
+  padding-top: 0;
+  border-top: none;
   &:first-of-type > div {
     border-top-left-radius: var(--sjs2-radius-semantic-form, 8px);
     border-bottom-left-radius: var(--sjs2-radius-semantic-form, 8px);
@@ -65,6 +65,12 @@
     border-top-right-radius: var(--sjs2-radius-semantic-form, 8px);
     border-bottom-right-radius: var(--sjs2-radius-semantic-form, 8px);
   }
+}
+
+.sps-table__row--main > .sps-table__cell {
+  padding-bottom: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
+  padding-top: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
+  border-top: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
 }
 
 .sps-table__cell--detail-panel {
@@ -86,13 +92,6 @@
   .sps-table__cell--detail-panel .sps-panel {
     margin-top: 0;
     margin-left: 32px;
-  }
-
-  .sps-table__cell {
-    padding: 0;
-    padding-bottom: var(--sjs2-spacing-x075, 6px);
-    padding-top: 0;
-    border-top: none;
   }
 
   .sps-table__row--empty {
@@ -120,19 +119,18 @@
     width: calc(100% + var(--action-container-width));
     margin-right: calc(-1 * var(--action-container-width));
     text-overflow: ellipsis;
-    
+
     border-radius: var(--sjs2-radius-semantic-form, 8px);
     padding: var(--sjs2-spacing-x100, 8px);
     margin-left: 0;
     transition: margin-left $creator-transition-duration;
-    
-    &:hover {
-      background: var(--sjs2-color-control-formbox-hovered-bg, #F5F5F5);
-      box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0) 
-        var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px) 
-        var(--sjs2-color-control-formbox-hovered-border, #D4D4D4) inset;
-    }
 
+    &:hover {
+      background: var(--sjs2-color-control-formbox-hovered-bg, #f5f5f5);
+      box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
+        var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
+        var(--sjs2-color-control-formbox-hovered-border, #d4d4d4) inset;
+    }
 
     &:focus,
     &:focus-within {
@@ -174,9 +172,6 @@
 }
 .sps-table__cell--actions {
   width: 0;
-}
-.sps-table__cell--actions:first-of-type {
-  width: calcSize(5);
 }
 
 // .sps-table__cell--actions > .sps-matrixdynamic__drag-element {
@@ -250,5 +245,7 @@
   @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);
   text-align: center;
-  height: 300px;
+  height: calc(
+    var(--sjs2-spacing-x400, 32px) + var(--sjs2-spacing-x300, 24px) + var(--sjs2-typography-line-height-default, 24px)
+  );
 }
