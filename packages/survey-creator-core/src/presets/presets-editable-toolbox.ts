@@ -177,7 +177,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   public get questionNames() {
     return [this.nameCategories, this.nameItems, this.nameMatrix, this.nameShowCategoryTitles, this.nameCategoriesMode];
   }
-  protected hasIcon(name: string) { return name !== this.nameCategories; }
+  protected hasIcon(name: string) { return name !== this.nameCategories && name !== this.nameSubitems; }
 
   protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
     return question?.name === this.nameCategories ? this.defaultCategories : [...this.defaultItems, ...this.defaultSubitems];
