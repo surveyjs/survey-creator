@@ -69,7 +69,12 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       id: "presets-menu",
       locTooltipName: "ed.creatorPresetsTitle",
       iconName: "navmenu-24x24",
-      css: "sps-menu-floating-action"
+      css: "sps-menu-floating-action",
+      action: () => {
+        if (settingsAction.popupModel.isVisible) {
+          setTimeout(() => settingsAction.popupModel.hide(), 1);
+        }
+      }
     }, {
       items: [...presets, ...tools],
       showPointer: false,
@@ -77,7 +82,6 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       horizontalPosition: "center",
       cssClass: "sps-popup-menu",
       cssClasses: listComponentCss,
-      onBlur: () => { settingsAction.popupModel.hide(); },
       onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
       onShow: () => { settingsAction.iconName = "close-24x24"; }
     }, this.creator);
@@ -93,7 +97,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       resetCurrentAction.action = () => { this.model?.resetToDefaults(presetsList.selectedItem.id); };
     });
     presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
-    setTimeout(() => settingsAction.action(), 100);
+    setTimeout(() => settingsAction.popupModel.show(), 100);
   }
 
   public deactivate(): boolean {
