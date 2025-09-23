@@ -204,9 +204,10 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (options.question.name == this.nameMatrix) {
-      options.row.getQuestionByName("name").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.name })), "name");
-    }
+    const key = this.getMatrixKeyColumnName(options.question);
+    const value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.name })), key);
+    options.row.getQuestionByName(key).value = value;
+    options.row.getQuestionByName("title").value = value;
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (this.needToSetActions(options.question.name)) {
