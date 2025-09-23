@@ -1322,10 +1322,12 @@ export var danishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Regulært udtryk",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Fejlmeddelelse",
+      // [Auto-translated] "Validation message"
+      text: "Meddelelse om validering",
       // [Auto-translated] "Validation expression"
-      expression: "Valideringsudtryk"
+      expression: "Valideringsudtryk",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type af notifikationer"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rækkeoverskrift i total",
@@ -2067,6 +2069,14 @@ export var danishStrings = {
       // [Auto-translated] "Range"
       range: "Interval"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fejl",
+      // [Auto-translated] "Warning"
+      warning: "Advarsel",
+      // [Auto-translated] "Informational"
+      info: "Informative"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fulde navn",
@@ -2754,7 +2764,9 @@ export var danishStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig."
+      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Angiver den type meddelelse, der vises til brugerne. Fejl blokerer fremskridt, indtil de er løst. Advarsler fremhæver problemer, men tillader at fortsætte. Infornationale noter giver yderligere kontekst eller neutral vejledning."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

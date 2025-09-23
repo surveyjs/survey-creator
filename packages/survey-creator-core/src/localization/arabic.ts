@@ -1321,10 +1321,12 @@ export var arStrings = {
     // "Regular expression"
     regex: "Regular expression",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "رسالة خطأ",
+      // [Auto-translated] "Validation message"
+      text: "رسالة التحقق من الصحة",
       // [Auto-translated] "Validation expression"
-      expression: "تعبير التحقق من الصحة"
+      expression: "تعبير التحقق من الصحة",
+      // [Auto-translated] "Notification type"
+      notificationType: "نوع الإشعار"
     },
     // "Total row header"
     totalText: "Total text",
@@ -2066,6 +2068,14 @@ export var arStrings = {
       // [Auto-translated] "Range"
       range: "نطاق"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "خطأ",
+      // [Auto-translated] "Warning"
+      warning: "تحذير",
+      // [Auto-translated] "Informational"
+      info: "اعلاميه"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "الاسم الكامل",
@@ -2753,7 +2763,9 @@ export var arStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة."
+      expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "يحدد نوع الإشعار المعروض للمستخدمين. تمنع الأخطاء التقدم حتى يتم حلها. تبرز التحذيرات المشكلات ولكنها تسمح بالمتابعة. توفر الملاحظات غير المعلوماتية سياقا إضافيا أو إرشادات محايدة."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

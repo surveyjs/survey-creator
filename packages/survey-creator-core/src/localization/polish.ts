@@ -1322,10 +1322,12 @@ export var polishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Wyrażenie regularne",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Komunikat o błędzie",
+      // [Auto-translated] "Validation message"
+      text: "Komunikat sprawdzania poprawności",
       // [Auto-translated] "Validation expression"
-      expression: "Wyrażenie sprawdzania poprawności"
+      expression: "Wyrażenie sprawdzania poprawności",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ powiadomienia"
     },
     // [Auto-translated] "Total row header"
     totalText: "Nagłówek wiersza sumy",
@@ -2067,6 +2069,14 @@ export var polishStrings = {
       // [Auto-translated] "Range"
       range: "Zakres"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Błąd",
+      // [Auto-translated] "Warning"
+      warning: "Ostrzeżenie",
+      // [Auto-translated] "Informational"
+      info: "Informacyjne"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Imię i nazwisko",
@@ -2754,7 +2764,9 @@ export var polishStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową."
+      expression: "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Określa typ powiadomienia wyświetlanego użytkownikom. Błędy blokują postęp do momentu ich rozwiązania. Ostrzeżenia wskazują problemy, ale pozwalają kontynuować. Notatki infornational zawierają dodatkowy kontekst lub neutralne wytyczne."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

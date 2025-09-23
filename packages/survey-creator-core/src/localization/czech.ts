@@ -1321,10 +1321,12 @@ export var czStrings = {
     // "Regular expression"
     regex: "Pravidelný výraz",
     surveyvalidator: {
-      // "Error message"
-      text: "Chybová zpráva",
+      // [Auto-translated] "Validation message"
+      text: "Ověřovací zpráva",
       // [Auto-translated] "Validation expression"
-      expression: "Ověřovací výraz"
+      expression: "Ověřovací výraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ oznámení"
     },
     // "Total row header"
     totalText: "Celkový text",
@@ -2066,6 +2068,14 @@ export var czStrings = {
       // [Auto-translated] "Range"
       range: "Rozmezí"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Chyba",
+      // [Auto-translated] "Warning"
+      warning: "Varování",
+      // [Auto-translated] "Informational"
+      info: "Informační"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Celé jméno",
@@ -2753,7 +2763,9 @@ export var czStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou."
+      expression: "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Určuje typ oznámení, které se bude zobrazovat uživatelům. Chyby blokují průběh, dokud nejsou vyřešeny. Varování upozorňují na problémy, ale umožňují pokračovat. Poznámky Infornational poskytují další kontext nebo neutrální pokyny."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

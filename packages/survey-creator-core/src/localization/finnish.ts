@@ -1321,10 +1321,12 @@ export var fiStrings = {
     // "Regular expression"
     regex: "Säännöllinen lauseke",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Virheviesti",
+      // [Auto-translated] "Validation message"
+      text: "Vahvistusviesti",
       // [Auto-translated] "Validation expression"
-      expression: "Vahvistuksen lauseke"
+      expression: "Vahvistuksen lauseke",
+      // [Auto-translated] "Notification type"
+      notificationType: "Ilmoituksen tyyppi"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rivin otsikon kokonaissumma",
@@ -2066,6 +2068,14 @@ export var fiStrings = {
       // [Auto-translated] "Range"
       range: "Etäisyys"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Virhe",
+      // [Auto-translated] "Warning"
+      warning: "Varoitus",
+      // [Auto-translated] "Informational"
+      info: "Tiedottava"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Koko nimi",
@@ -2753,7 +2763,9 @@ export var fiStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena"
+      expression: "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Määrittää käyttäjille näytettävän ilmoituksen tyypin. Virheet estävät edistymisen, kunnes ne on ratkaistu. Varoitukset korostavat ongelmia, mutta antavat jatkaa. Kansainväliset muistiinpanot tarjoavat lisäkontekstia tai neutraaleja ohjeita."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

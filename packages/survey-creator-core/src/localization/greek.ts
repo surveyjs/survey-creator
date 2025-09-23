@@ -1321,10 +1321,12 @@ export var grStrings = {
     // "Regular expression"
     regex: "Κανονική έκφραση",
     surveyvalidator: {
-      // "Error message"
-      text: "Μήνυμα σφάλματος",
+      // [Auto-translated] "Validation message"
+      text: "Μήνυμα επικύρωσης",
       // [Auto-translated] "Validation expression"
-      expression: "Παράσταση επικύρωσης"
+      expression: "Παράσταση επικύρωσης",
+      // [Auto-translated] "Notification type"
+      notificationType: "Τύπος ειδοποίησης"
     },
     // "Total row header"
     totalText: "Επικεφαλίδα συνολικής σειράς",
@@ -2066,6 +2068,14 @@ export var grStrings = {
       // [Auto-translated] "Range"
       range: "Έκταση"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Λάθος",
+      // [Auto-translated] "Warning"
+      warning: "Προειδοποίηση",
+      // [Auto-translated] "Informational"
+      info: "Ενημερωτικό"
+    },
     autocomplete: {
       // "Full Name"
       name: "Πλήρες Όνομα",
@@ -2753,7 +2763,9 @@ export var grStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Χρησιμοποιήστε το εικονίδιο με το μαγικό ραβδί για να ορίσετε πότε η τιμή της ερώτησης θεωρείται έγκυρη."
+      expression: "Χρησιμοποιήστε το εικονίδιο με το μαγικό ραβδί για να ορίσετε πότε η τιμή της ερώτησης θεωρείται έγκυρη.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Καθορίζει τον τύπο της ειδοποίησης που εμφανίζεται στους χρήστες. Τα σφάλματα εμποδίζουν την πρόοδο μέχρι να επιλυθούν. Οι προειδοποιήσεις επισημαίνουν προβλήματα, αλλά επιτρέπουν τη συνέχιση. Οι ενημερωτικές εθνικές σημειώσεις παρέχουν πρόσθετο πλαίσιο ή ουδέτερη καθοδήγηση."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

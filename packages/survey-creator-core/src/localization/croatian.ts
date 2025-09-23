@@ -1321,10 +1321,12 @@ export var hrStrings = {
     // "Regular expression"
     regex: "Redoviti izraz",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Poruka o pogrešci",
+      // [Auto-translated] "Validation message"
+      text: "Poruka o provjeri valjanosti",
       // [Auto-translated] "Validation expression"
-      expression: "Izraz za provjeru valjanosti"
+      expression: "Izraz za provjeru valjanosti",
+      // [Auto-translated] "Notification type"
+      notificationType: "Vrsta obavijesti"
     },
     // "Total row header"
     totalText: "Ukupan tekst",
@@ -2066,6 +2068,14 @@ export var hrStrings = {
       // [Auto-translated] "Range"
       range: "Domet"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Greška",
+      // [Auto-translated] "Warning"
+      warning: "Upozorenje",
+      // [Auto-translated] "Informational"
+      info: "Informativan"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Puno ime i prezime",
@@ -2753,7 +2763,9 @@ export var hrStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom."
+      expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Određuje vrstu obavijesti koja se prikazuje korisnicima. Pogreške blokiraju napredak dok se ne riješe. Upozorenja ističu probleme, ali dopuštaju nastavak. Infornacionalne bilješke pružaju dodatni kontekst ili neutralne smjernice."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

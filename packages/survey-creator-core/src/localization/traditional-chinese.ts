@@ -1322,10 +1322,12 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Regular expression"
     regex: "正則表達式",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "錯誤資訊",
+      // [Auto-translated] "Validation message"
+      text: "驗證訊息",
       // [Auto-translated] "Validation expression"
-      expression: "驗證表達式"
+      expression: "驗證表達式",
+      // [Auto-translated] "Notification type"
+      notificationType: "通知類型"
     },
     // [Auto-translated] "Total row header"
     totalText: "總行標題",
@@ -2067,6 +2069,14 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Range"
       range: "範圍"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "錯",
+      // [Auto-translated] "Warning"
+      warning: "儆",
+      // [Auto-translated] "Informational"
+      info: "資訊"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "全名",
@@ -2754,7 +2764,9 @@ export var traditionalChineseTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "使用魔術棒圖示來定義問題值何時被視為有效。"
+      expression: "使用魔術棒圖示來定義問題值何時被視為有效。",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "指定向使用者顯示的通知類型。錯誤會阻止進度，直到解決為止。警告會突出顯示問題，但允許繼續。Infornational 註釋提供了額外的背景或中立的指導。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

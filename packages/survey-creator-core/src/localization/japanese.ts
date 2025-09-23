@@ -1321,10 +1321,12 @@ export var jaStrings = {
     // "Regular expression"
     regex: "正規表現",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "エラーメッセージ",
+      // [Auto-translated] "Validation message"
+      text: "検証メッセージ",
       // [Auto-translated] "Validation expression"
-      expression: "検証式"
+      expression: "検証式",
+      // [Auto-translated] "Notification type"
+      notificationType: "通知タイプ"
     },
     // "Total row header"
     totalText: "テキストの合計",
@@ -2066,6 +2068,14 @@ export var jaStrings = {
       // [Auto-translated] "Range"
       range: "範囲"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "エラー",
+      // [Auto-translated] "Warning"
+      warning: "警告",
+      // [Auto-translated] "Informational"
+      info: "情報"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "フルネーム",
@@ -2753,7 +2763,9 @@ export var jaStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。"
+      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "ユーザーに表示される通知の種類を指定します。エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報に関するメモは、追加のコンテキストまたは中立的なガイダンスを提供します。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

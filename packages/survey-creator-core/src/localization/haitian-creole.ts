@@ -1321,10 +1321,12 @@ export var htStrings = {
     // "Regular expression"
     regex: "Ekspresyon regilye",
     surveyvalidator: {
-      // "Error message"
-      text: "Mesaj erè",
+      // [Auto-translated] "Validation message"
+      text: "Mesaj validasyon an",
       // [Auto-translated] "Validation expression"
-      expression: "Ekspresyon validasyon"
+      expression: "Ekspresyon validasyon",
+      // [Auto-translated] "Notification type"
+      notificationType: "Kalite notifikasyon"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -2066,6 +2068,14 @@ export var htStrings = {
       // [Auto-translated] "Range"
       range: "Pòte"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Erè",
+      // [Auto-translated] "Warning"
+      warning: "Avètisman",
+      // [Auto-translated] "Informational"
+      info: "Enfòmasyon"
+    },
     autocomplete: {
       // "Full Name"
       name: "Non konplè",
@@ -2753,7 +2763,9 @@ export var htStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab."
+      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Espesifye ki kalite notifikasyon yo montre itilizatè yo. Erè bloke pwogrè jiskaske rezoud Avètisman mete aksan sou pwoblèm men pèmèt yo kontinye Nòt Infornational bay kontèks adisyonèl oswa konsèy net."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
