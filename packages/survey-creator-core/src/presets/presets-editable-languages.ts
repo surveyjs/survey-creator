@@ -12,37 +12,6 @@ function searchItem(params) {
 }
 import { FunctionFactory } from "survey-core";
 FunctionFactory.Instance.register("searchItem", searchItem);
-class LocalizationPreview extends SurveyModel {
-  public getType(): string {
-    return "localizationpreview";
-  }
-  public get locale(): string {
-    return this.getPropertyValueWithoutDefault("locale") || surveyLocalization.currentLocale;
-  }
-  public set locale(value: string) {
-    if (value === surveyLocalization.defaultLocale && !surveyLocalization.currentLocale) {
-      value = "";
-    }
-    this.setPropertyValue("locale", value);
-  }
-}
-
-Serializer.addClass("localizationpreview", [
-  {
-    name: "locale",
-    category: "general",
-    choices: () => {
-      return surveyLocalization.getLocales(true);
-    },
-    onGetValue: (obj: any): any => {
-      return obj.locale == surveyLocalization.defaultLocale ? null : obj.locale;
-    },
-  }], ()=> new LocalizationPreview(), "survey");
-const locPreview = Serializer.createClass("localizationpreview");
-Serializer.getProperties("localizationpreview").forEach(p => {
-  const property = Serializer.getProperty("localizationpreview", p.name);
-  property.visible = p.name == "locale";
-});
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
@@ -125,10 +94,6 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     } else {
       question.selectAll();
     }
-  }
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
-    creator.setSidebarEnabled(active);
-    this.propertyGridSetObj(active ? locPreview : null);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.surveyUseEnglishNames) {
