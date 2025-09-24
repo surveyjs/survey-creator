@@ -798,6 +798,10 @@ export var arStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "كل خيار في عمود منفصل"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "محو الآخرين في نفس الصف"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "اسم",
@@ -1317,10 +1321,12 @@ export var arStrings = {
     // "Regular expression"
     regex: "Regular expression",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "رسالة خطأ",
+      // [Auto-translated] "Validation message"
+      text: "رسالة التحقق من الصحة",
       // [Auto-translated] "Validation expression"
-      expression: "تعبير التحقق من الصحة"
+      expression: "تعبير التحقق من الصحة",
+      // [Auto-translated] "Notification type"
+      notificationType: "نوع الإشعار"
     },
     // "Total row header"
     totalText: "Total text",
@@ -2062,6 +2068,14 @@ export var arStrings = {
       // [Auto-translated] "Range"
       range: "نطاق"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "خطأ",
+      // [Auto-translated] "Warning"
+      warning: "تحذير",
+      // [Auto-translated] "Informational"
+      info: "اعلاميه"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "الاسم الكامل",
@@ -2749,7 +2763,9 @@ export var arStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة."
+      expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "يحدد نوع الإشعار المعروض للمستخدمين. تمنع الأخطاء التقدم حتى يتم حلها. تبرز التحذيرات المشكلات ولكنها تسمح بالمتابعة. توفر الملاحظات غير المعلوماتية سياقا إضافيا أو إرشادات محايدة."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var arStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "يجعل مربعات الاختيار في هذا العمود حصرية. عند تحديده من قبل مستخدم ، سيقوم تلقائيا بإلغاء تحديد جميع مربعات الاختيار الأخرى في نفس الصف."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var arStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "امتداد العمود",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم"
+    progressBarInheritWidthFrom: "عرض منطقة شريط التقدم",
+    // [Auto-translated] "Theme name"
+    themeName: "اسم الموضوع"
   },
   theme: {
     // "Advanced mode"

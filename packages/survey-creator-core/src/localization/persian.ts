@@ -798,6 +798,10 @@ export var persianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "هر گزینه در یک ستون جداگانه"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "پاک کردن دیگران در همان ردیف"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "نام",
@@ -1317,10 +1321,12 @@ export var persianStrings = {
     // "Regular expression"
     regex: "فرمت صحیح عبارت ",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "پیام خطا",
+      // [Auto-translated] "Validation message"
+      text: "پیام اعتبارسنجی",
       // [Auto-translated] "Validation expression"
-      expression: "عبارت اعتبارسنجی"
+      expression: "عبارت اعتبارسنجی",
+      // [Auto-translated] "Notification type"
+      notificationType: "نوع اعلان"
     },
     // "Total row header"
     totalText: "متن کامل",
@@ -2062,6 +2068,14 @@ export var persianStrings = {
       // [Auto-translated] "Range"
       range: "محدوده"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "خطا",
+      // [Auto-translated] "Warning"
+      warning: "هشدار",
+      // [Auto-translated] "Informational"
+      info: "اطلاعاتی"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "نام و نام خانوادگی",
@@ -2749,7 +2763,9 @@ export var persianStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید."
+      expression: "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "نوع اعلانی را که به کاربران نشان داده می شود مشخص می کند. خطاها پیشرفت را تا زمانی که حل نشوند مسدود می کنند. هشدارها مشکلات را برجسته می کنند اما اجازه ادامه می دهند. یادداشت های Infornational زمینه اضافی یا راهنمایی خنثی را ارائه می دهند."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var persianStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "این انتخاب را منحصر به فرد می کند. هنگامی که توسط یک کاربر انتخاب می شود، به طور خودکار همه گزینه های دیگر در سوال را لغو انتخاب می کند.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "چک باکس های موجود در این ستون را انحصاری می کند. هنگامی که یک کاربر انتخاب می کند، به طور خودکار تمام کادرهای دیگر را در همان ردیف لغو انتخاب می کند."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "انتخاب کنید که آیا حروف بزرگ و کوچک در عبارت منظم باید معادل در نظر گرفته شوند.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var persianStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "دهانه ستون",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "عرض مساحت نوار پیشرفت"
+    progressBarInheritWidthFrom: "عرض مساحت نوار پیشرفت",
+    // [Auto-translated] "Theme name"
+    themeName: "نام قالب"
   },
   theme: {
     // "Advanced mode"

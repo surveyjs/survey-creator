@@ -10,7 +10,8 @@ export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.setWidthByTarget = false;
   question.popupModel.positionMode = "flex";
   question.popupModel.showPointer = true;
-  question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
+  question.searchEnabled = false;
+  question.dropdownListModel["listModel"].searchEnabled = ["operator", "conjunction", "logicTypeName"].indexOf(question.name) === -1;
 }
 
 export class LogicEvent extends EventBase<SurveyLogic, any> { }
@@ -401,7 +402,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.AddElements(itemValues, res);
   }
   private isItemValueProp(prop: JsonObjectProperty): boolean {
-    return prop && ["itemvalue[]", "choiceitem[]", "checkboxitem[]"].indexOf(prop.type) > -1;
+    return prop && ["itemvalue[]", "choiceitem[]", "checkboxitem[]", "matrixcolumn[]"].indexOf(prop.type) > -1;
   }
   private AddElements(src: Array<any>, dest: Array<any>) {
     for (var i = 0; i < src.length; i++) {

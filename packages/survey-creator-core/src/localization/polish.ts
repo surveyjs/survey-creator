@@ -799,6 +799,10 @@ export var polishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Każda opcja w osobnej kolumnie"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Wyczyść inne w tym samym wierszu"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nazwa",
@@ -1318,10 +1322,12 @@ export var polishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Wyrażenie regularne",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Komunikat o błędzie",
+      // [Auto-translated] "Validation message"
+      text: "Komunikat sprawdzania poprawności",
       // [Auto-translated] "Validation expression"
-      expression: "Wyrażenie sprawdzania poprawności"
+      expression: "Wyrażenie sprawdzania poprawności",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ powiadomienia"
     },
     // [Auto-translated] "Total row header"
     totalText: "Nagłówek wiersza sumy",
@@ -2063,6 +2069,14 @@ export var polishStrings = {
       // [Auto-translated] "Range"
       range: "Zakres"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Błąd",
+      // [Auto-translated] "Warning"
+      warning: "Ostrzeżenie",
+      // [Auto-translated] "Informational"
+      info: "Informacyjne"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Imię i nazwisko",
@@ -2750,7 +2764,9 @@ export var polishStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową."
+      expression: "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Określa typ powiadomienia wyświetlanego użytkownikom. Błędy blokują postęp do momentu ich rozwiązania. Ostrzeżenia wskazują problemy, ale pozwalają kontynuować. Notatki infornational zawierają dodatkowy kontekst lub neutralne wytyczne."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2845,6 +2861,10 @@ export var polishStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Sprawia, że pola wyboru w tej kolumnie są wyłączne. Po wybraniu przez użytkownika automatycznie odznaczą one wszystkie inne pola wyboru w tym samym wierszu."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3335,7 +3355,9 @@ export var polishStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpiętość kolumn",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu"
+    progressBarInheritWidthFrom: "Szerokość obszaru paska postępu",
+    // [Auto-translated] "Theme name"
+    themeName: "Nazwa motywu"
   },
   theme: {
     // "Advanced mode"

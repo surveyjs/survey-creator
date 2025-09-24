@@ -65,7 +65,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
   }
 
   protected renderElementContent(): React.JSX.Element {
-    if (this.imageModel.isEmptyImageLink) {
+    if (this.imageModel.isEmptyElement) {
       const fileQuestion = ReactQuestionFactory.Instance.createQuestion("file", {
         creator: this.imageModel.question.survey,
         isDisplayMode: false,

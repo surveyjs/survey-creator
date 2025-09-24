@@ -143,6 +143,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propValue: string;
   public showInToolboxOnly: boolean = false;
   public needDefaultSubitem: boolean = undefined;
+  @property() isDisabledByRestriction: boolean;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -191,6 +192,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   public set enabled(val: boolean) {
     this.setEnabled(val);
+  }
+  public getEnabled(): boolean {
+    if (this.isDisabledByRestriction) return false;
+    return super.getEnabled() !== false;
   }
   className: string;
 
@@ -1337,6 +1342,22 @@ export class QuestionToolbox
     });
   }
 
+  private actionsHash: { [index: string]: QuestionToolboxItem };
+  protected patchAction(action: QuestionToolboxItem) {
+    super.patchAction(action);
+    this.actionsHash = undefined;
+  }
+  public getActionById(name : string): QuestionToolboxItem {
+    if (!this.actionsHash) {
+      this.actionsHash = {};
+    }
+    let res = this.actionsHash[name];
+    if (!res) {
+      res = super.getActionById(name);
+      this.actionsHash[name] = res;
+    }
+    return res;
+  }
   private getDefaultQuestionItems(supportedQuestions: Array<string>, useDefaultCategories: boolean): Array<QuestionToolboxItem> {
     const res = [];
     const questions = this.getQuestionTypes(supportedQuestions);

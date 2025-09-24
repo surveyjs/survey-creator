@@ -798,6 +798,10 @@ export var slStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Vsaka možnost v ločenem stolpcu"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Počisti druge v isti vrstici"
+    },
     multipletextitem: {
       // "Name"
       name: "Ime",
@@ -1317,10 +1321,12 @@ export var slStrings = {
     // "Regular expression"
     regex: "Regularni izraz",
     surveyvalidator: {
-      // "Error message"
-      text: "Sporočilo o napaki",
+      // [Auto-translated] "Validation message"
+      text: "Potrditveno sporočilo",
       // [Auto-translated] "Validation expression"
-      expression: "Validacijski izraz"
+      expression: "Validacijski izraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Vrsta obvestila"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",
@@ -2062,6 +2068,14 @@ export var slStrings = {
       // [Auto-translated] "Range"
       range: "Razpon"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Napaka",
+      // [Auto-translated] "Warning"
+      warning: "Opozorilo",
+      // [Auto-translated] "Informational"
+      info: "Informativne"
+    },
     autocomplete: {
       // "Full Name"
       name: "Celé jméno",
@@ -2749,7 +2763,9 @@ export var slStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno."
+      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Določa vrsto obvestila, ki je prikazano uporabnikom. Napake blokirajo napredek, dokler niso odpravljene. Opozorila poudarjajo težave, vendar omogočajo nadaljevanje. Informativne opombe zagotavljajo dodaten kontekst ali nevtralne smernice."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var slStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Zaradi tega je ta izbira ekskluzivna. Ko uporabnik izbere, bo samodejno preklical izbiro vseh drugih možnosti v vprašanju.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Potrditvena polja v tem stolpcu so izključna. Ko uporabnik izbere, samodejno prekliče izbor vseh drugih potrditvenih polj v isti vrstici."
+    },
     // "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Izberite, če naj bodo velike in male črke v regularnem izrazu obravnavane kot enake",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var slStrings = {
     // "Column span"
     effectiveColSpan: "Razpon stolpca",
     // "Progress bar area width"
-    progressBarInheritWidthFrom: "Širina območja napredka"
+    progressBarInheritWidthFrom: "Širina območja napredka",
+    // [Auto-translated] "Theme name"
+    themeName: "Ime teme"
   },
   theme: {
     // "Advanced mode"

@@ -237,6 +237,8 @@ export class TranslationItem extends TranslationItemBase {
     return placeholderText;
   }
   public getTextForExport(loc: string): string {
+    const val = this.hashValues[loc];
+    if (!!val && !!val.text) return val.text;
     const res = this.locString.getLocaleText(loc);
     if (!!res) return res;
     const index = loc.indexOf("-");
@@ -1263,8 +1265,8 @@ export class Translation extends Base implements ITranslationLocales {
     }
     let res = [];
     let headerRow = [];
-    let visibleLocales = this.locales;
-    headerRow.push("description ↓ - language →");
+    const visibleLocales = this.locales;
+    headerRow.push("description ↓ - language →"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     for (let i = 0; i < visibleLocales.length; i++) {
       headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }

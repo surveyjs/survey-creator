@@ -84,7 +84,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     StringItemsNavigatorBase.setQuestion(this);
   }
-
+  protected onElementTypeRestrictionChanged(elType: string): void {
+    super.onElementTypeRestrictionChanged(elType);
+    if (this.currentAddQuestionType === elType) {
+      this.currentAddQuestionType = "";
+    }
+  }
   protected canSelectElement(): boolean {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
@@ -246,17 +251,34 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
+      if (this.surveyElement instanceof QuestionHtmlModel) {
+        surveyElement.unRegisterFunctionOnPropertyValueChanged("html", "isEmptyAdorner");
+      }
+      if (this.surveyElement instanceof PanelModelBase) {
+        surveyElement.unRegisterFunctionOnPropertiesValueChanged(["rows", "elements"], "isEmptyAdorner");
+      }
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
       }
     }
+    this.resetPropertyValue("isEmptyElement");
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
     super.attachElement(surveyElement);
     if (surveyElement) {
+      if (this.surveyElement instanceof QuestionHtmlModel) {
+        surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {
+          this.updateIsEmptyElement();
+        }, "isEmptyAdorner");
+      }
+      if (this.surveyElement instanceof PanelModelBase) {
+        surveyElement.registerFunctionOnPropertiesValueChanged(["rows", "elements"], (newValue: any) => {
+          this.updateIsEmptyElement();
+        }, "isEmptyAdorner");
+      }
       surveyElement.registerFunctionOnPropertyValueChanged("isRequired", (newValue: any) => {
         if (this.isActionContainerCreated) {
           const requiredAction = this.actionContainer.getActionById("isrequired");
@@ -338,19 +360,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
     this.updateActionVisibility(actionName, allow && !isPropReadOnly);
   }
-  public get isEmptyElement(): boolean {
+  get isEmptyElement(): boolean {
+    return this.getPropertyValue("isEmptyElement", undefined, () => this.getIsEmptyElement());
+  }
+  set isEmptyElement(val: boolean) {
+    this.setPropertyValue("isEmptyElement", val);
+  }
+  protected getIsEmptyElement(): boolean {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return !this.surveyElement.html;
     }
-
     if (this.surveyElement instanceof PanelModelBase) {
       const panel = this.surveyElement as any as PanelModelBase;
-      return (
-        !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0
-      );
+      return !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0;
     }
-
     return false;
+  }
+  protected updateIsEmptyElement() {
+    this.isEmptyElement = this.getIsEmptyElement();
   }
   public get isEmptyTemplate(): boolean {
     if (this.surveyElement instanceof QuestionPanelDynamicModel) {
@@ -431,13 +458,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     (defaultJsons[type] || []).forEach((djson) => {
       if (this.jsonIsCorresponded(djson)) {
         newJson = { ...json };
-        const objJson = this.element.toJSON();
-        const cleanJson = this.cleanDefaultsFromJson(type, djson);
         Object.keys(djson).forEach(p => {
-          if (p != "type" && !newJson[p]) newJson[p] = undefined;
-        });
-        Object.keys(json || {}).forEach(p => {
-          if (p != "type" && !(!objJson[p] || cleanJson[p])) newJson[p] = undefined;
+          if (p != "type" && !newJson.hasOwnProperty(p)) newJson[p] = undefined;
         });
       }
     });

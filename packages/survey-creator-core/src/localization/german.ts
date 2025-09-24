@@ -102,7 +102,7 @@ export var germanTranslation = {
     // "Text Input Questions"
     text: "Text-Eingabe-Fragen",
     // "Containers"
-    containers: "Kontainer",
+    containers: "Bereiche",
     // "Matrix Questions"
     matrix: "Matrix-Fragen",
     // "Misc"
@@ -798,6 +798,10 @@ export var germanTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jede Option in einer separaten Spalte"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Andere in derselben Reihe löschen"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Name",
@@ -1317,10 +1321,12 @@ export var germanTranslation = {
     // "Regular expression"
     regex: "Regulärer Ausdruck",
     surveyvalidator: {
-      // "Error message"
-      text: "Fehlermeldung",
+      // [Auto-translated] "Validation message"
+      text: "Validierungsmeldung",
       // [Auto-translated] "Validation expression"
-      expression: "Validierungs-Ausdruck"
+      expression: "Validierungs-Ausdruck",
+      // [Auto-translated] "Notification type"
+      notificationType: "Art der Meldung"
     },
     // "Total row header"
     totalText: "Text (total)",
@@ -2062,6 +2068,14 @@ export var germanTranslation = {
       // [Auto-translated] "Range"
       range: "Bereich"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fehler",
+      // [Auto-translated] "Warning"
+      warning: "Warnung",
+      // [Auto-translated] "Informational"
+      info: "Mitteilsam"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Vollständiger Name",
@@ -2749,7 +2763,9 @@ export var germanTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt."
+      expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Gibt den Typ der Benachrichtigung an, die Benutzern angezeigt wird. Fehler blockieren den Fortschritt, bis sie behoben sind. Warnungen weisen auf Probleme hin, lassen aber zu, dass fortgefahren wird. Infornationale Anmerkungen bieten zusätzlichen Kontext oder neutrale Orientierungshilfen."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var germanTranslation = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Macht diese Wahl exklusiv. Wenn sie von einem Benutzer ausgewählt wird, werden automatisch alle anderen Optionen in der Frage abgewählt.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Macht die Kontrollkästchen in dieser Spalte exklusiv. Wenn sie von einem Benutzer ausgewählt werden, werden alle anderen Kontrollkästchen in derselben Zeile automatisch deaktiviert."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var germanTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Spaltenbereich",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Breite des Fortschrittsbalkenbereichs"
+    progressBarInheritWidthFrom: "Breite des Fortschrittsbalkenbereichs",
+    // [Auto-translated] "Theme name"
+    themeName: "Name des Themas"
   },
   theme: {
     // "Advanced mode"

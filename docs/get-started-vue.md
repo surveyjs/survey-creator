@@ -505,6 +505,23 @@ import "ace-builds/src-noconflict/theme-clouds_midnight";
 </template>
 ```
 
+To enable code highlighting, set the path to the directory containing the `ace.js` script using the `AceJsonEditorModel.aceBasePath` property. If you host `ace.js` on your server, specify your server path. If you use a CDN or installed Ace via npm, you can use the following path:
+
+```html
+<!-- components/SurveyCreator.vue -->
+<script setup lang="ts">
+// ...
+import { AceJsonEditorModel } from "survey-creator-core";
+AceJsonEditorModel.aceBasePath = "https://unpkg.com/ace-builds/src-min-noconflict/";
+// ...
+</script>
+<template>
+  <!-- ... -->
+</template>
+```
+
+[View Demo](/survey-creator/examples/ace-editor-integration/vue3js (linkStyle))
+
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
 
 ## Further Reading
@@ -513,4 +530,3 @@ import "ace-builds/src-noconflict/theme-clouds_midnight";
 - [Property Grid Customization](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid)
 - [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox)
 - [Survey Customization](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization)
-- [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)

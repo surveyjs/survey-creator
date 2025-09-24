@@ -798,6 +798,10 @@ export var spanishTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Borrar otros en la misma fila"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nombre",
@@ -1317,10 +1321,12 @@ export var spanishTranslation = {
     // "Regular expression"
     regex: "Expresión regular",
     surveyvalidator: {
-      // "Error message"
-      text: "Mensaje de error",
+      // [Auto-translated] "Validation message"
+      text: "Mensaje de validación",
       // [Auto-translated] "Validation expression"
-      expression: "Expresión de validación"
+      expression: "Expresión de validación",
+      // [Auto-translated] "Notification type"
+      notificationType: "Tipo de notificación"
     },
     // "Total row header"
     totalText: "Texto total",
@@ -2062,6 +2068,14 @@ export var spanishTranslation = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Error",
+      // [Auto-translated] "Warning"
+      warning: "Advertencia",
+      // [Auto-translated] "Informational"
+      info: "Informativo"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nombre completo",
@@ -2749,7 +2763,9 @@ export var spanishTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta."
+      expression: "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Especifica el tipo de notificación que se muestra a los usuarios. Los errores bloquean el progreso hasta que se resuelven. Las advertencias resaltan los problemas, pero permiten continuar. Las notas informativas proporcionan un contexto adicional o una guía neutral."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var spanishTranslation = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Hace que esta elección sea exclusiva. Cuando un usuario lo selecciona, anulará automáticamente la selección de todas las demás opciones de la pregunta.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Hace que las casillas de verificación de esta columna sean exclusivas. Cuando un usuario lo selecciona, anulará automáticamente la selección de todas las demás casillas de verificación en la misma fila."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Seleccione si las letras mayúsculas y minúsculas de la expresión regular deben tratarse como equivalentes.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var spanishTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Tramo de columna",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Ancho del área de la barra de progreso"
+    progressBarInheritWidthFrom: "Ancho del área de la barra de progreso",
+    // [Auto-translated] "Theme name"
+    themeName: "Nombre del tema"
   },
   theme: {
     // "Advanced mode"

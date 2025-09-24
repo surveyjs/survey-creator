@@ -798,6 +798,10 @@ export var htStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Chak opsyon nan yon kolòn separe"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Klè lòt moun nan menm ranje a"
+    },
     multipletextitem: {
       // "Name"
       name: "Non",
@@ -1317,10 +1321,12 @@ export var htStrings = {
     // "Regular expression"
     regex: "Ekspresyon regilye",
     surveyvalidator: {
-      // "Error message"
-      text: "Mesaj erè",
+      // [Auto-translated] "Validation message"
+      text: "Mesaj validasyon an",
       // [Auto-translated] "Validation expression"
-      expression: "Ekspresyon validasyon"
+      expression: "Ekspresyon validasyon",
+      // [Auto-translated] "Notification type"
+      notificationType: "Kalite notifikasyon"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -2062,6 +2068,14 @@ export var htStrings = {
       // [Auto-translated] "Range"
       range: "Pòte"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Erè",
+      // [Auto-translated] "Warning"
+      warning: "Avètisman",
+      // [Auto-translated] "Informational"
+      info: "Enfòmasyon"
+    },
     autocomplete: {
       // "Full Name"
       name: "Non konplè",
@@ -2749,7 +2763,9 @@ export var htStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab."
+      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Espesifye ki kalite notifikasyon yo montre itilizatè yo. Erè bloke pwogrè jiskaske rezoud Avètisman mete aksan sou pwoblèm men pèmèt yo kontinye Nòt Infornational bay kontèks adisyonèl oswa konsèy net."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var htStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Fè chwa sa a san konte. Lè chwazi pa yon itilizatè, li pral otomatikman deselere tout lòt opsyon nan kesyon an.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Fè kaz chèk nan kolòn sa a san konte Lè yo chwazi pa yon itilizatè, yo pral otomatikman deklase, tout lòt bwat nan ranje a menm."
+    },
     // "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Chwazi si lèt majiskil ak miniskil nan ekspresyon regilye a dwe trete kòm ekivalan.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var htStrings = {
     // "Column span"
     effectiveColSpan: "span kolòn",
     // "Progress bar area width"
-    progressBarInheritWidthFrom: "Lajè zòn ba pwogrè"
+    progressBarInheritWidthFrom: "Lajè zòn ba pwogrè",
+    // [Auto-translated] "Theme name"
+    themeName: "Non tèm"
   },
   theme: {
     // "Advanced mode"

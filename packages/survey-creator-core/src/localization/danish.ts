@@ -799,6 +799,10 @@ export var danishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hver indstilling i en separat kolonne"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Ryd andre i samme række"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Navn",
@@ -1318,10 +1322,12 @@ export var danishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Regulært udtryk",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Fejlmeddelelse",
+      // [Auto-translated] "Validation message"
+      text: "Meddelelse om validering",
       // [Auto-translated] "Validation expression"
-      expression: "Valideringsudtryk"
+      expression: "Valideringsudtryk",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type af notifikationer"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rækkeoverskrift i total",
@@ -2063,6 +2069,14 @@ export var danishStrings = {
       // [Auto-translated] "Range"
       range: "Interval"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fejl",
+      // [Auto-translated] "Warning"
+      warning: "Advarsel",
+      // [Auto-translated] "Informational"
+      info: "Informative"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fulde navn",
@@ -2750,7 +2764,9 @@ export var danishStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig."
+      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Angiver den type meddelelse, der vises til brugerne. Fejl blokerer fremskridt, indtil de er løst. Advarsler fremhæver problemer, men tillader at fortsætte. Infornationale noter giver yderligere kontekst eller neutral vejledning."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2845,6 +2861,10 @@ export var danishStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Gør dette valg eksklusivt. Når den vælges af en bruger, fravælger den automatisk alle andre muligheder i spørgsmålet.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Gør afkrydsningsfelter i denne kolonne eksklusive. Når de vælges af en bruger, vil de automatisk fravælge alle andre afkrydsningsfelter i samme række."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3335,7 +3355,9 @@ export var danishStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Søjlespænd",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Bredde på statuslinjeområde"
+    progressBarInheritWidthFrom: "Bredde på statuslinjeområde",
+    // [Auto-translated] "Theme name"
+    themeName: "Tema navn"
   },
   theme: {
     // "Advanced mode"

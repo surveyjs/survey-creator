@@ -5,6 +5,7 @@ import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { SurveyElementActionContainer } from "../../src/components/action-container-view-model";
+import { parse } from "papaparse";
 
 test("create locales question for edit translation", () => {
   const survey = new SurveyModel({
@@ -17,9 +18,9 @@ test("create locales question for edit translation", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: [{ value: "item1", text: { fr: "Item 1 fr" } }, "item2", "item3"]
           }
@@ -351,7 +352,7 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
   expect(headerMatrix.columns[1].title).toBe("Source: Deutsch");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -362,8 +363,8 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Source: Français");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[1].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -595,4 +596,70 @@ test("Do not swap languages in the property grid on auto-translation, Bug#6548",
   expect(question.value).toHaveLength(3);
   expect(question.value[1]["name"]).toBe("fr");
   expect(question.value[2]["name"]).toBe("de");
+});
+test("Machine translation, editor & export, Bug#7059", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            description: "desc"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.getHasMachineTranslation()).toBeFalsy();
+  creator.onMachineTranslate.add((sender, options) => {
+    options.callback(["Title fr", "Desc fr"]);
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  const editor = translation.createTranslationEditor("fr");
+  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  expect(actions).toHaveLength(4);
+  expect(actions[3].id).toBe("svc-translation-export");
+  expect(actions[1].id).toBe("svc-translation-machine");
+  actions[1].action();
+  let exported = new Array<any>();
+  parse(editor.translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "fr"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(exported[1]).toEqual([
+    "survey.page1.q1.title",
+    "q1",
+    "Title fr"
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.q1.description",
+    "desc",
+    "Desc fr"
+  ]);
+  editor.cancel();
+  parse(translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(exported[1]).toEqual([
+    "survey.page1.q1.title",
+    "q1"
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.q1.description",
+    "desc"
+  ]);
 });

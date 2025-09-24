@@ -798,6 +798,10 @@ export var skStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnosť v samostatnom stĺpci"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Vymazanie ostatných v rovnakom riadku"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Meno",
@@ -1317,10 +1321,12 @@ export var skStrings = {
     // "Regular expression"
     regex: "Regulárny výraz",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Chybové hlásenie",
+      // [Auto-translated] "Validation message"
+      text: "Overovacia správa",
       // [Auto-translated] "Validation expression"
-      expression: "Overovací výraz"
+      expression: "Overovací výraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ oznámenia"
     },
     // "Total row header"
     totalText: "Celkom – text",
@@ -2062,6 +2068,14 @@ export var skStrings = {
       // [Auto-translated] "Range"
       range: "Rozsah"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Chyba",
+      // [Auto-translated] "Warning"
+      warning: "Varovanie",
+      // [Auto-translated] "Informational"
+      info: "Informačné"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Celé meno",
@@ -2749,7 +2763,9 @@ export var skStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Pomocou ikony čarovného prútika definujte, kedy sa hodnota otázky považuje za platnú."
+      expression: "Pomocou ikony čarovného prútika definujte, kedy sa hodnota otázky považuje za platnú.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Určuje typ oznámenia, ktoré sa zobrazuje používateľom. Chyby blokujú priebeh, kým sa nevyriešia. Upozornenia upozorňujú na problémy, ale umožňujú pokračovanie. Informačné poznámky poskytujú dodatočný kontext alebo neutrálne usmernenie."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var skStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Začiarkavacie políčka v tomto stĺpci sú exkluzívne. Keď používateľ vyberie, automaticky zruší začiarknutie všetkých ostatných políčok v rovnakom riadku."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var skStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rozpätie stĺpca",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu"
+    progressBarInheritWidthFrom: "Šírka oblasti indikátora priebehu",
+    // [Auto-translated] "Theme name"
+    themeName: "Názov témy"
   },
   theme: {
     // "Advanced mode"

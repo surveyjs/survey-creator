@@ -67,7 +67,9 @@ import {
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
-  CreatorThemeSelectedEvent
+  CreatorThemeSelectedEvent,
+  AllowInplaceEditEvent,
+  AllowAddElementEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -230,6 +232,7 @@ export class SurveyCreatorModel extends Base
    *
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
    * @see useElementTitles
+   * @see onAllowInplaceEdit
    */
   @property({ defaultValue: false }) inplaceEditChoiceValues: boolean;
   /**
@@ -670,6 +673,10 @@ export class SurveyCreatorModel extends Base
    * @see onCollectionItemAllowOperations
    */
   public onElementAllowOperations: EventBase<SurveyCreatorModel, ElementAllowOperationsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementAllowOperationsEvent>();
+  /**
+   * An event that is raised before adding an element to the survey. Use it to control which elements can be added by allowing or preventing the action.
+   */
+  public onAllowAddElement: EventBase<SurveyCreatorModel, AllowAddElementEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowAddElementEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains [adorners](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#specify-adorner-availability) for a survey element. Use this event to hide and modify predefined adorners or add a custom adorner.
@@ -1517,6 +1524,7 @@ export class SurveyCreatorModel extends Base
     super.locStrsChanged();
     this.tabbedMenu.locStrsChanged();
     this.toolbar.locStrsChanged();
+    this.sidebar.locStrsChanged();
   }
   private refreshPlugin() {
     const plugin = this.currentPlugin;
@@ -1741,12 +1749,7 @@ export class SurveyCreatorModel extends Base
       SurveyHelper.warnText("showSidebar is a boolean property now.");
       return;
     }
-    if (this.showSidebar === val) return;
     this.setShowSidebar(val, true);
-    if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
-      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
-      this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
-    }
   }
   public setSidebarEnabled(value: boolean) {
     this.setShowSidebar(value, true);
@@ -1754,7 +1757,6 @@ export class SurveyCreatorModel extends Base
     designerPlugin?.setSidebarEnabled(value);
   }
   public setShowSidebar(value: boolean, isManualMode = false) {
-    this.showSidebarValue = value;
     if (isManualMode) {
       if (value) {
         this.sidebar.expandedManually = true;
@@ -1762,8 +1764,14 @@ export class SurveyCreatorModel extends Base
         this.sidebar.collapsedManually = true;
       }
     }
+    if (this.showSidebar === value) return;
+    this.showSidebarValue = value;
     this.updateToolboxIsCompact();
     this.onShowSidebarVisibilityChanged.fire(this, { show: value });
+    if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
+      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
+      this.onShowPropertyGridVisiblityChanged.fire(this, { show: value });
+    }
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
@@ -2282,6 +2290,7 @@ export class SurveyCreatorModel extends Base
     if (!!this.undoRedoController) {
       this.undoRedoController.updateSurvey();
     }
+    this.doOnElementsChanged("");
   }
   private updatePlugin(name: string): void {
     const plugin = this.getPlugin(this.activeTab);
@@ -2533,6 +2542,34 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
   }
+  public onElementTypeRestrictionChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  private doOnElementsChanged(type: string): void {
+    if (this.onAllowAddElement.isEmpty) return;
+    const operations = ["ADDED_FROM_TOOLBOX", "ADDED_FROM_PAGEBUTTON", "ELEMENT_COPIED", "QUESTION_CONVERTED", "OBJECT_DELETED"];
+    if (!!type && operations.indexOf(type) < 0) return;
+    this.toolbox.items.forEach(item => {
+      const options = { name: item.name, toolboxItem: item, json: item.json, allow: true };
+      this.onAllowAddElement.fire(this, options);
+      const restricted = !options.allow;
+      if (item.isDisabledByRestriction !== restricted) {
+        item.isDisabledByRestriction = restricted;
+        this.onElementTypeRestrictionChanged.fire(this, { elType: item.name });
+      }
+    });
+  }
+  private isToolboxItemDisabledByRestriction(element: SurveyElement): boolean {
+    const name = element?.getType();
+    if (!name || this.onAllowAddElement.isEmpty) return false;
+    const item = this.toolbox.getActionById(name);
+    if (!!item && item.isDisabledByRestriction) return true;
+    const elements = element["elements"] || element["templateElements"];
+    if (Array.isArray(elements)) {
+      for (let i = 0; i < elements.length; i++) {
+        if (this.isToolboxItemDisabledByRestriction(elements[i])) return true;
+      }
+    }
+    return false;
+  }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
     var page = this.getPageByElement(panel);
@@ -2783,6 +2820,7 @@ export class SurveyCreatorModel extends Base
   public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
+    this.doOnElementsChanged(options.type);
     this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
@@ -4404,7 +4442,7 @@ export class SurveyCreatorModel extends Base
       obj: element,
       element: element,
       allowDelete: true,
-      allowCopy: true,
+      allowCopy: !this.isToolboxItemDisabledByRestriction(element),
       allowDragging: allowDragDefault,
       allowDrag: allowDragDefault,
       allowChangeType: true,
@@ -4680,6 +4718,18 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+
+  /**
+   * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
+   * @see inplaceEditChoiceValues
+   */
+  public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();
+
+  public isStringInplacelyEditable(element: Base, stringName: string, item?: ItemValue) {
+    const options = { element, item, propertyName: stringName, allow: !this.readOnly && !!isStringEditable(element, stringName) };
+    this.onAllowInplaceEdit.fire(this, options);
+    return options.allow;
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
@@ -4716,15 +4766,15 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     }
     opt.data = opt.data || data;
   });
-  model.getRendererForString = (element: Base, name: string): string => {
-    if (!creator.readOnly && isStringEditable(element, name)) {
+  model.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
+    if (creator.isStringInplacelyEditable(element, name, item)) {
       return editableStringRendererName;
     }
     return undefined;
   };
 
-  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-    if (!creator.readOnly && isStringEditable(element, locStr.name)) {
+  model.getRendererContextForString = (element: Base, locStr: LocalizableString, item?: ItemValue): any => {
+    if (creator.isStringInplacelyEditable(element, locStr.name, item)) {
       return {
         creator: creator,
         element,

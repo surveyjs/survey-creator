@@ -798,6 +798,10 @@ export var hebrewStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "כל אפשרות בעמודה נפרדת"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "ניקוי אחרים באותה שורה"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "שם",
@@ -1317,10 +1321,12 @@ export var hebrewStrings = {
     // "Regular expression"
     regex: "ביטוי רגולרי",
     surveyvalidator: {
-      // "Error message"
-      text: "הודעת שגיאה",
+      // [Auto-translated] "Validation message"
+      text: "הודעת אימות",
       // [Auto-translated] "Validation expression"
-      expression: "ביטוי אימות"
+      expression: "ביטוי אימות",
+      // [Auto-translated] "Notification type"
+      notificationType: "סוג הודעה"
     },
     // "Total row header"
     totalText: "טקסט לשורת סיכום",
@@ -2062,6 +2068,14 @@ export var hebrewStrings = {
       // [Auto-translated] "Range"
       range: "טווח"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "שגיאה",
+      // [Auto-translated] "Warning"
+      warning: "אזהרה",
+      // [Auto-translated] "Informational"
+      info: "אינפורמטיבי"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "שם מלא",
@@ -2749,7 +2763,9 @@ export var hebrewStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "השתמש בסמל שרביט הקסמים כדי להגדיר מתי ערך השאלה נחשב חוקי."
+      expression: "השתמש בסמל שרביט הקסמים כדי להגדיר מתי ערך השאלה נחשב חוקי.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "מציין את סוג ההודעה המוצגת למשתמשים. שגיאות חוסמות את ההתקדמות עד לפתרון. אזהרות מדגישות בעיות אך מאפשרות להמשיך. הערות אינפורמטיביות מספקות הקשר נוסף או הנחיות ניטרליות."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "הפיכת תיבות הסימון בעמודה זו לבלעדיות. כאשר הוא נבחר על-ידי משתמש, הוא יבטל באופן אוטומטי את הבחירה בכל תיבות הסימון האחרות באותה שורה."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var hebrewStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "טווח עמודות",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות"
+    progressBarInheritWidthFrom: "רוחב אזור מד התקדמות",
+    // [Auto-translated] "Theme name"
+    themeName: "שם ערכת נושא"
   },
   theme: {
     // "Advanced mode"

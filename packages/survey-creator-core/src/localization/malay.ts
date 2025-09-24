@@ -798,6 +798,10 @@ export var msStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsyen dalam lajur berasingan"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Kosongkan yang lain dalam baris yang sama"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nama",
@@ -1317,10 +1321,12 @@ export var msStrings = {
     // "Regular expression"
     regex: "Ekspresi biasa",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Mesej ralat",
+      // [Auto-translated] "Validation message"
+      text: "Mesej pengesahan",
       // [Auto-translated] "Validation expression"
-      expression: "Ungkapan pengesahihan"
+      expression: "Ungkapan pengesahihan",
+      // [Auto-translated] "Notification type"
+      notificationType: "Jenis pemberitahuan"
     },
     // "Total row header"
     totalText: "Jumlah teks",
@@ -2062,6 +2068,14 @@ export var msStrings = {
       // [Auto-translated] "Range"
       range: "Pelbagai"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Ralat",
+      // [Auto-translated] "Warning"
+      warning: "Amaran",
+      // [Auto-translated] "Informational"
+      info: "Bermaklumat"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nama Penuh",
@@ -2749,7 +2763,9 @@ export var msStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah."
+      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Menentukan jenis pemberitahuan yang ditunjukkan kepada pengguna. Ralat menyekat kemajuan sehingga diselesaikan. Amaran menyerlahkan isu tetapi membenarkan untuk diteruskan. Nota antarabangsa memberikan konteks tambahan atau panduan neutral."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var msStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Menjadikan kotak semak dalam lajur ini eksklusif. Apabila dipilih oleh pengguna, mereka akan menyahpilih semua kotak semak lain dalam baris yang sama secara automatik."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var msStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Rentang lajur",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan"
+    progressBarInheritWidthFrom: "Lebar kawasan bar kemajuan",
+    // [Auto-translated] "Theme name"
+    themeName: "Nama tema"
   },
   theme: {
     // "Advanced mode"

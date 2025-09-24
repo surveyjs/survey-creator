@@ -798,6 +798,10 @@ export var nbStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hvert alternativ i en egen kolonne"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Fjern andre i samme rad"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Navn",
@@ -1317,10 +1321,12 @@ export var nbStrings = {
     // "Regular expression"
     regex: "Regular expression",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Feilmelding",
+      // [Auto-translated] "Validation message"
+      text: "Melding om validering",
       // [Auto-translated] "Validation expression"
-      expression: "Uttrykk for validering"
+      expression: "Uttrykk for validering",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type varsling"
     },
     // "Total row header"
     totalText: "Total tekst",
@@ -2062,6 +2068,14 @@ export var nbStrings = {
       // [Auto-translated] "Range"
       range: "Rekkevidde"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Feil",
+      // [Auto-translated] "Warning"
+      warning: "Advarsel",
+      // [Auto-translated] "Informational"
+      info: "Informativ"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fullt navn",
@@ -2749,7 +2763,9 @@ export var nbStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig."
+      expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Angir hvilken type varsling som vises til brukere. Feil blokkerer fremdriften til den løses. Advarsler fremhever problemer, men lar dem fortsette. Infornational notater gir ytterligere kontekst eller nøytral veiledning."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var nbStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Gjør dette valget eksklusivt. Når den velges av en bruker, vil den automatisk velge bort alle andre alternativer i spørsmålet.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Gjør avmerkingsbokser i denne kolonnen eksklusive. Når de velges av en bruker, vil de automatisk fjerne merket for alle andre avmerkingsbokser i samme rad."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Velg om store og små bokstaver i det regulære uttrykket må behandles som likeverdige.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var nbStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Spaltespenn",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde"
+    progressBarInheritWidthFrom: "Bredde på fremdriftslinjeområde",
+    // [Auto-translated] "Theme name"
+    themeName: "Tema navn"
   },
   theme: {
     // "Advanced mode"

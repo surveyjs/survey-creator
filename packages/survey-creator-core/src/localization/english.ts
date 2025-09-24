@@ -424,6 +424,9 @@ export var enStrings = {
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column"
     },
+    matrixcolumn: {
+      isExclusive: "Clear others in the same row"
+    },
     multipletextitem: {
       name: "Name",
       title: "Title"
@@ -691,8 +694,9 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
     surveyvalidator: {
-      text: "Error message",
-      expression: "Validation expression"
+      text: "Validation message",
+      expression: "Validation expression",
+      notificationType: "Notification type"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",
@@ -1081,6 +1085,11 @@ export var enStrings = {
     sliderType: {
       single: "Single-Value",
       range: "Range"
+    },
+    notificationType: {
+      error: "Error",
+      warning: "Warning",
+      info: "Informational"
     },
     autocomplete: {
       name: "Full Name",
@@ -1479,7 +1488,8 @@ export var enStrings = {
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
     },
     surveyvalidator: {
-      expression: "Use the magic wand icon to define when the question's value is considered valid."
+      expression: "Use the magic wand icon to define when the question's value is considered valid.",
+      notificationType: "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
@@ -1537,6 +1547,9 @@ export var enStrings = {
       maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
     },
     isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
+    matrixcolumn: {
+      isExclusive: "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+    },
     caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
@@ -1796,7 +1809,8 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
-    progressBarInheritWidthFrom: "Progress bar area width"
+    progressBarInheritWidthFrom: "Progress bar area width",
+    themeName: "Theme name",
   },
   theme: {
     advancedMode: "Advanced mode",

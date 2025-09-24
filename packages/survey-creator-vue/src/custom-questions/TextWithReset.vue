@@ -16,7 +16,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { SvComponent } from "survey-vue3-ui";
+import { SvComponent, useBase } from "survey-vue3-ui";
 import type {
   QuestionTextWithResetModel,
   QuestionCommentWithResetModel,
@@ -31,4 +31,5 @@ const getComponentName = () => {
   return "survey-" + props.question.wrappedQuestionTemplate;
 };
 useQuestion(props, ref<HTMLElement>());
+useBase(() => props.question?.resetValueAdorner);
 </script>

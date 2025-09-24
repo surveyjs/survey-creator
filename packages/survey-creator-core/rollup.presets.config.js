@@ -8,7 +8,7 @@ import path from "path";
 const VERSION = require("./package.json").version;
 var banner = [
   "SurveyJS Creator v" + VERSION,
-  "(c) 2015-" + new Date().getFullYear() + " Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-" + new Date().getFullYear() + " Devsoft Baltic OÜ - http://surveyjs.io/", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
