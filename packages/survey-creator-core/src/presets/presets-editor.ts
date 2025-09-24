@@ -192,6 +192,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onUpdateQuestionCssClasses.add(function(_, options) {
       editablePresets.forEach(item => {
         if (item.getMainElementNames().indexOf(options.question.name) >= 0) {
+          options.cssClasses.mainRoot += " sps-question--main";
           options.cssClasses.row += " sps-table__row--main";
           options.cssClasses.buttonAdd += " sps-matrixdynamic__add-btn--icon";
           options.cssClasses.iconAdd = "sps-matrixdynamic__add-btn-icon";
@@ -201,9 +202,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     model.onUpdatePanelCssClasses.add(function(_, options) {
       editablePresets.forEach(item => {
-        if (options.panel.name === item.getMainPanelName()) {
-          options.cssClasses.panel.content += " sps-panel__content--main";
-        }
         if (options.panel.name === item.getNavigationElementName()) {
           options.cssClasses.panel.container += " sps-panel--navigation";
         }

@@ -19,12 +19,10 @@
   position: relative;
   display: flex;
   flex-direction: row-reverse;
-  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x400, 32px);;
+  padding: var(--sjs2-spacing-x150, 12px);
   align-items: center;
   gap: var(--sjs2-spacing-x150, 12px);
-  border-radius: 0;
-  border: none;
-  border-top: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+
   .sps-panel__header {
      width: auto;
      flex-grow: 1;
