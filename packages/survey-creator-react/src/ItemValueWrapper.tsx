@@ -1,9 +1,11 @@
-import { getLocString, ItemValueWrapperViewModel } from "survey-creator-core";
+import { getLocString, ItemValueWrapperViewModel, SurveyCreatorModel } from "survey-creator-core";
 import * as React from "react";
-import { QuestionSelectBase, Base, ItemValue } from "survey-core";
+import { QuestionSelectBase, Base, ItemValue, PanelModel, SurveyModel } from "survey-core";
 import {
   attachKey2click,
+  ISurveyCreator,
   ReactElementFactory,
+  SurveyPanel,
   SvgIcon
 } from "survey-react-ui";
 import { CreatorModelElement } from "./ModelElement";
@@ -97,34 +99,37 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     const itemkey = this.props.element.key + (this.model.allowAdd ? "_new" : "");
 
     return (
-      <div
-        ref={this.rootRef}
-        className={
-          "svc-item-value-wrapper" +
+      <>
+        <div
+          ref={this.rootRef}
+          className={
+            "svc-item-value-wrapper" +
           (this.model.allowAdd ? " svc-item-value--new" : "") +
           (this.model.isDragging ? " svc-item-value--dragging" : "") +
           (this.model.isDragDropGhost ? " svc-item-value--ghost" : "") +
           (this.model.isDragDropMoveDown ? " svc-item-value--movedown" : "") +
           (this.model.isDragDropMoveUp ? " svc-item-value--moveup" : "")
-        }
-        key={itemkey}
-        data-sv-drop-target-item-value={
-          this.model.isDraggable ? this.model.item.value : undefined
-        }
-        onPointerDown={(event: any) => this.model.onPointerDown(event)}
-      >
-        <div className="svc-item-value__ghost"></div>
+          }
+          key={itemkey}
+          data-sv-drop-target-item-value={
+            this.model.isDraggable ? this.model.item.value : undefined
+          }
+          onPointerDown={(event: any) => this.model.onPointerDown(event)}
+        >
+          <div className="svc-item-value__ghost"></div>
 
-        <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div>
+          <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div>
 
-        <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event.nativeEvent)}>{this.props.element}</div>
-        {this.renderPanelAction()}
-      </div>
+          <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event.nativeEvent)}>{this.props.element}</div>
+          {this.renderPanelAction()}
+        </div>
+        {this.renderPanel()}
+      </>
     );
   }
   private renderPanelAction(): React.JSX.Element | null {
     if (!this.model.canShowPanel()) return null;
-    const icName = this.model.showPanel ? "icon-remove_16x16" : "icon-add_16x16";
+    const icName = this.model.showPanel ? "icon-collapsepanel-16x16" : "icon-expandpanel-16x16";
     const btn = attachKey2click(<span
       role="button"
       className="svc-item-value-controls__button svc-item-value-controls__add"
@@ -136,7 +141,23 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     </span>);
     return <div className="svc-item-value-controls">{btn}</div>;
   }
+  private renderPanel(): React.JSX.Element | null {
+    if (!this.model.showPanel) return null;
+    const creator = this.model.creator;
+    const survey = creator.survey;
+    return <ChoiceItemPanel element={this.model.item.panel} survey={survey} creator={creator} css={survey.getCss()}></ChoiceItemPanel>;
+  }
 }
+
+const ChoiceItemPanel = React.memo(({ element, survey, creator, css }: {
+  element: PanelModel,
+  survey: SurveyModel,
+  creator: SurveyCreatorModel,
+  css: any,
+}) => {
+  return <SurveyPanel element={element} survey={survey} creator={creator} css={css} />;
+});
+ChoiceItemPanel.displayName = "ChoiceItemPanel";
 
 ReactElementFactory.Instance.registerElement(
   "svc-item-value",

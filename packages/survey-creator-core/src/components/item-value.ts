@@ -265,7 +265,9 @@ export class ItemValueWrapperViewModel extends Base {
   }
   public set showPanel(val: boolean) {
     if (val && !this.canShowPanel()) return;
-    this.item.showPanel = val;
+    if (val) {
+      this.item.panel.onFirstRendering();
+    }
     this.setPropertyValue("showPanel", val);
   }
   public togglePanel(): void {

@@ -1132,9 +1132,9 @@ test("Show/hide choiceitem panel", (): any => {
   expect(selectAllItemAdorner.canShowPanel()).toBeFalsy();
   const secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
   expect(secondItemAdorner.canShowPanel()).toBeFalsy();
-  expect(firstItemAdorner.isPanelShowing).toBeFalsy();
+  expect(firstItemAdorner.showPanel).toBeFalsy();
+  expect(firstItemAdorner.item.panel.wasRendered).toBeFalsy();
   firstItemAdorner.togglePanel();
-  expect(firstItemAdorner.isPanelShowing).toBeTruthy();
-  firstItemAdorner.togglePanel();
-  expect(firstItemAdorner.isPanelShowing).toBeFalsy();
+  expect(firstItemAdorner.showPanel).toBeTruthy();
+  expect(firstItemAdorner.item.panel.wasRendered).toBeTruthy();
 });
