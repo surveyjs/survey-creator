@@ -131,7 +131,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             this.createItemsMatrixJSON({
               allowAddRows: true,
               title: "Unsorted items",
-              description: "Drag an item from this column to the left one — it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
+              description: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
               descriptionLocation: "underInput",
               addRowButtonLocation: "bottom",
               addRowText: "Add a new item",

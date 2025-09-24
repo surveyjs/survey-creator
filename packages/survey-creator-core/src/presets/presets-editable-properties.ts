@@ -293,7 +293,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             this.createItemsMatrixJSON({
               title: "Unsorted items",
               name: this.nameMatrix,
-              description: "Drag an item from this column to the left one — it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
+              description: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
               descriptionLocation: "underInput",
               startWithNewLine: false,
             })
