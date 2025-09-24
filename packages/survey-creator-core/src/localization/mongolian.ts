@@ -1321,10 +1321,12 @@ export var mnStrings = {
     // "Regular expression"
     regex: "Тогтмол илэрхийлэл",
     surveyvalidator: {
-      // "Error message"
-      text: "Алдаа",
+      // [Auto-translated] "Validation message"
+      text: "Баталгаажуулах захиас",
       // [Auto-translated] "Validation expression"
-      expression: "Баталгаажуулалтын илэрхийлэл"
+      expression: "Баталгаажуулалтын илэрхийлэл",
+      // [Auto-translated] "Notification type"
+      notificationType: "Мэдэгдлийн төрөл"
     },
     // "Total row header"
     totalText: "Нийт мөр",
@@ -2066,6 +2068,14 @@ export var mnStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Алдаа",
+      // [Auto-translated] "Warning"
+      warning: "Анхааруулга",
+      // [Auto-translated] "Informational"
+      info: "Мэдээлэл"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Бүтэн нэр",
@@ -2753,7 +2763,9 @@ export var mnStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла."
+      expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Хэрэглэгчдэд үзүүлэх мэдэгдлийн төрлийг тодорхойлно. Алдаа нь шийдвэрлэгдэх хүртэл хөгжил дэвшлийг зогсоодог. Сэрэмжлүүлэг нь асуудлуудыг тодотгож байгаа ч үргэлжлүүлэхийг зөвшөөрдөг. Infornational notes нь нэмэлт хам сэдэв эсвэл төвийг сахисан удирдамж өгдөг."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

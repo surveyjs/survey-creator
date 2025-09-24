@@ -1321,10 +1321,12 @@ export var slStrings = {
     // "Regular expression"
     regex: "Regularni izraz",
     surveyvalidator: {
-      // "Error message"
-      text: "Sporočilo o napaki",
+      // [Auto-translated] "Validation message"
+      text: "Potrditveno sporočilo",
       // [Auto-translated] "Validation expression"
-      expression: "Validacijski izraz"
+      expression: "Validacijski izraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Vrsta obvestila"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",
@@ -2066,6 +2068,14 @@ export var slStrings = {
       // [Auto-translated] "Range"
       range: "Razpon"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Napaka",
+      // [Auto-translated] "Warning"
+      warning: "Opozorilo",
+      // [Auto-translated] "Informational"
+      info: "Informativne"
+    },
     autocomplete: {
       // "Full Name"
       name: "Celé jméno",
@@ -2753,7 +2763,9 @@ export var slStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno."
+      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Določa vrsto obvestila, ki je prikazano uporabnikom. Napake blokirajo napredek, dokler niso odpravljene. Opozorila poudarjajo težave, vendar omogočajo nadaljevanje. Informativne opombe zagotavljajo dodaten kontekst ali nevtralne smernice."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

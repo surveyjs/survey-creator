@@ -1321,10 +1321,12 @@ export var msStrings = {
     // "Regular expression"
     regex: "Ekspresi biasa",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Mesej ralat",
+      // [Auto-translated] "Validation message"
+      text: "Mesej pengesahan",
       // [Auto-translated] "Validation expression"
-      expression: "Ungkapan pengesahihan"
+      expression: "Ungkapan pengesahihan",
+      // [Auto-translated] "Notification type"
+      notificationType: "Jenis pemberitahuan"
     },
     // "Total row header"
     totalText: "Jumlah teks",
@@ -2066,6 +2068,14 @@ export var msStrings = {
       // [Auto-translated] "Range"
       range: "Pelbagai"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Ralat",
+      // [Auto-translated] "Warning"
+      warning: "Amaran",
+      // [Auto-translated] "Informational"
+      info: "Bermaklumat"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nama Penuh",
@@ -2753,7 +2763,9 @@ export var msStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah."
+      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Menentukan jenis pemberitahuan yang ditunjukkan kepada pengguna. Ralat menyekat kemajuan sehingga diselesaikan. Amaran menyerlahkan isu tetapi membenarkan untuk diteruskan. Nota antarabangsa memberikan konteks tambahan atau panduan neutral."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

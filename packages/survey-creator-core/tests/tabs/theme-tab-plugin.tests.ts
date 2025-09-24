@@ -1081,12 +1081,20 @@ test("Reset theme action availability", (): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   const resetThemeAction = themePlugin["resetTheme"];
   themePlugin.activate();
-  const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-  const isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
-  const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
-  const backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
-  const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  let isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
+  let colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
+  let backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
+  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
+  const updateEditors = () => {
+    propertyGridSurvey = themePlugin.propertyGrid.survey;
+    themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+    isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
+    colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
+    backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
+    primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
+  };
 
   expect(themeChooser.value).toBe("default");
   expect(resetThemeAction.enabled).toBeFalsy();
@@ -1094,34 +1102,73 @@ test("Reset theme action availability", (): any => {
   propertyGridSurvey.getQuestionByName("themeName").value = "flat";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(themeChooser.value).toBe("default");
 
   isPanelless.value = true;
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(isPanelless.value).toBe(false);
 
   colorPalette.value = "dark";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(colorPalette.value).toBe("light");
 
   backgroundImage.value = "image.png";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(backgroundImage.value).toBe("");
 
   primaryBackColor.value = "red";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(primaryBackColor.value).toBe("rgba(25, 179, 148, 1)");
 
   surveySettings.confirmActionAsync = originalCallback;
+});
+
+test("Reset theme action - header editors visibility still working", (): any => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    callback(true);
+    return true;
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const resetThemeAction = themePlugin["resetTheme"];
+  themePlugin.activate();
+  let groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  let headerViewContainer = groupHeader.elements[0].contentPanel;
+  let headerView = headerViewContainer.getElementByName("headerView");
+  let logoPosition = headerViewContainer.getElementByName("logoPosition");
+
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(headerView.value).toBe("advanced");
+  expect(logoPosition.isVisible).toBeFalsy();
+  headerView.value = "basic";
+  expect(logoPosition.isVisible).toBeTruthy();
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+
+  groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  headerViewContainer = groupHeader.elements[0].contentPanel;
+  headerView = headerViewContainer.getElementByName("headerView");
+  logoPosition = headerViewContainer.getElementByName("logoPosition");
+  expect(headerView.value).toBe("advanced");
+  expect(logoPosition.isVisible).toBeFalsy();
+  headerView.value = "basic";
+  expect(logoPosition.isVisible).toBeTruthy();
 });
 
 test("Custom theme assigned to creator", (): any => {

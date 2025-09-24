@@ -1321,10 +1321,12 @@ export var nbStrings = {
     // "Regular expression"
     regex: "Regular expression",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Feilmelding",
+      // [Auto-translated] "Validation message"
+      text: "Melding om validering",
       // [Auto-translated] "Validation expression"
-      expression: "Uttrykk for validering"
+      expression: "Uttrykk for validering",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type varsling"
     },
     // "Total row header"
     totalText: "Total tekst",
@@ -2066,6 +2068,14 @@ export var nbStrings = {
       // [Auto-translated] "Range"
       range: "Rekkevidde"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Feil",
+      // [Auto-translated] "Warning"
+      warning: "Advarsel",
+      // [Auto-translated] "Informational"
+      info: "Informativ"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fullt navn",
@@ -2753,7 +2763,9 @@ export var nbStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig."
+      expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Angir hvilken type varsling som vises til brukere. Feil blokkerer fremdriften til den løses. Advarsler fremhever problemer, men lar dem fortsette. Infornational notater gir ytterligere kontekst eller nøytral veiledning."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

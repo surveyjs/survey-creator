@@ -1321,10 +1321,12 @@ export var turkishStrings = {
     // "Regular expression"
     regex: "Düzenli ifade",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Hata mesajı",
+      // [Auto-translated] "Validation message"
+      text: "Doğrulama iletisi",
       // [Auto-translated] "Validation expression"
-      expression: "Doğrulama ifadesi"
+      expression: "Doğrulama ifadesi",
+      // [Auto-translated] "Notification type"
+      notificationType: "Bildirim türü"
     },
     // "Total row header"
     totalText: "Toplam metni",
@@ -2066,6 +2068,14 @@ export var turkishStrings = {
       // [Auto-translated] "Range"
       range: "Aralık"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Hata",
+      // [Auto-translated] "Warning"
+      warning: "Uyarı",
+      // [Auto-translated] "Informational"
+      info: "Bilgi"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Adınız ve Soyadınız",
@@ -2753,7 +2763,9 @@ export var turkishStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın."
+      expression: "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Kullanıcılara gösterilen bildirimin türünü belirtir. Hatalar, çözülene kadar ilerlemeyi engeller. Uyarılar sorunları vurgular ancak devam etmesine izin verir. Bilgi notları ek bağlam veya tarafsız rehberlik sağlar."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

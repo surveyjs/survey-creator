@@ -1321,10 +1321,12 @@ export var persianStrings = {
     // "Regular expression"
     regex: "فرمت صحیح عبارت ",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "پیام خطا",
+      // [Auto-translated] "Validation message"
+      text: "پیام اعتبارسنجی",
       // [Auto-translated] "Validation expression"
-      expression: "عبارت اعتبارسنجی"
+      expression: "عبارت اعتبارسنجی",
+      // [Auto-translated] "Notification type"
+      notificationType: "نوع اعلان"
     },
     // "Total row header"
     totalText: "متن کامل",
@@ -2066,6 +2068,14 @@ export var persianStrings = {
       // [Auto-translated] "Range"
       range: "محدوده"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "خطا",
+      // [Auto-translated] "Warning"
+      warning: "هشدار",
+      // [Auto-translated] "Informational"
+      info: "اطلاعاتی"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "نام و نام خانوادگی",
@@ -2753,7 +2763,9 @@ export var persianStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید."
+      expression: "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "نوع اعلانی را که به کاربران نشان داده می شود مشخص می کند. خطاها پیشرفت را تا زمانی که حل نشوند مسدود می کنند. هشدارها مشکلات را برجسته می کنند اما اجازه ادامه می دهند. یادداشت های Infornational زمینه اضافی یا راهنمایی خنثی را ارائه می دهند."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

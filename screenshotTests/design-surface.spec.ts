@@ -4,6 +4,7 @@ const title = "Design Surface";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
+    await page.waitForLoadState("networkidle");
     await page.goto(`${url}`);
   });
 

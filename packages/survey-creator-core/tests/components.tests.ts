@@ -1100,10 +1100,10 @@ test("QuestionImageAdornerViewModel updated on locale changed", () => {
   const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
   const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
 
-  expect(imageAdorner.isEmptyImageLink).toBeTruthy();
+  expect(imageAdorner.isEmptyElement).toBeTruthy();
 
   creator.survey.locale = "fr";
-  expect(imageAdorner.isEmptyImageLink).toBeFalsy();
+  expect(imageAdorner.isEmptyElement).toBeFalsy();
 });
 
 test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
@@ -1111,11 +1111,11 @@ test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
   const question = new QuestionImageModel("q1");
   question.imageLink = "test";
   const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
-  expect(imageAdorner.isEmptyImageLink).toBeFalsy();
+  expect(imageAdorner.isEmptyElement).toBeFalsy();
   imageAdorner.detachFromUI();
   expect(imageAdorner.question).toBeUndefined();
   imageAdorner.imageLinkValueChangedHandler();
-  expect(imageAdorner.isEmptyImageLink).toBeTruthy();
+  expect(imageAdorner.isEmptyElement).toBeTruthy();
 });
 test("Show/hide choiceitem panel", (): any => {
   const creator = new CreatorTester();

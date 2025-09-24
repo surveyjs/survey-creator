@@ -1321,10 +1321,12 @@ export var ruStrings = {
     // "Regular expression"
     regex: "Регулярное выражение",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Сообщение об ошибке",
+      // [Auto-translated] "Validation message"
+      text: "Сообщение о проверке",
       // [Auto-translated] "Validation expression"
-      expression: "Проверочное выражение"
+      expression: "Проверочное выражение",
+      // [Auto-translated] "Notification type"
+      notificationType: "Тип уведомления"
     },
     // "Total row header"
     totalText: "Общий текст",
@@ -2066,6 +2068,14 @@ export var ruStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Ошибка",
+      // [Auto-translated] "Warning"
+      warning: "Предупреждение",
+      // [Auto-translated] "Informational"
+      info: "Информационный"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Полное имя",
@@ -2753,7 +2763,9 @@ export var ruStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным."
+      expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Указывает тип уведомления, отображаемого пользователям. Ошибки блокируют прогресс до тех пор, пока не будут устранены. Предупреждения указывают на проблемы, но позволяют продолжить. Информационные заметки содержат дополнительный контекст или нейтральное руководство."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -694,8 +694,9 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
     surveyvalidator: {
-      text: "Error message",
-      expression: "Validation expression"
+      text: "Validation message",
+      expression: "Validation expression",
+      notificationType: "Notification type"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",
@@ -1084,6 +1085,11 @@ export var enStrings = {
     sliderType: {
       single: "Single-Value",
       range: "Range"
+    },
+    notificationType: {
+      error: "Error",
+      warning: "Warning",
+      info: "Informational"
     },
     autocomplete: {
       name: "Full Name",
@@ -1482,7 +1488,8 @@ export var enStrings = {
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
     },
     surveyvalidator: {
-      expression: "Use the magic wand icon to define when the question's value is considered valid."
+      expression: "Use the magic wand icon to define when the question's value is considered valid.",
+      notificationType: "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",

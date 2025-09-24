@@ -1321,10 +1321,12 @@ export var simplifiedChineseTranslation = {
     // "Regular expression"
     regex: "正则表达式",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "错误信息",
+      // [Auto-translated] "Validation message"
+      text: "验证消息",
       // [Auto-translated] "Validation expression"
-      expression: "验证表达式"
+      expression: "验证表达式",
+      // [Auto-translated] "Notification type"
+      notificationType: "通知类型"
     },
     // "Total row header"
     totalText: "总文本",
@@ -2066,6 +2068,14 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Range"
       range: "范围"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "错误",
+      // [Auto-translated] "Warning"
+      warning: "警告",
+      // [Auto-translated] "Informational"
+      info: "信息"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "全名",
@@ -2753,7 +2763,9 @@ export var simplifiedChineseTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "使用魔杖图标定义问题值何时被视为有效。"
+      expression: "使用魔杖图标定义问题值何时被视为有效。",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "指定向用户显示的通知类型。错误会阻止进度，直到解决。警告突出显示问题，但允许继续。Infornational 说明提供了额外的背景信息或中立的指导。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

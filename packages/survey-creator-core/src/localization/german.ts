@@ -1321,10 +1321,12 @@ export var germanTranslation = {
     // "Regular expression"
     regex: "Regulärer Ausdruck",
     surveyvalidator: {
-      // "Error message"
-      text: "Fehlermeldung",
+      // [Auto-translated] "Validation message"
+      text: "Validierungsmeldung",
       // [Auto-translated] "Validation expression"
-      expression: "Validierungs-Ausdruck"
+      expression: "Validierungs-Ausdruck",
+      // [Auto-translated] "Notification type"
+      notificationType: "Art der Meldung"
     },
     // "Total row header"
     totalText: "Text (total)",
@@ -2066,6 +2068,14 @@ export var germanTranslation = {
       // [Auto-translated] "Range"
       range: "Bereich"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fehler",
+      // [Auto-translated] "Warning"
+      warning: "Warnung",
+      // [Auto-translated] "Informational"
+      info: "Mitteilsam"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Vollständiger Name",
@@ -2753,7 +2763,9 @@ export var germanTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt."
+      expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Gibt den Typ der Benachrichtigung an, die Benutzern angezeigt wird. Fehler blockieren den Fortschritt, bis sie behoben sind. Warnungen weisen auf Probleme hin, lassen aber zu, dass fortgefahren wird. Infornationale Anmerkungen bieten zusätzlichen Kontext oder neutrale Orientierungshilfen."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

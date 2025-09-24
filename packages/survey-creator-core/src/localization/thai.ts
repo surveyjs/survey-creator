@@ -1321,10 +1321,12 @@ export const thStrings = {
     // "Regular expression"
     regex: "นิพจน์ปกติ",
     surveyvalidator: {
-      // "Error message"
-      text: "ข้อความข้อผิดพลาด",
+      // [Auto-translated] "Validation message"
+      text: "ข้อความการตรวจสอบความถูกต้อง",
       // [Auto-translated] "Validation expression"
-      expression: "นิพจน์การตรวจสอบความถูกต้อง"
+      expression: "นิพจน์การตรวจสอบความถูกต้อง",
+      // [Auto-translated] "Notification type"
+      notificationType: "ประเภทการแจ้งเตือน"
     },
     // "Total row header"
     totalText: "หัวแถวรวม",
@@ -2066,6 +2068,14 @@ export const thStrings = {
       // [Auto-translated] "Range"
       range: "เทือก"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "ความผิดพลาด",
+      // [Auto-translated] "Warning"
+      warning: "คำเตือน",
+      // [Auto-translated] "Informational"
+      info: "ข้อมูล"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "ชื่อ-นามสกุล",
@@ -2753,7 +2763,9 @@ export const thStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด"
+      expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "ระบุชนิดของการแจ้งเตือนที่แสดงต่อผู้ใช้ ข้อผิดพลาดจะบล็อกความคืบหน้าจนกว่าจะได้รับการแก้ไข คําเตือนจะเน้นปัญหาแต่อนุญาตให้ดําเนินการต่อ หมายเหตุ Infornational ให้บริบทเพิ่มเติมหรือคําแนะนําที่เป็นกลาง"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
