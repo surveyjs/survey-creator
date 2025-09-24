@@ -5,7 +5,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
-  private defaultIcon = "icon-pg-undefined-24x24";
+  private defaultIcon = "square-dashed-24x24";
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected hasIcon(_: string) { return false; }
