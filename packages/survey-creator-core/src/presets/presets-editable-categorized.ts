@@ -13,7 +13,9 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
   public getMainElementNames() : any { return [this.nameCategories]; }
-  protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return question.name === this.nameCategories ? "category" : "name"; }
+  protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any {
+    return question.name === this.nameCategories ? "category" : "name";
+  }
   public get questionNames() {
     return [this.nameCategories];
   }
@@ -111,7 +113,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     super.onMatrixRowAdded(model, creator, options);
     if (options.question.name == this.nameCategories) {
-      options.row.getQuestionByName("category").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.category })), "category");
+      this.setDefaultValueForRow(options.question, options.row);
     }
   }
 }
