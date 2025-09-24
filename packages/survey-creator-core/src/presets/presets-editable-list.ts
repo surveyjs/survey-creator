@@ -203,11 +203,17 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       hiddenItems.value = value;
     }
   }
+
+  protected setDefaultValueForRow(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const key = this.getMatrixKeyColumnName(question);
+    const value = SurveyHelper.getNewName((question.value || []).map(r => ({ name: r.name })), key);
+    row.getQuestionByName(key).value = value;
+    row.getQuestionByName("title").value = value;
+  }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    const key = this.getMatrixKeyColumnName(options.question);
-    const value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.name })), key);
-    options.row.getQuestionByName(key).value = value;
-    options.row.getQuestionByName("title").value = value;
+    if (this.isItemsMatrix(options.question.name)) {
+      this.setDefaultValueForRow(options.question, options.row);
+    }
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (this.needToSetActions(options.question.name)) {
