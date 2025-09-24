@@ -397,13 +397,15 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       if (rows[i].elements.indexOf(element) > -1) return rows[i];
     }
     for (var i = 0; i < panel.elements.length; i++) {
-      var pnl = panel.elements[i].getPanel();
-      if (!pnl) continue;
-      var row = this.dragDropFindRow(element, <PanelModelBase>pnl);
-      if (!!row) return row;
+      var pnls = panel.elements[i].getPanels();
+      if (Array.isArray(pnls)) {
+        for (var j = 0; j < pnls.length; j++) {
+          var row = this.dragDropFindRow(element, <PanelModelBase>pnls[j]);
+          if (!!row) return row;
+        }
+      }
     }
     return null;
-
   }
   private isSameElement(target: ISurveyElement): boolean {
     while(!!target) {
@@ -421,13 +423,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     });
     return result;
-  }
-
-  private getDragDropElementType(element: any) {
-    if (element.isPage) return ElType.Page;
-    if (element.isPanel) return ElType.Panel;
-    if (element instanceof QuestionPanelDynamicModel) return ElType.DynamicPanel;
-    return ElType.Question;
   }
 
   public dragOver(event: PointerEvent): void {
