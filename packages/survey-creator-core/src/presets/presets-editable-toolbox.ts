@@ -1,4 +1,4 @@
-import { FunctionFactory, Helpers, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
+import { Action, FunctionFactory, Helpers, IAction, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization } from "survey-creator-core";
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
@@ -181,6 +181,32 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
     return question?.name === this.nameCategories ? this.defaultCategories : [...this.defaultItems, ...this.defaultSubitems];
+  }
+
+  protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const categories = this.getQuestionCategories(model).value;
+    const actions = super.getItemMenuActions(model, question, row);
+    const catActions = [] as IAction[];
+    categories.forEach((i: any) => catActions.push(
+      new Action({
+        id: "to-" + i.category,
+        title: i.title,
+        action: () => {
+          //this.moveToCategory(model, question, row, i.category, true);
+        }
+      })));
+    actions.push(
+      new Action({
+        id: "move-as-subitem",
+        title: "Move as subitem",
+        needSeparator: true,
+        items: catActions,
+        action: () => {
+        }
+      })
+    );
+
+    return actions.map(a => new Action(a));
   }
 
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {

@@ -204,9 +204,13 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
 
+  protected getDefaultValueForRow(question: QuestionMatrixDynamicModel, key: string) {
+    return SurveyHelper.getNewName((question.value || []).map(r => ({ name: r.name })), key);
+  }
+
   protected setDefaultValueForRow(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const key = this.getMatrixKeyColumnName(question);
-    const value = SurveyHelper.getNewName((question.value || []).map(r => ({ name: r.name })), key);
+    const value = this.getDefaultValueForRow(question, key);
     row.getQuestionByName(key).value = value;
     row.getQuestionByName("title").value = value;
   }

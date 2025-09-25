@@ -1,4 +1,4 @@
-import { IAction, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
+import { Action, createDropdownActionModel, IAction, MatrixDynamicRowModel, PopupModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
 
@@ -30,6 +30,86 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         a.action = () => { this.resetCategory(model, row); };
       }
     });
+  }
+
+  private ejectRowData(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, remove: boolean) {
+    const value = question.value;
+    const rowDataIndex = question.visibleRows.indexOf(row);
+    const rowData = value[rowDataIndex];
+    if (remove) {
+      value.splice(rowDataIndex, 1);
+      question.value = value;
+    }
+  }
+
+  private moveToCategory(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, categoryName: string, remove = false) {
+    const rowData = this.ejectRowData(question, row, remove);
+    const categories = this.getQuestionCategories(model);
+    const catValue = categories.value;
+    const general = this.findOrCreateCategory(catValue, categoryName);
+    general[this.nameInnerMatrix].push(rowData);
+    categories.value = catValue;
+  }
+
+  protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const categories = this.getQuestionCategories(model).value;
+    const actions = [] as IAction[];
+    categories.forEach((i: any) => actions.push(
+      {
+        id: "to-" + i.category,
+        title: i.title,
+        action: () => {
+          this.moveToCategory(model, question, row, i.category, true);
+        }
+      }));
+    actions.push(
+      {
+        id: "move-to-new-category",
+        title: "Move to new category",
+        needSeparator: true,
+        action: () => {
+          this.moveToCategory(model, question, row, this.getDefaultValueForRow(question, "category"), true);
+        }
+      });
+
+    if (!this.getDefaultItem(question, row.value.name)) {
+      actions.push(
+        {
+          id: "remove-custom-item",
+          title: "Delete Custom Item",
+          needSeparator: true,
+          action: () => {
+            this.ejectRowData(question, row, true);
+          }
+        });
+    }
+
+    return actions.map(a => new Action(a));
+  }
+
+  protected replaceRemoveAction(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]): void {
+    const originalAction = actions.filter(a => a.id == "remove-row")[0];
+    if (originalAction) {
+      originalAction.visible = false;
+
+      const addAction = createDropdownActionModel({
+        id: "add-menu",
+        iconName: originalAction.iconName,
+        location: "end",
+        visibleIndex: 20
+      }, {
+        items: [],
+        horizontalPosition: "center"
+      });
+      addAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+        if (opt.isVisible) {
+          const listModel = opt.model.contentComponentData.model;
+          listModel.actions = this.getItemMenuActions(model, question, row);
+          listModel.flushUpdates();
+        }
+      });
+      actions.push(addAction);
+    }
   }
 
   protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
@@ -70,13 +150,10 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     categoriesQuestion.value = value;
     this.notifyCallback("Category restored to default");
   }
-  protected findOrCreateCategory(categories: any, category = null) {
+  protected findOrCreateCategory(categories: any, category?: string) {
     let generalCategory = categories.filter(c => c.category == category)[0];
     if (!generalCategory) {
-      generalCategory = categories.filter(c => c.category == "general")[0];
-    }
-    if (!generalCategory) {
-      generalCategory = { category: "general", title: "General", [this.nameInnerMatrix]: [] };
+      generalCategory = { category: category || "general", title: category || "General", [this.nameInnerMatrix]: [] };
       categories.push(generalCategory);
     }
     return generalCategory;
@@ -89,7 +166,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (options.question.name === this.nameCategories) {
       this.setupCategoryActions(model, creator, options.question, options.row, options.actions);
     }
+    if (options.question.name === this.nameMatrix) {
+      this.replaceRemoveAction(model, options.question, options.row, options.actions);
+    }
   }
+
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     super.onMatrixRowRemoving(model, creator, options);
     if (options.question.name == this.nameCategories) {
@@ -103,11 +184,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (options.question.name == this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];
       const defaultCategory = this.defaultCategories.filter(c => c[this.nameInnerMatrix].filter(i => i.name == rowData.name).length > 0)[0];
-      const categories = this.getQuestionCategories(model);
-      const catValue = categories.value;
-      const general = this.findOrCreateCategory(catValue, defaultCategory?.category);
-      general[this.nameInnerMatrix].push(rowData);
-      categories.value = catValue;
+      this.moveToCategory(model, options.question, options.row, defaultCategory?.category);
     }
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
@@ -117,3 +194,4 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
   }
 }
+
