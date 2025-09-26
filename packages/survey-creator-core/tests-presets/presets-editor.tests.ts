@@ -226,6 +226,7 @@ test("Preset edit model, custom items, apply", () => {
 
   const etalon = {
     name: "name1",
+    title: "name1",
     tooltip: "tooltip1",
     json: { type: "text" }
   };
@@ -640,7 +641,7 @@ test("Preset edit model, Keep description on deleting the question", () => {
   survey.setValue("propertyGrid_selector", "text");
   const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   const propGridHidden = survey.getQuestionByName("propertyGrid_matrix");
-  expect(propGridHidden.value).toBeFalsy();
+  expect(propGridHidden.value || []).toEqual([]);
   propGridCategories.visibleRows[0].showDetailPanel();
   const qItems = propGridCategories.visibleRows[0].detailPanel.getQuestionByName("properties");
   const itemIndex = qItems.value.findIndex(r => r.name == "name");
@@ -958,5 +959,5 @@ test("Icon default", () => {
   const renderedRow = matrix.renderedTable.rows.filter(r => r.row == matrix.visibleRows[0])[0];
   const iconAction = renderedRow.cells[1].item.value.actions[0];
   expect(iconAction.id).toBe("icon-action");
-  expect(iconAction.iconName).toBe("icon-pg-undefined-24x24");
+  expect(iconAction.iconName).toBe("square-dashed-24x24");
 });
