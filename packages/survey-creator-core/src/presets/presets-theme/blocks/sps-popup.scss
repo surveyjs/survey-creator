@@ -25,6 +25,9 @@
 }
 
 .sps-popup {
+  &.sv-popup--modal-popup {
+    z-index: 3000;
+  }
   .sps-root-modern {
     height: initial;
   }
