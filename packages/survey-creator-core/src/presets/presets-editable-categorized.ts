@@ -32,7 +32,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     });
   }
 
-  private ejectRowData(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, remove: boolean) {
+  protected ejectRowData(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, remove: boolean) {
     const value = question.value;
     const rowDataIndex = question.visibleRows.indexOf(row);
     const rowData = value[rowDataIndex];
@@ -40,6 +40,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       value.splice(rowDataIndex, 1);
       question.value = value;
     }
+    return rowData;
   }
 
   private moveToCategory(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, categoryName: string, remove = false) {
@@ -51,7 +52,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     categories.value = catValue;
   }
 
-  protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+  protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const categories = this.getQuestionCategories(model).value;
     const actions = [] as IAction[];
     categories.forEach((i: any) => actions.push(
@@ -72,19 +73,23 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         }
       });
 
+    return actions.map(a => new Action(a));
+  }
+
+  protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const actions = this.getItemMenuActionsCore(model, question, row);
     if (!this.getDefaultItem(question, row.value.name)) {
       actions.push(
-        {
+        new Action({
           id: "remove-custom-item",
           title: "Delete Custom Item",
           needSeparator: true,
           action: () => {
             this.ejectRowData(question, row, true);
           }
-        });
+        })
+      );
     }
-
-    return actions.map(a => new Action(a));
   }
 
   protected replaceRemoveAction(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]): void {
@@ -94,7 +99,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
       const addAction = createDropdownActionModel({
         id: "add-menu",
-        iconName: originalAction.iconName,
+        iconName: "more-circle-24x24",
         location: "end",
         visibleIndex: 20
       }, {

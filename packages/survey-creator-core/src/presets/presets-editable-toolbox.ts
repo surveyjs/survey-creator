@@ -183,30 +183,51 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return question?.name === this.nameCategories ? this.defaultCategories : [...this.defaultItems, ...this.defaultSubitems];
   }
 
-  protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
-    const categories = this.getQuestionCategories(model).value;
-    const actions = super.getItemMenuActions(model, question, row);
-    const catActions = [] as IAction[];
-    categories.forEach((i: any) => catActions.push(
-      new Action({
-        id: "to-" + i.category,
-        title: i.title,
-        action: () => {
-          //this.moveToCategory(model, question, row, i.category, true);
-        }
-      })));
-    actions.push(
-      new Action({
-        id: "move-as-subitem",
-        title: "Move as subitem",
-        needSeparator: true,
-        items: catActions,
-        action: () => {
-        }
-      })
-    );
+  private findItem(value: any, itemName: string) {
+    return value.map(c => c.items.filter(i => i.name == itemName)[0]).filter(i => !!i)[0];
+  }
 
-    return actions.map(a => new Action(a));
+  private moveToSubitems(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, itemName: string, remove = false) {
+    const rowData = this.ejectRowData(question, row, remove);
+    const categories = this.getQuestionCategories(model);
+    const catValue = categories.value;
+    const item = this.findItem(catValue, itemName);
+    if (item) {
+      if (!item.subitems) item.subitems = [];
+      item.subitems.push(rowData);
+    }
+    categories.value = catValue;
+  }
+
+  protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const categories = this.getQuestionCategories(model).value;
+    const actions = super.getItemMenuActionsCore(model, question, row);
+    const catActions = categories.map((c: any) => {
+      const catAction = new Action({
+        id: "tosubitemcategory-" + c.category,
+        title: c.title
+      });
+      if (c.items) {
+        const itemsActions = c.items.map((i: any) => new Action({
+          id: "tosubitem-" + i.name,
+          title: i.title,
+          action: () => {
+            this.moveToSubitems(model, question, row, i.name, true);
+          }
+        }));
+        catAction.setSubItems({ items: itemsActions });
+      }
+      return catAction;
+    }
+    );
+    const subitemsAction = new Action({
+      id: "move-as-subitem",
+      title: "Move as subitem",
+      needSeparator: true
+    });
+    subitemsAction.setSubItems({ items: catActions });
+    actions.push(subitemsAction);
+    return actions;
   }
 
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
