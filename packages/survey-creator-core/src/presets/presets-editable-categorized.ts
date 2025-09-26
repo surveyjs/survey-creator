@@ -90,6 +90,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         })
       );
     }
+    return actions;
   }
 
   protected replaceRemoveAction(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]): void {
