@@ -183,6 +183,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return question?.name === this.nameCategories ? this.defaultCategories : [...this.defaultItems, ...this.defaultSubitems];
   }
 
+  protected updateRowAction(question: QuestionMatrixDynamicModel, rowData: any, keyColumn: string, action: IAction) {
+    super.updateRowAction(question, rowData, keyColumn, action);
+    if (action.id == "show-detail" && question.name != this.nameCategories) {
+      action.visible = !!rowData.subitems;
+    }
+  }
+
   private findItem(value: any, itemName: string) {
     return value.map(c => c.items.filter(i => i.name == itemName)[0]).filter(i => !!i)[0];
   }
@@ -190,7 +197,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private moveToSubitems(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, itemName: string, remove = false) {
     const rowData = this.ejectRowData(question, row, remove);
     const categories = this.getQuestionCategories(model);
-    const catValue = categories.value;
+    const catValue = JSON.parse(JSON.stringify(categories.value));
     const item = this.findItem(catValue, itemName);
     if (item) {
       if (!item.subitems) item.subitems = [];

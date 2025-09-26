@@ -66,6 +66,10 @@
     border-top-right-radius: var(--sjs2-radius-semantic-form, 8px);
     border-bottom-right-radius: var(--sjs2-radius-semantic-form, 8px);
   }
+
+  .sps-action-bar{
+    justify-content: flex-end;
+  }
 }
 
 .sps-table__row--main > .sps-table__cell {

@@ -31,34 +31,33 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       matrix.renderedTable.rows.forEach(r => {
         if (!r.row) return;
         const iconActions = r.cells[1]?.item?.value.actions;
-        this.updateIconAction(matrix, r.row as MatrixDynamicRowModel, iconActions);
+        this.updateRowActions(matrix, r.row as MatrixDynamicRowModel, iconActions);
         const actions = r.cells[r.cells.length - 1].item?.value.actions;
-        this.updateResetAction(matrix, r.row as MatrixDynamicRowModel, actions);
+        this.updateRowActions(matrix, r.row as MatrixDynamicRowModel, actions);
       });
     }
   }
 
-  protected updateIconAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
+  protected updateRowActions(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
     if (!actions) return;
     const keyColumn = this.getMatrixKeyColumnName(question);
     if (!question.value) return;
     const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
     if (!rowData) return;
-    const iconAction = actions.filter(a => a.id == "icon-action")[0];
-    iconAction.iconName = rowData.iconName || this.defaultIcon;
+    actions.forEach(a => this.updateRowAction(question, rowData, keyColumn, a));
   }
-  protected updateResetAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]) {
-    if (!actions) return;
-    const keyColumn = this.getMatrixKeyColumnName(question);
-    if (!question.value) return;
-    const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
-    if (!rowData) return;
-    const defaultItem = this.getDefaultItem(question, rowData[keyColumn]);
-    if (!defaultItem) return;
-    const defaultData = {};
-    Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
-    const resetAction = actions.filter(a => a.id == "reset-to-default")[0];
-    resetAction.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
+
+  protected updateRowAction(question: QuestionMatrixDynamicModel, rowData: any, keyColumn: string, action: IAction) {
+    if (action.id == "icon-action") {
+      action.iconName = rowData.iconName || this.defaultIcon;
+    }
+    if (action.id == "reset-to-default") {
+      const defaultItem = this.getDefaultItem(question, rowData[keyColumn]);
+      if (!defaultItem) return;
+      const defaultData = {};
+      Object.keys(rowData).forEach(key => defaultData[key] = defaultItem[key]);
+      action.enabled = !Helpers.isTwoValueEquals(rowData, defaultData);
+    }
   }
 
   protected createResetAction(model: SurveyModel, row: MatrixDynamicRowModel, action: (action: Action) => void): IAction {
@@ -186,7 +185,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       options.actions.push(this.createEditAction(model, creator, question, options.row));
 
       this.setupStandardActions(options.actions, question, options.row, allowExpand, question.name == this.nameMatrix);
-      this.updateResetAction(question, options.row, options.actions);
+      this.updateRowActions(question, options.row, options.actions);
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
@@ -225,7 +224,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       if (!renderedRow) return;
       const actions = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions;
       if (!actions) return;
-      this.updateResetAction(options.question, options.row, actions);
+      this.updateRowActions(options.question, options.row, actions);
     }
   }
 }
