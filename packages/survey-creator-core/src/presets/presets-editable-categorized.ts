@@ -55,25 +55,49 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const categories = this.getQuestionCategories(model).value;
     const actions = [] as IAction[];
-    categories.forEach((i: any) => actions.push(
-      {
-        id: "to-" + i.category,
-        title: i.title,
-        action: () => {
-          this.moveToCategory(model, question, row, i.category, true);
-        }
-      }));
+    const isUnsorted = question.name == this.nameMatrix;
+    if (!isUnsorted) {
+      actions.push(
+        new Action({
+          id: "remove-from",
+          title: "Remove from " + question.title,
+          action: () => {
+            const rowDataIndex = question.visibleRows.indexOf(row);
+            question.removeRow(rowDataIndex);
+          }
+        })
+      );
+    }
+    const moveToCategories = categories.map((i: any) => new Action({
+      id: "to-" + i.category,
+      title: i.title,
+      action: () => {
+        this.moveToCategory(model, question, row, i.category, true);
+      }
+    }));
+    if (!isUnsorted) {
+      const catGroup = new Action({
+        id: "move-to-categories",
+        title: "Move to category...",
+        needSeparator: true
+      });
+      catGroup.setSubItems({ items: moveToCategories });
+      actions.push(catGroup);
+    } else {
+      actions.push(...moveToCategories);
+    }
+
     actions.push(
-      {
+      new Action({
         id: "move-to-new-category",
         title: "Move to new category",
-        needSeparator: true,
+        needSeparator: isUnsorted,
         action: () => {
           this.moveToCategory(model, question, row, this.getDefaultValueForRow(question, "category"), true);
         }
-      });
+      }));
 
-    return actions.map(a => new Action(a));
+    return actions;
   }
 
   protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
@@ -172,7 +196,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (options.question.name === this.nameCategories) {
       this.setupCategoryActions(model, creator, options.question, options.row, options.actions);
     }
-    if (options.question.name === this.nameMatrix) {
+    if (this.isItemsMatrix(options.question.name)) {
       this.replaceRemoveAction(model, options.question, options.row, options.actions);
     }
   }

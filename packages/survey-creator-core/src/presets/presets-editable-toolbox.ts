@@ -71,6 +71,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const newJson = { ...defaultJSON, ...props };
     if (addSubitems) {
       newJson.detailElements.push(this.createItemsMatrixJSON({
+        allowAddRows: true,
+        addRowText: "Add a new subitem",
+        addRowButtonLocation: "bottom",
         name: this.nameSubitems,
         valueName: "subitems",
         titleLocation: "hidden",
@@ -227,13 +230,34 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       return catAction;
     }
     );
-    const subitemsAction = new Action({
-      id: "move-as-subitem",
-      title: "Move as subitem",
-      needSeparator: true
-    });
-    subitemsAction.setSubItems({ items: catActions });
-    actions.push(subitemsAction);
+    const rowDataIndex = question.visibleRows.indexOf(row);
+    const rowData = question.value[rowDataIndex];
+    if (!rowData["subitems"]) {
+      if (question.name == this.nameItems || question.name == this.nameInnerMatrix) {
+        actions.push(new Action({
+          id: "convert-to-subcategory",
+          title: "Convert to subcategory...",
+          action: () => {
+            const categories = this.getQuestionCategories(model);
+            const catValue = JSON.parse(JSON.stringify(categories.value));
+            const item = this.findItem(catValue, rowData.name);
+            if (item) {
+              item.subitems = [];
+            }
+            categories.value = catValue;
+            this.updateMatrixRowActions(model, question.name);
+          }
+        }));
+      }
+      const subitemsAction = new Action({
+        id: "move-as-subitem",
+        title: "Move as subitem",
+        needSeparator: true
+      });
+      subitemsAction.setSubItems({ items: catActions });
+      actions.push(subitemsAction);
+    }
+
     return actions;
   }
 
