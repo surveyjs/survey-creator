@@ -20,7 +20,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const defaultJSON = {
       type: "matrixdynamic",
       name: "items",
-      title: "Add custom item",
+      title: "Toolbox",
       allowRowReorder: true,
       cellType: "text",
       showHeader: false,

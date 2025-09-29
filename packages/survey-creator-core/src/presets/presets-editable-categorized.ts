@@ -1,7 +1,7 @@
 import { Action, createDropdownActionModel, IAction, MatrixDynamicRowModel, PopupModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
-
+import { listComponentCss } from "./presets-theme/list-theme";
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
@@ -67,6 +67,13 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
           }
         })
       );
+    } else {
+      actions.push(new Action({
+        id: "move-to",
+        title: "Move To...",
+        css: "sps-list__item--label",
+        enabled: false
+      }));
     }
     const moveToCategories = categories.map((i: any) => new Action({
       id: "to-" + i.category,
@@ -129,7 +136,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         visibleIndex: 20
       }, {
         items: [],
-        horizontalPosition: "center"
+        showPointer: false,
+        verticalPosition: "top",
+        horizontalPosition: "center",
+        cssClass: "sps-popup-menu",
+        cssClasses: listComponentCss,
       });
       addAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
         if (opt.isVisible) {

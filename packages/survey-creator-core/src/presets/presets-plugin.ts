@@ -80,7 +80,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       showPointer: false,
       verticalPosition: "top",
       horizontalPosition: "center",
-      cssClass: "sps-popup-menu",
+      cssClass: "sps-popup-menu sps-popup-menu--always-on-top",
       cssClasses: listComponentCss,
       onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
       onShow: () => { settingsAction.iconName = "close-24x24"; }

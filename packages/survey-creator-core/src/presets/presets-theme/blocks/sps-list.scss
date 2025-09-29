@@ -62,6 +62,22 @@
   pointer-events: none;
 }
 
+.sps-list__item--label {
+  opacity: 1;
+  .sps-list__item-body {
+    display: flex;
+    padding: var(--sjs2-spacing-x050, 4px) var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x000, 0) var(--sjs2-spacing-x150, 12px);
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+
+    overflow: hidden;
+    color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
+
+    @include sjs2--typography--small-strong;
+  }
+} 
+
 .sps-list__item:focus,
 .sps-list__item:hover,
 .sps-list__item--focused,

@@ -10,7 +10,7 @@ class CreatorPresetEditorModelTester extends CreatorPresetEditorModel {
     const popupViewModel = new PopupDropdownViewModel(contextAction.popupModel); // need for popupModel.onShow
     contextAction.popupModel.show();
     const list = contextAction.popupModel.contentComponentData.model;
-    return list.actions;
+    return list.actions.filter(a => a.enabled !== false);
   }
 
   public getRowContextActions(question_name: string, item_name: string) {

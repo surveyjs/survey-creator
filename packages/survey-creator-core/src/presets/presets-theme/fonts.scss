@@ -15,18 +15,18 @@
   line-height: var(--sjs2-line-height-semantic-default, 24px); /* 150% */
 }
 @mixin sjs2--typography--default-strong {
-  /* sjs2/typography/default */
+   /* sjs2/typography/default-strong */
   font-family: var(--sjs2-font-family-semantic-default, "Open Sans");
   font-size: var(--sjs2-font-size-semantic-default, 16px);
   font-style: normal;
   font-weight: 600;
   line-height: var(--sjs2-line-height-semantic-default, 24px); /* 150% */
 }
-@mixin sjs2--typography--default-strong {
-  /* sjs2/typography/default-strong */
-  font-family: var(--sjs2-font-family-semantic-default, "Open Sans");
-  font-size: var(--sjs2-font-size-semantic-default, 16px);
+@mixin sjs2--typography--small-strong {
+  /* sjs2/typography/small-strong */
+  font-family: var(--sjs2-typography-font-family-default, "Open Sans");
+  font-size: var(--sjs2-typography-font-size-small, 12px);
   font-style: normal;
   font-weight: 600;
-  line-height: var(--sjs2-line-height-semantic-default, 24px); /* 150% */
+  line-height: var(--sjs2-typography-line-height-small, 16px); /* 133.333% */
 }

@@ -3,7 +3,9 @@
 @use "../fonts" as *;
 
 .sps-popup-menu.sv-popup--menu-popup {
-  height: unset;
+  &.sps-popup-menu--always-on-top {
+    height: unset;
+  }
   .sv-popup__container {
     border: initial;
     padding: var(--sjs2-spacing-x150, 12px);
@@ -23,6 +25,8 @@
     }
   }
 }
+
+
 
 .sps-popup {
   &.sv-popup--modal-popup {
