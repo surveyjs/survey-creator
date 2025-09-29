@@ -798,6 +798,10 @@ export var portugueseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opção em uma coluna separada"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Limpar outros na mesma linha"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nome",
@@ -1317,10 +1321,12 @@ export var portugueseTranslation = {
     // "Regular expression"
     regex: "Expressão regular",
     surveyvalidator: {
-      // "Error message"
-      text: "Mensagem de erro",
+      // [Auto-translated] "Validation message"
+      text: "Mensagem de validação",
       // [Auto-translated] "Validation expression"
-      expression: "Expressão de validação"
+      expression: "Expressão de validação",
+      // [Auto-translated] "Notification type"
+      notificationType: "Tipo de notificação"
     },
     // "Total row header"
     totalText: "Texto total da linha",
@@ -2062,6 +2068,14 @@ export var portugueseTranslation = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Erro",
+      // [Auto-translated] "Warning"
+      warning: "Aviso",
+      // [Auto-translated] "Informational"
+      info: "Informativo"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nome completo",
@@ -2749,7 +2763,9 @@ export var portugueseTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido."
+      expression: "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Especifica o tipo de notificação mostrada aos usuários. Os erros bloqueiam o progresso até serem resolvidos. Os avisos destacam os problemas, mas permitem continuar. As notas inforcionais fornecem contexto adicional ou orientação neutra."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var portugueseTranslation = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Torna esta escolha exclusiva. Quando selecionado por um usuário, ele desmarcará automaticamente todas as outras opções na pergunta.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Torna as caixas de seleção nesta coluna exclusivas. Quando selecionado por um usuário, ele desmarcará automaticamente todas as outras caixas de seleção na mesma linha."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Selecione se letras maiúsculas e minúsculas na expressão regular devem ser tratadas como equivalentes.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var portugueseTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Extensão da coluna",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Largura da área da barra de progresso"
+    progressBarInheritWidthFrom: "Largura da área da barra de progresso",
+    // [Auto-translated] "Theme name"
+    themeName: "Nome do tema"
   },
   theme: {
     // "Advanced mode"

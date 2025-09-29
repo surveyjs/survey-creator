@@ -798,6 +798,10 @@ export var huStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Minden beállítás külön oszlopban"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Törölje az ugyanabban a sorban lévő többi elemet"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Név",
@@ -1317,10 +1321,12 @@ export var huStrings = {
     // "Regular expression"
     regex: "Reguláris kifejezés",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Hibaüzenet",
+      // [Auto-translated] "Validation message"
+      text: "Érvényesítési üzenet",
       // [Auto-translated] "Validation expression"
-      expression: "Érvényesítési kifejezés"
+      expression: "Érvényesítési kifejezés",
+      // [Auto-translated] "Notification type"
+      notificationType: "Értesítés típusa"
     },
     // [Auto-translated] "Total row header"
     totalText: "Teljes sorfejléc",
@@ -2062,6 +2068,14 @@ export var huStrings = {
       // [Auto-translated] "Range"
       range: "Tartomány"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Hiba",
+      // [Auto-translated] "Warning"
+      warning: "Figyelmeztetés",
+      // [Auto-translated] "Informational"
+      info: "Információs"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Teljes név",
@@ -2749,7 +2763,9 @@ export var huStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek."
+      expression: "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Megadja a felhasználóknak megjelenített értesítés típusát. A hibák blokkolják a folyamatot, amíg meg nem oldják. A figyelmeztetések kiemelik a problémákat, de lehetővé teszik a folytatást. Az infornacionális jegyzetek további kontextust vagy semleges iránymutatást nyújtanak."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var huStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Kizárólagossá teszi ezt a választást. Ha egy felhasználó kiválasztja, automatikusan törli a kérdés összes többi beállításának kijelölését.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Az oszlopban lévő jelölőnégyzetek kizárólagossá válnak. Ha a felhasználó kiválasztja, automatikusan törli az összes többi jelölőnégyzet jelölését ugyanabban a sorban."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var huStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Oszlop fesztávolsága",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "A folyamatjelző sáv területének szélessége"
+    progressBarInheritWidthFrom: "A folyamatjelző sáv területének szélessége",
+    // [Auto-translated] "Theme name"
+    themeName: "Téma neve"
   },
   theme: {
     // "Advanced mode"

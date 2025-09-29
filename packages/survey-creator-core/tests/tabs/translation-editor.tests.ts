@@ -18,9 +18,9 @@ test("create locales question for edit translation", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: [{ value: "item1", text: { fr: "Item 1 fr" } }, "item2", "item3"]
           }
@@ -352,7 +352,7 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
   expect(headerMatrix.columns[1].title).toBe("Source: Deutsch");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -363,8 +363,8 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Source: Français");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[1].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -634,7 +634,7 @@ test("Machine translation, editor & export, Bug#7059", () => {
   });
 
   expect(exported).toHaveLength(3);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default", "fr"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "fr"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(exported[1]).toEqual([
     "survey.page1.q1.title",
     "q1",
@@ -653,7 +653,7 @@ test("Machine translation, editor & export, Bug#7059", () => {
   });
 
   expect(exported).toHaveLength(3);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(exported[1]).toEqual([
     "survey.page1.q1.title",
     "q1"

@@ -150,7 +150,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "logicTypeName",
               type: "dropdown",
               renderAs: "logicoperator",
-              searchEnabled: false,
               allowClear: false,
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",

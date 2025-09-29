@@ -798,6 +798,10 @@ export var fiStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Poista muut samalla rivillä olevat"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nimi",
@@ -1317,10 +1321,12 @@ export var fiStrings = {
     // "Regular expression"
     regex: "Säännöllinen lauseke",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Virheviesti",
+      // [Auto-translated] "Validation message"
+      text: "Vahvistusviesti",
       // [Auto-translated] "Validation expression"
-      expression: "Vahvistuksen lauseke"
+      expression: "Vahvistuksen lauseke",
+      // [Auto-translated] "Notification type"
+      notificationType: "Ilmoituksen tyyppi"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rivin otsikon kokonaissumma",
@@ -2062,6 +2068,14 @@ export var fiStrings = {
       // [Auto-translated] "Range"
       range: "Etäisyys"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Virhe",
+      // [Auto-translated] "Warning"
+      warning: "Varoitus",
+      // [Auto-translated] "Informational"
+      info: "Tiedottava"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Koko nimi",
@@ -2749,7 +2763,9 @@ export var fiStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena"
+      expression: "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Määrittää käyttäjille näytettävän ilmoituksen tyypin. Virheet estävät edistymisen, kunnes ne on ratkaistu. Varoitukset korostavat ongelmia, mutta antavat jatkaa. Kansainväliset muistiinpanot tarjoavat lisäkontekstia tai neutraaleja ohjeita."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var fiStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Tekee tämän sarakkeen valintaruuduista eksklusiivisia. Kun käyttäjä valitsee sen, hän poistaa automaattisesti kaikkien muiden saman rivin valintaruutujen valinnan."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var fiStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Sarakkeen jänneväli",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Edistymispalkin alueen leveys"
+    progressBarInheritWidthFrom: "Edistymispalkin alueen leveys",
+    // [Auto-translated] "Theme name"
+    themeName: "Teeman nimi"
   },
   theme: {
     // "Advanced mode"

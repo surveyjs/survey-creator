@@ -115,7 +115,12 @@ export class SidebarModel extends Base {
   public getPageById(id: string) {
     return this.pages.filter(page => page.id === id)[0];
   }
-
+  public locStrsChanged(): void {
+    super.locStrsChanged();
+    if (this._activePage) {
+      this.header.title = this._activePage.caption;
+    }
+  }
   private createActions() {
     this._collapseAction = new Action({
       id: "svd-grid-hide",

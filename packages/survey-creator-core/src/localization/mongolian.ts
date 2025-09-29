@@ -798,6 +798,10 @@ export var mnStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Нэг эгнээнд байгаа бусад хүмүүсийг цэвэрлэ"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Нэр",
@@ -1317,10 +1321,12 @@ export var mnStrings = {
     // "Regular expression"
     regex: "Тогтмол илэрхийлэл",
     surveyvalidator: {
-      // "Error message"
-      text: "Алдаа",
+      // [Auto-translated] "Validation message"
+      text: "Баталгаажуулах захиас",
       // [Auto-translated] "Validation expression"
-      expression: "Баталгаажуулалтын илэрхийлэл"
+      expression: "Баталгаажуулалтын илэрхийлэл",
+      // [Auto-translated] "Notification type"
+      notificationType: "Мэдэгдлийн төрөл"
     },
     // "Total row header"
     totalText: "Нийт мөр",
@@ -2062,6 +2068,14 @@ export var mnStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Алдаа",
+      // [Auto-translated] "Warning"
+      warning: "Анхааруулга",
+      // [Auto-translated] "Informational"
+      info: "Мэдээлэл"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Бүтэн нэр",
@@ -2749,7 +2763,9 @@ export var mnStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла."
+      expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Хэрэглэгчдэд үзүүлэх мэдэгдлийн төрлийг тодорхойлно. Алдаа нь шийдвэрлэгдэх хүртэл хөгжил дэвшлийг зогсоодог. Сэрэмжлүүлэг нь асуудлуудыг тодотгож байгаа ч үргэлжлүүлэхийг зөвшөөрдөг. Infornational notes нь нэмэлт хам сэдэв эсвэл төвийг сахисан удирдамж өгдөг."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var mnStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Энэ сонголтыг онцгой болгодог. Хэрэглэгч сонговол асуултын бусад бүх сонголтыг автоматаар хасна.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Энэ багананд байгаа чекбоксуудыг онцгой болгосон. Хэрэглэгч сонговол ижил мөрөн дэх бусад бүх тэмдэглэгээг автоматаар хасна."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var mnStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Баганын хугацаа",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн"
+    progressBarInheritWidthFrom: "Прогресс барын бүсийн өргөн",
+    // [Auto-translated] "Theme name"
+    themeName: "Сэдвийн нэр"
   },
   theme: {
     // "Advanced mode"

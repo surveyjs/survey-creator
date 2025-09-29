@@ -63,9 +63,6 @@ export class CreatorResponsivityManager {
       });
       this.resizeObserver.observe(this.findCorrectParent(this.container));
       this.process(true);
-      if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
-        this.creator.setShowSidebar(false);
-      }
     }
   }
 

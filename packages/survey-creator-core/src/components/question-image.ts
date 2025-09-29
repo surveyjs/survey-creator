@@ -43,7 +43,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     templateData: SurveyTemplateRendererTemplateData,
   ) {
     super(creator, surveyElement, templateData);
-    this.isEmptyImageLink = !this.question.imageLink;
     this.initFilePresentationModel();
   }
 
@@ -59,9 +58,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     if (surveyElement) {
       if (!this.imageLinkValueChangedHandler) {
         this.imageLinkValueChangedHandler = () => {
-          this.isEmptyImageLink = !this.question || !this.question.imageLink;
+          this.updateIsEmptyElement();
           this.filePresentationModel.value = null;
-          this.filePresentationModel.visible = this.isEmptyImageLink;
+          this.filePresentationModel.visible = this.isEmptyElement;
         };
       }
       surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
@@ -70,8 +69,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   @property({ defaultValue: false }) isUploading;
-  @property({ defaultValue: false }) isEmptyImageLink;
-
   chooseFile(model: QuestionImageAdornerViewModel) {
     const fileInput = <HTMLInputElement>model.rootElement.getElementsByClassName("svc-choose-file-input")[0];
     this.editorSurveyModel.chooseFiles(fileInput, (files: File[]) => {
@@ -83,8 +80,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
   imageLinkValueChangedHandler: () => void;
 
-  public get isEmptyElement(): boolean {
-    return this.isEmptyImageLink;
+  protected getIsEmptyElement() {
+    return !this.question || !this.question.imageLink;
   }
 
   public get question(): QuestionImageModel {
@@ -102,7 +99,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   protected getAnimatedElement() {
-    if (this.isEmptyImageLink) {
+    if (this.isEmptyElement) {
       const cssClasses = this.filePresentationModel.cssClasses;
       if (cssClasses.root) {
         return this.surveyElement.getWrapperElement().querySelector(`:scope ${classesToSelector(cssClasses.root)}`) as HTMLElement;

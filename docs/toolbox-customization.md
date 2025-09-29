@@ -60,6 +60,75 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 [View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
 
+## Customize Predefined Toolbox Items
+
+To customize a predefined Toolbox item, pass its [type](https://surveyjs.io/Documentation/Library?id=Question#getType) as an argument to the [`getItemByName(itemName)`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#getItemByName) method. This method returns the item's configuration object. Change the [properties of this object](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem) to customize the Toolbox item. For example, the following code uses the [`json`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#json) property to override predefined [choices](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel#choices) for a [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel) question:
+
+```js
+creator.toolbox
+  .getItemByName("dropdown")
+  .json
+  .choices = [
+    { text: "Option 1", value: 1 },
+    { text: "Option 2", value: 2 },
+    { text: "Option 3", value: 3 }
+  ];
+```
+
+[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+
+## Add a Custom Toolbox Item
+
+You can add custom items to the toolbox in two ways:
+
+### Option 1: Create a Custom Question Type
+
+The toolbox contains all question and panel types that can be added to a survey. To add a new toolbox item, define a new question type.
+
+Choose this option if you need to:
+
+- Define fixed question properties and prevent users from changing them
+- Allow conversion to and from your custom type
+- Encapsulate the internal logic of your question
+- Extend or enhance the functionality of a built-in question
+
+Refer to the following help topics for step-by-step instructions:
+
+- [Create Specialized Question Types](https://surveyjs.io/form-library/documentation/customize-question-types/create-specialized-question-types)
+- [Create Composite Question Types](https://surveyjs.io/form-library/documentation/customize-question-types/create-composite-question-types)
+- [Integrate Third-Party Angular Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-angular)
+- [Integrate Third-Party React Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-react)
+- [Integrate Third-Party Vue 3 Components](/form-library/documentation/customize-question-types/third-party-component-integration-vue)
+
+### Option 2: Add a JSON Variation
+
+Each toolbox item corresponds to a JSON object that gets added to the survey schema when a user drags the item onto the design surface. Built-in items map to distinct question and panel types, but you can also create toolbox items that represent *specific configurations* of those types.
+
+JSON variations are useful for creating reusable templates without altering the functionality of the underlying questions. Keep in mind:
+
+- JSON variations do not support type conversion
+- Users can still change the property values defined in the JSON object
+
+To add a JSON variation, call the [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem) method on a [`QuestionToolbox`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox) instance. For instance, the code below adds a "CSAT" toolbox item, which is a variation of a [Rating Scale](https://surveyjs.io/form-library/documentation/api-reference/rating-scale-question-model) question:
+
+```js
+creator.toolbox.addItem({
+  name: "csat",
+  title: "CSAT",
+  json: {
+    type: "rating",
+    title: "Overall, how satisfied are you with our product?",
+    rateType: "smileys",
+    minRateDescription: "Dissatisfied",
+    maxRateDescription: "Satisfied",
+    minRate: 1,
+    maxRate: 5
+  }
+});
+```
+
+> JSON variations are conceptually similar to [toolbox subitems](#manage-toolbox-subitems) since both represent specific configurations of existing question or panel types. Consider both approaches to determine which best fits your scenario.
+
 ## Group Toolbox Items by Categories
 
 > The compact Toolbox does not display categories.
@@ -186,23 +255,6 @@ creator.toolbox.allowExpandMultipleCategories = true;
 creator.toolbox.keepAllCategoriesExpanded = false;
 ```
 
-## Customize Predefined Toolbox Items
-
-To customize a predefined Toolbox item, pass its [type](https://surveyjs.io/Documentation/Library?id=Question#getType) as an argument to the [`getItemByName(itemName)`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#getItemByName) method. This method returns the item's configuration object. Change the [properties of this object](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem) to customize the Toolbox item. For example, the following code uses the [`json`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#json) property to override predefined [choices](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel#choices) for a [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel) question:
-
-```js
-creator.toolbox
-  .getItemByName("dropdown")
-  .json
-  .choices = [
-    { text: "Option 1", value: 1 },
-    { text: "Option 2", value: 2 },
-    { text: "Option 3", value: 3 }
-  ];
-```
-
-[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
-
 ## Manage Toolbox Subitems
 
 Toolbox items can have nested items, or "subitems". They appear when users hover over a toolbox item. Subitems help you create more specific configurations of a broader survey element type and group them. For example, the Single-Line Input toolbox item includes a number of subitems that create [Single-Line Input](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model) questions with different [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property values.
@@ -263,13 +315,3 @@ You can completely deactivate the subitems feature by disabling the Toolbox's [`
 ```js
 creator.toolbox.showSubitems = false;
 ```
-
-## Add a Custom Toolbox Item
-
-Since the Toolbox is meant to contain question and panel types, to add a new element, you need to create a custom question or panel type. Refer to the following help topics for detailed instructions:
-
-- [Create Specialized Question Types](https://surveyjs.io/form-library/documentation/customize-question-types/create-specialized-question-types)
-- [Create Composite Question Types](https://surveyjs.io/form-library/documentation/customize-question-types/create-composite-question-types)
-- [Integrate Third-Party Angular Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-angular)
-- [Integrate Third-Party React Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-react)
-- [Integrate Third-Party Vue 3 Components](/form-library/documentation/customize-question-types/third-party-component-integration-vue)

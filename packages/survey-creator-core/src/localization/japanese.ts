@@ -798,6 +798,10 @@ export var jaStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "個別の列に各オプション"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "同じ行の他のものをクリアする"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "名前",
@@ -1317,10 +1321,12 @@ export var jaStrings = {
     // "Regular expression"
     regex: "正規表現",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "エラーメッセージ",
+      // [Auto-translated] "Validation message"
+      text: "検証メッセージ",
       // [Auto-translated] "Validation expression"
-      expression: "検証式"
+      expression: "検証式",
+      // [Auto-translated] "Notification type"
+      notificationType: "通知タイプ"
     },
     // "Total row header"
     totalText: "テキストの合計",
@@ -2062,6 +2068,14 @@ export var jaStrings = {
       // [Auto-translated] "Range"
       range: "範囲"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "エラー",
+      // [Auto-translated] "Warning"
+      warning: "警告",
+      // [Auto-translated] "Informational"
+      info: "情報"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "フルネーム",
@@ -2749,7 +2763,9 @@ export var jaStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。"
+      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "ユーザーに表示される通知の種類を指定します。エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報に関するメモは、追加のコンテキストまたは中立的なガイダンスを提供します。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var jaStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "この列のチェックボックスを排他的にします。ユーザーが選択すると、同じ行内の他のすべてのチェックボックスが自動的に選択解除されます。"
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var jaStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "列スパン",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "プログレスバー領域の幅"
+    progressBarInheritWidthFrom: "プログレスバー領域の幅",
+    // [Auto-translated] "Theme name"
+    themeName: "テーマ名"
   },
   theme: {
     // "Advanced mode"

@@ -798,6 +798,10 @@ export const thStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "ล้างคนอื่นในแถวเดียวกัน"
+    },
     multipletextitem: {
       // "Name"
       name: "ชื่อ",
@@ -1317,10 +1321,12 @@ export const thStrings = {
     // "Regular expression"
     regex: "นิพจน์ปกติ",
     surveyvalidator: {
-      // "Error message"
-      text: "ข้อความข้อผิดพลาด",
+      // [Auto-translated] "Validation message"
+      text: "ข้อความการตรวจสอบความถูกต้อง",
       // [Auto-translated] "Validation expression"
-      expression: "นิพจน์การตรวจสอบความถูกต้อง"
+      expression: "นิพจน์การตรวจสอบความถูกต้อง",
+      // [Auto-translated] "Notification type"
+      notificationType: "ประเภทการแจ้งเตือน"
     },
     // "Total row header"
     totalText: "หัวแถวรวม",
@@ -2062,6 +2068,14 @@ export const thStrings = {
       // [Auto-translated] "Range"
       range: "เทือก"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "ความผิดพลาด",
+      // [Auto-translated] "Warning"
+      warning: "คำเตือน",
+      // [Auto-translated] "Informational"
+      info: "ข้อมูล"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "ชื่อ-นามสกุล",
@@ -2749,7 +2763,9 @@ export const thStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด"
+      expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "ระบุชนิดของการแจ้งเตือนที่แสดงต่อผู้ใช้ ข้อผิดพลาดจะบล็อกความคืบหน้าจนกว่าจะได้รับการแก้ไข คําเตือนจะเน้นปัญหาแต่อนุญาตให้ดําเนินการต่อ หมายเหตุ Infornational ให้บริบทเพิ่มเติมหรือคําแนะนําที่เป็นกลาง"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export const thStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "ทําให้ตัวเลือกนี้พิเศษ เมื่อเลือกโดยผู้ใช้ ระบบจะยกเลิกการเลือกตัวเลือกอื่นๆ ทั้งหมดในคําถามโดยอัตโนมัติ",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "ทําให้ช่องทําเครื่องหมายในคอลัมน์นี้เป็นเอกสิทธิ์เฉพาะบุคคล เมื่อผู้ใช้เลือก ผู้ใช้จะยกเลิกการเลือกช่องทําเครื่องหมายอื่นๆ ทั้งหมดในแถวเดียวกันโดยอัตโนมัติ"
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export const thStrings = {
     // "Column span"
     effectiveColSpan: "การขยายคอลัมน์",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "ความกว้างของพื้นที่แถบความคืบหน้า"
+    progressBarInheritWidthFrom: "ความกว้างของพื้นที่แถบความคืบหน้า",
+    // [Auto-translated] "Theme name"
+    themeName: "ชื่อธีม"
   },
   theme: {
     // "Advanced mode"

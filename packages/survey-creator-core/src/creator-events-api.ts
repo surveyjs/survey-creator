@@ -5,6 +5,7 @@ import {
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
+import { QuestionToolboxItem } from "./toolbox";
 
 export interface ElementDeletingEvent {
   /**
@@ -172,7 +173,24 @@ export interface ElementAllowOperationsEvent {
    */
   allowShowSettings: boolean | undefined;
 }
-
+export interface AllowAddElementEvent {
+  /**
+   * The name of the toolbox item used to create the element. Usually matches the element's [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
+  name: string;
+  /**
+   * The [toolbox item instance](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) that corresponds to the element.
+   */
+  toolboxItem?: QuestionToolboxItem;
+  /**
+   * The element's JSON definition.
+   */
+  json?: any;
+  /**
+   * A Boolean property that you can set to `false` to prevent the element from being added.
+   */
+  allow: boolean;
+}
 export interface DefineElementMenuItemsEvent {
   /**
    * @deprecated Use `options.element` instead.
@@ -1104,4 +1122,22 @@ export interface CreatorThemeSelectedEvent {
    * A selected Survey Creator theme.
    */
   theme: ICreatorTheme;
+}
+export interface AllowInplaceEditEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   */
+  element: Base;
+  /**
+   * A choice item being edited. Defined only when in-place editing targets a choice option.
+   */
+  item?: ItemValue;
+  /**
+   * The name of the property being edited.
+   */
+  propertyName: string;
+  /**
+   * A Boolean property that you can set to `false` if you want to disable in-place editing.
+   */
+  allow: boolean;
 }

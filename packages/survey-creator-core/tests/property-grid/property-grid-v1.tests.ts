@@ -1692,7 +1692,6 @@ test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
-  editorLocalization.reset();
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
   curStrings.pehelp.survey = { title: "Survey Title" };
@@ -1717,7 +1716,6 @@ test("property editor titleQuestion.description", () => {
   expect(titleQuestion.description).toEqual("Survey Title");
 
   delete curStrings.pehelp["page"];
-  editorLocalization.reset();
   propertyGrid = new PropertyGridModelTester(survey.pages[0]);
   titleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("title")

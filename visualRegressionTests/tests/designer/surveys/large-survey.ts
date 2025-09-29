@@ -1320,7 +1320,7 @@ export const largeSurvey = {
             "Bothered with cough, shortness of breath, wheezing or asthma?",
             "Coughing up sputum or blood?",
             "Exposed to anyone with tuberculosis?",
-            "“Blacked out” or lost consciousness?",
+            "“Blacked out” or lost consciousness?", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             "Chest pain or pressure, rapid or irregular heart beats, or known difficulty with a heart valve?",
             "Awakening at night with shortness of breath?",
             "Abnormal swelling in the legs or feet?",

@@ -798,6 +798,10 @@ export const roStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Fiecare opțiune într-o coloană separată"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Ștergeți altele din același rând"
+    },
     multipletextitem: {
       // "Name"
       name: "Nume",
@@ -1317,10 +1321,12 @@ export const roStrings = {
     // "Regular expression"
     regex: "Expresie regulată",
     surveyvalidator: {
-      // "Error message"
-      text: "Mesaj de eroare",
+      // [Auto-translated] "Validation message"
+      text: "Mesaj de validare",
       // [Auto-translated] "Validation expression"
-      expression: "Expresie de validare"
+      expression: "Expresie de validare",
+      // [Auto-translated] "Notification type"
+      notificationType: "Tip de notificare"
     },
     // "Total row header"
     totalText: "Antet rând total",
@@ -2062,6 +2068,14 @@ export const roStrings = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Eroare",
+      // [Auto-translated] "Warning"
+      warning: "Avertisment",
+      // [Auto-translated] "Informational"
+      info: "Informaţionale"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nume complet",
@@ -2749,7 +2763,9 @@ export const roStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă."
+      expression: "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Specifică tipul de notificare afișat utilizatorilor. Erorile blochează progresul până la rezolvare. Avertismentele evidențiază problemele, dar permit continuarea. Notele Infornational oferă context suplimentar sau orientări neutre."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export const roStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Face ca această alegere să fie exclusivă. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte opțiuni din întrebare.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Face casetele de selectare din această coloană exclusive. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte casete de selectare din același rând."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export const roStrings = {
     // "Column span"
     effectiveColSpan: "Span de coloană eficient",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Lățimea zonei barei de progres"
+    progressBarInheritWidthFrom: "Lățimea zonei barei de progres",
+    // [Auto-translated] "Theme name"
+    themeName: "Numele temei"
   },
   theme: {
     // "Advanced mode"

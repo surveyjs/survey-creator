@@ -59,6 +59,8 @@ import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 
+export * from "../src/localization/french";
+
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -331,6 +333,14 @@ test("Set propertyGridNavigationMode property by options", (): any => {
   expect(designerPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(themePlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(translationPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+});
+test("creator theme & settings property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
+  creator.locale = "fr";
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  creator.locale = "en";
 });
 
 test("showSurfaceTools", (): any => {
@@ -796,4 +806,98 @@ test("License text for default locale and another default locale", (): any => {
   expect(editorLocalization.getString("survey.license")).toBe("My license string");
 
   editorLocalization.defaultLocale = "en";
+});
+
+test("isStringEditable", (): any => {
+  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
+  expect(isStringEditable({}, "")).toBeTruthy();
+  expect(
+    isStringEditable({ isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
+  expect(
+    isStringEditable(
+      { isContentElement: true, isEditableTemplateElement: true },
+      ""
+    )
+  ).toBeTruthy();
+});
+test("isStringEditable for matrix dynamic", (): any => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  matrix.addColumn("col1");
+  matrix.rowCount = 1;
+  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
+  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
+});
+test("onGetIsStringEditable", (): any => {
+  const creator = new CreatorTester();
+  let lastEditableValue;
+  let callCount = 0;
+  let newValue;
+  creator.onAllowInplaceEdit.add((s, o) => {
+    lastEditableValue = o.allow;
+    callCount++;
+    if (newValue !== undefined) {
+      o.allow = newValue;
+    }
+  });
+  expect(lastEditableValue).toBeUndefined();
+  expect(callCount).toBe(0);
+
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeFalsy();
+  expect(lastEditableValue).toBeFalsy();
+  expect(callCount).toBe(1);
+
+  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeTruthy();
+  expect(callCount).toBe(2);
+
+  newValue = true;
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeFalsy();
+  expect(callCount).toBe(3);
+});
+test("Restrict users from adding more than a specified number of questions to a survey Issue#7122", (): any => {
+  const creator = new CreatorTester();
+  creator.onAllowAddElement.add((sender, options) => {
+    if (options.name === "comment") {
+      const qs = creator.survey.getAllQuestions(true, true, true);
+      qs.filter(q => q.getType() === "comment");
+      options.allow = qs.length < 2;
+    }
+  });
+  const action = creator.toolbox.getActionById("comment");
+  expect(action).toBeTruthy();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  const pAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const pDuplicateAction = pAdorner.actionContainer.getActionById("duplicate");
+  const qAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const qDuplicateAction = qAdorner.actionContainer.getActionById("duplicate");
+  expect(qDuplicateAction).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pDuplicateAction.isVisible).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getAllQuestions()[0]);
+  expect(action.enabled).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  pAdorner.currentAddQuestionType = "comment";
+  pAdorner.addNewQuestion(pAdorner, undefined);
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  creator.JSON = { };
+  expect(action.enabled).toBeTruthy();
 });

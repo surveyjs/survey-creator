@@ -798,6 +798,10 @@ export var frenchTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Chaque option dans une colonne distincte"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Effacer les autres personnes de la même rangée"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Nom",
@@ -1317,10 +1321,12 @@ export var frenchTranslation = {
     // "Regular expression"
     regex: "Expression régulière (RegEx)",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Message d'erreur",
+      // [Auto-translated] "Validation message"
+      text: "Message de validation",
       // [Auto-translated] "Validation expression"
-      expression: "Condition à respecter"
+      expression: "Condition à respecter",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type de notification"
     },
     // "Total row header"
     totalText: "Texte pour le total",
@@ -2062,6 +2068,14 @@ export var frenchTranslation = {
       // [Auto-translated] "Range"
       range: "Gamme"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Erreur",
+      // [Auto-translated] "Warning"
+      warning: "Avertissement",
+      // [Auto-translated] "Informational"
+      info: "Informationnel"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nom complet",
@@ -2749,7 +2763,9 @@ export var frenchTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Utilisez l’icône de la baguette magique pour définir quand la valeur de la question est considérée comme valide."
+      expression: "Utilisez l’icône de la baguette magique pour définir quand la valeur de la question est considérée comme valide.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Spécifie le type de notification affiché aux utilisateurs. Les erreurs bloquent la progression jusqu’à ce qu’elles soient résolues. Les avertissements mettent en évidence les problèmes mais permettent de continuer. Les notes d’Infornational fournissent un contexte supplémentaire ou des indications neutres."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var frenchTranslation = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Rend ce choix exclusif. Lorsqu’il est sélectionné par un utilisateur, il désélectionne automatiquement toutes les autres options de la question.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Rend les cases à cocher de cette colonne exclusives. Lorsqu’il est sélectionné par un utilisateur, il décoche automatiquement toutes les autres cases de la même ligne."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var frenchTranslation = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Portée de poteau",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Largeur de la zone de la barre de progression"
+    progressBarInheritWidthFrom: "Largeur de la zone de la barre de progression",
+    // [Auto-translated] "Theme name"
+    themeName: "Nom du thème"
   },
   theme: {
     // "Advanced mode"

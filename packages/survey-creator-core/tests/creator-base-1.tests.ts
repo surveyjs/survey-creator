@@ -1711,26 +1711,6 @@ test("getElementWrapperComponentName for inner component elements", () => {
   ComponentCollection.Instance.clear();
 });
 
-test("isStringEditable", (): any => {
-  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({}, "")).toBeTruthy();
-  expect(
-    isStringEditable({ isEditableTemplateElement: true }, "")
-  ).toBeTruthy();
-  expect(
-    isStringEditable(
-      { isContentElement: true, isEditableTemplateElement: true },
-      ""
-    )
-  ).toBeTruthy();
-});
-test("isStringEditable for matrix dynamic", (): any => {
-  const matrix = new QuestionMatrixDynamicModel("q1");
-  matrix.addColumn("col1");
-  matrix.rowCount = 1;
-  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
-  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
-});
 test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -1987,6 +1967,30 @@ test("set showSidebar is equivalent to action", (): any => {
   expect(creator.sidebar.visible).toBeFalsy();
   expect(creator.sidebar.collapsedManually).toBeTruthy();
   expect(creator.sidebar.expandedManually).toBeFalsy();
+});
+test("set showSidebar in init and check manual flags", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.collapsedManually).toBeFalsy();
+  expect(creator.sidebar.expandedManually).toBeFalsy();
+
+  creator.showSidebar = true;
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.collapsedManually).toBeFalsy();
+  expect(creator.sidebar.expandedManually).toBeTruthy();
 });
 test("Show/hide property grid by collapse/expand actions", (): any => {
   const creator = new CreatorTester();

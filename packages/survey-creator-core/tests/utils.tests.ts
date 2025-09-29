@@ -6,7 +6,7 @@ test("check capitalize function", () => {
   expect(capitalize("test2")).toEqual("Test2");
   expect(capitalize("Test3")).toEqual("Test3");
   expect(capitalize("test str   four")).toEqual("Test Str Four");
-  expect(capitalize("ελληνικά")).toEqual("Ελληνικά");
+  expect(capitalize("ελληνικά")).toEqual("Ελληνικά"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 });
 
 test("RGBToHSB HSBToRGB", (): any => {

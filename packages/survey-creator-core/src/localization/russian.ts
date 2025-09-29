@@ -798,6 +798,10 @@ export var ruStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Каждый вариант в отдельной колонке"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Удаление других объектов в том же ряду"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Имя",
@@ -1317,10 +1321,12 @@ export var ruStrings = {
     // "Regular expression"
     regex: "Регулярное выражение",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Сообщение об ошибке",
+      // [Auto-translated] "Validation message"
+      text: "Сообщение о проверке",
       // [Auto-translated] "Validation expression"
-      expression: "Проверочное выражение"
+      expression: "Проверочное выражение",
+      // [Auto-translated] "Notification type"
+      notificationType: "Тип уведомления"
     },
     // "Total row header"
     totalText: "Общий текст",
@@ -2062,6 +2068,14 @@ export var ruStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Ошибка",
+      // [Auto-translated] "Warning"
+      warning: "Предупреждение",
+      // [Auto-translated] "Informational"
+      info: "Информационный"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Полное имя",
@@ -2749,7 +2763,9 @@ export var ruStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным."
+      expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Указывает тип уведомления, отображаемого пользователям. Ошибки блокируют прогресс до тех пор, пока не будут устранены. Предупреждения указывают на проблемы, но позволяют продолжить. Информационные заметки содержат дополнительный контекст или нейтральное руководство."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var ruStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Делает чекбоксы в этой колонке эксклюзивными. Когда пользователь выбирает их, он автоматически снимает выбор со всех остальных флажков в той же строке."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var ruStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Пролет колонны",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Ширина области индикатора выполнения"
+    progressBarInheritWidthFrom: "Ширина области индикатора выполнения",
+    // [Auto-translated] "Theme name"
+    themeName: "Название темы"
   },
   theme: {
     // "Advanced mode"

@@ -2730,7 +2730,7 @@ test("Rename the name for detail panel in matrix dynamic", () => {
   expect((<Question>question1.detailElements[1]).visibleIf).toEqual("{row.question5} = 'a'");
   expect(question1.columns[0].visibleIf).toEqual("{row.question5} = 'a'");
 });
-test("Rename the name for matrix dropdown rows, bug#6910", () => {
+test("Rename the name for single matrix columns rows, bug#6910", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
@@ -2932,6 +2932,30 @@ test("Do not rename questions for another matrix", (): any => {
   expect(matrix1.columns[1].visibleIf).toEqual("{row.col1} = 'Item 1'");
   expect(matrix2.columns[1].visibleIf).toEqual("{row.col1} = 'item1'");
 });
+test("Update setValueExpression, setValueIf and defaultValueExpression on changing the name, Bug#7142", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+      {
+        type: "text",
+        name: "question2",
+        defaultValueExpression: "{question1} + 1",
+        setValueIf: "{question1} > 2",
+        setValueExpression: "{question1} + 3"
+      }
+    ],
+  };
+  creator.survey.getQuestionByName("question1").name = "newQuestion1";
+  const question2 = <Question>creator.survey.getQuestionByName("question2");
+  expect(question2.defaultValueExpression).toEqual("{newQuestion1} + 1");
+  expect(question2.setValueIf).toEqual("{newQuestion1} > 2");
+  expect(question2.setValueExpression).toEqual("{newQuestion1} + 3");
+});
+
 test("Modify choice and question name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

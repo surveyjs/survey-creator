@@ -799,6 +799,10 @@ export var koreanStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "별도의 열에 있는 각 옵션"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "같은 행에 있는 다른 항목 지우기"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "이름",
@@ -1318,10 +1322,12 @@ export var koreanStrings = {
     // [Auto-translated] "Regular expression"
     regex: "정규식",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "오류 메시지",
+      // [Auto-translated] "Validation message"
+      text: "유효성 검사 메시지",
       // [Auto-translated] "Validation expression"
-      expression: "유효성 검사 표현식"
+      expression: "유효성 검사 표현식",
+      // [Auto-translated] "Notification type"
+      notificationType: "알림 유형"
     },
     // [Auto-translated] "Total row header"
     totalText: "총 행 머리글",
@@ -2063,6 +2069,14 @@ export var koreanStrings = {
       // [Auto-translated] "Range"
       range: "레인지"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "오류",
+      // [Auto-translated] "Warning"
+      warning: "경고",
+      // [Auto-translated] "Informational"
+      info: "정보"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "성명",
@@ -2750,7 +2764,9 @@ export var koreanStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다."
+      expression: "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "사용자에게 표시되는 알림 유형을 지정합니다. 오류는 해결될 때까지 진행을 차단합니다. 경고는 문제를 강조 표시하지만 계속할 수 있습니다. 정보 노트는 추가 컨텍스트 또는 중립적인 지침을 제공합니다."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2845,6 +2861,10 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "이 열의 확인란을 배타적으로 만듭니다. 사용자가 선택하면 동일한 행의 다른 모든 확인란을 자동으로 선택 취소합니다."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3335,7 +3355,9 @@ export var koreanStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "열 범위",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비"
+    progressBarInheritWidthFrom: "진행률 표시줄 영역 너비",
+    // [Auto-translated] "Theme name"
+    themeName: "테마 이름"
   },
   theme: {
     // "Advanced mode"

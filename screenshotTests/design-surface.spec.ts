@@ -4,6 +4,7 @@ const title = "Design Surface";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
+    await page.waitForLoadState("networkidle");
     await page.goto(`${url}`);
   });
 
@@ -106,7 +107,7 @@ test.describe(title, () => {
 
   test("Placeholder", async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 900 });
-    await setIsCompact(page, true);
+    await setShowToolbox(page, false);
     const designerTabContent = page.locator(".svc-tab-designer");
     await compareScreenshot(page, designerTabContent, "surface-placeholder.png");
   });

@@ -798,6 +798,10 @@ export var nlStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Elke optie in een aparte kolom"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Anderen in dezelfde rij wissen"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Naam",
@@ -1317,10 +1321,12 @@ export var nlStrings = {
     // "Regular expression"
     regex: "Reguliere expressie",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Foutmelding",
+      // [Auto-translated] "Validation message"
+      text: "Validatie bericht",
       // [Auto-translated] "Validation expression"
-      expression: "Validatie-expressie"
+      expression: "Validatie-expressie",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type melding"
     },
     // "Total row header"
     totalText: "Totale tekst",
@@ -2062,6 +2068,14 @@ export var nlStrings = {
       // [Auto-translated] "Range"
       range: "Bereik"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fout",
+      // [Auto-translated] "Warning"
+      warning: "Waarschuwing",
+      // [Auto-translated] "Informational"
+      info: "Informatieve"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Voor- en achternaam",
@@ -2749,7 +2763,9 @@ export var nlStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd."
+      expression: "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Hiermee geeft u het type melding op dat aan gebruikers wordt getoond. Fouten blokkeren de voortgang totdat ze zijn opgelost. Waarschuwingen markeren problemen, maar laten doorgaan toe. Infornationale nota's bieden extra context of neutrale richtlijnen."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var nlStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Maakt selectievakjes in deze kolom exclusief. Wanneer een gebruiker deze selecteert, worden alle andere selectievakjes in dezelfde rij automatisch uitgeschakeld."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var nlStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolom spanwijdte",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied"
+    progressBarInheritWidthFrom: "Breedte van het voortgangsbalkgebied",
+    // [Auto-translated] "Theme name"
+    themeName: "Naam van het thema"
   },
   theme: {
     // "Advanced mode"

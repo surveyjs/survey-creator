@@ -799,6 +799,10 @@ export let svStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Varje alternativ i en separat kolumn"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Ta bort andra i samma rad"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Namn",
@@ -1318,10 +1322,12 @@ export let svStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Reguljärt uttryck",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Felmeddelande",
+      // [Auto-translated] "Validation message"
+      text: "Meddelande om validering",
       // [Auto-translated] "Validation expression"
-      expression: "Uttryck för validering"
+      expression: "Uttryck för validering",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ av anmälan"
     },
     // [Auto-translated] "Total row header"
     totalText: "Radrubrik för totalt antal",
@@ -2063,6 +2069,14 @@ export let svStrings = {
       // [Auto-translated] "Range"
       range: "Sortiment"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fel",
+      // [Auto-translated] "Warning"
+      warning: "Varning",
+      // [Auto-translated] "Informational"
+      info: "Informativt"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fullständigt namn",
@@ -2750,7 +2764,9 @@ export let svStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Använd trollstavsikonen för att definiera när frågans värde anses vara giltigt."
+      expression: "Använd trollstavsikonen för att definiera när frågans värde anses vara giltigt.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Anger vilken typ av meddelande som visas för användarna. Fel blockerar förloppet tills de har lösts. Varningar markerar problem men gör det möjligt att fortsätta. Infornationella noter ger ytterligare sammanhang eller neutral vägledning."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2845,6 +2861,10 @@ export let svStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Gör detta val exklusivt. När den väljs av en användare kommer den automatiskt att avmarkera alla andra alternativ i frågan.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Gör kryssrutorna i den här kolumnen exklusiva. När de väljs av en användare kommer de automatiskt att avmarkera alla andra kryssrutor på samma rad."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3335,7 +3355,9 @@ export let svStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Kolumn spännvidd",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area"
+    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area",
+    // [Auto-translated] "Theme name"
+    themeName: "Temats namn"
   },
   theme: {
     // "Advanced mode"

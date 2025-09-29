@@ -798,6 +798,10 @@ export var bgStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Всяка опция в отделна колона"
     },
+    matrixcolumn: {
+      // [Auto-translated] "Clear others in the same row"
+      isExclusive: "Изчистване на другите в същия ред"
+    },
     multipletextitem: {
       // [Auto-translated] "Name"
       name: "Име",
@@ -1317,10 +1321,12 @@ export var bgStrings = {
     // "Regular expression"
     regex: "Регулярен израз",
     surveyvalidator: {
-      // "Error message"
-      text: "Съобщение за грешка",
+      // [Auto-translated] "Validation message"
+      text: "Съобщение за валидиране",
       // [Auto-translated] "Validation expression"
-      expression: "Валидиращ израз"
+      expression: "Валидиращ израз",
+      // [Auto-translated] "Notification type"
+      notificationType: "Тип известие"
     },
     // "Total row header"
     totalText: "Общ текст в реда",
@@ -2062,6 +2068,14 @@ export var bgStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Грешка",
+      // [Auto-translated] "Warning"
+      warning: "Предупреждение",
+      // [Auto-translated] "Informational"
+      info: "Информационна"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Пълно име",
@@ -2749,7 +2763,9 @@ export var bgStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна."
+      expression: "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна.",
+      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Указва типа известие, което се показва на потребителите. Грешките блокират напредъка, докато не бъде разрешен. Предупрежденията подчертават проблемите, но позволяват да продължат. Информационните бележки предоставят допълнителен контекст или неутрални насоки."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2844,6 +2860,10 @@ export var bgStrings = {
     },
     // [Auto-translated] "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question."
     isExclusive: "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса.",
+    matrixcolumn: {
+      // [Auto-translated] "Makes checkboxes in this column exclusive. When selected by a user, they will automatically deselect all other checkboxes in the same row."
+      isExclusive: "Прави квадратчетата за отметка в тази колона изключителни. Когато бъде избран от потребител, той автоматично ще премахне отметката от всички останали квадратчета в същия ред."
+    },
     // [Auto-translated] "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent."
     caseInsensitive: "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни.",
     // "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used."
@@ -3334,7 +3354,9 @@ export var bgStrings = {
     // [Auto-translated] "Column span"
     effectiveColSpan: "Обхват на колоната",
     // [Auto-translated] "Progress bar area width"
-    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък"
+    progressBarInheritWidthFrom: "Ширина на областта на лентата за напредък",
+    // [Auto-translated] "Theme name"
+    themeName: "Име на темата"
   },
   theme: {
     // "Advanced mode"

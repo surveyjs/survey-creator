@@ -42,4 +42,17 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+export async function doDrag({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options: any }):Promise<void> {
+  await element.hover({ force: true });
+  await page.mouse.down();
+  const { x, y, width, height } = await <any>target.boundingBox();
+
+  await page.mouse.move(x + width / 2 + (options.destinationOffsetX || 0), y + height / 2 + (options.destinationOffsetY || 0), { steps: 20 });
+}
+
+export async function doDragDrop({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options: any }):Promise<void> {
+  await doDrag({ page, element, target, options: options || {} });
+  await page.mouse.up();
+}
+
 export { expect };
