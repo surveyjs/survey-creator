@@ -1,6 +1,6 @@
 <template>
   <SvComponent
-    :is="'survey-page'"
+    :is="'sv-page'"
     v-if="!!question && !!survey && survey.currentPage"
     :page="survey.currentPage"
     :survey="survey"
