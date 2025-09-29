@@ -58,6 +58,7 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
+import { TabbedMenuMode } from "../src/tabbed-menu";
 
 export * from "../src/localization/french";
 
@@ -179,20 +180,14 @@ test("creator.onSurveyInstanceSetupHandlers event", () => {
 
 test("check tabResponsivenessMode property", () => {
   const creator = new CreatorTester();
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
-
-  creator.tabResponsivenessMode = "icons";
-  expect(creator.tabbedMenu.actions.every((action) => !action.disableShrink)).toBeTruthy();
-  const firstTab = creator.tabbedMenu.actions[0];
-  expect(firstTab.hasTitle).toBeTruthy();
-  expect(firstTab.hasIcon).toBeFalsy();
-  firstTab.mode = "small";
-  expect(firstTab.hasTitle).toBeFalsy();
-  expect(firstTab.hasIcon).toBeTruthy();
-
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasIcon)).toBeTruthy();
+  creator.tabbedMenu.setMode(TabbedMenuMode.Icons);
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => action.hasIcon)).toBeTruthy();
+  creator.tabbedMenu.setMode(TabbedMenuMode.Titles);
+  expect(creator.tabbedMenu.actions.every((action) => action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasIcon)).toBeTruthy();
 });
 
 test("onModified options, on adding page and on copying page", () => {
