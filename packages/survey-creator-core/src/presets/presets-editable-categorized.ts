@@ -123,7 +123,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       originalAction.visible = false;
 
       const addAction = createDropdownActionModel({
-        id: "add-menu",
+        id: "context-menu",
         iconName: "more-circle-24x24",
         location: "end",
         visibleIndex: 20

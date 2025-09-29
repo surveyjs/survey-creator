@@ -380,9 +380,31 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   // }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
-    this.getQuestionItems(model).value = creator.toolbox.items.map(i => this.createToolboxItemRow(i));
-    const categories = creator.toolbox.categories.map(c => this.createToolboxCategoryRow(c));
-    model.setValue(this.nameCategories, categories);
+    const defaultItemsMap: any = {};
+    this.defaultItems.forEach((i: any) => defaultItemsMap[i.name] = i);
+    json = json || {};
+    let itemsDefinition = (json["definition"] || []).map(i => typeof i === "string" ? { name: i } : i);
+    let categoriesDefinition = json["categories"] || [];
+    if (itemsDefinition.length === 0) {
+      itemsDefinition = this.defaultItems;
+    } else {
+      itemsDefinition = itemsDefinition.map(i => ({ ...(defaultItemsMap[itemsDefinition.name] || {}), ...i }));
+    }
+    const itemsMap: any = {};
+    itemsDefinition.forEach((i: any) => itemsMap[i.name] = i);
+    if (categoriesDefinition.length === 0) {
+      categoriesDefinition = this.defaultCategories;
+    } else {
+      categoriesDefinition = categoriesDefinition.map(c => ({ ...c, ...{ items: c.items.map(i => itemsMap[i]) } }));
+    }
+
+    //categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));
+    //Object.keys(itemsMap).map(key => itemsMap[key]);
+    categoriesDefinition.filter((c: any) => c.items).forEach((c: any) => c.items.forEach((p: any) => delete defaultItemsMap[p.name]));
+    const hiddenItems = this.defaultItems.filter(t => defaultItemsMap[t.name]);
+
+    model.setValue(this.nameMatrix, hiddenItems);
+    model.setValue(this.nameCategories, categoriesDefinition);
     this.updateItemsFromCategories(model);
     this.updateShowCategoriesTitlesElements(model);
   }
