@@ -61,6 +61,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   constructor(props) {
     super(props);
     this.ref = React.createRef();
+    this.state = { changed: 0 };
   }
 
   private get item(): TabbedMenuItem {
@@ -94,13 +95,20 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   componentDidMount(): void {
     super.componentDidMount();
     this.item.updateModeCallback = (mode, callback) => {
+      const update = () => {
+        if (this.item.mode == mode) {
+          this.setState({ changed: this.state.changed + 1 });
+        } else {
+          this.item.mode = mode;
+        }
+      };
       queueMicrotask(() => {
         if ((ReactDOM as any)["flushSync"]) {
           (ReactDOM as any)["flushSync"](() => {
-            this.item.mode = mode;
+            update();
           });
         } else {
-          this.item.mode = mode;
+          update();
         }
         queueMicrotask(() => {
           callback(mode, this.ref.current);
