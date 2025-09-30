@@ -148,6 +148,15 @@
   }
 }
 
+.sps-matrixdynamic__dragged-row {
+  .sps-table__cell {
+    padding: 0;
+  }
+  .sps-input {
+    pointer-events: none;
+  }
+}
+
 .sps-table__row {
   --action-width: calc(
     2 * var(--ctr-actionbar-button-padding-top-large-icon, 8px) +
