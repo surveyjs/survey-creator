@@ -52,10 +52,15 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     categories.value = catValue;
   }
 
+  protected itemMenuCategoriesEnabled(model: SurveyModel) {
+    return true;
+  }
+
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const categories = this.getQuestionCategories(model).value;
     const actions = [] as IAction[];
     const isUnsorted = question.name == this.nameMatrix;
+    const hasCategories = this.itemMenuCategoriesEnabled(model);
     if (!isUnsorted) {
       actions.push(
         new Action({
@@ -68,13 +73,27 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         })
       );
     } else {
-      actions.push(new Action({
-        id: "move-to",
-        title: "Move To...",
-        css: "sps-list__item--label",
-        enabled: false
-      }));
+      if (hasCategories) {
+        actions.push(new Action({
+          id: "move-to",
+          title: "Move To...",
+          css: "sps-list__item--label",
+          enabled: false
+        }));
+      } else {
+        actions.push(new Action({
+          id: "restore-item",
+          title: "Add to Toolbox",
+          action: () => {
+            const rowDataIndex = question.visibleRows.indexOf(row);
+            question.removeRow(rowDataIndex);
+          }
+        }));
+      }
     }
+
+    if (!hasCategories) return actions;
+
     const moveToCategories = categories.map((i: any) => new Action({
       id: "to-" + i.category,
       title: i.title,

@@ -131,7 +131,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               addRowText: "Add Custom Item",
               startWithNewLine: false,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-            }, false),
+            }, true),
             this.createItemsMatrixJSON({
               allowAddRows: true,
               title: "Unsorted items",
@@ -210,9 +210,14 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     categories.value = catValue;
   }
 
+  protected itemMenuCategoriesEnabled(model: SurveyModel) {
+    return model.getValue(this.nameCategoriesMode) !== "items";
+  }
+
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const categories = this.getQuestionCategories(model).value;
     const actions = super.getItemMenuActionsCore(model, question, row);
+    const hasCategories = this.itemMenuCategoriesEnabled(model);
     const catActions = categories.map((c: any) => {
       const catAction = new Action({
         id: "tosubitemcategory-" + c.category,
@@ -231,6 +236,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       return catAction;
     }
     );
+    const subItems = hasCategories ? catActions : catActions.map(a => a.items).flat();
     const rowDataIndex = question.visibleRows.indexOf(row);
     const rowData = question.value[rowDataIndex];
     if (!rowData["subitems"]) {
@@ -261,7 +267,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         id: "move-as-subitem",
         title: "Move as subitem"
       });
-      subitemsAction.setSubItems({ items: catActions, cssClasses: listComponentCss });
+      subitemsAction.setSubItems({ items: subItems, cssClasses: listComponentCss });
       actions.push(subitemsAction);
     }
 
