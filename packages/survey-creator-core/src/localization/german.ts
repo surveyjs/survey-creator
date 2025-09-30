@@ -2073,8 +2073,8 @@ export var germanTranslation = {
       error: "Fehler",
       // [Auto-translated] "Warning"
       warning: "Warnung",
-      // [Auto-translated] "Informational"
-      info: "Mitteilsam"
+      // [Auto-translated] "Informational note"
+      info: "Informativer Hinweis"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var germanTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Gibt den Typ der Benachrichtigung an, die Benutzern angezeigt wird. Fehler blockieren den Fortschritt, bis sie behoben sind. Warnungen weisen auf Probleme hin, lassen aber zu, dass fortgefahren wird. Infornationale Anmerkungen bieten zusätzlichen Kontext oder neutrale Orientierungshilfen."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fehler blockieren den Fortschritt, bis sie behoben sind. Warnungen weisen auf Probleme hin, lassen aber zu, dass fortgefahren wird. Informationsnotizen bieten zusätzlichen Kontext oder eine neutrale Orientierung. Bei der Verwendung von Warnungen oder Informationshinweisen empfehlen wir, die sofortige Validierung zu aktivieren: \"Umfrage\" → \"Validierung\" → \"Validierung ausführen\" → \"Nachdem sich eine Antwort geändert hat\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

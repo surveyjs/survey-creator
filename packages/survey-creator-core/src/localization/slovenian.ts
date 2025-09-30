@@ -2073,8 +2073,8 @@ export var slStrings = {
       error: "Napaka",
       // [Auto-translated] "Warning"
       warning: "Opozorilo",
-      // [Auto-translated] "Informational"
-      info: "Informativne"
+      // [Auto-translated] "Informational note"
+      info: "Informativna opomba"
     },
     autocomplete: {
       // "Full Name"
@@ -2764,8 +2764,8 @@ export var slStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Določa vrsto obvestila, ki je prikazano uporabnikom. Napake blokirajo napredek, dokler niso odpravljene. Opozorila poudarjajo težave, vendar omogočajo nadaljevanje. Informativne opombe zagotavljajo dodaten kontekst ali nevtralne smernice."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Napake blokirajo napredek, dokler niso odpravljene. Opozorila poudarjajo težave, vendar omogočajo nadaljevanje. Informativne opombe ponujajo dodaten kontekst ali nevtralne smernice. Pri uporabi opozoril ali informativnih opomb priporočamo, da omogočite takojšnje preverjanje veljavnosti: »Anketa« → »Preverjanje« → »Zaženi preverjanje« → »Po spremembi odgovora«."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

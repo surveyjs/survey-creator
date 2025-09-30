@@ -2073,8 +2073,8 @@ export var ruStrings = {
       error: "Ошибка",
       // [Auto-translated] "Warning"
       warning: "Предупреждение",
-      // [Auto-translated] "Informational"
-      info: "Информационный"
+      // [Auto-translated] "Informational note"
+      info: "Информационная заметка"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var ruStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Указывает тип уведомления, отображаемого пользователям. Ошибки блокируют прогресс до тех пор, пока не будут устранены. Предупреждения указывают на проблемы, но позволяют продолжить. Информационные заметки содержат дополнительный контекст или нейтральное руководство."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Ошибки блокируют прогресс до тех пор, пока не будут устранены. Предупреждения указывают на проблемы, но позволяют продолжить. Информационные заметки содержат дополнительный контекст или нейтральное руководство. При использовании предупреждений или информационных заметок рекомендуется включить немедленную проверку: «Опрос» → «Проверка» → «Запустить проверку» → «После изменения ответа»."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

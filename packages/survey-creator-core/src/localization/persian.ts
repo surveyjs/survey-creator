@@ -2073,8 +2073,8 @@ export var persianStrings = {
       error: "خطا",
       // [Auto-translated] "Warning"
       warning: "هشدار",
-      // [Auto-translated] "Informational"
-      info: "اطلاعاتی"
+      // [Auto-translated] "Informational note"
+      info: "یادداشت اطلاعاتی"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var persianStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "نوع اعلانی را که به کاربران نشان داده می شود مشخص می کند. خطاها پیشرفت را تا زمانی که حل نشوند مسدود می کنند. هشدارها مشکلات را برجسته می کنند اما اجازه ادامه می دهند. یادداشت های Infornational زمینه اضافی یا راهنمایی خنثی را ارائه می دهند."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "خطاها پیشرفت را تا زمانی که حل نشوند مسدود می کنند. هشدارها مشکلات را برجسته می کنند اما اجازه ادامه می دهند. یادداشت های اطلاعاتی زمینه اضافی یا راهنمایی خنثی را ارائه می دهند. هنگام استفاده از هشدارها یا یادداشت های اطلاعاتی، توصیه می کنیم اعتبارسنجی فوری را فعال کنید: «نظرسنجی» → «اعتبارسنجی» → «اجرای اعتبارسنجی» → «پس از تغییر پاسخ»."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

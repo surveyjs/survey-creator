@@ -2073,8 +2073,8 @@ export var turkishStrings = {
       error: "Hata",
       // [Auto-translated] "Warning"
       warning: "Uyarı",
-      // [Auto-translated] "Informational"
-      info: "Bilgi"
+      // [Auto-translated] "Informational note"
+      info: "Bilgilendirme notu"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var turkishStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Kullanıcılara gösterilen bildirimin türünü belirtir. Hatalar, çözülene kadar ilerlemeyi engeller. Uyarılar sorunları vurgular ancak devam etmesine izin verir. Bilgi notları ek bağlam veya tarafsız rehberlik sağlar."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Hatalar, çözülene kadar ilerlemeyi engeller. Uyarılar sorunları vurgular ancak devam etmesine izin verir. Bilgilendirici notlar ek bağlam veya tarafsız rehberlik sunar. Uyarıları veya bilgi notlarını kullanırken anında doğrulamayı etkinleştirmenizi öneririz: \"Anket\" → \"Doğrulama\" → \"Doğrulamayı çalıştır\" → \"Yanıt değiştikten sonra\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
