@@ -464,7 +464,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     });
     const unsortedNames = Object.keys(itemsObject);
     if (unsortedNames.length > 0) {
-      let generalCategory = this.findOrCreateCategory(categories);
+      let generalCategory = this.findOrCreateCategory(categories, "general");
       generalCategory.items = generalCategory.items.concat(unsortedNames.map(name => this.createToolboxItemRow(itemsObject[name])));
     }
     this.getQuestionCategories(model).value = categories;
