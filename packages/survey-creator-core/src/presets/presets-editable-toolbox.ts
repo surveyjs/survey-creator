@@ -194,20 +194,23 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
 
-  private findItem(value: any, itemName: string) {
-    return value.map(c => c.items.filter(i => i.name == itemName)[0]).filter(i => !!i)[0];
+  private findItem(value: any, itemName: string, hasCategories: boolean) {
+    return hasCategories ?
+      value.map(c => c.items.filter(i => i.name == itemName)[0]).filter(i => !!i)[0] :
+      value.filter(i => i.name == itemName)[0];
   }
 
   private moveToSubitems(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, itemName: string, remove = false) {
     const rowData = this.ejectRowData(question, row, remove);
-    const categories = this.getQuestionCategories(model);
-    const catValue = JSON.parse(JSON.stringify(categories.value));
-    const item = this.findItem(catValue, itemName);
+    const hasCategories = this.itemMenuCategoriesEnabled(model);
+    const destination = hasCategories ? this.getQuestionCategories(model) : this.getQuestionItems(model);
+    const destValue = JSON.parse(JSON.stringify(destination.value));
+    const item = this.findItem(destValue, itemName, hasCategories);
     if (item) {
       if (!item.subitems) item.subitems = [];
       item.subitems.push(rowData);
     }
-    categories.value = catValue;
+    destination.value = destValue;
   }
 
   protected itemMenuCategoriesEnabled(model: SurveyModel) {
@@ -252,13 +255,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           id: "convert-to-subcategory",
           title: "Convert to subcategory...",
           action: () => {
-            const categories = this.getQuestionCategories(model);
-            const catValue = JSON.parse(JSON.stringify(categories.value));
-            const item = this.findItem(catValue, rowData.name);
+            const destination = hasCategories ? this.getQuestionCategories(model) : this.getQuestionItems(model);
+            const destValue = JSON.parse(JSON.stringify(destination.value));
+            const item = this.findItem(destValue, rowData.name, hasCategories);
             if (item) {
               item.subitems = [];
             }
-            categories.value = catValue;
+            destination.value = destValue;
             this.updateMatrixRowActions(model, question.name);
           }
         }));
