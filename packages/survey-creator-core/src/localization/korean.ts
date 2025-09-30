@@ -2074,8 +2074,8 @@ export var koreanStrings = {
       error: "오류",
       // [Auto-translated] "Warning"
       warning: "경고",
-      // [Auto-translated] "Informational"
-      info: "정보"
+      // [Auto-translated] "Informational note"
+      info: "정보 참고 사항"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2765,8 +2765,8 @@ export var koreanStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "사용자에게 표시되는 알림 유형을 지정합니다. 오류는 해결될 때까지 진행을 차단합니다. 경고는 문제를 강조 표시하지만 계속할 수 있습니다. 정보 노트는 추가 컨텍스트 또는 중립적인 지침을 제공합니다."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "오류는 해결될 때까지 진행을 차단합니다. 경고는 문제를 강조 표시하지만 계속할 수 있습니다. 정보 메모는 추가 컨텍스트 또는 중립적인 지침을 제공합니다. 경고 또는 정보 메모를 사용할 때 \"설문 조사\" → \"유효성 검사\" → \"유효성 검사 실행\" → \"답변이 변경된 후\"와 같은 즉각적인 유효성 검사를 활성화하는 것이 좋습니다."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -2073,8 +2073,8 @@ export var czStrings = {
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varování",
-      // [Auto-translated] "Informational"
-      info: "Informační"
+      // [Auto-translated] "Informational note"
+      info: "Informační poznámka"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var czStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Určuje typ oznámení, které se bude zobrazovat uživatelům. Chyby blokují průběh, dokud nejsou vyřešeny. Varování upozorňují na problémy, ale umožňují pokračovat. Poznámky Infornational poskytují další kontext nebo neutrální pokyny."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Chyby blokují průběh, dokud nejsou vyřešeny. Varování upozorňují na problémy, ale umožňují pokračovat. Informační poznámky nabízejí další kontext nebo neutrální pokyny. Při používání varování nebo informačních poznámek doporučujeme povolit okamžitou validaci: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

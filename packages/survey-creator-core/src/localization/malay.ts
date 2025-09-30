@@ -2073,8 +2073,8 @@ export var msStrings = {
       error: "Ralat",
       // [Auto-translated] "Warning"
       warning: "Amaran",
-      // [Auto-translated] "Informational"
-      info: "Bermaklumat"
+      // [Auto-translated] "Informational note"
+      info: "Nota maklumat"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var msStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Menentukan jenis pemberitahuan yang ditunjukkan kepada pengguna. Ralat menyekat kemajuan sehingga diselesaikan. Amaran menyerlahkan isu tetapi membenarkan untuk diteruskan. Nota antarabangsa memberikan konteks tambahan atau panduan neutral."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Ralat menyekat kemajuan sehingga diselesaikan. Amaran menyerlahkan isu tetapi membenarkan untuk diteruskan. Nota maklumat menawarkan konteks tambahan atau panduan neutral. Apabila menggunakan amaran atau nota maklumat, kami mengesyorkan agar mendayakan pengesahan segera: \"Tinjauan\" → \"Pengesahan\" → \"Jalankan pengesahan\" → \"Selepas jawapan berubah\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -2073,8 +2073,8 @@ export var nlStrings = {
       error: "Fout",
       // [Auto-translated] "Warning"
       warning: "Waarschuwing",
-      // [Auto-translated] "Informational"
-      info: "Informatieve"
+      // [Auto-translated] "Informational note"
+      info: "Informatieve notitie"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var nlStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Hiermee geeft u het type melding op dat aan gebruikers wordt getoond. Fouten blokkeren de voortgang totdat ze zijn opgelost. Waarschuwingen markeren problemen, maar laten doorgaan toe. Infornationale nota's bieden extra context of neutrale richtlijnen."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fouten blokkeren de voortgang totdat ze zijn opgelost. Waarschuwingen markeren problemen, maar laten doorgaan toe. Informatieve notities bieden extra context of neutrale begeleiding. Wanneer u waarschuwingen of informatieve notities gebruikt, raden we aan om onmiddellijke validatie in te schakelen: 'Enquête' → 'Validatie' → 'Validatie uitvoeren' → 'Nadat een antwoord is gewijzigd'."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

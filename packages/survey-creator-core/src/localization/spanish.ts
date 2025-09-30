@@ -2073,8 +2073,8 @@ export var spanishTranslation = {
       error: "Error",
       // [Auto-translated] "Warning"
       warning: "Advertencia",
-      // [Auto-translated] "Informational"
-      info: "Informativo"
+      // [Auto-translated] "Informational note"
+      info: "Nota informativa"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var spanishTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Especifica el tipo de notificación que se muestra a los usuarios. Los errores bloquean el progreso hasta que se resuelven. Las advertencias resaltan los problemas, pero permiten continuar. Las notas informativas proporcionan un contexto adicional o una guía neutral."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Los errores bloquean el progreso hasta que se resuelven. Las advertencias resaltan los problemas, pero permiten continuar. Las notas informativas ofrecen contexto adicional u orientación neutral. Cuando utilice advertencias o notas informativas, se recomienda habilitar la validación inmediata: \"Encuesta\" → \"Validación\" → \"Ejecutar validación\" → \"Después de que haya cambiado una respuesta\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

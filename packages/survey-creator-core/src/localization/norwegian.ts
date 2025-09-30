@@ -2073,8 +2073,8 @@ export var nbStrings = {
       error: "Feil",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational"
-      info: "Informativ"
+      // [Auto-translated] "Informational note"
+      info: "Informativ merknad"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var nbStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Angir hvilken type varsling som vises til brukere. Feil blokkerer fremdriften til den løses. Advarsler fremhever problemer, men lar dem fortsette. Infornational notater gir ytterligere kontekst eller nøytral veiledning."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Feil blokkerer fremdriften til den løses. Advarsler fremhever problemer, men lar dem fortsette. Informasjonsnotater gir ekstra kontekst eller nøytral veiledning. Når du bruker advarsler eller informasjonsnotater, anbefaler vi at du aktiverer umiddelbar validering: «Undersøkelse» → «Validering» → «Kjør validering» → «Etter at et svar er endret»."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

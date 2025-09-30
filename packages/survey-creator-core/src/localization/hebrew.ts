@@ -2073,8 +2073,8 @@ export var hebrewStrings = {
       error: "שגיאה",
       // [Auto-translated] "Warning"
       warning: "אזהרה",
-      // [Auto-translated] "Informational"
-      info: "אינפורמטיבי"
+      // [Auto-translated] "Informational note"
+      info: "הערת מידע"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var hebrewStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "השתמש בסמל שרביט הקסמים כדי להגדיר מתי ערך השאלה נחשב חוקי.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "מציין את סוג ההודעה המוצגת למשתמשים. שגיאות חוסמות את ההתקדמות עד לפתרון. אזהרות מדגישות בעיות אך מאפשרות להמשיך. הערות אינפורמטיביות מספקות הקשר נוסף או הנחיות ניטרליות."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "שגיאות חוסמות את ההתקדמות עד לפתרון. אזהרות מדגישות בעיות אך מאפשרות להמשיך. הערות מידע מציעות הקשר נוסף או הדרכה ניטרלית. בעת שימוש באזהרות או הערות מידע, אנו ממליצים להפעיל אימות מיידי: \"סקר\" → \"אימות\" → \"הפעל אימות\" →\"לאחר שינוי תשובה\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
