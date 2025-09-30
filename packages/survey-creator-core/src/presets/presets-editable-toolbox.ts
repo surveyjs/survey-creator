@@ -3,6 +3,7 @@ import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization } from "survey-creator-core";
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
+import { listComponentCss } from "./presets-theme/list-theme";
 
 const LocCategoriesName = "toolboxCategories";
 
@@ -225,7 +226,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             this.moveToSubitems(model, question, row, i.name, true);
           }
         }));
-        catAction.setSubItems({ items: itemsActions });
+        catAction.setSubItems({ items: itemsActions, cssClasses: listComponentCss });
       }
       return catAction;
     }
@@ -234,6 +235,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const rowData = question.value[rowDataIndex];
     if (!rowData["subitems"]) {
       if (question.name == this.nameItems || question.name == this.nameInnerMatrix) {
+        actions.push(new Action({
+          id: "subcategories",
+          title: "Subcategories",
+          css: "sps-list__item--label",
+          enabled: false,
+          needSeparator: true
+        }));
         actions.push(new Action({
           id: "convert-to-subcategory",
           title: "Convert to subcategory...",
@@ -251,10 +259,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       }
       const subitemsAction = new Action({
         id: "move-as-subitem",
-        title: "Move as subitem",
-        needSeparator: true
+        title: "Move as subitem"
       });
-      subitemsAction.setSubItems({ items: catActions });
+      subitemsAction.setSubItems({ items: catActions, cssClasses: listComponentCss });
       actions.push(subitemsAction);
     }
 

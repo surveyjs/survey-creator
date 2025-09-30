@@ -83,12 +83,18 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       }
     }));
     if (!isUnsorted) {
+      actions.push(new Action({
+        id: "categories",
+        title: "Categories",
+        css: "sps-list__item--label",
+        enabled: false,
+        needSeparator: true
+      }));
       const catGroup = new Action({
         id: "move-to-categories",
-        title: "Move to category...",
-        needSeparator: true
+        title: "Move to category..."
       });
-      catGroup.setSubItems({ items: moveToCategories });
+      catGroup.setSubItems({ items: moveToCategories, cssClasses: listComponentCss });
       actions.push(catGroup);
     } else {
       actions.push(...moveToCategories);
@@ -141,6 +147,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         horizontalPosition: "center",
         cssClass: "sps-popup-menu",
         cssClasses: listComponentCss,
+        searchEnabled: false
       });
       addAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
         if (opt.isVisible) {
