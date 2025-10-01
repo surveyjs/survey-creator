@@ -1,4 +1,4 @@
-import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization, settings, MatrixDynamicRowModel } from "survey-core";
+import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization, settings, MatrixDynamicRowModel, ComponentCollection } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
 import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
@@ -404,4 +404,16 @@ test("Preset edit, toolbox - edit item", () => {
   } finally {
     settings.showDialog = originalShowDialog;
   }
+});
+
+test("Preset edit, toolbox - custom types", () => {
+  ComponentCollection.Instance.add({ name: "test", title: "Test", questionJSON: { "type": "text", "title": "1" } });
+
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.value).toBeUndefined();
+  expect(categQuestion.value.filter(c => c.category === "general")[0].items.filter(i => i.name === "test")).toHaveLength(1);
+  ComponentCollection.Instance.remove("test");
 });

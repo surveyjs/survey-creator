@@ -1224,12 +1224,12 @@ export class QuestionToolbox
     }
     return null;
   }
-  protected onItemsChanged(changeActions: boolean = true) {
-    var categories = new Array<QuestionToolboxCategory>();
-    var categoriesHash = {};
-    var prevActiveCategory = this.activeCategory;
-    for (let i = 0; i < this.actions.length; i++) {
-      const item = this.actions[i];
+
+  private createCategoriesFromItems(items: Array<QuestionToolboxItem>) {
+    const categories = new Array<QuestionToolboxCategory>();
+    const categoriesHash = {};
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
       item.innerItem.action = () => {
         this.creator.clickToolboxItem((<any>item).json);
       };
@@ -1239,16 +1239,24 @@ export class QuestionToolbox
         const category = this.createCategory();
         category.name = categoryName;
         category.title = this.getCategoryTitle(categoryName);
-        category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
       }
       categoriesHash[categoryName].items.push(item);
     }
+    return categories;
+  }
+  protected onItemsChanged(changeActions: boolean = true) {
+    const categories = this.createCategoriesFromItems(this.actions);
     this.categories = categories;
+    let prevActiveCategory;
+    this.categories.forEach((category) => {
+      category.collapsed = category.name !== this.activeCategory && !this.keepAllCategoriesExpanded;
+      if (category.name === this.activeCategory) prevActiveCategory = category.name;
+    });
     if (!this.keepAllCategoriesExpanded) {
       if (!this.allowExpandMultipleCategories) {
-        if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
+        if (prevActiveCategory) {
           this.activeCategory = prevActiveCategory;
         } else {
           this.activeCategory = categories.length > 0 ? categories[0].name : "";
@@ -1328,18 +1336,9 @@ export class QuestionToolbox
     return res;
   }
   public getDefaultCategories(): Array<QuestionToolboxCategory> {
-    const items = this.getDefaultItems(this.supportedQuestions, false, true, true);
-    const itemsHash = {};
-    items.forEach(item => {
-      itemsHash[item.id] = item;
-    });
-    return Object.keys(QuestionToolbox.defaultCategories).map(cName=>{
-      const category = new QuestionToolboxCategory(this);
-      category.name = cName;
-      category.title = this.getCategoryTitle(cName);
-      category.items = QuestionToolbox.defaultCategories[cName].map(iName => itemsHash[iName]);
-      return category;
-    });
+    const items = this.getDefaultItems(this.supportedQuestions, true, true, true);
+    const categories = this.createCategoriesFromItems(items);
+    return categories;
   }
 
   private actionsHash: { [index: string]: QuestionToolboxItem };
