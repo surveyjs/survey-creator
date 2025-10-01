@@ -10,6 +10,7 @@ import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
 import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../src/creator-settings";
 import { SurveyTriggerComplete } from "survey-core";
+import { CreatorBase } from "../../src/creator-base";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
@@ -671,4 +672,20 @@ test("itemvalue[] custom dropdown property add locationInTable, Bug#6677", () =>
   Serializer.removeProperty("itemvalue", "prop2");
   Serializer.removeProperty("itemvalue", "prop3");
   Serializer.removeProperty("itemvalue", "prop4");
+});
+
+test("dropdown question inside detail panel", () => {
+  const question = new QuestionTextModel("q1");
+  question.choices = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question, new CreatorBase({}));
+  const validatorsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("validators");
+  validatorsQuestion.addRow();
+  const dropdownInsideCell = <QuestionDropdownModel>validatorsQuestion.visibleRows[0].cells[0].question;
+  const dropdownInsideDetail = <QuestionDropdownModel>validatorsQuestion.visibleRows[0].detailPanel.getQuestionByName("notificationType");
+  expect(dropdownInsideCell.popupModel.setWidthByTarget).toBe(true);
+  expect(dropdownInsideDetail.popupModel.setWidthByTarget).toBe(true);
+  dropdownInsideCell.popupModel.toggleVisibility();
+  dropdownInsideDetail.popupModel.toggleVisibility();
+  expect(dropdownInsideCell.popupModel.setWidthByTarget).toBe(false);
+  expect(dropdownInsideDetail.popupModel.setWidthByTarget).toBe(true);
 });
