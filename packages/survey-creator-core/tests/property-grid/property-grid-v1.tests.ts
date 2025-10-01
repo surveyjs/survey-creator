@@ -22,7 +22,8 @@ import {
   SurveyTriggerComplete,
   SurveyTriggerSkip,
   ImageItemValue,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  RegexValidator
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -1384,7 +1385,7 @@ test("'set' property editor, get choices on callback, Bug#720", () => {
 
 test("Validators property editor", () => {
   var survey = createSurvey();
-  var validator = new NumericValidator(10, 100);
+  var validator = new RegexValidator("^[0-9]+$");
   validator.text = "validatortext";
   var question = <Question>survey.getQuestionByName("question1");
   question.validators.push(validator);
@@ -1395,7 +1396,7 @@ test("Validators property editor", () => {
   var rows = validatorsQuestion.visibleRows;
   expect(rows).toHaveLength(1);
   expect(rows[0].cells[0].question.choices.length > 1).toBeTruthy();
-  expect(rows[0].cells[0].value).toEqual("numericvalidator");
+  expect(rows[0].cells[0].value).toEqual("regexvalidator");
   validatorsQuestion.addRow();
   expect(rows[1].cells[0].value).toEqual("expressionvalidator");
   rows[1].cells[0].value = "textvalidator";
@@ -1435,6 +1436,7 @@ test("Validators property editor update existing validator property - https://su
   var validator = new NumericValidator(10, 100);
   validator.text = "validatortext";
   var question = survey.getQuestionByName("question1");
+  question.inputType = "number";
   question.validators.push(validator);
   var propertyGrid = new PropertyGridModelTester(question);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
