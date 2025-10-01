@@ -27,12 +27,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
 
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (this.needToSetActions(name)) {
-      this.updateMatrixRowActions(model, name);
+      const matrix = model.getQuestionByName(name) as QuestionMatrixDynamicModel;
+      this.updateMatrixRowActions(model, matrix);
     }
   }
 
-  protected updateMatrixRowActions(model: SurveyModel, name: string) {
-    const matrix = model.getQuestionByName(name) as QuestionMatrixDynamicModel;
+  protected updateMatrixRowActions(model: SurveyModel, matrix: QuestionMatrixDynamicModel) {
     matrix.renderedTable.rows.forEach(r => {
       if (!r.row) return;
       const iconActions = r.cells[1]?.item?.value.actions;
