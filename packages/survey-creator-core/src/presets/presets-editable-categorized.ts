@@ -241,7 +241,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected getExistingKeys(model: SurveyModel, key: string) {
     const cats = model.getQuestionByName(this.nameCategories).value || [];
     const unsorted = model.getQuestionByName(this.nameMatrix).value || [];
-    return [...cats, ...cats.map(c => c.items).flat(), ...unsorted].map(i => i[key]).filter(v => !!v);
+    return [...cats, ...cats.map(c => c.items).flat(), ...unsorted].map(i => i?.[key]).filter(v => !!v);
   }
 
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
