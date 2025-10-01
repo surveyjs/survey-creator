@@ -414,10 +414,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
 
   private getCurrentlyHiddenItems(categories: any) {
+    const hiddenProperties = ["progressBarInheritWidthFrom"];
     const itemsMap: any = {};
     this.defaultItems.forEach((i: any) => itemsMap[i.name] = i);
     categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));
-    return Object.keys(itemsMap).map(key => itemsMap[key]);
+    return Object.keys(itemsMap).map(key => itemsMap[key]).filter(i => hiddenProperties.indexOf(i.name) == -1);
   }
 
   private setupDefaults(model: SurveyModel): void {
