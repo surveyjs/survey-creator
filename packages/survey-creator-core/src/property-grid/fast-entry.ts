@@ -1,7 +1,12 @@
-import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, Base, Helpers } from "survey-core";
+import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, settings, Helpers } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
+import { getItemValueSeparator } from "../survey-helper";
+
+function getSeparator(): string {
+  return getItemValueSeparator();
+}
 
 export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected commentValue: QuestionCommentModel;
@@ -105,7 +110,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     const items = [];
     for (var i = 0; i < texts.length; i++) {
       if (!texts[i]) continue;
-      var elements = texts[i].split(ItemValue.Separator);
+      var elements = texts[i].split(getSeparator());
       var valueItem = Serializer.createClass(this.className);
       this.names.forEach((name, i) => {
         valueItem[name] = elements[i];
@@ -139,7 +144,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     for (let i = 0; i < texts.length; i++) {
       let str = texts[i];
       if (!str) continue;
-      let value = str.split(ItemValue.Separator)[0];
+      let value = str.split(getSeparator())[0];
       if (values[value]) return value;
       values[value] = true;
     }
@@ -163,7 +168,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       }
       if (!Helpers.isValueEmpty(str)) {
         for (var i = 0; i < separatorCounter; i++) {
-          text += ItemValue.Separator;
+          text += getSeparator();
         }
         text += str;
         separatorCounter = 1;
