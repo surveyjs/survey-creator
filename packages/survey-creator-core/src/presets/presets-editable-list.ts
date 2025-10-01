@@ -207,19 +207,25 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
   }
 
-  protected getDefaultValueForRow(question: QuestionMatrixDynamicModel, key: string) {
-    return SurveyHelper.getNewName((question.value || []).map(r => ({ name: r.name })), key);
+  protected getExistingKeys(model: SurveyModel, key: string) {
+    const items = model.getQuestionByName(this.nameItems).value || [];
+    const unsorted = model.getQuestionByName(this.nameMatrix).value || [];
+    return [...items, ...unsorted].map(i => i[key]).filter(v => !!v);
   }
 
-  protected setDefaultValueForRow(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+  protected getDefaultValueForRow(model: SurveyModel, question: QuestionMatrixDynamicModel, key: string) {
+    return SurveyHelper.getNewName(this.getExistingKeys(model, key).map(r => ({ name: r })), key);
+  }
+
+  protected setDefaultValueForRow(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const key = this.getMatrixKeyColumnName(question);
-    const value = this.getDefaultValueForRow(question, key);
+    const value = this.getDefaultValueForRow(model, question, key);
     row.getQuestionByName(key).value = value;
     row.getQuestionByName("title").value = value;
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (this.isItemsMatrix(options.question.name)) {
-      this.setDefaultValueForRow(options.question, options.row);
+      this.setDefaultValueForRow(model, options.question, options.row);
     }
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {

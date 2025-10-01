@@ -125,7 +125,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         title: "Move to new category",
         needSeparator: isUnsorted,
         action: () => {
-          this.moveToCategory(model, question, row, this.getDefaultValueForRow(question, "category"), true);
+          this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
         }
       }));
 
@@ -238,6 +238,12 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
   }
 
+  protected getExistingKeys(model: SurveyModel, key: string) {
+    const cats = model.getQuestionByName(this.nameCategories).value || [];
+    const unsorted = model.getQuestionByName(this.nameMatrix).value || [];
+    return [...cats, ...cats.map(c => c.items).flat(), ...unsorted].map(i => i[key]).filter(v => !!v);
+  }
+
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     super.onMatrixRowRemoving(model, creator, options);
     if (options.question.name == this.nameCategories) {
@@ -257,7 +263,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     super.onMatrixRowAdded(model, creator, options);
     if (options.question.name == this.nameCategories) {
-      this.setDefaultValueForRow(options.question, options.row);
+      this.setDefaultValueForRow(model, options.question, options.row);
     }
   }
 }

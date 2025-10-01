@@ -213,6 +213,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     destination.value = destValue;
   }
 
+  protected getExistingKeys(model: SurveyModel, key: string) {
+    const superItems = super.getExistingKeys(model, key);
+    const items = model.getQuestionByName(this.nameItems).value || [];
+    const keys = items.map(i => i[key]).filter(v => !!v);
+    return [...superItems, ...keys];
+  }
+
   protected itemMenuCategoriesEnabled(model: SurveyModel) {
     return model.getValue(this.nameCategoriesMode) !== "items";
   }

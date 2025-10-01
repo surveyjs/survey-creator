@@ -417,3 +417,62 @@ test("Preset edit, toolbox - custom types", () => {
   expect(categQuestion.value.filter(c => c.category === "general")[0].items.filter(i => i.name === "test")).toHaveLength(1);
   ComponentCollection.Instance.remove("test");
 });
+
+test("Preset edit, toolbox - new names", () => {
+  const editor = new CreatorPresetEditorModel({
+    "toolbox": {
+      "definition": [
+        {
+          "name": "text"
+        },
+        {
+          "name": "comment"
+        },
+        {
+          "name": "multipletext"
+        },
+        {
+          "name": "name1",
+          "title": "name1"
+        },
+        {
+          "name": "panel"
+        },
+        {
+          "name": "paneldynamic"
+        },
+        {
+          "name": "name2",
+          "title": "name2"
+        }
+      ],
+      "categories": [
+        {
+          "category": "text",
+          "title": "Text Input Questions",
+          "items": [
+            "text",
+            "comment",
+            "multipletext",
+            "name1"
+          ]
+        },
+        {
+          "category": "containers",
+          "title": "Containers",
+          "items": [
+            "panel",
+            "paneldynamic",
+            "name2"
+          ]
+        }
+      ]
+    }
+  });
+  const survey = editor.model;
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  matrixQuestion.addRow();
+  expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name3");
+  matrixQuestion.addRow();
+  expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name4");
+});
