@@ -1089,7 +1089,7 @@ export var enStrings = {
     notificationType: {
       error: "Error",
       warning: "Warning",
-      info: "Informational"
+      info: "Informational note"
     },
     autocomplete: {
       name: "Full Name",
@@ -1489,7 +1489,7 @@ export var enStrings = {
     },
     surveyvalidator: {
       expression: "Use the magic wand icon to define when the question's value is considered valid.",
-      notificationType: "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
+      notificationType: "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",

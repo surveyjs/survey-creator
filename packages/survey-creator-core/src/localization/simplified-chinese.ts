@@ -2073,8 +2073,8 @@ export var simplifiedChineseTranslation = {
       error: "错误",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational"
-      info: "信息"
+      // [Auto-translated] "Informational note"
+      info: "信息说明"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var simplifiedChineseTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "使用魔杖图标定义问题值何时被视为有效。",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "指定向用户显示的通知类型。错误会阻止进度，直到解决。警告突出显示问题，但允许继续。Infornational 说明提供了额外的背景信息或中立的指导。"
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "错误会阻止进度，直到解决。警告突出显示问题，但允许继续。信息性说明提供额外的背景信息或中立指导。使用警告或信息性注释时，建议启用即时验证：“调查”→“验证”→“运行验证”→“答案更改后”。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

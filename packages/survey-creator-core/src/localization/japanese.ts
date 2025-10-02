@@ -2073,8 +2073,8 @@ export var jaStrings = {
       error: "エラー",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational"
-      info: "情報"
+      // [Auto-translated] "Informational note"
+      info: "情報メモ"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var jaStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "ユーザーに表示される通知の種類を指定します。エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報に関するメモは、追加のコンテキストまたは中立的なガイダンスを提供します。"
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報メモは、追加のコンテキストまたは中立的なガイダンスを提供します。警告または情報メモを使用する場合は、「アンケート」→「検証」→「検証の実行」→「回答が変更された後」の即時検証を有効にすることをお勧めします。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

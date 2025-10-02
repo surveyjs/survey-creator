@@ -2073,8 +2073,8 @@ export var bgStrings = {
       error: "Грешка",
       // [Auto-translated] "Warning"
       warning: "Предупреждение",
-      // [Auto-translated] "Informational"
-      info: "Информационна"
+      // [Auto-translated] "Informational note"
+      info: "Информационна бележка"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2764,8 @@ export var bgStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Указва типа известие, което се показва на потребителите. Грешките блокират напредъка, докато не бъде разрешен. Предупрежденията подчертават проблемите, но позволяват да продължат. Информационните бележки предоставят допълнителен контекст или неутрални насоки."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Грешките блокират напредъка, докато не бъде разрешен. Предупрежденията подчертават проблемите, но позволяват да продължат. Информационните бележки предлагат допълнителен контекст или неутрални насоки. Когато използвате предупреждения или информационни бележки, препоръчваме да активирате незабавно валидиране: \"Проучване\" → \"Валидиране\" → \"Стартиране на валидиране\" → \"След промяна на отговора\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

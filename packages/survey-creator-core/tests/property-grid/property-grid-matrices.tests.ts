@@ -17,8 +17,9 @@ export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/custom-questions/question-text-with-reset";
 
-test("Validators property editor", () => {
+test("Validators property editor, v2", () => {
   var question = new QuestionTextModel("q1");
+  question.inputType = "number";
   question.validators.push(new ExpressionValidator());
   var propertyGrid = new PropertyGridModelTester(question);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
@@ -71,6 +72,7 @@ test("Validators property editor for column", () => {
   var matrix = new QuestionMatrixDynamicModel("q1");
   var column = matrix.addColumn("col1");
   column.cellType = "text";
+  (<any>column).inputType = "number";
   column.validators.push(new ExpressionValidator());
   var propertyGrid = new PropertyGridModelTester(column);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
@@ -124,6 +126,7 @@ test("Question doesn't have expression validator, bug#4378", () => {
   surveySettings.supportedValidators.question.forEach(val => oldArray.push(val));
   surveySettings.supportedValidators.question = [];
   const question = new QuestionTextModel("q1");
+  question.inputType = "number";
   const propertyGrid = new PropertyGridModelTester(question);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("validators")
@@ -330,9 +333,10 @@ test("QuestionMultipleTextModel items property editor", () => {
   expect(question.items).toHaveLength(2);
   expect(question.items[1].name).toEqual("item2");
 });
-test("QuestionMultipleTextModel items property editor + validators editor", () => {
+test("QuestionMultipleTextModel items property editor + validators editor, #1", () => {
   var multipleQuestion = new QuestionMultipleTextModel("q1");
   var textItem = multipleQuestion.addItem("item1", "Item 1");
+  textItem.inputType = "number";
   var propertyGrid = new PropertyGridModelTester(multipleQuestion);
   var itemsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("items")
@@ -439,7 +443,7 @@ test("check multiple text items editing by Manual Entry", () => {
   expect(itemsQuestion.renderedTable.rows[2].cells[1].question.value).toEqual("item2");
   expect(itemsQuestion.renderedTable.rows[2].cells[2].question.value).toEqual("Item 2");
 });
-test("QuestionMultipleTextModel items property editor + validators editor", () => {
+test("QuestionMultipleTextModel items property editor + validators editor, #2", () => {
   var multipleQuestion = new QuestionMultipleTextModel("q1");
   var textItem = multipleQuestion.addItem("item1");
   var propertyGrid = new PropertyGridModelTester(multipleQuestion);
