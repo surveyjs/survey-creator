@@ -1,6 +1,6 @@
 import { Action, FunctionFactory, Helpers, IAction, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization } from "survey-creator-core";
+import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization, getLocString } from "survey-creator-core";
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -46,10 +46,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           "name": "details",
           "maxWidth": "30%",
           "elements": [
-            { type: "text", name: "name", title: "Name", isUnique: true, visible: false, isRequired: true },
-            { type: "text", name: "title", title: "Title", visible: false },
-            { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
-            { type: "text", name: "tooltip", title: "Tooltip", visible: false },
+            { type: "text", name: "name", title: getLocString("presets.toolbox.categoryName"), isUnique: true, visible: false, isRequired: true },
+            { type: "text", name: "title", title: getLocString("presets.toolbox.categoryTitle"), visible: false },
+            { type: "dropdown", name: "iconName", title: getLocString("presets.toolbox.iconName"), itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
+            { type: "text", name: "tooltip", title: getLocString("presets.toolbox.tooltip"), visible: false },
           ],
           visible: false
         },
@@ -58,7 +58,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           name: "json",
           startWithNewLine: false,
           renderAs: "default-comment",
-          title: "JSON object to apply when users select this toolbox item",
+          title: getLocString("presets.toolbox.jsonObject"),
           validators: [{
             type: "expression",
             text: "JSON should be correct",
@@ -73,7 +73,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     if (addSubitems) {
       newJson.detailElements.push(this.createItemsMatrixJSON({
         allowAddRows: true,
-        addRowText: "Add a new subitem",
+        addRowText: getLocString("presets.toolbox.addNewSubitem"),
         addRowButtonLocation: "bottom",
         name: this.nameSubitems,
         valueName: "subitems",
@@ -86,9 +86,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   public createMainPageCore(): any {
     return {
-      title: "Set up the Toolbox",
-      description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-      navigationTitle: "Toolbox",
+      title: getLocString("presets.toolbox.title"),
+      description: getLocString("presets.toolbox.description"),
+      navigationTitle: getLocString("presets.toolbox.navigationTitle"),
       elements: [
         {
           type: "panel",
@@ -97,13 +97,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              title: "Toolbox",
+              title: getLocString("presets.toolbox.toolbox"),
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               minRowCount: 1,
               allowRowReorder: true,
               allowAddRows: true,
               addRowButtonLocation: "top",
-              addRowText: "Add Custom Category",
+              addRowText: getLocString("presets.toolbox.addCustomCategory"),
               showHeader: false,
               columns: [
                 { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
@@ -111,34 +111,34 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               ],
               detailPanelMode: "underRow",
               detailElements: [
-                { type: "text", name: "category", title: "Name", isRequired: true, visible: false },
-                { type: "text", name: "title", title: "Title", visible: false },
-                { type: "text", name: "tooltip", title: "Tooltip", visible: false },
+                { type: "text", name: "category", title: getLocString("presets.toolbox.categoryName"), isRequired: true, visible: false },
+                { type: "text", name: "title", title: getLocString("presets.toolbox.categoryTitle"), visible: false },
+                { type: "text", name: "tooltip", title: getLocString("presets.toolbox.tooltip"), visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
                   titleLocation: "hidden",
                   allowAddRows: true,
                   addRowButtonLocation: "bottom",
-                  addRowText: "Add a new item",
+                  addRowText: getLocString("presets.toolbox.addNewItem"),
                   valueName: "items"
                 }, true)
               ]
             },
             this.createItemsMatrixJSON({
               name: this.nameItems,
-              title: "Toolbox",
+              title: getLocString("presets.toolbox.toolbox"),
               addRowButtonLocation: "top",
-              addRowText: "Add Custom Item",
+              addRowText: getLocString("presets.toolbox.addCustomItem"),
               startWithNewLine: false,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
             }, true),
             this.createItemsMatrixJSON({
               allowAddRows: true,
-              title: "Unsorted items",
-              description: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
+              title: getLocString("presets.toolbox.unsortedItems"),
+              description: getLocString("presets.toolbox.unsortedDescription"),
               descriptionLocation: "underInput",
               addRowButtonLocation: "bottom",
-              addRowText: "Add a new item",
+              addRowText: getLocString("presets.toolbox.addNewItem"),
               startWithNewLine: false,
               name: this.nameMatrix
             }, false)]
@@ -151,7 +151,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             {
               type: "boolean",
               name: this.nameCategoriesMode,
-              title: "Enable grouping",
+              title: getLocString("presets.toolbox.enableGrouping"),
               titleLocation: "hidden",
               defaultValue: "categories",
               valueTrue: "categories",
@@ -162,7 +162,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             {
               type: "boolean",
               name: this.nameShowCategoryTitles,
-              title: "Show category titles",
+              title: getLocString("presets.toolbox.showCategoryTitles"),
               defaultValue: false,
               titleLocation: "hidden",
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
@@ -253,14 +253,14 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       if (question.name == this.nameItems || question.name == this.nameInnerMatrix) {
         actions.push(new Action({
           id: "subcategories",
-          title: "Subcategories",
+          title: getLocString("presets.toolbox.subcategories"),
           css: "sps-list__item--label",
           enabled: false,
           needSeparator: true
         }));
         actions.push(new Action({
           id: "convert-to-subcategory",
-          title: "Convert to subcategory...",
+          title: getLocString("presets.toolbox.convertToSubcategory"),
           action: () => {
             const destination = hasCategories ? this.getQuestionCategories(model) : this.getQuestionItems(model);
             const destValue = JSON.parse(JSON.stringify(destination.value));
@@ -275,7 +275,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       }
       const subitemsAction = new Action({
         id: "move-as-subitem",
-        title: "Move as subitem"
+        title: getLocString("presets.toolbox.moveAsSubitem")
       });
       subitemsAction.setSubItems({ items: subItems, cssClasses: listComponentCss });
       actions.push(subitemsAction);

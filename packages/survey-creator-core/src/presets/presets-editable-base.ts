@@ -1,5 +1,5 @@
 import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, PanelModel } from "survey-core";
-import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
+import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions, getLocString } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 
 export interface ICreatorPresetEditorSetup {
@@ -109,7 +109,7 @@ export class CreatorPresetEditableBase {
   }
   public resetToDefaults(model: SurveyModel, notify = true): void {
     this.restoreValuesFromDefault(model);
-    this.notifyCallback(this.getPageTitle(model) + " resored to default");
+    this.notifyCallback(this.getPageTitle(model) + " " + getLocString("presets.editor.resoredToDefault"));
     this.children.forEach(item => {
       item.resetToDefaults(model, notify);
     });
@@ -207,7 +207,7 @@ export class CreatorPresetEditableBase {
           return true;
         },
         cssClass: "sps-popup svc-property-editor svc-creator-popup",
-        title: "Edit",
+        title: getLocString("presets.editor.edit"),
         displayMode: "popup"
       }, rootElement);
       if (survey.getAllQuestions().filter(q => !q.startWithNewLine).length > 0) {

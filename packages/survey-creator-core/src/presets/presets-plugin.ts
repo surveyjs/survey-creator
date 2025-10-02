@@ -1,5 +1,5 @@
 import { createDropdownActionModel, IAction } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 export class TabPresetsPlugin implements ICreatorPlugin {
@@ -23,7 +23,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", title: "Presets", plugin: this, iconName: TabPresetsPlugin.iconName });
+    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: TabPresetsPlugin.iconName });
     creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
@@ -50,11 +50,11 @@ export class TabPresetsPlugin implements ICreatorPlugin {
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [
-      { id: "save", title: "Save & Exit", css: "sps-list__item--positive", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
-      { id: "import", title: "Import", markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
-      { id: "export", title: "Export", markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
-      { id: "reset-current", title: "Reset Languages to default", needSeparator: true, action: () => { this.model?.resetToDefaults("page_languages"); } },
-      { id: "reset", title: "Reset all changes", action: () => { this.model?.resetToDefaults(); } },
+      { id: "save", title: getLocString("presets.plugin.save"), css: "sps-list__item--positive", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
+      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.model?.resetToDefaults("page_languages"); } },
+      { id: "reset", title: getLocString("presets.plugin.resetAll"), action: () => { this.model?.resetToDefaults(); } },
     ];
     let settingsAction;
     let presetsList;
@@ -93,7 +93,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     presetsList.selectedItem = presetsList.actions[0];
     this.model.model.onCurrentPageChanged.add((_, options) => {
       presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo];
-      resetCurrentAction.title = "Reset " + this.model.model.currentPage.navigationTitle + " to defaults";
+      resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(presetsList.selectedItem.id); };
     });
     presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);

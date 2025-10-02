@@ -1,6 +1,6 @@
 import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
-import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
+import { getLocString, editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 function searchItem(params) {
   const questionInstance = this.survey.getQuestionByName(params[0]);
   let itemvalue = params[1];
@@ -15,13 +15,13 @@ FunctionFactory.Instance.register("searchItem", searchItem);
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
-      title: "Languages",
-      description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-      navigationTitle: "Languages",
+      title: getLocString("presets.languages.title"),
+      description: getLocString("presets.languages.description"),
+      navigationTitle: getLocString("presets.languages.navigationTitle"),
       elements: [
         {
           type: "dropdown",
-          title: "Creator UI language",
+          title: getLocString("presets.languages.creatorUI"),
           placeholder: editorLocalization.getLocaleName(""),
           name: this.creatorLocaleName,
           searchEnabled: true,
@@ -29,12 +29,12 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
         },
         {
           type: "panel",
-          title: "Survey languages",
+          title: getLocString("presets.languages.surveyLanguages"),
           elements: [
             {
               type: "text",
               name: this.searchLocalesName,
-              placeholder: "Type to search...",
+              placeholder: getLocString("presets.languages.searchPlaceholder"),
               titleLocation: "hidden",
               textUpdateMode: "onTyping"
             }, {
@@ -56,7 +56,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
             {
               type: "boolean",
               name: this.surveyUseEnglishNames,
-              title: "Translate Survey language names to Engish",
+              title: getLocString("presets.languages.translateToEnglish"),
               titleLocation: "hidden",
               renderAs: "switch"
             }] }

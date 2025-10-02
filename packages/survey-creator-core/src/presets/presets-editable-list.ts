@@ -1,6 +1,6 @@
 import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry, Question } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
-import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
+import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
 export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
@@ -117,7 +117,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     const itemKey = this.getMatrixKeyColumnName(question);
     const resetActionParams = {
       id: "reset-to-default",
-      title: "Reset to default",
+      title: getLocString("presets.editor.resetToDefault"),
       css: "sps-action--grow",
       innerCss: "sps-btn sps-btn--secondary-alert",
       visibleIndex: 15,
@@ -125,7 +125,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
         survey.data = defaultItem;
         resetAction.enabled = false;
-        this.notifyCallback("Item restored to default");
+        this.notifyCallback(getLocString("presets.editor.itemRestoredToDefault"));
       }
     };
     resetAction = new Action(resetActionParams);
@@ -149,7 +149,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       });
       question.value = value;
     }
-    this.notifyCallback("Item restored to default");
+    this.notifyCallback(getLocString("presets.editor.itemRestoredToDefault"));
   }
   protected restoreItems(questionItems: QuestionMatrixDynamicModel, questionHiddenItems: QuestionMatrixDynamicModel, rowIndex: number) {
     const rowData = questionHiddenItems.value[rowIndex];

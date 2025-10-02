@@ -1,6 +1,6 @@
 import { Helpers, ItemValue, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel, editorLocalization } from "survey-creator-core";
+import { SurveyCreatorModel, editorLocalization, getLocString } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
@@ -27,32 +27,32 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       ],
       detailPanelMode: "underRow",
       detailElements: [
-        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true, readOnly: true, visible: false },
-        { type: "text", name: "title", title: "Title", visible: false },
-        { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false }
+        { type: "text", name: "name", title: getLocString("presets.tabs.name"), isUnique: true, isRequired: true, readOnly: true, visible: false },
+        { type: "text", name: "title", title: getLocString("presets.tabs.titleField"), visible: false },
+        { type: "dropdown", name: "iconName", title: getLocString("presets.tabs.iconName"), itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false }
       ]
     };
     return { ...defaultJSON, ...props };
   }
   public createMainPageCore(): any {
     return {
-      title: "Configure tabs",
-      description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-      navigationTitle: "Tabs",
+      title: getLocString("presets.tabs.title"),
+      description: getLocString("presets.tabs.description"),
+      navigationTitle: getLocString("presets.tabs.navigationTitle"),
       elements: [
         {
           type: "panel",
           name: this.mainPanelName,
           elements: [
             this.createItemsMatrixJSON({
-              title: "Tabs",
+              title: getLocString("presets.tabs.tabs"),
               name: this.nameItems
             }),
             this.createItemsMatrixJSON({
               startWithNewLine: false,
-              title: "Unsorted items",
+              title: getLocString("presets.tabs.unsortedItems"),
               name: this.nameMatrix,
-              description: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
+              description: getLocString("presets.tabs.unsortedDescription"),
               descriptionLocation: "underInput",
             }),
           ]
@@ -64,7 +64,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
             {
               type: "dropdown",
               name: this.nameActiveTab,
-              title: "Default tab"
+              title: getLocString("presets.tabs.defaultTab")
             }
           ]
         },

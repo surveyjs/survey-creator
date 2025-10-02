@@ -1,4 +1,4 @@
-import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
+import { SurveyCreatorModel, editorLocalization, ICreatorOptions, getLocString } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
 import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
@@ -7,6 +7,7 @@ import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
 import { presetsCss } from "./presets-theme/presets";
+export { enStrings } from "./localization/english";
 
 export class NavigationBar extends ActionContainer {
   constructor() {
@@ -42,7 +43,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.modelValue = this.createModel();
     this.resultModelValue = this.createResultModel();
     this.locTitle = new LocalizableString(undefined, false);
-    this.locTitle.text = "Creator Presets";
+    this.locTitle.text = getLocString("presets.editor.title");
     this.navigationBarValue = new NavigationBar();
     const firstTabName = "preset";
     this.preset.setJson(this.getJsonFromSurveyModel());
@@ -91,7 +92,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
 
   public resetToDefaults(page?: string) {
     if (!page) {
-      this.notify("All settings restored to default");
+      this.notify(getLocString("presets.editor.resetToDefaults"));
     }
     this.model.editablePresets.forEach(item => {
       if (!page || item.pageName == page) item.resetToDefaults(this.model, !!page);
@@ -115,8 +116,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
     model.showNavigationButtons = false;
-    model.completeText = "Save & Exit";
-    model.pagePrevText = "Back";
+    model.completeText = getLocString("presets.editor.completeText");
+    model.pagePrevText = getLocString("presets.editor.pagePrevText");
     model.enterKeyAction = "loseFocus";
 
     editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
@@ -214,7 +215,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const model = new SurveyModel({
       elements: [
         { type: "html", name: "q1", html: this.getResultHtml() },
-        { type: "comment", name: "json", title: "Preset JSON:", rows: 60, cols: 120, readOnly: true }
+        { type: "comment", name: "json", title: getLocString("presets.editor.presetJson"), rows: 60, cols: 120, readOnly: true }
       ]
     });
     model.showPrevButton = false;
@@ -227,7 +228,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         options.titleActions.push({
           id: "json_copy",
           iconName: "icon-copy",
-          title: "Copy",
+          title: getLocString("presets.editor.copy"),
           action: () => {
             navigator.clipboard.writeText(question.value);
           }
@@ -235,7 +236,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         options.titleActions.push({
           id: "json_download",
           iconName: "icon-download",
-          title: "Download",
+          title: getLocString("presets.editor.download"),
           action: () => {
             this.downloadJsonFile(question.value);
           }
@@ -243,7 +244,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         options.titleActions.push({
           id: "icon-load",
           iconName: "icon-load",
-          title: "Load",
+          title: getLocString("presets.editor.load"),
           action: () => {
             this.loadJsonFile();
           }
@@ -253,17 +254,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return model;
   }
   private getResultHtml(): string {
-    return `<div>Use the following code to apply the preset:
-<div style="line-height:1"><pre><code>import { SurveyCreatorModel, CreatorPreset } from "survey-creator-core";
-const creator = new SurveyCreatorModel({ ... });
-
-const presetJson = {
-  // Copy the JSON object from below
-}
-
-const preset = new CreatorPreset(presetJson);
-preset.apply(creator);</div></pre></code></div>
-`;
+    return `<div>${getLocString("presets.editor.usageExample")}</div>`;
   }
   public downloadJsonFile(text?: string): void {
     if (!text) text = this.jsonText;

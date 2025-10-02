@@ -5,7 +5,7 @@ import {
 import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
-  SurveyQuestionProperties, editorLocalization, PropertyGridModel,
+  SurveyQuestionProperties, editorLocalization, PropertyGridModel, getLocString,
   settings } from "survey-creator-core";
 
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
@@ -238,9 +238,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       ],
       detailPanelMode: "underRow",
       detailElements: [
-        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true, visible: false },
-        { type: "text", name: "title", title: "Title", isUnique: true, isRequired: true, visible: false },
-        { type: "comment", name: "description", title: "Description", visible: false }
+        { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
+        { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
+        { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), visible: false }
       ]
     };
     return { ...defaultJSON, ...props };
@@ -248,16 +248,16 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
   public createMainPageCore(): any {
     return {
-      title: "Customize the Property Grid",
-      navigationTitle: "Property Grid",
-      description: "Select an element to customize its settings available in the Property Grid.",
+      title: getLocString("presets.propertyGrid.title"),
+      navigationTitle: getLocString("presets.propertyGrid.navigationTitle"),
+      description: getLocString("presets.propertyGrid.description"),
       elements: [
         {
           type: "dropdown",
           name: this.nameSelector,
           allowClear: false,
           clearIfInvisible: "onHidden",
-          title: "Select an element to customize its settings available in the Property Grid"
+          title: getLocString("presets.propertyGrid.selectElement")
         },
         {
           type: "panel",
@@ -267,12 +267,12 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              title: "Property Grid",
+              title: getLocString("presets.propertyGrid.propertyGrid"),
               minRowCount: 1,
               allowRowReorder: true,
               addRowButtonLocation: "top",
               allowAddRows: true,
-              addRowText: "Add Custom Category",
+              addRowText: getLocString("presets.propertyGrid.addCustomCategory"),
               showHeader: false,
               columns: [
                 { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
@@ -281,9 +281,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               ],
               detailPanelMode: "underRow",
               detailElements: [
-                { type: "text", name: "category", title: "Name", isRequired: true, visible: false },
-                { type: "text", name: "title", title: "Title", visible: false },
-                { type: "dropdown", name: "iconName", title: "Icon name", itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
+                { type: "text", name: "category", title: getLocString("presets.propertyGrid.categoryName"), isRequired: true, visible: false },
+                { type: "text", name: "title", title: getLocString("presets.propertyGrid.categoryTitle"), visible: false },
+                { type: "dropdown", name: "iconName", title: getLocString("presets.propertyGrid.iconName"), itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
                   titleLocation: "hidden",
@@ -291,9 +291,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               ]
             },
             this.createItemsMatrixJSON({
-              title: "Unsorted items",
+              title: getLocString("presets.propertyGrid.unsortedItems"),
               name: this.nameMatrix,
-              description: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
+              description: getLocString("presets.propertyGrid.unsortedDescription"),
               descriptionLocation: "underInput",
               startWithNewLine: false,
             })

@@ -1,5 +1,5 @@
 import { Action, createDropdownActionModel, IAction, MatrixDynamicRowModel, PopupModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
-import { SurveyCreatorModel, SurveyHelper } from "survey-creator-core";
+import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
 import { listComponentCss } from "./presets-theme/list-theme";
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {
@@ -65,7 +65,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       actions.push(
         new Action({
           id: "remove-from",
-          title: "Remove from " + question.title,
+          title: getLocString("presets.toolbox.removeFrom").replace("{0}", question.title),
           action: () => {
             const rowDataIndex = question.visibleRows.indexOf(row);
             question.removeRow(rowDataIndex);
@@ -76,14 +76,14 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       if (hasCategories) {
         actions.push(new Action({
           id: "move-to",
-          title: "Move To...",
+          title: getLocString("presets.toolbox.moveTo"),
           css: "sps-list__item--label",
           enabled: false
         }));
       } else {
         actions.push(new Action({
           id: "restore-item",
-          title: "Add to Toolbox",
+          title: getLocString("presets.toolbox.addToToolbox"),
           action: () => {
             const rowDataIndex = question.visibleRows.indexOf(row);
             question.removeRow(rowDataIndex);
@@ -104,14 +104,14 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (!isUnsorted) {
       actions.push(new Action({
         id: "categories",
-        title: "Categories",
+        title: getLocString("presets.toolbox.categories_label"),
         css: "sps-list__item--label",
         enabled: false,
         needSeparator: true
       }));
       const catGroup = new Action({
         id: "move-to-categories",
-        title: "Move to category..."
+        title: getLocString("presets.toolbox.moveToCategory")
       });
       catGroup.setSubItems({ items: moveToCategories, cssClasses: listComponentCss });
       actions.push(catGroup);
@@ -122,7 +122,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     actions.push(
       new Action({
         id: "move-to-new-category",
-        title: "Move to new category",
+        title: getLocString("presets.toolbox.moveToNewCategory"),
         needSeparator: isUnsorted,
         action: () => {
           this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
@@ -138,7 +138,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       actions.push(
         new Action({
           id: "remove-custom-item",
-          title: "Delete Custom Item",
+          title: getLocString("presets.toolbox.deleteCustomItem"),
           needSeparator: true,
           action: () => {
             this.ejectRowData(question, row, true);
@@ -215,7 +215,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
     hiddenItemsQuestion.value = hiddenValue;
     categoriesQuestion.value = value;
-    this.notifyCallback("Category restored to default");
+    this.notifyCallback(getLocString("presets.editor.categoryRestoredToDefault"));
   }
   protected findOrCreateCategory(categories: any, category?: string) {
     let generalCategory = categories.filter(c => c.category == category)[0];
