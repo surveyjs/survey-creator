@@ -701,6 +701,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
         listModel.flushUpdates();
+        newAction.popupModel.isFocusedContent = listModel.showFilter;
       }
     });
     const listModel = newAction.popupModel.contentComponentData.model;
