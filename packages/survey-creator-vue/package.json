@@ -12,6 +12,8 @@
     "build:example:prod": "npm run build --prefix ./example",
     "build": "vite build && npm run build:types",
     "build:dev": "vite build --mode development",
+    "build:presets": "vite build --config vite.presets.config.ts",
+    "watch:presets": "vite build --config vite.presets.config.ts --watch",
     "build:types": "vue-tsc --project tsconfig.types.json --emitDeclarationOnly",
     "type-check": "vue-tsc --project tsconfig.types.json --noEmit",
     "test": "vitest --no-threads tests/test.spec.ts",

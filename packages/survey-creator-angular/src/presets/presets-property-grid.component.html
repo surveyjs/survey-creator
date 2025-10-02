@@ -1,0 +1,18 @@
+<div *ngIf="model">
+  <div class="sps-launch">
+    <button class="sps-launch__card" (click)="showPresets()">
+      <div class="sps-launch__container">
+        <div class="sps-launch__text">Set up Creator Presets</div>
+        <div class="sps-launch__text2">Global UI customization</div>
+        <div class="sps-launch__icon">
+          <div class="sps-launch__chevron-right-16-x-16">
+            <div class="sps-launch__icon2">
+              <sv-ng-icon size="auto" iconName="chevrondown-24x24"></sv-ng-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+  <svc-property-grid [model]="model"></svc-property-grid>
+</div>
