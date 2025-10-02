@@ -78,7 +78,7 @@ describe("CreatorPresetEditableBase", () => {
         expect.objectContaining({
           componentName: "survey",
           cssClass: "sps-popup svc-property-editor svc-creator-popup",
-          title: "Edit",
+          title: "edit",
           displayMode: "popup",
           data: expect.any(Object),
           onApply: expect.any(Function),
