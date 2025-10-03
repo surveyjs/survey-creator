@@ -2068,6 +2068,14 @@ export var persianStrings = {
       // [Auto-translated] "Range"
       range: "محدوده"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "خودکار",
+      // [Auto-translated] "Always"
+      always: "همیشه",
+      // [Auto-translated] "Never"
+      never: "هرگز"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "خطا",

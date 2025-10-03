@@ -2068,6 +2068,14 @@ export var czStrings = {
       // [Auto-translated] "Range"
       range: "Rozmezí"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Chyba",

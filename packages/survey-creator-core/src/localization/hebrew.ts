@@ -2068,6 +2068,14 @@ export var hebrewStrings = {
       // [Auto-translated] "Range"
       range: "טווח"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "אוטומטי",
+      // [Auto-translated] "Always"
+      always: "תמיד",
+      // [Auto-translated] "Never"
+      never: "אף פעם"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "שגיאה",

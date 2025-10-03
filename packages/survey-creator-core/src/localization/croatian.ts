@@ -2068,6 +2068,14 @@ export var hrStrings = {
       // [Auto-translated] "Range"
       range: "Domet"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Uvijek",
+      // [Auto-translated] "Never"
+      never: "Nikada"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Greška",

@@ -2068,6 +2068,14 @@ export var arStrings = {
       // [Auto-translated] "Range"
       range: "نطاق"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "تلقائي",
+      // [Auto-translated] "Always"
+      always: "دوما",
+      // [Auto-translated] "Never"
+      never: "أبدا"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "خطأ",

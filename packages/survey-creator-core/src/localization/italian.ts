@@ -2068,6 +2068,14 @@ export var italianTranslation = {
       // [Auto-translated] "Range"
       range: "Gamma"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatico",
+      // [Auto-translated] "Always"
+      always: "Sempre",
+      // [Auto-translated] "Never"
+      never: "Mai"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Errore",

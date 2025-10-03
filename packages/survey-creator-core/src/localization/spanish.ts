@@ -2068,6 +2068,14 @@ export var spanishTranslation = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automático",
+      // [Auto-translated] "Always"
+      always: "Siempre",
+      // [Auto-translated] "Never"
+      never: "Nunca"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Error",

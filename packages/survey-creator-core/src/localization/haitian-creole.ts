@@ -2068,6 +2068,14 @@ export var htStrings = {
       // [Auto-translated] "Range"
       range: "Pòte"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Oto",
+      // [Auto-translated] "Always"
+      always: "Toujou",
+      // [Auto-translated] "Never"
+      never: "Janm"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Erè",

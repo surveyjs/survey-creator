@@ -2069,6 +2069,14 @@ export var koreanStrings = {
       // [Auto-translated] "Range"
       range: "레인지"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "자동",
+      // [Auto-translated] "Always"
+      always: "늘",
+      // [Auto-translated] "Never"
+      never: "결코"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "오류",

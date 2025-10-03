@@ -2068,6 +2068,14 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Range"
       range: "范围"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自动",
+      // [Auto-translated] "Always"
+      always: "总是",
+      // [Auto-translated] "Never"
+      never: "从不"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "错误",

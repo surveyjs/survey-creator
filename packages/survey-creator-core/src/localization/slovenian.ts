@@ -2068,6 +2068,14 @@ export var slStrings = {
       // [Auto-translated] "Range"
       range: "Razpon"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Zmeraj",
+      // [Auto-translated] "Never"
+      never: "Nikoli"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Napaka",

@@ -2068,6 +2068,14 @@ export var ruStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Всегда",
+      // [Auto-translated] "Never"
+      never: "Никогда"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Ошибка",

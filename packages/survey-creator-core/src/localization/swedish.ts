@@ -2069,6 +2069,14 @@ export let svStrings = {
       // [Auto-translated] "Range"
       range: "Sortiment"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Bil",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fel",

@@ -2068,6 +2068,14 @@ export var turkishStrings = {
       // [Auto-translated] "Range"
       range: "Aralık"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Otomatik",
+      // [Auto-translated] "Always"
+      always: "Her zaman",
+      // [Auto-translated] "Never"
+      never: "Hiç"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Hata",

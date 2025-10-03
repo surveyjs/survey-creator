@@ -2068,6 +2068,14 @@ export var fiStrings = {
       // [Auto-translated] "Range"
       range: "Etäisyys"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Aina",
+      // [Auto-translated] "Never"
+      never: "Koskaan"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Virhe",

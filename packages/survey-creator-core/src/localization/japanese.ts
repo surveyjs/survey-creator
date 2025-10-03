@@ -2068,6 +2068,14 @@ export var jaStrings = {
       // [Auto-translated] "Range"
       range: "範囲"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自動",
+      // [Auto-translated] "Always"
+      always: "いつも",
+      // [Auto-translated] "Never"
+      never: "一度もない"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "エラー",

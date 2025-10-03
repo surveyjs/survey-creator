@@ -2068,6 +2068,14 @@ export var bgStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Винаги",
+      // [Auto-translated] "Never"
+      never: "Никога"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Грешка",

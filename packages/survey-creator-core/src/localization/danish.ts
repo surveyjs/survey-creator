@@ -2069,6 +2069,14 @@ export var danishStrings = {
       // [Auto-translated] "Range"
       range: "Interval"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fejl",

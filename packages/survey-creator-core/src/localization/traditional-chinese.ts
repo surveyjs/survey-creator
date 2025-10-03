@@ -2069,6 +2069,14 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Range"
       range: "範圍"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "汽車",
+      // [Auto-translated] "Always"
+      always: "總",
+      // [Auto-translated] "Never"
+      never: "勿"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "錯",

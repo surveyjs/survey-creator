@@ -2068,6 +2068,14 @@ export var indonesianStrings = {
       // [Auto-translated] "Range"
       range: "Lingkup"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Selalu",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Kesalahan",

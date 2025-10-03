@@ -2068,6 +2068,14 @@ export var frenchTranslation = {
       // [Auto-translated] "Range"
       range: "Gamme"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Toujours",
+      // [Auto-translated] "Never"
+      never: "Jamais"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Erreur",

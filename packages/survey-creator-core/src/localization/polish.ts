@@ -2069,6 +2069,14 @@ export var polishStrings = {
       // [Auto-translated] "Range"
       range: "Zakres"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatycznie",
+      // [Auto-translated] "Always"
+      always: "Zawsze",
+      // [Auto-translated] "Never"
+      never: "Nigdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Błąd",

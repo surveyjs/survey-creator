@@ -2068,6 +2068,14 @@ export var germanTranslation = {
       // [Auto-translated] "Range"
       range: "Bereich"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Immer",
+      // [Auto-translated] "Never"
+      never: "Nie"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fehler",

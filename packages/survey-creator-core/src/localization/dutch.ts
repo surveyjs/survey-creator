@@ -2068,6 +2068,14 @@ export var nlStrings = {
       // [Auto-translated] "Range"
       range: "Bereik"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altijd",
+      // [Auto-translated] "Never"
+      never: "Nooit"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fout",

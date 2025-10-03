@@ -2068,6 +2068,14 @@ export var huStrings = {
       // [Auto-translated] "Range"
       range: "Tartomány"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Kocsi",
+      // [Auto-translated] "Always"
+      always: "Mindig",
+      // [Auto-translated] "Never"
+      never: "Soha"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Hiba",

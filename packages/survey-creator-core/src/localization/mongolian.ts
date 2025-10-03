@@ -2068,6 +2068,14 @@ export var mnStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Үргэлж",
+      // [Auto-translated] "Never"
+      never: "Хэзээ ч"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Алдаа",

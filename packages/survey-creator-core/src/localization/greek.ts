@@ -2068,6 +2068,14 @@ export var grStrings = {
       // [Auto-translated] "Range"
       range: "Έκταση"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Αυτο",
+      // [Auto-translated] "Always"
+      always: "Πάντα",
+      // [Auto-translated] "Never"
+      never: "Ποτέ"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Λάθος",

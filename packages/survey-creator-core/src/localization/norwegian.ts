@@ -2068,6 +2068,14 @@ export var nbStrings = {
       // [Auto-translated] "Range"
       range: "Rekkevidde"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldri"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Feil",

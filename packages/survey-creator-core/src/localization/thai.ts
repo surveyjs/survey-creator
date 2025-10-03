@@ -2068,6 +2068,14 @@ export const thStrings = {
       // [Auto-translated] "Range"
       range: "เทือก"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "รถ",
+      // [Auto-translated] "Always"
+      always: "เสมอ",
+      // [Auto-translated] "Never"
+      never: "ไม่เคย"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "ความผิดพลาด",

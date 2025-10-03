@@ -2068,6 +2068,14 @@ export const roStrings = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Întotdeauna",
+      // [Auto-translated] "Never"
+      never: "Niciodată"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Eroare",

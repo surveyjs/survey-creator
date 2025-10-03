@@ -2068,6 +2068,14 @@ export var msStrings = {
       // [Auto-translated] "Range"
       range: "Pelbagai"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Sentiasa",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Ralat",
