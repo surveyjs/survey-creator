@@ -141,7 +141,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               addRowText: getLocString("presets.toolbox.addNewItem"),
               startWithNewLine: false,
               name: this.nameMatrix
-            }, false)]
+            }, true)]
         },
         {
           type: "panel",
