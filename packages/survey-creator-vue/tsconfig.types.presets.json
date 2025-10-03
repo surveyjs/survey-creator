@@ -1,0 +1,38 @@
+{
+    "extends": "./tsconfig.presets.json",
+    "compilerOptions": {
+        "outDir": "./build/types/presets",
+        "declaration": true,
+        "declarationMap": true,
+        "skipLibCheck": true,
+        "emitDeclarationOnly": true,
+        "types": [
+            "node",
+            "vite/client"
+        ],
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "vue": [
+                "./node_modules/vue"
+            ],
+            "survey-core": [
+                "./node_modules/survey-core"
+            ],
+            "survey-creator-core": [
+                "../survey-creator-core/build/typings"
+            ]
+        }
+    },
+    "include": [
+        "src/entries/presets.ts",
+        "src/presets/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.cy.ts",
+        "**/*.spec.ts",
+        "**/__tests__/**/*"
+    ]
+}

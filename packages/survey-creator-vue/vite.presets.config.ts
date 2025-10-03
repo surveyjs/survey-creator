@@ -54,6 +54,7 @@ export default defineConfig(({ mode }) => {
               module: `${libraryName}.es.js`,
               esm: `${libraryName}.es.js`,
               type: "module",
+              types: "./types/presets/index.d.ts",
               peerDependencies: {
                 vue: "^3.0.0",
                 "survey-core": "^1.0.0",
