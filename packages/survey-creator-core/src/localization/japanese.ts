@@ -1452,7 +1452,7 @@ export var jaStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "縮尺ラベルの表示",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "ツールチップを表示する",
+      tooltipVisibility: "ツールチップを表示する",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "親指の交差を許可する",
       // [Auto-translated] "Number of auto-generated labels"

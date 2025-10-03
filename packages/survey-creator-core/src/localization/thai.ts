@@ -1452,7 +1452,7 @@ export const thStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "แสดงป้ายชื่อมาตราส่วน",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "แสดงคําแนะนําเครื่องมือ",
+      tooltipVisibility: "แสดงคําแนะนําเครื่องมือ",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "อนุญาตให้ข้ามนิ้วหัวแม่มือ",
       // [Auto-translated] "Number of auto-generated labels"

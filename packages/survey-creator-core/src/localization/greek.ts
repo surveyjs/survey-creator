@@ -1452,7 +1452,7 @@ export var grStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Εμφάνιση ετικετών κλίμακας",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Εμφάνιση συμβουλών εργαλείων",
+      tooltipVisibility: "Εμφάνιση συμβουλών εργαλείων",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Να επιτρέπεται η διέλευση του αντίχειρα",
       // [Auto-translated] "Number of auto-generated labels"

@@ -1452,7 +1452,7 @@ export var nlStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Schaallabels weergeven",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Toon tooltips",
+      tooltipVisibility: "Toon tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Duimkruising toestaan",
       // [Auto-translated] "Number of auto-generated labels"

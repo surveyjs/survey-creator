@@ -1452,7 +1452,7 @@ export var persianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "نمایش برچسب های مقیاس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "نمایش نکات ابزار",
+      tooltipVisibility: "نمایش نکات ابزار",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "اجازه عبور از انگشت شست",
       // [Auto-translated] "Number of auto-generated labels"

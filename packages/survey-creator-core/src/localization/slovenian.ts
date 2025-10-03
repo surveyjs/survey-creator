@@ -1452,7 +1452,7 @@ export var slStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznak merila",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaži opise orodij",
+      tooltipVisibility: "Pokaži opise orodij",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dovoli prekrižanje palca",
       // [Auto-translated] "Number of auto-generated labels"

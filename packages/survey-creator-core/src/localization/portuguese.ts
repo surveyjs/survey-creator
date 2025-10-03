@@ -1452,7 +1452,7 @@ export var portugueseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Mostrar rótulos de escala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Mostrar dicas de ferramentas",
+      tooltipVisibility: "Mostrar dicas de ferramentas",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permitir o cruzamento do polegar",
       // [Auto-translated] "Number of auto-generated labels"

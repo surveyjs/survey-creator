@@ -1453,7 +1453,7 @@ export var koreanStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "축척 레이블 표시",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "툴팁 표시",
+      tooltipVisibility: "툴팁 표시",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "엄지 교차점 허용",
       // [Auto-translated] "Number of auto-generated labels"

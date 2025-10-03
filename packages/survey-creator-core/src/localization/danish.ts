@@ -1453,7 +1453,7 @@ export var danishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis værktøjstip",
+      tooltipVisibility: "Vis værktøjstip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillad tommelfingerkrydsning",
       // [Auto-translated] "Number of auto-generated labels"

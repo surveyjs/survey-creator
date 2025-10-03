@@ -1452,7 +1452,7 @@ export var nbStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis verktøytips",
+      tooltipVisibility: "Vis verktøytips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillat tommelkryssing",
       // [Auto-translated] "Number of auto-generated labels"

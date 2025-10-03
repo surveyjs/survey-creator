@@ -1452,7 +1452,7 @@ export var czStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazit štítky měřítka",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobrazit popisky nástrojů",
+      tooltipVisibility: "Zobrazit popisky nástrojů",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povolit křížení palců",
       // [Auto-translated] "Number of auto-generated labels"

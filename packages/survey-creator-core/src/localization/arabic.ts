@@ -1452,7 +1452,7 @@ export var arStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "إظهار تسميات المقياس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      tooltipVisibility: "عرض تلميحات الأدوات",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "السماح بعبور الإبهام",
       // [Auto-translated] "Number of auto-generated labels"

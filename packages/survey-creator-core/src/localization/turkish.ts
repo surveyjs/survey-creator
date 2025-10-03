@@ -1452,7 +1452,7 @@ export var turkishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Ölçek etiketlerini göster",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Araç ipuçlarını göster",
+      tooltipVisibility: "Araç ipuçlarını göster",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Başparmak geçişine izin ver",
       // [Auto-translated] "Number of auto-generated labels"

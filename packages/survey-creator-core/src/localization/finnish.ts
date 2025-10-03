@@ -1452,7 +1452,7 @@ export var fiStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Näytä asteikon otsikot",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Näytä työkaluvihjeet",
+      tooltipVisibility: "Näytä työkaluvihjeet",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Salli peukalon ylitys",
       // [Auto-translated] "Number of auto-generated labels"

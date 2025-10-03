@@ -1452,7 +1452,7 @@ export var msStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tunjukkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tunjukkan petua alat",
+      tooltipVisibility: "Tunjukkan petua alat",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Benarkan lintasan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"

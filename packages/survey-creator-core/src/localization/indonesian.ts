@@ -1452,7 +1452,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tampilkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tampilkan tooltip",
+      tooltipVisibility: "Tampilkan tooltip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Izinkan menyilangkan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"

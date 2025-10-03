@@ -1452,7 +1452,7 @@ export var hrStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznaka ljestvice",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Prikaži opise alata",
+      tooltipVisibility: "Prikaži opise alata",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dopustite križanje palca",
       // [Auto-translated] "Number of auto-generated labels"

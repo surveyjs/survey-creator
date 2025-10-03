@@ -1452,7 +1452,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "הצגת תוויות קנה מידה",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "הצגת תיאורי כלים",
+      tooltipVisibility: "הצגת תיאורי כלים",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "אפשר חציית אגודל",
       // [Auto-translated] "Number of auto-generated labels"

@@ -1452,7 +1452,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "显示刻度标签",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "显示工具提示",
+      tooltipVisibility: "显示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允许 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
