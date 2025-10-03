@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
       outDir: "./build",
       lib: {
         // Set the entry point for presets
-        entry: resolve(__dirname, "src/entries/presets.ts"),
+        entry: resolve(__dirname, "src/presets/index.ts"),
         // Name of the library.
         name: "SurveyCreatorVuePresets",
         // Generate preset files
