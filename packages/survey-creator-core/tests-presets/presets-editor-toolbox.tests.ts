@@ -426,7 +426,13 @@ test("Preset edit, toolbox - new names", () => {
           "name": "text"
         },
         {
-          "name": "comment"
+          "name": "comment",
+          "subitems": [
+            {
+              "name": "name3",
+              "title": "name3"
+            }
+          ]
         },
         {
           "name": "multipletext"
@@ -472,7 +478,7 @@ test("Preset edit, toolbox - new names", () => {
   const survey = editor.model;
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
   matrixQuestion.addRow();
-  expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name3");
-  matrixQuestion.addRow();
   expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name4");
+  matrixQuestion.addRow();
+  expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name5");
 });

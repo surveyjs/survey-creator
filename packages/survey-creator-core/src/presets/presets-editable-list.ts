@@ -210,11 +210,11 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected getExistingKeys(model: SurveyModel, key: string) {
     const items = model.getQuestionByName(this.nameItems).value || [];
     const unsorted = model.getQuestionByName(this.nameMatrix).value || [];
-    return [...items, ...unsorted].map(i => i[key]).filter(v => !!v);
+    return [...items, ...unsorted];
   }
 
   protected getDefaultValueForRow(model: SurveyModel, question: QuestionMatrixDynamicModel, key: string) {
-    return SurveyHelper.getNewName(this.getExistingKeys(model, key).map(r => ({ name: r })), key);
+    return SurveyHelper.getNewName(this.getExistingKeys(model, key).map(i => i[key]).filter(v => !!v).map(r => ({ name: r })), key);
   }
 
   protected setDefaultValueForRow(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {

@@ -216,8 +216,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected getExistingKeys(model: SurveyModel, key: string) {
     const superItems = super.getExistingKeys(model, key);
     const items = model.getQuestionByName(this.nameItems).value || [];
-    const keys = items.map(i => i[key]).filter(v => !!v);
-    return [...superItems, ...keys];
+    const rows = [...superItems, ...items];
+    const subitems = (rows.map(r => r.subitems || []) as any).flat();
+    return [...rows, ...subitems];
   }
 
   protected itemMenuCategoriesEnabled(model: SurveyModel) {
