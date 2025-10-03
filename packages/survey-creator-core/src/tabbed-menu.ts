@@ -9,6 +9,8 @@ export interface ITabbedMenuItem extends IAction {
 }
 
 export class TabbedMenuItem extends Action implements ITabbedMenuItem {
+  @property({ defaultValue: false }) showIcon: boolean;
+  @property({ defaultValue: true }) showTitle: boolean;
   constructor(item: ITabbedMenuItem) {
     super(item);
     this.enabled = true;
@@ -31,11 +33,14 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   getIconCss(): string {
     return new CssClassBuilder().append("svc-tabbed-menu-item__icon").toString();
   }
+  public get canShrink() {
+    return !!this.hasIcon;
+  }
   public get hasTitle(): boolean {
-    return !this.hasIcon;
+    return this.showTitle && !!this.title;
   }
   public get hasIcon(): boolean {
-    return !this.disableShrink && this.iconName && this.mode == "small";
+    return this.showIcon && !!this.iconName;
   }
   public doAction(): boolean {
     if (!this.enabled) return false;
@@ -43,7 +48,13 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
     return true;
   }
 }
+
+export enum TabbedMenuMode {
+  Icons = 1,
+  Titles = 2
+}
 export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
+  private currentMode: TabbedMenuMode = TabbedMenuMode.Titles;
   constructor(private creator: CreatorBase) {
     super();
     this.dotsItem.popupModel.horizontalPosition = "center";
@@ -76,17 +87,18 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       active: this.creator.viewType === name,
       disableHide: this.creator.viewType === name
     });
-    tab.disableShrink = this.creator.tabResponsivenessMode == "menu";
     if (index !== undefined && index >= 0 && index < this.actions.length) {
       this.actions.splice(index, 0, tab);
     } else {
       this.actions.push(tab);
     }
   }
-  public updateResponsivenessMode() {
-    this.actions.forEach((tab) => {
-      tab.disableShrink = this.creator.tabResponsivenessMode == "menu";
-    });
-    this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
+  public setMode(mode: TabbedMenuMode) {
+    if (mode !== this.currentMode) {
+      this.actions.forEach(a => a.showIcon = !!(mode & TabbedMenuMode.Icons));
+      this.actions.forEach(a => a.showTitle = !!(mode & TabbedMenuMode.Titles));
+      this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
+    }
+    this.currentMode = mode;
   }
 }

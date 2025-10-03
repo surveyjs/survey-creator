@@ -1453,7 +1453,7 @@ export var danishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis værktøjstip",
+      tooltipVisibility: "Vis værktøjstip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillad tommelfingerkrydsning",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2069,21 @@ export var danishStrings = {
       // [Auto-translated] "Range"
       range: "Interval"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fejl",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational"
-      info: "Informative"
+      // [Auto-translated] "Informational note"
+      info: "Informativ note"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2765,8 +2773,8 @@ export var danishStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Angiver den type meddelelse, der vises til brugerne. Fejl blokerer fremskridt, indtil de er løst. Advarsler fremhæver problemer, men tillader at fortsætte. Infornationale noter giver yderligere kontekst eller neutral vejledning."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fejl blokerer fremskridt, indtil de er løst. Advarsler fremhæver problemer, men tillader at fortsætte. Informative noter giver yderligere kontekst eller neutral vejledning. Når du bruger advarsler eller informationsbemærkninger, anbefaler vi, at du aktiverer øjeblikkelig validering: \"Undersøgelse\" → \"Validering\" → \"Kør validering\" → \"Når et svar er ændret\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

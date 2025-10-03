@@ -120,7 +120,7 @@ export const themeSettingsButtonSelector = (page) => page.locator(".sv-action-ba
 // export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)");
 
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
-  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text);
+  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) }));
 }
 export function getSelectOptionByText(page, text: string) {
   return page.locator("option").withExactText(text);

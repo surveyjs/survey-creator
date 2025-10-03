@@ -1452,7 +1452,7 @@ export var mnStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Жинлүүрийн шошгыг үзүүлэх",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips",
+      tooltipVisibility: "Tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Эрхий хуруугаа гаталахыг зөвшөөрөх",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export var mnStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Үргэлж",
+      // [Auto-translated] "Never"
+      never: "Хэзээ ч"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Алдаа",
       // [Auto-translated] "Warning"
       warning: "Анхааруулга",
-      // [Auto-translated] "Informational"
-      info: "Мэдээлэл"
+      // [Auto-translated] "Informational note"
+      info: "Мэдээллийн тэмдэглэл"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export var mnStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Хэрэглэгчдэд үзүүлэх мэдэгдлийн төрлийг тодорхойлно. Алдаа нь шийдвэрлэгдэх хүртэл хөгжил дэвшлийг зогсоодог. Сэрэмжлүүлэг нь асуудлуудыг тодотгож байгаа ч үргэлжлүүлэхийг зөвшөөрдөг. Infornational notes нь нэмэлт хам сэдэв эсвэл төвийг сахисан удирдамж өгдөг."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Алдаа нь шийдвэрлэгдэх хүртэл хөгжил дэвшлийг зогсоодог. Сэрэмжлүүлэг нь асуудлуудыг тодотгож байгаа ч үргэлжлүүлэхийг зөвшөөрдөг. Мэдээллийн тэмдэглэл нь нэмэлт хам сэдэв эсвэл төвийг сахисан удирдамжийг санал болгодог. Сэрэмжлүүлэг, мэдээллийн тэмдэглэл ашиглахдаа \"Survey\" → \"Validation\" → \"Run validation\" → \"Answer has changed\" зэрэг шууд баталгаажуулалтыг идэвхжүүлэхийг зөвлөж байна."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -1452,7 +1452,7 @@ export var huStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Léptékfeliratok megjelenítése",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Eszköztippek megjelenítése",
+      tooltipVisibility: "Eszköztippek megjelenítése",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Hüvelykujj keresztezésének engedélyezése",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export var huStrings = {
       // [Auto-translated] "Range"
       range: "Tartomány"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Kocsi",
+      // [Auto-translated] "Always"
+      always: "Mindig",
+      // [Auto-translated] "Never"
+      never: "Soha"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Hiba",
       // [Auto-translated] "Warning"
       warning: "Figyelmeztetés",
-      // [Auto-translated] "Informational"
-      info: "Információs"
+      // [Auto-translated] "Informational note"
+      info: "Tájékoztató megjegyzés"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export var huStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Megadja a felhasználóknak megjelenített értesítés típusát. A hibák blokkolják a folyamatot, amíg meg nem oldják. A figyelmeztetések kiemelik a problémákat, de lehetővé teszik a folytatást. Az infornacionális jegyzetek további kontextust vagy semleges iránymutatást nyújtanak."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "A hibák blokkolják a folyamatot, amíg meg nem oldják. A figyelmeztetések kiemelik a problémákat, de lehetővé teszik a folytatást. A tájékoztató megjegyzések további kontextust vagy semleges útmutatást nyújtanak. Figyelmeztetések vagy tájékoztató megjegyzések használata esetén javasoljuk, hogy engedélyezze az azonnali ellenőrzést: \"Felmérés\" → \"Ellenőrzés\" → \"Ellenőrzés futtatása\" → \"A válasz megváltozása után\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

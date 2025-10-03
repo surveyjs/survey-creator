@@ -1452,7 +1452,7 @@ export const thStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "แสดงป้ายชื่อมาตราส่วน",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "แสดงคําแนะนําเครื่องมือ",
+      tooltipVisibility: "แสดงคําแนะนําเครื่องมือ",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "อนุญาตให้ข้ามนิ้วหัวแม่มือ",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export const thStrings = {
       // [Auto-translated] "Range"
       range: "เทือก"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "รถ",
+      // [Auto-translated] "Always"
+      always: "เสมอ",
+      // [Auto-translated] "Never"
+      never: "ไม่เคย"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "ความผิดพลาด",
       // [Auto-translated] "Warning"
       warning: "คำเตือน",
-      // [Auto-translated] "Informational"
-      info: "ข้อมูล"
+      // [Auto-translated] "Informational note"
+      info: "หมายเหตุข้อมูล"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export const thStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "ระบุชนิดของการแจ้งเตือนที่แสดงต่อผู้ใช้ ข้อผิดพลาดจะบล็อกความคืบหน้าจนกว่าจะได้รับการแก้ไข คําเตือนจะเน้นปัญหาแต่อนุญาตให้ดําเนินการต่อ หมายเหตุ Infornational ให้บริบทเพิ่มเติมหรือคําแนะนําที่เป็นกลาง"
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "ข้อผิดพลาดจะบล็อกความคืบหน้าจนกว่าจะได้รับการแก้ไข คําเตือนจะเน้นปัญหาแต่อนุญาตให้ดําเนินการต่อ บันทึกข้อมูลเสนอบริบทเพิ่มเติมหรือคําแนะนําที่เป็นกลาง เมื่อใช้คําเตือนหรือบันทึกข้อมูล เราขอแนะนําให้เปิดใช้งานการตรวจสอบทันที: \"แบบสํารวจ\" → \"การตรวจสอบความถูกต้อง\" → \"เรียกใช้การตรวจสอบความถูกต้อง\" → \"หลังจากคําตอบมีการเปลี่ยนแปลง\""
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

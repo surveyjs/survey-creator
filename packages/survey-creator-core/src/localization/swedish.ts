@@ -1453,7 +1453,7 @@ export let svStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Visa skaletiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Visa verktygstips",
+      tooltipVisibility: "Visa verktygstips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillåt tumkorsning",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2069,21 @@ export let svStrings = {
       // [Auto-translated] "Range"
       range: "Sortiment"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Bil",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fel",
       // [Auto-translated] "Warning"
       warning: "Varning",
-      // [Auto-translated] "Informational"
-      info: "Informativt"
+      // [Auto-translated] "Informational note"
+      info: "Anteckning om information"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2765,8 +2773,8 @@ export let svStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Använd trollstavsikonen för att definiera när frågans värde anses vara giltigt.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Anger vilken typ av meddelande som visas för användarna. Fel blockerar förloppet tills de har lösts. Varningar markerar problem men gör det möjligt att fortsätta. Infornationella noter ger ytterligare sammanhang eller neutral vägledning."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fel blockerar förloppet tills de har lösts. Varningar markerar problem men gör det möjligt att fortsätta. Informationsanteckningar ger ytterligare sammanhang eller neutral vägledning. När du använder varningar eller informationsanteckningar rekommenderar vi att du aktiverar omedelbar validering: \"Undersökning\" → \"Validering\" → \"Kör validering\" → \"När ett svar har ändrats\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -1452,7 +1452,7 @@ export var arStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "إظهار تسميات المقياس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      tooltipVisibility: "عرض تلميحات الأدوات",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "السماح بعبور الإبهام",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export var arStrings = {
       // [Auto-translated] "Range"
       range: "نطاق"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "تلقائي",
+      // [Auto-translated] "Always"
+      always: "دوما",
+      // [Auto-translated] "Never"
+      never: "أبدا"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "خطأ",
       // [Auto-translated] "Warning"
       warning: "تحذير",
-      // [Auto-translated] "Informational"
-      info: "اعلاميه"
+      // [Auto-translated] "Informational note"
+      info: "ملاحظة إعلامية"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export var arStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "يحدد نوع الإشعار المعروض للمستخدمين. تمنع الأخطاء التقدم حتى يتم حلها. تبرز التحذيرات المشكلات ولكنها تسمح بالمتابعة. توفر الملاحظات غير المعلوماتية سياقا إضافيا أو إرشادات محايدة."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "تمنع الأخطاء التقدم حتى يتم حلها. تبرز التحذيرات المشكلات ولكنها تسمح بالمتابعة. توفر الملاحظات الإعلامية سياقا إضافيا أو إرشادات محايدة. عند استخدام التحذيرات أو الملاحظات الإعلامية، نوصي بتمكين التحقق الفوري: \"الاستطلاع\" → \"التحقق من الصحة\" → \"تشغيل التحقق من الصحة\" → \"بعد تغيير الإجابة\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -1452,7 +1452,7 @@ export var skStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazenie štítkov mierky",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobraziť popisy",
+      tooltipVisibility: "Zobraziť popisy",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povoliť prekríženie palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export var skStrings = {
       // [Auto-translated] "Range"
       range: "Rozsah"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varovanie",
-      // [Auto-translated] "Informational"
-      info: "Informačné"
+      // [Auto-translated] "Informational note"
+      info: "Informačná poznámka"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export var skStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Pomocou ikony čarovného prútika definujte, kedy sa hodnota otázky považuje za platnú.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Určuje typ oznámenia, ktoré sa zobrazuje používateľom. Chyby blokujú priebeh, kým sa nevyriešia. Upozornenia upozorňujú na problémy, ale umožňujú pokračovanie. Informačné poznámky poskytujú dodatočný kontext alebo neutrálne usmernenie."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Chyby blokujú priebeh, kým sa nevyriešia. Upozornenia upozorňujú na problémy, ale umožňujú pokračovanie. Informačné poznámky ponúkajú ďalší kontext alebo neutrálne usmernenie. Pri používaní upozornení alebo informačných poznámok odporúčame povoliť okamžité overenie: \"Prieskum\" → \"Overenie\" → \"Spustiť overenie\" → \"Po zmene odpovede\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

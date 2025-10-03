@@ -1453,7 +1453,7 @@ export var polishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Pokazywanie etykiet skali",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaż podpowiedzi",
+      tooltipVisibility: "Pokaż podpowiedzi",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Zezwalaj na krzyżowanie kciuka",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2069,21 @@ export var polishStrings = {
       // [Auto-translated] "Range"
       range: "Zakres"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatycznie",
+      // [Auto-translated] "Always"
+      always: "Zawsze",
+      // [Auto-translated] "Never"
+      never: "Nigdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Błąd",
       // [Auto-translated] "Warning"
       warning: "Ostrzeżenie",
-      // [Auto-translated] "Informational"
-      info: "Informacyjne"
+      // [Auto-translated] "Informational note"
+      info: "Nota informacyjna"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2765,8 +2773,8 @@ export var polishStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Użyj ikony magicznej różdżki, aby określić, kiedy wartość pytania jest uznawana za prawidłową.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Określa typ powiadomienia wyświetlanego użytkownikom. Błędy blokują postęp do momentu ich rozwiązania. Ostrzeżenia wskazują problemy, ale pozwalają kontynuować. Notatki infornational zawierają dodatkowy kontekst lub neutralne wytyczne."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Błędy blokują postęp do momentu ich rozwiązania. Ostrzeżenia wskazują problemy, ale pozwalają kontynuować. Notatki informacyjne oferują dodatkowy kontekst lub neutralne wskazówki. W przypadku korzystania z ostrzeżeń lub notatek informacyjnych zalecamy włączenie natychmiastowej walidacji: \"Ankieta\" → \"Walidacja\" → \"Uruchom walidację\" → \"Po zmianie odpowiedzi\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -1452,7 +1452,7 @@ export var hrStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznaka ljestvice",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Prikaži opise alata",
+      tooltipVisibility: "Prikaži opise alata",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dopustite križanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export var hrStrings = {
       // [Auto-translated] "Range"
       range: "Domet"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Uvijek",
+      // [Auto-translated] "Never"
+      never: "Nikada"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Greška",
       // [Auto-translated] "Warning"
       warning: "Upozorenje",
-      // [Auto-translated] "Informational"
-      info: "Informativan"
+      // [Auto-translated] "Informational note"
+      info: "Informativna napomena"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export var hrStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Određuje vrstu obavijesti koja se prikazuje korisnicima. Pogreške blokiraju napredak dok se ne riješe. Upozorenja ističu probleme, ali dopuštaju nastavak. Infornacionalne bilješke pružaju dodatni kontekst ili neutralne smjernice."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Pogreške blokiraju napredak dok se ne riješe. Upozorenja ističu probleme, ali dopuštaju nastavak. Informativne bilješke nude dodatni kontekst ili neutralne smjernice. Kada koristite upozorenja ili informativne bilješke, preporučujemo da omogućite trenutnu provjeru valjanosti: \"Anketa\" → \"Provjera valjanosti\" → \"Pokreni provjeru valjanosti\" → \"Nakon promjene odgovora\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -25,7 +25,7 @@
       class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
     ></div>
     <SvComponent
-      :is="'survey-page'"
+      :is="'sv-page'"
       :survey="model.creator.survey"
       :page="model.page"
       v-if="model.needRenderContent"

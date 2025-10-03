@@ -1452,7 +1452,7 @@ export const roStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afișarea etichetelor de scară",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afișarea sfaturilor ecran",
+      tooltipVisibility: "Afișarea sfaturilor ecran",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permiteți încrucișarea degetului mare",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export const roStrings = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Întotdeauna",
+      // [Auto-translated] "Never"
+      never: "Niciodată"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Eroare",
       // [Auto-translated] "Warning"
       warning: "Avertisment",
-      // [Auto-translated] "Informational"
-      info: "Informaţionale"
+      // [Auto-translated] "Informational note"
+      info: "Notă informativă"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2764,8 +2772,8 @@ export const roStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Specifică tipul de notificare afișat utilizatorilor. Erorile blochează progresul până la rezolvare. Avertismentele evidențiază problemele, dar permit continuarea. Notele Infornational oferă context suplimentar sau orientări neutre."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Erorile blochează progresul până la rezolvare. Avertismentele evidențiază problemele, dar permit continuarea. Notele informative oferă context suplimentar sau îndrumări neutre. Când utilizați avertismente sau note informative, vă recomandăm să activați validarea imediată: \"Sondaj\" → \"Validare\" → \"Validare rulare\" → \"După ce un răspuns s-a schimbat\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

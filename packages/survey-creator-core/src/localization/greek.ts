@@ -1452,7 +1452,7 @@ export var grStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Εμφάνιση ετικετών κλίμακας",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Εμφάνιση συμβουλών εργαλείων",
+      tooltipVisibility: "Εμφάνιση συμβουλών εργαλείων",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Να επιτρέπεται η διέλευση του αντίχειρα",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2068,21 @@ export var grStrings = {
       // [Auto-translated] "Range"
       range: "Έκταση"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Αυτο",
+      // [Auto-translated] "Always"
+      always: "Πάντα",
+      // [Auto-translated] "Never"
+      never: "Ποτέ"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Λάθος",
       // [Auto-translated] "Warning"
       warning: "Προειδοποίηση",
-      // [Auto-translated] "Informational"
-      info: "Ενημερωτικό"
+      // [Auto-translated] "Informational note"
+      info: "Ενημερωτικό σημείωμα"
     },
     autocomplete: {
       // "Full Name"
@@ -2764,8 +2772,8 @@ export var grStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Χρησιμοποιήστε το εικονίδιο με το μαγικό ραβδί για να ορίσετε πότε η τιμή της ερώτησης θεωρείται έγκυρη.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Καθορίζει τον τύπο της ειδοποίησης που εμφανίζεται στους χρήστες. Τα σφάλματα εμποδίζουν την πρόοδο μέχρι να επιλυθούν. Οι προειδοποιήσεις επισημαίνουν προβλήματα, αλλά επιτρέπουν τη συνέχιση. Οι ενημερωτικές εθνικές σημειώσεις παρέχουν πρόσθετο πλαίσιο ή ουδέτερη καθοδήγηση."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Τα σφάλματα εμποδίζουν την πρόοδο μέχρι να επιλυθούν. Οι προειδοποιήσεις επισημαίνουν προβλήματα, αλλά επιτρέπουν τη συνέχιση. Οι ενημερωτικές σημειώσεις προσφέρουν πρόσθετο πλαίσιο ή ουδέτερη καθοδήγηση. Όταν χρησιμοποιείτε προειδοποιήσεις ή ενημερωτικές σημειώσεις, συνιστούμε να ενεργοποιήσετε την άμεση επικύρωση: \"Έρευνα\" → \"Επικύρωση\" → \"Εκτέλεση επικύρωσης\" → \"Μετά την αλλαγή μιας απάντησης\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
