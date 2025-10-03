@@ -1452,7 +1452,7 @@ export var ruStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Отображение меток шкалы",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показать всплывающие подсказки",
+      tooltipVisibility: "Показать всплывающие подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешить скрещивание больших пальцев",
       // [Auto-translated] "Number of auto-generated labels"

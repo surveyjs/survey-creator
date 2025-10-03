@@ -1452,7 +1452,7 @@ export var htStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Montre etikèt echèl",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Montre zouti",
+      tooltipVisibility: "Montre zouti",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Pèmèt travèse gwo pous",
       // [Auto-translated] "Number of auto-generated labels"

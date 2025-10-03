@@ -1452,7 +1452,7 @@ export var germanTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Anzeigen von Skalenbeschriftungen",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips anzeigen",
+      tooltipVisibility: "Tooltips anzeigen",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Daumen kreuzen erlauben",
       // [Auto-translated] "Number of auto-generated labels"

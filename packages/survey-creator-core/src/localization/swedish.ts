@@ -1453,7 +1453,7 @@ export let svStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Visa skaletiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Visa verktygstips",
+      tooltipVisibility: "Visa verktygstips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillåt tumkorsning",
       // [Auto-translated] "Number of auto-generated labels"

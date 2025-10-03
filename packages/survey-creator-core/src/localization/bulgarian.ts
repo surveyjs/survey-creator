@@ -1452,7 +1452,7 @@ export var bgStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Показване на етикети на мащаба",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показване на подсказки",
+      tooltipVisibility: "Показване на подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешаване на кръстосване на палеца",
       // [Auto-translated] "Number of auto-generated labels"
