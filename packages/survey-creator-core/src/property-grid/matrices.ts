@@ -482,14 +482,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
     const names = (<any>question).columns.filter(c => !c.readOnly).map(c => c.name);
-    const visibleIfProp = Serializer.findProperty("itemvalue", "visibleIf");
-    if (visibleIfProp && visibleIfProp.visible) {
-      names.push("visibleIf");
-      const enableIfProp = Serializer.findProperty("itemvalue", "enableIf");
-      if (enableIfProp && enableIfProp.visible) {
-        names.push("enableIf");
+    const addProperty = (name: string) => {
+      const prop = Serializer.findProperty("itemvalue", name);
+      if (prop && prop.visible) {
+        names.push(name);
       }
-    }
+    };
+    addProperty("visibleIf");
+    addProperty("enableIf");
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
   }
   public canClearPropertyValue(
