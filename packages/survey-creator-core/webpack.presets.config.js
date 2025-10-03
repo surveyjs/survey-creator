@@ -7,6 +7,7 @@ const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
 module.exports = (env) => {
   const isProd = env.buildType === "prod";
   const emitDeclarations = !!env.emitDeclarations;
+  const emitStyles = !!env.emitStyles;
   const compilerOptions = emitDeclarations ? {} : {
     declaration: false,
     declarationDir: null
@@ -62,6 +63,25 @@ module.exports = (env) => {
           exclude: /node_modules/
         },
         {
+          test: /\.s(c|a)ss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: env.buildType !== "prod",
+              },
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                api: "modern",
+                sourceMap: env.buildType !== "prod",
+              },
+            },
+          ],
+        },
+        {
           test: /\.svg$/,
           use: ["svg-inline-loader"]
         }
@@ -71,6 +91,10 @@ module.exports = (env) => {
       new webpack.DefinePlugin({
         "process.env.VERSION": JSON.stringify(require("./package.json").version),
         "process.env.NODE_ENV": JSON.stringify(isProd ? "production" : "development")
+      }),
+      new RemoveEmptyScriptsPlugin(),
+      new MiniCssExtractPlugin({
+        filename: isProd ? "[name].min.css" : "[name].css"
       })
     ]
   };

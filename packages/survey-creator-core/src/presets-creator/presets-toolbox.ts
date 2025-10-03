@@ -8,6 +8,7 @@ export interface ICreatorPresetToolboxItem {
   json?: any;
   title?: string;
   tooltip?: string;
+  subitems?: ICreatorPresetToolboxItem[];
 }
 
 export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
@@ -21,7 +22,7 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
     toolbox.presetDefaultItems = this.getPresetDefaultItems(definition);
     if (Array.isArray(definition)) {
       definition.forEach(item => {
-        const tItem = toolbox.getActionById(item.name);
+        const tItem = toolbox.getItemByName(item.name);
         if (tItem) {
           ["iconName", "title", "tooltip", "json"].forEach(propName => {
             if (item[propName]) {
@@ -51,18 +52,35 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
     if (!this.json) return;
     super.applyCore(creator);
     creator.toolbox.showCategoryTitles = this.json.showCategoryTitles;
-    this.applyItems(creator, this.json["definition"]?.map(i => i.name));
-    this.applyCategories(creator, this.json["categories"]);
-  }
-  private applyItems(creator: SurveyCreatorModel, items: Array<string>): void {
-    if (!Array.isArray(items)) return;
-    creator.toolbox.hasCategories = false;
-    creator.toolbox.defineCategories([{ category: "general", items: items }]);
-  }
-  private applyCategories(creator: SurveyCreatorModel, categories: Array<IToolboxCategoryDefinition>): void {
-    if (!Array.isArray(categories)) return;
-    creator.toolbox.hasCategories = true;
+    const items = this.json["definition"];
+    const itemNames = items?.map(i => i.name);
+    let categories = this.json["categories"];
+    if (!categories) {
+      categories = creator.toolbox.categories
+        .map(c => ({
+          category: c.name,
+          items: c.items?.map(i => i.name).filter(name => !itemNames || itemNames.indexOf(name) != -1)
+        })).filter(c => c.items.length > 0);
+    } else if (categories.length === 0) {
+      const category = {
+        category: "general",
+        items: itemNames || creator.toolbox.itemNames
+      };
+      categories = [category];
+    }
     creator.toolbox.defineCategories(categories);
+    // TODO: check if defineCategories incorrectly resets subitems
+    if (items) {
+      items.forEach(item => {
+        const tItem = creator.toolbox.getItemByName(item.name);
+        if (tItem) {
+          if (item.subitems) {
+            tItem.items = [];
+            item.subitems.forEach(si => tItem.addSubitem(si as any));
+          }
+        }
+      });
+    }
   }
 }
 export class CreatorPresetToolbox extends CreatorPresetBase {

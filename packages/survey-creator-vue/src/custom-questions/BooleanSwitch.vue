@@ -49,11 +49,11 @@ useQuestion(props, root);
 
 const renderedValue = computed({
   get() {
-    return props.question.value;
+    return props.question.booleanValue;
   },
   set(val) {
     const question = props.question;
-    question.value = val;
+    question.booleanValue = val;
   },
 });
 </script>

@@ -1,16 +1,13 @@
 import { Helpers, ItemValue, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel } from "survey-creator-core";
-import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
+import { SurveyCreatorModel, editorLocalization, getLocString } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
-import { editorLocalization } from "../editorLocalization";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   private createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
       type: "matrixdynamic",
       name: "items",
-      titleLocation: "hidden",
       allowRowReorder: true,
       cellType: "text",
       showHeader: false,
@@ -26,31 +23,40 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
         },
         {
           "name": "title"
-        },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        }
       ],
       detailPanelMode: "underRow",
       detailElements: [
-        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-        { type: "text", name: "iconName", title: "Icon name" }
+        { type: "text", name: "name", title: getLocString("presets.tabs.name"), isUnique: true, isRequired: true, readOnly: true, visible: false },
+        { type: "text", name: "title", title: getLocString("presets.tabs.titleField"), visible: false },
+        { type: "dropdown", name: "iconName", title: getLocString("presets.tabs.iconName"), itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false }
       ]
     };
     return { ...defaultJSON, ...props };
   }
-
   public createMainPageCore(): any {
     return {
-      title: "Set Up the Tabs",
-      navigationTitle: "Tabs",
+      title: getLocString("presets.tabs.title"),
+      description: getLocString("presets.tabs.description"),
+      navigationTitle: getLocString("presets.tabs.navigationTitle"),
       elements: [
-        this.createItemsMatrixJSON({
-          name: this.nameItems
-        }),
-        this.createItemsMatrixJSON({
-          startWithNewLine: false,
-          name: this.nameMatrix,
-          "descriptionLocation": "underInput",
-        }),
+        {
+          type: "panel",
+          name: this.mainPanelName,
+          elements: [
+            this.createItemsMatrixJSON({
+              title: getLocString("presets.tabs.tabs"),
+              name: this.nameItems
+            }),
+            this.createItemsMatrixJSON({
+              startWithNewLine: false,
+              title: getLocString("presets.tabs.unsortedItems"),
+              name: this.nameMatrix,
+              description: getLocString("presets.tabs.unsortedDescription"),
+              descriptionLocation: "underInput",
+            }),
+          ]
+        },
         {
           type: "panel",
           name: "panel_tabs_controls",
@@ -58,23 +64,43 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
             {
               type: "dropdown",
               name: this.nameActiveTab,
-              title: "Default tab",
-              startWithNewLine: false
+              title: getLocString("presets.tabs.defaultTab")
+            }
+          ]
+        },
+        {
+          type: "panel",
+          title: " ",
+          name: this.navigationPanelName,
+          elements: [
+            {
+              type: "html",
+              html: "&nbsp"
             }
           ]
         }
       ]
     };
   }
-  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+
+  public get questionNames() {
+    return [this.nameItems, this.nameActiveTab];
+  }
+
+  private filterTabs(tabs: any) {
+    return tabs.filter(t => t.name != "presets");
+  }
+  protected hasIcon(name: string) { return true; }
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     let items = model.getValue(this.nameItems);
     if (!Array.isArray(items)) return undefined;
-    let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName }));
-    if (Helpers.isArraysEqual(activeTabChoices.map(i => i.name), creator.getTabNames(), false)) {
+    const creatorTabs = this.filterTabs(defaultJson?.items || creator.getTabs());
+    let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName || creatorTabs.filter(t => t.name == i.name)[0]?.iconName }));
+    if (Helpers.isArraysEqual(activeTabChoices, creatorTabs, false)) {
       activeTabChoices = undefined;
     }
     let activeTab = model.getValue(this.nameActiveTab);
-    if (!activeTabChoices && activeTab === creator.activeTab) {
+    if (!activeTabChoices && activeTab === (defaultJson?.activeTab || creator.activeTab)) {
       activeTab = undefined;
     }
     if (!activeTabChoices && !activeTab) return undefined;
@@ -88,6 +114,13 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     return val;
   }
 
+  protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
+    return {
+      activeTab: creator.activeTab,
+      items: this.filterTabs(creator.getTabs()),
+    };
+  }
+
   private getQuestionItems(model: SurveyModel): QuestionMatrixDynamicModel {
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
@@ -99,8 +132,8 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     super.onMatrixRowRemoving(model, creator, options);
   }
 
-  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameItems || super.isItemsMatrix(question);
+  protected isItemsMatrix(name: string): boolean {
+    return name === this.nameItems || super.isItemsMatrix(name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
     const rows = this.getQuestionItems(model).visibleRows;
@@ -113,11 +146,16 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   }
 
   private getAllTabs(creator: SurveyCreatorModel) {
-    return creator.getAvailableTabs().map(t => ({ name: t.name, title: editorLocalization.getString("tabs." + t.name), iconName: t.iconName }));
+    return this.filterTabs(creator.getAvailableTabs().map(t => ({ name: t.name, title: editorLocalization.getString("tabs." + t.name), iconName: t.iconName })));
   }
+
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    creator.tabs.forEach(i => i.enabled = active);
+  }
+
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
-    let items = json["items"] || [];
+    let items = (json["items"] || []).map(i => typeof i === "string" ? { name: i } : i);
     const tabNames = creator.tabbedMenu.actions.map(a => a.id);
 
     const allTabs = this.getAllTabs(creator);
@@ -141,6 +179,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     activeQ.choices = this.defaultItems.map(t => new ItemValue(t.name, t.title));
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    super.updateOnValueChangedCore(model, name);
     if (name === this.nameItems) {
       const val = model.getValue(name) || [];
       model.getQuestionByName(this.nameActiveTab).visible = val.length > 1;
@@ -148,6 +187,5 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       model.getQuestionByName(this.nameActiveTab).choices = val.map(v => new ItemValue(v.name, v.title));
     }
   }
-  private get nameItems() { return this.path + "_items"; }
   private get nameActiveTab() { return this.path + "_activeTab"; }
 }
