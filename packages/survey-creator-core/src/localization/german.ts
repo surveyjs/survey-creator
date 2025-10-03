@@ -1452,7 +1452,7 @@ export var germanTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Anzeigen von Skalenbeschriftungen",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips anzeigen",
+      tooltipVisibility: "Tooltips anzeigen",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Daumen kreuzen erlauben",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var germanTranslation = {
       single: "Einzelwertig",
       // [Auto-translated] "Range"
       range: "Bereich"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Immer",
+      // [Auto-translated] "Never"
+      never: "Nie"
     },
     notificationType: {
       // [Auto-translated] "Error"

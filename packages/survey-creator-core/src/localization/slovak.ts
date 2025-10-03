@@ -1452,7 +1452,7 @@ export var skStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazenie štítkov mierky",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobraziť popisy",
+      tooltipVisibility: "Zobraziť popisy",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povoliť prekríženie palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var skStrings = {
       single: "Jedna hodnota",
       // [Auto-translated] "Range"
       range: "Rozsah"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
     },
     notificationType: {
       // [Auto-translated] "Error"

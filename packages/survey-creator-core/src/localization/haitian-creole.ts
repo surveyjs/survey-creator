@@ -1452,7 +1452,7 @@ export var htStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Montre etikèt echèl",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Montre zouti",
+      tooltipVisibility: "Montre zouti",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Pèmèt travèse gwo pous",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var htStrings = {
       single: "Yon sèl-Valè",
       // [Auto-translated] "Range"
       range: "Pòte"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Oto",
+      // [Auto-translated] "Always"
+      always: "Toujou",
+      // [Auto-translated] "Never"
+      never: "Janm"
     },
     notificationType: {
       // [Auto-translated] "Error"

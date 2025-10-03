@@ -1452,7 +1452,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afficher les étiquettes d’échelle",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afficher les infobulles",
+      tooltipVisibility: "Afficher les infobulles",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Autoriser le croisement des pouces",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var frenchTranslation = {
       single: "Valeur unique",
       // [Auto-translated] "Range"
       range: "Gamme"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Toujours",
+      // [Auto-translated] "Never"
+      never: "Jamais"
     },
     notificationType: {
       // [Auto-translated] "Error"

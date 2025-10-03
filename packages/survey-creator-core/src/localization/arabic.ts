@@ -1452,7 +1452,7 @@ export var arStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "إظهار تسميات المقياس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      tooltipVisibility: "عرض تلميحات الأدوات",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "السماح بعبور الإبهام",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var arStrings = {
       single: "قيمة واحدة",
       // [Auto-translated] "Range"
       range: "نطاق"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "تلقائي",
+      // [Auto-translated] "Always"
+      always: "دوما",
+      // [Auto-translated] "Never"
+      never: "أبدا"
     },
     notificationType: {
       // [Auto-translated] "Error"

@@ -1453,7 +1453,7 @@ export var polishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Pokazywanie etykiet skali",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaż podpowiedzi",
+      tooltipVisibility: "Pokaż podpowiedzi",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Zezwalaj na krzyżowanie kciuka",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,6 +2068,14 @@ export var polishStrings = {
       single: "Pojedyncza wartość",
       // [Auto-translated] "Range"
       range: "Zakres"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatycznie",
+      // [Auto-translated] "Always"
+      always: "Zawsze",
+      // [Auto-translated] "Never"
+      never: "Nigdy"
     },
     notificationType: {
       // [Auto-translated] "Error"
