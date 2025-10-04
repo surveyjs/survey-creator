@@ -4706,6 +4706,7 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+  public maxChoicesElementsLevel: number = 0;
 
   /**
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.

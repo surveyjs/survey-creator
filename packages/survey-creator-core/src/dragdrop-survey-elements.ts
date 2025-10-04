@@ -406,7 +406,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     }
     return null;
-
   }
   private isSameElement(target: ISurveyElement): boolean {
     while(!!target) {
@@ -424,13 +423,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     });
     return result;
-  }
-
-  private getDragDropElementType(element: any) {
-    if (element.isPage) return ElType.Page;
-    if (element.isPanel) return ElType.Panel;
-    if (element instanceof QuestionPanelDynamicModel) return ElType.DynamicPanel;
-    return ElType.Question;
   }
 
   public dragOver(event: PointerEvent): void {
