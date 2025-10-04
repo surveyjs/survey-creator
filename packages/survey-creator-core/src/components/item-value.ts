@@ -258,7 +258,16 @@ export class ItemValueWrapperViewModel extends Base {
   }
   public canShowPanel(): boolean {
     if (!this.item.supportElements) return false;
-    return !this.question.isBuiltInChoice(this.item);
+    const level = this.creator.maxChoicesElementsLevel;
+    if (level <= 0) return false;
+    if (this.question.isBuiltInChoice(this.item)) return false;
+    let parent = this.question.parent;
+    let index = 0;
+    while(!!parent && index < level && parent.name.indexOf("choicePanel") === 0) {
+      index++;
+      parent = parent.parent;
+    }
+    return !!parent && index < level;
   }
   public get showPanel(): boolean {
     return this.getPropertyValue("showPanel", false);

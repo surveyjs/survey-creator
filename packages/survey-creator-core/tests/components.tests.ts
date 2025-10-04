@@ -1119,6 +1119,7 @@ test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
 });
 test("Show/hide choiceitem panel", (): any => {
   const creator = new CreatorTester();
+  creator.maxChoicesElementsLevel = 2;
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] },
       { type: "dropdown", name: "q2", choices: [1, 2, 3] }]
@@ -1137,4 +1138,25 @@ test("Show/hide choiceitem panel", (): any => {
   firstItemAdorner.togglePanel();
   expect(firstItemAdorner.showPanel).toBeTruthy();
   expect(firstItemAdorner.item.panel.wasRendered).toBeTruthy();
+});
+test("Show/hide choiceitem panel based on creator.maxChoicesElementsLevel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoicesElementsLevel = 2;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [{ value: 1, elements: [{ type: "checkbox", name: "q2", choices: [1, 2, 3] }] }, 2, 3] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
+  const firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  const secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  creator.maxChoicesElementsLevel = 0;
+  expect(firstItemAdorner.canShowPanel()).toBeFalsy();
+  expect(secondItemAdorner.canShowPanel()).toBeFalsy();
+  creator.maxChoicesElementsLevel = 1;
+  expect(firstItemAdorner.canShowPanel()).toBeTruthy();
+  expect(secondItemAdorner.canShowPanel()).toBeFalsy();
+  creator.maxChoicesElementsLevel = 2;
+  expect(firstItemAdorner.canShowPanel()).toBeTruthy();
+  expect(secondItemAdorner.canShowPanel()).toBeTruthy();
 });
