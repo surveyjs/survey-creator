@@ -1326,7 +1326,9 @@ export var htStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresyon validasyon",
       // [Auto-translated] "Notification type"
-      notificationType: "Kalite notifikasyon"
+      notificationType: "Kalite notifikasyon",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longè maksimòm (nan karaktè)"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -1452,7 +1454,7 @@ export var htStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Montre etikèt echèl",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Montre zouti",
+      tooltipVisibility: "Montre zouti",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Pèmèt travèse gwo pous",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var htStrings = {
       // [Auto-translated] "Range"
       range: "Pòte"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Oto",
+      // [Auto-translated] "Always"
+      always: "Toujou",
+      // [Auto-translated] "Never"
+      never: "Janm"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Erè",
       // [Auto-translated] "Warning"
       warning: "Avètisman",
-      // [Auto-translated] "Informational note"
-      info: "Nòt enfòmasyon"
+      // [Auto-translated] "Informational"
+      info: "Enfòmasyon"
     },
     autocomplete: {
       // "Full Name"

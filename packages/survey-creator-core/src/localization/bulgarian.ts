@@ -1326,7 +1326,9 @@ export var bgStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Валидиращ израз",
       // [Auto-translated] "Notification type"
-      notificationType: "Тип известие"
+      notificationType: "Тип известие",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимална дължина (в знаци)"
     },
     // "Total row header"
     totalText: "Общ текст в реда",
@@ -1452,7 +1454,7 @@ export var bgStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Показване на етикети на мащаба",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показване на подсказки",
+      tooltipVisibility: "Показване на подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешаване на кръстосване на палеца",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var bgStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Винаги",
+      // [Auto-translated] "Never"
+      never: "Никога"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Грешка",
       // [Auto-translated] "Warning"
       warning: "Предупреждение",
-      // [Auto-translated] "Informational note"
-      info: "Информационна бележка"
+      // [Auto-translated] "Informational"
+      info: "Информационна"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

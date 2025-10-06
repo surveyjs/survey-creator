@@ -1326,7 +1326,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "验证表达式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知类型"
+      notificationType: "通知类型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大长度（以字符为单位）"
     },
     // "Total row header"
     totalText: "总文本",
@@ -1452,7 +1454,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "显示刻度标签",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "显示工具提示",
+      tooltipVisibility: "显示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允许 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Range"
       range: "范围"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自动",
+      // [Auto-translated] "Always"
+      always: "总是",
+      // [Auto-translated] "Never"
+      never: "从不"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "错误",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational note"
-      info: "信息说明"
+      // [Auto-translated] "Informational"
+      info: "信息"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

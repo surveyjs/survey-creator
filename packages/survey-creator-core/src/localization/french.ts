@@ -1326,7 +1326,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Condition à respecter",
       // [Auto-translated] "Notification type"
-      notificationType: "Type de notification"
+      notificationType: "Type de notification",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longueur maximale (en caractères)"
     },
     // "Total row header"
     totalText: "Texte pour le total",
@@ -1452,7 +1454,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afficher les étiquettes d’échelle",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afficher les infobulles",
+      tooltipVisibility: "Afficher les infobulles",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Autoriser le croisement des pouces",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var frenchTranslation = {
       // [Auto-translated] "Range"
       range: "Gamme"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Toujours",
+      // [Auto-translated] "Never"
+      never: "Jamais"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Erreur",
       // [Auto-translated] "Warning"
       warning: "Avertissement",
-      // [Auto-translated] "Informational note"
-      info: "Note d’information"
+      // [Auto-translated] "Informational"
+      info: "Informationnel"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

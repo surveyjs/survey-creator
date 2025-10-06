@@ -1326,7 +1326,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresi validasi",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis notifikasi"
+      notificationType: "Jenis notifikasi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam karakter)"
     },
     // "Total row header"
     totalText: "Total teks",
@@ -1452,7 +1454,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tampilkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tampilkan tooltip",
+      tooltipVisibility: "Tampilkan tooltip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Izinkan menyilangkan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var indonesianStrings = {
       // [Auto-translated] "Range"
       range: "Lingkup"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Selalu",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Kesalahan",
       // [Auto-translated] "Warning"
       warning: "Peringatan",
-      // [Auto-translated] "Informational note"
-      info: "Catatan informasi"
+      // [Auto-translated] "Informational"
+      info: "Informasi"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

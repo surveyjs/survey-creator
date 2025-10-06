@@ -1326,7 +1326,9 @@ export var fiStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Vahvistuksen lauseke",
       // [Auto-translated] "Notification type"
-      notificationType: "Ilmoituksen tyyppi"
+      notificationType: "Ilmoituksen tyyppi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Enimmäispituus (merkkeinä)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rivin otsikon kokonaissumma",
@@ -1452,7 +1454,7 @@ export var fiStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Näytä asteikon otsikot",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Näytä työkaluvihjeet",
+      tooltipVisibility: "Näytä työkaluvihjeet",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Salli peukalon ylitys",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var fiStrings = {
       // [Auto-translated] "Range"
       range: "Etäisyys"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Aina",
+      // [Auto-translated] "Never"
+      never: "Koskaan"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Virhe",
       // [Auto-translated] "Warning"
       warning: "Varoitus",
-      // [Auto-translated] "Informational note"
-      info: "Tiedotus"
+      // [Auto-translated] "Informational"
+      info: "Tiedottava"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

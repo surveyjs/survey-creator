@@ -1327,7 +1327,9 @@ export var polishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Wyrażenie sprawdzania poprawności",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ powiadomienia"
+      notificationType: "Typ powiadomienia",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksymalna długość (w znakach)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Nagłówek wiersza sumy",
@@ -1453,7 +1455,7 @@ export var polishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Pokazywanie etykiet skali",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaż podpowiedzi",
+      tooltipVisibility: "Pokaż podpowiedzi",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Zezwalaj na krzyżowanie kciuka",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2071,21 @@ export var polishStrings = {
       // [Auto-translated] "Range"
       range: "Zakres"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatycznie",
+      // [Auto-translated] "Always"
+      always: "Zawsze",
+      // [Auto-translated] "Never"
+      never: "Nigdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Błąd",
       // [Auto-translated] "Warning"
       warning: "Ostrzeżenie",
-      // [Auto-translated] "Informational note"
-      info: "Nota informacyjna"
+      // [Auto-translated] "Informational"
+      info: "Informacyjne"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

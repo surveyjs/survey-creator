@@ -1326,7 +1326,9 @@ export const thStrings = {
       // [Auto-translated] "Validation expression"
       expression: "นิพจน์การตรวจสอบความถูกต้อง",
       // [Auto-translated] "Notification type"
-      notificationType: "ประเภทการแจ้งเตือน"
+      notificationType: "ประเภทการแจ้งเตือน",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "ความยาวสูงสุด (เป็นอักขระ)"
     },
     // "Total row header"
     totalText: "หัวแถวรวม",
@@ -1452,7 +1454,7 @@ export const thStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "แสดงป้ายชื่อมาตราส่วน",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "แสดงคําแนะนําเครื่องมือ",
+      tooltipVisibility: "แสดงคําแนะนําเครื่องมือ",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "อนุญาตให้ข้ามนิ้วหัวแม่มือ",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export const thStrings = {
       // [Auto-translated] "Range"
       range: "เทือก"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "รถ",
+      // [Auto-translated] "Always"
+      always: "เสมอ",
+      // [Auto-translated] "Never"
+      never: "ไม่เคย"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "ความผิดพลาด",
       // [Auto-translated] "Warning"
       warning: "คำเตือน",
-      // [Auto-translated] "Informational note"
-      info: "หมายเหตุข้อมูล"
+      // [Auto-translated] "Informational"
+      info: "ข้อมูล"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

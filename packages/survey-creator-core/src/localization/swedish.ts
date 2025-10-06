@@ -1327,7 +1327,9 @@ export let svStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Uttryck för validering",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ av anmälan"
+      notificationType: "Typ av anmälan",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximal längd (i tecken)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Radrubrik för totalt antal",
@@ -1453,7 +1455,7 @@ export let svStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Visa skaletiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Visa verktygstips",
+      tooltipVisibility: "Visa verktygstips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillåt tumkorsning",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2071,21 @@ export let svStrings = {
       // [Auto-translated] "Range"
       range: "Sortiment"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Bil",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fel",
       // [Auto-translated] "Warning"
       warning: "Varning",
-      // [Auto-translated] "Informational note"
-      info: "Anteckning om information"
+      // [Auto-translated] "Informational"
+      info: "Informativt"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

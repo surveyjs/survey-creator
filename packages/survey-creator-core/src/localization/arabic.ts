@@ -1326,7 +1326,9 @@ export var arStrings = {
       // [Auto-translated] "Validation expression"
       expression: "تعبير التحقق من الصحة",
       // [Auto-translated] "Notification type"
-      notificationType: "نوع الإشعار"
+      notificationType: "نوع الإشعار",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "الحد الأقصى للطول (بالأحرف)"
     },
     // "Total row header"
     totalText: "Total text",
@@ -1452,7 +1454,7 @@ export var arStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "إظهار تسميات المقياس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      tooltipVisibility: "عرض تلميحات الأدوات",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "السماح بعبور الإبهام",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var arStrings = {
       // [Auto-translated] "Range"
       range: "نطاق"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "تلقائي",
+      // [Auto-translated] "Always"
+      always: "دوما",
+      // [Auto-translated] "Never"
+      never: "أبدا"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "خطأ",
       // [Auto-translated] "Warning"
       warning: "تحذير",
-      // [Auto-translated] "Informational note"
-      info: "ملاحظة إعلامية"
+      // [Auto-translated] "Informational"
+      info: "اعلاميه"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

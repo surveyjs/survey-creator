@@ -1326,7 +1326,9 @@ export const roStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Expresie de validare",
       // [Auto-translated] "Notification type"
-      notificationType: "Tip de notificare"
+      notificationType: "Tip de notificare",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Lungime maximă (în caractere)"
     },
     // "Total row header"
     totalText: "Antet rând total",
@@ -1452,7 +1454,7 @@ export const roStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afișarea etichetelor de scară",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afișarea sfaturilor ecran",
+      tooltipVisibility: "Afișarea sfaturilor ecran",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permiteți încrucișarea degetului mare",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export const roStrings = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Întotdeauna",
+      // [Auto-translated] "Never"
+      never: "Niciodată"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Eroare",
       // [Auto-translated] "Warning"
       warning: "Avertisment",
-      // [Auto-translated] "Informational note"
-      info: "Notă informativă"
+      // [Auto-translated] "Informational"
+      info: "Informaţionale"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

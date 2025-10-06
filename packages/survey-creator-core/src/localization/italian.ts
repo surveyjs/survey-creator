@@ -1326,7 +1326,9 @@ export var italianTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Espressione di convalida",
       // [Auto-translated] "Notification type"
-      notificationType: "Tipo di notifica"
+      notificationType: "Tipo di notifica",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Lunghezza massima (in caratteri)"
     },
     // "Total row header"
     totalText: "Testo della riga Totale",
@@ -1452,7 +1454,7 @@ export var italianTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Mostra le etichette della scala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Mostra descrizioni comandi",
+      tooltipVisibility: "Mostra descrizioni comandi",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Consenti l'incrocio del pollice",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var italianTranslation = {
       // [Auto-translated] "Range"
       range: "Gamma"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatico",
+      // [Auto-translated] "Always"
+      always: "Sempre",
+      // [Auto-translated] "Never"
+      never: "Mai"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Errore",
       // [Auto-translated] "Warning"
       warning: "Avvertimento",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

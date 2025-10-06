@@ -1326,7 +1326,9 @@ export var nbStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Uttrykk for validering",
       // [Auto-translated] "Notification type"
-      notificationType: "Type varsling"
+      notificationType: "Type varsling",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimal lengde (i tegn)"
     },
     // "Total row header"
     totalText: "Total tekst",
@@ -1452,7 +1454,7 @@ export var nbStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis verktøytips",
+      tooltipVisibility: "Vis verktøytips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillat tommelkryssing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var nbStrings = {
       // [Auto-translated] "Range"
       range: "Rekkevidde"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldri"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Feil",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational note"
-      info: "Informativ merknad"
+      // [Auto-translated] "Informational"
+      info: "Informativ"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

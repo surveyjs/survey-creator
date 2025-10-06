@@ -1326,7 +1326,9 @@ export var jaStrings = {
       // [Auto-translated] "Validation expression"
       expression: "検証式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知タイプ"
+      notificationType: "通知タイプ",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大長 (文字数)"
     },
     // "Total row header"
     totalText: "テキストの合計",
@@ -1452,7 +1454,7 @@ export var jaStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "縮尺ラベルの表示",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "ツールチップを表示する",
+      tooltipVisibility: "ツールチップを表示する",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "親指の交差を許可する",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var jaStrings = {
       // [Auto-translated] "Range"
       range: "範囲"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自動",
+      // [Auto-translated] "Always"
+      always: "いつも",
+      // [Auto-translated] "Never"
+      never: "一度もない"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "エラー",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational note"
-      info: "情報メモ"
+      // [Auto-translated] "Informational"
+      info: "情報"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

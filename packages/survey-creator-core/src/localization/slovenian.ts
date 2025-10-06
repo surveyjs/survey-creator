@@ -1326,7 +1326,9 @@ export var slStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validacijski izraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Vrsta obvestila"
+      notificationType: "Vrsta obvestila",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Največja dolžina (v črkah)"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",
@@ -1452,7 +1454,7 @@ export var slStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznak merila",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaži opise orodij",
+      tooltipVisibility: "Pokaži opise orodij",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dovoli prekrižanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var slStrings = {
       // [Auto-translated] "Range"
       range: "Razpon"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Zmeraj",
+      // [Auto-translated] "Never"
+      never: "Nikoli"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Napaka",
       // [Auto-translated] "Warning"
       warning: "Opozorilo",
-      // [Auto-translated] "Informational note"
-      info: "Informativna opomba"
+      // [Auto-translated] "Informational"
+      info: "Informativne"
     },
     autocomplete: {
       // "Full Name"

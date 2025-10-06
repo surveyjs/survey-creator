@@ -1326,7 +1326,9 @@ export var mnStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Баталгаажуулалтын илэрхийлэл",
       // [Auto-translated] "Notification type"
-      notificationType: "Мэдэгдлийн төрөл"
+      notificationType: "Мэдэгдлийн төрөл",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Хамгийн их урт (үсгээр)"
     },
     // "Total row header"
     totalText: "Нийт мөр",
@@ -1452,7 +1454,7 @@ export var mnStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Жинлүүрийн шошгыг үзүүлэх",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips",
+      tooltipVisibility: "Tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Эрхий хуруугаа гаталахыг зөвшөөрөх",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var mnStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Үргэлж",
+      // [Auto-translated] "Never"
+      never: "Хэзээ ч"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Алдаа",
       // [Auto-translated] "Warning"
       warning: "Анхааруулга",
-      // [Auto-translated] "Informational note"
-      info: "Мэдээллийн тэмдэглэл"
+      // [Auto-translated] "Informational"
+      info: "Мэдээлэл"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

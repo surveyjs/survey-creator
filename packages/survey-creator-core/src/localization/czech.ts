@@ -1326,7 +1326,9 @@ export var czStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ověřovací výraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ oznámení"
+      notificationType: "Typ oznámení",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximální délka (ve znacích)"
     },
     // "Total row header"
     totalText: "Celkový text",
@@ -1452,7 +1454,7 @@ export var czStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazit štítky měřítka",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobrazit popisky nástrojů",
+      tooltipVisibility: "Zobrazit popisky nástrojů",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povolit křížení palců",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var czStrings = {
       // [Auto-translated] "Range"
       range: "Rozmezí"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varování",
-      // [Auto-translated] "Informational note"
-      info: "Informační poznámka"
+      // [Auto-translated] "Informational"
+      info: "Informační"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

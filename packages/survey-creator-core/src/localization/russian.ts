@@ -1326,7 +1326,9 @@ export var ruStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Проверочное выражение",
       // [Auto-translated] "Notification type"
-      notificationType: "Тип уведомления"
+      notificationType: "Тип уведомления",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимальная длина (в символах)"
     },
     // "Total row header"
     totalText: "Общий текст",
@@ -1452,7 +1454,7 @@ export var ruStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Отображение меток шкалы",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показать всплывающие подсказки",
+      tooltipVisibility: "Показать всплывающие подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешить скрещивание больших пальцев",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var ruStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Всегда",
+      // [Auto-translated] "Never"
+      never: "Никогда"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Ошибка",
       // [Auto-translated] "Warning"
       warning: "Предупреждение",
-      // [Auto-translated] "Informational note"
-      info: "Информационная заметка"
+      // [Auto-translated] "Informational"
+      info: "Информационный"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

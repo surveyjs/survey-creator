@@ -696,7 +696,8 @@ export var enStrings = {
     surveyvalidator: {
       text: "Validation message",
       expression: "Validation expression",
-      notificationType: "Notification type"
+      notificationType: "Notification type",
+      maxLength: "Maximum length (in characters)"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",
@@ -761,7 +762,7 @@ export var enStrings = {
       step: "Step value",
       showLabels: "Show scale labels",
       // segmentCount: "Number of segments",
-      tooltipVisibilityPG: "Show tooltips",
+      tooltipVisibility: "Show tooltips",
       allowSwap: "Allow thumb crossing",
       labelCount: "Number of auto-generated labels",
       minValueExpression: "Min value expression",
@@ -1086,10 +1087,15 @@ export var enStrings = {
       single: "Single-Value",
       range: "Range"
     },
+    tooltipVisibility: {
+      auto: "Auto",
+      always: "Always",
+      never: "Never"
+    },
     notificationType: {
       error: "Error",
       warning: "Warning",
-      info: "Informational note"
+      info: "Informational"
     },
     autocomplete: {
       name: "Full Name",

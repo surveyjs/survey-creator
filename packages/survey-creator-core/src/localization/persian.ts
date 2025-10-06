@@ -1326,7 +1326,9 @@ export var persianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "عبارت اعتبارسنجی",
       // [Auto-translated] "Notification type"
-      notificationType: "نوع اعلان"
+      notificationType: "نوع اعلان",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "حداکثر طول (بر حسب کاراکتر)"
     },
     // "Total row header"
     totalText: "متن کامل",
@@ -1452,7 +1454,7 @@ export var persianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "نمایش برچسب های مقیاس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "نمایش نکات ابزار",
+      tooltipVisibility: "نمایش نکات ابزار",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "اجازه عبور از انگشت شست",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2070,21 @@ export var persianStrings = {
       // [Auto-translated] "Range"
       range: "محدوده"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "خودکار",
+      // [Auto-translated] "Always"
+      always: "همیشه",
+      // [Auto-translated] "Never"
+      never: "هرگز"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "خطا",
       // [Auto-translated] "Warning"
       warning: "هشدار",
-      // [Auto-translated] "Informational note"
-      info: "یادداشت اطلاعاتی"
+      // [Auto-translated] "Informational"
+      info: "اطلاعاتی"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

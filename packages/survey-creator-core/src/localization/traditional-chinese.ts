@@ -1327,7 +1327,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "驗證表達式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知類型"
+      notificationType: "通知類型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "長度上限 （以字元為單位）"
     },
     // [Auto-translated] "Total row header"
     totalText: "總行標題",
@@ -1453,7 +1455,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "顯示刻度標籤",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "顯示工具提示",
+      tooltipVisibility: "顯示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允許 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2071,21 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Range"
       range: "範圍"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "汽車",
+      // [Auto-translated] "Always"
+      always: "總",
+      // [Auto-translated] "Never"
+      never: "勿"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "錯",
       // [Auto-translated] "Warning"
       warning: "儆",
-      // [Auto-translated] "Informational note"
-      info: "資訊說明"
+      // [Auto-translated] "Informational"
+      info: "資訊"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
