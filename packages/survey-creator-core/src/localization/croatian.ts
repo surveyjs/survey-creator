@@ -1452,7 +1452,7 @@ export var hrStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznaka ljestvice",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Prikaži opise alata",
+      tooltipVisibility: "Prikaži opise alata",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dopustite križanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var hrStrings = {
       single: "Jedna vrijednost",
       // [Auto-translated] "Range"
       range: "Domet"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Uvijek",
+      // [Auto-translated] "Never"
+      never: "Nikada"
     },
     notificationType: {
       // [Auto-translated] "Error"

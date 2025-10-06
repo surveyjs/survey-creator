@@ -1452,7 +1452,7 @@ export var mnStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Жинлүүрийн шошгыг үзүүлэх",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips",
+      tooltipVisibility: "Tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Эрхий хуруугаа гаталахыг зөвшөөрөх",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var mnStrings = {
       single: "Ганц үнэ цэнэтэй",
       // [Auto-translated] "Range"
       range: "Диапазон"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Үргэлж",
+      // [Auto-translated] "Never"
+      never: "Хэзээ ч"
     },
     notificationType: {
       // [Auto-translated] "Error"

@@ -1452,7 +1452,7 @@ export var msStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tunjukkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tunjukkan petua alat",
+      tooltipVisibility: "Tunjukkan petua alat",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Benarkan lintasan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var msStrings = {
       single: "Nilai Tunggal",
       // [Auto-translated] "Range"
       range: "Pelbagai"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Sentiasa",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
     },
     notificationType: {
       // [Auto-translated] "Error"

@@ -1452,7 +1452,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "显示刻度标签",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "显示工具提示",
+      tooltipVisibility: "显示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允许 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var simplifiedChineseTranslation = {
       single: "单值",
       // [Auto-translated] "Range"
       range: "范围"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自动",
+      // [Auto-translated] "Always"
+      always: "总是",
+      // [Auto-translated] "Never"
+      never: "从不"
     },
     notificationType: {
       // [Auto-translated] "Error"

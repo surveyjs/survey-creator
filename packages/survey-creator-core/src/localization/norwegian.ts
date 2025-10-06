@@ -1452,7 +1452,7 @@ export var nbStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis verktøytips",
+      tooltipVisibility: "Vis verktøytips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillat tommelkryssing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var nbStrings = {
       single: "Enkelt verdi",
       // [Auto-translated] "Range"
       range: "Rekkevidde"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldri"
     },
     notificationType: {
       // [Auto-translated] "Error"

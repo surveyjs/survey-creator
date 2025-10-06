@@ -1453,7 +1453,7 @@ export let svStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Visa skaletiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Visa verktygstips",
+      tooltipVisibility: "Visa verktygstips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillåt tumkorsning",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,6 +2068,14 @@ export let svStrings = {
       single: "Enkelt värde",
       // [Auto-translated] "Range"
       range: "Sortiment"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Bil",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
     },
     notificationType: {
       // [Auto-translated] "Error"

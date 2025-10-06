@@ -1453,7 +1453,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "顯示刻度標籤",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "顯示工具提示",
+      tooltipVisibility: "顯示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允許 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,6 +2068,14 @@ export var traditionalChineseTranslation = {
       single: "單值",
       // [Auto-translated] "Range"
       range: "範圍"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "汽車",
+      // [Auto-translated] "Always"
+      always: "總",
+      // [Auto-translated] "Never"
+      never: "勿"
     },
     notificationType: {
       // [Auto-translated] "Error"

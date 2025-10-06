@@ -1452,7 +1452,7 @@ export var slStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznak merila",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaži opise orodij",
+      tooltipVisibility: "Pokaži opise orodij",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dovoli prekrižanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var slStrings = {
       single: "Enojna vrednost",
       // [Auto-translated] "Range"
       range: "Razpon"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Zmeraj",
+      // [Auto-translated] "Never"
+      never: "Nikoli"
     },
     notificationType: {
       // [Auto-translated] "Error"

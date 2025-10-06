@@ -1452,7 +1452,7 @@ export var italianTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Mostra le etichette della scala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Mostra descrizioni comandi",
+      tooltipVisibility: "Mostra descrizioni comandi",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Consenti l'incrocio del pollice",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var italianTranslation = {
       single: "Valore singolo",
       // [Auto-translated] "Range"
       range: "Gamma"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automatico",
+      // [Auto-translated] "Always"
+      always: "Sempre",
+      // [Auto-translated] "Never"
+      never: "Mai"
     },
     notificationType: {
       // [Auto-translated] "Error"

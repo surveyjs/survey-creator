@@ -210,7 +210,8 @@ export class FastEntryEditor extends FastEntryEditorBase {
         src.splice(i, 1, item);
       }
     }
-    dest.splice.apply(dest, [0, dest.length].concat(<any>src));
+    dest.splice(0, dest.length);
+    src.forEach((item) => dest.push(item));
   }
   protected convertItemValuesToText(): string {
     var text = "";

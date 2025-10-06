@@ -1452,7 +1452,7 @@ export var persianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "نمایش برچسب های مقیاس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "نمایش نکات ابزار",
+      tooltipVisibility: "نمایش نکات ابزار",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "اجازه عبور از انگشت شست",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var persianStrings = {
       single: "تک مقدار",
       // [Auto-translated] "Range"
       range: "محدوده"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "خودکار",
+      // [Auto-translated] "Always"
+      always: "همیشه",
+      // [Auto-translated] "Never"
+      never: "هرگز"
     },
     notificationType: {
       // [Auto-translated] "Error"

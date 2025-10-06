@@ -1452,7 +1452,7 @@ export var jaStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "縮尺ラベルの表示",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "ツールチップを表示する",
+      tooltipVisibility: "ツールチップを表示する",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "親指の交差を許可する",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var jaStrings = {
       single: "単一値",
       // [Auto-translated] "Range"
       range: "範囲"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自動",
+      // [Auto-translated] "Always"
+      always: "いつも",
+      // [Auto-translated] "Never"
+      never: "一度もない"
     },
     notificationType: {
       // [Auto-translated] "Error"

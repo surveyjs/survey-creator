@@ -1452,7 +1452,7 @@ export var huStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Léptékfeliratok megjelenítése",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Eszköztippek megjelenítése",
+      tooltipVisibility: "Eszköztippek megjelenítése",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Hüvelykujj keresztezésének engedélyezése",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export var huStrings = {
       single: "Egyértékű",
       // [Auto-translated] "Range"
       range: "Tartomány"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Kocsi",
+      // [Auto-translated] "Always"
+      always: "Mindig",
+      // [Auto-translated] "Never"
+      never: "Soha"
     },
     notificationType: {
       // [Auto-translated] "Error"

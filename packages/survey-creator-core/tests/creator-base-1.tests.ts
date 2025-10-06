@@ -2746,6 +2746,31 @@ test("convertInputType, check locale", (): any => {
   const action: any = questionModel.getActionById("convertInputType");
   expect(action.data.locOwner.locale).toBe("de");
 });
+test("convertTo & convertInputType, check search input is focused", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" },] };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  const convertToAction = questionModel.getActionById("convertTo");
+  const convertInputTypeAction = questionModel.getActionById("convertInputType");
+
+  expect(convertToAction).toBeTruthy();
+  expect(convertInputTypeAction).toBeTruthy();
+
+  let popupModel = convertToAction.popupModel;
+  let popupViewModel = new PopupDropdownViewModel(popupModel); // need for popupModel.onShow
+  expect(popupModel).toBeTruthy();
+  popupModel.show();
+  expect(popupModel.isFocusedContent).toBeTruthy();
+
+  popupModel = convertInputTypeAction.popupModel;
+  popupViewModel = new PopupDropdownViewModel(popupModel); // need for popupModel.onShow
+  expect(popupModel).toBeTruthy();
+  popupModel.show();
+  expect(popupModel.isFocusedContent).toBeTruthy();
+});
 test("change locale & creator.sidebar.hasVisiblePages", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

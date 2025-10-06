@@ -1452,7 +1452,7 @@ export const roStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afișarea etichetelor de scară",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afișarea sfaturilor ecran",
+      tooltipVisibility: "Afișarea sfaturilor ecran",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permiteți încrucișarea degetului mare",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,14 @@ export const roStrings = {
       single: "Valoare unică",
       // [Auto-translated] "Range"
       range: "Gama"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Întotdeauna",
+      // [Auto-translated] "Never"
+      never: "Niciodată"
     },
     notificationType: {
       // [Auto-translated] "Error"
