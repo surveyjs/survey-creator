@@ -2083,8 +2083,8 @@ export var grStrings = {
       error: "Λάθος",
       // [Auto-translated] "Warning"
       warning: "Προειδοποίηση",
-      // [Auto-translated] "Informational note"
-      info: "Ενημερωτικό σημείωμα"
+      // [Auto-translated] "Informational"
+      info: "Ενημερωτικό"
     },
     autocomplete: {
       // "Full Name"

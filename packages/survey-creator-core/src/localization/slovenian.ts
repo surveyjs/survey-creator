@@ -2083,8 +2083,8 @@ export var slStrings = {
       error: "Napaka",
       // [Auto-translated] "Warning"
       warning: "Opozorilo",
-      // [Auto-translated] "Informational note"
-      info: "Informativna opomba"
+      // [Auto-translated] "Informational"
+      info: "Informativne"
     },
     autocomplete: {
       // "Full Name"

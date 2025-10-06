@@ -2084,8 +2084,8 @@ export var danishStrings = {
       error: "Fejl",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational note"
-      info: "Informativ note"
+      // [Auto-translated] "Informational"
+      info: "Informative"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

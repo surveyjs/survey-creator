@@ -2083,8 +2083,8 @@ export var spanishTranslation = {
       error: "Error",
       // [Auto-translated] "Warning"
       warning: "Advertencia",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -2083,8 +2083,8 @@ export var htStrings = {
       error: "Erè",
       // [Auto-translated] "Warning"
       warning: "Avètisman",
-      // [Auto-translated] "Informational note"
-      info: "Nòt enfòmasyon"
+      // [Auto-translated] "Informational"
+      info: "Enfòmasyon"
     },
     autocomplete: {
       // "Full Name"

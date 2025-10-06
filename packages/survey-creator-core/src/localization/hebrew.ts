@@ -2083,8 +2083,8 @@ export var hebrewStrings = {
       error: "שגיאה",
       // [Auto-translated] "Warning"
       warning: "אזהרה",
-      // [Auto-translated] "Informational note"
-      info: "הערת מידע"
+      // [Auto-translated] "Informational"
+      info: "אינפורמטיבי"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

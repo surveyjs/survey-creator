@@ -2083,8 +2083,8 @@ export var ruStrings = {
       error: "Ошибка",
       // [Auto-translated] "Warning"
       warning: "Предупреждение",
-      // [Auto-translated] "Informational note"
-      info: "Информационная заметка"
+      // [Auto-translated] "Informational"
+      info: "Информационный"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

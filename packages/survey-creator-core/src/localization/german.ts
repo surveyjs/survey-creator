@@ -2083,8 +2083,8 @@ export var germanTranslation = {
       error: "Fehler",
       // [Auto-translated] "Warning"
       warning: "Warnung",
-      // [Auto-translated] "Informational note"
-      info: "Informativer Hinweis"
+      // [Auto-translated] "Informational"
+      info: "Mitteilsam"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

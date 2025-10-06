@@ -2083,8 +2083,8 @@ export var indonesianStrings = {
       error: "Kesalahan",
       // [Auto-translated] "Warning"
       warning: "Peringatan",
-      // [Auto-translated] "Informational note"
-      info: "Catatan informasi"
+      // [Auto-translated] "Informational"
+      info: "Informasi"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

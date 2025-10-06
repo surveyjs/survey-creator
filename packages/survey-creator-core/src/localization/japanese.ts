@@ -2083,8 +2083,8 @@ export var jaStrings = {
       error: "エラー",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational note"
-      info: "情報メモ"
+      // [Auto-translated] "Informational"
+      info: "情報"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

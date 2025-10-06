@@ -2083,8 +2083,8 @@ export var portugueseTranslation = {
       error: "Erro",
       // [Auto-translated] "Warning"
       warning: "Aviso",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

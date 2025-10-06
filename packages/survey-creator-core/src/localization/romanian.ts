@@ -2083,8 +2083,8 @@ export const roStrings = {
       error: "Eroare",
       // [Auto-translated] "Warning"
       warning: "Avertisment",
-      // [Auto-translated] "Informational note"
-      info: "Notă informativă"
+      // [Auto-translated] "Informational"
+      info: "Informaţionale"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
