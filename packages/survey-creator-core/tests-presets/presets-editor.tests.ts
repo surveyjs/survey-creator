@@ -961,3 +961,14 @@ test("Icon default", () => {
   expect(iconAction.id).toBe("icon-action");
   expect(iconAction.iconName).toBe("square-dashed-24x24");
 });
+
+test("Delete active tab", () => {
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  expect(activeTabQuestion.value).toEqual("designer");
+
+  itemsQuestion.value = [{ name: "preview" }, { name: "logic" }, { name: "json" }];
+  expect(activeTabQuestion.value).toEqual("preview");
+});

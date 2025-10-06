@@ -182,9 +182,11 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
     super.updateOnValueChangedCore(model, name);
     if (name === this.nameItems) {
       const val = model.getValue(name) || [];
-      model.getQuestionByName(this.nameActiveTab).visible = val.length > 1;
-      model.getQuestionByName(this.nameItems).visible = val.length > 1;
-      model.getQuestionByName(this.nameActiveTab).choices = val.map(v => new ItemValue(v.name, v.title));
+      const activeTabQuestion = model.getQuestionByName(this.nameActiveTab);
+      activeTabQuestion.choices = val.map(v => new ItemValue(v.name, v.title));
+      if (!activeTabQuestion.selectedItem) {
+        activeTabQuestion.selectItem(activeTabQuestion.choices[0]);
+      }
     }
   }
   private get nameActiveTab() { return this.path + "_activeTab"; }
