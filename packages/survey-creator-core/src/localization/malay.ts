@@ -2083,8 +2083,8 @@ export var msStrings = {
       error: "Ralat",
       // [Auto-translated] "Warning"
       warning: "Amaran",
-      // [Auto-translated] "Informational note"
-      info: "Nota maklumat"
+      // [Auto-translated] "Informational"
+      info: "Bermaklumat"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

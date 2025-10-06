@@ -2083,8 +2083,8 @@ export var mnStrings = {
       error: "Алдаа",
       // [Auto-translated] "Warning"
       warning: "Анхааруулга",
-      // [Auto-translated] "Informational note"
-      info: "Мэдээллийн тэмдэглэл"
+      // [Auto-translated] "Informational"
+      info: "Мэдээлэл"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

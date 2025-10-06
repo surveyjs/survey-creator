@@ -2083,8 +2083,8 @@ export var hrStrings = {
       error: "Greška",
       // [Auto-translated] "Warning"
       warning: "Upozorenje",
-      // [Auto-translated] "Informational note"
-      info: "Informativna napomena"
+      // [Auto-translated] "Informational"
+      info: "Informativan"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

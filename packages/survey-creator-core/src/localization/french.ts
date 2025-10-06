@@ -2083,8 +2083,8 @@ export var frenchTranslation = {
       error: "Erreur",
       // [Auto-translated] "Warning"
       warning: "Avertissement",
-      // [Auto-translated] "Informational note"
-      info: "Note d’information"
+      // [Auto-translated] "Informational"
+      info: "Informationnel"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

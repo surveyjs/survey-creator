@@ -2084,8 +2084,8 @@ export var polishStrings = {
       error: "Błąd",
       // [Auto-translated] "Warning"
       warning: "Ostrzeżenie",
-      // [Auto-translated] "Informational note"
-      info: "Nota informacyjna"
+      // [Auto-translated] "Informational"
+      info: "Informacyjne"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

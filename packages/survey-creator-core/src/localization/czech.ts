@@ -2083,8 +2083,8 @@ export var czStrings = {
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varování",
-      // [Auto-translated] "Informational note"
-      info: "Informační poznámka"
+      // [Auto-translated] "Informational"
+      info: "Informační"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -2083,8 +2083,8 @@ export const thStrings = {
       error: "ความผิดพลาด",
       // [Auto-translated] "Warning"
       warning: "คำเตือน",
-      // [Auto-translated] "Informational note"
-      info: "หมายเหตุข้อมูล"
+      // [Auto-translated] "Informational"
+      info: "ข้อมูล"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -2083,8 +2083,8 @@ export var bgStrings = {
       error: "Грешка",
       // [Auto-translated] "Warning"
       warning: "Предупреждение",
-      // [Auto-translated] "Informational note"
-      info: "Информационна бележка"
+      // [Auto-translated] "Informational"
+      info: "Информационна"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

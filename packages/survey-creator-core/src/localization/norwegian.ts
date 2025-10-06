@@ -2083,8 +2083,8 @@ export var nbStrings = {
       error: "Feil",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational note"
-      info: "Informativ merknad"
+      // [Auto-translated] "Informational"
+      info: "Informativ"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

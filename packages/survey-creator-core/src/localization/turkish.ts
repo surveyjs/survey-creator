@@ -2083,8 +2083,8 @@ export var turkishStrings = {
       error: "Hata",
       // [Auto-translated] "Warning"
       warning: "Uyarı",
-      // [Auto-translated] "Informational note"
-      info: "Bilgilendirme notu"
+      // [Auto-translated] "Informational"
+      info: "Bilgi"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

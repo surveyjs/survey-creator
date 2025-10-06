@@ -2084,8 +2084,8 @@ export var traditionalChineseTranslation = {
       error: "錯",
       // [Auto-translated] "Warning"
       warning: "儆",
-      // [Auto-translated] "Informational note"
-      info: "資訊說明"
+      // [Auto-translated] "Informational"
+      info: "資訊"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

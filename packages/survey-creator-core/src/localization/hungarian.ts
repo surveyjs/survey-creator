@@ -2083,8 +2083,8 @@ export var huStrings = {
       error: "Hiba",
       // [Auto-translated] "Warning"
       warning: "Figyelmeztetés",
-      // [Auto-translated] "Informational note"
-      info: "Tájékoztató megjegyzés"
+      // [Auto-translated] "Informational"
+      info: "Információs"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -2084,8 +2084,8 @@ export let svStrings = {
       error: "Fel",
       // [Auto-translated] "Warning"
       warning: "Varning",
-      // [Auto-translated] "Informational note"
-      info: "Anteckning om information"
+      // [Auto-translated] "Informational"
+      info: "Informativt"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
