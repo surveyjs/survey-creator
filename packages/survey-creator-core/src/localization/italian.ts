@@ -2083,8 +2083,8 @@ export var italianTranslation = {
       error: "Errore",
       // [Auto-translated] "Warning"
       warning: "Avvertimento",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

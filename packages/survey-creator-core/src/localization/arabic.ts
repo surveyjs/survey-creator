@@ -2083,8 +2083,8 @@ export var arStrings = {
       error: "خطأ",
       // [Auto-translated] "Warning"
       warning: "تحذير",
-      // [Auto-translated] "Informational note"
-      info: "ملاحظة إعلامية"
+      // [Auto-translated] "Informational"
+      info: "اعلاميه"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

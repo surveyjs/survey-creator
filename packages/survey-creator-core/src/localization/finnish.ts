@@ -2083,8 +2083,8 @@ export var fiStrings = {
       error: "Virhe",
       // [Auto-translated] "Warning"
       warning: "Varoitus",
-      // [Auto-translated] "Informational note"
-      info: "Tiedotus"
+      // [Auto-translated] "Informational"
+      info: "Tiedottava"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

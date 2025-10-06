@@ -2083,8 +2083,8 @@ export var skStrings = {
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varovanie",
-      // [Auto-translated] "Informational note"
-      info: "Informačná poznámka"
+      // [Auto-translated] "Informational"
+      info: "Informačné"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

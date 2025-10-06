@@ -1095,7 +1095,7 @@ export var enStrings = {
     notificationType: {
       error: "Error",
       warning: "Warning",
-      info: "Informational note"
+      info: "Informational"
     },
     autocomplete: {
       name: "Full Name",

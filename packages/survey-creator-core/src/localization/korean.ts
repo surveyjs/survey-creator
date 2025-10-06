@@ -2084,8 +2084,8 @@ export var koreanStrings = {
       error: "오류",
       // [Auto-translated] "Warning"
       warning: "경고",
-      // [Auto-translated] "Informational note"
-      info: "정보 참고 사항"
+      // [Auto-translated] "Informational"
+      info: "정보"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

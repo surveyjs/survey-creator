@@ -2083,8 +2083,8 @@ export var persianStrings = {
       error: "خطا",
       // [Auto-translated] "Warning"
       warning: "هشدار",
-      // [Auto-translated] "Informational note"
-      info: "یادداشت اطلاعاتی"
+      // [Auto-translated] "Informational"
+      info: "اطلاعاتی"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

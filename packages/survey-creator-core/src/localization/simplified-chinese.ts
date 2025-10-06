@@ -2083,8 +2083,8 @@ export var simplifiedChineseTranslation = {
       error: "错误",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational note"
-      info: "信息说明"
+      // [Auto-translated] "Informational"
+      info: "信息"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
