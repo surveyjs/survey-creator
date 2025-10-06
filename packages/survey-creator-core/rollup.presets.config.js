@@ -15,7 +15,7 @@ var banner = [
 export default {
   input: path.resolve(__dirname, "./src/entries/presets.ts"),
   output: {
-    file: "build/survey-creator-core-presets.mjs",
+    file: "build/fesm/survey-creator-core-presets.mjs",
     format: "es",
     exports: "named",
     sourcemap: true

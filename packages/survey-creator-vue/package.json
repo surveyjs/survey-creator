@@ -16,7 +16,7 @@
     "build:presets:dev": "vite build --config vite.presets.config.ts --mode development && npm run build:types:presets",
     "watch:presets": "vite build --config vite.presets.config.ts --watch",
     "build:types": "vue-tsc --project tsconfig.types.json --emitDeclarationOnly",
-    "build:types:presets": "vue-tsc --project tsconfig.types.presets.json --emitDeclarationOnly && node -e \"require('fs').writeFileSync('./build/types/presets/index.d.ts', 'export * from \\\"./src/presets\\\";')\"",
+    "build:types:presets": "vue-tsc --project tsconfig.types.presets.json --emitDeclarationOnly",
     "type-check": "vue-tsc --project tsconfig.types.json --noEmit",
     "test": "vitest --no-threads tests/test.spec.ts",
     "test:single": "vitest --no-watch --no-threads tests/test.spec.ts",
