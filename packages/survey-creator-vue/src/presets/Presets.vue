@@ -18,12 +18,12 @@ import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
 
 const props = defineProps<{
-  data: any;
-  creator: SurveyCreatorModel;
+  model: any;
+  data: SurveyCreatorModel;
 }>();
 
-const model = computed(() => props.data?.model);
-const creator = computed(() => props.creator);
+const model = computed(() => props.model?.model);
+const creator = computed(() => props.data);
 
 useBase(() => model.value);
 </script>
