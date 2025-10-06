@@ -99,7 +99,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               name: this.nameCategories,
               title: getLocString("presets.toolbox.toolbox"),
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-              minRowCount: 1,
               allowRowReorder: true,
               allowAddRows: true,
               addRowButtonLocation: "top",
@@ -344,7 +343,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   private getJsonItemsDefinition(model: SurveyModel): any {
     const mode = model.getValue(this.nameCategoriesMode);
-    const itemsRaw = (mode === "items") ? model.getValue(this.nameItems) : model.getValue(this.nameCategories).map(c => c.items).flat();
+    const itemsRaw = (mode === "items") ? model.getValue(this.nameItems) : (model.getValue(this.nameCategories) || []).map(c => c.items).flat();
     const items = (itemsRaw || []).map(i => ({ ...i }));
     let differs = false;
     items.forEach(item => {

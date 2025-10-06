@@ -268,7 +268,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               type: "matrixdynamic",
               name: this.nameCategories,
               title: getLocString("presets.propertyGrid.propertyGrid"),
-              minRowCount: 1,
               allowRowReorder: true,
               addRowButtonLocation: "top",
               allowAddRows: true,
