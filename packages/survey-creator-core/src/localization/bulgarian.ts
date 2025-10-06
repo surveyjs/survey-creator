@@ -1326,7 +1326,9 @@ export var bgStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Валидиращ израз",
       // [Auto-translated] "Notification type"
-      notificationType: "Тип известие"
+      notificationType: "Тип известие",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимална дължина (в знаци)"
     },
     // "Total row header"
     totalText: "Общ текст в реда",

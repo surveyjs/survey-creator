@@ -1326,7 +1326,9 @@ export var nbStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Uttrykk for validering",
       // [Auto-translated] "Notification type"
-      notificationType: "Type varsling"
+      notificationType: "Type varsling",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimal lengde (i tegn)"
     },
     // "Total row header"
     totalText: "Total tekst",

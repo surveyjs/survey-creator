@@ -1326,7 +1326,9 @@ export var msStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ungkapan pengesahihan",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis pemberitahuan"
+      notificationType: "Jenis pemberitahuan",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam aksara)"
     },
     // "Total row header"
     totalText: "Jumlah teks",

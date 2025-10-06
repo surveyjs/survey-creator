@@ -1326,7 +1326,9 @@ export const thStrings = {
       // [Auto-translated] "Validation expression"
       expression: "นิพจน์การตรวจสอบความถูกต้อง",
       // [Auto-translated] "Notification type"
-      notificationType: "ประเภทการแจ้งเตือน"
+      notificationType: "ประเภทการแจ้งเตือน",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "ความยาวสูงสุด (เป็นอักขระ)"
     },
     // "Total row header"
     totalText: "หัวแถวรวม",

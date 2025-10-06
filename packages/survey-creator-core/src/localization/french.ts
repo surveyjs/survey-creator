@@ -1326,7 +1326,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Condition à respecter",
       // [Auto-translated] "Notification type"
-      notificationType: "Type de notification"
+      notificationType: "Type de notification",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longueur maximale (en caractères)"
     },
     // "Total row header"
     totalText: "Texte pour le total",

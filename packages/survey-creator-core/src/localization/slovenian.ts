@@ -1326,7 +1326,9 @@ export var slStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validacijski izraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Vrsta obvestila"
+      notificationType: "Vrsta obvestila",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Največja dolžina (v črkah)"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",

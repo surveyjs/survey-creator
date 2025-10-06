@@ -1326,7 +1326,9 @@ export var skStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Overovací výraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ oznámenia"
+      notificationType: "Typ oznámenia",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximálna dĺžka (v znakoch)"
     },
     // "Total row header"
     totalText: "Celkom – text",

@@ -1326,7 +1326,9 @@ export var germanTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Validierungs-Ausdruck",
       // [Auto-translated] "Notification type"
-      notificationType: "Art der Meldung"
+      notificationType: "Art der Meldung",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale Länge (in Zeichen)"
     },
     // "Total row header"
     totalText: "Text (total)",

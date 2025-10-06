@@ -1327,7 +1327,9 @@ export var polishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Wyrażenie sprawdzania poprawności",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ powiadomienia"
+      notificationType: "Typ powiadomienia",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksymalna długość (w znakach)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Nagłówek wiersza sumy",

@@ -1326,7 +1326,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Expresión de validación",
       // [Auto-translated] "Notification type"
-      notificationType: "Tipo de notificación"
+      notificationType: "Tipo de notificación",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longitud máxima (en caracteres)"
     },
     // "Total row header"
     totalText: "Texto total",
