@@ -2,22 +2,6 @@ import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getList
 
 const title = "Actions in Logic section Screenshot";
 
-const json = {
-  showQuestionNumbers: "on",
-  "logoPosition": "right",
-  "pages": [
-    {
-      "name": "page1",
-      "elements": [
-        {
-          "type": "text",
-          "name": "question1"
-        }
-      ]
-    }
-  ]
-};
-
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
@@ -26,7 +10,21 @@ test.describe(title, () => {
   test("Check states", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
-    await setJSON(page, json);
+    await setJSON(page, {
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
 
     await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
     await getPropertyGridCategory(page, generalGroupName).click();

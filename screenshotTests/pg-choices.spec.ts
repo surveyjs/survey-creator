@@ -12,7 +12,7 @@ test.describe(title, () => {
     await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
     await page.setViewportSize({ width: 1920, height: 1080 });
 
-    const json = {
+    await setJSON(page, {
       showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
@@ -22,18 +22,12 @@ test.describe(title, () => {
             {
               "type": "checkbox",
               "name": "question1",
-              "choices": [
-                "Item 1",
-                "Item 2",
-                "Item 3"
-              ]
+              "choices": ["Item 1", "Item 2", "Item 3"]
             }
           ]
         }
       ]
-    };
-
-    await setJSON(page, json);
+    });
     // await page.click(Selector(".svd-grid-expand"));
     await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
     await getPropertyGridCategory(page, generalGroupName).click();
