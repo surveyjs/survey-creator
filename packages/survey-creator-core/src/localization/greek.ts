@@ -1326,7 +1326,9 @@ export var grStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Παράσταση επικύρωσης",
       // [Auto-translated] "Notification type"
-      notificationType: "Τύπος ειδοποίησης"
+      notificationType: "Τύπος ειδοποίησης",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Μέγιστο μήκος (σε χαρακτήρες)"
     },
     // "Total row header"
     totalText: "Επικεφαλίδα συνολικής σειράς",

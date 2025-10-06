@@ -1326,7 +1326,9 @@ export var ruStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Проверочное выражение",
       // [Auto-translated] "Notification type"
-      notificationType: "Тип уведомления"
+      notificationType: "Тип уведомления",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимальная длина (в символах)"
     },
     // "Total row header"
     totalText: "Общий текст",

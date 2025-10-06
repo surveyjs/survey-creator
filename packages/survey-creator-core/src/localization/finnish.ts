@@ -1326,7 +1326,9 @@ export var fiStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Vahvistuksen lauseke",
       // [Auto-translated] "Notification type"
-      notificationType: "Ilmoituksen tyyppi"
+      notificationType: "Ilmoituksen tyyppi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Enimmäispituus (merkkeinä)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rivin otsikon kokonaissumma",

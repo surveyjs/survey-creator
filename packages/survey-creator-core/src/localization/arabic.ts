@@ -1326,7 +1326,9 @@ export var arStrings = {
       // [Auto-translated] "Validation expression"
       expression: "تعبير التحقق من الصحة",
       // [Auto-translated] "Notification type"
-      notificationType: "نوع الإشعار"
+      notificationType: "نوع الإشعار",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "الحد الأقصى للطول (بالأحرف)"
     },
     // "Total row header"
     totalText: "Total text",

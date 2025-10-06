@@ -1326,7 +1326,9 @@ export var turkishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Doğrulama ifadesi",
       // [Auto-translated] "Notification type"
-      notificationType: "Bildirim türü"
+      notificationType: "Bildirim türü",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimum uzunluk (karakter cinsinden)"
     },
     // "Total row header"
     totalText: "Toplam metni",

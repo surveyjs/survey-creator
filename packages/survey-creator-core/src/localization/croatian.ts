@@ -1326,7 +1326,9 @@ export var hrStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Izraz za provjeru valjanosti",
       // [Auto-translated] "Notification type"
-      notificationType: "Vrsta obavijesti"
+      notificationType: "Vrsta obavijesti",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimalna duljina (u znakovima)"
     },
     // "Total row header"
     totalText: "Ukupan tekst",

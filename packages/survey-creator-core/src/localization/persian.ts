@@ -1326,7 +1326,9 @@ export var persianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "عبارت اعتبارسنجی",
       // [Auto-translated] "Notification type"
-      notificationType: "نوع اعلان"
+      notificationType: "نوع اعلان",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "حداکثر طول (بر حسب کاراکتر)"
     },
     // "Total row header"
     totalText: "متن کامل",

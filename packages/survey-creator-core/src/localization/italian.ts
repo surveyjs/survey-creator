@@ -1326,7 +1326,9 @@ export var italianTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Espressione di convalida",
       // [Auto-translated] "Notification type"
-      notificationType: "Tipo di notifica"
+      notificationType: "Tipo di notifica",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Lunghezza massima (in caratteri)"
     },
     // "Total row header"
     totalText: "Testo della riga Totale",

@@ -696,7 +696,8 @@ export var enStrings = {
     surveyvalidator: {
       text: "Validation message",
       expression: "Validation expression",
-      notificationType: "Notification type"
+      notificationType: "Notification type",
+      maxLength: "Maximum length (in characters)"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",

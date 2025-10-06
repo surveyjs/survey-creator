@@ -1326,7 +1326,9 @@ export var huStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Érvényesítési kifejezés",
       // [Auto-translated] "Notification type"
-      notificationType: "Értesítés típusa"
+      notificationType: "Értesítés típusa",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximális hossz (karakterben)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Teljes sorfejléc",

@@ -1326,7 +1326,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresi validasi",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis notifikasi"
+      notificationType: "Jenis notifikasi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam karakter)"
     },
     // "Total row header"
     totalText: "Total teks",

@@ -1327,7 +1327,9 @@ export var koreanStrings = {
       // [Auto-translated] "Validation expression"
       expression: "유효성 검사 표현식",
       // [Auto-translated] "Notification type"
-      notificationType: "알림 유형"
+      notificationType: "알림 유형",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "최대 길이(문자)"
     },
     // [Auto-translated] "Total row header"
     totalText: "총 행 머리글",

@@ -1326,7 +1326,9 @@ export var nlStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validatie-expressie",
       // [Auto-translated] "Notification type"
-      notificationType: "Type melding"
+      notificationType: "Type melding",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale lengte (in tekens)"
     },
     // "Total row header"
     totalText: "Totale tekst",

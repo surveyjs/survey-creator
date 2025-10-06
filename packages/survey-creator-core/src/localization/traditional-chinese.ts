@@ -1327,7 +1327,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "驗證表達式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知類型"
+      notificationType: "通知類型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "長度上限 （以字元為單位）"
     },
     // [Auto-translated] "Total row header"
     totalText: "總行標題",

@@ -1326,7 +1326,9 @@ export var mnStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Баталгаажуулалтын илэрхийлэл",
       // [Auto-translated] "Notification type"
-      notificationType: "Мэдэгдлийн төрөл"
+      notificationType: "Мэдэгдлийн төрөл",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Хамгийн их урт (үсгээр)"
     },
     // "Total row header"
     totalText: "Нийт мөр",

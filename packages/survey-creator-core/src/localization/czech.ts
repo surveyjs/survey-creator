@@ -1326,7 +1326,9 @@ export var czStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ověřovací výraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ oznámení"
+      notificationType: "Typ oznámení",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximální délka (ve znacích)"
     },
     // "Total row header"
     totalText: "Celkový text",
