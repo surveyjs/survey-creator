@@ -37,9 +37,9 @@ test.describe(title, () => {
     await page.waitForLoadState("networkidle");
 
     const imagePicker = page.locator(".sd-imagepicker");
-    const firstImage = imagePicker.locator(".svc-image-item-value-wrapper").first();
-
     await imagePicker.click();
+
+    const firstImage = page.getByRole("img", { name: "left" });
     await firstImage.hover();
     await compareScreenshot(page, imagePicker, "image-picker-responsive-hover.png");
 
@@ -50,7 +50,7 @@ test.describe(title, () => {
       q.minImageWidth = 100;
     });
     await imagePicker.click();
-    await imagePicker.locator(".svc-image-item-value-wrapper").hover();
+    await firstImage.hover();
 
     await compareScreenshot(page, imagePicker, "image-picker-responsive-col-count-3-hover.png");
 
