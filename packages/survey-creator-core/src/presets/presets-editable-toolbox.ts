@@ -271,6 +271,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             }
             destination.value = destValue;
             this.updateMatrixRowActions(model, question);
+            row.showDetailPanel();
           }
         }));
       }

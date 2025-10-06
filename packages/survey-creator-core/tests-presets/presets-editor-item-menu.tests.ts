@@ -363,3 +363,14 @@ test("Preset edit (no categories), context menu - convert to subcategory", () =>
   const items2 = editor.getValue("toolbox_items");
   expect(items2.filter(i => i.name == "comment")[0].subitems).toEqual([]);
 });
+
+test("Expand subitenms on convert to subcategory", () => {
+  const editor = new CreatorPresetEditorModelTester(json);
+  editor.setValue("toolbox_mode", "items");
+  const actions = editor.getRowContextActions("toolbox_items", "comment");
+  const itemsQuestion = editor.model.getQuestionByName("toolbox_items");
+  const row = itemsQuestion.visibleRows.filter(r => r.value["name"] == "comment")[0];
+  expect(row.isDetailPanelShowing).toBeFalsy();
+  actions.filter(a => a.id == "convert-to-subcategory")[0].action();
+  expect(row.isDetailPanelShowing).toBeTruthy();
+});
