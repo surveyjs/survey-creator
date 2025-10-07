@@ -140,6 +140,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           name: "panel",
           title: getLogicString("actionsEditorTitle"),
           titleLocation: "hidden",
+          templateQuestionTitleLocation: "hidden",
           addPanelText: getLogicString("addNewAction"),
           removePanelButtonLocation: "right",
           panelCount: 0,

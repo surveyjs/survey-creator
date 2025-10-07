@@ -844,6 +844,8 @@ export var jaStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選択時に他のユーザーをクリアする",
+    // [Auto-translated] "Display both text and value"
+    showValue: "テキストと値の両方を表示する",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "ユーザーにコメントの入力を要求する",
     // "Display area height"

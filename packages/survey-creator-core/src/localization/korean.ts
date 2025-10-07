@@ -845,6 +845,8 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "선택하면 다른 항목 지우기",
+    // [Auto-translated] "Display both text and value"
+    showValue: "텍스트와 값 모두 표시",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "사용자에게 주석 입력 요구",
     // "Display area height"

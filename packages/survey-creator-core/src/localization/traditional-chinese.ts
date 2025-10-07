@@ -845,6 +845,8 @@ export var traditionalChineseTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選中時清除其他",
+    // [Auto-translated] "Display both text and value"
+    showValue: "同時顯示文字和值",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "要求使用者輸入註釋",
     // "Display area height"

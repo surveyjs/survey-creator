@@ -844,6 +844,8 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Hapus yang lain saat dipilih",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Tampilkan teks dan nilai",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Mengharuskan pengguna untuk memasukkan komentar",
     // "Display area height"

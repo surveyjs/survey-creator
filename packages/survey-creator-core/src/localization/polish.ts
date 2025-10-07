@@ -845,6 +845,8 @@ export var polishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Wyczyść inne po wybraniu",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Wyświetlanie zarówno tekstu, jak i wartości",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Wymagaj od użytkownika wprowadzenia komentarza",
     // "Display area height"

@@ -844,6 +844,8 @@ export var hrStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Prikaz teksta i vrijednosti",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Zahtijevanje od korisnika da unese komentar",
     // "Display area height"

@@ -844,6 +844,8 @@ export var persianStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "هنگام انتخاب دیگران را پاک کنید",
+    // [Auto-translated] "Display both text and value"
+    showValue: "نمایش متن و مقدار",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "نیاز به وارد کردن نظر کاربر",
     // "Display area height"
