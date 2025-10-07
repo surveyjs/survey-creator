@@ -323,8 +323,10 @@ test.describe(title, () => {
 
   test("Dropdown popup in property grid", async ({ page }) => {
     await page.setViewportSize({ width: 1240, height: 870 });
-    await page.locator(".svc-element__add-new-question").click();
-    await page.keyboard.press("Escape");
+    await setJSON(page, { "elements": [{ "type": "text", "name": "question1" }] });
+    const question1 = page.locator("[data-name=\"question1\"]");
+    await question1.click();
+
     await page.locator("div[data-name='inputType'] .spg-dropdown").click();
     await compareScreenshot(page, page.locator(".svc-side-bar"), "pg-dropdown-editor.png");
   });
