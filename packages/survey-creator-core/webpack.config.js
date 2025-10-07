@@ -91,9 +91,9 @@ var buildPlatformJson = {
       "require": "./themes/*.js"
     },
     "./presets": {
-      "types": "./typings-presets/entries/presets.d.ts",
-      "import": "./fesm/survey-creator-core-presets.mjs",
-      "require": "./survey-creator-core-presets.js"
+      "types": "./presets/index.d.ts",
+      "import": "./fesm/presets/index.mjs",
+      "require": "./presets/index.js"
     }
   },
   devDependencies: {},

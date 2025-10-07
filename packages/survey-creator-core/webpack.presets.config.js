@@ -16,11 +16,11 @@ module.exports = (env) => {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval-source-map",
     entry: {
-      "survey-creator-core-presets": path.resolve(__dirname, "./src/entries/presets.ts"),
+      "survey-creator-core-presets": path.resolve(__dirname, "./src/presets/index.ts"),
     },
     output: {
-      path: path.resolve(__dirname, "build"),
-      filename: isProd ? "[name].min.js" : "[name].js",
+      path: path.resolve(__dirname, "build/presets"),
+      filename: isProd ? "index.min.js" : "index.js",
       library: {
         root: "SurveyCreatorCorePresets",
         amd: "[dashedname]",
@@ -94,7 +94,7 @@ module.exports = (env) => {
       }),
       new RemoveEmptyScriptsPlugin(),
       new MiniCssExtractPlugin({
-        filename: isProd ? "[name].min.css" : "[name].css"
+        filename: isProd ? "index.min.css" : "index.css"
       })
     ]
   };

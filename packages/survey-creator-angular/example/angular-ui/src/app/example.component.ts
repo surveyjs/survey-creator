@@ -4,7 +4,7 @@ import { SurveyCreatorModel } from "survey-creator-core";
 import * as Survey from "survey-core";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
-import "survey-creator-core/survey-creator-core-presets.css";
+import "survey-creator-core/presets/index.css";
 import { TabPresetsPlugin } from "survey-creator-core/presets";
 const json = {
   "logoPosition": "right",

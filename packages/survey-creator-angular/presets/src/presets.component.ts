@@ -8,15 +8,15 @@ import { SurveyCreatorModel } from "survey-creator-core";
   styles: [":host { display: none; }"]
 })
 export class TabPresetsComponent extends BaseAngular<any> {
-  @Input() data: any = undefined;
-  @Input() creator?: SurveyCreatorModel;
-
-  get model() {
-    return this.data?.model;
+  @Input() model: any = undefined;
+  public get survey() {
+    return this.model.model;
   }
-
+  public get creator() {
+    return this.model.creator;
+  }
   protected getModel() {
-    return this.data;
+    return this.model;
   }
 }
 

@@ -19,11 +19,10 @@ import { computed } from "vue";
 
 const props = defineProps<{
   model: any;
-  data: SurveyCreatorModel;
 }>();
 
 const model = computed(() => props.model?.model);
-const creator = computed(() => props.data);
+const creator = computed(() => props.model?.creator);
 
 useBase(() => model.value);
 </script>

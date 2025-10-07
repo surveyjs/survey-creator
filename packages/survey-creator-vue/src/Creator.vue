@@ -62,7 +62,6 @@
                     <SvComponent
                       :is="tab.componentContent"
                       :model="tab.data.model"
-                      :data="model"
                     ></SvComponent>
                   </div>
                 </template>

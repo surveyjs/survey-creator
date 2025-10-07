@@ -1,4 +1,4 @@
-<div *ngIf="model">
+<ng-template #template>
   <div class="sps-launch">
     <button class="sps-launch__card" (click)="showPresets()">
       <div class="sps-launch__container">
@@ -14,5 +14,6 @@
       </div>
     </button>
   </div>
-  <svc-property-grid [model]="model"></svc-property-grid>
-</div>
+  <ng-template [component]="{ name: 'svc-property-grid', data: {model: model} }">
+  </ng-template>
+</ng-template>

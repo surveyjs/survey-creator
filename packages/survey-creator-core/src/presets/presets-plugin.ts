@@ -3,7 +3,7 @@ import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } f
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 export class TabPresetsPlugin implements ICreatorPlugin {
-  public model: CreatorPresetEditorModel | undefined;
+  public model: CreatorPresetEditorModel;
   public static iconName = "icon-settings";
   private activeTab;
   private currentPresetIndex = 0;
