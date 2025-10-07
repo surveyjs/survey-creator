@@ -1326,7 +1326,9 @@ export var slStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validacijski izraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Vrsta obvestila"
+      notificationType: "Vrsta obvestila",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Največja dolžina (v črkah)"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",
@@ -2081,8 +2083,8 @@ export var slStrings = {
       error: "Napaka",
       // [Auto-translated] "Warning"
       warning: "Opozorilo",
-      // [Auto-translated] "Informational note"
-      info: "Informativna opomba"
+      // [Auto-translated] "Informational"
+      info: "Informativne"
     },
     autocomplete: {
       // "Full Name"

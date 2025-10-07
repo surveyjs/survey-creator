@@ -1326,7 +1326,9 @@ export var italianTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Espressione di convalida",
       // [Auto-translated] "Notification type"
-      notificationType: "Tipo di notifica"
+      notificationType: "Tipo di notifica",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Lunghezza massima (in caratteri)"
     },
     // "Total row header"
     totalText: "Testo della riga Totale",
@@ -2081,8 +2083,8 @@ export var italianTranslation = {
       error: "Errore",
       // [Auto-translated] "Warning"
       warning: "Avvertimento",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

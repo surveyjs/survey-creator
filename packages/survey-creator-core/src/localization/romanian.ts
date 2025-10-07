@@ -1326,7 +1326,9 @@ export const roStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Expresie de validare",
       // [Auto-translated] "Notification type"
-      notificationType: "Tip de notificare"
+      notificationType: "Tip de notificare",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Lungime maximă (în caractere)"
     },
     // "Total row header"
     totalText: "Antet rând total",
@@ -2081,8 +2083,8 @@ export const roStrings = {
       error: "Eroare",
       // [Auto-translated] "Warning"
       warning: "Avertisment",
-      // [Auto-translated] "Informational note"
-      info: "Notă informativă"
+      // [Auto-translated] "Informational"
+      info: "Informaţionale"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -696,7 +696,8 @@ export var enStrings = {
     surveyvalidator: {
       text: "Validation message",
       expression: "Validation expression",
-      notificationType: "Notification type"
+      notificationType: "Notification type",
+      maxLength: "Maximum length (in characters)"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",
@@ -1094,7 +1095,7 @@ export var enStrings = {
     notificationType: {
       error: "Error",
       warning: "Warning",
-      info: "Informational note"
+      info: "Informational"
     },
     autocomplete: {
       name: "Full Name",

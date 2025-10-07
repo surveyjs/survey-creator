@@ -1326,7 +1326,9 @@ export var skStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Overovací výraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ oznámenia"
+      notificationType: "Typ oznámenia",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximálna dĺžka (v znakoch)"
     },
     // "Total row header"
     totalText: "Celkom – text",
@@ -2081,8 +2083,8 @@ export var skStrings = {
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varovanie",
-      // [Auto-translated] "Informational note"
-      info: "Informačná poznámka"
+      // [Auto-translated] "Informational"
+      info: "Informačné"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

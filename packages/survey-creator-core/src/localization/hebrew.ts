@@ -1326,7 +1326,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Validation expression"
       expression: "ביטוי אימות",
       // [Auto-translated] "Notification type"
-      notificationType: "סוג הודעה"
+      notificationType: "סוג הודעה",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "אורך מרבי (בתווים)"
     },
     // "Total row header"
     totalText: "טקסט לשורת סיכום",
@@ -2081,8 +2083,8 @@ export var hebrewStrings = {
       error: "שגיאה",
       // [Auto-translated] "Warning"
       warning: "אזהרה",
-      // [Auto-translated] "Informational note"
-      info: "הערת מידע"
+      // [Auto-translated] "Informational"
+      info: "אינפורמטיבי"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

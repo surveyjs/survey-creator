@@ -1327,7 +1327,9 @@ export var danishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Valideringsudtryk",
       // [Auto-translated] "Notification type"
-      notificationType: "Type af notifikationer"
+      notificationType: "Type af notifikationer",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimal længde (i tegn)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rækkeoverskrift i total",
@@ -2082,8 +2084,8 @@ export var danishStrings = {
       error: "Fejl",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational note"
-      info: "Informativ note"
+      // [Auto-translated] "Informational"
+      info: "Informative"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -1326,7 +1326,9 @@ export var portugueseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Expressão de validação",
       // [Auto-translated] "Notification type"
-      notificationType: "Tipo de notificação"
+      notificationType: "Tipo de notificação",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Comprimento máximo (em caracteres)"
     },
     // "Total row header"
     totalText: "Texto total da linha",
@@ -2081,8 +2083,8 @@ export var portugueseTranslation = {
       error: "Erro",
       // [Auto-translated] "Warning"
       warning: "Aviso",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
