@@ -844,6 +844,8 @@ export var fiStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Poista muut, kun se on valittuna",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Näytä sekä teksti että arvo",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vaadi käyttäjää kirjoittamaan kommentti",
     // "Display area height"

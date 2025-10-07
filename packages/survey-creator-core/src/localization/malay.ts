@@ -844,6 +844,8 @@ export var msStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Kosongkan yang lain apabila dipilih",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Paparkan kedua-dua teks dan nilai",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Memerlukan pengguna memasukkan komen",
     // "Display area height"

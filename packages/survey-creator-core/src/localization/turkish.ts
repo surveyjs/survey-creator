@@ -844,6 +844,8 @@ export var turkishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Seçildiğinde diğerlerini temizleme",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Hem metni hem de değeri görüntüleyin",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kullanıcının bir açıklama girmesini gerektir",
     // "Display area height"

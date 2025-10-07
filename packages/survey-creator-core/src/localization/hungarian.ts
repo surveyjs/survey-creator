@@ -844,6 +844,8 @@ export var huStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Mások törlése, ha ki van jelölve",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Szöveg és érték megjelenítése",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Megjegyzés megadásának megkövetelése a felhasználótól",
     // "Display area height"

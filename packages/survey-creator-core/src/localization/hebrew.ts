@@ -844,6 +844,8 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
+    // [Auto-translated] "Display both text and value"
+    showValue: "הצגת טקסט וערך",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "דרישת המשתמש להזין הערה",
     // "Display area height"

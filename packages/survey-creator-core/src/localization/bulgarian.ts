@@ -844,6 +844,8 @@ export var bgStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Изчистване на другите, когато е избрано",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Показване както на текст, така и на стойност",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Изискване от потребителя да въведе коментар",
     // "Display area height"

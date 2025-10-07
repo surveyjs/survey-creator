@@ -844,6 +844,8 @@ export var grStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Εμφάνιση κειμένου και τιμής",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Απαίτηση από το χρήστη να εισαγάγει ένα σχόλιο",
     // "Display area height"

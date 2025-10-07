@@ -844,6 +844,8 @@ export var slStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih, ko so izbrane",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Prikaz besedila in vrednosti",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Zahteva, da uporabnik vnese komentar",
     // "Display area height"
