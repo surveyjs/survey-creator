@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getToolboxItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody } from "./helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -168,8 +168,9 @@ test.describe(title, () => {
       });
     });
     await setIsCompact(page, false);
-    await getToolboxItemByText(page, "Dropdown").hover({ position: { x: 25, y: 0 } });
-    await getToolboxItemByText(page, "Dropdown").click({ position: { x: 25, y: 0 } });
+    await setJSON(page, { "elements": [{ "type": "dropdown", "name": "question1", "choices": ["Item 1", "Item 2", "Item 3"] }] });
+    const question1 = page.locator("[data-name=\"question1\"]");
+    await question1.click();
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Choice Options").click();
     await page.locator(".spg-action-button").filter({ hasText: "Edit" }).first().click();
@@ -372,14 +373,11 @@ test.describe(title, () => {
 
   test("Check question with error", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
-    await setJSON(page, {
-      showQuestionNumbers: "on",
-      type: "text",
-      name: "q1",
-    });
-    await addQuestionByAddQuestionButton(page, "Long Text");
+    await setJSON(page, { pages: [{ elements: [{ type: "text", name: "question1" }] }] });
+    const question1 = page.locator("[data-name=\"question1\"]");
+    await question1.click();
     const questionSelector = page.locator("div[data-name='name']");
-    const inputElement = questionSelector.locator("input");
+    const inputElement = page.getByRole("textbox", { name: "Question name" });
     await inputElement.click();
     await page.keyboard.press("Control+a");
     await page.keyboard.press("Delete");
@@ -607,7 +605,10 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     const questionSelector = page.locator("div[data-name='test']");
     await compareScreenshot(page, questionSelector, "text-with-reset-disabled-button.png");
-    await questionSelector.locator("input").fill("value");
+    await questionSelector.locator("input").click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("value");
+    await questionSelector.locator("input").click();
     await compareScreenshot(page, questionSelector, "text-with-reset-enabled-button.png");
   });
 
@@ -762,7 +763,7 @@ test.describe(title, () => {
   test("Helper action not hidden", async ({ page }) => {
     await page.setViewportSize({ width: 1240, height: 870 });
     const westResizer = page.locator(".svc-resizer-west");
-    const questionHeader = getPropertyGridCategory(page, "Conditions").locator("..").locator("..").locator("..").locator("..").locator(".spg-panel").locator(".spg-question__header");
+    const questionHeader = page.getByRole("group", { name: "Conditions" }).locator(".spg-question__header");
     const json = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "text", }] }] };
     await setJSON(page, json);
     await page.waitForTimeout(1000);
