@@ -844,6 +844,8 @@ export var arStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "مسح الآخرين عند تحديده",
+    // [Auto-translated] "Display both text and value"
+    showValue: "عرض كل من النص والقيمة",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "مطالبة المستخدم بإدخال تعليق",
     // "Display area height"

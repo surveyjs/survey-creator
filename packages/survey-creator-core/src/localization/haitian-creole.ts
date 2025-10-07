@@ -844,6 +844,8 @@ export var htStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Klè lòt moun lè yo chwazi yo",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Montre tou de tèks ak valè",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Mande pou itilizatè antre nan yon kòmantè",
     // "Display area height"

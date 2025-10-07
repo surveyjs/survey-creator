@@ -844,6 +844,8 @@ export const thStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "ล้างรายการอื่นเมื่อเลือก",
+    // [Auto-translated] "Display both text and value"
+    showValue: "แสดงทั้งข้อความและค่า",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "กําหนดให้ผู้ใช้ป้อนความคิดเห็น",
     // "Display area height"

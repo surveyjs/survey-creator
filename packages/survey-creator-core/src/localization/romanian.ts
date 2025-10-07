@@ -844,6 +844,8 @@ export const roStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ștergeți altele când este selectat",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Afișați atât textul, cât și valoarea",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Solicitați utilizatorului să introducă un comentariu",
     // "Display area height"

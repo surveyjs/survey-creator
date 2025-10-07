@@ -844,6 +844,8 @@ export var czStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymazat ostatní při výběru",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Zobrazení textu i hodnoty",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Požadovat po uživateli zadání komentáře",
     // "Display area height"

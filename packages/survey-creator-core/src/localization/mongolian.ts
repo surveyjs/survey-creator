@@ -844,6 +844,8 @@ export var mnStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Текст болон үнэ цэнийг аль алиныг нь харуул",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Хэрэглэгчээс тайлбар оруулахыг шаардах",
     // "Display area height"

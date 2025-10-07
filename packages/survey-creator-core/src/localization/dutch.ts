@@ -844,6 +844,8 @@ export var nlStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Anderen wissen wanneer geselecteerd",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Geef zowel tekst als waarde weer",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vereisen dat de gebruiker een opmerking invoert",
     // "Display area height"
