@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import { SvComponent } from "survey-vue3-ui";
-import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
 
