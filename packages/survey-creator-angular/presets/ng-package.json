@@ -3,6 +3,6 @@
   "dest": "./build",
   "deleteDestPath": false,
   "lib": {
-    "entryFile": "src/angular-ui.ts"
+    "entryFile": "src/index.ts"
   }
 }

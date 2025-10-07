@@ -38,29 +38,6 @@
         }
       }
     },
-    "survey-creator-angular-presets": {
-      "projectType": "library",
-      "root": ".",
-      "sourceRoot": "src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "./ng-package.presets.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "./tsconfig.presets.prod.json"
-            },
-            "development": {
-              "tsConfig": "./tsconfig.presets.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        }
-      }
-    },
     "angular-ui": {
       "projectType": "application",
       "schematics": {

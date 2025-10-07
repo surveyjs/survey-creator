@@ -82,7 +82,6 @@
   },
   "scripts": {
     "build": "ng build && node ./update-version.js",
-    "build:presets": "ng build survey-creator-angular-presets",
     "build:example:prod": "ng build  angular-ui",
     "serve:example:dev": "ng serve",
     "serve:example:prod": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
