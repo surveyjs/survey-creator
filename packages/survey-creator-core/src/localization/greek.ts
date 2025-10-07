@@ -1326,7 +1326,9 @@ export var grStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Παράσταση επικύρωσης",
       // [Auto-translated] "Notification type"
-      notificationType: "Τύπος ειδοποίησης"
+      notificationType: "Τύπος ειδοποίησης",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Μέγιστο μήκος (σε χαρακτήρες)"
     },
     // "Total row header"
     totalText: "Επικεφαλίδα συνολικής σειράς",
@@ -2081,8 +2083,8 @@ export var grStrings = {
       error: "Λάθος",
       // [Auto-translated] "Warning"
       warning: "Προειδοποίηση",
-      // [Auto-translated] "Informational note"
-      info: "Ενημερωτικό σημείωμα"
+      // [Auto-translated] "Informational"
+      info: "Ενημερωτικό"
     },
     autocomplete: {
       // "Full Name"

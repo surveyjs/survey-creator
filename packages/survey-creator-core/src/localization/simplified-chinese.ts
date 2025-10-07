@@ -1326,7 +1326,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "验证表达式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知类型"
+      notificationType: "通知类型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大长度（以字符为单位）"
     },
     // "Total row header"
     totalText: "总文本",
@@ -2081,8 +2083,8 @@ export var simplifiedChineseTranslation = {
       error: "错误",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational note"
-      info: "信息说明"
+      // [Auto-translated] "Informational"
+      info: "信息"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

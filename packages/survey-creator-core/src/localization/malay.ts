@@ -1326,7 +1326,9 @@ export var msStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ungkapan pengesahihan",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis pemberitahuan"
+      notificationType: "Jenis pemberitahuan",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam aksara)"
     },
     // "Total row header"
     totalText: "Jumlah teks",
@@ -2081,8 +2083,8 @@ export var msStrings = {
       error: "Ralat",
       // [Auto-translated] "Warning"
       warning: "Amaran",
-      // [Auto-translated] "Informational note"
-      info: "Nota maklumat"
+      // [Auto-translated] "Informational"
+      info: "Bermaklumat"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

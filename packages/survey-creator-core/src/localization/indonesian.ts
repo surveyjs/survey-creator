@@ -1326,7 +1326,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresi validasi",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis notifikasi"
+      notificationType: "Jenis notifikasi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam karakter)"
     },
     // "Total row header"
     totalText: "Total teks",
@@ -2081,8 +2083,8 @@ export var indonesianStrings = {
       error: "Kesalahan",
       // [Auto-translated] "Warning"
       warning: "Peringatan",
-      // [Auto-translated] "Informational note"
-      info: "Catatan informasi"
+      // [Auto-translated] "Informational"
+      info: "Informasi"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

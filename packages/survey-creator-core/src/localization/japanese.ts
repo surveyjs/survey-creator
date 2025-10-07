@@ -1326,7 +1326,9 @@ export var jaStrings = {
       // [Auto-translated] "Validation expression"
       expression: "検証式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知タイプ"
+      notificationType: "通知タイプ",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大長 (文字数)"
     },
     // "Total row header"
     totalText: "テキストの合計",
@@ -2081,8 +2083,8 @@ export var jaStrings = {
       error: "エラー",
       // [Auto-translated] "Warning"
       warning: "警告",
-      // [Auto-translated] "Informational note"
-      info: "情報メモ"
+      // [Auto-translated] "Informational"
+      info: "情報"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

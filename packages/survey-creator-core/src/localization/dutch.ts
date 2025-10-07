@@ -1326,7 +1326,9 @@ export var nlStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validatie-expressie",
       // [Auto-translated] "Notification type"
-      notificationType: "Type melding"
+      notificationType: "Type melding",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale lengte (in tekens)"
     },
     // "Total row header"
     totalText: "Totale tekst",
@@ -2081,8 +2083,8 @@ export var nlStrings = {
       error: "Fout",
       // [Auto-translated] "Warning"
       warning: "Waarschuwing",
-      // [Auto-translated] "Informational note"
-      info: "Informatieve notitie"
+      // [Auto-translated] "Informational"
+      info: "Informatieve"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

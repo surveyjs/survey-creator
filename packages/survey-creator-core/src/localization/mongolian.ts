@@ -1326,7 +1326,9 @@ export var mnStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Баталгаажуулалтын илэрхийлэл",
       // [Auto-translated] "Notification type"
-      notificationType: "Мэдэгдлийн төрөл"
+      notificationType: "Мэдэгдлийн төрөл",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Хамгийн их урт (үсгээр)"
     },
     // "Total row header"
     totalText: "Нийт мөр",
@@ -2081,8 +2083,8 @@ export var mnStrings = {
       error: "Алдаа",
       // [Auto-translated] "Warning"
       warning: "Анхааруулга",
-      // [Auto-translated] "Informational note"
-      info: "Мэдээллийн тэмдэглэл"
+      // [Auto-translated] "Informational"
+      info: "Мэдээлэл"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

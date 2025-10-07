@@ -1326,7 +1326,9 @@ export var persianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "عبارت اعتبارسنجی",
       // [Auto-translated] "Notification type"
-      notificationType: "نوع اعلان"
+      notificationType: "نوع اعلان",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "حداکثر طول (بر حسب کاراکتر)"
     },
     // "Total row header"
     totalText: "متن کامل",
@@ -2081,8 +2083,8 @@ export var persianStrings = {
       error: "خطا",
       // [Auto-translated] "Warning"
       warning: "هشدار",
-      // [Auto-translated] "Informational note"
-      info: "یادداشت اطلاعاتی"
+      // [Auto-translated] "Informational"
+      info: "اطلاعاتی"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

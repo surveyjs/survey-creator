@@ -1327,7 +1327,9 @@ export let svStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Uttryck för validering",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ av anmälan"
+      notificationType: "Typ av anmälan",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximal längd (i tecken)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Radrubrik för totalt antal",
@@ -2082,8 +2084,8 @@ export let svStrings = {
       error: "Fel",
       // [Auto-translated] "Warning"
       warning: "Varning",
-      // [Auto-translated] "Informational note"
-      info: "Anteckning om information"
+      // [Auto-translated] "Informational"
+      info: "Informativt"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

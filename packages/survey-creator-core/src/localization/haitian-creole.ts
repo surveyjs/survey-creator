@@ -1326,7 +1326,9 @@ export var htStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresyon validasyon",
       // [Auto-translated] "Notification type"
-      notificationType: "Kalite notifikasyon"
+      notificationType: "Kalite notifikasyon",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longè maksimòm (nan karaktè)"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -2081,8 +2083,8 @@ export var htStrings = {
       error: "Erè",
       // [Auto-translated] "Warning"
       warning: "Avètisman",
-      // [Auto-translated] "Informational note"
-      info: "Nòt enfòmasyon"
+      // [Auto-translated] "Informational"
+      info: "Enfòmasyon"
     },
     autocomplete: {
       // "Full Name"

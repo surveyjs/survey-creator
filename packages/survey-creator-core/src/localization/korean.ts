@@ -1327,7 +1327,9 @@ export var koreanStrings = {
       // [Auto-translated] "Validation expression"
       expression: "유효성 검사 표현식",
       // [Auto-translated] "Notification type"
-      notificationType: "알림 유형"
+      notificationType: "알림 유형",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "최대 길이(문자)"
     },
     // [Auto-translated] "Total row header"
     totalText: "총 행 머리글",
@@ -2082,8 +2084,8 @@ export var koreanStrings = {
       error: "오류",
       // [Auto-translated] "Warning"
       warning: "경고",
-      // [Auto-translated] "Informational note"
-      info: "정보 참고 사항"
+      // [Auto-translated] "Informational"
+      info: "정보"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
