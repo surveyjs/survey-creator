@@ -82,9 +82,7 @@
   },
   "scripts": {
     "build": "ng build && node ./update-version.js",
-    "build:presets": "webpack --config webpack.presets.config.js --env buildType=prod",
-    "build:presets:dev": "webpack --config webpack.presets.config.js --env buildType=dev",
-    "watch:presets": "webpack --config webpack.presets.config.js --env buildType=dev --watch",
+    "build:presets": "ng build survey-creator-angular-presets",
     "build:example:prod": "ng build  angular-ui",
     "serve:example:dev": "ng serve",
     "serve:example:prod": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",

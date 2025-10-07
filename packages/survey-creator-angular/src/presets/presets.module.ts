@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { SurveyModule } from "survey-angular-ui";
@@ -19,6 +19,7 @@ import { PresetsPropertyGridWrapperComponent } from "./presets-property-grid.com
     FormsModule,
     SurveyModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     TabPresetsComponent,
     PresetsIconItemComponent,

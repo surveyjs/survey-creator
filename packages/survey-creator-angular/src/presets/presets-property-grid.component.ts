@@ -8,14 +8,14 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class PresetsPropertyGridWrapperComponent extends BaseAngular<PropertyGridViewModel> {
-  @Input() model: PropertyGridViewModel = undefined;
+  @Input() model?: PropertyGridViewModel;
 
   showPresets() {
     (this.model as any)["showPresets"]?.();
   }
 
-  protected getModel() {
-    return this.model;
+  protected getModel(): PropertyGridViewModel {
+    return this.model!;
   }
 }
 

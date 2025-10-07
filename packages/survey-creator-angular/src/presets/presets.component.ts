@@ -9,7 +9,7 @@ import { SurveyCreatorModel } from "survey-creator-core";
 })
 export class TabPresetsComponent extends BaseAngular<any> {
   @Input() data: any = undefined;
-  @Input() creator: SurveyCreatorModel = undefined;
+  @Input() creator?: SurveyCreatorModel;
 
   get model() {
     return this.data?.model;

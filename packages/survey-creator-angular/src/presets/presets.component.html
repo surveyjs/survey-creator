@@ -1,5 +1,5 @@
 <div class="svc-flex-column">
-  <svc-toolbox *ngIf="creator.showToolbox" [model]="creator"></svc-toolbox>
+  <svc-toolbox *ngIf="creator?.showToolbox" [model]="creator"></svc-toolbox>
 </div>
 <div class="svc-tab-designer">
   <sv-ng-survey [model]="model"></sv-ng-survey>
