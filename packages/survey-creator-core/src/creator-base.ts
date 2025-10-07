@@ -2239,6 +2239,7 @@ export class SurveyCreatorModel extends Base
    * @returns true if initial survey doesn't have any elements or properties
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
+    this.expandCollapseManager.clearExpandChoicesStates();
     if (!json) {
       json = { "headerView": "advanced" };
     }
@@ -2402,11 +2403,13 @@ export class SurveyCreatorModel extends Base
     this.dragDropChoices = new DragDropChoices(null, this);
     this.dragDropChoices.onDragStart.add((sender, options) => {
       this.startUndoRedoTransaction("drag drop");
+      this.expandCollapseManager.collapseChoices((<any>this.dragDropChoices).parentElement.choices);
     });
     this.dragDropChoices.onDragEnd.add((sender, options) => {
       this.selectElement(options.draggedElement, undefined, false);
     });
     this.dragDropChoices.onDragClear.add((sender, options) => {
+      this.expandCollapseManager.expandChoices();
       this.stopUndoRedoTransaction();
     });
   }

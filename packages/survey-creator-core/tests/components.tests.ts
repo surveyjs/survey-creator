@@ -12,6 +12,8 @@ import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
 import { calculateDragOverLocation } from "../src/dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
+import { QuestionAdornerViewModel } from "../src/components/question";
+import { ExpandCollapseManager } from "../src/expand-collapse-manager";
 
 beforeEach(() => { });
 
@@ -1159,4 +1161,69 @@ test("Show/hide choiceitem panel based on creator.maxChoicesElementsLevel", (): 
   creator.maxChoicesElementsLevel = 2;
   expect(firstItemAdorner.canShowPanel()).toBeTruthy();
   expect(secondItemAdorner.canShowPanel()).toBeTruthy();
+});
+test("Do not collapse choice panel on adding a new question into empty panel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoicesElementsLevel = 1;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [1, 2, 3] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const itemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  itemAdorner.showPanel = true;
+  const panelAdorner = new QuestionAdornerViewModel(creator, itemAdorner.item.panel, undefined as any);
+  panelAdorner.addNewQuestion();
+  expect(q1.choices[0].elements).toHaveLength(1);
+  expect(itemAdorner.showPanel).toBeTruthy();
+  const itemAdorner2 = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  expect(itemAdorner2.showPanel).toBeTruthy();
+});
+test("ExpandCollapseManager for choice item panel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoicesElementsLevel = 1;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [1, 2, 3] }]
+  };
+  const manager = creator.expandCollapseManager;
+  const question = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const adorner1_1 = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const adorner2_1 = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  const adorner3_1 = new ItemValueWrapperViewModel(creator, question, question.choices[2]);
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeFalsy();
+  adorner1_1.showPanel = true;
+  expect(adorner1_1.showPanel).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  const adorner1_2 = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  expect(adorner1_2.showPanel).toBeTruthy();
+  adorner2_1.showPanel = true;
+  expect(adorner2_1.showPanel).toBeTruthy();
+  expect(adorner3_1.showPanel).toBeFalsy();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeTruthy();
+
+  manager.collapseChoices(question.choices);
+  expect(adorner1_1.showPanel).toBeFalsy();
+  expect(adorner1_2.showPanel).toBeFalsy();
+  expect(adorner2_1.showPanel).toBeFalsy();
+  expect(adorner3_1.showPanel).toBeFalsy();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeTruthy();
+
+  manager.expandChoices();
+  expect(adorner1_1.showPanel).toBeTruthy();
+  expect(adorner1_2.showPanel).toBeTruthy();
+  expect(adorner2_1.showPanel).toBeTruthy();
+  expect(adorner3_1.showPanel).toBeFalsy();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[2])).toBeFalsy();
+
+  adorner2_1.dispose();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeFalsy();
+  adorner1_1.dispose();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  adorner1_2.dispose();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeFalsy();
 });

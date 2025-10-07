@@ -16,6 +16,7 @@ import { getLocString } from "../editorLocalization";
 import { getNextItemText } from "../utils/creator-utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
+import { ExpandCollapseManager, IExpandCollapseChoice } from "src/expand-collapse-manager";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
@@ -25,7 +26,7 @@ const specificChoices = {
   "dontKnowItem": "showDontKnowItem"
 };
 
-export class ItemValueWrapperViewModel extends Base {
+export class ItemValueWrapperViewModel extends Base implements IExpandCollapseChoice {
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
   @property({ defaultValue: false }) isDragDropGhost: boolean;
@@ -74,6 +75,7 @@ export class ItemValueWrapperViewModel extends Base {
     if (!this.creator.isCanModifyProperty(question, "choices")) {
       this.canTouchItems = false;
     }
+    this.setupShowPanel();
   }
 
   private dragOrClickHelper: DragOrClickHelper;
@@ -122,11 +124,17 @@ export class ItemValueWrapperViewModel extends Base {
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
+  private get expandCollapseManager(): ExpandCollapseManager {
+    return this.creator.expandCollapseManager;
+  }
   public dispose(): void {
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
     );
+    if (this.canShowPanel()) {
+      this.expandCollapseManager.disposeChoice(this.item, this);
+    }
   }
 
   private getGhostPosition(item: any): string {
@@ -256,7 +264,14 @@ export class ItemValueWrapperViewModel extends Base {
     if (!Helpers.isNumber(min) || !Helpers.isNumber(max) || min === max && min === 0) return false;
     return val >= min && val <= max;
   }
+  private canShowPanelValue: boolean = undefined;
   public canShowPanel(): boolean {
+    if (this.canShowPanelValue === undefined) {
+      this.canShowPanelValue = this.calcCanShowPanel();
+    }
+    return this.canShowPanelValue;
+  }
+  private calcCanShowPanel(): boolean {
     if (!this.item.supportElements) return false;
     const level = this.creator.maxChoicesElementsLevel;
     if (level <= 0) return false;
@@ -277,13 +292,19 @@ export class ItemValueWrapperViewModel extends Base {
     if (val) {
       this.item.panel.onFirstRendering();
     }
+    this.expandCollapseManager.setChoicesState(this.item, val, this);
+    this.expandCollapse(val);
+  }
+  public expandCollapse(val: boolean): void {
     this.setPropertyValue("showPanel", val);
   }
   public togglePanel(): void {
     this.showPanel = !this.showPanel;
   }
-  private panelAdornerValue: any; // TODO fix it later, add correct type
-  public get panelAdorner(): any {
-    return this.panelAdornerValue;
+  private setupShowPanel() {
+    const state = this.expandCollapseManager.isChoiceExpanded(this.item);
+    if (state) {
+      this.showPanel = true;
+    }
   }
 }
