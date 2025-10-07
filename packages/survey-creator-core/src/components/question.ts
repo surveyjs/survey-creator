@@ -65,21 +65,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    if (
-      surveyElement.isQuestion &&
-      !!surveyElement["setCanShowOptionItemCallback"]
-    ) {
-      (<any>surveyElement).setCanShowOptionItemCallback(
-        (item: ItemValue): boolean => {
-          if (creator.readOnly) return false;
-          if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
-          return (
-            creator.maximumChoicesCount < 1 ||
-            surveyElement["choices"].length < creator.maximumChoicesCount
-          );
-        }
-      );
-    }
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     StringItemsNavigatorBase.setQuestion(this);
@@ -269,6 +254,21 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   protected attachElement(surveyElement: SurveyElement): void {
     super.attachElement(surveyElement);
     if (surveyElement) {
+      if (
+        surveyElement.isQuestion &&
+        !!surveyElement["setCanShowOptionItemCallback"]
+      ) {
+        (<any>surveyElement).setCanShowOptionItemCallback(
+          (item: ItemValue): boolean => {
+            if (this.creator.readOnly) return false;
+            if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
+            return (
+              this.creator.maximumChoicesCount < 1 ||
+              surveyElement["choices"].length < this.creator.maximumChoicesCount
+            );
+          }
+        );
+      }
       if (this.surveyElement instanceof QuestionHtmlModel) {
         surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {
           this.updateIsEmptyElement();
@@ -701,6 +701,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
         listModel.flushUpdates();
+        newAction.popupModel.isFocusedContent = listModel.showFilter;
       }
     });
     const listModel = newAction.popupModel.contentComponentData.model;

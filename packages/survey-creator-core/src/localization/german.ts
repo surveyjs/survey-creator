@@ -844,6 +844,8 @@ export var germanTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Andere löschen, wenn ausgewählt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Sowohl Text als auch Wert anzeigen",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Benutzer zur Eingabe eines Kommentars auffordern",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var germanTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Validierungs-Ausdruck",
       // [Auto-translated] "Notification type"
-      notificationType: "Art der Meldung"
+      notificationType: "Art der Meldung",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale Länge (in Zeichen)"
     },
     // "Total row header"
     totalText: "Text (total)",
@@ -1452,7 +1456,7 @@ export var germanTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Anzeigen von Skalenbeschriftungen",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips anzeigen",
+      tooltipVisibility: "Tooltips anzeigen",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Daumen kreuzen erlauben",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var germanTranslation = {
       // [Auto-translated] "Range"
       range: "Bereich"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Immer",
+      // [Auto-translated] "Never"
+      never: "Nie"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fehler",
       // [Auto-translated] "Warning"
       warning: "Warnung",
-      // [Auto-translated] "Informational note"
-      info: "Informativer Hinweis"
+      // [Auto-translated] "Informational"
+      info: "Mitteilsam"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

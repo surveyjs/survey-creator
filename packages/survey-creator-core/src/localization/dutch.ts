@@ -844,6 +844,8 @@ export var nlStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Anderen wissen wanneer geselecteerd",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Geef zowel tekst als waarde weer",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vereisen dat de gebruiker een opmerking invoert",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var nlStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validatie-expressie",
       // [Auto-translated] "Notification type"
-      notificationType: "Type melding"
+      notificationType: "Type melding",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale lengte (in tekens)"
     },
     // "Total row header"
     totalText: "Totale tekst",
@@ -1452,7 +1456,7 @@ export var nlStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Schaallabels weergeven",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Toon tooltips",
+      tooltipVisibility: "Toon tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Duimkruising toestaan",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var nlStrings = {
       // [Auto-translated] "Range"
       range: "Bereik"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altijd",
+      // [Auto-translated] "Never"
+      never: "Nooit"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fout",
       // [Auto-translated] "Warning"
       warning: "Waarschuwing",
-      // [Auto-translated] "Informational note"
-      info: "Informatieve notitie"
+      // [Auto-translated] "Informational"
+      info: "Informatieve"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

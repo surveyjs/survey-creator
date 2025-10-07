@@ -844,6 +844,8 @@ export var huStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Mások törlése, ha ki van jelölve",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Szöveg és érték megjelenítése",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Megjegyzés megadásának megkövetelése a felhasználótól",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var huStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Érvényesítési kifejezés",
       // [Auto-translated] "Notification type"
-      notificationType: "Értesítés típusa"
+      notificationType: "Értesítés típusa",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximális hossz (karakterben)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Teljes sorfejléc",
@@ -1452,7 +1456,7 @@ export var huStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Léptékfeliratok megjelenítése",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Eszköztippek megjelenítése",
+      tooltipVisibility: "Eszköztippek megjelenítése",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Hüvelykujj keresztezésének engedélyezése",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var huStrings = {
       // [Auto-translated] "Range"
       range: "Tartomány"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Kocsi",
+      // [Auto-translated] "Always"
+      always: "Mindig",
+      // [Auto-translated] "Never"
+      never: "Soha"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Hiba",
       // [Auto-translated] "Warning"
       warning: "Figyelmeztetés",
-      // [Auto-translated] "Informational note"
-      info: "Tájékoztató megjegyzés"
+      // [Auto-translated] "Informational"
+      info: "Információs"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

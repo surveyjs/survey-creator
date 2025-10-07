@@ -844,6 +844,8 @@ export var turkishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Seçildiğinde diğerlerini temizleme",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Hem metni hem de değeri görüntüleyin",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kullanıcının bir açıklama girmesini gerektir",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var turkishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Doğrulama ifadesi",
       // [Auto-translated] "Notification type"
-      notificationType: "Bildirim türü"
+      notificationType: "Bildirim türü",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimum uzunluk (karakter cinsinden)"
     },
     // "Total row header"
     totalText: "Toplam metni",
@@ -1452,7 +1456,7 @@ export var turkishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Ölçek etiketlerini göster",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Araç ipuçlarını göster",
+      tooltipVisibility: "Araç ipuçlarını göster",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Başparmak geçişine izin ver",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var turkishStrings = {
       // [Auto-translated] "Range"
       range: "Aralık"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Otomatik",
+      // [Auto-translated] "Always"
+      always: "Her zaman",
+      // [Auto-translated] "Never"
+      never: "Hiç"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Hata",
       // [Auto-translated] "Warning"
       warning: "Uyarı",
-      // [Auto-translated] "Informational note"
-      info: "Bilgilendirme notu"
+      // [Auto-translated] "Informational"
+      info: "Bilgi"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

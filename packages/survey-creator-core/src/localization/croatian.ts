@@ -844,6 +844,8 @@ export var hrStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Prikaz teksta i vrijednosti",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Zahtijevanje od korisnika da unese komentar",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var hrStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Izraz za provjeru valjanosti",
       // [Auto-translated] "Notification type"
-      notificationType: "Vrsta obavijesti"
+      notificationType: "Vrsta obavijesti",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimalna duljina (u znakovima)"
     },
     // "Total row header"
     totalText: "Ukupan tekst",
@@ -1452,7 +1456,7 @@ export var hrStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznaka ljestvice",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Prikaži opise alata",
+      tooltipVisibility: "Prikaži opise alata",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dopustite križanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var hrStrings = {
       // [Auto-translated] "Range"
       range: "Domet"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Uvijek",
+      // [Auto-translated] "Never"
+      never: "Nikada"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Greška",
       // [Auto-translated] "Warning"
       warning: "Upozorenje",
-      // [Auto-translated] "Informational note"
-      info: "Informativna napomena"
+      // [Auto-translated] "Informational"
+      info: "Informativan"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

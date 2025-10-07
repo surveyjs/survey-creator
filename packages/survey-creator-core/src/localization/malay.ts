@@ -844,6 +844,8 @@ export var msStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Kosongkan yang lain apabila dipilih",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Paparkan kedua-dua teks dan nilai",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Memerlukan pengguna memasukkan komen",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var msStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ungkapan pengesahihan",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis pemberitahuan"
+      notificationType: "Jenis pemberitahuan",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam aksara)"
     },
     // "Total row header"
     totalText: "Jumlah teks",
@@ -1452,7 +1456,7 @@ export var msStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tunjukkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tunjukkan petua alat",
+      tooltipVisibility: "Tunjukkan petua alat",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Benarkan lintasan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var msStrings = {
       // [Auto-translated] "Range"
       range: "Pelbagai"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Sentiasa",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Ralat",
       // [Auto-translated] "Warning"
       warning: "Amaran",
-      // [Auto-translated] "Informational note"
-      info: "Nota maklumat"
+      // [Auto-translated] "Informational"
+      info: "Bermaklumat"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

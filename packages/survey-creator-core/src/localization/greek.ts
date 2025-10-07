@@ -844,6 +844,8 @@ export var grStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Εμφάνιση κειμένου και τιμής",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Απαίτηση από το χρήστη να εισαγάγει ένα σχόλιο",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var grStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Παράσταση επικύρωσης",
       // [Auto-translated] "Notification type"
-      notificationType: "Τύπος ειδοποίησης"
+      notificationType: "Τύπος ειδοποίησης",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Μέγιστο μήκος (σε χαρακτήρες)"
     },
     // "Total row header"
     totalText: "Επικεφαλίδα συνολικής σειράς",
@@ -1452,7 +1456,7 @@ export var grStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Εμφάνιση ετικετών κλίμακας",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Εμφάνιση συμβουλών εργαλείων",
+      tooltipVisibility: "Εμφάνιση συμβουλών εργαλείων",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Να επιτρέπεται η διέλευση του αντίχειρα",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var grStrings = {
       // [Auto-translated] "Range"
       range: "Έκταση"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Αυτο",
+      // [Auto-translated] "Always"
+      always: "Πάντα",
+      // [Auto-translated] "Never"
+      never: "Ποτέ"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Λάθος",
       // [Auto-translated] "Warning"
       warning: "Προειδοποίηση",
-      // [Auto-translated] "Informational note"
-      info: "Ενημερωτικό σημείωμα"
+      // [Auto-translated] "Informational"
+      info: "Ενημερωτικό"
     },
     autocomplete: {
       // "Full Name"

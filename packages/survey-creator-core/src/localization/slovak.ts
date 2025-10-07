@@ -844,6 +844,8 @@ export var skStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymažte ostatné, keď sú vybraté",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Zobrazenie textu aj hodnoty",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vyžadovať od používateľa zadanie komentára",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var skStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Overovací výraz",
       // [Auto-translated] "Notification type"
-      notificationType: "Typ oznámenia"
+      notificationType: "Typ oznámenia",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximálna dĺžka (v znakoch)"
     },
     // "Total row header"
     totalText: "Celkom – text",
@@ -1452,7 +1456,7 @@ export var skStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazenie štítkov mierky",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobraziť popisy",
+      tooltipVisibility: "Zobraziť popisy",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povoliť prekríženie palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var skStrings = {
       // [Auto-translated] "Range"
       range: "Rozsah"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Chyba",
       // [Auto-translated] "Warning"
       warning: "Varovanie",
-      // [Auto-translated] "Informational note"
-      info: "Informačná poznámka"
+      // [Auto-translated] "Informational"
+      info: "Informačné"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

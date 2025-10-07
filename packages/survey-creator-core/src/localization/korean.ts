@@ -845,6 +845,8 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "선택하면 다른 항목 지우기",
+    // [Auto-translated] "Display both text and value"
+    showValue: "텍스트와 값 모두 표시",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "사용자에게 주석 입력 요구",
     // "Display area height"
@@ -1327,7 +1329,9 @@ export var koreanStrings = {
       // [Auto-translated] "Validation expression"
       expression: "유효성 검사 표현식",
       // [Auto-translated] "Notification type"
-      notificationType: "알림 유형"
+      notificationType: "알림 유형",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "최대 길이(문자)"
     },
     // [Auto-translated] "Total row header"
     totalText: "총 행 머리글",
@@ -1453,7 +1457,7 @@ export var koreanStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "축척 레이블 표시",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "툴팁 표시",
+      tooltipVisibility: "툴팁 표시",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "엄지 교차점 허용",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2073,21 @@ export var koreanStrings = {
       // [Auto-translated] "Range"
       range: "레인지"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "자동",
+      // [Auto-translated] "Always"
+      always: "늘",
+      // [Auto-translated] "Never"
+      never: "결코"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "오류",
       // [Auto-translated] "Warning"
       warning: "경고",
-      // [Auto-translated] "Informational note"
-      info: "정보 참고 사항"
+      // [Auto-translated] "Informational"
+      info: "정보"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

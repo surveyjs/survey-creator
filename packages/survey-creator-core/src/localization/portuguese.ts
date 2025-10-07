@@ -844,6 +844,8 @@ export var portugueseTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Limpar outros quando selecionado",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Exibir texto e valor",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Exigir que o usuário insira um comentário",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var portugueseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Expressão de validação",
       // [Auto-translated] "Notification type"
-      notificationType: "Tipo de notificação"
+      notificationType: "Tipo de notificação",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Comprimento máximo (em caracteres)"
     },
     // "Total row header"
     totalText: "Texto total da linha",
@@ -1452,7 +1456,7 @@ export var portugueseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Mostrar rótulos de escala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Mostrar dicas de ferramentas",
+      tooltipVisibility: "Mostrar dicas de ferramentas",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permitir o cruzamento do polegar",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var portugueseTranslation = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automático",
+      // [Auto-translated] "Always"
+      always: "Sempre",
+      // [Auto-translated] "Never"
+      never: "Nunca"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Erro",
       // [Auto-translated] "Warning"
       warning: "Aviso",
-      // [Auto-translated] "Informational note"
-      info: "Nota informativa"
+      // [Auto-translated] "Informational"
+      info: "Informativo"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

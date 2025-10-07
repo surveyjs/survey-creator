@@ -845,6 +845,8 @@ export var danishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ryd andre, når det er valgt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Vis både tekst og værdi",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kræv, at brugeren indtaster en kommentar",
     // "Display area height"
@@ -1327,7 +1329,9 @@ export var danishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Valideringsudtryk",
       // [Auto-translated] "Notification type"
-      notificationType: "Type af notifikationer"
+      notificationType: "Type af notifikationer",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimal længde (i tegn)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rækkeoverskrift i total",
@@ -1453,7 +1457,7 @@ export var danishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis værktøjstip",
+      tooltipVisibility: "Vis værktøjstip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillad tommelfingerkrydsning",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2069,13 +2073,21 @@ export var danishStrings = {
       // [Auto-translated] "Range"
       range: "Interval"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "Fejl",
       // [Auto-translated] "Warning"
       warning: "Advarsel",
-      // [Auto-translated] "Informational note"
-      info: "Informativ note"
+      // [Auto-translated] "Informational"
+      info: "Informative"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"

@@ -844,6 +844,8 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
+    // [Auto-translated] "Display both text and value"
+    showValue: "הצגת טקסט וערך",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "דרישת המשתמש להזין הערה",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Validation expression"
       expression: "ביטוי אימות",
       // [Auto-translated] "Notification type"
-      notificationType: "סוג הודעה"
+      notificationType: "סוג הודעה",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "אורך מרבי (בתווים)"
     },
     // "Total row header"
     totalText: "טקסט לשורת סיכום",
@@ -1452,7 +1456,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "הצגת תוויות קנה מידה",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "הצגת תיאורי כלים",
+      tooltipVisibility: "הצגת תיאורי כלים",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "אפשר חציית אגודל",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,13 +2072,21 @@ export var hebrewStrings = {
       // [Auto-translated] "Range"
       range: "טווח"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "אוטומטי",
+      // [Auto-translated] "Always"
+      always: "תמיד",
+      // [Auto-translated] "Never"
+      never: "אף פעם"
+    },
     notificationType: {
       // [Auto-translated] "Error"
       error: "שגיאה",
       // [Auto-translated] "Warning"
       warning: "אזהרה",
-      // [Auto-translated] "Informational note"
-      info: "הערת מידע"
+      // [Auto-translated] "Informational"
+      info: "אינפורמטיבי"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
