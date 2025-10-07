@@ -844,6 +844,8 @@ export var nbStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Fjern andre når det er valgt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Vis både tekst og verdi",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Krev at brukeren skriver inn en kommentar",
     // "Display area height"

@@ -844,6 +844,8 @@ export var skStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymažte ostatné, keď sú vybraté",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Zobrazenie textu aj hodnoty",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vyžadovať od používateľa zadanie komentára",
     // "Display area height"

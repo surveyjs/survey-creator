@@ -845,6 +845,8 @@ export let svStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Rensa andra när du väljer det här alternativet",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Visa både text och värde",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kräv att användaren anger en kommentar",
     // "Display area height"
