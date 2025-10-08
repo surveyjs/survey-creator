@@ -845,6 +845,8 @@ export var traditionalChineseTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選中時清除其他",
+    // [Auto-translated] "Display both text and value"
+    showValue: "同時顯示文字和值",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "要求使用者輸入註釋",
     // "Display area height"
@@ -1327,7 +1329,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "驗證表達式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知類型"
+      notificationType: "通知類型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "長度上限 （以字元為單位）"
     },
     // [Auto-translated] "Total row header"
     totalText: "總行標題",
@@ -1453,7 +1457,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "顯示刻度標籤",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "顯示工具提示",
+      tooltipVisibility: "顯示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允許 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2068,6 +2072,14 @@ export var traditionalChineseTranslation = {
       single: "單值",
       // [Auto-translated] "Range"
       range: "範圍"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "汽車",
+      // [Auto-translated] "Always"
+      always: "總",
+      // [Auto-translated] "Never"
+      never: "勿"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2765,8 +2777,8 @@ export var traditionalChineseTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "使用魔術棒圖示來定義問題值何時被視為有效。",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "指定向使用者顯示的通知類型。錯誤會阻止進度，直到解決為止。警告會突出顯示問題，但允許繼續。Infornational 註釋提供了額外的背景或中立的指導。"
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "錯誤會阻止進度，直到解決為止。警告會突出顯示問題，但允許繼續。資訊說明提供額外的背景資訊或中立的指導。使用警告或資訊附註時，建議您啟用立即驗證：「調查」→「驗證」→「執行驗證」→「答案變更後」。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

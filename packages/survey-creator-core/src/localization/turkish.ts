@@ -844,6 +844,8 @@ export var turkishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Seçildiğinde diğerlerini temizleme",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Hem metni hem de değeri görüntüleyin",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kullanıcının bir açıklama girmesini gerektir",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var turkishStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Doğrulama ifadesi",
       // [Auto-translated] "Notification type"
-      notificationType: "Bildirim türü"
+      notificationType: "Bildirim türü",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimum uzunluk (karakter cinsinden)"
     },
     // "Total row header"
     totalText: "Toplam metni",
@@ -1452,7 +1456,7 @@ export var turkishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Ölçek etiketlerini göster",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Araç ipuçlarını göster",
+      tooltipVisibility: "Araç ipuçlarını göster",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Başparmak geçişine izin ver",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var turkishStrings = {
       single: "Tek Değer",
       // [Auto-translated] "Range"
       range: "Aralık"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Otomatik",
+      // [Auto-translated] "Always"
+      always: "Her zaman",
+      // [Auto-translated] "Never"
+      never: "Hiç"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var turkishStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Sorunun değerinin ne zaman geçerli kabul edileceğini tanımlamak için sihirli değnek simgesini kullanın.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Kullanıcılara gösterilen bildirimin türünü belirtir. Hatalar, çözülene kadar ilerlemeyi engeller. Uyarılar sorunları vurgular ancak devam etmesine izin verir. Bilgi notları ek bağlam veya tarafsız rehberlik sağlar."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Hatalar, çözülene kadar ilerlemeyi engeller. Uyarılar sorunları vurgular ancak devam etmesine izin verir. Bilgilendirici notlar ek bağlam veya tarafsız rehberlik sunar. Uyarıları veya bilgi notlarını kullanırken anında doğrulamayı etkinleştirmenizi öneririz: \"Anket\" → \"Doğrulama\" → \"Doğrulamayı çalıştır\" → \"Yanıt değiştikten sonra\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

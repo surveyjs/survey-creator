@@ -844,6 +844,8 @@ export var bgStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Изчистване на другите, когато е избрано",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Показване както на текст, така и на стойност",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Изискване от потребителя да въведе коментар",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var bgStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Валидиращ израз",
       // [Auto-translated] "Notification type"
-      notificationType: "Тип известие"
+      notificationType: "Тип известие",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимална дължина (в знаци)"
     },
     // "Total row header"
     totalText: "Общ текст в реда",
@@ -1452,7 +1456,7 @@ export var bgStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Показване на етикети на мащаба",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показване на подсказки",
+      tooltipVisibility: "Показване на подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешаване на кръстосване на палеца",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var bgStrings = {
       single: "Единична стойност",
       // [Auto-translated] "Range"
       range: "Диапазон"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Винаги",
+      // [Auto-translated] "Never"
+      never: "Никога"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var bgStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Указва типа известие, което се показва на потребителите. Грешките блокират напредъка, докато не бъде разрешен. Предупрежденията подчертават проблемите, но позволяват да продължат. Информационните бележки предоставят допълнителен контекст или неутрални насоки."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Грешките блокират напредъка, докато не бъде разрешен. Предупрежденията подчертават проблемите, но позволяват да продължат. Информационните бележки предлагат допълнителен контекст или неутрални насоки. Когато използвате предупреждения или информационни бележки, препоръчваме да активирате незабавно валидиране: \"Проучване\" → \"Валидиране\" → \"Стартиране на валидиране\" → \"След промяна на отговора\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

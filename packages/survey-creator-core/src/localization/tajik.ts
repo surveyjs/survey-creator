@@ -751,7 +751,7 @@ export var tgStrings = {
       // max: "Max value",
       // step: "Step value",
       // showLabels: "Show scale labels",
-      // tooltipVisibilityPG: "Show tooltips",
+      // tooltipVisibility: "Show tooltips",
       // allowSwap: "Allow thumb crossing",
       // labelCount: "Number of auto-generated labels",
       // minValueExpression: "Min value expression",

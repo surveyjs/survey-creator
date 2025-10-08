@@ -844,6 +844,8 @@ export var persianStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "هنگام انتخاب دیگران را پاک کنید",
+    // [Auto-translated] "Display both text and value"
+    showValue: "نمایش متن و مقدار",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "نیاز به وارد کردن نظر کاربر",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var persianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "عبارت اعتبارسنجی",
       // [Auto-translated] "Notification type"
-      notificationType: "نوع اعلان"
+      notificationType: "نوع اعلان",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "حداکثر طول (بر حسب کاراکتر)"
     },
     // "Total row header"
     totalText: "متن کامل",
@@ -1452,7 +1456,7 @@ export var persianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "نمایش برچسب های مقیاس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "نمایش نکات ابزار",
+      tooltipVisibility: "نمایش نکات ابزار",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "اجازه عبور از انگشت شست",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var persianStrings = {
       single: "تک مقدار",
       // [Auto-translated] "Range"
       range: "محدوده"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "خودکار",
+      // [Auto-translated] "Always"
+      always: "همیشه",
+      // [Auto-translated] "Never"
+      never: "هرگز"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var persianStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "از نماد عصای جادویی برای تعیین زمان معتبر بودن مقدار سوال استفاده کنید.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "نوع اعلانی را که به کاربران نشان داده می شود مشخص می کند. خطاها پیشرفت را تا زمانی که حل نشوند مسدود می کنند. هشدارها مشکلات را برجسته می کنند اما اجازه ادامه می دهند. یادداشت های Infornational زمینه اضافی یا راهنمایی خنثی را ارائه می دهند."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "خطاها پیشرفت را تا زمانی که حل نشوند مسدود می کنند. هشدارها مشکلات را برجسته می کنند اما اجازه ادامه می دهند. یادداشت های اطلاعاتی زمینه اضافی یا راهنمایی خنثی را ارائه می دهند. هنگام استفاده از هشدارها یا یادداشت های اطلاعاتی، توصیه می کنیم اعتبارسنجی فوری را فعال کنید: «نظرسنجی» → «اعتبارسنجی» → «اجرای اعتبارسنجی» → «پس از تغییر پاسخ»."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

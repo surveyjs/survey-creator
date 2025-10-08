@@ -844,6 +844,8 @@ export var frenchTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Effacer les autres lorsque vous êtes sélectionné",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Afficher à la fois le texte et la valeur",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Demander à l’utilisateur de saisir un commentaire",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Condition à respecter",
       // [Auto-translated] "Notification type"
-      notificationType: "Type de notification"
+      notificationType: "Type de notification",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longueur maximale (en caractères)"
     },
     // "Total row header"
     totalText: "Texte pour le total",
@@ -1452,7 +1456,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afficher les étiquettes d’échelle",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afficher les infobulles",
+      tooltipVisibility: "Afficher les infobulles",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Autoriser le croisement des pouces",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var frenchTranslation = {
       single: "Valeur unique",
       // [Auto-translated] "Range"
       range: "Gamme"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Toujours",
+      // [Auto-translated] "Never"
+      never: "Jamais"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var frenchTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Utilisez l’icône de la baguette magique pour définir quand la valeur de la question est considérée comme valide.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Spécifie le type de notification affiché aux utilisateurs. Les erreurs bloquent la progression jusqu’à ce qu’elles soient résolues. Les avertissements mettent en évidence les problèmes mais permettent de continuer. Les notes d’Infornational fournissent un contexte supplémentaire ou des indications neutres."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Les erreurs bloquent la progression jusqu’à ce qu’elles soient résolues. Les avertissements mettent en évidence les problèmes mais permettent de continuer. Les notes informatives offrent un contexte supplémentaire ou des indications neutres. Lorsque vous utilisez des avertissements ou des notes d’information, nous vous recommandons d’activer la validation immédiate : « Enquête » → « Validation » → « Exécuter la validation » → « Après qu’une réponse a changé »."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

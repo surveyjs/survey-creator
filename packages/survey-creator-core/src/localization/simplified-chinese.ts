@@ -844,6 +844,8 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "选中时清除其他",
+    // [Auto-translated] "Display both text and value"
+    showValue: "同时显示文本和值",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "要求用户输入注释",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "验证表达式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知类型"
+      notificationType: "通知类型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大长度（以字符为单位）"
     },
     // "Total row header"
     totalText: "总文本",
@@ -1452,7 +1456,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "显示刻度标签",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "显示工具提示",
+      tooltipVisibility: "显示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允许 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var simplifiedChineseTranslation = {
       single: "单值",
       // [Auto-translated] "Range"
       range: "范围"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自动",
+      // [Auto-translated] "Always"
+      always: "总是",
+      // [Auto-translated] "Never"
+      never: "从不"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var simplifiedChineseTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "使用魔杖图标定义问题值何时被视为有效。",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "指定向用户显示的通知类型。错误会阻止进度，直到解决。警告突出显示问题，但允许继续。Infornational 说明提供了额外的背景信息或中立的指导。"
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "错误会阻止进度，直到解决。警告突出显示问题，但允许继续。信息性说明提供额外的背景信息或中立指导。使用警告或信息性注释时，建议启用即时验证：“调查”→“验证”→“运行验证”→“答案更改后”。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

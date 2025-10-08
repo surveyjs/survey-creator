@@ -844,6 +844,8 @@ export var hrStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Prikaz teksta i vrijednosti",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Zahtijevanje od korisnika da unese komentar",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var hrStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Izraz za provjeru valjanosti",
       // [Auto-translated] "Notification type"
-      notificationType: "Vrsta obavijesti"
+      notificationType: "Vrsta obavijesti",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimalna duljina (u znakovima)"
     },
     // "Total row header"
     totalText: "Ukupan tekst",
@@ -1452,7 +1456,7 @@ export var hrStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznaka ljestvice",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Prikaži opise alata",
+      tooltipVisibility: "Prikaži opise alata",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dopustite križanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var hrStrings = {
       single: "Jedna vrijednost",
       // [Auto-translated] "Range"
       range: "Domet"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Uvijek",
+      // [Auto-translated] "Never"
+      never: "Nikada"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var hrStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Određuje vrstu obavijesti koja se prikazuje korisnicima. Pogreške blokiraju napredak dok se ne riješe. Upozorenja ističu probleme, ali dopuštaju nastavak. Infornacionalne bilješke pružaju dodatni kontekst ili neutralne smjernice."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Pogreške blokiraju napredak dok se ne riješe. Upozorenja ističu probleme, ali dopuštaju nastavak. Informativne bilješke nude dodatni kontekst ili neutralne smjernice. Kada koristite upozorenja ili informativne bilješke, preporučujemo da omogućite trenutnu provjeru valjanosti: \"Anketa\" → \"Provjera valjanosti\" → \"Pokreni provjeru valjanosti\" → \"Nakon promjene odgovora\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -844,6 +844,8 @@ export var germanTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Andere löschen, wenn ausgewählt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Sowohl Text als auch Wert anzeigen",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Benutzer zur Eingabe eines Kommentars auffordern",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var germanTranslation = {
       // [Auto-translated] "Validation expression"
       expression: "Validierungs-Ausdruck",
       // [Auto-translated] "Notification type"
-      notificationType: "Art der Meldung"
+      notificationType: "Art der Meldung",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale Länge (in Zeichen)"
     },
     // "Total row header"
     totalText: "Text (total)",
@@ -1452,7 +1456,7 @@ export var germanTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Anzeigen von Skalenbeschriftungen",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips anzeigen",
+      tooltipVisibility: "Tooltips anzeigen",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Daumen kreuzen erlauben",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var germanTranslation = {
       single: "Einzelwertig",
       // [Auto-translated] "Range"
       range: "Bereich"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Immer",
+      // [Auto-translated] "Never"
+      never: "Nie"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var germanTranslation = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Verwenden Sie das Zauberstab-Symbol, um festzulegen, wann der Wert der Frage als gültig gilt.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Gibt den Typ der Benachrichtigung an, die Benutzern angezeigt wird. Fehler blockieren den Fortschritt, bis sie behoben sind. Warnungen weisen auf Probleme hin, lassen aber zu, dass fortgefahren wird. Infornationale Anmerkungen bieten zusätzlichen Kontext oder neutrale Orientierungshilfen."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fehler blockieren den Fortschritt, bis sie behoben sind. Warnungen weisen auf Probleme hin, lassen aber zu, dass fortgefahren wird. Informationsnotizen bieten zusätzlichen Kontext oder eine neutrale Orientierung. Bei der Verwendung von Warnungen oder Informationshinweisen empfehlen wir, die sofortige Validierung zu aktivieren: \"Umfrage\" → \"Validierung\" → \"Validierung ausführen\" → \"Nachdem sich eine Antwort geändert hat\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

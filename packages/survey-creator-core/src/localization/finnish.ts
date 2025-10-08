@@ -844,6 +844,8 @@ export var fiStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Poista muut, kun se on valittuna",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Näytä sekä teksti että arvo",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vaadi käyttäjää kirjoittamaan kommentti",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var fiStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Vahvistuksen lauseke",
       // [Auto-translated] "Notification type"
-      notificationType: "Ilmoituksen tyyppi"
+      notificationType: "Ilmoituksen tyyppi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Enimmäispituus (merkkeinä)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rivin otsikon kokonaissumma",
@@ -1452,7 +1456,7 @@ export var fiStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Näytä asteikon otsikot",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Näytä työkaluvihjeet",
+      tooltipVisibility: "Näytä työkaluvihjeet",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Salli peukalon ylitys",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var fiStrings = {
       single: "Yksittäinen arvo",
       // [Auto-translated] "Range"
       range: "Etäisyys"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Aina",
+      // [Auto-translated] "Never"
+      never: "Koskaan"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var fiStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Käytä taikasauvakuvaketta määrittääksesi, milloin kysymyksen arvoa pidetään kelvollisena",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Määrittää käyttäjille näytettävän ilmoituksen tyypin. Virheet estävät edistymisen, kunnes ne on ratkaistu. Varoitukset korostavat ongelmia, mutta antavat jatkaa. Kansainväliset muistiinpanot tarjoavat lisäkontekstia tai neutraaleja ohjeita."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Virheet estävät edistymisen, kunnes ne on ratkaistu. Varoitukset korostavat ongelmia, mutta antavat jatkaa. Tiedotusmuistiinpanot tarjoavat lisäkontekstia tai neutraalia ohjausta. Kun käytät varoituksia tai informatiivisia huomautuksia, suosittelemme ottamaan käyttöön välittömän vahvistuksen: \"Kysely\" → \"Vahvistus\" → \"Suorita vahvistus\" → \"Kun vastaus on muuttunut\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

@@ -844,6 +844,8 @@ export var jaStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選択時に他のユーザーをクリアする",
+    // [Auto-translated] "Display both text and value"
+    showValue: "テキストと値の両方を表示する",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "ユーザーにコメントの入力を要求する",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var jaStrings = {
       // [Auto-translated] "Validation expression"
       expression: "検証式",
       // [Auto-translated] "Notification type"
-      notificationType: "通知タイプ"
+      notificationType: "通知タイプ",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大長 (文字数)"
     },
     // "Total row header"
     totalText: "テキストの合計",
@@ -1452,7 +1456,7 @@ export var jaStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "縮尺ラベルの表示",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "ツールチップを表示する",
+      tooltipVisibility: "ツールチップを表示する",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "親指の交差を許可する",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var jaStrings = {
       single: "単一値",
       // [Auto-translated] "Range"
       range: "範囲"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自動",
+      // [Auto-translated] "Always"
+      always: "いつも",
+      // [Auto-translated] "Never"
+      never: "一度もない"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var jaStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "ユーザーに表示される通知の種類を指定します。エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報に関するメモは、追加のコンテキストまたは中立的なガイダンスを提供します。"
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報メモは、追加のコンテキストまたは中立的なガイダンスを提供します。警告または情報メモを使用する場合は、「アンケート」→「検証」→「検証の実行」→「回答が変更された後」の即時検証を有効にすることをお勧めします。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

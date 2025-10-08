@@ -844,6 +844,8 @@ export var nlStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Anderen wissen wanneer geselecteerd",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Geef zowel tekst als waarde weer",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vereisen dat de gebruiker een opmerking invoert",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var nlStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Validatie-expressie",
       // [Auto-translated] "Notification type"
-      notificationType: "Type melding"
+      notificationType: "Type melding",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximale lengte (in tekens)"
     },
     // "Total row header"
     totalText: "Totale tekst",
@@ -1452,7 +1456,7 @@ export var nlStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Schaallabels weergeven",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Toon tooltips",
+      tooltipVisibility: "Toon tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Duimkruising toestaan",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var nlStrings = {
       single: "Enkele waarde",
       // [Auto-translated] "Range"
       range: "Bereik"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altijd",
+      // [Auto-translated] "Never"
+      never: "Nooit"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var nlStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Gebruik het toverstokpictogram om te definiëren wanneer de waarde van de vraag als geldig wordt beschouwd.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Hiermee geeft u het type melding op dat aan gebruikers wordt getoond. Fouten blokkeren de voortgang totdat ze zijn opgelost. Waarschuwingen markeren problemen, maar laten doorgaan toe. Infornationale nota's bieden extra context of neutrale richtlijnen."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fouten blokkeren de voortgang totdat ze zijn opgelost. Waarschuwingen markeren problemen, maar laten doorgaan toe. Informatieve notities bieden extra context of neutrale begeleiding. Wanneer u waarschuwingen of informatieve notities gebruikt, raden we aan om onmiddellijke validatie in te schakelen: 'Enquête' → 'Validatie' → 'Validatie uitvoeren' → 'Nadat een antwoord is gewijzigd'."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

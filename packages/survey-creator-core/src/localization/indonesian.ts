@@ -844,6 +844,8 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Hapus yang lain saat dipilih",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Tampilkan teks dan nilai",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Mengharuskan pengguna untuk memasukkan komentar",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresi validasi",
       // [Auto-translated] "Notification type"
-      notificationType: "Jenis notifikasi"
+      notificationType: "Jenis notifikasi",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam karakter)"
     },
     // "Total row header"
     totalText: "Total teks",
@@ -1452,7 +1456,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tampilkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tampilkan tooltip",
+      tooltipVisibility: "Tampilkan tooltip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Izinkan menyilangkan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var indonesianStrings = {
       single: "Nilai Tunggal",
       // [Auto-translated] "Range"
       range: "Lingkup"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Selalu",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var indonesianStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Gunakan ikon tongkat ajaib untuk menentukan kapan nilai pertanyaan dianggap valid.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Menentukan jenis notifikasi yang ditampilkan kepada pengguna. Kesalahan memblokir kemajuan hingga teratasi. Peringatan menyoroti masalah tetapi memungkinkan untuk melanjutkan. Catatan informasi memberikan konteks tambahan atau panduan netral."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Kesalahan memblokir kemajuan hingga teratasi. Peringatan menyoroti masalah tetapi memungkinkan untuk melanjutkan. Catatan informasi menawarkan konteks tambahan atau panduan netral. Saat menggunakan peringatan atau catatan informasi, sebaiknya aktifkan validasi segera: \"Survei\" → \"Validasi\" → \"Jalankan validasi\" → \"Setelah jawaban berubah\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

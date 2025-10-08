@@ -844,6 +844,8 @@ export var htStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Klè lòt moun lè yo chwazi yo",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Montre tou de tèks ak valè",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Mande pou itilizatè antre nan yon kòmantè",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var htStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Ekspresyon validasyon",
       // [Auto-translated] "Notification type"
-      notificationType: "Kalite notifikasyon"
+      notificationType: "Kalite notifikasyon",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longè maksimòm (nan karaktè)"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -1452,7 +1456,7 @@ export var htStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Montre etikèt echèl",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Montre zouti",
+      tooltipVisibility: "Montre zouti",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Pèmèt travèse gwo pous",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var htStrings = {
       single: "Yon sèl-Valè",
       // [Auto-translated] "Range"
       range: "Pòte"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Oto",
+      // [Auto-translated] "Always"
+      always: "Toujou",
+      // [Auto-translated] "Never"
+      never: "Janm"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var htStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Espesifye ki kalite notifikasyon yo montre itilizatè yo. Erè bloke pwogrè jiskaske rezoud Avètisman mete aksan sou pwoblèm men pèmèt yo kontinye Nòt Infornational bay kontèks adisyonèl oswa konsèy net."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Erè bloke pwogrè jiskaske rezoud Avètisman mete aksan sou pwoblèm men pèmèt yo kontinye Nòt enfòmasyon yo ofri kontèks adisyonèl oswa konsèy net. Lè w ap itilize avètisman oswa nòt enfòmasyon, nou rekòmande pou pèmèt validasyon imedyat: \"Sondaj\" → \"Validasyon\" → \"Kouri validasyon\" → \"Apre yon repons te chanje\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

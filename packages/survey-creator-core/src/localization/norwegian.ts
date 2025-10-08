@@ -844,6 +844,8 @@ export var nbStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Fjern andre når det er valgt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Vis både tekst og verdi",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Krev at brukeren skriver inn en kommentar",
     // "Display area height"
@@ -1326,7 +1328,9 @@ export var nbStrings = {
       // [Auto-translated] "Validation expression"
       expression: "Uttrykk for validering",
       // [Auto-translated] "Notification type"
-      notificationType: "Type varsling"
+      notificationType: "Type varsling",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimal lengde (i tegn)"
     },
     // "Total row header"
     totalText: "Total tekst",
@@ -1452,7 +1456,7 @@ export var nbStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis verktøytips",
+      tooltipVisibility: "Vis verktøytips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillat tommelkryssing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2071,14 @@ export var nbStrings = {
       single: "Enkelt verdi",
       // [Auto-translated] "Range"
       range: "Rekkevidde"
+    },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Alltid",
+      // [Auto-translated] "Never"
+      never: "Aldri"
     },
     notificationType: {
       // [Auto-translated] "Error"
@@ -2764,8 +2776,8 @@ export var nbStrings = {
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
       expression: "Bruk tryllestavikonet for å definere når spørsmålets verdi anses som gyldig.",
-      // [Auto-translated] "Specifies the type of notification shown to users. Errors block progress until resolved. Warnings highlight issues but allow to continue. Infornational notes provide additional context or neutral guidance."
-      notificationType: "Angir hvilken type varsling som vises til brukere. Feil blokkerer fremdriften til den løses. Advarsler fremhever problemer, men lar dem fortsette. Infornational notater gir ytterligere kontekst eller nøytral veiledning."
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Feil blokkerer fremdriften til den løses. Advarsler fremhever problemer, men lar dem fortsette. Informasjonsnotater gir ekstra kontekst eller nøytral veiledning. Når du bruker advarsler eller informasjonsnotater, anbefaler vi at du aktiverer umiddelbar validering: «Undersøkelse» → «Validering» → «Kjør validering» → «Etter at et svar er endret»."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."

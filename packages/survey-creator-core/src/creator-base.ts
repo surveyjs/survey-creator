@@ -1463,14 +1463,8 @@ export class SurveyCreatorModel extends Base
   get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
   set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
 
-  private _tabResponsivenessMode: "menu" | "icons" = "icons";
-  public get tabResponsivenessMode(): "menu" | "icons" {
-    return this._tabResponsivenessMode;
-  }
-  public set tabResponsivenessMode(val: "menu" | "icons") {
-    this._tabResponsivenessMode = val;
-    this.tabbedMenu.updateResponsivenessMode();
-  }
+  public get tabResponsivenessMode(): string { return ""; }
+  public set tabResponsivenessMode(val: string) {}
   public tabbedMenu: TabbedMenuContainer;
 
   get tabs() {
@@ -2741,7 +2735,7 @@ export class SurveyCreatorModel extends Base
 
     survey.onPopupVisibleChanged.add((_, options) => {
       if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
-      if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase")) {
+      if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase") && options.question?.parent?.getType() !== "panel") {
         options.popup.setWidthByTarget = false;
       }
     });
