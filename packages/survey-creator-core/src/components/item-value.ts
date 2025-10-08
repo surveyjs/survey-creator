@@ -16,7 +16,7 @@ import { getLocString } from "../editorLocalization";
 import { getNextItemText } from "../utils/creator-utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
-import { ExpandCollapseManager, IExpandCollapseChoice } from "src/expand-collapse-manager";
+import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
