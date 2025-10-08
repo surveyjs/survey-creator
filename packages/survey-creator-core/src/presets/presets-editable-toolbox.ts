@@ -234,7 +234,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         title: c.title
       });
       if (c.items) {
-        const itemsActions = c.items.map((i: any) => new Action({
+        const itemsActions = c.items.filter((i: any) => i.name != row.value?.name).map((i: any) => new Action({
           id: "tosubitem-" + i.name,
           title: i.title,
           action: () => {

@@ -161,11 +161,11 @@ test("Preset edit, check categories context menu - check actions", () => {
     "move-as-subitem",
   ]);
   const catAction = actions[1];
-  expect(catAction.items.map(a => a.id)).toEqual(["to-text", "to-containers"]);
+  expect(catAction.items.map(a => a.id)).toEqual(["to-containers"]);
   const subitemsAction = actions[4];
   expect(subitemsAction.items.map(a => a.id)).toEqual(["tosubitemcategory-text", "tosubitemcategory-containers"]);
   const subitemsCatAction = subitemsAction.items[0];
-  expect(subitemsCatAction.items.map(a => a.id)).toEqual(["tosubitem-text", "tosubitem-comment", "tosubitem-multipletext"]);
+  expect(subitemsCatAction.items.map(a => a.id)).toEqual(["tosubitem-text", "tosubitem-multipletext"]);
 });
 
 test("Preset edit, categories context menu - remove", () => {

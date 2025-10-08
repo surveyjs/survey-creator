@@ -93,8 +93,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
 
     if (!hasCategories) return actions;
-
-    const moveToCategories = categories.map((i: any) => new Action({
+    const currentCategory = categories.filter(c => c.items.filter(i => i.name == row.value?.name).length > 0)[0];
+    const moveToCategories = categories.filter((i: any) => i.category != currentCategory?.category).map((i: any) => new Action({
       id: "to-" + i.category,
       title: i.title,
       action: () => {
