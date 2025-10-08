@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, upArrowImageLink, downArrowImageLink, leftArrowImageLink, compareScreenshot } from "./helper";
+import { url, setJSON, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, upArrowImageLink, downArrowImageLink, leftArrowImageLink, compareScreenshot, doDrag, doDragDrop } from "./helper";
 
 const title = "DragDrop Screenshot";
 
@@ -18,17 +18,9 @@ test.describe(title, () => {
       showQuestionNumbers: "on", pages: [{ name: "page1" }]
     });
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
-    });
-
     const ghostPage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(ghostPage, { force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: ghostPage });
 
     await compareScreenshot(page, page.locator(".svc-page--drag-over-empty"), "drag-drop-survey-element-ghost.png");
   });
@@ -43,17 +35,9 @@ test.describe(title, () => {
       showQuestionNumbers: "on", pages: [{ name: "page1" }]
     });
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
-    });
-
     const emptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(emptyPage, { force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: emptyPage });
 
     await compareScreenshot(page, page.locator(".svc-question__content--drag-over-inside"), "drag-drop-survey-element-empty-page.png");
   });
@@ -72,14 +56,7 @@ test.describe(title, () => {
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
-    });
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(emptyPage, { force: true });
+    await doDragDrop({ page, element: ratingToolboxItem, target: emptyPage });
     let pagesLength = await page.evaluate(() => (window as any).creator.survey.pages.length);
     expect(pagesLength).toBe(1);
 
@@ -92,12 +69,6 @@ test.describe(title, () => {
     await ratingToolboxItem.dragTo(newGhostPagePage, { force: true });
     pagesLength = await page.evaluate(() => (window as any).creator.survey.pages.length);
     expect(pagesLength).toBe(3);
-
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
-    });
 
     await ratingToolboxItem.hover();
     await ratingToolboxItem.dragTo(newGhostPagePage, { force: true });
@@ -117,9 +88,7 @@ test.describe(title, () => {
 
     const emptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(emptyPage, { force: true });
+    await doDragDrop({ page, element: ratingToolboxItem, target: emptyPage });
     await resetHoverToCreator(page);
 
     await compareScreenshot(page, ratingToolboxItem, "toolbox-item-state-after-drag.png");
@@ -145,18 +114,9 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(panel, { force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: panel });
 
     await compareScreenshot(page, panel, "drag-drop-survey-element-empty-panel.png");
   });
@@ -181,18 +141,9 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const panelDynamic = page.locator("[data-sv-drop-target-survey-element=\"question1\"]");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(panelDynamic, { force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: panelDynamic });
 
     await compareScreenshot(page, panelDynamic, "drag-drop-survey-element-empty-panel-dynamic.png");
   });
@@ -200,12 +151,6 @@ test.describe(title, () => {
   test("Choices: Ranking", async ({ page }) => {
     await hideAllAdornerActions(page);
     await page.setViewportSize({ width: 2560, height: 1440 });
-
-    await page.evaluate(() => {
-      const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
-      matrix.dragDropMatrixRows.drop = () => { };
-      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
-    });
 
     const json = {
       showQuestionNumbers: "on",
@@ -227,13 +172,6 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const qRoot = page.locator(".svc-question__adorner .sd-question__content").first();
     const firstItem = qRoot.locator(".svc-item-value-wrapper").first();
 
@@ -242,7 +180,8 @@ test.describe(title, () => {
     await firstItem.hover();
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking--hover.png");
 
-    await firstItem.locator(".svc-item-value-controls__drag").dragTo(firstItem);
+    await doDrag({ page, element: firstItem.locator(".svc-item-value-controls__drag"), target: firstItem });
+
     await page.waitForTimeout(500);
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking--dragging.png");
   });
@@ -335,12 +274,6 @@ test.describe(title, () => {
     await hideAllAdornerActions(page);
     await page.setViewportSize({ width: 2560, height: 1440 });
 
-    await page.evaluate(() => {
-      const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
-      matrix.dragDropMatrixRows.drop = () => { };
-      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
-    });
-
     const json = {
       showQuestionNumbers: "on",
       pages: [
@@ -365,12 +298,6 @@ test.describe(title, () => {
     await page.locator("[data-name=\"question1\"]").click();
     await getPropertyGridCategory(page, "Choice Options").click();
 
-    await page.evaluate(() => {
-      const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
-      matrix.dragDropMatrixRows.drop = () => { };
-      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
-    });
-
     const item1 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
     const item2 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
     const item3 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
@@ -391,12 +318,6 @@ test.describe(title, () => {
 
   test("Matrix: Property Grid: Choices: Scroll", async ({ page }) => {
     await page.setViewportSize({ width: 1500, height: 500 });
-
-    await page.evaluate(() => {
-      const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
-      matrix.dragDropMatrixRows.drop = () => { };
-      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
-    });
 
     const json = {
       showQuestionNumbers: "on",
@@ -422,12 +343,6 @@ test.describe(title, () => {
     await page.locator("[data-name=\"question1\"]").click();
     await getPropertyGridCategory(page, "General").click();
     await getPropertyGridCategory(page, "Choice Options").click();
-
-    await page.evaluate(() => {
-      const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
-      matrix.dragDropMatrixRows.drop = () => { };
-      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
-    });
 
     const item1 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
     const item2 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
@@ -486,8 +401,8 @@ test.describe(title, () => {
 
     await question1.click();
     await giraffeItem.hover();
-    await dragZoneGiraffeItem.hover();
-    await dragZoneGiraffeItem.dragTo(surveyTitle, { force: true });
+    await doDrag({ page, element: dragZoneGiraffeItem, target: surveyTitle });
+
     await page.waitForTimeout(1000);
     await resetHoverToCreator(page);
 
@@ -666,18 +581,9 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(panel, { force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: panel });
 
     await compareScreenshot(page, panel, "drag-drop-toolbox-custom-component-icon.png");
 
@@ -707,18 +613,10 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']");
     const checkboxItem = page.locator("[aria-label='Checkboxes']");
-
-    await checkboxItem.hover();
-    await checkboxItem.dragTo(newGhostPagePage, { force: true });
+    await doDrag({ page, element: checkboxItem, target: newGhostPagePage,
+    });
 
     await compareScreenshot(page, newGhostPagePage, "drag-drop-scroll.png");
   });
@@ -863,18 +761,9 @@ test.describe("DragDrop custom widget Screenshot", () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const q1 = page.locator("[data-sv-drop-target-survey-element='q1']");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(q1, { targetPosition: { x: 100, y: 10 }, force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: q1 });
 
     await compareScreenshot(page, page.locator(".svc-page").first(), "drag-drop-over-custom-widget.png");
   });
@@ -911,13 +800,6 @@ test.describe("DragDrop custom widget Screenshot", () => {
     };
     await setJSON(page, json);
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.drop = () => { };
-      window["creator"].dragDropChoices.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropChoices.domAdapter.drop = () => { };
-    });
-
     const panelRow = page.locator(".sd-row__panel");
     const checkboxItem = page.locator("[aria-label='Checkboxes']");
 
@@ -933,16 +815,8 @@ test.describe("DragDrop custom widget Screenshot", () => {
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
 
-    await page.evaluate(() => {
-      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
-      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
-    });
-
     const q1 = page.locator("[data-sv-drop-target-survey-element='q1']");
-
-    await q1.locator(".svc-question__drag-element").hover();
-    await q1.locator(".svc-question__drag-element").dragTo(q1, { targetPosition: { x: 10, y: 10 }, force: true });
+    await doDrag({ page, element: q1.locator(".svc-question__drag-element"), target: q1 });
 
     await compareScreenshot(page, page.locator(".svc-page").first(), "drag-drop-huge-shortcut-text.png");
   });
