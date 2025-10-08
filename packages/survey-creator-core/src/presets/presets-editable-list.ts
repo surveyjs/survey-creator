@@ -111,7 +111,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     });
   }
 
-  private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     let survey: SurveyModel;
     let resetAction;
     const itemKey = this.getMatrixKeyColumnName(question);
@@ -226,6 +226,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
+      this.editItem(model, creator, options.question, options.row);
     }
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {

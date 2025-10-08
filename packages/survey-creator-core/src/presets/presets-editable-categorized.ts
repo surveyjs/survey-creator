@@ -264,6 +264,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     super.onMatrixRowAdded(model, creator, options);
     if (options.question.name == this.nameCategories) {
       this.setDefaultValueForRow(model, options.question, options.row);
+      this.editItem(model, creator, options.question, options.row);
     }
   }
 }
