@@ -21,6 +21,14 @@
     }
 }
 
+.sps-question__content {
+    sv-ng-dropdown-question, sv-ng-dropdown {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+}
+
 .sps-dropdown__value {
     display: flex;
     padding: var(--sjs2-layout-control-input-medium-content-vertical, 8px)

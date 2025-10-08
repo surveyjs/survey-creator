@@ -147,6 +147,7 @@
   flex-direction: row-reverse;
   background: transparent;
   padding: 0 0 0 var(--sjs2-spacing-x100, 8px);
+  justify-content: flex-end;
   .sv-string-viewer {
     padding: var(--sjs2-spacing-x100, 8px);
   }

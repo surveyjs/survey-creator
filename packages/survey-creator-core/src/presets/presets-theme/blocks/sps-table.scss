@@ -155,6 +155,9 @@
   .sps-input {
     pointer-events: none;
   }
+  .sps-drag-element__svg {
+    display: none;
+  }
 }
 
 .sps-table__row {
