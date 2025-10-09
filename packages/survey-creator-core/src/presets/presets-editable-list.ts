@@ -111,7 +111,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     });
   }
 
-  private editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string}) {
     let survey: SurveyModel;
     let resetAction;
     const itemKey = this.getMatrixKeyColumnName(question);
@@ -129,7 +129,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       }
     };
     resetAction = new Action(resetActionParams);
-    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [resetAction] });
+    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [resetAction], title: options?.description });
     resetAction.enabled = !Helpers.isTwoValueEquals(survey.data, this.getDefaultItem(question, survey.getValue(itemKey)));
     survey.onValueChanged.add(()=>resetAction.enabled = true);
     const keyQuestion = survey.getQuestionByName(itemKey);
@@ -226,6 +226,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
+      this.editItem(model, creator, options.question, options.row, {
+        description: getLocString("presets.toolbox.newItem") + " " + options.question.locTitle.renderedText
+      });
     }
   }
   public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any) {

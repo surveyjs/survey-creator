@@ -50,7 +50,9 @@ export const enStrings = {
     addCustomItem: "Add Custom Item",
     addNewItem: "Add a new item",
     addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items"
+    noRowsText: "There are no items",
+    newItem: "New item in",
+    newCategory: "New category in",
   },
   propertyGrid: {
     title: "Customize the Property Grid",
