@@ -131,18 +131,16 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     if (!this.model.canShowPanel()) return null;
     const isShowPanel = this.model.showPanel;
     const icName = isShowPanel ? "icon-collapsepanel-16x16" : "icon-expandpanel-16x16";
-    const style = !isShowPanel && this.model.item.hasElements ? { backgroundColor: "lightgreen" } : undefined;
     const btn = attachKey2click(<span
       role="button"
-      className="svc-item-value-controls__button svc-item-value-controls__add"
-      style={style}
+      className="svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button"
       onClick={() => {
         this.model.togglePanel();
       }}
     >
       <SvgIcon size={"auto"} iconName={icName}></SvgIcon>
     </span>);
-    return <div className="svc-item-value-controls">{btn}</div>;
+    return <div className="svc-item-value-controls svc-choice-elements-button-container">{btn}</div>;
   }
   private renderPanel(): React.JSX.Element | null {
     if (!this.model.showPanel) return null;
