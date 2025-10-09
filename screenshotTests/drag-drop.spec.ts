@@ -60,18 +60,14 @@ test.describe(title, () => {
     let pagesLength = await page.evaluate(() => (window as any).creator.survey.pages.length);
     expect(pagesLength).toBe(1);
 
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(newGhostPagePage, { force: true });
+    await doDragDrop({ page, element: ratingToolboxItem, target: newGhostPagePage });
     pagesLength = await page.evaluate(() => (window as any).creator.survey.pages.length);
     expect(pagesLength).toBe(2);
 
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(newGhostPagePage, { force: true });
+    await doDragDrop({ page, element: ratingToolboxItem, target: newGhostPagePage });
     pagesLength = await page.evaluate(() => (window as any).creator.survey.pages.length);
     expect(pagesLength).toBe(3);
-
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(newGhostPagePage, { force: true });
+    await doDrag({ page, element: ratingToolboxItem, target: newGhostPagePage });
 
     await compareScreenshot(page, page.locator(".svc-page--drag-over-empty"), "drag-drop-survey-element-ghost-page-4.png");
   });
@@ -308,10 +304,8 @@ test.describe(title, () => {
     await item2.hover();
     await item3.hover();
     await dragZoneItem2.hover();
-    await dragZoneItem2.dragTo(item1, {
-      targetPosition: { x: 20, y: 20 },
-      force: true
-    });
+    // await dragZoneItem2.dragTo(item1, { targetPosition: { x: 20, y: 20 }, force: true });
+    await doDrag({ page, element: dragZoneItem2, target: item1 });
 
     await compareScreenshot(page, page.locator("[data-name=\"choices\"]"), "drag-drop-matrix-pg-choices.png");
   });
@@ -349,7 +343,10 @@ test.describe(title, () => {
     const item3 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
 
     const dragZoneItem2 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).locator(".spg-drag-element__svg");
-    await dragZoneItem2.dragTo(dragZoneItem2, { targetPosition: { x: -1, y: 0 }, force: true });
+    // await dragZoneItem2.dragTo(dragZoneItem2, { targetPosition: { x: -1, y: 0 }, force: true });
+    await doDrag({ page, element: dragZoneItem2, target: dragZoneItem2,
+      options: { targetPosition: { x: -1, y: 0 } }
+    });
 
     await compareScreenshot(page, page.locator("[data-name=\"choices\"]"), "drag-drop-matrix-pg-choices-scroll.png");
   });
@@ -446,8 +443,11 @@ test.describe(title, () => {
     const page1 = page.locator("[data-sv-drop-target-survey-element='page1']");
     const ratingToolboxItem = page.locator("[aria-label='Rating Scale']");
 
-    await ratingToolboxItem.hover();
-    await ratingToolboxItem.dragTo(question2, { targetPosition: { x: -1, y: 0 }, force: true });
+    // await ratingToolboxItem.dragTo(question2, { targetPosition: { x: -1, y: 0 }, force: true });
+    await doDragDrop({ page, element: ratingToolboxItem, target: question2,
+      options: { targetPosition: { x: -1, y: 0 } }
+    });
+
     await question4.hover();
     await compareScreenshot(page, page1, "drag-drop-to-multiline-from-toolbox.png");
   });
@@ -656,7 +656,7 @@ test.describe(title, () => {
     await panel.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.first().click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content");
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
     await toolboxToolAction.hover();
     await toolboxToolAction.dispatchEvent("pointerdown");
     await panel.hover();
@@ -694,7 +694,7 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     const qCollapseButton = page.locator(".svc-page__content #collapse");
-    const pageElement = page.locator(".svc-page");
+    const pageElement = page.locator(".svc-page").first();
     await pageElement.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.first().click();
 
@@ -802,9 +802,10 @@ test.describe("DragDrop custom widget Screenshot", () => {
 
     const panelRow = page.locator(".sd-row__panel");
     const checkboxItem = page.locator("[aria-label='Checkboxes']");
-
-    await checkboxItem.hover();
-    await checkboxItem.dragTo(panelRow, { targetPosition: { x: 50, y: 0 }, force: true });
+    // await checkboxItem.dragTo(panelRow, { targetPosition: { x: 50, y: 0 }, force: true });
+    await doDrag({ page, element: checkboxItem, target: panelRow, options: {
+      targetPosition: { x: 50, y: 0 } }
+    });
 
     await compareScreenshot(page, page.locator(".svc-question__content--panel"), "drag-drop-indicator-inside-panel-rows.png");
   });
