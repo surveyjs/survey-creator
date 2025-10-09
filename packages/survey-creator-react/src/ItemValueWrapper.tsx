@@ -1,9 +1,8 @@
-import { getLocString, ItemValueWrapperViewModel, SurveyCreatorModel } from "survey-creator-core";
+import { ItemValueWrapperViewModel, SurveyCreatorModel } from "survey-creator-core";
 import * as React from "react";
 import { QuestionSelectBase, Base, ItemValue, PanelModel, SurveyModel } from "survey-core";
 import {
   attachKey2click,
-  ISurveyCreator,
   ReactElementFactory,
   SurveyPanel,
   SvgIcon
@@ -156,7 +155,7 @@ const ChoiceItemPanel = React.memo(({ element, survey, creator, css }: {
   creator: SurveyCreatorModel,
   css: any,
 }) => {
-  return <SurveyPanel element={element} survey={survey} creator={creator} css={css} />;
+  return <SurveyPanel element={element} survey={survey} creator={creator} cssClasses={css} />;
 });
 ChoiceItemPanel.displayName = "ChoiceItemPanel";
 

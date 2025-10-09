@@ -59,7 +59,27 @@
     <div class="svc-item-value__item" @click="adorner.select(adorner, $event)">
       <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
+    <div v-if="adorner.canShowPanel()" class="svc-item-value-controls svc-choice-elements-button-container">
+        <span
+            role="button"
+            class="svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button"
+            @click="adorner.togglePanel()"
+            v-key2click
+          >
+            <SvComponent
+              :is="'sv-svg-icon'"
+              :iconName="adorner.showPanel ? 'icon-collapsepanel-16x16' : 'icon-expandpanel-16x16'"
+              :size="'auto'"
+            ></SvComponent>
+          </span>
+    </div>
   </div>
+  <SvComponent
+    v-if="adorner.showPanel"
+    :is="'survey-panel'"
+    :element="item.panel"
+    :cssClasses="adorner.creator.survey.getCss()"
+  />
 </template>
 
 <script lang="ts" setup>
