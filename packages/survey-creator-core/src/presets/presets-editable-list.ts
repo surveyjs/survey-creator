@@ -46,7 +46,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (!actions) return;
     const keyColumn = this.getMatrixKeyColumnName(question);
     if (!question.value) return;
-    const rowData = question.value.filter(r => row.value[keyColumn] == r[keyColumn])[0];
+    const rowData = question.value.filter(r => row.value?.[keyColumn] == r?.[keyColumn])[0];
     if (!rowData) return;
     actions.forEach(a => this.updateRowAction(question, rowData, keyColumn, a));
   }
