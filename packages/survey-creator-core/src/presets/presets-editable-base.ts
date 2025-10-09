@@ -196,7 +196,13 @@ export class CreatorPresetEditableBase {
         onApply: () => {
           if (survey.validate()) {
             const newValue = [...matrix.value];
-            const newRowValue = { ...row.value, ...survey.data };
+            const newData: any = { };
+            survey.getAllQuestions().forEach(q => {
+              if (q.visible) {
+                newData[q.name] = survey.data[q.name];
+              }
+            });
+            const newRowValue = { ...row.value, ...newData };
             newValue[row.index] = newRowValue;
             matrix.value = newValue;
             return true;
