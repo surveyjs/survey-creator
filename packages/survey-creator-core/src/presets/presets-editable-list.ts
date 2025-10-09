@@ -227,7 +227,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.toolbox.newItem") + " " + options.question.locTitle.renderedText
+        description: getLocString("presets.toolbox.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model))
       });
     }
   }

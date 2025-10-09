@@ -454,7 +454,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   //   question.value = value;
   // }
   private updateItemsFromCategories(model: SurveyModel) {
-    this.getQuestionItems(model).value = this.getQuestionCategories(model).value.map(r => [...r.items]).flat();
+    this.getQuestionItems(model).value = this.getQuestionCategories(model).value.map(r => [...(r.items || [])]).flat();
   }
 
   private updateCategoriesFromItems(model: SurveyModel) {
