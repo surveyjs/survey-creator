@@ -1121,7 +1121,7 @@ test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
 });
 test("Show/hide choiceitem panel", (): any => {
   const creator = new CreatorTester();
-  creator.maxChoicesElementsLevel = 2;
+  creator.maxChoiceContentNestingLevel = 2;
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] },
       { type: "dropdown", name: "q2", choices: [1, 2, 3] }]
@@ -1141,9 +1141,9 @@ test("Show/hide choiceitem panel", (): any => {
   expect(firstItemAdorner.showPanel).toBeTruthy();
   expect(firstItemAdorner.item.panel.wasRendered).toBeTruthy();
 });
-test("Show/hide choiceitem panel based on creator.maxChoicesElementsLevel", (): any => {
+test("Show/hide choiceitem panel based on creator.maxChoiceContentNestingLevel", (): any => {
   const creator = new CreatorTester();
-  creator.maxChoicesElementsLevel = 2;
+  creator.maxChoiceContentNestingLevel = 2;
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1",
       choices: [{ value: 1, elements: [{ type: "checkbox", name: "q2", choices: [1, 2, 3] }] }, 2, 3] }]
@@ -1152,15 +1152,15 @@ test("Show/hide choiceitem panel based on creator.maxChoicesElementsLevel", (): 
   const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
   let firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
   let secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
-  creator.maxChoicesElementsLevel = 0;
+  creator.maxChoiceContentNestingLevel = 0;
   expect(firstItemAdorner.canShowPanel()).toBeFalsy();
   expect(secondItemAdorner.canShowPanel()).toBeFalsy();
-  creator.maxChoicesElementsLevel = 1;
+  creator.maxChoiceContentNestingLevel = 1;
   firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
   secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
   expect(firstItemAdorner.canShowPanel()).toBeTruthy();
   expect(secondItemAdorner.canShowPanel()).toBeFalsy();
-  creator.maxChoicesElementsLevel = 2;
+  creator.maxChoiceContentNestingLevel = 2;
   firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
   secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
   expect(firstItemAdorner.canShowPanel()).toBeTruthy();
@@ -1168,7 +1168,7 @@ test("Show/hide choiceitem panel based on creator.maxChoicesElementsLevel", (): 
 });
 test("Do not collapse choice panel on adding a new question into empty panel", (): any => {
   const creator = new CreatorTester();
-  creator.maxChoicesElementsLevel = 1;
+  creator.maxChoiceContentNestingLevel = 1;
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1",
       choices: [1, 2, 3] }]
@@ -1185,7 +1185,7 @@ test("Do not collapse choice panel on adding a new question into empty panel", (
 });
 test("ExpandCollapseManager for choice item panel", (): any => {
   const creator = new CreatorTester();
-  creator.maxChoicesElementsLevel = 1;
+  creator.maxChoiceContentNestingLevel = 1;
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1",
       choices: [1, 2, 3] }]

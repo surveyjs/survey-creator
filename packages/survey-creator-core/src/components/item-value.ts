@@ -273,7 +273,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   private calcCanShowPanel(): boolean {
     if (!this.item.supportElements) return false;
-    const level = this.creator.maxChoicesElementsLevel;
+    const level = this.creator.maxChoiceContentNestingLevel;
     if (level <= 0) return false;
     if (this.question.isBuiltInChoice(this.item)) return false;
     let parent = this.question.parent;

@@ -35,7 +35,7 @@ test.describe(title, () => {
       ]
     };
     await setOptions(page, {
-      maxChoicesElementsLevel: 2
+      maxChoiceContentNestingLevel: 2
     });
     await setJSON(page, json);
     const choiceExpandButton = page.locator(".svc-choice-elements-button").first();
