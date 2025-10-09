@@ -77,7 +77,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         addRowButtonLocation: "bottom",
         name: this.nameSubitems,
         valueName: "subitems",
-        titleLocation: "hidden",
+        titleLocation: "top",
+        title: "{row.title}",
         startWithNewLine: false
       }, false));
     }

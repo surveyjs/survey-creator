@@ -25,6 +25,7 @@ export class CreatorPresetEditableBase {
   }
   public get pageName(): string { return "page_" + this.fullPath; }
   public getPageTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).title; }
+  public getPageShortTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).navigationTitle; }
   protected get mainPanelName() { return this.path + "_mainPanel"; }
   public getMainElementNames() : any { return [this.mainPanelName]; }
   public getMainPanelName() : any { return this.mainPanelName; }
@@ -180,7 +181,7 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[]}) {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string}) {
     const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
     const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
     survey.fitToContainer = false;
@@ -207,7 +208,7 @@ export class CreatorPresetEditableBase {
           return true;
         },
         cssClass: "sps-popup svc-property-editor svc-creator-popup",
-        title: getLocString("presets.editor.edit"),
+        title: options.title || getLocString("presets.editor.edit"),
         displayMode: "popup"
       }, rootElement);
       if (survey.getAllQuestions().filter(q => !q.startWithNewLine).length > 0) {
