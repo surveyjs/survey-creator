@@ -845,6 +845,8 @@ export var danishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ryd andre, når det er valgt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Vis både tekst og værdi",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kræv, at brugeren indtaster en kommentar",
     // "Display area height"

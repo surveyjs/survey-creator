@@ -454,6 +454,7 @@ export var enStrings = {
       suffix: "Currency suffix"
     },
     isExclusive: "Clear others when selected",
+    showValue: "Display both text and value",
     isCommentRequired: "Require user to enter a comment",
     imageHeight: "Display area height",
     imageWidth: "Display area width",

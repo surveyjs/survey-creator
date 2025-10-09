@@ -844,6 +844,8 @@ export var italianTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Cancella gli altri quando selezionato",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Visualizza sia il testo che il valore",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Richiedi all'utente di inserire un commento",
     // "Display area height"

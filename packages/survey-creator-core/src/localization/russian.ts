@@ -844,6 +844,8 @@ export var ruStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Удалить другие при выборе",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Отображение текста и значений",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Требовать от пользователя ввода комментария",
     // [Auto-translated] "Display area height"
