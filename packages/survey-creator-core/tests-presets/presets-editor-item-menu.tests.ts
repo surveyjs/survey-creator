@@ -315,7 +315,7 @@ test("Preset edit (no categories), check categories context menu - check actions
     "move-as-subitem",
   ]);
   const subitemsAction = actions[2];
-  expect(subitemsAction.items.map(a => a.id)).toEqual(["tosubitem-text", "tosubitem-comment", "tosubitem-multipletext",
+  expect(subitemsAction.items.map(a => a.id)).toEqual(["tosubitem-text", "tosubitem-multipletext",
     "tosubitem-panel", "tosubitem-paneldynamic"]);
 });
 
