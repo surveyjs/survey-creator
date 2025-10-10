@@ -849,7 +849,7 @@ export class PropertyGridModel {
         panel.collapse();
       }
     }
-    if (focus) {
+    if (focus && !question.isReadOnly) {
       question.focus();
     } else {
       if (this.showOneCategoryInPropertyGrid) {
