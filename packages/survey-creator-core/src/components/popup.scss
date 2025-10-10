@@ -42,6 +42,7 @@
   &.sv-popup--modal-overlay {
     background: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
     padding-top: var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2));
+    max-height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
 
     & > .sv-popup__container {
       width: 100vw;
