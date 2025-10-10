@@ -2,7 +2,6 @@ import {
   Base,
   ItemValue,
   property,
-  QuestionCheckboxModel,
   QuestionSelectBase,
   Serializer,
   JsonObjectProperty,
@@ -17,6 +16,7 @@ import { getLocString } from "../editorLocalization";
 import { getNextItemText } from "../utils/creator-utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
+import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
@@ -26,7 +26,7 @@ const specificChoices = {
   "dontKnowItem": "showDontKnowItem"
 };
 
-export class ItemValueWrapperViewModel extends Base {
+export class ItemValueWrapperViewModel extends Base implements IExpandCollapseChoice {
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
   @property({ defaultValue: false }) isDragDropGhost: boolean;
@@ -75,6 +75,7 @@ export class ItemValueWrapperViewModel extends Base {
     if (!this.creator.isCanModifyProperty(question, "choices")) {
       this.canTouchItems = false;
     }
+    this.setupShowPanel();
   }
 
   private dragOrClickHelper: DragOrClickHelper;
@@ -123,11 +124,17 @@ export class ItemValueWrapperViewModel extends Base {
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
+  private get expandCollapseManager(): ExpandCollapseManager {
+    return this.creator.expandCollapseManager;
+  }
   public dispose(): void {
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
     );
+    if (this.canShowPanel()) {
+      this.expandCollapseManager.disposeChoice(this.item, this);
+    }
   }
 
   private getGhostPosition(item: any): string {
@@ -256,5 +263,48 @@ export class ItemValueWrapperViewModel extends Base {
     const max = this.question.choicesMax;
     if (!Helpers.isNumber(min) || !Helpers.isNumber(max) || min === max && min === 0) return false;
     return val >= min && val <= max;
+  }
+  private canShowPanelValue: boolean = undefined;
+  public canShowPanel(): boolean {
+    if (this.canShowPanelValue === undefined) {
+      this.canShowPanelValue = this.calcCanShowPanel();
+    }
+    return this.canShowPanelValue;
+  }
+  private calcCanShowPanel(): boolean {
+    if (!this.item.supportElements) return false;
+    const level = this.creator.maxChoiceContentNestingLevel;
+    if (level <= 0) return false;
+    if (this.question.isBuiltInChoice(this.item)) return false;
+    let parent = this.question.parent;
+    let index = 0;
+    while(!!parent && index < level && parent.name.indexOf("choicePanel") === 0) {
+      index++;
+      parent = parent.parent;
+    }
+    return !!parent && index < level;
+  }
+  public get showPanel(): boolean {
+    return this.getPropertyValue("showPanel", false);
+  }
+  public set showPanel(val: boolean) {
+    if (val && !this.canShowPanel()) return;
+    if (val) {
+      this.item.panel.onFirstRendering();
+    }
+    this.expandCollapseManager.setChoicesState(this.item, val, this);
+    this.expandCollapse(val);
+  }
+  public expandCollapse(val: boolean): void {
+    this.setPropertyValue("showPanel", val);
+  }
+  public togglePanel(): void {
+    this.showPanel = !this.showPanel;
+  }
+  private setupShowPanel() {
+    const state = this.expandCollapseManager.isChoiceExpanded(this.item);
+    if (state) {
+      this.showPanel = true;
+    }
   }
 }
