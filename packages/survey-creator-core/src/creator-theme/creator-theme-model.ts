@@ -9,16 +9,27 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
   static defaultThemeName = "default-light";
 
+  static varBaseUnitFontSize = "--sjs2-base-unit-font-size";
+  static varBaseUnitLineHeight = "--sjs2-base-unit-line-height";
+  static varBaseUnitSize = "--sjs2-base-unit-size";
+  static varBaseUnitSpacing = "--sjs2-base-unit-spacing";
+  static varBaseUnitRadius = "--sjs2-base-unit-radius";
+  static varBaseUnitBorderWidth = "--sjs2-base-unit-border-width";
+
+  static varColorProjectBrand = "--sjs2-color-project-brand-600";
+  static varColorProjectAccent = "--sjs2-color-project-accent-600";
+  static varColorUtilitySurface = "--sjs2-color-utility-surface";
+
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};
 
   unitDictionary: { [index: string]: number } = {
-    "--ctr-font-unit": 8,
-    "--ctr-line-height-unit": 8,
-    "--ctr-size-unit": 8,
-    "--ctr-spacing-unit": 8,
-    "--ctr-corner-radius-unit": 8,
-    "--ctr-stroke-unit": 1,
+    [CreatorThemeModel.varBaseUnitFontSize]: 8,
+    [CreatorThemeModel.varBaseUnitLineHeight]: 8,
+    [CreatorThemeModel.varBaseUnitSize]: 8,
+    [CreatorThemeModel.varBaseUnitSpacing]: 8,
+    [CreatorThemeModel.varBaseUnitRadius]: 8,
+    [CreatorThemeModel.varBaseUnitBorderWidth]: 1,
   };
 
   @property() themeName: string = CreatorThemeModel.defaultThemeName;
@@ -31,7 +42,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   private isSpecialBackgroundFromCurrentTheme() {
     const currentTheme = CreatorThemes[this.themeName];
-    return colorsAreEqual(currentTheme && currentTheme.cssVariables && currentTheme.cssVariables["--sjs-special-background"], this["--sjs-special-background"]);
+    return colorsAreEqual(currentTheme && currentTheme.cssVariables && currentTheme.cssVariables[CreatorThemeModel.varColorUtilitySurface], this[CreatorThemeModel.varColorUtilitySurface]);
   }
   private findAppropriateSpecialBackground(primaryColorValue: string) {
     let primaryColorName: string;
@@ -47,10 +58,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     if (!this.isLight) {
       return;
     }
-    const canCalculateSpecialBackgroundColor = this.isSpecialBackgroundFromCurrentTheme() || colorsAreEqual(this.findAppropriateSpecialBackground(primaryColorOldValue), this["--sjs-special-background"]);
+    const canCalculateSpecialBackgroundColor = this.isSpecialBackgroundFromCurrentTheme() || colorsAreEqual(this.findAppropriateSpecialBackground(primaryColorOldValue), this[CreatorThemeModel.varColorUtilitySurface]);
     if (canCalculateSpecialBackgroundColor) {
       const newSpecialBackgroundColor = this.findAppropriateSpecialBackground(primaryColorNewValue);
-      this["--sjs-special-background"] = newSpecialBackgroundColor || PredefinedBackgroundColors["light"]["gray"];
+      this[CreatorThemeModel.varColorUtilitySurface] = newSpecialBackgroundColor || PredefinedBackgroundColors["light"]["gray"];
     }
   }
 
@@ -95,7 +106,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private resetColorThemeCssVariablesChanges(): void {
     Object.keys(this.themeCssVariablesChanges).forEach(key => {
-      if (key.indexOf("--sjs-") === 0) {
+      if (key.indexOf("--sjs2-") === 0) {
         delete this.themeCssVariablesChanges[key];
       }
     });
@@ -107,11 +118,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.resetColorThemeCssVariablesChanges();
       this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
-    } else if (name === "--sjs-primary-background-500") {
+    } else if (name === CreatorThemeModel.varColorProjectBrand) {
       this.setThemeCssVariablesChanges(name, newValue);
       this.setPropertyValue(name, newValue);
       this.updateBackgroundColor(newValue, oldValue);
-    } else if (name === "--sjs-secondary-background-500" || name === "--sjs-special-background") {
+    } else if (name === CreatorThemeModel.varColorProjectAccent || name === CreatorThemeModel.varColorUtilitySurface) {
       this.setThemeCssVariablesChanges(name, newValue);
       this.setPropertyValue(name, newValue);
     } else if (name.indexOf("--") === 0) {
@@ -122,12 +133,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private scalePropertiesChanged(propertyName: string, newValue: number) {
     if (propertyName == "fontScale") {
-      this.scalingProperties("--ctr-font-unit", newValue);
-      this.scalingProperties("--ctr-line-height-unit", newValue);
+      this.scalingProperties(CreatorThemeModel.varBaseUnitFontSize, newValue);
+      this.scalingProperties(CreatorThemeModel.varBaseUnitLineHeight, newValue);
     } else if (propertyName == "scale") {
-      this.scalingProperties("--ctr-size-unit", newValue);
-      this.scalingProperties("--ctr-spacing-unit", newValue);
-      this.scalingProperties("--ctr-corner-radius-unit", newValue);
+      this.scalingProperties(CreatorThemeModel.varBaseUnitSize, newValue);
+      this.scalingProperties(CreatorThemeModel.varBaseUnitSpacing, newValue);
+      this.scalingProperties(CreatorThemeModel.varBaseUnitRadius, newValue);
     }
   }
   private scalingProperties(cssName: string, newValue: number) {
@@ -140,13 +151,13 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private scaleCssVariables() {
     if (this.fontScale !== undefined) {
-      this.scaleValue("--ctr-font-unit", this.fontScale);
-      this.scaleValue("--ctr-line-height-unit", this.fontScale);
+      this.scaleValue(CreatorThemeModel.varBaseUnitFontSize, this.fontScale);
+      this.scaleValue(CreatorThemeModel.varBaseUnitLineHeight, this.fontScale);
     }
     if (this.scale !== undefined) {
-      this.scaleValue("--ctr-size-unit", this.scale);
-      this.scaleValue("--ctr-spacing-unit", this.scale);
-      this.scaleValue("--ctr-corner-radius-unit", this.scale);
+      this.scaleValue(CreatorThemeModel.varBaseUnitSize, this.scale);
+      this.scaleValue(CreatorThemeModel.varBaseUnitSpacing, this.scale);
+      this.scaleValue(CreatorThemeModel.varBaseUnitRadius, this.scale);
     }
   }
   private getScaleFactor(cssName: string): number {
@@ -155,8 +166,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private updateScaleProperties() {
     this.blockThemeChangedNotifications += 1;
     try {
-      this.fontScale = this.getScaleFactor("--ctr-font-unit");
-      this.scale = this.getScaleFactor("--ctr-size-unit");
+      this.fontScale = this.getScaleFactor(CreatorThemeModel.varBaseUnitFontSize);
+      this.scale = this.getScaleFactor(CreatorThemeModel.varBaseUnitSize);
     } finally {
       this.blockThemeChangedNotifications -= 1;
     }
@@ -259,7 +270,7 @@ Serializer.addClass(
 Serializer.addProperties("creatortheme", [
   {
     type: "color",
-    name: "--sjs-special-background",
+    name: CreatorThemeModel.varColorUtilitySurface,
     default: "#EDF9F7",
     enableIf: (obj: CreatorThemeModel): boolean => {
       return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
@@ -272,7 +283,7 @@ Serializer.addProperties("creatortheme", [
     }
   }, {
     type: "color",
-    name: "--sjs-primary-background-500",
+    name: CreatorThemeModel.varColorProjectBrand,
     default: "#19B394",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -282,7 +293,7 @@ Serializer.addProperties("creatortheme", [
     },
   }, {
     type: "color",
-    name: "--sjs-secondary-background-500",
+    name: CreatorThemeModel.varColorProjectAccent,
     default: "#19B394",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -292,11 +303,11 @@ Serializer.addProperties("creatortheme", [
       }
     },
   }, {
-    name: "--ctr-font-unit",
+    name: CreatorThemeModel.varBaseUnitFontSize,
     default: "8px",
     visible: false,
   }, {
-    name: "--ctr-line-height-unit",
+    name: CreatorThemeModel.varBaseUnitLineHeight,
     default: "8px",
     visible: false,
   }, {
@@ -320,15 +331,15 @@ Serializer.addProperties("creatortheme", [
       }
     }
   }, {
-    name: "--ctr-spacing-unit",
+    name: CreatorThemeModel.varBaseUnitSpacing,
     default: "8px",
     visible: false,
   }, {
-    name: "--ctr-size-unit",
+    name: CreatorThemeModel.varBaseUnitSize,
     default: "8px",
     visible: false,
   }, {
-    name: "--ctr-corner-radius-unit",
+    name: CreatorThemeModel.varBaseUnitRadius,
     default: "8px",
     visible: false,
   }, {

@@ -26,6 +26,7 @@
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
   <script src="../build/survey-creator-js.js"></script>
   <script src="./sc.js"></script>
+  <script src="../node_modules/survey-creator-core/themes/test.js"></script>
 </head>
 
 <body spellcheck="false">
@@ -34,7 +35,9 @@
 <script>
   window.surveyJSFramework = "react";
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+  SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
   const creator = new SurveyCreator.SurveyCreator();
+  creator.applyCreatorTheme(SurveyCreatorTheme.Test);
   creator.tabResponsivenessMode = "menu";
   creator["animationEnabled"] = false;
   creator.showOneCategoryInPropertyGrid = false;
