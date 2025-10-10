@@ -17,6 +17,7 @@
         v-if="!!adorner.element.hasTitle"
         :is="'survey-element-title'"
         :element="adorner.element"
+        :renderActions="false"
       />
       <div v-else :class="adorner.cssCollapsedHiddenTitle">
         <span class="svc-fake-title">{{ adorner.element.name }}</span>
