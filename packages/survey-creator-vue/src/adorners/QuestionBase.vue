@@ -15,6 +15,7 @@
           v-if="!!element.hasTitle"
           :is="'survey-element-title'"
           :element="element"
+          :renderActions="false"
       />
       <div v-else :class="model.cssCollapsedHiddenTitle">
         <span class="svc-fake-title">{{ element.name }}</span>
