@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { SurveyCreatorModule } from "survey-creator-angular";
+import { PresetsModule } from "survey-creator-angular/presets";
 import { SurveyModule } from "survey-angular-ui";
 import { ExampleComponent } from "./example.component";
 import { AppRoutingModule } from "./router.module";
@@ -23,7 +24,7 @@ import { NoLicenseComponent } from "./test/test-no-license.component";
     AppComponent, ExampleComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent, TestDropdownCollapseComponent, TestLocalizationComponent, ThemeTabComponent, NoLicenseComponent
   ],
   imports: [
-    BrowserModule, SurveyCreatorModule, FormsModule, SurveyModule, AppRoutingModule
+    BrowserModule, SurveyCreatorModule, FormsModule, SurveyModule, AppRoutingModule, PresetsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

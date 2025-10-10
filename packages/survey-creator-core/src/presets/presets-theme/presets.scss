@@ -1,0 +1,108 @@
+@use "../../variables" as *;
+@use "./fonts" as *;
+@use "blocks/sps-action-bar.scss";
+@use "blocks/sps-question.scss";
+@use "blocks/sps-input.scss";
+@use "blocks/sps-dropdown.scss";
+@use "blocks/sps-panel.scss";
+@use "blocks/sps-checkbox.scss";
+@use "blocks/sps-matrixdynamic.scss";
+@use "blocks/sps-table.scss";
+@use "blocks/sps-launch.scss";
+@use "blocks/sps-list.scss";
+@use "blocks/sps-popup.scss";
+
+.sps-root-modern {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  height: 0;
+  flex-grow: 1;
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
+  background: white;
+  @include disableLibraryAnimations;
+  display: flex;
+  flex-direction: column;
+  @include sjs2--typography--default;
+}
+
+.sps-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sps-page {
+  display: flex;
+  padding: var(--sjs2-spacing-x400, 32px);
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 0 0;
+  align-self: stretch;
+  gap: var(--sjs2-spacing-x150, 12px);
+  background: var(--sjs2-color-utility-surface-muted, rgba(28, 27, 32, 0.05));
+}
+
+.sps-page__title {
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+
+  @include sjs2--typography--medium-strong;
+}
+
+.sps-page__description {
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+
+  @include sjs2--typography--default;
+
+  padding-bottom: calc(var(--sjs2-spacing-x400, 32px) - var(--sjs2-spacing-x150, 12px));
+}
+
+.sps-action-title-bar {
+  margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
+  padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
+  gap: var(--sjs2-spacing-x150, 12px);
+  .sv-action--hidden {
+    display: none;
+  }
+
+  &.sps-action-title-bar {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.sps-body {
+  width: 100%;
+
+  .sv-components-container-contentBottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.sps-row {
+  max-width: 854px;
+}
+
+.sps-row--multiple {
+  display: flex;
+  align-items: stretch;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sjs2-spacing-x075, 6px);
+    align-self: stretch;
+    border-right: var(--sjs2-border-width-static-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.svc-tabbed-menu-item-container--presets {
+  display: none;
+}
