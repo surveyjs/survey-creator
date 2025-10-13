@@ -114,6 +114,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         title: getLocString("presets.toolbox.moveToCategory")
       });
       catGroup.setSubItems({ items: moveToCategories, cssClasses: listComponentCss });
+      catGroup.markerIconName = "icon-chevronright-24x24";
       actions.push(catGroup);
     } else {
       actions.push(...moveToCategories);

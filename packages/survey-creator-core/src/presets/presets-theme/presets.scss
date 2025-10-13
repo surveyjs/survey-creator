@@ -46,13 +46,13 @@
 }
 
 .sps-page__title {
-  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
 
   @include sjs2--typography--medium-strong;
 }
 
 .sps-page__description {
-  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
 
   @include sjs2--typography--default;
 
@@ -61,7 +61,6 @@
 
 .sps-action-title-bar {
   margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
-  padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
   gap: var(--sjs2-spacing-x150, 12px);
   .sv-action--hidden {
     display: none;
@@ -96,7 +95,7 @@
     align-items: flex-start;
     gap: var(--sjs2-spacing-x075, 6px);
     align-self: stretch;
-    border-right: var(--sjs2-border-width-static-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+    border-right: var(--sjs2-border-width-static-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
     &:last-child {
       border: none;
     }

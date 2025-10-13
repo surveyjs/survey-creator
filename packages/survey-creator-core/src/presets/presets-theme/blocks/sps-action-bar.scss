@@ -103,6 +103,7 @@
     background-color $creator-transition-duration,
     opacity $creator-transition-duration;
 
+  &.sps-action-button--pressed,
   &:hover,
   &:focus {
     opacity: 1;

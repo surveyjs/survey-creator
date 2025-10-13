@@ -19,7 +19,7 @@
   position: relative;
   display: flex;
   flex-direction: row-reverse;
-  padding: var(--sjs2-spacing-x150, 12px);
+  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px);
   align-items: center;
   gap: var(--sjs2-spacing-x150, 12px);
 
