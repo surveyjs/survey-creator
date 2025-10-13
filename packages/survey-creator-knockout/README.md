@@ -1,4 +1,4 @@
-# Survey Creator / Form Builder for Knockout
+# Survey Creator / Form Builder for Knockout (Obsolete)
 
 
 <video src="https://github.com/surveyjs/survey-creator/assets/22315929/884eeb5b-68e6-4d38-a8f9-d2483e6ce386"></video>
@@ -11,14 +11,11 @@ A visual designer that enables you and your users to create and modify surveys a
 
 [Try Survey Creator / Form Builder](https://surveyjs.io/create-survey)
 
-Although powered by Knockout, this library can also be used with Vue and jQuery. For React and Angular, we ship native implementations:
-
-- [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react)
-- [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular)
-
-## Get Started
-
-To get started with Survey Creator / Form Builder for Knockout, refer to the following tutorial: [Add a Survey to a Knockout Application](https://surveyjs.io/survey-creator/documentation/get-started-knockout-jquery).
+> This package provides a **legacy version** of Survey Creator for Knockout. For new projects, use the HTML/CSS/JavaScript implementation instead:
+>
+> - [`survey-creator-js`](https://www.npmjs.com/package/survey-creator-js)
+>
+> To learn how to integrate it into your application, refer to the following tutorial: [Add Survey Creator / Form Builder to a JavaScript Application](https://surveyjs.io/survey-creator/documentation/get-started-html-css-javascript).
 
 ## Resources
 
