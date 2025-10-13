@@ -1,7 +1,8 @@
 import {
   Base, ImageItemValue, ItemValue, QuestionCheckboxModel, JsonObjectProperty,
   QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel,
-  QuestionDropdownModel
+  QuestionDropdownModel,
+  ChoiceItem
 } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
@@ -1230,4 +1231,22 @@ test("ExpandCollapseManager for choice item panel", (): any => {
   expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
   adorner1_2.dispose();
   expect(manager.isChoiceExpanded(question.choices[0])).toBeFalsy();
+});
+test("Adorner should react on calling function of choiceItem", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 1;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [1, 2, 3] }]
+  };
+  const manager = creator.expandCollapseManager;
+  const question = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const choiceItem = <ChoiceItem>question.choices[0];
+  const adorner = new ItemValueWrapperViewModel(creator, question, choiceItem);
+  expect(adorner.showPanel).toBeFalsy();
+  choiceItem.expandPanelAtDesign();
+  expect(adorner.showPanel).toBeTruthy();
+  expect(choiceItem.onExpandPanelAtDesign.length).toBe(1);
+  adorner.dispose();
+  expect(choiceItem.onExpandPanelAtDesign.length).toBe(0);
 });

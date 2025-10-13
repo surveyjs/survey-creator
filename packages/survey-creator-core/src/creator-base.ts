@@ -9,7 +9,8 @@ import {
   SvgRegistry,
   addIconsToThemeSet,
   SvgThemeSets,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  ChoiceItem
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -3306,9 +3307,24 @@ export class SurveyCreatorModel extends Base
   private currentFocusInterval: any;
   private currentFocusTimeout: any;
   private renderPageTimeout: any;
-  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
+  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, onCallback: () => void = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
+    const doFocus = () => this.focusElementCore(element, focus, selEl, propertyName, startEdit, onCallback);
+    if (SurveyHelper.isChoiceItemPanel(element.parent)) {
+      const panel = SurveyHelper.getChoiceIItemPanel(element);
+      const item: ChoiceItem = panel["choiceItem"];
+      const q: Question = <Question>(<any>item.choiceOwner);
+      if (q.isCollapsed) q.expand();
+      this.focusElement(q, false, null, null, null, () => {
+        item.onExpandPanelAtDesign(item, {});
+        doFocus();
+      });
+    } else {
+      doFocus();
+    }
+  }
+  private focusElementCore(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, onCallback: () => void = null) {
     const elementPage = this.getPageByElement(selEl);
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
@@ -3349,9 +3365,15 @@ export class SurveyCreatorModel extends Base
           if (startEdit && !!element) {
             StringEditorConnector.get((element as Question).locTitle).activateEditor();
           }
+          onCallback && onCallback();
         }, 1);
       }, 100);
     }, 50);
+  }
+  private getChoiceItemQuestionToExpand(element: any): Question {
+    const panel = SurveyHelper.getChoiceIItemPanel(element);
+    const item: ChoiceItem = panel["choiceItem"];
+    return <Question>(<any>item.choiceOwner);
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {

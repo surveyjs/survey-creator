@@ -7,7 +7,8 @@ import {
   JsonObjectProperty,
   DragOrClickHelper,
   Helpers,
-  ITargets
+  ITargets,
+  PanelModelBase
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -17,6 +18,7 @@ import { getNextItemText } from "../utils/creator-utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
 import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
+import { SurveyHelper } from "../survey-helper";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
@@ -39,7 +41,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     public item: ItemValue
   ) {
     super();
-
+    this.item.onExpandPanelAtDesign.add(this.onExpandPanelAtDesign);
     this.updateIsNew(question, item);
     for (let key in specificChoices) {
       this.registerOnPropertyChanged(key, specificChoices[key]);
@@ -132,6 +134,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
     );
+    if (this.item) {
+      this.item.onExpandPanelAtDesign.remove(this.onExpandPanelAtDesign);
+    }
     if (this.canShowPanel()) {
       this.expandCollapseManager.disposeChoice(this.item, this);
     }
@@ -278,7 +283,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     if (this.question.isBuiltInChoice(this.item)) return false;
     let parent = this.question.parent;
     let index = 0;
-    while(!!parent && index < level && parent.name.indexOf("choicePanel") === 0) {
+    while(!!parent && index < level && SurveyHelper.isChoiceItemPanel(parent as PanelModelBase)) {
       index++;
       parent = parent.parent;
     }
@@ -301,6 +306,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   public togglePanel(): void {
     this.showPanel = !this.showPanel;
   }
+  private onExpandPanelAtDesign = () => {
+    this.showPanel = true;
+  };
   private setupShowPanel() {
     const state = this.expandCollapseManager.isChoiceExpanded(this.item);
     if (state) {
