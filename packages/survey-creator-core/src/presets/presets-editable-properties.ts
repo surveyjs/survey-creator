@@ -51,17 +51,16 @@ export class SurveyQuestionPresetPropertiesDetail {
   private properties: SurveyQuestionPresetProperties;
   private propertyGridValue: PropertyGridModel;
   private propertyGridDefaultValue: PropertyGridModel;
-  private allPropertiesNames: Array<string>;
   private obj;
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls = {};
     const obj = this.createObj();
     this.obj = obj;
     this.properties = new SurveyQuestionPresetProperties(obj, className, currentJson);
-    this.allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
+    const allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
     const objProps = {};
     Serializer.getPropertiesByObj(obj).forEach(prop => objProps[prop.name] = prop);
-    this.allPropertiesNames.forEach(name => {
+    allPropertiesNames.forEach(name => {
       const prop = objProps[name];
       if (prop) {
         const propClassName = this.getPropClassName(prop);
@@ -102,7 +101,6 @@ export class SurveyQuestionPresetPropertiesDetail {
     }
     return res;
   }
-  public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
   public getInitialJson(useDefaults: boolean) {
     const pgJSON = (useDefaults ? this.propertyGridDefaultValue : this.propertyGridValue).survey.toJSON();
     return pgJSON.pages.map(p => {
@@ -318,7 +316,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     if (!this.isModified) return undefined;
-    this.updateCurrentJson(model);
     return { definition: this.currentJson };
   }
 
@@ -375,6 +372,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
           });
         });
       }
+      if (!this.firstTimeLoading)this.updateCurrentJson(model);
     }
     // if ((<any>options.target)?.isQuestion) {
     //   if (options.name === "title") {
@@ -393,20 +391,20 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
     if (name !== this.nameSelector) return;
     this.firstTimeLoading = true;
-    this.updateCurrentJson(model);
     if (this.currentProperties) {
       this.currentProperties = undefined;
     }
     const selQuestion = this.getSelector(model);
     this.currentClassName = selQuestion.value;
-    if (!this.currentClassName) return;
-    this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
-    this.setupDefaults(model);
-    this.propertyGridSetObj(this.currentProperties.getObj());
-    const categories = this.currentProperties.getInitialJson(false);
-    model.setValue(this.nameCategories, categories);
-    const items = this.getCurrentlyHiddenItems(categories);
-    model.setValue(this.nameMatrix, items);
+    if (this.currentClassName) {
+      this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
+      this.setupDefaults(model);
+      this.propertyGridSetObj(this.currentProperties.getObj());
+      const categories = this.currentProperties.getInitialJson(false);
+      model.setValue(this.nameCategories, categories);
+      const items = this.getCurrentlyHiddenItems(categories);
+      model.setValue(this.nameMatrix, items);
+    }
     this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     //this.setupCreatorToolbox(this.propCreator);
