@@ -76,9 +76,8 @@
   </div>
   <SvComponent
     v-if="adorner.showPanel"
-    :is="'survey-panel'"
-    :element="item.panel"
-    :cssClasses="adorner.creator.survey.getCss()"
+    :is="getPanelComponentName(item.panel)"
+    v-bind="getPanelComponentData(item.panel)"
   />
 </template>
 
@@ -86,7 +85,7 @@
 import { SvComponent } from "survey-vue3-ui";
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
-import type { ItemValue, QuestionSelectBase } from "survey-core";
+import type { ItemValue, PanelModel, QuestionSelectBase, SurveyModel } from "survey-core";
 import {
   ItemValueWrapperViewModel,
   type SurveyCreatorModel,
@@ -146,4 +145,30 @@ const adorner = useCreatorModel(
 onBeforeUnmount(() => {
   stopWatch();
 });
+
+
+const getPanelComponentName = (panel: PanelModel): string => {
+  const survey = creator.value.survey;
+  if (survey) {
+    const name = survey.getElementWrapperComponentName(panel);
+    if (name) {
+      return name;
+    }
+  }
+  return "panel";
+};
+const getPanelComponentData = (panel: PanelModel): any => {
+  const survey = creator.value.survey;
+  let data: any;
+  if (survey) {
+    data = survey.getElementWrapperComponentData(panel);
+  }
+  return {
+    componentName: "survey-panel",
+    componentData: {
+      element: panel,
+      data: data,
+    },
+  };
+};
 </script>

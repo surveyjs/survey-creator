@@ -36,5 +36,6 @@
         </span>
     </div>
   </div>
-  <sv-ng-panel *ngIf="adorner.showPanel" [model]='item.panel'></sv-ng-panel>
+  <ng-template *ngIf="adorner.showPanel"
+          [component]="{ name: getPanelComponentName(item.panel), data: getPanelComponentData(item.panel) }"></ng-template>
 </ng-template>
