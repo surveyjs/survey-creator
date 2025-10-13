@@ -85,7 +85,7 @@
 import { SvComponent } from "survey-vue3-ui";
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
-import type { ItemValue, PanelModel, QuestionSelectBase, SurveyModel } from "survey-core";
+import type { ItemValue, PanelModel, QuestionSelectBase } from "survey-core";
 import {
   ItemValueWrapperViewModel,
   type SurveyCreatorModel,
