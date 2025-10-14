@@ -43,6 +43,7 @@
     background: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
     padding-top: var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2));
     max-height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
+    box-sizing: content-box;
 
     & > .sv-popup__container {
       width: 100vw;
