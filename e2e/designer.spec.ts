@@ -34,4 +34,42 @@ test.describe(title, () => {
     expect(await page.locator(".svc-page").first().getAttribute("data-sv-drop-target-page")).toBe("test2");
     expect(await page.locator(".svc-page").first().getAttribute("data-sv-drop-target-survey-element")).toBe("test2");
   });
+  test("Check title actions on design surface for title location = left", async ({ page }) => {
+    await page.setViewportSize({ width: 1000, height: 800 });
+    const testJson = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "text",
+              name: "Action Test",
+              titleLocation: "left",
+            },
+          ],
+        },
+      ],
+    };
+    await page.evaluate((json) => {
+      window["creator"].JSON = {};
+
+      window["creator"].onSurveyInstanceSetupHandlers.add((_, options) => {
+        if (options.area === "designer-tab" || options.area === "preview-tab") {
+          options.survey.onGetQuestionTitleActions.add((_, options) => {
+            options.titleActions = [
+              {
+                tooltip: "Test action",
+                iconName: "icon-toolbox-customquestion-24x24",
+                action: () => {
+                },
+              },
+            ];
+          });
+        }
+      });
+
+      window["creator"].JSON = json;
+    }, testJson);
+    await expect(page.getByRole("button", { name: "Test action" })).toBeVisible();
+  });
 });
