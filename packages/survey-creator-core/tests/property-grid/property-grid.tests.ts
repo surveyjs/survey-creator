@@ -2,7 +2,8 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
   PropertyGridEditorBoolean,
-  IPropertyGridEditor
+  IPropertyGridEditor,
+  PropertyGridModel
 } from "../../src/property-grid";
 import {
   Base,
@@ -3980,4 +3981,15 @@ test("The property is not translated for the custom question, Bug#7118", () => {
   expect(questionShowPlaceHolder.title).toBe("Show a placeholder within signature area");
 
   ComponentCollection.Instance.clear();
+});
+test("The property is not translated for the custom question, Bug#7202", () => {
+  Serializer.addProperty("question", { name: "testProp", category: "myTestCategory", readOnly: true });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+  propertyGrid.selectProperty("testProp", true);
+  expect(propertyGrid.survey.currentPage.title).toBe("myTestCategory");
+
+  Serializer.removeProperty("question", "testProp");
 });

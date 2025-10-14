@@ -10,10 +10,16 @@ import {
   PageModel,
   PanelModel,
   PanelModelBase,
+  settings
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
 import { wrapTextByCurlyBraces } from "./utils/creator-utils";
+
+export function getItemValueSeparator(): string {
+  const res = settings.itemValueSeparator;
+  return !!res ? res : "|";
+}
 
 export enum ObjType {
   Unknown = "unknown",
@@ -294,7 +300,7 @@ export class SurveyHelper {
       .map((row) =>
         row.cells
           .map((cell) => cell.value || "")
-          .join(ItemValue.Separator)
+          .join(getItemValueSeparator())
           .replace(/\|$/, "")
       )
       .join("\n");
@@ -308,7 +314,7 @@ export class SurveyHelper {
     items.forEach((item) => {
       if (text) text += "\n";
       text += item.value;
-      if (item.pureText) text += ItemValue.Separator + item.pureText;
+      if (item.pureText) text += getItemValueSeparator() + item.pureText;
     });
 
     return text;
@@ -325,7 +331,7 @@ export class SurveyHelper {
     var texts = text.split("\n");
     for (var i = 0; i < texts.length; i++) {
       if (!texts[i]) continue;
-      var elements = texts[i].split(ItemValue.Separator);
+      var elements = texts[i].split(getItemValueSeparator());
       var valueItem = Serializer.createClass(className);
       properties.forEach((p, i) => {
         valueItem[p.name] = elements[i];
