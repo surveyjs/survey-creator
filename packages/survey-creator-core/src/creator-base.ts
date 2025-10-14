@@ -3317,7 +3317,7 @@ export class SurveyCreatorModel extends Base
       const q: Question = <Question>(<any>item.choiceOwner);
       if (q.isCollapsed) q.expand();
       this.focusElement(q, false, null, null, null, () => {
-        item.onExpandPanelAtDesign(item, {});
+        item.onExpandPanelAtDesign.fire(item, {});
         doFocus();
       });
     } else {
