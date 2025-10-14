@@ -98,7 +98,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     const resetCurrentAction = presetsList.getActionById("reset-current");
     presetsList.selectedItem = presetsList.actions[0];
     this.model.model.onCurrentPageChanged.add((_, options) => {
-      presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo];
+      presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo + 1];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(presetsList.selectedItem.id); };
     });
