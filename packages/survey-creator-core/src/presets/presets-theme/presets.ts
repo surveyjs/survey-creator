@@ -180,6 +180,13 @@ export var presetsCss = {
     remainingCharacterCounter: "sps-remaining-character-counter",
     onError: "sps-input--error"
   },
+  comment: {
+    root: "sps-input sps-comment",
+    content: "sps-question__content sps-comment__content",
+    remainingCharacterCounter: "sps-remaining-character-counter",
+    small: "sps-row__question--small",
+    onError: "sps-input--error"
+  },
   dropdown: {
     root: "sps-selectbase",
     popup: "sps-dropdown-popup svc-creator-popup",

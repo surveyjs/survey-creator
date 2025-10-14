@@ -144,6 +144,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         new Action({
           id: "remove-custom-item",
           title: getLocString("presets.toolbox.deleteCustomItem"),
+          css: "sps-list__item--alert",
           needSeparator: true,
           action: () => {
             this.ejectRowData(question, row, true);

@@ -276,7 +276,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       }
       const subitemsAction = new Action({
         id: "move-as-subitem",
-        title: getLocString("presets.toolbox.moveAsSubitem")
+        title: getLocString("presets.toolbox.moveAsSubitem"),
+        needSeparator: true
       });
       this.setSubitemsToAction(subitemsAction, subItems);
       actions.push(subitemsAction);

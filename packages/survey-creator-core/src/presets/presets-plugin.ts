@@ -50,11 +50,13 @@ export class TabPresetsPlugin implements ICreatorPlugin {
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), css: "sps-list__item--positive", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
+      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
+      { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.model?.resetToDefaults("page_languages"); } },
-      { id: "reset", title: getLocString("presets.plugin.resetAll"), action: () => { this.model?.resetToDefaults(); } },
+      { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.model?.resetToDefaults("page_languages"); } },
+      { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
     ];
     let settingsAction;
     let presetsList;
@@ -76,10 +78,14 @@ export class TabPresetsPlugin implements ICreatorPlugin {
         }
       }
     }, {
-      items: [...presets, ...tools],
+      items: [
+        { id: "creator-presets", title: getLocString("presets.plugin.creatorPresets"), css: "sps-list__item--label", enabled: false },
+        ...presets,
+        ...tools],
       showPointer: false,
       verticalPosition: "top",
       horizontalPosition: "center",
+      searchEnabled: false,
       cssClass: "sps-popup-menu sps-popup-menu--always-on-top",
       cssClasses: listComponentCss,
       onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
