@@ -241,7 +241,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             this.moveToSubitems(model, question, row, i.name, true);
           }
         }));
-        catAction.setSubItems({ items: itemsActions, cssClasses: listComponentCss });
+        this.setSubitemsToAction(catAction, itemsActions);
       }
       return catAction;
     }
@@ -278,7 +278,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         id: "move-as-subitem",
         title: getLocString("presets.toolbox.moveAsSubitem")
       });
-      subitemsAction.setSubItems({ items: subItems, cssClasses: listComponentCss });
+      this.setSubitemsToAction(subitemsAction, subItems);
       actions.push(subitemsAction);
     }
 

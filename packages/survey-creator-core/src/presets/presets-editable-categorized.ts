@@ -56,6 +56,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     return true;
   }
 
+  protected setSubitemsToAction(action: Action, items: Action[]) {
+    action.setSubItems({ items: items, cssClasses: listComponentCss });
+    action.markerIconName = "icon-chevronright-24x24";
+  }
+
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const categories = this.getQuestionCategories(model).value;
     const actions = [] as IAction[];
@@ -113,8 +118,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         id: "move-to-categories",
         title: getLocString("presets.toolbox.moveToCategory")
       });
-      catGroup.setSubItems({ items: moveToCategories, cssClasses: listComponentCss });
-      catGroup.markerIconName = "icon-chevronright-24x24";
+      this.setSubitemsToAction(catGroup, moveToCategories);
       actions.push(catGroup);
     } else {
       actions.push(...moveToCategories);
