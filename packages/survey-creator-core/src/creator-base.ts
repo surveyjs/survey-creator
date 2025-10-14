@@ -3311,7 +3311,7 @@ export class SurveyCreatorModel extends Base
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
     const doFocus = () => this.focusElementCore(element, focus, selEl, propertyName, startEdit, onCallback);
-    if (SurveyHelper.isChoiceItemPanel(element.parent)) {
+    if (element && SurveyHelper.isChoiceItemPanel(element.parent)) {
       const panel = SurveyHelper.getChoiceIItemPanel(element);
       const item: ChoiceItem = panel["choiceItem"];
       const q: Question = <Question>(<any>item.choiceOwner);
