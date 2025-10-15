@@ -45,7 +45,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
           name: this.mainPanelName,
           elements: [
             this.createItemsMatrixJSON({
-              title: getLocString("presets.tabs.tabs"),
+              title: getLocString("presets.tabs.items"),
               name: this.nameItems
             }),
             this.createItemsMatrixJSON({

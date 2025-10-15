@@ -1,4 +1,4 @@
-import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry, Question } from "survey-core";
+import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry, Question, ComputedUpdater } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
 export class CreatorPresetEditableList extends CreatorPresetEditableBase {
@@ -68,6 +68,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     return {
       id: "reset-to-default",
       iconName: "icon-reset",
+      tooltip: getLocString("presets.items.restoreToDefault"),
       location: "end",
       visibleIndex: 15,
       action: action
@@ -78,6 +79,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     return {
       id: "edit-item",
       iconName: "icon-edit",
+      tooltip: getLocString("presets.items.edit"),
       location: "end",
       visibleIndex: 13,
       action: () => { this.editItem(model, creator, question, row); }
@@ -99,6 +101,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       if (a.id == "show-detail") {
         a.location = "end";
         a.iconName = "icon-expand-24x24";
+        a.title = <any>new ComputedUpdater(() => row.isDetailPanelShowing ? getLocString("presets.items.collapse") : getLocString("presets.items.expand"));
+        a.tooltip = getLocString("presets.items.expand");
         a.visibleIndex = 10;
         a.visible = allowExpand;
       }
@@ -107,6 +111,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         a.component = "sv-action-bar-item";
         a.action = () => question.removeRowUI(row);
         a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
+        a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.add");
       }
     });
   }
@@ -227,7 +232,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.toolbox.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model))
+        description: getLocString("presets.items.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model))
       });
     }
   }
