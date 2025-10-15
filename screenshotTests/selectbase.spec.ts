@@ -37,6 +37,9 @@ test.describe(title, () => {
     await setOptions(page, {
       maxChoiceContentNestingLevel: 2
     });
+    await page.evaluate(() => {
+      (window as any).creator.onNotify.add(()=>{});
+    });
     await setJSON(page, json);
     const choiceExpandButton = page.locator(".svc-choice-elements-button").first();
     const addQuestion = page.getByLabel("question1").getByText("Add Question");
