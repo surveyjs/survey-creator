@@ -849,7 +849,7 @@ export class PropertyGridModel {
         panel.collapse();
       }
     }
-    if (focus) {
+    if (focus && !question.isReadOnly) {
       question.focus();
     } else {
       if (this.showOneCategoryInPropertyGrid) {
@@ -1929,13 +1929,10 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     if (prop.type === "dropdown") return false;
     if (prop.type === "buttongroup") return true;
     if (this.isLocaleProp(prop)) return false;
-    if (
-      !this.canRenderAsButtonGroup ||
-      !choices ||
-      choices.length == 0 ||
-      choices.length > 4
-    )
-      return false;
+    if (!this.canRenderAsButtonGroup) return false;
+    if (!choices || !Array.isArray(choices)) return false;
+    if (choices.length == 0 || choices.length > 4) return false;
+
     var charCount = 0;
     for (var i = 0; i < choices.length; i++) {
       var text = this.getLocalizedText(

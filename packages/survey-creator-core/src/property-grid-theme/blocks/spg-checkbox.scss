@@ -3,6 +3,10 @@
 .spg-checkbox {
   cursor: pointer;
   margin-top: var(--ctr-checkbox-list-gap-vertical, var(--sjs-spacing-x2));
+
+  &.sd-checkbox--label-rendered {
+    gap: 0;
+  }
 }
 
 .spg-checkbox--disabled {
