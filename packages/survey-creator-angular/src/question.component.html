@@ -3,9 +3,9 @@
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
     <div *ngIf="adorner.showHiddenTitle" [class]="adorner.cssCollapsedHiddenHeader">
-      <sv-ng-element-title *ngIf="!!model.hasTitle" [element]="model"></sv-ng-element-title>
-        <div *ngIf="!model.hasTitle" [class]="adorner.cssCollapsedHiddenTitle">
-          <span class="svc-fake-title">{{model.name}}</span>
+      <sv-ng-element-title *ngIf="!!model.hasTitle" [element]="model" [renderActions]="false"></sv-ng-element-title>
+      <div *ngIf="!model.hasTitle" [class]="adorner.cssCollapsedHiddenTitle">
+        <span class="svc-fake-title">{{model.name}}</span>
       </div>
     </div>
     <div [class]="adorner.css()" [key2click]="{ disableTabStop: true }" (click)="adorner.select(adorner, $event)">
