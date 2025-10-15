@@ -1,5 +1,5 @@
 import { getLocaleStrings } from "survey-creator-core";
-export const enStrings = {
+export const faStrings = {
   languages: {
     title: "Languages",
     navigationTitle: "Languages",
@@ -114,5 +114,5 @@ export const enStrings = {
     resetToDefaults: "Reset {0} to defaults"
   }
 };
-const locale = getLocaleStrings("en");
-locale.presets = enStrings;
+const locale = getLocaleStrings("fa");
+locale.presets = faStrings;

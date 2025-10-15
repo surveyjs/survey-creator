@@ -10,9 +10,6 @@
     "version": "0.0.1",
     "scripts": {
         "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
-        "build:presets": "npm run build:presets --prefix packages/survey-creator-vue && npm run build:presets --prefix packages/survey-creator-angular",
-        "build:presets:dev": "npm run build:presets:dev --prefix packages/survey-creator-vue && npm run build:presets:dev --prefix packages/survey-creator-angular",
-        "watch:presets": "concurrently \"npm run watch:presets --prefix packages/survey-creator-vue\" \"npm run watch:presets --prefix packages/survey-creator-angular\"",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings=0",
         "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings=0 --fix",
         "pre-push-check": "npm run lint",
