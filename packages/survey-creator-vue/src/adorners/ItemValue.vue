@@ -59,14 +59,33 @@
     <div class="svc-item-value__item" @click="adorner.select(adorner, $event)">
       <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
+    <div v-if="adorner.canShowPanel()" class="svc-item-value-controls svc-choice-elements-button-container">
+        <span
+            role="button"
+            class="svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button"
+            @click="adorner.togglePanel()"
+            v-key2click
+          >
+            <SvComponent
+              :is="'sv-svg-icon'"
+              :iconName="adorner.showPanel ? 'icon-collapsepanel-16x16' : 'icon-expandpanel-16x16'"
+              :size="'auto'"
+            ></SvComponent>
+          </span>
+    </div>
   </div>
+  <SvComponent
+    v-if="adorner.showPanel"
+    :is="getPanelComponentName(item.panel)"
+    v-bind="getPanelComponentData(item.panel)"
+  />
 </template>
 
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
-import type { ItemValue, QuestionSelectBase } from "survey-core";
+import type { ItemValue, PanelModel, QuestionSelectBase } from "survey-core";
 import {
   ItemValueWrapperViewModel,
   type SurveyCreatorModel,
@@ -126,4 +145,30 @@ const adorner = useCreatorModel(
 onBeforeUnmount(() => {
   stopWatch();
 });
+
+
+const getPanelComponentName = (panel: PanelModel): string => {
+  const survey = creator.value.survey;
+  if (survey) {
+    const name = survey.getElementWrapperComponentName(panel);
+    if (name) {
+      return name;
+    }
+  }
+  return "panel";
+};
+const getPanelComponentData = (panel: PanelModel): any => {
+  const survey = creator.value.survey;
+  let data: any;
+  if (survey) {
+    data = survey.getElementWrapperComponentData(panel);
+  }
+  return {
+    componentName: "survey-panel",
+    componentData: {
+      element: panel,
+      data: data,
+    },
+  };
+};
 </script>

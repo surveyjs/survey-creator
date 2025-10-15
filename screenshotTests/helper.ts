@@ -30,6 +30,12 @@ export const setJSON = async (page, json) => {
   }, json);
 };
 
+export const setOptions = async (page, options) => {
+  await page.evaluate((options) => {
+    (window as any).creator.setOptions(options);
+  }, options);
+};
+
 export const setSurveyProp = async (page, propName, value) => {
   await page.evaluate(([propName, value]) => {
     (window as any).creator.survey[propName] = value;

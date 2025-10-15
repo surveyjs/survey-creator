@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON, expect } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect, setOptions } from "./helper";
 
 const title = "SelectBase Screenshot";
 
@@ -75,5 +75,47 @@ test.describe(title, () => {
     await page.locator(".svc-string-editor").getByText("Item 1").click();
     await page.locator(".sv-string-editor").getByText("Item 1").fill("JavaScript Form Builder Libraries. Building your own form management system has never been easier. Automate forms workflow and retain full ownership of respondent data.");
     await compareScreenshot(page, question, "dropdown-long-item-text.png");
+  });
+
+  test("Choices Elements feature #7192", async ({ page }) => {
+    await page.setViewportSize({ width: 1000, height: 800 });
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                {
+                  "value": "Item 2",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "name": "subitem2"
+                    }
+                  ]
+                },
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setOptions(page, {
+      maxChoiceContentNestingLevel: 2
+    });
+    await page.evaluate(() => {
+      (window as any).creator.onNotify.add(()=>{});
+    });
+    await setJSON(page, json);
+    const choiceExpandButton = page.locator(".svc-choice-elements-button").first();
+    const addQuestion = page.getByLabel("question1").getByText("Add Question");
+
+    await choiceExpandButton.click();
+    await addQuestion.click();
+    await compareScreenshot(page, ".sd-element__content", "choices-elements-designe-surface.png");
   });
 });
