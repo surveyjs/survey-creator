@@ -9,7 +9,8 @@ import {
   SvgRegistry,
   addIconsToThemeSet,
   SvgThemeSets,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  ChoiceItem
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -2239,6 +2240,7 @@ export class SurveyCreatorModel extends Base
    * @returns true if initial survey doesn't have any elements or properties
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
+    this.expandCollapseManager.clearExpandChoicesStates();
     if (!json) {
       json = { "headerView": "advanced" };
     }
@@ -2402,11 +2404,13 @@ export class SurveyCreatorModel extends Base
     this.dragDropChoices = new DragDropChoices(null, this);
     this.dragDropChoices.onDragStart.add((sender, options) => {
       this.startUndoRedoTransaction("drag drop");
+      this.expandCollapseManager.collapseChoices((<any>this.dragDropChoices).parentElement.choices);
     });
     this.dragDropChoices.onDragEnd.add((sender, options) => {
       this.selectElement(options.draggedElement, undefined, false);
     });
     this.dragDropChoices.onDragClear.add((sender, options) => {
+      this.expandCollapseManager.expandChoices();
       this.stopUndoRedoTransaction();
     });
   }
@@ -3303,9 +3307,24 @@ export class SurveyCreatorModel extends Base
   private currentFocusInterval: any;
   private currentFocusTimeout: any;
   private renderPageTimeout: any;
-  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
+  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, onCallback: () => void = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
+    const doFocus = () => this.focusElementCore(element, focus, selEl, propertyName, startEdit, onCallback);
+    if (element && SurveyHelper.isChoiceItemPanel(element.parent)) {
+      const panel = SurveyHelper.getChoiceIItemPanel(element);
+      const item: ChoiceItem = panel["choiceItem"];
+      const q: Question = <Question>(<any>item.choiceOwner);
+      if (q.isCollapsed) q.expand();
+      this.focusElement(q, false, null, null, null, () => {
+        item.onExpandPanelAtDesign.fire(item, {});
+        doFocus();
+      });
+    } else {
+      doFocus();
+    }
+  }
+  private focusElementCore(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, onCallback: () => void = null) {
     const elementPage = this.getPageByElement(selEl);
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
@@ -3346,9 +3365,15 @@ export class SurveyCreatorModel extends Base
           if (startEdit && !!element) {
             StringEditorConnector.get((element as Question).locTitle).activateEditor();
           }
+          onCallback && onCallback();
         }, 1);
       }, 100);
     }, 50);
+  }
+  private getChoiceItemQuestionToExpand(element: any): Question {
+    const panel = SurveyHelper.getChoiceIItemPanel(element);
+    const item: ChoiceItem = panel["choiceItem"];
+    return <Question>(<any>item.choiceOwner);
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
@@ -4706,6 +4731,7 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+  public maxChoiceContentNestingLevel: number = 0;
 
   /**
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
