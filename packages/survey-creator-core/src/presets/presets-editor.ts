@@ -148,6 +148,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onGetQuestionTitleActions.add((_, options) => {
       editablePresets.forEach(item => {
         if (options.question.name == item.getNavigationElementName()) {
+          options.question.getTitleToolbar().isResponsivenessDisabled = true;
           options.actions = model.navigationBar.actions;
         }
       });
@@ -155,6 +156,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onGetPanelTitleActions.add((_, options) => {
       editablePresets.forEach(item => {
         if (options.panel.name == item.getNavigationElementName()) {
+          options.panel.getTitleToolbar().isResponsivenessDisabled = true;
           options.actions = model.navigationBar.actions;
         }
       });
