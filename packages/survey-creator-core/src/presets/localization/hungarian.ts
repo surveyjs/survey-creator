@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const huStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "Nyelvek",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Nyelvek",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Válassza ki a felmérés készítőjének felhasználói felületének nyelvét és a célt\na konfigurált felmérés nyelvei.",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "Alkotói felhasználói felület nyelve",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "A felmérés nyelvei",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Írja be a kereséshez...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "Felmérés nyelvnevének fordítása angolra"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "Lapok konfigurálása",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Lapfülek",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Válassza ki a megjeleníteni kívánt lapokat, rendezze át őket, módosítsa a címüket,\nés válassza ki azt a lapot, amely alapértelmezés szerint aktív lesz.",
+    // [Auto-translated] "Visible tabs"
+    items: "Látható lapok",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "Rejtett lapok",
+    // [Auto-translated] "Default tab"
+    defaultTab: "Alapértelmezett lap",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Húzzon egy elemet ebből az oszlopból balra - az látható lesz a Lapok panelen. Az elemeket a plusz (+) és a mínusz (-) gombokkal is áthelyezheti.",
+    // [Auto-translated] "Name"
+    name: "Név",
+    // [Auto-translated] "Title"
+    titleField: "Cím",
+    // [Auto-translated] "Icon name"
+    iconName: "Ikon neve"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Az Eszköztár beállítása",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Szerszámosláda",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Válassza ki a megjeleníteni kívánt eszköztár elemeket, csoportosítsa őket kategóriákba, \nNevezze át őket, és szükség esetén módosítsa a sorrendjüket.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Szerszámosláda",
+    // [Auto-translated] "Categories"
+    categories: "Kategóriák",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "Rejtett eszköztár elemek",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Csoportosítás engedélyezése",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Kategóriacímek megjelenítése",
+    // [Auto-translated] "Name"
+    categoryName: "Név",
+    // [Auto-translated] "Title"
+    categoryTitle: "Cím",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Elemleírás",
+    // [Auto-translated] "Icon name"
+    iconName: "Ikon neve",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "JSON-objektum, amelyet akkor kell alkalmazni, amikor a felhasználók kiválasztják ezt az eszközkészlet-elemet",
+    // [Auto-translated] "Subcategories"
+    subcategories: "Alkategóriák",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "Engedélyezze a kérdés alelemeit...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Áthelyezés alelemként a...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Hozzáadás az eszköztárhoz",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Egyéni elem törlése",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Húzzon egy elemet ebből az oszlopból balra - az látható lesz az Eszköztár panelen. Az elemeket a plusz (+) és a mínusz (-) gombokkal is áthelyezheti.",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Új kategória",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Új elem",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Új elem hozzáadása",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Új alelem hozzáadása",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Nincsenek elemek",
+    // [Auto-translated] "New item in"
+    newItem: "Új elem"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "A tulajdonságrács testreszabása",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Tulajdonságrács",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "Jelöljön ki egy elemet a tulajdonságrácsban elérhető beállítások testreszabásához.",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "Válasszon ki egy elemet a tulajdonságrácsban elérhető beállítások testreszabásához",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Tulajdonságrács",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "Rendezetlen elemek",
+    // [Auto-translated] "Name"
+    categoryName: "Név",
+    // [Auto-translated] "Title"
+    categoryTitle: "Cím",
+    // [Auto-translated] "Icon name"
+    iconName: "Ikon neve",
+    // [Auto-translated] "Name"
+    name: "Név",
+    // [Auto-translated] "Title"
+    titleField: "Cím",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "Segítő szöveg",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Húzzon egy elemet ebből az oszlopból balra - az látható lesz a Lapok panelen. Az elemeket a plusz (+) és a mínusz (-) gombokkal is áthelyezheti.",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "Egyéni kategória hozzáadása"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Új elem hozzáadása",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Új alelem hozzáadása",
+    // [Auto-translated] "New item in"
+    newItem: "Új elem",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Új kategória",
+    // [Auto-translated] "New category in"
+    newCategory: "Új kategória",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Áthelyezés a kategóriába...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "Áthelyezés új kategóriába...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Kategóriák",
+    // [Auto-translated] "Move To..."
+    moveTo: "Áthelyezés...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Eltávolítás a {0}",
+    // [Auto-translated] "More"
+    more: "Több",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Visszaad",
+    // [Auto-translated] "Edit"
+    edit: "Szerkeszt",
+    // [Auto-translated] "Expand"
+    expand: "Kibővít",
+    // [Auto-translated] "Collapse"
+    collapse: "Összeomlás",
+    // [Auto-translated] "Remove"
+    remove: "Eltávolít",
+    // [Auto-translated] "Add"
+    add: "Hozzáad",
+    // [Auto-translated] "Delete"
+    delete: "Töröl"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "Alkotói készletek",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "Előre beállított JSON:",
+    // [Auto-translated] "Copy"
+    copy: "Másolat",
+    // [Auto-translated] "Download"
+    download: "Letöltés",
+    // [Auto-translated] "Load"
+    load: "Rakomány",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Mentés és kilépés",
+    // [Auto-translated] "Back"
+    back: "Hát",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "Visszaállítás az alapértelmezettre",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Minden beállítás visszaáll az alapértelmezettre",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "alapértelmezettre cserélve",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Az elem visszaállt az alapértelmezettre",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "A kategória visszaállítva az alapértelmezettre",
+    // [Auto-translated] "Edit"
+    edit: "Szerkeszt",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Mentés és kilépés",
+    // [Auto-translated] "Back"
+    pagePrevText: "Hát"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "Készletek",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Alkotói készletek",
+    // [Auto-translated] "Save & Exit"
+    save: "Mentés és kilépés",
+    // [Auto-translated] "File"
+    file: "Fájl",
+    // [Auto-translated] "Import"
+    import: "Importál",
+    // [Auto-translated] "Export"
+    export: "Kivitel",
+    // [Auto-translated] "Edit"
+    edit: "Szerkeszt",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "Nyelvek visszaállítása alapértelmezettre",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Az összes módosítás visszaállítása",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "Állítsa vissza {0} az alapértelmezett értékekre"
   }
 };
 const locale = getLocaleStrings("hu");

@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const zhTwStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "語言",
+    // [Auto-translated] "Languages"
+    navigationTitle: "語言",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "選取調查問卷建立者 UI 和目標的語言\n正在配置的調查問卷的語言。",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "創作者 UI 語言",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "調查語言",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "輸入以搜尋...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "將調查問卷語言名稱翻譯成英文"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "設定索引標籤",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "標籤",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "選擇要顯示的選項卡，重新排序它們，更改它們的標題，\n，然後選擇預設會處於作用中的索引標籤。",
+    // [Auto-translated] "Visible tabs"
+    items: "可見標籤",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "隱藏標籤",
+    // [Auto-translated] "Default tab"
+    defaultTab: "預設索引標籤",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "將項目從此欄拖曳到左側 - 它將顯示在「標籤」面板中。您還可以使用加號 （+） 和減號 （-） 按鈕移動項目。",
+    // [Auto-translated] "Name"
+    name: "名字",
+    // [Auto-translated] "Title"
+    titleField: "名",
+    // [Auto-translated] "Icon name"
+    iconName: "圖示名稱"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "設定工具箱",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "工具箱",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "選擇要顯示的工具箱項目，將它們分組為類別，\n重新命名它們，並視需要變更其順序。",
+    // [Auto-translated] "Toolbox"
+    toolbox: "工具箱",
+    // [Auto-translated] "Categories"
+    categories: "類別",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "隱藏的工具箱項目",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "啟用分組",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "顯示類別標題",
+    // [Auto-translated] "Name"
+    categoryName: "名字",
+    // [Auto-translated] "Title"
+    categoryTitle: "名",
+    // [Auto-translated] "Tooltip"
+    tooltip: "工具提示",
+    // [Auto-translated] "Icon name"
+    iconName: "圖示名稱",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "當使用者選取此工具箱項目時要套用的 JSON 物件",
+    // [Auto-translated] "Subcategories"
+    subcategories: "子類別",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "啟用此問題的子項目...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "作為子項目移動到...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "新增至工具箱",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "刪除自訂項目",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "將項目從此欄拖到左側 - 它將顯示在“工具箱”面板中。您還可以使用加號 （+） 和減號 （-） 按鈕移動項目。",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "新類別",
+    // [Auto-translated] "New Item"
+    addCustomItem: "新項目",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "新增項目",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "新增子項目",
+    // [Auto-translated] "There are no items"
+    noRowsText: "沒有項目",
+    // [Auto-translated] "New item in"
+    newItem: "新項目"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "自訂屬性格線",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "屬性格線",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "選取元素以自訂其在「性質格線」中可用的設定。",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "選取元素以自訂其在「性質格線」中可用的設定",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "屬性格線",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "未排序的項目",
+    // [Auto-translated] "Name"
+    categoryName: "名字",
+    // [Auto-translated] "Title"
+    categoryTitle: "名",
+    // [Auto-translated] "Icon name"
+    iconName: "圖示名稱",
+    // [Auto-translated] "Name"
+    name: "名字",
+    // [Auto-translated] "Title"
+    titleField: "名",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "輔助文字",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "將項目從此欄拖曳到左側 - 它將顯示在「標籤」面板中。您還可以使用加號 （+） 和減號 （-） 按鈕移動項目。",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "新增自訂類別"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "新增項目",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "新增子項目",
+    // [Auto-translated] "New item in"
+    newItem: "新項目",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "新類別",
+    // [Auto-translated] "New category in"
+    newCategory: "中的新類別",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "移至分類...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "移至新類別...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "類別",
+    // [Auto-translated] "Move To..."
+    moveTo: "移至...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "從{0}中刪除",
+    // [Auto-translated] "More"
+    more: "更",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "匡",
+    // [Auto-translated] "Edit"
+    edit: "編輯",
+    // [Auto-translated] "Expand"
+    expand: "脹",
+    // [Auto-translated] "Collapse"
+    collapse: "塌",
+    // [Auto-translated] "Remove"
+    remove: "除",
+    // [Auto-translated] "Add"
+    add: "加",
+    // [Auto-translated] "Delete"
+    delete: "刪除"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "創作者預設集",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "預設 JSON：",
+    // [Auto-translated] "Copy"
+    copy: "抄",
+    // [Auto-translated] "Download"
+    download: "下載",
+    // [Auto-translated] "Load"
+    load: "裝",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "儲存並退出",
+    // [Auto-translated] "Back"
+    back: "後面",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "重設為預設值",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "所有設定都還原為預設值",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "重置為預設值",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "項目還原為預設值",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "類別還原為預設值",
+    // [Auto-translated] "Edit"
+    edit: "編輯",
+    // [Auto-translated] "Save & Exit"
+    completeText: "儲存並退出",
+    // [Auto-translated] "Back"
+    pagePrevText: "後面"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "預設集",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "創作者預設集",
+    // [Auto-translated] "Save & Exit"
+    save: "儲存並退出",
+    // [Auto-translated] "File"
+    file: "檔案",
+    // [Auto-translated] "Import"
+    import: "進口",
+    // [Auto-translated] "Export"
+    export: "出口",
+    // [Auto-translated] "Edit"
+    edit: "編輯",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "將語言重設為預設值",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "重設所有變更",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "將{0}重設為預設值"
   }
 };
 const locale = getLocaleStrings("zh-tw");

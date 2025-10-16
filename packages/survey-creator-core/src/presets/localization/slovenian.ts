@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const slStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "Jezikih",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Jezikih",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Izberite jezik uporabniškega vmesnika in cilja ustvarjalca ankete\njezikov za anketo, ki se konfigurira.",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "Jezik uporabniškega vmesnika ustvarjalca",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "Anketni jeziki",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Vnesite za iskanje ...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "Prevajanje imen jezikov ankete v angleščino"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "Konfiguracija zavihkov",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Jezički",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Izberite zavihke, ki jih želite prikazati, spremenite njihov vrstni red, spremenite njihove naslove,\nin izberite zavihek, ki bo privzeto aktiven.",
+    // [Auto-translated] "Visible tabs"
+    items: "Vidni zavihki",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "Skriti zavihki",
+    // [Auto-translated] "Default tab"
+    defaultTab: "Privzeti zavihek",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Povlecite element iz tega stolpca v levo - prikaže se na plošči Zavihki. Predmete lahko premikate tudi z gumboma plus (+) in minus (-).",
+    // [Auto-translated] "Name"
+    name: "Ime",
+    // [Auto-translated] "Title"
+    titleField: "Naslov",
+    // [Auto-translated] "Icon name"
+    iconName: "Ime ikone"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Nastavitev orodja Toolbox",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Orodjarni",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Izberite elemente orodja, ki jih želite prikazati, jih združite v kategorije, \npreimenujte jih in po potrebi spremenite njihov vrstni red.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Orodjarni",
+    // [Auto-translated] "Categories"
+    categories: "Kategorije",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "Skriti elementi zbirke orodij",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Omogočanje združevanja v skupine",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Pokaži naslove kategorij",
+    // [Auto-translated] "Name"
+    categoryName: "Ime",
+    // [Auto-translated] "Title"
+    categoryTitle: "Naslov",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Opis orodja",
+    // [Auto-translated] "Icon name"
+    iconName: "Ime ikone",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "Predmet JSON, ki se uporabi, ko uporabniki izberejo ta element zbirke orodij",
+    // [Auto-translated] "Subcategories"
+    subcategories: "Podkategorije",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "Omogočite podelemente za to vprašanje ...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Premakni kot podelement v...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Dodaj v zbirko orodij",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Izbriši element po meri",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Povlecite element iz tega stolpca v levo - prikazan bo na plošči Toolbox. Predmete lahko premikate tudi z gumboma plus (+) in minus (-).",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nova kategorija",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Nova postavka",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Dodajanje novega elementa",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Dodajanje novega podelementa",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Ni elementov",
+    // [Auto-translated] "New item in"
+    newItem: "Nov izdelek v"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "Prilagajanje mreže lastnosti",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Mreža lastnosti",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "Izberite element, da prilagodite njegove nastavitve, ki so na voljo v mreži lastnosti.",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "Izberite element, da prilagodite njegove nastavitve, ki so na voljo v mreži lastnosti",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Mreža lastnosti",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "Nerazvrščeni elementi",
+    // [Auto-translated] "Name"
+    categoryName: "Ime",
+    // [Auto-translated] "Title"
+    categoryTitle: "Naslov",
+    // [Auto-translated] "Icon name"
+    iconName: "Ime ikone",
+    // [Auto-translated] "Name"
+    name: "Ime",
+    // [Auto-translated] "Title"
+    titleField: "Naslov",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "Pomožno besedilo",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Povlecite element iz tega stolpca v levo - prikaže se na plošči Zavihki. Predmete lahko premikate tudi z gumboma plus (+) in minus (-).",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "Dodaj kategorijo po meri"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Dodajanje novega elementa",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Dodajanje novega podelementa",
+    // [Auto-translated] "New item in"
+    newItem: "Nov izdelek v",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nova kategorija",
+    // [Auto-translated] "New category in"
+    newCategory: "Nova kategorija v",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Premakni se v kategorijo ...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "Premakni se v novo kategorijo ...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Kategorije",
+    // [Auto-translated] "Move To..."
+    moveTo: "Premakni se v...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Odstrani iz {0}",
+    // [Auto-translated] "More"
+    more: "Več",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Obnoviti",
+    // [Auto-translated] "Edit"
+    edit: "Urediti",
+    // [Auto-translated] "Expand"
+    expand: "Razširiti",
+    // [Auto-translated] "Collapse"
+    collapse: "Propad",
+    // [Auto-translated] "Remove"
+    remove: "Odstrani",
+    // [Auto-translated] "Add"
+    add: "Dodati",
+    // [Auto-translated] "Delete"
+    delete: "Izbrisati"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "Prednastavitve ustvarjalca",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "Prednastavljeni JSON:",
+    // [Auto-translated] "Copy"
+    copy: "Kopirati",
+    // [Auto-translated] "Download"
+    download: "Prenesti",
+    // [Auto-translated] "Load"
+    load: "Tovor",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Shranjevanje in zahod",
+    // [Auto-translated] "Back"
+    back: "Hrbet",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "Ponastavi na privzete nastavitve",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Vse nastavitve so bile obnovljene na privzete",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "prevrnjeno na privzeto",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Element je bil obnovljen na privzete nastavitve",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "Kategorija je bila obnovljena na privzeto",
+    // [Auto-translated] "Edit"
+    edit: "Urediti",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Shranjevanje in zahod",
+    // [Auto-translated] "Back"
+    pagePrevText: "Hrbet"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "Prednastavitve",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Prednastavitve ustvarjalca",
+    // [Auto-translated] "Save & Exit"
+    save: "Shranjevanje in zahod",
+    // [Auto-translated] "File"
+    file: "Datoteka",
+    // [Auto-translated] "Import"
+    import: "Uvoz",
+    // [Auto-translated] "Export"
+    export: "Izvoz",
+    // [Auto-translated] "Edit"
+    edit: "Urediti",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "Ponastavitev jezikov na privzete",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Ponastavitev vseh sprememb",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "Ponastavitev {0} na privzete nastavitve"
   }
 };
 const locale = getLocaleStrings("sl");

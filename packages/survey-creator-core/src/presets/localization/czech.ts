@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const csStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "Jazyky",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Jazyky",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Vyberte jazyk uživatelského rozhraní a cíle aplikace Survey Creator\njazyky konfigurovaného průzkumu.",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "Jazyk uživatelského rozhraní tvůrce",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "Jazyky průzkumu",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Zadejte pro vyhledávání...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "Přeložte názvy zeměměřických jazyků do angličtiny"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "Konfigurace karet",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Tabulátory",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Vyberte karty, které chcete zobrazit, změňte jejich pořadí, změňte jejich názvy,\na vyberte kartu, která bude ve výchozím nastavení aktivní.",
+    // [Auto-translated] "Visible tabs"
+    items: "Viditelné karty",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "Skryté karty",
+    // [Auto-translated] "Default tab"
+    defaultTab: "Výchozí karta",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Přetáhněte položku z tohoto sloupce do levého sloupce - zobrazí se viditelná v panelu Karty. Položky můžete také přesouvat pomocí tlačítek plus (+) a mínus (-).",
+    // [Auto-translated] "Name"
+    name: "Jméno",
+    // [Auto-translated] "Title"
+    titleField: "Titul",
+    // [Auto-translated] "Icon name"
+    iconName: "Název ikony"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Nastavení panelu nástrojů",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Souprava nářadí",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Vyberte položky panelu nástrojů, které chcete zobrazit, seskupte je do kategorií, \nPřejmenujte je a v případě potřeby změňte jejich pořadí.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Souprava nářadí",
+    // [Auto-translated] "Categories"
+    categories: "Kategorie",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "Skryté položky panelu nástrojů",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Povolit seskupení",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Zobrazit názvy kategorií",
+    // [Auto-translated] "Name"
+    categoryName: "Jméno",
+    // [Auto-translated] "Title"
+    categoryTitle: "Titul",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Popisek nástroje",
+    // [Auto-translated] "Icon name"
+    iconName: "Název ikony",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "Objekt JSON, který se použije, když uživatelé vyberou tuto položku panelu nástrojů",
+    // [Auto-translated] "Subcategories"
+    subcategories: "Podkategorie",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "Povolit podpoložky pro tuto otázku...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Přesunout jako podpoložku do...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Přidat do panelu nástrojů",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Odstranit vlastní položku",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Přetáhněte položku z tohoto sloupce do levého - zobrazí se viditelná v panelu Toolbox. Položky můžete také přesouvat pomocí tlačítek plus (+) a mínus (-).",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nová kategorie",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Nová položka",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Přidat novou položku",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Přidání nové podpoložky",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Nejsou zde žádné položky",
+    // [Auto-translated] "New item in"
+    newItem: "Nová položka v"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "Přizpůsobení mřížky vlastností",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Mřížka vlastností",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "Vyberte prvek, jehož nastavení je k dispozici v mřížce vlastností.",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "Vyberte prvek, jehož nastavení je k dispozici v mřížce vlastností",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Mřížka vlastností",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "Neseřazené položky",
+    // [Auto-translated] "Name"
+    categoryName: "Jméno",
+    // [Auto-translated] "Title"
+    categoryTitle: "Titul",
+    // [Auto-translated] "Icon name"
+    iconName: "Název ikony",
+    // [Auto-translated] "Name"
+    name: "Jméno",
+    // [Auto-translated] "Title"
+    titleField: "Titul",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "Pomocný text",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Přetáhněte položku z tohoto sloupce do levého sloupce - zobrazí se viditelná v panelu Karty. Položky můžete také přesouvat pomocí tlačítek plus (+) a mínus (-).",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "Přidat vlastní kategorii"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Přidat novou položku",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Přidání nové podpoložky",
+    // [Auto-translated] "New item in"
+    newItem: "Nová položka v",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nová kategorie",
+    // [Auto-translated] "New category in"
+    newCategory: "Nová kategorie v",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Přesunout do kategorie...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "Přesunout do nové kategorie...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Kategorie",
+    // [Auto-translated] "Move To..."
+    moveTo: "Přesunout do...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Odebrat z {0}",
+    // [Auto-translated] "More"
+    more: "Více",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Obnovit",
+    // [Auto-translated] "Edit"
+    edit: "Upravit",
+    // [Auto-translated] "Expand"
+    expand: "Expandovat",
+    // [Auto-translated] "Collapse"
+    collapse: "Zhroucení",
+    // [Auto-translated] "Remove"
+    remove: "Odstranit",
+    // [Auto-translated] "Add"
+    add: "Přidat",
+    // [Auto-translated] "Delete"
+    delete: "Vymazat"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "Předvolby pro tvůrce",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "Přednastavený kód JSON:",
+    // [Auto-translated] "Copy"
+    copy: "Kopírovat",
+    // [Auto-translated] "Download"
+    download: "Stáhnout",
+    // [Auto-translated] "Load"
+    load: "Náklad",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Uložit a ukončit",
+    // [Auto-translated] "Back"
+    back: "Hřbet",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "Obnovit výchozí nastavení",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Všechna nastavení byla obnovena na výchozí hodnoty",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "Změněno na výchozí",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Položka obnovena na výchozí nastavení",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "Kategorie obnovena na výchozí",
+    // [Auto-translated] "Edit"
+    edit: "Upravit",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Uložit a ukončit",
+    // [Auto-translated] "Back"
+    pagePrevText: "Hřbet"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "Přednastavuje",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Předvolby pro tvůrce",
+    // [Auto-translated] "Save & Exit"
+    save: "Uložit a ukončit",
+    // [Auto-translated] "File"
+    file: "Soubor",
+    // [Auto-translated] "Import"
+    import: "Dovoz",
+    // [Auto-translated] "Export"
+    export: "Vývoz",
+    // [Auto-translated] "Edit"
+    edit: "Upravit",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "Obnovení jazyků na výchozí",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Obnovit všechny změny",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "Obnovení {0} na výchozí hodnoty"
   }
 };
 const locale = getLocaleStrings("cs");

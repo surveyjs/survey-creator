@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const bgStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "Езици",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Езици",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Изберете езика на потребителския интерфейс на създателя на проучване и насочване\nезици за конфигурирането на проучването.",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "Език на потребителския интерфейс на създателя",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "Езици на проучването",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Въведете за търсене...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "Превод на имената на езици на проучването на английски"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "Конфигуриране на раздели",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Раздели",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Изберете разделите, които искате да покажете, пренаредете ги, променете заглавията им,\nи изберете раздела, който ще бъде активен по подразбиране.",
+    // [Auto-translated] "Visible tabs"
+    items: "Видими раздели",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "Скрити раздели",
+    // [Auto-translated] "Default tab"
+    defaultTab: "Раздел по подразбиране",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Плъзнете елемент от тази колона в лявата - той ще се появи видим в панела Раздели. Можете също така да премествате елементи с помощта на бутоните плюс (+) и минус (-).",
+    // [Auto-translated] "Name"
+    name: "Име",
+    // [Auto-translated] "Title"
+    titleField: "Заглавие",
+    // [Auto-translated] "Icon name"
+    iconName: "Име на иконата"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Настройване на кутията с инструменти",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Инструменти",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Изберете елементите на кутията с инструменти, които искате да покажете, групирайте ги в категории, \nПреименувайте ги и променяйте реда им, ако е необходимо.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Инструменти",
+    // [Auto-translated] "Categories"
+    categories: "Категории",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "Скрити елементи от кутия с инструменти",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Активиране на групиране",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Показване на заглавия на категории",
+    // [Auto-translated] "Name"
+    categoryName: "Име",
+    // [Auto-translated] "Title"
+    categoryTitle: "Заглавие",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Пояснение",
+    // [Auto-translated] "Icon name"
+    iconName: "Име на иконата",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "JSON обект, който да се приложи, когато потребителите изберат този елемент от кутията с инструменти",
+    // [Auto-translated] "Subcategories"
+    subcategories: "Подкатегории",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "Активирайте поделементи за този въпрос...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Преместване като поделемент към...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Добави в кутията с инструменти",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Изтриване на персонализиран елемент",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Плъзнете елемент от тази колона в лявата - той ще се появи видим �� панела Toolbox. Можете също така да премествате елементи с помощта на бутоните плюс (+) и минус (-).",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Нова категория",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Нов артикул",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Добавяне на нов елемент",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Добавяне на нов поделемент",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Няма артикули",
+    // [Auto-translated] "New item in"
+    newItem: "Нов артикул в"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "Персонализиране на мрежата със свойства",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Мрежа от имоти",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "Изберете елемент, за да персонализирате настройките му, налични в мрежата със свойства.",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "Изберете елемент, за да персонализирате настройките му, налични в мрежата със свойства",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Мрежа от имоти",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "Несортирани елементи",
+    // [Auto-translated] "Name"
+    categoryName: "Име",
+    // [Auto-translated] "Title"
+    categoryTitle: "Заглавие",
+    // [Auto-translated] "Icon name"
+    iconName: "Име на иконата",
+    // [Auto-translated] "Name"
+    name: "Име",
+    // [Auto-translated] "Title"
+    titleField: "Заглавие",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "Помощен текст",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Плъзнете елемент от тази колона в лявата - той ще се появи видим в панела Раздели. Можете също така да премествате елементи с помощта на бутоните плюс (+) и минус (-).",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "Добавяне на персонализирана категория"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Добавяне на нов елемент",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Добавяне на нов поделемент",
+    // [Auto-translated] "New item in"
+    newItem: "Нов артикул в",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Нова категория",
+    // [Auto-translated] "New category in"
+    newCategory: "Нова категория в",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Преместване в категория...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "Преместване в нова категория...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Категории",
+    // [Auto-translated] "Move To..."
+    moveTo: "Преместете се към...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Премахване от {0}",
+    // [Auto-translated] "More"
+    more: "Още",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Възстановявам",
+    // [Auto-translated] "Edit"
+    edit: "Редактирам",
+    // [Auto-translated] "Expand"
+    expand: "Разширявам",
+    // [Auto-translated] "Collapse"
+    collapse: "Срив",
+    // [Auto-translated] "Remove"
+    remove: "Махам",
+    // [Auto-translated] "Add"
+    add: "Добавям",
+    // [Auto-translated] "Delete"
+    delete: "Изтривам"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "Предварително зададени настройки за създатели",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "Предварително зададена JSON:",
+    // [Auto-translated] "Copy"
+    copy: "Копирам",
+    // [Auto-translated] "Download"
+    download: "Свалям",
+    // [Auto-translated] "Load"
+    load: "Товаря",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Запазване и излизане",
+    // [Auto-translated] "Back"
+    back: "Гръб",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "Нулиране по подразбиране",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Всички настройки са възстановени по подразбиране",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "Възстановено по подразбиране",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Елементът е възстановен по подразбиране",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "Категорията е възстановена по подразбиране",
+    // [Auto-translated] "Edit"
+    edit: "Редактирам",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Запазване и излизане",
+    // [Auto-translated] "Back"
+    pagePrevText: "Гръб"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "Настройки",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Предварително зададени настройки за създатели",
+    // [Auto-translated] "Save & Exit"
+    save: "Запазване и излизане",
+    // [Auto-translated] "File"
+    file: "Файл",
+    // [Auto-translated] "Import"
+    import: "Внос",
+    // [Auto-translated] "Export"
+    export: "Износ",
+    // [Auto-translated] "Edit"
+    edit: "Редактирам",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "Нулиране на езиците по подразбиране",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Нулиране на всички промени",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "Нулиране на {0} по подразбиране"
   }
 };
 const locale = getLocaleStrings("bg");

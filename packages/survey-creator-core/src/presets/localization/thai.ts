@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const thStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "ภาษา",
+    // [Auto-translated] "Languages"
+    navigationTitle: "ภาษา",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "เลือกภาษาของ UI และเป้าหมายของผู้สร้างแบบสํารวจ\nภาษาสําหรับแบบสํารวจที่กําลังกําหนดค่า",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "ภาษา UI ของครีเอเตอร์",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "ภาษาของแบบสํารวจ",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "พิมพ์เพื่อค้นหา...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "แปลชื่อภาษาของแบบสํารวจเป็นภาษาอังกฤษ"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "กําหนดค่าแท็บ",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "แท็บ",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "เลือกแท็บที่คุณต้องการแสดง จัดลําดับใหม่ เปลี่ยนชื่อ\nแล้วเลือกแท็บที่จะเปิดใช้งานตามค่าเริ่มต้น",
+    // [Auto-translated] "Visible tabs"
+    items: "แท็บที่มองเห็นได้",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "แท็บที่ซ่อนอยู่",
+    // [Auto-translated] "Default tab"
+    defaultTab: "แท็บเริ่มต้น",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "ลากรายการจากคอลัมน์นี้ไปทางซ้าย - รายการนั้นจะปรากฏในแผงแท็บ คุณยังสามารถย้ายรายการได้โดยใช้ปุ่มบวก (+) และลบ (-)",
+    // [Auto-translated] "Name"
+    name: "ชื่อ",
+    // [Auto-translated] "Title"
+    titleField: "ชื่อเรื่อง",
+    // [Auto-translated] "Icon name"
+    iconName: "ชื่อไอคอน"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "ตั้งค่ากล่องเครื่องมือ",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "เครื่อง มือ",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "เลือกรายการกล่องเครื่องมือที่คุณต้องการแสดงจัดกลุ่มเป็นหมวดหมู่ \nเปลี่ยนชื่อและเปลี่ยนลําดับหากจําเป็น",
+    // [Auto-translated] "Toolbox"
+    toolbox: "เครื่อง มือ",
+    // [Auto-translated] "Categories"
+    categories: "ประเภท",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "รายการกล่องเครื่องมือที่ซ่อนอยู่",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "เปิดใช้งานการจัดกลุ่ม",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "แสดงชื่อประเภท",
+    // [Auto-translated] "Name"
+    categoryName: "ชื่อ",
+    // [Auto-translated] "Title"
+    categoryTitle: "ชื่อเรื่อง",
+    // [Auto-translated] "Tooltip"
+    tooltip: "คําแนะนําเครื่องมือ",
+    // [Auto-translated] "Icon name"
+    iconName: "ชื่อไอคอน",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "ออบเจ็กต์ JSON ที่จะนําไปใช้เมื่อผู้ใช้เลือกรายการกล่องเครื่องมือนี้",
+    // [Auto-translated] "Subcategories"
+    subcategories: "หมวดหมู่ย่อย",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "เปิดใช้งานรายการย่อยสําหรับคําถามนี้...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "ย้ายเป็นรายการย่อยไปยัง...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "เพิ่มไปยังกล่องเครื่องมือ",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "ลบรายการที่กําหนดเอง",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "ลากรายการจากคอลัมน์นี้ไปทางซ้าย - รายการนั้นจะปรากฏในแผงกล่องเครื่องมือ คุณยังสามารถย้ายรายการได้โดยใช้ปุ่มบวก (+) และลบ (-)",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "หมวดหมู่ใหม่",
+    // [Auto-translated] "New Item"
+    addCustomItem: "รายการใหม่",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "เพิ่มรายการใหม่",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "เพิ่มรายการย่อยใหม่",
+    // [Auto-translated] "There are no items"
+    noRowsText: "ไม่มีรายการ",
+    // [Auto-translated] "New item in"
+    newItem: "รายการใหม่ใน"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "กําหนดตารางคุณสมบัติเอง",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "ตารางทรัพย์สิน",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "เลือกองค์ประกอบเพื่อปรับแต่งการตั้งค่าที่มีอยู่ในกริดคุณสมบัติ",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "เลือกองค์ประกอบเพื่อปรับแต่งการตั้งค่าที่มีอยู่ในกริดคุณสมบัติ",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "ตารางทรัพย์สิน",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "รายการที่ไม่ได้เรียงลําดับ",
+    // [Auto-translated] "Name"
+    categoryName: "ชื่อ",
+    // [Auto-translated] "Title"
+    categoryTitle: "ชื่อเรื่อง",
+    // [Auto-translated] "Icon name"
+    iconName: "ชื่อไอคอน",
+    // [Auto-translated] "Name"
+    name: "ชื่อ",
+    // [Auto-translated] "Title"
+    titleField: "ชื่อเรื่อง",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "ข้อความตัวช่วย",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "ลากรายการจากคอลัมน์นี้ไปทางซ้าย - รายการนั้นจะปรากฏในแผงแท็บ คุณยังสามารถย้ายรายการได้โดยใช้ปุ่มบวก (+) และลบ (-)",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "เพิ่มหมวดหมู่ที่กําหนดเอง"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "เพิ่มรายการใหม่",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "เพิ่มรายการย่อยใหม่",
+    // [Auto-translated] "New item in"
+    newItem: "รายการใหม่ใน",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "หมวดหมู่ใหม่",
+    // [Auto-translated] "New category in"
+    newCategory: "หมวดหมู่ใหม่ใน",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "ย้ายไปที่หมวดหมู่...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "ย้ายไปยังหมวดหมู่ใหม่...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "ประเภท",
+    // [Auto-translated] "Move To..."
+    moveTo: "ย้ายไปที่...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "ลบออกจาก{0}",
+    // [Auto-translated] "More"
+    more: "อีก",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "ซ่อมแซม",
+    // [Auto-translated] "Edit"
+    edit: "แก้ไข",
+    // [Auto-translated] "Expand"
+    expand: "ขยาย",
+    // [Auto-translated] "Collapse"
+    collapse: "ทรุด",
+    // [Auto-translated] "Remove"
+    remove: "ถอด",
+    // [Auto-translated] "Add"
+    add: "เพิ่ม",
+    // [Auto-translated] "Delete"
+    delete: "ลบ"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "ครีเอเตอร์ที่ตั้งไว้ล่วงหน้า",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "JSON ที่ตั้งไว้ล่วงหน้า:",
+    // [Auto-translated] "Copy"
+    copy: "ลอก",
+    // [Auto-translated] "Download"
+    download: "ดาวน์โหลด",
+    // [Auto-translated] "Load"
+    load: "ภาระ",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "บันทึกและออก",
+    // [Auto-translated] "Back"
+    back: "ย้อนกลับ",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "รีเซ็ตเป็นค่าเริ่มต้น",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "การตั้งค่าทั้งหมดกลับคืนสู่ค่าเริ่มต้น",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "เปลี่ยนเป็นค่าเริ่มต้น",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "รายการคืนค่าเป็นค่าเริ่มต้น",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "ประเภทถูกคืนค่าเป็นค่าเริ่มต้น",
+    // [Auto-translated] "Edit"
+    edit: "แก้ไข",
+    // [Auto-translated] "Save & Exit"
+    completeText: "บันทึกและออก",
+    // [Auto-translated] "Back"
+    pagePrevText: "ย้อนกลับ"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "ที่ตั้งไว้ล่วงหน้า",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "ครีเอเตอร์ที่ตั้งไว้ล่วงหน้า",
+    // [Auto-translated] "Save & Exit"
+    save: "บันทึกและออก",
+    // [Auto-translated] "File"
+    file: "แฟ้ม",
+    // [Auto-translated] "Import"
+    import: "นําเข้า",
+    // [Auto-translated] "Export"
+    export: "ส่งออก",
+    // [Auto-translated] "Edit"
+    edit: "แก้ไข",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "รีเซ็ตภาษาเป็นค่าเริ่มต้น",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "รีเซ็ตการเปลี่ยนแปลงทั้งหมด",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "รีเซ็ต{0}เป็นค่าเริ่มต้น"
   }
 };
 const locale = getLocaleStrings("th");

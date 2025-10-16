@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const htStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "Lang",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Lang",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Chwazi lang UI kreyatè sondaj la ak sib\nLang pou sondaj la ke yo te configuré.",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "Kreyatè UI lang",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "Lang sondaj yo",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Kalite pou fè rechèch ...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "Tradwi non lang sondaj an anglè"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
+    // [Auto-translated] "Configure tabs"
+    title: "Konfigirasyon onglè yo",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Onglè yo",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Chwazi onglè yo ou vle montre, reorder yo, chanje yo,\nepi chwazi tab la ki pral aktif pa default.",
+    // [Auto-translated] "Visible tabs"
+    items: "Onglè vizib",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "Onglè kache",
+    // [Auto-translated] "Default tab"
     defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Trennen yon atik soti nan kolòn sa a nan yon sèl la gòch - li pral parèt vizib nan panèl la Onglè. Ou kapab tou deplase atik, lè l sèvi avèk plis (+) ak mwens (-) bouton.",
+    // [Auto-translated] "Name"
+    name: "Fe-apel",
+    // [Auto-translated] "Title"
+    titleField: "Tit",
+    // [Auto-translated] "Icon name"
+    iconName: "Non icon"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Mete kanpe bwat zouti a",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Bwat zouti",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Chwazi atik yo bwat zouti ou vle montre, gwoup yo an kategori, \nchanje non yo, epi chanje lòd yo si sa nesesè.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Bwat zouti",
+    // [Auto-translated] "Categories"
+    categories: "Kategori",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "Atik bwat zouti kache",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Pèmèt gwoupman",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Montre kategori",
+    // [Auto-translated] "Name"
+    categoryName: "Fe-apel",
+    // [Auto-translated] "Title"
+    categoryTitle: "Tit",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Konsèy zouti",
+    // [Auto-translated] "Icon name"
+    iconName: "Non icon",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "JSON objè pou aplike lè itilizatè yo chwazi atik bwat zouti sa a",
+    // [Auto-translated] "Subcategories"
+    subcategories: "Sous-kategori",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "Pèmèt subitems pou kesyon sa a...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Deplase kòm yon subitem pou...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Ajoute nan bwat zouti",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Efase atik koutim",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Trennen yon atik ki soti nan kolòn sa a nan yon sèl la gòch - li pral parèt vizib nan panèl la Toolbox. Ou kapab tou deplase atik, lè l sèvi avèk plis (+) ak mwens (-) bouton.",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nouvo Kategori",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Nouvo Atik",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Ajoute yon nouvo atik",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Ajoute yon nouvo subitem",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Pa gen okenn atik",
+    // [Auto-translated] "New item in"
+    newItem: "Nouvo atik nan"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "Customize kadriyaj pwopriyete a",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Pwopriyete kadriyaj",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "Chwazi yon eleman pou Customize anviwònman li yo ki disponib nan kadriyaj la Pwopriyete.",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "Chwazi yon eleman pou Customize anviwònman li yo ki disponib nan kadriyaj la Pwopriyete",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Pwopriyete kadriyaj",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "Unsorted atik",
+    // [Auto-translated] "Name"
+    categoryName: "Fe-apel",
+    // [Auto-translated] "Title"
+    categoryTitle: "Tit",
+    // [Auto-translated] "Icon name"
+    iconName: "Non icon",
+    // [Auto-translated] "Name"
+    name: "Fe-apel",
+    // [Auto-translated] "Title"
+    titleField: "Tit",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "Tèks ede",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Trennen yon atik soti nan kolòn sa a nan yon sèl la gòch - li pral parèt vizib nan panèl la Onglè. Ou kapab tou deplase atik, lè l sèvi avèk plis (+) ak mwens (-) bouton.",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "Add Custom Kategori"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Ajoute yon nouvo atik",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Ajoute yon nouvo subitem",
+    // [Auto-translated] "New item in"
+    newItem: "Nouvo atik nan",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nouvo Kategori",
+    // [Auto-translated] "New category in"
+    newCategory: "Nouvo kategori nan",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Deplase nan kategori...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "Deplase nan nouvo kategori...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Kategori",
+    // [Auto-translated] "Move To..."
+    moveTo: "Deplase Pou...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Retire soti nan {0}",
+    // [Auto-translated] "More"
+    more: "Plis",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Retabli",
+    // [Auto-translated] "Edit"
+    edit: "modifye",
+    // [Auto-translated] "Expand"
+    expand: "Elaji",
+    // [Auto-translated] "Collapse"
+    collapse: "Tonbe",
+    // [Auto-translated] "Remove"
+    remove: "Deplase",
+    // [Auto-translated] "Add"
+    add: "Ajoute",
+    // [Auto-translated] "Delete"
+    delete: "Efase"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "Kreyatè Prereglaj",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "Prereglaj JSON:",
+    // [Auto-translated] "Copy"
+    copy: "Kopi",
+    // [Auto-translated] "Download"
+    download: "Rale dosye",
+    // [Auto-translated] "Load"
+    load: "Mete abo",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Sove & sòti",
+    // [Auto-translated] "Back"
+    back: "Do",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "Reyajiste nan default",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Tout anviwònman retabli nan default",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "Resored nan default",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Atik retabli nan default",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "Kategori retabli nan default",
+    // [Auto-translated] "Edit"
+    edit: "modifye",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Sove & sòti",
+    // [Auto-translated] "Back"
+    pagePrevText: "Do"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
-    import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Presets"
+    presetsTab: "Prereglaj",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Kreyatè Prereglaj",
+    // [Auto-translated] "Save & Exit"
+    save: "Sove & sòti",
+    // [Auto-translated] "File"
+    file: "Ranpli",
+    // [Auto-translated] "Import"
+    import: "Enpòte",
+    // [Auto-translated] "Export"
+    export: "Ekspòtasyon",
+    // [Auto-translated] "Edit"
+    edit: "modifye",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "Reyajiste Lang nan default",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Reyajiste tout chanjman",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "Reyajiste {0} default"
   }
 };
 const locale = getLocaleStrings("ht");

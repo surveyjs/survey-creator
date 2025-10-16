@@ -1,117 +1,216 @@
 import { getLocaleStrings } from "survey-creator-core";
 export const plStrings = {
   languages: {
-    title: "Languages",
-    navigationTitle: "Languages",
-    description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
-    surveyLanguages: "Survey languages",
-    searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    // [Auto-translated] "Languages"
+    title: "Języki",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Języki",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Wybierz język interfejsu użytkownika i celu kreatora ankiety\njęzyki dla konfigurowanej ankiety.",
+    // [Auto-translated] "Creator UI language"
+    creatorUI: "Język interfejsu twórcy",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "Języki ankiety",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Wpisz, aby wyszukać...",
+    // [Auto-translated] "Translate Survey language names to English"
+    translateToEnglish: "Tłumaczenie nazw języków ankiety na język angielski"
   },
   tabs: {
-    title: "Configure tabs",
-    navigationTitle: "Tabs",
-    description: "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default.",
-    items: "Visible tabs",
-    unsortedItems: "Hidden tabs",
-    defaultTab: "Default tab",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    name: "Name",
-    titleField: "Title",
-    iconName: "Icon name"
+    // [Auto-translated] "Configure tabs"
+    title: "Konfigurowanie kart",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Karty",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Wybierz zakładki, które chcesz wyświetlić, zmień ich kolejność, zmień ich tytuły,\ni wybierz kartę, która będzie domyślnie aktywna.",
+    // [Auto-translated] "Visible tabs"
+    items: "Widoczne zakładki",
+    // [Auto-translated] "Hidden tabs"
+    unsortedItems: "Ukryte karty",
+    // [Auto-translated] "Default tab"
+    defaultTab: "Zakładka Domyślne",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Przeciągnij element z tej kolumny do lewej - pojawi się on widoczny w panelu Karty. Możesz także przenosić elementy za pomocą przycisków plus (+) i minus (-).",
+    // [Auto-translated] "Name"
+    name: "Nazwa",
+    // [Auto-translated] "Title"
+    titleField: "Tytuł",
+    // [Auto-translated] "Icon name"
+    iconName: "Nazwa ikony"
   },
   toolbox: {
-    title: "Set up the Toolbox",
-    navigationTitle: "Toolbox",
-    description: "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required.",
-    toolbox: "Toolbox",
-    categories: "Categories",
-    unsortedItems: "Hidden toolbox items",
-    enableGrouping: "Enable grouping",
-    showCategoryTitles: "Show category titles",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    tooltip: "Tooltip",
-    iconName: "Icon name",
-    jsonObject: "JSON object to apply when users select this toolbox item",
-    subcategories: "Subcategories",
-    convertToSubcategory: "Enable subitems for this question...",
-    moveAsSubitem: "Move as a subitem to...",
-    addToToolbox: "Add to Toolbox",
-    deleteCustomItem: "Delete Custom Item",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "New Category",
-    addCustomItem: "New Item",
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    noRowsText: "There are no items",
-    newItem: "New item in",
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Konfigurowanie przybornika",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Skrzynka z narzędziami",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Wybierz elementy przybornika, które chcesz wyświetlić, pogrupuj je w kategorie, \nZmień ich nazwy i zmień ich kolejność, jeśli jest to wymagane.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Skrzynka z narzędziami",
+    // [Auto-translated] "Categories"
+    categories: "Kategorie",
+    // [Auto-translated] "Hidden toolbox items"
+    unsortedItems: "Ukryte elementy przybornika",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Włączanie grupowania",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Pokaż tytuły kategorii",
+    // [Auto-translated] "Name"
+    categoryName: "Nazwa",
+    // [Auto-translated] "Title"
+    categoryTitle: "Tytuł",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Podpowiedź",
+    // [Auto-translated] "Icon name"
+    iconName: "Nazwa ikony",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "Obiekt JSON do zastosowania, gdy użytkownicy wybiorą ten element przybornika",
+    // [Auto-translated] "Subcategories"
+    subcategories: "Podkategorie",
+    // [Auto-translated] "Enable subitems for this question..."
+    convertToSubcategory: "Włącz elementy podrzędne dla tego pytania...",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Przenieś jako element podrzędny do...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Dodaj do przybornika",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Usuń element niestandardowy",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Przeciągnij element z tej kolumny do lewej - pojawi się on w panelu Przybornik. Możesz także przenosić elementy za pomocą przycisków plus (+) i minus (-).",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nowa kategoria",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Nowy przedmiot",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Dodawanie nowego elementu",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Dodawanie nowego elementu podrzędnego",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Nie ma żadnych przedmiotów",
+    // [Auto-translated] "New item in"
+    newItem: "Nowy przedmiot w"
   },
   propertyGrid: {
-    title: "Customize the Property Grid",
-    navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
-    propertyGrid: "Property Grid",
-    unsortedItems: "Unsorted items",
-    categoryName: "Name",
-    categoryTitle: "Title",
-    iconName: "Icon name",
-    name: "Name",
-    titleField: "Title",
-    descriptionField: "Helper Text",
-    unsortedDescription: "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons.",
-    addCustomCategory: "Add Custom Category"
+    // [Auto-translated] "Customize the Property Grid"
+    title: "Dostosowywanie siatki właściwości",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Siatka właściwości",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
+    description: "Wybierz element, aby dostosować jego ustawienia dostępne w siatce właściwości.",
+    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
+    selectElement: "Wybierz element, aby dostosować jego ustawienia dostępne w siatce właściwości",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Siatka właściwości",
+    // [Auto-translated] "Unsorted items"
+    unsortedItems: "Nieposortowane przedmioty",
+    // [Auto-translated] "Name"
+    categoryName: "Nazwa",
+    // [Auto-translated] "Title"
+    categoryTitle: "Tytuł",
+    // [Auto-translated] "Icon name"
+    iconName: "Nazwa ikony",
+    // [Auto-translated] "Name"
+    name: "Nazwa",
+    // [Auto-translated] "Title"
+    titleField: "Tytuł",
+    // [Auto-translated] "Helper Text"
+    descriptionField: "Tekst pomocniczy",
+    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
+    unsortedDescription: "Przeciągnij element z tej kolumny do lewej - pojawi się on widoczny w panelu Karty. Możesz także przenosić elementy za pomocą przycisków plus (+) i minus (-).",
+    // [Auto-translated] "Add Custom Category"
+    addCustomCategory: "Dodaj kategorię niestandardową"
   },
   items: {
-    addNewItem: "Add a new item",
-    addNewSubitem: "Add a new subitem",
-    newItem: "New item in",
-    addCustomCategory: "New Category",
-    newCategory: "New category in",
-    moveToCategory: "Move to category...",
-    moveToNewCategory: "Move to new category...",
-    categoriesLabel: "Categories",
-    moveTo: "Move To...",
-    removeFrom: "Remove from {0}",
-    more: "More",
-    restoreToDefault: "Restore",
-    edit: "Edit",
-    expand: "Expand",
-    collapse: "Collapse",
-    remove: "Remove",
-    add: "Add",
-    delete: "Delete"
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Dodawanie nowego elementu",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Dodawanie nowego elementu podrzędnego",
+    // [Auto-translated] "New item in"
+    newItem: "Nowy przedmiot w",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nowa kategoria",
+    // [Auto-translated] "New category in"
+    newCategory: "Nowa kategoria w",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Przejdź do kategorii...",
+    // [Auto-translated] "Move to new category..."
+    moveToNewCategory: "Przejdź do nowej kategorii...",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Kategorie",
+    // [Auto-translated] "Move To..."
+    moveTo: "Przenieś się do...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Usuń z {0}",
+    // [Auto-translated] "More"
+    more: "Więcej",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Przywrócić",
+    // [Auto-translated] "Edit"
+    edit: "Redagować",
+    // [Auto-translated] "Expand"
+    expand: "Rozszerzać",
+    // [Auto-translated] "Collapse"
+    collapse: "Zapaść",
+    // [Auto-translated] "Remove"
+    remove: "Usunąć",
+    // [Auto-translated] "Add"
+    add: "Dodawać",
+    // [Auto-translated] "Delete"
+    delete: "Usunąć"
   },
   editor: {
-    title: "Creator Presets",
-    presetJson: "Preset JSON:",
-    copy: "Copy",
-    download: "Download",
-    load: "Load",
-    saveExit: "Save & Exit",
-    back: "Back",
-    resetToDefault: "Reset to default",
-    resetToDefaults: "All settings restored to default",
-    resoredToDefault: "resored to default",
-    itemRestoredToDefault: "Item restored to default",
-    categoryRestoredToDefault: "Category restored to default",
-    edit: "Edit",
-    completeText: "Save & Exit",
-    pagePrevText: "Back"
+    // [Auto-translated] "Creator Presets"
+    title: "Ustawienia predefiniowane twórcy",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "Wstępnie ustawiony kod JSON:",
+    // [Auto-translated] "Copy"
+    copy: "Kopiować",
+    // [Auto-translated] "Download"
+    download: "Pobierać",
+    // [Auto-translated] "Load"
+    load: "Ładunek",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Zapisz i wyjdź",
+    // [Auto-translated] "Back"
+    back: "Wstecz",
+    // [Auto-translated] "Reset to default"
+    resetToDefault: "Przywróć ustawienia domyślne",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Wszystkie ustawienia przywrócone do wartości domyślnych",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "Resetowany do domyślnego",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Element przywrócony do wartości domyślnej",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "Kategoria przywrócona do wartości domyślnej",
+    // [Auto-translated] "Edit"
+    edit: "Redagować",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Zapisz i wyjdź",
+    // [Auto-translated] "Back"
+    pagePrevText: "Wstecz"
   },
   plugin: {
-    presetsTab: "Presets",
-    creatorPresets: "Creator Presets",
-    save: "Save & Exit",
-    file: "File",
+    // [Auto-translated] "Presets"
+    presetsTab: "Ustawień",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Ustawienia predefiniowane twórcy",
+    // [Auto-translated] "Save & Exit"
+    save: "Zapisz i wyjdź",
+    // [Auto-translated] "File"
+    file: "Plik",
+    // [Auto-translated] "Import"
     import: "Import",
-    export: "Export",
-    edit: "Edit",
-    resetLanguages: "Reset Languages to default",
-    resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    // [Auto-translated] "Export"
+    export: "Eksport",
+    // [Auto-translated] "Edit"
+    edit: "Redagować",
+    // [Auto-translated] "Reset Languages to default"
+    resetLanguages: "Zresetuj języki do domyślnych",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Zresetuj wszystkie zmiany",
+    // [Auto-translated] "Reset {0} to defaults"
+    resetToDefaults: "Resetowanie {0} do ustawień domyślnych"
   }
 };
 const locale = getLocaleStrings("pl");
