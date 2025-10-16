@@ -521,6 +521,8 @@ test.describe(title, () => {
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
         const el = document.querySelectorAll(".svc-question__content")[idx];
+        if (!el) return;
+
         if (remove != "remove") {
           el.classList.add("svc-question__content--" + suffix);
         } else {
