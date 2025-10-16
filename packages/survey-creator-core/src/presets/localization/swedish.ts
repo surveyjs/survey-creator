@@ -26,11 +26,13 @@ export const svStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Synliga flikar",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Dolda flikar",
+    hiddenItems: "Dolda flikar",
     // [Auto-translated] "Default tab"
     defaultTab: "Fliken Standard",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Dra ett objekt från den här kolumnen till den vänstra - det kommer att visas synligt i flikpanelen. Du kan också flytta objekt med hjälp av plus- (+) och minus- (-)-knapparna.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Dra flikar hit för att visa dem",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Dra flikar hit för att dölja dem",
     // [Auto-translated] "Name"
     name: "Namn",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const svStrings = {
     toolbox: "Verktygslåda",
     // [Auto-translated] "Categories"
     categories: "Kategorier",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Inga kategorier",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Dra objekt hit för att visa dem",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Dra objekt hit för att dölja dem",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Dolda objekt i verktygslådan",
+    hiddenItems: "Dolda objekt i verktygslådan",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Aktivera gruppering",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const svStrings = {
     addToToolbox: "Lägg till i Toolbox",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Ta bort anpassat objekt",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Dra ett objekt från den här kolumnen till den vänstra - det kommer att visas synligt i verktygslådepanelen. Du kan också flytta objekt med hjälp av plus- (+) och minus- (-)-knapparna.",
     // [Auto-translated] "New Category"
     addCustomCategory: "Ny kategori",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const svStrings = {
     selectElement: "Välj ett element för att anpassa dess inställningar som är tillgängliga i egenskapsrutnätet",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Rutnät för fastigheter",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Inga kategorier",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Dra egenskaper hit för att visa dem",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Dra egenskaper hit för att dölja dem",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Osorterade objekt",
+    hiddenItems: "Osorterade objekt",
     // [Auto-translated] "Name"
     categoryName: "Namn",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const svStrings = {
     titleField: "Titel",
     // [Auto-translated] "Helper Text"
     descriptionField: "Text för hjälpare",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Dra ett objekt från den här kolumnen till den vänstra - det kommer att visas synligt i flikpanelen. Du kan också flytta objekt med hjälp av plus- (+) och minus- (-)-knapparna.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Lägg till anpassad kategori"
   },

@@ -26,11 +26,13 @@ export const koStrings = {
     // [Auto-translated] "Visible tabs"
     items: "표시되는 탭",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "숨겨진 탭",
+    hiddenItems: "숨겨진 탭",
     // [Auto-translated] "Default tab"
     defaultTab: "기본 탭",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "이 열에서 왼쪽 열로 항목을 드래그하면 탭 패널에 표시됩니다. 더하기(+) 및 빼기(-) 버튼을 사용하여 항목을 이동할 수도 있습니다.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "탭을 여기로 드래그하여 표시합니다.",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "탭을 여기로 드래그하여 숨깁니다.",
     // [Auto-translated] "Name"
     name: "이름",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const koStrings = {
     toolbox: "도구",
     // [Auto-translated] "Categories"
     categories: "카테고리",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "카테고리 없음",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "항목을 여기로 드래그하여 표시합니다.",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "항목을 여기로 드래그하여 숨깁니다.",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "숨겨진 도구 상자 항목",
+    hiddenItems: "숨겨진 도구 상자 항목",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "그룹화 사용",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const koStrings = {
     addToToolbox: "도구 상자에 추가",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "사용자 지정 항목 삭제",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "이 열에서 왼쪽 열로 항목을 드래그하면 도구 상자 패널에 표시됩니다. 더하기(+) 및 빼기(-) 버튼을 사용하여 항목을 이동할 수도 있습니다.",
     // [Auto-translated] "New Category"
     addCustomCategory: "새 카테고리",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const koStrings = {
     selectElement: "요소를 선택하여 속성 그리드에서 사용할 수 있는 설정을 사용자 지정합니다",
     // [Auto-translated] "Property Grid"
     propertyGrid: "속성 그리드",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "카테고리 없음",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "속성을 여기로 드래그하여 표시합니다.",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "속성을 여기로 드래그하여 숨깁니다.",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "정렬되지 않은 항목",
+    hiddenItems: "정렬되지 않은 항목",
     // [Auto-translated] "Name"
     categoryName: "이름",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const koStrings = {
     titleField: "타이틀",
     // [Auto-translated] "Helper Text"
     descriptionField: "도우미 텍스트",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "이 열에서 왼쪽 열로 항목을 드래그하면 탭 패널에 표시됩니다. 더하기(+) 및 빼기(-) 버튼을 사용하여 항목을 이동할 수도 있습니다.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "사용자 지정 범주 추가"
   },

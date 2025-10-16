@@ -26,11 +26,13 @@ export const nbStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Synlige faner",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Skjulte faner",
+    hiddenItems: "Skjulte faner",
     // [Auto-translated] "Default tab"
     defaultTab: "Standard-fanen",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Dra et element fra denne kolonnen til venstre - det vil vises synlig i Faner-panelet. Du kan også flytte elementer ved hjelp av pluss- (+) og minusknapper (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Dra faner hit for å vise dem",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Dra faner hit for å skjule dem",
     // [Auto-translated] "Name"
     name: "Navn",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const nbStrings = {
     toolbox: "Verktøykasse",
     // [Auto-translated] "Categories"
     categories: "Kategorier",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Ingen kategorier",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Dra objekter hit for å vise dem",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Dra objekter hit for å skjule dem",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Skjulte elementer i verktøykassen",
+    hiddenItems: "Skjulte elementer i verktøykassen",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Aktivere gruppering",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const nbStrings = {
     addToToolbox: "Legg til i verktøykassen",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Slett egendefinert element",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Dra et element fra denne kolonnen til venstre - det vil vises synlig i Verktøykasse-panelet. Du kan også flytte elementer ved hjelp av pluss- (+) og minusknapper (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Ny kategori",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const nbStrings = {
     selectElement: "Velg et element for å tilpasse innstillingene som er tilgjengelige i egenskapsrutenettet",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Eiendom rutenett",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Ingen kategorier",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Dra egenskaper hit for å vise dem",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Dra egenskaper hit for å skjule dem",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Usorterte elementer",
+    hiddenItems: "Usorterte elementer",
     // [Auto-translated] "Name"
     categoryName: "Navn",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const nbStrings = {
     titleField: "Tittel",
     // [Auto-translated] "Helper Text"
     descriptionField: "Tekst til hjelper",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Dra et element fra denne kolonnen til venstre - det vil vises synlig i Faner-panelet. Du kan også flytte elementer ved hjelp av pluss- (+) og minusknapper (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Legg til egendefinert kategori"
   },

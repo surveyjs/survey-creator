@@ -26,11 +26,13 @@ export const skStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Viditeľné karty",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Skryté karty",
+    hiddenItems: "Skryté karty",
     // [Auto-translated] "Default tab"
     defaultTab: "Predvolená karta",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Presuňte položku z tohto stĺpca doľava - zobrazí sa viditeľne na paneli Karty. Položky môžete presúvať aj pomocou tlačidiel plus (+) a mínus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Potiahnutím kariet sem ich zobrazíte",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Presunutím kariet sem ich skryjete",
     // [Auto-translated] "Name"
     name: "Meno",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const skStrings = {
     toolbox: "Toolbox",
     // [Auto-translated] "Categories"
     categories: "Kategórie",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Žiadne kategórie",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Presunutím položiek sem ich zobrazíte",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Presunutím položiek sem ich skryjete",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Skryté položky panela s nástrojmi",
+    hiddenItems: "Skryté položky panela s nástrojmi",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Povoliť zoskupovanie",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const skStrings = {
     addToToolbox: "Pridať do Toolboxu",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Odstrániť vlastnú položku",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Presuňte položku z tohto stĺpca doľava - zobrazí sa viditeľná na paneli Toolbox. Položky môžete presúvať aj pomocou tlačidiel plus (+) a mínus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nová kategória",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const skStrings = {
     selectElement: "Výberom prvku prispôsobte jeho nastavenia dostupné v mriežke vlastností",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Mriežka vlastností",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Žiadne kategórie",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Presuňte sem vlastnosti, aby ste ich zobrazili",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Presunutím vlastností sem ich skryjete",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Nezoradené položky",
+    hiddenItems: "Nezoradené položky",
     // [Auto-translated] "Name"
     categoryName: "Meno",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const skStrings = {
     titleField: "Titul",
     // [Auto-translated] "Helper Text"
     descriptionField: "Pomocný text",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Presuňte položku z tohto stĺpca doľava - zobrazí sa viditeľne na paneli Karty. Položky môžete presúvať aj pomocou tlačidiel plus (+) a mínus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Pridať vlastnú kategóriu"
   },

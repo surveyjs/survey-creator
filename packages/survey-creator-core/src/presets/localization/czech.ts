@@ -26,11 +26,13 @@ export const csStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Viditelné karty",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Skryté karty",
+    hiddenItems: "Skryté karty",
     // [Auto-translated] "Default tab"
     defaultTab: "Výchozí karta",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Přetáhněte položku z tohoto sloupce do levého sloupce - zobrazí se viditelná v panelu Karty. Položky můžete také přesouvat pomocí tlačítek plus (+) a mínus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Přetažením karet sem je zobrazíte",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Přetažením karet sem je skryjete",
     // [Auto-translated] "Name"
     name: "Jméno",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const csStrings = {
     toolbox: "Souprava nářadí",
     // [Auto-translated] "Categories"
     categories: "Kategorie",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Žádné kategorie",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Přetažením položek sem je zobrazíte",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Přetažením položek sem je skryjete",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Skryté položky panelu nástrojů",
+    hiddenItems: "Skryté položky panelu nástrojů",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Povolit seskupení",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const csStrings = {
     addToToolbox: "Přidat do panelu nástrojů",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Odstranit vlastní položku",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Přetáhněte položku z tohoto sloupce do levého - zobrazí se viditelná v panelu Toolbox. Položky můžete také přesouvat pomocí tlačítek plus (+) a mínus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nová kategorie",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const csStrings = {
     selectElement: "Vyberte prvek, jehož nastavení je k dispozici v mřížce vlastností",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Mřížka vlastností",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Žádné kategorie",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Přetažením vlastností sem je zobrazíte",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Přetažením vlastností je sem skryjete",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Neseřazené položky",
+    hiddenItems: "Neseřazené položky",
     // [Auto-translated] "Name"
     categoryName: "Jméno",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const csStrings = {
     titleField: "Titul",
     // [Auto-translated] "Helper Text"
     descriptionField: "Pomocný text",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Přetáhněte položku z tohoto sloupce do levého sloupce - zobrazí se viditelná v panelu Karty. Položky můžete také přesouvat pomocí tlačítek plus (+) a mínus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Přidat vlastní kategorii"
   },

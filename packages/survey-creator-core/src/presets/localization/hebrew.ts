@@ -26,11 +26,13 @@ export const heStrings = {
     // [Auto-translated] "Visible tabs"
     items: "כרטיסיות גלויות",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "כרטיסיות מוסתרות",
+    hiddenItems: "כרטיסיות מוסתרות",
     // [Auto-translated] "Default tab"
     defaultTab: "כרטיסיית ברירת מחדל",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "גרור פריט מעמודה זו לעמודה השמאלית - הוא יופיע גלוי בחלונית Tabs. באפשרותך גם להזיז פריטים באמצעות לחצני הפלוס (+) והמינוס (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "גרור כרטיסיות לכאן כדי להציג אותן",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "גרור כרטיסיות לכאן כדי להסתיר אותן",
     // [Auto-translated] "Name"
     name: "שם",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const heStrings = {
     toolbox: "ארגז כלים",
     // [Auto-translated] "Categories"
     categories: "קטגוריות",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "אין קטגוריות",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "גרור פריטים לכאן כדי להציג אותם",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "גרור פריטים לכאן כדי להסתיר אותם",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "פריטי ארגז כלים מוסתרים",
+    hiddenItems: "פריטי ארגז כלים מוסתרים",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "הפיכת קיבוץ לזמין",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const heStrings = {
     addToToolbox: "הוספה לארגז הכלים",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "מחיקת פריט מותאם אישית",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "גרור פריט מעמודה זו לעמודה השמאלית - הוא יופיע גלוי בחלונית ארגז הכלים. באפשרותך גם להזיז פריטים באמצעות לחצני הפלוס (+) והמינוס (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "קטגוריה חדשה",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const heStrings = {
     selectElement: "בחר רכיב כדי להתאים אישית את ההגדרות שלו הזמינות ברשת המאפיינים",
     // [Auto-translated] "Property Grid"
     propertyGrid: "רשת מאפיינים",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "אין קטגוריות",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "גרור מאפיינים לכאן כדי להציג אותם",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "גרור מאפיינים לכאן כדי להסתיר אותם",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "פריטים לא ממוינים",
+    hiddenItems: "פריטים לא ממוינים",
     // [Auto-translated] "Name"
     categoryName: "שם",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const heStrings = {
     titleField: "כותר",
     // [Auto-translated] "Helper Text"
     descriptionField: "טקסט מסייע",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "גרור פריט מעמודה זו לעמודה השמאלית - הוא יופיע גלוי בחלונית Tabs. באפשרותך גם להזיז פריטים באמצעות לחצני הפלוס (+) והמינוס (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "הוסף קטגוריה מותאמת אישית"
   },

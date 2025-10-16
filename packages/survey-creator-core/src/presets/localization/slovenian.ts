@@ -26,11 +26,13 @@ export const slStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Vidni zavihki",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Skriti zavihki",
+    hiddenItems: "Skriti zavihki",
     // [Auto-translated] "Default tab"
     defaultTab: "Privzeti zavihek",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Povlecite element iz tega stolpca v levo - prikaže se na plošči Zavihki. Predmete lahko premikate tudi z gumboma plus (+) in minus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Povlecite zavihke sem, da jih prikažete",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Povlecite zavihke sem, da jih skrijete",
     // [Auto-translated] "Name"
     name: "Ime",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const slStrings = {
     toolbox: "Orodjarni",
     // [Auto-translated] "Categories"
     categories: "Kategorije",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Brez kategorij",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Povlecite elemente sem, da jih prikažete",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Povlecite elemente sem, da jih skrijete",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Skriti elementi zbirke orodij",
+    hiddenItems: "Skriti elementi zbirke orodij",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Omogočanje združevanja v skupine",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const slStrings = {
     addToToolbox: "Dodaj v zbirko orodij",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Izbriši element po meri",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Povlecite element iz tega stolpca v levo - prikazan bo na plošči Toolbox. Predmete lahko premikate tudi z gumboma plus (+) in minus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nova kategorija",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const slStrings = {
     selectElement: "Izberite element, da prilagodite njegove nastavitve, ki so na voljo v mreži lastnosti",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Mreža lastnosti",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Brez kategorij",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Povlecite lastnosti sem, da jih prikažete",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Povlecite lastnosti sem, da jih skrijete",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Nerazvrščeni elementi",
+    hiddenItems: "Nerazvrščeni elementi",
     // [Auto-translated] "Name"
     categoryName: "Ime",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const slStrings = {
     titleField: "Naslov",
     // [Auto-translated] "Helper Text"
     descriptionField: "Pomožno besedilo",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Povlecite element iz tega stolpca v levo - prikaže se na plošči Zavihki. Predmete lahko premikate tudi z gumboma plus (+) in minus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Dodaj kategorijo po meri"
   },

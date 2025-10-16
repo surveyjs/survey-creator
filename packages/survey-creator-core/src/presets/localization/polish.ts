@@ -26,11 +26,13 @@ export const plStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Widoczne zakładki",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Ukryte karty",
+    hiddenItems: "Ukryte karty",
     // [Auto-translated] "Default tab"
     defaultTab: "Zakładka Domyślne",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Przeciągnij element z tej kolumny do lewej - pojawi się on widoczny w panelu Karty. Możesz także przenosić elementy za pomocą przycisków plus (+) i minus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Przeciągnij karty tutaj, aby je wyświetlić",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Przeciągnij karty tutaj, aby je ukryć",
     // [Auto-translated] "Name"
     name: "Nazwa",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const plStrings = {
     toolbox: "Skrzynka z narzędziami",
     // [Auto-translated] "Categories"
     categories: "Kategorie",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Brak kategorii",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Przeciągnij elementy tutaj, aby je wyświetlić",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Przeciągnij elementy tutaj, aby je ukryć",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Ukryte elementy przybornika",
+    hiddenItems: "Ukryte elementy przybornika",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Włączanie grupowania",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const plStrings = {
     addToToolbox: "Dodaj do przybornika",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Usuń element niestandardowy",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Przeciągnij element z tej kolumny do lewej - pojawi się on w panelu Przybornik. Możesz także przenosić elementy za pomocą przycisków plus (+) i minus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nowa kategoria",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const plStrings = {
     selectElement: "Wybierz element, aby dostosować jego ustawienia dostępne w siatce właściwości",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Siatka właściwości",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Brak kategorii",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Przeciągnij właściwości tutaj, aby je wyświetlić",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Przeciągnij właściwości tutaj, aby je ukryć",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Nieposortowane przedmioty",
+    hiddenItems: "Nieposortowane przedmioty",
     // [Auto-translated] "Name"
     categoryName: "Nazwa",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const plStrings = {
     titleField: "Tytuł",
     // [Auto-translated] "Helper Text"
     descriptionField: "Tekst pomocniczy",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Przeciągnij element z tej kolumny do lewej - pojawi się on widoczny w panelu Karty. Możesz także przenosić elementy za pomocą przycisków plus (+) i minus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Dodaj kategorię niestandardową"
   },

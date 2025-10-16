@@ -26,11 +26,13 @@ export const ruStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Видимые вкладки",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Скрытые вкладки",
+    hiddenItems: "Скрытые вкладки",
     // [Auto-translated] "Default tab"
     defaultTab: "Вкладка \"По умолчанию\"",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Перетащите элемент из этой колонки в левую - он появится видимым на панели Вкладок. Вы также можете перемещать предметы, используя кнопки «плюс» (+) и «минус» (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Перетащите вкладки сюда, чтобы отобразить их",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Перетащите вкладки сюда, чтобы скрыть их",
     // [Auto-translated] "Name"
     name: "Имя",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const ruStrings = {
     toolbox: "Ящик для инструментов",
     // [Auto-translated] "Categories"
     categories: "Категории",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Без категорий",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Перетащите элементы сюда, чтобы отобразить их",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Перетащите элементы сюда, чтобы скрыть их",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Скрытые элементы панели инструментов",
+    hiddenItems: "Скрытые элементы панели инструментов",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Включить группировку",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const ruStrings = {
     addToToolbox: "Добавить в Toolbox",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Удалить пользовательский элемент",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Перетащите элемент из этой колонки в левую - он появится видимым на панели Toolbox. Вы также можете перемещать предметы, используя кнопки «плюс» (+) и «минус» (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Новая категория",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const ruStrings = {
     selectElement: "Выберите элемент, чтобы настроить его параметры, доступные в сетке свойств",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Сетка свойств",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Без категорий",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Перетащите свойства сюда, чтобы отобразить их",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Перетащите свойства сюда, чтобы скрыть их",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Неотсортированные товары",
+    hiddenItems: "Неотсортированные товары",
     // [Auto-translated] "Name"
     categoryName: "Имя",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const ruStrings = {
     titleField: "Титул",
     // [Auto-translated] "Helper Text"
     descriptionField: "Вспомогательный текст",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Перетащите элемент из этой колонки в левую - он появится видимым на панели Вкладок. Вы также можете перемещать предметы, используя кнопки «плюс» (+) и «минус» (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Добавить пользовательскую категорию"
   },

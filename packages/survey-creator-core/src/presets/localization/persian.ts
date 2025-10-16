@@ -26,11 +26,13 @@ export const faStrings = {
     // [Auto-translated] "Visible tabs"
     items: "برگه های قابل مشاهده",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "برگه های مخفی",
+    hiddenItems: "برگه های مخفی",
     // [Auto-translated] "Default tab"
     defaultTab: "برگه پیش فرض",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "یک مورد را از این ستون به سمت چپ بکشید - در پنل Tabs قابل مشاهده ظاهر می شود. همچنین می توانید موارد را با استفاده از دکمه های مثبت (+) و منفی (-) جابجا کنید.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "برگه ها را به اینجا بکشید تا نشان داده شود",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "برگه ها را به اینجا بکشید تا پنهان شوند",
     // [Auto-translated] "Name"
     name: "نام",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const faStrings = {
     toolbox: "جعبه ابزار",
     // [Auto-translated] "Categories"
     categories: "دسته",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "بدون دسته بندی",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "موارد را به اینجا بکشید تا نشان داده شود",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "موارد را به اینجا بکشید تا پنهان شوند",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "موارد جعبه ابزار مخفی",
+    hiddenItems: "موارد جعبه ابزار مخفی",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "گروه بندی را فعال کنید",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const faStrings = {
     addToToolbox: "اضافه کردن به جعبه ابزار",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "حذف آیتم سفارشی",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "یک مورد را از این ستون به سمت چپ بکشید - در پانل جعبه ابزار قابل مشاهده ظاهر می شود. همچنین می توانید موارد را با استفاده از دکمه های مثبت (+) و منفی (-) جابجا کنید.",
     // [Auto-translated] "New Category"
     addCustomCategory: "دسته بندی جدید",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const faStrings = {
     selectElement: "یک عنصر را برای سفارشی کردن تنظیمات موجود در Property Grid انتخاب کنید",
     // [Auto-translated] "Property Grid"
     propertyGrid: "شبکه املاک",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "بدون دسته بندی",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "ویژگی ها را به اینجا بکشید تا به آنها نشان داده شود",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "ویژگی ها را به اینجا بکشید تا پنهان شوند",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "موارد مرتب نشده",
+    hiddenItems: "موارد مرتب نشده",
     // [Auto-translated] "Name"
     categoryName: "نام",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const faStrings = {
     titleField: "عنوان",
     // [Auto-translated] "Helper Text"
     descriptionField: "متن کمکی",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "یک مورد را از این ستون به سمت چپ بکشید - در پنل Tabs قابل مشاهده ظاهر می شود. همچنین می توانید موارد را با استفاده از دکمه های مثبت (+) و منفی (-) جابجا کنید.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "افزودن دسته بندی سفارشی"
   },

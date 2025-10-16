@@ -26,11 +26,13 @@ export const arStrings = {
     // [Auto-translated] "Visible tabs"
     items: "علامات التبويب المرئية",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "علامات التبويب المخفية",
+    hiddenItems: "علامات التبويب المخفية",
     // [Auto-translated] "Default tab"
     defaultTab: "علامة التبويب الافتراضية",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "اسحب عنصرا من هذا العمود إلى العمود الأيسر - سيظهر مرئيا في لوحة علامات التبويب. يمكنك أيضا نقل العناصر باستخدام زري الجمع (+) والطرح (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "اسحب علامات التبويب هنا لإظهارها",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "اسحب علامات التبويب هنا لإخفائها",
     // [Auto-translated] "Name"
     name: "اسم",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const arStrings = {
     toolbox: "ادوات",
     // [Auto-translated] "Categories"
     categories: "فئات",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "لا توجد فئات",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "اسحب العناصر هنا لإظهارها",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "اسحب العناصر هنا لإخفائها",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "عناصر صندوق الأدوات المخفية",
+    hiddenItems: "عناصر صندوق الأدوات المخفية",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "تمكين التجميع",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const arStrings = {
     addToToolbox: "أضف إلى Toolbox",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "حذف عنصر مخصص",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "اسحب عنصرا من هذا العمود إلى العمود الأيسر - سيظهر مرئيا في لوحة Toolbox. يمكنك أيضا نقل العناصر باستخدام زري الجمع (+) والطرح (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "فئة جديدة",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const arStrings = {
     selectElement: "حدد عنصرا لتخصيص إعداداته المتوفرة في شبكة الخصائص",
     // [Auto-translated] "Property Grid"
     propertyGrid: "شبكة العقارات",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "لا توجد فئات",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "اسحب الخصائص هنا لإظهارها",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "اسحب الخصائص هنا لإخفائها",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "العناصر غير المصنفة",
+    hiddenItems: "العناصر غير المصنفة",
     // [Auto-translated] "Name"
     categoryName: "اسم",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const arStrings = {
     titleField: "عنوان",
     // [Auto-translated] "Helper Text"
     descriptionField: "نص مساعد",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "اسحب عنصرا من هذا العمود إلى العمود الأيسر - سيظهر مرئيا في لوحة علامات التبويب. يمكنك أيضا نقل العناصر باستخدام زري الجمع (+) والطرح (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "إضافة فئة مخصصة"
   },

@@ -26,11 +26,13 @@ export const mnStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Харагдах таб",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Нуугдмал таб",
+    hiddenItems: "Нуугдмал таб",
     // [Auto-translated] "Default tab"
     defaultTab: "Default tab",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Энэ баганаас зүүн тал руу нэг зүйлийг чирч гарга - Tabs panel-д харагдана. Мөн плюс (+) болон минус (-) товчлууруудыг ашиглан эд зүйлсийг зөөж болно.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Үзүүлэхийн тулд tab-уудыг энд чирч оруулна уу",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Тэдгээрийг нуухын тулд табуудыг энд чирч оруул",
     // [Auto-translated] "Name"
     name: "Нэр",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const mnStrings = {
     toolbox: "Toolbox",
     // [Auto-translated] "Categories"
     categories: "Ангилал",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Ангилал байхгүй",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Үзүүлэхийн тулд энд чирч оруул",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Нуухын тулд энд чирч оруул",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Нуугдмал хэрэгслийн зүйлс",
+    hiddenItems: "Нуугдмал хэрэгслийн зүйлс",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Бүлэглэлийг идэвхжүүлэх",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const mnStrings = {
     addToToolbox: "Toolbox-д оруулах",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Custom item устгах",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Энэ баганаас зүүн тал руу нэг зүйлийг чирч гарга - энэ нь Toolbox panel-д харагдах болно. Мөн плюс (+) болон минус (-) товчлууруудыг ашиглан эд зүйлсийг зөөж болно.",
     // [Auto-translated] "New Category"
     addCustomCategory: "Шинэ ангилал",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const mnStrings = {
     selectElement: "Property Grid-д байгаа тохиргоог нь тохируулах элементийг сонго",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Өмч хөрөнгийн сүлжээ",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Ангилал байхгүй",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Үзүүлэхийн тулд энд чирэгдүүл",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Шинж чанаруудыг нуухын тулд энд чирч оруул",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Ангилаагүй зүйлс",
+    hiddenItems: "Ангилаагүй зүйлс",
     // [Auto-translated] "Name"
     categoryName: "Нэр",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const mnStrings = {
     titleField: "Гарчиг",
     // [Auto-translated] "Helper Text"
     descriptionField: "Туслах текст",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Энэ баганаас зүүн тал руу нэг зүйлийг чирч гарга - Tabs panel-д харагдана. Мөн плюс (+) болон минус (-) товчлууруудыг ашиглан эд зүйлсийг зөөж болно.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Custom Category нэмэх"
   },

@@ -26,11 +26,13 @@ export const roStrings = {
     // [Auto-translated] "Visible tabs"
     items: "File vizibile",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "File ascunse",
+    hiddenItems: "File ascunse",
     // [Auto-translated] "Default tab"
     defaultTab: "Fila implicită",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trageți un element din această coloană în cea din stânga - acesta va apărea vizibil în panoul File. De asemenea, puteți muta elemente, folosind butoanele plus (+) și minus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Trageți filele aici pentru a le afișa",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Trageți filele aici pentru a le ascunde",
     // [Auto-translated] "Name"
     name: "Nume",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const roStrings = {
     toolbox: "Cutie de scule",
     // [Auto-translated] "Categories"
     categories: "Categorii",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Fără categorii",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Trageți elementele aici pentru a le afișa",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Trageți elementele aici pentru a le ascunde",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Elemente ascunse din cutia de instrumente",
+    hiddenItems: "Elemente ascunse din cutia de instrumente",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Activați gruparea",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const roStrings = {
     addToToolbox: "Adăugați în trusa de instrumente",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Ștergeți elementul personalizat",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trageți un element din această coloană în cea din stânga - acesta va apărea vizibil în panoul Trusa de scule. De asemenea, puteți muta elemente, folosind butoanele plus (+) și minus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Categorie nouă",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const roStrings = {
     selectElement: "Selectați un element pentru a-i personaliza setările disponibile în grila de proprietăți",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Grilă de proprietăți",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Fără categorii",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Trageți proprietățile aici pentru a le afișa",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Trageți proprietățile aici pentru a le ascunde",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Articole nesortate",
+    hiddenItems: "Articole nesortate",
     // [Auto-translated] "Name"
     categoryName: "Nume",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const roStrings = {
     titleField: "Titlu",
     // [Auto-translated] "Helper Text"
     descriptionField: "Text de ajutor",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trageți un element din această coloană în cea din stânga - acesta va apărea vizibil în panoul File. De asemenea, puteți muta elemente, folosind butoanele plus (+) și minus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Adăugați o categorie personalizată"
   },

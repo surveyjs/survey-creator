@@ -26,11 +26,13 @@ export const jaStrings = {
     // [Auto-translated] "Visible tabs"
     items: "表示タブ",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "非表示のタブ",
+    hiddenItems: "非表示のタブ",
     // [Auto-translated] "Default tab"
     defaultTab: "[デフォルト] タブ",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "この列から左の列に項目をドラッグすると、タブパネルに表示されます。プラス (+) ボタンとマイナス (-) ボタンを使用してアイテムを移動することもできます。",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "タブをここにドラッグして表示します",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "タブをここにドラッグして非表示にします",
     // [Auto-translated] "Name"
     name: "名前",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const jaStrings = {
     toolbox: "ツールボックス",
     // [Auto-translated] "Categories"
     categories: "カテゴリ",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "カテゴリなし",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "項目をここにドラッグして表示します",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "アイテムをここにドラッグして非表示にします",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "非表示のツールボックス項目",
+    hiddenItems: "非表示のツールボックス項目",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "グループ化を有効にする",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const jaStrings = {
     addToToolbox: "ツールボックスに追加",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "カスタムアイテムの削除",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "この列から左側の列に項目をドラッグすると、ツールボックスパネルに表示されます。プラス (+) ボタンとマイナス (-) ボタンを使用してアイテムを移動することもできます。",
     // [Auto-translated] "New Category"
     addCustomCategory: "新しいカテゴリ",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const jaStrings = {
     selectElement: "要素を選択して、プロパティグリッドで利用可能な設定をカスタマイズします",
     // [Auto-translated] "Property Grid"
     propertyGrid: "プロパティグリッド",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "カテゴリなし",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "プロパティをここにドラッグして表示します",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "ここにプロパティをドラッグして非表示にします",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "未ソートのアイテム",
+    hiddenItems: "未ソートのアイテム",
     // [Auto-translated] "Name"
     categoryName: "名前",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const jaStrings = {
     titleField: "タイトル",
     // [Auto-translated] "Helper Text"
     descriptionField: "ヘルパーテキスト",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "この列から左の列に項目をドラッグすると、タブパネルに表示されます。プラス (+) ボタンとマイナス (-) ボタンを使用してアイテムを移動することもできます。",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "カスタムカテゴリの追加"
   },

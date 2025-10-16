@@ -26,11 +26,13 @@ export const thStrings = {
     // [Auto-translated] "Visible tabs"
     items: "แท็บที่มองเห็นได้",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "แท็บที่ซ่อนอยู่",
+    hiddenItems: "แท็บที่ซ่อนอยู่",
     // [Auto-translated] "Default tab"
     defaultTab: "แท็บเริ่มต้น",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "ลากรายการจากคอลัมน์นี้ไปทางซ้าย - รายการนั้นจะปรากฏในแผงแท็บ คุณยังสามารถย้ายรายการได้โดยใช้ปุ่มบวก (+) และลบ (-)",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "ลากแท็บมาที่นี่เพื่อแสดง",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "ลากแท็บมาที่นี่เพื่อซ่อนแท็บ",
     // [Auto-translated] "Name"
     name: "ชื่อ",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const thStrings = {
     toolbox: "เครื่อง มือ",
     // [Auto-translated] "Categories"
     categories: "ประเภท",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "ไม่มีหมวดหมู่",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "ลากรายการมาที่นี่เพื่อแสดงรายการเหล่านั้น",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "ลากรายการมาที่นี่เพื่อซ่อนรายการเหล่านั้น",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "รายการกล่องเครื่องมือที่ซ่อนอยู่",
+    hiddenItems: "รายการกล่องเครื่องมือที่ซ่อนอยู่",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "เปิดใช้งานการจัดกลุ่ม",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const thStrings = {
     addToToolbox: "เพิ่มไปยังกล่องเครื่องมือ",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "ลบรายการที่กําหนดเอง",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "ลากรายการจากคอลัมน์นี้ไปทางซ้าย - รายการนั้นจะปรากฏในแผงกล่องเครื่องมือ คุณยังสามารถย้ายรายการได้โดยใช้ปุ่มบวก (+) และลบ (-)",
     // [Auto-translated] "New Category"
     addCustomCategory: "หมวดหมู่ใหม่",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const thStrings = {
     selectElement: "เลือกองค์ประกอบเพื่อปรับแต่งการตั้งค่าที่มีอยู่ในกริดคุณสมบัติ",
     // [Auto-translated] "Property Grid"
     propertyGrid: "ตารางทรัพย์สิน",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "ไม่มีหมวดหมู่",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "ลากคุณสมบัติมาที่นี่เพื่อแสดง",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "ลากคุณสมบัติที่นี่เพื่อซ่อน",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "รายการที่ไม่ได้เรียงลําดับ",
+    hiddenItems: "รายการที่ไม่ได้เรียงลําดับ",
     // [Auto-translated] "Name"
     categoryName: "ชื่อ",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const thStrings = {
     titleField: "ชื่อเรื่อง",
     // [Auto-translated] "Helper Text"
     descriptionField: "ข้อความตัวช่วย",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "ลากรายการจากคอลัมน์นี้ไปทางซ้าย - รายการนั้นจะปรากฏในแผงแท็บ คุณยังสามารถย้ายรายการได้โดยใช้ปุ่มบวก (+) และลบ (-)",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "เพิ่มหมวดหมู่ที่กําหนดเอง"
   },

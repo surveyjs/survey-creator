@@ -26,11 +26,13 @@ export const idStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Tab yang terlihat",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Tab tersembunyi",
+    hiddenItems: "Tab tersembunyi",
     // [Auto-translated] "Default tab"
     defaultTab: "Tab default",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Seret item dari kolom ini ke kiri - itu akan tampak terlihat di panel Tab. Anda juga dapat memindahkan item, menggunakan tombol plus (+) dan minus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Seret tab ke sini untuk menampilkannya",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Seret tab ke sini untuk menyembunyikannya",
     // [Auto-translated] "Name"
     name: "Nama",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const idStrings = {
     toolbox: "Toolbox",
     // [Auto-translated] "Categories"
     categories: "Kategori",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Tidak ada kategori",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Seret item ke sini untuk menampilkannya",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Seret item ke sini untuk menyembunyikannya",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Item kotak alat tersembunyi",
+    hiddenItems: "Item kotak alat tersembunyi",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Aktifkan pengelompokan",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const idStrings = {
     addToToolbox: "Tambahkan ke Toolbox",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Hapus Item Kustom",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Seret item dari kolom ini ke kiri - itu akan muncul terlihat di panel Toolbox. Anda juga dapat memindahkan item, menggunakan tombol plus (+) dan minus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Kategori Baru",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const idStrings = {
     selectElement: "Pilih elemen untuk menyesuaikan pengaturannya yang tersedia di Kisi Properti",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Kisi Properti",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Tidak ada kategori",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Seret properti ke sini untuk menampilkannya",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Seret properti ke sini untuk menyembunyikannya",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Item yang tidak diurutkan",
+    hiddenItems: "Item yang tidak diurutkan",
     // [Auto-translated] "Name"
     categoryName: "Nama",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const idStrings = {
     titleField: "Titel",
     // [Auto-translated] "Helper Text"
     descriptionField: "Teks Pembantu",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Seret item dari kolom ini ke kiri - itu akan tampak terlihat di panel Tab. Anda juga dapat memindahkan item, menggunakan tombol plus (+) dan minus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Tambahkan Kategori Kustom"
   },

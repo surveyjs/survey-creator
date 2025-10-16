@@ -26,11 +26,13 @@ export const htStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Onglè vizib",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Onglè kache",
+    hiddenItems: "Onglè kache",
     // [Auto-translated] "Default tab"
     defaultTab: "Default tab",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trennen yon atik soti nan kolòn sa a nan yon sèl la gòch - li pral parèt vizib nan panèl la Onglè. Ou kapab tou deplase atik, lè l sèvi avèk plis (+) ak mwens (-) bouton.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Trennen onglets isit la pou montre yo",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Trennen onglè isit la pou kache yo",
     // [Auto-translated] "Name"
     name: "Fe-apel",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const htStrings = {
     toolbox: "Bwat zouti",
     // [Auto-translated] "Categories"
     categories: "Kategori",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Pa gen kategori",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Trennen atik isit la pou montre yo",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Trennen atik isit la pou kache yo",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Atik bwat zouti kache",
+    hiddenItems: "Atik bwat zouti kache",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Pèmèt gwoupman",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const htStrings = {
     addToToolbox: "Ajoute nan bwat zouti",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Efase atik koutim",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trennen yon atik ki soti nan kolòn sa a nan yon sèl la gòch - li pral parèt vizib nan panèl la Toolbox. Ou kapab tou deplase atik, lè l sèvi avèk plis (+) ak mwens (-) bouton.",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nouvo Kategori",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const htStrings = {
     selectElement: "Chwazi yon eleman pou Customize anviwònman li yo ki disponib nan kadriyaj la Pwopriyete",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Pwopriyete kadriyaj",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Pa gen kategori",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Trennen pwopriyete isit la pou montre yo",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Trennen pwopriyete isit la kache yo",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Unsorted atik",
+    hiddenItems: "Unsorted atik",
     // [Auto-translated] "Name"
     categoryName: "Fe-apel",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const htStrings = {
     titleField: "Tit",
     // [Auto-translated] "Helper Text"
     descriptionField: "Tèks ede",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trennen yon atik soti nan kolòn sa a nan yon sèl la gòch - li pral parèt vizib nan panèl la Onglè. Ou kapab tou deplase atik, lè l sèvi avèk plis (+) ak mwens (-) bouton.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Add Custom Kategori"
   },

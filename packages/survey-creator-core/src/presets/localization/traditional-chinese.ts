@@ -26,11 +26,13 @@ export const zhTwStrings = {
     // [Auto-translated] "Visible tabs"
     items: "可見標籤",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "隱藏標籤",
+    hiddenItems: "隱藏標籤",
     // [Auto-translated] "Default tab"
     defaultTab: "預設索引標籤",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "將項目從此欄拖曳到左側 - 它將顯示在「標籤」面板中。您還可以使用加號 （+） 和減號 （-） 按鈕移動項目。",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "將標籤拖曳到此處以顯示它們",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "將標籤拖曳到此處以隱藏它們",
     // [Auto-translated] "Name"
     name: "名字",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const zhTwStrings = {
     toolbox: "工具箱",
     // [Auto-translated] "Categories"
     categories: "類別",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "無分類",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "將項目拖曳到此處以顯示它們",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "將項目拖曳到此處以隱藏它們",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "隱藏的工具箱項目",
+    hiddenItems: "隱藏的工具箱項目",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "啟用分組",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const zhTwStrings = {
     addToToolbox: "新增至工具箱",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "刪除自訂項目",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "將項目從此欄拖到左側 - 它將顯示在“工具箱”面板中。您還可以使用加號 （+） 和減號 （-） 按鈕移動項目。",
     // [Auto-translated] "New Category"
     addCustomCategory: "新類別",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const zhTwStrings = {
     selectElement: "選取元素以自訂其在「性質格線」中可用的設定",
     // [Auto-translated] "Property Grid"
     propertyGrid: "屬性格線",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "無分類",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "將屬性拖曳到此處以顯示它們",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "將屬性拖曳到此處以隱藏它們",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "未排序的項目",
+    hiddenItems: "未排序的項目",
     // [Auto-translated] "Name"
     categoryName: "名字",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const zhTwStrings = {
     titleField: "名",
     // [Auto-translated] "Helper Text"
     descriptionField: "輔助文字",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "將項目從此欄拖曳到左側 - 它將顯示在「標籤」面板中。您還可以使用加號 （+） 和減號 （-） 按鈕移動項目。",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "新增自訂類別"
   },

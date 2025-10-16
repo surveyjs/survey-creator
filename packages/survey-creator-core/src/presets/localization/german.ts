@@ -26,11 +26,13 @@ export const deStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Sichtbare Registerkarten",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Versteckte Registerkarten",
+    hiddenItems: "Versteckte Registerkarten",
     // [Auto-translated] "Default tab"
     defaultTab: "Registerkarte \"Standard\"",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Ziehen Sie ein Element aus dieser Spalte in die linke Spalte – es wird im Tabs-Bedienfeld angezeigt. Sie können Elemente auch verschieben, indem Sie die Plus- (+) und Minus-Tasten (-) verwenden.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Ziehen Sie Registerkarten hierher, um sie anzuzeigen",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Ziehen Sie Registerkarten hierher, um sie auszublenden",
     // [Auto-translated] "Name"
     name: "Name",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const deStrings = {
     toolbox: "Werkzeugkasten",
     // [Auto-translated] "Categories"
     categories: "Kategorien",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Keine Kategorien",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Ziehen Sie Elemente hierher, um sie anzuzeigen",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Ziehen Sie Elemente hierher, um sie auszublenden",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Versteckte Elemente der Toolbox",
+    hiddenItems: "Versteckte Elemente der Toolbox",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Gruppierung aktivieren",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const deStrings = {
     addToToolbox: "Zur Toolbox hinzufügen",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Benutzerdefiniertes Element löschen",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Ziehen Sie ein Element aus dieser Spalte in die linke Spalte - es wird im Toolbox-Panel sichtbar angezeigt. Sie können Elemente auch verschieben, indem Sie die Plus- (+) und Minus-Tasten (-) verwenden.",
     // [Auto-translated] "New Category"
     addCustomCategory: "Neue Kategorie",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const deStrings = {
     selectElement: "Wählen Sie ein Element aus, um seine Einstellungen anzupassen, die im Eigenschaftenraster verfügbar sind",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Eigenschafts-Raster",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Keine Kategorien",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Ziehen Sie Eigenschaften hierher, um sie anzuzeigen",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Ziehen Sie Eigenschaften hierher, um sie auszublenden",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Unsortierte Artikel",
+    hiddenItems: "Unsortierte Artikel",
     // [Auto-translated] "Name"
     categoryName: "Name",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const deStrings = {
     titleField: "Titel",
     // [Auto-translated] "Helper Text"
     descriptionField: "Hilfstext",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Ziehen Sie ein Element aus dieser Spalte in die linke Spalte – es wird im Tabs-Bedienfeld angezeigt. Sie können Elemente auch verschieben, indem Sie die Plus- (+) und Minus-Tasten (-) verwenden.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Benutzerdefinierte Kategorie hinzufügen"
   },

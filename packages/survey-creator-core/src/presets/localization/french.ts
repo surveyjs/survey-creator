@@ -26,11 +26,13 @@ export const frStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Onglets visibles",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Onglets cachés",
+    hiddenItems: "Onglets cachés",
     // [Auto-translated] "Default tab"
     defaultTab: "Onglet par défaut",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Faites glisser un élément de cette colonne vers la gauche - il apparaîtra visible dans le panneau Onglets. Vous pouvez également déplacer des éléments à l’aide des boutons plus (+) et moins (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Faites glisser les onglets ici pour les afficher",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Faites glisser les onglets ici pour les masquer",
     // [Auto-translated] "Name"
     name: "Nom",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const frStrings = {
     toolbox: "Toolbox",
     // [Auto-translated] "Categories"
     categories: "Catégories",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Aucune catégorie",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Faites glisser les éléments ici pour les afficher",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Faites glisser des éléments ici pour les masquer",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Éléments de boîte à outils cachés",
+    hiddenItems: "Éléments de boîte à outils cachés",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Activer le regroupement",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const frStrings = {
     addToToolbox: "Ajouter à la boîte à outils",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Supprimer un élément personnalisé",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Faites glisser un élément de cette colonne vers la gauche - il apparaîtra visible dans le panneau Boîte à outils. Vous pouvez également déplacer des éléments à l’aide des boutons plus (+) et moins (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nouvelle catégorie",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const frStrings = {
     selectElement: "Sélectionnez un élément pour personnaliser ses paramètres disponibles dans la grille de propriétés",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Grille des propriétés",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Aucune catégorie",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Faites glisser les propriétés ici pour les afficher",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Faites glisser les propriétés ici pour les masquer",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Articles non triés",
+    hiddenItems: "Articles non triés",
     // [Auto-translated] "Name"
     categoryName: "Nom",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const frStrings = {
     titleField: "Titre",
     // [Auto-translated] "Helper Text"
     descriptionField: "Texte d’aide",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Faites glisser un élément de cette colonne vers la gauche - il apparaîtra visible dans le panneau Onglets. Vous pouvez également déplacer des éléments à l’aide des boutons plus (+) et moins (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Ajouter une catégorie personnalisée"
   },

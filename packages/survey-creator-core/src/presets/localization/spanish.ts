@@ -26,11 +26,13 @@ export const esStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Pestañas visibles",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Pestañas ocultas",
+    hiddenItems: "Pestañas ocultas",
     // [Auto-translated] "Default tab"
     defaultTab: "Pestaña predeterminada",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Arrastre un elemento de esta columna a la izquierda: aparecerá visible en el panel Pestañas. También puede mover elementos, usando los botones más (+) y menos (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Arrastre las pestañas aquí para mostrarlas",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Arrastra pestañas aquí para ocultarlas",
     // [Auto-translated] "Name"
     name: "Nombre",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const esStrings = {
     toolbox: "Caja de herramientas",
     // [Auto-translated] "Categories"
     categories: "Categorías",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Sin categorías",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Arrastra elementos aquí para mostrarlos",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Arrastra elementos aquí para ocultarlos",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Elementos ocultos de la caja de herramientas",
+    hiddenItems: "Elementos ocultos de la caja de herramientas",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Habilitar agrupación",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const esStrings = {
     addToToolbox: "Agregar a la caja de herramientas",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Eliminar elemento personalizado",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Arrastre un elemento de esta columna a la izquierda: aparecerá visible en el panel Caja de herramientas. También puede mover elementos, usando los botones más (+) y menos (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nueva categoría",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const esStrings = {
     selectElement: "Seleccione un elemento para personalizar su configuración disponible en la cuadrícula de propiedades",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Cuadrícula de propiedades",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Sin categorías",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Arrastre las propiedades aquí para mostrarlas",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Arrastre las propiedades aquí para ocultarlas",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Artículos sin clasificar",
+    hiddenItems: "Artículos sin clasificar",
     // [Auto-translated] "Name"
     categoryName: "Nombre",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const esStrings = {
     titleField: "Título",
     // [Auto-translated] "Helper Text"
     descriptionField: "Texto auxiliar",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Arrastre un elemento de esta columna a la izquierda: aparecerá visible en el panel Pestañas. También puede mover elementos, usando los botones más (+) y menos (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Agregar categoría personalizada"
   },

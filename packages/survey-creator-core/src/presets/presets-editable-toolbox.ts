@@ -28,8 +28,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       rowCount: 0,
       allowAddRows: false,
       addRowButtonLocation: "top",
-      addRowText: "Add Custom Item",
-      "noRowsText": "There are no items",
       columns: [
         {
           "name": "name",
@@ -102,6 +100,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               allowRowReorder: true,
               allowAddRows: true,
               addRowButtonLocation: "top",
+              noRowsText: getLocString("presets.toolbox.noCategoriesText"),
               addRowText: getLocString("presets.toolbox.addCustomCategory"),
               showHeader: false,
               columns: [
@@ -118,6 +117,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   titleLocation: "hidden",
                   allowAddRows: true,
                   addRowButtonLocation: "bottom",
+                  noRowsText: getLocString("presets.toolbox.noItemsText"),
                   addRowText: getLocString("presets.toolbox.addNewItem"),
                   valueName: "items"
                 }, true)
@@ -127,14 +127,15 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               name: this.nameItems,
               title: getLocString("presets.toolbox.toolbox"),
               addRowButtonLocation: "top",
+              noRowsText: getLocString("presets.toolbox.noItemsText"),
               addRowText: getLocString("presets.toolbox.addCustomItem"),
               startWithNewLine: false,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
             }, true),
             this.createItemsMatrixJSON({
               allowAddRows: true,
-              title: getLocString("presets.toolbox.unsortedItems"),
-              description: getLocString("presets.toolbox.unsortedDescription"),
+              title: getLocString("presets.toolbox.hiddenItems"),
+              noRowsText: getLocString("presets.toolbox.noHiddenItemsText"),
               descriptionLocation: "underInput",
               addRowButtonLocation: "bottom",
               addRowText: getLocString("presets.toolbox.addNewItem"),

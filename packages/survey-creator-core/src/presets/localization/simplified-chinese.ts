@@ -26,11 +26,13 @@ export const zhCnStrings = {
     // [Auto-translated] "Visible tabs"
     items: "可见选项卡",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "隐藏标签页",
+    hiddenItems: "隐藏标签页",
     // [Auto-translated] "Default tab"
     defaultTab: "默认选项卡",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "将项目从此列拖到左侧 - 它将在选项卡面板中显示。您还可以使用加号 （+） 和减号 （-） 按钮移动项目。",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "将选项卡拖到此处以显示它们",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "将选项卡拖到此处以隐藏它们",
     // [Auto-translated] "Name"
     name: "名字",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const zhCnStrings = {
     toolbox: "工具箱",
     // [Auto-translated] "Categories"
     categories: "类别",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "无类别",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "将项目拖到此处以显示它们",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "将项目拖到此处以隐藏它们",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "隐藏的工具箱项目",
+    hiddenItems: "隐藏的工具箱项目",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "启用分组",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const zhCnStrings = {
     addToToolbox: "添加到工具箱",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "删除自定义项目",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "将项目从此列拖到左侧 - 它将在“工具箱”面板中显示。您还可以使用加号 （+） 和减号 （-） 按钮移动项目。",
     // [Auto-translated] "New Category"
     addCustomCategory: "新类别",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const zhCnStrings = {
     selectElement: "选择一个元素以自定义其在属性网格中可用的设置",
     // [Auto-translated] "Property Grid"
     propertyGrid: "属性网格",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "无类别",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "将属性拖到此处以显示它们",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "将属性拖到此处以隐藏它们",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "未排序的项目",
+    hiddenItems: "未排序的项目",
     // [Auto-translated] "Name"
     categoryName: "名字",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const zhCnStrings = {
     titleField: "标题",
     // [Auto-translated] "Helper Text"
     descriptionField: "辅助文本",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "将项目从此列拖到左侧 - 它将在选项卡面板中显示。您还可以使用加号 （+） 和减号 （-） 按钮移动项目。",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "添加自定义类别"
   },

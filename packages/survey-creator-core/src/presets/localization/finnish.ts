@@ -26,11 +26,13 @@ export const fiStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Näkyvät välilehdet",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Piilotetut välilehdet",
+    hiddenItems: "Piilotetut välilehdet",
     // [Auto-translated] "Default tab"
     defaultTab: "Oletus-välilehti",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Vedä kohde tästä sarakkeesta vasemmalle - se näkyy Välilehdet-paneelissa. Voit myös siirtää kohteita plus- (+) ja miinuspainikkeilla (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Näytä välilehdet vetämällä ne tänne",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Piilota välilehdet vetämällä ne tänne",
     // [Auto-translated] "Name"
     name: "Nimi",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const fiStrings = {
     toolbox: "Työkalupakki",
     // [Auto-translated] "Categories"
     categories: "Luokat",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Ei luokkia",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Näytä kohteet vetämällä ne tänne",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Piilota kohteet vetämällä ne tänne",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Piilotetut työkalupakin kohteet",
+    hiddenItems: "Piilotetut työkalupakin kohteet",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Ota ryhmittely käyttöön",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const fiStrings = {
     addToToolbox: "Lisää työkalupakkiin",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Poista mukautettu kohde",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Vedä kohde tästä sarakkeesta vasemmalle - se näkyy Työkalupakki-paneelissa. Voit myös siirtää kohteita plus- (+) ja miinuspainikkeilla (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Uusi luokka",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const fiStrings = {
     selectElement: "Valitse elementti, jos haluat mukauttaa sen asetuksia, jotka ovat käytettävissä ominaisuusruudukossa",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Ominaisuuden ruudukko",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Ei luokkia",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Näytä ominaisuudet vetämällä ne tähän",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Piilota ominaisuudet vetämällä ne tähän",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Lajittelemattomat kohteet",
+    hiddenItems: "Lajittelemattomat kohteet",
     // [Auto-translated] "Name"
     categoryName: "Nimi",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const fiStrings = {
     titleField: "Nimike",
     // [Auto-translated] "Helper Text"
     descriptionField: "Aputeksti",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Vedä kohde tästä sarakkeesta vasemmalle - se näkyy Välilehdet-paneelissa. Voit myös siirtää kohteita plus- (+) ja miinuspainikkeilla (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Lisää mukautettu luokka"
   },

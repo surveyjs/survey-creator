@@ -26,11 +26,13 @@ export const ptStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Guias visíveis",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Guias ocultas",
+    hiddenItems: "Guias ocultas",
     // [Auto-translated] "Default tab"
     defaultTab: "Guia Padrão",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Arraste um item desta coluna para a esquerda - ele aparecerá visível no painel Guias. Você também pode mover itens, usando os botões de mais (+) e menos (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Arraste as guias aqui para mostrá-las",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Arraste as guias aqui para ocultá-las",
     // [Auto-translated] "Name"
     name: "Nome",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const ptStrings = {
     toolbox: "Toolbox",
     // [Auto-translated] "Categories"
     categories: "Categorias",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Sem categorias",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Arraste os itens aqui para mostrá-los",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Arraste os itens aqui para ocultá-los",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Itens ocultos da caixa de ferramentas",
+    hiddenItems: "Itens ocultos da caixa de ferramentas",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Habilitar agrupamento",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const ptStrings = {
     addToToolbox: "Adicionar à caixa de ferramentas",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Excluir item personalizado",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Arraste um item desta coluna para a esquerda - ele aparecerá visível no painel Caixa de ferramentas. Você também pode mover itens, usando os botões de mais (+) e menos (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nova categoria",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const ptStrings = {
     selectElement: "Selecione um elemento para personalizar suas configurações disponíveis na Grade de propriedades",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Grade de propriedades",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Sem categorias",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Arraste as propriedades aqui para mostrá-las",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Arraste as propriedades aqui para ocultá-las",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Itens não classificados",
+    hiddenItems: "Itens não classificados",
     // [Auto-translated] "Name"
     categoryName: "Nome",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const ptStrings = {
     titleField: "Título",
     // [Auto-translated] "Helper Text"
     descriptionField: "Texto auxiliar",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Arraste um item desta coluna para a esquerda - ele aparecerá visível no painel Guias. Você também pode mover itens, usando os botões de mais (+) e menos (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Adicionar categoria personalizada"
   },

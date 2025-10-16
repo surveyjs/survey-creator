@@ -26,11 +26,13 @@ export const itStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Schede visibili",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Schede nascoste",
+    hiddenItems: "Schede nascoste",
     // [Auto-translated] "Default tab"
     defaultTab: "Scheda Predefinito",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trascina un elemento da questa colonna a quella sinistra: apparirà visibile nel pannello Schede. È inoltre possibile spostare gli elementi utilizzando i pulsanti più (+) e meno (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Trascina le schede qui per mostrarle",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Trascina qui le schede per nasconderle",
     // [Auto-translated] "Name"
     name: "Nome",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const itStrings = {
     toolbox: "Cassetta degli attrezzi",
     // [Auto-translated] "Categories"
     categories: "Categorie",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Nessuna categoria",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Trascina qui gli elementi per visualizzarli",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Trascina qui gli elementi per nasconderli",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Elementi nascosti della casella degli strumenti",
+    hiddenItems: "Elementi nascosti della casella degli strumenti",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Abilita raggruppamento",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const itStrings = {
     addToToolbox: "Aggiungi alla casella degli strumenti",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Elimina articolo personalizzato",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trascina un elemento da questa colonna a quella sinistra: apparirà visibile nel pannello Toolbox. È inoltre possibile spostare gli elementi utilizzando i pulsanti più (+) e meno (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nuova Categoria",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const itStrings = {
     selectElement: "Seleziona un elemento per personalizzarne le impostazioni disponibili nella Griglia Proprietà",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Griglia delle proprietà",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Nessuna categoria",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Trascina qui le proprietà per visualizzarle",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Trascina qui le proprietà per nasconderle",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Articoli non ordinati",
+    hiddenItems: "Articoli non ordinati",
     // [Auto-translated] "Name"
     categoryName: "Nome",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const itStrings = {
     titleField: "Titolo",
     // [Auto-translated] "Helper Text"
     descriptionField: "Testo di supporto",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Trascina un elemento da questa colonna a quella sinistra: apparirà visibile nel pannello Schede. È inoltre possibile spostare gli elementi utilizzando i pulsanti più (+) e meno (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Aggiungi categoria personalizzata"
   },

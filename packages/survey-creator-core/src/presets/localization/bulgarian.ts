@@ -26,11 +26,13 @@ export const bgStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Видими раздели",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Скрити раздели",
+    hiddenItems: "Скрити раздели",
     // [Auto-translated] "Default tab"
     defaultTab: "Раздел по подразбиране",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Плъзнете елемент от тази колона в лявата - той ще се появи видим в панела Раздели. Можете също така да премествате елементи с помощта на бутоните плюс (+) и минус (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Плъзнете разделите тук, за да ги покажете",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Плъзнете разделите тук, за да ги скриете",
     // [Auto-translated] "Name"
     name: "Име",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const bgStrings = {
     toolbox: "Инструменти",
     // [Auto-translated] "Categories"
     categories: "Категории",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Няма категории",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Плъзнете елементите тук, за да ги покажете",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Плъзнете елементите тук, за да ги скриете",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Скрити елементи от кутия с инструменти",
+    hiddenItems: "Скрити елементи от кутия с инструменти",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Активиране на групиране",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const bgStrings = {
     addToToolbox: "Добави в кутията с инструменти",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Изтриване на персонализиран елемент",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Плъзнете елемент от тази колона в лявата - той ще се появи видим �� панела Toolbox. Можете също така да премествате елементи с помощта на бутоните плюс (+) и минус (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Нова категория",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const bgStrings = {
     selectElement: "Изберете елемент, за да персонализирате настройките му, налични в мрежата със свойства",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Мрежа от имоти",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Няма категории",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Плъзнете свойствата тук, за да ги покажете",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Плъзнете свойствата тук, за да ги скриете",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Несортирани елементи",
+    hiddenItems: "Несортирани елементи",
     // [Auto-translated] "Name"
     categoryName: "Име",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const bgStrings = {
     titleField: "Заглавие",
     // [Auto-translated] "Helper Text"
     descriptionField: "Помощен текст",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Плъзнете елемент от тази колона в лявата - той ще се появи видим в панела Раздели. Можете също така да премествате елементи с помощта на бутоните плюс (+) и минус (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Добавяне на персонализирана категория"
   },

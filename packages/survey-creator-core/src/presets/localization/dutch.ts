@@ -26,11 +26,13 @@ export const nlStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Zichtbare tabbladen",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Verborgen tabbladen",
+    hiddenItems: "Verborgen tabbladen",
     // [Auto-translated] "Default tab"
     defaultTab: "Tabblad Standaard",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Sleep een item van deze kolom naar de linkerkolom - het wordt zichtbaar weergegeven in het deelvenster Tabbladen. U kunt ook items verplaatsen met behulp van de plus- (+) en minknop (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Sleep tabbladen hierheen om ze weer te geven",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Sleep tabbladen hierheen om ze te verbergen",
     // [Auto-translated] "Name"
     name: "Naam",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const nlStrings = {
     toolbox: "Gereedschapskist",
     // [Auto-translated] "Categories"
     categories: "Categorieën",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Geen categorieën",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Sleep items hierheen om ze weer te geven",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Sleep items hierheen om ze te verbergen",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Verborgen gereedschapskistitems",
+    hiddenItems: "Verborgen gereedschapskistitems",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Groeperen inschakelen",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const nlStrings = {
     addToToolbox: "Toevoegen aan Toolbox",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Aangepast item verwijderen",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Sleep een item van deze kolom naar de linkerkolom - het wordt zichtbaar weergegeven in het deelvenster Gereedschapsset. U kunt ook items verplaatsen met behulp van de plus- (+) en minknop (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nieuwe categorie",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const nlStrings = {
     selectElement: "Selecteer een element om de instellingen aan te passen die beschikbaar zijn in het eigenschappenraster",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Eigendom raster",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Geen categorieën",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Sleep eigenschappen hierheen om ze weer te geven",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Sleep eigenschappen hierheen om ze te verbergen",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Ongesorteerde artikelen",
+    hiddenItems: "Ongesorteerde artikelen",
     // [Auto-translated] "Name"
     categoryName: "Naam",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const nlStrings = {
     titleField: "Titel",
     // [Auto-translated] "Helper Text"
     descriptionField: "Helper Tekst",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Sleep een item van deze kolom naar de linkerkolom - het wordt zichtbaar weergegeven in het deelvenster Tabbladen. U kunt ook items verplaatsen met behulp van de plus- (+) en minknop (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Aangepaste categorie toevoegen"
   },

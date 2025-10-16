@@ -46,13 +46,14 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
           elements: [
             this.createItemsMatrixJSON({
               title: getLocString("presets.tabs.items"),
+              noRowsText: getLocString("presets.tabs.noItemsText"),
               name: this.nameItems
             }),
             this.createItemsMatrixJSON({
               startWithNewLine: false,
-              title: getLocString("presets.tabs.unsortedItems"),
+              title: getLocString("presets.tabs.hiddenItems"),
+              noRowsText: getLocString("presets.tabs.noHiddenItemsText"),
               name: this.nameMatrix,
-              description: getLocString("presets.tabs.unsortedDescription"),
               descriptionLocation: "underInput",
             }),
           ]

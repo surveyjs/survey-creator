@@ -26,11 +26,9 @@ export const mmStrings = {
     // [Auto-translated] "Visible tabs"
     items: "မြင်နိုင်သော စာမျက်နှာခွဲများ",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "ဖုံးကွယ်ထားသော စာမျက်နှာများ",
+    hiddenItems: "ဖုံးကွယ်ထားသော စာမျက်နှာများ",
     // [Auto-translated] "Default tab"
     defaultTab: "စံထားချက် စာမျက်နှာခွဲ",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "ဒီကော်လံကနေ ဘယ်ဘက်ကို အရာတစ်ခုကို ဆွဲလိုက်ပါ၊ Tabs ဘောင်ကွက်ထဲမှာ မြင်ရလိမ့်မယ်။ သင်သည် အပေါင်း(+)နှင့် အနုတ် (-) ခလုတ်များကိုသုံး၍ ပစ္စည်းများကို ရွှေ့ပြောင်းနိုင်ပါသည်။",
     // [Auto-translated] "Name"
     name: "အမည်",
     // [Auto-translated] "Title"
@@ -50,7 +48,7 @@ export const mmStrings = {
     // [Auto-translated] "Categories"
     categories: "အမျိုးအစား",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "ဝှက်ထားတဲ့ ကိရိယာအိတ် အချက်အလက်များ",
+    hiddenItems: "ဝှက်ထားတဲ့ ကိရိယာအိတ် အချက်အလက်များ",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "အုပ်စုလိုက်ခွင့်ပြုပါ",
     // [Auto-translated] "Show category titles"
@@ -75,8 +73,6 @@ export const mmStrings = {
     addToToolbox: "ကိရိယာအိတ်ထဲသို့ ပေါင်းထည့်ပါ",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "စိတ်ကြိုက် အချက်အလက်ကို ပယ်ဖျက်ပါ",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "ဒီကော်လံကနေ ဘယ်ဘက်ကို အရာတစ်ခုကို ဆွဲလိုက်ပါ၊ ကိရိယာအိတ် ဘောင်ကွက်ထဲမှာ မြင်နိုင်ပါလိမ့်မယ်။ သင်သည် အပေါင်း(+)နှင့် အနုတ် (-) ခလုတ်များကိုသုံး၍ ပစ္စည်းများကို ရွှေ့ပြောင်းနိုင်ပါသည်။",
     // [Auto-translated] "New Category"
     addCustomCategory: "အမျိုးအစား အသစ်",
     // [Auto-translated] "New Item"
@@ -102,7 +98,7 @@ export const mmStrings = {
     // [Auto-translated] "Property Grid"
     propertyGrid: "ပိုင်ဆိုင်ရာဂရစ်ကွက်",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "မစီထားတဲ့ အရာဝတ္ထု",
+    hiddenItems: "မစီထားတဲ့ အရာဝတ္ထု",
     // [Auto-translated] "Name"
     categoryName: "အမည်",
     // [Auto-translated] "Title"
@@ -115,8 +111,6 @@ export const mmStrings = {
     titleField: "ခေါင်းစဉ်",
     // [Auto-translated] "Helper Text"
     descriptionField: "ကူညီသူ စာသား",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "ဒီကော်လံကနေ ဘယ်ဘက်ကို အရာတစ်ခုကို ဆွဲလိုက်ပါ၊ Tabs ဘောင်ကွက်ထဲမှာ မြင်ရလိမ့်မယ်။ သင်သည် အပေါင်း(+)နှင့် အနုတ် (-) ခလုတ်များကိုသုံး၍ ပစ္စည်းများကို ရွှေ့ပြောင်းနိုင်ပါသည်။",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "စိတ်ကြိုက် အမျိုးအစား ပေါင်းထည့်ပါ"
   },

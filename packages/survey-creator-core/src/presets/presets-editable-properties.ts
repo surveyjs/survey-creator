@@ -269,6 +269,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               allowRowReorder: true,
               addRowButtonLocation: "top",
               allowAddRows: true,
+              noRowsText: getLocString("presets.propertyGrid.noCategoriesText"),
               addRowText: getLocString("presets.propertyGrid.addCustomCategory"),
               showHeader: false,
               columns: [
@@ -283,14 +284,15 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                 { type: "dropdown", name: "iconName", title: getLocString("presets.propertyGrid.iconName"), itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
+                  noRowsText: getLocString("presets.propertyGrid.noItemsText"),
                   titleLocation: "hidden",
                 })
               ]
             },
             this.createItemsMatrixJSON({
-              title: getLocString("presets.propertyGrid.unsortedItems"),
+              title: getLocString("presets.propertyGrid.hiddenItems"),
               name: this.nameMatrix,
-              description: getLocString("presets.propertyGrid.unsortedDescription"),
+              noRowsText: getLocString("presets.propertyGrid.noHiddenItemsText"),
               descriptionLocation: "underInput",
               startWithNewLine: false,
             })

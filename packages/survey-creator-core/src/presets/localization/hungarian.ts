@@ -26,11 +26,13 @@ export const huStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Látható lapok",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Rejtett lapok",
+    hiddenItems: "Rejtett lapok",
     // [Auto-translated] "Default tab"
     defaultTab: "Alapértelmezett lap",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Húzzon egy elemet ebből az oszlopból balra - az látható lesz a Lapok panelen. Az elemeket a plusz (+) és a mínusz (-) gombokkal is áthelyezheti.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Húzza ide a lapokat a megjelenítésükhöz",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Húzza ide a lapokat az elrejtéshez",
     // [Auto-translated] "Name"
     name: "Név",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const huStrings = {
     toolbox: "Szerszámosláda",
     // [Auto-translated] "Categories"
     categories: "Kategóriák",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Nincs kategória",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Húzza ide az elemeket a megjelenítésükhöz",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Húzza ide az elemeket az elrejtéshez",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Rejtett eszköztár elemek",
+    hiddenItems: "Rejtett eszköztár elemek",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Csoportosítás engedélyezése",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const huStrings = {
     addToToolbox: "Hozzáadás az eszköztárhoz",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Egyéni elem törlése",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Húzzon egy elemet ebből az oszlopból balra - az látható lesz az Eszköztár panelen. Az elemeket a plusz (+) és a mínusz (-) gombokkal is áthelyezheti.",
     // [Auto-translated] "New Category"
     addCustomCategory: "Új kategória",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const huStrings = {
     selectElement: "Válasszon ki egy elemet a tulajdonságrácsban elérhető beállítások testreszabásához",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Tulajdonságrács",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Nincs kategória",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Húzza ide a tulajdonságokat a megjelenítésükhöz",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Húzza ide a tulajdonságokat az elrejtéshez",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Rendezetlen elemek",
+    hiddenItems: "Rendezetlen elemek",
     // [Auto-translated] "Name"
     categoryName: "Név",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const huStrings = {
     titleField: "Cím",
     // [Auto-translated] "Helper Text"
     descriptionField: "Segítő szöveg",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Húzzon egy elemet ebből az oszlopból balra - az látható lesz a Lapok panelen. Az elemeket a plusz (+) és a mínusz (-) gombokkal is áthelyezheti.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Egyéni kategória hozzáadása"
   },

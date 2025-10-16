@@ -26,11 +26,13 @@ export const elStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Ορατές καρτέλες",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Κρυφές καρτέλες",
+    hiddenItems: "Κρυφές καρτέλες",
     // [Auto-translated] "Default tab"
     defaultTab: "Προεπιλεγμένη καρτέλα",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Σύρετε ένα στοιχείο από αυτήν τη στήλη προς τα αριστερά - θα εμφανιστεί ορατό στον πίνακα καρτελών. Μπορείτε επίσης να μετακινήσετε στοιχεία, χρησιμοποιώντας τα κουμπιά συν (+) και πλην (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Σύρετε τις καρτέλες εδώ για να τις εμφανίσετε",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Σύρετε τις καρτέλες εδώ για να τις αποκρύψετε",
     // [Auto-translated] "Name"
     name: "Όνομα",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const elStrings = {
     toolbox: "Εργαλειοθήκη",
     // [Auto-translated] "Categories"
     categories: "Κατηγορίες",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Χωρίς κατηγορίες",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Σύρετε στοιχεία εδώ για να τα εμφανίσετε",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Σύρετε στοιχεία εδώ για να τα αποκρύψετε",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Κρυφά στοιχεία εργαλειοθήκης",
+    hiddenItems: "Κρυφά στοιχεία εργαλειοθήκης",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Ενεργοποίηση ομαδοποίησης",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const elStrings = {
     addToToolbox: "Προσθήκη στην εργαλειοθήκη",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Διαγραφή προσαρμοσμένου στοιχείου",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Σύρετε ένα στοιχείο από αυτήν τη στήλη προς τα αριστερά - θα ��μφανιστεί ορατό στον πίνακα Εργαλειοθήκη. Μπορείτε επίσης να μετακινήσετε στοιχεία, χρησιμοποιώντας τα κουμπιά συν (+) και πλην (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Νέα Κατηγορία",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const elStrings = {
     selectElement: "Επιλέξτε ένα στοιχείο για να προσαρμόσετε τις ρυθμίσεις του που είναι διαθέσιμες στο Πλέγμα Ιδιότητας",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Πλέγμα ιδιοκτησίας",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Χωρίς κατηγορίες",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Σύρετε τις ιδιότητες εδώ για να τις εμφανίσετε",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Σύρετε τις ιδιότητες εδώ για να τις αποκρύψετε",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Αταξινόμητα αντικείμενα",
+    hiddenItems: "Αταξινόμητα αντικείμενα",
     // [Auto-translated] "Name"
     categoryName: "Όνομα",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const elStrings = {
     titleField: "Τίτλος",
     // [Auto-translated] "Helper Text"
     descriptionField: "Βοηθητικό κείμενο",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Σύρετε ένα στοιχείο από αυτήν τη στήλη προς τα αριστερά - θα εμφανιστεί ορατό στον πίνακα καρτελών. Μπορείτε επίσης να μετακινήσετε στοιχεία, χρησιμοποιώντας τα κουμπιά συν (+) και πλην (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Προσθήκη προσαρμοσμένης κατηγορίας"
   },

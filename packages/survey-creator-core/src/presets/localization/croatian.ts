@@ -26,11 +26,13 @@ export const hrStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Vidljive kartice",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Skrivene kartice",
+    hiddenItems: "Skrivene kartice",
     // [Auto-translated] "Default tab"
     defaultTab: "Zadana kartica",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Povucite stavku iz ovog stupca ulijevo - pojavit će se vidljiva na ploči Kartice. Također možete premještati stavke pomoću tipki plus (+) i minus (-).",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Povucite kartice ovdje da biste ih prikazali",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Povucite kartice ovdje da biste ih sakrili",
     // [Auto-translated] "Name"
     name: "Ime",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const hrStrings = {
     toolbox: "Alatni okvir",
     // [Auto-translated] "Categories"
     categories: "Kategorije",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Nema kategorija",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Povucite stavke ovdje da biste ih prikazali",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Povucite stavke ovdje da biste ih sakrili",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Skrivene stavke kutije s alatima",
+    hiddenItems: "Skrivene stavke kutije s alatima",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Omogućivanje grupiranja",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const hrStrings = {
     addToToolbox: "Dodaj u okvir s alatima",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Izbriši prilagođenu stavku",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Povucite stavku iz ovog stupca ulijevo - pojavit će se vidljiva na ploči Toolbox. Također možete premještati stavke pomoću tipki plus (+) i minus (-).",
     // [Auto-translated] "New Category"
     addCustomCategory: "Nova kategorija",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const hrStrings = {
     selectElement: "Odaberite element da biste prilagodili njegove postavke dostupne u rešetki svojstava",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Mreža nekretnina",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Nema kategorija",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Povucite svojstva ovdje da biste ih prikazali",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Povucite svojstva ovdje da biste ih sakrili",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Nerazvrstane stavke",
+    hiddenItems: "Nerazvrstane stavke",
     // [Auto-translated] "Name"
     categoryName: "Ime",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const hrStrings = {
     titleField: "Naslov",
     // [Auto-translated] "Helper Text"
     descriptionField: "Pomoćni tekst",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Povucite stavku iz ovog stupca ulijevo - pojavit će se vidljiva na ploči Kartice. Također možete premještati stavke pomoću tipki plus (+) i minus (-).",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Dodaj prilagođenu kategoriju"
   },

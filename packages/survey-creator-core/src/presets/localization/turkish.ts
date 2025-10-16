@@ -26,11 +26,13 @@ export const trStrings = {
     // [Auto-translated] "Visible tabs"
     items: "Görünür sekmeler",
     // [Auto-translated] "Hidden tabs"
-    unsortedItems: "Gizli sekmeler",
+    hiddenItems: "Gizli sekmeler",
     // [Auto-translated] "Default tab"
     defaultTab: "Varsayılan sekme",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Bir öğeyi bu sütundan sola sürükleyin - Sekmeler panelinde görünür görünecektir. Artı (+) ve eksi (-) düğmelerini kullanarak öğeleri de taşıyabilirsiniz.",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Sekmeleri göstermek için buraya sürükleyin",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Gizlemek için sekmeleri buraya sürükleyin",
     // [Auto-translated] "Name"
     name: "Ad",
     // [Auto-translated] "Title"
@@ -49,8 +51,14 @@ export const trStrings = {
     toolbox: "Araç",
     // [Auto-translated] "Categories"
     categories: "Kategori",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Kategori yok",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Öğeleri göstermek için buraya sürükleyin",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Öğeleri gizlemek için buraya sürükleyin",
     // [Auto-translated] "Hidden toolbox items"
-    unsortedItems: "Gizli araç kutusu öğeleri",
+    hiddenItems: "Gizli araç kutusu öğeleri",
     // [Auto-translated] "Enable grouping"
     enableGrouping: "Gruplandırmayı etkinleştir",
     // [Auto-translated] "Show category titles"
@@ -75,8 +83,6 @@ export const trStrings = {
     addToToolbox: "Araç Kutusu'na ekle",
     // [Auto-translated] "Delete Custom Item"
     deleteCustomItem: "Özel Öğeyi Sil",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Toolbox panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Bir öğeyi bu sütundan sola sürükleyin - Araç Kutusu panelinde görünür görünecektir. Artı (+) ve eksi (-) düğmelerini kullanarak öğeleri de taşıyabilirsiniz.",
     // [Auto-translated] "New Category"
     addCustomCategory: "Yeni Kategori",
     // [Auto-translated] "New Item"
@@ -101,8 +107,14 @@ export const trStrings = {
     selectElement: "Özellik Izgarası'nda bulunan ayarlarını özelleştirmek için bir öğe seçin",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Özellik Izgarası",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Kategori yok",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Özellikleri göstermek için buraya sürükleyin",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Özellikleri gizlemek için buraya sürükleyin",
     // [Auto-translated] "Unsorted items"
-    unsortedItems: "Sıralanmamış öğeler",
+    hiddenItems: "Sıralanmamış öğeler",
     // [Auto-translated] "Name"
     categoryName: "Ad",
     // [Auto-translated] "Title"
@@ -115,8 +127,6 @@ export const trStrings = {
     titleField: "Başlık",
     // [Auto-translated] "Helper Text"
     descriptionField: "Yardımcı Metin",
-    // [Auto-translated] "Drag an item from this column to the left one - it will appear visible in the Tabs panel. You can also move items, using plus (+) and minus (-) buttons."
-    unsortedDescription: "Bir öğeyi bu sütundan sola sürükleyin - Sekmeler panelinde görünür görünecektir. Artı (+) ve eksi (-) düğmelerini kullanarak öğeleri de taşıyabilirsiniz.",
     // [Auto-translated] "Add Custom Category"
     addCustomCategory: "Özel Kategori Ekle"
   },
