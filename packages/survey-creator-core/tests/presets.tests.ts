@@ -156,6 +156,24 @@ test("set toolbox definition - no categories", () => {
   expect(tb.visibleActions).toHaveLength(4);
 });
 
+test("set toolbox definition - showCategoryTitles", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      showCategoryTitles: true
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  expect(tb.showCategoryTitles).toBeTruthy();
+
+  preset.setJson(undefined);
+  preset.apply(creator);
+  tb.flushUpdates();
+  expect(tb.showCategoryTitles).toBeFalsy();
+});
+
 test("set toolbox definition - no categories, no definition", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
@@ -168,6 +186,11 @@ test("set toolbox definition - no categories, no definition", () => {
   tb.flushUpdates();
   expect(tb.categories).toHaveLength(1);
   expect(tb.visibleActions.length).toBeGreaterThan(0);
+
+  preset.setJson(undefined);
+  preset.apply(creator);
+  tb.flushUpdates();
+  expect(tb.categories.length).toBeGreaterThan(1);
 });
 
 test("Override toolbox JSON", () => {

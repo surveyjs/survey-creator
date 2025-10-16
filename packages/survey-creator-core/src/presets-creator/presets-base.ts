@@ -28,7 +28,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     this.onApplied.fire(this, {});
   }
   public abstract getPath(): string;
-  protected applyEmptyJson(): boolean { return false; }
+  protected applyEmptyJson(): boolean { return true; }
   protected applyCore(creator: SurveyCreatorModel, internal: boolean = false): void { }
   protected createPresets(): Array<ICreatorPreset> {
     return [];

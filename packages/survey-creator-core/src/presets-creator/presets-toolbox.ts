@@ -49,14 +49,13 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
 export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
   public getPath(): string { return ""; }
   protected applyCore(creator: SurveyCreatorModel): void {
-    if (!this.json) return;
     super.applyCore(creator);
     creator.toolbox.showCategoryTitles = this.json.showCategoryTitles;
     const items = this.json["definition"];
     const itemNames = items?.map(i => i.name);
     let categories = this.json["categories"];
     if (!categories) {
-      categories = creator.toolbox.categories
+      categories = creator.toolbox.getDefaultCategories()
         .map(c => ({
           category: c.name,
           items: c.items?.map(i => i.name).filter(name => !itemNames || itemNames.indexOf(name) != -1)
