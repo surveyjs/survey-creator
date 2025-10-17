@@ -3690,8 +3690,8 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(creator.showJSONEditorTab).toBeTruthy();
     creator = new CreatorTester({ pageEditMode: "single" });
     creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
-    expect(surveySettings.allowShowEmptyTitleInDesignMode).toBeFalsy();
-    expect(surveySettings.allowShowEmptyDescriptionInDesignMode).toBeFalsy();
+    expect(surveySettings.designMode.showEmptyTitles).toBeFalsy();
+    expect(surveySettings.designMode.showEmptyDescriptions).toBeFalsy();
     expect(creator.JSON.pages).toBeUndefined();
     expect(creator.JSON.elements).toBeDefined();
     expect(creator.text.indexOf("pages")).toBe(-1);
@@ -3705,8 +3705,8 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(objects.items[1].data).toEqual(allQuestions[0]);
 
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 test("get survey JSON with pageEditModeValue=single #2711", (): any => {
@@ -3715,8 +3715,8 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
     creator.text = "";
     expect(creator.JSON).toStrictEqual({ "headerView": "advanced" });
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
@@ -3729,8 +3729,8 @@ test("delete last question and selection with pageEditModeValue=single #2712", (
     creator.deleteElement(question);
     expect(creator.selectedElement).toBe(creator.survey);
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 

@@ -9,7 +9,7 @@ import { assign } from "../../utils/utils";
 import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 import "./designer.scss";
 
-export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
+export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
 
 export class TabDesignerViewModel extends Base {
   private minSurfaceScaling = 20;
