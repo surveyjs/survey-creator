@@ -640,7 +640,7 @@ test("Support property visibleIf attribute", () => {
   var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
   expect(otherTextPropEd).toBeTruthy(); //otherText is here
   expect(otherTextPropEd.isVisible).toEqual(false); //It hidden by default
-  question.hasOther = true;
+  question.showOtherItem = true;
   expect(otherTextPropEd.isVisible).toEqual(true); //We show it now
 });
 test("Show property editor for condition/expression", () => {
@@ -999,7 +999,7 @@ test("property visibleIf attribute and options.onCanShowPropertyCallback", () =>
   var propertyGrid = new PropertyGridModelTester(question, options);
   var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
   expect(otherTextPropEd.isVisible).toEqual(false);
-  question.hasOther = true;
+  question.showOtherItem = true;
   expect(otherTextPropEd.isVisible).toEqual(false);
 });
 test("restfull property editor and options.onCanShowPropertyCallback", () => {

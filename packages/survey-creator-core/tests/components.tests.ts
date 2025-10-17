@@ -59,7 +59,7 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
   expect(selectAllItemAdorner.allowRemove).toBeFalsy();
 
-  question.hasSelectAll = true;
+  question.showSelectAllItem = true;
   expect(selectAllItemAdorner.isNew).toBeFalsy();
   expect(selectAllItemAdorner.allowAdd).toBeFalsy();
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();

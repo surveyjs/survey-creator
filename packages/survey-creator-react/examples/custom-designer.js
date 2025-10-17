@@ -29,7 +29,7 @@ let json = {
               maxCount: 2
             }
           ],
-          hasOther: true,
+          showOtherItem: true,
           choices: [
             "Performance",
             "Stability",

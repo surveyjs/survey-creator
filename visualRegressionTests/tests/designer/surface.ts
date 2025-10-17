@@ -418,7 +418,7 @@
 //                 "Item 1",
 //                 "Item 2"
 //               ],
-//               "hasOther": true,
+//               "showOtherItem": true,
 //               "colCount": 2
 //             }
 //           ]
@@ -468,7 +468,7 @@
 //                 "Item 3",
 //                 "Item 4"
 //               ],
-//               "hasOther": true,
+//               "showOtherItem": true,
 //               "colCount": 2
 //             }
 //           ]
