@@ -1585,7 +1585,7 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
     const res: any = {
       type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
-      showOptionsCaption: false
+      allowClear: false
     };
     return res;
   }

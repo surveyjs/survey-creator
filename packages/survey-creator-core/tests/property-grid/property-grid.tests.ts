@@ -167,7 +167,7 @@ test("dropdown property editor localization", (): any => {
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
-  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.allowClear).toBeTruthy();
   expect(localeQuestion.placeholder).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
 });
@@ -182,7 +182,7 @@ test("dropdown property editor localization & empty supportedLocales", (): any =
   );
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.choices).toHaveLength(0);
-  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.allowClear).toBeTruthy();
   expect(localeQuestion.placeholder).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
   surveyLocalization.supportedLocales = oldSupportedLocales;

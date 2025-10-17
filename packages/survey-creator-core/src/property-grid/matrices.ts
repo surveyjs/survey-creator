@@ -796,7 +796,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (!options.row.editingObj) return;
     const q = options.cellQuestion;
     if (options.columnName === this.getObjTypeName()) {
-      q.showOptionsCaption = false;
+      q.allowClear = false;
       q.choices = this.getChoices(obj);
       q.value = options.row.editingObj.getType();
     }

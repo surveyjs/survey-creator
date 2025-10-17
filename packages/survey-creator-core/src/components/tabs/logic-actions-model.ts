@@ -58,7 +58,7 @@ export class LogicActionModel extends LogicActionModelBase {
   private getSelectorOptionsText(logicType: SurveyLogicType): string {
     const elementType = logicType.baseClass;
     const placeholderName = elementType == "page" ? "pe.conditionSelectPage" : (elementType == "panel" ? "pe.conditionSelectPanel" : "pe.conditionSelectQuestion");
-    return editorLocalization.getString(placeholder);
+    return editorLocalization.getString(placeholderName);
   }
   protected getElementBySelectorName(panel: PanelModel): Base {
     const value = panel.getQuestionByName("elementSelector").value;
