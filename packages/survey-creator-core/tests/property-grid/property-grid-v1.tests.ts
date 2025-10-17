@@ -934,6 +934,7 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
+  expect(columnsQuestion.noRowsText).toEqual("You don't have any columns yet");
   expect(columnsQuestion.addRowText).toEqual("Add new column");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;

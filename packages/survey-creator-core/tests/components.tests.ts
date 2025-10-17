@@ -592,7 +592,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
   expect(ratingAdorner.enableAdd).toBeTruthy();
   expect(ratingAdorner.enableRemove).toBeTruthy();
 
-  question.rateDisplayMode = "smileys";
+  question.rateType = "smileys";
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeFalsy();

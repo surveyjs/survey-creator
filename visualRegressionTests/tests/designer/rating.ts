@@ -31,7 +31,7 @@ const jsonComment = {
         {
           "type": "rating",
           "name": "question1",
-          "hasComment": true
+          "showCommentArea": true
         }
       ]
     }

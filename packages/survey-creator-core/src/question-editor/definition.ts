@@ -714,7 +714,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "noEntriesText",
       "prevPanelText",
       "nextPanelText",
-      "showRangeInProgress",
       "showProgressBar",
       "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },

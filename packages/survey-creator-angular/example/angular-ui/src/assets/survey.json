@@ -88,8 +88,8 @@
           "type": "rating",
           "name": "satisfaction",
           "title": "How satisfied are you with the Product?",
-          "mininumRateDescription": "Not Satisfied",
-          "maximumRateDescription": "Completely satisfied"
+          "minRateDescription": "Not Satisfied",
+          "maxRateDescription": "Completely satisfied"
         },
         {
           "type": "panel",

@@ -858,7 +858,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.title = title;
       newQuestion.description = "";
       newQuestion.titleLocation = "top";
-      newQuestion.hasComment = false;
+      newQuestion.showCommentArea = false;
       if (newQuestion.showOtherItem) {
         const question = this.getConditionQuestion(qName);
         if (question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
