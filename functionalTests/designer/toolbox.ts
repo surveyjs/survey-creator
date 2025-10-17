@@ -40,6 +40,7 @@ async function setupCategories(t, windowWidth = 1910) {
   });
   await changeCategories();
   await t.resizeWindow(windowWidth, 600);
+  await t.wait(500);
 }
 
 async function setupToolboxProperty(propertyName: string, propertyValue: any) {
