@@ -100,9 +100,11 @@ test.before(async (t) => {
 }).only("Categories Responsiveness small -> large", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
-
+  await t
+    .takeScreenshot({ path:'setupCategories0.png', fullPage: true })
   await setupCategories(t, 1110);
   await t
+    .takeScreenshot({ path:'setupCategories1.png', fullPage: true })
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(categoriesHeader.count).eql(0)
     .expect(visibleToolboxItems.count).eql(11)
