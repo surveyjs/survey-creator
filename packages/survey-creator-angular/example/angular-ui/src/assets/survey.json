@@ -19,7 +19,8 @@
             {
               "name": "mostamount",
               "title": "Most amount you would every pay for a product like ours"
-            }, {
+            },
+            {
               "name": "leastamount",
               "title": "The least amount you would feel comfortable paying"
             }
@@ -58,7 +59,8 @@
             {
               "value": 4,
               "text": "Agree"
-            }, {
+            },
+            {
               "value": 5,
               "text": "Strongly Agree"
             }
@@ -67,13 +69,16 @@
             {
               "value": "affordable",
               "text": "Product is affordable"
-            }, {
+            },
+            {
               "value": "does what it claims",
               "text": "Product does what it claims"
-            }, {
+            },
+            {
               "value": "better then others",
               "text": "Product is better than other products on the market"
-            }, {
+            },
+            {
               "value": "easy to use",
               "text": "Product is easy to use"
             }
@@ -213,7 +218,7 @@
           "type": "text",
           "title": "Text",
           "enableIf": "{radiogroup} == 'item1'",
-          "placeHolder": "Jon Snow"
+          "placeholder": "Jon Snow"
         },
         {
           "name": "birthdate",
@@ -233,7 +238,7 @@
           "visibleIf": "{radiogroup} == 'item1'",
           "inputType": "email",
           "title": "Text Email",
-          "placeHolder": "jon.snow@nightwatch.org",
+          "placeholder": "jon.snow@nightwatch.org",
           "validators": [
             {
               "type": "email"
@@ -260,7 +265,7 @@
           "name": "surname",
           "type": "text",
           "title": "Surname",
-          "placeHolder": "Snow"
+          "placeholder": "Snow"
         },
         {
           "name": "signature",

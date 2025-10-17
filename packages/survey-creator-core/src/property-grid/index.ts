@@ -1585,7 +1585,7 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
     const res: any = {
       type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
-      showOptionsCaption: false
+      allowClear: false
     };
     return res;
   }
@@ -1901,7 +1901,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     var json: any = {
       type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
-      showOptionsCaption: false
+      allowClear: false
     };
     this.updateObjBasedOnEmptyValueItem(prop, choices, json);
     return json;
@@ -1912,10 +1912,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   private updateObjBasedOnEmptyValueItem(prop: JsonObjectProperty, choices: Array<any>, objOrJson: any): void {
     const emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
     if (!!emptyValueItem) {
-      objOrJson.showOptionsCaption = true;
       objOrJson.allowClear = true;
       if (emptyValueItem.text) {
-        objOrJson.optionsCaption = emptyValueItem.text;
+        objOrJson.placeholder = emptyValueItem.text;
       }
     }
   }
@@ -1946,7 +1945,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
     question.displayValueCallback = (text: string): string => {
-      return !text ? (<QuestionDropdownModel>question).optionsCaption : text;
+      return !text ? (<QuestionDropdownModel>question).placeholder : text;
     };
   }
   onMasterValueChanged(
@@ -2072,7 +2071,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const result = {
       type: "dropdown",
-      optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
+      placeholder: editorLocalization.getString("pe.conditionSelectQuestion"),
       choices: this.getChoices(obj, prop, options)
     };
     if (prop.type == "question") {

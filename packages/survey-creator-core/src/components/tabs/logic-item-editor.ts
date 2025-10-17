@@ -32,7 +32,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
   private initialSelectedElements: any = {};
-  private isModifiedValue: boolean = false;
+  private isModifiedValue = false;
   private contextValue: Question;
   private selectorElementsHash = {};
 
@@ -155,7 +155,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
-              optionsCaption: getLogicString("selectedActionCaption"),
+              placeholder: getLogicString("selectedActionCaption"),
               requiredErrorText: this.getLocString("pe.conditionActionEmpty")
             },
             {
@@ -184,7 +184,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
-              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,

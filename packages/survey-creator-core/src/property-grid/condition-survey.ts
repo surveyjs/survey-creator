@@ -12,7 +12,7 @@ import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
 
 export class ConditionEditorItem {
-  public conjunction: string = "and";
+  public conjunction = "and";
   public questionName: string;
   public operator: string = settings.logic.defaultOperators.default;
   public value: any;
@@ -260,7 +260,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private panelValue: QuestionPanelDynamicModel;
   private textEditorValue: QuestionCommentModel;
   private addConditionQuestionsHash = {};
-  private isModalValue: boolean = true;
+  private isModalValue = true;
   public allConditionQuestions: Array<ItemValue>;
   public onContextChanged: (context: Question) => void;
 
@@ -345,7 +345,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               type: "dropdown",
               renderAs: "logicoperator",
               titleLocation: "hidden",
-              showOptionsCaption: false,
+              allowClear: false,
               visibleIf: "{panelIndex} > 0",
               choices: [
                 { value: "and", text: editorLocalization.getString("pe.and") },
@@ -358,7 +358,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
-              showOptionsCaption: false,
+              allowClear: false,
               startWithNewLine: false,
               isRequired: true
             },
@@ -368,7 +368,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               titleLocation: "hidden",
               startWithNewLine: false,
-              showOptionsCaption: false,
+              allowClear: false,
               isRequired: true,
               enableIf: "{panel.questionName} notempty"
             },
@@ -376,7 +376,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
-              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,
@@ -639,7 +638,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const prefix = this.context.getValueName() + ".";
     return name.replace(prefix, "");
   }
-  private getContextIndexInfo(name: string, prefix: string = ""): { index: number, name: string } {
+  private getContextIndexInfo(name: string, prefix = ""): { index: number, name: string } {
     return SurveyHelper.getQuestionContextIndexInfo(name, prefix);
   }
   private getQuestionNameToPanel(name: string): string {
