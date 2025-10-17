@@ -146,7 +146,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   matrixdropdownbase: {
     properties: [
       "cellType",
-      "optionsCaption",
       "detailPanelMode",
       "detailPanelShowOnAdding",
       "singleInputTitleTemplate",
@@ -535,7 +534,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "otherText", tab: "choices" },
       { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
-      { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
       { name: "noneText", tab: "choices" },
       { name: "showRefuseItem", tab: "choices" },
@@ -565,7 +563,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "otherText", tab: "choices" },
       { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
-      { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
       { name: "noneText", tab: "choices" },
       { name: "showRefuseItem", tab: "choices" },
