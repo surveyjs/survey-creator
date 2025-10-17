@@ -345,7 +345,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               type: "dropdown",
               renderAs: "logicoperator",
               titleLocation: "hidden",
-              allowClear: false,
+              showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
               choices: [
                 { value: "and", text: editorLocalization.getString("pe.and") },
@@ -358,7 +358,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
-              allowClear: false,
+              showOptionsCaption: false,
               startWithNewLine: false,
               isRequired: true
             },
@@ -368,7 +368,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               titleLocation: "hidden",
               startWithNewLine: false,
-              allowClear: false,
+              showOptionsCaption: false,
               isRequired: true,
               enableIf: "{panel.questionName} notempty"
             },
@@ -376,6 +376,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
+              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,

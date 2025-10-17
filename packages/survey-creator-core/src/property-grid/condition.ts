@@ -18,7 +18,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   ): any {
     return {
       type: "comment",
-      allowClear: false,
+      showOptionsCaption: false,
       rows: 2
     };
   }
@@ -81,7 +81,7 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   ): any {
     return {
       type: "comment",
-      allowClear: false,
+      showOptionsCaption: false,
       rows: 2,
     };
   }

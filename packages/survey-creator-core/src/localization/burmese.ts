@@ -1099,6 +1099,8 @@ export var mmStrings = {
     maxRateDescription: "အများဆုံးတန်ဖိုးတန်းလုံး",
     // "Input type"
     inputType: "အဝင်အမျိုးအစား",
+    // "Option placeholder"
+    optionsCaption: "ရွေးချယ်မှု placeholder",
     // "Default Answer"
     defaultValue: "ပုံမှန်ဖြေဆိုမှု",
     // "Default texts"

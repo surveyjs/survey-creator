@@ -167,8 +167,8 @@ test("dropdown property editor localization", (): any => {
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
-  expect(localeQuestion.allowClear).toBeTruthy();
-  expect(localeQuestion.placeholder).toEqual("Default (English)");
+  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.optionsCaption).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
 });
 test("dropdown property editor localization & empty supportedLocales", (): any => {
@@ -182,8 +182,8 @@ test("dropdown property editor localization & empty supportedLocales", (): any =
   );
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.choices).toHaveLength(0);
-  expect(localeQuestion.allowClear).toBeTruthy();
-  expect(localeQuestion.placeholder).toEqual("Default (English)");
+  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.optionsCaption).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
   surveyLocalization.supportedLocales = oldSupportedLocales;
 });
@@ -2504,7 +2504,7 @@ test("showOptionsCaption/allowClear for dropdown with empty choice item", () => 
   expect(testQuestion.choices).toHaveLength(10);
   expect(testQuestion.showOptionsCaption).toBeTruthy();
   expect(testQuestion.allowClear).toBeTruthy();
-  expect(testQuestion.placeholder).toEqual("Empty value");
+  expect(testQuestion.optionsCaption).toEqual("Empty value");
 
   Serializer.removeProperty("question", "test");
 });
@@ -3487,7 +3487,7 @@ test("Localication and different locales, Bug#6717", () => {
   propertyGrid = new PropertyGridModelTester(question);
   titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
   expect(titleQuestion.value).toBeFalsy();
-  expect(titleQuestion.placeholder).toBe("Question 1");
+  expect(titleQuestion.placeHolder).toBe("Question 1");
 });
 test("panellayoutcolumns doesn't have adding button", () => {
   const creator = new CreatorTester();

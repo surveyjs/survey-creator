@@ -155,7 +155,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
-              placeholder: getLogicString("selectedActionCaption"),
+              optionsCaption: getLogicString("selectedActionCaption"),
               requiredErrorText: this.getLocString("pe.conditionActionEmpty")
             },
             {
@@ -184,6 +184,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
+              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,

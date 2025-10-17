@@ -609,6 +609,7 @@ export var enStrings = {
     minRateDescription: "Minimum value label",
     maxRateDescription: "Maximum value label",
     inputType: "Input type",
+    optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
