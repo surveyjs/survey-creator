@@ -299,7 +299,7 @@
 //             {
 //               "type": "matrixdropdown",
 //               "name": "m",
-//               "columnLayout": "vertical",
+//               "transposeData": true,
 //               "columns": [
 //                 {
 //                   "name": "Column 1",
@@ -418,7 +418,7 @@
 //                 "Item 1",
 //                 "Item 2"
 //               ],
-//               "hasOther": true,
+//               "showOtherItem": true,
 //               "colCount": 2
 //             }
 //           ]
@@ -468,7 +468,7 @@
 //                 "Item 3",
 //                 "Item 4"
 //               ],
-//               "hasOther": true,
+//               "showOtherItem": true,
 //               "colCount": 2
 //             }
 //           ]
@@ -1388,7 +1388,7 @@
 //   })({
 //     showQuestionNumbers: "on",
 //     title: "title",
-//     questions: [
+//     elements: [
 //       {
 //         type: "text",
 //         name: "q1"

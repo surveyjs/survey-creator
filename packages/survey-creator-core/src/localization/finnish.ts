@@ -3236,7 +3236,7 @@ export var fiStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Hahmonna muodossa", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Alkuperäisten kohteiden liittäminen", // Auto-generated string
+    attachData: "Alkuperäisten kohteiden liittäminen", // Auto-generated string
     // "Choices"
     choices: "Valinnat",
     // "Choices by url"

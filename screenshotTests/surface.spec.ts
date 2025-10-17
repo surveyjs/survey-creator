@@ -232,7 +232,7 @@ test.describe(title, () => {
                 "Item 1",
                 "Item 2"
               ],
-              "hasOther": true,
+              "showOtherItem": true,
               "colCount": 2
             }
           ]
@@ -281,7 +281,7 @@ test.describe(title, () => {
               "type": "checkbox",
               "name": "question1",
               "choices": ["Item 1", "Item 2", "Item 3", "Item 4"],
-              "hasOther": true,
+              "showOtherItem": true,
               "colCount": 2
             }
           ]

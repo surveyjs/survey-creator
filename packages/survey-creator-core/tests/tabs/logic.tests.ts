@@ -1957,9 +1957,9 @@ test("SurveyLogicUI: check show/hide action switching placeholder 'Select panel/
   logic.expressionEditor.text = "{q1} = 1";
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "panel_visibility";
-  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select a panel...");
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).placeholder).toEqual("Select a panel...");
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
-  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select a question...");
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).placeholder).toEqual("Select a question...");
   panel.getQuestionByName("logicTypeName").value = "panel_visibility";
   expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select a panel...");
 });

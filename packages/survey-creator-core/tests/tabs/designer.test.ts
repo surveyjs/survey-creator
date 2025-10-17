@@ -118,7 +118,7 @@ test("StringEditorViewModelBase page title placeholder", () => {
 test("StringEditorViewModelBase page title placeholder for started page", () => {
   const creator = new CreatorTester();
   creator.JSON = {
-    firstPageIsStarted: true,
+    firstPageIsStartPage: true,
     pages: [
       { elements: [{ type: "text" }] },
       { elements: [{ type: "text" }] }

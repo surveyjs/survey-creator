@@ -143,11 +143,11 @@ test("Special choices editability", (): any => {
   expect(creator.isCanModifyProperty(q0.noneItem, "text")).toBeFalsy();
   expect(creator.isCanModifyProperty(q0.otherItem, "text")).toBeFalsy();
 
-  q0.hasSelectAll = true;
+  q0.showSelectAllItem = true;
   expect(creator.isCanModifyProperty(q0.selectAllItem, "text")).toBeTruthy();
-  q0.hasNone = true;
+  q0.showNoneItem = true;
   expect(creator.isCanModifyProperty(q0.noneItem, "text")).toBeTruthy();
-  q0.hasOther = true;
+  q0.showOtherItem = true;
   expect(creator.isCanModifyProperty(q0.otherItem, "text")).toBeTruthy();
 });
 
@@ -184,7 +184,7 @@ test("Edit matrix cell question", (): any => {
   const editQuestion = <QuestionSelectBase>editSurvey.question;
   expect(editQuestion.getType()).toEqual("radiogroup");
   expect(editQuestion.inMatrixMode).toBeTruthy();
-  let objType: string = "";
+  let objType = "";
   creator.onCollectionItemAllowOperations.add((sender, options) => {
     objType = options.obj.getType();
   });

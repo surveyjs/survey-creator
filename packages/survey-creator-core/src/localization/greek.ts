@@ -3236,7 +3236,7 @@ export var grStrings = {
     // "Render as"
     renderAs: "Απόδοση ως", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
+    attachData: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
     // "Choices"
     choices: "Επιλογές",
     // "Choices by url"

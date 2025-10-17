@@ -3236,7 +3236,7 @@ export var hebrewStrings = {
     // "Render as"
     renderAs: "תצוגה כ", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "צרף פריטים מקוריים", // Auto-generated string
+    attachData: "צרף פריטים מקוריים", // Auto-generated string
     // "Choices"
     choices: "בחירות",
     // "Choices by url"

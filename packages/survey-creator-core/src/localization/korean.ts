@@ -3237,7 +3237,7 @@ export var koreanStrings = {
     // [Auto-translated] "Render as"
     renderAs: "렌더링 형식", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "원본 항목 첨부", // Auto-generated string
+    attachData: "원본 항목 첨부", // Auto-generated string
     // "Choices"
     choices: "선택",
     // "Choices by url"

@@ -3,7 +3,7 @@ import { Selector } from "testcafe";
 const title = "Page Title";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "text",
       name: "page_title"

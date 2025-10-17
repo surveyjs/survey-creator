@@ -3236,7 +3236,7 @@ export var czStrings = {
     // "Render as"
     renderAs: "Vykreslit jako", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Připojit původní položky", // Auto-generated string
+    attachData: "Připojit původní položky", // Auto-generated string
     // "Choices"
     choices: "Volby",
     // "Choices by url"

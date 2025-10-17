@@ -381,7 +381,7 @@ test("rateValues in property grid", async (t) => {
         {
           "type": "rating",
           "name": "question1",
-          "rateDisplayMode": "smileys",
+          "rateType": "smileys",
           "autoGenerate": false,
           "rateValues": [
             1,

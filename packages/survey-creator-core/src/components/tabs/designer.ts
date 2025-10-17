@@ -9,7 +9,7 @@ import { assign } from "../../utils/utils";
 import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 import "./designer.scss";
 
-export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
+export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
 
 export class TabDesignerViewModel extends Base {
   private minSurfaceScaling = 20;
@@ -80,7 +80,7 @@ export class TabDesignerViewModel extends Base {
   }
   private getNewPageNum(): number {
     const pages = this.survey.pages;
-    const num = pages.length + (this.survey.firstPageIsStarted ? 0 : 1);
+    const num = pages.length + (this.survey.firstPageIsStartPage ? 0 : 1);
     return num > 0 ? num : 1;
   }
   private get canShowNewPage(): boolean {

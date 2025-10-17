@@ -3236,7 +3236,7 @@ export var htStrings = {
     // "Render as"
     renderAs: "Rann kòm", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Tache atik orijinal yo", // Auto-generated string
+    attachData: "Tache atik orijinal yo", // Auto-generated string
     // "Choices"
     choices: "Chwa",
     // "Choices by url"

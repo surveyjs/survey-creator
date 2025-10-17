@@ -3236,7 +3236,7 @@ export var mnStrings = {
     // "Render as"
     renderAs: "руу хөрвүүлэх", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Эх элементүүдийг хавсаргах", // Auto-generated string
+    attachData: "Эх элементүүдийг хавсаргах", // Auto-generated string
     // "Choices"
     choices: "Сонголтууд",
     // "Choices by url"

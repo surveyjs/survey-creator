@@ -14,7 +14,7 @@ test.describe(title, () => {
 
     await setJSON(page, {
       showQuestionNumbers: "on",
-      questions: [
+      elements: [
         {
           type: "dropdown",
           name: "q1",

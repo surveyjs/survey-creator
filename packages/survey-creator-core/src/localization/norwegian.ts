@@ -3236,7 +3236,7 @@ export var nbStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Gjengi som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Legg ved originale elementer", // Auto-generated string
+    attachData: "Legg ved originale elementer", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

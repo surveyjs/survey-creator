@@ -1720,7 +1720,7 @@ export var tgStrings = {
     validators: "Валидаторҳо",
     // bindings: "Bindings",
     // renderAs: "Render as",
-    // attachOriginalItems: "Attach original items",
+    // attachData: "Attach original items",
     choices: "Интихоб",
     choicesByUrl: "Интихоб аз интернет",
     currency: "Асъор",

@@ -167,7 +167,7 @@ test("headerViewContainer survey title & description", (): any => {
 
 test("headerViewContainer get color values from theme", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
       "--sjs-font-headertitle-color": "rgba(219, 15, 15, 0.91)",
@@ -201,7 +201,7 @@ test("headerViewContainer get color values from theme", (): any => {
 
 test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -239,7 +239,7 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
 
 test("headerViewContainer: background color", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -264,7 +264,7 @@ test("headerViewContainer: background color", (): any => {
 
 test("headerViewContainer: background color reset #5940", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");

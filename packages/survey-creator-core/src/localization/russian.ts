@@ -3236,7 +3236,7 @@ export var ruStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Рендеринг как", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Прикрепите оригинальные элементы", // Auto-generated string
+    attachData: "Прикрепите оригинальные элементы", // Auto-generated string
     // "Choices"
     choices: "Выбор",
     // "Choices by url"

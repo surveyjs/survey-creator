@@ -36,7 +36,7 @@ function getSurveyJson(): any {
       {
         name: "page1",
         title: "Page 1",
-        questions: [
+        elements: [
           { type: "text", name: "question1" },
           {
             name: "question2",
@@ -49,10 +49,10 @@ function getSurveyJson(): any {
           }
         ]
       },
-      { name: "page2", questions: [{ name: "question3", type: "comment" }] },
+      { name: "page2", elements: [{ name: "question3", type: "comment" }] },
       {
         name: "page3",
-        questions: [
+        elements: [
           {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
@@ -123,7 +123,7 @@ test("getNextItemText for simple text", (): any => {
 test("Set Text property", () => {
   const creator = new CreatorTester();
   const json = {
-    questions: [
+    elements: [
       {
         type: "checkbox",
         name: "car",

@@ -347,7 +347,6 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      showRangeInProgress: "Show the progress bar",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -610,7 +609,6 @@ export var enStrings = {
     minRateDescription: "Minimum value label",
     maxRateDescription: "Maximum value label",
     inputType: "Input type",
-    optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
@@ -1751,7 +1749,7 @@ export var enStrings = {
     validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
-    attachOriginalItems: "Attach original items", // Auto-generated string
+    attachData: "Attach original items", // Auto-generated string
     choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string

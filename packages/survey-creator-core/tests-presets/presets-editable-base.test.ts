@@ -32,7 +32,7 @@ describe("CreatorPresetEditableBase", () => {
 
     // Create mock detail panel
     mockDetailPanel = new SurveyModel({
-      questions: [
+      elements: [
         {
           type: "text",
           name: "question1",

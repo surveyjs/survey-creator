@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Translation tab";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",

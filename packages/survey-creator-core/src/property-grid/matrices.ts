@@ -591,7 +591,7 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
     const ratingQuestion = <QuestionRatingModel>getQuestionFromObj(obj as SurveyElement);
     this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
     obj.onPropertyChanged.add((sender, options) => {
-      if (options.name == "rateCount" || options.name == "rateDisplayMode") {
+      if (options.name == "rateCount" || options.name == "rateType") {
         this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
       }
     });
@@ -796,7 +796,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (!options.row.editingObj) return;
     const q = options.cellQuestion;
     if (options.columnName === this.getObjTypeName()) {
-      q.showOptionsCaption = false;
+      q.allowClear = false;
       q.choices = this.getChoices(obj);
       q.value = options.row.editingObj.getType();
     }

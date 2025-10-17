@@ -23,7 +23,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               type: "boolean",
               name: this.surveyUseEnglishNames,
               title: "Translate Survey language names to Engish",
-              titleLocation: "hidden",
+              useTitleAsLabel: true,
               renderAs: "checkbox"
             },
             {

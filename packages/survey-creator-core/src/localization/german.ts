@@ -3236,7 +3236,7 @@ export var germanTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Rendern als", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Originalartikel anbringen", // Auto-generated string
+    attachData: "Originalartikel anbringen", // Auto-generated string
     // "Choices"
     choices: "Auswahlmöglichkeiten",
     // "Choices by url"

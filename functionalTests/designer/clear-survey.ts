@@ -3,7 +3,7 @@ import { setSurveyProp, url, setJSON } from "../helper";
 const title = "Clear survey functionality";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "text",
       name: "simple question"

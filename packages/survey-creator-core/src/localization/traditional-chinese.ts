@@ -3237,7 +3237,7 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "渲染為", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "附加原始專案", // Auto-generated string
+    attachData: "附加原始專案", // Auto-generated string
     // "Choices"
     choices: "選項",
     // "Choices by url"

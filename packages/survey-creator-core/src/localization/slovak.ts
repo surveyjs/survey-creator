@@ -3236,7 +3236,7 @@ export var skStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Vykresliť ako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloženie originálnych položiek", // Auto-generated string
+    attachData: "Priloženie originálnych položiek", // Auto-generated string
     // "Choices"
     choices: "možnosti",
     // "Choices by url"

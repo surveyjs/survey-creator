@@ -22,7 +22,7 @@ registerSurveyTheme(SurveyThemes);
 
 test("Theme builder initialization", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeEditor = themePlugin.propertyGrid.survey;
@@ -45,7 +45,7 @@ test("Theme builder initialization", (): any => {
 
 test("Theme builder: composite question font", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -75,7 +75,7 @@ test("Theme builder: composite question font", (): any => {
 
 test("Theme builder: composite question backgroundcornerradius", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -96,7 +96,7 @@ test("Theme builder: composite question backgroundcornerradius", (): any => {
 
 test("Check shadow settings editor", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -197,7 +197,7 @@ test("Check all file edit questions has onChooseFiles callback", (): any => {
 
 test("Theme builder: restore questionTitle switch tabs", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   creator.activeTab = "theme";
   let questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
@@ -226,7 +226,7 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 test("Desktop mode: add advanced mode switcher", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
-  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+  creator.JSON = { logo: "Logo", pages: [{ elements: [{ type: "text", name: "q1" }] }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -246,7 +246,7 @@ test("Desktop mode: add advanced mode switcher", (): any => {
 test("Mobile mode: hide advanced settings in property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.isMobileView = true;
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -267,7 +267,7 @@ test("Mobile mode: hide advanced settings in property grid", (): any => {
 test("Mobile mode: hide advanced settings (property grid buttons)", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
 
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.isMobileView = true;
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -281,7 +281,7 @@ test("Mobile mode: hide advanced settings (property grid buttons)", (): any => {
 test("Change advancedModeSwitcher visibility", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
-  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+  creator.JSON = { logo: "Logo", pages: [{ elements: [{ type: "text", name: "q1" }] }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -300,7 +300,7 @@ test("Change advancedModeSwitcher visibility", (): any => {
 test("advancedModeSwitcher state after switch tabs", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
-  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+  creator.JSON = { logo: "Logo", pages: [{ elements: [{ type: "text", name: "q1" }] }] };
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -325,7 +325,7 @@ test("advancedModeSwitcher state after switch tabs", (): any => {
 
 test("advancedModeSwitcher state after switch tabs (property grid buttons)", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+  creator.JSON = { logo: "Logo", pages: [{ elements: [{ type: "text", name: "q1" }] }] };
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -368,7 +368,7 @@ test("onAllowModifyTheme events + use creator.readOnly", (): any => {
 
 test("Add theme before activate", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
 
   const themes: string[] = [].concat(PredefinedThemes);
@@ -390,7 +390,7 @@ test("Add theme before activate", (): any => {
 
 test("Change available themes after activate", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -411,7 +411,7 @@ test("Change available themes after activate", (): any => {
 
 test("Disable/hide properties in theme property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -483,7 +483,7 @@ test("disable irrelevant settings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -540,7 +540,7 @@ test("disable page settings if single page mode", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -598,7 +598,7 @@ test("disable page settings if single page mode", (): any => {
 test("disable irrelevant settings (property grid buttons)", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -654,7 +654,7 @@ test("disable irrelevant settings (property grid buttons)", (): any => {
 test("disable page settings if single page mode (property grid buttons)", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -721,7 +721,7 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   };
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.locale = "test";
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -734,7 +734,7 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
 
 test("Disable/enable colorPalette property for custom theme variations in theme property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -781,7 +781,7 @@ test("Disable/enable colorPalette property for custom theme variations in theme 
 
 test("Disable/enable themeMode property for custom theme variations in theme property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -829,7 +829,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
 test("headerViewContainer init state", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   const groupHeader = themePlugin.propertyGrid.survey.pages[1];
@@ -877,7 +877,7 @@ test("headerViewContainer init state", (): any => {
 
 test("set headerViewContainer basic", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -912,7 +912,7 @@ test("set headerViewContainer basic", (): any => {
 
 test("set headerViewContainer basic restore", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { logoPosition: "right", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { logoPosition: "right", elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
 
@@ -923,7 +923,7 @@ test("set headerViewContainer basic restore", (): any => {
 
 test("set headerViewContainer advanced", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1002,7 +1002,7 @@ test("set headerViewContainer advanced", (): any => {
 
 test("restore basic headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
       "--sjs-corner-radius": "20px",
@@ -1089,7 +1089,7 @@ test("restore basic headerViewContainer values", (): any => {
 
 test("restore advanced headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
       "--sjs-corner-radius": "20px",
@@ -1179,7 +1179,7 @@ test("Check accordion property grid categories", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "accordion";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -1198,7 +1198,7 @@ test("Check buttons property grid categories", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.propertyGridNavigationMode = "buttons";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -1228,7 +1228,7 @@ test("Check subcategory order", (): any => {
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
     creator.propertyGridNavigationMode = "accordion";
     const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
     themePlugin.activate();
     let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -1261,7 +1261,7 @@ test("Check subcategory order (property grid buttons)", (): any => {
 
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
     const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
     themePlugin.activate();
     let propertyGridSurvey = themePlugin.propertyGrid.survey;
@@ -1278,7 +1278,7 @@ test("Check subcategory order (property grid buttons)", (): any => {
 
 test("header survey title font color changed", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { title: "Survey Title", elements: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1320,7 +1320,7 @@ test("header survey title font color changed", (): any => {
 
 test("header editable after theme changed", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { title: "Survey Title", headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { title: "Survey Title", headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1338,7 +1338,7 @@ test("header editable after theme changed", (): any => {
 
 test("advanced header disable inheritWidthFrom and reset it to 'container' if showTOC is true", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { title: "Survey Title", headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { title: "Survey Title", headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1372,7 +1372,7 @@ test("advanced header disable inheritWidthFrom and reset it to 'container' if sh
 });
 test("header background image/backgroundImageFit/backgroundImageOpacity, Bug#7124", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { title: "Survey Title", headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { title: "Survey Title", headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1400,7 +1400,7 @@ test("Theme builder: set custom font", (): any => {
   DefaultFonts.push(customFont);
   try {
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
     const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
     themePlugin.activate();
     const questionGeneralFont = themePlugin.propertyGrid.survey.findQuestionByName("--sjs-font-family") as QuestionDropdownModel;

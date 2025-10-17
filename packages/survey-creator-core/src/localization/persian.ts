@@ -3236,7 +3236,7 @@ export var persianStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render به عنوان", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "پیوست موارد اصلی", // Auto-generated string
+    attachData: "پیوست موارد اصلی", // Auto-generated string
     // "Choices"
     choices: "گزینه ها",
     // "Choices by url"

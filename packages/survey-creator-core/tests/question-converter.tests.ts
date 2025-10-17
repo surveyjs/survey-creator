@@ -113,14 +113,14 @@ test("Convert to custom component", () => {
     title: "Full Name",
     elementsJSON: []
   });
-  const survey = new SurveyModel({ questions: [{ type: "text", name: "q1" }] });
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }] });
   const questionText = survey.getAllQuestions()[0];
   const component = QuestionConverter.convertObject(questionText, "fullname", questionText.toJSON());
   expect(component.name).toBe("q1");
   ComponentCollection.Instance.clear();
 });
 test("Convert choices to rateValues", () => {
-  const survey = new SurveyModel({ questions: [{ type: "radiogroup", name: "q1", choices: ["i1", "i2"] }] });
+  const survey = new SurveyModel({ elements: [{ type: "radiogroup", name: "q1", choices: ["i1", "i2"] }] });
   const src = survey.getAllQuestions()[0];
   const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", src.toJSON());
   expect(dest.getType()).toBe("rating");
@@ -128,7 +128,7 @@ test("Convert choices to rateValues", () => {
   expect(dest.rateValues[0].value).toEqual("i1");
 });
 test("Convert rateValues to choices", () => {
-  const survey = new SurveyModel({ questions: [{ type: "rating", name: "q1", rateValues: ["i1", "i2"] }] });
+  const survey = new SurveyModel({ elements: [{ type: "rating", name: "q1", rateValues: ["i1", "i2"] }] });
   const src = survey.getAllQuestions()[0];
   const dest = <QuestionRadiogroupModel>QuestionConverter.convertObject(src, "radiogroup", src.toJSON());
   expect(dest.getType()).toBe("radiogroup");
@@ -136,7 +136,7 @@ test("Convert rateValues to choices", () => {
   expect(dest.choices[0].value).toEqual("i1");
 });
 test("Do not convert default choices", () => {
-  const survey = new SurveyModel({ questions: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] }] });
+  const survey = new SurveyModel({ elements: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] }] });
   const src = survey.getAllQuestions()[0];
   const objJSON = QuestionConverter.getObjJSON(src, { type: "radiogroup", name: "question1", choices: ["item1", "item2", "item3"] });
   const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", objJSON);

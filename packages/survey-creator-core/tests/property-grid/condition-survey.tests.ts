@@ -54,7 +54,7 @@ test("Setup simple panel", () => {
 
 test("Add condition", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
       { type: "text", name: "q2" }
@@ -82,7 +82,7 @@ test("Add condition", () => {
 });
 test("Do not delete the only condition, but clear it", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
       { type: "text", name: "q2" }
@@ -105,7 +105,7 @@ test("Do not delete the only condition, but clear it", () => {
 
 test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "dropdown", name: "q2" }
     ]
@@ -120,7 +120,7 @@ test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679"
 });
 test("Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "dropdown", name: "q2" }
     ]
@@ -1058,7 +1058,7 @@ test("Change operators via callback", () => {
   });
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
-  let evnt_questionType: string = "";
+  let evnt_questionType = "";
   options.isConditionOperatorEnabled = (questionName: string, question: Question, operator: string, isEnabled: boolean): boolean => {
     if (questionName === "q2" && ["contains", "anyof"].indexOf(operator) > -1) return false;
     evnt_questionType = question.getType();
@@ -1564,7 +1564,7 @@ test("questionName title visibility", () => {
 });
 test("isModified", () => {
   const survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
       { type: "text", name: "q2" }
@@ -1781,7 +1781,7 @@ test("Check errors for logic popup", () => {
 test("Change the default operator", () => {
   settings.logic.defaultOperator = "anyof";
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "checkbox", name: "q1", choices: [1, 2, 3] },
       { type: "dropdown", name: "q2", choices: [1, 2, 3] }
     ]
@@ -1794,7 +1794,7 @@ test("Change the default operator", () => {
 });
 test("Add unwrapped value if checkbox valuePropertyName is set", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
       { type: "text", name: "q2", "visibleIf": "{q1-unwrapped} allof ['apple', 'orange']" }
     ]
@@ -1820,7 +1820,7 @@ test("Add unwrapped value if checkbox valuePropertyName is set", () => {
 test("Condition editor and question value cssClasses", () => {
   ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
   const survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "comp1", name: "q1", choices: [1, 2, 3] },
       { type: "dropdown", name: "q2", choices: [1, 2, 3] },
       { type: "text", name: "q3" }

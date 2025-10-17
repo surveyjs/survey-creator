@@ -3236,7 +3236,7 @@ export var portugueseTranslation = {
     // "Render as"
     renderAs: "renderizar como", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "anexar itens originais", // Auto-generated string
+    attachData: "anexar itens originais", // Auto-generated string
     // "Choices"
     choices: "Opções",
     // "Choices by url"

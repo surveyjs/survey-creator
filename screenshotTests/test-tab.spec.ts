@@ -164,9 +164,10 @@ test.describe(title, () => {
       headerView: "basic",
       "autoFocusFirstQuestion": true,
       "title": "American History",
-      "showTimerPanel": "bottom",
-      "showTimerPanelMode": "survey",
-      "maxTimeToFinish": 60,
+      "showTimer": true,
+      "timerLocation": "bottom",
+      "timerInfoMode": "survey",
+      "timeLimit": 60,
       "widthMode": "static",
       "firstPageIsStartPage": true,
       "pages": [

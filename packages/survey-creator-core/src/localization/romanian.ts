@@ -3236,7 +3236,7 @@ export const roStrings = {
     // "Render as"
     renderAs: "Renderizare ca", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Atașați elementele originale", // Auto-generated string
+    attachData: "Atașați elementele originale", // Auto-generated string
     // "Choices"
     choices: "Opțiuni",
     // "Choices by url"

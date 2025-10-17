@@ -3236,7 +3236,7 @@ export var italianTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Esegui il rendering come", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Allega elementi originali", // Auto-generated string
+    attachData: "Allega elementi originali", // Auto-generated string
     // "Choices"
     choices: "Scelte",
     // [Auto-translated] "Choices by url"

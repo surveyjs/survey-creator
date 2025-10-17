@@ -10,7 +10,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -240,7 +240,7 @@ test("tablet size click outside", async (t) => {
 
 test("Focus in Property grid", async (t) => {
   await setJSON({
-    questions: [
+    elements: [
       {
         type: "boolean",
         name: "test_q"
@@ -271,7 +271,7 @@ test("Focus in Property grid", async (t) => {
 
 test("No Focus on open Property grid Mobile", async (t) => {
   await setJSON({
-    questions: [
+    elements: [
       {
         type: "text",
         name: "test_q"
