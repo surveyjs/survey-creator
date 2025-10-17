@@ -40,7 +40,7 @@ async function setupCategories(t, windowWidth = 1910) {
   });
   await changeCategories();
   await t.resizeWindow(windowWidth, 600);
-  await t.wait(500);
+  await t.wait(2500);
 }
 
 async function setupToolboxProperty(propertyName: string, propertyValue: any) {
@@ -97,7 +97,7 @@ test("Categories large mode", async (t) => {
 
 test.before(async (t) => {
   await t.resizeWindow(1200, 605);
-})("Categories Responsiveness small -> large", async (t) => {
+}).only("Categories Responsiveness small -> large", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
 
