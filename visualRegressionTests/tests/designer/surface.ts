@@ -299,7 +299,7 @@
 //             {
 //               "type": "matrixdropdown",
 //               "name": "m",
-//               "columnLayout": "vertical",
+//               "transposeData": true,
 //               "columns": [
 //                 {
 //                   "name": "Column 1",

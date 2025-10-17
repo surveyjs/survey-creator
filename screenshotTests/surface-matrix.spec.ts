@@ -87,7 +87,7 @@ test.describe(title, () => {
             {
               "type": "matrixdropdown",
               "name": "m",
-              "columnLayout": "vertical",
+              "transposeData": true,
               "columns": [
                 { "name": "Column 1", "cellType": "text" },
                 { "name": "Column 2", "cellType": "text" }

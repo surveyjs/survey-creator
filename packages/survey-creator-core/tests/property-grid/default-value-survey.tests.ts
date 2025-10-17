@@ -49,6 +49,7 @@ test("Edit matrix row default value", () => {
   expect(editorQuestion.columns).toHaveLength(2);
   expect(editorQuestion.rowCount).toEqual(1);
   expect(editorQuestion.columnsLocation).toEqual("vertical");
+  expect(editorQuestion.transposeData).toEqual(true);
   expect(editorQuestion.value).toEqual([{ col1: 1, col2: 2 }]);
   editorQuestion.visibleRows[0].cells[0].value = 3;
   editorQuestion.visibleRows[0].cells[1].value = 4;
@@ -66,7 +67,7 @@ test("Edit matrix row default value and defaultValue, Bug#5663", () => {
   expect(editorQuestion.getType()).toEqual("matrixdynamic");
   expect(editorQuestion.columns).toHaveLength(2);
   expect(editorQuestion.rowCount).toEqual(1);
-  expect(editorQuestion.columnsLocation).toEqual("vertical");
+  expect(editorQuestion.transposeData).toEqual(true);
   editorQuestion.visibleRows[0].cells[0].value = 5;
   editorQuestion.visibleRows[0].cells[1].value = 6;
   editor.apply();
