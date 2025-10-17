@@ -97,13 +97,14 @@ test("Categories large mode", async (t) => {
 
 test.before(async (t) => {
   await t.resizeWindow(1200, 605);
-}).only("Categories Responsiveness small -> large", async (t) => {
+})("Categories Responsiveness small -> large", async (t) => {
   await changeToolboxScrolling(false);
   await changeToolboxSearchEnabled(false);
 
-  await t.wait(2500);
+  await t.takeScreenshot({ path: "changeToolboxSettings.png", fullPage: true });
   await setupCategories(t, 1110);
   await t
+    .takeScreenshot({ path: "setupCategories.png", fullPage: true })
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(categoriesHeader.count).eql(0)
     .expect(visibleToolboxItems.count).eql(11)
