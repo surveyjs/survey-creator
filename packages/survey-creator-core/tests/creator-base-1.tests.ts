@@ -1636,7 +1636,7 @@ test("getQuestionContentWrapperComponentName for component", (): any => {
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
   const creator = new CreatorTester();
-  const survey = creator.createSurvey({ questions: [{ type: "test", name: "q1" }] });
+  const survey = creator.createSurvey({ elements: [{ type: "test", name: "q1" }] });
   const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
   const q = qCustom.contentPanel.questions[0];
   expect(q.name).toBe("rate1");
@@ -1682,7 +1682,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     });
   const creator = new CreatorTester();
   const survey = creator.createSurvey({
-    questions: [{
+    elements: [{
       "type": "mypanel",
       "name": "question1"
     }]
@@ -4109,7 +4109,7 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.maxVisibleChoices = 1;
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "dropdown",
         name: "test_dropdown",
@@ -4150,7 +4150,7 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
   const creator: CreatorTester = new CreatorTester();
   creator.maxVisibleChoices = -1;
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "dropdown",
         name: "test_dropdown",

@@ -1388,7 +1388,7 @@
 //   })({
 //     showQuestionNumbers: "on",
 //     title: "title",
-//     questions: [
+//     elements: [
 //       {
 //         type: "text",
 //         name: "q1"

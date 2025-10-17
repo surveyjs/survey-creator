@@ -118,7 +118,7 @@ test("DefaultValueEditor, simple test 2", () => {
 });
 test("Cells-Editor", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       {
         type: "matrix",
         name: "question1",
@@ -202,7 +202,7 @@ test("DefaultValueEditor, question title", () => {
 });
 test("cells-editor for columns with number values should be created ok", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       {
         type: "matrix",
         name: "question1",

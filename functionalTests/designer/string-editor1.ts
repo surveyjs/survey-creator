@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor 1";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -17,7 +17,7 @@ const json = {
 };
 
 const json2 = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -31,7 +31,7 @@ const json2 = {
   ]
 };
 const json3 = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -128,7 +128,7 @@ test("Check string editor visibility", async (t) => {
 
 test("Check string editor visibility on defferent ReadOnly cases", async (t) => {
   var json_t = {
-    questions: [
+    elements: [
       {
         type: "checkbox",
         name: "q1",

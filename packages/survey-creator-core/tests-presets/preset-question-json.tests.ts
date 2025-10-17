@@ -89,7 +89,7 @@ describe("QuestionPresetJsonModel", () => {
 
   test("Should work within a survey", () => {
     const survey = new SurveyModel({
-      questions: [
+      elements: [
         {
           type: "presetjson",
           name: "q1"

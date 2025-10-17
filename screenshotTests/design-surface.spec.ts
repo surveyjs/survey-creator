@@ -311,7 +311,7 @@ test.describe(title, () => {
     }, {
       showQuestionNumbers: "on",
       title: "title",
-      questions: [{ type: "text", name: "q1" }]
+      elements: [{ type: "text", name: "q1" }]
     });
 
     await page.evaluate(() => {

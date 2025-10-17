@@ -125,7 +125,7 @@
 //     })();
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
+//       showQuestionNumbers: "on", pages: [{ name: "page1", elements: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
 //     });
 
 //     const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
