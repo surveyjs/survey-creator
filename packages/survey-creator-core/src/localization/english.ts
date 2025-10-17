@@ -1751,7 +1751,7 @@ export var enStrings = {
     validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
-    attachOriginalItems: "Attach original items", // Auto-generated string
+    attachData: "Attach original items", // Auto-generated string
     choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string

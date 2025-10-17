@@ -3236,7 +3236,7 @@ export var turkishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Farklı işle", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Orijinal öğeleri ekleme", // Auto-generated string
+    attachData: "Orijinal öğeleri ekleme", // Auto-generated string
     // "Choices"
     choices: "Seçenekler",
     // "Choices by url"

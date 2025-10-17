@@ -3236,7 +3236,7 @@ export const thStrings = {
     // "Render as"
     renderAs: "แสดงผลเป็น", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "แนบรายการเดิม", // Auto-generated string
+    attachData: "แนบรายการเดิม", // Auto-generated string
     // "Choices"
     choices: "ตัวเลือก",
     // "Choices by url"

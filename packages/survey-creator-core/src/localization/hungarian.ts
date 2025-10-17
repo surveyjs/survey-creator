@@ -3236,7 +3236,7 @@ export var huStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderelés mint", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Eredeti elemek csatolása", // Auto-generated string
+    attachData: "Eredeti elemek csatolása", // Auto-generated string
     // "Choices"
     choices: "Lehetőségek",
     // "Choices by url"

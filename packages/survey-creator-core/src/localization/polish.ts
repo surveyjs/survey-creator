@@ -3237,7 +3237,7 @@ export var polishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderuj jako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Dołączanie oryginalnych elementów", // Auto-generated string
+    attachData: "Dołączanie oryginalnych elementów", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "Wyborów",
     // [Auto-translated] "Choices by url"

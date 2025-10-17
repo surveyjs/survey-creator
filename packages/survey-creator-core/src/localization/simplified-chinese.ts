@@ -3236,7 +3236,7 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "渲染为", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "附加原始项目", // Auto-generated string
+    attachData: "附加原始项目", // Auto-generated string
     // "Choices"
     choices: "选项",
     // "Choices by url"

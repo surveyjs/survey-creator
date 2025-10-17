@@ -3236,7 +3236,7 @@ export var msStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render sebagai", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Lampirkan item asal", // Auto-generated string
+    attachData: "Lampirkan item asal", // Auto-generated string
     // "Choices"
     choices: "pilihan",
     // "Choices by url"

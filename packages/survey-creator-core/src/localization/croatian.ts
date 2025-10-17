@@ -3236,7 +3236,7 @@ export var hrStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Iscrtaj kao", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloži izvorne stavke", // Auto-generated string
+    attachData: "Priloži izvorne stavke", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

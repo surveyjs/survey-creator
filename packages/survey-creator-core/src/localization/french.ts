@@ -3236,7 +3236,7 @@ export var frenchTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Rendre en tant que", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Joindre des documents originaux", // Auto-generated string
+    attachData: "Joindre des documents originaux", // Auto-generated string
     // "Choices"
     choices: "Choix",
     // "Choices by url"

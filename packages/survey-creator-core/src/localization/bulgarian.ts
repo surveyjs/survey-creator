@@ -3236,7 +3236,7 @@ export var bgStrings = {
     // "Render as"
     renderAs: "Представяне като", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Прикрепяне на оригиналните елементи", // Auto-generated string
+    attachData: "Прикрепяне на оригиналните елементи", // Auto-generated string
     // "Choices"
     choices: "Избори",
     // "Choices by url"

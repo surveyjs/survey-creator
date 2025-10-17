@@ -3237,7 +3237,7 @@ export let svStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Återge som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Bifoga originalföremål", // Auto-generated string
+    attachData: "Bifoga originalföremål", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

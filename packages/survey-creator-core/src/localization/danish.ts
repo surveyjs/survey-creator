@@ -3237,7 +3237,7 @@ export var danishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Gengiv som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Vedhæft originale elementer", // Auto-generated string
+    attachData: "Vedhæft originale elementer", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

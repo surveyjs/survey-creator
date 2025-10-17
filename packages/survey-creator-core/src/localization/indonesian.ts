@@ -3236,7 +3236,7 @@ export var indonesianStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render sebagai", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Melampirkan item asli", // Auto-generated string
+    attachData: "Melampirkan item asli", // Auto-generated string
     // "Choices"
     choices: "pilihan",
     // "Choices by url"

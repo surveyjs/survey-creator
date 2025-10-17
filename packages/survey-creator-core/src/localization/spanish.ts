@@ -3236,7 +3236,7 @@ export var spanishTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Renderizar como", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Adjuntar elementos originales", // Auto-generated string
+    attachData: "Adjuntar elementos originales", // Auto-generated string
     // "Choices"
     choices: "opciones",
     // "Choices by url"

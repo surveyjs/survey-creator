@@ -3236,7 +3236,7 @@ export var jaStrings = {
     // [Auto-translated] "Render as"
     renderAs: "レンダリング形式", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "オリジナルアイテムを添付する", // Auto-generated string
+    attachData: "オリジナルアイテムを添付する", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "選択肢",
     // [Auto-translated] "Choices by url"

@@ -3236,7 +3236,7 @@ export var nlStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderen als", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Voeg originele items toe", // Auto-generated string
+    attachData: "Voeg originele items toe", // Auto-generated string
     // "Choices"
     choices: "Keuzes",
     // "Choices by url"

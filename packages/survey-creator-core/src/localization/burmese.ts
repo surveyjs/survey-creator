@@ -2964,7 +2964,7 @@ export var mmStrings = {
     // "Render as"
     renderAs: "အဖြစ်ဖော်ပြပါ", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "မူရင်းအချက်အလက်များကိုထည့်ပါ", // Auto-generated string
+    attachData: "မူရင်းအချက်အလက်များကိုထည့်ပါ", // Auto-generated string
     // "Choices"
     choices: "ရွေးချယ်မှုများ",
     // "Choices by url"

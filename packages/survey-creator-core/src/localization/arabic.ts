@@ -3236,7 +3236,7 @@ export var arStrings = {
     // [Auto-translated] "Render as"
     renderAs: "عرض ك", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "إرفاق العناصر الأصلية", // Auto-generated string
+    attachData: "إرفاق العناصر الأصلية", // Auto-generated string
     // "Choices"
     choices: "الإختيارات",
     // "Choices by url"

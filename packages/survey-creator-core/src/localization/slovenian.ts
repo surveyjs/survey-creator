@@ -3236,7 +3236,7 @@ export var slStrings = {
     // "Render as"
     renderAs: "Upodobi kot", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Poveži izvirne predmete", // Auto-generated string
+    attachData: "Poveži izvirne predmete", // Auto-generated string
     // "Choices"
     choices: "Izbire",
     // "Choices by url"
