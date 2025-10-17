@@ -69,8 +69,8 @@ export interface IPropertyEditorSetup {
 
 export function setSurveyJSONForPropertyGrid(
   json: any,
-  updateOnTyping = true,
-  titleLocationLeft = true
+  updateOnTyping: boolean = true,
+  titleLocationLeft: boolean = true
 ) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
@@ -90,7 +90,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   private editSurveyValue: SurveyModel;
   constructor(
     protected options: ISurveyCreatorOptions = null,
-    doSetup = true
+    doSetup: boolean = true
   ) {
     if (!this.options) {
       this.options = new EmptySurveyCreatorOptions();
@@ -214,7 +214,7 @@ export var PropertyGridEditorCollection = {
   },
   isEditorFit(
     prop: JsonObjectProperty,
-    asDefault = false
+    asDefault: boolean = false
   ): IPropertyGridEditor {
     for (var i = this.editors.length - 1; i >= 0; i--) {
       let ed = this.editors[i];
@@ -498,7 +498,7 @@ export class PropertyJSONGenerator {
     private parentProperty: JsonObjectProperty = null,
     private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) { }
-  public toJSON(isNested = false, context: string = undefined): any {
+  public toJSON(isNested: boolean = false, context: string = undefined): any {
     return this.createJSON(isNested, context);
   }
   public createColumnsJSON(className: string, names: Array<string>): any {
@@ -512,7 +512,7 @@ export class PropertyJSONGenerator {
     }
     return res;
   }
-  public setupObjPanel(panel: PanelModelBase, isNestedObj = false, context: string = undefined): void {
+  public setupObjPanel(panel: PanelModelBase, isNestedObj: boolean = false, context: string = undefined): void {
     panel.fromJSON(this.toJSON(isNestedObj, context));
     this.onQuestionsCreated(panel);
   }
@@ -651,7 +651,7 @@ export class PropertyJSONGenerator {
     }
     return json;
   }
-  private createPanelProps(tab: SurveyQuestionEditorTabDefinition, context: string, isChild = false): any {
+  private createPanelProps(tab: SurveyQuestionEditorTabDefinition, context: string, isChild: boolean = false): any {
     var panel = this.createPanelJSON(tab.name, tab.title, tab.iconName, isChild);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
@@ -700,7 +700,7 @@ export class PropertyJSONGenerator {
     obj: Base,
     prop: JsonObjectProperty,
     title: string,
-    isColumn = false,
+    isColumn: boolean = false,
     context: string
   ): any {
     //if(isColumn && !SurveyHelper.isPropertyVisible(this.obj, prop, undefined, isColumn ? "list" : "")) return null;
@@ -1078,7 +1078,7 @@ export class PropertyGridModel {
     }
     return this.surveyValue;
   }
-  public showOneCategoryInPropertyGrid = false;
+  public showOneCategoryInPropertyGrid: boolean = false;
 
   public validate(): boolean {
     if (!this.survey) return;

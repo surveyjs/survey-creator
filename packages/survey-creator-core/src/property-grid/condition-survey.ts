@@ -12,7 +12,7 @@ import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
 
 export class ConditionEditorItem {
-  public conjunction = "and";
+  public conjunction: string = "and";
   public questionName: string;
   public operator: string = settings.logic.defaultOperators.default;
   public value: any;
@@ -260,7 +260,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private panelValue: QuestionPanelDynamicModel;
   private textEditorValue: QuestionCommentModel;
   private addConditionQuestionsHash = {};
-  private isModalValue = true;
+  private isModalValue: boolean = true;
   public allConditionQuestions: Array<ItemValue>;
   public onContextChanged: (context: Question) => void;
 
@@ -638,7 +638,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const prefix = this.context.getValueName() + ".";
     return name.replace(prefix, "");
   }
-  private getContextIndexInfo(name: string, prefix = ""): { index: number, name: string } {
+  private getContextIndexInfo(name: string, prefix: string = ""): { index: number, name: string } {
     return SurveyHelper.getQuestionContextIndexInfo(name, prefix);
   }
   private getQuestionNameToPanel(name: string): string {

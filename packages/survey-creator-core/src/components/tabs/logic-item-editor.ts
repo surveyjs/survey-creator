@@ -32,7 +32,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
   private initialSelectedElements: any = {};
-  private isModifiedValue = false;
+  private isModifiedValue: boolean = false;
   private contextValue: Question;
   private selectorElementsHash = {};
 
