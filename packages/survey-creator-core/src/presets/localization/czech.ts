@@ -74,9 +74,9 @@ export const csStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Objekt JSON, který se použije, když uživatelé vyberou tuto položku panelu nástrojů",
     // [Auto-translated] "Subcategories"
-    subcategories: "Podkategorie",
+    subitems: "Podkategorie",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Povolit podpoložky pro tuto otázku...",
+    enableSubitems: "Povolit podpoložky pro tuto otázku...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Přesunout jako podpoložku do...",
     // [Auto-translated] "Add to Toolbox"

@@ -74,9 +74,9 @@ export const heStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON להחלה כאשר משתמשים בוחרים בפריט ארגז כלים זה",
     // [Auto-translated] "Subcategories"
-    subcategories: "קטגוריות משנה",
+    subitems: "קטגוריות משנה",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "אפשר פריטי משנה לשאלה זו...",
+    enableSubitems: "אפשר פריטי משנה לשאלה זו...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "העבר כפריט משנה אל...",
     // [Auto-translated] "Add to Toolbox"

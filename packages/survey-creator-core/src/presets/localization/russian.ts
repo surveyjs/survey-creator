@@ -74,9 +74,9 @@ export const ruStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Объект JSON, который будет применяться при выборе пользователем этого элемента панели инструментов",
     // [Auto-translated] "Subcategories"
-    subcategories: "Подкатегории",
+    subitems: "Подкатегории",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Включите подпункты для этого вопроса...",
+    enableSubitems: "Включите подпункты для этого вопроса...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Переместить в качестве подэлемента в...",
     // [Auto-translated] "Add to Toolbox"

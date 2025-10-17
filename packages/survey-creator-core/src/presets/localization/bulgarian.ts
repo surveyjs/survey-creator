@@ -74,9 +74,9 @@ export const bgStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON обект, който да се приложи, когато потребителите изберат този елемент от кутията с инструменти",
     // [Auto-translated] "Subcategories"
-    subcategories: "Подкатегории",
+    subitems: "Подкатегории",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Активирайте поделементи за този въпрос...",
+    enableSubitems: "Активирайте поделементи за този въпрос...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Преместване като поделемент към...",
     // [Auto-translated] "Add to Toolbox"

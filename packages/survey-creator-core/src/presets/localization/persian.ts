@@ -74,9 +74,9 @@ export const faStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON برای اعمال زمانی که کاربران این مورد جعبه ابزار را انتخاب می کنند",
     // [Auto-translated] "Subcategories"
-    subcategories: "زیر مجموعه ها",
+    subitems: "زیر مجموعه ها",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "موارد فرعی را برای این سوال فعال کنید...",
+    enableSubitems: "موارد فرعی را برای این سوال فعال کنید...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "به عنوان یک زیر آیتم به...",
     // [Auto-translated] "Add to Toolbox"

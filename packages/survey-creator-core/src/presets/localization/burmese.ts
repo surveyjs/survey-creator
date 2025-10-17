@@ -64,9 +64,9 @@ export const mmStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "သုံးစွဲသူတွေက ဒီကိရိယာအိတ် အချက်အလက်ကို ရွေးတဲ့အခါ အသုံးချဖို့ JSON အရာဝတ္ထု",
     // [Auto-translated] "Subcategories"
-    subcategories: "အမျိုးအစား ခွဲ များ",
+    subitems: "အမျိုးအစား ခွဲ များ",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "ဒီမေးခွန်းအတွက် အစိတ်အပိုင်းများကို ခွင့်ပြုပါ...",
+    enableSubitems: "ဒီမေးခွန်းအတွက် အစိတ်အပိုင်းများကို ခွင့်ပြုပါ...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "အပိုင်းအပိုင်းတစ်ခုအဖြစ် ရွှေ့ပြောင်းပါ...",
     // [Auto-translated] "Add to Toolbox"

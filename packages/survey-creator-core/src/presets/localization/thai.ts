@@ -74,9 +74,9 @@ export const thStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "ออบเจ็กต์ JSON ที่จะนําไปใช้เมื่อผู้ใช้เลือกรายการกล่องเครื่องมือนี้",
     // [Auto-translated] "Subcategories"
-    subcategories: "หมวดหมู่ย่อย",
+    subitems: "หมวดหมู่ย่อย",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "เปิดใช้งานรายการย่อยสําหรับคําถามนี้...",
+    enableSubitems: "เปิดใช้งานรายการย่อยสําหรับคําถามนี้...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "ย้ายเป็นรายการย่อยไปยัง...",
     // [Auto-translated] "Add to Toolbox"

@@ -74,9 +74,9 @@ export const nlStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-object dat moet worden toegepast wanneer gebruikers dit toolbox-item selecteren",
     // [Auto-translated] "Subcategories"
-    subcategories: "Subcategorieën",
+    subitems: "Subcategorieën",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Schakel subitems in voor deze vraag...",
+    enableSubitems: "Schakel subitems in voor deze vraag...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Verplaats als subitem naar...",
     // [Auto-translated] "Add to Toolbox"

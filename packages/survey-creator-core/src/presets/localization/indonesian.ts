@@ -74,9 +74,9 @@ export const idStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON untuk diterapkan saat pengguna memilih item toolbox ini",
     // [Auto-translated] "Subcategories"
-    subcategories: "Subkategori",
+    subitems: "Subkategori",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Aktifkan subitem untuk pertanyaan ini...",
+    enableSubitems: "Aktifkan subitem untuk pertanyaan ini...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Pindah sebagai subitem ke...",
     // [Auto-translated] "Add to Toolbox"

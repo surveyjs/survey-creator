@@ -74,9 +74,9 @@ export const htStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON objè pou aplike lè itilizatè yo chwazi atik bwat zouti sa a",
     // [Auto-translated] "Subcategories"
-    subcategories: "Sous-kategori",
+    subitems: "Sous-kategori",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Pèmèt subitems pou kesyon sa a...",
+    enableSubitems: "Pèmèt subitems pou kesyon sa a...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Deplase kòm yon subitem pou...",
     // [Auto-translated] "Add to Toolbox"

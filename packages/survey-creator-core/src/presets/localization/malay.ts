@@ -74,9 +74,9 @@ export const msStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Objek JSON untuk digunakan apabila pengguna memilih item kotak alat ini",
     // [Auto-translated] "Subcategories"
-    subcategories: "Subkategori",
+    subitems: "Subkategori",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Dayakan subitem untuk soalan ini...",
+    enableSubitems: "Dayakan subitem untuk soalan ini...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Bergerak sebagai subitem ke...",
     // [Auto-translated] "Add to Toolbox"

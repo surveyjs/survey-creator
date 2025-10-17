@@ -74,9 +74,9 @@ export const deStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-Objekt, das angewendet werden soll, wenn Benutzer dieses Toolboxelement auswählen",
     // [Auto-translated] "Subcategories"
-    subcategories: "Unterkategorie",
+    subitems: "Unterkategorie",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Aktivieren Sie Unterpunkte für diese Frage...",
+    enableSubitems: "Aktivieren Sie Unterpunkte für diese Frage...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Als Unterelement verschieben nach...",
     // [Auto-translated] "Add to Toolbox"

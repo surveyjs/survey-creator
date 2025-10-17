@@ -74,9 +74,9 @@ export const roStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Obiect JSON de aplicat atunci când utilizatorii selectează acest element din caseta de instrumente",
     // [Auto-translated] "Subcategories"
-    subcategories: "Subcategorii",
+    subitems: "Subcategorii",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Activați subelemente pentru această întrebare...",
+    enableSubitems: "Activați subelemente pentru această întrebare...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Mutați ca subelement în...",
     // [Auto-translated] "Add to Toolbox"

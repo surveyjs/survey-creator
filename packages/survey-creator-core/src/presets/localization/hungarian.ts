@@ -74,9 +74,9 @@ export const huStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-objektum, amelyet akkor kell alkalmazni, amikor a felhasználók kiválasztják ezt az eszközkészlet-elemet",
     // [Auto-translated] "Subcategories"
-    subcategories: "Alkategóriák",
+    subitems: "Alkategóriák",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Engedélyezze a kérdés alelemeit...",
+    enableSubitems: "Engedélyezze a kérdés alelemeit...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Áthelyezés alelemként a...",
     // [Auto-translated] "Add to Toolbox"

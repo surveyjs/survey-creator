@@ -8,8 +8,8 @@
   }
   .sv-popup__container {
     border: initial;
-    padding: 0 var(--sjs2-spacing-x150, 12px);
-    margin: -13px 0;
+    
+    padding: var(--sjs2-spacing-x150, 12px);
 
     box-shadow: initial;
     background: initial;
@@ -25,6 +25,12 @@
         var(--sjs2-border-blur-floating-default, 12px) var(--sjs2-border-spread-floating-default, 4px)
         var(--sjs2-color-utility-shadow-floating-default, rgba(0, 76, 68, 0.2));
     }
+  }
+}
+
+.sps-popup-menu.sps-popup-menu--context {
+  .sv-popup__container {
+    padding: 0 var(--sjs2-spacing-x100, 8px);
   }
 }
 

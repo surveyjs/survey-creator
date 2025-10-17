@@ -74,9 +74,9 @@ export const jaStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "ユーザーがこのツールボックス項目を選択したときに適用する JSON オブジェクト",
     // [Auto-translated] "Subcategories"
-    subcategories: "サブカテゴリ",
+    subitems: "サブカテゴリ",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "この質問のサブ項目を有効にしてください...",
+    enableSubitems: "この質問のサブ項目を有効にしてください...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "サブアイテムとして移動する...",
     // [Auto-translated] "Add to Toolbox"

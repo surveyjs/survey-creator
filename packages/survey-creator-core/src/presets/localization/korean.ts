@@ -74,9 +74,9 @@ export const koStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "사용자가 이 도구 상자 항목을 선택할 때 적용할 JSON 개체",
     // [Auto-translated] "Subcategories"
-    subcategories: "하위 범주",
+    subitems: "하위 범주",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "이 질문에 대한 하위 항목 활성화...",
+    enableSubitems: "이 질문에 대한 하위 항목 활성화...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "하위 항목으로 이동...",
     // [Auto-translated] "Add to Toolbox"

@@ -74,9 +74,9 @@ export const fiStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-objekti, jota käytetään, kun käyttäjät valitsevat tämän työkalupalkin kohteen",
     // [Auto-translated] "Subcategories"
-    subcategories: "Alaluokat",
+    subitems: "Alaluokat",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Ota tämän kysymyksen alakohdat käyttöön...",
+    enableSubitems: "Ota tämän kysymyksen alakohdat käyttöön...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Siirrä alikohteena...",
     // [Auto-translated] "Add to Toolbox"

@@ -74,9 +74,9 @@ export const nbStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-objekt som skal brukes når brukere velger dette verktøykasseelementet",
     // [Auto-translated] "Subcategories"
-    subcategories: "Underkategorier",
+    subitems: "Underkategorier",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Aktiver underelementer for dette spørsmålet...",
+    enableSubitems: "Aktiver underelementer for dette spørsmålet...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Flytt som et underelement til...",
     // [Auto-translated] "Add to Toolbox"

@@ -74,9 +74,9 @@ export const mnStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON объект хэрэглэгчид энэ toolbox элементийг сонгоход хэрэглэнэ",
     // [Auto-translated] "Subcategories"
-    subcategories: "Дэд ангилал",
+    subitems: "Дэд ангилал",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Энэ асуултын дэд элементүүдийг идэвхжүүл...",
+    enableSubitems: "Энэ асуултын дэд элементүүдийг идэвхжүүл...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Дэд зүйл болгон шилжүүлнэ...",
     // [Auto-translated] "Add to Toolbox"

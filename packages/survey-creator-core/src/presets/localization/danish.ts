@@ -74,9 +74,9 @@ export const daStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-objekt, der skal anvendes, når brugere vælger dette værktøjskasseelement",
     // [Auto-translated] "Subcategories"
-    subcategories: "Underkategorier",
+    subitems: "Underkategorier",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Aktiver underelementer for dette spørgsmål...",
+    enableSubitems: "Aktiver underelementer for dette spørgsmål...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Flyt som et underemne til...",
     // [Auto-translated] "Add to Toolbox"

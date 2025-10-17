@@ -254,14 +254,14 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       if (question.name == this.nameItems || question.name == this.nameInnerMatrix) {
         actions.push(new Action({
           id: "subcategories",
-          title: getLocString("presets.toolbox.subcategories"),
+          title: getLocString("presets.toolbox.subitems"),
           css: "sps-list__item--label",
           enabled: false,
           needSeparator: true
         }));
         actions.push(new Action({
           id: "convert-to-subcategory",
-          title: getLocString("presets.toolbox.convertToSubcategory"),
+          title: getLocString("presets.toolbox.enableSubitems"),
           action: () => {
             const destination = hasCategories ? this.getQuestionCategories(model) : this.getQuestionItems(model);
             const destValue = JSON.parse(JSON.stringify(destination.value));

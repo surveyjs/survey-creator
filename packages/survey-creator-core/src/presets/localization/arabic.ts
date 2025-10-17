@@ -74,9 +74,9 @@ export const arStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON لتطبيقه عند تحديد المستخدمين لعنصر مربع الأدوات هذا",
     // [Auto-translated] "Subcategories"
-    subcategories: "الفئات الفرعيه",
+    subitems: "الفئات الفرعيه",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "تمكين العناصر الفرعية لهذا السؤال...",
+    enableSubitems: "تمكين العناصر الفرعية لهذا السؤال...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "نقل كعنصر فرعي إلى...",
     // [Auto-translated] "Add to Toolbox"

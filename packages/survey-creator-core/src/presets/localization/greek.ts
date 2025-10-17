@@ -74,9 +74,9 @@ export const elStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Αντικείμενο JSON για εφαρμογή όταν οι χρήστες επιλέγουν αυτό το στοιχείο εργαλειοθήκης",
     // [Auto-translated] "Subcategories"
-    subcategories: "Υποκατηγορίες",
+    subitems: "Υποκατηγορίες",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Ενεργοποιήστε τα δευτερεύοντα στοιχεία για αυτήν την ερώτηση...",
+    enableSubitems: "Ενεργοποιήστε τα δευτερεύοντα στοιχεία για αυτήν την ερώτηση...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Μετακίνηση ως υποστοιχείο σε...",
     // [Auto-translated] "Add to Toolbox"

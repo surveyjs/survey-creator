@@ -74,9 +74,9 @@ export const skStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Objekt JSON, ktorý sa použije, keď používatelia vyberú túto položku panela nástrojov",
     // [Auto-translated] "Subcategories"
-    subcategories: "Podkategórie",
+    subitems: "Podkategórie",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Povoliť podpoložky pre túto otázku...",
+    enableSubitems: "Povoliť podpoložky pre túto otázku...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Presunúť ako podpoložku do...",
     // [Auto-translated] "Add to Toolbox"

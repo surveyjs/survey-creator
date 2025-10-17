@@ -74,9 +74,9 @@ export const plStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Obiekt JSON do zastosowania, gdy użytkownicy wybiorą ten element przybornika",
     // [Auto-translated] "Subcategories"
-    subcategories: "Podkategorie",
+    subitems: "Podkategorie",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Włącz elementy podrzędne dla tego pytania...",
+    enableSubitems: "Włącz elementy podrzędne dla tego pytania...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Przenieś jako element podrzędny do...",
     // [Auto-translated] "Add to Toolbox"

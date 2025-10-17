@@ -74,9 +74,9 @@ export const trStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Kullanıcılar bu araç kutusu öğesini seçtiğinde uygulanacak JSON nesnesi",
     // [Auto-translated] "Subcategories"
-    subcategories: "Alt kategori",
+    subitems: "Alt kategori",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Bu soru için alt öğeleri etkinleştirin...",
+    enableSubitems: "Bu soru için alt öğeleri etkinleştirin...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Bir alt öğe olarak şuraya taşı...",
     // [Auto-translated] "Add to Toolbox"

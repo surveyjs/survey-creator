@@ -74,9 +74,9 @@ export const svStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-objekt som ska användas när användare väljer det här verktygslådeobjektet",
     // [Auto-translated] "Subcategories"
-    subcategories: "Underkategorier",
+    subitems: "Underkategorier",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Aktivera underobjekt för den här frågan...",
+    enableSubitems: "Aktivera underobjekt för den här frågan...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Flytta som ett underobjekt till...",
     // [Auto-translated] "Add to Toolbox"

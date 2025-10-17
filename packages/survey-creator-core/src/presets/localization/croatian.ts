@@ -74,9 +74,9 @@ export const hrStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON objekt koji će se primijeniti kada korisnici odaberu ovu stavku alata",
     // [Auto-translated] "Subcategories"
-    subcategories: "Podkategorije",
+    subitems: "Podkategorije",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Omogućite podstavke za ovo pitanje...",
+    enableSubitems: "Omogućite podstavke za ovo pitanje...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Premjesti kao podstavku u...",
     // [Auto-translated] "Add to Toolbox"

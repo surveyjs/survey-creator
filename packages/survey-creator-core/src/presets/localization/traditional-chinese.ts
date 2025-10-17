@@ -74,9 +74,9 @@ export const zhTwStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "當使用者選取此工具箱項目時要套用的 JSON 物件",
     // [Auto-translated] "Subcategories"
-    subcategories: "子類別",
+    subitems: "子類別",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "啟用此問題的子項目...",
+    enableSubitems: "啟用此問題的子項目...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "作為子項目移動到...",
     // [Auto-translated] "Add to Toolbox"

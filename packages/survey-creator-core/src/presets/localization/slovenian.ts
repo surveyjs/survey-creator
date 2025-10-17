@@ -74,9 +74,9 @@ export const slStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Predmet JSON, ki se uporabi, ko uporabniki izberejo ta element zbirke orodij",
     // [Auto-translated] "Subcategories"
-    subcategories: "Podkategorije",
+    subitems: "Podkategorije",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Omogočite podelemente za to vprašanje ...",
+    enableSubitems: "Omogočite podelemente za to vprašanje ...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Premakni kot podelement v...",
     // [Auto-translated] "Add to Toolbox"

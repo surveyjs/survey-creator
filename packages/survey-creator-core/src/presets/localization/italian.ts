@@ -74,9 +74,9 @@ export const itStrings = {
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Oggetto JSON da applicare quando gli utenti selezionano questo elemento della casella degli strumenti",
     // [Auto-translated] "Subcategories"
-    subcategories: "Sottocategorie",
+    subitems: "Sottocategorie",
     // [Auto-translated] "Enable subitems for this question..."
-    convertToSubcategory: "Abilita gli elementi secondari per questa domanda...",
+    enableSubitems: "Abilita gli elementi secondari per questa domanda...",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Sposta come sottoelemento in...",
     // [Auto-translated] "Add to Toolbox"

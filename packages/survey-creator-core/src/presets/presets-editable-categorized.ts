@@ -170,9 +170,9 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       }, {
         items: [],
         showPointer: false,
-        verticalPosition: "top",
+        verticalPosition: "bottom",
         horizontalPosition: "center",
-        cssClass: "sps-popup-menu",
+        cssClass: "sps-popup-menu sps-popup-menu--context",
         cssClasses: listComponentCss,
         searchEnabled: false
       });
