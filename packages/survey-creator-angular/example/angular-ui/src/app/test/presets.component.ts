@@ -1,0 +1,22 @@
+import { Component, ViewEncapsulation } from "@angular/core";
+import { SurveyCreatorModel } from "survey-creator-core";
+import { TestDefaultComponent } from "./default.component";
+import { TabPresetsPlugin } from "survey-creator-core/presets";
+@Component({
+  selector: "test-theme-preview",
+  templateUrl: "./test.component.html",
+  encapsulation: ViewEncapsulation.None
+})
+export class PresetsComponent extends TestDefaultComponent {
+  constructor() {
+    super();
+  }
+  protected override getSlk(): boolean { return false; }
+  protected override createCreator(): void {
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.allowZoom = false;
+    new TabPresetsPlugin((window as any).creator);
+  }
+}

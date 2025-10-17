@@ -125,6 +125,7 @@ jobs:
           npm run build:i18n
           npm run build
           npm run build:themes
+          npm run build:presets
         displayName: "Build Creator V2 Core"
 
       - script: |
@@ -317,6 +318,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 React"
 
       - script: |

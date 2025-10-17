@@ -2,6 +2,12 @@ import type { Locator, Page } from "@playwright/test";
 import { expect, test as baseTest } from "@playwright/test";
 
 export const url = "http://127.0.0.1:8080/testCafe/testcafe";
+export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page";
+export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/testCafe/preview-theme-switcher";
+export const urlThemeForPreview = "http://127.0.0.1:8080/testCafe/theme-for-preview-option";
+export const urlDropdownCollapseView = "http://127.0.0.1:8080/testCafe/dropdown-collapse-view";
+export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localized_ui";
+export const urlPresets = "http://127.0.0.1:8080/testCafe/presets";
 
 export async function compareScreenshot(page: Page, elementSelector: string | Locator | undefined, screenshotName: string, elementIndex = 0) {
   let currentElement = elementSelector;
@@ -53,6 +59,14 @@ export async function doDrag({ page, element, target, options }: { page: Page, e
 export async function doDragDrop({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options: any }):Promise<void> {
   await doDrag({ page, element, target, options: options || {} });
   await page.mouse.up();
+}
+
+export async function showCreatorSettings(page) {
+  await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
+}
+export async function showPresets(page) {
+  await showCreatorSettings(page);
+  await page.locator(".sps-launch__card").click();
 }
 
 export { expect };

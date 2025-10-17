@@ -3,7 +3,7 @@ import { type QuestionBooleanModel, RendererFactory } from "survey-core";
 import { attachKey2click, ReactQuestionFactory, SurveyElementBase, SurveyQuestionElementBase } from "survey-react-ui";
 export class SurveyQuestionBooleanSwitch extends SurveyQuestionElementBase {
   protected renderElement(): React.JSX.Element {
-    const button = attachKey2click(<div className={"spg-boolean-switch__button" + (this.questionBase.value ? " spg-boolean-switch__button--checked" : "")} tabIndex={0}
+    const button = attachKey2click(<div className={"spg-boolean-switch__button" + (this.questionBase.booleanValue ? " spg-boolean-switch__button--checked" : "")} tabIndex={0}
       role="checkbox"
       aria-checked={this.questionBase.booleanValue || false}
       aria-required={this.questionBase.a11y_input_ariaRequired}
@@ -21,7 +21,7 @@ export class SurveyQuestionBooleanSwitch extends SurveyQuestionElementBase {
     </div>, this.questionBase, { processEsc: false });
 
     return (
-      <div className="spg-boolean-switch" onClick={() => this.questionBase.value = !this.questionBase.value}>
+      <div className="spg-boolean-switch" onClick={() => this.questionBase.booleanValue = !this.questionBase.booleanValue}>
         {button}
         <div className="spg-boolean-switch__caption">
           <div className="spg-boolean-switch__title" id={this.questionBase.labelRenderedAriaID}>

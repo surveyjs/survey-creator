@@ -21,12 +21,6 @@
         }
     },
     "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/*.cy.ts",
-        "**/*.spec.ts",
-        "**/__tests__/**/*"
+        "src/index.ts"
     ]
 }
