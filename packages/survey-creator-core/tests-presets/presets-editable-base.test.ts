@@ -44,7 +44,7 @@ describe("CreatorPresetEditableBase", () => {
     // Create mock matrix
     mockMatrix = new QuestionMatrixDynamicModel("matrix");
     mockMatrix.fromJSON({
-      detailElements: [{ type: "text", name: "question1", isRequired: true }]
+      detailElements: [{ type: "text", name: "question1", isRequired: true, visible: false }]
     });
     mockMatrix.value = [{ question1: "initial value" }];
     mockRow = mockMatrix.visibleRows[0] as any;
