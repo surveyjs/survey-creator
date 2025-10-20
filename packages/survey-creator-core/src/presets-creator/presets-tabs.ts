@@ -9,7 +9,7 @@ export class CreatorPresetTabs extends CreatorPresetBase {
   public getPath(): string { return "tabs"; }
   protected applyCore(creator: SurveyCreatorModel, internal: boolean = false): void {
     super.applyCore(creator, internal);
-    const items = this.json["items"] || [];
+    const items = this.json["items"] || creator.getAvailableTabs().map(i => ({ name: i.name }));
     let tab = null;
     if (!internal) {
       tab = this.json.activeTab || (items.length > 0 ? items[0].name : "");
