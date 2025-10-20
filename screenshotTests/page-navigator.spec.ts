@@ -8,7 +8,7 @@ test.describe(title, () => {
   });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -117,7 +117,7 @@ test.describe(title, () => {
     });
 
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
+      showQuestionNumbers: true, pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
     });
 
     const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
@@ -394,7 +394,7 @@ test.describe(title, () => {
           ],
         },
       ],
-      showQuestionNumbers: "off",
+      showQuestionNumbers: false,
     });
     await page.waitForTimeout(500);
 
@@ -407,7 +407,7 @@ test.describe(title, () => {
   test("Page navigator has enough space to be shown", async ({ page }) => {
     await page.setViewportSize({ width: 1508, height: 800 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "title": "NPS Survey Question",
       "widthMode": "responsive",
       "pages": [
@@ -477,7 +477,7 @@ test.describe(title, () => {
       window["creator"].pageEditMode = "bypage";
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "title": "NPS Survey Question",
       "widthMode": "responsive",
       "pages": [
@@ -548,7 +548,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1500, height: 800 });
     await setShowSidebar(page, false);
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

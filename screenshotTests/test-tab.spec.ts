@@ -12,7 +12,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1280, height: 900 });
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -44,7 +44,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await explicitErrorHandler(page);
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -97,7 +97,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await explicitErrorHandler(page);
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -135,7 +135,7 @@ test.describe(title, () => {
 
     await setJSON(page, {
       autoFocusFirstQuestion: true,
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "width": "755px",
       "widthMode": "static",
       "pages": [
@@ -160,7 +160,7 @@ test.describe(title, () => {
   test("Check survey timer", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       headerView: "basic",
       "autoFocusFirstQuestion": true,
       "title": "American History",
@@ -246,7 +246,7 @@ test.describe(title, () => {
   test("dropdown popup in simulator", async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: 1000 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -284,7 +284,7 @@ test.describe(title, () => {
   test("dropdown popup in simulator - mobile", async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: 1000 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -321,7 +321,7 @@ test.describe(title, () => {
   test("background image in preview", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -354,7 +354,7 @@ test.describe(title, () => {
   test("Page selector with invisible page", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -397,7 +397,7 @@ test.describe(title, () => {
   test("Tagbox has wrong style on preview tab", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",

@@ -10,7 +10,7 @@ test("Adorner design", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -36,7 +36,7 @@ test("empty imageLink", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -63,7 +63,7 @@ test("broken imageLink", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -87,7 +87,7 @@ test("Check image loading indicator", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       { "name": "page2", "elements": [{ "type": "image", "name": "question2", "imageLink": "wrong_url" }] }

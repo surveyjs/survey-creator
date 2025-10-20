@@ -6,7 +6,7 @@
 // fixture`${title}`.page`${url}`;
 
 // const json1 = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -74,7 +74,7 @@
 // fixture`${title}`.page`${urlPreviewThemeSwitcher}`;
 
 // const json2 = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "pages": [
 //     {
 //       "name": "page1",
@@ -169,7 +169,7 @@
 //     await explicitErrorHandler();
 //     await setJSON(
 //       {
-//         showQuestionNumbers: "on",
+//         showQuestionNumbers: true,
 //         "logoPosition": "right",
 //         "pages": [
 //           {
@@ -213,7 +213,7 @@
 
 // const json3 = {
 //   autoFocusFirstQuestion: true,
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "width": "755px",
 //   "widthMode": "static",
 //   "pages": [
@@ -247,7 +247,7 @@
 
 //     await t.resizeWindow(1920, 1080);
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       headerView: "basic",
 //       "autoFocusFirstQuestion": true,
 //       "title": "American History",
@@ -336,7 +336,7 @@
 //     const simulator = Selector(".svd-simulator-content");
 //     await t.resizeWindow(1200, 1000);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -377,7 +377,7 @@
 //     const simulator = Selector(".svd-simulator-content");
 //     await t.resizeWindow(1200, 1000);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -416,7 +416,7 @@
 //     const previewTab = Selector(".svc-creator-tab").filterVisible();
 //     await t.resizeWindow(1024, 768);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -451,7 +451,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1024, 768);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -501,7 +501,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1024, 768);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",

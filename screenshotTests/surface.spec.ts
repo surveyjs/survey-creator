@@ -71,7 +71,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1000, height: 800 });
 
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -100,7 +100,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1000, height: 800 });
 
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -196,7 +196,7 @@ test.describe(title, () => {
   test("Boolean no wrap", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -220,7 +220,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -249,7 +249,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1280, height: 900 });
 
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -272,7 +272,7 @@ test.describe(title, () => {
   test("Choices (Checkbox): Layout small screen", async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -297,7 +297,7 @@ test.describe(title, () => {
   test("Question borders", async ({ page }) => {
     await page.setViewportSize({ width: 1232, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -334,7 +334,7 @@ test.describe(title, () => {
   test("Question borders in panels", async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 1500 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "width": "800px",
       "pages": [
@@ -380,7 +380,7 @@ test.describe(title, () => {
   test("Panel empty", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -403,7 +403,7 @@ test.describe(title, () => {
   test("Panel not empty", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -427,7 +427,7 @@ test.describe(title, () => {
   test("Panel gap between items", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -452,7 +452,7 @@ test.describe(title, () => {
   test("Panel multi-question row", async ({ page }) => {
     await page.setViewportSize({ width: 1956, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -486,7 +486,7 @@ test.describe(title, () => {
   test("Panel (small) with questions in row", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -511,7 +511,7 @@ test.describe(title, () => {
 
   test("Check question adorner width", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -603,7 +603,7 @@ test.describe(title, () => {
   test("Check question scroll", async ({ page }) => {
     await page.setViewportSize({ width: 1952, height: 1080 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -642,7 +642,7 @@ test.describe(title, () => {
   test("Check required question", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "elements": [
         {
@@ -669,7 +669,7 @@ test.describe(title, () => {
       window["Survey"].Serializer.findProperty("question", "title").maxLength = 15;
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -703,7 +703,7 @@ test.describe(title, () => {
     await setShowAddQuestionButton(page, false);
     await setIsCompact(page, true);
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -730,7 +730,7 @@ test.describe(title, () => {
     await setShowAddQuestionButton(page, false);
     await page.setViewportSize({ width: 1600, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         { "name": "page1", "elements": [{ "type": "text", "name": "question1" }] },
@@ -754,7 +754,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 400, height: 900 });
     await setShowAddQuestionButton(page, false);
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -778,7 +778,7 @@ test.describe(title, () => {
   test("Question add type selector button", async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -822,7 +822,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1400, height: 900 });
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "radiogroup",
@@ -843,7 +843,7 @@ test.describe(title, () => {
   test("Check carry forward panel", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -894,7 +894,7 @@ test.describe(title, () => {
   test("Check carry forward panel ranking", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -927,7 +927,7 @@ test.describe(title, () => {
   test("Check carry forward panel ranking: selectToRank", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -961,7 +961,7 @@ test.describe(title, () => {
   test("Check carry forward panel ranking: selectToRank vertical", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -996,7 +996,7 @@ test.describe(title, () => {
   test("Restful service banner", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -1026,7 +1026,7 @@ test.describe(title, () => {
   test("Question adorners - popup", async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -1062,7 +1062,7 @@ test.describe(title, () => {
   test("Question adorners for different sizes", async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 1900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -1138,7 +1138,7 @@ test.describe(title, () => {
       });
     });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [{ type: "boolean", name: "question1" }]
     };
     await setJSON(page, json);
@@ -1150,7 +1150,7 @@ test.describe(title, () => {
   test("Narrow question placeholder", async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 1000 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -1260,7 +1260,7 @@ test.describe(title, () => {
   test("Narrow panel add question button", async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 1000 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -1306,7 +1306,7 @@ test.describe(title, () => {
   test("Dynamic panels in multi-line", async ({ page }) => {
     await page.setViewportSize({ width: 1032, height: 1000 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -1341,7 +1341,7 @@ test.describe(title, () => {
   test("Panel title editor is fully visible", async ({ page }) => {
     await page.setViewportSize({ width: 1500, height: 1000 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -1387,7 +1387,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 1151, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [{ "name": "page1", "elements": [{ "type": "fullname", "name": "question1" }] }]
     });
     await page.locator(".svc-question__content--fullname").hover();
@@ -1397,7 +1397,7 @@ test.describe(title, () => {
   test("Check adorner actions responsivity after convert", async ({ page }) => {
     await page.setViewportSize({ width: 1432, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -1441,7 +1441,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1024, height: 800 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -1480,7 +1480,7 @@ test.describe(title, () => {
       });
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "elements": [{ type: "boolean", name: "q1", title: "Question Title" }]
     });

@@ -7,7 +7,7 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   elements: [
 //     {
 //       type: "dropdown",
