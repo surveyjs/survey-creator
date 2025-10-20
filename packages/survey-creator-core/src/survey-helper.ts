@@ -9,6 +9,7 @@ import {
   SurveyModel,
   PageModel,
   PanelModel,
+  PanelModelBase,
   settings
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
@@ -232,6 +233,16 @@ export class SurveyHelper {
   }
   public static canSelectObj(obj: Base) {
     return !obj || obj["disableSelecting"] !== true;
+  }
+  public static isChoiceItemPanel(panel: PanelModelBase): boolean {
+    return this.getChoiceIItemPanel(panel) !== null;
+  }
+  public static getChoiceIItemPanel(element: any): PanelModelBase {
+    while(!!element) {
+      if (element.isPanel && !!element.choiceItem) return <PanelModelBase>element;
+      element = element.parent;
+    }
+    return null;
   }
   public static warnNonSupported(name: string, newPropertyName?: string) {
     let outputText = wrapTextByCurlyBraces(name) + " is not supported in V2.";

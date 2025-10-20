@@ -124,7 +124,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         )} className={this.model.cssCollapsedHiddenHeader} >
         {(
           element.hasTitle ?
-            <TitleElement element={element}></TitleElement> :
+            <TitleElement element={element} renderActions={false}></TitleElement> :
             <div
               className={this.model.cssCollapsedHiddenTitle} >
               <span className="svc-fake-title">{element.name}</span>

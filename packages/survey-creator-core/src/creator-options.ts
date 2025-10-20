@@ -487,4 +487,5 @@ export interface ICreatorOptions {
    * @see showTranslationTab
    */
   clearTranslationsOnSourceTextChange?: boolean;
+  maxChoiceContentNestingLevel?: number;
 }

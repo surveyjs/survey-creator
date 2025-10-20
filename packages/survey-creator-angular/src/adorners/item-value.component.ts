@@ -28,6 +28,30 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
   public onBlur(event: any) {
     this.adorner.onFocusOut(event);
   }
+  public getPanelComponentName(panel: PanelModel): string {
+    const survey = this.creator.survey;
+    if (!!survey) {
+      const name = survey.getElementWrapperComponentName(panel);
+      if (!!name) {
+        return name;
+      }
+    }
+    return "panel";
+  }
+  public getPanelComponentData(panel: PanelModel): any {
+    const survey = this.creator.survey;
+    let data: any;
+    if (!!survey) {
+      data = survey.getElementWrapperComponentData(panel);
+    }
+    return {
+      componentName: "panel",
+      componentData: {
+        model: panel,
+        data: data
+      }
+    };
+  }
 
   private setupContainer() {
     if (this.item && this.container?.nativeElement) {

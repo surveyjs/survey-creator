@@ -241,7 +241,7 @@ test("Implement machine translation for Creator", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("fr");
-  let actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  let actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(3);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -251,7 +251,7 @@ test("Implement machine translation for Creator", () => {
   });
   expect(creator.getHasMachineTranslation()).toBeTruthy();
   editor = tabTranslation.model.createTranslationEditor("fr");
-  actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(4);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -331,7 +331,7 @@ test("Machine translation from non default locale - UI", () => {
   tabTranslation.activate();
   const editor: TranslationEditor = tabTranslation.model.createTranslationEditor("es");
   expect(editor.fromLocales).toHaveLength(2);
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(4);
   expect(actions[1].visible).toBeTruthy();
 
@@ -495,7 +495,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   creator.onMachineTranslate.add((sender, options) => {});
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "translation-tab:table-header-popup-editor") {
-      const actions = options.survey.navigationBar.actions;
+      const actions = options.survey.navigationBarTop.actions;
       actions.splice(actions.length - 3, 3);
     }
   });
@@ -503,7 +503,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const editor = tabTranslation.model.createTranslationEditor("de");
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(1);
 });
 
@@ -529,7 +529,7 @@ test("Check navigation bar in translation dialog", () => {
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("de");
   let stringsHeaderSurvey = editor.translation.stringsHeaderSurvey;
-  let navigationBar = stringsHeaderSurvey.navigationBar;
+  let navigationBar = stringsHeaderSurvey.navigationBarTop;
   expect(navigationBar).toBeInstanceOf(SurveyElementActionContainer);
   let fromLocaleAction = navigationBar.getActionById("svc-translation-fromlocale");
   expect(fromLocaleAction.location).toBe("start");
@@ -558,7 +558,7 @@ test("Check navigation bar in translation dialog", () => {
   tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   editor = tabTranslation.model.createTranslationEditor("de");
-  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
+  expect(editor.translation.stringsHeaderSurvey.navigationBarTop.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
 });
 test("Do not swap languages in the property grid on auto-translation, Bug#6548", () => {
   const creator = new CreatorTester();
@@ -621,7 +621,7 @@ test("Machine translation, editor & export, Bug#7059", () => {
   tabTranslation.activate();
   const translation = tabTranslation.model;
   const editor = translation.createTranslationEditor("fr");
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(4);
   expect(actions[3].id).toBe("svc-translation-export");
   expect(actions[1].id).toBe("svc-translation-machine");
