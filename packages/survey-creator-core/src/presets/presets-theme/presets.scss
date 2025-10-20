@@ -26,19 +26,13 @@
   flex-direction: column;
   @include sjs2--typography--default;
 
-  :has(.sps-page) {
+  :has(.sps-page):has(.sps-question--main) {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     &.sv-components-column--expandable {
       min-width: 100%;
     }
-  }
-}
-
-.sps-popup {
-  :has(.sps-page) {
-    flex-grow: 0;
   }
 }
 
