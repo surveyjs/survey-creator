@@ -56,7 +56,7 @@ test.describe(title, () => {
       window["creator"].onSurveyInstanceSetupHandlers.add((_, options) => {
         if (options.area === "designer-tab" || options.area === "preview-tab") {
           options.survey.onGetQuestionTitleActions.add((_, options) => {
-            options.titleActions = [
+            options.actions = [
               {
                 tooltip: "Test action",
                 iconName: "icon-toolbox-customquestion-24x24",

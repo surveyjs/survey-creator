@@ -3434,9 +3434,9 @@ test("check pages editor respects onPageAdding", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { titleActions: [], question: pagesQuestion };
+  const options = { actions: [], question: pagesQuestion };
   propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.titleActions[0] as IAction;
+  const addNewPageAction = options.actions[0] as IAction;
 
   expect(creator.survey.pages.length).toBe(0);
   addNewPageAction.action!();
@@ -3461,9 +3461,9 @@ test("Localication and survey.pages property, Bug#6687", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { titleActions: [], question: pagesQuestion };
+  const options = { actions: [], question: pagesQuestion };
   propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.titleActions[0] as IAction;
+  const addNewPageAction = options.actions[0] as IAction;
 
   expect(creator.survey.pages.length).toBe(0);
   addNewPageAction.action!();

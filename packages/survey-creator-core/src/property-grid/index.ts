@@ -374,7 +374,7 @@ export class PropertyGridTitleActionsCreator {
       question.getTitleToolbar().containerCss += " spg-title-toolbar--single-help-action";
     }
     if (actions.length > 0) {
-      options.titleActions = actions;
+      options.actions = actions;
     }
   }
   public onValueChanged(obj: any, property: JsonObjectProperty, question: Question): void {
@@ -921,10 +921,10 @@ export class PropertyGridModel {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
       this.onGetQuestionTitleActions(options, this.options);
       const q = options.question;
-      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.titleActions);
+      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
     });
     this.survey.onGetPanelTitleActions.add((sender, options) => {
-      options.titleActions.splice(0, options.titleActions.length);
+      options.actions.splice(0, options.actions.length);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
@@ -938,7 +938,7 @@ export class PropertyGridModel {
     this.survey.onMatrixCellValueChanged.add((sender, options) => {
       this.onMatrixCellValueChanged(options);
     });
-    this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
+    this.survey.onMatrixRenderRemoveButton.add((sender, options) => {
       options.allow = this.getMatrixAllowRemoveRow(options.question, <MatrixDynamicRowModel>options.row);
     });
     this.survey.onMatrixRowRemoving.add((sender, options) => {

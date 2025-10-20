@@ -760,7 +760,7 @@ export class Translation extends Base implements ITranslationLocales {
       }
     });
     res.onGetQuestionTitleActions.add((sender, options) => {
-      options.titleActions = [this.addLanguageAction];
+      options.actions = [this.addLanguageAction];
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);

@@ -332,7 +332,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onGetQuestionTitleActions(options: any) {
     if (options.question.name === "setValue") {
-      options.titleActions = [];
+      options.actions = [];
     }
   }
 

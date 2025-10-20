@@ -136,7 +136,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
     if (!this.getHasAddButton()) return;
     const question: QuestionMatrixDynamicModel = options.question;
-    options.titleActions.push({
+    options.actions.push({
       id: "add-item",
       iconName: "icon-add",
       iconSize: "auto",
@@ -598,7 +598,7 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
   }
 
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
-    const clearAction = options.titleActions.filter((a) => a.id == "property-grid-clear")[0];
+    const clearAction = options.actions.filter((a) => a.id == "property-grid-clear")[0];
     if (clearAction) clearAction.visible = false;
     super.onGetQuestionTitleActions(obj, options, creator);
   }
