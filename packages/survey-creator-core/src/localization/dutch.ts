@@ -664,8 +664,6 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "De voortgangsbalk weergeven",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -1154,8 +1152,6 @@ export var nlStrings = {
     maxRateDescription: "Maximale tariefomschrijving",
     // "Input type"
     inputType: "Invoertype",
-    // "Option placeholder"
-    optionsCaption: "Bijschrift opties",
     // "Default Answer"
     defaultValue: "Standaardwaarde",
     // "Default texts"

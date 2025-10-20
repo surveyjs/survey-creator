@@ -664,8 +664,6 @@ export var msStrings = {
       templateErrorLocation: "Penjajaran mesej ralat",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi kemasukan baharu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Tunjukkan bar kemajuan",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Elakkan respons pendua dalam soalan berikut"
     },
@@ -1154,8 +1152,6 @@ export var msStrings = {
     maxRateDescription: "Perihalan kadar maksimum",
     // "Input type"
     inputType: "Jenis input",
-    // "Option placeholder"
-    optionsCaption: "Kapsyen pilihan",
     // "Default Answer"
     defaultValue: "Nilai lalai",
     // "Default texts"

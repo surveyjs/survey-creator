@@ -664,8 +664,6 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Отображение индикатора выполнения",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -1154,8 +1152,6 @@ export var ruStrings = {
     maxRateDescription: "Описание для максимального рейтинга",
     // "Input type"
     inputType: "Тип ввода",
-    // "Option placeholder"
-    optionsCaption: "Параметры подписи",
     // [Auto-translated] "Default Answer"
     defaultValue: "Ответ по умолчанию",
     // "Default texts"

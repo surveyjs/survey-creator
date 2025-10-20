@@ -664,8 +664,6 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nová vstupní lokace",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazení ukazatele průběhu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -1154,8 +1152,6 @@ export var czStrings = {
     maxRateDescription: "Popis maximální sazby",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Popisek možností",
     // "Default Answer"
     defaultValue: "Výchozí hodnota",
     // "Default texts"

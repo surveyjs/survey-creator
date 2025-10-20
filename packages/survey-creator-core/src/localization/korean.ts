@@ -664,8 +664,6 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "진행률 표시줄 표시",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -1155,8 +1153,6 @@ export var koreanStrings = {
     maxRateDescription: "최대 설명 길이",
     // "Input type"
     inputType: "입력 유형",
-    // "Option placeholder"
-    optionsCaption: "옵션 캡션",
     // "Default Answer"
     defaultValue: "기본값",
     // "Default texts"

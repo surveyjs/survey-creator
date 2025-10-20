@@ -664,8 +664,6 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ново място за влизане",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Показване на лентата за напредъка",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -1154,8 +1152,6 @@ export var bgStrings = {
     maxRateDescription: "Описание на максималната оценка",
     // "Input type"
     inputType: "Тип на въвеждане",
-    // "Option placeholder"
-    optionsCaption: "Контейнер за опция",
     // "Default Answer"
     defaultValue: "Отговор по подразбиране",
     // "Default texts"

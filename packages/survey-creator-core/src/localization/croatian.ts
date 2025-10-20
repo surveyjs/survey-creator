@@ -664,8 +664,6 @@ export var hrStrings = {
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nova lokacija ulaska",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Prikaz trake napretka",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
@@ -1154,8 +1152,6 @@ export var hrStrings = {
     maxRateDescription: "Opis maksimalne stope",
     // "Input type"
     inputType: "Vrsta unosa",
-    // "Option placeholder"
-    optionsCaption: "Opis opcija",
     // "Default Answer"
     defaultValue: "Zadana vrijednost",
     // "Default texts"

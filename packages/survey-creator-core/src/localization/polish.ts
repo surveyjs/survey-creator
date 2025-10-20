@@ -664,8 +664,6 @@ export var polishStrings = {
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nowa lokalizacja wejścia",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Wyświetlanie paska postępu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
@@ -1155,8 +1153,6 @@ export var polishStrings = {
     maxRateDescription: "Opis najwyższej oceny",
     // "Input type"
     inputType: "Input type",
-    // "Option placeholder"
-    optionsCaption: "Options caption",
     // "Default Answer"
     defaultValue: "Default value",
     // [Auto-translated] "Default texts"

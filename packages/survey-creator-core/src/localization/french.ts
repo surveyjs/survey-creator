@@ -664,8 +664,6 @@ export var frenchTranslation = {
       templateErrorLocation: "Alignement des messages d’erreur",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nouveau lieu d’entrée",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Afficher la barre de progression",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Éviter les réponses en double à la question suivante"
     },
@@ -1154,8 +1152,6 @@ export var frenchTranslation = {
     maxRateDescription: "Description note maximum",
     // "Input type"
     inputType: "Type de champ",
-    // "Option placeholder"
-    optionsCaption: "Texte par défaut",
     // "Default Answer"
     defaultValue: "Valeur par défaut",
     // "Default texts"

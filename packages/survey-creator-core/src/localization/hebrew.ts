@@ -664,8 +664,6 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       // [Auto-translated] "New entry location"
       newPanelPosition: "מיקום כניסה חדש",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "הצגת מד ההתקדמות",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -1154,8 +1152,6 @@ export var hebrewStrings = {
     maxRateDescription: "תיאור ערך מקסימלי לדרגה",
     // "Input type"
     inputType: "סוג הקלט",
-    // "Option placeholder"
-    optionsCaption: "טקסט מציין אפשרויות",
     // "Default Answer"
     defaultValue: "תשובת ברירת המחדל",
     // "Default texts"

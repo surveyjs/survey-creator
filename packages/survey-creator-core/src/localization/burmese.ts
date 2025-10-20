@@ -639,8 +639,6 @@ export var mmStrings = {
       templateErrorLocation: "အမှားစာစောင်တည်နေရာ",
       // "New entry location"
       newPanelPosition: "ပန်းနယ်အသစ်တည်နေရာ",
-      // "Show the progress bar"
-      showRangeInProgress: "တိုးတက်မှုဘားကိုပြပါ",
       // "Prevent duplicate responses in the following question"
       keyName: "ထပ်တူဖြေဆိုမှုကိုတားဆီးပါ"
     },
@@ -1099,8 +1097,6 @@ export var mmStrings = {
     maxRateDescription: "အများဆုံးတန်ဖိုးတန်းလုံး",
     // "Input type"
     inputType: "အဝင်အမျိုးအစား",
-    // "Option placeholder"
-    optionsCaption: "ရွေးချယ်မှု placeholder",
     // "Default Answer"
     defaultValue: "ပုံမှန်ဖြေဆိုမှု",
     // "Default texts"

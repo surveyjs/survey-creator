@@ -664,8 +664,6 @@ export var arStrings = {
       templateErrorLocation: "محاذاة رسالة الخطأ",
       // [Auto-translated] "New entry location"
       newPanelPosition: "موقع دخول جديد",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "إظهار شريط التقدم",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -1154,8 +1152,6 @@ export var arStrings = {
     maxRateDescription: "وصف أكبر معدل",
     // "Input type"
     inputType: "نوع المدخل",
-    // "Option placeholder"
-    optionsCaption: "خيارات الشرح",
     // "Default Answer"
     defaultValue: "القيمة الإفتراضية",
     // "Default texts"

@@ -664,8 +664,6 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Yeni giriş konumu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "İlerleme çubuğunu gösterme",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -1154,8 +1152,6 @@ export var turkishStrings = {
     maxRateDescription: "Maksimum oran açıklaması",
     // "Input type"
     inputType: "Girdi tipi",
-    // "Option placeholder"
-    optionsCaption: "Seçenekler başlığı",
     // "Default Answer"
     defaultValue: "Varsayılan değer",
     // "Default texts"

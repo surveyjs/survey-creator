@@ -664,8 +664,6 @@ export var fiStrings = {
       templateErrorLocation: "Virhesanoman tasaus",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Uusi sisääntulopaikka",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Näytä edistymispalkki",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Estä päällekkäiset vastaukset seuraavassa kysymyksessä"
     },
@@ -1154,8 +1152,6 @@ export var fiStrings = {
     maxRateDescription: "Enimmäismäärän kuvaus",
     // "Input type"
     inputType: "Syötä tyyppi",
-    // "Option placeholder"
-    optionsCaption: "Vaihtoehdot kuvateksti",
     // "Default Answer"
     defaultValue: "Oletusarvo",
     // "Default texts"

@@ -664,8 +664,6 @@ export var danishStrings = {
       templateErrorLocation: "Justering af fejlmeddelelse",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny indgangsplacering",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Vis statuslinjen",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
@@ -1155,8 +1153,6 @@ export var danishStrings = {
     maxRateDescription: "Beskriv højeste vurdering",
     // "Input type"
     inputType: "Inputtype",
-    // "Option placeholder"
-    optionsCaption: "Muligheder tekst",
     // "Default Answer"
     defaultValue: "Standardværdi",
     // "Default texts"

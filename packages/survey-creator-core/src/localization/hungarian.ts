@@ -664,8 +664,6 @@ export var huStrings = {
       templateErrorLocation: "Hibaüzenetek igazítása",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Új belépési hely",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "A folyamatjelző sáv megjelenítése",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -1154,8 +1152,6 @@ export var huStrings = {
     maxRateDescription: "Legnagyobb szorzó leírása",
     // "Input type"
     inputType: "Mező típusa",
-    // "Option placeholder"
-    optionsCaption: "Beállítások felirata",
     // "Default Answer"
     defaultValue: "Alapértelmezett érték",
     // "Default texts"

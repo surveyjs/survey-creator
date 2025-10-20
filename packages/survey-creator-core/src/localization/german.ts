@@ -664,8 +664,6 @@ export var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Neuer Einstiegsort",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
@@ -1154,8 +1152,6 @@ export var germanTranslation = {
     maxRateDescription: "Beschreibung für maximale Bewertung",
     // "Input type"
     inputType: "Eingabetyp",
-    // "Option placeholder"
-    optionsCaption: "Auswahlbeschriftung",
     // "Default Answer"
     defaultValue: "Standardantwort",
     // "Default texts"

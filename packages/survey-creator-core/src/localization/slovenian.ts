@@ -664,8 +664,6 @@ export var slStrings = {
       templateErrorLocation: "Poravnava sporočila o napaki",
       // "New entry location"
       newPanelPosition: "Nova lokacija plošče",
-      // "Show the progress bar"
-      showRangeInProgress: "Prikaži vrstico napredka",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -1154,8 +1152,6 @@ export var slStrings = {
     maxRateDescription: "Oznaka za maksimalno vrednost",
     // "Input type"
     inputType: "Vrsta vnosa",
-    // "Option placeholder"
-    optionsCaption: "Zaslon možnosti",
     // "Default Answer"
     defaultValue: "Privzeti odgovor",
     // "Default texts"

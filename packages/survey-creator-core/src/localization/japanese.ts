@@ -664,8 +664,6 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "進行状況バーを表示する",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -1154,8 +1152,6 @@ export var jaStrings = {
     maxRateDescription: "最大レートの説明",
     // "Input type"
     inputType: "入力タイプ",
-    // "Option placeholder"
-    optionsCaption: "オプションのキャプション",
     // "Default Answer"
     defaultValue: "デフォルト値",
     // "Default texts"

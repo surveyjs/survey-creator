@@ -664,8 +664,6 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi entri baru",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Tampilkan bilah kemajuan",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
@@ -1154,8 +1152,6 @@ export var indonesianStrings = {
     maxRateDescription: "Deskripsi nilai maksimum",
     // "Input type"
     inputType: "Jenis masukan",
-    // "Option placeholder"
-    optionsCaption: "Keterangan pilihan",
     // "Default Answer"
     defaultValue: "Nilai standar",
     // "Default texts"

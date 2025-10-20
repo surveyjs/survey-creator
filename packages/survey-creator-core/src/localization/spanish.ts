@@ -664,8 +664,6 @@ export var spanishTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nueva ubicación de entrada",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Mostrar la barra de progreso",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
@@ -1154,8 +1152,6 @@ export var spanishTranslation = {
     maxRateDescription: "Descripción del valor máximo",
     // "Input type"
     inputType: "Tipo de entrada",
-    // "Option placeholder"
-    optionsCaption: "Cambie texto de 'Seleccione'",
     // "Default Answer"
     defaultValue: "Valor por defecto",
     // "Default texts"

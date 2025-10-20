@@ -664,8 +664,6 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
-      // "Show the progress bar"
-      showRangeInProgress: "Εμφάνιση μπάρας προόδου",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -1154,8 +1152,6 @@ export var grStrings = {
     maxRateDescription: "Ετικέτα μέγιστης τιμής",
     // "Input type"
     inputType: "Τύπος εισόδου",
-    // "Option placeholder"
-    optionsCaption: "Υπόδειξη επιλογής",
     // "Default Answer"
     defaultValue: "Προεπιλεγμένη Απάντηση",
     // "Default texts"

@@ -664,8 +664,6 @@ export let svStrings = {
       templateErrorLocation: "Justering av felmeddelande",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny plats för inresa",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Visa förloppsindikatorn",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Förhindra dubbla svar i följande fråga"
     },
@@ -1155,8 +1153,6 @@ export let svStrings = {
     maxRateDescription: "Maximala betyg beskrivning",
     // "Input type"
     inputType: "Indata typ",
-    // "Option placeholder"
-    optionsCaption: "Text för alternativ",
     // "Default Answer"
     defaultValue: "Standard värde",
     // "Default texts"

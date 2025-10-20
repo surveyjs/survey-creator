@@ -664,8 +664,6 @@ export var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       // [Auto-translated] "New entry location"
       newPanelPosition: "محل ورود جدید",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "نمایش نوار پیشرفت",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
@@ -1154,8 +1152,6 @@ export var persianStrings = {
     maxRateDescription: "توضیح حداکثر امتیاز",
     // "Input type"
     inputType: "نوع ورودی",
-    // "Option placeholder"
-    optionsCaption: "نوشته انتخاب ها",
     // "Default Answer"
     defaultValue: "مقدار پیش فرض",
     // "Default texts"

@@ -664,8 +664,6 @@ export var mnStrings = {
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Шинэ оролцооны байршил",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -1154,8 +1152,6 @@ export var mnStrings = {
     maxRateDescription: "Хамгийн их утгын тайлбар",
     // "Input type"
     inputType: "Оролтын төрөл",
-    // "Option placeholder"
-    optionsCaption: "Сонголтын талбар",
     // "Default Answer"
     defaultValue: "Үндсэн хариулт",
     // "Default texts"

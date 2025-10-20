@@ -664,8 +664,6 @@ export var simplifiedChineseTranslation = {
       templateErrorLocation: "错误消息对齐",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入场地点",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "显示进度条",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下问题中的重复回答"
     },
@@ -1154,8 +1152,6 @@ export var simplifiedChineseTranslation = {
     maxRateDescription: "最大值提示",
     // "Input type"
     inputType: "文本框类型",
-    // "Option placeholder"
-    optionsCaption: "下拉框提示语",
     // "Default Answer"
     defaultValue: "默认值",
     // "Default texts"

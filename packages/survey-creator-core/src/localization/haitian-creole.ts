@@ -664,8 +664,6 @@ export var htStrings = {
       templateErrorLocation: "Erè mesaj aliyman",
       // "New entry location"
       newPanelPosition: "Nouvo kote panèl",
-      // "Show the progress bar"
-      showRangeInProgress: "Montre ba pwogrè a",
       // "Prevent duplicate responses in the following question"
       keyName: "Anpeche repons doub nan kesyon sa a"
     },
@@ -1154,8 +1152,6 @@ export var htStrings = {
     maxRateDescription: "Maksimòm valè etikèt",
     // "Input type"
     inputType: "Kalite Antre",
-    // "Option placeholder"
-    optionsCaption: "Anplasman opsyon",
     // "Default Answer"
     defaultValue: "Repons Default",
     // "Default texts"

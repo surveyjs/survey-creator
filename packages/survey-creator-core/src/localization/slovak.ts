@@ -664,8 +664,6 @@ export var skStrings = {
       templateErrorLocation: "Zarovnanie chybových hlásení",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nové miesto vstupu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazenie indikátora priebehu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -1154,8 +1152,6 @@ export var skStrings = {
     maxRateDescription: "opis maximálneho hodnotenia",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Titulok možností",
     // "Default Answer"
     defaultValue: "Predvolená hodnota",
     // "Default texts"

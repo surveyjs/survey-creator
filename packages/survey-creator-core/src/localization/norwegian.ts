@@ -664,8 +664,6 @@ export var nbStrings = {
       templateErrorLocation: "Justering av feilmelding",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny inngangsplassering",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Vis fremdriftslinjen",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
@@ -1154,8 +1152,6 @@ export var nbStrings = {
     maxRateDescription: "Beskrivelse maksimumsvurdering",
     // "Input type"
     inputType: "Inndata-type",
-    // "Option placeholder"
-    optionsCaption: "Tekst for alternativer",
     // "Default Answer"
     defaultValue: "Standardverdi",
     // "Default texts"

@@ -664,8 +664,6 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       // "New entry location"
       newPanelPosition: "Locația noului panou",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Afișați bara de progres",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -1154,8 +1152,6 @@ export const roStrings = {
     maxRateDescription: "Etichetă valoare maximă",
     // "Input type"
     inputType: "Tip intrare",
-    // "Option placeholder"
-    optionsCaption: "Locaș opțiune",
     // "Default Answer"
     defaultValue: "Răspuns implicit",
     // "Default texts"

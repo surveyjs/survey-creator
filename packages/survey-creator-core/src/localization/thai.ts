@@ -664,8 +664,6 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       // "New entry location"
       newPanelPosition: "ตำแหน่งแผงใหม่",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "แสดงแถบความคืบหน้า",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -1154,8 +1152,6 @@ export const thStrings = {
     maxRateDescription: "ป้ายกำกับค่าสูงสุด",
     // "Input type"
     inputType: "ประเภทอินพุต",
-    // "Option placeholder"
-    optionsCaption: "ข้อความตัวอย่างตัวเลือก",
     // "Default Answer"
     defaultValue: "คำตอบเริ่มต้น",
     // "Default texts"
