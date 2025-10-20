@@ -1143,9 +1143,8 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateReadOnly(): void {
     if (this.stringsSurvey) {
-      const mode = this.readOnly ? "display" : "edit";
-      this.stringsSurvey.mode = mode;
-      this.settingsSurvey.mode = mode;
+      this.stringsSurvey.readOnly = this.readOnly;
+      this.settingsSurvey.readOnly = this.readOnly;
     }
   }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {

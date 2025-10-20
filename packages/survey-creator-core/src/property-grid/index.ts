@@ -897,7 +897,7 @@ export class PropertyGridModel {
   private createSurveyValue(): void {
     const json = this.getSurveyJSON();
     if (this.options.readOnly) {
-      json.mode = "display";
+      json.readOnly = true;
     }
     this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
       this.onCreateSurvey(survey);
@@ -1431,7 +1431,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     );
     if (!surveyPropertyEditor || !settings.showDialog) return;
     if (question.isReadOnly) {
-      surveyPropertyEditor.editSurvey.mode = "display";
+      surveyPropertyEditor.editSurvey.readOnly = true;
     }
     const prevCurrentLocale = surveyLocalization.currentLocale;
     const locale = editorLocalization.currentLocale;
