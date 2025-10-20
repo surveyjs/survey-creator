@@ -1230,8 +1230,8 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   creator.onDragDropAllow.add((sender, options) => {
     counter++;
     surveyQuestionCount = options.survey.getAllQuestions().length;
-    targetName = options.draggedElement.name;
-    sourceName = options.toElement.name;
+    targetName = options.toElement.name;
+    sourceName = options.draggedElement.name;
     parentName = options.parent.name;
     options.allow = !!options.insertAfter;
   });
