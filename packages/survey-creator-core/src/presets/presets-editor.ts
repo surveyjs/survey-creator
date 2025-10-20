@@ -6,6 +6,7 @@ import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-too
 import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
+import { CreatorPresetEditableOptions } from "./presets-editable-options";
 import { presetsCss } from "./presets-theme/presets";
 export { enStrings } from "./localization/english";
 
@@ -367,6 +368,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
     if (fullPath === "propertyGrid") return new CreatorPresetEditablePropertyGrid(preset);
+    //if (fullPath === "options") return new CreatorPresetEditableOptions(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {

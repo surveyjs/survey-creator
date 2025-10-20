@@ -1,6 +1,7 @@
 import { CreatorPresetBase, ICreatorPreset } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
 import { CreatorPresetLanguages } from "./presets-languages";
+import { CreatorPresetOptions } from "./presets-options";
 import { CreatorPresetTabs, ICreatorPresetTab } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";
 import { IToolboxCategoryDefinition } from "../toolbox";
@@ -55,6 +56,6 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetLanguages(), new CreatorPresetTabs(), new CreatorPresetToolbox(),
-      new CreatorPresetPropertyGrid()];
+      new CreatorPresetPropertyGrid(), new CreatorPresetOptions()];
   }
 }

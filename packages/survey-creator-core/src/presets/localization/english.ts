@@ -69,6 +69,11 @@ export const enStrings = {
     descriptionField: "Helper Text",
     addCustomCategory: "Add Custom Category"
   },
+  options: {
+    title: "Survey Creator Options",
+    navigationTitle: "Options",
+    description: "Set options",
+  },
   items: {
     addNewItem: "Add a new item",
     addNewSubitem: "Add a new subitem",

@@ -427,3 +427,14 @@ test("apply supported locales", () => {
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
   expect(surveyLocalization.showNamesInEnglish).toBeFalsy();
 });
+test("set creator options", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    options: {
+      allowZoom: false,
+    }
+  });
+  expect(creator.allowZoom).toBeTruthy();
+  preset.apply(creator);
+  expect(creator.allowZoom).toBeFalsy();
+});
