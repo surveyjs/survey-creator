@@ -2266,10 +2266,6 @@ export var nbStrings = {
     underRowSingle: "Under raden viser du bare én inndeling",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skjult"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Begge"

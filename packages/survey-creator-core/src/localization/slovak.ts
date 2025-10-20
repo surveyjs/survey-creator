@@ -2266,10 +2266,6 @@ export var skStrings = {
     underRowSingle: "Pod riadkom zobrazte iba jednu sekciu",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obidva"

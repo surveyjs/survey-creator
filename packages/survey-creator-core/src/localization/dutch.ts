@@ -2266,10 +2266,6 @@ export var nlStrings = {
     underRowSingle: "Geef onder de rij slechts één sectie weer",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Verborgen"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Beide"

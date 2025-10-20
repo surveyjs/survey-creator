@@ -2266,10 +2266,6 @@ export var turkishStrings = {
     underRowSingle: "Satırın altında yalnızca bir bölüm görüntüleyin",
     // "Auto"
     auto: "Otomatik",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Gizli"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Her ikisi"

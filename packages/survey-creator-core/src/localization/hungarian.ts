@@ -2266,10 +2266,6 @@ export var huStrings = {
     underRowSingle: "A sor alatt csak egy szakasz megjelenítése",
     // "Auto"
     auto: "Kocsi",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Rejtett"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Mindkettő"

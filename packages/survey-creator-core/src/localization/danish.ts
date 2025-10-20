@@ -2267,10 +2267,6 @@ export var danishStrings = {
     underRowSingle: "Under rækken skal du kun få vist én sektion",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skjult"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Begge"

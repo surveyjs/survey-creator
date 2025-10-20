@@ -2266,10 +2266,6 @@ export var htStrings = {
     underRowSingle: "Anba ranje a, montre yon sèl ekspansyon ranje sèlman",
     // "Auto"
     auto: "Oto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Kache"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Tou de"

@@ -2266,10 +2266,6 @@ export var hrStrings = {
     underRowSingle: "Ispod retka prikažite samo jedan odjeljak",
     // "Auto"
     auto: "Automobil",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skriven"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Oba"

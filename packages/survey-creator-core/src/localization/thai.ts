@@ -2266,10 +2266,6 @@ export const thStrings = {
     underRowSingle: "ใต้แถว แสดงการขยายแถวเดียว",
     // "Auto"
     auto: "อัตโนมัติ",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "ซ่อน"
-    },
     timerInfoMode: {
       // "Both"
       combined: "ทั้งสอง"

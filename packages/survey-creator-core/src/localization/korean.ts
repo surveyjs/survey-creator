@@ -2267,10 +2267,6 @@ export var koreanStrings = {
     underRowSingle: "행 아래에 하나의 섹션만 표시합니다.",
     // "Auto"
     auto: "자동",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "숨겨진"
-    },
     timerInfoMode: {
       // "Both"
       combined: "둘다"

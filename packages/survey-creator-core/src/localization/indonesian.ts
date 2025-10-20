@@ -2266,10 +2266,6 @@ export var indonesianStrings = {
     underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Sembunyi"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Keduanya"

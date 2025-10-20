@@ -2266,10 +2266,6 @@ export var frenchTranslation = {
     underRowSingle: "Sous la rangée, n’affichez qu’une seule section",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Masqué"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Les deux"

@@ -1170,9 +1170,6 @@ export var tgStrings = {
     // underRow: "Under the row",
     // underRowSingle: "Under the row, display one section only",
     // auto: "Auto",
-    showNavigationButtons: {
-      // none: "Hidden"
-    },
     timerInfoMode: {
       // combined: "Both"
     },

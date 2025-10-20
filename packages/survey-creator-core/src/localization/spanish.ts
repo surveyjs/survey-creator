@@ -2266,10 +2266,6 @@ export var spanishTranslation = {
     underRowSingle: "Debajo de la fila, sólo un panel es visible",
     // "Auto"
     auto: "Automático",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Oculto"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambos"

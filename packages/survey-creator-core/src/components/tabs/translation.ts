@@ -1606,7 +1606,8 @@ export class TranslationEditor {
     exportAction.css = actionCss;
     survey.addNavigationItem(importAction);
     survey.addNavigationItem(exportAction);
-    survey.showNavigationButtons = "top";
+    survey.showNavigationButtons = true;
+    survey.navigationButtonsLocation = "top";
   }
   private createStringsToTranslate(): Array<TranslationItem> {
     const res = new Array<TranslationItem>();

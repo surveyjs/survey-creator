@@ -2266,10 +2266,6 @@ export var italianTranslation = {
     underRowSingle: "Sotto la riga, solo un pannello è visibile",
     // "Auto"
     auto: "Automatico",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Nascosto"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Entrambe"

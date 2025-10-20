@@ -2267,10 +2267,6 @@ export let svStrings = {
     underRowSingle: "Under raden visas endast ett avsnitt",
     // "Auto"
     auto: "Automatisk",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Dold"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Båda"

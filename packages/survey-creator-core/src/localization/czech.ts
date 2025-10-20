@@ -2266,10 +2266,6 @@ export var czStrings = {
     underRowSingle: "Pod řádkem, pouze jeden panel je viditelný",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obě"

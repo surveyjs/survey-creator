@@ -2266,10 +2266,6 @@ export var jaStrings = {
     underRowSingle: "行の下には、1 つのセクションのみを表示します",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隠れた"
-    },
     timerInfoMode: {
       // "Both"
       combined: "両方とも"

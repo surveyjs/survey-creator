@@ -2266,10 +2266,6 @@ export var msStrings = {
     underRowSingle: "Di bawah baris, paparkan satu bahagian sahaja",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Tersembunyi"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Kedua-duanya"

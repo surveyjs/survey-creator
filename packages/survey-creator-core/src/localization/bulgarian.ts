@@ -2266,10 +2266,6 @@ export var bgStrings = {
     underRowSingle: "Под реда се вижда само един панел.",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Скрит"
-    },
     timerInfoMode: {
       // "Both"
       combined: "И двете"

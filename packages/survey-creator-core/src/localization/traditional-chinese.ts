@@ -2267,10 +2267,6 @@ export var traditionalChineseTranslation = {
     underRowSingle: "在行下，僅顯示一個部分",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隱藏"
-    },
     timerInfoMode: {
       // "Both"
       combined: "雙"

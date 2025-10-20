@@ -2266,10 +2266,6 @@ export var mnStrings = {
     underRowSingle: "Мөрийн доор, зөвхөн ганц панел харагдана",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Нуусан"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Аль аль нь"

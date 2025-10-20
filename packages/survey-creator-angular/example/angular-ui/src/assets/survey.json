@@ -1,5 +1,6 @@
 {
-  "showProgressBar": "top",
+  "showProgressBar": true,
+  "progressBarLocation": "top",
   "title": "Survey New Design Test",
   "description": "This is the survey shown via survey-angular-ui module.",
   "logo": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
@@ -19,7 +20,8 @@
             {
               "name": "mostamount",
               "title": "Most amount you would every pay for a product like ours"
-            }, {
+            },
+            {
               "name": "leastamount",
               "title": "The least amount you would feel comfortable paying"
             }
@@ -58,7 +60,8 @@
             {
               "value": 4,
               "text": "Agree"
-            }, {
+            },
+            {
               "value": 5,
               "text": "Strongly Agree"
             }
@@ -67,13 +70,16 @@
             {
               "value": "affordable",
               "text": "Product is affordable"
-            }, {
+            },
+            {
               "value": "does what it claims",
               "text": "Product does what it claims"
-            }, {
+            },
+            {
               "value": "better then others",
               "text": "Product is better than other products on the market"
-            }, {
+            },
+            {
               "value": "easy to use",
               "text": "Product is easy to use"
             }

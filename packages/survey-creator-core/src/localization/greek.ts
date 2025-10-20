@@ -2266,10 +2266,6 @@ export var grStrings = {
     underRowSingle: "Κάτω από τη σειρά, εμφάνιση μόνο μίας επέκτασης σειράς",
     // "Auto"
     auto: "Αυτόματο",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Κρυφό"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Και τα δύο"

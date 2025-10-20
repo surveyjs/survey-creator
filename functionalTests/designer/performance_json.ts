@@ -30452,5 +30452,6 @@ export const large_json = {
       "title": "Page 5"
     }
   ],
-  "showProgressBar": "both"
+  "showProgressBar": true,
+  "progressBarLocation": "topBottom"
 };

@@ -2266,10 +2266,6 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Скрытый"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Оба"

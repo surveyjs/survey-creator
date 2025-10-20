@@ -2266,10 +2266,6 @@ export var arStrings = {
     underRowSingle: "أسفل الصف، اعرض قسما واحدا فقط",
     // "Auto"
     auto: "تلقائي",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "مخفي"
-    },
     timerInfoMode: {
       // "Both"
       combined: "كلا"

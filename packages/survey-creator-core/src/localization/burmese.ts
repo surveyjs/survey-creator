@@ -2126,10 +2126,6 @@ export var mmStrings = {
     underRowSingle: "အတန်းအောက်တွင်၊ တစ်တန်းတည်းချဲ့ထားမှုကိုသာပြပါ",
     // "Auto"
     auto: "အလိုအလျောက်",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "ဖျောက်ထားသည်"
-    },
     timerInfoMode: {
       // "Both"
       combined: "နှစ်ခုလုံး"

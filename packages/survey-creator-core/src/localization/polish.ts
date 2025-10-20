@@ -2267,10 +2267,6 @@ export var polishStrings = {
     underRowSingle: "Pod wierszem wyświetl tylko jedną sekcję",
     // "Auto"
     auto: "Automatycznie",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Ukryty"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obie"

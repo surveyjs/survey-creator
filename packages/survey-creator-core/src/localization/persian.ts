@@ -2266,10 +2266,6 @@ export var persianStrings = {
     underRowSingle: "در زیر ردیف، فقط یک بخش نمایش داده می شود",
     // "Auto"
     auto: "خودکار",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "پنهان"
-    },
     timerInfoMode: {
       // "Both"
       combined: "هر دو"

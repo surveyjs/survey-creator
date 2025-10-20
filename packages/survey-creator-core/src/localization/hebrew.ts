@@ -2266,10 +2266,6 @@ export var hebrewStrings = {
     underRowSingle: "מתחת לשורה, עם פאנל יחיד בלבד",
     // "Auto"
     auto: "אוטומטי",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "מוסתר"
-    },
     timerInfoMode: {
       // "Both"
       combined: "שני הצדדים"

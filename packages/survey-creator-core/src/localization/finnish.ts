@@ -2266,10 +2266,6 @@ export var fiStrings = {
     underRowSingle: "Näytä rivin alla vain yksi osio",
     // "Auto"
     auto: "Automaattinen",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Piilotettu"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Molemmat"

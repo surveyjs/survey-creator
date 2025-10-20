@@ -2266,10 +2266,6 @@ export var germanTranslation = {
     underRowSingle: "Unter der Zeile wird nur ein Abschnitt angezeigt",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Versteckt"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Beide"

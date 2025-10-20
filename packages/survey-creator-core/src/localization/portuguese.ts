@@ -2266,10 +2266,6 @@ export var portugueseTranslation = {
     underRowSingle: "Sob a linha, apenas um painel é visível",
     // "Auto"
     auto: "Automático",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Escondido"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambos"

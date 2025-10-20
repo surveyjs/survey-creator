@@ -2266,10 +2266,6 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Ascuns"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambele"

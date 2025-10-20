@@ -2266,10 +2266,6 @@ export var slStrings = {
     underRowSingle: "Pod řádkem, zobrazit pouze jednu expanze řádku",
     // "Auto"
     auto: "Automaticky",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Skryté"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obojí"
