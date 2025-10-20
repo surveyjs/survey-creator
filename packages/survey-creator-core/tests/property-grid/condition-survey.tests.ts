@@ -1927,3 +1927,27 @@ test("Show two radiogroups with the same valueName", () => {
   expect(questionValue.getType()).toBe("radiogroup");
   expect(questionValue.choices).toHaveLength(8);
 });
+test("addCondition quotes in items values - Bug#10512", () => {
+  const survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "radiogroup", name: "q2", choices: ["item1\"s", "item2\"s\"after", "before\"item3", "Before \"With Quotes\""] }
+    ]
+  });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
+  expect(editor.panel.panels).toHaveLength(1);
+  const panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("equal");
+  panel.getQuestionByName("questionName").value = "q2";
+  const questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toBe("radiogroup");
+  expect((<QuestionRadiogroupModel>questionValue).choices).toHaveLength(4);
+  questionValue.value = questionValue.choices[0].value;
+  expect(editor.text).toEqual("{q2} = 'item1\\\"s'");
+  questionValue.value = questionValue.choices[1].value;
+  expect(editor.text).toEqual("{q2} = 'item2\\\"s\\\"after'");
+  questionValue.value = questionValue.choices[2].value;
+  expect(editor.text).toEqual("{q2} = 'before\\\"item3'");
+  questionValue.value = questionValue.choices[3].value;
+  expect(editor.text).toEqual("{q2} = 'Before \\\"With Quotes\\\"'");
+});
