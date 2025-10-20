@@ -29,6 +29,7 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
     "build": "webpack --env buildType=dev && webpack --env buildType=prod && rollup -c",
+    "build:presets": "webpack --config ./webpack.presets.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.presets.config.js --env buildType=prod",
     "watch:dev": "webpack --env buildType=dev --watch && rollup -c -w",
     "watch:prod": "webpack --env buildType=prod --watch",
     "lint": "eslint ./src",
