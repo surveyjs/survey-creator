@@ -182,7 +182,8 @@ export class CreatorPresetEditableBase {
   }
 
   protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string}) {
-    const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
+    const index = (matrix.visibleRows as any).findIndex(r => r === row);
+    const data = matrix.value[index];
     const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
     survey.fitToContainer = false;
     survey.showNavigationButtons = false;
@@ -203,7 +204,7 @@ export class CreatorPresetEditableBase {
               }
             });
             const newRowValue = { ...row.value, ...newData };
-            newValue[row.index] = newRowValue;
+            newValue[index] = newRowValue;
             matrix.value = newValue;
             return true;
           } else {
