@@ -456,6 +456,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 Angular"
 
       - script: |
@@ -600,6 +601,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 Vue"
 
       - script: |
@@ -793,6 +795,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 JS"
 
       #  - script: |

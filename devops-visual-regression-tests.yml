@@ -105,6 +105,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
           npm run build:themes
         displayName: "Build Creator V2 Core themes"
+      
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+          npm run build:presets
+        displayName: "Build Creator V2 Core presets"
 
       - task: CopyFiles@2
         inputs:
@@ -287,6 +292,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 React"
 
 
@@ -458,6 +464,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 Angular"
 
       - script: |
@@ -638,6 +645,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 Vue"
 
       - script: |
@@ -865,6 +873,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run build
+          npm run build:presets
         displayName: "Build CreatorV2 JS"
 
       - script: |
