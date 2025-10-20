@@ -1268,8 +1268,6 @@ export var spanishTranslation = {
     timerLocation: "Mostrar panel de temporizador",
     // "Timer mode"
     timerInfoMode: "Mostrar modo de panel del temporizador",
-    // "Panel display mode"
-    renderMode: "Modo de renderizado",
     // "Enable entry addition"
     allowAddPanel: "Permitir agregar un panel",
     // "Enable entry removal"

@@ -1268,8 +1268,6 @@ export var frenchTranslation = {
     timerLocation: "Afficher le panneau chronomètre",
     // "Timer mode"
     timerInfoMode: "Mode d'affichage du panneau chronomètre",
-    // "Panel display mode"
-    renderMode: "Mode de rendu",
     // "Enable entry addition"
     allowAddPanel: "Autoriser l'ajout de sections",
     // "Enable entry removal"

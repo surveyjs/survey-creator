@@ -694,7 +694,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   paneldynamic: {
     properties: [
-      "renderMode",
       "displayMode",
       "templateTabTitle",
       "tabTitlePlaceholder",

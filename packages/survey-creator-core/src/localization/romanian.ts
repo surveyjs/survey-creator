@@ -1268,8 +1268,6 @@ export const roStrings = {
     timerLocation: "Alinierea timerului",
     // "Timer mode"
     timerInfoMode: "Modul timerului",
-    // "Panel display mode"
-    renderMode: "Modul de afișare a panoului",
     // "Enable entry addition"
     allowAddPanel: "Permite adăugarea panoului",
     // "Enable entry removal"

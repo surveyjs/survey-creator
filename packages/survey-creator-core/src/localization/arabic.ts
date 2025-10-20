@@ -1268,8 +1268,6 @@ export var arStrings = {
     timerLocation: "إظهار لوحة المؤقت",
     // "Timer mode"
     timerInfoMode: "إظهار نمط لوحة المؤقت",
-    // "Panel display mode"
-    renderMode: "نمط العرض",
     // "Enable entry addition"
     allowAddPanel: "السماح بإضافة لوحة",
     // "Enable entry removal"

@@ -1268,8 +1268,6 @@ export var fiStrings = {
     timerLocation: "Näytä ajastus -paneeli",
     // "Timer mode"
     timerInfoMode: "Näytä ajastus -paneelin tila",
-    // "Panel display mode"
-    renderMode: "Renderöinnin tila",
     // "Enable entry addition"
     allowAddPanel: "Salli paneelin lisääminen",
     // "Enable entry removal"

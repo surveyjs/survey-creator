@@ -1269,8 +1269,6 @@ export let svStrings = {
     timerLocation: "Visa tidtagning",
     // "Timer mode"
     timerInfoMode: "Visa tidtagning läge",
-    // "Panel display mode"
-    renderMode: "Rendering läge",
     // "Enable entry addition"
     allowAddPanel: "Tillåt att lägga till panel",
     // "Enable entry removal"

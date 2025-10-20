@@ -1268,8 +1268,6 @@ export var htStrings = {
     timerLocation: "Aliyman revèy",
     // "Timer mode"
     timerInfoMode: "Mòd revèy",
-    // "Panel display mode"
-    renderMode: "Mòd ekspozisyon panèl",
     // "Enable entry addition"
     allowAddPanel: "Pèmèt adisyon panèl",
     // "Enable entry removal"

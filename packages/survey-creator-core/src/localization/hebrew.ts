@@ -1268,8 +1268,6 @@ export var hebrewStrings = {
     timerLocation: "מיקום הטיימר",
     // "Timer mode"
     timerInfoMode: "מצב הטיימר",
-    // "Panel display mode"
-    renderMode: "מצב תצוגת הפאנל",
     // "Enable entry addition"
     allowAddPanel: "אפשר הוספת פאנלים",
     // "Enable entry removal"

@@ -1268,8 +1268,6 @@ export var slStrings = {
     timerLocation: "Poravnava timerja",
     // "Timer mode"
     timerInfoMode: "Način timerja",
-    // "Panel display mode"
-    renderMode: "Način prikaza panela",
     // "Enable entry addition"
     allowAddPanel: "Omogoči dodajanje panela",
     // "Enable entry removal"

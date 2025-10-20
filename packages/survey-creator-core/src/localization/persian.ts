@@ -1268,8 +1268,6 @@ export var persianStrings = {
     timerLocation: "نمایش پنل زمان سنج",
     // "Timer mode"
     timerInfoMode: "نمایش حالت پنل زمان سنج",
-    // "Panel display mode"
-    renderMode: "حالت رندر",
     // "Enable entry addition"
     allowAddPanel: "اجازه افزودن پنل",
     // "Enable entry removal"

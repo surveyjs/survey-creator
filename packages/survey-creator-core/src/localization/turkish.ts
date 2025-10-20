@@ -1268,8 +1268,6 @@ export var turkishStrings = {
     timerLocation: "Zamanlayıcı panelini göster",
     // "Timer mode"
     timerInfoMode: "Zamanlayıcı paneli modunu göster",
-    // "Panel display mode"
-    renderMode: "İşleme modu",
     // "Enable entry addition"
     allowAddPanel: "Panel eklemeye izin ver",
     // "Enable entry removal"

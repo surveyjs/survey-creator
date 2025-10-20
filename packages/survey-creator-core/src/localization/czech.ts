@@ -1268,8 +1268,6 @@ export var czStrings = {
     timerLocation: "Zobrazit panel časovače",
     // "Timer mode"
     timerInfoMode: "Zobrazit režim panelu časovače",
-    // "Panel display mode"
-    renderMode: "Režim vykreslování",
     // "Enable entry addition"
     allowAddPanel: "Povolit přidání panelu",
     // "Enable entry removal"

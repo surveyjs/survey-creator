@@ -1268,8 +1268,6 @@ export var italianTranslation = {
     timerLocation: "Visualizzazione pannello timer",
     // "Timer mode"
     timerInfoMode: "Modalità visualizzazione pannello timer",
-    // "Panel display mode"
-    renderMode: "Modalità di visualizzazione",
     // "Enable entry addition"
     allowAddPanel: "Consenti l'aggiunta di un pannello",
     // "Enable entry removal"

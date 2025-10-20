@@ -1268,8 +1268,6 @@ export var nbStrings = {
     timerLocation: "Vis tidtaking",
     // "Timer mode"
     timerInfoMode: "Vis tidtaking-modus",
-    // "Panel display mode"
-    renderMode: "Gjengivelse modus",
     // "Enable entry addition"
     allowAddPanel: "Tillat å legge til panel",
     // "Enable entry removal"

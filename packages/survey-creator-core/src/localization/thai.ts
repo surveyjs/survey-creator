@@ -1268,8 +1268,6 @@ export const thStrings = {
     timerLocation: "การจัดตำแหน่งตัวจับเวลา",
     // "Timer mode"
     timerInfoMode: "โหมดตัวจับเวลา",
-    // "Panel display mode"
-    renderMode: "โหมดแสดงผลแผง",
     // "Enable entry addition"
     allowAddPanel: "เปิดใช้งานการเพิ่มแผง",
     // "Enable entry removal"

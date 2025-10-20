@@ -1268,8 +1268,6 @@ export var mnStrings = {
     timerLocation: "Тоолуурын байршил",
     // "Timer mode"
     timerInfoMode: "Тоолуурын горим",
-    // "Panel display mode"
-    renderMode: "Панелийн дэлгэцийн горим",
     // "Enable entry addition"
     allowAddPanel: "Панел нэмэхийг зөвшөөрөх",
     // "Enable entry removal"

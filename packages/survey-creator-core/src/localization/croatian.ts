@@ -1268,8 +1268,6 @@ export var hrStrings = {
     timerLocation: "Pokaži ploču timera",
     // "Timer mode"
     timerInfoMode: "Prikazate način rada timer panela",
-    // "Panel display mode"
-    renderMode: "Način prikaza",
     // "Enable entry addition"
     allowAddPanel: "Dopustite dodavanje ploče",
     // "Enable entry removal"

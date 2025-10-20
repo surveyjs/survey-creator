@@ -1209,8 +1209,6 @@ export var mmStrings = {
     timerLocation: "အချိန်တိုင်းကိရိယာတည်နေရာ",
     // "Timer mode"
     timerInfoMode: "အချိန် mode",
-    // "Panel display mode"
-    renderMode: "ပန်းနယ်ပြသမှု mode",
     // "Enable entry addition"
     allowAddPanel: "ပန်းနယ်ထည့်ရန်ဖွင့်ပါ",
     // "Enable entry removal"

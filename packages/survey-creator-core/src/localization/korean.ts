@@ -1269,8 +1269,6 @@ export var koreanStrings = {
     timerLocation: "타이머 패널 표시",
     // "Timer mode"
     timerInfoMode: "타이머 패널 모드 표시",
-    // "Panel display mode"
-    renderMode: "렌더링 모드",
     // "Enable entry addition"
     allowAddPanel: "패널 추가 허용",
     // "Enable entry removal"

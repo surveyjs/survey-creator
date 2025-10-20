@@ -1269,8 +1269,6 @@ export var traditionalChineseTranslation = {
     timerLocation: "顯示計時器面板",
     // "Timer mode"
     timerInfoMode: "顯示計時器面板模式",
-    // "Panel display mode"
-    renderMode: "渲染模式",
     // "Enable entry addition"
     allowAddPanel: "允許添加面板",
     // "Enable entry removal"

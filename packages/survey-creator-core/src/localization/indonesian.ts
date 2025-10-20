@@ -1268,8 +1268,6 @@ export var indonesianStrings = {
     timerLocation: "Tampilkan panel pengatur waktu",
     // "Timer mode"
     timerInfoMode: "Tampilkan mode panel pengatur waktu",
-    // "Panel display mode"
-    renderMode: "Mode render",
     // "Enable entry addition"
     allowAddPanel: "Bolehkan penambahan panel",
     // "Enable entry removal"

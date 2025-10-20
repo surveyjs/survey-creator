@@ -1268,8 +1268,6 @@ export var bgStrings = {
     timerLocation: "Местоположение на таймера",
     // "Timer mode"
     timerInfoMode: "Режим на таймера",
-    // "Panel display mode"
-    renderMode: "Режим на показване на панела",
     // "Enable entry addition"
     allowAddPanel: "Разрешаване добавянето на панели",
     // "Enable entry removal"

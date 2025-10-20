@@ -660,7 +660,6 @@ export var tgStrings = {
     // showTimer: "Use a timer",
     timerLocation: "Нишон додани бастаи вақтсанҷ",
     timerInfoMode: "Нишон додани ҳолати бастаи таймер",
-    // renderMode: "Panel display mode",
     allowAddPanel: "Иҷозат додан ба илова кардани бастаҳо",
     allowRemovePanel: "Иҷозат додан ба нест кардани бастаҳо",
     addPanelText: "Иловаи матн ба баста",

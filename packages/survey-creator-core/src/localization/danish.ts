@@ -1269,8 +1269,6 @@ export var danishStrings = {
     timerLocation: "Vis tidspanel",
     // "Timer mode"
     timerInfoMode: "Vis tidspanel tilstand",
-    // "Panel display mode"
-    renderMode: "Renderingstilstand",
     // "Enable entry addition"
     allowAddPanel: "Tillad at tilføje et panel",
     // "Enable entry removal"

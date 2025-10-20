@@ -1268,8 +1268,6 @@ export var nlStrings = {
     timerLocation: "Toon timerpaneel",
     // "Timer mode"
     timerInfoMode: "Modus timerpaneel",
-    // "Panel display mode"
-    renderMode: "Render-modus",
     // "Enable entry addition"
     allowAddPanel: "Sta het toevoegen van een paneel toe",
     // "Enable entry removal"

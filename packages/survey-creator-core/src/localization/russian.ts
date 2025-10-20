@@ -1268,8 +1268,6 @@ export var ruStrings = {
     timerLocation: "Показывать панель таймера",
     // "Timer mode"
     timerInfoMode: "Показывать режим панели таймера",
-    // [Auto-translated] "Panel display mode"
-    renderMode: "Режим отображения панели",
     // "Enable entry addition"
     allowAddPanel: "Разрешить добавление панели",
     // "Enable entry removal"

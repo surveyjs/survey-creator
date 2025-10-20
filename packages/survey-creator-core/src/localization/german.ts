@@ -1268,8 +1268,6 @@ export var germanTranslation = {
     timerLocation: "Position des Timers",
     // "Timer mode"
     timerInfoMode: "Modus des Timers",
-    // "Panel display mode"
-    renderMode: "Anzeigemodus",
     // "Enable entry addition"
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     // "Enable entry removal"

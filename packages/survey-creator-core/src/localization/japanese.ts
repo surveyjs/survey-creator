@@ -1268,8 +1268,6 @@ export var jaStrings = {
     timerLocation: "タイマーパネルを表示する",
     // "Timer mode"
     timerInfoMode: "タイマーパネルモードを表示",
-    // "Panel display mode"
-    renderMode: "レンダーモード",
     // "Enable entry addition"
     allowAddPanel: "パネルの追加を許可",
     // "Enable entry removal"

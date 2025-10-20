@@ -1268,8 +1268,6 @@ export var grStrings = {
     timerLocation: "Στοίχιση χρονομέτρου",
     // "Timer mode"
     timerInfoMode: "Κατάσταση χρονομέτρου",
-    // "Panel display mode"
-    renderMode: "Τρόπος εμφάνισης πάνελ",
     // "Enable entry addition"
     allowAddPanel: "Ενεργοποίηση προσθήκης πάνελ",
     // "Enable entry removal"

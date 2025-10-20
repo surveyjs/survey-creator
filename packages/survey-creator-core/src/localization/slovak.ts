@@ -1268,8 +1268,6 @@ export var skStrings = {
     timerLocation: "Zobraziť panel s časovačom",
     // "Timer mode"
     timerInfoMode: "Zobraziť režim panela s časovačom",
-    // "Panel display mode"
-    renderMode: "Režim vykresľovania",
     // "Enable entry addition"
     allowAddPanel: "Povoliť pridanie panela",
     // "Enable entry removal"

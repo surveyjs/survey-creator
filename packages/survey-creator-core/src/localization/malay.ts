@@ -1268,8 +1268,6 @@ export var msStrings = {
     timerLocation: "Tunjukkan panel pemasa",
     // "Timer mode"
     timerInfoMode: "Tunjukkan mod panel pemasa",
-    // "Panel display mode"
-    renderMode: "Mod penyampaian",
     // "Enable entry addition"
     allowAddPanel: "Benarkan menambahkan panel",
     // "Enable entry removal"

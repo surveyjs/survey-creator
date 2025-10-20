@@ -1268,8 +1268,6 @@ export var huStrings = {
     timerLocation: "Időzító mutatása",
     // "Timer mode"
     timerInfoMode: "Időzító módja",
-    // "Panel display mode"
-    renderMode: "Megjelenítés módja",
     // "Enable entry addition"
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     // "Enable entry removal"

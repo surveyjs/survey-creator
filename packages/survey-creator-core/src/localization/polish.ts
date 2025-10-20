@@ -1269,8 +1269,6 @@ export var polishStrings = {
     timerLocation: "Show timer panel",
     // "Timer mode"
     timerInfoMode: "Show timer panel mode",
-    // "Panel display mode"
-    renderMode: "Render mode",
     // "Enable entry addition"
     allowAddPanel: "Allow adding a panel",
     // "Enable entry removal"

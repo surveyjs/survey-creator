@@ -1268,8 +1268,6 @@ export var portugueseTranslation = {
     timerLocation: "Mostrar o painel de cronômetro",
     // "Timer mode"
     timerInfoMode: "Mostrar painel de modo de cronômetro",
-    // "Panel display mode"
-    renderMode: "Modo de renderização",
     // "Enable entry addition"
     allowAddPanel: "Permitir adicionar painel",
     // "Enable entry removal"

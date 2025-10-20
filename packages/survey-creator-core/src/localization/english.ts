@@ -667,7 +667,6 @@ export var enStrings = {
     showTimer: "Use a timer",
     timerLocation: "Timer alignment",
     timerInfoMode: "Timer mode",
-    renderMode: "Panel display mode",
     allowAddPanel: "Enable entry addition",
     allowRemovePanel: "Enable entry removal",
     addPanelText: "\"Add Entry\" button text",
