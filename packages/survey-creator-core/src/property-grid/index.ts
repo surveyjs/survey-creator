@@ -1288,9 +1288,14 @@ export class PropertyGridModel {
   }
   private onMatrixCellValueChanging(options: any) {
     if (this.isCellCreating) return;
+    const obj = options.row.editingObj;
+    const propName = options.columnName;
+    if (this.options.trimValues && propName === "value" && obj.isDescendantOf("itemvalue") && typeof options.value === "string") {
+      options.value = options.value.trim();
+    }
     var changingOptions = {
-      obj: options.row.editingObj,
-      propertyName: options.columnName,
+      obj: obj,
+      propertyName: propName,
       value: options.oldValue,
       newValue: options.value,
       doValidation: false

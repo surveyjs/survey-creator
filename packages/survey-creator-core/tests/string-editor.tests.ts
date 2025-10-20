@@ -270,7 +270,7 @@ test("Test string editor content editable for matrix and panels", (): any => {
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
 });
 
-test("Test string editor inplaceEditForValues", (): any => {
+test("Test string editor inplaceEditForValues + creator.trimValues", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [
@@ -314,6 +314,11 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
+
+  //creator.trimValues=true, Issue#7180
+  creator.trimValues = true;
+  seChoice.onBlur({ target: { innerText: "  trimValue  ", innerHTML: "  trimValue  ", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.value).toEqual("trimValue");
 });
 test("Test string editor inplaceEditForValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
