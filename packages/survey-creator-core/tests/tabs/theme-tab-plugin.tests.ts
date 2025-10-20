@@ -30,12 +30,14 @@ test("Creator top action bar: only theme tab", (): any => {
   };
   expect(creator.activeTab).toEqual("theme");
   creator.showOneCategoryInPropertyGrid = false;
+  creator.toolbar.flushUpdates();
   expect(creator.toolbar.visibleActions.length).toEqual(6);
   let receivedOrder = creator.toolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(themeBuilderButtonOrder);
   expect(creator.toolbar.visibleActions[3].active).toBeTruthy();
 
   creator.activeTab = "logic";
+  creator.toolbar.flushUpdates();
   expect(creator.toolbar.visibleActions.length).toEqual(3);
   receivedOrder = creator.toolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(logicTabButtonOrder);
@@ -53,6 +55,7 @@ test("Creator footer action bar: only theme tab", (): any => {
   expect(creator.activeTab).toEqual("theme");
 
   creator.isMobileView = true;
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
@@ -60,6 +63,7 @@ test("Creator footer action bar: only theme tab", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "logic";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 
@@ -95,6 +99,7 @@ test("Creator footer action bar: all tabs", (): any => {
   expect(creator.activeTab).toEqual("designer");
 
   creator.isMobileView = true;
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
@@ -102,6 +107,7 @@ test("Creator footer action bar: all tabs", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
 
   creator.activeTab = "test";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(testTabButtonOrder);
@@ -109,6 +115,7 @@ test("Creator footer action bar: all tabs", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "theme";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(themeTabButtonOrder);
@@ -116,9 +123,11 @@ test("Creator footer action bar: all tabs", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "logic";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 
   creator.activeTab = "designer";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
@@ -1072,12 +1081,20 @@ test("Reset theme action availability", (): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   const resetThemeAction = themePlugin["resetTheme"];
   themePlugin.activate();
-  const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-  const isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
-  const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
-  const backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
-  const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  let isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
+  let colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
+  let backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
+  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
+  const updateEditors = () => {
+    propertyGridSurvey = themePlugin.propertyGrid.survey;
+    themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+    isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
+    colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
+    backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
+    primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor");
+  };
 
   expect(themeChooser.value).toBe("default");
   expect(resetThemeAction.enabled).toBeFalsy();
@@ -1085,34 +1102,73 @@ test("Reset theme action availability", (): any => {
   propertyGridSurvey.getQuestionByName("themeName").value = "flat";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(themeChooser.value).toBe("default");
 
   isPanelless.value = true;
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(isPanelless.value).toBe(false);
 
   colorPalette.value = "dark";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(colorPalette.value).toBe("light");
 
   backgroundImage.value = "image.png";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(backgroundImage.value).toBe("");
 
   primaryBackColor.value = "red";
   expect(resetThemeAction.enabled).toBeTruthy();
   resetThemeAction.action();
+  updateEditors();
   expect(resetThemeAction.enabled).toBeFalsy();
   expect(primaryBackColor.value).toBe("rgba(25, 179, 148, 1)");
 
   surveySettings.confirmActionAsync = originalCallback;
+});
+
+test("Reset theme action - header editors visibility still working", (): any => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    callback(true);
+    return true;
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const resetThemeAction = themePlugin["resetTheme"];
+  themePlugin.activate();
+  let groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  let headerViewContainer = groupHeader.elements[0].contentPanel;
+  let headerView = headerViewContainer.getElementByName("headerView");
+  let logoPosition = headerViewContainer.getElementByName("logoPosition");
+
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(headerView.value).toBe("advanced");
+  expect(logoPosition.isVisible).toBeFalsy();
+  headerView.value = "basic";
+  expect(logoPosition.isVisible).toBeTruthy();
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+
+  groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  headerViewContainer = groupHeader.elements[0].contentPanel;
+  headerView = headerViewContainer.getElementByName("headerView");
+  logoPosition = headerViewContainer.getElementByName("logoPosition");
+  expect(headerView.value).toBe("advanced");
+  expect(logoPosition.isVisible).toBeFalsy();
+  headerView.value = "basic";
+  expect(logoPosition.isVisible).toBeTruthy();
 });
 
 test("Custom theme assigned to creator", (): any => {
@@ -1492,4 +1548,25 @@ test("Theme settings action visibility", (): any => {
 
   creator.isMobileView = true;
   expect(themePlugin["themeSettingsAction"].visible).toBeTruthy();
+});
+
+test("Update default font family", (): any => {
+  const oldFontFamily = "Open Sans";
+  const newFontFamily = "Georgia, serif";
+  settings.themeEditor.defaultFontFamily = newFontFamily;
+  SurveyThemes.DefaultLight.cssVariables["--sjs-font-family"] = newFontFamily;
+
+  try {
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+    creator.themeEditor.activate();
+    const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+    expect(propertyGridSurvey.getQuestionByName("--sjs-font-family").value).toBe(newFontFamily);
+    expect(propertyGridSurvey.getQuestionByName("questionTitle").value.family).toBe(newFontFamily);
+
+  } finally {
+    settings.themeEditor.defaultFontFamily = oldFontFamily;
+    SurveyThemes.DefaultLight.cssVariables["--sjs-font-family"] = oldFontFamily;
+  }
 });

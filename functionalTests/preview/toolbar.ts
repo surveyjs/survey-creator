@@ -130,7 +130,7 @@ test("Preview Survey Again", async (t) => {
     .click(Selector("#nextPage"))
     .click(Selector("#nextPage"))
     .click(Selector("input[value='Complete']"))
-    .expect(Selector("h3").withText("Thank you for completing the survey").visible).ok()
+    .expect(Selector(".sd-completedpage").withText("Thank you for completing the survey").visible).ok()
     .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok();
 });

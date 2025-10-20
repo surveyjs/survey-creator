@@ -22,7 +22,8 @@ import {
   SurveyTriggerComplete,
   SurveyTriggerSkip,
   ImageItemValue,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  RegexValidator
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -1384,7 +1385,7 @@ test("'set' property editor, get choices on callback, Bug#720", () => {
 
 test("Validators property editor", () => {
   var survey = createSurvey();
-  var validator = new NumericValidator(10, 100);
+  var validator = new RegexValidator("^[0-9]+$");
   validator.text = "validatortext";
   var question = <Question>survey.getQuestionByName("question1");
   question.validators.push(validator);
@@ -1395,7 +1396,7 @@ test("Validators property editor", () => {
   var rows = validatorsQuestion.visibleRows;
   expect(rows).toHaveLength(1);
   expect(rows[0].cells[0].question.choices.length > 1).toBeTruthy();
-  expect(rows[0].cells[0].value).toEqual("numericvalidator");
+  expect(rows[0].cells[0].value).toEqual("regexvalidator");
   validatorsQuestion.addRow();
   expect(rows[1].cells[0].value).toEqual("expressionvalidator");
   rows[1].cells[0].value = "textvalidator";
@@ -1435,6 +1436,7 @@ test("Validators property editor update existing validator property - https://su
   var validator = new NumericValidator(10, 100);
   validator.text = "validatortext";
   var question = survey.getQuestionByName("question1");
+  question.inputType = "number";
   question.validators.push(validator);
   var propertyGrid = new PropertyGridModelTester(question);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
@@ -1540,8 +1542,8 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   var question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
   question.choices = [1, 2, 3];
   var tabs =
-    SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
+    SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = [
     { name: "general", visible: false }
   ];
 
@@ -1552,7 +1554,7 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   expect(
     choicesQuestion.hasDetailPanel(choicesQuestion.visibleRows[0])
   ).toBeFalsy();
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = tabs;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = tabs;
 });
 
 test("SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invisible", () => {
@@ -1570,17 +1572,15 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invi
   var panel = rows[0].detailPanel;
   expect(panel.getQuestionByName("visibleIf").isVisible).toBeTruthy();
   expect(panel.getQuestionByName("enableIf").isVisible).toBeTruthy();
-
-  Serializer.findProperty("itemvalue", "visibleIf").visible = false;
-  Serializer.findProperty("itemvalue", "enableIf").visible = false;
+  const props = ["visibleIf", "enableIf", "showCommentArea", "isCommentRequired", "commentPlaceholder"];
+  props.forEach((propName) => { Serializer.findProperty("choiceitem", propName).visible = false; });
   propertyGrid = new PropertyGridModelTester(question);
   choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
   rows = choicesQuestion.visibleRows;
   expect(choicesQuestion.hasDetailPanel(rows[0])).toBeFalsy();
-  Serializer.findProperty("itemvalue", "visibleIf").visible = true;
-  Serializer.findProperty("itemvalue", "enableIf").visible = true;
+  props.forEach((propName) => { Serializer.findProperty("choiceitem", propName).visible = true; });
 });
 test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   var survey = new SurveyModel();
@@ -1694,7 +1694,6 @@ test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
-  editorLocalization.reset();
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
   curStrings.pehelp.survey = { title: "Survey Title" };
@@ -1719,7 +1718,6 @@ test("property editor titleQuestion.description", () => {
   expect(titleQuestion.description).toEqual("Survey Title");
 
   delete curStrings.pehelp["page"];
-  editorLocalization.reset();
   propertyGrid = new PropertyGridModelTester(survey.pages[0]);
   titleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("title")

@@ -7,14 +7,19 @@ description: Select your preferable backend to find a dedicated GitHub repositor
 
 In many use cases, Survey Creator communicates with a remote storage. Use the following GitHub repositories to integrate Survey Creator with your backend framework:
 
-| Backend Framework | GitHub Repository                                                                                                        | Demo Site                                                   |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
-| PHP               | [Sample PHP backend for SurveyJS Form Library and Survey Creator](https://github.com/surveyjs/surveyjs-php)              | [Run demo](https://surveyjs-php.azurewebsites.net/)         |
-| ASP.NET Core      | [Sample .NET Core backend for SurveyJS Form Library and Survey Creator](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run demo](https://surveyjs-aspnet-core.azurewebsites.net/) |
-| NodeJS            | [Sample NodeJS backend for SurveyJS Form Library and Survey Creator](https://github.com/surveyjs/surveyjs-nodejs)        | [Run demo](https://surveyjs-nodejs.azurewebsites.net/)      |
+| Backend Framework | GitHub Repository | Demo Site |
+| ----------------- | ----------------- | --------- |
+| PHP | [SurveyJS + PHP](https://github.com/surveyjs/surveyjs-php) | [Run Demo](https://surveyjs-php.azurewebsites.net/) |
+| ASP.NET Core | [SurveyJS + .NET Core](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run Demo](https://surveyjs-aspnet-core.azurewebsites.net/) |
+| NodeJS | [SurveyJS + NodeJS](https://github.com/surveyjs/surveyjs-nodejs)<br>[SurveyJS + NodeJS + PostgreSQL](https://github.com/surveyjs/surveyjs-nodejs-postgresql)<br>[SurveyJS + NodeJS + MongoDB](https://github.com/surveyjs/surveyjs-nodejs-mongodb) | [Run Demo](https://surveyjs-nodejs.azurewebsites.net/) |
+| Python | [SurveyJS + Python](https://github.com/surveyjs/surveyjs-python-flask) | [Run Demo](https://surveyjs-flask.azurewebsites.net/) |
 
 We also created a plugin for WordPress. You can use it as is or modify it to integrate SurveyJS Form Library and Survey Creator into another CMS:
 
-| Product Name | GitHub Repository                                                                       | Plugin Site                                                 |
-| ------------ | --------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| WordPress    | [Sources for SurveyJS WordPress plugin](https://github.com/surveyjs/surveyjs-wordpress) | [WordPress plugin](https://wordpress.org/plugins/surveyjs/) |
+| Product Name | GitHub Repository | Plugin Site |
+| ------------ | ----------------- | ----------- |
+| WordPress | [SurveyJS + WordPress](https://github.com/surveyjs/surveyjs-wordpress) | [WordPress plugin](https://wordpress.org/plugins/surveyjs/) |
+
+The examples above show how to generate survey JSON schemas using Survey Creator and save them in a database. For a deeper integration, you can configure Survey Creator as a no-code editor for domain models. This setup allows survey authors to generate code for server-side domain models directly from the client-side Survey Creator, and vice versa: generate survey JSON schemas from existing domain models. Refer to the following help topic for more information on this use case:
+
+[No-code Editor for Domain Models](https://surveyjs.io/documentation/no-code-editor-for-domain-models (linkStyle))

@@ -639,6 +639,7 @@ test("Drag Drop inside panel dynamic top indicator", async (t) => {
       })(idx, suffix, remove);
     }
 
+    await t.wait(500);
     await setClass(1, "drag-over-top");
     await takeElementScreenshot("drag-drop-inside-panel-dynamic-top.png", Page1, t, comparer);
     await setClass(1, "drag-over-top", "remove");
@@ -832,6 +833,7 @@ test("Drag indicator for custom widget", async (t) => {
         afterRender: (question, element) => {
           const input = element.getElementsByTagName("input")[0];
           input.style.width = "100%";
+          input.style.boxSizing = "content-box";
           input.style.padding = "8px auto";
         },
       };

@@ -8,6 +8,11 @@ export default defineConfig({
   },
   snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}{ext}",
   reporter: [["junit", { outputFile: "test-results/e2e-junit-results.xml" }], ["html", { open: "never" }]],
+  use: {
+    launchOptions: {
+      ignoreDefaultArgs: ["--hide-scrollbars"],
+    }
+  },
   projects: [
     {
       name: "a11y",
@@ -16,6 +21,10 @@ export default defineConfig({
     {
       name: "scr",
       testDir: resolve(__dirname, "./screenshotTests")
+    },
+    {
+      name: "scr_legacy",
+      testDir: resolve(__dirname, "./screenshotLegacyTests")
     },
     {
       name: "e2e",

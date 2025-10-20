@@ -524,6 +524,196 @@ test("Check question converter selected item for single subitems (json)", (): an
   surveySettings.animationEnabled = true;
 });
 
+test("Check question converter selected item for customized rating subitems (json)", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const item = creator.toolbox.getItemByName("rating") as QuestionToolboxItem;
+  item.clearSubitems();
+  item.addSubitem(<any>{
+    name: "stars-3",
+    title: "3 stars Scale",
+    json: {
+      type: "rating",
+      rateType: "stars",
+      rateCount: 3,
+      rateMin: 0,
+      rateMax: 2,
+    },
+  });
+  item.addSubitem(<any>{
+    name: "stars-5",
+    title: "5 stars Scale",
+    json: {
+      type: "rating",
+      rateType: "stars",
+      title: "5-stars",
+      rateMin: 0,
+      rateMax: 4,
+    },
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1", "rateType": "stars", title: "5-stars",
+        "rateMin": 0,
+        "rateMax": 4, },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.show();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("rating");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.show();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("stars-5");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter - convert to 5 stars", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const item = creator.toolbox.getItemByName("rating") as QuestionToolboxItem;
+  item.clearSubitems();
+  item.addSubitem(<any>{
+    name: "stars-3",
+    title: "3 stars Scale",
+    json: {
+      type: "rating",
+      rateType: "stars",
+      rateCount: 3,
+      rateMin: 0,
+      rateMax: 2,
+    },
+  });
+  item.addSubitem(<any>{
+    name: "stars-5",
+    title: "5 stars Scale",
+    json: {
+      type: "rating",
+      rateType: "stars",
+      rateMin: 0,
+      rateMax: 4,
+    },
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1", "rateType": "stars",
+        "rateMin": 0,
+        "rateMax": 2, },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.show();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("rating");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.show();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("stars-3");
+
+  const toConvert = listSubtype.actions[2];
+  toConvert.action();
+  const questionConverted2 = creator.survey.getQuestionByName("q1");
+  expect(questionConverted2.rateType).toBe("stars");
+  expect(questionConverted2.rateCount).toBe(5);
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter - convert to 3 stars", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const item = creator.toolbox.getItemByName("rating") as QuestionToolboxItem;
+  item.clearSubitems();
+  item.addSubitem(<any>{
+    name: "stars-3",
+    title: "3 stars Scale",
+    json: {
+      type: "rating",
+      rateType: "stars",
+      rateCount: 3,
+      rateMin: 0,
+      rateMax: 2,
+    },
+  });
+  item.addSubitem(<any>{
+    name: "stars-5",
+    title: "5 stars Scale",
+    json: {
+      type: "rating",
+      rateType: "stars",
+      rateMin: 0,
+      rateMax: 4,
+    },
+  });
+
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1", "rateType": "stars",
+        "rateCount": 4,
+        "rateMax": 4, },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  const popup = convertToAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.show();
+  const list = popup.contentComponentData.model;
+  expect(list.selectedItem.id).toBe("rating");
+
+  const popupSubtype = list.selectedItem.popupModel;
+  const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
+  popupSubtype.show();
+  const listSubtype = popupSubtype.contentComponentData.model;
+  expect(listSubtype.selectedItem.id).toBe("rating-default");
+
+  const toConvert = listSubtype.actions[1];
+  toConvert.action();
+  const questionConverted2 = creator.survey.getQuestionByName("q1");
+  expect(questionConverted2.rateType).toBe("stars");
+  expect(questionConverted2.rateCount).toBe(3);
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question converter with subitems (json)", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();

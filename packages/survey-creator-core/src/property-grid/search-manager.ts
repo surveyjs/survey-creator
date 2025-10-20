@@ -67,7 +67,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
     const normalize = settings.comparator.normalizeTextCallback;
     let newValueInLow = normalize(newFilter, "search");
     newValueInLow = newValueInLow.toLocaleLowerCase().trim();
-    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
+    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisibleInSurvey);
     return visibleQuestions.filter(q => {
       let srcString = q.name + "|" + q.title + "|" + q.description;
       if (!!srcString) {

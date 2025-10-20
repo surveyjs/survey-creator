@@ -42,7 +42,8 @@ export class PageNavigatorViewModel extends Base {
       cssClasses: listComponentCss,
       allowSelection: true,
       listRole: "menu",
-      listItemRole: "menuitemradio"
+      listItemRole: "menuitemradio",
+      locOwner: pagesController.creator as any
     });
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
     this.popupModel.focusFirstInputSelector = ".svc-list__item--selected";
@@ -128,6 +129,10 @@ export class PageNavigatorViewModel extends Base {
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = (item: any) => {
+      const survey = this.pagesController.survey;
+      if (this.pageEditMode === "bypage" && survey.pages.indexOf(page) < 0) {
+        survey.addPage(page);
+      }
       this.scrollToPage(page);
     };
     item.data = page;
@@ -143,7 +148,9 @@ export class PageNavigatorViewModel extends Base {
       this.pagesController.creator.selectElement(this.pagesController.currentPage);
       return;
     }
-    const el: any = document.getElementById(page.id);
+    const rootNode = this._itemsContainer?.getRootNode();
+    const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
+    const el: any = doc.getElementById(page.id);
     if (!!el) {
       const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
       if (!!this._scrollableContainer) {

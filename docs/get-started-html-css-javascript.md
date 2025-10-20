@@ -486,12 +486,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ## (Optional) Enable Ace Editor in the JSON Editor Tab
 
-The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Add the Ace script and the scripts of required Ace extensions to your HTML page. For instance, the following code references the editor itself and an extension that adds a Find/Replace dialog to it:
+The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Add the Ace script and the scripts of required Ace extensions to your HTML page. For instance, the following code references the editor itself and the extensions that enable the Find/Replace dialog in Ace and add support for the dark theme:
 
 ```html
-<script src="https://unpkg.com/ace-builds/src-min-noconflict/ace.js" type="text/javascript"></script>
-<script src="https://unpkg.com/ace-builds/src-min-noconflict/ext-searchbox.js" type="text/javascript"></script>
+<script src="https://unpkg.com/ace-builds/src-min-noconflict/ace.js"></script>
+<script src="https://unpkg.com/ace-builds/src-min-noconflict/ext-searchbox.js"></script>
+<script src="https://unpkg.com/ace-builds/src-min-noconflict/theme-clouds_midnight.js"></script>
 ```
+
+To enable code highlighting, set the path to the directory containing the `ace.js` script using the `AceJsonEditorModel.aceBasePath` property. If you host `ace.js` on your server, specify your server path. If you use a CDN or installed Ace via npm, you can use the following path:
+
+```js
+SurveyCreatorCore.AceJsonEditorModel.aceBasePath = "https://unpkg.com/ace-builds/src-min-noconflict/";
+```
+
+[View Demo](/survey-creator/examples/ace-editor-integration/vanillajs (linkStyle))
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/html-css-js (linkStyle))
 

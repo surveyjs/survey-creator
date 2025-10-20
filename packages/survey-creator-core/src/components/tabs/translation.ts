@@ -237,6 +237,8 @@ export class TranslationItem extends TranslationItemBase {
     return placeholderText;
   }
   public getTextForExport(loc: string): string {
+    const val = this.hashValues[loc];
+    if (!!val && !!val.text) return val.text;
     const res = this.locString.getLocaleText(loc);
     if (!!res) return res;
     const index = loc.indexOf("-");
@@ -1099,7 +1101,7 @@ export class Translation extends Base implements ITranslationLocales {
       onSelectionChanged: (item: IAction) => {
         this.addLocale(item.id);
       }
-    });
+    }, this.options as any);
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -1263,8 +1265,8 @@ export class Translation extends Base implements ITranslationLocales {
     }
     let res = [];
     let headerRow = [];
-    let visibleLocales = this.locales;
-    headerRow.push("description ↓ - language →");
+    const visibleLocales = this.locales;
+    headerRow.push("description ↓ - language →"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     for (let i = 0; i < visibleLocales.length; i++) {
       headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }
@@ -1351,7 +1353,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.reset();
   }
   public createTranslationEditor(locale: string): TranslationEditor {
-    const res = new TranslationEditor(this.survey, locale, this.options);
+    const res = new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback);
     res.onApply = () => {
       this.reset();
     };
@@ -1445,13 +1447,14 @@ export class TranslationEditor {
   private fromLocale: string;
   private locale: string;
   public onApply: () => void;
-  constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions) {
+  constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions, translationStringVisibilityCallback?: (obj: Base, propertyName: string, visible: boolean) => boolean) {
     this.survey = survey;
     this.options = options;
     this.locale = locale;
     this.translationValue = new TranslationForEditor(this.survey, this.options, (survey: SurveyModel) => {
       this.setupNavigationButtons(survey);
     });
+    this.translationValue.translationStringVisibilityCallback = translationStringVisibilityCallback;
     this.translation.setEditMode(this.locale);
     this.translation.reset();
     this.fillFromLocales();
@@ -1577,10 +1580,11 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
+    survey.showCompleteButton = false;
     const navigationBar = new SurveyElementActionContainer();
     navigationBar.allowResponsiveness();
-    survey["navigationBarValue"] = navigationBar;
-    survey.findLayoutElement("buttons-navigation").data = navigationBar;
+    survey["navigationBarTopValue"] = navigationBar;
+    survey.findLayoutElement("buttons-navigation-top").data = navigationBar;
     navigationBar.locOwner = survey;
     navigationBar.cssClasses = survey.css.actionBar;
     navigationBar.containerCss = survey.css.footer;
@@ -1642,7 +1646,8 @@ export class TranslationEditor {
         action.title = this.getActionTranslateFromText(id);
       },
       cssClasses: listComponentCss,
-      allowSelection: true
+      allowSelection: true,
+      locOwner: this.options as any
     }, {
       verticalPosition: "bottom",
       horizontalPosition: "center",
@@ -1670,7 +1675,7 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
-    const action = this.translation.stringsHeaderSurvey.findLayoutElement("buttons-navigation").data.getActionById("svc-translation-fromlocale");
+    const action = this.translation.stringsHeaderSurvey.findLayoutElement("buttons-navigation-top").data.getActionById("svc-translation-fromlocale");
     if (!!action) {
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;

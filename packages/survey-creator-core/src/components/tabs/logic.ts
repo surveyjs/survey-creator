@@ -1,4 +1,4 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn, QuestionDropdownModel, EventBase } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn, QuestionDropdownModel, EventBase, JsonObjectProperty } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -10,7 +10,8 @@ export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.setWidthByTarget = false;
   question.popupModel.positionMode = "flex";
   question.popupModel.showPointer = true;
-  question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
+  question.searchEnabled = false;
+  question.dropdownListModel["listModel"].searchEnabled = ["operator", "conjunction", "logicTypeName"].indexOf(question.name) === -1;
 }
 
 export class LogicEvent extends EventBase<SurveyLogic, any> { }
@@ -163,6 +164,18 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public renameItemValue(item: ItemValue, oldValue: any): void {
     const question = this.getItemValueQuestion(item, oldValue);
     if (!question) return;
+    if (question.isDescendantOf("matrixdropdownbase")) {
+      question.columns.forEach(column => {
+        const choices = column.choices;
+        if (Array.isArray(choices) && choices.length === 0) {
+          this.renamteItemValueCore(column.templateQuestion, item, oldValue);
+        }
+      });
+    } else {
+      this.renamteItemValueCore(question, item, oldValue);
+    }
+  }
+  private renamteItemValueCore(question: Question, item: ItemValue, oldValue: any): void {
     this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
     this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
   }
@@ -379,7 +392,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     var itemValues = q[propName];
     if (!itemValues) return;
     var prop = Serializer.findProperty(q.getType(), propName);
-    if (!prop || prop.type !== "itemvalue[]") return;
+    if (!this.isItemValueProp(prop)) return;
     for (var i = 0; i < itemValues.length; i++) {
       var itemValue = itemValues[i];
       if (itemValue instanceof ItemValue) {
@@ -387,6 +400,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       }
     }
     this.AddElements(itemValues, res);
+  }
+  private isItemValueProp(prop: JsonObjectProperty): boolean {
+    return prop && ["itemvalue[]", "choiceitem[]", "checkboxitem[]", "matrixcolumn[]"].indexOf(prop.type) > -1;
   }
   private AddElements(src: Array<any>, dest: Array<any>) {
     for (var i = 0; i < src.length; i++) {

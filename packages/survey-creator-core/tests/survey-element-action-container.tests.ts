@@ -1,4 +1,4 @@
-import { Action, ActionContainer, IAction, PopupDropdownViewModel, ResponsivityManager } from "survey-core";
+import { Action, ActionContainer, AdaptiveContainerUpdateOptions, IAction, PopupDropdownViewModel, ResponsivityManager, UpdateResponsivenessMode } from "survey-core";
 import { SurveyElementActionContainer } from "../src/components/action-container-view-model";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -58,7 +58,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
     action.maxDimension = a.maxDimension;
     return action;
   }));
-
+  actionContainer.flushUpdates();
   actionContainer.fit({ availableSpace: 564 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
@@ -159,7 +159,7 @@ test("SurveyElementActionContainer without subtypes fit", () => {
     action.maxDimension = a.maxDimension;
     return action;
   }));
-
+  actionContainer.flushUpdates();
   actionContainer.fit({ availableSpace: 564 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("large");
@@ -224,37 +224,61 @@ test("actions and creator.onPropertyValueChanging", () => {
   expect(q1.isRequired).toBeTruthy();
 });
 
+class TestSurveyElementActionContainer extends SurveyElementActionContainer {
+  updateCallback: (isResetInitialized: boolean) => void;
+  protected update(options: AdaptiveContainerUpdateOptions): void {
+    if (!!options.updateResponsivenessMode) {
+      this.updateCallback && this.updateCallback(options.updateResponsivenessMode == UpdateResponsivenessMode.Hard);
+    }
+  }
+}
+
+class TestQuestionAdornerViewModel extends QuestionAdornerViewModel {
+  protected createActionContainer(): TestSurveyElementActionContainer {
+    const actionContainer = new TestSurveyElementActionContainer();
+    actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    return actionContainer;
+  }
+}
+
 test("Check actions container responsiveness doesn't run when invisible", () => {
   const creator = new CreatorTester();
   class ResizeObserver {
-    observe() { }
+    constructor(protected callback: () => void) {}
+    observe() {
+      this.callback();
+    }
     disconnect() { }
   }
   const oldResizeObserver = window.ResizeObserver;
+  const oldRequestAnimationFrame = window.requestAnimationFrame;
   window.ResizeObserver = <any>ResizeObserver;
+  window.requestAnimationFrame = (callback) => { callback(1); return 1; };
   creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }, { type: "text", name: "q3" }] };
   const q1 = creator.survey.getQuestionByName("q1");
   const q2 = creator.survey.getQuestionByName("q2");
   const q3 = creator.survey.getQuestionByName("q3");
   creator.selectElement(q1);
 
-  const spy = jest.spyOn(ResponsivityManager.prototype as any, "process");
-  const q1Adapter = new QuestionAdornerViewModel(creator, q1, <any>undefined);
-  const q2Adapter = new QuestionAdornerViewModel(creator, q2, <any>undefined);
-  const q3Adapter = new QuestionAdornerViewModel(creator, q3, <any>undefined);
-  const q1ActionsContainer = q1Adapter.actionContainer;
-  const q2ActionsContainer = q2Adapter.actionContainer;
-  const q3ActionsContainer = q3Adapter.actionContainer;
+  const spy = jest.spyOn(ResponsivityManager.prototype as any, "updateItemsDimensions");
+  const q1Adapter = new TestQuestionAdornerViewModel(creator, q1, <any>undefined);
+  const q2Adapter = new TestQuestionAdornerViewModel(creator, q2, <any>undefined);
+  const q3Adapter = new TestQuestionAdornerViewModel(creator, q3, <any>undefined);
+  const q1ActionsContainer = q1Adapter.actionContainer as TestSurveyElementActionContainer;
+  const q2ActionsContainer = q2Adapter.actionContainer as TestSurveyElementActionContainer;
+  const q3ActionsContainer = q3Adapter.actionContainer as TestSurveyElementActionContainer;
   const container = document.createElement("div");
   jest.spyOn(container, "offsetWidth", "get").mockImplementation(() => {
     return 100;
   });
   expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  q1ActionsContainer.flushUpdates();
   q1ActionsContainer.initResponsivityManager(container);
   expect(spy).toHaveBeenCalledTimes(1);
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
 
   expect(q2Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
+  q2ActionsContainer.flushUpdates();
   q2ActionsContainer.initResponsivityManager(container);
   expect(spy).toHaveBeenCalledTimes(1);
   let q2Log = "";
@@ -264,6 +288,7 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
 
   expect(q3Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
+  q3ActionsContainer.flushUpdates();
   q3ActionsContainer.initResponsivityManager(container);
   expect(spy).toHaveBeenCalledTimes(1);
   let q3Log = "";
@@ -273,6 +298,9 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
 
   creator.selectElement(q2);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
   expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
   expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
@@ -284,6 +312,9 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
 
   creator.selectElement(q1);
   creator.selectElement(q2);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
   expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
   expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
@@ -294,6 +325,9 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q3Log).toBe("");
 
   q3Adapter.hover(new Event("") as any, null);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
   expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
   expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
@@ -304,6 +338,9 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q3Log).toBe("->raised:true");
 
   q3Adapter.hover(new Event("") as any, null);
+  q1ActionsContainer.flushUpdates();
+  q2ActionsContainer.flushUpdates();
+  q3ActionsContainer.flushUpdates();
   expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
   expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
@@ -313,6 +350,7 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q2Log).toBe("->raised:true");
   expect(q3Log).toBe("->raised:true");
   window.ResizeObserver = oldResizeObserver;
+  window.requestAnimationFrame = oldRequestAnimationFrame;
   spy.mockRestore();
 });
 

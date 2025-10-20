@@ -23,6 +23,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: content-box;
 }
 
 .svc-toolbox__panel {
@@ -35,6 +36,7 @@
   border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid var(--ctr-toolbox-border-color, var(--sjs-border-25, #d4d4d4ff));
   background: var(--ctr-toolbox-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   min-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
+  box-sizing: content-box;
 }
 
 .svc-toolbox {
@@ -296,4 +298,9 @@
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--ctr-property-grid-placeholder-text-description-color, var(--sjs-layer-1-foreground-50, #00000080));
+}
+
+.svc-toolbox--disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

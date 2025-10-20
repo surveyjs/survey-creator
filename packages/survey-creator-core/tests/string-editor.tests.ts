@@ -315,7 +315,7 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
 });
-test("Test string editor inplaceEditForValues + сorrect non-unique value", (): any => {
+test("Test string editor inplaceEditForValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [
@@ -396,6 +396,50 @@ test("Maxlen check", (): any => {
   var target = { innerText: "very long title" };
   stringEditorSurveyTitle.onInput({ target: target });
   expect(target.innerText).toEqual("very long ti");
+  Serializer.findProperty("survey", "title").maxLength = -1;
+});
+
+test("Maxlen and required", (): any => {
+  Serializer.findProperty("survey", "title").maxLength = 12;
+  Serializer.findProperty("survey", "title").isRequired = true;
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({ "title": "t" });
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
+  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  stringEditorSurveyTitle.onFocus({ target: target });
+  target.innerText = "title";
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("5/12");
+  stringEditorSurveyTitle.onBlur({ target: target });
+
+  stringEditorSurveyTitle.onFocus({ target: target });
+  target.innerText = "";
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("0/12");
+
+  stringEditorSurveyTitle.onBlur({ target: target });
+  stringEditorSurveyTitle.onFocus({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("0/12");
+  Serializer.findProperty("survey", "title").maxLength = -1;
+  Serializer.findProperty("survey", "title").required = false;
+});
+
+test("Maxlen and EOL", (): any => {
+  Serializer.findProperty("survey", "title").maxLength = 12;
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({ "title": "t" });
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
+  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+
+  stringEditorSurveyTitle.onFocus({ target: target });
+  target.innerText = "\n";
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe("0/12");
+
   Serializer.findProperty("survey", "title").maxLength = -1;
 });
 
@@ -819,39 +863,6 @@ test("StringEditor on property value changing", () => {
   stringEditorQuestion.onBlur(event);
   expect(eventRaised).toEqual(2);
   expect(question.locTitle.text).toEqual("c");
-});
-
-test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator/issues/3568", () => {
-  const creator = new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { name: "q", type: "text" }
-        ]
-      }
-    ]
-  });
-
-  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
-  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-
-  var attrTest, valueTest;
-  var event = {
-    target: {
-      parentElement: { click: () => { } },
-      innerText: "a", setAttribute: (attr, val) => {
-        attrTest = attr;
-        valueTest = val;
-      }, removeAttribute: (attr, val) => { attrTest = attr; }
-    }
-  };
-  stringEditorSurveyTitle.onFocus(event);
-  expect(attrTest).toEqual("tabindex");
-  expect(valueTest).toEqual(-1);
-  attrTest = null;
-  stringEditorSurveyTitle.onBlur(event);
-  expect(attrTest).toEqual("tabindex");
 });
 
 test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com/surveyjs/survey-creator/issues/3658", () => {

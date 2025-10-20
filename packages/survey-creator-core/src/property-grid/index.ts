@@ -283,7 +283,7 @@ export var PropertyGridEditorCollection = {
       }
       var cellQuestion = row.getQuestionByName(options.columnName);
       if (!!cellQuestion) {
-        row.runCondition({}, { question: cellQuestion });
+        row.runCondition({ question: cellQuestion });
       }
     }
   },
@@ -774,9 +774,13 @@ export class PropertyJSONGenerator {
     if (!!this.parentProperty) {
       titleClass += "@" + this.parentProperty.name;
     }
-    if (this.obj.getType() === "matrixdropdowncolumn" && (<any>this.obj).getDynamicType() !== "question") {
-      if (!Serializer.findProperty(this.obj.getType(), prop.name)) {
-        titleClass = (<any>this.obj).getDynamicType();
+    const dynamicFunc = (<any>this.obj).getDynamicType;
+    const isDynamicFunc = !!dynamicFunc && typeof dynamicFunc === "function";
+    if (isDynamicFunc) {
+      const dType = (<any>this.obj).getDynamicType();
+      if (dType !== "question" && !Serializer.findProperty(this.obj.getType(), prop.name) &&
+      Serializer.findProperty(dType, prop.name)) {
+        titleClass = dType;
       }
     }
     return editorLocalization.getPropertyNameInEditor(titleClass, prop.name);
@@ -845,7 +849,7 @@ export class PropertyGridModel {
         panel.collapse();
       }
     }
-    if (focus) {
+    if (focus && !question.isReadOnly) {
       question.focus();
     } else {
       if (this.showOneCategoryInPropertyGrid) {
@@ -1925,13 +1929,10 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     if (prop.type === "dropdown") return false;
     if (prop.type === "buttongroup") return true;
     if (this.isLocaleProp(prop)) return false;
-    if (
-      !this.canRenderAsButtonGroup ||
-      !choices ||
-      choices.length == 0 ||
-      choices.length > 4
-    )
-      return false;
+    if (!this.canRenderAsButtonGroup) return false;
+    if (!choices || !Array.isArray(choices)) return false;
+    if (choices.length == 0 || choices.length > 4) return false;
+
     var charCount = 0;
     for (var i = 0; i < choices.length; i++) {
       var text = this.getLocalizedText(
@@ -1980,7 +1981,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     }
     if (prop.name === "cellType") {
       let text = editorLocalization.getString("qt." + value);
-      if (text) return text;
+      if (text && text !== value) return text;
     }
     if (value === null) return null;
     return editorLocalization.getPropertyValueInEditor(prop.name, value);

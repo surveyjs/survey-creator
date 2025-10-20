@@ -49,7 +49,7 @@ import {
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
-import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
+import { EditorLocalization, editorLocalization, setupLocale } from "../src/editorLocalization";
 import { ICreatorPlugin, settings } from "../src/creator-settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
@@ -58,6 +58,9 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
+import { TabbedMenuMode } from "../src/tabbed-menu";
+
+export * from "../src/localization/french";
 
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
@@ -177,20 +180,14 @@ test("creator.onSurveyInstanceSetupHandlers event", () => {
 
 test("check tabResponsivenessMode property", () => {
   const creator = new CreatorTester();
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
-
-  creator.tabResponsivenessMode = "icons";
-  expect(creator.tabbedMenu.actions.every((action) => !action.disableShrink)).toBeTruthy();
-  const firstTab = creator.tabbedMenu.actions[0];
-  expect(firstTab.hasTitle).toBeTruthy();
-  expect(firstTab.hasIcon).toBeFalsy();
-  firstTab.mode = "small";
-  expect(firstTab.hasTitle).toBeFalsy();
-  expect(firstTab.hasIcon).toBeTruthy();
-
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasIcon)).toBeTruthy();
+  creator.tabbedMenu.setMode(TabbedMenuMode.Icons);
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => action.hasIcon)).toBeTruthy();
+  creator.tabbedMenu.setMode(TabbedMenuMode.Titles);
+  expect(creator.tabbedMenu.actions.every((action) => action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasIcon)).toBeTruthy();
 });
 
 test("onModified options, on adding page and on copying page", () => {
@@ -331,6 +328,14 @@ test("Set propertyGridNavigationMode property by options", (): any => {
   expect(designerPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(themePlugin.showOneCategoryInPropertyGrid).toBeTruthy();
   expect(translationPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+});
+test("creator theme & settings property grids & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
+  creator.locale = "fr";
+  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  creator.locale = "en";
 });
 
 test("showSurfaceTools", (): any => {
@@ -593,7 +598,7 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(21);
+  expect(itemCount).toBe(22);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -606,8 +611,10 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
   creator.maxPanelNestingLevel = 2;
   expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(2);
-  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
@@ -617,10 +624,14 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   creator.maxPanelNestingLevel = 1;
   expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(1);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel3, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel4, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
@@ -628,15 +639,56 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   creator.maxPanelNestingLevel = 0;
   expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel3, false)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel4, false)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+});
+
+test("addNewQuestion popup menu for first level panels and paneldynamics", (): any => {
+  const creator = new CreatorTester({ maxPanelNestingLevel: 0 });
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          },
+          {
+            "type": "paneldynamic",
+            "name": "question1"
+          }
+        ]
+      }
+    ],
+    "headerView": "advanced"
+  };
+  expect(creator.maxNestedPanels).toBe(-1);
+  expect(creator.maxPanelNestingLevel).toBe(0);
+  const panel = creator.survey.getPanelByName("panel1");
+  const paneldynamic = creator.survey.getQuestionByName("question1");
+  const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(22);
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+  // Add New (create child) action
+  expect(creator.getAvailableToolboxItems(panel)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(paneldynamic)).toHaveLength(itemCount - 2);
+  // Convert To action
+  expect(creator.getAvailableToolboxItems(panel, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(paneldynamic, false)).toHaveLength(itemCount);
 });
 
 test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any => {
@@ -653,7 +705,7 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any 
   const question1 = creator.survey.getQuestionByName("question1");
   const question2 = panel2.template.getQuestionByName("question2");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(21);
+  expect(itemCount).toBe(22);
   creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
   expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
@@ -663,6 +715,28 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any 
   expect(creator.getAvailableToolboxItems(question1)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(question2, false)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(question2)).toHaveLength(itemCount - 2);
+});
+
+test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements #6973", (): any => {
+  const creator = new CreatorTester();
+  creator.forbiddenNestedElements = {
+    panel: ["panel"],
+    paneldynamic: ["panel", "paneldynamic"],
+  };
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel1", elements: [{ type: "text", name: "question1" }] },
+      { type: "paneldynamic", name: "panel2", templateElements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(22);
+  const panel2 = creator.survey.getQuestionByName("panel2");
+  expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
+  const innerPanel = panel2.template;
+  const ownerElement = creator._getActualElementToAddNewElements(innerPanel);
+  expect(ownerElement).toBe(panel2);
+  expect(creator.getAvailableToolboxItems(ownerElement, false)).toHaveLength(itemCount - 2);
 });
 
 test("Preserve defaultAddQuestionType", (): any => {
@@ -686,8 +760,8 @@ test("Preserve defaultAddQuestionType", (): any => {
   expect(question1.getType()).toEqual("radiogroup");
   expect(creator.addNewQuestionText).toEqual("Add Question");
 
-  expect(questionTypeSelectorListModel.actions[9].id).toEqual("text");
-  questionTypeSelectorListModel.onItemClick(questionTypeSelectorListModel.actions[9]);
+  expect(questionTypeSelectorListModel.actions[10].id).toEqual("text");
+  questionTypeSelectorListModel.onItemClick(questionTypeSelectorListModel.actions[10]);
   const question2 = <QuestionRadiogroupModel>survey.getAllQuestions()[1];
   expect(question2.getType()).toEqual("text");
   expect(pageAdorner.currentAddQuestionType).toEqual("");
@@ -700,4 +774,125 @@ test("Preserve defaultAddQuestionType", (): any => {
   expect(pageAdorner.currentAddQuestionType).toEqual("");
   expect(creator.currentAddQuestionType).toEqual("");
   expect(creator.addNewQuestionText).toEqual("Add Question");
+});
+
+test("License text for default locale and another default locale", (): any => {
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+  let creator = new CreatorTester();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  editorLocalization.defaultLocale = "fr";
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  setupLocale({ localeCode: "fr", strings: { survey: {} } });
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  setupLocale({ localeCode: "fr", strings: { survey: { license: "My license string" } } });
+  creator = new CreatorTester();
+  expect(creator.licenseText).toBe("My license string");
+  expect(editorLocalization.getLocale()).toBeDefined();
+  expect(editorLocalization.getString("survey.license")).toBe("My license string");
+
+  editorLocalization.defaultLocale = "en";
+});
+
+test("isStringEditable", (): any => {
+  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
+  expect(isStringEditable({}, "")).toBeTruthy();
+  expect(
+    isStringEditable({ isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
+  expect(
+    isStringEditable(
+      { isContentElement: true, isEditableTemplateElement: true },
+      ""
+    )
+  ).toBeTruthy();
+});
+test("isStringEditable for matrix dynamic", (): any => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  matrix.addColumn("col1");
+  matrix.rowCount = 1;
+  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
+  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
+});
+test("onGetIsStringEditable", (): any => {
+  const creator = new CreatorTester();
+  let lastEditableValue;
+  let callCount = 0;
+  let newValue;
+  creator.onAllowInplaceEdit.add((s, o) => {
+    lastEditableValue = o.allow;
+    callCount++;
+    if (newValue !== undefined) {
+      o.allow = newValue;
+    }
+  });
+  expect(lastEditableValue).toBeUndefined();
+  expect(callCount).toBe(0);
+
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeFalsy();
+  expect(lastEditableValue).toBeFalsy();
+  expect(callCount).toBe(1);
+
+  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeTruthy();
+  expect(callCount).toBe(2);
+
+  newValue = true;
+  expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeTruthy();
+  expect(lastEditableValue).toBeFalsy();
+  expect(callCount).toBe(3);
+});
+test("Restrict users from adding more than a specified number of questions to a survey Issue#7122", (): any => {
+  const creator = new CreatorTester();
+  creator.onAllowAddElement.add((sender, options) => {
+    if (options.name === "comment") {
+      const qs = creator.survey.getAllQuestions(true, true, true);
+      qs.filter(q => q.getType() === "comment");
+      options.allow = qs.length < 2;
+    }
+  });
+  const action = creator.toolbox.getActionById("comment");
+  expect(action).toBeTruthy();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  const pAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const pDuplicateAction = pAdorner.actionContainer.getActionById("duplicate");
+  const qAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const qDuplicateAction = qAdorner.actionContainer.getActionById("duplicate");
+  expect(qDuplicateAction).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pDuplicateAction.isVisible).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getAllQuestions()[0]);
+  expect(action.enabled).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  pAdorner.currentAddQuestionType = "comment";
+  pAdorner.addNewQuestion(pAdorner, undefined);
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  creator.JSON = { };
+  expect(action.enabled).toBeTruthy();
 });

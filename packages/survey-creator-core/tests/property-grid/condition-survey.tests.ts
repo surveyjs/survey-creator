@@ -1905,3 +1905,25 @@ test("Do not show comment for other if storeOthersAsComment is true/false", () =
   expect(radioQuestion2.showOtherItem).toBeTruthy();
   expect(radioQuestion2.comment).toBe("foo");
 });
+test("Show two radiogroups with the same valueName", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "radiogroup", choices: [1, 2, 3], valueName: "radio" },
+      { name: "q2", type: "radiogroup", choices: [4, 5, 6], valueName: "radio" },
+      { name: "q3", type: "radiogroup", choices: [6, 8, 9], valueName: "radio" },
+      { name: "test", type: "text" }
+    ]
+  });
+  const question = survey.getQuestionByName("test");
+  const conditionEditor = new ConditionEditor(survey, question, undefined, "visibleIf");
+  expect(conditionEditor.panel.panelCount).toBe(1);
+  const panel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(1);
+  expect(questionName.choices[0].value).toBe("radio");
+  //expect(questionName.choices[0].text).toBe("q1");
+  questionName.value = "radio";
+  const questionValue = <QuestionDropdownModel>panel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toBe("radiogroup");
+  expect(questionValue.choices).toHaveLength(8);
+});

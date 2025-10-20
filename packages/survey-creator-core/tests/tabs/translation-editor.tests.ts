@@ -5,6 +5,7 @@ import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { SurveyElementActionContainer } from "../../src/components/action-container-view-model";
+import { parse } from "papaparse";
 
 test("create locales question for edit translation", () => {
   const survey = new SurveyModel({
@@ -17,9 +18,9 @@ test("create locales question for edit translation", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: [{ value: "item1", text: { fr: "Item 1 fr" } }, "item2", "item3"]
           }
@@ -44,6 +45,52 @@ test("create locales question for edit translation", () => {
   const itemsGroup = qGroup.groups[0];
   expect(itemsGroup.groups).toHaveLength(0);
   expect(itemsGroup.items).toHaveLength(2);
+});
+test("onTranslationStringVisibility for editor, Bug#7094", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "title": "Survey title",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+        "title": "Page1 title"
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onTranslationStringVisibility.add((sender, options) => {
+    if (options.element.getType() == "survey" && options.propertyName === "title") {
+      options.visible = false;
+    } else if (options.element["name"] === "question1" && options.propertyName === "title") {
+      options.visible = false;
+    } else {
+      options.visible = true;
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model.createTranslationEditor("fr").translation;
+
+  expect(translation.root.items).toHaveLength(2);
+  expect(translation.root.groups).toHaveLength(2);
+  expect(translation.root.groups[0].name).toEqual("page1");
+  expect(translation.root.groups[0].items).toHaveLength(1);
+  expect(translation.root.groups[0].items[0].name).toEqual("title");
+  expect(translation.root.groups[1].name).toEqual("page2");
 });
 test("Apply changes on apply only", () => {
   const survey = new SurveyModel({
@@ -194,7 +241,7 @@ test("Implement machine translation for Creator", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("fr");
-  let actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  let actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(3);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -204,7 +251,7 @@ test("Implement machine translation for Creator", () => {
   });
   expect(creator.getHasMachineTranslation()).toBeTruthy();
   editor = tabTranslation.model.createTranslationEditor("fr");
-  actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(4);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -284,7 +331,7 @@ test("Machine translation from non default locale - UI", () => {
   tabTranslation.activate();
   const editor: TranslationEditor = tabTranslation.model.createTranslationEditor("es");
   expect(editor.fromLocales).toHaveLength(2);
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(4);
   expect(actions[1].visible).toBeTruthy();
 
@@ -305,7 +352,7 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
   expect(headerMatrix.columns[1].title).toBe("Source: Deutsch");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -316,8 +363,8 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Source: Français");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español");
+  expect(headerMatrix.columns[1].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
@@ -448,7 +495,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   creator.onMachineTranslate.add((sender, options) => {});
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "translation-tab:table-header-popup-editor") {
-      const actions = options.survey.navigationBar.actions;
+      const actions = options.survey.navigationBarTop.actions;
       actions.splice(actions.length - 3, 3);
     }
   });
@@ -456,7 +503,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const editor = tabTranslation.model.createTranslationEditor("de");
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
   expect(actions).toHaveLength(1);
 });
 
@@ -482,7 +529,7 @@ test("Check navigation bar in translation dialog", () => {
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("de");
   let stringsHeaderSurvey = editor.translation.stringsHeaderSurvey;
-  let navigationBar = stringsHeaderSurvey.navigationBar;
+  let navigationBar = stringsHeaderSurvey.navigationBarTop;
   expect(navigationBar).toBeInstanceOf(SurveyElementActionContainer);
   let fromLocaleAction = navigationBar.getActionById("svc-translation-fromlocale");
   expect(fromLocaleAction.location).toBe("start");
@@ -511,7 +558,7 @@ test("Check navigation bar in translation dialog", () => {
   tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   editor = tabTranslation.model.createTranslationEditor("de");
-  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
+  expect(editor.translation.stringsHeaderSurvey.navigationBarTop.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
 });
 test("Do not swap languages in the property grid on auto-translation, Bug#6548", () => {
   const creator = new CreatorTester();
@@ -549,4 +596,70 @@ test("Do not swap languages in the property grid on auto-translation, Bug#6548",
   expect(question.value).toHaveLength(3);
   expect(question.value[1]["name"]).toBe("fr");
   expect(question.value[2]["name"]).toBe("de");
+});
+test("Machine translation, editor & export, Bug#7059", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            description: "desc"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.getHasMachineTranslation()).toBeFalsy();
+  creator.onMachineTranslate.add((sender, options) => {
+    options.callback(["Title fr", "Desc fr"]);
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  const editor = translation.createTranslationEditor("fr");
+  const actions = editor.translation.stringsHeaderSurvey.navigationBarTop.actions;
+  expect(actions).toHaveLength(4);
+  expect(actions[3].id).toBe("svc-translation-export");
+  expect(actions[1].id).toBe("svc-translation-machine");
+  actions[1].action();
+  let exported = new Array<any>();
+  parse(editor.translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "fr"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(exported[1]).toEqual([
+    "survey.page1.q1.title",
+    "q1",
+    "Title fr"
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.q1.description",
+    "desc",
+    "Desc fr"
+  ]);
+  editor.cancel();
+  parse(translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(exported[1]).toEqual([
+    "survey.page1.q1.title",
+    "q1"
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.q1.description",
+    "desc"
+  ]);
 });

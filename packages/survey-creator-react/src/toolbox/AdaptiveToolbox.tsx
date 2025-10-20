@@ -9,7 +9,6 @@ export interface ISurveyCreatorToolboxProps {
   model: SurveyCreatorModel;
 }
 export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
-  private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: ISurveyCreatorToolboxProps) {
@@ -17,19 +16,23 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
     this.rootRef = React.createRef();
   }
 
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    const container = this.rootRef.current;
+    if (container) {
+      this.toolbox.afterRender(container);
+    }
+  }
+
   componentDidMount() {
     super.componentDidMount();
     const container = this.rootRef.current;
-    this.toolbox.setRootElement(container);
-    if (!container) return;
-    this.manager = new VerticalResponsivityManager(
-      this.toolbox.containerElement as HTMLDivElement,
-      this.toolbox
-    );
+    if (container) {
+      this.toolbox.afterRender(container);
+    }
   }
   componentWillUnmount() {
-    this.manager && (this.manager.dispose());
-    this.toolbox.setRootElement(undefined);
+    this.toolbox.beforeDestroy();
     super.componentWillUnmount();
   }
   public get creator() {
@@ -50,7 +53,11 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
 
   renderCategories() {
     return this.toolbox.categories.map((category, index) => {
-      return <SurveyCreatorToolboxCategory category={category} toolbox={this.toolbox} key={"category" + index} ></SurveyCreatorToolboxCategory>;
+      return ReactElementFactory.Instance.createElement("svc-toolbox-category", {
+        category,
+        toolbox: this.toolbox,
+        key: "category" + index
+      });
     });
   }
   renderSearch() {
@@ -67,11 +74,10 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
   }
 
   render(): React.JSX.Element {
-    if (!this.toolbox.hasActions) return null;
     const search = this.toolbox.showSearch ? this.renderSearch() : null;
     const placeholder = this.toolbox.showPlaceholder ? <div className="svc-toolbox__placeholder">{this.toolbox.toolboxNoResultsFound}</div> : null;
     return (
-      <div ref={this.rootRef} className={this.toolbox.classNames}>
+      <div ref={this.rootRef} className={this.toolbox.classNames} style={this.toolbox.getRootStyle()}>
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
           {search}
           {placeholder}

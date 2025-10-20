@@ -34,6 +34,7 @@ export class MatrixCellWrapperEditSurvey {
       (<any>survey).isPopupEditorContent = true;
       survey.showQuestionNumbers = "none";
       survey.questionTitleLocation = "hidden";
+      survey.locale = cellQuestion.getSurvey()?.getLocale();
     });
     this.question.setSurveyImpl(this.survey);
     this.question.inMatrixMode = true;

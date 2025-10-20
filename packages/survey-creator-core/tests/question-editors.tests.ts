@@ -339,3 +339,23 @@ test("Edit matrix cell question & default cellType, #5976", (): any => {
   expect(matrix.columns[0].cellType).toBe("dropdown");
   expect(matrix.columns[0].choices).toHaveLength(2);
 });
+test("Edit matrix cell question & survey locale", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    locale: "de",
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1" }],
+        "rows": ["row1", "row2"],
+        choices: [1, 2, 3, 4]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  creator.selectElement(matrix.columns[0]);
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  expect(editSurvey.survey.locale).toEqual("de");
+});

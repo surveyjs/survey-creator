@@ -10,6 +10,7 @@ export * from "../presets/presets-editable-base";
 //export * from "../presets/presets-languages";
 //export * from "../presets/presets-properties";
 export * from "../presets/preset-question-ranking";
+export * from "../presets/preset-question-json";
 import { checkLibraryVersion } from "survey-core";
 
 export let Version: string;

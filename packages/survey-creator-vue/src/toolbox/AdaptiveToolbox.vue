@@ -1,5 +1,5 @@
 <template>
-  <div :class="toolbox.classNames" ref="root">
+  <div :class="toolbox.classNames" ref="root" :style="toolbox.getRootStyle()">
     <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__panel">
       <div v-if="toolbox.showSearch" class="svc-toolbox__search-container">
         <template v-if="toolbox.isCompactRendered">
@@ -52,10 +52,9 @@
 </template>
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
-import { VerticalResponsivityManager } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, onUpdated, ref } from "vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const toolbox = computed(() => {
   return props.model.toolbox;
@@ -64,17 +63,14 @@ const toolbox = computed(() => {
 const root = ref<HTMLDivElement>();
 
 useBase(() => toolbox.value);
-let responsivityManager: VerticalResponsivityManager;
+onUpdated(() => {
+  toolbox.value.afterRender(root.value as HTMLDivElement);
+})
 onMounted(() => {
-  toolbox.value.setRootElement(root.value as HTMLDivElement);
-  responsivityManager = new VerticalResponsivityManager(
-    toolbox.value.containerElement as HTMLDivElement,
-    toolbox.value
-  );
+  toolbox.value.afterRender(root.value as HTMLDivElement);
 });
 onUnmounted(() => {
-  responsivityManager?.dispose();
-  toolbox.value.setRootElement(undefined as any);
+  toolbox.value.beforeDestroy();
 });
 const renderedActions = computed(() => toolbox.value.renderedActions);
 </script>

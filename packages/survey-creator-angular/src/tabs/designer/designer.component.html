@@ -1,6 +1,8 @@
 <ng-template #template>
   <div class="svc-flex-column">
-    <svc-toolbox *ngIf="model.isToolboxVisible" [model]="creator"></svc-toolbox>
+    <ng-container *ngIf="model.isToolboxVisible">
+      <ng-template [component]="{name: 'svc-toolbox', data: { model: creator }}"></ng-template>
+    </ng-container>
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
     <sv-scroll [onInnerHeightChanged]="model.setHasScroll">
@@ -14,9 +16,7 @@
             <svc-surface-placeholder [name]="'designer'" [placeholderTitleText]="model.placeholderTitleText"
               [placeholderDescriptionText]="model.placeholderDescriptionText">
             </svc-surface-placeholder>
-            <div class="svc-designer-placeholder-page">
-              <svc-page [model]="model.newPage" [survey]="survey" [creator]="creator" [isGhost]="true"></svc-page>
-            </div>
+            <svc-page-wrapper [page]="model.newPage" [creator]="creator" [isGhost]="true" [className]="'svc-designer-placeholder-page'"></svc-page-wrapper>
           </div>
         </ng-container>
         <ng-container *ngIf="!model.showPlaceholder">

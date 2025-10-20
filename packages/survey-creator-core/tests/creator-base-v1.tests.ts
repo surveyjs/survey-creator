@@ -305,6 +305,39 @@ test("onElementDeleting event", () => {
   expect(counter).toEqual(3);
 });
 
+test("onElementAllowOperations event for deleteCurrentElement", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+  let counter = 0;
+  let canRemove = true;
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowDelete = canRemove;
+    counter++;
+  });
+
+  const page = creator.survey.pages[0];
+  const q1 = page.addNewQuestion("text", "q1");
+  const q2 = page.addNewQuestion("text", "q2");
+  page.addNewQuestion("text", "q3");
+
+  expect(page.questions).toHaveLength(3);
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  creator.deleteCurrentElement();
+  expect(page.questions).toHaveLength(2);
+  expect(counter).toEqual(1);
+
+  canRemove = false;
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  creator.deleteCurrentElement();
+  expect(page.questions).toHaveLength(2);
+  expect(counter).toEqual(2);
+
+  canRemove = true;
+  creator.deleteCurrentElement();
+  expect(page.questions).toHaveLength(1);
+  expect(counter).toEqual(3);
+});
+
 test("Delete object and selectedElement property", () => {
   const creator = new CreatorTester();
   creator.JSON = {

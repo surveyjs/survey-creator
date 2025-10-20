@@ -105,7 +105,7 @@ test("getProperty function breaks on word automatically", () => {
 test("add de localization", () => {
   const deutschStrings = {
     p: {
-      isRequired: "Wird benötigt",
+      isRequired: "Wird benötigt", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     },
   };
   editorLocalization.locales["de"] = deutschStrings;
@@ -278,13 +278,12 @@ test("Get property name from pe. based on class name", () => {
   editorLocalization.defaultLocale = "fr";
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
   editorLocalization.defaultLocale = "en";
 });
 test("Support preset locale strings", () => {
   editorLocalization.currentLocale = "";
   editorLocalization.defaultLocale = "en";
-  editorLocalization.reset();
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
   editorLocalization.getLocale().pe.survey.title = "Survey title";
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
@@ -293,7 +292,7 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
 
   editorLocalization.presetStrings = {
     en: { qt: { text: "Text - en preset" }, pe: { survey: { title: "Survey title - en preset" } } },
@@ -319,7 +318,7 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
   editorLocalization.defaultLocale = "it";
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo del sondaggio");
 
   editorLocalization.defaultLocale = "";
 });
@@ -328,7 +327,7 @@ test("All properties should be in English translation", () => {
   const addClasses = (baseClassName: string): void => {
     classes.push(baseClassName);
     Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {
-      if (["linkvalue", "color", "slider"].indexOf(qType.name) < 0) {
+      if (["linkvalue", "color"].indexOf(qType.name) < 0) {
         classes.push(qType.name);
       }
     });
@@ -373,4 +372,27 @@ test("getLocaleStrings function, Bug#6754", () => {
   expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
   expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
   editorLocalization.defaultLocale = "en";
+});
+test("creator.sidebar.header.title & creator.locale, bug#7130", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  expect(creator.sidebar.header.title).toBe("Survey Settings");
+  creator.locale = "fr";
+  creator.JSON = {};
+  expect(creator.sidebar.header.title).toBe("Paramètres du sondage"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  creator.activeTab = "translation";
+  expect(creator.sidebar.header.title).toBe("Traduction");
+  creator.locale = "en";
+  expect(creator.sidebar.header.title).toBe("Language Settings");
+});
+test("Preset strings", () => {
+  editorLocalization.presetStrings = {
+    en: {
+      qt: { text: "Text - en preset" }, pe: { survey: { title: "Survey title - en preset" } },
+      pehelp: { panel: { description: "Some code" } } }
+  };
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - en preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - en preset");
+  expect(editorLocalization.getPropertyHelpInEditor("panel", "description")).toEqual("Some code");
+  expect(editorLocalization.getPropertyHelpInEditor("panel", "name")).toEqual("A panel ID that is not visible to respondents.");
+  editorLocalization.presetStrings = undefined;
 });

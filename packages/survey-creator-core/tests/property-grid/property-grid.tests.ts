@@ -2,7 +2,8 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
   PropertyGridEditorBoolean,
-  IPropertyGridEditor
+  IPropertyGridEditor,
+  PropertyGridModel
 } from "../../src/property-grid";
 import {
   Base,
@@ -55,7 +56,7 @@ import { SurveyQuestionEditorDefinition } from "../../src/question-editor/defini
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
 import { CreatorTester } from "../creator-tester";
-import { QuestionButtonGroupModel } from "survey-core";
+import { setupLocale } from "../../src/editorLocalization";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -305,7 +306,7 @@ test("itemvalue[] property editor", () => {
   expect(choicesQuestion.visibleRows[0].cells[0].value).toEqual(1); //"the first cell value is 3"
   choicesQuestion.addRow();
   expect(question.choices).toHaveLength(4); // "There are 4 items now");
-  expect(question.choices[3].getType()).toEqual("itemvalue"); //correct class created
+  expect(question.choices[3].getType()).toEqual("choiceitem"); //correct class created
   expect(choicesQuestion.visibleRows[3].cells[0].value).toEqual(4);
   expect(question.choices[3].value).toEqual(4); //"The last item value is 4");
   question.choices[1].text = "Item 2";
@@ -423,7 +424,7 @@ test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
   expect(choicesQuestion.columns).toHaveLength(2);
   const row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.elements).toHaveLength(4);
+  expect(row.detailPanel.elements).toHaveLength(7);
   const thirdElement = row.detailPanel.elements[2];
   expect(thirdElement.name).toEqual("prop1");
   expect(thirdElement.getType()).toEqual("dropdown");
@@ -444,7 +445,7 @@ test("itemvalue[] custom add showMode as 'form', create in general category by d
   expect(choicesQuestion.columns).toHaveLength(2);
   const row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.elements).toHaveLength(4);
+  expect(row.detailPanel.elements).toHaveLength(7);
   const thirdElement = row.detailPanel.elements[2];
   expect(thirdElement.name).toEqual("prop1");
 
@@ -2958,8 +2959,8 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   const actions1 = choicesQuestion.renderedTable.rowsActions[0];
   expect(actions1).toHaveLength(2);
 
-  const oldDefinition = SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
+  const oldDefinition = SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = [
     { name: "general", visible: false }
   ];
   const propertyGrid2 = new PropertyGridModelTester(question, options);
@@ -2968,7 +2969,7 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   );
   const actions2 = choicesQuestion2.renderedTable.rowsActions[0];
   expect(actions2).toHaveLength(1);
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = oldDefinition;
+  SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = oldDefinition;
 });
 test("choices and onCollectionItemDeleting", () => {
   const question = new QuestionDropdownModel("q1");
@@ -3873,4 +3874,147 @@ test("Pages Collection Editor - The Trash Bin (Remove) button is unavailable whe
   expect(cell.isActionsCell).toBeTruthy();
   container = <ActionContainer>cell.item.value;
   expect(container.getActionById("remove-row")).toBeTruthy();
+});
+test("If a property becomes in different categories for different question types it can lead to errors, Bug#6997", () => {
+  Serializer.addProperty("matrix", { name: "isRequired:boolean", category: "validation" });
+  expect(Serializer.findProperty("question", "isRequired").category).toBeFalsy();
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "matrix", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  let propertyGrid = new PropertyGridModelTester(q1);
+  let requiredQ = propertyGrid.survey.getQuestionByName("isRequired");
+  expect(requiredQ).toBeTruthy();
+  expect(requiredQ.parent.name).toBe("validation");
+  propertyGrid = new PropertyGridModelTester(q2);
+  requiredQ = propertyGrid.survey.getQuestionByName("isRequired");
+  expect(requiredQ).toBeTruthy();
+  expect(requiredQ.parent.name).toBe("general");
+
+  Serializer.removeProperty("matrix", "isRequired");
+});
+test("Unique question name property & whitespace, Bug#7022", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+  };
+  const q2 = creator.survey.getQuestionByName("q2");
+  const propertyGrid = new PropertyGridModelTester(q2, creator);
+  const questionName = propertyGrid.survey.getQuestionByName("name");
+  expect(questionName.value).toBe("q2");
+  questionName.value = "q1";
+  expect(questionName.errors).toHaveLength(1);
+  expect(q2.name).toBe("q2");
+  questionName.value = "q1 ";
+  expect(questionName.errors).toHaveLength(1);
+  expect(q2.name).toBe("q2");
+});
+test("Unique page name property & whitespace, Bug#7022", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [{ name: "page1" }, { name: "page2" }]
+  };
+  const page2 = creator.survey.getPageByName("page2");
+  const propertyGrid = new PropertyGridModelTester(page2, creator);
+  const questionName = propertyGrid.survey.getQuestionByName("name");
+  expect(questionName.value).toBe("page2");
+  questionName.value = "page1";
+  expect(questionName.errors).toHaveLength(1);
+  expect(page2.name).toBe("page2");
+  questionName.value = "page1 ";
+  expect(questionName.errors).toHaveLength(1);
+  expect(page2.name).toBe("page2");
+});
+test("Single matrix cellType property editor", () => {
+  const survey = new SurveyModel({
+    elements: [{ type: "matrix", name: "q1" }]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const questionCellType = propertyGrid.survey.getQuestionByName("cellType");
+  expect(questionCellType.getType()).toBe("buttongroup");
+  expect(questionCellType.choices).toHaveLength(2);
+  expect(questionCellType.choices[0].value).toBe("radio");
+  expect(questionCellType.choices[1].value).toBe("checkbox");
+  expect(questionCellType.choices[0].text).toBe("Radio Buttons");
+  expect(questionCellType.choices[1].text).toBe("Checkboxes");
+});
+test("The progressBarLocation property values appear unlocalized when applying a custom locale, Bug#7110", () => {
+  const localeStringsEn = {
+    pe: {
+      questionOrder: "Form field order",
+      questionTitleLocation: "Field title location",
+    },
+  };
+  setupLocale({ localeCode: "customlocale", strings: localeStringsEn });
+
+  const creator = new CreatorTester();
+  creator.locale = "customlocale";
+  const propertyGrid = new PropertyGridModelTester(creator.survey, creator);
+  const questionOrder = propertyGrid.survey.getQuestionByName("questionOrder");
+  expect(questionOrder.title).toBe("Form field order");
+  const progressBarLocation = propertyGrid.survey.getQuestionByName("progressBarLocation");
+  expect(progressBarLocation.choices[0].text).toBe("Auto");
+  expect(progressBarLocation.choices[1].text).toBe("Above the header");
+
+  creator.locale = "en";
+});
+test("The property is not translated for the custom question, Bug#7118", () => {
+  ComponentCollection.Instance.add({
+    name: "customsignature",
+    inheritBaseProps: true,
+    questionJSON: {
+      type: "signaturepad"
+    },
+  });
+
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "customsignature", name: "q1" }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionShowPlaceHolder = propertyGrid.survey.getQuestionByName("showPlaceholder");
+  expect(questionShowPlaceHolder.title).toBe("Show a placeholder within signature area");
+
+  ComponentCollection.Instance.clear();
+});
+test("The property is not translated for the custom question, Bug#7202", () => {
+  Serializer.addProperty("question", { name: "testProp", category: "myTestCategory", readOnly: true });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+  propertyGrid.selectProperty("testProp", true);
+  expect(propertyGrid.survey.currentPage.title).toBe("myTestCategory");
+
+  Serializer.removeProperty("question", "testProp");
+});
+test("Choices as function & async function, Bug#7207", () => {
+  Serializer.addProperty("dropdown", {
+    name: "func",
+    choices: (obj: any, choicesCallback: any) => {
+      choicesCallback([1, 2, 3]);
+    },
+  });
+
+  Serializer.addProperty("dropdown", {
+    name: "asyncFunc",
+    choices: async (obj: any, choicesCallback: any) => {
+      choicesCallback([1, 2, 3]);
+    }
+  });
+
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+  expect(propertyGrid.survey.getQuestionByName("func").getType()).toEqual("dropdown");
+  expect(propertyGrid.survey.getQuestionByName("asyncFunc").getType()).toEqual("dropdown");
+
+  Serializer.removeProperty("dropdown", "func");
+  Serializer.removeProperty("dropdown", "asyncFunc");
 });

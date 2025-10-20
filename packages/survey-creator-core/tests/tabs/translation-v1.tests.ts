@@ -38,9 +38,10 @@ test("Test question choices localization", () => {
     }
   }
   expect(choices).toBeTruthy();
-  expect(choices.items).toHaveLength(2);
+  expect(choices.items).toHaveLength(4);
   expect(choices.items[0].name).toEqual("item1");
-  expect(choices.items[1].name).toEqual("item2");
+  expect(choices.items[1].name).toEqual("item1.commentPlaceholder");
+  expect(choices.items[2].name).toEqual("item2");
 });
 test("Question choices localization with value=0", () => {
   const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");
@@ -54,9 +55,10 @@ test("Question choices localization with value=0", () => {
     }
   }
   expect(choices).toBeTruthy();
-  expect(choices.items).toHaveLength(2);
+  expect(choices.items).toHaveLength(4);
   expect(choices.items[0].name).toEqual(0);
-  expect(choices.items[1].name).toEqual(1);
+  expect(choices.items[1].name).toBe("0.commentPlaceholder");
+  expect(choices.items[2].name).toEqual(1);
 });
 
 test("Survey child groups", () => {
@@ -172,9 +174,9 @@ test("disable locales", () => {
             name: "question1",
             title: {
               default: "question 1",
-              fr: "quéstion 1",
-              it: "quéstion 1",
-              es: "quéstion 1"
+              fr: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              it: "quéstion 1", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+              es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
             },
             choices: ["item1", "item2", "item3"]
           }
@@ -359,7 +361,7 @@ test("Import from array", () => {
   const translation: Translation = new Translation(survey);
 
   translation.importFromNestedArray([
-    ["description ↓ - language →", "default", "de"],
+    ["description ↓ - language →", "default", "de"], // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     ["survey.page1.question1.title", "question1_1", ""],
     ["survey.page1.question1.col1.title", "col1 en1", "col1 de1"]
   ]);
@@ -428,7 +430,7 @@ test("Export to array", () => {
   });
 
   expect(exported).toHaveLength(7);
-  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de"]);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(exported[1]).toEqual([
     "survey.page1.question1.title",
     "question1",
@@ -576,11 +578,13 @@ test("Custom localizable property in itemvalue", () => {
   );
   expect(choicesGroup).toBeTruthy();
   expect(choicesGroup.isGroup).toBeTruthy();
-  expect(choicesGroup.items).toHaveLength(4);
+  expect(choicesGroup.items).toHaveLength(6);
   expect(choicesGroup.items[0].name).toEqual("1");
   expect(choicesGroup.items[1].name).toEqual("1.customProp");
-  expect(choicesGroup.items[2].name).toEqual("2");
-  expect(choicesGroup.items[3].name).toEqual("2.customProp");
+  expect(choicesGroup.items[2].name).toEqual("1.commentPlaceholder");
+  expect(choicesGroup.items[3].name).toEqual("2");
+  expect(choicesGroup.items[4].name).toEqual("2.customProp");
+  expect(choicesGroup.items[5].name).toEqual("2.commentPlaceholder");
   Serializer.removeProperty("itemvalue", "customProp");
 });
 

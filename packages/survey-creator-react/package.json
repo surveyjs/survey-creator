@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "2.1.1",
+  "version": "2.3.11",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -40,7 +40,10 @@
     "e2e": "playwright test --project e2e --ui",
     "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
-    "test:scr:ci": "playwright test --project scr"
+    "test:scr:ci": "playwright test --project scr",
+    "test:scr:copy:tests": "node copy-src-tests.js",
+    "test:scr:legacy": "node copy-src-tests.js && playwright test --project scr_legacy --ui",
+    "test:scr:legacy:ci": "node copy-src-tests.js && playwright test --project scr_legacy"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.0",

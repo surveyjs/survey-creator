@@ -27,10 +27,14 @@ export class ToolboxToolViewModel extends Base {
         popup.isFocusedContent = false;
       }
     }
+    if (typeof item.enabled === "undefined") {
+      item.enabled = true;
+    }
   }
 
   public click = (event) => {
     if (!this.allowAdd) return;
+    if (!this.toolboxItem.enabled) return;
     this.creator.clickToolboxItem(this.item.json);
     this.hidePopup();
   };
@@ -77,6 +81,7 @@ export class ToolboxToolViewModel extends Base {
   };
 
   private startDragToolboxItem = (pointerDownEvent: PointerEvent) => {
+    if (!this.toolboxItem.enabled) return;
     var json = this.creator.getJSONForNewElement(this.item.json);
     this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, this.item);
     return true;

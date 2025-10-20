@@ -1,4 +1,4 @@
-import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property } from "survey-core";
+import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property, UpdateResponsivenessMode } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { ICreatorPlugin } from "./creator-settings";
 import { listComponentCss } from "./components/list-theme";
@@ -9,8 +9,11 @@ export interface ITabbedMenuItem extends IAction {
 }
 
 export class TabbedMenuItem extends Action implements ITabbedMenuItem {
+  @property({ defaultValue: false }) showIcon: boolean;
+  @property({ defaultValue: true }) showTitle: boolean;
   constructor(item: ITabbedMenuItem) {
     super(item);
+    this.enabled = true;
   }
   componentContent: string;
   renderTab?: () => any;
@@ -30,14 +33,28 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   getIconCss(): string {
     return new CssClassBuilder().append("svc-tabbed-menu-item__icon").toString();
   }
+  public get canShrink() {
+    return !!this.hasIcon;
+  }
   public get hasTitle(): boolean {
-    return !this.hasIcon;
+    return this.showTitle && !!this.title;
   }
   public get hasIcon(): boolean {
-    return !this.disableShrink && this.iconName && this.mode == "small";
+    return this.showIcon && !!this.iconName;
+  }
+  public doAction(): boolean {
+    if (!this.enabled) return false;
+    this.action();
+    return true;
   }
 }
+
+export enum TabbedMenuMode {
+  Icons = 1,
+  Titles = 2
+}
 export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
+  private currentMode: TabbedMenuMode = TabbedMenuMode.Titles;
   constructor(private creator: CreatorBase) {
     super();
     this.dotsItem.popupModel.horizontalPosition = "center";
@@ -56,6 +73,9 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     index?: number) {
     const tabName = name === "test" ? "preview" : name;
     const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
+    const actionHandler = function(name) {
+      this.creator.switchTab(name);
+    };
     const tab = new TabbedMenuItem({
       id: name,
       locTitleName: locStrName,
@@ -63,21 +83,22 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       iconName: iconName || "icon-undefined-24x24",
-      action: () => { this.creator.switchTab(name); },
+      action: actionHandler.bind(this, name),
       active: this.creator.viewType === name,
       disableHide: this.creator.viewType === name
     });
-    tab.disableShrink = this.creator.tabResponsivenessMode == "menu";
     if (index !== undefined && index >= 0 && index < this.actions.length) {
       this.actions.splice(index, 0, tab);
     } else {
       this.actions.push(tab);
     }
   }
-  public updateResponsivenessMode() {
-    this.actions.forEach((tab) => {
-      tab.disableShrink = this.creator.tabResponsivenessMode == "menu";
-    });
-    this.raiseUpdate(true);
+  public setMode(mode: TabbedMenuMode) {
+    if (mode !== this.currentMode) {
+      this.actions.forEach(a => a.showIcon = !!(mode & TabbedMenuMode.Icons));
+      this.actions.forEach(a => a.showTitle = !!(mode & TabbedMenuMode.Titles));
+      this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
+    }
+    this.currentMode = mode;
   }
 }

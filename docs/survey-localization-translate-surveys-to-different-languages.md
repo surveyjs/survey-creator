@@ -61,7 +61,7 @@ creator.locale = "fr";
 
 ### Override Individual Translations
 
-You can modify individual translation strings. Call the `getLocale(locale)` method to get an object with locale translations. Refer to any [dictionary file](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) for information about the structure of this object. To modify a translation string, change the corresponding object property:
+You can modify individual translation strings. Call the `getLocaleStrings(locale)` method to get an object with locale translations. Refer to any [dictionary file](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) for information about the structure of this object. To modify a translation string, change the corresponding object property:
 
 ```js
 // Get English translations
@@ -103,11 +103,21 @@ editorLocalization.defaultLocale = "fr";
 
 ## Localize Survey Contents
 
-If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select a default language different from English:
+If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select different languages and provide translations for them:
 
-<img src="./images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Default Language dropdown" width="50%">
+<img src="./images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Survey Language dropdown" width="1544" height="688">
 
-If you want to restrict the list of available languages, specify the `supportedLocales` array:
+The default language is English, so text properties that support translations (such as `title`, `description`, etc.) are supposed to store English strings. To use another language as the default (for example, if surveys are primarily authored in German or French), set the `surveyLocalization.defaultLocale` property. Text properties will then store strings in the specified language.
+
+```js
+Survey.surveyLocalization.defaultLocale = "fr";
+
+// In modular applications
+import { surveyLocalization } from 'survey-core';
+surveyLocalization.defaultLocale = "fr";
+```
+
+To limit the list of languages available for translation in the Survey Creator UI, specify the `surveyLocalization.supportedLocales` array:
 
 ```js
 Survey.surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
@@ -117,7 +127,11 @@ import { surveyLocalization } from 'survey-core';
 surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
 ```
 
-Predefined survey texts are translated into the selected language automatically. SurveyJS Form Library takes translation strings from [community-supported dictionaries](https://github.com/surveyjs/survey-library/tree/01bd8abd0c574719956d4d579d48c8010cd389d4/packages/survey-core/src/localization). Custom texts (questions, choices, page titles, error messages) should be translated by Survey Creator users in the Translation tab. To display it, enable the [`showTranslationTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showTranslationTab) property as shown below. Note that users can specify translation strings only for the languages that you list in the `supportedLocales` array.
+Predefined survey texts are translated into the selected language automatically. SurveyJS Form Library takes translation strings from [community-supported dictionaries](https://github.com/surveyjs/survey-library/tree/01bd8abd0c574719956d4d579d48c8010cd389d4/packages/survey-core/src/localization). Custom texts (questions, choices, page titles, error messages) should be translated by Survey Creator users in the Translation tab:
+
+<img src="./images/translation-tab.png" alt="Survey Creator - Translation tab" width="1544" height="612">
+
+To display the Translation tab, enable the [`showTranslationTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showTranslationTab) property as shown below. Note that users can specify translation strings only for the languages that you list in the `supportedLocales` array.
 
 ```js
 const creatorOptions = {

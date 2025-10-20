@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 import { QuestionToolbox, QuestionToolboxCategory, QuestionToolboxItem } from "survey-creator-core";
 
 @Component({
@@ -17,3 +17,5 @@ export class ToolboxCategoryComponent extends BaseAngular<QuestionToolboxCategor
     return item.renderedId;
   }
 }
+
+AngularComponentFactory.Instance.registerComponent("svc-toolbox-category", ToolboxCategoryComponent);

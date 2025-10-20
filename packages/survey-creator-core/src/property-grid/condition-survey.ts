@@ -292,7 +292,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       if (this.panel.panelCount > 0)
         this.panel.panels[0].getQuestionByName("questionName").titleLocation = "left";
     });
-    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+    this.editSurvey.onDynamicPanelValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
     this.editSurvey.css = logicCss;
@@ -344,7 +344,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "conjunction",
               type: "dropdown",
               renderAs: "logicoperator",
-              searchEnabled: false,
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
@@ -367,7 +366,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "operator",
               type: "dropdown",
               renderAs: "logicoperator",
-              searchEnabled: false,
               titleLocation: "hidden",
               startWithNewLine: false,
               showOptionsCaption: false,
@@ -683,13 +681,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (questions.length > 0) {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
-        if (contextObject == question) continue;
+        if (contextObject === question) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
         if (settings.logic.includeComplexQuestions && question.isContainer) {
           res.push({ question: question, name: question.name, text: question.title });
         }
         question.addConditionObjectsByContext(res, context);
       }
+      this.mergeSelectBasedQuestions(res);
     }
 
     const variableNames = this.survey.getVariableNames();
@@ -748,6 +747,68 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       }
       names.push(item.name);
     });
+  }
+  private mergeSelectBasedQuestions(res: Array<any>): void {
+    const selectBaseHash = {};
+    for (let i = 0; i < res.length; i++) {
+      if (res[i].context) continue;
+      const q: Question = res[i].question;
+      if (q.isDescendantOf("selectbase")) {
+        const valueName = q.getFilteredName();
+        let qs = selectBaseHash[valueName];
+        if (!selectBaseHash[valueName]) {
+          qs = [];
+          selectBaseHash[valueName] = qs;
+        }
+        if (qs.length === 0 || qs[0].getType() === q.getType()) {
+          qs.push(q);
+        }
+      }
+    }
+    for (const valueName in selectBaseHash) {
+      const qs = selectBaseHash[valueName];
+      if (qs.length < 2) continue;
+      this.replaceQuestions(res, qs);
+    }
+  }
+  private replaceQuestions(res: Array<any>, arr: Array<Question>): void {
+    const json = arr[0].toJSON();
+    json.type = arr[0].getType();
+    if (!json.choices) {
+      json.choices = [];
+    }
+    for (let i = 1; i < arr.length; i++) {
+      this.mergeSelectBasedTwoQuestions(arr[0], arr[i], json);
+    }
+    const question = Serializer.createClass(json.type, json);
+    for (let i = 0; i < arr.length; i++) {
+      this.mergeChoices(question, arr[i]);
+    }
+    for (let i = res.length - 1; i >= 0; i--) {
+      const item = res[i];
+      const index = arr.indexOf(item.question);
+      if (index > 0) {
+        res.splice(i, 1);
+      } else if (index === 0) {
+        item.question = question;
+      }
+    }
+  }
+  private mergeSelectBasedTwoQuestions(q1: Question, q2: Question, json: any): void {
+    const js = q2.toJSON();
+    for (let key in js) {
+      if (Helpers.isValueEmpty(json[key])) {
+        json[key] = js[key];
+      }
+    }
+  }
+  private mergeChoices(q1: Question, q2: Question): void {
+    for (let i = 0; i < q2.choices.length; i++) {
+      const choice = q2.choices[i];
+      if (!ItemValue.getItemByValue(q1.choices, choice.value)) {
+        q1.choices.push(new ItemValue(choice.value, choice.text));
+      }
+    }
   }
   private calculatedValueQuestion: Question = null;
   private getCalculatedValueQuestion(): Question {

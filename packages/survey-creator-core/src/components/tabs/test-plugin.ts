@@ -20,6 +20,8 @@ export class TabTestPlugin implements ICreatorPlugin {
   private nextPageAction: Action;
   private simulatorTheme: any = surveyCss[defaultThemeName];
 
+  public static iconName = "icon-preview";
+
   public model: TestSurveyTabViewModel;
   private _previewDevice: string = "";
   public get previewDevice(): string {
@@ -89,7 +91,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "preview", plugin: this, iconName: "icon-preview" });
+    creator.addTab({ name: "preview", plugin: this, iconName: TabTestPlugin.iconName });
     this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
@@ -167,7 +169,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         cssClasses: listComponentCss,
         onHide: () => { this.deviceSelectorAction.enabled = true; },
         onShow: () => { this.deviceSelectorAction.enabled = false; }
-      });
+      }, this.creator);
       items.push(this.deviceSelectorAction);
 
       this.orientationSelectorAction = new Action({
@@ -225,7 +227,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       cssClasses: listComponentCss,
       onHide: () => { this.languageSelectorAction.enabled = true; },
       onShow: () => { this.languageSelectorAction.enabled = false; }
-    });
+    }, this.creator);
     items.push(this.languageSelectorAction);
 
     this.designerAction = new Action({

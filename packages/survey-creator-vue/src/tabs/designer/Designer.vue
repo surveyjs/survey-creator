@@ -130,4 +130,5 @@ const props = defineProps<{ model: TabDesignerViewModel }>();
 const survey = computed(() => props.model.survey);
 useBase(() => props.model);
 useBase(() => survey.value);
+useBase(() => props.model.pagesController);
 </script>

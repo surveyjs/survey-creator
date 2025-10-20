@@ -42,6 +42,7 @@ test("SearchManager: highlightedEditorClass", () => {
 
   expect(getHighlightedEditors(survey)).toHaveLength(0);
   searchManager.filterString = "st";
+  searchManager.searchActionBar.flushUpdates();
 
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
@@ -81,7 +82,7 @@ test("SearchManager: matchCounterText", () => {
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
-
+  searchManager.searchActionBar.flushUpdates();
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
@@ -103,11 +104,64 @@ test("SearchManager: matchCounterText", () => {
   expect(searchManager.matchCounterText).toBe("3/3");
 });
 
+test("SearchManager: matchCounterText with visibility", () => {
+  const searchManager = new SearchManagerPropertyGrid();
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1",
+        "title": "First"
+      },
+      {
+        "type": "text",
+        "name": "q2",
+        "title": "Test",
+        "visible": "false",
+      },
+      {
+        "type": "text",
+        "name": "q3",
+        "title": "Last"
+      },
+      {
+        "type": "panel",
+        "name": "p1",
+        "visible": "false",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q4",
+            "title": "Best"
+          },
+        ]
+      },
+    ]
+  });
+  searchManager.setSurvey(survey);
+  searchManager.filterString = "st";
+  searchManager.searchActionBar.flushUpdates();
+  const prevAction = searchManager.searchActionBar.visibleActions[0];
+  const nextAction = searchManager.searchActionBar.visibleActions[1];
+  expect(searchManager.searchActionBar.actions).toHaveLength(3);
+  expect(searchManager.searchActionBar.visibleActions).toHaveLength(3);
+  expect(prevAction.visible).toBeTruthy();
+  expect(nextAction.visible).toBeTruthy();
+  expect(searchManager.matchCounterText).toBe("1/2");
+
+  nextAction.action();
+  expect(searchManager.matchCounterText).toBe("2/2");
+
+  nextAction.action();
+  expect(searchManager.matchCounterText).toBe("1/2");
+});
+
 test("SearchManager: enabled searchActionBar items", () => {
   const searchManager = new SearchManagerPropertyGrid();
   const survey = createSurvey();
   searchManager.setSurvey(survey);
   searchManager.filterString = "st";
+  searchManager.searchActionBar.flushUpdates();
 
   const prevAction = searchManager.searchActionBar.visibleActions[0];
   const nextAction = searchManager.searchActionBar.visibleActions[1];
@@ -120,6 +174,7 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(searchManager.matchCounterText).toBe("1/3");
 
   searchManager.filterString = "aaa";
+  searchManager.searchActionBar.flushUpdates();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
   expect(prevAction.visible).toBeFalsy();
   expect(nextAction.visible).toBeFalsy();
@@ -127,6 +182,7 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(searchManager.matchCounterText).toBe("No results found");
 
   searchManager.filterString = "First";
+  searchManager.searchActionBar.flushUpdates();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
   expect(prevAction.visible).toBeFalsy();
   expect(nextAction.visible).toBeFalsy();
@@ -134,6 +190,7 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(searchManager.matchCounterText).toBe("");
 
   clearAction.action();
+  searchManager.searchActionBar.flushUpdates();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(0);
   expect(searchManager.filterString).toBe("");
 });
@@ -145,7 +202,7 @@ test("SearchManager: normalizeTextCallback", () => {
       {
         "type": "text",
         "name": "q1",
-        "title": "brouillé"
+        "title": "brouillé" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
       },
       {
         "type": "text",

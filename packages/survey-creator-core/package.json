@@ -1,5 +1,5 @@
 {
-  "version": "2.1.1",
+  "version": "2.3.11",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -63,7 +63,7 @@
     "postcss-calc": "9.0.1",
     "postcss-cli": "10.1.0",
     "postcss-fail-on-warn": "0.2.1",
-    "postcss-import": "^16.1.0",
+    "postcss-import": "16.1.0",
     "rimraf": "2.5.4",
     "rollup": "^4.34.8",
     "rollup-plugin-license": "^3.6.0",

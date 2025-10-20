@@ -19,6 +19,7 @@
     position: relative;
     outline: none;
     z-index: 12;
+    max-width: 100%;
 
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
@@ -178,7 +179,6 @@
 
 .sd-rating {
   .sd-rating__item:focus-within {
-
     &:not(.sd-rating__min-text),
     &:not(.sd-rating__max-text) {
       .svc-string-editor:focus-within {
@@ -216,11 +216,11 @@
   }
 }
 
+sv-ng-string,
 .svc-string-editor {
-
   &:hover,
   &:focus-within {
-    &~.sd-question__required-text {
+    & ~ .sd-question__required-text {
       visibility: hidden;
     }
   }

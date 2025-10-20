@@ -19,7 +19,9 @@ import {
   surveyLocalization,
   ComputedUpdater,
   AnimationBoolean,
-  IAnimationConsumer
+  IAnimationConsumer,
+  VerticalResponsivityManager,
+  UpdateResponsivenessMode
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -59,7 +61,8 @@ export interface IQuestionToolboxItem extends IAction {
   /**
    * A user-friendly toolbox item title.
    */
-  title: string;
+  title?: string;
+  titles?: { [locale: string]: string };
   className?: string;
   /**
    * A toolbox item tooltip.
@@ -140,6 +143,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propValue: string;
   public showInToolboxOnly: boolean = false;
   public needDefaultSubitem: boolean = undefined;
+  @property() isDisabledByRestriction: boolean;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -167,6 +171,8 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .toString();
     }) as any;
   }
+  titles: { [locale: string]: string };
+  elementId?: string;
   /**
    * A user-friendly toolbox item title.
    */
@@ -186,6 +192,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   public set enabled(val: boolean) {
     this.setEnabled(val);
+  }
+  public getEnabled(): boolean {
+    if (this.isDisabledByRestriction) return false;
+    return super.getEnabled() !== false;
   }
   className: string;
 
@@ -450,13 +460,13 @@ export class QuestionToolbox
     if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch ||
       this.creator && this.creator.toolboxLocation === "sidebar") {
       this.isResponsivenessDisabled = true;
-      this.updateCallback && this.updateCallback(true);
+      this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
       return;
     }
     if (this.hasCategories && this.showCategoryTitles) {
       if (isCompact) {
         this.isResponsivenessDisabled = false;
-        this.raiseUpdate(true);
+        this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
       } else {
         this.isResponsivenessDisabled = true;
         this.setActionsMode("large");
@@ -464,7 +474,7 @@ export class QuestionToolbox
       return;
     }
     this.isResponsivenessDisabled = false;
-    this.raiseUpdate(true);
+    this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
   }
   /**
    * Indicates whether the Toolbox is currently in [compact mode](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#forceCompact).
@@ -590,9 +600,11 @@ export class QuestionToolbox
       title: surveyLocalization.getString("ed.toolboxSearch"),
       showTitle: false,
       action: () => {
+        if (!this.enabled) return;
         (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
-      }
+      },
+      enabled: this.enabled
     });
     this.updateResponsiveness(this.isCompact, this.overflowBehavior);
     this.createDefaultItems(supportedQuestions, useDefaultCategories);
@@ -611,17 +623,19 @@ export class QuestionToolbox
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper<IQuestionToolboxItem>((pointerDownEvent, _targets, itemModel) => {
+      if (!this.enabled) return;
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
-    });
+    }, false);
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
-      if (!this.creator.readOnly) {
+      if (!this.creator.readOnly && this.enabled) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
+    this.dotsItem.data.locOwner = this.creator;
     this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
@@ -686,11 +700,13 @@ export class QuestionToolbox
       .append("svc-toolbox--flyout-to-compact-running", this.isFlyoutToCompactRunning)
       .append("svc-toolbox--compact", this.isCompactRendered)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
-      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
+      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll")
+      .append("svc-toolbox--disabled", !this.enabled)
+      .toString();
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
-      this.visibleActions.forEach((item) => (item.mode = "small"));
+      this.getVisibleActions().forEach((item) => (item.mode = "small"));
     } else {
       this.dotsItem.popupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
     }
@@ -834,6 +850,8 @@ export class QuestionToolbox
     this.onItemsChanged();
   }
   private correctItem(item: IQuestionToolboxItem) {
+    if (!item.id) item.id = item.name;
+    this.updateActionTitle(item);
     if (!item.title) item.title = item.name;
     if (!item.tooltip) item.tooltip = item.title;
   }
@@ -969,8 +987,21 @@ export class QuestionToolbox
     });
   }
   private updateActionTitle(action: IAction): void {
-    const newTitle = editorLocalization.getString("qt." + action.id);
-    if (!!newTitle && newTitle !== action.id) {
+    let newTitle = "";
+    const titles = action["titles"];
+    if (!!titles) {
+      newTitle = titles[editorLocalization.locale];
+      if (!newTitle) {
+        newTitle = titles["default"];
+      }
+    }
+    if (!newTitle) {
+      newTitle = editorLocalization.getString("qt." + action.id);
+      if (newTitle === action.id) {
+        newTitle = "";
+      }
+    }
+    if (!!newTitle) {
       action.title = newTitle;
       action.tooltip = newTitle;
     }
@@ -1171,6 +1202,14 @@ export class QuestionToolbox
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
+  @property({
+    defaultValue: true,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      target.items.forEach(i => i.enabled = val);
+      target.searchManager.enabled = val;
+      target.searchItem.enabled = val;
+    }
+  }) enabled: boolean;
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
@@ -1235,6 +1274,12 @@ export class QuestionToolbox
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
   }
+  protected getRenderedActions(): Array<QuestionToolboxItem> {
+    const actions = this.actions;
+    if (actions.length === 1 && !!actions[0].iconName)
+      return actions;
+    return actions.concat([<QuestionToolboxItem>this.dotsItem]);
+  }
   private indexOf(name: string) {
     for (var i = 0; i < this.actions.length; i++) {
       if (this.actions[i].name == name) return i;
@@ -1279,6 +1324,22 @@ export class QuestionToolbox
     }
     if (includeComponents) {
       res = res.concat(this.getRegisterComponentQuestions());
+    }
+    return res;
+  }
+  private actionsHash: { [index: string]: QuestionToolboxItem };
+  protected patchAction(action: QuestionToolboxItem) {
+    super.patchAction(action);
+    this.actionsHash = undefined;
+  }
+  public getActionById(name : string): QuestionToolboxItem {
+    if (!this.actionsHash) {
+      this.actionsHash = {};
+    }
+    let res = this.actionsHash[name];
+    if (!res) {
+      res = super.getActionById(name);
+      this.actionsHash[name] = res;
     }
     return res;
   }
@@ -1371,10 +1432,12 @@ export class QuestionToolbox
     }
     delete elementJson.name;
     var category = json.category ? json.category : "";
+    const titles = typeof json.title === "object" ? json.title : undefined;
     const item: IQuestionToolboxItem = <any>new Action(<any>{
       id: json.name,
       name: json.name,
       iconName: iconName,
+      titles: titles,
       title: title,
       tooltip: title,
       className: QuestionToolboxItem.getItemClassNames(iconName),
@@ -1382,7 +1445,9 @@ export class QuestionToolbox
       isCopied: false,
       category: category
     });
-    return this.getOrCreateToolboxItem(item);
+    const res = this.getOrCreateToolboxItem(item);
+    this.updateActionTitle(res);
+    return res;
   }
   private getTitleFromJsonTitle(title: any, name: string): string {
     if (!title) return title;
@@ -1431,6 +1496,17 @@ export class QuestionToolbox
         questions.push(name);
     }
     return questions;
+  }
+  public createResponsivityManager(container: HTMLDivElement): VerticalResponsivityManager {
+    return new VerticalResponsivityManager(container, this);
+  }
+  public afterRender(container: HTMLDivElement) {
+    this.setRootElement(container);
+    this.initResponsivityManager(this.containerElement as HTMLDivElement);
+  }
+  public beforeDestroy() {
+    this.setRootElement(undefined);
+    this.resetResponsivityManager();
   }
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

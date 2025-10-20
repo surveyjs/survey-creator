@@ -284,6 +284,7 @@ export class TabDesignerViewModel extends Base {
   }
   public initSurvey() {
     if (!this.survey) return;
+    this.blockAnimations();
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPage(false);
@@ -301,6 +302,7 @@ export class TabDesignerViewModel extends Base {
     }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
+    this.releaseAnimations();
   }
   private updateSurveyScaleStartDimensions() {
     this.survey.staticStartWidth = undefined;
@@ -400,10 +402,10 @@ export class TabDesignerViewModel extends Base {
           options.reorderedItems = [];
           options.addedItems = [droppedPage];
           const ghostPage = new PageModel();
-          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
           ghostPage.title = droppedPage.title;
           ghostPage.num = droppedPage.num;
           ghostPage["isGhost"] = true;
+          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
           options.deletedItems = [ghostPage];
           options.mergedItems.splice(droppedPage["draggedFrom"], 0, ghostPage);
         }

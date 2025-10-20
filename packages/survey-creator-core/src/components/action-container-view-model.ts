@@ -1,7 +1,8 @@
 import {
   AdaptiveActionContainer,
   Action,
-  ResponsivityManager
+  ResponsivityManager,
+  UpdateResponsivenessMode
 } from "survey-core";
 import { listComponentCss } from "./list-theme";
 class SurveyElementResponsivityManager extends ResponsivityManager {
@@ -97,7 +98,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
   allowResponsiveness() {
     if (!this._isResponsivenessAllowed) {
       this._isResponsivenessAllowed = true;
-      this.updateCallback && this.updateCallback(true);
+      this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
     }
   }
   public get isResponsivenessAllowed() {

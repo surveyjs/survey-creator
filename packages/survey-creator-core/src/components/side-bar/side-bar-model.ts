@@ -115,7 +115,12 @@ export class SidebarModel extends Base {
   public getPageById(id: string) {
     return this.pages.filter(page => page.id === id)[0];
   }
-
+  public locStrsChanged(): void {
+    super.locStrsChanged();
+    if (this._activePage) {
+      this.header.title = this._activePage.caption;
+    }
+  }
   private createActions() {
     this._collapseAction = new Action({
       id: "svd-grid-hide",
@@ -147,6 +152,7 @@ export class SidebarModel extends Base {
         iconSize: "auto",
         css: "svd-grid-expand",
         needSeparator: true,
+        visibleIndex: 1000,
         action: () => {
           this.expandSidebar();
           if (!this.flyoutMode) {

@@ -38,6 +38,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "visible",
       "readOnly",
       "isRequired",
+      "showTitle",
       "showCommentArea",
       "commentText",
       "commentPlaceholder",
@@ -149,8 +150,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "detailPanelMode",
       "detailPanelShowOnAdding",
       "singleInputTitleTemplate",
+      { name: "columnMinWidth", tab: "layout" },
       { name: "showHeader", tab: "layout" },
-      { name: "showColumnHeader", tab: "layout" },
       { name: "verticalAlign", tab: "layout" },
       { name: "alternateRows", tab: "layout" },
       { name: "columnsVisibleIf", tab: "logic", index: 1000 },
@@ -159,7 +160,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "transposeData", tab: "layout" },
       { name: "horizontalScroll", tab: "layout" },
       { name: "columnColCount", tab: "layout" },
-      { name: "columnMinWidth", tab: "layout" },
       { name: "cellErrorLocation", tab: "layout" },
       { name: "detailErrorLocation", tab: "layout" }
     ],
@@ -174,14 +174,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "allowAddRows",
       "allowRemoveRows",
       "allowRowReorder",
-      "rowCount",
-      "minRowCount",
-      "maxRowCount",
+      "confirmDelete",
+      "confirmDeleteText",
       "addRowButtonLocation",
       "addRowText",
       "removeRowText",
-      "confirmDelete",
-      "confirmDeleteText",
+      "rowCount",
+      "minRowCount",
+      "maxRowCount",
       "placeholder",
       { name: "hideColumnsIfEmpty", tab: "columns" },
       { name: "noRowsText", tab: "columns" },
@@ -202,18 +202,18 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   matrix: {
     properties: [
+      "cellType",
       { name: "eachRowRequired", tab: "validation" },
       { name: "eachRowUnique", tab: "validation" },
+      { name: "columnMinWidth", tab: "layout" },
+      { name: "rowTitleWidth", tab: "layout" },
       { name: "showHeader", tab: "layout" },
-      { name: "showColumnHeader", tab: "layout" },
       { name: "verticalAlign", tab: "layout" },
       { name: "alternateRows", tab: "layout" },
       { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "columnsVisibleIf", tab: "logic", index: 1000 },
-      { name: "rowsVisibleIf", tab: "logic", index: 1100 },
-      { name: "columnMinWidth", tab: "layout" },
-      { name: "rowTitleWidth", tab: "layout" }
+      { name: "rowsVisibleIf", tab: "logic", index: 1100 }
     ],
     tabs: [
       { name: "columns", index: 10 },
@@ -257,7 +257,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "labelCount", tab: "sliderSettings" },
       { name: "customLabels", tab: "sliderSettings" },
       { name: "labelFormat", tab: "sliderSettings" },
-      { name: "tooltipVisibilityPG", tab: "sliderSettings" },
+      { name: "tooltipVisibility", tab: "sliderSettings" },
       { name: "tooltipFormat", tab: "sliderSettings" },
       { name: "allowSwap", tab: "sliderSettings" },
       { name: "allowClear", tab: "sliderSettings" },
@@ -366,7 +366,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ]
   },
   "itemvalue[]@choices": {
-    properties: [{ name: "visibleIf" }, { name: "enableIf" }],
+    properties: ["visibleIf", "enableIf"],
+    tabs: [{ name: "general" }]
+  },
+  "choiceitem[]@choices": {
+    properties: ["visibleIf", "enableIf", "showCommentArea", "isCommentRequired", "commentPlaceholder"],
     tabs: [{ name: "general" }]
   },
   "imageitemvalue[]@choices": {
@@ -409,7 +413,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "label",
       "labelTrue",
       "labelFalse",
-      "showTitle",
       { name: "valueTrue", tab: "data" },
       { name: "valueFalse", tab: "data" }
     ]
@@ -637,6 +640,28 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [{ name: "rateValues", index: 5 }]
   },
+  "matrixdropdowncolumn@slider": {
+    properties: [
+      { name: "sliderType", tab: "sliderSettings" },
+      { name: "min", tab: "sliderSettings" },
+      { name: "max", tab: "sliderSettings" },
+      { name: "step", tab: "sliderSettings" },
+      { name: "minRangeLength", tab: "sliderSettings" },
+      { name: "maxRangeLength", tab: "sliderSettings" },
+      { name: "showLabels", tab: "sliderSettings" },
+      { name: "autoGenerate", tab: "sliderSettings" },
+      { name: "labelCount", tab: "sliderSettings" },
+      { name: "customLabels", tab: "sliderSettings" },
+      { name: "labelFormat", tab: "sliderSettings" },
+      { name: "tooltipVisibility", tab: "sliderSettings" },
+      { name: "tooltipFormat", tab: "sliderSettings" },
+      { name: "allowSwap", tab: "sliderSettings" },
+      { name: "allowClear", tab: "sliderSettings" },
+      { name: "minValueExpression", tab: "logic", index: 410 },
+      { name: "maxValueExpression", tab: "logic", index: 420 },
+    ],
+    tabs: [{ name: "sliderSettings", index: 10 }]
+  },
   multipletextitem: {
     properties: [
       "name",
@@ -683,21 +708,21 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelsState",
       { name: "allowAddPanel" },
       { name: "allowRemovePanel" },
+      "confirmDelete",
+      "confirmDeleteText",
       "addPanelText",
       "removePanelText",
       "templateTitle",
       "templateDescription",
       "noEntriesText",
-      "confirmDelete",
-      "confirmDeleteText",
       "prevPanelText",
       "nextPanelText",
-      "showQuestionNumbers",
       "showRangeInProgress",
       "showProgressBar",
       "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
       { name: "copyDefaultValueFromLastEntry", tab: "data" },
+      { name: "showQuestionNumbers", tab: "questionSettings" },
       { name: "templateQuestionTitleLocation", tab: "questionSettings" },
       { name: "templateQuestionTitleWidth", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },

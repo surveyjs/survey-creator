@@ -449,18 +449,36 @@ test("PageNavigatorViewModel bypage mode", (): any => {
   expect(model.currentPage).toEqual(pages[0]);
 
   model.items[1].action();
-  expect(model.items).toHaveLength(2);
-  expect(model.items[0].active).toBeFalsy();
-  expect(model.items[1].active).toBeTruthy();
-  expect(model.currentPage).toEqual(desigerTab.newPage);
-
-  creator.addPage(desigerTab.newPage);
   expect(model.items).toHaveLength(3);
   expect(model.items[0].active).toBeFalsy();
   expect(model.items[1].active).toBeTruthy();
   expect(model.items[2].active).toBeFalsy();
-  expect(model.currentPage).toEqual(pages[1]);
-  expect(model.items[2].data).toEqual(desigerTab.newPage);
+  expect(model.currentPage).not.toEqual(desigerTab.newPage);
+
+  creator.addPage(desigerTab.newPage);
+  expect(model.items).toHaveLength(4);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.items[2].active).toBeTruthy();
+  expect(model.items[3].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[2]);
+  expect(model.items[3].data).toEqual(desigerTab.newPage);
+});
+test("PageNavigatorViewModel bypage mode - create new page on selected ghost page, Bug#7053", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(creator.survey.pages).toHaveLength(1);
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "bypage");
+  expect(model.items).toHaveLength(2);
+  let act = model.items[1].action;
+  act && act();
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.selectedElementName).toEqual("page2");
+  expect(model.items).toHaveLength(3);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
 });
 
 test("Creator bypage edit mode - add question to a new page", (): any => {
@@ -1693,26 +1711,6 @@ test("getElementWrapperComponentName for inner component elements", () => {
   ComponentCollection.Instance.clear();
 });
 
-test("isStringEditable", (): any => {
-  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({}, "")).toBeTruthy();
-  expect(
-    isStringEditable({ isEditableTemplateElement: true }, "")
-  ).toBeTruthy();
-  expect(
-    isStringEditable(
-      { isContentElement: true, isEditableTemplateElement: true },
-      ""
-    )
-  ).toBeTruthy();
-});
-test("isStringEditable for matrix dynamic", (): any => {
-  const matrix = new QuestionMatrixDynamicModel("q1");
-  matrix.addColumn("col1");
-  matrix.rowCount = 1;
-  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
-  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
-});
 test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -1970,6 +1968,30 @@ test("set showSidebar is equivalent to action", (): any => {
   expect(creator.sidebar.collapsedManually).toBeTruthy();
   expect(creator.sidebar.expandedManually).toBeFalsy();
 });
+test("set showSidebar in init and check manual flags", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.collapsedManually).toBeFalsy();
+  expect(creator.sidebar.expandedManually).toBeFalsy();
+
+  creator.showSidebar = true;
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.collapsedManually).toBeFalsy();
+  expect(creator.sidebar.expandedManually).toBeTruthy();
+});
 test("Show/hide property grid by collapse/expand actions", (): any => {
   const creator = new CreatorTester();
   creator.propertyGridNavigationMode = "accordion";
@@ -2033,7 +2055,7 @@ test("Hide property grid is always visible in flyoutMode", (): any => {
 });
 
 test("Check property grid expand action is always last", (): any => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester({ propertyGridNavigationMode: "accordion" });
   creator.JSON = {
     pages: [
       {
@@ -2047,6 +2069,8 @@ test("Check property grid expand action is always last", (): any => {
     ]
   };
 
+  creator.setShowSidebar(false);
+  creator.toolbar.flushUpdates();
   const index = creator.toolbar.renderedActions.length - 1;
   expect(creator.toolbar.renderedActions[index].id).toEqual("svd-grid-expand");
   creator.toolbarItems.push(new Action({
@@ -2055,6 +2079,7 @@ test("Check property grid expand action is always last", (): any => {
     title: "Test action",
     action: function () { }
   }));
+  creator.toolbar.flushUpdates();
   expect(creator.toolbar.renderedActions[index].id).toEqual("test-action");
   expect(creator.toolbar.renderedActions[index + 1].id).toEqual("svd-grid-expand");
 });
@@ -2350,7 +2375,7 @@ test("ConvertTo, show the current question type selected", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(21);
+  expect(items).toHaveLength(22);
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
@@ -2380,7 +2405,7 @@ test("ConvertTo, show it for a panel", (): any => {
     undefined
   );
   const items = panelModel.getConvertToTypesActions();
-  expect(items).toHaveLength(21);
+  expect(items).toHaveLength(22);
   const popup = panelModel.getActionById("convertTo").popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
@@ -2423,44 +2448,62 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(21);
+  expect(itemCount).toBe(22);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   creator.maxNestedPanels = 3;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(3);
-  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
-  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
-  creator.maxNestedPanels = 2;
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(22);
+  creator.maxNestedPanels = 2;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel3, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel4, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   creator.maxNestedPanels = 1;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(1);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel3, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel4, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
-  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   creator.maxNestedPanels = 0;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
+  expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel3, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel4, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
-  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
 });
 
@@ -2510,21 +2553,21 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   expect(questionTypeSelectorListModel.actions.length).toBe(0);
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(21);
+  expect(convertToAction.data.actions.length).toBe(22);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(22);
   questionTypeSelectorModel.popupModel.hide();
 
   pageModel.addNewQuestion("text", "q2");
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(20);
+  expect(convertToAction.data.actions.length).toBe(21);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(20);
+  expect(questionTypeSelectorListModel.actions.length).toBe(21);
   questionTypeSelectorModel.popupModel.hide();
 
   const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
@@ -2570,7 +2613,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(21);
+  expect(items).toHaveLength(22);
   expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
   expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
   expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
@@ -2585,7 +2628,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items2 = panelModel.getConvertToTypesActions();
-  expect(items2).toHaveLength(21);
+  expect(items2).toHaveLength(22);
 });
 test("convertInputType, change inputType for a text question", (): any => {
   surveySettings.animationEnabled = false;
@@ -2657,6 +2700,39 @@ test("convertInputType, hide it for readOnly creator", (): any => {
   questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
 });
+test("convertInputType styles with event", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "boolean", name: "q3" },
+    ]
+  };
+
+  creator.onElementGetActions.add((sender, options) => {
+    if (options.element.getType() === "rating") {
+      const convertInputTypeActionIndex = options.actions.findIndex(
+        (x) => x.id === "convertInputType"
+      );
+      if (!!convertInputTypeActionIndex) {
+        options.actions.splice(convertInputTypeActionIndex, 1);
+      }
+    }
+  });
+
+  let questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeFalsy();
+  expect(questionModel.getActionById("convertInputType").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertInputType").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q3"), undefined);
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo") > -1).toBeTruthy();
+  expect(questionModel.getActionById("convertTo").css.indexOf("svc-dropdown-action--convertTo-last") > -1).toBeTruthy();
+});
 test("convertInputType, check locale", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2669,6 +2745,31 @@ test("convertInputType, check locale", (): any => {
   const questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
   const action: any = questionModel.getActionById("convertInputType");
   expect(action.data.locOwner.locale).toBe("de");
+});
+test("convertTo & convertInputType, check search input is focused", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" },] };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  const convertToAction = questionModel.getActionById("convertTo");
+  const convertInputTypeAction = questionModel.getActionById("convertInputType");
+
+  expect(convertToAction).toBeTruthy();
+  expect(convertInputTypeAction).toBeTruthy();
+
+  let popupModel = convertToAction.popupModel;
+  let popupViewModel = new PopupDropdownViewModel(popupModel); // need for popupModel.onShow
+  expect(popupModel).toBeTruthy();
+  popupModel.show();
+  expect(popupModel.isFocusedContent).toBeTruthy();
+
+  popupModel = convertInputTypeAction.popupModel;
+  popupViewModel = new PopupDropdownViewModel(popupModel); // need for popupModel.onShow
+  expect(popupModel).toBeTruthy();
+  popupModel.show();
+  expect(popupModel.isFocusedContent).toBeTruthy();
 });
 test("change locale & creator.sidebar.hasVisiblePages", (): any => {
   const creator = new CreatorTester();
@@ -4429,7 +4530,8 @@ test("Creator footer action bar: only designer tab", (): any => {
   expect(creator.activeTab).toEqual("designer");
 
   creator.isMobileView = true;
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  creator.footerToolbar.flushUpdates();
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
@@ -4437,7 +4539,8 @@ test("Creator footer action bar: only designer tab", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
 
   creator.activeTab = "logic";
-  expect(creator.footerToolbar.actions.length).toEqual(5);
+  creator.footerToolbar.flushUpdates();
+  expect(creator.footerToolbar.actions.length).toEqual(6);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 test("Creator footer action bar: add custom action", (): any => {
@@ -4476,6 +4579,7 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.activeTab).toEqual("designer");
 
   creator.isMobileView = true;
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
@@ -4483,6 +4587,7 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
 
   creator.activeTab = "test";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(testTabButtonOrder);
@@ -4490,9 +4595,11 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "logic";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 
   creator.activeTab = "designer";
+  creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);

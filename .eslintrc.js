@@ -7,7 +7,8 @@ module.exports = {
   },
   "plugins": [
     "@typescript-eslint",
-    "surveyjs"
+    "surveyjs",
+    "surveyjs/eslint-plugin-i18n",
   ],
   "extends": [
     "eslint:recommended",
@@ -97,9 +98,16 @@ module.exports = {
     // "@typescript-eslint/no-use-before-define": "off",
     // "@typescript-eslint/interface-name-prefix": "off",
     // "@typescript-eslint/consistent-type-assertions": "off",
-    // "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
     // "@typescript-eslint/no-empty-interface": "off",
     // "@typescript-eslint/no-empty-function": "off",
+    "surveyjs/eslint-plugin-i18n/only-english-or-code": [
+      "error",
+      {
+        "includeIdentifier": true,
+        "includeComment": true
+      }
+    ],
   },
   "overrides": [
     {
@@ -109,6 +117,12 @@ module.exports = {
       "rules": {
         "no-undef": "off",
         "@typescript-eslint/no-var-requires": "off",
+      }
+    },
+    {
+      "files": ["packages/survey-creator-core/src/localization/*.ts"],
+      "rules": {
+        "surveyjs/eslint-plugin-i18n/only-english-or-code": "off"
       }
     }
   ]

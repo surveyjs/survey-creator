@@ -17,6 +17,7 @@
           @paste="onPaste"
           @blur="onBlur"
           @input="baseModel?.onInput"
+          @beforeinput="baseModel?.onBeforeInput"
           @keydown="baseModel?.onKeyDown"
           @keyup="baseModel?.onKeyUp"
           @compositionstart="baseModel?.onCompositionStart"
@@ -27,6 +28,7 @@
           :aria-placeholder="placeholder"
           :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
+          :tabindex="baseModel.tabIndex"
           ref="root"
         ></span>
         <span
@@ -45,6 +47,7 @@
           :aria-placeholder="placeholder"
           :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
+          :tabindex="baseModel.tabIndex"
           v-html="renderedHtml"
           ref="root"
         ></span>

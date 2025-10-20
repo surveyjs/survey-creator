@@ -4,7 +4,7 @@ import {
   ISurveyPropertyGridDefinition,
   defaultPropertyGridDefinition
 } from "./definition";
-import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
+import { JsonObjectProperty, Serializer, JsonMetadataClass, Helpers } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { pgTabIcons } from "../property-grid/icons";
@@ -97,7 +97,7 @@ export class SurveyQuestionProperties {
   }
   private getClassDefintion(name: string, includingParents?: boolean): ISurveyQuestionEditorDefinition {
     if (!this.propertyGridDefinition || !this.propertyGridDefinition.classes) return undefined;
-    let res = this.propertyGridDefinition.classes[name];
+    let res = this.getDefinitionClassCopy(name);
     while(!res && includingParents && name) {
       const names = name.split("@");
       const hasBrackets = names[0].indexOf("[]") > 0;
@@ -109,9 +109,14 @@ export class SurveyQuestionProperties {
         }
         name += "@" + names[1];
       }
-      res = this.propertyGridDefinition.classes[name];
+      res = this.getDefinitionClassCopy(name);
     }
     return res;
+  }
+  private getDefinitionClassCopy(name: string) : ISurveyQuestionEditorDefinition {
+    if (!name) return undefined;
+    const cls = this.propertyGridDefinition.classes[name];
+    return cls ? Helpers.getUnbindValue(cls) : undefined;
   }
   private fillPropertiesHash() {
     this.propertiesHash = {};

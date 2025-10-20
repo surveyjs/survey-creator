@@ -85,7 +85,7 @@ test("Categories large mode", async (t) => {
 
   await t
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(16)
+    .expect(visibleToolboxItems.count).eql(17)
 
     .click(categoriesHeader.nth(1))
     .expect(visibleToolboxItems.count).eql(3)
@@ -108,7 +108,7 @@ test.before(async (t) => {
 
     .resizeWindow(1900, 600)
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(16)
+    .expect(visibleToolboxItems.count).eql(17)
 
     .click(categoriesHeader.nth(1))
     .expect(visibleToolboxItems.count).eql(3)
@@ -125,7 +125,7 @@ test.before(async (t) => {
   await setupCategories(t);
   await t
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(16)
+    .expect(visibleToolboxItems.count).eql(17)
 
     .resizeWindow(1200, 600)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
@@ -145,16 +145,16 @@ test("Categories allowExpandMultipleCategories property", async (t) => {
     .expect(visibleToolboxItems.count).eql(0)
 
     .click(categoriesHeader.nth(0))
-    .expect(categories.nth(0).find(":scope>.svc-toolbox__tool").count).eql(16)
-    .expect(visibleToolboxItems.count).eql(16)
+    .expect(categories.nth(0).find(":scope>.svc-toolbox__tool").count).eql(17)
+    .expect(visibleToolboxItems.count).eql(17)
 
     .click(categoriesHeader.nth(1))
     .expect(categories.nth(1).find(":scope>.svc-toolbox__tool").count).eql(3)
-    .expect(visibleToolboxItems.count).eql(19)
+    .expect(visibleToolboxItems.count).eql(20)
 
     .click(categoriesHeader.nth(2))
     .expect(categories.nth(2).find(":scope>.svc-toolbox__tool").count).eql(2)
-    .expect(visibleToolboxItems.count).eql(21);
+    .expect(visibleToolboxItems.count).eql(22);
 });
 
 test("Categories keepAllCategoriesExpanded property", async (t) => {
@@ -165,7 +165,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
   await t
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(21)
+    .expect(visibleToolboxItems.count).eql(22)
 
     .hover(categoriesHeader.nth(0), { speed: 0.5 })
     .expect(getExpandedCategories(0).exists).notOk()
@@ -174,7 +174,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(0))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(21)
+    .expect(visibleToolboxItems.count).eql(22)
 
     .hover(categoriesHeader.nth(1), { speed: 0.5 })
     .expect(getExpandedCategories(1).exists).notOk()
@@ -183,7 +183,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(1))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(21)
+    .expect(visibleToolboxItems.count).eql(22)
 
     .hover(categoriesHeader.nth(2), { speed: 0.5 })
     .expect(getExpandedCategories(2).exists).notOk()
@@ -192,7 +192,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(2))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(21);
+    .expect(visibleToolboxItems.count).eql(22);
 });
 
 test("add question from toolbox popup items", async (t) => {
@@ -261,7 +261,7 @@ test("toolbar responsiveness with search", async (t) => {
   });
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(visibleToolboxItems.count).eql(11);
 
@@ -269,7 +269,7 @@ test("toolbar responsiveness with search", async (t) => {
   await t.resizeWindow(1920, 598);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(visibleToolboxItems.count).eql(10);
 });
@@ -335,7 +335,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".sv-scroll__container").clientHeight).lte(515)
     .expect(visibleToolboxItems.count).eql(11)
-    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23)
 
     .click(".svc-question__content--text", { offsetX: 200, offsetY: 20 })
     .click(Selector(".svc-survey-element-toolbar-item__title").withText("Save as Toolbox Item"))
@@ -343,7 +343,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".sv-scroll__container").clientHeight).lte(515)
     .expect(visibleToolboxItems.count).eql(11)
-    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23);
+    .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(24);
 });
 
 test("toolbox subTypes: add items by drag-n-drop", async (t) => {

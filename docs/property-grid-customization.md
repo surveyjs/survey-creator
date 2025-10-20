@@ -7,7 +7,7 @@ description: Learn how to hide survey properties from Property Grid, add custom 
 
 Property Grid displays the properties of a selected survey element and allows a user to change the property values. This help topic describes how you can modify the Property Grid contents.
 
-<img src="./images/survey-creator-property-grid.png" alt="Survey Creator - Property Grid" width="100%">
+<img src="./images/survey-creator-property-grid.png" alt="Survey Creator - Property Grid" width="1544" height="684">
 
 ## Hide Properties from the Property Grid
 
@@ -70,11 +70,15 @@ engLocale.pageNextText = "Forward";
 engLocale.completeText = "Send";
 ```
 
+> Default values set through either `Serializer` or localization methods are not stored in the survey JSON schema. To ensure these defaults are applied when the survey runs, you must include the same code in your runtime application. Alternatively, you can use Survey Creator's events to assign initial values when elements are created. For more information, refer to the following help topic:
+>
+> [Customize Survey Elements on Creation](/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
+
 ## Add Help Texts to Property Editors
 
 Property editors can display hints or tooltips that help survey authors specify correct property values. For example, the following image illustrates a hint for the [`acceptedTypes`](https://surveyjs.io/form-library/documentation/api-reference/file-model#acceptedTypes) property editor in a [File Upload](https://surveyjs.io/form-library/examples/file-upload/) question: 
 
-<img src="./images/property-grid-hint.png" alt="Survey Creator: Hints in the Property Grid">
+<img src="./images/property-grid-hint.png" alt="Survey Creator: Hints in the Property Grid" width="1544" height="600">
 
 Hints are stored in the `pehelp` object (stands for "property editor help") within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization). You can use [localization API](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages#override-individual-translations) to specify or override help texts within this object. For instance, the code below specifies a hint for the [`title`](https://surveyjs.io/form-library/documentation/api-reference/question#title) property editor.
 

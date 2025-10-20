@@ -61,6 +61,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     super.componentDidUpdate(prevProps, prevState);
     this.baseModel.setLocString(this.locString);
     this.baseModel.afterRender();
+    this.locString.onStringChanged.add(this.onChangedHandler);
   }
   public componentWillUnmount() {
     super.componentWillUnmount();
@@ -88,6 +89,9 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   };
   private onCompositionEnd = (event: any) => {
     this.baseModel.onCompositionEnd(event.nativeEvent);
+  };
+  private onBeforeInput = (event: any) => {
+    this.baseModel.onBeforeInput(event);
   };
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
@@ -144,6 +148,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-placeholder={this.placeholder}
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
+          tabIndex={this.baseModel.tabIndex}
           // style={this.style}
           dangerouslySetInnerHTML={this.htmlValue}
           onBlur={this.onBlur}
@@ -160,6 +165,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable={this.contentEditable}
+          tabIndex={this.baseModel.tabIndex}
           spellCheck={false}
           aria-placeholder={this.placeholder}
           aria-label={this.placeholder || "content editable"}
@@ -167,6 +173,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           // style={this.style}
           key={this.locString.renderedHtml}
           onBlur={this.onBlur}
+          onBeforeInput={this.onBeforeInput}
           onInput={this.onInput}
           onPaste={this.onPaste}
           onCompositionStart={this.onCompositionStart}

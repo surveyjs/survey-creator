@@ -303,13 +303,6 @@ export class StringEditorViewModelBase extends Base {
     this.addCreatorEvents();
   }
   public checkConstraints(event: any) {
-    if (!this.compostionInProgress && this.maxLength > 0 && event.keyCode >= 32) {
-      var text: string = (event.target as any).innerText || "";
-
-      if (text.length >= this.maxLength) {
-        event.preventDefault();
-      }
-    }
     if (event.keyCode == 13 && !this.locString.allowLineBreaks) {
       event.preventDefault();
     }
@@ -329,12 +322,13 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onFocus(event: any): void {
+    const text = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
     if (!this.focusedProgram) {
-      this.valueBeforeEdit = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
+      this.valueBeforeEdit = text;
       this.focusedProgram = false;
     }
     if (this.maxLength > 0) {
-      this.characterCounter.updateRemainingCharacterCounter(this.valueBeforeEdit, this.maxLength);
+      this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength);
     }
     if (this.creator) {
       this.creator.selectFromStringEditor = true;
@@ -346,7 +340,6 @@ export class StringEditorViewModelBase extends Base {
 
     event.target.parentElement.click();
     event.target.spellcheck = true;
-    event.target.setAttribute("tabindex", -1);
     this.focused = true;
     this.justFocused = true;
   }
@@ -366,10 +359,20 @@ export class StringEditorViewModelBase extends Base {
   public onCompositionStart(event: any): void {
     this.compostionInProgress = true;
   }
-
+  public onBeforeInput(event: any): void {
+    if (!this.compostionInProgress && this.maxLength > 0) {
+      const currentValue = event.target.innerText;
+      const insertedData = event.data || "";
+      const selectionLength = window.getSelection().toString().length;
+      const newValueLength = currentValue.length + insertedData.length - selectionLength;
+      if (newValueLength > this.maxLength) {
+        event.preventDefault();
+      }
+    }
+  }
   public onInput(event: any): void {
     if (this.maxLength > 0) {
-      var text: string = (event.target as any).innerText || "";
+      var text: string = this.getClearedText(event.target);
       this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength);
     }
     if (this.editAsText && !this.compostionInProgress) {
@@ -387,7 +390,6 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
-    event.target.removeAttribute("tabindex");
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
@@ -517,7 +519,7 @@ export class StringEditorViewModelBase extends Base {
       selection.deleteFromDocument();
       selection.getRangeAt(0).insertNode(document.createTextNode(text));
       selection.collapseToEnd();
-      event.target.dispatchEvent(new Event("input", { bubbles: true }));
+      this.getEditorElement().dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
@@ -603,6 +605,9 @@ export class StringEditorViewModelBase extends Base {
   public get contentEditable(): boolean {
     if (!this.creator) return true;
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
+  }
+  public get tabIndex(): number {
+    return this.contentEditable ? 0 : null;
   }
   public get showCharacterCounter(): boolean {
     return this.maxLength !== -1;

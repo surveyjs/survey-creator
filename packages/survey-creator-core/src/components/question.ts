@@ -65,26 +65,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    if (
-      surveyElement.isQuestion &&
-      !!surveyElement["setCanShowOptionItemCallback"]
-    ) {
-      (<any>surveyElement).setCanShowOptionItemCallback(
-        (item: ItemValue): boolean => {
-          if (creator.readOnly) return false;
-          if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
-          return (
-            creator.maximumChoicesCount < 1 ||
-            surveyElement["choices"].length < creator.maximumChoicesCount
-          );
-        }
-      );
-    }
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     StringItemsNavigatorBase.setQuestion(this);
   }
-
+  protected onElementTypeRestrictionChanged(elType: string): void {
+    super.onElementTypeRestrictionChanged(elType);
+    if (this.currentAddQuestionType === elType) {
+      this.currentAddQuestionType = "";
+    }
+  }
   protected canSelectElement(): boolean {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
@@ -246,17 +236,49 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
+      if (this.surveyElement instanceof QuestionHtmlModel) {
+        surveyElement.unRegisterFunctionOnPropertyValueChanged("html", "isEmptyAdorner");
+      }
+      if (this.surveyElement instanceof PanelModelBase) {
+        surveyElement.unRegisterFunctionOnPropertiesValueChanged(["rows", "elements"], "isEmptyAdorner");
+      }
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
       }
     }
+    this.resetPropertyValue("isEmptyElement");
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
     super.attachElement(surveyElement);
     if (surveyElement) {
+      if (
+        surveyElement.isQuestion &&
+        !!surveyElement["setCanShowOptionItemCallback"]
+      ) {
+        (<any>surveyElement).setCanShowOptionItemCallback(
+          (item: ItemValue): boolean => {
+            if (this.creator.readOnly) return false;
+            if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
+            return (
+              this.creator.maximumChoicesCount < 1 ||
+              surveyElement["choices"].length < this.creator.maximumChoicesCount
+            );
+          }
+        );
+      }
+      if (this.surveyElement instanceof QuestionHtmlModel) {
+        surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {
+          this.updateIsEmptyElement();
+        }, "isEmptyAdorner");
+      }
+      if (this.surveyElement instanceof PanelModelBase) {
+        surveyElement.registerFunctionOnPropertiesValueChanged(["rows", "elements"], (newValue: any) => {
+          this.updateIsEmptyElement();
+        }, "isEmptyAdorner");
+      }
       surveyElement.registerFunctionOnPropertyValueChanged("isRequired", (newValue: any) => {
         if (this.isActionContainerCreated) {
           const requiredAction = this.actionContainer.getActionById("isrequired");
@@ -312,10 +334,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
   }
   private updateActionsLocations(): void {
-    const actions = this.actionContainer.visibleActions;
+    const actions = this.actionContainer.getVisibleActions();
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {
-      if (actions[i].id === "convertTo") switchToStartLocation = true;
+      if (actions[i].id === "convertTo" || actions[i].id === "convertInputType") {
+        actions[i].css = "svc-dropdown-action--convertTo";
+        if (!switchToStartLocation) {
+          actions[i].css += " svc-dropdown-action--convertTo-last";
+        }
+        switchToStartLocation = true;
+      }
       if (!actions[i].innerItem.location) actions[i].innerItem.location = switchToStartLocation ? "start" : "end";
     }
   }
@@ -332,19 +360,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
     this.updateActionVisibility(actionName, allow && !isPropReadOnly);
   }
-  public get isEmptyElement(): boolean {
+  get isEmptyElement(): boolean {
+    return this.getPropertyValue("isEmptyElement", undefined, () => this.getIsEmptyElement());
+  }
+  set isEmptyElement(val: boolean) {
+    this.setPropertyValue("isEmptyElement", val);
+  }
+  protected getIsEmptyElement(): boolean {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return !this.surveyElement.html;
     }
-
     if (this.surveyElement instanceof PanelModelBase) {
       const panel = this.surveyElement as any as PanelModelBase;
-      return (
-        !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0
-      );
+      return !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0;
     }
-
     return false;
+  }
+  protected updateIsEmptyElement() {
+    this.isEmptyElement = this.getIsEmptyElement();
   }
   public get isEmptyTemplate(): boolean {
     if (this.surveyElement instanceof QuestionPanelDynamicModel) {
@@ -425,13 +458,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     (defaultJsons[type] || []).forEach((djson) => {
       if (this.jsonIsCorresponded(djson)) {
         newJson = { ...json };
-        const objJson = this.element.toJSON();
-        const cleanJson = this.cleanDefaultsFromJson(type, djson);
         Object.keys(djson).forEach(p => {
-          if (p != "type" && !newJson[p]) newJson[p] = undefined;
-        });
-        Object.keys(json || {}).forEach(p => {
-          if (p != "type" && !(!objJson[p] || cleanJson[p])) newJson[p] = undefined;
+          if (p != "type" && !newJson.hasOwnProperty(p)) newJson[p] = undefined;
         });
       }
     });
@@ -488,7 +516,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     newAction.disableHide = true;
     return newAction;
   }
-
   public static checkForNeedDefaultSubitems(items: QuestionToolboxItem[]) {
     items.filter(i => i.needDefaultSubitem === undefined).forEach((item: QuestionToolboxItem) => {
       item.needDefaultSubitem = false;
@@ -653,7 +680,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
-      css: "svc-dropdown-action--convertTo",
       iconName: options.actionData.iconName,
       iconSize: "auto",
       title: options.actionData.title,
@@ -669,18 +695,19 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
       cssClasses: listComponentCss,
-    });
+    }, this.creator);
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
+        listModel.flushUpdates();
+        newAction.popupModel.isFocusedContent = listModel.showFilter;
       }
     });
     const listModel = newAction.popupModel.contentComponentData.model;
     // options.updateListModel(listModel);
     if (listModel.selectedItem) newAction.title = listModel.selectedItem.title;
     newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
-    newAction.data.locOwner = this.creator;
     return newAction;
   }
 
@@ -739,7 +766,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
-    items[items.length - 1].css += " svc-dropdown-action--convertTo-last";
     if (typeof element["isRequired"] !== "undefined" && !!element.getType
       && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());

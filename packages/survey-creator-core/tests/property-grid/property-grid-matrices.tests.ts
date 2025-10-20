@@ -10,6 +10,8 @@ import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
 import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../src/creator-settings";
 import { SurveyTriggerComplete } from "survey-core";
+import { CreatorBase } from "../../src/creator-base";
+import { FastEntryEditor } from "../../src/property-grid/fast-entry";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
@@ -17,8 +19,9 @@ export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/custom-questions/question-text-with-reset";
 
-test("Validators property editor", () => {
+test("Validators property editor, v2", () => {
   var question = new QuestionTextModel("q1");
+  question.inputType = "number";
   question.validators.push(new ExpressionValidator());
   var propertyGrid = new PropertyGridModelTester(question);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
@@ -71,6 +74,7 @@ test("Validators property editor for column", () => {
   var matrix = new QuestionMatrixDynamicModel("q1");
   var column = matrix.addColumn("col1");
   column.cellType = "text";
+  (<any>column).inputType = "number";
   column.validators.push(new ExpressionValidator());
   var propertyGrid = new PropertyGridModelTester(column);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
@@ -124,6 +128,7 @@ test("Question doesn't have expression validator, bug#4378", () => {
   surveySettings.supportedValidators.question.forEach(val => oldArray.push(val));
   surveySettings.supportedValidators.question = [];
   const question = new QuestionTextModel("q1");
+  question.inputType = "number";
   const propertyGrid = new PropertyGridModelTester(question);
   var validatorsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("validators")
@@ -330,9 +335,10 @@ test("QuestionMultipleTextModel items property editor", () => {
   expect(question.items).toHaveLength(2);
   expect(question.items[1].name).toEqual("item2");
 });
-test("QuestionMultipleTextModel items property editor + validators editor", () => {
+test("QuestionMultipleTextModel items property editor + validators editor, #1", () => {
   var multipleQuestion = new QuestionMultipleTextModel("q1");
   var textItem = multipleQuestion.addItem("item1", "Item 1");
+  textItem.inputType = "number";
   var propertyGrid = new PropertyGridModelTester(multipleQuestion);
   var itemsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("items")
@@ -439,7 +445,7 @@ test("check multiple text items editing by Manual Entry", () => {
   expect(itemsQuestion.renderedTable.rows[2].cells[1].question.value).toEqual("item2");
   expect(itemsQuestion.renderedTable.rows[2].cells[2].question.value).toEqual("Item 2");
 });
-test("QuestionMultipleTextModel items property editor + validators editor", () => {
+test("QuestionMultipleTextModel items property editor + validators editor, #2", () => {
   var multipleQuestion = new QuestionMultipleTextModel("q1");
   var textItem = multipleQuestion.addItem("item1");
   var propertyGrid = new PropertyGridModelTester(multipleQuestion);
@@ -470,6 +476,31 @@ test("QuestionCheckbox choices placeholder", () => {
   expect(row.getQuestionByName("text").placeholder).toBe("item1");
   row.getQuestionByName("value").value = "item111";
   expect(row.getQuestionByName("text").placeholder).toBe("item111");
+});
+test("QuestionCheckbox choices placeholder after FastEntryEditor, Bug#7180", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  const row1 = choicesQuestion.visibleRows[0];
+  expect(row1.getQuestionByName("value").value).toBe("item1");
+  const textQ1 = row1.getQuestionByName("text");
+  expect(textQ1.placeholder).toBe("item1");
+
+  const prop = Serializer.findProperty("checkbox", "choices");
+  const fastEntry = new FastEntryEditor(question.choices, propertyGrid.options, prop.className, ["value"]);//, "text", "visibleIf", "enableIf"]);
+  fastEntry.comment.value = "item1_1\nitem2_2\nitem3_3";
+  fastEntry.apply();
+  const row2 = choicesQuestion.visibleRows[0];
+  expect(row2.getQuestionByName("value").value).toBe("item1_1");
+  const textQ2 = row2.getQuestionByName("text");
+  expect(textQ2.value).toBeFalsy();
+  expect(textQ2.placeholder).toBe("item1_1");
+  row2.getQuestionByName("value").value = "item111";
+  expect(textQ2.placeholder).toBe("item111");
 });
 test("ImagePicker choices columns & detail panel", () => {
   const question = new QuestionImagePickerModel("q1");
@@ -671,4 +702,20 @@ test("itemvalue[] custom dropdown property add locationInTable, Bug#6677", () =>
   Serializer.removeProperty("itemvalue", "prop2");
   Serializer.removeProperty("itemvalue", "prop3");
   Serializer.removeProperty("itemvalue", "prop4");
+});
+
+test("dropdown question inside detail panel", () => {
+  const question = new QuestionTextModel("q1");
+  question.choices = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question, new CreatorBase({}));
+  const validatorsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("validators");
+  validatorsQuestion.addRow();
+  const dropdownInsideCell = <QuestionDropdownModel>validatorsQuestion.visibleRows[0].cells[0].question;
+  const dropdownInsideDetail = <QuestionDropdownModel>validatorsQuestion.visibleRows[0].detailPanel.getQuestionByName("notificationType");
+  expect(dropdownInsideCell.popupModel.setWidthByTarget).toBe(true);
+  expect(dropdownInsideDetail.popupModel.setWidthByTarget).toBe(true);
+  dropdownInsideCell.popupModel.toggleVisibility();
+  dropdownInsideDetail.popupModel.toggleVisibility();
+  expect(dropdownInsideCell.popupModel.setWidthByTarget).toBe(false);
+  expect(dropdownInsideDetail.popupModel.setWidthByTarget).toBe(true);
 });

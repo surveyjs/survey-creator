@@ -12,7 +12,6 @@ export class TabbedMenuComponent extends SurveyElementBase<
   ITabbedMenuComponentProps,
   any
 > {
-  private manager: ResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
   private get model() {
@@ -31,23 +30,25 @@ export class TabbedMenuComponent extends SurveyElementBase<
   renderElement(): React.JSX.Element {
     const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.renderedId} />);
     return (
-      <div ref={this.rootRef} className="svc-tabbed-menu" role="tablist">
+      <div ref={this.rootRef} className="svc-tabbed-menu" role="tablist" style={this.model.getRootStyle()}>
         {items}
       </div>
     );
   }
-
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    const container: HTMLDivElement = this.rootRef.current;
+    if (!container) return;
+    this.model.initResponsivityManager(container);
+  }
   componentDidMount() {
     super.componentDidMount();
     const container: HTMLDivElement = this.rootRef.current;
     if (!container) return;
-    this.manager = new ResponsivityManager(
-      container,
-      this.model
-    );
+    this.model.initResponsivityManager(container);
   }
   componentWillUnmount() {
-    this.manager && (this.manager.dispose());
+    this.model.resetResponsivityManager();
     super.componentWillUnmount();
   }
 }
@@ -60,6 +61,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   constructor(props) {
     super(props);
     this.ref = React.createRef();
+    this.state = { changed: 0 };
   }
 
   private get item(): TabbedMenuItem {
@@ -93,13 +95,20 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   componentDidMount(): void {
     super.componentDidMount();
     this.item.updateModeCallback = (mode, callback) => {
+      const update = () => {
+        if (this.item.mode == mode) {
+          this.setState({ changed: this.state.changed + 1 });
+        } else {
+          this.item.mode = mode;
+        }
+      };
       queueMicrotask(() => {
         if ((ReactDOM as any)["flushSync"]) {
           (ReactDOM as any)["flushSync"](() => {
-            this.item.mode = mode;
+            update();
           });
         } else {
-          this.item.mode = mode;
+          update();
         }
         queueMicrotask(() => {
           callback(mode, this.ref.current);
@@ -137,7 +146,7 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
         aria-selected={item.active}
         aria-controls={"scrollableDiv-" + item.id}
         className={item.getRootCss()}
-        onClick={() => item.action(item)}
+        onClick={() => item.doAction()}
       >
         {item.hasTitle ? <span className={item.getTitleCss()}>{item.title}</span> : null}
         {item.hasIcon ? <SvgIcon iconName={item.iconName} className={item.getIconCss()} size={"auto"} title={item.tooltip || item.title}></SvgIcon> : null}
