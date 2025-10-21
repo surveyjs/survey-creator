@@ -227,6 +227,7 @@ export interface ISurveyCreatorOptions {
   rootElement?: HTMLElement;
   previewShowResults: boolean;
   showOneCategoryInPropertyGrid: boolean;
+  trimValues: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
@@ -377,6 +378,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   showOneCategoryInPropertyGrid: boolean;
+  trimValues: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
