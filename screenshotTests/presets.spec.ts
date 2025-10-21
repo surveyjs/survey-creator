@@ -103,8 +103,29 @@ test.describe(title, () => {
     const root = page.locator(".sps-panel").first();
 
     page.locator(".sps-table__row").first().getByTitle("Expand").click();
-    page.locator(".sps-table__row").first().getByTitle("More").click();
+    page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).hover();
+    const moreButton = page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).getByTitle("More");
+    expect(moreButton).toBeVisible();
+    moreButton.click();
     page.getByText("Move to category...").hover();
+    await page.waitForTimeout(300);
+    expect(page.getByText("Text Input Questions")).toBeVisible();
     await compareScreenshot(page, root, "presets-context-menu.png");
+  });
+
+  test("Presets Dialogs", async ({ page }) => {
+    page.locator(".sps-list__container").getByText("Toolbox").click();
+    expect(page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
+
+    const root = page.locator(".sps-panel").first();
+
+    page.locator(".sps-table__row").first().getByTitle("Edit").click();
+    await compareScreenshot(page, ".sv-popup__container", "presets-dialog-small.png");
+    page.getByText("Cancel").click();
+
+    page.locator(".sps-table__row").first().getByTitle("Expand").click();
+    page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).hover();
+    page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).getByTitle("Edit").click();
+    await compareScreenshot(page, ".sv-popup__container", "presets-dialog-large.png");
   });
 });
