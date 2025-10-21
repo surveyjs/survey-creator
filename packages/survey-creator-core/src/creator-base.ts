@@ -287,6 +287,7 @@ export class SurveyCreatorModel extends Base
   set propertyGridNavigationMode(newValue: "buttons" | "accordion") {
     this.showOneCategoryInPropertyGrid = newValue === "buttons";
   }
+  public trimValues: boolean = false;
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
