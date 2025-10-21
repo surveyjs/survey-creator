@@ -2424,6 +2424,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
+    if (this.isCreatingNewElement) return;
     if (this.isObjQuestion(obj)) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
@@ -2526,9 +2527,12 @@ export class SurveyCreatorModel extends Base
   public onDragDropItemStart(): void {
     this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
   }
+  private isCreatingNewElement: boolean;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
+    this.isCreatingNewElement = true;
     question.name = this.generateUniqueName(question, question.name);
+    this.isCreatingNewElement = false;
     var page = this.getPageByElement(question);
     if (!page) return;
     var options = { question: question, page: page, reason: this.addNewElementReason };
@@ -3083,7 +3087,6 @@ export class SurveyCreatorModel extends Base
       }
     }
   }
-
   public createNewElement(json: any): IElement {
     const newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
