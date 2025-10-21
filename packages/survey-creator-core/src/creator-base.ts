@@ -4732,6 +4732,17 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+  /**
+   * Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content such as questions or panels.
+   *
+   * - 0 - Disables content nesting for choice options.
+   * - 1 - Allows first-level choice options to contain survey elements.
+   * - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
+   *
+   * Default value: 0
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
+   */
   public maxChoiceContentNestingLevel: number = 0;
 
   /**
