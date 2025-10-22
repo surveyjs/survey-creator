@@ -4425,11 +4425,11 @@ export class SurveyCreatorModel extends Base
       iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
-      needSeparator: needSeparator
+      needSeparator: needSeparator,
+      action: () => {
+        onSelectQuestionType(item.typeName, item.json);
+      }
     });
-    action.action = () => {
-      onSelectQuestionType(item.typeName, item.json);
-    };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({
