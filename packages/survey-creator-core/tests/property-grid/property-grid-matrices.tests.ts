@@ -719,3 +719,22 @@ test("dropdown question inside detail panel", () => {
   expect(dropdownInsideCell.popupModel.setWidthByTarget).toBe(false);
   expect(dropdownInsideDetail.popupModel.setWidthByTarget).toBe(true);
 });
+test("QuestionCheckbox choices options.trimValues, Issue#7180", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const options = new EmptySurveyCreatorOptions();
+  options.trimValues = true;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const row1 = choicesQuestion.visibleRows[0];
+  const valueQ = row1.getQuestionByName("value");
+  expect(valueQ.value).toBe("item1");
+  valueQ.value = "  item1  ";
+  expect(valueQ.value).toBe("item1");
+  expect(question.choices[0].value).toBe("item1");
+  valueQ.value = "  item11  ";
+  expect(valueQ.value).toBe("item11");
+  expect(question.choices[0].value).toBe("item11");
+});

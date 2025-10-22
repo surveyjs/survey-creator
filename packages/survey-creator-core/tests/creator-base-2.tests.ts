@@ -896,3 +896,31 @@ test("Restrict users from adding more than a specified number of questions to a 
   creator.JSON = { };
   expect(action.enabled).toBeTruthy();
 });
+test("Should not modify expression properties  on copying questions inside the dynamic panel, Bug#7223", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "paneldynamic",
+        "name": "panel1",
+        "templateElements": [
+          {
+            "type": "boolean",
+            "name": "q1"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+            "visibleIf": "{panel.q1} = true"
+          }
+        ]
+      }
+    ]
+  };
+  const panel1 = (creator.survey.getQuestionByName("panel1") as QuestionPanelDynamicModel).template;
+  const q2 = panel1.getQuestionByName("q2");
+  expect(q2.visibleIf).toBe("{panel.q1} = true");
+  const q1 = panel1.getQuestionByName("q1");
+  creator.copyQuestion(q1, true);
+  expect(q2.visibleIf).toBe("{panel.q1} = true");
+});

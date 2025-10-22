@@ -430,9 +430,13 @@ export class StringEditorViewModelBase extends Base {
   }
 
   private getClearedText(target: HTMLElement): string {
-    const html = target.innerHTML;
-    const text = target.innerText;
+    let html = target.innerHTML;
+    let text = target.innerText;
     let mdText = null;
+    if (this.creator && this.creator.trimValues && this.isInplaceForEditValues) {
+      html = html.trim();
+      text = text.trim();
+    }
     if (!this.editAsText && this.creator) {
       const options = {
         element: <Base><any>this.locString.owner,

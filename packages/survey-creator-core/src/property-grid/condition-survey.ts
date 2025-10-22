@@ -74,8 +74,7 @@ export class SurveyConditionEditorItem extends ConditionEditorItem {
     if (val == "true" || val == "false") return val;
     if (this.isNumeric(val)) return val;
     if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
-    if (!this.isQuote(val[0])) val = "'" + val;
-    if (!this.isQuote(val[val.length - 1])) val = val + "'";
+    if (!this.isQuote(val)) val = "'" + val + "'";
     return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
   }
   private isNumeric(val: any): boolean {

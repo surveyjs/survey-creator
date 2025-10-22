@@ -6,13 +6,11 @@ import { EmbeddedViewContentComponent } from "survey-angular-ui";
   template: "<ng-template #template><ng-template [component]=\"{ name: componentName, data: componentData }\"></ng-template></ng-template>",
   styles: [":host { display: none }"]
 })
-export class QuestionElementContentComponent extends EmbeddedViewContentComponent implements AfterViewInit, OnChanges {
+export class QuestionElementContentComponent extends EmbeddedViewContentComponent implements OnChanges {
   @Input() componentName!: string;
   @Input() componentData!: any;
-  ngAfterViewInit() {
-    this.embeddedView?.detach();
-  }
+  override ngDoCheck() {}
   ngOnChanges(changes: SimpleChanges): void {
-    this.embeddedView?.detectChanges();
+    this.embeddedView?.reattach();
   }
 }
