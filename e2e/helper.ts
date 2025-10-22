@@ -28,6 +28,8 @@ export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
     const errors: Array<Error> = [];
     page.addListener("pageerror", (error) => {
       errors.push(error);
+      // eslint-disable-next-line no-console
+      console.log(`Uncaught exception: "${error}"`);
     });
     await use(page);
     if (!skipJSErrors) {
