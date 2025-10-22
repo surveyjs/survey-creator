@@ -8,7 +8,6 @@ export interface ICreatorPresetEditorSetup {
 }
 
 export class CreatorPresetEditableBase {
-  private propertyGrid: PropertyGridModel;
   public parent: CreatorPresetEditableBase;
   protected get navigationPanelName(): string { return this.path + "_navigation"; }
   public children: Array<CreatorPresetEditableBase> = [];
@@ -98,11 +97,7 @@ export class CreatorPresetEditableBase {
     this.disposeCore();
     this.children.forEach(item => item.dispose());
   }
-  protected propertyGridSetObj(obj: any) {
-    this.propertyGrid["setObj"](obj);
-  }
   public setupQuestions(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.propertyGrid = creatorSetup.creator["designerPropertyGrid"];
     this.setupQuestionsCore(model, creatorSetup);
     this.children.forEach(item => {
       item.setupQuestions(model, creatorSetup);

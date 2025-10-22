@@ -373,7 +373,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     creator.readOnly = active;
     creator.toolbox.items.forEach(i => i.enabled = active);
     creator.toolbox.enabled = active;
-    this.propertyGridSetObj(null);
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {

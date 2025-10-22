@@ -313,7 +313,12 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
     };
   }
-
+  private propertyGrid: PropertyGridModel;
+  protected propertyGridSetObj(obj: any) {
+    const pageName = this.propertyGrid.survey.currentPage?.name;
+    this.propertyGrid["setObj"](obj);
+    this.propertyGrid.survey.currentPage = this.propertyGrid.survey.getPageByName(pageName);
+  }
   protected hasIcon(name: string) { return name == this.nameCategories; }
 
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
@@ -322,6 +327,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.propertyGrid = creatorSetup.creator["designerPropertyGrid"];
     super.setupQuestionsCore(model, creatorSetup);
     this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
@@ -401,11 +407,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     if (this.currentClassName) {
       this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
       this.setupDefaults(model);
-      this.propertyGridSetObj(this.currentProperties.getObj());
       const categories = this.currentProperties.getInitialJson(false);
       model.setValue(this.nameCategories, categories);
       const items = this.getCurrentlyHiddenItems(categories);
       model.setValue(this.nameMatrix, items);
+      this.propertyGridSetObj(this.currentProperties.getObj());
     }
     this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
