@@ -664,8 +664,6 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi entri baru",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Tampilkan bilah kemajuan",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
@@ -1154,8 +1152,6 @@ export var indonesianStrings = {
     maxRateDescription: "Deskripsi nilai maksimum",
     // "Input type"
     inputType: "Jenis masukan",
-    // "Option placeholder"
-    optionsCaption: "Keterangan pilihan",
     // "Default Answer"
     defaultValue: "Nilai standar",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var indonesianStrings = {
     timerLocation: "Tampilkan panel pengatur waktu",
     // "Timer mode"
     timerInfoMode: "Tampilkan mode panel pengatur waktu",
-    // "Panel display mode"
-    renderMode: "Mode render",
     // "Enable entry addition"
     allowAddPanel: "Bolehkan penambahan panel",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var indonesianStrings = {
     underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Sembunyi"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Keduanya"
@@ -3236,7 +3226,7 @@ export var indonesianStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render sebagai", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Melampirkan item asli", // Auto-generated string
+    attachData: "Melampirkan item asli", // Auto-generated string
     // "Choices"
     choices: "pilihan",
     // "Choices by url"

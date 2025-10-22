@@ -664,8 +664,6 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Yeni giriş konumu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "İlerleme çubuğunu gösterme",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -1154,8 +1152,6 @@ export var turkishStrings = {
     maxRateDescription: "Maksimum oran açıklaması",
     // "Input type"
     inputType: "Girdi tipi",
-    // "Option placeholder"
-    optionsCaption: "Seçenekler başlığı",
     // "Default Answer"
     defaultValue: "Varsayılan değer",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var turkishStrings = {
     timerLocation: "Zamanlayıcı panelini göster",
     // "Timer mode"
     timerInfoMode: "Zamanlayıcı paneli modunu göster",
-    // "Panel display mode"
-    renderMode: "İşleme modu",
     // "Enable entry addition"
     allowAddPanel: "Panel eklemeye izin ver",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var turkishStrings = {
     underRowSingle: "Satırın altında yalnızca bir bölüm görüntüleyin",
     // "Auto"
     auto: "Otomatik",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Gizli"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Her ikisi"
@@ -3236,7 +3226,7 @@ export var turkishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Farklı işle", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Orijinal öğeleri ekleme", // Auto-generated string
+    attachData: "Orijinal öğeleri ekleme", // Auto-generated string
     // "Choices"
     choices: "Seçenekler",
     // "Choices by url"

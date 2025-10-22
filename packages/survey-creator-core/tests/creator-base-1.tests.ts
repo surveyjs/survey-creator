@@ -1017,7 +1017,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2", startWithNewLine: false },
       { type: "text", name: "question3" }
-    ], showQuestionNumbers: "on"
+    ], showQuestionNumbers: true
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -1031,7 +1031,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
-    ], showQuestionNumbers: "on"
+    ], showQuestionNumbers: true
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -1636,7 +1636,7 @@ test("getQuestionContentWrapperComponentName for component", (): any => {
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
   const creator = new CreatorTester();
-  const survey = creator.createSurvey({ questions: [{ type: "test", name: "q1" }] });
+  const survey = creator.createSurvey({ elements: [{ type: "test", name: "q1" }] });
   const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
   const q = qCustom.contentPanel.questions[0];
   expect(q.name).toBe("rate1");
@@ -1682,7 +1682,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     });
   const creator = new CreatorTester();
   const survey = creator.createSurvey({
-    questions: [{
+    elements: [{
       "type": "mypanel",
       "name": "question1"
     }]
@@ -3504,7 +3504,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
   creator.addNewQuestionLast = false;
-  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: "on" };
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: true };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   panelModel.addNewQuestion();
@@ -3690,8 +3690,8 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(creator.showJSONEditorTab).toBeTruthy();
     creator = new CreatorTester({ pageEditMode: "single" });
     creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
-    expect(surveySettings.allowShowEmptyTitleInDesignMode).toBeFalsy();
-    expect(surveySettings.allowShowEmptyDescriptionInDesignMode).toBeFalsy();
+    expect(surveySettings.designMode.showEmptyTitles).toBeFalsy();
+    expect(surveySettings.designMode.showEmptyDescriptions).toBeFalsy();
     expect(creator.JSON.pages).toBeUndefined();
     expect(creator.JSON.elements).toBeDefined();
     expect(creator.text.indexOf("pages")).toBe(-1);
@@ -3705,8 +3705,8 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(objects.items[1].data).toEqual(allQuestions[0]);
 
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 test("get survey JSON with pageEditModeValue=single #2711", (): any => {
@@ -3715,8 +3715,8 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
     creator.text = "";
     expect(creator.JSON).toStrictEqual({ "headerView": "advanced" });
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
@@ -3729,8 +3729,8 @@ test("delete last question and selection with pageEditModeValue=single #2712", (
     creator.deleteElement(question);
     expect(creator.selectedElement).toBe(creator.survey);
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 
@@ -4109,7 +4109,7 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.maxVisibleChoices = 1;
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "dropdown",
         name: "test_dropdown",
@@ -4150,7 +4150,7 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
   const creator: CreatorTester = new CreatorTester();
   creator.maxVisibleChoices = -1;
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "dropdown",
         name: "test_dropdown",

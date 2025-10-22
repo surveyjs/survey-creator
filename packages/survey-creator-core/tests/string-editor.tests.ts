@@ -876,7 +876,7 @@ test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com
     pages: [
       {
         elements: [
-          { name: "q", type: "checkbox", choices: [1, 2, 3], hasOther: true }
+          { name: "q", type: "checkbox", choices: [1, 2, 3], showOtherItem: true }
         ]
       }
     ]

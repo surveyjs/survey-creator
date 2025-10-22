@@ -443,8 +443,8 @@ export class SurveyCreatorModel extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    SurveySettings.allowShowEmptyTitleInDesignMode = allowModifyPages;
-    SurveySettings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
+    SurveySettings.designMode.showEmptyTitles = allowModifyPages;
+    SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }

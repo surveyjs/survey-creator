@@ -664,8 +664,6 @@ export var fiStrings = {
       templateErrorLocation: "Virhesanoman tasaus",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Uusi sisääntulopaikka",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Näytä edistymispalkki",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Estä päällekkäiset vastaukset seuraavassa kysymyksessä"
     },
@@ -1154,8 +1152,6 @@ export var fiStrings = {
     maxRateDescription: "Enimmäismäärän kuvaus",
     // "Input type"
     inputType: "Syötä tyyppi",
-    // "Option placeholder"
-    optionsCaption: "Vaihtoehdot kuvateksti",
     // "Default Answer"
     defaultValue: "Oletusarvo",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var fiStrings = {
     timerLocation: "Näytä ajastus -paneeli",
     // "Timer mode"
     timerInfoMode: "Näytä ajastus -paneelin tila",
-    // "Panel display mode"
-    renderMode: "Renderöinnin tila",
     // "Enable entry addition"
     allowAddPanel: "Salli paneelin lisääminen",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var fiStrings = {
     underRowSingle: "Näytä rivin alla vain yksi osio",
     // "Auto"
     auto: "Automaattinen",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Piilotettu"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Molemmat"
@@ -3236,7 +3226,7 @@ export var fiStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Hahmonna muodossa", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Alkuperäisten kohteiden liittäminen", // Auto-generated string
+    attachData: "Alkuperäisten kohteiden liittäminen", // Auto-generated string
     // "Choices"
     choices: "Valinnat",
     // "Choices by url"

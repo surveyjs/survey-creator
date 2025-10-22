@@ -664,8 +664,6 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ново място за влизане",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Показване на лентата за напредъка",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -1154,8 +1152,6 @@ export var bgStrings = {
     maxRateDescription: "Описание на максималната оценка",
     // "Input type"
     inputType: "Тип на въвеждане",
-    // "Option placeholder"
-    optionsCaption: "Контейнер за опция",
     // "Default Answer"
     defaultValue: "Отговор по подразбиране",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var bgStrings = {
     timerLocation: "Местоположение на таймера",
     // "Timer mode"
     timerInfoMode: "Режим на таймера",
-    // "Panel display mode"
-    renderMode: "Режим на показване на панела",
     // "Enable entry addition"
     allowAddPanel: "Разрешаване добавянето на панели",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var bgStrings = {
     underRowSingle: "Под реда се вижда само един панел.",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Скрит"
-    },
     timerInfoMode: {
       // "Both"
       combined: "И двете"
@@ -3236,7 +3226,7 @@ export var bgStrings = {
     // "Render as"
     renderAs: "Представяне като", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Прикрепяне на оригиналните елементи", // Auto-generated string
+    attachData: "Прикрепяне на оригиналните елементи", // Auto-generated string
     // "Choices"
     choices: "Избори",
     // "Choices by url"

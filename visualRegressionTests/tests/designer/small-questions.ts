@@ -7,7 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
-  showQuestionNumbers: "on",
+  showQuestionNumbers: true,
   "pages": [
     {
       "name": "page1",

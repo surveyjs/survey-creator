@@ -664,8 +664,6 @@ export var traditionalChineseTranslation = {
       templateErrorLocation: "錯誤消息對齊",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入場地點",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "顯示進度條",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下問題中的重複回答"
     },
@@ -1155,8 +1153,6 @@ export var traditionalChineseTranslation = {
     maxRateDescription: "最大值提示",
     // "Input type"
     inputType: "文本框類型",
-    // "Option placeholder"
-    optionsCaption: "下拉框提示語",
     // [Auto-translated] "Default Answer"
     defaultValue: "默認答案",
     // [Auto-translated] "Default texts"
@@ -1273,8 +1269,6 @@ export var traditionalChineseTranslation = {
     timerLocation: "顯示計時器面板",
     // "Timer mode"
     timerInfoMode: "顯示計時器面板模式",
-    // "Panel display mode"
-    renderMode: "渲染模式",
     // "Enable entry addition"
     allowAddPanel: "允許添加面板",
     // "Enable entry removal"
@@ -2273,10 +2267,6 @@ export var traditionalChineseTranslation = {
     underRowSingle: "在行下，僅顯示一個部分",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隱藏"
-    },
     timerInfoMode: {
       // "Both"
       combined: "雙"
@@ -3237,7 +3227,7 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "渲染為", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "附加原始專案", // Auto-generated string
+    attachData: "附加原始專案", // Auto-generated string
     // "Choices"
     choices: "選項",
     // "Choices by url"

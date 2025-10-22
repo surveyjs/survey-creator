@@ -664,8 +664,6 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "진행률 표시줄 표시",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -1155,8 +1153,6 @@ export var koreanStrings = {
     maxRateDescription: "최대 설명 길이",
     // "Input type"
     inputType: "입력 유형",
-    // "Option placeholder"
-    optionsCaption: "옵션 캡션",
     // "Default Answer"
     defaultValue: "기본값",
     // "Default texts"
@@ -1273,8 +1269,6 @@ export var koreanStrings = {
     timerLocation: "타이머 패널 표시",
     // "Timer mode"
     timerInfoMode: "타이머 패널 모드 표시",
-    // "Panel display mode"
-    renderMode: "렌더링 모드",
     // "Enable entry addition"
     allowAddPanel: "패널 추가 허용",
     // "Enable entry removal"
@@ -2273,10 +2267,6 @@ export var koreanStrings = {
     underRowSingle: "행 아래에 하나의 섹션만 표시합니다.",
     // "Auto"
     auto: "자동",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "숨겨진"
-    },
     timerInfoMode: {
       // "Both"
       combined: "둘다"
@@ -3237,7 +3227,7 @@ export var koreanStrings = {
     // [Auto-translated] "Render as"
     renderAs: "렌더링 형식", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "원본 항목 첨부", // Auto-generated string
+    attachData: "원본 항목 첨부", // Auto-generated string
     // "Choices"
     choices: "선택",
     // "Choices by url"

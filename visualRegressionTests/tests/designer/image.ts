@@ -7,7 +7,7 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -46,7 +46,7 @@
 //     await explicitErrorHandler();
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -77,7 +77,7 @@
 //     await explicitErrorHandler();
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -106,7 +106,7 @@
 //     await explicitErrorHandler();
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {

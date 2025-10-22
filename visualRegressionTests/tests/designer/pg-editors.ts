@@ -8,7 +8,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 test("Properties on the same line", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -53,7 +53,7 @@ test("Properties on the same line", async (t) => {
 test("Properties on the same line (date)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -98,7 +98,7 @@ test("Properties on the same line (date)", async (t) => {
 test("Values editors, keep them close", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -125,7 +125,7 @@ test("Values editors, keep them close", async (t) => {
 test("Check default value editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -376,12 +376,12 @@ test("rateValues in property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
     await setJSON({
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "rating",
           "name": "question1",
-          "rateDisplayMode": "smileys",
+          "rateType": "smileys",
           "autoGenerate": false,
           "rateValues": [
             1,
@@ -429,7 +429,7 @@ test("Check question with error", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await setJSON({
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       type: "text",
       name: "q1",
     });
@@ -626,7 +626,7 @@ test("Check dropdown editor with titleLocation: 'left'", async (t) => {
 test("Check overriding property editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -695,7 +695,7 @@ test("Check text editor with reset button", async (t) => {
 test("Check accepted file types hint link", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -767,7 +767,7 @@ test("Property grid checkbox with description", async (t) => {
       (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
     })();
     await setJSON({
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -814,7 +814,7 @@ test("renderAs works in matrix questions for textwithreset", async (t) => {
       // });
     })();
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -841,7 +841,7 @@ test("popup overlay in property grid", async (t) => {
       window["Survey"]._setIsTouch(true);
     })();
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -899,7 +899,7 @@ test("Character counter in property grid", async t => {
       window["Survey"].Serializer.findProperty("question", "title").maxLength = 20;
     })();
     await setJSON({
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

@@ -12,7 +12,7 @@ const multipageJSON = {
     {
       name: "page1",
       title: "Page 1",
-      questions: [
+      elements: [
         { type: "text", name: "question1" },
         {
           name: "question2",
@@ -25,10 +25,10 @@ const multipageJSON = {
         }
       ]
     },
-    { name: "page2", questions: [{ name: "question3", type: "comment" }] },
+    { name: "page2", elements: [{ name: "question3", type: "comment" }] },
     {
       name: "page3",
-      questions: [
+      elements: [
         {
           name: "question4",
           columns: ["Column 1", "Column 2", "Column 3"],

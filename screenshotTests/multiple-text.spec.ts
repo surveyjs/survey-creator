@@ -10,7 +10,7 @@ test.describe(title, () => {
   test("Multiple text items", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

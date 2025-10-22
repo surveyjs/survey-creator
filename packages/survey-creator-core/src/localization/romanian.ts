@@ -664,8 +664,6 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       // "New entry location"
       newPanelPosition: "Locația noului panou",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Afișați bara de progres",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -1154,8 +1152,6 @@ export const roStrings = {
     maxRateDescription: "Etichetă valoare maximă",
     // "Input type"
     inputType: "Tip intrare",
-    // "Option placeholder"
-    optionsCaption: "Locaș opțiune",
     // "Default Answer"
     defaultValue: "Răspuns implicit",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export const roStrings = {
     timerLocation: "Alinierea timerului",
     // "Timer mode"
     timerInfoMode: "Modul timerului",
-    // "Panel display mode"
-    renderMode: "Modul de afișare a panoului",
     // "Enable entry addition"
     allowAddPanel: "Permite adăugarea panoului",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Ascuns"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambele"
@@ -3236,7 +3226,7 @@ export const roStrings = {
     // "Render as"
     renderAs: "Renderizare ca", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Atașați elementele originale", // Auto-generated string
+    attachData: "Atașați elementele originale", // Auto-generated string
     // "Choices"
     choices: "Opțiuni",
     // "Choices by url"

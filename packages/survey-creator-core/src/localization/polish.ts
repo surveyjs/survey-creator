@@ -664,8 +664,6 @@ export var polishStrings = {
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nowa lokalizacja wejścia",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Wyświetlanie paska postępu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
@@ -1155,8 +1153,6 @@ export var polishStrings = {
     maxRateDescription: "Opis najwyższej oceny",
     // "Input type"
     inputType: "Input type",
-    // "Option placeholder"
-    optionsCaption: "Options caption",
     // "Default Answer"
     defaultValue: "Default value",
     // [Auto-translated] "Default texts"
@@ -1273,8 +1269,6 @@ export var polishStrings = {
     timerLocation: "Show timer panel",
     // "Timer mode"
     timerInfoMode: "Show timer panel mode",
-    // "Panel display mode"
-    renderMode: "Render mode",
     // "Enable entry addition"
     allowAddPanel: "Allow adding a panel",
     // "Enable entry removal"
@@ -2273,10 +2267,6 @@ export var polishStrings = {
     underRowSingle: "Pod wierszem wyświetl tylko jedną sekcję",
     // "Auto"
     auto: "Automatycznie",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Ukryty"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obie"
@@ -3237,7 +3227,7 @@ export var polishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderuj jako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Dołączanie oryginalnych elementów", // Auto-generated string
+    attachData: "Dołączanie oryginalnych elementów", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "Wyborów",
     // [Auto-translated] "Choices by url"

@@ -664,8 +664,6 @@ export var portugueseTranslation = {
       templateErrorLocation: "Alinhamento da mensagem de erro",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Novo local de entrada",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Mostrar a barra de progresso",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evite respostas duplicadas na seguinte pergunta"
     },
@@ -1154,8 +1152,6 @@ export var portugueseTranslation = {
     maxRateDescription: "Descrição de qualificação máxima",
     // "Input type"
     inputType: "Tipo de entrada",
-    // "Option placeholder"
-    optionsCaption: "Título de opção",
     // "Default Answer"
     defaultValue: "Valor pré-definido",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var portugueseTranslation = {
     timerLocation: "Mostrar o painel de cronômetro",
     // "Timer mode"
     timerInfoMode: "Mostrar painel de modo de cronômetro",
-    // "Panel display mode"
-    renderMode: "Modo de renderização",
     // "Enable entry addition"
     allowAddPanel: "Permitir adicionar painel",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var portugueseTranslation = {
     underRowSingle: "Sob a linha, apenas um painel é visível",
     // "Auto"
     auto: "Automático",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Escondido"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -3236,7 +3226,7 @@ export var portugueseTranslation = {
     // "Render as"
     renderAs: "renderizar como", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "anexar itens originais", // Auto-generated string
+    attachData: "anexar itens originais", // Auto-generated string
     // "Choices"
     choices: "Opções",
     // "Choices by url"

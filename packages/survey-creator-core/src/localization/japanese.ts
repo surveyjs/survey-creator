@@ -664,8 +664,6 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "進行状況バーを表示する",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -1154,8 +1152,6 @@ export var jaStrings = {
     maxRateDescription: "最大レートの説明",
     // "Input type"
     inputType: "入力タイプ",
-    // "Option placeholder"
-    optionsCaption: "オプションのキャプション",
     // "Default Answer"
     defaultValue: "デフォルト値",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var jaStrings = {
     timerLocation: "タイマーパネルを表示する",
     // "Timer mode"
     timerInfoMode: "タイマーパネルモードを表示",
-    // "Panel display mode"
-    renderMode: "レンダーモード",
     // "Enable entry addition"
     allowAddPanel: "パネルの追加を許可",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var jaStrings = {
     underRowSingle: "行の下には、1 つのセクションのみを表示します",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隠れた"
-    },
     timerInfoMode: {
       // "Both"
       combined: "両方とも"
@@ -3236,7 +3226,7 @@ export var jaStrings = {
     // [Auto-translated] "Render as"
     renderAs: "レンダリング形式", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "オリジナルアイテムを添付する", // Auto-generated string
+    attachData: "オリジナルアイテムを添付する", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "選択肢",
     // [Auto-translated] "Choices by url"

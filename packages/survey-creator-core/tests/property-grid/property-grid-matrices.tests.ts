@@ -34,7 +34,7 @@ test("Validators property editor, v2", () => {
     validatorsQuestion.visibleRows[0].cells[0].question
   );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
-  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.allowClear).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = question.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
@@ -87,7 +87,7 @@ test("Validators property editor for column", () => {
     validatorsQuestion.visibleRows[0].cells[0].question
   );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
-  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.allowClear).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = column.templateQuestion.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
@@ -175,7 +175,7 @@ test("Triggers property editor", () => {
   triggerTypeQuestion = <QuestionDropdownModel>(
     triggersQuestion.visibleRows[1].cells[0].question
   );
-  expect(triggerTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(triggerTypeQuestion.allowClear).toBeFalsy();
   triggerTypeQuestion.value = "completetrigger";
   expect(
     triggersQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
@@ -361,7 +361,7 @@ test("QuestionMultipleTextModel items property editor + validators editor, #1", 
     validatorsQuestion.visibleRows[0].cells[0].question
   );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
-  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.allowClear).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = textItem.editor.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);

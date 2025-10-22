@@ -107,7 +107,7 @@ function createSurvey(): SurveyModel {
     pages: [
       {
         name: "page1",
-        questions: [
+        elements: [
           { type: "text", name: "question1" },
           {
             name: "question2",
@@ -120,10 +120,10 @@ function createSurvey(): SurveyModel {
           }
         ]
       },
-      { name: "page2", questions: [{ name: "question3", type: "comment" }] },
+      { name: "page2", elements: [{ name: "question3", type: "comment" }] },
       {
         name: "page3",
-        questions: [
+        elements: [
           {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
@@ -471,7 +471,7 @@ test("SurveyPropertyItemValuesEditor - returns error on empty value", () => {
 });
 test("SurveyPropertyItemValue disable viewtext for multiple languages", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       {
         type: "checkbox",
         name: "q1",
@@ -934,6 +934,7 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
+  expect(columnsQuestion.noRowsText).toEqual("You don't have any columns yet");
   expect(columnsQuestion.addRowText).toEqual("Add new column");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;

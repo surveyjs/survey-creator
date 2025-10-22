@@ -664,8 +664,6 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       // "New entry location"
       newPanelPosition: "ตำแหน่งแผงใหม่",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "แสดงแถบความคืบหน้า",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -1154,8 +1152,6 @@ export const thStrings = {
     maxRateDescription: "ป้ายกำกับค่าสูงสุด",
     // "Input type"
     inputType: "ประเภทอินพุต",
-    // "Option placeholder"
-    optionsCaption: "ข้อความตัวอย่างตัวเลือก",
     // "Default Answer"
     defaultValue: "คำตอบเริ่มต้น",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export const thStrings = {
     timerLocation: "การจัดตำแหน่งตัวจับเวลา",
     // "Timer mode"
     timerInfoMode: "โหมดตัวจับเวลา",
-    // "Panel display mode"
-    renderMode: "โหมดแสดงผลแผง",
     // "Enable entry addition"
     allowAddPanel: "เปิดใช้งานการเพิ่มแผง",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export const thStrings = {
     underRowSingle: "ใต้แถว แสดงการขยายแถวเดียว",
     // "Auto"
     auto: "อัตโนมัติ",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "ซ่อน"
-    },
     timerInfoMode: {
       // "Both"
       combined: "ทั้งสอง"
@@ -3236,7 +3226,7 @@ export const thStrings = {
     // "Render as"
     renderAs: "แสดงผลเป็น", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "แนบรายการเดิม", // Auto-generated string
+    attachData: "แนบรายการเดิม", // Auto-generated string
     // "Choices"
     choices: "ตัวเลือก",
     // "Choices by url"

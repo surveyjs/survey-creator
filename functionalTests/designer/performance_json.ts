@@ -744,7 +744,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -1567,7 +1566,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -2390,7 +2388,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -3213,7 +3210,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -4036,7 +4032,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -4859,7 +4854,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -5682,7 +5676,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -6511,7 +6504,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -7334,7 +7326,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -8157,7 +8148,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -8980,7 +8970,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -9803,7 +9792,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -10626,7 +10614,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -11449,7 +11436,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -12278,7 +12264,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -13101,7 +13086,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -13924,7 +13908,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -14747,7 +14730,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -15570,7 +15552,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -16393,7 +16374,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -17216,7 +17196,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -18045,7 +18024,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -18868,7 +18846,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -19691,7 +19668,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -20514,7 +20490,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -21337,7 +21312,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -22160,7 +22134,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -22983,7 +22956,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -23806,7 +23778,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         }
       ],
@@ -24635,7 +24606,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -25458,7 +25428,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -26281,7 +26250,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -27104,7 +27072,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -27927,7 +27894,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -28750,7 +28716,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -29573,7 +29538,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -30396,7 +30360,6 @@ export const large_json = {
           "panelCount": 2,
           "addPanelText": "Add a blood relative",
           "removePanelText": "Remove the relative",
-          "renderMode": "progressTop",
           "displayMode": "carousel"
         },
         {
@@ -30489,5 +30452,6 @@ export const large_json = {
       "title": "Page 5"
     }
   ],
-  "showProgressBar": "both"
+  "showProgressBar": true,
+  "progressBarLocation": "topBottom"
 };

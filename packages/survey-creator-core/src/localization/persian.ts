@@ -664,8 +664,6 @@ export var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       // [Auto-translated] "New entry location"
       newPanelPosition: "محل ورود جدید",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "نمایش نوار پیشرفت",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
@@ -1154,8 +1152,6 @@ export var persianStrings = {
     maxRateDescription: "توضیح حداکثر امتیاز",
     // "Input type"
     inputType: "نوع ورودی",
-    // "Option placeholder"
-    optionsCaption: "نوشته انتخاب ها",
     // "Default Answer"
     defaultValue: "مقدار پیش فرض",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var persianStrings = {
     timerLocation: "نمایش پنل زمان سنج",
     // "Timer mode"
     timerInfoMode: "نمایش حالت پنل زمان سنج",
-    // "Panel display mode"
-    renderMode: "حالت رندر",
     // "Enable entry addition"
     allowAddPanel: "اجازه افزودن پنل",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var persianStrings = {
     underRowSingle: "در زیر ردیف، فقط یک بخش نمایش داده می شود",
     // "Auto"
     auto: "خودکار",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "پنهان"
-    },
     timerInfoMode: {
       // "Both"
       combined: "هر دو"
@@ -3236,7 +3226,7 @@ export var persianStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render به عنوان", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "پیوست موارد اصلی", // Auto-generated string
+    attachData: "پیوست موارد اصلی", // Auto-generated string
     // "Choices"
     choices: "گزینه ها",
     // "Choices by url"

@@ -664,8 +664,6 @@ export var htStrings = {
       templateErrorLocation: "Erè mesaj aliyman",
       // "New entry location"
       newPanelPosition: "Nouvo kote panèl",
-      // "Show the progress bar"
-      showRangeInProgress: "Montre ba pwogrè a",
       // "Prevent duplicate responses in the following question"
       keyName: "Anpeche repons doub nan kesyon sa a"
     },
@@ -1154,8 +1152,6 @@ export var htStrings = {
     maxRateDescription: "Maksimòm valè etikèt",
     // "Input type"
     inputType: "Kalite Antre",
-    // "Option placeholder"
-    optionsCaption: "Anplasman opsyon",
     // "Default Answer"
     defaultValue: "Repons Default",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var htStrings = {
     timerLocation: "Aliyman revèy",
     // "Timer mode"
     timerInfoMode: "Mòd revèy",
-    // "Panel display mode"
-    renderMode: "Mòd ekspozisyon panèl",
     // "Enable entry addition"
     allowAddPanel: "Pèmèt adisyon panèl",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var htStrings = {
     underRowSingle: "Anba ranje a, montre yon sèl ekspansyon ranje sèlman",
     // "Auto"
     auto: "Oto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Kache"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Tou de"
@@ -3236,7 +3226,7 @@ export var htStrings = {
     // "Render as"
     renderAs: "Rann kòm", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Tache atik orijinal yo", // Auto-generated string
+    attachData: "Tache atik orijinal yo", // Auto-generated string
     // "Choices"
     choices: "Chwa",
     // "Choices by url"

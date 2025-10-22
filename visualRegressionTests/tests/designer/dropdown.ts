@@ -7,8 +7,8 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
-//   questions: [
+//   showQuestionNumbers: true,
+//   elements: [
 //     {
 //       type: "dropdown",
 //       name: "q1",

@@ -760,7 +760,7 @@ export class Translation extends Base implements ITranslationLocales {
       }
     });
     res.onGetQuestionTitleActions.add((sender, options) => {
-      options.titleActions = [this.addLanguageAction];
+      options.actions = [this.addLanguageAction];
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
@@ -1143,9 +1143,8 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateReadOnly(): void {
     if (this.stringsSurvey) {
-      const mode = this.readOnly ? "display" : "edit";
-      this.stringsSurvey.mode = mode;
-      this.settingsSurvey.mode = mode;
+      this.stringsSurvey.readOnly = this.readOnly;
+      this.settingsSurvey.readOnly = this.readOnly;
     }
   }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
@@ -1607,7 +1606,8 @@ export class TranslationEditor {
     exportAction.css = actionCss;
     survey.addNavigationItem(importAction);
     survey.addNavigationItem(exportAction);
-    survey.showNavigationButtons = "top";
+    survey.showNavigationButtons = true;
+    survey.navigationButtonsLocation = "top";
   }
   private createStringsToTranslate(): Array<TranslationItem> {
     const res = new Array<TranslationItem>();

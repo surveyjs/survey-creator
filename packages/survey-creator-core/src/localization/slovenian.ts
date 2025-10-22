@@ -664,8 +664,6 @@ export var slStrings = {
       templateErrorLocation: "Poravnava sporočila o napaki",
       // "New entry location"
       newPanelPosition: "Nova lokacija plošče",
-      // "Show the progress bar"
-      showRangeInProgress: "Prikaži vrstico napredka",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -1154,8 +1152,6 @@ export var slStrings = {
     maxRateDescription: "Oznaka za maksimalno vrednost",
     // "Input type"
     inputType: "Vrsta vnosa",
-    // "Option placeholder"
-    optionsCaption: "Zaslon možnosti",
     // "Default Answer"
     defaultValue: "Privzeti odgovor",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var slStrings = {
     timerLocation: "Poravnava timerja",
     // "Timer mode"
     timerInfoMode: "Način timerja",
-    // "Panel display mode"
-    renderMode: "Način prikaza panela",
     // "Enable entry addition"
     allowAddPanel: "Omogoči dodajanje panela",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var slStrings = {
     underRowSingle: "Pod řádkem, zobrazit pouze jednu expanze řádku",
     // "Auto"
     auto: "Automaticky",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Skryté"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obojí"
@@ -3236,7 +3226,7 @@ export var slStrings = {
     // "Render as"
     renderAs: "Upodobi kot", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Poveži izvirne predmete", // Auto-generated string
+    attachData: "Poveži izvirne predmete", // Auto-generated string
     // "Choices"
     choices: "Izbire",
     // "Choices by url"

@@ -28,7 +28,7 @@ export class MatrixCellWrapperEditSurvey {
     this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
-    this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
+    this.surveyValue = creator.createSurvey({ elements: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
       survey.css = defaultCss;
       survey.setDesignMode(true);
       (<any>survey).isPopupEditorContent = true;
