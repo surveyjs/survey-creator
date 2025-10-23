@@ -1971,8 +1971,7 @@ export class SurveyCreatorModel extends Base
       this.switchTab(this.tabs[0].id);
     }
   }
-  private initPlugins(): void {
-    this.addPlugin("undoredo", new UndoRedoPlugin(this));
+  public initialTabs() {
     const tabs = [];
     if (this.showDesignerTab) {
       tabs.push("designer");
@@ -1992,6 +1991,11 @@ export class SurveyCreatorModel extends Base
     if (this.showTranslationTab) {
       tabs.push("translation");
     }
+    return tabs;
+  }
+  private initPlugins(): void {
+    this.addPlugin("undoredo", new UndoRedoPlugin(this));
+    const tabs = this.initialTabs();
     this.setTabs(tabs);
   }
   private initFooterToolbar(): void {
