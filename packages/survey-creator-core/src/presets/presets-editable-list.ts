@@ -111,7 +111,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         a.component = "sv-action-bar-item";
         a.action = () => question.removeRowUI(row);
         a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
-        a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.add");
+        a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.delete");
       }
     });
   }
