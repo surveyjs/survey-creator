@@ -1384,7 +1384,7 @@ export var slStrings = {
     labelFalse: "Oznaka za »Neresnično«",
     // "Show the Clear button"
     allowClear: "Prikaži gumb za brisanje",
-    // "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Način iskanja",
     // "Display format"
     displayStyle: "Format prikaza",
@@ -2938,6 +2938,10 @@ export var slStrings = {
     detailErrorLocation: "Nastavi lokacijo sporočil o napakah za vprašanja, gnezdena v podrobnostnih razdelkih. Nastavitev Podedovano uporablja nastavitev iz lastnosti: Poravnava sporočila o napaki",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Ko je omogočena lastnost Prepreči podvojene odgovore, bo anketiranec, ki bo poskušal oddati podvojen vnos, prejel naslednje sporočilo o napaki",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Ko je lastnost »Prepreči podvojene odgovore« omogočena za stolpec matrike, bo respondent, ki poskuša poslati podvojeni vnos, prejel to sporočilo o napaki."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Omogoča izračun skupnih vrednosti na podlagi izraza. Izraz lahko vključuje: osnovne izračune ({q1_id} + {q2_id}), Booleove izraze ({age} > 60) in funkcije (iif(), today(), age(), min(), max(), avg() itd.)",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3100,10 @@ export var slStrings = {
     fileOrPhotoPlaceholder: "Velja, ko je \"Vrsta vira datoteke\" nastavljena na \"Lokalna datoteka ali kamera\"",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Razporedi možnosti izbire v več-stolpčni postavitvi. Ko je nastavljen na 0, so možnosti prikazane v eni vrstici",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Razporedi polja z besedilom v postavitev z več stolpci."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Izberite, če želite shraniti vrednost vprašanja z uporabo maske v rezultatih ankete"
