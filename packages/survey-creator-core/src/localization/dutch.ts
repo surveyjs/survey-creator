@@ -1384,7 +1384,7 @@ export var nlStrings = {
     labelFalse: "Label 'Onwaar'",
     // "Show the Clear button"
     allowClear: "De knop Wissen weergeven",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Zoekmodus",
     // [Auto-translated] "Display format"
     displayStyle: "Weergave formaat",
@@ -2938,6 +2938,10 @@ export var nlStrings = {
     detailErrorLocation: "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Wanneer de eigenschap 'Dubbele reacties voorkomen' is ingeschakeld voor een matrixkolom, ontvangt een respondent die een dubbele invoer probeert in te dienen, het volgende foutbericht."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3100,10 @@ export var nlStrings = {
     fileOrPhotoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als de optie op 0 staat, worden de opties op één regel weergegeven.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Rangschikt tekstvakken in een lay-out met meerdere kolommen."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selecteer of u de vraagwaarde met een toegepast masker wilt opslaan in enquêteresultaten."
