@@ -664,8 +664,6 @@ export var nbStrings = {
       templateErrorLocation: "Justering av feilmelding",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny inngangsplassering",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Vis fremdriftslinjen",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
@@ -1154,8 +1152,6 @@ export var nbStrings = {
     maxRateDescription: "Beskrivelse maksimumsvurdering",
     // "Input type"
     inputType: "Inndata-type",
-    // "Option placeholder"
-    optionsCaption: "Tekst for alternativer",
     // "Default Answer"
     defaultValue: "Standardverdi",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var nbStrings = {
     timerLocation: "Vis tidtaking",
     // "Timer mode"
     timerInfoMode: "Vis tidtaking-modus",
-    // "Panel display mode"
-    renderMode: "Gjengivelse modus",
     // "Enable entry addition"
     allowAddPanel: "Tillat å legge til panel",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var nbStrings = {
     underRowSingle: "Under raden viser du bare én inndeling",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skjult"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Begge"
@@ -3236,7 +3226,7 @@ export var nbStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Gjengi som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Legg ved originale elementer", // Auto-generated string
+    attachData: "Legg ved originale elementer", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

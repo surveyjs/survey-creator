@@ -36,7 +36,58 @@ let json = {
               "title": "Concert",
               "rateType": "stars"
             }
-          ]
+          ],
+          showOtherItem: true,
+          choices: [
+            "Performance",
+            "Stability",
+            "User Interface",
+            "Complete Functionality"
+          ],
+          otherText: "Other feature:",
+          colCount: 2
+        },
+        {
+          type: "comment",
+          name: "passive_experience",
+          visibleIf: "{nps_score} > 6  and {nps_score} < 9",
+          title: "What is the primary reason for your score?"
+        },
+        {
+          type: "comment",
+          name: "disappointed_experience",
+          visibleIf: "{nps_score} notempty",
+          title:
+            "What do you miss and what was disappointing in your experience with us?"
+        }
+      ]
+    },
+    {
+      name: "page2",
+      elements: [
+        {
+          type: "checkbox",
+          name: "question4",
+          choices: ["item1", "item2", "item3"]
+        }
+      ]
+    },
+    {
+      name: "page3",
+      elements: [
+        {
+          type: "dropdown",
+          name: "question5",
+          choices: ["item1", "item2", "item3"]
+        }
+      ]
+    },
+    {
+      name: "page4",
+      elements: [
+        {
+          type: "rating",
+          name: "question6"
         }
       ]
     }

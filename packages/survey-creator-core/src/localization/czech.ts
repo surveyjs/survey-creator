@@ -664,8 +664,6 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nová vstupní lokace",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazení ukazatele průběhu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -1154,8 +1152,6 @@ export var czStrings = {
     maxRateDescription: "Popis maximální sazby",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Popisek možností",
     // "Default Answer"
     defaultValue: "Výchozí hodnota",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var czStrings = {
     timerLocation: "Zobrazit panel časovače",
     // "Timer mode"
     timerInfoMode: "Zobrazit režim panelu časovače",
-    // "Panel display mode"
-    renderMode: "Režim vykreslování",
     // "Enable entry addition"
     allowAddPanel: "Povolit přidání panelu",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var czStrings = {
     underRowSingle: "Pod řádkem, pouze jeden panel je viditelný",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obě"
@@ -3236,7 +3226,7 @@ export var czStrings = {
     // "Render as"
     renderAs: "Vykreslit jako", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Připojit původní položky", // Auto-generated string
+    attachData: "Připojit původní položky", // Auto-generated string
     // "Choices"
     choices: "Volby",
     // "Choices by url"

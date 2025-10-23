@@ -1,6 +1,8 @@
 import {
   Base, ImageItemValue, ItemValue, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel,
+  QuestionDropdownModel,
+  ChoiceItem
 } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
@@ -11,6 +13,8 @@ import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
 import { calculateDragOverLocation } from "../src/dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
+import { QuestionAdornerViewModel } from "../src/components/question";
+import { ExpandCollapseManager } from "../src/expand-collapse-manager";
 
 beforeEach(() => { });
 
@@ -55,7 +59,7 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
   expect(selectAllItemAdorner.allowRemove).toBeFalsy();
 
-  question.hasSelectAll = true;
+  question.showSelectAllItem = true;
   expect(selectAllItemAdorner.isNew).toBeFalsy();
   expect(selectAllItemAdorner.allowAdd).toBeFalsy();
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
@@ -588,7 +592,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
   expect(ratingAdorner.enableAdd).toBeTruthy();
   expect(ratingAdorner.enableRemove).toBeTruthy();
 
-  question.rateDisplayMode = "smileys";
+  question.rateType = "smileys";
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeFalsy();
@@ -1115,4 +1119,133 @@ test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
   expect(imageAdorner.question).toBeUndefined();
   imageAdorner.imageLinkValueChangedHandler();
   expect(imageAdorner.isEmptyElement).toBeTruthy();
+});
+test("Show/hide choiceitem panel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 2;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] },
+      { type: "dropdown", name: "q2", choices: [1, 2, 3] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
+
+  const selectAllItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.selectAllItem);
+  const firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[1]);
+  expect(firstItemAdorner.canShowPanel()).toBeTruthy();
+  expect(selectAllItemAdorner.canShowPanel()).toBeFalsy();
+  const secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  expect(secondItemAdorner.canShowPanel()).toBeFalsy();
+  expect(firstItemAdorner.showPanel).toBeFalsy();
+  expect(firstItemAdorner.item.panel.wasRendered).toBeFalsy();
+  firstItemAdorner.togglePanel();
+  expect(firstItemAdorner.showPanel).toBeTruthy();
+  expect(firstItemAdorner.item.panel.wasRendered).toBeTruthy();
+});
+test("Show/hide choiceitem panel based on creator.maxChoiceContentNestingLevel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 2;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [{ value: 1, elements: [{ type: "checkbox", name: "q2", choices: [1, 2, 3] }] }, 2, 3] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
+  let firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  let secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  creator.maxChoiceContentNestingLevel = 0;
+  expect(firstItemAdorner.canShowPanel()).toBeFalsy();
+  expect(secondItemAdorner.canShowPanel()).toBeFalsy();
+  creator.maxChoiceContentNestingLevel = 1;
+  firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  expect(firstItemAdorner.canShowPanel()).toBeTruthy();
+  expect(secondItemAdorner.canShowPanel()).toBeFalsy();
+  creator.maxChoiceContentNestingLevel = 2;
+  firstItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  secondItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  expect(firstItemAdorner.canShowPanel()).toBeTruthy();
+  expect(secondItemAdorner.canShowPanel()).toBeTruthy();
+});
+test("Do not collapse choice panel on adding a new question into empty panel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 1;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [1, 2, 3] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const itemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  itemAdorner.showPanel = true;
+  const panelAdorner = new QuestionAdornerViewModel(creator, itemAdorner.item.panel, undefined as any);
+  panelAdorner.addNewQuestion();
+  expect(q1.choices[0].elements).toHaveLength(1);
+  expect(itemAdorner.showPanel).toBeTruthy();
+  const itemAdorner2 = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  expect(itemAdorner2.showPanel).toBeTruthy();
+});
+test("ExpandCollapseManager for choice item panel", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 1;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [1, 2, 3] }]
+  };
+  const manager = creator.expandCollapseManager;
+  const question = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const adorner1_1 = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const adorner2_1 = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  const adorner3_1 = new ItemValueWrapperViewModel(creator, question, question.choices[2]);
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeFalsy();
+  adorner1_1.showPanel = true;
+  expect(adorner1_1.showPanel).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  const adorner1_2 = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  expect(adorner1_2.showPanel).toBeTruthy();
+  adorner2_1.showPanel = true;
+  expect(adorner2_1.showPanel).toBeTruthy();
+  expect(adorner3_1.showPanel).toBeFalsy();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeTruthy();
+
+  manager.collapseChoices(question.choices);
+  expect(adorner1_1.showPanel).toBeFalsy();
+  expect(adorner1_2.showPanel).toBeFalsy();
+  expect(adorner2_1.showPanel).toBeFalsy();
+  expect(adorner3_1.showPanel).toBeFalsy();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeTruthy();
+
+  manager.expandChoices();
+  expect(adorner1_1.showPanel).toBeTruthy();
+  expect(adorner1_2.showPanel).toBeTruthy();
+  expect(adorner2_1.showPanel).toBeTruthy();
+  expect(adorner3_1.showPanel).toBeFalsy();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeTruthy();
+  expect(manager.isChoiceExpanded(question.choices[2])).toBeFalsy();
+
+  adorner2_1.dispose();
+  expect(manager.isChoiceExpanded(question.choices[1])).toBeFalsy();
+  adorner1_1.dispose();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeTruthy();
+  adorner1_2.dispose();
+  expect(manager.isChoiceExpanded(question.choices[0])).toBeFalsy();
+});
+test("Adorner should react on calling function of choiceItem", (): any => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 1;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1",
+      choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const choiceItem = <ChoiceItem>question.choices[0];
+  const adorner = new ItemValueWrapperViewModel(creator, question, choiceItem);
+  expect(adorner.showPanel).toBeFalsy();
+  choiceItem.onExpandPanelAtDesign.fire(choiceItem, {});
+  expect(adorner.showPanel).toBeTruthy();
+  expect(choiceItem.onExpandPanelAtDesign.length).toBe(1);
+  adorner.dispose();
+  expect(choiceItem.onExpandPanelAtDesign.length).toBe(0);
 });

@@ -167,8 +167,8 @@ test("dropdown property editor localization", (): any => {
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
-  expect(localeQuestion.showOptionsCaption).toBeTruthy();
-  expect(localeQuestion.optionsCaption).toEqual("Default (English)");
+  expect(localeQuestion.allowClear).toBeTruthy();
+  expect(localeQuestion.placeholder).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
 });
 test("dropdown property editor localization & empty supportedLocales", (): any => {
@@ -182,8 +182,8 @@ test("dropdown property editor localization & empty supportedLocales", (): any =
   );
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.choices).toHaveLength(0);
-  expect(localeQuestion.showOptionsCaption).toBeTruthy();
-  expect(localeQuestion.optionsCaption).toEqual("Default (English)");
+  expect(localeQuestion.allowClear).toBeTruthy();
+  expect(localeQuestion.placeholder).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
   surveyLocalization.supportedLocales = oldSupportedLocales;
 });
@@ -640,7 +640,7 @@ test("Support property visibleIf attribute", () => {
   var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
   expect(otherTextPropEd).toBeTruthy(); //otherText is here
   expect(otherTextPropEd.isVisible).toEqual(false); //It hidden by default
-  question.hasOther = true;
+  question.showOtherItem = true;
   expect(otherTextPropEd.isVisible).toEqual(true); //We show it now
 });
 test("Show property editor for condition/expression", () => {
@@ -999,7 +999,7 @@ test("property visibleIf attribute and options.onCanShowPropertyCallback", () =>
   var propertyGrid = new PropertyGridModelTester(question, options);
   var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
   expect(otherTextPropEd.isVisible).toEqual(false);
-  question.hasOther = true;
+  question.showOtherItem = true;
   expect(otherTextPropEd.isVisible).toEqual(false);
 });
 test("restfull property editor and options.onCanShowPropertyCallback", () => {
@@ -2504,7 +2504,7 @@ test("showOptionsCaption/allowClear for dropdown with empty choice item", () => 
   expect(testQuestion.choices).toHaveLength(10);
   expect(testQuestion.showOptionsCaption).toBeTruthy();
   expect(testQuestion.allowClear).toBeTruthy();
-  expect(testQuestion.optionsCaption).toEqual("Empty value");
+  expect(testQuestion.placeholder).toEqual("Empty value");
 
   Serializer.removeProperty("question", "test");
 });
@@ -3434,9 +3434,9 @@ test("check pages editor respects onPageAdding", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { titleActions: [], question: pagesQuestion };
+  const options = { actions: [], question: pagesQuestion };
   propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.titleActions[0] as IAction;
+  const addNewPageAction = options.actions[0] as IAction;
 
   expect(creator.survey.pages.length).toBe(0);
   addNewPageAction.action!();
@@ -3461,9 +3461,9 @@ test("Localication and survey.pages property, Bug#6687", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { titleActions: [], question: pagesQuestion };
+  const options = { actions: [], question: pagesQuestion };
   propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.titleActions[0] as IAction;
+  const addNewPageAction = options.actions[0] as IAction;
 
   expect(creator.survey.pages.length).toBe(0);
   addNewPageAction.action!();

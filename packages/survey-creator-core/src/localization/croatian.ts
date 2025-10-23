@@ -664,8 +664,6 @@ export var hrStrings = {
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nova lokacija ulaska",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Prikaz trake napretka",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
@@ -1154,8 +1152,6 @@ export var hrStrings = {
     maxRateDescription: "Opis maksimalne stope",
     // "Input type"
     inputType: "Vrsta unosa",
-    // "Option placeholder"
-    optionsCaption: "Opis opcija",
     // "Default Answer"
     defaultValue: "Zadana vrijednost",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var hrStrings = {
     timerLocation: "Pokaži ploču timera",
     // "Timer mode"
     timerInfoMode: "Prikazate način rada timer panela",
-    // "Panel display mode"
-    renderMode: "Način prikaza",
     // "Enable entry addition"
     allowAddPanel: "Dopustite dodavanje ploče",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var hrStrings = {
     underRowSingle: "Ispod retka prikažite samo jedan odjeljak",
     // "Auto"
     auto: "Automobil",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skriven"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Oba"
@@ -3236,7 +3226,7 @@ export var hrStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Iscrtaj kao", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloži izvorne stavke", // Auto-generated string
+    attachData: "Priloži izvorne stavke", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

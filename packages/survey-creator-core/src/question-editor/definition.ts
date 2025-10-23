@@ -146,7 +146,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   matrixdropdownbase: {
     properties: [
       "cellType",
-      "optionsCaption",
       "detailPanelMode",
       "detailPanelShowOnAdding",
       "singleInputTitleTemplate",
@@ -535,7 +534,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "otherText", tab: "choices" },
       { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
-      { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
       { name: "noneText", tab: "choices" },
       { name: "showRefuseItem", tab: "choices" },
@@ -565,7 +563,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "otherText", tab: "choices" },
       { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
-      { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
       { name: "noneText", tab: "choices" },
       { name: "showRefuseItem", tab: "choices" },
@@ -697,7 +694,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   paneldynamic: {
     properties: [
-      "renderMode",
       "displayMode",
       "templateTabTitle",
       "tabTitlePlaceholder",
@@ -717,7 +713,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "noEntriesText",
       "prevPanelText",
       "nextPanelText",
-      "showRangeInProgress",
       "showProgressBar",
       "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
@@ -780,7 +775,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "navigationTitle",
       "navigationDescription",
       "timeLimit",
-      "maxTimeToFinish",
       { name: "showNavigationButtons", tab: "navigation" }
     ],
     tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]
@@ -866,11 +860,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "timeLimit", tab: "timer" },
       { name: "timeLimitPerPage", tab: "timer" },
       { name: "timerInfoMode", tab: "timer" },
-
-      { name: "maxTimeToFinish", tab: "timer" },
-      { name: "maxTimeToFinishPage", tab: "timer" },
-      { name: "showTimerPanel", tab: "timer" },
-      { name: "showTimerPanelMode", tab: "timer" },
 
       { name: "logo", tab: "logo" },
       { name: "logoPosition", tab: "logo" },

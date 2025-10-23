@@ -10,7 +10,7 @@ test.describe(title, () => {
   test("check whole layout", async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -38,7 +38,7 @@ test.describe(title, () => {
   test("smartphone layout", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -70,7 +70,7 @@ test.describe(title, () => {
     });
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor 1";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -17,7 +17,7 @@ const json = {
 };
 
 const json2 = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -31,7 +31,7 @@ const json2 = {
   ]
 };
 const json3 = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -79,7 +79,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 
 test("Edit question title", async (t) => {
   await setJSON(json);
-  const title = json.questions[0].name;
+  const title = json.elements[0].name;
   const svStringSelector = Selector(".sv-string-editor").withText(title);
   const prefix = "prefix";
 
@@ -115,7 +115,7 @@ test("Check string editor visibility", async (t) => {
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).notOk();
 
   const newJson = JSON.parse(JSON.stringify(json));
-  newJson.questions[0]["description"] = "Desc";
+  newJson.elements[0]["description"] = "Desc";
   await setJSON(newJson);
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
 
@@ -128,7 +128,7 @@ test("Check string editor visibility", async (t) => {
 
 test("Check string editor visibility on defferent ReadOnly cases", async (t) => {
   var json_t = {
-    questions: [
+    elements: [
       {
         type: "checkbox",
         name: "q1",

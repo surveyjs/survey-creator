@@ -164,7 +164,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               name: this.nameShowCategoryTitles,
               title: getLocString("presets.toolbox.showCategoryTitles"),
               defaultValue: false,
-              titleLocation: "hidden",
+              useTitleAsLabel: true,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
               clearIfInvisible: "onHidden",
               renderAs: "switch"

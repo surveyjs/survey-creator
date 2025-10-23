@@ -155,7 +155,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
-              optionsCaption: getLogicString("selectedActionCaption"),
+              placeholder: getLogicString("selectedActionCaption"),
               requiredErrorText: this.getLocString("pe.conditionActionEmpty")
             },
             {
@@ -184,7 +184,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
-              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,
@@ -333,7 +332,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onGetQuestionTitleActions(options: any) {
     if (options.question.name === "setValue") {
-      options.titleActions = [];
+      options.actions = [];
     }
   }
 

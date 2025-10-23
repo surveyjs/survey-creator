@@ -664,8 +664,6 @@ export var italianTranslation = {
       templateErrorLocation: "Allineamento dei messaggi di errore",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nuova posizione di ingresso",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Visualizzare la barra di avanzamento",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Impedisci risposte duplicate nella seguente domanda"
     },
@@ -1154,8 +1152,6 @@ export var italianTranslation = {
     maxRateDescription: "Descrizione del valore massimo",
     // "Input type"
     inputType: "Tipo di inserimento",
-    // "Option placeholder"
-    optionsCaption: "Testo segnaposto dell'opzione",
     // "Default Answer"
     defaultValue: "Valore default",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var italianTranslation = {
     timerLocation: "Visualizzazione pannello timer",
     // "Timer mode"
     timerInfoMode: "Modalità visualizzazione pannello timer",
-    // "Panel display mode"
-    renderMode: "Modalità di visualizzazione",
     // "Enable entry addition"
     allowAddPanel: "Consenti l'aggiunta di un pannello",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var italianTranslation = {
     underRowSingle: "Sotto la riga, solo un pannello è visibile",
     // "Auto"
     auto: "Automatico",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Nascosto"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Entrambe"
@@ -3236,7 +3226,7 @@ export var italianTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Esegui il rendering come", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Allega elementi originali", // Auto-generated string
+    attachData: "Allega elementi originali", // Auto-generated string
     // "Choices"
     choices: "Scelte",
     // [Auto-translated] "Choices by url"

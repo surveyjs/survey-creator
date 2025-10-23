@@ -1230,8 +1230,8 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   creator.onDragDropAllow.add((sender, options) => {
     counter++;
     surveyQuestionCount = options.survey.getAllQuestions().length;
-    targetName = options.target.name;
-    sourceName = options.source.name;
+    targetName = options.toElement.name;
+    sourceName = options.draggedElement.name;
     parentName = options.parent.name;
     options.allow = !!options.insertAfter;
   });
@@ -1409,7 +1409,7 @@ test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
     ]
   };
   creator.onDragDropAllow.add((sender, options) => {
-    (<any>options).allowDropNextToAnother = false;
+    options.allowDropNextToAnother = false;
   });
   const ddHelper: any = creator.dragDropSurveyElements;
   const q1 = creator.survey.getQuestionByName("question1");

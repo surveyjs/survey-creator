@@ -1687,5 +1687,6 @@ export const largeSurvey = {
   "partialSendEnabled": true,
   "showQuestionNumbers": "off",
   "questionErrorLocation": "bottom",
-  "showProgressBar": "top"
+  "showProgressBar": true,
+  "progressBarLocation": "top"
 };

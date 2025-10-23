@@ -53,7 +53,7 @@ const json = {
             "User Interface",
             "Complete Functionality"
           ],
-          "hasOther": true,
+          "showOtherItem": true,
           "otherText": "Other feature:",
           "colCount": 2
         },

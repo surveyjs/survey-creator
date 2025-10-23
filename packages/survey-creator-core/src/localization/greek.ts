@@ -664,8 +664,6 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
-      // "Show the progress bar"
-      showRangeInProgress: "Εμφάνιση μπάρας προόδου",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -1154,8 +1152,6 @@ export var grStrings = {
     maxRateDescription: "Ετικέτα μέγιστης τιμής",
     // "Input type"
     inputType: "Τύπος εισόδου",
-    // "Option placeholder"
-    optionsCaption: "Υπόδειξη επιλογής",
     // "Default Answer"
     defaultValue: "Προεπιλεγμένη Απάντηση",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var grStrings = {
     timerLocation: "Στοίχιση χρονομέτρου",
     // "Timer mode"
     timerInfoMode: "Κατάσταση χρονομέτρου",
-    // "Panel display mode"
-    renderMode: "Τρόπος εμφάνισης πάνελ",
     // "Enable entry addition"
     allowAddPanel: "Ενεργοποίηση προσθήκης πάνελ",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var grStrings = {
     underRowSingle: "Κάτω από τη σειρά, εμφάνιση μόνο μίας επέκτασης σειράς",
     // "Auto"
     auto: "Αυτόματο",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Κρυφό"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Και τα δύο"
@@ -3236,7 +3226,7 @@ export var grStrings = {
     // "Render as"
     renderAs: "Απόδοση ως", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
+    attachData: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
     // "Choices"
     choices: "Επιλογές",
     // "Choices by url"

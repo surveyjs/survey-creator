@@ -664,8 +664,6 @@ export var huStrings = {
       templateErrorLocation: "Hibaüzenetek igazítása",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Új belépési hely",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "A folyamatjelző sáv megjelenítése",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -1154,8 +1152,6 @@ export var huStrings = {
     maxRateDescription: "Legnagyobb szorzó leírása",
     // "Input type"
     inputType: "Mező típusa",
-    // "Option placeholder"
-    optionsCaption: "Beállítások felirata",
     // "Default Answer"
     defaultValue: "Alapértelmezett érték",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var huStrings = {
     timerLocation: "Időzító mutatása",
     // "Timer mode"
     timerInfoMode: "Időzító módja",
-    // "Panel display mode"
-    renderMode: "Megjelenítés módja",
     // "Enable entry addition"
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var huStrings = {
     underRowSingle: "A sor alatt csak egy szakasz megjelenítése",
     // "Auto"
     auto: "Kocsi",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Rejtett"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Mindkettő"
@@ -3236,7 +3226,7 @@ export var huStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderelés mint", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Eredeti elemek csatolása", // Auto-generated string
+    attachData: "Eredeti elemek csatolása", // Auto-generated string
     // "Choices"
     choices: "Lehetőségek",
     // "Choices by url"

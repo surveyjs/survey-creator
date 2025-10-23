@@ -347,7 +347,6 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      showRangeInProgress: "Show the progress bar",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -610,7 +609,6 @@ export var enStrings = {
     minRateDescription: "Minimum value label",
     maxRateDescription: "Maximum value label",
     inputType: "Input type",
-    optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
@@ -669,7 +667,6 @@ export var enStrings = {
     showTimer: "Use a timer",
     timerLocation: "Timer alignment",
     timerInfoMode: "Timer mode",
-    renderMode: "Panel display mode",
     allowAddPanel: "Enable entry addition",
     allowRemovePanel: "Enable entry removal",
     addPanelText: "\"Add Entry\" button text",
@@ -1194,9 +1191,6 @@ export var enStrings = {
     underRow: "Under the row",
     underRowSingle: "Under the row, display one section only",
     auto: "Auto",
-    showNavigationButtons: {
-      none: "Hidden"
-    },
     timerInfoMode: {
       combined: "Both"
     },
@@ -1751,7 +1745,7 @@ export var enStrings = {
     validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
-    attachOriginalItems: "Attach original items", // Auto-generated string
+    attachData: "Attach original items", // Auto-generated string
     choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string

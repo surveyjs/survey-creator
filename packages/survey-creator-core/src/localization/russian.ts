@@ -664,8 +664,6 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Отображение индикатора выполнения",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -1154,8 +1152,6 @@ export var ruStrings = {
     maxRateDescription: "Описание для максимального рейтинга",
     // "Input type"
     inputType: "Тип ввода",
-    // "Option placeholder"
-    optionsCaption: "Параметры подписи",
     // [Auto-translated] "Default Answer"
     defaultValue: "Ответ по умолчанию",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var ruStrings = {
     timerLocation: "Показывать панель таймера",
     // "Timer mode"
     timerInfoMode: "Показывать режим панели таймера",
-    // [Auto-translated] "Panel display mode"
-    renderMode: "Режим отображения панели",
     // "Enable entry addition"
     allowAddPanel: "Разрешить добавление панели",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Скрытый"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Оба"
@@ -3236,7 +3226,7 @@ export var ruStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Рендеринг как", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Прикрепите оригинальные элементы", // Auto-generated string
+    attachData: "Прикрепите оригинальные элементы", // Auto-generated string
     // "Choices"
     choices: "Выбор",
     // "Choices by url"

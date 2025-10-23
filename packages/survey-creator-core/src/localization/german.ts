@@ -664,8 +664,6 @@ export var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Neuer Einstiegsort",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
@@ -1154,8 +1152,6 @@ export var germanTranslation = {
     maxRateDescription: "Beschreibung für maximale Bewertung",
     // "Input type"
     inputType: "Eingabetyp",
-    // "Option placeholder"
-    optionsCaption: "Auswahlbeschriftung",
     // "Default Answer"
     defaultValue: "Standardantwort",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var germanTranslation = {
     timerLocation: "Position des Timers",
     // "Timer mode"
     timerInfoMode: "Modus des Timers",
-    // "Panel display mode"
-    renderMode: "Anzeigemodus",
     // "Enable entry addition"
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var germanTranslation = {
     underRowSingle: "Unter der Zeile wird nur ein Abschnitt angezeigt",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Versteckt"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Beide"
@@ -3236,7 +3226,7 @@ export var germanTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Rendern als", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Originalartikel anbringen", // Auto-generated string
+    attachData: "Originalartikel anbringen", // Auto-generated string
     // "Choices"
     choices: "Auswahlmöglichkeiten",
     // "Choices by url"

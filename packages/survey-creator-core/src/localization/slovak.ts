@@ -664,8 +664,6 @@ export var skStrings = {
       templateErrorLocation: "Zarovnanie chybových hlásení",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nové miesto vstupu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazenie indikátora priebehu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -1154,8 +1152,6 @@ export var skStrings = {
     maxRateDescription: "opis maximálneho hodnotenia",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Titulok možností",
     // "Default Answer"
     defaultValue: "Predvolená hodnota",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var skStrings = {
     timerLocation: "Zobraziť panel s časovačom",
     // "Timer mode"
     timerInfoMode: "Zobraziť režim panela s časovačom",
-    // "Panel display mode"
-    renderMode: "Režim vykresľovania",
     // "Enable entry addition"
     allowAddPanel: "Povoliť pridanie panela",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var skStrings = {
     underRowSingle: "Pod riadkom zobrazte iba jednu sekciu",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obidva"
@@ -3236,7 +3226,7 @@ export var skStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Vykresliť ako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloženie originálnych položiek", // Auto-generated string
+    attachData: "Priloženie originálnych položiek", // Auto-generated string
     // "Choices"
     choices: "možnosti",
     // "Choices by url"

@@ -3,7 +3,7 @@ import { setSurveyProp, url, setJSON, getDropdownValue } from "../helper";
 const title = "Change survey locale";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "dropdown",
       name: "question1",

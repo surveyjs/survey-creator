@@ -664,8 +664,6 @@ export var msStrings = {
       templateErrorLocation: "Penjajaran mesej ralat",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi kemasukan baharu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Tunjukkan bar kemajuan",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Elakkan respons pendua dalam soalan berikut"
     },
@@ -1154,8 +1152,6 @@ export var msStrings = {
     maxRateDescription: "Perihalan kadar maksimum",
     // "Input type"
     inputType: "Jenis input",
-    // "Option placeholder"
-    optionsCaption: "Kapsyen pilihan",
     // "Default Answer"
     defaultValue: "Nilai lalai",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var msStrings = {
     timerLocation: "Tunjukkan panel pemasa",
     // "Timer mode"
     timerInfoMode: "Tunjukkan mod panel pemasa",
-    // "Panel display mode"
-    renderMode: "Mod penyampaian",
     // "Enable entry addition"
     allowAddPanel: "Benarkan menambahkan panel",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var msStrings = {
     underRowSingle: "Di bawah baris, paparkan satu bahagian sahaja",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Tersembunyi"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Kedua-duanya"
@@ -3236,7 +3226,7 @@ export var msStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render sebagai", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Lampirkan item asal", // Auto-generated string
+    attachData: "Lampirkan item asal", // Auto-generated string
     // "Choices"
     choices: "pilihan",
     // "Choices by url"

@@ -192,7 +192,7 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
     .click(getToolboxItemByText("Multi-Select Matrix"));
 
   await ClientFunction(() => {
-    window["creator"].survey.getQuestionByName("question1").columnLayout = "vertical";
+    window["creator"].survey.getQuestionByName("question1").transposeData = true;
   })();
 
   await t.click(Selector(".sv-string-editor").withText("Row 1"))

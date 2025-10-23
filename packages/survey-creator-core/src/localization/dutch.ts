@@ -664,8 +664,6 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "De voortgangsbalk weergeven",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -1154,8 +1152,6 @@ export var nlStrings = {
     maxRateDescription: "Maximale tariefomschrijving",
     // "Input type"
     inputType: "Invoertype",
-    // "Option placeholder"
-    optionsCaption: "Bijschrift opties",
     // "Default Answer"
     defaultValue: "Standaardwaarde",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var nlStrings = {
     timerLocation: "Toon timerpaneel",
     // "Timer mode"
     timerInfoMode: "Modus timerpaneel",
-    // "Panel display mode"
-    renderMode: "Render-modus",
     // "Enable entry addition"
     allowAddPanel: "Sta het toevoegen van een paneel toe",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var nlStrings = {
     underRowSingle: "Geef onder de rij slechts één sectie weer",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Verborgen"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Beide"
@@ -3236,7 +3226,7 @@ export var nlStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderen als", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Voeg originele items toe", // Auto-generated string
+    attachData: "Voeg originele items toe", // Auto-generated string
     // "Choices"
     choices: "Keuzes",
     // "Choices by url"

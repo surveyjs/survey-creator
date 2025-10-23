@@ -664,8 +664,6 @@ export var danishStrings = {
       templateErrorLocation: "Justering af fejlmeddelelse",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny indgangsplacering",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Vis statuslinjen",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
@@ -1155,8 +1153,6 @@ export var danishStrings = {
     maxRateDescription: "Beskriv højeste vurdering",
     // "Input type"
     inputType: "Inputtype",
-    // "Option placeholder"
-    optionsCaption: "Muligheder tekst",
     // "Default Answer"
     defaultValue: "Standardværdi",
     // "Default texts"
@@ -1273,8 +1269,6 @@ export var danishStrings = {
     timerLocation: "Vis tidspanel",
     // "Timer mode"
     timerInfoMode: "Vis tidspanel tilstand",
-    // "Panel display mode"
-    renderMode: "Renderingstilstand",
     // "Enable entry addition"
     allowAddPanel: "Tillad at tilføje et panel",
     // "Enable entry removal"
@@ -2273,10 +2267,6 @@ export var danishStrings = {
     underRowSingle: "Under rækken skal du kun få vist én sektion",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skjult"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Begge"
@@ -3237,7 +3227,7 @@ export var danishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Gengiv som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Vedhæft originale elementer", // Auto-generated string
+    attachData: "Vedhæft originale elementer", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

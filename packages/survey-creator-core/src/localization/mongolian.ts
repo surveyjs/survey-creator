@@ -664,8 +664,6 @@ export var mnStrings = {
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Шинэ оролцооны байршил",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -1154,8 +1152,6 @@ export var mnStrings = {
     maxRateDescription: "Хамгийн их утгын тайлбар",
     // "Input type"
     inputType: "Оролтын төрөл",
-    // "Option placeholder"
-    optionsCaption: "Сонголтын талбар",
     // "Default Answer"
     defaultValue: "Үндсэн хариулт",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var mnStrings = {
     timerLocation: "Тоолуурын байршил",
     // "Timer mode"
     timerInfoMode: "Тоолуурын горим",
-    // "Panel display mode"
-    renderMode: "Панелийн дэлгэцийн горим",
     // "Enable entry addition"
     allowAddPanel: "Панел нэмэхийг зөвшөөрөх",
     // "Enable entry removal"
@@ -2272,10 +2266,6 @@ export var mnStrings = {
     underRowSingle: "Мөрийн доор, зөвхөн ганц панел харагдана",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Нуусан"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Аль аль нь"
@@ -3236,7 +3226,7 @@ export var mnStrings = {
     // "Render as"
     renderAs: "руу хөрвүүлэх", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Эх элементүүдийг хавсаргах", // Auto-generated string
+    attachData: "Эх элементүүдийг хавсаргах", // Auto-generated string
     // "Choices"
     choices: "Сонголтууд",
     // "Choices by url"

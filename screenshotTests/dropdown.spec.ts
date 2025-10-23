@@ -13,8 +13,8 @@ test.describe(title, () => {
     const buttonSelector = page.locator(".svc-question__dropdown-choices--wrapper .svc-action-button");
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
-      questions: [
+      showQuestionNumbers: true,
+      elements: [
         {
           type: "dropdown",
           name: "q1",
