@@ -10,7 +10,7 @@
     "serve:example:dev": "npm run dev --prefix ./example",
     "serve:example:prod": "npm run preview --prefix ./example",
     "build:example:prod": "npm run build --prefix ./example",
-    "build": "vite build && npm run build:types",
+    "build": "vite build && npm run build:types && npm run build:presets",
     "build:dev": "vite build --mode development",
     "build:presets": "vite build --config vite.presets.config.ts && npm run build:types:presets",
     "build:presets:dev": "vite build --config vite.presets.config.ts --mode development && npm run build:types:presets",
