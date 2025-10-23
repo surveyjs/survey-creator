@@ -775,6 +775,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "navigationTitle",
       "navigationDescription",
       "timeLimit",
+      { name: "questionStartIndex", tab: "questionSettings" },
       { name: "showNavigationButtons", tab: "navigation" }
     ],
     tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]
