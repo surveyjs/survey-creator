@@ -1,4 +1,4 @@
-import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
+import { Base, property, ListModel, Action, ComputedUpdater, Model } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
@@ -11,6 +11,7 @@ export abstract class JsonEditorBaseModel extends Base {
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
+  private lastSyncedText: string = "";
   @property() hasErrors: boolean;
 
   constructor(protected creator: SurveyCreatorModel) {
@@ -27,6 +28,7 @@ export abstract class JsonEditorBaseModel extends Base {
   protected onEditorActivated(): void { }
   public onPluginActivate(): void {
     this.text = this.creator.text;
+    this.lastSyncedText = this.creator.text;
     this.onEditorActivated();
     this.isJSONChanged = false;
   }
@@ -114,7 +116,45 @@ export abstract class JsonEditorBaseModel extends Base {
   public processErrors(text: string): void {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
     this.setErrors(textWorker.errors);
+
+    // If no syntax errors, attempt to sync valid JSON to creator immediately
+    if (!this.hasErrors) {
+      this.syncToCreator();
+    }
   }
+
+  protected syncToCreator(): void {
+    // Don't sync if readonly or text hasn't changed
+    if (this.readOnly || this.text === this.lastSyncedText) {
+      return;
+    }
+
+    // Validate JSON syntax and parse
+    let surveyDefinition: unknown;
+    try {
+      surveyDefinition = JSON.parse(this.text);
+    } catch(error) {
+      // Invalid JSON syntax - don't sync
+      return;
+    }
+
+    // Validate semantic correctness by creating a Survey Model
+    const survey = new Model(surveyDefinition);
+    if (survey.jsonErrors && survey.jsonErrors.length > 0) {
+      // Survey has semantic errors - don't sync
+      return;
+    }
+
+    // JSON is valid - sync to creator immediately
+    this.creator.changeText(this.text, true, true);
+    this.lastSyncedText = this.text;
+    this.isJSONChanged = true;
+  }
+
+  public hasUnsyncedChanges(): boolean {
+    return this.text !== this.lastSyncedText;
+  }
+
   public get readOnly(): boolean {
     return this.creator.readOnly;
   }
@@ -227,7 +267,22 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      if (!this.model.readOnly && this.model.isJSONChanged) {
+      // Check if there are unsynced changes (e.g., user switched tabs before timeout fired)
+      if (!this.model.readOnly && this.model.hasUnsyncedChanges()) {
+        // Validate immediately before leaving tab
+        const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+
+        // If JSON has syntax errors, prevent deactivation
+        if (!textWorker.isJsonCorrect) {
+          return false;
+        }
+
+        // If JSON has semantic errors, prevent deactivation
+        if (textWorker.isJsonHasErrors) {
+          return false;
+        }
+
+        // JSON is valid - sync before leaving
         this.creator.selectedElement = undefined;
         this.creator.changeText(this.model.text, false, true);
         this.creator.selectedElement = this.creator.survey;
