@@ -102,6 +102,7 @@ test.describe(title, () => {
       await page.click("#zoomOut button");
     }
     await page.setViewportSize({ width: 600, height: 1900 });
+    await page.waitForTimeout(500);
     await compareScreenshot(page, surfaceSelector, "design-surface-zoom-out.png");
   });
 
