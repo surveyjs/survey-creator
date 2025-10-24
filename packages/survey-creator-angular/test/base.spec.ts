@@ -39,15 +39,15 @@ describe("base tests", () => {
     let firstModelCreated = component.model;
     expect(component.modelChangedLog).toBe("->modelChanged");
     expect(!!firstModelCreated).toBe(true);
-    expect(component.model["__ngImplemented"]).toBe(true);
+    expect(firstModelCreated["onPropertyValueCoreChanged"].length).toBe(1);
     component.input1 = "test";
     fixture.detectChanges();
     let secondModelCreated = component.model;
     expect(component.modelChangedLog).toBe("->modelChanged->modelChanged");
     expect(!!secondModelCreated).toBe(true);
     expect(secondModelCreated !== firstModelCreated).toBe(true);
-    expect(secondModelCreated["__ngImplemented"]).toBe(true);
-    expect(!!firstModelCreated["__ngImplemented"]).toBe(false);
+    expect(secondModelCreated["onPropertyValueCoreChanged"].length).toBe(1);
+    expect(firstModelCreated["onPropertyValueCoreChanged"]).toBe(undefined);
     component.input1 = "test";
     fixture.detectChanges();
     expect(component.modelChangedLog).toBe("->modelChanged->modelChanged");

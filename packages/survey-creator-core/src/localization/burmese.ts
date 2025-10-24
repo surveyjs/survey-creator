@@ -639,8 +639,6 @@ export var mmStrings = {
       templateErrorLocation: "အမှားစာစောင်တည်နေရာ",
       // "New entry location"
       newPanelPosition: "ပန်းနယ်အသစ်တည်နေရာ",
-      // "Show the progress bar"
-      showRangeInProgress: "တိုးတက်မှုဘားကိုပြပါ",
       // "Prevent duplicate responses in the following question"
       keyName: "ထပ်တူဖြေဆိုမှုကိုတားဆီးပါ"
     },
@@ -1099,8 +1097,6 @@ export var mmStrings = {
     maxRateDescription: "အများဆုံးတန်ဖိုးတန်းလုံး",
     // "Input type"
     inputType: "အဝင်အမျိုးအစား",
-    // "Option placeholder"
-    optionsCaption: "ရွေးချယ်မှု placeholder",
     // "Default Answer"
     defaultValue: "ပုံမှန်ဖြေဆိုမှု",
     // "Default texts"
@@ -1213,8 +1209,6 @@ export var mmStrings = {
     timerLocation: "အချိန်တိုင်းကိရိယာတည်နေရာ",
     // "Timer mode"
     timerInfoMode: "အချိန် mode",
-    // "Panel display mode"
-    renderMode: "ပန်းနယ်ပြသမှု mode",
     // "Enable entry addition"
     allowAddPanel: "ပန်းနယ်ထည့်ရန်ဖွင့်ပါ",
     // "Enable entry removal"
@@ -2132,10 +2126,6 @@ export var mmStrings = {
     underRowSingle: "အတန်းအောက်တွင်၊ တစ်တန်းတည်းချဲ့ထားမှုကိုသာပြပါ",
     // "Auto"
     auto: "အလိုအလျောက်",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "ဖျောက်ထားသည်"
-    },
     timerInfoMode: {
       // "Both"
       combined: "နှစ်ခုလုံး"
@@ -2964,7 +2954,7 @@ export var mmStrings = {
     // "Render as"
     renderAs: "အဖြစ်ဖော်ပြပါ", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "မူရင်းအချက်အလက်များကိုထည့်ပါ", // Auto-generated string
+    attachData: "မူရင်းအချက်အလက်များကိုထည့်ပါ", // Auto-generated string
     // "Choices"
     choices: "ရွေးချယ်မှုများ",
     // "Choices by url"

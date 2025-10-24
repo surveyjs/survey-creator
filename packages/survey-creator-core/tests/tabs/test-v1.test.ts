@@ -25,9 +25,9 @@ test("pages, active", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
+      { name: "page3", elements: [{ type: "text", name: "q3" }] }
     ]
   };
   var model = getTestModel(creator);
@@ -44,9 +44,9 @@ test("pages, visibility", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { questions: [{ type: "text", name: "q1" }] },
-      { questions: [{ type: "text", name: "q2", visible: false }] },
-      { questions: [{ type: "text", name: "q3" }] }
+      { elements: [{ type: "text", name: "q1" }] },
+      { elements: [{ type: "text", name: "q2", visible: false }] },
+      { elements: [{ type: "text", name: "q3" }] }
     ]
   };
   var model = getTestModel(creator);
@@ -106,7 +106,7 @@ test("Use title for pages", (): any => {
 test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -128,7 +128,7 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
 
   creator.showDefaultLanguageInTestSurveyTab = "auto";
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",

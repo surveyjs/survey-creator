@@ -664,8 +664,6 @@ export var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       // [Auto-translated] "New entry location"
       newPanelPosition: "محل ورود جدید",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "نمایش نوار پیشرفت",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
@@ -1154,8 +1152,6 @@ export var persianStrings = {
     maxRateDescription: "توضیح حداکثر امتیاز",
     // "Input type"
     inputType: "نوع ورودی",
-    // "Option placeholder"
-    optionsCaption: "نوشته انتخاب ها",
     // "Default Answer"
     defaultValue: "مقدار پیش فرض",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var persianStrings = {
     timerLocation: "نمایش پنل زمان سنج",
     // "Timer mode"
     timerInfoMode: "نمایش حالت پنل زمان سنج",
-    // "Panel display mode"
-    renderMode: "حالت رندر",
     // "Enable entry addition"
     allowAddPanel: "اجازه افزودن پنل",
     // "Enable entry removal"
@@ -1390,7 +1384,7 @@ export var persianStrings = {
     labelFalse: "برچسب \"غلط\"",
     // "Show the Clear button"
     allowClear: "نشان دادن دکمهی Clear",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "حالت جستجو",
     // [Auto-translated] "Display format"
     displayStyle: "فرمت نمایش",
@@ -2272,10 +2266,6 @@ export var persianStrings = {
     underRowSingle: "در زیر ردیف، فقط یک بخش نمایش داده می شود",
     // "Auto"
     auto: "خودکار",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "پنهان"
-    },
     timerInfoMode: {
       // "Both"
       combined: "هر دو"
@@ -2948,6 +2938,10 @@ export var persianStrings = {
     detailErrorLocation: "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" برای یک ستون ماتریس فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3100,10 @@ export var persianStrings = {
     fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "جعبه های متن را در یک طرح بندی چند ستونی مرتب می کند."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "انتخاب کنید که ایا می خواهید مقدار سؤال را با یک ماسک کاربردی در نتایج نظرسنجی ذخیره کنید."
@@ -3236,7 +3234,7 @@ export var persianStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render به عنوان", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "پیوست موارد اصلی", // Auto-generated string
+    attachData: "پیوست موارد اصلی", // Auto-generated string
     // "Choices"
     choices: "گزینه ها",
     // "Choices by url"

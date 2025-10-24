@@ -10,11 +10,11 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await hideAllAdornerActions();
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
@@ -38,11 +38,11 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await hideAllAdornerActions();
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
@@ -66,11 +66,11 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await hideAllAdornerActions();
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
@@ -116,11 +116,11 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await hideAllAdornerActions();
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
@@ -140,7 +140,7 @@
 //     await t.resizeWindow(2560, 1440);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -173,7 +173,7 @@
 //     await t.resizeWindow(2560, 1440);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -205,7 +205,7 @@
 //     await t.resizeWindow(2560, 1440);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -244,7 +244,7 @@
 //     await t.resizeWindow(390, 844);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -274,7 +274,7 @@
 //     await t.resizeWindow(390, 844);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -304,7 +304,7 @@
 //     await t.resizeWindow(390, 844);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -340,7 +340,7 @@
 //     });
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -397,7 +397,7 @@
 //     });
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -443,7 +443,7 @@
 //     await t.resizeWindow(2560, 1440);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -501,7 +501,7 @@
 //     await t.resizeWindow(2584, 1440);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -546,7 +546,7 @@
 //     await setShowAddQuestionButton(false);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -604,7 +604,7 @@
 //     await t.resizeWindow(832, 600);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -656,7 +656,7 @@
 //     });
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -693,7 +693,7 @@
 //     await t.resizeWindow(1000, 500);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -733,7 +733,7 @@
 
 //     await t.resizeWindow(1600, 1000);
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -777,7 +777,7 @@
 //     await setShowAddQuestionButton(false);
 //     await t.resizeWindow(1652, 500);
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           name: "page1",
@@ -857,7 +857,7 @@
 //     await setShowAddQuestionButton(false);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]
 //     };
 //     await setJSON(json);
@@ -879,7 +879,7 @@
 //     await t.resizeWindow(1000, 500);
 
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -921,7 +921,7 @@
 // test("Huge shortcut text", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." }] }]
+//       showQuestionNumbers: true, pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." }] }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 

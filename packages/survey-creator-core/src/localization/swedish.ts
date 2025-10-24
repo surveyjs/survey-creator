@@ -664,8 +664,6 @@ export let svStrings = {
       templateErrorLocation: "Justering av felmeddelande",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny plats för inresa",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Visa förloppsindikatorn",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Förhindra dubbla svar i följande fråga"
     },
@@ -1155,8 +1153,6 @@ export let svStrings = {
     maxRateDescription: "Maximala betyg beskrivning",
     // "Input type"
     inputType: "Indata typ",
-    // "Option placeholder"
-    optionsCaption: "Text för alternativ",
     // "Default Answer"
     defaultValue: "Standard värde",
     // "Default texts"
@@ -1273,8 +1269,6 @@ export let svStrings = {
     timerLocation: "Visa tidtagning",
     // "Timer mode"
     timerInfoMode: "Visa tidtagning läge",
-    // "Panel display mode"
-    renderMode: "Rendering läge",
     // "Enable entry addition"
     allowAddPanel: "Tillåt att lägga till panel",
     // "Enable entry removal"
@@ -1391,7 +1385,7 @@ export let svStrings = {
     labelFalse: "Etiketten \"Falskt\"",
     // "Show the Clear button"
     allowClear: "Visa knappen Rensa",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Sökläge",
     // [Auto-translated] "Display format"
     displayStyle: "Visningsformat",
@@ -2273,10 +2267,6 @@ export let svStrings = {
     underRowSingle: "Under raden visas endast ett avsnitt",
     // "Auto"
     auto: "Automatisk",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Dold"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Båda"
@@ -2949,6 +2939,10 @@ export let svStrings = {
     detailErrorLocation: "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad för en matriskolumn kommer en svarande som försöker skicka en dubblettpost att få följande felmeddelande."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3107,6 +3101,10 @@ export let svStrings = {
     fileOrPhotoPlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Ordnar textrutor i en layout med flera kolumner."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Välj om du vill lagra frågevärdet med en tillämpad mask i undersökningsresultaten."
@@ -3237,7 +3235,7 @@ export let svStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Återge som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Bifoga originalföremål", // Auto-generated string
+    attachData: "Bifoga originalföremål", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

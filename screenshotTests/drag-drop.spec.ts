@@ -11,11 +11,11 @@ test.describe(title, () => {
   test("Ghost Survey Element", async ({ page }) => {
     await hideAllAdornerActions(page);
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
 
     const ghostPage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']");
@@ -28,11 +28,11 @@ test.describe(title, () => {
   test("Empty page", async ({ page }) => {
     await hideAllAdornerActions(page);
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
 
     const emptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
@@ -45,11 +45,11 @@ test.describe(title, () => {
   test("Ghost Survey Element after several drops", async ({ page }) => {
     await hideAllAdornerActions(page);
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
 
     const emptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
@@ -75,11 +75,11 @@ test.describe(title, () => {
   test("Toolbox Item State After Drag", async ({ page }) => {
     await hideAllAdornerActions(page);
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
 
     const emptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
@@ -95,7 +95,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -122,7 +122,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -149,7 +149,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -187,7 +187,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 390, height: 844 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -215,7 +215,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 390, height: 844 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -243,7 +243,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 390, height: 844 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -271,7 +271,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -314,7 +314,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1500, height: 500 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -351,7 +351,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -400,7 +400,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2584, height: 1440 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -437,7 +437,7 @@ test.describe(title, () => {
     await setShowAddQuestionButton(page, false);
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -494,7 +494,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 832, height: 600 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -546,7 +546,7 @@ test.describe(title, () => {
     }, "icon-modernbooleancheckchecked");
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -577,7 +577,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1000, height: 500 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -612,7 +612,7 @@ test.describe(title, () => {
 
     await page.setViewportSize({ width: 1600, height: 1000 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -650,7 +650,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1652, height: 500 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
@@ -728,7 +728,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
     await setShowAddQuestionButton(page, false);
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]
     };
     await setJSON(page, json);
@@ -745,7 +745,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
     await page.setViewportSize({ width: 1000, height: 500 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -778,7 +778,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
 
   test("Huge shortcut text", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." }] }]
+      showQuestionNumbers: true, pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." }] }]
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
 

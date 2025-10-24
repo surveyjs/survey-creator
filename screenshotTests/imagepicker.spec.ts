@@ -9,7 +9,7 @@ test.describe(title, () => {
   });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {

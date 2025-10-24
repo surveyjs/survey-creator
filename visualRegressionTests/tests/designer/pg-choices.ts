@@ -7,7 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
-  showQuestionNumbers: "on",
+  showQuestionNumbers: true,
   "logoPosition": "right",
   "pages": [
     {
@@ -60,7 +60,7 @@ test("Check items empty", async (t) => {
     await t.resizeWindow(1920, 1080);
 
     const checkBoxEmptyItemsSurvey = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -97,7 +97,7 @@ test("Collection editor headers", async (t) => {
     });
 
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -132,7 +132,7 @@ test("Check choices editor with narrow property grid", async (t) => {
     await t.resizeWindow(1920, 1080);
 
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",

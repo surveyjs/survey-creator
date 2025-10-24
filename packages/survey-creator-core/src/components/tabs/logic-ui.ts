@@ -238,8 +238,8 @@ export class SurveyLogicUI extends SurveyLogic {
   private updateEditModeLogicItem(item: ILogicItemUI) {
     if (!item) return;
 
-    item.expressionEditor.editSurvey.mode = this.readOnly ? "display" : "edit";
-    item.itemEditor.editSurvey.mode = this.readOnly ? "display" : "edit";
+    item.expressionEditor.editSurvey.readOnly = this.readOnly;
+    item.itemEditor.editSurvey.readOnly = this.readOnly;
   }
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.findLogicItemUI(item);

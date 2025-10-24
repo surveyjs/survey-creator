@@ -21,7 +21,7 @@
 //     const creatorTabElement = Selector(".svc-creator-tab");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -70,7 +70,7 @@
 //     const toolboxElement = Selector(".svc-toolbox");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -94,7 +94,7 @@
 //     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -142,7 +142,7 @@
 //     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -218,7 +218,7 @@
 //     await setAllowEditSurveyTitle(false);
 //     await setShowAddQuestionButton(false);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         {
 //           "name": "page1",
@@ -246,7 +246,7 @@
 //     await t.resizeWindow(2560, 1440);
 //     const toolboxElement = Selector(".svc-toolbox");
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix-custom" }]); })();
 //     await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
@@ -266,7 +266,7 @@
 //     const toolboxElement = Selector(".svc-toolbox");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await ClientFunction(() => { window["creator"].toolbox.keepAllCategoriesExpanded = true; })();
 //     await ClientFunction(() => { window["creator"].toolbox.changeCategories([]); })();
@@ -282,7 +282,7 @@
 //     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
 //     await t.resizeWindow(2560, 1440)
@@ -304,7 +304,7 @@
 //     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
@@ -341,7 +341,7 @@
 //     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").nth(1);
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(1775, 500)
 //       .scrollBy(".svc-toolbox .sv-scroll__scroller", 2, 300)
@@ -360,7 +360,7 @@
 //     const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440)
 //       .wait(300)
@@ -413,7 +413,7 @@
 //     const toolboxItem = Selector(".svc-toolbox__item").filterVisible().nth(5);
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -448,7 +448,7 @@
 
 //     await setDirRTL();
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -481,7 +481,7 @@
 //     await setShowAddQuestionButton(false);
 //     await changeToolboxSearchEnabled(true);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     await t.resizeWindow(2560, 1440);
@@ -505,7 +505,7 @@
 //     const toolboxElement = Selector(".svc-toolbox");
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await changeToolboxScrolling(false);
 //     await changeToolboxSearchEnabled(true);
@@ -528,7 +528,7 @@
 //     await setShowAddQuestionButton(false);
 //     await changeToolboxSearchEnabled(true);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     await t.resizeWindow(1240, 870);
@@ -552,7 +552,7 @@
 //     await changeToolboxSearchEnabled(true);
 //     await changeToolboxLocation("right");
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(2560, 1440);
 //     await setShowSidebar(false);
@@ -575,7 +575,7 @@
 //     await changeToolboxSearchEnabled(true);
 //     await setDirRTL();
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     await t.resizeWindow(2560, 1440);
@@ -597,7 +597,7 @@
 //     await setShowAddQuestionButton(false);
 //     await setShowSidebar(false);
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 
 //     await t.resizeWindow(950, 870);

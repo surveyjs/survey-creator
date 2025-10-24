@@ -22,7 +22,7 @@ function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
 test("Test language Bar Item", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -58,7 +58,7 @@ test("Test language Bar Item", (): any => {
 test("Test languages dropdown with unknown language", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -209,7 +209,7 @@ test("Page action title when the preview shows only, Bug#5277", (): any => {
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -224,7 +224,7 @@ test("Show/hide device similator", (): any => {
 
   creator = new CreatorTester({ showSimulatorInTestSurveyTab: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -239,7 +239,7 @@ test("Show/hide device similator", (): any => {
 test("Hide similatorAction on mobile devices", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.isTouch = true;
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.makeNewViewActive("test");
   let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeTruthy();
@@ -269,8 +269,8 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
       { name: "page3" }
     ]
   };
@@ -293,8 +293,8 @@ test("Hide page actions if survey is not in running state", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
       { name: "page3" }
     ]
   };
@@ -312,8 +312,8 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
       { name: "page3" }
     ]
   };
@@ -344,9 +344,9 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
+      { name: "page3", elements: [{ type: "text", name: "q3" }] }
     ]
   };
   const model = getTestModel(creator);
@@ -360,9 +360,9 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
 
   creator.JSON = {
     pages: [
-      { name: "page1", title: "page title 1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", title: "page title 2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", title: "page title 1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "page title 2", elements: [{ type: "text", name: "q2" }] },
+      { name: "page3", elements: [{ type: "text", name: "q3" }] }
     ]
   };
   creator.getPlugin("test").update();
@@ -382,8 +382,8 @@ test("pageSelector if page title with markup", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", title: "<i>Page 1</i>", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", title: "<i>Page 2</i>", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", title: "<i>Page 1</i>", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", elements: [{ type: "text", name: "q2" }] },
     ]
   };
   var model = getTestModel(creator);
@@ -399,7 +399,7 @@ test("pageSelector if page title with markup", (): any => {
 test("Simulator view switch", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -421,7 +421,7 @@ test("Simulator in iphone15", (): any => {
 test("Hide Test Again action on leaving Preview", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -443,7 +443,7 @@ test("Hide Test Again action on leaving Preview", (): any => {
 test("invisibleToggleAction doesn't created, there are no exceptions", (): any => {
   const creator: CreatorTester = new CreatorTester({ showInvisibleElementsInTestSurveyTab: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -458,7 +458,7 @@ test("invisibleToggleAction doesn't created, there are no exceptions", (): any =
 test("invisibleToggleAction title", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -472,7 +472,7 @@ test("invisibleToggleAction title", (): any => {
 test("invisibleToggleAction state change", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -862,7 +862,7 @@ test("Update theme in active test/preview tab 2", (): any => {
 test("showResults default behavior", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -883,7 +883,7 @@ test("showResults default behavior", (): any => {
 test("showResults with previewShowResults false", (): any => {
   const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -904,7 +904,7 @@ test("showResults with previewShowResults false", (): any => {
 test("devices selector dropdown items default order", (): any => {
   const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -931,7 +931,7 @@ test("change devices selector dropdown items order", (): any => {
 
     const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
     creator.JSON = {
-      questions: [
+      elements: [
         {
           type: "text",
           name: "q1",
@@ -1026,7 +1026,7 @@ test("Mark previous pages as passed if selectPageAction selects non-subsequent p
 test("Suppress NavigateToUrl notification using allow option", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -1093,7 +1093,7 @@ test("The Preview Survey button text is not translated Bug#6016", (): any => {
 });
 test("Preview tab: default device and save current device", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
 
   expect(creator.previewDevice).toBe("desktop");
@@ -1122,7 +1122,7 @@ test("Preview tab: default device and save current device", (): any => {
 
 test("Preview tab: use theme palatte corresponding cretor theme palette if theme is not selected", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
 
   expect(creator.preferredColorPalette).toBe("light");

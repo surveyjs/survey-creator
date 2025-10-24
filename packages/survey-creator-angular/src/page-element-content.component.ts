@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, DoCheck, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { EmbeddedViewContentComponent } from "survey-angular-ui";
 import { PageModel, SurveyModel } from "survey-core";
 
@@ -7,13 +7,11 @@ import { PageModel, SurveyModel } from "survey-core";
   template: "<ng-template #template><page [model]=\"model\" [survey]=\"survey\"></page></ng-template>",
   styles: [":host { display: none }"]
 })
-export class PageElementContentComponent extends EmbeddedViewContentComponent implements AfterViewInit, OnChanges {
+export class PageElementContentComponent extends EmbeddedViewContentComponent implements OnChanges {
   @Input() model!: PageModel;
   @Input() survey!: SurveyModel;
-  ngAfterViewInit() {
-    this.embeddedView?.detach();
-  }
+  override ngDoCheck() {}
   ngOnChanges(changes: SimpleChanges): void {
-    this.embeddedView?.detectChanges();
+    this.embeddedView?.reattach();
   }
 }

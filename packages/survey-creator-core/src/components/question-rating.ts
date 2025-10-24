@@ -96,7 +96,7 @@ export class QuestionRatingAdornerViewModel extends Base {
 
   public static allowAddForElement(element: QuestionRatingModel, maximumRateValues: number): boolean {
     if ((maximumRateValues < 1 || maximumRateValues > settings.ratingMaximumRateValueCount) && !QuestionRatingAdornerViewModel.useRateValues(element)) maximumRateValues = settings.ratingMaximumRateValueCount;
-    if (element.rateDisplayMode == "smileys" && (maximumRateValues < 1 || maximumRateValues > 10)) maximumRateValues = 10;
+    if (element.rateType == "smileys" && (maximumRateValues < 1 || maximumRateValues > 10)) maximumRateValues = 10;
     if (maximumRateValues < 1) return true;
     return element.rateCount < maximumRateValues;
   }

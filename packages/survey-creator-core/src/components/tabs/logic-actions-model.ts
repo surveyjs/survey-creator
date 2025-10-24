@@ -57,8 +57,8 @@ export class LogicActionModelBase {
 export class LogicActionModel extends LogicActionModelBase {
   private getSelectorOptionsText(logicType: SurveyLogicType): string {
     const elementType = logicType.baseClass;
-    const optionsCaptionName = elementType == "page" ? "pe.conditionSelectPage" : (elementType == "panel" ? "pe.conditionSelectPanel" : "pe.conditionSelectQuestion");
-    return editorLocalization.getString(optionsCaptionName);
+    const placeholderName = elementType == "page" ? "pe.conditionSelectPage" : (elementType == "panel" ? "pe.conditionSelectPanel" : "pe.conditionSelectQuestion");
+    return editorLocalization.getString(placeholderName);
   }
   protected getElementBySelectorName(panel: PanelModel): Base {
     const value = panel.getQuestionByName("elementSelector").value;
@@ -86,7 +86,7 @@ export class LogicActionModel extends LogicActionModelBase {
     question.visible = true;
     question.choices = choices;
     question.allowClear = false;
-    question.optionsCaption = this.getSelectorOptionsText(this.logicType);
+    question.placeholder = this.getSelectorOptionsText(this.logicType);
     this.setInitialElementValue(question, this.initialLogicAction, selectedElement);
   }
   public getSelectedElement(): string {

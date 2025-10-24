@@ -287,6 +287,7 @@ export class SurveyCreatorModel extends Base
   set propertyGridNavigationMode(newValue: "buttons" | "accordion") {
     this.showOneCategoryInPropertyGrid = newValue === "buttons";
   }
+  public trimValues: boolean = false;
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
@@ -442,8 +443,8 @@ export class SurveyCreatorModel extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    SurveySettings.allowShowEmptyTitleInDesignMode = allowModifyPages;
-    SurveySettings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
+    SurveySettings.designMode.showEmptyTitles = allowModifyPages;
+    SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
@@ -2423,6 +2424,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
+    if (this.isCreatingNewElement) return;
     if (this.isObjQuestion(obj)) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
@@ -2525,9 +2527,12 @@ export class SurveyCreatorModel extends Base
   public onDragDropItemStart(): void {
     this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
   }
+  private isCreatingNewElement: boolean;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
+    this.isCreatingNewElement = true;
     question.name = this.generateUniqueName(question, question.name);
+    this.isCreatingNewElement = false;
     var page = this.getPageByElement(question);
     if (!page) return;
     var options = { question: question, page: page, reason: this.addNewElementReason };
@@ -2709,6 +2714,9 @@ export class SurveyCreatorModel extends Base
       survey.gridLayoutEnabled = false;
     }
 
+    if (reason === "theme") {
+      survey.showTimer = false;
+    }
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
@@ -3082,7 +3090,6 @@ export class SurveyCreatorModel extends Base
       }
     }
   }
-
   public createNewElement(json: any): IElement {
     const newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
@@ -4421,11 +4428,11 @@ export class SurveyCreatorModel extends Base
       iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
-      needSeparator: needSeparator
+      needSeparator: needSeparator,
+      action: () => {
+        onSelectQuestionType(item.typeName, item.json);
+      }
     });
-    action.action = () => {
-      onSelectQuestionType(item.typeName, item.json);
-    };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({
@@ -4731,6 +4738,17 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+  /**
+   * Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content such as questions or panels.
+   *
+   * - 0 - Disables content nesting for choice options.
+   * - 1 - Allows first-level choice options to contain survey elements.
+   * - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
+   *
+   * Default value: 0
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
+   */
   public maxChoiceContentNestingLevel: number = 0;
 
   /**

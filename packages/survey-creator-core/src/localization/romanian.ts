@@ -664,8 +664,6 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       // "New entry location"
       newPanelPosition: "Locația noului panou",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Afișați bara de progres",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -1154,8 +1152,6 @@ export const roStrings = {
     maxRateDescription: "Etichetă valoare maximă",
     // "Input type"
     inputType: "Tip intrare",
-    // "Option placeholder"
-    optionsCaption: "Locaș opțiune",
     // "Default Answer"
     defaultValue: "Răspuns implicit",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export const roStrings = {
     timerLocation: "Alinierea timerului",
     // "Timer mode"
     timerInfoMode: "Modul timerului",
-    // "Panel display mode"
-    renderMode: "Modul de afișare a panoului",
     // "Enable entry addition"
     allowAddPanel: "Permite adăugarea panoului",
     // "Enable entry removal"
@@ -1390,8 +1384,8 @@ export const roStrings = {
     labelFalse: "Etichetă pentru „Fals”",
     // "Show the Clear button"
     allowClear: "Afișează butonul de ștergere",
-    // "Search Mode"
-    searchMode: "Modul de căutare",
+    // [Auto-translated] "Search mode"
+    searchMode: "Mod de căutare",
     // "Display format"
     displayStyle: "Format de afișare",
     // "Formatted string"
@@ -2272,10 +2266,6 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Ascuns"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambele"
@@ -2948,6 +2938,10 @@ export const roStrings = {
     detailErrorLocation: "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Când proprietatea \"Preveniți răspunsurile duplicate\" este activată pentru o coloană matrice, un respondent care încearcă să trimită o intrare dublată va primi următorul mesaj de eroare."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3100,10 @@ export const roStrings = {
     fileOrPhotoPlaceholder: "Se aplică atunci când „Tip sursă fișier” este „Fișier local sau cameră”.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Aranjează opțiunile de alegere într-un layout pe mai multe coloane. Când este setat la 0, opțiunile sunt afișate pe un singur rând.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Aranjează casetele text într-un aspect cu mai multe coloane."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selectați dacă doriți să stocați valoarea întrebării cu o mască aplicată în rezultatele chestionarului."
@@ -3236,7 +3234,7 @@ export const roStrings = {
     // "Render as"
     renderAs: "Renderizare ca", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Atașați elementele originale", // Auto-generated string
+    attachData: "Atașați elementele originale", // Auto-generated string
     // "Choices"
     choices: "Opțiuni",
     // "Choices by url"
