@@ -17,6 +17,7 @@ export class PresetsComponent extends TestDefaultComponent {
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     this.creator.allowZoom = false;
-    new TabPresetsPlugin((window as any).creator);
+    this.creator.showOneCategoryInPropertyGrid = true;
+    new TabPresetsPlugin(this.creator);
   }
 }
