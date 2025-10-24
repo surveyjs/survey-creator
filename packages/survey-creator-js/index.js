@@ -194,6 +194,7 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => 
 });
 */
 const creator = new SurveyCreator.SurveyCreator(options);
+new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
 creator.onModified.add((sender, options) => {
   console.log(JSON.stringify(options, null, 3));
 });

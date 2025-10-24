@@ -98,17 +98,19 @@ module.exports = function (options) {
       umdNamedDefine: true
     },
     externals: {
-      react: {
-        root: "React",
-        commonjs2: "react",
-        commonjs: "react",
-        amd: "react"
+      "react":
+      {
+        root: "SurveyUI",
+        commonjs2: "survey-js-ui",
+        commonjs: "survey-js-ui",
+        amd: "survey-js-ui"
       },
-      "react-dom": {
-        root: "ReactDOM",
-        commonjs2: "react-dom",
-        commonjs: "react-dom",
-        amd: "react-dom"
+      "react-dom":
+      {
+        root: "SurveyUI",
+        commonjs2: "survey-js-ui",
+        commonjs: "survey-js-ui",
+        amd: "survey-js-ui"
       },
       "survey-core": {
         root: "Survey",
@@ -117,11 +119,18 @@ module.exports = function (options) {
         amd: "survey-core"
       },
       "survey-js-ui": {
-        root: "SurveyReact",
+        root: "SurveyUI",
         commonjs2: "survey-js-ui",
         commonjs: "survey-js-ui",
         amd: "survey-js-ui"
       },
+      "survey-react-ui":
+        {
+          root: "SurveyUI",
+          commonjs2: "survey-js-ui",
+          commonjs: "survey-js-ui",
+          amd: "survey-js-ui"
+        },
       "survey-creator-core": {
         root: "SurveyCreatorCore",
         commonjs2: "survey-creator-core",

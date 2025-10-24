@@ -16,6 +16,7 @@
 // }
 
 .sps-drag-element__svg {
+  box-sizing: content-box;
   width: var(--sjs2-size-icon-medium, 24px);
   height: var(--sjs2-size-icon-medium, 24px);
   display: flex;
