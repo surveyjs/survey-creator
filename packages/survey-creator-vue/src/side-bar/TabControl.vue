@@ -19,7 +19,7 @@
     <div class="svc-sidebar-tabs__bottom-container">
       <div class="svc-sidebar-tabs__items">
         <SvComponent
-          :is="'svc-tabs'"
+          :is="'sv-action-bar'"
           :model="model.bottomToolbar"
         ></SvComponent>
       </div>
