@@ -710,13 +710,18 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
       { name: "copyDefaultValueFromLastEntry", tab: "data" },
-      { name: "showQuestionNumbers", tab: "questionSettings" },
       { name: "templateQuestionTitleLocation", tab: "questionSettings" },
       { name: "templateQuestionTitleWidth", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
       { name: "removePanelButtonLocation", tab: "layout" },
+      { name: "showNumber", tab: "numbering" },
+      { name: "showQuestionNumbers", tab: "numbering" },
+      { name: "questionStartIndex", tab: "numbering" },
       { name: "keyName", tab: "validation" },
       { name: "keyDuplicationError", tab: "validation" }
+    ],
+    tabs: [
+      { name: "numbering", index: 350 }
     ]
   },
   panelbase: {
