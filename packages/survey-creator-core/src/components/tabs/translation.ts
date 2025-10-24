@@ -1579,11 +1579,10 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    survey.showCompleteButton = false;
     const navigationBar = new SurveyElementActionContainer();
+    survey.createNavigationBarCallback = () => <any>navigationBar;
+    survey.showCompleteButton = false;
     navigationBar.allowResponsiveness();
-    survey["navigationBarTopValue"] = navigationBar;
-    survey.findLayoutElement("buttons-navigation-top").data = navigationBar;
     navigationBar.locOwner = survey;
     navigationBar.cssClasses = survey.css.actionBar;
     navigationBar.containerCss = survey.css.footer;
@@ -1675,7 +1674,7 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
-    const action = this.translation.stringsHeaderSurvey.findLayoutElement("buttons-navigation-top").data.getActionById("svc-translation-fromlocale");
+    const action = this.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
     if (!!action) {
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
