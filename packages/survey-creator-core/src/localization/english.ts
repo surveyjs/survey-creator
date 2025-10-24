@@ -347,7 +347,6 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      showRangeInProgress: "Show the progress bar",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -610,7 +609,6 @@ export var enStrings = {
     minRateDescription: "Minimum value label",
     maxRateDescription: "Maximum value label",
     inputType: "Input type",
-    optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
@@ -669,7 +667,6 @@ export var enStrings = {
     showTimer: "Use a timer",
     timerLocation: "Timer alignment",
     timerInfoMode: "Timer mode",
-    renderMode: "Panel display mode",
     allowAddPanel: "Enable entry addition",
     allowRemovePanel: "Enable entry removal",
     addPanelText: "\"Add Entry\" button text",
@@ -729,7 +726,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
-    searchMode: "Search Mode",
+    searchMode: "Search mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -1194,9 +1191,6 @@ export var enStrings = {
     underRow: "Under the row",
     underRowSingle: "Under the row, display one section only",
     auto: "Auto",
-    showNavigationButtons: {
-      none: "Hidden"
-    },
     timerInfoMode: {
       combined: "Both"
     },
@@ -1593,6 +1587,9 @@ export var enStrings = {
     cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
+    matrixdropdown: {
+      keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+    },
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     description: "Type a subtitle.",
@@ -1677,6 +1674,9 @@ export var enStrings = {
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
     colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
+    multipletext: {
+      colCount: "Arranges text boxes in a multi-column layout.",
+    },
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
@@ -1751,7 +1751,7 @@ export var enStrings = {
     validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
-    attachOriginalItems: "Attach original items", // Auto-generated string
+    attachData: "Attach original items", // Auto-generated string
     choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string

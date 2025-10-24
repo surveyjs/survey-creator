@@ -8,7 +8,7 @@ test.describe(title, () => {
   });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -39,7 +39,7 @@ test.describe(title, () => {
   test("Select base editing", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

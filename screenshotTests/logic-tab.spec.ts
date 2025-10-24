@@ -26,7 +26,7 @@ test.describe(title, () => {
   });
 
   const jsonOneRule = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -58,7 +58,7 @@ test.describe(title, () => {
   test("long question name", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -118,7 +118,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 1920, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -143,7 +143,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 900, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -167,7 +167,7 @@ test.describe(title, () => {
   test("Check logic Manual Entry", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -193,7 +193,7 @@ test.describe(title, () => {
   });
 
   const jsonMultipleConditionsMultipleActions = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -260,7 +260,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-action-questions.png");
   });
   const jsonAllActionTypes = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "completedHtmlOnCondition": [
       {
@@ -304,7 +304,7 @@ test.describe(title, () => {
               "User Interface",
               "Complete Functionality"
             ],
-            "hasOther": true,
+            "showOtherItem": true,
             "otherText": "Other feature:",
             "colCount": 2
           },
@@ -415,7 +415,7 @@ test.describe(title, () => {
   test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async ({ page }) => {
     await page.setViewportSize({ width: 800, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

@@ -8,7 +8,7 @@ test.describe("Top Menu Screenshot", () => {
 
   test("Top menu on designer tab", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 1920, height: 1080 });
 
@@ -48,7 +48,7 @@ test.describe("Top Menu Screenshot", () => {
 
   test("Top menu with single item", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 1920, height: 1080 });
 
@@ -65,7 +65,7 @@ test.describe("Top Menu Screenshot", () => {
     await page.setViewportSize({ width: 900, height: 1080 });
     const topBarElement = page.locator(".svc-top-bar");
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.evaluate(() => {
       (window as any).creator.tabResponsivenessMode = "icons";

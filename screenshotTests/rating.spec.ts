@@ -2,7 +2,7 @@ import { url, compareScreenshot, test, setJSON, expect } from "./helper";
 const title = "Rating Question Screenshot";
 
 const json = {
-  showQuestionNumbers: "on",
+  showQuestionNumbers: true,
   "logoPosition": "right",
   "pages": [
     {
@@ -17,7 +17,7 @@ const json = {
   ]
 };
 const jsonComment = {
-  showQuestionNumbers: "on",
+  showQuestionNumbers: true,
   "logoPosition": "right",
   "pages": [
     {
@@ -34,7 +34,7 @@ const jsonComment = {
 };
 
 const jsonMulti = {
-  showQuestionNumbers: "on",
+  showQuestionNumbers: true,
   "logoPosition": "right",
   "pages": [
     {
@@ -84,7 +84,7 @@ test.describe(title, () => {
   test("Rating adorners", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -112,7 +112,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1956, height: 1080 });
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "rating",
@@ -126,7 +126,7 @@ test.describe(title, () => {
     await compareScreenshot(page, question, "rating-disabled-add.png");
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "rating",
@@ -235,7 +235,7 @@ test.describe(title, () => {
 
   test("Rating min/max editing", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -261,7 +261,7 @@ test.describe(title, () => {
 
   test("Rating in matrix", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -295,7 +295,7 @@ test.describe(title, () => {
 
   test("Rating long item", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -332,7 +332,7 @@ test.describe(title, () => {
 
   test("Rating labels location", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

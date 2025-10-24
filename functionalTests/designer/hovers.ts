@@ -9,7 +9,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 );
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",

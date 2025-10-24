@@ -7,7 +7,7 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -22,7 +22,7 @@
 //   ]
 // };
 // const jsonComment = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -31,7 +31,7 @@
 //         {
 //           "type": "rating",
 //           "name": "question1",
-//           "hasComment": true
+//           "showCommentArea": true
 //         }
 //       ]
 //     }
@@ -39,7 +39,7 @@
 // };
 
 // const jsonMulti = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -81,7 +81,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1956, 1080);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       elements: [
 //         {
 //           type: "rating",
@@ -94,7 +94,7 @@
 //     const question = Selector("div[data-name=question1]");
 //     await takeElementScreenshot("rating-disabled-add.png", question, t, comparer);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       elements: [
 //         {
 //           type: "rating",
@@ -215,7 +215,7 @@
 // test("Rating min/max editing", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -243,7 +243,7 @@
 // test("Rating in matrix", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -290,7 +290,7 @@
 // test("Rating long item", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -329,7 +329,7 @@
 // test("Rating labels location", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {

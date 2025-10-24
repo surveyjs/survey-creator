@@ -664,8 +664,6 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Отображение индикатора выполнения",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -1154,8 +1152,6 @@ export var ruStrings = {
     maxRateDescription: "Описание для максимального рейтинга",
     // "Input type"
     inputType: "Тип ввода",
-    // "Option placeholder"
-    optionsCaption: "Параметры подписи",
     // [Auto-translated] "Default Answer"
     defaultValue: "Ответ по умолчанию",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var ruStrings = {
     timerLocation: "Показывать панель таймера",
     // "Timer mode"
     timerInfoMode: "Показывать режим панели таймера",
-    // [Auto-translated] "Panel display mode"
-    renderMode: "Режим отображения панели",
     // "Enable entry addition"
     allowAddPanel: "Разрешить добавление панели",
     // "Enable entry removal"
@@ -1390,7 +1384,7 @@ export var ruStrings = {
     labelFalse: "«Ложный» ярлык",
     // "Show the Clear button"
     allowClear: "Показать кнопку «Очистить»",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Режим поиска",
     // [Auto-translated] "Display format"
     displayStyle: "Формат отображения",
@@ -2272,10 +2266,6 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Скрытый"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Оба"
@@ -2948,6 +2938,10 @@ export var ruStrings = {
     detailErrorLocation: "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Если для столбца матрицы включено свойство \"Предотвратить дублирование ответов\", респондент, пытающийся отправить повторяющуюся запись, получит следующее сообщение об ошибке."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3100,10 @@ export var ruStrings = {
     fileOrPhotoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Упорядочивает текстовые поля в макете с несколькими столбцами."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Выберите, хотите ли вы сохранить значение вопроса с примененной маской в результатах опроса."
@@ -3236,7 +3234,7 @@ export var ruStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Рендеринг как", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Прикрепите оригинальные элементы", // Auto-generated string
+    attachData: "Прикрепите оригинальные элементы", // Auto-generated string
     // "Choices"
     choices: "Выбор",
     // "Choices by url"

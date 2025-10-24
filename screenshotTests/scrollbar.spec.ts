@@ -11,7 +11,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 900 });
 
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

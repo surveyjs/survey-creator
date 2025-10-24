@@ -664,8 +664,6 @@ export var traditionalChineseTranslation = {
       templateErrorLocation: "錯誤消息對齊",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入場地點",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "顯示進度條",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下問題中的重複回答"
     },
@@ -1155,8 +1153,6 @@ export var traditionalChineseTranslation = {
     maxRateDescription: "最大值提示",
     // "Input type"
     inputType: "文本框類型",
-    // "Option placeholder"
-    optionsCaption: "下拉框提示語",
     // [Auto-translated] "Default Answer"
     defaultValue: "默認答案",
     // [Auto-translated] "Default texts"
@@ -1273,8 +1269,6 @@ export var traditionalChineseTranslation = {
     timerLocation: "顯示計時器面板",
     // "Timer mode"
     timerInfoMode: "顯示計時器面板模式",
-    // "Panel display mode"
-    renderMode: "渲染模式",
     // "Enable entry addition"
     allowAddPanel: "允許添加面板",
     // "Enable entry removal"
@@ -1391,8 +1385,8 @@ export var traditionalChineseTranslation = {
     labelFalse: "“虛假”標籤",
     // "Show the Clear button"
     allowClear: "顯示“清除”按鈕",
-    // [Auto-translated] "Search Mode"
-    searchMode: "搜索模式",
+    // [Auto-translated] "Search mode"
+    searchMode: "搜尋模式",
     // [Auto-translated] "Display format"
     displayStyle: "顯示格式",
     // [Auto-translated] "Formatted string"
@@ -2273,10 +2267,6 @@ export var traditionalChineseTranslation = {
     underRowSingle: "在行下，僅顯示一個部分",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隱藏"
-    },
     timerInfoMode: {
       // "Both"
       combined: "雙"
@@ -2949,6 +2939,10 @@ export var traditionalChineseTranslation = {
     detailErrorLocation: "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "當矩陣欄啟用「防止重複回應」屬性時，嘗試提交重複項目的受訪者將收到以下錯誤訊息。"
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3107,6 +3101,10 @@ export var traditionalChineseTranslation = {
     fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "在多列佈局中排列選項。當設置為 0 時，選項將顯示在一行中。",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "以多欄版面配置排列文字方塊。"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
@@ -3237,7 +3235,7 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "渲染為", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "附加原始專案", // Auto-generated string
+    attachData: "附加原始專案", // Auto-generated string
     // "Choices"
     choices: "選項",
     // "Choices by url"

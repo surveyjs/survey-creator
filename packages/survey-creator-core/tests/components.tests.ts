@@ -59,7 +59,7 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
   expect(selectAllItemAdorner.allowRemove).toBeFalsy();
 
-  question.hasSelectAll = true;
+  question.showSelectAllItem = true;
   expect(selectAllItemAdorner.isNew).toBeFalsy();
   expect(selectAllItemAdorner.allowAdd).toBeFalsy();
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
@@ -592,7 +592,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
   expect(ratingAdorner.enableAdd).toBeTruthy();
   expect(ratingAdorner.enableRemove).toBeTruthy();
 
-  question.rateDisplayMode = "smileys";
+  question.rateType = "smileys";
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeFalsy();

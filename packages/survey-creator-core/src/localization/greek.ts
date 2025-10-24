@@ -664,8 +664,6 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
-      // "Show the progress bar"
-      showRangeInProgress: "Εμφάνιση μπάρας προόδου",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -1154,8 +1152,6 @@ export var grStrings = {
     maxRateDescription: "Ετικέτα μέγιστης τιμής",
     // "Input type"
     inputType: "Τύπος εισόδου",
-    // "Option placeholder"
-    optionsCaption: "Υπόδειξη επιλογής",
     // "Default Answer"
     defaultValue: "Προεπιλεγμένη Απάντηση",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var grStrings = {
     timerLocation: "Στοίχιση χρονομέτρου",
     // "Timer mode"
     timerInfoMode: "Κατάσταση χρονομέτρου",
-    // "Panel display mode"
-    renderMode: "Τρόπος εμφάνισης πάνελ",
     // "Enable entry addition"
     allowAddPanel: "Ενεργοποίηση προσθήκης πάνελ",
     // "Enable entry removal"
@@ -1390,8 +1384,8 @@ export var grStrings = {
     labelFalse: "Ετικέτα για \"Λάθος\"",
     // "Show the Clear button"
     allowClear: "Εμφάνιση κουμπιού Εκκαθάριση",
-    // "Search Mode"
-    searchMode: "Λειτουργία Αναζήτησης",
+    // [Auto-translated] "Search mode"
+    searchMode: "Λειτουργία αναζήτησης",
     // "Display format"
     displayStyle: "Μορφή εμφάνισης",
     // "Formatted string"
@@ -2272,10 +2266,6 @@ export var grStrings = {
     underRowSingle: "Κάτω από τη σειρά, εμφάνιση μόνο μίας επέκτασης σειράς",
     // "Auto"
     auto: "Αυτόματο",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Κρυφό"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Και τα δύο"
@@ -2948,6 +2938,10 @@ export var grStrings = {
     detailErrorLocation: "Ορίζει την τοποθεσία των μηνυμάτων σφάλματος για ερωτήσεις που είναι ενσωματωμένες σε τμήματα λεπτομερειών. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση από την ιδιότητα \"Στοίχιση μηνύματος σφάλματος\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Όταν η ιδιότητα \"Αποτροπή διπλών απαντήσεων\" είναι ενεργοποιημένη, ένας συμμετέχων που προσπαθεί να υποβάλει μια διπλότυπη καταχώρηση θα λάβει το παρακάτω μήνυμα σφάλματος.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Όταν η ιδιότητα \"Αποτροπή διπλότυπων αποκρίσεων\" είναι ενεργοποιημένη για μια στήλη μήτρας, ένας ερωτώμενος που επιχειρεί να υποβάλει μια διπλότυπη καταχώρηση θα λάβει το ακόλουθο μήνυμα λάθους."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Σας επιτρέπει να υπολογίσετε συνολικές τιμές με βάση μια έκφραση. Η έκφραση μπορεί να περιλαμβάνει βασικούς υπολογισμούς (`{q1_id} + {q2_id}`), λογικές εκφράσεις (`{age} > 60`) και συναρτήσεις ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, κλπ.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3100,10 @@ export var grStrings = {
     fileOrPhotoPlaceholder: "Ισχύει όταν ο τύπος πηγής αρχείου είναι \"Τοπικό αρχείο ή κάμερα\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Τακτοποιεί τα πλαίσια κειμένου σε διάταξη πολλών στηλών."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Επιλέξτε αν θέλετε να αποθηκεύσετε την τιμή της ερώτησης με την εφαρμοσμένη μάσκα στα αποτελέσματα της έρευνας."
@@ -3236,7 +3234,7 @@ export var grStrings = {
     // "Render as"
     renderAs: "Απόδοση ως", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
+    attachData: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
     // "Choices"
     choices: "Επιλογές",
     // "Choices by url"

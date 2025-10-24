@@ -136,7 +136,7 @@ test("JsonEditor & fixError action with object to array", () => {
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     pages: [{
-      questions: {
+      elements: {
         type: "text",
         name: "q1",
       }
@@ -150,7 +150,7 @@ test("JsonEditor & fixError action with object to array", () => {
   expect(editor.hasErrors).toBeFalsy();
   expect(JSON.parse(editor.text)).toEqual({
     pages: [{
-      questions: [
+      elements: [
         {
           type: "text",
           name: "q1",
@@ -209,7 +209,7 @@ test("import json from file", (done) => {
   const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   editorPlugin.activate();
 
-  const data = JSON.stringify({ questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] } as any, null, 4);
+  const data = JSON.stringify({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] } as any, null, 4);
   const blob = new Blob([data], { type: "application/json" });
   expect(editorPlugin.model.isJSONChanged).toBeFalsy();
   editorPlugin.importFromFile(blob as any, () => {
@@ -220,7 +220,7 @@ test("import json from file", (done) => {
 });
 test("export json to file", (done): any => {
   const creator: CreatorTester = new CreatorTester();
-  creator.JSON = { questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
   const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   editorPlugin.activate();
 

@@ -8,7 +8,7 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -47,7 +47,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1920, 1080);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {

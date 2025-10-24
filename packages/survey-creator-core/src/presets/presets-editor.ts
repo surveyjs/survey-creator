@@ -176,7 +176,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onGetQuestionTitleActions.add((sender, options) => {
       if (options.question.name === "json") {
         const question = options.question;
-        options.titleActions.push({
+        options.actions.push({
           id: "json_copy",
           iconName: "icon-copy",
           title: "Copy",
@@ -184,7 +184,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
             navigator.clipboard.writeText(question.value);
           }
         });
-        options.titleActions.push({
+        options.actions.push({
           id: "json_download",
           iconName: "icon-download",
           title: "Download",
@@ -192,7 +192,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
             this.downloadJsonFile(question.value);
           }
         });
-        options.titleActions.push({
+        options.actions.push({
           id: "icon-load",
           iconName: "icon-load",
           title: "Load",

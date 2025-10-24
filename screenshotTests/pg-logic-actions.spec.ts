@@ -11,7 +11,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -41,7 +41,7 @@ test.describe(title, () => {
 
   test("Check list item styles into logic popup", async ({ page }) => {
     const json2 = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",

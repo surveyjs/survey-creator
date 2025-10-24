@@ -664,8 +664,6 @@ export var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Neuer Einstiegsort",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
@@ -1154,8 +1152,6 @@ export var germanTranslation = {
     maxRateDescription: "Beschreibung für maximale Bewertung",
     // "Input type"
     inputType: "Eingabetyp",
-    // "Option placeholder"
-    optionsCaption: "Auswahlbeschriftung",
     // "Default Answer"
     defaultValue: "Standardantwort",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var germanTranslation = {
     timerLocation: "Position des Timers",
     // "Timer mode"
     timerInfoMode: "Modus des Timers",
-    // "Panel display mode"
-    renderMode: "Anzeigemodus",
     // "Enable entry addition"
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     // "Enable entry removal"
@@ -1390,7 +1384,7 @@ export var germanTranslation = {
     labelFalse: "Bezeichner \"Falsch\"",
     // "Show the Clear button"
     allowClear: "Überschrift der Auswahlmöglichkeiten anzeigen",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Suchmodus",
     // "Display format"
     displayStyle: "Wertanzeigestil",
@@ -2272,10 +2266,6 @@ export var germanTranslation = {
     underRowSingle: "Unter der Zeile wird nur ein Abschnitt angezeigt",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Versteckt"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Beide"
@@ -2948,6 +2938,10 @@ export var germanTranslation = {
     detailErrorLocation: "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Antworten verhindern\" für eine Matrixspalte aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Eintrag einzureichen, die folgende Fehlermeldung."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3100,10 @@ export var germanTranslation = {
     fileOrPhotoPlaceholder: "Gilt, wenn \"Quelltyp\" \"Lokale Dateien oder Kamera\" ist.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Ordnet Textfelder in einem mehrspaltigen Layout an."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Wählen Sie diese Option aus, wenn Sie den Fragewert mit einer angewendeten Maske in den Umfrageergebnissen speichern möchten."
@@ -3236,7 +3234,7 @@ export var germanTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Rendern als", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Originalartikel anbringen", // Auto-generated string
+    attachData: "Originalartikel anbringen", // Auto-generated string
     // "Choices"
     choices: "Auswahlmöglichkeiten",
     // "Choices by url"

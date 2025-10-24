@@ -21,7 +21,7 @@ test.describe(title, () => {
     const translationTab = getTabbedMenuItemByText(page, "Translation");
 
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
@@ -65,7 +65,7 @@ test.describe(title, () => {
     const toolboxItem = page.locator(".svc-toolbox__item");
     const toolboxElement = page.locator(".svc-toolbox");
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-left-subitems-first.png");
@@ -88,7 +88,7 @@ test.describe(title, () => {
     const creatorTabElement = page.locator(".svc-creator-tab");
     const translationTab = getTabbedMenuItemByText(page, "Translation");
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await changeToolboxLocation(page, "right");
@@ -131,7 +131,7 @@ test.describe(title, () => {
     const creatorTabElement = page.locator(".svc-creator-tab");
     const translationTab = getTabbedMenuItemByText(page, "Translation");
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
 
@@ -194,7 +194,7 @@ test.describe(title, () => {
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         { name: "page1", elements: [{ type: "text", name: "question1" }] },
         { name: "page2", elements: [{ type: "text", name: "question2" }] }
@@ -213,7 +213,7 @@ test.describe(title, () => {
     await changeToolboxSearchEnabled(page, false);
     await page.setViewportSize({ width: 2560, height: 1440 });
     const toolboxElement = page.locator(".svc-toolbox");
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.evaluate(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix-custom" }]); });
     await page.evaluate(() => { window["creator"].toolbox.showCategoryTitles = true; });
     await page.evaluate(() => { window["creator"].toolbox.allowExpandMultipleCategories = true; });
@@ -229,7 +229,7 @@ test.describe(title, () => {
     await changeToolboxSearchEnabled(page, false);
     const toolboxElement = page.locator(".svc-toolbox");
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.evaluate(() => { window["creator"].toolbox.keepAllCategoriesExpanded = true; });
     await page.evaluate(() => { window["creator"].toolbox.changeCategories([]); });
     await page.evaluate(() => { window["creator"].toolbox.showCategoryTitles = true; });
@@ -241,7 +241,7 @@ test.describe(title, () => {
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
     await page.setViewportSize({ width: 2560, height: 1440 });
     await page.waitForTimeout(300);
@@ -258,7 +258,7 @@ test.describe(title, () => {
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
 
     const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
     await page.setViewportSize({ width: 2560, height: 1440 });
@@ -287,7 +287,7 @@ test.describe(title, () => {
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
     const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await page.waitForTimeout(300);
     await itemSelector.hover();
@@ -333,7 +333,7 @@ test.describe(title, () => {
     await setShowAddQuestionButton(page, false);
     const toolboxItem = page.locator(".svc-toolbox__item").filter({ has: page.locator(":visible") }).nth(5);
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await changeToolboxLocation(page, "right");
@@ -365,7 +365,7 @@ test.describe(title, () => {
     const toolboxItem = page.locator(".svc-toolbox__item").filter({ has: page.locator(":visible") }).nth(5);
 
     await setDirRTL(page);
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await changeToolboxScrolling(page, true);
@@ -396,7 +396,7 @@ test.describe(title, () => {
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
     await changeToolboxSearchEnabled(page, true);
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
 
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
@@ -419,7 +419,7 @@ test.describe(title, () => {
     const toolboxElement = page.locator(".svc-toolbox");
     const toolboxSearch = page.locator(".svc-toolbox input").first();
 
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await changeToolboxScrolling(page, false);
     await changeToolboxSearchEnabled(page, true);
     await page.evaluate(() => {
@@ -439,7 +439,7 @@ test.describe(title, () => {
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
     await changeToolboxSearchEnabled(page, true);
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
 
     await page.setViewportSize({ width: 1240, height: 870 });
     await setShowSidebar(page, false);
@@ -460,7 +460,7 @@ test.describe(title, () => {
     await setShowAddQuestionButton(page, false);
     await changeToolboxSearchEnabled(page, true);
     await changeToolboxLocation(page, "right");
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-search-right.png");
@@ -480,7 +480,7 @@ test.describe(title, () => {
     await setShowAddQuestionButton(page, false);
     await changeToolboxSearchEnabled(page, true);
     await setDirRTL(page);
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
 
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
@@ -500,7 +500,7 @@ test.describe(title, () => {
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
     await setShowSidebar(page, false);
-    await setJSON(page, { showQuestionNumbers: "on", pages: [{ name: "page1" }] });
+    await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
 
     await page.setViewportSize({ width: 950, height: 870 });
     await changeToolboxSearchEnabled(page, true);

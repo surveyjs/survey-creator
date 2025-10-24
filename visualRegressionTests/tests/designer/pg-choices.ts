@@ -7,7 +7,7 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -60,7 +60,7 @@
 //     await t.resizeWindow(1920, 1080);
 
 //     const checkBoxEmptyItemsSurvey = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -97,7 +97,7 @@
 //     });
 
 //     const surveyJSON = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -132,7 +132,7 @@
 //     await t.resizeWindow(1920, 1080);
 
 //     const surveyJSON = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",

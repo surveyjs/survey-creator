@@ -664,8 +664,6 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ново място за влизане",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Показване на лентата за напредъка",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -1154,8 +1152,6 @@ export var bgStrings = {
     maxRateDescription: "Описание на максималната оценка",
     // "Input type"
     inputType: "Тип на въвеждане",
-    // "Option placeholder"
-    optionsCaption: "Контейнер за опция",
     // "Default Answer"
     defaultValue: "Отговор по подразбиране",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var bgStrings = {
     timerLocation: "Местоположение на таймера",
     // "Timer mode"
     timerInfoMode: "Режим на таймера",
-    // "Panel display mode"
-    renderMode: "Режим на показване на панела",
     // "Enable entry addition"
     allowAddPanel: "Разрешаване добавянето на панели",
     // "Enable entry removal"
@@ -1390,7 +1384,7 @@ export var bgStrings = {
     labelFalse: "\"Невярно\" етикет",
     // "Show the Clear button"
     allowClear: "Показване на бутона Изчистване",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Режим на търсене",
     // "Display format"
     displayStyle: "Стил за изобразяване на стойността",
@@ -2272,10 +2266,6 @@ export var bgStrings = {
     underRowSingle: "Под реда се вижда само един панел.",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Скрит"
-    },
     timerInfoMode: {
       // "Both"
       combined: "И двете"
@@ -2948,6 +2938,10 @@ export var bgStrings = {
     detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено за колона с матрица, респондентът, който се опитва да изпрати дублиращ се запис, ще получи следното съобщение за грешка."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3100,10 @@ export var bgStrings = {
     fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Подрежда текстовите полета в оформление с няколко колони."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."
@@ -3236,7 +3234,7 @@ export var bgStrings = {
     // "Render as"
     renderAs: "Представяне като", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Прикрепяне на оригиналните елементи", // Auto-generated string
+    attachData: "Прикрепяне на оригиналните елементи", // Auto-generated string
     // "Choices"
     choices: "Избори",
     // "Choices by url"

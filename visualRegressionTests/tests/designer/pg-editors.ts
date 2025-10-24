@@ -8,7 +8,7 @@
 // test("Properties on the same line", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -53,7 +53,7 @@
 // test("Properties on the same line (date)", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -98,7 +98,7 @@
 // test("Values editors, keep them close", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -125,7 +125,7 @@
 // test("Check default value editor", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -376,12 +376,12 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1240, 870);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "rating",
 //           "name": "question1",
-//           "rateDisplayMode": "smileys",
+//           "rateType": "smileys",
 //           "autoGenerate": false,
 //           "rateValues": [
 //             1,
@@ -429,7 +429,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1920, 1920);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       type: "text",
 //       name: "q1",
 //     });
@@ -626,7 +626,7 @@
 // test("Check overriding property editor", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -695,7 +695,7 @@
 // test("Check accepted file types hint link", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -767,7 +767,7 @@
 //       (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
 //     })();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -814,7 +814,7 @@
 //       // });
 //     })();
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -841,7 +841,7 @@
 //       window["Survey"]._setIsTouch(true);
 //     })();
 //     const json = {
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -899,7 +899,7 @@
 //       window["Survey"].Serializer.findProperty("question", "title").maxLength = 20;
 //     })();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {

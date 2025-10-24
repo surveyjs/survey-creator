@@ -30,7 +30,7 @@
 // });
 
 // const jsonOneRule = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -79,7 +79,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1920, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -147,7 +147,7 @@
 //     await t.resizeWindow(1920, 900);
 //     await patchNotifierLifeTime();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -181,7 +181,7 @@
 //     await t.resizeWindow(900, 900);
 //     await patchNotifierLifeTime();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -215,7 +215,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1920, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -247,7 +247,7 @@
 // });
 
 // const jsonMultipleConditionsMultipleActions = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -336,7 +336,7 @@
 //   });
 // });
 // const jsonAllActionTypes = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "completedHtmlOnCondition": [
 //     {
@@ -380,7 +380,7 @@
 //             "User Interface",
 //             "Complete Functionality"
 //           ],
-//           "hasOther": true,
+//           "showOtherItem": true,
 //           "otherText": "Other feature:",
 //           "colCount": 2
 //         },
@@ -503,7 +503,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(800, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {

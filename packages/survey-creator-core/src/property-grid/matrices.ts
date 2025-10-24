@@ -136,7 +136,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
     if (!this.getHasAddButton()) return;
     const question: QuestionMatrixDynamicModel = options.question;
-    options.titleActions.push({
+    options.actions.push({
       id: "add-item",
       iconName: "icon-add",
       iconSize: "auto",
@@ -591,14 +591,14 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
     const ratingQuestion = <QuestionRatingModel>getQuestionFromObj(obj as SurveyElement);
     this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
     obj.onPropertyChanged.add((sender, options) => {
-      if (options.name == "rateCount" || options.name == "rateDisplayMode") {
+      if (options.name == "rateCount" || options.name == "rateType") {
         this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
       }
     });
   }
 
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
-    const clearAction = options.titleActions.filter((a) => a.id == "property-grid-clear")[0];
+    const clearAction = options.actions.filter((a) => a.id == "property-grid-clear")[0];
     if (clearAction) clearAction.visible = false;
     super.onGetQuestionTitleActions(obj, options, creator);
   }
@@ -796,7 +796,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (!options.row.editingObj) return;
     const q = options.cellQuestion;
     if (options.columnName === this.getObjTypeName()) {
-      q.showOptionsCaption = false;
+      q.allowClear = false;
       q.choices = this.getChoices(obj);
       q.value = options.row.editingObj.getType();
     }

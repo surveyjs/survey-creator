@@ -443,8 +443,8 @@ export class SurveyCreatorModel extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    SurveySettings.allowShowEmptyTitleInDesignMode = allowModifyPages;
-    SurveySettings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
+    SurveySettings.designMode.showEmptyTitles = allowModifyPages;
+    SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
@@ -2714,6 +2714,9 @@ export class SurveyCreatorModel extends Base
       survey.gridLayoutEnabled = false;
     }
 
+    if (reason === "theme") {
+      survey.showTimer = false;
+    }
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
@@ -4425,11 +4428,11 @@ export class SurveyCreatorModel extends Base
       iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
-      needSeparator: needSeparator
+      needSeparator: needSeparator,
+      action: () => {
+        onSelectQuestionType(item.typeName, item.json);
+      }
     });
-    action.action = () => {
-      onSelectQuestionType(item.typeName, item.json);
-    };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({

@@ -9,7 +9,7 @@ test.describe(title, () => {
 
   test("Properties on the same line", async ({ page }) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -54,7 +54,7 @@ test.describe(title, () => {
 
   test("Properties on the same line (date)", async ({ page }) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -100,7 +100,7 @@ test.describe(title, () => {
   test("Values editors, keep them close", async ({ page }) => {
     await page.setViewportSize({ width: 1560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [{ "type": "text", "name": "question1" }]
     });
 
@@ -117,7 +117,7 @@ test.describe(title, () => {
 
   test("Check default value editor", async ({ page }) => {
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "text",
@@ -335,12 +335,12 @@ test.describe(title, () => {
   test("rateValues in property grid", async ({ page }) => {
     await page.setViewportSize({ width: 1240, height: 870 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [
         {
           "type": "rating",
           "name": "question1",
-          "rateDisplayMode": "smileys",
+          "rateType": "smileys",
           "autoGenerate": false,
           "rateValues": [1, 2, 3, 4, 5]
         }
@@ -550,7 +550,7 @@ test.describe(title, () => {
 
   test("Check overriding property editor", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -614,7 +614,7 @@ test.describe(title, () => {
 
   test("Check accepted file types hint link", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -677,7 +677,7 @@ test.describe(title, () => {
       (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -711,7 +711,7 @@ test.describe(title, () => {
       window["Survey"].Serializer.findProperty("page", "name").defaultValue = "test";
     });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [{ "type": "text", "name": "question1" }]
     };
     await setJSON(page, json);
@@ -731,7 +731,7 @@ test.describe(title, () => {
       window["Survey"]._setIsTouch(true);
     });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "elements": [{ "type": "text", "name": "question1" }]
     };
     await setJSON(page, json);
@@ -787,7 +787,7 @@ test.describe(title, () => {
       window["Survey"].Serializer.findProperty("question", "title").maxLength = 20;
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

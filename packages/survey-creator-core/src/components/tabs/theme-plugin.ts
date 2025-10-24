@@ -306,7 +306,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   private initPropertyGridSurvey() {
-    this.propertyGrid.survey.mode = "edit";
+    this.propertyGrid.survey.readOnly = false;
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();

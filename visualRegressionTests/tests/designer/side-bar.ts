@@ -9,7 +9,7 @@
 // test("object selector popup", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t
 //       .resizeWindow(750, 700)
@@ -43,7 +43,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     const sideBarActionsContainer = Selector(".svc-side-bar__container-actions");
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "pages": [
 //         {
 //           "name": "page1",
@@ -68,7 +68,7 @@
 // test("property grid search", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "text",
@@ -99,7 +99,7 @@
 // test("property grid search matrix", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "elements": [
 //         {
 //           "type": "radiogroup",
