@@ -478,7 +478,11 @@ test.describe(title, () => {
     const DragZoneQuestion1 = Question1.locator(".svc-question__drag-element");
 
     await Question1.click({ position: { x: 0, y: 20 } });
-    await doDragDrop({ page, element: DragZoneQuestion1, target: Question2, options: { destinationOffsetX: 80 } });
+    await doDragDrop({ page, element: DragZoneQuestion1, target: Question2,
+      options: {
+        targetPosition: { x: 500, y: 20 }
+      }
+    });
     await resetHoverToCreator(page);
     await compareScreenshot(page, ".svc-question__content", "surface-panel-multi-row-question-selected.png");
   });
