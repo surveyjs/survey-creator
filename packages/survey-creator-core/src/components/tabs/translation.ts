@@ -1579,17 +1579,32 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    const navigationBar = new SurveyElementActionContainer();
+    class TranslationEditorNavigationBar extends SurveyElementActionContainer {
+      constructor(public survey: SurveyModel) {
+        super();
+        this.locOwner = survey;
+      }
+      public updateCss() {
+        this.cssClasses = this.survey.css.actionBar;
+        this.containerCss = this.survey.css.footer;
+        this.actions.forEach(action => {
+          if (action.component === "sv-action-bar-item") {
+            action.innerCss = this.cssSurveyNavigationButton;
+          }
+        });
+      }
+      private get cssSurveyNavigationButton(): string {
+        return new CssClassBuilder().append(this.survey.css.navigationButton).append(this.survey.css.bodyNavigationButton).toString();
+      }
+    }
+    const navigationBar = new TranslationEditorNavigationBar(survey);
     survey.createNavigationBarCallback = () => <any>navigationBar;
     survey.showCompleteButton = false;
     navigationBar.allowResponsiveness();
-    navigationBar.locOwner = survey;
-    navigationBar.cssClasses = survey.css.actionBar;
-    navigationBar.containerCss = survey.css.footer;
-    survey.addNavigationItem(this.createLocaleFromAction());
+    navigationBar.addAction(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
-      survey.addNavigationItem(new Action({
+      navigationBar.addAction(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
         iconSize: "auto",
@@ -1603,8 +1618,9 @@ export class TranslationEditor {
     importAction.css = actionCss;
     const exportAction = createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true);
     exportAction.css = actionCss;
-    survey.addNavigationItem(importAction);
-    survey.addNavigationItem(exportAction);
+    navigationBar.addAction(importAction);
+    navigationBar.addAction(exportAction);
+    navigationBar.updateCss();
     survey.showNavigationButtons = true;
     survey.navigationButtonsLocation = "top";
   }
