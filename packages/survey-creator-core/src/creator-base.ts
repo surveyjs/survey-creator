@@ -2714,6 +2714,9 @@ export class SurveyCreatorModel extends Base
       survey.gridLayoutEnabled = false;
     }
 
+    if (reason === "theme") {
+      survey.showTimer = false;
+    }
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }

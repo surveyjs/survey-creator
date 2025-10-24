@@ -924,3 +924,24 @@ test("Should not modify expression properties  on copying questions inside the d
   creator.copyQuestion(q1, true);
   expect(q2.visibleIf).toBe("{panel.q1} = true");
 });
+
+test("survey in theme tab shouldn't show timer panel", () => {
+  const creator = new CreatorTester();
+  const survey = creator.createSurvey({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ],
+    "showTimer": true,
+    "timeLimit": 5,
+    "headerView": "advanced"
+  }, "theme");
+  expect(survey.getPanelByName("showTimer")).toBeFalsy();
+});
