@@ -1,9 +1,7 @@
-import { url, wrapVisualTest } from "../../helper";
+import { url } from "../../helper";
 
 fixture`${"Empty test"}`.page`${url}`;
 
 test("Empty test", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
-  });
+  await t.resizeWindow(1920, 1080);
 });
