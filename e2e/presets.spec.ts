@@ -9,7 +9,7 @@ async function getRowsInputValues(matrix: any) {
 }
 
 async function getTabsTexts(page: any) {
-  return (await page.locator(".svc-tabbed-menu-item").allTextContents()).map(t => t.trim()).filter(t => t != "Presets");
+  return (await page.locator(".svc-tabbed-menu-item").filter({ visible: true }).allTextContents()).map(t => t.trim());
 }
 
 test.describe(title, () => {
@@ -65,4 +65,27 @@ test.describe(title, () => {
     expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes"]);
     expect(await getTabsTexts(page)).toEqual(["JSON Editor", "Logic", "Designer", "Translations"]);
   });
+
+  test("Check presets tabs - edit", async ({ page }) => {
+    await page.locator(".sps-list__container").getByText("Tabs").click();
+    const items = page.locator(".sps-question--matrixdynamic table").nth(0);
+
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
+
+    await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Designer1");
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.getByText("icon-actual-size-24x24").click();
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
+    expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Logic", "Translations"]);
+
+    await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1).click();
+    await page.getByRole("button", { name: "Reset to default" }).click();
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+  });
+
 });
