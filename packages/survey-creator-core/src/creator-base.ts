@@ -1657,7 +1657,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `false` (the sidebar is available)
    *
-   * > Unlike [`showSidebar`](), which controls the sidebar's visibility, this property disables the sidebar feature entirely.
+   * > Unlike [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar), which controls the sidebar's visibility, this property disables the sidebar feature entirely.
    */
   @property() removeSidebar: boolean;
   public sidebar: SidebarModel;
