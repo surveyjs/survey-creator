@@ -1651,7 +1651,12 @@ export class SurveyCreatorModel extends Base
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
+
+  @property() removeSidebar: boolean;
   public sidebar: SidebarModel;
+  public get isSidebarVisible() {
+    return this.sidebar && !this.removeSidebar;
+  }
 
   constructor(protected options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super();

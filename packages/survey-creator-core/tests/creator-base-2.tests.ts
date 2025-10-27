@@ -945,3 +945,14 @@ test("survey in theme tab shouldn't show timer panel", () => {
   }, "theme");
   expect(survey.getPanelByName("showTimer")).toBeFalsy();
 });
+
+test("option to hide sidebar", () => {
+  const creator = new CreatorTester();
+  expect(creator.isSidebarVisible).toBeTruthy();
+  creator.removeSidebar = true;
+  expect(creator.isSidebarVisible).toBeFalsy();
+  creator.removeSidebar = false;
+  expect(creator.isSidebarVisible).toBeTruthy();
+  creator.sidebar = undefined;
+  expect(creator.isSidebarVisible).toBeFalsy();
+});
