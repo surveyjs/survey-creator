@@ -840,7 +840,7 @@ test("creator.onConditionQuestionsGetList, sortOrder", () => {
   expect(questionValue.choices[1].value).toEqual("q2");
 });
 
-test("creator.onGetObjectDisplayName, change visible name for objects", () => {
+test("creator.onElementGetDisplayName, change visible name for objects", () => {
   const creator = new CreatorTester();
   let reason = "";
   let area = "";
@@ -872,7 +872,7 @@ test("creator.onGetObjectDisplayName, change visible name for objects", () => {
 });
 
 test(
-  "use creator.onGetObjectDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
+  "use creator.onElementGetDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
   () => {
     const creator = new CreatorTester();
     creator.onElementGetDisplayName.add(function (sender, options) {

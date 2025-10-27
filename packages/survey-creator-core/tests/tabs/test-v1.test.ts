@@ -92,9 +92,9 @@ test("Use title for pages", (): any => {
     ]
   };
   expect(creator.survey.pages).toHaveLength(2);
-  creator.showObjectTitles = true;
-  creator.onGetObjectDisplayName.add(function (sender, options) {
-    if (options.obj.name == "p2") options.displayName = "My Second Page";
+  creator.useElementTitles = true;
+  creator.onElementGetDisplayName.add(function (sender, options) {
+    if (options.element.name == "p2") options.displayName = "My Second Page";
   });
   var model = getTestModel(creator);
   expect(model.survey.pages).toHaveLength(2);

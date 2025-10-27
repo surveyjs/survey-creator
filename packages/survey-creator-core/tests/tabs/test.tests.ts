@@ -317,15 +317,15 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
       { name: "page3" }
     ]
   };
-  creator.onGetObjectDisplayName.add((sender, options) => {
+  creator.onElementGetDisplayName.add((sender, options) => {
     if (options.reason === "survey-tester" && options.area === "preview-tab:page-list") {
-      const survey = options.obj.survey;
-      const index = survey.pages.indexOf(options.obj);
+      const survey = options.element.survey;
+      const index = survey.pages.indexOf(options.element);
       options.displayName = (index + 1).toString() + ". " + options.displayName;
     }
     if (options.reason === "survey-tester-selected" && options.area === "preview-tab:selected-page") {
-      const survey = options.obj.survey;
-      const index = survey.pages.indexOf(options.obj);
+      const survey = options.element.survey;
+      const index = survey.pages.indexOf(options.element);
       options.displayName = "Page " + (index + 1).toString() + " from " + survey.pages.length;
     }
   });

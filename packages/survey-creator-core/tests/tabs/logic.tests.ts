@@ -3122,9 +3122,9 @@ test("Update expression on changing row value in matrix dropdown", (): any => {
   matrix.rows[1].value = "Row 2";
   expect(q1.visibleIf).toEqual("{matrix.Row 2.col1} = 'item1'");
 });
-test("Use creator.onGetObjectDisplayName for element selector in visibleIf action", () => {
+test("Use creator.onElementGetDisplayName for element selector in visibleIf action", () => {
   const creator = new CreatorTester();
-  creator.onGetObjectDisplayName.add(function (sender, options) {
+  creator.onElementGetDisplayName.add(function (sender, options) {
     if (options.area === "logic-tab:question-selector") {
       options.displayName = "# " + options.obj.title;
     }
