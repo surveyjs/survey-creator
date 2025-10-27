@@ -180,7 +180,7 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
 
   await ClientFunction(() => {
     window["Survey"].Serializer.getProperty("checkbox", "choices").readOnly = false;
-    window["creator"].onGetPropertyReadOnly.add(function (editor, options) {
+    window["creator"].onPropertyGetReadOnly.add(function (editor, options) {
       if (options.obj.getType() === "radiogroup" && options.propertyName == "choices")
         options.readOnly = true;
     });

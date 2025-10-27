@@ -956,7 +956,7 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeTruthy();
 
-  creator.onGetPropertyReadOnly.add((sender, options) => eventFunction(sender, options));
+  creator.onPropertyGetReadOnly.add((sender, options) => eventFunction(sender, options));
 
   expect(ratingAdorner.allowAdd).toBeFalsy();
   expect(ratingAdorner.allowRemove).toBeFalsy();

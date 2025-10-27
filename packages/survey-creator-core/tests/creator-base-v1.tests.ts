@@ -1213,7 +1213,7 @@ test(
 test("creator getMenuItems should respect property readOnly - https://github.com/surveyjs/survey-creator/issues/1024", () => {
   const creator = new CreatorTester(undefined);
   const question = new QuestionTextModel("qt");
-  creator.onGetPropertyReadOnly.add(function (sender, options) {
+  creator.onPropertyGetReadOnly.add(function (sender, options) {
     if (options.property.name == "isRequired") {
       options.readOnly = true;
     }
