@@ -268,7 +268,7 @@ test("Check string editor not loosing focus and selects underlying items", async
 */
 });
 
-test("Check string editor inplaceEditForValues property", async (t) => {
+test("Check string editor inplaceEditChoiceValues property", async (t) => {
   await setJSON(json);
 
   const svItemSelector = Selector(".sv-string-editor").withText("Item 1");
@@ -284,7 +284,7 @@ test("Check string editor inplaceEditForValues property", async (t) => {
     })()).eql({ value: "Item 1", text: "newItem 1" });
 
   await ClientFunction(() => {
-    window["creator"].inplaceEditForValues = true;
+    window["creator"].inplaceEditChoiceValues = true;
   })();
 
   await t

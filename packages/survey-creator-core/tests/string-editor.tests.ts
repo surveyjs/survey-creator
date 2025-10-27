@@ -270,7 +270,7 @@ test("Test string editor content editable for matrix and panels", (): any => {
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
 });
 
-test("Test string editor inplaceEditForValues + creator.trimValues", (): any => {
+test("Test string editor inplaceEditChoiceValues + creator.trimValues", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [
@@ -309,7 +309,7 @@ test("Test string editor inplaceEditForValues + creator.trimValues", (): any => 
   expect(otherItem.locText.text).toEqual("Other changed");
   expect(q0.otherText).toEqual("Other changed");
 
-  creator.inplaceEditForValues = true;
+  creator.inplaceEditChoiceValues = true;
   seChoice.onBlur({ target: { innerText: "newItemValue", innerHTML: "newItemValue", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("newItemValue");
@@ -320,7 +320,7 @@ test("Test string editor inplaceEditForValues + creator.trimValues", (): any => 
   seChoice.onBlur({ target: { innerText: "  trimValue  ", innerHTML: "  trimValue  ", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.value).toEqual("trimValue");
 });
-test("Test string editor inplaceEditForValues + correct non-unique value", (): any => {
+test("Test string editor inplaceEditChoiceValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [
@@ -340,7 +340,7 @@ test("Test string editor inplaceEditForValues + correct non-unique value", (): a
       }
     ]
   };
-  creator.inplaceEditForValues = true;
+  creator.inplaceEditChoiceValues = true;
   const q = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q0");
   const itemValue = q.choices[2];
   var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
@@ -938,9 +938,9 @@ test("StringEditor multiline paste with tabs and empty lines for selectbase ques
   expect(question.choices.map(c => c.text)).toEqual(["item1", "a", "b", "item3"]);
 });
 
-test("StringEditor multiline paste for selectbase questions - inplaceEditForValues", (): any => {
+test("StringEditor multiline paste for selectbase questions - inplaceEditChoiceValues", (): any => {
   const creator = new CreatorTester();
-  creator.inplaceEditForValues = true;
+  creator.inplaceEditChoiceValues = true;
   creator.JSON = {
     elements: [
       { type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] },
@@ -1027,7 +1027,7 @@ test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionRadiogroupModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionImagePickerModel("q") })).toBeFalsy();
 });
-test("Test string editor inplaceEditForValues without Creator", (): any => {
+test("Test string editor inplaceEditChoiceValues without Creator", (): any => {
   const survey = new SurveyModel({
     "pages": [
       {
