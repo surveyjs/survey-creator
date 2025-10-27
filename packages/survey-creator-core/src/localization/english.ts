@@ -1456,7 +1456,8 @@ export var enStrings = {
       newPanelPosition: "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one.",
       copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
-      confirmDelete: "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Triggers a confirmation prompt before removing an entry.",
+      showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
