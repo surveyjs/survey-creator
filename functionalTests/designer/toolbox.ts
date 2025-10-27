@@ -301,7 +301,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
       window["creator"].toolbox.addItem(item);
     };
 
-    window["creator"].onDefineElementMenuItems.add(function (editor, options) {
+    window["creator"].onElementGetActions.add(function (editor, options) {
       if (options.obj.isPage) return;
       const objToAdd = options.obj;
       options.items.unshift({

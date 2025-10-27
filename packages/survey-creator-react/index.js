@@ -209,10 +209,10 @@ creator.propertyGridNavigationMode = "buttons";
 // creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
 
 // Step 3: Add a custom adorner that saves a question configuration as a toolbox item
-creator.onDefineElementMenuItems.add((_, options) => {
-  if (options.obj["isPage"]) return;
-  const objToAdd = options.obj;
-  options.items.unshift({
+creator.onElementGetActions.add((_, options) => {
+  if (options.element["isPage"]) return;
+  const objToAdd = options.element;
+  options.actions.unshift({
     id: "save-to-toolbox",
     title: "Save to Toolbox",
     iconName: "icon-toolbox",
