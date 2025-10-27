@@ -12,11 +12,15 @@ async function getTabsTexts(page: any) {
   return (await page.locator(".svc-tabbed-menu-item").filter({ visible: true }).allTextContents()).map(t => t.trim());
 }
 
+async function getToolboxTexts(page: any) {
+  return (await page.locator(".svc-toolbox__item").filter({ visible: true }).allTextContents()).map(t => t.trim());
+}
+
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.waitForLoadState("networkidle");
     await page.goto(`${urlPresets}`);
-    await page.setViewportSize({ width: 1440, height: 1440 });
+    await page.setViewportSize({ width: 1440, height: 900 });
     await showPresets(page);
   });
 
@@ -86,6 +90,31 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
     expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+  });
+
+  test("Check presets toolbox - edit", async ({ page }) => {
+    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
+
+    const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
+    const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
+    await items.getByRole("row", { name: "Choice Questions" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "Slider" }).getByRole("button").nth(3).click();
+    await items.getByText("Remove from Toolbox").click();
+    expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Checkboxes"]);
+
+    await hidden.getByRole("button", { name: "More" }).nth(0).click();
+    await hidden.getByRole("menuitem", { name: "Text Input Questions" }).locator("span").click();
+    expect((await getToolboxTexts(page)).slice(9, 13)).toEqual(["Single-Line Input", "Long Text", "Multiple Textboxes", "Slider"]);
+
+    await items.getByRole("button", { name: "Collapse" }).click();
+    await items.getByRole("button", { name: "Delete" }).nth(2).click();
+    expect((await getToolboxTexts(page)).slice(12, 14)).toEqual(["Slider", "Single-Select Matrix"]);
+
+    await hidden.getByRole("button", { name: "More" }).first().click();
+
+    await hidden.getByText("Move to new category").click();
+    expect((await getToolboxTexts(page)).slice(20, 21)).toEqual(["Panel"]);
   });
 
 });
