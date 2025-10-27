@@ -1770,7 +1770,7 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
     ]
   };
   creator.JSON = json;
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   let counter = 0;
   let changedType;
   creator.onModified.add((sender, options) => {
@@ -3568,7 +3568,7 @@ test("Page add new question when a selected question is inside a panel, Bug#4468
   expect(page.elements).toHaveLength(2);
 });
 
-test("Creator state, change the same property, isAutoSave=false", () => {
+test("Creator state, change the same property, autoSaveEnabled=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
     no: number,
@@ -3586,7 +3586,7 @@ test("Creator state, change the same property, isAutoSave=false", () => {
   question.title = "Title 2";
   expect(creator.state).toEqual("modified");
 });
-test("Creator notify state, change the same property, isAutoSave=false", () => {
+test("Creator notify state, change the same property, autoSaveEnabled=false", () => {
   let notifierLog = "";
   const creator = new CreatorTester();
   creator.notify = (msg, type) => {
@@ -3612,9 +3612,9 @@ test("Creator notify state, change the same property, isAutoSave=false", () => {
   expect(creator.state).toEqual("modified");
   expect(notifierLog).toBe("Saving, Modified, Error! Editor content is not saved. - error, ");
 });
-test("Creator state, change the same property, isAutoSave=true", () => {
+test("Creator state, change the same property, autoSaveEnabled=true", () => {
   const creator = new CreatorTester();
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   var counter = 0;
   var saveNo = 0;
   creator.saveSurveyFunc = function (
@@ -3988,7 +3988,7 @@ test("showPropertyGrid: false generates error", () => {
 });
 test("Test options, setting some of them can generate errors", () => {
   const options = {
-    isAutoSave: true,
+    autoSaveEnabled: true,
     showJSONEditorTab: false,
     showElementEditorAsPropertyGrid: true,
     showLogicTab: true,

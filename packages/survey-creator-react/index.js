@@ -110,7 +110,7 @@ const options = {
   showEmbeddedSurveyTab: true,
   showThemeTab: true,
   showCreatorThemeSettings: true,
-  isAutoSave: true
+  autoSaveEnabled: true
 };
 
 class CustomToolboxWrapper extends React.Component {

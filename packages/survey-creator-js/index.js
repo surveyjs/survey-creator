@@ -107,7 +107,7 @@ const options = {
   showLogicTab: true,
   showTranslationTab: true,
   showEmbeddedSurveyTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true
 };
 
 // class CustomToolboxWrapper extends React.Component {
