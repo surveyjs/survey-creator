@@ -2705,7 +2705,9 @@ export const roStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou."
+      confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

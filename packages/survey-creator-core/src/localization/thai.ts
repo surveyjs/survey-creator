@@ -2705,7 +2705,9 @@ export const thStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

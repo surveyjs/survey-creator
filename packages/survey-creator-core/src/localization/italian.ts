@@ -2705,7 +2705,9 @@ export var italianTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Fai riferimento al nome di una domanda per richiedere a un utente di fornire una risposta univoca per questa domanda in ogni pannello.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una voce."
+      confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una voce.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno del pannello dinamico."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

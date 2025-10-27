@@ -2705,7 +2705,9 @@ export var persianStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند."
+      confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "اعداد را به سؤالات تودرتو در پانل پویا اختصاص می دهد."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -2705,7 +2705,9 @@ export var htStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl."
+      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Asiyen nimewo nan kesyon ki enbrike nan panèl dinamik la."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

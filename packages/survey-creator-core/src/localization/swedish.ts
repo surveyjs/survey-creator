@@ -2706,7 +2706,9 @@ export let svStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort."
+      confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den dynamiska panelen."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

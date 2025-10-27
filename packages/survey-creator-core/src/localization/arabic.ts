@@ -2705,7 +2705,9 @@ export var arStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال."
+      confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
