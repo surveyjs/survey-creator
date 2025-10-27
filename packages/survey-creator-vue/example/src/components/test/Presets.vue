@@ -1,5 +1,5 @@
 <template>
-    <Common :options="{ expandCollapseButtonVisibility: 'never',  showLogicTab: true, showTranslationTab: true }" :use-slk="true"></Common>
+    <Common :options="{ expandCollapseButtonVisibility: 'never',  showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false }" :use-slk="true"></Common>
 </template>
 <script lang="ts" setup>
 import Common from './Common.vue';
