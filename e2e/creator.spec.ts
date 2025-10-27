@@ -38,8 +38,8 @@ test.describe(title, () => {
 
   test("Check removeSidebar property", async ({ page }) => {
     await page.setViewportSize({ width: 1500, height: 1080 });
-    expect(await page.locator(".svc-side-bar")).toBeVisible();
+    expect(await page.locator(".svc-side-bar").filter({ visible: true }).count()).toBe(1);
     await page.evaluate(() => { window["creator"].removeSidebar = true; });
-    expect(await page.locator(".svc-side-bar")).toBeHidden();
+    expect(await page.locator(".svc-side-bar").filter({ visible: true }).count()).toBe(0);
   });
 });
