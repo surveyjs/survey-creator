@@ -199,8 +199,8 @@ test("Check creator events on string editor", async (t) => {
   const msg = "Description length can not be greater than 10 characters";
   await ClientFunction((json, msg) => {
     window["creator"].JSON = json;
-    window["creator"].onPropertyValidationCustomError.add(function (sender, options) {
-      if (options.obj.isQuestion && options.propertyName == "description" && options.value.length > 10) {
+    window["creator"].onPropertyDisplayCustomError.add(function (sender, options) {
+      if (options.element.isQuestion && options.propertyName == "description" && options.value.length > 10) {
         options.error = msg;
       }
     });

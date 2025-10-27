@@ -2875,8 +2875,8 @@ test("Modify property editor settings on event", (): any => {
 });
 test("Modify property editor via property grid survey", (): any => {
   const creator = new CreatorTester();
-  creator.onPropertyGridSurveyCreated.add((sender, options) => {
-    if (options.obj.getType() !== "text") return;
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area !== "property-grid" || options.element?.getType() !== "text") return;
     const question = options.survey.getQuestionByName("placeholder");
     question.textUpdateMode = "onTyping";
     question.dataList = ["item1", "item2"];
@@ -3957,7 +3957,7 @@ test("isTextInput", (): any => {
   (<any>span)["isContentEditable"] = true;
   expect(isTextInput(span)).toBeTruthy();
 });
-test("onSurveyPropertyValueChanged event", () => {
+test("onAfterPropertyChanged event", () => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   let propertyName;
@@ -4272,7 +4272,8 @@ test("Initial Property Grid category expanded state", (): any => {
     }
     return "";
   };
-  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area !== "property-grid") return;
     survey = options.survey;
   });
   const defaultJSON = settings.defaultNewSurveyJSON;

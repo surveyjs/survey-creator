@@ -851,8 +851,8 @@ test("StringEditor on property value changing", () => {
   const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   var stringEditorQuestion = new StringEditorViewModelBase(question.locTitle, creator);
   var eventRaised = 0;
-  creator.onPropertyValueChanging.add((sender, options) => {
-    if (!!options.value && options.propertyName === "title" && options.obj == question) {
+  creator.onBeforePropertyChanged.add((sender, options) => {
+    if (!!options.oldValue && options.propertyName === "title" && options.element == question) {
       eventRaised++;
       if (options.newValue == "a") {
         options.newValue = "b";
