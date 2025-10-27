@@ -8,7 +8,7 @@
     <sv-scroll>
       <div class="svc-tab-designer_content">
         <ng-container *ngIf="model.showPlaceholder">
-          <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
+          <div *ngIf="creator.showHeaderInEmptySurvey && creator.showSurveyHeader" class="svc-designer-header">
             <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header>
             </div>
           </div>

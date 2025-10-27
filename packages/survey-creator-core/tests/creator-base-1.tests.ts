@@ -2928,20 +2928,20 @@ test("Set readOnly option", (): any => {
     expect(e).toBeNull();
   }
 });
-test("Set allowEditSurveyTitle option", (): any => {
-  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+test("Set showSurveyHeader option", (): any => {
+  const creator = new CreatorTester({ showSurveyHeader: false });
   const showProp = (className: string, propName: string): boolean => {
     const prop = Serializer.findProperty(className, propName);
     return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
   };
-  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(creator.showSurveyHeader).toBeFalsy();
   expect(showProp("survey", "title")).toBeFalsy();
   expect(showProp("survey", "description")).toBeFalsy();
   expect(showProp("survey", "logo")).toBeFalsy();
   expect(showProp("survey", "logoFit")).toBeFalsy();
   expect(showProp("survey", "logoWidth")).toBeFalsy();
   expect(showProp("survey", "logoHeight")).toBeFalsy();
-  creator.allowEditSurveyTitle = true;
+  creator.showSurveyHeader = true;
   expect(showProp("survey", "title")).toBeTruthy();
   expect(showProp("survey", "description")).toBeTruthy();
   expect(showProp("survey", "logo")).toBeTruthy();
@@ -2949,16 +2949,16 @@ test("Set allowEditSurveyTitle option", (): any => {
   expect(showProp("survey", "logoWidth")).toBeTruthy();
   expect(showProp("survey", "logoHeight")).toBeTruthy();
 });
-test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
+test("Set showSurveyHeader option with removed logoHeight property", (): any => {
   Serializer.removeProperty("survey", "logoHeight");
-  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const creator = new CreatorTester({ showSurveyHeader: false });
   const showProp = (className: string, propName: string): boolean => {
     const prop = Serializer.findProperty(className, propName);
     return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
   };
-  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(creator.showSurveyHeader).toBeFalsy();
   expect(showProp("survey", "logoWidth")).toBeFalsy();
-  creator.allowEditSurveyTitle = true;
+  creator.showSurveyHeader = true;
   expect(showProp("survey", "logoWidth")).toBeTruthy();
   Serializer.addProperty("survey", { name: "logoHeight", default: "200px", minValue: 0 });
 });
@@ -3136,7 +3136,7 @@ test("LogicPlugin Manual Entry: fastEntryAction enabled", () => {
   expect(fastEntryAction.enabled).toBeTruthy();
 });
 test("getNewName get new element name", (): any => {
-  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const creator = new CreatorTester({ showSurveyHeader: false });
   creator.JSON = { pages: [{ name: "page1" }] };
   const getNewName = (elementType: string, isPanel?: boolean) => { return creator["getNewName"](elementType, isPanel); };
 
