@@ -868,7 +868,7 @@ export class SurveyCreatorModel extends Base
    */
   public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
   /**
-   *@deprecated Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
+   * @deprecated Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
    */
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.onPageGetFooterActions;
 
