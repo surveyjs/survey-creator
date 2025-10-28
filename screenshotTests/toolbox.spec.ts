@@ -496,14 +496,21 @@ test.describe(title, () => {
     const creatorTabElement = page.locator(".svc-creator-tab");
     const toolboxSearch = page.locator(".svc-toolbox input").first();
 
+    await page.screenshot({ path: "toolbox-search-rtl-compact-1.png", fullPage: true });
     await setDirRTL(page);
+    await page.screenshot({ path: "toolbox-search-rtl-compact-2.png", fullPage: true });
     await setAllowEditSurveyTitle(page, false);
+    await page.screenshot({ path: "toolbox-search-rtl-compact-3.png", fullPage: true });
     await setShowAddQuestionButton(page, false);
+    await page.screenshot({ path: "toolbox-search-rtl-compact-4.png", fullPage: true });
     await setShowSidebar(page, false);
+    await page.screenshot({ path: "toolbox-search-rtl-compact-5.png", fullPage: true });
     await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
+    await page.screenshot({ path: "toolbox-search-rtl-compact-6.png", fullPage: true });
 
     await page.setViewportSize({ width: 950, height: 870 });
     await changeToolboxSearchEnabled(page, true);
+    await page.screenshot({ path: "toolbox-search-rtl-compact-7.png", fullPage: true });
     await compareScreenshot(page, creatorTabElement, "toolbox-search-rtl-compact.png");
     await page.locator(".svc-toolbox__search-button").click();
     await toolboxSearch.click();
