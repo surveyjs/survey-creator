@@ -2706,7 +2706,9 @@ export var koreanStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다."
+      confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

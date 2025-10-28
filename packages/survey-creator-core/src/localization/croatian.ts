@@ -2705,7 +2705,9 @@ export var hrStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa."
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

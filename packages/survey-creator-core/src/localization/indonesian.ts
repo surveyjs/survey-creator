@@ -2705,7 +2705,9 @@ export var indonesianStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri."
+      confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

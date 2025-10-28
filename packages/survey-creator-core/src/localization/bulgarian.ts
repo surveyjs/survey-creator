@@ -2705,7 +2705,9 @@ export var bgStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис."
+      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

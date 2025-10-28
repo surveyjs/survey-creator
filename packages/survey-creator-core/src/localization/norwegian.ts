@@ -2705,7 +2705,9 @@ export var nbStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en oppføring."
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en oppføring.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i det dynamiske panelet."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

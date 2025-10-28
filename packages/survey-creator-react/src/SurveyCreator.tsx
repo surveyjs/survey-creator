@@ -163,7 +163,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderSidebar() {
-    if (!!this.creator.sidebar) {
+    if (!!this.creator.isSidebarVisible) {
       return ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sidebar });
     } else {
       return null;

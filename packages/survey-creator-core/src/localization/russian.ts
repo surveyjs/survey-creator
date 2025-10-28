@@ -2705,7 +2705,9 @@ export var ruStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Запускает запрос на подтверждение перед удалением записи."
+      confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

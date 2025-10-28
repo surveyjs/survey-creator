@@ -2705,7 +2705,9 @@ export var jaStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。"
+      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

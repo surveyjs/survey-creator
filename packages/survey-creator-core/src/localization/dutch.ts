@@ -2705,7 +2705,9 @@ export var nlStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd."
+      confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

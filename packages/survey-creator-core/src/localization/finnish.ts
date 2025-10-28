@@ -2705,7 +2705,9 @@ export var fiStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Käynnistää vahvistuskehotteen ennen merkinnän poistamista."
+      confirmDelete: "Käynnistää vahvistuskehotteen ennen merkinnän poistamista.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Määrittää numerot kysymyksiin, jotka on sisäkkäin dynaamisessa paneelissa."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
