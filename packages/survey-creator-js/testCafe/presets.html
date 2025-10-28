@@ -39,6 +39,7 @@
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
+    window["Survey"].settings.animationEnabled = false;
     creator.allowZoom = false;
     window.creator = creator;
     new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
