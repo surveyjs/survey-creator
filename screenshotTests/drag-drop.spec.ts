@@ -531,6 +531,7 @@ test.describe(title, () => {
       }, [idx, suffix, remove]);
     }
 
+    await expect(page.locator(".svc-question__content")).toHaveCount(2);
     await page.waitForTimeout(500);
     await setClass(1, "drag-over-top");
     await compareScreenshot(page, page1, "drag-drop-inside-panel-dynamic-top.png");
