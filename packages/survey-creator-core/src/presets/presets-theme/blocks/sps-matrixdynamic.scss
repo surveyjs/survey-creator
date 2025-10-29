@@ -106,7 +106,7 @@
   height: var(--sjs2-size-icon-medium, 24px);
   padding: 0;
   margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1)) 0
-  var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;
   margin-left: var(--sjs2-spacing-x150, 12px);
   &:disabled {
     opacity: 1;
@@ -122,13 +122,15 @@
   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   display: flex;
 }
-.sps-table-wrapper ~ .sps-matrixdynamic__footer {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-top: var(--sjs2-spacing-x075, 6px);
-  padding-bottom: var(--sjs2-spacing-x050, 4px);
-  display: flex;
-  justify-content: stretch;
+.sps-table-wrapper, sv-ng-matrix-table {
+  &~ .sps-matrixdynamic__footer {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-top: var(--sjs2-spacing-x075, 6px);
+    padding-bottom: var(--sjs2-spacing-x050, 4px);
+    display: flex;
+    justify-content: stretch;
+  }
 }
 .sps-matrixdynamic__add-btn {
   @include sjs2--typography--default;
@@ -147,10 +149,10 @@
 .sps-matrixdynamic__add-btn--icon {
   flex-direction: row-reverse;
   background: transparent;
-  padding: 0 0 0 var(--sjs2-spacing-x100, 8px);
+  padding: var(--sjs2-spacing-x100, 8px);
   justify-content: flex-end;
   .sv-string-viewer {
-    padding: var(--sjs2-spacing-x100, 8px);
+    padding: 0 0 0 var(--sjs2-spacing-x100, 8px);
   }
 }
 

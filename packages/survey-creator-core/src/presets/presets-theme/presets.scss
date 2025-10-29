@@ -69,7 +69,6 @@
 }
 
 .sps-action-title-bar {
-  margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
   gap: var(--sjs2-spacing-x150, 12px);
   .sv-action--hidden {
     display: none;
@@ -78,6 +77,7 @@
   &.sps-action-title-bar {
     margin-top: 0;
     margin-bottom: 0;
+    margin-inline-end: 0;
   }
 }
 
@@ -93,6 +93,10 @@
 
 .sps-row {
   max-width: 854px;
+
+  sv-ng-question {
+    position: absolute;
+  }
 }
 
 .sps-row--multiple {
