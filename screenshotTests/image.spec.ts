@@ -24,7 +24,7 @@ test("Adorner design", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
+  await page.waitForLoadState("load");
 
   const image = page.locator(".sd-image");
   await image.click();
