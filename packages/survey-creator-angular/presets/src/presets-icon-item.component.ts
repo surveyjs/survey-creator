@@ -8,7 +8,7 @@ import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-an
   styles: [":host { display: none; }"]
 })
 export class PresetsIconItemComponent extends EmbeddedViewContentComponent {
-  @Input() item?: ItemValue;
+  @Input() model!: ItemValue;
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-presets-icon-item", PresetsIconItemComponent);
