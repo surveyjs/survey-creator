@@ -102,8 +102,10 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(presetsList.selectedItem.id); };
     });
-    presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
-    setTimeout(() => settingsAction.popupModel.show(), 100);
+
+    setTimeout(() => {
+      presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
+    }, 100);
   }
 
   public deactivate(): boolean {
