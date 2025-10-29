@@ -13,6 +13,9 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
   protected getCssType(): string {
     return "comment";
   }
+  public getTemplate(): string {
+    return "comment";
+  }
   public get textAreaModel(): TextAreaModel {
     if (!this.jsonAreaModelValue) {
       const options = this.getTextAreaOptions();
@@ -51,11 +54,5 @@ ElementFactory.Instance.registerElement("presetjson", (name) => {
 Serializer.addClass("presetjson",
   [],
   function () { return new QuestionPresetJsonModel(""); },
-  "comment"
-);
-
-RendererFactory.Instance.registerRenderer(
-  "presetjson",
-  "default-comment",
   "comment"
 );
