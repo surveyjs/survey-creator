@@ -561,7 +561,7 @@ test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   expect(rows[0].cells[0].value).toEqual("If 'q1' == 3, make question 'q2' visible, make question 'q3' visible");
 });
 test("SurveyLogicUI: Test creator onLogicItemDisplayText event", () => {
-  const creator = new CreatorTester({ showTitlesInExpressions: true });
+  const creator = new CreatorTester({ useElementTitles: true });
   creator.JSON = {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },

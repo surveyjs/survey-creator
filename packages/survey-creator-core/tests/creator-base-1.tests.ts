@@ -2783,13 +2783,13 @@ test("change locale & creator.sidebar.hasVisiblePages", (): any => {
   creator.locale = "de";
   expect(creator.sidebar.hasVisiblePages).toBeTruthy();
 });
-test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
+test("QuestionAdornerViewModel for selectbase and creator.minChoices", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
   const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
-  creator.minimumChoicesCount = 2;
+  creator.minChoices = 2;
   let itemValue = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
   expect(itemValue.allowRemove).toBeFalsy();
   q1.choices.push(new ItemValue("item3"));
@@ -2797,13 +2797,13 @@ test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", 
   q1.choices.splice(2, 1);
   expect(itemValue.allowRemove).toBeFalsy();
 });
-test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
+test("QuestionAdornerViewModel for selectbase and creator.maxChoices", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
   const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
-  creator.maximumChoicesCount = 3;
+  creator.maxChoices = 3;
   const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2 + 4);
   q1.choices.push(new ItemValue("item3"));
@@ -3087,15 +3087,15 @@ test("Keyboard Shortcuts", (): any => {
   expect(count).toEqual(0);
 });
 
-test("LogicPlugin Manual Entry: options.allowEditExpressionsInTextEditor", () => {
+test("LogicPlugin Manual Entry: options.logicAllowTextEditExpressions", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   let logicTabActions = logicPlugin.createActions();
-  expect(creator.allowEditExpressionsInTextEditor).toBeTruthy();
+  expect(creator.logicAllowTextEditExpressions).toBeTruthy();
   expect(logicTabActions).toHaveLength(3);
   expect(logicTabActions[2].id).toEqual("svc-logic-fast-entry");
 
-  creator.allowEditExpressionsInTextEditor = false;
+  creator.logicAllowTextEditExpressions = false;
   logicTabActions = logicPlugin.createActions();
   expect(logicTabActions).toHaveLength(2);
   expect(logicTabActions.filter(action => action.id === "svc-logic-fast-entry")).toHaveLength(0);
@@ -4314,7 +4314,7 @@ test("PageAdorner: check Add new question creates property grid only once", (): 
   let pageModel = creator.survey.pages[0];
   let pageAdornerModel = new PageAdorner(creator, pageModel);
   let log = "";
-  creator.onSelectedElementChanging.add(() => {
+  creator.onElementSelecting.add(() => {
     log += "->changed";
   });
   pageAdornerModel.addNewQuestion(null, null);
@@ -4363,7 +4363,7 @@ test("creator.deleteLocaleStrings", () => {
   expect(q.title).toEqual("question1");
 });
 
-test("Check onGetPageActions event", () => {
+test("Check onPageGetFooterActions event", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
@@ -4371,7 +4371,7 @@ test("Check onGetPageActions event", () => {
   const page = <PageModel>creator.survey.currentPage;
   const pageModel = new PageAdorner(creator, page);
   let log = "";
-  creator.onGetPageActions.add((_, opt) => {
+  creator.onPageGetFooterActions.add((_, opt) => {
     expect(opt.page).toBe(creator.survey.currentPage);
     opt.actions.push({
       title: "test",
@@ -4443,7 +4443,7 @@ test("Keep selection on deleting another question, #5634", (): any => {
     ]
   };
   let counter = 0;
-  creator.onSelectedElementChanged.add((sender, options) => {
+  creator.onElementSelected.add((sender, options) => {
     counter++;
   });
   creator.selectQuestionByName("q1");
@@ -4464,7 +4464,7 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
     ]
   };
   let counter = 0;
-  creator.onSelectedElementChanged.add((sender, options) => {
+  creator.onElementSelected.add((sender, options) => {
     counter++;
   });
   creator.selectQuestionByName("q1");
@@ -4701,7 +4701,7 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   settings.logic.questionSortOrder = "none";
   expect(func()).toBe("none");
   let sortOrder = "asc";
-  creator.onConditionQuestionsGetList.add((sender, options) => {
+  creator.onConditionGetQuestionList.add((sender, options) => {
     options.sortOrder = sortOrder;
   });
   expect(func()).toBe("asc");

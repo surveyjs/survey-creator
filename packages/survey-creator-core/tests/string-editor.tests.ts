@@ -470,7 +470,7 @@ test("StringEditorConnector for selectbase questions", (): any => {
   };
   const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   creator.selectElement(question);
-  creator.maximumChoicesCount = 3;
+  creator.maxChoices = 3;
 
   const questionAdorner = new QuestionAdornerViewModel(
     creator,
@@ -623,7 +623,7 @@ test("StringEditorConnector for multiple text questions", (): any => {
 
 test("StringEditorConnector for matrix questions (columns)", (): any => {
   const creator = new CreatorTester();
-  creator.maximumColumnsCount = 3;
+  creator.maxColumns = 3;
   creator.JSON = {
     elements: [
       { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
@@ -671,7 +671,7 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
 
 test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
   const creator = new CreatorTester();
-  creator.maximumColumnsCount = 3;
+  creator.maxColumns = 3;
   creator.JSON = {
     elements: [
       { type: "matrixdropdown", name: "q2", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
@@ -735,7 +735,7 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
   for (var i = 0; i < allQuestions.length; i++) {
     const question = allQuestions[i] as any;
     creator.selectElement(question);
-    creator.maximumRowsCount = 3;
+    creator.maxRows = 3;
 
     const questionAdorner = new QuestionAdornerViewModel(
       creator,
@@ -1101,9 +1101,9 @@ test("Test string editor description clear (with EOL)", (): any => {
   expect(q0.locDescription.text).toEqual("");
 });
 
-test("StringEditor multiline paste for selectbase questions should respect creator.maximumChoicesCount", (): any => {
+test("StringEditor multiline paste for selectbase questions should respect creator.maxChoices", (): any => {
   const creator = new CreatorTester();
-  creator.maximumChoicesCount = 4;
+  creator.maxChoices = 4;
   creator.JSON = {
     elements: [
       { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },

@@ -201,6 +201,10 @@ export interface ISurveyCreatorOptions {
   isMobileView: boolean;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
+  logicMaxItemsInCondition: number;
+  /**
+   * @deprecated
+   */
   maxLogicItemsInCondition: number;
   /**
    * @deprecated
@@ -211,8 +215,15 @@ export interface ISurveyCreatorOptions {
    */
   showTitlesInExpressions: boolean;
   useElementTitles: boolean;
+  /**
+   * @deprecated
+   */
   allowEditExpressionsInTextEditor: boolean;
+  /**
+   * @deprecated
+   */
   maximumColumnsCount: number;
+  maxColumns: number;
   minimumChoicesCount: number;
   maximumChoicesCount: number;
   maximumRowsCount: number;
@@ -349,6 +360,8 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
+  maxColumns: number;
+  logicMaxItemsInCondition: number;
   previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
@@ -358,6 +371,9 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   isMobileView: boolean = false;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
+  /**
+   * @deprecated
+   */
   maxLogicItemsInCondition: number;
   /**
    * @deprecated
@@ -368,7 +384,14 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
    */
   showTitlesInExpressions: boolean;
   useElementTitles: boolean;
+  /**
+   * @deprecated
+   */
   allowEditExpressionsInTextEditor: boolean = true;
+  logicAllowTextEditExpressions: boolean = true;
+  /**
+   * @deprecated
+   */
   maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
   minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
   maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;

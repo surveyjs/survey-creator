@@ -598,12 +598,12 @@ test("Do not allow to select page object", () => {
   const question = creator.survey.getQuestionByName("question1");
   creator.selectedElement = question;
   expect(creator.selectedElement["name"]).toEqual("question1");
-  creator.onSelectedElementChanging.add(function (c, options) {
+  creator.onElementSelecting.add(function (c, options) {
     if (
-      options.newSelectedElement != null &&
-      options.newSelectedElement.getType() == "page"
+      options.element != null &&
+      options.element.getType() == "page"
     ) {
-      options.newSelectedElement = creator.survey;
+      options.element = creator.survey;
     }
   });
   creator.selectedElement = creator.survey.pages[0];
@@ -613,10 +613,10 @@ test("Do not allow to select page object", () => {
 test("Do not allow to select page/survey objects", () => {
   const creator = new CreatorTester();
   creator.JSON = getSurveyJson();
-  creator.onSelectedElementChanging.add(function (c, options) {
-    const el = options.newSelectedElement;
+  creator.onElementSelecting.add(function (c, options) {
+    const el = options.element;
     if (!el || el.getType() == "page" || el.getType() == "survey") {
-      options.newSelectedElement =
+      options.element =
         creator.survey.getAllQuestions().length > 0
           ? creator.survey.getAllQuestions()[0]
           : null;
@@ -786,7 +786,7 @@ test("generate element name based on another survey", () => {
 
 test("creator.onConditionQuestionsGetList, Bug#957", () => {
   const creator = new CreatorTester();
-  creator.onConditionQuestionsGetList.add(function (sender, options) {
+  creator.onConditionGetQuestionList.add(function (sender, options) {
     options.list = options.list.filter(
       (item) => item.question.getType() === "text"
     );
@@ -812,7 +812,7 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
 });
 test("creator.onConditionQuestionsGetList, sortOrder", () => {
   const creator = new CreatorTester();
-  creator.onConditionQuestionsGetList.add(function (sender, options) {
+  creator.onConditionGetQuestionList.add(function (sender, options) {
     options.sortOrder = "none";
     options.list = options.list.filter(
       (item) => item.question.getType() === "text"
@@ -915,8 +915,8 @@ test(
   }
 );
 
-test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
-  const creator = new CreatorTester({ maxLogicItemsInCondition: 2 });
+test("creator options.logicMaxItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+  const creator = new CreatorTester({ logicMaxItemsInCondition: 2 });
   creator.JSON = {
     elements: [
       { name: "q1", type: "text" },
@@ -1185,7 +1185,7 @@ test("onModified options", () => {
 });
 test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
   const creator = new CreatorTester();
-  creator.showObjectTitles = true;
+  creator.useElementTitles = true;
   creator.JSON = getSurveyJson();
   const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");

@@ -844,7 +844,7 @@ test("Update theme in active test/preview tab 2", (): any => {
     previewBodyCss = options.survey.css.body;
   });
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.reason === "preview" || options.reason === "test") {
+    if (options.area === "preview-tab") {
       instanceBodyCss = options.survey.css.body;
       instanceArea = options.area;
     }

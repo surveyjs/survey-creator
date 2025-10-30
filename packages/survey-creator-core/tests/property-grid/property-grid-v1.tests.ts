@@ -1270,7 +1270,7 @@ test("Triggers property editor", () => {
   trigger.expression = "{question1} != val1";
   survey.triggers.push(trigger);
   const options = new EmptySurveyCreatorOptions();
-  options.showTitlesInExpressions = true;
+  options.useElementTitles = true;
   const propertyGrid = new PropertyGridModelTester(survey, options);
   const triggersQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("triggers")
