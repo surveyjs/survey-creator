@@ -2705,7 +2705,9 @@ export var grStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Αναφέρετε το όνομα της ερώτησης για να απαιτηθεί από τον χρήστη να παράσχει μοναδική απάντηση για αυτήν την ερώτηση σε κάθε πάνελ.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα."
+      confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -2705,7 +2705,9 @@ export var skStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky."
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -2705,7 +2705,9 @@ export var turkishStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler."
+      confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

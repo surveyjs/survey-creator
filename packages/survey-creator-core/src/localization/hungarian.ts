@@ -2705,7 +2705,9 @@ export var huStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt."
+      confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

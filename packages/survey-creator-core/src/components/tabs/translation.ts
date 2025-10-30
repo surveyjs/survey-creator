@@ -1579,32 +1579,16 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    class TranslationEditorNavigationBar extends SurveyElementActionContainer {
-      constructor(public survey: SurveyModel) {
-        super();
-        this.locOwner = survey;
-      }
-      public updateCss() {
-        this.cssClasses = this.survey.css.actionBar;
-        this.containerCss = this.survey.css.footer;
-        this.actions.forEach(action => {
-          if (action.component === "sv-action-bar-item") {
-            action.innerCss = this.cssSurveyNavigationButton;
-          }
-        });
-      }
-      private get cssSurveyNavigationButton(): string {
-        return new CssClassBuilder().append(this.survey.css.navigationButton).append(this.survey.css.bodyNavigationButton).toString();
-      }
-    }
-    const navigationBar = new TranslationEditorNavigationBar(survey);
-    survey.createNavigationBarCallback = () => <any>navigationBar;
+    const navigationBar = new SurveyElementActionContainer();
+    survey.createNavigationBarCallback = () => navigationBar;
     survey.showCompleteButton = false;
+    survey.showNavigationButtons = true;
+    survey.navigationButtonsLocation = "top";
     navigationBar.allowResponsiveness();
     navigationBar.addAction(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
-      navigationBar.addAction(new Action({
+      survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
         iconSize: "auto",
@@ -1618,11 +1602,8 @@ export class TranslationEditor {
     importAction.css = actionCss;
     const exportAction = createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true);
     exportAction.css = actionCss;
-    navigationBar.addAction(importAction);
-    navigationBar.addAction(exportAction);
-    navigationBar.updateCss();
-    survey.showNavigationButtons = true;
-    survey.navigationButtonsLocation = "top";
+    survey.addNavigationItem(importAction);
+    survey.addNavigationItem(exportAction);
   }
   private createStringsToTranslate(): Array<TranslationItem> {
     const res = new Array<TranslationItem>();

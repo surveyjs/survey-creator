@@ -2706,7 +2706,9 @@ export var traditionalChineseTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "在刪除條目之前觸發確認提示。"
+      confirmDelete: "在刪除條目之前觸發確認提示。",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "將編號指派給巢狀在動態面板中的問題。"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

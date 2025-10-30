@@ -5,7 +5,7 @@ const title = "Design Surface";
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("load");
   });
 
   test("Check minimal height", async ({ page }) => {

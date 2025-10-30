@@ -2705,7 +2705,9 @@ export var msStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar entri."
+      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar entri.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Memperuntukkan nombor kepada soalan yang bersarang dalam panel dinamik."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

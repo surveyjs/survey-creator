@@ -415,7 +415,8 @@ export class SurveyCreatorModel extends Base
     this.setPropertyVisibility("survey", allow, "pages");
     this.setPropertyVisibility("question", allow, "page");
     this.setPropertyVisibility("panel", allow, "page");
-    this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+    const optJson = this.options.showJSONEditorTab;
+    this.showJSONEditorTab = (optJson === true) || (optJson === undefined && allow);
   }
 
   private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
@@ -868,7 +869,7 @@ export class SurveyCreatorModel extends Base
    */
   public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
   /**
-   *@deprecated Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
+   * @deprecated Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
    */
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.onPageGetFooterActions;
 
@@ -1651,7 +1652,19 @@ export class SurveyCreatorModel extends Base
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
+
+  /**
+   * Specifies whether to remove the sidebar that contains the Property Grid from the Survey Creator UI.
+   *
+   * Default value: `false` (the sidebar is available)
+   *
+   * > Unlike [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar), which controls the sidebar's visibility, this property disables the sidebar feature entirely.
+   */
+  @property() removeSidebar: boolean;
   public sidebar: SidebarModel;
+  public get isSidebarVisible() {
+    return this.sidebar && !this.removeSidebar;
+  }
 
   constructor(protected options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super();
@@ -1730,12 +1743,13 @@ export class SurveyCreatorModel extends Base
   @property() showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
-   * Specifies whether to show the sidebar that displays the Property Grid.
+   * Opens or closes the sidebar that displays the Property Grid.
    *
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/customize-property-editors/ (linkStyle))
    * @see sidebarLocation
+   * @see removeSidebar
    */
   public get showSidebar(): boolean {
     return this.showSidebarValue;
@@ -4570,6 +4584,7 @@ export class SurveyCreatorModel extends Base
    * - `"right"` (default) - Displays the sidebar on the right side of the design surface.
    * - `"left"` - Displays the sidebar on the left side of the design surface.
    * @see toolboxLocation
+   * @see removeSidebar
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
 
