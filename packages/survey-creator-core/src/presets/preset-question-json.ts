@@ -1,4 +1,4 @@
-import { QuestionCommentModel, ItemValue, Serializer, ElementFactory, ITextArea, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
+import { QuestionCommentModel, Serializer, ElementFactory, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
 import { SurveyJSON5 } from "survey-creator-core";
 
 export class QuestionPresetJsonModel extends QuestionCommentModel {
@@ -11,6 +11,9 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
     return "presetjson";
   }
   protected getCssType(): string {
+    return "comment";
+  }
+  public getTemplate(): string {
     return "comment";
   }
   public get textAreaModel(): TextAreaModel {
@@ -51,11 +54,5 @@ ElementFactory.Instance.registerElement("presetjson", (name) => {
 Serializer.addClass("presetjson",
   [],
   function () { return new QuestionPresetJsonModel(""); },
-  "comment"
-);
-
-RendererFactory.Instance.registerRenderer(
-  "presetjson",
-  "default-comment",
   "comment"
 );

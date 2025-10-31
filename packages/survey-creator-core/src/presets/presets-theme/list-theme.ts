@@ -1,0 +1,27 @@
+export var listComponentCss = {
+  root: "sps-list__container",
+  itemsContainer: "sps-list",
+  itemsContainerFiltering: "sps-list--filtering",
+  emptyContainer: "sps-list__empty-container",
+  emptyText: "sps-list__empty-text",
+
+  filter: "sps-list__filter",
+  filterIcon: "sps-list__filter-icon",
+  filterInput: "sps-list__input",
+  searchClearButtonIcon: "sps-list__filter-clear-button",
+
+  loadingIndicator: "sps-list__loading-indicator",
+  item: "sps-list__item",
+  itemSelected: "sps-list__item--selected",
+  itemGroup: "sps-list__item--group",
+  itemGroupSelected: "sps-list__item--group-selected",
+  itemWithIcon: "sps-list__item--with-icon",
+  itemDisabled: "sps-list__item--disabled",
+  itemFocused: "sps-list__item--focused",
+  itemHovered: "sps-list__item--hovered",
+  itemTextWrap: "sps-list__item-text--wrap",
+  itemIcon: "sps-list__item-icon",
+  itemMarkerIcon: "sps-list-item__marker-icon",
+  itemSeparator: "sps-list__item-separator",
+  itemBody: "sps-list__item-body",
+};

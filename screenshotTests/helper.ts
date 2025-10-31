@@ -2,13 +2,6 @@ import { Locator, Page } from "playwright/test";
 
 export * from "../e2e/helper";
 
-export const url = "http://127.0.0.1:8080/testCafe/testcafe";
-export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page";
-export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/testCafe/preview-theme-switcher";
-export const urlThemeForPreview = "http://127.0.0.1:8080/testCafe/theme-for-preview-option";
-export const urlDropdownCollapseView = "http://127.0.0.1:8080/testCafe/dropdown-collapse-view";
-export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localized_ui";
-
 export const base64image =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
 

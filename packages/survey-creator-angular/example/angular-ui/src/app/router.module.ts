@@ -9,6 +9,7 @@ import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 import { TestLocalizationComponent } from "./test/localization.component";
 import { ThemeTabComponent } from "./test/test-theme-tab.component";
 import { NoLicenseComponent } from "./test/test-no-license.component";
+import { PresetsComponent } from "./test/presets.component";
 import { ExampleComponent } from "./example.component";
 
 const routes = [
@@ -21,6 +22,7 @@ const routes = [
   { path: "testCafe/dropdown-collapse-view", component: TestDropdownCollapseComponent },
   { path: "testCafe/testcafe-theme-tab", component: ThemeTabComponent },
   { path: "testCafe/testcafe-no-license", component: NoLicenseComponent },
+  { path: "testCafe/presets", component: PresetsComponent },
   { path: "", component: ExampleComponent }
 ];
 

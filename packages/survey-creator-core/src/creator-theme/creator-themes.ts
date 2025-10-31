@@ -21,6 +21,11 @@ export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> 
   sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
 }
 
+export function extendCreatorTheme(theme: ICreatorTheme) {
+  const curTheme = CreatorThemes[theme.themeName];
+  curTheme.cssVariables = { ...curTheme.cssVariables, ...theme.cssVariables };
+}
+
 const defaultVariables = {
   "--sjs-special-background": "#EDF9F7",
   "--sjs-primary-background-500": "#19B394",
