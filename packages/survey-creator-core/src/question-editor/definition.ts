@@ -109,6 +109,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "allowCameraAccess",
       "acceptedTypes",
       "maxSize",
+      "maxFiles",
       "imageHeight",
       "imageWidth",
       "filePlaceholder",
