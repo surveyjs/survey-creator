@@ -203,7 +203,7 @@ export async function setShowAddQuestionButton(newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(newVal: boolean) {
   await ClientFunction((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   })(newVal);
 }
 export async function setExpandCollapseButtonVisibility(newVal: string) {

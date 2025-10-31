@@ -9,7 +9,7 @@ export class ExpressionToDisplayText {
   public toDisplayText(expression: string): string {
     if (!this.survey) return expression;
     this.showTitles =
-      !!this.options && (this.options.useElementTitles == true || this.options.showTitlesInExpressions == true);
+      !!this.options && this.options.useElementTitles;
     var parser = new Survey.ConditionsParser();
     var node = parser.parseExpression(expression);
     if (!node) return expression;

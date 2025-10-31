@@ -202,11 +202,11 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(3);
 });
 
-test("actions and creator.onPropertyValueChanging", () => {
+test("actions and creator.onBeforePropertyChanged", () => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   let isRequiredNewValue = false;
-  creator.onPropertyValueChanging.add((sender, options) => {
+  creator.onBeforePropertyChanged.add((sender, options) => {
     if (options.propertyName === "isRequired") {
       options.newValue = isRequiredNewValue;
     }

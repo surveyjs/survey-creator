@@ -608,7 +608,7 @@ test("Apply value correctly after errors, Bug #5915", () => {
   expect(q.choices[0].value).toBe("item2");
   expect(q.choices[1].value).toBe("item1");
 });
-test("Show text column in itemvalue (choices) if inplaceEditForValues is false (default)", () => {
+test("Show text column in itemvalue (choices) if inplaceEditChoiceValues is false (default)", () => {
   const q = new QuestionCheckboxBase("q1");
   q.choices = ["item1", "item2", "item3"];
   const propertyGrid = new PropertyGridModelTester(q);
@@ -617,42 +617,42 @@ test("Show text column in itemvalue (choices) if inplaceEditForValues is false (
   expect(qProperty.columns[0].name).toBe("value");
   expect(qProperty.columns[1].name).toBe("text");
 });
-test("Hide text column in itemvalue (choices) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (choices) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionCheckboxBase("q1");
   q.choices = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
   expect(qProperty.columns).toHaveLength(1);
   expect(qProperty.columns[0].name).toBe("value");
 });
-test("Hide text column in itemvalue (rateValues) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (rateValues) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionRatingModel("q1");
   q.rateValues = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rateValues");
   expect(qProperty.columns).toHaveLength(2);
   expect(qProperty.columns[0].name).toBe("icon");
   expect(qProperty.columns[1].name).toBe("value");
 });
-test("Hide text column in itemvalue (matrixdropdown.rows) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (matrixdropdown.rows) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionMatrixDropdownModel("q1");
   q.rows = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rows");
   expect(qProperty.columns).toHaveLength(1);
   expect(qProperty.columns[0].name).toBe("value");
 });
-test("Hide text column in itemvalue (matrix.columns) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (matrix.columns) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionMatrixModel("q1");
   q.columns = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
   expect(qProperty.columns).toHaveLength(1);

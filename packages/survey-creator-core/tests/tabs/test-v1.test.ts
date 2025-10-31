@@ -92,9 +92,9 @@ test("Use title for pages", (): any => {
     ]
   };
   expect(creator.survey.pages).toHaveLength(2);
-  creator.showObjectTitles = true;
-  creator.onGetObjectDisplayName.add(function (sender, options) {
-    if (options.obj.name == "p2") options.displayName = "My Second Page";
+  creator.useElementTitles = true;
+  creator.onElementGetDisplayName.add(function (sender, options) {
+    if (options.element.name == "p2") options.displayName = "My Second Page";
   });
   var model = getTestModel(creator);
   expect(model.survey.pages).toHaveLength(2);
@@ -103,7 +103,7 @@ test("Use title for pages", (): any => {
   expect(model.pageListItems[1].title).toEqual("My Second Page");
 });
 
-test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
+test("previewAllowSelectLanguage: auto, true, false, all", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -113,7 +113,7 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
       }
     ]
   };
-  expect(creator.showDefaultLanguageInTestSurveyTab).toEqual("auto");
+  expect(creator.previewAllowSelectLanguage).toEqual("auto");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   const languageSelectorAction = testPlugin["languageSelectorAction"];
   const languageSelectorActionList = languageSelectorAction.data;
@@ -121,12 +121,12 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   testPlugin.activate();
   expect(languageSelectorAction.visible).toBeFalsy();
 
-  creator.showDefaultLanguageInTestSurveyTab = true;
+  creator.previewAllowSelectLanguage = true;
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeTruthy();
   expect(languageSelectorActionList.actions.length > 10).toBeTruthy();
 
-  creator.showDefaultLanguageInTestSurveyTab = "auto";
+  creator.previewAllowSelectLanguage = "auto";
   creator.JSON = {
     elements: [
       {
@@ -143,17 +143,17 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   expect(languageSelectorActionList.actions[1].id).toEqual("de");
   expect(languageSelectorActionList.actions[1].title).toEqual("Deutsch");
 
-  creator.showDefaultLanguageInTestSurveyTab = true;
+  creator.previewAllowSelectLanguage = true;
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeTruthy();
   expect(languageSelectorActionList.actions).toHaveLength(2);
 
-  creator.showDefaultLanguageInTestSurveyTab = false;
+  creator.previewAllowSelectLanguage = false;
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeFalsy();
   expect(languageSelectorActionList.actions).toHaveLength(0);
 
-  creator.showDefaultLanguageInTestSurveyTab = "all";
+  creator.previewAllowSelectLanguage = "all";
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeTruthy();
   expect(languageSelectorActionList.actions.length > 10).toBeTruthy();

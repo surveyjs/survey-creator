@@ -135,7 +135,7 @@ export class UndoRedoController extends Base {
     var options = { canUndo: canUndo, allow: canUndo };
     this.onBeforeUndo.fire(this.creator, options);
     this.creator.onBeforeUndo.fire(this.creator, options);
-    if (options.canUndo) {
+    if (options.allow) {
       this.undoRedoManager.undo();
       this.selectElementAfterUndo();
     }
@@ -147,7 +147,7 @@ export class UndoRedoController extends Base {
     const options = { canRedo: canRedo, allow: canRedo };
     this.onBeforeRedo.fire(this.creator, options);
     this.creator.onBeforeRedo.fire(this.creator, options);
-    if (options.canRedo) {
+    if (options.allow) {
       const item = this.undoRedoManager.redo();
       this.selectElementAfterUndo();
     }

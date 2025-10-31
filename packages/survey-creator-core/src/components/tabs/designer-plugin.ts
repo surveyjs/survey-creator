@@ -254,7 +254,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);
     this.creator.onSurveyInstanceCreated.add((s, o) => {
-      if (o.reason == "designer") {
+      if (o.area == "designer-tab") {
         this.designerStateManager.initForSurvey(o.survey);
       }
     });

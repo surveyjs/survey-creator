@@ -1110,12 +1110,22 @@ export class SurveyCreatorModel extends Base
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
    */
-  public showObjectTitles = false;
+  get showObjectTitles() {
+    return this.useElementTitles;
+  }
+  set showObjectTitles(val) {
+    this.useElementTitles = val;
+  }
 
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
    */
-  public showTitlesInExpressions = false;
+  get showTitlesInExpressions() {
+    return this.useElementTitles;
+  }
+  set showTitlesInExpressions(val) {
+    this.useElementTitles = val;
+  }
 
   /**
    * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
@@ -1781,7 +1791,7 @@ export class SurveyCreatorModel extends Base
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
-  * @deprecated showPropertyGrid is deprecated, use showSidebar instead.
+  * @deprecated Use the [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) property instead.
   */
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
@@ -2711,7 +2721,7 @@ export class SurveyCreatorModel extends Base
     displayName: string = undefined
   ): string {
     if (!displayName) {
-      displayName = SurveyHelper.getObjectName(obj, this.useElementTitles || this.showObjectTitles);
+      displayName = SurveyHelper.getObjectName(obj, this.useElementTitles);
     }
     var options = { obj: obj, element: obj, displayName: displayName, area: area, reason: reason };
     this.onElementGetDisplayName.fire(this, options);
@@ -2835,7 +2845,7 @@ export class SurveyCreatorModel extends Base
     this.setState("modified");
     this.onModified.fire(this, options);
     this.doOnElementsChanged(options.type);
-    this.isAutoSave && this.doAutoSave();
+    this.autoSaveEnabled && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
@@ -4284,7 +4294,7 @@ export class SurveyCreatorModel extends Base
   }
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
-    this.showSaveButton = value != null && !this.isAutoSave;
+    this.showSaveButton = value != null && !this.autoSaveEnabled;
   }
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string, defaultJSON: any = null) {

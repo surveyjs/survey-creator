@@ -1098,7 +1098,7 @@ test("Show complex question in the condition builder", () => {
   });
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
-  options.showTitlesInExpressions = true;
+  options.useElementTitles = true;
   let editor = new ConditionEditor(survey, question, options, "visibleIf");
   expect(editor.allConditionQuestions).toHaveLength(4);
   let panel = editor.panel.panels[0];
@@ -1247,7 +1247,7 @@ test("show calculated values", () => {
   expect(questionName.choices[0].value).toEqual("q2");
   expect(questionName.choices[1].value).toEqual("val1");
 });
-test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+test("options.logicMaxItemsInCondition, hide `Add Condition` on exceeding the value", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
@@ -1256,7 +1256,7 @@ test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the va
   });
   var question = survey.getQuestionByName("q1");
   var options = new EmptySurveyCreatorOptions();
-  options.maxLogicItemsInCondition = 2;
+  options.logicMaxItemsInCondition = 2;
   options.getObjectDisplayName = (
     obj: any,
     area: string,

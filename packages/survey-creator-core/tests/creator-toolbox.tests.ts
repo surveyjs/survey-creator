@@ -15,7 +15,7 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason).toHaveLength(1);
   expect(reason[0]).toEqual("ADDED_FROM_TOOLBOX");
 
-  creator.fastCopyQuestion(creator.survey.getAllQuestions()[0]);
+  creator.copyQuestion(creator.survey.getAllQuestions()[0]);
   expect(reason).toHaveLength(2);
   expect(reason[1]).toEqual("ELEMENT_COPIED");
 

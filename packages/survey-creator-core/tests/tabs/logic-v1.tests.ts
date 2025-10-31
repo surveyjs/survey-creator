@@ -523,7 +523,7 @@ test("Edit triggers via trigger editor", () => {
     ]
   });
   var options = new EmptySurveyCreatorOptions();
-  options.showTitlesInExpressions = true;
+  options.useElementTitles = true;
   var logic = new SurveyLogicUI(survey, options);
   expect(logic.items).toHaveLength(1);
   logic.editItem(logic.items[0]);
@@ -586,7 +586,7 @@ test("Edit condition complete via its editor", () => {
 });
 test("Use survey creator options", () => {
   var options = new EmptySurveyCreatorOptions();
-  options.showTitlesInExpressions = true;
+  options.useElementTitles = true;
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
@@ -809,7 +809,7 @@ test("Add existing visible Items", () => {
     ]
   });
   var options = new EmptySurveyCreatorOptions();
-  options.showTitlesInExpressions = true;
+  options.useElementTitles = true;
   var logic = new SurveyLogic(survey, options);
   expect(logic.items).toHaveLength(1);
   expect(logic.items[0].getDisplayText()).toEqual("If 'My Question 1' == 1, make question 'q2' visible, make question 'q3' visible");

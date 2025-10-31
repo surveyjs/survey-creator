@@ -150,10 +150,10 @@ test("Check question adorners location", (): any => {
       { type: "text", name: "q1" },
     ]
   };
-  creator.onDefineElementMenuItems.add(function (editor, options) {
-    if (options.obj.isPage) return;
-    const objToAdd = options.obj;
-    options.items.unshift({
+  creator.onElementGetActions.add(function (editor, options) {
+    if (options.element.isPage) return;
+    const objToAdd = options.element;
+    options.actions.unshift({
       id: "addtosharedrepo"
     });
   });

@@ -46,7 +46,7 @@ test.describe("designer a11y", () => {
   });
   test("Check radiogroup, rating and checkbox questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -71,7 +71,7 @@ test.describe("designer a11y", () => {
 
   test("Check dropdown and tagbox questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -89,7 +89,7 @@ test.describe("designer a11y", () => {
 
   test("Check dropdown and tagbox questions with defaults", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -107,7 +107,7 @@ test.describe("designer a11y", () => {
 
   test("Check boolean, file and ranking questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -125,7 +125,7 @@ test.describe("designer a11y", () => {
 
   test("Check imagepicker question", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -152,7 +152,7 @@ test.describe("designer a11y", () => {
 
   test("Check inputs questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -190,7 +190,7 @@ test.describe("designer a11y", () => {
 
   test("Check panels questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -211,7 +211,7 @@ test.describe("designer a11y", () => {
 
   test("Check matrixes questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -252,7 +252,7 @@ test.describe("designer a11y", () => {
 
   test("Check image questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [
@@ -284,7 +284,7 @@ test.describe("designer a11y", () => {
 
   test("Check html, expression and signaturepad questions", async ({ page }) => {
     await page.evaluate(() => {
-      window["creator"].allowEditSurveyTitle = false;
+      window["creator"].showSurveyHeader = false;
     });
     await setJSON(page, {
       "pages": [

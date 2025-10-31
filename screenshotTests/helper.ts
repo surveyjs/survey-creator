@@ -209,7 +209,7 @@ export async function setShowAddQuestionButton(page, newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(page, newVal: boolean) {
   await page.evaluate((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   }, newVal);
 }
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {

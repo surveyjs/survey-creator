@@ -25,7 +25,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       editorLocalization.getString("pe.fastEntryPlaceholder");
     this.editSurvey.onValidateQuestion.add((sender, options) => {
       if (options.errors.length > 0) return;
-      const minChoiceCount = this.options.minimumChoicesCount;
+      const minChoiceCount = this.options.minChoices;
       if (minChoiceCount > 0) {
         const choicesCount = this.getChoicesCount();
         if (minChoiceCount > choicesCount) {
@@ -34,7 +34,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
         }
         return;
       }
-      const maxChoicesCount = this.options.maximumChoicesCount;
+      const maxChoicesCount = this.options.maxChoices;
       if (maxChoicesCount > 0) {
         const choicesCount = this.getChoicesCount();
         if (maxChoicesCount < choicesCount) {

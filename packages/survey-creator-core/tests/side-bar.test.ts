@@ -51,10 +51,10 @@ test("Sidebar: hasVisiblePages test", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   expect(creator.sidebar.hasVisiblePages).toEqual(true);
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.sidebar.hasVisiblePages).toEqual(false);
 
-  creator.makeNewViewActive("translation");
+  creator.switchTab("translation");
   expect(creator.sidebar.hasVisiblePages).toEqual(true);
 });
 

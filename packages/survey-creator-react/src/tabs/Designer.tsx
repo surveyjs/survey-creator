@@ -105,7 +105,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     </React.Fragment>);
   }
   renderPlaceHolder(): React.JSX.Element {
-    const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle && this.creator.showHeaderInEmptySurvey);
+    const surveyHeader = this.renderHeader(this.creator.showSurveyHeader && this.creator.showHeaderInEmptySurvey);
 
     return (<React.Fragment>
       {surveyHeader}
@@ -120,7 +120,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
   renderTabContent(): React.JSX.Element {
     const survey: SurveyModel = this.creator.survey;
-    const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
+    const surveyHeader = this.renderHeader(this.creator.showSurveyHeader);
     const style: any = { ...this.model.surfaceCssVariables };
     style.maxWidth = survey.renderedWidth;
 

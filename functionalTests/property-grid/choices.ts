@@ -81,7 +81,7 @@ test("https://github.com/surveyjs/survey-library/issues/4170, responsiveness bug
 });
 test("Load choices by custom button in fast edit", async (t) => {
   const setCreatorHandler = ClientFunction(() => {
-    window["creator"].onPropertyGridShowModal.add((sender, options) => {
+    window["creator"].onPropertyGridShowPopup.add((sender, options) => {
       const editor = options.popupEditor;
       options.popupModel.footerToolbar.addAction({
         id: "fast-entry-custom",

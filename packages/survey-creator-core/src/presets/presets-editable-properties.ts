@@ -483,7 +483,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   //         }
   //       }
   //     });
-  //     creator.isAutoSave = false;
+  //     creator.autoSaveEnabled = false;
   //     creator.showTabsDefault = false;
   //     creator.showToolbarDefault = false;
   //     creator.allowCollapseSidebar = false;

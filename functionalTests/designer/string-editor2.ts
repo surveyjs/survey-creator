@@ -680,10 +680,13 @@ test("Check string editor focus on imagepicker caption click", async (t) => {
 test("Check string editor with html", async (t) => {
   await explicitErrorHandler();
   await ClientFunction(() => {
-    (<any>window).creator.onDesignerSurveyCreated.add(function (editor, options) {
-      options.survey.onTextMarkdown.add((_, opt) => {
-        opt.html = opt.text;
-      });
+    (<any>window).creator.onSurveyInstanceCreated.add(function (editor, options) {
+      if (options.area === "designer-tab") {
+        options.survey.onTextMarkdown.add((_, opt) => {
+          opt.html = opt.text;
+        });
+      }
+
     });
   })();
   await setJSON({
@@ -703,10 +706,12 @@ test("Check string editor with html", async (t) => {
 test("Check string editor with html security", async (t) => {
   await explicitErrorHandler();
   await ClientFunction(() => {
-    (<any>window).creator.onDesignerSurveyCreated.add(function (editor, options) {
-      options.survey.onTextMarkdown.add((_, opt) => {
-        opt.html = opt.text.replaceAll("<", "[").replaceAll(">", "]");
-      });
+    (<any>window).creator.onSurveyInstanceCreated.add(function (editor, options) {
+      if (options.area === "designer-tab") {
+        options.survey.onTextMarkdown.add((_, opt) => {
+          opt.html = opt.text.replaceAll("<", "[").replaceAll(">", "]");
+        });
+      }
     });
   })();
 
