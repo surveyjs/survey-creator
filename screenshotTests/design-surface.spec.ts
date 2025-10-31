@@ -201,7 +201,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].onElementGetActions.add((_, options) => {
         if (!options.element["isPage"]) return;
-        options.actionsElement.push({
+        options.actions.push({
           id: "duplicate2",
           title: "Duplicate",
           enabled: false,

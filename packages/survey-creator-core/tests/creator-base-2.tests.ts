@@ -439,7 +439,6 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
       reason.push(options.allowDrag);
       if (disableDrag) {
         options.allowDrag = false;
-        options.allowDragging = false;
       }
     }
   });

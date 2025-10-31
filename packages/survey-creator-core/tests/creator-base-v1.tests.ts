@@ -1001,7 +1001,7 @@ test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () =>
   };
   let model;
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.reason === "condition-builder") {
+    if (options.area === "logic-rule:condition-editor") {
       model = options.model;
     }
   });
