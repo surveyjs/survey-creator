@@ -28,6 +28,8 @@ export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
     const errors: Array<Error> = [];
     page.addListener("pageerror", (error) => {
       errors.push(error);
+      // eslint-disable-next-line no-console
+      console.log(`Uncaught exception: "${error}"`);
     });
     await use(page);
     if (!skipJSErrors) {
@@ -47,7 +49,11 @@ export async function doDrag({ page, element, target, options }: { page: Page, e
   await page.mouse.down();
   const { x, y, width, height } = await <any>target.boundingBox();
 
-  await page.mouse.move(x + width / 2 + (options.destinationOffsetX || 0), y + height / 2 + (options.destinationOffsetY || 0), { steps: 20 });
+  if (options?.targetPosition) {
+    await page.mouse.move(x + (options.targetPosition.x || 0), y + (options.targetPosition.y || 0), { steps: 20 });
+  } else {
+    await page.mouse.move(x + width / 2 + (options.destinationOffsetX || 0), y + height / 2 + (options.destinationOffsetY || 0), { steps: 20 });
+  }
 }
 
 export async function doDragDrop({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options: any }):Promise<void> {
