@@ -3126,7 +3126,7 @@ test("Use creator.onElementGetDisplayName for element selector in visibleIf acti
   const creator = new CreatorTester();
   creator.onElementGetDisplayName.add(function (sender, options) {
     if (options.area === "logic-tab:question-selector") {
-      options.displayName = "# " + options.obj.title;
+      options.displayName = "# " + options.element.title;
     }
   });
   creator.JSON = {

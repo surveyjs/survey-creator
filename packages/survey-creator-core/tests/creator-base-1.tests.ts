@@ -2146,7 +2146,7 @@ test("PageAdorner and onElementAllowOperations", (): any => {
   };
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.isPage) {
+    if (options.element.isPage) {
       options.allowDelete = sender.survey.pageCount > 1;
     }
   });
@@ -2167,10 +2167,10 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
     let page = null;
-    if (options.obj.isPage) {
-      page = options.obj;
+    if (options.element.isPage) {
+      page = options.element;
     } else {
-      page = options.obj.page;
+      page = options.element.page;
     }
     if (!!page) {
       const isFirstPage = sender.survey.pages.indexOf(page) === 0;
@@ -2215,7 +2215,7 @@ test("PageAdorner and onElementAllowOperations, allowExpandCollapse", (): any =>
     ]
   };
   creator.onElementAllowOperations.add((sender, options) => {
-    options.allowExpandCollapse = (options.obj as SurveyElement).name == "page2";
+    options.allowExpandCollapse = (options.element as SurveyElement).name == "page2";
   });
   const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
   const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
@@ -2261,10 +2261,10 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   };
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.isQuestion) {
-      options.allowChangeType = options.obj.getType() !== "comment";
-      options.allowChangeRequired = options.obj.getType() !== "text";
-      options.allowChangeInputType = options.obj.name !== "q1";
+    if (options.element.isQuestion) {
+      options.allowChangeType = options.element.getType() !== "comment";
+      options.allowChangeRequired = options.element.getType() !== "text";
+      options.allowChangeInputType = options.element.name !== "q1";
     }
   });
   const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
@@ -2300,7 +2300,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations, allowExpandCollapse
   };
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
-    options.allowExpandCollapse = (options.obj as Question).name === "q1";
+    options.allowExpandCollapse = (options.element as Question).name === "q1";
   });
   const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
   const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
@@ -2354,7 +2354,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations on new elements", ()
     ]
   };
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.isQuestion) {
+    if (options.element.isQuestion) {
       options.allowChangeType = false;
       options.allowChangeRequired = false;
     }
@@ -2839,7 +2839,7 @@ test("QuestionAdornerViewModel for selectbase and creator.onItemValueAdded", ():
     elements: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2"] }]
   };
   creator.onItemValueAdded.add((sender, options) => {
-    options.newItem.text = options.obj.getType() + ":" + options.propertyName + ","
+    options.newItem.text = options.element.getType() + ":" + options.propertyName + ","
       + options.newItem.value + "," + options.itemValues.length.toString();
 
   });
@@ -2870,7 +2870,7 @@ test("Modify property editor settings on event", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyEditorCreated.add((sender, options) => {
     if (
-      options.obj.getType() == "text" &&
+      options.element.getType() == "text" &&
       options.property.name === "placeholder"
     ) {
       options.editor.textUpdateMode = "onTyping";
@@ -2905,7 +2905,7 @@ test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
   const creator = new CreatorTester();
   creator.onPropertyEditorUpdateTitleActions.add((sender, options) => {
-    const obj = options.obj;
+    const obj = options.element;
     if (
       obj.getType() === "checkbox" &&
       options.property.name === "choices" &&
@@ -4656,7 +4656,7 @@ test("Creator bypage edit mode & onElementAllowOperations", (): any => {
   const creator = new CreatorTester();
   creator.pageEditMode = "bypage";
   creator.onElementAllowOperations.add(function (creator, options) {
-    var obj = options.obj;
+    var obj = options.element;
     if (!obj) return;
     if (obj.getType() == "page") {
       options.allowDelete = creator.survey.pages.indexOf(obj) % 2 === 1;

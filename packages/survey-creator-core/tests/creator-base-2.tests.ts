@@ -133,8 +133,8 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   const selectedTypes = new Array<string>();
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "property-grid") {
-      if (options.obj) {
-        selectedTypes.push(options.obj.getType());
+      if (options.element) {
+        selectedTypes.push(options.element.getType());
       }
     }
   });

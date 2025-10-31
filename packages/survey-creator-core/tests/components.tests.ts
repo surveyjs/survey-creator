@@ -215,7 +215,7 @@ test("item value allowAdd on events", () => {
   const creator = new CreatorTester();
 
   creator.onCollectionItemAllowOperations.add(function (sender, options) {
-    const q = <QuestionCheckboxModel>options.obj;
+    const q = <QuestionCheckboxModel>options.element;
     if (q && q.selectAllItem == options.item) {
       options.allowAdd = true;
     }
@@ -426,7 +426,7 @@ test("QuestionImageAdornerViewModel read only mode on events", () => {
   expect(imageAdorner.filePresentationModel.renderedInputReadOnly).toBeFalsy();
 
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.name == "q1") options.allowEdit = false;
+    if (options.element.name == "q1") options.allowEdit = false;
   });
 
   const imageAdornerRO = new QuestionImageAdornerViewModel(

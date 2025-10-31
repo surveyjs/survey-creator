@@ -49,7 +49,7 @@ test("Test string editor content editable", (): any => {
   ).readOnly = true;
 
   creator.onPropertyGetReadOnly.add(function (editor, options) {
-    var obj = options.obj;
+    var obj = options.element;
     if (!obj || !obj.page) return;
 
     //you may check obj.getType();
@@ -125,35 +125,35 @@ test("Test string editor select questions items readonly", (): any => {
   Serializer.getProperty("dropdown", "choices").readOnly = false;
 
   creator.onPropertyGetReadOnly.add(function (editor, options) {
-    if (options.obj?.isDescendantOf("dropdown") && options.propertyName == "choices")
+    if (options.element?.isDescendantOf("dropdown") && options.property.name == "choices")
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
 
   creator.onPropertyGetReadOnly.add(function (editor, options) {
-    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+    if (options.element?.isDescendantOf("itemvalue") && options.parentElement && options.parentElement.name == "q0" && options.parentElement.choices.indexOf(options.element) == 0)
       options.readOnly = false;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
   creator.onPropertyGetReadOnly.clear();
 
   creator.onPropertyGetReadOnly.add(function (editor, options) {
-    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+    if (options.element?.isDescendantOf("itemvalue") && options.parentElement && options.parentElement.name == "q0" && options.parentElement.choices.indexOf(options.element) == 0)
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, true, true, true, true, true]);
   creator.onPropertyGetReadOnly.clear();
 
   creator.onElementAllowOperations.add(function (editor, options) {
-    if (options.obj.name === "q1")
+    if (options.element.name === "q1")
       options.allowEdit = false;
   });
   expect(checkItemEdit()).toEqual([true, true, false, false, true, true]);
 
   creator.onCollectionItemAllowOperations.add(function (editor, options) {
-    if (options.obj.name == "q0" && options.collection.indexOf(options.item) == 0)
+    if (options.element.name == "q0" && options.collection.indexOf(options.item) == 0)
       options.allowEdit = false;
-    if (options.obj.name == "q1" && options.collection.indexOf(options.item) == 1)
+    if (options.element.name == "q1" && options.collection.indexOf(options.item) == 1)
       options.allowEdit = true;
   });
   expect(checkItemEdit()).toEqual([false, true, false, false, true, true]);
@@ -778,7 +778,7 @@ test("StringEditorConnector for matrix - onItemValueAdded event", (): any => {
   var log = "";
 
   creator.onItemValueAdded.add((sender, options) => {
-    log += (options.obj as QuestionMatrixModel).name + ":" + options.itemValues.map(c => c.title).join(",") + "+" + options.newItem.title;
+    log += (options.element as QuestionMatrixModel).name + ":" + options.itemValues.map(c => c.title).join(",") + "+" + options.newItem.title;
   });
   creator.JSON = {
     elements: [
@@ -887,7 +887,7 @@ test("StringEditor onPropertyGetReadOnly for radio/checkbox - https://github.com
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrOtherItem, creator);
 
   creator.onPropertyGetReadOnly.add((sender, options) => {
-    if (options.property.name === "otherText" && options.obj.getType() === "checkbox") {
+    if (options.property.name === "otherText" && options.element.getType() === "checkbox") {
       options.readOnly = true;
     }
   });

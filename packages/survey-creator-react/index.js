@@ -278,7 +278,7 @@ Survey.ComponentCollection.Instance.add({
 creator.toolbox.searchEnabled = true;
 creator.expandCollapseButtonVisibility = "onhover";
 creator.onElementAllowOperations.add((sender, options) => {
-  if (options.obj.isPage) {
+  if (options.element.isPage) {
     options.allowDelete = sender.survey.pageCount > 1;
   }
 });

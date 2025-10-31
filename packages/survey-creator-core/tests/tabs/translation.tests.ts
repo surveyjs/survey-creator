@@ -903,9 +903,9 @@ test("onTranslationStringVisibility", () => {
   const creator = new CreatorTester();
   creator.JSON = surveyJson;
   creator.onTranslationStringVisibility.add((sender, options) => {
-    if (options.obj.getType() == "survey" && options.propertyName === "title") {
+    if (options.element.getType() == "survey" && options.propertyName === "title") {
       options.visible = false;
-    } else if (options.obj["name"] === "question1" && options.propertyName === "title") {
+    } else if (options.element["name"] === "question1" && options.propertyName === "title") {
       options.visible = false;
     } else {
       options.visible = true;

@@ -302,9 +302,9 @@ test("toolbar responsiveness in compact mode", async (t) => {
     };
 
     window["creator"].onElementGetActions.add(function (editor, options) {
-      if (options.obj.isPage) return;
-      const objToAdd = options.obj;
-      options.items.unshift({
+      if (options.element.isPage) return;
+      const objToAdd = options.element;
+      options.actions.unshift({
         id: "addtosharedrepo",
         title: "Save as Toolbox Item",
         iconName: "icon-toolbox",

@@ -845,9 +845,8 @@ test("creator.onElementGetDisplayName, change visible name for objects", () => {
   let reason = "";
   let area = "";
   creator.onElementGetDisplayName.add(function (sender, options) {
-    reason = options.reason;
     area = options.area;
-    options.displayName = options.obj.title + " [" + options.obj.name + "]";
+    options.displayName = options.element.title + " [" + options.element.name + "]";
   });
   creator.JSON = {
     elements: [
@@ -876,16 +875,16 @@ test(
   () => {
     const creator = new CreatorTester();
     creator.onElementGetDisplayName.add(function (sender, options) {
-      if (options.reason === "property-grid" && options.area === "property-grid-header:element-list") {
-        if (!!options.obj.title) {
-          options.displayName = options.obj.title;
+      if (options.area === "property-grid-header:element-list") {
+        if (!!options.element.title) {
+          options.displayName = options.element.title;
         }
-        if (!!options.obj.description) {
-          options.displayName = options.obj.description;
+        if (!!options.element.description) {
+          options.displayName = options.element.description;
         }
       }
-      if (options.reason === "property-grid-title" && options.area === "property-grid-header:selected-element") {
-        options.displayName = options.obj.name + " Properties";
+      if (options.area === "property-grid-header:selected-element") {
+        options.displayName = options.element.name + " Properties";
       }
     });
     creator.JSON = {

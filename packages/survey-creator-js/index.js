@@ -209,7 +209,7 @@ window.creator = creator;
 creator.toolbox.searchEnabled = true;
 
 creator.onElementAllowOperations.add((sender, options) => {
-  if (options.obj.isPage) {
+  if (options.element.isPage) {
     options.allowDelete = sender.survey.pageCount > 1;
   }
 });
