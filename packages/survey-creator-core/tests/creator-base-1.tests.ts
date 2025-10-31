@@ -80,9 +80,9 @@ test("do not deactivate/activate tabs on selecting the active tab", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.activeTab).toEqual("designer");
-  expect(creator.makeNewViewActive("preview")).toBeTruthy();
+  expect(creator.switchTab("preview")).toBeTruthy();
   creator.activeTab = "preview";
-  expect(creator.makeNewViewActive("preview")).toBeFalsy();
+  expect(creator.switchTab("preview")).toBeFalsy();
   creator.activeTab = "preview";
 });
 test("Select new added question", (): any => {
@@ -1019,7 +1019,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question3" }
     ], showQuestionNumbers: true
   };
-  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  creator.copyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
   const question = creator.survey.getQuestionByName("question4");
   expect(question.startWithNewLine).toBeFalsy();
@@ -1033,7 +1033,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question3" }
     ], showQuestionNumbers: true
   };
-  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  creator.copyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
   expect(creator.survey.getQuestionByName("question4")).toBeTruthy();
   expect(creator.survey.getQuestionByName("question4").visibleIndex).toEqual(1);
@@ -1061,7 +1061,7 @@ test("fast copy from paneldynamic", (): any => {
     ]
   };
   expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(1);
-  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1").template.elements[0]);
+  creator.copyQuestion(creator.survey.getQuestionByName("question1").template.elements[0]);
   expect(creator.survey.pages[0].questions).toHaveLength(1);
   expect(creator.survey.getQuestionByName("question3")).toBeTruthy();
   expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(2);
@@ -1723,7 +1723,7 @@ test("Test plug-ins in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   const testPlugin = <TabTestPlugin>creator.getPlugin("preview");
   expect(testPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(designerPlugin.model).toBeFalsy();
   expect(testPlugin.model).toBeTruthy();
   const logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
@@ -1733,15 +1733,15 @@ test("Test plug-ins in creator", (): any => {
   expect(logicPlugin.model).toBeFalsy();
   expect(translationPlugin.model).toBeFalsy();
 
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(testPlugin.model).toBeFalsy();
   expect(logicPlugin.model).toBeTruthy();
-  creator.makeNewViewActive("translation");
+  creator.switchTab("translation");
   expect(logicPlugin.model).toBeFalsy();
   expect(translationPlugin.model).toBeTruthy();
-  creator.makeNewViewActive("embed");
+  creator.switchTab("embed");
   expect(translationPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(designerPlugin.model).toBeTruthy();
 });
 test("Test plug-ins JSON-Text in creator", (): any => {
@@ -1753,10 +1753,10 @@ test("Test plug-ins JSON-Text in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(designerPlugin.model).toBeTruthy();
   expect(textPlugin.model).toBeFalsy();
 });
@@ -1780,15 +1780,15 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
   expect(creator.viewType).toEqual("designer");
   const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   expect(textPlugin.model).toBeTruthy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(counter).toEqual(0);
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   json.pages[0].elements[0].name = "question1";
   textPlugin.model.text = JSON.stringify(json);
   textPlugin.model.isJSONChanged = true;
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(creator.survey.getAllQuestions()[0].name).toEqual("question1");
   expect(counter).toEqual(1);
   expect(changedType).toEqual("JSON_EDITOR");
@@ -1807,10 +1807,10 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(designerPlugin.model).toBeTruthy();
   expect(textPlugin.model).toBeFalsy();
   TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
@@ -1843,10 +1843,10 @@ test("Test plug-ins check order change viewtype and activate/deactivate", (): an
     }
   });
 
-  creator.makeNewViewActive("one");
+  creator.switchTab("one");
   expect(result).toBe("one-activate");
 
-  creator.makeNewViewActive("two");
+  creator.switchTab("two");
   expect(result).toBe("one-activate+one-deactivate+two-activate");
 
 });
@@ -2417,8 +2417,8 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
-test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
-  const creator = new CreatorTester({ maxNestedPanels: 0 });
+test("ConvertTo & addNewQuestion for panel & maxPanelNestingLevel", (): any => {
+  const creator = new CreatorTester({ maxPanelNestingLevel: 0 });
   creator.JSON = {
     elements: [
       {
@@ -2437,10 +2437,10 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
       { type: "paneldynamic", name: "panel2" }
     ]
   };
-  expect(creator.maxNestedPanels).toBe(0);
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
-  creator.maxNestedPanels = -1;
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
+  expect(creator.maxPanelNestingLevel).toBe(0);
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
+  creator.maxPanelNestingLevel = -1;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(-1);
   const panel1 = creator.survey.getPanelByName("panel1");
   const panel2 = creator.survey.getQuestionByName("panel2");
   const panel3 = creator.survey.getPanelByName("panel3");
@@ -2453,16 +2453,16 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
-  creator.maxNestedPanels = 3;
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(3);
+  creator.maxPanelNestingLevel = 3;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(3);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(22);
-  creator.maxNestedPanels = 2;
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
+  creator.maxPanelNestingLevel = 2;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2473,8 +2473,8 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
-  creator.maxNestedPanels = 1;
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(1);
+  creator.maxPanelNestingLevel = 1;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(1);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2488,8 +2488,8 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
-  creator.maxNestedPanels = 0;
-  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
+  creator.maxPanelNestingLevel = 0;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2976,12 +2976,12 @@ test("creator.onActiveTabChanged", (): any => {
     model = options.model;
   });
   expect(creator.viewType).toEqual("designer");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(tabName).toEqual("preview");
   expect(plugin).toEqual(creator.getPlugin("test"));
   expect(model).toEqual(plugin.model);
   expect(creator.activeTab).toEqual("preview");
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
   expect(model).toEqual(plugin.model);
@@ -2999,11 +2999,11 @@ test("creator.onActiveTabChaning", (): any => {
     options.allow = allow;
   });
   expect(creator.viewType).toEqual("designer");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(tabName).toEqual("preview");
   expect(creator.activeTab).toEqual("preview");
   allow = false;
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(tabName).toEqual("logic");
   expect(creator.activeTab).toEqual("preview");
 });
@@ -3015,7 +3015,7 @@ test("active tab disableHide", (): any => {
   expect(creator.viewType).toEqual("designer");
   expect(creator.tabs[0].active).toBeTruthy();
   expect(creator.tabs[0].disableHide).toBeTruthy();
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.tabs[1].active).toBeTruthy();
   expect(creator.tabs[1].disableHide).toBeTruthy();
   expect(creator.tabs[0].active).toBeFalsy();
@@ -3036,7 +3036,7 @@ test("update tab content", (): any => {
   expect(hasQ1(creator.survey)).toBeTruthy();
 
   creator.JSON = {};
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.viewType).toEqual("preview");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   expect(hasQ1(testPlugin.model.survey)).toBeFalsy();
@@ -3044,7 +3044,7 @@ test("update tab content", (): any => {
   expect(hasQ1(testPlugin.model.survey)).toBeTruthy();
 
   creator.JSON = {};
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(creator.viewType).toEqual("logic");
   const logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
   expect(hasQ1(logicPlugin.model.survey)).toBeFalsy();
@@ -3052,7 +3052,7 @@ test("update tab content", (): any => {
   expect(hasQ1(logicPlugin.model.survey)).toBeTruthy();
 
   creator.JSON = {};
-  creator.makeNewViewActive("translation");
+  creator.switchTab("translation");
   expect(creator.viewType).toEqual("translation");
   const translationPlugin = <TabLogicPlugin>creator.getPlugin("translation");
   expect(hasQ1(translationPlugin.model.survey)).toBeFalsy();
@@ -3994,8 +3994,8 @@ test("Test options, setting some of them can generate errors", () => {
     showLogicTab: true,
     showEmbededSurveyTab: false,
     showSidebar: true,
-    showSimulatorInTestSurveyTab: true,
-    showTestSurveyTab: true,
+    previewAllowSimulateDevices: true,
+    showPreviewTab: true,
     showPropertyGrid: "right",
     showToolbox: "right",
     showTranslationTab: false,
@@ -4471,7 +4471,7 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
   expect(counter).toBe(1);
   expect(creator.selectedElementName).toEqual("q1");
   const q2 = creator.survey.getQuestionByName("q2");
-  creator.fastCopyQuestion(q2, true);
+  creator.copyQuestion(q2, true);
   expect(creator.selectedElementName).toEqual("question1");
   expect(counter).toBe(2);
 });

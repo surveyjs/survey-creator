@@ -486,9 +486,9 @@ test("QuestionImageAdornerViewModel pass question into onUploadFile event", () =
   expect(counter).toEqual(1);
 });
 
-test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate values", () => {
+test("QuestionRatingAdornerViewModel respect maxRateValues with no rate values", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -523,7 +523,7 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate valu
 
 test("QuestionRatingAdornerViewModel disabled add remove", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", rateType: "smileys", name: "q1", rateMin: 1, rateMax: 10 }]
   };
@@ -559,7 +559,7 @@ test("QuestionRatingAdornerViewModel disabled add remove", () => {
 
 test("QuestionRatingAdornerViewModel respect library limits", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -570,7 +570,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
     question,
     <any>{}
   );
-  creator.maximumRateValues = 0;
+  creator.maxRateValues = 0;
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeTruthy();
@@ -608,7 +608,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
 
 test("QuestionRatingAdornerViewModel button styles", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -631,7 +631,7 @@ test("QuestionRatingAdornerViewModel button styles", () => {
 
 test("QuestionRatingAdornerViewModel controlsClassNames", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -669,9 +669,9 @@ test("QuestionRatingAdornerViewModel controlsClassNames", () => {
   expect(ratingAdorner.hasTopLabel).toBe(false);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
 });
-test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
+test("QuestionRatingAdornerViewModel respect maxRateValues with rate values", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{
       type: "rating", name: "q1", "rateValues": [
@@ -935,7 +935,7 @@ test("LogoImageViewModel isUploading", () => {
 
 test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };

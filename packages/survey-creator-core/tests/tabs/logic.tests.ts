@@ -3168,7 +3168,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   };
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
 
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   const logic = logicPlugin.model;
 
   expect(logic.items).toHaveLength(0);
@@ -3179,7 +3179,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   expect(logic.items).toHaveLength(1);
   expect(logic.tryLeaveUI()).toBeFalsy();
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.activeTab).toBe("logic");
 
   logic.expressionEditor.text = "{q1} = 4";
@@ -3188,12 +3188,12 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
 
   expect(logic.tryLeaveUI()).toBeFalsy();
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.activeTab).toBe("logic");
   panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("elementSelector").value = "q4";
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.activeTab).toBe("preview");
 
   const q4 = creator.survey.getQuestionByName("q4");

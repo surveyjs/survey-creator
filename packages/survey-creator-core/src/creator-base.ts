@@ -1781,7 +1781,7 @@ export class SurveyCreatorModel extends Base
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
-  * @deprecated showPropertyGrid is deprecated, use showSidebar instead.
+  * @deprecated Use the [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) property instead.
   */
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");

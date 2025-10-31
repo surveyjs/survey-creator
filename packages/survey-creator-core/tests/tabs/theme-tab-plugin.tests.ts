@@ -77,8 +77,8 @@ test("Theme invisibleToggleAction state change", (): any => {
       }
     ]
   };
-  creator.showInvisibleElementsInTestSurveyTab = true;
-  creator.makeNewViewActive("theme");
+  creator.previewAllowHiddenElements = true;
+  creator.switchTab("theme");
   const action = creator.footerToolbar.getActionById("showInvisible") as Action;
   expect(action.active).toBeFalsy();
   action.action();

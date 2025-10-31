@@ -360,7 +360,7 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
-  maxColumns: number;
+  maxColumns: number = settings.propertyGrid.maximumColumnsCount;
   logicMaxItemsInCondition: number;
   previewShowResults: boolean;
   rootElement: HTMLElement;

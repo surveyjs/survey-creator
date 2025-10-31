@@ -394,7 +394,7 @@ test("fast copy tests, copy a question", () => {
     creator.survey.pages[0].addNewQuestion("text", "question1")
   );
   q1.placeholder = "I'm here";
-  creator.fastCopyQuestion(q1);
+  creator.copyQuestion(q1);
   expect(creator.survey.pages[0].questions).toHaveLength(2);
   const q2 = <QuestionTextModel>creator.survey.pages[0].questions[1];
   expect(q2.name).toEqual("question2");
@@ -410,7 +410,7 @@ test("fast copy tests, copy a panel with questions and a nested panel", () => {
   const p2 = p1.addNewPanel("panel2");
   const q2 = p2.addNewQuestion("text", "question2");
   (<any>creator.survey).selectedElement = p1;
-  creator.fastCopyQuestion(p1);
+  creator.copyQuestion(p1);
 
   expect(survey.pages[0].elements).toHaveLength(2);
   const newPanel = <PanelModel>survey.pages[0].elements[1];
@@ -452,7 +452,7 @@ test("fast copy tests, set the correct parent", () => {
   const p2 = p1.addNewPanel("panel2");
   const q2 = p2.addNewQuestion("text", "question2");
   creator.selectElement(q2);
-  creator.fastCopyQuestion(q2);
+  creator.copyQuestion(q2);
   expect(p2.questions).toHaveLength(2);
   const newQuestion = <QuestionTextModel>p2.questions[1];
   expect(newQuestion.name).toEqual("question3");
