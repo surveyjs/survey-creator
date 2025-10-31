@@ -2845,7 +2845,7 @@ export class SurveyCreatorModel extends Base
     this.setState("modified");
     this.onModified.fire(this, options);
     this.doOnElementsChanged(options.type);
-    this.isAutoSave && this.doAutoSave();
+    this.autoSaveEnabled && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
@@ -4294,7 +4294,7 @@ export class SurveyCreatorModel extends Base
   }
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
-    this.showSaveButton = value != null && !this.isAutoSave;
+    this.showSaveButton = value != null && !this.autoSaveEnabled;
   }
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string, defaultJSON: any = null) {

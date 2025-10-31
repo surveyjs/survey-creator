@@ -1027,3 +1027,69 @@ test("Test allowEditExpressionsInTextEditor <> logicAllowTextEditExpressions com
   creator.logicAllowTextEditExpressions = true;
   expect(creator.allowEditExpressionsInTextEditor).toEqual(true);
 });
+
+test("Test showSurveyTitle <> showSurveyHeader compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSurveyTitle = false;
+  expect(creator.showSurveyHeader).toEqual(false);
+  creator.showSurveyHeader = true;
+  expect(creator.showSurveyTitle).toEqual(true);
+});
+
+test("Test isAutoSave <> autoSaveEnabled compatibility", () => {
+  const creator = new CreatorTester();
+  creator.isAutoSave = true;
+  expect(creator.autoSaveEnabled).toEqual(true);
+  creator.autoSaveEnabled = false;
+  expect(creator.isAutoSave).toEqual(false);
+});
+
+test("Test maxLogicItemsInCondition <> logicMaxItemsInCondition compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maxLogicItemsInCondition = 4;
+  expect(creator.logicMaxItemsInCondition).toEqual(4);
+  creator.logicMaxItemsInCondition = 2;
+  expect(creator.maxLogicItemsInCondition).toEqual(2);
+});
+
+test("Test showPagesInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showPagesInPreviewTab = false;
+  expect(creator.previewAllowSelectPage).toEqual(false);
+  creator.previewAllowSelectPage = true;
+  expect(creator.showPagesInPreviewTab).toEqual(true);
+});
+
+test("Test showSimulatorInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSimulatorInPreviewTab = false;
+  expect(creator.previewAllowSimulateDevices).toEqual(false);
+  creator.previewAllowSimulateDevices = true;
+  expect(creator.showSimulatorInPreviewTab).toEqual(true);
+});
+
+test("Test showDefaultLanguageInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showDefaultLanguageInPreviewTab = false;
+  expect(creator.previewAllowSelectLanguage).toEqual(false);
+  creator.previewAllowSelectLanguage = "auto";
+  expect(creator.showDefaultLanguageInPreviewTab).toEqual("auto");
+  creator.showDefaultLanguageInPreviewTab = "all";
+  expect(creator.previewAllowSelectLanguage).toEqual("all");
+});
+
+test("Test showInvisibleElementsInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showInvisibleElementsInPreviewTab = false;
+  expect(creator.previewAllowHiddenElements).toEqual(false);
+  creator.previewAllowHiddenElements = true;
+  expect(creator.showInvisibleElementsInPreviewTab).toEqual(true);
+});
+
+test("Test makeNewViewActive (obsolete)", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.makeNewViewActive("preview"));
+  expect(creator.activeTab).toEqual("preview");
+  expect(creator.makeNewViewActive("designer"));
+  expect(creator.activeTab).toEqual("designer");
+});

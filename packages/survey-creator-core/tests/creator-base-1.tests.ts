@@ -1067,6 +1067,18 @@ test("fast copy from paneldynamic", (): any => {
   expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(2);
   expect(creator.survey.getQuestionByName("question1").template.elements[1].name).toEqual("question3");
 });
+test("fast copy tests, fastCopyQuestion method (obsolete)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" },
+      { type: "text", name: "question3" }
+    ], showQuestionNumbers: true
+  };
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  expect(creator.survey.pages[0].questions).toHaveLength(4);
+});
 test("Page duplicate action, copy a page and check the index", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
