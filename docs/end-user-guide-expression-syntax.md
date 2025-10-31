@@ -189,6 +189,8 @@ Comparison operators are used to compare two values (or in case of `empty` and `
 | `anyof` | Compares a value with an array of values and returns `true` if the value is present in the array. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
 | `allof` | Compares two arrays and returns `true` if the first array includes all values from the second. | `"{q1} allof [ 'value1', 'value2', 'value3' ]"` |
 
+> Comparison operations are case-sensitive.
+
 ### Logical Operators
 
 Logical operators combine or revert logical conditions to create complex logic for features like visibility, data validation, dynamic read-only state, etc. Available logical operators are described below:

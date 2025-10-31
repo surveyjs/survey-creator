@@ -421,7 +421,14 @@ test("allowDragPages respects the pageEditMode", (): any => {
   expect(creator.allowDragPages).toBeFalsy();
   expect(creator.pageEditMode).toBe("bypage");
 });
-
+test("Show editor tab for pageEditMode equals to 'bypage', Bug#", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(creator.pageEditMode).toBe("bypage");
+  expect(creator.showJSONEditorTab).toBeTruthy();
+  expect(creator.tabbedMenu.getActionById("designer").isVisible).toBeTruthy();
+  expect(creator.tabbedMenu.getActionById("json").isVisible).toBeTruthy();
+});
 test("onElementAllowOperations for pages and allowDragging in page adorner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text" }] };

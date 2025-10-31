@@ -415,7 +415,8 @@ export class SurveyCreatorModel extends Base
     this.setPropertyVisibility("survey", allow, "pages");
     this.setPropertyVisibility("question", allow, "page");
     this.setPropertyVisibility("panel", allow, "page");
-    this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+    const optJson = this.options.showJSONEditorTab;
+    this.showJSONEditorTab = (optJson === true) || (optJson === undefined && allow);
   }
 
   private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
