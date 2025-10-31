@@ -2092,12 +2092,12 @@ test("Support maxColumns option in single matrix", () => {
   question.columns.push(new ItemValue("col3"));
   expect(updater()).toBeFalsy();
 });
-test("Support maximumRateValuesCount option", () => {
+test("Support maxRateValues option", () => {
   var question = new QuestionRatingModel("q1");
   question.rateValues.push(new ItemValue("item1"));
   question.rateValues.push(new ItemValue("item2"));
   var options = new EmptySurveyCreatorOptions();
-  options.maximumRateValues = 3;
+  options.maxRateValues = 3;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("rateValues")

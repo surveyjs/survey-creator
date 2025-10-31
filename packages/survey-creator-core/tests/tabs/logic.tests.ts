@@ -3200,7 +3200,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   expect(q4.enableIf).toBe("{q1} = 4");
 });
 test("Creator is readonly", () => {
-  const creator = new CreatorTester({ showTitlesInExpressions: true });
+  const creator = new CreatorTester({ useElementTitles: true });
   creator.JSON = {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },

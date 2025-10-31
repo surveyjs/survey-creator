@@ -2417,8 +2417,8 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
-test("ConvertTo & addNewQuestion for panel & maxPanelNestingLevel", (): any => {
-  const creator = new CreatorTester({ maxPanelNestingLevel: 0 });
+test("ConvertTo & addNewQuestion for panel & maxNestedPanels (obsolete)", (): any => {
+  const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
       {
@@ -2437,10 +2437,10 @@ test("ConvertTo & addNewQuestion for panel & maxPanelNestingLevel", (): any => {
       { type: "paneldynamic", name: "panel2" }
     ]
   };
-  expect(creator.maxPanelNestingLevel).toBe(0);
-  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
-  creator.maxPanelNestingLevel = -1;
-  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(-1);
+  expect(creator.maxNestedPanels).toBe(0);
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
+  creator.maxNestedPanels = -1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
   const panel1 = creator.survey.getPanelByName("panel1");
   const panel2 = creator.survey.getQuestionByName("panel2");
   const panel3 = creator.survey.getPanelByName("panel3");
@@ -2453,16 +2453,16 @@ test("ConvertTo & addNewQuestion for panel & maxPanelNestingLevel", (): any => {
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
-  creator.maxPanelNestingLevel = 3;
-  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(3);
+  creator.maxNestedPanels = 3;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(3);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(22);
-  creator.maxPanelNestingLevel = 2;
-  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(2);
+  creator.maxNestedPanels = 2;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2473,8 +2473,8 @@ test("ConvertTo & addNewQuestion for panel & maxPanelNestingLevel", (): any => {
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
-  creator.maxPanelNestingLevel = 1;
-  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(1);
+  creator.maxNestedPanels = 1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(1);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
@@ -2488,8 +2488,8 @@ test("ConvertTo & addNewQuestion for panel & maxPanelNestingLevel", (): any => {
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
-  creator.maxPanelNestingLevel = 0;
-  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
+  creator.maxNestedPanels = 0;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);

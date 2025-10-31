@@ -963,3 +963,67 @@ test("option to hide sidebar", () => {
   creator.sidebar = undefined;
   expect(creator.isSidebarVisible).toBeFalsy();
 });
+
+test("Test inplaceEditChoiceValues <> inplaceEditForValues compatibility", (): any => {
+  const creator = new CreatorTester();
+  creator.inplaceEditChoiceValues = true;
+  expect(creator.inplaceEditForValues).toEqual(true);
+  creator.inplaceEditForValues = false;
+  expect(creator.inplaceEditChoiceValues).toEqual(false);
+});
+
+test("Test showObjectTitles <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showObjectTitles).toEqual(true);
+  creator.showObjectTitles = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test showTitlesInExpressions <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showTitlesInExpressions).toEqual(true);
+  creator.showTitlesInExpressions = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test maximumChoicesCount <> maxChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumChoicesCount = 5;
+  expect(creator.maxChoices).toEqual(5);
+  creator.maxChoices = 3;
+  expect(creator.maximumChoicesCount).toEqual(3);
+});
+
+test("Test minimumChoicesCount <> minChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.minimumChoicesCount = 5;
+  expect(creator.minChoices).toEqual(5);
+  creator.minChoices = 3;
+  expect(creator.minimumChoicesCount).toEqual(3);
+});
+
+test("Test maximumColumnsCount <> maxColumns compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumColumnsCount = 5;
+  expect(creator.maxColumns).toEqual(5);
+  creator.maxColumns = 3;
+  expect(creator.maximumColumnsCount).toEqual(3);
+});
+
+test("Test maximumRateValues <> maxRateValues compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 5;
+  expect(creator.maxRateValues).toEqual(5);
+  creator.maxRateValues = 3;
+  expect(creator.maximumRateValues).toEqual(3);
+});
+
+test("Test allowEditExpressionsInTextEditor <> logicAllowTextEditExpressions compatibility", () => {
+  const creator = new CreatorTester();
+  creator.allowEditExpressionsInTextEditor = false;
+  expect(creator.logicAllowTextEditExpressions).toEqual(false);
+  creator.logicAllowTextEditExpressions = true;
+  expect(creator.allowEditExpressionsInTextEditor).toEqual(true);
+});

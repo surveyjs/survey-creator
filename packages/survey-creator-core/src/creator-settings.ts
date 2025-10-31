@@ -202,42 +202,18 @@ export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   logicMaxItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  maxLogicItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  showObjectTitles: boolean;
-  /**
-   * @deprecated
-   */
-  showTitlesInExpressions: boolean;
+  logicAllowTextEditExpressions: boolean;
   useElementTitles: boolean;
-  /**
-   * @deprecated
-   */
-  allowEditExpressionsInTextEditor: boolean;
-  /**
-   * @deprecated
-   */
-  maximumColumnsCount: number;
   maxColumns: number;
-  minimumChoicesCount: number;
-  maximumChoicesCount: number;
-  maximumRowsCount: number;
-  maximumRateValues: number;
+  minChoices: number;
+  maxChoices: number;
+  maxRows: number;
+  maxRateValues: number;
 
-  maxNestedPanels: number;
   maxPanelNestingLevel: number;
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   enableLinkFileEditor: boolean;
-  /**
-   * @deprecated
-   */
-  inplaceEditForValues: boolean;
   inplaceEditChoiceValues: boolean;
   rootElement?: HTMLElement;
   previewShowResults: boolean;
@@ -360,7 +336,6 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
-  maxColumns: number = settings.propertyGrid.maximumColumnsCount;
   logicMaxItemsInCondition: number;
   previewShowResults: boolean;
   rootElement: HTMLElement;
@@ -371,39 +346,15 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   isMobileView: boolean = false;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
-  /**
-   * @deprecated
-   */
-  maxLogicItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  showObjectTitles: boolean;
-  /**
-   * @deprecated
-   */
-  showTitlesInExpressions: boolean;
   useElementTitles: boolean;
-  /**
-   * @deprecated
-   */
-  allowEditExpressionsInTextEditor: boolean = true;
   logicAllowTextEditExpressions: boolean = true;
-  /**
-   * @deprecated
-   */
-  maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
-  minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
-  maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
-  maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
-  maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  maxColumns: number = settings.propertyGrid.maxColumns;
+  minChoices: number = settings.propertyGrid.minChoices;
+  maxChoices: number = settings.propertyGrid.maxChoices;
+  maxRows: number = settings.propertyGrid.maxRows;
+  maxRateValues: number = settings.propertyGrid.maxRateValues;
   machineTranslationValue: boolean = false;
-  /**
-   * @deprecated
-   */
-  inplaceEditForValues: boolean = false;
   inplaceEditChoiceValues: boolean = false;
-  maxNestedPanels: number = -1;
   maxPanelNestingLevel: number = -1;
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
