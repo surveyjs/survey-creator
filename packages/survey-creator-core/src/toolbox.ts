@@ -62,7 +62,6 @@ export interface IQuestionToolboxItem extends IAction {
    * A user-friendly toolbox item title.
    */
   title?: string;
-  titles?: { [locale: string]: string };
   className?: string;
   /**
    * A toolbox item tooltip.
@@ -171,7 +170,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .toString();
     }) as any;
   }
-  titles: { [locale: string]: string };
   elementId?: string;
   /**
    * A user-friendly toolbox item title.
@@ -791,10 +789,12 @@ export class QuestionToolbox
   }
   private getOrCreateToolboxItem(item: IQuestionToolboxItem): QuestionToolboxItem {
     if (item instanceof QuestionToolboxItem) {
+      item.locTitle.owner = this.creator;
       return item;
     } else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
       const newItem = new QuestionToolboxItem(item);
+      newItem.locTitle.owner = this.creator;
       this.createSubTypes(newItem);
       return newItem;
     }
@@ -852,8 +852,10 @@ export class QuestionToolbox
   private correctItem(item: IQuestionToolboxItem) {
     if (!item.id) item.id = item.name;
     this.updateActionTitle(item);
-    if (!item.title) item.title = item.name;
-    if (!item.tooltip) item.tooltip = item.title;
+    if (!item.titles) {
+      if (!item.title) item.title = item.name;
+      if (!item.tooltip) item.tooltip = item.title;
+    }
   }
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;
@@ -976,6 +978,7 @@ export class QuestionToolbox
   }
   private updateToolboxItemTitle(item: QuestionToolboxItem): void {
     this.updateActionTitle(item);
+    item.locStrsChanged();
     this.updateActionTitle(item.innerItem);
     if (!Array.isArray(item.items)) return;
     item.items.forEach(subItem => {
@@ -987,19 +990,9 @@ export class QuestionToolbox
     });
   }
   private updateActionTitle(action: IAction): void {
-    let newTitle = "";
-    const titles = action["titles"];
-    if (!!titles) {
-      newTitle = titles[editorLocalization.locale];
-      if (!newTitle) {
-        newTitle = titles["default"];
-      }
-    }
-    if (!newTitle) {
-      newTitle = editorLocalization.getString("qt." + action.id);
-      if (newTitle === action.id) {
-        newTitle = "";
-      }
+    let newTitle = editorLocalization.getString("qt." + action.id);
+    if (newTitle === action.id) {
+      newTitle = "";
     }
     if (!!newTitle) {
       action.title = newTitle;
@@ -1433,6 +1426,9 @@ export class QuestionToolbox
     delete elementJson.name;
     var category = json.category ? json.category : "";
     const titles = typeof json.title === "object" ? json.title : undefined;
+    if (!!titles) {
+      title = undefined;
+    }
     const item: IQuestionToolboxItem = <any>new Action(<any>{
       id: json.name,
       name: json.name,
