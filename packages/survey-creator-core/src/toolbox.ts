@@ -161,6 +161,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     super(item);
     this.locTitle.onGetTextCallback = (str: string): string => getLocalizedToolboxItemName(str, this);
     this.showInToolboxOnly = item.showInToolboxOnly === true;
+    this.locStrsChanged();
     const originalCss = this.css;
     this.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
