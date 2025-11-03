@@ -140,7 +140,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propValue: string;
   public showInToolboxOnly: boolean = false;
   public needDefaultSubitem: boolean = undefined;
-  private isCreated: boolean;
   @property() isDisabledByRestriction: boolean;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
@@ -152,16 +151,12 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   constructor(private item: IQuestionToolboxItem) {
     super(item);
     this.locTitle.onGetTextCallback = (str: string): string => {
-      if (!!str && this.isCreated) {
-        return str;
-      }
+      if (!!str) return str;
       if (this.propName) {
         return editorLocalization.getPropertyValueInEditor(this.propName, this.propValue);
       }
-      const res = editorLocalization.getString("qt." + this.id);
-      return res !== this.id ? res : "";
+      return editorLocalization.getString("qt." + this.id);
     };
-    this.isCreated = true;
     this.showInToolboxOnly = item.showInToolboxOnly === true;
     const originalCss = this.css;
     this.css = new ComputedUpdater(() => {
@@ -186,11 +181,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   public set title(val: string) {
     this.setTitle(val);
-  }
-  protected getTitle(): string {
-    const res = super.getTitle();
-    if (!!res || !this.isCreated) return res;
-    return this.name;
   }
   protected getId(): string {
     return super.getId() || this.name;
