@@ -2,8 +2,8 @@
   <div
     class="svc-toolbox__item"
     role="button"
-    :aria-label="item.tooltip"
-    :title="item.tooltip"
+    :aria-label="item.getTooltip()"
+    :title="item.getTooltip()"
     :class="item.renderedCss"
     @click="viewModel.click($event)"
     v-key2click="{ disableTabStop: !viewModel.toolboxItem.enabled }"
