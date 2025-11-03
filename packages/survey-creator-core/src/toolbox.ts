@@ -27,7 +27,6 @@ import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
 import { listComponentCss } from "./components/list-theme";
-import { get } from "http";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
