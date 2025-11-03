@@ -27,6 +27,7 @@ import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
 import { listComponentCss } from "./components/list-theme";
+import { get } from "http";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -87,6 +88,8 @@ export interface IQuestionToolboxItem extends IAction {
   clearSubitems?(): void;
   addSubitem?(subitem: IQuestionToolboxItem, index: number): void;
   removeSubitem?(subitem: IQuestionToolboxItem | string): void;
+  propName?: string;
+  propValue?: any;
 }
 
 export interface IQuestionToolbox {
@@ -130,6 +133,13 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
+function getLocalizedToolboxItemName(str: string, item: IQuestionToolboxItem): string {
+  if (!!str) return str;
+  if (item.propName) {
+    return editorLocalization.getPropertyValueInEditor(item.propName, item.propValue);
+  }
+  return editorLocalization.getString("qt." + item.id);
+}
 /**
  * A toolbox item instance.
  *
@@ -150,13 +160,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   constructor(private item: IQuestionToolboxItem) {
     super(item);
-    this.locTitle.onGetTextCallback = (str: string): string => {
-      if (!!str) return str;
-      if (this.propName) {
-        return editorLocalization.getPropertyValueInEditor(this.propName, this.propValue);
-      }
-      return editorLocalization.getString("qt." + this.id);
-    };
+    this.locTitle.onGetTextCallback = (str: string): string => getLocalizedToolboxItemName(str, this);
     this.showInToolboxOnly = item.showInToolboxOnly === true;
     const originalCss = this.css;
     this.css = new ComputedUpdater(() => {
@@ -632,6 +636,12 @@ export class QuestionToolbox
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     }, false);
+    this.hiddenItemsListModel.registerPropertyChangedHandlers(["actions"], () => {
+      this.hiddenItemsListModel.actions.forEach((item) => {
+        item.locTitle.onGetTextCallback = (str: string): string => getLocalizedToolboxItemName(str, <IQuestionToolboxItem>item.innerItem);
+      });
+    }, "actions");
+
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
       if (!this.creator.readOnly && this.enabled) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
@@ -815,7 +825,7 @@ export class QuestionToolbox
       newJson[propName] = ch;
       const newId = parentItem.id != ch ? ch : parentItem.id + "-default";
 
-      const innerItem = new QuestionToolboxItem({
+      const item = new QuestionToolboxItem({
         id: newId,
         name: newId,
         className: QuestionToolboxItem.getItemClassNames() + " svc-toolbox__item-subtype",
@@ -823,11 +833,11 @@ export class QuestionToolbox
         iconName: null,
         category: null,
         isCopied: false,
-        component: QuestionToolbox.defaultItemComponent
+        component: QuestionToolbox.defaultItemComponent,
+        propName: propName,
+        propValue: ch
       });
-      innerItem.propName = propName;
-      innerItem.propValue = ch;
-      return innerItem;
+      return item;
     });
     if (newItems) {
       parentItem.addSubitems(newItems);
