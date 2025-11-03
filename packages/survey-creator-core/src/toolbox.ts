@@ -11,9 +11,7 @@ import {
   propertyArray,
   Question,
   Serializer,
-  SurveyModel,
   DragOrClickHelper,
-  PopupModel,
   CssClassBuilder,
   HashTable,
   surveyLocalization,
@@ -153,6 +151,16 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   constructor(private item: IQuestionToolboxItem) {
     super(item);
+    this.locTitle.onGetTextCallback = (str: string): string => {
+      if (!!str && this.isCreated) {
+        return str;
+      }
+      if (this.propName) {
+        return editorLocalization.getPropertyValueInEditor(this.propName, this.propValue);
+      }
+      const res = editorLocalization.getString("qt." + this.id);
+      return res !== this.id ? res : "";
+    };
     this.isCreated = true;
     this.showInToolboxOnly = item.showInToolboxOnly === true;
     const originalCss = this.css;
@@ -182,15 +190,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   protected getTitle(): string {
     const res = super.getTitle();
     if (!!res || !this.isCreated) return res;
-    return this.getLocalizedString() || this.name;
+    return this.name;
   }
   protected getId(): string {
     return super.getId() || this.name;
-  }
-  private getLocalizedString(): string {
-    return "";
-    //const res = editorLocalization.getString("qt." + this.id);
-    //return res === this.id ? null : res;
   }
   /**
    * Specifies whether users can interact with the toolbox item.
@@ -825,7 +828,6 @@ export class QuestionToolbox
       const innerItem = new QuestionToolboxItem({
         id: newId,
         name: newId,
-        title: editorLocalization.getPropertyValueInEditor(propName, ch),
         className: QuestionToolboxItem.getItemClassNames() + " svc-toolbox__item-subtype",
         json: newJson,
         iconName: null,
@@ -852,10 +854,6 @@ export class QuestionToolbox
    * @see items
    */
   public addItem(item: IQuestionToolboxItem, index?: number) {
-    if (!item.id) {
-      item.id = item.name;
-    }
-    this.correctItem(item);
     const action = this.getOrCreateToolboxItem(item);
     if (index === undefined) {
       this.actions.push(action);
@@ -863,9 +861,6 @@ export class QuestionToolbox
       this.actions.splice(index, 0, action);
     }
     this.onItemsChanged();
-  }
-  private correctItem(item: IQuestionToolboxItem) {
-    this.updateActionTitle(item);
   }
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;
@@ -876,7 +871,6 @@ export class QuestionToolbox
    * @see addItem
    */
   public replaceItem(item: IQuestionToolboxItem): boolean {
-    this.correctItem(item);
     const index: number = this.indexOf(item.name);
     if (index < 0) return;
     this.actions[index] = this.getOrCreateToolboxItem(item);
@@ -978,35 +972,12 @@ export class QuestionToolbox
   }
   public updateTitles(): void {
     this.actions.forEach(action => {
-      this.updateToolboxItemTitle(action);
+      action.locStrsChanged();
     });
     if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
         category.title = this.getCategoryTitle(category.name);
       });
-    }
-  }
-  private updateToolboxItemTitle(item: QuestionToolboxItem): void {
-    this.updateActionTitle(item);
-    item.locStrsChanged();
-    this.updateActionTitle(item.innerItem);
-    if (!Array.isArray(item.items)) return;
-    item.items.forEach(subItem => {
-      const propName = subItem.propName;
-      const propValue = subItem.propValue;
-      if (!!propName && !!propValue) {
-        subItem.title = editorLocalization.getPropertyValueInEditor(propName, propValue);
-      }
-    });
-  }
-  private updateActionTitle(action: IAction): void {
-    let newTitle = editorLocalization.getString("qt." + action.id);
-    if (newTitle === action.id) {
-      newTitle = "";
-    }
-    if (!!newTitle) {
-      action.title = newTitle;
-      action.tooltip = newTitle;
     }
   }
   private updateCategoriesState() {
@@ -1359,14 +1330,11 @@ export class QuestionToolbox
       }
       const json = this.getQuestionJSON(question);
       delete json.name;
-      const title = editorLocalization.getString("qt." + name);
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,
         name: name,
         iconName: iconName,
-        title: title,
-        tooltip: title,
         className: QuestionToolboxItem.getItemClassNames(iconName),
         json: json,
         isCopied: false,
@@ -1422,13 +1390,7 @@ export class QuestionToolbox
   private createToolboxItemFromJSON(json: any): QuestionToolboxItem {
     if (json.showInToolbox === false || json.internal === true || !json.name) return undefined;
     const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
-    let title: string = editorLocalization.getString("qt." + json.name);
-    if (!title || title == json.name) {
-      title = this.getTitleFromJsonTitle(json.title, json.name);
-    }
-    if (!title) {
-      title = json.name;
-    }
+    let title: string = typeof json.title === "string" ? json.title : undefined;
     var elementJson = json.defaultJSON ? JSON.parse(JSON.stringify(json.defaultJSON)) : {};
     if (!elementJson.type) {
       elementJson.type = json.name;
@@ -1452,20 +1414,7 @@ export class QuestionToolbox
       category: category
     });
     const res = this.getOrCreateToolboxItem(item);
-    this.updateActionTitle(res);
     return res;
-  }
-  private getTitleFromJsonTitle(title: any, name: string): string {
-    if (!title) return title;
-    if (typeof title === "string") return title;
-    if (typeof title !== "object") return title;
-    for (let key in title) {
-      const loc = editorLocalization.locales[key];
-      if (title[key] && loc && loc.qt) {
-        loc.qt[name] = title[key];
-      }
-    }
-    return editorLocalization.getString("qt." + name);
   }
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
