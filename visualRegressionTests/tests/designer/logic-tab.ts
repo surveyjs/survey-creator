@@ -499,7 +499,7 @@
 //   });
 // });
 
-// test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async (t) => {
+// test("Texts overflow the controls when useElementTitles is enabled #3192", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(800, 900);
 //     await setJSON({
@@ -535,7 +535,7 @@
 //       ]
 //     });
 //     await ClientFunction(() => {
-//       window["creator"].setOptions({ showTitlesInExpressions: true });
+//       window["creator"].setOptions({ useElementTitles: true });
 //     })();
 //     await t
 //       .click(getTabbedMenuItemByText(creatorTabLogicName))

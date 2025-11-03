@@ -433,7 +433,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
-      if (this.creator.isAutoSave) {
+      if (this.creator.autoSaveEnabled) {
         this.processAutoSave();
       }
       this.propertyGrid.survey.editingObj = undefined;
@@ -453,7 +453,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
-      if (this.creator.isAutoSave) {
+      if (this.creator.autoSaveEnabled) {
         this.processAutoSave();
       }
     });

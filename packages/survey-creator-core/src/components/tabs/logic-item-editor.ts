@@ -492,7 +492,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!logicType.hasSelectorChoices) return [];
     const elements = logicType.getSelectorChoices(this.survey, this.context);
     const res = [];
-    const showTitles = this.options.useElementTitles || this.options.showTitlesInExpressions;
+    const showTitles = this.options.useElementTitles;
     for (let i = 0; i < elements.length; i++) {
       let namePrefix = "";
       let textPrefix = "";
