@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, EventBase, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyElement, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, EventBase, getIconNameFromProxy, IElement, IPanel, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyElement, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -218,10 +218,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         dragOverElement = question;
       }
     });
-
+    const designPanel = dropTarget.getPanelInDesignMode();
     // drop to matrix detail panel
-    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideElement) {
-      dropTarget = (<any>dropTarget).detailPanel;
+    if (!!designPanel && this.insideElement) {
+      dropTarget = designPanel;
     }
 
     // drop to question
@@ -245,9 +245,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (!dropTarget) return false;
     if (dropTarget === this.draggedElement) return false;
 
-    if (SurveyHelper.isPanelDynamic(this.draggedElement) && dropTarget === this.draggedElement.template) {
-      return false;
-    }
+    const draggedPanel = this.draggedElement.getPanelInDesignMode();
+    if (dropTarget === draggedPanel) return false;
     let container = !dropTarget.isPage && dragOverLocation === DropIndicatorPosition.Inside ? dropTarget : dropTarget.parent;
     if (container && !container.isInteractiveDesignElement) {
       container = container.parent || container.parentQuestion;
@@ -255,21 +254,17 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (!this.isAllowedToAdd(this.draggedElement && this.draggedElement.getType && this.draggedElement.getType(), container || dropTarget)) {
       return false;
     }
-    if (this.maxPanelNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {
-      let draggedPanel = this.draggedElement as PanelModel;
-      if (SurveyHelper.isPanelDynamic(this.draggedElement)) {
-        draggedPanel = (<QuestionPanelDynamicModel>this.draggedElement).template;
+    if (!!draggedPanel) {
+      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(draggedPanel, 0);
+      if (this.maxPanelNestingLevel >= 0) {
+        let len = SurveyHelper.getElementParentContainers(dropTarget, false).length;
+        if (dragOverLocation === DropIndicatorPosition.Inside && !!dropTarget.getPanelInDesignMode()) len++;
+        if (this.maxPanelNestingLevel < len + childPanelsMaxNesting) return false;
+      } else if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
+        let len = SurveyHelper.getElementDeepLength(dropTarget);
+        if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
+        if (this.maxNestedPanels < len + childPanelsMaxNesting) return false;
       }
-      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(draggedPanel, 0);
-      let len = SurveyHelper.getElementParentContainers(dropTarget, false).length;
-      if (dragOverLocation === DropIndicatorPosition.Inside && (dropTarget.isPanel || SurveyHelper.isPanelDynamic(dropTarget))) len++;
-      if (this.maxPanelNestingLevel < len + childPanelsMaxNesting) return false;
-    } else if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
-      const draggedPanel = this.draggedElement as PanelModel;
-      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(draggedPanel, 0);
-      let len = SurveyHelper.getElementDeepLength(dropTarget);
-      if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
-      if (this.maxNestedPanels < len + childPanelsMaxNesting) return false;
     }
 
     if (
@@ -454,7 +449,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
 
-    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || SurveyHelper.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
+    const dropPanel = dropTarget.getPanelInDesignMode();
+    const elPanels = dropPanel || (dropTarget.isPage ? dropTarget : undefined);
+    if (!this.draggedElement.isPage && dropTarget && !!elPanels && elPanels.elements.length === 0) {
       if (dropTarget.isPage || this.insideElement) {
         dragOverLocation = DropIndicatorPosition.Inside;
       }
@@ -464,7 +461,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
-    if ((dropTarget.isPanel || SurveyHelper.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
+    if (!!dropPanel && this.insideElement && dropTargetAdorner.collapsed) {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
@@ -562,7 +559,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
 
     if (this.dragOverLocation === DropIndicatorPosition.Inside) {
-      if (SurveyHelper.isPanelDynamic(dest)) dest = dest.template;
+      dest = dest.getPanelInDesignMode() || dest;
       (<PanelModelBase>dest).insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
@@ -594,13 +591,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   private getTargetParent(dropTarget: any): any {
-    let targetParent = dropTarget.isPage || dropTarget.isPanel ? dropTarget : dropTarget.parent;
-
-    if (dropTarget.getType() === "paneldynamic") {
-      targetParent = dropTarget.templateValue;
-    }
-
-    return targetParent;
+    const designPanel = dropTarget.getPanelInDesignMode();
+    if (!!designPanel) return designPanel;
+    return dropTarget.isPage ? dropTarget : dropTarget.parent;
   }
 
   protected getTargetRow(dropTarget: any): QuestionRowModel {

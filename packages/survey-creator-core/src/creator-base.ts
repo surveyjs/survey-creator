@@ -4342,7 +4342,7 @@ export class SurveyCreatorModel extends Base
     let availableToolboxItems: Array<QuestionToolboxItem> = [];
     this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    const elementNesting = !!element && isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element)) ? 1 : 0;
+    const elementNesting = !!element && isAddNew && !!element.getPanelInDesignMode() ? 1 : 0;
     if (!this.isAllowedNestingLevel(element, elementNesting)) {
       for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
         if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
@@ -4358,7 +4358,7 @@ export class SurveyCreatorModel extends Base
     }
 
     if (!element) return availableToolboxItems;
-    if (element.isPanel || SurveyHelper.isPanelDynamic(element)) {
+    if (!!element.getPanelInDesignMode()) {
       availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
     } else {
       const parentContainers = SurveyHelper.getElementParentContainers(element, false);
