@@ -218,15 +218,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         dragOverElement = question;
       }
     });
-    const designPanel = dropTarget.getPanelInDesignMode();
-    // drop to matrix detail panel
-    if (!!designPanel && this.insideElement) {
-      dropTarget = designPanel;
-    }
-
-    // drop to question
-
-    //question inside paneldymanic
     if (!dropTarget.page) {
       const nearestDropTargetPageElement = dropTargetNode.parentElement.closest<HTMLElement>("[data-sv-drop-target-page]");
       dataAttributeValue = nearestDropTargetPageElement.dataset.svDropTargetPage;
