@@ -1,6 +1,5 @@
-import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel, IAction, PanelModel } from "survey-core";
-import { PropertyGridModel, SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions, getLocString } from "survey-creator-core";
-import { presetsCss } from "./presets-theme/presets";
+import { Helpers, SurveyModel } from "survey-core";
+import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions, getLocString } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
   creator: SurveyCreatorModel;
@@ -176,63 +175,6 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string}) {
-    const index = (matrix.visibleRows as any).findIndex(r => r === row);
-    const data = matrix.value[index];
-    const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
-    survey.fitToContainer = false;
-    survey.showNavigationButtons = false;
-    survey.data = data;
-    survey.css = presetsCss;
-    survey.enterKeyAction = "loseFocus";
-    if (settings.showDialog) {
-      const popupModel = settings.showDialog?.(<IDialogOptions>{
-        componentName: "survey",
-        data: { survey: survey, model: survey },
-        onApply: () => {
-          if (survey.validate()) {
-            const newValue = [...matrix.value];
-            const newData: any = { };
-            survey.getAllQuestions().forEach(q => {
-              if (q.visible) {
-                newData[q.name] = survey.data[q.name];
-              }
-            });
-            const newRowValue = { ...row.value, ...newData };
-            newValue[index] = newRowValue;
-            matrix.value = newValue;
-            return true;
-          } else {
-            return false;
-          }
-        },
-        onCancel: () => {
-          return true;
-        },
-        cssClass: "sps-popup svc-property-editor svc-creator-popup",
-        title: options.title || getLocString("presets.editor.edit"),
-        displayMode: "popup"
-      }, rootElement);
-      if (survey.getAllQuestions().filter(q => !q.startWithNewLine).length > 0) {
-        popupModel.width = "100%";
-      }
-
-      if (popupModel.footerToolbar) {
-        const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-        defaultActionBarCss.item = "sps-btn";
-        popupModel.footerToolbar.cssClasses = defaultActionBarCss;
-        popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
-        popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
-
-        if (options.actions) {
-          popupModel.footerToolbar.actions.unshift(...options.actions);
-        }
-      }
-      survey.getAllPanels().forEach(q => (q as PanelModel).visible = !(q as PanelModel).visible);
-      survey.getAllQuestions().forEach(q => q.visible = !q.visible);
-    }
-    return survey;
-  }
   public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
     if (!localizationName) return undefined;
     if (!text) return;

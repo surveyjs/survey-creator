@@ -1,6 +1,7 @@
-import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry, Question, ComputedUpdater } from "survey-core";
+import { Helpers, MatrixDynamicRowModel, QuestionMatrixDynamicModel, SurveyModel, Action, IAction, SvgRegistry, settings, ComputedUpdater, PanelModel, IDialogOptions } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
+import { presetsCss } from "./presets-theme/presets";
 export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
@@ -244,5 +245,63 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       if (!actions) return;
       this.updateRowActions(options.question, options.row, actions);
     }
+  }
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string}) {
+    const index = (matrix.visibleRows as any).findIndex(r => r === row);
+    const data = matrix.value[index];
+    const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
+    survey.fitToContainer = false;
+    survey.showNavigationButtons = false;
+    survey.data = data;
+    survey.css = presetsCss;
+    survey.enterKeyAction = "loseFocus";
+    if (settings.showDialog) {
+      const popupModel = settings.showDialog?.(<IDialogOptions>{
+        componentName: "survey",
+        data: { survey: survey, model: survey },
+        onApply: () => {
+          if (survey.validate()) {
+            const newValue = [...matrix.value];
+            const newData: any = { };
+            survey.getAllQuestions().forEach(q => {
+              if (q.visible) {
+                newData[q.name] = survey.data[q.name];
+              }
+            });
+            const newRowValue = { ...row.value, ...newData };
+            newValue[index] = newRowValue;
+            matrix.value = newValue;
+            this.updateMatrixRowActions(matrix.survey as any, matrix);
+            return true;
+          } else {
+            return false;
+          }
+        },
+        onCancel: () => {
+          return true;
+        },
+        cssClass: "sps-popup svc-property-editor svc-creator-popup",
+        title: options.title || getLocString("presets.editor.edit"),
+        displayMode: "popup"
+      }, rootElement);
+      if (survey.getAllQuestions().filter(q => !q.startWithNewLine).length > 0) {
+        popupModel.width = "100%";
+      }
+
+      if (popupModel.footerToolbar) {
+        const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
+        defaultActionBarCss.item = "sps-btn";
+        popupModel.footerToolbar.cssClasses = defaultActionBarCss;
+        popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
+        popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
+
+        if (options.actions) {
+          popupModel.footerToolbar.actions.unshift(...options.actions);
+        }
+      }
+      survey.getAllPanels().forEach(q => (q as PanelModel).visible = !(q as PanelModel).visible);
+      survey.getAllQuestions().forEach(q => q.visible = !q.visible);
+    }
+    return survey;
   }
 }
