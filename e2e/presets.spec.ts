@@ -166,4 +166,57 @@ test.describe(title, () => {
     expect((await page.locator(".svc-toolbox__item-subtype").filter({ visible: true }).allTextContents()).map(t => t.trim())).toEqual(["Labels", "Stars", "Slider", "Smileys"]);
   });
 
+  test("Check presets toolbox - edit category", async ({ page }) => {
+    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    const items = page.locator(".sps-question--matrixdynamic table").nth(0);
+
+    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
+
+    await page.getByRole("row", { name: "Containers" }).hover();
+    await page.getByRole("row", { name: "Containers" }).getByRole("button").nth(1).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers1");
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers1", "Matrix Questions", "Misc"]);
+
+    await page.getByRole("row", { name: "Containers1" }).hover();
+    expect(await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1)).toBeVisible();
+    await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1).click();
+    await page.getByRole("button", { name: "Reset to default" }).waitFor({ state: "visible" });
+    await page.getByRole("button", { name: "Reset to default" }).click();
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
+  });
+
+  test("Check presets toolbox - custom category and custom item", async ({ page }) => {
+    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    const items = page.locator(".sps-question--matrixdynamic").nth(0);
+    const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
+
+    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
+    await page.getByRole("button", { name: "New Category" }).click();
+    await page.getByRole("textbox", { name: "Name" }).fill("custom");
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
+    await page.getByRole("button", { name: "Apply" }).click();
+
+    await page.getByRole("row", { name: "Custom" }).locator("#show-detail").getByRole("button").click();
+
+    await items.getByRole("button", { name: "Add a new item" }).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.getByText("icon-arrowleft-16x16").click();
+    await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
+    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
+    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
+
+    await hidden.getByRole("button", { name: "Add a new item" }).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.getByTitle("icon-arrowright-16x16").click();
+    await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await hidden.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
+  });
+
 });
