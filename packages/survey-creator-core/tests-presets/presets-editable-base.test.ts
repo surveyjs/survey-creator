@@ -1,5 +1,5 @@
 import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
-import { CreatorPresetEditableBase } from "../src/presets/presets-editable-base";
+import { CreatorPresetEditableList } from "../src/presets/presets-editable-list";
 import { CreatorPresetBase } from "../src/presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
 
@@ -16,7 +16,7 @@ jest.mock("survey-core", () => {
 });
 
 describe("CreatorPresetEditableBase", () => {
-  let base: CreatorPresetEditableBase;
+  let base: CreatorPresetEditableList;
   let mockPreset: CreatorPresetBase;
   let mockRow: MatrixDynamicRowModel;
   let mockMatrix: QuestionMatrixDynamicModel;
@@ -56,7 +56,7 @@ describe("CreatorPresetEditableBase", () => {
     mockShowDialog = jest.spyOn(settings, "showDialog");
 
     // Create instance of CreatorPresetEditableBase
-    base = new CreatorPresetEditableBase(mockPreset);
+    base = new CreatorPresetEditableList(mockPreset);
   });
 
   afterEach(() => {
