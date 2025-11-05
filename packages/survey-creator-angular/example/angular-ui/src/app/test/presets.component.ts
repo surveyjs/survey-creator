@@ -12,7 +12,7 @@ export class PresetsComponent extends TestDefaultComponent {
   constructor() {
     super();
   }
-  protected override getSlk(): boolean { return false; }
+  protected override getSlk(): boolean { return true }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     this.creator.tabResponsivenessMode = "menu";
