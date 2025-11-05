@@ -77,8 +77,8 @@ test("Theme invisibleToggleAction state change", (): any => {
       }
     ]
   };
-  creator.showInvisibleElementsInTestSurveyTab = true;
-  creator.makeNewViewActive("theme");
+  creator.previewAllowHiddenElements = true;
+  creator.switchTab("theme");
   const action = creator.footerToolbar.getActionById("showInvisible") as Action;
   expect(action.active).toBeFalsy();
   action.action();
@@ -223,7 +223,7 @@ test("Theme builder: composite question values are lost", (): any => {
 test("import theme from file", (done) => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   creator.autoSaveDelay = 0;
   let saveThemeCount = 0;
   creator.saveThemeFunc = (saveNo, callback) => {
@@ -285,7 +285,7 @@ test("export theme to file", (done): any => {
 
 test("Theme onModified and saveThemeFunc", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   creator.autoSaveDelay = 0;
   let saveCount = 0;
   creator.saveSurveyFunc = () => {
@@ -528,7 +528,7 @@ test("Keep background image in theme modifications", (): any => {
 
 test("Keep theme modifications between edit sessions", (): any => {
   let creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   creator.autoSaveDelay = 0;
   let savedTheme: any = {};
   creator.saveThemeFunc = () => {

@@ -1384,8 +1384,8 @@ export const thStrings = {
     labelFalse: "ป้ายสำหรับ \"เท็จ\"",
     // "Show the Clear button"
     allowClear: "แสดงปุ่มลบ",
-    // "Search Mode"
-    searchMode: "โหมดการค้นหา",
+    // [Auto-translated] "Search mode"
+    searchMode: "โหมดค้นหา",
     // "Display format"
     displayStyle: "รูปแบบการแสดงผล",
     // "Formatted string"
@@ -2705,7 +2705,9 @@ export const thStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export const thStrings = {
     detailErrorLocation: "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\"",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "เมื่อเปิดใช้งานคุณสมบัติ \"ป้องกันการตอบสนองที่ซ้ํากัน\" สําหรับคอลัมน์เมทริกซ์ ผู้ตอบที่พยายามส่งรายการที่ซ้ํากันจะได้รับข้อความแสดงข้อผิดพลาดต่อไปนี้"
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export const thStrings = {
     fileOrPhotoPlaceholder: "ใช้เมื่อ \"ประเภทแหล่งไฟล์\" เป็น \"ไฟล์ท้องถิ่นหรือกล้อง\"",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "จัดเรียงตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "จัดเรียงกล่องข้อความในเค้าโครงแบบหลายคอลัมน์"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "เลือกถ้าคุณต้องการบันทึกค่าคำถามพร้อมหน้ากากในผลลัพธ์แบบสำรวจ"

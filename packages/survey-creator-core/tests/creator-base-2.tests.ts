@@ -133,8 +133,8 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   const selectedTypes = new Array<string>();
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "property-grid") {
-      if (options.obj) {
-        selectedTypes.push(options.obj.getType());
+      if (options.element) {
+        selectedTypes.push(options.element.getType());
       }
     }
   });
@@ -421,7 +421,14 @@ test("allowDragPages respects the pageEditMode", (): any => {
   expect(creator.allowDragPages).toBeFalsy();
   expect(creator.pageEditMode).toBe("bypage");
 });
-
+test("Show editor tab for pageEditMode equals to 'bypage', Bug#", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(creator.pageEditMode).toBe("bypage");
+  expect(creator.showJSONEditorTab).toBeTruthy();
+  expect(creator.tabbedMenu.getActionById("designer").isVisible).toBeTruthy();
+  expect(creator.tabbedMenu.getActionById("json").isVisible).toBeTruthy();
+});
 test("onElementAllowOperations for pages and allowDragging in page adorner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text" }] };
@@ -432,7 +439,6 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
       reason.push(options.allowDrag);
       if (disableDrag) {
         options.allowDrag = false;
-        options.allowDragging = false;
       }
     }
   });
@@ -923,4 +929,166 @@ test("Should not modify expression properties  on copying questions inside the d
   const q1 = panel1.getQuestionByName("q1");
   creator.copyQuestion(q1, true);
   expect(q2.visibleIf).toBe("{panel.q1} = true");
+});
+
+test("survey in theme tab shouldn't show timer panel", () => {
+  const creator = new CreatorTester();
+  const survey = creator.createSurvey({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ],
+    "showTimer": true,
+    "timeLimit": 5,
+    "headerView": "advanced"
+  }, "theme");
+  expect(survey.getPanelByName("showTimer")).toBeFalsy();
+});
+
+test("option to hide sidebar", () => {
+  const creator = new CreatorTester();
+  expect(creator.isSidebarVisible).toBeTruthy();
+  creator.removeSidebar = true;
+  expect(creator.isSidebarVisible).toBeFalsy();
+  creator.removeSidebar = false;
+  expect(creator.isSidebarVisible).toBeTruthy();
+  creator.sidebar = undefined;
+  expect(creator.isSidebarVisible).toBeFalsy();
+});
+
+test("Test inplaceEditChoiceValues <> inplaceEditForValues compatibility", (): any => {
+  const creator = new CreatorTester();
+  creator.inplaceEditChoiceValues = true;
+  expect(creator.inplaceEditForValues).toEqual(true);
+  creator.inplaceEditForValues = false;
+  expect(creator.inplaceEditChoiceValues).toEqual(false);
+});
+
+test("Test showObjectTitles <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showObjectTitles).toEqual(true);
+  creator.showObjectTitles = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test showTitlesInExpressions <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showTitlesInExpressions).toEqual(true);
+  creator.showTitlesInExpressions = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test maximumChoicesCount <> maxChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumChoicesCount = 5;
+  expect(creator.maxChoices).toEqual(5);
+  creator.maxChoices = 3;
+  expect(creator.maximumChoicesCount).toEqual(3);
+});
+
+test("Test minimumChoicesCount <> minChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.minimumChoicesCount = 5;
+  expect(creator.minChoices).toEqual(5);
+  creator.minChoices = 3;
+  expect(creator.minimumChoicesCount).toEqual(3);
+});
+
+test("Test maximumColumnsCount <> maxColumns compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumColumnsCount = 5;
+  expect(creator.maxColumns).toEqual(5);
+  creator.maxColumns = 3;
+  expect(creator.maximumColumnsCount).toEqual(3);
+});
+
+test("Test maximumRateValues <> maxRateValues compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 5;
+  expect(creator.maxRateValues).toEqual(5);
+  creator.maxRateValues = 3;
+  expect(creator.maximumRateValues).toEqual(3);
+});
+
+test("Test allowEditExpressionsInTextEditor <> logicAllowTextEditExpressions compatibility", () => {
+  const creator = new CreatorTester();
+  creator.allowEditExpressionsInTextEditor = false;
+  expect(creator.logicAllowTextEditExpressions).toEqual(false);
+  creator.logicAllowTextEditExpressions = true;
+  expect(creator.allowEditExpressionsInTextEditor).toEqual(true);
+});
+
+test("Test showSurveyTitle <> showSurveyHeader compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSurveyTitle = false;
+  expect(creator.showSurveyHeader).toEqual(false);
+  creator.showSurveyHeader = true;
+  expect(creator.showSurveyTitle).toEqual(true);
+});
+
+test("Test isAutoSave <> autoSaveEnabled compatibility", () => {
+  const creator = new CreatorTester();
+  creator.isAutoSave = true;
+  expect(creator.autoSaveEnabled).toEqual(true);
+  creator.autoSaveEnabled = false;
+  expect(creator.isAutoSave).toEqual(false);
+});
+
+test("Test maxLogicItemsInCondition <> logicMaxItemsInCondition compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maxLogicItemsInCondition = 4;
+  expect(creator.logicMaxItemsInCondition).toEqual(4);
+  creator.logicMaxItemsInCondition = 2;
+  expect(creator.maxLogicItemsInCondition).toEqual(2);
+});
+
+test("Test showPagesInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showPagesInPreviewTab = false;
+  expect(creator.previewAllowSelectPage).toEqual(false);
+  creator.previewAllowSelectPage = true;
+  expect(creator.showPagesInPreviewTab).toEqual(true);
+});
+
+test("Test showSimulatorInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSimulatorInPreviewTab = false;
+  expect(creator.previewAllowSimulateDevices).toEqual(false);
+  creator.previewAllowSimulateDevices = true;
+  expect(creator.showSimulatorInPreviewTab).toEqual(true);
+});
+
+test("Test showDefaultLanguageInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showDefaultLanguageInPreviewTab = false;
+  expect(creator.previewAllowSelectLanguage).toEqual(false);
+  creator.previewAllowSelectLanguage = "auto";
+  expect(creator.showDefaultLanguageInPreviewTab).toEqual("auto");
+  creator.showDefaultLanguageInPreviewTab = "all";
+  expect(creator.previewAllowSelectLanguage).toEqual("all");
+});
+
+test("Test showInvisibleElementsInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showInvisibleElementsInPreviewTab = false;
+  expect(creator.previewAllowHiddenElements).toEqual(false);
+  creator.previewAllowHiddenElements = true;
+  expect(creator.showInvisibleElementsInPreviewTab).toEqual(true);
+});
+
+test("Test makeNewViewActive (obsolete)", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.makeNewViewActive("preview"));
+  expect(creator.activeTab).toEqual("preview");
+  expect(creator.makeNewViewActive("designer"));
+  expect(creator.activeTab).toEqual("designer");
 });

@@ -24,7 +24,7 @@ test("Adorner design", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
+  await page.waitForLoadState("load");
 
   const image = page.locator(".sd-image");
   await image.click();
@@ -50,7 +50,6 @@ test("empty imageLink", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
 
   const fileplaceholder = page.locator(".svc-question__content--image .sd-file");
   await expect(fileplaceholder).toBeVisible();
@@ -77,7 +76,6 @@ test("broken imageLink", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
   await page.locator(".sd-image").click();
   await expect(page.locator(".svc-question__content--image")).toHaveScreenshot("image-broken-image-link.png");
 });

@@ -1384,7 +1384,7 @@ export var hrStrings = {
     labelFalse: "Oznaka \"False\"",
     // "Show the Clear button"
     allowClear: "Prikaz gumba Očisti",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Način pretraživanja",
     // [Auto-translated] "Display format"
     displayStyle: "Format prikaza",
@@ -2705,7 +2705,9 @@ export var hrStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa."
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var hrStrings = {
     detailErrorLocation: "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Kada je svojstvo \"Spriječi duplicirane odgovore\" omogućeno za stupac matrice, ispitanik koji pokušava poslati duplicirani unos primit će sljedeću poruku o pogrešci."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var hrStrings = {
     fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Raspoređuje tekstualne okvire u rasporedu s više stupaca."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."

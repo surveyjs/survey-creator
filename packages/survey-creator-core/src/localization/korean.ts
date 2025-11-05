@@ -1385,7 +1385,7 @@ export var koreanStrings = {
     labelFalse: "\"거짓\" 레이블",
     // "Show the Clear button"
     allowClear: "지우기 단추 표시",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "검색 모드",
     // [Auto-translated] "Display format"
     displayStyle: "표시 형식",
@@ -2706,7 +2706,9 @@ export var koreanStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다."
+      confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2939,6 +2941,10 @@ export var koreanStrings = {
     detailErrorLocation: "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "행렬 열에 대해 \"중복 응답 방지\" 속성을 사용하도록 설정하면 중복 항목을 제출하려는 응답자에게 다음과 같은 오류 메시지가 표시됩니다."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3097,6 +3103,10 @@ export var koreanStrings = {
     fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "텍스트 상자를 다중 열 레이아웃으로 정렬합니다."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."

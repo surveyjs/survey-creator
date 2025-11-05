@@ -54,7 +54,7 @@ export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
    */
   element: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
    */
   parentElement: Base;
 }

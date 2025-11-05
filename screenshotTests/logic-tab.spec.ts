@@ -412,7 +412,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), "logic-question-actions.png");
   });
 
-  test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async ({ page }) => {
+  test("Texts overflow the controls when useElementTitles is enabled #3192", async ({ page }) => {
     await page.setViewportSize({ width: 800, height: 900 });
     await setJSON(page, {
       showQuestionNumbers: true,
@@ -447,7 +447,7 @@ test.describe(title, () => {
       ]
     });
     await page.evaluate(() => {
-      window["creator"].setOptions({ showTitlesInExpressions: true });
+      window["creator"].setOptions({ useElementTitles: true });
     });
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
 

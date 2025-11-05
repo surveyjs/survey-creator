@@ -34,7 +34,7 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await page.setViewportSize({ width: 2584, height: 1440 });
     await setJSON(page, json);
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("load");
 
     const imagePicker = page.locator(".sd-imagepicker");
     await imagePicker.click();
@@ -69,7 +69,7 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, json);
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("load");
 
     const imagePicker = page.locator(".sd-imagepicker");
     await imagePicker.click();
@@ -132,7 +132,7 @@ test.describe(title, () => {
       });
     });
     await setJSON(page, json);
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("load");
 
     const imagePicker = page.locator(".sd-imagepicker");
     await imagePicker.click();

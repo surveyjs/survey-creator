@@ -1384,8 +1384,8 @@ export var turkishStrings = {
     labelFalse: "\"Yanlış\" etiketi",
     // "Show the Clear button"
     allowClear: "Seçeneklerin başlığını göster",
-    // [Auto-translated] "Search Mode"
-    searchMode: "Arama Modu",
+    // [Auto-translated] "Search mode"
+    searchMode: "Arama modu",
     // [Auto-translated] "Display format"
     displayStyle: "Görüntü formatı",
     // [Auto-translated] "Formatted string"
@@ -2705,7 +2705,9 @@ export var turkishStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler."
+      confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var turkishStrings = {
     detailErrorLocation: "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Bir matris sütunu için \"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir giriş göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var turkishStrings = {
     fileOrPhotoPlaceholder: "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Metin kutularını çok sütunlu bir düzende düzenler."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Soru değerini, anket sonuçlarında uygulanan bir maske ile saklamak istiyorsanız seçin."

@@ -186,7 +186,7 @@ test("Edit matrix cell question", (): any => {
   expect(editQuestion.inMatrixMode).toBeTruthy();
   let objType = "";
   creator.onCollectionItemAllowOperations.add((sender, options) => {
-    objType = options.obj.getType();
+    objType = options.element.getType();
   });
   editQuestion.choices = [1, 2, 3, 4];
   expect(creator.state).toBeFalsy();

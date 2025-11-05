@@ -4,8 +4,8 @@ const title = "Design Surface";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.waitForLoadState("networkidle");
     await page.goto(`${url}`);
+    await page.waitForLoadState("load");
   });
 
   test("Check minimal height", async ({ page }) => {
@@ -199,9 +199,9 @@ test.describe(title, () => {
   test("Check page button states", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.evaluate(() => {
-      window["creator"].onDefineElementMenuItems.add((_, options) => {
-        if (!options.obj["isPage"]) return;
-        options.items.push({
+      window["creator"].onElementGetActions.add((_, options) => {
+        if (!options.element["isPage"]) return;
+        options.actions.push({
           id: "duplicate2",
           title: "Duplicate",
           enabled: false,

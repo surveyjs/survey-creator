@@ -561,7 +561,7 @@ test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   expect(rows[0].cells[0].value).toEqual("If 'q1' == 3, make question 'q2' visible, make question 'q3' visible");
 });
 test("SurveyLogicUI: Test creator onLogicItemDisplayText event", () => {
-  const creator = new CreatorTester({ showTitlesInExpressions: true });
+  const creator = new CreatorTester({ useElementTitles: true });
   creator.JSON = {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
@@ -3122,11 +3122,11 @@ test("Update expression on changing row value in matrix dropdown", (): any => {
   matrix.rows[1].value = "Row 2";
   expect(q1.visibleIf).toEqual("{matrix.Row 2.col1} = 'item1'");
 });
-test("Use creator.onGetObjectDisplayName for element selector in visibleIf action", () => {
+test("Use creator.onElementGetDisplayName for element selector in visibleIf action", () => {
   const creator = new CreatorTester();
-  creator.onGetObjectDisplayName.add(function (sender, options) {
+  creator.onElementGetDisplayName.add(function (sender, options) {
     if (options.area === "logic-tab:question-selector") {
-      options.displayName = "# " + options.obj.title;
+      options.displayName = "# " + options.element.title;
     }
   });
   creator.JSON = {
@@ -3168,7 +3168,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   };
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
 
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   const logic = logicPlugin.model;
 
   expect(logic.items).toHaveLength(0);
@@ -3179,7 +3179,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   expect(logic.items).toHaveLength(1);
   expect(logic.tryLeaveUI()).toBeFalsy();
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.activeTab).toBe("logic");
 
   logic.expressionEditor.text = "{q1} = 4";
@@ -3188,19 +3188,19 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
 
   expect(logic.tryLeaveUI()).toBeFalsy();
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.activeTab).toBe("logic");
   panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("elementSelector").value = "q4";
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.activeTab).toBe("preview");
 
   const q4 = creator.survey.getQuestionByName("q4");
   expect(q4.enableIf).toBe("{q1} = 4");
 });
 test("Creator is readonly", () => {
-  const creator = new CreatorTester({ showTitlesInExpressions: true });
+  const creator = new CreatorTester({ useElementTitles: true });
   creator.JSON = {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },

@@ -1384,7 +1384,7 @@ export var frenchTranslation = {
     labelFalse: "Texte du bouton « Faux »",
     // "Show the Clear button"
     allowClear: "Afficher le bouton Effacer",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Mode de recherche",
     // [Auto-translated] "Display format"
     displayStyle: "Format d’affichage",
@@ -2705,7 +2705,9 @@ export var frenchTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Déclenche une invite de confirmation avant de supprimer une entrée."
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer une entrée.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Attribue des numéros aux questions imbriquées dans le panneau dynamique."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var frenchTranslation = {
     detailErrorLocation: "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur ».",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée pour une colonne de matrice, une personne interrogée qui tente d’envoyer une entrée en double reçoit le message d’erreur suivant."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var frenchTranslation = {
     fileOrPhotoPlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux ou appareil photo ».",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Organise les options de choix dans une disposition à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Organise les zones de texte dans une disposition à plusieurs colonnes."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Sélectionnez cette option si vous souhaitez stocker la valeur de la question à l’aide d’un masque appliqué dans les résultats de l’enquête."

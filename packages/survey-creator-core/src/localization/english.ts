@@ -596,6 +596,7 @@ export var enStrings = {
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
+    maxFiles: "Maximum number of files",
     rowCount: "Row count",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
@@ -726,7 +727,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
-    searchMode: "Search Mode",
+    searchMode: "Search mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -1456,7 +1457,8 @@ export var enStrings = {
       newPanelPosition: "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one.",
       copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
-      confirmDelete: "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Triggers a confirmation prompt before removing an entry.",
+      showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
@@ -1587,6 +1589,9 @@ export var enStrings = {
     cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
+    matrixdropdown: {
+      keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+    },
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     description: "Type a subtitle.",
@@ -1671,6 +1676,9 @@ export var enStrings = {
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
     colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
+    multipletext: {
+      colCount: "Arranges text boxes in a multi-column layout.",
+    },
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },

@@ -1579,15 +1579,13 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    survey.showCompleteButton = false;
     const navigationBar = new SurveyElementActionContainer();
+    survey.createNavigationBarCallback = () => navigationBar;
+    survey.showCompleteButton = false;
+    survey.showNavigationButtons = true;
+    survey.navigationButtonsLocation = "top";
     navigationBar.allowResponsiveness();
-    survey["navigationBarTopValue"] = navigationBar;
-    survey.findLayoutElement("buttons-navigation-top").data = navigationBar;
-    navigationBar.locOwner = survey;
-    navigationBar.cssClasses = survey.css.actionBar;
-    navigationBar.containerCss = survey.css.footer;
-    survey.addNavigationItem(this.createLocaleFromAction());
+    navigationBar.addAction(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
       survey.addNavigationItem(new Action({
@@ -1606,8 +1604,6 @@ export class TranslationEditor {
     exportAction.css = actionCss;
     survey.addNavigationItem(importAction);
     survey.addNavigationItem(exportAction);
-    survey.showNavigationButtons = true;
-    survey.navigationButtonsLocation = "top";
   }
   private createStringsToTranslate(): Array<TranslationItem> {
     const res = new Array<TranslationItem>();
@@ -1675,7 +1671,7 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
-    const action = this.translation.stringsHeaderSurvey.findLayoutElement("buttons-navigation-top").data.getActionById("svc-translation-fromlocale");
+    const action = this.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
     if (!!action) {
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;

@@ -451,7 +451,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     );
   }
   protected excludeTextPropertyName(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
-    const hideText = options?.inplaceEditForValues;
+    const hideText = options?.inplaceEditChoiceValues;
     return !!hideText ? propNames.filter(p => p !== "text") : propNames;
   }
   protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
@@ -529,14 +529,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     return res;
   }
   protected getMinimumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
-    if (prop.name === "choices") return options.minimumChoicesCount;
+    if (prop.name === "choices") return options.minChoices;
     return super.getMaximumRowCount(obj, prop, options);
   }
   protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
-    if (prop.name === "choices") return options.maximumChoicesCount;
-    if (prop.name === "rows") return options.maximumRowsCount;
-    if (prop.name === "columns") return options.maximumColumnsCount;
-    if (prop.name === "rateValues") return options.maximumRateValues;
+    if (prop.name === "choices") return options.maxChoices;
+    if (prop.name === "rows") return options.maxRows;
+    if (prop.name === "columns") return options.maxColumns;
+    if (prop.name === "rateValues") return options.maxRateValues;
     return super.getMaximumRowCount(obj, prop, options);
   }
   private hasMultipleLanguage(items: Array<ItemValue>): boolean {
@@ -629,7 +629,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): number {
-    return options.maximumColumnsCount;
+    return options.maxColumns;
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }

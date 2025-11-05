@@ -1384,8 +1384,8 @@ export var mnStrings = {
     labelFalse: "\"Үгүй\" шошго",
     // "Show the Clear button"
     allowClear: "Цэвэрлэх товч харуулах",
-    // [Auto-translated] "Search Mode"
-    searchMode: "Хайлтын Мод",
+    // [Auto-translated] "Search mode"
+    searchMode: "Хайлтын режим",
     // "Display format"
     displayStyle: "Утга харуулах хэв маяг",
     // "Formatted string"
@@ -2705,7 +2705,9 @@ export var mnStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ."
+      confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var mnStrings = {
     detailErrorLocation: "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Матриц багананд \"Prevent duplicate responses\" свойствийг идэвхжүүлбэл давхар тайлбар илгээх гэж оролдсон респондент дараах алдааны мессеж хүлээн авна."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var mnStrings = {
     fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Текстийн хайрцгуудыг олон баганатай байрлуулна."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."

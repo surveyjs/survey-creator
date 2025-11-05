@@ -263,8 +263,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
             if (this.creator.readOnly) return false;
             if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
             return (
-              this.creator.maximumChoicesCount < 1 ||
-              surveyElement["choices"].length < this.creator.maximumChoicesCount
+              this.creator.maxChoices < 1 || surveyElement["choices"].length < this.creator.maxChoices
             );
           }
         );

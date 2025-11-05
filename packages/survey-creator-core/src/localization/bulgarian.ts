@@ -1384,7 +1384,7 @@ export var bgStrings = {
     labelFalse: "\"Невярно\" етикет",
     // "Show the Clear button"
     allowClear: "Показване на бутона Изчистване",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Режим на търсене",
     // "Display format"
     displayStyle: "Стил за изобразяване на стойността",
@@ -2705,7 +2705,9 @@ export var bgStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис."
+      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var bgStrings = {
     detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено за колона с матрица, респондентът, който се опитва да изпрати дублиращ се запис, ще получи следното съобщение за грешка."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var bgStrings = {
     fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Подрежда текстовите полета в оформление с няколко колони."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."

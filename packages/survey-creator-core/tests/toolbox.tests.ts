@@ -44,7 +44,7 @@ test("toolbox reorder items", (): any => {
   expect(toolbox.items[1].name).toEqual("radiogroup");
   expect(toolbox.items[2].name).toEqual("countries");
   expect(toolbox.items[2].title).toEqual("countries");
-  expect(toolbox.items[2].tooltip).toEqual("countries");
+  expect(toolbox.items[2].getTooltip()).toEqual("countries");
   toolbox.orderedQuestions = ["dropdown", "countries", "radiogroup"];
   expect(toolbox.items[0].name).toEqual("dropdown");
   expect(toolbox.items[1].name).toEqual("countries");
@@ -880,7 +880,7 @@ test("Check toolbox getAnimatedElement methods", (): any => {
   expect(toolbox.classNames.indexOf(isFlyoutToCompactRunningClass) >= 0).toBeFalsy();
   surveySettings.animationEnabled = false;
 });
-test("Update subitems on locale change, Bug#6014", (): any => {
+test("Update subitems on locale change, Bug#6014, #1", (): any => {
   const creator = new CreatorTester({ questionTypes: ["text", "checkbox"] });
   creator.locale = "de";
   const checkbox = creator.toolbox.getItemByName("checkbox") as QuestionToolboxItem;
@@ -889,7 +889,7 @@ test("Update subitems on locale change, Bug#6014", (): any => {
   expect(text.getSubitem("color").locTitle.renderedHtml).toBe("Farbe");
   creator.locale = "en";
 });
-test("Update subitems on locale change, Bug#6014", (): any => {
+test("Update subitems on locale change, Bug#6014, #2", (): any => {
   const creator = new CreatorTester({ questionTypes: ["text"] });
   creator.toolbox.addItem({ name: "test1", json: {}, titles: { de: "Test-de", en: "Test" } });
   expect(creator.toolbox.getItemByName("test1").title).toBe("Test");

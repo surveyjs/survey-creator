@@ -1384,7 +1384,7 @@ export var hebrewStrings = {
     labelFalse: "תוית 'לא נכון'",
     // "Show the Clear button"
     allowClear: "הצג את לחצן הניקוי",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "מצב חיפוש",
     // "Display format"
     displayStyle: "סגנון תצוגת ערך",
@@ -2705,7 +2705,9 @@ export var hebrewStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך."
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var hebrewStrings = {
     detailErrorLocation: "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" זמין עבור עמודת מטריצה, משיב המנסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var hebrewStrings = {
     fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "סידור תיבות טקסט בפריסה מרובת עמודות."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."

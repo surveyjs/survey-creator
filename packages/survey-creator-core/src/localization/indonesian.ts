@@ -1384,8 +1384,8 @@ export var indonesianStrings = {
     labelFalse: "Label \"Salah\"",
     // "Show the Clear button"
     allowClear: "Tampilkan tombol Hapus",
-    // [Auto-translated] "Search Mode"
-    searchMode: "Mode Pencarian",
+    // [Auto-translated] "Search mode"
+    searchMode: "Mode pencarian",
     // [Auto-translated] "Display format"
     displayStyle: "Format tampilan",
     // [Auto-translated] "Formatted string"
@@ -2705,7 +2705,9 @@ export var indonesianStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri."
+      confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2938,6 +2940,10 @@ export var indonesianStrings = {
     detailErrorLocation: "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Saat properti \"Cegah respons duplikat\" diaktifkan untuk kolom matriks, responden yang mencoba mengirimkan entri duplikat akan menerima pesan kesalahan berikut."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3096,6 +3102,10 @@ export var indonesianStrings = {
     fileOrPhotoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Mengatur kotak teks dalam tata letak multi-kolom."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Pilih apakah Anda ingin menyimpan nilai pertanyaan dengan masker yang diterapkan dalam hasil survei."
