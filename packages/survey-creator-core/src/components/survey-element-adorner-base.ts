@@ -435,7 +435,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.updateActionVisibility("collapse", this.allowExpandCollapse);
     if (options.allowShowSettings === undefined) {
       const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
-      this.updateActionVisibility("settings", settingsVisibility);
+      this.updateActionVisibility("settings", settingsVisibility && this.creator.removeSidebar !== true);
     } else {
       this.updateActionVisibility("settings", options.allowShowSettings);
     }
