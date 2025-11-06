@@ -146,7 +146,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
           event.persist();
           this.model.click(event);
         }}>
-        <SvgIcon size={"auto"} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
+        <SvgIcon size={"auto"} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.getTooltip()}></SvgIcon>
         <span>{this.item.title}</span>
       </span>
       :
@@ -157,7 +157,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
         className={this.item.renderedCss}
         tabIndex={0}
         role="button"
-        aria-label={this.item.tooltip}
+        aria-label={this.item.getTooltip()}
         onClick={(event: any) => {
           event.persist();
           this.model.click(event);

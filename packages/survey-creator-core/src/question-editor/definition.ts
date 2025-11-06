@@ -101,6 +101,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "sourceType",
       "allowMultiple",
+      "maxFiles",
       { name: "showPreview" },
       "allowImagesPreview",
       "waitForUpload",

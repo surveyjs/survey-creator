@@ -31,7 +31,7 @@ In order to pipe selected choices to a Dynamic Matrix, follow these steps:
 7. Under **Conditions**, locate the **Make the question visible if** property to make the matrix visible only when at least one checkbox of the source question is selected.
 8. Click the **Magic wand** icon on the right of the property. This action opens a popup with a GUI for setting up display logic.
 9.  In the popup, select the source question ID (its "Question name" property value you assigned in step 2).
-10. Select the **Not Empty** condition from the drop-down menu and click **Apply**.
+10. Select the **Not empty** condition from the drop-down menu and click **Apply**.
 11. Under **Data**, locate the **Join identifier** property and set it to the same value you have used for this property of the Checkboxes question in step 4.
 12. Select the column of the matrix to which you want to pipe selected choices. This action will display the settings of the column.
 13. Under **General**, locate the **Column name** field and enter the value you used for the **Store values in the following property** field of the Checkboxes question in step 5.

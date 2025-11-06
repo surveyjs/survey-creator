@@ -596,6 +596,7 @@ export var enStrings = {
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
+    maxFiles: "Maximum number of files",
     rowCount: "Row count",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",

@@ -150,7 +150,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
     });
     items.push(this.filterActionTypeAction);
 
-    if (this.creator.allowEditExpressionsInTextEditor) {
+    if (this.creator.logicAllowTextEditExpressions) {
       this.fastEntryAction = new Action({
         id: "svc-logic-fast-entry",
         iconName: "icon-fast-entry",

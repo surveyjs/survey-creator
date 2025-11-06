@@ -64,11 +64,11 @@ test("Check unique value in itemValue", () => {
 
   propValue.isUnique = oldUnique;
 });
-test("options.minimumChoicesCount in FastEntry editor", () => {
+test("options.minChoices in FastEntry editor", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");
   originalElement.choices = [1, 2, 3];
   const options = new EmptySurveyCreatorOptions();
-  options.minimumChoicesCount = 3;
+  options.minChoices = 3;
   var fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
   fastEntryEditor.comment.value = "1|item1\n2\n";
   var result = fastEntryEditor.apply();
@@ -82,11 +82,11 @@ test("options.minimumChoicesCount in FastEntry editor", () => {
   expect(result).toBeTruthy();
   expect(fastEntryEditor.comment.errors).toHaveLength(0);
 });
-test("options.maximumChoicesCount in FastEntry editor", () => {
+test("options.maxChoices in FastEntry editor", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");
   originalElement.choices = [1, 2];
   const options = new EmptySurveyCreatorOptions();
-  options.maximumChoicesCount = 3;
+  options.maxChoices = 3;
   var fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
   fastEntryEditor.comment.value = "1|item1\n2\n3\n4|item4";
   var result = fastEntryEditor.apply();

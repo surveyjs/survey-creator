@@ -1,8 +1,8 @@
 <ng-template #template>
-  <div role="button" [attr.aria-label]="this.item.tooltip" [class]="this.item.renderedCss"
+  <div role="button" [attr.aria-label]="this.item.getTooltip()" [class]="this.item.renderedCss"
     (click)="viewModel.click($event)" [key2click]="{ disableTabStop: !viewModel.toolboxItem.enabled }">
     <span class="svc-toolbox__item-container">
-      <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon" [title]="this.item.tooltip"
+      <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon" [title]="this.item.getTooltip()"
         sv-ng-svg-icon></svg>
     </span>
     <span *ngIf="!isCompact" class="svc-toolbox__item-title">{{item.title}}</span>

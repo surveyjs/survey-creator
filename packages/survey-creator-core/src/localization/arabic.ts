@@ -1126,6 +1126,8 @@ export var arStrings = {
     storeDataAsText: "تخزين محتويات ملف JSON كنص",
     // "Maximum file size (in bytes)"
     maxSize: "أقصى حجم للملف بالبايت",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "الحد الأقصى لعدد الملفات",
     // "Row count"
     rowCount: "عدد الصفوف",
     // "Columns layout"

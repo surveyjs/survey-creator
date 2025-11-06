@@ -210,7 +210,7 @@ test("Change Creator locale property", (): any => {
   expect(tabButton.title).toEqual("Logik");
   expect(textQuestion.title).toEqual("Text");
   expect(choiceCategory.title).toEqual("Choices de");
-  expect(textQuestion.innerItem.title).toEqual("Text");
+  expect(textQuestion.locTitle.renderedHtml).toEqual("Text");
   expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
   creator.selectElement(creator.survey.getQuestionByName("q2"));
   expect(creator.propertyGrid.getQuestionByName("format").title).toEqual("Format de");
@@ -221,7 +221,7 @@ test("Change Creator locale property", (): any => {
   expect(tabButton.title).toEqual("Logic");
   expect(choiceCategory.title).toEqual("Choice Questions");
   expect(textQuestion.title).toEqual("Single-Line Input");
-  expect(textQuestion.innerItem.title).toEqual("Single-Line Input");
+  expect(textQuestion.locTitle.renderedHtml).toEqual("Single-Line Input");
   expect(saveAction.title).toEqual("Save Survey");
 });
 test("Check creator license localization", (): any => {
