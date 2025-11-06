@@ -963,6 +963,26 @@ test("option to hide sidebar", () => {
   expect(creator.isSidebarVisible).toBeFalsy();
 });
 
+test("option to hide settings action", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "question1" }] }] };
+  creator.sidebar.flyoutMode = true;
+  const question = creator.survey.getQuestionByName("question1");
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+  creator.selectElement(question);
+
+  const settingsAction = questionAdorner.actionContainer.getActionById("settings");
+  const toolbarSettings = creator.toolbar.getActionById("svd-settings");
+  expect(toolbarSettings.isVisible).toBeTruthy();
+  expect(settingsAction.isVisible).toBeTruthy();
+
+  creator.removeSidebar = true;
+  creator.selectElement(creator.survey.pages[0]);
+  creator.selectElement(question);
+  expect(toolbarSettings.isVisible).toBeFalsy();
+  expect(settingsAction.isVisible).toBeFalsy();
+});
+
 test("Test inplaceEditChoiceValues <> inplaceEditForValues compatibility", (): any => {
   const creator = new CreatorTester();
   creator.inplaceEditChoiceValues = true;

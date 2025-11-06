@@ -56,7 +56,7 @@ interface IDragToElementOptions {
 
 export async function doDrag({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options?: IDragToElementOptions }):Promise<void> {
   if (options?.elementPosition) {
-    await element.hover({ force: true, position: { x: (options.targetPosition?.x || 0), y: (options.targetPosition?.y || 0) } });
+    await element.hover({ force: true, position: { x: (options.elementPosition?.x || 0), y: (options.elementPosition?.y || 0) } });
   } else {
     await element.hover({ force: true });
   }
