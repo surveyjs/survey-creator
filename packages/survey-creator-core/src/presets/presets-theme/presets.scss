@@ -94,7 +94,9 @@
 .sps-row {
   max-width: 854px;
 
-  sv-ng-question {
+  sv-ng-question,
+  sv-ng-panel,
+  sv-ng-element {
     position: absolute;
   }
 }
