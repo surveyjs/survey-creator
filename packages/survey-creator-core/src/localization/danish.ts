@@ -664,8 +664,6 @@ export var danishStrings = {
       templateErrorLocation: "Justering af fejlmeddelelse",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny indgangsplacering",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Vis statuslinjen",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
@@ -845,6 +843,8 @@ export var danishStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ryd andre, når det er valgt",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Vis både tekst og værdi",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Kræv, at brugeren indtaster en kommentar",
     // "Display area height"
@@ -1153,8 +1153,6 @@ export var danishStrings = {
     maxRateDescription: "Beskriv højeste vurdering",
     // "Input type"
     inputType: "Inputtype",
-    // "Option placeholder"
-    optionsCaption: "Muligheder tekst",
     // "Default Answer"
     defaultValue: "Standardværdi",
     // "Default texts"
@@ -1271,8 +1269,6 @@ export var danishStrings = {
     timerLocation: "Vis tidspanel",
     // "Timer mode"
     timerInfoMode: "Vis tidspanel tilstand",
-    // "Panel display mode"
-    renderMode: "Renderingstilstand",
     // "Enable entry addition"
     allowAddPanel: "Tillad at tilføje et panel",
     // "Enable entry removal"
@@ -1322,10 +1318,14 @@ export var danishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Regulært udtryk",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Fejlmeddelelse",
+      // [Auto-translated] "Validation message"
+      text: "Meddelelse om validering",
       // [Auto-translated] "Validation expression"
-      expression: "Valideringsudtryk"
+      expression: "Valideringsudtryk",
+      // [Auto-translated] "Notification type"
+      notificationType: "Type af notifikationer",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimal længde (i tegn)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Rækkeoverskrift i total",
@@ -1385,7 +1385,7 @@ export var danishStrings = {
     labelFalse: "Etiketten \"Falsk\"",
     // "Show the Clear button"
     allowClear: "Vis knappen Ryd",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Søgetilstand",
     // [Auto-translated] "Display format"
     displayStyle: "Visningsformat",
@@ -1451,7 +1451,7 @@ export var danishStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Vis skalaetiketter",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Vis værktøjstip",
+      tooltipVisibility: "Vis værktøjstip",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Tillad tommelfingerkrydsning",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,22 @@ export var danishStrings = {
       // [Auto-translated] "Range"
       range: "Interval"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Altid",
+      // [Auto-translated] "Never"
+      never: "Aldrig"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Fejl",
+      // [Auto-translated] "Warning"
+      warning: "Advarsel",
+      // [Auto-translated] "Informational"
+      info: "Informative"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fulde navn",
@@ -2251,10 +2267,6 @@ export var danishStrings = {
     underRowSingle: "Under rækken skal du kun få vist én sektion",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skjult"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Begge"
@@ -2694,7 +2706,9 @@ export var danishStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Udløser en bekræftelsesprompt, før en post fjernes."
+      confirmDelete: "Udløser en bekræftelsesprompt, før en post fjernes.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i det dynamiske panel."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2754,7 +2768,9 @@ export var danishStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig."
+      expression: "Brug tryllestavsikonet til at definere, hvornår spørgsmålets værdi betragtes som gyldig.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Fejl blokerer fremskridt, indtil de er løst. Advarsler fremhæver problemer, men tillader at fortsætte. Informative noter giver yderligere kontekst eller neutral vejledning. Når du bruger advarsler eller informationsbemærkninger, anbefaler vi, at du aktiverer øjeblikkelig validering: \"Undersøgelse\" → \"Validering\" → \"Kør validering\" → \"Når et svar er ændret\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2925,6 +2941,10 @@ export var danishStrings = {
     detailErrorLocation: "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret for en matrixkolonne, vil en respondent, der forsøger at indsende en dubletpost, modtage følgende fejlmeddelelse."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3083,6 +3103,10 @@ export var danishStrings = {
     fileOrPhotoPlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Arrangerer tekstbokse i et layout med flere kolonner."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vælg, om du vil gemme spørgsmålsværdien med en anvendt maske i undersøgelsesresultater."
@@ -3213,7 +3237,7 @@ export var danishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Gengiv som", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Vedhæft originale elementer", // Auto-generated string
+    attachData: "Vedhæft originale elementer", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"

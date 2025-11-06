@@ -664,8 +664,6 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nová vstupní lokace",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazení ukazatele průběhu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -844,6 +842,8 @@ export var czStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymazat ostatní při výběru",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Zobrazení textu i hodnoty",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Požadovat po uživateli zadání komentáře",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var czStrings = {
     maxRateDescription: "Popis maximální sazby",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Popisek možností",
     // "Default Answer"
     defaultValue: "Výchozí hodnota",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var czStrings = {
     timerLocation: "Zobrazit panel časovače",
     // "Timer mode"
     timerInfoMode: "Zobrazit režim panelu časovače",
-    // "Panel display mode"
-    renderMode: "Režim vykreslování",
     // "Enable entry addition"
     allowAddPanel: "Povolit přidání panelu",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var czStrings = {
     // "Regular expression"
     regex: "Pravidelný výraz",
     surveyvalidator: {
-      // "Error message"
-      text: "Chybová zpráva",
+      // [Auto-translated] "Validation message"
+      text: "Ověřovací zpráva",
       // [Auto-translated] "Validation expression"
-      expression: "Ověřovací výraz"
+      expression: "Ověřovací výraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ oznámení",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximální délka (ve znacích)"
     },
     // "Total row header"
     totalText: "Celkový text",
@@ -1384,7 +1384,7 @@ export var czStrings = {
     labelFalse: "Popisek \"nepravdivé\" hodnoty",
     // "Show the Clear button"
     allowClear: "Zobrazit popisek možností",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Režim vyhledávání",
     // "Display format"
     displayStyle: "Styl zobrazení hodnoty",
@@ -1450,7 +1450,7 @@ export var czStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazit štítky měřítka",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobrazit popisky nástrojů",
+      tooltipVisibility: "Zobrazit popisky nástrojů",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povolit křížení palců",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var czStrings = {
       // [Auto-translated] "Range"
       range: "Rozmezí"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Chyba",
+      // [Auto-translated] "Warning"
+      warning: "Varování",
+      // [Auto-translated] "Informational"
+      info: "Informační"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Celé jméno",
@@ -2250,10 +2266,6 @@ export var czStrings = {
     underRowSingle: "Pod řádkem, pouze jeden panel je viditelný",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obě"
@@ -2693,7 +2705,9 @@ export var czStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Odkazujte na název otázky, chcete-li vyžadovat, aby uživatel na tuto otázku v každém panelu poskytl jedinečnou odpověď.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Spustí výzvu k potvrzení před odstraněním položky."
+      confirmDelete: "Spustí výzvu k potvrzení před odstraněním položky.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v dynamickém panelu."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var czStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou."
+      expression: "Pomocí ikony kouzelné hůlky definujte, kdy je hodnota otázky považována za platnou.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Chyby blokují průběh, dokud nejsou vyřešeny. Varování upozorňují na problémy, ale umožňují pokračovat. Informační poznámky nabízejí další kontext nebo neutrální pokyny. Při používání varování nebo informačních poznámek doporučujeme povolit okamžitou validaci: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var czStrings = {
     detailErrorLocation: "Nastavuje umístění chybových zpráv pro otázky vnořené do podrobných oddílů. Volba \"Zdědit\" aplikuje nastavení z vlastnosti \"Zarovnání chybové zprávy\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Pokud je povolena vlastnost \"Zabránit duplicitním odpovědím\", respondentovi, který se pokouší odeslat duplicitní záznam, se zobrazí následující chybová zpráva.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Pokud je pro sloupec matice povolena vlastnost \"Zabránit duplicitním odpovědím\", respondent, který se pokusí odeslat duplicitní položku, obdrží následující chybovou zprávu."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Umožňuje vypočítat celkové hodnoty na základě výrazu. Výraz může obsahovat základní výpočty ('{q1_id} + {q2_id}'), logické výrazy ('{age} > 60') a funkce ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atd.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var czStrings = {
     fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Uspořádá možnosti voleb v rozložení s více sloupci. Při nastavení na 0 se možnosti zobrazí na jednom řádku.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Uspořádá textová pole do vícesloupcového rozvržení."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vyberte, zda chcete uložit hodnotu otázky s použitou maskou do výsledků průzkumu."
@@ -3212,7 +3236,7 @@ export var czStrings = {
     // "Render as"
     renderAs: "Vykreslit jako", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Připojit původní položky", // Auto-generated string
+    attachData: "Připojit původní položky", // Auto-generated string
     // "Choices"
     choices: "Volby",
     // "Choices by url"

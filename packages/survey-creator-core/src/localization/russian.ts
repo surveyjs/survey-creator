@@ -664,8 +664,6 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Отображение индикатора выполнения",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -844,6 +842,8 @@ export var ruStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Удалить другие при выборе",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Отображение текста и значений",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Требовать от пользователя ввода комментария",
     // [Auto-translated] "Display area height"
@@ -1152,8 +1152,6 @@ export var ruStrings = {
     maxRateDescription: "Описание для максимального рейтинга",
     // "Input type"
     inputType: "Тип ввода",
-    // "Option placeholder"
-    optionsCaption: "Параметры подписи",
     // [Auto-translated] "Default Answer"
     defaultValue: "Ответ по умолчанию",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var ruStrings = {
     timerLocation: "Показывать панель таймера",
     // "Timer mode"
     timerInfoMode: "Показывать режим панели таймера",
-    // [Auto-translated] "Panel display mode"
-    renderMode: "Режим отображения панели",
     // "Enable entry addition"
     allowAddPanel: "Разрешить добавление панели",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var ruStrings = {
     // "Regular expression"
     regex: "Регулярное выражение",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Сообщение об ошибке",
+      // [Auto-translated] "Validation message"
+      text: "Сообщение о проверке",
       // [Auto-translated] "Validation expression"
-      expression: "Проверочное выражение"
+      expression: "Проверочное выражение",
+      // [Auto-translated] "Notification type"
+      notificationType: "Тип уведомления",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимальная длина (в символах)"
     },
     // "Total row header"
     totalText: "Общий текст",
@@ -1384,7 +1384,7 @@ export var ruStrings = {
     labelFalse: "«Ложный» ярлык",
     // "Show the Clear button"
     allowClear: "Показать кнопку «Очистить»",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Режим поиска",
     // [Auto-translated] "Display format"
     displayStyle: "Формат отображения",
@@ -1450,7 +1450,7 @@ export var ruStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Отображение меток шкалы",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показать всплывающие подсказки",
+      tooltipVisibility: "Показать всплывающие подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешить скрещивание больших пальцев",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var ruStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Всегда",
+      // [Auto-translated] "Never"
+      never: "Никогда"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Ошибка",
+      // [Auto-translated] "Warning"
+      warning: "Предупреждение",
+      // [Auto-translated] "Informational"
+      info: "Информационный"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Полное имя",
@@ -2250,10 +2266,6 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Скрытый"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Оба"
@@ -2693,7 +2705,9 @@ export var ruStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Запускает запрос на подтверждение перед удалением записи."
+      confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var ruStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным."
+      expression: "Используйте значок волшебной палочки, чтобы определить, когда значение вопроса считается действительным.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Ошибки блокируют прогресс до тех пор, пока не будут устранены. Предупреждения указывают на проблемы, но позволяют продолжить. Информационные заметки содержат дополнительный контекст или нейтральное руководство. При использовании предупреждений или информационных заметок рекомендуется включить немедленную проверку: «Опрос» → «Проверка» → «Запустить проверку» → «После изменения ответа»."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var ruStrings = {
     detailErrorLocation: "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Если для столбца матрицы включено свойство \"Предотвратить дублирование ответов\", респондент, пытающийся отправить повторяющуюся запись, получит следующее сообщение об ошибке."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var ruStrings = {
     fileOrPhotoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Упорядочивает текстовые поля в макете с несколькими столбцами."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Выберите, хотите ли вы сохранить значение вопроса с примененной маской в результатах опроса."
@@ -3212,7 +3236,7 @@ export var ruStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Рендеринг как", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Прикрепите оригинальные элементы", // Auto-generated string
+    attachData: "Прикрепите оригинальные элементы", // Auto-generated string
     // "Choices"
     choices: "Выбор",
     // "Choices by url"

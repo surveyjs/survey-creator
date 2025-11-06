@@ -660,7 +660,6 @@ export var tgStrings = {
     // showTimer: "Use a timer",
     timerLocation: "Нишон додани бастаи вақтсанҷ",
     timerInfoMode: "Нишон додани ҳолати бастаи таймер",
-    // renderMode: "Panel display mode",
     allowAddPanel: "Иҷозат додан ба илова кардани бастаҳо",
     allowRemovePanel: "Иҷозат додан ба нест кардани бастаҳо",
     addPanelText: "Иловаи матн ба баста",
@@ -751,7 +750,7 @@ export var tgStrings = {
       // max: "Max value",
       // step: "Step value",
       // showLabels: "Show scale labels",
-      // tooltipVisibilityPG: "Show tooltips",
+      // tooltipVisibility: "Show tooltips",
       // allowSwap: "Allow thumb crossing",
       // labelCount: "Number of auto-generated labels",
       // minValueExpression: "Min value expression",
@@ -1171,9 +1170,6 @@ export var tgStrings = {
     // underRow: "Under the row",
     // underRowSingle: "Under the row, display one section only",
     // auto: "Auto",
-    showNavigationButtons: {
-      // none: "Hidden"
-    },
     timerInfoMode: {
       // combined: "Both"
     },
@@ -1720,7 +1716,7 @@ export var tgStrings = {
     validators: "Валидаторҳо",
     // bindings: "Bindings",
     // renderAs: "Render as",
-    // attachOriginalItems: "Attach original items",
+    // attachData: "Attach original items",
     choices: "Интихоб",
     choicesByUrl: "Интихоб аз интернет",
     currency: "Асъор",

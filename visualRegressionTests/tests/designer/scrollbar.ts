@@ -5,7 +5,7 @@ const title = "Sidebar Screenshot";
 fixture`${title}`.page`${url}`;
 
 const json = {
-  showQuestionNumbers: "on",
+  showQuestionNumbers: true,
   "logoPosition": "right",
   "pages": [
     {

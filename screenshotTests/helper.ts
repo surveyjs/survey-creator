@@ -30,6 +30,12 @@ export const setJSON = async (page, json) => {
   }, json);
 };
 
+export const setOptions = async (page, options) => {
+  await page.evaluate((options) => {
+    (window as any).creator.setOptions(options);
+  }, options);
+};
+
 export const setSurveyProp = async (page, propName, value) => {
   await page.evaluate(([propName, value]) => {
     (window as any).creator.survey[propName] = value;
@@ -120,7 +126,7 @@ export const themeSettingsButtonSelector = (page) => page.locator(".sv-action-ba
 // export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)");
 
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
-  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text);
+  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) }));
 }
 export function getSelectOptionByText(page, text: string) {
   return page.locator("option").withExactText(text);
@@ -162,10 +168,11 @@ export async function addQuestionByAddQuestionButton(page, text) {
   await page.locator(".svc-list__item span").getByText(text).click();
 }
 
-export async function changeToolboxLocation(page, newVal: string) {
+export async function changeToolboxLocation(page: Page, newVal: string) {
   await page.evaluate((newVal) => {
     window["creator"].toolboxLocation = newVal;
   }, newVal);
+  await page.waitForTimeout(500);
 }
 
 export async function changeToolboxScrolling(page, hasScroll: boolean) {
@@ -203,7 +210,7 @@ export async function setShowAddQuestionButton(page, newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(page, newVal: boolean) {
   await page.evaluate((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   }, newVal);
 }
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {

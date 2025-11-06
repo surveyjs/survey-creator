@@ -12,23 +12,6 @@ fixture`${title}`.page`${url}`;
 
 const flyoutPropertyGrid = Selector(".svc-side-bar--flyout");
 
-test("Check base responsiveness for tabbed menu", async (t) => {
-  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-of-type(5)");
-  await t
-    .resizeWindow(1920, 900)
-    .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(700, 969)
-    .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
-    .click(".svc-tabbed-menu-item-container.sv-dots");
-  const popupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
-  await t
-    .expect(getListItemByText("Translation").visible).ok()
-    .pressKey("esc")
-    .expect(popupSelector.visible).notOk()
-    .resizeWindow(1920, 900)
-    .expect(await tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok();
-});
-
 test("Check base responsiveness for toolbox", async (t) => {
   await changeToolboxScrolling(false);
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(20)");

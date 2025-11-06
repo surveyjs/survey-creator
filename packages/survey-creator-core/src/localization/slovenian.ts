@@ -664,8 +664,6 @@ export var slStrings = {
       templateErrorLocation: "Poravnava sporočila o napaki",
       // "New entry location"
       newPanelPosition: "Nova lokacija plošče",
-      // "Show the progress bar"
-      showRangeInProgress: "Prikaži vrstico napredka",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -844,6 +842,8 @@ export var slStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih, ko so izbrane",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Prikaz besedila in vrednosti",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Zahteva, da uporabnik vnese komentar",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var slStrings = {
     maxRateDescription: "Oznaka za maksimalno vrednost",
     // "Input type"
     inputType: "Vrsta vnosa",
-    // "Option placeholder"
-    optionsCaption: "Zaslon možnosti",
     // "Default Answer"
     defaultValue: "Privzeti odgovor",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var slStrings = {
     timerLocation: "Poravnava timerja",
     // "Timer mode"
     timerInfoMode: "Način timerja",
-    // "Panel display mode"
-    renderMode: "Način prikaza panela",
     // "Enable entry addition"
     allowAddPanel: "Omogoči dodajanje panela",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var slStrings = {
     // "Regular expression"
     regex: "Regularni izraz",
     surveyvalidator: {
-      // "Error message"
-      text: "Sporočilo o napaki",
+      // [Auto-translated] "Validation message"
+      text: "Potrditveno sporočilo",
       // [Auto-translated] "Validation expression"
-      expression: "Validacijski izraz"
+      expression: "Validacijski izraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Vrsta obvestila",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Največja dolžina (v črkah)"
     },
     // "Total row header"
     totalText: "Povzetek vrstice",
@@ -1384,7 +1384,7 @@ export var slStrings = {
     labelFalse: "Oznaka za »Neresnično«",
     // "Show the Clear button"
     allowClear: "Prikaži gumb za brisanje",
-    // "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Način iskanja",
     // "Display format"
     displayStyle: "Format prikaza",
@@ -1450,7 +1450,7 @@ export var slStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznak merila",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Pokaži opise orodij",
+      tooltipVisibility: "Pokaži opise orodij",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dovoli prekrižanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var slStrings = {
       // [Auto-translated] "Range"
       range: "Razpon"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Zmeraj",
+      // [Auto-translated] "Never"
+      never: "Nikoli"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Napaka",
+      // [Auto-translated] "Warning"
+      warning: "Opozorilo",
+      // [Auto-translated] "Informational"
+      info: "Informativne"
+    },
     autocomplete: {
       // "Full Name"
       name: "Celé jméno",
@@ -2250,10 +2266,6 @@ export var slStrings = {
     underRowSingle: "Pod řádkem, zobrazit pouze jednu expanze řádku",
     // "Auto"
     auto: "Automaticky",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Skryté"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obojí"
@@ -2693,7 +2705,9 @@ export var slStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Sklicujte se na ime vprašanja, da zahteva od uporabnika, da za to vprašanje v vsakem panelu poda edinstven odgovor.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče."
+      confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Dodeli številke vprašanjem, ugnezdenim v dinamični plošči."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var slStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno."
+      expression: "Z ikono čarobne palice določite, kdaj se vrednost vprašanja šteje za veljavno.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Napake blokirajo napredek, dokler niso odpravljene. Opozorila poudarjajo težave, vendar omogočajo nadaljevanje. Informativne opombe ponujajo dodaten kontekst ali nevtralne smernice. Pri uporabi opozoril ali informativnih opomb priporočamo, da omogočite takojšnje preverjanje veljavnosti: »Anketa« → »Preverjanje« → »Zaženi preverjanje« → »Po spremembi odgovora«."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var slStrings = {
     detailErrorLocation: "Nastavi lokacijo sporočil o napakah za vprašanja, gnezdena v podrobnostnih razdelkih. Nastavitev Podedovano uporablja nastavitev iz lastnosti: Poravnava sporočila o napaki",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Ko je omogočena lastnost Prepreči podvojene odgovore, bo anketiranec, ki bo poskušal oddati podvojen vnos, prejel naslednje sporočilo o napaki",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Ko je lastnost »Prepreči podvojene odgovore« omogočena za stolpec matrike, bo respondent, ki poskuša poslati podvojeni vnos, prejel to sporočilo o napaki."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Omogoča izračun skupnih vrednosti na podlagi izraza. Izraz lahko vključuje: osnovne izračune ({q1_id} + {q2_id}), Booleove izraze ({age} > 60) in funkcije (iif(), today(), age(), min(), max(), avg() itd.)",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var slStrings = {
     fileOrPhotoPlaceholder: "Velja, ko je \"Vrsta vira datoteke\" nastavljena na \"Lokalna datoteka ali kamera\"",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Razporedi možnosti izbire v več-stolpčni postavitvi. Ko je nastavljen na 0, so možnosti prikazane v eni vrstici",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Razporedi polja z besedilom v postavitev z več stolpci."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Izberite, če želite shraniti vrednost vprašanja z uporabo maske v rezultatih ankete"
@@ -3212,7 +3236,7 @@ export var slStrings = {
     // "Render as"
     renderAs: "Upodobi kot", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Poveži izvirne predmete", // Auto-generated string
+    attachData: "Poveži izvirne predmete", // Auto-generated string
     // "Choices"
     choices: "Izbire",
     // "Choices by url"

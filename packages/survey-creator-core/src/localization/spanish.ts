@@ -664,8 +664,6 @@ export var spanishTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nueva ubicación de entrada",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Mostrar la barra de progreso",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
@@ -844,6 +842,8 @@ export var spanishTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Borrar otros cuando se selecciona",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Mostrar texto y valor",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Requerir al usuario que introduzca un comentario",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var spanishTranslation = {
     maxRateDescription: "Descripción del valor máximo",
     // "Input type"
     inputType: "Tipo de entrada",
-    // "Option placeholder"
-    optionsCaption: "Cambie texto de 'Seleccione'",
     // "Default Answer"
     defaultValue: "Valor por defecto",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var spanishTranslation = {
     timerLocation: "Mostrar panel de temporizador",
     // "Timer mode"
     timerInfoMode: "Mostrar modo de panel del temporizador",
-    // "Panel display mode"
-    renderMode: "Modo de renderizado",
     // "Enable entry addition"
     allowAddPanel: "Permitir agregar un panel",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var spanishTranslation = {
     // "Regular expression"
     regex: "Expresión regular",
     surveyvalidator: {
-      // "Error message"
-      text: "Mensaje de error",
+      // [Auto-translated] "Validation message"
+      text: "Mensaje de validación",
       // [Auto-translated] "Validation expression"
-      expression: "Expresión de validación"
+      expression: "Expresión de validación",
+      // [Auto-translated] "Notification type"
+      notificationType: "Tipo de notificación",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longitud máxima (en caracteres)"
     },
     // "Total row header"
     totalText: "Texto total",
@@ -1384,7 +1384,7 @@ export var spanishTranslation = {
     labelFalse: "Etiqueta \"Falso\"",
     // "Show the Clear button"
     allowClear: "Mostrar el botón limpiar",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Modo de búsqueda",
     // [Auto-translated] "Display format"
     displayStyle: "Formato de visualización",
@@ -1450,7 +1450,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Mostrar etiquetas de escala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Mostrar información sobre herramientas",
+      tooltipVisibility: "Mostrar información sobre herramientas",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permitir el cruce de pulgares",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var spanishTranslation = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automático",
+      // [Auto-translated] "Always"
+      always: "Siempre",
+      // [Auto-translated] "Never"
+      never: "Nunca"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Error",
+      // [Auto-translated] "Warning"
+      warning: "Advertencia",
+      // [Auto-translated] "Informational"
+      info: "Informativo"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nombre completo",
@@ -2250,10 +2266,6 @@ export var spanishTranslation = {
     underRowSingle: "Debajo de la fila, sólo un panel es visible",
     // "Auto"
     auto: "Automático",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Oculto"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2693,7 +2705,9 @@ export var spanishTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Haga referencia a un nombre de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada."
+      confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Asigna números a las preguntas anidadas dentro del panel dinámico."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var spanishTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta."
+      expression: "Utilice el icono de la varita mágica para definir cuándo se considera válido el valor de la pregunta.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Los errores bloquean el progreso hasta que se resuelven. Las advertencias resaltan los problemas, pero permiten continuar. Las notas informativas ofrecen contexto adicional u orientación neutral. Cuando utilice advertencias o notas informativas, se recomienda habilitar la validación inmediata: \"Encuesta\" → \"Validación\" → \"Ejecutar validación\" → \"Después de que haya cambiado una respuesta\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var spanishTranslation = {
     detailErrorLocation: "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada para una columna de matriz, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var spanishTranslation = {
     fileOrPhotoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Organiza los cuadros de texto en un diseño de varias columnas."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Seleccione si desea almacenar el valor de la pregunta con una máscara aplicada en los resultados de la encuesta."
@@ -3212,7 +3236,7 @@ export var spanishTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Renderizar como", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Adjuntar elementos originales", // Auto-generated string
+    attachData: "Adjuntar elementos originales", // Auto-generated string
     // "Choices"
     choices: "opciones",
     // "Choices by url"

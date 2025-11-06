@@ -136,7 +136,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
     if (!this.getHasAddButton()) return;
     const question: QuestionMatrixDynamicModel = options.question;
-    options.titleActions.push({
+    options.actions.push({
       id: "add-item",
       iconName: "icon-add",
       iconSize: "auto",
@@ -451,7 +451,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     );
   }
   protected excludeTextPropertyName(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
-    const hideText = options?.inplaceEditForValues;
+    const hideText = options?.inplaceEditChoiceValues;
     return !!hideText ? propNames.filter(p => p !== "text") : propNames;
   }
   protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
@@ -482,14 +482,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
     const names = (<any>question).columns.filter(c => !c.readOnly).map(c => c.name);
-    const visibleIfProp = Serializer.findProperty("itemvalue", "visibleIf");
-    if (visibleIfProp && visibleIfProp.visible) {
-      names.push("visibleIf");
-      const enableIfProp = Serializer.findProperty("itemvalue", "enableIf");
-      if (enableIfProp && enableIfProp.visible) {
-        names.push("enableIf");
+    const addProperty = (name: string) => {
+      const prop = Serializer.findProperty("itemvalue", name);
+      if (prop && prop.visible) {
+        names.push(name);
       }
-    }
+    };
+    addProperty("visibleIf");
+    addProperty("enableIf");
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
   }
   public canClearPropertyValue(
@@ -529,14 +529,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     return res;
   }
   protected getMinimumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
-    if (prop.name === "choices") return options.minimumChoicesCount;
+    if (prop.name === "choices") return options.minChoices;
     return super.getMaximumRowCount(obj, prop, options);
   }
   protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
-    if (prop.name === "choices") return options.maximumChoicesCount;
-    if (prop.name === "rows") return options.maximumRowsCount;
-    if (prop.name === "columns") return options.maximumColumnsCount;
-    if (prop.name === "rateValues") return options.maximumRateValues;
+    if (prop.name === "choices") return options.maxChoices;
+    if (prop.name === "rows") return options.maxRows;
+    if (prop.name === "columns") return options.maxColumns;
+    if (prop.name === "rateValues") return options.maxRateValues;
     return super.getMaximumRowCount(obj, prop, options);
   }
   private hasMultipleLanguage(items: Array<ItemValue>): boolean {
@@ -591,14 +591,14 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
     const ratingQuestion = <QuestionRatingModel>getQuestionFromObj(obj as SurveyElement);
     this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
     obj.onPropertyChanged.add((sender, options) => {
-      if (options.name == "rateCount" || options.name == "rateDisplayMode") {
+      if (options.name == "rateCount" || options.name == "rateType") {
         this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
       }
     });
   }
 
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
-    const clearAction = options.titleActions.filter((a) => a.id == "property-grid-clear")[0];
+    const clearAction = options.actions.filter((a) => a.id == "property-grid-clear")[0];
     if (clearAction) clearAction.visible = false;
     super.onGetQuestionTitleActions(obj, options, creator);
   }
@@ -629,7 +629,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): number {
-    return options.maximumColumnsCount;
+    return options.maxColumns;
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
@@ -796,7 +796,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (!options.row.editingObj) return;
     const q = options.cellQuestion;
     if (options.columnName === this.getObjTypeName()) {
-      q.showOptionsCaption = false;
+      q.allowClear = false;
       q.choices = this.getChoices(obj);
       q.value = options.row.editingObj.getType();
     }

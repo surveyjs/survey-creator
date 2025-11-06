@@ -664,8 +664,6 @@ export var simplifiedChineseTranslation = {
       templateErrorLocation: "错误消息对齐",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入场地点",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "显示进度条",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下问题中的重复回答"
     },
@@ -844,6 +842,8 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "选中时清除其他",
+    // [Auto-translated] "Display both text and value"
+    showValue: "同时显示文本和值",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "要求用户输入注释",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var simplifiedChineseTranslation = {
     maxRateDescription: "最大值提示",
     // "Input type"
     inputType: "文本框类型",
-    // "Option placeholder"
-    optionsCaption: "下拉框提示语",
     // "Default Answer"
     defaultValue: "默认值",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var simplifiedChineseTranslation = {
     timerLocation: "显示计时器面板",
     // "Timer mode"
     timerInfoMode: "显示计时器面板模式",
-    // "Panel display mode"
-    renderMode: "渲染模式",
     // "Enable entry addition"
     allowAddPanel: "允许添加面板",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var simplifiedChineseTranslation = {
     // "Regular expression"
     regex: "正则表达式",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "错误信息",
+      // [Auto-translated] "Validation message"
+      text: "验证消息",
       // [Auto-translated] "Validation expression"
-      expression: "验证表达式"
+      expression: "验证表达式",
+      // [Auto-translated] "Notification type"
+      notificationType: "通知类型",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大长度（以字符为单位）"
     },
     // "Total row header"
     totalText: "总文本",
@@ -1384,7 +1384,7 @@ export var simplifiedChineseTranslation = {
     labelFalse: "“虚假”标签",
     // "Show the Clear button"
     allowClear: "显示“清除”按钮",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "搜索模式",
     // [Auto-translated] "Display format"
     displayStyle: "显示格式",
@@ -1450,7 +1450,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "显示刻度标签",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "显示工具提示",
+      tooltipVisibility: "显示工具提示",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "允许 Thumb Crossing",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Range"
       range: "范围"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自动",
+      // [Auto-translated] "Always"
+      always: "总是",
+      // [Auto-translated] "Never"
+      never: "从不"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "错误",
+      // [Auto-translated] "Warning"
+      warning: "警告",
+      // [Auto-translated] "Informational"
+      info: "信息"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "全名",
@@ -2250,10 +2266,6 @@ export var simplifiedChineseTranslation = {
     underRowSingle: "在行下，仅显示一个部分",
     // "Auto"
     auto: "自动",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隐藏"
-    },
     timerInfoMode: {
       // "Both"
       combined: "双"
@@ -2693,7 +2705,9 @@ export var simplifiedChineseTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "在删除条目之前触发确认提示。"
+      confirmDelete: "在删除条目之前触发确认提示。",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "为嵌套在动态面板中的问题分配编号。"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var simplifiedChineseTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "使用魔杖图标定义问题值何时被视为有效。"
+      expression: "使用魔杖图标定义问题值何时被视为有效。",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "错误会阻止进度，直到解决。警告突出显示问题，但允许继续。信息性说明提供额外的背景信息或中立指导。使用警告或信息性注释时，建议启用即时验证：“调查”→“验证”→“运行验证”→“答案更改后”。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var simplifiedChineseTranslation = {
     detailErrorLocation: "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "当为矩阵列启用“防止重复响应”属性时，尝试提交重复条目的受访者将收到以下错误消息。"
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var simplifiedChineseTranslation = {
     fileOrPhotoPlaceholder: "当“源类型”为“本地文件或相机”时适用。",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "在多列布局中排列选项。当设置为 0 时，选项将显示在一行中。",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "以多列布局排列文本框。"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "选择是否要在调查结果中存储带有应用掩码的问题值。"
@@ -3212,7 +3236,7 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "渲染为", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "附加原始项目", // Auto-generated string
+    attachData: "附加原始项目", // Auto-generated string
     // "Choices"
     choices: "选项",
     // "Choices by url"

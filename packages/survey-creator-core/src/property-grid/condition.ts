@@ -18,7 +18,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   ): any {
     return {
       type: "comment",
-      showOptionsCaption: false,
+      allowClear: false,
       rows: 2
     };
   }
@@ -81,15 +81,15 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   ): any {
     return {
       type: "comment",
-      showOptionsCaption: false,
+      allowClear: false,
       rows: 2,
     };
   }
   public canClearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): boolean {
-    return options.allowEditExpressionsInTextEditor !== false;
+    return options.logicAllowTextEditExpressions !== false;
   }
   public onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    if (options.allowEditExpressionsInTextEditor === false) {
+    if (options.logicAllowTextEditExpressions === false) {
       question.onKeyDownPreprocess = (event: any) => {
         const allowed = ["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"];
         if (!event.ctrlKey && allowed.indexOf(event.key) < 0) {

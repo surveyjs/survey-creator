@@ -210,7 +210,7 @@ test("Change Creator locale property", (): any => {
   expect(tabButton.title).toEqual("Logik");
   expect(textQuestion.title).toEqual("Text");
   expect(choiceCategory.title).toEqual("Choices de");
-  expect(textQuestion.innerItem.title).toEqual("Text");
+  expect(textQuestion.locTitle.renderedHtml).toEqual("Text");
   expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
   creator.selectElement(creator.survey.getQuestionByName("q2"));
   expect(creator.propertyGrid.getQuestionByName("format").title).toEqual("Format de");
@@ -221,7 +221,7 @@ test("Change Creator locale property", (): any => {
   expect(tabButton.title).toEqual("Logic");
   expect(choiceCategory.title).toEqual("Choice Questions");
   expect(textQuestion.title).toEqual("Single-Line Input");
-  expect(textQuestion.innerItem.title).toEqual("Single-Line Input");
+  expect(textQuestion.locTitle.renderedHtml).toEqual("Single-Line Input");
   expect(saveAction.title).toEqual("Save Survey");
 });
 test("Check creator license localization", (): any => {
@@ -284,7 +284,6 @@ test("Get property name from pe. based on class name", () => {
 test("Support preset locale strings", () => {
   editorLocalization.currentLocale = "";
   editorLocalization.defaultLocale = "en";
-  editorLocalization.reset();
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
   editorLocalization.getLocale().pe.survey.title = "Survey title";
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
@@ -384,4 +383,16 @@ test("creator.sidebar.header.title & creator.locale, bug#7130", () => {
   expect(creator.sidebar.header.title).toBe("Traduction");
   creator.locale = "en";
   expect(creator.sidebar.header.title).toBe("Language Settings");
+});
+test("Preset strings", () => {
+  editorLocalization.presetStrings = {
+    en: {
+      qt: { text: "Text - en preset" }, pe: { survey: { title: "Survey title - en preset" } },
+      pehelp: { panel: { description: "Some code" } } }
+  };
+  expect(editorLocalization.getString("qt.text")).toEqual("Text - en preset");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title - en preset");
+  expect(editorLocalization.getPropertyHelpInEditor("panel", "description")).toEqual("Some code");
+  expect(editorLocalization.getPropertyHelpInEditor("panel", "name")).toEqual("A panel ID that is not visible to respondents.");
+  editorLocalization.presetStrings = undefined;
 });

@@ -11,7 +11,7 @@ test.describe(title, () => {
   test("strings view", async ({ page }) => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -79,7 +79,7 @@ test.describe(title, () => {
       (window as any).creator.onMachineTranslate.add((sender, options) => { });
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

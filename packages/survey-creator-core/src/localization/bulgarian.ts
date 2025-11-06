@@ -664,8 +664,6 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ново място за влизане",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Показване на лентата за напредъка",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -844,6 +842,8 @@ export var bgStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Изчистване на другите, когато е избрано",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Показване както на текст, така и на стойност",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Изискване от потребителя да въведе коментар",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var bgStrings = {
     maxRateDescription: "Описание на максималната оценка",
     // "Input type"
     inputType: "Тип на въвеждане",
-    // "Option placeholder"
-    optionsCaption: "Контейнер за опция",
     // "Default Answer"
     defaultValue: "Отговор по подразбиране",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var bgStrings = {
     timerLocation: "Местоположение на таймера",
     // "Timer mode"
     timerInfoMode: "Режим на таймера",
-    // "Panel display mode"
-    renderMode: "Режим на показване на панела",
     // "Enable entry addition"
     allowAddPanel: "Разрешаване добавянето на панели",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var bgStrings = {
     // "Regular expression"
     regex: "Регулярен израз",
     surveyvalidator: {
-      // "Error message"
-      text: "Съобщение за грешка",
+      // [Auto-translated] "Validation message"
+      text: "Съобщение за валидиране",
       // [Auto-translated] "Validation expression"
-      expression: "Валидиращ израз"
+      expression: "Валидиращ израз",
+      // [Auto-translated] "Notification type"
+      notificationType: "Тип известие",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Максимална дължина (в знаци)"
     },
     // "Total row header"
     totalText: "Общ текст в реда",
@@ -1384,7 +1384,7 @@ export var bgStrings = {
     labelFalse: "\"Невярно\" етикет",
     // "Show the Clear button"
     allowClear: "Показване на бутона Изчистване",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Режим на търсене",
     // "Display format"
     displayStyle: "Стил за изобразяване на стойността",
@@ -1450,7 +1450,7 @@ export var bgStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Показване на етикети на мащаба",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Показване на подсказки",
+      tooltipVisibility: "Показване на подсказки",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Разрешаване на кръстосване на палеца",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var bgStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Винаги",
+      // [Auto-translated] "Never"
+      never: "Никога"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Грешка",
+      // [Auto-translated] "Warning"
+      warning: "Предупреждение",
+      // [Auto-translated] "Informational"
+      info: "Информационна"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Пълно име",
@@ -2250,10 +2266,6 @@ export var bgStrings = {
     underRowSingle: "Под реда се вижда само един панел.",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Скрит"
-    },
     timerInfoMode: {
       // "Both"
       combined: "И двете"
@@ -2693,7 +2705,9 @@ export var bgStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис."
+      confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var bgStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна."
+      expression: "Използвайте иконата на магическа пръчица, за да определите кога стойността на въпроса се счита за валидна.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Грешките блокират напредъка, докато не бъде разрешен. Предупрежденията подчертават проблемите, но позволяват да продължат. Информационните бележки предлагат допълнителен контекст или неутрални насоки. Когато използвате предупреждения или информационни бележки, препоръчваме да активирате незабавно валидиране: \"Проучване\" → \"Валидиране\" → \"Стартиране на валидиране\" → \"След промяна на отговора\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var bgStrings = {
     detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено за колона с матрица, респондентът, който се опитва да изпрати дублиращ се запис, ще получи следното съобщение за грешка."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var bgStrings = {
     fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Подрежда текстовите полета в оформление с няколко колони."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."
@@ -3212,7 +3236,7 @@ export var bgStrings = {
     // "Render as"
     renderAs: "Представяне като", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Прикрепяне на оригиналните елементи", // Auto-generated string
+    attachData: "Прикрепяне на оригиналните елементи", // Auto-generated string
     // "Choices"
     choices: "Избори",
     // "Choices by url"

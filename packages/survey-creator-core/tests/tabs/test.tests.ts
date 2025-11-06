@@ -22,7 +22,7 @@ function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
 test("Test language Bar Item", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -58,7 +58,7 @@ test("Test language Bar Item", (): any => {
 test("Test languages dropdown with unknown language", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -209,7 +209,7 @@ test("Page action title when the preview shows only, Bug#5277", (): any => {
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -217,14 +217,14 @@ test("Show/hide device similator", (): any => {
     ]
   };
   let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeTruthy();
   expect(similatorAction.visible).toBeTruthy();
 
-  creator = new CreatorTester({ showSimulatorInTestSurveyTab: false });
+  creator = new CreatorTester({ previewAllowSimulateDevices: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -239,8 +239,8 @@ test("Show/hide device similator", (): any => {
 test("Hide similatorAction on mobile devices", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.isTouch = true;
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-  creator.makeNewViewActive("test");
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.switchTab("test");
   let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeTruthy();
   expect(similatorAction.visible).toBeFalsy();
@@ -254,7 +254,7 @@ test("Check popup viewType", (): any => {
   const creator: CreatorTester = new CreatorTester();
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const model: TestSurveyTabViewModel = testPlugin.model;
   const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
   model.survey.onOpenDropdownMenu.add((_, options) => {
@@ -269,8 +269,8 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
       { name: "page3" }
     ]
   };
@@ -293,8 +293,8 @@ test("Hide page actions if survey is not in running state", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
       { name: "page3" }
     ]
   };
@@ -312,20 +312,20 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
       { name: "page3" }
     ]
   };
-  creator.onGetObjectDisplayName.add((sender, options) => {
-    if (options.reason === "survey-tester" && options.area === "preview-tab:page-list") {
-      const survey = options.obj.survey;
-      const index = survey.pages.indexOf(options.obj);
+  creator.onElementGetDisplayName.add((sender, options) => {
+    if (options.area === "preview-tab:page-list") {
+      const survey = options.element.survey;
+      const index = survey.pages.indexOf(options.element);
       options.displayName = (index + 1).toString() + ". " + options.displayName;
     }
-    if (options.reason === "survey-tester-selected" && options.area === "preview-tab:selected-page") {
-      const survey = options.obj.survey;
-      const index = survey.pages.indexOf(options.obj);
+    if (options.area === "preview-tab:selected-page") {
+      const survey = options.element.survey;
+      const index = survey.pages.indexOf(options.element);
       options.displayName = "Page " + (index + 1).toString() + " from " + survey.pages.length;
     }
   });
@@ -344,9 +344,9 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
+      { name: "page3", elements: [{ type: "text", name: "q3" }] }
     ]
   };
   const model = getTestModel(creator);
@@ -360,9 +360,9 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
 
   creator.JSON = {
     pages: [
-      { name: "page1", title: "page title 1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", title: "page title 2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", title: "page title 1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "page title 2", elements: [{ type: "text", name: "q2" }] },
+      { name: "page3", elements: [{ type: "text", name: "q3" }] }
     ]
   };
   creator.getPlugin("test").update();
@@ -382,8 +382,8 @@ test("pageSelector if page title with markup", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", title: "<i>Page 1</i>", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", title: "<i>Page 2</i>", questions: [{ type: "text", name: "q2" }] },
+      { name: "page1", title: "<i>Page 1</i>", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", elements: [{ type: "text", name: "q2" }] },
     ]
   };
   var model = getTestModel(creator);
@@ -399,7 +399,7 @@ test("pageSelector if page title with markup", (): any => {
 test("Simulator view switch", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -421,7 +421,7 @@ test("Simulator in iphone15", (): any => {
 test("Hide Test Again action on leaving Preview", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -429,7 +429,7 @@ test("Hide Test Again action on leaving Preview", (): any => {
     ]
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const model: TestSurveyTabViewModel = testPlugin.model;
 
   let testAgain = model.testAgainAction;
@@ -437,13 +437,13 @@ test("Hide Test Again action on leaving Preview", (): any => {
   expect(testAgain.visible).toBeFalsy();
   model.survey.doComplete();
   expect(testAgain.visible).toBeTruthy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(testAgain.visible).toBeFalsy();
 });
 test("invisibleToggleAction doesn't created, there are no exceptions", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showInvisibleElementsInTestSurveyTab: false });
+  const creator: CreatorTester = new CreatorTester({ previewAllowHiddenElements: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
@@ -451,35 +451,35 @@ test("invisibleToggleAction doesn't created, there are no exceptions", (): any =
     ]
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const action = creator.getActionBarItem("showInvisible");
   expect(action).toBeFalsy();
 });
 test("invisibleToggleAction title", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
       }
     ]
   };
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const action = creator.getActionBarItem("showInvisible");
   expect(action.title).toEqual("Show invisible elements");
 });
 test("invisibleToggleAction state change", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
       }
     ]
   };
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const action = creator.getActionBarItem("showInvisible") as Action;
   expect(action.active).toBeFalsy();
   action.action();
@@ -524,7 +524,7 @@ test("Test correct survey results node levels", (): any => {
     ]
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const resultsModel: SurveyResultsModel = new SurveyResultsModel(testPlugin.model.simulator.survey);
 
   const zeroLvl: SurveyResultsItemModel[] = resultsModel.resultData;
@@ -542,7 +542,7 @@ test("Test correct survey results node levels", (): any => {
 test("Check zoom in mobile preview", (): any => {
   const creator: CreatorTester = new CreatorTester();
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const simulator: SurveySimulatorModel = testPlugin.model.simulator;
   simulator.resetZoomParameters();
 
@@ -725,25 +725,25 @@ test("isPageToolbarVisible & firstPage is started, #6624", (): any => {
 test("Default mobile orientation", (): any => {
   const creator: CreatorTester = new CreatorTester();
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const model: TestSurveyTabViewModel = testPlugin.model;
   expect(creator.previewOrientation).toBe("landscape");
   expect(model.simulator.landscape).toBeTruthy();
 
   const creator2: CreatorTester = new CreatorTester({ previewOrientation: "portrait" });
   const testPlugin2: TabTestPlugin = <TabTestPlugin>creator2.getPlugin("test");
-  creator2.makeNewViewActive("test");
+  creator2.switchTab("test");
   const model2: TestSurveyTabViewModel = testPlugin2.model;
   expect(creator2.previewOrientation).toBe("portrait");
   expect(model2.simulator.landscape).toBeFalsy();
 
   creator2.previewOrientation = "landscape";
-  creator2.makeNewViewActive("test");
+  creator2.switchTab("test");
   expect(model2.simulator.landscape).toBeFalsy();
 
   const creator3: CreatorTester = new CreatorTester({ previewOrientation: "landscape" });
   const testPlugin3: TabTestPlugin = <TabTestPlugin>creator3.getPlugin("test");
-  creator3.makeNewViewActive("test");
+  creator3.switchTab("test");
   const model3: TestSurveyTabViewModel = testPlugin3.model;
   expect(model3.simulator.landscape).toBeTruthy();
 });
@@ -762,7 +762,7 @@ test("Apply theme from theme builder", (): any => {
   };
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(testPlugin["changeThemeAction"]).toBeUndefined();
 
   const model: TestSurveyTabViewModel = testPlugin.model;
@@ -775,7 +775,7 @@ test("Check that popups inside survey are closed when scrolling container", (): 
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
 
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
 
   const model: TestSurveyTabViewModel = testPlugin.model;
   const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
@@ -844,7 +844,7 @@ test("Update theme in active test/preview tab 2", (): any => {
     previewBodyCss = options.survey.css.body;
   });
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.reason === "preview" || options.reason === "test") {
+    if (options.area === "preview-tab") {
       instanceBodyCss = options.survey.css.body;
       instanceArea = options.area;
     }
@@ -862,7 +862,7 @@ test("Update theme in active test/preview tab 2", (): any => {
 test("showResults default behavior", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -883,7 +883,7 @@ test("showResults default behavior", (): any => {
 test("showResults with previewShowResults false", (): any => {
   const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -904,7 +904,7 @@ test("showResults with previewShowResults false", (): any => {
 test("devices selector dropdown items default order", (): any => {
   const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -931,7 +931,7 @@ test("change devices selector dropdown items order", (): any => {
 
     const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
     creator.JSON = {
-      questions: [
+      elements: [
         {
           type: "text",
           name: "q1",
@@ -1000,7 +1000,7 @@ test("Mark previous pages as passed if selectPageAction selects non-subsequent p
     ]
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   const model: TestSurveyTabViewModel = testPlugin.model;
 
   const selectPageAction = model.selectPageAction;
@@ -1026,7 +1026,7 @@ test("Mark previous pages as passed if selectPageAction selects non-subsequent p
 test("Suppress NavigateToUrl notification using allow option", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -1093,7 +1093,7 @@ test("The Preview Survey button text is not translated Bug#6016", (): any => {
 });
 test("Preview tab: default device and save current device", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
 
   expect(creator.previewDevice).toBe("desktop");
@@ -1122,7 +1122,7 @@ test("Preview tab: default device and save current device", (): any => {
 
 test("Preview tab: use theme palatte corresponding cretor theme palette if theme is not selected", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
 
   expect(creator.preferredColorPalette).toBe("light");

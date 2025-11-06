@@ -664,8 +664,6 @@ export var portugueseTranslation = {
       templateErrorLocation: "Alinhamento da mensagem de erro",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Novo local de entrada",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Mostrar a barra de progresso",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evite respostas duplicadas na seguinte pergunta"
     },
@@ -844,6 +842,8 @@ export var portugueseTranslation = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Limpar outros quando selecionado",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Exibir texto e valor",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Exigir que o usuário insira um comentário",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var portugueseTranslation = {
     maxRateDescription: "Descrição de qualificação máxima",
     // "Input type"
     inputType: "Tipo de entrada",
-    // "Option placeholder"
-    optionsCaption: "Título de opção",
     // "Default Answer"
     defaultValue: "Valor pré-definido",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var portugueseTranslation = {
     timerLocation: "Mostrar o painel de cronômetro",
     // "Timer mode"
     timerInfoMode: "Mostrar painel de modo de cronômetro",
-    // "Panel display mode"
-    renderMode: "Modo de renderização",
     // "Enable entry addition"
     allowAddPanel: "Permitir adicionar painel",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var portugueseTranslation = {
     // "Regular expression"
     regex: "Expressão regular",
     surveyvalidator: {
-      // "Error message"
-      text: "Mensagem de erro",
+      // [Auto-translated] "Validation message"
+      text: "Mensagem de validação",
       // [Auto-translated] "Validation expression"
-      expression: "Expressão de validação"
+      expression: "Expressão de validação",
+      // [Auto-translated] "Notification type"
+      notificationType: "Tipo de notificação",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Comprimento máximo (em caracteres)"
     },
     // "Total row header"
     totalText: "Texto total da linha",
@@ -1384,7 +1384,7 @@ export var portugueseTranslation = {
     labelFalse: "\"Falso\" rótulo",
     // "Show the Clear button"
     allowClear: "Mostrar o botão Limpar",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Modo de pesquisa",
     // "Display format"
     displayStyle: "Estilo de exibição de valor",
@@ -1450,7 +1450,7 @@ export var portugueseTranslation = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Mostrar rótulos de escala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Mostrar dicas de ferramentas",
+      tooltipVisibility: "Mostrar dicas de ferramentas",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permitir o cruzamento do polegar",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var portugueseTranslation = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automático",
+      // [Auto-translated] "Always"
+      always: "Sempre",
+      // [Auto-translated] "Never"
+      never: "Nunca"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Erro",
+      // [Auto-translated] "Warning"
+      warning: "Aviso",
+      // [Auto-translated] "Informational"
+      info: "Informativo"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nome completo",
@@ -2250,10 +2266,6 @@ export var portugueseTranslation = {
     underRowSingle: "Sob a linha, apenas um painel é visível",
     // "Auto"
     auto: "Automático",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Escondido"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2693,7 +2705,9 @@ export var portugueseTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Faça referência a um nome de pergunta para exigir que um usuário forneça uma resposta exclusiva para essa pergunta em cada painel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Aciona um prompt de confirmação antes de remover uma entrada."
+      confirmDelete: "Aciona um prompt de confirmação antes de remover uma entrada.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Atribui números a perguntas aninhadas no painel dinâmico."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var portugueseTranslation = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido."
+      expression: "Use o ícone de varinha mágica para definir quando o valor da pergunta é considerado válido.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Os erros bloqueiam o progresso até serem resolvidos. Os avisos destacam os problemas, mas permitem continuar. As notas informativas oferecem contexto adicional ou orientação neutra. Ao usar avisos ou notas informativas, recomendamos ativar a validação imediata: \"Pesquisa\" → \"Validação\" → \"Executar validação\" → \"Depois que uma resposta for alterada\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var portugueseTranslation = {
     detailErrorLocation: "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Quando a propriedade \"Impedir respostas duplicadas\" está habilitada, um respondente tentando enviar uma entrada duplicada receberá a seguinte mensagem de erro.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Quando a propriedade \"Impedir respostas duplicadas\" estiver ativada para uma coluna de matriz, um respondente que tentar enviar uma entrada duplicada receberá a seguinte mensagem de erro."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Permite calcular valores totais com base em uma expressão. A expressão pode incluir cálculos básicos ('{q1_id} + {q2_id}'), expressões booleanas ('{age} > 60') e funções ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var portugueseTranslation = {
     fileOrPhotoPlaceholder: "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais ou câmera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Organiza caixas de texto em um layout de várias colunas."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selecione se deseja armazenar o valor da pergunta com uma máscara aplicada nos resultados do questionário."
@@ -3212,7 +3236,7 @@ export var portugueseTranslation = {
     // "Render as"
     renderAs: "renderizar como", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "anexar itens originais", // Auto-generated string
+    attachData: "anexar itens originais", // Auto-generated string
     // "Choices"
     choices: "Opções",
     // "Choices by url"

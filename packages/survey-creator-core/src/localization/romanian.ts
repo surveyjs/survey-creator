@@ -664,8 +664,6 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       // "New entry location"
       newPanelPosition: "Locația noului panou",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Afișați bara de progres",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -844,6 +842,8 @@ export const roStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ștergeți altele când este selectat",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Afișați atât textul, cât și valoarea",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Solicitați utilizatorului să introducă un comentariu",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export const roStrings = {
     maxRateDescription: "Etichetă valoare maximă",
     // "Input type"
     inputType: "Tip intrare",
-    // "Option placeholder"
-    optionsCaption: "Locaș opțiune",
     // "Default Answer"
     defaultValue: "Răspuns implicit",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export const roStrings = {
     timerLocation: "Alinierea timerului",
     // "Timer mode"
     timerInfoMode: "Modul timerului",
-    // "Panel display mode"
-    renderMode: "Modul de afișare a panoului",
     // "Enable entry addition"
     allowAddPanel: "Permite adăugarea panoului",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export const roStrings = {
     // "Regular expression"
     regex: "Expresie regulată",
     surveyvalidator: {
-      // "Error message"
-      text: "Mesaj de eroare",
+      // [Auto-translated] "Validation message"
+      text: "Mesaj de validare",
       // [Auto-translated] "Validation expression"
-      expression: "Expresie de validare"
+      expression: "Expresie de validare",
+      // [Auto-translated] "Notification type"
+      notificationType: "Tip de notificare",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Lungime maximă (în caractere)"
     },
     // "Total row header"
     totalText: "Antet rând total",
@@ -1384,8 +1384,8 @@ export const roStrings = {
     labelFalse: "Etichetă pentru „Fals”",
     // "Show the Clear button"
     allowClear: "Afișează butonul de ștergere",
-    // "Search Mode"
-    searchMode: "Modul de căutare",
+    // [Auto-translated] "Search mode"
+    searchMode: "Mod de căutare",
     // "Display format"
     displayStyle: "Format de afișare",
     // "Formatted string"
@@ -1450,7 +1450,7 @@ export const roStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Afișarea etichetelor de scară",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Afișarea sfaturilor ecran",
+      tooltipVisibility: "Afișarea sfaturilor ecran",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Permiteți încrucișarea degetului mare",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export const roStrings = {
       // [Auto-translated] "Range"
       range: "Gama"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Întotdeauna",
+      // [Auto-translated] "Never"
+      never: "Niciodată"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Eroare",
+      // [Auto-translated] "Warning"
+      warning: "Avertisment",
+      // [Auto-translated] "Informational"
+      info: "Informaţionale"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nume complet",
@@ -2250,10 +2266,6 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Ascuns"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambele"
@@ -2693,7 +2705,9 @@ export const roStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou."
+      confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export const roStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă."
+      expression: "Utilizați pictograma baghetă magică pentru a defini când valoarea întrebării este considerată validă.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Erorile blochează progresul până la rezolvare. Avertismentele evidențiază problemele, dar permit continuarea. Notele informative oferă context suplimentar sau îndrumări neutre. Când utilizați avertismente sau note informative, vă recomandăm să activați validarea imediată: \"Sondaj\" → \"Validare\" → \"Validare rulare\" → \"După ce un răspuns s-a schimbat\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export const roStrings = {
     detailErrorLocation: "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Când proprietatea \"Preveniți răspunsurile duplicate\" este activată pentru o coloană matrice, un respondent care încearcă să trimită o intrare dublată va primi următorul mesaj de eroare."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export const roStrings = {
     fileOrPhotoPlaceholder: "Se aplică atunci când „Tip sursă fișier” este „Fișier local sau cameră”.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Aranjează opțiunile de alegere într-un layout pe mai multe coloane. Când este setat la 0, opțiunile sunt afișate pe un singur rând.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Aranjează casetele text într-un aspect cu mai multe coloane."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selectați dacă doriți să stocați valoarea întrebării cu o mască aplicată în rezultatele chestionarului."
@@ -3212,7 +3236,7 @@ export const roStrings = {
     // "Render as"
     renderAs: "Renderizare ca", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Atașați elementele originale", // Auto-generated string
+    attachData: "Atașați elementele originale", // Auto-generated string
     // "Choices"
     choices: "Opțiuni",
     // "Choices by url"

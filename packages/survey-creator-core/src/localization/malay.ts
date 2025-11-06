@@ -664,8 +664,6 @@ export var msStrings = {
       templateErrorLocation: "Penjajaran mesej ralat",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi kemasukan baharu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Tunjukkan bar kemajuan",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Elakkan respons pendua dalam soalan berikut"
     },
@@ -844,6 +842,8 @@ export var msStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Kosongkan yang lain apabila dipilih",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Paparkan kedua-dua teks dan nilai",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Memerlukan pengguna memasukkan komen",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var msStrings = {
     maxRateDescription: "Perihalan kadar maksimum",
     // "Input type"
     inputType: "Jenis input",
-    // "Option placeholder"
-    optionsCaption: "Kapsyen pilihan",
     // "Default Answer"
     defaultValue: "Nilai lalai",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var msStrings = {
     timerLocation: "Tunjukkan panel pemasa",
     // "Timer mode"
     timerInfoMode: "Tunjukkan mod panel pemasa",
-    // "Panel display mode"
-    renderMode: "Mod penyampaian",
     // "Enable entry addition"
     allowAddPanel: "Benarkan menambahkan panel",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var msStrings = {
     // "Regular expression"
     regex: "Ekspresi biasa",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Mesej ralat",
+      // [Auto-translated] "Validation message"
+      text: "Mesej pengesahan",
       // [Auto-translated] "Validation expression"
-      expression: "Ungkapan pengesahihan"
+      expression: "Ungkapan pengesahihan",
+      // [Auto-translated] "Notification type"
+      notificationType: "Jenis pemberitahuan",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Panjang maksimum (dalam aksara)"
     },
     // "Total row header"
     totalText: "Jumlah teks",
@@ -1384,8 +1384,8 @@ export var msStrings = {
     labelFalse: "Label \"Palsu\"",
     // "Show the Clear button"
     allowClear: "Tunjukkan kapsyen pilihan",
-    // [Auto-translated] "Search Mode"
-    searchMode: "Mod Carian",
+    // [Auto-translated] "Search mode"
+    searchMode: "Mod carian",
     // [Auto-translated] "Display format"
     displayStyle: "Format paparan",
     // [Auto-translated] "Formatted string"
@@ -1450,7 +1450,7 @@ export var msStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Tunjukkan label skala",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tunjukkan petua alat",
+      tooltipVisibility: "Tunjukkan petua alat",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Benarkan lintasan ibu jari",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var msStrings = {
       // [Auto-translated] "Range"
       range: "Pelbagai"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Sentiasa",
+      // [Auto-translated] "Never"
+      never: "Tidak pernah"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Ralat",
+      // [Auto-translated] "Warning"
+      warning: "Amaran",
+      // [Auto-translated] "Informational"
+      info: "Bermaklumat"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nama Penuh",
@@ -2250,10 +2266,6 @@ export var msStrings = {
     underRowSingle: "Di bawah baris, paparkan satu bahagian sahaja",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Tersembunyi"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Kedua-duanya"
@@ -2693,7 +2705,9 @@ export var msStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar entri."
+      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar entri.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Memperuntukkan nombor kepada soalan yang bersarang dalam panel dinamik."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var msStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah."
+      expression: "Gunakan ikon tongkat ajaib untuk menentukan bila nilai soalan dianggap sah.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Ralat menyekat kemajuan sehingga diselesaikan. Amaran menyerlahkan isu tetapi membenarkan untuk diteruskan. Nota maklumat menawarkan konteks tambahan atau panduan neutral. Apabila menggunakan amaran atau nota maklumat, kami mengesyorkan agar mendayakan pengesahan segera: \"Tinjauan\" → \"Pengesahan\" → \"Jalankan pengesahan\" → \"Selepas jawapan berubah\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var msStrings = {
     detailErrorLocation: "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Apabila sifat \"Cegah respons pendua\" didayakan untuk lajur matriks, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var msStrings = {
     fileOrPhotoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Menyusun kotak teks dalam susun atur berbilang lajur."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Pilih jika anda ingin menyimpan nilai soalan dengan topeng yang digunakan dalam hasil tinjauan."
@@ -3212,7 +3236,7 @@ export var msStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render sebagai", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Lampirkan item asal", // Auto-generated string
+    attachData: "Lampirkan item asal", // Auto-generated string
     // "Choices"
     choices: "pilihan",
     // "Choices by url"

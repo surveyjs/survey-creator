@@ -27,14 +27,14 @@ export abstract class StringItemsNavigatorBase {
   protected addNewItems(creator: SurveyCreatorModel, items: any, startIndex: number, itemsToAdd: string[]) {
     let newItems = items.slice();
     const createNewItem = (text: any): ItemValue => {
-      const val = creator.inplaceEditForValues ? text : getNextItemValue(creator.getChoicesItemBaseTitle(), newItems);
+      const val = creator.inplaceEditChoiceValues ? text : getNextItemValue(creator.getChoicesItemBaseTitle(), newItems);
       if (this.question.createItemValue) return this.question.createItemValue(val, text);
       return new ItemValue(val, text);
     };
 
     newItems.splice(startIndex, 1);
     itemsToAdd.forEach((item, offset) => {
-      if (creator.maximumChoicesCount <= 0 || newItems.length < creator.maximumChoicesCount) {
+      if (creator.maxChoices <= 0 || newItems.length < creator.maxChoices) {
         newItems.splice(startIndex + offset, 0, createNewItem(item));
       }
     });
@@ -126,7 +126,7 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
     return [this.question.choices];
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
-    if (creator.maximumChoicesCount && items.length >= creator.maximumChoicesCount) return;
+    if (creator.maxChoices && items.length >= creator.maxChoices) return;
     const itemValue = creator.createNewItemValue(this.question);
     if (!!text) itemValue.value = text;
   }
@@ -164,7 +164,7 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
     let titleBase: string;
     let propertyName: string;
     if (items == this.question.columns) {
-      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
+      if (creator.maxColumns && items.length >= creator.maxColumns) return;
       titleBase = "Column "; propertyName = "columns";
     }
     if (items == this.question.rows) {
@@ -192,7 +192,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     if (items == this.question.columns) {
-      if (creator.maximumColumnsCount && items.length >= creator.maximumColumnsCount) return;
+      if (creator.maxColumns && items.length >= creator.maxColumns) return;
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
       this.question.columns.push(column);
       creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
@@ -430,9 +430,13 @@ export class StringEditorViewModelBase extends Base {
   }
 
   private getClearedText(target: HTMLElement): string {
-    const html = target.innerHTML;
-    const text = target.innerText;
+    let html = target.innerHTML;
+    let text = target.innerText;
     let mdText = null;
+    if (this.creator && this.creator.trimValues && this.isInplaceForEditValues) {
+      html = html.trim();
+      text = text.trim();
+    }
     if (!this.editAsText && this.creator) {
       const options = {
         element: <Base><any>this.locString.owner,
@@ -475,9 +479,9 @@ export class StringEditorViewModelBase extends Base {
     return "";
   }
   private get isInplaceForEditValues(): boolean {
-    return !!this.creator && this.creator.inplaceEditForValues &&
+    return !!this.creator && this.creator.inplaceEditChoiceValues &&
       this.locString.owner instanceof ItemValue &&
-      this.creator.inplaceEditForValues &&
+      this.creator.inplaceEditChoiceValues &&
       ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) === -1;
   }
   private setValueIntoLocStr(clearedText: any, target: HTMLElement): void {

@@ -106,7 +106,7 @@ export const logicDetailButtonElement = Selector(".sl-table__detail-button").fil
 export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
 
 export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes") {
-  return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
+  return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text, .svc-tabbed-menu-item-container title").withText(text).filterVisible().parent();
 }
 export function getSelectOptionByText(text: string) {
   return Selector("option").withExactText(text).filterVisible();
@@ -203,7 +203,7 @@ export async function setShowAddQuestionButton(newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(newVal: boolean) {
   await ClientFunction((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   })(newVal);
 }
 export async function setExpandCollapseButtonVisibility(newVal: string) {

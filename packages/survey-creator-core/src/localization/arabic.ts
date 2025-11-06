@@ -664,8 +664,6 @@ export var arStrings = {
       templateErrorLocation: "محاذاة رسالة الخطأ",
       // [Auto-translated] "New entry location"
       newPanelPosition: "موقع دخول جديد",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "إظهار شريط التقدم",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -844,6 +842,8 @@ export var arStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "مسح الآخرين عند تحديده",
+    // [Auto-translated] "Display both text and value"
+    showValue: "عرض كل من النص والقيمة",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "مطالبة المستخدم بإدخال تعليق",
     // "Display area height"
@@ -1126,6 +1126,8 @@ export var arStrings = {
     storeDataAsText: "تخزين محتويات ملف JSON كنص",
     // "Maximum file size (in bytes)"
     maxSize: "أقصى حجم للملف بالبايت",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "الحد الأقصى لعدد الملفات",
     // "Row count"
     rowCount: "عدد الصفوف",
     // "Columns layout"
@@ -1152,8 +1154,6 @@ export var arStrings = {
     maxRateDescription: "وصف أكبر معدل",
     // "Input type"
     inputType: "نوع المدخل",
-    // "Option placeholder"
-    optionsCaption: "خيارات الشرح",
     // "Default Answer"
     defaultValue: "القيمة الإفتراضية",
     // "Default texts"
@@ -1270,8 +1270,6 @@ export var arStrings = {
     timerLocation: "إظهار لوحة المؤقت",
     // "Timer mode"
     timerInfoMode: "إظهار نمط لوحة المؤقت",
-    // "Panel display mode"
-    renderMode: "نمط العرض",
     // "Enable entry addition"
     allowAddPanel: "السماح بإضافة لوحة",
     // "Enable entry removal"
@@ -1321,10 +1319,14 @@ export var arStrings = {
     // "Regular expression"
     regex: "Regular expression",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "رسالة خطأ",
+      // [Auto-translated] "Validation message"
+      text: "رسالة التحقق من الصحة",
       // [Auto-translated] "Validation expression"
-      expression: "تعبير التحقق من الصحة"
+      expression: "تعبير التحقق من الصحة",
+      // [Auto-translated] "Notification type"
+      notificationType: "نوع الإشعار",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "الحد الأقصى للطول (بالأحرف)"
     },
     // "Total row header"
     totalText: "Total text",
@@ -1384,7 +1386,7 @@ export var arStrings = {
     labelFalse: "تسمية \"خطأ\"",
     // "Show the Clear button"
     allowClear: "إظهار الزر مسح",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "وضع البحث",
     // [Auto-translated] "Display format"
     displayStyle: "تنسيق العرض",
@@ -1450,7 +1452,7 @@ export var arStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "إظهار تسميات المقياس",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      tooltipVisibility: "عرض تلميحات الأدوات",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "السماح بعبور الإبهام",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2068,22 @@ export var arStrings = {
       // [Auto-translated] "Range"
       range: "نطاق"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "تلقائي",
+      // [Auto-translated] "Always"
+      always: "دوما",
+      // [Auto-translated] "Never"
+      never: "أبدا"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "خطأ",
+      // [Auto-translated] "Warning"
+      warning: "تحذير",
+      // [Auto-translated] "Informational"
+      info: "اعلاميه"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "الاسم الكامل",
@@ -2250,10 +2268,6 @@ export var arStrings = {
     underRowSingle: "أسفل الصف، اعرض قسما واحدا فقط",
     // "Auto"
     auto: "تلقائي",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "مخفي"
-    },
     timerInfoMode: {
       // "Both"
       combined: "كلا"
@@ -2693,7 +2707,9 @@ export var arStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال."
+      confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2769,9 @@ export var arStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة."
+      expression: "استخدم أيقونة العصا السحرية لتحديد متى تعتبر قيمة السؤال صالحة.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "تمنع الأخطاء التقدم حتى يتم حلها. تبرز التحذيرات المشكلات ولكنها تسمح بالمتابعة. توفر الملاحظات الإعلامية سياقا إضافيا أو إرشادات محايدة. عند استخدام التحذيرات أو الملاحظات الإعلامية، نوصي بتمكين التحقق الفوري: \"الاستطلاع\" → \"التحقق من الصحة\" → \"تشغيل التحقق من الصحة\" → \"بعد تغيير الإجابة\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2942,10 @@ export var arStrings = {
     detailErrorLocation: "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\" لعمود مصفوفة، سيتلقى المستجيب الذي يحاول إرسال إدخال مكرر رسالة الخطأ التالية."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3104,10 @@ export var arStrings = {
     fileOrPhotoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "لترتيب مربعات النص في تخطيط متعدد الأعمدة."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "حدد ما إذا كنت تريد تخزين قيمة السؤال باستخدام قناع مطبق في نتائج الاستطلاع."
@@ -3212,7 +3238,7 @@ export var arStrings = {
     // [Auto-translated] "Render as"
     renderAs: "عرض ك", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "إرفاق العناصر الأصلية", // Auto-generated string
+    attachData: "إرفاق العناصر الأصلية", // Auto-generated string
     // "Choices"
     choices: "الإختيارات",
     // "Choices by url"

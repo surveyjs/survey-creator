@@ -664,8 +664,6 @@ export var htStrings = {
       templateErrorLocation: "Erè mesaj aliyman",
       // "New entry location"
       newPanelPosition: "Nouvo kote panèl",
-      // "Show the progress bar"
-      showRangeInProgress: "Montre ba pwogrè a",
       // "Prevent duplicate responses in the following question"
       keyName: "Anpeche repons doub nan kesyon sa a"
     },
@@ -844,6 +842,8 @@ export var htStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Klè lòt moun lè yo chwazi yo",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Montre tou de tèks ak valè",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Mande pou itilizatè antre nan yon kòmantè",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var htStrings = {
     maxRateDescription: "Maksimòm valè etikèt",
     // "Input type"
     inputType: "Kalite Antre",
-    // "Option placeholder"
-    optionsCaption: "Anplasman opsyon",
     // "Default Answer"
     defaultValue: "Repons Default",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var htStrings = {
     timerLocation: "Aliyman revèy",
     // "Timer mode"
     timerInfoMode: "Mòd revèy",
-    // "Panel display mode"
-    renderMode: "Mòd ekspozisyon panèl",
     // "Enable entry addition"
     allowAddPanel: "Pèmèt adisyon panèl",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var htStrings = {
     // "Regular expression"
     regex: "Ekspresyon regilye",
     surveyvalidator: {
-      // "Error message"
-      text: "Mesaj erè",
+      // [Auto-translated] "Validation message"
+      text: "Mesaj validasyon an",
       // [Auto-translated] "Validation expression"
-      expression: "Ekspresyon validasyon"
+      expression: "Ekspresyon validasyon",
+      // [Auto-translated] "Notification type"
+      notificationType: "Kalite notifikasyon",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Longè maksimòm (nan karaktè)"
     },
     // "Total row header"
     totalText: "Total ranje tèt",
@@ -1384,8 +1384,8 @@ export var htStrings = {
     labelFalse: "Mete etikèt sou \"Fo\"",
     // "Show the Clear button"
     allowClear: "Montre bouton an klè",
-    // "Search Mode"
-    searchMode: "Mode rechèch",
+    // [Auto-translated] "Search mode"
+    searchMode: "Rechèch mòd",
     // "Display format"
     displayStyle: "Fòma ekspozisyon",
     // "Formatted string"
@@ -1450,7 +1450,7 @@ export var htStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Montre etikèt echèl",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Montre zouti",
+      tooltipVisibility: "Montre zouti",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Pèmèt travèse gwo pous",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var htStrings = {
       // [Auto-translated] "Range"
       range: "Pòte"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Oto",
+      // [Auto-translated] "Always"
+      always: "Toujou",
+      // [Auto-translated] "Never"
+      never: "Janm"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Erè",
+      // [Auto-translated] "Warning"
+      warning: "Avètisman",
+      // [Auto-translated] "Informational"
+      info: "Enfòmasyon"
+    },
     autocomplete: {
       // "Full Name"
       name: "Non konplè",
@@ -2250,10 +2266,6 @@ export var htStrings = {
     underRowSingle: "Anba ranje a, montre yon sèl ekspansyon ranje sèlman",
     // "Auto"
     auto: "Oto",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Kache"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Tou de"
@@ -2693,7 +2705,9 @@ export var htStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl."
+      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Asiyen nimewo nan kesyon ki enbrike nan panèl dinamik la."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var htStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab."
+      expression: "Sèvi ak icon majik la pou defini lè valè kesyon an konsidere valab.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Erè bloke pwogrè jiskaske rezoud Avètisman mete aksan sou pwoblèm men pèmèt yo kontinye Nòt enfòmasyon yo ofri kontèks adisyonèl oswa konsèy net. Lè w ap itilize avètisman oswa nòt enfòmasyon, nou rekòmande pou pèmèt validasyon imedyat: \"Sondaj\" → \"Validasyon\" → \"Kouri validasyon\" → \"Apre yon repons te chanje\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var htStrings = {
     detailErrorLocation: "Fikse kote mesaj erè yo pou kesyon ki enbrike nan seksyon detay yo. Opsyon \"Eritye\" aplike paramèt ki soti nan pwopriyete \"Aliyman mesaj erè\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Lè pwopriyete \"Anpeche repons kopi\" yo aktive, yon moun ki reponn ap eseye soumèt yon kopi kopi ap resevwa mesaj erè sa a.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Lè pwopriyete \"Anpeche repons kopi\" pèmèt pou yon kolòn matris, yon repond ki ap eseye soumèt yon antre kopi ap resevwa mesaj erè sa a."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Pèmèt ou kalkile valè total ki baze sou yon ekspresyon. Ekspresyon an ka gen ladan kalkil debaz (`{q1_id} + {q2_id}`), ekspresyon booleyen (`{age} > 60`) ak fonksyon ('iif()`, `jodi a ()`, `age ()`, `min()`, `max()`, `avg()`, elatriye).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var htStrings = {
     fileOrPhotoPlaceholder: "Aplike lè \"Tip sous dosye\" se \"Fichiye lokal oswa kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Fè aranjman pou chwa chwa nan yon layout milti-kolòn. Lè yo mete sou 0, opsyon yo parèt sou yon sèl liy.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Ranje bwat tèks nan yon Layout milti-kolòn"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Chwazi si ou vle estoke valè kesyon an ak yon mask aplike nan rezilta sondaj yo."
@@ -3212,7 +3236,7 @@ export var htStrings = {
     // "Render as"
     renderAs: "Rann kòm", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Tache atik orijinal yo", // Auto-generated string
+    attachData: "Tache atik orijinal yo", // Auto-generated string
     // "Choices"
     choices: "Chwa",
     // "Choices by url"

@@ -1,6 +1,9 @@
 import { SurveyCreatorModel } from "./creator-base";
 import "./responsivity.scss";
+import { TabbedMenuMode } from "./tabbed-menu";
 import { DomWindowHelper } from "./utils/global_variables_utils";
+
+interface IProcessOptions { toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean, narrowSidebar: boolean, tabbedMenuIsCompact: boolean }
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
@@ -60,29 +63,28 @@ export class CreatorResponsivityManager {
       });
       this.resizeObserver.observe(this.findCorrectParent(this.container));
       this.process(true);
-      if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
-        this.creator.setShowSidebar(false);
-      }
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean, narrowSidebar: boolean) {
-    this.creator.updateToolboxIsCompact(toolboxIsCompact);
-    this.procesShowToolbox(toolboxVisible);
-    this.procesShowPageNavigator(toolboxVisible);
-    this.procesShowSurfaceToolbar(toolboxVisible);
+  private _process(options: IProcessOptions) {
+    this.creator.updateToolboxIsCompact(options.toolboxIsCompact);
+    this.procesShowToolbox(options.toolboxVisible);
+    this.procesShowPageNavigator(options.toolboxVisible);
+    this.procesShowSurfaceToolbar(options.toolboxVisible);
 
-    if (this.creator.sidebar.visible && !flyoutSidebar) {
+    if (this.creator.sidebar.visible && !options.flyoutSidebar) {
       this.creator.sidebar.collapsedManually = false;
     }
-    if (this.creator.sidebar.visible && !this.creator.sidebar.expandedManually && flyoutSidebar && this.creator.toolboxLocation != "right") {
+    if (this.creator.sidebar.visible && !this.creator.sidebar.expandedManually && options.flyoutSidebar && this.creator.toolboxLocation != "right") {
       this.creator.sidebar.collapseSidebar();
     }
-    if (!this.creator.sidebar.visible && !this.creator.sidebar.collapsedManually && !flyoutSidebar && this.creator.toolboxLocation != "right") {
+    if (!this.creator.sidebar.visible && !this.creator.sidebar.collapsedManually && !options.flyoutSidebar && this.creator.toolboxLocation != "right") {
       this.creator.sidebar.expandSidebar();
     }
-    this.creator.sidebar.flyoutMode = flyoutSidebar;
-    this.creator.sidebar.narrowMode = narrowSidebar;
+    this.creator.sidebar.flyoutMode = options.flyoutSidebar;
+    this.creator.sidebar.narrowMode = options.narrowSidebar;
+
+    this.creator.tabbedMenu.setMode(options.tabbedMenuIsCompact ? TabbedMenuMode.Icons : TabbedMenuMode.Titles);
   }
   public process(isFirst: boolean = false) {
     if (isFirst) {
@@ -92,13 +94,13 @@ export class CreatorResponsivityManager {
     this.updateSurveyActualWidth();
     this.currentWidth = this.getScreenWidth();
     if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
-      this._process(false, true, false, false);
+      this._process({ toolboxIsCompact: false, toolboxVisible: true, flyoutSidebar: false, narrowSidebar: false, tabbedMenuIsCompact: false });
     } else if (this.currentWidth === "l") {
-      this._process(true, true, false, true);
+      this._process({ toolboxIsCompact: true, toolboxVisible: true, flyoutSidebar: false, narrowSidebar: true, tabbedMenuIsCompact: false });
     } else if (this.currentWidth === "m") {
-      this._process(true, true, true, false);
+      this._process({ toolboxIsCompact: true, toolboxVisible: true, flyoutSidebar: true, narrowSidebar: false, tabbedMenuIsCompact: false });
     } else {
-      this._process(true, false, true, false);
+      this._process({ toolboxIsCompact: true, toolboxVisible: false, flyoutSidebar: true, narrowSidebar: false, tabbedMenuIsCompact: true });
     }
 
     if (this.currentWidth == "xs") {

@@ -36,7 +36,7 @@ function getSurveyJson(): any {
       {
         name: "page1",
         title: "Page 1",
-        questions: [
+        elements: [
           { type: "text", name: "question1" },
           {
             name: "question2",
@@ -49,10 +49,10 @@ function getSurveyJson(): any {
           }
         ]
       },
-      { name: "page2", questions: [{ name: "question3", type: "comment" }] },
+      { name: "page2", elements: [{ name: "question3", type: "comment" }] },
       {
         name: "page3",
-        questions: [
+        elements: [
           {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
@@ -123,7 +123,7 @@ test("getNextItemText for simple text", (): any => {
 test("Set Text property", () => {
   const creator = new CreatorTester();
   const json = {
-    questions: [
+    elements: [
       {
         type: "checkbox",
         name: "car",
@@ -394,7 +394,7 @@ test("fast copy tests, copy a question", () => {
     creator.survey.pages[0].addNewQuestion("text", "question1")
   );
   q1.placeholder = "I'm here";
-  creator.fastCopyQuestion(q1);
+  creator.copyQuestion(q1);
   expect(creator.survey.pages[0].questions).toHaveLength(2);
   const q2 = <QuestionTextModel>creator.survey.pages[0].questions[1];
   expect(q2.name).toEqual("question2");
@@ -410,7 +410,7 @@ test("fast copy tests, copy a panel with questions and a nested panel", () => {
   const p2 = p1.addNewPanel("panel2");
   const q2 = p2.addNewQuestion("text", "question2");
   (<any>creator.survey).selectedElement = p1;
-  creator.fastCopyQuestion(p1);
+  creator.copyQuestion(p1);
 
   expect(survey.pages[0].elements).toHaveLength(2);
   const newPanel = <PanelModel>survey.pages[0].elements[1];
@@ -452,7 +452,7 @@ test("fast copy tests, set the correct parent", () => {
   const p2 = p1.addNewPanel("panel2");
   const q2 = p2.addNewQuestion("text", "question2");
   creator.selectElement(q2);
-  creator.fastCopyQuestion(q2);
+  creator.copyQuestion(q2);
   expect(p2.questions).toHaveLength(2);
   const newQuestion = <QuestionTextModel>p2.questions[1];
   expect(newQuestion.name).toEqual("question3");
@@ -598,12 +598,12 @@ test("Do not allow to select page object", () => {
   const question = creator.survey.getQuestionByName("question1");
   creator.selectedElement = question;
   expect(creator.selectedElement["name"]).toEqual("question1");
-  creator.onSelectedElementChanging.add(function (c, options) {
+  creator.onElementSelecting.add(function (c, options) {
     if (
-      options.newSelectedElement != null &&
-      options.newSelectedElement.getType() == "page"
+      options.element != null &&
+      options.element.getType() == "page"
     ) {
-      options.newSelectedElement = creator.survey;
+      options.element = creator.survey;
     }
   });
   creator.selectedElement = creator.survey.pages[0];
@@ -613,10 +613,10 @@ test("Do not allow to select page object", () => {
 test("Do not allow to select page/survey objects", () => {
   const creator = new CreatorTester();
   creator.JSON = getSurveyJson();
-  creator.onSelectedElementChanging.add(function (c, options) {
-    const el = options.newSelectedElement;
+  creator.onElementSelecting.add(function (c, options) {
+    const el = options.element;
     if (!el || el.getType() == "page" || el.getType() == "survey") {
-      options.newSelectedElement =
+      options.element =
         creator.survey.getAllQuestions().length > 0
           ? creator.survey.getAllQuestions()[0]
           : null;
@@ -786,7 +786,7 @@ test("generate element name based on another survey", () => {
 
 test("creator.onConditionQuestionsGetList, Bug#957", () => {
   const creator = new CreatorTester();
-  creator.onConditionQuestionsGetList.add(function (sender, options) {
+  creator.onConditionGetQuestionList.add(function (sender, options) {
     options.list = options.list.filter(
       (item) => item.question.getType() === "text"
     );
@@ -812,7 +812,7 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
 });
 test("creator.onConditionQuestionsGetList, sortOrder", () => {
   const creator = new CreatorTester();
-  creator.onConditionQuestionsGetList.add(function (sender, options) {
+  creator.onConditionGetQuestionList.add(function (sender, options) {
     options.sortOrder = "none";
     options.list = options.list.filter(
       (item) => item.question.getType() === "text"
@@ -840,14 +840,13 @@ test("creator.onConditionQuestionsGetList, sortOrder", () => {
   expect(questionValue.choices[1].value).toEqual("q2");
 });
 
-test("creator.onGetObjectDisplayName, change visible name for objects", () => {
+test("creator.onElementGetDisplayName, change visible name for objects", () => {
   const creator = new CreatorTester();
   let reason = "";
   let area = "";
   creator.onElementGetDisplayName.add(function (sender, options) {
-    reason = options.reason;
     area = options.area;
-    options.displayName = options.obj.title + " [" + options.obj.name + "]";
+    options.displayName = options.element.title + " [" + options.element.name + "]";
   });
   creator.JSON = {
     elements: [
@@ -872,20 +871,20 @@ test("creator.onGetObjectDisplayName, change visible name for objects", () => {
 });
 
 test(
-  "use creator.onGetObjectDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
+  "use creator.onElementGetDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
   () => {
     const creator = new CreatorTester();
     creator.onElementGetDisplayName.add(function (sender, options) {
-      if (options.reason === "property-grid" && options.area === "property-grid-header:element-list") {
-        if (!!options.obj.title) {
-          options.displayName = options.obj.title;
+      if (options.area === "property-grid-header:element-list") {
+        if (!!options.element.title) {
+          options.displayName = options.element.title;
         }
-        if (!!options.obj.description) {
-          options.displayName = options.obj.description;
+        if (!!options.element.description) {
+          options.displayName = options.element.description;
         }
       }
-      if (options.reason === "property-grid-title" && options.area === "property-grid-header:selected-element") {
-        options.displayName = options.obj.name + " Properties";
+      if (options.area === "property-grid-header:selected-element") {
+        options.displayName = options.element.name + " Properties";
       }
     });
     creator.JSON = {
@@ -915,8 +914,8 @@ test(
   }
 );
 
-test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
-  const creator = new CreatorTester({ maxLogicItemsInCondition: 2 });
+test("creator options.logicMaxItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+  const creator = new CreatorTester({ logicMaxItemsInCondition: 2 });
   creator.JSON = {
     elements: [
       { name: "q1", type: "text" },
@@ -1002,7 +1001,7 @@ test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () =>
   };
   let model;
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.reason === "condition-builder") {
+    if (options.area === "logic-rule:condition-editor") {
       model = options.model;
     }
   });
@@ -1185,7 +1184,7 @@ test("onModified options", () => {
 });
 test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
   const creator = new CreatorTester();
-  creator.showObjectTitles = true;
+  creator.useElementTitles = true;
   creator.JSON = getSurveyJson();
   const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");
@@ -1213,7 +1212,7 @@ test(
 test("creator getMenuItems should respect property readOnly - https://github.com/surveyjs/survey-creator/issues/1024", () => {
   const creator = new CreatorTester(undefined);
   const question = new QuestionTextModel("qt");
-  creator.onGetPropertyReadOnly.add(function (sender, options) {
+  creator.onPropertyGetReadOnly.add(function (sender, options) {
     if (options.property.name == "isRequired") {
       options.readOnly = true;
     }

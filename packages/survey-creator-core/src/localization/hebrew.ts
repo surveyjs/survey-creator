@@ -664,8 +664,6 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       // [Auto-translated] "New entry location"
       newPanelPosition: "מיקום כניסה חדש",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "הצגת מד ההתקדמות",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -844,6 +842,8 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
+    // [Auto-translated] "Display both text and value"
+    showValue: "הצגת טקסט וערך",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "דרישת המשתמש להזין הערה",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var hebrewStrings = {
     maxRateDescription: "תיאור ערך מקסימלי לדרגה",
     // "Input type"
     inputType: "סוג הקלט",
-    // "Option placeholder"
-    optionsCaption: "טקסט מציין אפשרויות",
     // "Default Answer"
     defaultValue: "תשובת ברירת המחדל",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var hebrewStrings = {
     timerLocation: "מיקום הטיימר",
     // "Timer mode"
     timerInfoMode: "מצב הטיימר",
-    // "Panel display mode"
-    renderMode: "מצב תצוגת הפאנל",
     // "Enable entry addition"
     allowAddPanel: "אפשר הוספת פאנלים",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var hebrewStrings = {
     // "Regular expression"
     regex: "ביטוי רגולרי",
     surveyvalidator: {
-      // "Error message"
-      text: "הודעת שגיאה",
+      // [Auto-translated] "Validation message"
+      text: "הודעת אימות",
       // [Auto-translated] "Validation expression"
-      expression: "ביטוי אימות"
+      expression: "ביטוי אימות",
+      // [Auto-translated] "Notification type"
+      notificationType: "סוג הודעה",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "אורך מרבי (בתווים)"
     },
     // "Total row header"
     totalText: "טקסט לשורת סיכום",
@@ -1384,7 +1384,7 @@ export var hebrewStrings = {
     labelFalse: "תוית 'לא נכון'",
     // "Show the Clear button"
     allowClear: "הצג את לחצן הניקוי",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "מצב חיפוש",
     // "Display format"
     displayStyle: "סגנון תצוגת ערך",
@@ -1450,7 +1450,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "הצגת תוויות קנה מידה",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "הצגת תיאורי כלים",
+      tooltipVisibility: "הצגת תיאורי כלים",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "אפשר חציית אגודל",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var hebrewStrings = {
       // [Auto-translated] "Range"
       range: "טווח"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "אוטומטי",
+      // [Auto-translated] "Always"
+      always: "תמיד",
+      // [Auto-translated] "Never"
+      never: "אף פעם"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "שגיאה",
+      // [Auto-translated] "Warning"
+      warning: "אזהרה",
+      // [Auto-translated] "Informational"
+      info: "אינפורמטיבי"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "שם מלא",
@@ -2250,10 +2266,6 @@ export var hebrewStrings = {
     underRowSingle: "מתחת לשורה, עם פאנל יחיד בלבד",
     // "Auto"
     auto: "אוטומטי",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "מוסתר"
-    },
     timerInfoMode: {
       // "Both"
       combined: "שני הצדדים"
@@ -2693,7 +2705,9 @@ export var hebrewStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך."
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var hebrewStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "השתמש בסמל שרביט הקסמים כדי להגדיר מתי ערך השאלה נחשב חוקי."
+      expression: "השתמש בסמל שרביט הקסמים כדי להגדיר מתי ערך השאלה נחשב חוקי.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "שגיאות חוסמות את ההתקדמות עד לפתרון. אזהרות מדגישות בעיות אך מאפשרות להמשיך. הערות מידע מציעות הקשר נוסף או הדרכה ניטרלית. בעת שימוש באזהרות או הערות מידע, אנו ממליצים להפעיל אימות מיידי: \"סקר\" → \"אימות\" → \"הפעל אימות\" →\"לאחר שינוי תשובה\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var hebrewStrings = {
     detailErrorLocation: "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" זמין עבור עמודת מטריצה, משיב המנסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var hebrewStrings = {
     fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "סידור תיבות טקסט בפריסה מרובת עמודות."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
@@ -3212,7 +3236,7 @@ export var hebrewStrings = {
     // "Render as"
     renderAs: "תצוגה כ", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "צרף פריטים מקוריים", // Auto-generated string
+    attachData: "צרף פריטים מקוריים", // Auto-generated string
     // "Choices"
     choices: "בחירות",
     // "Choices by url"

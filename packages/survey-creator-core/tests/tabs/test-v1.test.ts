@@ -25,9 +25,9 @@ test("pages, active", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { name: "page1", questions: [{ type: "text", name: "q1" }] },
-      { name: "page2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] },
+      { name: "page3", elements: [{ type: "text", name: "q3" }] }
     ]
   };
   var model = getTestModel(creator);
@@ -44,9 +44,9 @@ test("pages, visibility", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
-      { questions: [{ type: "text", name: "q1" }] },
-      { questions: [{ type: "text", name: "q2", visible: false }] },
-      { questions: [{ type: "text", name: "q3" }] }
+      { elements: [{ type: "text", name: "q1" }] },
+      { elements: [{ type: "text", name: "q2", visible: false }] },
+      { elements: [{ type: "text", name: "q3" }] }
     ]
   };
   var model = getTestModel(creator);
@@ -92,9 +92,9 @@ test("Use title for pages", (): any => {
     ]
   };
   expect(creator.survey.pages).toHaveLength(2);
-  creator.showObjectTitles = true;
-  creator.onGetObjectDisplayName.add(function (sender, options) {
-    if (options.obj.name == "p2") options.displayName = "My Second Page";
+  creator.useElementTitles = true;
+  creator.onElementGetDisplayName.add(function (sender, options) {
+    if (options.element.name == "p2") options.displayName = "My Second Page";
   });
   var model = getTestModel(creator);
   expect(model.survey.pages).toHaveLength(2);
@@ -103,17 +103,17 @@ test("Use title for pages", (): any => {
   expect(model.pageListItems[1].title).toEqual("My Second Page");
 });
 
-test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
+test("previewAllowSelectLanguage: auto, true, false, all", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1"
       }
     ]
   };
-  expect(creator.showDefaultLanguageInTestSurveyTab).toEqual("auto");
+  expect(creator.previewAllowSelectLanguage).toEqual("auto");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   const languageSelectorAction = testPlugin["languageSelectorAction"];
   const languageSelectorActionList = languageSelectorAction.data;
@@ -121,14 +121,14 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   testPlugin.activate();
   expect(languageSelectorAction.visible).toBeFalsy();
 
-  creator.showDefaultLanguageInTestSurveyTab = true;
+  creator.previewAllowSelectLanguage = true;
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeTruthy();
   expect(languageSelectorActionList.actions.length > 10).toBeTruthy();
 
-  creator.showDefaultLanguageInTestSurveyTab = "auto";
+  creator.previewAllowSelectLanguage = "auto";
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",
@@ -143,17 +143,17 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   expect(languageSelectorActionList.actions[1].id).toEqual("de");
   expect(languageSelectorActionList.actions[1].title).toEqual("Deutsch");
 
-  creator.showDefaultLanguageInTestSurveyTab = true;
+  creator.previewAllowSelectLanguage = true;
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeTruthy();
   expect(languageSelectorActionList.actions).toHaveLength(2);
 
-  creator.showDefaultLanguageInTestSurveyTab = false;
+  creator.previewAllowSelectLanguage = false;
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeFalsy();
   expect(languageSelectorActionList.actions).toHaveLength(0);
 
-  creator.showDefaultLanguageInTestSurveyTab = "all";
+  creator.previewAllowSelectLanguage = "all";
   testPlugin.update();
   expect(languageSelectorAction.visible).toBeTruthy();
   expect(languageSelectorActionList.actions.length > 10).toBeTruthy();

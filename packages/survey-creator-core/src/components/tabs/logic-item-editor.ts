@@ -140,6 +140,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           name: "panel",
           title: getLogicString("actionsEditorTitle"),
           titleLocation: "hidden",
+          templateQuestionTitleLocation: "hidden",
           addPanelText: getLogicString("addNewAction"),
           removePanelButtonLocation: "right",
           panelCount: 0,
@@ -154,7 +155,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
-              optionsCaption: getLogicString("selectedActionCaption"),
+              placeholder: getLogicString("selectedActionCaption"),
               requiredErrorText: this.getLocString("pe.conditionActionEmpty")
             },
             {
@@ -183,7 +184,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
-              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,
@@ -332,7 +332,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onGetQuestionTitleActions(options: any) {
     if (options.question.name === "setValue") {
-      options.titleActions = [];
+      options.actions = [];
     }
   }
 
@@ -492,7 +492,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!logicType.hasSelectorChoices) return [];
     const elements = logicType.getSelectorChoices(this.survey, this.context);
     const res = [];
-    const showTitles = this.options.useElementTitles || this.options.showTitlesInExpressions;
+    const showTitles = this.options.useElementTitles;
     for (let i = 0; i < elements.length; i++) {
       let namePrefix = "";
       let textPrefix = "";

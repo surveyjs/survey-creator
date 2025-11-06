@@ -65,26 +65,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    if (
-      surveyElement.isQuestion &&
-      !!surveyElement["setCanShowOptionItemCallback"]
-    ) {
-      (<any>surveyElement).setCanShowOptionItemCallback(
-        (item: ItemValue): boolean => {
-          if (creator.readOnly) return false;
-          if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
-          return (
-            creator.maximumChoicesCount < 1 ||
-            surveyElement["choices"].length < creator.maximumChoicesCount
-          );
-        }
-      );
-    }
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     StringItemsNavigatorBase.setQuestion(this);
   }
-
+  protected onElementTypeRestrictionChanged(elType: string): void {
+    super.onElementTypeRestrictionChanged(elType);
+    if (this.currentAddQuestionType === elType) {
+      this.currentAddQuestionType = "";
+    }
+  }
   protected canSelectElement(): boolean {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
@@ -246,17 +236,48 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
+      if (this.surveyElement instanceof QuestionHtmlModel) {
+        surveyElement.unRegisterFunctionOnPropertyValueChanged("html", "isEmptyAdorner");
+      }
+      if (this.surveyElement instanceof PanelModelBase) {
+        surveyElement.unRegisterFunctionOnPropertiesValueChanged(["rows", "elements"], "isEmptyAdorner");
+      }
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
       }
     }
+    this.resetPropertyValue("isEmptyElement");
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
     super.attachElement(surveyElement);
     if (surveyElement) {
+      if (
+        surveyElement.isQuestion &&
+        !!surveyElement["setCanShowOptionItemCallback"]
+      ) {
+        (<any>surveyElement).setCanShowOptionItemCallback(
+          (item: ItemValue): boolean => {
+            if (this.creator.readOnly) return false;
+            if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
+            return (
+              this.creator.maxChoices < 1 || surveyElement["choices"].length < this.creator.maxChoices
+            );
+          }
+        );
+      }
+      if (this.surveyElement instanceof QuestionHtmlModel) {
+        surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {
+          this.updateIsEmptyElement();
+        }, "isEmptyAdorner");
+      }
+      if (this.surveyElement instanceof PanelModelBase) {
+        surveyElement.registerFunctionOnPropertiesValueChanged(["rows", "elements"], (newValue: any) => {
+          this.updateIsEmptyElement();
+        }, "isEmptyAdorner");
+      }
       surveyElement.registerFunctionOnPropertyValueChanged("isRequired", (newValue: any) => {
         if (this.isActionContainerCreated) {
           const requiredAction = this.actionContainer.getActionById("isrequired");
@@ -330,7 +351,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
     this.updateActionVisibilityByProp("isrequired", "isRequired", operationsAllow && options.allowChangeRequired);
     this.updateActionVisibilityByProp("convertInputType", "inputType", options.allowChangeInputType);
-    this.updateActionVisibilityByProp("convertInputType", "rateDisplayMode", options.allowChangeInputType);
+    this.updateActionVisibilityByProp("convertInputType", "rateType", options.allowChangeInputType);
   }
   private updateActionVisibilityByProp(actionName: string, propName: string, allow: boolean): void {
     const prop = Serializer.findProperty(this.surveyElement.getType(), propName);
@@ -338,19 +359,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
     this.updateActionVisibility(actionName, allow && !isPropReadOnly);
   }
-  public get isEmptyElement(): boolean {
+  get isEmptyElement(): boolean {
+    return this.getPropertyValue("isEmptyElement", undefined, () => this.getIsEmptyElement());
+  }
+  set isEmptyElement(val: boolean) {
+    this.setPropertyValue("isEmptyElement", val);
+  }
+  protected getIsEmptyElement(): boolean {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return !this.surveyElement.html;
     }
-
     if (this.surveyElement instanceof PanelModelBase) {
       const panel = this.surveyElement as any as PanelModelBase;
-      return (
-        !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0
-      );
+      return !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0;
     }
-
     return false;
+  }
+  protected updateIsEmptyElement() {
+    this.isEmptyElement = this.getIsEmptyElement();
   }
   public get isEmptyTemplate(): boolean {
     if (this.surveyElement instanceof QuestionPanelDynamicModel) {
@@ -674,6 +700,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
         listModel.flushUpdates();
+        newAction.popupModel.isFocusedContent = listModel.showFilter;
       }
     });
     const listModel = newAction.popupModel.contentComponentData.model;

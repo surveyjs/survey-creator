@@ -1,5 +1,5 @@
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-import { ItemValue, QuestionRadiogroupModel, QuestionDropdownModel, QuestionTextBase, Serializer } from "survey-core";
+import { ItemValue, QuestionRadiogroupModel, QuestionDropdownModel, QuestionTextBase, Serializer, settings } from "survey-core";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 
 test("Create survey with editingObj", () => {
@@ -15,6 +15,25 @@ test("Create survey with editingObj", () => {
   expect(originalElement.choices[0].text).toEqual("item1");
   expect(originalElement.choices[3].value).toEqual("4");
   expect(originalElement.choices[3].text).toEqual("item4");
+});
+test("Different survey settings.ItemValueSeparator", () => {
+  const originalElement = new QuestionRadiogroupModel("originalElement");
+  originalElement.choices = [1, 2, 3];
+
+  settings.itemValueSeparator = "";
+  const fastEntryEditor = new FastEntryEditor(originalElement.choices);
+  fastEntryEditor.comment.value = "3|item3";
+  fastEntryEditor.apply();
+  expect(originalElement.choices).toHaveLength(1);
+  expect(originalElement.choices[0].value).toEqual(3);
+  expect(originalElement.choices[0].text).toEqual("item3");
+  settings.itemValueSeparator = ";";
+  fastEntryEditor.comment.value = "2;item2";
+  fastEntryEditor.apply();
+  expect(originalElement.choices).toHaveLength(1);
+  expect(originalElement.choices[0].value).toEqual("2");
+  expect(originalElement.choices[0].text).toEqual("item2");
+  settings.itemValueSeparator = "|";
 });
 
 test("Check unique value in itemValue", () => {
@@ -45,11 +64,11 @@ test("Check unique value in itemValue", () => {
 
   propValue.isUnique = oldUnique;
 });
-test("options.minimumChoicesCount in FastEntry editor", () => {
+test("options.minChoices in FastEntry editor", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");
   originalElement.choices = [1, 2, 3];
   const options = new EmptySurveyCreatorOptions();
-  options.minimumChoicesCount = 3;
+  options.minChoices = 3;
   var fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
   fastEntryEditor.comment.value = "1|item1\n2\n";
   var result = fastEntryEditor.apply();
@@ -63,11 +82,11 @@ test("options.minimumChoicesCount in FastEntry editor", () => {
   expect(result).toBeTruthy();
   expect(fastEntryEditor.comment.errors).toHaveLength(0);
 });
-test("options.maximumChoicesCount in FastEntry editor", () => {
+test("options.maxChoices in FastEntry editor", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");
   originalElement.choices = [1, 2];
   const options = new EmptySurveyCreatorOptions();
-  options.maximumChoicesCount = 3;
+  options.maxChoices = 3;
   var fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
   fastEntryEditor.comment.value = "1|item1\n2\n3\n4|item4";
   var result = fastEntryEditor.apply();

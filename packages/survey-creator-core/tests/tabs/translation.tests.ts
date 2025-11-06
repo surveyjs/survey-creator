@@ -327,8 +327,8 @@ test("Translation show All strings and property visibility, #1", () => {
       }
     ]
   };
-  creator.onShowingProperty.add((sender, options) => {
-    options.canShow = ["title", "completedHtml"].indexOf(options.property.name) > -1;
+  creator.onPropertyShowing.add((sender, options) => {
+    options.show = ["title", "completedHtml"].indexOf(options.property.name) > -1;
   });
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
@@ -338,14 +338,14 @@ test("Translation show All strings and property visibility, #1", () => {
   translation.showAllStrings = true;
   expect(translation.root.locItems).toHaveLength(2);
 });
-test("Translation tab & onShowingProperty errror. We should not have errors, #5869", () => {
+test("Translation tab & onPropertyShowing errror. We should not have errors, #5869", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "question1", choices: ["item1", "item2"] }]
   };
-  creator.onShowingProperty.add((sender, options) => {
-    if (options.obj.getType() == "survey") {
-      options.canShow = options.property.name == "title";
+  creator.onPropertyShowing.add((sender, options) => {
+    if (options.element.getType() == "survey") {
+      options.show = options.property.name == "title";
     }
   });
   const tabTranslation = new TabTranslationPlugin(creator);
@@ -903,9 +903,9 @@ test("onTranslationStringVisibility", () => {
   const creator = new CreatorTester();
   creator.JSON = surveyJson;
   creator.onTranslationStringVisibility.add((sender, options) => {
-    if (options.obj.getType() == "survey" && options.propertyName === "title") {
+    if (options.element.getType() == "survey" && options.propertyName === "title") {
       options.visible = false;
-    } else if (options.obj["name"] === "question1" && options.propertyName === "title") {
+    } else if (options.element["name"] === "question1" && options.propertyName === "title") {
       options.visible = false;
     } else {
       options.visible = true;

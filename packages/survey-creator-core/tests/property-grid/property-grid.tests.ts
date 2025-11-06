@@ -2,7 +2,8 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
   PropertyGridEditorBoolean,
-  IPropertyGridEditor
+  IPropertyGridEditor,
+  PropertyGridModel
 } from "../../src/property-grid";
 import {
   Base,
@@ -166,8 +167,8 @@ test("dropdown property editor localization", (): any => {
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
-  expect(localeQuestion.showOptionsCaption).toBeTruthy();
-  expect(localeQuestion.optionsCaption).toEqual("Default (English)");
+  expect(localeQuestion.allowClear).toBeTruthy();
+  expect(localeQuestion.placeholder).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
 });
 test("dropdown property editor localization & empty supportedLocales", (): any => {
@@ -181,8 +182,8 @@ test("dropdown property editor localization & empty supportedLocales", (): any =
   );
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.choices).toHaveLength(0);
-  expect(localeQuestion.showOptionsCaption).toBeTruthy();
-  expect(localeQuestion.optionsCaption).toEqual("Default (English)");
+  expect(localeQuestion.allowClear).toBeTruthy();
+  expect(localeQuestion.placeholder).toEqual("Default (English)");
   expect(localeQuestion.displayValue).toEqual("Default (English)");
   surveyLocalization.supportedLocales = oldSupportedLocales;
 });
@@ -639,7 +640,7 @@ test("Support property visibleIf attribute", () => {
   var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
   expect(otherTextPropEd).toBeTruthy(); //otherText is here
   expect(otherTextPropEd.isVisible).toEqual(false); //It hidden by default
-  question.hasOther = true;
+  question.showOtherItem = true;
   expect(otherTextPropEd.isVisible).toEqual(true); //We show it now
 });
 test("Show property editor for condition/expression", () => {
@@ -650,11 +651,11 @@ test("Show property editor for condition/expression", () => {
     propertyGrid.survey.getQuestionByName("defaultValueExpression")
   ).toBeTruthy(); //defaultValueExpression is here
 });
-test("Test options.allowEditExpressionsInTextEditor", () => {
+test("Test options.logicAllowTextEditExpressions", () => {
   const question = new QuestionTextModel("q1");
   question.visibleIf = "{q2} = 'abc'";
   const options = new EmptySurveyCreatorOptions();
-  options.allowEditExpressionsInTextEditor = false;
+  options.logicAllowTextEditExpressions = false;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
   var expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
@@ -664,7 +665,7 @@ test("Test options.allowEditExpressionsInTextEditor", () => {
   expect(conditionQuestion.titleActions).toHaveLength(2);
   expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
 
-  options.allowEditExpressionsInTextEditor = true;
+  options.logicAllowTextEditExpressions = true;
   propertyGrid = new PropertyGridModelTester(question, options);
   conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
   expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
@@ -998,7 +999,7 @@ test("property visibleIf attribute and options.onCanShowPropertyCallback", () =>
   var propertyGrid = new PropertyGridModelTester(question, options);
   var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
   expect(otherTextPropEd.isVisible).toEqual(false);
-  question.hasOther = true;
+  question.showOtherItem = true;
   expect(otherTextPropEd.isVisible).toEqual(false);
 });
 test("restfull property editor and options.onCanShowPropertyCallback", () => {
@@ -2000,12 +2001,12 @@ function getAddItemAction(question: Question): IAction {
 function getAddItemActionEnableUpdater(question: Question): () => any {
   return (<ComputedUpdater><any>getAddItemAction(question).enabled).updater;
 }
-test("Support maximumColumnsCount option", () => {
+test("Support maxColumns option", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
   question.addColumn("col2");
   var options = new EmptySurveyCreatorOptions();
-  options.maximumColumnsCount = 3;
+  options.maxColumns = 3;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
@@ -2020,24 +2021,24 @@ test("Support maximumColumnsCount option", () => {
   question.columns.splice(2, 1);
   expect(updater()).toBeTruthy();
 });
-test("Support minimumChoicesCount option", () => {
+test("Support minChoices option", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices.push(new ItemValue("item1"));
   question.choices.push(new ItemValue("item2"));
   var options = new EmptySurveyCreatorOptions();
-  options.minimumChoicesCount = 3;
+  options.minChoices = 3;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
   expect(editQuestion.minRowCount).toEqual(3);
 });
-test("Support maximumChoicesCount option", () => {
+test("Support maxChoices option", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices.push(new ItemValue("item1"));
   question.choices.push(new ItemValue("item2"));
   var options = new EmptySurveyCreatorOptions();
-  options.maximumChoicesCount = 3;
+  options.maxChoices = 3;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
@@ -2052,12 +2053,12 @@ test("Support maximumChoicesCount option", () => {
   question.choices.splice(0, 1);
   expect(updater()).toBeTruthy();
 });
-test("Support maximumRowsCount option", () => {
+test("Support maxRows option", () => {
   const testMaxRows = (question: any) => {
     question.rows.push(new ItemValue("row1"));
     question.rows.push(new ItemValue("row2"));
     var options = new EmptySurveyCreatorOptions();
-    options.maximumRowsCount = 3;
+    options.maxRows = 3;
     var propertyGrid = new PropertyGridModelTester(question, options);
     var editQuestion = <QuestionMatrixDynamicModel>(
       propertyGrid.survey.getQuestionByName("rows")
@@ -2073,12 +2074,12 @@ test("Support maximumRowsCount option", () => {
   testMaxRows(new QuestionMatrixDropdownModel("q1"));
   testMaxRows(new QuestionMatrixModel("q1"));
 });
-test("Support maximumColumnsCount option in single matrix", () => {
+test("Support maxColumns option in single matrix", () => {
   var question = new QuestionMatrixModel("q1");
   question.columns.push(new ItemValue("col1"));
   question.columns.push(new ItemValue("col2"));
   var options = new EmptySurveyCreatorOptions();
-  options.maximumColumnsCount = 3;
+  options.maxColumns = 3;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
@@ -2091,12 +2092,12 @@ test("Support maximumColumnsCount option in single matrix", () => {
   question.columns.push(new ItemValue("col3"));
   expect(updater()).toBeFalsy();
 });
-test("Support maximumRateValuesCount option", () => {
+test("Support maxRateValues option", () => {
   var question = new QuestionRatingModel("q1");
   question.rateValues.push(new ItemValue("item1"));
   question.rateValues.push(new ItemValue("item2"));
   var options = new EmptySurveyCreatorOptions();
-  options.maximumRateValues = 3;
+  options.maxRateValues = 3;
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("rateValues")
@@ -2503,7 +2504,7 @@ test("showOptionsCaption/allowClear for dropdown with empty choice item", () => 
   expect(testQuestion.choices).toHaveLength(10);
   expect(testQuestion.showOptionsCaption).toBeTruthy();
   expect(testQuestion.allowClear).toBeTruthy();
-  expect(testQuestion.optionsCaption).toEqual("Empty value");
+  expect(testQuestion.placeholder).toEqual("Empty value");
 
   Serializer.removeProperty("question", "test");
 });
@@ -3433,9 +3434,9 @@ test("check pages editor respects onPageAdding", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { titleActions: [], question: pagesQuestion };
+  const options = { actions: [], question: pagesQuestion };
   propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.titleActions[0] as IAction;
+  const addNewPageAction = options.actions[0] as IAction;
 
   expect(creator.survey.pages.length).toBe(0);
   addNewPageAction.action!();
@@ -3460,9 +3461,9 @@ test("Localication and survey.pages property, Bug#6687", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { titleActions: [], question: pagesQuestion };
+  const options = { actions: [], question: pagesQuestion };
   propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.titleActions[0] as IAction;
+  const addNewPageAction = options.actions[0] as IAction;
 
   expect(creator.survey.pages.length).toBe(0);
   addNewPageAction.action!();
@@ -3980,4 +3981,40 @@ test("The property is not translated for the custom question, Bug#7118", () => {
   expect(questionShowPlaceHolder.title).toBe("Show a placeholder within signature area");
 
   ComponentCollection.Instance.clear();
+});
+test("The property is not translated for the custom question, Bug#7202", () => {
+  Serializer.addProperty("question", { name: "testProp", category: "myTestCategory", readOnly: true });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+  propertyGrid.selectProperty("testProp", true);
+  expect(propertyGrid.survey.currentPage.title).toBe("myTestCategory");
+
+  Serializer.removeProperty("question", "testProp");
+});
+test("Choices as function & async function, Bug#7207", () => {
+  Serializer.addProperty("dropdown", {
+    name: "func",
+    choices: (obj: any, choicesCallback: any) => {
+      choicesCallback([1, 2, 3]);
+    },
+  });
+
+  Serializer.addProperty("dropdown", {
+    name: "asyncFunc",
+    choices: async (obj: any, choicesCallback: any) => {
+      choicesCallback([1, 2, 3]);
+    }
+  });
+
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+  expect(propertyGrid.survey.getQuestionByName("func").getType()).toEqual("dropdown");
+  expect(propertyGrid.survey.getQuestionByName("asyncFunc").getType()).toEqual("dropdown");
+
+  Serializer.removeProperty("dropdown", "func");
+  Serializer.removeProperty("dropdown", "asyncFunc");
 });

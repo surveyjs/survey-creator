@@ -35,7 +35,7 @@ test.describe(title, () => {
   test("toolbar view", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }
@@ -52,7 +52,7 @@ test.describe(title, () => {
   test("theme setting property grid", async ({ page }) => {
     await page.setViewportSize({ width: 1580, height: 4000 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       title: "Title",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
@@ -98,7 +98,7 @@ test.describe(title, () => {
   test("theme setting property grid mobile", async ({ page }) => {
     await page.setViewportSize({ width: 400, height: 600 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }

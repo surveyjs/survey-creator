@@ -347,7 +347,6 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      showRangeInProgress: "Show the progress bar",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -454,6 +453,7 @@ export var enStrings = {
       suffix: "Currency suffix"
     },
     isExclusive: "Clear others when selected",
+    showValue: "Display both text and value",
     isCommentRequired: "Require user to enter a comment",
     imageHeight: "Display area height",
     imageWidth: "Display area width",
@@ -596,6 +596,7 @@ export var enStrings = {
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
+    maxFiles: "Maximum number of files",
     rowCount: "Row count",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
@@ -609,7 +610,6 @@ export var enStrings = {
     minRateDescription: "Minimum value label",
     maxRateDescription: "Maximum value label",
     inputType: "Input type",
-    optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
@@ -668,7 +668,6 @@ export var enStrings = {
     showTimer: "Use a timer",
     timerLocation: "Timer alignment",
     timerInfoMode: "Timer mode",
-    renderMode: "Panel display mode",
     allowAddPanel: "Enable entry addition",
     allowRemovePanel: "Enable entry removal",
     addPanelText: "\"Add Entry\" button text",
@@ -694,8 +693,10 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
     surveyvalidator: {
-      text: "Error message",
-      expression: "Validation expression"
+      text: "Validation message",
+      expression: "Validation expression",
+      notificationType: "Notification type",
+      maxLength: "Maximum length (in characters)"
     },
     totalText: "Total row header",
     totalType: "Aggregation method",
@@ -726,7 +727,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
-    searchMode: "Search Mode",
+    searchMode: "Search mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -760,7 +761,7 @@ export var enStrings = {
       step: "Step value",
       showLabels: "Show scale labels",
       // segmentCount: "Number of segments",
-      tooltipVisibilityPG: "Show tooltips",
+      tooltipVisibility: "Show tooltips",
       allowSwap: "Allow thumb crossing",
       labelCount: "Number of auto-generated labels",
       minValueExpression: "Min value expression",
@@ -1085,6 +1086,16 @@ export var enStrings = {
       single: "Single-Value",
       range: "Range"
     },
+    tooltipVisibility: {
+      auto: "Auto",
+      always: "Always",
+      never: "Never"
+    },
+    notificationType: {
+      error: "Error",
+      warning: "Warning",
+      info: "Informational"
+    },
     autocomplete: {
       name: "Full Name",
       "honorific-prefix": "Prefix",
@@ -1181,9 +1192,6 @@ export var enStrings = {
     underRow: "Under the row",
     underRowSingle: "Under the row, display one section only",
     auto: "Auto",
-    showNavigationButtons: {
-      none: "Hidden"
-    },
     timerInfoMode: {
       combined: "Both"
     },
@@ -1449,7 +1457,8 @@ export var enStrings = {
       newPanelPosition: "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one.",
       copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
-      confirmDelete: "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Triggers a confirmation prompt before removing an entry.",
+      showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
@@ -1482,7 +1491,8 @@ export var enStrings = {
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
     },
     surveyvalidator: {
-      expression: "Use the magic wand icon to define when the question's value is considered valid."
+      expression: "Use the magic wand icon to define when the question's value is considered valid.",
+      notificationType: "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
@@ -1579,6 +1589,9 @@ export var enStrings = {
     cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
+    matrixdropdown: {
+      keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+    },
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     description: "Type a subtitle.",
@@ -1663,6 +1676,9 @@ export var enStrings = {
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
     colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
+    multipletext: {
+      colCount: "Arranges text boxes in a multi-column layout.",
+    },
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
@@ -1737,7 +1753,7 @@ export var enStrings = {
     validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
-    attachOriginalItems: "Attach original items", // Auto-generated string
+    attachData: "Attach original items", // Auto-generated string
     choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string

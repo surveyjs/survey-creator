@@ -664,8 +664,6 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
-      // "Show the progress bar"
-      showRangeInProgress: "Εμφάνιση μπάρας προόδου",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -844,6 +842,8 @@ export var grStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Εμφάνιση κειμένου και τιμής",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Απαίτηση από το χρήστη να εισαγάγει ένα σχόλιο",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var grStrings = {
     maxRateDescription: "Ετικέτα μέγιστης τιμής",
     // "Input type"
     inputType: "Τύπος εισόδου",
-    // "Option placeholder"
-    optionsCaption: "Υπόδειξη επιλογής",
     // "Default Answer"
     defaultValue: "Προεπιλεγμένη Απάντηση",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var grStrings = {
     timerLocation: "Στοίχιση χρονομέτρου",
     // "Timer mode"
     timerInfoMode: "Κατάσταση χρονομέτρου",
-    // "Panel display mode"
-    renderMode: "Τρόπος εμφάνισης πάνελ",
     // "Enable entry addition"
     allowAddPanel: "Ενεργοποίηση προσθήκης πάνελ",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var grStrings = {
     // "Regular expression"
     regex: "Κανονική έκφραση",
     surveyvalidator: {
-      // "Error message"
-      text: "Μήνυμα σφάλματος",
+      // [Auto-translated] "Validation message"
+      text: "Μήνυμα επικύρωσης",
       // [Auto-translated] "Validation expression"
-      expression: "Παράσταση επικύρωσης"
+      expression: "Παράσταση επικύρωσης",
+      // [Auto-translated] "Notification type"
+      notificationType: "Τύπος ειδοποίησης",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Μέγιστο μήκος (σε χαρακτήρες)"
     },
     // "Total row header"
     totalText: "Επικεφαλίδα συνολικής σειράς",
@@ -1384,8 +1384,8 @@ export var grStrings = {
     labelFalse: "Ετικέτα για \"Λάθος\"",
     // "Show the Clear button"
     allowClear: "Εμφάνιση κουμπιού Εκκαθάριση",
-    // "Search Mode"
-    searchMode: "Λειτουργία Αναζήτησης",
+    // [Auto-translated] "Search mode"
+    searchMode: "Λειτουργία αναζήτησης",
     // "Display format"
     displayStyle: "Μορφή εμφάνισης",
     // "Formatted string"
@@ -1450,7 +1450,7 @@ export var grStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Εμφάνιση ετικετών κλίμακας",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Εμφάνιση συμβουλών εργαλείων",
+      tooltipVisibility: "Εμφάνιση συμβουλών εργαλείων",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Να επιτρέπεται η διέλευση του αντίχειρα",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var grStrings = {
       // [Auto-translated] "Range"
       range: "Έκταση"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Αυτο",
+      // [Auto-translated] "Always"
+      always: "Πάντα",
+      // [Auto-translated] "Never"
+      never: "Ποτέ"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Λάθος",
+      // [Auto-translated] "Warning"
+      warning: "Προειδοποίηση",
+      // [Auto-translated] "Informational"
+      info: "Ενημερωτικό"
+    },
     autocomplete: {
       // "Full Name"
       name: "Πλήρες Όνομα",
@@ -2250,10 +2266,6 @@ export var grStrings = {
     underRowSingle: "Κάτω από τη σειρά, εμφάνιση μόνο μίας επέκτασης σειράς",
     // "Auto"
     auto: "Αυτόματο",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Κρυφό"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Και τα δύο"
@@ -2693,7 +2705,9 @@ export var grStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Αναφέρετε το όνομα της ερώτησης για να απαιτηθεί από τον χρήστη να παράσχει μοναδική απάντηση για αυτήν την ερώτηση σε κάθε πάνελ.",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα."
+      confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var grStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Χρησιμοποιήστε το εικονίδιο με το μαγικό ραβδί για να ορίσετε πότε η τιμή της ερώτησης θεωρείται έγκυρη."
+      expression: "Χρησιμοποιήστε το εικονίδιο με το μαγικό ραβδί για να ορίσετε πότε η τιμή της ερώτησης θεωρείται έγκυρη.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Τα σφάλματα εμποδίζουν την πρόοδο μέχρι να επιλυθούν. Οι προειδοποιήσεις επισημαίνουν προβλήματα, αλλά επιτρέπουν τη συνέχιση. Οι ενημερωτικές σημειώσεις προσφέρουν πρόσθετο πλαίσιο ή ουδέτερη καθοδήγηση. Όταν χρησιμοποιείτε προειδοποιήσεις ή ενημερωτικές σημειώσεις, συνιστούμε να ενεργοποιήσετε την άμεση επικύρωση: \"Έρευνα\" → \"Επικύρωση\" → \"Εκτέλεση επικύρωσης\" → \"Μετά την αλλαγή μιας απάντησης\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var grStrings = {
     detailErrorLocation: "Ορίζει την τοποθεσία των μηνυμάτων σφάλματος για ερωτήσεις που είναι ενσωματωμένες σε τμήματα λεπτομερειών. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση από την ιδιότητα \"Στοίχιση μηνύματος σφάλματος\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Όταν η ιδιότητα \"Αποτροπή διπλών απαντήσεων\" είναι ενεργοποιημένη, ένας συμμετέχων που προσπαθεί να υποβάλει μια διπλότυπη καταχώρηση θα λάβει το παρακάτω μήνυμα σφάλματος.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Όταν η ιδιότητα \"Αποτροπή διπλότυπων αποκρίσεων\" είναι ενεργοποιημένη για μια στήλη μήτρας, ένας ερωτώμενος που επιχειρεί να υποβάλει μια διπλότυπη καταχώρηση θα λάβει το ακόλουθο μήνυμα λάθους."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Σας επιτρέπει να υπολογίσετε συνολικές τιμές με βάση μια έκφραση. Η έκφραση μπορεί να περιλαμβάνει βασικούς υπολογισμούς (`{q1_id} + {q2_id}`), λογικές εκφράσεις (`{age} > 60`) και συναρτήσεις ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, κλπ.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var grStrings = {
     fileOrPhotoPlaceholder: "Ισχύει όταν ο τύπος πηγής αρχείου είναι \"Τοπικό αρχείο ή κάμερα\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Τακτοποιεί τα πλαίσια κειμένου σε διάταξη πολλών στηλών."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Επιλέξτε αν θέλετε να αποθηκεύσετε την τιμή της ερώτησης με την εφαρμοσμένη μάσκα στα αποτελέσματα της έρευνας."
@@ -3212,7 +3236,7 @@ export var grStrings = {
     // "Render as"
     renderAs: "Απόδοση ως", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
+    attachData: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
     // "Choices"
     choices: "Επιλογές",
     // "Choices by url"

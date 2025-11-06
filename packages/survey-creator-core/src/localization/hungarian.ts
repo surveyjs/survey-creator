@@ -664,8 +664,6 @@ export var huStrings = {
       templateErrorLocation: "Hibaüzenetek igazítása",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Új belépési hely",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "A folyamatjelző sáv megjelenítése",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -844,6 +842,8 @@ export var huStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Mások törlése, ha ki van jelölve",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Szöveg és érték megjelenítése",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Megjegyzés megadásának megkövetelése a felhasználótól",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var huStrings = {
     maxRateDescription: "Legnagyobb szorzó leírása",
     // "Input type"
     inputType: "Mező típusa",
-    // "Option placeholder"
-    optionsCaption: "Beállítások felirata",
     // "Default Answer"
     defaultValue: "Alapértelmezett érték",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var huStrings = {
     timerLocation: "Időzító mutatása",
     // "Timer mode"
     timerInfoMode: "Időzító módja",
-    // "Panel display mode"
-    renderMode: "Megjelenítés módja",
     // "Enable entry addition"
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var huStrings = {
     // "Regular expression"
     regex: "Reguláris kifejezés",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Hibaüzenet",
+      // [Auto-translated] "Validation message"
+      text: "Érvényesítési üzenet",
       // [Auto-translated] "Validation expression"
-      expression: "Érvényesítési kifejezés"
+      expression: "Érvényesítési kifejezés",
+      // [Auto-translated] "Notification type"
+      notificationType: "Értesítés típusa",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximális hossz (karakterben)"
     },
     // [Auto-translated] "Total row header"
     totalText: "Teljes sorfejléc",
@@ -1384,7 +1384,7 @@ export var huStrings = {
     labelFalse: "\"Hamis\" címke",
     // "Show the Clear button"
     allowClear: "A Törlés gomb megjelenítése",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Keresési mód",
     // [Auto-translated] "Display format"
     displayStyle: "Megjelenítési formátum",
@@ -1450,7 +1450,7 @@ export var huStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Léptékfeliratok megjelenítése",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Eszköztippek megjelenítése",
+      tooltipVisibility: "Eszköztippek megjelenítése",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Hüvelykujj keresztezésének engedélyezése",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var huStrings = {
       // [Auto-translated] "Range"
       range: "Tartomány"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Kocsi",
+      // [Auto-translated] "Always"
+      always: "Mindig",
+      // [Auto-translated] "Never"
+      never: "Soha"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Hiba",
+      // [Auto-translated] "Warning"
+      warning: "Figyelmeztetés",
+      // [Auto-translated] "Informational"
+      info: "Információs"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Teljes név",
@@ -2250,10 +2266,6 @@ export var huStrings = {
     underRowSingle: "A sor alatt csak egy szakasz megjelenítése",
     // "Auto"
     auto: "Kocsi",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Rejtett"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Mindkettő"
@@ -2693,7 +2705,9 @@ export var huStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt."
+      confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var huStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek."
+      expression: "A varázspálca ikonnal meghatározhatja, hogy a kérdés értéke mikor tekinthető érvényesnek.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "A hibák blokkolják a folyamatot, amíg meg nem oldják. A figyelmeztetések kiemelik a problémákat, de lehetővé teszik a folytatást. A tájékoztató megjegyzések további kontextust vagy semleges útmutatást nyújtanak. Figyelmeztetések vagy tájékoztató megjegyzések használata esetén javasoljuk, hogy engedélyezze az azonnali ellenőrzést: \"Felmérés\" → \"Ellenőrzés\" → \"Ellenőrzés futtatása\" → \"A válasz megváltozása után\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var huStrings = {
     detailErrorLocation: "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van egy mátrixoszlophoz, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var huStrings = {
     fileOrPhotoPlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Szövegdobozokat rendez többoszlopos elrendezésben."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Válassza ki, ha a kérdés értékét alkalmazott maszkkal szeretné tárolni a felmérés eredményeiben."
@@ -3212,7 +3236,7 @@ export var huStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderelés mint", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Eredeti elemek csatolása", // Auto-generated string
+    attachData: "Eredeti elemek csatolása", // Auto-generated string
     // "Choices"
     choices: "Lehetőségek",
     // "Choices by url"

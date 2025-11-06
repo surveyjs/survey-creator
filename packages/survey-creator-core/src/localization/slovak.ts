@@ -664,8 +664,6 @@ export var skStrings = {
       templateErrorLocation: "Zarovnanie chybových hlásení",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nové miesto vstupu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazenie indikátora priebehu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -844,6 +842,8 @@ export var skStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymažte ostatné, keď sú vybraté",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Zobrazenie textu aj hodnoty",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Vyžadovať od používateľa zadanie komentára",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var skStrings = {
     maxRateDescription: "opis maximálneho hodnotenia",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Titulok možností",
     // "Default Answer"
     defaultValue: "Predvolená hodnota",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var skStrings = {
     timerLocation: "Zobraziť panel s časovačom",
     // "Timer mode"
     timerInfoMode: "Zobraziť režim panela s časovačom",
-    // "Panel display mode"
-    renderMode: "Režim vykresľovania",
     // "Enable entry addition"
     allowAddPanel: "Povoliť pridanie panela",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var skStrings = {
     // "Regular expression"
     regex: "Regulárny výraz",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Chybové hlásenie",
+      // [Auto-translated] "Validation message"
+      text: "Overovacia správa",
       // [Auto-translated] "Validation expression"
-      expression: "Overovací výraz"
+      expression: "Overovací výraz",
+      // [Auto-translated] "Notification type"
+      notificationType: "Typ oznámenia",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maximálna dĺžka (v znakoch)"
     },
     // "Total row header"
     totalText: "Celkom – text",
@@ -1384,7 +1384,7 @@ export var skStrings = {
     labelFalse: "Označenie \"False\"",
     // "Show the Clear button"
     allowClear: "Zobraziť titulok možností",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Režim vyhľadávania",
     // [Auto-translated] "Display format"
     displayStyle: "Formát zobrazenia",
@@ -1450,7 +1450,7 @@ export var skStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Zobrazenie štítkov mierky",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Zobraziť popisy",
+      tooltipVisibility: "Zobraziť popisy",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Povoliť prekríženie palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var skStrings = {
       // [Auto-translated] "Range"
       range: "Rozsah"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Auto",
+      // [Auto-translated] "Always"
+      always: "Vždy",
+      // [Auto-translated] "Never"
+      never: "Nikdy"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Chyba",
+      // [Auto-translated] "Warning"
+      warning: "Varovanie",
+      // [Auto-translated] "Informational"
+      info: "Informačné"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Celé meno",
@@ -2250,10 +2266,6 @@ export var skStrings = {
     underRowSingle: "Pod riadkom zobrazte iba jednu sekciu",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obidva"
@@ -2693,7 +2705,9 @@ export var skStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky."
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var skStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Pomocou ikony čarovného prútika definujte, kedy sa hodnota otázky považuje za platnú."
+      expression: "Pomocou ikony čarovného prútika definujte, kedy sa hodnota otázky považuje za platnú.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Chyby blokujú priebeh, kým sa nevyriešia. Upozornenia upozorňujú na problémy, ale umožňujú pokračovanie. Informačné poznámky ponúkajú ďalší kontext alebo neutrálne usmernenie. Pri používaní upozornení alebo informačných poznámok odporúčame povoliť okamžité overenie: \"Prieskum\" → \"Overenie\" → \"Spustiť overenie\" → \"Po zmene odpovede\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var skStrings = {
     detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Keď je pre stĺpec matice povolená vlastnosť Zabrániť duplicitným odpovediam, respondent, ktorý sa pokúša odoslať duplicitný záznam, dostane nasledujúce chybové hlásenie."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var skStrings = {
     fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Usporiada textové polia do rozloženia s viacerými stĺpcami."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vyberte, či chcete do výsledkov prieskumu uložiť hodnotu otázky s použitou maskou."
@@ -3212,7 +3236,7 @@ export var skStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Vykresliť ako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloženie originálnych položiek", // Auto-generated string
+    attachData: "Priloženie originálnych položiek", // Auto-generated string
     // "Choices"
     choices: "možnosti",
     // "Choices by url"

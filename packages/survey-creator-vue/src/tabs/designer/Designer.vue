@@ -17,7 +17,7 @@
           <div
             v-if="
               model.creator.showHeaderInEmptySurvey &&
-              model.creator.allowEditSurveyTitle
+              model.creator.showSurveyHeader
             "
             class="svc-designer-header"
           >
@@ -59,7 +59,7 @@
             ]"
           >
             <div
-              v-if="model.creator.allowEditSurveyTitle"
+              v-if="model.creator.showSurveyHeader"
               class="svc-designer-header"
             >
               <SvComponent :is="'survey-header'" :survey="model.creator.survey" />
@@ -130,4 +130,5 @@ const props = defineProps<{ model: TabDesignerViewModel }>();
 const survey = computed(() => props.model.survey);
 useBase(() => props.model);
 useBase(() => survey.value);
+useBase(() => props.model.pagesController);
 </script>

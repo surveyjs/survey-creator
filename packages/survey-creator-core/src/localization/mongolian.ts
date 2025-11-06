@@ -664,8 +664,6 @@ export var mnStrings = {
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Шинэ оролцооны байршил",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -844,6 +842,8 @@ export var mnStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Текст болон үнэ цэнийг аль алиныг нь харуул",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Хэрэглэгчээс тайлбар оруулахыг шаардах",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var mnStrings = {
     maxRateDescription: "Хамгийн их утгын тайлбар",
     // "Input type"
     inputType: "Оролтын төрөл",
-    // "Option placeholder"
-    optionsCaption: "Сонголтын талбар",
     // "Default Answer"
     defaultValue: "Үндсэн хариулт",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var mnStrings = {
     timerLocation: "Тоолуурын байршил",
     // "Timer mode"
     timerInfoMode: "Тоолуурын горим",
-    // "Panel display mode"
-    renderMode: "Панелийн дэлгэцийн горим",
     // "Enable entry addition"
     allowAddPanel: "Панел нэмэхийг зөвшөөрөх",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var mnStrings = {
     // "Regular expression"
     regex: "Тогтмол илэрхийлэл",
     surveyvalidator: {
-      // "Error message"
-      text: "Алдаа",
+      // [Auto-translated] "Validation message"
+      text: "Баталгаажуулах захиас",
       // [Auto-translated] "Validation expression"
-      expression: "Баталгаажуулалтын илэрхийлэл"
+      expression: "Баталгаажуулалтын илэрхийлэл",
+      // [Auto-translated] "Notification type"
+      notificationType: "Мэдэгдлийн төрөл",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Хамгийн их урт (үсгээр)"
     },
     // "Total row header"
     totalText: "Нийт мөр",
@@ -1384,8 +1384,8 @@ export var mnStrings = {
     labelFalse: "\"Үгүй\" шошго",
     // "Show the Clear button"
     allowClear: "Цэвэрлэх товч харуулах",
-    // [Auto-translated] "Search Mode"
-    searchMode: "Хайлтын Мод",
+    // [Auto-translated] "Search mode"
+    searchMode: "Хайлтын режим",
     // "Display format"
     displayStyle: "Утга харуулах хэв маяг",
     // "Formatted string"
@@ -1450,7 +1450,7 @@ export var mnStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Жинлүүрийн шошгыг үзүүлэх",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Tooltips",
+      tooltipVisibility: "Tooltips",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Эрхий хуруугаа гаталахыг зөвшөөрөх",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var mnStrings = {
       // [Auto-translated] "Range"
       range: "Диапазон"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Авто",
+      // [Auto-translated] "Always"
+      always: "Үргэлж",
+      // [Auto-translated] "Never"
+      never: "Хэзээ ч"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Алдаа",
+      // [Auto-translated] "Warning"
+      warning: "Анхааруулга",
+      // [Auto-translated] "Informational"
+      info: "Мэдээлэл"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Бүтэн нэр",
@@ -2250,10 +2266,6 @@ export var mnStrings = {
     underRowSingle: "Мөрийн доор, зөвхөн ганц панел харагдана",
     // "Auto"
     auto: "Авто",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Нуусан"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Аль аль нь"
@@ -2693,7 +2705,9 @@ export var mnStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ."
+      confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var mnStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла."
+      expression: "Асуултын үнэ цэн хэзээ хүчин төгөлдөр болохыг тодорхойлохын тулд ид шидийн саваа тэмдгийг ашигла.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Алдаа нь шийдвэрлэгдэх хүртэл хөгжил дэвшлийг зогсоодог. Сэрэмжлүүлэг нь асуудлуудыг тодотгож байгаа ч үргэлжлүүлэхийг зөвшөөрдөг. Мэдээллийн тэмдэглэл нь нэмэлт хам сэдэв эсвэл төвийг сахисан удирдамжийг санал болгодог. Сэрэмжлүүлэг, мэдээллийн тэмдэглэл ашиглахдаа \"Survey\" → \"Validation\" → \"Run validation\" → \"Answer has changed\" зэрэг шууд баталгаажуулалтыг идэвхжүүлэхийг зөвлөж байна."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var mnStrings = {
     detailErrorLocation: "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Матриц багананд \"Prevent duplicate responses\" свойствийг идэвхжүүлбэл давхар тайлбар илгээх гэж оролдсон респондент дараах алдааны мессеж хүлээн авна."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var mnStrings = {
     fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Текстийн хайрцгуудыг олон баганатай байрлуулна."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."
@@ -3212,7 +3236,7 @@ export var mnStrings = {
     // "Render as"
     renderAs: "руу хөрвүүлэх", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "Эх элементүүдийг хавсаргах", // Auto-generated string
+    attachData: "Эх элементүүдийг хавсаргах", // Auto-generated string
     // "Choices"
     choices: "Сонголтууд",
     // "Choices by url"

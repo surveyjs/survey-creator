@@ -201,32 +201,24 @@ export interface ISurveyCreatorOptions {
   isMobileView: boolean;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
-  maxLogicItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  showObjectTitles: boolean;
-  /**
-   * @deprecated
-   */
-  showTitlesInExpressions: boolean;
+  logicMaxItemsInCondition: number;
+  logicAllowTextEditExpressions: boolean;
   useElementTitles: boolean;
-  allowEditExpressionsInTextEditor: boolean;
-  maximumColumnsCount: number;
-  minimumChoicesCount: number;
-  maximumChoicesCount: number;
-  maximumRowsCount: number;
-  maximumRateValues: number;
+  maxColumns: number;
+  minChoices: number;
+  maxChoices: number;
+  maxRows: number;
+  maxRateValues: number;
 
-  maxNestedPanels: number;
   maxPanelNestingLevel: number;
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   enableLinkFileEditor: boolean;
-  inplaceEditForValues: boolean;
+  inplaceEditChoiceValues: boolean;
   rootElement?: HTMLElement;
   previewShowResults: boolean;
   showOneCategoryInPropertyGrid: boolean;
+  trimValues: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
@@ -344,6 +336,7 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
+  logicMaxItemsInCondition: number;
   previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
@@ -353,30 +346,20 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   isMobileView: boolean = false;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
-  maxLogicItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  showObjectTitles: boolean;
-  /**
-   * @deprecated
-   */
-  showTitlesInExpressions: boolean;
   useElementTitles: boolean;
-  allowEditExpressionsInTextEditor: boolean = true;
-  maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
-  minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
-  maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
-  maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
-  maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  logicAllowTextEditExpressions: boolean = true;
+  maxColumns: number = settings.propertyGrid.maxColumns;
+  minChoices: number = settings.propertyGrid.minChoices;
+  maxChoices: number = settings.propertyGrid.maxChoices;
+  maxRows: number = settings.propertyGrid.maxRows;
+  maxRateValues: number = settings.propertyGrid.maxRateValues;
   machineTranslationValue: boolean = false;
-  inplaceEditForValues: boolean = false;
-
-  maxNestedPanels: number = -1;
+  inplaceEditChoiceValues: boolean = false;
   maxPanelNestingLevel: number = -1;
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   showOneCategoryInPropertyGrid: boolean;
+  trimValues: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;

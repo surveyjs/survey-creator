@@ -664,8 +664,6 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "進行状況バーを表示する",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -844,6 +842,8 @@ export var jaStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選択時に他のユーザーをクリアする",
+    // [Auto-translated] "Display both text and value"
+    showValue: "テキストと値の両方を表示する",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "ユーザーにコメントの入力を要求する",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var jaStrings = {
     maxRateDescription: "最大レートの説明",
     // "Input type"
     inputType: "入力タイプ",
-    // "Option placeholder"
-    optionsCaption: "オプションのキャプション",
     // "Default Answer"
     defaultValue: "デフォルト値",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var jaStrings = {
     timerLocation: "タイマーパネルを表示する",
     // "Timer mode"
     timerInfoMode: "タイマーパネルモードを表示",
-    // "Panel display mode"
-    renderMode: "レンダーモード",
     // "Enable entry addition"
     allowAddPanel: "パネルの追加を許可",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var jaStrings = {
     // "Regular expression"
     regex: "正規表現",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "エラーメッセージ",
+      // [Auto-translated] "Validation message"
+      text: "検証メッセージ",
       // [Auto-translated] "Validation expression"
-      expression: "検証式"
+      expression: "検証式",
+      // [Auto-translated] "Notification type"
+      notificationType: "通知タイプ",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "最大長 (文字数)"
     },
     // "Total row header"
     totalText: "テキストの合計",
@@ -1384,7 +1384,7 @@ export var jaStrings = {
     labelFalse: "「虚偽」ラベル",
     // "Show the Clear button"
     allowClear: "オプションのキャプションを表示する",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "検索モード",
     // [Auto-translated] "Display format"
     displayStyle: "表示形式",
@@ -1450,7 +1450,7 @@ export var jaStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "縮尺ラベルの表示",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "ツールチップを表示する",
+      tooltipVisibility: "ツールチップを表示する",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "親指の交差を許可する",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var jaStrings = {
       // [Auto-translated] "Range"
       range: "範囲"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "自動",
+      // [Auto-translated] "Always"
+      always: "いつも",
+      // [Auto-translated] "Never"
+      never: "一度もない"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "エラー",
+      // [Auto-translated] "Warning"
+      warning: "警告",
+      // [Auto-translated] "Informational"
+      info: "情報"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "フルネーム",
@@ -2250,10 +2266,6 @@ export var jaStrings = {
     underRowSingle: "行の下には、1 つのセクションのみを表示します",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隠れた"
-    },
     timerInfoMode: {
       // "Both"
       combined: "両方とも"
@@ -2693,7 +2705,9 @@ export var jaStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。"
+      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var jaStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。"
+      expression: "魔法の杖アイコンを使用して、質問の値が有効と見なされるタイミングを定義します。",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "エラーは解決されるまで進行をブロックします。警告は問題を強調表示しますが、続行できます。情報メモは、追加のコンテキストまたは中立的なガイダンスを提供します。警告または情報メモを使用する場合は、「アンケート」→「検証」→「検証の実行」→「回答が変更された後」の即時検証を有効にすることをお勧めします。"
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var jaStrings = {
     detailErrorLocation: "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "マトリックス列に対して「重複応答の防止」プロパティが有効になっている場合、重複エントリを送信しようとすると、回答者に次のエラーメッセージが表示されます。"
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var jaStrings = {
     fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "テキストボックスを複数列レイアウトに配置します。"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "マスクを適用した質問値をアンケート結果に保存する場合に選択します。"
@@ -3212,7 +3236,7 @@ export var jaStrings = {
     // [Auto-translated] "Render as"
     renderAs: "レンダリング形式", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "オリジナルアイテムを添付する", // Auto-generated string
+    attachData: "オリジナルアイテムを添付する", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "選択肢",
     // [Auto-translated] "Choices by url"

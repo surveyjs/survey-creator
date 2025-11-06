@@ -48,7 +48,7 @@ Alternatively, you can make a question required conditionally by following these
 2. Under the **Conditions** category, locate the **Make the question required if** property.  
 3. Click the **Magic wand** icon to open a popup for condition configuration.  
 4. In the popup, select the triggering element's **ID** (its **Question name** property value).  
-5. Choose a condition from the drop-down menu, such as **Empty**, **Not Empty**, **Equals**, or **Greater than**.  
+5. Choose a condition from the drop-down menu, such as **Empty**, **Not empty**, **Equals**, or **Greater than**.  
 6. Enter or select the triggering value.  
 7. Click **Apply**.
 
@@ -121,7 +121,7 @@ A page cannot be made required unless you specify a condition which will make it
 2. Under the **Conditions** category, locate the **Make the page required if** property.  
 3. Click the **Magic wand** icon to open a popup for condition configuration.  
 4. In the popup, select the triggering element's **ID** (its **Question name** property value).  
-5. Choose a condition from the drop-down menu, such as **Empty**, **Not Empty**, **Equals**, or **Greater than**.  
+5. Choose a condition from the drop-down menu, such as **Empty**, **Not empty**, **Equals**, or **Greater than**.  
 6. Enter or select the triggering value.  
 7. Click **Apply**.
 

@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor 1";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -17,7 +17,7 @@ const json = {
 };
 
 const json2 = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -31,7 +31,7 @@ const json2 = {
   ]
 };
 const json3 = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -79,7 +79,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 
 test("Edit question title", async (t) => {
   await setJSON(json);
-  const title = json.questions[0].name;
+  const title = json.elements[0].name;
   const svStringSelector = Selector(".sv-string-editor").withText(title);
   const prefix = "prefix";
 
@@ -115,7 +115,7 @@ test("Check string editor visibility", async (t) => {
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).notOk();
 
   const newJson = JSON.parse(JSON.stringify(json));
-  newJson.questions[0]["description"] = "Desc";
+  newJson.elements[0]["description"] = "Desc";
   await setJSON(newJson);
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
 
@@ -128,7 +128,7 @@ test("Check string editor visibility", async (t) => {
 
 test("Check string editor visibility on defferent ReadOnly cases", async (t) => {
   var json_t = {
-    questions: [
+    elements: [
       {
         type: "checkbox",
         name: "q1",
@@ -180,8 +180,8 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
 
   await ClientFunction(() => {
     window["Survey"].Serializer.getProperty("checkbox", "choices").readOnly = false;
-    window["creator"].onGetPropertyReadOnly.add(function (editor, options) {
-      if (options.obj.getType() === "radiogroup" && options.propertyName == "choices")
+    window["creator"].onPropertyGetReadOnly.add(function (editor, options) {
+      if (options.element.getType() === "radiogroup" && options.propertyName == "choices")
         options.readOnly = true;
     });
   })();
@@ -199,8 +199,8 @@ test("Check creator events on string editor", async (t) => {
   const msg = "Description length can not be greater than 10 characters";
   await ClientFunction((json, msg) => {
     window["creator"].JSON = json;
-    window["creator"].onPropertyValidationCustomError.add(function (sender, options) {
-      if (options.obj.isQuestion && options.propertyName == "description" && options.value.length > 10) {
+    window["creator"].onPropertyDisplayCustomError.add(function (sender, options) {
+      if (options.element.isQuestion && options.propertyName == "description" && options.value.length > 10) {
         options.error = msg;
       }
     });
@@ -268,7 +268,7 @@ test("Check string editor not loosing focus and selects underlying items", async
 */
 });
 
-test("Check string editor inplaceEditForValues property", async (t) => {
+test("Check string editor inplaceEditChoiceValues property", async (t) => {
   await setJSON(json);
 
   const svItemSelector = Selector(".sv-string-editor").withText("Item 1");
@@ -284,7 +284,7 @@ test("Check string editor inplaceEditForValues property", async (t) => {
     })()).eql({ value: "Item 1", text: "newItem 1" });
 
   await ClientFunction(() => {
-    window["creator"].inplaceEditForValues = true;
+    window["creator"].inplaceEditChoiceValues = true;
   })();
 
   await t

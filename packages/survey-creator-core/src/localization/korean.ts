@@ -664,8 +664,6 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "진행률 표시줄 표시",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -845,6 +843,8 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "선택하면 다른 항목 지우기",
+    // [Auto-translated] "Display both text and value"
+    showValue: "텍스트와 값 모두 표시",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "사용자에게 주석 입력 요구",
     // "Display area height"
@@ -1153,8 +1153,6 @@ export var koreanStrings = {
     maxRateDescription: "최대 설명 길이",
     // "Input type"
     inputType: "입력 유형",
-    // "Option placeholder"
-    optionsCaption: "옵션 캡션",
     // "Default Answer"
     defaultValue: "기본값",
     // "Default texts"
@@ -1271,8 +1269,6 @@ export var koreanStrings = {
     timerLocation: "타이머 패널 표시",
     // "Timer mode"
     timerInfoMode: "타이머 패널 모드 표시",
-    // "Panel display mode"
-    renderMode: "렌더링 모드",
     // "Enable entry addition"
     allowAddPanel: "패널 추가 허용",
     // "Enable entry removal"
@@ -1322,10 +1318,14 @@ export var koreanStrings = {
     // [Auto-translated] "Regular expression"
     regex: "정규식",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "오류 메시지",
+      // [Auto-translated] "Validation message"
+      text: "유효성 검사 메시지",
       // [Auto-translated] "Validation expression"
-      expression: "유효성 검사 표현식"
+      expression: "유효성 검사 표현식",
+      // [Auto-translated] "Notification type"
+      notificationType: "알림 유형",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "최대 길이(문자)"
     },
     // [Auto-translated] "Total row header"
     totalText: "총 행 머리글",
@@ -1385,7 +1385,7 @@ export var koreanStrings = {
     labelFalse: "\"거짓\" 레이블",
     // "Show the Clear button"
     allowClear: "지우기 단추 표시",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "검색 모드",
     // [Auto-translated] "Display format"
     displayStyle: "표시 형식",
@@ -1451,7 +1451,7 @@ export var koreanStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "축척 레이블 표시",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "툴팁 표시",
+      tooltipVisibility: "툴팁 표시",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "엄지 교차점 허용",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2067,6 +2067,22 @@ export var koreanStrings = {
       // [Auto-translated] "Range"
       range: "레인지"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "자동",
+      // [Auto-translated] "Always"
+      always: "늘",
+      // [Auto-translated] "Never"
+      never: "결코"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "오류",
+      // [Auto-translated] "Warning"
+      warning: "경고",
+      // [Auto-translated] "Informational"
+      info: "정보"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "성명",
@@ -2251,10 +2267,6 @@ export var koreanStrings = {
     underRowSingle: "행 아래에 하나의 섹션만 표시합니다.",
     // "Auto"
     auto: "자동",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "숨겨진"
-    },
     timerInfoMode: {
       // "Both"
       combined: "둘다"
@@ -2694,7 +2706,9 @@ export var koreanStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다."
+      confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2754,7 +2768,9 @@ export var koreanStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다."
+      expression: "마술 지팡이 아이콘을 사용하여 질문의 값이 유효한 것으로 간주되는 시기를 정의합니다.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "오류는 해결될 때까지 진행을 차단합니다. 경고는 문제를 강조 표시하지만 계속할 수 있습니다. 정보 메모는 추가 컨텍스트 또는 중립적인 지침을 제공합니다. 경고 또는 정보 메모를 사용할 때 \"설문 조사\" → \"유효성 검사\" → \"유효성 검사 실행\" → \"답변이 변경된 후\"와 같은 즉각적인 유효성 검사를 활성화하는 것이 좋습니다."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2925,6 +2941,10 @@ export var koreanStrings = {
     detailErrorLocation: "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "행렬 열에 대해 \"중복 응답 방지\" 속성을 사용하도록 설정하면 중복 항목을 제출하려는 응답자에게 다음과 같은 오류 메시지가 표시됩니다."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3083,6 +3103,10 @@ export var koreanStrings = {
     fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "텍스트 상자를 다중 열 레이아웃으로 정렬합니다."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
@@ -3213,7 +3237,7 @@ export var koreanStrings = {
     // [Auto-translated] "Render as"
     renderAs: "렌더링 형식", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "원본 항목 첨부", // Auto-generated string
+    attachData: "원본 항목 첨부", // Auto-generated string
     // "Choices"
     choices: "선택",
     // "Choices by url"

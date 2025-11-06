@@ -5,6 +5,7 @@ import {
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
+import { QuestionToolboxItem } from "./toolbox";
 
 export interface ElementDeletingEvent {
   /**
@@ -53,7 +54,7 @@ export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
    */
   element: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
    */
   parentElement: Base;
 }
@@ -172,7 +173,24 @@ export interface ElementAllowOperationsEvent {
    */
   allowShowSettings: boolean | undefined;
 }
-
+export interface AllowAddElementEvent {
+  /**
+   * The name of the toolbox item used to create the element. Usually matches the element's [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
+  name: string;
+  /**
+   * The [toolbox item instance](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) that corresponds to the element.
+   */
+  toolboxItem?: QuestionToolboxItem;
+  /**
+   * The element's JSON definition.
+   */
+  json?: any;
+  /**
+   * A Boolean property that you can set to `false` to prevent the element from being added.
+   */
+  allow: boolean;
+}
 export interface DefineElementMenuItemsEvent {
   /**
    * @deprecated Use `options.element` instead.
@@ -994,11 +1012,11 @@ export interface DragDropAllowEvent {
    */
   allow: boolean;
   /**
-   * @deprecated Use `options.draggedElement` instead.
+   * @deprecated Use `options.toElement` instead.
    */
   target?: IElement;
   /**
-   * @deprecated Use `options.toElement` instead.
+   * @deprecated Use `options.draggedElement` instead.
    */
   source?: IElement;
 }

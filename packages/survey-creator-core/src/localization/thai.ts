@@ -664,8 +664,6 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       // "New entry location"
       newPanelPosition: "ตำแหน่งแผงใหม่",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "แสดงแถบความคืบหน้า",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -844,6 +842,8 @@ export const thStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "ล้างรายการอื่นเมื่อเลือก",
+    // [Auto-translated] "Display both text and value"
+    showValue: "แสดงทั้งข้อความและค่า",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "กําหนดให้ผู้ใช้ป้อนความคิดเห็น",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export const thStrings = {
     maxRateDescription: "ป้ายกำกับค่าสูงสุด",
     // "Input type"
     inputType: "ประเภทอินพุต",
-    // "Option placeholder"
-    optionsCaption: "ข้อความตัวอย่างตัวเลือก",
     // "Default Answer"
     defaultValue: "คำตอบเริ่มต้น",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export const thStrings = {
     timerLocation: "การจัดตำแหน่งตัวจับเวลา",
     // "Timer mode"
     timerInfoMode: "โหมดตัวจับเวลา",
-    // "Panel display mode"
-    renderMode: "โหมดแสดงผลแผง",
     // "Enable entry addition"
     allowAddPanel: "เปิดใช้งานการเพิ่มแผง",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export const thStrings = {
     // "Regular expression"
     regex: "นิพจน์ปกติ",
     surveyvalidator: {
-      // "Error message"
-      text: "ข้อความข้อผิดพลาด",
+      // [Auto-translated] "Validation message"
+      text: "ข้อความการตรวจสอบความถูกต้อง",
       // [Auto-translated] "Validation expression"
-      expression: "นิพจน์การตรวจสอบความถูกต้อง"
+      expression: "นิพจน์การตรวจสอบความถูกต้อง",
+      // [Auto-translated] "Notification type"
+      notificationType: "ประเภทการแจ้งเตือน",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "ความยาวสูงสุด (เป็นอักขระ)"
     },
     // "Total row header"
     totalText: "หัวแถวรวม",
@@ -1384,8 +1384,8 @@ export const thStrings = {
     labelFalse: "ป้ายสำหรับ \"เท็จ\"",
     // "Show the Clear button"
     allowClear: "แสดงปุ่มลบ",
-    // "Search Mode"
-    searchMode: "โหมดการค้นหา",
+    // [Auto-translated] "Search mode"
+    searchMode: "โหมดค้นหา",
     // "Display format"
     displayStyle: "รูปแบบการแสดงผล",
     // "Formatted string"
@@ -1450,7 +1450,7 @@ export const thStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "แสดงป้ายชื่อมาตราส่วน",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "แสดงคําแนะนําเครื่องมือ",
+      tooltipVisibility: "แสดงคําแนะนําเครื่องมือ",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "อนุญาตให้ข้ามนิ้วหัวแม่มือ",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export const thStrings = {
       // [Auto-translated] "Range"
       range: "เทือก"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "รถ",
+      // [Auto-translated] "Always"
+      always: "เสมอ",
+      // [Auto-translated] "Never"
+      never: "ไม่เคย"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "ความผิดพลาด",
+      // [Auto-translated] "Warning"
+      warning: "คำเตือน",
+      // [Auto-translated] "Informational"
+      info: "ข้อมูล"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "ชื่อ-นามสกุล",
@@ -2250,10 +2266,6 @@ export const thStrings = {
     underRowSingle: "ใต้แถว แสดงการขยายแถวเดียว",
     // "Auto"
     auto: "อัตโนมัติ",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "ซ่อน"
-    },
     timerInfoMode: {
       // "Both"
       combined: "ทั้งสอง"
@@ -2693,7 +2705,9 @@ export const thStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
       // "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export const thStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด"
+      expression: "ใช้ไอคอนไม้กายสิทธิ์เพื่อกําหนดว่าค่าของคําถามถือว่าถูกต้องเมื่อใด",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "ข้อผิดพลาดจะบล็อกความคืบหน้าจนกว่าจะได้รับการแก้ไข คําเตือนจะเน้นปัญหาแต่อนุญาตให้ดําเนินการต่อ บันทึกข้อมูลเสนอบริบทเพิ่มเติมหรือคําแนะนําที่เป็นกลาง เมื่อใช้คําเตือนหรือบันทึกข้อมูล เราขอแนะนําให้เปิดใช้งานการตรวจสอบทันที: \"แบบสํารวจ\" → \"การตรวจสอบความถูกต้อง\" → \"เรียกใช้การตรวจสอบความถูกต้อง\" → \"หลังจากคําตอบมีการเปลี่ยนแปลง\""
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export const thStrings = {
     detailErrorLocation: "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\"",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "เมื่อเปิดใช้งานคุณสมบัติ \"ป้องกันการตอบสนองที่ซ้ํากัน\" สําหรับคอลัมน์เมทริกซ์ ผู้ตอบที่พยายามส่งรายการที่ซ้ํากันจะได้รับข้อความแสดงข้อผิดพลาดต่อไปนี้"
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export const thStrings = {
     fileOrPhotoPlaceholder: "ใช้เมื่อ \"ประเภทแหล่งไฟล์\" เป็น \"ไฟล์ท้องถิ่นหรือกล้อง\"",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "จัดเรียงตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "จัดเรียงกล่องข้อความในเค้าโครงแบบหลายคอลัมน์"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "เลือกถ้าคุณต้องการบันทึกค่าคำถามพร้อมหน้ากากในผลลัพธ์แบบสำรวจ"
@@ -3212,7 +3236,7 @@ export const thStrings = {
     // "Render as"
     renderAs: "แสดงผลเป็น", // Auto-generated string
     // "Attach original items"
-    attachOriginalItems: "แนบรายการเดิม", // Auto-generated string
+    attachData: "แนบรายการเดิม", // Auto-generated string
     // "Choices"
     choices: "ตัวเลือก",
     // "Choices by url"

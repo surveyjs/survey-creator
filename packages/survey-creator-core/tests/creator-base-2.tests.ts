@@ -58,6 +58,7 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
+import { TabbedMenuMode } from "../src/tabbed-menu";
 
 export * from "../src/localization/french";
 
@@ -132,8 +133,8 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   const selectedTypes = new Array<string>();
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "property-grid") {
-      if (options.obj) {
-        selectedTypes.push(options.obj.getType());
+      if (options.element) {
+        selectedTypes.push(options.element.getType());
       }
     }
   });
@@ -179,20 +180,14 @@ test("creator.onSurveyInstanceSetupHandlers event", () => {
 
 test("check tabResponsivenessMode property", () => {
   const creator = new CreatorTester();
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
-
-  creator.tabResponsivenessMode = "icons";
-  expect(creator.tabbedMenu.actions.every((action) => !action.disableShrink)).toBeTruthy();
-  const firstTab = creator.tabbedMenu.actions[0];
-  expect(firstTab.hasTitle).toBeTruthy();
-  expect(firstTab.hasIcon).toBeFalsy();
-  firstTab.mode = "small";
-  expect(firstTab.hasTitle).toBeFalsy();
-  expect(firstTab.hasIcon).toBeTruthy();
-
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasIcon)).toBeTruthy();
+  creator.tabbedMenu.setMode(TabbedMenuMode.Icons);
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => action.hasIcon)).toBeTruthy();
+  creator.tabbedMenu.setMode(TabbedMenuMode.Titles);
+  expect(creator.tabbedMenu.actions.every((action) => action.hasTitle)).toBeTruthy();
+  expect(creator.tabbedMenu.actions.every((action) => !action.hasIcon)).toBeTruthy();
 });
 
 test("onModified options, on adding page and on copying page", () => {
@@ -426,7 +421,14 @@ test("allowDragPages respects the pageEditMode", (): any => {
   expect(creator.allowDragPages).toBeFalsy();
   expect(creator.pageEditMode).toBe("bypage");
 });
-
+test("Show editor tab for pageEditMode equals to 'bypage', Bug#", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(creator.pageEditMode).toBe("bypage");
+  expect(creator.showJSONEditorTab).toBeTruthy();
+  expect(creator.tabbedMenu.getActionById("designer").isVisible).toBeTruthy();
+  expect(creator.tabbedMenu.getActionById("json").isVisible).toBeTruthy();
+});
 test("onElementAllowOperations for pages and allowDragging in page adorner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text" }] };
@@ -437,7 +439,6 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
       reason.push(options.allowDrag);
       if (disableDrag) {
         options.allowDrag = false;
-        options.allowDragging = false;
       }
     }
   });
@@ -855,4 +856,259 @@ test("onGetIsStringEditable", (): any => {
   expect(creator.isStringInplacelyEditable({ isContentElement: true } as any, "")).toBeTruthy();
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(3);
+});
+test("Restrict users from adding more than a specified number of questions to a survey Issue#7122", (): any => {
+  const creator = new CreatorTester();
+  creator.onAllowAddElement.add((sender, options) => {
+    if (options.name === "comment") {
+      const qs = creator.survey.getAllQuestions(true, true, true);
+      qs.filter(q => q.getType() === "comment");
+      options.allow = qs.length < 2;
+    }
+  });
+  const action = creator.toolbox.getActionById("comment");
+  expect(action).toBeTruthy();
+  expect(creator.survey.getAllQuestions().length).toBe(0);
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(1);
+  const pAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const pDuplicateAction = pAdorner.actionContainer.getActionById("duplicate");
+  const qAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const qDuplicateAction = qAdorner.actionContainer.getActionById("duplicate");
+  expect(qDuplicateAction).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  creator.clickToolboxItem((action.json));
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pDuplicateAction.isVisible).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getAllQuestions()[0]);
+  expect(action.enabled).toBeTruthy();
+  expect(qDuplicateAction.isVisible).toBeTruthy();
+  expect(pDuplicateAction.isVisible).toBeTruthy();
+
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  pAdorner.currentAddQuestionType = "comment";
+  pAdorner.addNewQuestion(pAdorner, undefined);
+  expect(creator.survey.getAllQuestions().length).toBe(2);
+  expect(action.enabled).toBeFalsy();
+  expect(qDuplicateAction.isVisible).toBeFalsy();
+  expect(pAdorner.currentAddQuestionType).toBe("");
+  creator.JSON = { };
+  expect(action.enabled).toBeTruthy();
+});
+test("Should not modify expression properties  on copying questions inside the dynamic panel, Bug#7223", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "paneldynamic",
+        "name": "panel1",
+        "templateElements": [
+          {
+            "type": "boolean",
+            "name": "q1"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+            "visibleIf": "{panel.q1} = true"
+          }
+        ]
+      }
+    ]
+  };
+  const panel1 = (creator.survey.getQuestionByName("panel1") as QuestionPanelDynamicModel).template;
+  const q2 = panel1.getQuestionByName("q2");
+  expect(q2.visibleIf).toBe("{panel.q1} = true");
+  const q1 = panel1.getQuestionByName("q1");
+  creator.copyQuestion(q1, true);
+  expect(q2.visibleIf).toBe("{panel.q1} = true");
+});
+
+test("survey in theme tab shouldn't show timer panel", () => {
+  const creator = new CreatorTester();
+  const survey = creator.createSurvey({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ],
+    "showTimer": true,
+    "timeLimit": 5,
+    "headerView": "advanced"
+  }, "theme");
+  expect(survey.getPanelByName("showTimer")).toBeFalsy();
+});
+
+test("option to hide sidebar", () => {
+  const creator = new CreatorTester();
+  expect(creator.isSidebarVisible).toBeTruthy();
+  creator.removeSidebar = true;
+  expect(creator.isSidebarVisible).toBeFalsy();
+  creator.removeSidebar = false;
+  expect(creator.isSidebarVisible).toBeTruthy();
+  creator.sidebar = undefined;
+  expect(creator.isSidebarVisible).toBeFalsy();
+});
+
+test("option to hide settings action", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "question1" }] }] };
+  creator.sidebar.flyoutMode = true;
+  const question = creator.survey.getQuestionByName("question1");
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+  creator.selectElement(question);
+
+  const settingsAction = questionAdorner.actionContainer.getActionById("settings");
+  const toolbarSettings = creator.toolbar.getActionById("svd-settings");
+  expect(toolbarSettings.isVisible).toBeTruthy();
+  expect(settingsAction.isVisible).toBeTruthy();
+
+  creator.removeSidebar = true;
+  creator.selectElement(creator.survey.pages[0]);
+  creator.selectElement(question);
+  expect(toolbarSettings.isVisible).toBeFalsy();
+  expect(settingsAction.isVisible).toBeFalsy();
+});
+
+test("Test inplaceEditChoiceValues <> inplaceEditForValues compatibility", (): any => {
+  const creator = new CreatorTester();
+  creator.inplaceEditChoiceValues = true;
+  expect(creator.inplaceEditForValues).toEqual(true);
+  creator.inplaceEditForValues = false;
+  expect(creator.inplaceEditChoiceValues).toEqual(false);
+});
+
+test("Test showObjectTitles <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showObjectTitles).toEqual(true);
+  creator.showObjectTitles = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test showTitlesInExpressions <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showTitlesInExpressions).toEqual(true);
+  creator.showTitlesInExpressions = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test maximumChoicesCount <> maxChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumChoicesCount = 5;
+  expect(creator.maxChoices).toEqual(5);
+  creator.maxChoices = 3;
+  expect(creator.maximumChoicesCount).toEqual(3);
+});
+
+test("Test minimumChoicesCount <> minChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.minimumChoicesCount = 5;
+  expect(creator.minChoices).toEqual(5);
+  creator.minChoices = 3;
+  expect(creator.minimumChoicesCount).toEqual(3);
+});
+
+test("Test maximumColumnsCount <> maxColumns compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumColumnsCount = 5;
+  expect(creator.maxColumns).toEqual(5);
+  creator.maxColumns = 3;
+  expect(creator.maximumColumnsCount).toEqual(3);
+});
+
+test("Test maximumRateValues <> maxRateValues compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 5;
+  expect(creator.maxRateValues).toEqual(5);
+  creator.maxRateValues = 3;
+  expect(creator.maximumRateValues).toEqual(3);
+});
+
+test("Test allowEditExpressionsInTextEditor <> logicAllowTextEditExpressions compatibility", () => {
+  const creator = new CreatorTester();
+  creator.allowEditExpressionsInTextEditor = false;
+  expect(creator.logicAllowTextEditExpressions).toEqual(false);
+  creator.logicAllowTextEditExpressions = true;
+  expect(creator.allowEditExpressionsInTextEditor).toEqual(true);
+});
+
+test("Test showSurveyTitle <> showSurveyHeader compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSurveyTitle = false;
+  expect(creator.showSurveyHeader).toEqual(false);
+  creator.showSurveyHeader = true;
+  expect(creator.showSurveyTitle).toEqual(true);
+});
+
+test("Test isAutoSave <> autoSaveEnabled compatibility", () => {
+  const creator = new CreatorTester();
+  creator.isAutoSave = true;
+  expect(creator.autoSaveEnabled).toEqual(true);
+  creator.autoSaveEnabled = false;
+  expect(creator.isAutoSave).toEqual(false);
+});
+
+test("Test maxLogicItemsInCondition <> logicMaxItemsInCondition compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maxLogicItemsInCondition = 4;
+  expect(creator.logicMaxItemsInCondition).toEqual(4);
+  creator.logicMaxItemsInCondition = 2;
+  expect(creator.maxLogicItemsInCondition).toEqual(2);
+});
+
+test("Test showPagesInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showPagesInPreviewTab = false;
+  expect(creator.previewAllowSelectPage).toEqual(false);
+  creator.previewAllowSelectPage = true;
+  expect(creator.showPagesInPreviewTab).toEqual(true);
+});
+
+test("Test showSimulatorInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSimulatorInPreviewTab = false;
+  expect(creator.previewAllowSimulateDevices).toEqual(false);
+  creator.previewAllowSimulateDevices = true;
+  expect(creator.showSimulatorInPreviewTab).toEqual(true);
+});
+
+test("Test showDefaultLanguageInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showDefaultLanguageInPreviewTab = false;
+  expect(creator.previewAllowSelectLanguage).toEqual(false);
+  creator.previewAllowSelectLanguage = "auto";
+  expect(creator.showDefaultLanguageInPreviewTab).toEqual("auto");
+  creator.showDefaultLanguageInPreviewTab = "all";
+  expect(creator.previewAllowSelectLanguage).toEqual("all");
+});
+
+test("Test showInvisibleElementsInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showInvisibleElementsInPreviewTab = false;
+  expect(creator.previewAllowHiddenElements).toEqual(false);
+  creator.previewAllowHiddenElements = true;
+  expect(creator.showInvisibleElementsInPreviewTab).toEqual(true);
+});
+
+test("Test makeNewViewActive (obsolete)", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.makeNewViewActive("preview"));
+  expect(creator.activeTab).toEqual("preview");
+  expect(creator.makeNewViewActive("designer"));
+  expect(creator.activeTab).toEqual("designer");
 });

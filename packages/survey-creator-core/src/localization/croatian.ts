@@ -664,8 +664,6 @@ export var hrStrings = {
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nova lokacija ulaska",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Prikaz trake napretka",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
@@ -844,6 +842,8 @@ export var hrStrings = {
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
+    // [Auto-translated] "Display both text and value"
+    showValue: "Prikaz teksta i vrijednosti",
     // [Auto-translated] "Require user to enter a comment"
     isCommentRequired: "Zahtijevanje od korisnika da unese komentar",
     // "Display area height"
@@ -1152,8 +1152,6 @@ export var hrStrings = {
     maxRateDescription: "Opis maksimalne stope",
     // "Input type"
     inputType: "Vrsta unosa",
-    // "Option placeholder"
-    optionsCaption: "Opis opcija",
     // "Default Answer"
     defaultValue: "Zadana vrijednost",
     // "Default texts"
@@ -1270,8 +1268,6 @@ export var hrStrings = {
     timerLocation: "Pokaži ploču timera",
     // "Timer mode"
     timerInfoMode: "Prikazate način rada timer panela",
-    // "Panel display mode"
-    renderMode: "Način prikaza",
     // "Enable entry addition"
     allowAddPanel: "Dopustite dodavanje ploče",
     // "Enable entry removal"
@@ -1321,10 +1317,14 @@ export var hrStrings = {
     // "Regular expression"
     regex: "Redoviti izraz",
     surveyvalidator: {
-      // [Auto-translated] "Error message"
-      text: "Poruka o pogrešci",
+      // [Auto-translated] "Validation message"
+      text: "Poruka o provjeri valjanosti",
       // [Auto-translated] "Validation expression"
-      expression: "Izraz za provjeru valjanosti"
+      expression: "Izraz za provjeru valjanosti",
+      // [Auto-translated] "Notification type"
+      notificationType: "Vrsta obavijesti",
+      // [Auto-translated] "Maximum length (in characters)"
+      maxLength: "Maksimalna duljina (u znakovima)"
     },
     // "Total row header"
     totalText: "Ukupan tekst",
@@ -1384,7 +1384,7 @@ export var hrStrings = {
     labelFalse: "Oznaka \"False\"",
     // "Show the Clear button"
     allowClear: "Prikaz gumba Očisti",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Način pretraživanja",
     // [Auto-translated] "Display format"
     displayStyle: "Format prikaza",
@@ -1450,7 +1450,7 @@ export var hrStrings = {
       // [Auto-translated] "Show scale labels"
       showLabels: "Prikaz oznaka ljestvice",
       // [Auto-translated] "Show tooltips"
-      tooltipVisibilityPG: "Prikaži opise alata",
+      tooltipVisibility: "Prikaži opise alata",
       // [Auto-translated] "Allow thumb crossing"
       allowSwap: "Dopustite križanje palca",
       // [Auto-translated] "Number of auto-generated labels"
@@ -2066,6 +2066,22 @@ export var hrStrings = {
       // [Auto-translated] "Range"
       range: "Domet"
     },
+    tooltipVisibility: {
+      // [Auto-translated] "Auto"
+      auto: "Automobil",
+      // [Auto-translated] "Always"
+      always: "Uvijek",
+      // [Auto-translated] "Never"
+      never: "Nikada"
+    },
+    notificationType: {
+      // [Auto-translated] "Error"
+      error: "Greška",
+      // [Auto-translated] "Warning"
+      warning: "Upozorenje",
+      // [Auto-translated] "Informational"
+      info: "Informativan"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Puno ime i prezime",
@@ -2250,10 +2266,6 @@ export var hrStrings = {
     underRowSingle: "Ispod retka prikažite samo jedan odjeljak",
     // "Auto"
     auto: "Automobil",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skriven"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Oba"
@@ -2693,7 +2705,9 @@ export var hrStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa."
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2753,7 +2767,9 @@ export var hrStrings = {
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
-      expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom."
+      expression: "Upotrijebite ikonu čarobnog štapića kako biste odredili kada se vrijednost pitanja smatra valjanom.",
+      // [Auto-translated] "Errors block progress until resolved. Warnings highlight issues but allow to continue. Informational notes offer additional context or neutral guidance. When using warnings or informational notes, we recommend enabling immediate validation: \"Survey\" → \"Validation\" → \"Run validation\" → \"After an answer has changed\"."
+      notificationType: "Pogreške blokiraju napredak dok se ne riješe. Upozorenja ističu probleme, ali dopuštaju nastavak. Informativne bilješke nude dodatni kontekst ili neutralne smjernice. Kada koristite upozorenja ili informativne bilješke, preporučujemo da omogućite trenutnu provjeru valjanosti: \"Anketa\" → \"Provjera valjanosti\" → \"Pokreni provjeru valjanosti\" → \"Nakon promjene odgovora\"."
     },
     signaturepad: {
       // "Sets the width of the displayed signature area and the resulting image."
@@ -2924,6 +2940,10 @@ export var hrStrings = {
     detailErrorLocation: "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Kada je svojstvo \"Spriječi duplicirane odgovore\" omogućeno za stupac matrice, ispitanik koji pokušava poslati duplicirani unos primit će sljedeću poruku o pogrešci."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3082,6 +3102,10 @@ export var hrStrings = {
     fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Raspoređuje tekstualne okvire u rasporedu s više stupaca."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."
@@ -3212,7 +3236,7 @@ export var hrStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Iscrtaj kao", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloži izvorne stavke", // Auto-generated string
+    attachData: "Priloži izvorne stavke", // Auto-generated string
     // "Choices"
     choices: "choices",
     // "Choices by url"
