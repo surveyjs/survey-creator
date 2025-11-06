@@ -89,6 +89,7 @@ import { DomDocumentHelper } from "./utils/global_variables_utils";
 import { deprecate } from "util";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import Default from "./themes/default-light";
+import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -4718,12 +4719,23 @@ export class SurveyCreatorModel extends Base
     }
 
   }
+
+  private patchLegacyCSSVariables(newCssVariable: any) {
+    Object.keys(legacyCssVariables).forEach((variable) => {
+      if (!!newCssVariable[variable]) {
+        newCssVariable[legacyCssVariables[variable]] = newCssVariable[variable];
+        delete newCssVariable[variable];
+      }
+    });
+  }
+
   public syncTheme(theme: ICreatorTheme, isLight?: boolean): void {
     if (!theme) return;
     this.creatorTheme = theme;
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
+    this.patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
