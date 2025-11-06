@@ -166,7 +166,7 @@ export class SurveyQuestionPresetPropertiesDetail {
             const tabName = tab.name;
             if (!!tabName && tabNames.indexOf(tab.name) < 0) {
               tabNames.push(tab.name);
-              tabs.push({ name: tab.name, index: tabNames.length * tabStep });
+              tabs.push({ name: tab.name, index: tabNames.length * tabStep, iconName: tab.iconName });
             }
             const item: any = { name: propName, index: propertiesIndeces[propName] };
             if (!!tabName) {
@@ -487,7 +487,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
   private getPropertiesArray(model: SurveyModel): Array<any> {
     const categories = this.getQuestionCategories(model).value;
-    return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name) }));
+    return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name), iconName: c.iconName }));
   }
   private changePropTitleAndDescription(path: string, propName: string, val: string): void {
     this.ensureLocalizationPath(path);

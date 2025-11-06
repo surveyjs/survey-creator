@@ -268,7 +268,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
                 newData[q.name] = survey.data[q.name];
               }
             });
-            const newRowValue = { ...row.value, ...newData };
+            const newRowValue = { ...matrix.value[index], ...newData };
             newValue[index] = newRowValue;
             matrix.value = newValue;
             this.updateMatrixRowActions(matrix.survey as any, matrix);

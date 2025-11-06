@@ -201,11 +201,13 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("button", { name: "Apply" }).click();
-
+    await page.waitForTimeout(500);
     await page.getByRole("row", { name: "Custom" }).locator("#show-detail").getByRole("button").click();
 
     await items.getByRole("button", { name: "Add a new item" }).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
+    await page.getByRole("combobox", { name: "Icon name" }).focus();
+    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByText("icon-arrowleft-16x16").click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
@@ -216,6 +218,8 @@ test.describe(title, () => {
 
     await hidden.getByRole("button", { name: "Add a new item" }).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
+    await page.getByRole("combobox", { name: "Icon name" }).focus();
+    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByTitle("icon-arrowright-16x16").click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
@@ -268,7 +272,7 @@ test.describe(title, () => {
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
 
-    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["Survey", "Logo in the Survey Header", "Navigation", "Question Settings"]);
+    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
     expect(await getRowsInputValues(hidden)).toEqual([]);
     expect((await getPropertiesTexts(page)).slice(0, 4)).toEqual([
       "Survey title",
@@ -318,6 +322,8 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Navigation" }).hover();
     await page.getByRole("row", { name: "Navigation" }).getByRole("button").nth(2).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Navigation1");
+    await page.getByRole("combobox", { name: "Icon name" }).focus();
+    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
@@ -327,7 +333,7 @@ test.describe(title, () => {
 
     await page.getByRole("row", { name: "Navigation1" }).hover();
     expect(await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1)).toBeVisible();
-    await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1).click();
+    await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(2).click();
     await page.getByRole("button", { name: "Reset to default" }).waitFor({ state: "visible" });
     await page.getByRole("button", { name: "Reset to default" }).click();
     await page.getByRole("button", { name: "Apply" }).click();
@@ -345,6 +351,8 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Add Custom Category" }).click();
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
+    await page.getByRole("combobox", { name: "Icon name" }).focus();
+    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
