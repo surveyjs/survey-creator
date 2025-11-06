@@ -247,17 +247,17 @@ test.describe(title, () => {
 
     expect(await page.locator(".svc-sidebar-tabs").getByTitle("Data")).toBeVisible();
     await items.getByRole("button", { name: "Collapse" }).click();
-    await items.getByRole("button", { name: "Delete" }).nth(2).click();
+    await items.getByRole("row", { name: "Data" }).getByRole("button", { name: "Delete" }).click();
     expect(await page.locator(".svc-sidebar-tabs").getByTitle("Data")).toBeHidden();
 
     await hidden.getByRole("button", { name: "More" }).first().click();
 
-    expect(await page.locator(".svc-sidebar-tabs").getByTitle("Category 1")).toBeHidden();
+    expect(await page.locator(".svc-sidebar-tabs").getByTitle("category1")).toBeHidden();
     await hidden.getByText("Move to new category").click();
-    expect(await page.locator(".svc-sidebar-tabs").getByTitle("Category 1")).toBeVisible();
-    await page.locator(".svc-sidebar-tabs").getByTitle("Category 1").click();
+    expect(await page.locator(".svc-sidebar-tabs").getByTitle("category1")).toBeVisible();
+    await page.locator(".svc-sidebar-tabs").getByTitle("category1").click();
     expect((await getPropertiesTexts(page))).toEqual([
-      "Survey layout"]);
+      "Clear hidden question values"]);
   });
 
   test("Check presets Property Grid - drag-drop categories", async ({ page }) => {
@@ -268,7 +268,7 @@ test.describe(title, () => {
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
 
-    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
+    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["Survey", "Logo in the Survey Header", "Navigation", "Question Settings"]);
     expect(await getRowsInputValues(hidden)).toEqual([]);
     expect((await getPropertiesTexts(page)).slice(0, 4)).toEqual([
       "Survey title",
@@ -286,83 +286,83 @@ test.describe(title, () => {
     expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(2).getAttribute("title")).toBe("General");
   });
 
-  test.skip("Check presets Property Grid - drag-drop items", async ({ page }) => {
+  test("Check presets Property Grid - drag-drop items", async ({ page }) => {
     await page.locator(".sps-list__container").getByText("Property Grid").click();
-    expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
+    await page.locator(".svc-sidebar-tabs").getByTitle("Logo in the Survey Header").click();
+    expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo height", "Logo fit"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
-    await items.getByRole("row", { name: "Choice Questions" }).locator("#show-detail").getByRole("button").click();
-    await doDragDrop({ page, element: items.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
+    await items.getByRole("row", { name: "Logo in the Survey Header" }).locator("#show-detail").getByRole("button").click();
+    await doDragDrop({ page, element: items.getByRole("row", { name: "Logo height" }).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
 
-    expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Checkboxes"]);
+    expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo fit"]);
 
-    await items.getByRole("row", { name: "Text Input Questions" }).locator("#show-detail").getByRole("button").click();
-    await doDragDrop({ page, element: hidden.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Multiple Textboxes" }), options: { targetPosition: { x: 25, y: 25 } } });
+    await doDragDrop({ page, element: items.getByRole("row", { name: "Logo fit" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey logo" }), options: { targetPosition: { x: 5, y: 5 } } });
+    expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo fit", "Logo width"]);
 
-    expect((await getPropertiesTexts(page)).slice(9, 13)).toEqual(["Single-Line Input", "Long Text", "Slider", "Multiple Textboxes"]);
+    await items.getByRole("row", { name: "General" }).locator("#show-detail").getByRole("button").click();
+    await doDragDrop({ page, element: hidden.getByRole("row", { name: "Logo height" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey title" }), options: { targetPosition: { x: 25, y: 25 } } });
 
-    await doDragDrop({ page, element: items.getByRole("row", { name: "Long Text" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Ranking" }), options: { targetPosition: { x: 5, y: 5 } } });
-    expect((await getPropertiesTexts(page)).slice(7, 12)).toEqual(["Image Picker", "Long Text", "Ranking", "Single-Line Input", "Slider"]);
+    await page.locator(".svc-sidebar-tabs").getByTitle("General").click();
 
-    await items.getByRole("row", { name: "Rating" }).locator("#show-detail").getByRole("button").click();
-    await doDragDrop({ page, element: items.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Stars" }) });
-    await page.locator(".svc-toolbox__item-submenu-button").nth(0).hover();
-    expect(await page.locator(".svc-toolbox-subtypes .sv-popup__container").filter({ visible: true })).toBeVisible();
-    expect((await page.locator(".svc-toolbox__item-subtype").filter({ visible: true }).allTextContents()).map(t => t.trim())).toEqual(["Labels", "Stars", "Slider", "Smileys"]);
+    expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Logo height", "Survey title", "Survey description"]);
   });
 
-  test.skip("Check presets Property Grid - edit category", async ({ page }) => {
+  test("Check presets Property Grid - edit category", async ({ page }) => {
     await page.locator(".sps-list__container").getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
-    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
+    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
 
-    await page.getByRole("row", { name: "Containers" }).hover();
-    await page.getByRole("row", { name: "Containers" }).getByRole("button").nth(1).click();
-    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers1");
+    await page.getByRole("row", { name: "Navigation" }).hover();
+    await page.getByRole("row", { name: "Navigation" }).getByRole("button").nth(2).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Navigation1");
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
-    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers1", "Matrix Questions", "Misc"]);
+    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation1", "Question Settings"]);
+    expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-more-24x24");
+    expect(await page.locator(".svc-menu-action__icon svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-more-24x24");
 
-    await page.getByRole("row", { name: "Containers1" }).hover();
-    expect(await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1)).toBeVisible();
-    await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1).click();
+    await page.getByRole("row", { name: "Navigation1" }).hover();
+    expect(await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1)).toBeVisible();
+    await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1).click();
     await page.getByRole("button", { name: "Reset to default" }).waitFor({ state: "visible" });
     await page.getByRole("button", { name: "Reset to default" }).click();
     await page.getByRole("button", { name: "Apply" }).click();
-    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
+    expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
+    expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
+    expect(await page.locator(".svc-menu-action__icon svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
   });
 
-  test.skip("Check presets Property Grid - custom category and custom item", async ({ page }) => {
+  test("Check presets Property Grid - custom category", async ({ page }) => {
     await page.locator(".sps-list__container").getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
-    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
-    await page.getByRole("button", { name: "New Category" }).click();
+    expect((await getRowsInputValues(items)).slice(-3)).toEqual(["Validation", "\"Thank You\" Page", "Quiz Mode"]);
+    await page.getByRole("button", { name: "Add Custom Category" }).click();
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
 
+    await items.getByRole("row", { name: "Pages" }).getByRole("button", { name: "Delete" }).click();
     await page.getByRole("row", { name: "Custom" }).locator("#show-detail").getByRole("button").click();
+    await doDragDrop({
+      page,
+      element: hidden.getByRole("row", { name: "Pages" }).locator(".sd-table__cell--drag"),
+      target: items.getByText("Drag properties here to show them"),
+      options: { targetPosition: { x: 25, y: 25 } }
+    });
 
-    await items.getByRole("button", { name: "Add a new item" }).click();
-    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
-    await page.getByRole("combobox", { name: "Icon name" }).click();
-    await page.getByText("icon-arrowleft-16x16").click();
-    await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
-    await page.getByRole("button", { name: "Apply" }).click();
-    expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
-    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
-    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
+    expect(await page.locator(".svc-sidebar-tabs").getByTitle("Custom")
+      .locator("svg use").filter({ visible: true }).getAttribute("xlink:href")).toBe("#icon-more-24x24");
 
-    await hidden.getByRole("button", { name: "Add a new item" }).click();
-    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
-    await page.getByRole("combobox", { name: "Icon name" }).click();
-    await page.getByTitle("icon-arrowright-16x16").click();
-    await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
-    await page.getByRole("button", { name: "Apply" }).click();
-    expect(await hidden.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
+    await page.locator(".svc-sidebar-tabs").getByTitle("Custom").click();
+    expect(await getPropertiesTexts(page)).toEqual(["Pages"]);
   });
 
 });
