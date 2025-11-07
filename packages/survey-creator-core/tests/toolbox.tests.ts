@@ -44,7 +44,7 @@ test("toolbox reorder items", (): any => {
   expect(toolbox.items[1].name).toEqual("radiogroup");
   expect(toolbox.items[2].name).toEqual("countries");
   expect(toolbox.items[2].title).toEqual("countries");
-  expect(toolbox.items[2].tooltip).toEqual("countries");
+  expect(toolbox.items[2].getTooltip()).toEqual("countries");
   toolbox.orderedQuestions = ["dropdown", "countries", "radiogroup"];
   expect(toolbox.items[0].name).toEqual("dropdown");
   expect(toolbox.items[1].name).toEqual("countries");

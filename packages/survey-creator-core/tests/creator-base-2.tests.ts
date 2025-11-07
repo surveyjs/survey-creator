@@ -133,8 +133,8 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   const selectedTypes = new Array<string>();
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "property-grid") {
-      if (options.obj) {
-        selectedTypes.push(options.obj.getType());
+      if (options.element) {
+        selectedTypes.push(options.element.getType());
       }
     }
   });
@@ -439,7 +439,6 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
       reason.push(options.allowDrag);
       if (disableDrag) {
         options.allowDrag = false;
-        options.allowDragging = false;
       }
     }
   });
@@ -962,4 +961,154 @@ test("option to hide sidebar", () => {
   expect(creator.isSidebarVisible).toBeTruthy();
   creator.sidebar = undefined;
   expect(creator.isSidebarVisible).toBeFalsy();
+});
+
+test("option to hide settings action", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "question1" }] }] };
+  creator.sidebar.flyoutMode = true;
+  const question = creator.survey.getQuestionByName("question1");
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+  creator.selectElement(question);
+
+  const settingsAction = questionAdorner.actionContainer.getActionById("settings");
+  const toolbarSettings = creator.toolbar.getActionById("svd-settings");
+  expect(toolbarSettings.isVisible).toBeTruthy();
+  expect(settingsAction.isVisible).toBeTruthy();
+
+  creator.removeSidebar = true;
+  creator.selectElement(creator.survey.pages[0]);
+  creator.selectElement(question);
+  expect(toolbarSettings.isVisible).toBeFalsy();
+  expect(settingsAction.isVisible).toBeFalsy();
+});
+
+test("Test inplaceEditChoiceValues <> inplaceEditForValues compatibility", (): any => {
+  const creator = new CreatorTester();
+  creator.inplaceEditChoiceValues = true;
+  expect(creator.inplaceEditForValues).toEqual(true);
+  creator.inplaceEditForValues = false;
+  expect(creator.inplaceEditChoiceValues).toEqual(false);
+});
+
+test("Test showObjectTitles <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showObjectTitles).toEqual(true);
+  creator.showObjectTitles = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test showTitlesInExpressions <> useElementTitles compatibility", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  expect(creator.showTitlesInExpressions).toEqual(true);
+  creator.showTitlesInExpressions = false;
+  expect(creator.useElementTitles).toEqual(false);
+});
+
+test("Test maximumChoicesCount <> maxChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumChoicesCount = 5;
+  expect(creator.maxChoices).toEqual(5);
+  creator.maxChoices = 3;
+  expect(creator.maximumChoicesCount).toEqual(3);
+});
+
+test("Test minimumChoicesCount <> minChoices compatibility", () => {
+  const creator = new CreatorTester();
+  creator.minimumChoicesCount = 5;
+  expect(creator.minChoices).toEqual(5);
+  creator.minChoices = 3;
+  expect(creator.minimumChoicesCount).toEqual(3);
+});
+
+test("Test maximumColumnsCount <> maxColumns compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumColumnsCount = 5;
+  expect(creator.maxColumns).toEqual(5);
+  creator.maxColumns = 3;
+  expect(creator.maximumColumnsCount).toEqual(3);
+});
+
+test("Test maximumRateValues <> maxRateValues compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 5;
+  expect(creator.maxRateValues).toEqual(5);
+  creator.maxRateValues = 3;
+  expect(creator.maximumRateValues).toEqual(3);
+});
+
+test("Test allowEditExpressionsInTextEditor <> logicAllowTextEditExpressions compatibility", () => {
+  const creator = new CreatorTester();
+  creator.allowEditExpressionsInTextEditor = false;
+  expect(creator.logicAllowTextEditExpressions).toEqual(false);
+  creator.logicAllowTextEditExpressions = true;
+  expect(creator.allowEditExpressionsInTextEditor).toEqual(true);
+});
+
+test("Test showSurveyTitle <> showSurveyHeader compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSurveyTitle = false;
+  expect(creator.showSurveyHeader).toEqual(false);
+  creator.showSurveyHeader = true;
+  expect(creator.showSurveyTitle).toEqual(true);
+});
+
+test("Test isAutoSave <> autoSaveEnabled compatibility", () => {
+  const creator = new CreatorTester();
+  creator.isAutoSave = true;
+  expect(creator.autoSaveEnabled).toEqual(true);
+  creator.autoSaveEnabled = false;
+  expect(creator.isAutoSave).toEqual(false);
+});
+
+test("Test maxLogicItemsInCondition <> logicMaxItemsInCondition compatibility", () => {
+  const creator = new CreatorTester();
+  creator.maxLogicItemsInCondition = 4;
+  expect(creator.logicMaxItemsInCondition).toEqual(4);
+  creator.logicMaxItemsInCondition = 2;
+  expect(creator.maxLogicItemsInCondition).toEqual(2);
+});
+
+test("Test showPagesInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showPagesInPreviewTab = false;
+  expect(creator.previewAllowSelectPage).toEqual(false);
+  creator.previewAllowSelectPage = true;
+  expect(creator.showPagesInPreviewTab).toEqual(true);
+});
+
+test("Test showSimulatorInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showSimulatorInPreviewTab = false;
+  expect(creator.previewAllowSimulateDevices).toEqual(false);
+  creator.previewAllowSimulateDevices = true;
+  expect(creator.showSimulatorInPreviewTab).toEqual(true);
+});
+
+test("Test showDefaultLanguageInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showDefaultLanguageInPreviewTab = false;
+  expect(creator.previewAllowSelectLanguage).toEqual(false);
+  creator.previewAllowSelectLanguage = "auto";
+  expect(creator.showDefaultLanguageInPreviewTab).toEqual("auto");
+  creator.showDefaultLanguageInPreviewTab = "all";
+  expect(creator.previewAllowSelectLanguage).toEqual("all");
+});
+
+test("Test showInvisibleElementsInPreviewTab <> previewAllowSelectPage compatibility", () => {
+  const creator = new CreatorTester();
+  creator.showInvisibleElementsInPreviewTab = false;
+  expect(creator.previewAllowHiddenElements).toEqual(false);
+  creator.previewAllowHiddenElements = true;
+  expect(creator.showInvisibleElementsInPreviewTab).toEqual(true);
+});
+
+test("Test makeNewViewActive (obsolete)", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.makeNewViewActive("preview"));
+  expect(creator.activeTab).toEqual("preview");
+  expect(creator.makeNewViewActive("designer"));
+  expect(creator.activeTab).toEqual("designer");
 });

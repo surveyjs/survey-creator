@@ -274,8 +274,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.objectValue = object;
     this.panelValue = <QuestionPanelDynamicModel>(this.editSurvey.getQuestionByName("panel"));
     this.textEditorValue = <QuestionCommentModel>(this.editSurvey.getQuestionByName("textEditor"));
-    if (!!this.options.maxLogicItemsInCondition) {
-      this.panel.maxPanelCount = this.options.maxLogicItemsInCondition;
+    if (!!this.options.logicMaxItemsInCondition) {
+      this.panel.maxPanelCount = this.options.logicMaxItemsInCondition;
     }
     this.allConditionQuestions = this.createAllConditionQuestions();
     this.editSurvey.onValueChanged.add((sender, options) => {
@@ -696,7 +696,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < res.length; i++) {
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
-      if (!(this.options.useElementTitles || this.options.showTitlesInExpressions)) {
+      if (!this.options.useElementTitles) {
         let name = res[i].name;
         let valueName = question.valueName;
         if (!!valueName && name.indexOf(valueName) == 0) {
@@ -1057,7 +1057,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any) {
     if (options.question.name === "panel" && options.value.length > 0) {
-      const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
+      const maxLogicItems = this.options.logicMaxItemsInCondition > 0 ? this.options.logicMaxItemsInCondition : 100;
       options.question.maxPanelCount = options.value.length === 1 && !options.value[0].questionName ? 1 : maxLogicItems;
       this.panel.panels.forEach(panel => {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;

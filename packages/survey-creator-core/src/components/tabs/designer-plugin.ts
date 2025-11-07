@@ -53,9 +53,13 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       return this.isSettingsActive;
     });
   }
-  private createVisibleUpdater() {
+  private createVisibleUpdater(additionalConditionFunc?: () => boolean) {
     return <any>new ComputedUpdater<boolean>(() => {
-      return this.creator.activeTab === "designer";
+      let additionalCondition = true;
+      if (!!additionalConditionFunc) {
+        additionalCondition = additionalConditionFunc();
+      }
+      return this.creator.activeTab === "designer" && additionalCondition;
     });
   }
   private updateTabControl() {
@@ -254,7 +258,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);
     this.creator.onSurveyInstanceCreated.add((s, o) => {
-      if (o.reason == "designer") {
+      if (o.area == "designer-tab") {
         this.designerStateManager.initForSurvey(o.survey);
       }
     });
@@ -419,7 +423,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         }
       },
       active: this.createSelectedUpdater(),
-      visible: this.createVisibleUpdater(),
+      visible: this.createVisibleUpdater(() => {
+        return this.creator.removeSidebar !== true;
+      }),
       locTitleName: "ed.surveySettings",
       locTooltipName: "ed.surveySettingsTooltip",
       showTitle: false

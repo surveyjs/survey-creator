@@ -412,7 +412,4 @@ export class SurveyHelper {
     }
     return containers;
   }
-  public static isPanelDynamic(element: any) {
-    return !!element && (element as Base).isDescendantOf("paneldynamic");
-  }
 }

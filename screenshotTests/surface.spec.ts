@@ -478,10 +478,10 @@ test.describe(title, () => {
     const DragZoneQuestion1 = Question1.locator(".svc-question__drag-element");
 
     await Question1.click({ position: { x: 0, y: 20 } });
-    await doDragDrop({ page,
-      element: DragZoneQuestion1,
-      target: Question2,
-      options: { destinationOffsetX: 80 }
+    await doDragDrop({ page, element: DragZoneQuestion1, target: Question2,
+      options: {
+        targetPosition: { x: 500, y: 20 }
+      }
     });
     await resetHoverToCreator(page);
     await compareScreenshot(page, ".svc-question__content", "surface-panel-multi-row-question-selected.png");
@@ -1136,9 +1136,9 @@ test.describe(title, () => {
   test("Question adorner - hide converter", async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 1900 });
     await page.evaluate(() => {
-      (window as any).creator.onDefineElementMenuItems.add((sender, options) => {
-        const convertToAction = options.items.filter(item => item.id === "convertTo")[0];
-        options.items.splice(options.items.indexOf(convertToAction), 1);
+      (window as any).creator.onElementGetActions.add((sender, options) => {
+        const convertToAction = options.actions.filter(action => action.id === "convertTo")[0];
+        options.actions.splice(options.actions.indexOf(convertToAction), 1);
       });
     });
     const json = {
@@ -1472,9 +1472,9 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "never";
-      window["creator"].onDefineElementMenuItems.add((_, options) => {
-        if (options.obj["isPage"]) return;
-        options.items.push({
+      window["creator"].onElementGetActions.add((_, options) => {
+        if (options.element["isPage"]) return;
+        options.actions.push({
           id: "isrequired2",
           title: "Required",
           enabled: false,

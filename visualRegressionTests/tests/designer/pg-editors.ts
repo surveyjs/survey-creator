@@ -173,7 +173,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1240, 870);
 //     await ClientFunction(() => {
-//       (<any>window).creator.onPropertyGridShowModal.add((sender, options) => {
+//       (<any>window).creator.onPropertyGridShowPopup.add((sender, options) => {
 //         const editor = options.popupEditor;
 //         options.popupModel.footerToolbar.addAction({
 //           id: "fast-entry-custom",

@@ -154,7 +154,7 @@ test.describe(title, () => {
   test("Custom button into fast entry popup", async ({ page }) => {
     await page.setViewportSize({ width: 1240, height: 870 });
     await page.evaluate(() => {
-      (<any>window).creator.onPropertyGridShowModal.add((sender, options) => {
+      (<any>window).creator.onPropertyGridShowPopup.add((sender, options) => {
         const editor = options.popupEditor;
         options.popupModel.footerToolbar.addAction({
           id: "fast-entry-custom",

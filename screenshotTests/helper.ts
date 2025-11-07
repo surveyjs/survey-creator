@@ -168,10 +168,11 @@ export async function addQuestionByAddQuestionButton(page, text) {
   await page.locator(".svc-list__item span").getByText(text).click();
 }
 
-export async function changeToolboxLocation(page, newVal: string) {
+export async function changeToolboxLocation(page: Page, newVal: string) {
   await page.evaluate((newVal) => {
     window["creator"].toolboxLocation = newVal;
   }, newVal);
+  await page.waitForTimeout(500);
 }
 
 export async function changeToolboxScrolling(page, hasScroll: boolean) {
@@ -209,7 +210,7 @@ export async function setShowAddQuestionButton(page, newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(page, newVal: boolean) {
   await page.evaluate((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   }, newVal);
 }
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {
