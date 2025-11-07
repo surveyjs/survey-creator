@@ -4734,12 +4734,13 @@ export class SurveyCreatorModel extends Base
     this.creatorTheme = theme;
 
     const newCssVariable = {};
-    assign(newCssVariable, theme?.cssVariables);
+    assign(newCssVariable, Default.cssVariables, theme?.cssVariables);
     this.patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
     }
+    this.creatorTheme.cssVariables = newCssVariable;
     this.themeVariables = newCssVariable;
     const iconsSetName = this.creatorTheme && this.creatorTheme["iconSet"] ? this.creatorTheme["iconSet"] : "v2";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
