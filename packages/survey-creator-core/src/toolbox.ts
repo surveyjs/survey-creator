@@ -399,10 +399,6 @@ export class QuestionToolbox
   ];
   private _containerElementValue: HTMLElement;
   private _rootElementValue: HTMLElement;
-  private _scrollbarElement: HTMLElement;
-  private _containerBodyElement: HTMLElement;
-  private _scrollbarSizerElement: HTMLElement;
-  private _containerBodyResizeObserver: ResizeObserver;
   public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
