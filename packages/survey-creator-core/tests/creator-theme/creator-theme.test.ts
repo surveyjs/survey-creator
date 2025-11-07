@@ -3,6 +3,7 @@ import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { CreatorThemes, PredefinedCreatorThemes, registerCreatorTheme } from "../../src/creator-theme/creator-themes";
 import { CreatorTester } from "../creator-tester";
+import Default from "../../src/themes/default-light";
 
 test("onCreatorThemePropertyChanged event", (): any => {
   const creator: CreatorTester = new CreatorTester();
@@ -41,7 +42,7 @@ test("registerCreatorTheme function", (): any => {
 
     themeChooser.value = customThemeName;
     expect(creator.creatorTheme.themeName).toBe(customThemeName);
-    expect(creator.themeVariables).toStrictEqual({ ...customCssVariables });
+    expect(creator.themeVariables).toStrictEqual({ ...Default.cssVariables, ...customCssVariables });
   } finally {
     PredefinedCreatorThemes.splice(PredefinedCreatorThemes.indexOf(customThemeName), 1);
     delete CreatorThemes[customThemeName];
