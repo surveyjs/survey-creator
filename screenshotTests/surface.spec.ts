@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator } from "./helper";
+import { url, compareScreenshot, test, expect, setJSON, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -161,7 +161,7 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
-    await page.evaluate(() => document.body.focus());
+    await resetFocusToBody(page);
     await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-mobile.png");
   });
 
@@ -1424,7 +1424,7 @@ test.describe(title, () => {
     await page.locator(".svc-question__adorner").nth(2).click({ position: { x: 10, y: 10 } });
     await page.locator(".svc-question__adorner").nth(2).scrollIntoViewIfNeeded();
     await page.hover(".svc-creator", { position: { x: 10, y: 10 } });
-    await page.evaluate(() => { document.body.focus(); });
+    await resetFocusToBody(page);
     await page.waitForTimeout(100);
 
     const root = page.locator(".sd-page.sd-body__page");
