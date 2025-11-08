@@ -455,12 +455,19 @@ test.describe(title, () => {
     const toolboxElement = page.locator(".svc-toolbox");
     const toolboxSearch = page.locator(".svc-toolbox input").first();
 
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-1.png", fullPage: true });
     await changeToolboxScrolling(page, false);
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-2.png", fullPage: true });
     await setAllowEditSurveyTitle(page, false);
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-3.png", fullPage: true });
     await setShowAddQuestionButton(page, false);
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-4.png", fullPage: true });
     await changeToolboxSearchEnabled(page, true);
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-5.png", fullPage: true });
     await changeToolboxLocation(page, "right");
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-6.png", fullPage: true });
     await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
+    await page.screenshot({ path: "test-results/toolbox-search-rtl/toolbox-search-rtl-7.png", fullPage: true });
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-search-right.png");
