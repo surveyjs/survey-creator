@@ -3,7 +3,8 @@
   "name": "survey-creator-core",
   "description": "A framework-independent core package of the SurveyJS Survey Creator component. With Survey Creator, you can visually design complex, interactive JSON forms and surveys in a drag-and-drop interface.",
   "homepage": "https://surveyjs.io/",
-  "license": "https://surveyjs.io/licensing",
+  "license": "SEE LICENSE IN LICENSE.pdf",
+  "licenseUrl": "https://surveyjs.io/licensing",
   "keywords": [
   "survey",
   "form",
