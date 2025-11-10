@@ -81,8 +81,6 @@
     "testcafe": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --env=angular --config-file .testcaferc.dev.js",
     "testcafe:ci": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "test": "ng test survey-creator-angular",
-    "visual-regression-tests:ci": "testcafe --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
-    "visual-regression-tests": "testcafe ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "test:single": "ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\" ",
     "test:a11y": "playwright test --project a11y --ui",
