@@ -1,10 +1,11 @@
 {
   "name": "survey-creator-react",
   "version": "2.3.14",
-  "description": "A dynamic, white-label drag-and-drop form builder for React that generates JSON schemas defining a form’s structure, layout, style, and behaviour. 
-  These schemas are then rendered using SurveyJS Form Library. With Survey Creator, you can visually design complex, interactive forms and surveys without writing code.",
+  "description": "A white-label drag-and-drop form builder for React that lets you design complex, interactive forms and surveys without writing code. It generates JSON schemas used by the SurveyJS Form Library to render dynamic forms in your React app.",
+  "author": "DevSoft Baltic OU <info@devsoftbaltic.com>",
   "homepage": "https://surveyjs.io/",
-  "license": "https://surveyjs.io/licensing",
+  "license": "SEE LICENSE IN LICENSE.pdf",
+  "licenseUrl": "https://surveyjs.io/licensing",
   "keywords": [
   "react",
   "survey",
