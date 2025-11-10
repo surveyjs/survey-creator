@@ -228,11 +228,6 @@ jobs:
         condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - script: |
           cd $(Build.SourcesDirectory)/survey-creator
           npm run postinstall
         displayName: "install chrome playwright"
@@ -321,25 +316,3 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: "Creator React SCR Tests"
         condition: succeededOrFailed()
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run vrt:v2:ci
-        displayName: "Visual Regression Tests V2 Creator React"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests-V2"
-          Contents: "**"
-          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_VRT-V2"
-          OverWrite: true
-        condition: always()
-        displayName: "copy vrt v2 react artifacts"
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_React_VRT-V2/"
-          ArtifactName: "Creator_React_VRT-V2"
-          publishLocation: "Container"
-        condition: always()
-        displayName: "publish vrt v2 react artifacts"
