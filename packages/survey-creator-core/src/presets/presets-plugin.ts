@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -49,21 +49,25 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.model.model.onComplete.add(() => this.hidePresets());
 
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
+    let settingsAction: IAction;
+    let presetsList: ListModel;
+    const keep = (item: IAction) => {
+      settingsAction.popupModel.show();
+    };
     const tools = [
       { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
       { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: () => { this.model?.loadJsonFile(); } },
-      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: () => { this.model?.downloadJsonFile(); } },
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
+      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
       { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
       { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.model?.resetToDefaults("page_languages"); } },
       { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
     ];
-    let settingsAction;
-    let presetsList;
+
     presets.forEach(p => {
       p.action = (item)=>{
         presetsList.selectedItem = item;
-        settingsAction.popupModel.show();
+        keep(item);
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });
