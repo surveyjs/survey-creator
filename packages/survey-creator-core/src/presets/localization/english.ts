@@ -109,7 +109,8 @@ export const enStrings = {
     categoryRestoredToDefault: "Category restored to default",
     edit: "Edit",
     completeText: "Save & Exit",
-    pagePrevText: "Back"
+    pagePrevText: "Back",
+    required: "Please enter a value.",
   },
   plugin: {
     buttonTitle: "UI Configuration Manager",

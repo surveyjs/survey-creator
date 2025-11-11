@@ -255,6 +255,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     survey.data = data;
     survey.css = presetsCss;
     survey.enterKeyAction = "loseFocus";
+    survey.questionErrorLocation = "bottom";
+
     if (settings.showDialog) {
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
@@ -300,7 +302,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         }
       }
       survey.getAllPanels().forEach(q => (q as PanelModel).visible = !(q as PanelModel).visible);
-      survey.getAllQuestions().forEach(q => q.visible = !q.visible);
+      survey.getAllQuestions().forEach(q => {
+        q.visible = !q.visible;
+        if (q.isRequired) {
+          q.requiredErrorText = getLocString("presets.editor.required");
+        }
+      });
     }
     return survey;
   }
