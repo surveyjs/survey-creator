@@ -65,6 +65,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
             {
               type: "dropdown",
               name: this.nameActiveTab,
+              allowClear: false,
               title: getLocString("presets.tabs.defaultTab")
             }
           ]
