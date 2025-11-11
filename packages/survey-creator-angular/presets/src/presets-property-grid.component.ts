@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { PropertyGridViewModel } from "survey-creator-core";
+import { getLocString, PropertyGridViewModel } from "survey-creator-core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -13,6 +13,9 @@ export class PresetsPropertyGridWrapperComponent extends BaseAngular<PropertyGri
   showPresets() {
     (this.model as any)["showPresets"]?.();
   }
+
+  buttonTitle = getLocString("presets.plugin.buttonTitle");
+  buttonDescription = getLocString("presets.plugin.buttonDescription");
 
   protected getModel(): PropertyGridViewModel {
     return this.model!;

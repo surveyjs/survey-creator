@@ -6,7 +6,7 @@ import {
   SurveyElementBase,
   SvgIcon,
 } from "survey-react-ui";
-import { PropertyGridViewModel } from "survey-creator-core";
+import { getLocString, PropertyGridViewModel } from "survey-creator-core";
 interface IPresetsPropertyGridWrapperProps {
   model: PropertyGridViewModel;
 }
@@ -25,8 +25,8 @@ export class PresetsPropertyGridWrapper extends React.Component<any, any> {
             onClick={ model["showPresets"] }
           >
             <div className="sps-launch__container">
-              <div className="sps-launch__text">Set up Creator Presets</div>
-              <div className="sps-launch__text2">Global UI customization</div>
+              <div className="sps-launch__text">{getLocString("presets.plugin.buttonTitle")}</div>
+              <div className="sps-launch__text2">{getLocString("presets.plugin.buttonDescription")}</div>
               <div className="sps-launch__icon">
                 <div className="sps-launch__chevron-right-16-x-16">
                   <div className="sps-launch__icon2">

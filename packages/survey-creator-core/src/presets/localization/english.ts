@@ -112,6 +112,8 @@ export const enStrings = {
     pagePrevText: "Back"
   },
   plugin: {
+    buttonTitle: "UI Configuration Manager",
+    buttonDescription: "Configure Toolbox, Tabs, Property Grid, and other Survey Creator UI elements, and save the configuration as a reusable preset.",
     presetsTab: "Presets",
     creatorPresets: "Creator Presets",
     save: "Save & Exit",
