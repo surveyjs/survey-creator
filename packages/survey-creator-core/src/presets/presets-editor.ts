@@ -72,9 +72,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public set json(val: ICreatorPresetData) {
     this.preset.setJson(val);
-    this.modelValue = this.createModel();
+    this.updateDataFromJson(this.modelValue);
     this.upldateResultJson();
-    this.applyFromSurveyModel();
   }
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
@@ -110,6 +109,14 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private notify(message: string) {
     this.creator.notify(message);
   }
+
+  protected updateDataFromJson(model: SurveyModel) {
+    const json = this.preset.getJson() || {};
+    model.editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
+    this.updateJsonLocalizationStrings(model.editablePresets);
+    return json;
+  }
+
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -127,9 +134,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       this.defaultJsonValue = {};
       editablePresets.forEach(item => this.defaultJsonValue[item.path] = item.getDefaultJsonValue(this.creator));
     }
-    const json = this.preset.getJson() || {};
-    editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
-    this.updateJsonLocalizationStrings(editablePresets);
+    const json = this.updateDataFromJson(model);
+
     this.activatePage(model, this.creator, editablePresets);
     model.onCurrentPageChanged.add((sender, options) => {
       this.activatePage(model, this.creator, editablePresets);
