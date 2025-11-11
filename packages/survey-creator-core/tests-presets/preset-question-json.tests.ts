@@ -57,6 +57,21 @@ describe("QuestionPresetJsonModel", () => {
     expect(errors[0].text).toBe("JSON error");
   });
 
+  test("Should not update value with incompatible JSON", () => {
+    const initialValue = { test: "value" };
+    question.value = initialValue;
+    question.textAreaModel.onTextAreaChange({ target: { value: '{"typo": "text"}' } } as any);
+    expect(question.value).toEqual(initialValue);
+  });
+
+  test("Should add error when JSON is incompatible", () => {
+    const errors: any[] = [];
+    question.textAreaModel.onTextAreaChange({ target: { value: '{"typo": "text"}' } } as any);
+    question.onCheckForErrors(errors, false, true);
+    expect(errors.length).toBe(1);
+    expect(errors[0].text).toBe("JSON error");
+  });
+
   test("Should not add error when JSON is valid", () => {
     const errors: any[] = [];
     question.textAreaModel.onTextAreaChange({ target: { value: '{"type": "text"}' } } as any);
