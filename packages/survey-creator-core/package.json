@@ -1,32 +1,6 @@
 {
   "version": "2.3.14",
   "name": "survey-creator-core",
-  "description": "A framework-independent core package of the SurveyJS Survey Creator component. With Survey Creator, you can visually design complex, interactive JSON forms and surveys in a drag-and-drop interface.",
-  "homepage": "https://surveyjs.io/",
-  "license": "SEE LICENSE IN LICENSE.pdf",
-  "licenseUrl": "https://surveyjs.io/licensing",
-  "keywords": [
-  "survey",
-  "form",
-  "surveyjs",
-  "survey-library",
-  "form-builder",
-  "dynamic-form-builder",
-  "drag-and-drop-form-builder",
-  "form-library",
-  "form-management",
-  "questionnaire",
-  "data-collection",
-  "ui-component",
-  "json",
-  "json-schema",
-  "survey-creator",
-  "survey-builder",
-  "client-side",
-  "frontend",
-  "javascript",
-  "typescript"
-],
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"
