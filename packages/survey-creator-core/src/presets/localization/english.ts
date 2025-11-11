@@ -4,10 +4,10 @@ export const enStrings = {
     title: "Languages",
     navigationTitle: "Languages",
     description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
-    creatorUI: "Creator UI language",
+    creatorUI: "Survey Creator UI language",
     surveyLanguages: "Survey languages",
     searchPlaceholder: "Type to search...",
-    translateToEnglish: "Translate Survey language names to English"
+    translateToEnglish: "Translate language names to English"
   },
   tabs: {
     title: "Configure tabs",
@@ -54,8 +54,8 @@ export const enStrings = {
   propertyGrid: {
     title: "Customize the Property Grid",
     navigationTitle: "Property Grid",
-    description: "Select an element to customize its settings available in the Property Grid.",
-    selectElement: "Select an element to customize its settings available in the Property Grid",
+    description: "Hide, rename, reorder, or change property grouping in the Property Grid.",
+    selectElement: "Select a survey element to customize",
     propertyGrid: "Property Grid",
     noCategoriesText: "No categories",
     noItemsText: "Drag properties here to show them",
@@ -67,7 +67,7 @@ export const enStrings = {
     name: "Name",
     titleField: "Title",
     descriptionField: "Helper Text",
-    addCustomCategory: "Add Custom Category"
+    addCustomCategory: "New Category"
   },
   options: {
     title: "Survey Creator Options",

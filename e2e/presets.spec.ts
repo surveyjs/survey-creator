@@ -348,7 +348,7 @@ test.describe(title, () => {
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
     expect((await getRowsInputValues(items)).slice(-3)).toEqual(["Validation", "\"Thank You\" Page", "Quiz Mode"]);
-    await page.getByRole("button", { name: "Add Custom Category" }).click();
+    await page.getByRole("button", { name: "New Category" }).click();
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
