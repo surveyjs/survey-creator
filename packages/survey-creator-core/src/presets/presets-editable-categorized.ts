@@ -273,7 +273,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (options.question.name == this.nameCategories) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model)
+        description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+        isNew: true
       });
     }
   }

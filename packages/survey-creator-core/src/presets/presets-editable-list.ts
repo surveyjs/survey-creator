@@ -117,7 +117,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     });
   }
 
-  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string}) {
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string, isNew: boolean}) {
     let survey: SurveyModel;
     let resetAction;
     const itemKey = this.getMatrixKeyColumnName(question);
@@ -135,7 +135,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       }
     };
     resetAction = new Action(resetActionParams);
-    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [resetAction], title: options?.description });
+    survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [resetAction], title: options?.description, removeOnCancel: options.isNew });
     resetAction.enabled = !Helpers.isTwoValueEquals(survey.data, this.getDefaultItem(question, survey.getValue(itemKey)));
     survey.onValueChanged.add(()=>resetAction.enabled = true);
     const keyQuestion = survey.getQuestionByName(itemKey);
@@ -233,7 +233,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.items.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model))
+        description: getLocString("presets.items.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model)),
+        isNew: true
       });
     }
   }
@@ -246,7 +247,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       this.updateRowActions(options.question, options.row, actions);
     }
   }
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string}) {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string, removeOnCancel: boolean}) {
     const index = (matrix.visibleRows as any).findIndex(r => r === row);
     const data = matrix.value[index];
     const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
@@ -280,6 +281,11 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
           }
         },
         onCancel: () => {
+          if (options.removeOnCancel) {
+            const newValue = [...matrix.value];
+            newValue.splice(index, 1);
+            matrix.value = newValue;
+          }
           return true;
         },
         cssClass: "sps-popup svc-property-editor svc-creator-popup",
