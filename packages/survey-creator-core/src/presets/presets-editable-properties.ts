@@ -131,7 +131,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     this.updateCurrentJsonCore(this.currentJson.classes, val);
   }
   private updateCurrentJsonCore(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>): void {
-    if (!Array.isArray(val) || val.length === 0) return;
+    if (!Array.isArray(val)) val = [];
     const tabNames = [];
     this.classes.forEach(cl => {
       this.updateCurrentJsonClass(curJsonClasses, val, cl, tabNames);
