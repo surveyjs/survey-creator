@@ -124,7 +124,10 @@ export const enStrings = {
     edit: "Edit",
     resetLanguages: "Reset Languages to default",
     resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults"
+    resetToDefaults: "Reset {0} to defaults",
+    basic: "basic",
+    advanced: "advanced",
+    expert: "expert"
   }
 };
 const locale = getLocaleStrings("en");

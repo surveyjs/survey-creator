@@ -2,6 +2,7 @@ import { createDropdownActionModel, IAction, ListModel } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
+import { basic, advanced, expert } from "./default-settings";
 export class TabPresetsPlugin implements ICreatorPlugin {
   public model: CreatorPresetEditorModel;
   public static iconName = "icon-settings";
@@ -56,6 +57,10 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     };
     const tools = [
       { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
+      { id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "basic", title: getLocString("presets.plugin.basic"), action: (item: IAction) => { keep(item); this.model.json = basic; } },
+      { id: "advanced", title: getLocString("presets.plugin.advanced"), action: (item: IAction) => { keep(item); this.model.json = advanced; } },
+      { id: "expert", title: getLocString("presets.plugin.expert"), action: (item: IAction) => { keep(item); this.model.json = expert; } },
       { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
