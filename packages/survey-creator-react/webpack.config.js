@@ -14,25 +14,42 @@ const banner = [
   "SurveyJS Creator React v" + packageJson.version,
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator"
+  "License: https://surveyjs.io/licensing"
 ].join("\n");
 
 const buildPlatformJson = {
   name: packageJson.name,
   version: packageJson.version,
-  description:
-    "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
+  description: "A white-label drag-and-drop form builder for React that lets you design complex, interactive forms and surveys without writing code. It generates JSON schemas used by the SurveyJS Form Library to render dynamic forms in your React app.",
+  author: "DevSoft Baltic OU <info@devsoftbaltic.com>",
+  homepage: "https://surveyjs.io/",
+  license: "SEE LICENSE IN LICENSE",
+  licenseUrl: "https://surveyjs.io/licensing",
   keywords: [
-    "Survey",
-    "Survey Creator",
-    "Form Builder",
-    "Survey Maker",
-    "SurveyJS",
-    "JavaScript",
-    "TypeScript"
+"react",
+    "survey",
+    "form",
+    "surveyjs",
+    "survey-library",
+    "react-component",
+    "form-builder",
+    "dynamic-form-builder",
+    "drag-and-drop-form-builder",
+    "form-library",
+    "form-management",
+    "questionnaire",
+    "data-collection",
+    "ui-component",
+    "json",
+    "json-schema",
+    "react-schema-form",
+    "survey-creator",
+    "survey-builder",
+    "client-side",
+    "frontend",
+    "javascript",
+    "typescript"
   ],
-  homepage: "https://surveyjs.io/Overview/Survey-Creator",
-  license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
     "**/*"
   ],
