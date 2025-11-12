@@ -125,6 +125,7 @@ export const enStrings = {
     resetLanguages: "Reset Languages to default",
     resetAll: "Reset all changes",
     resetToDefaults: "Reset {0} to defaults",
+    defaultSettings: "Default Settings",
     basic: "Basic",
     advanced: "Advanced",
     expert: "Expert"
