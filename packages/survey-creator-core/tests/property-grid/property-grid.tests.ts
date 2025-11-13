@@ -2145,6 +2145,24 @@ test("Edit columns in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("min")).toBeTruthy();
   expect(propertyGrid.survey.getQuestionByName("min").isVisible).toBeTruthy();
 });
+test("Change question name from 'question1' to 'Question1', Bug#7261", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [{ elements: [{ type: "text", name: "question1" }, { type: "text", name: "q2", visibleIf: "{question1}=1" }] }]
+  };
+  creator.setModified("");
+  const question = creator.survey.getQuestionByName("question1");
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const nameQuestion = propertyGrid.survey.getQuestionByName("name");
+  nameQuestion.inputValue = "Question1";
+  expect(nameQuestion.value).toStrictEqual("Question1");
+  expect(question.name).toStrictEqual("Question1");
+  const question2 = creator.survey.getQuestionByName("q2");
+  expect(question2.visibleIf).toStrictEqual("{Question1}=1");
+  expect(creator.state).toBe("modified");
+  const json = creator.survey.toJSON();
+  expect(json.pages[0].elements[0].name).toStrictEqual("Question1");
+});
 test("Change checkbox column type into boolean, Bug#4519", () => {
   const survey = new SurveyModel({
     "elements": [
