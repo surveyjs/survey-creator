@@ -1,4 +1,4 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement, SurveyModel } from "survey-core";
+import { Base, ComputedUpdater, Helpers, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement, SurveyModel } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
@@ -607,6 +607,29 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
     return this.excludeTextPropertyName(propNames, options);
   }
 }
+export class PropertyGridEditorMatrixCustomLabels extends PropertyGridEditorMatrixItemValues {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "sliderlabel[]";
+  }
+  public onMatrixCellValidate(obj: Base, options: any): string {
+    const newVal = options.value;
+    if (!Helpers.isNumber(newVal)) return;
+    if (options.columnName == "value" && !options.error) {
+      const val = Helpers.getNumber(newVal);
+      const errorVal = this.getMinMaxError(obj, val);
+      if (!!errorVal) {
+        options.error = options.question.getLocalizationString(errorVal[0]).replace("{0}", errorVal[1]);
+      }
+    }
+  }
+  private getMinMaxError(obj: Base, val: number): [string, number] {
+    const min = (<any>obj).min;
+    const max = (<any>obj).max;
+    if (val < min) return ["minError", min];
+    if (val > max) return ["maxError", max];
+    return null;
+  }
+}
 
 export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
@@ -895,6 +918,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixRateValues());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixCustomLabels());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixPages());
 PropertyGridEditorCollection.register(

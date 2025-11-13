@@ -184,6 +184,7 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
+  onMatrixCellValidate?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any, creator: ISurveyCreatorOptions) => void;
@@ -268,6 +269,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMatrixCellCreated) {
       res.onMatrixCellCreated(options.question.obj, options);
+    }
+  },
+  onMatrixCellValidate(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixCellValidate) {
+      res.onMatrixCellValidate(options.question.obj, options);
     }
   },
   onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -1308,6 +1315,7 @@ export class PropertyGridModel {
     const q = options.row.getQuestionByColumnName(options.columnName);
     if (!q || !q.property) return;
     options.error = this.validateQuestionValue(<any>options.row.editingObj, q, q.property, options.value);
+    PropertyGridEditorCollection.onMatrixCellValidate(options.question.editingObj, options.question.property, options);
   }
   private onGetMatrixRowAction(options: any) {
     PropertyGridEditorCollection.onGetMatrixRowAction(
