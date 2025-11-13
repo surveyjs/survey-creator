@@ -324,6 +324,12 @@ export interface ISurveyCreatorOptions {
     callback: (status: string, data: any) => any,
     context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
+  clearFiles(
+    value: any,
+    question: Question,
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
+  ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
@@ -485,6 +491,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
     question: Question,
     callback: (status: string, data: any) => any
   ): void { }
+  clearFiles(value: any, question: Question, callback: (status: string, data: any) => any, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void {
+  }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }

@@ -1005,6 +1005,12 @@ export class PropertyGridModel {
       const item = options.question.obj.getType() == "imageitemvalue" ? options.question.obj : undefined;
       this.options.uploadFiles(options.files, question, callback, { element: options.question.obj, item: item, elementType: options.question.obj.getType(), propertyName: options.name });
     });
+    this.survey.onClearFiles.add((_, options) => {
+      const callback = (status: string, data: any) => options.callback(status, options.value);
+      const question = options.question.obj.getType() == "survey" ? undefined : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : options.question.obj);
+      const item = options.question.obj.getType() == "imageitemvalue" ? options.question.obj : undefined;
+      this.options.clearFiles(options.value, question, callback, { element: options.question.obj, item: item, elementType: options.question.obj.getType(), propertyName: options.name });
+    });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;

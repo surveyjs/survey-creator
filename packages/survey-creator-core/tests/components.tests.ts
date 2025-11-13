@@ -893,6 +893,26 @@ test("QuestionImageAdornerViewModel filePresentationModel triggers creator.onUpl
   expect(uploadCount).toBe(1);
 });
 
+test("QuestionImageAdornerViewModel triggers creator.onClearFile event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  question.value = [{}];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  let clearCount = 0;
+  creator.onClearFile.add((s, o) => {
+    clearCount++;
+    o.callback({}, "success");
+  });
+  expect(clearCount).toBe(0);
+
+  imageAdorner.filePresentationModel.clear();
+  expect(clearCount).toBe(1);
+});
+
 test("QuestionImageAdornerViewModel filePresentationModel creates own survey instance", () => {
   const creator = new CreatorTester();
   creator.JSON = {
