@@ -158,11 +158,18 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     let items = (json["items"] || []).map(i => typeof i === "string" ? { name: i } : i);
-    const tabNames = creator.tabbedMenu.actions.map(a => a.id);
-
+    const tabNames = creator.initialTabs();
     const allTabs = this.getAllTabs(creator);
+    const defaultItems = allTabs.filter(t => tabNames.indexOf(t.name) >= 0);
     if (items.length === 0) {
-      items = allTabs.filter(t => tabNames.indexOf(t.name) >= 0);
+      items = defaultItems;
+    } else {
+      for (let i = 0; i < items.length; i++) {
+        const defaultItem = defaultItems.filter(di => di.name == items[i].name)[0];
+        if (defaultItem) {
+          items[i] = { ...defaultItem, ...items[i] };
+        }
+      }
     }
     const itemNames = items.map(i => i.name);
     const hiddenItems = allTabs.filter(t => itemNames.indexOf(t.name) < 0);

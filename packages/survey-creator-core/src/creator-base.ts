@@ -514,6 +514,7 @@ export class SurveyCreatorModel extends Base
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
+  private customTabNames: string[] = [];
   /**
    * @deprecated Use the [`addTab(tabOptions)`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#addTab) method instead.
    */
@@ -566,6 +567,7 @@ export class SurveyCreatorModel extends Base
       throw new Error("Plugin or name is not set");
     }
     this.tabbedMenu.addTab(name, plugin, title, iconName, componentName, index);
+    this.customTabNames.push(name);
     this.addPlugin(name, plugin);
   }
   public addPlugin(name: string, plugin: ICreatorPlugin): void {
@@ -579,6 +581,7 @@ export class SurveyCreatorModel extends Base
       this.tabs.splice(index, 1);
     }
     delete this.plugins[name];
+
     if (plugin.dispose) {
       plugin.dispose();
     }
@@ -2015,7 +2018,7 @@ export class SurveyCreatorModel extends Base
     if (this.showTranslationTab) {
       tabs.push("translation");
     }
-    return tabs;
+    return [...tabs, ...this.customTabNames];
   }
   private initPlugins(): void {
     this.addPlugin("undoredo", new UndoRedoPlugin(this));

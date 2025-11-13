@@ -112,6 +112,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
 
   protected updateDataFromJson(model: SurveyModel) {
     const json = this.preset.getJson() || {};
+    editorLocalization.presetStrings = json.localization;
+    model.editablePresets.forEach(item => item.setupQuestions(model, this));
     model.editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
     this.updateJsonLocalizationStrings(model.editablePresets);
     return json;
@@ -129,7 +131,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.enterKeyAction = "loseFocus";
 
     editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
-    editablePresets.forEach(item => item.setupQuestions(model, this));
     if (!this.defaultJsonValue) {
       this.defaultJsonValue = {};
       editablePresets.forEach(item => this.defaultJsonValue[item.path] = item.getDefaultJsonValue(this.creator));

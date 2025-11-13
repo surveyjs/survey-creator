@@ -407,22 +407,28 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   // }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
-    const defaultItemsMap: any = {};
-    this.defaultItems.forEach((i: any) => defaultItemsMap[i.name] = i);
+    const defaultItemsMap = this.defaultItems.reduce((acc: any, i: any) => { acc[i.name] = i; return acc; }, {});
+    const defaultCategoriesMap = this.defaultCategories.reduce((acc: any, i: any) => { acc[i.category] = i; return acc; }, {});
+
+    this.defaultItems.filter(i => i.subitems).map(i => i.subitems.forEach(si => defaultItemsMap[si.name] = si));
+
     json = json || {};
     let itemsDefinition = (json["definition"] || []).map(i => typeof i === "string" ? { name: i } : i);
     let categoriesDefinition = json["categories"] || [];
     if (itemsDefinition.length === 0) {
       itemsDefinition = this.defaultItems;
     } else {
-      itemsDefinition = itemsDefinition.map(i => ({ ...(defaultItemsMap[itemsDefinition.name] || {}), ...i }));
+      itemsDefinition = itemsDefinition.map(i => ({ ...(defaultItemsMap[i.name] || {}), ...i }));
     }
     const itemsMap: any = {};
-    itemsDefinition.forEach((i: any) => itemsMap[i.name] = i);
+    itemsDefinition.forEach((i: any) => itemsMap[i.name] = { ...i, subitems: i.subitems && i.subitems.map(si => ({ ...(defaultItemsMap[si.name] || {}), ...si })) });
     if (categoriesDefinition.length === 0) {
       categoriesDefinition = this.defaultCategories;
     } else {
-      categoriesDefinition = categoriesDefinition.map(c => ({ ...c, ...{ items: c.items.map(i => itemsMap[i]) } }));
+      categoriesDefinition = categoriesDefinition.map(c => ({
+        ...defaultCategoriesMap[c.category],
+        ...c,
+        ...{ items: c.items.map(i => itemsMap[i]).filter(i => !!i) } }));
     }
 
     //categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));

@@ -957,3 +957,396 @@ test("Delete active tab", () => {
   itemsQuestion.value = [{ name: "preview" }, { name: "logic" }, { name: "json" }];
   expect(activeTabQuestion.value).toEqual("preview");
 });
+
+test("Tabs import and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  editor.json = {
+    tabs: { items: [{ name: "designer", iconName: "icon-test" }, "preview"] },
+    localization: {
+      "en": {
+        "tabs": {
+          "preview": "Test"
+        }
+      }
+    }
+  };
+
+  const value = survey.getQuestionByName("tabs_items").value;
+  expect(value).toEqual([
+    {
+      "name": "designer",
+      "title": "Designer",
+      "iconName": "icon-test"
+    },
+    {
+      "name": "preview",
+      "title": "Test",
+      "iconName": "icon-preview"
+    }
+  ]);
+
+  editor.json = {
+    tabs: { items: [{ name: "designer", iconName: "icon-test" }, "preview", "logic"] },
+    localization: {
+      "en": {
+        "tabs": {
+          "preview": "Test"
+        }
+      }
+    }
+  };
+  const value2 = survey.getQuestionByName("tabs_items").value;
+
+  expect(value2).toEqual([
+    {
+      "name": "designer",
+      "title": "Designer",
+      "iconName": "icon-test"
+    },
+    {
+      "name": "preview",
+      "title": "Test",
+      "iconName": "icon-preview"
+    },
+    {
+      "name": "logic",
+      "title": "Logic",
+      "iconName": "icon-logic-24x24"
+    }
+  ]);
+});
+
+test("Toolbox import and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  editor.json = { toolbox: {
+    "definition": [
+      {
+        "name": "radiogroup"
+      },
+      {
+        "name": "rating",
+        "subitems": [
+          {
+            "name": "labels",
+          },
+          {
+            "name": "stars",
+            "json": {
+              "type": "rating",
+              "rateType": "stars"
+            }
+          }
+        ]
+      },
+      {
+        "name": "comment",
+        "iconName": "icon-test"
+      }
+    ],
+    "categories": [
+      {
+        "category": "choice",
+        "items": [
+          "radiogroup",
+          "rating"
+        ]
+      },
+      {
+        "category": "text",
+        "items": [
+          "comment"
+        ]
+      }
+    ]
+  },
+  "localization": {
+    "en": {
+      "qt": {
+        "comment": "Comment"
+      }
+    }
+  } };
+
+  const survey = editor.model;
+  const value = survey.getQuestionByName("toolbox_categories").value;
+  expect(value).toEqual([
+    {
+      "category": "choice",
+      "title": "Choice Questions",
+      "items": [
+        {
+          "name": "radiogroup",
+          "title": "Radio Button Group",
+          "iconName": "icon-radiogroup",
+          "json": {
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ],
+            "type": "radiogroup"
+          }
+        },
+        {
+          "name": "rating",
+          "title": "Rating Scale",
+          "iconName": "icon-rating",
+          "json": {
+            "type": "rating"
+          },
+          "subitems": [
+            {
+              "name": "labels",
+              "title": "Labels",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "labels"
+              }
+            },
+            {
+              "name": "stars",
+              "title": "Stars",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "stars"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "text",
+      "title": "Text Input Questions",
+      "items": [
+        {
+          "name": "comment",
+          "title": "Comment",
+          "iconName": "icon-test",
+          "json": {
+            "type": "comment"
+          }
+        }
+      ]
+    }
+  ]);
+
+  editor.json = { toolbox: {
+    "definition": [
+      {
+        "name": "radiogroup"
+      },
+      {
+        "name": "rating",
+        "subitems": [
+          {
+            "name": "labels",
+          },
+          {
+            "name": "stars",
+            "json": {
+              "type": "rating",
+              "rateType": "stars"
+            }
+          }
+        ]
+      },
+      {
+        "name": "comment"
+      }
+    ],
+    "categories": [
+      {
+        "category": "choice",
+        "items": [
+          "radiogroup",
+          "rating"
+        ]
+      },
+      {
+        "category": "text",
+        "items": [
+          "comment",
+          "html"
+        ]
+      }
+    ]
+  },
+  "localization": {
+    "en": {
+      "qt": {
+        "comment": "Comment"
+      }
+    }
+  } };
+
+  const value2 = survey.getQuestionByName("toolbox_categories").value;
+  expect(value2).toEqual([
+    {
+      "category": "choice",
+      "title": "Choice Questions",
+      "items": [
+        {
+          "name": "radiogroup",
+          "title": "Radio Button Group",
+          "iconName": "icon-radiogroup",
+          "json": {
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ],
+            "type": "radiogroup"
+          }
+        },
+        {
+          "name": "rating",
+          "title": "Rating Scale",
+          "iconName": "icon-rating",
+          "json": {
+            "type": "rating"
+          },
+          "subitems": [
+            {
+              "name": "labels",
+              "title": "Labels",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "labels"
+              }
+            },
+            {
+              "name": "stars",
+              "title": "Stars",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "stars"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "text",
+      "title": "Text Input Questions",
+      "items": [
+        {
+          "name": "comment",
+          "title": "Comment",
+          "iconName": "icon-comment",
+          "json": {
+            "type": "comment"
+          }
+        }
+      ]
+    }
+  ]);
+});
+
+test("Property import and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  editor.json = { "propertyGrid": {
+    "definition": {
+      "autoGenerateProperties": false,
+      "classes": {
+        "survey": {
+          "properties": [
+            {
+              "name": "title",
+              "index": 10000,
+              "tab": "general"
+            },
+            {
+              "name": "description",
+              "index": 20000,
+              "tab": "general"
+            },
+            {
+              "name": "logoWidth",
+              "index": 10000,
+              "tab": "logo"
+            },
+            {
+              "name": "logoHeight",
+              "index": 20000,
+              "tab": "logo"
+            }
+          ],
+          "tabs": [
+            {
+              "name": "general",
+              "index": 100,
+              "iconName": "icon-pg-data-24x24"
+            },
+            {
+              "name": "logo",
+              "index": 200
+            }
+          ]
+        } }
+    }
+  },
+  "localization": {
+    "en": {
+      "pe": {
+        "survey": {
+          "logoWidth": "Width",
+          "logoHeight": "Height"
+        },
+        "tabs": {
+          "logo": "Logo"
+        }
+      }
+    }
+  } };
+
+  const survey = editor.model;
+  const value = survey.getQuestionByName("propertyGrid_categories").value;
+  expect(value).toEqual([
+    {
+      "category": "general",
+      "title": "General",
+      "iconName": "icon-pg-data-24x24",
+      "properties": [
+        {
+          "name": "title",
+          "title": "Survey title",
+          "description": "Type a user-friendly title to display."
+        },
+        {
+          "name": "description",
+          "title": "Survey description",
+          "description": "Type a subtitle."
+        }
+      ]
+    },
+    {
+      "category": "logo",
+      "title": "Logo",
+      "iconName": "icon-pg-logo-24x24",
+      "properties": [
+        {
+          "name": "logo",
+          "title": "Survey logo",
+          "description": "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
+        },
+        {
+          "name": "logoWidth",
+          "title": "Width",
+          "description": "Sets a logo width in CSS units (px, %, in, pt, etc.)."
+        },
+        {
+          "name": "logoHeight",
+          "title": "Height",
+          "description": "Sets a logo height in CSS units (px, %, in, pt, etc.)."
+        }
+      ]
+    }
+  ]);
+});
