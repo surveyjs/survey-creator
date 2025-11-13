@@ -1126,6 +1126,8 @@ export var bgStrings = {
     storeDataAsText: "Съхранявай съдържанието на файла в JSON резултат като текст",
     // "Maximum file size (in bytes)"
     maxSize: "Максимален размер на файла (в байтове)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Максимален брой файлове",
     // "Row count"
     rowCount: "Брой редове",
     // "Columns layout"
