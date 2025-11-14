@@ -96,9 +96,15 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     let items = model.getValue(this.nameItems);
     if (!Array.isArray(items)) return undefined;
-    const creatorTabs = this.filterTabs(defaultJson?.items || creator.getTabs());
-    let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName || creatorTabs.filter(t => t.name == i.name)[0]?.iconName }));
-    if (Helpers.isArraysEqual(activeTabChoices, creatorTabs, false)) {
+    const creatorDefaultTabs = this.filterTabs(defaultJson?.items || creator.getTabs());
+    const creatorTabs = this.filterTabs(creator.getTabs());
+    let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName }));
+    activeTabChoices.forEach(i => {
+      if (i.iconName == creatorTabs.filter(t => t.name == i.name)[0]?.iconName) {
+        delete i.iconName;
+      }
+    });
+    if (Helpers.isArraysEqual(activeTabChoices, creatorDefaultTabs, false)) {
       activeTabChoices = undefined;
     }
     let activeTab = model.getValue(this.nameActiveTab);
@@ -119,7 +125,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
     return {
       activeTab: creator.activeTab,
-      items: this.filterTabs(creator.getTabs()),
+      items: this.filterTabs(creator.getTabs()).map(i => ({ name: i.name })),
     };
   }
 
