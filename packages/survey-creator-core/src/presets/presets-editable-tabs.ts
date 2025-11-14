@@ -94,13 +94,13 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
   }
   protected hasIcon(name: string) { return true; }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
-    let items = model.getValue(this.nameItems);
+    let items = model.getQuestionByName(this.nameItems).value;
     if (!Array.isArray(items)) return undefined;
     const creatorDefaultTabs = this.filterTabs(defaultJson?.items || creator.getTabs());
-    const creatorTabs = this.filterTabs(creator.getTabs());
+    const creatorAvailableTabs = this.filterTabs(creator.getAvailableTabs());
     let activeTabChoices = items.map(i => ({ name: i.name, iconName: i.iconName }));
     activeTabChoices.forEach(i => {
-      if (i.iconName == creatorTabs.filter(t => t.name == i.name)[0]?.iconName) {
+      if (!i.iconName || i.iconName == creatorAvailableTabs.filter(t => t.name == i.name)[0]?.iconName) {
         delete i.iconName;
       }
     });

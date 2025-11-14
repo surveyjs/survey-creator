@@ -1354,13 +1354,34 @@ test("Property import and defaults", () => {
 test("Tabs export and defaults", () => {
   const editor = new CreatorPresetEditorModel({});
   const survey = editor.model;
-  (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel).removeRow(1);
+  const items = (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel);
+  items.removeRow(1);
   expect(editor.json).toEqual({
     "tabs": {
       "activeTab": "designer",
       "items": [
         {
           "name": "designer",
+        },
+        {
+          "name": "logic",
+        },
+        {
+          "name": "json",
+        },
+      ],
+    }
+  });
+  const value = { ...items.value };
+  value[0].iconName = "test-icon";
+  survey.getQuestionByName("tabs_items").value = value;
+  expect(editor.getJsonFromSurveyModel()).toEqual({
+    "tabs": {
+      "activeTab": "designer",
+      "items": [
+        {
+          "name": "designer",
+          "iconName": "test-icon"
         },
         {
           "name": "logic",
