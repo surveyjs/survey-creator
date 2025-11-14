@@ -1,4 +1,4 @@
-import { QuestionCommentModel, ItemValue, Serializer, ElementFactory, ITextArea, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
+import { QuestionCommentModel, Serializer, ElementFactory, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError, JsonObject, Base } from "survey-core";
 import { SurveyJSON5 } from "survey-creator-core";
 
 export class QuestionPresetJsonModel extends QuestionCommentModel {
@@ -13,6 +13,9 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
   protected getCssType(): string {
     return "comment";
   }
+  public getTemplate(): string {
+    return "comment";
+  }
   public get textAreaModel(): TextAreaModel {
     if (!this.jsonAreaModelValue) {
       const options = this.getTextAreaOptions();
@@ -20,8 +23,13 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
       const updateQuestionValue = (newValue: any) => {
         if (!Helpers.isTwoValueEquals(JSON.stringify(_this.value, null, 2), newValue, false, true, false)) {
           try {
-            _this.value = new SurveyJSON5().parse(newValue);
-            this.jsonError = false;
+            const value = new SurveyJSON5().parse(newValue);
+
+            const jsonConverter = new JsonObject();
+            jsonConverter.toObject(value, new Base());
+            this.jsonError = jsonConverter.errors.length > 0;
+            if (this.jsonError) return;
+            _this.value = value;
           } catch{
             this.jsonError = true;
           }
@@ -54,8 +62,3 @@ Serializer.addClass("presetjson",
   "comment"
 );
 
-RendererFactory.Instance.registerRenderer(
-  "presetjson",
-  "default-comment",
-  "comment"
-);

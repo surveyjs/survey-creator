@@ -25,7 +25,7 @@
                   [attr.aria-labelledby]="'tab-' + tab.id"
                   [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
                   <ng-template
-                    [component]="{ name: tab.componentContent, data: { model: tab.data.model } }"></ng-template>
+                    [component]="{ name: tab.componentContent, data: { data: creator, model: tab.data.model } }"></ng-template>
                 </div>
               </ng-container>
             </div>

@@ -3,7 +3,7 @@ import { SurveyCreatorModel } from "../creator-base";
 
 export interface ICreatorPreset {
   setJson(json: any): void;
-  apply(creator: SurveyCreatorModel): void;
+  apply(creator: SurveyCreatorModel, internal?: boolean): void;
   getPath(): string;
 }
 
@@ -19,17 +19,17 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     this.json = json;
     this.children.forEach(item => item.setJson(this.json && item.getPath() ? this.json[item.getPath()] : this.json));
   }
-  public apply(creator?: SurveyCreatorModel): void {
+  public apply(creator: SurveyCreatorModel, internal = false): void {
     if (!this.json) return;
     if (!!creator) {
-      this.applyCore(creator);
-      this.children.forEach(item => item.apply(creator));
+      this.applyCore(creator, internal);
+      this.children.forEach(item => item.apply(creator, internal));
     }
     this.onApplied.fire(this, {});
   }
   public abstract getPath(): string;
-  protected applyEmptyJson(): boolean { return false; }
-  protected applyCore(creator: SurveyCreatorModel): void { }
+  protected applyEmptyJson(): boolean { return true; }
+  protected applyCore(creator: SurveyCreatorModel, internal: boolean = false): void { }
   protected createPresets(): Array<ICreatorPreset> {
     return [];
   }
