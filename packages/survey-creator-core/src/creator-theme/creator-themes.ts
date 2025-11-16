@@ -1,5 +1,5 @@
 import { CreatorStylesManager } from "./styles-manager";
-import { Default } from "../themes/default-light";
+import { Default } from "../themes/default-light-internal";
 import { registerTheme, ThemesHash, sortDefaultThemes } from "../utils/themes";
 
 export interface ICreatorTheme {
