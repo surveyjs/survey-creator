@@ -439,7 +439,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       active: false,
       enabled: false,
       visible: <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.creator.activeTab === "designer", this.creator.showSaveButton);
+        return notShortCircuitAnd(this.creator.activeTab === "designer" || this.creator.activeTab === "translation", this.creator.showSaveButton);
       }),
       locTitleName: "ed.saveSurvey",
       locTooltipName: "ed.saveSurveyTooltip",

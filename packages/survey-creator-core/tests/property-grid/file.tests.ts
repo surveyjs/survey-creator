@@ -106,14 +106,22 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
   expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
 });
 
-test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
+test("Check PropertyGridLinkFileEditor creator's onUploadFile and onClearFile events", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
   let lastUploadOptions;
+  let clearCount = 0;
+  let lastClearOptions;
   const question = new QuestionImageModel("q1");
   creator.onUploadFile.add((s, o) => {
     lastUploadOptions = o;
     uploadCount++;
+    o.callback("success", "test_url");
+    expect(o.question.name).toBe("q1");
+  });
+  creator.onClearFile.add((s, o) => {
+    lastClearOptions = o;
+    clearCount++;
     o.callback("success", "test_url");
     expect(o.question.name).toBe("q1");
   });
@@ -126,6 +134,15 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
   expect(lastUploadOptions.element).toEqual(question);
   expect(lastUploadOptions.elementType).toEqual("image");
   expect(lastUploadOptions.propertyName).toEqual("imageLink");
+  expect(clearCount).toBe(0);
+  expect(lastClearOptions).toBeUndefined();
+  questionEditor.clear();
+  expect(uploadCount).toBe(1);
+  expect(clearCount).toBe(1);
+  expect(lastClearOptions.question).toEqual(question);
+  expect(lastClearOptions.element).toEqual(question);
+  expect(lastClearOptions.elementType).toEqual("image");
+  expect(lastClearOptions.propertyName).toEqual("imageLink");
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with signature pad", () => {

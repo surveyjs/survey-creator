@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-vue",
-  "version": "2.3.14",
+  "version": "2.3.15",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
@@ -20,8 +20,6 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\" ",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --max-warnings=0 --fix",
-    "visual-regression-tests:ci": "testcafe --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"npm run serve:example:prod\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
-    "visual-regression-tests": "testcafe ../../visualRegressionTests/  --app \"npm run serve:example:prod\" --screenshots ../../ --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "testcafe:ci": "testcafe ../../functionalTests/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --reporter minimal",
     "testcafe": "testcafe ../../functionalTests/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "test:a11y": "playwright test --project a11y --ui",
