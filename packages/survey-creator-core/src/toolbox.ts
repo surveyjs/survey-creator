@@ -797,7 +797,7 @@ export class QuestionToolbox
       item.locTitle.owner = this.creator;
       return item;
     }
-    return this.createActionCore(item) as QuestionToolboxItem;
+    return this.createActionCore(this, item) as QuestionToolboxItem;
   }
   private createSubTypes(parentItem: QuestionToolboxItem): void {
     let property = null;
@@ -847,11 +847,13 @@ export class QuestionToolbox
     }
     this.onItemsChanged();
   }
-  protected createActionCore(item: IAction): Action {
+  protected createActionCore(owner: Base, item: IAction): Action {
     item.iconName = item.iconName || QuestionToolbox.defaultIconName;
     const newItem = new QuestionToolboxItem(item as IQuestionToolboxItem);
     newItem.locTitle.owner = this.creator;
-    this.createSubTypes(newItem);
+    if (owner === this) {
+      this.createSubTypes(newItem);
+    }
     return newItem;
   }
   private get dragDropHelper(): DragDropSurveyElements {
