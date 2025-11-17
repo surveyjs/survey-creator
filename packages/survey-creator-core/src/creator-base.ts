@@ -922,6 +922,8 @@ export class SurveyCreatorModel extends Base
    * @see uploadFiles
    */
   public onUploadFile: EventBase<SurveyCreatorModel, UploadFileEvent> = this.addCreatorEvent<SurveyCreatorModel, UploadFileEvent>();
+
+  public onClearFile: EventBase<SurveyCreatorModel, UploadFileEvent> = this.addCreatorEvent<SurveyCreatorModel, UploadFileEvent>();
   /**
    * An event that is raised when the Translation tab displays a property for translation. Use this event to control the property visibility.
    */
@@ -3664,6 +3666,27 @@ export class SurveyCreatorModel extends Base
       this.onUploadFile.fire(this, {
         question: question,
         files: files || [],
+        callback: callback,
+        element: context && context.element || this.survey,
+        elementType: context && context.elementType,
+        propertyName: context && context.propertyName,
+        context: context
+      } as any);
+    }
+  }
+
+  public clearFiles(
+    value: any,
+    question: Question,
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
+  ) {
+    if (this.onClearFile.isEmpty) {
+      callback("success", value);
+    } else {
+      this.onClearFile.fire(this, {
+        question: question,
+        files: value || [],
         callback: callback,
         element: context && context.element || this.survey,
         elementType: context && context.elementType,

@@ -4,7 +4,8 @@ import {
   SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
   ItemValue,
   QuestionCheckboxModel,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  QuestionSliderModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -12,6 +13,7 @@ import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../sr
 import { SurveyTriggerComplete } from "survey-core";
 import { CreatorBase } from "../../src/creator-base";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
+import { min } from "lodash";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
@@ -737,4 +739,44 @@ test("QuestionCheckbox choices options.trimValues, Issue#7180", () => {
   valueQ.value = "  item11  ";
   expect(valueQ.value).toBe("item11");
   expect(question.choices[0].value).toBe("item11");
+});
+test("QuestionSlider customLabels & min/max properties, Bug#7250", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "slider",
+        name: "q1",
+        min: 10,
+        max: 50,
+        customLabels: [10, 20, 30, 40, 50]
+      }]
+  });
+  const question = survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var customLabelsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("customLabels")
+  );
+  const cell1Value = customLabelsQuestion.visibleRows[0].getQuestionByColumnName("value");
+  const cell2Value = customLabelsQuestion.visibleRows[1].getQuestionByColumnName("value");
+  expect(cell1Value.value).toBe(10);
+  cell1Value.value = 5;
+  expect(question.customLabels[0].value).toBe(10);
+  expect(cell1Value.value).toBe(5);
+  expect(cell1Value.errors).toHaveLength(1);
+  expect(cell1Value.errors[0].getText()).toBe("The value should not be less than 10");
+  cell1Value.value = 15;
+  expect(question.customLabels[0].value).toBe(15);
+  expect(cell1Value.value).toBe(15);
+  expect(cell1Value.errors).toHaveLength(0);
+
+  expect(cell2Value.value).toBe(20);
+  cell2Value.value = 55;
+  expect(question.customLabels[1].value).toBe(20);
+  expect(cell2Value.value).toBe(55);
+  expect(cell2Value.errors).toHaveLength(1);
+  expect(cell2Value.errors[0].getText()).toBe("The value should not be greater than 50");
+  cell2Value.value = 45;
+  expect(question.customLabels[1].value).toBe(45);
+  expect(cell2Value.value).toBe(45);
+  expect(cell2Value.errors).toHaveLength(0);
 });

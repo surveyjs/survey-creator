@@ -108,6 +108,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "needConfirmRemoveFile",
       { name: "storeDataAsText" },
       "allowCameraAccess",
+      "acceptedCategories",
       "acceptedTypes",
       "maxSize",
       "imageHeight",

@@ -621,7 +621,8 @@ test.describe(title, () => {
           "elements": [
             {
               "type": "file",
-              "name": "question1"
+              "name": "question1",
+              "acceptedTypes": ".png,.jpg"
             }
           ]
         }

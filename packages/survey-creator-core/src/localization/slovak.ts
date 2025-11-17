@@ -1126,6 +1126,8 @@ export var skStrings = {
     storeDataAsText: "Uložiť obsahu súboru vo výsledku JSON ako text",
     // "Maximum file size (in bytes)"
     maxSize: "Maximálna veľkosť súboru v bajtoch",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximálny počet súborov",
     // "Row count"
     rowCount: "Počet riadkov",
     // "Columns layout"

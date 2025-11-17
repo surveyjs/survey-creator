@@ -70,3 +70,25 @@ test("saveSurvey and saveTheme actions integration", (): any => {
   expect(saveCount).toBe(1);
   expect(saveThemeCount).toBe(1);
 });
+
+test("saveSurvey action visibility", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showTranslationTab: true, saveSurveyAndTheme: true });
+  let saveCount = 0;
+  creator.saveSurveyFunc = () => {
+    saveCount++;
+  };
+  creator.JSON = { headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
+  const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  const saveSurveyAction = designerPlugin["saveSurveyAction"] as Action;
+
+  expect(saveSurveyAction.visible).toBeTruthy();
+  expect(saveSurveyAction.enabled).toBeFalsy();
+
+  creator.activeTab = "theme";
+  expect(saveSurveyAction.visible).toBeFalsy();
+  expect(saveSurveyAction.enabled).toBeFalsy();
+
+  creator.activeTab = "translation";
+  expect(saveSurveyAction.visible).toBeTruthy();
+  expect(saveSurveyAction.enabled).toBeFalsy();
+});

@@ -36,9 +36,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     if (!!this.loadedFilesValue) {
       this.containsMultiplyFiles = false;
       this.survey.clearFiles(
-        this.loadedFilesValue,
+        this,
         this.name,
-        this.previewValue,
+        this.loadedFilesValue,
         null,
         (status, data) => {
           if (status === "success") {
