@@ -375,7 +375,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
     if (fullPath === "propertyGrid") return new CreatorPresetEditablePropertyGrid(preset);
-    //if (fullPath === "options") return new CreatorPresetEditableOptions(preset);
+    if (fullPath === "options") return new CreatorPresetEditableOptions(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
