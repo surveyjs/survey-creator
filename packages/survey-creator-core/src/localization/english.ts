@@ -1679,7 +1679,7 @@ export var enStrings = {
     storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results.",
     format: "Use {0} as a placeholder for the actual value.",
     acceptedCategories: "Select \"Custom\" to add your own file extensions on top of the predefined categories.",
-    acceptedTypes: " Enter file extensions separated by commas (e.g., .csv, .xml).",
+    acceptedTypes: "Enter file extensions separated by commas (e.g., .csv, .xml).",
     columnColCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes.",
     autocomplete: "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion.",
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
