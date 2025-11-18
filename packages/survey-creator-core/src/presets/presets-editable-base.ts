@@ -133,6 +133,7 @@ export class CreatorPresetEditableBase {
       item.onGetMatrixRowActions(model, creator, options);
     });
   }
+  public onGetPanelTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }

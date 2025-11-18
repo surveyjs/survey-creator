@@ -27,6 +27,7 @@ export interface ICreatorPresetData {
     categories?: Array<IToolboxCategoryDefinition>,
     showCategoryTitles?: boolean,
   };
+  options: any;
   localization?: any;
 }
 

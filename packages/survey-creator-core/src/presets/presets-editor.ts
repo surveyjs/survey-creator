@@ -167,6 +167,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
           options.panel.getTitleToolbar().isResponsivenessDisabled = true;
           options.actions = model.navigationBar.actions;
         }
+        item.onGetPanelTitleActions(model, this.creator, options);
       });
     });
     function adjustMatrixAlignment(question: Question) {
