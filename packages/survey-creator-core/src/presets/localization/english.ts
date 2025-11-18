@@ -66,7 +66,7 @@ export const enStrings = {
     iconName: "Icon name",
     name: "Name",
     titleField: "Title",
-    descriptionField: "Helper Text",
+    descriptionField: "Helper text",
     addCustomCategory: "New Category"
   },
   options: {
@@ -102,7 +102,7 @@ export const enStrings = {
     load: "Load",
     saveExit: "Save & Exit",
     back: "Back",
-    resetToDefault: "Reset to default",
+    resetToDefault: "Reset",
     resetToDefaults: "All settings restored to default",
     resoredToDefault: "resored to default",
     itemRestoredToDefault: "Item restored to default",
@@ -114,7 +114,7 @@ export const enStrings = {
   },
   plugin: {
     buttonTitle: "UI Configuration Manager",
-    buttonDescription: "Configure Toolbox, Tabs, Property Grid, and other Survey Creator UI elements, and save the configuration as a reusable preset.",
+    buttonDescription: "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset.",
     presetsTab: "Presets",
     creatorPresets: "Creator Presets",
     save: "Save & Exit",
@@ -122,9 +122,9 @@ export const enStrings = {
     import: "Import",
     export: "Export",
     edit: "Edit",
-    resetLanguages: "Reset Languages to default",
+    resetLanguages: "Reset Languages",
     resetAll: "Reset all changes",
-    resetToDefaults: "Reset {0} to defaults",
+    resetToDefaults: "Reset {0}",
     defaultSettings: "Default Settings",
     basic: "Basic",
     advanced: "Advanced",
