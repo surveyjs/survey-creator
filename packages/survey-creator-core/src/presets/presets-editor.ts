@@ -282,6 +282,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     if (!this.inputFileElement) {
       this.inputFileElement = document.createElement("input");
       this.inputFileElement.type = "file";
+      this.inputFileElement.accept = ".json";
       this.inputFileElement.style.display = "none";
       this.inputFileElement.onchange = () => {
         if (this.inputFileElement.files.length < 1) return;
