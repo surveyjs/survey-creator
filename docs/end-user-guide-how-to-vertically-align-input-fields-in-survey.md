@@ -8,11 +8,11 @@ description: This guide will walk you through how to set up vertical input field
 
 When question titles are left-aligned, the associated input fields can sometimes look disorganized due to varying title widths. This often occurs because the width of a question title depends on the number of characters it contains, leading to uneven spacing. 
 
-<img src="../images/eud-before-alignment.png" alt="A form with multiple input fields" width="1390" height="791">
+<img src="images/eud-before-alignment.png" alt="A form with multiple input fields" width="1390" height="791">
 
 To solve this, SurveyJS introduced a **Question title width** setting, which allows you to apply a consistent width to all questions within a page or panel and align input fields more neatly. This guide will walk you through how to set up vertical input field alignment using the **Question title width** property.
 
-<img src="../images/eud-after.png" alt="How to vertically alight input field in a form" width="1389" height="803">
+<img src="images/eud-after.png" alt="How to vertically alight input field in a form" width="1389" height="803">
 
 ## How to Enable Vertical Input Field Alignment
 
@@ -23,7 +23,7 @@ To apply a consistent width to question titles, follow these steps:
 3. Set the **Question title alignment** to **Left**. Once this is done, the **Question title width** property will appear.  
 4. Enter the desired value in the **Question title width** editor. This value will define a uniform width for all question titles in the selected page or panel. The property accepts all commonly used CSS values (px, %, in, pt, etc.).
 
-<img src="../images/eud-page-panel.png" alt="How to set up vertical input field alignment for a page or panel using the new Question title width property." width="401" height="505">
+<img src="images/eud-page-panel.png" alt="How to set up vertical input field alignment for a page or panel using the new Question title width property." width="401" height="505">
 
 ## How to Apply Question Title Alignment at the Survey Level
 
@@ -32,7 +32,7 @@ The **Question title alignment** setting is also available at the survey level, 
 1. Switch to the survey-level settings in the top right corner.  
 2. Under the **Question settings** category, find the **Question title alignment** property and change it to **Left**.
 
-<img src="../images/eud-survey-level.png" alt="How to vertically alight input field in the entire form" width="400" height="495">
+<img src="images/eud-survey-level.png" alt="How to vertically alight input field in the entire form" width="400" height="495">
 
 This will apply left alignment to all questions in the survey. However, please note that to customize the **Question title width**, you will need to access the settings of individual pages or panels.
 

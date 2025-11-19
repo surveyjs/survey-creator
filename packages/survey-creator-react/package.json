@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "2.3.14",
+  "version": "2.3.16",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"

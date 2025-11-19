@@ -47,7 +47,7 @@ To mask an entry of a Single-Line Input question, follow the steps below:
 1. Under **Input Mask Settings**, locate the **Input mask type** property.
 1. In the drop-down menu, select among the available mask types.
 
-<img src="../images/eud-input-mask-type.png" alt='Input mask types' width="343" height="517">
+<img src="images/eud-input-mask-type.png" alt='Input mask types' width="343" height="517">
 
 ### Multiple Textboxes
 
@@ -55,17 +55,20 @@ By default, a Multiple Textboxes question consists of two single-line fields. To
 
 1. Select a Multiple Textboxes question. This action will display the question settings in the Property Grid.
 1. Under **Items**, locate the field whose input you wish to mask.
-1. Click the **Pen** icon on the right of the input field title to expand the field's settings.<br><br>
-    <img src="../images/eud-items.png" alt='Expand item settings' width="302" height="400">
-1. Locate the **Input type** property and make sure it's set to its default **Text** option.<br><br>
-    <img src="../images/eud-item-input-type.png" alt='Change item input type' width="301" height="391">
+1. Click the **Pen** icon on the right of the input field title to expand the field's settings.
+
+    <img src="images/eud-items.png" alt='Expand item settings' width="302" height="400">
+1. Locate the **Input type** property and make sure it's set to its default **Text** option.
+
+    <img src="images/eud-item-input-type.png" alt='Change item input type' width="301" height="391">
 1. Under **Input Mask Settings**, locate the **Input mask type** property.
-1. In the drop-down menu, select among the available input types.<br><br>
-    <img src="../images/eud-item-input-mask.png" alt='Apply input mask to a text field of a Multiple Textboxes question' width="305" height="356">
+1. In the drop-down menu, select among the available input types.
+
+    <img src="images/eud-item-input-mask.png" alt='Apply input mask to a text field of a Multiple Textboxes question' width="305" height="356">
 
 The image bellow illustrates a Multiple Textboxes question with four masked text fields for collecting payment details.
 
-<img src="../images/eud-preview-items.png" alt='Multiple Textboxes question with masked fields' width="584" height="324">
+<img src="images/eud-preview-items.png" alt='Multiple Textboxes question with masked fields' width="584" height="324">
 
 ### Multi-Select Matrix
 
@@ -77,20 +80,23 @@ To change **Cell input type** for all cells of a matrix table to Single-Line Inp
 2. Under **General**, locate the **Cell input type** property.
 3. In the drop-down menu, select **Single-Line Input**.
 
-<img src="../images/eud-mutli-select-all-cells.png" alt='Multi-Select Matrix: How to set a cell type for all matrix cells' width="1347" height="672">
+<img src="images/eud-mutli-select-all-cells.png" alt='Multi-Select Matrix: How to set a cell type for all matrix cells' width="1347" height="672">
 
 If you wish to apply different cell input types to different matrix columns, change **Cell input type** for individual columns as follows:
 
 1. Select a Multi-Select Matrix question. This action will display the question settings in the Property Grid.
 2. Under **Columns**, select the column to whose cells you wish to apply a mask.
-3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.<br><br>
-    <img src="../images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414"><br><br>
-    Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.<br><br>
-    <img src="../images/eud-column-area.png" alt='Multiple Textboxes: How to activate column settings in the Property Grid' width="819" height="454">
+3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.
+
+    <img src="images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414"><br><br>
+    Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.
+
+    <img src="images/eud-column-area.png" alt='Multiple Textboxes: How to activate column settings in the Property Grid' width="819" height="454">
 4. Under **General**, locate the **Cell input type** property. By default, it is set to **Default**, which means that it inherits **Cell input type** set for the entire matrix table.
 5. In the drop-down menu, select **Single-Line Input**.
-6. Locate the **Input type** property and make sure it's set to its default **Text** option.<br><br>
-    <img src="../images/eud-column-input-type.png" alt='Multi-Select Matrix column: Changing cell input type to Single-Line Input' width="334" height="543">
+6. Locate the **Input type** property and make sure it's set to its default **Text** option.
+
+    <img src="images/eud-column-input-type.png" alt='Multi-Select Matrix column: Changing cell input type to Single-Line Input' width="334" height="543">
 
 Now that the **Cell input type** is set to **Single-Line Input**, you can apply input masks to cells of such a column:
 

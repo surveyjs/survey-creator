@@ -1,10 +1,6 @@
 {
   "name": "survey-creator-js",
-  "version": "2.3.14",
-  "description": "",
-  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
-  "author": "Devsoft Baltic OU",
-  "license": "SEE LICENSE IN LICENSE",
+  "version": "2.3.16",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"

@@ -184,6 +184,7 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
+  onMatrixCellValidate?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any, creator: ISurveyCreatorOptions) => void;
@@ -268,6 +269,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMatrixCellCreated) {
       res.onMatrixCellCreated(options.question.obj, options);
+    }
+  },
+  onMatrixCellValidate(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixCellValidate) {
+      res.onMatrixCellValidate(options.question.obj, options);
     }
   },
   onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -998,6 +1005,12 @@ export class PropertyGridModel {
       const item = options.question.obj.getType() == "imageitemvalue" ? options.question.obj : undefined;
       this.options.uploadFiles(options.files, question, callback, { element: options.question.obj, item: item, elementType: options.question.obj.getType(), propertyName: options.name });
     });
+    this.survey.onClearFiles.add((_, options) => {
+      const callback = (status: string, data: any) => options.callback(status, options.value);
+      const question = options.question.obj.getType() == "survey" ? undefined : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : options.question.obj);
+      const item = options.question.obj.getType() == "imageitemvalue" ? options.question.obj : undefined;
+      this.options.clearFiles(options.value, question, callback, { element: options.question.obj, item: item, elementType: options.question.obj.getType(), propertyName: options.name });
+    });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
@@ -1308,6 +1321,7 @@ export class PropertyGridModel {
     const q = options.row.getQuestionByColumnName(options.columnName);
     if (!q || !q.property) return;
     options.error = this.validateQuestionValue(<any>options.row.editingObj, q, q.property, options.value);
+    PropertyGridEditorCollection.onMatrixCellValidate(options.question.editingObj, options.question.property, options);
   }
   private onGetMatrixRowAction(options: any) {
     PropertyGridEditorCollection.onGetMatrixRowAction(

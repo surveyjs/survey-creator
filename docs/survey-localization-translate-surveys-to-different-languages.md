@@ -105,7 +105,7 @@ editorLocalization.defaultLocale = "fr";
 
 If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select different languages and provide translations for them:
 
-<img src="./images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Survey Language dropdown" width="1544" height="688">
+<img src="images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Survey Language dropdown" width="1544" height="688">
 
 The default language is English, so text properties that support translations (such as `title`, `description`, etc.) are supposed to store English strings. To use another language as the default (for example, if surveys are primarily authored in German or French), set the `surveyLocalization.defaultLocale` property. Text properties will then store strings in the specified language.
 
@@ -129,7 +129,7 @@ surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
 
 Predefined survey texts are translated into the selected language automatically. SurveyJS Form Library takes translation strings from [community-supported dictionaries](https://github.com/surveyjs/survey-library/tree/01bd8abd0c574719956d4d579d48c8010cd389d4/packages/survey-core/src/localization). Custom texts (questions, choices, page titles, error messages) should be translated by Survey Creator users in the Translation tab:
 
-<img src="./images/translation-tab.png" alt="Survey Creator - Translation tab" width="1544" height="612">
+<img src="images/translation-tab.png" alt="Survey Creator - Translation tab" width="1544" height="612">
 
 To display the Translation tab, enable the [`showTranslationTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showTranslationTab) property as shown below. Note that users can specify translation strings only for the languages that you list in the `supportedLocales` array.
 

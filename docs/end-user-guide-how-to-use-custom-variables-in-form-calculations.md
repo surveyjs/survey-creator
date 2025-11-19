@@ -17,18 +17,21 @@ The steps below describe how to create a custom variable using the `age()` funct
 
 1. In the Toolbox area, hover over **Single-Line Input** and select **Date** from the list of available input types.
 2. Enter a question ID in the **Question name** text box.
-3. Enter a user-friendly value in the **Question title** text box. This value will be visible to respondents.<br><br>
-    <img src="../images/eud-date.png" alt="Single-Line Input: Date type" width="1520" height="728">
+3. Enter a user-friendly value in the **Question title** text box. This value will be visible to respondents.
+
+    <img src="images/eud-date.png" alt="Single-Line Input: Date type" width="1520" height="728">
 4. Switch to the survey-level settings in the top right corner.
 5. Under **Conditions**, locate the **Custom variables** subsection.
 6. Click the **Plus** icon to create a new variable.
 7. Enter a unique **Name** for the variable.
-8. Enter the following sample value in the **Expression** field: `age({date-of-birth})`, where `date-of-birth` is the "Question name" value of the field in which a respondent enters their date of birth.<br><br>
-    <img src="../images/eud-age-cv.png" alt="How to create a custom variable using the age() function" width="359" height="463">
+8. Enter the following sample value in the **Expression** field: `age({date-of-birth})`, where `date-of-birth` is the "Question name" value of the field in which a respondent enters their date of birth.
+
+    <img src="images/eud-age-cv.png" alt="How to create a custom variable using the age() function" width="359" height="463">
 9. Add a dependent question to your form. In this example we are using a **Yes/No (Boolean)** question.
 10. Enter a question ID in the **Question name** text box.
-11. Enter a user-friendly value in the **Question title** text box.<br><br>
-    <img src="../images/eud-boolean.png" alt="Yes/No (Boolean) question configuration" width="1520" height="721">
+11. Enter a user-friendly value in the **Question title** text box.
+
+    <img src="images/eud-boolean.png" alt="Yes/No (Boolean) question configuration" width="1520" height="721">
 12. Under **Condition**, locate the **Make the question visible if** property.
 13. Click the **Magic wand** icon on the right of the property to open a pop-up dialog.
 14. In the dialog, select the custom variable name assigned in step 7 and the condition that has to be met in order for the dependent question to be visible.
@@ -36,11 +39,11 @@ The steps below describe how to create a custom variable using the `age()` funct
 
 Based on the configuration above, the "Do you have a driving license?" question will only be visible if a respondent's age is greater than or equals to 16.
 
-<img src="../images/eud-visibility-cv.png" alt="How to make a question visible depending on the custom variable value" width="1299" height="706">
+<img src="images/eud-visibility-cv.png" alt="How to make a question visible depending on the custom variable value" width="1299" height="706">
 
 To test the custom variable configuration, switch to the **Preview** tab and select or enter a value in the Date of birth question.
 
-<img src="../images/eud-preview-cv.png" alt="How to test a visibility rule based on a custom variable value" width="823" height="372">
+<img src="images/eud-preview-cv.png" alt="How to test a visibility rule based on a custom variable value" width="823" height="372">
 
 ## How to Complete a Survey Based on a Custom Variable Value
 
@@ -57,5 +60,5 @@ The steps below describe how to create a trigger that will prompt a respondent t
 
 Based on the configuration above, the survey completes automatically if a respondent's age is less than 16.
 
-<img src="../images/eud-complete-survey-cv.png" alt="How to create a 'Complete survey' trigger using a custom variable" width="1469" height="674">
+<img src="images/eud-complete-survey-cv.png" alt="How to create a 'Complete survey' trigger using a custom variable" width="1469" height="674">
 

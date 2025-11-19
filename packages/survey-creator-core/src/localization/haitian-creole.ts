@@ -1126,6 +1126,8 @@ export var htStrings = {
     storeDataAsText: "Sere kontni fichye a nan rezilta JSON kòm tèks",
     // "Maximum file size (in bytes)"
     maxSize: "Gwosè maksimòm dosye (an byte)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maksimòm kantite dosye",
     // "Row count"
     rowCount: "Konte ranje",
     // "Columns layout"
