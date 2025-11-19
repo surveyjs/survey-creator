@@ -20,7 +20,7 @@ By default, questions within a form appear in their original order. To randomize
 3. Set this setting to **Random**.  
 4. To see the randomized order in action, switch to the **Preview** tab.
 
-<img src="../images/eud-randon-survey 397 421.png" alt="How to randomize questions in a form" width="397" height="421">
+<img src="images/eud-randon-survey 397 421.png" alt="How to randomize questions in a form" width="397" height="421">
 
 ## How to Randomize Questions within a Page
 
@@ -33,7 +33,7 @@ To display questions on a specific page in random order, do the following:
 
 If you choose the **Inherit** option, questions on the page will follow the question order set on the survey level.
 
-<img src="../images/eud-random-page 410 515.png" alt="How to randomize questions within a page" width="410" height="421">
+<img src="images/eud-random-page 410 515.png" alt="How to randomize questions within a page" width="410" height="421">
 
 ## How to Randomize Questions within a Panel
 
@@ -44,7 +44,7 @@ SurveyJS allows you to group multiple questions into a panel for easier manageme
 3. Set this setting to **Random**.  
 4. Go to the **Preview** tab to view the effect.
 
-<img src="../images/eud-random-panel 400 517.png" alt="How to randomize questions within a panel" width="400" height="517">
+<img src="images/eud-random-panel 400 517.png" alt="How to randomize questions within a panel" width="400" height="517">
 
 ## How to Randomize Choice Options
 
@@ -64,7 +64,7 @@ Follow the steps below to randomize choices for those question types:
 3. Select **Random** from the drop-down menu.  
 4. Switch to the **Preview** tab to view the randomized choice order.
 
-<img src="../images/eud-random-choice-options 398 725.png" alt="How to randomize choice options in a question" width="398" height="725">
+<img src="images/eud-random-choice-options 398 725.png" alt="How to randomize choice options in a question" width="398" height="725">
 
 Other **Choice order** options include:
 
@@ -81,6 +81,6 @@ Matrix rows appear in their default position unless they are randomized. To shuf
 3. Set this setting to **Random**.  
 4. Preview the effect by switching to the **Preview** tab.
 
-<img src="../images/eud-random-matrix-rows 1394 760.png" alt="How to randomize rows in a Single-Select Matrix" width="1394" height="760">
+<img src="images/eud-random-matrix-rows 1394 760.png" alt="How to randomize rows in a Single-Select Matrix" width="1394" height="760">
 
 > Row randomization is unavailable for Multi-Select and Dynamic Matrices.

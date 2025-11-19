@@ -81,7 +81,7 @@ We redesigned most parts of the Survey Creator to make its UI more adaptive and 
 
 Re-designed Toolbox and Property Grid look modern and adapt themselves to different layouts.
 
-<img src="./images/creator-v2-toolbox-and-property-grid.png" alt="Survey Creator - Toolbox and Property Grid" width="75%">
+<img src="images/creator-v2-toolbox-and-property-grid.png" alt="Survey Creator - Toolbox and Property Grid" width="75%">
 
 <a id="action-buttons"></a> 
 
@@ -89,11 +89,11 @@ Re-designed Toolbox and Property Grid look modern and adapt themselves to differ
 
 We now display action buttons within their corresponding questions (instead of above the questions). Programmatic access to the buttons is now possible.
 
-<img src="./images/survey-creator-action-buttons.png" alt="Survey Creator - Action buttons rearranged" width="100%">
+<img src="images/survey-creator-action-buttons.png" alt="Survey Creator - Action buttons rearranged" width="100%">
 
 If you click the button that changes the question type, you will see a drop-down list of all supported types. In Survey Creator V1, this list was limited to the types that were interchangeable with the current element type. With the full list, you can now add multiple default questions to the survey to specify their types afterwards.
 
-<img src="./images/survey-creator-question-types.png" alt="Survey Creator - Question types dropdown" width="100%">
+<img src="images/survey-creator-question-types.png" alt="Survey Creator - Question types dropdown" width="100%">
 
 If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. Alternatively, you can revert to old behavior. Use the following code to limit the list to interchangeable types only:
 
@@ -107,7 +107,7 @@ SurveyCreator.settings.questionConvertMode = 1;
 
 Previously, users configured each survey page in an individual tab. In the new Survey Creator, pages are displayed one under another. To reach a certain page, users can scroll the design surface or select the page in the page navigator.
 
-<img src="./images/survey-creator-updated-page-navigation.png" alt="Survey Creator - Page navigator update" width="100%">
+<img src="images/survey-creator-updated-page-navigation.png" alt="Survey Creator - Page navigator update" width="100%">
 
 <a id="adorners"></a>
 
@@ -115,11 +115,11 @@ Previously, users configured each survey page in an individual tab. In the new S
 
 Adorners are design-surface controls for survey element manipulation. In the new Survey Creator, adorners allow users to edit text inline.
 
-<img src="./images/creator-v2-adorner-column-title.png" alt="Survey Creator - Element creation" width="75%">
+<img src="images/creator-v2-adorner-column-title.png" alt="Survey Creator - Element creation" width="75%">
 
 Adorners also implement the capability to change column cell properties directly in the designer.
 
-<img src="./images/creator-v2-adorner-column-setup.png" alt="Survey Creator - Element creation" width="75%">
+<img src="images/creator-v2-adorner-column-setup.png" alt="Survey Creator - Element creation" width="75%">
 
 <a id="element-creation"></a>
 
@@ -127,7 +127,7 @@ Adorners also implement the capability to change column cell properties directly
 
 In the designer, users can click Add Question to quickly add new survey elements. The ellipsis button allows users to select the type of new questions.
 
-<img src="./images/creator-v2-element-creation.png" alt="Survey Creator - Element creation" width="75%">
+<img src="images/creator-v2-element-creation.png" alt="Survey Creator - Element creation" width="75%">
 
 <a id="element-selector"></a>
 
@@ -135,7 +135,7 @@ In the designer, users can click Add Question to quickly add new survey elements
 
 The survey element selector now displays the survey structure as a tree. In addition, users can use the search box to filter elements. The search box appears if the element list contains more than 10 items.
 
-<img src="./images/creator-v2-element-selector-2.png" alt="Survey Creator - Element selector in the Property Grid" width="75%">
+<img src="images/creator-v2-element-selector-2.png" alt="Survey Creator - Element selector in the Property Grid" width="75%">
 
 <a id="translation-tab"></a>
 
@@ -143,7 +143,7 @@ The survey element selector now displays the survey structure as a tree. In addi
 
 Previously, the Translation tab had individually-designed layout and controls. In the new Survey Creator, this tab displays our own survey component with Matrix questions. In addition, the Translation tab now includes a Property Grid that allows users to select required languages.
 
-<img src="./images/creator-v2-translation-tab-2.png" alt="Survey Creator - Translation tab" width="75%">
+<img src="images/creator-v2-translation-tab-2.png" alt="Survey Creator - Translation tab" width="75%">
 
 <a id="logic-tab"></a>
 
@@ -151,11 +151,11 @@ Previously, the Translation tab had individually-designed layout and controls. I
 
 Users can now create and edit logic rules within the same view.
 
-<img src="./images/creator-v2-logic-tab-item-editing.png" alt="Survey Creator - Logic tab" width="75%">
+<img src="images/creator-v2-logic-tab-item-editing.png" alt="Survey Creator - Logic tab" width="75%">
 
 We also added the capability to filter rules by questions or action types. This capability is useful for surveys with complex logic.
 
-<img src="./images/creator-v2-logic-tab-filtering.png" alt="Survey Creator - Question selector in the Logic tab" width="75%">
+<img src="images/creator-v2-logic-tab-filtering.png" alt="Survey Creator - Question selector in the Logic tab" width="75%">
 
 <a id="test-tab"></a>
 
@@ -163,7 +163,7 @@ We also added the capability to filter rules by questions or action types. This 
 
 We renamed the Test Survey tab to Preview and added a device selector that allows users to preview the created survey on most popular devices.
 
-<img src="./images/creator-v2-device-type.png" alt="Survey Creator - Preview tab" width="75%">
+<img src="images/creator-v2-device-type.png" alt="Survey Creator - Preview tab" width="75%">
 
 <a id="technical-changes"></a>
 

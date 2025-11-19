@@ -21,7 +21,7 @@ To modify the default button label, follow these steps:
 1. Under **Navigation**, locate the input fields that contain the default button text: **"Previous Page" button text**, **"Next Page" button text** and **"Complete Survey" button text**.
 1. Enter a new value in any or all the fields to update their button labels.
 
-<img src="../images/eud-rename-buttons.png" alt='How to rename navigation button labels' width="327" height="527">
+<img src="images/eud-rename-buttons.png" alt='How to rename navigation button labels' width="327" height="527">
 
 ### Hide the Previous Page Button
 
@@ -37,7 +37,7 @@ To hide the navigation buttons for the entire form, follow these steps:
 1. Under **Navigation**, locate the **Show / hide navigation buttons** property.
 1. Select **Hidden**.
 
-<img src="../images/eud-hide-buttons.png" alt='How to hide navigation buttons' width="335" height="525">
+<img src="images/eud-hide-buttons.png" alt='How to hide navigation buttons' width="335" height="525">
 
 You can also set the visibility of the navigation buttons for individual pages. A page-level button visibility rule overrides the same rule defined for the entire form.
 
@@ -48,13 +48,13 @@ To hide the navigation buttons for an individual page, follow these steps:
 1. Select **Hidden**.
 > The **Inherit** option applies a survey-level setting (defaults to visible, aligned to the bottom).
 
-<img src="../images/eud-page-buttons.png" alt='How to hide navigation buttons for a particular page' width="336" height="360">
+<img src="images/eud-page-buttons.png" alt='How to hide navigation buttons for a particular page' width="336" height="360">
 
 ### Auto-Advance
 
 If you hide the navigation buttons, enable the auto-advance feature by selecting the **Auto-advance to the next page** checkbox. This feature allows the form to advance to the next page automatically after a respondent answers all questions on the current page. Note that a survey with auto-advance enabled is also completed automatically. If you want to disable this behavior, unselect the **Complete the survey automatically** checkbox.
 
-<img src="../images/eud-auto-advance.png" alt='How to enable the auto-advance feature' width="331" height="476">
+<img src="images/eud-auto-advance.png" alt='How to enable the auto-advance feature' width="331" height="476">
 
 ### Review and Edit Responses Before Submit
 
@@ -66,11 +66,11 @@ To enable the form preview, follow these steps:
 1. Under **Navigation**, locate the **Review before submit** property.
 1. Select between **Show all questions** (enables the preview page with all questions) or **Show answered questions only** (the preview page will only display questions with answers).
 
-<img src="../images/eud-preview.png" alt='Review before submit' width="331" height="469">
+<img src="images/eud-preview.png" alt='Review before submit' width="331" height="469">
 
 Once form preview is enabled, two additional navigation buttons&mdash;Preview and Edit&mdash;become available in the form. You can easily change their labels by entering new values in the corresponding input fields, as shown below.
 
-<img src="../images/eud-preview-edit.png" alt='Edit before submit' width="329" height="519">
+<img src="images/eud-preview-edit.png" alt='Edit before submit' width="329" height="519">
 
 ## Side Navigation (Table of Contents)
 
@@ -82,7 +82,7 @@ To enable side navigation, follow these steps:
 1. Under **Navigation**, locate the **Show table of contents (TOC)** checkbox and select it.
 1. Under **TOC alignment**, choose between **Left** (default value) and **Right** to set the location of the side navigation.
 
-<img src="../images/eud-side-navigation.png" alt='Side nagivation' width="331" height="483">
+<img src="images/eud-side-navigation.png" alt='Side nagivation' width="331" height="483">
 
 ## Progress Bar
 
@@ -104,7 +104,7 @@ To set the progress bar alignment, follow these steps:
 1. Under **Navigation**, locate the **Progress bar alignment** property.
 1. In the drop-down menu, select among the available location options.
 
-<img src="../images/eud-progress-bar-alignment.png" alt='Progress bar alignment option' width="332" height="478">
+<img src="images/eud-progress-bar-alignment.png" alt='Progress bar alignment option' width="332" height="478">
 
 If you select the **Auto** alignment option for the progress bar, make sure to enable the advanced header mode by following the steps below:
 
@@ -113,7 +113,7 @@ If you select the **Auto** alignment option for the progress bar, make sure to e
 1. Set the **Background color** to None.
 1. Make sure the header doesn't contain images.
 
-<img src="../images/eud-advanced-header.png" alt='Enable advanced header mode' width="1586" height="800">
+<img src="images/eud-advanced-header.png" alt='Enable advanced header mode' width="1586" height="800">
 
 ### Progress Bar Type
 
@@ -130,15 +130,15 @@ To set the progress bar type, follow the steps below:
 1. Under **Navigation**, locate the **Progress bar type** property.
 1. In the drop-down menu, select from the available options.
 
-<img src="../images/eud-progress-bar-type.png" alt='Select progress bar type' width="331" height="460">
+<img src="images/eud-progress-bar-type.png" alt='Select progress bar type' width="331" height="460">
 
 ### Progress Bar View
 
 By default, the progress bar displays a thin line that connects multiple beads that represent individual pages. If you want to make it more informative, you can add page titles and numbers to it by enabling the **Display page titles in progress bar** and **Display page numbers in progress bar** properties. Note that these properties are only available if the **Progress bar type** is set to **Completed pages**.
 
-<img src="../images/eud-page-numbers-names.png" alt='Display page titles and numbers in the progresss bar' width="331" height="474">
+<img src="images/eud-page-numbers-names.png" alt='Display page titles and numbers in the progresss bar' width="331" height="474">
 
 As a result, the progress bar will look as shown in the image below.
 
-<img src="../images/eud-page-preview.png" alt='Progress bar preview' width="1240" height="699">
+<img src="images/eud-page-preview.png" alt='Progress bar preview' width="1240" height="699">
 

@@ -11,7 +11,7 @@ In SurveyJS, an expression is a mathematical formula or logical statement used t
 
 SurveyJS Form Builder provides a graphical user interface for constructing logical expressions&mdash;a pop-up dialog with a list of questions and custom variables to select from and available operators. This dialog appears when you click a **Magic wand** button next to an expression setting in the Property Grid. For example, you can find such settings within the **Conditions** category of a page or question.
 
-<img src="../images/eud-expression-settings.png" alt='Survey Creator: Expression builder UI' width="1340" height="760">
+<img src="images/eud-expression-settings.png" alt='Survey Creator: Expression builder UI' width="1340" height="760">
 
 Although the visual expression builder covers most use cases, it operates within certain limitations that do not allow you to construct any imaginable expression. To unlock the full capabilities of expressions, you need to get acquainted with the syntax rules. This guide will introduce you to expression structure, supported operators, and built-in functions that you can use for calculations within your form.
 
@@ -27,7 +27,7 @@ To use a question value in an expression, specify the **Question name** property
 2. Open the **Conditions** category and find the **Make the question visible if** setting in it.
 3. Specify this setting with the following expression: `{nps-score} >= 9`.
 
-<img src="../images/eud-visibleif-expression.png" alt='How to specify a conditional visibility expression' width="1338" height="756">
+<img src="images/eud-visibleif-expression.png" alt='How to specify a conditional visibility expression' width="1338" height="756">
 
 > For questions with a specified **Data** > **Join identifier** setting, use its value instead of the **Question name** value.
 
@@ -127,20 +127,23 @@ The advanced syntax may be useful in many cases, one of which is data validation
 1. Add a Dynamic Panel to the design surface.
 2. Add two Single-Line Input questions to the Dynamic Panel.
 3. Select the first question, locate the **Input type** drop-down menu under the **General** category, and select **Date**.
-4. Repeat step 3 for the second question.<br><br>
-  <img src="../images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
+4. Repeat step 3 for the second question.
+
+  <img src="images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
 5. Select the first question and enter `start-date` as the **Question name** setting value.
-6. Select the second question and enter `end-date` as a value for the same setting.<br><br>
-  <img src="../images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
-7. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.<br><br>
-  <img src="../images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+6. Select the second question and enter `end-date` as a value for the same setting.
+
+  <img src="images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
+7. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
+
+  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
 8. Specify the following **Error message**: `End date should be greater than start date`.
 9. Enter the following **Validation expression**: `{panel.start-date} < {panel.end-date}`.
-  <img src="../images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
+  <img src="images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
 
 To check that the validation rule works as expected, open the Preview tab, add a new entry to the Dynamic Panel, and select invalid start and end dates.
 
-<img src="../images/eud-datevalidation-preview.png" alt='Date validation preview' width="1321" height="671">
+<img src="images/eud-datevalidation-preview.png" alt='Date validation preview' width="1321" height="671">
 
 ### Custom Variables
 
@@ -154,15 +157,17 @@ Calculation functions produce results that can be used as operands in expression
 
 1. Add two Single-Line Input questions to the design surface.
 2. Set their **Input type** to **Date** and **Question name** to `start-date` and `end-date` (perform steps 3 to 6 from the [instructions for the Dynamic Panel](#dynamic-panel)).
-3. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.<br><br>
-  <img src="../images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+3. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
+
+  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
 4. Specify the following **Error message**: `Difference between start and end dates must not be greater than 14 days`.
-5. Enter the following **Validation expression**: `dateDiff({start-date}, {end-date}, "days") <= 14`.<br><br>
-  <img src="../images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
+5. Enter the following **Validation expression**: `dateDiff({start-date}, {end-date}, "days") <= 14`.
+
+  <img src="images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
 
 To verify the validation, open the Preview tab and select two dates that are more than 14 days apart.
 
-<img src="../images/eud-validation-datediff-preview.png" alt='Date difference validation preview' width="1217" height="407">
+<img src="images/eud-validation-datediff-preview.png" alt='Date difference validation preview' width="1217" height="407">
 
 Other calculation functions are used in expressions in a similar way. For more details, refer to the [Calculation Functions](#calculation-functions) section of this document.
 
