@@ -26,7 +26,7 @@ const buildPlatformJson = {
   license: "SEE LICENSE IN LICENSE",
   licenseUrl: "https://surveyjs.io/licensing",
   keywords: [
-"react",
+    "react",
     "survey",
     "form",
     "surveyjs",
