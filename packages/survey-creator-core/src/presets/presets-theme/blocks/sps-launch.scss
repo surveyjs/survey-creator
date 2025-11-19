@@ -29,15 +29,21 @@
   position: relative;
   cursor: pointer;
   appearance: none;
+  padding: var(--sjs2-spacing-x200, 16px);
   &:hover {
     background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
   }
   &:active {
     background: var(--sjs2-color-bg-basic-primary, #ffffff);
   }
+  &::after{
+    content: "";
+    display: block;
+    width: var(--sjs2-spacing-x600, 48px);
+    align-self: stretch;
+  }
 }
 .sps-launch__container {
-  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -47,7 +53,7 @@
   position: relative;
 }
 .sps-launch__text {
-  color: var(--sjs2-color-fg-brand-primary, #19b394);
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
   text-align: left;
   font-family: var(--sjs2-typography-default-strong-font-family, "OpenSans-SemiBold", sans-serif);
   font-size: var(--sjs2-typography-default-strong-font-size, 16px);

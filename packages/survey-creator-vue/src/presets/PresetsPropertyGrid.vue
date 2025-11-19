@@ -4,15 +4,15 @@
       <div class="sps-launch__container">
         <div class="sps-launch__text">{{buttonTitle}}</div>
         <div class="sps-launch__text2">{{buttonDescription}}</div>
-        <div class="sps-launch__icon">
-          <div class="sps-launch__chevron-right-16-x-16">
-            <div class="sps-launch__icon2">
-              <SvComponent
-                :is="'sv-svg-icon'"
-                size="auto"
-                iconName="chevrondown-24x24"
-              />
-            </div>
+      </div>
+      <div class="sps-launch__icon">
+        <div class="sps-launch__chevron-right-16-x-16">
+          <div class="sps-launch__icon2">
+            <SvComponent
+              :is="'sv-svg-icon'"
+              size="auto"
+              iconName="chevrondown-24x24"
+            />
           </div>
         </div>
       </div>
