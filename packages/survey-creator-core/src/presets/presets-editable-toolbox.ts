@@ -62,7 +62,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
             text: "JSON should be correct",
             expression: "validateToolboxJson({json})"
           }],
-          rows: 15,
           visible: false
         }
       ]
