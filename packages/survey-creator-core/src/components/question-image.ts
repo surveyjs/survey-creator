@@ -35,6 +35,12 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         }, { element: this.question, elementType: this.question.getType(), propertyName: "imageLink" });
       }
     });
+    this.editorSurveyModel.onClearFiles.add((s, o) => {
+      this.creator.clearFiles(o.value, this.question, (status, link) => {
+        this.question.imageLink = link;
+        o.callback(status, o.value);
+      }, { element: this.question, elementType: this.question.getType(), propertyName: "imageLink" });
+    });
   }
 
   constructor(

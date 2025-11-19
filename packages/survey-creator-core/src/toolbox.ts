@@ -399,10 +399,6 @@ export class QuestionToolbox
   ];
   private _containerElementValue: HTMLElement;
   private _rootElementValue: HTMLElement;
-  private _scrollbarElement: HTMLElement;
-  private _containerBodyElement: HTMLElement;
-  private _scrollbarSizerElement: HTMLElement;
-  private _containerBodyResizeObserver: ResizeObserver;
   public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
@@ -636,12 +632,6 @@ export class QuestionToolbox
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     }, false);
-    this.hiddenItemsListModel.registerPropertyChangedHandlers(["actions"], () => {
-      this.hiddenItemsListModel.actions.forEach((item) => {
-        item.locTitle.onGetTextCallback = (str: string): string => getLocalizedToolboxItemName(str, <IQuestionToolboxItem>item.innerItem);
-      });
-    }, "actions");
-
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
       if (!this.creator.readOnly && this.enabled) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
@@ -806,13 +796,8 @@ export class QuestionToolbox
     if (item instanceof QuestionToolboxItem) {
       item.locTitle.owner = this.creator;
       return item;
-    } else {
-      item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
-      const newItem = new QuestionToolboxItem(item);
-      newItem.locTitle.owner = this.creator;
-      this.createSubTypes(newItem);
-      return newItem;
     }
+    return this.createActionCore(this, item) as QuestionToolboxItem;
   }
   private createSubTypes(parentItem: QuestionToolboxItem): void {
     let property = null;
@@ -861,6 +846,15 @@ export class QuestionToolbox
       this.actions.splice(index, 0, action);
     }
     this.onItemsChanged();
+  }
+  protected createActionCore(owner: Base, item: IAction): Action {
+    item.iconName = item.iconName || QuestionToolbox.defaultIconName;
+    const newItem = new QuestionToolboxItem(item as IQuestionToolboxItem);
+    newItem.locTitle.owner = this.creator;
+    if (owner === this) {
+      this.createSubTypes(newItem);
+    }
+    return newItem;
   }
   private get dragDropHelper(): DragDropSurveyElements {
     return this.creator.dragDropSurveyElements;

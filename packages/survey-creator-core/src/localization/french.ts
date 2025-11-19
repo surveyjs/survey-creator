@@ -1126,6 +1126,8 @@ export var frenchTranslation = {
     storeDataAsText: "Stocker le contenu du fichier dans le résultat JSON sous forme de texte",
     // "Maximum file size (in bytes)"
     maxSize: "Taille maximum du fichier en octets",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Nombre maximum de fichiers",
     // "Row count"
     rowCount: "Nombre de lignes",
     // "Columns layout"

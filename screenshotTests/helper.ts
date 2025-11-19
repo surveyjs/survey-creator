@@ -148,13 +148,13 @@ export function getAddNewQuestionButton(page) {
 }
 
 export function getToolboxItemByText(page, text) {
-  return page.locator(".svc-toolbox__item-title").getByText(text);
+  return page.locator(".svc-toolbox__item-title").getByText(text, { exact: true });
 }
 export function getToolboxItemByAriaLabel(page, text) {
   return page.locator(".svc-toolbox__item").withAttribute("aria-label").getByText(text);
 }
 export function getSubToolboxItemByText(page, text) {
-  return page.locator(".svc-toolbox__item-subtype").getByText(text);
+  return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
 }
 export async function addQuestionByAddQuestionButton(page, text) {
   await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();

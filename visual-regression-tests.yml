@@ -228,11 +228,6 @@ jobs:
         condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - script: |
           cd $(Build.SourcesDirectory)/survey-creator
           npm run postinstall
         displayName: "install chrome playwright"
@@ -293,28 +288,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 React"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run visual-regression-tests:ci
-        displayName: "Visual Regression Tests CreatorV2 React"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests"
-          Contents: "**"
-          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_VRT"
-          OverWrite: true
-        condition: always()
-        displayName: "copy vrt react artifacts"
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_React_VRT/"
-          ArtifactName: "Creator_React_VRT"
-          publishLocation: "Container"
-        condition: always()
-        displayName: "publish vrt react artifacts"
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -432,11 +405,6 @@ jobs:
         displayName: "npm install"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - script: |
           cd $(Build.SourcesDirectory)/survey-creator
           npm run postinstall
         displayName: "install chrome playwright"
@@ -473,28 +441,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 Angular"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run visual-regression-tests:ci
-        displayName: "Visual Regression Tests CreatorV2 Angular"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests"
-          Contents: "**"
-          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_Angular_VRT"
-          OverWrite: true
-        condition: always()
-        displayName: "copy vrt angular artifacts"
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_Angular_VRT/"
-          ArtifactName: "Creator_Angular_VRT"
-          publishLocation: "Container"
-        condition: always()
-        displayName: "publish vrt angular artifacts"
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -612,11 +558,6 @@ jobs:
         displayName: "npm install"
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - script: |
           cd $(Build.SourcesDirectory)/survey-creator
           npm run postinstall
         displayName: "install chrome playwright"
@@ -653,28 +594,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 Vue"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run visual-regression-tests:ci
-        displayName: "Visual Regression Tests CreatorV2 Vue"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests"
-          Contents: "**"
-          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_Vue_VRT"
-          OverWrite: true
-        condition: always()
-        displayName: "copy vrt vue artifacts"
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_Vue_VRT/"
-          ArtifactName: "Creator_Vue_VRT"
-          publishLocation: "Container"
-        condition: always()
-        displayName: "publish vrt vue artifacts"
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -818,11 +737,6 @@ jobs:
         condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
       - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - script: |
           cd $(Build.SourcesDirectory)/survey-creator
           npm run postinstall
         displayName: "install chrome playwright"
@@ -870,28 +784,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 JS"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run visual-regression-tests:ci
-        displayName: "Visual Regression Tests CreatorV2 JS"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests"
-          Contents: "**"
-          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_JS_VRT"
-          OverWrite: true
-        condition: always()
-        displayName: "copy vrt JS artifacts"
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_JS_VRT/"
-          ArtifactName: "Creator_JS_VRT"
-          publishLocation: "Container"
-        condition: always()
-        displayName: "publish vrt JS artifacts"
 
       - task: PublishBuildArtifacts@1
         inputs:
