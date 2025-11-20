@@ -135,6 +135,7 @@ export var enStrings = {
     toolboxSearch: "Search",
     toolboxFilteredTextPlaceholder: "Type to search...",
     toolboxNoResultsFound: "No results found",
+    propertyGridEmptySurveyText: "No properties to display",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
     propertyGridPlaceholderTitle: "Start configuring your form",

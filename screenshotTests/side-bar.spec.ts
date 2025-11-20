@@ -186,4 +186,20 @@ test.describe(title, () => {
     await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
     await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");
   });
+
+  test("property grid empty survey", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 900 });
+    await page.evaluate(() => {
+      window["creator"].onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
+        if (area === "property-grid" && obj.getType() === "page") {
+          [...survey.pages].forEach((page) => page.delete());
+        }
+      });
+
+      window["creator"].JSON = { pages: [{ name: "page1" }] };
+    });
+
+    await page.locator(".sd-page").first().click();
+    await compareScreenshot(page, ".spg-root-modern", "property-grid-empty-survey.png");
+  });
 });

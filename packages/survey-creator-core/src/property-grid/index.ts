@@ -1019,6 +1019,7 @@ export class PropertyGridModel {
   }
 
   private onCreateSurvey(survey: SurveyModel): void {
+    survey.emptySurveyText = getLocString("ed.propertyGridEmptySurveyText");
     survey.questionErrorLocation = "bottom";
     survey.getCss().list = {};
     const surveyCss = { ...propertyGridCss };
