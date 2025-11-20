@@ -5,29 +5,39 @@ import { getLocString, editorLocalization, SurveyCreatorModel } from "survey-cre
 export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
   private createElements() {
     return [
-      { type: "panel", name: "designer", elements: [
+      { type: "panel", name: "designer", state: "expanded", elements: [
         { name: "pageEditMode", type: "dropdown", choices: [
           { value: "standard", text: "Standard" },
           { value: "single", text: "Single" },
           { value: "bypage", text: "By Page" }
         ] },
-        { name: "showSurveyHeader", type: "boolean" },
-        { name: "showHeaderInEmptySurvey", type: "boolean" },
-        { name: "useElementTitles", type: "boolean" },
-        { name: "allowZoom", type: "boolean" },
-        { name: "allowDragPages", type: "boolean" },
-        { name: "collapseOnDrag", type: "boolean" },
-        { name: "expandCollapseButtonVisibility", type: "dropdown", choices: [
-          { value: "never", text: "Never" },
-          { value: "onhover", text: "On Hover" },
-          { value: "always", text: "Always" }
+        { type: "panel", name: "designerHeader", elements: [
+          { name: "showSurveyHeader", type: "boolean" },
+          { name: "showHeaderInEmptySurvey", type: "boolean" },
         ] },
-        { name: "collapseQuestions", type: "boolean" },
-        { name: "collapsePanels", type: "boolean" },
-        { name: "collapsePages", type: "boolean" },
+        { type: "panel", name: "designerTitles", elements: [
+          { name: "useElementTitles", type: "boolean" },
+        ] },
+        { type: "panel", name: "designerZoomDrag", elements: [
+          { name: "allowDragPages", type: "boolean" },
+          { name: "collapseOnDrag", type: "boolean" },
+          { name: "allowZoom", type: "boolean" },
+        ] },
+        { type: "panel", name: "designerExpandCollapse", elements: [
+          { name: "expandCollapseButtonVisibility", type: "dropdown", choices: [
+            { value: "never", text: "Never" },
+            { value: "onhover", text: "On Hover" },
+            { value: "always", text: "Always" }
+          ] },
+          { name: "collapseQuestions", type: "boolean" },
+          { name: "collapsePanels", type: "boolean" },
+          { name: "collapsePages", type: "boolean" },
+        ] },
         { name: "maxRows", type: "text", inputType: "number" },
         { name: "maxColumns", type: "text", inputType: "number" },
-        { name: "inplaceEditChoiceValues", type: "boolean" },
+        { type: "panel", name: "designerChoices", elements: [
+          { name: "inplaceEditChoiceValues", type: "boolean" },
+        ] },
         { name: "minChoices", type: "text", inputType: "number" },
         { name: "maxChoices", type: "text", inputType: "number" },
         { name: "maxVisibleChoices", type: "text", inputType: "number" },
@@ -35,8 +45,11 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { name: "forbiddenNestedElements", type: "text" },
         { name: "maxPanelNestingLevel", type: "text", inputType: "number" }
       ] },
-      { type: "panel", name: "preview", elements: [
-        { name: "previewAllowSimulateDevice", type: "boolean" },
+      { type: "panel", name: "preview", state: "expanded", elements: [
+        { type: "panel", name: "previewSimulateDevice", elements: [
+          { name: "previewAllowSimulateDevice", type: "boolean" },
+        ] },
+
         { name: "previewDevice", type: "dropdown", choices: [
           { value: "desktop", text: "Desktop" },
           { value: "iPhoneSE", text: "iPhone SE" },
@@ -52,16 +65,18 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
           { value: "landscape", text: "Landscape" },
           { value: "portrait", text: "Portrait" }
         ] },
-        { name: "previewAllowSelectLanguage", type: "boolean" },
-        { name: "previewAllowSelectPage", type: "boolean" },
+        { type: "panel", name: "previewAllowSelect", elements: [
+          { name: "previewAllowSelectLanguage", type: "boolean" },
+          { name: "previewAllowSelectPage", type: "boolean" },
+        ] },
         { name: "previewAllowHiddenElements", type: "boolean" },
       ] },
-      { type: "panel", name: "logic", elements: [
+      { type: "panel", name: "logic", state: "expanded", elements: [
         { name: "logicAllowTextEditExpressions", type: "boolean" },
         { name: "logicMaxItemsInCondition", type: "text", inputType: "number" }
       ]
       },
-      { type: "panel", name: "translation", elements: [
+      { type: "panel", name: "translation", state: "expanded", elements: [
         { name: "clearTranslationsOnSourceTextChange", type: "boolean" },
       ]
       }
@@ -76,8 +91,9 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
   private patchElements(elements: any[]): any[] {
     return elements.map(element => {
       if (element.type === "panel") {
-        element.state = "expanded";
-        element.title = editorLocalization.getString("tabs." + element.name);
+        if (element.state == "expanded") {
+          element.title = editorLocalization.getString("tabs." + element.name);
+        }
         this.patchElements(element.elements);
       } else {
         this.optionsList.push(element.name);

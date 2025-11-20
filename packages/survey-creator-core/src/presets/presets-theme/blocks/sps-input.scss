@@ -198,3 +198,7 @@
   gap: var(--ctr-editor-buttons-gap, var(--sjs-spacing-x05));
   align-self: stretch;
 }
+
+.sps-question--nested .sps-input {
+  max-width: 363px;
+}

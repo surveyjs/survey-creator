@@ -24,8 +24,8 @@ export var presetsCss = {
     edit: "sps-btn sps-footer__edit-btn"
   },
   panel: {
-    withFrame: "",
-    nested: "",
+    withFrame: "sps-panel--with-frame",
+    nested: "sps-panel--nested",
     expandableAnimating: "",
     header: "sps-panel__header",
     title: "sps-title sps-panel__title",
@@ -42,7 +42,9 @@ export var presetsCss = {
     icon: "sps-panel__icon",
     iconExpanded: "sps-panel__icon--expanded",
     footer: "sps-panel__footer",
-    requiredMark: "sps-panel__required-text"
+    requiredMark: "sps-panel__required-text",
+    collapsed: "sps-panel--collapsed",
+    expanded: "sps-panel--expanded",
   },
   paneldynamic: {
     nested: "",

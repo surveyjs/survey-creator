@@ -123,18 +123,15 @@
 }
 
 .sps-action-button--icon {
-  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-right-large-icon, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
+  padding: var(--sjs2-layout-control-action-xx-small-box-vertical, 4px) var(--sjs2-layout-control-action-xx-small-box-horizontal, 4px);
 }
 .sps-action-button__icon {
   display: block;
-  width: var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-actionbar-button-icon-height, var(--sjs-font-size-x3));
+  width: 16px;
+  height: 16px;
 
   use {
-    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
     transition: fill $creator-transition-duration;
   }
 }

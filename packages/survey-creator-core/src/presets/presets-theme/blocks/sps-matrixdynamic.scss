@@ -57,6 +57,11 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  .sps-question__title  {
+    color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+    @include sjs2--typography--default-strong;
+  }
 }
 
 .sps-matrixdynamic__content {

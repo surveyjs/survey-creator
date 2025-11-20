@@ -24,14 +24,26 @@
 
 .sps-question__title {
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);
-
   @include sjs2--typography--default-strong;
+}
+
+.sps-question--nested {
+  .sps-question__title {
+    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px) var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
+    @include sjs2--typography--default;
+  }
+  .sps-question__header {
+    width: 100%;
+    display: flex;
+    padding: 0;
+    align-items: flex-start;
+    align-self: stretch;
+  }
 }
 
 .sps-question__content {
   display: flex;
-  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px)
-    var(--sjs2-spacing-x250, 20px);
   flex-direction: column;
   align-items: stretch;
   align-self: stretch;

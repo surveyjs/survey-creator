@@ -147,6 +147,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       if (options.name === "languages_creator") {
         editorLocalization.currentLocale = options.value;
         editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
+        return;
       }
       if (questionNames.indexOf(options.name) != -1 && !this.applying) {
         this.applyFromSurveyModel(false);
