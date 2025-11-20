@@ -1521,7 +1521,6 @@ export class SurveyCreatorModel extends Base
   public onLocaleChanded: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   public updateLocalizedStrings(): void {
     this.toolbox.updateTitles();
-    this.refreshPlugin();
     const selEl = this.selectedElement;
     if (!!selEl) {
       this.selectElement(null);
@@ -1534,18 +1533,7 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.locStrsChanged();
     this.toolbar.locStrsChanged();
     this.sidebar.locStrsChanged();
-  }
-  private refreshPlugin() {
-    const plugin = this.currentPlugin;
-    if (!!plugin) {
-      if (plugin.deactivate) {
-        plugin.deactivate();
-      }
-      const viewType = this.viewType;
-      this.viewType = "";
-      plugin.activate();
-      this.viewType = viewType;
-    }
+    this.currentPlugin?.model?.locStrsChanged();
   }
   /**
    * Enables the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
