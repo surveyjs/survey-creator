@@ -59,6 +59,8 @@
   flex-grow: 1;
 
   .sps-question__title  {
+    padding: 0;
+    line-height: var(--sjs2-typography-line-height-default, 24px); /* 150% */
     color: var(--sjs2-color-fg-basic-primary, #1c1b20);
     @include sjs2--typography--default-strong;
   }
@@ -189,7 +191,7 @@
 
 .sps-question--matrixdynamic.sps-question--nested {
   .sps-question__header {
-    padding: var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x100, 8px)
+    padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x100, 8px)
       var(--sjs2-spacing-x250, 20px);
     border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
     box-sizing: border-box;

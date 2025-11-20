@@ -123,15 +123,15 @@
 }
 
 .sps-action-button--icon {
-  padding: var(--sjs2-layout-control-action-xx-small-box-vertical, 4px) var(--sjs2-layout-control-action-xx-small-box-horizontal, 4px);
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1));
 }
 .sps-action-button__icon {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 
   use {
-    fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
+    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     transition: fill $creator-transition-duration;
   }
 }

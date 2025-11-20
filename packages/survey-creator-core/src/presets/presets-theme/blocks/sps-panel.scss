@@ -32,6 +32,8 @@
    }
   .sps-panel__content {
     display: flex;
+    flex-direction: row;
+    padding: 0;
   }
   .sps-row {
     border: none;

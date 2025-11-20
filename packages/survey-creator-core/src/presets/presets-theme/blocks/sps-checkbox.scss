@@ -128,7 +128,11 @@
 }
 
 .sps-selectbase__column {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  gap: var(--sjs2-spacing-x200, 16px);
+  padding-top: var(--sjs2-spacing-x200, 16px);
 }
 
 .sps-selectbase__label {

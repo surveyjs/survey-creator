@@ -70,9 +70,9 @@ export const enStrings = {
     addCustomCategory: "New Category"
   },
   options: {
-    title: "Survey Creator Options",
+    title: "Options",
     navigationTitle: "Options",
-    description: "Set options",
+    description: "Detailed configuration settings for Survey Creator.",
   },
   items: {
     addNewItem: "Add a new item",

@@ -204,6 +204,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     model.onUpdateQuestionCssClasses.add(function(_, options) {
       editablePresets.forEach(item => {
+        const suffix = item.getCustomQuestionCssSuffix(options.question);
+        if (suffix) {
+          options.cssClasses.mainRoot += " sps-question--" + suffix;
+        }
         if (item.getMainElementNames().indexOf(options.question.name) >= 0) {
           options.cssClasses.mainRoot += " sps-question--main";
           options.cssClasses.row += " sps-table__row--main";
@@ -216,7 +220,14 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onUpdatePanelCssClasses.add(function(_, options) {
       editablePresets.forEach(item => {
         if (options.panel.name === item.getNavigationElementName()) {
-          options.cssClasses.panel.container += " sps-panel--navigation";
+          options.cssClasses.panel.container += " sps-panel--navigation ";
+        }
+      });
+    });
+    model.onUpdatePageCssClasses.add(function(_, options) {
+      editablePresets.forEach(item => {
+        if (item.pageName === options.page.name) {
+          options.cssClasses.page.root += " sps-page--" + item.fullPath;
         }
       });
     });

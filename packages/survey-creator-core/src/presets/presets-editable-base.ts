@@ -1,4 +1,4 @@
-import { Helpers, SurveyModel } from "survey-core";
+import { Helpers, Question, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions, getLocString } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
@@ -27,6 +27,7 @@ export class CreatorPresetEditableBase {
   protected get mainPanelName() { return this.path + "_mainPanel"; }
   public getMainElementNames() : any { return [this.mainPanelName]; }
   public getMainPanelName() : any { return this.mainPanelName; }
+  public getCustomQuestionCssSuffix(question: Question) { return ""; }
   public createPages(): Array<any> {
     const res = [];
     const mainPage = this.createMainPage();

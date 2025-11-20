@@ -1,4 +1,4 @@
-import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel, Question } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { getLocString, editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 function searchItem(params) {
@@ -63,7 +63,9 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
       ] };
   }
   public getMainElementNames() : any { return [this.surveyLocalesName]; }
-
+  public getCustomQuestionCssSuffix(question: Question) {
+    return question.name === this.searchLocalesName ? "search" : "";
+  }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;

@@ -12,12 +12,15 @@
 .sps-question--with-frame {
   border-radius: var(--sjs2-radius-x250, 20px);
   border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  .sps-question__content {
+    padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px);
+  }
 }
 
 .sps-question__header {
   width: 100%;
   display: flex;
-  padding: var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
+  padding: var(--sjs2-spacing-x200, 20px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
   align-items: flex-start;
   align-self: stretch;
 }
@@ -39,6 +42,9 @@
     padding: 0;
     align-items: flex-start;
     align-self: stretch;
+  }
+  .sps-question__content {
+    padding: 0;
   }
 }
 
