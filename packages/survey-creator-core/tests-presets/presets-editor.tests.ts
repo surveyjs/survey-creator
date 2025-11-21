@@ -12,12 +12,13 @@ import { editorLocalization } from "../src/editorLocalization";
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.pages).toHaveLength(4);
-  expect(survey.visiblePages).toHaveLength(4);
+  expect(survey.pages).toHaveLength(5);
+  expect(survey.visiblePages).toHaveLength(5);
   expect(survey.pages[0].name).toEqual("page_languages");
   expect(survey.pages[1].name).toEqual("page_tabs");
   expect(survey.pages[2].name).toEqual("page_toolbox");
   expect(survey.pages[3].name).toEqual("page_propertyGrid");
+  expect(survey.pages[4].name).toEqual("page_options");
 });
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
