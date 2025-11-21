@@ -759,6 +759,7 @@ test("Change localization strings and then change locale for tabs", () => {
   const item = itemsQuestion.visibleRows[0];
   item.getQuestionByName("title").value = "Designer edit";
   survey.setValue("languages_creator", "de");
+  editor.onLocaleChanged();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
