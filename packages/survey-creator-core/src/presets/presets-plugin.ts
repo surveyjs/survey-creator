@@ -130,4 +130,10 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.model = undefined;
     return true;
   }
+
+  public onLocaleChanged() {
+    if (this.model) {
+      this.model.onLocaleChanged();
+    }
+  }
 }

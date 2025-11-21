@@ -119,6 +119,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return json;
   }
 
+  public onLocaleChanged() {
+    const json = this.preset.getJson();
+    this.model.editablePresets.forEach(item => item.onLocaleChanged(this.model, json[item.path], this.creator));
+  }
+
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -145,8 +150,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
       if (options.name === "languages_creator") {
-        editorLocalization.currentLocale = options.value;
-        editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
+        this.creator.locale = options.value;
         return;
       }
       if (questionNames.indexOf(options.name) != -1 && !this.applying) {

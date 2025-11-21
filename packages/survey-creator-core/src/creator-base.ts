@@ -1543,6 +1543,10 @@ export class SurveyCreatorModel extends Base
   private refreshPlugin() {
     const plugin = this.currentPlugin;
     if (!!plugin) {
+      if (plugin.onLocaleChanged) {
+        plugin.onLocaleChanged();
+        return;
+      }
       if (plugin.deactivate) {
         plugin.deactivate();
       }
