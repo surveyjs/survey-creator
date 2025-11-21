@@ -250,6 +250,8 @@ export var jaStrings = {
     toolboxFilteredTextPlaceholder: "「検索」...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "結果が見つかりませんでした",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "表示するプロパティがありません",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var jaStrings = {
     storeDataAsText: "ファイルのコンテンツをテキストとしてJSONの結果に保存",
     // "Maximum file size (in bytes)"
     maxSize: "ファイルの最大サイズ（byte）",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "最大ファイル数",
     // "Row count"
     rowCount: "列数",
     // "Columns layout"
@@ -1400,8 +1404,10 @@ export var jaStrings = {
     allowMultiple: "複数のファイルのアップロードを有効にする",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "アップロードされた画像をプレビューする",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "受け入れられるファイルの種類",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "受け入れられるファイルカテゴリ",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "追加のファイル拡張子",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "アップロードが完了するまで待ちます",
     // [Auto-translated] "Confirm file deletion"
@@ -2081,6 +2087,20 @@ export var jaStrings = {
       warning: "警告",
       // [Auto-translated] "Informational"
       info: "情報"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "画像",
+      // [Auto-translated] "Videos"
+      video: "ビデオ",
+      // [Auto-translated] "Audio"
+      audio: "オーディオ",
+      // [Auto-translated] "Documents"
+      document: "書類",
+      // [Auto-translated] "Archives"
+      archive: "史料",
+      // [Auto-translated] "Custom"
+      custom: "習慣"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -3088,8 +3108,10 @@ export var jaStrings = {
     storeOthersAsComment: "「その他」オプションの値をアンケート結果に別のプロパティとして保存する場合に選択します。",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "{0} を実際の値のプレースホルダーとして使用します。",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "詳細については、[accept](https://www.w3schools.com/tags/att_input_accept.asp) 属性の説明を参照してください。",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "「カスタム」を選択して、あらかじめ定義されたカテゴリの上に自分のファイル拡張子を追加してください。",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "カンマで区切られたファイル拡張子(例:.csv、.xml)を入力してください。",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "選択肢を複数列のレイアウトに配置します。0 に設定すると、オプションが 1 行に表示されます。「���ル���力タイプ」がラジオボタングループまたはチェックボックスに設定されている列にのみ適用されます。",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
