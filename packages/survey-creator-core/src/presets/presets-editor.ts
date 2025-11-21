@@ -149,10 +149,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     const questionNames = editablePresets.map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
-      if (options.name === "languages_creator") {
-        this.creator.locale = options.value;
-        return;
-      }
       if (questionNames.indexOf(options.name) != -1 && !this.applying) {
         this.applyFromSurveyModel(false);
         this.activatePage(model, this.creator, editablePresets);

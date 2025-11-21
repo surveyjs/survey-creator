@@ -343,6 +343,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       locStrs[name] = strs;
     }
   }
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupQuestionsValueCore(model, json, creator);
+  }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
     this.setJSONForTitlesAndDescriptions(locStrs, "pe");
     this.setJSONForTitlesAndDescriptions(locStrs, "pehelp");
