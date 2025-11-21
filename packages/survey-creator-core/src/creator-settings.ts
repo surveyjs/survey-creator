@@ -185,6 +185,7 @@ export interface ICreatorPlugin {
   defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
+  onLocaleChanged?: () => void;
   model: Base;
 }
 

@@ -7,17 +7,20 @@ export interface ICreatorPresetTab {
 
 export class CreatorPresetTabs extends CreatorPresetBase {
   public getPath(): string { return "tabs"; }
-  protected applyCore(creator: SurveyCreatorModel): void {
-    super.applyCore(creator);
-    const items = this.json["items"] || [];
-    let tab = this.json.activeTab || (items.length > 0 ? items[0].name : "");
-    if (items.length > 0 && items.filter(i => i.name == tab).length == 0) {
-      tab = items[0].name;
-    }
-    if (!!tab && creator.activeTab !== tab) {
-      const activePlugin = creator.getPlugin(creator.activeTab);
-      if (!!activePlugin?.deactivate) {
-        activePlugin.deactivate();
+  protected applyCore(creator: SurveyCreatorModel, internal: boolean = false): void {
+    super.applyCore(creator, internal);
+    const items = this.json["items"] || creator.initialTabs().map(name => ({ name }));
+    let tab = null;
+    if (!internal) {
+      tab = this.json.activeTab || (items.length > 0 ? items[0].name : "");
+      if (items.length > 0 && items.filter(i => i.name == tab).length == 0) {
+        tab = items[0].name;
+      }
+      if (!!tab && creator.activeTab !== tab) {
+        const activePlugin = creator.getPlugin(creator.activeTab);
+        if (!!activePlugin?.deactivate) {
+          activePlugin.deactivate();
+        }
       }
     }
     this.applyTabs(creator, items);
@@ -27,6 +30,7 @@ export class CreatorPresetTabs extends CreatorPresetBase {
   }
   private applyTabs(creator: SurveyCreatorModel, items: Array<ICreatorPresetTab>): void {
     if (!Array.isArray(items)) return;
-    creator.setTabs(items.map(i => i.name));
+    const tabs = [...items.map(i => i.name), ...creator.tabs.map(i => i.id).filter(id => id == "presets")];
+    creator.setTabs(tabs);
   }
 }

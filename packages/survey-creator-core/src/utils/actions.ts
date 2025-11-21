@@ -72,6 +72,7 @@ export class MenuButton extends Action {
     return new CssClassBuilder()
       .append("svc-menu-action__button")
       .append("svc-menu-action__button--with-subtitle", this.contentType === "text-description-vertical")
+      .append("svc-menu-action__button--disabled", this.disabled)
       .append("svc-menu-action__button--pressed", this.pressed)
       .append("svc-menu-action__button--selected", !!this.active)
       .toString();

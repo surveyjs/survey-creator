@@ -3,6 +3,7 @@ import { SurveyCreatorModel } from "../creator-base";
 
 export class CreatorPresetPropertyGridDefinition extends CreatorPresetBase {
   public getPath(): string { return "definition"; }
+  protected applyEmptyJson(): boolean { return false; }
   protected applyCore(creator: SurveyCreatorModel): void {
     creator.setPropertyGridDefinition(this.json);
   }
