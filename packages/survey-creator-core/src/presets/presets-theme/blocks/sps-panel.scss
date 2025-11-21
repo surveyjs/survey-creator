@@ -37,7 +37,7 @@
   }
   .sps-row {
     border: none;
-    padding: 0 var(--tokens-spacing-static-positive-x300, 24px);
+    padding: 0 0 0 var(--tokens-spacing-static-positive-x300, 24px);
     border-left: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
     &:first-of-type {
       padding-left: 0;

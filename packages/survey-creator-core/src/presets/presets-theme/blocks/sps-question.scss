@@ -19,8 +19,9 @@
 
 .sps-question__header {
   width: 100%;
+  box-sizing: border-box;
   display: flex;
-  padding: var(--sjs2-spacing-x200, 20px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
+  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
   align-items: flex-start;
   align-self: stretch;
 }

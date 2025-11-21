@@ -23,12 +23,12 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
           { name: "collapseOnDrag", type: "boolean" },
           { name: "allowZoom", type: "boolean" },
         ] },
+        { name: "expandCollapseButtonVisibility", type: "dropdown", choices: [
+          { value: "never", text: "Never" },
+          { value: "onhover", text: "On Hover" },
+          { value: "always", text: "Always" }
+        ] },
         { type: "panel", name: "designerExpandCollapse", elements: [
-          { name: "expandCollapseButtonVisibility", type: "dropdown", choices: [
-            { value: "never", text: "Never" },
-            { value: "onhover", text: "On Hover" },
-            { value: "always", text: "Always" }
-          ] },
           { name: "collapseQuestions", type: "boolean" },
           { name: "collapsePanels", type: "boolean" },
           { name: "collapsePages", type: "boolean" },

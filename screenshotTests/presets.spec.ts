@@ -51,6 +51,11 @@ test.describe(title, () => {
     await page.locator(".sps-panel--navigation").getByText("Next").click();
     expect(await page.locator(".sps-page__title").getByText("Property Grid")).toBeVisible();
     await compareScreenshot(page, page.locator(".sps-page"), "presets-property-grid.png");
+
+    await page.locator(".sps-panel--navigation").getByText("Next").click();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    await page.locator(".sv-action-bar-item--collapse").nth(0).click();
+    await compareScreenshot(page, page.locator(".sps-page"), "presets-options.png");
   });
 
   test("Presets Items", async ({ page }) => {

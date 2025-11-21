@@ -70,25 +70,26 @@
 
   .sps-question__title {
     color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
-
+    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px) var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
     @include sjs2--typography--default;
   }
 
-  .sps-question__content {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
+  .sps-question__content.sps-question__content {
+    padding: 0;
   }
   
-  .sps-row--multiple > div {
-    align-items: stretch;
-    padding-left: var(--sjs2-spacing-x400, 32px);
-    padding-right: var(--sjs2-spacing-x400, 32px);
-    &:first-of-type {
-      padding-left: 0;
-    }
-    &:last-of-type {
-      padding-right: 0;
+  .sps-row--multiple { 
+    margin: 0;
+    &> div {
+      align-items: stretch;
+      padding-left: var(--sjs2-spacing-x400, 32px);
+      padding-right: var(--sjs2-spacing-x400, 32px);
+      &:first-of-type {
+        padding-left: 0;
+      }
+      &:last-of-type {
+        padding-right: 0;
+      }
     }
   }
 
@@ -104,5 +105,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--sjs2-spacing-x200, 16px);
+    padding: 0;
   }
 }
