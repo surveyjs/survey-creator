@@ -51,24 +51,25 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.designerPlugin.activateSidebar();
     this.model.model.onComplete.add(() => this.hidePresets());
 
-    const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
+    //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
+    const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
     let settingsAction: IAction;
 
     const keep = (item: IAction) => {
       settingsAction.popupModel.show();
     };
     const tools = [
-      { id: "save", locTitleName: "presets.plugin.save", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
-      { id: "defaultSettings", locTitleName: "presets.plugin.defaultSettings", needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "basic", locTitleName: "presets.plugin.basic", action: (item: IAction) => { keep(item); this.model.json = basic; } },
-      { id: "advanced", locTitleName: "presets.plugin.advanced", action: (item: IAction) => { keep(item); this.model.json = advanced; } },
-      { id: "expert", locTitleName: "presets.plugin.expert", action: (item: IAction) => { keep(item); this.model.json = expert; } },
-      { id: "file", locTitleName: "presets.plugin.file", needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "import", locTitleName: "presets.plugin.import", markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
-      { id: "export", locTitleName: "presets.plugin.export", markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
-      { id: "edit", locTitleName: "presets.plugin.edit", needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "reset-current", locTitleName: "presets.plugin.resetLanguages", action: () => { this.model?.resetToDefaults("page_languages"); } },
-      { id: "reset", locTitleName: "presets.plugin.resetAll", css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
+      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() }, //locTitleName: "presets.plugin.save"
+      { id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "basic", title: getLocString("presets.plugin.basic"), action: (item: IAction) => { keep(item); this.model.json = basic; } },
+      { id: "advanced", title: getLocString("presets.plugin.advanced"), action: (item: IAction) => { keep(item); this.model.json = advanced; } },
+      { id: "expert", title: getLocString("presets.plugin.expert"), action: (item: IAction) => { keep(item); this.model.json = expert; } },
+      { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
+      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
+      { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.model?.resetToDefaults("page_languages"); } },
+      { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
     ];
 
     presets.forEach(p => {
@@ -101,7 +102,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       cssClasses: listComponentCss,
       onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
       onShow: () => { settingsAction.iconName = "close-24x24"; }
-    }, this.creator);
+    }, this.model.model);
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
     bottomActions.unshift(settingsAction);
