@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 Survey Creator is not available for free commercial use. To integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing) for the software developer(s) who will be working with the Survey Creator APIs and implementing the integration. If you use Survey Creator without a license, an alert banner will appear at the bottom of the interface:
 
-<img src="./images/alert-banner.png" alt="Survey Creator: Alert banner" width="1544" height="824">
+<img src="images/alert-banner.png" alt="Survey Creator: Alert banner" width="1544" height="824">
 
 After purchasing a license, follow the steps below to activate it and remove the alert banner:
 

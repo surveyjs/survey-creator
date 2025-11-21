@@ -38,7 +38,7 @@ To set up branching logic that redirects a respondent to a specific form questio
 3. Locate a subsection called **Triggers** and click the **Plus** icon to add a new trigger.
 4. In the trigger drop-down menu, select **Skip to question**.
 
-<img src="../images/eud-skip-to-question-steps-part-1.png" alt='Survey Creator: How to implement "skip to question" logic, part 1' width="1544" height="700">
+<img src="images/eud-skip-to-question-steps-part-1.png" alt='Survey Creator: How to implement "skip to question" logic, part 1' width="1544" height="700">
 
 5. Click the **Pen** icon to expand the trigger settings.
 6. Use one of the following ways to specify an expression that, when evaluates to `true`, will take a respondent to the target question (the destination you want to direct a respondent to).
@@ -46,7 +46,7 @@ To set up branching logic that redirects a respondent to a specific form questio
    - Click the **Magic wand** icon to open a popup and build the expression using a GUI. Click **Apply** when you finish.
 7. Select a target question using the drop-down menu of the **Question to skip to** property.
 
-<img src="../images/eud-skip-to-question-steps-part-2.png" alt='Survey Creator: How to implement "skip to question" logic, part 2' width="1544" height="700">
+<img src="images/eud-skip-to-question-steps-part-2.png" alt='Survey Creator: How to implement "skip to question" logic, part 2' width="1544" height="700">
 
 ### Show/Hide Questions
 
@@ -58,14 +58,14 @@ To create a conditional rule that determines the visibility of a question, panel
 2. Switch to the **Conditions** category and locate the **Make the question/panel/page visible if** property.
 3. Click the **Magic wand** icon on the right of the property. This action opens a popup with a GUI for setting up display logic.
 
-<img src="../images/eud-question-display-logic-steps-1-to-3.png" alt='Survey Creator: How to implement question display logic (steps 1 to 3)' width="1544" height="678">
+<img src="images/eud-question-display-logic-steps-1-to-3.png" alt='Survey Creator: How to implement question display logic (steps 1 to 3)' width="1544" height="678">
 
 4. In the popup, select the trigger [element ID](/survey-creator/documentation/end-user-guide/form-display-logic#how-it-works) (its **Question/Panel/Page name** property value).
 5. Select a condition from the drop-down menu: Empty, Not empty, Equals, Does not equal, Any of, Greater than, Less than, Greater than or equals to, or Less than or equals to.
 6. Type in or select the triggering answer.
 7. Click **Apply**.
 
-<img src="../images/eud-question-display-logic-steps-4-to-7.png" alt='Survey Creator: How to implement question display logic (steps 4 to 7)' width="1544" height="678">
+<img src="images/eud-question-display-logic-steps-4-to-7.png" alt='Survey Creator: How to implement question display logic (steps 4 to 7)' width="1544" height="678">
 
 ### Complete Survey
 
@@ -76,20 +76,20 @@ To automatically complete a survey based on a user response, perform the followi
 3. Locate a subsection called **Triggers** and click the **Plus** icon to add a new trigger.
 4. In the trigger drop-down menu, select **Complete survey**.
 
-<img src="../images/eud-complete-survey-steps-part-1.png" alt='Survey Creator: How to implement "complete survey" logic, part 1' width="1162" height="710">
+<img src="images/eud-complete-survey-steps-part-1.png" alt='Survey Creator: How to implement "complete survey" logic, part 1' width="1162" height="710">
 
 5. Click the **Pen** icon to expand the trigger settings.
 6. Use one of the following ways to specify an expression that, when evaluates to `true`, will activate survey completion.
    - Enter the expression in the **Expression** field.
    - Click the **Magic wand** icon to open a popup and build the expression using a GUI. Click **Apply** when you finish.
 
-<img src="../images/eud-complete-survey-steps-part-2.png" alt='Survey Creator: How to implement "complete survey" logic, part 2' width="1163" height="709">
+<img src="images/eud-complete-survey-steps-part-2.png" alt='Survey Creator: How to implement "complete survey" logic, part 2' width="1163" height="709">
 
 ### Graphical User Interface for Conditional Forms
 
 SurveyJS Form Builder offers a user-friendly Logic tab and Conditions sections within the Property Grid for all form elements. These features allow users with diverse technical expertise to effortlessly configure conditional logic via a graphical user interface (GUI). The Logic tab consolidates all conditional rules created in the individual Conditions sections of the Property Grid. Within the Logic tab, users can implement all available types of form branching, including "Skip to question", "Complete survey", and "Show/hide question".
 
-<img src="../images/eud-logic-tab-condition-list.png" alt='Survey Creator: Condition list in the Logic tab' width="772" height="884">
+<img src="images/eud-logic-tab-condition-list.png" alt='Survey Creator: Condition list in the Logic tab' width="772" height="884">
 
 ## See Also
 

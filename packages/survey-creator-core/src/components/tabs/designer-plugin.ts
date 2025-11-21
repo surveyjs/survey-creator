@@ -141,10 +141,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private updatePredefinedColorChoices() {
     this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
-      if (question.name === "--sjs-special-background") {
+      if (question.name === CreatorThemeModel.varColorUtilitySurface) {
         (question as any).choices = this.themeModel && this.themeModel.isLight ? getPredefinedBackgoundColorsChoices() : [];
       }
-      if (question.name === "--sjs-primary-background-500" || question.name === "--sjs-secondary-background-500") {
+      if (question.name === CreatorThemeModel.varColorProjectBrand || question.name === CreatorThemeModel.varColorProjectAccent) {
         (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
       }
     });

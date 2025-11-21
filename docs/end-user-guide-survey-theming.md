@@ -13,7 +13,7 @@ A theme in SurveyJS is a set of CSS variables that control the look and feel of 
 
 To customize the survey design, open the **Themes** tab in the Survey Creator.
 
-<img src="../images/eud-themes-tab.png" alt="The Theme Editor tab" width="1544" height="786">
+<img src="images/eud-themes-tab.png" alt="The Theme Editor tab" width="1544" height="786">
 
 ## Choose and Apply a Theme
 
@@ -21,29 +21,29 @@ The Theme Editor comes with a collection of predefined themes that provide a gre
 
 To apply a new theme, locate the **Theme** drop-down menu under the **General** category and select a theme from this menu:
 
-<img src="../images/eud-theme-list.png" alt="Select a survey theme" width="1544" height="786">
+<img src="images/eud-theme-list.png" alt="Select a survey theme" width="1544" height="786">
 
 ## Enable Dark Mode
 
 Dark mode provides a smooth, modern appearance that's easier on the eyes, especially in low-light environments. To enable this mode, switch the Light/Dark toggle to **Dark**:
 
-<img src="../images/eud-dark-theme-mode.png" alt="Enable dark mode" width="1544" height="798">
+<img src="images/eud-dark-theme-mode.png" alt="Enable dark mode" width="1544" height="798">
 
 ## Display Questions Without Question Boxes
 
 In a typical survey, every element includes an input field and a question box&mdash;an area that frames the question content and separates it from the survey background. 
 
-<img src="../images/eud-survey-with-question-boxes.png" alt="Survey elements with question boxes" width="772" height="771">
+<img src="images/eud-survey-with-question-boxes.png" alt="Survey elements with question boxes" width="772" height="771">
 
 The Theme Editor allows you to remove the question boxes for the questions that are not nested within a panel, resulting in a lighter and more compact overall appearance.
 
 To display questions without their individual question boxes, locate the **Question appearance** setting under the **General** category and toggle it to **Without Panels**:
 
-<img src="../images/eud-question-without-panels-boxes.png" alt="Survey elements without question boxes" width="1544" height="754">
+<img src="images/eud-question-without-panels-boxes.png" alt="Survey elements without question boxes" width="1544" height="754">
 
 > The form builder offers an element called a panel (or a section) that allows you to group several questions together. In this case, the **Question appearance** setting applies to the questions inside the panel, while the panel itself keeps its own borders:
 > 
-> <img src="../images/eud-questions-within-panel.png" alt="Survey elements grouped within a panel" width="1480" height="806">
+> <img src="images/eud-questions-within-panel.png" alt="Survey elements grouped within a panel" width="1480" height="806">
 
 ## Style the Survey Header
 
@@ -63,13 +63,13 @@ To add and configure your company logo in the survey header, follow these steps:
    * **Cover** - Image fills the entire box while maintaining its aspect ratio.
    * **Fill** - Image is stretched to fill the box without maintaining its aspect ratio.   
 
-<img src="../images/eud-add-logo.png" alt="Add a logo to the survey header" width="1544" height="638">
+<img src="images/eud-add-logo.png" alt="Add a logo to the survey header" width="1544" height="638">
 
 6. Switch to the **Themes** tab.  
 7. Open the **Header** category
 8. Locate the **Logo alignment** property and use it to align the logo in the horizontal and vertical directions.
 
-<img src="../images/eud-logo-alignment.png" alt="Align the logo" width="1544" height="650">
+<img src="images/eud-logo-alignment.png" alt="Align the logo" width="1544" height="650">
 
 > Regardless of the position you set, the logo is always displayed on the right in the Designer tab.
 
@@ -81,7 +81,7 @@ If your survey includes a title and description, you can customize their fonts, 
 
 The survey title and description occupy a header area with a defined text width. To change it, open the **Header** category and adjust the **Text width** property:
 
-<img src="../images/eud-header-area-text-width.png" alt="Customize the width of the header area allocated to survey title and description" width="1544" height="632">
+<img src="images/eud-header-area-text-width.png" alt="Customize the width of the header area allocated to survey title and description" width="1544" height="632">
 
 #### Customize Fonts
 
@@ -94,13 +94,13 @@ To change the font settings for the survey title and description, follow these s
 5. Adjust the **Opacity** in percent using the control next to **Color**.  
 6. Set the **Font size** in pixels.
 
-<img src="../images/eud-survey-title-desctiption-font.png" alt="Customize the survey title and description fonts" width="1544" height="728">
+<img src="images/eud-survey-title-desctiption-font.png" alt="Customize the survey title and description fonts" width="1544" height="728">
 
 #### Align Text
 
 You can align the survey title and description both vertically and horizontally. Use the **Survey title alignment** and **Survey description alignment** properties available under **Header**.
 
-<img src="../images/eud-survey-title-description-alignment.png" alt="Align survey title and description" width="1544" height="639">
+<img src="images/eud-survey-title-description-alignment.png" alt="Align survey title and description" width="1544" height="639">
 
 ### Customize the Header Area
 
@@ -109,7 +109,7 @@ To customize header area properties, follow these steps:
 1. Ensure that the **View** toggle is set to **Advanced**.  
 2. Set the header height for desktop devices using the **Height** property and for mobile devices using the **Height on smartphones** property.
 
-<img src="../images/eud-header-height.png" alt="Specify the survey header height" width="1544" height="672">
+<img src="images/eud-header-height.png" alt="Specify the survey header height" width="1544" height="672">
 
 > You can preview how your survey looks on different devices in the **Preview** tab by switching between available devices and screen orientations.
 
@@ -119,7 +119,7 @@ To customize header area properties, follow these steps:
    * **Accent** - Applies the accent color from the selected survey theme.
    * **Custom** - Allows you to set a custom background color using the color picker (in RGB, HSL, or HEX format).
 
-<img src="../images/eud-header-area-background-color.png" alt="Survey header background color settings" width="1544" height="672">
+<img src="images/eud-header-area-background-color.png" alt="Survey header background color settings" width="1544" height="672">
 
 In addition, you can style the header background by uploading an image:
 
@@ -133,7 +133,7 @@ In addition, you can style the header background by uploading an image:
 4. Set the transparency of the background image using the **Opacity** property.  
 5. If you want the survey content to overlap with the header, check the **Overlap** checkbox in the header settings.
 
-<img src="../images/eud-header-area-background-image.png" alt="Survey header background image settings" width="1544" height="672">
+<img src="images/eud-header-area-background-image.png" alt="Survey header background image settings" width="1544" height="672">
 
 ### Adjust the Header Content Area
 
@@ -144,7 +144,7 @@ Follow the steps below to modify the width of the survey header area that contai
    * Keep the default option **Same as survey** if you prefer the header content to match the width of the survey itself (its content).
    * Select **Same as container** if you want the header content area to automatically adjust its width to match the space where your survey is displayed.
 
-<img src="../images/eud-content-area-width.png" alt="Advanced survey header settings: Area width of the header content" width="402" height="489">
+<img src="images/eud-content-area-width.png" alt="Advanced survey header settings: Area width of the header content" width="402" height="489">
 
 ## Background Options
 
@@ -166,7 +166,7 @@ In addition, you can style the survey background by uploading an image:
 4. You can also lock the image in place by setting the **Image position** toggle to **Fixed**, so the background remains stationary as you scroll the survey. To make the background move along with the content, switch to **Scroll**.
 5. Adjust the image's transparency using the **Opacity** property.
 
-<img src="../images/eud-background-image.png" alt="Survey background settings" width="1544" height="624">   
+<img src="images/eud-background-image.png" alt="Survey background settings" width="1544" height="624">   
 
 ## See Also
 

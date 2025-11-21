@@ -7,7 +7,7 @@ description: Learn to switch between full and compact modes, limit available que
 
 The Toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey. This help topic describes how you can customize the Toolbox.
 
-<img src="./images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="1544" height="772">
+<img src="images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="1544" height="772">
 
 - [Full and Compact Modes](#full-and-compact-modes)
 - [Limit Available Question and Panel Types](#limit-available-question-and-panel-types)
@@ -20,7 +20,7 @@ The Toolbox contains available question and panel types. Users can click questio
 
 The Toolbox supports full mode (illustrated above) and compact mode. In compact mode, element names are hidden. To see an individual element name, a user should move the mouse pointer over the element icon.
 
-<img src="./images/survey-creator-toolbox-compact.png" alt="Survey Creator - Toolbox in compact mode" width="1544" height="776">
+<img src="images/survey-creator-toolbox-compact.png" alt="Survey Creator - Toolbox in compact mode" width="1544" height="776">
 
 The Toolbox switches between the modes automatically based on available width. Specify the [`forceCompact`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#forceCompact) property if you want the Toolbox to always use a specific mode:
 
@@ -259,7 +259,7 @@ creator.toolbox.keepAllCategoriesExpanded = false;
 
 Toolbox items can have nested items, or "subitems". They appear when users hover over a toolbox item. Subitems help you create more specific configurations of a broader survey element type and group them. For example, the Single-Line Input toolbox item includes a number of subitems that create [Single-Line Input](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model) questions with different [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property values.
 
-<img src="./images/toolbox-subitems.png" alt="Survey Creator: Toolbox subitems" width="1544" height="808">
+<img src="images/toolbox-subitems.png" alt="Survey Creator: Toolbox subitems" width="1544" height="808">
 
 ### Create Subitems
 

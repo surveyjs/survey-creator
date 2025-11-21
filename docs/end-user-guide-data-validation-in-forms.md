@@ -36,7 +36,7 @@ Starting from **v2.3.8**, all validators allow you to choose the type of notific
 - **Warning** - Lets users continue but shows a caution message (orange).
 - **Informational** - Provides a helpful note that doesn't stop submission (blue).
 
-<img src="../images/eud-notification-types.png" alt="Notification types" width="1544" height="932">
+<img src="images/eud-notification-types.png" alt="Notification types" width="1544" height="932">
 
 If you create multiple validation rules of different types for the same question, the form will first display error messages when triggered. Once the user corrects their input, a warning message will appear, and so on.
 
@@ -46,7 +46,7 @@ By default, validation runs when a user moves to a different page. In a single-p
 2. Under **Validation**, locate the **Run validation** property.
 3. Select **After an answer has changed**.
 
-<img src="../images/eud-run-validation-warning-informational.png" alt="Set when to run validation on the user's input" width="1544" height="934">
+<img src="images/eud-run-validation-warning-informational.png" alt="Set when to run validation on the user's input" width="1544" height="934">
 
 ## Supported Validators by Question Type
 
@@ -75,11 +75,11 @@ The Text validator controls how long the input text can be. To create a text val
    - **Allow digits** - Uncheck to prevent numbers in the answer.  
    - **Validation message** - Custom message to display when limits are not respected.  
 
-<img src="../images/eud-text.png" alt="Create a validation rule using the Text validator" width="1544" height="932">
+<img src="images/eud-text.png" alt="Create a validation rule using the Text validator" width="1544" height="932">
 
 The Text validator checks input only *after* the user leaves the input field or attempts to move forward in the form (depending on the chosen validation mode). This means users can temporarily enter more characters than allowed. To *block* extra characters from being entered, use the **Maximum character limit** property instead. Both features prevent invalid input at submission, but they differ in how the form behaves while users are typing.
 
-<img src="../images/eud-text-maximum-char-limit.png" alt="Restrict the number of characters for open-ended questions" width="1544" height="932">
+<img src="images/eud-text-maximum-char-limit.png" alt="Restrict the number of characters for open-ended questions" width="1544" height="932">
 
 ### Numeric Validation
 
@@ -95,11 +95,11 @@ Numeric validation lets you restrict input to a specific number range. To set up
     - **Maximum value** - The highest number allowed.
     - **Validation message** - Custom text to display when the value is outside the allowed range.
 
-<img src="../images/eud-number.png" alt="Create a validation rule using the Number validator" width="1544" height="936">
+<img src="images/eud-number.png" alt="Create a validation rule using the Number validator" width="1544" height="936">
 
 When Single-Line Input is set to type **Number**, its built-in **Min** and **Max** validation properties become available:
 
-<img src="../images/eud-built-in-min-max-number.png" alt='Limit numerical entry using the built-in Min and Max properties.' width="1544" height="936">
+<img src="images/eud-built-in-min-max-number.png" alt='Limit numerical entry using the built-in Min and Max properties.' width="1544" height="936">
 
 **Min** and **Max** provide a quick way to define the allowed range of values, but they always display the default error message. To show a custom message, use the **Number validator** instead.
 
@@ -119,7 +119,7 @@ With this setup, the form field will display a default error message for invalid
 3. Select **Email** from the validation type dropdown.
 4. Specify the **Validation message** property.
 
-<img src="../images/eud-email.png" alt="Set a custom error message for an email validation rule" width="1544" height="936">
+<img src="images/eud-email.png" alt="Set a custom error message for an email validation rule" width="1544" height="936">
 
 ### Answer Count Validation
 
@@ -134,14 +134,14 @@ The Answer Count validator ensures that respondents select a number of options w
      - **Maximum count** - The maximum number of options a user can select.
      - **Validation message** - Custom text to show if the user selects too few or too many options.
 
-<img src="../images/eud-answer-count.png" alt="Create a validation rule using the Answer Count validator" width="1544" height="934">
+<img src="images/eud-answer-count.png" alt="Create a validation rule using the Answer Count validator" width="1544" height="934">
 
 Alternatively, you can use the built-in **Minimum choices to select** and **Maximum choices to select** properties in the **Choices** category. The key differences are in behavior:
 
 - When the minimum condition is not met, the form field displays an error message as shown below. If you set the condition using the **Minimum choices to select**, you cannot customize the error message. The **Answer Count validator** allows you to do it.
-    <img src="../images/eud-built-in-min-max-count-error.png" alt='Default message shown when the minimum number of options is not selected.' width="1544" height="934">
+    <img src="images/eud-built-in-min-max-count-error.png" alt='Default message shown when the minimum number of options is not selected.' width="1544" height="934">
 - When the maximum condition is reached, the **Maximum choices to select** property disables further selection (see the illustration below). The **Answer Count validator**, on the other hand, allows selections to exceed the maximum number and displays an error only when the user leaves the field or moves forward in the form.
-    <img src="../images/eud-built-in-max-count.png" alt='User selected the maximum number of choice options.' width="1544" height="934">
+    <img src="images/eud-built-in-max-count.png" alt='User selected the maximum number of choice options.' width="1544" height="934">
 - The **Minimum/Maximum choices to select** properties always produce an error, which requires correction and prevents the user from submitting the form. With the **Answer Count validator**, you can configure the notification type as a warning or informational note.
 
 Choose the option that best fits your use case.
@@ -159,7 +159,7 @@ The Regex validator enforces a custom input pattern. To configure this validator
      - **Case insensitive** - Select this if uppercase and lowercase letters should be treated as equivalent.  
      - **Validation message** - A message that explains the required value format to the user.
 
-<img src="../images/eud-regex.png" alt="Create a validation rule using the Regex validator" width="1544" height="934">
+<img src="images/eud-regex.png" alt="Create a validation rule using the Regex validator" width="1544" height="934">
 
 ### Expression Validation
 
@@ -175,7 +175,7 @@ To configure this validator, follow the steps below:
      - **Validation expression** - A Boolean expression that must evaluate to `true` for the answer to be accepted. See the [Expression Syntax Guide](https://surveyjs.io/survey-creator/documentation/end-user-guide/expression-syntax) for examples, or click the **Magic wand** icon to build the expression using the GUI.
      - **Validation message** - The error text shown when the expression evaluates to `false`.
 
-<img src="../images/eud-expression.png" alt="Create a validation rule using the Expression validator" width="1544" height="936">
+<img src="images/eud-expression.png" alt="Create a validation rule using the Expression validator" width="1544" height="936">
 
 ## See Also
 

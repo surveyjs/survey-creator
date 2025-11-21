@@ -1,5 +1,5 @@
 import { CreatorStylesManager } from "./styles-manager";
-import { DefaultLightColorCssVariables } from "../themes/default-light-color-css-variables";
+import { Default } from "../themes/default-light-internal";
 import { registerTheme, ThemesHash, sortDefaultThemes } from "../utils/themes";
 
 export interface ICreatorTheme {
@@ -21,31 +21,26 @@ export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> 
   sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
 }
 
-export function extendCreatorTheme(theme: ICreatorTheme) {
-  const curTheme = CreatorThemes[theme.themeName];
-  curTheme.cssVariables = { ...curTheme.cssVariables, ...theme.cssVariables };
-}
+// const defaultVariables = {
+//   "--sjs2-color-utility-surface": "#EDF9F7",
+//   "--sjs2-color-project-brand-600": "#19B394",
+//   "--sjs2-color-project-accent-600": "#19B394",
+// };
 
-const defaultVariables = {
-  "--sjs-special-background": "#EDF9F7",
-  "--sjs-primary-background-500": "#19B394",
-  "--sjs-secondary-background-500": "#19B394",
-};
-
-export const CreatorThemes: { [index: string]: ICreatorTheme } = {
-  "default-light": {
-    themeName: "default-light",
-    cssVariables: defaultVariables,
-    iconSet: "v2"
-  }
-};
-
-let stylesStr = "";
-if (Object.keys(DefaultLightColorCssVariables).length) {
-  Object.keys(DefaultLightColorCssVariables).forEach((varName) => {
-    try {
-      stylesStr += `${varName}: ${DefaultLightColorCssVariables[varName]};`;
-    } catch(e) { }
-  });
-}
-CreatorStylesManager.insertStylesRulesIntoDocument([{ selector: "survey-creator,.svc-creator", styles: stylesStr }]);
+// export const CreatorThemes: { [index: string]: ICreatorTheme } = {
+//   "default-light": {
+//     themeName: "default-light",
+//     cssVariables: defaultVariables,
+//     iconSet: "v2"
+//   }
+// };
+export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": Default };
+// let stylesStr = "";
+// if (Object.keys(Default.cssVariables).length) {
+//   Object.keys(Default.cssVariables).forEach((varName) => {
+//     try {
+//       stylesStr += `${varName}: ${Default.cssVariables[varName]};`;
+//     } catch(e) { }
+//   });
+// }
+// CreatorStylesManager.insertStylesRulesIntoDocument([{ selector: "survey-creator,.svc-creator", styles: stylesStr }]);
