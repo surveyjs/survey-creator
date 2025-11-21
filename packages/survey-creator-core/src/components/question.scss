@@ -433,7 +433,7 @@ svc-question {
   .svc-list__item {
     &, &:hover {
       & > .svc-list__item-body .sv-svg-icon use {
-        fill: var(--sjs-secondary-background-500, #19b394ff);
+        fill: var(--sjs-secondary-background-500, #FF9814);
       }
     }
   }

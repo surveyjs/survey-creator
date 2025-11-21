@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -14,6 +13,14 @@ export default defineConfig(({ command }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       }
-    }
+    },
+    build: {
+      commonjsOptions: {
+        include: [/survey-creator-core\/build\/themes\/test/, /node_modules/],
+      },
+    },
+    optimizeDeps: {
+      include: ["survey-creator-core/themes/test"],
+    },
 }
 })
