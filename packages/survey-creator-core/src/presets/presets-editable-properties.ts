@@ -325,17 +325,19 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     if (!this.isModified) return undefined;
     return { definition: this.currentJson };
   }
-
-  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.propertyGrid = creatorSetup.creator["designerPropertyGrid"];
-    super.setupQuestionsCore(model, creatorSetup);
-    this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
+  protected setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getSelector(model).choices = this.getSelectorChoices(creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
     // this.propCreatorValue = creatorSetup.createCreator(options);
     // this.setupPropertyCreator();
     // this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
+  }
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.propertyGrid = creatorSetup.creator["designerPropertyGrid"];
+    super.setupQuestionsCore(model, creatorSetup);
+    this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setJSONForTitlesAndDescriptions(locStrs: any, name: string): void {
     const strs = this.localeStrings[name];
@@ -344,6 +346,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     }
   }
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupPageQuestions(model, creator);
     this.setupQuestionsValueCore(model, json, creator);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {

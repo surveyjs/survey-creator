@@ -13,6 +13,8 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   private toolboxCompact;
   private defaultJson;
 
+  private presetsList: ListModel;
+
   private showPresets() {
     this.activeTab = this.creator.activeTab;
     this.creator.activeTab = "presets";
@@ -24,7 +26,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: TabPresetsPlugin.iconName });
+    creator.addTab({ name: "presets", locTitleNaqme: "presets.plugin.presetsTab", plugin: this, iconName: TabPresetsPlugin.iconName });
     creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
@@ -49,29 +51,29 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.designerPlugin.activateSidebar();
     this.model.model.onComplete.add(() => this.hidePresets());
 
-    const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
+    const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.fullPath, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     let settingsAction: IAction;
-    let presetsList: ListModel;
+
     const keep = (item: IAction) => {
       settingsAction.popupModel.show();
     };
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
-      { id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "basic", title: getLocString("presets.plugin.basic"), action: (item: IAction) => { keep(item); this.model.json = basic; } },
-      { id: "advanced", title: getLocString("presets.plugin.advanced"), action: (item: IAction) => { keep(item); this.model.json = advanced; } },
-      { id: "expert", title: getLocString("presets.plugin.expert"), action: (item: IAction) => { keep(item); this.model.json = expert; } },
-      { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
-      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
-      { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.model?.resetToDefaults("page_languages"); } },
-      { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
+      { id: "save", locTitleName: "presets.plugin.save", markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() },
+      { id: "defaultSettings", locTitleName: "presets.plugin.defaultSettings", needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "basic", locTitleName: "presets.plugin.basic", action: (item: IAction) => { keep(item); this.model.json = basic; } },
+      { id: "advanced", locTitleName: "presets.plugin.advanced", action: (item: IAction) => { keep(item); this.model.json = advanced; } },
+      { id: "expert", locTitleName: "presets.plugin.expert", action: (item: IAction) => { keep(item); this.model.json = expert; } },
+      { id: "file", locTitleName: "presets.plugin.file", needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "import", locTitleName: "presets.plugin.import", markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
+      { id: "export", locTitleName: "presets.plugin.export", markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
+      { id: "edit", locTitleName: "presets.plugin.edit", needSeparator: true, css: "sps-list__item--label", enabled: false },
+      { id: "reset-current", locTitleName: "presets.plugin.resetLanguages", action: () => { this.model?.resetToDefaults("page_languages"); } },
+      { id: "reset", locTitleName: "presets.plugin.resetAll", css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
     ];
 
     presets.forEach(p => {
       p.action = (item)=>{
-        presetsList.selectedItem = item;
+        this.presetsList.selectedItem = item;
         keep(item);
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
@@ -88,7 +90,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       }
     }, {
       items: [
-        { id: "creator-presets", title: getLocString("presets.plugin.creatorPresets"), css: "sps-list__item--label", enabled: false },
+        { id: "creator-presets", locTitleName: "presets.plugin.creatorPresets", css: "sps-list__item--label", enabled: false },
         ...presets,
         ...tools],
       showPointer: false,
@@ -103,13 +105,13 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
     bottomActions.unshift(settingsAction);
-    presetsList = settingsAction.popupModel.contentComponentData.model;
-    const resetCurrentAction = presetsList.getActionById("reset-current");
-    presetsList.selectedItem = presetsList.actions[0];
+    this.presetsList = settingsAction.popupModel.contentComponentData.model;
+    const resetCurrentAction = this.presetsList.getActionById("reset-current");
+    this.presetsList.selectedItem = this.presetsList.actions[0];
     this.model.model.onCurrentPageChanged.add((_, options) => {
-      presetsList.selectedItem = presetsList.actions[this.model.model.currentPageNo + 1];
+      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo + 1];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
-      resetCurrentAction.action = () => { this.model?.resetToDefaults(presetsList.selectedItem.id); };
+      resetCurrentAction.action = () => { this.model?.resetToDefaults(this.presetsList.selectedItem.id); };
     });
 
     setTimeout(() => {
@@ -132,6 +134,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   public onLocaleChanged() {
+    //this.presetsList.actions.forEach(a => a.locStrsChanged());
     if (this.model) {
       this.model.onLocaleChanged();
     }
