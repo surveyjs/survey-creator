@@ -26,7 +26,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", locTitleNaqme: "presets.plugin.presetsTab", plugin: this, iconName: TabPresetsPlugin.iconName });
+    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: TabPresetsPlugin.iconName });
     creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
@@ -51,7 +51,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.designerPlugin.activateSidebar();
     this.model.model.onComplete.add(() => this.hidePresets());
 
-    const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.fullPath, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
+    const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     let settingsAction: IAction;
 
     const keep = (item: IAction) => {
