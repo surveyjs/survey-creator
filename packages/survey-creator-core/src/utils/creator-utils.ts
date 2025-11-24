@@ -100,7 +100,7 @@ export function getNextValue(prefix: string, values: any[], isText?: boolean): s
 }
 
 export function getQuestionFromObj(obj: SurveyElement): Question {
-  return (obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : (obj as Question);
+  return (obj instanceof MatrixDropdownColumn) ? (<MatrixDropdownColumn>obj).templateQuestion : (obj as Question);
 }
 
 export function scrollElementIntoView(elementId: string) {
