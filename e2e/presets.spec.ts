@@ -95,8 +95,8 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Designer1" }).hover();
     expect(await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1)).toBeVisible();
     await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1).click();
-    await page.getByRole("button", { name: "Reset to default" }).waitFor({ state: "visible" });
-    await page.getByRole("button", { name: "Reset to default" }).click();
+    await page.getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
+    await page.getByRole("button", { name: "Reset" }).click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
     expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
@@ -185,8 +185,8 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Containers1" }).hover();
     expect(await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1)).toBeVisible();
     await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1).click();
-    await page.getByRole("button", { name: "Reset to default" }).waitFor({ state: "visible" });
-    await page.getByRole("button", { name: "Reset to default" }).click();
+    await page.getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
+    await page.getByRole("button", { name: "Reset" }).click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
   });
@@ -334,8 +334,8 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Navigation1" }).hover();
     expect(await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1)).toBeVisible();
     await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(2).click();
-    await page.getByRole("button", { name: "Reset to default" }).waitFor({ state: "visible" });
-    await page.getByRole("button", { name: "Reset to default" }).click();
+    await page.getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
+    await page.getByRole("button", { name: "Reset" }).click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
