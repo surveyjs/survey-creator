@@ -451,17 +451,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   private get nameSelector() { return this.fullPath + "_selector"; }
   //   private get namePropertyCreator() { return this.fullPath + "_propcreator"; }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
-    const classes = ["survey", "page", "panel"];
-    const toolboxItems = {};
+    const classes = ["survey", "page"];
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
-      toolboxItems[item.id] = true;
+      classes.push(item.id);
     });
 
-    Serializer.getChildrenClasses("question", true).forEach(cl => {
-      if (toolboxItems[cl.name]) {
-        classes.push(cl.name);
-      }
-    });
     const res: any[] = [];
     classes.forEach(str => res.push(new ItemValue(str, this.getSelectorItemTitle(str))));
     const columnPrefix = "matrixdropdowncolumn@";
