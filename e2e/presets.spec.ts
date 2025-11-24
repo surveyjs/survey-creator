@@ -121,10 +121,19 @@ test.describe(title, () => {
     await items.getByRole("button", { name: "Delete" }).nth(2).click();
     expect((await getToolboxTexts(page)).slice(12, 14)).toEqual(["Slider", "Single-Select Matrix"]);
 
-    await hidden.getByRole("button", { name: "More" }).first().click();
-
+    await hidden.getByRole("button", { name: "More" }).last().click();
     await hidden.getByText("Move to new category").click();
-    expect((await getToolboxTexts(page)).slice(20, 21)).toEqual(["Panel"]);
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers1");
+    await page.getByRole("button", { name: "Cancel" }).click();
+    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc"]);
+
+    await hidden.getByRole("button", { name: "More" }).last().click();
+    await hidden.getByText("Move to new category").click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers2");
+    await page.getByRole("button", { name: "Apply" }).click();
+    expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc", "Containers2"]);
+    expect((await getToolboxTexts(page)).slice(20, 21)).toEqual(["Dynamic Panel"]);
+
   });
 
   test("Check presets toolbox - drag-drop categories", async ({ page }) => {

@@ -51,6 +51,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     const general = this.findOrCreateCategory(catValue, categoryName);
     general[this.nameInnerMatrix].push(rowData);
     categories.value = catValue;
+    return (categories.visibleRows as any).find(r => r.getValue("category") == categoryName) as MatrixDynamicRowModel;
   }
 
   protected itemMenuCategoriesEnabled(model: SurveyModel) {
@@ -63,7 +64,8 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
 
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
-    const categories = this.getQuestionCategories(model).value;
+    const categoriesQuestion = this.getQuestionCategories(model);
+    const categories = categoriesQuestion.value;
     const actions = [] as IAction[];
     const isUnsorted = question.name == this.nameMatrix;
     const hasCategories = this.itemMenuCategoriesEnabled(model);
@@ -131,7 +133,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         title: getLocString("presets.items.moveToNewCategory"),
         needSeparator: isUnsorted,
         action: () => {
-          this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
+          const newCatRow = this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
+          this.editItem(model, null, categoriesQuestion, newCatRow, {
+            description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+            isNew: true
+          });
         }
       }));
 

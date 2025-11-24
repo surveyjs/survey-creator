@@ -282,9 +282,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         },
         onCancel: () => {
           if (options.removeOnCancel) {
-            const newValue = [...matrix.value];
-            newValue.splice(index, 1);
-            matrix.value = newValue;
+            matrix.removeRowUI(row);
           }
           return true;
         },
