@@ -908,3 +908,10 @@ test("Update subitems on locale change, Bug#6014, #2", (): any => {
   creator.toolbox.addItem({ name: "test4", json: {} });
   expect(creator.toolbox.getItemByName("test4").title).toBe("test4");
 });
+test("toolbox category localization Bug#7284", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.showCategoryTitles = true;
+  expect(creator.toolbox.categories[0].title).toBe("Choice Questions");
+  creator.locale = "de";
+  expect(creator.toolbox.categories[0].title).toBe("Auswahl-Fragen");
+});
