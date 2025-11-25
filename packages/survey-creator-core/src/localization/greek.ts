@@ -250,6 +250,8 @@ export var grStrings = {
     toolboxFilteredTextPlaceholder: "Πληκτρολογήστε για αναζήτηση...",
     // "No results found"
     toolboxNoResultsFound: "Δεν βρέθηκαν αποτελέσματα",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Δεν υπάρχουν ιδιότητες για εμφάνιση",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Πληκτρολογήστε για αναζήτηση...",
     // "No results found"
@@ -1126,6 +1128,8 @@ export var grStrings = {
     storeDataAsText: "Αποθήκευση περιεχομένου αρχείου στο JSON ως κείμενο",
     // "Maximum file size (in bytes)"
     maxSize: "Μέγιστο μέγεθος αρχείου (σε bytes)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Μέγιστος αριθμός αρχείων",
     // "Row count"
     rowCount: "Αριθμός γραμμών",
     // "Columns layout"
@@ -1400,8 +1404,10 @@ export var grStrings = {
     allowMultiple: "Επιτρέπει πολλαπλή αποστολή αρχείων",
     // "Preview uploaded images"
     allowImagesPreview: "Προεπισκόπηση ανεβασμένων εικόνων",
-    // "Accepted file types"
-    acceptedTypes: "Αποδεκτοί τύποι αρχείων",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Αποδεκτές κατηγορίες αρχείων",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Πρόσθετες επεκτάσεις αρχείων",
     // "Wait for upload to complete"
     waitForUpload: "Περιμένετε για να ολοκληρωθεί η αποστολή",
     // "Confirm file deletion"
@@ -2081,6 +2087,20 @@ export var grStrings = {
       warning: "Προειδοποίηση",
       // [Auto-translated] "Informational"
       info: "Ενημερωτικό"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Εικόνες",
+      // [Auto-translated] "Videos"
+      video: "Βίντεο",
+      // [Auto-translated] "Audio"
+      audio: "Ήχου",
+      // [Auto-translated] "Documents"
+      document: "Έγγραφα",
+      // [Auto-translated] "Archives"
+      archive: "Αρχεία",
+      // [Auto-translated] "Custom"
+      custom: "Συνήθεια"
     },
     autocomplete: {
       // "Full Name"
@@ -3088,8 +3108,10 @@ export var grStrings = {
     storeOthersAsComment: "Επιλέξτε για να αποθηκεύσετε την τιμή της επιλογής \"Άλλο\" ως ξεχωριστή ιδιότητα στα αποτελέσματα της έρευνας.",
     // "Use {0} as a placeholder for the actual value."
     format: "Χρησιμοποιήστε το {0} ως χώρος κράτησης για την πραγματική τιμή.",
-    // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Ανατρέξτε στην περιγραφή του χαρακτηριστικού [accept](https://www.w3schools.com/tags/att_input_accept.asp) για περισσότερες πληροφορίες.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Επιλέξτε \"Προσαρμοσμένο\" για να προσθέσετε τις δικές σας επεκτάσεις αρχείων πάνω από τις προκαθορισμένες κατηγορίες.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Εισαγάγετε επεκτάσεις αρχείων διαχωρισμένες με κόμματα (π.χ. .csv, .xml).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Ισχύει μόνο για στήλες με \"Τύπο εισαγωγής κελιού\" ρυθμισμένο σε Ομάδα Ραδιοκουμπιών ή Πεδίο Επιλογών.",
     // "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."

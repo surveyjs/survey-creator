@@ -250,6 +250,8 @@ export var persianStrings = {
     toolboxFilteredTextPlaceholder: "تایپ برای جستجو...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "نتیجه ای یافت نشد",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "هیچ ویژگی ای برای نمایش وجود ندارد",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "جستجو...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var persianStrings = {
     storeDataAsText: "ذخیره کردن محتوای فایل در JSON به عنوان متن",
     // "Maximum file size (in bytes)"
     maxSize: "حداکثر سایز به بایت",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "حداکثر تعداد فایل ها",
     // "Row count"
     rowCount: "تعداد سطر",
     // "Columns layout"
@@ -1400,8 +1404,10 @@ export var persianStrings = {
     allowMultiple: "فعال کردن آپلود چند فایل",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "پیش نمایش تصاویر آپلود شده",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "انواع فایل های پذیرفته شده",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "دسته بندی های فایل پذیرفته شده",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "پسوندهای فایل اضافی",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "منتظر بمانید تا آپلود کامل شود",
     // [Auto-translated] "Confirm file deletion"
@@ -2081,6 +2087,20 @@ export var persianStrings = {
       warning: "هشدار",
       // [Auto-translated] "Informational"
       info: "اطلاعاتی"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "تصاویر",
+      // [Auto-translated] "Videos"
+      video: "فیلم",
+      // [Auto-translated] "Audio"
+      audio: "صوتی",
+      // [Auto-translated] "Documents"
+      document: "اسناد",
+      // [Auto-translated] "Archives"
+      archive: "آرشیو",
+      // [Auto-translated] "Custom"
+      custom: "سفارشی"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -3088,8 +3108,10 @@ export var persianStrings = {
     storeOthersAsComment: "انتخاب کنید برای ذخیره \"دیگر\" مقدار گزینه به عنوان یک ملک جداگانه در نتایج نظرسنجی.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "از {0} به عنوان نگهدارنده برای ارزش واقعی استفاده کنید.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "برای اطلاعات بیشتر به [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description مراجعه کنید.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "گزینه «سفارشی» را انتخاب کنید تا پسوندهای فایل خود را روی دسته بندی های از پیش تعریف شده اضافه کنید.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "پسوندهای فایل را وارد کنید که با ویرگول جدا شده اند (مثلا .csv، .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. فقط برای ستون هایی اعمال می شود که \"نوع ورودی سلولی\" روی گروه دکمه های رادیویی یا کادرهای تأیید تنظیم شده است.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
