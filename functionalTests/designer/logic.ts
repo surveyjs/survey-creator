@@ -294,7 +294,7 @@ test("Update rules", async (t) => {
     .expect(tableRulesSelector.count).eql(2)
     .expect(Selector(".st-table__cell--actions").count).eql(4)
     .expect(Selector(".sl-table__detail-button").count).eql(2)
-    .expect(Selector("#remove-row").count).eql(2);
+    .expect(Selector(".sv-action--remove-row").count).eql(2);
 });
 
 test("Manual Entry of the editing condition", async (t) => {

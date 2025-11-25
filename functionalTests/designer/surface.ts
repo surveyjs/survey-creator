@@ -345,7 +345,7 @@ test("Question adorner - update other rows with lazy rendering on question colla
   })();
   await setJSON(jsonL);
   const qContent = Selector(".svc-question__content");
-  const qCollapseButton = Selector(".svc-question__content #collapse");
+  const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
   await t.expect(qContent.count).eql(2);
   await t.expect(qCollapseButton.count).eql(2);
 
@@ -371,9 +371,9 @@ test("Collapse all and expand all toolbar", async (t) => {
     window["creator"].expandCollapseButtonVisibility = "onhover";
   })();
   await setJSON(json);
-  await t.click("#collapseAll");
+  await t.click(".sv-sction--collapse-all");
   await t.expect(Selector(".svc-page__content--collapsed").exists).ok();
-  await t.click("#expandAll");
+  await t.click(".sv-sction--expande-all");
   await t.expect(Selector(".svc-page__content--collapsed").exists).notOk();
 });
 test("Collapse all and expand all toolbar visibility", async (t) => {
@@ -394,16 +394,16 @@ test("Collapse all and expand all toolbar visibility", async (t) => {
     window["creator"].expandCollapseButtonVisibility = "onhover";
   })();
   await setJSON(json);
-  await t.expect(Selector("#collapseAll").exists).ok();
-  await t.expect(Selector("#collapseAll").visible).ok();
-  await t.expect(Selector("#expandAll").exists).ok();
-  await t.expect(Selector("#expandAll").visible).ok();
+  await t.expect(Selector(".sv-sction--collapse-all").exists).ok();
+  await t.expect(Selector(".sv-sction--collapse-all").visible).ok();
+  await t.expect(Selector(".sv-sction--expande-all").exists).ok();
+  await t.expect(Selector(".sv-sction--expande-all").visible).ok();
 
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "never";
   })();
-  await t.expect(Selector("#collapseAll").visible).notOk();
-  await t.expect(Selector("#expandAll").visible).notOk();
+  await t.expect(Selector(".sv-sction--collapse-all").visible).notOk();
+  await t.expect(Selector(".sv-sction--expande-all").visible).notOk();
 
 });
 test("Check page adorner state is restored after shrink and stretch", async (t) => {
@@ -424,11 +424,11 @@ test("Check page adorner state is restored after shrink and stretch", async (t) 
   };
   await setJSON(json);
   await t.click(".svc-page", { offsetX: 3, offsetY: 3 });
-  await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
+  await t.expect(Selector(".svc-page__content-actions .sv-action--duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
   await t.resizeWindow(500, 1080);
-  await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).notOk();
+  await t.expect(Selector(".svc-page__content-actions .sv-action--duplicate .svc-page-toolbar-item__title--with-icon").visible).notOk();
   await t.resizeWindow(1920, 1080);
-  await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
+  await t.expect(Selector(".svc-page__content-actions .sv-action--duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
 });
 test("Popup position", async (t) => {
   const setCreatorTop = ClientFunction((top) => {

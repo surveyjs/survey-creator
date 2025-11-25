@@ -448,6 +448,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.designerAction = new Action({
       id: "svd-designer",
+      css: "sv-action--svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
@@ -459,6 +460,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.previewAction = new Action({
       id: "svd-preview",
+      css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
       action: () => {

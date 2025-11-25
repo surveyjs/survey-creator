@@ -521,6 +521,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.designerAction = new Action({
       id: "svd-designer",
+      css: "sv-action--svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
       action: () => { this.creator.switchTab("designer"); },
@@ -531,6 +532,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.prevPageAction = new Action({
       id: "prevPage",
+      css: "sv-action--prevPage",
       iconName: "icon-arrow-left_16x16",
       title: getLocString("ts.prevPage"),
       showTitle: false,
@@ -543,6 +545,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.nextPageAction = new Action({
       id: "nextPage",
+      css: "sv-action--nextPage",
       iconName: "icon-arrow-right_16x16",
       showTitle: false,
       title: getLocString("ts.nextPage"),
@@ -552,6 +555,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.previewAction = new Action({
       id: "svd-preview",
+      css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
       active: true,
@@ -708,6 +712,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
       this.invisibleToggleAction = new Action({
         id: "showInvisible",
+        css: "sv-action--showInvisible",
         iconName: "icon-invisible-items",
         iconSize: "auto",
         mode: "small",

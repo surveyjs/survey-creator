@@ -243,7 +243,7 @@ test.describe(title, () => {
     await setExpandCollapseButtonVisibility(page, "onhover");
     await setJSON(page, json);
     await page.click("#lockQuestions");
-    await page.hover("#collapseAll");
+    await page.hover(".sv-sction--collapse-all");
     await compareScreenshot(page, page.locator(".svc-tab-designer"), "design-surface-toolbar.png");
 
     await setAllowZoom(page, true);

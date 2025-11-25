@@ -213,7 +213,7 @@ test("Matrix dropdown with detail panel", async (t) => {
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .hover(SingleInputToolboxItem)
     .dragToElement(SingleInputToolboxItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
-    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok();
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find(".sv-action--convertTo").withText("Single-Line Input").visible)).ok();
 
 });
 
@@ -229,14 +229,14 @@ test("Matrix dropdown with detail panel - add question button", async (t) => {
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
-    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok()
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find(".sv-action--convertTo").nth(0).withText("Single-Line Input").visible)).ok()
     .expect(Selector(".sd-question[data-name=question2]").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-element__add-new-question"))
     .expect(Selector(".sd-question[data-name=question3]").visible).ok();
 });
 
 test("Rating question required property", async (t) => {
-  const isrequiredButton = Selector("#isrequired");
+  const isrequiredButton = Selector(".sv-action--isrequired");
   await t
     .expect(questions.exists).notOk()
 
@@ -295,7 +295,7 @@ test("Keep focus on question convert", async (t) => {
 
     .click(getListItemByText("Long Text"))
     .expect(Selector(".svc-question__content--selected").find("textarea").visible).ok()
-    .expect(Selector(".svc-question__content--selected #convertTo button").focused).ok();
+    .expect(Selector(".svc-question__content--selected .sv-action--convertTo button").focused).ok();
 });
 
 test("Matrix column title - get focus on click, not tab", async (t) => {
@@ -393,7 +393,7 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-question__content");
-  const qCollapseButton = Selector(".svc-question__content #collapse");
+  const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
   await t.hover(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(Selector(".svc-question__adorner").hasClass("svc-hovered")).ok();
   await t.expect(qCollapseButton.visible).notOk();
@@ -433,12 +433,12 @@ test("Question and page collapse button title", async (t) => {
   };
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
-  const qCollapseButton = Selector(".svc-question__content #collapse button");
+  const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse button");
   await t.expect(qCollapseButton.getAttribute("title")).eql("Collapse");
   await t.click(qCollapseButton);
   await t.expect(qCollapseButton.getAttribute("title")).eql("Expand");
 
-  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area #collapse button");
+  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area .sv-action-bar-item--collapse button");
   await t.expect(pCollapseButton.getAttribute("title")).eql("Collapse");
   await t.click(pCollapseButton);
   await t.expect(pCollapseButton.getAttribute("title")).eql("Expand");
@@ -461,9 +461,9 @@ test("Question adorner - do not render content when initially collapsed", async 
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-question__content--text");
-  const qCollapseButton = Selector(".svc-question__content--text #collapse");
+  const qCollapseButton = Selector(".svc-question__content--text .sv-action-bar-item--collapse");
   const pContent = Selector(".svc-question__content--panel");
-  const pCollapseButton = Selector(".svc-question__content--panel #collapse");
+  const pCollapseButton = Selector(".svc-question__content--panel .sv-action-bar-item--collapse");
   await t.expect(qCollapseButton.visible).ok();
   await t.click(qCollapseButton);
   await t.expect(pCollapseButton.visible).ok();
@@ -508,8 +508,8 @@ test("Question adorner - collapse button visibility inside panels", async (t) =>
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const qContent = Selector(".svc-question__content--text");
   const pContent = Selector(".svc-question__content--panel");
-  const qCollapseButton = Selector(".svc-question__content--text #collapse");
-  const pCollapseButton = Selector(".svc-question__content--panel #collapse");
+  const qCollapseButton = Selector(".svc-question__content--text .sv-action-bar-item--collapse");
+  const pCollapseButton = Selector(".svc-question__content--panel .sv-action-bar-item--collapse");
 
   await t.hover(qContent, { offsetX: 10, offsetY: 10 });
   await t.expect(Selector(".svc-question__adorner.svc-hovered > .svc-question__content--text").exists).ok();
@@ -587,7 +587,7 @@ test("Page adorner - collapse button in differen modes", async (t) => {
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
   const pContent = Selector(".svc-page__content");
-  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area #collapse button");
+  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area .sv-action-bar-item--collapse button");
   const actions = Selector(".svc-page__content-actions");
   await t.hover(pContent, { offsetX: 10, offsetY: 10 });
   await t.expect(Selector(".svc-page__content").hasClass("svc-hovered")).ok({ timeout: 3000 });

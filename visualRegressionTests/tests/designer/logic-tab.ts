@@ -115,7 +115,7 @@
 //       .click(getTabbedMenuItemByText(creatorTabLogicName));
 //     await t.hover(logicDetailButtonElement);
 //     await takeElementScreenshot("logic-expand-hover.png", logicDetailButtonElement, t, comparer);
-//     const removeRuleSelector = Selector("#remove-row .sv-action-bar-item");
+//     const removeRuleSelector = Selector(".sv-action--remove-row .sv-action-bar-item");
 //     await t.hover(removeRuleSelector);
 //     await takeElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t, comparer);
 //     await t.click(logicDetailButtonElement);

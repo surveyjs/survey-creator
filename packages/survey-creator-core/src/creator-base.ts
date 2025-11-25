@@ -4330,7 +4330,7 @@ export class SurveyCreatorModel extends Base
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     this.addNewElementReason = "ELEMENT_CONVERTED";
     el = this.convertQuestion(<Question>el, newType, defaultJSON);
-    this.selectElement(el, null, "#convertTo button");
+    this.selectElement(el, null, ".sv-action--convertTo button");
   }
 
   public getAddNewQuestionText(currentAddQuestionType: string = null) {

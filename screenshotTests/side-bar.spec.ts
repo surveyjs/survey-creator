@@ -16,7 +16,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 750, height: 700 });
     await page.locator(".sv-action-bar-item[title=\"Show Panel\"]").click();
-    await page.locator(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item").click();
+    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
 
     await compareScreenshot(page, ".svc-side-bar__container", "side-bar-object-selector.png");
   });
@@ -29,7 +29,7 @@ test.describe(title, () => {
     await page.locator(".svc-page-navigator__selector").click();
     await getListItemByText(page, "educationalNeeds").click();
     await page.locator(".svc-string-editor__input").filter({ hasText: "Patient Name" }).click();
-    await page.locator(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item").click();
+    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
     await page.waitForTimeout(1000);
 
     await compareScreenshot(page, objectSelectorContent, "side-bar-object-selector-with-selected-item.png");
