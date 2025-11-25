@@ -250,6 +250,8 @@ export var skStrings = {
     toolboxFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Žiadne vlastnosti na zobrazenie",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     // [Auto-translated] "No results found"
@@ -1402,8 +1404,10 @@ export var skStrings = {
     allowMultiple: "Povolenie nahrávania viacerých súborov",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Náhľad nahraných obrázkov",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Akceptované typy súborov",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Akceptované kategórie súborov",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Ďalšie prípony súboru",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Počkajte na dokončenie nahrávania",
     // [Auto-translated] "Confirm file deletion"
@@ -2083,6 +2087,20 @@ export var skStrings = {
       warning: "Varovanie",
       // [Auto-translated] "Informational"
       info: "Informačné"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Obrázky",
+      // [Auto-translated] "Videos"
+      video: "Videá",
+      // [Auto-translated] "Audio"
+      audio: "Zvukový",
+      // [Auto-translated] "Documents"
+      document: "Dokumenty",
+      // [Auto-translated] "Archives"
+      archive: "Archívy",
+      // [Auto-translated] "Custom"
+      custom: "Zvyk"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -3090,8 +3108,10 @@ export var skStrings = {
     storeOthersAsComment: "Túto voľbu vyberte, ak chcete uložiť hodnotu možnosti \"Iné\" ako samostatnú vlastnosť vo výsledkoch prieskumu.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Použite {0} ako zástupný symbol skutočnej hodnoty.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Ďalšie informácie nájdete v popise atribútu [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Vyberte \"Vlastné\" a pridajte vlastné prípony súborov nad preddefinované kategórie.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Zadajte prípony súborov oddelené čiarkami (napr. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Vzťahuje sa len na stĺpce s možnosťou \"Typ vstupu bunky\" nastavenou na Skupina prepínacích tlačidiel alebo Začiarkavacie políčka.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
