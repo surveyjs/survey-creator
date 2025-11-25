@@ -19,7 +19,9 @@ import {
   AnimationBoolean,
   IAnimationConsumer,
   VerticalResponsivityManager,
-  UpdateResponsivenessMode
+  UpdateResponsivenessMode,
+  ILocalizableOwner,
+  LocalizableString
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -91,7 +93,7 @@ export interface IQuestionToolboxItem extends IAction {
   propValue?: any;
 }
 
-export interface IQuestionToolbox {
+export interface IQuestionToolbox extends ILocalizableOwner {
   toggleCategoryState(name: string);
 }
 
@@ -104,9 +106,22 @@ export interface IToolboxCategoryDefinition {
 export class QuestionToolboxCategory extends Base {
   constructor(private toolbox: IQuestionToolbox) {
     super();
+    this.createLocalizableString("title", this.toolbox);
+  }
+  protected get locTitle(): LocalizableString { return this.getLocalizableString("title"); }
+  public get title(): string {
+    return this.locTitle.text;
+  }
+  public set title(val: string) {
+    this.setLocalizableStringText("title", val);
   }
   @property() name: string;
-  @property() title: string;
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "name") {
+      this.locTitle.localizationName = newValue ? "toolboxCategories." + newValue : "";
+    }
+  }
   @propertyArray() items: Array<QuestionToolboxItem>;
   @property({ defaultValue: false }) collapsedValue: boolean;
   @property({ defaultValue: false }) forceExpand: boolean;
@@ -653,10 +668,6 @@ export class QuestionToolbox
     });
     return questionCategoryMap;
   }
-  private getCategoryTitle(name: string): string {
-    if (this.categoriesTitles[name]) return this.categoriesTitles[name];
-    return getLocString("toolboxCategories." + name);
-  }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
     //if(!this.allowExpandMultipleCategories) {
@@ -970,7 +981,7 @@ export class QuestionToolbox
     });
     if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
-        category.title = this.getCategoryTitle(category.name);
+        category.locStrsChanged();
       });
     }
   }
@@ -1206,7 +1217,10 @@ export class QuestionToolbox
       if (!categoriesHash[categoryName]) {
         const category = this.createCategory();
         category.name = categoryName;
-        category.title = this.getCategoryTitle(categoryName);
+        const categoryTitle = this.categoriesTitles[categoryName];
+        if (categoryTitle) {
+          category.title = categoryTitle;
+        }
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
