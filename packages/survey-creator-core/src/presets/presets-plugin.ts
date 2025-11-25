@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, IDialogOptions, LocalizableString } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -23,6 +23,10 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   private hidePresets() {
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
+  }
+
+  private confirmReset(onApply: ()=>void) {
+    onApply();
   }
 
   constructor(private creator: SurveyCreatorModel) {
@@ -68,8 +72,8 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
       { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.model?.resetToDefaults("page_languages"); } },
-      { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.model?.resetToDefaults(); } },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
+      { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.confirmReset(() => this.model?.resetToDefaults()); } },
     ];
 
     presets.forEach(p => {
