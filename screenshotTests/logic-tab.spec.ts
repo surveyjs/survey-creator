@@ -90,7 +90,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.hover(".sl-table__detail-button");
     await compareScreenshot(page, page.locator(".sl-table__detail-button"), "logic-expand-hover.png");
-    const removeRuleSelector = page.locator(".sv-action--remove-row .sv-action-bar-item");
+    const removeRuleSelector = page.locator(".sl-table__remove-button .sv-action-bar-item");
     await removeRuleSelector.hover();
     await compareScreenshot(page, removeRuleSelector, "logic-rule-remove-hover.png");
     await page.click(".sl-table__detail-button");
@@ -182,7 +182,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.hover(".sl-table__row");
     await page.click(".sl-table__detail-button");
-    await page.click("#svc-logic-fast-entry button");
+    await page.click(".sv-action--logic-fast-entry button");
     const conditionContentSelector = page.locator(".sl-table__cell--detail-panel .sl-panel");
     await compareScreenshot(page, conditionContentSelector, "logic-fast-entry.png");
     await page.click(".sl-comment");

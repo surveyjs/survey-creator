@@ -409,6 +409,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.surveySettingsAction = new Action({
       id: "svd-settings",
+      css: "sv-action--svd-settings",
       iconName: "icon-settings",
       iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {

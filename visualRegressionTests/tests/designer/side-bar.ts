@@ -201,7 +201,7 @@
 //       window["creator"].showOneCategoryInPropertyGrid = true;
 //     })();
 //     await t
-//       .click(Selector("#svd-settings"))
+//       .click(Selector(".sv-action--svd-settings"))
 //       .click(Selector(".spg-question[data-name='locale'] .spg-dropdown").find(".sd-dropdown__filter-string-input"))
 //       .hover(Selector(".sv-popup").filterVisible(), { offsetX: 0, offsetY: 0 });
 //     await takeElementScreenshot("mobile-popup-inside-new-pg.png", "", t, comparer);

@@ -130,7 +130,7 @@
 //     await t
 //       .click(getPropertyGridCategory("General"))
 //       .click(expandedGroup.find(".spg-button-group__item-caption").withText("Dark"))
-//       .click(Selector("#svc-reset-theme .svc-toolbar__item"));
+//       .click(Selector(".sv-action--reset-theme .svc-toolbar__item"));
 
 //     await takeElementScreenshot("theme-tab-reset-popup-dialog.png", Selector(".sv-popup__body-content").filterVisible(), t, comparer);
 //   });

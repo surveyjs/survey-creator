@@ -163,6 +163,7 @@ export class UndoRedoController extends Base {
     const items: Array<Action> = [];
     this.undoAction = new Action({
       id: "action-undo",
+      css: "sv-action--action-undo",
       iconName: "icon-undo",
       iconSize: "auto",
       locTitleName: "ed.undo",
@@ -175,6 +176,7 @@ export class UndoRedoController extends Base {
     });
     this.redoAction = new Action({
       id: "action-redo",
+      css: "sv-action--action-redo",
       iconName: "icon-redo",
       iconSize: "auto",
       locTitleName: "ed.redo",

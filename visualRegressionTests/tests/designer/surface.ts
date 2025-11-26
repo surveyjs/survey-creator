@@ -222,7 +222,7 @@
 //     await t.resizeWindow(1920, 900);
 //     await setAllowZoom(true);
 //     await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
-//     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
+//     for (let i = 0; i < 5; i++) { await t.click(Selector(".sv-action--zoomOut").find("button")); }
 //     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
 //     const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
@@ -2591,12 +2591,12 @@
 //     await setShowSidebar(false);
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
-//     await t.click("#lockQuestions");
+//     await t.click(".sv-action--lockQuestions");
 //     await t.hover(".sv-action--collapse-all");
 //     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
 
 //     await setAllowZoom(true);
-//     await t.hover("#zoomOut");
+//     await t.hover(".sv-action--zoomOut");
 //     await takeElementScreenshot("design-surface-toolbar-with-zoom.png", Selector(".svc-tab-designer__surface-toolbar"), t, comparer);
 //   });
 // });
@@ -2706,7 +2706,7 @@
 //     await t.click(qContent, { offsetX: 5, offsetY: 5 });
 
 //     await t.resizeWindow(1024, 3700);
-//     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
+//     for (let i = 0; i < 5; i++) { await t.click(Selector(".sv-action--zoomOut").find("button")); }
 //     await t.resizeWindow(600, 1900);
 //     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
 //   });

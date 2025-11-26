@@ -617,6 +617,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     this.resetTheme = new Action({
       id: "svc-reset-theme",
+      css: "sv-action--reset-theme",
       iconName: "icon-reset",
       iconSize: "auto",
       locTitleName: "ed.themeResetButton",

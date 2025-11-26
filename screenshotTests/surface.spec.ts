@@ -59,8 +59,8 @@ test.describe(title, () => {
     await setJSON(page, surveyJSON);
 
     await page.click(".svc-question__content", { position: { x: 5, y: 5 } });
-    await page.locator(".sv-action--convertTo").waitFor({ state: "visible" });
-    await page.locator(".sv-action--convertTo").click();
+    await page.locator(".svc-dropdown-action--convertTo").waitFor({ state: "visible" });
+    await page.locator(".svc-dropdown-action--convertTo").click();
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
@@ -88,8 +88,8 @@ test.describe(title, () => {
     await setJSON(page, surveyJSON);
 
     await page.click(".svc-question__content", { position: { x: 5, y: 5 } });
-    await page.locator(".sv-action--convertTo").waitFor({ state: "visible" });
-    await page.locator(".sv-action--convertTo").click();
+    await page.locator(".svc-dropdown-action--convertTo").waitFor({ state: "visible" });
+    await page.locator(".svc-dropdown-action--convertTo").click();
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true }).first();
     await expect(popupContainer).toBeVisible();
@@ -156,8 +156,8 @@ test.describe(title, () => {
     });
     await setJSON(page, surveyJSON);
     await page.click(".svc-question__content", { position: { x: 5, y: 5 } });
-    await page.locator(".sv-action--convertTo").waitFor({ state: "visible" });
-    await page.locator(".sv-action--convertTo").click();
+    await page.locator(".svc-dropdown-action--convertTo").waitFor({ state: "visible" });
+    await page.locator(".svc-dropdown-action--convertTo").click();
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
@@ -1416,7 +1416,7 @@ test.describe(title, () => {
     });
     await page.locator(".svc-question__adorner").nth(2).hover({ position: { x: 10, y: 10 } });
     await page.locator(".svc-question__adorner").nth(2).click({ position: { x: 10, y: 10 } });
-    await page.locator(".sv-action--convertTo").nth(2).click();
+    await page.locator(".svc-dropdown-action--convertTo").nth(2).click();
     await getListItemByText(page, "Yes/No (Boolean)").click();
     await page.locator(".svc-question__adorner").nth(1).hover({ position: { x: 10, y: 10 } });
     await page.locator(".svc-question__adorner").nth(1).click({ position: { x: 10, y: 10 } });

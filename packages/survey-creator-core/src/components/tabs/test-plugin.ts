@@ -154,6 +154,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         .map((key) => ({ id: key, title: simulatorDevices[key].title, visibleIndex: simulatorDevices[key].visibleIndex ?? Number.MAX_VALUE }));
       this.deviceSelectorAction = createDropdownActionModel({
         id: "deviceSelector",
+        css: "sv-action--deviceSelector",
         iconName: "icon-device-desktop",
         iconSize: "auto",
         mode: "small",
