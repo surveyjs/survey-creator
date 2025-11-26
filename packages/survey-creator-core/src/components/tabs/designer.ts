@@ -166,6 +166,7 @@ export class TabDesignerViewModel extends Base {
     });
     surfaceToolbarItems.push(<IAction>{
       id: "zoomOut",
+      css: "sv-action--zoomOut",
       locTooltipName: "ed.zoomOutTooltip",
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
@@ -179,6 +180,7 @@ export class TabDesignerViewModel extends Base {
 
     surfaceToolbarItems.push({
       id: "collapseAll",
+      css: "sv-action--collapse-all",
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",
@@ -188,6 +190,7 @@ export class TabDesignerViewModel extends Base {
     });
     surfaceToolbarItems.push({
       id: "expandAll",
+      css: "sv-sction--expande-all",
       locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
       iconSize: "auto",
@@ -196,6 +199,7 @@ export class TabDesignerViewModel extends Base {
     });
     surfaceToolbarItems.push({
       id: "lockQuestions",
+      css: "sv-action--lockQuestions",
       locTooltipName: "ed.lockQuestionsTooltip",
       iconName: "icon-questionlock-24x24",
       iconSize: "auto",

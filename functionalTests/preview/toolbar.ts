@@ -65,7 +65,7 @@ const json2 = {
   }]
 };
 
-const orientationAction = Selector("#orientationSelector .sv-action-bar-item");
+const orientationAction = Selector(".sv-action--orientationSelector .sv-action-bar-item");
 const restartSurveyButtonText = "Preview Survey Again";
 
 test("Language switcher", async (t) => {
@@ -88,21 +88,21 @@ test("Page switcher", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("First page")
-    .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(true)
-    .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
+    .expect(Selector(".svc-page-selector").textContent).contains("First page")
+    .expect(Selector(".sv-action--prevPage button").hasAttribute("disabled")).eql(true)
+    .expect(Selector(".sv-action--nextPage button").hasAttribute("disabled")).eql(false)
 
-    .click(Selector("#nextPage"))
+    .click(Selector(".sv-action--nextPage"))
     .expect(Selector(".sd-question__title").withText("question1").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("Second page")
-    .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
-    .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
+    .expect(Selector(".svc-page-selector").textContent).contains("Second page")
+    .expect(Selector(".sv-action--prevPage button").hasAttribute("disabled")).eql(false)
+    .expect(Selector(".sv-action--nextPage button").hasAttribute("disabled")).eql(false)
 
-    .click(Selector("#nextPage"))
+    .click(Selector(".sv-action--nextPage"))
     .expect(Selector(".sd-question__title").withText("question2").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("Page 3")
-    .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
-    .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
+    .expect(Selector(".svc-page-selector").textContent).contains("Page 3")
+    .expect(Selector(".sv-action--prevPage button").hasAttribute("disabled")).eql(false)
+    .expect(Selector(".sv-action--nextPage button").hasAttribute("disabled")).eql(true)
 
     .click(Selector(".svc-preview-pager__item[title='Page 3']"))
     .expect(getListItemByText("Second page").visible).ok()
@@ -111,9 +111,9 @@ test("Page switcher", async (t) => {
     .expect(getListItemByText("Page 3").hasClass("svc-list__item--selected")).ok()
     .click(getListItemByText("Second page"))
     .expect(Selector(".sd-question__title").withText("question1").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("Second page")
-    .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
-    .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
+    .expect(Selector(".svc-page-selector").textContent).contains("Second page")
+    .expect(Selector(".sv-action--prevPage button").hasAttribute("disabled")).eql(false)
+    .expect(Selector(".sv-action--nextPage button").hasAttribute("disabled")).eql(false)
     .click(Selector(".svc-preview-pager__item[title='Second page']"))
     .expect(getListItemByText("First page").hasClass("svc-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("svc-list__item--selected")).ok()
@@ -127,8 +127,8 @@ test("Preview Survey Again", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
-    .click(Selector("#nextPage"))
-    .click(Selector("#nextPage"))
+    .click(Selector(".sv-action--nextPage"))
+    .click(Selector(".sv-action--nextPage"))
     .click(Selector("input[value='Complete']"))
     .expect(Selector(".sd-completedpage").withText("Thank you for completing the survey").visible).ok()
     .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))

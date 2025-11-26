@@ -270,7 +270,7 @@ test("Check help description doesn't reset input value", async (t) => {
   });
   const quizTab = getPropertyGridCategory("Quiz Mode");
   const input = Selector("[data-name='timeLimit'] .spg-input");
-  const helpButton = Selector("[data-name='timeLimit'] #property-grid-help");
+  const helpButton = Selector("[data-name='timeLimit'] .spg-help-action");
   await t
     .click(quizTab)
     .click(input)
