@@ -572,7 +572,6 @@ export class QuestionToolbox
    * @see isCompact
    */
   @property() forceCompact: boolean;
-  private categoriesTitles: HashTable<string> = {};
 
   /**
    * Specifies whether to display a search field that allows users to find question and panel types within the Toolbox.
@@ -1075,11 +1074,11 @@ export class QuestionToolbox
         }
       });
     }
-    this.categoriesTitles = {};
+    const categoriesTitles: { [key: string]: string } = {};
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
       if (!!category.category && !!category.title) {
-        this.categoriesTitles[category.category] = category.title;
+        categoriesTitles[category.category] = category.title;
       }
       if (!Array.isArray(category.items)) return;
       category.items.forEach(obj => {
@@ -1112,7 +1111,7 @@ export class QuestionToolbox
       });
     }
     this.setItems(actionList);
-    this.onItemsChanged(false);
+    this.onItemsChanged(false, categoriesTitles);
   }
 
   /**
@@ -1203,7 +1202,7 @@ export class QuestionToolbox
     }
     return null;
   }
-  protected onItemsChanged(changeActions: boolean = true) {
+  protected onItemsChanged(changeActions: boolean = true, categoriesTitles?: { [key: string]: string }) {
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
@@ -1217,7 +1216,7 @@ export class QuestionToolbox
       if (!categoriesHash[categoryName]) {
         const category = this.createCategory();
         category.name = categoryName;
-        const categoryTitle = this.categoriesTitles[categoryName];
+        const categoryTitle = categoriesTitles ? categoriesTitles[categoryName] : undefined;
         if (categoryTitle) {
           category.title = categoryTitle;
         }
