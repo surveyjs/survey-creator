@@ -179,7 +179,7 @@ export class TabDesignerViewModel extends Base {
 
     surfaceToolbarItems.push({
       id: "collapseAll",
-      css: "sv-sction--collapse-all",
+      css: "sv-action--collapse-all",
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",

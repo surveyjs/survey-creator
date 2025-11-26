@@ -371,7 +371,7 @@ test("Collapse all and expand all toolbar", async (t) => {
     window["creator"].expandCollapseButtonVisibility = "onhover";
   })();
   await setJSON(json);
-  await t.click(".sv-sction--collapse-all");
+  await t.click(".sv-action--collapse-all");
   await t.expect(Selector(".svc-page__content--collapsed").exists).ok();
   await t.click(".sv-sction--expande-all");
   await t.expect(Selector(".svc-page__content--collapsed").exists).notOk();
@@ -394,15 +394,15 @@ test("Collapse all and expand all toolbar visibility", async (t) => {
     window["creator"].expandCollapseButtonVisibility = "onhover";
   })();
   await setJSON(json);
-  await t.expect(Selector(".sv-sction--collapse-all").exists).ok();
-  await t.expect(Selector(".sv-sction--collapse-all").visible).ok();
+  await t.expect(Selector(".sv-action--collapse-all").exists).ok();
+  await t.expect(Selector(".sv-action--collapse-all").visible).ok();
   await t.expect(Selector(".sv-sction--expande-all").exists).ok();
   await t.expect(Selector(".sv-sction--expande-all").visible).ok();
 
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "never";
   })();
-  await t.expect(Selector(".sv-sction--collapse-all").visible).notOk();
+  await t.expect(Selector(".sv-action--collapse-all").visible).notOk();
   await t.expect(Selector(".sv-sction--expande-all").visible).notOk();
 
 });

@@ -213,7 +213,7 @@ test("Matrix dropdown with detail panel", async (t) => {
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .hover(SingleInputToolboxItem)
     .dragToElement(SingleInputToolboxItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
-    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find(".sv-action--convertTo").withText("Single-Line Input").visible)).ok();
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find(".svc-dropdown-action--convertTo").withText("Single-Line Input").visible)).ok();
 
 });
 
@@ -229,7 +229,7 @@ test("Matrix dropdown with detail panel - add question button", async (t) => {
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
-    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find(".sv-action--convertTo").nth(0).withText("Single-Line Input").visible)).ok()
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find(".svc-dropdown-action--convertTo").nth(0).withText("Single-Line Input").visible)).ok()
     .expect(Selector(".sd-question[data-name=question2]").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-element__add-new-question"))
     .expect(Selector(".sd-question[data-name=question3]").visible).ok();
@@ -295,7 +295,7 @@ test("Keep focus on question convert", async (t) => {
 
     .click(getListItemByText("Long Text"))
     .expect(Selector(".svc-question__content--selected").find("textarea").visible).ok()
-    .expect(Selector(".svc-question__content--selected .sv-action--convertTo button").focused).ok();
+    .expect(Selector(".svc-question__content--selected .svc-dropdown-action--convertTo button").focused).ok();
 });
 
 test("Matrix column title - get focus on click, not tab", async (t) => {

@@ -2592,7 +2592,7 @@
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
 //     await t.click("#lockQuestions");
-//     await t.hover(".sv-sction--collapse-all");
+//     await t.hover(".sv-action--collapse-all");
 //     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
 
 //     await setAllowZoom(true);
