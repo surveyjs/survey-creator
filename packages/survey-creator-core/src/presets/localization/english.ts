@@ -124,6 +124,9 @@ export const enStrings = {
     edit: "Edit",
     resetLanguages: "Reset Languages",
     resetAll: "Reset all changes",
+    resetConfirmation: "Do you really want to reset the settings?",
+    resetConfirmationOk: "Yes, reset the settings",
+
     resetToDefaults: "Reset {0}",
     defaultSettings: "Default Settings",
     basic: "Basic",

@@ -26,7 +26,19 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   private confirmReset(onApply: ()=>void) {
-    onApply();
+    libSettings.confirmActionAsync(getLocString("presets.plugin.resetConfirmation"),
+      (confirm) => {
+        if (confirm) {
+          onApply();
+        }
+      },
+      {
+        applyTitle: getLocString("presets.plugin.resetConfirmationOk"),
+        locale: this.creator.locale,
+        cssClass: "sv-popup--confirm svc-creator-popup"
+      }
+    );
+
   }
 
   constructor(private creator: SurveyCreatorModel) {
