@@ -144,6 +144,22 @@ test("Preset edit, toolbox - change item", () => {
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].tooltip).toEqual("tooltip-test");
 });
 
+test("Preset edit, toolbox - empty subitems", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  itemsQuestion.visibleRows[1].showDetailPanel();
+  itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("subitems").value = [];
+  expect(editor.json.toolbox.definition.filter(i => i.name == "rating")[0].subitems).toEqual([]);
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].subitems).toBeUndefined();
+  itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("iconName").value = "icon-test";
+  expect(editor.json.toolbox.definition.filter(i => i.name == "rating")[0].subitems).toEqual([]);
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].subitems).toBeUndefined();
+});
+
 test("Preset edit, toolbox - reorder items", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;

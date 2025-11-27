@@ -156,6 +156,24 @@ test("set toolbox definition - no categories", () => {
   expect(tb.visibleActions).toHaveLength(4);
 });
 
+test("set toolbox definition - no subitems", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [
+        { name: "rating", subitems: [] },
+      ]
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  const actions = tb.visibleActions;
+  expect(tb.visibleActions).toHaveLength(1);
+  expect(actions[0].name).toBe("rating");
+  expect(actions[0].items).toHaveLength(0);
+});
+
 test("set toolbox definition - showCategoryTitles", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({

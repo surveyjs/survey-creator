@@ -74,6 +74,10 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
         const tItem = creator.toolbox.getItemByName(item.name);
         if (tItem) {
           if (item.subitems) {
+            if (item.subitems.length === 0) {
+              tItem.clearSubitems();
+              return;
+            }
             tItem.items = [];
             item.subitems.forEach(si => tItem.addSubitem(si as any));
           }

@@ -333,7 +333,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private cleanIfNotDiffers(item, defaultItem) {
     if (!defaultItem) return true;
     let differs = false;
-    Object.keys(item).forEach(key => {
+    Object.keys({ ...item, ...defaultItem }).forEach(key => {
       if (!Helpers.isTwoValueEquals(item[key], defaultItem[key])) {
         differs = true;
         return;
@@ -348,7 +348,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const items = (itemsRaw || []).map(i => ({ ...i }));
     let differs = false;
     items.forEach(item => {
-      if (this.cleanIfNotDiffers(item, this.defaultItems.filter(i => i.name == item.name)[0])) differs = true;
+      const defaultItem = this.defaultItems.filter(i => i.name == item.name)[0];
+      if (!item.subitems && defaultItem?.subitems) item.subitems = [];
+      if (this.cleanIfNotDiffers(item, defaultItem)) differs = true;
     });
     if (!differs && !Helpers.isTwoValueEquals(items.map(i=>i.name), this.defaultItems.map(i=>i.name))) differs = true;
     return differs ? items : undefined;
