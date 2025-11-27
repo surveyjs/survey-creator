@@ -186,10 +186,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return question?.name === this.nameCategories ? this.defaultCategories : [...this.defaultItems, ...this.defaultSubitems];
   }
 
-  protected updateRowAction(question: QuestionMatrixDynamicModel, rowData: any, keyColumn: string, action: IAction) {
-    super.updateRowAction(question, rowData, keyColumn, action);
+  protected updateRowAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rowData: any, keyColumn: string, action: IAction) {
+    super.updateRowAction(question, row, rowData, keyColumn, action);
     if (action.id == "show-detail" && question.name != this.nameCategories) {
-      action.visible = !!rowData.subitems;
+      action.visible = row.isDetailPanelShowing || !!rowData.subitems;
     }
   }
 

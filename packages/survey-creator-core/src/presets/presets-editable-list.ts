@@ -49,10 +49,10 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (!question.value) return;
     const rowData = question.value.filter(r => row.value?.[keyColumn] == r?.[keyColumn])[0];
     if (!rowData) return;
-    actions.forEach(a => this.updateRowAction(question, rowData, keyColumn, a));
+    actions.forEach(a => this.updateRowAction(question, row, rowData, keyColumn, a));
   }
 
-  protected updateRowAction(question: QuestionMatrixDynamicModel, rowData: any, keyColumn: string, action: IAction) {
+  protected updateRowAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rowData: any, keyColumn: string, action: IAction) {
     if (action.id == "icon-action") {
       action.iconName = rowData.iconName || this.defaultIcon;
     }

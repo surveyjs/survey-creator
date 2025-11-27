@@ -160,6 +160,25 @@ test("Preset edit, toolbox - empty subitems", () => {
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].subitems).toBeUndefined();
 });
 
+test("Preset edit, toolbox - empty subitems", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  const getShowDetailAction = (visibleRow: any) => {
+    let renderedRow = itemsQuestion.renderedTable.rows.filter(r => r.row == visibleRow)[0];
+    return renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "show-detail")[0];
+  };
+  expect(getShowDetailAction(itemsQuestion.visibleRows[0]).visible).toBeFalsy();
+  expect(getShowDetailAction(itemsQuestion.visibleRows[1]).visible).toBeTruthy();
+
+  itemsQuestion.visibleRows[1].showDetailPanel();
+  itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("subitems").value = [];
+  expect(getShowDetailAction(itemsQuestion.visibleRows[1]).visible).toBeTruthy();
+});
+
 test("Preset edit, toolbox - reorder items", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
