@@ -19,7 +19,9 @@ import {
   AnimationBoolean,
   IAnimationConsumer,
   VerticalResponsivityManager,
-  UpdateResponsivenessMode
+  UpdateResponsivenessMode,
+  ILocalizableOwner,
+  LocalizableString
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -91,7 +93,7 @@ export interface IQuestionToolboxItem extends IAction {
   propValue?: any;
 }
 
-export interface IQuestionToolbox {
+export interface IQuestionToolbox extends ILocalizableOwner {
   toggleCategoryState(name: string);
 }
 
@@ -104,9 +106,22 @@ export interface IToolboxCategoryDefinition {
 export class QuestionToolboxCategory extends Base {
   constructor(private toolbox: IQuestionToolbox) {
     super();
+    this.createLocalizableString("title", this.toolbox);
+  }
+  public get locTitle(): LocalizableString { return this.getLocalizableString("title"); }
+  public get title(): string {
+    return this.locTitle.text;
+  }
+  public set title(val: string) {
+    this.setLocalizableStringText("title", val);
   }
   @property() name: string;
-  @property() title: string;
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "name") {
+      this.locTitle.localizationName = newValue ? "toolboxCategories." + newValue : "";
+    }
+  }
   @propertyArray() items: Array<QuestionToolboxItem>;
   @property({ defaultValue: false }) collapsedValue: boolean;
   @property({ defaultValue: false }) forceExpand: boolean;
@@ -557,7 +572,6 @@ export class QuestionToolbox
    * @see isCompact
    */
   @property() forceCompact: boolean;
-  private categoriesTitles: HashTable<string> = {};
 
   /**
    * Specifies whether to display a search field that allows users to find question and panel types within the Toolbox.
@@ -652,10 +666,6 @@ export class QuestionToolbox
       });
     });
     return questionCategoryMap;
-  }
-  private getCategoryTitle(name: string): string {
-    if (this.categoriesTitles[name]) return this.categoriesTitles[name];
-    return getLocString("toolboxCategories." + name);
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
@@ -970,7 +980,7 @@ export class QuestionToolbox
     });
     if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
-        category.title = this.getCategoryTitle(category.name);
+        category.locStrsChanged();
       });
     }
   }
@@ -1064,11 +1074,11 @@ export class QuestionToolbox
         }
       });
     }
-    this.categoriesTitles = {};
+    const categoriesTitles: { [key: string]: string } = {};
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
       if (!!category.category && !!category.title) {
-        this.categoriesTitles[category.category] = category.title;
+        categoriesTitles[category.category] = category.title;
       }
       if (!Array.isArray(category.items)) return;
       category.items.forEach(obj => {
@@ -1101,7 +1111,7 @@ export class QuestionToolbox
       });
     }
     this.setItems(actionList);
-    this.onItemsChanged(false);
+    this.onItemsChanged(false, categoriesTitles);
   }
 
   /**
@@ -1192,7 +1202,7 @@ export class QuestionToolbox
     }
     return null;
   }
-  protected onItemsChanged(changeActions: boolean = true) {
+  protected onItemsChanged(changeActions: boolean = true, categoriesTitles?: { [key: string]: string }) {
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
@@ -1206,7 +1216,10 @@ export class QuestionToolbox
       if (!categoriesHash[categoryName]) {
         const category = this.createCategory();
         category.name = categoryName;
-        category.title = this.getCategoryTitle(categoryName);
+        const categoryTitle = categoriesTitles ? categoriesTitles[categoryName] : undefined;
+        if (categoryTitle) {
+          category.title = categoryTitle;
+        }
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
