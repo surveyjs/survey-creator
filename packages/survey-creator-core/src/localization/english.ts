@@ -1346,6 +1346,7 @@ export var enStrings = {
     contains: "Contains",
     notcontains: "Does not contain",
     anyof: "Any of",
+    noneof: "None of",
     allof: "All of",
     greater: "Greater than",
     less: "Less than",
