@@ -63,7 +63,7 @@
 
 //     await t
 //       .click(getTabbedMenuItemByText(creatorTabPreviewName))
-//       .click(Selector("#deviceSelector button"))
+//       .click(Selector(".sv-action--deviceSelector button"))
 //       .click(getListItemByText("iPhone SE"));
 
 //     await takeElementScreenshot("test-tab-iphone.png", Selector(".svd-simulator-wrapper"), t, comparer);

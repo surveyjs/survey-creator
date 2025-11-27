@@ -99,7 +99,7 @@ test.describe(title, () => {
     await qContent.click({ position: { x: 5, y: 5 } });
 
     for (let i = 0; i < 5; i++) {
-      await page.click("#zoomOut button");
+      await page.click(".sv-action--zoomOut button");
     }
     await page.setViewportSize({ width: 600, height: 1900 });
     await page.waitForTimeout(500);

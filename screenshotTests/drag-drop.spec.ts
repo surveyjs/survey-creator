@@ -629,7 +629,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const qCollapseButton = page.locator(".svc-question__content #collapse");
+    const qCollapseButton = page.locator(".svc-question__content .sv-action-bar-item--collapse");
     const panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]");
     await panel.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.filter({ visible: true }).first().click();
@@ -667,7 +667,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const qCollapseButton = page.locator(".svc-page__content #collapse").filter({ visible: true }).first();
+    const qCollapseButton = page.locator(".svc-page__content .sv-action-bar-item--collapse").filter({ visible: true }).first();
     const pageElement = page.locator(".svc-page").first();
     await pageElement.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.click();

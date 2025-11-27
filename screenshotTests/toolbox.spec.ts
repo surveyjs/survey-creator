@@ -403,12 +403,12 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search.png");
     await toolboxSearch.type("single");
     await compareScreenshot(page, toolboxElement, "toolbox-search-entered.png");
-    await page.locator("#svd-grid-search-close").hover();
+    await page.locator(".sv-action--grid-search-close").hover();
     await compareScreenshot(page, toolboxElement, "toolbox-search-close-hover.png");
     await toolboxSearch.click();
     await toolboxSearch.type("qwerty");
     await compareScreenshot(page, toolboxElement, "toolbox-search-placeholder.png");
-    await page.locator("#svd-grid-search-close").click();
+    await page.locator(".sv-action--grid-search-close").click();
     await page.evaluate(() => {
       (document.querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red";
     });

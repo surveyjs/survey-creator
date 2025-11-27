@@ -115,7 +115,7 @@
 //       .click(getTabbedMenuItemByText(creatorTabLogicName));
 //     await t.hover(logicDetailButtonElement);
 //     await takeElementScreenshot("logic-expand-hover.png", logicDetailButtonElement, t, comparer);
-//     const removeRuleSelector = Selector("#remove-row .sv-action-bar-item");
+//     const removeRuleSelector = Selector(".sl-table__remove-button .sv-action-bar-item");
 //     await t.hover(removeRuleSelector);
 //     await takeElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t, comparer);
 //     await t.click(logicDetailButtonElement);
@@ -237,7 +237,7 @@
 //     await t.click(getTabbedMenuItemByText(creatorTabLogicName))
 //       .hover(Selector(".sl-table__row"))
 //       .click(logicDetailButtonElement)
-//       .click("#svc-logic-fast-entry button");
+//       .click(".sv-action--logic-fast-entry button");
 //     const conditionContentSelector = Selector(".sl-table__cell--detail-panel .sl-panel");
 //     await takeElementScreenshot("logic-fast-entry.png", conditionContentSelector, t, comparer);
 //     await t.click(Selector(".sl-comment")).pressKey("ctrl+a delete");

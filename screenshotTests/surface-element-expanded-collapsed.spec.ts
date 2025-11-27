@@ -242,12 +242,12 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await setExpandCollapseButtonVisibility(page, "onhover");
     await setJSON(page, json);
-    await page.click("#lockQuestions");
-    await page.hover("#collapseAll");
+    await page.click(".sv-action--lockQuestions");
+    await page.hover(".sv-action--collapse-all");
     await compareScreenshot(page, page.locator(".svc-tab-designer"), "design-surface-toolbar.png");
 
     await setAllowZoom(page, true);
-    await page.hover("#zoomOut");
+    await page.hover(".sv-action--zoomOut");
     await compareScreenshot(page, page.locator(".svc-tab-designer__surface-toolbar"), "design-surface-toolbar-with-zoom.png");
   });
 });

@@ -47,17 +47,17 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td colspan="3"><b>Checkboxes</b>, <b>Image Picker</b>, <b>Multiple Textboxes</b>, <b>Ranking</b></td>
       </tr>
       <tr>
-        <td><code>{questionid[index]}</code></td>
+        <td><code>{qid[index]}</code></td>
         <td>Use a zero-based index to access a selected item.</td>
-        <td><code>{question1[0]}</code></td>
+        <td><code>{q1[0]}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Multiple Textboxes</b></td>
       </tr>
       <tr>
-        <td><code>{questionid.itemid}</code></td>
+        <td><code>{qid.itemid}</code></td>
         <td>Accesses an individual textbox.</td>
-        <td><code>{question1.item1}</code></td>
+        <td><code>{q1.item1}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Single-Select Matrix</b></td>
@@ -68,6 +68,21 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{row.column1}</code></td>
       </tr>
       <tr>
+        <td><code>{prevRow.columnid}</code></td>
+        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+        <td><code>{prevRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{nextRow.columnid}</code></td>
+        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+        <td><code>{nextRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
+        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+        <td><code>{matrix1[-1].column1}</code></td>
+      </tr>
+      <tr>
         <td colspan="3"><b>Multi-Select Matrix</b></td>
       </tr>
       <tr>
@@ -76,14 +91,29 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{row.column1}</code></td>
       </tr>
       <tr>
-        <td><code>{questionid.rowid.columnid}</code></td>
-        <td>Accesses an individual matrix cell.</td>
-        <td><code>{matrix.row1.column1}</code></td>
+        <td><code>{prevRow.columnid}</code></td>
+        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+        <td><code>{prevRow.column1}</code></td>
       </tr>
       <tr>
-        <td><code>{questionid-total.columnid}</code></td>
+        <td><code>{nextRow.columnid}</code></td>
+        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+        <td><code>{nextRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
+        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+        <td><code>{matrix1[-1].column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid.rowid.columnid}</code></td>
+        <td>Accesses an individual matrix cell.</td>
+        <td><code>{matrix1.row1.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid-total.columnid}</code></td>
         <td>Accesses a cell in a total row.</td>
-        <td><code>{question1-total.column1}</code></td>
+        <td><code>{matrix1-total.column1}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Dynamic Matrix</b></td>
@@ -94,27 +124,57 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{row.column1}</code></td>
       </tr>
       <tr>
+        <td><code>{prevRow.columnid}</code></td>
+        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+        <td><code>{prevRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{nextRow.columnid}</code></td>
+        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+        <td><code>{nextRow.column1}</code></td>
+      </tr>
+      <tr>
         <td><code>{dmatrixid[rowindex].columnid}</code></td>
         <td>Use a zero-based row index to access a specific cell.</td>
         <td><code>{dmatrix1[0].column1}</code></td>
       </tr>
       <tr>
+        <td><code>{dmatrixid[-1].columnid}</code><br><code>{dmatrixid[-2].columnid}</code><br>...</td>
+        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+        <td><code>{dmatrix1[-1].column1}</code></td>
+      </tr>
+      <tr>
         <td colspan="3"><b>Dynamic Panel</b></td>
       </tr>
       <tr>
-        <td><code>{panel.questionid}</code></td>
-        <td>Use the <code>panel</code> prefix to access a question within the same panel.</td>
-        <td><code>{panel.question1}</code></td>
+        <td><code>{panel.qid}</code></td>
+        <td>Use the <code>panel</code> prefix to access a question in the same panel.</td>
+        <td><code>{panel.q1}</code></td>
       </tr>
       <tr>
-        <td><code>{parentPanel.questionid}</code></td>
-        <td>Use the <code>parentPanel</code> prefix to access a question within a parent Dynamic Panel. Applies when one Dynamic Panel question is nested in another.</td>
-        <td><code>{parentPanel.question1}</code></td>
+        <td><code>{prevPanel.qid}</code></td>
+        <td>Use the <code>prevPanel</code> prefix to access a question in the previous panel.</td>
+        <td><code>{prevPanel.q1}</code></td>
       </tr>
       <tr>
-        <td><code>{dpanelid[panelindex].questionid}</code></td>
-        <td>Use a zero-based panel index to access a question within a specific panel.</td>
-        <td><code>{dpanel1[0].question1}</code></td>
+        <td><code>{nextPanel.qid}</code></td>
+        <td>Use the <code>nextPanel</code> prefix to access a question in the next panel.</td>
+        <td><code>{nextPanel.q1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{parentPanel.qid}</code></td>
+        <td>Use the <code>parentPanel</code> prefix to access a question in a parent Dynamic Panel. Applies when one Dynamic Panel question is nested in another.</td>
+        <td><code>{parentPanel.q1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{dpanelid[panelindex].qid}</code></td>
+        <td>Use a zero-based panel index to access a question in a specific panel.</td>
+        <td><code>{dpanel1[0].q1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{dpanelid[-1].qid}</code><br><code>{dpanelid[-2].qid}</code><br>...</td>
+        <td>Use negative indices to access a question in the last panel, the panel before the last, and so on.</td>
+        <td><code>{dpanel1[-1].q1}</code></td>
       </tr>
     </tbody>
   </table>
@@ -226,7 +286,7 @@ Calculation functions allow you to perform computations within your survey. All 
 ### Logical Functions
 
 Expressions support one logical function&mdash;`iif`. It returns one value or the other based on whether a specified condition is true or false.      
-Example: `"iif({question1} > 20, 'High', 'Low')"`
+Example: `"iif({q1} > 20, 'High', 'Low')"`
 
 ### Date Functions
 

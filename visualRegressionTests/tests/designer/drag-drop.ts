@@ -752,7 +752,7 @@
 //     };
 //     await setJSON(json);
 
-//     const qCollapseButton = Selector(".svc-question__content #collapse");
+//     const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
 //     const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
 //     await t.hover(Panel, { offsetX: 5, offsetY: 5 });
 //     await t.click(qCollapseButton.filterVisible());
@@ -795,7 +795,7 @@
 //       ]
 //     };
 //     await setJSON(json);
-//     const qCollapseButton = Selector(".svc-page__content #collapse");
+//     const qCollapseButton = Selector(".svc-page__content .sv-action-bar-item--collapse");
 //     const Page = Selector(".svc-page");
 //     await t.hover(Page, { offsetX: 5, offsetY: 5 });
 //     await t.click(qCollapseButton.filterVisible());

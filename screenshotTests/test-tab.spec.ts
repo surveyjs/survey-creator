@@ -64,7 +64,7 @@ test.describe(title, () => {
     });
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await page.click("#deviceSelector button");
+    await page.click(".sv-action--deviceSelector button");
     await getListItemByText(page, "iPhone SE").click();
     await compareScreenshot(page, page.locator(".svd-simulator-wrapper"), "test-tab-iphone.png");
     await compareScreenshot(page, page.locator(".svc-plugin-tab__content"), "test-tab-iphone-whole-tab.png");
