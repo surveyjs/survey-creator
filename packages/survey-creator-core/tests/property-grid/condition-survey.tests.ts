@@ -614,6 +614,7 @@ test("enabled operators", () => {
       "equal",
       "notequal",
       "anyof",
+      "noneof",
       "greater",
       "less",
       "greaterorequal",
@@ -630,6 +631,7 @@ test("enabled operators", () => {
       "contains",
       "notcontains",
       "anyof",
+      "noneof",
       "allof"
     ]
   );
@@ -648,7 +650,7 @@ test("enabled operators", () => {
     ]
   );
   checkFun("qFile", ["empty", "notempty"]);
-  checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof"]);
+  checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof", "noneof"]);
 });
 test("Keep condition value on changing operation when it possible", () => {
   var survey = new SurveyModel({
@@ -668,7 +670,7 @@ test("Keep condition value on changing operation when it possible", () => {
   panel.getQuestionByName("operator").value = "empty";
   expect(panel.getQuestionByName("questionValue").isEmpty()).toBeTruthy();
 });
-test("Selectbase + anyof", () => {
+test("Selectbase + anyof / noneof", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
@@ -684,6 +686,14 @@ test("Selectbase + anyof", () => {
     "dropdown"
   );
   panel.getQuestionByName("operator").value = "anyof";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "checkbox"
+  );
+  panel.getQuestionByName("operator").value = "equal";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+  panel.getQuestionByName("operator").value = "noneof";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual(
     "checkbox"
   );
@@ -754,6 +764,11 @@ test("Add apostrophes to string value", () => {
   panel.getQuestionByName("operator").value = "equal";
   panel.getQuestionByName("questionValue").value = ["item1", 1];
   expect(editor.text).toEqual("{question2} = ['item1', 1]");
+
+  panel.getQuestionByName("questionName").value = "question1";
+  panel.getQuestionByName("operator").value = "noneof";
+  panel.getQuestionByName("questionValue").value = ["item1", 1];
+  expect(editor.text).toEqual("{question1} noneof ['item1', 1]");
 });
 test("Parse expressions", () => {
   var survey = new SurveyModel({
@@ -881,6 +896,9 @@ test("Change questionName in panel", () => {
 
   panel.getQuestionByName("operator").value = "equal";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual("radiogroup");
+
+  panel.getQuestionByName("operator").value = "noneof";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("checkbox");
 });
 test("Create expression from scratch", () => {
   var survey = new SurveyModel({
@@ -1012,9 +1030,12 @@ test("anyof/allof is enabled on editing, Bug #804", () => {
   const opQuestion = <QuestionDropdownModel>panel.getQuestionByName("operator");
   opQuestion.onOpenedCallBack();
   const opChoices = opQuestion.choices;
-  const itemValue = ItemValue.getItemByValue(opChoices, "anyof");
-  expect(itemValue.isEnabled).toBeFalsy();
-  expect(itemValue.isVisible).toBeFalsy();
+  const itemValueAnyOf = ItemValue.getItemByValue(opChoices, "anyof");
+  expect(itemValueAnyOf.isEnabled).toBeFalsy();
+  expect(itemValueAnyOf.isVisible).toBeFalsy();
+  const itemValueNoneOf = ItemValue.getItemByValue(opChoices, "noneof");
+  expect(itemValueNoneOf.isEnabled).toBeFalsy();
+  expect(itemValueNoneOf.isVisible).toBeFalsy();
 });
 test("remove operators", () => {
   var survey = new SurveyModel({

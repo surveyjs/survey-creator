@@ -925,7 +925,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (json.type == "expression") {
       json.type = "text";
     }
-    if (operator == "anyof") {
+    if (operator == "anyof" || operator == "noneof") {
       if (!ConditionEditor.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";
       }
