@@ -563,7 +563,7 @@ export interface GetConditionOperatorEvent {
    */
   questionName: string;
   /**
-   * A condition operator for which the event is raised: `"empty"`, `"notempty"`, `"equal"`, `"notequal"`, `"contains"`, `"notcontains"`, `"anyof"`, `"allof"`, `"greater"`, `"less"`, `"greaterorequal"`, or `"lessorequal"`.
+   * A condition operator for which the event is raised: `"empty"`, `"notempty"`, `"equal"`, `"notequal"`, `"contains"`, `"notcontains"`, `"anyof"`, `"noneof"`, `"allof"`, `"greater"`, `"less"`, `"greaterorequal"`, or `"lessorequal"`.
    */
   operator: string;
   /**

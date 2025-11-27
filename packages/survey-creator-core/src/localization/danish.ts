@@ -250,6 +250,8 @@ export var danishStrings = {
     toolboxFilteredTextPlaceholder: "Skriv for at søge...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Ingen resultater fundet",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Ingen egenskaber at vise",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
     // [Auto-translated] "No results found"
@@ -1127,6 +1129,8 @@ export var danishStrings = {
     storeDataAsText: "Gem filindhold i JSON-resultat som tekst",
     // "Maximum file size (in bytes)"
     maxSize: "Maksimal filstørrelse i bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maksimalt antal filer",
     // "Row count"
     rowCount: "Antal rækker",
     // "Columns layout"
@@ -1401,8 +1405,10 @@ export var danishStrings = {
     allowMultiple: "Aktivér upload af flere filer",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Se eksempler på uploadede billeder",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Accepterede filtyper",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Accepterede filkategorier",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Yderligere filendelser",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vent på, at overførslen er fuldført",
     // [Auto-translated] "Confirm file deletion"
@@ -2082,6 +2088,20 @@ export var danishStrings = {
       warning: "Advarsel",
       // [Auto-translated] "Informational"
       info: "Informative"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Billeder",
+      // [Auto-translated] "Videos"
+      video: "Videoer",
+      // [Auto-translated] "Audio"
+      audio: "Lyd",
+      // [Auto-translated] "Documents"
+      document: "Dokumenter",
+      // [Auto-translated] "Archives"
+      archive: "Arkiv",
+      // [Auto-translated] "Custom"
+      custom: "Sædvane"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -3089,8 +3109,10 @@ export var danishStrings = {
     storeOthersAsComment: "Vælg for at gemme værdien \"Andet\" som en separat egenskab i undersøgelsesresultater.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Brug {0} som pladsholder for den faktiske værdi.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Se beskrivelsen af attributten [accept](https://www.w3schools.com/tags/att_input_accept.asp) for at få flere oplysninger.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Vælg \"Custom\" for at tilføje dine egne filendelser øverst i de foruddefinerede kategorier.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Indtast filendelser adskilt af kommaer (f.eks. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Gælder kun for kolonner, hvor \"Celleinputtype\" er indstillet til Alternativknapgruppe eller afkrydsningsfelter.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."

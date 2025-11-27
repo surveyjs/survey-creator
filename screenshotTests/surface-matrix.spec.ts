@@ -23,7 +23,7 @@ test.describe(title, () => {
     await setAllowZoom(page, true);
     await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     for (let i = 0; i < 5; i++) {
-      await page.locator("#zoomOut button").click();
+      await page.locator(".sv-action--zoomOut button").click();
     }
     const row1Column1Cell = page.locator(".sv-dropdown_select-wrapper").first();
     const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button").first();

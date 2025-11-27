@@ -468,7 +468,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
-        css: "svc-action-bar-item--right",
+        css: "svc-action-bar-item--right sv-action--duplicate",
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
         iconSize: "auto",

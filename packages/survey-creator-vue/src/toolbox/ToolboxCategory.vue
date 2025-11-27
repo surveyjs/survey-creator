@@ -16,7 +16,10 @@
             toolbox.canCollapseCategories,
         }"
       >
-        <span class="svc-toolbox__category-title">{{ category.title }}</span>
+        <span class="svc-toolbox__category-title"><SvComponent
+        :is="'survey-string'"
+        :locString="category.locTitle"
+      ></SvComponent></span>
         <div
           v-if="toolbox.canCollapseCategories"
           class="svc-toolbox__category-header__controls"

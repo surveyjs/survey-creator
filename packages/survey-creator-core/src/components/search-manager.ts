@@ -11,6 +11,7 @@ export abstract class SearchManager extends Base {
   protected getSearchActions() {
     return [new Action({
       id: "svd-grid-search-close",
+      css: "sv-action--grid-search-close",
       iconName: "icon-clear_16x16",
       component: "sv-action-bar-item",
       title: getLocString("ed.clear"),

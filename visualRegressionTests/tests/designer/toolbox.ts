@@ -489,12 +489,12 @@
 //     await takeElementScreenshot("toolbox-search.png", toolboxElement, t, comparer);
 //     await t.typeText(Selector(".svc-toolbox input"), "single");
 //     await takeElementScreenshot("toolbox-search-entered.png", toolboxElement, t, comparer);
-//     await t.hover("#svd-grid-search-close");
+//     await t.hover(".sv-action--grid-search-close");
 //     await takeElementScreenshot("toolbox-search-close-hover.png", toolboxElement, t, comparer);
 //     await t.click(Selector(".svc-toolbox input"));
 //     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
 //     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
-//     await t.click("#svd-grid-search-close");
+//     await t.click(".sv-action--grid-search-close");
 //     await ClientFunction(() => (document.querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red")();
 //     await takeElementScreenshot("toolbox-search-background.png", toolboxElement, t, comparer);
 //   });
