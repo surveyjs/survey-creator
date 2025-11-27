@@ -108,7 +108,7 @@ export class QuestionToolboxCategory extends Base {
     super();
     this.createLocalizableString("title", this.toolbox);
   }
-  protected get locTitle(): LocalizableString { return this.getLocalizableString("title"); }
+  public get locTitle(): LocalizableString { return this.getLocalizableString("title"); }
   public get title(): string {
     return this.locTitle.text;
   }

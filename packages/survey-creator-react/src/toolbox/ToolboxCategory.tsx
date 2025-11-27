@@ -45,9 +45,10 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     if (this.toolbox.canCollapseCategories) {
       className += " svc-toolbox__category-header--collapsed";
     }
+    const title = this.renderLocString(this.category.locTitle);
     return attachKey2click(
       <div className={className} onClick={e => this.category.toggleState()}>
-        <span className="svc-toolbox__category-title">{this.category.title}</span>
+        <span className="svc-toolbox__category-title">{title}</span>
         {this.renderButton()}
       </div>
     );
