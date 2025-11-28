@@ -156,7 +156,7 @@ export class CreatorPresetEditableBase {
   private saveValuesAsDefault(model: SurveyModel) {
     this.questionNames.forEach(name => model.getQuestionByName(name).defaultValue = model.getValue(name) && JSON.parse(JSON.stringify(model.getValue(name))));
   }
-  private restoreValuesFromDefault(model: SurveyModel) {
+  protected restoreValuesFromDefault(model: SurveyModel) {
     this.questionNames.forEach(name => model.getQuestionByName(name).value = model.getQuestionByName(name).defaultValue && JSON.parse(JSON.stringify(model.getQuestionByName(name).defaultValue)));
   }
 

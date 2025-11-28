@@ -1398,65 +1398,6 @@ test("Tabs export and defaults", () => {
 
 test("Properties and applied presets", () => {
   const preset = new CreatorPreset({
-    "toolbox": {
-      "categories": [
-        {
-          "category": "choice",
-          "items": [
-            "radiogroup",
-            "rating",
-            "slider",
-            "checkbox",
-            "dropdown",
-            "tagbox",
-            "boolean",
-            "file",
-            "imagepicker",
-            "ranking"
-          ]
-        },
-        {
-          "category": "text",
-          "items": [
-            "text",
-            "comment",
-            "multipletext"
-          ]
-        },
-        {
-          "category": "containers",
-          "items": [
-            "panel",
-            "paneldynamic"
-          ]
-        },
-        {
-          "category": "matrix",
-          "items": [
-            "matrix",
-            "matrixdropdown",
-            "matrixdynamic"
-          ]
-        },
-        {
-          "category": "misc",
-          "items": [
-            "html",
-            "expression",
-            "image",
-            "signaturepad"
-          ]
-        },
-        {
-          "category": "general",
-          "items": [
-            "newrating",
-            "d2",
-            "myComposite"
-          ]
-        }
-      ]
-    },
     "propertyGrid": {
       "definition": {
         "autoGenerateProperties": false,
@@ -1513,3 +1454,33 @@ test("Properties and applied presets", () => {
   expect(definition.classes.rating).toEqual({ "properties": [], "tabs": [] });
   expect(definition.classes.selectbase.properties[0].name).toEqual("choices");
 });
+
+test("Properties reset to defaults", () => {
+  const editor = new CreatorPresetEditorModel();
+
+  const survey = editor.model;
+
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const hidden = survey.getQuestionByName("propertyGrid_matrix");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "slider";
+
+  categories.removeRow(5);
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
+  expect(hidden.value.map(c=> c.name)).toEqual(["validators", "requiredErrorText"]);
+  editor.resetToDefaults();
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(hidden.value).toEqual([]);
+
+  categories.removeRow(5);
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
+  expect(hidden.value.map(c=> c.name)).toEqual(["validators", "requiredErrorText"]);
+
+  selector.value = "survey";
+  editor.resetToDefaults();
+
+  selector.value = "slider";
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(hidden.value).toEqual([]);
+});
+

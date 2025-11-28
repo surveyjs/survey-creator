@@ -323,6 +323,12 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
   protected hasIcon(name: string) { return name == this.nameCategories; }
 
+  protected restoreValuesFromDefault(model: SurveyModel) {
+    this.isModified = false;
+    this.currentJson = this.copyJson(defaultPropertyGridDefinition);
+    this.updateMatrices(model);
+  }
+
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     if (!this.isModified) return undefined;
     return { definition: this.currentJson };
@@ -412,6 +418,13 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     }
     const selQuestion = this.getSelector(model);
     this.currentClassName = selQuestion.value;
+    this.updateMatrices(model);
+    this.firstTimeLoading = false;
+    //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
+    //this.setupCreatorToolbox(this.propCreator);
+  }
+
+  private updateMatrices(model: SurveyModel) {
     if (this.currentClassName) {
       this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
       this.setupDefaults(model);
@@ -421,9 +434,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       model.setValue(this.nameMatrix, items);
       this.propertyGridSetObj(this.currentProperties.getObj());
     }
-    this.firstTimeLoading = false;
-    //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
-    //this.setupCreatorToolbox(this.propCreator);
   }
 
   private getCurrentlyHiddenItems(categories: any) {
