@@ -250,6 +250,8 @@ export var spanishTranslation = {
     toolboxFilteredTextPlaceholder: "Escriba para buscar...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "No se han encontrado resultados",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "No hay propiedades que mostrar",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var spanishTranslation = {
     storeDataAsText: "Tienda el contenido del archivo en el resultado de JSON como texto",
     // "Maximum file size (in bytes)"
     maxSize: "Tamaño máximo de archivo en bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Número máximo de archivos",
     // "Row count"
     rowCount: "Número de filas",
     // "Columns layout"
@@ -1400,8 +1404,10 @@ export var spanishTranslation = {
     allowMultiple: "Permitir múltiples ficheros",
     // "Preview uploaded images"
     allowImagesPreview: "Previsualizar imágenes",
-    // "Accepted file types"
-    acceptedTypes: "Tipos de fichero aceptados",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Categorías de archivo aceptadas",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Extensiones de archivo adicionales",
     // "Wait for upload to complete"
     waitForUpload: "Espera a que se complete la carga",
     // "Confirm file deletion"
@@ -2082,6 +2088,20 @@ export var spanishTranslation = {
       // [Auto-translated] "Informational"
       info: "Informativo"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Imágenes",
+      // [Auto-translated] "Videos"
+      video: "Videos",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Documentos",
+      // [Auto-translated] "Archives"
+      archive: "Archivo",
+      // [Auto-translated] "Custom"
+      custom: "Costumbre"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nombre completo",
@@ -2495,6 +2515,8 @@ export var spanishTranslation = {
     notcontains: "no contiene",
     // "Any of"
     anyof: "cualquiera de",
+    // [Auto-translated] "None of"
+    noneof: "Ninguna de ellas",
     // "All of"
     allof: "todo",
     // "Greater than"
@@ -3088,8 +3110,10 @@ export var spanishTranslation = {
     storeOthersAsComment: "Seleccione esta opción para almacenar el valor de la opción \"Otro\" como una propiedad independiente en los resultados de la encuesta.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Utilice {0} como marcador de posición para el valor real.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Consulte la descripción del atributo [accept](https://www.w3schools.com/tags/att_input_accept.asp) para obtener más información.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Selecciona \"Personalizado\" para añadir tus propias extensiones de archivo encima de las categorías predefinidas.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Introduce extensiones de archivo separadas por comas (por ejemplo, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Se aplica solo a las columnas con \"Tipo de entrada de celda\" establecido en Grupo de botones de opción o Casillas de verificación.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
