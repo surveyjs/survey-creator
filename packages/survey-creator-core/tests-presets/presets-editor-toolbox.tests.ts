@@ -160,7 +160,7 @@ test("Preset edit, toolbox - empty subitems", () => {
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].subitems).toBeUndefined();
 });
 
-test("Preset edit, toolbox - empty subitems", () => {
+test("Preset edit, toolbox - empty subitems actions", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
