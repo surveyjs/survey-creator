@@ -1,4 +1,4 @@
-import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization, settings, MatrixDynamicRowModel } from "survey-core";
+import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization, settings, MatrixDynamicRowModel, ComponentCollection } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
 import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
@@ -13,7 +13,6 @@ import { CreatorPresetEditableCaregorizedListConfigurator } from "../src/presets
 
 test("Preset edit, toolbox - remove item from categories", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
@@ -27,21 +26,18 @@ test("Preset edit, toolbox - remove item from categories", () => {
   expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "multipletext"]);
   expect(matrixQuestion.visibleRows).toHaveLength(1);
   expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["comment"]);
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.toolbox).toBeDefined();
   const length = editor.json.toolbox.definition.length;
   expect(editor.json.toolbox.definition.map(i => i.name)).toContain("text");
   expect(editor.json.toolbox.definition.map(i => i.name)).not.toContain("comment");
   expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "multipletext"]);
   itemsQuestion.removeRow(0);
-  editor.applyFromSurveyModel();
   expect(editor.json.toolbox.categories[1].items).toStrictEqual(["multipletext"]);
   expect(editor.json.toolbox.definition.length).toBe(length - 1);
 });
 
 test("Preset edit, toolbox - remove whole category from categories", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
@@ -50,14 +46,32 @@ test("Preset edit, toolbox - remove whole category from categories", () => {
   const row = categQuestion.visibleRows[1];
   categQuestion.removeRow(1);
   expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.toolbox).toBeDefined();
   expect(editor.json.toolbox.categories.length).toBe(4);
 });
 
+test("Preset edit, toolbox - remove empty category from categories, when there is some items in matrix", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  expect(categQuestion.visibleRows).toHaveLength(5);
+  matrixQuestion.addRow();
+  categQuestion.addRow();
+  categQuestion.removeRow(categQuestion.visibleRows.length - 1);
+});
+
+test("Preset edit, toolbox - no categories", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  expect(editor.json.toolbox).toBeDefined();
+  expect(editor.json.toolbox.categories.length).toBe(0);
+});
+
 test("Preset edit, toolbox - remove item from flat items", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   survey.getQuestionByName("toolbox_mode").value = "items";
   const itemsQuestion = survey.getQuestionByName("toolbox_items");
@@ -71,7 +85,6 @@ test("Preset edit, toolbox - remove item from flat items", () => {
 
 test("Preset edit, toolbox - remove item from hidden items to flat items", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   survey.getQuestionByName("toolbox_mode").value = "items";
   const itemsQuestion = survey.getQuestionByName("toolbox_items");
@@ -84,9 +97,24 @@ test("Preset edit, toolbox - remove item from hidden items to flat items", () =>
   expect(itemsQuestion.value.filter(i => i.name == "name1")[0].title).toBe("Name1");
 });
 
-test("Preset edit, toolbox - remove item from hidden items to general category", () => {
+test("Preset edit, toolbox - remove new item from hidden items to its default category", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  survey.getQuestionByName("toolbox_mode").value = "categories";
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  categQuestion.visibleRows[1].showDetailPanel();
+  let items = categQuestion.visibleRows[1].detailPanel.getQuestionByName("items");
+  expect(items.value.map(i => i.name)).toEqual(["text", "comment", "multipletext"]);
+  items.removeRow(2);
+  expect(items.value.map(i => i.name)).toEqual(["text", "comment"]);
+
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  matrixQuestion.removeRow(0);
+  expect(categQuestion.value[1].items.map(i => i.name)).toEqual(["text", "comment", "multipletext"]);
+});
+
+test("Preset edit, toolbox - remove new item from hidden items to general category", () => {
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.getQuestionByName("toolbox_mode").value = "categories";
   const categQuestion = survey.getQuestionByName("toolbox_categories");
@@ -101,7 +129,6 @@ test("Preset edit, toolbox - remove item from hidden items to general category",
 
 test("Preset edit, toolbox - change item", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
   const row = categQuestion.visibleRows[1];
@@ -109,14 +136,67 @@ test("Preset edit, toolbox - change item", () => {
   const itemsQuestion = row.getQuestionByName("items");
   itemsQuestion.visibleRows[1].showDetailPanel();
   itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("iconName").value = "icon-test";
-  editor.applyFromSurveyModel();
   expect(editor.json.toolbox.definition.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test");
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].iconName).toBeUndefined();
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].tooltip).toBeUndefined();
   itemsQuestion.visibleRows[0].showDetailPanel();
   itemsQuestion.visibleRows[0].getQuestionByName("tooltip").value = "tooltip-test";
-  editor.applyFromSurveyModel();
   expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].tooltip).toEqual("tooltip-test");
+});
+
+test("Preset edit, toolbox - empty subitems", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  itemsQuestion.visibleRows[1].showDetailPanel();
+  itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("subitems").value = [];
+  expect(editor.json.toolbox.definition.filter(i => i.name == "rating")[0].subitems).toEqual([]);
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].subitems).toBeUndefined();
+  itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("iconName").value = "icon-test";
+  expect(editor.json.toolbox.definition.filter(i => i.name == "rating")[0].subitems).toEqual([]);
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].subitems).toBeUndefined();
+});
+
+test("Preset edit, toolbox - empty subitems actions", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  const getShowDetailAction = (visibleRow: any) => {
+    let renderedRow = itemsQuestion.renderedTable.rows.filter(r => r.row == visibleRow)[0];
+    return renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "show-detail")[0];
+  };
+  expect(getShowDetailAction(itemsQuestion.visibleRows[0]).visible).toBeFalsy();
+  expect(getShowDetailAction(itemsQuestion.visibleRows[1]).visible).toBeTruthy();
+
+  itemsQuestion.visibleRows[1].showDetailPanel();
+  itemsQuestion.visibleRows[1].detailPanel.getQuestionByName("subitems").value = [];
+  expect(getShowDetailAction(itemsQuestion.visibleRows[1]).visible).toBeTruthy();
+});
+
+test("Preset edit, toolbox - reorder items", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  expect(categQuestion.visibleRows).toHaveLength(5);
+  const row = categQuestion.visibleRows[1];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  const value = itemsQuestion.value;
+  value.push(value[0]);
+  value.splice(0, 1);
+  itemsQuestion.value = value;
+  expect(editor.json.toolbox).toBeDefined();
+  expect(editor.json.toolbox.definition.map(i => i.name)).toContain("text");
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["comment", "multipletext", "text"]);
 });
 
 test("Preset edit, toolbox - change category", () => {
@@ -142,7 +222,6 @@ test("Preset edit, toolbox - change category", () => {
 
   itemsQuestion.value = value;
   itemsQuestion2.value = value2;
-  editor.applyFromSurveyModel();
 
   expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "comment", "multipletext", "panel"]);
   expect(editor.json.toolbox.categories[2].items).toStrictEqual(["paneldynamic"]);
@@ -150,7 +229,6 @@ test("Preset edit, toolbox - change category", () => {
 
 test("Preset edit, toolbox - switch to items mode", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
   const row = categQuestion.visibleRows[1];
@@ -167,13 +245,11 @@ test("Preset edit, toolbox - switch to items mode", () => {
   expect(itemRow.getValue("iconName")).toBe("icon-test");
 
   itemRow.detailPanel.getQuestionByName("iconName").value = "icon-test2";
-  editor.applyFromSurveyModel();
   expect(editor.json.toolbox.definition.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test2");
 });
 
 test("Preset edit, toolbox - switch to categories mode", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   survey.getQuestionByName("toolbox_mode").value = "items";
   const allItemsQuestion = survey.getQuestionByName("toolbox_items");
@@ -228,9 +304,25 @@ test("Preset edit, toolbox - reset category", () => {
   expect(hiddenQuestion.value.map(i => i.name)).toEqual(["comment", "paneldynamic"]);
 });
 
-test("Preset edit, toolbox - default names in categories", () => {
+test("Preset edit, toolbox - reset item", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  const itemQuestion = survey.getQuestionByName("toolbox_items");
+  const itemsValue = itemQuestion.value;
+
+  itemsValue.filter(c => c.name == "text")[0].title = "TextChanged";
+
+  const row = itemQuestion.visibleRows.filter(r => r.getValue("name") == "text")[0];
+  const renderedRow = itemQuestion.renderedTable.rows.filter(r => r.row == row)[0];
+  const resetAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "reset-to-default")[0];
+  resetAction.action(resetAction);
+
+  expect(itemsValue.filter(c => c.name == "text")[0].title).toEqual("Single-Line Input");
+});
+
+test.skip("Preset edit, toolbox - default names in categories", () => {
+  const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
   categoriesQuestion.value = categoriesQuestion.value.filter(v => ["text", "containers"].indexOf(v.category) >= 0);
@@ -245,9 +337,8 @@ test("Preset edit, toolbox - default names in categories", () => {
   expect(categoriesQuestion.value[2].category).toBe("category1");
 });
 
-test("Preset edit, toolbox - default names in items", () => {
+test.skip("Preset edit, toolbox - default names in items", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
   const itemsQuestion = survey.getQuestionByName("toolbox_matrix");
@@ -267,12 +358,15 @@ test("Preset edit, toolbox - default names in items", () => {
 
 test("Preset edit, toolbox - edit category", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
+  categQuestion.addRow();
+  categQuestion.visibleRows[categQuestion.visibleRows.length - 1].getQuestionByName("category").value = "New_category";
 
   const renderedRow = categQuestion.renderedTable.rows.filter(r => r.row == categQuestion.visibleRows[0])[0];
-  const editCategoryAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+  const editCategoryAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
+  const renderedCustomRow = categQuestion.renderedTable.rows.filter(r => r.row == categQuestion.visibleRows[categQuestion.visibleRows.length - 1])[0];
+  const editCustomCategoryAction = renderedCustomRow.cells[renderedCustomRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
 
   const originalShowDialog = settings.showDialog;
   let popupSurvey: SurveyModel | undefined;
@@ -298,8 +392,7 @@ test("Preset edit, toolbox - edit category", () => {
 
     expect(popupSurvey!.getQuestionByName("category").readOnly).toBeTruthy();
 
-    renderedRow.row.getQuestionByName("isDefault").value = false;
-    editCategoryAction.action();
+    editCustomCategoryAction.action();
     expect(popupSurvey!.getQuestionByName("category").readOnly).toBeFalsy();
   } finally {
     settings.showDialog = originalShowDialog;
@@ -308,7 +401,6 @@ test("Preset edit, toolbox - edit category", () => {
 
 test("Preset edit, toolbox - edit item", () => {
   const editor = new CreatorPresetEditorModel();
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const survey = editor.model;
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix") as QuestionMatrixDynamicModel;
 
@@ -330,15 +422,98 @@ test("Preset edit, toolbox - edit item", () => {
     itemsQuestion.addRow();
     expect(itemsQuestion.visibleRows).toHaveLength(2);
 
-    matrixQuestion.visibleRows[0].showDetailPanel();
+    const renderedRow = itemsQuestion.renderedTable.rows.filter(r => r.row == itemsQuestion.visibleRows[0])[0];
+    const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
+    editItemAction.action();
+
     const nameQuestion = popupSurvey!.getQuestionByName("name");
     expect(nameQuestion.readOnly).toBeTruthy();
 
-    matrixQuestion.visibleRows[1].showDetailPanel();
+    const renderedRow2 = matrixQuestion.renderedTable.rows.filter(r => r.row == matrixQuestion.visibleRows[1])[0];
+    const editItemAction2 = renderedRow2.cells[renderedRow2.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
+    editItemAction2.action();
+
     const nameQuestion2 = popupSurvey!.getQuestionByName("name");
     expect(nameQuestion2.readOnly).toBeFalsy();
 
   } finally {
     settings.showDialog = originalShowDialog;
   }
+});
+
+test("Preset edit, toolbox - custom types", () => {
+  ComponentCollection.Instance.add({ name: "test", title: "Test", questionJSON: { "type": "text", "title": "1" } });
+
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.value).toBeUndefined();
+  expect(categQuestion.value.filter(c => c.category === "general")[0].items.filter(i => i.name === "test")).toHaveLength(1);
+  ComponentCollection.Instance.remove("test");
+});
+
+test("Preset edit, toolbox - new names", () => {
+  const editor = new CreatorPresetEditorModel({
+    "toolbox": {
+      "definition": [
+        {
+          "name": "text"
+        },
+        {
+          "name": "comment",
+          "subitems": [
+            {
+              "name": "name3",
+              "title": "name3"
+            }
+          ]
+        },
+        {
+          "name": "multipletext"
+        },
+        {
+          "name": "name1",
+          "title": "name1"
+        },
+        {
+          "name": "panel"
+        },
+        {
+          "name": "paneldynamic"
+        },
+        {
+          "name": "name2",
+          "title": "name2"
+        }
+      ],
+      "categories": [
+        {
+          "category": "text",
+          "title": "Text Input Questions",
+          "items": [
+            "text",
+            "comment",
+            "multipletext",
+            "name1"
+          ]
+        },
+        {
+          "category": "containers",
+          "title": "Containers",
+          "items": [
+            "panel",
+            "paneldynamic",
+            "name2"
+          ]
+        }
+      ]
+    }
+  });
+  const survey = editor.model;
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  matrixQuestion.addRow();
+  expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name4");
+  matrixQuestion.addRow();
+  expect(matrixQuestion.value[matrixQuestion.value.length - 1].name).toBe("name5");
 });

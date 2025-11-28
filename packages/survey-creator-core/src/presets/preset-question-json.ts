@@ -1,9 +1,9 @@
-import { QuestionCommentModel, ItemValue, Serializer, ElementFactory, ITextArea, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
+import { QuestionCommentModel, Serializer, ElementFactory, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError, JsonObject, Base, SurveyModel } from "survey-core";
 import { SurveyJSON5 } from "survey-creator-core";
 
 export class QuestionPresetJsonModel extends QuestionCommentModel {
   private jsonAreaModelValue: TextAreaModel;
-  private jsonError: boolean = false;
+  private jsonErrors: string[] = [];
   constructor(name: string) {
     super(name);
   }
@@ -13,6 +13,9 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
   protected getCssType(): string {
     return "comment";
   }
+  public getTemplate(): string {
+    return "comment";
+  }
   public get textAreaModel(): TextAreaModel {
     if (!this.jsonAreaModelValue) {
       const options = this.getTextAreaOptions();
@@ -20,13 +23,19 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
       const updateQuestionValue = (newValue: any) => {
         if (!Helpers.isTwoValueEquals(JSON.stringify(_this.value, null, 2), newValue, false, true, false)) {
           try {
-            _this.value = new SurveyJSON5().parse(newValue);
-            this.jsonError = false;
-          } catch{
-            this.jsonError = true;
+            const value = new SurveyJSON5().parse(newValue);
+            const valueToCheck = { ...value, name: "temp" };
+
+            const jsonConverter = new JsonObject();
+            jsonConverter.toObject({ elements: [valueToCheck] }, new SurveyModel());
+            this.jsonErrors = jsonConverter.errors.map((err) => err.message);
+            if (this.jsonErrors.length > 0) return;
+            _this.value = value;
+          } catch(error) {
+            this.jsonErrors = [error.message];
           }
         } else {
-          this.jsonError = false;
+          this.jsonErrors = [];
         }
       };
       options.getTextValue = () => JSON.stringify(this.value, null, 2);
@@ -38,9 +47,9 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
 
   protected onCheckForErrors(errors: Array<SurveyError>, isOnValueChanged: boolean, fireCallback: boolean): void {
     super.onCheckForErrors(errors, isOnValueChanged, fireCallback);
-    if (!!this.jsonError) {
-      errors.push(new CustomError("JSON error", this));
-    }
+    this.jsonErrors.forEach(errorMessage => {
+      errors.push(new CustomError(errorMessage, this));
+    });
   }
 
 }
@@ -54,8 +63,3 @@ Serializer.addClass("presetjson",
   "comment"
 );
 
-RendererFactory.Instance.registerRenderer(
-  "presetjson",
-  "default-comment",
-  "comment"
-);

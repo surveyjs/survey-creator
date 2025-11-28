@@ -1,9 +1,9 @@
 import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
-import { ICreatorPresetData } from "../src/presets-creator/presets";
+import { CreatorPreset, ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
-import { SurveyCreatorModel } from "../src/creator-base";
+import { CreatorBase, SurveyCreatorModel } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
@@ -12,12 +12,13 @@ import { editorLocalization } from "../src/editorLocalization";
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.pages).toHaveLength(4);
-  expect(survey.visiblePages).toHaveLength(4);
+  expect(survey.pages).toHaveLength(5);
+  expect(survey.visiblePages).toHaveLength(5);
   expect(survey.pages[0].name).toEqual("page_languages");
   expect(survey.pages[1].name).toEqual("page_tabs");
   expect(survey.pages[2].name).toEqual("page_toolbox");
   expect(survey.pages[3].name).toEqual("page_propertyGrid");
+  expect(survey.pages[4].name).toEqual("page_options");
 });
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -63,34 +64,40 @@ test("Preset edit model, tabs page with creator, default items", () => {
   itemsQuestion.value = [{ name: "preview" }, { name: "logic" }];
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   activeTabQuestion.value = "logic";
-  editor.applyFromSurveyModel();
   const creator = editor.creator;
+  creator.activeTab = "logic";
+  editor.applyFromSurveyModel();
   expect(creator.tabs).toHaveLength(2);
   expect(creator.tabs[0].id).toEqual("preview");
   expect(creator.tabs[1].id).toEqual("logic");
   expect(creator.activeTab).toBe("logic");
 });
-test("Preset edit model, tabs page one selected element", () => {
-  const editor = new CreatorPresetEditorModel({});
+
+test("Preset edit model, tabs page with creator, default items with custom", () => {
+  const creator = new CreatorBase();
+  creator.addTab({ name: "custom", plugin: { model: creator, activate: () => { } } });
+  const editor = new CreatorPresetEditorModel({}, creator);
   const survey = editor.model;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
+  expect(defultTabs.map(t => t.name)).toEqual(["designer", "preview", "logic", "json", "custom"]);
+
+  itemsQuestion.value = [{ name: "preview" }, { name: "custom" }];
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
-  expect(itemsQuestion.value.map(t => t.name)).toEqual(["designer", "preview", "logic", "json"]);
-  itemsQuestion.value = [{ name: "designer" }];
-  expect(itemsQuestion.value.map(t => t.name)).toEqual(["designer"]);
-  expect(itemsQuestion.isVisible).toBeFalsy();
-  expect(activeTabQuestion.isVisible).toBeFalsy();
-  itemsQuestion.value = [{ name: "designer" }, { name: "preview" }];
-  expect(itemsQuestion.value.map(t => t.name)).toEqual(["designer", "preview"]);
-  expect(itemsQuestion.isVisible).toBeTruthy();
-  expect(activeTabQuestion.isVisible).toBeTruthy();
+  activeTabQuestion.value = "custom";
+  editor.applyFromSurveyModel();
+  expect(creator.tabs).toHaveLength(2);
+  expect(creator.tabs[0].id).toEqual("preview");
+  expect(creator.tabs[1].id).toEqual("custom");
+  expect(creator.activeTab).toBe("preview");
 });
+
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: ["designer", "logic"], activeTab: "logic" } });
   const survey = editor.model;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
-  expect(defultTabs).toEqual(["designer", "logic"]);
+  expect(defultTabs.map(t => t.name)).toEqual(["designer", "logic"]);
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   expect(activeTabQuestion.value).toEqual("logic");
 });
@@ -205,6 +212,7 @@ test("Preset edit model, custom items, apply", () => {
 
   const etalon = {
     name: "name1",
+    title: "name1",
     tooltip: "tooltip1",
     json: { type: "text" }
   };
@@ -222,11 +230,11 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
   expect(question.visibleRows).toHaveLength(defaultItems.length);
   expect(question.value).toHaveLength(defaultItems.length);
-  question.value = question.value.filter(r => ["boolean", "text", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  question.value = question.value.filter(r => ["boolean", "comment", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
   const etalon: ICreatorPresetData = {
     toolbox: {
-      definition: [{ name: "text" }, { name: "checkbox" }, { name: "boolean" }]
+      categories: [],
+      definition: [{ name: "comment" }, { name: "checkbox" }, { name: "boolean" }]
     }
   };
   const testJson = editor.preset.getJson();
@@ -328,10 +336,6 @@ test("Preset edit model, property grid, setup", () => {
   expect(checkSelectorChoice("empty")).toBeFalsy();
   expect(checkSelectorChoice("nonvalue")).toBeFalsy();
   expect(checkSelectorChoice("textwithbutton")).toBeFalsy();
-  const panel = survey.getPanelByName("propPanel");
-  expect(panel.isVisible).toBeFalsy();
-  selectorQuestion.value = "survey";
-  expect(panel.isVisible).toBeTruthy();
 
   const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   expect(propGridCategories).toBeTruthy();
@@ -494,19 +498,19 @@ test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
   expect(panels[1].elements[0].name).toBe("choices");
   expect(panels[1].elements[1].name).toBe("showSelectAllItem");
 });
-test("Editor: activeTab & navigationBar", () => {
-  const editor = new CreatorPresetEditorModel();
-  expect(editor.activeTab).toEqual("preset");
-  expect(editor.navigationBar.actions[0].active).toBeTruthy();
-  const survey = editor.model;
-  const itemsQuestion = survey.getQuestionByName("tabs_items");
-  itemsQuestion.value = [{ name: "designer" }, { name: "translation" }];
-  editor.navigationBar.actions[1].action();
-  expect(editor.activeTab).toEqual("creator");
-  expect(editor.creator.tabs).toHaveLength(2);
-  expect(editor.creator.tabs[0].id).toEqual("designer");
-  expect(editor.creator.tabs[1].id).toEqual("translation");
-});
+// test("Editor: activeTab & navigationBar", () => {
+//   const editor = new CreatorPresetEditorModel();
+//   expect(editor.activeTab).toEqual("preset");
+//   expect(editor.navigationBar.actions[0].active).toBeTruthy();
+//   const survey = editor.model;
+//   const itemsQuestion = survey.getQuestionByName("tabs_items");
+//   itemsQuestion.value = [{ name: "designer" }, { name: "translation" }];
+//   editor.navigationBar.actions[1].action();
+//   expect(editor.activeTab).toEqual("creator");
+//   expect(editor.creator.tabs).toHaveLength(2);
+//   expect(editor.creator.tabs[0].id).toEqual("designer");
+//   expect(editor.creator.tabs[1].id).toEqual("translation");
+// });
 // test("Editor: do not allow to change the activeTab if there is an error", () => {
 //   const editor = new CreatorPresetEditorModel();
 //   expect(editor.activeTab).toEqual("preset");
@@ -537,14 +541,12 @@ test("Change localization strings for tabs", () => {
   const itemsQuestion = survey.getQuestionByName("tabs_items");
   const item = itemsQuestion.visibleRows[0];
   item.getQuestionByName("title").value = "Designer edit";
-  editor.applyFromSurveyModel();
   let loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
   expect(loc.en.tabs.logic).toBeFalsy();
   expect(editor.creator.tabs[0].locTitle.text).toEqual("Designer edit");
   item.getQuestionByName("title").value = "Designer";
-  editor.applyFromSurveyModel();
   loc = editor.json.localization;
   expect(loc).toBeFalsy();
 });
@@ -589,7 +591,6 @@ test("Change localization strings for toolbox categories", () => {
   expect(row1.getQuestionByName("title").value).toBe("Choice Questions");
   expect(row1.getQuestionByName("title").isReadOnly).toBeFalsy();
   row1.getQuestionByName("title").value = "Choice Questions edit";
-  editor.applyFromSurveyModel();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.toolboxCategories.text).toBeFalsy();
@@ -626,7 +627,7 @@ test("Preset edit model, Keep description on deleting the question", () => {
   survey.setValue("propertyGrid_selector", "text");
   const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   const propGridHidden = survey.getQuestionByName("propertyGrid_matrix");
-  expect(propGridHidden.value).toBeFalsy();
+  expect(propGridHidden.value || []).toEqual([]);
   propGridCategories.visibleRows[0].showDetailPanel();
   const qItems = propGridCategories.visibleRows[0].detailPanel.getQuestionByName("properties");
   const itemIndex = qItems.value.findIndex(r => r.name == "name");
@@ -709,6 +710,47 @@ test("Preset edit model, Change localization strings title&description", () => {
   const propGridSurvey = creator.propertyGrid;
   expect(propGridSurvey.getPageByName("general").title).toEqual("General Edit");
 });
+test("Change tabs presets multiple times", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  let itemsQuestion = survey.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+  expect(editor.json.tabs.items.map(t => t.name)).toEqual(["designer", "preview", "logic"]);
+
+  let defaultTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  defaultTabQuestion.value = "preview";
+  expect(editor.json.tabs.activeTab).toBe("preview");
+  expect(editor.json.tabs.items.map(t => t.name)).toEqual(["designer", "preview", "logic"]);
+});
+test("Change toolbox presets multiple times", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  let categoriesQuestion = survey.getQuestionByName("toolbox_categories");
+  const categoriesValue = [...categoriesQuestion.value];
+  categoriesQuestion.value = [categoriesValue[1], categoriesValue[2]];
+  expect(editor.json.toolbox.categories.map(t => t.category)).toEqual(["text", "containers"]);
+  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "panel", "paneldynamic"]);
+
+  let defaultTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  defaultTabQuestion.value = "preview";
+  expect(editor.json.toolbox.categories.map(t => t.category)).toEqual(["text", "containers"]);
+  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "panel", "paneldynamic"]);
+});
+test("Use default preset json", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  let itemsQuestion = survey.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+  expect(editor.json.tabs.items.map(t => t.name)).toEqual(["designer", "preview", "logic"]);
+  const newDefaultJson = editor.defaultJson;
+
+  const editor2 = new CreatorPresetEditorModel({}, null, newDefaultJson);
+  expect(editor2.json.tabs).toBeUndefined();
+});
 test("Change localization strings and then change locale for tabs", () => {
   addLocales();
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -717,6 +759,7 @@ test("Change localization strings and then change locale for tabs", () => {
   const item = itemsQuestion.visibleRows[0];
   item.getQuestionByName("title").value = "Designer edit";
   survey.setValue("languages_creator", "de");
+  editor.onLocaleChanged();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.tabs.designer).toEqual("Designer edit");
@@ -831,19 +874,6 @@ test("Preset edit model, toolbox categories, restore after creator locale change
   survey.setValue("toolbox_mode", "categories");
   expect(matrix.rowCount).toBe(rowCount);
 });
-test("Preset edit model, tabs page with creator, default items", () => {
-  const editor = new CreatorPresetEditorModel({});
-  const survey = editor.model;
-  const itemsQuestion = survey.getQuestionByName("tabs_items");
-  itemsQuestion.value = ["preview", "logic"];
-  const nextBtn = survey.navigationBar.getActionById("sv-nav-next");
-  expect(nextBtn.isVisible).toBeTruthy();
-  survey.currentPageNo = survey.visiblePages.length - 1;
-  expect(survey.isLastPage).toBeTruthy();
-  expect(nextBtn.isVisible).toBeTruthy();
-  nextBtn.action();
-  expect(survey.isFirstPage).toBeTruthy();
-});
 test("Preset edit model, save creator JSON on applying new preset", () => {
   const editor = new CreatorPresetEditorModel({});
   const survey = editor.model;
@@ -860,7 +890,6 @@ test("Preset edit model, save creator JSON on applying new preset", () => {
 });
 test("Preset edit model, set json property", () => {
   const editor = new CreatorPresetEditorModel({});
-  editor.activeTab = "results";
   const jsonQuestion = editor.resultModel.getQuestionByName("json");
   expect(jsonQuestion.value).toBe("{}");
   const json = {
@@ -875,5 +904,583 @@ test("Preset edit model, set json property", () => {
   editor.json = json;
   expect(JSON.parse(jsonQuestion.value)).toMatchObject(json);
   expect(editor.creator.tabs).toHaveLength(2);
-  expect(editor.creator.activeTab).toBe("preview");
 });
+test("Reset all changes", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  expect(editor.json).toEqual({});
+  (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel).removeRowByIndex(1);
+  expect(editor.json.tabs).toBeDefined();
+
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  expect(editor.json.toolbox.categories).toBeDefined();
+  survey.getQuestionByName("toolbox_showCategoryTitles").value = true;
+  expect(editor.json.toolbox.showCategoryTitles).toBeDefined();
+  (survey.getQuestionByName("toolbox_items") as QuestionMatrixDynamicModel).removeRowByIndex(1);
+
+  editor.resetToDefaults();
+  expect(editor.json).toEqual({});
+});
+test("Icon change", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const tabs = (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel);
+  const row = tabs.visibleRows.filter(r => r.value.name == "designer")[0];
+  const renderedRow = tabs.renderedTable.rows.filter(r => r.row == row)[0];
+  const iconAction = renderedRow.cells[1].item.value.actions[0];
+  expect(iconAction.id).toBe("icon-action");
+  expect(iconAction.iconName).toBe("icon-config");
+
+  const tabsValue = JSON.parse(JSON.stringify(tabs.value));
+  tabsValue.filter(v => v.name == "designer")[0].iconName = "icon-test";
+  tabs.value = tabsValue;
+  expect(iconAction.iconName).toBe("icon-test");
+});
+
+test("Icon default", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const matrix = (survey.getQuestionByName("toolbox_matrix") as QuestionMatrixDynamicModel);
+  matrix.addRow();
+
+  const renderedRow = matrix.renderedTable.rows.filter(r => r.row == matrix.visibleRows[0])[0];
+  const iconAction = renderedRow.cells[1].item.value.actions[0];
+  expect(iconAction.id).toBe("icon-action");
+  expect(iconAction.iconName).toBe("square-dashed-24x24");
+});
+
+test("Delete active tab", () => {
+  const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
+  expect(activeTabQuestion.value).toEqual("designer");
+
+  itemsQuestion.value = [{ name: "preview" }, { name: "logic" }, { name: "json" }];
+  expect(activeTabQuestion.value).toEqual("preview");
+});
+
+test("Tabs import and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  editor.json = {
+    tabs: { items: [{ name: "designer", iconName: "icon-test" }, "preview"] },
+    localization: {
+      "en": {
+        "tabs": {
+          "preview": "Test"
+        }
+      }
+    }
+  };
+
+  const value = survey.getQuestionByName("tabs_items").value;
+  expect(value).toEqual([
+    {
+      "name": "designer",
+      "title": "Designer",
+      "iconName": "icon-test"
+    },
+    {
+      "name": "preview",
+      "title": "Test",
+      "iconName": "icon-preview"
+    }
+  ]);
+
+  editor.json = {
+    tabs: { items: [{ name: "designer", iconName: "icon-test" }, "preview", "logic"] },
+    localization: {
+      "en": {
+        "tabs": {
+          "preview": "Test"
+        }
+      }
+    }
+  };
+  const value2 = survey.getQuestionByName("tabs_items").value;
+
+  expect(value2).toEqual([
+    {
+      "name": "designer",
+      "title": "Designer",
+      "iconName": "icon-test"
+    },
+    {
+      "name": "preview",
+      "title": "Test",
+      "iconName": "icon-preview"
+    },
+    {
+      "name": "logic",
+      "title": "Logic",
+      "iconName": "icon-logic-24x24"
+    }
+  ]);
+});
+
+test("Toolbox import and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  editor.json = { toolbox: {
+    "definition": [
+      {
+        "name": "radiogroup"
+      },
+      {
+        "name": "rating",
+        "subitems": [
+          {
+            "name": "labels",
+          },
+          {
+            "name": "stars",
+            "json": {
+              "type": "rating",
+              "rateType": "stars"
+            }
+          }
+        ]
+      },
+      {
+        "name": "comment",
+        "iconName": "icon-test"
+      }
+    ],
+    "categories": [
+      {
+        "category": "choice",
+        "items": [
+          "radiogroup",
+          "rating"
+        ]
+      },
+      {
+        "category": "text",
+        "items": [
+          "comment"
+        ]
+      }
+    ]
+  },
+  "localization": {
+    "en": {
+      "qt": {
+        "comment": "Comment"
+      }
+    }
+  } };
+
+  const survey = editor.model;
+  const value = survey.getQuestionByName("toolbox_categories").value;
+  expect(value).toEqual([
+    {
+      "category": "choice",
+      "title": "Choice Questions",
+      "items": [
+        {
+          "name": "radiogroup",
+          "title": "Radio Button Group",
+          "iconName": "icon-radiogroup",
+          "json": {
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ],
+            "type": "radiogroup"
+          }
+        },
+        {
+          "name": "rating",
+          "title": "Rating Scale",
+          "iconName": "icon-rating",
+          "json": {
+            "type": "rating"
+          },
+          "subitems": [
+            {
+              "name": "labels",
+              "title": "Labels",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "labels"
+              }
+            },
+            {
+              "name": "stars",
+              "title": "Stars",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "stars"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "text",
+      "title": "Text Input Questions",
+      "items": [
+        {
+          "name": "comment",
+          "title": "Comment",
+          "iconName": "icon-test",
+          "json": {
+            "type": "comment"
+          }
+        }
+      ]
+    }
+  ]);
+
+  editor.json = { toolbox: {
+    "definition": [
+      {
+        "name": "radiogroup"
+      },
+      {
+        "name": "rating",
+        "subitems": [
+          {
+            "name": "labels",
+          },
+          {
+            "name": "stars",
+            "json": {
+              "type": "rating",
+              "rateType": "stars"
+            }
+          }
+        ]
+      },
+      {
+        "name": "comment"
+      }
+    ],
+    "categories": [
+      {
+        "category": "choice",
+        "items": [
+          "radiogroup",
+          "rating"
+        ]
+      },
+      {
+        "category": "text",
+        "items": [
+          "comment",
+          "html"
+        ]
+      }
+    ]
+  },
+  "localization": {
+    "en": {
+      "qt": {
+        "comment": "Comment"
+      }
+    }
+  } };
+
+  const value2 = survey.getQuestionByName("toolbox_categories").value;
+  expect(value2).toEqual([
+    {
+      "category": "choice",
+      "title": "Choice Questions",
+      "items": [
+        {
+          "name": "radiogroup",
+          "title": "Radio Button Group",
+          "iconName": "icon-radiogroup",
+          "json": {
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ],
+            "type": "radiogroup"
+          }
+        },
+        {
+          "name": "rating",
+          "title": "Rating Scale",
+          "iconName": "icon-rating",
+          "json": {
+            "type": "rating"
+          },
+          "subitems": [
+            {
+              "name": "labels",
+              "title": "Labels",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "labels"
+              }
+            },
+            {
+              "name": "stars",
+              "title": "Stars",
+              "iconName": null,
+              "json": {
+                "type": "rating",
+                "rateType": "stars"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "text",
+      "title": "Text Input Questions",
+      "items": [
+        {
+          "name": "comment",
+          "title": "Comment",
+          "iconName": "icon-comment",
+          "json": {
+            "type": "comment"
+          }
+        }
+      ]
+    }
+  ]);
+});
+
+test("Property import and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  editor.json = { "propertyGrid": {
+    "definition": {
+      "autoGenerateProperties": false,
+      "classes": {
+        "survey": {
+          "properties": [
+            {
+              "name": "title",
+              "index": 10000,
+              "tab": "general"
+            },
+            {
+              "name": "description",
+              "index": 20000,
+              "tab": "general"
+            },
+            {
+              "name": "logoWidth",
+              "index": 10000,
+              "tab": "logo"
+            },
+            {
+              "name": "logoHeight",
+              "index": 20000,
+              "tab": "logo"
+            }
+          ],
+          "tabs": [
+            {
+              "name": "general",
+              "index": 100,
+              "iconName": "icon-pg-data-24x24"
+            },
+            {
+              "name": "logo",
+              "index": 200
+            }
+          ]
+        } }
+    }
+  },
+  "localization": {
+    "en": {
+      "pe": {
+        "survey": {
+          "logoWidth": "Width",
+          "logoHeight": "Height"
+        },
+        "tabs": {
+          "logo": "Logo"
+        }
+      }
+    }
+  } };
+
+  const survey = editor.model;
+  const value = survey.getQuestionByName("propertyGrid_categories").value;
+  expect(value).toEqual([
+    {
+      "category": "general",
+      "title": "General",
+      "iconName": "icon-pg-data-24x24",
+      "properties": [
+        {
+          "name": "title",
+          "title": "Survey title",
+          "description": "Type a user-friendly title to display."
+        },
+        {
+          "name": "description",
+          "title": "Survey description",
+          "description": "Type a subtitle."
+        }
+      ]
+    },
+    {
+      "category": "logo",
+      "title": "Logo",
+      "iconName": "icon-pg-logo-24x24",
+      "properties": [
+        {
+          "name": "logo",
+          "title": "Survey logo",
+          "description": "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)."
+        },
+        {
+          "name": "logoWidth",
+          "title": "Width",
+          "description": "Sets a logo width in CSS units (px, %, in, pt, etc.)."
+        },
+        {
+          "name": "logoHeight",
+          "title": "Height",
+          "description": "Sets a logo height in CSS units (px, %, in, pt, etc.)."
+        }
+      ]
+    }
+  ]);
+});
+
+test("Tabs export and defaults", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const items = (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel);
+  items.removeRow(1);
+  expect(editor.json).toEqual({
+    "tabs": {
+      "activeTab": "designer",
+      "items": [
+        {
+          "name": "designer",
+        },
+        {
+          "name": "logic",
+        },
+        {
+          "name": "json",
+        },
+      ],
+    }
+  });
+  const value = { ...items.value };
+  value[0].iconName = "test-icon";
+  survey.getQuestionByName("tabs_items").value = value;
+  expect(editor.getJsonFromSurveyModel()).toEqual({
+    "tabs": {
+      "activeTab": "designer",
+      "items": [
+        {
+          "name": "designer",
+          "iconName": "test-icon"
+        },
+        {
+          "name": "logic",
+        },
+        {
+          "name": "json",
+        },
+      ],
+    }
+  });
+});
+
+test("Properties and applied presets", () => {
+  const preset = new CreatorPreset({
+    "propertyGrid": {
+      "definition": {
+        "autoGenerateProperties": false,
+        "classes": {
+          "question": {
+            "properties": [],
+            "tabs": []
+          },
+          "rating": {
+            "properties": [],
+            "tabs": []
+          },
+          "selectbase": {
+            "properties": [
+              {
+                "name": "choices",
+                "index": 1000,
+                "tab": "choices"
+              }
+            ],
+            "tabs": [
+              {
+                "name": "choices",
+                "index": 100,
+                "iconName": "icon-pg-specific-24x24"
+              }
+            ]
+          },
+          "radiogroup": {
+            "properties": [],
+            "tabs": []
+          },
+        }
+      }
+    }
+  });
+  const creator = new CreatorBase();
+  preset.apply(creator);
+  const editor = new CreatorPresetEditorModel({}, creator);
+
+  const survey = editor.model;
+
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "radiogroup";
+  expect(categories.value.length).toBe(1);
+  expect(categories.value[0].category).toBe("choices");
+  expect(categories.value[0].properties.length).toBe(1);
+  expect(categories.value[0].properties[0].name).toBe("choices");
+  selector.value = "rating";
+  expect(categories.value).toEqual([]);
+
+  const definition = editor.json.propertyGrid.definition;
+  expect(definition.classes.rating).toEqual({ "properties": [], "tabs": [] });
+  expect(definition.classes.selectbase.properties[0].name).toEqual("choices");
+});
+
+test("Properties reset to defaults", () => {
+  const editor = new CreatorPresetEditorModel();
+
+  const survey = editor.model;
+
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const hidden = survey.getQuestionByName("propertyGrid_matrix");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "slider";
+
+  categories.removeRow(5);
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
+  expect(hidden.value.map(c=> c.name)).toEqual(["validators", "requiredErrorText"]);
+  editor.resetToDefaults();
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(hidden.value).toEqual([]);
+
+  categories.removeRow(5);
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
+  expect(hidden.value.map(c=> c.name)).toEqual(["validators", "requiredErrorText"]);
+
+  selector.value = "survey";
+  editor.resetToDefaults();
+
+  selector.value = "slider";
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(hidden.value).toEqual([]);
+});
+

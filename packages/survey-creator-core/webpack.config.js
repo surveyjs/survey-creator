@@ -104,15 +104,10 @@ var buildPlatformJson = {
       "default": "./themes/*.js",
     },
     "./presets": {
-      "types": "./presets-typings/typings/entries/index.d.ts",
-      "import": "./fesm/survey-creator-core-presets.mjs",
-      "require": "./survey-creator-core-presets.js"
-    },
-    "./presets/*": {
-      "types": "./presets-typings/typings/*.d.ts",
-      "import": "./fesm/survey-creator-core-presets/*.mjs",
-      "require": "./survey-creator-core-presets/*.js"
-    },
+      "types": "./presets/index.d.ts",
+      "import": "./fesm/presets/index.mjs",
+      "require": "./presets/index.js"
+    }
   },
   devDependencies: {},
 };
