@@ -1395,3 +1395,114 @@ test("Tabs export and defaults", () => {
     }
   });
 });
+
+test("Properties and applied presets", () => {
+  const editor = new CreatorPresetEditorModel({
+    "toolbox": {
+      "categories": [
+        {
+          "category": "choice",
+          "items": [
+            "radiogroup",
+            "rating",
+            "slider",
+            "checkbox",
+            "dropdown",
+            "tagbox",
+            "boolean",
+            "file",
+            "imagepicker",
+            "ranking"
+          ]
+        },
+        {
+          "category": "text",
+          "items": [
+            "text",
+            "comment",
+            "multipletext"
+          ]
+        },
+        {
+          "category": "containers",
+          "items": [
+            "panel",
+            "paneldynamic"
+          ]
+        },
+        {
+          "category": "matrix",
+          "items": [
+            "matrix",
+            "matrixdropdown",
+            "matrixdynamic"
+          ]
+        },
+        {
+          "category": "misc",
+          "items": [
+            "html",
+            "expression",
+            "image",
+            "signaturepad"
+          ]
+        },
+        {
+          "category": "general",
+          "items": [
+            "newrating",
+            "d2",
+            "myComposite"
+          ]
+        }
+      ]
+    },
+    "propertyGrid": {
+      "definition": {
+        "autoGenerateProperties": false,
+        "classes": {
+          "question": {
+            "properties": [],
+            "tabs": []
+          },
+          "rating": {
+            "properties": [],
+            "tabs": []
+          },
+          "selectbase": {
+            "properties": [
+              {
+                "name": "choices",
+                "index": 1000,
+                "tab": "choices"
+              }
+            ],
+            "tabs": [
+              {
+                "name": "choices",
+                "index": 100,
+                "iconName": "icon-pg-specific-24x24"
+              }
+            ]
+          },
+          "radiogroup": {
+            "properties": [],
+            "tabs": []
+          },
+        }
+      }
+    }
+  });
+
+  const survey = editor.model;
+
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "radiogroup";
+  expect(categories.value.length).toBe(1);
+  expect(categories.value[0].category).toBe("choices");
+  expect(categories.value[0].properties.length).toBe(1);
+  expect(categories.value[0].properties[0].name).toBe("choices");
+  selector.value = "rating";
+  expect(categories.value).toEqual([]);
+});

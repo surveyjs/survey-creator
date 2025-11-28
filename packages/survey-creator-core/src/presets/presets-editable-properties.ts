@@ -102,8 +102,9 @@ export class SurveyQuestionPresetPropertiesDetail {
     return res;
   }
   public getInitialJson(useDefaults: boolean) {
-    const pgJSON = (useDefaults ? this.propertyGridDefaultValue : this.propertyGridValue).survey.toJSON();
-    return pgJSON.pages.map(p => {
+    const propertyGrid = useDefaults ? this.propertyGridDefaultValue : this.propertyGridValue;
+    const pgJSON = propertyGrid.survey.toJSON();
+    return pgJSON.pages.filter(p => p.name != propertyGrid.placeholderPageName).map(p => {
       return {
         category: p.name,
         title: p.title,
@@ -268,6 +269,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               title: getLocString("presets.propertyGrid.propertyGrid"),
               allowRowReorder: true,
               addRowButtonLocation: "top",
+              rowCount: 0,
               allowAddRows: true,
               noRowsText: getLocString("presets.propertyGrid.noCategoriesText"),
               addRowText: getLocString("presets.propertyGrid.addCustomCategory"),
