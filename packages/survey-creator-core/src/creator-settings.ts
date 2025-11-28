@@ -37,6 +37,7 @@ export var settings = {
     contains: ["checkbox", "text", "comment"],
     notcontains: ["checkbox", "text", "comment"],
     anyof: ["selectbase"],
+    noneof: ["selectbase"],
     allof: ["checkbox"],
     greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     less: ["!checkbox", "!imagepicker", "!boolean", "!file"],

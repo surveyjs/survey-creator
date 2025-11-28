@@ -250,6 +250,8 @@ export var msStrings = {
     toolboxFilteredTextPlaceholder: "Taip untuk mencari...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Tiada keputusan ditemui",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Tiada sifat untuk dipaparkan",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var msStrings = {
     storeDataAsText: "Simpan kandungan fail dalam keputusan JSON sebagai teks",
     // "Maximum file size (in bytes)"
     maxSize: "Maksimum saiz fail dalam bait",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Bilangan fail maksimum",
     // "Row count"
     rowCount: "Kiraan baris",
     // "Columns layout"
@@ -1400,8 +1404,10 @@ export var msStrings = {
     allowMultiple: "Dayakan muat naik berbilang fail",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Pratonton imej yang dimuat naik",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Jenis fail yang diterima",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Kategori fail yang diterima",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Sambungan fail tambahan",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Tunggu muat naik selesai",
     // [Auto-translated] "Confirm file deletion"
@@ -2082,6 +2088,20 @@ export var msStrings = {
       // [Auto-translated] "Informational"
       info: "Bermaklumat"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Imej",
+      // [Auto-translated] "Videos"
+      video: "Video",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Dokumen",
+      // [Auto-translated] "Archives"
+      archive: "Arkib",
+      // [Auto-translated] "Custom"
+      custom: "Tersuai"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nama Penuh",
@@ -2495,6 +2515,8 @@ export var msStrings = {
     notcontains: "tidak mengandungi",
     // "Any of"
     anyof: "sebarang",
+    // [Auto-translated] "None of"
+    noneof: "Tiada satu pun daripada",
     // "All of"
     allof: "semua",
     // "Greater than"
@@ -3088,8 +3110,10 @@ export var msStrings = {
     storeOthersAsComment: "Pilih untuk menyimpan nilai pilihan \"Lain-lain\" sebagai harta berasingan dalam hasil tinjauan.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Gunakan {0} sebagai ruang letak untuk nilai sebenar.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Rujuk perihalan atribut [terima](https://www.w3schools.com/tags/att_input_accept.asp) untuk maklumat lanjut.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Pilih \"Tersuai\" untuk menambah sambungan fail anda sendiri di atas kategori yang telah ditetapkan.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Masukkan sambungan fail yang dipisahkan dengan koma (cth, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Menyusun pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Digunakan hanya untuk lajur dengan \"Jenis input sel\" ditetapkan kepada Kumpulan Butang Radio atau Kotak Semak.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."

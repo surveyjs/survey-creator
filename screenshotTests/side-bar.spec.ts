@@ -16,7 +16,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 750, height: 700 });
     await page.locator(".sv-action-bar-item[title=\"Show Panel\"]").click();
-    await page.locator(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item").click();
+    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
 
     await compareScreenshot(page, ".svc-side-bar__container", "side-bar-object-selector.png");
   });
@@ -29,7 +29,7 @@ test.describe(title, () => {
     await page.locator(".svc-page-navigator__selector").click();
     await getListItemByText(page, "educationalNeeds").click();
     await page.locator(".svc-string-editor__input").filter({ hasText: "Patient Name" }).click();
-    await page.locator(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item").click();
+    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
     await page.waitForTimeout(1000);
 
     await compareScreenshot(page, objectSelectorContent, "side-bar-object-selector-with-selected-item.png");
@@ -181,7 +181,7 @@ test.describe(title, () => {
       window["Survey"]._setIsTouch(true);
       window["creator"].showOneCategoryInPropertyGrid = true;
     });
-    await page.locator("#svd-settings").click();
+    await page.locator(".sv-action--svd-settings").click();
     await page.locator(".spg-question[data-name='locale'] .spg-dropdown").locator(".sd-editor-chevron-button").click();
     await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
     await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");

@@ -63,8 +63,9 @@
       "Title": "Customize Question Types"
     },
     {
-      "Name": "api",
+      "Name": "api-reference",
       "Title": "Survey Creator API",
+      "UseInPath": true,
       "Items": [
         {
           "Name": "surveycreatormodel",

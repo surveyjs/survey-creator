@@ -915,3 +915,10 @@ test("Get default toolbox categories", (): any => {
   expect(categories.map(c => ({ name: c.name, items: c.items.map(i => i.name) }))).toEqual([{ name: "text", items: ["text"] }, { name: "general", items: ["test"] }]);
   ComponentCollection.Instance.remove("test");
 });
+test("toolbox category localization Bug#7284", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.showCategoryTitles = true;
+  expect(creator.toolbox.categories[0].title).toBe("Choice Questions");
+  creator.locale = "de";
+  expect(creator.toolbox.categories[0].title).toBe("Auswahl-Fragen");
+});

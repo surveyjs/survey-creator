@@ -493,6 +493,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     const actionData: IAction = {
       id: "convertTo",
+      css: "sv-action--convertTo",
       enabled: true,
       visibleIndex: 0,
       title: !!currItem ? currItem.title : editorLocalization.getString("qt." + this.currentType),
@@ -723,7 +724,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const actionSetup = {
       id: "isrequired",
       ariaRole: "checkbox",
-      css: "svc-action-bar-item--right",
+      css: "svc-action-bar-item--right sv-action--isrequired",
       innerCss: "svc-required-action",
       visibleIndex: 20,
       iconName: "icon-required",

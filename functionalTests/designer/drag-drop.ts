@@ -425,7 +425,7 @@ test("Drag Drop to collapsed panel", async (t) => {
     ]
   };
 
-  const qCollapseButton = Selector(".svc-question__content #collapse");
+  const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
   await t.click(qCollapseButton.filterVisible());
 
   const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
@@ -478,7 +478,7 @@ test("Drag Drop to selected collapsed panel", async (t) => {
   };
   await setJSON(json);
 
-  const qCollapseButton = Selector(".svc-question__content #collapse");
+  const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
   await t.click(qCollapseButton.filterVisible());
 
   const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
@@ -527,7 +527,7 @@ test("Drag Drop to collapsed dynamic panel", async (t) => {
   };
   await setJSON(json);
 
-  const qCollapseButton = Selector(".svc-question__content #collapse");
+  const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
   await t.click(qCollapseButton.filterVisible());
 
   const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
@@ -573,7 +573,7 @@ test("Drag Drop to collapsed page", async (t) => {
   };
   await setJSON(json);
 
-  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area #collapse button");
+  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area .sv-action-bar-item--collapse button");
   await t.click(pCollapseButton.filterVisible());
 
   const Page = Selector(".svc-page");

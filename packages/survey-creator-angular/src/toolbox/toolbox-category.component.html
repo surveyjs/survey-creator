@@ -4,7 +4,7 @@
     <div class="svc-toolbox__category-header-wrapper">
       <div class="svc-toolbox__category-header"
         (click)="category.toggleState()" [key2click] [class.svc-toolbox__category-header--collapsed]="toolbox.canCollapseCategories" >
-        <span class="svc-toolbox__category-title">{{category.title}}</span>
+        <span class="svc-toolbox__category-title" [model]="category.locTitle" sv-ng-string></span>
         <div *ngIf="toolbox.canCollapseCategories" class="svc-toolbox__category-header__controls">
           <svg [iconName]="category.iconName" [class]="category.iconClassName" [size]="'auto'" sv-ng-svg-icon></svg>
         </div>

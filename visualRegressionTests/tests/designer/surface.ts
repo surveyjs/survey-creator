@@ -62,8 +62,8 @@
 
 //     await t
 //       .click(Selector(".svc-question__content"), { offsetX: 5, offsetY: 5 })
-//       .expect(Selector("#convertTo").visible).ok()
-//       .click(Selector("#convertTo"))
+//       .expect(Selector(".sv-action--convertTo").visible).ok()
+//       .click(Selector(".sv-action--convertTo"))
 //       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
 //     await takeElementScreenshot("convert-to-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
 //   });
@@ -91,8 +91,8 @@
 
 //     await t
 //       .click(Selector(".svc-question__content"), { offsetX: 5, offsetY: 5 })
-//       .expect(Selector("#convertTo").visible).ok()
-//       .click(Selector("#convertTo"))
+//       .expect(Selector(".sv-action--convertTo").visible).ok()
+//       .click(Selector(".sv-action--convertTo"))
 //       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
 //     await takeElementScreenshot("convert-to-popup-panel.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
 //   });
@@ -164,8 +164,8 @@
 //     await setJSON(surveyJSON);
 //     await t
 //       .click(Selector(".svc-question__content"), { offsetX: 5, offsetY: 5 })
-//       .expect(Selector("#convertTo").visible).ok()
-//       .click(Selector("#convertTo"))
+//       .expect(Selector(".sv-action--convertTo").visible).ok()
+//       .click(Selector(".sv-action--convertTo"))
 //       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
 //     await ClientFunction(() => document.body.focus())();
 //     await takeElementScreenshot("convert-to-popup-mobile.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
@@ -222,7 +222,7 @@
 //     await t.resizeWindow(1920, 900);
 //     await setAllowZoom(true);
 //     await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
-//     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
+//     for (let i = 0; i < 5; i++) { await t.click(Selector(".sv-action--zoomOut").find("button")); }
 //     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
 //     const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
@@ -2291,7 +2291,7 @@
 //     });
 //     await t.hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 })
 //       .click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 })
-//       .click(Selector("#convertTo").nth(2))
+//       .click(Selector(".sv-action--convertTo").nth(2))
 //       .click(getListItemByText("Yes/No (Boolean)"))
 //       .hover(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
 //       .click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
@@ -2348,7 +2348,7 @@
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
 //     const qContent = Selector(".svc-question__content");
-//     const qCollapseButton = Selector(".svc-question__content #collapse");
+//     const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
 //     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
 //     await t.click(qCollapseButton.filterVisible());
 //     await takeElementScreenshot("question-adorner-collapsed.png", qContent.nth(0), t, comparer);
@@ -2410,7 +2410,7 @@
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
 //     const qContent = Selector(".svc-question__content");
-//     const qCollapseButton = Selector(".svc-question__content #collapse");
+//     const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
 //     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
 //     await t.click(qCollapseButton.filterVisible());
 //     await takeElementScreenshot("question-adorner-no-title-collapsed.png", qContent.nth(0), t, comparer);
@@ -2443,7 +2443,7 @@
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
 //     const qContent = Selector(".svc-page__content");
-//     const qCollapseButton = Selector(".svc-page__content #collapse");
+//     const qCollapseButton = Selector(".svc-page__content .sv-action-bar-item--collapse");
 //     await t.hover(qContent.nth(0), { offsetX: 10, offsetY: 10 });
 //     await t.expect(qContent.nth(0).hasClass("svc-hovered")).ok();
 //     await takeElementScreenshot("page-adorner-expanded.png", ".svc-tab-designer_content", t, comparer);
@@ -2475,7 +2475,7 @@
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
 //     const qContent = Selector(".svc-question__content");
-//     const qCollapseButton = Selector(".svc-question__content #collapse");
+//     const qCollapseButton = Selector(".svc-question__content .sv-action-bar-item--collapse");
 //     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
 //     await t.click(qCollapseButton.filterVisible());
 //     await takeElementScreenshot("question-adorner-collapsed-mobile.png", qContent.nth(0), t, comparer);
@@ -2519,7 +2519,7 @@
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
 //     const qContent = Selector(".svc-page__content");
-//     const qCollapseButton = Selector(".svc-page__content #collapse");
+//     const qCollapseButton = Selector(".svc-page__content .sv-action-bar-item--collapse");
 //     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
 //     await t.click(qCollapseButton.filterVisible());
 //     await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
@@ -2591,12 +2591,12 @@
 //     await setShowSidebar(false);
 //     await setExpandCollapseButtonVisibility("onhover");
 //     await setJSON(json);
-//     await t.click("#lockQuestions");
-//     await t.hover("#collapseAll");
+//     await t.click(".sv-action--lockQuestions");
+//     await t.hover(".sv-action--collapse-all");
 //     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
 
 //     await setAllowZoom(true);
-//     await t.hover("#zoomOut");
+//     await t.hover(".sv-action--zoomOut");
 //     await takeElementScreenshot("design-surface-toolbar-with-zoom.png", Selector(".svc-tab-designer__surface-toolbar"), t, comparer);
 //   });
 // });
@@ -2706,7 +2706,7 @@
 //     await t.click(qContent, { offsetX: 5, offsetY: 5 });
 
 //     await t.resizeWindow(1024, 3700);
-//     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
+//     for (let i = 0; i < 5; i++) { await t.click(Selector(".sv-action--zoomOut").find("button")); }
 //     await t.resizeWindow(600, 1900);
 //     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
 //   });

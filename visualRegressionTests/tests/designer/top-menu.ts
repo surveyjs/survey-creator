@@ -26,20 +26,20 @@
 //     await takeElementScreenshot("top-menu-undo-active.png", topBarElement, t, comparer);
 
 //     await t
-//       .hover(Selector("#action-undo"));
+//       .hover(Selector(".sv-action--action-undo"));
 //     await takeElementScreenshot("top-menu-undo-active-hovered.png", topBarElement, t, comparer);
 
 //     await t
-//       .hover(Selector("#action-redo"));
+//       .hover(Selector(".sv-action--action-redo"));
 //     await takeElementScreenshot("top-menu-redo-inactive-hovered.png", topBarElement, t, comparer);
 
 //     await t
-//       .click(Selector("#action-undo .sv-action-bar-item"))
+//       .click(Selector(".sv-action--action-undo .sv-action-bar-item"))
 //       .click(Selector(".svc-side-bar .spg-row").nth(1));
 //     await takeElementScreenshot("top-menu-undo-and-redo-active.png", topBarElement, t, comparer);
 
 //     await t
-//       .click(Selector("#action-undo .sv-action-bar-item"))
+//       .click(Selector(".sv-action--action-undo .sv-action-bar-item"))
 //       .click(Selector(".svc-side-bar .spg-row").nth(1));
 //     await takeElementScreenshot("top-menu-redo-active.png", topBarElement, t, comparer);
 
