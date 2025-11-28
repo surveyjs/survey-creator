@@ -1,6 +1,6 @@
 import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
-import { ICreatorPresetData } from "../src/presets-creator/presets";
+import { CreatorPreset, ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
 import { CreatorBase, SurveyCreatorModel } from "../src/creator-base";
@@ -1397,7 +1397,7 @@ test("Tabs export and defaults", () => {
 });
 
 test("Properties and applied presets", () => {
-  const editor = new CreatorPresetEditorModel({
+  const preset = new CreatorPreset({
     "toolbox": {
       "categories": [
         {
@@ -1493,6 +1493,9 @@ test("Properties and applied presets", () => {
       }
     }
   });
+  const creator = new CreatorBase();
+  preset.apply(creator);
+  const editor = new CreatorPresetEditorModel({}, creator);
 
   const survey = editor.model;
 
@@ -1505,4 +1508,8 @@ test("Properties and applied presets", () => {
   expect(categories.value[0].properties[0].name).toBe("choices");
   selector.value = "rating";
   expect(categories.value).toEqual([]);
+
+  const definition = editor.json.propertyGrid.definition;
+  expect(definition.classes.rating).toEqual({ "properties": [], "tabs": [] });
+  expect(definition.classes.selectbase.properties[0].name).toEqual("choices");
 });

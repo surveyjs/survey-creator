@@ -443,8 +443,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.getSelector(model).value = "survey";
-    this.isModified = !!json?.definition;
-    this.currentJson = json?.definition || this.copyJson(creator.getPropertyGridDefinition() || defaultPropertyGridDefinition);
+    const defaultJson = creator.getPropertyGridDefinition();
+    this.isModified = !!json?.definition || !defaultJson || JSON.stringify(defaultJson) !== JSON.stringify(defaultPropertyGridDefinition);
+    this.currentJson = json?.definition || this.copyJson(defaultJson || defaultPropertyGridDefinition);
     this.currentJson.autoGenerateProperties = false;
     this.updateOnValueChangedCore(model, this.nameSelector);
   }
