@@ -2515,6 +2515,8 @@ export var skStrings = {
     notcontains: "neobsahuje",
     // "Any of"
     anyof: "ktorákoľvek",
+    // [Auto-translated] "None of"
+    noneof: "Žiadna z",
     // "All of"
     allof: "všetky",
     // "Greater than"
