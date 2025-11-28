@@ -3,7 +3,7 @@ import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { CreatorThemes, PredefinedCreatorThemes, registerCreatorTheme } from "../../src/creator-theme/creator-themes";
 import { CreatorTester } from "../creator-tester";
-import Default from "../../src/themes/default-light-internal";
+import Default from "../../src/themes/default-light";
 
 test("onCreatorThemePropertyChanged event", (): any => {
   const creator: CreatorTester = new CreatorTester();

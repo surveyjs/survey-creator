@@ -9,6 +9,7 @@ import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 import { TestLocalizationComponent } from "./test/localization.component";
 import { ThemeTabComponent } from "./test/test-theme-tab.component";
 import { NoLicenseComponent } from "./test/test-no-license.component";
+import { CreatorThemesComponent } from "./test/creator-themes.component";
 import { ExampleComponent } from "./example.component";
 
 const routes = [
@@ -20,7 +21,8 @@ const routes = [
   { path: "testCafe/testcafe_localized_ui", component: TestLocalizationComponent },
   { path: "testCafe/dropdown-collapse-view", component: TestDropdownCollapseComponent },
   { path: "testCafe/testcafe-theme-tab", component: ThemeTabComponent },
-  { path: "testCafe/testcafe-no-license", component: NoLicenseComponent },
+  { path: "testCafe/testcafe-no-license", component: NoLicenseComponent }, 
+  { path: "testCafe/creator-themes", component: CreatorThemesComponent }, 
   { path: "", component: ExampleComponent }
 ];
 

@@ -88,7 +88,7 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
 import { deprecate } from "util";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
-import Default from "./themes/default-light-internal";
+import Default from "./themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
