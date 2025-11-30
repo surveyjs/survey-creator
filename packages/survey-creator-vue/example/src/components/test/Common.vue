@@ -26,7 +26,7 @@ creator.value["animationEnabled"] = false;
 if(props.options.propertyGridNavigationMode != 'buttons') {
   creator.value.showOneCategoryInPropertyGrid = false;
 }
-creator.value.allowZoom = props.options === undefined ? false : props.options.allowZoom!;
+creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.options.allowZoom!;
 (window as any).updateCreatorModel = (options: any, json: any) => {
   (window as any).prevCreator = creator.value;
   const newCreator = new SurveyCreatorModel(options);
@@ -38,7 +38,7 @@ creator.value.allowZoom = props.options === undefined ? false : props.options.al
   if(props.options.propertyGridNavigationMode != 'buttons') {
     creator.value.showOneCategoryInPropertyGrid = false;
   }
-  creator.value.allowZoom = props.options === undefined ? false : props.options.allowZoom!;
+  creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.options.allowZoom!;
   (window as any).creator = creator.value;
 }
 </script>
