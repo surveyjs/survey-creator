@@ -10,6 +10,7 @@ import { TestLocalizationComponent } from "./test/localization.component";
 import { ThemeTabComponent } from "./test/test-theme-tab.component";
 import { NoLicenseComponent } from "./test/test-no-license.component";
 import { PresetsComponent } from "./test/presets.component";
+import { CreatorThemesComponent } from "./test/creator-themes.component";
 import { ExampleComponent } from "./example.component";
 
 const routes = [
@@ -23,6 +24,7 @@ const routes = [
   { path: "testCafe/testcafe-theme-tab", component: ThemeTabComponent },
   { path: "testCafe/testcafe-no-license", component: NoLicenseComponent },
   { path: "testCafe/presets", component: PresetsComponent },
+  { path: "testCafe/creator-themes", component: CreatorThemesComponent }, 
   { path: "", component: ExampleComponent }
 ];
 

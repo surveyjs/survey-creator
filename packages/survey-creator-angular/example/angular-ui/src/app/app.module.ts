@@ -19,10 +19,11 @@ import { TestLocalizationComponent } from "./test/localization.component";
 import { ThemeTabComponent } from "./test/test-theme-tab.component";
 import { NoLicenseComponent } from "./test/test-no-license.component";
 import { PresetsComponent } from "./test/presets.component";
+import { CreatorThemesComponent } from "./test/creator-themes.component";
 
 @NgModule({
   declarations: [
-    AppComponent, ExampleComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent, TestDropdownCollapseComponent, TestLocalizationComponent, ThemeTabComponent, NoLicenseComponent, PresetsComponent
+    AppComponent, ExampleComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent, TestDropdownCollapseComponent, TestLocalizationComponent, ThemeTabComponent, NoLicenseComponent, PresetsComponent, CreatorThemesComponent
   ],
   imports: [
     BrowserModule, SurveyCreatorModule, FormsModule, SurveyModule, AppRoutingModule, PresetsModule

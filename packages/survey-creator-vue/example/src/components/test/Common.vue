@@ -23,8 +23,10 @@ creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
 (window as any).creator = creator.value;
 creator.value.tabResponsivenessMode = "menu";
 creator.value["animationEnabled"] = false;
-creator.value.showOneCategoryInPropertyGrid = false;
-creator.value.allowZoom = false;
+if(props.options.propertyGridNavigationMode != 'buttons') {
+  creator.value.showOneCategoryInPropertyGrid = false;
+}
+creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.options.allowZoom!;
 (window as any).updateCreatorModel = (options: any, json: any) => {
   (window as any).prevCreator = creator.value;
   const newCreator = new SurveyCreatorModel(options);
@@ -33,8 +35,10 @@ creator.value.allowZoom = false;
   creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
-  creator.value.showOneCategoryInPropertyGrid = false;
-  creator.value.allowZoom = false;
+  if(props.options.propertyGridNavigationMode != 'buttons') {
+    creator.value.showOneCategoryInPropertyGrid = false;
+  }
+  creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.options.allowZoom!;
   (window as any).creator = creator.value;
 }
 </script>
