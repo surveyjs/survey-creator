@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
-import { SurveyCreatorModel, TabbedMenuItem } from "survey-creator-core";
+import { SurveyCreatorModel, TabbedMenuItem, cssVariablesToString } from "survey-creator-core";
 
 @Component({
   selector: "survey-creator",
@@ -45,6 +45,9 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   }
   trackTabBy(_: number, tab: TabbedMenuItem) {
     return tab.id;
+  }
+  public get themeVariablesString(): string {
+    return cssVariablesToString(this.creator.themeVariables);
   }
 }
 

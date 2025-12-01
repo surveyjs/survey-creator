@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { PageModel, SurveyModel } from "survey-core";
-import { TabDesignerViewModel } from "survey-creator-core";
+import { TabDesignerViewModel, cssVariablesToString } from "survey-creator-core";
 import { BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -21,5 +21,8 @@ export class DesignerSurveyComponent extends BaseAngular<SurveyModel> {
   }
   public trackPageBy(index: number, page: PageModel): string {
     return page.id;
+  }
+  public get surfaceCssVariablesString(): string {
+    return cssVariablesToString(this.model.surfaceCssVariables);
   }
 }
