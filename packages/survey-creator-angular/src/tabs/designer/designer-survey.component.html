@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div [class]="model.designerCss" [style.maxWidth]="survey.renderedWidth" [attr.style]="surfaceCssVariablesString">
+  <div [class]="model.designerCss" [attr.style]="surfaceCssVariablesString">
     <div *ngIf="creator.showSurveyHeader" class="svc-designer-header">
       <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
     </div>
