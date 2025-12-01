@@ -1,5 +1,5 @@
 import { CreatorStylesManager } from "./styles-manager";
-import { Default } from "../themes/default-light-internal";
+import { DefaultLight } from "../themes/default-light";
 import { registerTheme, ThemesHash, sortDefaultThemes } from "../utils/themes";
 
 export interface ICreatorTheme {
@@ -34,7 +34,7 @@ export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> 
 //     iconSet: "v2"
 //   }
 // };
-export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": Default };
+export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": DefaultLight };
 // let stylesStr = "";
 // if (Object.keys(Default.cssVariables).length) {
 //   Object.keys(Default.cssVariables).forEach((varName) => {
