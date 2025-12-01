@@ -386,7 +386,7 @@ export interface ICreatorOptions {
   /**
    * The default question type on clicking Add Question button.
    */
-  defaultAddQuestionType: string;
+  defaultAddQuestionType?: string;
   /**
    * Specifies how Survey Creator users edit survey pages.
    *
