@@ -23,7 +23,7 @@ export class DesignerSurveyComponent extends BaseAngular<SurveyModel> {
     return page.id;
   }
   public get surfaceCssVariablesString(): string {
-    const styles = { ...this.model.surfaceCssVariables, maxWidth: this.survey.renderedWidth || "" };
+    const styles = { ...this.model.surfaceCssVariables, ["max-width"]: this.survey.renderedWidth || "" };
     return cssVariablesToString(styles);
   }
 }
