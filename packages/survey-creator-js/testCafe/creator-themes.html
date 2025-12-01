@@ -33,7 +33,6 @@
 <script>
   window.surveyJSFramework = "react";
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-  SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
   creator.applyCreatorTheme(SurveyCreatorTheme.Test);
   creator.tabResponsivenessMode = "menu";
@@ -49,7 +48,6 @@
       window.updateCreatorModel = (options, json) => {
         window.prevCreator = window.creator;
         const creator = new SurveyCreator.SurveyCreator(options);
-        creator.applyCreatorTheme(SurveyCreatorTheme.Test);
         creator.JSON = json;
         this.setState({ creator });
         creator.tabResponsivenessMode = "menu";
