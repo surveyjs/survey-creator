@@ -3497,6 +3497,19 @@ test("Use settings.designer.defaultAddQuestionType", (): any => {
   expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
   panelModel.addNewQuestion();
   expect(panel.questions[0].getType()).toEqual("radiogroup");
+  settings.designer.defaultAddQuestionType = "text";
+});
+test("Use creator.defaultAddQuestionType", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  creator.defaultAddQuestionType = "radiogroup";
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  pageModel.addNewQuestion(null, null);
+  expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
+  panelModel.addNewQuestion();
+  expect(panel.questions[0].getType()).toEqual("radiogroup");
 });
 test("Use settings.designer.showAddQuestionButton = false", (): any => {
   settings.designer.showAddQuestionButton = false;
