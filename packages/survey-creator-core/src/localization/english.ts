@@ -694,8 +694,8 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
     surveyvalidator: {
-      text: "Validation message",
-      expression: "Validation expression",
+      text: "Notification message for invalid input",
+      expression: "Valid when",
       notificationType: "Notification type",
       maxLength: "Maximum length (in characters)"
     },
