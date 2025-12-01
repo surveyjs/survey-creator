@@ -4450,11 +4450,18 @@ export class SurveyCreatorModel extends Base
     this.onPageGetFooterActions.fire(this, options);
     return options.actions;
   }
+  private defaultAddQuestionTypeValue: string;
+  public get defaultAddQuestionType(): string {
+    return this.defaultAddQuestionTypeValue || settings.designer.defaultAddQuestionType;
+  }
+  public set defaultAddQuestionType(val: string) {
+    this.defaultAddQuestionTypeValue = val;
+  }
 
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, initJson: any = null) {
     if (!type) type = this.currentAddQuestionType;
-    if (!type) type = settings.designer.defaultAddQuestionType;
+    if (!type) type = this.defaultAddQuestionType;
     beforeAdd(type);
     let json = initJson;
     if (!json) {

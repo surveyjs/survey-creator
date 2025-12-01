@@ -780,6 +780,43 @@ test("Preserve defaultAddQuestionType", (): any => {
   expect(pageAdorner.currentAddQuestionType).toEqual("");
   expect(creator.currentAddQuestionType).toEqual("");
   expect(creator.addNewQuestionText).toEqual("Add Question");
+  settings.designer.defaultAddQuestionType = "text";
+});
+test("Preserve defaultAddQuestionType in Creator options, Issue#7291", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [{ name: "page1" }]
+  };
+  const survey: SurveyModel = creator.survey;
+  creator.defaultAddQuestionType = "radiogroup";
+  creator.rememberLastQuestionType = false;
+  const pageAdorner = new PageAdorner(creator, survey.pages[0]);
+  const questionTypeSelectorListModel = pageAdorner.questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
+  const actionPopupViewModel = new PopupDropdownViewModel(pageAdorner.questionTypeSelectorModel.popupModel); // need for popupModel.onShow
+  pageAdorner.questionTypeSelectorModel.popupModel.show();
+
+  expect(pageAdorner.currentAddQuestionType).toEqual("");
+  expect(creator.currentAddQuestionType).toEqual("");
+  pageAdorner.addNewQuestion(pageAdorner, undefined as any);
+  const question1 = <QuestionRadiogroupModel>survey.getAllQuestions()[0];
+  expect(question1.getType()).toEqual("radiogroup");
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+
+  expect(questionTypeSelectorListModel.actions[10].id).toEqual("text");
+  questionTypeSelectorListModel.onItemClick(questionTypeSelectorListModel.actions[10]);
+  const question2 = <QuestionRadiogroupModel>survey.getAllQuestions()[1];
+  expect(question2.getType()).toEqual("text");
+  expect(pageAdorner.currentAddQuestionType).toEqual("");
+  expect(creator.currentAddQuestionType).toEqual("");
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+
+  pageAdorner.addNewQuestion(pageAdorner, undefined as any);
+  const question3 = <QuestionRadiogroupModel>survey.getAllQuestions()[2];
+  expect(question3.getType()).toEqual("radiogroup");
+  expect(pageAdorner.currentAddQuestionType).toEqual("");
+  expect(creator.currentAddQuestionType).toEqual("");
+  expect(creator.addNewQuestionText).toEqual("Add Question");
 });
 
 test("License text for default locale and another default locale", (): any => {
