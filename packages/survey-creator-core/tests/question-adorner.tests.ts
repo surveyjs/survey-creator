@@ -1270,14 +1270,14 @@ test("Don't reset collapased state for moved question", () => {
   const page1 = creator.survey.pages[0];
   const page2 = creator.survey.pages[1];
   let pageAdorner = new PageAdorner(creator, page1);
-  creator.collapseAllPagesOnDragStart(page1);
+  creator.collapseElementsOnDragStart(page1);
   expect(pageAdorner.collapsed).toBeTruthy();
   creator.designerStateManager.suspend();
   creator.survey.pages.splice(0, 1);
   creator.survey.pages.splice(1, 0, page1);
   pageAdorner = new PageAdorner(creator, page1);
   creator.designerStateManager.release();
-  creator.restoreElementsState();
+  creator.restoreElementsStateOnDragEnd();
   expect(pageAdorner.collapsed).toBeTruthy();
 });
 
