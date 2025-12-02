@@ -108,7 +108,7 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
-    await items.getByRole("row", { name: "Choice Questions" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "Choice Questions" }).getByTitle("Expand").click();
     await items.getByRole("row", { name: "Slider" }).getByRole("button").nth(3).click();
     await items.getByText("Remove from Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Checkboxes"]);
@@ -159,12 +159,12 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
-    await items.getByRole("row", { name: "Choice Questions" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "Choice Questions" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: items.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
 
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Checkboxes"]);
 
-    await items.getByRole("row", { name: "Text Input Questions" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "Text Input Questions" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: hidden.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Multiple Textboxes" }), options: { targetPosition: { x: 25, y: 25 } } });
 
     expect((await getToolboxTexts(page)).slice(9, 13)).toEqual(["Single-Line Input", "Long Text", "Slider", "Multiple Textboxes"]);
@@ -172,7 +172,7 @@ test.describe(title, () => {
     await doDragDrop({ page, element: items.getByRole("row", { name: "Long Text" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Ranking" }), options: { targetPosition: { x: 5, y: 5 } } });
     expect((await getToolboxTexts(page)).slice(7, 12)).toEqual(["Image Picker", "Long Text", "Ranking", "Single-Line Input", "Slider"]);
 
-    await items.getByRole("row", { name: "Rating" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "Rating" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: items.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Stars" }) });
     await page.locator(".svc-toolbox__item-submenu-button").nth(0).hover();
     expect(await page.locator(".svc-toolbox-subtypes .sv-popup__container").filter({ visible: true })).toBeVisible();
@@ -211,7 +211,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("button", { name: "Apply" }).click();
     await page.waitForTimeout(500);
-    await page.getByRole("row", { name: "Custom" }).locator("#show-detail").getByRole("button").click();
+    await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
     await items.getByRole("button", { name: "Add a new item" }).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
@@ -242,7 +242,7 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
-    await items.getByRole("row", { name: "General" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "General" }).getByTitle("Expand").click();
     await items.getByRole("row", { name: "Survey description" }).hover();
     await items.getByRole("row", { name: "Survey description" }).getByRole("button").nth(2).click();
     await items.getByText("Remove from properties").click();
@@ -307,7 +307,7 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
-    await items.getByRole("row", { name: "Logo in the Survey Header" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "Logo in the Survey Header" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: items.getByRole("row", { name: "Logo height" }).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
 
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo fit"]);
@@ -315,7 +315,7 @@ test.describe(title, () => {
     await doDragDrop({ page, element: items.getByRole("row", { name: "Logo fit" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey logo" }), options: { targetPosition: { x: 5, y: 5 } } });
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo fit", "Logo width"]);
 
-    await items.getByRole("row", { name: "General" }).locator("#show-detail").getByRole("button").click();
+    await items.getByRole("row", { name: "General" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: hidden.getByRole("row", { name: "Logo height" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey title" }), options: { targetPosition: { x: 25, y: 25 } } });
 
     await page.locator(".svc-sidebar-tabs").getByTitle("General").click();
@@ -368,7 +368,7 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Apply" }).click();
 
     await items.getByRole("row", { name: "Pages" }).getByRole("button", { name: "Delete" }).click();
-    await page.getByRole("row", { name: "Custom" }).locator("#show-detail").getByRole("button").click();
+    await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
     await doDragDrop({
       page,
       element: hidden.getByRole("row", { name: "Pages" }).locator(".sd-table__cell--drag"),
