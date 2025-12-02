@@ -97,7 +97,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     });
     settingsAction = createDropdownActionModel({
       id: "presets-menu",
-      locTooltipName: "ed.creatorPresetsTitle",
+      tooltip: getLocString("presets.plugin.creatorPresets"),
       iconName: "navmenu-24x24",
       css: "sps-menu-floating-action",
       action: () => {
@@ -107,7 +107,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       }
     }, {
       items: [
-        { id: "creator-presets", locTitleName: "presets.plugin.creatorPresets", css: "sps-list__item--label", enabled: false },
+        { id: "creator-presets", title: getLocString("presets.plugin.creatorPresets"), css: "sps-list__item--label", enabled: false },
         ...presets,
         ...tools],
       showPointer: false,
