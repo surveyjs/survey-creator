@@ -246,6 +246,8 @@ export var presetsCss = {
     detailButtonExpanded: "sps-table__cell--detail-button--expanded",
     detailIcon: "sps-detail-panel__icon sps-action-button__icon",
     detailIconExpanded: "sps-detail-panel__icon--expanded",
+    detailIconExpandedId: "icon-collapse-24x24",
+    detailIconId: "icon-expand-24x24",
     detailPanelCell: "sps-table__cell sps-table__cell--detail-panel",
     actionsCell: "sps-table__cell sps-table__cell--actions",
     buttonAdd: "sps-matrixdynamic__add-btn sps-action-button sps-action-button--large",

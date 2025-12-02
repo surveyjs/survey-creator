@@ -188,10 +188,6 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         action.enabled = false;
       });
       options.actions.push(resetAction);
-
-      question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
-      question.cssClasses.detailIconId = "icon-expand-24x24";
-
       options.actions.push(this.createEditAction(model, creator, question, options.row));
 
       this.setupStandardActions(options.actions, question, options.row, allowExpand, question.name == this.nameMatrix);
