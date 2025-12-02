@@ -162,6 +162,7 @@
 .sps-page--options {
   .sps-panel--with-frame > .sps-panel__content {
     width: 50%;
+    box-sizing: content-box;
   }
 
   .sps-action-button--icon {
