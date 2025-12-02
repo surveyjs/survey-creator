@@ -27,7 +27,7 @@ const router = createRouter({
     { path: "/testCafe/dropdown-collapse-view", component: DropdownCollapse },
     { path: "/testCafe/testcafe-theme-tab", component: ThemeTab },
     { path: "/testCafe/testcafe-no-license", component: NoLicense },
-    { path: "/testCafe/presets", component: Presets }
+    { path: "/testCafe/presets", component: Presets },
     { path: "/testCafe/creator-themes", component: CreatorThemes }
   ]
 })
