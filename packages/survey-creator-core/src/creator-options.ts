@@ -481,7 +481,7 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    *
-   * Default value: `true`
+   * Default value: `false`
    */
   collapseOnDrag?: boolean;
   /**
