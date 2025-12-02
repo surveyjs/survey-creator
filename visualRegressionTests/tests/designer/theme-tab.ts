@@ -43,7 +43,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1280, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         { elements: [{ type: "text", name: "question1" }] },
 //         { elements: [{ type: "text", name: "question2" }] }
@@ -62,7 +62,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1580, 4000);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       title: "Title",
 //       pages: [
 //         { elements: [{ type: "text", name: "question1" }] },
@@ -107,7 +107,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(400, 600);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       pages: [
 //         { elements: [{ type: "text", name: "question1" }] },
 //         { elements: [{ type: "text", name: "question2" }] }
@@ -130,7 +130,7 @@
 //     await t
 //       .click(getPropertyGridCategory("General"))
 //       .click(expandedGroup.find(".spg-button-group__item-caption").withText("Dark"))
-//       .click(Selector("#svc-reset-theme .svc-toolbar__item"));
+//       .click(Selector(".sv-action--reset-theme .svc-toolbar__item"));
 
 //     await takeElementScreenshot("theme-tab-reset-popup-dialog.png", Selector(".sv-popup__body-content").filterVisible(), t, comparer);
 //   });

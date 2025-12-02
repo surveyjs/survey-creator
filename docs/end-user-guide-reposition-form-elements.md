@@ -19,7 +19,7 @@ Reordering pages can help improve the logical flow of your form. For instance, i
 
 Additionally, you can add a new page using the **Plus** icon and position it anywhere within the form using click-and-drag.
 
-<img src="../images/eud-reorder-pages.png" alt='Survey Creator: How to reorder form pages' width="444" height="730">
+<img src="images/eud-reorder-pages.png" alt='Survey Creator: How to reorder form pages' width="444" height="730">
 
 ## How to Move a Question to a Different Page
 
@@ -29,7 +29,7 @@ Moving a question to another page is helpful when you identify that its placemen
 2. Under the **Layout** category, locate the **Move the question to page** setting.  
 3. Select the target page from the drop-down list.
 
-<img src="../images/eud-move-question.png" alt='Survey Creator: How to move a question to a different page' width="1446" height="810">
+<img src="images/eud-move-question.png" alt='Survey Creator: How to move a question to a different page' width="1446" height="810">
 
 ## How to Move a Panel to a Different Page
 
@@ -37,10 +37,12 @@ A panel (or section) in Survey Creator is a form element that groups multiple qu
 
 1. Select the panel you want to copy on the design surface or in the survey tree.  
 2. Click **Duplicate** at the bottom of the panel. A copy will be created, and the focus will shift to the duplicate.
-3. Under the **General** category, locate the **Panel name** setting and assign a unique ID to the panel for further configuration.<br><br>
-    <img src="../images/eud-duplicate-panel.png" alt='Survey Creator: How to duplicate a panel' width="1438" height="686">
+3. Under the **General** category, locate the **Panel name** setting and assign a unique ID to the panel for further configuration.
+
+    <img src="images/eud-duplicate-panel.png" alt='Survey Creator: How to duplicate a panel' width="1438" height="686">
 4. Under the **Panel Layout** category, locate the **Move the panel to page** setting.  
-5. Select the target page from the drop-down list.<br><br>
-    <img src="../images/eud-move-panel.png" alt='Survey Creator: How to move a panel to a different page' width="1450" height="810">
+5. Select the target page from the drop-down list.
+
+    <img src="images/eud-move-panel.png" alt='Survey Creator: How to move a panel to a different page' width="1450" height="810">
 
 > For both questions and panels, a repositioned element is placed at the end of the target page and can then be dragged to its desired location within the page.

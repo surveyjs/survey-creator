@@ -24,7 +24,7 @@ test("Test popups", async (t) => {
               }
             ],
             "panelCount": 20,
-            "renderMode": "tab"
+            "displayMode": "tab"
           }
         ]
       }

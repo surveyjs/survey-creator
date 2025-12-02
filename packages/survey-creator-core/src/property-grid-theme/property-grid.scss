@@ -105,7 +105,23 @@
 }
 
 .spg-body--empty {
-  margin: calcSize(3);
+  padding: var(--sjs2-spacing-x500, 40px) var(--sjs2-spacing-x400, 32px);
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+  text-align: center;
+
+  /* sjs2/typography/default */
+  font-family: var(--sjs2-typography-font-family-default, "Open Sans");
+  font-size: var(--sjs2-typography-font-size-default, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--sjs2-typography-line-height-default, 24px); /* 150% */
 }
 
 .spg-title-toolbar--single-help-action {

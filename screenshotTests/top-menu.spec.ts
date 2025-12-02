@@ -8,7 +8,7 @@ test.describe("Top Menu Screenshot", () => {
 
   test("Top menu on designer tab", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 1920, height: 1080 });
 
@@ -23,17 +23,17 @@ test.describe("Top Menu Screenshot", () => {
     await page.click(".svc-toolbox");
     await compareScreenshot(page, topBarElement, "top-menu-undo-active.png");
 
-    await page.hover("#action-undo");
+    await page.hover(".sv-action--action-undo");
     await compareScreenshot(page, topBarElement, "top-menu-undo-active-hovered.png");
 
-    await page.hover("#action-redo");
+    await page.hover(".sv-action--action-redo");
     await compareScreenshot(page, topBarElement, "top-menu-redo-inactive-hovered.png");
 
-    await page.click("#action-undo .sv-action-bar-item");
+    await page.click(".sv-action--action-undo .sv-action-bar-item");
     await page.click(".svc-side-bar .spg-row >> nth=1");
     await compareScreenshot(page, topBarElement, "top-menu-undo-and-redo-active.png");
 
-    await page.click("#action-undo .sv-action-bar-item");
+    await page.click(".sv-action--action-undo .sv-action-bar-item");
     await page.click(".svc-side-bar .spg-row >> nth=1");
     await compareScreenshot(page, topBarElement, "top-menu-redo-active.png");
 
@@ -48,7 +48,7 @@ test.describe("Top Menu Screenshot", () => {
 
   test("Top menu with single item", async ({ page }) => {
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 1920, height: 1080 });
 
@@ -65,7 +65,7 @@ test.describe("Top Menu Screenshot", () => {
     await page.setViewportSize({ width: 900, height: 1080 });
     const topBarElement = page.locator(".svc-top-bar");
     await setJSON(page, {
-      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+      showQuestionNumbers: true, pages: [{ name: "page1" }]
     });
     await page.evaluate(() => {
       (window as any).creator.tabResponsivenessMode = "icons";

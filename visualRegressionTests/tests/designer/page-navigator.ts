@@ -7,7 +7,7 @@
 // });
 
 // const json = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -125,7 +125,7 @@
 //     })();
 
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1", elements: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
 //     });
 
 //     const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
@@ -405,7 +405,7 @@
 //           ],
 //         },
 //       ],
-//       showQuestionNumbers: "off",
+//       showQuestionNumbers: false,
 //     });
 //     await t.wait(500);
 //     // await ClientFunction(() => {
@@ -424,7 +424,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1508, 800);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "title": "NPS Survey Question",
 //       "widthMode": "responsive",
 //       "pages": [
@@ -494,7 +494,7 @@
 //       window["creator"].pageEditMode = "bypage";
 //     })();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "title": "NPS Survey Question",
 //       "widthMode": "responsive",
 //       "pages": [
@@ -565,7 +565,7 @@
 //     await t.resizeWindow(1500, 800);
 //     await setShowSidebar(false);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {

@@ -9,7 +9,7 @@
 // test("Top menu on designer tab", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(1920, 1080);
 
@@ -26,20 +26,20 @@
 //     await takeElementScreenshot("top-menu-undo-active.png", topBarElement, t, comparer);
 
 //     await t
-//       .hover(Selector("#action-undo"));
+//       .hover(Selector(".sv-action--action-undo"));
 //     await takeElementScreenshot("top-menu-undo-active-hovered.png", topBarElement, t, comparer);
 
 //     await t
-//       .hover(Selector("#action-redo"));
+//       .hover(Selector(".sv-action--action-redo"));
 //     await takeElementScreenshot("top-menu-redo-inactive-hovered.png", topBarElement, t, comparer);
 
 //     await t
-//       .click(Selector("#action-undo .sv-action-bar-item"))
+//       .click(Selector(".sv-action--action-undo .sv-action-bar-item"))
 //       .click(Selector(".svc-side-bar .spg-row").nth(1));
 //     await takeElementScreenshot("top-menu-undo-and-redo-active.png", topBarElement, t, comparer);
 
 //     await t
-//       .click(Selector("#action-undo .sv-action-bar-item"))
+//       .click(Selector(".sv-action--action-undo .sv-action-bar-item"))
 //       .click(Selector(".svc-side-bar .spg-row").nth(1));
 //     await takeElementScreenshot("top-menu-redo-active.png", topBarElement, t, comparer);
 
@@ -56,7 +56,7 @@
 // test("Top menu with single item", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await t.resizeWindow(1920, 1080);
 
@@ -75,7 +75,7 @@
 //     await t.resizeWindow(900, 1080);
 //     const topBarElement = Selector(".svc-top-bar");
 //     await setJSON({
-//       showQuestionNumbers: "on", pages: [{ name: "page1" }]
+//       showQuestionNumbers: true, pages: [{ name: "page1" }]
 //     });
 //     await ClientFunction(() => (window as any).creator.tabResponsivenessMode = "icons")();
 //     await takeElementScreenshot("top-menu-responsivity-icons-big.png", topBarElement, t, comparer);

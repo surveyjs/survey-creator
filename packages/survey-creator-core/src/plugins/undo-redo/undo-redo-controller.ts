@@ -135,7 +135,7 @@ export class UndoRedoController extends Base {
     var options = { canUndo: canUndo, allow: canUndo };
     this.onBeforeUndo.fire(this.creator, options);
     this.creator.onBeforeUndo.fire(this.creator, options);
-    if (options.canUndo) {
+    if (options.allow) {
       this.undoRedoManager.undo();
       this.selectElementAfterUndo();
     }
@@ -147,7 +147,7 @@ export class UndoRedoController extends Base {
     const options = { canRedo: canRedo, allow: canRedo };
     this.onBeforeRedo.fire(this.creator, options);
     this.creator.onBeforeRedo.fire(this.creator, options);
-    if (options.canRedo) {
+    if (options.allow) {
       const item = this.undoRedoManager.redo();
       this.selectElementAfterUndo();
     }
@@ -163,6 +163,7 @@ export class UndoRedoController extends Base {
     const items: Array<Action> = [];
     this.undoAction = new Action({
       id: "action-undo",
+      css: "sv-action--action-undo",
       iconName: "icon-undo",
       iconSize: "auto",
       locTitleName: "ed.undo",
@@ -175,6 +176,7 @@ export class UndoRedoController extends Base {
     });
     this.redoAction = new Action({
       id: "action-redo",
+      css: "sv-action--action-redo",
       iconName: "icon-redo",
       iconSize: "auto",
       locTitleName: "ed.redo",

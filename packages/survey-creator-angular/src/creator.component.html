@@ -1,6 +1,6 @@
 <ng-container *ngIf="!creator.isCreatorDisposed">
   <sv-ng-modal-container></sv-ng-modal-container>
-  <div [class]="creator.getRootCss()" [style]="creator.themeVariables" #container>
+  <div [class]="creator.getRootCss()" [attr.style]="themeVariablesString" #container>
     <div>
       <sv-svg-bundle></sv-svg-bundle>
     </div>
@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        <svc-side-bar [model]="creator.sidebar" *ngIf="creator.sidebar"></svc-side-bar>
+        <svc-side-bar [model]="creator.sidebar" *ngIf="creator.isSidebarVisible"></svc-side-bar>
       </div>
       <div class="svc-creator__banner" *ngIf="!creator.haveCommercialLicense">
         <span class="svc-creator__non-commercial-text" [innerHTML]="creator.licenseText | safeHtml"></span>

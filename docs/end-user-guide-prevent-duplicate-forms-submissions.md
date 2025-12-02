@@ -21,7 +21,7 @@ To prevent repetitive form submission from the same respondent, follow these ste
 1. Under **General**, locate an input field called **Limit to one response**. 
 1. Enter a unique cookie value for your form.
 
-<img src="../images/eud-limit-to-one-response.png" alt='Prevent duplicate form submissions in SurveyJS' width="445" height="702">
+<img src="images/eud-limit-to-one-response.png" alt='Prevent duplicate form submissions in SurveyJS' width="445" height="702">
 
 ## Troubleshooting 
 
@@ -36,7 +36,7 @@ To verify whether cookie-based duplicate submission prevention is functioning co
 1. Find and select the website where your form has been published.
 1. In the list of cookies on the right panel, locate the unique cookie value that you've assigned.
 
-<img src="../images/eud-cookie-troubleshooting.png" alt='Troubleshooting cookie-based duplicate submission prevention in SurveyJS' width="790" height="469">
+<img src="images/eud-cookie-troubleshooting.png" alt='Troubleshooting cookie-based duplicate submission prevention in SurveyJS' width="790" height="469">
 
 ## Limitations
 

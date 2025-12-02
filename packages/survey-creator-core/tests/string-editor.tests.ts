@@ -48,8 +48,8 @@ test("Test string editor content editable", (): any => {
     "description"
   ).readOnly = true;
 
-  creator.onGetPropertyReadOnly.add(function (editor, options) {
-    var obj = options.obj;
+  creator.onPropertyGetReadOnly.add(function (editor, options) {
+    var obj = options.element;
     if (!obj || !obj.page) return;
 
     //you may check obj.getType();
@@ -124,36 +124,36 @@ test("Test string editor select questions items readonly", (): any => {
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
   Serializer.getProperty("dropdown", "choices").readOnly = false;
 
-  creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj?.isDescendantOf("dropdown") && options.propertyName == "choices")
+  creator.onPropertyGetReadOnly.add(function (editor, options) {
+    if (options.element?.isDescendantOf("dropdown") && options.property.name == "choices")
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
 
-  creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+  creator.onPropertyGetReadOnly.add(function (editor, options) {
+    if (options.element?.isDescendantOf("itemvalue") && options.parentElement && options.parentElement.name == "q0" && options.parentElement.choices.indexOf(options.element) == 0)
       options.readOnly = false;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
-  creator.onGetPropertyReadOnly.clear();
+  creator.onPropertyGetReadOnly.clear();
 
-  creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+  creator.onPropertyGetReadOnly.add(function (editor, options) {
+    if (options.element?.isDescendantOf("itemvalue") && options.parentElement && options.parentElement.name == "q0" && options.parentElement.choices.indexOf(options.element) == 0)
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, true, true, true, true, true]);
-  creator.onGetPropertyReadOnly.clear();
+  creator.onPropertyGetReadOnly.clear();
 
   creator.onElementAllowOperations.add(function (editor, options) {
-    if (options.obj.name === "q1")
+    if (options.element.name === "q1")
       options.allowEdit = false;
   });
   expect(checkItemEdit()).toEqual([true, true, false, false, true, true]);
 
   creator.onCollectionItemAllowOperations.add(function (editor, options) {
-    if (options.obj.name == "q0" && options.collection.indexOf(options.item) == 0)
+    if (options.element.name == "q0" && options.collection.indexOf(options.item) == 0)
       options.allowEdit = false;
-    if (options.obj.name == "q1" && options.collection.indexOf(options.item) == 1)
+    if (options.element.name == "q1" && options.collection.indexOf(options.item) == 1)
       options.allowEdit = true;
   });
   expect(checkItemEdit()).toEqual([false, true, false, false, true, true]);
@@ -270,7 +270,7 @@ test("Test string editor content editable for matrix and panels", (): any => {
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
 });
 
-test("Test string editor inplaceEditForValues", (): any => {
+test("Test string editor inplaceEditChoiceValues + creator.trimValues", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [
@@ -309,13 +309,18 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(otherItem.locText.text).toEqual("Other changed");
   expect(q0.otherText).toEqual("Other changed");
 
-  creator.inplaceEditForValues = true;
+  creator.inplaceEditChoiceValues = true;
   seChoice.onBlur({ target: { innerText: "newItemValue", innerHTML: "newItemValue", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
+
+  //creator.trimValues=true, Issue#7180
+  creator.trimValues = true;
+  seChoice.onBlur({ target: { innerText: "  trimValue  ", innerHTML: "  trimValue  ", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.value).toEqual("trimValue");
 });
-test("Test string editor inplaceEditForValues + correct non-unique value", (): any => {
+test("Test string editor inplaceEditChoiceValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     "pages": [
@@ -335,7 +340,7 @@ test("Test string editor inplaceEditForValues + correct non-unique value", (): a
       }
     ]
   };
-  creator.inplaceEditForValues = true;
+  creator.inplaceEditChoiceValues = true;
   const q = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q0");
   const itemValue = q.choices[2];
   var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
@@ -465,7 +470,7 @@ test("StringEditorConnector for selectbase questions", (): any => {
   };
   const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   creator.selectElement(question);
-  creator.maximumChoicesCount = 3;
+  creator.maxChoices = 3;
 
   const questionAdorner = new QuestionAdornerViewModel(
     creator,
@@ -618,7 +623,7 @@ test("StringEditorConnector for multiple text questions", (): any => {
 
 test("StringEditorConnector for matrix questions (columns)", (): any => {
   const creator = new CreatorTester();
-  creator.maximumColumnsCount = 3;
+  creator.maxColumns = 3;
   creator.JSON = {
     elements: [
       { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
@@ -666,7 +671,7 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
 
 test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
   const creator = new CreatorTester();
-  creator.maximumColumnsCount = 3;
+  creator.maxColumns = 3;
   creator.JSON = {
     elements: [
       { type: "matrixdropdown", name: "q2", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
@@ -730,7 +735,7 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
   for (var i = 0; i < allQuestions.length; i++) {
     const question = allQuestions[i] as any;
     creator.selectElement(question);
-    creator.maximumRowsCount = 3;
+    creator.maxRows = 3;
 
     const questionAdorner = new QuestionAdornerViewModel(
       creator,
@@ -773,7 +778,7 @@ test("StringEditorConnector for matrix - onItemValueAdded event", (): any => {
   var log = "";
 
   creator.onItemValueAdded.add((sender, options) => {
-    log += (options.obj as QuestionMatrixModel).name + ":" + options.itemValues.map(c => c.title).join(",") + "+" + options.newItem.title;
+    log += (options.element as QuestionMatrixModel).name + ":" + options.itemValues.map(c => c.title).join(",") + "+" + options.newItem.title;
   });
   creator.JSON = {
     elements: [
@@ -846,8 +851,8 @@ test("StringEditor on property value changing", () => {
   const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
   var stringEditorQuestion = new StringEditorViewModelBase(question.locTitle, creator);
   var eventRaised = 0;
-  creator.onPropertyValueChanging.add((sender, options) => {
-    if (!!options.value && options.propertyName === "title" && options.obj == question) {
+  creator.onBeforePropertyChanged.add((sender, options) => {
+    if (!!options.oldValue && options.propertyName === "title" && options.element == question) {
       eventRaised++;
       if (options.newValue == "a") {
         options.newValue = "b";
@@ -865,13 +870,13 @@ test("StringEditor on property value changing", () => {
   expect(question.locTitle.text).toEqual("c");
 });
 
-test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com/surveyjs/survey-creator/issues/3658", () => {
+test("StringEditor onPropertyGetReadOnly for radio/checkbox - https://github.com/surveyjs/survey-creator/issues/3658", () => {
   const creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({
     pages: [
       {
         elements: [
-          { name: "q", type: "checkbox", choices: [1, 2, 3], hasOther: true }
+          { name: "q", type: "checkbox", choices: [1, 2, 3], showOtherItem: true }
         ]
       }
     ]
@@ -881,8 +886,8 @@ test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com
   const locStrOtherItem: LocalizableString = question.otherItem.locText;
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrOtherItem, creator);
 
-  creator.onGetPropertyReadOnly.add((sender, options) => {
-    if (options.property.name === "otherText" && options.obj.getType() === "checkbox") {
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (options.property.name === "otherText" && options.element.getType() === "checkbox") {
       options.readOnly = true;
     }
   });
@@ -933,9 +938,9 @@ test("StringEditor multiline paste with tabs and empty lines for selectbase ques
   expect(question.choices.map(c => c.text)).toEqual(["item1", "a", "b", "item3"]);
 });
 
-test("StringEditor multiline paste for selectbase questions - inplaceEditForValues", (): any => {
+test("StringEditor multiline paste for selectbase questions - inplaceEditChoiceValues", (): any => {
   const creator = new CreatorTester();
-  creator.inplaceEditForValues = true;
+  creator.inplaceEditChoiceValues = true;
   creator.JSON = {
     elements: [
       { type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] },
@@ -1022,7 +1027,7 @@ test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionRadiogroupModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionImagePickerModel("q") })).toBeFalsy();
 });
-test("Test string editor inplaceEditForValues without Creator", (): any => {
+test("Test string editor inplaceEditChoiceValues without Creator", (): any => {
   const survey = new SurveyModel({
     "pages": [
       {
@@ -1096,9 +1101,9 @@ test("Test string editor description clear (with EOL)", (): any => {
   expect(q0.locDescription.text).toEqual("");
 });
 
-test("StringEditor multiline paste for selectbase questions should respect creator.maximumChoicesCount", (): any => {
+test("StringEditor multiline paste for selectbase questions should respect creator.maxChoices", (): any => {
   const creator = new CreatorTester();
-  creator.maximumChoicesCount = 4;
+  creator.maxChoices = 4;
   creator.JSON = {
     elements: [
       { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },

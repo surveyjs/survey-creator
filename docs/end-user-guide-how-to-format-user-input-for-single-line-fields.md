@@ -15,7 +15,7 @@ A single-line field is an input field where users can input text or data in a si
 
 The Color input type allows users to select a color using a color picker or enter color code combination in HEX, RGB, or HLS format. Once a color is specified, its value is captured and submitted with the form data in one of the available formats. The image below illustrates a Single-Line Input question with an activated color picker.
 
-<img src="../images/eud-color-picker.png" alt='Input type: color' width="749" height="550">
+<img src="images/eud-color-picker.png" alt='Input type: color' width="749" height="550">
 
 [View Demo](https://surveyjs.io/form-library/examples/color-input-question/ (linkStyle))
 
@@ -23,7 +23,7 @@ The Color input type allows users to select a color using a color picker or ente
 
 The Date input type enables users to select a date from a calendar widget. This type restricts input to a valid date format that depends on the browser's language (i.e., `mm/dd/yyyy` for English). Users can click on the input field to open a date picker and choose a date, as shown in the image below.
 
-<img src="../images/eud-date-picker.png" alt='Input type: date' width="740" height="544">
+<img src="images/eud-date-picker.png" alt='Input type: date' width="740" height="544">
 
 ### Datetime-local
 
@@ -39,7 +39,7 @@ The Email input type is used for fields that require email addresses. It ensures
 
 The Month input type allows users to select a month and year from a calendar with a scrollable interface. This type restricts input to a valid `month year` format, allowing users to specify a month without a specific day.
 
-<img src="../images/eud-month-picker.png" alt='Input type: month' width="758" height="467">
+<img src="images/eud-month-picker.png" alt='Input type: month' width="758" height="467">
 
 ### Number
 
@@ -54,7 +54,7 @@ Specifies the maximum value that the input field can accept. If a user tries to 
 - Step     
 Specifies the increment or decrement value for the input field. Users can increment or decrement the input value using the spinner control. The value entered by a user will be rounded to the nearest multiple of the step value.
 
-<img src="../images/eud-numeric.png" alt='Input type: number' width="329" height="378">
+<img src="images/eud-numeric.png" alt='Input type: number' width="329" height="378">
 
 [View Demo](https://surveyjs.io/form-library/examples/numeric-entry-question/ (linkStyle))
 
@@ -62,7 +62,7 @@ Specifies the increment or decrement value for the input field. Users can increm
 
 The Password input type hides the characters entered by a user, making it suitable for fields with sensitive information, such as passwords or PINs. This input type provides security by obscuring the input characters to prevent them from being visible to others.
 
-<img src="../images/eud-password.png" alt='Input type: password' width="755" height="385">
+<img src="images/eud-password.png" alt='Input type: password' width="755" height="385">
 
 ### Range
 
@@ -80,7 +80,7 @@ The Text input type is a generic input type used for single-line text fields. It
 
 The Time input type allows users to select a specific time using a time picker interface. This type restricts input to a valid time format, which depends on the browser's language (i.e., `hh:mm AM/PM` for English), and supports 12- and 24-hour time formats.
 
-<img src="../images/eud-time-picker.png" alt='Input type: time' width="750" height="551">
+<img src="images/eud-time-picker.png" alt='Input type: time' width="750" height="551">
 
 ### URL
 
@@ -90,7 +90,7 @@ The URL input type is used for fields that require website addresses or URLs. It
 
 The Week input type allows users to select a specific week from a calendar interface. This type restricts input to a valid week format `Week ##, YYYY`, where `##` represents the week number within the year. Users can choose a week by clicking on the input field to open a week picker interface.
 
-<img src="../images/eud-week-picker.png" alt='Input type: week' width="760" height="576">
+<img src="images/eud-week-picker.png" alt='Input type: week' width="760" height="576">
 
 ## How to Set Input Type for Single-Line Fields
 
@@ -105,7 +105,7 @@ In SurveyJS Form Builder, you can set input type for single-line fields availabl
 
 By default, any Single-Line Input question added to a form has its input type set to Text.
 
-<img src="../images/eud-default-single-line.png" alt='Single-Line Input question: default input type' width="1491" height="599">
+<img src="images/eud-default-single-line.png" alt='Single-Line Input question: default input type' width="1491" height="599">
 
 To change the input type for a Single-Line Input question, follow these steps:
 
@@ -113,7 +113,7 @@ To change the input type for a Single-Line Input question, follow these steps:
 1. Under **General**, locate the **Input type** property.
 1. In the drop-down menu, select among the available input types.
 
-   <img src="../images/eud-input-type.png" alt='Single-Line Input question: available input types' width="329" height="490">
+   <img src="images/eud-input-type.png" alt='Single-Line Input question: available input types' width="329" height="490">
 
 ### Multiple Textboxes
 
@@ -125,13 +125,13 @@ By default, a Multiple Textboxes question consists of two single-line fields who
 1. Locate the **Input type** property.
 1. In the drop-down menu, select among the available input types.
 
-<img src="../images/eud-multiple-textboxes.png" alt='Multiple Textboxes: how to set a new input type for a field' width="1489" height="735">
+<img src="images/eud-multiple-textboxes.png" alt='Multiple Textboxes: how to set a new input type for a field' width="1489" height="735">
 
 ### Multi-Select Matrix
 
 The Multi-Select Matrix allows you to set cell types for all cells of a matrix table or for cells of a particular matrix column. By default, when a new Multi-Select Matrix is added to a form, all cells have the Dropdown type. 
 
-<img src="../images/eud-mutli-select-all-cells.png" alt='Multi-Select Matrix: how to set a cell type for all matrix cells' width="1347" height="672">
+<img src="images/eud-mutli-select-all-cells.png" alt='Multi-Select Matrix: how to set a cell type for all matrix cells' width="1347" height="672">
 
 To change the cell type for all cells of a matrix table, follow these steps:
 
@@ -145,19 +145,22 @@ To set an input type for a column of cells within a Multi-Select Matrix, follow 
 
 1. Select a Multi-Select Matrix question. This action will display the question settings in the Property Grid.
 2. Under **Columns**, select the column for whose cells you wish to set a new input type.
-3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.<br><br>
-   <img src="../images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414"><br><br>
-   Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.<br><br>
-   <img src="../images/eud-column-area.png" alt='Multiple Textboxes: How to activate column settings in the Property Grid' width="819" height="454">
+3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.
+
+   <img src="images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414"><br><br>
+   Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.
+
+   <img src="images/eud-column-area.png" alt='Multiple Textboxes: How to activate column settings in the Property Grid' width="819" height="454">
 4. Under **General**, locate the **Cell input type** property. By default, it is set to Default, which means that it inherits the cell type set for the entire matrix table.
 5. In the drop-down menu, select Single-Line Input.
 6. Locate the **Input type** property.
-7. In the drop-down menu, select among the available input types.<br><br>
-   <img src="../images/eud-column-input-type.png" alt='Multiple Textboxes: How to set a new question type for a column cell' width="327" height="548">
+7. In the drop-down menu, select among the available input types.
+
+   <img src="images/eud-column-input-type.png" alt='Multiple Textboxes: How to set a new question type for a column cell' width="327" height="548">
 
 The image below illustrates a three-column matrix table with cell input types set to Single-Line Input, Dropdown and Yes/No (Boolean). The first column has its "Input type" property set to Month.
 
-<img src="../images/eud-column-input-type-preview.png" alt='Multiple Textboxes: how to set a column cell type to a Single-Line Input and modify its input type' width="896" height="456">
+<img src="images/eud-column-input-type-preview.png" alt='Multiple Textboxes: how to set a column cell type to a Single-Line Input and modify its input type' width="896" height="456">
 
 > A cell input type set for a column overrides the same setting defined for all cells within a multi-select matrix table.
 

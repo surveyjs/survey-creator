@@ -35,7 +35,7 @@ test.describe(title, () => {
   test("toolbar view", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }
@@ -52,7 +52,7 @@ test.describe(title, () => {
   test("theme setting property grid", async ({ page }) => {
     await page.setViewportSize({ width: 1580, height: 4000 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       title: "Title",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
@@ -98,7 +98,7 @@ test.describe(title, () => {
   test("theme setting property grid mobile", async ({ page }) => {
     await page.setViewportSize({ width: 400, height: 600 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }
@@ -117,7 +117,7 @@ test.describe(title, () => {
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await getPropertyGridCategory(page, "General").click();
     await expandedGroup.locator(".spg-button-group__item-caption").getByText("Dark").click();
-    await page.click("#svc-reset-theme .svc-toolbar__item");
+    await page.click(".sv-action--reset-theme .svc-toolbar__item");
     const popup = page.locator(".sv-popup__body-content").filter({ has: page.locator(":visible") });
     await compareScreenshot(page, popup, "theme-tab-reset-popup-dialog.png");
   });

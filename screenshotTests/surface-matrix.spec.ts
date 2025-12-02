@@ -23,7 +23,7 @@ test.describe(title, () => {
     await setAllowZoom(page, true);
     await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     for (let i = 0; i < 5; i++) {
-      await page.locator("#zoomOut button").click();
+      await page.locator(".sv-action--zoomOut button").click();
     }
     const row1Column1Cell = page.locator(".sv-dropdown_select-wrapper").first();
     const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button").first();
@@ -37,7 +37,7 @@ test.describe(title, () => {
   test("Matrix column", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "widthMode": "static",
       "width": "700px",
       "pages": [
@@ -77,7 +77,7 @@ test.describe(title, () => {
   test("Matrix column vertical", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "widthMode": "static",
       "width": "700px",
       "pages": [
@@ -87,7 +87,7 @@ test.describe(title, () => {
             {
               "type": "matrixdropdown",
               "name": "m",
-              "columnLayout": "vertical",
+              "transposeData": true,
               "columns": [
                 { "name": "Column 1", "cellType": "text" },
                 { "name": "Column 2", "cellType": "text" }
@@ -118,7 +118,7 @@ test.describe(title, () => {
   test("Matrix column editor boolean", async ({ page }) => {
     await page.setViewportSize({ width: 1956, height: 900 });
     const surveyJSON = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -196,7 +196,7 @@ test.describe(title, () => {
   test("Matrix check title editing (https://github.com/surveyjs/survey-creator/issues/3160)", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           "type": "matrix",
@@ -222,7 +222,7 @@ test.describe(title, () => {
   test("Matrix dynamic with detail two questions + select", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "matrixdynamic",
@@ -247,7 +247,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1400, height: 900 });
 
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -288,7 +288,7 @@ test.describe(title, () => {
   test("Matrix Dynamiv with rows drad-drop", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 1080 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "pages": [
         {
           "name": "page1",
@@ -311,7 +311,7 @@ test.describe(title, () => {
   test("Matrix dynamic with detail", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "matrixdynamic",
@@ -333,7 +333,7 @@ test.describe(title, () => {
   test("Matrix dynamic with detail empty", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "matrixdynamic",
@@ -354,7 +354,7 @@ test.describe(title, () => {
   test("Selected matrix-in-panel", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {

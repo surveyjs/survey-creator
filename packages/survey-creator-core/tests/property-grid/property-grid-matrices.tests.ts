@@ -4,7 +4,8 @@ import {
   SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
   ItemValue,
   QuestionCheckboxModel,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  QuestionSliderModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -12,6 +13,7 @@ import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../sr
 import { SurveyTriggerComplete } from "survey-core";
 import { CreatorBase } from "../../src/creator-base";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
+import { min } from "lodash";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
@@ -34,7 +36,7 @@ test("Validators property editor, v2", () => {
     validatorsQuestion.visibleRows[0].cells[0].question
   );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
-  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.allowClear).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = question.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
@@ -87,7 +89,7 @@ test("Validators property editor for column", () => {
     validatorsQuestion.visibleRows[0].cells[0].question
   );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
-  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.allowClear).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = column.templateQuestion.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
@@ -175,7 +177,7 @@ test("Triggers property editor", () => {
   triggerTypeQuestion = <QuestionDropdownModel>(
     triggersQuestion.visibleRows[1].cells[0].question
   );
-  expect(triggerTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(triggerTypeQuestion.allowClear).toBeFalsy();
   triggerTypeQuestion.value = "completetrigger";
   expect(
     triggersQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
@@ -361,7 +363,7 @@ test("QuestionMultipleTextModel items property editor + validators editor, #1", 
     validatorsQuestion.visibleRows[0].cells[0].question
   );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
-  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.allowClear).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = textItem.editor.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
@@ -608,7 +610,7 @@ test("Apply value correctly after errors, Bug #5915", () => {
   expect(q.choices[0].value).toBe("item2");
   expect(q.choices[1].value).toBe("item1");
 });
-test("Show text column in itemvalue (choices) if inplaceEditForValues is false (default)", () => {
+test("Show text column in itemvalue (choices) if inplaceEditChoiceValues is false (default)", () => {
   const q = new QuestionCheckboxBase("q1");
   q.choices = ["item1", "item2", "item3"];
   const propertyGrid = new PropertyGridModelTester(q);
@@ -617,42 +619,42 @@ test("Show text column in itemvalue (choices) if inplaceEditForValues is false (
   expect(qProperty.columns[0].name).toBe("value");
   expect(qProperty.columns[1].name).toBe("text");
 });
-test("Hide text column in itemvalue (choices) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (choices) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionCheckboxBase("q1");
   q.choices = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
   expect(qProperty.columns).toHaveLength(1);
   expect(qProperty.columns[0].name).toBe("value");
 });
-test("Hide text column in itemvalue (rateValues) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (rateValues) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionRatingModel("q1");
   q.rateValues = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rateValues");
   expect(qProperty.columns).toHaveLength(2);
   expect(qProperty.columns[0].name).toBe("icon");
   expect(qProperty.columns[1].name).toBe("value");
 });
-test("Hide text column in itemvalue (matrixdropdown.rows) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (matrixdropdown.rows) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionMatrixDropdownModel("q1");
   q.rows = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rows");
   expect(qProperty.columns).toHaveLength(1);
   expect(qProperty.columns[0].name).toBe("value");
 });
-test("Hide text column in itemvalue (matrix.columns) if inplaceEditForValues is true", () => {
+test("Hide text column in itemvalue (matrix.columns) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionMatrixModel("q1");
   q.columns = ["item1", "item2", "item3"];
   const options = new EmptySurveyCreatorOptions();
-  options.inplaceEditForValues = true;
+  options.inplaceEditChoiceValues = true;
   const propertyGrid = new PropertyGridModelTester(q, options);
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
   expect(qProperty.columns).toHaveLength(1);
@@ -718,4 +720,63 @@ test("dropdown question inside detail panel", () => {
   dropdownInsideDetail.popupModel.toggleVisibility();
   expect(dropdownInsideCell.popupModel.setWidthByTarget).toBe(false);
   expect(dropdownInsideDetail.popupModel.setWidthByTarget).toBe(true);
+});
+test("QuestionCheckbox choices options.trimValues, Issue#7180", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const options = new EmptySurveyCreatorOptions();
+  options.trimValues = true;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const row1 = choicesQuestion.visibleRows[0];
+  const valueQ = row1.getQuestionByName("value");
+  expect(valueQ.value).toBe("item1");
+  valueQ.value = "  item1  ";
+  expect(valueQ.value).toBe("item1");
+  expect(question.choices[0].value).toBe("item1");
+  valueQ.value = "  item11  ";
+  expect(valueQ.value).toBe("item11");
+  expect(question.choices[0].value).toBe("item11");
+});
+test("QuestionSlider customLabels & min/max properties, Bug#7250", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "slider",
+        name: "q1",
+        min: 10,
+        max: 50,
+        customLabels: [10, 20, 30, 40, 50]
+      }]
+  });
+  const question = survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var customLabelsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("customLabels")
+  );
+  const cell1Value = customLabelsQuestion.visibleRows[0].getQuestionByColumnName("value");
+  const cell2Value = customLabelsQuestion.visibleRows[1].getQuestionByColumnName("value");
+  expect(cell1Value.value).toBe(10);
+  cell1Value.value = 5;
+  expect(question.customLabels[0].value).toBe(10);
+  expect(cell1Value.value).toBe(5);
+  expect(cell1Value.errors).toHaveLength(1);
+  expect(cell1Value.errors[0].getText()).toBe("The value should not be less than 10");
+  cell1Value.value = 15;
+  expect(question.customLabels[0].value).toBe(15);
+  expect(cell1Value.value).toBe(15);
+  expect(cell1Value.errors).toHaveLength(0);
+
+  expect(cell2Value.value).toBe(20);
+  cell2Value.value = 55;
+  expect(question.customLabels[1].value).toBe(20);
+  expect(cell2Value.value).toBe(55);
+  expect(cell2Value.errors).toHaveLength(1);
+  expect(cell2Value.errors[0].getText()).toBe("The value should not be greater than 50");
+  cell2Value.value = 45;
+  expect(question.customLabels[1].value).toBe(45);
+  expect(cell2Value.value).toBe(45);
+  expect(cell2Value.errors).toHaveLength(0);
 });

@@ -11,7 +11,7 @@ In SurveyJS, an expression is a mathematical formula or logical statement used t
 
 SurveyJS Form Builder provides a graphical user interface for constructing logical expressions&mdash;a pop-up dialog with a list of questions and custom variables to select from and available operators. This dialog appears when you click a **Magic wand** button next to an expression setting in the Property Grid. For example, you can find such settings within the **Conditions** category of a page or question.
 
-<img src="../images/eud-expression-settings.png" alt='Survey Creator: Expression builder UI' width="1340" height="760">
+<img src="images/eud-expression-settings.png" alt='Survey Creator: Expression builder UI' width="1340" height="760">
 
 Although the visual expression builder covers most use cases, it operates within certain limitations that do not allow you to construct any imaginable expression. To unlock the full capabilities of expressions, you need to get acquainted with the syntax rules. This guide will introduce you to expression structure, supported operators, and built-in functions that you can use for calculations within your form.
 
@@ -27,7 +27,7 @@ To use a question value in an expression, specify the **Question name** property
 2. Open the **Conditions** category and find the **Make the question visible if** setting in it.
 3. Specify this setting with the following expression: `{nps-score} >= 9`.
 
-<img src="../images/eud-visibleif-expression.png" alt='How to specify a conditional visibility expression' width="1338" height="756">
+<img src="images/eud-visibleif-expression.png" alt='How to specify a conditional visibility expression' width="1338" height="756">
 
 > For questions with a specified **Data** > **Join identifier** setting, use its value instead of the **Question name** value.
 
@@ -47,17 +47,17 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td colspan="3"><b>Checkboxes</b>, <b>Image Picker</b>, <b>Multiple Textboxes</b>, <b>Ranking</b></td>
       </tr>
       <tr>
-        <td><code>{questionid[index]}</code></td>
+        <td><code>{qid[index]}</code></td>
         <td>Use a zero-based index to access a selected item.</td>
-        <td><code>{question1[0]}</code></td>
+        <td><code>{q1[0]}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Multiple Textboxes</b></td>
       </tr>
       <tr>
-        <td><code>{questionid.itemid}</code></td>
+        <td><code>{qid.itemid}</code></td>
         <td>Accesses an individual textbox.</td>
-        <td><code>{question1.item1}</code></td>
+        <td><code>{q1.item1}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Single-Select Matrix</b></td>
@@ -68,6 +68,21 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{row.column1}</code></td>
       </tr>
       <tr>
+        <td><code>{prevRow.columnid}</code></td>
+        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+        <td><code>{prevRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{nextRow.columnid}</code></td>
+        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+        <td><code>{nextRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
+        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+        <td><code>{matrix1[-1].column1}</code></td>
+      </tr>
+      <tr>
         <td colspan="3"><b>Multi-Select Matrix</b></td>
       </tr>
       <tr>
@@ -76,14 +91,29 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{row.column1}</code></td>
       </tr>
       <tr>
-        <td><code>{questionid.rowid.columnid}</code></td>
-        <td>Accesses an individual matrix cell.</td>
-        <td><code>{matrix.row1.column1}</code></td>
+        <td><code>{prevRow.columnid}</code></td>
+        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+        <td><code>{prevRow.column1}</code></td>
       </tr>
       <tr>
-        <td><code>{questionid-total.columnid}</code></td>
+        <td><code>{nextRow.columnid}</code></td>
+        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+        <td><code>{nextRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
+        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+        <td><code>{matrix1[-1].column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid.rowid.columnid}</code></td>
+        <td>Accesses an individual matrix cell.</td>
+        <td><code>{matrix1.row1.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{matrixid-total.columnid}</code></td>
         <td>Accesses a cell in a total row.</td>
-        <td><code>{question1-total.column1}</code></td>
+        <td><code>{matrix1-total.column1}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Dynamic Matrix</b></td>
@@ -94,27 +124,57 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{row.column1}</code></td>
       </tr>
       <tr>
+        <td><code>{prevRow.columnid}</code></td>
+        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+        <td><code>{prevRow.column1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{nextRow.columnid}</code></td>
+        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+        <td><code>{nextRow.column1}</code></td>
+      </tr>
+      <tr>
         <td><code>{dmatrixid[rowindex].columnid}</code></td>
         <td>Use a zero-based row index to access a specific cell.</td>
         <td><code>{dmatrix1[0].column1}</code></td>
       </tr>
       <tr>
+        <td><code>{dmatrixid[-1].columnid}</code><br><code>{dmatrixid[-2].columnid}</code><br>...</td>
+        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+        <td><code>{dmatrix1[-1].column1}</code></td>
+      </tr>
+      <tr>
         <td colspan="3"><b>Dynamic Panel</b></td>
       </tr>
       <tr>
-        <td><code>{panel.questionid}</code></td>
-        <td>Use the <code>panel</code> prefix to access a question within the same panel.</td>
-        <td><code>{panel.question1}</code></td>
+        <td><code>{panel.qid}</code></td>
+        <td>Use the <code>panel</code> prefix to access a question in the same panel.</td>
+        <td><code>{panel.q1}</code></td>
       </tr>
       <tr>
-        <td><code>{parentPanel.questionid}</code></td>
-        <td>Use the <code>parentPanel</code> prefix to access a question within a parent Dynamic Panel. Applies when one Dynamic Panel question is nested in another.</td>
-        <td><code>{parentPanel.question1}</code></td>
+        <td><code>{prevPanel.qid}</code></td>
+        <td>Use the <code>prevPanel</code> prefix to access a question in the previous panel.</td>
+        <td><code>{prevPanel.q1}</code></td>
       </tr>
       <tr>
-        <td><code>{dpanelid[panelindex].questionid}</code></td>
-        <td>Use a zero-based panel index to access a question within a specific panel.</td>
-        <td><code>{dpanel1[0].question1}</code></td>
+        <td><code>{nextPanel.qid}</code></td>
+        <td>Use the <code>nextPanel</code> prefix to access a question in the next panel.</td>
+        <td><code>{nextPanel.q1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{parentPanel.qid}</code></td>
+        <td>Use the <code>parentPanel</code> prefix to access a question in a parent Dynamic Panel. Applies when one Dynamic Panel question is nested in another.</td>
+        <td><code>{parentPanel.q1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{dpanelid[panelindex].qid}</code></td>
+        <td>Use a zero-based panel index to access a question in a specific panel.</td>
+        <td><code>{dpanel1[0].q1}</code></td>
+      </tr>
+      <tr>
+        <td><code>{dpanelid[-1].qid}</code><br><code>{dpanelid[-2].qid}</code><br>...</td>
+        <td>Use negative indices to access a question in the last panel, the panel before the last, and so on.</td>
+        <td><code>{dpanel1[-1].q1}</code></td>
       </tr>
     </tbody>
   </table>
@@ -127,20 +187,23 @@ The advanced syntax may be useful in many cases, one of which is data validation
 1. Add a Dynamic Panel to the design surface.
 2. Add two Single-Line Input questions to the Dynamic Panel.
 3. Select the first question, locate the **Input type** drop-down menu under the **General** category, and select **Date**.
-4. Repeat step 3 for the second question.<br><br>
-  <img src="../images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
+4. Repeat step 3 for the second question.
+
+  <img src="images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
 5. Select the first question and enter `start-date` as the **Question name** setting value.
-6. Select the second question and enter `end-date` as a value for the same setting.<br><br>
-  <img src="../images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
-7. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.<br><br>
-  <img src="../images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+6. Select the second question and enter `end-date` as a value for the same setting.
+
+  <img src="images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
+7. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
+
+  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
 8. Specify the following **Error message**: `End date should be greater than start date`.
 9. Enter the following **Validation expression**: `{panel.start-date} < {panel.end-date}`.
-  <img src="../images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
+  <img src="images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
 
 To check that the validation rule works as expected, open the Preview tab, add a new entry to the Dynamic Panel, and select invalid start and end dates.
 
-<img src="../images/eud-datevalidation-preview.png" alt='Date validation preview' width="1321" height="671">
+<img src="images/eud-datevalidation-preview.png" alt='Date validation preview' width="1321" height="671">
 
 ### Custom Variables
 
@@ -154,15 +217,17 @@ Calculation functions produce results that can be used as operands in expression
 
 1. Add two Single-Line Input questions to the design surface.
 2. Set their **Input type** to **Date** and **Question name** to `start-date` and `end-date` (perform steps 3 to 6 from the [instructions for the Dynamic Panel](#dynamic-panel)).
-3. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.<br><br>
-  <img src="../images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+3. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
+
+  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
 4. Specify the following **Error message**: `Difference between start and end dates must not be greater than 14 days`.
-5. Enter the following **Validation expression**: `dateDiff({start-date}, {end-date}, "days") <= 14`.<br><br>
-  <img src="../images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
+5. Enter the following **Validation expression**: `dateDiff({start-date}, {end-date}, "days") <= 14`.
+
+  <img src="images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
 
 To verify the validation, open the Preview tab and select two dates that are more than 14 days apart.
 
-<img src="../images/eud-validation-datediff-preview.png" alt='Date difference validation preview' width="1217" height="407">
+<img src="images/eud-validation-datediff-preview.png" alt='Date difference validation preview' width="1217" height="407">
 
 Other calculation functions are used in expressions in a similar way. For more details, refer to the [Calculation Functions](#calculation-functions) section of this document.
 
@@ -188,6 +253,8 @@ Comparison operators are used to compare two values (or in case of `empty` and `
 | `notcontains` / `notcontain` | Compares two values and returns `true` if the first value doesn't contain the second value within it. | `"{q1} notcontains 'abc'"` |
 | `anyof` | Compares a value with an array of values and returns `true` if the value is present in the array. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
 | `allof` | Compares two arrays and returns `true` if the first array includes all values from the second. | `"{q1} allof [ 'value1', 'value2', 'value3' ]"` |
+
+> Comparison operations are case-sensitive.
 
 ### Logical Operators
 
@@ -219,7 +286,7 @@ Calculation functions allow you to perform computations within your survey. All 
 ### Logical Functions
 
 Expressions support one logical function&mdash;`iif`. It returns one value or the other based on whether a specified condition is true or false.      
-Example: `"iif({question1} > 20, 'High', 'Low')"`
+Example: `"iif({q1} > 20, 'High', 'Low')"`
 
 ### Date Functions
 

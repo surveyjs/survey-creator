@@ -19,7 +19,7 @@ By default, each new question added to your form is assigned a number. If you pr
 2. Under **Question settings**, locate the **Question numbering** setting.  
 3. Select the **No numbering** option from the drop-down menu.
 
-<img src="../images/eud-question-numbering-survey 401 674.png" alt='How to remove question numbering for all questions within a form or survey' width="401" height="674">
+<img src="images/eud-question-numbering-survey 401 674.png" alt='How to remove question numbering for all questions within a form or survey' width="401" height="674">
 
 ### For an Individual Question
 
@@ -29,7 +29,7 @@ If you want to keep question numbering for most questions but remove it from spe
 2. Under **Layout**, locate the **Hide the question number** setting.  
 3. Check the box to remove the question number.
 
-<img src="../images/eud-hide-question-number 400 347.png" alt='How to remove question numbers for an individual question within a form or survey' width="400" height="347">
+<img src="images/eud-hide-question-number 400 347.png" alt='How to remove question numbers for an individual question within a form or survey' width="400" height="347">
 
 ## How to Restart Question Numbering on Each Page
 
@@ -39,7 +39,7 @@ If you would like the question numbering to reset at the beginning of each page,
 2. Under **Question settings**, locate the **Question numbering** setting.  
 3. Select the **Reset on each page** option from the drop-down menu.
 
-<img src="../images/eud-reset-on-each-page 401 674.png" alt='How to reset question numbering on each page' width="401" height="674">
+<img src="images/eud-reset-on-each-page 401 674.png" alt='How to reset question numbering on each page' width="401" height="674">
 
 ## How to Number Survey Pages
 
@@ -49,7 +49,7 @@ Page numbers in your survey or form are hidden by default. To display them, foll
 2. Under **Pages**, locate the **Show page numbers** setting.  
 3. Check the box to enable page numbering.
 
-<img src="../images/eud-show-page-numbers 401 541.png" alt='How to number survey pages' width="401" height="541">
+<img src="images/eud-show-page-numbers 401 541.png" alt='How to number survey pages' width="401" height="541">
 
 ## How to Number Panels
 
@@ -59,7 +59,7 @@ Individual panel numbering and the numbering of questions within a nesting panel
 2. Under **Numbering**, locate the **Number panels** setting.
 3. Check the box to number the selected panel.
 
-<img src="../images/eud-panel-numbering 408 513.png" alt='How to number panels' width="408" height="513">
+<img src="images/eud-panel-numbering 408 513.png" alt='How to number panels' width="408" height="513">
 
 ## Question Numbering within a Panel
 
@@ -69,16 +69,16 @@ You can manage question numbering within an individual panel. For instance, you 
 2. Under **Numbering**, locate the **Question numbering** setting. 
 3. Select the **No numbering** option from the drop-down menu.
 
-<img src="../images/eud-no-question-numbering-within-a-panel 412 321.png" alt='How to remove numbers from questions nested within a panel' width="412" height="321">
+<img src="images/eud-no-question-numbering-within-a-panel 412 321.png" alt='How to remove numbers from questions nested within a panel' width="412" height="321">
 
 The result will look as follows:
 
-<img src="../images/eud-no-question-numbering-within-a-panel-preview 931 605.png" alt='Preview: A panel of questions without numbering' width="931" height="605">
+<img src="images/eud-no-question-numbering-within-a-panel-preview 931 605.png" alt='Preview: A panel of questions without numbering' width="931" height="605">
 
 Alternatively, if you wish to restart question numbering within each panel, use the **Reset on each panel** option. 
 
-<img src="../images/eud-reset-on-each-panel 1122 852.png" alt='Preview: Panels of questions with numbering reset on each' width="1122" height="852">
+<img src="images/eud-reset-on-each-panel 1122 852.png" alt='Preview: Panels of questions with numbering reset on each' width="1122" height="852">
 
 For continuous numbering of each element, select the **Auto-numbering** option.
 
-<img src="../images/eud-auto-numbering-within-a-panel 935 604.png" alt='Preview: A panel of questions with continuous numbering' width="935" height="604">
+<img src="images/eud-auto-numbering-within-a-panel 935 604.png" alt='Preview: A panel of questions with continuous numbering' width="935" height="604">

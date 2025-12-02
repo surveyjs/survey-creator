@@ -10,7 +10,7 @@ test("Adorner design", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -24,7 +24,7 @@ test("Adorner design", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
+  await page.waitForLoadState("load");
 
   const image = page.locator(".sd-image");
   await image.click();
@@ -36,7 +36,7 @@ test("empty imageLink", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -50,7 +50,6 @@ test("empty imageLink", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
 
   const fileplaceholder = page.locator(".svc-question__content--image .sd-file");
   await expect(fileplaceholder).toBeVisible();
@@ -63,7 +62,7 @@ test("broken imageLink", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -77,7 +76,6 @@ test("broken imageLink", async ({ page }) => {
   };
 
   await setJSON(page, json);
-  await page.waitForLoadState("networkidle");
   await page.locator(".sd-image").click();
   await expect(page.locator(".svc-question__content--image")).toHaveScreenshot("image-broken-image-link.png");
 });
@@ -87,7 +85,7 @@ test("Check image loading indicator", async ({ page }) => {
   await page.setViewportSize({ width: 2560, height: 1440 });
 
   const json = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       { "name": "page2", "elements": [{ "type": "image", "name": "question2", "imageLink": "wrong_url" }] }

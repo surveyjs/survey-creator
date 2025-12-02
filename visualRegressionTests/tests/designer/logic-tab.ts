@@ -30,7 +30,7 @@
 // });
 
 // const jsonOneRule = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -79,7 +79,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1920, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -115,7 +115,7 @@
 //       .click(getTabbedMenuItemByText(creatorTabLogicName));
 //     await t.hover(logicDetailButtonElement);
 //     await takeElementScreenshot("logic-expand-hover.png", logicDetailButtonElement, t, comparer);
-//     const removeRuleSelector = Selector("#remove-row .sv-action-bar-item");
+//     const removeRuleSelector = Selector(".sl-table__remove-button .sv-action-bar-item");
 //     await t.hover(removeRuleSelector);
 //     await takeElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t, comparer);
 //     await t.click(logicDetailButtonElement);
@@ -147,7 +147,7 @@
 //     await t.resizeWindow(1920, 900);
 //     await patchNotifierLifeTime();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -181,7 +181,7 @@
 //     await t.resizeWindow(900, 900);
 //     await patchNotifierLifeTime();
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -215,7 +215,7 @@
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(1920, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -237,7 +237,7 @@
 //     await t.click(getTabbedMenuItemByText(creatorTabLogicName))
 //       .hover(Selector(".sl-table__row"))
 //       .click(logicDetailButtonElement)
-//       .click("#svc-logic-fast-entry button");
+//       .click(".sv-action--logic-fast-entry button");
 //     const conditionContentSelector = Selector(".sl-table__cell--detail-panel .sl-panel");
 //     await takeElementScreenshot("logic-fast-entry.png", conditionContentSelector, t, comparer);
 //     await t.click(Selector(".sl-comment")).pressKey("ctrl+a delete");
@@ -247,7 +247,7 @@
 // });
 
 // const jsonMultipleConditionsMultipleActions = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "pages": [
 //     {
@@ -336,7 +336,7 @@
 //   });
 // });
 // const jsonAllActionTypes = {
-//   showQuestionNumbers: "on",
+//   showQuestionNumbers: true,
 //   "logoPosition": "right",
 //   "completedHtmlOnCondition": [
 //     {
@@ -380,7 +380,7 @@
 //             "User Interface",
 //             "Complete Functionality"
 //           ],
-//           "hasOther": true,
+//           "showOtherItem": true,
 //           "otherText": "Other feature:",
 //           "colCount": 2
 //         },
@@ -499,11 +499,11 @@
 //   });
 // });
 
-// test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async (t) => {
+// test("Texts overflow the controls when useElementTitles is enabled #3192", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
 //     await t.resizeWindow(800, 900);
 //     await setJSON({
-//       showQuestionNumbers: "on",
+//       showQuestionNumbers: true,
 //       "logoPosition": "right",
 //       "pages": [
 //         {
@@ -535,7 +535,7 @@
 //       ]
 //     });
 //     await ClientFunction(() => {
-//       window["creator"].setOptions({ showTitlesInExpressions: true });
+//       window["creator"].setOptions({ useElementTitles: true });
 //     })();
 //     await t
 //       .click(getTabbedMenuItemByText(creatorTabLogicName))

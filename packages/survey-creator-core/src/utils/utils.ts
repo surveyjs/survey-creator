@@ -96,3 +96,12 @@ export function getOS(): "Mac OS" | "iOS" | "Windows" | "Android" | "Linux" {
 
   return os;
 }
+
+export function cssVariablesToString(cssVariables: { [key: string]: string } | null | undefined): string {
+  if (!cssVariables) {
+    return "";
+  }
+  return Object.keys(cssVariables)
+    .map(key => `${key}: ${cssVariables[key]}`)
+    .join("; ");
+}

@@ -4,7 +4,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Logic tab";
 
 const json = {
-  questions: [
+  elements: [
     {
       type: "checkbox",
       name: "string_editor",
@@ -18,7 +18,7 @@ const json = {
 };
 
 const json2 = {
-  questions: [
+  elements: [
     {
       type: "dropdown",
       name: "q1",
@@ -294,7 +294,7 @@ test("Update rules", async (t) => {
     .expect(tableRulesSelector.count).eql(2)
     .expect(Selector(".st-table__cell--actions").count).eql(4)
     .expect(Selector(".sl-table__detail-button").count).eql(2)
-    .expect(Selector("#remove-row").count).eql(2);
+    .expect(Selector(".sl-table__remove-button").count).eql(2);
 });
 
 test("Manual Entry of the editing condition", async (t) => {

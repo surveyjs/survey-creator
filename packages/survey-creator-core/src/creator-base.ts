@@ -88,6 +88,8 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
 import { deprecate } from "util";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
+import Default from "./themes/default-light";
+import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -287,6 +289,7 @@ export class SurveyCreatorModel extends Base
   set propertyGridNavigationMode(newValue: "buttons" | "accordion") {
     this.showOneCategoryInPropertyGrid = newValue === "buttons";
   }
+  public trimValues: boolean = false;
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
@@ -414,7 +417,8 @@ export class SurveyCreatorModel extends Base
     this.setPropertyVisibility("survey", allow, "pages");
     this.setPropertyVisibility("question", allow, "page");
     this.setPropertyVisibility("panel", allow, "page");
-    this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+    const optJson = this.options.showJSONEditorTab;
+    this.showJSONEditorTab = (optJson === true) || (optJson === undefined && allow);
   }
 
   private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
@@ -442,8 +446,8 @@ export class SurveyCreatorModel extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    SurveySettings.allowShowEmptyTitleInDesignMode = allowModifyPages;
-    SurveySettings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
+    SurveySettings.designMode.showEmptyTitles = allowModifyPages;
+    SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
@@ -867,7 +871,7 @@ export class SurveyCreatorModel extends Base
    */
   public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
   /**
-   *@deprecated Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
+   * @deprecated Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
    */
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.onPageGetFooterActions;
 
@@ -920,6 +924,8 @@ export class SurveyCreatorModel extends Base
    * @see uploadFiles
    */
   public onUploadFile: EventBase<SurveyCreatorModel, UploadFileEvent> = this.addCreatorEvent<SurveyCreatorModel, UploadFileEvent>();
+
+  public onClearFile: EventBase<SurveyCreatorModel, UploadFileEvent> = this.addCreatorEvent<SurveyCreatorModel, UploadFileEvent>();
   /**
    * An event that is raised when the Translation tab displays a property for translation. Use this event to control the property visibility.
    */
@@ -1108,12 +1114,22 @@ export class SurveyCreatorModel extends Base
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
    */
-  public showObjectTitles = false;
+  get showObjectTitles() {
+    return this.useElementTitles;
+  }
+  set showObjectTitles(val) {
+    this.useElementTitles = val;
+  }
 
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
    */
-  public showTitlesInExpressions = false;
+  get showTitlesInExpressions() {
+    return this.useElementTitles;
+  }
+  set showTitlesInExpressions(val) {
+    this.useElementTitles = val;
+  }
 
   /**
    * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
@@ -1650,7 +1666,19 @@ export class SurveyCreatorModel extends Base
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
+
+  /**
+   * Specifies whether to remove the sidebar that contains the Property Grid from the Survey Creator UI.
+   *
+   * Default value: `false` (the sidebar is available)
+   *
+   * > Unlike [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar), which controls the sidebar's visibility, this property disables the sidebar feature entirely.
+   */
+  @property() removeSidebar: boolean;
   public sidebar: SidebarModel;
+  public get isSidebarVisible() {
+    return this.sidebar && !this.removeSidebar;
+  }
 
   constructor(protected options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super();
@@ -1663,6 +1691,7 @@ export class SurveyCreatorModel extends Base
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
+    this.applyCreatorTheme(Default);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
@@ -1729,12 +1758,13 @@ export class SurveyCreatorModel extends Base
   @property() showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
-   * Specifies whether to show the sidebar that displays the Property Grid.
+   * Opens or closes the sidebar that displays the Property Grid.
    *
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/customize-property-editors/ (linkStyle))
    * @see sidebarLocation
+   * @see removeSidebar
    */
   public get showSidebar(): boolean {
     return this.showSidebarValue;
@@ -1766,7 +1796,7 @@ export class SurveyCreatorModel extends Base
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
-  * @deprecated showPropertyGrid is deprecated, use showSidebar instead.
+  * @deprecated Use the [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) property instead.
   */
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
@@ -2433,6 +2463,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
+    if (this.isCreatingNewElement) return;
     if (this.isObjQuestion(obj)) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
@@ -2535,9 +2566,12 @@ export class SurveyCreatorModel extends Base
   public onDragDropItemStart(): void {
     this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
   }
+  private isCreatingNewElement: boolean;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
+    this.isCreatingNewElement = true;
     question.name = this.generateUniqueName(question, question.name);
+    this.isCreatingNewElement = false;
     var page = this.getPageByElement(question);
     if (!page) return;
     var options = { question: question, page: page, reason: this.addNewElementReason };
@@ -2702,7 +2736,7 @@ export class SurveyCreatorModel extends Base
     displayName: string = undefined
   ): string {
     if (!displayName) {
-      displayName = SurveyHelper.getObjectName(obj, this.useElementTitles || this.showObjectTitles);
+      displayName = SurveyHelper.getObjectName(obj, this.useElementTitles);
     }
     var options = { obj: obj, element: obj, displayName: displayName, area: area, reason: reason };
     this.onElementGetDisplayName.fire(this, options);
@@ -2719,6 +2753,9 @@ export class SurveyCreatorModel extends Base
       survey.gridLayoutEnabled = false;
     }
 
+    if (reason === "theme") {
+      survey.showTimer = false;
+    }
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
@@ -2823,7 +2860,7 @@ export class SurveyCreatorModel extends Base
     this.setState("modified");
     this.onModified.fire(this, options);
     this.doOnElementsChanged(options.type);
-    this.isAutoSave && this.doAutoSave();
+    this.autoSaveEnabled && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
@@ -3092,7 +3129,6 @@ export class SurveyCreatorModel extends Base
       }
     }
   }
-
   public createNewElement(json: any): IElement {
     const newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
@@ -3643,6 +3679,27 @@ export class SurveyCreatorModel extends Base
       this.onUploadFile.fire(this, {
         question: question,
         files: files || [],
+        callback: callback,
+        element: context && context.element || this.survey,
+        elementType: context && context.elementType,
+        propertyName: context && context.propertyName,
+        context: context
+      } as any);
+    }
+  }
+
+  public clearFiles(
+    value: any,
+    question: Question,
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
+  ) {
+    if (this.onClearFile.isEmpty) {
+      callback("success", value);
+    } else {
+      this.onClearFile.fire(this, {
+        question: question,
+        files: value || [],
         callback: callback,
         element: context && context.element || this.survey,
         elementType: context && context.elementType,
@@ -4273,7 +4330,7 @@ export class SurveyCreatorModel extends Base
   }
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
-    this.showSaveButton = value != null && !this.isAutoSave;
+    this.showSaveButton = value != null && !this.autoSaveEnabled;
   }
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string, defaultJSON: any = null) {
@@ -4283,7 +4340,7 @@ export class SurveyCreatorModel extends Base
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     this.addNewElementReason = "ELEMENT_CONVERTED";
     el = this.convertQuestion(<Question>el, newType, defaultJSON);
-    this.selectElement(el, null, "#convertTo button");
+    this.selectElement(el, null, ".svc-dropdown-action--convertTo button");
   }
 
   public getAddNewQuestionText(currentAddQuestionType: string = null) {
@@ -4321,7 +4378,7 @@ export class SurveyCreatorModel extends Base
     let availableToolboxItems: Array<QuestionToolboxItem> = [];
     this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    const elementNesting = !!element && isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element)) ? 1 : 0;
+    const elementNesting = !!element && isAddNew && !!element.getPanelInDesignMode() ? 1 : 0;
     if (!this.isAllowedNestingLevel(element, elementNesting)) {
       for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
         if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
@@ -4337,7 +4394,7 @@ export class SurveyCreatorModel extends Base
     }
 
     if (!element) return availableToolboxItems;
-    if (element.isPanel || SurveyHelper.isPanelDynamic(element)) {
+    if (!!element.getPanelInDesignMode()) {
       availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
     } else {
       const parentContainers = SurveyHelper.getElementParentContainers(element, false);
@@ -4403,11 +4460,18 @@ export class SurveyCreatorModel extends Base
     this.onPageGetFooterActions.fire(this, options);
     return options.actions;
   }
+  private defaultAddQuestionTypeValue: string;
+  public get defaultAddQuestionType(): string {
+    return this.defaultAddQuestionTypeValue || settings.designer.defaultAddQuestionType;
+  }
+  public set defaultAddQuestionType(val: string) {
+    this.defaultAddQuestionTypeValue = val;
+  }
 
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null, initJson: any = null) {
     if (!type) type = this.currentAddQuestionType;
-    if (!type) type = settings.designer.defaultAddQuestionType;
+    if (!type) type = this.defaultAddQuestionType;
     beforeAdd(type);
     let json = initJson;
     if (!json) {
@@ -4431,11 +4495,11 @@ export class SurveyCreatorModel extends Base
       iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
-      needSeparator: needSeparator
+      needSeparator: needSeparator,
+      action: () => {
+        onSelectQuestionType(item.typeName, item.json);
+      }
     });
-    action.action = () => {
-      onSelectQuestionType(item.typeName, item.json);
-    };
 
     if (!!item.items && item.items.length > 0 && this.toolbox.showSubitems) {
       const innerItems = item.items.map(i => new Action({
@@ -4573,6 +4637,7 @@ export class SurveyCreatorModel extends Base
    * - `"right"` (default) - Displays the sidebar on the right side of the design surface.
    * - `"left"` - Displays the sidebar on the left side of the design surface.
    * @see toolboxLocation
+   * @see removeSidebar
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
 
@@ -4694,16 +4759,28 @@ export class SurveyCreatorModel extends Base
     }
 
   }
+
+  private patchLegacyCSSVariables(newCssVariable: any) {
+    Object.keys(legacyCssVariables).forEach((variable) => {
+      if (!!newCssVariable[variable]) {
+        newCssVariable[legacyCssVariables[variable]] = newCssVariable[variable];
+        delete newCssVariable[variable];
+      }
+    });
+  }
+
   public syncTheme(theme: ICreatorTheme, isLight?: boolean): void {
     if (!theme) return;
     this.creatorTheme = theme;
 
     const newCssVariable = {};
-    assign(newCssVariable, theme?.cssVariables);
+    assign(newCssVariable, Default.cssVariables, theme?.cssVariables);
+    this.patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
     }
+    this.creatorTheme.cssVariables = newCssVariable;
     this.themeVariables = newCssVariable;
     const iconsSetName = this.creatorTheme && this.creatorTheme["iconSet"] ? this.creatorTheme["iconSet"] : "v2";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
@@ -4742,6 +4819,17 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
+  /**
+   * Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content such as questions or panels.
+   *
+   * - 0 - Disables content nesting for choice options.
+   * - 1 - Allows first-level choice options to contain survey elements.
+   * - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
+   *
+   * Default value: 0
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
+   */
   public maxChoiceContentNestingLevel: number = 0;
 
   /**

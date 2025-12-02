@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
+import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 @Component({
   selector: "test-dropdown-collapse",
   templateUrl: "./test.component.html",
@@ -14,5 +15,6 @@ export class TestDropdownCollapseComponent extends TestDefaultComponent {
     this.creator["animationEnabled"] = false;
     this.creator.showOneCategoryInPropertyGrid = false;
     this.creator.allowZoom = false;
+    this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
   }
 }

@@ -250,6 +250,8 @@ export var jaStrings = {
     toolboxFilteredTextPlaceholder: "「検索」...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "結果が見つかりませんでした",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "表示するプロパティがありません",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
     // [Auto-translated] "No results found"
@@ -664,8 +666,6 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "進行状況バーを表示する",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -1128,6 +1128,8 @@ export var jaStrings = {
     storeDataAsText: "ファイルのコンテンツをテキストとしてJSONの結果に保存",
     // "Maximum file size (in bytes)"
     maxSize: "ファイルの最大サイズ（byte）",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "最大ファイル数",
     // "Row count"
     rowCount: "列数",
     // "Columns layout"
@@ -1154,8 +1156,6 @@ export var jaStrings = {
     maxRateDescription: "最大レートの説明",
     // "Input type"
     inputType: "入力タイプ",
-    // "Option placeholder"
-    optionsCaption: "オプションのキャプション",
     // "Default Answer"
     defaultValue: "デフォルト値",
     // "Default texts"
@@ -1272,8 +1272,6 @@ export var jaStrings = {
     timerLocation: "タイマーパネルを表示する",
     // "Timer mode"
     timerInfoMode: "タイマーパネルモードを表示",
-    // "Panel display mode"
-    renderMode: "レンダーモード",
     // "Enable entry addition"
     allowAddPanel: "パネルの追加を許可",
     // "Enable entry removal"
@@ -1390,7 +1388,7 @@ export var jaStrings = {
     labelFalse: "「虚偽」ラベル",
     // "Show the Clear button"
     allowClear: "オプションのキャプションを表示する",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "検索モード",
     // [Auto-translated] "Display format"
     displayStyle: "表示形式",
@@ -1406,8 +1404,10 @@ export var jaStrings = {
     allowMultiple: "複数のファイルのアップロードを有効にする",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "アップロードされた画像をプレビューする",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "受け入れられるファイルの種類",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "受け入れられるファイルカテゴリ",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "追加のファイル拡張子",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "アップロードが完了するまで待ちます",
     // [Auto-translated] "Confirm file deletion"
@@ -2088,6 +2088,20 @@ export var jaStrings = {
       // [Auto-translated] "Informational"
       info: "情報"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "画像",
+      // [Auto-translated] "Videos"
+      video: "ビデオ",
+      // [Auto-translated] "Audio"
+      audio: "オーディオ",
+      // [Auto-translated] "Documents"
+      document: "書類",
+      // [Auto-translated] "Archives"
+      archive: "史料",
+      // [Auto-translated] "Custom"
+      custom: "習慣"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "フルネーム",
@@ -2272,10 +2286,6 @@ export var jaStrings = {
     underRowSingle: "行の下には、1 つのセクションのみを表示します",
     // "Auto"
     auto: "自動",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "隠れた"
-    },
     timerInfoMode: {
       // "Both"
       combined: "両方とも"
@@ -2715,7 +2725,9 @@ export var jaStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。"
+      confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2948,6 +2960,10 @@ export var jaStrings = {
     detailErrorLocation: "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "マトリックス列に対して「重複応答の防止」プロパティが有効になっている場合、重複エントリを送信しようとすると、回答者に次のエラーメッセージが表示されます。"
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3092,8 +3108,10 @@ export var jaStrings = {
     storeOthersAsComment: "「その他」オプションの値をアンケート結果に別のプロパティとして保存する場合に選択します。",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "{0} を実際の値のプレースホルダーとして使用します。",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "詳細については、[accept](https://www.w3schools.com/tags/att_input_accept.asp) 属性の説明を参照してください。",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "「カスタム」を選択して、あらかじめ定義されたカテゴリの上に自分のファイル拡張子を追加してください。",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "カンマで区切られたファイル拡張子(例:.csv、.xml)を入力してください。",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "選択肢を複数列のレイアウトに配置します。0 に設定すると、オプションが 1 行に表示されます。「���ル���力タイプ」がラジオボタングループまたはチェックボックスに設定されている列にのみ適用されます。",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3106,6 +3124,10 @@ export var jaStrings = {
     fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "テキストボックスを複数列レイアウトに配置します。"
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "マスクを適用した質問値をアンケート結果に保存する場合に選択します。"
@@ -3236,7 +3258,7 @@ export var jaStrings = {
     // [Auto-translated] "Render as"
     renderAs: "レンダリング形式", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "オリジナルアイテムを添付する", // Auto-generated string
+    attachData: "オリジナルアイテムを添付する", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "選択肢",
     // [Auto-translated] "Choices by url"

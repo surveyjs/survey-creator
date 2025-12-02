@@ -1,6 +1,6 @@
 <ng-template #template>
-  <div [class]="model.designerCss" [style.maxWidth]="survey.renderedWidth" [style]="model.surfaceCssVariables">
-    <div *ngIf="creator.allowEditSurveyTitle" class="svc-designer-header">
+  <div [class]="model.designerCss" [attr.style]="surfaceCssVariablesString">
+    <div *ngIf="creator.showSurveyHeader" class="svc-designer-header">
       <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
     </div>
 

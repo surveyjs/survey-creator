@@ -37,6 +37,7 @@ export var settings = {
     contains: ["checkbox", "text", "comment"],
     notcontains: ["checkbox", "text", "comment"],
     anyof: ["selectbase"],
+    noneof: ["selectbase"],
     allof: ["checkbox"],
     greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
@@ -201,32 +202,24 @@ export interface ISurveyCreatorOptions {
   isMobileView: boolean;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
-  maxLogicItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  showObjectTitles: boolean;
-  /**
-   * @deprecated
-   */
-  showTitlesInExpressions: boolean;
+  logicMaxItemsInCondition: number;
+  logicAllowTextEditExpressions: boolean;
   useElementTitles: boolean;
-  allowEditExpressionsInTextEditor: boolean;
-  maximumColumnsCount: number;
-  minimumChoicesCount: number;
-  maximumChoicesCount: number;
-  maximumRowsCount: number;
-  maximumRateValues: number;
+  maxColumns: number;
+  minChoices: number;
+  maxChoices: number;
+  maxRows: number;
+  maxRateValues: number;
 
-  maxNestedPanels: number;
   maxPanelNestingLevel: number;
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   enableLinkFileEditor: boolean;
-  inplaceEditForValues: boolean;
+  inplaceEditChoiceValues: boolean;
   rootElement?: HTMLElement;
   previewShowResults: boolean;
   showOneCategoryInPropertyGrid: boolean;
+  trimValues: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
@@ -332,6 +325,12 @@ export interface ISurveyCreatorOptions {
     callback: (status: string, data: any) => any,
     context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
+  clearFiles(
+    value: any,
+    question: Question,
+    callback: (status: string, data: any) => any,
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
+  ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
@@ -344,6 +343,7 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
+  logicMaxItemsInCondition: number;
   previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
@@ -353,30 +353,20 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   isMobileView: boolean = false;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
-  maxLogicItemsInCondition: number;
-  /**
-   * @deprecated
-   */
-  showObjectTitles: boolean;
-  /**
-   * @deprecated
-   */
-  showTitlesInExpressions: boolean;
   useElementTitles: boolean;
-  allowEditExpressionsInTextEditor: boolean = true;
-  maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
-  minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
-  maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
-  maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
-  maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  logicAllowTextEditExpressions: boolean = true;
+  maxColumns: number = settings.propertyGrid.maxColumns;
+  minChoices: number = settings.propertyGrid.minChoices;
+  maxChoices: number = settings.propertyGrid.maxChoices;
+  maxRows: number = settings.propertyGrid.maxRows;
+  maxRateValues: number = settings.propertyGrid.maxRateValues;
   machineTranslationValue: boolean = false;
-  inplaceEditForValues: boolean = false;
-
-  maxNestedPanels: number = -1;
+  inplaceEditChoiceValues: boolean = false;
   maxPanelNestingLevel: number = -1;
   forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   showOneCategoryInPropertyGrid: boolean;
+  trimValues: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
@@ -502,6 +492,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
     question: Question,
     callback: (status: string, data: any) => any
   ): void { }
+  clearFiles(value: any, question: Question, callback: (status: string, data: any) => any, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void {
+  }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }

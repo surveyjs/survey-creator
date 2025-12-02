@@ -59,7 +59,7 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
   expect(selectAllItemAdorner.allowRemove).toBeFalsy();
 
-  question.hasSelectAll = true;
+  question.showSelectAllItem = true;
   expect(selectAllItemAdorner.isNew).toBeFalsy();
   expect(selectAllItemAdorner.allowAdd).toBeFalsy();
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
@@ -215,7 +215,7 @@ test("item value allowAdd on events", () => {
   const creator = new CreatorTester();
 
   creator.onCollectionItemAllowOperations.add(function (sender, options) {
-    const q = <QuestionCheckboxModel>options.obj;
+    const q = <QuestionCheckboxModel>options.element;
     if (q && q.selectAllItem == options.item) {
       options.allowAdd = true;
     }
@@ -426,7 +426,7 @@ test("QuestionImageAdornerViewModel read only mode on events", () => {
   expect(imageAdorner.filePresentationModel.renderedInputReadOnly).toBeFalsy();
 
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.name == "q1") options.allowEdit = false;
+    if (options.element.name == "q1") options.allowEdit = false;
   });
 
   const imageAdornerRO = new QuestionImageAdornerViewModel(
@@ -486,9 +486,9 @@ test("QuestionImageAdornerViewModel pass question into onUploadFile event", () =
   expect(counter).toEqual(1);
 });
 
-test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate values", () => {
+test("QuestionRatingAdornerViewModel respect maxRateValues with no rate values", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -523,7 +523,7 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate valu
 
 test("QuestionRatingAdornerViewModel disabled add remove", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", rateType: "smileys", name: "q1", rateMin: 1, rateMax: 10 }]
   };
@@ -559,7 +559,7 @@ test("QuestionRatingAdornerViewModel disabled add remove", () => {
 
 test("QuestionRatingAdornerViewModel respect library limits", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -570,7 +570,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
     question,
     <any>{}
   );
-  creator.maximumRateValues = 0;
+  creator.maxRateValues = 0;
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeTruthy();
@@ -592,7 +592,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
   expect(ratingAdorner.enableAdd).toBeTruthy();
   expect(ratingAdorner.enableRemove).toBeTruthy();
 
-  question.rateDisplayMode = "smileys";
+  question.rateType = "smileys";
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeFalsy();
@@ -608,7 +608,7 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
 
 test("QuestionRatingAdornerViewModel button styles", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -631,7 +631,7 @@ test("QuestionRatingAdornerViewModel button styles", () => {
 
 test("QuestionRatingAdornerViewModel controlsClassNames", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -669,9 +669,9 @@ test("QuestionRatingAdornerViewModel controlsClassNames", () => {
   expect(ratingAdorner.hasTopLabel).toBe(false);
   expect(ratingAdorner.controlsClassNames).toBe("svc-rating-question-controls svc-item-value-controls");
 });
-test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
+test("QuestionRatingAdornerViewModel respect maxRateValues with rate values", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{
       type: "rating", name: "q1", "rateValues": [
@@ -893,6 +893,26 @@ test("QuestionImageAdornerViewModel filePresentationModel triggers creator.onUpl
   expect(uploadCount).toBe(1);
 });
 
+test("QuestionImageAdornerViewModel triggers creator.onClearFile event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  question.value = [{}];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  let clearCount = 0;
+  creator.onClearFile.add((s, o) => {
+    clearCount++;
+    o.callback({}, "success");
+  });
+  expect(clearCount).toBe(0);
+
+  imageAdorner.filePresentationModel.clear();
+  expect(clearCount).toBe(1);
+});
+
 test("QuestionImageAdornerViewModel filePresentationModel creates own survey instance", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -935,7 +955,7 @@ test("LogoImageViewModel isUploading", () => {
 
 test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly", () => {
   const creator = new CreatorTester();
-  creator.maximumRateValues = 4;
+  creator.maxRateValues = 4;
   creator.JSON = {
     elements: [{ type: "rating", name: "q1", rateMax: 3 }]
   };
@@ -956,7 +976,7 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.enableAdd).toBeTruthy();
 
-  creator.onGetPropertyReadOnly.add((sender, options) => eventFunction(sender, options));
+  creator.onPropertyGetReadOnly.add((sender, options) => eventFunction(sender, options));
 
   expect(ratingAdorner.allowAdd).toBeFalsy();
   expect(ratingAdorner.allowRemove).toBeFalsy();

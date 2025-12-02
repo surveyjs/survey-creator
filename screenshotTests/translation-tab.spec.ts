@@ -11,7 +11,7 @@ test.describe(title, () => {
   test("strings view", async ({ page }) => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -79,7 +79,7 @@ test.describe(title, () => {
       (window as any).creator.onMachineTranslate.add((sender, options) => { });
     });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -117,8 +117,10 @@ test.describe(title, () => {
     await page.locator("button[title='Auto-translate All']").nth(1).click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
     await page.setViewportSize({ width: 1000, height: 1440 });
+    await page.waitForTimeout(500);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-medium-screen.png");
     await page.setViewportSize({ width: 800, height: 1440 });
+    await page.waitForTimeout(500);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-small-screen.png");
   });
 });

@@ -250,6 +250,8 @@ export var persianStrings = {
     toolboxFilteredTextPlaceholder: "تایپ برای جستجو...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "نتیجه ای یافت نشد",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "هیچ ویژگی ای برای نمایش وجود ندارد",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "جستجو...",
     // [Auto-translated] "No results found"
@@ -664,8 +666,6 @@ export var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       // [Auto-translated] "New entry location"
       newPanelPosition: "محل ورود جدید",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "نمایش نوار پیشرفت",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
@@ -1128,6 +1128,8 @@ export var persianStrings = {
     storeDataAsText: "ذخیره کردن محتوای فایل در JSON به عنوان متن",
     // "Maximum file size (in bytes)"
     maxSize: "حداکثر سایز به بایت",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "حداکثر تعداد فایل ها",
     // "Row count"
     rowCount: "تعداد سطر",
     // "Columns layout"
@@ -1154,8 +1156,6 @@ export var persianStrings = {
     maxRateDescription: "توضیح حداکثر امتیاز",
     // "Input type"
     inputType: "نوع ورودی",
-    // "Option placeholder"
-    optionsCaption: "نوشته انتخاب ها",
     // "Default Answer"
     defaultValue: "مقدار پیش فرض",
     // "Default texts"
@@ -1272,8 +1272,6 @@ export var persianStrings = {
     timerLocation: "نمایش پنل زمان سنج",
     // "Timer mode"
     timerInfoMode: "نمایش حالت پنل زمان سنج",
-    // "Panel display mode"
-    renderMode: "حالت رندر",
     // "Enable entry addition"
     allowAddPanel: "اجازه افزودن پنل",
     // "Enable entry removal"
@@ -1390,7 +1388,7 @@ export var persianStrings = {
     labelFalse: "برچسب \"غلط\"",
     // "Show the Clear button"
     allowClear: "نشان دادن دکمهی Clear",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "حالت جستجو",
     // [Auto-translated] "Display format"
     displayStyle: "فرمت نمایش",
@@ -1406,8 +1404,10 @@ export var persianStrings = {
     allowMultiple: "فعال کردن آپلود چند فایل",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "پیش نمایش تصاویر آپلود شده",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "انواع فایل های پذیرفته شده",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "دسته بندی های فایل پذیرفته شده",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "پسوندهای فایل اضافی",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "منتظر بمانید تا آپلود کامل شود",
     // [Auto-translated] "Confirm file deletion"
@@ -2088,6 +2088,20 @@ export var persianStrings = {
       // [Auto-translated] "Informational"
       info: "اطلاعاتی"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "تصاویر",
+      // [Auto-translated] "Videos"
+      video: "فیلم",
+      // [Auto-translated] "Audio"
+      audio: "صوتی",
+      // [Auto-translated] "Documents"
+      document: "اسناد",
+      // [Auto-translated] "Archives"
+      archive: "آرشیو",
+      // [Auto-translated] "Custom"
+      custom: "سفارشی"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "نام و نام خانوادگی",
@@ -2272,10 +2286,6 @@ export var persianStrings = {
     underRowSingle: "در زیر ردیف، فقط یک بخش نمایش داده می شود",
     // "Auto"
     auto: "خودکار",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "پنهان"
-    },
     timerInfoMode: {
       // "Both"
       combined: "هر دو"
@@ -2715,7 +2725,9 @@ export var persianStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند."
+      confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "اعداد را به سؤالات تودرتو در پانل پویا اختصاص می دهد."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2948,6 +2960,10 @@ export var persianStrings = {
     detailErrorLocation: "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند.",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" برای یک ستون ماتریس فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3092,8 +3108,10 @@ export var persianStrings = {
     storeOthersAsComment: "انتخاب کنید برای ذخیره \"دیگر\" مقدار گزینه به عنوان یک ملک جداگانه در نتایج نظرسنجی.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "از {0} به عنوان نگهدارنده برای ارزش واقعی استفاده کنید.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "برای اطلاعات بیشتر به [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description مراجعه کنید.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "گزینه «سفارشی» را انتخاب کنید تا پسوندهای فایل خود را روی دسته بندی های از پیش تعریف شده اضافه کنید.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "پسوندهای فایل را وارد کنید که با ویرگول جدا شده اند (مثلا .csv، .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. فقط برای ستون هایی اعمال می شود که \"نوع ورودی سلولی\" روی گروه دکمه های رادیویی یا کادرهای تأیید تنظیم شده است.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3106,6 +3124,10 @@ export var persianStrings = {
     fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "جعبه های متن را در یک طرح بندی چند ستونی مرتب می کند."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "انتخاب کنید که ایا می خواهید مقدار سؤال را با یک ماسک کاربردی در نتایج نظرسنجی ذخیره کنید."
@@ -3236,7 +3258,7 @@ export var persianStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Render به عنوان", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "پیوست موارد اصلی", // Auto-generated string
+    attachData: "پیوست موارد اصلی", // Auto-generated string
     // "Choices"
     choices: "گزینه ها",
     // "Choices by url"

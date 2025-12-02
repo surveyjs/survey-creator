@@ -263,8 +263,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
             if (this.creator.readOnly) return false;
             if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
             return (
-              this.creator.maximumChoicesCount < 1 ||
-              surveyElement["choices"].length < this.creator.maximumChoicesCount
+              this.creator.maxChoices < 1 || surveyElement["choices"].length < this.creator.maxChoices
             );
           }
         );
@@ -352,7 +351,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
     this.updateActionVisibilityByProp("isrequired", "isRequired", operationsAllow && options.allowChangeRequired);
     this.updateActionVisibilityByProp("convertInputType", "inputType", options.allowChangeInputType);
-    this.updateActionVisibilityByProp("convertInputType", "rateDisplayMode", options.allowChangeInputType);
+    this.updateActionVisibilityByProp("convertInputType", "rateType", options.allowChangeInputType);
   }
   private updateActionVisibilityByProp(actionName: string, propName: string, allow: boolean): void {
     const prop = Serializer.findProperty(this.surveyElement.getType(), propName);
@@ -494,6 +493,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     const actionData: IAction = {
       id: "convertTo",
+      css: "sv-action--convertTo",
       enabled: true,
       visibleIndex: 0,
       title: !!currItem ? currItem.title : editorLocalization.getString("qt." + this.currentType),
@@ -724,7 +724,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const actionSetup = {
       id: "isrequired",
       ariaRole: "checkbox",
-      css: "svc-action-bar-item--right",
+      css: "svc-action-bar-item--right sv-action--isrequired",
       innerCss: "svc-required-action",
       visibleIndex: 20,
       iconName: "icon-required",
@@ -778,7 +778,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   addNewQuestion = () => {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
-      this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+      this.currentAddQuestionType || this.creator.defaultAddQuestionType);
   };
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel((type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {

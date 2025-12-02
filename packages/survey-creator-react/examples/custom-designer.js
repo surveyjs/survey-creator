@@ -29,7 +29,7 @@ let json = {
               maxCount: 2
             }
           ],
-          hasOther: true,
+          showOtherItem: true,
           choices: [
             "Performance",
             "Stability",
@@ -60,7 +60,7 @@ let json = {
 const options = {
   showLogicTab: true,
   showTranslationTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true
 };
 
 class CustomDesignerTab extends SurveyCreator.TabDesignerComponent {

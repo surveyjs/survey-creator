@@ -99,9 +99,9 @@ export const collapseButtonSelector = (page) => page.locator(".sv-action-bar-ite
 export const surveySettingsButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Survey settings\"]");
 export const themeSettingsButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Theme settings\"]");
 // export const propertyGridSelector = Selector(".svc-side-bar__container");
-// export const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
+// export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
 // export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
-// export const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
+// export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 
 // export const questions = Selector(".svc-question__content");
 // export const questionToolbarActions = Selector(".svc-question__content--selected .svc-question__content-actions").find(".sv-action");
@@ -155,23 +155,24 @@ export function getAddNewQuestionButton(page) {
 }
 
 export function getToolboxItemByText(page, text) {
-  return page.locator(".svc-toolbox__item-title").getByText(text);
+  return page.locator(".svc-toolbox__item-title").getByText(text, { exact: true });
 }
 export function getToolboxItemByAriaLabel(page, text) {
   return page.locator(".svc-toolbox__item").withAttribute("aria-label").getByText(text);
 }
 export function getSubToolboxItemByText(page, text) {
-  return page.locator(".svc-toolbox__item-subtype").getByText(text);
+  return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
 }
 export async function addQuestionByAddQuestionButton(page, text) {
   await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
   await page.locator(".svc-list__item span").getByText(text).click();
 }
 
-export async function changeToolboxLocation(page, newVal: string) {
+export async function changeToolboxLocation(page: Page, newVal: string) {
   await page.evaluate((newVal) => {
     window["creator"].toolboxLocation = newVal;
   }, newVal);
+  await page.waitForTimeout(500);
 }
 
 export async function changeToolboxScrolling(page, hasScroll: boolean) {
@@ -209,7 +210,7 @@ export async function setShowAddQuestionButton(page, newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(page, newVal: boolean) {
   await page.evaluate((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   }, newVal);
 }
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {

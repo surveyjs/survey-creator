@@ -1,4 +1,4 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement, SurveyModel } from "survey-core";
+import { Base, ComputedUpdater, Helpers, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement, SurveyModel } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
@@ -136,7 +136,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
     if (!this.getHasAddButton()) return;
     const question: QuestionMatrixDynamicModel = options.question;
-    options.titleActions.push({
+    options.actions.push({
       id: "add-item",
       iconName: "icon-add",
       iconSize: "auto",
@@ -451,7 +451,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     );
   }
   protected excludeTextPropertyName(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
-    const hideText = options?.inplaceEditForValues;
+    const hideText = options?.inplaceEditChoiceValues;
     return !!hideText ? propNames.filter(p => p !== "text") : propNames;
   }
   protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
@@ -529,14 +529,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     return res;
   }
   protected getMinimumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
-    if (prop.name === "choices") return options.minimumChoicesCount;
+    if (prop.name === "choices") return options.minChoices;
     return super.getMaximumRowCount(obj, prop, options);
   }
   protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
-    if (prop.name === "choices") return options.maximumChoicesCount;
-    if (prop.name === "rows") return options.maximumRowsCount;
-    if (prop.name === "columns") return options.maximumColumnsCount;
-    if (prop.name === "rateValues") return options.maximumRateValues;
+    if (prop.name === "choices") return options.maxChoices;
+    if (prop.name === "rows") return options.maxRows;
+    if (prop.name === "columns") return options.maxColumns;
+    if (prop.name === "rateValues") return options.maxRateValues;
     return super.getMaximumRowCount(obj, prop, options);
   }
   private hasMultipleLanguage(items: Array<ItemValue>): boolean {
@@ -591,20 +591,43 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
     const ratingQuestion = <QuestionRatingModel>getQuestionFromObj(obj as SurveyElement);
     this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
     obj.onPropertyChanged.add((sender, options) => {
-      if (options.name == "rateCount" || options.name == "rateDisplayMode") {
+      if (options.name == "rateCount" || options.name == "rateType") {
         this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
       }
     });
   }
 
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
-    const clearAction = options.titleActions.filter((a) => a.id == "property-grid-clear")[0];
+    const clearAction = options.actions.filter((a) => a.id == "property-grid-clear")[0];
     if (clearAction) clearAction.visible = false;
     super.onGetQuestionTitleActions(obj, options, creator);
   }
 
   protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
     return this.excludeTextPropertyName(propNames, options);
+  }
+}
+export class PropertyGridEditorMatrixCustomLabels extends PropertyGridEditorMatrixItemValues {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "sliderlabel[]";
+  }
+  public onMatrixCellValidate(obj: Base, options: any): string {
+    const newVal = options.value;
+    if (!Helpers.isNumber(newVal)) return;
+    if (options.columnName == "value" && !options.error) {
+      const val = Helpers.getNumber(newVal);
+      const errorVal = this.getMinMaxError(obj, val);
+      if (!!errorVal) {
+        options.error = options.question.getLocalizationString(errorVal[0]).replace("{0}", errorVal[1]);
+      }
+    }
+  }
+  private getMinMaxError(obj: Base, val: number): [string, number] {
+    const min = (<any>obj).min;
+    const max = (<any>obj).max;
+    if (val < min) return ["minError", min];
+    if (val > max) return ["maxError", max];
+    return null;
   }
 }
 
@@ -629,7 +652,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): number {
-    return options.maximumColumnsCount;
+    return options.maxColumns;
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
@@ -796,7 +819,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (!options.row.editingObj) return;
     const q = options.cellQuestion;
     if (options.columnName === this.getObjTypeName()) {
-      q.showOptionsCaption = false;
+      q.allowClear = false;
       q.choices = this.getChoices(obj);
       q.value = options.row.editingObj.getType();
     }
@@ -895,6 +918,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixRateValues());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixCustomLabels());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixPages());
 PropertyGridEditorCollection.register(

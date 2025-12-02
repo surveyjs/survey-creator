@@ -54,7 +54,7 @@ export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
    */
   element: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
    */
   parentElement: Base;
 }
@@ -563,7 +563,7 @@ export interface GetConditionOperatorEvent {
    */
   questionName: string;
   /**
-   * A condition operator for which the event is raised: `"empty"`, `"notempty"`, `"equal"`, `"notequal"`, `"contains"`, `"notcontains"`, `"anyof"`, `"allof"`, `"greater"`, `"less"`, `"greaterorequal"`, or `"lessorequal"`.
+   * A condition operator for which the event is raised: `"empty"`, `"notempty"`, `"equal"`, `"notequal"`, `"contains"`, `"notcontains"`, `"anyof"`, `"noneof"`, `"allof"`, `"greater"`, `"less"`, `"greaterorequal"`, or `"lessorequal"`.
    */
   operator: string;
   /**
@@ -1012,11 +1012,11 @@ export interface DragDropAllowEvent {
    */
   allow: boolean;
   /**
-   * @deprecated Use `options.draggedElement` instead.
+   * @deprecated Use `options.toElement` instead.
    */
   target?: IElement;
   /**
-   * @deprecated Use `options.toElement` instead.
+   * @deprecated Use `options.draggedElement` instead.
    */
   source?: IElement;
 }

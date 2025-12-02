@@ -80,9 +80,9 @@ test("do not deactivate/activate tabs on selecting the active tab", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.activeTab).toEqual("designer");
-  expect(creator.makeNewViewActive("preview")).toBeTruthy();
+  expect(creator.switchTab("preview")).toBeTruthy();
   creator.activeTab = "preview";
-  expect(creator.makeNewViewActive("preview")).toBeFalsy();
+  expect(creator.switchTab("preview")).toBeFalsy();
   creator.activeTab = "preview";
 });
 test("Select new added question", (): any => {
@@ -1017,9 +1017,9 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2", startWithNewLine: false },
       { type: "text", name: "question3" }
-    ], showQuestionNumbers: "on"
+    ], showQuestionNumbers: true
   };
-  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  creator.copyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
   const question = creator.survey.getQuestionByName("question4");
   expect(question.startWithNewLine).toBeFalsy();
@@ -1031,9 +1031,9 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
-    ], showQuestionNumbers: "on"
+    ], showQuestionNumbers: true
   };
-  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  creator.copyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
   expect(creator.survey.getQuestionByName("question4")).toBeTruthy();
   expect(creator.survey.getQuestionByName("question4").visibleIndex).toEqual(1);
@@ -1061,11 +1061,23 @@ test("fast copy from paneldynamic", (): any => {
     ]
   };
   expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(1);
-  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1").template.elements[0]);
+  creator.copyQuestion(creator.survey.getQuestionByName("question1").template.elements[0]);
   expect(creator.survey.pages[0].questions).toHaveLength(1);
   expect(creator.survey.getQuestionByName("question3")).toBeTruthy();
   expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(2);
   expect(creator.survey.getQuestionByName("question1").template.elements[1].name).toEqual("question3");
+});
+test("fast copy tests, fastCopyQuestion method (obsolete)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" },
+      { type: "text", name: "question3" }
+    ], showQuestionNumbers: true
+  };
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  expect(creator.survey.pages[0].questions).toHaveLength(4);
 });
 test("Page duplicate action, copy a page and check the index", (): any => {
   const creator = new CreatorTester();
@@ -1636,7 +1648,7 @@ test("getQuestionContentWrapperComponentName for component", (): any => {
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
   const creator = new CreatorTester();
-  const survey = creator.createSurvey({ questions: [{ type: "test", name: "q1" }] });
+  const survey = creator.createSurvey({ elements: [{ type: "test", name: "q1" }] });
   const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
   const q = qCustom.contentPanel.questions[0];
   expect(q.name).toBe("rate1");
@@ -1682,7 +1694,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     });
   const creator = new CreatorTester();
   const survey = creator.createSurvey({
-    questions: [{
+    elements: [{
       "type": "mypanel",
       "name": "question1"
     }]
@@ -1723,7 +1735,7 @@ test("Test plug-ins in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   const testPlugin = <TabTestPlugin>creator.getPlugin("preview");
   expect(testPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(designerPlugin.model).toBeFalsy();
   expect(testPlugin.model).toBeTruthy();
   const logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
@@ -1733,15 +1745,15 @@ test("Test plug-ins in creator", (): any => {
   expect(logicPlugin.model).toBeFalsy();
   expect(translationPlugin.model).toBeFalsy();
 
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(testPlugin.model).toBeFalsy();
   expect(logicPlugin.model).toBeTruthy();
-  creator.makeNewViewActive("translation");
+  creator.switchTab("translation");
   expect(logicPlugin.model).toBeFalsy();
   expect(translationPlugin.model).toBeTruthy();
-  creator.makeNewViewActive("embed");
+  creator.switchTab("embed");
   expect(translationPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(designerPlugin.model).toBeTruthy();
 });
 test("Test plug-ins JSON-Text in creator", (): any => {
@@ -1753,10 +1765,10 @@ test("Test plug-ins JSON-Text in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(designerPlugin.model).toBeTruthy();
   expect(textPlugin.model).toBeFalsy();
 });
@@ -1770,7 +1782,7 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
     ]
   };
   creator.JSON = json;
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   let counter = 0;
   let changedType;
   creator.onModified.add((sender, options) => {
@@ -1780,15 +1792,15 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
   expect(creator.viewType).toEqual("designer");
   const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   expect(textPlugin.model).toBeTruthy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(counter).toEqual(0);
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   json.pages[0].elements[0].name = "question1";
   textPlugin.model.text = JSON.stringify(json);
   textPlugin.model.isJSONChanged = true;
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(creator.survey.getAllQuestions()[0].name).toEqual("question1");
   expect(counter).toEqual(1);
   expect(changedType).toEqual("JSON_EDITOR");
@@ -1807,10 +1819,10 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("json");
+  creator.switchTab("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("designer");
+  creator.switchTab("designer");
   expect(designerPlugin.model).toBeTruthy();
   expect(textPlugin.model).toBeFalsy();
   TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
@@ -1843,10 +1855,10 @@ test("Test plug-ins check order change viewtype and activate/deactivate", (): an
     }
   });
 
-  creator.makeNewViewActive("one");
+  creator.switchTab("one");
   expect(result).toBe("one-activate");
 
-  creator.makeNewViewActive("two");
+  creator.switchTab("two");
   expect(result).toBe("one-activate+one-deactivate+two-activate");
 
 });
@@ -2134,7 +2146,7 @@ test("PageAdorner and onElementAllowOperations", (): any => {
   };
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.isPage) {
+    if (options.element.isPage) {
       options.allowDelete = sender.survey.pageCount > 1;
     }
   });
@@ -2155,10 +2167,10 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
     let page = null;
-    if (options.obj.isPage) {
-      page = options.obj;
+    if (options.element.isPage) {
+      page = options.element;
     } else {
-      page = options.obj.page;
+      page = options.element.page;
     }
     if (!!page) {
       const isFirstPage = sender.survey.pages.indexOf(page) === 0;
@@ -2203,7 +2215,7 @@ test("PageAdorner and onElementAllowOperations, allowExpandCollapse", (): any =>
     ]
   };
   creator.onElementAllowOperations.add((sender, options) => {
-    options.allowExpandCollapse = (options.obj as SurveyElement).name == "page2";
+    options.allowExpandCollapse = (options.element as SurveyElement).name == "page2";
   });
   const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
   const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
@@ -2249,10 +2261,10 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   };
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.isQuestion) {
-      options.allowChangeType = options.obj.getType() !== "comment";
-      options.allowChangeRequired = options.obj.getType() !== "text";
-      options.allowChangeInputType = options.obj.name !== "q1";
+    if (options.element.isQuestion) {
+      options.allowChangeType = options.element.getType() !== "comment";
+      options.allowChangeRequired = options.element.getType() !== "text";
+      options.allowChangeInputType = options.element.name !== "q1";
     }
   });
   const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
@@ -2288,7 +2300,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations, allowExpandCollapse
   };
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
-    options.allowExpandCollapse = (options.obj as Question).name === "q1";
+    options.allowExpandCollapse = (options.element as Question).name === "q1";
   });
   const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
   const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
@@ -2342,7 +2354,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations on new elements", ()
     ]
   };
   creator.onElementAllowOperations.add((sender, options) => {
-    if (options.obj.isQuestion) {
+    if (options.element.isQuestion) {
       options.allowChangeType = false;
       options.allowChangeRequired = false;
     }
@@ -2417,7 +2429,7 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
-test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
+test("ConvertTo & addNewQuestion for panel & maxNestedPanels (obsolete)", (): any => {
   const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
@@ -2783,13 +2795,13 @@ test("change locale & creator.sidebar.hasVisiblePages", (): any => {
   creator.locale = "de";
   expect(creator.sidebar.hasVisiblePages).toBeTruthy();
 });
-test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
+test("QuestionAdornerViewModel for selectbase and creator.minChoices", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
   const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
-  creator.minimumChoicesCount = 2;
+  creator.minChoices = 2;
   let itemValue = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
   expect(itemValue.allowRemove).toBeFalsy();
   q1.choices.push(new ItemValue("item3"));
@@ -2797,13 +2809,13 @@ test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", 
   q1.choices.splice(2, 1);
   expect(itemValue.allowRemove).toBeFalsy();
 });
-test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
+test("QuestionAdornerViewModel for selectbase and creator.maxChoices", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
   const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
-  creator.maximumChoicesCount = 3;
+  creator.maxChoices = 3;
   const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2 + 4);
   q1.choices.push(new ItemValue("item3"));
@@ -2827,7 +2839,7 @@ test("QuestionAdornerViewModel for selectbase and creator.onItemValueAdded", ():
     elements: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2"] }]
   };
   creator.onItemValueAdded.add((sender, options) => {
-    options.newItem.text = options.obj.getType() + ":" + options.propertyName + ","
+    options.newItem.text = options.element.getType() + ":" + options.propertyName + ","
       + options.newItem.value + "," + options.itemValues.length.toString();
 
   });
@@ -2858,7 +2870,7 @@ test("Modify property editor settings on event", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyEditorCreated.add((sender, options) => {
     if (
-      options.obj.getType() == "text" &&
+      options.element.getType() == "text" &&
       options.property.name === "placeholder"
     ) {
       options.editor.textUpdateMode = "onTyping";
@@ -2875,8 +2887,8 @@ test("Modify property editor settings on event", (): any => {
 });
 test("Modify property editor via property grid survey", (): any => {
   const creator = new CreatorTester();
-  creator.onPropertyGridSurveyCreated.add((sender, options) => {
-    if (options.obj.getType() !== "text") return;
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area !== "property-grid" || options.element?.getType() !== "text") return;
     const question = options.survey.getQuestionByName("placeholder");
     question.textUpdateMode = "onTyping";
     question.dataList = ["item1", "item2"];
@@ -2893,7 +2905,7 @@ test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
   const creator = new CreatorTester();
   creator.onPropertyEditorUpdateTitleActions.add((sender, options) => {
-    const obj = options.obj;
+    const obj = options.element;
     if (
       obj.getType() === "checkbox" &&
       options.property.name === "choices" &&
@@ -2928,20 +2940,20 @@ test("Set readOnly option", (): any => {
     expect(e).toBeNull();
   }
 });
-test("Set allowEditSurveyTitle option", (): any => {
-  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+test("Set showSurveyHeader option", (): any => {
+  const creator = new CreatorTester({ showSurveyHeader: false });
   const showProp = (className: string, propName: string): boolean => {
     const prop = Serializer.findProperty(className, propName);
     return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
   };
-  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(creator.showSurveyHeader).toBeFalsy();
   expect(showProp("survey", "title")).toBeFalsy();
   expect(showProp("survey", "description")).toBeFalsy();
   expect(showProp("survey", "logo")).toBeFalsy();
   expect(showProp("survey", "logoFit")).toBeFalsy();
   expect(showProp("survey", "logoWidth")).toBeFalsy();
   expect(showProp("survey", "logoHeight")).toBeFalsy();
-  creator.allowEditSurveyTitle = true;
+  creator.showSurveyHeader = true;
   expect(showProp("survey", "title")).toBeTruthy();
   expect(showProp("survey", "description")).toBeTruthy();
   expect(showProp("survey", "logo")).toBeTruthy();
@@ -2949,16 +2961,16 @@ test("Set allowEditSurveyTitle option", (): any => {
   expect(showProp("survey", "logoWidth")).toBeTruthy();
   expect(showProp("survey", "logoHeight")).toBeTruthy();
 });
-test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
+test("Set showSurveyHeader option with removed logoHeight property", (): any => {
   Serializer.removeProperty("survey", "logoHeight");
-  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const creator = new CreatorTester({ showSurveyHeader: false });
   const showProp = (className: string, propName: string): boolean => {
     const prop = Serializer.findProperty(className, propName);
     return creator.onCanShowPropertyCallback(undefined, prop, "", undefined, <any>undefined);
   };
-  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(creator.showSurveyHeader).toBeFalsy();
   expect(showProp("survey", "logoWidth")).toBeFalsy();
-  creator.allowEditSurveyTitle = true;
+  creator.showSurveyHeader = true;
   expect(showProp("survey", "logoWidth")).toBeTruthy();
   Serializer.addProperty("survey", { name: "logoHeight", default: "200px", minValue: 0 });
 });
@@ -2976,12 +2988,12 @@ test("creator.onActiveTabChanged", (): any => {
     model = options.model;
   });
   expect(creator.viewType).toEqual("designer");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(tabName).toEqual("preview");
   expect(plugin).toEqual(creator.getPlugin("test"));
   expect(model).toEqual(plugin.model);
   expect(creator.activeTab).toEqual("preview");
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
   expect(model).toEqual(plugin.model);
@@ -2999,11 +3011,11 @@ test("creator.onActiveTabChaning", (): any => {
     options.allow = allow;
   });
   expect(creator.viewType).toEqual("designer");
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(tabName).toEqual("preview");
   expect(creator.activeTab).toEqual("preview");
   allow = false;
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(tabName).toEqual("logic");
   expect(creator.activeTab).toEqual("preview");
 });
@@ -3015,7 +3027,7 @@ test("active tab disableHide", (): any => {
   expect(creator.viewType).toEqual("designer");
   expect(creator.tabs[0].active).toBeTruthy();
   expect(creator.tabs[0].disableHide).toBeTruthy();
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.tabs[1].active).toBeTruthy();
   expect(creator.tabs[1].disableHide).toBeTruthy();
   expect(creator.tabs[0].active).toBeFalsy();
@@ -3036,7 +3048,7 @@ test("update tab content", (): any => {
   expect(hasQ1(creator.survey)).toBeTruthy();
 
   creator.JSON = {};
-  creator.makeNewViewActive("test");
+  creator.switchTab("test");
   expect(creator.viewType).toEqual("preview");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   expect(hasQ1(testPlugin.model.survey)).toBeFalsy();
@@ -3044,7 +3056,7 @@ test("update tab content", (): any => {
   expect(hasQ1(testPlugin.model.survey)).toBeTruthy();
 
   creator.JSON = {};
-  creator.makeNewViewActive("logic");
+  creator.switchTab("logic");
   expect(creator.viewType).toEqual("logic");
   const logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
   expect(hasQ1(logicPlugin.model.survey)).toBeFalsy();
@@ -3052,7 +3064,7 @@ test("update tab content", (): any => {
   expect(hasQ1(logicPlugin.model.survey)).toBeTruthy();
 
   creator.JSON = {};
-  creator.makeNewViewActive("translation");
+  creator.switchTab("translation");
   expect(creator.viewType).toEqual("translation");
   const translationPlugin = <TabLogicPlugin>creator.getPlugin("translation");
   expect(hasQ1(translationPlugin.model.survey)).toBeFalsy();
@@ -3087,15 +3099,15 @@ test("Keyboard Shortcuts", (): any => {
   expect(count).toEqual(0);
 });
 
-test("LogicPlugin Manual Entry: options.allowEditExpressionsInTextEditor", () => {
+test("LogicPlugin Manual Entry: options.logicAllowTextEditExpressions", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   let logicTabActions = logicPlugin.createActions();
-  expect(creator.allowEditExpressionsInTextEditor).toBeTruthy();
+  expect(creator.logicAllowTextEditExpressions).toBeTruthy();
   expect(logicTabActions).toHaveLength(3);
   expect(logicTabActions[2].id).toEqual("svc-logic-fast-entry");
 
-  creator.allowEditExpressionsInTextEditor = false;
+  creator.logicAllowTextEditExpressions = false;
   logicTabActions = logicPlugin.createActions();
   expect(logicTabActions).toHaveLength(2);
   expect(logicTabActions.filter(action => action.id === "svc-logic-fast-entry")).toHaveLength(0);
@@ -3136,7 +3148,7 @@ test("LogicPlugin Manual Entry: fastEntryAction enabled", () => {
   expect(fastEntryAction.enabled).toBeTruthy();
 });
 test("getNewName get new element name", (): any => {
-  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const creator = new CreatorTester({ showSurveyHeader: false });
   creator.JSON = { pages: [{ name: "page1" }] };
   const getNewName = (elementType: string, isPanel?: boolean) => { return creator["getNewName"](elementType, isPanel); };
 
@@ -3485,6 +3497,19 @@ test("Use settings.designer.defaultAddQuestionType", (): any => {
   expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
   panelModel.addNewQuestion();
   expect(panel.questions[0].getType()).toEqual("radiogroup");
+  settings.designer.defaultAddQuestionType = "text";
+});
+test("Use creator.defaultAddQuestionType", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  creator.defaultAddQuestionType = "radiogroup";
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  pageModel.addNewQuestion(null, null);
+  expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
+  panelModel.addNewQuestion();
+  expect(panel.questions[0].getType()).toEqual("radiogroup");
 });
 test("Use settings.designer.showAddQuestionButton = false", (): any => {
   settings.designer.showAddQuestionButton = false;
@@ -3504,7 +3529,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
   creator.addNewQuestionLast = false;
-  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: "on" };
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: true };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   panelModel.addNewQuestion();
@@ -3568,7 +3593,7 @@ test("Page add new question when a selected question is inside a panel, Bug#4468
   expect(page.elements).toHaveLength(2);
 });
 
-test("Creator state, change the same property, isAutoSave=false", () => {
+test("Creator state, change the same property, autoSaveEnabled=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
     no: number,
@@ -3586,7 +3611,7 @@ test("Creator state, change the same property, isAutoSave=false", () => {
   question.title = "Title 2";
   expect(creator.state).toEqual("modified");
 });
-test("Creator notify state, change the same property, isAutoSave=false", () => {
+test("Creator notify state, change the same property, autoSaveEnabled=false", () => {
   let notifierLog = "";
   const creator = new CreatorTester();
   creator.notify = (msg, type) => {
@@ -3612,9 +3637,9 @@ test("Creator notify state, change the same property, isAutoSave=false", () => {
   expect(creator.state).toEqual("modified");
   expect(notifierLog).toBe("Saving, Modified, Error! Editor content is not saved. - error, ");
 });
-test("Creator state, change the same property, isAutoSave=true", () => {
+test("Creator state, change the same property, autoSaveEnabled=true", () => {
   const creator = new CreatorTester();
-  creator.isAutoSave = true;
+  creator.autoSaveEnabled = true;
   var counter = 0;
   var saveNo = 0;
   creator.saveSurveyFunc = function (
@@ -3690,8 +3715,8 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(creator.showJSONEditorTab).toBeTruthy();
     creator = new CreatorTester({ pageEditMode: "single" });
     creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
-    expect(surveySettings.allowShowEmptyTitleInDesignMode).toBeFalsy();
-    expect(surveySettings.allowShowEmptyDescriptionInDesignMode).toBeFalsy();
+    expect(surveySettings.designMode.showEmptyTitles).toBeFalsy();
+    expect(surveySettings.designMode.showEmptyDescriptions).toBeFalsy();
     expect(creator.JSON.pages).toBeUndefined();
     expect(creator.JSON.elements).toBeDefined();
     expect(creator.text.indexOf("pages")).toBe(-1);
@@ -3705,8 +3730,8 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(objects.items[1].data).toEqual(allQuestions[0]);
 
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 test("get survey JSON with pageEditModeValue=single #2711", (): any => {
@@ -3715,8 +3740,8 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
     creator.text = "";
     expect(creator.JSON).toStrictEqual({ "headerView": "advanced" });
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
@@ -3729,8 +3754,8 @@ test("delete last question and selection with pageEditModeValue=single #2712", (
     creator.deleteElement(question);
     expect(creator.selectedElement).toBe(creator.survey);
   } finally {
-    surveySettings.allowShowEmptyTitleInDesignMode = true;
-    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+    surveySettings.designMode.showEmptyTitles = true;
+    surveySettings.designMode.showEmptyDescriptions = true;
   }
 });
 
@@ -3957,7 +3982,7 @@ test("isTextInput", (): any => {
   (<any>span)["isContentEditable"] = true;
   expect(isTextInput(span)).toBeTruthy();
 });
-test("onSurveyPropertyValueChanged event", () => {
+test("onAfterPropertyChanged event", () => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   let propertyName;
@@ -3988,14 +4013,14 @@ test("showPropertyGrid: false generates error", () => {
 });
 test("Test options, setting some of them can generate errors", () => {
   const options = {
-    isAutoSave: true,
+    autoSaveEnabled: true,
     showJSONEditorTab: false,
     showElementEditorAsPropertyGrid: true,
     showLogicTab: true,
     showEmbededSurveyTab: false,
     showSidebar: true,
-    showSimulatorInTestSurveyTab: true,
-    showTestSurveyTab: true,
+    previewAllowSimulateDevices: true,
+    showPreviewTab: true,
     showPropertyGrid: "right",
     showToolbox: "right",
     showTranslationTab: false,
@@ -4109,7 +4134,7 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.maxVisibleChoices = 1;
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "dropdown",
         name: "test_dropdown",
@@ -4150,7 +4175,7 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
   const creator: CreatorTester = new CreatorTester();
   creator.maxVisibleChoices = -1;
   creator.JSON = {
-    questions: [
+    elements: [
       {
         type: "dropdown",
         name: "test_dropdown",
@@ -4272,7 +4297,8 @@ test("Initial Property Grid category expanded state", (): any => {
     }
     return "";
   };
-  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area !== "property-grid") return;
     survey = options.survey;
   });
   const defaultJSON = settings.defaultNewSurveyJSON;
@@ -4313,7 +4339,7 @@ test("PageAdorner: check Add new question creates property grid only once", (): 
   let pageModel = creator.survey.pages[0];
   let pageAdornerModel = new PageAdorner(creator, pageModel);
   let log = "";
-  creator.onSelectedElementChanging.add(() => {
+  creator.onElementSelecting.add(() => {
     log += "->changed";
   });
   pageAdornerModel.addNewQuestion(null, null);
@@ -4362,7 +4388,7 @@ test("creator.deleteLocaleStrings", () => {
   expect(q.title).toEqual("question1");
 });
 
-test("Check onGetPageActions event", () => {
+test("Check onPageGetFooterActions event", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
@@ -4370,7 +4396,7 @@ test("Check onGetPageActions event", () => {
   const page = <PageModel>creator.survey.currentPage;
   const pageModel = new PageAdorner(creator, page);
   let log = "";
-  creator.onGetPageActions.add((_, opt) => {
+  creator.onPageGetFooterActions.add((_, opt) => {
     expect(opt.page).toBe(creator.survey.currentPage);
     opt.actions.push({
       title: "test",
@@ -4442,7 +4468,7 @@ test("Keep selection on deleting another question, #5634", (): any => {
     ]
   };
   let counter = 0;
-  creator.onSelectedElementChanged.add((sender, options) => {
+  creator.onElementSelected.add((sender, options) => {
     counter++;
   });
   creator.selectQuestionByName("q1");
@@ -4463,14 +4489,14 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
     ]
   };
   let counter = 0;
-  creator.onSelectedElementChanged.add((sender, options) => {
+  creator.onElementSelected.add((sender, options) => {
     counter++;
   });
   creator.selectQuestionByName("q1");
   expect(counter).toBe(1);
   expect(creator.selectedElementName).toEqual("q1");
   const q2 = creator.survey.getQuestionByName("q2");
-  creator.fastCopyQuestion(q2, true);
+  creator.copyQuestion(q2, true);
   expect(creator.selectedElementName).toEqual("question1");
   expect(counter).toBe(2);
 });
@@ -4643,7 +4669,7 @@ test("Creator bypage edit mode & onElementAllowOperations", (): any => {
   const creator = new CreatorTester();
   creator.pageEditMode = "bypage";
   creator.onElementAllowOperations.add(function (creator, options) {
-    var obj = options.obj;
+    var obj = options.element;
     if (!obj) return;
     if (obj.getType() == "page") {
       options.allowDelete = creator.survey.pages.indexOf(obj) % 2 === 1;
@@ -4700,7 +4726,7 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   settings.logic.questionSortOrder = "none";
   expect(func()).toBe("none");
   let sortOrder = "asc";
-  creator.onConditionQuestionsGetList.add((sender, options) => {
+  creator.onConditionGetQuestionList.add((sender, options) => {
     options.sortOrder = sortOrder;
   });
   expect(func()).toBe("asc");

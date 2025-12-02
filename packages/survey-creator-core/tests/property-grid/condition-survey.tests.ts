@@ -54,7 +54,7 @@ test("Setup simple panel", () => {
 
 test("Add condition", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
       { type: "text", name: "q2" }
@@ -82,7 +82,7 @@ test("Add condition", () => {
 });
 test("Do not delete the only condition, but clear it", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
       { type: "text", name: "q2" }
@@ -105,7 +105,7 @@ test("Do not delete the only condition, but clear it", () => {
 
 test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "dropdown", name: "q2" }
     ]
@@ -120,7 +120,7 @@ test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679"
 });
 test("Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "dropdown", name: "q2" }
     ]
@@ -614,6 +614,7 @@ test("enabled operators", () => {
       "equal",
       "notequal",
       "anyof",
+      "noneof",
       "greater",
       "less",
       "greaterorequal",
@@ -630,6 +631,7 @@ test("enabled operators", () => {
       "contains",
       "notcontains",
       "anyof",
+      "noneof",
       "allof"
     ]
   );
@@ -648,7 +650,7 @@ test("enabled operators", () => {
     ]
   );
   checkFun("qFile", ["empty", "notempty"]);
-  checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof"]);
+  checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof", "noneof"]);
 });
 test("Keep condition value on changing operation when it possible", () => {
   var survey = new SurveyModel({
@@ -668,7 +670,7 @@ test("Keep condition value on changing operation when it possible", () => {
   panel.getQuestionByName("operator").value = "empty";
   expect(panel.getQuestionByName("questionValue").isEmpty()).toBeTruthy();
 });
-test("Selectbase + anyof", () => {
+test("Selectbase + anyof / noneof", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
@@ -684,6 +686,14 @@ test("Selectbase + anyof", () => {
     "dropdown"
   );
   panel.getQuestionByName("operator").value = "anyof";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "checkbox"
+  );
+  panel.getQuestionByName("operator").value = "equal";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+  panel.getQuestionByName("operator").value = "noneof";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual(
     "checkbox"
   );
@@ -754,6 +764,11 @@ test("Add apostrophes to string value", () => {
   panel.getQuestionByName("operator").value = "equal";
   panel.getQuestionByName("questionValue").value = ["item1", 1];
   expect(editor.text).toEqual("{question2} = ['item1', 1]");
+
+  panel.getQuestionByName("questionName").value = "question1";
+  panel.getQuestionByName("operator").value = "noneof";
+  panel.getQuestionByName("questionValue").value = ["item1", 1];
+  expect(editor.text).toEqual("{question1} noneof ['item1', 1]");
 });
 test("Parse expressions", () => {
   var survey = new SurveyModel({
@@ -881,6 +896,9 @@ test("Change questionName in panel", () => {
 
   panel.getQuestionByName("operator").value = "equal";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual("radiogroup");
+
+  panel.getQuestionByName("operator").value = "noneof";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("checkbox");
 });
 test("Create expression from scratch", () => {
   var survey = new SurveyModel({
@@ -1012,9 +1030,12 @@ test("anyof/allof is enabled on editing, Bug #804", () => {
   const opQuestion = <QuestionDropdownModel>panel.getQuestionByName("operator");
   opQuestion.onOpenedCallBack();
   const opChoices = opQuestion.choices;
-  const itemValue = ItemValue.getItemByValue(opChoices, "anyof");
-  expect(itemValue.isEnabled).toBeFalsy();
-  expect(itemValue.isVisible).toBeFalsy();
+  const itemValueAnyOf = ItemValue.getItemByValue(opChoices, "anyof");
+  expect(itemValueAnyOf.isEnabled).toBeFalsy();
+  expect(itemValueAnyOf.isVisible).toBeFalsy();
+  const itemValueNoneOf = ItemValue.getItemByValue(opChoices, "noneof");
+  expect(itemValueNoneOf.isEnabled).toBeFalsy();
+  expect(itemValueNoneOf.isVisible).toBeFalsy();
 });
 test("remove operators", () => {
   var survey = new SurveyModel({
@@ -1058,7 +1079,7 @@ test("Change operators via callback", () => {
   });
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
-  let evnt_questionType: string = "";
+  let evnt_questionType = "";
   options.isConditionOperatorEnabled = (questionName: string, question: Question, operator: string, isEnabled: boolean): boolean => {
     if (questionName === "q2" && ["contains", "anyof"].indexOf(operator) > -1) return false;
     evnt_questionType = question.getType();
@@ -1098,7 +1119,7 @@ test("Show complex question in the condition builder", () => {
   });
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
-  options.showTitlesInExpressions = true;
+  options.useElementTitles = true;
   let editor = new ConditionEditor(survey, question, options, "visibleIf");
   expect(editor.allConditionQuestions).toHaveLength(4);
   let panel = editor.panel.panels[0];
@@ -1247,7 +1268,7 @@ test("show calculated values", () => {
   expect(questionName.choices[0].value).toEqual("q2");
   expect(questionName.choices[1].value).toEqual("val1");
 });
-test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+test("options.logicMaxItemsInCondition, hide `Add Condition` on exceeding the value", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
@@ -1256,7 +1277,7 @@ test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the va
   });
   var question = survey.getQuestionByName("q1");
   var options = new EmptySurveyCreatorOptions();
-  options.maxLogicItemsInCondition = 2;
+  options.logicMaxItemsInCondition = 2;
   options.getObjectDisplayName = (
     obj: any,
     area: string,
@@ -1564,7 +1585,7 @@ test("questionName title visibility", () => {
 });
 test("isModified", () => {
   const survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
       { type: "text", name: "q2" }
@@ -1781,7 +1802,7 @@ test("Check errors for logic popup", () => {
 test("Change the default operator", () => {
   settings.logic.defaultOperator = "anyof";
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "checkbox", name: "q1", choices: [1, 2, 3] },
       { type: "dropdown", name: "q2", choices: [1, 2, 3] }
     ]
@@ -1794,7 +1815,7 @@ test("Change the default operator", () => {
 });
 test("Add unwrapped value if checkbox valuePropertyName is set", () => {
   var survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
       { type: "text", name: "q2", "visibleIf": "{q1-unwrapped} allof ['apple', 'orange']" }
     ]
@@ -1820,7 +1841,7 @@ test("Add unwrapped value if checkbox valuePropertyName is set", () => {
 test("Condition editor and question value cssClasses", () => {
   ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
   const survey = new SurveyModel({
-    questions: [
+    elements: [
       { type: "comp1", name: "q1", choices: [1, 2, 3] },
       { type: "dropdown", name: "q2", choices: [1, 2, 3] },
       { type: "text", name: "q3" }
@@ -1926,4 +1947,28 @@ test("Show two radiogroups with the same valueName", () => {
   const questionValue = <QuestionDropdownModel>panel.getQuestionByName("questionValue");
   expect(questionValue.getType()).toBe("radiogroup");
   expect(questionValue.choices).toHaveLength(8);
+});
+test("addCondition quotes in items values - Bug#10512", () => {
+  const survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "radiogroup", name: "q2", choices: ["item1\"s", "item2\"s\"after", "before\"item3", "Before \"With Quotes\""] }
+    ]
+  });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
+  expect(editor.panel.panels).toHaveLength(1);
+  const panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("equal");
+  panel.getQuestionByName("questionName").value = "q2";
+  const questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toBe("radiogroup");
+  expect((<QuestionRadiogroupModel>questionValue).choices).toHaveLength(4);
+  questionValue.value = questionValue.choices[0].value;
+  expect(editor.text).toEqual("{q2} = 'item1\\\"s'");
+  questionValue.value = questionValue.choices[1].value;
+  expect(editor.text).toEqual("{q2} = 'item2\\\"s\\\"after'");
+  questionValue.value = questionValue.choices[2].value;
+  expect(editor.text).toEqual("{q2} = 'before\\\"item3'");
+  questionValue.value = questionValue.choices[3].value;
+  expect(editor.text).toEqual("{q2} = 'Before \\\"With Quotes\\\"'");
 });

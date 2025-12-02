@@ -195,7 +195,7 @@ test("disable locales", () => {
 });
 test("get/set the selected locales with inactive translation tab", () => {
   const survey: SurveyModel = new SurveyModel({
-    questions: [
+    elements: [
       {
         type: "text",
         name: "q1",

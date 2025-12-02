@@ -664,8 +664,6 @@ export var italianTranslation = {
       templateErrorLocation: "Allineamento dei messaggi di errore",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nuova posizione di ingresso",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Visualizzare la barra di avanzamento",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Impedisci risposte duplicate nella seguente domanda"
     },
@@ -1154,8 +1152,6 @@ export var italianTranslation = {
     maxRateDescription: "Descrizione del valore massimo",
     // "Input type"
     inputType: "Tipo di inserimento",
-    // "Option placeholder"
-    optionsCaption: "Testo segnaposto dell'opzione",
     // "Default Answer"
     defaultValue: "Valore default",
     // "Default texts"
@@ -1272,8 +1268,6 @@ export var italianTranslation = {
     timerLocation: "Visualizzazione pannello timer",
     // "Timer mode"
     timerInfoMode: "Modalità visualizzazione pannello timer",
-    // "Panel display mode"
-    renderMode: "Modalità di visualizzazione",
     // "Enable entry addition"
     allowAddPanel: "Consenti l'aggiunta di un pannello",
     // "Enable entry removal"
@@ -1390,7 +1384,7 @@ export var italianTranslation = {
     labelFalse: "Etichetta \"Falso\"",
     // "Show the Clear button"
     allowClear: "Mostra il tasto Cancella",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Modalità di ricerca",
     // "Display format"
     displayStyle: "Stile di visualizzazione del valore",
@@ -2272,10 +2266,6 @@ export var italianTranslation = {
     underRowSingle: "Sotto la riga, solo un pannello è visibile",
     // "Auto"
     auto: "Automatico",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Nascosto"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Entrambe"
@@ -2715,7 +2705,9 @@ export var italianTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Fai riferimento al nome di una domanda per richiedere a un utente di fornire una risposta univoca per questa domanda in ogni pannello.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una voce."
+      confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una voce.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno del pannello dinamico."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2948,6 +2940,10 @@ export var italianTranslation = {
     detailErrorLocation: "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Quando la proprietà \"Impedisci risposte duplicate\" è abilitata, un rispondente che tenta di inviare una voce duplicata riceverà il seguente messaggio di errore.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Quando la proprietà \"Impedisci risposte duplicate\" è abilitata per una colonna della matrice, un rispondente che tenta di inviare una voce duplicata riceverà il seguente messaggio di errore."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Consente di calcolare i valori totali in base a un'espressione. L'espressione può includere calcoli di base ('{q1_id} + {q2_id}'), espressioni booleane ('{age} > 60') e funzioni ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', ecc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3106,6 +3102,10 @@ export var italianTranslation = {
     fileOrPhotoPlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Dispone le caselle di testo in un layout a più colonne."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selezionare questa opzione se si desidera memorizzare il valore della domanda con una maschera applicata nei risultati dell'indagine."
@@ -3236,7 +3236,7 @@ export var italianTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Esegui il rendering come", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Allega elementi originali", // Auto-generated string
+    attachData: "Allega elementi originali", // Auto-generated string
     // "Choices"
     choices: "Scelte",
     // [Auto-translated] "Choices by url"

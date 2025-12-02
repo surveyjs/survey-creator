@@ -135,6 +135,7 @@ export var enStrings = {
     toolboxSearch: "Search",
     toolboxFilteredTextPlaceholder: "Type to search...",
     toolboxNoResultsFound: "No results found",
+    propertyGridEmptySurveyText: "No properties to display",
     propertyGridFilteredTextPlaceholder: "Type to search...",
     propertyGridNoResultsFound: "No results found",
     propertyGridPlaceholderTitle: "Start configuring your form",
@@ -347,7 +348,6 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      showRangeInProgress: "Show the progress bar",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -597,6 +597,7 @@ export var enStrings = {
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
+    maxFiles: "Maximum number of files",
     rowCount: "Row count",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
@@ -610,7 +611,6 @@ export var enStrings = {
     minRateDescription: "Minimum value label",
     maxRateDescription: "Maximum value label",
     inputType: "Input type",
-    optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
@@ -669,7 +669,6 @@ export var enStrings = {
     showTimer: "Use a timer",
     timerLocation: "Timer alignment",
     timerInfoMode: "Timer mode",
-    renderMode: "Panel display mode",
     allowAddPanel: "Enable entry addition",
     allowRemovePanel: "Enable entry removal",
     addPanelText: "\"Add Entry\" button text",
@@ -695,8 +694,8 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
     surveyvalidator: {
-      text: "Validation message",
-      expression: "Validation expression",
+      text: "Notification message for invalid input",
+      expression: "Valid when",
       notificationType: "Notification type",
       maxLength: "Maximum length (in characters)"
     },
@@ -729,7 +728,7 @@ export var enStrings = {
     labelTrue: "Label for \"True\"",
     labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
-    searchMode: "Search Mode",
+    searchMode: "Search mode",
     displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
@@ -737,7 +736,8 @@ export var enStrings = {
     useGrouping: "Display grouping separators",
     allowMultiple: "Enable multiple file upload",
     allowImagesPreview: "Preview uploaded images",
-    acceptedTypes: "Accepted file types",
+    acceptedCategories: "Accepted file categories",
+    acceptedTypes: "Additional file extensions",
     waitForUpload: "Wait for upload to complete",
     needConfirmRemoveFile: "Confirm file deletion",
     detailPanelMode: "Row details alignment",
@@ -1098,6 +1098,14 @@ export var enStrings = {
       warning: "Warning",
       info: "Informational"
     },
+    acceptedCategories: {
+      image: "Images",
+      video: "Videos",
+      audio: "Audio",
+      document: "Documents",
+      archive: "Archives",
+      custom: "Custom"
+    },
     autocomplete: {
       name: "Full Name",
       "honorific-prefix": "Prefix",
@@ -1194,9 +1202,6 @@ export var enStrings = {
     underRow: "Under the row",
     underRowSingle: "Under the row, display one section only",
     auto: "Auto",
-    showNavigationButtons: {
-      none: "Hidden"
-    },
     timerInfoMode: {
       combined: "Both"
     },
@@ -1341,6 +1346,7 @@ export var enStrings = {
     contains: "Contains",
     notcontains: "Does not contain",
     anyof: "Any of",
+    noneof: "None of",
     allof: "All of",
     greater: "Greater than",
     less: "Less than",
@@ -1462,7 +1468,8 @@ export var enStrings = {
       newPanelPosition: "Defines the position of a newly added entry. By default, new entries are added to the end. Select \"Next\" to insert a new entry after the current one.",
       copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
-      confirmDelete: "Triggers a confirmation prompt before removing an entry."
+      confirmDelete: "Triggers a confirmation prompt before removing an entry.",
+      showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
@@ -1593,6 +1600,9 @@ export var enStrings = {
     cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
+    matrixdropdown: {
+      keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+    },
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     description: "Type a subtitle.",
@@ -1670,13 +1680,17 @@ export var enStrings = {
     },
     storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results.",
     format: "Use {0} as a placeholder for the actual value.",
-    acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
+    acceptedCategories: "Select \"Custom\" to add your own file extensions on top of the predefined categories.",
+    acceptedTypes: "Enter file extensions separated by commas (e.g., .csv, .xml).",
     columnColCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes.",
     autocomplete: "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion.",
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
     fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
     colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line.",
+    multipletext: {
+      colCount: "Arranges text boxes in a multi-column layout.",
+    },
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
@@ -1751,7 +1765,7 @@ export var enStrings = {
     validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
-    attachOriginalItems: "Attach original items", // Auto-generated string
+    attachData: "Attach original items", // Auto-generated string
     choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string

@@ -54,6 +54,13 @@
   .sd-root-modern {
     min-height: 100%;
 
+    span {
+      -moz-user-select: text;
+      -webkit-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+
     .sv-popup--menu-popup {
       width: auto;
       right: 0;

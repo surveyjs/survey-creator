@@ -94,17 +94,17 @@ export class QuestionRatingAdornerViewModel extends Base {
     }
   }
 
-  public static allowAddForElement(element: QuestionRatingModel, maximumRateValues: number): boolean {
-    if ((maximumRateValues < 1 || maximumRateValues > settings.ratingMaximumRateValueCount) && !QuestionRatingAdornerViewModel.useRateValues(element)) maximumRateValues = settings.ratingMaximumRateValueCount;
-    if (element.rateDisplayMode == "smileys" && (maximumRateValues < 1 || maximumRateValues > 10)) maximumRateValues = 10;
-    if (maximumRateValues < 1) return true;
-    return element.rateCount < maximumRateValues;
+  public static allowAddForElement(element: QuestionRatingModel, maxRateValues: number): boolean {
+    if ((maxRateValues < 1 || maxRateValues > settings.ratingMaximumRateValueCount) && !QuestionRatingAdornerViewModel.useRateValues(element)) maxRateValues = settings.ratingMaximumRateValueCount;
+    if (element.rateType == "smileys" && (maxRateValues < 1 || maxRateValues > 10)) maxRateValues = 10;
+    if (maxRateValues < 1) return true;
+    return element.rateCount < maxRateValues;
   }
   public get allowAdd(): boolean {
     return this.canAddOrRemove();
   }
   public get enableAdd(): boolean {
-    return this.allowAdd && QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maximumRateValues);
+    return this.allowAdd && QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maxRateValues);
   }
   public get addClassNames(): string {
     return new CssClassBuilder()

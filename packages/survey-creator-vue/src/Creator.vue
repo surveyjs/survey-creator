@@ -79,7 +79,7 @@
           <SvComponent
             :is="'svc-side-bar'"
             :model="model.sidebar"
-            v-if="model.sidebar"
+            v-if="model.isSidebarVisible"
           ></SvComponent>
         </div>
         <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">

@@ -152,6 +152,11 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+          npm run test:presets
+        displayName: "Unit tests CreatorV2 Core presets"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
           npm run test:postcss
         displayName: "check postcss compatibility"
 

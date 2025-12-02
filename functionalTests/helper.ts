@@ -79,9 +79,9 @@ export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide
 export const surveySettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Survey settings\"]");
 export const themeSettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Theme settings\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
-export const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
+export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
 export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
-export const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 
 export const questions = Selector(".svc-question__content");
 export const questionToolbarActions = Selector(".svc-question__content--selected .svc-question__content-actions").filterVisible().find(".sv-action").filterVisible();
@@ -203,7 +203,7 @@ export async function setShowAddQuestionButton(newVal: boolean) {
 }
 export async function setAllowEditSurveyTitle(newVal: boolean) {
   await ClientFunction((newVal) => {
-    window["creator"].allowEditSurveyTitle = newVal;
+    window["creator"].showSurveyHeader = newVal;
   })(newVal);
 }
 export async function setExpandCollapseButtonVisibility(newVal: string) {

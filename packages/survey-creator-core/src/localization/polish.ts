@@ -664,8 +664,6 @@ export var polishStrings = {
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nowa lokalizacja wejścia",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Wyświetlanie paska postępu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
@@ -1155,8 +1153,6 @@ export var polishStrings = {
     maxRateDescription: "Opis najwyższej oceny",
     // "Input type"
     inputType: "Input type",
-    // "Option placeholder"
-    optionsCaption: "Options caption",
     // "Default Answer"
     defaultValue: "Default value",
     // [Auto-translated] "Default texts"
@@ -1273,8 +1269,6 @@ export var polishStrings = {
     timerLocation: "Show timer panel",
     // "Timer mode"
     timerInfoMode: "Show timer panel mode",
-    // "Panel display mode"
-    renderMode: "Render mode",
     // "Enable entry addition"
     allowAddPanel: "Allow adding a panel",
     // "Enable entry removal"
@@ -1391,7 +1385,7 @@ export var polishStrings = {
     labelFalse: "Etykieta \"Fałsz\"",
     // "Show the Clear button"
     allowClear: "Pokaż przycisk Wyczyść",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Tryb wyszukiwania",
     // [Auto-translated] "Display format"
     displayStyle: "Format wyświetlania",
@@ -2273,10 +2267,6 @@ export var polishStrings = {
     underRowSingle: "Pod wierszem wyświetl tylko jedną sekcję",
     // "Auto"
     auto: "Automatycznie",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Ukryty"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obie"
@@ -2716,7 +2706,9 @@ export var polishStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem wpisu."
+      confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem wpisu.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w panelu dynamicznym."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2949,6 +2941,10 @@ export var polishStrings = {
     detailErrorLocation: "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona dla kolumny macierzy, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Umożliwia obliczanie wartości całkowitych na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), wyrażenia logiczne ('{age} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3107,6 +3103,10 @@ export var polishStrings = {
     fileOrPhotoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Rozmieszcza pola tekstowe w układzie wielokolumnowym."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Wybierz, czy chcesz przechowywać wartość pytania z zastosowaną maską w wynikach ankiety."
@@ -3237,7 +3237,7 @@ export var polishStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Renderuj jako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Dołączanie oryginalnych elementów", // Auto-generated string
+    attachData: "Dołączanie oryginalnych elementów", // Auto-generated string
     // [Auto-translated] "Choices"
     choices: "Wyborów",
     // [Auto-translated] "Choices by url"

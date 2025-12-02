@@ -53,9 +53,13 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       return this.isSettingsActive;
     });
   }
-  private createVisibleUpdater() {
+  private createVisibleUpdater(additionalConditionFunc?: () => boolean) {
     return <any>new ComputedUpdater<boolean>(() => {
-      return this.creator.activeTab === "designer";
+      let additionalCondition = true;
+      if (!!additionalConditionFunc) {
+        additionalCondition = additionalConditionFunc();
+      }
+      return this.creator.activeTab === "designer" && additionalCondition;
     });
   }
   private updateTabControl() {
@@ -124,10 +128,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private updatePredefinedColorChoices() {
     this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
-      if (question.name === "--sjs-special-background") {
+      if (question.name === CreatorThemeModel.varColorUtilitySurface) {
         (question as any).choices = this.themeModel && this.themeModel.isLight ? getPredefinedBackgoundColorsChoices() : [];
       }
-      if (question.name === "--sjs-primary-background-500" || question.name === "--sjs-secondary-background-500") {
+      if (question.name === CreatorThemeModel.varColorProjectBrand || question.name === CreatorThemeModel.varColorProjectAccent) {
         (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
       }
     });
@@ -254,7 +258,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);
     this.creator.onSurveyInstanceCreated.add((s, o) => {
-      if (o.reason == "designer") {
+      if (o.area == "designer-tab") {
         this.designerStateManager.initForSurvey(o.survey);
       }
     });
@@ -405,6 +409,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.surveySettingsAction = new Action({
       id: "svd-settings",
+      css: "sv-action--svd-settings",
       iconName: "icon-settings",
       iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
@@ -419,7 +424,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         }
       },
       active: this.createSelectedUpdater(),
-      visible: this.createVisibleUpdater(),
+      visible: this.createVisibleUpdater(() => {
+        return this.creator.removeSidebar !== true;
+      }),
       locTitleName: "ed.surveySettings",
       locTooltipName: "ed.surveySettingsTooltip",
       showTitle: false
@@ -433,7 +440,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       active: false,
       enabled: false,
       visible: <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.creator.activeTab === "designer", this.creator.showSaveButton);
+        return notShortCircuitAnd(this.creator.activeTab === "designer" || this.creator.activeTab === "translation", this.creator.showSaveButton);
       }),
       locTitleName: "ed.saveSurvey",
       locTooltipName: "ed.saveSurveyTooltip",
@@ -442,6 +449,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.designerAction = new Action({
       id: "svd-designer",
+      css: "sv-action--svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
@@ -453,6 +461,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.previewAction = new Action({
       id: "svd-preview",
+      css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
       action: () => {

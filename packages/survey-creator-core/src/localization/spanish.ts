@@ -250,6 +250,8 @@ export var spanishTranslation = {
     toolboxFilteredTextPlaceholder: "Escriba para buscar...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "No se han encontrado resultados",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "No hay propiedades que mostrar",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
     // [Auto-translated] "No results found"
@@ -664,8 +666,6 @@ export var spanishTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nueva ubicación de entrada",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Mostrar la barra de progreso",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
@@ -1128,6 +1128,8 @@ export var spanishTranslation = {
     storeDataAsText: "Tienda el contenido del archivo en el resultado de JSON como texto",
     // "Maximum file size (in bytes)"
     maxSize: "Tamaño máximo de archivo en bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Número máximo de archivos",
     // "Row count"
     rowCount: "Número de filas",
     // "Columns layout"
@@ -1154,8 +1156,6 @@ export var spanishTranslation = {
     maxRateDescription: "Descripción del valor máximo",
     // "Input type"
     inputType: "Tipo de entrada",
-    // "Option placeholder"
-    optionsCaption: "Cambie texto de 'Seleccione'",
     // "Default Answer"
     defaultValue: "Valor por defecto",
     // "Default texts"
@@ -1272,8 +1272,6 @@ export var spanishTranslation = {
     timerLocation: "Mostrar panel de temporizador",
     // "Timer mode"
     timerInfoMode: "Mostrar modo de panel del temporizador",
-    // "Panel display mode"
-    renderMode: "Modo de renderizado",
     // "Enable entry addition"
     allowAddPanel: "Permitir agregar un panel",
     // "Enable entry removal"
@@ -1390,7 +1388,7 @@ export var spanishTranslation = {
     labelFalse: "Etiqueta \"Falso\"",
     // "Show the Clear button"
     allowClear: "Mostrar el botón limpiar",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Modo de búsqueda",
     // [Auto-translated] "Display format"
     displayStyle: "Formato de visualización",
@@ -1406,8 +1404,10 @@ export var spanishTranslation = {
     allowMultiple: "Permitir múltiples ficheros",
     // "Preview uploaded images"
     allowImagesPreview: "Previsualizar imágenes",
-    // "Accepted file types"
-    acceptedTypes: "Tipos de fichero aceptados",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Categorías de archivo aceptadas",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Extensiones de archivo adicionales",
     // "Wait for upload to complete"
     waitForUpload: "Espera a que se complete la carga",
     // "Confirm file deletion"
@@ -2088,6 +2088,20 @@ export var spanishTranslation = {
       // [Auto-translated] "Informational"
       info: "Informativo"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Imágenes",
+      // [Auto-translated] "Videos"
+      video: "Videos",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Documentos",
+      // [Auto-translated] "Archives"
+      archive: "Archivo",
+      // [Auto-translated] "Custom"
+      custom: "Costumbre"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nombre completo",
@@ -2272,10 +2286,6 @@ export var spanishTranslation = {
     underRowSingle: "Debajo de la fila, sólo un panel es visible",
     // "Auto"
     auto: "Automático",
-    showNavigationButtons: {
-      // "Hidden"
-      none: "Oculto"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2505,6 +2515,8 @@ export var spanishTranslation = {
     notcontains: "no contiene",
     // "Any of"
     anyof: "cualquiera de",
+    // [Auto-translated] "None of"
+    noneof: "Ninguna de ellas",
     // "All of"
     allof: "todo",
     // "Greater than"
@@ -2715,7 +2727,9 @@ export var spanishTranslation = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Haga referencia a un nombre de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada."
+      confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Asigna números a las preguntas anidadas dentro del panel dinámico."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2948,6 +2962,10 @@ export var spanishTranslation = {
     detailErrorLocation: "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada para una columna de matriz, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error."
+    },
     // [Auto-translated] "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3092,8 +3110,10 @@ export var spanishTranslation = {
     storeOthersAsComment: "Seleccione esta opción para almacenar el valor de la opción \"Otro\" como una propiedad independiente en los resultados de la encuesta.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Utilice {0} como marcador de posición para el valor real.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Consulte la descripción del atributo [accept](https://www.w3schools.com/tags/att_input_accept.asp) para obtener más información.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Selecciona \"Personalizado\" para añadir tus propias extensiones de archivo encima de las categorías predefinidas.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Introduce extensiones de archivo separadas por comas (por ejemplo, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Se aplica solo a las columnas con \"Tipo de entrada de celda\" establecido en Grupo de botones de opción o Casillas de verificación.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3106,6 +3126,10 @@ export var spanishTranslation = {
     fileOrPhotoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Organiza los cuadros de texto en un diseño de varias columnas."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Seleccione si desea almacenar el valor de la pregunta con una máscara aplicada en los resultados de la encuesta."
@@ -3236,7 +3260,7 @@ export var spanishTranslation = {
     // [Auto-translated] "Render as"
     renderAs: "Renderizar como", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Adjuntar elementos originales", // Auto-generated string
+    attachData: "Adjuntar elementos originales", // Auto-generated string
     // "Choices"
     choices: "opciones",
     // "Choices by url"

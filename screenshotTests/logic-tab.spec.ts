@@ -26,7 +26,7 @@ test.describe(title, () => {
   });
 
   const jsonOneRule = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -58,7 +58,7 @@ test.describe(title, () => {
   test("long question name", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -90,7 +90,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.hover(".sl-table__detail-button");
     await compareScreenshot(page, page.locator(".sl-table__detail-button"), "logic-expand-hover.png");
-    const removeRuleSelector = page.locator("#remove-row .sv-action-bar-item");
+    const removeRuleSelector = page.locator(".sl-table__remove-button .sv-action-bar-item");
     await removeRuleSelector.hover();
     await compareScreenshot(page, removeRuleSelector, "logic-rule-remove-hover.png");
     await page.click(".sl-table__detail-button");
@@ -118,7 +118,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 1920, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -143,7 +143,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 900, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -167,7 +167,7 @@ test.describe(title, () => {
   test("Check logic Manual Entry", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -182,7 +182,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.hover(".sl-table__row");
     await page.click(".sl-table__detail-button");
-    await page.click("#svc-logic-fast-entry button");
+    await page.click(".sv-action--logic-fast-entry button");
     const conditionContentSelector = page.locator(".sl-table__cell--detail-panel .sl-panel");
     await compareScreenshot(page, conditionContentSelector, "logic-fast-entry.png");
     await page.click(".sl-comment");
@@ -193,7 +193,7 @@ test.describe(title, () => {
   });
 
   const jsonMultipleConditionsMultipleActions = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "pages": [
       {
@@ -260,7 +260,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-action-questions.png");
   });
   const jsonAllActionTypes = {
-    showQuestionNumbers: "on",
+    showQuestionNumbers: true,
     "logoPosition": "right",
     "completedHtmlOnCondition": [
       {
@@ -304,7 +304,7 @@ test.describe(title, () => {
               "User Interface",
               "Complete Functionality"
             ],
-            "hasOther": true,
+            "showOtherItem": true,
             "otherText": "Other feature:",
             "colCount": 2
           },
@@ -412,10 +412,10 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), "logic-question-actions.png");
   });
 
-  test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async ({ page }) => {
+  test("Texts overflow the controls when useElementTitles is enabled #3192", async ({ page }) => {
     await page.setViewportSize({ width: 800, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -447,7 +447,7 @@ test.describe(title, () => {
       ]
     });
     await page.evaluate(() => {
-      window["creator"].setOptions({ showTitlesInExpressions: true });
+      window["creator"].setOptions({ useElementTitles: true });
     });
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
 

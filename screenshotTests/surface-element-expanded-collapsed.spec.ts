@@ -10,7 +10,7 @@ test.describe(title, () => {
   test("Question adorner - collapsed", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "text",
@@ -76,7 +76,7 @@ test.describe(title, () => {
   test("Question adorner - no title collapsed", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       "logoPosition": "right",
       "pages": [
         {
@@ -128,7 +128,7 @@ test.describe(title, () => {
   test("Page adorner - collapsed", async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 600 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "expression",
@@ -156,7 +156,7 @@ test.describe(title, () => {
   test("Question adorner - collapsed mobile", async ({ page }) => {
     await page.setViewportSize({ width: 551, height: 1080 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "text",
@@ -224,7 +224,7 @@ test.describe(title, () => {
   test("Collapse all and expand all toolbar", async ({ page }) => {
     await page.setViewportSize({ width: 912, height: 1080 });
     const json = {
-      showQuestionNumbers: "on",
+      showQuestionNumbers: true,
       elements: [
         {
           type: "text",
@@ -242,12 +242,12 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await setExpandCollapseButtonVisibility(page, "onhover");
     await setJSON(page, json);
-    await page.click("#lockQuestions");
-    await page.hover("#collapseAll");
+    await page.click(".sv-action--lockQuestions");
+    await page.hover(".sv-action--collapse-all");
     await compareScreenshot(page, page.locator(".svc-tab-designer"), "design-surface-toolbar.png");
 
     await setAllowZoom(page, true);
-    await page.hover("#zoomOut");
+    await page.hover(".sv-action--zoomOut");
     await compareScreenshot(page, page.locator(".svc-tab-designer__surface-toolbar"), "design-surface-toolbar-with-zoom.png");
   });
 });

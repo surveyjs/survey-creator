@@ -250,6 +250,8 @@ export var skStrings = {
     toolboxFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Žiadne vlastnosti na zobrazenie",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     // [Auto-translated] "No results found"
@@ -664,8 +666,6 @@ export var skStrings = {
       templateErrorLocation: "Zarovnanie chybových hlásení",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nové miesto vstupu",
-      // [Auto-translated] "Show the progress bar"
-      showRangeInProgress: "Zobrazenie indikátora priebehu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -1128,6 +1128,8 @@ export var skStrings = {
     storeDataAsText: "Uložiť obsahu súboru vo výsledku JSON ako text",
     // "Maximum file size (in bytes)"
     maxSize: "Maximálna veľkosť súboru v bajtoch",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximálny počet súborov",
     // "Row count"
     rowCount: "Počet riadkov",
     // "Columns layout"
@@ -1154,8 +1156,6 @@ export var skStrings = {
     maxRateDescription: "opis maximálneho hodnotenia",
     // "Input type"
     inputType: "Typ vstupu",
-    // "Option placeholder"
-    optionsCaption: "Titulok možností",
     // "Default Answer"
     defaultValue: "Predvolená hodnota",
     // "Default texts"
@@ -1272,8 +1272,6 @@ export var skStrings = {
     timerLocation: "Zobraziť panel s časovačom",
     // "Timer mode"
     timerInfoMode: "Zobraziť režim panela s časovačom",
-    // "Panel display mode"
-    renderMode: "Režim vykresľovania",
     // "Enable entry addition"
     allowAddPanel: "Povoliť pridanie panela",
     // "Enable entry removal"
@@ -1390,7 +1388,7 @@ export var skStrings = {
     labelFalse: "Označenie \"False\"",
     // "Show the Clear button"
     allowClear: "Zobraziť titulok možností",
-    // [Auto-translated] "Search Mode"
+    // [Auto-translated] "Search mode"
     searchMode: "Režim vyhľadávania",
     // [Auto-translated] "Display format"
     displayStyle: "Formát zobrazenia",
@@ -1406,8 +1404,10 @@ export var skStrings = {
     allowMultiple: "Povolenie nahrávania viacerých súborov",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Náhľad nahraných obrázkov",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Akceptované typy súborov",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Akceptované kategórie súborov",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Ďalšie prípony súboru",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Počkajte na dokončenie nahrávania",
     // [Auto-translated] "Confirm file deletion"
@@ -2088,6 +2088,20 @@ export var skStrings = {
       // [Auto-translated] "Informational"
       info: "Informačné"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Obrázky",
+      // [Auto-translated] "Videos"
+      video: "Videá",
+      // [Auto-translated] "Audio"
+      audio: "Zvukový",
+      // [Auto-translated] "Documents"
+      document: "Dokumenty",
+      // [Auto-translated] "Archives"
+      archive: "Archívy",
+      // [Auto-translated] "Custom"
+      custom: "Zvyk"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Celé meno",
@@ -2272,10 +2286,6 @@ export var skStrings = {
     underRowSingle: "Pod riadkom zobrazte iba jednu sekciu",
     // "Auto"
     auto: "Auto",
-    showNavigationButtons: {
-      // [Auto-translated] "Hidden"
-      none: "Skrytý"
-    },
     timerInfoMode: {
       // "Both"
       combined: "Obidva"
@@ -2505,6 +2515,8 @@ export var skStrings = {
     notcontains: "neobsahuje",
     // "Any of"
     anyof: "ktorákoľvek",
+    // [Auto-translated] "None of"
+    noneof: "Žiadna z",
     // "All of"
     allof: "všetky",
     // "Greater than"
@@ -2715,7 +2727,9 @@ export var skStrings = {
       // "Reference a question name to require a user to provide a unique response for this question in each entry."
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
-      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky."
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2948,6 +2962,10 @@ export var skStrings = {
     detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     // "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message."
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
+    matrixdropdown: {
+      // [Auto-translated] "When the \"Prevent duplicate responses\" property is enabled for a matrix column, a respondent attempting to submit a duplicate entry will receive the following error message."
+      keyDuplicationError: "Keď je pre stĺpec matice povolená vlastnosť Zabrániť duplicitným odpovediam, respondent, ktorý sa pokúša odoslať duplicitný záznam, dostane nasledujúce chybové hlásenie."
+    },
     // "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)."
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
     // "Reference a column ID to require a user to provide a unique response for each question within the specified column."
@@ -3092,8 +3110,10 @@ export var skStrings = {
     storeOthersAsComment: "Túto voľbu vyberte, ak chcete uložiť hodnotu možnosti \"Iné\" ako samostatnú vlastnosť vo výsledkoch prieskumu.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Použite {0} ako zástupný symbol skutočnej hodnoty.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Ďalšie informácie nájdete v popise atribútu [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Vyberte \"Vlastné\" a pridajte vlastné prípony súborov nad preddefinované kategórie.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Zadajte prípony súborov oddelené čiarkami (napr. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Vzťahuje sa len na stĺpce s možnosťou \"Typ vstupu bunky\" nastavenou na Skupina prepínacích tlačidiel alebo Začiarkavacie políčka.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3106,6 +3126,10 @@ export var skStrings = {
     fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\".",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line."
     colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku.",
+    multipletext: {
+      // [Auto-translated] "Arranges text boxes in a multi-column layout."
+      colCount: "Usporiada textové polia do rozloženia s viacerými stĺpcami."
+    },
     masksettings: {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vyberte, či chcete do výsledkov prieskumu uložiť hodnotu otázky s použitou maskou."
@@ -3236,7 +3260,7 @@ export var skStrings = {
     // [Auto-translated] "Render as"
     renderAs: "Vykresliť ako", // Auto-generated string
     // [Auto-translated] "Attach original items"
-    attachOriginalItems: "Priloženie originálnych položiek", // Auto-generated string
+    attachData: "Priloženie originálnych položiek", // Auto-generated string
     // "Choices"
     choices: "možnosti",
     // "Choices by url"

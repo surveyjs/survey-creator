@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, ComponentCollection, PopupDropdownViewModel, QuestionPanelDynamicModel, QuestionRadiogroupModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, PopupDropdownViewModel, QuestionPanelDynamicModel, QuestionRadiogroupModel, QuestionTextModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -150,10 +150,10 @@ test("Check question adorners location", (): any => {
       { type: "text", name: "q1" },
     ]
   };
-  creator.onDefineElementMenuItems.add(function (editor, options) {
-    if (options.obj.isPage) return;
-    const objToAdd = options.obj;
-    options.items.unshift({
+  creator.onElementGetActions.add(function (editor, options) {
+    if (options.element.isPage) return;
+    const objToAdd = options.element;
+    options.actions.unshift({
       id: "addtosharedrepo"
     });
   });
@@ -925,6 +925,34 @@ test("Check question converter with subitems (types)", (): any => {
   getQuestionConverterList(creator, "q1").getActionById("boolean").items[2].action();
   expect(creator.survey.getQuestionByName("q1").choices[0].text).toBe("abc");
   expect(creator.survey.getQuestionByName("q1").getType()).toBe("radiogroup");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Check question converter on subitem search", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  const list = getQuestionConverterList(creator, "q1");
+  list.filterString = "Email";
+  const filteredActions = list.renderedActions.filter(item => list.isItemVisible(item));
+  expect(filteredActions).toHaveLength(1);
+  filteredActions[0].action();
+  const questionConverted = creator.survey.getQuestionByName("q1") as QuestionTextModel;
+  expect(questionConverted.inputType).toBe("email");
 
   surveySettings.animationEnabled = true;
 });

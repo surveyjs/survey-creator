@@ -155,7 +155,7 @@ test.describe(title, () => {
     expect(duration).toBeLessThan(timeLimit * 2); // TODO: fix long dropdown opening
     await page.locator(".svc-object-selector .svc-list__container > .svc-list__filter").click();
     start = performance.now();
-    await page.locator("#svd-grid-object-selector").getByRole("textbox", { name: "Type to search..." }).fill("q3978");
+    await page.locator(".sv-action--object-selector").getByRole("textbox", { name: "Type to search..." }).fill("q3978");
     end = performance.now();
     duration = end - start;
     // eslint-disable-next-line no-console

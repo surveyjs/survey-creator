@@ -74,8 +74,7 @@ export class SurveyConditionEditorItem extends ConditionEditorItem {
     if (val == "true" || val == "false") return val;
     if (this.isNumeric(val)) return val;
     if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
-    if (!this.isQuote(val[0])) val = "'" + val;
-    if (!this.isQuote(val[val.length - 1])) val = val + "'";
+    if (!this.isQuote(val)) val = "'" + val + "'";
     return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
   }
   private isNumeric(val: any): boolean {
@@ -275,8 +274,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.objectValue = object;
     this.panelValue = <QuestionPanelDynamicModel>(this.editSurvey.getQuestionByName("panel"));
     this.textEditorValue = <QuestionCommentModel>(this.editSurvey.getQuestionByName("textEditor"));
-    if (!!this.options.maxLogicItemsInCondition) {
-      this.panel.maxPanelCount = this.options.maxLogicItemsInCondition;
+    if (!!this.options.logicMaxItemsInCondition) {
+      this.panel.maxPanelCount = this.options.logicMaxItemsInCondition;
     }
     this.allConditionQuestions = this.createAllConditionQuestions();
     this.editSurvey.onValueChanged.add((sender, options) => {
@@ -345,7 +344,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               type: "dropdown",
               renderAs: "logicoperator",
               titleLocation: "hidden",
-              showOptionsCaption: false,
+              allowClear: false,
               visibleIf: "{panelIndex} > 0",
               choices: [
                 { value: "and", text: editorLocalization.getString("pe.and") },
@@ -358,7 +357,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
-              showOptionsCaption: false,
+              allowClear: false,
               startWithNewLine: false,
               isRequired: true
             },
@@ -368,7 +367,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               titleLocation: "hidden",
               startWithNewLine: false,
-              showOptionsCaption: false,
+              allowClear: false,
               isRequired: true,
               enableIf: "{panel.questionName} notempty"
             },
@@ -376,7 +375,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "removeAction",
               type: "linkvalue",
               titleLocation: "hidden",
-              showOptionsCaption: false,
               visible: false,
               startWithNewLine: false,
               showValueInLink: false,
@@ -698,7 +696,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < res.length; i++) {
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
-      if (!(this.options.useElementTitles || this.options.showTitlesInExpressions)) {
+      if (!this.options.useElementTitles) {
         let name = res[i].name;
         let valueName = question.valueName;
         if (!!valueName && name.indexOf(valueName) == 0) {
@@ -859,7 +857,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.title = title;
       newQuestion.description = "";
       newQuestion.titleLocation = "top";
-      newQuestion.hasComment = false;
+      newQuestion.showCommentArea = false;
       if (newQuestion.showOtherItem) {
         const question = this.getConditionQuestion(qName);
         if (question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
@@ -927,7 +925,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (json.type == "expression") {
       json.type = "text";
     }
-    if (operator == "anyof") {
+    if (operator == "anyof" || operator == "noneof") {
       if (!ConditionEditor.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";
       }
@@ -1059,7 +1057,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any) {
     if (options.question.name === "panel" && options.value.length > 0) {
-      const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
+      const maxLogicItems = this.options.logicMaxItemsInCondition > 0 ? this.options.logicMaxItemsInCondition : 100;
       options.question.maxPanelCount = options.value.length === 1 && !options.value[0].questionName ? 1 : maxLogicItems;
       this.panel.panels.forEach(panel => {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;

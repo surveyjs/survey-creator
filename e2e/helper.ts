@@ -28,6 +28,8 @@ export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
     const errors: Array<Error> = [];
     page.addListener("pageerror", (error) => {
       errors.push(error);
+      // eslint-disable-next-line no-console
+      console.log(`Uncaught exception: "${error}"`);
     });
     await use(page);
     if (!skipJSErrors) {
@@ -42,15 +44,30 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
-export async function doDrag({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options: any }):Promise<void> {
-  await element.hover({ force: true });
-  await page.mouse.down();
-  const { x, y, width, height } = await <any>target.boundingBox();
-
-  await page.mouse.move(x + width / 2 + (options.destinationOffsetX || 0), y + height / 2 + (options.destinationOffsetY || 0), { steps: 20 });
+interface IDragToElementOptions {
+  elementPosition?: {x: number, y: number};
+  targetPosition?: {x: number, y: number};
+  steps?: number;
 }
 
-export async function doDragDrop({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options: any }):Promise<void> {
+export async function doDrag({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options?: IDragToElementOptions }):Promise<void> {
+  if (options?.elementPosition) {
+    await element.hover({ force: true, position: { x: (options.elementPosition?.x || 0), y: (options.elementPosition?.y || 0) } });
+  } else {
+    await element.hover({ force: true });
+  }
+  await page.mouse.down();
+  await target.scrollIntoViewIfNeeded();
+  const { x, y, width, height } = await <any>target.boundingBox();
+
+  if (options?.targetPosition) {
+    await page.mouse.move(x + (options?.targetPosition?.x || 0), y + (options?.targetPosition?.y || 0), { steps: options?.steps || 20 });
+  } else {
+    await page.mouse.move(x + width / 2, y + height / 2, { steps: options?.steps || 20 });
+  }
+}
+
+export async function doDragDrop({ page, element, target, options }: { page: Page, element: Locator, target: Locator, options?: IDragToElementOptions }):Promise<void> {
   await doDrag({ page, element, target, options: options || {} });
   await page.mouse.up();
 }
