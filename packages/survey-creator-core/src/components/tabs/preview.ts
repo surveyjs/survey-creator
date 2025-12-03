@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
@@ -7,7 +7,6 @@ import { findSuitableTheme, isThemeEmpty } from "./theme-model";
 import { listComponentCss } from "../list-theme";
 
 export class PreviewViewModel extends Base {
-  static tagRegex = /(<([^>]+)>)/ig;
   public enableInvisiblePages: boolean = true;
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -174,12 +173,21 @@ export class PreviewViewModel extends Base {
   private getCurrentPageItem(): IAction {
     return this.pageListItems[this.survey.pages.indexOf(this.survey.activePage)];
   }
-  private getSelectPageTitle(): string {
-    return (this.activePage && this.getPageTitle(this.activePage, "preview-tab:selected-page", "survey-tester-selected")) || getLocString("ts.selectPage");
+  private updateSelectedPageTitle(): void {
+    const action = this.selectPageAction;
+    if (action) {
+      action.locTitle.sharedData = this.activePage ? this.activePage.locTitle : null;
+      action.locTitle.onGetTextCallback = (text: string): string => {
+        return this.getSelectPageTitle(text);
+      };
+      action.locTitle.strChanged();
+    }
   }
-  private getPageTitle(page: PageModel, area = "preview-tab:page-list", reason = "survey-tester") {
-    const pageTitle = page.title.replace(PreviewViewModel.tagRegex, "");
-    let title = this.surveyProvider.getObjectDisplayName(page, area, reason, pageTitle);
+  private getSelectPageTitle(text: string): string {
+    return (this.activePage && this.getPageTitle(text, this.activePage, "preview-tab:selected-page", "survey-tester-selected")) || getLocString("ts.selectPage");
+  }
+  private getPageTitle(text: string, page: PageModel, area = "preview-tab:page-list", reason = "survey-tester") {
+    let title = this.surveyProvider.getObjectDisplayName(page, area, reason, text);
     if (title === page.name && title.indexOf("page") === 0) {
       const index: number = this.survey.pages.indexOf(page);
       return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);
@@ -190,10 +198,15 @@ export class PreviewViewModel extends Base {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
+      const locTitle = new LocalizableString(page, true);
+      locTitle.sharedData = page.locTitle;
+      locTitle.onGetTextCallback = (text: string): string => {
+        return this.getPageTitle(text, page);
+      };
       const pageItem: IAction = {
         id: page.name,
         data: page,
-        title: this.getPageTitle(page),
+        locTitle: locTitle,
         enabled: (this.enableInvisiblePages && this.showInvisibleElements) || page.isVisible,
         visible: true
       };
@@ -257,11 +270,11 @@ export class PreviewViewModel extends Base {
       this.prevPageAction.action = () => setNearPage(false);
       pageActions.push(this.prevPageAction);
     }
-
+    const activePageLocTitle = new LocalizableString(this.survey, true);
     this.selectPageAction = createDropdownActionModel({
       id: "pageSelector",
       css: "svc-page-selector",
-      title: this.getSelectPageTitle(),
+      locTitle: activePageLocTitle,
       visible: this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab
     }, {
       items: this.pageListItems,
@@ -282,6 +295,7 @@ export class PreviewViewModel extends Base {
       verticalPosition: "top",
       horizontalPosition: "center"
     }, this.surveyProvider);
+    this.updateSelectedPageTitle();
     pageActions.push(this.selectPageAction);
     this.selectPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
       return this.isSurveyRunning();
@@ -336,7 +350,7 @@ export class PreviewViewModel extends Base {
 
     if (name === "activePage") {
       this.updatePrevNextPageActionState();
-      this.selectPageAction.title = this.getSelectPageTitle();
+      this.updateSelectedPageTitle();
     }
     if (name === "isRunning" || name === "pageListItems" || name === "showPagesInTestSurveyTab") {
       this.selectPageAction.popupModel.contentComponentData.model.items = this.pageListItems;
