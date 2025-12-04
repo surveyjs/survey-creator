@@ -103,6 +103,9 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         element.renderAs = "checkbox";
         element.useTitleAsLabel = true;
       }
+      if (element.type === "dropdown") {
+        element.searchEnabled = false;
+      }
       element.name = this.addPathToName(element.name);
       return element;
     });
