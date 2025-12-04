@@ -124,7 +124,7 @@
   display: flex;
   flex-direction: column;
 
-  .sps-question__content {
+  .sps-question__content, sv-ng-question-comment {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
