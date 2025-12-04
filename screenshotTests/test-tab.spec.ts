@@ -393,6 +393,44 @@ test.describe(title, () => {
     await pageSelectorButton.click();
     await compareScreenshot(page, page.locator(".svc-page-selector .sv-popup__container"), "test-tab-page-selector-witn-invisible-page.png");
   });
+  test("Page selector & markdown", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.evaluate(() => {
+      (window as any).creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+        if (options.area === "preview-tab") {
+          options.survey.onTextMarkdown.add((_, mdOptions) => {
+            mdOptions.html = mdOptions.text;
+          });
+        }
+      });
+    });
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "title": "<b><i>Page 1</i></b>",
+          "elements": [{ "type": "text", "name": "question1" }]
+        },
+        {
+          "name": "page2",
+          "title": "<b><i>Page 2</i></b>",
+          "elements": [{ "type": "text", "name": "question2" }]
+        },
+        {
+          "name": "page3",
+          "title": "<b><i>Page 3</i></b>",
+          "elements": [{ "type": "text", "name": "question3" }]
+        },
+      ]
+    });
+    const pageSelectorButton = page.locator(".svc-page-selector");
+    const pageSelectorMenu = page.locator(".svc-list__container");
+    const pageSelectorSecondPage = pageSelectorMenu.locator(".svc-list__item-body").nth(1);
+    await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
+    await compareScreenshot(page, pageSelectorButton, "test-tab-page-selector-markdown-button-first.png");
+    await pageSelectorButton.click();
+    await compareScreenshot(page, pageSelectorMenu, "test-tab-page-selector-markdown-menu.png");
+  });
 
   test("Tagbox has wrong style on preview tab", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
