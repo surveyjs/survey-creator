@@ -175,11 +175,8 @@ export class PreviewViewModel extends Base {
   }
   private updateSelectedPageTitle(): void {
     const action = this.selectPageAction;
-    if (action) {
-      action.locTitle.sharedData = this.activePage ? this.activePage.locTitle : null;
-      action.locTitle.onGetTextCallback = (text: string): string => {
-        return this.getSelectPageTitle(text);
-      };
+    if (action && this.activePage) {
+      action.locTitle.setJson(this.activePage.locTitle.getJson());
       action.locTitle.strChanged();
     }
   }
@@ -199,7 +196,7 @@ export class PreviewViewModel extends Base {
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
       const locTitle = new LocalizableString(page, true);
-      locTitle.sharedData = page.locTitle;
+      locTitle.setJson(page.locTitle.getJson());
       locTitle.onGetTextCallback = (text: string): string => {
         return this.getPageTitle(text, page);
       };
@@ -271,6 +268,9 @@ export class PreviewViewModel extends Base {
       pageActions.push(this.prevPageAction);
     }
     const activePageLocTitle = new LocalizableString(this.survey, true);
+    activePageLocTitle.onGetTextCallback = (text: string): string => {
+      return this.getSelectPageTitle(text);
+    };
     this.selectPageAction = createDropdownActionModel({
       id: "pageSelector",
       css: "svc-page-selector",
