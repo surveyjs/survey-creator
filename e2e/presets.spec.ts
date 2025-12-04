@@ -108,6 +108,7 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
+    await items.getByRole("row", { name: "Choice Questions" }).hover();
     await items.getByRole("row", { name: "Choice Questions" }).getByTitle("Expand").click();
     await items.getByRole("row", { name: "Slider" }).getByRole("button").nth(3).click();
     await items.getByText("Remove from Toolbox").click();
@@ -159,6 +160,7 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
+    await items.getByRole("row", { name: "Choice Questions" }).hover();
     await items.getByRole("row", { name: "Choice Questions" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: items.getByRole("row", { name: "Slider" }).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
 
@@ -211,6 +213,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("button", { name: "Apply" }).click();
     await page.waitForTimeout(500);
+    await page.getByRole("row", { name: "Custom" }).hover();
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
     await items.getByRole("button", { name: "Add a new item" }).click();
