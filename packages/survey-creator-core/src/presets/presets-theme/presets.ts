@@ -1,4 +1,4 @@
-//import { listComponentCss } from "../components/list-theme";
+import { listComponentCss } from "survey-creator-core";
 
 export var presetsCss = {
   root: "sps-root-modern",
@@ -23,6 +23,7 @@ export var presetsCss = {
     preview: "sps-btn sps-footer__preview-btn",
     edit: "sps-btn sps-footer__edit-btn"
   },
+  list: JSON.parse(JSON.stringify(listComponentCss)),
   panel: {
     withFrame: "sps-panel--with-frame",
     nested: "sps-panel--nested",
@@ -177,6 +178,7 @@ export var presetsCss = {
   },
   text: {
     root: "sps-input sps-text",
+    controlReadOnly: "sps-input--readonly",
     small: "sps-row__question--small",
     content: "sps-question__content sps-text__content",
     remainingCharacterCounter: "sps-remaining-character-counter",
@@ -195,6 +197,7 @@ export var presetsCss = {
     small: "sps-row__question--small sd-row__question--small",
     control: "sps-input sps-dropdown",
     controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
+    controlReadOnly: "sps-input--readonly",
     controlValue: "sps-dropdown__value",
     filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
     other: "sps-comment sps-question__other",
@@ -202,7 +205,9 @@ export var presetsCss = {
     selectWrapper: "sv-dropdown_select-wrapper sps-dropdown_select-wrapper",
     chevronButtonIconId: "icon-chevron",
     cleanButton: "sps-dropdown__clean-button sps-input__edit-button",
-    controlReadOnly: "sd-input--disabled sd-input--readonly"
+    controlReadOnly: "sd-input--disabled sd-input--readonly",
+    hintPrefix: "sps-dropdown__hint-prefix sd-dropdown__hint-prefix",
+    hintSuffix: "sps-dropdown__hint-suffix sd-dropdown__hint-suffix"
   },
   matrix: {
     tableWrapper: "sps-matrix sps-table-wrapper",

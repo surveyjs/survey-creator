@@ -38,6 +38,11 @@
   color: var(--ctr-editor-content-text-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
 }
 
+.sps-input--readonly {
+  color: var(--sjs2-color-control-input-readonly-value, #1C1B20);
+  background: var(--sjs2-color-control-formbox-readonly-bg, #FFF);
+}
+
 .sps-input {
   &::-webkit-datetime-edit,
   &::-webkit-datetime-edit-fields-wrapper,

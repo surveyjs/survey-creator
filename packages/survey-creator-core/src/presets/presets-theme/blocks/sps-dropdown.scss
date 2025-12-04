@@ -18,6 +18,7 @@
         flex: 1 0 0;
         box-shadow: none;
         border: none;
+        color: var(--sjs2-color-control-input-default-value, #1C1B20);
     }
 }
 
@@ -39,6 +40,10 @@
     &.sv-string-viewer {
         white-space: nowrap;
     }
+}
+
+.sps-dropdown__hint-prefix, .sps-dropdown__hint-suffix {
+    color: var(--sjs2-color-control-input-default-placeholder, rgba(28, 27, 32, 0.60));
 }
 
 .sps-dropdown-popup.sv-popup--menu-popup {

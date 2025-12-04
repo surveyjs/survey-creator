@@ -133,7 +133,7 @@
     transition: margin-left $creator-transition-duration;
 
     &:hover {
-      background: var(--sjs2-color-control-formbox-hovered-bg, #f5f5f5);
+      background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
       box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
         var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
         var(--sjs2-color-control-formbox-hovered-border, #d4d4d4) inset;

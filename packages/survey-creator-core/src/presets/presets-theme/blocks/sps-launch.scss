@@ -113,6 +113,9 @@
   top: 100%;
   transform-origin: 0 0;
   transform: rotate(-90deg) scale(1, 1);
+  use {
+    fill: var(--sjs2-color-fg-basic-primary-muted, #424146);
+  }
 }
 .sps-launch__chevron-down {
   align-self: stretch;

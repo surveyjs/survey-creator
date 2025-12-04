@@ -50,7 +50,7 @@
   .sps-page {
     padding: 0;
     gap: var(--sjs2-spacing-x200, 16px);
-    background: initial;
+    background: var(--sjs2-color-utility-sheet, #FFF);
   }
   .sps-row {
     max-width: initial;
