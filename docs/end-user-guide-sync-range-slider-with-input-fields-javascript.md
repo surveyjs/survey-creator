@@ -103,7 +103,7 @@ This section guides you through setting up a Range Slider and linking it to two 
 2. Go to the **Validation** category.
 3. Click the **Plus** icon to add a new validation rule.
 4. In the **Error message** field, enter the text you wish to show if the values users enter in either input field don't meet the requirements (e.g. `The distance between the two slider values must be between 100 and 250.`).
-5. In the **Validation expression** field, enter the following expression: `{max} empty or {min} empty or ({max} - {min} <= 250 and {max} - {min} >= 100)`, where values in curly brackets refer to the names of the Single-Line Input questions. This expression ensures that the length of the specified range stays within the allowed limits when the range is defined externally.
+5. In the **Valid when** field, enter the following expression: `{max} empty or {min} empty or ({max} - {min} <= 250 and {max} - {min} >= 100)`, where values in curly brackets refer to the names of the Single-Line Input questions. This expression ensures that the length of the specified range stays within the allowed limits when the range is defined externally.
 
    <img src="images/eud-validation-rule.png" alt="Configure a validation rule for the range length limits defined via the input fields." width="1544" height="872">
 6. To ensure users are immediately informed of invalid values, enable immediate validation. Switch to the survey-level settings, open the **Validation** category, find the **Run validation** dropdown, and select the **After an answer is changed** option.

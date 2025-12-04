@@ -189,17 +189,21 @@ The advanced syntax may be useful in many cases, one of which is data validation
 3. Select the first question, locate the **Input type** drop-down menu under the **General** category, and select **Date**.
 4. Repeat step 3 for the second question.
 
-  <img src="images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
+<img src="images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
+
 5. Select the first question and enter `start-date` as the **Question name** setting value.
 6. Select the second question and enter `end-date` as a value for the same setting.
 
-  <img src="images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
+<img src="images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
+
 7. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
 
-  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+<img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+
 8. Specify the following **Error message**: `End date should be greater than start date`.
-9. Enter the following **Validation expression**: `{panel.start-date} < {panel.end-date}`.
-  <img src="images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
+9. Enter the following validation expression in the **Valid when** editor: `{panel.start-date} < {panel.end-date}`.
+
+<img src="images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
 
 To check that the validation rule works as expected, open the Preview tab, add a new entry to the Dynamic Panel, and select invalid start and end dates.
 
@@ -219,11 +223,12 @@ Calculation functions produce results that can be used as operands in expression
 2. Set their **Input type** to **Date** and **Question name** to `start-date` and `end-date` (perform steps 3 to 6 from the [instructions for the Dynamic Panel](#dynamic-panel)).
 3. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
 
-  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
-4. Specify the following **Error message**: `Difference between start and end dates must not be greater than 14 days`.
-5. Enter the following **Validation expression**: `dateDiff({start-date}, {end-date}, "days") <= 14`.
+<img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
 
-  <img src="images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
+4. Specify the following **Error message**: `Difference between start and end dates must not be greater than 14 days`.
+5. Enter the following validation expression in the **Valid when** field: `dateDiff({start-date}, {end-date}, "days") <= 14`.
+
+<img src="images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
 
 To verify the validation, open the Preview tab and select two dates that are more than 14 days apart.
 

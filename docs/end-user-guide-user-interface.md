@@ -234,15 +234,18 @@ Respondents use mouse or touch gestures to draw their signature within the alloc
 
 - How to: Resize the allocated area         
 Switch to the **General** category and change the **Signature area width** and **Signature area height** values:     
-    <img src="images/survey-creator-change-size.png" alt="Survey Creator - Change size" width="1448" height="648">
+
+<img src="images/survey-creator-change-size.png" alt="Survey Creator - Change size" width="1448" height="648">
 
 - How to: Change the storage format        
 The respondent's input is saved as a base64-encoded image in one of the following formats: PNG, JPEG, SVG. To select the desired format, use the **Storage format** editor in the **General** category:       
-    <img src="images/survey-creator-image-format.png" alt="Survey Creator - Storage format" width="1448" height="648">
+
+<img src="images/survey-creator-image-format.png" alt="Survey Creator - Storage format" width="1448" height="648">
 
 - How to: Change the pen color          
-Switch to the **General** category and select the desired color from the **Stroke color** drop-down menu:     
-    <img src="images/survey-creator-pen-color.png" alt="Survey Creator - Pen color" width="1448" height="648">
+Switch to the **General** category and select the desired color from the **Stroke color** drop-down menu:
+
+<img src="images/survey-creator-pen-color.png" alt="Survey Creator - Pen color" width="1448" height="648">
 
 ### Adorners
 
