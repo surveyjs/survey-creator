@@ -1,5 +1,5 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, IDialogOptions, LocalizableString } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString } from "survey-core";
+import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { basic, advanced, expert } from "./default-settings";
@@ -50,6 +50,23 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     settingsPage.componentName = "svc-presets-property-grid";
     this.toolboxCompact = creator.toolbox.forceCompact;
   }
+
+  /**
+   * An event that is raised when...
+   *
+   * Parameters:
+   *
+   * - `sender`: `TabPresetsPlugin`\
+   * A `TabPresetsPlugin` instance that raised the event.
+   * - `options.preset`: [`ICreatorPresetData`](https://surveyjs.io/form-library/documentation/api-reference/...)\
+   * A selected theme.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/.../ (linkStyle))
+   * @see availableThemes
+   * @see addTheme
+   * @see removeTheme
+   */
+  public onPresetSaved = new EventBase<TabPresetsPlugin, { preset: ICreatorPresetData }>();
 
   public saveToFileHandler = saveToFileHandler;
 

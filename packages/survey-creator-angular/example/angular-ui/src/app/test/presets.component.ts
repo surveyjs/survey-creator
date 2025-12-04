@@ -3,6 +3,7 @@ import { SurveyCreatorModel } from "survey-creator-core";
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
 import { TabPresetsPlugin } from "survey-creator-core/presets";
+import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 @Component({
   selector: "test-theme-preview",
   templateUrl: "./test.component.html",
@@ -15,6 +16,7 @@ export class PresetsComponent extends TestDefaultComponent {
   protected override getSlk(): boolean { return true }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
+    this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     settings.animationEnabled = false;
