@@ -331,14 +331,14 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
   });
   var model = getTestModel(creator);
   expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[0].title).toEqual("1. page1");
-  expect(model.pageListItems[1].title).toEqual("2. page2");
-  expect(model.pageListItems[2].title).toEqual("3. page3");
+  expect(model.pageListItems[0].locTitle?.textOrHtml).toEqual("1. page1");
+  expect(model.pageListItems[1].locTitle?.textOrHtml).toEqual("2. page2");
+  expect(model.pageListItems[2].locTitle?.textOrHtml).toEqual("3. page3");
   const selectedPage: IAction = model.pageActions.filter(
     (item: IAction) => item.id === "pageSelector")[0];
-  expect(selectedPage.title).toEqual("Page 1 from 3");
+  expect(selectedPage.locTitle?.textOrHtml).toEqual("Page 1 from 3");
   model.survey.nextPage();
-  expect(selectedPage.title).toEqual("Page 2 from 3");
+  expect(selectedPage.locTitle?.textOrHtml).toEqual("Page 2 from 3");
 });
 test("pages, PageListItems, pageSelector: check page titles", (): any => {
   const creator = new CreatorTester();
@@ -353,10 +353,10 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   const selectedPage: () => IAction = () => model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
 
   expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[0].title).toEqual("Page 1");
-  expect(model.pageListItems[1].title).toEqual("Page 2");
-  expect(model.pageListItems[2].title).toEqual("Page 3");
-  expect(selectedPage().title).toEqual("Page 1");
+  expect(model.pageListItems[0].locTitle?.textOrHtml).toEqual("Page 1");
+  expect(model.pageListItems[1].locTitle?.textOrHtml).toEqual("Page 2");
+  expect(model.pageListItems[2].locTitle?.textOrHtml).toEqual("Page 3");
+  expect(selectedPage().locTitle?.textOrHtml).toEqual("Page 1");
 
   creator.JSON = {
     pages: [
@@ -366,19 +366,18 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
     ]
   };
   creator.getPlugin("test").update();
-  expect(model.pageListItems[0].title).toEqual("page title 1");
-  expect(model.pageListItems[1].title).toEqual("page title 2");
-  expect(model.pageListItems[2].title).toEqual("Page 3");
-  expect(selectedPage().title).toEqual("page title 1");
+  expect(model.pageListItems[0].locTitle?.textOrHtml).toEqual("page title 1");
+  expect(model.pageListItems[1].locTitle?.textOrHtml).toEqual("page title 2");
+  expect(model.pageListItems[2].locTitle?.textOrHtml).toEqual("Page 3");
+  expect(selectedPage().locTitle?.textOrHtml).toEqual("page title 1");
 
   model.survey.nextPage();
-  expect(selectedPage().title).toEqual("page title 2");
+  expect(selectedPage().locTitle?.textOrHtml).toEqual("page title 2");
 
   model.survey.nextPage();
-  expect(selectedPage().title).toEqual("Page 3");
+  expect(selectedPage().locTitle?.textOrHtml).toEqual("Page 3");
 });
-
-test("pageSelector if page title with markup", (): any => {
+test("pageSelector if page title with markup, Bug#7298", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
@@ -386,14 +385,23 @@ test("pageSelector if page title with markup", (): any => {
       { name: "page2", title: "<i>Page 2</i>", elements: [{ type: "text", name: "q2" }] },
     ]
   };
+  creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+    if (options.area === "preview-tab") {
+      options.survey.onTextMarkdown.add((_, mdOptions) => {
+        if (mdOptions.text.indexOf("<i>") > -1) {
+          mdOptions.html = mdOptions.text + "#markup";
+        }
+      });
+    }
+  });
   var model = getTestModel(creator);
   expect(model.pageListItems).toHaveLength(2);
-  expect(model.pageListItems[0].title).toEqual("Page 1");
-  expect(model.pageListItems[1].title).toEqual("Page 2");
+  expect(model.pageListItems[0].locTitle?.textOrHtml).toEqual("<i>Page 1</i>#markup");
+  expect(model.pageListItems[1].locTitle?.textOrHtml).toEqual("<i>Page 2</i>#markup");
   const selectedPage: IAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
-  expect(selectedPage.title).toEqual("Page 1");
+  expect(selectedPage.locTitle?.textOrHtml).toEqual("<i>Page 1</i>#markup");
   model.survey.nextPage();
-  expect(selectedPage.title).toEqual("Page 2");
+  expect(selectedPage.locTitle?.textOrHtml).toEqual("<i>Page 2</i>#markup");
 });
 
 test("Simulator view switch", (): any => {
