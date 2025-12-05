@@ -812,6 +812,8 @@ export class PropertyGridModel {
   public onSetNewObjectCallback: () => void;
   public onNewSurveyCreatedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
+  public readonly placeholderPageName = "p1--empty-pg-placeholder-page";
+
   public refresh(): void {
     this.setObj(this.objValue);
   }
@@ -1042,7 +1044,7 @@ export class PropertyGridModel {
       survey.checkErrorsMode = "onValueChanging";
       survey.questionErrorComponent = "svc-question-error";
       if (survey.pages.length === 0) {
-        survey.addNewPage("p1");
+        survey.addNewPage(this.placeholderPageName);
       }
     }
   }

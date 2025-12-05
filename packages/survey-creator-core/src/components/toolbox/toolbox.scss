@@ -301,6 +301,8 @@
 }
 
 .svc-toolbox--disabled {
-  opacity: 0.5;
   pointer-events: none;
+  .svc-toolbox__search-button {
+    pointer-events: none;
+  }
 }

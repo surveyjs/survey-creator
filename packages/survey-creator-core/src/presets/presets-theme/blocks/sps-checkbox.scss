@@ -1,0 +1,158 @@
+@use "../../../variables" as *;
+@use "../fonts" as *;
+
+.sps-checkbox {
+  cursor: pointer;
+}
+
+.sps-checkbox--disabled {
+  cursor: default;
+
+  .sps-checkbox {
+    cursor: default;
+  }
+
+  .sps-checkbox__caption {
+    color: var(--ctr-checkbox-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
+  }
+
+  .sps-checkbox__rectangle,
+  &.sps-checkbox:active .sps-checkbox__rectangle,
+  &.sps-checkbox__control:focus + .sps-checkbox__rectangle {
+    border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid
+      var(--ctr-checkbox-border-color-disabled, var(--sjs-border-10, #dcdcdcff));
+    background: var(--ctr-checkbox-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
+    outline: none;
+  }
+}
+
+.sps-checkbox__caption {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+}
+
+.sps-checkbox__rectangle {
+  border-radius: var(--sjs2-radius-control-checkbox, 4px);
+  border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-false-default-border, #D4D4D4);
+  background: var(--sjs2-color-control-check-false-default-bg, rgba(28, 27, 32, 0.05));
+
+  /* sjs2/shadow/inner */
+  //box-shadow: var(--sjs2-shadow-size-inner-offset-x, 0) var(--sjs2-shadow-size-inner-offset-y, 0) var(--sjs2-shadow-size-inner-blur, 0) var(--sjs2-shadow-size-inner-spread, 1px) var(--sjs2-shadow-color-inner, #D4D4D4) inset;
+  box-sizing: border-box;
+  width: var(--sjs2-size-x300, 24px);
+  height: var(--sjs2-size-x300, 24px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  // padding: calcSize(0.5);
+  padding: 1px 1px;
+  outline: 2px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background $creator-transition-duration,
+    background-color $creator-transition-duration,
+    outline $creator-transition-duration;
+}
+
+.sps-checkbox:hover {
+  .sps-checkbox__rectangle {
+    background: var(--sjs2-color-control-check-false-hovered-bg, rgba(28, 27, 32, 0.10));
+  }
+}
+
+.sps-checkbox.sps-checkbox--checked:hover {
+  .sps-checkbox__rectangle {
+    background: var(--sjs2-color-control-check-true-hovered-bg, #15987E);
+  }
+}
+
+.sps-checkbox:active .sps-checkbox__rectangle,
+.sps-checkbox__control:focus:not(:disabled) + .sps-checkbox__rectangle {
+  outline: 2px solid var(--ctr-checkbox-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+  outline-offset: -2px;
+}
+
+.sps-checkbox .sps-checkbox__svg {
+  display: block;
+  opacity: 0;
+  fill: transparent;
+  width: var(--ctr-checkbox-button-check-mark-width, 16px);
+  height: var(--ctr-checkbox-button-check-mark-height, 16px);
+  background-repeat: no-repeat;
+  background-size: calcSize(2) calcSize(2);
+  transition:
+    opacity $creator-transition-duration,
+    fill $creator-transition-duration;
+}
+
+.sps-checkbox--checked {
+  .sps-checkbox__rectangle {
+    background: var(--sjs2-color-control-check-true-default-bg, #19B394);
+    border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-true-default-border, #19B394);
+  }
+
+  .sps-checkbox__svg {
+    opacity: 1;
+    fill: var(--sjs2-color-control-check-true-default-icon, #ffffff);
+  }
+}
+
+.sps-checkbox--disabled.sps-checkbox--checked .sps-checkbox__svg {
+  fill: var(--ctr-checkbox-button-check-mark-color-disabled, var(--sjs-border-25, #d4d4d4ff));
+}
+
+.sps-checkbox__control {
+  position: fixed;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+//todo: need to hide unneeded icons
+.sps-checkbox__hidden {
+  display: none;
+}
+
+.sps-selectbase {
+  border: none;
+  padding: 0;
+  margin: 0;
+  align-self: stretch;
+  display: flex;
+}
+
+.sps-selectbase__column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--sjs2-spacing-x200, 16px);
+  padding-top: var(--sjs2-spacing-x200, 16px);
+}
+
+.sps-selectbase__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ctr-checkbox-gap, var(--sjs-spacing-x1));
+  cursor: pointer;
+}
+
+.sps-checkbox {
+  .sps-question__description {
+    padding: 0;
+    padding-top: var(--ctr-checkbox-description-text-margin-top, var(--sjs-spacing-x1));
+    padding-inline-start: var(--ctr-checkbox-description-text-margin-left, var(--sjs-font-size-x4));
+    color: var(--ctr-checkbox-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+  }
+
+  .sps-help-action {
+    use {
+      pointer-events: none;
+    }
+  }
+}

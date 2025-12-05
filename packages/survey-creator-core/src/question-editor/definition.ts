@@ -227,7 +227,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   rating: {
     properties: [
       { name: "displayMode", tab: "rateValues" },
+      { name: "rateType", tab: "rateValues" },
+      { name: "rateColorMode", tab: "rateValues" },
+      { name: "scaleColorMode", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
+      { name: "autoGenerate", tab: "rateValues" },
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },

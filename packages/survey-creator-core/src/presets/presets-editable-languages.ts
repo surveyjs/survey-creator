@@ -1,45 +1,72 @@
-import { Helpers, ItemValue, QuestionCheckboxBase, QuestionCheckboxModel, surveyLocalization, SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { editorLocalization, SurveyCreatorModel } from "survey-creator-core";
-
+import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel, Question } from "survey-core";
+import { CreatorPresetEditableBase } from "./presets-editable-base";
+import { getLocString, editorLocalization, SurveyCreatorModel } from "survey-creator-core";
+function searchItem(params) {
+  const questionInstance = this.survey.getQuestionByName(params[0]);
+  let itemvalue = params[1];
+  let text = params[2];
+  if (!text) return true;
+  const item = questionInstance.choices.filter(c => c.value == itemvalue)[0];
+  if (!item) return true;
+  return item.text.toUpperCase().indexOf(text.toUpperCase()) != -1;
+}
+import { FunctionFactory } from "survey-core";
+FunctionFactory.Instance.register("searchItem", searchItem);
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
-      title: "Select Languages",
-      navigationTitle: "Languages",
+      title: getLocString("presets.languages.title"),
+      description: getLocString("presets.languages.description"),
+      navigationTitle: getLocString("presets.languages.navigationTitle"),
       elements: [
-        { type: "panel", name: "languages_main_panel",
-          description: "Select the language of the Survey Creator UI and target languages for the survey being configured.",
+        {
+          type: "dropdown",
+          title: getLocString("presets.languages.creatorUI"),
+          placeholder: editorLocalization.getLocaleName(""),
+          name: this.creatorLocaleName,
+          searchEnabled: true,
+          choices: this.getCreatorLocales()
+        },
+        {
+          type: "panel",
+          title: getLocString("presets.languages.surveyLanguages"),
           elements: [
             {
-              type: "dropdown",
-              titleLocation: "left",
-              title: " UI language:",
-              placeholder: editorLocalization.getLocaleName(""),
-              name: this.creatorLocaleName,
-              choices: this.getCreatorLocales()
-            },
-            {
-              type: "boolean",
-              name: this.surveyUseEnglishNames,
-              title: "Translate Survey language names to Engish",
-              useTitleAsLabel: true,
-              renderAs: "checkbox"
-            },
-            {
+              type: "text",
+              name: this.searchLocalesName,
+              placeholder: getLocString("presets.languages.searchPlaceholder"),
+              titleLocation: "hidden",
+              textUpdateMode: "onTyping"
+            }, {
               type: "checkbox",
               name: this.surveyLocalesName,
-              title: "Survey languages",
+              titleLocation: "hidden",
               minSelectedChoices: 1,
               colCount: 3,
               showSelectAllItem: true,
-              choices: this.getSurveyLocales()
-            }
-          ]
-        }
+              choices: this.getSurveyLocales(),
+              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}"
+            }]
+        },
+        {
+          type: "panel",
+          title: " ",
+          name: this.navigationPanelName,
+          elements: [
+            {
+              type: "boolean",
+              name: this.surveyUseEnglishNames,
+              title: getLocString("presets.languages.translateToEnglish"),
+              titleLocation: "hidden",
+              renderAs: "switch"
+            }] }
       ] };
   }
-  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  public getMainElementNames() : any { return [this.surveyLocalesName]; }
+  public getCustomQuestionCssSuffix(question: Question) {
+    return question.name === this.searchLocalesName ? "search" : "";
+  }
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
@@ -65,7 +92,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
     if (Array.isArray(locales) && locales.length > 0) {
-      question.valule = locales;
+      question.valule = locales; // TODO: sheck spell
     } else {
       question.selectAll();
     }
@@ -77,7 +104,12 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
+  private get searchLocalesName(): string { return this.path + "_searchLocales"; }
   private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }
+
+  public get questionNames() {
+    return [this.creatorLocaleName, this.surveyLocalesName, this.surveyUseEnglishNames];
+  }
   private getIsShowInEnglishSelected(model: SurveyModel): boolean { return model.getValue(this.surveyUseEnglishNames) === true; }
   private getCreatorLocales(): Array<ItemValue> {
     return this.getLocaleItemValues(editorLocalization.getLocales(), false);

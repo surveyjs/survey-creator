@@ -1,0 +1,108 @@
+@use "../../../variables.scss" as *;
+@use "./variables.scss" as *;
+@use "../fonts" as *;
+
+.sps-popup-menu.sv-popup--menu-popup {
+  &.sps-popup-menu--always-on-top {
+    height: unset;
+  }
+  .sv-popup__container {
+    border: initial;
+    
+    padding: var(--sjs2-spacing-x150, 12px);
+
+    box-shadow: initial;
+    background: initial;
+    box-sizing: border-box;
+
+    .sv-popup__body-content {
+      border-radius: var(--sjs2-radius-container-menu, 20px);
+      border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+      background: var(--sjs2-color-utility-sheet, #fff);
+  
+      /* sjs2/border-effect/elevated/default */
+      box-shadow: var(--sjs2-border-offset-x-elevated-default, 0px) var(--sjs2-border-offset-y-elevated-default, 4px) var(--sjs2-border-blur-elevated-default, 8px) var(--sjs2-border-spread-elevated-default, 2px) var(--sjs2-color-utility-shadow-elevated-default, rgba(0, 76, 68, 0.15));
+    }
+  }
+}
+
+.sps-popup-menu.sps-popup-menu--context {
+  .sv-popup__container {
+    padding: 0 var(--sjs2-spacing-x100, 8px);
+  }
+}
+
+
+
+.sps-popup {
+  &.sv-popup--modal-popup {
+    z-index: 3000;
+  }
+  .sps-root-modern {
+    height: initial;
+  }
+
+  .sv-popup__body-footer .sv-action-bar {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .sps-page {
+    padding: 0;
+    gap: var(--sjs2-spacing-x200, 16px);
+    background: var(--sjs2-color-utility-sheet, #FFF);
+  }
+  .sps-row {
+    max-width: initial;
+  }
+  .sps-question--with-frame {
+    border: none;
+    border-radius: 0;
+  }
+
+  .sps-question__header {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  } 
+
+  .sps-question__title {
+    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px) var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
+    @include sjs2--typography--default;
+  }
+
+  .sps-question__content.sps-question__content {
+    padding: 0;
+  }
+  
+  .sps-row--multiple { 
+    margin: 0;
+    &> div {
+      align-items: stretch;
+      padding-left: var(--sjs2-spacing-x400, 32px);
+      padding-right: var(--sjs2-spacing-x400, 32px);
+      &:first-of-type {
+        padding-left: 0;
+      }
+      &:last-of-type {
+        padding-right: 0;
+      }
+    }
+  }
+
+  .sps-panel {
+    border: none;
+    border-radius: 0;
+    align-self: stretch;
+    .sps-row {
+       border: none;
+    }
+  }
+  .sps-panel__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sjs2-spacing-x200, 16px);
+    padding: 0;
+  }
+}
