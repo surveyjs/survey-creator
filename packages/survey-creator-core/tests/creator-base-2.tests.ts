@@ -846,6 +846,32 @@ test("License text for default locale and another default locale", (): any => {
   editorLocalization.defaultLocale = "en";
 });
 
+test("License text from plugin", (): any => {
+  const creator = new CreatorTester();
+
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { }
+  });
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+
+  creator.addPlugin("two", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: () => "no license"
+  });
+  expect(creator.licenseText).toBe("no license");
+
+  creator.addPlugin("three", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: () => ""
+  });
+  expect(creator.licenseText).toBe("no license");
+
+  creator.addPlugin("four", <ICreatorPlugin>{
+    activate: () => { }
+  });
+  expect(creator.licenseText).toBe("no license");
+});
+
 test("isStringEditable", (): any => {
   expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
   expect(isStringEditable({}, "")).toBeTruthy();
