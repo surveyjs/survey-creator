@@ -40,6 +40,17 @@ export class CreatorPreset extends CreatorPresetBase {
   public getJson(): ICreatorPresetData {
     return <ICreatorPresetData>this.json;
   }
+  /**
+   * A method that applies the preset to the Creator instance.
+   *
+   * Parameters:
+   *
+   * - `creator`: `SurveyCreatorModel`\
+   * A `SurveyCreatorModel` instance that the preset is applied to.
+   */
+  public applyTo(creator: SurveyCreatorModel): void {
+    super.apply(creator, false);
+  }
   public apply(creator: SurveyCreatorModel, internal = false): void {
     super.apply(creator, internal);
     this.applyLocalization();

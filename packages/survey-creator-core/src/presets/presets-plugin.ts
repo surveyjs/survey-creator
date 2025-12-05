@@ -1,5 +1,5 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
+import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { basic, advanced, expert } from "./default-settings";
@@ -51,6 +51,27 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.toolboxCompact = creator.toolbox.forceCompact;
   }
 
+  /**
+   * An event that is raised when...
+   *
+   * Parameters:
+   *
+   * - `sender`: `TabPresetsPlugin`\
+   * A `TabPresetsPlugin` instance that raised the event.
+   * - `options.preset`: [`ICreatorPresetData`](https://surveyjs.io/form-library/documentation/api-reference/...)\
+   * A selected theme.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/.../ (linkStyle))
+   * @see availableThemes
+   * @see addTheme
+   * @see removeTheme
+   */
+  public onPresetSaved = new EventBase<TabPresetsPlugin, { preset: ICreatorPresetData }>();
+
+  protected saveHandler() {
+    this.onPresetSaved.fire(this, { preset: this.model.json });
+    this.hidePresets();
+  }
   public saveToFileHandler = saveToFileHandler;
 
   private preventTabSwitch = (_, options) => {
@@ -75,7 +96,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
       settingsAction.popupModel.show();
     };
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.hidePresets() }, //locTitleName: "presets.plugin.save"
+      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
       { id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), needSeparator: true, css: "sps-list__item--label", enabled: false },
       { id: "basic", title: getLocString("presets.plugin.basic"), action: (item: IAction) => { keep(item); this.model.json = basic; } },
       { id: "advanced", title: getLocString("presets.plugin.advanced"), action: (item: IAction) => { keep(item); this.model.json = advanced; } },
