@@ -1,6 +1,6 @@
 <ng-container *ngIf="!creator.isCreatorDisposed">
   <sv-ng-modal-container></sv-ng-modal-container>
-  <div [class]="creator.getRootCss()" [style]="creator.themeVariables" #container>
+  <div [class]="creator.getRootCss()" [attr.style]="themeVariablesString" #container>
     <div>
       <sv-svg-bundle></sv-svg-bundle>
     </div>
