@@ -127,6 +127,10 @@
   }
 }
 
+.spg-row--multiple .spg-question--location--left {
+  flex-wrap: unset;
+}
+
 .spg-question--disabled.spg-question--location--left .spg-question__title {
   color: var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 }
