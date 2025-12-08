@@ -16,7 +16,7 @@
   width: 100%;
 }
 
-.spg-question--disabled .spg-question__header {
+.spg-question--disabled .spg-question__header .spg-title {
   opacity: var(--ctr-editor-label-opacity-disabled, 0.25);
 }
 
@@ -89,17 +89,46 @@
 
 .spg-question--location--left {
   flex-direction: row;
-  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
-  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, var(--sjs-stroke-x1)) var(--ctr-editor-border-color, var(--sjs-border-10, #dcdcdcff));
+  flex-wrap: wrap;
   line-height: calcSize(6);
   vertical-align: middle;
   align-items: stretch;
-  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-
 
   &:focus-within {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+    .spg-question__content--left {
+      box-shadow:
+        inset calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0 0
+          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+        inset 0 calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
+          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+        inset 0 calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
+          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+    }
+
+    .spg-question__header--location--left {
+      box-shadow:
+        inset calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0 0
+          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+        inset 0 calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
+          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+        inset 0 calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
+          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+    }
   }
+
+  &.spg-question--disabled {
+    .spg-question__content--left {
+      background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, white));
+    }
+
+    .spg-question__header--location--left {
+      background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, white));
+    }
+  }
+}
+
+.spg-row--multiple .spg-question--location--left {
+  flex-wrap: unset;
 }
 
 .spg-question--disabled.spg-question--location--left .spg-question__title {
@@ -114,6 +143,17 @@
   display: flex;
   align-items: center;
   padding-inline-start: var(--ctr-editor-padding-left, var(--sjs-spacing-x05));
+  border-top-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-bottom-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
+  box-sizing: border-box;
+  box-shadow:
+    inset calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0
+      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+    inset 0 calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
+      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+    inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
+      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
 
   .spg-question__title {
     padding: 
@@ -136,6 +176,16 @@
 
 .spg-question__content--left {
   flex: 2;
+  border-top-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-bottom-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
+  box-shadow:
+    inset calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0
+      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+    inset 0 calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
+      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+    inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
+      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
 
   .spg-input.spg-input.spg-input {
     background-color: transparent;
