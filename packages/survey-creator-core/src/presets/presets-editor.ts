@@ -1,11 +1,14 @@
-import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
+import { SurveyCreatorModel, editorLocalization, ICreatorOptions, getLocString } from "survey-creator-core";
 import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
-import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
+import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
+import { CreatorPresetEditableOptions } from "./presets-editable-options";
+import { presetsCss } from "./presets-theme/presets";
+export { enStrings } from "./localization/english";
 
 export class NavigationBar extends ActionContainer {
   constructor() {
@@ -28,33 +31,31 @@ export class NavigationBar extends ActionContainer {
 
 export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
   private presetValue: CreatorPreset;
-  private creatorValue: SurveyCreatorModel;
   private modelValue: SurveyModel;
   private resultModelValue: SurveyModel;
   private navigationBarValue: NavigationBar;
   public locTitle: LocalizableString;
-  constructor(json?: ICreatorPresetData) {
+  private applying = false;
+  constructor(json?: ICreatorPresetData, private creatorValue?: SurveyCreatorModel, private defaultJsonValue?: ICreatorPresetData) {
     super();
     editorLocalization.presetStrings = undefined;
     this.presetValue = new CreatorPreset(json);
-    this.creatorValue = this.createCreator({});
+    if (!this.creatorValue)this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
     this.resultModelValue = this.createResultModel();
     this.locTitle = new LocalizableString(undefined, false);
-    this.locTitle.text = "Creator Presets";
+    this.locTitle.text = getLocString("presets.editor.title");
     this.navigationBarValue = new NavigationBar();
     const firstTabName = "preset";
-    this.addNavigationAction(firstTabName, "Edit Preset");
-    this.addNavigationAction("creator", "Preview Survey Creator");
-    this.addNavigationAction("results", "View Preset JSON");
-    this.activeTab = firstTabName;
+    this.preset.setJson(this.getJsonFromSurveyModel());
   }
   public dispose(): void {
     super.dispose();
-    this.creator.dispose();
+    //this.creator.dispose();
     this.disposeModel();
   }
   private disposeModel(): void {
+    this.resetAllPages();
     this.model.editablePresets.forEach(preset => preset.dispose());
     this.model.dispose();
   }
@@ -65,86 +66,124 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.upldateResultJson();
     return this.resultModelValue;
   }
-  public get navigationBar(): ActionContainer { return this.navigationBarValue; }
-  public get activeTab(): string {
-    return this.getPropertyValue("activeTab");
-  }
-  public set activeTab(val: string) {
-    this.setPropertyValue("activeTab", val);
-  }
-  public setActiveTab(val: string): boolean {
-    if (this.activeTab === "preset" && !this.model.validate(true, true)) return false;
-    this.activeTab = val;
-    return true;
-  }
-  public getLocale(): string { return this.json?.languages?.creator || "en"; }
+  public getLocale(): string { return editorLocalization.currentLocale || "en"; }
   public get json(): ICreatorPresetData {
     return this.preset.getJson();
   }
   public set json(val: ICreatorPresetData) {
     this.preset.setJson(val);
-    this.modelValue = this.createModel();
+    this.updateDataFromJson(this.modelValue);
     this.upldateResultJson();
-    this.applyFromSurveyModel(true);
   }
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
   }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
-    if (name === "activeTab" && oldValue === "preset") {
-      this.applyFromSurveyModel();
-    }
+  public get defaultJson(): ICreatorPresetData {
+    return this.defaultJsonValue;
   }
   public createCreator(options: ICreatorOptions): SurveyCreatorModel {
     return new SurveyCreatorModel(options);
   }
-  private addNavigationAction(tabName: string, title: string): void {
-    const id = "action-preset-" + tabName;
-    const actionInfo = {
-      id: id,
-      title: title,
-      active: <any>new ComputedUpdater<boolean>(() => this.activeTab === tabName),
-      action: () => { this.setActiveTab(tabName); }
-    };
-    this.navigationBar.addAction(actionInfo);
+
+  private resetAllPages() {
+    this.model.editablePresets.forEach(item => item.setupOnCurrentPage(this.model, this.creator, true));
+    this.creator.readOnly = false;
   }
+
+  public resetToDefaults(page?: string) {
+    if (!page) {
+      this.notify(getLocString("presets.editor.resetToDefaults"));
+    }
+    this.model.editablePresets.forEach(item => {
+      if (!page || item.pageName == page) item.resetToDefaults(this.model, !!page);
+    });
+  }
+
+  private activatePage (model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {
+    const inactivePresets = editablePresets.filter(item => model.currentPage.name !== item.pageName);
+    const activePreset = editablePresets.filter(item => model.currentPage.name === item.pageName)[0];
+    inactivePresets.forEach(item => item.setupOnCurrentPage(model, this.creator, false));
+    activePreset.setupOnCurrentPage(model, this.creator, true);
+  }
+
+  private notify(message: string) {
+    this.creator.notify(message);
+  }
+
+  protected updateDataFromJson(model: SurveyModel) {
+    const json = this.preset.getJson() || {};
+    editorLocalization.presetStrings = json.localization;
+    model.editablePresets.forEach(item => item.setupQuestions(model, this));
+    model.editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
+    this.updateJsonLocalizationStrings(model.editablePresets);
+    return json;
+  }
+
+  public onLocaleChanged() {
+    const json = this.preset.getJson();
+    this.model.editablePresets.forEach(item => item.onLocaleChanged(this.model, json[item.path], this.creator));
+  }
+
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
+    model.css = presetsCss;
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
-    model.showPrevButton = false;
-    model.showCompleteButton = false;
-    model.registerFunctionOnPropertyValueChanged("isShowNextButton", () => {
-      model.setPropertyValue("isShowNextButton", true);
-    });
-    const nextButton = model.navigationBar.getActionById("sv-nav-next");
-    nextButton.action = (): void => {
-      if (!model.isLastPage) {
-        model.nextPageUIClick();
-      } else {
-        model.currentPageNo = 0;
-      }
-    };
-    editablePresets.forEach(item => item.setupQuestions(model, this));
-    const json = this.preset.getJson() || {};
-    editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], this.creator));
-    this.updateJsonLocalizationStrings(editablePresets);
+    model.showNavigationButtons = false;
+    model.completeText = getLocString("presets.editor.completeText");
+    model.pagePrevText = getLocString("presets.editor.pagePrevText");
+    model.enterKeyAction = "loseFocus";
+
+    editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
+    if (!this.defaultJsonValue) {
+      this.defaultJsonValue = {};
+      editablePresets.forEach(item => this.defaultJsonValue[item.path] = item.getDefaultJsonValue(this.creator));
+    }
+    const json = this.updateDataFromJson(model);
+
+    this.activatePage(model, this.creator, editablePresets);
     model.onCurrentPageChanged.add((sender, options) => {
-      editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
+      this.activatePage(model, this.creator, editablePresets);
     });
-    model.onValueChanging.add((sender, options) => {
-      if (options.name === "languages_creator") {
-        this.applyFromSurveyModel(true);
-      }
-    });
+    const questionNames = editablePresets.map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
-      if (options.name === "languages_creator") {
-        editorLocalization.currentLocale = options.value;
-        editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
+      if (questionNames.indexOf(options.name) != -1 && !this.applying) {
+        this.applyFromSurveyModel(false);
+        this.activatePage(model, this.creator, editablePresets);
       }
     });
+    model.onGetQuestionTitleActions.add((_, options) => {
+      editablePresets.forEach(item => {
+        if (options.question.name == item.getNavigationElementName()) {
+          options.question.getTitleToolbar().isResponsivenessDisabled = true;
+          options.actions = model.navigationBar.actions;
+        }
+      });
+    });
+    model.onGetPanelTitleActions.add((_, options) => {
+      editablePresets.forEach(item => {
+        if (options.panel.name == item.getNavigationElementName()) {
+          options.panel.getTitleToolbar().isResponsivenessDisabled = true;
+          options.actions = model.navigationBar.actions;
+        }
+        item.onGetPanelTitleActions(model, this.creator, options);
+      });
+    });
+    function adjustMatrixAlignment(question: Question) {
+      if (question.isDescendantOf("matrixdynamic")) {
+        question.onCreateDetailPanelRenderedRowCallback = (
+          renderedRow: QuestionMatrixDropdownRenderedRow
+        ) => {
+          renderedRow.cells = [renderedRow.cells[1]];
+          renderedRow.cells[0].colSpans += 2;
+        };
+      }
+    }
+    model.getAllQuestions().forEach(question => adjustMatrixAlignment(question));
+    model.onQuestionCreated.add((_, options) => { adjustMatrixAlignment(options.question); });
+
     model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, this.creator, options));
     });
@@ -160,13 +199,46 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onMatrixRowAdded.add((sender, options) => {
       editablePresets.forEach(item => item.onMatrixRowAdded(model, this.creator, options));
     });
+    model.onMatrixCellValueChanged.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixCellValueChanged(model, this.creator, options));
+    });
+    model.onUpdateQuestionCssClasses.add(function(_, options) {
+      editablePresets.forEach(item => {
+        const suffix = item.getCustomQuestionCssSuffix(options.question);
+        if (suffix) {
+          options.cssClasses.mainRoot += " sps-question--" + suffix;
+        }
+        if (item.getMainElementNames().indexOf(options.question.name) >= 0) {
+          options.cssClasses.mainRoot += " sps-question--main";
+          options.cssClasses.row += " sps-table__row--main";
+          options.cssClasses.buttonAdd += " sps-matrixdynamic__add-btn--icon";
+          options.cssClasses.iconAdd = "sps-matrixdynamic__add-btn-icon";
+          options.cssClasses.iconAddId = "#icon-add-24x24";
+        }
+      });
+    });
+    model.onUpdatePanelCssClasses.add(function(_, options) {
+      editablePresets.forEach(item => {
+        if (options.panel.name === item.getNavigationElementName()) {
+          options.cssClasses.panel.container += " sps-panel--navigation ";
+        }
+      });
+    });
+    model.onUpdatePageCssClasses.add(function(_, options) {
+      editablePresets.forEach(item => {
+        if (item.pageName === options.page.name) {
+          options.cssClasses.page.root += " sps-page--" + item.fullPath;
+        }
+      });
+    });
+
     return model;
   }
   protected createResultModel(): SurveyModel {
     const model = new SurveyModel({
       elements: [
         { type: "html", name: "q1", html: this.getResultHtml() },
-        { type: "comment", name: "json", title: "Preset JSON:", rows: 60, cols: 120, readOnly: true }
+        { type: "comment", name: "json", title: getLocString("presets.editor.presetJson"), rows: 60, cols: 120, readOnly: true }
       ]
     });
     model.showPrevButton = false;
@@ -179,7 +251,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         options.actions.push({
           id: "json_copy",
           iconName: "icon-copy",
-          title: "Copy",
+          title: getLocString("presets.editor.copy"),
           action: () => {
             navigator.clipboard.writeText(question.value);
           }
@@ -187,7 +259,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         options.actions.push({
           id: "json_download",
           iconName: "icon-download",
-          title: "Download",
+          title: getLocString("presets.editor.download"),
           action: () => {
             this.downloadJsonFile(question.value);
           }
@@ -195,7 +267,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         options.actions.push({
           id: "icon-load",
           iconName: "icon-load",
-          title: "Load",
+          title: getLocString("presets.editor.load"),
           action: () => {
             this.loadJsonFile();
           }
@@ -205,19 +277,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return model;
   }
   private getResultHtml(): string {
-    return `<div>Use the following code to apply the preset:
-<div style="line-height:1"><pre><code>import { SurveyCreatorModel, CreatorPreset } from "survey-creator-core";
-const creator = new SurveyCreatorModel({ ... });
-
-const presetJson = {
-  // Copy the JSON object from below
-}
-
-const preset = new CreatorPreset(presetJson);
-preset.apply(creator);</div></pre></code></div>
-`;
+    return `<div>${getLocString("presets.editor.usageExample")}</div>`;
   }
-  private downloadJsonFile(text: string): void {
+  public downloadJsonFile(text?: string): void {
+    if (!text) text = this.jsonText;
     const jsonBlob = new Blob([text], { type: "application/json" });
     const elem = window.document.createElement("a");
     elem.href = window.URL.createObjectURL(jsonBlob);
@@ -227,10 +290,11 @@ preset.apply(creator);</div></pre></code></div>
     document.body.removeChild(elem);
   }
   inputFileElement: HTMLInputElement;
-  private loadJsonFile(): void {
+  public loadJsonFile(): void {
     if (!this.inputFileElement) {
       this.inputFileElement = document.createElement("input");
       this.inputFileElement.type = "file";
+      this.inputFileElement.accept = ".json";
       this.inputFileElement.style.display = "none";
       this.inputFileElement.onchange = () => {
         if (this.inputFileElement.files.length < 1) return;
@@ -251,22 +315,27 @@ preset.apply(creator);</div></pre></code></div>
   private upldateResultJson(): void {
     this.resultModelValue.getQuestionByName("json").value = this.jsonText;
   }
-  public applyFromSurveyModel(reCreateCretor: boolean = true): boolean {
-    if (!this.validateEditableModel(this.model)) return false;
-    if (reCreateCretor) {
-      const json = this.creator?.JSON || {};
-      this.creatorValue = this.createCreator({});
-      this.creator.JSON = json;
+  public applyFromSurveyModel(validate = true): boolean {
+    this.applying = true;
+    if (validate && !this.validateEditableModel(this.model)) {
+      this.applying = false;
+      return false;
     }
+    // if (reCreateCretor) {
+    //   const json = this.creator?.JSON || {};
+    //   this.creatorValue = this.createCreator({});
+    //   this.creator.JSON = json;
+    // }
     this.preset.setJson(this.getJsonFromSurveyModel());
     this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
-    this.preset.apply(this.creator);
+    this.preset.apply(this.creator, true);
+    this.applying = false;
     return true;
   }
   public getJsonFromSurveyModel(): any {
     const res: ICreatorPresetData = {};
     this.model.editablePresets.forEach(preset => {
-      const val = preset.getJsonValue(this.model, this.creator);
+      const val = preset.getJsonValue(this.model, this.creator, this.defaultJsonValue?.[preset.path]);
       if (!!val) {
         res[preset.path] = val;
       }
@@ -320,6 +389,7 @@ preset.apply(creator);</div></pre></code></div>
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
     if (fullPath === "propertyGrid") return new CreatorPresetEditablePropertyGrid(preset);
+    if (fullPath === "options") return new CreatorPresetEditableOptions(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
@@ -346,7 +416,7 @@ preset.apply(creator);</div></pre></code></div>
     return res;
   }
   private getEditModelJson(editablePresets: Array<CreatorPresetEditableBase>): any {
-    const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false, widthMode: "static", width: "1200px" };
+    const modelJson = { pages: [], showQuestionNumbers: false };
     editablePresets.forEach(preset => {
       const pages = preset.createPages();
       if (Array.isArray(pages)) {

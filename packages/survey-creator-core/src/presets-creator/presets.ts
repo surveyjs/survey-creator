@@ -1,6 +1,7 @@
 import { CreatorPresetBase, ICreatorPreset } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
 import { CreatorPresetLanguages } from "./presets-languages";
+import { CreatorPresetOptions } from "./presets-options";
 import { CreatorPresetTabs, ICreatorPresetTab } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";
 import { IToolboxCategoryDefinition } from "../toolbox";
@@ -26,6 +27,7 @@ export interface ICreatorPresetData {
     categories?: Array<IToolboxCategoryDefinition>,
     showCategoryTitles?: boolean,
   };
+  options?: any;
   localization?: any;
 }
 
@@ -38,11 +40,11 @@ export class CreatorPreset extends CreatorPresetBase {
   public getJson(): ICreatorPresetData {
     return <ICreatorPresetData>this.json;
   }
-  public apply(creator?: SurveyCreatorModel): void {
-    super.apply(creator);
+  public apply(creator: SurveyCreatorModel, internal = false): void {
+    super.apply(creator, internal);
     this.applyLocalization();
     if (!!creator) {
-      creator.updateLocalizedStrings();
+      creator.updateLocalizedStrings(!internal);
     }
   }
   protected applyLocalization(): void {
@@ -55,6 +57,6 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetLanguages(), new CreatorPresetTabs(), new CreatorPresetToolbox(),
-      new CreatorPresetPropertyGrid()];
+      new CreatorPresetPropertyGrid(), new CreatorPresetOptions()];
   }
 }

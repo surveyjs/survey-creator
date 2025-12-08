@@ -1,16 +1,13 @@
 import {
   JsonObjectProperty, ItemValue, QuestionDropdownModel,
-  Base, Serializer, SurveyModel, matrixDropdownColumnTypes, PageModel,
-  LocalizableString,
-  Question } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes
+} from "survey-core";
+import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
-  SurveyQuestionProperties, editorLocalization, PropertyGridModel, TabDesignerPlugin,
-  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper, calculateDragOverLocation, PageAdorner
-} from "survey-creator-core";
+  SurveyQuestionProperties, editorLocalization, PropertyGridModel, getLocString,
+  settings } from "survey-creator-core";
 
-import { ElementFactory, QuestionMatrixDynamicModel, QuestionPanelDynamicModel } from "survey-core";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 
 //   private allTypes: string[];
@@ -54,15 +51,16 @@ export class SurveyQuestionPresetPropertiesDetail {
   private properties: SurveyQuestionPresetProperties;
   private propertyGridValue: PropertyGridModel;
   private propertyGridDefaultValue: PropertyGridModel;
-  private allPropertiesNames: Array<string>;
+  private obj;
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls = {};
     const obj = this.createObj();
+    this.obj = obj;
     this.properties = new SurveyQuestionPresetProperties(obj, className, currentJson);
-    this.allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
+    const allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
     const objProps = {};
     Serializer.getPropertiesByObj(obj).forEach(prop => objProps[prop.name] = prop);
-    this.allPropertiesNames.forEach(name => {
+    allPropertiesNames.forEach(name => {
       const prop = objProps[name];
       if (prop) {
         const propClassName = this.getPropClassName(prop);
@@ -82,6 +80,9 @@ export class SurveyQuestionPresetPropertiesDetail {
     this.propertyGridValue = this.createPropertyGrid(obj, this.currentJson);
     this.propertyGridDefaultValue = this.createPropertyGrid(obj);
   }
+  public getObj() {
+    return this.obj;
+  }
   private createPropertyGrid(obj: Base, json?: ISurveyPropertyGridDefinition): PropertyGridModel {
     const res = new PropertyGridModel(undefined, undefined, json);
     res.showOneCategoryInPropertyGrid = true;
@@ -100,20 +101,26 @@ export class SurveyQuestionPresetPropertiesDetail {
     }
     return res;
   }
-  public getAllPropertiesNames(): Array<string> { return this.allPropertiesNames; }
-  public getInitialJson() {
-    const pgJSON = this.propertyGridValue.survey.toJSON();
-    return pgJSON.pages.map(p => {
+  public getInitialJson(useDefaults: boolean) {
+    const propertyGrid = useDefaults ? this.propertyGridDefaultValue : this.propertyGridValue;
+    const pgJSON = propertyGrid.survey.toJSON();
+    return pgJSON.pages.filter(p => p.name != propertyGrid.placeholderPageName).map(p => {
       return {
         category: p.name,
         title: p.title,
         iconName: p.iconName,
-        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => ({
-          name: e.name,
-          title: e.title,
-          description: e.description,
-          isDefault: true
-        }))
+        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => {
+          const property: any = {
+            name: e.name,
+            title: e.title
+          };
+
+          if (e.description !== undefined) {
+            property.description = e.description;
+          }
+
+          return property;
+        })
       };
     });
   }
@@ -125,7 +132,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     this.updateCurrentJsonCore(this.currentJson.classes, val);
   }
   private updateCurrentJsonCore(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>): void {
-    if (!Array.isArray(val) || val.length === 0) return;
+    if (!Array.isArray(val)) val = [];
     const tabNames = [];
     this.classes.forEach(cl => {
       this.updateCurrentJsonClass(curJsonClasses, val, cl, tabNames);
@@ -160,7 +167,7 @@ export class SurveyQuestionPresetPropertiesDetail {
             const tabName = tab.name;
             if (!!tabName && tabNames.indexOf(tab.name) < 0) {
               tabNames.push(tab.name);
-              tabs.push({ name: tab.name, index: tabNames.length * tabStep });
+              tabs.push({ name: tab.name, index: tabNames.length * tabStep, iconName: tab.iconName });
             }
             const item: any = { name: propName, index: propertiesIndeces[propName] };
             if (!!tabName) {
@@ -211,7 +218,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   protected createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
       type: "matrixdynamic",
-      titleLocation: "hidden",
       allowRowReorder: true,
       cellType: "text",
       showHeader: false,
@@ -231,10 +237,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       ],
       detailPanelMode: "underRow",
       detailElements: [
-        { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-        { type: "text", name: "title", title: "Title", isUnique: true, isRequired: true },
-        { type: "comment", name: "description", title: "Description" },
-        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
+        { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
+        { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
+        { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), visible: false }
       ]
     };
     return { ...defaultJSON, ...props };
@@ -242,28 +247,32 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
   public createMainPageCore(): any {
     return {
-      title: "Set Up the Property Grid",
-      navigationTitle: "Property Grid",
+      title: getLocString("presets.propertyGrid.title"),
+      navigationTitle: getLocString("presets.propertyGrid.navigationTitle"),
+      description: getLocString("presets.propertyGrid.description"),
       elements: [
         {
           type: "dropdown",
           name: this.nameSelector,
+          allowClear: false,
           clearIfInvisible: "onHidden",
-          title: "Select an element to customize its settings available in the Property Grid"
+          title: getLocString("presets.propertyGrid.selectElement")
         },
         {
           type: "panel",
-          name: "propPanel",
+          name: this.mainPanelName,
           visibleIf: this.getNotEmptyVisibleIf(this.nameSelector),
           elements: [
             {
               type: "matrixdynamic",
               name: this.nameCategories,
-              titleLocation: "hidden",
-              minRowCount: 1,
+              title: getLocString("presets.propertyGrid.propertyGrid"),
               allowRowReorder: true,
               addRowButtonLocation: "top",
-              addRowText: "Add Custom Category",
+              rowCount: 0,
+              allowAddRows: true,
+              noRowsText: getLocString("presets.propertyGrid.noCategoriesText"),
+              addRowText: getLocString("presets.propertyGrid.addCustomCategory"),
               showHeader: false,
               columns: [
                 { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
@@ -272,36 +281,60 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               ],
               detailPanelMode: "underRow",
               detailElements: [
-                { type: "text", name: "category", title: "Category", isRequired: true, visible: false },
-                { type: "text", name: "iconName", title: "Icon Name", visible: false },
+                { type: "text", name: "category", title: getLocString("presets.propertyGrid.categoryName"), isRequired: true, visible: false },
+                { type: "text", name: "title", title: getLocString("presets.propertyGrid.categoryTitle"), visible: false },
+                { type: "dropdown", name: "iconName", title: getLocString("presets.propertyGrid.iconName"), itemComponent: "svc-presets-icon-item", "allowCustomChoices": true, choices: this.iconList, visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
+                  noRowsText: getLocString("presets.propertyGrid.noItemsText"),
+                  titleLocation: "hidden",
                 })
               ]
             },
             this.createItemsMatrixJSON({
-              //allowAddRows: true,
-              //addRowButtonLocation: "top",
-              //addRowText: "Add Custom Item",
-              startWithNewLine: false,
+              title: getLocString("presets.propertyGrid.hiddenItems"),
               name: this.nameMatrix,
-              "descriptionLocation": "underInput",
-              description: "Drag an item from this column to the left one - it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+              noRowsText: getLocString("presets.propertyGrid.noHiddenItemsText"),
+              descriptionLocation: "underInput",
+              startWithNewLine: false,
             })
           ]
         },
+        {
+          type: "panel",
+          title: " ",
+          name: this.navigationPanelName,
+          elements: [
+            {
+              type: "html",
+              html: "&nbsp"
+            }
+          ]
+        }
       ]
 
     };
   }
+  private propertyGrid: PropertyGridModel;
+  protected propertyGridSetObj(obj: any) {
+    const pageName = this.propertyGrid.survey.currentPage?.name;
+    this.propertyGrid["setObj"](obj);
+    this.propertyGrid.survey.currentPage = this.propertyGrid.survey.getPageByName(pageName);
+  }
+  protected hasIcon(name: string) { return name == this.nameCategories; }
 
-  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+  protected restoreValuesFromDefault(model: SurveyModel) {
+    this.isModified = false;
+    this.currentJson = this.copyJson(defaultPropertyGridDefinition);
+    this.updateMatrices(model);
+  }
+
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     if (!this.isModified) return undefined;
-    this.updateCurrentJson(model);
     return { definition: this.currentJson };
   }
-  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-    this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
+  protected setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getSelector(model).choices = this.getSelectorChoices(creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
     // this.propCreatorValue = creatorSetup.createCreator(options);
@@ -309,11 +342,20 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     // this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
   }
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.propertyGrid = creatorSetup.creator["designerPropertyGrid"];
+    super.setupQuestionsCore(model, creatorSetup);
+    this.setupPageQuestions(model, creatorSetup.creator);
+  }
   private setJSONForTitlesAndDescriptions(locStrs: any, name: string): void {
     const strs = this.localeStrings[name];
     if (Object.keys(strs).length > 0) {
       locStrs[name] = strs;
     }
+  }
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupPageQuestions(model, creator);
+    this.setupQuestionsValueCore(model, json, creator);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
     this.setJSONForTitlesAndDescriptions(locStrs, "pe");
@@ -322,6 +364,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   protected updateJsonLocalizationStringsCore(locStrs: any): void {
     this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
   }
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    creator.setSidebarEnabled(active);
+    this.propertyGridSetObj(active ? this.currentProperties?.getObj() : null);
+  }
+
   //   private isPropCreatorChanged: boolean;
   private firstTimeLoading = false;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
@@ -347,6 +394,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
           });
         });
       }
+      if (!this.firstTimeLoading)this.updateCurrentJson(model);
     }
     // if ((<any>options.target)?.isQuestion) {
     //   if (options.name === "title") {
@@ -365,46 +413,62 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
     if (name !== this.nameSelector) return;
     this.firstTimeLoading = true;
-    this.updateCurrentJson(model);
     if (this.currentProperties) {
       this.currentProperties = undefined;
     }
     const selQuestion = this.getSelector(model);
     this.currentClassName = selQuestion.value;
-    if (!this.currentClassName) return;
-    this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
-    const categories = this.currentProperties.getInitialJson();
-    this.defaultItems = [];
-    model.setValue(this.nameCategories, categories);
+    this.updateMatrices(model);
     this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     //this.setupCreatorToolbox(this.propCreator);
   }
 
-  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    this.isModified = !!json;
-    if (!json) {
-      json = this.copyJson(defaultPropertyGridDefinition);
+  private updateMatrices(model: SurveyModel) {
+    if (this.currentClassName) {
+      this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
+      this.setupDefaults(model);
+      const categories = this.currentProperties.getInitialJson(false);
+      model.setValue(this.nameCategories, categories);
+      const items = this.getCurrentlyHiddenItems(categories);
+      model.setValue(this.nameMatrix, items);
+      this.propertyGridSetObj(this.currentProperties.getObj());
     }
-    this.currentJson = json;
+  }
+
+  private getCurrentlyHiddenItems(categories: any) {
+    const hiddenProperties = ["progressBarInheritWidthFrom"];
+    const itemsMap: any = {};
+    this.defaultItems.forEach((i: any) => itemsMap[i.name] = i);
+    categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));
+    return Object.keys(itemsMap).map(key => itemsMap[key]).filter(i => hiddenProperties.indexOf(i.name) == -1);
+  }
+
+  private setupDefaults(model: SurveyModel): void {
+    const categories = this.currentProperties?.getInitialJson(true) || [];
+    this.defaultCategories = [...categories];
+    this.defaultItems = [];
+    categories.forEach(c => this.defaultItems.push(...c.properties));
+  }
+
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.getSelector(model).value = "survey";
+    const defaultJson = creator.getPropertyGridDefinition();
+    this.isModified = !!json?.definition || (defaultJson && (JSON.stringify(defaultJson) !== JSON.stringify(defaultPropertyGridDefinition)));
+    this.currentJson = json?.definition || this.copyJson(defaultJson || defaultPropertyGridDefinition);
     this.currentJson.autoGenerateProperties = false;
+    this.updateOnValueChangedCore(model, this.nameSelector);
   }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
   //   private getPropertyCreatorQuestion(model: SurveyModel): QuestionEmbeddedCreatorModel { return <QuestionEmbeddedCreatorModel>model.getQuestionByName(this.namePropertyCreator); }
   private get nameSelector() { return this.fullPath + "_selector"; }
   //   private get namePropertyCreator() { return this.fullPath + "_propcreator"; }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
-    const classes = ["survey", "page", "panel"];
-    const toolboxItems = {};
+    const classes = ["survey", "page"];
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
-      toolboxItems[item.id] = true;
+      classes.push(item.id);
     });
 
-    Serializer.getChildrenClasses("question", true).forEach(cl => {
-      if (toolboxItems[cl.name]) {
-        classes.push(cl.name);
-      }
-    });
     const res: any[] = [];
     classes.forEach(str => res.push(new ItemValue(str, this.getSelectorItemTitle(str))));
     const columnPrefix = "matrixdropdowncolumn@";
@@ -433,7 +497,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
   private getPropertiesArray(model: SurveyModel): Array<any> {
     const categories = this.getQuestionCategories(model).value;
-    return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name) }));
+    return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name), iconName: c.iconName }));
   }
   private changePropTitleAndDescription(path: string, propName: string, val: string): void {
     this.ensureLocalizationPath(path);

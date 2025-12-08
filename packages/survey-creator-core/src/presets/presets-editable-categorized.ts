@@ -1,52 +1,207 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
-import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
-import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
-import { ICreatorPresetToolboxItem } from "survey-creator-core";
-import { CreatorPresetEditorModel } from "./presets-editor";
-import { SurveyHelper } from "../survey-helper";
+import { Action, createDropdownActionModel, IAction, MatrixDynamicRowModel, PopupModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
+import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
-
+import { listComponentCss } from "./presets-theme/list-theme";
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
-
+  protected defaultCategories: any;
+  protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
+    return question?.name === this.nameCategories ? this.defaultCategories : this.defaultItems;
+  }
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
-  //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
-  //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
-  //}
-  protected updateOnValueChangedCore(model: SurveyModel, name: string) {
-    // if (name == this.nameCategories) {
-    //   this.fillAutoName(this.getQuestionCategories(model), "category");
-    // }
-    // if (name == this.nameMatrix) {
-    //   this.fillAutoName(this.getMatrix(model), "name");
-    // }
+  public getMainElementNames() : any { return [this.nameCategories]; }
+  protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any {
+    return question.name === this.nameCategories ? "category" : "name";
   }
-  private editCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
-    const survey = this.showDetailPanelInPopup(this.getQuestionCategories(model), row, model.rootElement, false);
-    if (survey) {
-      const category = survey.getQuestionByName("category");
-      const isDefault = row.getQuestionByName("isDefault");
+  public get questionNames() {
+    return [this.nameCategories];
+  }
 
-      if (category) {
-        category.visible = true;
-        if (isDefault) category.readOnly = isDefault.value;
+  protected setupCategoryActions(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]): void {
+    actions.forEach(a => {
+      if (a.id == "remove-row") {
+        a.iconName = "icon-delete_24x24";
+        a.tooltip = getLocString("presets.items.delete");
+        a.innerCss = "sps-action-button sps-action-button--icon sps-action-button--danger";
       }
-      survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameInnerMatrix);
+      if (a.id == "reset-to-default") {
+        a.action = () => { this.resetCategory(model, row); };
+      }
+    });
+  }
+
+  protected ejectRowData(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, remove: boolean) {
+    const value = question.value;
+    const rowDataIndex = question.visibleRows.indexOf(row);
+    const rowData = value[rowDataIndex];
+    if (remove) {
+      value.splice(rowDataIndex, 1);
+      question.value = value;
+    }
+    return rowData;
+  }
+
+  private moveToCategory(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, categoryName: string, remove = false) {
+    const rowData = this.ejectRowData(question, row, remove);
+    const categories = this.getQuestionCategories(model);
+    const catValue = categories.value;
+    const general = this.findOrCreateCategory(catValue, categoryName);
+    general[this.nameInnerMatrix].push(rowData);
+    categories.value = catValue;
+    return (categories.visibleRows as any).find(r => r.getValue("category") == categoryName) as MatrixDynamicRowModel;
+  }
+
+  protected itemMenuCategoriesEnabled(model: SurveyModel) {
+    return true;
+  }
+
+  protected setSubitemsToAction(action: Action, items: Action[]) {
+    action.setSubItems({ items: items, cssClasses: listComponentCss });
+    action.markerIconName = "icon-chevronright-24x24";
+  }
+
+  protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const categoriesQuestion = this.getQuestionCategories(model);
+    const categories = categoriesQuestion.value;
+    const actions = [] as IAction[];
+    const isUnsorted = question.name == this.nameMatrix;
+    const hasCategories = this.itemMenuCategoriesEnabled(model);
+    if (!isUnsorted) {
+      actions.push(
+        new Action({
+          id: "remove-from",
+          title: getLocString("presets.items.removeFrom").replace("{0}", question.title),
+          action: () => {
+            const rowDataIndex = question.visibleRows.indexOf(row);
+            question.removeRow(rowDataIndex);
+          }
+        })
+      );
+    } else {
+      if (hasCategories) {
+        actions.push(new Action({
+          id: "move-to",
+          title: getLocString("presets.items.moveTo"),
+          css: "sps-list__item--label",
+          enabled: false
+        }));
+      } else {
+        actions.push(new Action({
+          id: "restore-item",
+          title: getLocString("presets.toolbox.addToToolbox"),
+          action: () => {
+            const rowDataIndex = question.visibleRows.indexOf(row);
+            question.removeRow(rowDataIndex);
+          }
+        }));
+      }
+    }
+
+    if (!hasCategories) return actions;
+    const currentCategory = categories.filter(c => c[this.nameInnerMatrix].filter(i => i.name == row.value?.name).length > 0)[0];
+    const moveToCategories = categories.filter((i: any) => i.category != currentCategory?.category).map((i: any) => new Action({
+      id: "to-" + i.category,
+      title: i.title,
+      action: () => {
+        this.moveToCategory(model, question, row, i.category, true);
+      }
+    }));
+    if (!isUnsorted) {
+      actions.push(new Action({
+        id: "categories",
+        title: getLocString("presets.items.categoriesLabel"),
+        css: "sps-list__item--label",
+        enabled: false,
+        needSeparator: true
+      }));
+      const catGroup = new Action({
+        id: "move-to-categories",
+        title: getLocString("presets.items.moveToCategory")
+      });
+      this.setSubitemsToAction(catGroup, moveToCategories);
+      actions.push(catGroup);
+    } else {
+      actions.push(...moveToCategories);
+    }
+
+    actions.push(
+      new Action({
+        id: "move-to-new-category",
+        title: getLocString("presets.items.moveToNewCategory"),
+        needSeparator: isUnsorted,
+        action: () => {
+          const newCatRow = this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
+          this.editItem(model, null, categoriesQuestion, newCatRow, {
+            description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+            isNew: true
+          });
+        }
+      }));
+
+    return actions;
+  }
+
+  protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    const actions = this.getItemMenuActionsCore(model, question, row);
+    if (!this.getDefaultItem(question, row.value.name)) {
+      actions.push(
+        new Action({
+          id: "remove-custom-item",
+          title: getLocString("presets.toolbox.deleteCustomItem"),
+          css: "sps-list__item--alert",
+          needSeparator: true,
+          action: () => {
+            this.ejectRowData(question, row, true);
+          }
+        })
+      );
+    }
+    return actions;
+  }
+
+  protected replaceRemoveAction(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, actions: IAction[]): void {
+    const originalAction = actions.filter(a => a.id == "remove-row")[0];
+    if (originalAction) {
+      originalAction.visible = false;
+
+      const addAction = createDropdownActionModel({
+        id: "context-menu",
+        iconName: "more-circle-24x24",
+        tooltip: getLocString("presets.items.more"),
+        location: "end",
+        visibleIndex: 20
+      }, {
+        items: [],
+        showPointer: false,
+        verticalPosition: "bottom",
+        horizontalPosition: "center",
+        cssClass: "sps-popup-menu sps-popup-menu--context",
+        cssClasses: listComponentCss,
+        searchEnabled: false
+      });
+      addAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+        if (opt.isVisible) {
+          const listModel = opt.model.contentComponentData.model;
+          listModel.actions = this.getItemMenuActions(model, question, row);
+          listModel.flushUpdates();
+        }
+      });
+      actions.push(addAction);
     }
   }
 
   protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
 
-  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return super.isItemsMatrix(question) || question.name === this.nameInnerMatrix;
+  protected isItemsMatrix(name: string): boolean {
+    return super.isItemsMatrix(name) || name === this.nameInnerMatrix;
   }
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const category = row.getValue("category");
-    const defaultItems = this.defaultItems.filter(i => i.category == category);
+    const defaultItems = this.defaultCategories.filter(i => i.category == category)[0]?.[this.nameInnerMatrix];
+    if (!defaultItems) return;
     const categoriesQuestion = this.getQuestionCategories(model);
     const hiddenItemsQuestion = this.getMatrix(model);
     const hiddenValue = hiddenItemsQuestion.value || [];
@@ -74,77 +229,60 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
     hiddenItemsQuestion.value = hiddenValue;
     categoriesQuestion.value = value;
+    this.notifyCallback(getLocString("presets.editor.categoryRestoredToDefault"));
   }
-  protected findOrCreateGeneralCategory(categories: any) {
-    let generalCategory = categories.filter(c => c.category == "general")[0];
+  protected findOrCreateCategory(categories: any, category?: string) {
+    let generalCategory = categories.filter(c => c.category == category)[0];
     if (!generalCategory) {
-      generalCategory = { category: "general", title: "General", [this.nameInnerMatrix]: [] };
+      generalCategory = { category: category || "general", title: category || "General", [this.nameInnerMatrix]: [] };
       categories.push(generalCategory);
     }
     return generalCategory;
   }
+  protected needToSetActions(name: string) {
+    return this.isItemsMatrix(name) || name === this.nameCategories;
+  }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     super.onGetMatrixRowActionsCore(model, creator, options);
     if (options.question.name === this.nameCategories) {
-      options.question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
-      options.question.cssClasses.detailIconId = "icon-expand-24x24";
-
-      const iconName = options.question.value?.filter(v => v.category == options.row.getValue("category"))[0]?.iconName;
-      if (iconName) {
-        options.actions.push({
-          id: iconName,
-          iconName: iconName,
-          location: "start",
-          enabled: false
-        });
-      }
-
-      options.actions.push({
-        id: "reset-to-default",
-        iconName: "icon-reset",
-        location: "end",
-        visibleIndex: 15,
-        action: ()=>{ this.resetCategory(model, options.row); }
-      });
-
-      options.actions.push({
-        id: "edit-category",
-        iconName: "icon-edit",
-        location: "end",
-        visibleIndex: 13,
-        action: ()=>{ this.editCategory(model, options.row); }
-      });
-      options.actions.forEach(a => {
-        if (a.id == "show-detail") {
-          a.location = "end";
-          a.iconName = "icon-expand-24x24",
-          a.visibleIndex = 10;
-        }
-        if (a.id == "remove-row") a.visibleIndex = 20;
-      });
+      this.setupCategoryActions(model, creator, options.question, options.row, options.actions);
+    }
+    if (this.isItemsMatrix(options.question.name)) {
+      this.replaceRemoveAction(model, options.question, options.row, options.actions);
     }
   }
+
+  protected getExistingKeys(model: SurveyModel, key: string) {
+    const cats = model.getQuestionByName(this.nameCategories).value || [];
+    const unsorted = model.getQuestionByName(this.nameMatrix).value || [];
+    return [...cats, ...cats.map(c => c.items).flat().filter(key => !!key), ...unsorted];
+  }
+
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     super.onMatrixRowRemoving(model, creator, options);
     if (options.question.name == this.nameCategories) {
       const items = options.question.value[options.rowIndex][this.nameInnerMatrix];
-      const hiddenItems = this.getMatrix(model);
-      const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
-      hiddenItems.value = value;
+      if (items) {
+        const hiddenItems = this.getMatrix(model);
+        const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
+        hiddenItems.value = value;
+      }
     }
     if (options.question.name == this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];
-      const categories = this.getQuestionCategories(model);
-      const catValue = categories.value;
-      const general = this.findOrCreateGeneralCategory(catValue);
-      general[this.nameInnerMatrix].push(rowData);
-      categories.value = catValue;
+      const defaultCategory = this.defaultCategories.filter(c => c[this.nameInnerMatrix].filter(i => i.name == rowData.name).length > 0)[0];
+      this.moveToCategory(model, options.question, options.row, defaultCategory?.category);
     }
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     super.onMatrixRowAdded(model, creator, options);
     if (options.question.name == this.nameCategories) {
-      options.row.getQuestionByName("category").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.category })), "category");
+      this.setDefaultValueForRow(model, options.question, options.row);
+      this.editItem(model, creator, options.question, options.row, {
+        description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+        isNew: true
+      });
     }
   }
 }
+

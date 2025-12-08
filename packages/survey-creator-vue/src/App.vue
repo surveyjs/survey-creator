@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { SurveyCreatorModel } from "survey-creator-core";
-
+//import { TabPresetsComponent } from "../build/survey-creator-vue-presets";
 //window.survey = new SurveyModel(json);
 
 export default defineComponent({

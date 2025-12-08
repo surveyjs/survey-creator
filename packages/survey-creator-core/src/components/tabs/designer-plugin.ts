@@ -31,8 +31,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public previewAction: Action;
   private designerAction: Action;
   public designerStateManager: DesignerStateManager;
-  private tabControlModel: TabControlModel;
+  private tabControlModelValue: TabControlModel;
   private prevActivePage: string;
+
+  public get tabControlModel() {
+    return this.tabControlModelValue;
+  }
 
   public static iconName = "icon-config";
 
@@ -89,9 +93,18 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
   }
 
-  private updateActivePage() {
+  public activateSidebar() {
+    this.updateActivePage(false);
+    this.updateTabControl();
+  }
+
+  public setSidebarEnabled(value: boolean) {
+    this.tabControlModel.expandCollapseAction.enabled = value;
+  }
+
+  private updateActivePage(showPlaceholder = true) {
     if (this.showOneCategoryInPropertyGrid) {
-      this.setActivePage(this.creator.survey.pageCount ? this.propertyGridTab.id : this.propertyGridPlaceholderPage.id);
+      this.setActivePage(this.creator.survey.pageCount || !showPlaceholder ? this.propertyGridTab.id : this.propertyGridPlaceholderPage.id);
     } else {
       this.setPropertyGridIsActivePage();
     }
@@ -211,7 +224,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "designer", plugin: this, iconName: TabDesignerPlugin.iconName });
-    this.tabControlModel = new TabControlModel(this.creator.sidebar);
+    this.tabControlModelValue = new TabControlModel(this.creator.sidebar);
     this.tabControlModel.onTopToolbarItemCreated = (bar) => {
       this.setupPropertyGridTabActions(bar);
     };

@@ -77,15 +77,35 @@ test("set toolbox items", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
     toolbox: {
-      definition: [{ name: "text" }, { name: "dropdown" }, { name: "matrix" }],
+      definition: [{ name: "text" }, { name: "dropdown" }, { name: "radiogroup" }],
     }
   });
   preset.apply(creator);
   const tb = creator.toolbox;
   tb.flushUpdates();
-  expect(tb.categories).toHaveLength(1);
+  expect(tb.categories).toHaveLength(2);
   expect(tb.visibleActions).toHaveLength(3);
-  expect(tb.hasCategories).toBeFalsy();
+  expect(tb.hasCategories).toBeTruthy();
+});
+test("set toolbox items and categories", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [{ name: "text", iconName: "i-text" }, { name: "dropdown" }, { name: "matrix" }],
+      categories: [
+        { category: "general", items: ["text", "dropdown"] },
+        { category: "matrix", items: ["matrix"] }
+      ]
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  expect(tb.categories).toHaveLength(2);
+  expect(tb.visibleActions).toHaveLength(3);
+  expect(tb.hasCategories).toBeTruthy();
+  expect(tb.visibleActions[0].name).toBe("text");
+  expect(tb.visibleActions[0].iconName).toBe("i-text");
 });
 test("set toolbox definition", () => {
   const creator = new CreatorTester();
@@ -96,6 +116,9 @@ test("set toolbox definition", () => {
         { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
         { name: "dropdown" },
         { name: "matrix" },
+      ],
+      categories: [
+        { category: "general", items: ["text-number", "text-date", "dropdown", "matrix"] }
       ]
     }
   });
@@ -111,6 +134,83 @@ test("set toolbox definition", () => {
   expect(actions[1].title).toEqual("Date");
   expect(actions[1].json.inputType).toEqual("date");
 });
+
+test("set toolbox definition - no categories", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [
+        { name: "text-number", title: "Number", json: { type: "text", inputType: "number" } },
+        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
+        { name: "dropdown" },
+        { name: "matrix" },
+      ],
+      categories: []
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  const actions = tb.visibleActions;
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions).toHaveLength(4);
+});
+
+test("set toolbox definition - no subitems", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [
+        { name: "rating", subitems: [] },
+      ]
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  const actions = tb.visibleActions;
+  expect(tb.visibleActions).toHaveLength(1);
+  expect(actions[0].name).toBe("rating");
+  expect(actions[0].items).toHaveLength(0);
+});
+
+test("set toolbox definition - showCategoryTitles", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      showCategoryTitles: true
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  expect(tb.showCategoryTitles).toBeTruthy();
+
+  preset.setJson(undefined);
+  preset.apply(creator);
+  tb.flushUpdates();
+  expect(tb.showCategoryTitles).toBeFalsy();
+});
+
+test("set toolbox definition - no categories, no definition", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      categories: []
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions.length).toBeGreaterThan(0);
+
+  preset.setJson(undefined);
+  preset.apply(creator);
+  tb.flushUpdates();
+  expect(tb.categories.length).toBeGreaterThan(1);
+});
+
 test("Override toolbox JSON", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
@@ -344,4 +444,15 @@ test("apply supported locales", () => {
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
   expect(surveyLocalization.showNamesInEnglish).toBeFalsy();
+});
+test("set creator options", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    options: {
+      allowZoom: false,
+    }
+  });
+  expect(creator.allowZoom).toBeTruthy();
+  preset.apply(creator);
+  expect(creator.allowZoom).toBeFalsy();
 });

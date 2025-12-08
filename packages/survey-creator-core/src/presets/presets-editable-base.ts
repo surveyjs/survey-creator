@@ -1,5 +1,5 @@
-import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel } from "survey-core";
-import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
+import { Helpers, Question, SurveyModel } from "survey-core";
+import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions, getLocString } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
   creator: SurveyCreatorModel;
@@ -8,6 +8,7 @@ export interface ICreatorPresetEditorSetup {
 
 export class CreatorPresetEditableBase {
   public parent: CreatorPresetEditableBase;
+  protected get navigationPanelName(): string { return this.path + "_navigation"; }
   public children: Array<CreatorPresetEditableBase> = [];
   public constructor(public preset: CreatorPresetBase) {
   }
@@ -21,6 +22,12 @@ export class CreatorPresetEditableBase {
     return prefix + this.path;
   }
   public get pageName(): string { return "page_" + this.fullPath; }
+  public getPageTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).title; }
+  public getPageShortTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).navigationTitle; }
+  protected get mainPanelName() { return this.path + "_mainPanel"; }
+  public getMainElementNames() : any { return [this.mainPanelName]; }
+  public getMainPanelName() : any { return this.mainPanelName; }
+  public getCustomQuestionCssSuffix(question: Question) { return ""; }
   public createPages(): Array<any> {
     const res = [];
     const mainPage = this.createMainPage();
@@ -35,6 +42,8 @@ export class CreatorPresetEditableBase {
     });
     return res;
   }
+  public get questionNames(): string[] { return []; }
+  public notifyCallback = (message: string) => {};
   public validate(model: SurveyModel): boolean {
     if (!this.validateCore(model)) return false;
     for (let i = 0; i < this.children.length; i ++) {
@@ -56,9 +65,10 @@ export class CreatorPresetEditableBase {
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val + "'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
-  public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel): any {
+  public getNavigationElementName() : any { return this.navigationPanelName; }
+  public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {
     const page = model.getPageByName(this.pageName);
-    const core = page && page.isVisible ? this.getJsonValueCore(model, creator) : undefined;
+    const core = page && page.isVisible ? this.getJsonValueCore(model, creator, defaultJson) : undefined;
     let hasValue = !!core;
     const res = hasValue ? core : {};
     this.children.forEach(item => {
@@ -69,6 +79,11 @@ export class CreatorPresetEditableBase {
       }
     });
     return hasValue ? res : undefined;
+  }
+  public getDefaultJsonValue(creator: SurveyCreatorModel) {
+    const json = this.getDefaultJsonValueCore(creator);
+    this.children.forEach(item => json[item.path] = item.getDefaultJsonValueCore(creator));
+    return json;
   }
   public setJsonLocalizationStrings(model: SurveyModel, locStrs: any): void {
     this.setJsonLocalizationStringsCore(model, locStrs);
@@ -88,12 +103,17 @@ export class CreatorPresetEditableBase {
       item.setupQuestions(model, creatorSetup);
     });
   }
-  public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel): void {
-    if (model.currentPage.name === this.pageName) {
-      this.setupOnCurrentPageCore(model, creator);
-    }
+  public resetToDefaults(model: SurveyModel, notify = true): void {
+    this.restoreValuesFromDefault(model);
+    this.notifyCallback(this.getPageTitle(model) + " " + getLocString("presets.editor.resoredToDefault"));
     this.children.forEach(item => {
-      item.setupOnCurrentPage(model, creator);
+      item.resetToDefaults(model, notify);
+    });
+  }
+  public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {
+    this.setupOnCurrentPageCore(model, creator, active);
+    this.children.forEach(item => {
+      item.setupOnCurrentPage(model, creator, active);
     });
   }
   public updateOnValueChanged(model: SurveyModel, name: string): void {
@@ -114,11 +134,14 @@ export class CreatorPresetEditableBase {
       item.onGetMatrixRowActions(model, creator, options);
     });
   }
+  public onGetPanelTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
+  public onMatrixCellValueChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
+    this.saveValuesAsDefault(model);
     this.children.forEach(item => {
       item.setupQuestionsValue(model, !!json ? json[item.path] : undefined, creator);
     });
@@ -129,14 +152,24 @@ export class CreatorPresetEditableBase {
       item.setupQuestionsValue(model, !!json ? json[item.path] : undefined, creator);
     });
   }
+
+  private saveValuesAsDefault(model: SurveyModel) {
+    this.questionNames.forEach(name => model.getQuestionByName(name).defaultValue = model.getValue(name) && JSON.parse(JSON.stringify(model.getValue(name))));
+  }
+  protected restoreValuesFromDefault(model: SurveyModel) {
+    this.questionNames.forEach(name => model.getQuestionByName(name).value = model.getQuestionByName(name).defaultValue && JSON.parse(JSON.stringify(model.getQuestionByName(name).defaultValue)));
+  }
+
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
+  protected resetToDefaultsCore(model: SurveyModel): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
-  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any { return undefined; }
+  protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any { return undefined; }
+  protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any { return {}; }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
   protected updateJsonLocalizationStringsCore(locStrs: any): void {}
   protected disposeCore(): void {}
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {}
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
@@ -144,38 +177,6 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, hideDetailPanel = true) {
-    if (settings.showDialog) {
-      const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
-      if (hideDetailPanel) row.hideDetailPanel();
-      const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
-      survey.fitToContainer = false;
-      survey.showNavigationButtons = false;
-      survey.data = data;
-      const popupModel = settings.showDialog?.(<IDialogOptions>{
-        componentName: "survey",
-        data: { survey: survey, model: survey },
-        onApply: () => {
-          if (survey.validate()) {
-            const newValue = [...matrix.value];
-            const newRowValue = { ...row.value, ...survey.data };
-            newValue[row.index] = newRowValue;
-            matrix.value = newValue;
-            return true;
-          } else {
-            return false;
-          }
-        },
-        onCancel: () => {
-          return true;
-        },
-        cssClass: "svc-property-editor svc-creator-popup",
-        title: "Detail",
-        displayMode: "popup"
-      }, rootElement);
-      return survey;
-    }
-  }
   public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
     if (!localizationName) return undefined;
     if (!text) return;

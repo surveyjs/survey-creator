@@ -78,7 +78,8 @@
             ],
             "styles": [
               "./node_modules/survey-core/survey-core.css",
-              "./node_modules/survey-creator-core/survey-creator-core.css"
+              "./node_modules/survey-creator-core/survey-creator-core.css",
+              "./node_modules/survey-creator-core/presets/index.css"
             ],
             "scripts": []
           },

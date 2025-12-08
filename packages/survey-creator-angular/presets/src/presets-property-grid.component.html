@@ -1,0 +1,19 @@
+<ng-template #template>
+  <div class="sps-launch">
+    <button class="sps-launch__card" (click)="showPresets()">
+      <div class="sps-launch__container">
+        <div class="sps-launch__text">{{buttonTitle}}</div>
+        <div class="sps-launch__text2">{{buttonDescription}}</div>
+      </div>
+      <div class="sps-launch__icon">
+        <div class="sps-launch__chevron-right-16-x-16">
+          <div class="sps-launch__icon2">
+            <svg size="auto" iconName="chevrondown-24x24" sv-ng-svg-icon></svg>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+  <ng-template [component]="{ name: 'svc-property-grid', data: {model: model} }">
+  </ng-template>
+</ng-template>

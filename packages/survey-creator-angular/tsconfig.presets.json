@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "survey-creator-angular": [
+                "./build"
+            ]
+        }
+    },
+    "include": [
+        "./src/presets/index.ts"
+    ]
+}
