@@ -3,11 +3,13 @@ import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "./../presets-creator/presets";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
   static defaultThemeName = "default-light";
+  static defaultPresetName = "expert";
 
   static varBaseUnitFontSize = "--sjs2-base-unit-font-size";
   static varBaseUnitLineHeight = "--sjs2-base-unit-line-height";
@@ -32,10 +34,13 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     [CreatorThemeModel.varBaseUnitBorderWidth]: 1,
   };
 
+  @property() presetName: string = CreatorThemeModel.defaultPresetName;
   @property() themeName: string = CreatorThemeModel.defaultThemeName;
   @property() scale: number;
   @property() fontScale: number;
   @property() isLight: boolean = true;
+
+  public onPresetSelected = new EventBase<CreatorThemeModel, { preset: ICreatorPresetConfig }>();
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
@@ -252,6 +257,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 Serializer.addClass(
   "creatortheme",
   [
+    {
+      type: "dropdown",
+      name: "presetName",
+      choices: PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) })),
+    },
     {
       type: "dropdown",
       name: "themeName",

@@ -8,6 +8,7 @@ import { IToolboxCategoryDefinition } from "../toolbox";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
+import { registerTheme, sortDefaultThemes, ThemesHash } from "../utils/themes";
 
 export interface ICreatorPresetData {
   languages?: {
@@ -29,6 +30,25 @@ export interface ICreatorPresetData {
   };
   options?: any;
   localization?: any;
+}
+
+export interface ICreatorPresetConfig {
+  presetName: string;
+  json?: ICreatorPresetData;
+}
+
+type PresetsHash<T> = ThemesHash<T>;
+
+export const PredefinedCreatorPresets: string[] = [];
+export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
+
+export function registerCreatorPreset(...presets: Array<PresetsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
+  const importedPresetNames: string[] = [];
+  registerTheme((preset: ICreatorPresetConfig) => {
+    CreatorPresets[preset.presetName] = preset;
+    importedPresetNames.push(preset.presetName);
+  }, ...presets);
+  sortDefaultThemes(defaultCreatorPresetsOrder, importedPresetNames, PredefinedCreatorPresets);
 }
 
 export class CreatorPreset extends CreatorPresetBase {
@@ -71,3 +91,5 @@ export class CreatorPreset extends CreatorPresetBase {
       new CreatorPresetPropertyGrid(), new CreatorPresetOptions()];
   }
 }
+
+export const CreatorPresets: { [index: string]: ICreatorPresetConfig } = { };

@@ -14,6 +14,7 @@ import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/cre
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
+import { PredefinedCreatorPresets } from "../../presets-creator/presets";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -214,6 +215,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     survey.onUpdatePanelCssClasses.add((_, options) => {
       options.cssClasses.panel.container += " spg-panel--group";
     });
+    const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
+    if (!!presetChooser) {
+      presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) }));
+    }
     const themeChooser = survey.getQuestionByName("themeName") as QuestionDropdownModel;
     if (!!themeChooser) {
       themeChooser.choices = PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) }));

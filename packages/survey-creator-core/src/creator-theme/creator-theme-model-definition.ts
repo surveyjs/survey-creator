@@ -4,7 +4,8 @@ import { CreatorThemeModel } from "./creator-theme-model";
 const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
   "creatortheme": {
     properties: [
-      { name: "themeName", index: 1 },
+      { name: "presetName", index: 1 },
+      { name: "themeName", index: 2 },
       { name: CreatorThemeModel.varColorProjectBrand, index: 10, tab: "accentColors" },
       { name: CreatorThemeModel.varColorProjectAccent, index: 20, tab: "accentColors" },
       { name: CreatorThemeModel.varColorUtilitySurface, index: 30, tab: "surfaceBackground" },
