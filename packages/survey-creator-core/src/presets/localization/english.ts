@@ -131,7 +131,9 @@ export const enStrings = {
     defaultSettings: "Default Settings",
     basic: "Basic",
     advanced: "Advanced",
-    expert: "Expert"
+    expert: "Expert",
+    license: "To use the Survey Creator Presets plugin in your application, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, please <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>latest version</a>.",
+    licenseCreator: "To use the Survey Creator library with Presets Plugin in your application, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, please <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>latest version</a>.",
   }
 };
 const locale = getLocaleStrings("en");

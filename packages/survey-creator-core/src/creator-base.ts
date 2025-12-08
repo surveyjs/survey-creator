@@ -324,17 +324,17 @@ export class SurveyCreatorModel extends Base
     return Object.keys(this.pluginLicenseTexts || {});
   }
   public get haveCommercialLicense(): boolean {
-    return !!hasLicense && hasLicense(1);
+    return !!hasLicense && hasLicense(1) && this.getUnlicensedPluginsNames().length === 0;
   }
   public set haveCommercialLicense(val: boolean) {
     // eslint-disable-next-line no-console
     console.warn("As of v1.9.101, the haveCommercialLicense property is not supported. To activate your license, use the setLicenseKey(key) method as shown on the following page: https://surveyjs.io/remove-alert-banner");
   }
   public get licenseText(): string {
-    const unlicensedPlugins = this.getUnlicensedPluginsNames();
-    if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
     const d: any = !!glc ? glc(1) : false;
     if (!!d && d.toLocaleDateString) return this.getLocString("survey.license2").replace("{date}", d.toLocaleDateString());
+    const unlicensedPlugins = this.getUnlicensedPluginsNames();
+    if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
     return this.getLocString("survey.license");
   }
   public slk(val: string): void {
@@ -580,7 +580,7 @@ export class SurveyCreatorModel extends Base
   }
   public addPlugin(name: string, plugin: ICreatorPlugin): void {
     this.plugins[name] = plugin;
-    const licenseText = plugin.getLicenseText?.();
+    const licenseText = plugin.getLicenseText?.(this.haveCommercialLicense);
     if (licenseText) {
       const licenseTexts = { ...this.pluginLicenseTexts };
       licenseTexts[name] = licenseText;

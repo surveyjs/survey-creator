@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -155,5 +155,11 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     if (this.model) {
       this.model.onLocaleChanged();
     }
+  }
+
+  public getLicenseText(hasCreatorLicense: boolean): string {
+    if (!hasCreatorLicense) return getLocString("presets.plugin.licenseCreator");
+    if (!hasLicense?.(8)) return getLocString("presets.plugin.license");
+    return "";
   }
 }

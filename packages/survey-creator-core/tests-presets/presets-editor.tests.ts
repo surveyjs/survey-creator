@@ -1,8 +1,19 @@
-import { QuestionMatrixDynamicModel } from "survey-core";
+import { QuestionMatrixDynamicModel, hasLicense } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { TabPresetsPlugin } from "../src/presets/presets-plugin";
+import { SurveyCreatorModel } from "../src/creator-base";
+import { getLocString } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
+
+jest.mock("survey-core", () => {
+  const originalModule = jest.requireActual("survey-core");
+  return {
+    ...originalModule,
+    hasLicense: jest.fn(() => false)
+  };
+});
 
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
@@ -236,5 +247,28 @@ test("Delete active tab", () => {
 
   itemsQuestion.value = [{ name: "preview" }, { name: "logic" }, { name: "json" }];
   expect(activeTabQuestion.value).toEqual("preview");
+});
+
+test("Preset plugin, getLicenseText method", () => {
+  const creator = new SurveyCreatorModel({});
+  const plugin = new TabPresetsPlugin(creator);
+  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+
+  const result1 = plugin.getLicenseText(false);
+  expect(result1).toBeTruthy();
+  expect(result1).toEqual(getLocString("presets.plugin.licenseCreator"));
+
+  hasLicenseMock.mockReturnValue(false);
+  const result2 = plugin.getLicenseText(true);
+  expect(result2).toBeTruthy();
+  expect(result2).toEqual(getLocString("presets.plugin.license"));
+  expect(hasLicenseMock).toHaveBeenCalledWith(8);
+
+  hasLicenseMock.mockReturnValue(true);
+  const result3 = plugin.getLicenseText(true);
+  expect(result3).toEqual("");
+  expect(hasLicenseMock).toHaveBeenCalledWith(8);
+
+  hasLicenseMock.mockClear();
 });
 

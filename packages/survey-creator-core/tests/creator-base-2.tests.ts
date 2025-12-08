@@ -25,6 +25,7 @@ import {
   PopupDropdownViewModel,
   Question,
   SurveyElement,
+  hasLicense,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -61,6 +62,14 @@ import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 import { TabbedMenuMode } from "../src/tabbed-menu";
 
 export * from "../src/localization/french";
+
+jest.mock("survey-core", () => {
+  const originalModule = jest.requireActual("survey-core");
+  return {
+    ...originalModule,
+    hasLicense: jest.fn((id) => false)
+  };
+});
 
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
@@ -846,30 +855,67 @@ test("License text for default locale and another default locale", (): any => {
   editorLocalization.defaultLocale = "en";
 });
 
-test("License text from plugin", (): any => {
+test("License text from plugin (unlicensed creator)", (): any => {
+  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
   const creator = new CreatorTester();
 
   creator.addPlugin("one", <ICreatorPlugin>{
     activate: () => { }
   });
+  hasLicenseMock.mockReturnValue(false);
+  expect(creator.haveCommercialLicense).toBeFalsy();
   expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
 
   creator.addPlugin("two", <ICreatorPlugin>{
     activate: () => { },
-    getLicenseText: () => "no license"
+    getLicenseText: (_) => "no license"
   });
   expect(creator.licenseText).toBe("no license");
+  expect(creator.haveCommercialLicense).toBeFalsy();
 
   creator.addPlugin("three", <ICreatorPlugin>{
     activate: () => { },
-    getLicenseText: () => ""
+    getLicenseText: (_) => ""
   });
   expect(creator.licenseText).toBe("no license");
+  expect(creator.haveCommercialLicense).toBeFalsy();
 
   creator.addPlugin("four", <ICreatorPlugin>{
     activate: () => { }
   });
   expect(creator.licenseText).toBe("no license");
+  expect(creator.haveCommercialLicense).toBeFalsy();
+});
+
+test("License text from plugin (licensed creator)", (): any => {
+  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+  hasLicenseMock.mockReturnValue(true);
+  const creator = new CreatorTester();
+
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { }
+  });
+  expect(creator.haveCommercialLicense).toBeTruthy();
+
+  creator.addPlugin("two", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => "no license"
+  });
+  expect(creator.licenseText).toBe("no license");
+  expect(creator.haveCommercialLicense).toBeFalsy();
+
+  creator.addPlugin("three", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => ""
+  });
+  expect(creator.licenseText).toBe("no license");
+  expect(creator.haveCommercialLicense).toBeFalsy();
+
+  creator.addPlugin("four", <ICreatorPlugin>{
+    activate: () => { }
+  });
+  expect(creator.licenseText).toBe("no license");
+  expect(creator.haveCommercialLicense).toBeFalsy();
 });
 
 test("isStringEditable", (): any => {
