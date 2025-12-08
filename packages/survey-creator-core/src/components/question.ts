@@ -778,7 +778,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   addNewQuestion = () => {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
-      this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+      this.currentAddQuestionType || this.creator.defaultAddQuestionType);
   };
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel((type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {

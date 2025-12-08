@@ -99,8 +99,8 @@ test("Use title for pages", (): any => {
   var model = getTestModel(creator);
   expect(model.survey.pages).toHaveLength(2);
   expect(model.pageListItems).toHaveLength(2);
-  expect(model.pageListItems[0].title).toEqual("First Page");
-  expect(model.pageListItems[1].title).toEqual("My Second Page");
+  expect(model.pageListItems[0].locTitle?.textOrHtml).toEqual("First Page");
+  expect(model.pageListItems[1].locTitle?.textOrHtml).toEqual("My Second Page");
 });
 
 test("previewAllowSelectLanguage: auto, true, false, all", (): any => {

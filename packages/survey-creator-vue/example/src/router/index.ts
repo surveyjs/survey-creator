@@ -9,6 +9,7 @@ import NoLicense from "../components/test/NoLicense.vue";
 import ByPage from "../components/test/ByPage.vue";
 import DropdownCollapse from "../components/test/DropdownCollapse.vue";
 import CustomWidget from "../components/test/CustomWidget.vue";
+import CreatorThemes from "../components/test/CreatorThemes.vue";
 import Example from '@/components/Example.vue';
 
 
@@ -24,7 +25,8 @@ const router = createRouter({
     { path: "/testCafe/testcafe_localized_ui", component: Localization },
     { path: "/testCafe/dropdown-collapse-view", component: DropdownCollapse },
     { path: "/testCafe/testcafe-theme-tab", component: ThemeTab },
-    { path: "/testCafe/testcafe-no-license", component: NoLicense }
+    { path: "/testCafe/testcafe-no-license", component: NoLicense },
+    { path: "/testCafe/creator-themes", component: CreatorThemes }
   ]
 })
 

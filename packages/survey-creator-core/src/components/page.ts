@@ -268,7 +268,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
-    }, null, type || this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+    }, null, type || this.currentAddQuestionType || this.creator.defaultAddQuestionType);
   };
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {

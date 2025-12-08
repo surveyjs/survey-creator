@@ -79,7 +79,7 @@ When selected files exceed the allowed value, the respondent will be informed wi
 
 **Preview uploaded images** enables or disables the preview of uploaded image files.
 
-<img src="images/eud-disable-image-preview.png" alt='Uploaded images with disabled preview.' width="1544" height="768">
+<img src="images/eud-disable-image-preview.png" alt='Uploaded images with disabled preview.' width="1544" height="770">
 
 **Image height** and **Image width** specify the display height and width of uploaded images in the preview, as well as the actual height of images taken with the camera. When multiple file upload is disabled, the image's display height is constrained by the preview area; when multiple file upload is enabled, it's constrained by the thumbnail area instead.
 
