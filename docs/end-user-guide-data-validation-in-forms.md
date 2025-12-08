@@ -73,7 +73,7 @@ The Text validator controls how long the input text can be. To create a text val
    - **Minimum length** - The fewest characters allowed.  
    - **Maximum length** - The most characters allowed.  
    - **Allow digits** - Uncheck to prevent numbers in the answer.  
-   - **Validation message** - Custom message to display when limits are not respected.  
+   - **Notification message for invalid input** - Custom message to display when limits are not respected.  
 
 <img src="images/eud-text.png" alt="Create a validation rule using the Text validator" width="1544" height="932">
 
@@ -93,7 +93,7 @@ Numeric validation lets you restrict input to a specific number range. To set up
 6. Configure the rule using these properties:
     - **Minimum value** - The lowest number allowed.
     - **Maximum value** - The highest number allowed.
-    - **Validation message** - Custom text to display when the value is outside the allowed range.
+    - **Notification message for invalid input** - Custom text to display when the value is outside the allowed range.
 
 <img src="images/eud-number.png" alt="Create a validation rule using the Number validator" width="1544" height="936">
 
@@ -117,7 +117,7 @@ With this setup, the form field will display a default error message for invalid
 1. Switch to the **Validation** category in the Property Grid.
 2. In the **Validation rules** property, click the **Plus** icon to add a new rule.
 3. Select **Email** from the validation type dropdown.
-4. Specify the **Validation message** property.
+4. Specify the **Notification message for invalid input** property.
 
 <img src="images/eud-email.png" alt="Set a custom error message for an email validation rule" width="1544" height="936">
 
@@ -132,7 +132,7 @@ The Answer Count validator ensures that respondents select a number of options w
 5. Configure the rule using these properties:
      - **Minimum count** - The minimum number of options a user must select.
      - **Maximum count** - The maximum number of options a user can select.
-     - **Validation message** - Custom text to show if the user selects too few or too many options.
+     - **Notification message for invalid input** - Custom text to show if the user selects too few or too many options.
 
 <img src="images/eud-answer-count.png" alt="Create a validation rule using the Answer Count validator" width="1544" height="934">
 
@@ -157,7 +157,7 @@ The Regex validator enforces a custom input pattern. To configure this validator
 5. Configure the rule using these properties:
      - **Regular expression** - A pattern that defines the allowed values.  
      - **Case insensitive** - Select this if uppercase and lowercase letters should be treated as equivalent.  
-     - **Validation message** - A message that explains the required value format to the user.
+     - **Notification message for invalid input** - A message that explains the required value format to the user.
 
 <img src="images/eud-regex.png" alt="Create a validation rule using the Regex validator" width="1544" height="934">
 
@@ -172,8 +172,8 @@ To configure this validator, follow the steps below:
 3. In the **Validation rules** property, click the **Plus** icon to add a new rule.
 4. Select **Expression** from the validation type dropdown.
 5. Configure the rule using these properties:
-     - **Validation expression** - A Boolean expression that must evaluate to `true` for the answer to be accepted. See the [Expression Syntax Guide](https://surveyjs.io/survey-creator/documentation/end-user-guide/expression-syntax) for examples, or click the **Magic wand** icon to build the expression using the GUI.
-     - **Validation message** - The error text shown when the expression evaluates to `false`.
+     - **Valid when** - A Boolean expression that must evaluate to `true` for the answer to be accepted. See the [Expression Syntax Guide](https://surveyjs.io/survey-creator/documentation/end-user-guide/expression-syntax) for examples, or click the **Magic wand** icon to build the expression using the GUI.
+     - **Notification message for invalid input** - The error text shown when the expression evaluates to `false`.
 
 <img src="images/eud-expression.png" alt="Create a validation rule using the Expression validator" width="1544" height="936">
 

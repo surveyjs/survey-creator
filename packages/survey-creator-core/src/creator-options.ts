@@ -384,7 +384,9 @@ export interface ICreatorOptions {
    */
   addNewQuestionLast?: boolean;
   /**
-   * The default question type on clicking Add Question button.
+   * Specifies the [question type](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to use by default when users click the "Add Question" button on the design surface.
+   *
+   * Default value: `"text"`
    */
   defaultAddQuestionType?: string;
   /**
@@ -479,7 +481,7 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    *
-   * Default value: `true`
+   * Default value: `false`
    */
   collapseOnDrag?: boolean;
   /**
