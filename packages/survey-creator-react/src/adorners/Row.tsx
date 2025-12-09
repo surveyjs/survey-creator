@@ -28,8 +28,8 @@ export class RowWrapper extends CreatorModelElement<
       null
     );
   }
-  protected getUpdatedModelProps(): string[] {
-    return ["row", "componentData"];
+  protected getUpdatedModelProps(): Array<string | { name: string, deepEqual?: boolean }> {
+    return ["row", { name: "componentData", deepEqual: true }];
   }
   protected getStateElement(): Base {
     return this.model;
