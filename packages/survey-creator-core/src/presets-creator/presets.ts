@@ -8,7 +8,7 @@ import { IToolboxCategoryDefinition } from "../toolbox";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
-import { registerTheme, sortDefaultThemes, ThemesHash } from "../utils/themes";
+import { registerConfig, sortDefaultConfigs, ConfigsHash } from "../utils/configs";
 
 export interface ICreatorPresetData {
   languages?: {
@@ -37,18 +37,18 @@ export interface ICreatorPresetConfig {
   json?: ICreatorPresetData;
 }
 
-type PresetsHash<T> = ThemesHash<T>;
+type PresetsHash<T> = ConfigsHash<T>;
 
 export const PredefinedCreatorPresets: string[] = [];
 export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
 
 export function registerCreatorPreset(...presets: Array<PresetsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
   const importedPresetNames: string[] = [];
-  registerTheme((preset: ICreatorPresetConfig) => {
+  registerConfig((preset: ICreatorPresetConfig) => {
     CreatorPresets[preset.presetName] = preset;
     importedPresetNames.push(preset.presetName);
   }, ...presets);
-  sortDefaultThemes(defaultCreatorPresetsOrder, importedPresetNames, PredefinedCreatorPresets);
+  sortDefaultConfigs(defaultCreatorPresetsOrder, importedPresetNames, PredefinedCreatorPresets);
 }
 
 export class CreatorPreset extends CreatorPresetBase {

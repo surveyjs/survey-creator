@@ -1,6 +1,6 @@
 import { CreatorStylesManager } from "./styles-manager";
 import { DefaultLight } from "../themes/default-light";
-import { registerTheme, ThemesHash, sortDefaultThemes } from "../utils/themes";
+import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../utils/configs";
 
 export interface ICreatorTheme {
   themeName?: string;
@@ -12,13 +12,13 @@ export interface ICreatorTheme {
 export const PredefinedCreatorThemes: string[] = ["default-light"];
 export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
 
-export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> | ICreatorTheme>) {
+export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme> | ICreatorTheme>) {
   const importedThemeNames = [];
-  registerTheme((theme: ICreatorTheme) => {
+  registerConfig((theme: ICreatorTheme) => {
     CreatorThemes[theme.themeName] = theme;
     importedThemeNames.push(theme.themeName);
   }, ...themes);
-  sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
+  sortDefaultConfigs(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
 }
 
 // const defaultVariables = {

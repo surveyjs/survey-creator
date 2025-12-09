@@ -6,7 +6,7 @@ import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator
 import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "./../presets-creator/presets";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
-export class CreatorThemeModel extends Base implements ICreatorTheme {
+export class CreatorThemeModel extends Base implements ICreatorTheme, ICreatorPresetConfig {
   static legacyThemeName = "sc2020";
   static defaultThemeName = "default-light";
   static defaultPresetName = "expert";
@@ -119,7 +119,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
     if (this.blockThemeChangedNotifications > 0) return;
 
-    if (name === "themeName") {
+    if (name === "presetName") {
+
+      this.onPresetSelected.fire(this, { preset: this.toJSON() });
+    } else if (name === "themeName") {
       this.resetColorThemeCssVariablesChanges();
       this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });

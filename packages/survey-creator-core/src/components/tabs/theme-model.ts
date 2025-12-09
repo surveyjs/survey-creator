@@ -7,7 +7,7 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
-import { registerTheme, ThemesHash, sortDefaultThemes } from "../../utils/themes";
+import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
 import { assign, roundTo2Decimals } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
@@ -16,9 +16,9 @@ import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
-export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme>) {
+export function registerSurveyTheme(...themes: Array<ConfigsHash<ITheme> | ITheme>) {
   const importedThemeNames = [];
-  registerTheme((theme: ITheme) => {
+  registerConfig((theme: ITheme) => {
     const creatorThemeVariables = {};
     const creatorTheme = {};
     assign(creatorThemeVariables, theme.cssVariables);
@@ -27,7 +27,7 @@ export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme
     Themes[creatorThemeName] = creatorTheme;
     importedThemeNames.push(theme.themeName);
   }, ...themes);
-  sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
+  sortDefaultConfigs(defaultThemesOrder, importedThemeNames, PredefinedThemes);
 }
 
 export function getThemeFullName(theme: ITheme) {
