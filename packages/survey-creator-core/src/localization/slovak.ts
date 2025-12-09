@@ -1321,10 +1321,10 @@ export var skStrings = {
     // "Regular expression"
     regex: "Regulárny výraz",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Overovacia správa",
-      // [Auto-translated] "Validation expression"
-      expression: "Overovací výraz",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Oznámenie o neplatnom vstupe",
+      // [Auto-translated] "Valid when"
+      expression: "Platné, keď",
       // [Auto-translated] "Notification type"
       notificationType: "Typ oznámenia",
       // [Auto-translated] "Maximum length (in characters)"
