@@ -278,6 +278,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-utils
           node ./dist/translateCreator.js
+          node ./dist/translateCreatorPresets.js
         displayName: "survey-utils translate creator"
 
       - powershell: |
