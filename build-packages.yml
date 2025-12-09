@@ -290,6 +290,7 @@ jobs:
           git fetch origin master --tags --force
           git checkout master
           git add packages/survey-creator-core/src/localization
+          git add packages/survey-creator-core/src/presets/localization
           git commit -m "updated survey-creator translation [azurepipelines skip]"
           git pull origin master
           git push origin master
