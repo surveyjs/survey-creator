@@ -15,6 +15,7 @@ import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
 import { PredefinedCreatorPresets } from "../../presets-creator/presets";
+import { ComponentContainerModel } from "src/entries";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -172,7 +173,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.onThemePropertyGridSurveyCreated();
     };
     themePropertyGridViewModel.searchEnabled = false;
-    this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-property-grid", themePropertyGridViewModel);
+    const sidebarPageModel = new ComponentContainerModel();
+    sidebarPageModel.elements = [
+      { componentName: "svc-property-grid", componentData: themePropertyGridViewModel }];
+    this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-component-container", sidebarPageModel);
     this.themePropertyGridTab.locTileName = "ed.creatorSettingTitle";
     this.themePropertyGridTab.activateCallback = () => {
       settingsAction.active = true;
