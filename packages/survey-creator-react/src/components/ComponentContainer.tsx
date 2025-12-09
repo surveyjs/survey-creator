@@ -1,8 +1,9 @@
 import * as React from "react";
+import { ComponentContainerModel } from "survey-creator-core";
 import { ReactElementFactory } from "survey-react-ui";
 
 interface IComponentContainerProps {
-  elements: ComponentContainerModel;
+  model: ComponentContainerModel;
 }
 
 export class ComponentContainer extends React.Component<IComponentContainerProps, any> {
@@ -12,7 +13,7 @@ export class ComponentContainer extends React.Component<IComponentContainerProps
   render(): React.JSX.Element {
     return (
       <div className="svc-component-container" >
-        {this.props.elements.map((element, index) => {
+        {this.props.model.elements.map((element, index) => {
           return ReactElementFactory.Instance.createElement(element.componentName, { model: element.componentData, key: index });
         })}
       </div>

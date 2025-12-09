@@ -11,11 +11,13 @@ import { TabControlModel } from "../side-bar/tab-control-model";
 import { MenuButton } from "../../utils/actions";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
+import { creatorPresetsModelPropertyGridDefinition } from "../../presets-creator/creator-presets-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
+import { CreatorPresetsModel } from "../../presets-creator/creator-presets-model";
 import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
 import { PredefinedCreatorPresets } from "../../presets-creator/presets";
-import { ComponentContainerModel } from "src/entries";
+import { ComponentContainerModel } from "../component-container/component-container";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -173,9 +175,23 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.onThemePropertyGridSurveyCreated();
     };
     themePropertyGridViewModel.searchEnabled = false;
+
+    const presetModel = new CreatorPresetsModel();
+    const presetPropertyGrid = new PropertyGridModel(undefined, creator, creatorPresetsModelPropertyGridDefinition);
+    presetPropertyGrid.showOneCategoryInPropertyGrid = true;
+    presetPropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
+    const presetPropertyGridViewModel = new PropertyGridViewModel(presetPropertyGrid, creator);
+    presetPropertyGridViewModel.onNewSurveyCreatedCallback = () => {
+      this.onThemePropertyGridSurveyCreated();
+    };
+    presetPropertyGridViewModel.searchEnabled = false;
+    presetPropertyGrid.obj = presetModel;
+
     const sidebarPageModel = new ComponentContainerModel();
     sidebarPageModel.elements = [
-      { componentName: "svc-property-grid", componentData: themePropertyGridViewModel }];
+      { componentName: "svc-property-grid", componentData: presetPropertyGridViewModel },
+      { componentName: "svc-property-grid", componentData: themePropertyGridViewModel },
+    ];
     this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-component-container", sidebarPageModel);
     this.themePropertyGridTab.locTileName = "ed.creatorSettingTitle";
     this.themePropertyGridTab.activateCallback = () => {
