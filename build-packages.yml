@@ -245,7 +245,7 @@ jobs:
       - powershell: |
           cd $(Build.SourcesDirectory)/service
           git pull origin master
-          git merge -X ours master
+          git merge -X ours origin/master
           git fetch origin master --tags --force
           git checkout master
           git add surveyjs.io/App_Data/DocsEditor
