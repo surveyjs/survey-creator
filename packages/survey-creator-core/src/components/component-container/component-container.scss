@@ -3,4 +3,9 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
+
+  &>div,&>div>div {
+    height: fit-content
+  }
 }
+ 

@@ -1,7 +1,7 @@
 import { ISurveyPropertiesDefinition, ISurveyPropertyGridDefinition } from "../question-editor/definition";
 
 const creatorPresetsModelProperties: ISurveyPropertiesDefinition = {
-  "creatorsettings": {
+  "creatorpreset": {
     properties: [
       { name: "presetName", index: 1 },
     ]

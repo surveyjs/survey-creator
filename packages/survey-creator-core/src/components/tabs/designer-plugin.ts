@@ -181,9 +181,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     presetPropertyGrid.showOneCategoryInPropertyGrid = true;
     presetPropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
     const presetPropertyGridViewModel = new PropertyGridViewModel(presetPropertyGrid, creator);
-    presetPropertyGridViewModel.onNewSurveyCreatedCallback = () => {
-      this.onThemePropertyGridSurveyCreated();
-    };
     presetPropertyGridViewModel.searchEnabled = false;
     presetPropertyGrid.obj = presetModel;
 

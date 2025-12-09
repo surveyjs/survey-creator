@@ -4,6 +4,9 @@ import { ICreatorPresetConfig, PredefinedCreatorPresets } from "./presets";
 
 export class CreatorPresetsModel extends Base implements ICreatorPresetConfig {
   static defaultPresetName = "expert";
+  public getType(): string {
+    return "creatorpreset";
+  }
 
   @property() presetName: string = CreatorPresetsModel.defaultPresetName;
 
