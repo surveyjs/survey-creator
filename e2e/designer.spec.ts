@@ -1,5 +1,5 @@
 
-import { url, test, expect } from "./helper";
+import { url, test, expect, doDragDrop, setJSON } from "./helper";
 
 const title = "Designer";
 
@@ -71,5 +71,37 @@ test.describe(title, () => {
       window["creator"].JSON = json;
     }, testJson);
     await expect(page.getByRole("button", { name: "Test action" })).toBeVisible();
+  });
+  test("check d&d paneldynamic from one page to another - #7304", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.evaluate(() => {
+      (window as any).creator.animationEnabled = true;
+    });
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "paneldynamic",
+              "name": "question1",
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "question2"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "headerView": "advanced"
+    });
+    await doDragDrop({ page, element: page.locator("[data-sv-drop-target-survey-element='question1'] > .svc-question__content > .svc-question__drag-area"), target: page.locator("[data-sv-drop-target-page='page2']"), options: { targetPosition: { x: 50, y: 50 }, elementPosition: { x: 10, y: 10 } } });
+    await page.waitForTimeout(2000);
+    await page.locator("[data-sv-drop-target-page='page2'] .svc-element__add-new-question").nth(1).click();
+    await page.waitForTimeout(2000);
+    expect(await page.locator("[data-sv-drop-target-page='page2'] .svc-string-editor", { hasText: "question2" }).isVisible()).toBe(true);
+    expect(await page.locator("[data-sv-drop-target-page='page2'] .svc-string-editor", { hasText: "question3" }).isVisible()).toBe(true);
   });
 });
