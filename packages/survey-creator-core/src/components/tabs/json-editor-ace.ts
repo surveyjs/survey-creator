@@ -68,8 +68,9 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       .getUndoManager();
     this.aceCanUndo = undoManager.hasUndo();
     this.aceCanRedo = undoManager.hasRedo();
-    var isFocused: any = this.aceEditor.isFocused();
-    if (isFocused === true) {
+    const isFocused = this.aceEditor.isFocused() === true;
+    const isSearchBoxActive = this.aceEditor?.searchBox?.active === true;
+    if (isFocused || isSearchBoxActive) {
       this.isJSONChanged = !undoManager.isClean();
     }
   }
