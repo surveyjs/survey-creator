@@ -2,6 +2,7 @@
 import "../localization/arabic";
 import "../localization/bulgarian";
 import "../localization/burmese";
+import "../localization/catalan";
 import "../localization/croatian";
 import "../localization/czech";
 import "../localization/danish";
@@ -27,7 +28,6 @@ import "../localization/simplified-chinese";
 import "../localization/slovak";
 import "../localization/slovenian";
 import "../localization/spanish";
-import "../localization/catalan";
 import "../localization/swedish";
 import "../localization/tajik";
 import "../localization/thai";
