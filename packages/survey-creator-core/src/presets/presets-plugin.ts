@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, Serializer } from "survey-core";
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -178,3 +178,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     }
   }
 }
+Serializer.addProperty("creatorpresets", {
+  type: "presets-launcher",
+  name: "launch"
+});

@@ -1,3 +1,3 @@
 export { TabPresetsComponent } from "../presets/Presets";
-export { PresetsPropertyGridWrapper } from "../presets/PresetsPropertyGrid";
+export { PresetsLauncher } from "../presets/PresetsLauncher";
 export { PresetsIconItem } from "../presets/PresetsIconItem";

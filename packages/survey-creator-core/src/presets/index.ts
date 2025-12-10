@@ -6,6 +6,7 @@ export * from "./presets-editable-tabs";
 export * from "./presets-editable-options";
 export * from "./presets-editable-base";
 export * from "./preset-question-json";
+export * from "./presets-question-launcher";
 import { checkLibraryVersion } from "survey-core";
 import "../presets/presets-theme/presets.scss";
 export let Version: string;
