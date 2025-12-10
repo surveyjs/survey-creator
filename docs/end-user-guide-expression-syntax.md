@@ -256,7 +256,8 @@ Comparison operators are used to compare two values (or in case of `empty` and `
 | `>` / `greater`  | Compares two values and returns `true` if the first is greater than the second. | `"{q1} > 10"` |
 | `*=` / `contains` / `contain`  | Compares two values and returns `true` if the first value contains the second value within it. | `"{q1} contains 'abc'"` |
 | `notcontains` / `notcontain` | Compares two values and returns `true` if the first value doesn't contain the second value within it. | `"{q1} notcontains 'abc'"` |
-| `anyof` | Compares a value with an array of values and returns `true` if the value is present in the array. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
+| `anyof` | Compares a value with an array of values and returns `true` if the value is present, or compares two arrays and returns `true` if the first array includes any value from the second. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
+| `noneof` | Compares a value with an array of values and returns `true` if the value is absent, or compares two arrays and returns `true` if the first array includes none of the values from the second. | `"{q1} noneof [ 'value1', 'value2', 'value3' ]"` |
 | `allof` | Compares two arrays and returns `true` if the first array includes all values from the second. | `"{q1} allof [ 'value1', 'value2', 'value3' ]"` |
 
 > Comparison operations are case-sensitive.
