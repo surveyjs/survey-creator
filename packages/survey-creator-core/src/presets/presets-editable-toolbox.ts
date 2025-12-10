@@ -528,10 +528,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     updateTextFromQuestion(this.getQuestionItems(model), locStrs);
 
     const matrix = this.getQuestionCategories(model);
+    const defaultCategoriesMap = this.defaultCategories.reduce((acc: any, i: any) => { acc[i.category] = i; return acc; }, {});
+
     if (matrix.isVisible) {
       matrix.visibleRows.forEach(row => {
         const category = row.getValue("category");
-        if (row.getValue("title") !== this.getCategoryTitle(category)) {
+        if (row.getValue("title") !== defaultCategoriesMap[category]?.title) {
           if (!locStrs[LocCategoriesName]) {
             locStrs[LocCategoriesName] = {};
           }
