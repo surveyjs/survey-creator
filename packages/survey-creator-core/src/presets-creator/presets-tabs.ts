@@ -31,6 +31,12 @@ export class CreatorPresetTabs extends CreatorPresetBase {
   private applyTabs(creator: SurveyCreatorModel, items: Array<ICreatorPresetTab>): void {
     if (!Array.isArray(items)) return;
     const tabs = [...items.map(i => i.name), ...creator.tabs.map(i => i.id).filter(id => id == "presets")];
+
+    items.forEach(item => {
+      if (item.iconName === undefined) return;
+      const action = creator.tabbedMenu.getActionById(item.name);
+      action.iconName = item.iconName;
+    });
     creator.setTabs(tabs);
   }
 }
