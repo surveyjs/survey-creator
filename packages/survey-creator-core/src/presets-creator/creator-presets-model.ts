@@ -1,6 +1,6 @@
 import { Serializer, Base, property, EventBase } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { ICreatorPresetConfig, PredefinedCreatorPresets } from "./presets";
+import { CreatorPreset, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "./presets";
 
 export class CreatorPresetsModel extends Base implements ICreatorPresetConfig {
   static defaultPresetName = "expert";
@@ -11,6 +11,14 @@ export class CreatorPresetsModel extends Base implements ICreatorPresetConfig {
   @property() presetName: string = CreatorPresetsModel.defaultPresetName;
 
   public onPresetSelected = new EventBase<CreatorPresetsModel, { preset: ICreatorPresetConfig }>();
+  constructor() {
+    super();
+    this.onPropertyValueChangedCallback = (name: string) => {
+      if (name === "presetName") {
+        this.onPresetSelected.fire(this, { preset: CreatorPresets[this.presetName] });
+      }
+    };
+  }
 }
 Serializer.addClass(
   "creatorpreset",

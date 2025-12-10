@@ -16,7 +16,7 @@ import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { CreatorPresetsModel } from "../../presets-creator/creator-presets-model";
 import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
-import { PredefinedCreatorPresets } from "../../presets-creator/presets";
+import { CreatorPreset, PredefinedCreatorPresets } from "../../presets-creator/presets";
 import { ComponentContainerModel } from "../component-container/component-container";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
@@ -181,8 +181,19 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     presetPropertyGrid.showOneCategoryInPropertyGrid = true;
     presetPropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
     const presetPropertyGridViewModel = new PropertyGridViewModel(presetPropertyGrid, creator);
+    presetPropertyGridViewModel.onNewSurveyCreatedCallback = () => {
+      const survey = presetPropertyGrid.survey;
+      const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
+      if (!!presetChooser) {
+        presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) }));
+      }
+    };
     presetPropertyGridViewModel.searchEnabled = false;
     presetPropertyGrid.obj = presetModel;
+    presetModel.onPresetSelected.add((sender, options) => {
+      new CreatorPreset(options.preset.json).apply(creator);
+      this.openCreatorThemeSettings();
+    });
 
     const sidebarPageModel = new ComponentContainerModel();
     sidebarPageModel.elements = [
@@ -232,10 +243,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     survey.onUpdatePanelCssClasses.add((_, options) => {
       options.cssClasses.panel.container += " spg-panel--group";
     });
-    const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
-    if (!!presetChooser) {
-      presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) }));
-    }
     const themeChooser = survey.getQuestionByName("themeName") as QuestionDropdownModel;
     if (!!themeChooser) {
       themeChooser.choices = PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) }));
