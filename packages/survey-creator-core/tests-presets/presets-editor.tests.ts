@@ -268,7 +268,7 @@ test("Preset plugin, getLicenseText method", () => {
   expect(result2).toEqual(getLocString("presets.plugin.license"));
   expect(hasLicenseMock).toHaveBeenCalledWith(8);
 
-  const result2_1 = plugin.getLicenseText(false, "123");
+  const result2_1 = plugin.getLicenseText(true, "123");
   expect(result2_1).toBeTruthy();
   expect(result2_1).toEqual(getLocString("presets.plugin.license2").replace("{date}", "123"));
 

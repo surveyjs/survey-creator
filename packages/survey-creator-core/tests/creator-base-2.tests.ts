@@ -866,24 +866,25 @@ test("License text from plugin (unlicensed creator)", (): any => {
   expect(creator.haveCommercialLicense).toBeFalsy();
   expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
 
+  creator.licenseDateStringValue = "123";
   creator.addPlugin("two", <ICreatorPlugin>{
     activate: () => { },
-    getLicenseText: (_) => "no license"
+    getLicenseText: (_, datestr) => "no license " + datestr
   });
-  expect(creator.licenseText).toBe("no license");
+  expect(creator.licenseText).toBe("no license 123");
   expect(creator.haveCommercialLicense).toBeFalsy();
 
   creator.addPlugin("three", <ICreatorPlugin>{
     activate: () => { },
-    getLicenseText: (_) => ""
+    getLicenseText: (_, __) => ""
   });
-  expect(creator.licenseText).toBe("no license");
+  expect(creator.licenseText).toBe("no license 123");
   expect(creator.haveCommercialLicense).toBeFalsy();
 
   creator.addPlugin("four", <ICreatorPlugin>{
     activate: () => { }
   });
-  expect(creator.licenseText).toBe("no license");
+  expect(creator.licenseText).toBe("no license 123");
   expect(creator.haveCommercialLicense).toBeFalsy();
 });
 

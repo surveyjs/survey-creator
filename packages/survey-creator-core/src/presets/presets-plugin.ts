@@ -159,7 +159,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
 
   public getLicenseText(hasCreatorLicense: boolean, creatorLicenseDateString: string): string {
     if (!hasCreatorLicense) return creatorLicenseDateString ?
-      getLocString("survey.license2").replace("{date}", creatorLicenseDateString) :
+      getLocString("presets.plugin.licenseCreator2").replace("{date}", creatorLicenseDateString) :
       getLocString("presets.plugin.licenseCreator");
     if (!hasLicense?.(8)) {
       if (creatorLicenseDateString) {
