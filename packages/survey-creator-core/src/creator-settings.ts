@@ -187,7 +187,7 @@ export interface ICreatorPlugin {
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   onLocaleChanged?: () => void;
-  getLicenseText?: (hasCreatorLicense: boolean) => string;
+  getLicenseText?: (hasCreatorLicense: boolean, creatorKeyDateString: string) => string;
   model: Base;
 }
 

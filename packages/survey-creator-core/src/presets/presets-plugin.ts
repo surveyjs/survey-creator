@@ -157,9 +157,16 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     }
   }
 
-  public getLicenseText(hasCreatorLicense: boolean): string {
-    if (!hasCreatorLicense) return getLocString("presets.plugin.licenseCreator");
-    if (!hasLicense?.(8)) return getLocString("presets.plugin.license");
+  public getLicenseText(hasCreatorLicense: boolean, creatorLicenseDateString: string): string {
+    if (!hasCreatorLicense) return creatorLicenseDateString ?
+      getLocString("survey.license2").replace("{date}", creatorLicenseDateString) :
+      getLocString("presets.plugin.licenseCreator");
+    if (!hasLicense?.(8)) {
+      if (creatorLicenseDateString) {
+        return getLocString("presets.plugin.license2").replace("{date}", creatorLicenseDateString);
+      }
+      return getLocString("presets.plugin.license");
+    }
     return "";
   }
 }

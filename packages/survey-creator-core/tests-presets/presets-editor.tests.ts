@@ -254,18 +254,26 @@ test("Preset plugin, getLicenseText method", () => {
   const plugin = new TabPresetsPlugin(creator);
   const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
 
-  const result1 = plugin.getLicenseText(false);
+  const result1 = plugin.getLicenseText(false, "");
   expect(result1).toBeTruthy();
   expect(result1).toEqual(getLocString("presets.plugin.licenseCreator"));
 
+  const result1_1 = plugin.getLicenseText(false, "123");
+  expect(result1_1).toBeTruthy();
+  expect(result1_1).toEqual(getLocString("presets.plugin.licenseCreator2").replace("{date}", "123"));
+
   hasLicenseMock.mockReturnValue(false);
-  const result2 = plugin.getLicenseText(true);
+  const result2 = plugin.getLicenseText(true, "");
   expect(result2).toBeTruthy();
   expect(result2).toEqual(getLocString("presets.plugin.license"));
   expect(hasLicenseMock).toHaveBeenCalledWith(8);
 
+  const result2_1 = plugin.getLicenseText(false, "123");
+  expect(result2_1).toBeTruthy();
+  expect(result2_1).toEqual(getLocString("presets.plugin.license2").replace("{date}", "123"));
+
   hasLicenseMock.mockReturnValue(true);
-  const result3 = plugin.getLicenseText(true);
+  const result3 = plugin.getLicenseText(true, "");
   expect(result3).toEqual("");
   expect(hasLicenseMock).toHaveBeenCalledWith(8);
 

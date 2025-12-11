@@ -330,9 +330,15 @@ export class SurveyCreatorModel extends Base
     // eslint-disable-next-line no-console
     console.warn("As of v1.9.101, the haveCommercialLicense property is not supported. To activate your license, use the setLicenseKey(key) method as shown on the following page: https://surveyjs.io/remove-alert-banner");
   }
-  public get licenseText(): string {
+  private get licenseDateString(): string {
     const d: any = !!glc ? glc(1) : false;
-    if (!!d && d.toLocaleDateString) return this.getLocString("survey.license2").replace("{date}", d.toLocaleDateString());
+    if (!!d && d.toLocaleDateString) return d.toLocaleDateString();
+    return "";
+  }
+
+  public get licenseText(): string {
+    const licenseDateString = this.licenseDateString;
+    if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
     return this.getLocString("survey.license");
@@ -580,7 +586,7 @@ export class SurveyCreatorModel extends Base
   }
   public addPlugin(name: string, plugin: ICreatorPlugin): void {
     this.plugins[name] = plugin;
-    const licenseText = plugin.getLicenseText?.(this.haveCommercialLicense);
+    const licenseText = plugin.getLicenseText?.(this.haveCommercialLicense, this.licenseDateString);
     if (licenseText) {
       const licenseTexts = { ...this.pluginLicenseTexts };
       licenseTexts[name] = licenseText;
