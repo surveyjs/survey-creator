@@ -436,6 +436,14 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     }
   }
 
+  private updateIndexesForAll(model: SurveyModel) {
+    const classes = this.getSelector(model).choices.map(c => c.value);
+    classes.forEach((currentClassName) => {
+      const currentProperties = new SurveyQuestionPresetPropertiesDetail(currentClassName, this.currentJson);
+      currentProperties.updateCurrentJson(this.getPropertiesArray(currentProperties.getInitialJson(true)));
+    });
+  }
+
   private getCurrentlyHiddenItems(categories: any) {
     const hiddenProperties = ["progressBarInheritWidthFrom"];
     const itemsMap: any = {};
@@ -457,6 +465,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.isModified = !!json?.definition || (defaultJson && (JSON.stringify(defaultJson) !== JSON.stringify(defaultPropertyGridDefinition)));
     this.currentJson = json?.definition || this.copyJson(defaultJson || defaultPropertyGridDefinition);
     this.currentJson.autoGenerateProperties = false;
+    this.updateIndexesForAll(model);
     this.updateOnValueChangedCore(model, this.nameSelector);
   }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
@@ -492,11 +501,10 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     //if (!this.isPropCreatorChanged) return;
     //this.isPropCreatorChanged = false;
     if (this.currentProperties) {
-      this.currentProperties.updateCurrentJson(this.getPropertiesArray(model));
+      this.currentProperties.updateCurrentJson(this.getPropertiesArray(this.getQuestionCategories(model).value));
     }
   }
-  private getPropertiesArray(model: SurveyModel): Array<any> {
-    const categories = this.getQuestionCategories(model).value;
+  private getPropertiesArray(categories: any): Array<any> {
     return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name), iconName: c.iconName }));
   }
   private changePropTitleAndDescription(path: string, propName: string, val: string): void {
