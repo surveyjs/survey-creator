@@ -32,11 +32,12 @@ export class CreatorPresetTabs extends CreatorPresetBase {
     if (!Array.isArray(items)) return;
     const tabs = [...items.map(i => i.name), ...creator.tabs.map(i => i.id).filter(id => id == "presets")];
 
+    creator.setTabs(tabs);
     items.forEach(item => {
-      if (item.iconName === undefined) return;
+      if (!item.iconName) return;
       const action = creator.tabbedMenu.getActionById(item.name);
       if (action) action.iconName = item.iconName;
     });
-    creator.setTabs(tabs);
+
   }
 }
