@@ -1945,7 +1945,7 @@ export class SurveyCreatorModel extends Base
     this.initPlugins();
     this.initFooterToolbar();
   }
-  private getTabsInfo(): any {
+  public getTabsInfo(): any {
     return {
       designer: { iconName: TabDesignerPlugin.iconName, init: () => new TabDesignerPlugin(this) },
       preview: { iconName: TabTestPlugin.iconName, init: () => new TabTestPlugin(this) },
