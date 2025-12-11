@@ -35,7 +35,7 @@ export class CreatorPresetTabs extends CreatorPresetBase {
     items.forEach(item => {
       if (item.iconName === undefined) return;
       const action = creator.tabbedMenu.getActionById(item.name);
-      action.iconName = item.iconName;
+      if (action) action.iconName = item.iconName;
     });
     creator.setTabs(tabs);
   }
