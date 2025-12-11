@@ -219,6 +219,7 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
     await items.getByRole("button", { name: "Add a new item" }).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).focus();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
