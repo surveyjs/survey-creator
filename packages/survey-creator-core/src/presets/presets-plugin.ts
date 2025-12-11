@@ -47,7 +47,6 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.showPresets = () => this.showPresets();
-    settingsPage.componentName = "svc-presets-property-grid";
     this.toolboxCompact = creator.toolbox.forceCompact;
   }
 

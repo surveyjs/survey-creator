@@ -197,7 +197,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     const sidebarPageModel = new ComponentContainerModel();
     sidebarPageModel.elements = [
-      { componentName: "svc-property-grid", componentData: presetPropertyGridViewModel },
+      { componentName: "svc-presets-property-grid", componentData: presetPropertyGridViewModel },
       { componentName: "svc-property-grid", componentData: themePropertyGridViewModel },
     ];
     this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-component-container", sidebarPageModel);
