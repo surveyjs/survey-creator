@@ -54,4 +54,8 @@ export class CreatorTester extends SurveyCreatorModel {
     res["createdId"] = ++this.logicCreatedId;
     return res;
   }
+  public licenseDateStringValue = "";
+  protected get licenseDateString() {
+    return this.licenseDateStringValue;
+  }
 }

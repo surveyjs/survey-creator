@@ -1,8 +1,20 @@
-import { QuestionMatrixDynamicModel } from "survey-core";
+import { QuestionMatrixDynamicModel, glc, hasLicense } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { TabPresetsPlugin } from "../src/presets/presets-plugin";
+import { SurveyCreatorModel } from "../src/creator-base";
+import { getLocString } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
+
+jest.mock("survey-core", () => {
+  const originalModule = jest.requireActual("survey-core");
+  return {
+    ...originalModule,
+    hasLicense: jest.fn(() => false),
+    glc: jest.fn(() => undefined)
+  };
+});
 
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
@@ -236,5 +248,44 @@ test("Delete active tab", () => {
 
   itemsQuestion.value = [{ name: "preview" }, { name: "logic" }, { name: "json" }];
   expect(activeTabQuestion.value).toEqual("preview");
+});
+
+test("Preset plugin, getLicenseText method", () => {
+  const creator = new SurveyCreatorModel({});
+  const plugin = new TabPresetsPlugin(creator);
+  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+  const glcMock = glc as jest.MockedFunction<typeof glc>;
+
+  const result1 = plugin.getLicenseText(false, "");
+  expect(result1).toBeTruthy();
+  expect(result1).toEqual(getLocString("presets.plugin.licenseCreator"));
+
+  const result1_1 = plugin.getLicenseText(false, "03/05/2023");
+  expect(result1_1).toBeTruthy();
+  expect(result1_1).toEqual(getLocString("presets.plugin.licenseCreator2").replace("{date}", "03/05/2023"));
+
+  hasLicenseMock.mockReturnValue(false);
+  const result2 = plugin.getLicenseText(true, "");
+  expect(result2).toBeTruthy();
+  expect(result2).toEqual(getLocString("presets.plugin.license"));
+  expect(hasLicenseMock).toHaveBeenCalledWith(8);
+
+  const dateMock = { toLocaleDateString: () => "13/12/2023" };
+  glcMock.mockReturnValue(dateMock);
+  const result2_1 = plugin.getLicenseText(true, "");
+  expect(result2_1).toBeTruthy();
+  expect(result2_1).toEqual(getLocString("presets.plugin.license2").replace("{date}", "13/12/2023"));
+
+  glcMock.mockReturnValue(dateMock);
+  const result2_2 = plugin.getLicenseText(false, "13/12/2024");
+  expect(result2_2).toBeTruthy();
+  expect(result2_2).toEqual(getLocString("presets.plugin.license2").replace("{date}", "13/12/2023"));
+
+  hasLicenseMock.mockReturnValue(true);
+  const result3 = plugin.getLicenseText(true, "");
+  expect(result3).toEqual("");
+  expect(hasLicenseMock).toHaveBeenCalledWith(8);
+
+  hasLicenseMock.mockClear();
 });
 
