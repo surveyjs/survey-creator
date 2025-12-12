@@ -176,30 +176,36 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     };
     themePropertyGridViewModel.searchEnabled = false;
 
-    const presetModel = new CreatorPresetsModel();
-    const presetPropertyGrid = new PropertyGridModel(undefined, creator, creatorPresetsModelPropertyGridDefinition);
-    presetPropertyGrid.showOneCategoryInPropertyGrid = true;
-    presetPropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
-    const presetPropertyGridViewModel = new PropertyGridViewModel(presetPropertyGrid, creator);
-    presetPropertyGridViewModel.onNewSurveyCreatedCallback = () => {
-      const survey = presetPropertyGrid.survey;
-      const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
-      if (!!presetChooser) {
-        presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) }));
-      }
-    };
-    presetPropertyGridViewModel.searchEnabled = false;
-    presetPropertyGrid.obj = presetModel;
-    presetModel.onPresetSelected.add((sender, options) => {
-      new CreatorPreset(options.preset.json).apply(creator);
-      this.openCreatorThemeSettings();
-    });
-
-    const sidebarPageModel = new ComponentContainerModel();
-    sidebarPageModel.elements = [
-      { componentName: "svc-presets-property-grid", componentData: presetPropertyGridViewModel },
+    const sidebarPageModelelements = [
       { componentName: "svc-property-grid", componentData: themePropertyGridViewModel },
     ];
+
+    if (PredefinedCreatorPresets.length > 0) {
+      const presetModel = new CreatorPresetsModel();
+      const presetPropertyGrid = new PropertyGridModel(undefined, creator, creatorPresetsModelPropertyGridDefinition);
+      presetPropertyGrid.showOneCategoryInPropertyGrid = true;
+      presetPropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
+      const presetPropertyGridViewModel = new PropertyGridViewModel(presetPropertyGrid, creator);
+      presetPropertyGridViewModel.onNewSurveyCreatedCallback = () => {
+        const survey = presetPropertyGrid.survey;
+        const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
+        if (!!presetChooser) {
+          presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) }));
+        }
+      };
+      presetPropertyGridViewModel.searchEnabled = false;
+      presetPropertyGrid.obj = presetModel;
+      presetModel.onPresetSelected.add((sender, options) => {
+        new CreatorPreset(options.preset.json).apply(creator);
+        this.openCreatorThemeSettings();
+      });
+      sidebarPageModelelements.unshift(
+        { componentName: "svc-property-grid", componentData: presetPropertyGridViewModel }
+      );
+    }
+
+    const sidebarPageModel = new ComponentContainerModel();
+    sidebarPageModel.elements = sidebarPageModelelements;
     this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-component-container", sidebarPageModel);
     this.themePropertyGridTab.locTileName = "ed.creatorSettingTitle";
     this.themePropertyGridTab.activateCallback = () => {

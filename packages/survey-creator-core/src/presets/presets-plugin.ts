@@ -2,6 +2,7 @@ import { createDropdownActionModel, IAction, ListModel, settings as libSettings,
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
+import { settings } from "cluster";
 //import { basic, advanced, expert } from "./default-settings";
 export class TabPresetsPlugin implements ICreatorPlugin {
   public model: CreatorPresetEditorModel;
@@ -46,7 +47,8 @@ export class TabPresetsPlugin implements ICreatorPlugin {
     creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
-    settingsPage.componentData.showPresets = () => this.showPresets();
+    settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
+    settingsPage.componentData.elements[0].componentData.showPresets = () => this.showPresets();
     this.toolboxCompact = creator.toolbox.forceCompact;
   }
 

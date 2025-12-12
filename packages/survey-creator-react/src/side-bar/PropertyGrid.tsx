@@ -38,6 +38,3 @@ export default PropertyGridComponent;
 ReactElementFactory.Instance.registerElement("svc-property-grid", (props) => {
   return React.createElement(PropertyGridComponent, props);
 });
-ReactElementFactory.Instance.registerElement("svc-presets-property-grid", (props) => {
-  return React.createElement(PropertyGridComponent, props);
-});
