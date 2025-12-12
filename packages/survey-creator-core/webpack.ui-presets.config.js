@@ -6,13 +6,13 @@ var path = require("path");
 
 const config = {
   output: {
-    path: __dirname + "/build/presets-settings"
+    path: __dirname + "/build/ui-presets"
   },
   entry: {
-    "default-light": path.resolve(__dirname, "./src/presets-settings/basic.ts"),
-    "default-dark": path.resolve(__dirname, "./src/presets-settings/advanced.ts"),
-    "default-contrast": path.resolve(__dirname, "./src/presets-settings/expert.ts"),
-    "index": path.resolve(__dirname, "./src/presets-settings/index.ts"),
+    "default-light": path.resolve(__dirname, "./src/ui-presets/basic.ts"),
+    "default-dark": path.resolve(__dirname, "./src/ui-presets/advanced.ts"),
+    "default-contrast": path.resolve(__dirname, "./src/ui-presets/expert.ts"),
+    "index": path.resolve(__dirname, "./src/ui-presets/index.ts"),
   },
   externals: {
     "survey-creator-core": {
@@ -46,7 +46,7 @@ function patchEntries(config) {
 module.exports = function (options) {
   options.platform = "";
   options.libraryName = "SurveyCreatorPreset";
-  options.tsConfigFile = path.resolve(__dirname, "./tsconfig.presets-settings.json");
+  options.tsConfigFile = path.resolve(__dirname, "./tsconfig.ui-presets.json");
   const mainConfig = webpackCommonConfig(options);
   mainConfig.entry = {};
   patchEntries(config);

@@ -190,7 +190,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         const survey = presetPropertyGrid.survey;
         const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
         if (!!presetChooser) {
-          presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("presets.names." + theme) }));
+          presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("preset.names." + theme) }));
         }
       };
       presetPropertyGridViewModel.searchEnabled = false;

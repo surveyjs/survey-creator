@@ -8,10 +8,10 @@
             ]
         },
         "declaration": true,
-        "declarationDir": "./build/presets-settings/",
+        "declarationDir": "./build/ui-presets/",
     },
     "include": [
-        "./src/presets-settings/index.ts"
+        "./src/ui-presets/index.ts"
     ],
     "exclude": [],
 }
