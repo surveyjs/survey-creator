@@ -250,6 +250,8 @@ export let svStrings = {
     toolboxFilteredTextPlaceholder: "Skriv för att söka...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Inga resultat hittades",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Inga egenskaper att visa",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
     // [Auto-translated] "No results found"
@@ -1127,6 +1129,8 @@ export let svStrings = {
     storeDataAsText: "Lagra filinnehållet i JSON som text",
     // "Maximum file size (in bytes)"
     maxSize: "Max filstorlek i bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximalt antal filer",
     // "Row count"
     rowCount: "Antal rader",
     // "Columns layout"
@@ -1318,10 +1322,10 @@ export let svStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Reguljärt uttryck",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Meddelande om validering",
-      // [Auto-translated] "Validation expression"
-      expression: "Uttryck för validering",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Notifikationsmeddelande för ogiltig inmatning",
+      // [Auto-translated] "Valid when"
+      expression: "Giltigt när",
       // [Auto-translated] "Notification type"
       notificationType: "Typ av anmälan",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1401,8 +1405,10 @@ export let svStrings = {
     allowMultiple: "Aktivera uppladdning av flera filer",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Förhandsgranska uppladdade bilder",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Godkända filtyper",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Godkända filkategorier",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Ytterligare filtillägg",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vänta tills uppladdningen är klar",
     // [Auto-translated] "Confirm file deletion"
@@ -2083,6 +2089,20 @@ export let svStrings = {
       // [Auto-translated] "Informational"
       info: "Informativt"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Bilder",
+      // [Auto-translated] "Videos"
+      video: "Videor",
+      // [Auto-translated] "Audio"
+      audio: "Ljud",
+      // [Auto-translated] "Documents"
+      document: "Dokument",
+      // [Auto-translated] "Archives"
+      archive: "Arkiv",
+      // [Auto-translated] "Custom"
+      custom: "Sed"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fullständigt namn",
@@ -2496,6 +2516,8 @@ export let svStrings = {
     notcontains: "not contains",
     // [Auto-translated] "Any of"
     anyof: "Någon av",
+    // [Auto-translated] "None of"
+    noneof: "Inget av",
     // [Auto-translated] "All of"
     allof: "Alla",
     // "Greater than"
@@ -3089,8 +3111,10 @@ export let svStrings = {
     storeOthersAsComment: "Välj det här alternativet om du vill lagra alternativvärdet \"Annat\" som en separat egenskap i undersökningsresultaten.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Använd {0} som platshållare för det faktiska värdet.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Mer information finns i attributbeskrivningen [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Välj \"Custom\" för att lägga till egna filfiendelser ovanpå de fördefinierade kategorierna.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Ange filextenser separerade med kommatecken (t.ex. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. Gäller endast för kolumner med \"Cellindatatyp\" inställt på Alternativknappsgrupp eller Kryssrutor.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."

@@ -20,11 +20,24 @@ export class CreatorModelElement<P, S> extends SurveyElementBase<P, S> {
     if (!Array.isArray(names)) return true;
     for (var i = 0; i < names.length; i++) {
       const key = names[i];
-      if (this.props[key] !== nextProps[key]) return true;
+      if (typeof key === "object") {
+        const currentProp = this.props[key.name];
+        const nextProp = nextProps[key.name];
+        if (key.deepEqual) {
+          if (this.props[key.name] === nextProps[key.name]) return false;
+          const currentPropKeys = Object.keys(currentProp || {});
+          if (currentPropKeys.length !== Object.keys(nextProp || {}).length) return true;
+          return currentPropKeys.some(key => currentProp[key] != nextProp[key]);
+        } else {
+          return currentProp !== nextProp;
+        }
+      } else {
+        if (this.props[key] !== nextProps[key]) return true;
+      }
     }
     return false;
   }
-  protected getUpdatedModelProps(): string[] {
+  protected getUpdatedModelProps(): Array<string | { name: string, deepEqual?: boolean }> {
     return undefined;
   }
 }

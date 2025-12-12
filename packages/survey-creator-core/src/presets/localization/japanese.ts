@@ -7,14 +7,14 @@ export const jaStrings = {
     navigationTitle: "言語",
     // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
     description: "アンケート作成ツールのUIとターゲットの言語を選択します\n構成中の調査の言語。",
-    // [Auto-translated] "Creator UI language"
-    creatorUI: "クリエイター UI 言語",
+    // [Auto-translated] "Survey Creator UI language"
+    creatorUI: "Survey Creator UI言語",
     // [Auto-translated] "Survey languages"
     surveyLanguages: "調査言語",
     // [Auto-translated] "Type to search..."
     searchPlaceholder: "検索するには入力します...",
-    // [Auto-translated] "Translate Survey language names to English"
-    translateToEnglish: "調査の言語名を英語に翻訳する"
+    // [Auto-translated] "Translate language names to English"
+    translateToEnglish: "言語名を英語に翻訳する"
   },
   tabs: {
     // [Auto-translated] "Configure tabs"
@@ -73,10 +73,10 @@ export const jaStrings = {
     iconName: "アイコン名",
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "ユーザーがこのツールボックス項目を選択したときに適用する JSON オブジェクト",
-    // [Auto-translated] "Subcategories"
-    subitems: "サブカテゴリ",
-    // [Auto-translated] "Enable subitems for this question..."
-    enableSubitems: "この質問のサブ項目を有効にしてください...",
+    // [Auto-translated] "Subitems"
+    subitems: "サブアイテム",
+    // [Auto-translated] "Enable subitems for this question"
+    enableSubitems: "この質問のサブアイテムを有効にしてください",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "サブアイテムとして移動する...",
     // [Auto-translated] "Add to Toolbox"
@@ -101,10 +101,10 @@ export const jaStrings = {
     title: "プロパティグリッドのカスタマイズ",
     // [Auto-translated] "Property Grid"
     navigationTitle: "プロパティグリッド",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
-    description: "要素を選択して、プロパティ グリッドで使用できる設定をカスタマイズします。",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
-    selectElement: "要素を選択して、プロパティグリッドで利用可能な設定をカスタマイズします",
+    // [Auto-translated] "Hide, rename, reorder, or change property grouping in the Property Grid."
+    description: "プロパティグリッド内でプロパティグループを非表示、名前変更、並べ替え、または変更できます。",
+    // [Auto-translated] "Select a survey element to customize"
+    selectElement: "カスタマイズする調査要素を選択してください",
     // [Auto-translated] "Property Grid"
     propertyGrid: "プロパティグリッド",
     // [Auto-translated] "No categories"
@@ -113,8 +113,8 @@ export const jaStrings = {
     noItemsText: "プロパティをここにドラッグして表示します",
     // [Auto-translated] "Drag properties here to hide them"
     noHiddenItemsText: "ここにプロパティをドラッグして非表示にします",
-    // [Auto-translated] "Unsorted items"
-    hiddenItems: "未ソートのアイテム",
+    // [Auto-translated] "Hidden properties"
+    hiddenItems: "隠れた性質",
     // [Auto-translated] "Name"
     categoryName: "名前",
     // [Auto-translated] "Title"
@@ -125,10 +125,18 @@ export const jaStrings = {
     name: "名前",
     // [Auto-translated] "Title"
     titleField: "タイトル",
-    // [Auto-translated] "Helper Text"
+    // [Auto-translated] "Helper text"
     descriptionField: "ヘルパーテキスト",
-    // [Auto-translated] "Add Custom Category"
-    addCustomCategory: "カスタムカテゴリの追加"
+    // [Auto-translated] "New Category"
+    addCustomCategory: "新カテゴリー"
+  },
+  options: {
+    // [Auto-translated] "Options"
+    title: "オプション",
+    // [Auto-translated] "Options"
+    navigationTitle: "オプション",
+    // [Auto-translated] "Detailed configuration settings for Survey Creator."
+    description: "Survey Creatorの詳細な設定。"
   },
   items: {
     // [Auto-translated] "Add a new item"
@@ -143,8 +151,8 @@ export const jaStrings = {
     newCategory: "新しいカテゴリ",
     // [Auto-translated] "Move to category..."
     moveToCategory: "カテゴリへ移動...",
-    // [Auto-translated] "Move to new category..."
-    moveToNewCategory: "新しいカテゴリに移動...",
+    // [Auto-translated] "Move to new category"
+    moveToNewCategory: "新カテゴリーへの移行",
     // [Auto-translated] "Categories"
     categoriesLabel: "カテゴリ",
     // [Auto-translated] "Move To..."
@@ -183,8 +191,8 @@ export const jaStrings = {
     saveExit: "保存して終了",
     // [Auto-translated] "Back"
     back: "戻る",
-    // [Auto-translated] "Reset to default"
-    resetToDefault: "デフォルトにリセット",
+    // [Auto-translated] "Reset"
+    resetToDefault: "リセット",
     // [Auto-translated] "All settings restored to default"
     resetToDefaults: "すべての設定がデフォルトに復元されました",
     // [Auto-translated] "resored to default"
@@ -198,9 +206,15 @@ export const jaStrings = {
     // [Auto-translated] "Save & Exit"
     completeText: "保存して終了",
     // [Auto-translated] "Back"
-    pagePrevText: "戻る"
+    pagePrevText: "戻る",
+    // [Auto-translated] "Please enter a value."
+    required: "値を入力してください。"
   },
   plugin: {
+    // [Auto-translated] "UI Configuration Manager"
+    buttonTitle: "UI設定マネージャー",
+    // [Auto-translated] "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset."
+    buttonDescription: "ツールボックス、タブ、プロパティグリッド、その他のUI要素を設定し、セットアップを再利用可能なプリセットとして保存します。",
     // [Auto-translated] "Presets"
     presetsTab: "プリセット",
     // [Auto-translated] "Creator Presets"
@@ -215,12 +229,24 @@ export const jaStrings = {
     export: "輸出",
     // [Auto-translated] "Edit"
     edit: "編集",
-    // [Auto-translated] "Reset Languages to default"
-    resetLanguages: "言語をデフォルトにリセットする",
+    // [Auto-translated] "Reset Languages"
+    resetLanguages: "言語のリセット",
     // [Auto-translated] "Reset all changes"
     resetAll: "すべての変更をリセットする",
-    // [Auto-translated] "Reset {0} to defaults"
-    resetToDefaults: "{0}をデフォルトにリセットする"
+    // [Auto-translated] "Do you really want to reset the settings?"
+    resetConfirmation: "本当に設定をリセットしたいのですか?",
+    // [Auto-translated] "Yes, reset the settings"
+    resetConfirmationOk: "はい、設定をリセットしてください",
+    // [Auto-translated] "Reset {0}"
+    resetToDefaults: "リセット{0}",
+    // [Auto-translated] "Default Settings"
+    defaultSettings: "デフォルト設定",
+    // [Auto-translated] "Basic"
+    basic: "基本的な",
+    // [Auto-translated] "Advanced"
+    advanced: "アドバンスド",
+    // [Auto-translated] "Expert"
+    expert: "達人"
   }
 };
 const locale = getLocaleStrings("ja");

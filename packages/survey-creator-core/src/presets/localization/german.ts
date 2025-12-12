@@ -7,14 +7,14 @@ export const deStrings = {
     navigationTitle: "Sprachen",
     // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
     description: "Wählen Sie die Sprache der Survey Creator-Benutzeroberfläche und das Ziel aus\nSprachen für die Umfrage, die konfiguriert wird.",
-    // [Auto-translated] "Creator UI language"
-    creatorUI: "Sprache der Creator-Benutzeroberfläche",
+    // [Auto-translated] "Survey Creator UI language"
+    creatorUI: "Survey Creator UI-Sprache",
     // [Auto-translated] "Survey languages"
     surveyLanguages: "Sprachen der Umfrage",
     // [Auto-translated] "Type to search..."
     searchPlaceholder: "Geben Sie ein, um zu suchen...",
-    // [Auto-translated] "Translate Survey language names to English"
-    translateToEnglish: "Übersetzen Sie die Namen der Umfragesprachen ins Englische"
+    // [Auto-translated] "Translate language names to English"
+    translateToEnglish: "Übersetze Sprachnamen ins Englische"
   },
   tabs: {
     // [Auto-translated] "Configure tabs"
@@ -73,10 +73,10 @@ export const deStrings = {
     iconName: "Name des Symbols",
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON-Objekt, das angewendet werden soll, wenn Benutzer dieses Toolboxelement auswählen",
-    // [Auto-translated] "Subcategories"
-    subitems: "Unterkategorie",
-    // [Auto-translated] "Enable subitems for this question..."
-    enableSubitems: "Aktivieren Sie Unterpunkte für diese Frage...",
+    // [Auto-translated] "Subitems"
+    subitems: "Unterelemente",
+    // [Auto-translated] "Enable subitems for this question"
+    enableSubitems: "Aktiviere Unterelemente für diese Frage",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Als Unterelement verschieben nach...",
     // [Auto-translated] "Add to Toolbox"
@@ -101,10 +101,10 @@ export const deStrings = {
     title: "Anpassen des Eigenschaftenrasters",
     // [Auto-translated] "Property Grid"
     navigationTitle: "Eigenschafts-Raster",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
-    description: "Wählen Sie ein Element aus, um die Einstellungen anzupassen, die im Eigenschaftenraster verfügbar sind.",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
-    selectElement: "Wählen Sie ein Element aus, um seine Einstellungen anzupassen, die im Eigenschaftenraster verfügbar sind",
+    // [Auto-translated] "Hide, rename, reorder, or change property grouping in the Property Grid."
+    description: "Verstecken, umbenennen, neu ordnen oder die Eigentumsgruppierung im Property Grid ändern.",
+    // [Auto-translated] "Select a survey element to customize"
+    selectElement: "Wählen Sie ein Umfrageelement zum Anpassen aus",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Eigenschafts-Raster",
     // [Auto-translated] "No categories"
@@ -113,8 +113,8 @@ export const deStrings = {
     noItemsText: "Ziehen Sie Eigenschaften hierher, um sie anzuzeigen",
     // [Auto-translated] "Drag properties here to hide them"
     noHiddenItemsText: "Ziehen Sie Eigenschaften hierher, um sie auszublenden",
-    // [Auto-translated] "Unsorted items"
-    hiddenItems: "Unsortierte Artikel",
+    // [Auto-translated] "Hidden properties"
+    hiddenItems: "Versteckte Eigenschaften",
     // [Auto-translated] "Name"
     categoryName: "Name",
     // [Auto-translated] "Title"
@@ -125,10 +125,18 @@ export const deStrings = {
     name: "Name",
     // [Auto-translated] "Title"
     titleField: "Titel",
-    // [Auto-translated] "Helper Text"
-    descriptionField: "Hilfstext",
-    // [Auto-translated] "Add Custom Category"
-    addCustomCategory: "Benutzerdefinierte Kategorie hinzufügen"
+    // [Auto-translated] "Helper text"
+    descriptionField: "Helfertext",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Neue Kategorie"
+  },
+  options: {
+    // [Auto-translated] "Options"
+    title: "Optionen",
+    // [Auto-translated] "Options"
+    navigationTitle: "Optionen",
+    // [Auto-translated] "Detailed configuration settings for Survey Creator."
+    description: "Detaillierte Konfigurationseinstellungen für Survey Creator."
   },
   items: {
     // [Auto-translated] "Add a new item"
@@ -143,8 +151,8 @@ export const deStrings = {
     newCategory: "Neue Kategorie in",
     // [Auto-translated] "Move to category..."
     moveToCategory: "Zur Kategorie wechseln...",
-    // [Auto-translated] "Move to new category..."
-    moveToNewCategory: "In eine neue Kategorie wechseln...",
+    // [Auto-translated] "Move to new category"
+    moveToNewCategory: "Wechsel in neue Kategorie",
     // [Auto-translated] "Categories"
     categoriesLabel: "Kategorien",
     // [Auto-translated] "Move To..."
@@ -183,8 +191,8 @@ export const deStrings = {
     saveExit: "Speichern & Beenden",
     // [Auto-translated] "Back"
     back: "Zurück",
-    // [Auto-translated] "Reset to default"
-    resetToDefault: "Auf Standard zurücksetzen",
+    // [Auto-translated] "Reset"
+    resetToDefault: "Zurücksetzen",
     // [Auto-translated] "All settings restored to default"
     resetToDefaults: "Alle Einstellungen auf Standard zurückgesetzt",
     // [Auto-translated] "resored to default"
@@ -198,9 +206,15 @@ export const deStrings = {
     // [Auto-translated] "Save & Exit"
     completeText: "Speichern & Beenden",
     // [Auto-translated] "Back"
-    pagePrevText: "Zurück"
+    pagePrevText: "Zurück",
+    // [Auto-translated] "Please enter a value."
+    required: "Bitte geben Sie einen Wert ein."
   },
   plugin: {
+    // [Auto-translated] "UI Configuration Manager"
+    buttonTitle: "UI Configuration Manager",
+    // [Auto-translated] "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset."
+    buttonDescription: "Konfigurieren Sie das Toolbox, die Tabs, das Property Grid und andere UI-Elemente und speichern Sie das Setup als wiederverwendbare Voreinstellung.",
     // [Auto-translated] "Presets"
     presetsTab: "Presets",
     // [Auto-translated] "Creator Presets"
@@ -215,12 +229,24 @@ export const deStrings = {
     export: "Exportieren",
     // [Auto-translated] "Edit"
     edit: "Redigieren",
-    // [Auto-translated] "Reset Languages to default"
-    resetLanguages: "Sprachen auf Standard zurücksetzen",
+    // [Auto-translated] "Reset Languages"
+    resetLanguages: "Reset-Sprachen",
     // [Auto-translated] "Reset all changes"
     resetAll: "Alle Änderungen zurücksetzen",
-    // [Auto-translated] "Reset {0} to defaults"
-    resetToDefaults: "Zurücksetzen {0} auf die Standardeinstellungen"
+    // [Auto-translated] "Do you really want to reset the settings?"
+    resetConfirmation: "Willst du wirklich die Einstellungen zurücksetzen?",
+    // [Auto-translated] "Yes, reset the settings"
+    resetConfirmationOk: "Ja, setze die Einstellungen zurück",
+    // [Auto-translated] "Reset {0}"
+    resetToDefaults: "Reset {0}",
+    // [Auto-translated] "Default Settings"
+    defaultSettings: "Standardeinstellungen",
+    // [Auto-translated] "Basic"
+    basic: "Grundlegend",
+    // [Auto-translated] "Advanced"
+    advanced: "Fortgeschritten",
+    // [Auto-translated] "Expert"
+    expert: "Experte"
   }
 };
 const locale = getLocaleStrings("de");

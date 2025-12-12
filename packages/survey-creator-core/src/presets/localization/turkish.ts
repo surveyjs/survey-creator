@@ -7,14 +7,14 @@ export const trStrings = {
     navigationTitle: "Diller",
     // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
     description: "Anket Oluşturucu Kullanıcı Arabiriminin dilini seçin ve hedefleyin\nyapılandırılmakta olan anket için diller.",
-    // [Auto-translated] "Creator UI language"
-    creatorUI: "Oluşturucu kullanıcı arayüzü dili",
+    // [Auto-translated] "Survey Creator UI language"
+    creatorUI: "Anket Oluşturucu Arayüzü dili",
     // [Auto-translated] "Survey languages"
     surveyLanguages: "Anket dilleri",
     // [Auto-translated] "Type to search..."
     searchPlaceholder: "Aramak için yazın...",
-    // [Auto-translated] "Translate Survey language names to English"
-    translateToEnglish: "Anket dili adlarını İngilizce'ye çevirme"
+    // [Auto-translated] "Translate language names to English"
+    translateToEnglish: "Dil isimlerini İngilizceye çevir"
   },
   tabs: {
     // [Auto-translated] "Configure tabs"
@@ -73,10 +73,10 @@ export const trStrings = {
     iconName: "Simge adı",
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Kullanıcılar bu araç kutusu öğesini seçtiğinde uygulanacak JSON nesnesi",
-    // [Auto-translated] "Subcategories"
-    subitems: "Alt kategori",
-    // [Auto-translated] "Enable subitems for this question..."
-    enableSubitems: "Bu soru için alt öğeleri etkinleştirin...",
+    // [Auto-translated] "Subitems"
+    subitems: "Alt",
+    // [Auto-translated] "Enable subitems for this question"
+    enableSubitems: "Bu soru için alt öğeleri etkinleştirin",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Bir alt öğe olarak şuraya taşı...",
     // [Auto-translated] "Add to Toolbox"
@@ -101,10 +101,10 @@ export const trStrings = {
     title: "Özellik Izgarasını Özelleştirme",
     // [Auto-translated] "Property Grid"
     navigationTitle: "Özellik Izgarası",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
-    description: "Özellik Kılavuzu'nda bulunan ayarlarını özelleştirmek için bir öğe seçin.",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
-    selectElement: "Özellik Izgarası'nda bulunan ayarlarını özelleştirmek için bir öğe seçin",
+    // [Auto-translated] "Hide, rename, reorder, or change property grouping in the Property Grid."
+    description: "Property Grid'de gizlemek, yeniden adlandırmak, yeniden sıralamak veya özellik gruplamalarını değiştirmek.",
+    // [Auto-translated] "Select a survey element to customize"
+    selectElement: "Özelleştirmek için bir anket öğesi seçin",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Özellik Izgarası",
     // [Auto-translated] "No categories"
@@ -113,8 +113,8 @@ export const trStrings = {
     noItemsText: "Özellikleri göstermek için buraya sürükleyin",
     // [Auto-translated] "Drag properties here to hide them"
     noHiddenItemsText: "Özellikleri gizlemek için buraya sürükleyin",
-    // [Auto-translated] "Unsorted items"
-    hiddenItems: "Sıralanmamış öğeler",
+    // [Auto-translated] "Hidden properties"
+    hiddenItems: "Gizli özellikler",
     // [Auto-translated] "Name"
     categoryName: "Ad",
     // [Auto-translated] "Title"
@@ -125,10 +125,18 @@ export const trStrings = {
     name: "Ad",
     // [Auto-translated] "Title"
     titleField: "Başlık",
-    // [Auto-translated] "Helper Text"
-    descriptionField: "Yardımcı Metin",
-    // [Auto-translated] "Add Custom Category"
-    addCustomCategory: "Özel Kategori Ekle"
+    // [Auto-translated] "Helper text"
+    descriptionField: "Yardımcı metin",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Yeni Kategori"
+  },
+  options: {
+    // [Auto-translated] "Options"
+    title: "Seçenekler",
+    // [Auto-translated] "Options"
+    navigationTitle: "Seçenekler",
+    // [Auto-translated] "Detailed configuration settings for Survey Creator."
+    description: "Survey Creator için ayrıntılı yapılandırma ayarları."
   },
   items: {
     // [Auto-translated] "Add a new item"
@@ -143,8 +151,8 @@ export const trStrings = {
     newCategory: "Yeni kategori",
     // [Auto-translated] "Move to category..."
     moveToCategory: "Kategoriye taşı...",
-    // [Auto-translated] "Move to new category..."
-    moveToNewCategory: "Yeni kategoriye taşı...",
+    // [Auto-translated] "Move to new category"
+    moveToNewCategory: "Yeni kategoriye geçiş",
     // [Auto-translated] "Categories"
     categoriesLabel: "Kategori",
     // [Auto-translated] "Move To..."
@@ -183,8 +191,8 @@ export const trStrings = {
     saveExit: "Kaydet & Çık",
     // [Auto-translated] "Back"
     back: "Geri",
-    // [Auto-translated] "Reset to default"
-    resetToDefault: "Varsayılana sıfırla",
+    // [Auto-translated] "Reset"
+    resetToDefault: "Sıfırlama",
     // [Auto-translated] "All settings restored to default"
     resetToDefaults: "Tüm ayarlar varsayılana geri yüklendi",
     // [Auto-translated] "resored to default"
@@ -198,9 +206,15 @@ export const trStrings = {
     // [Auto-translated] "Save & Exit"
     completeText: "Kaydet & Çık",
     // [Auto-translated] "Back"
-    pagePrevText: "Geri"
+    pagePrevText: "Geri",
+    // [Auto-translated] "Please enter a value."
+    required: "Lütfen bir değer girin."
   },
   plugin: {
+    // [Auto-translated] "UI Configuration Manager"
+    buttonTitle: "UI Yapılandırma Yöneticisi",
+    // [Auto-translated] "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset."
+    buttonDescription: "Toolbox, Tabs, Property Grid ve diğer arayüz öğelerini yapılandırın ve kurulumu yeniden kullanılabilir bir ön ayar olarak kaydedin.",
     // [Auto-translated] "Presets"
     presetsTab: "Önayarları",
     // [Auto-translated] "Creator Presets"
@@ -215,12 +229,24 @@ export const trStrings = {
     export: "Ihracat",
     // [Auto-translated] "Edit"
     edit: "Düzenlemek",
-    // [Auto-translated] "Reset Languages to default"
-    resetLanguages: "Dilleri varsayılana sıfırla",
+    // [Auto-translated] "Reset Languages"
+    resetLanguages: "Dilleri Sıfırlama",
     // [Auto-translated] "Reset all changes"
     resetAll: "Tüm değişiklikleri sıfırla",
-    // [Auto-translated] "Reset {0} to defaults"
-    resetToDefaults: "{0} varsayılanlara sıfırla"
+    // [Auto-translated] "Do you really want to reset the settings?"
+    resetConfirmation: "Gerçekten ayarları sıfırlamak mı istiyorsun?",
+    // [Auto-translated] "Yes, reset the settings"
+    resetConfirmationOk: "Evet, ayarları sıfırlayın",
+    // [Auto-translated] "Reset {0}"
+    resetToDefaults: "Sıfırlama {0}",
+    // [Auto-translated] "Default Settings"
+    defaultSettings: "Varsayılan Ayarlar",
+    // [Auto-translated] "Basic"
+    basic: "Temel",
+    // [Auto-translated] "Advanced"
+    advanced: "İleri",
+    // [Auto-translated] "Expert"
+    expert: "Uzman"
   }
 };
 const locale = getLocaleStrings("tr");

@@ -40,9 +40,11 @@ When choosing the source and target question types for Carry Forward, take into 
 - An Image Picker question passes selected, unselected, or all image/video files if the follow-up question is also an Image Picker type. Otherwise, it passes image/video captions. You can change the selection type&mdash;single or multiple&mdash;by using the **Allow multiple selection** checkbox.
  
     <img src="images/eud-allow-multiple-selection-cf.png" alt='How to allow multiple selection in the Image Picker' width="332" height="324">
+
 - A Ranking question can be used as a source of all choices only, unless the **Allow selective ranking** property checkbox is selected.
 
     <img src="images/eud-allow-selective-ranking.png" alt='How to enable selective ranking in the Ranking question' width="332" height="284">
+
 - Checkboxes and Multi-Select Dropdown (Tag Box) can pass one or multiple selected choices, depending on the value set for the **Maximum choices to select** property.
 
     <img src="images/eud-max-choices-to-select.png" alt='How to set the maximum number of choices a user can select' width="331" height="244">

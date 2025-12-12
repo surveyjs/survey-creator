@@ -1321,10 +1321,10 @@ export var persianStrings = {
     // "Regular expression"
     regex: "فرمت صحیح عبارت ",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "پیام اعتبارسنجی",
-      // [Auto-translated] "Validation expression"
-      expression: "عبارت اعتبارسنجی",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "پیام اطلاع رسانی برای ورودی نامعتبر",
+      // [Auto-translated] "Valid when"
+      expression: "معتبر زمانی که",
       // [Auto-translated] "Notification type"
       notificationType: "نوع اعلان",
       // [Auto-translated] "Maximum length (in characters)"
@@ -2515,6 +2515,8 @@ export var persianStrings = {
     notcontains: "شامل نباشد",
     // "Any of"
     anyof: "هرکدام",
+    // [Auto-translated] "None of"
+    noneof: "هیچ کدام از این ها",
     // "All of"
     allof: "همه",
     // "Greater than"

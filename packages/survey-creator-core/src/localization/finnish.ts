@@ -250,6 +250,8 @@ export var fiStrings = {
     toolboxFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Ei ominaisuuksia näytettäväksi",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var fiStrings = {
     storeDataAsText: "Tallenna tiedostosisältö JSON-tulokseen tekstinä",
     // "Maximum file size (in bytes)"
     maxSize: "Tiedoston enimmäiskoko tavuina",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Tiedostojen enimmäismäärä",
     // "Row count"
     rowCount: "Rivien määrä",
     // "Columns layout"
@@ -1317,10 +1321,10 @@ export var fiStrings = {
     // "Regular expression"
     regex: "Säännöllinen lauseke",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Vahvistusviesti",
-      // [Auto-translated] "Validation expression"
-      expression: "Vahvistuksen lauseke",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Ilmoitusviesti virheellisestä syötteestä",
+      // [Auto-translated] "Valid when"
+      expression: "Voimassa kun",
       // [Auto-translated] "Notification type"
       notificationType: "Ilmoituksen tyyppi",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1404,10 @@ export var fiStrings = {
     allowMultiple: "Ota käyttöön useiden tiedostojen lataus",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Esikatsele ladattuja kuvia",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Hyväksytyt tiedostotyypit",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Hyväksytyt tiedostokategoriat",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Lisätiedostopäätteet",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Odota latauksen valmistumista",
     // [Auto-translated] "Confirm file deletion"
@@ -2082,6 +2088,20 @@ export var fiStrings = {
       // [Auto-translated] "Informational"
       info: "Tiedottava"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Kuvia",
+      // [Auto-translated] "Videos"
+      video: "Videot",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Asiakirjat",
+      // [Auto-translated] "Archives"
+      archive: "Arkisto",
+      // [Auto-translated] "Custom"
+      custom: "Tapa"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Koko nimi",
@@ -2495,6 +2515,8 @@ export var fiStrings = {
     notcontains: "ei sisällä",
     // "Any of"
     anyof: "mikä tahansa",
+    // [Auto-translated] "None of"
+    noneof: "Ei mitään",
     // "All of"
     allof: "kaikki",
     // "Greater than"
@@ -3088,8 +3110,10 @@ export var fiStrings = {
     storeOthersAsComment: "Valitse tämä, jos haluat tallentaa Muu-vaihtoehdon arvon erillisenä ominaisuutena kyselyn tuloksiin.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Käytä {0} todellisen arvon paikkamerkkinä.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Katso lisätietoja määritteen [accept](https://www.w3schools.com/tags/att_input_accept.asp) kuvauksesta.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Valitse \"Custom\" lisätäksesi omat tiedostopäätteesi ennalta määriteltyjen kategorioiden päälle.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Syötä tiedostopäätteet, jotka on erotettu pilkuilla (esim. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, vaihtoehdot näkyvät yhdellä rivillä. Koskee vain sarakkeita, joiden Solusyötteen tyyppi -asetuksena on Valintanappiryhmä tai Valintaneliöt.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
