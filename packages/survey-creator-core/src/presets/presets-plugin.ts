@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, hasLicense } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, hasLicense, glc } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -158,14 +158,15 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   public getLicenseText(hasCreatorLicense: boolean, creatorLicenseDateString: string): string {
-    if (!hasCreatorLicense) return creatorLicenseDateString ?
-      getLocString("presets.plugin.licenseCreator2").replace("{date}", creatorLicenseDateString) :
-      getLocString("presets.plugin.licenseCreator");
     if (!hasLicense?.(8)) {
-      if (creatorLicenseDateString) {
-        return getLocString("presets.plugin.license2").replace("{date}", creatorLicenseDateString);
+      const presetsLicenseDateString = glc?.(8)?.toLocaleDateString?.();
+      if (presetsLicenseDateString) {
+        return getLocString("presets.plugin.license2").replace("{date}", presetsLicenseDateString);
       }
-      return getLocString("presets.plugin.license");
+      if (hasCreatorLicense) return getLocString("presets.plugin.license");
+      return creatorLicenseDateString ?
+        getLocString("presets.plugin.licenseCreator2").replace("{date}", creatorLicenseDateString) :
+        getLocString("presets.plugin.licenseCreator");
     }
     return "";
   }
