@@ -4,7 +4,6 @@ import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
-import { ICreatorPresetConfig } from "src/presets-creator/presets";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
@@ -39,8 +38,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   @property() scale: number;
   @property() fontScale: number;
   @property() isLight: boolean = true;
-
-  public onPresetSelected = new EventBase<CreatorThemeModel, { preset: ICreatorPresetConfig }>();
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();

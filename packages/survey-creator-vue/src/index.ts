@@ -21,6 +21,7 @@ import QuestionError from "./components/QuestionError.vue";
 import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
+import ComponentContainer from "./components/ComponentContainer.vue";
 import Test from "./tabs/preview/Test.vue";
 
 import TestAgain from "./tabs/preview/TestAgain.vue";
@@ -149,6 +150,8 @@ function registerComponents(
   registerComponent("svc-tab-logic", Logic);
 
   registerComponent("svc-tab-theme", Theme);
+
+  registerComponent("svc-component-container", ComponentContainer);
 
   registerComponent("svc-toolbox", AdaptiveToolbox);
   registerComponent("svc-toolbox-list", ToolboxList);
