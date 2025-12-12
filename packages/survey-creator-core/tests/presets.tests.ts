@@ -24,6 +24,22 @@ test("show/hidetabs", () => {
   expect(creator.tabs[1].id).toBe("designer");
   expect(creator.activeTab).toBe("preview");
 });
+test("tabs icons", () => {
+  const creator = new CreatorTester();
+  expect(creator.tabs).toHaveLength(4);
+  new CreatorPreset({}).apply(creator);
+  const preset = new CreatorPreset({
+    tabs: {
+      items: [{ name: "preview", iconName: "i-preview" }, { name: "designer", iconName: "i-designer" }, { name: "logic" }],
+      activeTab: "preview"
+    }
+  });
+  preset.apply(creator);
+  expect(creator.tabs).toHaveLength(3);
+  expect(creator.tabs[0].iconName).toBe("i-preview");
+  expect(creator.tabs[1].iconName).toBe("i-designer");
+  expect(creator.tabs[2].iconName).toBe("icon-logic-24x24");
+});
 test("Update top toolbars on setting tabs", () => {
   const creator = new CreatorTester();
   creator.propertyGridNavigationMode = "accordion";
