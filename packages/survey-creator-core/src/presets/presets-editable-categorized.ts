@@ -7,6 +7,9 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
   protected defaultCategories: any;
+  protected get defaultCategoriesMap() {
+    return this.defaultCategories.reduce((acc: any, i: any) => { acc[i.category] = i; return acc; }, {});
+  }
   protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
     return question?.name === this.nameCategories ? this.defaultCategories : this.defaultItems;
   }
