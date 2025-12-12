@@ -270,15 +270,16 @@ test("Preset plugin, getLicenseText method", () => {
   expect(result2).toEqual(getLocString("presets.plugin.license"));
   expect(hasLicenseMock).toHaveBeenCalledWith(8);
 
-  glcMock.mockReturnValue(new Date("2023-05-03T12:00:00Z"));
+  const dateMock = { toLocaleDateString: () => "13/12/2023" };
+  glcMock.mockReturnValue(dateMock);
   const result2_1 = plugin.getLicenseText(true, "");
   expect(result2_1).toBeTruthy();
-  expect(result2_1).toEqual(getLocString("presets.plugin.license2").replace("{date}", "03/05/2023"));
+  expect(result2_1).toEqual(getLocString("presets.plugin.license2").replace("{date}", "13/12/2023"));
 
-  glcMock.mockReturnValue(new Date("2023-05-03T12:00:00Z"));
-  const result2_2 = plugin.getLicenseText(false, "03/05/2024");
+  glcMock.mockReturnValue(dateMock);
+  const result2_2 = plugin.getLicenseText(false, "13/12/2024");
   expect(result2_2).toBeTruthy();
-  expect(result2_2).toEqual(getLocString("presets.plugin.license2").replace("{date}", "03/05/2023"));
+  expect(result2_2).toEqual(getLocString("presets.plugin.license2").replace("{date}", "13/12/2023"));
 
   hasLicenseMock.mockReturnValue(true);
   const result3 = plugin.getLicenseText(true, "");
