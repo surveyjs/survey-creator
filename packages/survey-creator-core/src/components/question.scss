@@ -830,7 +830,7 @@ svc-question,
   box-sizing: border-box;
   padding: 0 calcSize(5);
   margin: calcSize(4) 0;
-  z-index: -1 !important;
+  z-index: -1;
   width: 100%;
   .svc-string-editor,
   .svc-fake-title,
@@ -847,6 +847,9 @@ svc-question,
     opacity: 0;
     transition: opacity 150ms;
   }
+}
+.svc-element__header--hidden.sd-question__header--location--left {
+  z-index: -1 !important;
 }
 .svc-element__header--lazy,
 .svc-element__header--hidden.sd-question__header--location--left {
