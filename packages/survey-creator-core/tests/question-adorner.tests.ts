@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, ComponentCollection, PopupDropdownViewModel, QuestionPanelDynamicModel, QuestionRadiogroupModel, QuestionTextModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, PopupDropdownViewModel, QuestionMatrixDropdownModel, QuestionPanelDynamicModel, QuestionRadiogroupModel, QuestionTextModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -1387,4 +1387,58 @@ test("Check question converter subitems", (): any => {
   expect(text.needDefaultSubitem).toBeFalsy(); // needDefaultSubitem is recalculated after clearSubitems
 
   surveySettings.animationEnabled = true;
+});
+test("Test showHiddenTitle functionality", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ],
+        templateQuestionTitleLocation: "left"
+      },
+      {
+        type: "matrixdropdown",
+        name: "question3",
+        columns: [{ name: "col", cellType: "text" }],
+        detailElements: [
+          {
+            type: "paneldynamic",
+            name: "question4",
+            templateElements: [
+              {
+                type: "text",
+                name: "question5"
+              }
+            ],
+            templateQuestionTitleLocation: "left"
+          }
+        ],
+        detailPanelMode: "underRow",
+        rows: ["row1", "row2"]
+      },
+      {
+        type: "text",
+        name: "question6",
+        titleLocation: "left"
+      }
+    ]
+  };
+  const question6 = creator.survey.getQuestionByName("question6") as QuestionTextModel;
+  expect(new QuestionAdornerViewModel(creator, question6, <any>undefined).showHiddenTitle).toBeTruthy();
+  const question1 = creator.survey.getQuestionByName("question1") as QuestionPanelDynamicModel;
+  const question2 = question1.panels[0].getQuestionByName("question2") as QuestionTextModel;
+  expect(new QuestionAdornerViewModel(creator, question2, <any>undefined).showHiddenTitle).toBeTruthy();
+  const question3 = creator.survey.getQuestionByName("question3") as QuestionMatrixDropdownModel;
+  question3.visibleRows[0].showDetailPanel();
+  const panel = question3.visibleRows[0].detailPanel;
+  const dPanel = panel.getQuestionByName("question4") as QuestionPanelDynamicModel;
+  const question5 = dPanel.panels[0].getQuestionByName("question5") as QuestionTextModel;
+  expect(new QuestionAdornerViewModel(creator, question5, <any>undefined).showHiddenTitle).toBeTruthy();
 });
