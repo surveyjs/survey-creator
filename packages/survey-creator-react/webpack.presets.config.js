@@ -31,7 +31,7 @@ module.exports = function (options) {
   const config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey-creator-react-presets": path.resolve(__dirname, "./src/entries/presets.ts")
+      "survey-creator-ui-preset-editor-react": path.resolve(__dirname, "./src/entries/presets.ts")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -89,7 +89,7 @@ module.exports = function (options) {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: {
-        root: options.libraryName || "SurveyCreatorPresets",
+        root: options.libraryName || "SurveyCreatorUIPresetEditorReact",
         amd: "[dashedname]",
         commonjs: "[dashedname]",
       },
@@ -128,11 +128,11 @@ module.exports = function (options) {
         commonjs: "survey-creator-core",
         amd: "survey-creator-core"
       },
-      "survey-creator-core-presets": {
+      "survey-creator-ui-preset-editor-core": {
         root: "SurveyCreatorUIPresetEditorCore",
-        commonjs2: "survey-creator-core-presets",
-        commonjs: "survey-creator-core-presets",
-        amd: "survey-creator-core-presets"
+        commonjs2: "survey-creator-ui-preset-editor-core",
+        commonjs: "survey-creator-ui-preset-editor-core",
+        amd: "survey-creator-ui-preset-editor-core"
       },
       "survey-creator-react": {
         root: "SurveyCreatorReact",

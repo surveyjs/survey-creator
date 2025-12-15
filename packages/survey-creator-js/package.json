@@ -22,7 +22,7 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
     "build:main": "webpack --env buildType=dev && webpack --env buildType=prod && rollup -c",
-    "build:presets": "webpack --config ./webpack.ui-preset-editor.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.ui-preset-editor.config.js --env buildType=prod",
+    "build:presets": "webpack --config ./webpack.presets.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.presets.config.js --env buildType=prod  && rollup -c rollup.presets.config.js --bundleConfigAsCjs",
     "build": "npm run build:main && npm run build:presets",
     "watch:dev": "webpack --env buildType=dev --watch && rollup -c -w",
     "watch:prod": "webpack --env buildType=prod --watch",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.2",

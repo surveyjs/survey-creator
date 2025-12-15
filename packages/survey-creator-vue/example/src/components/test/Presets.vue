@@ -3,9 +3,9 @@
 </template>
 <script lang="ts" setup>
 import Common from './Common.vue';
-import "survey-creator-vue/presets";
+import "survey-creator-vue/ui-preset-editor";
 import "survey-creator-core/ui-preset-editor/index.css";
-import { UIPresetEditor } from "survey-creator-core/presets";
+import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
 import { settings } from "survey-core"
 import { onMounted } from 'vue';
 onMounted(() => {

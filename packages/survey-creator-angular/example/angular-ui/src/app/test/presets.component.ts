@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
-import { UIPresetEditor } from "survey-creator-core/ui-presets";
+import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
 import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 @Component({
   selector: "test-theme-preview",

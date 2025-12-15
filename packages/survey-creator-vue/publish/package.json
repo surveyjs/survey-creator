@@ -50,10 +50,10 @@
       "import": "./survey-creator-vue.es.js",
       "require": "./survey-creator-vue.umd.js"
     },
-    "./presets": {
+    "./ui-preset-editor": {
       "types": "./types-presets/index.d.ts",
-      "import": "./survey-creator-vue-presets.es.js",
-      "require": "./survey-creator-vue-presets.umd.js"
+      "import": "./survey-creator-ui-preset-editor-vue.es.js",
+      "require": "./survey-creator-ui-preset-editor-vue.umd.js"
     }
   }
 }
