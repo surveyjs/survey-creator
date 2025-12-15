@@ -79,7 +79,7 @@
             "styles": [
               "./node_modules/survey-core/survey-core.css",
               "./node_modules/survey-creator-core/survey-creator-core.css",
-              "./node_modules/survey-creator-core/presets/index.css"
+              "./node_modules/survey-creator-core/ui-preset-editor/index.css"
             ],
             "scripts": []
           },

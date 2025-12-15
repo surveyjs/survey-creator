@@ -2,7 +2,7 @@ import { ItemValue, QuestionDropdownModel, Serializer } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
-import { CreatorPreset } from "../src/presets-creator/presets";
+import { UIPreset } from "../src/presets-creator/presets";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -432,7 +432,7 @@ test("Property import and defaults", () => {
 });
 
 test("Properties and applied presets", () => {
-  const preset = new CreatorPreset({
+  const preset = new UIPreset({
     "propertyGrid": {
       "definition": {
         "autoGenerateProperties": false,

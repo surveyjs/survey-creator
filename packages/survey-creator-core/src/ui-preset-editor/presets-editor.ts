@@ -1,5 +1,5 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions, getLocString } from "survey-creator-core";
-import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
+import { UIPreset, ICreatorPresetData } from "survey-creator-core";
 import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
@@ -30,7 +30,7 @@ export class NavigationBar extends ActionContainer {
 }
 
 export class CreatorPresetEditorModel extends Base implements ICreatorPresetEditorSetup {
-  private presetValue: CreatorPreset;
+  private presetValue: UIPreset;
   private modelValue: SurveyModel;
   private resultModelValue: SurveyModel;
   private navigationBarValue: NavigationBar;
@@ -39,7 +39,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   constructor(json?: ICreatorPresetData, private creatorValue?: SurveyCreatorModel, private defaultJsonValue?: ICreatorPresetData) {
     super();
     editorLocalization.presetStrings = undefined;
-    this.presetValue = new CreatorPreset(json);
+    this.presetValue = new UIPreset(json);
     if (!this.creatorValue)this.creatorValue = this.createCreator({});
     this.modelValue = this.createModel();
     this.resultModelValue = this.createResultModel();
@@ -59,7 +59,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.model.editablePresets.forEach(preset => preset.dispose());
     this.model.dispose();
   }
-  public get preset(): CreatorPreset { return this.presetValue; }
+  public get preset(): UIPreset { return this.presetValue; }
   public get creator(): SurveyCreatorModel { return this.creatorValue; }
   public get model(): SurveyModel { return this.modelValue; }
   public get resultModel(): SurveyModel {
@@ -384,7 +384,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     }
     return true;
   }
-  private createEditableCore(preset: CreatorPreset, fullPath: string): CreatorPresetEditableBase {
+  private createEditableCore(preset: UIPreset, fullPath: string): CreatorPresetEditableBase {
     if (fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
@@ -392,11 +392,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     if (fullPath === "options") return new CreatorPresetEditableOptions(preset);
     return undefined;
   }
-  private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
+  private createEditable(preset: UIPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
     const editable = this.createEditableCore(preset, fullPath);
     if (editable) {
       preset.children.forEach(item => {
-        const child = this.createEditable(<CreatorPreset>item, editable, fullPath + "_" + item.getPath());
+        const child = this.createEditable(<UIPreset>item, editable, fullPath + "_" + item.getPath());
         if (child) {
           editable.children.push(child);
           child.parent = editable;
@@ -408,7 +408,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private createEditablePresets(): Array<CreatorPresetEditableBase> {
     const res = [];
     this.preset.children.forEach(preset => {
-      const editable = this.createEditable(<CreatorPreset>preset, undefined, preset.getPath());
+      const editable = this.createEditable(<UIPreset>preset, undefined, preset.getPath());
       if (editable) {
         res.push(editable);
       }
