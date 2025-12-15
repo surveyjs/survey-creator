@@ -16,13 +16,13 @@ module.exports = (env) => {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval-source-map",
     entry: {
-      "survey-creator-core-presets": path.resolve(__dirname, "./src/ui-preset-editor/index.ts"),
+      "survey-creator-ui-preset-editor-core": path.resolve(__dirname, "./src/ui-preset-editor/index.ts"),
     },
     output: {
       path: path.resolve(__dirname, "build/ui-preset-editor"),
       filename: isProd ? "index.min.js" : "index.js",
       library: {
-        root: "SurveyCreatorCorePresets",
+        root: "SurveyCreatorUIPresetEditorCore",
         amd: "[dashedname]",
         commonjs: "[dashedname]",
       },
@@ -55,7 +55,7 @@ module.exports = (env) => {
             {
               loader: "ts-loader",
               options: {
-                configFile: path.resolve(__dirname, "./tsconfig.presets.json"),
+                configFile: path.resolve(__dirname, "./tsconfig.ui-preset-editor.json"),
                 compilerOptions
               }
             }

@@ -9,6 +9,7 @@ example/
 examples/
 .gitignore
 webpack.config.js
+webpack.ui-preset-editor.config.js
 webpack.presets.config.js
 index.js
 copy-vrt-tests.js

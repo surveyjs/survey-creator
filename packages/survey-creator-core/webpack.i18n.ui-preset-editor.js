@@ -18,19 +18,19 @@ const config = {
 };
 
 function patchEntries() {
-  fs.readdirSync(path.resolve(__dirname, "./src/presets/localization")).forEach(file => {
+  fs.readdirSync(path.resolve(__dirname, "./src/ui-preset-editor/localization")).forEach(file => {
     var extension = path.extname(file);
     if (extension.toLowerCase() === ".ts") {
-      config.entry[`presets/i18n/${path.basename(file, extension)}`] = (path.resolve(__dirname, "./src/presets/localization") + "/" + file);
+      config.entry[`ui-preset-editor/i18n/${path.basename(file, extension)}`] = (path.resolve(__dirname, "./src/ui-preset-editor/localization") + "/" + file);
     }
   });
-  config.entry["presets/i18n/index"] = path.resolve(__dirname, "./src/presets/i18n.ts");
+  config.entry["ui-preset-editor/i18n/index"] = path.resolve(__dirname, "./src/ui-preset-editor/i18n.ts");
 }
 
 module.exports = function (options) {
   options.platform = "i18n";
-  options.libraryName = "SurveyCreatorLocalesPresets";
-  options.tsConfigFile = "tsconfig.i18n.presets.json";
+  options.libraryName = "SurveyCreatorUIPresetsEditorLocales";
+  options.tsConfigFile = "tsconfig.i18n.ui-preset-editor.json";
   patchEntries();
   const mainConfig = webpackCommonConfigCreator(options);
   mainConfig.entry = {};

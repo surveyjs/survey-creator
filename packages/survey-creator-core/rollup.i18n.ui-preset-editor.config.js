@@ -4,18 +4,18 @@ const fs = require("fs");
 const input = {};
 
 function patchEntries() {
-  fs.readdirSync(path.resolve(__dirname, "./src/presets/localization")).forEach(file => {
+  fs.readdirSync(path.resolve(__dirname, "./src/ui-preset-editor/localization")).forEach(file => {
     var extension = path.extname(file);
     if (extension.toLowerCase() === ".ts") {
-      input[`presets/i18n/${path.basename(file, extension)}`] = (path.resolve(__dirname, "./src/presets/localization") + "/" + file);
+      input[`ui-preset-editor/i18n/${path.basename(file, extension)}`] = (path.resolve(__dirname, "./src/ui-preset-editor/localization") + "/" + file);
     }
   });
-  input["presets/i18n/index"] = path.resolve(__dirname, "./src/presets/i18n.ts");
+  input["ui-preset-editor/i18n/index"] = path.resolve(__dirname, "./src/ui-preset-editor/i18n.ts");
 }
 
 module.exports = () => {
   let options = {
-    tsconfig: path.resolve(__dirname, "./tsconfig.i18n.presets.json")
+    tsconfig: path.resolve(__dirname, "./tsconfig.i18n.ui-preset-editor.json")
   };
   const config = defaultConfig(options);
   patchEntries();

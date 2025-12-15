@@ -24,7 +24,7 @@ export default {
   plugins: [
     nodeResolve(),
     commonjs(),
-    typescript({ inlineSources: true, sourceMap: true, tsconfig: path.resolve(__dirname, "./tsconfig.presets.fesm.json"), compilerOptions: {
+    typescript({ inlineSources: true, sourceMap: true, tsconfig: path.resolve(__dirname, "./tsconfig.ui-preset-editor.fesm.json"), compilerOptions: {
       declaration: false,
       declarationDir: null
     } }),
