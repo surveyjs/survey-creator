@@ -18,6 +18,7 @@ export class TabControlModel extends Base {
       id: "svd-grid-hide",
       showTitle: false,
       visible: true,
+      enabled: true,
       pressed: false,
       action: () => {
         if (!this.expandCollapseAction.enabled) return;

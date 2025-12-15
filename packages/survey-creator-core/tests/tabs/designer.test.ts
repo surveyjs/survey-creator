@@ -868,3 +868,8 @@ test("Create topToolbar on request and setup it, Bug#6665", () => {
   expect(tabBar.isTopToolbarCreated).toBeTruthy();
   expect(topToolbar.actions.length > 3).toBeTruthy();
 });
+test("Sidebar collapse/expand with button", () => {
+  const creator = new CreatorTester();
+  const tabControlModelValue = new TabControlModel(creator.sidebar);
+  expect(tabControlModelValue.expandCollapseAction.enabled).toBeTruthy();
+});
