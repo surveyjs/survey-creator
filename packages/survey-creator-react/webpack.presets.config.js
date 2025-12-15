@@ -129,7 +129,7 @@ module.exports = function (options) {
         amd: "survey-creator-core"
       },
       "survey-creator-core-presets": {
-        root: "SurveyCreatorCorePresets",
+        root: "SurveyCreatorUIPresetEditorCore",
         commonjs2: "survey-creator-core-presets",
         commonjs: "survey-creator-core-presets",
         amd: "survey-creator-core-presets"

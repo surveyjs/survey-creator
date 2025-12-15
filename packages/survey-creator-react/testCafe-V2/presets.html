@@ -41,7 +41,7 @@
     creator["animationEnabled"] = false;
     creator.allowZoom = false;
     window.creator = creator;
-    new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
+    new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
     root.render(React.createElement(React.StrictMode, {
       children: React.createElement(

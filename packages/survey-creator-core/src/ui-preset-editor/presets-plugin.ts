@@ -3,7 +3,7 @@ import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandl
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 //import { basic, advanced, expert } from "./default-settings";
-export class TabPresetsPlugin implements ICreatorPlugin {
+export class UIPresetEditor implements ICreatorPlugin {
   public model: CreatorPresetEditorModel;
   public static iconName = "icon-settings";
   private activeTab;
@@ -42,7 +42,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: TabPresetsPlugin.iconName });
+    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName });
     creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
@@ -56,8 +56,8 @@ export class TabPresetsPlugin implements ICreatorPlugin {
    *
    * Parameters:
    *
-   * - `sender`: `TabPresetsPlugin`\
-   * A `TabPresetsPlugin` instance that raised the event.
+   * - `sender`: `UIPresetEditor`\
+   * A `UIPresetEditor` instance that raised the event.
    * - `options.preset`: [`ICreatorPresetData`](https://surveyjs.io/form-library/documentation/api-reference/...)\
    * A selected theme.
    *
@@ -66,7 +66,7 @@ export class TabPresetsPlugin implements ICreatorPlugin {
    * @see addTheme
    * @see removeTheme
    */
-  public onPresetSaved = new EventBase<TabPresetsPlugin, { preset: ICreatorPresetData }>();
+  public onPresetSaved = new EventBase<UIPresetEditor, { preset: ICreatorPresetData }>();
 
   protected saveHandler() {
     this.onPresetSaved.fire(this, { preset: this.model.json });

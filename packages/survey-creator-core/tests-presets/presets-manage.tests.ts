@@ -1,6 +1,6 @@
 import { QuestionMatrixDynamicModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
-import { TabPresetsPlugin } from "../src/presets/presets-plugin";
+import { UIPresetEditor } from "../src/presets/presets-plugin";
 import { CreatorBase } from "../src/creator-base";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
@@ -8,7 +8,7 @@ import { CreatorBase } from "../src/creator-base";
 
 test("Preset edit model, create pages", () => {
   const creator = new CreatorBase();
-  const plugin = new TabPresetsPlugin(creator);
+  const plugin = new UIPresetEditor(creator);
   let v;
   plugin.onPresetSaved.add((_, opt) => {
     v = opt.preset.toolbox.showCategoryTitles;

@@ -45,7 +45,7 @@
     window["Survey"].settings.animationEnabled = false;
     creator.allowZoom = false;
     window.creator = creator;
-    new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
+    new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
 
     class SurveyCreatorRenderComponent extends SurveyUI.Component {
       constructor(props) {
@@ -61,7 +61,7 @@
           creator["animationEnabled"] = false;
           creator.allowZoom = false;
           window.creator = creator;
-          new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
+          new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
         }
       }
       render() {

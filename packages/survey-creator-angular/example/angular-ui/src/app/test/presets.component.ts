@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
-import { TabPresetsPlugin } from "survey-creator-core/presets";
+import { UIPresetEditor } from "survey-creator-core/presets";
 import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 @Component({
   selector: "test-theme-preview",
@@ -22,6 +22,6 @@ export class PresetsComponent extends TestDefaultComponent {
     settings.animationEnabled = false;
     this.creator.allowZoom = false;
     this.creator.showOneCategoryInPropertyGrid = true;
-    new TabPresetsPlugin(this.creator);
+    new UIPresetEditor(this.creator);
   }
 }

@@ -285,8 +285,8 @@ creator.saveSurveyFunc = (no, callback) => {
   }, 1000);
 };
 
-if(window.SurveyCreatorCorePresets) {
-  window.editor = new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
+if(window.SurveyCreatorUIPresetEditorCore) {
+  window.editor = new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
 }
 
 ReactDOM.render(

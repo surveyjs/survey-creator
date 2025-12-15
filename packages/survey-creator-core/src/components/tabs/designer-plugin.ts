@@ -16,7 +16,7 @@ import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { CreatorPresetsModel } from "../../ui-presets-creator/creator-presets-model";
 import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
-import { CreatorPreset, PredefinedCreatorPresets } from "../../ui-presets-creator/presets";
+import { UIPreset, PredefinedCreatorPresets } from "../../ui-presets-creator/presets";
 import { ComponentContainerModel } from "../component-container/component-container";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
@@ -196,7 +196,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       presetPropertyGridViewModel.searchEnabled = false;
       presetPropertyGrid.obj = presetModel;
       presetModel.onPresetSelected.add((sender, options) => {
-        new CreatorPreset(options.preset.json).apply(creator);
+        new UIPreset(options.preset.json).apply(creator);
         this.openCreatorThemeSettings();
       });
       sidebarPageModelelements.unshift(

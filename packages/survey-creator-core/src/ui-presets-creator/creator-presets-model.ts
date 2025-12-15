@@ -1,6 +1,6 @@
 import { Serializer, Base, property, EventBase } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { CreatorPreset, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "./presets";
+import { UIPreset, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "./presets";
 
 export class CreatorPresetsModel extends Base implements ICreatorPresetConfig {
   static defaultPresetName = "expert";

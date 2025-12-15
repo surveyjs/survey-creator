@@ -51,7 +51,7 @@ export function registerCreatorPreset(...presets: Array<PresetsHash<ICreatorPres
   sortDefaultConfigs(defaultCreatorPresetsOrder, importedPresetNames, PredefinedCreatorPresets);
 }
 
-export class CreatorPreset extends CreatorPresetBase {
+export class UIPreset extends CreatorPresetBase {
   public constructor(json: ICreatorPresetData) {
     super();
     this.setJson(json);
