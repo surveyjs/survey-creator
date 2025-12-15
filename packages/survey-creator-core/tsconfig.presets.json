@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "./build/presets",
+    "declarationDir": "./build/ui-preset-editor",
     "paths": {
       "survey-creator-core": [
         "./build"
@@ -10,6 +10,6 @@
     }
   },
   "include": [
-    "./src/presets/index.ts"
+    "./src/ui-preset-editor/index.ts"
   ]
 }

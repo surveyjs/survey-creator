@@ -108,11 +108,11 @@ export * from "../pages-controller";
 export * from "../creator-theme/creator-themes";
 export * from "../creator-theme/creator-theme-model-definition";
 export * from "../creator-theme/creator-theme-model";
-export * from "../presets-creator/presets-base";
-export * from "../presets-creator/presets";
-export * from "../presets-creator/presets-properties";
-export * from "../presets-creator/presets-tabs";
-export * from "../presets-creator/presets-toolbox";
+export * from "../ui-presets-creator/presets-base";
+export * from "../ui-presets-creator/presets";
+export * from "../ui-presets-creator/presets-properties";
+export * from "../ui-presets-creator/presets-tabs";
+export * from "../ui-presets-creator/presets-toolbox";
 export * from "../dragdrop-survey-elements";
 
 import "../components/search.scss";
