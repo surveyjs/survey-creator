@@ -1,5 +1,5 @@
 import { ItemValue, QuestionDropdownModel, Serializer } from "survey-core";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
 import { UIPreset } from "../src/presets-creator/presets";

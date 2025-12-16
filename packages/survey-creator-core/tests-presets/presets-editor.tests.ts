@@ -1,5 +1,5 @@
 import { QuestionMatrixDynamicModel, glc, hasLicense } from "survey-core";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { TabPresetsPlugin } from "../src/presets/presets-plugin";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { getLocString } from "../src/editorLocalization";
