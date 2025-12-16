@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc } from "survey-core";
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
