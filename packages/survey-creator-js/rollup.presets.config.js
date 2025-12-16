@@ -2,6 +2,7 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import bannerPlugin from "rollup-plugin-license";
+import alias from "@rollup/plugin-alias";
 import replace from "@rollup/plugin-replace";
 import path from "path";
 
@@ -20,8 +21,18 @@ export default {
     exports: "named",
     sourcemap: true
   },
-  external: ["survey-core", "survey-creator-core"],
+  external: ["survey-core", "survey-creator-core", "survey-js-ui", "survey-creator-js"],
   plugins: [
+    alias({
+      entries: {
+        "survey-react-ui": "survey-js-ui",
+        "survey-creator-react": "survey-creator-js",
+        "react": "survey-js-ui",
+        "react-dom/test-utils": "survey-js-ui",
+        "react-dom": "survey-js-ui",
+        "react/jsx-runtime": "survey-js-ui"
+      }
+    }),
     nodeResolve(),
     commonjs(),
     typescript({ filterRoot: false, inlineSources: true, sourceMap: true, tsconfig: path.resolve(__dirname, "./tsconfig.presets.fesm.json"), compilerOptions: {
