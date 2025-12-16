@@ -5,7 +5,6 @@ import { TestDefaultComponent } from "./default.component";
 import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
 import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 import SurveyCreatorUIPreset from "survey-creator-core/ui-presets";
-import SurveyCreatorTheme from "survey-creator-core/themes";
 import { registerUIPreset } from 'survey-creator-core';
 registerUIPreset(SurveyCreatorUIPreset);
 registerCreatorTheme(SurveyCreatorTestTheme);
@@ -21,7 +20,7 @@ export class PresetsComponent extends TestDefaultComponent {
   protected override getSlk(): boolean { return true }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
-    this.creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
+    this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     settings.animationEnabled = false;
