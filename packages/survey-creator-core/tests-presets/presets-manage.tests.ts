@@ -6,7 +6,7 @@ import { CreatorBase } from "../src/creator-base";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
 
-test("Preset edit model, create pages", () => {
+test("Preset  editor - check events", () => {
   const creator = new CreatorBase();
   const plugin = new UIPresetEditor(creator);
   let v;
