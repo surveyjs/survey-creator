@@ -9,9 +9,9 @@ const config = {
     path: __dirname + "/build/ui-presets"
   },
   entry: {
-    "default-light": path.resolve(__dirname, "./src/ui-presets/basic.ts"),
-    "default-dark": path.resolve(__dirname, "./src/ui-presets/advanced.ts"),
-    "default-contrast": path.resolve(__dirname, "./src/ui-presets/expert.ts"),
+    "basic": path.resolve(__dirname, "./src/ui-presets/basic.ts"),
+    "advanced": path.resolve(__dirname, "./src/ui-presets/advanced.ts"),
+    "expert": path.resolve(__dirname, "./src/ui-presets/expert.ts"),
     "index": path.resolve(__dirname, "./src/ui-presets/index.ts"),
   },
   externals: {
@@ -35,7 +35,7 @@ function patchEntries(config) {
         export: "default",
         umdNamedDefine: true,
         name: {
-          root: ["SurveyCreatorPreset", umdName],
+          root: ["SurveyCreatorUIPreset", umdName],
           amd: "[dashedname]",
           commonjs: "[dashedname]",
         },
@@ -45,7 +45,7 @@ function patchEntries(config) {
 }
 module.exports = function (options) {
   options.platform = "";
-  options.libraryName = "SurveyCreatorPreset";
+  options.libraryName = "SurveyCreatorUIPreset";
   options.tsConfigFile = path.resolve(__dirname, "./tsconfig.ui-presets.json");
   const mainConfig = webpackCommonConfig(options);
   mainConfig.entry = {};

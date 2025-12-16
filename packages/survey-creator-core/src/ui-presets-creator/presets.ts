@@ -33,16 +33,14 @@ export interface ICreatorPresetData {
 }
 
 export interface ICreatorPresetConfig {
-  presetName: string;
+  presetName?: string;
   json?: ICreatorPresetData;
 }
-
-type PresetsHash<T> = ConfigsHash<T>;
 
 export const PredefinedCreatorPresets: string[] = [];
 export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
 
-export function registerUIPreset(...presets: Array<PresetsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
+export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
   const importedPresetNames: string[] = [];
   registerConfig((preset: ICreatorPresetConfig) => {
     CreatorPresets[preset.presetName] = preset;
