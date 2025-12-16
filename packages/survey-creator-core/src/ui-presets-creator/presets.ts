@@ -42,7 +42,7 @@ type PresetsHash<T> = ConfigsHash<T>;
 export const PredefinedCreatorPresets: string[] = [];
 export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
 
-export function registerCreatorPreset(...presets: Array<PresetsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
+export function registerUIPreset(...presets: Array<PresetsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
   const importedPresetNames: string[] = [];
   registerConfig((preset: ICreatorPresetConfig) => {
     CreatorPresets[preset.presetName] = preset;
