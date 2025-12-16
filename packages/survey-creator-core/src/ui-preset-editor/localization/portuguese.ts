@@ -7,14 +7,14 @@ export const ptStrings = {
     navigationTitle: "Idiomas",
     // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
     description: "Selecione o idioma da interface do usuário e do Survey Creator\nidiomas para a pesquisa que está sendo configurada.",
-    // [Auto-translated] "Creator UI language"
-    creatorUI: "Idioma da interface do usuário do criador",
+    // [Auto-translated] "Survey Creator UI language"
+    creatorUI: "Linguagem de interface Survey Creator",
     // [Auto-translated] "Survey languages"
     surveyLanguages: "Idiomas da pesquisa",
     // [Auto-translated] "Type to search..."
     searchPlaceholder: "Digite para pesquisar...",
-    // [Auto-translated] "Translate Survey language names to English"
-    translateToEnglish: "Traduzir nomes de idiomas de pesquisa para inglês"
+    // [Auto-translated] "Translate language names to English"
+    translateToEnglish: "Traduzir nomes de idiomas para o inglês"
   },
   tabs: {
     // [Auto-translated] "Configure tabs"
@@ -73,10 +73,10 @@ export const ptStrings = {
     iconName: "Nome do ícone",
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "JSON a ser aplicado quando os usuários selecionam este item da caixa de ferramentas",
-    // [Auto-translated] "Subcategories"
-    subitems: "Subcategorias",
-    // [Auto-translated] "Enable subitems for this question..."
-    enableSubitems: "Habilitar subitens para esta pergunta...",
+    // [Auto-translated] "Subitems"
+    subitems: "Subitens",
+    // [Auto-translated] "Enable subitems for this question"
+    enableSubitems: "Ative subitens para esta pergunta",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Mover como um subitem para...",
     // [Auto-translated] "Add to Toolbox"
@@ -101,10 +101,10 @@ export const ptStrings = {
     title: "Personalizar a grade de propriedades",
     // [Auto-translated] "Property Grid"
     navigationTitle: "Grade de propriedades",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
-    description: "Selecione um elemento para personalizar suas configurações disponíveis na Grade de propriedades.",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
-    selectElement: "Selecione um elemento para personalizar suas configurações disponíveis na Grade de propriedades",
+    // [Auto-translated] "Hide, rename, reorder, or change property grouping in the Property Grid."
+    description: "Esconda, renomeia, reordene ou altere o agrupamento de propriedades na Grade de Propriedades.",
+    // [Auto-translated] "Select a survey element to customize"
+    selectElement: "Selecione um elemento de pesquisa para personalizar",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Grade de propriedades",
     // [Auto-translated] "No categories"
@@ -113,8 +113,8 @@ export const ptStrings = {
     noItemsText: "Arraste as propriedades aqui para mostrá-las",
     // [Auto-translated] "Drag properties here to hide them"
     noHiddenItemsText: "Arraste as propriedades aqui para ocultá-las",
-    // [Auto-translated] "Unsorted items"
-    hiddenItems: "Itens não classificados",
+    // [Auto-translated] "Hidden properties"
+    hiddenItems: "Propriedades ocultas",
     // [Auto-translated] "Name"
     categoryName: "Nome",
     // [Auto-translated] "Title"
@@ -125,10 +125,18 @@ export const ptStrings = {
     name: "Nome",
     // [Auto-translated] "Title"
     titleField: "Título",
-    // [Auto-translated] "Helper Text"
+    // [Auto-translated] "Helper text"
     descriptionField: "Texto auxiliar",
-    // [Auto-translated] "Add Custom Category"
-    addCustomCategory: "Adicionar categoria personalizada"
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nova Categoria"
+  },
+  options: {
+    // [Auto-translated] "Options"
+    title: "Opções",
+    // [Auto-translated] "Options"
+    navigationTitle: "Opções",
+    // [Auto-translated] "Detailed configuration settings for Survey Creator."
+    description: "Configurações detalhadas para o Survey Creator."
   },
   items: {
     // [Auto-translated] "Add a new item"
@@ -143,8 +151,8 @@ export const ptStrings = {
     newCategory: "Nova categoria em",
     // [Auto-translated] "Move to category..."
     moveToCategory: "Mover para a categoria...",
-    // [Auto-translated] "Move to new category..."
-    moveToNewCategory: "Mover para uma nova categoria...",
+    // [Auto-translated] "Move to new category"
+    moveToNewCategory: "Mudança para nova categoria",
     // [Auto-translated] "Categories"
     categoriesLabel: "Categorias",
     // [Auto-translated] "Move To..."
@@ -183,8 +191,8 @@ export const ptStrings = {
     saveExit: "Salvar e sair",
     // [Auto-translated] "Back"
     back: "Voltar",
-    // [Auto-translated] "Reset to default"
-    resetToDefault: "Redefinir para o padrão",
+    // [Auto-translated] "Reset"
+    resetToDefault: "Repor",
     // [Auto-translated] "All settings restored to default"
     resetToDefaults: "Todas as configurações restauradas para o padrão",
     // [Auto-translated] "resored to default"
@@ -198,9 +206,15 @@ export const ptStrings = {
     // [Auto-translated] "Save & Exit"
     completeText: "Salvar e sair",
     // [Auto-translated] "Back"
-    pagePrevText: "Voltar"
+    pagePrevText: "Voltar",
+    // [Auto-translated] "Please enter a value."
+    required: "Por favor, insira um valor."
   },
   plugin: {
+    // [Auto-translated] "UI Configuration Manager"
+    buttonTitle: "Gerenciador de Configuração de UI",
+    // [Auto-translated] "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset."
+    buttonDescription: "Configure a Toolbox, as abas, a grade de propriedades e outros elementos da interface, e salve a configuração como um preset reutilizável.",
     // [Auto-translated] "Presets"
     presetsTab: "Presets",
     // [Auto-translated] "Creator Presets"
@@ -215,12 +229,24 @@ export const ptStrings = {
     export: "Exportação",
     // [Auto-translated] "Edit"
     edit: "Editar",
-    // [Auto-translated] "Reset Languages to default"
-    resetLanguages: "Redefinir idiomas para o padrão",
+    // [Auto-translated] "Reset Languages"
+    resetLanguages: "Linguagens de Reinício",
     // [Auto-translated] "Reset all changes"
     resetAll: "Redefinir todas as alterações",
-    // [Auto-translated] "Reset {0} to defaults"
-    resetToDefaults: "Redefinir {0} para os padrões"
+    // [Auto-translated] "Do you really want to reset the settings?"
+    resetConfirmation: "Você realmente quer resetar as configurações?",
+    // [Auto-translated] "Yes, reset the settings"
+    resetConfirmationOk: "Sim, resetem as configurações",
+    // [Auto-translated] "Reset {0}"
+    resetToDefaults: "Resetar {0}",
+    // [Auto-translated] "Default Settings"
+    defaultSettings: "Configurações padrão",
+    // [Auto-translated] "Basic"
+    basic: "Básico",
+    // [Auto-translated] "Advanced"
+    advanced: "Avançado",
+    // [Auto-translated] "Expert"
+    expert: "Especialista"
   }
 };
 const locale = getLocaleStrings("pt");

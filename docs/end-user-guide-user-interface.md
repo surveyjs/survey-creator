@@ -39,8 +39,11 @@ Respondents select one number within a range. Use the Rating Scale type when you
 
 - How to: Use graphic symbols (stars, emojis) for rate values           
 Switch to the **Rating Values** category and select a required **Rating icon**:
+
     <img src="images/survey-creator-rate-type.png" alt="Survey Creator - Change rating icon in Property Grid" width="1448" height="656">
+
 Alternatively, you can change the rate type using an adorner directly on the design surface:
+
     <img src="images/survey-creator-rate-type-using-adorner.png" alt="Survey Creator - Change rate type using an adorner" width="1448" height="562">
 
 <div id="checkbox"></div>
@@ -81,13 +84,15 @@ Use the File Upload type to allow respondents to upload files. Respondents drag 
 
 - How to: Restrict uploaded file types          
 The File Upload type is built upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:            
-    <img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="1448" height="682">
+    
+<img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="1448" height="682">
 
     > Always restrict the allowed file types to prevent possible security vulnerabilities. 
 
 - How to: Enable multiple file selection           
 Switch to the **General** category and select **Enable multiple file upload**:        
-    <img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Enable multiple file upload" width="1448" height="702">
+    
+<img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Enable multiple file upload" width="1448" height="702">
 
 #### Image Picker
 
@@ -97,11 +102,13 @@ Respondents select one or several images or videos from a series. A value associ
 
 - How to: Associate values with images or videos          
 Switch to the **Choices** category and enter the values in the **Choices** table:      
-    <img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="1448" height="650">
+
+<img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="1448" height="650">
 
 - How to: Enable multiple image or video selection           
 Switch to the **General** category and select **Allow multiple selection**:            
-    <img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="1448" height="650">
+
+<img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="1448" height="650">
     
 #### Ranking 
 

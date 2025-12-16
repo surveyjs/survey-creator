@@ -13,7 +13,7 @@ var banner = [
   "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
 export default {
-  input: path.resolve(__dirname, "./src/entries/presets.ts"),
+  input: path.resolve(__dirname, "./src/presets/index.ts"),
   output: {
     file: "build/fesm/ui-preset-editor/index.mjs",
     format: "es",

@@ -245,11 +245,13 @@ jobs:
       - powershell: |
           cd $(Build.SourcesDirectory)/service
           git pull origin master
+          git merge -X ours origin/master
           git fetch origin master --tags --force
           git checkout master
           git add surveyjs.io/App_Data/DocsEditor
           git commit -m "updated survey-creator docs [azurepipelines skip]"
           git pull origin master
+          git merge -X ours origin/master
           git push origin master
         displayName: "Git surveyjs/service push updated docs"
       # - powershell: |
@@ -276,6 +278,7 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-utils
           node ./dist/translateCreator.js
+          node ./dist/translateCreatorPresets.js
         displayName: "survey-utils translate creator"
 
       - powershell: |
@@ -287,6 +290,7 @@ jobs:
           git fetch origin master --tags --force
           git checkout master
           git add packages/survey-creator-core/src/localization
+          git add packages/survey-creator-core/src/presets/localization
           git commit -m "updated survey-creator translation [azurepipelines skip]"
           git pull origin master
           git push origin master

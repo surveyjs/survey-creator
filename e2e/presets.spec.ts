@@ -210,19 +210,24 @@ test.describe(title, () => {
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
     await page.getByRole("button", { name: "New Category" }).click();
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
+    await page.getByRole("textbox", { name: "Name" }).blur();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
+    await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
     await page.waitForTimeout(500);
     await page.getByRole("row", { name: "Custom" }).hover();
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
     await items.getByRole("button", { name: "Add a new item" }).click();
+    await page.getByRole("textbox", { name: "Title", exact: true }).focus();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
+    await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByText("icon-arrowleft-16x16").click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
+    await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
     expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
@@ -230,11 +235,13 @@ test.describe(title, () => {
 
     await hidden.getByRole("button", { name: "Add a new item" }).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
+    await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByTitle("icon-arrowright-16x16").click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
+    await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await hidden.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
   });

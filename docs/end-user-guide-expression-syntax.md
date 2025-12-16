@@ -60,88 +60,78 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{q1.item1}</code></td>
       </tr>
       <tr>
+        <td colspan="3"><b>All Matrices</b></td>
+        <tr>
+          <td><code>{row.columnid}</code></td>
+          <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
+          <td><code>{row.column1}</code></td>
+        </tr>
+        <tr>
+          <td><code>{prevRow.columnid}</code></td>
+          <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+          <td><code>{prevRow.column1}</code></td>
+        </tr>
+        <tr>
+          <td><code>{nextRow.columnid}</code></td>
+          <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+          <td><code>{nextRow.column1}</code></td>
+        </tr>
+        <tr>
+          <td><code>{rowIndex}</code></td>
+          <td>Accesses the row index within the collection of all rows. Starts with 1.</td>
+          <td><code>Row #{rowIndex}</code></td>
+        </tr>
+        <tr>
+          <td><code>{visibleRowIndex}</code></td>
+          <td>Accesses the row index within the collection of visible rows. Starts with 1.</td>
+          <td><code>Row #{visibleRowIndex}</code></td>
+        </tr>
+        <tr>
+          <td><code>{rowName}</code></td>
+          <td>Accesses the row name (the row's Value property). Use this placeholder if you need to distinguish between matrix rows.</td>
+          <td><code>iif({rowName} = 'test', 'Yes', 'No')</code></td>
+        </tr>
+        <tr>
+          <td><code>{rowTitle}</code></td>
+          <td>Accesses the row title (the row's Text property).</td>
+          <td><code>Title: {rowTitle}</code></td>
+        </tr>
+        <tr>
+          <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
+          <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+          <td><code>{matrix1[-1].column1}</code></td>
+        </tr>
+      </tr>
+      <tr>
         <td colspan="3"><b>Single-Select Matrix</b></td>
       </tr>
       <tr>
-        <td><code>{row.columnid}</code></td>
-        <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
-        <td><code>{row.column1}</code></td>
+        <td><code>{matrixid.rowid}</code></td>
+        <td>Accesses the selected value in the specified matrix row.</td>
+        <td><code>{matrix1.row1}</code></td>
       </tr>
       <tr>
-        <td><code>{prevRow.columnid}</code></td>
-        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
-        <td><code>{prevRow.column1}</code></td>
+        <td colspan="3"><b>Multi-Select Matrix and Dynamic Matrix</b></td>
       </tr>
       <tr>
-        <td><code>{nextRow.columnid}</code></td>
-        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
-        <td><code>{nextRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
-        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
-        <td><code>{matrix1[-1].column1}</code></td>
-      </tr>
-      <tr>
-        <td colspan="3"><b>Multi-Select Matrix</b></td>
-      </tr>
-      <tr>
-        <td><code>{row.columnid}</code></td>
-        <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
-        <td><code>{row.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{prevRow.columnid}</code></td>
-        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
-        <td><code>{prevRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{nextRow.columnid}</code></td>
-        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
-        <td><code>{nextRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
-        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
-        <td><code>{matrix1[-1].column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{matrixid.rowid.columnid}</code></td>
-        <td>Accesses an individual matrix cell.</td>
-        <td><code>{matrix1.row1.column1}</code></td>
+        <td><code>{totalRow.columnid}</code></td>
+        <td>Use the <code>totalRow</code> prefix to access a cell in the total matrix row.</td>
+        <td><code>{totalRow.column1}</code></td>
       </tr>
       <tr>
         <td><code>{matrixid-total.columnid}</code></td>
-        <td>Accesses a cell in a total row.</td>
+        <td>Accesses a cell in the total row from outside the matrix.</td>
         <td><code>{matrix1-total.column1}</code></td>
       </tr>
       <tr>
-        <td colspan="3"><b>Dynamic Matrix</b></td>
-      </tr>
-      <tr>
-        <td><code>{row.columnid}</code></td>
-        <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
-        <td><code>{row.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{prevRow.columnid}</code></td>
-        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
-        <td><code>{prevRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{nextRow.columnid}</code></td>
-        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
-        <td><code>{nextRow.column1}</code></td>
+        <td><code>{matrixid.rowid.columnid}</code></td>
+        <td>Accesses an individual cell in a Multi-Select Matrix.</td>
+        <td><code>{matrix1.row1.column1}</code></td>
       </tr>
       <tr>
         <td><code>{dmatrixid[rowindex].columnid}</code></td>
-        <td>Use a zero-based row index to access a specific cell.</td>
+        <td>Accesses an individual cell in a Dynamic Matrix.</td>
         <td><code>{dmatrix1[0].column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{dmatrixid[-1].columnid}</code><br><code>{dmatrixid[-2].columnid}</code><br>...</td>
-        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
-        <td><code>{dmatrix1[-1].column1}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Dynamic Panel</b></td>
@@ -256,7 +246,8 @@ Comparison operators are used to compare two values (or in case of `empty` and `
 | `>` / `greater`  | Compares two values and returns `true` if the first is greater than the second. | `"{q1} > 10"` |
 | `*=` / `contains` / `contain`  | Compares two values and returns `true` if the first value contains the second value within it. | `"{q1} contains 'abc'"` |
 | `notcontains` / `notcontain` | Compares two values and returns `true` if the first value doesn't contain the second value within it. | `"{q1} notcontains 'abc'"` |
-| `anyof` | Compares a value with an array of values and returns `true` if the value is present in the array. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
+| `anyof` | Compares a value with an array of values and returns `true` if the value is present, or compares two arrays and returns `true` if the first array includes any value from the second. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
+| `noneof` | Compares a value with an array of values and returns `true` if the value is absent, or compares two arrays and returns `true` if the first array includes none of the values from the second. | `"{q1} noneof [ 'value1', 'value2', 'value3' ]"` |
 | `allof` | Compares two arrays and returns `true` if the first array includes all values from the second. | `"{q1} allof [ 'value1', 'value2', 'value3' ]"` |
 
 > Comparison operations are case-sensitive.

@@ -180,4 +180,18 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.model.onLocaleChanged();
     }
   }
+
+  public getLicenseText(hasCreatorLicense: boolean, creatorLicenseDateString: string): string {
+    if (!hasLicense?.(8)) {
+      const presetsLicenseDateString = glc?.(8)?.toLocaleDateString?.();
+      if (presetsLicenseDateString) {
+        return getLocString("presets.plugin.license2").replace("{date}", presetsLicenseDateString);
+      }
+      if (hasCreatorLicense) return getLocString("presets.plugin.license");
+      return creatorLicenseDateString ?
+        getLocString("presets.plugin.licenseCreator2").replace("{date}", creatorLicenseDateString) :
+        getLocString("presets.plugin.licenseCreator");
+    }
+    return "";
+  }
 }

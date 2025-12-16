@@ -7,14 +7,14 @@ export const ruStrings = {
     navigationTitle: "Языки",
     // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
     description: "Выберите язык пользовательского интерфейса создателя опросов и целевую цель\nЯзыки для конфигурируемого опроса.",
-    // [Auto-translated] "Creator UI language"
-    creatorUI: "Язык пользовательского интерфейса автора",
+    // [Auto-translated] "Survey Creator UI language"
+    creatorUI: "Язык пользовательского интерфейса создателя опроса",
     // [Auto-translated] "Survey languages"
     surveyLanguages: "Языки опроса",
     // [Auto-translated] "Type to search..."
     searchPlaceholder: "Введите для поиска...",
-    // [Auto-translated] "Translate Survey language names to English"
-    translateToEnglish: "Перевод названий языков опроса на английский"
+    // [Auto-translated] "Translate language names to English"
+    translateToEnglish: "Перевод названий языков на английский"
   },
   tabs: {
     // [Auto-translated] "Configure tabs"
@@ -73,10 +73,10 @@ export const ruStrings = {
     iconName: "Название иконки",
     // [Auto-translated] "JSON object to apply when users select this toolbox item"
     jsonObject: "Объект JSON, который будет применяться при выборе пользователем этого элемента панели инструментов",
-    // [Auto-translated] "Subcategories"
-    subitems: "Подкатегории",
-    // [Auto-translated] "Enable subitems for this question..."
-    enableSubitems: "Включите подпункты для этого вопроса...",
+    // [Auto-translated] "Subitems"
+    subitems: "Подэлементов",
+    // [Auto-translated] "Enable subitems for this question"
+    enableSubitems: "Включите подпункты для этого вопроса",
     // [Auto-translated] "Move as a subitem to..."
     moveAsSubitem: "Переместить в качестве подэлемента в...",
     // [Auto-translated] "Add to Toolbox"
@@ -101,10 +101,10 @@ export const ruStrings = {
     title: "Настройка сетки свойств",
     // [Auto-translated] "Property Grid"
     navigationTitle: "Сетка свойств",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid."
-    description: "Выберите элемент, чтобы настроить его параметры, доступные в сетке свойств.",
-    // [Auto-translated] "Select an element to customize its settings available in the Property Grid"
-    selectElement: "Выберите элемент, чтобы настроить его параметры, доступные в сетке свойств",
+    // [Auto-translated] "Hide, rename, reorder, or change property grouping in the Property Grid."
+    description: "Скрыть, переименовать, изменить порядок или изменить группу свойств в сетке свойств.",
+    // [Auto-translated] "Select a survey element to customize"
+    selectElement: "Выберите элемент опроса для настройки",
     // [Auto-translated] "Property Grid"
     propertyGrid: "Сетка свойств",
     // [Auto-translated] "No categories"
@@ -113,8 +113,8 @@ export const ruStrings = {
     noItemsText: "Перетащите свойства сюда, чтобы отобразить их",
     // [Auto-translated] "Drag properties here to hide them"
     noHiddenItemsText: "Перетащите свойства сюда, чтобы скрыть их",
-    // [Auto-translated] "Unsorted items"
-    hiddenItems: "Неотсортированные товары",
+    // [Auto-translated] "Hidden properties"
+    hiddenItems: "Скрытые свойства",
     // [Auto-translated] "Name"
     categoryName: "Имя",
     // [Auto-translated] "Title"
@@ -125,10 +125,18 @@ export const ruStrings = {
     name: "Имя",
     // [Auto-translated] "Title"
     titleField: "Титул",
-    // [Auto-translated] "Helper Text"
-    descriptionField: "Вспомогательный текст",
-    // [Auto-translated] "Add Custom Category"
-    addCustomCategory: "Добавить пользовательскую категорию"
+    // [Auto-translated] "Helper text"
+    descriptionField: "Текст помощника",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Новая категория"
+  },
+  options: {
+    // [Auto-translated] "Options"
+    title: "Параметры",
+    // [Auto-translated] "Options"
+    navigationTitle: "Параметры",
+    // [Auto-translated] "Detailed configuration settings for Survey Creator."
+    description: "Подробные настройки конфигурации для Survey Creator."
   },
   items: {
     // [Auto-translated] "Add a new item"
@@ -143,8 +151,8 @@ export const ruStrings = {
     newCategory: "Новая категория в",
     // [Auto-translated] "Move to category..."
     moveToCategory: "Перейти в категорию...",
-    // [Auto-translated] "Move to new category..."
-    moveToNewCategory: "Перейти в новую категорию...",
+    // [Auto-translated] "Move to new category"
+    moveToNewCategory: "Переход в новую категорию",
     // [Auto-translated] "Categories"
     categoriesLabel: "Категории",
     // [Auto-translated] "Move To..."
@@ -183,8 +191,8 @@ export const ruStrings = {
     saveExit: "Сохранить и выйти",
     // [Auto-translated] "Back"
     back: "Назад",
-    // [Auto-translated] "Reset to default"
-    resetToDefault: "Сброс до значений по умолчанию",
+    // [Auto-translated] "Reset"
+    resetToDefault: "Сброс",
     // [Auto-translated] "All settings restored to default"
     resetToDefaults: "Все настройки восстановлены по умолчанию",
     // [Auto-translated] "resored to default"
@@ -198,9 +206,15 @@ export const ruStrings = {
     // [Auto-translated] "Save & Exit"
     completeText: "Сохранить и выйти",
     // [Auto-translated] "Back"
-    pagePrevText: "Назад"
+    pagePrevText: "Назад",
+    // [Auto-translated] "Please enter a value."
+    required: "Пожалуйста, введите значение."
   },
   plugin: {
+    // [Auto-translated] "UI Configuration Manager"
+    buttonTitle: "Менеджер конфигурации интерфейса",
+    // [Auto-translated] "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset."
+    buttonDescription: "Настройте Toolbox, вкладки, сетку свойств и другие элементы интерфейса, а также сохраните установку как многоразовый пресет.",
     // [Auto-translated] "Presets"
     presetsTab: "Пресетов",
     // [Auto-translated] "Creator Presets"
@@ -215,12 +229,24 @@ export const ruStrings = {
     export: "Экспорт",
     // [Auto-translated] "Edit"
     edit: "Редактировать",
-    // [Auto-translated] "Reset Languages to default"
-    resetLanguages: "Сбросить настройки «Языки» до значений по умолчанию",
+    // [Auto-translated] "Reset Languages"
+    resetLanguages: "Языки сброса",
     // [Auto-translated] "Reset all changes"
     resetAll: "Сбросить все изменения",
-    // [Auto-translated] "Reset {0} to defaults"
-    resetToDefaults: "Сброс {0} значений по умолчанию"
+    // [Auto-translated] "Do you really want to reset the settings?"
+    resetConfirmation: "Вы действительно хотите сбросить настройки?",
+    // [Auto-translated] "Yes, reset the settings"
+    resetConfirmationOk: "Да, сбросьте настройки",
+    // [Auto-translated] "Reset {0}"
+    resetToDefaults: "Сброс {0}",
+    // [Auto-translated] "Default Settings"
+    defaultSettings: "Настройки по умолчанию",
+    // [Auto-translated] "Basic"
+    basic: "Основной",
+    // [Auto-translated] "Advanced"
+    advanced: "Продвинутый",
+    // [Auto-translated] "Expert"
+    expert: "Эксперт"
   }
 };
 const locale = getLocaleStrings("ru");
