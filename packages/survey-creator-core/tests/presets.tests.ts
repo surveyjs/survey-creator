@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { UIPreset, ICreatorPresetData } from "../src/presets-creator/presets";
+import { UIPreset, ICreatorPresetData } from "../src/ui-presets-creator/presets";
 import { editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 export * from "../src/localization/german";
@@ -27,8 +27,8 @@ test("show/hidetabs", () => {
 test("tabs icons", () => {
   const creator = new CreatorTester();
   expect(creator.tabs).toHaveLength(4);
-  new CreatorPreset({}).apply(creator);
-  const preset = new CreatorPreset({
+  new UIPreset({}).apply(creator);
+  const preset = new UIPreset({
     tabs: {
       items: [{ name: "preview", iconName: "i-preview" }, { name: "designer", iconName: "i-designer" }, { name: "logic" }],
       activeTab: "preview"
