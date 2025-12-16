@@ -90,7 +90,6 @@ export * from "../components/side-bar/side-bar-header-model";
 export * from "../components/side-bar/side-bar-page-model";
 export * from "../components/side-bar/tab-control-model";
 export * from "../components/switcher/switcher";
-export * from "../components/switcher/switcher";
 export * from "../components/component-container/component-container";
 export * from "../utils/events";
 export * from "../utils/utils";

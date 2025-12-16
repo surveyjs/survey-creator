@@ -8,7 +8,6 @@ import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
   static defaultThemeName = "default-light";
-  static defaultPresetName = "expert";
 
   static varBaseUnitFontSize = "--sjs2-base-unit-font-size";
   static varBaseUnitLineHeight = "--sjs2-base-unit-line-height";
@@ -33,7 +32,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     [CreatorThemeModel.varBaseUnitBorderWidth]: 1,
   };
 
-  @property() presetName: string = CreatorThemeModel.defaultPresetName;
   @property() themeName: string = CreatorThemeModel.defaultThemeName;
   @property() scale: number;
   @property() fontScale: number;
