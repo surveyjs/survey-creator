@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Base, SurveyModel, PageModel } from "survey-core";
+import { Base, SurveyModel } from "survey-core";
 import {
   ReactElementFactory,
   Survey,

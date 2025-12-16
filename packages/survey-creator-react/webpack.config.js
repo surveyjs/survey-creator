@@ -68,6 +68,11 @@ const buildPlatformJson = {
       "types": "./typings/entries/index.d.ts",
       "import": "./fesm/survey-creator-react.mjs",
       "require": "./survey-creator-react.js"
+    },
+    "./ui-preset-editor": {
+      "types": "./typings/entries/presets.d.ts",
+      "import": "./fesm/ui-preset-editor/index.mjs",
+      "require": "./ui-preset-editor/index.js"
     }
   },
   peerDependencies: {

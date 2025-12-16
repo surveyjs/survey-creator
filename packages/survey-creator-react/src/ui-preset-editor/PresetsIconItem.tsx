@@ -2,20 +2,17 @@ import * as React from "react";
 import { ItemValue } from "survey-core";
 import {
   ReactElementFactory,
-  Survey,
-  SurveyElementBase,
   SvgIcon,
 } from "survey-react-ui";
-import { PropertyGridViewModel } from "survey-creator-core";
 interface IPresetsIconItemProps {
   item: ItemValue;
 }
-export class PresetsIconItem extends React.Component<any, any> {
+export class PresetsIconItem extends React.Component<IPresetsIconItemProps, any> {
   constructor(props: IPresetsIconItemProps) {
     super(props);
   }
   render() {
-    const item = (this.props as IPresetsIconItemProps).item;
+    const item = this.props.item;
     if (!item) return null;
 
     return (
@@ -29,5 +26,5 @@ export class PresetsIconItem extends React.Component<any, any> {
 }
 
 ReactElementFactory.Instance.registerElement("svc-presets-icon-item", (props) => {
-  return React.createElement(PresetsIconItem, props);
+  return React.createElement(PresetsIconItem, props as IPresetsIconItemProps);
 });

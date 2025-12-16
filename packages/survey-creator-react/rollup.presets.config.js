@@ -20,7 +20,7 @@ export default {
     exports: "named",
     sourcemap: true
   },
-  external: ["survey-core", "survey-creator-core"],
+  external: ["survey-core", "survey-creator-core", "survey-react-ui", "react", "react-dom", "survey-creator-react"],
   plugins: [
     nodeResolve(),
     commonjs(),

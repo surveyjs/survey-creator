@@ -1,21 +1,18 @@
 import * as React from "react";
-import { Base, SurveyModel, PageModel } from "survey-core";
 import {
   ReactElementFactory,
-  Survey,
-  SurveyElementBase,
   SvgIcon,
 } from "survey-react-ui";
 import { getLocString, PropertyGridViewModel } from "survey-creator-core";
 interface IPresetsPropertyGridWrapperProps {
   model: PropertyGridViewModel;
 }
-export class PresetsPropertyGridWrapper extends React.Component<any, any> {
+export class PresetsPropertyGridWrapper extends React.Component<IPresetsPropertyGridWrapperProps, any> {
   constructor(props: IPresetsPropertyGridWrapperProps) {
     super(props);
   }
   render() {
-    const model = (this.props as IPresetsPropertyGridWrapperProps).model;
+    const model = this.props.model;
     if (!model) return null;
 
     return (
@@ -44,5 +41,5 @@ export class PresetsPropertyGridWrapper extends React.Component<any, any> {
 }
 
 ReactElementFactory.Instance.registerElement("svc-presets-property-grid", (props) => {
-  return React.createElement(PresetsPropertyGridWrapper, props);
+  return React.createElement(PresetsPropertyGridWrapper, props as IPresetsPropertyGridWrapperProps);
 });
