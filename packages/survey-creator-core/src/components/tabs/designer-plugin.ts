@@ -166,10 +166,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
   }
 
-  private createSettingsPropertyGridViewModel(definition: ISurveyPropertyGridDefinition, creator: SurveyCreatorModel) {
+  private createSettingsPropertyGridViewModel(id: string, definition: ISurveyPropertyGridDefinition, creator: SurveyCreatorModel) {
     const propertyGrid = new PropertyGridModel(undefined, creator, definition);
     propertyGrid.showOneCategoryInPropertyGrid = true;
-    propertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
+    propertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings:" + id;
     const propertyGridViewModel = new PropertyGridViewModel(propertyGrid, creator);
     propertyGridViewModel.searchEnabled = false;
     return propertyGridViewModel;
@@ -177,7 +177,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private createCreatorSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
-    this.themePropertyGridViewModel = this.createSettingsPropertyGridViewModel(creatorThemeModelPropertyGridDefinition, creator);
+    this.themePropertyGridViewModel = this.createSettingsPropertyGridViewModel("theme", creatorThemeModelPropertyGridDefinition, creator);
     this.themePropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
       this.onThemePropertyGridSurveyCreated(survey);
     };
@@ -187,7 +187,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     if (PredefinedCreatorPresets.length > 0) {
       const presetModel = new CreatorPresetsModel();
-      const presetPropertyGridViewModel = this.createSettingsPropertyGridViewModel(creatorPresetsModelPropertyGridDefinition, creator);
+      const presetPropertyGridViewModel = this.createSettingsPropertyGridViewModel("preset", creatorPresetsModelPropertyGridDefinition, creator);
       presetPropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
         const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
         if (!!presetChooser) {
