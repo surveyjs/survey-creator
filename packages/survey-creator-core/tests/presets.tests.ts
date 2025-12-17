@@ -1,7 +1,8 @@
 import { CreatorTester } from "./creator-tester";
-import { UIPreset, ICreatorPresetData } from "../src/ui-presets-creator/presets";
-import { editorLocalization } from "../src/editorLocalization";
+import { UIPreset, ICreatorPresetData, registerUIPreset } from "../src/ui-presets-creator/presets";
+import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
+import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
@@ -471,4 +472,41 @@ test("set creator options", () => {
   expect(creator.allowZoom).toBeTruthy();
   preset.apply(creator);
   expect(creator.allowZoom).toBeFalsy();
+});
+test("ui preset registration", () => {
+  const creator0 = new CreatorTester();
+  const sideBarPageModel0 = creator0.sidebar.pages.filter(page => page.id === "creatorTheme")[0].componentData;
+  expect(sideBarPageModel0.elements).toHaveLength(1);
+  registerUIPreset(
+    {
+      presetName: "basic",
+      json: {
+        options: {
+          allowZoom: false,
+        }
+      }
+    }
+  );
+  registerUIPreset(
+    {
+      presetName: "advanced",
+      json: {
+        options: {
+          allowZoom: true,
+        }
+      }
+    }
+  );
+  const creator = new CreatorTester();
+  const sideBarPageModel = creator.sidebar.pages.filter(page => page.id === "creatorTheme")[0].componentData;
+  expect(sideBarPageModel.elements).toHaveLength(2);
+  const survey = sideBarPageModel.elements[0].componentData.survey;
+  expect(survey.getQuestionByName("presetName").choices.map(c => [c.value, c.text])).toEqual([["basic", "Basic"], ["advanced", "Advanced"]]);
+
+  expect(creator.allowZoom).toBeTruthy();
+  survey.setValue("presetName", "basic");
+  expect(creator.allowZoom).toBeFalsy();
+
+  survey.setValue("presetName", "advanced");
+  expect(creator.allowZoom).toBeTruthy();
 });
