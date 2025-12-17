@@ -257,23 +257,21 @@ export class SurveyQuestionPresetPropertiesDetail {
           if (prop.tab === tab.name) {
             const obj = { prop: prop, className: clName };
             tabProperties[prop.name] = obj;
-            if (this.classes.indexOf(clName) < 0) {
+            if (prop.index !== undefined && this.classes.indexOf(clName) < 0) {
               filteredTabProperties.push(prop);
             }
           }
         }
       }
     });
-    filteredTabProperties.sort((a, b) => (b.index || 0) - (a.index || 0));
-    const step = 100;
-    let index = 0;
+    const elements = Array<IPropertyEditorInfo>();
     tab.items.forEach((propName) => {
       const prop = tabProperties[propName]?.prop;
       if (prop) {
-        index = this.getIndexForElement(filteredTabProperties, prop.index || 0, index, step);
-        prop.index = step * (index ++);
+        elements.push(prop);
       }
     });
+    this.sortElementsByIndex(elements, filteredTabProperties);
   }
   private addGeneralTabIfNeeded(tabs: {[key: string]: IPropertyTabInfo }, tabOrder: string[], curJsonClasses: ISurveyPropertiesDefinition) {
     const generalTabName = settings.propertyGrid.generalTabName;
@@ -291,7 +289,6 @@ export class SurveyQuestionPresetPropertiesDetail {
     val.forEach(tab => {
       tabOrder.push(tab.name);
     });
-    const sortedTabs = this.getSortedTabs(tabs, tabOrder);
     this.addGeneralTabIfNeeded(tabs, tabOrder, curJsonClasses);
     val.forEach(tab => {
       if (!tabs[tab.name]) {
@@ -302,23 +299,30 @@ export class SurveyQuestionPresetPropertiesDetail {
         tabs[tab.name] = newTab;
       }
     });
-    const step = 100;
-    let index = 0;
-    tabOrder.forEach((tabName) => {
-      const curIndex = tabs[tabName].index || 0;
-      index = this.getIndexForElement(sortedTabs, curIndex, index, step);
-      tabs[tabName].index = step * (index ++);
-    });
+    const sortedElements = this.getSortedTabs(tabs, tabOrder);
+    const elements: Array<IPropertyEditorInfo | IPropertyTabInfo> = [];
+    tabOrder.forEach((tabName) => { elements.push(tabs[tabName]); });
+    this.sortElementsByIndex(elements, sortedElements);
   }
   private getSortedTabs(tabs: {[key: string]: IPropertyTabInfo}, tabOrder: string[]): IPropertyTabInfo[] {
     const res: IPropertyTabInfo[] = [];
     Object.keys(tabs).forEach((name) => {
-      if (tabOrder.indexOf(name) < 0) {
-        res.push(tabs[name]);
+      const tab = tabs[name];
+      if (tab.index !== undefined && tabOrder.indexOf(name) < 0) {
+        res.push(tab);
       }
     });
-    res.sort((a, b) => (b.index || 0) - (a.index || 0));
     return res;
+  }
+  private sortElementsByIndex(elements: Array<IPropertyEditorInfo | IPropertyTabInfo>, sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>): void {
+    sortedElements.sort((a, b) => (b.index || 0) - (a.index || 0));
+    const step = 100;
+    let index = 0;
+    elements.forEach((el) => {
+      const curIndex = el.index || 0;
+      index = this.getIndexForElement(sortedElements, curIndex, index, step);
+      el.index = step * (index ++);
+    });
   }
   private getIndexForElement(sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>, curIndex: number, startIndex: number, step: number): number {
     if (curIndex <= 0) return startIndex;
