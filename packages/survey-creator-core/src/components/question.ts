@@ -37,6 +37,7 @@ import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
 import { SurveyHelper } from "../survey-helper";
+import { DomDocumentHelper } from "../utils/global_variables_utils";
 
 export interface QuestionBannerParams {
   text: string;
@@ -79,6 +80,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
   select(model: QuestionAdornerViewModel, event: IPortableEvent) {
+    const document = DomDocumentHelper.getDocument();
     if (!model.canSelectElement()) return;
     const creator = model.creator;
     const selEl = model.surveyElement;

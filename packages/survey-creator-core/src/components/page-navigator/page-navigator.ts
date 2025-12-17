@@ -5,6 +5,7 @@ import "./page-navigator.scss";
 import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
 import { listComponentCss } from "../list-theme";
+import { DomDocumentHelper } from "../../utils/global_variables_utils";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;
@@ -142,6 +143,7 @@ export class PageNavigatorViewModel extends Base {
     return this.pagesController.creator["pageEditMode"] === "bypage";
   }
   public scrollToPage(page: PageModel) {
+    const document = DomDocumentHelper.getDocument();
     if (this.pageEditMode === "bypage") {
       this.pagesController.currentPage = page;
       this.currentPage = page;
@@ -190,6 +192,7 @@ export class PageNavigatorViewModel extends Base {
     let maxVisiblePage = undefined;
     let maxVisiblePagePart = 0;
     this.pagesController.pages.forEach(page => {
+      const document = DomDocumentHelper.getDocument();
       const pageElement = document.getElementById(page.id);
       if (!!pageElement) {
         const pageTop = pageElement.offsetTop;

@@ -4,6 +4,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
+import { DomDocumentHelper, DomWindowHelper } from "../../utils/global_variables_utils";
 
 const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
@@ -38,6 +39,7 @@ export abstract class JsonEditorBaseModel extends Base {
       this.jsonEditorChangedTimeoutId = -1;
     } else {
       const self: JsonEditorBaseModel = this;
+      const window = DomWindowHelper.getWindow();
       if (!!window) {
         this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
           self.jsonEditorChangedTimeoutId = -1;
@@ -172,6 +174,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       component: "sv-action-bar-item",
       needSeparator: true,
       action: () => {
+        const document = DomDocumentHelper.getDocument();
         if (!document) return;
         if (!this.inputFileElement) {
           this.inputFileElement = document.createElement("input");

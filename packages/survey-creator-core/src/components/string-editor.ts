@@ -7,6 +7,7 @@ import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
+import { DomDocumentHelper, DomWindowHelper } from "../utils/global_variables_utils";
 
 export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
@@ -360,6 +361,7 @@ export class StringEditorViewModelBase extends Base {
     this.compostionInProgress = true;
   }
   public onBeforeInput(event: any): void {
+    const window = DomWindowHelper.getWindow();
     if (!this.compostionInProgress && this.maxLength > 0) {
       const currentValue = event.target.innerText;
       const insertedData = event.data || "";
@@ -390,6 +392,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
+    const window = DomWindowHelper.getWindow();
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
@@ -513,6 +516,8 @@ export class StringEditorViewModelBase extends Base {
 
   public onPaste(event: ClipboardEvent): void {
     if (this.editAsText) {
+      const window = DomWindowHelper.getWindow();
+      const document = DomDocumentHelper.getDocument();
       event.preventDefault();
       // get text representation of clipboard
       let text = event.clipboardData.getData("text/plain");
@@ -547,6 +552,7 @@ export class StringEditorViewModelBase extends Base {
     return true;
   }
   public onKeyUp(event: KeyboardEvent): boolean {
+    const document = DomDocumentHelper.getDocument();
     if (event.keyCode === 9 && event.target === document.activeElement) {
       select(event.target);
     }
@@ -554,6 +560,7 @@ export class StringEditorViewModelBase extends Base {
   }
   private justFocused = false;
   public onMouseUp(event: MouseEvent): boolean {
+    const window = DomWindowHelper.getWindow();
     if (this.justFocused) {
       this.justFocused = false;
       if (!window) return false;

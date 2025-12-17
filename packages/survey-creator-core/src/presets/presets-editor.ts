@@ -1,5 +1,5 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions, getLocString } from "survey-creator-core";
-import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
+import { CreatorPreset, ICreatorPresetData, DomWindowHelper, DomDocumentHelper } from "survey-creator-core";
 import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
@@ -280,10 +280,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return `<div>${getLocString("presets.editor.usageExample")}</div>`;
   }
   public downloadJsonFile(text?: string): void {
+    const document = DomDocumentHelper.getDocument();
     if (!text) text = this.jsonText;
     const jsonBlob = new Blob([text], { type: "application/json" });
-    const elem = window.document.createElement("a");
-    elem.href = window.URL.createObjectURL(jsonBlob);
+    const elem = document.createElement("a");
+    elem.href = URL.createObjectURL(jsonBlob);
     elem.download = "preset.json";
     document.body.appendChild(elem);
     elem.click();
@@ -291,6 +292,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   inputFileElement: HTMLInputElement;
   public loadJsonFile(): void {
+    const document = DomDocumentHelper.getDocument();
     if (!this.inputFileElement) {
       this.inputFileElement = document.createElement("input");
       this.inputFileElement.type = "file";

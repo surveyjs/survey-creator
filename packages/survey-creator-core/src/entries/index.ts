@@ -112,6 +112,7 @@ export * from "../presets-creator/presets-properties";
 export * from "../presets-creator/presets-tabs";
 export * from "../presets-creator/presets-toolbox";
 export * from "../dragdrop-survey-elements";
+export * from "../utils/global_variables_utils";
 
 import "../components/search.scss";
 import "../components/property-panel/property-panel-item.scss";

@@ -8,6 +8,7 @@ import {
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
 import "./json-editor-ace.scss";
+import { DomWindowHelper } from "../../utils/global_variables_utils";
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: any;
@@ -31,6 +32,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
 
   public init(aceEditor: any): void {
+    const window = DomWindowHelper.getWindow();
     this.aceEditor = aceEditor;
     const aceModules = (window["ace"] as any)?.define?.modules;
     if (!(aceModules && aceModules["ace/ext/searchbox"])) {
@@ -122,6 +124,7 @@ export class TabJsonEditorAcePlugin
     return new AceJsonEditorModel(creator);
   }
   public static hasAceEditor(): boolean {
+    const window = DomWindowHelper.getWindow();
     return typeof window !== "undefined" && typeof window["ace"] !== "undefined";
   }
 }

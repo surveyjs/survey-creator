@@ -2,6 +2,7 @@ import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 
 import "./simulator.scss";
+import { DomDocumentHelper, DomWindowHelper } from "../utils/global_variables_utils";
 
 export class SurveySimulatorModel extends Base {
   private surveyChanged() {
@@ -90,10 +91,12 @@ export class SurveySimulatorModel extends Base {
     return this.currZoomScale;
   }
   public activateZoom = () => {
+    const document = DomDocumentHelper.getDocument();
     document.addEventListener("keydown", this.listenTryToZoom);
     document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
   };
   public deactivateZoom = () => {
+    const document = DomDocumentHelper.getDocument();
     document.removeEventListener("keydown", this.listenTryToZoom);
     document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
   };
@@ -126,6 +129,7 @@ export class SurveySimulatorModel extends Base {
     this.currZoomScale = type === "zero" ? 1 : this.currZoomScale * multiplier;
   }
   private zoomSimulator(type: "up" | "down" | "zero", event: any) {
+    const document = DomDocumentHelper.getDocument();
     event.preventDefault();
 
     this.changeZoomScale(type);
@@ -136,6 +140,7 @@ export class SurveySimulatorModel extends Base {
     event.stopPropagation();
   }
   public resetZoomParameters(): void {
+    const document = DomDocumentHelper.getDocument();
     this.currZoomScale = 1;
     const simulator = document.getElementById("svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "";
@@ -201,7 +206,7 @@ export class SurveySimulatorModel extends Base {
   }
 }
 
-export var DEFAULT_MONITOR_DPI = (typeof window !== "undefined" ? window.devicePixelRatio : 1) * 96;
+export var DEFAULT_MONITOR_DPI = (typeof DomWindowHelper.getWindow() !== "undefined" ? DomWindowHelper.getWindow().devicePixelRatio : 1) * 96;
 export var simulatorDevices: {
   [index: string]: {
     cssPixelRatio?: number,

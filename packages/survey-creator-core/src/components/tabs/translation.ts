@@ -22,6 +22,7 @@ import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { listComponentCss } from "../list-theme";
+import { DomDocumentHelper, DomWindowHelper } from "../../utils/global_variables_utils";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -847,6 +848,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private inputFileElement: HTMLInputElement;
   public importFromCSVFileDOM(): void {
+    const document = DomDocumentHelper.getDocument();
     if (!document) return;
     if (!this.inputFileElement) {
       this.inputFileElement = document.createElement("input");
@@ -1321,14 +1323,16 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   public exportToSCVFile(fileName: string) {
+    const window = DomWindowHelper.getWindow();
+    const document = DomDocumentHelper.getDocument();
     if (!window) return;
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
     if (window.navigator["msSaveOrOpenBlob"]) {
       window.navigator["msSaveBlob"](blob, fileName);
     } else {
-      var elem = window.document.createElement("a");
-      elem.href = window.URL.createObjectURL(blob);
+      var elem = document.createElement("a");
+      elem.href = URL.createObjectURL(blob);
       elem.download = fileName;
       document.body.appendChild(elem);
       elem.click();

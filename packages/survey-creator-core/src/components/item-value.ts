@@ -19,6 +19,7 @@ import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
 import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
 import { SurveyHelper } from "../survey-helper";
+import { DomDocumentHelper } from "../utils/global_variables_utils";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
@@ -222,6 +223,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   private focusNextElementToRemove(index) {
     setTimeout(() => {
+      const document = DomDocumentHelper.getDocument();
       const el = document.getElementById(this.question.id);
       const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
