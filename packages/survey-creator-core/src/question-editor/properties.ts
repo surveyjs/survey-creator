@@ -8,8 +8,10 @@ import { JsonObjectProperty, Serializer, JsonMetadataClass, Helpers } from "surv
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { pgTabIcons } from "../property-grid/icons";
+import { get } from "http";
 
 export class SurveyQuestionEditorPropertyDefinition {
+  public className: string;
   public property: JsonObjectProperty;
   public title: string;
   public category: string;
@@ -163,7 +165,7 @@ export class SurveyQuestionProperties {
         if (addedProperties.indexOf(defTab.name) > -1) {
           this.setTabProperties(defTab);
         } else {
-          if (this.addPropertyIntoTab(defTab, true)) {
+          if (this.addPropertyIntoTab(className, defTab, true)) {
             addedProperties.push(defTab.name);
           }
         }
@@ -177,7 +179,7 @@ export class SurveyQuestionProperties {
           defItem.properties[j]["name"] || defItem.properties[j];
         if (addedProperties.indexOf(propertyName) === -1) {
           addedProperties.push(propertyName);
-          this.addPropertyIntoTab(defItem.properties[j]);
+          this.addPropertyIntoTab(className, defItem.properties[j]);
         }
       }
     }
@@ -214,6 +216,7 @@ export class SurveyQuestionProperties {
     }
   }
   private addPropertyIntoTab(
+    className: string,
     defProperty: any,
     isTab: boolean = false
   ): boolean {
@@ -235,6 +238,7 @@ export class SurveyQuestionProperties {
       tabName = defProperty.tab;
     }
     var propertyDefinition = new SurveyQuestionEditorPropertyDefinition();
+    propertyDefinition.className = className;
     propertyDefinition.property = propRes.property;
     propertyDefinition.category =
       !isString && !!defProperty.category ? defProperty.category : "";
@@ -503,14 +507,37 @@ export class SurveyQuestionProperties {
       tabs.push(classRes);
     }
   }
+  private getClassDepth(className: string): number {
+    if (className.indexOf("matrixdropdowncolumn@") === 0)
+      return className.indexOf("@default") > 0 ? 0 : 1;
+    if (className.indexOf("@") > 0) return 0;
+    const classes = this.propertyGridDefinition.classes;
+    if (!classes) return 0;
+    let res = 0;
+    let classInfo = Serializer.findClass(className);
+    while(!!classInfo && !!classInfo.parentName) {
+      className = classInfo.parentName;
+      if (classes[className]) return this.getClassDepth(className) + 1;
+      classInfo = Serializer.findClass(className);
+    }
+    return res;
+  }
   private sortProperties(
     properties: Array<SurveyQuestionEditorPropertyDefinition>
   ) {
     if (!Array.isArray(properties)) return;
-    let index = 0;
+    const classesIndexes: { [key: string]: number } = {};
+    const getIndexByClassName = (className: string): number => {
+      if (classesIndexes[className] === undefined) {
+        let index = this.getClassDepth(className) * 10000;
+        classesIndexes[className] = index;
+      } else {
+        classesIndexes[className] += 1;
+      }
+      return classesIndexes[className];
+    };
     properties.forEach(prop => {
-      prop.index = prop.definedIndex !== undefined ? prop.definedIndex : index;
-      index ++;
+      prop.index = prop.definedIndex !== undefined ? prop.definedIndex : getIndexByClassName(prop.className);
     });
     properties.sort((prop1, prop2): number => {
       if (prop1.index === prop2.index) return 0;
