@@ -1,6 +1,6 @@
 import { QuestionMatrixDynamicModel, glc, hasLicense } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
-import { TabPresetsPlugin } from "../src/presets/presets-plugin";
+import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { getLocString } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/german";
@@ -252,7 +252,7 @@ test("Delete active tab", () => {
 
 test("Preset plugin, getLicenseText method", () => {
   const creator = new SurveyCreatorModel({});
-  const plugin = new TabPresetsPlugin(creator);
+  const plugin = new UIPresetEditor(creator);
   const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
   const glcMock = glc as jest.MockedFunction<typeof glc>;
 

@@ -2,7 +2,7 @@ import { ItemValue, QuestionDropdownModel, Serializer } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
-import { UIPreset } from "../src/presets-creator/presets";
+import { UIPreset } from "../src/ui-presets-creator/presets";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";

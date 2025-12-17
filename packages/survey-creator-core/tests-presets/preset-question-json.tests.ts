@@ -1,4 +1,4 @@
-import { QuestionPresetJsonModel } from "../src/presets/preset-question-json";
+import { QuestionPresetJsonModel } from "../src/ui-preset-editor/preset-question-json";
 import { SurveyModel, CustomError } from "survey-core";
 
 class TestQuestionPresetJsonModel extends QuestionPresetJsonModel {
