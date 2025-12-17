@@ -194,7 +194,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("preset.names." + theme) }));
         }
       };
-      presetPropertyGridViewModel.searchEnabled = false;
       presetPropertyGridViewModel.setObject(presetModel);
       presetModel.onPresetSelected.add((sender, options) => {
         new UIPreset(options.preset.json).apply(creator);
