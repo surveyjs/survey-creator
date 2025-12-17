@@ -1,11 +1,16 @@
 
-export type ConfigsHash<T> = { [index: string]: T | boolean, __surveyjs_internal_themes_hash: boolean };
+export type ConfigsHash<T> = {
+  [index: string]: T | boolean,
+  __surveyjs_internal_themes_hash?: boolean,
+  __surveyjs_internal_configs_hash?: boolean,
+};
 export function registerConfig<T>(registerConfigCallback: (config: T) => void, ...configs: Array<T | ConfigsHash<T>>) {
   configs.forEach(config => {
-    if ((config as ConfigsHash<T>).__surveyjs_internal_themes_hash) {
+    if ((config as ConfigsHash<T>).__surveyjs_internal_themes_hash
+    || (config as ConfigsHash<T>).__surveyjs_internal_configs_hash) {
       const configsHash = config as ConfigsHash<T>;
       Object.keys(configsHash).forEach(key => {
-        if (key != "__surveyjs_internal_configs_hash" && key != "default" && typeof configsHash[key] !== "boolean") {
+        if (key.indexOf("__surveyjs_internal_") != 0 && key != "default" && typeof configsHash[key] !== "boolean") {
           registerConfigCallback(configsHash[key]);
         }
       });
