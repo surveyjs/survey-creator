@@ -1,6 +1,6 @@
 
 export type ConfigsHash<T> = {
-  [index: string]: T | boolean,
+  [index: string]: T | boolean | undefined,
   __surveyjs_internal_themes_hash?: boolean,
   __surveyjs_internal_configs_hash?: boolean,
 };
