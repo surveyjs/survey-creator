@@ -191,7 +191,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       presetPropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
         const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
         if (!!presetChooser) {
-          presetChooser.choices = PredefinedCreatorPresets.map(theme => ({ value: theme, text: getLocString("preset.names." + theme) }));
+          presetChooser.choices = PredefinedCreatorPresets.map(preset => ({ value: preset, text: getLocString("preset.names." + preset) }));
         }
       };
       presetPropertyGridViewModel.setObject(presetModel);
