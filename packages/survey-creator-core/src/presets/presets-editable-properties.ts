@@ -247,7 +247,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   private updateTabProperties(curJsonClasses: ISurveyPropertiesDefinition, tab: IPropertyGridTabInfo) {
     if (!Array.isArray(tab.items)) return;
     const tabProperties: { [key: string]: { prop: IPropertyEditorInfo, className: string } } = {};
-    const filteredTabProperties: Array< { prop: IPropertyEditorInfo, className: string }> = [];
+    const filteredTabProperties: IPropertyEditorInfo[] = [];
     Object.keys(curJsonClasses).forEach(clName => {
       if (this.allClasses.indexOf(clName) < 0) return;
       const props = curJsonClasses[clName].properties;
@@ -258,19 +258,19 @@ export class SurveyQuestionPresetPropertiesDetail {
             const obj = { prop: prop, className: clName };
             tabProperties[prop.name] = obj;
             if (this.classes.indexOf(clName) < 0) {
-              filteredTabProperties.push(obj);
+              filteredTabProperties.push(prop);
             }
           }
         }
       }
     });
-    filteredTabProperties.sort((a, b) => (b.prop.index || 0) - (a.prop.index || 0));
+    filteredTabProperties.sort((a, b) => (b.index || 0) - (a.index || 0));
     const step = 100;
     let index = 0;
     tab.items.forEach((propName) => {
       const prop = tabProperties[propName]?.prop;
       if (prop) {
-        index = this.getIndexForProperty(filteredTabProperties, prop.index || 0, index, step);
+        index = this.getIndexForElement(filteredTabProperties, prop.index || 0, index, step);
         prop.index = step * (index ++);
       }
     });
@@ -306,7 +306,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     let index = 0;
     tabOrder.forEach((tabName) => {
       const curIndex = tabs[tabName].index || 0;
-      index = this.getIndexForTab(sortedTabs, curIndex, index, step);
+      index = this.getIndexForElement(sortedTabs, curIndex, index, step);
       tabs[tabName].index = step * (index ++);
     });
   }
@@ -320,26 +320,14 @@ export class SurveyQuestionPresetPropertiesDetail {
     res.sort((a, b) => (b.index || 0) - (a.index || 0));
     return res;
   }
-  private getIndexForTab(sortedTabs: IPropertyTabInfo[], curIndex: number, startIndex: number, step: number): number {
+  private getIndexForElement(sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>, curIndex: number, startIndex: number, step: number): number {
     if (curIndex <= 0) return startIndex;
-    for (let i = sortedTabs.length - 1; i >= 0; i--) {
-      const tab = sortedTabs[i];
-      const tabIndex = tab.index || 0;
-      if (tabIndex > 0 && tabIndex < curIndex) {
-        tab.index = step * (startIndex ++);
-        sortedTabs.splice(i, 1);
-      }
-    }
-    return startIndex;
-  }
-  private getIndexForProperty(propsInfo: { prop: IPropertyEditorInfo, className: string }[], curIndex: number, startIndex: number, step: number): number {
-    if (curIndex <= 0) return startIndex;
-    for (let i = propsInfo.length - 1; i >= 0; i--) {
-      const info = propsInfo[i];
-      const index = info.prop.index || 0;
+    for (let i = sortedElements.length - 1; i >= 0; i--) {
+      const prop = sortedElements[i];
+      const index = prop.index || 0;
       if (index > 0 && index < curIndex) {
-        info.prop.index = step * (startIndex ++);
-        propsInfo.splice(i, 1);
+        prop.index = step * (startIndex ++);
+        sortedElements.splice(i, 1);
       }
     }
     return startIndex;
