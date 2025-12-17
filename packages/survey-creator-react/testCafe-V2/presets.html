@@ -22,9 +22,10 @@
   <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
   <script src="../node_modules/survey-creator-core/ui-preset-editor/index.js" defer></script>
+  <script src="../node_modules/survey-creator-core/ui-presets/index.js"></script>
   <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
   <script src="../build/survey-creator-react.js" defer></script>
-  <script src="../build/survey-creator-react-presets.js" defer></script>
+  <script src="../build/survey-creator-ui-preset-editor-react.js" defer></script>
   <script src="./sc.js" defer></script>
 </head>
 
@@ -35,6 +36,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+    SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     creator.tabResponsivenessMode = "menu";
     window["Survey"].settings.animationEnabled = false;
