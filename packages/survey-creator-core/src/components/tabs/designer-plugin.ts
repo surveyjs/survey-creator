@@ -181,7 +181,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.themePropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
       this.onThemePropertyGridSurveyCreated(survey);
     };
-    const sidebarPageModelelements = [
+    const sidebarPageModelElements = [
       { componentName: "svc-property-grid", componentData: this.themePropertyGridViewModel },
     ];
 
@@ -199,13 +199,13 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         new UIPreset(options.preset.json).apply(creator);
         this.openCreatorThemeSettings();
       });
-      sidebarPageModelelements.unshift(
+      sidebarPageModelElements.unshift(
         { componentName: "svc-property-grid", componentData: presetPropertyGridViewModel }
       );
     }
 
     const sidebarPageModel = new ComponentContainerModel();
-    sidebarPageModel.elements = sidebarPageModelelements;
+    sidebarPageModel.elements = sidebarPageModelElements;
     this.settingsPropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-component-container", sidebarPageModel);
     this.settingsPropertyGridTab.locTileName = "ed.creatorSettingTitle";
     this.settingsPropertyGridTab.activateCallback = () => {
