@@ -6,8 +6,6 @@ import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
 import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 import SurveyCreatorUIPreset from "survey-creator-core/ui-presets";
 import { registerUIPreset } from 'survey-creator-core';
-registerUIPreset(SurveyCreatorUIPreset);
-registerCreatorTheme(SurveyCreatorTestTheme);
 @Component({
   selector: "test-theme-preview",
   templateUrl: "./test.component.html",
@@ -19,6 +17,8 @@ export class PresetsComponent extends TestDefaultComponent {
   }
   protected override getSlk(): boolean { return true }
   protected override createCreator(): void {
+    registerUIPreset(SurveyCreatorUIPreset);
+    registerCreatorTheme(SurveyCreatorTestTheme);
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
     this.creator.tabResponsivenessMode = "menu";
