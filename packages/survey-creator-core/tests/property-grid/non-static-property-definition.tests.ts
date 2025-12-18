@@ -191,3 +191,33 @@ test("Support matrixdropdowncolumn@selectbase", () => {
   expect(choicesQuestions[1].name).toBe("choicesFromQuestion");
   expect(choicesQuestions[2].name).toBe("showSelectAllItem");
 });
+test("Incorrect order in general tab with preset indeces", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question, undefined, {
+    autoGenerateProperties: false,
+    classes: {
+      question: {
+        properties: [
+          { name: "name", index: 100 },
+          { name: "title", index: 200 },
+          { name: "description", index: 300 }
+        ]
+      },
+      text: {
+        properties: ["inputType", "maxLength"]
+      }
+    }
+  });
+  const survey = propertyGrid.survey;
+  const panels = survey.getAllPanels();
+  expect(panels).toHaveLength(1);
+  expect(panels[0].name).toBe("general");
+
+  const generalQuestions = panels[0].elements;
+  expect(generalQuestions).toHaveLength(5);
+  expect(generalQuestions[0].name).toBe("name");
+  expect(generalQuestions[1].name).toBe("title");
+  expect(generalQuestions[2].name).toBe("description");
+  expect(generalQuestions[3].name).toBe("inputType");
+  expect(generalQuestions[4].name).toBe("maxLength");
+});
