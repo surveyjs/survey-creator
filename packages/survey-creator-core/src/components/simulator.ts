@@ -138,7 +138,7 @@ export class SurveySimulatorModel extends Base {
     event.stopPropagation();
   }
   public resetZoomParameters(): void {
-    const root = this.survey.rootElement.getRootNode() || DomDocumentHelper.getDocument();
+    const root = this.survey.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
     if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     this.currZoomScale = 1;
     const simulator = root.querySelector("#svd-simulator-wrapper");
