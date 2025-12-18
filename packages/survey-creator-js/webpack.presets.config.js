@@ -18,7 +18,7 @@ const banner = [
 ].join("\n");
 
 module.exports = function (options) {
-  const buildPath = __dirname + "/build/";
+  const buildPath = __dirname + "/build/ui-preset-editor/";
   const isProductionBuild = options.buildType === "prod";
   const emitDeclarations = !!options.emitDeclarations;
   const emitNonSourceFiles = !!options.emitNonSourceFiles;
@@ -31,7 +31,7 @@ module.exports = function (options) {
   const config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey-creator-ui-preset-editor-js": path.resolve(__dirname, "./entries/presets.ts")
+      "index": path.resolve(__dirname, "./entries/presets.ts")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
