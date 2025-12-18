@@ -121,7 +121,15 @@ var buildPlatformJson = {
       "types": "./ui-preset-editor/index.d.ts",
       "import": "./fesm/ui-preset-editor/index.mjs",
       "require": "./ui-preset-editor/index.js"
-    }
+    },
+    "./ui-preset-editor/i18n": {
+      "import": "./fesm/ui-preset-editor/i18n/index.mjs",
+      "require": "./ui-preset-editor/i18n/index.js"
+    },
+    "./ui-preset-editor/i18n/*": {
+      "import": "./fesm/ui-preset-editor/i18n/*.mjs",
+      "require": "./ui-preset-editor/i18n/*.js"
+    },
   },
   devDependencies: {},
 };
