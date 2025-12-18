@@ -129,20 +129,19 @@ export class SurveySimulatorModel extends Base {
     this.currZoomScale = type === "zero" ? 1 : this.currZoomScale * multiplier;
   }
   private zoomSimulator(type: "up" | "down" | "zero", event: any) {
-    const document = DomDocumentHelper.getDocument();
+    const root = event.target?.getRootNode() || DomDocumentHelper.getDocument();
+    if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     event.preventDefault();
-
     this.changeZoomScale(type);
-
-    const simulator = document.getElementById("svd-simulator-wrapper");
+    const simulator = root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "scale(" + this.currZoomScale + ")";
-
     event.stopPropagation();
   }
   public resetZoomParameters(): void {
-    const document = DomDocumentHelper.getDocument();
+    const root = this.survey.rootElement.getRootNode() || DomDocumentHelper.getDocument();
+    if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     this.currZoomScale = 1;
-    const simulator = document.getElementById("svd-simulator-wrapper");
+    const simulator = root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "";
   }
 

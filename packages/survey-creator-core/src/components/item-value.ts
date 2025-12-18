@@ -223,8 +223,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   private focusNextElementToRemove(index) {
     setTimeout(() => {
-      const document = DomDocumentHelper.getDocument();
-      const el = document.getElementById(this.question.id);
+      const root = this.creator.rootElement.getRootNode() || DomDocumentHelper.getDocument();
+      if (!(root instanceof Document || root instanceof ShadowRoot)) return;
+      const el = root.querySelector("#" + this.question.id);
       const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
     }, 100

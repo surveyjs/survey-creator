@@ -192,8 +192,9 @@ export class PageNavigatorViewModel extends Base {
     let maxVisiblePage = undefined;
     let maxVisiblePagePart = 0;
     this.pagesController.pages.forEach(page => {
-      const document = DomDocumentHelper.getDocument();
-      const pageElement = document.getElementById(page.id);
+      const root = viewPort.getRootNode() || DomDocumentHelper.getDocument();
+      if (!(root instanceof Document || root instanceof ShadowRoot)) return;
+      const pageElement = root.querySelector("#" + page.id);
       if (!!pageElement) {
         const pageTop = pageElement.offsetTop;
         const pageBottom = pageTop + pageElement.clientHeight;
