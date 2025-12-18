@@ -12,6 +12,12 @@ export interface ICreatorTheme {
 export const PredefinedCreatorThemes: string[] = ["default-light"];
 export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
 
+/**
+ * Registers Survey Creator themes to make them available for customization in the Survey Creator UI.
+ *
+ * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
+ * @param themes One or more Survey Creator theme configuations separated by commas, or an object containing multiple configurations.
+ */
 export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme> | ICreatorTheme>) {
   const importedThemeNames = [];
   registerConfig((theme: ICreatorTheme) => {

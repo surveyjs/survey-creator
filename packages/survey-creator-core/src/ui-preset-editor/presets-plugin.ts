@@ -3,6 +3,10 @@ import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandl
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 //import { basic, advanced, expert } from "./default-settings";
+
+/**
+ * A class that instantiates the Preset Editor and provides APIs to manage its elements.
+ */
 export class UIPresetEditor implements ICreatorPlugin {
   public model: CreatorPresetEditorModel;
   public static iconName = "icon-settings";
@@ -52,19 +56,14 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   /**
-   * An event that is raised when...
+   * An event raised when a user clicks **Save & Exit** in the Preset Editor.
    *
    * Parameters:
    *
    * - `sender`: `UIPresetEditor`\
    * A `UIPresetEditor` instance that raised the event.
-   * - `options.preset`: [`ICreatorPresetData`](https://surveyjs.io/form-library/documentation/api-reference/...)\
-   * A selected theme.
-   *
-   * [View Demo](https://surveyjs.io/survey-creator/examples/.../ (linkStyle))
-   * @see availableThemes
-   * @see addTheme
-   * @see removeTheme
+   * - `options.preset`: `ICreatorPresetData`\
+   * A preset configuration that was applied to the Survey Creator.
    */
   public onPresetSaved = new EventBase<UIPresetEditor, { preset: ICreatorPresetData }>();
 

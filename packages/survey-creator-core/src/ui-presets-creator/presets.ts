@@ -40,6 +40,10 @@ export interface ICreatorPresetConfig {
 export const PredefinedCreatorPresets: string[] = [];
 export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
 
+/**
+ * Registers UI presets to make them available for customization in the Preset Editor UI.
+ * @param presets One or more UI preset configuations separated by commas, or an object containing multiple configurations.
+ */
 export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
   const importedPresetNames: string[] = [];
   registerConfig((preset: ICreatorPresetConfig) => {
@@ -48,7 +52,9 @@ export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetCon
   }, ...presets);
   sortDefaultConfigs(defaultCreatorPresetsOrder, importedPresetNames, PredefinedCreatorPresets);
 }
-
+/**
+ * A class that instantiates a UI preset and provides an API to apply it.
+ */
 export class UIPreset extends CreatorPresetBase {
   public constructor(json: ICreatorPresetData) {
     super();
@@ -59,12 +65,8 @@ export class UIPreset extends CreatorPresetBase {
     return <ICreatorPresetData>this.json;
   }
   /**
-   * A method that applies the preset to the Creator instance.
-   *
-   * Parameters:
-   *
-   * - `creator`: `SurveyCreatorModel`\
-   * A `SurveyCreatorModel` instance that the preset is applied to.
+   * Applies the preset to a Survey Creator instance.
+   * @param creator A [`SurveyCreatorModel`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator) instance to which the preset is applied.
    */
   public applyTo(creator: SurveyCreatorModel): void {
     super.apply(creator, false);
