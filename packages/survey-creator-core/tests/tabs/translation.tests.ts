@@ -2371,3 +2371,44 @@ test("Change translation sidebar caption in the code, Bug#7154", () => {
   sidebar.caption = "";
   expect(sidebar.caption).toBe("Language Settings");
 });
+test("Error on getting placeholder, Bug#7327", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrix",
+        name: "q1",
+        columns: [
+          {
+            value: "c1",
+            text: {
+              default: "Column 1",
+              de: "Column 1 (DE)"
+            }
+          }
+        ],
+        rows: [
+          {
+            value: "r1",
+            text: {
+              default: "Row 1",
+              de: "Row 1 (DE)"
+            }
+          }
+        ],
+        cells: {
+          default: {
+            c1: "Zelltext 1"
+          },
+          r1: {}
+        }
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  const placeholders: string[] = [];
+  translation.root.allLocItems.forEach(item => placeholders.push(item.getPlaceholder("de")));
+  expect(placeholders).toContain("Translation...");
+});
