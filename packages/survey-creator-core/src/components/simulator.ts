@@ -133,7 +133,7 @@ export class SurveySimulatorModel extends Base {
     if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     event.preventDefault();
     this.changeZoomScale(type);
-    const simulator = root.querySelector("#svd-simulator-wrapper");
+    const simulator = <HTMLElement>root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "scale(" + this.currZoomScale + ")";
     event.stopPropagation();
   }
@@ -141,7 +141,7 @@ export class SurveySimulatorModel extends Base {
     const root = this.survey.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
     if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     this.currZoomScale = 1;
-    const simulator = root.querySelector("#svd-simulator-wrapper");
+    const simulator = <HTMLElement>root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "";
   }
 

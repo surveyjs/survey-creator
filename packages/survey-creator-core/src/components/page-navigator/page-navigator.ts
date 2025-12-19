@@ -194,7 +194,7 @@ export class PageNavigatorViewModel extends Base {
     this.pagesController.pages.forEach(page => {
       const root = viewPort?.getRootNode() || DomDocumentHelper.getDocument();
       if (!(root instanceof Document || root instanceof ShadowRoot)) return;
-      const pageElement = root.querySelector("#" + page.id);
+      const pageElement = <HTMLElement>root.querySelector("#" + page.id);
       if (!!pageElement) {
         const pageTop = pageElement.offsetTop;
         const pageBottom = pageTop + pageElement.clientHeight;
