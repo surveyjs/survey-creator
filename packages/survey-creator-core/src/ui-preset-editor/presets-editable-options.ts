@@ -97,7 +97,11 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         this.patchElements(element.elements);
       } else {
         this.optionsList.push(element.name);
-        element.title = element.name;
+        element.title = editorLocalization.getString("presets.options.o." + element.name);
+        const help = editorLocalization.getString("presets.options.ohelp." + element.name);
+        if (help != element.name) {
+          element.description = help;
+        }
       }
       if (element.type === "boolean") {
         element.renderAs = "checkbox";

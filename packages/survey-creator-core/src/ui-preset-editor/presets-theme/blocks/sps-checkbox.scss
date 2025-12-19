@@ -89,6 +89,10 @@
     fill $creator-transition-duration;
 }
 
+.sps-checkbox.sd-checkbox--label-rendered {
+  gap: 0;
+}
+
 .sps-checkbox--checked {
   .sps-checkbox__rectangle {
     background: var(--sjs2-color-control-check-true-default-bg, #19B394);

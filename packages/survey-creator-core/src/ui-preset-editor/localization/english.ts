@@ -73,6 +73,14 @@ export const enStrings = {
     title: "Options",
     navigationTitle: "Options",
     description: "Detailed configuration settings for Survey Creator.",
+    o: {
+      maxRows: "Maximum number of matrix rows",
+      allowZoom: "Enable zoom controls",
+    },
+    ohelp: {
+      maxRows: "Specifies the number of rows that survey designers can add to Single-Select Matrix and Multi-Select Matrix questions.",
+      allowZoom: "Controls whether the Zoom In, Zoom Out, and Zoom to 100% buttons are available.",
+    }
   },
   items: {
     addNewItem: "Add a new item",
