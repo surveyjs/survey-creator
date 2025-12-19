@@ -2,12 +2,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "survey-creator-core": [
+      "survey-creator-js": [
         "./build"
       ]
     }
   },
   "include": [
-    "./src/entries/presets.ts"
+    "./entries/presets.ts"
   ]
 }

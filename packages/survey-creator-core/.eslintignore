@@ -3,6 +3,6 @@ build/
 doc_generator/
 node_modules/
 webpack.config.js
-webpack.presets.config.js
+webpack.ui-preset-editor.config.js
 creator-themes-import.js
 creator-themes-update-fallback.js

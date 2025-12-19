@@ -1,5 +1,5 @@
 import { QuestionMatrixDynamicModel } from "survey-core";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { CreatorBase } from "../src/creator-base";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";

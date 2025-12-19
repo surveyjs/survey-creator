@@ -341,9 +341,9 @@ test("Set propertyGridNavigationMode property by options", (): any => {
 test("creator theme & settings property grids & creator.locale, bug#7130", () => {
   const creator = new CreatorTester();
   const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
-  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Theme name");
+  expect(designerPlugin["themePropertyGridViewModel"].survey.getQuestionByName("themeName").title).toBe("Theme name");
   creator.locale = "fr";
-  expect(designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName").title).toBe("Nom du thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(designerPlugin["themePropertyGridViewModel"].survey.getQuestionByName("themeName").title).toBe("Nom du thème"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   creator.locale = "en";
 });
 

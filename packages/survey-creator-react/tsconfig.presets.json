@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "survey-creator-core": [
+      "survey-creator-react": [
         "./build"
       ]
     }
