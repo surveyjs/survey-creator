@@ -1,0 +1,21 @@
+{
+    "name": "survey-creator-js-example",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "survey-core": "../../../../survey-library/packages/survey-core/build",
+        "survey-js-ui": "../../../../survey-library/packages/survey-js-ui/build",
+        "survey-creator-core": "../../survey-creator-core/build",
+        "survey-creator-js": "../build"
+    },
+    "devDependencies": {
+        "vite": "^4.5.9",
+        "vite-plugin-node-polyfills": "latest"
+    }
+}

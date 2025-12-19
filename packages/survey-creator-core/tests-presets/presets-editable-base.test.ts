@@ -1,6 +1,6 @@
 import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
-import { CreatorPresetEditableList } from "../src/presets/presets-editable-list";
-import { CreatorPresetBase } from "../src/presets-creator/presets-base";
+import { CreatorPresetEditableList } from "../src/ui-preset-editor/presets-editable-list";
+import { CreatorPresetBase } from "../src/ui-presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
 
 // Mock settings object

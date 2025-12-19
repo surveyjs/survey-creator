@@ -1,8 +1,10 @@
 import { ItemValue, QuestionDropdownModel, Serializer } from "survey-core";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
-import { CreatorPreset } from "../src/presets-creator/presets";
+import { UIPreset } from "../src/ui-presets-creator/presets";
+import { SurveyQuestionPresetPropertiesDetail } from "../src/ui-preset-editor/presets-editable-properties";
+import { ISurveyPropertiesDefinition } from "../src/question-editor/definition";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -85,10 +87,12 @@ test("Preset edit model, property grid, apply", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   propDef = editor.preset.getJson().propertyGrid?.definition;
   const pageProps = propDef?.classes["page"];
-  expect(pageProps?.tabs).toHaveLength(0);
+  expect(pageProps.tabs).toHaveLength(1);
+  expect(pageProps.tabs).toEqual([{ name: "layout", visible: false }]);
   expect(pageProps?.properties).toHaveLength(0);
   const panelBaseProps = propDef?.classes["panelbase"];
-  expect(panelBaseProps?.tabs).toHaveLength(1);
+  expect(panelBaseProps?.tabs).toHaveLength(3);
+  expect(panelBaseProps?.tabs).toEqual([{ name: "general", index: 0 }, { name: "questionSettings", index: 100 }, { name: "validation", index: 400 }]);
   expect(panelBaseProps?.properties).toHaveLength(3);
   const creator = editor.creator;
   creator.JSON = { pages: [{ name: "page1" }] };
@@ -249,6 +253,11 @@ test("Preset edit model, Change localization strings title&description", () => {
   properties.visibleRows[1].detailPanel.getQuestionByName("description").value = "My Input Type description";
 
   expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const propDef = editor.preset.getJson().propertyGrid?.definition;
+  expect(propDef).toBeTruthy();
+  expect(propDef?.classes["question"].properties.find(p => p.name == "name").index).toBe(0);
+  expect(propDef?.classes["question"].properties.find(p => p.name == "title").index).toBe(200);
+  expect(propDef?.classes["text"].properties.find(p => p.name == "inputType").index).toBe(100);
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.pe.question).toBeTruthy();
@@ -432,7 +441,7 @@ test("Property import and defaults", () => {
 });
 
 test("Properties and applied presets", () => {
-  const preset = new CreatorPreset({
+  const preset = new UIPreset({
     "propertyGrid": {
       "definition": {
         "autoGenerateProperties": false,
@@ -517,4 +526,124 @@ test("Properties reset to defaults", () => {
   selector.value = "slider";
   expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
   expect(hidden.value).toEqual([]);
+});
+test("Properties & tabs order test", () => {
+  const classes: any = {
+    question: {
+      properties: ["name", "title", "description", "visible",
+        { name: "layout", tab: "layout" },
+        { name: "visibleIf", tab: "logic", index: 100 },
+        { name: "enableIf", tab: "logic", index: 200 },
+        { name: "requiredIf", tab: "logic", index: 300 }
+      ],
+      tabs: [
+        { name: "layout", index: 100 },
+        { name: "logic", index: 200 },
+      ]
+    },
+    selectbase: {
+      properties: [{ name: "choices", tab: "choices" }, { name: "choicesByUrl", tab: "choicesByUrl" }],
+      tabs: [
+        { name: "choices", index: 10 },
+        { name: "choicesByUrl", index: 11 }
+      ]
+    },
+    ranking: {
+      properties: ["selectToRankEnabled", "selectToRankAreasLayout"],
+    },
+    slider: {
+      properties: [
+        { name: "sliderType", tab: "sliderSettings" },
+        { name: "min", tab: "sliderSettings" },
+        { name: "max", tab: "sliderSettings" },
+        { name: "step", tab: "sliderSettings" },
+        { name: "minValueExpression", tab: "logic", index: 210 },
+        { name: "maxValueExpression", tab: "logic", index: 220 },
+      ],
+      tabs: [{ name: "sliderSettings", index: 10 }]
+    }
+  };
+  const definition: ISurveyPropertiesDefinition = { "classes": classes };
+  const properties = new SurveyQuestionPresetPropertiesDetail("ranking", definition);
+  properties.updateCurrentJson([
+    {
+      name: "general",
+      items: ["name", "title", "visible", "selectToRankEnabled", "selectToRankAreasLayout", "description"],
+    },
+    {
+      name: "choices",
+      items: ["choices", "choicesByUrl"]
+    },
+    { name: "layout", items: ["layout"] },
+    {
+      name: "logic",
+      items: ["visibleIf", "enableIf", "requiredIf"]
+    }
+  ]);
+  expect(classes.question.tabs).toHaveLength(3);
+  expect(classes.question.tabs[0]).toEqual({ name: "general", index: 0 });
+  expect(classes.question.tabs[1]).toEqual({ name: "layout", index: 400 });
+  expect(classes.question.tabs[2]).toEqual({ name: "logic", index: 500 });
+  expect(classes.selectbase.tabs).toHaveLength(1);
+  expect(classes.selectbase.tabs[0]).toEqual({ name: "choices", index: 100 });
+  expect(classes.ranking.tabs).toBeFalsy();
+  expect(classes.slider.tabs).toHaveLength(1);
+  expect(classes.slider.tabs[0]).toEqual({ name: "sliderSettings", index: 200 });
+  expect(classes.question.properties).toHaveLength(8);
+  expect(classes.question.properties).toEqual([
+    { name: "name", tab: "general", index: 0 },
+    { name: "title", tab: "general", index: 100 },
+    { name: "description", tab: "general", index: 500 },
+    { name: "visible", tab: "general", index: 200 },
+    { name: "layout", tab: "layout", index: 0 },
+    { name: "visibleIf", tab: "logic", index: 0 },
+    { name: "enableIf", tab: "logic", index: 100 },
+    { name: "requiredIf", tab: "logic", index: 400 }
+  ]);
+  expect(classes.selectbase.properties).toHaveLength(2);
+  expect(classes.selectbase.properties).toEqual([
+    { name: "choices", tab: "choices", index: 0 },
+    { name: "choicesByUrl", tab: "choices", index: 100 }
+  ]);
+  expect(classes.ranking.properties).toHaveLength(2);
+  expect(classes.ranking.properties).toEqual([
+    { name: "selectToRankEnabled", tab: "general", index: 300 },
+    { name: "selectToRankAreasLayout", tab: "general", index: 400 }
+  ]);
+  expect(classes.slider.properties).toHaveLength(6);
+  expect(classes.slider.properties).toEqual([
+    { name: "sliderType", tab: "sliderSettings" },
+    { name: "min", tab: "sliderSettings" },
+    { name: "max", tab: "sliderSettings" },
+    { name: "step", tab: "sliderSettings" },
+    { name: "minValueExpression", tab: "logic", index: 200 },
+    { name: "maxValueExpression", tab: "logic", index: 300 }
+  ]);
+});
+test("Properties categories order", () => {
+  const editor = new CreatorPresetEditorModel();
+
+  const survey = editor.model;
+
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+
+  selector.value = "ranking";
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
+  selector.value = "slider";
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
+
+  categories.visibleRows[0].showDetailPanel();
+  const properties = categories.visibleRows[0].detailPanel.getQuestionByName("properties");
+  const value = [...properties.value];
+  value.splice(0, 1);
+  properties.value = value;
+
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["title", "description", "visible"]);
+  selector.value = "ranking";
+  expect(categories.value.map(c=> c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["title", "description", "visible"]);
 });

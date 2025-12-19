@@ -15,9 +15,10 @@ export * from "./side-bar/tab-control.component";
 export * from "./side-bar/side-bar-property-grid-header.component";
 export * from "./side-bar/property-grid-placeholder.component";
 export * from "./side-bar/side-bar-header.component";
-
 export * from "./side-bar/object-selector.component";
 export * from "./side-bar/property-grid.component";
+
+export * from "./components/component-container.component";
 export * from "./components/search.component";
 export * from "./tabs/json/json-editor-textarea.component";
 export * from "./tabs/json/json-editor-ace.component";

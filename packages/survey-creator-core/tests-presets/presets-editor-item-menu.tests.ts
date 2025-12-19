@@ -1,5 +1,5 @@
 import { PopupDropdownViewModel, Question } from "survey-core";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 
 class CreatorPresetEditorModelTester extends CreatorPresetEditorModel {
   private getQuestionRowContextActions(question: Question, item_name: string) {
