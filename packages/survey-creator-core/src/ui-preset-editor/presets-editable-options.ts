@@ -148,6 +148,29 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
     return this.optionsList.map(option => this.addPathToName(option));
   }
 
+  public onGetQuestionTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    const prefix = this.fullPath + "_";
+    if (options.question.parent?.name.substring(0, prefix.length) !== prefix) return;
+    const help = editorLocalization.getString("presets.options.ohelp." + options.question.name);
+    if (help == options.question.name) return;
+    const collapseIcon = "icon-hidehint-16x16";
+    const expandIcon = "icon-hint-16x16";
+    options.actions = [{
+      id: "hint",
+      css: "sv-action-bar-item--hint",
+      //locTooltipName: new ComputedUpdater<string>(() => options.panel.isCollapsed ? "ed.expandTooltip" : "ed.collapseTooltip") as any,
+      iconName: new ComputedUpdater<string>(() => options.question.description ? expandIcon : collapseIcon) as any,
+      iconSize: "auto",
+      action: () => {
+        if (options.question.description) {
+          options.question.description = "";
+        } else {
+          options.question.description = help;
+        }
+      }
+    }];
+  }
+
   public onGetPanelTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     const prefix = this.fullPath + "_";
     if (options.panel.name.substring(0, prefix.length) !== prefix) return;
