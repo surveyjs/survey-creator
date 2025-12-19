@@ -6,10 +6,9 @@ import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
   SurveyQuestionProperties, editorLocalization, PropertyGridModel, getLocString,
-  settings } from "survey-creator-core";
+  settings, IPropertyTabInfo, IPropertyEditorInfo } from "survey-creator-core";
 
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
-import { IPropertyTabInfo, IPropertyEditorInfo } from "../question-editor/definition";
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj: any, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
@@ -162,7 +161,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   private getAllUsedTabNames(curJsonClasses: ISurveyPropertiesDefinition): string[] {
     const res: string[] = [];
     this.allClasses.forEach(clName => {
-      const props = curJsonClasses[clName]?.properties;
+      const props = curJsonClasses[clName]?.properties as Array<IPropertyEditorInfo>;
       if (Array.isArray(props)) {
         props.forEach(prop => {
           if (res.indexOf(prop.tab) < 0) {
@@ -211,7 +210,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     });
     const oldTabProperties: {[key: string]: boolean} = {};
     this.classes.forEach(clName => {
-      const props = curJsonClasses[clName]?.properties;
+      const props = curJsonClasses[clName]?.properties as Array<IPropertyEditorInfo>;
       if (Array.isArray(props)) {
         for (let i = props.length - 1; i >= 0; i--) {
           oldTabProperties[props[i].name] = true;
@@ -250,7 +249,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     const filteredTabProperties: IPropertyEditorInfo[] = [];
     Object.keys(curJsonClasses).forEach(clName => {
       if (this.allClasses.indexOf(clName) < 0) return;
-      const props = curJsonClasses[clName].properties;
+      const props = curJsonClasses[clName].properties as Array<IPropertyEditorInfo>;
       if (Array.isArray(props)) {
         for (let i = 0; i < props.length; i++) {
           const prop = props[i];
