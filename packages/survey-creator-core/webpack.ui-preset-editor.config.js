@@ -16,11 +16,11 @@ module.exports = (env) => {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval-source-map",
     entry: {
-      "survey-creator-ui-preset-editor-core": path.resolve(__dirname, "./src/ui-preset-editor/index.ts"),
+      "index": path.resolve(__dirname, "./src/ui-preset-editor/index.ts"),
     },
     output: {
       path: path.resolve(__dirname, "build/ui-preset-editor"),
-      filename: isProd ? "index.min.js" : "index.js",
+      filename: "[name]" + (isProd ? ".min.js" : ".js"),
       library: {
         root: "SurveyCreatorUIPresetEditorCore",
         amd: "[dashedname]",

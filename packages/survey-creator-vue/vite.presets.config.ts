@@ -3,8 +3,6 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import copy from "rollup-plugin-copy";
 
-const libraryName = "survey-creator-ui-preset-editor-vue";
-
 export default defineConfig(({ mode }) => {
   return {
     plugins: [vue()],
@@ -12,14 +10,14 @@ export default defineConfig(({ mode }) => {
     build: {
       emptyOutDir: false,
       sourcemap: mode == "development",
-      outDir: "./build",
+      outDir: "./build/ui-preset-editor",
       lib: {
         // Set the entry point for presets
         entry: resolve(__dirname, "src/ui-preset-editor/index.ts"),
         // Name of the library.
-        name: "SurveyCreatorVuePresets",
+        name: "SurveyCreatorUIPresetEditorVue",
         // Generate preset files
-        fileName: (format) => `${libraryName}.${format}.js`,
+        fileName: (format) => `index.${format}.js`,
       },
       rollupOptions: {
         // External dependencies
@@ -27,7 +25,6 @@ export default defineConfig(({ mode }) => {
           "vue",
           "survey-core",
           "survey-creator-core",
-          "survey-creator-ui-preset-editor-core",
           "survey-vue3-ui",
           "survey-creator-vue",
         ],
