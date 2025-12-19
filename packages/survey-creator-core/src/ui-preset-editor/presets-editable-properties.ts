@@ -6,34 +6,10 @@ import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
   SurveyQuestionProperties, editorLocalization, PropertyGridModel, getLocString,
-  settings } from "survey-creator-core";
+  settings, IPropertyTabInfo, IPropertyEditorInfo } from "survey-creator-core";
 
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 
-//   private allTypes: string[];
-//   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
-//     this.allTypes = ElementFactory.Instance.getAllToolboxTypes();
-//     model.onGetDynamicPanelTabTitle.add(this.onGetDynamicPanelTabTitle);
-//     this.getPanel(model).panelCount = this.allTypes.length;
-//   }
-//   private get nameSelector() { return this.fullPath + "_selector"; }
-//   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
-
-//   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-//     //this.setupQuestionsValueDefinition(model, json);
-//     //this.isModified = !!json;
-//     if (!json) {
-//       json = this.copyJson(defaultPropertyGridDefinition);
-//     }
-//     const currentJson = json;
-//     currentJson.autoGenerateProperties = false;
-//     this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
-//     this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
-//     const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createPropertyGridItemRow(i)) }));
-//     model.setValue(this.nameCategories, categories);
-//   }
-// }
-const LocCategoriesName = "tabs";
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj: any, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
     super(obj, null, className, null, null, null, propertyGridDefinition);
@@ -44,23 +20,29 @@ export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
 }
 
 const presetPropertiesBaseClasses = ["question", "matrixdropdownbase", "selectbase", "panelbase", "matrixdropdowncolumn@default", "matrixdropdowncolumn@selectbase"];
-
+interface IPropertyGridTabInfo {
+  name: string;
+  iconName?: string;
+  items: Array<string>;
+}
 export class SurveyQuestionPresetPropertiesDetail {
-  private propertiesHash = {};
+  private propertiesHash: { [key: string]: string } = {};
   public classes = new Array<string>();
   private properties: SurveyQuestionPresetProperties;
   private propertyGridValue: PropertyGridModel;
   private propertyGridDefaultValue: PropertyGridModel;
   private obj;
+  private allClasses: string[];
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
-    const cls = {};
+    const cls: { [key: string]: boolean } = {};
     const obj = this.createObj();
     this.obj = obj;
+    this.currentJson.classes = this.currentJson.classes || {};
     this.properties = new SurveyQuestionPresetProperties(obj, className, currentJson);
     const allPropertiesNames = this.properties.getAllVisiblePropertiesNames(true);
-    const objProps = {};
+    const objProps: { [key: string]: JsonObjectProperty } = {};
     Serializer.getPropertiesByObj(obj).forEach(prop => objProps[prop.name] = prop);
-    allPropertiesNames.forEach(name => {
+    allPropertiesNames.forEach((name: string) => {
       const prop = objProps[name];
       if (prop) {
         const propClassName = this.getPropClassName(prop);
@@ -77,11 +59,31 @@ export class SurveyQuestionPresetPropertiesDetail {
     if (this.classes.indexOf(className) < 0) {
       this.classes.push(className);
     }
+    this.allClasses = this.getAllClasses();
     this.propertyGridValue = this.createPropertyGrid(obj, this.currentJson);
     this.propertyGridDefaultValue = this.createPropertyGrid(obj);
   }
   public getObj() {
     return this.obj;
+  }
+  private getAllClasses(): string[] {
+    const res = new Array<string>();
+    const className = this.classes[0];
+    res.push(className);
+    if (className == "survey") return res;
+    const isColumn = className.indexOf("matrixdropdowncolumn@") == 0;
+    Object.keys(this.currentJson.classes).forEach(cl => {
+      if (isColumn) {
+        if (cl.indexOf("matrixdropdowncolumn@") === 0) {
+          res.push(cl);
+        }
+      } else {
+        if (Serializer.isDescendantOf(cl, className) && res.indexOf(cl) < 0) {
+          res.push(cl);
+        }
+      }
+    });
+    return res;
   }
   private createPropertyGrid(obj: Base, json?: ISurveyPropertyGridDefinition): PropertyGridModel {
     const res = new PropertyGridModel(undefined, undefined, json);
@@ -133,52 +135,221 @@ export class SurveyQuestionPresetPropertiesDetail {
   }
   private updateCurrentJsonCore(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>): void {
     if (!Array.isArray(val)) val = [];
-    const tabNames = [];
-    this.classes.forEach(cl => {
-      this.updateCurrentJsonClass(curJsonClasses, val, cl, tabNames);
-    });
+    this.updateJsonClasses(curJsonClasses, val);
   }
-  private updateCurrentJsonClass(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>, clName: string, tabNames: Array<string>): void {
-    const properties = [];
-    const tabs: any = [];
-    const tabStep = 100;
+  private updateJsonClasses(curJsonClasses: ISurveyPropertiesDefinition, val: Array<IPropertyGridTabInfo>): void {
+    if (!Array.isArray(val)) return;
+    for (let i = val.length - 1; i >= 0; i--) {
+      if (!val[i].name) {
+        val.splice(i, 1);
+      }
+    }
+    this.convertPropertiesIntoObject(curJsonClasses);
+    const tabs: {[key: string]: IPropertyTabInfo} = this.getAllTabsInfo(curJsonClasses);
+    this.updateTabIndexes(tabs, val, curJsonClasses);
+    this.removeAddUpdateProperties(curJsonClasses, val);
 
     val.forEach(tab => {
-      const clVal = tab.items;
-      if (Array.isArray(clVal)) {
-        const classesIndeces: any = [];
-        this.classes.forEach(cl => classesIndeces.push(0));
-        const propertiesIndeces = {};
-        for (let i = 0; i < clVal.length; i++) {
-          const clName = this.propertiesHash[clVal[i]];
-          let clIndex = this.classes.indexOf(clName);
-          if (clIndex < 0) continue;
-          const nextStep = 10000 / Math.pow(10, clIndex);
-          let max = 0;
-          for (let j = 0; j <= clIndex; j++) {
-            if (classesIndeces[j] > max) max = classesIndeces[j];
-          }
-          const visIndex = max + nextStep;
-          propertiesIndeces[clVal[i]] = visIndex;
-          classesIndeces[clIndex] = visIndex;
-        }
-        clVal.forEach(propName => {
-          if (this.propertiesHash[propName] === clName) {
-            const tabName = tab.name;
-            if (!!tabName && tabNames.indexOf(tab.name) < 0) {
-              tabNames.push(tab.name);
-              tabs.push({ name: tab.name, index: tabNames.length * tabStep, iconName: tab.iconName });
-            }
-            const item: any = { name: propName, index: propertiesIndeces[propName] };
-            if (!!tabName) {
-              item.tab = tabName;
-            }
-            properties.push(item);
+      if (tab.iconName !== undefined) {
+        tabs[tab.name].iconName = tab.iconName;
+      }
+      this.updateTabProperties(curJsonClasses, tab);
+    });
+    const usedTabNames: string[] = this.getAllUsedTabNames(curJsonClasses);
+    this.removeUnusedTabs(usedTabNames, curJsonClasses);
+  }
+  private getAllUsedTabNames(curJsonClasses: ISurveyPropertiesDefinition): string[] {
+    const res: string[] = [];
+    this.allClasses.forEach(clName => {
+      const props = curJsonClasses[clName]?.properties as Array<IPropertyEditorInfo>;
+      if (Array.isArray(props)) {
+        props.forEach(prop => {
+          if (res.indexOf(prop.tab) < 0) {
+            res.push(prop.tab);
           }
         });
       }
     });
-    curJsonClasses[clName] = { properties: properties, tabs: tabs };
+    return res;
+  }
+  private removeUnusedTabs(usedTabNames: string[], curJsonClasses: ISurveyPropertiesDefinition): void {
+    this.classes.forEach(clName => {
+      const tabs = curJsonClasses[clName]?.tabs;
+      if (Array.isArray(tabs)) {
+        for (let i = tabs.length - 1; i >= 0; i--) {
+          if (usedTabNames.indexOf(tabs[i].name) < 0) {
+            tabs.splice(i, 1);
+          }
+        }
+      }
+    });
+  }
+  private convertPropertiesIntoObject(curJsonClasses: ISurveyPropertiesDefinition) {
+    const generalTabName = settings.propertyGrid.generalTabName;
+    Object.keys(curJsonClasses).forEach(clName => {
+      const props = curJsonClasses[clName].properties;
+      if (Array.isArray(props)) {
+        for (let i = 0; i < props.length; i++) {
+          const prop = props[i];
+          if (typeof prop === "string") {
+            props.splice(i, 1, { name: prop, tab: generalTabName });
+          } else {
+            if (!prop.tab) {
+              prop.tab = generalTabName;
+            }
+          }
+        }
+      }
+    });
+  }
+  private removeAddUpdateProperties(curJsonClasses: ISurveyPropertiesDefinition, val: Array<IPropertyGridTabInfo>): void {
+    const newTabProperties: {[key: string]: string} = {};
+    val.forEach(tab => {
+      if (!Array.isArray(tab.items)) return;
+      tab.items.forEach(propName => newTabProperties[propName] = tab.name);
+    });
+    const oldTabProperties: {[key: string]: boolean} = {};
+    this.classes.forEach(clName => {
+      const props = curJsonClasses[clName]?.properties as Array<IPropertyEditorInfo>;
+      if (Array.isArray(props)) {
+        for (let i = props.length - 1; i >= 0; i--) {
+          oldTabProperties[props[i].name] = true;
+          const prop = props[i];
+          if (!newTabProperties[prop.name]) {
+            props.splice(i, 1);
+          } else {
+            if (prop.tab !== newTabProperties[prop.name]) {
+              prop.tab = newTabProperties[prop.name];
+              prop.index = undefined;
+            }
+          }
+        }
+      }
+    });
+    const lastClassName = this.classes[this.classes.length - 1];
+    const firstClassName = this.classes[0];
+    Object.keys(newTabProperties).forEach(propName => {
+      if (!oldTabProperties[propName]) {
+        const prop = Serializer.findProperty(lastClassName, propName);
+        if (prop) {
+          let propClassName = this.getPropClassName(prop);
+          if (this.classes.indexOf(propClassName) < 0) {
+            propClassName = firstClassName;
+          }
+          const classInfo = curJsonClasses[propClassName];
+          classInfo.properties = classInfo.properties || [];
+          classInfo.properties.push({ name: propName, tab: newTabProperties[propName] });
+        }
+      }
+    });
+  }
+  private updateTabProperties(curJsonClasses: ISurveyPropertiesDefinition, tab: IPropertyGridTabInfo) {
+    if (!Array.isArray(tab.items)) return;
+    const tabProperties: { [key: string]: { prop: IPropertyEditorInfo, className: string } } = {};
+    const filteredTabProperties: IPropertyEditorInfo[] = [];
+    Object.keys(curJsonClasses).forEach(clName => {
+      if (this.allClasses.indexOf(clName) < 0) return;
+      const props = curJsonClasses[clName].properties as Array<IPropertyEditorInfo>;
+      if (Array.isArray(props)) {
+        for (let i = 0; i < props.length; i++) {
+          const prop = props[i];
+          if (prop.tab === tab.name) {
+            const obj = { prop: prop, className: clName };
+            tabProperties[prop.name] = obj;
+            if (prop.index !== undefined && this.classes.indexOf(clName) < 0) {
+              filteredTabProperties.push(prop);
+            }
+          }
+        }
+      }
+    });
+    const elements = Array<IPropertyEditorInfo>();
+    tab.items.forEach((propName) => {
+      const prop = tabProperties[propName]?.prop;
+      if (prop) {
+        elements.push(prop);
+      }
+    });
+    this.sortElementsByIndex(elements, filteredTabProperties);
+  }
+  private addGeneralTabIfNeeded(tabs: {[key: string]: IPropertyTabInfo }, tabOrder: string[], curJsonClasses: ISurveyPropertiesDefinition) {
+    const generalTabName = settings.propertyGrid.generalTabName;
+    if (tabOrder.indexOf(generalTabName) >= 0 && !tabs[generalTabName]) {
+      const baseClass = this.classes[0];
+      const generalTab: IPropertyTabInfo = { name: generalTabName, index: 0 };
+      const classInfo = curJsonClasses[baseClass];
+      classInfo.tabs = classInfo.tabs || [];
+      classInfo.tabs.unshift(generalTab);
+      tabs[generalTabName] = generalTab;
+    }
+  }
+  private updateTabIndexes(tabs: {[key: string]: IPropertyTabInfo }, val: Array<IPropertyGridTabInfo>, curJsonClasses: ISurveyPropertiesDefinition): void {
+    const tabOrder: string[] = [];
+    val.forEach(tab => {
+      tabOrder.push(tab.name);
+    });
+    this.addGeneralTabIfNeeded(tabs, tabOrder, curJsonClasses);
+    val.forEach(tab => {
+      if (!tabs[tab.name]) {
+        const baseClass = this.classes[0];
+        curJsonClasses[baseClass].tabs = curJsonClasses[baseClass].tabs || [];
+        const newTab = { name: tab.name };
+        curJsonClasses[baseClass].tabs.push(newTab);
+        tabs[tab.name] = newTab;
+      }
+    });
+    const sortedElements = this.getSortedTabs(tabs, tabOrder);
+    const elements: Array<IPropertyEditorInfo | IPropertyTabInfo> = [];
+    tabOrder.forEach((tabName) => { elements.push(tabs[tabName]); });
+    this.sortElementsByIndex(elements, sortedElements);
+  }
+  private getSortedTabs(tabs: {[key: string]: IPropertyTabInfo}, tabOrder: string[]): IPropertyTabInfo[] {
+    const res: IPropertyTabInfo[] = [];
+    Object.keys(tabs).forEach((name) => {
+      const tab = tabs[name];
+      if (tab.index !== undefined && tabOrder.indexOf(name) < 0) {
+        res.push(tab);
+      }
+    });
+    return res;
+  }
+  private sortElementsByIndex(elements: Array<IPropertyEditorInfo | IPropertyTabInfo>, sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>): void {
+    sortedElements.sort((a, b) => (b.index || 0) - (a.index || 0));
+    const step = 100;
+    let index = 0;
+    elements.forEach((el) => {
+      const curIndex = el.index || 0;
+      index = this.getIndexForElement(sortedElements, curIndex, index, step);
+      el.index = step * (index ++);
+    });
+  }
+  private getIndexForElement(sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>, curIndex: number, startIndex: number, step: number): number {
+    if (curIndex <= 0) return startIndex;
+    for (let i = sortedElements.length - 1; i >= 0; i--) {
+      const prop = sortedElements[i];
+      const index = prop.index || 0;
+      if (index > 0 && index < curIndex) {
+        prop.index = step * (startIndex ++);
+        sortedElements.splice(i, 1);
+      }
+    }
+    return startIndex;
+  }
+  private getAllTabsInfo(curJsonClasses: ISurveyPropertiesDefinition): {[key: string]: IPropertyTabInfo } {
+    const tabs: {[key: string]: IPropertyTabInfo } = {};
+    Object.keys(curJsonClasses).forEach(clName => {
+      if (this.allClasses.indexOf(clName) >= 0) {
+        const classInfo = curJsonClasses[clName];
+        if (classInfo.tabs) {
+          classInfo.tabs.forEach(tab => {
+            if (!tabs[tab.name]) {
+              tabs[tab.name] = tab;
+            }
+          });
+        }
+      }
+    });
+    return tabs;
   }
   private getPropClassName(prop: JsonObjectProperty): string {
     const clName = prop.classInfo.name;
@@ -435,7 +606,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       this.propertyGridSetObj(this.currentProperties.getObj());
     }
   }
-
   private getCurrentlyHiddenItems(categories: any) {
     const hiddenProperties = ["progressBarInheritWidthFrom"];
     const itemsMap: any = {};
@@ -492,11 +662,10 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     //if (!this.isPropCreatorChanged) return;
     //this.isPropCreatorChanged = false;
     if (this.currentProperties) {
-      this.currentProperties.updateCurrentJson(this.getPropertiesArray(model));
+      this.currentProperties.updateCurrentJson(this.getPropertiesArray(this.getQuestionCategories(model).value));
     }
   }
-  private getPropertiesArray(model: SurveyModel): Array<any> {
-    const categories = this.getQuestionCategories(model).value;
+  private getPropertiesArray(categories: any): Array<any> {
     return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name), iconName: c.iconName }));
   }
   private changePropTitleAndDescription(path: string, propName: string, val: string): void {
