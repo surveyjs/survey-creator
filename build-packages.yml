@@ -244,14 +244,11 @@ jobs:
       # https://stackoverflow.com/questions/58485585/azure-pipeline-powershell-and-git-on-windows-server-2019-gives-error-in-output
       - powershell: |
           cd $(Build.SourcesDirectory)/service
-          git pull origin master
-          git merge -X ours origin/master
-          git fetch origin master --tags --force
-          git checkout master
+          git fetch origin master
+          git checkout -B master origin/master
+          git reset --hard origin/master
           git add surveyjs.io/App_Data/DocsEditor
           git commit -m "updated survey-creator docs [azurepipelines skip]"
-          git pull origin master
-          git merge -X ours origin/master
           git push origin master
         displayName: "Git surveyjs/service push updated docs"
       # - powershell: |

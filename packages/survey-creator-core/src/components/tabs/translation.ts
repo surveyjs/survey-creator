@@ -232,7 +232,8 @@ export class TranslationItem extends TranslationItemBase {
     if (!(this.context instanceof PageModel) && this.name === "title") {
       return this.getPlaceholderText(locale) || this.context.name;
     }
-    if (Serializer.isDescendantOf(this.context.getType(), "itemvalue")) {
+    const className = this.context.getType && this.context.getType();
+    if (Serializer.isDescendantOf(className, "itemvalue")) {
       return this.getPlaceholderText(locale) || this.getItemValuePlaceholderText() || placeholderText;
     }
     return placeholderText;
