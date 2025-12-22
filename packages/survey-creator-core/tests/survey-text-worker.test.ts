@@ -1,7 +1,9 @@
+import { clear } from "console";
 import { SurveyTextWorker } from "../src/textWorker";
+import { ILoadFromJSONOptions } from "survey-core";
 
-function createTextWorker(json: any): SurveyTextWorker {
-  return new SurveyTextWorker(JSON.stringify(json, null, 3));
+function createTextWorker(json: any, options?: ILoadFromJSONOptions): SurveyTextWorker {
+  return new SurveyTextWorker(JSON.stringify(json, null, 3), options);
 }
 
 test("SurveyTextWorker, incorrect property name pos", () => {
@@ -102,4 +104,25 @@ test("SurveyTextWorker, required properties", () => {
   const indent1 = lines[5].split(" ").length - 1;
   const indent2 = lines[6].split(" ").length - 1;
   expect(indent2).toBe(indent1 + 3);
+});
+test("SurveyTextWorker, validate properties value, Issue#7335", () => {
+  const textWorker = createTextWorker({
+    elements: [
+      { type: "text", name: "q1",
+        clearIfInvisible: "test"
+      }
+    ]
+  }, { validatePropertyValues: true });
+  expect(textWorker.errors).toHaveLength(1);
+  const error = textWorker.errors[0];
+  const propNamePos = 25;
+  expect(error.at).toBe(propNamePos);
+  expect(error.isFixable).toBeTruthy();
+  textWorker.text = error.fixError(textWorker.text);
+  const newJson = JSON.parse(textWorker.text);
+  expect(newJson.elements[0]).toEqual({
+    type: "text",
+    name: "q1",
+    clearIfInvisible: "default"
+  });
 });

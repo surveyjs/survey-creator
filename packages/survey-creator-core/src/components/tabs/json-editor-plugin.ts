@@ -112,8 +112,17 @@ export abstract class JsonEditorBaseModel extends Base {
     return res;
   }
   public processErrors(text: string): void {
-    const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
+    const textWorker: SurveyTextWorker = this.createTextWorker();
     this.setErrors(textWorker.errors);
+  }
+  public allowingDeactivate(): boolean {
+    const textWorker: SurveyTextWorker = this.createTextWorker();
+    if (!textWorker.isJsonCorrect) return undefined;
+    return !textWorker.isJsonHasErrors;
+  }
+  private createTextWorker(): SurveyTextWorker {
+    return new SurveyTextWorker(this.text, {
+      validatePropertyValues: this.creator.validatePropertyValuesInJsonEditor });
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
@@ -240,9 +249,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   }
   public defaultAllowingDeactivate(): boolean {
     if (!this.model) return true;
-    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
-    if (!textWorker.isJsonCorrect) return undefined;
-    return !textWorker.isJsonHasErrors;
+    return this.model.allowingDeactivate();
   }
   protected abstract createModel(
     creator: SurveyCreatorModel
