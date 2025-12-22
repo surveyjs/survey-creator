@@ -145,7 +145,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         json[option] = question.value;
       }
     });
-    json["forbiddenNestedElements"] = { panel: json["forbiddenNestedElementsPanel"], paneldynamic: json["forbiddenNestedElementsPanelDynamic"] };
+    json["forbiddenNestedElements"] = { panel: [...json["forbiddenNestedElementsPanel"]], paneldynamic: [...json["forbiddenNestedElementsPanelDynamic"]] };
     delete json["forbiddenNestedElementsPanel"];
     delete json["forbiddenNestedElementsPanelDynamic"];
 
@@ -155,8 +155,22 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
   }
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    this.optionsList.forEach(option => model.getQuestionByName(this.addPathToName(option)).value =
-    (json ? json[option] : creator[option]));
+    function getOptionValue(option: string): any {
+      return json?.[option] === undefined ? creator[option] : json[option];
+    }
+
+    this.optionsList.forEach(option => {
+      let val = getOptionValue(option);
+      if (option === "forbiddenNestedElementsPanel") {
+        val = getOptionValue("forbiddenNestedElements")?.panel;
+        if (val) val = [...val];
+      }
+      if (option === "forbiddenNestedElementsPanelDynamic") {
+        val = getOptionValue("forbiddenNestedElements")?.paneldynamic;
+        if (val) val = [...val];
+      }
+      model.getQuestionByName(this.addPathToName(option)).value = val;
+    });
   }
 
   public get questionNames() {
