@@ -848,9 +848,6 @@ svc-question,
     transition: opacity 150ms;
   }
 }
-.svc-element__header--hidden.sd-question__header--location--left {
-  z-index: -1 !important;
-}
 .svc-element__header--lazy,
 .svc-element__header--hidden.sd-question__header--location--left {
   .svc-string-editor,
