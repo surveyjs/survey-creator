@@ -12,6 +12,8 @@
 }
 
 .svc-test-tab__content .svc-plugin-tab__content {
+  justify-content: space-around;
+  
   .svc-preview__test-again {
     width: calcSize(33);
     box-sizing: border-box;
