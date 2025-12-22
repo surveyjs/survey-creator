@@ -13,10 +13,10 @@ test("CreatorPresetEditableOptions - check questions and creator properties bind
   survey.getQuestionByName("options_allowZoom").value = false;
   expect(editor.creator.allowZoom).toBeFalsy();
 
-  expect(editor.creator.previewAllowSimulateDevice).toBeFalsy();
-  expect(survey.getQuestionByName("options_previewAllowSimulateDevice").value).toBeFalsy();
-  survey.getQuestionByName("options_previewAllowSimulateDevice").value = true;
-  expect(editor.creator.previewAllowSimulateDevice).toBeTruthy();
+  expect(editor.creator.previewAllowSimulateDevices).toBeFalsy();
+  expect(survey.getQuestionByName("options_previewAllowSimulateDevices").value).toBeFalsy();
+  survey.getQuestionByName("options_previewAllowSimulateDevices").value = true;
+  expect(editor.creator.previewAllowSimulateDevices).toBeTruthy();
 });
 
 test("CreatorPresetEditableOptions - check export", () => {

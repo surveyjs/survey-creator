@@ -29,6 +29,10 @@
 .sps-checkbox__caption {
   @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+
+  .sv-title-actions {
+    gap: var(--sjs2-spacing-x050, 4px);
+  }
 }
 
 .sps-checkbox__rectangle {
