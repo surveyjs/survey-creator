@@ -329,4 +329,34 @@ test.describe(title, () => {
     await expect(svStringSelector).toHaveClass(/svc-string-editor--error/);
     await compareScreenshot(page, ".svc-designer-header .sd-title", "surface-string-editor-error.png");
   });
+  test("Dynamic Panel placed inside a Matrix Detail Section - An inner question title is duplicated when templateQuestionTitleLocation: 'left' Bug#7308", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1900 });
+    const json = {
+      elements: [
+        {
+          type: "matrixdropdown",
+          name: "question1",
+          columns: [{ name: "col", cellType: "text" }],
+          detailElements: [
+            {
+              type: "paneldynamic",
+              name: "question2",
+              templateElements: [
+                {
+                  type: "text",
+                  name: "question3"
+                }
+              ],
+              templateQuestionTitleLocation: "left"
+            }
+          ],
+          detailPanelMode: "underRow",
+          rows: ["row1", "row2"]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    const question3 = page.locator("[data-sv-drop-target-survey-element=\"question3\"]").first();
+    await compareScreenshot(page, question3, "question-in-dynamic-panel-in-detail-panel-title-location-left.png");
+  });
 });
