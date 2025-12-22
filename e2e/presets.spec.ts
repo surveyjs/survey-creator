@@ -124,12 +124,14 @@ test.describe(title, () => {
 
     await hidden.getByRole("button", { name: "More" }).last().click();
     await hidden.getByText("Move to new category").click();
+    await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers1");
     await page.getByRole("button", { name: "Cancel" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc"]);
 
     await hidden.getByRole("button", { name: "More" }).last().click();
     await hidden.getByText("Move to new category").click();
+    await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers2");
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc", "Containers2"]);
@@ -209,18 +211,22 @@ test.describe(title, () => {
 
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
     await page.getByRole("button", { name: "New Category" }).click();
+    await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Name" }).blur();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
+    await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom");
     await page.getByRole("button", { name: "Apply" }).click();
     await page.waitForTimeout(500);
     await page.getByRole("row", { name: "Custom" }).hover();
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
     await items.getByRole("button", { name: "Add a new item" }).click();
+    await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
+    await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom 1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
@@ -233,7 +239,9 @@ test.describe(title, () => {
     expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
 
     await hidden.getByRole("button", { name: "Add a new item" }).click();
+    await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
+    await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom 2");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
@@ -368,6 +376,7 @@ test.describe(title, () => {
 
     expect((await getRowsInputValues(items)).slice(-3)).toEqual(["Validation", "\"Thank You\" Page", "Quiz Mode"]);
     await page.getByRole("button", { name: "New Category" }).click();
+    await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("combobox", { name: "Icon name" }).focus();

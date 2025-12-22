@@ -1,46 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SurveyJS Creator React</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/worker-json.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/mode-json.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ext-language_tools.js" type="text/javascript"
-    charset="utf-8"></script>
-
-  <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
-
-  <!-- <script src="https://unpkg.com/jquery"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
-
-  <script src="../../node_modules/survey-core/survey.core.js"></script>
-  <script src="../../node_modules/survey-core/themes/index.js"></script>
-  <script src="../../node_modules/survey-react-ui/survey-react-ui.js"></script>
-  <script src="../../survey-creator-core/build/survey-creator-core.js"></script>
-  <script src="../build/survey-creator-react.js"></script>
-  <link rel="stylesheet" type="text/css" href="../../node_modules/survey-core/survey-core.css" />
-  <link rel="stylesheet" type="text/css" href="../../survey-creator-core/build/survey-creator-core.css" />
-</head>
-
-<body>
-  <div id="surveyCreator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
-</body>
-<script type="text/babel">
-  let creator = new SurveyCreator.SurveyCreator({});
-  window.creator = creator;
-  //creator.JSON = json;
-  ReactDOM.render(<React.StrictMode>
-    <SurveyCreator.SurveyCreatorComponent creator={creator} />
-  </React.StrictMode>, document.getElementById("surveyCreator"));
-</script>
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SurveyJS Creator React - Example</title>
+  </head>
+  <body spellcheck="false">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
+

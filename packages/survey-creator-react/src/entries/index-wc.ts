@@ -61,6 +61,7 @@ export * from "../events";
 export * from "../side-bar/ObjectSelector";
 export * from "../side-bar/PropertyGrid";
 export * from "../components/Search";
+export * from "../components/ComponentContainer";
 export * from "../Switcher";
 
 export * from "../tabs/JsonErrorItem";

@@ -14,7 +14,7 @@ export class PropertyGridViewModel extends Base {
   public prevSelectionAction: Action;
   public objectSelectionAction: MenuButton;
   public searchManager = new SearchManagerPropertyGrid();
-  public onNewSurveyCreatedCallback: () => void;
+  public onNewSurveyCreatedCallback: (survey: SurveyModel) => void;
   private selectorPopupModel: PopupModel;
 
   @property() hasPrev: boolean;
@@ -57,6 +57,9 @@ export class PropertyGridViewModel extends Base {
   public set survey(val: SurveyModel) {
     this.setPropertyValue("survey", val);
   }
+  public setObject(obj: any) {
+    this.propertyGridModel.obj = obj;
+  }
   public get rootCss(): string {
     return new CssClassBuilder()
       .append("spg-container")
@@ -97,7 +100,7 @@ export class PropertyGridViewModel extends Base {
       });
     }
     if (this.onNewSurveyCreatedCallback) {
-      this.onNewSurveyCreatedCallback();
+      this.onNewSurveyCreatedCallback(this.survey);
     }
   }
   private updateTitle() {

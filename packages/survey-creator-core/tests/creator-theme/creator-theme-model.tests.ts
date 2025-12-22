@@ -58,7 +58,7 @@ test("Creator theme: sync css variables", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
-  let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
+  let surfaceBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
 
   expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
   expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
@@ -93,10 +93,10 @@ test("Creator theme: reset color variables after change theme", (): any => {
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
     const themeModel = designerPlugin["themeModel"];
-    const themeName = designerPlugin["themePropertyGrid"].survey.findQuestionByName("themeName");
-    const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
-    const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
-    const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectAccent);
+    const themeName = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName("themeName");
+    const surfaceBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
+    const primaryBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
+    const secondaryBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorProjectAccent);
 
     expect(themeName.value).toEqual("default-light");
     expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
@@ -155,8 +155,8 @@ test("Creator theme check scale", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
-  let scale = designerPlugin["themePropertyGrid"].survey.findQuestionByName("scale");
-  let fontScale = designerPlugin["themePropertyGrid"].survey.findQuestionByName("fontScale");
+  let scale = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName("scale");
+  let fontScale = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName("fontScale");
 
   const themeJson: ICreatorTheme = {
     themeName: "custom",
@@ -207,9 +207,9 @@ test("Creator theme: apply custom theme", (): any => {
   };
   creator.applyCreatorTheme(themeJson);
 
-  const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
-  const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
-  const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName(CreatorThemeModel.varColorProjectAccent);
+  const surfaceBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
+  const primaryBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
+  const secondaryBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorProjectAccent);
   expect(surfaceBackgroundColor.value).toEqual("rgba(253, 255, 148, 0.5)");
   expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toBe("rgba(253, 255, 148, 0.5)");
 

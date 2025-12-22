@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey-core.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
-  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/presets/index.css">
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/ui-preset-editor/index.css">
   <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-js.min.css" /> -->
   <style>
         /*imitation of Tailwind CSS, bootstrap and other CSS frameworks (only for survey-creator-js)*/
@@ -22,10 +22,11 @@
   <script src="../node_modules/survey-core/themes/index.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
-  <script src="../node_modules/survey-creator-core/presets/index.js"></script>
+  <script src="../node_modules/survey-creator-core/ui-preset-editor/index.js"></script>
+  <script src="../node_modules/survey-creator-core/ui-presets/index.js"></script>
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
   <script src="../build/survey-creator-js.js"></script>
-  <script src="../build/survey-creator-js-presets.js"></script>
+  <script src="../build/ui-preset-editor/index.js"></script>
   <script src="./sc.js"></script>
   <script src="../node_modules/survey-creator-core/themes/test.js"></script>
 </head>
@@ -38,6 +39,7 @@
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
+    SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     creator.applyCreatorTheme(SurveyCreatorTheme.Test);
     creator.tabResponsivenessMode = "menu";
@@ -45,7 +47,7 @@
     window["Survey"].settings.animationEnabled = false;
     creator.allowZoom = false;
     window.creator = creator;
-    new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
+    new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
 
     class SurveyCreatorRenderComponent extends SurveyUI.Component {
       constructor(props) {
@@ -61,7 +63,7 @@
           creator["animationEnabled"] = false;
           creator.allowZoom = false;
           window.creator = creator;
-          new SurveyCreatorCorePresets.TabPresetsPlugin(creator);
+          new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
         }
       }
       render() {

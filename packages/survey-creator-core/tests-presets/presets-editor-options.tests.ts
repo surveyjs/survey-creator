@@ -2,7 +2,7 @@ import { SurveyModel } from "survey-core";
 import { CreatorPresetEditableOptions } from "../src/presets/presets-editable-options";
 import { CreatorPresetBase } from "../src/presets-creator/presets-base";
 import { SurveyCreatorModel } from "../src/creator-base";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 
 test("CreatorPresetEditableOptions - check questions and creator properties binding", () => {
   const editor = new CreatorPresetEditorModel();

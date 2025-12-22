@@ -8,6 +8,6 @@
         }
     },
     "include": [
-        "./src/presets/index.ts"
+        "./src/ui-preset-editor/index.ts"
     ]
 }

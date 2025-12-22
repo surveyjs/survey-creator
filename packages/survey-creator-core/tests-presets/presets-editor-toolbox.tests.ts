@@ -1,5 +1,5 @@
 import { QuestionMatrixDynamicModel, settings, ComponentCollection } from "survey-core";
-import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
@@ -719,6 +719,17 @@ test("Change localization strings for toolbox categories", () => {
   expect(loc).toBeTruthy();
   expect(loc.en.toolboxCategories.text).toBeFalsy();
   expect(loc.en.toolboxCategories.choice).toEqual("Choice Questions edit");
+});
+test("Change localization strings for toolbox categories - and switch titles on", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.setValue("toolbox_mode", "categories");
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
+  const row1 = matrix.visibleRows[0];
+  expect(row1.getQuestionByName("category").value).toBe("choice");
+  row1.getQuestionByName("title").value = "Choice Questions edit";
+  survey.setValue("toolbox_showCategoryTitles", true);
+  expect(editor.creator.toolbox.categories[0].title).toBe("Choice Questions edit");
 });
 test("Toolbox categories, show header and showcolumn title column if show categories", () => {
   const editor = new CreatorPresetEditorModel();

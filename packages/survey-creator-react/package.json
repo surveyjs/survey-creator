@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "2.4.1",
+  "version": "2.5.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"
@@ -21,7 +21,7 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
     "build:main": "webpack --env buildType=dev --env emitDeclarations --env emitNonSourceFiles && webpack --env buildType=prod && rollup -c",
-    "build:presets": "webpack --config ./webpack.presets.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.presets.config.js --env buildType=prod",
+    "build:presets": "webpack --config ./webpack.presets.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.presets.config.js --env buildType=prod && rollup -c rollup.presets.config.js --bundleConfigAsCjs",
     "build": "npm run build:main && npm run build:presets",
     "watch:dev": "concurrently \"webpack --env buildType=dev --watch --env emitDeclarations --env emitStyles\" \"rollup -c -w\" ",
     "watch:prod": "webpack --env buildType=prod --watch",
@@ -38,6 +38,7 @@
     "test:scr:legacy:ci": "node copy-src-tests.js && playwright test --project scr_legacy"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.2",

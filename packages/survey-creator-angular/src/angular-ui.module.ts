@@ -18,6 +18,7 @@ import { TabControlComponent } from "./side-bar/tab-control.component";
 import { SidebarPropertyGridHeaderComponent } from "./side-bar/side-bar-property-grid-header.component";
 import { PropertyGridPlaceholderComponent } from "./side-bar/property-grid-placeholder.component";
 import { SidebarHeaderComponent } from "./side-bar/side-bar-header.component";
+import { ComponentContainerComponent } from "./components/component-container.component";
 
 import { ObjectSelectorComponent } from "./side-bar/object-selector.component";
 import { PropertyGridComponent } from "./side-bar/property-grid.component";
@@ -88,7 +89,7 @@ import { PageWrapperComponent } from "./page-wrapper.component";
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, QuestionTextWithResetComponent,
-    BooleanSwitchComponent, TranslateFromAction, AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent],
+    BooleanSwitchComponent, TranslateFromAction, AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent, ComponentContainerComponent],
 
   imports: [
     CommonModule, FormsModule, SurveyModule
@@ -99,7 +100,7 @@ import { PageWrapperComponent } from "./page-wrapper.component";
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, QuestionTextWithResetComponent, BooleanSwitchComponent, TranslateFromAction,
-    AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent],
+    AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent, ComponentContainerComponent],
   providers: [],
 })
 export class SurveyCreatorModule { }
