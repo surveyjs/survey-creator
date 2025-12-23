@@ -50,7 +50,6 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { type: "panel", name: "previewSimulateDevice", elements: [
           { name: "previewAllowSimulateDevices", type: "boolean" },
         ] },
-
         { name: "previewDevice", type: "dropdown", choices: [
           { value: "desktop", text: "Desktop" },
           { value: "iPhoneSE", text: "iPhone SE" },
@@ -65,23 +64,26 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { name: "previewOrientation", type: "dropdown", choices: [
           "landscape", "portrait"
         ] },
-        { type: "panel", name: "previewAllowSelect", elements: [
-          { name: "previewAllowSelectLanguage", type: "dropdown", choices: [
-            "auto", true, false, "all"
-          ] },
-          { name: "previewAllowSelectPage", type: "boolean" },
+        { name: "previewAllowSelectLanguage", type: "dropdown", choices: [
+          "auto", true, false, "all"
         ] },
-        { name: "previewAllowHiddenElements", type: "boolean" },
+        { type: "panel", name: "previewAllowSelect", elements: [
+          { name: "previewAllowSelectPage", type: "boolean" },
+          { name: "previewAllowHiddenElements", type: "boolean" },
+        ] },
       ] },
       { type: "panel", name: "logic", state: "expanded", elements: [
-        { name: "logicAllowTextEditExpressions", type: "boolean" },
+        { type: "panel", name: "previewSimulateDevice", elements: [
+          { name: "logicAllowTextEditExpressions", type: "boolean" },
+        ] },
         { name: "logicMaxItemsInCondition", type: "text", inputType: "number" }
       ]
       },
       { type: "panel", name: "translation", state: "expanded", elements: [
-        { name: "clearTranslationsOnSourceTextChange", type: "boolean" },
-      ]
-      }
+        { type: "panel", name: "previewSimulateDevice", elements: [
+          { name: "clearTranslationsOnSourceTextChange", type: "boolean" },
+        ] },
+      ] },
 
     ];
   }
