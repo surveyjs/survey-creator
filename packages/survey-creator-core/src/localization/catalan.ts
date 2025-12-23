@@ -866,8 +866,6 @@ export var catalanTranslation = {
     enabled: "Habilitat",
     // [Auto-translated] "Disabled"
     disabled: "Deshabilitat",
-    // [Auto-translated] "Heredar"
-    heredar: "Heredar",
     // "Apply"
     apply: "Solicitar",
     // "OK"
@@ -1906,8 +1904,6 @@ export var catalanTranslation = {
     camera: "Cámara",
     // [Auto-translated] "Local file or Camera"
     "file-camera": "Fitxer local o cámara",
-    // "Heredar"
-    heredar: "heredar",
     // "Visible"
     show: "mostrar",
     // "Hidden"
