@@ -162,7 +162,7 @@ test("JsonEditor & fixError action with object to array", () => {
 });
 test("JsonEditor & fixError action incorrect properties value, Issue#7335", () => {
   const creator = new CreatorTester({
-    validatePropertyValuesInJsonEditor: true
+    validateJsonPropertyValues: true
   });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
