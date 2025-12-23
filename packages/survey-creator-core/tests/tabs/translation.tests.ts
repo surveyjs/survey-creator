@@ -1095,6 +1095,61 @@ test("init placeholders for choices", () => {
   expect(cellQuestion2.placeholder).toEqual("1");
   expect(cellQuestion2.value).toEqual("I 1");
 });
+test("Placeholder for different elements, Issue#7333", () => {
+  const survey = new SurveyModel({
+    "completedHtmlOnCondition": [
+      {
+        "expression": "{nps-score} <= 6 or {rebuy} = false",
+        "html": "Exit one"
+      }
+    ],
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "q1",
+            "description": "Q1 description",
+            "otherPlaceholder": "Please specify",
+            "otherText": "Other features"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+            "placeholder": "Enter your email here"
+          }
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.addLocale("de");
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(2);
+  const expressionPanel = <PanelModel>page.elements[0];
+  expect(expressionPanel.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[1];
+  expect(pagePanel.elements).toHaveLength(2);
+  const question1 = <PanelModel>pagePanel.elements[0];
+  const question2 = <PanelModel>pagePanel.elements[1];
+  expect(question1.elements).toHaveLength(4);
+  expect(question2.elements).toHaveLength(2);
+  const cellIndex = 1;
+  const checkPlaceholder = (matrix: QuestionMatrixDropdownModel, expectedPlaceholder: string, rowIndex: number = 0) => {
+    const cellQuestion = <QuestionCommentModel>matrix.visibleRows[rowIndex].cells[cellIndex].question;
+    expect(cellQuestion.placeholder).toEqual(expectedPlaceholder);
+  };
+  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[0], "q1");
+  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[1], "Q1 description");
+  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[2], "Please specify");
+  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[3], "Other features");
+  checkPlaceholder(<QuestionMatrixDropdownModel>question2.elements[0], "q2");
+  checkPlaceholder(<QuestionMatrixDropdownModel>question2.elements[1], "Enter your email here");
+  checkPlaceholder(<QuestionMatrixDropdownModel>expressionPanel.elements[0], "Exit one");
+});
 
 test("localize placeholders", () => {
   const survey = new SurveyModel({
