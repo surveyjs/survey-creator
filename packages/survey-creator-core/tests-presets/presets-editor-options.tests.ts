@@ -14,10 +14,10 @@ test("CreatorPresetEditableOptions - check questions and creator properties bind
   survey.getQuestionByName("options_allowZoom").value = false;
   expect(editor.creator.allowZoom).toBeFalsy();
 
-  expect(editor.creator.previewAllowSimulateDevices).toBeFalsy();
-  expect(survey.getQuestionByName("options_previewAllowSimulateDevices").value).toBeFalsy();
-  survey.getQuestionByName("options_previewAllowSimulateDevices").value = true;
   expect(editor.creator.previewAllowSimulateDevices).toBeTruthy();
+  expect(survey.getQuestionByName("options_previewAllowSimulateDevices").value).toBeTruthy();
+  survey.getQuestionByName("options_previewAllowSimulateDevices").value = false;
+  expect(editor.creator.previewAllowSimulateDevices).toBeFalsy();
 });
 
 test("CreatorPresetEditableOptions - check export", () => {
@@ -42,12 +42,9 @@ test("CreatorPresetEditableOptions - check import", () => {
 test("CreatorPresetEditableOptions - forbiddenNestedElements init", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value).toHaveLength(0);
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value.map(v => v)).toEqual([]);
   editor.json = { options: { forbiddenNestedElements: { panel: ["boolean", "text"] } } };
-  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value).toEqual([
-    "boolean",
-    "text",
-  ]);
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value.map(v => v)).toEqual(["boolean", "text"]);
 });
 
 test("CreatorPresetEditableOptions - forbiddenNestedElements", () => {

@@ -131,11 +131,11 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
     };
   }
   protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
-    const value = this.optionsList.reduce((acc: any, option) => { acc[this.addPathToName(option)] = creator[option]; return acc; }, {});
-    if (value["forbiddenNestedElements"]) {
-      value["forbiddenNestedElementsPanel"] = [...creator.forbiddenNestedElements.panel];
-      value["forbiddenNestedElementsPanelDynamic"] = [...creator.forbiddenNestedElements.paneldynamic];
-      delete value["forbiddenNestedElements"];
+    const value = this.optionsList.reduce((acc: any, option) => { acc[option] = creator[option]; return acc; }, {});
+    delete value["forbiddenNestedElementsPanel"];
+    delete value["forbiddenNestedElementsPanelDynamic"];
+    if (creator.forbiddenNestedElements) {
+      value["forbiddenNestedElements"] = { panel: [...creator.forbiddenNestedElements.panel], paneldynamic: [...creator.forbiddenNestedElements.paneldynamic] };
     }
     return value;
   }
@@ -147,7 +147,9 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         json[option] = question.value;
       }
     });
-    json["forbiddenNestedElements"] = { panel: [...json["forbiddenNestedElementsPanel"]], paneldynamic: [...json["forbiddenNestedElementsPanelDynamic"]] };
+    if (json["forbiddenNestedElementsPanel"]?.length || json["forbiddenNestedElementsPanelDynamic"]?.length) {
+      json["forbiddenNestedElements"] = { panel: [...json["forbiddenNestedElementsPanel"]], paneldynamic: [...json["forbiddenNestedElementsPanelDynamic"]] };
+    }
     delete json["forbiddenNestedElementsPanel"];
     delete json["forbiddenNestedElementsPanelDynamic"];
 
