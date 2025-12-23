@@ -2465,5 +2465,5 @@ test("Error on getting placeholder, Bug#7327", () => {
   const translation = tabTranslation.model;
   const placeholders: string[] = [];
   translation.root.allLocItems.forEach(item => placeholders.push(item.getPlaceholder("de")));
-  expect(placeholders).toContain("Translation...");
+  expect(placeholders).toStrictEqual(["q1", "Column 1", "Row 1", "Zelltext 1", "Zelltext 1"]);
 });
