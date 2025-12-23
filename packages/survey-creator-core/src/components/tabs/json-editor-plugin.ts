@@ -122,7 +122,7 @@ export abstract class JsonEditorBaseModel extends Base {
   }
   private createTextWorker(): SurveyTextWorker {
     return new SurveyTextWorker(this.text, {
-      validatePropertyValues: this.creator.validatePropertyValuesInJsonEditor });
+      validatePropertyValues: this.creator.validateJsonPropertyValues });
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
