@@ -81,6 +81,9 @@ export class TranslationItemString extends Base {
       this.locString.setLocaleText(this.locale, newValue);
     }
   }
+  public getLocText(loc: string): string {
+    return this.locString.getLocaleText(loc) || this.text;
+  }
   public getType(): string {
     return "translationitemstring";
   }
@@ -145,8 +148,9 @@ export class TranslationItem extends TranslationItemBase {
   }
   public applyEditLocale(locale: string): void {
     const itemStr = this.values(locale);
-    if (!!itemStr && !!itemStr.text) {
-      this.setLocText(locale, itemStr.text);
+    const text = itemStr?.getLocText(locale);
+    if (!!text) {
+      this.setLocText(locale, text);
     }
   }
   public values(loc: string): TranslationItemString {
