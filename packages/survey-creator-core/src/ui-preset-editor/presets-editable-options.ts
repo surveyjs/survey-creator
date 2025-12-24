@@ -76,7 +76,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { type: "panel", name: "previewSimulateDevice", elements: [
           { name: "logicAllowTextEditExpressions", type: "boolean" },
         ] },
-        { name: "logicMaxItemsInCondition", type: "text", inputType: "number" }
+        { name: "logicMaxItemsInCondition", type: "text", inputType: "number", min: -1 }
       ]
       },
       { type: "panel", name: "translation", state: "expanded", elements: [
