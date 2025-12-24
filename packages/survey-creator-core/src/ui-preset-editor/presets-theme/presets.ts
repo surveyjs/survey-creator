@@ -208,6 +208,13 @@ export var presetsCss = {
     hintPrefix: "sps-dropdown__hint-prefix sd-dropdown__hint-prefix",
     hintSuffix: "sps-dropdown__hint-suffix sd-dropdown__hint-suffix"
   },
+  tagbox: {
+    cleanItemButton: "sd-tagbox-item_clean-button sps-tagbox-item_clean-button",
+    cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg sps-tagbox-item_clean-button-svg",
+    control: "sd-input sd-tagbox sd-dropdown sps-tagbox sps-dropdown",
+    controlValue: "sd-tagbox__value sd-dropdown__value sps-tagbox__value",
+    filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
+  },
   matrix: {
     tableWrapper: "sps-matrix sps-table-wrapper",
     root: "sps-table",

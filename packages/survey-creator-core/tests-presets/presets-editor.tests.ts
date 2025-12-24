@@ -63,7 +63,7 @@ test("Preset edit model, page component", () => {
   expect(resJson2).toEqual({});
 });
 
-test("Preset edit model, page component", () => {
+test("Preset edit model, page component 2", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
   expect(editor.creator.tabs).toHaveLength(4);
   const survey = editor.model;

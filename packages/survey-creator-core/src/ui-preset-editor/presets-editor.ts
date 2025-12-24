@@ -160,6 +160,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
           options.question.getTitleToolbar().isResponsivenessDisabled = true;
           options.actions = model.navigationBar.actions;
         }
+        item.onGetQuestionTitleActions(model, this.creator, options);
       });
     });
     model.onGetPanelTitleActions.add((_, options) => {

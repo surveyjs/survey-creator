@@ -133,4 +133,14 @@ test.describe(title, () => {
     await page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).getByTitle("Edit").click();
     await compareScreenshot(page, ".sv-popup__container", "presets-dialog-large.png");
   });
+
+  test("Presets options hints", async ({ page }) => {
+    await page.locator(".sps-list__container").getByText("Options").click();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    await page.locator(".sv-action-bar-item--collapse").nth(0).click();
+    await page.locator(".sps-checkbox__caption .sps-action-button").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-question__title .sps-action-button").filter({ visible: true }).nth(0).click();
+    await compareScreenshot(page, page.locator(".sps-panel").nth(1), "presets-options-hints.png");
+  });
 });

@@ -3,6 +3,7 @@ import { CreatorPresetEditableOptions } from "../src/presets/presets-editable-op
 import { CreatorPresetBase } from "../src/presets-creator/presets-base";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
+import { CreatorTester } from "../tests/creator-tester";
 
 test("CreatorPresetEditableOptions - check questions and creator properties binding", () => {
   const editor = new CreatorPresetEditorModel();
@@ -13,10 +14,10 @@ test("CreatorPresetEditableOptions - check questions and creator properties bind
   survey.getQuestionByName("options_allowZoom").value = false;
   expect(editor.creator.allowZoom).toBeFalsy();
 
-  expect(editor.creator.previewAllowSimulateDevice).toBeFalsy();
-  expect(survey.getQuestionByName("options_previewAllowSimulateDevice").value).toBeFalsy();
-  survey.getQuestionByName("options_previewAllowSimulateDevice").value = true;
-  expect(editor.creator.previewAllowSimulateDevice).toBeTruthy();
+  expect(editor.creator.previewAllowSimulateDevices).toBeTruthy();
+  expect(survey.getQuestionByName("options_previewAllowSimulateDevices").value).toBeTruthy();
+  survey.getQuestionByName("options_previewAllowSimulateDevices").value = false;
+  expect(editor.creator.previewAllowSimulateDevices).toBeFalsy();
 });
 
 test("CreatorPresetEditableOptions - check export", () => {
@@ -36,4 +37,41 @@ test("CreatorPresetEditableOptions - check import", () => {
   expect(survey.getQuestionByName("options_allowZoom").value).toBeTruthy();
   editor.json = { options: { allowZoom: false } };
   expect(survey.getQuestionByName("options_allowZoom").value).toBeFalsy();
+});
+
+test("CreatorPresetEditableOptions - forbiddenNestedElements init", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value.map(v => v)).toEqual([]);
+  editor.json = { options: { forbiddenNestedElements: { panel: ["boolean", "text"] } } };
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value.map(v => v)).toEqual(["boolean", "text"]);
+});
+
+test("CreatorPresetEditableOptions - forbiddenNestedElements", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value).toHaveLength(0);
+  editor.json = { options: { forbiddenNestedElements: { panel: ["boolean", "text"], paneldynamic: ["slider", "matrix"] } } };
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value.map(v => v)).toEqual([
+    "boolean",
+    "text",
+  ]);
+});
+
+test("CreatorPresetEditableOptions - forbiddenNestedElements initial values", () => {
+  const creator = new CreatorTester();
+  creator.forbiddenNestedElements = { panel: ["boolean", "text"], paneldynamic: ["slider", "matrix"] };
+  const editor = new CreatorPresetEditorModel(undefined, creator);
+  const survey = editor.model;
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanelDynamic").value.slice()).toEqual(["slider", "matrix"]);
+  expect(survey.getQuestionByName("options_forbiddenNestedElementsPanel").value.slice()).toEqual(["boolean", "text"]);
+});
+
+test("CreatorPresetEditableOptions - forbiddenNestedElements export", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.getQuestionByName("options_forbiddenNestedElementsPanel").value = ["boolean", "text"];
+  survey.getQuestionByName("options_forbiddenNestedElementsPanelDynamic").value = ["slider", "matrix"];
+  expect(editor.json.options.forbiddenNestedElements.panel).toEqual(["boolean", "text"]);
+  expect(editor.json.options.forbiddenNestedElements.paneldynamic).toEqual(["slider", "matrix"]);
 });
