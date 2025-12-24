@@ -112,11 +112,11 @@ export const enStrings = {
       expandCollapseButtonVisibility: {
         "never": "Never",
         "always": "Always",
-        "onhover": "On Hover"
+        "onhover": "On hover"
       },
       previewOrientation: {
         "landscape": "Landscape (Horizontal)",
-        "portrait": "Portrait (Vaertical)"
+        "portrait": "Portrait (Vertical)"
       },
       previewAllowSelectLanguage: {
         "auto": "Only for multilingual surveys",

@@ -15,7 +15,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
     return [
       { type: "panel", name: "designer", state: "expanded", elements: [
         { name: "pageEditMode", type: "dropdown", choices: [
-          "standard", "single", "bypage"
+          "standard", "bypage", "single"
         ] },
         { type: "panel", name: "designerHeader", elements: [
           { name: "showSurveyHeader", type: "boolean" },
@@ -40,11 +40,11 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { name: "maxColumns", type: "text", inputType: "number" },
         { name: "minChoices", type: "text", inputType: "number" },
         { name: "maxChoices", type: "text", inputType: "number" },
-        { name: "maxVisibleChoices", type: "text", inputType: "number" },
+        { name: "maxVisibleChoices", type: "text", inputType: "number", min: -1 },
         { name: "maxRateValues", type: "text", inputType: "number" },
         { name: "forbiddenNestedElementsPanel", type: "tagbox", choices: allTypes },
         { name: "forbiddenNestedElementsPanelDynamic", type: "tagbox", choices: allTypes },
-        { name: "maxPanelNestingLevel", type: "text", inputType: "number" }
+        { name: "maxPanelNestingLevel", type: "text", inputType: "number", min: -1 }
       ] },
       { type: "panel", name: "preview", state: "expanded", elements: [
         { type: "panel", name: "previewSimulateDevice", elements: [
@@ -65,7 +65,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
           "landscape", "portrait"
         ] },
         { name: "previewAllowSelectLanguage", type: "dropdown", choices: [
-          "auto", true, false, "all"
+          "auto", "all", true, false
         ] },
         { type: "panel", name: "previewAllowSelect", elements: [
           { name: "previewAllowSelectPage", type: "boolean" },
@@ -109,6 +109,9 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
           const text = choice.text || editorLocalization.getString("presets.options.ov." + element.name + "." + val);
           return { value: val, text: text };
         });
+      }
+      if (element.inputType === "number" && element.min === undefined) {
+        element.min = 0;
       }
       if (element.type === "boolean") {
         element.renderAs = "checkbox";
