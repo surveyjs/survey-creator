@@ -989,3 +989,35 @@ test("Toolbox import and defaults", () => {
     }
   ]);
 });
+test("Preset edit model, toolbox definition page, matrix actions when category is empty", () => {
+  const editor = new CreatorPresetEditorModel(
+    {
+      "toolbox": {
+        "definition": [
+          {
+            "name": "text"
+          }
+        ],
+        "categories": [
+          {
+            "category": "text",
+            "items": [
+              "text",
+            ]
+          },
+          {
+            "category": "matrix"
+          }
+        ]
+      }
+    });
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  let renderedRow = itemsQuestion.renderedTable.rows.filter(r => r.row == itemsQuestion.visibleRows[0])[0];
+  const action = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "context-menu")[0];
+  action.action(action);
+
+});
