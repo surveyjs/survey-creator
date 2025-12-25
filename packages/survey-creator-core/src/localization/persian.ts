@@ -3531,6 +3531,16 @@ export var persianStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "کنتراست"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "پایه",
+      // [Auto-translated] "Advanced"
+      advanced: "پیشرفته",
+      // [Auto-translated] "Expert"
+      expert: "کارشناس"
+    }
   }
 };
 
