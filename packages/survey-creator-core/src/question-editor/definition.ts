@@ -479,6 +479,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@checkbox": {
     properties: [
+      { name: "choices", tab: "choices", index: 0 },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -500,6 +501,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "selectAllText", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
+      { name: "choicesByUrl", tab: "choicesByUrl" },
     ],
     tabs: [
       { name: "choices", index: 10 },
@@ -508,6 +510,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@radiogroup": {
     properties: [
+      { name: "choices", tab: "choices", index: 0 },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -525,6 +528,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "dontKnowText", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
+      { name: "choicesByUrl", tab: "choicesByUrl" },
     ],
     tabs: [
       { name: "choices", index: 10 },
@@ -534,6 +538,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "matrixdropdowncolumn@dropdown": {
     properties: [
       "placeholder",
+      { name: "choices", tab: "choices", index: 0 },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -554,6 +559,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
+      { name: "choicesByUrl", tab: "choicesByUrl" },
     ],
     tabs: [
       { name: "choices", index: 10 },
@@ -563,6 +569,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "matrixdropdowncolumn@tagbox": {
     properties: [
       "placeholder",
+      { name: "choices", tab: "choices", index: 0 },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
@@ -583,6 +590,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
+      { name: "choicesByUrl", tab: "choicesByUrl" },
     ],
     tabs: [
       { name: "choices", index: 10 },

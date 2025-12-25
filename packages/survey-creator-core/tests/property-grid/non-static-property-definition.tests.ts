@@ -18,11 +18,17 @@ const defaultProperties : ISurveyPropertyGridDefinition = {
       ]
     },
     selectbase: {
+      properties: [
+        { name: "choices", tab: "choices" },
+      ],
       tabs: [
         { name: "choices", index: 5 }
       ]
     },
     matrixdropdownbase: {
+      properties: [
+        { name: "columns", tab: "columns" },
+      ],
       tabs: [
         { name: "columns", index: 10 }
       ]
