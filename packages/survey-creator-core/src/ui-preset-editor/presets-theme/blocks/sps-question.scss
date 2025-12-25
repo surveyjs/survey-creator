@@ -21,6 +21,7 @@
   width: 100%;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
   align-items: flex-start;
   align-self: stretch;
@@ -29,6 +30,10 @@
 .sps-question__title {
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);
   @include sjs2--typography--default-strong;
+
+  .sv-title-actions {
+    gap: var(--sjs2-spacing-x050, 4px);
+  }
 }
 
 .sps-question--nested {
@@ -46,6 +51,12 @@
   }
   .sps-question__content {
     padding: 0;
+  }
+  .sps-question__description {
+    @include ctrSmallFont;
+    color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+    padding-bottom: calcSize(2);
+    white-space: normal;
   }
 }
 

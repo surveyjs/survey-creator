@@ -19,7 +19,7 @@
   --sjs-primary-background-10: var(--sjs2-color-bg-brand-secondary);
   --sjs-primary-background-400: var(--sjs2-color-bg-brand-primary-dim);
   --sjs-primary-foreground-100: var(--sjs2-color-fg-static-main-primary);
-  --sjs-primary-foreground-25: var(--sjs2-color-fg-static-main-primary);
+  --sjs-primary-foreground-25: rgba(from var(--sjs2-color-fg-static-main-primary) r g b / 0.25);
   --sjs-secondary-background-500: var(--sjs2-color-bg-accent-primary);
   --sjs-secondary-background-25: var(--sjs2-color-bg-accent-secondary-dim);
   --sjs-secondary-background-10: var(--sjs2-color-bg-accent-secondary);
