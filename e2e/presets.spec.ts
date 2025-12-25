@@ -330,7 +330,7 @@ test.describe(title, () => {
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo fit"]);
 
     await doDragDrop({ page, element: items.getByRole("row", { name: "Logo fit" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey logo" }), options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo fit", "Logo width"]);
+    expect(await getPropertiesTexts(page)).toEqual(["Logo fit", "Survey logo", "Logo width"]);
 
     await items.getByRole("row", { name: "General" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: hidden.getByRole("row", { name: "Logo height" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey title" }), options: { targetPosition: { x: 25, y: 25 } } });
