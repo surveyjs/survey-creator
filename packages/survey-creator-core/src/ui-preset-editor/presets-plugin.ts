@@ -68,6 +68,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   public onPresetSaved = new EventBase<UIPresetEditor, { preset: ICreatorPresetData }>();
 
   protected saveHandler() {
+    if (!this.model.applyFromSurveyModel()) return;
     this.onPresetSaved.fire(this, { preset: this.model.json });
     this.hidePresets();
   }
