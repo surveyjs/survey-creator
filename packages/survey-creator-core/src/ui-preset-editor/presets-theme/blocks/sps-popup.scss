@@ -37,6 +37,10 @@
 .sps-popup {
   &.sv-popup--modal-popup {
     z-index: 3000;
+    :has(.sps-page) {
+      min-height: initial;
+      flex-grow: initial;
+    }
   }
   .sps-root-modern {
     height: initial;
