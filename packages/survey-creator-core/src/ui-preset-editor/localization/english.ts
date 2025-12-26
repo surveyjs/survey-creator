@@ -5,6 +5,7 @@ export const enStrings = {
     navigationTitle: "Languages",
     description: "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured.",
     creatorUI: "Survey Creator UI language",
+    defaultSurveyLocale: "Default survey language",
     surveyLanguages: "Survey languages",
     searchPlaceholder: "Type to search...",
     translateToEnglish: "Translate language names to English"
