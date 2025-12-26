@@ -32,6 +32,7 @@
     "lint:fix": "eslint . --max-warnings=0 --fix"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "survey-core": "../../../survey-library/packages/survey-core/build"
   },
   "devDependencies": {
@@ -41,6 +42,7 @@
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/ace": "0.0.32",
     "@types/jest": "^26.0.24",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "7.0.4",
     "@types/papaparse": "^5.0.4",
     "@types/qunit": "2.0.31",
