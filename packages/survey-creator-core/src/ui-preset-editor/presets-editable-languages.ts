@@ -45,15 +45,16 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               colCount: 3,
               showSelectAllItem: true,
               choices: this.getSurveyLocales(),
+              choicesEnableIf: "{item} <> \"" + surveyLocalization.defaultLocale + "\"",
               choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}",
             }]
         },
         {
           type: "dropdown",
           title: getLocString("presets.languages.defaultSurveyLocale"),
-          defaultValue: surveyLocalization.defaultLocale,
           name: this.defaultSurveyLocaleName,
           searchEnabled: true,
+          visible: false, // question is hidden until we have a better way to set the default survey locale
           choicesFromQuestion: this.surveyLocalesName,
           choicesFromQuestionMode: "selected",
         },
@@ -80,7 +81,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const defaultSurveyLocale = model.getValue(this.defaultSurveyLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    if (!creatorLocale && question.isAllSelected && !useEnglishNames) return undefined;
+    if (!creatorLocale && !defaultSurveyLocale && question.isAllSelected && !useEnglishNames) return undefined;
     const res: any = {};
     if (creatorLocale) {
       res.creator = creatorLocale;
@@ -97,22 +98,38 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     }
     return res;
   }
+
+  private selectDefaultLanguage(model: SurveyModel): void {
+    //select the default language if it is not selected
+    const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
+    const defaultLocale = surveyLocalization.defaultLocale;
+    if (!!defaultLocale && Array.isArray(question.value)) {
+      if (question.value.indexOf(defaultLocale) < 0) {
+        question.value = question.value.concat([defaultLocale]);
+      }
+    }
+  }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     model.setValue(this.creatorLocaleName, json.creator);
-    model.setValue(this.surveyUseEnglishNames, json.showInEnglish === true);
+    model.setValue(this.defaultSurveyLocaleName, json.defaultSurveyLocale || creator.survey.locale || surveyLocalization.defaultLocale);
+    model.setValue(this.surveyUseEnglishNames, json.useEnglishNames === true);
     this.updateLocaleNames(model);
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
     if (Array.isArray(locales) && locales.length > 0) {
-      question.valule = locales; // TODO: sheck spell
+      question.value = locales;
     } else {
       question.selectAll();
     }
+    this.selectDefaultLanguage(model);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.surveyUseEnglishNames) {
       this.updateLocaleNames(model);
+    }
+    if (name === this.surveyLocalesName) {
+      this.selectDefaultLanguage(model);
     }
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
