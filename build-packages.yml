@@ -511,6 +511,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 React"
+      
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 React"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -689,6 +694,11 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 Angular"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 Angular"
 
@@ -861,6 +871,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 Vue"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 Vue"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -1096,6 +1111,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 JS"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 JS"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
