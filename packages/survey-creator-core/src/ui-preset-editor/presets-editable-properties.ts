@@ -60,7 +60,7 @@ export class SurveyQuestionPresetPropertiesDetail {
       }
     }
     firstClassName = firstClassName || className;
-    this.getAllClasses(firstClassName).forEach(cl => {
+    this.collectAllClasses(firstClassName).forEach(cl => {
       if (presetPropertiesBaseClasses.indexOf(cl) < 0) {
         this.allClasses.push(cl);
       } else {
@@ -73,7 +73,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   public getObj() {
     return this.obj;
   }
-  private getAllClasses(className: string): string[] {
+  private collectAllClasses(className: string): string[] {
     const res = new Array<string>();
     res.push(className);
     if (className == "survey") return res;
@@ -141,6 +141,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     this.removeBaseClassesFromCurrentJson();
     this.updateCurrentJsonCore(this.currentJson.classes, val);
   }
+  public getAllClasses(): Array<string> { return this.allClasses; }
   public getClassesBySharedProperty(propName: string): Array<string> {
     const res: string[] = [];
     for (let i = 0; i < this.allClasses.length; i++) {
