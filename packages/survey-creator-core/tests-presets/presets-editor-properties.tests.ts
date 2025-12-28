@@ -4,7 +4,7 @@ import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
 import { UIPreset } from "../src/ui-presets-creator/presets";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/ui-preset-editor/presets-editable-properties";
-import { ISurveyPropertiesDefinition } from "../src/question-editor/definition";
+import { ISurveyPropertiesDefinition, defaultPropertyGridDefinition } from "../src/question-editor/definition";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -633,4 +633,10 @@ test("remove base types from properties json", () => {
   expect(classes["selectbase"]).toBeUndefined();
   expect(classes["question"]).toBeUndefined();
   expect(classes["ranking"]).toBeTruthy();
+});
+test("getClassesBySharedProperty", () => {
+  let properties = new SurveyQuestionPresetPropertiesDetail("text", defaultPropertyGridDefinition);
+  expect(properties.getClassesBySharedProperty("textUpdateMode")).toEqual(["comment", "text"]);
+  properties = new SurveyQuestionPresetPropertiesDetail("checkbox", defaultPropertyGridDefinition);
+  expect(properties.getClassesBySharedProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
 });

@@ -141,6 +141,16 @@ export class SurveyQuestionPresetPropertiesDetail {
     this.removeBaseClassesFromCurrentJson();
     this.updateCurrentJsonCore(this.currentJson.classes, val);
   }
+  public getClassesBySharedProperty(propName: string): Array<string> {
+    const res: string[] = [];
+    for (let i = 0; i < this.allClasses.length; i++) {
+      const prop = Serializer.findProperty(this.allClasses[i], propName);
+      if (prop && prop.visible !== false) {
+        res.push(this.allClasses[i]);
+      }
+    }
+    return res;
+  }
   private removeBaseClassesFromCurrentJson(): void {
     if (!this.hasBaseClassInCurrentJson() || this.baseClasses.length === 0) return;
     const classes = this.currentJson.classes;
