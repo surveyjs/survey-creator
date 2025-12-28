@@ -88,12 +88,9 @@ test("Preset edit model, property grid, apply", () => {
   propDef = editor.preset.getJson().propertyGrid?.definition;
   const pageProps = propDef?.classes["page"];
   expect(pageProps.tabs).toHaveLength(1);
-  expect(pageProps.tabs).toEqual([{ name: "layout", visible: false }]);
-  expect(pageProps?.properties).toHaveLength(0);
-  const panelBaseProps = propDef?.classes["panelbase"];
-  expect(panelBaseProps?.tabs).toHaveLength(3);
-  expect(panelBaseProps?.tabs).toEqual([{ name: "general", index: 0 }, { name: "questionSettings", index: 100 }, { name: "validation", index: 400 }]);
-  expect(panelBaseProps?.properties).toHaveLength(3);
+  expect(pageProps.tabs).toEqual([{ name: "general" }]);
+  expect(pageProps?.properties).toHaveLength(3);
+  expect(propDef?.classes["panelbase"]).toBeUndefined();
   const creator = editor.creator;
   creator.JSON = { pages: [{ name: "page1" }] };
   creator.selectElement(creator.survey.pages[0]);
@@ -131,6 +128,10 @@ test("Preset edit model, make general tab as second tab", () => {
   ];
 
   expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const propDef = editor.preset.getJson().propertyGrid?.definition;
+  const textProps = propDef?.classes["text"];
+  expect(textProps?.tabs).toHaveLength(2);
+  expect(textProps?.tabs).toEqual([{ name: "logic" }, { name: "general" }]);
   const creator = editor.creator;
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.selectElement(creator.survey.getQuestionByName("q1"));
@@ -255,9 +256,6 @@ test("Preset edit model, Change localization strings title&description", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   const propDef = editor.preset.getJson().propertyGrid?.definition;
   expect(propDef).toBeTruthy();
-  expect(propDef?.classes["question"].properties.find(p => p.name == "name").index).toBe(0);
-  expect(propDef?.classes["question"].properties.find(p => p.name == "title").index).toBe(200);
-  expect(propDef?.classes["text"].properties.find(p => p.name == "inputType").index).toBe(100);
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
   expect(loc.en.pe.question).toBeTruthy();
@@ -585,45 +583,10 @@ test("Properties & tabs order test", () => {
       items: ["visibleIf", "enableIf", "requiredIf"]
     }
   ]);
-  expect(classes.question.tabs).toHaveLength(3);
-  expect(classes.question.tabs[0]).toEqual({ name: "general", index: 0 });
-  expect(classes.question.tabs[1]).toEqual({ name: "layout", index: 400 });
-  expect(classes.question.tabs[2]).toEqual({ name: "logic", index: 500 });
-  expect(classes.selectbase.tabs).toHaveLength(1);
-  expect(classes.selectbase.tabs[0]).toEqual({ name: "choices", index: 100 });
-  expect(classes.ranking.tabs).toBeFalsy();
-  expect(classes.slider.tabs).toHaveLength(1);
-  expect(classes.slider.tabs[0]).toEqual({ name: "sliderSettings", index: 200 });
-  expect(classes.question.properties).toHaveLength(8);
-  expect(classes.question.properties).toEqual([
-    { name: "name", tab: "general", index: 0 },
-    { name: "title", tab: "general", index: 100 },
-    { name: "description", tab: "general", index: 500 },
-    { name: "visible", tab: "general", index: 200 },
-    { name: "layout", tab: "layout", index: 0 },
-    { name: "visibleIf", tab: "logic", index: 0 },
-    { name: "enableIf", tab: "logic", index: 100 },
-    { name: "requiredIf", tab: "logic", index: 400 }
-  ]);
-  expect(classes.selectbase.properties).toHaveLength(2);
-  expect(classes.selectbase.properties).toEqual([
-    { name: "choices", tab: "choices", index: 0 },
-    { name: "choicesByUrl", tab: "choices", index: 100 }
-  ]);
-  expect(classes.ranking.properties).toHaveLength(2);
-  expect(classes.ranking.properties).toEqual([
-    { name: "selectToRankEnabled", tab: "general", index: 300 },
-    { name: "selectToRankAreasLayout", tab: "general", index: 400 }
-  ]);
-  expect(classes.slider.properties).toHaveLength(6);
-  expect(classes.slider.properties).toEqual([
-    { name: "sliderType", tab: "sliderSettings" },
-    { name: "min", tab: "sliderSettings" },
-    { name: "max", tab: "sliderSettings" },
-    { name: "step", tab: "sliderSettings" },
-    { name: "minValueExpression", tab: "logic", index: 200 },
-    { name: "maxValueExpression", tab: "logic", index: 300 }
-  ]);
+  expect(classes.question).toBeUndefined();
+  expect(classes.ranking.tabs).toHaveLength(4);
+  expect(classes.ranking.tabs).toEqual([{ name: "general" }, { name: "choices" }, { name: "layout" }, { name: "logic" }]);
+  expect(classes.slider.tabs).toHaveLength(3);
 });
 test("Properties categories order", () => {
   const editor = new CreatorPresetEditorModel();
@@ -650,5 +613,24 @@ test("Properties categories order", () => {
   expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["title", "description", "visible"]);
   selector.value = "ranking";
   expect(categories.value.map(c=> c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
-  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["title", "description", "visible"]);
+  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
+});
+test("remove base types from properties json", () => {
+  const editor = new CreatorPresetEditorModel();
+
+  const survey = editor.model;
+
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+
+  selector.value = "ranking";
+  categories.removeRow(2);
+  editor.applyFromSurveyModel();
+  const propDef = editor.preset.getJson().propertyGrid?.definition;
+  expect(propDef).toBeTruthy();
+  const classes = propDef?.classes;
+  expect(classes).toBeTruthy();
+  expect(classes["selectbase"]).toBeUndefined();
+  expect(classes["question"]).toBeUndefined();
+  expect(classes["ranking"]).toBeTruthy();
 });
