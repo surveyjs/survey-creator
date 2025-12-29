@@ -143,4 +143,16 @@ test.describe(title, () => {
     await page.locator(".sps-question__title .sps-action-button").filter({ visible: true }).nth(0).click();
     await compareScreenshot(page, page.locator(".sps-panel").nth(1), "presets-options-hints.png");
   });
+
+  test("Presets options background", async ({ page }) => {
+    await page.locator(".sps-list__container").getByText("Options").click();
+    await page.locator(".svc-sidebar-tabs__bottom-container").getByRole("button").click();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    await page.locator(".sv-action-bar-item--collapse").nth(0).click();
+    await page.locator(".sv-action-bar-item--collapse").nth(1).click();
+    await page.locator(".sv-action-bar-item--collapse").nth(2).click();
+    await page.locator(".sv-action-bar-item--collapse").nth(3).click();
+    await compareScreenshot(page, page.locator(".sps-page"), "presets-options-background.png");
+  });
 });
