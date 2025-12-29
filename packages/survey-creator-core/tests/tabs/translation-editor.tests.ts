@@ -262,6 +262,40 @@ test("Implement machine translation for Creator", () => {
   expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
   expect(q1.locDescription.getLocaleText("fr")).toBe("Desc fr");
 });
+test("Modify machine translation before apply, Bug#7340", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            description: "desc"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {
+    options.callback(["Title fr", "Desc fr"]);
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const editor = tabTranslation.model.createTranslationEditor("fr");
+  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const machineTranslationAction = actions.find(a => a.id === "svc-translation-machine");
+  machineTranslationAction?.action();
+  const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  const cellQuestion = matrix.visibleRows[0].cells[1].question;
+  expect(cellQuestion.value).toBe("Title fr");
+  cellQuestion.value = "Modified Title fr";
+  editor.apply();
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.locTitle.getLocaleText("fr")).toBe("Modified Title fr");
+  expect(q1.locDescription.getLocaleText("fr")).toBe("Desc fr");
+});
 test("Show Edit action only if doMachineTranslation is set", () => {
   const survey = new SurveyModel({
     elements: [

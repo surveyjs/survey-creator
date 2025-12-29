@@ -357,6 +357,11 @@ test("Property import and defaults", () => {
               "tab": "general"
             },
             {
+              "name": "logo",
+              "index": 10000,
+              "tab": "logo"
+            },
+            {
               "name": "logoWidth",
               "index": 10000,
               "tab": "logo"

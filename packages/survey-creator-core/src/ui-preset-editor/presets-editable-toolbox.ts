@@ -429,7 +429,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       categoriesDefinition = categoriesDefinition.map(c => ({
         ...defaultCategoriesMap[c.category],
         ...c,
-        ...{ items: c.items.map(i => itemsMap[i]).filter(i => !!i) } }));
+        ...{ items: c.items?.map(i => itemsMap[i]).filter(i => !!i) } }));
     }
 
     //categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));

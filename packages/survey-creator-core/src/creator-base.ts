@@ -368,6 +368,7 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
+  public validateJsonPropertyValues: boolean = true;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**
    * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
