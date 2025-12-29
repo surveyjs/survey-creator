@@ -33,6 +33,7 @@
     flex-direction: column;
     &.sv-components-column--expandable {
       min-width: 100%;
+      flex-grow: 1;
     }
   }
 }

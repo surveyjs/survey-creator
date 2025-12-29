@@ -41,6 +41,9 @@
       min-height: initial;
       flex-grow: initial;
     }
+    .sv-components-row {
+      flex-direction: row;
+    }
   }
   .sps-root-modern {
     height: initial;
