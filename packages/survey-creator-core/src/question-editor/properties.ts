@@ -178,12 +178,23 @@ export class SurveyQuestionProperties {
         this.sortProperties(this.tabs[i].properties);
       }
     }
-    this.tabs.sort(function (a, b) {
-      return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
-    });
+    this.sortTabsByIndex(this.tabs);
     this.setParentTabs();
     this.tabs.forEach(tab => {
-      tab.tabs?.sort((a, b) => a.index - b.index);
+      this.sortTabsByIndex(tab.tabs);
+    });
+  }
+  private sortTabsByIndex(tabs: Array<SurveyQuestionEditorTabDefinition>): void {
+    if (!Array.isArray(tabs)) return;
+    let hasIndex = false;
+    tabs.forEach(tab => {
+      if (tab.index > 0) {
+        hasIndex = true;
+      }
+    });
+    if (!hasIndex) return;
+    tabs.sort((a, b) => {
+      return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
   }
   private setParentTabs(): void {
@@ -372,7 +383,7 @@ export class SurveyQuestionProperties {
       );
       if (!metaClass) break;
       res = this.getAllDefinitionsByClassSingleCore(metaClass.name, usedProperties, result, isColumn);
-      curClassName = metaClass.parentName;
+      curClassName = metaClass.name === "page" ? "panelbase" : metaClass.parentName;
     }
     return res;
   }
