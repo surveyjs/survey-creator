@@ -50,15 +50,6 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
             }]
         },
         {
-          type: "dropdown",
-          title: getLocString("presets.languages.defaultSurveyLocale"),
-          name: this.defaultSurveyLocaleName,
-          searchEnabled: true,
-          visible: false, // question is hidden until we have a better way to set the default survey locale
-          choicesFromQuestion: this.surveyLocalesName,
-          choicesFromQuestionMode: "selected",
-        },
-        {
           type: "panel",
           title: " ",
           name: this.navigationPanelName,
@@ -78,21 +69,18 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const creatorLocale = model.getValue(this.creatorLocaleName);
-    const defaultSurveyLocale = model.getValue(this.defaultSurveyLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    if (!creatorLocale && !defaultSurveyLocale && question.isAllSelected && !useEnglishNames) return undefined;
+    const isAllSelected = question.isAllSelected || question.choices.length < 2;
+    if (!creatorLocale && isAllSelected && !useEnglishNames) return undefined;
     const res: any = {};
     if (creatorLocale) {
       res.creator = creatorLocale;
     }
-    if (defaultSurveyLocale) {
-      res.defaultSurveyLocale = defaultSurveyLocale;
-    }
     if (useEnglishNames) {
       res.useEnglishNames = true;
     }
-    if (!question.isAllSelected && Array.isArray(question.value)) {
+    if (!isAllSelected && Array.isArray(question.value)) {
       res.surveyLocales = [];
       question.value.forEach(val => res.surveyLocales.push(val));
     }
@@ -105,14 +93,13 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const defaultLocale = surveyLocalization.defaultLocale;
     if (!!defaultLocale && Array.isArray(question.value)) {
       if (question.value.indexOf(defaultLocale) < 0) {
-        question.value = question.value.concat([defaultLocale]);
+        question.selectItem(question.getItemByValue(defaultLocale, question.choices), true);
       }
     }
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     model.setValue(this.creatorLocaleName, json.creator);
-    model.setValue(this.defaultSurveyLocaleName, json.defaultSurveyLocale || creator.survey.locale || surveyLocalization.defaultLocale);
     model.setValue(this.surveyUseEnglishNames, json.useEnglishNames === true);
     this.updateLocaleNames(model);
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
@@ -134,7 +121,6 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
-  private get defaultSurveyLocaleName() : string { return this.path + "_defaultSurveyLocale"; }
   private get searchLocalesName(): string { return this.path + "_searchLocales"; }
   private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }
 

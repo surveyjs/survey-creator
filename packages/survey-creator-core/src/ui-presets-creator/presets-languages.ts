@@ -7,11 +7,9 @@ export class CreatorPresetLanguages extends CreatorPresetBase {
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
     const locale = this.json?.creator || "";
-    //const defaultLocale = this.json?.defaultSurveyLocale || "";
     const supportedLocales = this.json?.surveyLocales || [];
     const useEnglishNames = this.json?.useEnglishNames;
     creator.locale = locale;
-    //creator.survey.locale = defaultLocale;
     surveyLocalization.supportedLocales = supportedLocales;
     surveyLocalization.showNamesInEnglish = useEnglishNames === true;
   }

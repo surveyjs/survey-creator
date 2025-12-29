@@ -13,7 +13,6 @@ import { registerConfig, sortDefaultConfigs, ConfigsHash } from "../utils/config
 export interface ICreatorPresetData {
   languages?: {
     creator?: string,
-    defaultSurveyLocale?: string,
     surveyLocales?: Array<string>,
     useEnglishNames?: boolean,
   };

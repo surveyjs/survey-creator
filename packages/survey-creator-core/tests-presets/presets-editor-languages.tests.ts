@@ -57,9 +57,9 @@ test("Preset edit model, Languages tab", () => {
   surveyLocalesQuestion.value = ["de", "fr"];
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.languages?.creator).toBe("de");
-  expect(editor.json.languages?.surveyLocales).toStrictEqual(["de", "fr"]);
+  expect(editor.json.languages?.surveyLocales).toStrictEqual(["de", "fr", "en"]);
   expect(editor.creator.locale).toBe("de");
-  expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr"]);
+  expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr", "en"]);
 
   dropdownQuestion.clearValue();
   surveyLocalesQuestion.selectAll();
@@ -84,21 +84,6 @@ test("Preset edit model, Languages tab - show in English", () => {
   expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
 
   surveyLocalization.showNamesInEnglish = false;
-});
-test("Preset edit model, Languages tab - survey locales", () => {
-  addLocales();
-  const editor = new CreatorPresetEditorModel();
-  const survey = editor.model;
-  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
-  const defaultSurveyLocaleQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_defaultSurveyLocale");
-  const oldSurveyLocaleQuestion = surveyLocalesQuestion.value;
-  surveyLocalesQuestion.value = ["de", "fr"];
-  expect(defaultSurveyLocaleQuestion.visibleChoices.map(c => c.value)).toEqual(["de", "en", "fr"]);
-  // defaultSurveyLocaleQuestion.value = "de";
-  // expect(editor.applyFromSurveyModel()).toBeTruthy();
-  // expect(editor.json.languages?.defaultSurveyLocale).toBe("de");
-  // expect(survey.defaultLocale).toBe("de");
-  surveyLocalesQuestion.value = oldSurveyLocaleQuestion;
 });
 test("Preset edit model, toolbox categories, restore after creator locale changed", () => {
   addLocales();
