@@ -250,6 +250,8 @@ export var bgStrings = {
     toolboxFilteredTextPlaceholder: "Въведете за търсене...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Няма намерени резултати",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Няма свойства за показване",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
     // [Auto-translated] "No results found"
@@ -1319,10 +1321,10 @@ export var bgStrings = {
     // "Regular expression"
     regex: "Регулярен израз",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Съобщение за валидиране",
-      // [Auto-translated] "Validation expression"
-      expression: "Валидиращ израз",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Известие за невалиден вход",
+      // [Auto-translated] "Valid when"
+      expression: "Валидно е, когато",
       // [Auto-translated] "Notification type"
       notificationType: "Тип известие",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1402,8 +1404,10 @@ export var bgStrings = {
     allowMultiple: "Разрешаване на множество файлове",
     // "Preview uploaded images"
     allowImagesPreview: "Преглед на изображения",
-    // "Accepted file types"
-    acceptedTypes: "Допустими типове файлове",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Приети категории файлове",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Допълнителни разширения на файловете",
     // "Wait for upload to complete"
     waitForUpload: "Изчакай да завърши качването.",
     // "Confirm file deletion"
@@ -2084,6 +2088,20 @@ export var bgStrings = {
       // [Auto-translated] "Informational"
       info: "Информационна"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Изображения",
+      // [Auto-translated] "Videos"
+      video: "Видеа",
+      // [Auto-translated] "Audio"
+      audio: "Аудио",
+      // [Auto-translated] "Documents"
+      document: "Документи",
+      // [Auto-translated] "Archives"
+      archive: "Архиви",
+      // [Auto-translated] "Custom"
+      custom: "Обичай"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Пълно име",
@@ -2497,6 +2515,8 @@ export var bgStrings = {
     notcontains: "не съдържа",
     // "Any of"
     anyof: "всеки от",
+    // [Auto-translated] "None of"
+    noneof: "Нито едно от",
     // "All of"
     allof: "всички",
     // "Greater than"
@@ -3090,8 +3110,10 @@ export var bgStrings = {
     storeOthersAsComment: "Изберете, за да съхраните стойността на опцията \"Други\" като отделно свойство в резултатите от проучването.",
     // "Use {0} as a placeholder for the actual value."
     format: "Използвай {0} като контейнер за действителната стойност.",
-    // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Направи справка с (https://www.w3schools.com/tags/att_input_accept.asp) за повече информация.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Изберете \"Custom\", за да добавите свои разширения върху предварително зададени категории.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Въвеждаме разширения на файловете, разделени със запетаи (например .csv, .xml).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Приложимо само за типове клетки Radiogroup и Checkbox.",
     // "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3508,6 +3530,16 @@ export var bgStrings = {
       "default-dark": "Тъмен",
       // [Auto-translated] "Contrast"
       "default-contrast": "Контраст"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Основно",
+      // [Auto-translated] "Advanced"
+      advanced: "Напреднали",
+      // [Auto-translated] "Expert"
+      expert: "Експерт"
     }
   }
 };
