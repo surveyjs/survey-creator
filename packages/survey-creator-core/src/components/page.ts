@@ -111,7 +111,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           this.isVisibleInViewPort = true;
-          if ((!this.element.survey || !(this.element.survey as SurveyModel).isLazyRenderingSuspended) && !this.needRenderContent) {
+          const el = this.element;
+          if ((!!el && !el.isDisposed && (!el.survey || !(el.survey as SurveyModel).isLazyRenderingSuspended)) && !this.needRenderContent) {
             setTimeout(() => this.needRenderContent = true, 1);
           }
         } else {
