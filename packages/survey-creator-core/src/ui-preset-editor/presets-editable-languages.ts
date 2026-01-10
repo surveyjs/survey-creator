@@ -25,7 +25,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
           placeholder: editorLocalization.getLocaleName(""),
           name: this.creatorLocaleName,
           searchEnabled: true,
-          choices: this.getCreatorLocales()
+          choices: this.getCreatorLocales(),
         },
         {
           type: "panel",
@@ -45,7 +45,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               colCount: 3,
               showSelectAllItem: true,
               choices: this.getSurveyLocales(),
-              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}"
+              choicesEnableIf: "{item} <> \"" + surveyLocalization.defaultLocale + "\"",
+              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}",
             }]
         },
         {
@@ -70,7 +71,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    if (!creatorLocale && question.isAllSelected && !useEnglishNames) return undefined;
+    const isAllSelected = question.isAllSelected || question.choices.length < 2;
+    if (!creatorLocale && isAllSelected && !useEnglishNames) return undefined;
     const res: any = {};
     if (creatorLocale) {
       res.creator = creatorLocale;
@@ -78,28 +80,43 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     if (useEnglishNames) {
       res.useEnglishNames = true;
     }
-    if (!question.isAllSelected && Array.isArray(question.value)) {
+    if (!isAllSelected && Array.isArray(question.value)) {
       res.surveyLocales = [];
       question.value.forEach(val => res.surveyLocales.push(val));
     }
     return res;
   }
+
+  private selectDefaultLanguage(model: SurveyModel): void {
+    //select the default language if it is not selected
+    const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
+    const defaultLocale = surveyLocalization.defaultLocale;
+    if (!!defaultLocale && Array.isArray(question.value)) {
+      if (question.value.indexOf(defaultLocale) < 0) {
+        question.selectItem(question.getItemByValue(defaultLocale, question.choices), true);
+      }
+    }
+  }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     model.setValue(this.creatorLocaleName, json.creator);
-    model.setValue(this.surveyUseEnglishNames, json.showInEnglish === true);
+    model.setValue(this.surveyUseEnglishNames, json.useEnglishNames === true);
     this.updateLocaleNames(model);
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
     if (Array.isArray(locales) && locales.length > 0) {
-      question.valule = locales; // TODO: sheck spell
+      question.value = locales;
     } else {
       question.selectAll();
     }
+    this.selectDefaultLanguage(model);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.surveyUseEnglishNames) {
       this.updateLocaleNames(model);
+    }
+    if (name === this.surveyLocalesName) {
+      this.selectDefaultLanguage(model);
     }
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
@@ -115,7 +132,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     return this.getLocaleItemValues(editorLocalization.getLocales(), false);
   }
   private getSurveyLocales(): Array<ItemValue> {
-    return this.getLocaleItemValues(surveyLocalization.getLocales(true), true);
+    return this.getLocaleItemValues(Object.keys(surveyLocalization.locales), true);
   }
   private getLocaleItemValues(locales: Array<string>, addEnLocale: boolean): Array<ItemValue> {
     const res = [];

@@ -57,9 +57,9 @@ test("Preset edit model, Languages tab", () => {
   surveyLocalesQuestion.value = ["de", "fr"];
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.languages?.creator).toBe("de");
-  expect(editor.json.languages?.surveyLocales).toStrictEqual(["de", "fr"]);
+  expect(editor.json.languages?.surveyLocales).toStrictEqual(["de", "fr", "en"]);
   expect(editor.creator.locale).toBe("de");
-  expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr"]);
+  expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr", "en"]);
 
   dropdownQuestion.clearValue();
   surveyLocalesQuestion.selectAll();
