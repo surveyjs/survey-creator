@@ -187,7 +187,9 @@ export interface IPropertyGridEditor {
   onMatrixCellValidate?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
+  onMatrixCellFocused?: (obj: Base, row: any) => void;
   onGetQuestionTitleActions?: (obj: Base, options: any, creator: ISurveyCreatorOptions) => void;
+  onMatrixDetailPanelVisibleChanged?: (obj: Base, options: any) => void;
   onUpdateQuestionCssClasses?: (obj: Base, options: any) => void;
 }
 
@@ -305,6 +307,16 @@ export var PropertyGridEditorCollection = {
     }
     return true;
   },
+  onMatrixCellFocused(
+    obj: Base,
+    prop: JsonObjectProperty,
+    row: MatrixDynamicRowModel
+  ): void {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixCellFocused) {
+      res.onMatrixCellFocused(obj, row);
+    }
+  },
   onGetMatrixRowAction(
     obj: Base,
     prop: JsonObjectProperty,
@@ -314,6 +326,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetMatrixRowAction) {
       res.onGetMatrixRowAction(obj, options, setObjFunc);
+    }
+  },
+  onMatrixDetailPanelVisibleChanged(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixDetailPanelVisibleChanged) {
+      res.onMatrixDetailPanelVisibleChanged(obj, options);
     }
   },
   onUpdateQuestionCssClasses(obj: Base,
@@ -959,6 +977,9 @@ export class PropertyGridModel {
     this.survey.onGetMatrixRowActions.add((sender, options) => {
       this.onGetMatrixRowAction(options);
     });
+    this.survey.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
+      this.onMatrixDetailPanelVisibleChanged(options);
+    });
     this.survey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
@@ -998,8 +1019,19 @@ export class PropertyGridModel {
       });
     }
     this.survey.onFocusInQuestion.add((sender, options) => {
-      this.currentlySelectedProperty = options.question.name;
-      this.currentlySelectedPanel = <PanelModel>options.question.parent;
+      const q = options.question;
+      const parentQ = q.parentQuestion;
+      if (!parentQ) {
+        this.currentlySelectedProperty = q.name;
+        this.currentlySelectedPanel = <PanelModel>q.parent;
+      } else {
+        if (parentQ.isDescendantOf("matrixdynamic")) {
+          this.onMatrixCellFocused(
+            parentQ,
+            <MatrixDynamicRowModel>q.data
+          );
+        }
+      }
     });
     this.survey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
@@ -1336,6 +1368,13 @@ export class PropertyGridModel {
       }
     );
   }
+  private onMatrixDetailPanelVisibleChanged(options: any) {
+    PropertyGridEditorCollection.onMatrixDetailPanelVisibleChanged(
+      this.obj,
+      options.question.property,
+      options
+    );
+  }
   private onUpdateQuestionCssClasses(options: any) {
     PropertyGridEditorCollection.onUpdateQuestionCssClasses(
       this.obj,
@@ -1406,6 +1445,13 @@ export class PropertyGridModel {
       <any>this.obj,
       row.editingObj,
       res
+    );
+  }
+  private onMatrixCellFocused(question: Question, row: MatrixDynamicRowModel): void {
+    PropertyGridEditorCollection.onMatrixCellFocused(
+      this.obj,
+      (<any>question).property,
+      row
     );
   }
   private onMatrixRowAdded(options: any) {

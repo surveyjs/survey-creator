@@ -5,7 +5,8 @@ import {
   ItemValue,
   QuestionCheckboxModel,
   QuestionImagePickerModel,
-  QuestionSliderModel
+  QuestionSliderModel,
+  QuestionImageMapModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -13,7 +14,6 @@ import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../sr
 import { SurveyTriggerComplete } from "survey-core";
 import { CreatorBase } from "../../src/creator-base";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-import { min } from "lodash";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
@@ -779,4 +779,30 @@ test("QuestionSlider customLabels & min/max properties, Bug#7250", () => {
   expect(question.customLabels[1].value).toBe(45);
   expect(cell2Value.value).toBe(45);
   expect(cell2Value.errors).toHaveLength(0);
+});
+test("ImageMap grid select", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "imagemap",
+        name: "q1",
+        areas: [{ value: "area1" }, { value: "area2" }]
+      }]
+  });
+  survey.setDesignMode(true);
+  const question = <QuestionImageMapModel>survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var areasQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("areas")
+  );
+  const cell1Value = areasQuestion.visibleRows[0].getQuestionByColumnName("value");
+  const cell2Text = areasQuestion.visibleRows[1].getQuestionByColumnName("text");
+  expect(question.isItemSelected(question.areas[0])).toBeFalsy();
+  expect(question.isItemSelected(question.areas[1])).toBeFalsy();
+  propertyGrid.survey.whenQuestionFocusIn(cell1Value);
+  expect(question.isItemSelected(question.areas[0])).toBeTruthy();
+  expect(question.isItemSelected(question.areas[1])).toBeFalsy();
+  propertyGrid.survey.whenQuestionFocusIn(cell2Text);
+  expect(question.isItemSelected(question.areas[0])).toBeFalsy();
+  expect(question.isItemSelected(question.areas[1])).toBeTruthy();
 });

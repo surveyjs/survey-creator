@@ -137,6 +137,43 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "storeDataAsText" },
     ]
   },
+  imagemap: {
+    properties: [
+      "imageLink",
+      { name: "multiSelect", tab: "general" },
+
+      { name: "minSelectedAreas", tab: "areas" },
+      { name: "maxSelectedAreas", tab: "areas" },
+      { name: "areas", tab: "areas" },
+
+      { name: "shape", tab: "appearance" },
+      { name: "idleFillColor", tab: "appearance" },
+      { name: "idleStrokeColor", tab: "appearance" },
+      { name: "idleStrokeWidth", tab: "appearance" },
+      { name: "hoverFillColor", tab: "appearance" },
+      { name: "hoverStrokeColor", tab: "appearance" },
+      { name: "hoverStrokeWidth", tab: "appearance" },
+      { name: "selectedFillColor", tab: "appearance" },
+      { name: "selectedStrokeColor", tab: "appearance" },
+      { name: "selectedStrokeWidth", tab: "appearance" },
+
+      { name: "valuePropertyName", tab: "data" },
+    ],
+    tabs: [
+      { name: "areas", index: 10 },
+      { name: "appearance", index: 20 }
+    ]
+  },
+  "imagemaparea[]@areas": {
+    properties: [
+      "visibleIf",
+      "enableIf",
+      "shape",
+    ],
+    tabs: [
+      { name: "general" }
+    ]
+  },
   html: {
     properties: ["html"]
   },
