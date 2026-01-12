@@ -1321,10 +1321,10 @@ export var msStrings = {
     // "Regular expression"
     regex: "Ekspresi biasa",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Mesej pengesahan",
-      // [Auto-translated] "Validation expression"
-      expression: "Ungkapan pengesahihan",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Mesej pemberitahuan untuk input tidak sah",
+      // [Auto-translated] "Valid when"
+      expression: "Sah apabila",
       // [Auto-translated] "Notification type"
       notificationType: "Jenis pemberitahuan",
       // [Auto-translated] "Maximum length (in characters)"
@@ -3530,6 +3530,16 @@ export var msStrings = {
       "default-dark": "Gelap",
       // [Auto-translated] "Contrast"
       "default-contrast": "Sebaliknya"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Asas",
+      // [Auto-translated] "Advanced"
+      advanced: "Lanjutan",
+      // [Auto-translated] "Expert"
+      expert: "Pakar"
     }
   }
 };
