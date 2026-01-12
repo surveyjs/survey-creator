@@ -14,6 +14,7 @@ import { FunctionFactory } from "survey-core";
 FunctionFactory.Instance.register("searchItem", searchItem);
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
+    const surveyLocales = this.getSurveyLocales();
     return {
       title: getLocString("presets.languages.title"),
       description: getLocString("presets.languages.description"),
@@ -25,7 +26,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
           placeholder: editorLocalization.getLocaleName(""),
           name: this.creatorLocaleName,
           searchEnabled: true,
-          choices: this.getCreatorLocales(),
+          choices: this.getCreatorLocales()
         },
         {
           type: "panel",
@@ -43,8 +44,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               titleLocation: "hidden",
               minSelectedChoices: 1,
               colCount: 3,
-              showSelectAllItem: true,
-              choices: this.getSurveyLocales(),
+              showSelectAllItem: surveyLocales.length > 1,
+              choices: surveyLocales,
               choicesEnableIf: "{item} <> \"" + surveyLocalization.defaultLocale + "\"",
               choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}",
             }]
@@ -86,17 +87,6 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     }
     return res;
   }
-
-  private selectDefaultLanguage(model: SurveyModel): void {
-    //select the default language if it is not selected
-    const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    const defaultLocale = surveyLocalization.defaultLocale;
-    if (!!defaultLocale && Array.isArray(question.value)) {
-      if (question.value.indexOf(defaultLocale) < 0) {
-        question.selectItem(question.getItemByValue(defaultLocale, question.choices), true);
-      }
-    }
-  }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     model.setValue(this.creatorLocaleName, json.creator);
@@ -107,16 +97,12 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     if (Array.isArray(locales) && locales.length > 0) {
       question.value = locales;
     } else {
-      question.selectAll();
+      question.value = question.choices.map(item => item.value);
     }
-    this.selectDefaultLanguage(model);
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.surveyUseEnglishNames) {
       this.updateLocaleNames(model);
-    }
-    if (name === this.surveyLocalesName) {
-      this.selectDefaultLanguage(model);
     }
   }
   private get creatorLocaleName() : string { return this.path + "_creator"; }
