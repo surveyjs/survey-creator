@@ -9,11 +9,12 @@ import {
   ItemValue,
   QuestionTextModel,
   ComponentCollection,
-  QuestionCheckboxModel
+  QuestionCheckboxModel,
+  CalculatedValue
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
-import { title } from "process";
+import { PropertyGridModelTester } from "./property-grid.base";
 
 export * from "../../src/components/link-value";
 
@@ -1971,4 +1972,75 @@ test("addCondition quotes in items values - Bug#10512", () => {
   expect(editor.text).toEqual("{q2} = 'before\\\"item3'");
   questionValue.value = questionValue.choices[3].value;
   expect(editor.text).toEqual("{q2} = 'Before \\\"With Quotes\\\"'");
+});
+
+test("Expression validation #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "radiogroup", name: "q2" }
+    ],
+    calculatedValues: [
+      { name: "calc1", expression: "{q1} + 1" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+
+  visibleIfQuestion.value = "bs+{";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("The expression is incorrect.");
+  expect(q1.visibleIf).toBeFalsy();
+
+  visibleIfQuestion.value = "{q2} = 1";
+  expect(visibleIfQuestion.errors).toHaveLength(0);
+  expect(q1.visibleIf).toBe("{q2} = 1");
+
+  visibleIfQuestion.value = "{q3} = 1";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("The variable 'q3' is not found.");
+  expect(q1.visibleIf).toBe("{q2} = 1");
+
+  visibleIfQuestion.value = "nonexistfunc({q1})";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("The function 'nonexistfunc' is not found.");
+  expect(q1.visibleIf).toBe("{q2} = 1");
+
+  visibleIfQuestion.value = "age({q2}) > 18";
+  expect(visibleIfQuestion.errors).toHaveLength(0);
+  expect(q1.visibleIf).toBe("age({q2}) > 18");
+});
+
+test("Do expression validation onload #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        "type": "text",
+        "name": "question1",
+        "visibleIf": "{question2}",
+        "enableIf": "bd+{",
+        "defaultValueExpression": "age({question2})",
+        "requiredIf": "ages({question1})"
+      }
+    ]
+  });
+  const q1 = survey.getQuestionByName("question1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+
+  const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("The variable 'question2' is not found.");
+
+  const enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
+  expect(enableIfQuestion.errors).toHaveLength(1);
+  expect(enableIfQuestion.errors[0].text).toBe("The expression is incorrect.");
+
+  const defaultValueExpressionQuestion = propertyGrid.survey.getQuestionByName("defaultValueExpression");
+  expect(defaultValueExpressionQuestion.errors).toHaveLength(1);
+  expect(defaultValueExpressionQuestion.errors[0].text).toBe("The variable 'question2' is not found.");
+
+  const requiredIfQuestion = propertyGrid.survey.getQuestionByName("requiredIf");
+  expect(requiredIfQuestion.errors).toHaveLength(1);
+  expect(requiredIfQuestion.errors[0].text).toBe("The function 'ages' is not found.");
 });

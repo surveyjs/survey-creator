@@ -1,4 +1,4 @@
-import { Base, ConditionsParser, JsonObjectProperty, Operand, Question } from "survey-core";
+import { Base, ConditionsParser, FunctionFactory, FunctionOperand, JsonObjectProperty, Operand, ProcessValue, Question, Variable } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
@@ -21,6 +21,34 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
       allowClear: false,
       rows: 2
     };
+  }
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
+    if (!val) return "";
+    const operand = new ConditionsParser().parseExpression(val);
+    if (!operand) return "The expression is incorrect.";
+    const list = new Array<Operand>();
+    operand.addOperandsToList(list);
+    for (const op of list) {
+      const type = op.getType();
+      if (type === "variable") {
+        const varName = (<Variable>op).variable;
+        const res = new ProcessValue(obj.getValueGetterContext()).hasValue(varName);
+        if (!res) {
+          return `The variable '${varName}' is not found.`;
+        }
+      }
+      if (type === "function") {
+        const functionName = (<FunctionOperand>op).functionName;
+        if (!FunctionFactory.Instance.hasFunction(functionName)) return `The function '${functionName}' is not found.`;
+      }
+    }
+    return "";
+  }
+  public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    const error = this.validateValue(obj, question, prop, question.value);
+    if (error) {
+      question.addError(error);
+    }
   }
   public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
     question.clearValue();

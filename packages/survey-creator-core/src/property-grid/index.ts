@@ -141,6 +141,7 @@ export interface IPropertyGridEditor {
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
+  onAfterSetValue?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
   onAfterRenderQuestion?: (
     obj: Base,
@@ -250,6 +251,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onSetup) {
       res.onSetup(obj, question, prop, options);
+    }
+  },
+  onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onAfterSetValue) {
+      res.onAfterSetValue(obj, question, prop, options);
     }
   },
   validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any): string {
@@ -978,6 +985,9 @@ export class PropertyGridModel {
       }
     });
     this.survey.editingObj = this.obj;
+    this.survey.getAllQuestions().forEach(q => {
+      PropertyGridEditorCollection.onAfterSetValue(this.obj, q, q.property, this.options);
+    });
     this.updateDependedPropertiesEditors();
 
     if (this.showOneCategoryInPropertyGrid) {
