@@ -86,4 +86,40 @@ export async function showPresets(page) {
   await page.locator(".sps-launch__card").click();
 }
 
+export const creatorTabDesignerName = "Designer";
+export const creatorTabPreviewName = "Preview";
+export const creatorTabLogicName = "Logic";
+export const creatorTabTranslationName = "Translation";
+export const creatorTabThemeName = "Themes";
+export const generalGroupName = "General";
+export const logicGroupName = "Conditions";
+export const inputMaskSettingsGroupName = "Input Mask Settings";
+
+export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
+  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) }));
+}
+
+export function getBarItemByTitle(page: Page, text: string): Locator {
+  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+}
+
+export function getListItemByText(page: Page, text: string): Locator {
+  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true });
+}
+
+export function getMenuItemByText(page: Page, text: string): Locator {
+  return page.getByRole("menuitemradio", { name: text, exact: true });
+}
+
+export const explicitErrorHandler = async (page: Page) => {
+  await page.evaluate(() => {
+    window.addEventListener("error", e => {
+      if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
+        e.message === "ResizeObserver loop limit exceeded") {
+        e.stopImmediatePropagation();
+      }
+    });
+  });
+};
+
 export { expect };
