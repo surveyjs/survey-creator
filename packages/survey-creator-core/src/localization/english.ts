@@ -776,6 +776,41 @@ export var enStrings = {
       labelFormat: "Label format",
       tooltipFormat: "Tooltip format"
     },
+    imagemap: {
+      imageLink: "Image URL",
+      areas: "Areas",
+      multiSelect: "Allow multiple selections",
+      valuePropertyName: "Value property name",
+
+      shape: "Shape",
+
+      idleFillColor: "Idle fill color",
+      idleStrokeColor: "Idle stroke color",
+      idleStrokeWidth: "Idle stroke width",
+      hoverFillColor: "Hover fill color",
+      hoverStrokeColor: "Hover stroke color",
+      hoverStrokeWidth: "Hover stroke width",
+
+      selectedFillColor: "Selected fill color",
+      selectedStrokeColor: "Selected stroke color",
+      selectedStrokeWidth: "Selected stroke width",
+      maxSelectedAreas: "Maximum selected areas",
+      minSelectedAreas: "Minimum selected areas",
+    },
+    imagemaparea: {
+      value: "Value",
+      shape: "Shape",
+      coords: "Coordinates",
+      idleFillColor: "Idle fill color",
+      idleStrokeColor: "Idle stroke color",
+      idleStrokeWidth: "Idle stroke width",
+      hoverFillColor: "Hover fill color",
+      hoverStrokeColor: "Hover stroke color",
+      hoverStrokeWidth: "Hover stroke width",
+      selectedFillColor: "Selected fill color",
+      selectedStrokeColor: "Selected stroke color",
+      selectedStrokeWidth: "Selected stroke width",
+    },
     file: {
       imageHeight: "Image height",
       imageWidth: "Image width"
