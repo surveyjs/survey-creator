@@ -6,6 +6,7 @@ import {
 } from "./index";
 import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "../creator-settings";
+import { getLocString } from "../editorLocalization";
 
 export class PropertyGridEditorExpression extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
@@ -25,7 +26,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions): string {
     if (!val || !options.expressionsValidateSyntax) return "";
     const operand = new ConditionsParser().parseExpression(val);
-    if (!operand) return "The expression is incorrect.";
+    if (!operand) return getLocString("ed.expressionSyntaxError");
     const list = new Array<Operand>();
     operand.addOperandsToList(list);
     for (const op of list) {
@@ -34,12 +35,12 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
         const varName = (<Variable>op).variable;
         const res = new ProcessValue(obj.getValueGetterContext()).hasValue(varName);
         if (!res) {
-          return `The variable '${varName}' is not found.`;
+          return getLocString("ed.expressionUnknownVariable")["format"](varName);
         }
       }
       if (type === "function" && options.expressionsValidateFunctions) {
         const functionName = (<FunctionOperand>op).functionName;
-        if (!FunctionFactory.Instance.hasFunction(functionName)) return `The function '${functionName}' is not found.`;
+        if (!FunctionFactory.Instance.hasFunction(functionName)) return getLocString("ed.expressionUnknownFunction")["format"](functionName);
       }
     }
     return "";

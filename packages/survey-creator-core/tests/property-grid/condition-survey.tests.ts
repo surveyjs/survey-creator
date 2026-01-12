@@ -1989,7 +1989,7 @@ test("Expression validation #7362", () => {
 
   visibleIfQuestion.value = "bs+{";
   expect(visibleIfQuestion.errors).toHaveLength(1);
-  expect(visibleIfQuestion.errors[0].text).toBe("The expression is incorrect.");
+  expect(visibleIfQuestion.errors[0].text).toBe("Syntax error.");
   expect(q1.visibleIf).toBeFalsy();
 
   visibleIfQuestion.value = "{q2} = 1";
@@ -1998,12 +1998,12 @@ test("Expression validation #7362", () => {
 
   visibleIfQuestion.value = "{q3} = 1";
   expect(visibleIfQuestion.errors).toHaveLength(1);
-  expect(visibleIfQuestion.errors[0].text).toBe("The variable 'q3' is not found.");
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variable: \"q3\".");
   expect(q1.visibleIf).toBe("{q2} = 1");
 
   visibleIfQuestion.value = "nonexistfunc({q1})";
   expect(visibleIfQuestion.errors).toHaveLength(1);
-  expect(visibleIfQuestion.errors[0].text).toBe("The function 'nonexistfunc' is not found.");
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown function: \"nonexistfunc\".");
   expect(q1.visibleIf).toBe("{q2} = 1");
 
   visibleIfQuestion.value = "age({q2}) > 18";
@@ -2032,19 +2032,19 @@ test("Do expression validation onload #7362", () => {
 
   const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
   expect(visibleIfQuestion.errors).toHaveLength(1);
-  expect(visibleIfQuestion.errors[0].text).toBe("The variable 'question2' is not found.");
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variable: \"question2\".");
 
   const enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
   expect(enableIfQuestion.errors).toHaveLength(1);
-  expect(enableIfQuestion.errors[0].text).toBe("The expression is incorrect.");
+  expect(enableIfQuestion.errors[0].text).toBe("Syntax error.");
 
   const defaultValueExpressionQuestion = propertyGrid.survey.getQuestionByName("defaultValueExpression");
   expect(defaultValueExpressionQuestion.errors).toHaveLength(1);
-  expect(defaultValueExpressionQuestion.errors[0].text).toBe("The variable 'question2' is not found.");
+  expect(defaultValueExpressionQuestion.errors[0].text).toBe("Unknown variable: \"question2\".");
 
   const requiredIfQuestion = propertyGrid.survey.getQuestionByName("requiredIf");
   expect(requiredIfQuestion.errors).toHaveLength(1);
-  expect(requiredIfQuestion.errors[0].text).toBe("The function 'ages' is not found.");
+  expect(requiredIfQuestion.errors[0].text).toBe("Unknown function: \"ages\".");
 });
 test("Calculated values expression validation #7362", () => {
   const survey = new SurveyModel({
