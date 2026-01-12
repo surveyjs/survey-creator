@@ -50,6 +50,12 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+export const getJSON = async (page: Page) => {
+  return await page.evaluate(() => {
+    return JSON.parse(window["creator"].text);
+  });
+};
+
 interface IDragToElementOptions {
   elementPosition?: {x: number, y: number};
   targetPosition?: {x: number, y: number};
@@ -109,6 +115,10 @@ export function getListItemByText(page: Page, text: string): Locator {
 
 export function getMenuItemByText(page: Page, text: string): Locator {
   return page.getByRole("menuitemradio", { name: text, exact: true });
+}
+
+export function getPropertyGridCategory(page: Page, categoryName: string): Locator {
+  return page.locator(".spg-panel__title span").getByText(categoryName, { exact: true });
 }
 
 export const explicitErrorHandler = async (page: Page) => {
