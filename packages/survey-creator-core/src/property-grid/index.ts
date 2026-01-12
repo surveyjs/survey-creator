@@ -142,7 +142,7 @@ export interface IPropertyGridEditor {
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   onAfterSetValue?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
-  validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
+  validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions) => string;
   onAfterRenderQuestion?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -259,10 +259,10 @@ export var PropertyGridEditorCollection = {
       res.onAfterSetValue(obj, question, prop, options);
     }
   },
-  validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any): string {
+  validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any, options: ISurveyCreatorOptions): string {
     var res = this.getEditor(prop);
     if (!!res && !!res.validateValue) {
-      return res.validateValue(obj, question, prop, value);
+      return res.validateValue(obj, question, prop, value, options);
     }
     return "";
   },
@@ -586,6 +586,7 @@ export class PropertyJSONGenerator {
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options, this.propertyGridDefinition);
+      PropertyGridEditorCollection.onAfterSetValue(this.obj, q, prop, this.options);
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }
@@ -1186,7 +1187,7 @@ export class PropertyGridModel {
     if (this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
       return this.getErrorTextOnValidate(
         editorLocalization.getString("pe.propertyNameIsIncorrect"), prop.name, obj, val);
-    const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
+    const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val, this.options);
     return this.getErrorTextOnValidate(editorError, prop.name, obj, val);
   }
   private getErrorTextOnValidate(defaultError: string, propName: string, obj: Base, val: any): string {

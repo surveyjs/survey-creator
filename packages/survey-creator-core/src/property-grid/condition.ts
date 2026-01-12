@@ -22,30 +22,30 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
       rows: 2
     };
   }
-  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
-    if (!val) return "";
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions): string {
+    if (!val || !options.expressionsValidateSyntax) return "";
     const operand = new ConditionsParser().parseExpression(val);
     if (!operand) return "The expression is incorrect.";
     const list = new Array<Operand>();
     operand.addOperandsToList(list);
     for (const op of list) {
       const type = op.getType();
-      if (type === "variable") {
+      if (type === "variable" && options.expressionsValidateVariables) {
         const varName = (<Variable>op).variable;
         const res = new ProcessValue(obj.getValueGetterContext()).hasValue(varName);
         if (!res) {
           return `The variable '${varName}' is not found.`;
         }
       }
-      if (type === "function") {
+      if (type === "function" && options.expressionsValidateFunctions) {
         const functionName = (<FunctionOperand>op).functionName;
         if (!FunctionFactory.Instance.hasFunction(functionName)) return `The function '${functionName}' is not found.`;
       }
     }
     return "";
   }
-  public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty): void {
-    const error = this.validateValue(obj, question, prop, question.value);
+  public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+    const error = this.validateValue(obj, question, prop, question.value, options);
     if (error) {
       question.addError(error);
     }

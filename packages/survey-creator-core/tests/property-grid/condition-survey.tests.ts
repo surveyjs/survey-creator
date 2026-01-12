@@ -1979,13 +1979,12 @@ test("Expression validation #7362", () => {
     elements: [
       { type: "text", name: "q1" },
       { type: "radiogroup", name: "q2" }
-    ],
-    calculatedValues: [
-      { name: "calc1", expression: "{q1} + 1" }
     ]
   });
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
   const q1 = survey.getQuestionByName("q1");
-  const propertyGrid = new PropertyGridModelTester(q1);
+  const propertyGrid = new PropertyGridModelTester(q1, options);
   const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
 
   visibleIfQuestion.value = "bs+{";
@@ -2025,8 +2024,11 @@ test("Do expression validation onload #7362", () => {
       }
     ]
   });
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+
   const q1 = survey.getQuestionByName("question1");
-  const propertyGrid = new PropertyGridModelTester(q1);
+  const propertyGrid = new PropertyGridModelTester(q1, options);
 
   const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
   expect(visibleIfQuestion.errors).toHaveLength(1);
@@ -2043,4 +2045,31 @@ test("Do expression validation onload #7362", () => {
   const requiredIfQuestion = propertyGrid.survey.getQuestionByName("requiredIf");
   expect(requiredIfQuestion.errors).toHaveLength(1);
   expect(requiredIfQuestion.errors[0].text).toBe("The function 'ages' is not found.");
+});
+test("Calculated values expression validation #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        "type": "text",
+        "name": "q1",
+      }
+    ],
+    calculatedValues: [
+      {
+        name: "calc1",
+        expression: "{q2}"
+      },
+    ]
+  });
+
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(survey, options);
+  const matrix = propertyGrid.survey.getQuestionByName("calculatedValues") as QuestionMatrixDynamicModel;
+  expect(matrix).toBeTruthy();
+  expect(matrix.visibleRows).toHaveLength(1);
+  const row = matrix.visibleRows[0];
+  row.showDetailPanel();
+  const expressionQuestion = row.detailPanel.getQuestionByName("expression");
+  expect(expressionQuestion.errors).toHaveLength(1);
 });
