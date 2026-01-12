@@ -155,4 +155,10 @@ test.describe(title, () => {
     await page.locator(".sv-action-bar-item--collapse").nth(3).click();
     await compareScreenshot(page, page.locator(".sps-page"), "presets-options-background.png");
   });
+
+  test("Presets small screen", async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 1440 });
+    expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
+    await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png");
+  });
 });
