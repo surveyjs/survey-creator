@@ -49,10 +49,12 @@ test("Preset edit model, Languages tab", () => {
   const survey = editor.model;
   const dropdownQuestion = <QuestionDropdownModel>survey.getQuestionByName("languages_creator");
   const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+  expect(surveyLocalesQuestion.showSelectAllItem).toBeTruthy();
   expect(dropdownQuestion.choices.length > 0).toBeTruthy();
   expect(surveyLocalesQuestion.choices.length > 0).toBeTruthy();
   expect(dropdownQuestion.isEmpty()).toBeTruthy();
   expect(surveyLocalesQuestion.isAllSelected).toBeTruthy();
+
   dropdownQuestion.value = "de";
   surveyLocalesQuestion.value = ["de", "fr"];
   expect(editor.applyFromSurveyModel()).toBeTruthy();
@@ -67,6 +69,47 @@ test("Preset edit model, Languages tab", () => {
   expect(editor.creator.locale).toBeFalsy();
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
 });
+
+test("Preset edit model, Languages tab - default survey language item", () => {
+  addLocales();
+  surveyLocalization.defaultLocale = "it";
+  const editor = new CreatorPresetEditorModel();
+  const defaultLocale = surveyLocalization.defaultLocale;
+  const survey = editor.model;
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+
+  const defaultItem = surveyLocalesQuestion.getItemByValue(surveyLocalization.defaultLocale, surveyLocalesQuestion.choices);
+  expect(defaultItem.enabled).toBeFalsy();
+  expect(defaultItem.selected).toBeTruthy();
+  surveyLocalization.defaultLocale = defaultLocale;
+});
+
+test("Preset edit model, Languages tab - no locales", () => {
+  surveyLocalization.locales = {};
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+
+  expect(surveyLocalesQuestion.choices.map(c => c.value)).toEqual(["en"]);
+
+  expect(surveyLocalesQuestion.showSelectAllItem).toBeFalsy();
+
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.languages?.surveyLocales).toBeFalsy();
+});
+
+test("Preset edit model, Languages tab - survey language items", () => {
+  addLocales();
+  const supportedLocales = surveyLocalization.supportedLocales;
+  surveyLocalization.supportedLocales = ["fr", "it"];
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+
+  expect(surveyLocalesQuestion.choices.map(c => c.value)).toEqual(["en", "de", "fr", "it", "bg"]);
+  surveyLocalization.supportedLocales = supportedLocales;
+});
+
 test("Preset edit model, Languages tab - show in English", () => {
   addLocales();
   const editor = new CreatorPresetEditorModel();
