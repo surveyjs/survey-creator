@@ -1,6 +1,8 @@
 import {
   JsonObjectProperty, ItemValue, QuestionDropdownModel,
-  Base, Serializer, SurveyModel, matrixDropdownColumnTypes
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
+  QuestionMatrixDynamicModel,
+  MatrixDynamicRowModel
 } from "survey-core";
 import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
@@ -330,6 +332,29 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                   name: this.nameInnerMatrix,
                   noRowsText: getLocString("presets.propertyGrid.noItemsText"),
                   titleLocation: "hidden",
+                  detailElements:
+
+                  [
+                    {
+                      "type": "panel",
+                      "name": "details",
+                      "maxWidth": "30%",
+                      "elements": [
+                        { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
+                        { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
+                        { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), showSelectAllItem: true, visible: false },
+                      ],
+                      visible: false
+                    },
+                    {
+                      type: "checkbox",
+                      name: "classes",
+                      title: getLocString("presets.propertyGrid.propertyVisibleIn"),
+                      colCount: 3,
+                      startWithNewLine: false,
+                      visible: false
+                    }
+                  ]
                 })
               ]
             },
@@ -561,6 +586,20 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       if (!strs[name]) strs[name] = {};
       strs = strs[name];
     }
+  }
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string, isNew: boolean}) {
+    if (question.name === this.nameInnerMatrix && this.currentProperties) {
+      const classesQuestion = question.detailPanel.getQuestionByName("classes");
+      const propertyName = row.getValue("name");
+      classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName);
+      const index = (question.visibleRows as any).findIndex(r => r === row);
+      if (index >= 0) {
+        const value = question.value || [];
+        value[index].classes = ["survey"];
+        question.value = value;
+      }
+    }
+    super.editItem(model, creator, question, row, options);
   }
   //   private setupPropertyCreator(): void {
   //     const creator = this.propCreator;

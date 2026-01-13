@@ -640,3 +640,51 @@ test("getClassesBySharedProperty", () => {
   properties = new SurveyQuestionPresetPropertiesDetail("checkbox", defaultPropertyGridDefinition);
   expect(properties.getClassesBySharedProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
 });
+test("visible in classes", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "checkbox");
+
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  propGridCategories.visibleRows[1].showDetailPanel();
+  const properties = propGridCategories.visibleRows[1].detailPanel.getQuestionByName("properties");
+  const itemIndex = properties.value.findIndex(r => r.name == "choicesOrder");
+
+  const row = properties.visibleRows[itemIndex];
+  const renderedRow = properties.renderedTable.rows.filter(r => r.row == row)[0];
+  const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
+  editItemAction.action();
+
+  expect(properties.detailPanel.getQuestionByName("classes").choices.map(c => c.value)).toEqual([
+    "checkbox",
+    "ranking",
+    "radiogroup",
+    "dropdown",
+    "tagbox",
+    "imagepicker"
+  ]);
+
+  const value = propGridCategories.value;
+  const valueRow = value.find(c => c.category == "choices").properties.find(p => p.name == "choicesOrder");
+  expect(valueRow.classes).toEqual([
+    "checkbox",
+    "ranking",
+    "radiogroup",
+    "dropdown",
+    "tagbox",
+    "imagepicker"
+  ]);
+
+  valueRow.classes = ["checkbox", "radiogroup"];
+  propGridCategories.value = [...value];
+  editor.applyFromSurveyModel();
+  const propDef = editor.preset.getJson().propertyGrid?.definition;
+  expect(propDef).toBeTruthy();
+  const classes = propDef?.classes;
+  expect(classes).toBeTruthy();
+  expect(classes["ranking"]).toBeUndefined();
+  expect(classes["checkbox"]).toBeTruthy();
+  expect(classes["radiogroup"]).toBeTruthy();
+  expect(classes["tagbox"]).toBeUndefined();
+});

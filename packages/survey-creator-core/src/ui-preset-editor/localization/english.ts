@@ -68,6 +68,7 @@ export const enStrings = {
     name: "Name",
     titleField: "Title",
     descriptionField: "Helper text",
+    propertyVisibleIn: "Property visible in",
     addCustomCategory: "New Category"
   },
   options: {
