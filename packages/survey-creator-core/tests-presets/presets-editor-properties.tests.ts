@@ -640,6 +640,12 @@ test("getClassesBySharedProperty", () => {
   properties = new SurveyQuestionPresetPropertiesDetail("checkbox", defaultPropertyGridDefinition);
   expect(properties.getClassesBySharedProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
 });
+test("getSelectedClassesForProperty", () => {
+  let properties = new SurveyQuestionPresetPropertiesDetail("text", defaultPropertyGridDefinition);
+  expect(properties.getSelectedClassesForProperty("textUpdateMode")).toEqual(["comment", "text"]);
+  properties = new SurveyQuestionPresetPropertiesDetail("checkbox", defaultPropertyGridDefinition);
+  expect(properties.getSelectedClassesForProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
+});
 test("visible in classes", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;

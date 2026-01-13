@@ -154,6 +154,18 @@ export class SurveyQuestionPresetPropertiesDetail {
     }
     return res;
   }
+  public getSelectedClassesForProperty(propName: string): string[] {
+    const res: string[] = [];
+    for (let i = 0; i < this.allClasses.length; i++) {
+      if (this.currentJson.classes[this.allClasses[i]].properties?.filter(p => p === propName || p.name === propName)[0]) {
+        res.push(this.allClasses[i]);
+      }
+    }
+    if (res.length === 0) {
+      return this.getClassesBySharedProperty(propName);
+    }
+    return res;
+  }
   private removeBaseClassesFromCurrentJson(): void {
     if (!this.hasBaseClassInCurrentJson() || this.baseClasses.length === 0) return;
     const classes = this.currentJson.classes;
@@ -595,8 +607,8 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       const index = (question.visibleRows as any).findIndex(r => r === row);
       if (index >= 0) {
         const value = question.value || [];
-        value[index].classes = ["survey"];
-        question.value = value;
+        value[index].classes = this.currentProperties.getSelectedClassesForProperty(propertyName);
+        question.value = [...value];
       }
     }
     super.editItem(model, creator, question, row, options);
