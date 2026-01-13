@@ -15,6 +15,7 @@ import {
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { PropertyGridModelTester } from "./property-grid.base";
+import { ActionContainer } from "survey-core";
 
 export * from "../../src/components/link-value";
 
@@ -2094,12 +2095,15 @@ test("checkbox expression choices validation #7362", () => {
   expect(matrix).toBeTruthy();
   expect(matrix.visibleRows).toHaveLength(1);
   const row = matrix.visibleRows[0];
-  row.showDetailPanel();
+  const renderedRow = matrix.renderedTable.rows[0];
+  const container = <ActionContainer>renderedRow.cells[renderedRow.cells.length - 1].item.value;
+  const action = container.getActionById("show-detail");
+  action.action();
+  expect(row.isDetailPanelShowing).toBeTruthy();
   expect(q1.choices[0].visibleIf).toBe("{q2} = 1");
   const expressionQuestion = row.detailPanel.getQuestionByName("visibleIf");
   expect(expressionQuestion.value).toBe("{q2} = 1");
-  // TODO not working for load phase
-  // expect(expressionQuestion.errors).toHaveLength(1);
+  expect(expressionQuestion.errors).toHaveLength(1);
   expressionQuestion.value = "{q2} = 2";
   expect(expressionQuestion.errors).toHaveLength(1);
   expressionQuestion.value = "{q1} = 2";
@@ -2139,4 +2143,29 @@ test("less annoying expression checks #7362", () => {
   expect(visibleIf.errors).toHaveLength(0);
   expect(visibleIf.value).toBe("{q1} = 1");
   expect(visibleIf.textUpdateMode).toBe("onBlur");
+});
+test("less annoying expression checks for properties with values correct & incorrect #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        name: "q1",
+        visibleIf: "{q1} = 1",
+        enableIf: "{q2} = 1"
+      }
+    ],
+  });
+
+  const q1 = survey.getQuestionByName("q1") as QuestionCheckboxModel;
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const visibleIf = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+  expect(visibleIf.value).toBe("{q1} = 1");
+  expect(visibleIf.errors).toHaveLength(0);
+  const enableIf = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("enableIf");
+  expect(enableIf.textUpdateMode).toBe("onTyping");
+  expect(enableIf.value).toBe("{q2} = 1");
+  expect(enableIf.errors).toHaveLength(1);
 });

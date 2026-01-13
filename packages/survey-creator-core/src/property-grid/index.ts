@@ -20,7 +20,8 @@ import {
   surveyLocalization,
   QuestionTextBase,
   IDialogOptions,
-  PageModel
+  PageModel,
+  GetMatrixRowActionsEvent
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -315,12 +316,13 @@ export var PropertyGridEditorCollection = {
   onGetMatrixRowAction(
     obj: Base,
     prop: JsonObjectProperty,
-    options: any,
-    setObjFunc: (obj: Base) => void
+    evtOptions: GetMatrixRowActionsEvent,
+    setObjFunc: (obj: Base) => void,
+    options: ISurveyCreatorOptions
   ) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetMatrixRowAction) {
-      res.onGetMatrixRowAction(obj, options, setObjFunc);
+      res.onGetMatrixRowAction(obj, prop, evtOptions, setObjFunc, options);
     }
   },
   onUpdateQuestionCssClasses(obj: Base,
@@ -1344,7 +1346,8 @@ export class PropertyGridModel {
       options,
       (obj: Base): void => {
         this.setObjFromAction(obj, options.question.name);
-      }
+      },
+      this.options
     );
   }
   private onUpdateQuestionCssClasses(options: any) {
