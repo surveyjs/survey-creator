@@ -161,6 +161,7 @@ test.describe(title, () => {
     await addButton.click();
     await expect(page.locator(" .sd-imagepicker__no-image")).toBeVisible();
     await input.fill("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+    await page.keyboard.press("Enter");
     await expect(page.locator(" .sd-imagepicker__no-image")).not.toBeVisible();
   });
 });
