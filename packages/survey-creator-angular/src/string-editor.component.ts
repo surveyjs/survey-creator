@@ -5,7 +5,7 @@ import { CreatorModelComponent } from "./creator-model.component";
 import { AngularComponentFactory } from "survey-angular-ui";
 
 @Component({
-  selector: "svc-string-edtior",
+  selector: "svc-string-editor",
   templateUrl: "./string-editor.component.html",
   styles: [":host { display: none; }"]
 })
