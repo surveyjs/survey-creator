@@ -46,6 +46,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     return "";
   }
   public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+    question.textUpdateMode = question.isEmpty() ? "onBlur" : "onTyping";
     const error = this.validateValue(obj, question, prop, question.value, options);
     if (error) {
       question.addError(error);
@@ -61,6 +62,9 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     question.valueFromDataCallback = (val: any): any => {
       return this.processExpression(val, false);
     };
+    question.registerFunctionOnPropertiesValueChanged(["errors"], () => {
+      question.textUpdateMode = question.errors.length > 0 ? "onTyping" : "onBlur";
+    });
   }
   private processExpression(val: string, valueToData: boolean): string {
     if (!val) return val;

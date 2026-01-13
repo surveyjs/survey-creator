@@ -10,7 +10,7 @@ import {
   QuestionTextModel,
   ComponentCollection,
   QuestionCheckboxModel,
-  CalculatedValue
+  QuestionCommentModel
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -2072,4 +2072,71 @@ test("Calculated values expression validation #7362", () => {
   row.showDetailPanel();
   const expressionQuestion = row.detailPanel.getQuestionByName("expression");
   expect(expressionQuestion.errors).toHaveLength(1);
+});
+
+test("checkbox expression choices validation #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        choices: [{ value: 1, visibleIf: "{q2} = 1" }],
+        name: "q1",
+      }
+    ],
+  });
+
+  const q1 = survey.getQuestionByName("q1") as QuestionCheckboxModel;
+  expect(q1.choices[0].visibleIf).toBe("{q2} = 1");
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const matrix = propertyGrid.survey.getQuestionByName("choices") as QuestionMatrixDynamicModel;
+  expect(matrix).toBeTruthy();
+  expect(matrix.visibleRows).toHaveLength(1);
+  const row = matrix.visibleRows[0];
+  row.showDetailPanel();
+  expect(q1.choices[0].visibleIf).toBe("{q2} = 1");
+  const expressionQuestion = row.detailPanel.getQuestionByName("visibleIf");
+  expect(expressionQuestion.value).toBe("{q2} = 1");
+  // TODO not working for load phase
+  // expect(expressionQuestion.errors).toHaveLength(1);
+  expressionQuestion.value = "{q2} = 2";
+  expect(expressionQuestion.errors).toHaveLength(1);
+  expressionQuestion.value = "{q1} = 2";
+  expect(q1.choices[0].visibleIf).toBe("{q1} = 2");
+  expect(expressionQuestion.errors).toHaveLength(0);
+});
+
+test("less annoying expression checks #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        name: "q1",
+      }
+    ],
+  });
+
+  const q1 = survey.getQuestionByName("q1") as QuestionCheckboxModel;
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const visibleIf = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+  visibleIf.onInput({ target: { value: "{u = 1" } });
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+  expect(visibleIf.errors).toHaveLength(0);
+
+  visibleIf.value = "{u = 1";
+  expect(visibleIf.textUpdateMode).toBe("onTyping");
+  expect(visibleIf.errors).toHaveLength(1);
+  expect(visibleIf.value).toBe("{u = 1");
+  expect(q1.visibleIf).toBeFalsy();
+
+  expect(visibleIf.textUpdateMode).toBe("onTyping");
+  visibleIf.onInput({ target: { value: "{q1} = 1" } });
+  expect(visibleIf.errors).toHaveLength(0);
+  expect(visibleIf.value).toBe("{q1} = 1");
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
 });
