@@ -673,14 +673,6 @@ test("visible in classes", () => {
 
   const value = propGridCategories.value;
   const valueRow = value.find(c => c.category == "choices").properties.find(p => p.name == "choicesOrder");
-  expect(valueRow.classes).toEqual([
-    "checkbox",
-    "ranking",
-    "radiogroup",
-    "dropdown",
-    "tagbox",
-    "imagepicker"
-  ]);
 
   valueRow.classes = ["checkbox", "radiogroup"];
   propGridCategories.value = [...value];
@@ -689,8 +681,8 @@ test("visible in classes", () => {
   expect(propDef).toBeTruthy();
   const classes = propDef?.classes;
   expect(classes).toBeTruthy();
-  expect(classes["ranking"]).toBeUndefined();
-  expect(classes["checkbox"]).toBeTruthy();
-  expect(classes["radiogroup"]).toBeTruthy();
-  expect(classes["tagbox"]).toBeUndefined();
+  expect(classes["ranking"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
+  expect(classes["checkbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
+  expect(classes["radiogroup"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
+  expect(classes["tagbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
 });

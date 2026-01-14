@@ -157,7 +157,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   public getSelectedClassesForProperty(propName: string): string[] {
     const res: string[] = [];
     for (let i = 0; i < this.allClasses.length; i++) {
-      if (this.currentJson.classes[this.allClasses[i]].properties?.filter(p => p === propName || p.name === propName)[0]) {
+      if (this.currentJson.classes[this.allClasses[i]].properties?.filter((p: any) => p === propName || p.name === propName)[0]) {
         res.push(this.allClasses[i]);
       }
     }
@@ -235,6 +235,23 @@ export class SurveyQuestionPresetPropertiesDetail {
     curJsonClasses[this.className] = curJsonClasses[this.className] || {};
     curJsonClasses[this.className].tabs = tabs;
     curJsonClasses[this.className].properties = properties;
+  }
+  public updatePropertyVisibility(propInfo: any): void {
+    this.updatePropertyVisibilityCore(this.currentJson.classes, propInfo);
+  }
+
+  private updatePropertyVisibilityCore(curJsonClasses: ISurveyPropertiesDefinition, propInfo: any): void {
+    Object.keys(curJsonClasses).forEach(className => {
+      const classDef = curJsonClasses[className];
+      const propIndex = classDef.properties?.findIndex((p: any) => p.name === propInfo.name);
+      if (propInfo.classes && propInfo.classes.indexOf(className) < 0) {
+        if (propIndex > -1) classDef.properties.splice(propIndex, 1);
+      } else {
+        if (propIndex < 0) {
+          classDef.properties.push({ name: propInfo.name, tab: propInfo.tab });
+        }
+      }
+    });
   }
   private getPropClassName(prop: JsonObjectProperty): string {
     const clName = prop.classInfo.name;
@@ -569,8 +586,12 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   private updateCurrentJson(model: SurveyModel): void {
     //if (!this.isPropCreatorChanged) return;
     //this.isPropCreatorChanged = false;
+    const categories = this.getQuestionCategories(model).value;
+
+    categories?.forEach(c => c.properties?.forEach(p => this.currentProperties?.updatePropertyVisibility(p))); // may be slow!
+
     if (this.currentProperties) {
-      this.currentProperties.updateCurrentJson(this.getPropertiesArray(this.getQuestionCategories(model).value));
+      this.currentProperties.updateCurrentJson(this.getPropertiesArray(categories));
     }
   }
   private getPropertiesArray(categories: any): Array<any> {
