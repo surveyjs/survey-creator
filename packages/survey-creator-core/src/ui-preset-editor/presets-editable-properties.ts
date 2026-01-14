@@ -236,19 +236,20 @@ export class SurveyQuestionPresetPropertiesDetail {
     curJsonClasses[this.className].tabs = tabs;
     curJsonClasses[this.className].properties = properties;
   }
-  public updatePropertyVisibility(propInfo: any): void {
-    this.updatePropertyVisibilityCore(this.currentJson.classes, propInfo);
+  public updatePropertyVisibility(propInfo: any, propCategory: string): void {
+    this.updatePropertyVisibilityCore(this.currentJson.classes, propInfo, propCategory);
   }
 
-  private updatePropertyVisibilityCore(curJsonClasses: ISurveyPropertiesDefinition, propInfo: any): void {
+  private updatePropertyVisibilityCore(curJsonClasses: ISurveyPropertiesDefinition, propInfo: any, propCategory: string): void {
     Object.keys(curJsonClasses).forEach(className => {
       const classDef = curJsonClasses[className];
-      const propIndex = classDef.properties?.findIndex((p: any) => p.name === propInfo.name);
-      if (propInfo.classes && propInfo.classes.indexOf(className) < 0) {
+      const propIndex = (classDef.properties as any)?.findIndex((p: any) => p.name === propInfo.name);
+      if (!propInfo.classes) return;
+      if (propInfo.classes.indexOf(className) < 0) {
         if (propIndex > -1) classDef.properties.splice(propIndex, 1);
       } else {
         if (propIndex < 0) {
-          classDef.properties.push({ name: propInfo.name, tab: propInfo.tab });
+          classDef.properties.push({ name: propInfo.name, tab: propCategory });
         }
       }
     });
@@ -588,7 +589,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     //this.isPropCreatorChanged = false;
     const categories = this.getQuestionCategories(model).value;
 
-    categories?.forEach(c => c.properties?.forEach(p => this.currentProperties?.updatePropertyVisibility(p))); // may be slow!
+    categories?.forEach(c => c.properties?.forEach(p => this.currentProperties?.updatePropertyVisibility(p, c.category))); // may be slow!
 
     if (this.currentProperties) {
       this.currentProperties.updateCurrentJson(this.getPropertiesArray(categories));
