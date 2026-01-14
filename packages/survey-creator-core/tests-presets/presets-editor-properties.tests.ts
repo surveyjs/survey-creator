@@ -662,20 +662,20 @@ test("visible in classes", () => {
   const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
   editItemAction.action();
 
-  expect(properties.detailPanel.getQuestionByName("classes").choices.map(c => c.value)).toEqual([
-    "checkbox",
-    "ranking",
-    "radiogroup",
-    "dropdown",
-    "tagbox",
-    "imagepicker"
+  expect(properties.detailPanel.getQuestionByName("classes").choices.map(c => [c.value, c.text])).toEqual([
+    ["checkbox", "Checkboxes"],
+    ["ranking", "Ranking"],
+    ["radiogroup", "Radio Button Group"],
+    ["dropdown", "Dropdown"],
+    ["tagbox", "Multi-Select Dropdown"],
+    ["imagepicker", "Image Picker"]
   ]);
 
-  const value = propGridCategories.value;
+  const value = JSON.parse(JSON.stringify(propGridCategories.value));
   const valueRow = value.find(c => c.category == "choices").properties.find(p => p.name == "choicesOrder");
 
   valueRow.classes = ["checkbox", "radiogroup"];
-  propGridCategories.value = [...value];
+  propGridCategories.value = value;
   editor.applyFromSurveyModel();
   const propDef = editor.preset.getJson().propertyGrid?.definition;
   expect(propDef).toBeTruthy();
@@ -683,6 +683,6 @@ test("visible in classes", () => {
   expect(classes).toBeTruthy();
   expect(classes["ranking"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
   expect(classes["checkbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
-  expect(classes["radiogroup"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
-  expect(classes["tagbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
+  expect(classes["radiogroup"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
+  expect(classes["tagbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
 });

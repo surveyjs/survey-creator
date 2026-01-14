@@ -470,6 +470,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   private firstTimeLoading = false;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     super.updateOnValueChangedCore(model, name);
+    let needToUpdateMatrices = false;
     if (name == this.nameCategories) {
       if (!this.firstTimeLoading)this.isModified = true;
       const matrix = this.getQuestionCategories(model);
@@ -488,9 +489,13 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             if (p.description !== editorLocalization.getString("pehelp." + p.name)) {
               this.changePropTitleAndDescription("pehelp", p.name, p.description);
             }
+            if (p.classes?.indexOf(this.currentClassName) == -1) {
+              needToUpdateMatrices = true;
+            }
           });
         });
       }
+
       if (!this.firstTimeLoading)this.updateCurrentJson(model);
     }
     // if ((<any>options.target)?.isQuestion) {
@@ -507,8 +512,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     //     this.localeStrings.pe.tabs[name] = options.newValue;
     //   }
     // }
-
-    if (name !== this.nameSelector) return;
+    if (name !== this.nameSelector && !needToUpdateMatrices) return;
     this.firstTimeLoading = true;
     if (this.currentProperties) {
       this.currentProperties = undefined;
@@ -589,10 +593,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     //this.isPropCreatorChanged = false;
     const categories = this.getQuestionCategories(model).value;
 
-    categories?.forEach(c => c.properties?.forEach(p => this.currentProperties?.updatePropertyVisibility(p, c.category))); // may be slow!
-
     if (this.currentProperties) {
       this.currentProperties.updateCurrentJson(this.getPropertiesArray(categories));
+      categories?.forEach(c => c.properties?.forEach(p => this.currentProperties?.updatePropertyVisibility(p, c.category))); // may be slow!
     }
   }
   private getPropertiesArray(categories: any): Array<any> {
@@ -625,7 +628,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     if (question.name === this.nameInnerMatrix && this.currentProperties) {
       const classesQuestion = question.detailPanel.getQuestionByName("classes");
       const propertyName = row.getValue("name");
-      classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName);
+      classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName).map(c => new ItemValue(c, this.getSelectorItemTitle(c)));
       const index = (question.visibleRows as any).findIndex(r => r === row);
       if (index >= 0) {
         const value = question.value || [];
