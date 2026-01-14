@@ -5,8 +5,8 @@ import {
   ItemValue,
   QuestionCheckboxModel,
   QuestionImagePickerModel,
-  QuestionSliderModel,
-  QuestionImageMapModel
+  QuestionImageMapModel,
+  ActionContainer
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -805,4 +805,40 @@ test("ImageMap grid select", () => {
   propertyGrid.survey.whenQuestionFocusIn(cell2Text);
   expect(question.isItemSelected(question.areas[0])).toBeFalsy();
   expect(question.isItemSelected(question.areas[1])).toBeTruthy();
+});
+test("ImageMap can keep expanded one area only", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "imagemap",
+        name: "q1",
+        areas: [{ value: "area1" }, { value: "area2" }]
+      }]
+  });
+  survey.setDesignMode(true);
+  const question = <QuestionImageMapModel>survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const areasQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("areas")
+  );
+  const clickExpandArea = (rowIndex: number) => {
+    const renderedRow = areasQuestion.renderedTable.rows[rowIndex];
+    const container = <ActionContainer>renderedRow.cells[renderedRow.cells.length - 1].item.value;
+    const action = container.getActionById("show-detail");
+    action.action();
+  };
+  const getExppadedAreasIndeces = (): number[] => {
+    const result: number[] = [];
+    areasQuestion.visibleRows.forEach((row, index) => {
+      if (row.isDetailPanelShowing) result.push(index);
+    });
+    return result;
+  };
+  expect(getExppadedAreasIndeces()).toHaveLength(0);
+  clickExpandArea(0);
+  expect(getExppadedAreasIndeces()).toEqual([0]);
+  clickExpandArea(3);
+  expect(getExppadedAreasIndeces()).toEqual([1]);
+  clickExpandArea(2);
+  expect(getExppadedAreasIndeces()).toHaveLength(0);
 });
