@@ -1,4 +1,4 @@
-import { Base, ConditionsParser, JsonObjectProperty, Operand, Question } from "survey-core";
+import { Base, ConditionsParser, FunctionFactory, FunctionOperand, JsonObjectProperty, Operand, ProcessValue, Question, Variable } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
@@ -6,6 +6,7 @@ import {
 } from "./index";
 import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "../creator-settings";
+import { getLocString } from "../editorLocalization";
 
 export class PropertyGridEditorExpression extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
@@ -22,6 +23,36 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
       rows: 2
     };
   }
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions): string {
+    if (!val || !options.expressionsValidateSyntax) return "";
+    const operand = new ConditionsParser().parseExpression(val);
+    if (!operand) return getLocString("ed.expressionSyntaxError");
+    const list = new Array<Operand>();
+    operand.addOperandsToList(list);
+    for (const op of list) {
+      const type = op.getType();
+      if (type === "variable" && options.expressionsValidateVariables) {
+        const varName = (<Variable>op).variable;
+        const res = new ProcessValue(obj.getValueGetterContext()).hasValue(varName);
+        if (!res) {
+          return getLocString("ed.expressionUnknownVariable")["format"](varName);
+        }
+      }
+      if (type === "function" && options.expressionsValidateFunctions) {
+        const functionName = (<FunctionOperand>op).functionName;
+        if (!FunctionFactory.Instance.hasFunction(functionName)) return getLocString("ed.expressionUnknownFunction")["format"](functionName);
+      }
+    }
+    return "";
+  }
+  public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+    question.textUpdateMode = question.isEmpty() ? "onBlur" : "onTyping";
+    const error = this.validateValue(obj, question, prop, question.value, options);
+    if (error) {
+      question.addError(error);
+    }
+    this.updateTextUpdateMode(question);
+  }
   public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
     question.clearValue();
   }
@@ -32,6 +63,12 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     question.valueFromDataCallback = (val: any): any => {
       return this.processExpression(val, false);
     };
+    question.registerFunctionOnPropertiesValueChanged(["errors"], () => {
+      this.updateTextUpdateMode(question);
+    });
+  }
+  private updateTextUpdateMode(question: Question) {
+    question.textUpdateMode = question.errors.length > 0 ? "onTyping" : "onBlur";
   }
   private processExpression(val: string, valueToData: boolean): string {
     if (!val) return val;

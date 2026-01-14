@@ -20,7 +20,8 @@ import {
   surveyLocalization,
   QuestionTextBase,
   IDialogOptions,
-  PageModel
+  PageModel,
+  GetMatrixRowActionsEvent
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -141,7 +142,8 @@ export interface IPropertyGridEditor {
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
-  validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
+  onAfterSetValue?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
+  validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions) => string;
   onAfterRenderQuestion?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -254,10 +256,16 @@ export var PropertyGridEditorCollection = {
       res.onSetup(obj, question, prop, options);
     }
   },
-  validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any): string {
+  onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onAfterSetValue) {
+      res.onAfterSetValue(obj, question, prop, options);
+    }
+  },
+  validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any, options: ISurveyCreatorOptions): string {
     var res = this.getEditor(prop);
     if (!!res && !!res.validateValue) {
-      return res.validateValue(obj, question, prop, value);
+      return res.validateValue(obj, question, prop, value, options);
     }
     return "";
   },
@@ -320,12 +328,13 @@ export var PropertyGridEditorCollection = {
   onGetMatrixRowAction(
     obj: Base,
     prop: JsonObjectProperty,
-    options: any,
-    setObjFunc: (obj: Base) => void
+    evtOptions: GetMatrixRowActionsEvent,
+    setObjFunc: (obj: Base) => void,
+    options: ISurveyCreatorOptions
   ) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetMatrixRowAction) {
-      res.onGetMatrixRowAction(obj, options, setObjFunc);
+      res.onGetMatrixRowAction(obj, prop, evtOptions, setObjFunc, options);
     }
   },
   onMatrixDetailPanelVisibleChanged(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -597,6 +606,7 @@ export class PropertyJSONGenerator {
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options, this.propertyGridDefinition);
+      PropertyGridEditorCollection.onAfterSetValue(this.obj, q, prop, this.options);
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }
@@ -999,6 +1009,9 @@ export class PropertyGridModel {
       }
     });
     this.survey.editingObj = this.obj;
+    this.survey.getAllQuestions().forEach(q => {
+      PropertyGridEditorCollection.onAfterSetValue(this.obj, q, q.property, this.options);
+    });
     this.updateDependedPropertiesEditors();
 
     if (this.showOneCategoryInPropertyGrid) {
@@ -1208,7 +1221,7 @@ export class PropertyGridModel {
     if (this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
       return this.getErrorTextOnValidate(
         editorLocalization.getString("pe.propertyNameIsIncorrect"), prop.name, obj, val);
-    const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
+    const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val, this.options);
     return this.getErrorTextOnValidate(editorError, prop.name, obj, val);
   }
   private getErrorTextOnValidate(defaultError: string, propName: string, obj: Base, val: any): string {
@@ -1365,7 +1378,8 @@ export class PropertyGridModel {
       options,
       (obj: Base): void => {
         this.setObjFromAction(obj, options.question.name);
-      }
+      },
+      this.options
     );
   }
   private onMatrixDetailPanelVisibleChanged(options: any) {

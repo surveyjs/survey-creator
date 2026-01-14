@@ -9,11 +9,13 @@ import {
   ItemValue,
   QuestionTextModel,
   ComponentCollection,
-  QuestionCheckboxModel
+  QuestionCheckboxModel,
+  QuestionCommentModel
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
-import { title } from "process";
+import { PropertyGridModelTester } from "./property-grid.base";
+import { ActionContainer } from "survey-core";
 
 export * from "../../src/components/link-value";
 
@@ -1971,4 +1973,199 @@ test("addCondition quotes in items values - Bug#10512", () => {
   expect(editor.text).toEqual("{q2} = 'before\\\"item3'");
   questionValue.value = questionValue.choices[3].value;
   expect(editor.text).toEqual("{q2} = 'Before \\\"With Quotes\\\"'");
+});
+
+test("Expression validation #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "radiogroup", name: "q2" }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+
+  visibleIfQuestion.value = "bs+{";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Syntax error.");
+  expect(q1.visibleIf).toBeFalsy();
+
+  visibleIfQuestion.value = "{q2} = 1";
+  expect(visibleIfQuestion.errors).toHaveLength(0);
+  expect(q1.visibleIf).toBe("{q2} = 1");
+
+  visibleIfQuestion.value = "{q3} = 1";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variable: \"q3\".");
+  expect(q1.visibleIf).toBe("{q2} = 1");
+
+  visibleIfQuestion.value = "nonexistfunc({q1})";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown function: \"nonexistfunc\".");
+  expect(q1.visibleIf).toBe("{q2} = 1");
+
+  visibleIfQuestion.value = "age({q2}) > 18";
+  expect(visibleIfQuestion.errors).toHaveLength(0);
+  expect(q1.visibleIf).toBe("age({q2}) > 18");
+});
+
+test("Do expression validation onload #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        "type": "text",
+        "name": "question1",
+        "visibleIf": "{question2}",
+        "enableIf": "bd+{",
+        "defaultValueExpression": "age({question2})",
+        "requiredIf": "ages({question1})"
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+
+  const q1 = survey.getQuestionByName("question1");
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+
+  const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variable: \"question2\".");
+
+  const enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
+  expect(enableIfQuestion.errors).toHaveLength(1);
+  expect(enableIfQuestion.errors[0].text).toBe("Syntax error.");
+
+  const defaultValueExpressionQuestion = propertyGrid.survey.getQuestionByName("defaultValueExpression");
+  expect(defaultValueExpressionQuestion.errors).toHaveLength(1);
+  expect(defaultValueExpressionQuestion.errors[0].text).toBe("Unknown variable: \"question2\".");
+
+  const requiredIfQuestion = propertyGrid.survey.getQuestionByName("requiredIf");
+  expect(requiredIfQuestion.errors).toHaveLength(1);
+  expect(requiredIfQuestion.errors[0].text).toBe("Unknown function: \"ages\".");
+});
+test("Calculated values expression validation #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        "type": "text",
+        "name": "q1",
+      }
+    ],
+    calculatedValues: [
+      {
+        name: "calc1",
+        expression: "{q2}"
+      },
+    ]
+  });
+
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(survey, options);
+  const matrix = propertyGrid.survey.getQuestionByName("calculatedValues") as QuestionMatrixDynamicModel;
+  expect(matrix).toBeTruthy();
+  expect(matrix.visibleRows).toHaveLength(1);
+  const row = matrix.visibleRows[0];
+  row.showDetailPanel();
+  const expressionQuestion = row.detailPanel.getQuestionByName("expression");
+  expect(expressionQuestion.errors).toHaveLength(1);
+});
+
+test("checkbox expression choices validation #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        choices: [{ value: 1, visibleIf: "{q2} = 1" }],
+        name: "q1",
+      }
+    ],
+  });
+
+  const q1 = survey.getQuestionByName("q1") as QuestionCheckboxModel;
+  expect(q1.choices[0].visibleIf).toBe("{q2} = 1");
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const matrix = propertyGrid.survey.getQuestionByName("choices") as QuestionMatrixDynamicModel;
+  expect(matrix).toBeTruthy();
+  expect(matrix.visibleRows).toHaveLength(1);
+  const row = matrix.visibleRows[0];
+  const renderedRow = matrix.renderedTable.rows[0];
+  const container = <ActionContainer>renderedRow.cells[renderedRow.cells.length - 1].item.value;
+  const action = container.getActionById("show-detail");
+  action.action();
+  expect(row.isDetailPanelShowing).toBeTruthy();
+  expect(q1.choices[0].visibleIf).toBe("{q2} = 1");
+  const expressionQuestion = row.detailPanel.getQuestionByName("visibleIf");
+  expect(expressionQuestion.value).toBe("{q2} = 1");
+  expect(expressionQuestion.errors).toHaveLength(1);
+  expressionQuestion.value = "{q2} = 2";
+  expect(expressionQuestion.errors).toHaveLength(1);
+  expressionQuestion.value = "{q1} = 2";
+  expect(q1.choices[0].visibleIf).toBe("{q1} = 2");
+  expect(expressionQuestion.errors).toHaveLength(0);
+});
+
+test("less annoying expression checks #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        name: "q1",
+      }
+    ],
+  });
+
+  const q1 = survey.getQuestionByName("q1") as QuestionCheckboxModel;
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const visibleIf = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+  visibleIf.onInput({ target: { value: "{u = 1" } });
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+  expect(visibleIf.errors).toHaveLength(0);
+
+  visibleIf.value = "{u = 1";
+  expect(visibleIf.textUpdateMode).toBe("onTyping");
+  expect(visibleIf.errors).toHaveLength(1);
+  expect(visibleIf.value).toBe("{u = 1");
+  expect(q1.visibleIf).toBeFalsy();
+
+  expect(visibleIf.textUpdateMode).toBe("onTyping");
+  visibleIf.onInput({ target: { value: "{q1} = 1" } });
+  expect(visibleIf.errors).toHaveLength(0);
+  expect(visibleIf.value).toBe("{q1} = 1");
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+});
+test("less annoying expression checks for properties with values correct & incorrect #7362", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        name: "q1",
+        visibleIf: "{q1} = 1",
+        enableIf: "{q2} = 1"
+      }
+    ],
+  });
+
+  const q1 = survey.getQuestionByName("q1") as QuestionCheckboxModel;
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+  const visibleIf = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
+  expect(visibleIf.textUpdateMode).toBe("onBlur");
+  expect(visibleIf.value).toBe("{q1} = 1");
+  expect(visibleIf.errors).toHaveLength(0);
+  const enableIf = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("enableIf");
+  expect(enableIf.textUpdateMode).toBe("onTyping");
+  expect(enableIf.value).toBe("{q2} = 1");
+  expect(enableIf.errors).toHaveLength(1);
 });

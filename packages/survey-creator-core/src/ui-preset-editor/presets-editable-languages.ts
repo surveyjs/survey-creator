@@ -14,6 +14,7 @@ import { FunctionFactory } from "survey-core";
 FunctionFactory.Instance.register("searchItem", searchItem);
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
+    const surveyLocales = this.getSurveyLocales();
     return {
       title: getLocString("presets.languages.title"),
       description: getLocString("presets.languages.description"),
@@ -43,9 +44,10 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               titleLocation: "hidden",
               minSelectedChoices: 1,
               colCount: 3,
-              showSelectAllItem: true,
-              choices: this.getSurveyLocales(),
-              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}"
+              showSelectAllItem: surveyLocales.length > 1,
+              choices: surveyLocales,
+              choicesEnableIf: "{item} <> \"" + surveyLocalization.defaultLocale + "\"",
+              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}",
             }]
         },
         {
@@ -70,7 +72,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    if (!creatorLocale && question.isAllSelected && !useEnglishNames) return undefined;
+    const isAllSelected = question.isAllSelected || question.choices.length < 2;
+    if (!creatorLocale && isAllSelected && !useEnglishNames) return undefined;
     const res: any = {};
     if (creatorLocale) {
       res.creator = creatorLocale;
@@ -78,7 +81,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     if (useEnglishNames) {
       res.useEnglishNames = true;
     }
-    if (!question.isAllSelected && Array.isArray(question.value)) {
+    if (!isAllSelected && Array.isArray(question.value)) {
       res.surveyLocales = [];
       question.value.forEach(val => res.surveyLocales.push(val));
     }
@@ -87,14 +90,14 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     model.setValue(this.creatorLocaleName, json.creator);
-    model.setValue(this.surveyUseEnglishNames, json.showInEnglish === true);
+    model.setValue(this.surveyUseEnglishNames, json.useEnglishNames === true);
     this.updateLocaleNames(model);
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
     if (Array.isArray(locales) && locales.length > 0) {
-      question.valule = locales; // TODO: sheck spell
+      question.value = locales;
     } else {
-      question.selectAll();
+      question.value = question.choices.map(item => item.value);
     }
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
@@ -115,7 +118,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     return this.getLocaleItemValues(editorLocalization.getLocales(), false);
   }
   private getSurveyLocales(): Array<ItemValue> {
-    return this.getLocaleItemValues(surveyLocalization.getLocales(true), true);
+    return this.getLocaleItemValues(Object.keys(surveyLocalization.locales), true);
   }
   private getLocaleItemValues(locales: Array<string>, addEnLocale: boolean): Array<ItemValue> {
     const res = [];

@@ -506,4 +506,7 @@ export interface ICreatorOptions {
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
    */
   maxChoiceContentNestingLevel?: number;
+  expressionsValidateFunctions?: boolean;
+  expressionsValidateVariables?: boolean;
+  expressionsValidateSyntax?: boolean;
 }

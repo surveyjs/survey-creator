@@ -1,4 +1,8 @@
-import { Base, ComputedUpdater, Helpers, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDetailPanelVisibleChangedEvent, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionImageMapModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement, SurveyModel } from "survey-core";
+import { Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
+  JsonMetadataClass, JsonObjectProperty, MatrixDetailPanelVisibleChangedEvent, MatrixDropdownColumn, MatrixDropdownRowModelBase,
+  MatrixDynamicRowModel, PanelModel, Question, QuestionImageMapModel, QuestionMatrixDropdownModelBase,
+  QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel,
+  renamedIcons, Serializer, SurveyElement } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
@@ -83,12 +87,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   }
   public onGetMatrixRowAction(
     obj: Base,
-    options: any,
-    setObjFunc: (obj: Base) => void
+    prop: JsonObjectProperty,
+    evtOptions: GetMatrixRowActionsEvent,
+    setObjFunc: (obj: Base) => void,
+    options: ISurveyCreatorOptions
   ) {
-    const question: QuestionMatrixDynamicModel = options.question;
-    const row: MatrixDynamicRowModel = options.row;
-    const actions: IAction[] = options.actions;
+    const question = <QuestionMatrixDynamicModel>evtOptions.question;
+    const row = <MatrixDynamicRowModel>evtOptions.row;
+    const actions: IAction[] = evtOptions.actions;
     if (this.getEditItemAsStandAlone()) {
       actions.push({
         id: "svd-grid-edit-column",
@@ -98,7 +104,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         showTitle: false,
         location: "end",
         action: () => {
-          var column = <MatrixDropdownColumn>options.row.editingObj;
+          const column = <MatrixDropdownColumn>evtOptions.row.editingObj;
           setObjFunc(column);
         }
       });
@@ -115,7 +121,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.location = "end";
       showDetailAction.ariaExpanded = row.isDetailPanelShowing;
       showDetailAction.action = () => {
-        row.showHideDetailPanelClick();
+        this.showHideDetailPanel(row, options);
         showDetailAction.iconName = row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
       };
       showDetailAction.visibleIndex = 0;
@@ -126,6 +132,15 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       };
     }
     updateMatixActionsClasses(actions);
+  }
+  private showHideDetailPanel(row: MatrixDynamicRowModel, options: ISurveyCreatorOptions) {
+    const hasDetail = !!row.detailPanel;
+    row.showHideDetailPanelClick();
+    if (!!row.detailPanel && !hasDetail) {
+      row.detailPanel.questions.forEach(q => {
+        PropertyGridEditorCollection.onAfterSetValue(q.obj, q, q.property, options);
+      });
+    }
   }
   private getShowDetailActionIconName(row: MatrixDynamicRowModel) {
     return row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
