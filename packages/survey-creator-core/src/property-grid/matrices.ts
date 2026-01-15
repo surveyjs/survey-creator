@@ -1,6 +1,6 @@
 import { Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
-  JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase,
-  MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase,
+  JsonMetadataClass, JsonObjectProperty, MatrixDetailPanelVisibleChangedEvent, MatrixDropdownColumn, MatrixDropdownRowModelBase,
+  MatrixDynamicRowModel, PanelModel, Question, QuestionImageMapModel, QuestionMatrixDropdownModelBase,
   QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel,
   renamedIcons, Serializer, SurveyElement } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
@@ -18,6 +18,7 @@ import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/ac
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyHelper } from "../survey-helper";
+import { ImageMapArea } from "survey-core/typings/src/question_imagemap";
 
 Serializer.addProperty("itemvalue",
   {
@@ -672,6 +673,31 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
+export class PropertyGridEditorImageMapArea extends PropertyGridEditorMatrixItemValues {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "imagemaparea[]";
+  }
+  protected getMatrixJSON(obj: Base, prop: JsonObjectProperty, propNames: Array<string>,
+    options: ISurveyCreatorOptions, propGridDefinition: ISurveyPropertyGridDefinition
+  ): any {
+    const res = super.getMatrixJSON(obj, prop, propNames, options, propGridDefinition);
+    res.detailPanelMode = "underRowSingle";
+    return res;
+  }
+  public onMatrixDetailPanelVisibleChanged(obj: Base, options: MatrixDetailPanelVisibleChangedEvent) {
+    const area = options.row.editingObj as ImageMapArea;
+    const model = obj as QuestionImageMapModel;
+    // Fist came visible change event with visible: true, then with visible: false
+    // so need to check current value when visible is false
+    model.selectedArea = options.visible ? area : (model.selectedArea === area ? undefined : model.selectedArea);
+  }
+  public onMatrixCellFocused(obj: Base, row: any) {
+    const area = row.editingObj as ImageMapArea;
+    const model = obj as QuestionImageMapModel;
+    model.selectedArea = area;
+  }
+}
+
 export class PropertyGridEditorMatrixLayoutColumns extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "panellayoutcolumns";
@@ -965,3 +991,4 @@ PropertyGridEditorCollection.register({
   }
 });
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixLayoutColumns());
+PropertyGridEditorCollection.register(new PropertyGridEditorImageMapArea());

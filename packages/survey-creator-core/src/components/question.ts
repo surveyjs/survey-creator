@@ -677,7 +677,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const selectedItems = actions.filter(item => item.id === id);
     return selectedItems.length > 0 ? selectedItems[0] : undefined;
   }
-  private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
+  protected createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
       iconName: options.actionData.iconName,

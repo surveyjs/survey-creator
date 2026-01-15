@@ -11,6 +11,7 @@ export * from "../adorners/QuestionHeader";
 export * from "../adorners/QuestionFooter";
 export * from "../adorners/QuestionBanner";
 export * from "../adorners/QuestionDropdown";
+export * from "../adorners/QuestionImagemap";
 export * from "../adorners/QuestionImage";
 export * from "../adorners/QuestionRating";
 export * from "../adorners/QuestionWidget";

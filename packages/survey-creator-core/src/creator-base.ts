@@ -4971,6 +4971,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       if (element.isDescendantOf("image")) {
         return "svc-image-question";
       }
+      if (element.isDescendantOf("imagemap")) {
+        return "svc-imagemap-question";
+      }
       return "svc-question";
     }
     if (element instanceof PanelModel) {
