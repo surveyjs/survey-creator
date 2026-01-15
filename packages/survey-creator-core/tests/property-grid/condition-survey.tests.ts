@@ -2169,3 +2169,34 @@ test("less annoying expression checks for properties with values correct & incor
   expect(enableIf.value).toBe("{q2} = 1");
   expect(enableIf.errors).toHaveLength(1);
 });
+
+test("expression validation with multiple errors", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        "type": "text",
+        "name": "q1",
+        "visibleIf": "{q2} = {q2} = {q3}",
+        "requiredIf": "foo() = foo() = bar()",
+        "enableIf": "foo({q2}) = foo({q2}) = bar({q2})",
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  options.expressionsValidateVariables = true;
+
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1, options);
+
+  const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variables: \"q2, q3\".");
+
+  const requiredIfQuestion = propertyGrid.survey.getQuestionByName("requiredIf");
+  expect(requiredIfQuestion.errors).toHaveLength(1);
+  expect(requiredIfQuestion.errors[0].text).toBe("Unknown functions: \"foo, bar\".");
+
+  const enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
+  expect(enableIfQuestion.errors).toHaveLength(1);
+  expect(enableIfQuestion.errors[0].text).toBe("Unknown functions: \"foo, bar\".");
+});

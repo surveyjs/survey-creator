@@ -29,20 +29,38 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     if (!operand) return getLocString("ed.expressionSyntaxError");
     const list = new Array<Operand>();
     operand.addOperandsToList(list);
-    for (const op of list) {
-      const type = op.getType();
-      if (type === "variable" && options.expressionsValidateVariables) {
-        const varName = (<Variable>op).variable;
-        const res = new ProcessValue(obj.getValueGetterContext()).hasValue(varName);
-        if (!res) {
-          return getLocString("ed.expressionUnknownVariable")["format"](varName);
+
+    const operands = list.reduce((acc, operand) => {
+      const type = operand.getType();
+      if (!acc[type]) { acc[type] = []; }
+      acc[type].push(operand);
+      return acc;
+    }, {} as { [key: string]: Operand[] });
+
+    if (options.expressionsValidateFunctions) {
+      const errors = [];
+      for (const operand of (operands.function || []) as FunctionOperand[]) {
+        if (errors.indexOf(operand.functionName) === -1 && !FunctionFactory.Instance.hasFunction(operand.functionName)) {
+          errors.push(operand.functionName);
         }
       }
-      if (type === "function" && options.expressionsValidateFunctions) {
-        const functionName = (<FunctionOperand>op).functionName;
-        if (!FunctionFactory.Instance.hasFunction(functionName)) return getLocString("ed.expressionUnknownFunction")["format"](functionName);
+      if (errors.length) {
+        return getLocString("ed.expressionUnknownFunction" + (errors.length > 1 ? "s" : ""))["format"](errors.join(", "));
       }
     }
+
+    if (options.expressionsValidateVariables) {
+      const errors = [];
+      for (const operand of (operands.variable || []) as Variable[]) {
+        if (errors.indexOf(operand.variable) === -1 && !new ProcessValue(obj.getValueGetterContext()).hasValue(operand.variable)) {
+          errors.push(operand.variable);
+        }
+      }
+      if (errors.length) {
+        return getLocString("ed.expressionUnknownVariable" + (errors.length > 1 ? "s" : ""))["format"](errors.length === 1 ? errors[0] : errors.join(", "));
+      }
+    }
+
     return "";
   }
   public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
