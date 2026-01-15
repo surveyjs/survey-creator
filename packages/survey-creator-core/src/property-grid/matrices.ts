@@ -545,7 +545,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   }
   protected getMinimumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
     if (prop.name === "choices") return options.minChoices;
-    return super.getMaximumRowCount(obj, prop, options);
+    return super.getMinimumRowCount(obj, prop, options);
   }
   protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
     if (prop.name === "choices") return options.maxChoices;
