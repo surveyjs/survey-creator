@@ -238,6 +238,12 @@ export var mnStrings = {
     options: "Тохиргоо",
     // "Generate Valid JSON"
     generateValidJSON: "Бодит JSON үүсгэх",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Тодорхойгүй үүрэг: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Тодорхойгүй хувьсагч: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Синтаксын алдаа.",
     // "Generate Readable JSON"
     generateReadableJSON: "Ойлгомжтой JSON үүсгэх",
     // "Toolbox"
@@ -1479,6 +1485,66 @@ export var mnStrings = {
       labelFormat: "Шошгоны хэлбэр",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Tooltip формат"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Зурагны URL",
+      // [Auto-translated] "Areas"
+      areas: "Бүс нутгууд",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Олон сонголтыг зөвшөөрөх",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Үнэ цэнийн өмчийн нэр",
+      // [Auto-translated] "Shape"
+      shape: "Хэлбэр",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Чөлөөт дүүргэлтийн өнгө",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Сул өнгийн өнгө",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Хоосон цохилтын өргөн",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Хөвөх хавчны дүүргэлтийн өнгө",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Хөвөх зургийн өнгө",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Хөвөх цохилтын өргөн",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Сонгогдсон дүүргэлтийн өнгө",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Сонгогдсон зургийн өнгө",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Сонгогдсон цохилтын өргөн",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Хамгийн их сонгогдсон бүсүүд",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Хамгийн бага сонгогдсон бүсүүд"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Үнэ цэн",
+      // [Auto-translated] "Shape"
+      shape: "Хэлбэр",
+      // [Auto-translated] "Coordinates"
+      coords: "Координатууд",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Чөлөөт дүүргэлтийн өнгө",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Сул өнгийн өнгө",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Хоосон цохилтын өргөн",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Хөвөх хавчны дүүргэлтийн өнгө",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Хөвөх зургийн өнгө",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Хөвөх цохилтын өргөн",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Сонгогдсон дүүргэлтийн өнгө",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Сонгогдсон зургийн өнгө",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Сонгогдсон цохилтын өргөн"
     },
     file: {
       // [Auto-translated] "Image height"

@@ -394,20 +394,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     });
     this.defaultCategories = toolboxDefaultCategories.map(i => this.createToolboxCategoryRow(i));
   }
-  // private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
-  //   if (!a || !b || a.length !== b.length) return false;
-  //   for (let i = 0; i < a.length; i++) {
-  //     if (a[i].name !== b[i].name || a[i].title !== b[i].title) return false;
-  //   }
-  //   return true;
-  // }
-  // private updateRankingLocalizationName(question: QuestionMatrixDynamicModel): void {
-  //   question.choices.forEach(item => {
-  //     item.locText.localizationName = "qt." + item.value;
-  //   });
-  // }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    //this.setupQuestionsValueDefinition(model, json);
     const defaultItemsMap = this.defaultItems.reduce((acc: any, i: any) => { acc[i.name] = i; return acc; }, {});
     const defaultCategoriesMap = this.defaultCategoriesMap;
 
@@ -432,8 +419,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         ...{ items: c.items?.map(i => itemsMap[i]).filter(i => !!i) } }));
     }
 
-    //categories.filter((c: any) => c.properties).forEach((c: any) => c.properties.forEach((p: any) => delete itemsMap[p.name]));
-    //Object.keys(itemsMap).map(key => itemsMap[key]);
     categoriesDefinition.filter((c: any) => c.items).forEach((c: any) => c.items.forEach((p: any) => delete defaultItemsMap[p.name]));
     const hiddenItems = this.defaultItems.filter(t => defaultItemsMap[t.name]);
 
@@ -446,20 +431,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.setupDefaults(model, creator);
     this.setupQuestionsValueCore(model, json, creator);
   }
-  // private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
-  //   json = json || {};
-  //   const question = this.getMatrix(model);
-  //   const value = [];
-  //   const definition = json.definition || [];
-  //   definition.forEach(item => {
-  //     const val = {};
-  //     for (let key in item) {
-  //       val[key] = key === "json" ? JSON.stringify(item[key], null, 2) : item[key];
-  //     }
-  //     value.push(val);
-  //   });
-  //   question.value = value;
-  // }
   private updateItemsFromCategories(model: SurveyModel) {
     this.getQuestionItems(model).value = this.getQuestionCategories(model).value.map(r => [...(r.items || [])]).flat();
   }

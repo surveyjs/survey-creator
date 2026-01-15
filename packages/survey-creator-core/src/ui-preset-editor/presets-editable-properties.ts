@@ -280,15 +280,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   private localeStrings: any;
   private currentProperties?: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
-  //   private propCreatorValue: SurveyCreatorModel;
   private isModified: boolean;
-  //   public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
-  //   public disposeCore(): void {
-  //     if (this.propCreator) {
-  //       this.propCreator.dispose();
-  //       this.propCreatorValue = undefined;
-  //     }
-  //   }
   protected get nameInnerMatrix() { return "properties"; }
   protected createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
@@ -435,9 +427,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.getSelector(model).choices = this.getSelectorChoices(creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
-    // this.propCreatorValue = creatorSetup.createCreator(options);
-    // this.setupPropertyCreator();
-    // this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
@@ -467,7 +456,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.propertyGridSetObj(active ? this.currentProperties?.getObj() : null);
   }
 
-  //   private isPropCreatorChanged: boolean;
   private firstTimeLoading = false;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     super.updateOnValueChangedCore(model, name);
@@ -495,20 +483,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
 
       if (!this.firstTimeLoading)this.updateCurrentJson(model);
     }
-    // if ((<any>options.target)?.isQuestion) {
-    //   if (options.name === "title") {
-    //     this.changePropTitleAndDescription("pe", name, options.newValue);
-    //   }
-    //   if (options.name === "description") {
-    //     this.changePropTitleAndDescription("pehelp", name, options.newValue);
-    //   }
-    // }
-    // if ((<any>options.target)?.isPage) {
-    //   if (options.name === "title") {
-    //     this.ensureLocalizationPath("pe.tabs");
-    //     this.localeStrings.pe.tabs[name] = options.newValue;
-    //   }
-    // }
     if (name !== this.nameSelector) return;
     this.firstTimeLoading = true;
     if (this.currentProperties) {
@@ -518,8 +492,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.currentClassName = selQuestion.value;
     this.updateMatrices(model);
     this.firstTimeLoading = false;
-    //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
-    //this.setupCreatorToolbox(this.propCreator);
   }
 
   private updateMatrices(model: SurveyModel) {
@@ -557,9 +529,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.updateOnValueChangedCore(model, this.nameSelector);
   }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
-  //   private getPropertyCreatorQuestion(model: SurveyModel): QuestionEmbeddedCreatorModel { return <QuestionEmbeddedCreatorModel>model.getQuestionByName(this.namePropertyCreator); }
   private get nameSelector() { return this.fullPath + "_selector"; }
-  //   private get namePropertyCreator() { return this.fullPath + "_propcreator"; }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
     const classes = ["survey", "page"];
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
@@ -586,12 +556,8 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     return columnTitle + ": " + postFix;
   }
   private updateCurrentJson(model: SurveyModel): void {
-    //if (!this.isPropCreatorChanged) return;
-    //this.isPropCreatorChanged = false;
-    const categories = this.getQuestionCategories(model).value;
-
     if (this.currentProperties) {
-      this.currentProperties.updateCurrentJson(this.getPropertiesArray(categories));
+      this.currentProperties.updateCurrentJson(this.getPropertiesArray(this.getQuestionCategories(model).value));
     }
   }
   private getPropertiesArray(categories: any): Array<any> {
@@ -647,218 +613,4 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     }
     super.editItem(model, creator, question, row, options);
   }
-  //   private setupPropertyCreator(): void {
-  //     const creator = this.propCreator;
-  //     creator.maxNestedPanels = 0;
-  //     creator.showSaveButton = false;
-  //     creator.onModified.add((sender, options) => {
-  //       this.isPropCreatorChanged = true;
-  //       this.isModified = true;
-  //       if (options.type === "PROPERTY_CHANGED") {
-  //         const name = (<any>options.target).name;
-  //         if ((<any>options.target)?.isQuestion) {
-  //           if (options.name === "title") {
-  //             this.changePropTitleAndDescription("pe", name, options.newValue);
-  //           }
-  //           if (options.name === "description") {
-  //             this.changePropTitleAndDescription("pehelp", name, options.newValue);
-  //           }
-  //         }
-  //         if ((<any>options.target)?.isPage) {
-  //           if (options.name === "title") {
-  //             this.ensureLocalizationPath("pe.tabs");
-  //             this.localeStrings.pe.tabs[name] = options.newValue;
-  //           }
-  //         }
-  //       }
-  //     });
-  //     creator.autoSaveEnabled = false;
-  //     creator.showTabsDefault = false;
-  //     creator.showToolbarDefault = false;
-  //     creator.allowCollapseSidebar = false;
-  //     creator.toolbar.setItems([]);
-  //     creator.showAddQuestionButton = false;
-  //     creator.toolbox.forceCompact = false;
-  //     creator.showSidebar = false;
-  //     creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
-  //       if (options.area === "designer-tab") {
-  //         const model = options.survey;
-  //         model.onPageAdded.add((sender, options) => {
-  //           this.addCategoryNamePropIntoPage(options.page, creator);
-  //         });
-  //       }
-  //     });
-  //     creator.onSurveyInstanceCreated.add((sender, options) => {
-  //       if (options.area === "designer-tab") {
-  //         const model = options.survey;
-  //         model.onElementWrapperComponentName.add((sender, options) => {
-  //           const el = options.element;
-  //           if (this.isCategoryElement(el)) {
-  //             options.componentName = el.getType();
-  //           } else {
-  //             const compName = options.componentName;
-  //             if (el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
-  //               options.componentName = "svc-preset-question";
-  //             }
-  //             if (el.isPage) {
-  //               options.componentName = "svc-preset-page";
-  //             }
-  //           }
-  //         });
-  //         const prev_getRendererContextForString = model.getRendererContextForString;
-  //         const prev_getRendererForString = model.getRendererForString;
-  //         model.getRendererForString = (element: Base, name: string): string => {
-  //           if (this.isCategoryElement(element)) return undefined;
-  //           return prev_getRendererForString.call(model, element, name);
-  //         };
-  //         model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-  //           if (this.isCategoryElement(element)) return locStr;
-  //           return prev_getRendererContextForString.call(model, element, locStr);
-  //         };
-  //       }
-  //     });
-  //     creator.onElementAllowOperations.add((sender, options) => {
-  //       options.allowChangeInputType = false;
-  //       options.allowChangeRequired = false;
-  //       options.allowChangeType = false;
-  //       options.allowCopy = false;
-  //       options.allowShowSettings = false;
-  //       options.allowDelete = true;
-  //       options.allowEdit = true;
-  //     });
-  //     creator.onCollectionItemAllowOperations.add((sender, options) => {
-  //       options.allowEdit = false;
-  //       options.allowAdd = false;
-  //       options.allowDelete = false;
-  //     });
-  //     creator.onModified.add((sender, options) => {
-  //       if (options.type === "OBJECT_DELETED") {
-  //         this.setupCreatorToolbox(sender);
-  //       }
-  //     });
-  //     creator.getElementAddornerCssCallback = (obj: Base, className: string): string => { return className + " preset_pg_question"; };
-  //     creator.onPageAdded.add((sender, options) => {
-  //       const page = options.page;
-  //       page.name = SurveyHelper.getNewName(creator.survey.pages, "category");
-  //       if (!page.title) {
-  //         page.title = "New Category";
-  //       }
-  //       page.updateRows();
-  //     });
-  //     creator.onQuestionAdded.add((sender, options) => {
-  //       this.setupCreatorToolbox(sender);
-  //     });
-  //     creator.onDragDropAllow.add((sender, options) => {
-  //       options.allowDropNextToAnother = false;
-  //     });
-  //     creator.onCanShowProperty.add((sender, options) => {
-  //       if (options.obj.isPage && options.propertyName === "description") {
-  //         options.canShow = false;
-  //       }
-  //     });
-  //   }
-  //   private isCategoryElement(el: any): boolean {
-  //     return el.isCategoryElement === true;
-  //   }
-  //   private updateCreatorJSON(json: any): any {
-  //     if (!json || !json.pages) return;
-  //     json.widthMode = "static";
-  //     json.width = "800px";
-  //     json.pages.forEach((page: any) => {
-  //       this.updateCreatorJSONElements(page.elements);
-  //     });
-  //     return json;
-  //   }
-  //   private updateCreatorJSONElements(elements: Array<any>): void {
-  //     if (!Array.isArray(elements)) return;
-  //     for (let i = elements.length - 1; i >= 0; i--) {
-  //       const el = elements[i];
-  //       if (!!el.name && el.name.indexOf("overridingProperty") > -1) {
-  //         elements.splice(i, 1);
-  //       } else {
-  //         this.updateJSONElement(el);
-  //       }
-  //     }
-  //   }
-  //   private updateJSONElement(el: any): void {
-  //     if (Array.isArray(el.elements)) {
-  //       this.updateCreatorJSONElements(el.elements);
-  //     }
-  //     if (el.titleLocation === "hidden") {
-  //       delete el.titleLocation;
-  //     }
-  //     if (el.descriptionLocation === "hidden") {
-  //       delete el.descriptionLocation;
-  //     }
-  //     if (!!el.state) {
-  //       delete el.state;
-  //     }
-  //     const type = el.type;
-  //     if (type === "textwithreset") {
-  //       el.type = "text";
-  //     }
-  //     if (type === "commentwithreset") {
-  //       el.type = "comment";
-  //     }
-  //   }
-  //   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
-  //     const elements: IQuestionToolboxItem[] = [];
-  //     const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
-  //     const propGrid = this.currentProperties.propertyGridDefault.survey;
-  //     const survey = this.propCreator.survey;
-  //     const allProps = this.currentProperties.getAllPropertiesNames();
-  //     allProps.forEach(propName => {
-  //       if (!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)
-  //         && hiddenProperties.indexOf(propName) < 0) {
-  //         const q = propGrid.getQuestionByName(propName);
-  //         const json = q.toJSON();
-  //         this.updateJSONElement(json);
-  //         json.name = propName;
-  //         json.type = q.getType();
-  //         elements.push({
-  //           name: propName,
-  //           title: q.title,
-  //           className: q.getType(),
-  //           iconName: "icon-text", //TODO
-  //           json: json
-  //         });
-  //       }
-  //     });
-
-//     creator.toolbox.addItems(elements, true);
-//   }
-//   private addCategoryNamePropIntoPage(page: PageModel, creator: SurveyCreatorModel): void {
-//     page.showDescription = false;
-//     (<any>page).isPropertyGridCategory = true;
-//     const qCategoryName: Question = Serializer.createClass("text");
-//     qCategoryName.name = "page_categoryName";
-//     qCategoryName.value = page.name;
-//     qCategoryName.valueChangedCallback = () => {
-//       page.name = qCategoryName.value;
-//     };
-//     qCategoryName.title = "Category Name"; //TODO
-//     qCategoryName.titleLocation = "left";
-//     qCategoryName.readOnly = this.isDefaultCategoryName(page.name);
-//     const qCatetoryIcon = Serializer.createClass("text");
-//     qCategoryName.name = "page_categoryIcon";
-//     qCatetoryIcon.title = "Category Icon"; //TODO
-//     qCatetoryIcon.titleLocation = "left";
-//     qCatetoryIcon.startWithNewLine = false;
-//     [qCategoryName, qCatetoryIcon].forEach(el => {
-//       el.getSurvey = () => { return page.survey; };
-//       Object.defineProperty(el, "isDesignMode", { get() { return false; } });
-//       el.isCategoryElement = true;
-//       el.onFirstRendering();
-//     });
-//     (<any>page)["getElementsForRows"] = () => {
-//       const res = [].concat(page.elements);
-//       res.unshift(qCatetoryIcon);
-//       res.unshift(qCategoryName);
-//       return res;
-//     };
-//   }
-//   private isDefaultCategoryName(name: string): boolean {
-//     if (!name) return true;
-//     return !!this.currentProperties.propertyGridDefault.survey.getPageByName(name);
-//   }
 }

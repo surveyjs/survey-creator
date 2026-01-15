@@ -506,7 +506,22 @@ export interface ICreatorOptions {
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
    */
   maxChoiceContentNestingLevel?: number;
+  /**
+   * Specifies whether to validate that functions referenced in expressions exist.
+   *
+   * Default value: `true`
+   */
   expressionsValidateFunctions?: boolean;
+  /**
+   * Specifies whether to validate that variables and question, panel, or page names referenced in expressions exist.
+   *
+   * Default value: `false`
+   */
   expressionsValidateVariables?: boolean;
+  /**
+   * Specifies whether to validate the expression syntax (for example, unmatched parentheses, missing operands, or invalid operators).
+   *
+   * Default value: `true`
+   */
   expressionsValidateSyntax?: boolean;
 }

@@ -322,11 +322,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       this.applying = false;
       return false;
     }
-    // if (reCreateCretor) {
-    //   const json = this.creator?.JSON || {};
-    //   this.creatorValue = this.createCreator({});
-    //   this.creator.JSON = json;
-    // }
     this.preset.setJson(this.getJsonFromSurveyModel());
     this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
     this.preset.apply(this.creator, true);
