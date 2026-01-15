@@ -1,4 +1,4 @@
-import { ItemValue, QuestionDropdownModel, Serializer } from "survey-core";
+import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
@@ -647,6 +647,15 @@ test("getSelectedClassesForProperty", () => {
   expect(properties.getSelectedClassesForProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
 });
 test("visible in classes", () => {
+  const originalShowDialog = settings.showDialog;
+  let popupSurvey: SurveyModel | undefined;
+  let onApply;
+  settings.showDialog = (options: any) => {
+    popupSurvey = options.data.survey;
+    onApply = options.onApply;
+    return { dispose: jest.fn() };
+  };
+
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.currentPage = survey.getPageByName("page_propertyGrid");
@@ -671,11 +680,9 @@ test("visible in classes", () => {
     ["imagepicker", "Image Picker"]
   ]);
 
-  const value = JSON.parse(JSON.stringify(propGridCategories.value));
-  const valueRow = value.find(c => c.category == "choices").properties.find(p => p.name == "choicesOrder");
+  popupSurvey!.setValue("classes", ["checkbox", "radiogroup"]);
+  onApply!();
 
-  valueRow.classes = ["checkbox", "radiogroup"];
-  propGridCategories.value = value;
   editor.applyFromSurveyModel();
   const propDef = editor.preset.getJson().propertyGrid?.definition;
   expect(propDef).toBeTruthy();
@@ -685,4 +692,6 @@ test("visible in classes", () => {
   expect(classes["checkbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
   expect(classes["radiogroup"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
   expect(classes["tagbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
+
+  settings.showDialog = originalShowDialog;
 });
