@@ -659,8 +659,10 @@ test("Test options.logicAllowTextEditExpressions", () => {
   var propertyGrid = new PropertyGridModelTester(question, options);
   var conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
   var expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
-  expect(conditionQuestion.onKeyDownPreprocess).toBeTruthy();
-  expect(expressionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(conditionQuestion.forceIsInputReadOnly).toBeTruthy();
+  expect(conditionQuestion.isInputReadOnly).toBeTruthy();
+  expect(expressionQuestion.forceIsInputReadOnly).toBeFalsy();
+  expect(expressionQuestion.isInputReadOnly).toBeFalsy();
   expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
   expect(conditionQuestion.titleActions).toHaveLength(2);
   expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
@@ -669,8 +671,10 @@ test("Test options.logicAllowTextEditExpressions", () => {
   propertyGrid = new PropertyGridModelTester(question, options);
   conditionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("visibleIf");
   expressionQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("defaultValueExpression");
-  expect(conditionQuestion.onKeyDownPreprocess).toBeFalsy();
-  expect(expressionQuestion.onKeyDownPreprocess).toBeFalsy();
+  expect(conditionQuestion.forceIsInputReadOnly).toBeFalsy();
+  expect(conditionQuestion.isInputReadOnly).toBeFalsy();
+  expect(expressionQuestion.forceIsInputReadOnly).toBeFalsy();
+  expect(expressionQuestion.isInputReadOnly).toBeFalsy();
   expect(conditionQuestion.getTitleToolbar()).toBeTruthy();
   expect(conditionQuestion.titleActions).toHaveLength(3);
   expect(conditionQuestion.titleActions[1].enabled).toBeTruthy();
