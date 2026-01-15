@@ -127,12 +127,7 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   }
   public onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     if (options.logicAllowTextEditExpressions === false) {
-      question.onKeyDownPreprocess = (event: any) => {
-        const allowed = ["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"];
-        if (!event.ctrlKey && allowed.indexOf(event.key) < 0) {
-          event.preventDefault();
-        }
-      };
+      question.forceIsInputReadOnly = true;
     }
   }
   public createPropertyEditorSetup(
