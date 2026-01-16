@@ -35,7 +35,6 @@ test.describe(title, () => {
   });
 
   test("Presets pages overview", async ({ page }) => {
-    await page.locator(".sps-menu-floating-action").click();
     expect(await page.locator(".sps-list__container")).not.toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
     await compareScreenshot(page, page.locator(".sps-page"), "presets-languages.png");

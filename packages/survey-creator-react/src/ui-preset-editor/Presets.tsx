@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Base, SurveyModel } from "survey-core";
+import { ActionContainer, Base, SurveyModel } from "survey-core";
 import {
   ReactElementFactory,
   Survey,
+  SurveyActionBar,
   SurveyElementBase,
 } from "survey-react-ui";
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -12,6 +13,9 @@ interface ITabPresetsComponentProps {
 }
 
 export class TabPresetsComponent extends SurveyElementBase<ITabPresetsComponentProps, any> {
+  private get navigationBar(): ActionContainer {
+    return this.props.data.navigationBar;
+  }
   private get model(): SurveyModel {
     return this.props.data.model;
   }
@@ -32,6 +36,7 @@ export class TabPresetsComponent extends SurveyElementBase<ITabPresetsComponentP
           {this.creator.showToolbox ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
         </div>
         <div className={presetsTabClassName}>
+          <SurveyActionBar model={this.navigationBar}></SurveyActionBar>
           <Survey model={this.model} />
         </div>
       </React.Fragment>

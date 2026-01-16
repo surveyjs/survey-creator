@@ -173,20 +173,3 @@ button.sps-action-button--large {
 .sps-action-button--text {
   padding: calcSize(0.5) calcSize(2);
 }
-
-.sps-menu-floating-action {
-  .svc-menu-action__button {
-    background: var(--sjs2-color-bg-brand-primary, #19B394);
-    use {
-      fill: var(--sjs2-color-fg-static-main-primary, #FFF);
-    }
-  }
-  .svc-menu-action__button:hover,
-  .svc-menu-action__button:focus,
-  .svc-menu-action__button:focus-within {
-    background: var(--sjs2-color-bg-brand-primary-dim, #15987E);
-  }
-  .svc-menu-action__button:active {
-    background: var(--sjs2-color-bg-brand-primary, #19B394);
-  }
-}
