@@ -6,7 +6,11 @@
       :model="creator"
     />
   </div>
-  <div class="svc-tab-designer">
+  <div class="svc-tab-designer svc-tab-designer--presets">
+    <SvComponent
+      :is="'sv-action-bar'"
+      :model="navigationBar"
+    ></SvComponent>
     <SvComponent :is="'survey'" :model="model" />
   </div>
 </template>
@@ -21,6 +25,7 @@ const props = defineProps<{
 }>();
 
 const model = computed(() => props.model?.model);
+const navigationBar = computed(() => props.model?.navigationBar);
 const creator = computed(() => props.model?.creator);
 
 useBase(() => model.value);

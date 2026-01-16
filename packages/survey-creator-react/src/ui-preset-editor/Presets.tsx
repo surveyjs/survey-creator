@@ -28,7 +28,7 @@ export class TabPresetsComponent extends SurveyElementBase<ITabPresetsComponentP
   }
 
   renderElement(): React.JSX.Element {
-    const presetsTabClassName = "svc-tab-designer ";
+    const presetsTabClassName = "svc-tab-designer svc-tab-designer--presets";
 
     return (
       <React.Fragment>

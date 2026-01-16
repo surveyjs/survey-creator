@@ -70,7 +70,6 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   protected saveHandler() {
     this.onPresetSaved.fire(this, { preset: this.model.json });
-    this.hidePresets();
   }
   public saveToFileHandler = saveToFileHandler;
 
@@ -91,18 +90,16 @@ export class UIPresetEditor implements ICreatorPlugin {
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
 
-    const defaultPresets = PredefinedCreatorPresets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { keep(item); this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
+    const defaultPresets = PredefinedCreatorPresets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
     if (defaultPresets.length > 0) {
-      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), needSeparator: true, css: "sps-list__item--label", enabled: false });
+      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
     }
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
-      { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { this.model?.loadJsonFile(); } },
+      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
-      { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
       { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.confirmReset(() => this.model?.resetToDefaults()); } },
     ];
 
@@ -117,13 +114,17 @@ export class UIPresetEditor implements ICreatorPlugin {
       verticalPosition: "bottom" as VerticalPosition | undefined,
       horizontalPosition: "center" as HorizontalPosition | undefined,
       searchEnabled: false,
+      cssClass: "sps-popup-menu sps-popup-menu--dropdown",
       cssClasses: listComponentCss
     };
 
     const listAction = createDropdownActionModel({
       items: [],
       id: "presets-list",
-      iconName: "icon-chevron_16x16"
+      iconName: "icon-chevron_16x16",
+      iconSize: 16,
+      title: getLocString("presets.plugin.creatorPresets"),
+      css: "sps-navigation-action",
     }, {
       ...popupOptions,
       items: defaultPresets,
@@ -133,6 +134,8 @@ export class UIPresetEditor implements ICreatorPlugin {
       items: [],
       id: "presets-pages",
       iconName: "icon-chevron_16x16",
+      iconSize: 16,
+      title: getLocString("presets.plugin.select"),
       css: "sps-navigation-action",
     }, {
       ...popupOptions,
@@ -143,6 +146,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       items: [],
       id: "presets-edit",
       iconName: "icon-chevron_16x16",
+      iconSize: 16,
       title: getLocString("presets.plugin.edit"),
       css: "sps-navigation-action",
     }, {
@@ -154,7 +158,8 @@ export class UIPresetEditor implements ICreatorPlugin {
       id: "presets-quit",
       iconName: "icon-exit-24x24",
       title: getLocString("presets.plugin.quit"),
-      css: "sps-navigation-action sps-navigation-action--right",
+      css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
+      action: () => { this.saveHandler(); this.hidePresets(); }
     });
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
@@ -166,8 +171,9 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.presetsList = pagesAction.popupModel.contentComponentData.model;
     const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
     this.presetsList.selectedItem = this.presetsList.actions[0];
+    pagesAction.title = this.presetsList.selectedItem.title || "";
     this.model.model.onCurrentPageChanged.add((_, options) => {
-      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo + 1];
+      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(this.presetsList.selectedItem.id); };
     });
