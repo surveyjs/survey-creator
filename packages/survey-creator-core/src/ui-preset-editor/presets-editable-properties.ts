@@ -1,6 +1,8 @@
 import {
   JsonObjectProperty, ItemValue, QuestionDropdownModel,
-  Base, Serializer, SurveyModel, matrixDropdownColumnTypes
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
+  QuestionMatrixDynamicModel,
+  MatrixDynamicRowModel
 } from "survey-core";
 import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
@@ -152,6 +154,18 @@ export class SurveyQuestionPresetPropertiesDetail {
     }
     return res;
   }
+  public getSelectedClassesForProperty(propName: string): string[] {
+    const res: string[] = [];
+    for (let i = 0; i < this.allClasses.length; i++) {
+      if (this.currentJson.classes[this.allClasses[i]].properties?.filter((p: any) => p === propName || p.name === propName)[0]) {
+        res.push(this.allClasses[i]);
+      }
+    }
+    if (res.length === 0) {
+      return this.getClassesBySharedProperty(propName);
+    }
+    return res;
+  }
   private removeBaseClassesFromCurrentJson(): void {
     if (!this.hasBaseClassInCurrentJson() || this.baseClasses.length === 0) return;
     const classes = this.currentJson.classes;
@@ -221,6 +235,25 @@ export class SurveyQuestionPresetPropertiesDetail {
     curJsonClasses[this.className] = curJsonClasses[this.className] || {};
     curJsonClasses[this.className].tabs = tabs;
     curJsonClasses[this.className].properties = properties;
+  }
+  public updatePropertyVisibility(propInfo: any, propCategory: string): void {
+    this.removeBaseClassesFromCurrentJson();
+    this.updatePropertyVisibilityCore(this.currentJson.classes, propInfo, propCategory);
+  }
+
+  private updatePropertyVisibilityCore(curJsonClasses: ISurveyPropertiesDefinition, propInfo: any, propCategory: string): void {
+    Object.keys(curJsonClasses).forEach(className => {
+      const classDef = curJsonClasses[className];
+      const propIndex = (classDef.properties as any)?.findIndex((p: any) => p.name === propInfo.name);
+      if (!propInfo.classes) return;
+      if (propInfo.classes.indexOf(className) < 0) {
+        if (propIndex > -1) classDef.properties.splice(propIndex, 1);
+      } else {
+        if (propIndex < 0) {
+          classDef.properties.push({ name: propInfo.name, tab: propCategory });
+        }
+      }
+    });
   }
   private getPropClassName(prop: JsonObjectProperty): string {
     const clName = prop.classInfo.name;
@@ -322,6 +355,29 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                   name: this.nameInnerMatrix,
                   noRowsText: getLocString("presets.propertyGrid.noItemsText"),
                   titleLocation: "hidden",
+                  detailElements:
+
+                  [
+                    {
+                      "type": "panel",
+                      "name": "details",
+                      "maxWidth": "30%",
+                      "elements": [
+                        { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
+                        { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
+                        { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), showSelectAllItem: true, visible: false },
+                      ],
+                      visible: false
+                    },
+                    {
+                      type: "checkbox",
+                      name: "classes",
+                      title: getLocString("presets.propertyGrid.propertyVisibleIn"),
+                      colCount: 3,
+                      startWithNewLine: false,
+                      visible: false
+                    }
+                  ]
                 })
               ]
             },
@@ -424,9 +480,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
           });
         });
       }
+
       if (!this.firstTimeLoading)this.updateCurrentJson(model);
     }
-
     if (name !== this.nameSelector) return;
     this.firstTimeLoading = true;
     if (this.currentProperties) {
@@ -529,5 +585,32 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       if (!strs[name]) strs[name] = {};
       strs = strs[name];
     }
+  }
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    if (data.classes?.indexOf(this.currentClassName) == -1) {
+      const index = (matrix.visibleRows as any).findIndex(r => r === row);
+      matrix.removeRow(index);
+    }
+    const pName = row.getValue("name");
+    const categories = this.getQuestionCategories(matrix.survey as any);
+    categories.value?.forEach(c => c.properties?.forEach(p => {
+      if (p.name != pName) return;
+      this.currentProperties?.updatePropertyVisibility(data, c.category);
+    }));
+    super.onDetailPanelInPopupApply(data, matrix, row);
+  }
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string, isNew: boolean}) {
+    if (question.name === this.nameInnerMatrix && this.currentProperties) {
+      const classesQuestion = question.detailPanel.getQuestionByName("classes");
+      const propertyName = row.getValue("name");
+      classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName).map(c => new ItemValue(c, this.getSelectorItemTitle(c)));
+      const index = (question.visibleRows as any).findIndex(r => r === row);
+      if (index >= 0) {
+        const value = question.value || [];
+        value[index].classes = this.currentProperties.getSelectedClassesForProperty(propertyName);
+        question.value = [...value];
+      }
+    }
+    super.editItem(model, creator, question, row, options);
   }
 }

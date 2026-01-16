@@ -1,4 +1,4 @@
-import { ItemValue, QuestionDropdownModel, Serializer } from "survey-core";
+import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
@@ -639,4 +639,59 @@ test("getClassesBySharedProperty", () => {
   expect(properties.getClassesBySharedProperty("textUpdateMode")).toEqual(["comment", "text"]);
   properties = new SurveyQuestionPresetPropertiesDetail("checkbox", defaultPropertyGridDefinition);
   expect(properties.getClassesBySharedProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
+});
+test("getSelectedClassesForProperty", () => {
+  let properties = new SurveyQuestionPresetPropertiesDetail("text", defaultPropertyGridDefinition);
+  expect(properties.getSelectedClassesForProperty("textUpdateMode")).toEqual(["comment", "text"]);
+  properties = new SurveyQuestionPresetPropertiesDetail("checkbox", defaultPropertyGridDefinition);
+  expect(properties.getSelectedClassesForProperty("choicesByUrl")).toEqual(["checkbox", "ranking", "radiogroup", "dropdown", "tagbox", "imagepicker"]);
+});
+test("visible in classes", () => {
+  const originalShowDialog = settings.showDialog;
+  let popupSurvey: SurveyModel | undefined;
+  let onApply;
+  settings.showDialog = (options: any) => {
+    popupSurvey = options.data.survey;
+    onApply = options.onApply;
+    return { dispose: jest.fn() };
+  };
+
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "checkbox");
+
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  propGridCategories.visibleRows[1].showDetailPanel();
+  const properties = propGridCategories.visibleRows[1].detailPanel.getQuestionByName("properties");
+  const itemIndex = properties.value.findIndex(r => r.name == "choicesOrder");
+
+  const row = properties.visibleRows[itemIndex];
+  const renderedRow = properties.renderedTable.rows.filter(r => r.row == row)[0];
+  const editItemAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-item")[0];
+  editItemAction.action();
+
+  expect(properties.detailPanel.getQuestionByName("classes").choices.map(c => [c.value, c.text])).toEqual([
+    ["checkbox", "Checkboxes"],
+    ["ranking", "Ranking"],
+    ["radiogroup", "Radio Button Group"],
+    ["dropdown", "Dropdown"],
+    ["tagbox", "Multi-Select Dropdown"],
+    ["imagepicker", "Image Picker"]
+  ]);
+
+  popupSurvey!.setValue("classes", ["checkbox", "radiogroup"]);
+  onApply!();
+
+  editor.applyFromSurveyModel();
+  const propDef = editor.preset.getJson().propertyGrid?.definition;
+  expect(propDef).toBeTruthy();
+  const classes = propDef?.classes;
+  expect(classes).toBeTruthy();
+  expect(classes["ranking"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
+  expect(classes["checkbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
+  expect(classes["radiogroup"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(1);
+  expect(classes["tagbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
+
+  settings.showDialog = originalShowDialog;
 });

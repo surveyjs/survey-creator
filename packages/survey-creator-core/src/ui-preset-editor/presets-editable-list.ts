@@ -243,6 +243,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       this.updateRowActions(options.question, options.row, actions);
     }
   }
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) { }
   protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string, removeOnCancel?: boolean}) {
     const index = (matrix.visibleRows as any).findIndex(r => r === row);
     const data = matrix.value[index];
@@ -269,6 +270,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
             });
             const newRowValue = { ...matrix.value[index], ...newData };
             newValue[index] = newRowValue;
+            this.onDetailPanelInPopupApply(newData, matrix, row);
             matrix.value = newValue;
             this.updateMatrixRowActions(matrix.survey as any, matrix);
             return true;
