@@ -5,7 +5,9 @@ import {
   ItemValue,
   QuestionCheckboxModel,
   QuestionImagePickerModel,
-  QuestionSliderModel
+  QuestionSliderModel,
+  ActionContainer,
+  QuestionRadiogroupModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -779,4 +781,34 @@ test("QuestionSlider customLabels & min/max properties, Bug#7250", () => {
   expect(question.customLabels[1].value).toBe(45);
   expect(cell2Value.value).toBe(45);
   expect(cell2Value.errors).toHaveLength(0);
+});
+test("choices options.minChoices, Bug#7374, Bug#7375", () => {
+  const question = new QuestionRadiogroupModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  const options = new EmptySurveyCreatorOptions();
+  options.minChoices = 2;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const isRowHasRemoveButton = (index: number): boolean => {
+    const rows = choicesQuestion.renderedTable.rows;
+    const cells = rows[index * 2].cells;
+    const item = cells[cells.length - 1].item;
+    if (!item) return false;
+    const container = <ActionContainer>(item.value);
+    return !!container.getActionById("remove-row");
+  };
+  expect(choicesQuestion.visibleRows).toHaveLength(3);
+  expect(isRowHasRemoveButton(0)).toBe(true);
+  expect(isRowHasRemoveButton(2)).toBe(true);
+  question.choices = [];
+  expect(choicesQuestion.visibleRows).toHaveLength(2);
+  expect(question.choices).toHaveLength(2);
+  expect(isRowHasRemoveButton(0)).toBe(false);
+  expect(isRowHasRemoveButton(1)).toBe(false);
+  question.choices = ["item1", "item2", "item3"];
+  expect(choicesQuestion.visibleRows).toHaveLength(3);
+  expect(isRowHasRemoveButton(0)).toBe(true);
+  expect(isRowHasRemoveButton(2)).toBe(true);
 });
