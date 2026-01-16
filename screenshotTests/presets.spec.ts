@@ -104,6 +104,7 @@ test.describe(title, () => {
   test("Presets Context Menu", async ({ page }) => {
     await page.locator(".sps-list__container").getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
+    await page.getByRole("button", { name: "Creator Presets" }).click();
 
     const root = page.locator(".sps-panel").first();
 
@@ -138,6 +139,7 @@ test.describe(title, () => {
     await page.locator(".sps-list__container").getByText("Options").click();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    await page.getByRole("button", { name: "Creator Presets" }).click();
     await page.locator(".sv-action-bar-item--collapse").nth(0).click();
     await page.locator(".sps-checkbox__caption .sps-action-button").filter({ visible: true }).nth(0).click();
     await page.locator(".sps-question__title .sps-action-button").filter({ visible: true }).nth(0).click();
@@ -154,5 +156,12 @@ test.describe(title, () => {
     await page.locator(".sv-action-bar-item--collapse").nth(2).click();
     await page.locator(".sv-action-bar-item--collapse").nth(3).click();
     await compareScreenshot(page, page.locator(".sps-page"), "presets-options-background.png");
+  });
+
+  test("Presets small screen", async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 1440 });
+    expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
+    await page.getByRole("button", { name: "Creator Presets" }).click();
+    await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png");
   });
 });

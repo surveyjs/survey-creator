@@ -24,7 +24,7 @@ test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.waitForLoadState("networkidle");
     await page.goto(`${urlPresets}`);
-    await page.setViewportSize({ width: 1440, height: 1400 });
+    await page.setViewportSize({ width: 1920, height: 1400 });
     await showPresets(page);
   });
 
