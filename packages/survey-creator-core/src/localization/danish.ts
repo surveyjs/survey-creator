@@ -238,6 +238,16 @@ export var danishStrings = {
     options: "Indstillinger",
     // "Generate Valid JSON"
     generateValidJSON: "Generer gylding JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Ukendt funktion: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Ukendte funktioner: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Ukendt variabel: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Ukendte variable: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Syntaksfejl.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generer læsbar JSON",
     // "Toolbox"
@@ -1322,10 +1332,10 @@ export var danishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Regulært udtryk",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Meddelelse om validering",
-      // [Auto-translated] "Validation expression"
-      expression: "Valideringsudtryk",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Notifikationsbesked om ugyldig input",
+      // [Auto-translated] "Valid when"
+      expression: "Gyldig, når",
       // [Auto-translated] "Notification type"
       notificationType: "Type af notifikationer",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1480,6 +1490,66 @@ export var danishStrings = {
       labelFormat: "Etiket format",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Værktøjstip-format"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Billed-URL",
+      // [Auto-translated] "Areas"
+      areas: "Områder",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Tillad flere valgmuligheder",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Værdiejendomsnavn",
+      // [Auto-translated] "Shape"
+      shape: "Form",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-farve",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle stregfarve",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Idle stroke-bredde",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill-farve",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Svævestregfarve",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hover-stregbredde",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Udvalgt fyldfarve",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Udvalgt stregfarve",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Udvalgt stregbredde",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maksimalt udvalgte områder",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimum udvalgte områder"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Værdi",
+      // [Auto-translated] "Shape"
+      shape: "Form",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinater",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-farve",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle stregfarve",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Idle stroke-bredde",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill-farve",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Svævestregfarve",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hover-stregbredde",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Udvalgt fyldfarve",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Udvalgt stregfarve",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Udvalgt stregbredde"
     },
     file: {
       // [Auto-translated] "Image height"
@@ -2516,6 +2586,8 @@ export var danishStrings = {
     notcontains: "not contains",
     // [Auto-translated] "Any of"
     anyof: "Enhver af",
+    // [Auto-translated] "None of"
+    noneof: "Ingen af",
     // [Auto-translated] "All of"
     allof: "Alle af",
     // "Greater than"
@@ -3529,6 +3601,16 @@ export var danishStrings = {
       "default-dark": "Mørk",
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Grundlæggende",
+      // [Auto-translated] "Advanced"
+      advanced: "Avanceret",
+      // [Auto-translated] "Expert"
+      expert: "Ekspert"
     }
   }
 };
