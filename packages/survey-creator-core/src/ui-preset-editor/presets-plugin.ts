@@ -3,7 +3,7 @@ import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandl
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
-//import { basic, advanced, expert } from "./default-settings";
+import { ICreatorPresetConfig, UIPreset } from "../ui-presets-creator/presets";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
@@ -11,13 +11,14 @@ import { HorizontalPosition, VerticalPosition } from "../../../../../survey-libr
 export class UIPresetEditor implements ICreatorPlugin {
   public model: CreatorPresetEditorModel;
   public static iconName = "icon-settings";
-  private activeTab;
+  private activeTab: string = "designer";
   private currentPresetIndex = 0;
   private currentValue;
   private designerPlugin;
   private toolboxCompact;
-  private defaultJson;
+  private defaultJson = {};
 
+  private pagesList: ListModel;
   private presetsList: ListModel;
 
   private showPresets() {
@@ -68,8 +69,41 @@ export class UIPresetEditor implements ICreatorPlugin {
    */
   public onPresetSaved = new EventBase<UIPresetEditor, { preset: ICreatorPresetData }>();
 
+  private customPresets = [] as string[];
+
+  private get presetsMenuItems(): IAction[] {
+    const defaultPresets =
+    [...PredefinedCreatorPresets, ...this.customPresets].map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
+    if (defaultPresets.length > 0) {
+      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
+    }
+    return defaultPresets;
+  }
+
+  /**
+   * Adds a new UI preset to UI Preset Editor.
+   * @param preset A [UI preset] to add.
+   * @param setAsDefault For internal use.
+   * @see removePreset
+   */
+  public addPreset(preset: ICreatorPresetConfig, setAsDefault = false) {
+    CreatorPresets[preset.presetName] = preset;
+    this.customPresets.push(preset.presetName);
+    this.presetsList.setItems(this.presetsMenuItems);
+  }
+  /**
+   * Removes a UI theme from Theme Editor.
+   * @param presetAccessor A [UI preset] to delete or a preset identifier.
+   * @see addPreset
+   */
+  public removePreset(presetAccessor: string | ICreatorPresetConfig, includeModifications = false): void {
+
+  }
   protected saveHandler() {
     this.onPresetSaved.fire(this, { preset: this.model.json });
+  }
+  protected saveAsHandler() {
+    this.addPreset({ presetName: "custom_" + new Date().getTime(), json: this.model.json });
   }
   public saveToFileHandler = saveToFileHandler;
 
@@ -90,13 +124,11 @@ export class UIPresetEditor implements ICreatorPlugin {
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
 
-    const defaultPresets = PredefinedCreatorPresets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
-    if (defaultPresets.length > 0) {
-      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
-    }
+    const defaultPresets = this.presetsMenuItems;
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAsHandler() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
       { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
@@ -105,7 +137,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     presets.forEach(p => {
       p.action = (item)=>{
-        this.presetsList.selectedItem = item;
+        this.pagesList.selectedItem = item;
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });
@@ -168,14 +200,15 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.model.navigationBar.addAction(pagesAction);
     this.model.navigationBar.addAction(editAction);
     this.model.navigationBar.addAction(quitAction);
-    this.presetsList = pagesAction.popupModel.contentComponentData.model;
+    this.pagesList = pagesAction.popupModel.contentComponentData.model;
+    this.presetsList = listAction.popupModel.contentComponentData.model;
     const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
-    this.presetsList.selectedItem = this.presetsList.actions[0];
-    pagesAction.title = this.presetsList.selectedItem.title || "";
+    this.pagesList.selectedItem = this.pagesList.actions[0];
+    pagesAction.title = this.pagesList.selectedItem.title || "";
     this.model.model.onCurrentPageChanged.add((_, options) => {
-      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo];
+      this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
-      resetCurrentAction.action = () => { this.model?.resetToDefaults(this.presetsList.selectedItem.id); };
+      resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
 
     setTimeout(() => {
