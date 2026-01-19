@@ -104,6 +104,9 @@ export const enStrings = {
       logicAllowTextEditExpressions: "Allow editing expressions as plain text",
       logicMaxItemsInCondition: "Maximum number of items in a logic condition",
       clearTranslationsOnSourceTextChange: "Clear translations when source text changes",
+      expressionsValidateFunctions: "Validate variables and element names in expressions",
+      expressionsValidateVariables: "Validate functions in expressions",
+      expressionsValidateSyntax: "Validate expression syntax",
     },
     ov: {
       pageEditMode: {
@@ -148,6 +151,9 @@ export const enStrings = {
       logicAllowTextEditExpressions: "Controls whether survey designers can manually edit logical expressions in the Logic tab as plain text instead of using the visual editor.",
       logicMaxItemsInCondition: "-1 is unlimited.",
       clearTranslationsOnSourceTextChange: "Specifies whether translations in other languages are cleared when the source language text is changed.",
+      expressionsValidateFunctions: "When selected, Survey Creator reports an error if an expression references an unknown variable or survey element name.",
+      expressionsValidateVariables: "When selected, Survey Creator reports an error if an expression uses an unknown function.",
+      expressionsValidateSyntax: "When selected, Survey Creator reports an error if an expression contains syntax errors.",
     }
   },
   items: {
