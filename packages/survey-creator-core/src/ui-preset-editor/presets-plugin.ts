@@ -71,13 +71,26 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   private customPresets = [] as string[];
 
+  private editPresetsList() {
+
+  }
+
+  private presetListToItems(presets: string[]) {
+    return presets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
+  }
   private get presetsMenuItems(): IAction[] {
-    const defaultPresets =
-    [...PredefinedCreatorPresets, ...this.customPresets].map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
+    const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
     if (defaultPresets.length > 0) {
       defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
     }
-    return defaultPresets;
+
+    const customPresets = this.presetListToItems(this.customPresets);
+    if (customPresets.length > 0) {
+      customPresets.unshift({ id: "customSettings", needSeparator: true, title: getLocString("presets.plugin.savedPresets"), css: "sps-list__item--label", enabled: false });
+    }
+    const editItem = { id: "editPresetsList", needSeparator: true, title: getLocString("preset.plugin.editPresetsList"), action: this.editPresetsList } as IAction;
+
+    return [...defaultPresets, ...customPresets, editItem];
   }
 
   /**
