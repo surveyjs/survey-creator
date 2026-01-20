@@ -143,6 +143,8 @@ test.describe(title, () => {
     await page.locator(".sv-action-bar-item--collapse").nth(0).click();
     await page.locator(".sps-checkbox__caption .sps-action-button").filter({ visible: true }).nth(0).click();
     await page.locator(".sps-question__title .sps-action-button").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-panel .sv-string-viewer", { hasText: "Show toggle for hidden elements" })
+      .evaluate(node => node.innerHTML = node.innerHTML + " (text to make the title longer to check the hint button)");
     await compareScreenshot(page, page.locator(".sps-panel").nth(1), "presets-options-hints.png");
   });
 
