@@ -1,4 +1,4 @@
-import { Base, ConditionsParser, JsonObjectProperty, Operand, Question, ExpressionExecutorErrorType } from "survey-core";
+import { Base, ConditionsParser, JsonObjectProperty, Operand, Question, ExpressionErrorType } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
@@ -36,17 +36,17 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
         return acc;
       }, {});
 
-      if (errors[ExpressionExecutorErrorType.SyntaxError] || errors[ExpressionExecutorErrorType.ConstantCondition]) {
+      if (errors[ExpressionErrorType.SyntaxError] || errors[ExpressionErrorType.SemanticError]) {
         return getLocString("ed.expressionSyntaxError");
       }
 
-      if (errors[ExpressionExecutorErrorType.UnknownFunction]) {
-        const functionNames = errors[ExpressionExecutorErrorType.UnknownFunction].map((e) => e.functionName).filter((e, i, a) => a.indexOf(e) === i);
-        return getLocString("ed.expressionUnknownFunction" + (functionNames.length > 1 ? "s" : ""))["format"](functionNames.join(", "));
+      if (errors[ExpressionErrorType.UnknownFunction]) {
+        const functionNames = errors[ExpressionErrorType.UnknownFunction].map((e) => e.functionName).filter((e, i, a) => a.indexOf(e) === i);
+        return getLocString("ed.ionUnknownFunction" + (functionNames.length > 1 ? "s" : ""))["format"](functionNames.join(", "));
       }
 
-      if (errors[ExpressionExecutorErrorType.UnknownVariable]) {
-        const variableNames = errors[ExpressionExecutorErrorType.UnknownVariable].map((e) => e.variableName).filter((e, i, a) => a.indexOf(e) === i);
+      if (errors[ExpressionErrorType.UnknownVariable]) {
+        const variableNames = errors[ExpressionErrorType.UnknownVariable].map((e) => e.variableName).filter((e, i, a) => a.indexOf(e) === i);
         return getLocString("ed.expressionUnknownVariable" + (variableNames.length > 1 ? "s" : ""))["format"](variableNames.join(", "));
       }
     }
