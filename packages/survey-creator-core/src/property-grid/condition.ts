@@ -42,7 +42,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
 
       if (errors[ExpressionErrorType.UnknownFunction]) {
         const functionNames = errors[ExpressionErrorType.UnknownFunction].map((e) => e.functionName).filter((e, i, a) => a.indexOf(e) === i);
-        return getLocString("ed.ionUnknownFunction" + (functionNames.length > 1 ? "s" : ""))["format"](functionNames.join(", "));
+        return getLocString("ed.expressionUnknownFunction" + (functionNames.length > 1 ? "s" : ""))["format"](functionNames.join(", "));
       }
 
       if (errors[ExpressionErrorType.UnknownVariable]) {
