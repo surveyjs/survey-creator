@@ -151,6 +151,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       css: "sps-navigation-action",
     }, {
       ...popupOptions,
+      onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
       items: tools,
     }, this.model.model);
 
