@@ -98,10 +98,10 @@ test.describe(title, () => {
       "headerView": "advanced"
     });
     await doDragDrop({ page, element: page.locator("[data-sv-drop-target-survey-element='question1'] > .svc-question__content > .svc-question__drag-area"), target: page.locator("[data-sv-drop-target-page='page2']"), options: { targetPosition: { x: 50, y: 50 }, elementPosition: { x: 10, y: 10 } } });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(5000);
     await expect(page.locator("[data-sv-drop-target-page='page2'] .svc-string-editor", { hasText: "question2" })).toBeVisible({ visible: true });
     await page.locator("[data-sv-drop-target-page='page2'] .svc-element__add-new-question.svc-btn").click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(5000);
     await expect(page.locator("[data-sv-drop-target-page='page2'] .svc-string-editor", { hasText: "question3" })).toBeVisible({ visible: true });
   });
 });
