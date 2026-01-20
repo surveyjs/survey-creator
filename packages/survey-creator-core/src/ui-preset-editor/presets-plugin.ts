@@ -4,7 +4,6 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
 import { ICreatorPresetConfig, UIPreset } from "../ui-presets-creator/presets";
-import { title } from "process";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
@@ -123,8 +122,8 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private getPresetsListToEdit() {
-    return [...PredefinedCreatorPresets.map(p =>({ title: this.getPresetTitle(p), name: p, custom: false })),
-      ...this.customPresets.map(p =>({ title: p, name: p, custom: true }))];
+    return [...PredefinedCreatorPresets.map(p =>({ title: this.getPresetTitle(p), name: p, visible: true, custom: false })),
+      ...this.customPresets.map(p =>({ title: p, name: p, visible: true, custom: true }))];
   }
 
   private editPresetsList(onSet: (newList: string) => void) {
@@ -139,13 +138,19 @@ export class UIPresetEditor implements ICreatorPlugin {
             title: "Title",
           },
           {
-            name: "title",
+            name: "name",
             visible: false
+          },
+          {
+            name: "visible",
+            visible: false,
+            cellType: "boolean",
           },
           {
             name: "custom",
             cellType: "boolean",
-            visible: false
+            visible: false,
+            defaultValue: true,
           }
         ],
         rowCount: 0,
@@ -158,6 +163,25 @@ export class UIPresetEditor implements ICreatorPlugin {
         allowCustomChoices: true,
         titleLocation: "hidden",
         isRequired: true }]
+    });
+    survey.onGetMatrixRowActions.add((sender, options) => {
+      const removeAction = options.actions.filter(a => a.id == "remove-row")[0];
+      const getRowIconName = (row) => row.getValue("visible") ? "icon-visible-24x24" : "icon-invisible-24x24";
+      if (!options.row.getValue("custom")) {
+        removeAction.visible = false;
+        const visibleAction = new Action({
+          id: "visible",
+          iconName: getRowIconName(options.row),
+          tooltip: getLocString("presets.items.more"),
+          location: "end",
+          action: () => {
+            //options.row.setValue("visible", !options.row.getValue("visible"));
+            options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
+            visibleAction.iconName = getRowIconName(options.row);
+          }
+        });
+        options.actions.push(visibleAction);
+      }
     });
     settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
@@ -182,7 +206,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   public addPreset(preset: ICreatorPresetConfig, setAsDefault = false) {
     CreatorPresets[preset.presetName] = preset;
     this.customPresets.push(preset.presetName);
-    this.presetsList.setItems(this.presetsMenuItems);
+    this.presetsList?.setItems(this.presetsMenuItems);
   }
   /**
    * Removes a UI theme from Theme Editor.
