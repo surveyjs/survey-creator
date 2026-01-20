@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel } from "survey-core";
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -92,6 +92,24 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     return [...defaultPresets, ...customPresets, editItem];
   }
+  private setPresetNewName(onSet: (newName: string) => void) {
+    const survey = new SurveyModel({
+      showNavigationButtons: "none",
+      elements: [{ type: "dropdown", name: "presetName", allowCustomChoices: true, choices: this.presetListToItems(this.customPresets).map(i => ({ value: i.id, text: i.title })), titleLocation: "hidden", isRequired: true }]
+    });
+    settings.showDialog?.(<IDialogOptions>{
+      componentName: "survey",
+      data: { survey: survey, model: survey },
+      onApply: () => {
+        if (!survey.validate()) return false;
+        onSet(survey.getValue("presetName"));
+        return true;
+      },
+      cssClass: "sps-popup svc-property-editor svc-creator-popup",
+      title: getLocString("presets.plugin.saveAsTitle"),
+      displayMode: "popup"
+    }, this.creator.rootElement);
+  }
 
   /**
    * Adds a new UI preset to UI Preset Editor.
@@ -116,7 +134,9 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.onPresetSaved.fire(this, { preset: this.model.json });
   }
   protected saveAsHandler() {
-    this.addPreset({ presetName: "custom_" + new Date().getTime(), json: this.model.json });
+    this.setPresetNewName((newName) => {
+      this.addPreset({ presetName: newName, json: this.model.json });
+    });
   }
   public saveToFileHandler = saveToFileHandler;
 
