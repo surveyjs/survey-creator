@@ -4,6 +4,7 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
 import { ICreatorPresetConfig, UIPreset } from "../ui-presets-creator/presets";
+import { title } from "process";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
@@ -71,12 +72,15 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   private customPresets = [] as string[];
 
-  private editPresetsList() {
-
+  private getPresetTitle(name: string) {
+    return getLocString("preset.names." + name);
   }
 
   private presetListToItems(presets: string[]) {
-    return presets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
+    return presets.map(presetName => ({ id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
+      this.presetsList.selectedItem = item;
+      this.model.json = CreatorPresets[presetName].json;
+    } })) as IAction[];
   }
   private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
@@ -88,14 +92,72 @@ export class UIPresetEditor implements ICreatorPlugin {
     if (customPresets.length > 0) {
       customPresets.unshift({ id: "customSettings", needSeparator: true, title: getLocString("presets.plugin.savedPresets"), css: "sps-list__item--label", enabled: false });
     }
-    const editItem = { id: "editPresetsList", needSeparator: customPresets.length + defaultPresets.length > 0, title: getLocString("preset.plugin.editPresetsList"), action: this.editPresetsList } as IAction;
+    const editItem = { id: "editPresetsList", needSeparator: customPresets.length + defaultPresets.length > 0, title: getLocString("preset.plugin.editPresetsList"), action: ()=>this.editPresetsList(()=>{}) } as IAction;
 
     return [...defaultPresets, ...customPresets, editItem];
   }
   private setPresetNewName(onSet: (newName: string) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
-      elements: [{ type: "dropdown", name: "presetName", allowCustomChoices: true, choices: this.presetListToItems(this.customPresets).map(i => ({ value: i.id, text: i.title })), titleLocation: "hidden", isRequired: true }]
+      elements: [{
+        type: "dropdown",
+        name: "presetName",
+        defaultValue: this.presetsList.selectedItem?.title || "",
+        allowCustomChoices: true,
+        choices: this.customPresets.map(i => ({ value: i, text: i })),
+        titleLocation: "hidden",
+        isRequired: true }]
+    });
+    settings.showDialog?.(<IDialogOptions>{
+      componentName: "survey",
+      data: { survey: survey, model: survey },
+      onApply: () => {
+        if (!survey.validate()) return false;
+        onSet(survey.getValue("presetName"));
+        return true;
+      },
+      cssClass: "sps-popup svc-property-editor svc-creator-popup",
+      title: getLocString("presets.plugin.saveAsTitle"),
+      displayMode: "popup"
+    }, this.creator.rootElement);
+  }
+
+  private getPresetsListToEdit() {
+    return [...PredefinedCreatorPresets.map(p =>({ title: this.getPresetTitle(p), name: p, custom: false })),
+      ...this.customPresets.map(p =>({ title: p, name: p, custom: true }))];
+  }
+
+  private editPresetsList(onSet: (newList: string) => void) {
+    const survey = new SurveyModel({
+      showNavigationButtons: "none",
+      elements: [{
+        type: "matrixdynamic",
+        name: "presetsList",
+        columns: [
+          {
+            name: "title",
+            title: "Title",
+          },
+          {
+            name: "title",
+            visible: false
+          },
+          {
+            name: "custom",
+            cellType: "boolean",
+            visible: false
+          }
+        ],
+        rowCount: 0,
+        cellType: "text",
+        confirmDelete: true,
+        confirmDeleteText: "Are you sure you want to delete this preset?",
+        addRowText: "Add new preset...",
+        allowRowReorder: true,
+        defaultValue: this.getPresetsListToEdit(),
+        allowCustomChoices: true,
+        titleLocation: "hidden",
+        isRequired: true }]
     });
     settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
@@ -136,6 +198,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   protected saveAsHandler() {
     this.setPresetNewName((newName) => {
       this.addPreset({ presetName: newName, json: this.model.json });
+      this.presetsList.onItemClick(this.presetsList.getActionById(newName));
     });
   }
   public saveToFileHandler = saveToFileHandler;
