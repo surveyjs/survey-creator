@@ -1,4 +1,4 @@
-import { Base, ConditionsParser, FunctionFactory, FunctionOperand, JsonObjectProperty, Operand, ProcessValue, Question, Variable } from "survey-core";
+import { Base, ConditionsParser, JsonObjectProperty, Operand, Question, ExpressionExecutorErrorType } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
@@ -24,40 +24,30 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     };
   }
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions): string {
+
     if (!val || !options.expressionsValidateSyntax) return "";
-    const operand = new ConditionsParser().parseExpression(val);
-    if (!operand) return getLocString("ed.expressionSyntaxError");
-    const list = new Array<Operand>();
-    operand.addOperandsToList(list);
+    const result = obj.validateExpression(prop.name, val, options.expressionsValidateFunctions, options.expressionsValidateVariables);
 
-    const operands = list.reduce((acc, operand) => {
-      const type = operand.getType();
-      if (!acc[type]) { acc[type] = []; }
-      acc[type].push(operand);
-      return acc;
-    }, {} as { [key: string]: Operand[] });
+    if (result) {
 
-    if (options.expressionsValidateFunctions) {
-      const errors = [];
-      for (const operand of (operands.function || []) as FunctionOperand[]) {
-        if (errors.indexOf(operand.functionName) === -1 && !FunctionFactory.Instance.hasFunction(operand.functionName)) {
-          errors.push(operand.functionName);
-        }
-      }
-      if (errors.length) {
-        return getLocString("ed.expressionUnknownFunction" + (errors.length > 1 ? "s" : ""))["format"](errors.join(", "));
-      }
-    }
+      const errors = result.errors.reduce((acc, error) => {
+        if (!acc[error.errorType]) { acc[error.errorType] = []; }
+        acc[error.errorType].push(error);
+        return acc;
+      }, {});
 
-    if (options.expressionsValidateVariables) {
-      const errors = [];
-      for (const operand of (operands.variable || []) as Variable[]) {
-        if (errors.indexOf(operand.variable) === -1 && !new ProcessValue(obj.getValueGetterContext()).hasValue(operand.variable)) {
-          errors.push(operand.variable);
-        }
+      if (errors[ExpressionExecutorErrorType.SyntaxError] || errors[ExpressionExecutorErrorType.ConstantCondition]) {
+        return getLocString("ed.expressionSyntaxError");
       }
-      if (errors.length) {
-        return getLocString("ed.expressionUnknownVariable" + (errors.length > 1 ? "s" : ""))["format"](errors.length === 1 ? errors[0] : errors.join(", "));
+
+      if (errors[ExpressionExecutorErrorType.UnknownFunction]) {
+        const functionNames = errors[ExpressionExecutorErrorType.UnknownFunction].map((e) => e.functionName).filter((e, i, a) => a.indexOf(e) === i);
+        return getLocString("ed.expressionUnknownFunction" + (functionNames.length > 1 ? "s" : ""))["format"](functionNames.join(", "));
+      }
+
+      if (errors[ExpressionExecutorErrorType.UnknownVariable]) {
+        const variableNames = errors[ExpressionExecutorErrorType.UnknownVariable].map((e) => e.variableName).filter((e, i, a) => a.indexOf(e) === i);
+        return getLocString("ed.expressionUnknownVariable" + (variableNames.length > 1 ? "s" : ""))["format"](variableNames.join(", "));
       }
     }
 
