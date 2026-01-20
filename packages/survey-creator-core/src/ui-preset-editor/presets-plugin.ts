@@ -88,7 +88,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     if (customPresets.length > 0) {
       customPresets.unshift({ id: "customSettings", needSeparator: true, title: getLocString("presets.plugin.savedPresets"), css: "sps-list__item--label", enabled: false });
     }
-    const editItem = { id: "editPresetsList", needSeparator: true, title: getLocString("preset.plugin.editPresetsList"), action: this.editPresetsList } as IAction;
+    const editItem = { id: "editPresetsList", needSeparator: customPresets.length + defaultPresets.length > 0, title: getLocString("preset.plugin.editPresetsList"), action: this.editPresetsList } as IAction;
 
     return [...defaultPresets, ...customPresets, editItem];
   }
