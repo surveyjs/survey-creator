@@ -26,7 +26,11 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions): string {
 
     if (!val || !options.expressionsValidateSyntax) return "";
-    const result = obj.validateExpression(prop.name, val, options.expressionsValidateFunctions, options.expressionsValidateVariables);
+    const result = obj.validateExpression(prop.name, val, {
+      variables: options.expressionsValidateVariables,
+      functions: options.expressionsValidateFunctions,
+      semantics: options.expressionsValidateSemantics
+    });
 
     if (result) {
 

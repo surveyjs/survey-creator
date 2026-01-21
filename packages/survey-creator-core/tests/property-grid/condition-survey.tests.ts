@@ -1993,18 +1993,23 @@ test("Expression validation #7362", () => {
   expect(visibleIfQuestion.errors[0].text).toBe("Syntax error.");
   expect(q1.visibleIf).toBeFalsy();
 
-  visibleIfQuestion.value = "{q2} = 1";
-  expect(visibleIfQuestion.errors).toHaveLength(0);
-  expect(q1.visibleIf).toBe("{q2} = 1");
+  visibleIfQuestion.value = "foo";
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Semantic error.");
+  expect(q1.visibleIf).toBeFalsy();
 
   visibleIfQuestion.value = "{q3} = 1";
   expect(visibleIfQuestion.errors).toHaveLength(1);
   expect(visibleIfQuestion.errors[0].text).toBe("Unknown variable: \"q3\".");
-  expect(q1.visibleIf).toBe("{q2} = 1");
+  expect(q1.visibleIf).toBeFalsy();
 
-  visibleIfQuestion.value = "nonexistfunc({q1})";
+  visibleIfQuestion.value = "foo({q1})";
   expect(visibleIfQuestion.errors).toHaveLength(1);
-  expect(visibleIfQuestion.errors[0].text).toBe("Unknown function: \"nonexistfunc\".");
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown function: \"foo\".");
+  expect(q1.visibleIf).toBeFalsy();
+
+  visibleIfQuestion.value = "{q2} = 1";
+  expect(visibleIfQuestion.errors).toHaveLength(0);
   expect(q1.visibleIf).toBe("{q2} = 1");
 
   visibleIfQuestion.value = "age({q2}) > 18";
