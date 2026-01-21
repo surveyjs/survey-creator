@@ -134,6 +134,7 @@ export var enStrings = {
     expressionUnknownVariable: "Unknown variable: \"{0}\".",
     expressionUnknownVariables: "Unknown variables: \"{0}\".",
     expressionSyntaxError: "Syntax error.",
+    expressionSemanticsError: "Semantic error.",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",

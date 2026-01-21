@@ -345,6 +345,7 @@ export interface ISurveyCreatorOptions {
   expressionsValidateFunctions?: boolean;
   expressionsValidateVariables?: boolean;
   expressionsValidateSyntax?: boolean;
+  expressionsValidateSemantics?: boolean;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
@@ -524,4 +525,5 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   expressionsValidateFunctions: boolean = true;
   expressionsValidateVariables: boolean = false;
   expressionsValidateSyntax: boolean = true;
+  expressionsValidateSemantics: boolean = true;
 }

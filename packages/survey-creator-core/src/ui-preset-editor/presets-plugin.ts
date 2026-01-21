@@ -5,7 +5,6 @@ import { listComponentCss } from "./presets-theme/list-theme";
 import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
 import { ICreatorPresetConfig, UIPreset } from "../ui-presets-creator/presets";
 import { presetsCss } from "./presets-theme/presets";
-import { get } from "lodash";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
