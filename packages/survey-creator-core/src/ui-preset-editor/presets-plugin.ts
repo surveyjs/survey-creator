@@ -4,6 +4,8 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
 import { ICreatorPresetConfig, UIPreset } from "../ui-presets-creator/presets";
+import { presetsCss } from "./presets-theme/presets";
+import { get } from "lodash";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
@@ -44,7 +46,6 @@ export class UIPresetEditor implements ICreatorPlugin {
         cssClass: "sv-popup--confirm svc-creator-popup"
       }
     );
-
   }
 
   constructor(private creator: SurveyCreatorModel) {
@@ -93,13 +94,19 @@ export class UIPresetEditor implements ICreatorPlugin {
     if (customPresets.length > 0) {
       customPresets.unshift({ id: "customSettings", needSeparator: true, title: getLocString("presets.plugin.savedPresets"), css: "sps-list__item--label", enabled: false });
     }
-    const editItem = { id: "editPresetsList", needSeparator: customPresets.length + defaultPresets.length > 0, title: getLocString("preset.plugin.editPresetsList"), action: ()=>this.editPresetsList(this.applyPresetsList.bind(this)) } as IAction;
+    const editItem = { id: "editPresetsList",
+      needSeparator: customPresets.length + defaultPresets.length > 0,
+      title: getLocString("presets.plugin.editPresetsList"),
+      action: ()=>this.editPresetsList(this.applyPresetsList.bind(this))
+    } as IAction;
 
     return [...defaultPresets, ...customPresets, editItem];
   }
   private setPresetNewName(onSet: (newName: string) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
+      enterKeyAction: "loseFocus",
+      questionErrorLocation: "bottom",
       elements: [{
         type: "dropdown",
         name: "presetName",
@@ -109,6 +116,8 @@ export class UIPresetEditor implements ICreatorPlugin {
         titleLocation: "hidden",
         isRequired: true }]
     });
+    survey.css = presetsCss;
+    survey.questionErrorLocation = "bottom";
     settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
@@ -132,7 +141,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.customPresets = [];
     newList.forEach(item => {
       const name = item.name || item.title;
-      if (PredefinedCreatorPresets.includes(name)) {
+      if ((PredefinedCreatorPresets as any).includes(name)) {
         CreatorPresets[name].visible = item.visible;
       } else {
         this.customPresets.push(name);
@@ -144,6 +153,8 @@ export class UIPresetEditor implements ICreatorPlugin {
   private editPresetsList(onSet: (newList: any[]) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
+      enterKeyAction: "loseFocus",
+      questionErrorLocation: "bottom",
       elements: [{
         type: "matrixdynamic",
         name: "presetsList",
@@ -171,14 +182,15 @@ export class UIPresetEditor implements ICreatorPlugin {
         rowCount: 0,
         cellType: "text",
         confirmDelete: true,
-        confirmDeleteText: "Are you sure you want to delete this preset?",
-        addRowText: "Add new preset...",
+        confirmDeleteText: getLocString("presets.plugin.confirmDeleteCustomPreset"),
+        addRowText: getLocString("presets.plugin.addNewPreset"),
         allowRowReorder: true,
         defaultValue: this.getPresetsListToEdit(),
         allowCustomChoices: true,
         titleLocation: "hidden",
         isRequired: true }]
     });
+    survey.css = presetsCss;
     survey.onGetMatrixRowActions.add((sender, options) => {
       const removeAction = options.actions.filter(a => a.id == "remove-row")[0];
       const getRowIconName = (row) => row.getValue("visible") ? "icon-visible-24x24" : "icon-invisible-24x24";
@@ -187,7 +199,6 @@ export class UIPresetEditor implements ICreatorPlugin {
         const visibleAction = new Action({
           id: "visible",
           iconName: getRowIconName(options.row),
-          tooltip: getLocString("presets.items.more"),
           location: "end",
           action: () => {
             //options.row.setValue("visible", !options.row.getValue("visible"));
@@ -196,11 +207,22 @@ export class UIPresetEditor implements ICreatorPlugin {
           }
         });
         options.actions.push(visibleAction);
+      } else {
+        removeAction.iconName = "icon-delete-24x24";
+        removeAction.iconSize = "auto",
+        removeAction.component = "sv-action-bar-item",
+        removeAction.innerCss = "sps-table__action-button sps-table__action-button--remove",
+        removeAction.showTitle = false,
+        removeAction.action = () => {
+          options.question.removeRowUI(options.row);
+        };
       }
     });
     survey.onMatrixRowAdding.add((sender, options) => {
       const addSurvey = new SurveyModel({
         showNavigationButtons: "none",
+        enterKeyAction: "loseFocus",
+        questionErrorLocation: "bottom",
         elements: [{
           type: "text",
           name: "presetName",
@@ -218,6 +240,7 @@ export class UIPresetEditor implements ICreatorPlugin {
           ],
         }]
       });
+      addSurvey.css = presetsCss;
       settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: addSurvey, model: addSurvey },
@@ -246,7 +269,7 @@ export class UIPresetEditor implements ICreatorPlugin {
         return true;
       },
       cssClass: "sps-popup svc-property-editor svc-creator-popup",
-      title: getLocString("presets.plugin.saveAsTitle"),
+      title: getLocString("presets.plugin.editPresetsListTitle"),
       displayMode: "popup"
     }, this.creator.rootElement);
   }
@@ -328,6 +351,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       cssClasses: listComponentCss
     };
 
+    let curentlySelectedPreset: IAction;
     const listAction = createDropdownActionModel({
       items: [],
       id: "presets-list",
@@ -338,6 +362,14 @@ export class UIPresetEditor implements ICreatorPlugin {
     }, {
       ...popupOptions,
       items: defaultPresets,
+      onSelectionChanged: (selectedItem) => {
+        if (selectedItem.id === "editPresetsList") {
+          this.presetsList.selectedItem = curentlySelectedPreset;
+          if (curentlySelectedPreset?.title) listAction.title = curentlySelectedPreset.title;
+        } else {
+          curentlySelectedPreset = selectedItem;
+        }
+      },
     }, this.model.model);
 
     const pagesAction = createDropdownActionModel({
@@ -381,9 +413,11 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.model.navigationBar.addAction(quitAction);
     this.pagesList = pagesAction.popupModel.contentComponentData.model;
     this.presetsList = listAction.popupModel.contentComponentData.model;
+    this.presetsList.selectedItem = this.presetsList.actions.filter(a => !a.disabled)[0];
     const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
     this.pagesList.selectedItem = this.pagesList.actions[0];
     pagesAction.title = this.pagesList.selectedItem.title || "";
+    listAction.title = this.presetsList.selectedItem.title || "";
     this.model.model.onCurrentPageChanged.add((_, options) => {
       this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
