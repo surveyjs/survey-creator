@@ -1,7 +1,8 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action } from "survey-core";
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
+import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
 //import { basic, advanced, expert } from "./default-settings";
 
 /**
@@ -69,7 +70,6 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   protected saveHandler() {
     this.onPresetSaved.fire(this, { preset: this.model.json });
-    this.hidePresets();
   }
   public saveToFileHandler = saveToFileHandler;
 
@@ -89,67 +89,92 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
-    let settingsAction: IAction;
 
-    const keep = (item: IAction) => {
-      settingsAction.popupModel.show();
-    };
-
-    const defaultPresets = PredefinedCreatorPresets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { keep(item); this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
+    const defaultPresets = PredefinedCreatorPresets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
     if (defaultPresets.length > 0) {
-      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), needSeparator: true, css: "sps-list__item--label", enabled: false });
+      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
     }
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", needSeparator: true, action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
-      ...defaultPresets,
-      { id: "file", title: getLocString("presets.plugin.file"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", action: (item: IAction) => { keep(item); this.model?.loadJsonFile(); } },
-      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { keep(item); this.model?.downloadJsonFile(); } },
-      { id: "edit", title: getLocString("presets.plugin.edit"), needSeparator: true, css: "sps-list__item--label", enabled: false },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
+      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
+      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
       { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.confirmReset(() => this.model?.resetToDefaults()); } },
     ];
 
     presets.forEach(p => {
       p.action = (item)=>{
         this.presetsList.selectedItem = item;
-        keep(item);
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });
-    settingsAction = createDropdownActionModel({
-      id: "presets-menu",
-      tooltip: getLocString("presets.plugin.creatorPresets"),
-      iconName: "navmenu-24x24",
-      css: "sps-menu-floating-action",
-      action: () => {
-        if (settingsAction.popupModel.isVisible) {
-          setTimeout(() => settingsAction.popupModel.hide(), 1);
-        }
-      }
-    }, {
-      items: [
-        { id: "creator-presets", title: getLocString("presets.plugin.creatorPresets"), css: "sps-list__item--label", enabled: false },
-        ...presets,
-        ...tools],
+    const popupOptions = {
       showPointer: false,
-      verticalPosition: "top",
-      horizontalPosition: "center",
+      verticalPosition: "bottom" as VerticalPosition | undefined,
+      horizontalPosition: "center" as HorizontalPosition | undefined,
       searchEnabled: false,
-      cssClass: "sps-popup-menu sps-popup-menu--always-on-top",
-      cssClasses: listComponentCss,
-      onHide: () => { settingsAction.iconName = "navmenu-24x24"; },
-      onShow: () => { settingsAction.iconName = "close-24x24"; }
+      cssClass: "sps-popup-menu sps-popup-menu--dropdown",
+      cssClasses: listComponentCss
+    };
+
+    const listAction = createDropdownActionModel({
+      items: [],
+      id: "presets-list",
+      iconName: "icon-chevron_16x16",
+      iconSize: 16,
+      title: getLocString("presets.plugin.creatorPresets"),
+      css: "sps-navigation-action",
+    }, {
+      ...popupOptions,
+      items: defaultPresets,
     }, this.model.model);
+
+    const pagesAction = createDropdownActionModel({
+      items: [],
+      id: "presets-pages",
+      iconName: "icon-chevron_16x16",
+      iconSize: 16,
+      title: getLocString("presets.plugin.select"),
+      css: "sps-navigation-action",
+    }, {
+      ...popupOptions,
+      items: presets,
+    }, this.model.model);
+
+    const editAction = createDropdownActionModel({
+      items: [],
+      id: "presets-edit",
+      iconName: "icon-chevron_16x16",
+      iconSize: 16,
+      title: getLocString("presets.plugin.edit"),
+      css: "sps-navigation-action",
+    }, {
+      ...popupOptions,
+      onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
+      items: tools,
+    }, this.model.model);
+
+    const quitAction = new Action({
+      id: "presets-quit",
+      iconName: "icon-exit-24x24",
+      title: getLocString("presets.plugin.quit"),
+      css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
+      action: () => { this.saveHandler(); this.hidePresets(); }
+    });
+
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
-    bottomActions.unshift(settingsAction);
-    this.presetsList = settingsAction.popupModel.contentComponentData.model;
-    const resetCurrentAction = this.presetsList.getActionById("reset-current");
+    if (defaultPresets.length > 0)this.model.navigationBar.addAction(listAction);
+    this.model.navigationBar.addAction(pagesAction);
+    this.model.navigationBar.addAction(editAction);
+    this.model.navigationBar.addAction(quitAction);
+    this.presetsList = pagesAction.popupModel.contentComponentData.model;
+    const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
     this.presetsList.selectedItem = this.presetsList.actions[0];
+    pagesAction.title = this.presetsList.selectedItem.title || "";
     this.model.model.onCurrentPageChanged.add((_, options) => {
-      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo + 1];
+      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(this.presetsList.selectedItem.id); };
     });
@@ -164,7 +189,6 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.currentValue = this.model?.model.data;
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = true);
-    bottomActions.splice(0, 1);
     this.currentPresetIndex = this.model?.model.currentPageNo || 0;
     if (this.model) {
       this.model.dispose();

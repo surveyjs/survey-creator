@@ -14,16 +14,16 @@ export class NavigationBar extends ActionContainer {
   constructor() {
     super();
     this.cssClasses = {
-      root: "presets-navigation-bar",
+      root: "sps-navigation-bar",
       defaultSizeMode: "",
       smallSizeMode: "",
-      item: "presets-navigation-bar__item presets-navigation-bar-item",
+      item: "sps-navigation-bar__item sps-navigation-bar-item",
       itemWithTitle: "",
       itemAsIcon: "",
-      itemActive: "presets-navigation-bar-item--active",
-      itemPressed: "presets-navigation-bar-item--pressed",
-      itemIcon: "",
-      itemTitle: "",
+      itemActive: "sps-navigation-bar-item--active",
+      itemPressed: "sps-navigation-bar-item--pressed",
+      itemIcon: "sps-navigation-bar-item__icon",
+      itemTitle: "sps-navigation-bar-item__title",
       itemTitleWithIcon: "",
     };
   }
@@ -48,6 +48,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.navigationBarValue = new NavigationBar();
     const firstTabName = "preset";
     this.preset.setJson(this.getJsonFromSurveyModel());
+  }
+  public get navigationBar(): ActionContainer {
+    return this.navigationBarValue;
   }
   public dispose(): void {
     super.dispose();

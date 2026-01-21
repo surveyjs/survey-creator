@@ -1,4 +1,4 @@
-import { QuestionMatrixDynamicModel, glc, hasLicense } from "survey-core";
+import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { SurveyCreatorModel } from "../src/creator-base";
@@ -287,5 +287,18 @@ test("Preset plugin, getLicenseText method", () => {
   expect(hasLicenseMock).toHaveBeenCalledWith(8);
 
   hasLicenseMock.mockClear();
+});
+
+test("Preset plugin, menu title should not be changed", () => {
+  const creator = new SurveyCreatorModel({});
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+  expect(plugin.model.navigationBar.actions.map(a => a.id)).toEqual(["presets-pages", "presets-edit", "presets-quit"]);
+  const oldTitle = plugin.model.navigationBar.actions[1].title;
+  const list = plugin.model.navigationBar.actions[1].popupModel.contentComponentData.model;
+  const testAction = list.getActionById("reset");
+  testAction.action = () => { };
+  list.onItemClick(testAction);
+  expect(plugin.model.navigationBar.actions[1].title).toEqual(oldTitle);
 });
 

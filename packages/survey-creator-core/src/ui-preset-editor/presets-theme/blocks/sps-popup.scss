@@ -26,6 +26,12 @@
   }
 }
 
+.sps-popup-menu.sps-popup-menu--dropdown {
+  .sv-popup__container {
+    padding-top: var(--sjs2-spacing-x50, 4px);
+  }
+}
+
 .sps-popup-menu.sps-popup-menu--context {
   .sv-popup__container {
     padding: 0 var(--sjs2-spacing-x100, 8px);
@@ -61,6 +67,9 @@
   .sps-page {
     padding: 0;
     gap: var(--sjs2-spacing-x200, 16px);
+    align-self: stretch;
+    max-width: initial;
+    width: initial;
   }
   .sps-row {
     max-width: initial;
