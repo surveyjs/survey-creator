@@ -238,6 +238,18 @@ export var portugueseTranslation = {
     options: "Opções",
     // "Generate Valid JSON"
     generateValidJSON: "Gerar JSON válido",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Função desconhecida: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Funções desconhecidas: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variável desconhecida: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variáveis desconhecidas: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Erro de sintaxe.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Erro semântico.",
     // "Generate Readable JSON"
     generateReadableJSON: "Gerar JSON legível",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var portugueseTranslation = {
     toolboxFilteredTextPlaceholder: "Digite para pesquisar...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nenhum resultado encontrado",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Nenhuma propriedade para exibir",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1140,8 @@ export var portugueseTranslation = {
     storeDataAsText: "Gravar conteúdo de arquivo no resultado JSON como texto",
     // "Maximum file size (in bytes)"
     maxSize: "Tamanho máximo de arquivo em bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Número máximo de arquivos",
     // "Row count"
     rowCount: "Contagem de linhas",
     // "Columns layout"
@@ -1317,10 +1333,10 @@ export var portugueseTranslation = {
     // "Regular expression"
     regex: "Expressão regular",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Mensagem de validação",
-      // [Auto-translated] "Validation expression"
-      expression: "Expressão de validação",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Mensagem de notificação para entrada inválida",
+      // [Auto-translated] "Valid when"
+      expression: "Válido quando",
       // [Auto-translated] "Notification type"
       notificationType: "Tipo de notificação",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1416,10 @@ export var portugueseTranslation = {
     allowMultiple: "Permitir vários arquivos",
     // "Preview uploaded images"
     allowImagesPreview: "Pré-visualizar imagens",
-    // "Accepted file types"
-    acceptedTypes: "Tipos de arquivo aceites",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Categorias de arquivos aceitas",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Extensões adicionais de arquivo",
     // "Wait for upload to complete"
     waitForUpload: "Aguarde a conclusão do upload",
     // "Confirm file deletion"
@@ -1473,6 +1491,66 @@ export var portugueseTranslation = {
       labelFormat: "Formato do rótulo",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formato da dica de ferramenta"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL da imagem",
+      // [Auto-translated] "Areas"
+      areas: "Áreas",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Permitir múltiplas seleções",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Valor nome da propriedade",
+      // [Auto-translated] "Shape"
+      shape: "Formato",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Cor de preenchimento em repouso",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Cor do curso de marcha lenta",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Largura do curso de marcha lenta",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Cor de preenchimento com o botão de suspensão",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Cor do traço suspensório",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Largura do traço de pairação",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Cor de preenchimento selecionada",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Cor selecionada do traço",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Largura de traço selecionada",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Áreas selecionadas no máximo",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Áreas mínimas selecionadas"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valor",
+      // [Auto-translated] "Shape"
+      shape: "Formato",
+      // [Auto-translated] "Coordinates"
+      coords: "Coordenadas",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Cor de preenchimento em repouso",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Cor do curso de marcha lenta",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Largura do curso de marcha lenta",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Cor de preenchimento com o botão de suspensão",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Cor do traço suspensório",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Largura do traço de pairação",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Cor de preenchimento selecionada",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Cor selecionada do traço",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Largura de traço selecionada"
     },
     file: {
       // [Auto-translated] "Image height"
@@ -2082,6 +2160,20 @@ export var portugueseTranslation = {
       // [Auto-translated] "Informational"
       info: "Informativo"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Imagens",
+      // [Auto-translated] "Videos"
+      video: "Vídeos",
+      // [Auto-translated] "Audio"
+      audio: "Áudio",
+      // [Auto-translated] "Documents"
+      document: "Documentos",
+      // [Auto-translated] "Archives"
+      archive: "Arquivos",
+      // [Auto-translated] "Custom"
+      custom: "Costume"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nome completo",
@@ -2495,6 +2587,8 @@ export var portugueseTranslation = {
     notcontains: "não contém",
     // "Any of"
     anyof: "Nenhum de",
+    // [Auto-translated] "None of"
+    noneof: "Nenhuma",
     // "All of"
     allof: "Todos de",
     // "Greater than"
@@ -3088,8 +3182,10 @@ export var portugueseTranslation = {
     storeOthersAsComment: "Selecione para armazenar o valor da opção \"Outro\" como uma propriedade separada nos resultados da pesquisa.",
     // "Use {0} as a placeholder for the actual value."
     format: "Utilizar {0} como um espaço reservado para o valor real.",
-    // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Consulte o [aceitar](https://www.w3schools.com/tags/att_input_accept.asp) descrição do atributo para mais informações.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Selecione \"Custom\" para adicionar suas próprias extensões de arquivo sobre as categorias predefinidas.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Insira extensões de arquivo separadas por vírgulas (por exemplo, .csv, .xml).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Aplicável apenas aos tipos de célula Grupo de Rádio e Caixa de Seleção.",
     // "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3506,6 +3602,16 @@ export var portugueseTranslation = {
       "default-dark": "Escuro",
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Básico",
+      // [Auto-translated] "Advanced"
+      advanced: "Avançado",
+      // [Auto-translated] "Expert"
+      expert: "Especialista"
     }
   }
 };
