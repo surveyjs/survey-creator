@@ -40,8 +40,12 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
         return acc;
       }, {});
 
-      if (errors[ExpressionErrorType.SyntaxError] || errors[ExpressionErrorType.SemanticError]) {
+      if (errors[ExpressionErrorType.SyntaxError]) {
         return getLocString("ed.expressionSyntaxError");
+      }
+
+      if (errors[ExpressionErrorType.SemanticError]) {
+        return getLocString("ed.expressionSemanticsError");
       }
 
       if (errors[ExpressionErrorType.UnknownFunction]) {
