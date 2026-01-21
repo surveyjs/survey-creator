@@ -509,11 +509,15 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to validate that functions referenced in expressions exist.
    *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
    * Default value: `true`
    */
   expressionsValidateFunctions?: boolean;
   /**
    * Specifies whether to validate that variables and question, panel, or page names referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `false`
    */
@@ -524,4 +528,12 @@ export interface ICreatorOptions {
    * Default value: `true`
    */
   expressionsValidateSyntax?: boolean;
+  /**
+   * Specifies whether to validate expressions that are syntactically valid but have no meaningful effect because they always evaluate to the same value.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
+  expressionsValidateSemantics?: boolean;
 }
