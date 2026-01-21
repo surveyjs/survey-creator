@@ -126,6 +126,10 @@
     color: var(--ctr-popup-title-color, var(--sjs-layer-1-foreground-100, #000000e6));
   }
 
+  .sv-popup__content {
+    @include ctrDefaultFont;
+  }
+
   &.sv-popup--menu-popup {
     .sv-popup-inner > .sv-popup__container,
     & > .sv-popup__container {
