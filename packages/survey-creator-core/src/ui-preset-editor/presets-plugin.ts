@@ -76,10 +76,12 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private presetListToItems(presets: string[]) {
-    return presets.map(presetName => ({ id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
-      this.presetsList.selectedItem = item;
-      this.model.json = CreatorPresets[presetName].json;
-    } })) as IAction[];
+    return presets
+      .filter(presetName => CreatorPresets[presetName].visible !== false)
+      .map(presetName => ({ id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
+        this.presetsList.selectedItem = item;
+        this.model.json = CreatorPresets[presetName].json;
+      } })) as IAction[];
   }
   private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
@@ -91,7 +93,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     if (customPresets.length > 0) {
       customPresets.unshift({ id: "customSettings", needSeparator: true, title: getLocString("presets.plugin.savedPresets"), css: "sps-list__item--label", enabled: false });
     }
-    const editItem = { id: "editPresetsList", needSeparator: customPresets.length + defaultPresets.length > 0, title: getLocString("preset.plugin.editPresetsList"), action: ()=>this.editPresetsList(()=>{}) } as IAction;
+    const editItem = { id: "editPresetsList", needSeparator: customPresets.length + defaultPresets.length > 0, title: getLocString("preset.plugin.editPresetsList"), action: ()=>this.editPresetsList(this.applyPresetsList.bind(this)) } as IAction;
 
     return [...defaultPresets, ...customPresets, editItem];
   }
@@ -122,11 +124,24 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private getPresetsListToEdit() {
-    return [...PredefinedCreatorPresets.map(p =>({ title: this.getPresetTitle(p), name: p, visible: true, custom: false })),
+    return [...PredefinedCreatorPresets.map(p =>({ title: this.getPresetTitle(p), name: p, visible: CreatorPresets[p]?.visible !== false, custom: false })),
       ...this.customPresets.map(p =>({ title: p, name: p, visible: true, custom: true }))];
   }
 
-  private editPresetsList(onSet: (newList: string) => void) {
+  private applyPresetsList(newList: any[]) {
+    this.customPresets = [];
+    newList.forEach(item => {
+      const name = item.name || item.title;
+      if (PredefinedCreatorPresets.includes(name)) {
+        CreatorPresets[name].visible = item.visible;
+      } else {
+        this.customPresets.push(name);
+      }
+    });
+    this.updateMenu();
+  }
+
+  private editPresetsList(onSet: (newList: any[]) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
       elements: [{
@@ -183,18 +198,61 @@ export class UIPresetEditor implements ICreatorPlugin {
         options.actions.push(visibleAction);
       }
     });
+    survey.onMatrixRowAdding.add((sender, options) => {
+      const addSurvey = new SurveyModel({
+        showNavigationButtons: "none",
+        elements: [{
+          type: "text",
+          name: "presetName",
+          titleLocation: "hidden",
+          isRequired: true,
+        }, {
+          type: "buttongroup",
+          name: "template",
+          title: "Template",
+          defaultValue: "basic",
+          choices: [
+            { value: "basic", text: "Basic" },
+            { value: "advanced", text: "Advanced" },
+            { value: "expert", text: "Expert" }
+          ],
+        }]
+      });
+      settings.showDialog?.(<IDialogOptions>{
+        componentName: "survey",
+        data: { survey: addSurvey, model: addSurvey },
+        onApply: () => {
+          if (!addSurvey.validate()) return false;
+          const presetName = addSurvey.getValue("presetName");
+          CreatorPresets[presetName] = JSON.parse(JSON.stringify(CreatorPresets[addSurvey.getValue("template")]));
+          const value = options.question.value || [];
+          value.push({ title: presetName, name: presetName, visible: true, custom: true });
+          options.question.value = value;
+          onSet(value); // TODO: fix nested popup modals and remove this line
+          return true;
+        },
+        cssClass: "sps-popup svc-property-editor svc-creator-popup",
+        title: getLocString("presets.plugin.addNewPreset"),
+        displayMode: "popup"
+      }, this.creator.rootElement);
+      options.allow = false;
+    });
     settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
       onApply: () => {
         if (!survey.validate()) return false;
-        onSet(survey.getValue("presetName"));
+        onSet(survey.getValue("presetsList"));
         return true;
       },
       cssClass: "sps-popup svc-property-editor svc-creator-popup",
       title: getLocString("presets.plugin.saveAsTitle"),
       displayMode: "popup"
     }, this.creator.rootElement);
+  }
+
+  private updateMenu() {
+    this.presetsList?.setItems(this.presetsMenuItems);
   }
 
   /**
@@ -206,7 +264,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   public addPreset(preset: ICreatorPresetConfig, setAsDefault = false) {
     CreatorPresets[preset.presetName] = preset;
     this.customPresets.push(preset.presetName);
-    this.presetsList?.setItems(this.presetsMenuItems);
+    this.updateMenu();
   }
   /**
    * Removes a UI theme from Theme Editor.

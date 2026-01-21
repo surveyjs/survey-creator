@@ -34,6 +34,7 @@ export interface ICreatorPresetData {
 
 export interface ICreatorPresetConfig {
   presetName?: string;
+  visible?: boolean;
   json?: ICreatorPresetData | any;
 }
 
