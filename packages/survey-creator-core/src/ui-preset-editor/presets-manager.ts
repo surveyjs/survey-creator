@@ -1,9 +1,6 @@
 import { Action, IAction, IDialogOptions, ListModel, settings, SurveyModel } from "survey-core";
-import { getLocString } from "../editorLocalization";
-import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "../ui-presets-creator/presets";
+import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
-import { SurveyCreatorModel } from "../creator-base";
-
 export class PresetsManager {
   /**
    *
