@@ -9,6 +9,7 @@ export class PresetsManager {
 
   }
   public presetsList: ListModel;
+  public selectPresetCallback: (preset: ICreatorPresetConfig) => void;
 
   private customPresets = [] as string[];
 
@@ -21,10 +22,10 @@ export class PresetsManager {
       .filter(presetName => CreatorPresets[presetName].visible !== false)
       .map(presetName => ({ id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
         this.presetsList.selectedItem = item;
-        //this.model.json = CreatorPresets[presetName].json;
+        this.selectPresetCallback?.(CreatorPresets[presetName]);
       } })) as IAction[];
   }
-  public get presetsMenuItems(): IAction[] {
+  private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
     if (defaultPresets.length > 0) {
       defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });

@@ -58,6 +58,9 @@ export class UIPresetEditor implements ICreatorPlugin {
     settingsPage.componentData.elements[0].componentData.showPresets = () => this.showPresets();
     this.toolboxCompact = creator.toolbox.forceCompact;
     this.presetsManager = new PresetsManager(this.creator);
+    this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
+      this.model.json = preset.json;
+    };
   }
 
   /**
@@ -186,6 +189,14 @@ export class UIPresetEditor implements ICreatorPlugin {
       onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
       items: tools,
     }, this.model.model);
+
+    const statusAction = new Action({
+      id: "presets-status",
+      iconName: "icon-exit-24x24",
+      title: "",
+      css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
+      action: () => { this.saveHandler(); this.hidePresets(); }
+    });
 
     const quitAction = new Action({
       id: "presets-quit",
