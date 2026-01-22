@@ -27,13 +27,17 @@ They can be used separately ("10 days", "5 months", "6 years") or together to fo
 You can use the `dateDiff()` function to display the calculated duration value in the following questions:
 
 - Expression    
-This question is always read-only. The value is set using the **Expression** property located under **General**:<br><br>
+This question is always read-only. The value is set using the **Expression** property located under **General**:
+
     <img src="images/eud-expression 401 611.png" alt='Duration fuction in an Expression question' width="301" height="458">
 
 - Single-Line Input     
-The value is set using the **Set value expression** property located under **Conditions**:<br><br>
-    <img src="images/eud-set-value-expression 400 596.png" alt='Duration fuction in a Single Line Input' width="300" height="447"><br><br>
-    You can enable the read-only mode for a Single-Line Input with a set expression using the **Read-only** property located under **General**:<br><br>
+The value is set using the **Set value expression** property located under **Conditions**:
+
+    <img src="images/eud-set-value-expression 400 596.png" alt='Duration fuction in a Single Line Input' width="300" height="447">
+
+    You can enable the read-only mode for a Single-Line Input with a set expression using the **Read-only** property located under **General**:
+
     <img src="images/eud-read-only 400 596.png" alt='How to set Read-only mode for a Single-Line Input' width="300" height="447">
 
 If you want the calculations to happen behind the scenes, you can create a hidden Expression question, create a custom variable, or use a combination of both. For example, you can create one custom variable for the duration in years and another one for the number of months of the remaining incomplete year. Then, you can create a read-only Expression question that will display both values in a single field.

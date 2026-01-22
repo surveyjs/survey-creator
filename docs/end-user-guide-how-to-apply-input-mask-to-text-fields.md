@@ -88,10 +88,12 @@ If you wish to apply different cell input types to different matrix columns, cha
 2. Under **Columns**, select the column to whose cells you wish to apply a mask.
 3. Click the **Pen** icon on the right of the column title. This action will display the column settings in the Property Grid.
 
-    <img src="images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414"><br><br>
+    <img src="images/eud-multi-select-matrix-column.png" alt='Multi-Select Matrix: How to set a new cell type for a column' width="329" height="414">
+    
     Another way to display the column settings in the Property Grid is by clicking the area around the column title on the design surface.
 
     <img src="images/eud-column-area.png" alt='Multiple Textboxes: How to activate column settings in the Property Grid' width="819" height="454">
+
 4. Under **General**, locate the **Cell input type** property. By default, it is set to **Default**, which means that it inherits **Cell input type** set for the entire matrix table.
 5. In the drop-down menu, select **Single-Line Input**.
 6. Locate the **Input type** property and make sure it's set to its default **Text** option.
