@@ -2,7 +2,6 @@ import { createDropdownActionModel, IAction, ListModel, settings as libSettings,
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
-import { HorizontalPosition, VerticalPosition } from "../../../../../survey-library/packages/survey-core/build/typings/src/utils/popup";
 import { ICreatorPresetConfig, UIPreset } from "../ui-presets-creator/presets";
 import { presetsCss } from "./presets-theme/presets";
 import { PresetsManager } from "./presets-manager";
@@ -135,8 +134,8 @@ export class UIPresetEditor implements ICreatorPlugin {
     });
     const popupOptions = {
       showPointer: false,
-      verticalPosition: "bottom" as VerticalPosition | undefined,
-      horizontalPosition: "center" as HorizontalPosition | undefined,
+      verticalPosition: "bottom" as any,
+      horizontalPosition: "center" as any,
       searchEnabled: false,
       cssClass: "sps-popup-menu sps-popup-menu--dropdown",
       cssClasses: listComponentCss
