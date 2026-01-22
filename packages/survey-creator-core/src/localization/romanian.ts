@@ -238,6 +238,12 @@ export const roStrings = {
     options: "Opțiuni",
     // "Generate Valid JSON"
     generateValidJSON: "Generează JSON valid",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Funcție necunoscută: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variabilă necunoscută: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Eroare de sintaxă.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generează JSON lizibil",
     // "Toolbox"
@@ -250,6 +256,8 @@ export const roStrings = {
     toolboxFilteredTextPlaceholder: "Tastați pentru a căuta...",
     // "No results found"
     toolboxNoResultsFound: "Nu au fost găsite rezultate",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Nicio proprietate de afișat",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Tastați pentru a căuta...",
     // "No results found"
@@ -1126,6 +1134,8 @@ export const roStrings = {
     storeDataAsText: "Stocați conținutul fișierului în rezultatul JSON ca text",
     // "Maximum file size (in bytes)"
     maxSize: "Dimensiunea maximă a fișierului (în octeți)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Numărul maxim de fișiere",
     // "Row count"
     rowCount: "Număr de rânduri",
     // "Columns layout"
@@ -1317,10 +1327,10 @@ export const roStrings = {
     // "Regular expression"
     regex: "Expresie regulată",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Mesaj de validare",
-      // [Auto-translated] "Validation expression"
-      expression: "Expresie de validare",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Mesaj de notificare pentru intrare invalidă",
+      // [Auto-translated] "Valid when"
+      expression: "Valabil când",
       // [Auto-translated] "Notification type"
       notificationType: "Tip de notificare",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1410,10 @@ export const roStrings = {
     allowMultiple: "Permite încărcarea multiplă de fișiere",
     // "Preview uploaded images"
     allowImagesPreview: "Previzualizează imaginile încărcate",
-    // "Accepted file types"
-    acceptedTypes: "Tipuri de fișiere acceptate",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Categorii de fișiere acceptate",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Extensii suplimentare de fișiere",
     // "Wait for upload to complete"
     waitForUpload: "Așteptați finalizarea încărcării",
     // "Confirm file deletion"
@@ -1473,6 +1485,66 @@ export const roStrings = {
       labelFormat: "Formatul etichetei",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formatul sfatului ecran"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL al imaginii",
+      // [Auto-translated] "Areas"
+      areas: "Zone",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Permite selecții multiple",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Denumirea proprietății de valoare",
+      // [Auto-translated] "Shape"
+      shape: "Formă",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Culoare de umplere la repaus",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Culoarea cursei de relație",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lățimea cursei la ralanti",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Culoare de umplere cu cursor",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Culoarea treptelor de plutire",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lățimea cursei de plutire",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Culoarea de umplere selectată",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Culoarea de linie selectată",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lățimea aleasă a cursei",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Zone maxime selectate",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Zone minime selectate"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valoare",
+      // [Auto-translated] "Shape"
+      shape: "Formă",
+      // [Auto-translated] "Coordinates"
+      coords: "Coordonate",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Culoare de umplere la repaus",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Culoarea cursei de relație",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lățimea cursei la ralanti",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Culoare de umplere cu cursor",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Culoarea treptelor de plutire",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lățimea cursei de plutire",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Culoarea de umplere selectată",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Culoarea de linie selectată",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lățimea aleasă a cursei"
     },
     file: {
       // [Auto-translated] "Image height"
@@ -2082,6 +2154,20 @@ export const roStrings = {
       // [Auto-translated] "Informational"
       info: "Informaţionale"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Imagini",
+      // [Auto-translated] "Videos"
+      video: "Videoclipuri",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Documente",
+      // [Auto-translated] "Archives"
+      archive: "Arhive",
+      // [Auto-translated] "Custom"
+      custom: "Obiceiuri"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nume complet",
@@ -2495,6 +2581,8 @@ export const roStrings = {
     notcontains: "Nu conține",
     // "Any of"
     anyof: "Oricare dintre",
+    // [Auto-translated] "None of"
+    noneof: "Niciunul dintre ele",
     // "All of"
     allof: "Toate dintre",
     // "Greater than"
@@ -3088,8 +3176,10 @@ export const roStrings = {
     storeOthersAsComment: "Selectați pentru a stoca valoarea opțiunii „Altele” ca o proprietate separată în rezultatele chestionarului.",
     // "Use {0} as a placeholder for the actual value."
     format: "Utilizați {0} ca substituent pentru valoarea actuală.",
-    // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Consultați descrierea atributului [accept](https://www.w3schools.com/tags/att_input_accept.asp) pentru mai multe informații.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Selectează \"Custom\" pentru a-ți adăuga propriile extensii de fișier peste categoriile predefinite.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Introduceți extensiile de fișiere separate prin virgule (de exemplu, .csv, .xml).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Se aplică doar dacă „Tip de intrare a celulei” este setat la Grup de butoane radio sau Casete de selectare.",
     // "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3506,6 +3596,16 @@ export const roStrings = {
       "default-dark": "Întunecat",
       // [Auto-translated] "Contrast"
       "default-contrast": "Contrast"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Bază",
+      // [Auto-translated] "Advanced"
+      advanced: "Avansat",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
     }
   }
 };

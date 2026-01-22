@@ -342,6 +342,10 @@ export interface ISurveyCreatorOptions {
   ): void;
   translationLocalesOrder: Array<string>;
   canAddPage(pageToAdd?: PageModel): boolean;
+  expressionsValidateFunctions?: boolean;
+  expressionsValidateVariables?: boolean;
+  expressionsValidateSyntax?: boolean;
+  expressionsValidateSemantics?: boolean;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
@@ -518,4 +522,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   getRendererContext(locStr: LocalizableString) {
     return locStr;
   }
+  expressionsValidateFunctions: boolean = true;
+  expressionsValidateVariables: boolean = false;
+  expressionsValidateSyntax: boolean = true;
+  expressionsValidateSemantics: boolean = true;
 }

@@ -24,19 +24,18 @@ test.describe(title, () => {
     await page.goto(`${urlPresets}`);
     //await changeToolboxScrolling(page, false);
     //await changeToolboxSearchEnabled(page, false);
-    await page.setViewportSize({ width: 1440, height: 1440 });
+    await page.setViewportSize({ width: 1440, height: 1507 });
     await showPresets(page);
   });
 
   test("Check presets menu", async ({ page }) => {
-    await page.locator(".sps-list__item").nth(2).hover();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).locator(".sps-list__item").nth(2).hover();
     await compareScreenshot(page, page.locator(".sps-list__container"), "presets-menu.png");
-    await compareScreenshot(page, page.locator(".svc-sidebar-tabs"), "presets-menu-position.png");
+    await compareScreenshot(page, page.locator(".sps-navigation-bar"), "presets-menu-position.png");
   });
 
   test("Presets pages overview", async ({ page }) => {
-    await page.locator(".sps-menu-floating-action").click();
-    expect(await page.locator(".sps-list__container")).not.toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
     await compareScreenshot(page, page.locator(".sps-page"), "presets-languages.png");
 
@@ -59,7 +58,8 @@ test.describe(title, () => {
   });
 
   test("Presets Items", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
     expect(await page.locator(".sps-page__title").getByText("Tabs")).toBeVisible();
 
     const root = page.locator(".sps-question--matrixdynamic").first();
@@ -75,7 +75,8 @@ test.describe(title, () => {
   });
 
   test("Presets Categories", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
 
     const root = page.locator(".sps-question--matrixdynamic").first();
@@ -102,7 +103,8 @@ test.describe(title, () => {
   });
 
   test("Presets Context Menu", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
 
     const root = page.locator(".sps-panel").first();
@@ -119,7 +121,8 @@ test.describe(title, () => {
   });
 
   test("Presets Dialogs", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
 
     const root = page.locator(".sps-panel").first();
@@ -132,5 +135,36 @@ test.describe(title, () => {
     await page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).hover();
     await page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).getByTitle("Edit").click();
     await compareScreenshot(page, ".sv-popup__container", "presets-dialog-large.png");
+  });
+
+  test("Presets options hints", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Options").click();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    await page.locator(".sv-action-bar-item--collapse").nth(0).click();
+    await page.locator(".sps-checkbox__caption .sps-action-button").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-question__title .sps-action-button").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-panel .sv-string-viewer", { hasText: "Show toggle for hidden elements" })
+      .evaluate(node => node.innerHTML = node.innerHTML + " (text to make the title longer to check the hint button)");
+    await compareScreenshot(page, page.locator(".sps-panel").nth(1), "presets-options-hints.png");
+  });
+
+  test("Presets options background", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Options").click();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
+    await page.locator(".sv-action-bar-item--collapse").nth(0).click();
+    await page.locator(".sv-action-bar-item--collapse").nth(1).click();
+    await page.locator(".sv-action-bar-item--collapse").nth(2).click();
+    await page.locator(".sv-action-bar-item--collapse").nth(3).click();
+    await compareScreenshot(page, page.locator(".sps-page"), "presets-options-background.png");
+  });
+
+  test("Presets small screen", async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 1507 });
+    expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
+    await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png");
   });
 });

@@ -14,16 +14,16 @@ export class NavigationBar extends ActionContainer {
   constructor() {
     super();
     this.cssClasses = {
-      root: "presets-navigation-bar",
+      root: "sps-navigation-bar",
       defaultSizeMode: "",
       smallSizeMode: "",
-      item: "presets-navigation-bar__item presets-navigation-bar-item",
+      item: "sps-navigation-bar__item sps-navigation-bar-item",
       itemWithTitle: "",
       itemAsIcon: "",
-      itemActive: "presets-navigation-bar-item--active",
-      itemPressed: "presets-navigation-bar-item--pressed",
-      itemIcon: "",
-      itemTitle: "",
+      itemActive: "sps-navigation-bar-item--active",
+      itemPressed: "sps-navigation-bar-item--pressed",
+      itemIcon: "sps-navigation-bar-item__icon",
+      itemTitle: "sps-navigation-bar-item__title",
       itemTitleWithIcon: "",
     };
   }
@@ -48,6 +48,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.navigationBarValue = new NavigationBar();
     const firstTabName = "preset";
     this.preset.setJson(this.getJsonFromSurveyModel());
+  }
+  public get navigationBar(): ActionContainer {
+    return this.navigationBarValue;
   }
   public dispose(): void {
     super.dispose();
@@ -160,6 +163,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
           options.question.getTitleToolbar().isResponsivenessDisabled = true;
           options.actions = model.navigationBar.actions;
         }
+        item.onGetQuestionTitleActions(model, this.creator, options);
       });
     });
     model.onGetPanelTitleActions.add((_, options) => {
@@ -323,11 +327,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       this.applying = false;
       return false;
     }
-    // if (reCreateCretor) {
-    //   const json = this.creator?.JSON || {};
-    //   this.creatorValue = this.createCreator({});
-    //   this.creator.JSON = json;
-    // }
     this.preset.setJson(this.getJsonFromSurveyModel());
     this.model.setValue("json_result", JSON.stringify(this.preset.getJson(), null, 2));
     this.preset.apply(this.creator, true);

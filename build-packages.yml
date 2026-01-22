@@ -198,17 +198,17 @@ jobs:
       #     CleanTargetFolder: true
       #   displayName: 'Copy root docs to the local surveyjs/service repo'
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs"
-          Contents: |
-            classes.json
-            pmes.json
-            surveyjs_definition.json
-          TargetFolder: "$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor"
-          OverWrite: true
-          CleanTargetFolder: false
-        displayName: "Copy generated docs to the local surveyjs/service repo"
+      # - task: CopyFiles@2
+      #   inputs:
+      #     SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs"
+      #     Contents: |
+      #       classes.json
+      #       pmes.json
+      #       surveyjs_definition.json
+      #     TargetFolder: "$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor"
+      #     OverWrite: true
+      #     CleanTargetFolder: false
+      #   displayName: "Copy generated docs to the local surveyjs/service repo"
 
       - task: CopyFiles@2
         inputs:
@@ -247,10 +247,7 @@ jobs:
           git fetch origin master
           git checkout -B master origin/master
           git reset --hard origin/master
-          git add surveyjs.io/App_Data/DocsEditor
-          git commit -m "updated survey-creator docs [azurepipelines skip]"
-          git push origin master
-        displayName: "Git surveyjs/service push updated docs"
+        displayName: "Git surveyjs/service push updated docs (prepare)"
       # - powershell: |
       #     cd $(Build.SourcesDirectory)/service
       #     git pull origin V2
@@ -261,6 +258,25 @@ jobs:
       #     git pull origin V2
       #     git push origin V2
       #   displayName: "git surveyjs/service push updated V2 docs"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs"
+          Contents: |
+            classes.json
+            pmes.json
+            surveyjs_definition.json
+          TargetFolder: "$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor"
+          OverWrite: true
+          CleanTargetFolder: false
+        displayName: "Copy generated docs to the local surveyjs/service repo"
+
+      - powershell: |
+          cd $(Build.SourcesDirectory)/service
+          git add surveyjs.io/App_Data/DocsEditor
+          git commit -m "updated survey-creator docs [azurepipelines skip]"
+          git push origin master
+        displayName: "Git surveyjs/service push updated docs"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-utils
@@ -511,6 +527,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 React"
+      
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 React"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -689,6 +710,11 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 Angular"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 Angular"
 
@@ -861,6 +887,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 Vue"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 Vue"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -1096,6 +1127,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 JS"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+          npm run e2e:ci
+        displayName: "Playwright Functional test CreatorV2 JS"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js

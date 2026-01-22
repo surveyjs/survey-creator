@@ -1,6 +1,8 @@
 import {
   JsonObjectProperty, ItemValue, QuestionDropdownModel,
-  Base, Serializer, SurveyModel, matrixDropdownColumnTypes
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
+  QuestionMatrixDynamicModel,
+  MatrixDynamicRowModel
 } from "survey-core";
 import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
@@ -9,6 +11,8 @@ import {
   settings, IPropertyTabInfo, IPropertyEditorInfo } from "survey-creator-core";
 
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
+import { ISurveyQuestionEditorDefinition } from "../question-editor/definition";
+import { SurveyQuestionEditorTabDefinition } from "../question-editor/properties";
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj: any, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
@@ -18,8 +22,8 @@ export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
     return prop.visible !== false;
   }
 }
-
-const presetPropertiesBaseClasses = ["question", "matrixdropdownbase", "selectbase", "panelbase", "matrixdropdowncolumn@default", "matrixdropdowncolumn@selectbase"];
+const presetMatrixColumnName = "matrixdropdowncolumn";
+const presetPropertiesBaseClasses = ["question", "matrixdropdownbase", "selectbase", "panelbase", presetMatrixColumnName + "@default", presetMatrixColumnName + "@selectbase"];
 interface IPropertyGridTabInfo {
   name: string;
   iconName?: string;
@@ -27,12 +31,12 @@ interface IPropertyGridTabInfo {
 }
 export class SurveyQuestionPresetPropertiesDetail {
   private propertiesHash: { [key: string]: string } = {};
-  public classes = new Array<string>();
   private properties: SurveyQuestionPresetProperties;
   private propertyGridValue: PropertyGridModel;
   private propertyGridDefaultValue: PropertyGridModel;
   private obj;
-  private allClasses: string[];
+  private allClasses: string[] = [];
+  private baseClasses: string[] = [];
   constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
     const cls: { [key: string]: boolean } = {};
     const obj = this.createObj();
@@ -50,31 +54,35 @@ export class SurveyQuestionPresetPropertiesDetail {
         cls[propClassName] = true;
       }
     });
+    let firstClassName = "";
     for (let i = 0; i < presetPropertiesBaseClasses.length; i++) {
       const cl = presetPropertiesBaseClasses[i];
       if (cls[cl]) {
-        this.classes.push(cl);
+        firstClassName = firstClassName || cl;
       }
     }
-    if (this.classes.indexOf(className) < 0) {
-      this.classes.push(className);
-    }
-    this.allClasses = this.getAllClasses();
+    firstClassName = firstClassName || className;
+    this.collectAllClasses(firstClassName).forEach(cl => {
+      if (presetPropertiesBaseClasses.indexOf(cl) < 0) {
+        this.allClasses.push(cl);
+      } else {
+        this.baseClasses.push(cl);
+      }
+    });
     this.propertyGridValue = this.createPropertyGrid(obj, this.currentJson);
     this.propertyGridDefaultValue = this.createPropertyGrid(obj);
   }
   public getObj() {
     return this.obj;
   }
-  private getAllClasses(): string[] {
+  private collectAllClasses(className: string): string[] {
     const res = new Array<string>();
-    const className = this.classes[0];
     res.push(className);
     if (className == "survey") return res;
-    const isColumn = className.indexOf("matrixdropdowncolumn@") == 0;
+    const isColumn = className.indexOf(presetMatrixColumnName + "@") == 0;
     Object.keys(this.currentJson.classes).forEach(cl => {
       if (isColumn) {
-        if (cl.indexOf("matrixdropdowncolumn@") === 0) {
+        if (cl.indexOf(presetMatrixColumnName + "@") === 0) {
           res.push(cl);
         }
       } else {
@@ -91,12 +99,13 @@ export class SurveyQuestionPresetPropertiesDetail {
     res.obj = obj;
     return res;
   }
-  private createObj(): Base {
-    if (this.className === "survey") return new SurveyModel();
-    const ind = this.className.indexOf("@");
-    if (ind < 0) return Serializer.createClass(this.className);
-    const clName = this.className.substring(0, ind);
-    const postFix = this.className.substring(ind + 1);
+  private createObj(className?: string): Base {
+    className = className || this.className;
+    if (className === "survey") return new SurveyModel();
+    const ind = className.indexOf("@");
+    if (ind < 0) return Serializer.createClass(className);
+    const clName = className.substring(0, ind);
+    const postFix = className.substring(ind + 1);
     const res = Serializer.createClass(clName);
     if (res.cellType) {
       res.cellType = postFix;
@@ -131,225 +140,120 @@ export class SurveyQuestionPresetPropertiesDetail {
     return this.propertiesHash[propName];
   }
   public updateCurrentJson(val: Array<any>): void {
+    this.removeBaseClassesFromCurrentJson();
     this.updateCurrentJsonCore(this.currentJson.classes, val);
+  }
+  public getAllClasses(): Array<string> { return this.allClasses; }
+  public getClassesBySharedProperty(propName: string): Array<string> {
+    const res: string[] = [];
+    for (let i = 0; i < this.allClasses.length; i++) {
+      const prop = Serializer.findProperty(this.allClasses[i], propName);
+      if (prop && prop.visible !== false) {
+        res.push(this.allClasses[i]);
+      }
+    }
+    return res;
+  }
+  public getSelectedClassesForProperty(propName: string): string[] {
+    const res: string[] = [];
+    for (let i = 0; i < this.allClasses.length; i++) {
+      if (this.currentJson.classes[this.allClasses[i]].properties?.filter((p: any) => p === propName || p.name === propName)[0]) {
+        res.push(this.allClasses[i]);
+      }
+    }
+    if (res.length === 0) {
+      return this.getClassesBySharedProperty(propName);
+    }
+    return res;
+  }
+  private removeBaseClassesFromCurrentJson(): void {
+    if (!this.hasBaseClassInCurrentJson() || this.baseClasses.length === 0) return;
+    const classes = this.currentJson.classes;
+    this.allClasses.forEach(clName => {
+      classes[clName] = this.createFlatClassProperties(clName);
+    });
+    this.removeBaseClassesFromCurrentJsonCore();
+  }
+  private createFlatClassProperties(className: string): ISurveyQuestionEditorDefinition {
+    const obj = this.createObj(className);
+    this.properties = new SurveyQuestionPresetProperties(obj, className, this.currentJson);
+    const res : ISurveyQuestionEditorDefinition = { properties: [] };
+    const title = this.currentJson.classes[className]?.title;
+    if (!!title) {
+      res.title = title;
+    }
+    this.properties.getTabs().forEach((tab: SurveyQuestionEditorTabDefinition, index: number) => {
+      if (tab.visible !== false && tab.properties.length > 0) {
+        res.tabs = res.tabs || [];
+        const newTab: IPropertyTabInfo = { name: tab.name };
+        if (!!tab.title) {
+          newTab.title = tab.title;
+        }
+        if (!!tab.iconName) {
+          newTab.iconName = tab.iconName;
+        }
+        res.tabs.push(newTab);
+
+        tab.properties.forEach(prop => {
+          res.properties?.push({ name: prop.name, tab: tab.name });
+        });
+      }
+    });
+    return res;
+  }
+  private hasBaseClassInCurrentJson(): boolean {
+    for (let i = 0; i < this.baseClasses.length; i++) {
+      if (this.currentJson.classes[this.baseClasses[i]]) return true;
+    }
+    return false;
+  }
+  private removeBaseClassesFromCurrentJsonCore(): void {
+    this.baseClasses.forEach(name => {
+      delete this.currentJson.classes[name];
+    });
   }
   private updateCurrentJsonCore(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>): void {
     if (!Array.isArray(val)) val = [];
     this.updateJsonClasses(curJsonClasses, val);
   }
   private updateJsonClasses(curJsonClasses: ISurveyPropertiesDefinition, val: Array<IPropertyGridTabInfo>): void {
-    if (!Array.isArray(val)) return;
-    for (let i = val.length - 1; i >= 0; i--) {
-      if (!val[i].name) {
-        val.splice(i, 1);
-      }
-    }
-    this.convertPropertiesIntoObject(curJsonClasses);
-    const tabs: {[key: string]: IPropertyTabInfo} = this.getAllTabsInfo(curJsonClasses);
-    this.updateTabIndexes(tabs, val, curJsonClasses);
-    this.removeAddUpdateProperties(curJsonClasses, val);
-
+    const tabs = new Array<IPropertyTabInfo>();
+    const properties = new Array<IPropertyEditorInfo>();
     val.forEach(tab => {
+      if (!tab || !tab.name) return;
+      const newTab: IPropertyTabInfo = { name: tab.name };
       if (tab.iconName !== undefined) {
-        tabs[tab.name].iconName = tab.iconName;
+        newTab.iconName = tab.iconName;
       }
-      this.updateTabProperties(curJsonClasses, tab);
-    });
-    const usedTabNames: string[] = this.getAllUsedTabNames(curJsonClasses);
-    this.removeUnusedTabs(usedTabNames, curJsonClasses);
-  }
-  private getAllUsedTabNames(curJsonClasses: ISurveyPropertiesDefinition): string[] {
-    const res: string[] = [];
-    this.allClasses.forEach(clName => {
-      const props = curJsonClasses[clName]?.properties as Array<IPropertyEditorInfo>;
-      if (Array.isArray(props)) {
-        props.forEach(prop => {
-          if (res.indexOf(prop.tab) < 0) {
-            res.push(prop.tab);
-          }
+      tabs.push(newTab);
+      if (Array.isArray(tab.items)) {
+        tab.items.forEach(propName => {
+          properties.push({ name: propName, tab: tab.name });
         });
       }
     });
-    return res;
+    curJsonClasses[this.className] = curJsonClasses[this.className] || {};
+    curJsonClasses[this.className].tabs = tabs;
+    curJsonClasses[this.className].properties = properties;
   }
-  private removeUnusedTabs(usedTabNames: string[], curJsonClasses: ISurveyPropertiesDefinition): void {
-    this.classes.forEach(clName => {
-      const tabs = curJsonClasses[clName]?.tabs;
-      if (Array.isArray(tabs)) {
-        for (let i = tabs.length - 1; i >= 0; i--) {
-          if (usedTabNames.indexOf(tabs[i].name) < 0) {
-            tabs.splice(i, 1);
-          }
+  public updatePropertyVisibility(propInfo: any, propCategory: string): void {
+    this.removeBaseClassesFromCurrentJson();
+    this.updatePropertyVisibilityCore(this.currentJson.classes, propInfo, propCategory);
+  }
+
+  private updatePropertyVisibilityCore(curJsonClasses: ISurveyPropertiesDefinition, propInfo: any, propCategory: string): void {
+    Object.keys(curJsonClasses).forEach(className => {
+      const classDef = curJsonClasses[className];
+      const propIndex = (classDef.properties as any)?.findIndex((p: any) => p.name === propInfo.name);
+      if (!propInfo.classes) return;
+      if (propInfo.classes.indexOf(className) < 0) {
+        if (propIndex > -1) classDef.properties.splice(propIndex, 1);
+      } else {
+        if (propIndex < 0) {
+          classDef.properties.push({ name: propInfo.name, tab: propCategory });
         }
       }
     });
-  }
-  private convertPropertiesIntoObject(curJsonClasses: ISurveyPropertiesDefinition) {
-    const generalTabName = settings.propertyGrid.generalTabName;
-    Object.keys(curJsonClasses).forEach(clName => {
-      const props = curJsonClasses[clName].properties;
-      if (Array.isArray(props)) {
-        for (let i = 0; i < props.length; i++) {
-          const prop = props[i];
-          if (typeof prop === "string") {
-            props.splice(i, 1, { name: prop, tab: generalTabName });
-          } else {
-            if (!prop.tab) {
-              prop.tab = generalTabName;
-            }
-          }
-        }
-      }
-    });
-  }
-  private removeAddUpdateProperties(curJsonClasses: ISurveyPropertiesDefinition, val: Array<IPropertyGridTabInfo>): void {
-    const newTabProperties: {[key: string]: string} = {};
-    val.forEach(tab => {
-      if (!Array.isArray(tab.items)) return;
-      tab.items.forEach(propName => newTabProperties[propName] = tab.name);
-    });
-    const oldTabProperties: {[key: string]: boolean} = {};
-    this.classes.forEach(clName => {
-      const props = curJsonClasses[clName]?.properties as Array<IPropertyEditorInfo>;
-      if (Array.isArray(props)) {
-        for (let i = props.length - 1; i >= 0; i--) {
-          oldTabProperties[props[i].name] = true;
-          const prop = props[i];
-          if (!newTabProperties[prop.name]) {
-            props.splice(i, 1);
-          } else {
-            if (prop.tab !== newTabProperties[prop.name]) {
-              prop.tab = newTabProperties[prop.name];
-              prop.index = undefined;
-            }
-          }
-        }
-      }
-    });
-    const lastClassName = this.classes[this.classes.length - 1];
-    const firstClassName = this.classes[0];
-    Object.keys(newTabProperties).forEach(propName => {
-      if (!oldTabProperties[propName]) {
-        const prop = Serializer.findProperty(lastClassName, propName);
-        if (prop) {
-          let propClassName = this.getPropClassName(prop);
-          if (this.classes.indexOf(propClassName) < 0) {
-            propClassName = firstClassName;
-          }
-          const classInfo = curJsonClasses[propClassName];
-          classInfo.properties = classInfo.properties || [];
-          classInfo.properties.push({ name: propName, tab: newTabProperties[propName] });
-        }
-      }
-    });
-  }
-  private updateTabProperties(curJsonClasses: ISurveyPropertiesDefinition, tab: IPropertyGridTabInfo) {
-    if (!Array.isArray(tab.items)) return;
-    const tabProperties: { [key: string]: { prop: IPropertyEditorInfo, className: string } } = {};
-    const filteredTabProperties: IPropertyEditorInfo[] = [];
-    Object.keys(curJsonClasses).forEach(clName => {
-      if (this.allClasses.indexOf(clName) < 0) return;
-      const props = curJsonClasses[clName].properties as Array<IPropertyEditorInfo>;
-      if (Array.isArray(props)) {
-        for (let i = 0; i < props.length; i++) {
-          const prop = props[i];
-          if (prop.tab === tab.name) {
-            const obj = { prop: prop, className: clName };
-            tabProperties[prop.name] = obj;
-            if (prop.index !== undefined && this.classes.indexOf(clName) < 0) {
-              filteredTabProperties.push(prop);
-            }
-          }
-        }
-      }
-    });
-    const elements = Array<IPropertyEditorInfo>();
-    tab.items.forEach((propName) => {
-      const prop = tabProperties[propName]?.prop;
-      if (prop) {
-        elements.push(prop);
-      }
-    });
-    this.sortElementsByIndex(elements, filteredTabProperties);
-  }
-  private addGeneralTabIfNeeded(tabs: {[key: string]: IPropertyTabInfo }, tabOrder: string[], curJsonClasses: ISurveyPropertiesDefinition) {
-    const generalTabName = settings.propertyGrid.generalTabName;
-    if (tabOrder.indexOf(generalTabName) >= 0 && !tabs[generalTabName]) {
-      const baseClass = this.classes[0];
-      const generalTab: IPropertyTabInfo = { name: generalTabName, index: 0 };
-      const classInfo = curJsonClasses[baseClass];
-      classInfo.tabs = classInfo.tabs || [];
-      classInfo.tabs.unshift(generalTab);
-      tabs[generalTabName] = generalTab;
-    }
-  }
-  private updateTabIndexes(tabs: {[key: string]: IPropertyTabInfo }, val: Array<IPropertyGridTabInfo>, curJsonClasses: ISurveyPropertiesDefinition): void {
-    const tabOrder: string[] = [];
-    val.forEach(tab => {
-      tabOrder.push(tab.name);
-    });
-    this.addGeneralTabIfNeeded(tabs, tabOrder, curJsonClasses);
-    val.forEach(tab => {
-      if (!tabs[tab.name]) {
-        const baseClass = this.classes[0];
-        curJsonClasses[baseClass].tabs = curJsonClasses[baseClass].tabs || [];
-        const newTab = { name: tab.name };
-        curJsonClasses[baseClass].tabs.push(newTab);
-        tabs[tab.name] = newTab;
-      }
-    });
-    const sortedElements = this.getSortedTabs(tabs, tabOrder);
-    const elements: Array<IPropertyEditorInfo | IPropertyTabInfo> = [];
-    tabOrder.forEach((tabName) => { elements.push(tabs[tabName]); });
-    this.sortElementsByIndex(elements, sortedElements);
-  }
-  private getSortedTabs(tabs: {[key: string]: IPropertyTabInfo}, tabOrder: string[]): IPropertyTabInfo[] {
-    const res: IPropertyTabInfo[] = [];
-    Object.keys(tabs).forEach((name) => {
-      const tab = tabs[name];
-      if (tab.index !== undefined && tabOrder.indexOf(name) < 0) {
-        res.push(tab);
-      }
-    });
-    return res;
-  }
-  private sortElementsByIndex(elements: Array<IPropertyEditorInfo | IPropertyTabInfo>, sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>): void {
-    sortedElements.sort((a, b) => (b.index || 0) - (a.index || 0));
-    const step = 100;
-    let index = 0;
-    elements.forEach((el) => {
-      const curIndex = el.index || 0;
-      index = this.getIndexForElement(sortedElements, curIndex, index, step);
-      el.index = step * (index ++);
-    });
-  }
-  private getIndexForElement(sortedElements: Array<IPropertyEditorInfo | IPropertyTabInfo>, curIndex: number, startIndex: number, step: number): number {
-    if (curIndex <= 0) return startIndex;
-    for (let i = sortedElements.length - 1; i >= 0; i--) {
-      const prop = sortedElements[i];
-      const index = prop.index || 0;
-      if (index > 0 && index < curIndex) {
-        prop.index = step * (startIndex ++);
-        sortedElements.splice(i, 1);
-      }
-    }
-    return startIndex;
-  }
-  private getAllTabsInfo(curJsonClasses: ISurveyPropertiesDefinition): {[key: string]: IPropertyTabInfo } {
-    const tabs: {[key: string]: IPropertyTabInfo } = {};
-    Object.keys(curJsonClasses).forEach(clName => {
-      if (this.allClasses.indexOf(clName) >= 0) {
-        const classInfo = curJsonClasses[clName];
-        if (classInfo.tabs) {
-          classInfo.tabs.forEach(tab => {
-            if (!tabs[tab.name]) {
-              tabs[tab.name] = tab;
-            }
-          });
-        }
-      }
-    });
-    return tabs;
   }
   private getPropClassName(prop: JsonObjectProperty): string {
     const clName = prop.classInfo.name;
@@ -376,15 +280,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   private localeStrings: any;
   private currentProperties?: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
-  //   private propCreatorValue: SurveyCreatorModel;
   private isModified: boolean;
-  //   public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
-  //   public disposeCore(): void {
-  //     if (this.propCreator) {
-  //       this.propCreator.dispose();
-  //       this.propCreatorValue = undefined;
-  //     }
-  //   }
   protected get nameInnerMatrix() { return "properties"; }
   protected createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
@@ -459,6 +355,29 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                   name: this.nameInnerMatrix,
                   noRowsText: getLocString("presets.propertyGrid.noItemsText"),
                   titleLocation: "hidden",
+                  detailElements:
+
+                  [
+                    {
+                      "type": "panel",
+                      "name": "details",
+                      "maxWidth": "30%",
+                      "elements": [
+                        { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
+                        { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
+                        { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), showSelectAllItem: true, visible: false },
+                      ],
+                      visible: false
+                    },
+                    {
+                      type: "checkbox",
+                      name: "classes",
+                      title: getLocString("presets.propertyGrid.propertyVisibleIn"),
+                      colCount: 3,
+                      startWithNewLine: false,
+                      visible: false
+                    }
+                  ]
                 })
               ]
             },
@@ -508,9 +427,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.getSelector(model).choices = this.getSelectorChoices(creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
-    // this.propCreatorValue = creatorSetup.createCreator(options);
-    // this.setupPropertyCreator();
-    // this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
@@ -540,7 +456,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.propertyGridSetObj(active ? this.currentProperties?.getObj() : null);
   }
 
-  //   private isPropCreatorChanged: boolean;
   private firstTimeLoading = false;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     super.updateOnValueChangedCore(model, name);
@@ -565,23 +480,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
           });
         });
       }
+
       if (!this.firstTimeLoading)this.updateCurrentJson(model);
     }
-    // if ((<any>options.target)?.isQuestion) {
-    //   if (options.name === "title") {
-    //     this.changePropTitleAndDescription("pe", name, options.newValue);
-    //   }
-    //   if (options.name === "description") {
-    //     this.changePropTitleAndDescription("pehelp", name, options.newValue);
-    //   }
-    // }
-    // if ((<any>options.target)?.isPage) {
-    //   if (options.name === "title") {
-    //     this.ensureLocalizationPath("pe.tabs");
-    //     this.localeStrings.pe.tabs[name] = options.newValue;
-    //   }
-    // }
-
     if (name !== this.nameSelector) return;
     this.firstTimeLoading = true;
     if (this.currentProperties) {
@@ -591,8 +492,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.currentClassName = selQuestion.value;
     this.updateMatrices(model);
     this.firstTimeLoading = false;
-    //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
-    //this.setupCreatorToolbox(this.propCreator);
   }
 
   private updateMatrices(model: SurveyModel) {
@@ -630,9 +529,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.updateOnValueChangedCore(model, this.nameSelector);
   }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
-  //   private getPropertyCreatorQuestion(model: SurveyModel): QuestionEmbeddedCreatorModel { return <QuestionEmbeddedCreatorModel>model.getQuestionByName(this.namePropertyCreator); }
   private get nameSelector() { return this.fullPath + "_selector"; }
-  //   private get namePropertyCreator() { return this.fullPath + "_propcreator"; }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
     const classes = ["survey", "page"];
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
@@ -659,8 +556,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     return columnTitle + ": " + postFix;
   }
   private updateCurrentJson(model: SurveyModel): void {
-    //if (!this.isPropCreatorChanged) return;
-    //this.isPropCreatorChanged = false;
     if (this.currentProperties) {
       this.currentProperties.updateCurrentJson(this.getPropertiesArray(this.getQuestionCategories(model).value));
     }
@@ -691,218 +586,31 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       strs = strs[name];
     }
   }
-  //   private setupPropertyCreator(): void {
-  //     const creator = this.propCreator;
-  //     creator.maxNestedPanels = 0;
-  //     creator.showSaveButton = false;
-  //     creator.onModified.add((sender, options) => {
-  //       this.isPropCreatorChanged = true;
-  //       this.isModified = true;
-  //       if (options.type === "PROPERTY_CHANGED") {
-  //         const name = (<any>options.target).name;
-  //         if ((<any>options.target)?.isQuestion) {
-  //           if (options.name === "title") {
-  //             this.changePropTitleAndDescription("pe", name, options.newValue);
-  //           }
-  //           if (options.name === "description") {
-  //             this.changePropTitleAndDescription("pehelp", name, options.newValue);
-  //           }
-  //         }
-  //         if ((<any>options.target)?.isPage) {
-  //           if (options.name === "title") {
-  //             this.ensureLocalizationPath("pe.tabs");
-  //             this.localeStrings.pe.tabs[name] = options.newValue;
-  //           }
-  //         }
-  //       }
-  //     });
-  //     creator.autoSaveEnabled = false;
-  //     creator.showTabsDefault = false;
-  //     creator.showToolbarDefault = false;
-  //     creator.allowCollapseSidebar = false;
-  //     creator.toolbar.setItems([]);
-  //     creator.showAddQuestionButton = false;
-  //     creator.toolbox.forceCompact = false;
-  //     creator.showSidebar = false;
-  //     creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
-  //       if (options.area === "designer-tab") {
-  //         const model = options.survey;
-  //         model.onPageAdded.add((sender, options) => {
-  //           this.addCategoryNamePropIntoPage(options.page, creator);
-  //         });
-  //       }
-  //     });
-  //     creator.onSurveyInstanceCreated.add((sender, options) => {
-  //       if (options.area === "designer-tab") {
-  //         const model = options.survey;
-  //         model.onElementWrapperComponentName.add((sender, options) => {
-  //           const el = options.element;
-  //           if (this.isCategoryElement(el)) {
-  //             options.componentName = el.getType();
-  //           } else {
-  //             const compName = options.componentName;
-  //             if (el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
-  //               options.componentName = "svc-preset-question";
-  //             }
-  //             if (el.isPage) {
-  //               options.componentName = "svc-preset-page";
-  //             }
-  //           }
-  //         });
-  //         const prev_getRendererContextForString = model.getRendererContextForString;
-  //         const prev_getRendererForString = model.getRendererForString;
-  //         model.getRendererForString = (element: Base, name: string): string => {
-  //           if (this.isCategoryElement(element)) return undefined;
-  //           return prev_getRendererForString.call(model, element, name);
-  //         };
-  //         model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
-  //           if (this.isCategoryElement(element)) return locStr;
-  //           return prev_getRendererContextForString.call(model, element, locStr);
-  //         };
-  //       }
-  //     });
-  //     creator.onElementAllowOperations.add((sender, options) => {
-  //       options.allowChangeInputType = false;
-  //       options.allowChangeRequired = false;
-  //       options.allowChangeType = false;
-  //       options.allowCopy = false;
-  //       options.allowShowSettings = false;
-  //       options.allowDelete = true;
-  //       options.allowEdit = true;
-  //     });
-  //     creator.onCollectionItemAllowOperations.add((sender, options) => {
-  //       options.allowEdit = false;
-  //       options.allowAdd = false;
-  //       options.allowDelete = false;
-  //     });
-  //     creator.onModified.add((sender, options) => {
-  //       if (options.type === "OBJECT_DELETED") {
-  //         this.setupCreatorToolbox(sender);
-  //       }
-  //     });
-  //     creator.getElementAddornerCssCallback = (obj: Base, className: string): string => { return className + " preset_pg_question"; };
-  //     creator.onPageAdded.add((sender, options) => {
-  //       const page = options.page;
-  //       page.name = SurveyHelper.getNewName(creator.survey.pages, "category");
-  //       if (!page.title) {
-  //         page.title = "New Category";
-  //       }
-  //       page.updateRows();
-  //     });
-  //     creator.onQuestionAdded.add((sender, options) => {
-  //       this.setupCreatorToolbox(sender);
-  //     });
-  //     creator.onDragDropAllow.add((sender, options) => {
-  //       options.allowDropNextToAnother = false;
-  //     });
-  //     creator.onCanShowProperty.add((sender, options) => {
-  //       if (options.obj.isPage && options.propertyName === "description") {
-  //         options.canShow = false;
-  //       }
-  //     });
-  //   }
-  //   private isCategoryElement(el: any): boolean {
-  //     return el.isCategoryElement === true;
-  //   }
-  //   private updateCreatorJSON(json: any): any {
-  //     if (!json || !json.pages) return;
-  //     json.widthMode = "static";
-  //     json.width = "800px";
-  //     json.pages.forEach((page: any) => {
-  //       this.updateCreatorJSONElements(page.elements);
-  //     });
-  //     return json;
-  //   }
-  //   private updateCreatorJSONElements(elements: Array<any>): void {
-  //     if (!Array.isArray(elements)) return;
-  //     for (let i = elements.length - 1; i >= 0; i--) {
-  //       const el = elements[i];
-  //       if (!!el.name && el.name.indexOf("overridingProperty") > -1) {
-  //         elements.splice(i, 1);
-  //       } else {
-  //         this.updateJSONElement(el);
-  //       }
-  //     }
-  //   }
-  //   private updateJSONElement(el: any): void {
-  //     if (Array.isArray(el.elements)) {
-  //       this.updateCreatorJSONElements(el.elements);
-  //     }
-  //     if (el.titleLocation === "hidden") {
-  //       delete el.titleLocation;
-  //     }
-  //     if (el.descriptionLocation === "hidden") {
-  //       delete el.descriptionLocation;
-  //     }
-  //     if (!!el.state) {
-  //       delete el.state;
-  //     }
-  //     const type = el.type;
-  //     if (type === "textwithreset") {
-  //       el.type = "text";
-  //     }
-  //     if (type === "commentwithreset") {
-  //       el.type = "comment";
-  //     }
-  //   }
-  //   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
-  //     const elements: IQuestionToolboxItem[] = [];
-  //     const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
-  //     const propGrid = this.currentProperties.propertyGridDefault.survey;
-  //     const survey = this.propCreator.survey;
-  //     const allProps = this.currentProperties.getAllPropertiesNames();
-  //     allProps.forEach(propName => {
-  //       if (!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)
-  //         && hiddenProperties.indexOf(propName) < 0) {
-  //         const q = propGrid.getQuestionByName(propName);
-  //         const json = q.toJSON();
-  //         this.updateJSONElement(json);
-  //         json.name = propName;
-  //         json.type = q.getType();
-  //         elements.push({
-  //           name: propName,
-  //           title: q.title,
-  //           className: q.getType(),
-  //           iconName: "icon-text", //TODO
-  //           json: json
-  //         });
-  //       }
-  //     });
-
-//     creator.toolbox.addItems(elements, true);
-//   }
-//   private addCategoryNamePropIntoPage(page: PageModel, creator: SurveyCreatorModel): void {
-//     page.showDescription = false;
-//     (<any>page).isPropertyGridCategory = true;
-//     const qCategoryName: Question = Serializer.createClass("text");
-//     qCategoryName.name = "page_categoryName";
-//     qCategoryName.value = page.name;
-//     qCategoryName.valueChangedCallback = () => {
-//       page.name = qCategoryName.value;
-//     };
-//     qCategoryName.title = "Category Name"; //TODO
-//     qCategoryName.titleLocation = "left";
-//     qCategoryName.readOnly = this.isDefaultCategoryName(page.name);
-//     const qCatetoryIcon = Serializer.createClass("text");
-//     qCategoryName.name = "page_categoryIcon";
-//     qCatetoryIcon.title = "Category Icon"; //TODO
-//     qCatetoryIcon.titleLocation = "left";
-//     qCatetoryIcon.startWithNewLine = false;
-//     [qCategoryName, qCatetoryIcon].forEach(el => {
-//       el.getSurvey = () => { return page.survey; };
-//       Object.defineProperty(el, "isDesignMode", { get() { return false; } });
-//       el.isCategoryElement = true;
-//       el.onFirstRendering();
-//     });
-//     (<any>page)["getElementsForRows"] = () => {
-//       const res = [].concat(page.elements);
-//       res.unshift(qCatetoryIcon);
-//       res.unshift(qCategoryName);
-//       return res;
-//     };
-//   }
-//   private isDefaultCategoryName(name: string): boolean {
-//     if (!name) return true;
-//     return !!this.currentProperties.propertyGridDefault.survey.getPageByName(name);
-//   }
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+    if (data.classes?.indexOf(this.currentClassName) == -1) {
+      const index = (matrix.visibleRows as any).findIndex(r => r === row);
+      matrix.removeRow(index);
+    }
+    const pName = row.getValue("name");
+    const categories = this.getQuestionCategories(matrix.survey as any);
+    categories.value?.forEach(c => c.properties?.forEach(p => {
+      if (p.name != pName) return;
+      this.currentProperties?.updatePropertyVisibility(data, c.category);
+    }));
+    super.onDetailPanelInPopupApply(data, matrix, row);
+  }
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string, isNew: boolean}) {
+    if (question.name === this.nameInnerMatrix && this.currentProperties) {
+      const classesQuestion = question.detailPanel.getQuestionByName("classes");
+      const propertyName = row.getValue("name");
+      classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName).map(c => new ItemValue(c, this.getSelectorItemTitle(c)));
+      const index = (question.visibleRows as any).findIndex(r => r === row);
+      if (index >= 0) {
+        const value = question.value || [];
+        value[index].classes = this.currentProperties.getSelectedClassesForProperty(propertyName);
+        question.value = [...value];
+      }
+    }
+    super.editItem(model, creator, question, row, options);
+  }
 }

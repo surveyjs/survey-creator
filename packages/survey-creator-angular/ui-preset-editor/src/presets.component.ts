@@ -12,6 +12,9 @@ export class TabPresetsComponent extends BaseAngular<any> {
   public get survey() {
     return this.model.model;
   }
+  public get navigationBar() {
+    return this.model.navigationBar;
+  }
   public get creator() {
     return this.model.creator;
   }

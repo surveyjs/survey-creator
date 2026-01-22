@@ -24,12 +24,13 @@ test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.waitForLoadState("networkidle");
     await page.goto(`${urlPresets}`);
-    await page.setViewportSize({ width: 1440, height: 1400 });
+    await page.setViewportSize({ width: 1920, height: 1400 });
     await showPresets(page);
   });
 
   test("Check presets tabs", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
@@ -49,7 +50,8 @@ test.describe(title, () => {
   });
 
   test("Check presets tabs - drag-drop", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
@@ -75,7 +77,8 @@ test.describe(title, () => {
   });
 
   test("Check presets tabs - edit", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
@@ -103,7 +106,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -140,7 +144,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - drag-drop categories", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -157,7 +162,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - drag-drop items", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -184,7 +190,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - edit category", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
@@ -205,7 +212,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - custom category and custom item", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
@@ -254,7 +262,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
     expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Survey title", "Survey description", "Make the title and description visible"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -292,7 +301,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - drag-drop categories", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
     expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(1).getAttribute("title")).toBe("General");
     expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(2).getAttribute("title")).toBe("Logo in the Survey Header");
 
@@ -318,7 +328,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - drag-drop items", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
     await page.locator(".svc-sidebar-tabs").getByTitle("Logo in the Survey Header").click();
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo height", "Logo fit"]);
 
@@ -330,7 +341,7 @@ test.describe(title, () => {
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo fit"]);
 
     await doDragDrop({ page, element: items.getByRole("row", { name: "Logo fit" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey logo" }), options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo fit", "Logo width"]);
+    expect(await getPropertiesTexts(page)).toEqual(["Logo fit", "Survey logo", "Logo width"]);
 
     await items.getByRole("row", { name: "General" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: hidden.getByRole("row", { name: "Logo height" }).locator(".sd-table__cell--drag"), target: items.getByRole("row", { name: "Survey title" }), options: { targetPosition: { x: 25, y: 25 } } });
@@ -341,7 +352,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - edit category", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
@@ -370,7 +382,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - custom category", async ({ page }) => {
-    await page.locator(".sps-list__container").getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 

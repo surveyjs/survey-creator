@@ -1,15 +1,21 @@
-import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel, ComputedUpdater, Helpers } from "survey-core";
+import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel, ComputedUpdater, Helpers, ElementFactory } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { getLocString, editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 
 export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
   private createElements() {
+
+    const allTypes = ElementFactory.Instance.getAllToolboxTypes().map(item => {
+      return {
+        value: item,
+        text: editorLocalization.getString("qt." + item)
+      };
+    });
+
     return [
       { type: "panel", name: "designer", state: "expanded", elements: [
         { name: "pageEditMode", type: "dropdown", choices: [
-          { value: "standard", text: "Standard" },
-          { value: "single", text: "Single" },
-          { value: "bypage", text: "By Page" }
+          "standard", "bypage", "single"
         ] },
         { type: "panel", name: "designerHeader", elements: [
           { name: "showSurveyHeader", type: "boolean" },
@@ -20,13 +26,10 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         ] },
         { type: "panel", name: "designerZoomDrag", elements: [
           { name: "allowDragPages", type: "boolean" },
-          { name: "collapseOnDrag", type: "boolean" },
           { name: "allowZoom", type: "boolean" },
         ] },
         { name: "expandCollapseButtonVisibility", type: "dropdown", choices: [
-          { value: "never", text: "Never" },
-          { value: "onhover", text: "On Hover" },
-          { value: "always", text: "Always" }
+          "never", "onhover", "always"
         ] },
         { type: "panel", name: "designerExpandCollapse", elements: [
           { name: "collapseQuestions", type: "boolean" },
@@ -35,21 +38,23 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         ] },
         { name: "maxRows", type: "text", inputType: "number" },
         { name: "maxColumns", type: "text", inputType: "number" },
-        { type: "panel", name: "designerChoices", elements: [
-          { name: "inplaceEditChoiceValues", type: "boolean" },
-        ] },
         { name: "minChoices", type: "text", inputType: "number" },
         { name: "maxChoices", type: "text", inputType: "number" },
-        { name: "maxVisibleChoices", type: "text", inputType: "number" },
+        { name: "maxVisibleChoices", type: "text", inputType: "number", min: -1 },
         { name: "maxRateValues", type: "text", inputType: "number" },
-        { name: "forbiddenNestedElements", type: "text" },
-        { name: "maxPanelNestingLevel", type: "text", inputType: "number" }
+        { name: "forbiddenNestedElementsPanel", type: "tagbox", choices: allTypes },
+        { name: "forbiddenNestedElementsPanelDynamic", type: "tagbox", choices: allTypes },
+        { name: "maxPanelNestingLevel", type: "text", inputType: "number", min: -1 },
+        { type: "panel", name: "expressionsValidation", elements: [
+          { name: "expressionsValidateFunctions", type: "boolean" },
+          { name: "expressionsValidateVariables", type: "boolean" },
+          { name: "expressionsValidateSyntax", type: "boolean" },
+        ] },
       ] },
       { type: "panel", name: "preview", state: "expanded", elements: [
         { type: "panel", name: "previewSimulateDevice", elements: [
-          { name: "previewAllowSimulateDevice", type: "boolean" },
+          { name: "previewAllowSimulateDevices", type: "boolean" },
         ] },
-
         { name: "previewDevice", type: "dropdown", choices: [
           { value: "desktop", text: "Desktop" },
           { value: "iPhoneSE", text: "iPhone SE" },
@@ -62,24 +67,28 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
           { value: "microsoftSurface", text: "Microsoft Surface" }
         ] },
         { name: "previewOrientation", type: "dropdown", choices: [
-          { value: "landscape", text: "Landscape" },
-          { value: "portrait", text: "Portrait" }
+          "landscape", "portrait"
+        ] },
+        { name: "previewAllowSelectLanguage", type: "dropdown", choices: [
+          "auto", "all", true, false
         ] },
         { type: "panel", name: "previewAllowSelect", elements: [
-          { name: "previewAllowSelectLanguage", type: "boolean" },
           { name: "previewAllowSelectPage", type: "boolean" },
+          { name: "previewAllowHiddenElements", type: "boolean" },
         ] },
-        { name: "previewAllowHiddenElements", type: "boolean" },
       ] },
       { type: "panel", name: "logic", state: "expanded", elements: [
-        { name: "logicAllowTextEditExpressions", type: "boolean" },
-        { name: "logicMaxItemsInCondition", type: "text", inputType: "number" }
+        { type: "panel", name: "previewSimulateDevice", elements: [
+          { name: "logicAllowTextEditExpressions", type: "boolean" },
+        ] },
+        { name: "logicMaxItemsInCondition", type: "text", inputType: "number", min: -1 }
       ]
       },
       { type: "panel", name: "translation", state: "expanded", elements: [
-        { name: "clearTranslationsOnSourceTextChange", type: "boolean" },
-      ]
-      }
+        { type: "panel", name: "previewSimulateDevice", elements: [
+          { name: "clearTranslationsOnSourceTextChange", type: "boolean" },
+        ] },
+      ] },
 
     ];
   }
@@ -97,7 +106,17 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         this.patchElements(element.elements);
       } else {
         this.optionsList.push(element.name);
-        element.title = element.name;
+        element.title = editorLocalization.getString("presets.options.o." + element.name);
+      }
+      if (element.choices) {
+        element.choices = element.choices.map((choice: any) => {
+          const val = choice.value !== undefined ? choice.value : choice;
+          const text = choice.text || editorLocalization.getString("presets.options.ov." + element.name + "." + val);
+          return { value: val, text: text };
+        });
+      }
+      if (element.inputType === "number" && element.min === undefined) {
+        element.min = 0;
       }
       if (element.type === "boolean") {
         element.renderAs = "checkbox";
@@ -120,7 +139,13 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
     };
   }
   protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any {
-    return this.optionsList.reduce((acc: any, option) => { acc[option] = creator[option]; return acc; }, {});
+    const value = this.optionsList.reduce((acc: any, option) => { acc[option] = creator[option]; return acc; }, {});
+    delete value["forbiddenNestedElementsPanel"];
+    delete value["forbiddenNestedElementsPanelDynamic"];
+    if (creator.forbiddenNestedElements) {
+      value["forbiddenNestedElements"] = { panel: [...creator.forbiddenNestedElements.panel], paneldynamic: [...creator.forbiddenNestedElements.paneldynamic] };
+    }
+    return value;
   }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any {
     const json: any = {};
@@ -130,18 +155,62 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         json[option] = question.value;
       }
     });
+    if (json["forbiddenNestedElementsPanel"]?.length || json["forbiddenNestedElementsPanelDynamic"]?.length) {
+      json["forbiddenNestedElements"] = { panel: [...json["forbiddenNestedElementsPanel"]], paneldynamic: [...json["forbiddenNestedElementsPanelDynamic"]] };
+    }
+    delete json["forbiddenNestedElementsPanel"];
+    delete json["forbiddenNestedElementsPanelDynamic"];
+
     if (Helpers.isTwoValueEquals(json, defaultJson)) return undefined;
 
     return json;
   }
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    this.optionsList.forEach(option => model.getQuestionByName(this.addPathToName(option)).value =
-    (json ? json[option] : creator[option]));
+    function getOptionValue(option: string): any {
+      return json?.[option] === undefined ? creator[option] : json[option];
+    }
+
+    this.optionsList.forEach(option => {
+      let val = getOptionValue(option);
+      if (option === "forbiddenNestedElementsPanel") {
+        val = getOptionValue("forbiddenNestedElements")?.panel;
+        if (val) val = [...val];
+      }
+      if (option === "forbiddenNestedElementsPanelDynamic") {
+        val = getOptionValue("forbiddenNestedElements")?.paneldynamic;
+        if (val) val = [...val];
+      }
+      model.getQuestionByName(this.addPathToName(option)).value = val;
+    });
   }
 
   public get questionNames() {
     return this.optionsList.map(option => this.addPathToName(option));
+  }
+
+  public onGetQuestionTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    const prefix = this.fullPath + "_";
+    if (options.question.parent?.name.substring(0, prefix.length) !== prefix) return;
+    const optionName = options.question.name.substring(prefix.length);
+    const help = editorLocalization.getString("presets.options.ohelp." + optionName);
+    if (help == optionName) return;
+    const collapseIcon = "icon-hidehint-16x16";
+    const expandIcon = "icon-hint-16x16";
+    options.actions = [{
+      id: "hint",
+      css: "sv-action-bar-item--hint",
+      //locTooltipName: new ComputedUpdater<string>(() => options.panel.isCollapsed ? "ed.expandTooltip" : "ed.collapseTooltip") as any,
+      iconName: new ComputedUpdater<string>(() => options.question.description ? collapseIcon : expandIcon) as any,
+      iconSize: "auto",
+      action: () => {
+        if (options.question.description) {
+          options.question.description = "";
+        } else {
+          options.question.description = help;
+        }
+      }
+    }];
   }
 
   public onGetPanelTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {

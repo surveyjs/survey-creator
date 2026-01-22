@@ -1,4 +1,4 @@
-import { Base, ConditionsParser, JsonObjectProperty, Operand, Question } from "survey-core";
+import { Base, ConditionsParser, JsonObjectProperty, Operand, Question, ExpressionErrorType } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
@@ -6,6 +6,7 @@ import {
 } from "./index";
 import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "../creator-settings";
+import { getLocString } from "../editorLocalization";
 
 export class PropertyGridEditorExpression extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
@@ -22,6 +23,52 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
       rows: 2
     };
   }
+  public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions): string {
+
+    if (!val || !options.expressionsValidateSyntax) return "";
+    const result = obj.validateExpression(prop.name, val, {
+      variables: options.expressionsValidateVariables,
+      functions: options.expressionsValidateFunctions,
+      semantics: options.expressionsValidateSemantics
+    });
+
+    if (result) {
+
+      const errors = result.errors.reduce((acc, error) => {
+        if (!acc[error.errorType]) { acc[error.errorType] = []; }
+        acc[error.errorType].push(error);
+        return acc;
+      }, {});
+
+      if (errors[ExpressionErrorType.SyntaxError]) {
+        return getLocString("ed.expressionSyntaxError");
+      }
+
+      if (errors[ExpressionErrorType.SemanticError]) {
+        return getLocString("ed.expressionSemanticsError");
+      }
+
+      if (errors[ExpressionErrorType.UnknownFunction]) {
+        const functionNames = errors[ExpressionErrorType.UnknownFunction].map((e) => e.functionName).filter((e, i, a) => a.indexOf(e) === i);
+        return getLocString("ed.expressionUnknownFunction" + (functionNames.length > 1 ? "s" : ""))["format"](functionNames.join(", "));
+      }
+
+      if (errors[ExpressionErrorType.UnknownVariable]) {
+        const variableNames = errors[ExpressionErrorType.UnknownVariable].map((e) => e.variableName).filter((e, i, a) => a.indexOf(e) === i);
+        return getLocString("ed.expressionUnknownVariable" + (variableNames.length > 1 ? "s" : ""))["format"](variableNames.join(", "));
+      }
+    }
+
+    return "";
+  }
+  public onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+    question.textUpdateMode = question.isEmpty() ? "onBlur" : "onTyping";
+    const error = this.validateValue(obj, question, prop, question.value, options);
+    if (error) {
+      question.addError(error);
+    }
+    this.updateTextUpdateMode(question);
+  }
   public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
     question.clearValue();
   }
@@ -32,6 +79,12 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     question.valueFromDataCallback = (val: any): any => {
       return this.processExpression(val, false);
     };
+    question.registerFunctionOnPropertiesValueChanged(["errors"], () => {
+      this.updateTextUpdateMode(question);
+    });
+  }
+  private updateTextUpdateMode(question: Question) {
+    question.textUpdateMode = question.errors.length > 0 ? "onTyping" : "onBlur";
   }
   private processExpression(val: string, valueToData: boolean): string {
     if (!val) return val;
@@ -90,12 +143,7 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   }
   public onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     if (options.logicAllowTextEditExpressions === false) {
-      question.onKeyDownPreprocess = (event: any) => {
-        const allowed = ["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"];
-        if (!event.ctrlKey && allowed.indexOf(event.key) < 0) {
-          event.preventDefault();
-        }
-      };
+      question.forceIsInputReadOnly = true;
     }
   }
   public createPropertyEditorSetup(

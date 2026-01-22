@@ -1,14 +1,14 @@
-import { SurveyModel, JsonError, Base, ISurveyElement, ISurveyData, ISurvey } from "survey-core";
+import { SurveyModel, JsonError, Base, ISurveyElement, ISurveyData, ILoadFromJSONOptions, JsonObjectProperty } from "survey-core";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
 
 class SurveyForTextWorker extends SurveyModel {
   private isRunEndLoadingFromJson: boolean;
-  constructor(jsonObj: any) {
+  constructor(jsonObj: any, options: ILoadFromJSONOptions) {
     super();
     this.setDesignMode(true);
-    this.fromJSON(jsonObj);
+    this.fromJSON(jsonObj, options);
   }
   //Run endLoading before fixing issues with unique names
   public runEndLoadingFromJson(): void {
@@ -66,7 +66,7 @@ class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase 
   }
   public fixError(text: string, start: number, end: number): string {
     const content = text.substring(start, end + 1);
-    const json = JSON.parse(content);
+    const json = new SurveyJSON5().parse(content);
     this.updatedJsonObjOnFix(json);
     return this.replaceJson(text, start, end, json);
   }
@@ -141,6 +141,26 @@ class SurveyTextWorkerJsonRequiredPropertyErrorFixer extends SurveyTextWorkerJso
     json["name"] = name;
   }
 }
+class SurveyTextWorkerJsonIncorrectPropertyValueErrorFixer extends SurveyTextWorkerJsonErrorFixer {
+  public constructor(protected element: Base, protected jsonObj: any, private property: JsonObjectProperty) {
+    super(element, jsonObj);
+  }
+  public get isFixable(): boolean {
+    return this.getFirstChoice() != null;
+  }
+  protected updatedJsonObjOnFix(json: any): void {
+    let value = this.getFirstChoice();
+    if (typeof value !== "string") {
+      value = JSON.stringify(value);
+    }
+    json[this.property.name] = value;
+  }
+  private getFirstChoice(): any {
+    const choices = this.property?.choices;
+    if (Array.isArray(choices) && choices.length > 0) return choices[0];
+    return null;
+  }
+}
 
 export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   public elementStart: number;
@@ -148,6 +168,7 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   private element: Base;
   private errorType: string;
   private propertyName: string;
+  private property: JsonObjectProperty;
   private jsonObj: any;
   public constructor(jsonError: JsonError) {
     super(<number>jsonError.at, jsonError.getFullDescription());
@@ -155,7 +176,8 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
     this.elementEnd = <number>jsonError.end;
     this.element = jsonError.element;
     this.errorType = jsonError.type;
-    this.propertyName = jsonError["propertyName"];
+    this.property = jsonError["property"];
+    this.propertyName = jsonError["propertyName"] || this.property?.name;
     this.jsonObj = jsonError.jsonObj;
   }
   protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
@@ -167,6 +189,9 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
       return new SurveyTextWorkerJsonDuplicateNameErrorFixer(this.element, this.jsonObj);
     if (this.errorType === "requiredproperty")
       return new SurveyTextWorkerJsonRequiredPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
+    if (this.errorType === "incorrectvalue") {
+      return new SurveyTextWorkerJsonIncorrectPropertyValueErrorFixer(this.element, this.jsonObj, this.property);
+    }
     return super.createFixer();
   }
   public getErrorType(): string { return this.errorType; }
@@ -189,7 +214,7 @@ export class SurveyTextWorker {
   private surveyValue: SurveyModel;
   private jsonValue: any;
 
-  constructor(public text: string) {
+  constructor(public text: string, private options?: ILoadFromJSONOptions) {
     if (!this.text || this.text.trim() == "") {
       this.text = "{}";
     }
@@ -216,7 +241,7 @@ export class SurveyTextWorker {
       if (!!SurveyTextWorker.onProcessJson) {
         SurveyTextWorker.onProcessJson(this.jsonValue);
       }
-      this.surveyValue = new SurveyForTextWorker(this.jsonValue);
+      this.surveyValue = new SurveyForTextWorker(this.jsonValue, this.options);
       const jsonErrors = this.surveyValue.jsonErrors;
       if (Array.isArray(jsonErrors)) {
         for (var i = 0; i < jsonErrors.length; i++) {
