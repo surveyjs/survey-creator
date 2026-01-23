@@ -23,7 +23,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   private pagesList: ListModel;
   private presetsList: ListModel;
-  private saveAsAction: Action;
+  private saveAction: Action;
 
   private showPresets() {
     this.activeTab = this.creator.activeTab;
@@ -60,7 +60,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.toolboxCompact = creator.toolbox.forceCompact;
     this.presetsManager = new PresetsManager();
     this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
-      this.saveAsAction.enabled = PredefinedCreatorPresets.indexOf(preset.presetName) !== -1;
+      this.saveAction.enabled = PredefinedCreatorPresets.indexOf(preset.presetName) === -1;
       this.model.json = preset.json;
     };
   }
@@ -219,7 +219,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == UIPresetEditor.defaultPresetName)[0];
     this.presetsManager.presetsList = this.presetsList;
     const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
-    this.saveAsAction = editAction.popupModel.contentComponentData.model.getActionById("saveAs");
+    this.saveAction = editAction.popupModel.contentComponentData.model.getActionById("save");
     this.pagesList.selectedItem = this.pagesList.actions[0];
     pagesAction.title = this.pagesList.selectedItem.title || "";
     listAction.title = this.presetsList.selectedItem.title || "";
