@@ -1,11 +1,11 @@
 import { Action, IAction, IDialogOptions, ListModel, settings, SurveyModel } from "survey-core";
-import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
+import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 export class PresetsManager {
   /**
    *
    */
-  constructor(private creator: SurveyCreatorModel) {
+  constructor() {
 
   }
   public presetsList: ListModel;
@@ -70,7 +70,7 @@ export class PresetsManager {
       cssClass: "sps-popup svc-property-editor svc-creator-popup",
       title: getLocString("presets.plugin.saveAsTitle"),
       displayMode: "popup"
-    }, this.creator.rootElement);
+    });
   }
 
   private getPresetsListToEdit() {
@@ -131,7 +131,11 @@ export class PresetsManager {
         titleLocation: "hidden",
         isRequired: true }]
     });
-    survey.css = presetsCss;
+    survey.css = { ...presetsCss,
+      matrixdynamic: {
+        ...propertyGridCss.matrixdynamic,
+        buttonAdd: presetsCss.matrixdynamic.buttonAdd
+      } };
     survey.onGetMatrixRowActions.add((sender, options) => {
       const removeAction = options.actions.filter(a => a.id == "remove-row")[0];
       const getRowIconName = (row) => row.getValue("visible") ? "icon-visible-24x24" : "icon-invisible-24x24";
@@ -152,7 +156,7 @@ export class PresetsManager {
         removeAction.iconName = "icon-delete-24x24";
         removeAction.iconSize = "auto",
         removeAction.component = "sv-action-bar-item",
-        removeAction.innerCss = "sps-table__action-button sps-table__action-button--remove",
+        removeAction.innerCss = "spg-table__action-button spg-table__action-button--remove",
         removeAction.showTitle = false,
         removeAction.action = () => {
           options.question.removeRowUI(options.row);
@@ -198,7 +202,7 @@ export class PresetsManager {
         cssClass: "sps-popup svc-property-editor svc-creator-popup",
         title: getLocString("presets.plugin.addNewPreset"),
         displayMode: "popup"
-      }, this.creator.rootElement);
+      });
       options.allow = false;
     });
     settings.showDialog?.(<IDialogOptions>{
@@ -212,7 +216,7 @@ export class PresetsManager {
       cssClass: "sps-popup svc-property-editor svc-creator-popup",
       title: getLocString("presets.plugin.editPresetsListTitle"),
       displayMode: "popup"
-    }, this.creator.rootElement);
+    });
   }
 
   private updateMenu() {
