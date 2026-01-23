@@ -1,4 +1,4 @@
-import { Action, IAction, IDialogOptions, ListModel, settings, SurveyModel } from "survey-core";
+import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
 import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 export class PresetsManager {
@@ -10,6 +10,7 @@ export class PresetsManager {
   }
   public presetsList: ListModel;
   public selectPresetCallback: (preset: ICreatorPresetConfig) => void;
+  public presetSelector: QuestionDropdownModel;
 
   private customPresets = [] as string[];
 
@@ -221,6 +222,11 @@ export class PresetsManager {
 
   private updateMenu() {
     this.presetsList?.setItems(this.presetsMenuItems);
+    if (this.presetSelector)this.presetSelector.choices = this.getPresetsListToEdit().map(i => ({ value: i.name, text: i.title }));
+  }
+
+  public update() {
+    this.updateMenu();
   }
 
   public saveAs(json: any) {
