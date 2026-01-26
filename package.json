@@ -14,8 +14,7 @@
         "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings=0 --fix",
         "pre-push-check": "npm run lint",
         "prepare": "husky install",
-        "postinstall": "playwright install chromium",
-        "a": "refresh azure cache for eslint plugin"
+        "postinstall": "playwright install chromium"
     },
     "devDependencies": {
         "@commitlint/cli": "^19.8.0",
