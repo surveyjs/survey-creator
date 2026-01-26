@@ -176,7 +176,11 @@ export class PresetsManager {
           ],
         }]
       });
-      addSurvey.css = presetsCss;
+      addSurvey.css = { ...presetsCss,
+        buttongroup: {
+          ...propertyGridCss.buttongroup,
+        }
+      };
       settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: addSurvey, model: addSurvey },
@@ -209,6 +213,9 @@ export class PresetsManager {
     });
     this.addPresetsListEditor(survey);
     survey.css = { ...presetsCss,
+      actionBar: {
+        ...propertyGridCss.actionBar,
+      },
       matrixdynamic: {
         ...propertyGridCss.matrixdynamic,
         buttonAdd: presetsCss.matrixdynamic.buttonAdd,

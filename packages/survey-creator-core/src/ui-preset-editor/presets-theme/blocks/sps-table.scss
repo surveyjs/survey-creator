@@ -71,6 +71,12 @@
   }
 }
 
+.spg-table .sps-table__cell {
+  padding-bottom: 0;
+  &:not(.sps-table__cell--detail-panel) .sps-input:focus-within {
+    margin-left: 0;
+  }
+}
 .sps-table__row--main > .sps-table__cell {
   padding-bottom: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
   padding-top: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
