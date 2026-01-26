@@ -129,7 +129,7 @@ module.exports = {
       }
     },
     {
-      files: ["packages/**/*.ts", "packages/**/*.tsx", "**.spec.ts"],
+      files: ["packages/**/*.ts", "packages/**/*.tsx", "**.spec.ts", "functionalTests/**/*.ts"],
       rules: {
         "surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom": [
           "error",
