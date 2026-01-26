@@ -63,6 +63,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
       this.saveAction.enabled = PredefinedCreatorPresets.indexOf(preset.presetName) === -1;
       this.model.json = preset.json;
+      this.setStatus("initial");
     };
     this.creator.onSurveyInstanceCreated.add((_, o) => {
       if (o.area == "designer-tab:creator-settings:preset") {
@@ -105,9 +106,22 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   protected saveHandler() {
     this.onPresetSaved.fire(this, { preset: this.model.json });
+    this.setStatus("saved");
   }
   protected saveAsHandler() {
     this.presetsManager.saveAs(this.model.json);
+    this.setStatus("saved");
+  }
+  protected setStatus(status: "saved" | "unsaved" | "initial") {
+    this.presetsManager.setStatus(status === "unsaved");
+    const statusAction = this.model.navigationBar.getActionById("presets-status");
+    statusAction.visible = status === "unsaved";
+    statusAction.title = getLocString(status === "unsaved" ? "presets.plugin.unsaved" : "presets.plugin.saved");
+  }
+  protected updateStatusAction(unsaved: boolean) {
+    const statusAction = this.model.navigationBar.getActionById("presets-status");
+    statusAction.visible = unsaved;
+    statusAction.title = getLocString(unsaved ? "presets.plugin.unsaved" : "presets.plugin.saved");
   }
   public saveToFileHandler = saveToFileHandler;
 
@@ -123,11 +137,11 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.model.model.data = this.currentValue;
     }
     this.designerPlugin.activateSidebar();
-    this.model.model.onComplete.add(() => this.hidePresets());
 
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
 
+    this.model.model.onComplete.add(() => this.hidePresets());
     const defaultPresets = this.presetsManager.presetsMenuItems;
 
     const tools = [
@@ -202,9 +216,10 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     const statusAction = new Action({
       id: "presets-status",
-      iconName: "icon-exit-24x24",
-      title: "",
-      css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
+      enabled: false,
+      visible: false,
+      title: "Saved",
+      css: "sps-navigation-action sps-navigation-action--label sps-navigation-action--large-icon",
       action: () => { this.saveHandler(); this.hidePresets(); }
     });
 
@@ -221,22 +236,29 @@ export class UIPresetEditor implements ICreatorPlugin {
     if (defaultPresets.length > 0)this.model.navigationBar.addAction(listAction);
     this.model.navigationBar.addAction(pagesAction);
     this.model.navigationBar.addAction(editAction);
+    this.model.navigationBar.addAction(statusAction);
     this.model.navigationBar.addAction(quitAction);
     this.pagesList = pagesAction.popupModel.contentComponentData.model;
     this.presetsList = listAction.popupModel.contentComponentData.model;
-    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == UIPresetEditor.defaultPresetName)[0];
     this.presetsManager.presetsList = this.presetsList;
     const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
     this.saveAction = editAction.popupModel.contentComponentData.model.getActionById("save");
     this.pagesList.selectedItem = this.pagesList.actions[0];
     pagesAction.title = this.pagesList.selectedItem.title || "";
-    listAction.title = this.presetsList.selectedItem.title || "";
+
     this.model.model.onCurrentPageChanged.add((_, options) => {
       this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
 
+    this.model.model.onValueChanged.add((sender, options) => {
+      this.setStatus("unsaved");
+    });
+
+    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector.value)[0];
+    this.presetsList.selectedItem.action(this.presetsList.selectedItem);
+    listAction.title = this.presetsList.selectedItem.title || "";
     setTimeout(() => {
       presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
     }, 100);

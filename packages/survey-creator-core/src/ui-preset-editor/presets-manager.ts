@@ -11,6 +11,11 @@ export class PresetsManager {
   public presetsList: ListModel;
   public selectPresetCallback: (preset: ICreatorPresetConfig) => void;
   public presetSelector: QuestionDropdownModel;
+  private unsaved = false;
+
+  public setStatus(unsaved: boolean) {
+    this.unsaved = unsaved;
+  }
 
   private customPresets = [] as string[];
 

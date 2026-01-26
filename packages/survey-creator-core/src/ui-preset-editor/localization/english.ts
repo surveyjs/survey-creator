@@ -212,6 +212,9 @@ export const enStrings = {
     resetConfirmation: "Do you really want to reset the settings?",
     resetConfirmationOk: "Yes, reset the settings",
 
+    saved: "Saved",
+    unsaved: "Unsaved changes",
+
     resetToDefaults: "Reset {0}",
     defaultSettings: "Default Settings",
     basic: "Basic",
