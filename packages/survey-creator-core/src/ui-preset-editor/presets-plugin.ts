@@ -1,4 +1,4 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
 import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
@@ -67,8 +67,8 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.creator.onSurveyInstanceCreated.add((_, o) => {
       if (o.area == "designer-tab:creator-settings:preset") {
         this.presetsManager.presetSelector = o.survey.getQuestionByName("presetName");
+        //this.presetsManager.addPresetsListEditor(o.survey, (item) => { });
         this.presetsManager.update();
-        o.survey.pages[0].addQuestion(new QuestionMatrixDynamicModel("presetsList"));
       }
     });
   }

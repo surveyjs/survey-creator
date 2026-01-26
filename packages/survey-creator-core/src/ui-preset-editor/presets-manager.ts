@@ -1,4 +1,4 @@
-import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
+import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 export class PresetsManager {
@@ -92,51 +92,41 @@ export class PresetsManager {
     this.updateMenu();
   }
 
-  private editPresetsList(onSet: (newList: any[]) => void) {
-    const survey = new SurveyModel({
-      showNavigationButtons: "none",
-      enterKeyAction: "loseFocus",
-      questionErrorLocation: "bottom",
-      elements: [{
-        type: "matrixdynamic",
-        name: "presetsList",
-        columns: [
-          {
-            name: "title",
-            title: "Title",
-          },
-          {
-            name: "name",
-            visible: false
-          },
-          {
-            name: "visible",
-            visible: false,
-            cellType: "boolean",
-          },
-          {
-            name: "custom",
-            cellType: "boolean",
-            visible: false,
-            defaultValue: true,
-          }
-        ],
-        rowCount: 0,
-        cellType: "text",
-        confirmDelete: true,
-        confirmDeleteText: getLocString("presets.plugin.confirmDeleteCustomPreset"),
-        addRowText: getLocString("presets.plugin.addNewPreset"),
-        allowRowReorder: true,
-        defaultValue: this.getPresetsListToEdit(),
-        allowCustomChoices: true,
-        titleLocation: "hidden",
-        isRequired: true }]
-    });
-    survey.css = { ...presetsCss,
-      matrixdynamic: {
-        ...propertyGridCss.matrixdynamic,
-        buttonAdd: presetsCss.matrixdynamic.buttonAdd
-      } };
+  public addPresetsListEditor(survey: SurveyModel, onEdit?: (item: any) => void) {
+    const presetsListEditor = new QuestionMatrixDynamicModel("presetsList");
+    presetsListEditor.fromJSON({
+      type: "matrixdynamic",
+      name: "presetsList",
+      columns: [
+        {
+          name: "title",
+          title: "Title",
+        },
+        {
+          name: "name",
+          visible: false
+        },
+        {
+          name: "visible",
+          visible: false,
+          cellType: "boolean",
+        },
+        {
+          name: "custom",
+          cellType: "boolean",
+          visible: false,
+          defaultValue: true,
+        }
+      ],
+      cellType: "text",
+      confirmDelete: true,
+      confirmDeleteText: getLocString("presets.plugin.confirmDeleteCustomPreset"),
+      addRowText: getLocString("presets.plugin.addNewPreset"),
+      allowRowReorder: true,
+      allowCustomChoices: true,
+      isRequired: true }
+    );
+
     survey.onGetMatrixRowActions.add((sender, options) => {
       const removeAction = options.actions.filter(a => a.id == "remove-row")[0];
       const getRowIconName = (row) => row.getValue("visible") ? "icon-visible-24x24" : "icon-invisible-24x24";
@@ -197,7 +187,6 @@ export class PresetsManager {
           const value = options.question.value || [];
           value.push({ title: presetName, name: presetName, visible: true, custom: true });
           options.question.value = value;
-          onSet(value); // TODO: fix nested popup modals and remove this line
           return true;
         },
         cssClass: "sps-popup svc-property-editor svc-creator-popup",
@@ -206,6 +195,26 @@ export class PresetsManager {
       });
       options.allow = false;
     });
+    survey.pages[0].addQuestion(presetsListEditor);
+    presetsListEditor.value = this.getPresetsListToEdit();
+  }
+
+  private editPresetsList(onSet: (newList: any[]) => void) {
+    const survey = new SurveyModel({
+      showNavigationButtons: "none",
+      enterKeyAction: "loseFocus",
+      questionErrorLocation: "bottom",
+      questionTitleLocation: "hidden",
+      pages: [{ name: "page1", elements: [] }]
+    });
+    this.addPresetsListEditor(survey);
+    survey.css = { ...presetsCss,
+      matrixdynamic: {
+        ...propertyGridCss.matrixdynamic,
+        buttonAdd: presetsCss.matrixdynamic.buttonAdd,
+        footer: propertyGridCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
+      }
+    };
     settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
