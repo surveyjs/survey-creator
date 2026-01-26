@@ -124,4 +124,13 @@
     gap: var(--sjs2-spacing-x200, 16px);
     padding: 0;
   }
+ 
 }
+
+.sps-popup--level2 {
+  &.sv-popup--modal-popup.svc-property-editor .sv-popup__container {
+      .sv-components-column--expandable {
+        min-width: 400px
+      }
+    } 
+  }

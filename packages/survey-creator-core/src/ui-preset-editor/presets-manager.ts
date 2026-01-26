@@ -189,7 +189,7 @@ export class PresetsManager {
           options.question.value = value;
           return true;
         },
-        cssClass: "sps-popup svc-property-editor svc-creator-popup",
+        cssClass: "sps-popup sps-popup--level2 svc-property-editor svc-creator-popup",
         title: getLocString("presets.plugin.addNewPreset"),
         displayMode: "popup"
       });
