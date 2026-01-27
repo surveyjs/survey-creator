@@ -42,7 +42,7 @@ Switch to the **Rating Values** category and select a required **Rating icon**:
 
     <img src="images/survey-creator-rate-type.png" alt="Survey Creator - Change rating icon in Property Grid" width="1448" height="656">
 
-Alternatively, you can change the rate type using an adorner directly on the design surface:
+    Alternatively, you can change the rate type using an adorner directly on the design surface:
 
     <img src="images/survey-creator-rate-type-using-adorner.png" alt="Survey Creator - Change rate type using an adorner" width="1448" height="562">
 
@@ -85,14 +85,14 @@ Use the File Upload type to allow respondents to upload files. Respondents drag 
 - How to: Restrict uploaded file types          
 The File Upload type is built upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:            
     
-<img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="1448" height="682">
+    <img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="1448" height="682">
 
     > Always restrict the allowed file types to prevent possible security vulnerabilities. 
 
 - How to: Enable multiple file selection           
 Switch to the **General** category and select **Enable multiple file upload**:        
     
-<img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Enable multiple file upload" width="1448" height="702">
+    <img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Enable multiple file upload" width="1448" height="702">
 
 #### Image Picker
 
@@ -103,12 +103,12 @@ Respondents select one or several images or videos from a series. A value associ
 - How to: Associate values with images or videos          
 Switch to the **Choices** category and enter the values in the **Choices** table:      
 
-<img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="1448" height="650">
+    <img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="1448" height="650">
 
 - How to: Enable multiple image or video selection           
 Switch to the **General** category and select **Allow multiple selection**:            
 
-<img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="1448" height="650">
+    <img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="1448" height="650">
     
 #### Ranking 
 
@@ -169,11 +169,13 @@ The Single-Select Matrix type displays radio buttons in rows and columns. Respon
 <img src="images/question-types-matrix-single-choice.png" alt="SurveyJS Question types - Single-Select Matrix" width="1544" height="906">
 
 - How to: Add new rows          
-Open the **Rows** category and click **Add new rows**:         
+Open the **Rows** category and click **Add new row**:
+
     <img src="images/survey-creator-add-new-row.png" alt="Survey Creator - Add new row to a matrix question" width="1448" height="544">
 
 - How to: Randomize rows        
-Open the **Rows** category, find the **Row order** editor, and switch it to *Random*:     
+Open the **Rows** category, find the **Row order** editor, and switch it to *Random*:
+
     <img src="images/survey-creator-row-order.png" alt="Survey Creator - Row order in a matrix question" width="1448" height="544">
 
 See also:
@@ -201,7 +203,8 @@ Respondents use these editors to select a desired value in each cell. The follow
 <img src="images/question-types-matrix-multiple-choices.png" alt="SurveyJS Question types - Multi-Select Matrix" width="1544" height="908">
 
 - How to: Change the editor type         
-Switch to the **General** category and select the desired editor type from the **Cell input type** drop-down menu:       
+Switch to the **General** category and select the desired editor type from the **Cell input type** drop-down menu:
+
     <img src="images/survey-creator-matrix-cell-type.png" alt="Survey Creator - Matrix cell type" width="1448" height="678">
 
 See also:
@@ -242,17 +245,17 @@ Respondents use mouse or touch gestures to draw their signature within the alloc
 - How to: Resize the allocated area         
 Switch to the **General** category and change the **Signature area width** and **Signature area height** values:     
 
-<img src="images/survey-creator-change-size.png" alt="Survey Creator - Change size" width="1448" height="648">
+    <img src="images/survey-creator-change-size.png" alt="Survey Creator - Change size" width="1448" height="648">
 
 - How to: Change the storage format        
 The respondent's input is saved as a base64-encoded image in one of the following formats: PNG, JPEG, SVG. To select the desired format, use the **Storage format** editor in the **General** category:       
 
-<img src="images/survey-creator-image-format.png" alt="Survey Creator - Storage format" width="1448" height="648">
+    <img src="images/survey-creator-image-format.png" alt="Survey Creator - Storage format" width="1448" height="648">
 
 - How to: Change the pen color          
 Switch to the **General** category and select the desired color from the **Stroke color** drop-down menu:
 
-<img src="images/survey-creator-pen-color.png" alt="Survey Creator - Pen color" width="1448" height="648">
+    <img src="images/survey-creator-pen-color.png" alt="Survey Creator - Pen color" width="1448" height="648">
 
 ### Adorners
 
