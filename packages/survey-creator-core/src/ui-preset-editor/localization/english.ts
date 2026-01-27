@@ -203,6 +203,8 @@ export const enStrings = {
     saveAs: "Save as...",
     saveAsTitle: "Save current preset as...",
     quit: "Quit",
+    quitConfirmation: "Exit to Survey Creator? You will loose all unsaved changes",
+    quitConfirmationOk: "Exit",
     file: "File",
     import: "Import",
     export: "Export",

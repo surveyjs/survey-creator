@@ -32,6 +32,11 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private hidePresets() {
+    if (this.presetsManager && !this.presetsManager.isSaved) {
+      this.model.json = this.defaultJson;
+      this.model.applyFromSurveyModel(false);
+    }
+    this.presetsManager.presetSelector.value = this.presetsList.selectedItem.id;
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
   }
@@ -45,6 +50,24 @@ export class UIPresetEditor implements ICreatorPlugin {
       },
       {
         applyTitle: getLocString("presets.plugin.resetConfirmationOk"),
+        locale: this.creator.locale,
+        cssClass: "sv-popup--confirm svc-creator-popup"
+      }
+    );
+  }
+  private confirmQuit(onApply: ()=>void) {
+    if (this.presetsManager?.isSaved) {
+      onApply();
+      return;
+    }
+    libSettings.confirmActionAsync(getLocString("presets.plugin.quitConfirmation"),
+      (confirm) => {
+        if (confirm) {
+          onApply();
+        }
+      },
+      {
+        applyTitle: getLocString("presets.plugin.quitConfirmationOk"),
         locale: this.creator.locale,
         cssClass: "sv-popup--confirm svc-creator-popup"
       }
@@ -105,12 +128,12 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   protected saveHandler() {
+    this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
     this.onPresetSaved.fire(this, { preset: this.model.json });
     this.setStatus("saved");
   }
   protected saveAsHandler() {
-    this.presetsManager.saveAs(this.model.json);
-    this.setStatus("saved");
+    this.presetsManager.saveAs(this.model.json, ()=> { this.setStatus("saved"); });
   }
   protected setStatus(status: "saved" | "unsaved" | "initial") {
     this.presetsManager.setStatus(status === "unsaved");
@@ -228,7 +251,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       iconName: "icon-exit-24x24",
       title: getLocString("presets.plugin.quit"),
       css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
-      action: () => { this.saveHandler(); this.hidePresets(); }
+      action: () => { this.confirmQuit(() => this.hidePresets()); }
     });
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;

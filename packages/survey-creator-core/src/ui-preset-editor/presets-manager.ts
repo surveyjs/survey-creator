@@ -16,6 +16,9 @@ export class PresetsManager {
   public setStatus(unsaved: boolean) {
     this.unsaved = unsaved;
   }
+  public get isSaved(): boolean {
+    return !this.unsaved;
+  }
 
   private customPresets = [] as string[];
 
@@ -54,17 +57,19 @@ export class PresetsManager {
       showNavigationButtons: "none",
       enterKeyAction: "loseFocus",
       questionErrorLocation: "bottom",
+      focusFirstQuestionAutomatic: true,
       elements: [{
         type: "dropdown",
         name: "presetName",
-        defaultValue: this.presetsList.selectedItem?.title || "",
         allowCustomChoices: true,
         choices: this.customPresets.map(i => ({ value: i, text: i })),
         titleLocation: "hidden",
+        requiredErrorText: getLocString("presets.editor.required"),
         isRequired: true }]
     });
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
+
     settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
@@ -250,10 +255,11 @@ export class PresetsManager {
     this.updateMenu();
   }
 
-  public saveAs(json: any) {
+  public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
       this.addPreset({ presetName: newName, json: json });
       this.presetsList.onItemClick(this.presetsList.getActionById(newName));
+      saveCallback(newName);
     });
   }
 
