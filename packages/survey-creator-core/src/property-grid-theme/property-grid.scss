@@ -47,6 +47,10 @@
   }
 }
 
+.spg-container:not(:last-child) .spg-page {
+  padding-bottom: 0;
+}
+
 .sv-popup--modal-popup {
   &.svc-property-editor .sv-popup__container {
     .sv-popup_shadow {

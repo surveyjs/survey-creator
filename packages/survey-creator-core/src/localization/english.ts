@@ -129,6 +129,12 @@ export var enStrings = {
     pasteTooltip: "Paste from clipboard",
     options: "Options",
     generateValidJSON: "Generate Valid JSON",
+    expressionUnknownFunction: "Unknown function: \"{0}\".",
+    expressionUnknownFunctions: "Unknown functions: \"{0}\".",
+    expressionUnknownVariable: "Unknown variable: \"{0}\".",
+    expressionUnknownVariables: "Unknown variables: \"{0}\".",
+    expressionSyntaxError: "Syntax error.",
+    expressionSemanticsError: "Semantic error.",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
@@ -775,6 +781,41 @@ export var enStrings = {
       customLabels: "Custom labels",
       labelFormat: "Label format",
       tooltipFormat: "Tooltip format"
+    },
+    imagemap: {
+      imageLink: "Image URL",
+      areas: "Areas",
+      multiSelect: "Allow multiple selections",
+      valuePropertyName: "Value property name",
+
+      shape: "Shape",
+
+      idleFillColor: "Idle fill color",
+      idleStrokeColor: "Idle stroke color",
+      idleStrokeWidth: "Idle stroke width",
+      hoverFillColor: "Hover fill color",
+      hoverStrokeColor: "Hover stroke color",
+      hoverStrokeWidth: "Hover stroke width",
+
+      selectedFillColor: "Selected fill color",
+      selectedStrokeColor: "Selected stroke color",
+      selectedStrokeWidth: "Selected stroke width",
+      maxSelectedAreas: "Maximum selected areas",
+      minSelectedAreas: "Minimum selected areas",
+    },
+    imagemaparea: {
+      value: "Value",
+      shape: "Shape",
+      coords: "Coordinates",
+      idleFillColor: "Idle fill color",
+      idleStrokeColor: "Idle stroke color",
+      idleStrokeWidth: "Idle stroke width",
+      hoverFillColor: "Hover fill color",
+      hoverStrokeColor: "Hover stroke color",
+      hoverStrokeWidth: "Hover stroke width",
+      selectedFillColor: "Selected fill color",
+      selectedStrokeColor: "Selected stroke color",
+      selectedStrokeWidth: "Selected stroke width",
     },
     file: {
       imageHeight: "Image height",
@@ -1905,6 +1946,13 @@ export var enStrings = {
       "default-light": "Light",
       "default-dark": "Dark",
       "default-contrast": "Contrast"
+    }
+  },
+  preset: {
+    names: {
+      basic: "Basic",
+      advanced: "Advanced",
+      expert: "Expert",
     }
   }
 };

@@ -186,6 +186,8 @@ export interface ICreatorPlugin {
   defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
+  onLocaleChanged?: () => void;
+  getLicenseText?: (hasCreatorLicense: boolean, creatorKeyDateString: string) => string;
   model: Base;
 }
 
@@ -340,6 +342,10 @@ export interface ISurveyCreatorOptions {
   ): void;
   translationLocalesOrder: Array<string>;
   canAddPage(pageToAdd?: PageModel): boolean;
+  expressionsValidateFunctions?: boolean;
+  expressionsValidateVariables?: boolean;
+  expressionsValidateSyntax?: boolean;
+  expressionsValidateSemantics?: boolean;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
@@ -516,4 +522,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   getRendererContext(locStr: LocalizableString) {
     return locStr;
   }
+  expressionsValidateFunctions: boolean = true;
+  expressionsValidateVariables: boolean = false;
+  expressionsValidateSyntax: boolean = true;
+  expressionsValidateSemantics: boolean = true;
 }

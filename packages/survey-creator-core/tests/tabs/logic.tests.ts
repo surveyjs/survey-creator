@@ -3027,6 +3027,38 @@ test("Delete the question && settings.logic.updateExpressionsOnDeleting", () => 
   expect(q2.visibleIf).toEqual("{q1} = 1 and {q3} < 2 or {q1} = 2");
   settings.logic.updateExpressionsOnDeleting.question = true;
 });
+
+test("Check iif expression after deleting a question Bug#7297", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        "type": "text",
+        "name": "q1",
+      },
+      {
+        "type": "text",
+        "name": "q2"
+      },
+      {
+        "type": "boolean",
+        "name": "q3"
+      },
+      {
+        "type": "text",
+        "name": "q4",
+        "visibleIf": "iif({q1} = 'dog', {q2}, '') anyof['Dog', 'Cat'] and {q3} = true"
+      }
+    ]
+  };
+
+  const survey = creator.survey;
+  const q3 = survey.getQuestionByName("q3");
+  const q4 = survey.getQuestionByName("q4");
+  creator.deleteElement(q3);
+  expect(q4.visibleIf).toEqual("(iif(({q1} == 'dog'), {q2}, '') anyof ['Dog', 'Cat'])");
+});
+
 test("Update expression on changing column name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

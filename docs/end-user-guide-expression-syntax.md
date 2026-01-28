@@ -60,88 +60,78 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{q1.item1}</code></td>
       </tr>
       <tr>
+        <td colspan="3"><b>All Matrices</b></td>
+        <tr>
+          <td><code>{row.columnid}</code></td>
+          <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
+          <td><code>{row.column1}</code></td>
+        </tr>
+        <tr>
+          <td><code>{prevRow.columnid}</code></td>
+          <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
+          <td><code>{prevRow.column1}</code></td>
+        </tr>
+        <tr>
+          <td><code>{nextRow.columnid}</code></td>
+          <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
+          <td><code>{nextRow.column1}</code></td>
+        </tr>
+        <tr>
+          <td><code>{rowIndex}</code></td>
+          <td>Accesses the row index within the collection of all rows. Starts with 1.</td>
+          <td><code>Row #{rowIndex}</code></td>
+        </tr>
+        <tr>
+          <td><code>{visibleRowIndex}</code></td>
+          <td>Accesses the row index within the collection of visible rows. Starts with 1.</td>
+          <td><code>Row #{visibleRowIndex}</code></td>
+        </tr>
+        <tr>
+          <td><code>{rowName}</code></td>
+          <td>Accesses the row name (the row's Value property). Use this placeholder if you need to distinguish between matrix rows.</td>
+          <td><code>iif({rowName} = 'test', 'Yes', 'No')</code></td>
+        </tr>
+        <tr>
+          <td><code>{rowTitle}</code></td>
+          <td>Accesses the row title (the row's Text property).</td>
+          <td><code>Title: {rowTitle}</code></td>
+        </tr>
+        <tr>
+          <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
+          <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
+          <td><code>{matrix1[-1].column1}</code></td>
+        </tr>
+      </tr>
+      <tr>
         <td colspan="3"><b>Single-Select Matrix</b></td>
       </tr>
       <tr>
-        <td><code>{row.columnid}</code></td>
-        <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
-        <td><code>{row.column1}</code></td>
+        <td><code>{matrixid.rowid}</code></td>
+        <td>Accesses the selected value in the specified matrix row.</td>
+        <td><code>{matrix1.row1}</code></td>
       </tr>
       <tr>
-        <td><code>{prevRow.columnid}</code></td>
-        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
-        <td><code>{prevRow.column1}</code></td>
+        <td colspan="3"><b>Multi-Select Matrix and Dynamic Matrix</b></td>
       </tr>
       <tr>
-        <td><code>{nextRow.columnid}</code></td>
-        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
-        <td><code>{nextRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
-        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
-        <td><code>{matrix1[-1].column1}</code></td>
-      </tr>
-      <tr>
-        <td colspan="3"><b>Multi-Select Matrix</b></td>
-      </tr>
-      <tr>
-        <td><code>{row.columnid}</code></td>
-        <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
-        <td><code>{row.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{prevRow.columnid}</code></td>
-        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
-        <td><code>{prevRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{nextRow.columnid}</code></td>
-        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
-        <td><code>{nextRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{matrixid[-1].columnid}</code><br><code>{matrixid[-2].columnid}</code><br>...</td>
-        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
-        <td><code>{matrix1[-1].column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{matrixid.rowid.columnid}</code></td>
-        <td>Accesses an individual matrix cell.</td>
-        <td><code>{matrix1.row1.column1}</code></td>
+        <td><code>{totalRow.columnid}</code></td>
+        <td>Use the <code>totalRow</code> prefix to access a cell in the total matrix row.</td>
+        <td><code>{totalRow.column1}</code></td>
       </tr>
       <tr>
         <td><code>{matrixid-total.columnid}</code></td>
-        <td>Accesses a cell in a total row.</td>
+        <td>Accesses a cell in the total row from outside the matrix.</td>
         <td><code>{matrix1-total.column1}</code></td>
       </tr>
       <tr>
-        <td colspan="3"><b>Dynamic Matrix</b></td>
-      </tr>
-      <tr>
-        <td><code>{row.columnid}</code></td>
-        <td>Use the <code>row</code> prefix to access a cell in the same matrix row.</td>
-        <td><code>{row.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{prevRow.columnid}</code></td>
-        <td>Use the <code>prevRow</code> prefix to access a cell in the previous matrix row.</td>
-        <td><code>{prevRow.column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{nextRow.columnid}</code></td>
-        <td>Use the <code>nextRow</code> prefix to access a cell in the next matrix row.</td>
-        <td><code>{nextRow.column1}</code></td>
+        <td><code>{matrixid.rowid.columnid}</code></td>
+        <td>Accesses an individual cell in a Multi-Select Matrix.</td>
+        <td><code>{matrix1.row1.column1}</code></td>
       </tr>
       <tr>
         <td><code>{dmatrixid[rowindex].columnid}</code></td>
-        <td>Use a zero-based row index to access a specific cell.</td>
+        <td>Accesses an individual cell in a Dynamic Matrix.</td>
         <td><code>{dmatrix1[0].column1}</code></td>
-      </tr>
-      <tr>
-        <td><code>{dmatrixid[-1].columnid}</code><br><code>{dmatrixid[-2].columnid}</code><br>...</td>
-        <td>Use negative indices to access a cell in the last row, the row before the last, and so on.</td>
-        <td><code>{dmatrix1[-1].column1}</code></td>
       </tr>
       <tr>
         <td colspan="3"><b>Dynamic Panel</b></td>
@@ -189,17 +179,21 @@ The advanced syntax may be useful in many cases, one of which is data validation
 3. Select the first question, locate the **Input type** drop-down menu under the **General** category, and select **Date**.
 4. Repeat step 3 for the second question.
 
-  <img src="images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
+<img src="images/eud-inputype-date.png" alt='How to specify input type' width="1321" height="594">
+
 5. Select the first question and enter `start-date` as the **Question name** setting value.
 6. Select the second question and enter `end-date` as a value for the same setting.
 
-  <img src="images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
+<img src="images/eud-questionname.png" alt='How to specify question name' width="1321" height="640">
+
 7. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
 
-  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+<img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
+
 8. Specify the following **Error message**: `End date should be greater than start date`.
-9. Enter the following **Validation expression**: `{panel.start-date} < {panel.end-date}`.
-  <img src="images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
+9. Enter the following validation expression in the **Valid when** editor: `{panel.start-date} < {panel.end-date}`.
+
+<img src="images/eud-validationrules-expression.png" alt='A data validation rule of the expression type' width="1321" height="646">
 
 To check that the validation rule works as expected, open the Preview tab, add a new entry to the Dynamic Panel, and select invalid start and end dates.
 
@@ -219,11 +213,12 @@ Calculation functions produce results that can be used as operands in expression
 2. Set their **Input type** to **Date** and **Question name** to `start-date` and `end-date` (perform steps 3 to 6 from the [instructions for the Dynamic Panel](#dynamic-panel)).
 3. Select the `end-date` question, locate the **Validation rules** setting under the **Validation** category, and click **Add new rule**.
 
-  <img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
-4. Specify the following **Error message**: `Difference between start and end dates must not be greater than 14 days`.
-5. Enter the following **Validation expression**: `dateDiff({start-date}, {end-date}, "days") <= 14`.
+<img src="images/eud-validationrules-addnewrule.png" alt='How to add a new data validation rule' width="1321" height="602">
 
-  <img src="images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
+4. Specify the following **Error message**: `Difference between start and end dates must not be greater than 14 days`.
+5. Enter the following validation expression in the **Valid when** field: `dateDiff({start-date}, {end-date}, "days") <= 14`.
+
+<img src="images/eud-validation-datediff.png" alt='A validation rule that checks the difference between two dates' width="1217" height="620">
 
 To verify the validation, open the Preview tab and select two dates that are more than 14 days apart.
 
@@ -251,7 +246,8 @@ Comparison operators are used to compare two values (or in case of `empty` and `
 | `>` / `greater`  | Compares two values and returns `true` if the first is greater than the second. | `"{q1} > 10"` |
 | `*=` / `contains` / `contain`  | Compares two values and returns `true` if the first value contains the second value within it. | `"{q1} contains 'abc'"` |
 | `notcontains` / `notcontain` | Compares two values and returns `true` if the first value doesn't contain the second value within it. | `"{q1} notcontains 'abc'"` |
-| `anyof` | Compares a value with an array of values and returns `true` if the value is present in the array. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
+| `anyof` | Compares a value with an array of values and returns `true` if the value is present, or compares two arrays and returns `true` if the first array includes any value from the second. | `"{q1} anyof [ 'value1', 'value2', 'value3' ]"` |
+| `noneof` | Compares a value with an array of values and returns `true` if the value is absent, or compares two arrays and returns `true` if the first array includes none of the values from the second. | `"{q1} noneof [ 'value1', 'value2', 'value3' ]"` |
 | `allof` | Compares two arrays and returns `true` if the first array includes all values from the second. | `"{q1} allof [ 'value1', 'value2', 'value3' ]"` |
 
 > Comparison operations are case-sensitive.
@@ -302,7 +298,7 @@ For date calculations, you can use the following functions:
 | `day`| Day of the month for a given date as a value from 1 to 31. | `"day('2000-01-30')"` (30) |
 | `weekday`| Day of the week for a given date as a value from 0 (Sunday) to 6 (Saturday). | `"weekday('2000-01-01')"` (6) |
 | `dateDiff`| Difference between two given dates in full days (default), hours, minutes, seconds, months, or years. | `"dateDiff('2000-01-01', '2000-02-01', "days")"` (31)<br>`"dateDiff('2000-01-01', '2000-04-01', "months")"` (3)<br>`"dateDiff('2000-01-01', '2009-02-01', "years")"` (9)<br>`"dateDiff('2000-01-01T01:00:00', '2000-01-01T03:00:00', "hours")"` (2)<br>`"dateDiff('2000-01-01T01:00:00', '2000-01-01T01:45:00', "minutes")"` (45)<br>`"dateDiff('2000-01-01T01:00:00', '2000-01-01T01:00:30', "seconds")"` (30) |
-| `dateAdd`| A `Date` value with an added or subtracted number of full days (default), months, or years. | `"dateAdd('2000-01-01', 10, "days")"` (`new Date(2000-01-11)`)<br>`"dateAdd('2000-01-01', 4, "months")"` (`new Date(2000-05-01)`)<br>`"dateAdd('2000-01-01', -5, "years")"` (`new Date(1995-01-01)`) |
+| `dateAdd`| A `Date` value with an added or subtracted number of full days (default), hours, minutes, seconds, months, or years. | `"dateAdd('2000-01-01', 10, "days")"` (`new Date(2000-01-11)`)<br>`"dateAdd('2000-01-01', 4, "months")"` (`new Date(2000-05-01)`)<br>`"dateAdd('2000-01-01', -5, "years")"` (`new Date(1995-01-01)`) |
 
 [How to Calculate Duration Between Dates and Prefill a Form Field with the Duration Value](https://surveyjs.io/survey-creator/documentation/end-user-guide/how-to-calculate-duration-between-dates-within-form (linkStyle))
 

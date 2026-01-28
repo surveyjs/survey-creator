@@ -39,9 +39,21 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "peerDependencies": {
-    "vue": "^3.2.41",
+    "vue": "^3.4.0",
     "survey-core": "*",
     "survey-creator-core": "*",
     "survey-vue3-ui": "*"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./survey-creator-vue.es.js",
+      "require": "./survey-creator-vue.umd.js"
+    },
+    "./ui-preset-editor": {
+      "types": "./types-presets/index.d.ts",
+      "import": "./ui-preset-editor/index.es.js",
+      "require": "./ui-preset-editor/index.umd.js"
+    }
   }
 }

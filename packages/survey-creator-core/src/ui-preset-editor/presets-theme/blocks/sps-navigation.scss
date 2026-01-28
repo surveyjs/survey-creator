@@ -1,0 +1,85 @@
+@use "../fonts.scss" as *;
+
+.sps-navigation-bar {
+  display: flex;
+  padding: var(--sjs2-spacing-x150, 12px);
+  align-items: center;
+  gap: var(--sjs2-spacing-x100, 8px);
+  align-self: stretch;
+  border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  background: var(--sjs2-color-utility-surface-muted, rgba(28, 27, 32, 0.05));
+}
+
+.sps-navigation-action--right {
+  margin-left: auto;
+}
+
+.sps-navigation-bar-item {
+  display: flex;
+  padding: var(--sjs2-layout-control-action-small-box-vertical, 8px)
+    var(--sjs2-layout-control-action-small-box-horizontal, 8px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--sjs2-layout-control-action-small-box-gap, 0);
+
+  border-radius: var(--sjs2-radius-control-button, 8px);
+  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+
+  //hovered and focused state
+  &:hover,
+  &:focus-visible {
+    background: var(--sjs2-color-bg-basic-primary-dim, #f5f5f5);
+  }
+
+  //pressed state
+  &:active,
+  &.sps-navigation-bar-item--pressed {
+    background: var(--sjs2-color-bg-basic-primary, #fff);
+  }
+
+  //checked state
+  &.sps-navigation-bar-item--active {
+    background: var(--sjs2-color-bg-basic-primary-dim, #f5f5f5);
+  }
+
+  //disabled state
+  &:disabled {
+    opacity: var(--sjs2-opacity-disabled, 0.25);
+    background: var(--sjs2-color-bg-basic-primary-disabled, #d4d4d4);
+  }
+}
+
+.sps-navigation-bar-item {
+  flex-direction: row-reverse;
+}
+
+.sps-navigation-bar-item__title {
+  display: flex;
+  padding: var(--sjs2-layout-control-action-small-label-vertical, 0)
+    var(--sjs2-layout-control-action-small-label-horizontal, 6px);
+  justify-content: center;
+  align-items: center;
+
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  text-align: center;
+  @include sjs2--typography--default-strong;
+}
+
+.sps-navigation-bar-item__icon {
+  display: flex;
+  padding: var(--sjs2-layout-control-action-small-addon-vertical, 4px)
+    var(--sjs2-layout-control-action-small-addon-horizontal, 4px);
+  justify-content: center;
+  align-items: center;
+  box-sizing: content-box;
+}
+
+.sps-navigation-action--large-icon {
+  .sps-navigation-bar-item__icon {
+    display: flex;
+    padding: var(--sjs2-layout-control-action-small-icon-vertical, 0)
+      var(--sjs2-layout-control-action-small-icon-horizontal, 0);
+    align-items: center;
+  }
+}

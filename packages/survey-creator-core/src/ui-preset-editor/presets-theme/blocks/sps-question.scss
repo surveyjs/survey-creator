@@ -1,0 +1,83 @@
+@use "../../../variables.scss" as *;
+@use "../fonts" as *;
+
+.sps-question {
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+}
+
+.sps-question--main {
+  min-height: 420px;
+}
+
+.sps-question--with-frame {
+  border-radius: var(--sjs2-radius-x250, 20px);
+  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  .sps-question__content {
+    padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px);
+  }
+}
+
+.sps-question__header {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.sps-question__title {
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  @include sjs2--typography--default-strong;
+
+  .sv-title-actions {
+    gap: var(--sjs2-spacing-x050, 4px);
+  }
+}
+
+.sps-question--nested {
+  .sps-question__title {
+    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px) var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
+    @include sjs2--typography--default;
+  }
+  .sps-question__header {
+    width: 100%;
+    display: flex;
+    padding: 0;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+  .sps-question__content {
+    padding: 0;
+  }
+  .sps-question__description {
+    @include ctrSmallFont;
+    color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+    padding-bottom: calcSize(2);
+    white-space: normal;
+  }
+}
+
+.sps-question__content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
+}
+
+.sps-question__description {
+  white-space: normal;
+  color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
+}
+
+.sps-question__description--under {
+  display: flex;
+  padding: var(--sjs2-spacing-x100, 8px);
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+}

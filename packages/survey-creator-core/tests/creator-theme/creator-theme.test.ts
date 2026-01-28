@@ -4,6 +4,7 @@ import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { CreatorThemes, PredefinedCreatorThemes, registerCreatorTheme } from "../../src/creator-theme/creator-themes";
 import { CreatorTester } from "../creator-tester";
 import Default from "../../src/themes/default-light";
+import { legacyCssVariables } from "../../src/themes/legacy-vars";
 
 test("onCreatorThemePropertyChanged event", (): any => {
   const creator: CreatorTester = new CreatorTester();
@@ -34,7 +35,7 @@ test("registerCreatorTheme function", (): any => {
   try {
     const creator: CreatorTester = new CreatorTester();
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
-    const themeChooser = designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName") as QuestionDropdownModel;
+    const themeChooser = designerPlugin["themePropertyGridViewModel"].survey.getQuestionByName("themeName") as QuestionDropdownModel;
     expect(themeChooser.choices).toHaveLength(2);
     expect(themeChooser.choices[1].value).toBe(customThemeName);
     //expect(creator.creatorTheme).toBeUndefined();
@@ -47,4 +48,18 @@ test("registerCreatorTheme function", (): any => {
     PredefinedCreatorThemes.splice(PredefinedCreatorThemes.indexOf(customThemeName), 1);
     delete CreatorThemes[customThemeName];
   }
+});
+
+test("check legacy vars has no ambiguous values", (): any => {
+  const legacyVars: any = legacyCssVariables;
+  const duplicatedKeys: any[] = [];
+  const valuesHash: { [key: string]: boolean } = {};
+  for (const key in legacyVars) {
+    const value = legacyVars[key];
+    if (valuesHash[value] && !duplicatedKeys.includes(key)) {
+      duplicatedKeys.push(key);
+    }
+    valuesHash[value] = true;
+  }
+  expect(duplicatedKeys).toHaveLength(0);
 });

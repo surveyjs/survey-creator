@@ -778,6 +778,33 @@ test.describe(title, () => {
     await compareScreenshot(page, questionHeader, "helper-action.png");
   });
 
+  test("Multiline help text", async ({ page }) => {
+    await page.setViewportSize({ width: 1240, height: 870 });
+    await page.evaluate(() => {
+      const translations = (window as any).SurveyCreatorCore.getLocaleStrings("en");
+      translations.pehelp.visible = "Defines whether the selected survey element is shown to respondents. When set to true, the element appears in the survey. When set to false, the element is hidden but remains in the survey structure and can be shown later through conditions or logic. Use this property to hide questions, panels, or pages without deleting them.";
+    });
+    const question1 = page.locator("[data-name=\"q2\"]");
+
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "text", "name": "q1" },
+            { "type": "text", "name": "q2", "visibleIf": "{q1} notempty" }
+          ]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    await page.waitForTimeout(1000);
+
+    await question1.click({ position: { x: 20, y: 20 } });
+    await page.getByRole("button", { name: "Defines whether the selected" }).click();
+    await compareScreenshot(page, ".spg-row.spg-row--multiple", "multiline-help-text.png");
+  });
+
   test("Character counter in property grid", async ({ page }) => {
     const showSidebarButton = page.locator("[title='Show Panel']");
 

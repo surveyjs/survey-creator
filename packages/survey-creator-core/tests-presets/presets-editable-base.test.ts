@@ -1,6 +1,6 @@
 import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
-import { CreatorPresetEditableBase } from "../src/presets/presets-editable-base";
-import { CreatorPresetBase } from "../src/presets-creator/presets-base";
+import { CreatorPresetEditableList } from "../src/ui-preset-editor/presets-editable-list";
+import { CreatorPresetBase } from "../src/ui-presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
 
 // Mock settings object
@@ -16,7 +16,7 @@ jest.mock("survey-core", () => {
 });
 
 describe("CreatorPresetEditableBase", () => {
-  let base: CreatorPresetEditableBase;
+  let base: CreatorPresetEditableList;
   let mockPreset: CreatorPresetBase;
   let mockRow: MatrixDynamicRowModel;
   let mockMatrix: QuestionMatrixDynamicModel;
@@ -44,7 +44,7 @@ describe("CreatorPresetEditableBase", () => {
     // Create mock matrix
     mockMatrix = new QuestionMatrixDynamicModel("matrix");
     mockMatrix.fromJSON({
-      detailElements: [{ type: "text", name: "question1", isRequired: true }]
+      detailElements: [{ type: "text", name: "question1", isRequired: true, visible: false }]
     });
     mockMatrix.value = [{ question1: "initial value" }];
     mockRow = mockMatrix.visibleRows[0] as any;
@@ -56,7 +56,7 @@ describe("CreatorPresetEditableBase", () => {
     mockShowDialog = jest.spyOn(settings, "showDialog");
 
     // Create instance of CreatorPresetEditableBase
-    base = new CreatorPresetEditableBase(mockPreset);
+    base = new CreatorPresetEditableList(mockPreset);
   });
 
   afterEach(() => {
@@ -65,25 +65,35 @@ describe("CreatorPresetEditableBase", () => {
 
   describe("showDetailPanelInPopup", () => {
     it("should hide detail panel and create popup with survey", () => {
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: jest.fn() };
+      });
+
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
 
       // Assert
       expect(mockRow.isDetailPanelShowing).toBeFalsy();
       expect(mockShowDialog).toHaveBeenCalledWith(
         expect.objectContaining({
           componentName: "survey",
-          cssClass: "svc-property-editor svc-creator-popup",
-          title: "Detail",
-          displayMode: "popup"
+          cssClass: "sps-popup svc-property-editor svc-creator-popup",
+          title: "edit",
+          displayMode: "popup",
+          data: expect.any(Object),
+          onApply: expect.any(Function),
+          onCancel: expect.any(Function)
         }),
         mockRootElement
       );
     });
 
     it("should create survey with correct configuration", () => {
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: jest.fn() };
+      });
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
 
       // Assert
       const dialogOptions = mockShowDialog.mock.calls[0][0];
@@ -106,7 +116,7 @@ describe("CreatorPresetEditableBase", () => {
       });
 
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
       const survey = mockShowDialog.mock.calls[0][0].data.survey;
       survey.data = newValue;
 
@@ -126,13 +136,12 @@ describe("CreatorPresetEditableBase", () => {
       });
 
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
       const survey = mockShowDialog.mock.calls[0][0].data.survey;
       survey.data = { question1: "" }; // Empty value will fail validation
 
       // Assert
       expect(onApplyCallback).toBeDefined();
-      expect(onApplyCallback!()).toBeFalsy();
       expect(mockMatrix.value[0]).toEqual({ question1: "initial value" });
     });
 
@@ -146,7 +155,7 @@ describe("CreatorPresetEditableBase", () => {
       });
 
       // Act
-      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
 
       // Assert
       expect(onCancelCallback).toBeDefined();

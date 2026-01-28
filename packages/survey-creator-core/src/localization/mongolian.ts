@@ -238,6 +238,12 @@ export var mnStrings = {
     options: "Тохиргоо",
     // "Generate Valid JSON"
     generateValidJSON: "Бодит JSON үүсгэх",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Тодорхойгүй үүрэг: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Тодорхойгүй хувьсагч: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Синтаксын алдаа.",
     // "Generate Readable JSON"
     generateReadableJSON: "Ойлгомжтой JSON үүсгэх",
     // "Toolbox"
@@ -250,6 +256,8 @@ export var mnStrings = {
     toolboxFilteredTextPlaceholder: "Хайлт хийх төрөл...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Ямар ч үр дүн олдсонгүй",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Харуулах шинж чанаргүй",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
     // [Auto-translated] "No results found"
@@ -1126,6 +1134,8 @@ export var mnStrings = {
     storeDataAsText: "JSON үр дүнд файлын агуулгыг текст хэлбэрээр хадгалах",
     // "Maximum file size (in bytes)"
     maxSize: "Файлын дээд хэмжээ (байтаар)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Файлын хамгийн их тоо",
     // "Row count"
     rowCount: "Мөрний тоо",
     // "Columns layout"
@@ -1317,10 +1327,10 @@ export var mnStrings = {
     // "Regular expression"
     regex: "Тогтмол илэрхийлэл",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Баталгаажуулах захиас",
-      // [Auto-translated] "Validation expression"
-      expression: "Баталгаажуулалтын илэрхийлэл",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Буруу оролтод мэдэгдэл",
+      // [Auto-translated] "Valid when"
+      expression: "Хүчинтэй үед",
       // [Auto-translated] "Notification type"
       notificationType: "Мэдэгдлийн төрөл",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1410,10 @@ export var mnStrings = {
     allowMultiple: "Олон файл зөвшөөрөх",
     // "Preview uploaded images"
     allowImagesPreview: "Зургуудыг урьдчилж харах",
-    // "Accepted file types"
-    acceptedTypes: "Зөвшөөрөгдсөн файлын төрөл",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Хүлээн зөвшөөрөгдсөн файлын ангилал",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Нэмэлт файлын өргөтгөлүүд",
     // "Wait for upload to complete"
     waitForUpload: "Файл байршуулж дуустал хүлээх",
     // "Confirm file deletion"
@@ -1473,6 +1485,66 @@ export var mnStrings = {
       labelFormat: "Шошгоны хэлбэр",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Tooltip формат"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Зурагны URL",
+      // [Auto-translated] "Areas"
+      areas: "Бүс нутгууд",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Олон сонголтыг зөвшөөрөх",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Үнэ цэнийн өмчийн нэр",
+      // [Auto-translated] "Shape"
+      shape: "Хэлбэр",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Чөлөөт дүүргэлтийн өнгө",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Сул өнгийн өнгө",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Хоосон цохилтын өргөн",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Хөвөх хавчны дүүргэлтийн өнгө",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Хөвөх зургийн өнгө",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Хөвөх цохилтын өргөн",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Сонгогдсон дүүргэлтийн өнгө",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Сонгогдсон зургийн өнгө",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Сонгогдсон цохилтын өргөн",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Хамгийн их сонгогдсон бүсүүд",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Хамгийн бага сонгогдсон бүсүүд"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Үнэ цэн",
+      // [Auto-translated] "Shape"
+      shape: "Хэлбэр",
+      // [Auto-translated] "Coordinates"
+      coords: "Координатууд",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Чөлөөт дүүргэлтийн өнгө",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Сул өнгийн өнгө",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Хоосон цохилтын өргөн",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Хөвөх хавчны дүүргэлтийн өнгө",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Хөвөх зургийн өнгө",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Хөвөх цохилтын өргөн",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Сонгогдсон дүүргэлтийн өнгө",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Сонгогдсон зургийн өнгө",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Сонгогдсон цохилтын өргөн"
     },
     file: {
       // [Auto-translated] "Image height"
@@ -2082,6 +2154,20 @@ export var mnStrings = {
       // [Auto-translated] "Informational"
       info: "Мэдээлэл"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Зургууд",
+      // [Auto-translated] "Videos"
+      video: "Видеонууд",
+      // [Auto-translated] "Audio"
+      audio: "Аудио",
+      // [Auto-translated] "Documents"
+      document: "Баримт бичгүүд",
+      // [Auto-translated] "Archives"
+      archive: "Архив",
+      // [Auto-translated] "Custom"
+      custom: "Custom"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Бүтэн нэр",
@@ -2495,6 +2581,8 @@ export var mnStrings = {
     notcontains: "Агуулаагүй",
     // "Any of"
     anyof: "Аль нэгийг нь",
+    // [Auto-translated] "None of"
+    noneof: "Ямар ч",
     // "All of"
     allof: "Бүгдийг нь",
     // "Greater than"
@@ -3088,8 +3176,10 @@ export var mnStrings = {
     storeOthersAsComment: "\"Бусад\" сонголтын үнэ цэнийг судалгааны үр дүнд тусад нь өмч болгон хадгалахыг сонго.",
     // "Use {0} as a placeholder for the actual value."
     format: "{0} нь тухайн утгын жишээ болно.",
-    // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Атрибутын талаар нэмэлт мэдээллийг үзэхийн тулд [accept](https://www.w3schools.com/tags/att_input_accept.asp)-лүү хандана уу.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "\"Custom\" гэж сонгож, урьдчилан тодорхойлсон ангиллын дээр өөрийн файл өргөтгөлүүдийг нэмнэ.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Файлын өргөтгөлүүдийг тасалтайгаар (жишээ нь, .csv, .xml) оруулна.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Зөвхөн олон сонголттой эсвэл Radiogroup -д ашиглана.",
     // "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3506,6 +3596,16 @@ export var mnStrings = {
       "default-dark": "Харанхуй",
       // [Auto-translated] "Contrast"
       "default-contrast": "Эсрэг тэсрэг байдал"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Үндсэн",
+      // [Auto-translated] "Advanced"
+      advanced: "Дэвшилтэт",
+      // [Auto-translated] "Expert"
+      expert: "Мэргэжилтэн"
     }
   }
 };

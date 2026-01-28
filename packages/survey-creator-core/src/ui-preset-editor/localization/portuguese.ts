@@ -1,0 +1,253 @@
+import { getLocaleStrings } from "survey-creator-core";
+export const ptStrings = {
+  languages: {
+    // [Auto-translated] "Languages"
+    title: "Idiomas",
+    // [Auto-translated] "Languages"
+    navigationTitle: "Idiomas",
+    // [Auto-translated] "Select the language of the Survey Creator UI and target\nlanguages for the survey being configured."
+    description: "Selecione o idioma da interface do usuário e do Survey Creator\nidiomas para a pesquisa que está sendo configurada.",
+    // [Auto-translated] "Survey Creator UI language"
+    creatorUI: "Linguagem de interface Survey Creator",
+    // [Auto-translated] "Survey languages"
+    surveyLanguages: "Idiomas da pesquisa",
+    // [Auto-translated] "Type to search..."
+    searchPlaceholder: "Digite para pesquisar...",
+    // [Auto-translated] "Translate language names to English"
+    translateToEnglish: "Traduzir nomes de idiomas para o inglês"
+  },
+  tabs: {
+    // [Auto-translated] "Configure tabs"
+    title: "Configurar guias",
+    // [Auto-translated] "Tabs"
+    navigationTitle: "Guias",
+    // [Auto-translated] "Select the tabs you want to show, reorder them, change their titles,\nand choose the tab that will be active by default."
+    description: "Selecione as guias que deseja mostrar, reordene-as, altere seus títulos,\ne escolha a guia que estará ativa por padrão.",
+    // [Auto-translated] "Visible tabs"
+    items: "Guias visíveis",
+    // [Auto-translated] "Hidden tabs"
+    hiddenItems: "Guias ocultas",
+    // [Auto-translated] "Default tab"
+    defaultTab: "Guia Padrão",
+    // [Auto-translated] "Drag tabs here to show them"
+    noItemsText: "Arraste as guias aqui para mostrá-las",
+    // [Auto-translated] "Drag tabs here to hide them"
+    noHiddenItemsText: "Arraste as guias aqui para ocultá-las",
+    // [Auto-translated] "Name"
+    name: "Nome",
+    // [Auto-translated] "Title"
+    titleField: "Título",
+    // [Auto-translated] "Icon name"
+    iconName: "Nome do ícone"
+  },
+  toolbox: {
+    // [Auto-translated] "Set up the Toolbox"
+    title: "Configurar a caixa de ferramentas",
+    // [Auto-translated] "Toolbox"
+    navigationTitle: "Toolbox",
+    // [Auto-translated] "Select the toolbox items you want to show, group them into categories, \nrename them, and change their order if required."
+    description: "Selecione os itens da caixa de ferramentas que deseja mostrar, agrupe-os em categorias, \nRenomeie-os e altere sua ordem, se necessário.",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Toolbox",
+    // [Auto-translated] "Categories"
+    categories: "Categorias",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Sem categorias",
+    // [Auto-translated] "Drag items here to show them"
+    noItemsText: "Arraste os itens aqui para mostrá-los",
+    // [Auto-translated] "Drag items here to hide them"
+    noHiddenItemsText: "Arraste os itens aqui para ocultá-los",
+    // [Auto-translated] "Hidden toolbox items"
+    hiddenItems: "Itens ocultos da caixa de ferramentas",
+    // [Auto-translated] "Enable grouping"
+    enableGrouping: "Habilitar agrupamento",
+    // [Auto-translated] "Show category titles"
+    showCategoryTitles: "Mostrar títulos de categorias",
+    // [Auto-translated] "Name"
+    categoryName: "Nome",
+    // [Auto-translated] "Title"
+    categoryTitle: "Título",
+    // [Auto-translated] "Tooltip"
+    tooltip: "Dica de ferramenta",
+    // [Auto-translated] "Icon name"
+    iconName: "Nome do ícone",
+    // [Auto-translated] "JSON object to apply when users select this toolbox item"
+    jsonObject: "JSON a ser aplicado quando os usuários selecionam este item da caixa de ferramentas",
+    // [Auto-translated] "Subitems"
+    subitems: "Subitens",
+    // [Auto-translated] "Enable subitems for this question"
+    enableSubitems: "Ative subitens para esta pergunta",
+    // [Auto-translated] "Move as a subitem to..."
+    moveAsSubitem: "Mover como um subitem para...",
+    // [Auto-translated] "Add to Toolbox"
+    addToToolbox: "Adicionar à caixa de ferramentas",
+    // [Auto-translated] "Delete Custom Item"
+    deleteCustomItem: "Excluir item personalizado",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nova categoria",
+    // [Auto-translated] "New Item"
+    addCustomItem: "Novo item",
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Adicionar um novo item",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Adicionar um novo subitem",
+    // [Auto-translated] "There are no items"
+    noRowsText: "Não há itens",
+    // [Auto-translated] "New item in"
+    newItem: "Novo item em"
+  },
+  propertyGrid: {
+    // [Auto-translated] "Customize the Property Grid"
+    title: "Personalizar a grade de propriedades",
+    // [Auto-translated] "Property Grid"
+    navigationTitle: "Grade de propriedades",
+    // [Auto-translated] "Hide, rename, reorder, or change property grouping in the Property Grid."
+    description: "Esconda, renomeia, reordene ou altere o agrupamento de propriedades na Grade de Propriedades.",
+    // [Auto-translated] "Select a survey element to customize"
+    selectElement: "Selecione um elemento de pesquisa para personalizar",
+    // [Auto-translated] "Property Grid"
+    propertyGrid: "Grade de propriedades",
+    // [Auto-translated] "No categories"
+    noCategoriesText: "Sem categorias",
+    // [Auto-translated] "Drag properties here to show them"
+    noItemsText: "Arraste as propriedades aqui para mostrá-las",
+    // [Auto-translated] "Drag properties here to hide them"
+    noHiddenItemsText: "Arraste as propriedades aqui para ocultá-las",
+    // [Auto-translated] "Hidden properties"
+    hiddenItems: "Propriedades ocultas",
+    // [Auto-translated] "Name"
+    categoryName: "Nome",
+    // [Auto-translated] "Title"
+    categoryTitle: "Título",
+    // [Auto-translated] "Icon name"
+    iconName: "Nome do ícone",
+    // [Auto-translated] "Name"
+    name: "Nome",
+    // [Auto-translated] "Title"
+    titleField: "Título",
+    // [Auto-translated] "Helper text"
+    descriptionField: "Texto auxiliar",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nova Categoria"
+  },
+  options: {
+    // [Auto-translated] "Options"
+    title: "Opções",
+    // [Auto-translated] "Options"
+    navigationTitle: "Opções",
+    // [Auto-translated] "Detailed configuration settings for Survey Creator."
+    description: "Configurações detalhadas para o Survey Creator."
+  },
+  items: {
+    // [Auto-translated] "Add a new item"
+    addNewItem: "Adicionar um novo item",
+    // [Auto-translated] "Add a new subitem"
+    addNewSubitem: "Adicionar um novo subitem",
+    // [Auto-translated] "New item in"
+    newItem: "Novo item em",
+    // [Auto-translated] "New Category"
+    addCustomCategory: "Nova categoria",
+    // [Auto-translated] "New category in"
+    newCategory: "Nova categoria em",
+    // [Auto-translated] "Move to category..."
+    moveToCategory: "Mover para a categoria...",
+    // [Auto-translated] "Move to new category"
+    moveToNewCategory: "Mudança para nova categoria",
+    // [Auto-translated] "Categories"
+    categoriesLabel: "Categorias",
+    // [Auto-translated] "Move To..."
+    moveTo: "Mover para...",
+    // [Auto-translated] "Remove from {0}"
+    removeFrom: "Remover do {0}",
+    // [Auto-translated] "More"
+    more: "Mais",
+    // [Auto-translated] "Restore"
+    restoreToDefault: "Restaurar",
+    // [Auto-translated] "Edit"
+    edit: "Editar",
+    // [Auto-translated] "Expand"
+    expand: "Expandir",
+    // [Auto-translated] "Collapse"
+    collapse: "Colapso",
+    // [Auto-translated] "Remove"
+    remove: "Retirar",
+    // [Auto-translated] "Add"
+    add: "Adicionar",
+    // [Auto-translated] "Delete"
+    delete: "Excluir"
+  },
+  editor: {
+    // [Auto-translated] "Creator Presets"
+    title: "Predefinições do criador",
+    // [Auto-translated] "Preset JSON:"
+    presetJson: "JSON predefinido:",
+    // [Auto-translated] "Copy"
+    copy: "Copiar",
+    // [Auto-translated] "Download"
+    download: "Baixar",
+    // [Auto-translated] "Load"
+    load: "Carga",
+    // [Auto-translated] "Save & Exit"
+    saveExit: "Salvar e sair",
+    // [Auto-translated] "Back"
+    back: "Voltar",
+    // [Auto-translated] "Reset"
+    resetToDefault: "Repor",
+    // [Auto-translated] "All settings restored to default"
+    resetToDefaults: "Todas as configurações restauradas para o padrão",
+    // [Auto-translated] "resored to default"
+    resoredToDefault: "resored para padrão",
+    // [Auto-translated] "Item restored to default"
+    itemRestoredToDefault: "Item restaurado para o padrão",
+    // [Auto-translated] "Category restored to default"
+    categoryRestoredToDefault: "Categoria restaurada para o padrão",
+    // [Auto-translated] "Edit"
+    edit: "Editar",
+    // [Auto-translated] "Save & Exit"
+    completeText: "Salvar e sair",
+    // [Auto-translated] "Back"
+    pagePrevText: "Voltar",
+    // [Auto-translated] "Please enter a value."
+    required: "Por favor, insira um valor."
+  },
+  plugin: {
+    // [Auto-translated] "UI Configuration Manager"
+    buttonTitle: "Gerenciador de Configuração de UI",
+    // [Auto-translated] "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset."
+    buttonDescription: "Configure a Toolbox, as abas, a grade de propriedades e outros elementos da interface, e salve a configuração como um preset reutilizável.",
+    // [Auto-translated] "Presets"
+    presetsTab: "Presets",
+    // [Auto-translated] "Creator Presets"
+    creatorPresets: "Predefinições do criador",
+    // [Auto-translated] "Save & Exit"
+    save: "Salvar e sair",
+    // [Auto-translated] "File"
+    file: "Arquivo",
+    // [Auto-translated] "Import"
+    import: "Importação",
+    // [Auto-translated] "Export"
+    export: "Exportação",
+    // [Auto-translated] "Edit"
+    edit: "Editar",
+    // [Auto-translated] "Reset Languages"
+    resetLanguages: "Linguagens de Reinício",
+    // [Auto-translated] "Reset all changes"
+    resetAll: "Redefinir todas as alterações",
+    // [Auto-translated] "Do you really want to reset the settings?"
+    resetConfirmation: "Você realmente quer resetar as configurações?",
+    // [Auto-translated] "Yes, reset the settings"
+    resetConfirmationOk: "Sim, resetem as configurações",
+    // [Auto-translated] "Reset {0}"
+    resetToDefaults: "Resetar {0}",
+    // [Auto-translated] "Default Settings"
+    defaultSettings: "Configurações padrão",
+    // [Auto-translated] "Basic"
+    basic: "Básico",
+    // [Auto-translated] "Advanced"
+    advanced: "Avançado",
+    // [Auto-translated] "Expert"
+    expert: "Especialista"
+  }
+};
+const locale = getLocaleStrings("pt");
+locale.presets = ptStrings;

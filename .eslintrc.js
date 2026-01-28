@@ -120,7 +120,10 @@ module.exports = {
       }
     },
     {
-      "files": ["packages/survey-creator-core/src/localization/*.ts"],
+      "files": [
+        "packages/survey-creator-core/src/localization/*.ts",
+        "packages/survey-creator-core/src/ui-preset-editor/localization/*.ts"
+      ],
       "rules": {
         "surveyjs/eslint-plugin-i18n/only-english-or-code": "off"
       }

@@ -1202,12 +1202,12 @@ export class QuestionToolbox
     }
     return null;
   }
-  protected onItemsChanged(changeActions: boolean = true, categoriesTitles?: { [key: string]: string }) {
-    var categories = new Array<QuestionToolboxCategory>();
-    var categoriesHash = {};
-    var prevActiveCategory = this.activeCategory;
-    for (let i = 0; i < this.actions.length; i++) {
-      const item = this.actions[i];
+
+  private createCategoriesFromItems(items: Array<QuestionToolboxItem>, categoriesTitles?: { [key: string]: string }) {
+    const categories = new Array<QuestionToolboxCategory>();
+    const categoriesHash = {};
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
       item.innerItem.action = () => {
         this.creator.clickToolboxItem((<any>item).json);
       };
@@ -1220,16 +1220,24 @@ export class QuestionToolbox
         if (categoryTitle) {
           category.title = categoryTitle;
         }
-        category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
       }
       categoriesHash[categoryName].items.push(item);
     }
+    return categories;
+  }
+  protected onItemsChanged(changeActions: boolean = true, categoriesTitles?: { [key: string]: string }) {
+    const categories = this.createCategoriesFromItems(this.actions, categoriesTitles);
     this.categories = categories;
+    let prevActiveCategory;
+    this.categories.forEach((category) => {
+      category.collapsed = category.name !== this.activeCategory && !this.keepAllCategoriesExpanded;
+      if (category.name === this.activeCategory) prevActiveCategory = category.name;
+    });
     if (!this.keepAllCategoriesExpanded) {
       if (!this.allowExpandMultipleCategories) {
-        if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
+        if (prevActiveCategory) {
           this.activeCategory = prevActiveCategory;
         } else {
           this.activeCategory = categories.length > 0 ? categories[0].name : "";
@@ -1308,6 +1316,12 @@ export class QuestionToolbox
     }
     return res;
   }
+  public getDefaultCategories(): Array<QuestionToolboxCategory> {
+    const items = this.getDefaultItems(this.supportedQuestions, true, true, true);
+    const categories = this.createCategoriesFromItems(items);
+    return categories;
+  }
+
   private actionsHash: { [index: string]: QuestionToolboxItem };
   protected patchAction(action: QuestionToolboxItem) {
     super.patchAction(action);

@@ -250,6 +250,8 @@ export var germanTranslation = {
     toolboxFilteredTextPlaceholder: "Geben Sie ein, um zu suchen...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Keine Ergebnisse gefunden",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Keine Eigenschaften zu zeigen",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var germanTranslation = {
     storeDataAsText: "Dateininhalt des JSON-Resultats als Text speichern",
     // "Maximum file size (in bytes)"
     maxSize: "Maximale Dateigröße in Bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximale Anzahl von Dateien",
     // "Row count"
     rowCount: "Zeilenanzahl",
     // "Columns layout"
@@ -1317,10 +1321,10 @@ export var germanTranslation = {
     // "Regular expression"
     regex: "Regulärer Ausdruck",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Validierungsmeldung",
-      // [Auto-translated] "Validation expression"
-      expression: "Validierungs-Ausdruck",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Benachrichtigungsmeldung für ungültige Eingabe",
+      // [Auto-translated] "Valid when"
+      expression: "Gültig, wenn",
       // [Auto-translated] "Notification type"
       notificationType: "Art der Meldung",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1404,10 @@ export var germanTranslation = {
     allowMultiple: "Mehrere Dateien zulassen",
     // "Preview uploaded images"
     allowImagesPreview: "Vorschaubilder",
-    // "Accepted file types"
-    acceptedTypes: "Akzeptierte Dateitypen",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Akzeptierte Dateikategorien",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Zusätzliche Dateierweiterungen",
     // "Wait for upload to complete"
     waitForUpload: "Warten bis der Upload abgeschlossen ist",
     // "Confirm file deletion"
@@ -2082,6 +2088,20 @@ export var germanTranslation = {
       // [Auto-translated] "Informational"
       info: "Mitteilsam"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Bilder",
+      // [Auto-translated] "Videos"
+      video: "Videos",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Urkunden",
+      // [Auto-translated] "Archives"
+      archive: "Archiv",
+      // [Auto-translated] "Custom"
+      custom: "Gewohnheit"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Vollständiger Name",
@@ -2495,6 +2515,8 @@ export var germanTranslation = {
     notcontains: "enthält nicht",
     // "Any of"
     anyof: "eins aus",
+    // [Auto-translated] "None of"
+    noneof: "Keines von",
     // "All of"
     allof: "alle aus",
     // "Greater than"
@@ -3088,8 +3110,10 @@ export var germanTranslation = {
     storeOthersAsComment: "Wählen Sie diese Option aus, um den Wert der Option \"Sonstiges\" als separate Eigenschaft in den Umfrageergebnissen zu speichern.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Verwenden Sie {0} als Platzhalter für den tatsächlichen Wert.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Weitere Informationen finden Sie in der Beschreibung des Attributs [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Wählen Sie \"Benutzerdefiniert\", um Ihre eigenen Dateierweiterungen über die vordefinierten Kategorien zu legen.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Geben Sie Dateierweiterungen ein, getrennt durch Kommas (z. B. .csv, .xml).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Gilt nur für die Zellentypen \"Radiogruppe\" und \"Kontrollkästchen\".",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."

@@ -2,6 +2,7 @@ import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
+import { clear } from "console";
 
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester();
@@ -154,6 +155,38 @@ test("JsonEditor & fixError action with object to array", () => {
         {
           type: "text",
           name: "q1",
+        }
+      ]
+    }]
+  });
+});
+test("JsonEditor & fixError action incorrect properties value, Issue#7335", () => {
+  const creator = new CreatorTester({
+    validateJsonPropertyValues: true
+  });
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    pages: [{
+      elements: [{
+        type: "text",
+        name: "q1",
+        clearIfInvisible: "sss"
+      }]
+    }]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeTruthy();
+  expect(editor.errorList.actions).toHaveLength(1);
+  expect(editor.errorList.actions[0].data.showFixButton).toBeTruthy();
+  editor.errorList.actions[0].data.fixError();
+  expect(editor.hasErrors).toBeFalsy();
+  expect(JSON.parse(editor.text)).toEqual({
+    pages: [{
+      elements: [
+        {
+          type: "text",
+          name: "q1",
+          clearIfInvisible: "default"
         }
       ]
     }]

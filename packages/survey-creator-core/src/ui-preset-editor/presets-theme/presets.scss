@@ -1,0 +1,189 @@
+@use "../../variables" as *;
+@use "./fonts" as *;
+@use "blocks/sps-action-bar.scss";
+@use "blocks/sps-question.scss";
+@use "blocks/sps-input.scss";
+@use "blocks/sps-dropdown.scss";
+@use "blocks/sps-tagbox.scss";
+@use "blocks/sps-panel.scss";
+@use "blocks/sps-checkbox.scss";
+@use "blocks/sps-matrixdynamic.scss";
+@use "blocks/sps-table.scss";
+@use "blocks/sps-launch.scss";
+@use "blocks/sps-list.scss";
+@use "blocks/sps-popup.scss";
+@use "blocks/sps-navigation.scss";
+
+.svc-tab-designer.svc-tab-designer--presets {
+  background: white;
+}
+
+.sps-root-modern {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  height: 0;
+  flex-grow: 1;
+  /* disable library transition animations */
+  --sjs-transition-duration: 0ms;
+  @include disableLibraryAnimations;
+  display: flex;
+  flex-direction: column;
+  @include sjs2--typography--default;
+
+  :has(.sps-page) {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    &.sv-components-column--expandable {
+      min-width: 100%;
+      flex-grow: 1;
+    }
+  }
+}
+
+.sps-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sps-page {
+  display: flex;
+  padding: var(--sjs2-spacing-x400, 32px);
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 0 0;
+  align-self: center;
+  gap: var(--sjs2-spacing-x150, 12px);
+  max-width: min(100%, 936px);
+  width: 936px;
+  box-sizing: border-box;
+}
+
+.sps-page__title {
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+
+  @include sjs2--typography--medium-strong;
+}
+
+.sps-page__description {
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+
+  @include sjs2--typography--default;
+
+  padding-bottom: calc(var(--sjs2-spacing-x400, 32px) - var(--sjs2-spacing-x150, 12px));
+}
+
+.sps-action-title-bar {
+  gap: var(--sjs2-spacing-x150, 12px);
+  .sv-action--hidden {
+    display: none;
+  }
+
+  &.sps-action-title-bar {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-inline-end: 0;
+    min-width: fit-content;
+  }
+}
+
+.sps-body {
+  width: 100%;
+  background: var(--sjs2-color-utility-surface-muted, rgba(28, 27, 32, 0.05));
+
+  .sv-components-container-contentBottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.sps-row {
+  sv-ng-question,
+  sv-ng-panel,
+  sv-ng-element {
+    position: absolute;
+  }
+}
+
+.sps-row--multiple {
+  display: flex;
+  align-items: stretch;
+  margin: calc(-1 * var(--sjs2-spacing-x150, 12px)) calc(-1 * var(--sjs2-spacing-x250, 20px))
+    calc(-1 * var(--sjs2-spacing-x250, 20px)) calc(-1 * var(--sjs2-spacing-x250, 20px));
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: content-box;
+    gap: var(--sjs2-spacing-x075, 6px);
+    align-self: stretch;
+    border-right: var(--sjs2-border-width-static-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.sps-question[data-name="json"] {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .sps-question__content,
+  sv-ng-question-comment {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .sps-comment {
+    flex-grow: 1;
+  }
+}
+
+.svc-tabbed-menu-item-container--presets {
+  display: none;
+}
+.sps-page--languages {
+  .sps-panel__content {
+    gap: 0;
+  }
+}
+.sps-question--search {
+  padding: 0 var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px);
+  margin: 0 calc(-1 * var(--sjs2-spacing-x250, 20px)) 0;
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--sjs2-border-width-x100, 1px);
+    background: var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  }
+}
+
+.sps-page--options {
+  .sps-panel--with-frame > .sps-panel__content {
+    width: 50%;
+    box-sizing: content-box;
+  }
+
+  .sps-action-button--icon {
+    padding: var(--sjs2-layout-control-action-xx-small-box-vertical, 4px)
+      var(--sjs2-layout-control-action-xx-small-box-horizontal, 4px);
+  }
+  .sps-action-button__icon {
+    width: 16px;
+    height: 16px;
+
+    use {
+      fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
+    }
+  }
+}

@@ -908,6 +908,13 @@ test("Update subitems on locale change, Bug#6014, #2", (): any => {
   creator.toolbox.addItem({ name: "test4", json: {} });
   expect(creator.toolbox.getItemByName("test4").title).toBe("test4");
 });
+test("Get default toolbox categories", (): any => {
+  ComponentCollection.Instance.add({ name: "test", title: "Test", questionJSON: { "type": "text", "title": "1" } });
+  const creator = new CreatorTester({ questionTypes: ["text"] });
+  const categories = creator.toolbox.getDefaultCategories();
+  expect(categories.map(c => ({ name: c.name, items: c.items.map(i => i.name) }))).toEqual([{ name: "text", items: ["text"] }, { name: "general", items: ["test"] }]);
+  ComponentCollection.Instance.remove("test");
+});
 test("toolbox category localization Bug#7284", (): any => {
   const creator = new CreatorTester();
   creator.toolbox.showCategoryTitles = true;

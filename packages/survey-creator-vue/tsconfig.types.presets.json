@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/types-presets",
+        "declaration": true,
+        "skipLibCheck": true,
+        "types": [
+            "node",
+            "vite/client"
+        ],
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "vue": [
+                "./node_modules/vue"
+            ],
+            "survey-core": [
+                "./node_modules/survey-core"
+            ]
+        }
+    },
+    "include": [
+        "src/ui-preset-editor/index.ts"
+    ]
+}

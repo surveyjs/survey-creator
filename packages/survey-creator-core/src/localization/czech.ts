@@ -238,6 +238,18 @@ export var czStrings = {
     options: "Možnosti",
     // "Generate Valid JSON"
     generateValidJSON: "Generovat platný JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Neznámá funkce: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Neznámé funkce: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Neznámá proměnná: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Neznámé proměnné: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Chyba syntaxe.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Sémantická chyba.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generovat čitelný JSON",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var czStrings = {
     toolboxFilteredTextPlaceholder: "Chcete-li hledat, zadejte jej...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nebyly nalezeny žádné výsledky",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Žádné vlastnosti k zobrazení",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1140,8 @@ export var czStrings = {
     storeDataAsText: "Uložit obsah souboru ve výsledku JSON jako text",
     // "Maximum file size (in bytes)"
     maxSize: "Maximální velikost souboru v bajtech",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximální počet souborů",
     // "Row count"
     rowCount: "Počet řádků",
     // "Columns layout"
@@ -1317,10 +1333,10 @@ export var czStrings = {
     // "Regular expression"
     regex: "Pravidelný výraz",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Ověřovací zpráva",
-      // [Auto-translated] "Validation expression"
-      expression: "Ověřovací výraz",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Oznámení o neplatném vstupu",
+      // [Auto-translated] "Valid when"
+      expression: "Platné, když",
       // [Auto-translated] "Notification type"
       notificationType: "Typ oznámení",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1416,10 @@ export var czStrings = {
     allowMultiple: "Povolit více souborů",
     // "Preview uploaded images"
     allowImagesPreview: "Náhled obrázků",
-    // "Accepted file types"
-    acceptedTypes: "Povolené typy souborů",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Akceptované kategorie souborů",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Další přípony souboru",
     // "Wait for upload to complete"
     waitForUpload: "Počkejte na dokončení nahrávání",
     // "Confirm file deletion"
@@ -1473,6 +1491,66 @@ export var czStrings = {
       labelFormat: "Formát štítku",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formát popisku nástroje"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL obrázku",
+      // [Auto-translated] "Areas"
+      areas: "Oblasti",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Povolit více výběrů",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Hodnota nemovitosti",
+      // [Auto-translated] "Shape"
+      shape: "Tvar",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Nečinná vyplňovací barva",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Barva volnoběžného tahu",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Šířka zdvihu volnoběhu",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Barva výplň na jechození",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Barva tahu na najeto",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Šířka pohybu myší",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Zvolená barva výplně",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Vybraná barva tahů",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Zvolená šířka tahu",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maximální počet vybraných oblastí",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimální vybrané oblasti"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Hodnota",
+      // [Auto-translated] "Shape"
+      shape: "Tvar",
+      // [Auto-translated] "Coordinates"
+      coords: "Souřadnice",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Nečinná vyplňovací barva",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Barva volnoběžného tahu",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Šířka zdvihu volnoběhu",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Barva výplň na jechození",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Barva tahu na najeto",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Šířka pohybu myší",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Zvolená barva výplně",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Vybraná barva tahů",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Zvolená šířka tahu"
     },
     file: {
       // [Auto-translated] "Image height"
@@ -2082,6 +2160,20 @@ export var czStrings = {
       // [Auto-translated] "Informational"
       info: "Informační"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Obrázky",
+      // [Auto-translated] "Videos"
+      video: "Videa",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Dokumenty",
+      // [Auto-translated] "Archives"
+      archive: "Archivy",
+      // [Auto-translated] "Custom"
+      custom: "Zvyk"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Celé jméno",
@@ -2495,6 +2587,8 @@ export var czStrings = {
     notcontains: "neobsahuje",
     // "Any of"
     anyof: "žádný z",
+    // [Auto-translated] "None of"
+    noneof: "Nic z",
     // "All of"
     allof: "všechny",
     // "Greater than"
@@ -3088,8 +3182,10 @@ export var czStrings = {
     storeOthersAsComment: "Tuto možnost vyberte, chcete-li uložit hodnotu možnosti \"Jiné\" jako samostatnou vlastnost ve výsledcích průzkumu.",
     // "Use {0} as a placeholder for the actual value."
     format: "Použít {0} jako zástupný text pro skutečnou hodnotu.",
-    // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Pro více informací viz [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Vyberte \"Vlastní\" a přidejte si vlastní přípony nad předdefinované kategorie.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Zadejte přípony souborů oddělené čárkami (např. .csv, .xml).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Vztahuje se pouze na typy přepínač a zaškrtávací políčka.",
     // "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3506,6 +3602,16 @@ export var czStrings = {
       "default-dark": "Temný",
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Základní",
+      // [Auto-translated] "Advanced"
+      advanced: "Pokročilé",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
     }
   }
 };

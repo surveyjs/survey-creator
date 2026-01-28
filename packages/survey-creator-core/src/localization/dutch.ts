@@ -250,6 +250,8 @@ export var nlStrings = {
     toolboxFilteredTextPlaceholder: "Typ om te zoeken...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Geen resultaten gevonden",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Geen eigenschappen om te tonen",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
     // [Auto-translated] "No results found"
@@ -1126,6 +1128,8 @@ export var nlStrings = {
     storeDataAsText: "Bewaar bestandsinhoud in JSON-resultaat als tekst",
     // "Maximum file size (in bytes)"
     maxSize: "Maximale bestandsgrootte in bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximaal aantal bestanden",
     // "Row count"
     rowCount: "Aantal rijen",
     // "Columns layout"
@@ -1317,10 +1321,10 @@ export var nlStrings = {
     // "Regular expression"
     regex: "Reguliere expressie",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Validatie bericht",
-      // [Auto-translated] "Validation expression"
-      expression: "Validatie-expressie",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Melding voor ongeldige invoer",
+      // [Auto-translated] "Valid when"
+      expression: "Geldig wanneer",
       // [Auto-translated] "Notification type"
       notificationType: "Type melding",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1404,10 @@ export var nlStrings = {
     allowMultiple: "Uploaden van meerdere bestanden inschakelen",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Bekijk een voorbeeld van geüploade afbeeldingen",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Geaccepteerde bestandstypen",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Geaccepteerde bestandscategorieën",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Extra bestandsextensies",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Wacht tot het uploaden is voltooid",
     // [Auto-translated] "Confirm file deletion"
@@ -2082,6 +2088,20 @@ export var nlStrings = {
       // [Auto-translated] "Informational"
       info: "Informatieve"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Beelden",
+      // [Auto-translated] "Videos"
+      video: "Video 's",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Documenten",
+      // [Auto-translated] "Archives"
+      archive: "Archief",
+      // [Auto-translated] "Custom"
+      custom: "Gewoonte"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Voor- en achternaam",
@@ -2495,6 +2515,8 @@ export var nlStrings = {
     notcontains: "bevat niet",
     // "Any of"
     anyof: "een van",
+    // [Auto-translated] "None of"
+    noneof: "Geen van",
     // "All of"
     allof: "alles van",
     // "Greater than"
@@ -3088,8 +3110,10 @@ export var nlStrings = {
     storeOthersAsComment: "Selecteer deze optie om de waarde van de optie 'Overig' op te slaan als een afzonderlijke eigenschap in enquêteresultaten.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Gebruik {0} als tijdelijke aanduiding voor de werkelijke waarde.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Raadpleeg de beschrijving van het kenmerk [accepteren](https://www.w3schools.com/tags/att_input_accept.asp) voor meer informatie.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Selecteer \"Aangepast\" om je eigen bestandsextensies bovenop de vooraf gedefinieerde categorieën toe te voegen.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Voer bestandsextensies in, gescheiden door komma's (bijvoorbeeld .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Is alleen van toepassing op kolommen waarvoor \"Type celinvoer\" is ingesteld op Keuzerondje, Groep of selectievakjes.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."

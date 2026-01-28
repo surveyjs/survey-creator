@@ -1,0 +1,11 @@
+<ng-template #template>
+  <div class="svc-flex-column">
+    <ng-template *ngIf="creator?.showToolbox" [component]="{ name: 'svc-toolbox', data: {model: creator} }">
+    </ng-template>
+  </div>
+  <div class="svc-tab-designer svc-tab-designer--presets">
+    <sv-action-bar [model]="navigationBar" [handleClick]="false"></sv-action-bar>
+    <ng-template [component]="{ name: 'survey', data: {model: survey} }">
+    </ng-template>
+  </div>
+</ng-template>

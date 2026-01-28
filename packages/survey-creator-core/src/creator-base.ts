@@ -319,16 +319,28 @@ export class SurveyCreatorModel extends Base
   set showSurveyTitle(val: boolean) {
     this.allowEditSurveyTitle = val;
   }
+  @property({ defaultValue: {} }) pluginLicenseTexts: {[key: string]: string};
+  private getUnlicensedPluginsNames(): string[] {
+    return Object.keys(this.pluginLicenseTexts || {});
+  }
   public get haveCommercialLicense(): boolean {
-    return !!hasLicense && hasLicense(1);
+    return !!hasLicense && hasLicense(1) && this.getUnlicensedPluginsNames().length === 0;
   }
   public set haveCommercialLicense(val: boolean) {
     // eslint-disable-next-line no-console
     console.warn("As of v1.9.101, the haveCommercialLicense property is not supported. To activate your license, use the setLicenseKey(key) method as shown on the following page: https://surveyjs.io/remove-alert-banner");
   }
-  public get licenseText(): string {
+  protected get licenseDateString(): string {
     const d: any = !!glc ? glc(1) : false;
-    if (!!d && d.toLocaleDateString) return this.getLocString("survey.license2").replace("{date}", d.toLocaleDateString());
+    if (!!d && d.toLocaleDateString) return d.toLocaleDateString();
+    return "";
+  }
+
+  public get licenseText(): string {
+    const unlicensedPlugins = this.getUnlicensedPluginsNames();
+    if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
+    const licenseDateString = this.licenseDateString;
+    if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     return this.getLocString("survey.license");
   }
   public slk(val: string): void {
@@ -356,6 +368,11 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
+  public validateJsonPropertyValues: boolean = true;
+  public expressionsValidateFunctions: boolean = true;
+  public expressionsValidateVariables: boolean = false;
+  public expressionsValidateSyntax: boolean = true;
+  public expressionsValidateSemantics: boolean = true;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**
    * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
@@ -516,6 +533,7 @@ export class SurveyCreatorModel extends Base
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
+  private customTabNames: string[] = [];
   /**
    * @deprecated Use the [`addTab(tabOptions)`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#addTab) method instead.
    */
@@ -568,10 +586,17 @@ export class SurveyCreatorModel extends Base
       throw new Error("Plugin or name is not set");
     }
     this.tabbedMenu.addTab(name, plugin, title, iconName, componentName, index);
+    this.customTabNames.push(name);
     this.addPlugin(name, plugin);
   }
   public addPlugin(name: string, plugin: ICreatorPlugin): void {
     this.plugins[name] = plugin;
+    const licenseText = plugin.getLicenseText?.(this.haveCommercialLicense, this.licenseDateString);
+    if (licenseText) {
+      const licenseTexts = { ...this.pluginLicenseTexts };
+      licenseTexts[name] = licenseText;
+      this.pluginLicenseTexts = licenseTexts;
+    }
   }
   private removePlugin(name: string): void {
     const plugin = this.getPlugin(name);
@@ -581,6 +606,7 @@ export class SurveyCreatorModel extends Base
       this.tabs.splice(index, 1);
     }
     delete this.plugins[name];
+
     if (plugin.dispose) {
       plugin.dispose();
     }
@@ -1521,13 +1547,15 @@ export class SurveyCreatorModel extends Base
     this.onLocaleChanded.fire(this, { locale: value });
   }
   public onLocaleChanded: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
-  public updateLocalizedStrings(): void {
+  public updateLocalizedStrings(refreshPlugin: boolean = true): void {
     this.toolbox.updateTitles();
-    this.refreshPlugin();
-    const selEl = this.selectedElement;
-    if (!!selEl) {
-      this.selectElement(null);
-      this.selectElement(selEl);
+    if (refreshPlugin) {
+      this.refreshPlugin();
+      const selEl = this.selectedElement;
+      if (!!selEl) {
+        this.selectElement(null);
+        this.selectElement(selEl);
+      }
     }
     this.locStrsChanged();
   }
@@ -1540,6 +1568,10 @@ export class SurveyCreatorModel extends Base
   private refreshPlugin() {
     const plugin = this.currentPlugin;
     if (!!plugin) {
+      if (plugin.onLocaleChanged) {
+        plugin.onLocaleChanged();
+        return;
+      }
       if (plugin.deactivate) {
         plugin.deactivate();
       }
@@ -1776,6 +1808,11 @@ export class SurveyCreatorModel extends Base
     }
     this.setShowSidebar(val, true);
   }
+  public setSidebarEnabled(value: boolean) {
+    this.setShowSidebar(value, true);
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    designerPlugin?.setSidebarEnabled(value);
+  }
   public setShowSidebar(value: boolean, isManualMode = false) {
     if (isManualMode) {
       if (value) {
@@ -1931,7 +1968,7 @@ export class SurveyCreatorModel extends Base
     this.initPlugins();
     this.initFooterToolbar();
   }
-  private getTabsInfo(): any {
+  public getTabsInfo(): any {
     return {
       designer: { iconName: TabDesignerPlugin.iconName, init: () => new TabDesignerPlugin(this) },
       preview: { iconName: TabTestPlugin.iconName, init: () => new TabTestPlugin(this) },
@@ -1942,21 +1979,22 @@ export class SurveyCreatorModel extends Base
     };
   }
   public getAvailableTabs(): Array<any> {
-    const res = [];
+    const res = this.tabs.map(t => ({ name: t.id, iconName: t.iconName }));
     const tabInfo = this.getTabsInfo();
     for (let key in tabInfo) {
-      res.push({ name: key, iconName: tabInfo[key].iconName });
+      if (res.filter(t => t.name == key).length == 0) {
+        res.push({ name: key, iconName: tabInfo[key].iconName });
+      }
     }
     return res;
   }
-  public getTabNames(): Array<string> {
-    const tabNames = this.getAvailableTabs().map(t => t.name);
+  public getTabs(): Array<any> {
+    const tabs = this.getAvailableTabs();
     const res = [];
     this.tabs.forEach(tab => {
       const name = this.fixPluginName(tab.id);
-      if (tabNames.indexOf(name) > -1) {
-        res.push(name);
-      }
+      const newtab = tabs.filter(t => t.name === name)[0];
+      if (newtab) res.push(newtab);
     });
     return res;
   }
@@ -1964,9 +2002,9 @@ export class SurveyCreatorModel extends Base
   public setTabs(tabNames: Array<string>): void {
     if (!Array.isArray(tabNames)) return;
     const tabInfo = this.getTabsInfo();
-    for (let i = tabNames.length - 1; i >= 0; i--) {
-      if (!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
-    }
+    // for (let i = tabNames.length - 1; i >= 0; i--) {
+    //   if (!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
+    // }
     if (tabNames.length === 0) return;
     for (let i = this.tabs.length - 1; i >= 0; i--) {
       const tabId = this.tabs[i].id;
@@ -1988,12 +2026,11 @@ export class SurveyCreatorModel extends Base
         this.tabs.splice(i, 0, item);
       }
     }
-    if (this.tabs.length > 0) {
+    if (this.tabs.length > 0 && this.tabs.filter(t => t.id == this.activeTab).length == 0) {
       this.switchTab(this.tabs[0].id);
     }
   }
-  private initPlugins(): void {
-    this.addPlugin("undoredo", new UndoRedoPlugin(this));
+  public initialTabs() {
     const tabs = [];
     if (this.showDesignerTab) {
       tabs.push("designer");
@@ -2013,6 +2050,11 @@ export class SurveyCreatorModel extends Base
     if (this.showTranslationTab) {
       tabs.push("translation");
     }
+    return [...tabs, ...this.customTabNames];
+  }
+  private initPlugins(): void {
+    this.addPlugin("undoredo", new UndoRedoPlugin(this));
+    const tabs = this.initialTabs();
     this.setTabs(tabs);
   }
   private initFooterToolbar(): void {

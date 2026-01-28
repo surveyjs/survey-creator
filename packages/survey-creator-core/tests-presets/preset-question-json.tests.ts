@@ -1,4 +1,4 @@
-import { QuestionPresetJsonModel } from "../src/presets/preset-question-json";
+import { QuestionPresetJsonModel } from "../src/ui-preset-editor/preset-question-json";
 import { SurveyModel, CustomError } from "survey-core";
 
 class TestQuestionPresetJsonModel extends QuestionPresetJsonModel {
@@ -54,7 +54,22 @@ describe("QuestionPresetJsonModel", () => {
     question.textAreaModel.onTextAreaChange({ target: { value: "{invalid json" } } as any);
     question.onCheckForErrors(errors, false, true);
     expect(errors.length).toBe(1);
-    expect(errors[0].text).toBe("JSON error");
+    expect(errors[0].text).toBe("Expected ':' instead of 'j'");
+  });
+
+  test("Should not update value with incompatible JSON", () => {
+    const initialValue = { test: "value" };
+    question.value = initialValue;
+    question.textAreaModel.onTextAreaChange({ target: { value: '{"typo": "text"}' } } as any);
+    expect(question.value).toEqual(initialValue);
+  });
+
+  test("Should add error when JSON is incompatible", () => {
+    const errors: any[] = [];
+    question.textAreaModel.onTextAreaChange({ target: { value: '{"type": "text", "asdf": "a"}' } } as any);
+    question.onCheckForErrors(errors, false, true);
+    expect(errors.length).toBe(1);
+    expect(errors[0].text).toBe("Unknown property in class 'text': 'asdf'.");
   });
 
   test("Should not add error when JSON is valid", () => {

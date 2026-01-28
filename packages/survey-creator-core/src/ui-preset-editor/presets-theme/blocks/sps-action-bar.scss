@@ -1,0 +1,175 @@
+@use "../../../variables.scss" as *;
+@use "../fonts.scss" as *;
+
+.sps-action-bar {
+  display: flex;
+  box-sizing: content-box;
+  position: relative;
+  align-items: center;
+  margin-left: auto;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sps-action {
+  display: flex;
+}
+
+.sps-action--grow {
+  flex-grow: 1;
+}
+
+.sps-btn {
+  appearance: none;
+  border: none;
+  display: flex;
+  padding: calc(
+      var(--sjs2-layout-control-action-medium-box-vertical, 12px) +
+        var(--sjs2-layout-control-action-medium-label-vertical, 0px)
+    )
+    calc(
+      var(--sjs2-layout-control-action-medium-box-horizontal, 12px) +
+        var(--sjs2-layout-control-action-medium-label-horizontal, 12px)
+    );
+
+  justify-content: center;
+  align-items: center;
+  gap: var(--sjs2-layout-control-action-medium-box-gap, 0);
+  border-radius: var(--sjs2-radius-control-button, 8px);
+  background: var(--sjs2-color-bg-brand-primary, #19b394);
+
+  color: var(--sjs2-color-fg-static-main-primary, #fff);
+  text-align: center;
+
+  @include sjs2--typography--default-strong;
+
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-brand-primary-dim, #15987e);
+  }
+  &:active {
+    background: var(--sjs2-color-bg-brand-primary, #19b394);
+  }
+  &:disabled {
+    opacity: var(--sjs2-opacity-disabled, 0.25);
+    background: var(--sjs2-color-bg-state-common-disabled, #D4D4D4);
+
+    color: var(--sjs2-color-fg-state-common-disabled, rgba(28, 27, 32, 0.40));
+    pointer-events: none;
+  }
+}
+
+.sps-btn--secondary-brand {
+  background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
+  color: var(--sjs2-color-fg-brand-primary, #19b394);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-brand-secondary-dim, rgba(25, 179, 148, 0.15));
+  }
+  &:active{
+     background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
+  }
+}
+
+.sps-btn--secondary-alert {
+  background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.10));
+  color: var(--sjs2-color-fg-alert-primary, #C30935);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-alert-secondary-dim, rgba(229, 10, 62, 0.15));
+  }
+  &:active{
+    background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.10));
+  }
+}
+
+.sps-action-button {
+  @include ctrDefaultBoldFont;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: flex;
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-right-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
+  box-sizing: border-box;
+  border: none;
+  color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
+  border-radius: var(--sjs2-radius-control-action-icon, 8px);
+  background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0));
+  cursor: pointer;
+  transition:
+    background-color $creator-transition-duration,
+    opacity $creator-transition-duration;
+
+  &.sps-action-button--pressed,
+  &:hover,
+  &:focus {
+    opacity: 1;
+    outline: none;
+
+    background: var(--sjs2-color-bg-neutral-tertiary-dim, rgba(28, 27, 32, 0.05));
+
+    use {
+      fill: var(--ctr-actionbar-button-icon-color-hovered, var(--sjs-layer-1-foreground-75, #000000bf));
+    }
+  }
+  &:disabled {
+    use {
+      fill: var(--sjs2-color-fg-state-common-disabled, rgba(28, 27, 32, 0.40));
+    }
+  }
+}
+
+.sps-action-button--icon {
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1));
+}
+.sps-action-button__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+
+  use {
+    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    transition: fill $creator-transition-duration;
+  }
+}
+
+.sps-action-button--danger {
+  color: var(--ctr-library-action-button-text-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
+
+  &:hover,
+  &:focus {
+    background-color: var(
+      --ctr-library-action-button-background-color-negative-hovered,
+      var(--sjs-semantic-red-background-10, #e50a3e1a)
+    );
+
+    use {
+      fill: var(--ctr-library-action-button-icon-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
+    }
+  }
+}
+
+button.sps-action-button--large {
+
+}
+
+.sps-action-button:disabled {
+  opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
+  pointer-events: none;
+  cursor: default;
+}
+
+.sps-action-button--muted {
+  opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
+}
+
+.sps-action-button:active {
+  opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
+}
+
+.sps-action-button--text {
+  padding: calcSize(0.5) calcSize(2);
+}

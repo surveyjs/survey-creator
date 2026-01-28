@@ -103,15 +103,32 @@ var buildPlatformJson = {
       "types": "./themes/*.d.ts",
       "default": "./themes/*.js",
     },
-    "./presets": {
-      "types": "./presets-typings/typings/entries/index.d.ts",
-      "import": "./fesm/survey-creator-core-presets.mjs",
-      "require": "./survey-creator-core-presets.js"
+    "./ui-presets": {
+      "types": "./ui-presets/index.d.ts",
+      "import": "./fesm/ui-presets/index.mjs",
+      "require": "./ui-presets/index.js"
     },
-    "./presets/*": {
-      "types": "./presets-typings/typings/*.d.ts",
-      "import": "./fesm/survey-creator-core-presets/*.mjs",
-      "require": "./survey-creator-core-presets/*.js"
+    "./ui-presets/index": {
+      "types": "./ui-presets/index.d.ts",
+      "import": "./fesm/ui-presets/index.mjs",
+      "require": "./ui-presets/index.js"
+    },
+    "./ui-presets/*": {
+      "types": "./ui-presets/*.d.ts",
+      "default": "./ui-presets/*.js",
+    },
+    "./ui-preset-editor": {
+      "types": "./ui-preset-editor/index.d.ts",
+      "import": "./fesm/ui-preset-editor/index.mjs",
+      "require": "./ui-preset-editor/index.js"
+    },
+    "./ui-preset-editor/i18n": {
+      "import": "./fesm/ui-preset-editor/i18n/index.mjs",
+      "require": "./ui-preset-editor/i18n/index.js"
+    },
+    "./ui-preset-editor/i18n/*": {
+      "import": "./fesm/ui-preset-editor/i18n/*.mjs",
+      "require": "./ui-preset-editor/i18n/*.js"
     },
   },
   devDependencies: {},

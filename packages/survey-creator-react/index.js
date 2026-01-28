@@ -2,48 +2,39 @@ Survey.ComponentCollection.Instance.add({ name: "newrating", title: "SuperRating
 Survey.ComponentCollection.Instance.add({ name: "d2", title: "DDD", questionJSON: { "type": "dropdown", "name": "superrating", "title": "1", "isRequired": true, choices: [1, 2, 3] } });
 
 let json = {
-  completedHtml:
-    "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
-  completedHtmlOnCondition: [
+  "pages": [
     {
-      expression: "{nps_score} > 8",
-      html:
-        "<h3>Thank you for your feedback.</h3> <h5>We glad that you love our product. Your ideas and suggestions will help us to make our product even better!</h5>"
-    },
-    {
-      expression: "{nps_score} < 7",
-      html:
-        "<h3>Thank you for your feedback.</h3> <h5> We are glad that you share with us your ideas.We highly value all suggestions from our customers. We do our best to improve the product and reach your expectation.</h5><br/>"
-    }
-  ],
-  pages: [
-    {
-      name: "page1",
-      title: "page1 -- title",
-      description: "page1 -- description",
-      elements: [
+      "name": "page1",
+      "elements": [
         {
-          type: "rating",
-          name: "nps_score",
-          title:
-            "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
-          isRequired: true,
-          rateMin: 0,
-          rateMax: 10,
-          minRateDescription: "(Most unlikely)",
-          maxRateDescription: "(Most likely)"
-        },
-        {
-          type: "checkbox",
-          name: "promoter_features",
-          visibleIf: "{nps_score} >= 9",
-          title: "What features do you value the most?",
-          isRequired: true,
-          validators: [
+          "type": "panel",
+          "name": "panel1",
+          "questionTitleWidth": "200px",
+          "questionTitleLocation": "left",
+          "elements": [
             {
-              type: "answercount",
-              text: "Please select two features maximum.",
-              maxCount: 2
+              "type": "rating",
+              "name": "question1",
+              "title": "Organization",
+              "rateType": "stars"
+            },
+            {
+              "type": "rating",
+              "name": "question2",
+              "title": "Service",
+              "rateType": "stars"
+            },
+            {
+              "type": "rating",
+              "name": "question3",
+              "title": "Ambiance",
+              "rateType": "stars"
+            },
+            {
+              "type": "rating",
+              "name": "question4",
+              "title": "Concert",
+              "rateType": "stars"
             }
           ],
           showOtherItem: true,
@@ -191,6 +182,7 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => 
 */
 SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
 SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
+//SurveyCreatorCore.registerUIPreset(SurveyCreatorPreset);
 const creator = new SurveyCreator.SurveyCreator(options);
 //creator.applyCreatorTheme(SurveyCreatorTheme.testTheme);
 creator.onModified.add((sender, options) => {
@@ -223,6 +215,7 @@ creator.onElementGetActions.add((_, options) => {
     }
   });
 });
+creator.JSON = json;
 
 function getCompositeInput(question) {
   return question.contentPanel.getQuestionByName("q1");
@@ -292,38 +285,9 @@ creator.saveSurveyFunc = (no, callback) => {
   }, 1000);
 };
 
-// const editor = new SurveyCreatorCorePresets.CreatorPresetEditorModel();
-// window.editor = editor;
-// class PresetsTabComponent extends React.Component {
-//   render() {
-//     return (
-//       <SurveyReact.Survey model={editor.model} />
-//     );
-//   }
-// }
-
-// const presetsPlugin = {
-//   // Do nothing when the tab is activated or deactivated
-//   activate: () => { },
-//   deactivate: () => { return true; }
-// };
-
-// SurveyReact.ReactElementFactory.Instance.registerElement(
-//   "svc-tab-presets",
-//   (props) => {
-//       return React.createElement(PresetsTabComponent, props);
-//   }
-// );
-// creator.addTab({
-//   name: "presets",
-//   plugin: presetsPlugin,
-//   title: "Presets",
-//   componentName: "svc-tab-presets",
-//   index: 100
-// });
-
-
-
+if(window.SurveyCreatorUIPresetEditorCore) {
+  window.editor = new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
+}
 
 ReactDOM.render(
   <React.StrictMode>

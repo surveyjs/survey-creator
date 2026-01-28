@@ -123,6 +123,7 @@ export interface ICreatorOptions {
    * Refer to the following MDN topic for information on differences between JSON and JavaScript objects: [JavaScript and JSON Differences](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#javascript_and_json_differences)
    */
   generateValidJSON?: boolean;
+  validateJsonPropertyValues?: boolean;
   /**
    * Enables the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
    *
@@ -384,7 +385,9 @@ export interface ICreatorOptions {
    */
   addNewQuestionLast?: boolean;
   /**
-   * The default question type on clicking Add Question button.
+   * Specifies the [question type](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to use by default when users click the "Add Question" button on the design surface.
+   *
+   * Default value: `"text"`
    */
   defaultAddQuestionType?: string;
   /**
@@ -479,7 +482,7 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    *
-   * Default value: `true`
+   * Default value: `false`
    */
   collapseOnDrag?: boolean;
   /**
@@ -503,4 +506,34 @@ export interface ICreatorOptions {
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
    */
   maxChoiceContentNestingLevel?: number;
+  /**
+   * Specifies whether to validate that functions referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
+  expressionsValidateFunctions?: boolean;
+  /**
+   * Specifies whether to validate that variables and question, panel, or page names referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `false`
+   */
+  expressionsValidateVariables?: boolean;
+  /**
+   * Specifies whether to validate the expression syntax (for example, unmatched parentheses, missing operands, or invalid operators).
+   *
+   * Default value: `true`
+   */
+  expressionsValidateSyntax?: boolean;
+  /**
+   * Specifies whether to validate expressions that are syntactically valid but have no meaningful effect because they always evaluate to the same value.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
+  expressionsValidateSemantics?: boolean;
 }
