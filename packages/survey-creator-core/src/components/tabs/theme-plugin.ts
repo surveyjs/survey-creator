@@ -16,6 +16,7 @@ import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { MenuButton } from "../../utils/actions";
+import { DomDocumentHelper } from "../../utils/global_variables_utils";
 
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
@@ -679,6 +680,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       component: "sv-action-bar-item",
       needSeparator: true,
       action: () => {
+        const document = DomDocumentHelper.getDocument();
         if (!document) return;
         if (!this.inputFileElement) {
           this.inputFileElement = document.createElement("input");
