@@ -137,6 +137,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.completeText = getLocString("presets.editor.completeText");
     model.pagePrevText = getLocString("presets.editor.pagePrevText");
     model.enterKeyAction = "loseFocus";
+    model.fitToContainer = false;
 
     editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
     if (!this.defaultJsonValue) {
