@@ -1,5 +1,5 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
-import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
+import { ICreatorPlugin, ICreatorPresetData, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager } from "./presets-manager";
@@ -112,19 +112,18 @@ export class UIPresetEditor implements ICreatorPlugin {
   /**
    * Adds a new UI preset to UI Preset Editor.
    * @param preset A [UI preset] to add.
-   * @param setAsDefault For internal use.
    * @see removePreset
    */
-  public addPreset(preset: ICreatorPresetConfig, setAsDefault = false) {
-    this.presetsManager.addPreset(preset, setAsDefault);
+  public addPreset(preset: UIPreset) {
+    this.presetsManager.addPreset(preset);
   }
   /**
    * Removes a UI theme from Theme Editor.
    * @param presetAccessor A [UI preset] to delete or a preset identifier.
    * @see addPreset
    */
-  public removePreset(presetAccessor: string | ICreatorPresetConfig, includeModifications = false): void {
-
+  public removePreset(presetAccessor: string | UIPreset): void {
+    this.presetsManager.removePreset(typeof(presetAccessor) === "string" ? presetAccessor : presetAccessor.name);
   }
 
   protected saveHandler() {

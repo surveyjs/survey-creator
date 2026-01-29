@@ -263,12 +263,14 @@ export class PresetsManager {
     });
   }
 
-  public addPreset(preset: ICreatorPresetConfig, setAsDefault = false) {
+  public addPreset(preset: ICreatorPresetConfig) {
     CreatorPresets[preset.presetName] = preset;
     this.customPresets.push(preset.presetName);
     this.updateMenu();
   }
-  public removePreset(presetAccessor: string | ICreatorPresetConfig, includeModifications = false): void {
-
+  public removePreset(presetAccessor: string): void {
+    delete CreatorPresets[presetAccessor];
+    this.customPresets = this.customPresets.filter(p => p !== presetAccessor);
+    this.updateMenu();
   }
 }
