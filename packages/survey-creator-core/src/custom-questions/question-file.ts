@@ -20,10 +20,8 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       super.loadPreview(newValue);
     }
   }
-  public get allowMultiple(): boolean {
-    return false;
-  }
-  public set allowMultiple(val: boolean) {}
+  @property({ onSetting: (val: boolean) => false }) allowMultiple: boolean;
+
   public clear(doneCallback?: () => void, shouldClearValue: boolean = true) {
     if (!this.survey) return;
     const callback = () => {
