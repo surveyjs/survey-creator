@@ -328,7 +328,7 @@ test("Element Selector: Column: Scroll", async (t) => {
   await setJSON(json);
 
   const getQuestionTopPosition = await ClientFunction(() => {
-    return Math.round(document.querySelector(".svc-question__content")!.getBoundingClientRect().top);
+    return Math.round((window as any).creator.rootElement.getRootNode().querySelector(".svc-question__content")!.getBoundingClientRect().top);
   });
 
   await t

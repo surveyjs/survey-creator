@@ -462,7 +462,7 @@ test.describe(title, () => {
 
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
-        const el = document.querySelectorAll(".svc-question__content")[idx];
+        const el = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-question__content")[idx];
         if (remove != "remove") {
           el.classList.add("svc-question__content--" + suffix);
         } else {
@@ -520,7 +520,7 @@ test.describe(title, () => {
 
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
-        const el = document.querySelectorAll(".svc-question__content")[idx];
+        const el = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-question__content")[idx];
         if (!el) return;
 
         if (remove != "remove") {
@@ -608,7 +608,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      (window as any).creator.rootElement.getRootNode().head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     });
 
     await page.setViewportSize({ width: 1600, height: 1000 });
@@ -644,7 +644,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      (window as any).creator.rootElement.getRootNode().head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     });
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
@@ -711,7 +711,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
 
       window["Survey"].CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
 
-      const widgetTemplateForKo = document.createElement("script");
+      const widgetTemplateForKo = (window as any).creator.rootElement.getRootNode().createElement("script");
       widgetTemplateForKo.setAttribute("id", "survey-widget-peoplepicker");
       widgetTemplateForKo.setAttribute("type", "text/html");
       widgetTemplateForKo.innerHTML = `
@@ -721,7 +721,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
                     </label>
                   </div>
                 `;
-      document.body.appendChild(widgetTemplateForKo);
+      (window as any).creator.rootElement.getRootNode().body.appendChild(widgetTemplateForKo);
     });
 
     await hideAllAdornerActions(page);

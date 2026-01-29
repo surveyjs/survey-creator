@@ -43,11 +43,11 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
 });
 
 export const handleShiftEnter = ClientFunction((selector: string) => {
-  document.querySelector(selector).addEventListener("keypress", function (e: any) {
+  (window as any).creator.rootElement.getRootNode().querySelector(selector).addEventListener("keypress", function (e: any) {
     if (e.charCode === 13 && e.shiftKey) {
-      var editorEl = document.querySelector(selector) as any;
+      var editorEl = (window as any).creator.rootElement.getRootNode().querySelector(selector) as any;
       var selection = window.getSelection() as any;
-      var range = document.createRange();
+      var range = (window as any).creator.rootElement.getRootNode().createRange();
 
       editorEl.innerHTML += "<div><br/></div>";
 
@@ -182,7 +182,7 @@ export async function changeToolboxSearchEnabled(enabled: boolean) {
 
 export async function setDirRTL() {
   await ClientFunction(() => {
-    document.body.setAttribute("dir", "rtl");
+    (window as any).creator.rootElement.getRootNode().body.setAttribute("dir", "rtl");
   })();
 }
 

@@ -218,12 +218,12 @@ test("check toolbox scroll", async (t) => {
   await explicitErrorHandler();
   await t.resizeWindow(1900, 800);
   const hasNoScroll = ClientFunction(() => {
-    let element = document.querySelector(".svc-toolbox");
+    let element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox");
     return element?.scrollHeight == element?.clientHeight;
   });
 
   const setSize = ClientFunction((size) => {
-    let element = document.querySelector(".svc-creator");
+    let element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-creator");
     element["style"].height = size + "px";
   });
 

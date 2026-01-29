@@ -432,8 +432,8 @@ test("Check page adorner state is restored after shrink and stretch", async (t) 
 });
 test("Popup position", async (t) => {
   const setCreatorTop = ClientFunction((top) => {
-    var el = document.getElementById("survey-creator");
-    if (!el) el = document.querySelector(".svc-creator") as HTMLElement; // for angular app
+    var el = (window as any).creator.rootElement.getRootNode().getElementById("survey-creator");
+    if (!el) el = (window as any).creator.rootElement.getRootNode().querySelector(".svc-creator") as HTMLElement; // for angular app
     el.style.marginTop = top;
   });
   await setCreatorTop("200px");
@@ -449,7 +449,7 @@ test("Popup position", async (t) => {
   });
   await t.click('button[title="Survey settings"]');
   await t.click('[data-name="locale"]');
-  await t.expect(ClientFunction(() => { return document.querySelector('[data-name="locale"] .sv-popup__container')?.getBoundingClientRect().top; })()).gte(200);
+  await t.expect(ClientFunction(() => { return (window as any).creator.rootElement.getRootNode().querySelector('[data-name="locale"] .sv-popup__container')?.getBoundingClientRect().top; })()).gte(200);
   await setCreatorTop("");
 });
 

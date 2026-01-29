@@ -729,7 +729,7 @@ test("Image picker question inplace editor - add new item", async (t) => {
     .expect(imageItems.nth(4).find("img").visible).ok();
 
   const getImageLink = ClientFunction(() => {
-    return document.querySelectorAll("img.sd-imagepicker__image")[4]["src"];
+    return (window as any).creator.rootElement.getRootNode().querySelectorAll("img.sd-imagepicker__image")[4]["src"];
   });
   let imageLink = await getImageLink();
   await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");
@@ -758,7 +758,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
     .click(getToolboxItemByText("Image"), { speed: 0.5 });
 
   const getImageLink = ClientFunction(() => {
-    return document.querySelectorAll("img.sd-image__image")[0]["src"];
+    return (window as any).creator.rootElement.getRootNode().querySelectorAll("img.sd-image__image")[0]["src"];
   });
 
   await t

@@ -495,7 +495,7 @@ test("Bug #2857: check scroll not appear", async (t) => {
   await setJSON(surveyJSON);
 
   const compareWidths = ClientFunction(() => {
-    const scrollableSelector = <HTMLElement>document.querySelector(".svc-logic-tab__content");
+    const scrollableSelector = <HTMLElement>(window as any).creator.rootElement.getRootNode().querySelector(".svc-logic-tab__content");
     return scrollableSelector.offsetWidth >= scrollableSelector.scrollWidth;
   });
 

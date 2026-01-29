@@ -587,7 +587,7 @@ test("Paste multiline selectbase through event", async (t) => {
   var paste = ClientFunction((data) => {
     var event = new Event("paste");
     event["clipboardData"] = { getData: () => data };
-    document.activeElement.dispatchEvent(event);
+    (window as any).creator.rootElement.getRootNode().activeElement.dispatchEvent(event);
   });
 
   await t
@@ -621,16 +621,16 @@ test.skip("Paste html data", async (t) => {
   });
 
   await ClientFunction(() => {
-    document.addEventListener("copy", function (e) {
+    (window as any).creator.rootElement.getRootNode().addEventListener("copy", function (e) {
       e.clipboardData.setData("text/html", "<span>s\nd</span>");
       e.clipboardData.setData("text/plain", "s d");
     });
 
-    document.getElementById("copy-simulator")?.addEventListener("click", () => {
-      document.execCommand("copy");
+    (window as any).creator.rootElement.getRootNode().getElementById("copy-simulator")?.addEventListener("click", () => {
+      (window as any).creator.rootElement.getRootNode().execCommand("copy");
     });
-    document.getElementById("paste-simulator")?.addEventListener("mouseover", () => {
-      document.execCommand("paste"); // does not work in chrome
+    (window as any).creator.rootElement.getRootNode().getElementById("paste-simulator")?.addEventListener("mouseover", () => {
+      (window as any).creator.rootElement.getRootNode().execCommand("paste"); // does not work in chrome
     });
   })();
 
@@ -727,11 +727,11 @@ test("Check string editor with html security", async (t) => {
   const htmlMarkupSelector = Selector(".sv-string-editor--html").withText("Test");
   await t.expect(htmlMarkupSelector.visible).ok();
 
-  await t.expect(ClientFunction(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("[p]Test[/p]");
+  await t.expect(ClientFunction(() => (window as any).creator.rootElement.getRootNode().querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("[p]Test[/p]");
   await t.click(htmlMarkupSelector);
-  await t.expect(ClientFunction(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("&lt;p&gt;Test&lt;/p&gt;");
+  await t.expect(ClientFunction(() => (window as any).creator.rootElement.getRootNode().querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("&lt;p&gt;Test&lt;/p&gt;");
   await t.pressKey("enter");
-  await t.expect(ClientFunction(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("[p]Test[/p]");
+  await t.expect(ClientFunction(() => (window as any).creator.rootElement.getRootNode().querySelector(".sd-question[data-name=q1] .sv-string-editor").innerHTML)()).eql("[p]Test[/p]");
 });
 
 test("Check string editor focus does not throw error: #4459", async (t) => {

@@ -138,7 +138,7 @@ test.describe(title, () => {
     const questionSelector = page.locator("div[data-name='defaultValue']");
 
     await compareScreenshot(page, questionSelector, "default-value-clear-button.png");
-    await page.evaluate(() => { (<HTMLElement>document.querySelector("div[data-name='defaultValue'] .svc-question-link__clear-button"))?.focus(); });
+    await page.evaluate(() => { (<HTMLElement>(window as any).creator.rootElement.getRootNode().querySelector("div[data-name='defaultValue'] .svc-question-link__clear-button"))?.focus(); });
     await compareScreenshot(page, questionSelector, "default-value-clear-button-focus.png");
   });
 

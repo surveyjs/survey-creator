@@ -89,11 +89,11 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
   await t.resizeWindow(2560, 2000);
   await ClientFunction(() => {
-    const el: any = document.getElementById("survey-creator");
+    const el: any = (window as any).creator.rootElement.getRootNode().getElementById("survey-creator");
     el.style.position = "relative";
     el.style.bottom = undefined;
     el.style.height = "15000px";
-    const rootEl: any = document.getElementsByTagName("app-root")[0];
+    const rootEl: any = (window as any).creator.rootElement.getRootNode().getElementsByTagName("app-root")[0];
     if (!!rootEl) {
       rootEl.style.position = "relative";
     }
@@ -1115,7 +1115,7 @@ test("Animation (choices)", async (t) => {
 
   const animationClassesCount = await ClientFunction(() => {
     let result = 0;
-    const itemValueNodes = document.querySelector("[data-name='question1']").querySelectorAll(".svc-item-value-wrapper");
+    const itemValueNodes = (window as any).creator.rootElement.getRootNode().querySelector("[data-name='question1']").querySelectorAll(".svc-item-value-wrapper");
     itemValueNodes.forEach(itemValueNode => {
       if (itemValueNode.classList.contains("svc-item-value--movedown") ||
         itemValueNode.classList.contains("svc-item-value--moveup")) {
@@ -1615,11 +1615,11 @@ test("Drag Drop to new page and Undo", async (t) => {
 
   await t.resizeWindow(2560, 2000);
   await ClientFunction(() => {
-    const el: any = document.getElementById("survey-creator");
+    const el: any = (window as any).creator.rootElement.getRootNode().getElementById("survey-creator");
     el.style.position = "relative";
     el.style.bottom = undefined;
     el.style.height = "10000px";
-    const rootEl: any = document.getElementsByTagName("app-root")[0];
+    const rootEl: any = (window as any).creator.rootElement.getRootNode().getElementsByTagName("app-root")[0];
     if (!!rootEl) {
       rootEl.style.position = "relative";
     }
