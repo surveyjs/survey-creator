@@ -502,7 +502,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       model.setValue(this.nameCategories, categories);
       const items = this.getCurrentlyHiddenItems(categories);
       model.setValue(this.nameMatrix, items);
-      this.propertyGridSetObj(this.currentProperties.getObj());
+      if (this.pageName == model.currentPage.name)this.propertyGridSetObj(this.currentProperties.getObj());
     }
   }
   private getCurrentlyHiddenItems(categories: any) {
