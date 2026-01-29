@@ -27,6 +27,7 @@
 }
 
 .sps-popup-menu.sps-popup-menu--dropdown {
+  height: 0;
   .sv-popup__container {
     padding-top: var(--sjs2-spacing-x50, 4px);
   }

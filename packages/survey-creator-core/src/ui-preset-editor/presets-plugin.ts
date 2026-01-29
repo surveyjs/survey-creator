@@ -188,7 +188,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       horizontalPosition: "center" as any,
       searchEnabled: false,
       cssClass: "sps-popup-menu sps-popup-menu--dropdown",
-      cssClasses: listComponentCss
+      cssClasses: listComponentCss,
     };
 
     let curentlySelectedPreset: IAction;
@@ -210,6 +210,7 @@ export class UIPresetEditor implements ICreatorPlugin {
           curentlySelectedPreset = selectedItem;
         }
       },
+      onBlur: () =>{ listAction.popupModel.hide(); }
     }, this.model.model);
 
     const pagesAction = createDropdownActionModel({
@@ -222,6 +223,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     }, {
       ...popupOptions,
       items: presets,
+      onBlur: () =>{ pagesAction.popupModel.hide(); }
     }, this.model.model);
 
     const editAction = createDropdownActionModel({
@@ -235,6 +237,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       ...popupOptions,
       onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
       items: tools,
+      onBlur: () =>{ editAction.popupModel.hide(); }
     }, this.model.model);
 
     const statusAction = new Action({
