@@ -281,9 +281,11 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.setStatus("unsaved");
     });
 
-    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector.value)[0];
-    this.presetsList.selectedItem.action(this.presetsList.selectedItem);
-    listAction.title = this.presetsList.selectedItem.title || "";
+    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector?.value)[0];
+    if (this.presetsList.selectedItem) {
+      this.presetsList.selectedItem.action(this.presetsList.selectedItem);
+      listAction.title = this.presetsList.selectedItem.title || "";
+    }
     setTimeout(() => {
       presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
     }, 100);

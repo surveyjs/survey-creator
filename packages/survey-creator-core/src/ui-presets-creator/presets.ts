@@ -59,7 +59,7 @@ export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetCon
 export class UIPreset extends CreatorPresetBase {
   public constructor(data: ICreatorPresetData | ICreatorPresetConfig) {
     super();
-    if ((data.hasOwnProperty("json"))) {
+    if ((data?.hasOwnProperty("json"))) {
       this.setJson((data as ICreatorPresetConfig).json);
       this.name = (data as ICreatorPresetConfig).presetName || "";
     } else {
