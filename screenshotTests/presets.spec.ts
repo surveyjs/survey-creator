@@ -24,15 +24,31 @@ test.describe(title, () => {
     await page.goto(`${urlPresets}`);
     //await changeToolboxScrolling(page, false);
     //await changeToolboxSearchEnabled(page, false);
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      const presetsPlugin = creator.getPlugin("presets");
+      presetsPlugin.addPreset(new (window as any).SurveyCreatorCore.UIPreset({ presetName: "Custom Preset" }));
+    });
     await page.setViewportSize({ width: 1440, height: 1507 });
     await showPresets(page);
   });
 
   test("Check presets menu", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").nth(0).click();
+    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-list-menu.png");
+    await page.locator(".sps-navigation-bar-item").nth(2).click();
+    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-edit-menu.png");
+
     await page.locator(".sps-navigation-bar-item").nth(1).click();
     await page.locator(".sps-list__container").filter({ visible: true }).locator(".sps-list__item").nth(2).hover();
     await compareScreenshot(page, page.locator(".sps-list__container"), "presets-menu.png");
     await compareScreenshot(page, page.locator(".sps-navigation-bar"), "presets-menu-position.png");
+  });
+
+  test("Check presets list", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list").click();
+    await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
   });
 
   test("Presets pages overview", async ({ page }) => {
