@@ -615,7 +615,7 @@ jobs:
           testRunTitle: "Creator Vue SCR Tests"
         condition: always()
 
-  - job: CreatorV2JS
+  - job: Preact_ShadowDOM_BoxSizing
     dependsOn: CreatorV2Core
     steps:
       - checkout: self
