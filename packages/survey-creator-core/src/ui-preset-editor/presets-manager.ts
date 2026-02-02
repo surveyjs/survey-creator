@@ -248,7 +248,7 @@ export class PresetsManager {
 
   private updateMenu() {
     this.presetsList?.setItems(this.presetsMenuItems);
-    if (this.presetSelector)this.presetSelector.choices = this.getPresetsListToEdit().map(i => ({ value: i.name, text: i.title }));
+    if (this.presetSelector)this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
   }
 
   public update() {

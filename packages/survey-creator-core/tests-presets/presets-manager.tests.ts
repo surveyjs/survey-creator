@@ -162,7 +162,7 @@ describe("PresetsManager", () => {
     beforeEach(() => {
       PredefinedCreatorPresets.push("basic", "advanced");
       CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
-      CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: true };
+      CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: false };
     });
 
     test("should update menu when update is called", () => {

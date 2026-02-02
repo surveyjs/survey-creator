@@ -36,6 +36,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.model.json = this.defaultJson;
       this.model.applyFromSurveyModel(false);
     }
+    this.presetsManager.update();
     this.presetsManager.presetSelector.value = this.presetsList.selectedItem.id;
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
@@ -282,6 +283,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     });
 
     this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector?.value)[0];
+    curentlySelectedPreset = this.presetsList.selectedItem;
     if (this.presetsList.selectedItem) {
       this.presetsList.selectedItem.action(this.presetsList.selectedItem);
       listAction.title = this.presetsList.selectedItem.title || "";
