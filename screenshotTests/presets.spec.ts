@@ -27,7 +27,9 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const creator = (window as any).creator;
       const presetsPlugin = creator.getPlugin("presets");
-      presetsPlugin.addPreset(new (window as any).SurveyCreatorCore.UIPreset({ presetName: "Custom Preset" }));
+      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic };
+      customPreset.presetName = "Custom Preset";
+      presetsPlugin.addPreset(customPreset);
     });
     await page.setViewportSize({ width: 1440, height: 1507 });
     await showPresets(page);
@@ -48,7 +50,10 @@ test.describe(title, () => {
   test("Check presets list", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list").click();
+    await page.locator(".spg-action-button").nth(1).click();
     await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
+    await page.getByText("Add new preset...").click();
+    await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "presets-select-dialog.png");
   });
 
   test("Presets pages overview", async ({ page }) => {
