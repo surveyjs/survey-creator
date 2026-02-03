@@ -592,7 +592,7 @@ describe("PresetsManager", () => {
       expect(removeAction.iconName).toBe("icon-delete-24x24");
       expect(removeAction.iconSize).toBe("auto");
       expect(removeAction.component).toBe("sv-action-bar-item");
-      expect(removeAction.innerCss).toBe("spg-table__action-button spg-table__action-button--remove");
+      expect(removeAction.innerCss).toBe("sps-action-button sps-action-button--danger");
       expect(removeAction.showTitle).toBe(false);
       expect(removeAction.action).toBeDefined();
     });
@@ -620,6 +620,19 @@ describe("PresetsManager", () => {
       removeAction.action(removeAction);
 
       expect(matrixQuestion.removeRowUI).toHaveBeenCalledWith(row);
+    });
+
+    test("predefined presets title should be readonly", () => {
+      matrixQuestion.value = [
+        { name: "basic", title: "Basic", visible: true, custom: false },
+        { name: "custom1", title: "Custom 1", visible: true, custom: true }
+      ];
+
+      const predefinedRow = matrixQuestion.visibleRows.find((r: any) => r.getValue("custom") === false) as any;
+      const customRow = matrixQuestion.visibleRows.find((r: any) => r.getValue("custom") === true) as any;
+
+      expect(predefinedRow.getQuestionByName("title").readOnly).toBe(true);
+      expect(customRow.getQuestionByName("title").readOnly).toBe(false);
     });
 
     test("should handle both predefined and custom presets in same matrix", () => {
@@ -658,7 +671,7 @@ describe("PresetsManager", () => {
       expect(predefinedRemoveAction.visible).toBe(false);
       expect(predefinedVisibleAction).toBeDefined();
       expect(customRemoveAction.iconName).toBe("icon-delete-24x24");
-      expect(customVisibleAction).toBeUndefined();
+      expect(customVisibleAction).toBeDefined();
     });
   });
 

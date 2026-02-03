@@ -223,16 +223,18 @@ export class PresetsManager {
   }
 
   private customizePopupButtons(popupModel: any, applyText: string, cancelText: string) {
-    const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-    defaultActionBarCss.item = "sps-btn";
-    popupModel.footerToolbar.cssClasses = defaultActionBarCss;
-    const applyAction = popupModel.footerToolbar.getActionById("apply");
-    const cancelAction = popupModel.footerToolbar.getActionById("cancel");
-    applyAction.innerCss = "sps-btn--primary-brand";
-    applyAction.title = applyText || getLocString("buttons.apply");
-    cancelAction.innerCss = "sps-btn--secondary-brand";
-    cancelAction.css += " sps-action--grow";
-    cancelAction.title = cancelText || getLocString("buttons.cancel");
+    if (popupModel.footerToolbar) {
+      const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
+      defaultActionBarCss.item = "sps-btn";
+      popupModel.footerToolbar.cssClasses = defaultActionBarCss;
+      const applyAction = popupModel.footerToolbar.getActionById("apply");
+      const cancelAction = popupModel.footerToolbar.getActionById("cancel");
+      applyAction.innerCss = "sps-btn--primary-brand";
+      applyAction.title = applyText || getLocString("buttons.apply");
+      cancelAction.innerCss = "sps-btn--secondary-brand";
+      cancelAction.css += " sps-action--grow";
+      cancelAction.title = cancelText || getLocString("buttons.cancel");
+    }
   }
 
   private editPresetsList(onSet: (newList: any[]) => void) {
