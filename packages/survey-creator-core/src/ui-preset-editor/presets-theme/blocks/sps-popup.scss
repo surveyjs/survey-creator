@@ -42,6 +42,11 @@
 
 
 .sps-popup {
+  .sv-popup__body-header {
+    @include sjs2--typography--medium-strong;
+    color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  }
+
   &.sv-popup--modal-popup {
     z-index: 3000;
     :has(.sps-page) {

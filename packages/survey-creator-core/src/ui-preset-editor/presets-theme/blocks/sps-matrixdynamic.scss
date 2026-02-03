@@ -133,7 +133,7 @@
 .sps-matrixdynamic__footer--in-dialog {
   display: flex;
   margin: 0;
-  padding-top: var(--sjs2-spacing-x075, 6px);
+  padding-top: var(--sjs2-spacing-x150, 12px);
 
 } 
 
@@ -228,5 +228,11 @@
         var(--ctr-data-table-row-shadow-floating-2-offset-y, 16px)
         var(--ctr-data-table-row-shadow-floating-2-blur, 32px) var(--ctr-data-table-row-shadow-floating-2-spread, 0px)
         var(--ctr-data-table-row-shadow-floating-2-color, var(--sjs-special-glow, #004c441a));
+  }
+}
+
+.spg-table__row:has(.sps-action--invisible) {
+  .sps-input {
+    opacity: 0.25;
   }
 }

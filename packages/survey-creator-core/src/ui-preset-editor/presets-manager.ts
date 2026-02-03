@@ -1,11 +1,12 @@
 import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
+import { get } from "lodash";
 export class PresetsManager {
   /**
    *
    */
-  constructor() {
+  constructor(private creator?: SurveyCreatorModel) {
 
   }
   public presetsList: ListModel;
@@ -137,31 +138,38 @@ export class PresetsManager {
       isRequired: true }
     );
 
+    survey.onMatrixCellCreated.add((sender, options) => {
+      if (options.columnName === "title") {
+        options.cellQuestion.readOnly = !options.row.getValue("custom");
+      }
+    });
     survey.onGetMatrixRowActions.add((sender, options) => {
       const removeAction = options.actions.filter(a => a.id == "remove-row")[0];
       const getRowIconName = (row) => row.getValue("visible") ? "icon-visible-24x24" : "icon-invisible-24x24";
-      if (!options.row.getValue("custom")) {
-        removeAction.visible = false;
-        const visibleAction = new Action({
-          id: "visible",
-          iconName: getRowIconName(options.row),
-          location: "end",
-          action: () => {
-            //options.row.setValue("visible", !options.row.getValue("visible"));
-            options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
-            visibleAction.iconName = getRowIconName(options.row);
-          }
-        });
-        options.actions.push(visibleAction);
-      } else {
+      const visibleAction = new Action({
+        id: "visible",
+        iconName: getRowIconName(options.row),
+        location: "end",
+        css: options.row.getValue("visible") ? "" : "sps-action--invisible",
+        action: () => {
+          options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
+          visibleAction.iconName = getRowIconName(options.row);
+          visibleAction.css = options.row.getValue("visible") ? "" : "sps-action--invisible";
+        }
+      });
+      options.actions.push(visibleAction);
+
+      if (options.row.getValue("custom")) {
         removeAction.iconName = "icon-delete-24x24";
         removeAction.iconSize = "auto",
         removeAction.component = "sv-action-bar-item",
-        removeAction.innerCss = "spg-table__action-button spg-table__action-button--remove",
+        removeAction.innerCss = "sps-action-button sps-action-button--danger",
         removeAction.showTitle = false,
         removeAction.action = () => {
           options.question.removeRowUI(options.row);
         };
+      } else {
+        removeAction.visible = false;
       }
     });
     survey.onMatrixRowAdding.add((sender, options) => {
@@ -191,7 +199,7 @@ export class PresetsManager {
           ...propertyGridCss.buttongroup,
         }
       };
-      settings.showDialog?.(<IDialogOptions>{
+      const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: addSurvey, model: addSurvey },
         onApply: () => {
@@ -206,11 +214,25 @@ export class PresetsManager {
         cssClass: "sps-popup sps-popup--level2 svc-property-editor svc-creator-popup",
         title: getLocString("presets.plugin.addNewPreset"),
         displayMode: "popup"
-      });
+      }, this.creator?.rootElement);
+      this.customizePopupButtons(popupModel, getLocString("presets.plugin.add"), getLocString("presets.plugin.discard"));
       options.allow = false;
     });
     survey.pages[0].addQuestion(presetsListEditor);
     presetsListEditor.value = this.getPresetsListToEdit();
+  }
+
+  private customizePopupButtons(popupModel: any, applyText: string, cancelText: string) {
+    const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
+    defaultActionBarCss.item = "sps-btn";
+    popupModel.footerToolbar.cssClasses = defaultActionBarCss;
+    const applyAction = popupModel.footerToolbar.getActionById("apply");
+    const cancelAction = popupModel.footerToolbar.getActionById("cancel");
+    applyAction.innerCss = "sps-btn--primary-brand";
+    applyAction.title = applyText || getLocString("buttons.apply");
+    cancelAction.innerCss = "sps-btn--secondary-brand";
+    cancelAction.css += " sps-action--grow";
+    cancelAction.title = cancelText || getLocString("buttons.cancel");
   }
 
   private editPresetsList(onSet: (newList: any[]) => void) {
@@ -225,6 +247,7 @@ export class PresetsManager {
     survey.css = { ...presetsCss,
       actionBar: {
         ...propertyGridCss.actionBar,
+        itemIcon: presetsCss.actionBar.itemIcon + " sps-action-button__icon--muted",
       },
       matrixdynamic: {
         ...propertyGridCss.matrixdynamic,
@@ -232,7 +255,7 @@ export class PresetsManager {
         footer: propertyGridCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
       }
     };
-    settings.showDialog?.(<IDialogOptions>{
+    const popupModel = settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
       onApply: () => {
@@ -243,7 +266,8 @@ export class PresetsManager {
       cssClass: "sps-popup svc-property-editor svc-creator-popup",
       title: getLocString("presets.plugin.editPresetsListTitle"),
       displayMode: "popup"
-    });
+    }, this.creator?.rootElement);
+    this.customizePopupButtons(popupModel, getLocString("presets.plugin.save"), getLocString("presets.plugin.discard"));
   }
 
   private updateMenu() {

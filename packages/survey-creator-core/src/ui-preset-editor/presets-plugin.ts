@@ -83,7 +83,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
     settingsPage.componentData.elements[0].componentData.showPresets = () => this.showPresets();
     this.toolboxCompact = creator.toolbox.forceCompact;
-    this.presetsManager = new PresetsManager();
+    this.presetsManager = new PresetsManager(creator);
     this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
       this.saveAction.enabled = PredefinedCreatorPresets.indexOf(preset.presetName) === -1;
       this.model.json = preset.json;

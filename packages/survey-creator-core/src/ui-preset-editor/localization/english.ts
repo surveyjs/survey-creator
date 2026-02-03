@@ -200,6 +200,8 @@ export const enStrings = {
     presetsTab: "Presets",
     creatorPresets: "Creator Presets",
     save: "Save",
+    add: "Add",
+    discard: "Discard",
     saveAs: "Save as...",
     saveAsTitle: "Save current preset as...",
     quit: "Quit",

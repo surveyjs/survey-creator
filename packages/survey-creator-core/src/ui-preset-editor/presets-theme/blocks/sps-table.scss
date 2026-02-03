@@ -154,6 +154,14 @@
       margin-left: var(--sjs2-spacing-x100, 8px);
     }
   }
+  .sps-input--readonly {
+    &:hover,    
+    &:focus,
+    &:focus-within {
+      box-shadow: none;
+      background: transparent;
+    }
+  }
 }
 
 .sps-matrixdynamic__dragged-row {
