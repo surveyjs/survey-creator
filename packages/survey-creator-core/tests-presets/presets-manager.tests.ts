@@ -204,23 +204,6 @@ describe("PresetsManager", () => {
       expect(customAction).toBeDefined();
     });
 
-    test("should add separator for custom presets", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "customSeparator",
-        json: {}
-      };
-      manager.addPreset(preset);
-      jest.clearAllMocks();
-
-      manager.update();
-
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
-      const customSettingsLabel = menuItems.find(item => item.id === "customSettings");
-
-      expect(customSettingsLabel).toBeDefined();
-      expect(customSettingsLabel?.needSeparator).toBe(true);
-    });
-
     test("should include edit list item", () => {
       manager.update();
 

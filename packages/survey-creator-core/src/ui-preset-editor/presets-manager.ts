@@ -37,14 +37,7 @@ export class PresetsManager {
   }
   private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
-    if (defaultPresets.length > 0) {
-      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
-    }
-
     const customPresets = this.presetListToItems(this.customPresets);
-    if (customPresets.length > 0) {
-      customPresets.unshift({ id: "customSettings", needSeparator: true, title: getLocString("presets.plugin.savedPresets"), css: "sps-list__item--label", enabled: false });
-    }
     const editItem = { id: "editPresetsList",
       needSeparator: customPresets.length + defaultPresets.length > 0,
       title: getLocString("presets.plugin.editPresetsList"),
