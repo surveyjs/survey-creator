@@ -1222,3 +1222,26 @@ test("Test makeNewViewActive (obsolete)", (): any => {
   expect(creator.makeNewViewActive("designer"));
   expect(creator.activeTab).toEqual("designer");
 });
+test("Do not count non  questions elements as unique, Bug#7398", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "paneldynamic", name: "q1", templateElements: [{ type: "text", name: "q2" }] },
+      { type: "paneldynamic", name: "q3", templateElements: [{ type: "text", name: "q4" }] },
+      { type: "matrixdynamic", name: "q5", columns: [{ name: "col1" }, { name: "col2" }] },
+      { type: "multipletext", name: "q6", items: [{ name: "item1" }, { name: "item2" }] },
+      { type: "text", name: "q7" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q7");
+  creator.selectElement(question);
+  const questionName = creator["designerPropertyGrid"].survey.getQuestionByName("name");
+  expect(questionName.value).toEqual("q7");
+  questionName.value = "col1";
+  expect(questionName.hasErrors()).toBeFalsy();
+  questionName.value = "item2";
+  expect(questionName.hasErrors()).toBeFalsy();
+  questionName.value = "q2";
+  expect(questionName.hasErrors()).toBeTruthy();
+  expect(question.name).toEqual("item2");
+});

@@ -2,7 +2,6 @@ import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
-import { clear } from "console";
 
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester();
@@ -296,4 +295,86 @@ test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
   creator.activeTab = "designer";
   expect(counter).toBe(1);
   SurveyTextWorker.onProcessJson = undefined;
+});
+test("JsonEditor & duplicated errors in matrices columns", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "q1",
+        columns: [
+          { name: "col1" },
+        ]
+      },
+      {
+        type: "matrixdynamic",
+        name: "q2",
+        columns: [
+          { name: "col1" },
+        ]
+      }
+    ]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeFalsy();
+  expect(editor.errorList.actions).toHaveLength(0);
+
+  editor.text = JSON.stringify({
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "q1",
+        columns: [
+          { name: "col1" },
+          { name: "col1" }
+        ]
+      }
+    ]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeTruthy();
+  expect(editor.errorList.actions).toHaveLength(1);
+});
+test("JsonEditor & duplicated errors in multiple text items, Bug#7398", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    elements: [
+      {
+        type: "multipletext",
+        name: "q1",
+        items: [
+          { name: "col1" },
+        ]
+      },
+      {
+        type: "multipletext",
+        name: "q2",
+        items: [
+          { name: "col1" },
+        ]
+      }
+    ]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeFalsy();
+  expect(editor.errorList.actions).toHaveLength(0);
+
+  editor.text = JSON.stringify({
+    elements: [
+      {
+        type: "multipletext",
+        name: "q1",
+        items: [
+          { name: "col1" },
+          { name: "col1" }
+        ]
+      }
+    ]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeTruthy();
+  expect(editor.errorList.actions).toHaveLength(1);
 });
