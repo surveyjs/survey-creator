@@ -108,7 +108,7 @@ This section guides you through setting up a Range Slider and linking it to two 
    <img src="images/eud-validation-rule.png" alt="Configure a validation rule for the range length limits defined via the input fields." width="1544" height="872">
 6. To ensure users are immediately informed of invalid values, enable immediate validation. Switch to the survey-level settings, open the **Validation** category, find the **Run validation** dropdown, and select the **After an answer is changed** option.
 
-   <img src="images/eud-run-validation.png" alt='Specify when to run validation' width="1544" height="872">
+   <img src="images/eud-run-validation-fixed.png" alt='Specify when to run validation' width="1544" height="864">
 
 Now, if a user enters values that result in a range length less than 100 or greater than 250, the following error message will appear at the top of the Range Slider.
 

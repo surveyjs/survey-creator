@@ -321,7 +321,13 @@ export class SurveyTextWorker {
     return res;
   }
   private checkDuplicatedElement(el: any, names: any, duplicates: Array<Base>): void {
-    const name = el["name"];
+    let name = el["name"];
+    if (!name) return;
+    if (!SurveyHelper.isPanelOrQuestion(el)) {
+      const owner = el.getOwner();
+      if (!owner || !owner["name"]) return;
+      name = owner["name"] + "$" + name;
+    }
     if (names[name]) {
       duplicates.push(el);
     } else {

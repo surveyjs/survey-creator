@@ -52,10 +52,6 @@ To translate your form into additional languages, follow these steps:
 
 <img src="images/eud-localization-design-tab-de.png" width="1544" height="954" alt="Translating survey elements into German">
 
-All translations are stored directly in the resulting survey JSON schema.
-
-<img src="images/eud-localization-form-json.png" width="1544" height="722" alt="Survey JSON containing translated texts">
-
 ## See Also
 
 - [Translate Forms in the Translations Tab](/survey-creator/documentation/end-user-guide/translations-tab)

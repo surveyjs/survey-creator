@@ -57,7 +57,7 @@ Cells for newly added languages display fallback values&mdash;either texts from 
 
 ### Enter Translations
 
-You can type translations for each language directly into the table cells. All changes are saved automatically and become part of the survey JSON schema.
+You can type translations for each language directly into the table cells. All changes are saved automatically.
 
 <img src="images/eud-localization-translate-texts.png" width="1544" height="866" alt="Entering translations">
 
@@ -81,7 +81,7 @@ Click **Export to CSV** to download all the survey text for translation, or clic
 
 ### Hide Languages from the Grid
 
-To reduce visual clutter and focus on specific languages, uncheck unwanted languages in the right-side panel. This hides the corresponding columns in the grid but does not remove translations from the survey JSON.
+To reduce visual clutter and focus on specific languages, uncheck unwanted languages in the right-side panel. This hides the corresponding columns in the grid but does not remove translations from the survey.
 
 <img src="images/eud-localization-hide-locales.png" width="1544" height="596" alt="Hiding languages in the grid">
 
@@ -108,7 +108,8 @@ AI-assisted translation allows you to generate translations automatically in jus
 
 <img src="images/eud-localization-autotranslate-all-dialog.png" width="1544" height="1000" alt="Auto-translation dialog">
 
-4. Click **Apply** to save the generated translations to your survey JSON schema. You can then review and make any changes directly in the table.
+4. Click **Apply** to save the generated translations to your survey. You can then review and make any changes directly in the table.
+
 ## See Also
 
 - [Translate Forms in the Designer Tab](/survey-creator/documentation/end-user-guide/translate-forms-in-designer-tab)

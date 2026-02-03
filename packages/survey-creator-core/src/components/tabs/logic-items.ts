@@ -107,7 +107,7 @@ export class SurveyLogicAction {
   }
   public addQuestionNames(names: string[]) {
     const name = this.elementOwnerName;
-    if (!!this.elementName && names.indexOf(name) === -1) {
+    if (!!name && names.indexOf(name) === -1) {
       names.push(name);
     }
     this.questionNamesValues.forEach(name => {
@@ -124,10 +124,10 @@ export class SurveyLogicAction {
     if (!this.element) return "";
     var prefix = "";
     const owner = this.getOwnerElement();
-    if (!!owner && owner !== this.element) {
+    if (!!owner && owner !== this.element && !!(<any>owner).name) {
       prefix = (<any>owner).name + ".";
     }
-    return (prefix + (<any>this.element).name) || "";
+    return (prefix + (<any>this.element).name || "") || "";
   }
   private get elementOwnerName(): string {
     const owner = this.getOwnerElement();
