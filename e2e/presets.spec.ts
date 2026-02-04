@@ -430,7 +430,7 @@ test.describe(title, () => {
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list").click();
     await page.locator(".spg-action-button").nth(1).click();
 
-    await page.getByText("Apply").click();
+    await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Edit Presets list"]);
@@ -448,10 +448,10 @@ test.describe(title, () => {
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list").click();
     await page.getByText("Add new preset...").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
-    await page.getByRole("button", { name: "Apply" }).nth(1).click();
+    await page.getByRole("button", { name: "Add" }).nth(1).click();
     const items = page.locator(".sv-popup__container table").nth(0);
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert", "MyPreset"]);
-    await page.getByRole("button", { name: "Apply" }).click();
+    await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Edit Presets list"]);
