@@ -17,7 +17,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   private currentValue;
   private designerPlugin;
   private toolboxCompact;
-  private defaultJson = {};
+  private defaultJson;
 
   private presetsManager;
 
