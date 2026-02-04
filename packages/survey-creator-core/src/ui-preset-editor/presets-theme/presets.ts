@@ -253,7 +253,7 @@ export var presetsCss = {
     headerCell: "sps-table__cell sps-table__cell--header",
     button: "sps-btn",
     detailRow: "sps-table__row sps-table__row--detail",
-    detailButton: "sps-table__cell--detail-button sps-action-button",
+    detailButton: "sps-table__cell--detail-button sps-action-button sps-action-button--icon",
     detailButtonExpanded: "sps-table__cell--detail-button--expanded",
     detailIcon: "sps-detail-panel__icon sps-action-button__icon",
     detailIconExpanded: "sps-detail-panel__icon--expanded",
