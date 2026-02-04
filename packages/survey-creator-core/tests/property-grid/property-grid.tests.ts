@@ -2826,6 +2826,16 @@ test("Has narrow style between link value questions", () => {
   expect(defaultValueQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeFalsy();
   expect(correctAnswerQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeTruthy();
 });
+test("Has no narrow style after invisible question", () => {
+  const defaultValueProperty = Serializer.findProperty("text", "defaultValue");
+  const oldVisible = defaultValueProperty.visible;
+  defaultValueProperty.visible = false;
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const correctAnswerQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("correctAnswer");
+  expect(correctAnswerQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeFalsy();
+  defaultValueProperty.visible = oldVisible;
+});
 test("nextToProperty on the same line", () => {
   const maxProperty = Serializer.findProperty("text", "max");
   const oldNextToProperty = maxProperty.nextToProperty;
