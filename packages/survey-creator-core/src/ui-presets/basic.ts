@@ -39,7 +39,6 @@ export const Basic = {
           },
           "file": {
             "properties": [
-              "needConfirmRemoveFile",
               "acceptedTypes",
               "maxSize"
             ]
