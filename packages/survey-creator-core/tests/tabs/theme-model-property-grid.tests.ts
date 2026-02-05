@@ -1209,6 +1209,40 @@ test("Check buttons property grid categories", (): any => {
   expect(propertyGridSurvey.currentPage.name).toBe("general");
 });
 
+test("Updates tab actions and sidebar header title by search manager", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "buttons";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const pgTabs = themePlugin["tabControlModel"].topToolbar.actions;
+  const generalTab = pgTabs.find(t => t.id === "general");
+  const headerTab = pgTabs.find(t => t.id === "header");
+  const backgroundTab = pgTabs.find(t => t.id === "background");
+
+  expect(propertyGridSurvey.currentPage.name).toBe("general");
+  expect(generalTab?.active).toBe(true);
+  expect(creator.sidebar.header.title).toBe(propertyGridSurvey.currentPage.title);
+
+  const headerPage = propertyGridSurvey.getPageByName("header");
+  propertyGridSurvey.currentPage = headerPage;
+
+  expect(propertyGridSurvey.currentPage.name).toBe("header");
+  expect(generalTab?.active).toBe(false);
+  expect(headerTab?.active).toBe(true);
+  expect(creator.sidebar.header.title).toBe(headerPage.title);
+
+  const backgroundPage = propertyGridSurvey.getPageByName("background");
+  propertyGridSurvey.currentPage = backgroundPage;
+
+  expect(propertyGridSurvey.currentPage.name).toBe("background");
+  expect(headerTab?.active).toBe(false);
+  expect(backgroundTab?.active).toBe(true);
+  expect(creator.sidebar.header.title).toBe(backgroundPage.title);
+});
+
 test("Check subcategory order", (): any => {
   Serializer.addProperty("theme", {
     name: "custom-question-title",
