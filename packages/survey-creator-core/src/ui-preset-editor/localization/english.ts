@@ -224,7 +224,7 @@ export const enStrings = {
     basic: "Basic",
     advanced: "Advanced",
     expert: "Expert",
-    editPresetsList: "Edit Presets list",
+    editPresetsList: "Edit Presets list...",
     editPresetsListTitle: "Edit Presets list",
     addNewPreset: "Add new preset...",
     addNewPresetTitle: "Add new preset",
