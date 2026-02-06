@@ -1,6 +1,34 @@
 export const Basic = {
   presetName: "basic",
   json: {
+    "toolbox": {
+      "definition": [
+        { "name": "radiogroup" },
+        { "name": "rating" },
+        { "name": "slider" },
+        { "name": "checkbox" },
+        { "name": "dropdown" },
+        { "name": "boolean" },
+        { "name": "file" },
+        { "name": "text" },
+        { "name": "comment" },
+        { "name": "matrix" },
+        { "name": "image" },
+      ],
+    },
+    "tabs": {
+      "items": [
+        {
+          "name": "designer",
+          "iconName": "icon-config"
+        },
+        {
+          "name": "preview",
+          "iconName": "icon-preview"
+        }
+      ],
+      "activeTab": "designer"
+    },
     "propertyGrid": {
       "definition": {
         "autoGenerateProperties": false,
@@ -47,7 +75,9 @@ export const Basic = {
             "properties": [
               "cellType",
               "eachRowRequired",
-              "eachRowUnique"
+              "eachRowUnique",
+              "columns",
+              "rows",
             ]
           },
           "rating": {

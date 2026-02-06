@@ -1,6 +1,27 @@
 export const Advanced = {
   presetName: "advanced",
   json: {
+    "tabs": {
+      "items": [
+        {
+          "name": "designer",
+          "iconName": "icon-config"
+        },
+        {
+          "name": "preview",
+          "iconName": "icon-preview"
+        },
+        {
+          "name": "translation",
+          "iconName": "icon-language"
+        },
+        {
+          "name": "theme",
+          "iconName": "icon-theme"
+        }
+      ],
+      "activeTab": "designer"
+    },
     "propertyGrid": {
       "definition": {
         "autoGenerateProperties": false,
@@ -60,6 +81,7 @@ export const Advanced = {
           matrixdropdownbase: {
             properties: [
               "cellType",
+              { name: "columns", tab: "columns" },
               { name: "verticalAlign", tab: "layout" },
               { name: "alternateRows", tab: "layout" },
               { name: "cellErrorLocation", tab: "layout" },
@@ -79,7 +101,7 @@ export const Advanced = {
             ]
           },
           matrixdropdown: {
-            properties: []
+            properties: [{ name: "rows", tab: "rows" }],
           },
           matrix: {
             properties: [
@@ -91,6 +113,7 @@ export const Advanced = {
           },
           multipletext: {
             properties: [
+              { name: "items", tab: "items" },
               { name: "itemTitleWidth", tab: "layout" },
             ]
           },
