@@ -608,6 +608,21 @@ test("default toolbox JSON by question and converter", (): any => {
   expect(question.toJSON()["choices"]).toHaveLength(5);
   delete settings.toolbox.defaultJSON["radiogroup"];
 });
+test("default toolbox JSON for matrices, Bug#7394", (): any => {
+  settings.toolbox.defaultJSON["matrixdynamic"] = { cellType: "text", columns: [{ name: "col1" }] };
+  const creator = new CreatorTester();
+  const json: any = creator.toolbox.getItemByName("matrixdynamic").json;
+  creator.clickToolboxItem(json);
+  expect(creator.selectedElementName).toEqual("question1");
+  let question = <Question>creator.selectedElement;
+  expect(question.getType()).toEqual("matrixdynamic");
+  expect(question.toJSON()).toStrictEqual({
+    name: "question1",
+    cellType: "text",
+    columns: [{ name: "col1" }]
+  });
+  delete settings.toolbox.defaultJSON["matrixdynamic"];
+});
 test("Check that d&d not working for toobox invisible items in readOnly mode", (): any => {
   const creator = new CreatorTester();
   const oldOnPointerDown = DragOrClickHelper.prototype.onPointerDown;
