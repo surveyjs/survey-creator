@@ -12,7 +12,7 @@ resources:
   pipelines:
     - pipeline: LibraryMain
       source: "/library/Library Main"
-      trigger: false
+      trigger: none
 
 variables:
   npm_config_cache: $(Pipeline.Workspace)/.npm
