@@ -1,6 +1,7 @@
 export * from "./presets-editable-toolbox";
 export * from "./presets-editor";
 export * from "./presets-plugin";
+export * from "./presets-manager";
 export * from "./presets-editable-languages";
 export * from "./presets-editable-tabs";
 export * from "./presets-editable-options";

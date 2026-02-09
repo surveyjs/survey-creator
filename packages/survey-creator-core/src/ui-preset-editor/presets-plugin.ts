@@ -2,7 +2,7 @@ import { createDropdownActionModel, IAction, ListModel, settings as libSettings,
 import { ICreatorPlugin, ICreatorPresetData, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
-import { PresetsManager } from "./presets-manager";
+import { PresetsManager, IPresetListItem } from "./presets-manager";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
@@ -25,6 +25,26 @@ export class UIPresetEditor implements ICreatorPlugin {
   private presetsList: ListModel;
 
   private saveAction: Action;
+  private saveCount = 0;
+
+  /**
+   * Custom function to handle preset saving. When set, it is called instead of the default save handler.
+   * @param saveNo The sequential save number (0-based).
+   * @param callback Call this when the custom save is complete to apply the default save behavior.
+   */
+  public savePresetFunc: (saveNo: number, callback: () => void) => void;
+
+  /**
+   * An event raised when the presets list is saved in the Edit Presets List dialog.
+   *
+   * Parameters:
+   *
+   * - `sender`: `UIPresetEditor`\
+   * A `UIPresetEditor` instance that raised the event.
+   * - `options.presets`: `IPresetListItem[]`\
+   * The updated presets list.
+   */
+  public onPresetListSaved = new EventBase<UIPresetEditor, { presets: IPresetListItem[] }>();
 
   private showPresets() {
     this.activeTab = this.creator.activeTab;
@@ -84,6 +104,9 @@ export class UIPresetEditor implements ICreatorPlugin {
     settingsPage.componentData.elements[0].componentData.showPresets = () => this.showPresets();
     this.toolboxCompact = creator.toolbox.forceCompact;
     this.presetsManager = new PresetsManager(creator);
+    this.presetsManager.onPresetListSaved = (presets) => {
+      this.onPresetListSaved.fire(this, { presets });
+    };
     this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
       this.saveAction.enabled = PredefinedCreatorPresets.indexOf(preset.presetName) === -1;
       this.model.json = preset.json;
@@ -99,24 +122,12 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   /**
-   * An event raised when a user clicks **Save & Exit** in the Preset Editor.
-   *
-   * Parameters:
-   *
-   * - `sender`: `UIPresetEditor`\
-   * A `UIPresetEditor` instance that raised the event.
-   * - `options.preset`: `ICreatorPresetData`\
-   * A preset configuration that was applied to the Survey Creator.
-   */
-  public onPresetSaved = new EventBase<UIPresetEditor, { preset: ICreatorPresetData }>();
-
-  /**
    * Adds a new UI preset to UI Preset Editor.
    * @param preset A [UI preset] to add.
    * @see removePreset
    */
   public addPreset(preset: UIPreset) {
-    this.presetsManager.addPreset(preset);
+    this.presetsManager.addPreset({ presetName: preset.name, json: preset.getJson() });
   }
   /**
    * Removes a UI theme from Theme Editor.
@@ -127,9 +138,43 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.presetsManager.removePreset(typeof(presetAccessor) === "string" ? presetAccessor : presetAccessor.name);
   }
 
+  /**
+   * Returns a preset by name.
+   * @param name The preset identifier.
+   * @returns The preset configuration or undefined if not found.
+   */
+  public getPreset(name: string): ICreatorPresetConfig | undefined {
+    return this.presetsManager.getPreset(name);
+  }
+
+  /**
+   * Returns the currently selected preset.
+   */
+  public getCurrentPreset(): ICreatorPresetConfig | undefined {
+    return this.presetsManager.getCurrentPreset();
+  }
+
+  /**
+   * Mutable array of all presets. Includes presets from register, add, or user-saved.
+   * Each item has: name, visible, removable (true for custom presets), sortable.
+   */
+  public get presets(): IPresetListItem[] {
+    return this.presetsManager.getPresetsArray();
+  }
+
+  private performSave() {
+    if (this.savePresetFunc) {
+      this.savePresetFunc(this.saveCount, () => {
+        this.saveHandler();
+      });
+    } else {
+      this.saveHandler();
+    }
+  }
+
   protected saveHandler() {
     this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
-    this.onPresetSaved.fire(this, { preset: this.model.json });
+    this.saveCount++;
     this.setStatus("saved");
   }
   protected saveAsHandler() {
@@ -168,7 +213,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     const defaultPresets = this.presetsManager.presetsMenuItems;
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), enabled: false, action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "save", title: getLocString("presets.plugin.save"), enabled: false, action: () => this.performSave() }, //locTitleName: "presets.plugin.save"
       { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAsHandler() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
@@ -246,7 +291,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       visible: false,
       title: "Saved",
       css: "sps-navigation-action sps-navigation-action--label sps-navigation-action--large-icon",
-      action: () => { this.saveHandler(); this.hidePresets(); }
+      action: () => { this.performSave(); this.hidePresets(); }
     });
 
     const quitAction = new Action({

@@ -2,6 +2,12 @@ import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, Ques
 import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 import { get } from "lodash";
+
+export interface IPresetListItem {
+  name: string;
+  visible: boolean;
+}
+
 export class PresetsManager {
   /**
    *
@@ -14,14 +20,20 @@ export class PresetsManager {
   public presetSelector: QuestionDropdownModel;
   private unsaved = false;
 
+  /**
+   * Callback fired when the presets list is saved in the Edit Presets List dialog.
+   */
+  public onPresetListSaved: (presets: IPresetListItem[]) => void;
+
+  private customPresets = [] as string[];
+  private _presetsArray: IPresetListItem[] = [];
+
   public setStatus(unsaved: boolean) {
     this.unsaved = unsaved;
   }
   public get isSaved(): boolean {
     return !this.unsaved;
   }
-
-  private customPresets = [] as string[];
 
   private getPresetTitle(name: string) {
     return getLocString("preset.names." + name);
@@ -93,7 +105,27 @@ export class PresetsManager {
         this.customPresets.push(name);
       }
     });
+    this.rebuildPresetsArray();
+    this.onPresetListSaved?.(this._presetsArray);
     this.updateMenu();
+  }
+
+  private rebuildPresetsArray() {
+    this._presetsArray.length = 0;
+    [...PredefinedCreatorPresets, ...this.customPresets].forEach(p => {
+      this._presetsArray.push({
+        name: p,
+        visible: CreatorPresets[p]?.visible !== false,
+      });
+    });
+  }
+
+  /**
+   * Returns the presets array. Mutable - includes all presets from register, add, or user-saved.
+   */
+  public getPresetsArray(): IPresetListItem[] {
+    this.rebuildPresetsArray();
+    return this._presetsArray;
   }
 
   public addPresetsListEditor(survey: SurveyModel, onEdit?: (item: any) => void) {
@@ -285,11 +317,22 @@ export class PresetsManager {
   public addPreset(preset: ICreatorPresetConfig) {
     CreatorPresets[preset.presetName] = preset;
     this.customPresets.push(preset.presetName);
+    this.rebuildPresetsArray();
     this.updateMenu();
   }
   public removePreset(presetAccessor: string): void {
     delete CreatorPresets[presetAccessor];
     this.customPresets = this.customPresets.filter(p => p !== presetAccessor);
+    this.rebuildPresetsArray();
     this.updateMenu();
+  }
+
+  public getPreset(name: string): ICreatorPresetConfig | undefined {
+    return CreatorPresets[name];
+  }
+
+  public getCurrentPreset(): ICreatorPresetConfig | undefined {
+    const value = this.presetSelector?.value;
+    return value ? CreatorPresets[value] : undefined;
   }
 }
