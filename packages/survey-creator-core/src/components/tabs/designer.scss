@@ -209,7 +209,7 @@ svc-tab-designer {
 }
 
 .svc-creator__toolbox--right,
-[dir="rtl"],
+:dir(rtl),
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
   .svc-tab-designer__tools {
