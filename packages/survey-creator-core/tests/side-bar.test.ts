@@ -38,7 +38,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[4].visible).toEqual(true); // translation
 
   creator.sidebar.activePage = "toolbox";
-  expect(creator.sidebar.header.title).toEqual(undefined);
+  expect(creator.sidebar.header.title).toEqual("Toolbox");
   expect(creator.sidebar.activePage).toEqual("toolbox");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGridPlaceholder
   expect(creator.sidebar.pages[1].visible).toEqual(false); // propertyGrid
