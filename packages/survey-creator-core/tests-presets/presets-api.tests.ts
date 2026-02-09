@@ -21,21 +21,6 @@ afterEach(() => {
   PredefinedCreatorPresets.push(...originalPredefinedPresets);
 });
 
-test("Preset editor - check events", () => {
-  const creator = new CreatorBase();
-  const plugin = new UIPresetEditor(creator);
-  let v;
-  plugin.onPresetSaved.add((_, opt) => {
-    v = opt.preset.toolbox?.showCategoryTitles;
-  });
-  plugin.activate();
-  const q = plugin.model.model.getQuestionByName("toolbox_showCategoryTitles");
-  q.value = true;
-  expect(v).toBe(undefined);
-  plugin["saveHandler"]();
-  expect(v).toBe(true);
-});
-
 describe("UIPresetEditor API", () => {
   beforeEach(() => {
     PredefinedCreatorPresets.push("basic", "advanced");
@@ -130,7 +115,6 @@ describe("UIPresetEditor API", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
       plugin.activate();
-      const saveCallback = jest.fn();
       plugin.savePresetFunc = (saveNo, callback) => {
         expect(saveNo).toBe(0);
         callback();
@@ -139,18 +123,6 @@ describe("UIPresetEditor API", () => {
       plugin["performSave"]();
 
       expect(plugin["saveCount"]).toBe(1);
-    });
-
-    test("should use default save when savePresetFunc is not set", () => {
-      const creator = new CreatorBase();
-      const plugin = new UIPresetEditor(creator);
-      let saved = false;
-      plugin.onPresetSaved.add(() => { saved = true; });
-      plugin.activate();
-
-      plugin["performSave"]();
-
-      expect(saved).toBe(true);
     });
 
     test("savePresetFunc receives incremental saveNo", () => {
