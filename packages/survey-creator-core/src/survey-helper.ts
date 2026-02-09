@@ -10,7 +10,8 @@ import {
   PageModel,
   PanelModel,
   PanelModelBase,
-  settings
+  settings,
+  IElement
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
@@ -146,6 +147,9 @@ export class SurveyHelper {
       SurveyHelper.addElements(survey.pages[i].elements, isPanel, result);
     }
     return result;
+  }
+  public static isPanelOrQuestion(el: Base): boolean {
+    return el.isPanel || el.isQuestion || el.isPage;
   }
   public static isPropertyVisible(obj: any, prop: JsonObjectProperty, options: ISurveyCreatorOptions = null, showMode: string = null, parentObj: any = null, parentProperty: JsonObjectProperty = null): boolean {
     if (!prop || !prop.visible) return false;

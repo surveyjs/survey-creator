@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -395,6 +395,15 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
+
+      this.propertyGrid.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
+        const pgTabs = this.tabControlModel.topToolbar.actions;
+        pgTabs.forEach(action => {
+          action.active = action.id === options.newCurrentPage.name;
+        });
+        this.creator.sidebar.header.title = options.newCurrentPage.title;
+      });
+
       this.creator.sidebar.header.title = this.propertyGrid.survey.currentPage.title;
       this.creator.sidebar.header.subTitle = this.propertyGridTab.caption;
     }

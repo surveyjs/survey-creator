@@ -3120,12 +3120,18 @@ export class SurveyCreatorModel extends Base
     return this.getAllElements(true, includeNewItems);
   }
   private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
-    const result = SurveyHelper.getAllElements(this.survey, isPanel);
+    const els = SurveyHelper.getAllElements(this.survey, isPanel);
     if (includeNewItems) {
-      SurveyHelper.addElements(this.newPanels, isPanel, result);
-      SurveyHelper.addElements(this.newQuestions, isPanel, result);
+      SurveyHelper.addElements(this.newPanels, isPanel, els);
+      SurveyHelper.addElements(this.newQuestions, isPanel, els);
     }
-    return result;
+    const res = [];
+    els.forEach(el => {
+      if (SurveyHelper.isPanelOrQuestion(el)) {
+        res.push(el);
+      }
+    });
+    return res;
   }
   protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
