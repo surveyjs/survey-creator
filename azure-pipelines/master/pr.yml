@@ -11,7 +11,7 @@ resources:
       name: surveyjs/azure-pipelines-repo-dont-remove-please
   pipelines:
     - pipeline: LibraryMain
-      source: Library Main
+      source: "/library/Library Main"
       trigger: false
 
 variables:
