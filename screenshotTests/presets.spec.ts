@@ -142,6 +142,19 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "presets-context-menu.png");
   });
 
+  test("Check presets icon edit popup", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+
+    await page.getByRole("row", { name: "Designer" }).hover();
+    await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
+    await page.getByRole("combobox", { name: "Icon name" }).focus();
+    await page.waitForTimeout(500);
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await compareScreenshot(page, ".sps-dropdown-popup .svc-list__container", "presets-icon-edit-popup.png");
+  });
+
   test("Presets Dialogs", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").nth(1).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
