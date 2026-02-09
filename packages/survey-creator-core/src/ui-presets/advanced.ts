@@ -367,8 +367,152 @@ export const Advanced = {
               { name: "showOnCompleted", index: 600 },
               { name: "timer", index: 700 }
             ]
-          }
-        } }
+          },
+          "matrixdropdowncolumn@default": {
+            properties: [
+              "name",
+              "title",
+              "cellType",
+              "isRequired",
+              "isUnique",
+              { name: "requiredIf", tab: "logic" },
+              { name: "validators", tab: "validation" },
+            ],
+            tabs: [
+              { name: "general", index: 5 },
+              { name: "logic", index: 20 },
+              { name: "validation", index: 60 }
+            ]
+          },
+          "matrixdropdowncolumn@checkbox": {
+            properties: [
+              { name: "choices", tab: "choices", index: 0 },
+              { name: "choicesFromQuestion", tab: "choices" },
+              { name: "choicesFromQuestionMode", tab: "choices" },
+              { name: "showOtherItem", tab: "choices" },
+              { name: "colCount", tab: "choices" },
+              { name: "showSelectAllItem", tab: "choices" },
+              { name: "minSelectedChoices", tab: "choices" },
+              { name: "maxSelectedChoices", tab: "choices" },
+            ],
+            tabs: [
+              { name: "choices", index: 10 },
+              { name: "choicesByUrl", index: 11 }
+            ]
+          },
+          "matrixdropdowncolumn@radiogroup": {
+            properties: [
+              { name: "choices", tab: "choices", index: 0 },
+              { name: "choicesFromQuestion", tab: "choices" },
+              { name: "choicesFromQuestionMode", tab: "choices" },
+              { name: "showOtherItem", tab: "choices" },
+              { name: "colCount", tab: "choices" },
+            ],
+            tabs: [
+              { name: "choices", index: 10 },
+              { name: "choicesByUrl", index: 11 }
+            ]
+          },
+          "matrixdropdowncolumn@dropdown": {
+            properties: [
+              { name: "choices", tab: "choices", index: 0 },
+              { name: "choicesFromQuestion", tab: "choices" },
+              { name: "choicesFromQuestionMode", tab: "choices" },
+              { name: "showOtherItem", tab: "choices" },
+              { name: "colCount", tab: "choices" },
+              { name: "allowClear", tab: "choices" },
+            ],
+            tabs: [
+              { name: "choices", index: 10 },
+              { name: "choicesByUrl", index: 11 }
+            ]
+          },
+          "matrixdropdowncolumn@tagbox": {
+            properties: [
+              { name: "choices", tab: "choices", index: 0 },
+              { name: "choicesFromQuestion", tab: "choices" },
+              { name: "choicesFromQuestionMode", tab: "choices" },
+              { name: "showOtherItem", tab: "choices" },
+              { name: "colCount", tab: "choices" },
+              { name: "allowClear", tab: "choices" },
+            ],
+            tabs: [
+              { name: "choices", index: 10 },
+              { name: "choicesByUrl", index: 11 }
+            ]
+          },
+          "matrixdropdowncolumn@text": {
+            properties: [
+              "inputType",
+              "min",
+              "max",
+              "step",
+              { name: "maskType", tab: "mask" },
+              { name: "maskSettings", tab: "mask" },
+            ],
+            tabs: [
+              { name: "mask", index: 20 }
+            ]
+          },
+          "matrixdropdowncolumn@comment": {
+            properties: ["rows", "maxLength"]
+          },
+          "matrixdropdowncolumn@boolean": {
+            properties: [
+              { name: "labelTrue", tab: "data" },
+              { name: "labelFalse", tab: "data" },
+            ],
+            tabs: [{ name: "data", index: 25 }]
+          },
+          "matrixdropdowncolumn@expression": {
+            properties: [
+              "expression",
+              "displayStyle",
+              "currency"
+            ]
+          },
+          "matrixdropdowncolumn@rating": {
+            properties: [
+              { name: "rateType", tab: "rateValues" },
+              { name: "rateMin", tab: "rateValues" },
+              { name: "rateMax", tab: "rateValues" },
+              { name: "rateStep", tab: "rateValues" },
+              { name: "rateDescriptionLocation", tab: "rateValues" },
+              { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
+            ],
+            tabs: [{ name: "rateValues", index: 5 }]
+          },
+          "matrixdropdowncolumn@slider": {
+            properties: [
+              { name: "sliderType", tab: "sliderSettings" },
+              { name: "min", tab: "sliderSettings" },
+              { name: "max", tab: "sliderSettings" },
+              { name: "step", tab: "sliderSettings" },
+              { name: "minRangeLength", tab: "sliderSettings" },
+              { name: "maxRangeLength", tab: "sliderSettings" },
+              { name: "showLabels", tab: "sliderSettings" },
+              { name: "tooltipVisibility", tab: "sliderSettings" },
+              { name: "allowSwap", tab: "sliderSettings" },
+              { name: "allowClear", tab: "sliderSettings" },
+            ],
+            tabs: [{ name: "sliderSettings", index: 10 }]
+          },
+          multipletextitem: {
+            properties: [
+              "name",
+              "title",
+              "inputType",
+              "isRequired",
+              "inputTextAlignment",
+              { name: "maskType", tab: "mask" },
+              { name: "maskSettings", tab: "mask" },
+            ],
+            tabs: [
+              { name: "mask", index: 250 }
+            ]
+          },
+        }
+      }
     }
   }
 }as const;
