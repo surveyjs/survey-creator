@@ -97,8 +97,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
   }
 
-  public activateSidebar() {
-    this.updateActivePage(false);
+  public activateSidebar(showPlaceholder = false) {
+    this.updateActivePage(showPlaceholder);
     this.updateTabControl();
   }
 
