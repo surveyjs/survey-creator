@@ -319,6 +319,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     this.model.model.onCurrentPageChanged.add((_, options) => {
       this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
+      pagesAction.title = this.pagesList.selectedItem.title || "";
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
