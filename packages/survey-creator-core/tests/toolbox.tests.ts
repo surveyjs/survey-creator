@@ -937,3 +937,18 @@ test("toolbox category localization Bug#7284", (): any => {
   creator.locale = "de";
   expect(creator.toolbox.categories[0].title).toBe("Auswahl-Fragen");
 });
+
+test("Sidebar: toolboxAction title is localized with locTitleName ed.toolbox", () => {
+  const creator = new CreatorTester({ toolboxLocation: "sidebar" });
+  const toolboxAction = creator.getActionBarItem("svd-toolbox");
+  expect(toolboxAction).toBeTruthy();
+  expect(toolboxAction.locTitleName).toEqual("ed.toolbox");
+  expect(toolboxAction.title).toEqual("Toolbox");
+
+  creator.locale = "de";
+  expect(toolboxAction.title).toEqual("Werkzeugleiste");
+  expect(toolboxAction.locTitle?.text).toEqual("Werkzeugleiste");
+
+  creator.locale = "";
+  expect(toolboxAction.title).toEqual("Toolbox");
+});
