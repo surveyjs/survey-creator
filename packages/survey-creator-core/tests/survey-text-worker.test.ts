@@ -126,3 +126,12 @@ test("SurveyTextWorker, validate properties value, Issue#7335", () => {
     clearIfInvisible: "default"
   });
 });
+
+test("SurveyTextWorker ignores $schema", () => {
+  const textWorker = createTextWorker({
+    $schema: "https://example.com/survey.schema.json",
+    elements: [{ type: "text", name: "q1" }]
+  });
+  expect(textWorker.isJsonCorrect).toBeTruthy();
+  expect(textWorker.errors).toHaveLength(0);
+});

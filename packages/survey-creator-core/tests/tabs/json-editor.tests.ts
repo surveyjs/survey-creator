@@ -25,6 +25,33 @@ test("JsonEditor & showErrors/errorList", () => {
   expect(editor.errorList.actions[0].title.substring(0, 8)).toBe("Line: 6.");
 });
 
+test("JsonEditor ignores $schema", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    $schema: "https://example.com/survey.schema.json",
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeFalsy();
+  expect(editor.errorList.actions).toHaveLength(0);
+});
+
+test("Creator preserves $schema in JSON and text", () => {
+  const creator = new CreatorTester();
+  const schemaUrl = "https://example.com/survey.schema.json";
+  creator.JSON = {
+    $schema: schemaUrl,
+    elements: [{ type: "text", name: "q1" }]
+  };
+  const json = creator.JSON;
+  expect(json.$schema).toBe(schemaUrl);
+  const parsed = JSON.parse(creator.text);
+  expect(parsed.$schema).toBe(schemaUrl);
+});
+
 test("JsonEditor & fixError action", () => {
   const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);

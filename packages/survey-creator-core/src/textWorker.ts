@@ -213,6 +213,7 @@ export class SurveyTextWorker {
   public errors: Array<SurveyTextWorkerError>;
   private surveyValue: SurveyModel;
   private jsonValue: any;
+  private schemaValue: any;
 
   constructor(public text: string, private options?: ILoadFromJSONOptions) {
     if (!this.text || this.text.trim() == "") {
@@ -237,6 +238,7 @@ export class SurveyTextWorker {
       this.errors.push(new SurveyTextWorkerParserError(error.at, error.message));
     }
     if (this.jsonValue != null) {
+      this.extractSchemaFromJson(this.jsonValue);
       this.updateJsonPositions(this.jsonValue);
       if (!!SurveyTextWorker.onProcessJson) {
         SurveyTextWorker.onProcessJson(this.jsonValue);
@@ -262,6 +264,13 @@ export class SurveyTextWorker {
         jsonObj["pos"][key] = obj["pos"];
         this.updateJsonPositions(obj);
       }
+    }
+  }
+  private extractSchemaFromJson(jsonObj: any): void {
+    if (!jsonObj || typeof jsonObj !== "object") return;
+    if (Object.prototype.hasOwnProperty.call(jsonObj, "$schema")) {
+      this.schemaValue = jsonObj["$schema"];
+      delete jsonObj["$schema"];
     }
   }
   private setErrorsPositionByChartAt() {

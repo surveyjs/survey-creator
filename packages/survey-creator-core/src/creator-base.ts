@@ -2599,6 +2599,7 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
   }
   private isCreatingNewElement: boolean;
+  private surveySchemaValue: any;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     this.isCreatingNewElement = true;
@@ -2683,6 +2684,7 @@ export class SurveyCreatorModel extends Base
     var json = (<any>this.survey).toJSON();
     json = this.singlePageJSON(json);
     this.moveElementsToTheEnd(json);
+    json = this.applySchemaToJson(json);
     const indent = settings.jsonEditor.indentation;
     if (this.generateValidJSON) {
       return JSON.stringify(json, null, indent);
@@ -2713,6 +2715,7 @@ export class SurveyCreatorModel extends Base
   public changeText(value: string, clearState = false, trustJSON?: boolean): void {
     this.setTextValue(value);
     if (!value) {
+      this.updateSchemaFromJson(undefined);
       this.initSurveyWithJSON(undefined, clearState);
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
@@ -2725,6 +2728,7 @@ export class SurveyCreatorModel extends Base
         }
       }
       if (!!jsonValue) {
+        this.updateSchemaFromJson(jsonValue);
         this.initSurveyWithJSON(jsonValue, clearState);
       } else {
         this.viewType = "json";
@@ -2751,12 +2755,12 @@ export class SurveyCreatorModel extends Base
 
   public getSurveyJSON(): any {
     if (this.viewType != "json") {
-      return new JsonObject().toJsonObject(this.survey);
+      return this.applySchemaToJson(new JsonObject().toJsonObject(this.survey));
     }
     var surveyJsonText = this.text;
     var textWorker = new SurveyTextWorker(surveyJsonText);
     if (textWorker.isJsonCorrect) {
-      return new JsonObject().toJsonObject(textWorker.survey);
+      return this.applySchemaToJson(new JsonObject().toJsonObject(textWorker.survey));
     }
     return null;
   }
@@ -3020,14 +3024,40 @@ export class SurveyCreatorModel extends Base
    */
   public get JSON(): any {
     const json = (<any>this.survey).toJSON();
-    return this.singlePageJSON(json);
+    return this.applySchemaToJson(this.singlePageJSON(json));
   }
   public set JSON(val: any) {
     if (this.viewType == "json") {
+      this.updateSchemaFromJson(val, true, false);
       this.setTextValue(JSON.stringify(val));
     } else {
+      this.updateSchemaFromJson(val);
       this.initSurveyWithJSON(val, true);
     }
+  }
+  private updateSchemaFromJson(jsonObj: any, clearOnMissing: boolean = true, strip: boolean = true): void {
+    if (jsonObj && typeof jsonObj === "object") {
+      if (Object.prototype.hasOwnProperty.call(jsonObj, "$schema")) {
+        this.surveySchemaValue = jsonObj["$schema"];
+        if (strip) {
+          delete jsonObj["$schema"];
+        }
+        return;
+      }
+    }
+    if (clearOnMissing) {
+      this.surveySchemaValue = undefined;
+    }
+  }
+  private applySchemaToJson(jsonObj: any): any {
+    if (!jsonObj || typeof jsonObj !== "object") return jsonObj;
+    if (this.surveySchemaValue === undefined) return jsonObj;
+    if (Object.prototype.hasOwnProperty.call(jsonObj, "$schema")) return jsonObj;
+    const withSchema: any = { "$schema": this.surveySchemaValue };
+    Object.keys(jsonObj).forEach(key => {
+      withSchema[key] = jsonObj[key];
+    });
+    return withSchema;
   }
   public loadSurvey(surveyId: string): void {
     // eslint-disable-next-line no-console
