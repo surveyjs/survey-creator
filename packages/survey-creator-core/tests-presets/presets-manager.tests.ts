@@ -313,6 +313,39 @@ describe("PresetsManager", () => {
       expect(manager.presetsList.onItemClick).toHaveBeenCalledWith(mockAction);
     });
 
+    test("should overwrite existing preset when name already exists", () => {
+      const presetName = "existingPreset";
+      const initialJson = { toolbox: { showCategoryTitles: false } };
+      const updatedJson = { toolbox: { showCategoryTitles: true } };
+      const saveCallback = jest.fn();
+
+      // Prepare existing custom preset so it is present in the manager's custom list.
+      manager.addPreset({ presetName, json: initialJson });
+
+      const mockAction = { id: presetName } as IAction;
+      (manager.presetsList.getActionById as jest.Mock).mockReturnValue(mockAction);
+
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: jest.fn() };
+      });
+
+      manager.saveAs(updatedJson, saveCallback);
+
+      const dialogOptions = mockShowDialog.mock.calls[0][0];
+      const survey = dialogOptions.data.survey as SurveyModel;
+      survey.setValue("presetName", presetName);
+      dialogOptions.onApply();
+
+      // Preset config should be overwritten (not duplicated).
+      expect(CreatorPresets[presetName]).toBeDefined();
+      expect(CreatorPresets[presetName].json).toEqual(updatedJson);
+      expect(saveCallback).toHaveBeenCalledWith(presetName);
+      expect(manager.presetsList.onItemClick).toHaveBeenCalledWith(mockAction);
+
+      const occurrences = manager.getPresetsArray().filter(p => p.name === presetName).length;
+      expect(occurrences).toBe(1);
+    });
+
     test("should not add preset when dialog is cancelled", () => {
       const json = {};
       const saveCallback = jest.fn();

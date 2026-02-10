@@ -315,8 +315,17 @@ export class PresetsManager {
   }
 
   public addPreset(preset: ICreatorPresetConfig) {
-    CreatorPresets[preset.presetName] = preset;
-    this.customPresets.push(preset.presetName);
+    const presetName = preset?.presetName;
+    if (!presetName) return;
+
+    // Overwrite existing preset config without duplicating it in the list.
+    const existingPreset = CreatorPresets[presetName];
+    CreatorPresets[presetName] = existingPreset ? { ...existingPreset, ...preset } : preset;
+
+    // Only custom presets should be stored in the custom list and only once.
+    if (PredefinedCreatorPresets.indexOf(presetName) === -1 && this.customPresets.indexOf(presetName) === -1) {
+      this.customPresets.push(presetName);
+    }
     this.rebuildPresetsArray();
     this.updateMenu();
   }
