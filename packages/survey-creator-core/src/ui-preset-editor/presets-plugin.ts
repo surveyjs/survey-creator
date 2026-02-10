@@ -127,7 +127,7 @@ export class UIPresetEditor implements ICreatorPlugin {
    * @see removePreset
    */
   public addPreset(preset: UIPreset) {
-    this.presetsManager.addPreset(preset);
+    this.presetsManager.addPreset({ presetName: preset.name, json: preset.getJson() });
   }
   /**
    * Removes a UI theme from Theme Editor.
