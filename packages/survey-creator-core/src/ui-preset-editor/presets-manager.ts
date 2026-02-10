@@ -108,6 +108,19 @@ export class PresetsManager {
     this.rebuildPresetsArray();
     this.onPresetListSaved?.(this._presetsArray);
     this.updateMenu();
+    this.ensureSelectedPresetAvailable();
+  }
+
+  private ensureSelectedPresetAvailable() {
+    const current = this.presetsList.selectedItem.id;
+    const visibleNames = this.getPresetsListToEdit().filter(p => p.visible).map(p => p.name);
+    if (visibleNames.indexOf(current) >= 0) return;
+    const fallback = visibleNames[0];
+    if (!fallback || !CreatorPresets[fallback]) return;
+    const action = this.presetsList?.getActionById?.(fallback);
+    if (action) {
+      this.presetsList.selectedItem = action;
+    }
   }
 
   private rebuildPresetsArray() {
@@ -334,6 +347,7 @@ export class PresetsManager {
     this.customPresets = this.customPresets.filter(p => p !== presetAccessor);
     this.rebuildPresetsArray();
     this.updateMenu();
+    this.ensureSelectedPresetAvailable();
   }
 
   public getPreset(name: string): ICreatorPresetConfig | undefined {
