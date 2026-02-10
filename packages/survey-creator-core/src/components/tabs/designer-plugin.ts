@@ -83,14 +83,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateHeaderComponent() {
     const activePage = this.creator.sidebar.activePage;
-    if (this.showOneCategoryInPropertyGrid) {
-      if (this.activePageIsPropertyGrid) {
-        this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
-        this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
-      } else if (activePage === this.propertyGridPlaceholderPage.id || activePage === this.settingsPropertyGridTab.id || activePage === this.toolboxTab.id) {
-        this.creator.sidebar.header.componentName = "svc-side-bar-header";
-        this.creator.sidebar.header.componentData = this.creator.sidebar.header;
-      }
+    if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
+      this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
+      this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
+    } else if (this.showOneCategoryInPropertyGrid && (activePage === this.propertyGridPlaceholderPage.id || activePage === this.settingsPropertyGridTab.id || activePage === this.toolboxTab.id)) {
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
       this.creator.sidebar.header.componentName = "";
       this.creator.sidebar.header.componentData = undefined;
