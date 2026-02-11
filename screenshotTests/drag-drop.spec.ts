@@ -608,7 +608,12 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      (window as any).creator.rootElement.getRootNode().head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.querySelector("div")?.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      }
     });
 
     await page.setViewportSize({ width: 1600, height: 1000 });
@@ -644,7 +649,12 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      (window as any).creator.rootElement.getRootNode().head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.querySelector("div")?.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      }
     });
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
@@ -711,7 +721,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
 
       window["Survey"].CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
 
-      const widgetTemplateForKo = (window as any).creator.rootElement.getRootNode().createElement("script");
+      const widgetTemplateForKo = document.createElement("script");
       widgetTemplateForKo.setAttribute("id", "survey-widget-peoplepicker");
       widgetTemplateForKo.setAttribute("type", "text/html");
       widgetTemplateForKo.innerHTML = `
@@ -721,7 +731,12 @@ test.describe("DragDrop custom widget Screenshot", () => {
                     </label>
                   </div>
                 `;
-      (window as any).creator.rootElement.getRootNode().body.appendChild(widgetTemplateForKo);
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.body.appendChild(widgetTemplateForKo);
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.appendChild(widgetTemplateForKo);
+      }
     });
 
     await hideAllAdornerActions(page);

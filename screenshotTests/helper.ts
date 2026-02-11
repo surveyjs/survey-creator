@@ -246,7 +246,7 @@ export const explicitErrorHandler = async (page) => {
 // }
 
 export async function resetHoverToCreator(page: Page, offsetX: number = 0, offsetY: number = 0): Promise<void> {
-  await page.locator("#survey-creator").hover({ position: { x: offsetX, y: offsetY } });
+  await page.locator("#survey-creator").hover({ position: { x: offsetX, y: offsetY }, force: true });
 }
 
 export const hideAllAdornerActions = async (page) => {
