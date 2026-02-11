@@ -66,7 +66,6 @@ test("Preset edit model, property grid, apply", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   let propDef = editor.preset.getJson().propertyGrid?.definition;
   const surveyProps = propDef?.classes["survey"];
-  //expect(propDef?.autoGenerateProperties).toStrictEqual(false);
   expect(surveyProps?.tabs).toHaveLength(2);
   expect(surveyProps?.properties).toHaveLength(4);
 
@@ -340,7 +339,7 @@ test("Property import and defaults", () => {
   const editor = new CreatorPresetEditorModel({});
   editor.json = { "propertyGrid": {
     "definition": {
-      "autoGenerateProperties": false,
+      "generateOtherTab": false,
       "classes": {
         "survey": {
           "properties": [
@@ -447,7 +446,7 @@ test("Properties and applied presets", () => {
   const preset = new UIPreset({
     "propertyGrid": {
       "definition": {
-        "autoGenerateProperties": false,
+        "generateOtherTab": false,
         "classes": {
           "question": {
             "properties": [],
@@ -694,4 +693,75 @@ test("visible in classes", () => {
   expect(classes["tagbox"].properties.filter(p => p.name === "choicesOrder")).toHaveLength(0);
 
   settings.showDialog = originalShowDialog;
+});
+test("Include custom properties into preset", () => {
+  Serializer.addProperty("rating", { name: "customProp1", category: "rateValues" });
+  const editor = new CreatorPresetEditorModel();
+  editor.json = {
+    "propertyGrid": {
+      "definition": {
+        "classes": {
+          "rating": {
+            "properties": [{ name: "name", tab: "general" }, { name: "rateStep", tab: "rateValues" }, { name: "rateValues", tab: "rateValues" }],
+            "tabs": [{ name: "general", index: 1 }, { name: "rateValues", index: 100 }],
+          }
+        }
+      }
+    }
+  };
+  const survey = editor.model;
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "rating";
+  const tabIndex = categories.value.findIndex(c => c.category == "rateValues");
+  const row = categories.visibleRows[tabIndex];
+  row.showDetailPanel();
+  const properties = row.detailPanel.getQuestionByName("properties");
+  expect(properties.value.findIndex(r => r.name == "rateStep") > -1).toBeTruthy();
+  const index = properties.value.findIndex(r => r.name == "customProp1");
+  expect(index > -1).toBeTruthy();
+  const val = properties.value;
+  val.splice(index, 1);
+  properties.value = val;
+  editor.applyFromSurveyModel();
+  let propDef = editor.preset.getJson().propertyGrid?.definition;
+  let invisibleGeneratedProperties = propDef?.classes.rating.invisibleGeneratedProperties;
+  expect(invisibleGeneratedProperties).toBeTruthy();
+  expect(invisibleGeneratedProperties).toContain("customProp1");
+
+  val.push({ name: "customProp1", tab: "rateValues" });
+  properties.value = val;
+  editor.applyFromSurveyModel();
+  propDef = editor.preset.getJson().propertyGrid?.definition;
+  invisibleGeneratedProperties = propDef?.classes.rating.invisibleGeneratedProperties;
+  expect(invisibleGeneratedProperties).toBeFalsy();
+
+  Serializer.removeProperty("rating", "customProp1");
+});
+test("Do not include custom properties into preset if it is set as invisible", () => {
+  Serializer.addProperty("rating", { name: "customProp1", category: "rateValues" });
+  const editor = new CreatorPresetEditorModel();
+  editor.json = {
+    "propertyGrid": {
+      "definition": {
+        "classes": {
+          "rating": {
+            "properties": ["name", { name: "minStep", tab: "rateValues" }, { name: "rateValues", tab: "rateValues" }],
+            "tabs": [{ name: "rateValues", index: 100 }],
+            "invisibleGeneratedProperties": ["customProp1"]
+          }
+        }
+      }
+    }
+  };
+  const survey = editor.model;
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "rating";
+  const tabIndex = categories.value.findIndex(c => c.category == "rateValues");
+  const row = categories.visibleRows[tabIndex];
+  row.showDetailPanel();
+  const properties = row.detailPanel.getQuestionByName("properties");
+  expect(properties.value.findIndex(r => r.name == "customProp1") > -1).toBeFalsy();
+  Serializer.removeProperty("rating", "customProp1");
 });

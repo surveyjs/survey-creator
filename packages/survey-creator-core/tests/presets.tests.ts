@@ -254,7 +254,7 @@ test("set property grid defintion", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
+        generateOtherTab: false,
         classes: {
           question: {
             properties: [
@@ -289,7 +289,6 @@ test("set property grid defintion: make general tab not the first one", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
         classes: {
           question: {
             properties: [
@@ -323,7 +322,6 @@ test("set property grid defintion: just one tab for page", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
         classes: {
           panelbase: {
             properties: [
@@ -351,7 +349,6 @@ test("set property grid defintion & icons", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
         classes: {
           question: {
             properties: [
