@@ -368,6 +368,41 @@ export interface CollectionItemAllowOperationsEvent {
   allowEdit: boolean;
 }
 
+export interface CollectionItemDeletingEvent {
+  /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
+   * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
+   */
+  element: Base;
+  /**
+   * A property that contains the collection to which the target item belongs.
+   */
+  property: JsonObjectProperty;
+  /**
+   * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
+   */
+  propertyName: string;
+  /**
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
+   */
+  collection: Base[];
+  /**
+   * A target collection item.
+   */
+  item: Base;
+  /**
+   * @deprecated Use `options.allow` instead.
+   */
+  allowDelete?: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being deleted.
+   */
+  allow: boolean;
+}
+
 export interface CollectionItemAddedEvent {
   /**
    * @deprecated Use `options.element` instead.
