@@ -463,4 +463,33 @@ test.describe(title, () => {
     expect(await getDropdownTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset"]);
   });
 
+  test("Delete current custom preset in list editor switches to Basic", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.getByText("Add new preset...").click();
+    await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
+    await page.getByRole("button", { name: "Add" }).nth(1).click();
+    await page.getByRole("button", { name: "Save" }).click();
+
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Edit Presets list..."]);
+    await page.locator(".sps-list__item").filter({ hasText: "MyPreset" }).click();
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "MyPreset" }).click();
+
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    const items = page.locator(".sv-popup__container table").nth(0);
+    expect(await getRowsInputValues(items)).toContain("MyPreset");
+
+    await page.getByTitle("Delete").click();
+
+    await page.getByTitle("OK").click();
+    expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert"]);
+    await page.getByRole("button", { name: "Save" }).click();
+
+    await expect(page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" })).toBeVisible();
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" }).click();
+    await expect(page.locator(".sps-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
+  });
+
 });

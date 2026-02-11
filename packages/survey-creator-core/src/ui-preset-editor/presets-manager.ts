@@ -87,7 +87,7 @@ export class PresetsManager {
       cssClass: "sps-popup svc-property-editor svc-creator-popup",
       title: getLocString("presets.plugin.saveAsTitle"),
       displayMode: "popup"
-    });
+    }, this.creator?.rootElement);
   }
 
   private getPresetsListToEdit() {
@@ -119,7 +119,7 @@ export class PresetsManager {
     if (!fallback || !CreatorPresets[fallback]) return;
     const action = this.presetsList?.getActionById?.(fallback);
     if (action) {
-      this.presetsList.selectedItem = action;
+      this.presetsList.onItemClick(action);
     }
   }
 
@@ -202,6 +202,7 @@ export class PresetsManager {
         removeAction.iconSize = "auto",
         removeAction.component = "sv-action-bar-item",
         removeAction.innerCss = "sps-action-button sps-action-button--danger",
+        removeAction.tooltip = getLocString("presets.plugin.deletePreset"),
         removeAction.showTitle = false,
         removeAction.action = () => {
           options.question.removeRowUI(options.row);
