@@ -45,9 +45,10 @@ export const Basic = {
               "showQuestionNumbers",
               "checkErrorsMode",
               "navigateToUrl",
+              "showCompletePage",
               "completedHtml",
               "showTimer",
-              "timeLimit"
+              "timeLimit",
             ]
           },
           "question": {
@@ -56,7 +57,6 @@ export const Basic = {
               "title",
               "description",
               "isRequired",
-              "defaultValue",
               "correctAnswer"
             ]
           },
@@ -67,6 +67,7 @@ export const Basic = {
           },
           "file": {
             "properties": [
+              "allowMultiple",
               "acceptedTypes",
               "maxSize"
             ]
@@ -74,6 +75,7 @@ export const Basic = {
           "matrix": {
             "properties": [
               "cellType",
+              "rowOrder",
               "eachRowRequired",
               "eachRowUnique",
               "columns",
@@ -85,7 +87,9 @@ export const Basic = {
               "rateType",
               "rateMin",
               "rateMax",
-              "rateStep"
+              "rateStep",
+              "minRateDescription",
+              "maxRateDescription"
             ]
           },
           "slider": {
@@ -101,6 +105,7 @@ export const Basic = {
           "selectbase": {
             "properties": [
               "choices",
+              "choicesOrder",
               "showOtherItem",
               "showNoneItem"
             ]

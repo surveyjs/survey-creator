@@ -31,6 +31,7 @@ export const Advanced = {
               "name",
               "title",
               "description",
+              "visible",
               "readOnly",
               "isRequired",
               "showTitle",
@@ -42,12 +43,17 @@ export const Advanced = {
               { name: "titleLocation", tab: "layout" },
               { name: "descriptionLocation", tab: "layout" },
               { name: "errorLocation", tab: "layout" },
+              { name: "defaultValue", tab: "data" },
+              { name: "correctAnswer", tab: "data" },
+              { name: "visibleIf", tab: "logic", index: 100 },
+              { name: "enableIf", tab: "logic", index: 200 },
               { name: "requiredIf", tab: "logic", index: 300 },
               { name: "validators", tab: "validation" },
             ],
             tabs: [
               { name: "layout", index: 100 },
               { name: "logic", index: 200 },
+              { name: "data", index: 300 },
               { name: "validation", index: 400 }
             ]
           },
@@ -66,13 +72,15 @@ export const Advanced = {
               "waitForUpload",
               "needConfirmRemoveFile",
               "acceptedTypes",
+              "acceptedTypes",
               "maxSize",
             ]
           },
           signaturepad: {
             properties: [
               "allowClear",
-              "waitForUpload",
+              "signatureWidth",
+              "signatureHeight",
             ]
           },
           html: {
@@ -98,6 +106,8 @@ export const Advanced = {
               "minRowCount",
               "maxRowCount",
               { name: "keyName", tab: "validation" },
+              { name: "defaultRowValue", tab: "data" },
+              { name: "copyDefaultValueFromLastEntry", tab: "data" },
             ]
           },
           matrixdropdown: {
@@ -106,10 +116,17 @@ export const Advanced = {
           matrix: {
             properties: [
               "cellType",
+              { name: "columns", tab: "columns" },
+              { name: "rows", tab: "rows" },
+              { name: "rowOrder", tab: "rows" },
               { name: "alternateRows", tab: "layout" },
               { name: "eachRowRequired", tab: "validation" },
               { name: "eachRowUnique", tab: "validation" },
             ],
+            tabs: [
+              { name: "columns", index: 10 },
+              { name: "rows", index: 11 },
+            ]
           },
           multipletext: {
             properties: [
@@ -123,6 +140,8 @@ export const Advanced = {
               { name: "rateMin", tab: "rateValues" },
               { name: "rateMax", tab: "rateValues" },
               { name: "rateStep", tab: "rateValues" },
+              { name: "minRateDescription", tab: "rateValues" },
+              { name: "maxRateDescription", tab: "rateValues" },
               { name: "rateDescriptionLocation", tab: "rateValues" },
               { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
             ],
@@ -147,16 +166,21 @@ export const Advanced = {
           selectbase: {
             properties: [
               { name: "choices", tab: "choices" },
+              { name: "choicesOrder", tab: "choices" },
               { name: "choicesFromQuestion", tab: "choices" },
               { name: "choicesFromQuestionMode", tab: "choices" },
               { name: "allowCustomChoices", tab: "choices" },
               { name: "textWrapEnabled", tab: "choices" },
               { name: "showOtherItem", tab: "choices" },
               { name: "showNoneItem", tab: "choices" },
+              { name: "separateSpecialChoices", tab: "choices" },
+              { name: "url", tab: "choicesByUrl" },
+              { name: "path", tab: "choicesByUrl" },
               { name: "colCount", tab: "layout" },
             ],
             tabs: [
               { name: "choices", index: 10 },
+              { name: "choicesByUrl", index: 11 },
             ]
           },
           checkbox: {
@@ -265,6 +289,7 @@ export const Advanced = {
           paneldynamic: {
             properties: [
               "displayMode",
+              "templateTabTitle",
               "tabAlign",
               "panelCount",
               "minPanelCount",
@@ -272,8 +297,13 @@ export const Advanced = {
               { name: "allowAddPanel" },
               { name: "allowRemovePanel" },
               "confirmDelete",
-              { name: "templateQuestionTitleLocation", tab: "questionSettings" },
+              "templateTitle",
+              "templateDescription",
               { name: "showQuestionNumbers", tab: "numbering" },
+              { name: "templateQuestionTitleLocation", tab: "questionSettings" },
+              { name: "templateQuestionTitleWidth", tab: "questionSettings" },
+              { name: "defaultPanelValue", tab: "data" },
+              { name: "copyDefaultValueFromLastEntry", tab: "data" },
             ],
             tabs: [
               { name: "numbering", index: 350 }
@@ -307,19 +337,25 @@ export const Advanced = {
             ]
           },
           page: {
-            properties: [],
+            properties: [
+              { name: "showNavigationButtons", tab: "navigation" },
+            ],
+            tabs: [
+              { name: "navigation", index: 350 }
+            ]
           },
           survey: {
             properties: [
               "title",
               "description",
               "cookieName",
+              "showTitle",
               "locale",
               { name: "questionsOnPageMode", tab: "navigation" },
               //{ name: "firstPageIsStartPage", tab: "navigation" },
               { name: "autoAdvanceEnabled", tab: "navigation" },
               { name: "autoAdvanceAllowComplete", tab: "navigation" },
-              //{ name: "showNavigationButtons", tab: "navigation" },
+              { name: "showNavigationButtons", tab: "navigation" },
               { name: "navigationButtonsLocation", tab: "navigation" },
               { name: "showPrevButton", tab: "navigation" },
               { name: "progressBarLocation", tab: "navigation" },
@@ -346,7 +382,8 @@ export const Advanced = {
               { name: "showCompletePage", tab: "showOnCompleted" },
               { name: "completedHtml", tab: "showOnCompleted" },
               { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
-
+              { name: "calculatedValues", tab: "logic" },
+              { name: "triggers", tab: "logic" },
               { name: "showTimer", tab: "timer" },
               { name: "timerLocation", tab: "timer" },
               { name: "timeLimit", tab: "timer" },
