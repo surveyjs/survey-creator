@@ -23,7 +23,7 @@ export const legacyCssVariables = {
   "--sjs-semantic-yellow-background-500": "--sjs2-color-bg-warning-primary",
   "--sjs-semantic-yellow-background-10": "--sjs2-color-bg-warning-secondary",
   //"--sjs-semantic-yellow-foreground-100": "--sjs2-color-fg-static-main-primary",
-  "--sjs-special-background": "--sjs2-color-utility-surface-designer",
+  "--sjs-special-background": "--sjs2-color-utility-surface",
   "--sjs-layer-1-foreground-75": "--sjs2-color-fg-basic-primary-muted",
   "--sjs-special-glow": "--sjs2-color-utility-shadow-medium",
   "--sjs-special-shadow": "--sjs2-color-utility-shadow-surface-default",
