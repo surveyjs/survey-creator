@@ -17,7 +17,7 @@ In the default setting, any multi-page form created in SurveyJS Form Builder has
 
 To modify the default button label, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings. 
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings. 
 1. Under **Navigation**, locate the input fields that contain the default button text: **"Previous Page" button text**, **"Next Page" button text** and **"Complete Survey" button text**.
 1. Enter a new value in any or all the fields to update their button labels.
 
@@ -33,7 +33,7 @@ For complex multi-page forms with conditional branching, where you want to ensur
 
 To hide the navigation buttons for the entire form, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings. 
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings. 
 1. Under **Navigation**, locate the **Show / hide navigation buttons** property.
 1. Select **Hidden**.
 
@@ -43,7 +43,7 @@ You can also set the visibility of the navigation buttons for individual pages. 
 
 To hide the navigation buttons for an individual page, follow these steps:
 
-1. In the top right corner of the Property Grid, select the ID of the page on which you want to hide the navigation elements. This action will display the page settings in the Property Grid. 
+1. At the top of the Property Grid, select the ID of the page on which you want to hide the navigation elements. This action will display the page settings in the Property Grid. 
 1. Under **Navigation**, locate the **Show / hide navigation buttons** property.
 1. Select **Hidden**.
 > The **Inherit** option applies a survey-level setting (defaults to visible, aligned to the bottom).
@@ -62,7 +62,7 @@ When the default navigation buttons&mdash;Next, Previous, and Complete&mdash;are
 
 To enable the form preview, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings. 
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings. 
 1. Under **Navigation**, locate the **Review before submit** property.
 1. Select between **Show all questions** (enables the preview page with all questions) or **Show answered questions only** (the preview page will only display questions with answers).
 
@@ -78,7 +78,7 @@ The table of contents (TOC) appears on the side of a form or survey and displays
 
 To enable side navigation, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings. 
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings. 
 1. Under **Navigation**, locate the **Show table of contents (TOC)** checkbox and select it.
 1. Under **TOC alignment**, choose between **Left** (default value) and **Right** to set the location of the side navigation.
 
@@ -100,7 +100,7 @@ The progress bar can be displayed at the following locations:
 
 To set the progress bar alignment, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings. 
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings. 
 1. Under **Navigation**, locate the **Progress bar alignment** property.
 1. In the drop-down menu, select among the available location options.
 
@@ -126,7 +126,7 @@ To specify the information the progress bar should display, you can set the **Pr
 
 To set the progress bar type, follow the steps below:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings. 
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings. 
 1. Under **Navigation**, locate the **Progress bar type** property.
 1. In the drop-down menu, select from the available options.
 
