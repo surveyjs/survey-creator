@@ -132,4 +132,30 @@ export const explicitErrorHandler = async (page: Page) => {
   });
 };
 
+export async function changeToolboxScrolling(page: Page, hasScroll: boolean) {
+  await page.evaluate((newVal) => {
+    window["creator"].toolbox.overflowBehavior = newVal ? "scroll" : "hideInMenu";
+  }, hasScroll);
+}
+
+export async function changeToolboxSearchEnabled(page: Page, enabled: boolean) {
+  await page.evaluate((newVal) => {
+    window["creator"].toolbox.searchEnabled = newVal;
+  }, enabled);
+}
+
+export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
+  await page.evaluate((val) => {
+    window["creator"].showSurveyHeader = val;
+  }, newVal);
+}
+
+export function getToolboxItemByText(page: Page, text: string): Locator {
+  return page.locator(".svc-toolbox__item-title").getByText(text, { exact: true });
+}
+
+export function getSubToolboxItemByText(page: Page, text: string): Locator {
+  return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
+}
+
 export { expect };
