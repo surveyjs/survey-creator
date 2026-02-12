@@ -40,16 +40,16 @@ test.describe(title, () => {
     await page.getByRole("combobox", { name: "Theme name" }).focus();
 
     await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getListItemByText(page, "Light").click();
-    await compareScreenshot(page, ".svc-creator", "creator-theme-default-light.png");
-
-    await page.getByRole("combobox", { name: "Theme name" }).click();
     await getListItemByText(page, "Dark").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-dark.png");
 
     await page.getByRole("combobox", { name: "Theme name" }).click();
     await getListItemByText(page, "Contrast").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-contrast.png");
+
+    await page.getByRole("combobox", { name: "Theme name" }).click();
+    await getListItemByText(page, "Light").click();
+    await compareScreenshot(page, ".svc-creator", "creator-theme-default-light.png");
   });
 
 });
