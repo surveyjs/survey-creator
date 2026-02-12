@@ -280,6 +280,16 @@ test("set property grid defintion", () => {
   expect(panels[1].name).toBe("logic");
   expect(panels[0].elements).toHaveLength(3);
   expect(panels[1].elements).toHaveLength(2);
+
+  const presetDefault = new UIPreset({
+    propertyGrid: {
+      definition: null as any
+    }
+  });
+  presetDefault.apply(creator);
+  const surveyDefault = creator.propertyGrid;
+  const panelsDefault = surveyDefault.getAllPanels();
+  expect(panelsDefault).toHaveLength(6);
 });
 test("set property grid defintion: make general tab not the first one", () => {
   const creator = new CreatorTester();
