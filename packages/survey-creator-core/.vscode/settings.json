@@ -4,7 +4,7 @@
         "node_modules": true
     },
     "[typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.defaultFormatter": "vscode.typescript-language-features",
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit"
         }

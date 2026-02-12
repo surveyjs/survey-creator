@@ -191,6 +191,38 @@ test("JsonEditor & fixError action incorrect properties value, Issue#7335", () =
     }]
   });
 });
+test("JsonEditor & fixError better fix suggestions, Issue#7417", () => {
+  const creator = new CreatorTester({
+    validateJsonPropertyValues: true
+  });
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    pages: [{
+      elements: [{
+        type: "text",
+        name: "q1",
+        clearIfInvisible: "cOmPlEtE"
+      }]
+    }]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeTruthy();
+  expect(editor.errorList.actions).toHaveLength(1);
+  expect(editor.errorList.actions[0].data.showFixButton).toBeTruthy();
+  editor.errorList.actions[0].data.fixError();
+  expect(editor.hasErrors).toBeFalsy();
+  expect(JSON.parse(editor.text)).toEqual({
+    pages: [{
+      elements: [
+        {
+          type: "text",
+          name: "q1",
+          clearIfInvisible: "onComplete"
+        }
+      ]
+    }]
+  });
+});
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
   let modelEditor;
