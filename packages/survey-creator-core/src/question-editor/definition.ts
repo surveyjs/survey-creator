@@ -228,7 +228,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "colCount", tab: "layout" },
       { name: "inputSize", tab: "layout" },
       { name: "itemErrorLocation", tab: "layout" },
-      { name: "items", tab: "items" }
+      { name: "items", tab: "items" },
+      { name: "itemTitleWidth", tab: "layout" },
     ],
     tabs: [{ name: "items", index: 10 }]
   },
@@ -240,6 +241,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "scaleColorMode", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
       { name: "autoGenerate", tab: "rateValues" },
+      { name: "rateValues", tab: "rateValues" },
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
@@ -312,14 +314,17 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "minSelectedChoices", tab: "choices" },
       { name: "maxSelectedChoices", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
+      { name: "valuePropertyName", tab: "data" }
     ]
   },
   ranking: {
     properties: [
+      "selectToRankEmptyRankedAreaText",
+      "selectToRankEmptyUnrankedAreaText",
       { name: "selectToRankEnabled" },
       { name: "selectToRankAreasLayout" },
       { name: "minSelectedChoices", tab: "choices" },
-      { name: "maxSelectedChoices", tab: "choices" }
+      { name: "maxSelectedChoices", tab: "choices" },
     ]
   },
   radiogroup: {
@@ -370,7 +375,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "imageFit",
       "imageHeight",
       "imageWidth",
-      "text"
+      "altText"
     ]
   },
   "itemvalue[]@choices": {
@@ -421,6 +426,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "label",
       "labelTrue",
       "labelFalse",
+      "swapOrder",
       { name: "valueTrue", tab: "data" },
       { name: "valueFalse", tab: "data" }
     ]
@@ -433,7 +439,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "format",
       "maximumFractionDigits",
       "minimumFractionDigits",
-      "useGrouping"
+      "useGrouping",
+      { name: "precision", tab: "data" }
     ]
   },
   "panellayoutcolumn": {
@@ -638,14 +645,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       { name: "displayMode", tab: "rateValues" },
       { name: "rateType", tab: "rateValues" },
-      { name: "rateCount", tab: "rateValues" },
       { name: "rateColorMode", tab: "rateValues" },
       { name: "scaleColorMode", tab: "rateValues" },
+      { name: "rateCount", tab: "rateValues" },
       { name: "autoGenerate", tab: "rateValues" },
+      { name: "rateValues", tab: "rateValues" },
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
-      { name: "rateValues", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
       { name: "rateDescriptionLocation", tab: "rateValues" },
@@ -737,7 +744,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "templateQuestionTitleLocation", tab: "questionSettings" },
       { name: "templateQuestionTitleWidth", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
+      { name: "templateVisibleIf", tab: "logic" },
       { name: "removePanelButtonLocation", tab: "layout" },
+      { name: "newPanelPosition", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" },
