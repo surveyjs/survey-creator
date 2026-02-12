@@ -14,7 +14,7 @@ export class ComponentContainer extends React.Component<IComponentContainerProps
     return (
       <div className="svc-component-container" >
         {this.props.model.elements.map((element, index) => {
-          return ReactElementFactory.Instance.createElement(element.componentName, { model: element.componentData, key: index });
+          return ReactElementFactory.Instance.createElement(element.componentName, { ...element.componentData, key: index });
         })}
       </div>
     );

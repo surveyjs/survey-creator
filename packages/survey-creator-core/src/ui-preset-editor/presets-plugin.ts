@@ -1,9 +1,51 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
-import { ICreatorPlugin, ICreatorPresetData, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
+import { ICreatorPlugin, ComponentContainerModel, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
 
+interface IConfirmDialogOptions {
+  title: string;
+  message: string;
+  iconName: string;
+  showCloseButton: boolean;
+  applyText: string;
+  cancelText: string;
+  onApply: () => boolean; onCancel: () => void;
+}
+
+export function confirm(creator: SurveyCreatorModel, options: IConfirmDialogOptions) {
+  const locStrTitle = new LocalizableString(undefined as any, false);
+  locStrTitle.defaultValue = options.title;
+  const locStrMessage = new LocalizableString(undefined as any, false);
+  locStrMessage.defaultValue = options.message;
+
+  const contentModelElements = [
+    { componentName: "sv-svg-icon", componentData: { iconName: options.iconName, size: "auto", className: "svc-creator-popup__icon" } },
+    { componentName: "sv-string-viewer", componentData: {
+      locStr: locStrTitle,
+      locString: locStrTitle,
+      model: locStrTitle,
+      textCssClass: "svc-creator-popup__title" }
+    },
+    { componentName: "sv-string-viewer", componentData: {
+      locStr: locStrMessage,
+      locString: locStrMessage,
+      model: locStrMessage,
+      textCssClass: "svc-creator-popup__message" } },
+  ];
+  const contentModel = new ComponentContainerModel();
+  contentModel.elements = contentModelElements;
+  libSettings.showDialog({
+    componentName: "svc-component-container",
+    data: { model: contentModel },
+    onApply: () => { return options.onApply(); },
+    onCancel: () => { return options.onCancel(); },
+    cssClass: "svc-creator-popup",
+    displayMode: "popup",
+    showCloseButton: options.showCloseButton,
+  }, creator.rootElement);
+}
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
  */
@@ -63,36 +105,27 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private confirmReset(onApply: ()=>void) {
-    libSettings.confirmActionAsync(getLocString("presets.plugin.resetConfirmation"),
-      (confirm) => {
-        if (confirm) {
-          onApply();
-        }
-      },
+    confirm(this.creator,
       {
-        applyTitle: getLocString("presets.plugin.resetConfirmationOk"),
-        locale: this.creator.locale,
-        cssClass: "sv-popup--confirm svc-creator-popup"
-      }
-    );
+        title: getLocString("presets.plugin.resetConfirmation"),
+        message: getLocString("presets.plugin.resetConfirmationMessage"),
+        applyText: getLocString("presets.plugin.resetConfirmationOk"),
+        cancelText: getLocString("presets.plugin.resetConfirmationCancel"),
+        iconName: "icon-warning-24x24",
+        showCloseButton: false,
+        onApply: () => { onApply(); return true; }, onCancel: () => { return true; }
+      });
   }
-  private confirmQuit(onApply: ()=>void) {
-    if (this.presetsManager?.isSaved) {
-      onApply();
-      return;
-    }
-    libSettings.confirmActionAsync(getLocString("presets.plugin.quitConfirmation"),
-      (confirm) => {
-        if (confirm) {
-          onApply();
-        }
-      },
-      {
-        applyTitle: getLocString("presets.plugin.quitConfirmationOk"),
-        locale: this.creator.locale,
-        cssClass: "sv-popup--confirm svc-creator-popup"
-      }
-    );
+  private confirmQuit(onApply: ()=>void, onDiscard: ()=>void) {
+    confirm(this.creator, {
+      title: getLocString("presets.plugin.quitConfirmation"),
+      message: getLocString("presets.plugin.quitConfirmationMessage"),
+      applyText: getLocString("presets.plugin.quitConfirmationOk"),
+      cancelText: getLocString("presets.plugin.quitConfirmatioDiscard"),
+      iconName: "icon-warning-24x24",
+      showCloseButton: true,
+      onApply: () => { onApply(); return true; }, onCancel: () => { onDiscard(); return true; }
+    });
   }
 
   constructor(private creator: SurveyCreatorModel) {
@@ -101,7 +134,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
-    settingsPage.componentData.elements[0].componentData.showPresets = () => this.showPresets();
+    settingsPage.componentData.elements[0].componentData.model.showPresets = () => this.showPresets();
     this.toolboxCompact = creator.toolbox.forceCompact;
     this.presetsManager = new PresetsManager(creator);
     this.presetsManager.onPresetListSaved = (presets) => {
@@ -291,7 +324,6 @@ export class UIPresetEditor implements ICreatorPlugin {
       visible: false,
       title: "Saved",
       css: "sps-navigation-action sps-navigation-action--label sps-navigation-action--large-icon",
-      action: () => { this.performSave(); this.hidePresets(); }
     });
 
     const quitAction = new Action({
@@ -299,7 +331,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       iconName: "icon-exit-24x24",
       title: getLocString("presets.plugin.quit"),
       css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
-      action: () => { this.confirmQuit(() => this.hidePresets()); }
+      action: () => { this.confirmQuit(() => this.hidePresets(), () => this.hidePresets()); }
     });
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
