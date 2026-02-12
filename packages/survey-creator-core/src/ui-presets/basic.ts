@@ -10,11 +10,74 @@ export const Basic = {
         { "name": "dropdown" },
         { "name": "boolean" },
         { "name": "file" },
-        { "name": "text" },
+        { "name": "text", "subitems": [] },
+        {
+          "name": "date",
+          "title": "Date",
+          "iconName": "icon-text",
+          "json": {
+            "type": "text",
+            "inputType": "date"
+          }
+        },
+        {
+          "name": "email",
+          "title": "Email",
+          "iconName": "icon-text",
+          "json": {
+            "type": "text",
+            "inputType": "email"
+          }
+        },
+        {
+          "name": "tel",
+          "title": "Phone Number",
+          "iconName": "icon-text",
+          "json": {
+            "type": "text",
+            "inputType": "tel"
+          }
+        },
         { "name": "comment" },
         { "name": "matrix" },
         { "name": "image" },
       ],
+      "categories": [
+        {
+          "category": "choice",
+          "items": [
+            "radiogroup",
+            "rating",
+            "slider",
+            "checkbox",
+            "dropdown",
+            "boolean",
+            "file",
+          ]
+        },
+        {
+          "category": "text",
+          "items": [
+            "text",
+            "email",
+            "tel",
+            "date",
+            "comment",
+          ]
+        },
+        {
+          "category": "matrix",
+          "items": [
+            "matrix"
+          ]
+        },
+        {
+          "category": "misc",
+          "items": [
+            "image"
+          ]
+        }
+      ]
     },
     "tabs": {
       "items": [
