@@ -15,7 +15,7 @@ The **Show single question per page** option, also known as Card View, helps bre
 
 To enable the Card view, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings.  
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings.  
 2. Under **Navigation**, locate the **Survey layout** setting.  
 3. Select the **Show single question per page** option.
    
@@ -35,7 +35,7 @@ For forms with multiple questions and shorter titles, adjusting the title locati
 
 To set question title location for all questions within a form, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings.  
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings.  
 2. Under **Question Settings**, locate the **Question title alignment** setting.  
 3. Select between available options:  
    * **Top** (default) - Question title appears above the input field.  
@@ -76,7 +76,7 @@ To avoid situations like those illustrated above, place descriptions under input
 
 To set question description location for all questions within a form, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings.  
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings.  
 2. Under **Question Settings**, locate the **Question description alignment** setting.  
 3. Select between the available options.
 

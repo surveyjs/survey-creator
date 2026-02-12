@@ -86,9 +86,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
       this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
       this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
-    } else if (this.showOneCategoryInPropertyGrid && (activePage === this.propertyGridPlaceholderPage.id
-      || activePage === this.settingsPropertyGridTab.id
-    )) {
+    } else if (this.showOneCategoryInPropertyGrid && (activePage === this.propertyGridPlaceholderPage.id || activePage === this.settingsPropertyGridTab.id || activePage === this.toolboxTab.id)) {
       this.creator.sidebar.header.componentName = "svc-side-bar-header";
       this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
@@ -297,6 +295,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       }
     });
     this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
+    this.toolboxTab.locTileName = "ed.toolbox";
 
     if (this.creator.showCreatorThemeSettings) {
       this.createCreatorSettingsPage(creator);
@@ -450,7 +449,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       visible: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(this.creator.activeTab === "designer", this.creator.showToolbox, this.creator.toolboxLocation === "sidebar");
       }),
-      title: "Toolbox",
+      locTitleName: "ed.toolbox",
       showTitle: false
     });
 

@@ -70,7 +70,8 @@ import {
   CreatorThemePropertyChangedEvent,
   CreatorThemeSelectedEvent,
   AllowInplaceEditEvent,
-  AllowAddElementEvent
+  AllowAddElementEvent,
+  CollectionItemDeletingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -763,7 +764,10 @@ export class SurveyCreatorModel extends Base
    */
   public onPropertyGridShowModal: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.onPropertyGridShowPopup;
   public onCanDeleteItem: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
-  public onCollectionItemDeleting: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  /**
+   * An event that is raised before an item is removed from a collection (for example, a choice option in Choices, a column or row in Columns, etc.). Use this event to intercept and optionally cancel the deletion.
+   */
+  public onCollectionItemDeleting: EventBase<SurveyCreatorModel, CollectionItemDeletingEvent> = this.addCreatorEvent<SurveyCreatorModel, CollectionItemDeletingEvent>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a collection item (a choice option in Choices, a column or row in Columns, etc.). Use this event to prevent users from adding, deleting, or editing a particular collection item.
    * @see onElementAllowOperations
@@ -3996,14 +4000,16 @@ export class SurveyCreatorModel extends Base
     if (this.onCollectionItemDeleting.isEmpty) return true;
     const options = {
       obj: obj,
+      element: obj,
       property: property,
       propertyName: property.name,
       collection: collection,
       item: item,
-      allowDelete: true
+      allowDelete: true,
+      allow: true
     };
     this.onCollectionItemDeleting.fire(this, options);
-    return options.allowDelete;
+    return options.allowDelete && options.allow;
   }
   onCollectionItemAllowingCallback(
     obj: Base,
