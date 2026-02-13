@@ -32,6 +32,12 @@
     fill: var(--sjs2-color-fg-warning-primary, #FF9814);
   }
 }
+.svc-creator-confirm-dialog__icon--danger {
+  background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.10));
+  use {
+    fill: var(--sjs2-color-fg-alert-primary, #C30935);
+  }
+}
 .svc-creator-confirm-dialog__title {
   @include sjs2--typography--medium-strong;
   color: var(--sjs2-color-fg-basic-primary, #1C1B20);

@@ -60,9 +60,9 @@ export function showConfirmDialog(creator: SurveyCreatorModel, options: IConfirm
   const applyAction = dialogModel.footerToolbar.getActionById("apply");
   const cancelAction = dialogModel.footerToolbar.getActionById("cancel");
   applyAction.title = options.applyText;
-  applyAction.innerCss = options.category === "danger" ? "sps-btn--primary-danger" : "sps-btn--primary-neutral";
+  applyAction.innerCss = options.category === "danger" ? "sps-btn--secondary-alert" : "sps-btn--primary-neutral";
   cancelAction.title = options.cancelText;
-  cancelAction.innerCss = options.category === "danger" ? "sps-btn--secondary-danger" : "sps-btn--secondary-neutral";
+  cancelAction.innerCss = "sps-btn--secondary-neutral";
 
   return dialogModel;
 }
