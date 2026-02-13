@@ -150,6 +150,27 @@ export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
   }, newVal);
 }
 
+export async function handleShiftEnter(page: Page, selector: string) {
+  await page.evaluate((sel: string) => {
+    const el = document.querySelector(sel);
+    if (el) {
+      el.addEventListener("keypress", function (e: Event) {
+        const ev = e as KeyboardEvent;
+        if (ev.charCode === 13 && ev.shiftKey) {
+          const editorEl = document.querySelector(sel) as HTMLElement;
+          const selection = window.getSelection()!;
+          const range = document.createRange();
+          editorEl.innerHTML += "<div><br/></div>";
+          range.setStart(editorEl, editorEl.childNodes.length);
+          range.setEnd(editorEl, editorEl.childNodes.length);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      });
+    }
+  }, selector);
+}
+
 export function getToolboxItemByText(page: Page, text: string): Locator {
   return page.locator(".svc-toolbox__item-title").getByText(text, { exact: true });
 }
