@@ -1,51 +1,10 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
-import { ICreatorPlugin, ComponentContainerModel, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
+import { ICreatorPlugin, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
+import { showConfirmDialog } from "./confirm-dialog";
 
-interface IConfirmDialogOptions {
-  title: string;
-  message: string;
-  iconName: string;
-  showCloseButton: boolean;
-  applyText: string;
-  cancelText: string;
-  onApply: () => boolean; onCancel: () => void;
-}
-
-export function confirm(creator: SurveyCreatorModel, options: IConfirmDialogOptions) {
-  const locStrTitle = new LocalizableString(undefined as any, false);
-  locStrTitle.defaultValue = options.title;
-  const locStrMessage = new LocalizableString(undefined as any, false);
-  locStrMessage.defaultValue = options.message;
-
-  const contentModelElements = [
-    { componentName: "sv-svg-icon", componentData: { iconName: options.iconName, size: "auto", className: "svc-creator-popup__icon" } },
-    { componentName: "sv-string-viewer", componentData: {
-      locStr: locStrTitle,
-      locString: locStrTitle,
-      model: locStrTitle,
-      textCssClass: "svc-creator-popup__title" }
-    },
-    { componentName: "sv-string-viewer", componentData: {
-      locStr: locStrMessage,
-      locString: locStrMessage,
-      model: locStrMessage,
-      textCssClass: "svc-creator-popup__message" } },
-  ];
-  const contentModel = new ComponentContainerModel();
-  contentModel.elements = contentModelElements;
-  libSettings.showDialog({
-    componentName: "svc-component-container",
-    data: { model: contentModel },
-    onApply: () => { return options.onApply(); },
-    onCancel: () => { return options.onCancel(); },
-    cssClass: "svc-creator-popup",
-    displayMode: "popup",
-    showCloseButton: options.showCloseButton,
-  }, creator.rootElement);
-}
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
  */
@@ -105,7 +64,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private confirmReset(onApply: ()=>void) {
-    confirm(this.creator,
+    showConfirmDialog(this.creator,
       {
         title: getLocString("presets.plugin.resetConfirmation"),
         message: getLocString("presets.plugin.resetConfirmationMessage"),
@@ -117,11 +76,11 @@ export class UIPresetEditor implements ICreatorPlugin {
       });
   }
   private confirmQuit(onApply: ()=>void, onDiscard: ()=>void) {
-    confirm(this.creator, {
+    showConfirmDialog(this.creator, {
       title: getLocString("presets.plugin.quitConfirmation"),
       message: getLocString("presets.plugin.quitConfirmationMessage"),
-      applyText: getLocString("presets.plugin.quitConfirmationOk"),
-      cancelText: getLocString("presets.plugin.quitConfirmatioDiscard"),
+      applyText: getLocString("presets.plugin.quitConfirmationSave"),
+      cancelText: getLocString("presets.plugin.quitConfirmationDiscard"),
       iconName: "icon-warning-24x24",
       showCloseButton: true,
       onApply: () => { onApply(); return true; }, onCancel: () => { onDiscard(); return true; }
@@ -195,29 +154,41 @@ export class UIPresetEditor implements ICreatorPlugin {
     return this.presetsManager.getPresetsArray();
   }
 
-  private performSave() {
+  private performSave(closeOnSave = false) {
     if (this.savePresetFunc) {
       this.savePresetFunc(this.saveCount, () => {
-        this.saveHandler();
+        this.saveHandler(closeOnSave);
       });
     } else {
-      this.saveHandler();
+      this.saveHandler(closeOnSave);
     }
   }
 
-  protected saveHandler() {
+  private saveOrSaveAs(closeOnSave = false) {
+    const currentName = this.getCurrentPreset()?.presetName;
+    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+      this.performSave(closeOnSave);
+    } else {
+      this.saveAsHandler(closeOnSave);
+    }
+  }
+
+  protected saveHandler(closeOnSave = false) {
     this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
     this.saveCount++;
     this.setStatus("saved");
+    if (closeOnSave) {
+      this.hidePresets();
+    }
   }
-  protected saveAsHandler() {
-    this.presetsManager.saveAs(this.model.json, ()=> { this.setStatus("saved"); });
+  protected saveAsHandler(closeOnSave = false) {
+    this.presetsManager.saveAs(this.model.json, ()=> { this.performSave(closeOnSave); });
   }
-  protected setStatus(status: "saved" | "unsaved" | "initial") {
+  protected setStatus(status: "saved" | "unsaved" | "saving" |"initial") {
     this.presetsManager.setStatus(status === "unsaved");
     const statusAction = this.model.navigationBar.getActionById("presets-status");
     statusAction.visible = status === "unsaved";
-    statusAction.title = getLocString(status === "unsaved" ? "presets.plugin.unsaved" : "presets.plugin.saved");
+    statusAction.title = getLocString("presets.plugin.status." + status.toLowerCase());
   }
   protected updateStatusAction(unsaved: boolean) {
     const statusAction = this.model.navigationBar.getActionById("presets-status");
@@ -331,7 +302,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       iconName: "icon-exit-24x24",
       title: getLocString("presets.plugin.quit"),
       css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
-      action: () => { this.confirmQuit(() => this.hidePresets(), () => this.hidePresets()); }
+      action: () => { this.confirmQuit(() => this.saveOrSaveAs(true), () => this.hidePresets()); }
     });
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;

@@ -2,6 +2,7 @@ import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, Ques
 import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 import { get } from "lodash";
+import { showConfirmDialog } from "./confirm-dialog";
 
 export interface IPresetListItem {
   name: string;
@@ -168,8 +169,8 @@ export class PresetsManager {
         }
       ],
       cellType: "text",
-      confirmDelete: true,
-      confirmDeleteText: getLocString("presets.plugin.confirmDeleteCustomPreset"),
+      //confirmDelete: true,
+      //confirmDeleteText: getLocString("presets.plugin.confirmDeleteCustomPreset"),
       addRowText: getLocString("presets.plugin.addNewPreset"),
       allowRowReorder: true,
       allowCustomChoices: true,
@@ -179,6 +180,23 @@ export class PresetsManager {
     survey.onMatrixCellCreated.add((sender, options) => {
       if (options.columnName === "title") {
         options.cellQuestion.readOnly = !options.row.getValue("custom");
+      }
+    });
+    let allowRemoveRow = false;
+    survey.onMatrixRowRemoving.add((sender, options) => {
+      options.allow = allowRemoveRow;
+      if (allowRemoveRow) {
+        allowRemoveRow = false;
+      } else {
+        showConfirmDialog(this.creator, {
+          title: getLocString("presets.plugin.deleteConfirmation").replace("{0}", options.row.getValue("title")),
+          message: getLocString("presets.plugin.deleteConfirmationMessage"),
+          applyText: getLocString("presets.plugin.deleteConfirmationOk"),
+          cancelText: getLocString("presets.plugin.deleteConfirmationCancel"),
+          iconName: "icon-warning-24x24",
+          showCloseButton: false,
+          onApply: () => { allowRemoveRow = true; options.question.removeRow(options.rowIndex); return true; }, onCancel: () => { return true; }
+        });
       }
     });
     survey.onGetMatrixRowActions.add((sender, options) => {

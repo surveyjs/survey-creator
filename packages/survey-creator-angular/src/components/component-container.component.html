@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div class="svc-component-container" >
+  <div [class]="model.cssClass" >
     <ng-template *ngFor="let element of model.elements" [component]="{ name: element.componentName, data: element.componentData }"></ng-template>
   </div>
 </ng-template>

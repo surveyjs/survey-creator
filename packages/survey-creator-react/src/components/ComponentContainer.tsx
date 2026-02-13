@@ -12,7 +12,7 @@ export class ComponentContainer extends React.Component<IComponentContainerProps
   }
   render(): React.JSX.Element {
     return (
-      <div className="svc-component-container" >
+      <div className={this.props.model.cssClass} >
         {this.props.model.elements.map((element, index) => {
           return ReactElementFactory.Instance.createElement(element.componentName, { ...element.componentData, key: index });
         })}

@@ -84,6 +84,30 @@
   }
 }
 
+.sps-btn--primary-neutral {
+  background: var(--sjs2-color-bg-neutral-primary, #1C1B20);
+  color: var(--sjs2-color-fg-neutral-on-primary, #FFF);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-neutral-primary-dim, #424146);
+  }
+  &:active{
+    background: var(--sjs2-color-bg-neutral-primary, #1C1B20);
+  }
+}
+
+.sps-btn--secondary-neutral {
+  background: var(--sjs2-color-bg-neutral-secondary, #F5F5F5);
+  color: var(--sjs2-color-fg-neutral-secondary, #1C1B20);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-neutral-secondary-dim, #EDEDED);
+  }
+  &:active{
+    background: var(--sjs2-color-bg-neutral-secondary, #F5F5F5);
+  }
+}
+
 .sps-action-button {
   @include ctrDefaultBoldFont;
   -webkit-appearance: none;

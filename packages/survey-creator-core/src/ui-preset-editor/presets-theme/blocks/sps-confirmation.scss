@@ -1,0 +1,59 @@
+@use "../../../variables.scss" as *;
+@use "../fonts.scss" as *;
+
+
+.svc-creator-confirm-dialog__content-container {
+  display: flex;
+  padding: 0 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--sjs2-spacing-x200, 16px);
+  align-self: stretch;
+}
+.svc-creator-confirm-dialog__title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sjs2-spacing-x150, 12px);
+  align-self: stretch;
+}
+.svc-creator-confirm-dialog__icon {
+  display: flex;
+  padding: 12px;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  box-sizing: content-box;
+  border-radius: var(--sjs2-radius-round, 9999px);
+  background: var(--sjs2-color-bg-warning-secondary, rgba(255, 152, 20, 0.10));
+  margin: 0 auto;
+  use {
+    fill: var(--sjs2-color-fg-warning-primary, #FF9814);
+  }
+}
+.svc-creator-confirm-dialog__title {
+  @include sjs2--typography--medium-strong;
+  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  text-align: center;
+}
+.svc-creator-confirm-dialog__message {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+  text-align: center;
+}
+
+.svc-creator-confirm-dialog {
+  .sv-modal-footer-action-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--sjs2-spacing-x150, 12px);
+    align-self: stretch;
+    justify-content: stretch;
+    flex-grow: 1;
+  }
+  .sv-action, .sv-action__content, .sps-btn {
+    flex-grow: 1;
+    min-width: fit-content;
+  }
+}
