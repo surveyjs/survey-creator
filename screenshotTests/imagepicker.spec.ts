@@ -1,5 +1,6 @@
-import { url, setJSON, explicitErrorHandler, upArrowImageLink, rigthArrowImageLink, downArrowImageLink, leftArrowImageLink, compareScreenshot } from "./helper";
 import { test, expect } from "@playwright/test";
+import { url, setJSON, explicitErrorHandler, compareScreenshot } from "./helper";
+import { downArrowImageLink, leftArrowImageLink, rigthArrowImageLink, upArrowImageLink } from "../resources/base64images";
 
 const title = "ImagePicker Screenshot";
 
