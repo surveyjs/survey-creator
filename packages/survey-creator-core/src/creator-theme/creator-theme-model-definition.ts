@@ -20,7 +20,7 @@ const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
 };
 
 export const creatorThemeModelPropertyGridDefinition: ISurveyPropertyGridDefinition = {
-  autoGenerateProperties: true,
+  generateOtherTab: true,
   classes: creatorThemeModelProperties
 };
 

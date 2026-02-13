@@ -3,7 +3,7 @@ import { PropertyGridModelTester } from "./property-grid.base";
 import { ISurveyPropertyGridDefinition } from "../../src/question-editor/definition";
 
 const defaultProperties : ISurveyPropertyGridDefinition = {
-  autoGenerateProperties: false,
+  generateOtherTab: false,
   classes: {
     question: {
       properties: [
@@ -108,7 +108,7 @@ test("Update propertyGridDefintion", () => {
   expect(panels[1].elements).toHaveLength(2);
 });
 const defaultProperties2 : ISurveyPropertyGridDefinition = {
-  autoGenerateProperties: false,
+  generateOtherTab: false,
   classes: {
     question: {
       properties: [
@@ -200,7 +200,7 @@ test("Support matrixdropdowncolumn@selectbase", () => {
 test("Incorrect order in general tab with preset indeces", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question, undefined, {
-    autoGenerateProperties: false,
+    generateOtherTab: false,
     classes: {
       question: {
         properties: [

@@ -9,7 +9,7 @@ const creatorPresetsModelProperties: ISurveyPropertiesDefinition = {
 };
 
 export const creatorPresetsModelPropertyGridDefinition: ISurveyPropertyGridDefinition = {
-  autoGenerateProperties: true,
+  generateOtherTab: true,
   classes: creatorPresetsModelProperties
 };
 
