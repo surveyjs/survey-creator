@@ -802,6 +802,26 @@ test("expand/collapse event and expand all", () => {
   expect(panelAdorner.collapsed).toBeFalsy();
 });
 
+test("Show property grid placeholder on removing all elements, #7409", () => {
+  const creator = new CreatorTester();
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  creator.onModified.add((sender, options) => {
+    if (options.type === "OBJECT_DELETED" && creator.survey.pages.length === 0) {
+      designerPlugin.activateSidebar(true);
+    }
+  });
+  const placeHolderId = designerPlugin["propertyGridPlaceholderPage"].id;
+  expect(creator.sidebar.activePage).toBe(placeHolderId);
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.sidebar.activePage).not.toBe(placeHolderId);
+  const question = creator.survey.getQuestionByName("q1");
+  creator.deleteElement(question);
+  expect(creator.survey.pages).toHaveLength(0);
+  expect(creator.sidebar.activePage).toBe(placeHolderId);
+});
+
 test("expand/collapse methods", () => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();

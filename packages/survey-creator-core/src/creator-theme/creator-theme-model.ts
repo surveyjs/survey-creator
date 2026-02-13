@@ -4,6 +4,7 @@ import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
+import DefaultLight from "../themes/default-light";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
@@ -40,9 +41,19 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
 
+  private getThemeFromCreatorThemes(themeName: string): ICreatorTheme {
+    const theme = CreatorThemes[themeName];
+    if (!theme) return;
+
+    if (themeName === CreatorThemeModel.defaultThemeName && (!theme.cssVariables || Object.keys(theme.cssVariables).length === 0)) {
+      theme.cssVariables = { ...DefaultLight.cssVariables };
+    }
+    return theme;
+  }
   private isSpecialBackgroundFromCurrentTheme() {
-    const currentTheme = CreatorThemes[this.themeName];
-    return colorsAreEqual(currentTheme && currentTheme.cssVariables && currentTheme.cssVariables[CreatorThemeModel.varColorUtilitySurface], this[CreatorThemeModel.varColorUtilitySurface]);
+    const currentTheme = this.getThemeFromCreatorThemes(this.themeName);
+    const currentThemeCssVariables = currentTheme?.cssVariables;
+    return colorsAreEqual(currentThemeCssVariables?.[CreatorThemeModel.varColorUtilitySurface], this[CreatorThemeModel.varColorUtilitySurface]);
   }
   private findAppropriateSpecialBackground(primaryColorValue: string) {
     let primaryColorName: string;
@@ -177,7 +188,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public loadTheme(theme: ICreatorTheme = {}) {
     this.blockThemeChangedNotifications += 1;
     try {
-      const baseTheme = CreatorThemes[theme.themeName] || {};
+      const baseTheme = this.getThemeFromCreatorThemes(theme.themeName) || {};
       this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
 
       const effectiveThemeCssVariables = {};

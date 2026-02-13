@@ -58,7 +58,7 @@ export var turkishStrings = {
     // "Image"
     image: "Resim",
     // "Dropdown"
-    dropdown: "Seçim Kıutusu",
+    dropdown: "Seçim Kutusu",
     // [Auto-translated] "Multi-Select Dropdown"
     tagbox: "Çoklu Seçim Açılır Menüsü",
     // "File Upload"

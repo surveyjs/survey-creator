@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "2.5.8",
+  "version": "2.5.10",
   "description": "A white-label drag-and-drop form builder for Angular that lets you design complex, interactive forms and surveys without writing code. It generates JSON schemas used by the SurveyJS Form Library to render dynamic forms in your Angular app.",
   "author": "DevSoft Baltic OU <info@devsoftbaltic.com>",
   "homepage": "https://surveyjs.io/",

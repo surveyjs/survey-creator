@@ -2,6 +2,7 @@ import { SurveyModel, JsonError, Base, ISurveyElement, ISurveyData, ILoadFromJSO
 import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
+import { levenshteinDistance } from "./utils/utils";
 
 class SurveyForTextWorker extends SurveyModel {
   private isRunEndLoadingFromJson: boolean;
@@ -149,7 +150,7 @@ class SurveyTextWorkerJsonIncorrectPropertyValueErrorFixer extends SurveyTextWor
     return this.getFirstChoice() != null;
   }
   protected updatedJsonObjOnFix(json: any): void {
-    let value = this.getFirstChoice();
+    let value = this.getClosestChoice(json[this.property.name]) || this.getFirstChoice();
     if (typeof value !== "string") {
       value = JSON.stringify(value);
     }
@@ -160,8 +161,22 @@ class SurveyTextWorkerJsonIncorrectPropertyValueErrorFixer extends SurveyTextWor
     if (Array.isArray(choices) && choices.length > 0) return choices[0];
     return null;
   }
+  private getClosestChoice(needle: string): any {
+    let closest = { value: null, distance: needle.length };
+    needle = needle.toUpperCase();
+    for (const choice of (this.property?.choices || [])) {
+      let choiceUpperCase = choice.toUpperCase();
+      if (choiceUpperCase === needle) return choice;
+      const distance = levenshteinDistance(needle, choiceUpperCase);
+      if (distance === 0) return choice;
+      if (distance < closest.distance) {
+        closest.distance = distance;
+        closest.value = choice;
+      }
+    }
+    return closest.value;
+  }
 }
-
 export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   public elementStart: number;
   public elementEnd: number;

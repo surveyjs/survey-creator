@@ -89,11 +89,11 @@ Re-designed Toolbox and Property Grid look modern and adapt themselves to differ
 
 We now display action buttons within their corresponding questions (instead of above the questions). Programmatic access to the buttons is now possible.
 
-<img src="images/survey-creator-action-buttons.png" alt="Survey Creator - Action buttons rearranged" width="100%">
+<img src="images/survey-creator-action-buttons.png" alt="Survey Creator - Action buttons rearranged" width="1661" height="214">
 
 If you click the button that changes the question type, you will see a drop-down list of all supported types. In Survey Creator V1, this list was limited to the types that were interchangeable with the current element type. With the full list, you can now add multiple default questions to the survey to specify their types afterwards.
 
-<img src="images/survey-creator-question-types.png" alt="Survey Creator - Question types dropdown" width="100%">
+<img src="images/survey-creator-question-types.png" alt="Survey Creator - Question types dropdown" width="1656" height="463">
 
 If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. Alternatively, you can revert to old behavior. Use the following code to limit the list to interchangeable types only:
 
@@ -107,7 +107,7 @@ SurveyCreator.settings.questionConvertMode = 1;
 
 Previously, users configured each survey page in an individual tab. In the new Survey Creator, pages are displayed one under another. To reach a certain page, users can scroll the design surface or select the page in the page navigator.
 
-<img src="images/survey-creator-updated-page-navigation.png" alt="Survey Creator - Page navigator update" width="100%">
+<img src="images/survey-creator-updated-page-navigation.png" alt="Survey Creator - Page navigator update" width="1004" height="254">
 
 <a id="adorners"></a>
 
