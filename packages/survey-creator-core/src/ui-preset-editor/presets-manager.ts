@@ -40,12 +40,31 @@ export class PresetsManager {
     return getLocString("preset.names." + name);
   }
 
+  private confirmSwitchPreset(onApply: ()=>void) {
+    if (this.isSaved) {
+      onApply();
+      return;
+    }
+    showConfirmDialog(this.creator, {
+      category: "danger",
+      title: getLocString("presets.plugin.switchPresetConfirmation"),
+      message: getLocString("presets.plugin.switchPresetConfirmationMessage"),
+      applyText: getLocString("presets.plugin.switchPresetConfirmationOk"),
+      cancelText: getLocString("presets.plugin.switchPresetConfirmationCancel"),
+      iconName: "icon-warning-24x24",
+      showCloseButton: false,
+      onApply: () => { onApply(); return true; }, onCancel: () => { return true; }
+    });
+  }
+
   private presetListToItems(presets: string[]) {
     return presets
       .filter(presetName => CreatorPresets[presetName].visible !== false)
       .map(presetName => ({ id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
-        this.presetsList.selectedItem = item;
-        this.selectPresetCallback?.(CreatorPresets[presetName]);
+        this.confirmSwitchPreset(() => {
+          this.presetsList.selectedItem = item;
+          this.selectPresetCallback?.(CreatorPresets[presetName]);
+        });
       } })) as IAction[];
   }
   private get presetsMenuItems(): IAction[] {
@@ -77,7 +96,7 @@ export class PresetsManager {
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
 
-    settings.showDialog?.(<IDialogOptions>{
+    const popupModel = settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
       onApply: () => {
@@ -89,6 +108,7 @@ export class PresetsManager {
       title: getLocString("presets.plugin.saveAsTitle"),
       displayMode: "popup"
     }, this.creator?.rootElement);
+    this.customizePopupButtons(popupModel, getLocString("presets.plugin.save"), getLocString("presets.plugin.cancel"));
   }
 
   private getPresetsListToEdit() {
@@ -189,11 +209,12 @@ export class PresetsManager {
         allowRemoveRow = false;
       } else {
         showConfirmDialog(this.creator, {
+          category: "danger",
           title: getLocString("presets.plugin.deleteConfirmation").replace("{0}", options.row.getValue("title")),
           message: getLocString("presets.plugin.deleteConfirmationMessage"),
           applyText: getLocString("presets.plugin.deleteConfirmationOk"),
           cancelText: getLocString("presets.plugin.deleteConfirmationCancel"),
-          iconName: "icon-warning-24x24",
+          iconName: "icon-delete-24x24",
           showCloseButton: false,
           onApply: () => { allowRemoveRow = true; options.question.removeRow(options.rowIndex); return true; }, onCancel: () => { return true; }
         });

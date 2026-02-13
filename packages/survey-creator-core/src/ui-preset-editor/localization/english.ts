@@ -202,6 +202,7 @@ export const enStrings = {
     save: "Save",
     add: "Add",
     discard: "Discard",
+    cancel: "Cancel",
     saveAs: "Save as...",
     saveAsTitle: "Save current preset as...",
     quit: "Quit",
@@ -213,6 +214,10 @@ export const enStrings = {
     deleteConfirmationMessage: "You will not be able to restore it",
     deleteConfirmationOk: "Yes, delete",
     deleteConfirmationCancel: "No, cancel",
+    switchPresetConfirmation: "Switch Preset?",
+    switchPresetConfirmationMessage: "You will loose all unsaved changes",
+    switchPresetConfirmationOk: "Yes, switch",
+    switchPresetConfirmationCancel: "No, cancel",
 
     file: "File",
     import: "Import",

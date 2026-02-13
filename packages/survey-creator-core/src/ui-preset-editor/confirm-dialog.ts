@@ -5,6 +5,7 @@ export interface IConfirmDialogOptions {
   title: string;
   message: string;
   iconName: string;
+  category?: "warning" | "danger";
   showCloseButton: boolean;
   applyText: string;
   cancelText: string;
@@ -34,7 +35,11 @@ export function showConfirmDialog(creator: SurveyCreatorModel, options: IConfirm
   titleContainer.cssClass = "svc-creator-confirm-dialog__title-container";
 
   const contentModelElements = [
-    { componentName: "sv-svg-icon", componentData: { iconName: options.iconName, size: "auto", className: "svc-creator-confirm-dialog__icon" } },
+    { componentName: "sv-svg-icon", componentData: {
+      iconName: options.iconName,
+      size: "auto",
+      className: "svc-creator-confirm-dialog__icon" + (options.category === "danger" ? " svc-creator-confirm-dialog__icon--danger" : "")
+    } },
     { componentName: "svc-component-container", componentData: { model: titleContainer } },
   ];
   const contentModel = new ComponentContainerModel();
@@ -52,9 +57,12 @@ export function showConfirmDialog(creator: SurveyCreatorModel, options: IConfirm
   const defaultActionBarCss = dialogModel.footerToolbar.cssClasses;
   defaultActionBarCss.item = "sps-btn";
   dialogModel.footerToolbar.cssClasses = defaultActionBarCss;
-  dialogModel.footerToolbar.getActionById("apply").title = options.applyText;
-  dialogModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-neutral";
-  dialogModel.footerToolbar.getActionById("cancel").title = options.cancelText;
-  dialogModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-neutral";
+  const applyAction = dialogModel.footerToolbar.getActionById("apply");
+  const cancelAction = dialogModel.footerToolbar.getActionById("cancel");
+  applyAction.title = options.applyText;
+  applyAction.innerCss = options.category === "danger" ? "sps-btn--primary-danger" : "sps-btn--primary-neutral";
+  cancelAction.title = options.cancelText;
+  cancelAction.innerCss = options.category === "danger" ? "sps-btn--secondary-danger" : "sps-btn--secondary-neutral";
+
   return dialogModel;
 }

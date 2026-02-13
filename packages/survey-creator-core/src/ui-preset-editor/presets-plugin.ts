@@ -66,6 +66,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   private confirmReset(onApply: ()=>void) {
     showConfirmDialog(this.creator,
       {
+        category: "danger",
         title: getLocString("presets.plugin.resetConfirmation"),
         message: getLocString("presets.plugin.resetConfirmationMessage"),
         applyText: getLocString("presets.plugin.resetConfirmationOk"),
@@ -82,7 +83,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       applyText: getLocString("presets.plugin.quitConfirmationSave"),
       cancelText: getLocString("presets.plugin.quitConfirmationDiscard"),
       iconName: "icon-warning-24x24",
-      showCloseButton: true,
+      showCloseButton: false,
       onApply: () => { onApply(); return true; }, onCancel: () => { onDiscard(); return true; }
     });
   }
