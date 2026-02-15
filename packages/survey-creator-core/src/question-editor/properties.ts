@@ -108,7 +108,7 @@ export class SurveyQuestionProperties {
     }
     return res;
   }
-  private getDefinitionClassCopy(name: string) : ISurveyQuestionEditorDefinition {
+  private getDefinitionClassCopy(name: string): ISurveyQuestionEditorDefinition {
     if (!name) return undefined;
     const cls = this.propertyGridDefinition.classes[name];
     return cls ? Helpers.getUnbindValue(cls) : undefined;
@@ -198,7 +198,7 @@ export class SurveyQuestionProperties {
     });
   }
   private setParentTabs(): void {
-    for (let i = this.tabs.length - 1; i >= 0; i --) {
+    for (let i = this.tabs.length - 1; i >= 0; i--) {
       const tab = this.tabs[i];
       if (tab.parentName) {
         const parent = this.getTabByName(tab.parentName);
@@ -397,16 +397,14 @@ export class SurveyQuestionProperties {
       while(i < classRes.properties.length) {
         const prop = classRes.properties[i];
         const propName = typeof prop == "string" ? prop : prop.name;
-        let tabName = settings.propertyGrid.generalTabName;
-        if (typeof prop !== "string" && !!prop.tab) {
-          tabName = prop.tab;
-        }
+        const originalTabName = typeof prop !== "string" && !!prop.tab ? prop.tab : "";
+        let tabName = originalTabName || settings.propertyGrid.generalTabName;
         const jsonProp = !!this.propertiesHash[propName]
           ? this.propertiesHash[propName].property
           : null;
         if (!isColumn || jsonProp?.availableInMatrixColumn) {
           const jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
-          if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
+          if (!originalTabName && !!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
             classRes.properties.splice(i, 1);
           } else {
             usedProperties[propName] = true;
