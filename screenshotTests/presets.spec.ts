@@ -27,7 +27,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const creator = (window as any).creator;
       const presetsPlugin = creator.getPlugin("presets");
-      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic };
+      const customPreset = new (window as any).SurveyCreatorCore.UIPreset({ ...(window as any).SurveyCreatorUIPreset.Basic });
       customPreset.presetName = "Custom Preset";
       presetsPlugin.addPreset(customPreset);
     });
