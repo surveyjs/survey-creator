@@ -89,7 +89,7 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
 import { deprecate } from "util";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
-import Default from "./themes/default-light";
+import { DefaultLight } from "./themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
@@ -1727,7 +1727,7 @@ export class SurveyCreatorModel extends Base
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
-    this.applyCreatorTheme(Default);
+    this.applyCreatorTheme(DefaultLight);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
@@ -4818,7 +4818,7 @@ export class SurveyCreatorModel extends Base
     this.creatorTheme = theme;
 
     const newCssVariable = {};
-    assign(newCssVariable, Default.cssVariables, theme?.cssVariables);
+    assign(newCssVariable, DefaultLight.cssVariables, theme?.cssVariables);
     this.patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {

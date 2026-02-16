@@ -19,7 +19,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   static varColorProjectBrand = "--sjs2-color-project-brand-600";
   static varColorProjectAccent = "--sjs2-color-project-accent-600";
-  static varColorUtilitySurface = "--sjs2-color-utility-surface";
+  static varColorUtilitySurface = "--sjs2-color-utility-surface-designer";
 
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};

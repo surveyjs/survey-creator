@@ -320,7 +320,7 @@ test("Preset edit model, Property grid change the new category title and then na
   let pages = creator.propertyGrid.visiblePages;
 
   // let propGridSurvey = getPropGridSurvey(survey);
-  let categoryPage = pages.filter(p=>p.name === "category1")[0];
+  let categoryPage = pages.filter(p => p.name === "category1")[0];
   expect(categoryPage).toBeTruthy();
   //expect(categoryPage.title).toBe("My Category");
 
@@ -329,73 +329,76 @@ test("Preset edit model, Property grid change the new category title and then na
   creator.selectElement(null);
   creator.selectElement(creator.survey);
   pages = creator.propertyGrid.visiblePages;
-  expect(pages.filter(p=>p.name === "category1")[0]).toBeFalsy();
-  categoryPage = pages.filter(p=>p.name === "my_new_category")[0];
+  expect(pages.filter(p => p.name === "category1")[0]).toBeFalsy();
+  categoryPage = pages.filter(p => p.name === "my_new_category")[0];
   expect(categoryPage).toBeTruthy();
   // expect(categoryPage.title).toBe("My Category");
 });
 
 test("Property import and defaults", () => {
   const editor = new CreatorPresetEditorModel({});
-  editor.json = { "propertyGrid": {
-    "definition": {
-      "generateOtherTab": false,
-      "classes": {
-        "survey": {
-          "properties": [
-            {
-              "name": "title",
-              "index": 10000,
-              "tab": "general"
-            },
-            {
-              "name": "description",
-              "index": 20000,
-              "tab": "general"
-            },
-            {
-              "name": "logo",
-              "index": 10000,
-              "tab": "logo"
-            },
-            {
-              "name": "logoWidth",
-              "index": 10000,
-              "tab": "logo"
-            },
-            {
-              "name": "logoHeight",
-              "index": 20000,
-              "tab": "logo"
-            }
-          ],
-          "tabs": [
-            {
-              "name": "general",
-              "index": 100,
-              "iconName": "icon-pg-data-24x24"
-            },
-            {
-              "name": "logo",
-              "index": 200
-            }
-          ]
-        } }
-    }
-  },
-  "localization": {
-    "en": {
-      "pe": {
-        "survey": {
-          "logoWidth": "Width",
-          "logoHeight": "Height"
-        },
-        "tabs": {
-          "logo": "Logo"
+  editor.json = {
+    "propertyGrid": {
+      "definition": {
+        "generateOtherTab": false,
+        "classes": {
+          "survey": {
+            "properties": [
+              {
+                "name": "title",
+                "index": 10000,
+                "tab": "general"
+              },
+              {
+                "name": "description",
+                "index": 20000,
+                "tab": "general"
+              },
+              {
+                "name": "logo",
+                "index": 10000,
+                "tab": "logo"
+              },
+              {
+                "name": "logoWidth",
+                "index": 10000,
+                "tab": "logo"
+              },
+              {
+                "name": "logoHeight",
+                "index": 20000,
+                "tab": "logo"
+              }
+            ],
+            "tabs": [
+              {
+                "name": "general",
+                "index": 100,
+                "iconName": "icon-pg-data-24x24"
+              },
+              {
+                "name": "logo",
+                "index": 200
+              }
+            ]
+          }
+        }
+      }
+    },
+    "localization": {
+      "en": {
+        "pe": {
+          "survey": {
+            "logoWidth": "Width",
+            "logoHeight": "Height"
+          },
+          "tabs": {
+            "logo": "Logo"
+          }
         }
       }
     }
-  } };
+  };
 
   const survey = editor.model;
   const value = survey.getQuestionByName("propertyGrid_categories").value;
@@ -512,21 +515,21 @@ test("Properties reset to defaults", () => {
   selector.value = "slider";
 
   categories.removeRow(5);
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
-  expect(hidden.value.map(c=> c.name)).toEqual(["validators", "requiredErrorText"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
+  expect(hidden.value.map(c => c.name)).toEqual(["validators", "requiredErrorText"]);
   editor.resetToDefaults();
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
   expect(hidden.value).toEqual([]);
 
   categories.removeRow(5);
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
-  expect(hidden.value.map(c=> c.name)).toEqual(["validators", "requiredErrorText"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data"]);
+  expect(hidden.value.map(c => c.name)).toEqual(["validators", "requiredErrorText"]);
 
   selector.value = "survey";
   editor.resetToDefaults();
 
   selector.value = "slider";
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
   expect(hidden.value).toEqual([]);
 });
 test("Properties & tabs order test", () => {
@@ -596,11 +599,11 @@ test("Properties categories order", () => {
   const selector = survey.getQuestionByName("propertyGrid_selector");
 
   selector.value = "ranking";
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
-  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c => c.category === "general").properties.map(p => p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
   selector.value = "slider";
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
-  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c => c.category === "general").properties.map(p => p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
 
   categories.visibleRows[0].showDetailPanel();
   const properties = categories.visibleRows[0].detailPanel.getQuestionByName("properties");
@@ -608,11 +611,11 @@ test("Properties categories order", () => {
   value.splice(0, 1);
   properties.value = value;
 
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
-  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["title", "description", "visible"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "sliderSettings", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c => c.category === "general").properties.map(p => p.name).slice(0, 3)).toEqual(["title", "description", "visible"]);
   selector.value = "ranking";
-  expect(categories.value.map(c=> c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
-  expect(categories.value.find(c=> c.category === "general").properties.map(p=> p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
+  expect(categories.value.map(c => c.category)).toEqual(["general", "choices", "choicesByUrl", "layout", "logic", "data", "validation"]);
+  expect(categories.value.find(c => c.category === "general").properties.map(p => p.name).slice(0, 3)).toEqual(["name", "title", "description"]);
 });
 test("remove base types from properties json", () => {
   const editor = new CreatorPresetEditorModel();
@@ -763,5 +766,32 @@ test("Do not include custom properties into preset if it is set as invisible", (
   row.showDetailPanel();
   const properties = row.detailPanel.getQuestionByName("properties");
   expect(properties.value.findIndex(r => r.name == "customProp1") > -1).toBeFalsy();
+  Serializer.removeProperty("rating", "customProp1");
+});
+test("Move custom properties into another tab", () => {
+  Serializer.addProperty("rating", { name: "customProp1", category: "rateValues" });
+  const editor = new CreatorPresetEditorModel();
+  editor.json = {
+    "propertyGrid": {
+      "definition": {
+        "classes": {
+          "rating": {
+            "properties": ["name", { name: "customProp1", tab: "general" }, { name: "minStep", tab: "rateValues" }, { name: "rateValues", tab: "rateValues" }],
+            "tabs": [{ name: "rateValues", index: 100 }, { name: "general", index: 200 }]
+          }
+        }
+      }
+    }
+  };
+  const survey = editor.model;
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "rating";
+  const tabIndex = categories.value.findIndex(c => c.category == "general");
+  const row = categories.visibleRows[tabIndex];
+  row.showDetailPanel();
+  const properties = row.detailPanel.getQuestionByName("properties");
+  expect(properties.value.findIndex(r => r.name == "name") > -1).toBeTruthy();
+  expect(properties.value.findIndex(r => r.name == "customProp1") > -1).toBeTruthy();
   Serializer.removeProperty("rating", "customProp1");
 });
