@@ -120,7 +120,7 @@ export const Basic = {
               "title",
               "description",
               "isRequired",
-              "correctAnswer"
+              { name: "correctAnswer", index: 100000 }
             ]
           },
           "comment": {
@@ -139,11 +139,11 @@ export const Basic = {
           "matrix": {
             "properties": [
               "cellType",
+              "columns",
+              "rows",
               "rowOrder",
               "eachRowRequired",
               "eachRowUnique",
-              "columns",
-              "rows",
             ]
           },
           "rating": {
