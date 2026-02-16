@@ -492,4 +492,16 @@ test.describe(title, () => {
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
   });
 
+  test("Check presets quit confirmation dialog", async ({ page }) => {
+    await page.getByText("Dansk").click();
+    await page.getByTitle("Quit").click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
+
+    await page.locator(".sv-popup__close-button").click();
+    await page.getByTitle("Quit").click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
+    await page.getByRole("button", { name: "Save and exit" }).click();
+    await expect(page.locator(".svc-creator-popup")).toContainText("Save current preset as");
+  });
+
 });
