@@ -133,7 +133,7 @@ export class PresetsManager {
   }
 
   private ensureSelectedPresetAvailable() {
-    const current = this.presetsList.selectedItem.id;
+    const current = this.presetsList?.selectedItem?.id;
     const visibleNames = this.getPresetsListToEdit().filter(p => p.visible).map(p => p.name);
     if (visibleNames.indexOf(current) >= 0) return;
     const fallback = visibleNames[0];
