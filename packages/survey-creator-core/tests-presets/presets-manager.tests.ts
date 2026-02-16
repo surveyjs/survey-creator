@@ -478,6 +478,54 @@ describe("PresetsManager", () => {
       const customAction = updatedMenuItems.find(item => item.id === "newCustom");
       expect(customAction).toBeDefined();
     });
+
+    test("should rename custom preset when title is changed in edit list", () => {
+      const originalName = "oldPresetName";
+      const newName = "newPresetName";
+      const presetJson = { toolbox: { showCategoryTitles: true } };
+      manager.addPreset({
+        presetName: originalName,
+        json: presetJson,
+        visible: true
+      });
+      expect(CreatorPresets[originalName]).toBeDefined();
+      expect(CreatorPresets[originalName].json).toEqual(presetJson);
+
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      manager.update();
+      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const editItem = menuItems.find(item => item.id === "editPresetsList");
+      if (editItem && editItem.action) {
+        editItem.action();
+      }
+
+      const dialogOptions = mockShowDialog.mock.calls[0][0];
+      const survey = dialogOptions.data.survey as SurveyModel;
+      // Simulate user renaming: row had name "oldPresetName", user edited title to "newPresetName"
+      const newList = [
+        { name: "basic", title: "Basic", visible: true, custom: false },
+        { name: "advanced", title: "Advanced", visible: true, custom: false },
+        { name: originalName, title: newName, visible: true, custom: true }
+      ];
+      survey.setValue("presetsList", newList);
+
+      expect(onApplyCallback).toBeDefined();
+      expect(onApplyCallback!()).toBe(true);
+
+      expect(CreatorPresets[originalName]).toBeUndefined();
+      expect(CreatorPresets[newName]).toBeDefined();
+      expect(CreatorPresets[newName].presetName).toBe(newName);
+      expect(CreatorPresets[newName].json).toEqual(presetJson);
+
+      const presetsArray = manager.getPresetsArray();
+      expect(presetsArray.some(p => p.name === originalName)).toBe(false);
+      expect(presetsArray.some(p => p.name === newName)).toBe(true);
+    });
   });
 
   describe("Matrix row actions configuration", () => {

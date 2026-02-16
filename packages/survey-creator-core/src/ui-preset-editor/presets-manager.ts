@@ -118,17 +118,36 @@ export class PresetsManager {
 
   private applyPresetsList(newList: any[]) {
     this.customPresets = [];
+    const renamedPresets: Record<string, string> = {};
     newList.forEach(item => {
-      const name = item.name || item.title;
-      if ((PredefinedCreatorPresets as any).includes(name)) {
-        CreatorPresets[name].visible = item.visible;
+      const isPredefined = (PredefinedCreatorPresets as any).includes(item.name);
+      if (isPredefined) {
+        CreatorPresets[item.name].visible = item.visible;
       } else {
-        this.customPresets.push(name);
+        // Custom preset: "title" is editable and is the preset name (user can rename)
+        const newName = (item.title || item.name || "").trim();
+        const oldName = item.name;
+        if (!newName) return;
+
+        if (oldName && oldName !== newName && CreatorPresets[oldName]) {
+          // Rename: copy config to new name, then remove old
+          CreatorPresets[newName] = { ...CreatorPresets[oldName], presetName: newName };
+          delete CreatorPresets[oldName];
+          renamedPresets[oldName] = newName;
+        }
+        this.customPresets.push(newName);
       }
     });
     this.rebuildPresetsArray();
     this.onPresetListSaved?.(this._presetsArray);
     this.updateMenu();
+    const selectedId = this.presetsList?.selectedItem?.id;
+    if (selectedId && renamedPresets[selectedId]) {
+      const action = this.presetsList?.getActionById?.(renamedPresets[selectedId]);
+      if (action) {
+        this.presetsList.onItemClick(action);
+      }
+    }
     this.ensureSelectedPresetAvailable();
   }
 
