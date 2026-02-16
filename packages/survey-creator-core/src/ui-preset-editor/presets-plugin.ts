@@ -83,7 +83,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       applyText: getLocString("presets.plugin.quitConfirmationSave"),
       cancelText: getLocString("presets.plugin.quitConfirmationDiscard"),
       iconName: "icon-warning-24x24",
-      showCloseButton: false,
+      showCloseButton: true,
       onApply: () => { onApply(); return true; }, onCancel: () => { onDiscard(); return true; }
     });
   }
