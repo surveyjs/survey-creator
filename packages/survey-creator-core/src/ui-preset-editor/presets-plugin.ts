@@ -154,13 +154,6 @@ export class UIPresetEditor implements ICreatorPlugin {
     return this.presetsManager.getPresetsArray();
   }
 
-  private saveClicked() {
-    if (PredefinedCreatorPresets.indexOf(this.getCurrentPreset()?.presetName) === -1) {
-      this.performSave();
-    } else {
-      this.saveAsHandler();
-    }
-  }
   private performSave(closeOnSave = false) {
     if (this.savePresetFunc) {
       this.savePresetFunc(this.saveCount, () => {
@@ -224,7 +217,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     const defaultPresets = this.presetsManager.presetsMenuItems;
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveClicked() }, //locTitleName: "presets.plugin.save"
+      { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveOrSaveAs() }, //locTitleName: "presets.plugin.save"
       { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAsHandler() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
@@ -309,7 +302,13 @@ export class UIPresetEditor implements ICreatorPlugin {
       iconName: "icon-exit-24x24",
       title: getLocString("presets.plugin.quit"),
       css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
-      action: () => { this.confirmQuit(() => this.saveOrSaveAs(true), () => this.hidePresets()); }
+      action: () => {
+        if (this.presetsManager.isSaved) {
+          this.hidePresets();
+          return;
+        }
+        this.confirmQuit(() => this.saveOrSaveAs(true), () => this.hidePresets());
+      }
     });
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
