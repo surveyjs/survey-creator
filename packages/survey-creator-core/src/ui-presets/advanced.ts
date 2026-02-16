@@ -71,7 +71,7 @@ export const Advanced = {
               "allowImagesPreview",
               "waitForUpload",
               "needConfirmRemoveFile",
-              "acceptedTypes",
+              "acceptedCategories",
               "acceptedTypes",
               "maxSize",
             ]

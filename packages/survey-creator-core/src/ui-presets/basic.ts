@@ -131,6 +131,7 @@ export const Basic = {
           "file": {
             "properties": [
               "allowMultiple",
+              "acceptedCategories",
               "acceptedTypes",
               "maxSize"
             ]
