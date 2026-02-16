@@ -1,6 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "./variables.scss" as *;
-@use "../fonts" as *;
+@use "../../../typography-mixins.scss" as *;
 
 .sps-popup-menu.sv-popup--menu-popup {
   &.sps-popup-menu--always-on-top {

@@ -1,6 +1,7 @@
 import { test } from "@playwright/test";
 import { injectAxe, checkA11y } from "axe-playwright";
-import { axeOptions, downArrowImageLink, leftArrowImageLink, rigthArrowImageLink, setJSON, upArrowImageLink, updateCreatorModel, url } from "./helper";
+import { axeOptions, setJSON, updateCreatorModel, url } from "./helper";
+import { downArrowImageLink, leftArrowImageLink, rigthArrowImageLink, upArrowImageLink } from "../resources/base64images";
 
 test.describe("designer a11y", () => {
   test.beforeEach(async ({ page }) => {
