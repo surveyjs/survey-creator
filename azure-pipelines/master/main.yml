@@ -9,6 +9,10 @@ resources:
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/service
+    - repository: SiteData
+      type: github
+      endpoint: github.com_surveyjsdeveloper
+      name: surveyjs/surveyjs-site-data
     - repository: EmptyRepo
       type: github
       endpoint: github.com_surveyjsdeveloper
@@ -46,6 +50,10 @@ jobs:
       - checkout: self
         persistCredentials: true
       - checkout: Service
+        persistCredentials: true
+        clean: true
+        fetchDepth: 1
+      - checkout: SiteData
         persistCredentials: true
         clean: true
         fetchDepth: 1
@@ -288,6 +296,42 @@ jobs:
               git push origin $branch
           }
         displayName: "Git surveyjs/service push updated docs for $(CurrentBranch)"
+
+      - powershell: |
+          $branch = "$(CurrentBranch)"
+          cd $(Build.SourcesDirectory)/surveyjs-site-data
+          $env:GIT_REDIRECT_STDERR = '2>&1'
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
+          git fetch origin $branch
+          git checkout -B $branch origin/$branch
+          git reset --hard origin/$branch
+        displayName: "Git surveyjs-site-data push updated docs (prepare)"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs"
+          Contents: |
+            classes.json
+            pmes.json
+            surveyjs_definition.json
+          TargetFolder: "$(Build.SourcesDirectory)/surveyjs-site-data/DocsEditor"
+          OverWrite: true
+          CleanTargetFolder: false
+        displayName: "Copy generated docs to the local surveyjs-site-data repo"
+
+      - powershell: |
+          $branch = "$(CurrentBranch)"
+          cd $(Build.SourcesDirectory)/surveyjs-site-data
+          $env:GIT_REDIRECT_STDERR = '2>&1'
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
+          git add DocsEditor
+          if (git status --porcelain) {
+              git commit -m "updated survey-creator docs for $branch [azurepipelines skip]"
+              git push origin $branch
+          }
+        displayName: "Git surveyjs-site-data push updated docs for $(CurrentBranch)"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-utils
