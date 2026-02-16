@@ -1,4 +1,5 @@
-import { url, compareScreenshot, test, setJSON, expect, setShowToolbox, setShowAddQuestionButton, upArrowImageLink, setAllowEditSurveyTitle, setShowSidebar, setIsCompact, changeToolboxSearchEnabled, changeToolboxScrolling } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, setShowSidebar, setIsCompact, changeToolboxSearchEnabled, changeToolboxScrolling } from "./helper";
+import { upArrowImageLink } from "../resources/base64images";
 
 const title = "Design Surface";
 
