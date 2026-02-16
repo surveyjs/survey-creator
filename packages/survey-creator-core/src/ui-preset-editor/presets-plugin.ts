@@ -329,9 +329,9 @@ export class UIPresetEditor implements ICreatorPlugin {
       resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
 
-    this.model.model.onValueChanged.add((sender, options) => {
+    this.model.onJsonChangedCallback = () => {
       this.setStatus("unsaved");
-    });
+    };
 
     this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector?.value)[0];
     curentlySelectedPreset = this.presetsList.selectedItem;

@@ -465,6 +465,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
 
   private firstTimeLoading = false;
+  public get isSettingUp() { return this.firstTimeLoading; }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     super.updateOnValueChangedCore(model, name);
     if (name == this.nameCategories) {
