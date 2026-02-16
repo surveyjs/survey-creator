@@ -381,8 +381,8 @@ export class PresetsManager {
   public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
       this.addPreset({ presetName: newName, json: json });
-      this.presetsList.onItemClick(this.presetsList.getActionById(newName));
       saveCallback(newName);
+      this.presetsList.onItemClick(this.presetsList.getActionById(newName));
     });
   }
 
