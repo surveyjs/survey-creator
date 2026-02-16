@@ -14,7 +14,7 @@ export const Basic = {
         {
           "name": "date",
           "title": "Date",
-          "iconName": "icon-text",
+          "iconName": "icon-toolbox-calendar-24x24",
           "json": {
             "type": "text",
             "inputType": "date"
@@ -23,7 +23,7 @@ export const Basic = {
         {
           "name": "email",
           "title": "Email",
-          "iconName": "icon-text",
+          "iconName": "icon-toolbox-email-24x24",
           "json": {
             "type": "text",
             "inputType": "email"
@@ -32,7 +32,7 @@ export const Basic = {
         {
           "name": "tel",
           "title": "Phone Number",
-          "iconName": "icon-text",
+          "iconName": "icon-toolbox-phone-24x24",
           "json": {
             "type": "text",
             "inputType": "tel"
