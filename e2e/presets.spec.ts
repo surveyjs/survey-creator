@@ -482,7 +482,7 @@ test.describe(title, () => {
 
     await page.getByTitle("Delete").click();
 
-    await page.getByTitle("OK").click();
+    await page.getByTitle("Yes, delete").click();
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert"]);
     await page.getByRole("button", { name: "Save" }).click();
 
