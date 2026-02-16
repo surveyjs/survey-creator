@@ -17,7 +17,7 @@ Cookies store information on a user's browser after the user have submitted a fo
 
 To prevent repetitive form submission from the same respondent, follow these steps:
 
-1. In the top right corner of the Property Grid, select **Survey** to switch to the survey-level settings.
+1. At the top of the Property Grid, select **Survey** to switch to the survey-level settings.
 1. Under **General**, locate an input field called **Limit to one response**. 
 1. Enter a unique cookie value for your form.
 

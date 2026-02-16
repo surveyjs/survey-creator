@@ -100,7 +100,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
 };
 
 export const themeModelPropertyGridDefinition: ISurveyPropertyGridDefinition = {
-  autoGenerateProperties: true,
+  generateOtherTab: true,
   classes: themeModelProperties
 };
 

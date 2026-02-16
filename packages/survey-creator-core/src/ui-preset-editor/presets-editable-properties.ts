@@ -219,6 +219,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   private updateJsonClasses(curJsonClasses: ISurveyPropertiesDefinition, val: Array<IPropertyGridTabInfo>): void {
     const tabs = new Array<IPropertyTabInfo>();
     const properties = new Array<IPropertyEditorInfo>();
+    const allProperties = new Array<string>();
     val.forEach(tab => {
       if (!tab || !tab.name) return;
       const newTab: IPropertyTabInfo = { name: tab.name };
@@ -229,12 +230,19 @@ export class SurveyQuestionPresetPropertiesDetail {
       if (Array.isArray(tab.items)) {
         tab.items.forEach(propName => {
           properties.push({ name: propName, tab: tab.name });
+          allProperties.push(propName);
         });
       }
     });
     curJsonClasses[this.className] = curJsonClasses[this.className] || {};
     curJsonClasses[this.className].tabs = tabs;
     curJsonClasses[this.className].properties = properties;
+    const invisibleProps = this.properties.getInvisibleCustomGeneratedProperties(allProperties);
+    if (invisibleProps.length > 0) {
+      curJsonClasses[this.className].invisibleGeneratedProperties = invisibleProps;
+    } else {
+      delete curJsonClasses[this.className].invisibleGeneratedProperties;
+    }
   }
   public updatePropertyVisibility(propInfo: any, propCategory: string): void {
     this.removeBaseClassesFromCurrentJson();
@@ -525,7 +533,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     const defaultJson = creator.getPropertyGridDefinition();
     this.isModified = !!json?.definition || (defaultJson && (JSON.stringify(defaultJson) !== JSON.stringify(defaultPropertyGridDefinition)));
     this.currentJson = json?.definition || this.copyJson(defaultJson || defaultPropertyGridDefinition);
-    this.currentJson.autoGenerateProperties = false;
+    this.currentJson.generateOtherTab = false;
     this.updateOnValueChangedCore(model, this.nameSelector);
   }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }

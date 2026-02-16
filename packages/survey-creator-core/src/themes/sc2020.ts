@@ -1307,6 +1307,7 @@ export default {
     "--sjs2-color-project-brand-600": "#19B394",
     "--sjs2-color-project-accent-600": "#FF9814",
     "--sjs2-color-utility-surface": "#F3F3F3",
+    "--sjs2-color-utility-surface-designer": "#F3F3F3",
     "--sjs-primary-background-10": "#19B3941A",
     "--sjs-primary-background-400": "#14A48B",
     "--sjs-primary-foreground-100": "#FFFFFF",

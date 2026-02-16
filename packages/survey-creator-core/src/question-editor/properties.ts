@@ -108,7 +108,7 @@ export class SurveyQuestionProperties {
     }
     return res;
   }
-  private getDefinitionClassCopy(name: string) : ISurveyQuestionEditorDefinition {
+  private getDefinitionClassCopy(name: string): ISurveyQuestionEditorDefinition {
     if (!name) return undefined;
     const cls = this.propertyGridDefinition.classes[name];
     return cls ? Helpers.getUnbindValue(cls) : undefined;
@@ -198,7 +198,7 @@ export class SurveyQuestionProperties {
     });
   }
   private setParentTabs(): void {
-    for (let i = this.tabs.length - 1; i >= 0; i --) {
+    for (let i = this.tabs.length - 1; i >= 0; i--) {
       const tab = this.tabs[i];
       if (tab.parentName) {
         const parent = this.getTabByName(tab.parentName);
@@ -397,16 +397,14 @@ export class SurveyQuestionProperties {
       while(i < classRes.properties.length) {
         const prop = classRes.properties[i];
         const propName = typeof prop == "string" ? prop : prop.name;
-        let tabName = settings.propertyGrid.generalTabName;
-        if (typeof prop !== "string" && !!prop.tab) {
-          tabName = prop.tab;
-        }
+        const originalTabName = typeof prop !== "string" && !!prop.tab ? prop.tab : "";
+        let tabName = originalTabName || settings.propertyGrid.generalTabName;
         const jsonProp = !!this.propertiesHash[propName]
           ? this.propertiesHash[propName].property
           : null;
         if (!isColumn || jsonProp?.availableInMatrixColumn) {
           const jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
-          if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
+          if (!originalTabName && !!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
             classRes.properties.splice(i, 1);
           } else {
             usedProperties[propName] = true;
@@ -455,25 +453,47 @@ export class SurveyQuestionProperties {
     }
     return res;
   }
+  private getInvisibleGeneratedProperties(tabs: Array<ISurveyQuestionEditorDefinition>): Array<string> {
+    const res = [];
+    if (!Array.isArray(tabs)) return res;
+    tabs.forEach(tab => {
+      if (Array.isArray(tab.invisibleGeneratedProperties)) {
+        tab.invisibleGeneratedProperties.forEach(prop => res.push(prop));
+      }
+    });
+    return res;
+  }
+  public getInvisibleCustomGeneratedProperties(visibleProperties: Array<string>): Array<string> {
+    const res = new Array<string>();
+    this.customGeneratedProperties.forEach(prop => {
+      if (visibleProperties.indexOf(prop) < 0) {
+        res.push(prop);
+      }
+    });
+    return res;
+  }
+  private customGeneratedProperties: Array<string> = [];
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
     const unusedProperties = this.getUnusedProperties(usedProperties, isFormMode);
-    if (!this.propertyGridDefinition.autoGenerateProperties) {
-      this.unusedProperties = unusedProperties;
-      return;
-    }
-    let classRes: any = { properties: [], tabs: [] };
-    let tabNames = [];
+    const invisibleGeneratedProperties = this.getInvisibleGeneratedProperties(tabs);
+    const generateOther = this.propertyGridDefinition.generateOtherTab;
+    const classRes: any = { properties: [], tabs: [] };
+    const tabNames = [];
+    this.customGeneratedProperties = [].concat(invisibleGeneratedProperties);
     for (var i = 0; i < unusedProperties.length; i++) {
       const prop = unusedProperties[i];
-      let propCategory = this.getJsonPropertyCategory(prop);
-      let tabName = !!propCategory
+      if (invisibleGeneratedProperties.indexOf(prop.name) > -1) continue;
+      const propCategory = this.getJsonPropertyCategory(prop);
+      const tabName = !!propCategory
         ? propCategory
         : tabs.length == 0 || (!!this.parentObj && this.showMode === "form")
           ? settings.propertyGrid.generalTabName
           : otherTabName;
+      if (!generateOther && tabName === otherTabName) continue;
+      this.customGeneratedProperties.push(prop.name);
       if (tabNames.indexOf(tabName) < 0 && tabName != settings.propertyGrid.generalTabName) {
         tabNames.push(tabName);
         classRes.tabs.push({

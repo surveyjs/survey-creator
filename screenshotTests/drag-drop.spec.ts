@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, upArrowImageLink, downArrowImageLink, leftArrowImageLink, compareScreenshot, doDrag, doDragDrop } from "./helper";
+import { url, setJSON, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
+import { downArrowImageLink, upArrowImageLink } from "../resources/base64images";
 
 const title = "DragDrop Screenshot";
 

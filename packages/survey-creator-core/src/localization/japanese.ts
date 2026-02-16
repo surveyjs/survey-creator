@@ -238,6 +238,18 @@ export var jaStrings = {
     options: "オプション",
     // "Generate Valid JSON"
     generateValidJSON: "有効なJSONを生成する",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "不明な機能:「{0}」。",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "未知の機能:「{0}」。",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "未知変数:「{0}」。",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "未知の変数:「{0}」。",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "構文の誤りです。",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "意味誤りです。",
     // "Generate Readable JSON"
     generateReadableJSON: "読み取り可能なJSONを生成する",
     // "Toolbox"
@@ -1321,10 +1333,10 @@ export var jaStrings = {
     // "Regular expression"
     regex: "正規表現",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "検証メッセージ",
-      // [Auto-translated] "Validation expression"
-      expression: "検証式",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "無効な入力の通知メッセージ",
+      // [Auto-translated] "Valid when"
+      expression: "有効の場合",
       // [Auto-translated] "Notification type"
       notificationType: "通知タイプ",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1479,6 +1491,66 @@ export var jaStrings = {
       labelFormat: "ラベルの形式",
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "ツールチップの形式"
+    },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "画像URL",
+      // [Auto-translated] "Areas"
+      areas: "地域",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "複数選択を許可する",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "価値のプロパティ名",
+      // [Auto-translated] "Shape"
+      shape: "形状",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "アイドルフィルカラー",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "アイドルストロークカラー",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "アイドルストローク幅",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "ホバーフィルカラー",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "ホバーストロークカラー",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "ホバーストローク幅",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "選択された塗りつぶし色",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "選択されたストロークカラー",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "選択ストローク幅",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "最大選択エリア",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "最小選択エリア"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "価値",
+      // [Auto-translated] "Shape"
+      shape: "形状",
+      // [Auto-translated] "Coordinates"
+      coords: "座標",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "アイドルフィルカラー",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "アイドルストロークカラー",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "アイドルストローク幅",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "ホバーフィルカラー",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "ホバーストロークカラー",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "ホバーストローク幅",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "選択された塗りつぶし色",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "選択されたストロークカラー",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "選択ストローク幅"
     },
     file: {
       // [Auto-translated] "Image height"
@@ -2515,6 +2587,8 @@ export var jaStrings = {
     notcontains: "含まない",
     // "Any of"
     anyof: "次のいずれか",
+    // [Auto-translated] "None of"
+    noneof: "いずれも",
     // "All of"
     allof: "次のすべて",
     // "Greater than"
@@ -3528,6 +3602,16 @@ export var jaStrings = {
       "default-dark": "暗い",
       // [Auto-translated] "Contrast"
       "default-contrast": "対照"
+    }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "基本的な",
+      // [Auto-translated] "Advanced"
+      advanced: "上級",
+      // [Auto-translated] "Expert"
+      expert: "専門家"
     }
   }
 };

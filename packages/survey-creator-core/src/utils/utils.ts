@@ -105,3 +105,31 @@ export function cssVariablesToString(cssVariables: { [key: string]: string } | n
     .map(key => `${key}: ${cssVariables[key]}`)
     .join("; ");
 }
+
+export function levenshteinDistance(str1: string, str2: string): number {
+  if (!str1) return str2 ? str2.length : 0;
+  if (!str2) return str1.length;
+  if (str1 === str2) return 0;
+  if (str1.length > str2.length) {
+    [str1, str2] = [str2, str1];
+  }
+  const len1 = str1.length;
+  const len2 = str2.length;
+  let prevRow = [];
+  let currRow = [];
+  for (let j = 0; j <= len2; j++) {
+    prevRow[j] = j;
+  }
+  for (let i = 1; i <= len1; i++) {
+    currRow[0] = i;
+    for (let j = 1; j <= len2; j++) {
+      const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
+      currRow[j] = Math.min(
+        prevRow[j] + 1,
+        currRow[j - 1] + 1,
+        prevRow[j - 1] + cost
+      );
+    } [prevRow, currRow] = [currRow, prevRow];
+  }
+  return prevRow[len2];
+}
