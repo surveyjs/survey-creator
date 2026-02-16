@@ -191,11 +191,6 @@ export class UIPresetEditor implements ICreatorPlugin {
     statusAction.visible = status === "unsaved";
     statusAction.title = getLocString("presets.plugin.status." + status.toLowerCase());
   }
-  protected updateStatusAction(unsaved: boolean) {
-    const statusAction = this.model.navigationBar.getActionById("presets-status");
-    statusAction.visible = unsaved;
-    statusAction.title = getLocString(unsaved ? "presets.plugin.unsaved" : "presets.plugin.saved");
-  }
   public saveToFileHandler = saveToFileHandler;
 
   private preventTabSwitch = (_, options) => {
