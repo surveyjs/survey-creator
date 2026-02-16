@@ -1,5 +1,26 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
+import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
+
+const originalCreatorPresets: { [key: string]: ICreatorPresetConfig } = {};
+let originalPredefinedPresets: string[] = [];
+
+beforeEach(() => {
+  Object.keys(originalCreatorPresets).forEach(key => delete originalCreatorPresets[key]);
+  Object.keys(CreatorPresets).forEach(key => {
+    originalCreatorPresets[key] = CreatorPresets[key];
+    delete CreatorPresets[key];
+  });
+  originalPredefinedPresets = [...PredefinedCreatorPresets];
+  PredefinedCreatorPresets.length = 0;
+});
+
+afterEach(() => {
+  Object.keys(CreatorPresets).forEach(key => delete CreatorPresets[key]);
+  Object.assign(CreatorPresets, originalCreatorPresets);
+  PredefinedCreatorPresets.length = 0;
+  PredefinedCreatorPresets.push(...originalPredefinedPresets);
+});
 
 test("UIPresetEditor: pagesAction.title falls back to empty string when selected item has no title", () => {
   const creator = new CreatorTester();
@@ -19,5 +40,47 @@ test("UIPresetEditor: pagesAction.title falls back to empty string when selected
 
   expect(pagesAction.title).toBe(surveyModel.currentPage.navigationTitle);
   plugin.deactivate();
+});
+
+describe("UIPresetEditor: saveClicked", () => {
+  test("should call performSave for custom preset", () => {
+    PredefinedCreatorPresets.push("basic");
+    CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+    CreatorPresets["custom1"] = { presetName: "custom1", json: {}, visible: true };
+
+    const creator = new CreatorTester();
+    const plugin = new UIPresetEditor(creator);
+    (plugin as any)["presetsManager"].presetSelector = { value: "custom1" } as any;
+    plugin.activate();
+
+    const performSaveSpy = jest.spyOn(plugin as any, "performSave").mockImplementation(() => { });
+    const saveAsHandlerSpy = jest.spyOn(plugin as any, "saveAsHandler").mockImplementation(() => { });
+
+    (plugin as any)["saveClicked"]();
+
+    expect(performSaveSpy).toHaveBeenCalledTimes(1);
+    expect(saveAsHandlerSpy).not.toHaveBeenCalled();
+    plugin.deactivate();
+  });
+
+  test("should call saveAsHandler for predefined preset", () => {
+    PredefinedCreatorPresets.push("basic");
+    CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+    CreatorPresets["custom1"] = { presetName: "custom1", json: {}, visible: true };
+
+    const creator = new CreatorTester();
+    const plugin = new UIPresetEditor(creator);
+    (plugin as any)["presetsManager"].presetSelector = { value: "basic" } as any;
+    plugin.activate();
+
+    const performSaveSpy = jest.spyOn(plugin as any, "performSave").mockImplementation(() => { });
+    const saveAsHandlerSpy = jest.spyOn(plugin as any, "saveAsHandler").mockImplementation(() => { });
+
+    (plugin as any)["saveClicked"]();
+
+    expect(saveAsHandlerSpy).toHaveBeenCalledTimes(1);
+    expect(performSaveSpy).not.toHaveBeenCalled();
+    plugin.deactivate();
+  });
 });
 

@@ -395,7 +395,7 @@ export class PresetsManager {
   }
 
   public getCurrentPreset(): ICreatorPresetConfig | undefined {
-    const value = this.presetSelector?.value;
+    const value = this.presetsList?.selectedItem?.id;
     return value ? CreatorPresets[value] : undefined;
   }
 }

@@ -101,7 +101,6 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.onPresetListSaved.fire(this, { presets });
     };
     this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
-      this.saveAction.enabled = PredefinedCreatorPresets.indexOf(preset.presetName) === -1;
       this.model.json = preset.json;
       this.setStatus("initial");
     };
@@ -155,6 +154,13 @@ export class UIPresetEditor implements ICreatorPlugin {
     return this.presetsManager.getPresetsArray();
   }
 
+  private saveClicked() {
+    if (PredefinedCreatorPresets.indexOf(this.getCurrentPreset()?.presetName) === -1) {
+      this.performSave();
+    } else {
+      this.saveAsHandler();
+    }
+  }
   private performSave(closeOnSave = false) {
     if (this.savePresetFunc) {
       this.savePresetFunc(this.saveCount, () => {
@@ -218,7 +224,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     const defaultPresets = this.presetsManager.presetsMenuItems;
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), enabled: false, action: () => this.performSave() }, //locTitleName: "presets.plugin.save"
+      { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveClicked() }, //locTitleName: "presets.plugin.save"
       { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAsHandler() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },

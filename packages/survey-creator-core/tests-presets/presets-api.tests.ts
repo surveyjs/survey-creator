@@ -100,8 +100,8 @@ describe("UIPresetEditor API", () => {
     test("should return current preset when selector is set", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
-      plugin.activate();
       plugin["presetsManager"].presetSelector = { value: "basic" } as any;
+      plugin.activate();
 
       const current = plugin.getCurrentPreset();
 
