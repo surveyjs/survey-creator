@@ -1,5 +1,5 @@
 @use "../../../variables" as *;
-@use "../fonts" as *;
+@use "../../../typography-mixins.scss" as *;
 
 .sps-checkbox {
   cursor: pointer;

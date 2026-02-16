@@ -1,5 +1,5 @@
 @use "../../../variables.scss" as *;
-@use "../fonts.scss" as *;
+@use "../../../typography-mixins.scss" as *;
 
 .sps-action-bar {
   display: flex;
