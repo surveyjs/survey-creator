@@ -462,10 +462,15 @@ test.describe(title, () => {
   test("Paste multiline selectbase", async ({ page }) => {
     await page.locator(".svc-toolbox__tool").getByText("Radio Button Group").click();
 
+    await page.locator(".sv-string-editor").getByText("Item 2").hover();
     await page.locator(".sv-string-editor").getByText("Item 2").click();
+    await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeFocused();
+
     await page.keyboard.press("Home");
     await page.keyboard.press("ArrowRight");
     await page.keyboard.press("ArrowRight");
+
+    await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeFocused();
     await page.evaluate(() => {
       const el = document.activeElement as HTMLElement;
       const event = new ClipboardEvent("paste", { bubbles: true, cancelable: true, clipboardData: new DataTransfer() });
