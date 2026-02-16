@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, explicitErrorHandler, upArrowImageLink } from "./helper";
+import { url, setJSON, explicitErrorHandler } from "./helper";
+import { upArrowImageLink } from "../resources/base64images";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(`${url}`);
