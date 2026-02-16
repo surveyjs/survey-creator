@@ -3,6 +3,7 @@ import {
   test,
   expect,
   setJSON,
+  getToolboxItemByText,
   explicitErrorHandler,
   handleShiftEnter,
   doDragDrop,
@@ -207,7 +208,7 @@ test.describe(title, () => {
   });
 
   test("Focus on new question", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Radio Button Group").click();
+    await getToolboxItemByText(page, "Radio Button Group").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
   });
@@ -243,7 +244,7 @@ test.describe(title, () => {
   });
 
   test("Focus switch on select base", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Radio Button Group").click();
+    await getToolboxItemByText(page, "Radio Button Group").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
@@ -259,7 +260,7 @@ test.describe(title, () => {
   });
 
   test("Disable edit inactive items", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Checkboxes").click();
+    await getToolboxItemByText(page, "Checkboxes").click();
 
     const itemSelector = ".svc-item-value__item .svc-string-editor .sv-string-editor";
     expect(await page.locator(itemSelector).getByText("Select All").getAttribute("contenteditable")).toEqual("false");
@@ -274,7 +275,7 @@ test.describe(title, () => {
   });
 
   test("Focus switch on rating base", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Rating Scale").click();
+    await getToolboxItemByText(page, "Rating Scale").click();
     await page.keyboard.press("Enter");
     const svStringSelector = page.locator(".svc-rating-question-content .sv-string-editor").getByText("2").first();
     await expect(svStringSelector).toBeVisible();
@@ -287,7 +288,7 @@ test.describe(title, () => {
   });
 
   test("Delete items on backspace", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Radio Button Group").click();
+    await getToolboxItemByText(page, "Radio Button Group").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
@@ -318,7 +319,7 @@ test.describe(title, () => {
   });
 
   test("Focus switch on multiple text", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Multiple Textboxes").click();
+    await getToolboxItemByText(page, "Multiple Textboxes").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
@@ -334,7 +335,7 @@ test.describe(title, () => {
   });
 
   test("Delete  multiple text items on backspace", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Multiple Textboxes").click();
+    await getToolboxItemByText(page, "Multiple Textboxes").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
@@ -367,7 +368,7 @@ test.describe(title, () => {
   });
 
   test("Focus switch on matrix columns and rows", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Single-Select Matrix").click();
+    await getToolboxItemByText(page, "Single-Select Matrix").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
@@ -393,7 +394,7 @@ test.describe(title, () => {
   });
 
   test("Delete matrix Columns on backspace", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Single-Select Matrix").click();
+    await getToolboxItemByText(page, "Single-Select Matrix").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
@@ -424,7 +425,7 @@ test.describe(title, () => {
   });
 
   test("Delete matrix rows on backspace", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Single-Select Matrix").click();
+    await getToolboxItemByText(page, "Single-Select Matrix").click();
     const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Tab");
@@ -460,7 +461,7 @@ test.describe(title, () => {
   });
 
   test("Paste multiline selectbase", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Radio Button Group").click();
+    await getToolboxItemByText(page, "Radio Button Group").click();
 
     await page.locator(".sv-string-editor").getByText("Item 2").hover();
     await page.locator(".sv-string-editor").getByText("Item 2").click();
@@ -547,7 +548,7 @@ test.describe(title, () => {
   });
 
   test("Undo after new item add", async ({ page }) => {
-    await page.locator(".svc-toolbox__tool").getByText("Radio Button Group").click();
+    await getToolboxItemByText(page, "Radio Button Group").click();
     await page.locator(".svc-item-value-controls__add").filter({ visible: true }).nth(1).click();
     await expect(page.locator(".svc-item-value-controls__remove")).toHaveCount(4);
     await page.locator("button[title=Undo]").click();

@@ -172,7 +172,7 @@ export async function handleShiftEnter(page: Page, selector: string) {
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {
-  return page.locator(".svc-toolbox__item-title").getByText(text, { exact: true });
+  return page.locator(`.svc-toolbox__tool [aria-label='${text}']`);
 }
 
 export function getSubToolboxItemByText(page: Page, text: string): Locator {
