@@ -679,7 +679,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (questions.length > 0) {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
-        if (contextObject === question) continue;
+        if (contextObject === question && !this.isItemValueObject) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
         if (settings.logic.includeComplexQuestions && question.isContainer) {
           res.push({ question: question, name: question.name, text: question.title });
@@ -716,7 +716,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return res;
   }
   private getContextObject(): Base {
-    if (this.object && this.object.isDescendantOf("itemvalue")) {
+    if (this.isItemValueObject) {
       const res: any = (<ItemValue>this.object).locOwner;
       if (!!res && res.getType) {
         if (!!res.locOwner && res.locOwner.isDescendantOf("matrixdropdowncolumn"))
@@ -725,6 +725,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       }
     }
     return this.object;
+  }
+  private get isItemValueObject(): boolean {
+    return this.object && this.object.isDescendantOf("itemvalue");
   }
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (let i = 0; i < values.length; i++) {

@@ -1974,7 +1974,19 @@ test("addCondition quotes in items values - Bug#10512", () => {
   questionValue.value = questionValue.choices[3].value;
   expect(editor.text).toEqual("{q2} = 'Before \\\"With Quotes\\\"'");
 });
-
+test("Show question in the list when editing question choices/rows/columns, Bug#7178", () => {
+  const survey = new SurveyModel({
+    questions: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const editor = new ConditionEditor(survey, q1.choices[0]);
+  expect(editor.panel.panels).toHaveLength(1);
+  const panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").choices).toHaveLength(1);
+  expect(panel.getQuestionByName("questionName").choices[0].value).toBe("q1");
+});
 test("Expression validation #7362", () => {
   const survey = new SurveyModel({
     elements: [
