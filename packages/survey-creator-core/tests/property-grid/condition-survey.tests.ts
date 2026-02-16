@@ -291,8 +291,9 @@ test("allCondtionQuestions for choices in a question", () => {
 
   const editor = new ConditionEditor(survey, question.choices[0]);
   const condQuestions = editor.allConditionQuestions;
-  expect(condQuestions).toHaveLength(1);
-  expect(condQuestions[0].value).toEqual("q2");
+  expect(condQuestions).toHaveLength(2);
+  expect(condQuestions[0].value).toEqual("q1");
+  expect(condQuestions[1].value).toEqual("q2");
 });
 test("allCondtionQuestions for matrix column", () => {
   var survey = new SurveyModel();
