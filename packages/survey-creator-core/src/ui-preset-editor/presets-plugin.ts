@@ -156,6 +156,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   private performSave(closeOnSave = false) {
     if (this.savePresetFunc) {
+      this.setStatus("saving");
       this.savePresetFunc(this.saveCount, () => {
         this.saveHandler(closeOnSave);
       });
@@ -184,7 +185,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   protected saveAsHandler(closeOnSave = false) {
     this.presetsManager.saveAs(this.model.json, ()=> { this.performSave(closeOnSave); });
   }
-  protected setStatus(status: "saved" | "unsaved" | "saving" |"initial") {
+  protected setStatus(status: "saved" | "unsaved" | "saving" | "initial") {
     this.presetsManager.setStatus(status === "unsaved");
     const statusAction = this.model.navigationBar.getActionById("presets-status");
     statusAction.visible = status === "unsaved";
