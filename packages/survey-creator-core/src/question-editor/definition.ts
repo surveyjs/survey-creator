@@ -18,6 +18,7 @@ export interface ISurveyQuestionEditorDefinition {
   title?: string;
   properties?: Array<string | IPropertyEditorInfo>;
   tabs?: Array<IPropertyTabInfo>;
+  invisibleGeneratedProperties?: Array<string>;
 }
 
 export interface ISurveyPropertiesDefinition {
@@ -25,7 +26,7 @@ export interface ISurveyPropertiesDefinition {
 }
 
 export interface ISurveyPropertyGridDefinition {
-  autoGenerateProperties: boolean;
+  generateOtherTab: boolean;
   classes: ISurveyPropertiesDefinition;
 }
 
@@ -973,7 +974,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
 };
 
 export const defaultPropertyGridDefinition: ISurveyPropertyGridDefinition = {
-  autoGenerateProperties: true,
+  generateOtherTab: true,
   classes: defaultProperties
 };
 
