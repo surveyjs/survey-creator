@@ -144,10 +144,31 @@ export async function changeToolboxSearchEnabled(page: Page, enabled: boolean) {
   }, enabled);
 }
 
+export async function changeToolboxLocation(page: Page, newVal: string) {
+  await page.evaluate((val) => {
+    window["creator"].toolboxLocation = val;
+  }, newVal);
+}
+
+export async function getPagesLength(page: Page): Promise<number> {
+  return await page.evaluate(() => window["creator"].survey.pages.length);
+}
+
 export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
   await page.evaluate((val) => {
     window["creator"].showSurveyHeader = val;
   }, newVal);
+}
+
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+
+export async function addQuestionByAddQuestionButton(page: Page, text: string) {
+  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
+  await page.locator(".svc-list__item span").getByText(text, { exact: true }).click();
+}
+
+export function getAddNewQuestionButton(page: Page): Locator {
+  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {
