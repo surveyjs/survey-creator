@@ -1,7 +1,7 @@
 <template>
 
   <div :class="model.cssClass" >
-    <SvComponent :is="element.componentName" :model="element.componentData" v-for="(element, index) in props.model.elements" :key="index" />
+    <SvComponent :is="element.componentName" v-bind="element.componentData" v-for="(element, index) in props.model.elements" :key="index" />
   </div>
 </template>
 

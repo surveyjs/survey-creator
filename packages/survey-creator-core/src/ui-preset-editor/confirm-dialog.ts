@@ -34,11 +34,14 @@ export function showConfirmDialog(creator: SurveyCreatorModel, options: IConfirm
   ];
   titleContainer.cssClass = "svc-creator-confirm-dialog__title-container";
 
+  const className = "svc-creator-confirm-dialog__icon" + (options.category === "danger" ? " svc-creator-confirm-dialog__icon--danger" : "");
   const contentModelElements = [
     { componentName: "sv-svg-icon", componentData: {
       iconName: options.iconName,
       size: "auto",
-      className: "svc-creator-confirm-dialog__icon" + (options.category === "danger" ? " svc-creator-confirm-dialog__icon--danger" : "")
+      className: className, // TODO: rework in library
+      class: className, // TODO: rework in library
+      partCss: className, // TODO: rework in library
     } },
     { componentName: "svc-component-container", componentData: { model: titleContainer } },
   ];
