@@ -413,24 +413,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   };
 
   private getConvertToTypes(): Array<QuestionToolboxItem> {
-    const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
-    const itemNames = [];
-    availableItems.forEach(item => {
-      if (itemNames.indexOf(item.typeName) == -1) {
-        itemNames.push(item.typeName);
-      }
-    });
-    const convertClasses: string[] = QuestionConverter.getConvertToClasses(this.currentType, itemNames, true);
-
-    const res = [];
-    convertClasses.forEach((className: string) => {
-      const items = this.creator.toolbox.items.filter(item => item.name == className);
-      if (Array.isArray(items) && items.length > 0) {
-        const item = items[0];
-        res.push(item);
-      }
-    });
-    return res;
+    return this.creator.getAvailableToolboxItems(this.element, false);
   }
 
   private buildDefaultJsonMap(availableItems: QuestionToolboxItem[]) {
