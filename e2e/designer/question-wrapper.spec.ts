@@ -121,6 +121,7 @@ test.describe(title, () => {
 
     await getToolboxItemByText(page, "Single-Line Input").hover();
     await getToolboxItemByText(page, "Single-Line Input").click();
+    await page.locator(".svc-tab-designer").hover({ position: { x: 150, y: 5 } });
     await page.locator(".svc-tab-designer").click({ position: { x: 150, y: 5 } });
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(0);
     await page.locator(".svc-question__content").hover({ position: { x: 5, y: 5 } });
@@ -187,6 +188,7 @@ test.describe(title, () => {
     expect(normalize(titleText)).toBe("question1");
     await expect(requiredActionButton).not.toHaveClass(/svc-survey-element-toolbar__item--active/);
 
+    await requiredActionButton.hover();
     await requiredActionButton.click();
     titleText = await questionTitle.innerText();
     expect(normalize(titleText)).toBe("question1 *");
