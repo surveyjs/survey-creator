@@ -465,7 +465,7 @@ test.describe(title, () => {
 
     await page.locator(".sv-string-editor").getByText("Item 2").hover();
     await page.locator(".sv-string-editor").getByText("Item 2").click();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(500);
     await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeFocused();
 
     await page.keyboard.press("Home");
