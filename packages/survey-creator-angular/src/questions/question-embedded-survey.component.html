@@ -1,5 +1,7 @@
 <ng-template #template>
-  <ng-container *ngIf="!!model && !!survey && survey.currentPage">
-    <page [model]="survey.currentPage" [survey]="survey"></page>
-  </ng-container>
+  <div #container style="display: contents">
+    <ng-container *ngIf="!!model && !!survey && survey.currentPage">
+      <page [model]="survey.currentPage" [survey]="survey"></page>
+    </ng-container>
+  </div>
 </ng-template>
