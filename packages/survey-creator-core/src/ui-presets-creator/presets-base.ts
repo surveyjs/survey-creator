@@ -20,7 +20,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     this.children.forEach(item => item.setJson(this.json && item.getPath() ? this.json[item.getPath()] : this.json));
   }
   public apply(creator: SurveyCreatorModel, internal = false): void {
-    if (!this.json) return;
+    if (this.json === undefined) return;
     if (!!creator) {
       this.applyCore(creator, internal);
       this.children.forEach(item => item.apply(creator, internal));

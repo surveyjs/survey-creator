@@ -16,8 +16,7 @@ import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { MenuButton } from "../../utils/actions";
-import { DomDocumentHelper } from "../../utils/global_variables_utils";
-
+import { CreatorDomHelper } from "../../dom-helper";
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
  *
@@ -52,7 +51,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private undoAction: Action;
   private redoAction: Action;
   private advancedModeSwitcher: Switcher;
-  private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
   private _showOneCategoryInPropertyGrid: boolean = true;
@@ -689,19 +687,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       component: "sv-action-bar-item",
       needSeparator: true,
       action: () => {
-        const document = DomDocumentHelper.getDocument();
-        if (!document) return;
-        if (!this.inputFileElement) {
-          this.inputFileElement = document.createElement("input");
-          this.inputFileElement.type = "file";
-          this.inputFileElement.style.display = "none";
-          this.inputFileElement.onchange = () => {
-            if (this.inputFileElement.files.length < 1) return;
-            this.importFromFile(this.inputFileElement.files[0]);
-            this.inputFileElement.value = "";
-          };
-        }
-        this.inputFileElement.click();
+        CreatorDomHelper.openFileDialog((file: File) => this.importFromFile(file));
       }
     });
     items.push(this.importAction);
