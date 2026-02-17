@@ -646,7 +646,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
-    if (!listModel.selectedItem && !propName) return null;
+    if (listModel.actions.length === 0 || (!listModel.selectedItem && !propName)) return null;
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
