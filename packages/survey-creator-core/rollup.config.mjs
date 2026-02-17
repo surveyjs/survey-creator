@@ -3,29 +3,14 @@ import fs from "fs";
 import { resolve, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import typescript from "@rollup/plugin-typescript";
-import nodeResolve from "@rollup/plugin-node-resolve";
-import replace from "@rollup/plugin-replace";
-import commonjs from "@rollup/plugin-commonjs";
-import bannerPlugin from "rollup-plugin-license";
 import svgLoader from "svg-inline-loader";
 
 import process from "process";
 import pkg from "./package.json" assert { type: "json" };
-import { createEsmConfig, createUmdConfig, createCssConfig, minifyCSS } from "./rollup.helpers.mjs";
-import { plugin } from "postcss";
+import { createEsmConfig, createUmdConfig, createCssConfig } from "./rollup.helpers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
-
-const input = { "survey-creator-core": resolve(__dirname, "./src/entries/index.ts") };
-
-const banner = [
-  "SurveyJS Creator v" + pkg.version,
-  "(c) 2015-" + new Date().getFullYear() + " Devsoft Baltic OÜ - http://surveyjs.io/", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator",
-].join("\n");
 
 const buildPlatformJson = {
   name: pkg.name,
@@ -159,17 +144,10 @@ async function createVirtualModule(path) {
   return `export default ${JSON.stringify(result, undefined, "\t")}`;
 }
 
+const imagesV1 = await createVirtualModule(fg.convertPathToPattern(resolve(__dirname, "./src/images-v1")) + "/*.svg");
+const imagesV2 = await createVirtualModule(fg.convertPathToPattern(resolve(__dirname, "./src/images-v2")) + "/*.svg");
+
 export default async (options) => {
-
-  // options = options ?? {};
-
-  // if (!options.tsconfig) {
-  //   options.tsconfig = resolve(__dirname, "./tsconfig.fesm.json");
-  // }
-
-  // if (!options.dir) {
-  //   options.dir = resolve(__dirname, "./build/fesm");
-  // }
 
   return [
     createUmdConfig({
@@ -185,10 +163,10 @@ export default async (options) => {
       globalName: "SurveyCreatorCore",
       globals: { "survey-core": "Survey" },
       virtualModules: {
-        "iconsV1": await createVirtualModule(fg.convertPathToPattern(resolve(__dirname, "./src/images-v1")) + "/*.svg"),
-        "iconsV2": await createVirtualModule(fg.convertPathToPattern(resolve(__dirname, "./src/images-v2")) + "/*.svg")
+        "iconsV1": imagesV1,
+        "iconsV2": imagesV2
       },
-      emitCss: "survey-creator-core.fontless.css"
+      emitCss: resolve(buildPath, "survey-creator-core.fontless.css")
     }),
     createCssConfig({
       input: {
@@ -198,11 +176,10 @@ export default async (options) => {
       emitMinified: process.env.emitMinified === "true",
       version: pkg.version,
       onCloseBundle: async() => {
-        if (fs.existsSync(resolve(buildPath, "survey-creator-core.css"))) {
-          fs.unlinkSync(resolve(buildPath, "survey-creator-core.css"));
-        }
-        if (fs.existsSync(resolve(buildPath, "survey-creator-core.min.css"))) {
-          fs.unlinkSync(resolve(buildPath, "survey-creator-core.min.css"));
+        for (const path of [resolve(buildPath, "survey-creator-core.css"), resolve(buildPath, "survey-creator-core.min.css")]) {
+          if (fs.existsSync(path)) {
+            fs.unlinkSync(path);
+          }
         }
         for (const name of ["fonts.fontless", "survey-creator-core.fontless"]) {
           fs.appendFileSync(
@@ -218,69 +195,17 @@ export default async (options) => {
         }
       }
     }),
-    // {
-    //   input,
-    //   context: "this",
-    //   external: ["survey-core"],
-    //   plugins: [
-    //     {
-    //       name: "icons",
-    //       resolveId: (id) => {
-    //         if (Object.keys(iconsMap).includes(id)) {
-    //           return id;
-    //         }
-    //       },
-    //       load: async (id) => {
-    //         if (Object.keys(iconsMap).includes(id)) {
-    //           const icons = {};
-    //           for (const iconPath of await fg.glob(iconsMap[id])) {
-    //             icons[basename(iconPath).replace(/\.svg$/, "").toLocaleLowerCase()] = svgLoader.getExtractedSVG(readFile(iconPath).toString());
-    //           }
-    //           return `export default ${JSON.stringify(icons, undefined, "\t")}`;
-    //         }
-    //       }
-    //     },
-    //     {
-    //       name: "remove-scss-imports",
-    //       load: (id) => {
-    //         if (id.match(/\.scss$/)) return "";
-    //       }
-    //     },
-    //     //force take correct .js file for papaparse dependency
-    //     nodeResolve({ browser: true }),
-    //     commonjs(),
-    //     typescript({
-    //       inlineSources: true,
-    //       sourceMap: true,
-    //       tsconfig: options.tsconfig,
-    //       compilerOptions: {
-    //         declaration: false,
-    //         declarationDir: null
-    //       }
-    //     }),
-    //     replace({
-    //       preventAssignment: false,
-    //       values: {
-    //         "process.env.RELEASE_DATE": JSON.stringify(new Date().toISOString().slice(0, 10)),
-    //         "process.env.VERSION": JSON.stringify(pkg.version),
-    //       }
-    //     }),
-    //     bannerPlugin({
-    //       banner: {
-    //         content: banner,
-    //         commentStyle: "ignored",
-    //       }
-    //     })
-    //   ],
-    //   output: [
-    //     {
-    //       dir: options.dir,
-    //       entryFileNames: "[name].mjs",
-    //       format: "esm",
-    //       exports: "named",
-    //       sourcemap: true,
-    //     },
-    //   ],
-    // }
+    createEsmConfig({
+      version: pkg.version,
+      input: { "survey-creator-core": resolve("./src/entries/index.ts") },
+      dir: resolve(buildPath, "fesm"),
+      tsconfig: resolve(__dirname, "./tsconfig.fesm.json"),
+      external: ["survey-core"],
+      virtualModules: {
+        "iconsV1": imagesV1,
+        "iconsV2": imagesV2
+      },
+      emitCss: false
+    })
   ];
 };

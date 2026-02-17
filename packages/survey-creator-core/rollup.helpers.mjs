@@ -3,21 +3,19 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import bannerPlugin from "rollup-plugin-license";
 import commonjs from "@rollup/plugin-commonjs";
-import nodePolyfills from "rollup-plugin-polyfill-node";
 import pluginVirtual from "@rollup/plugin-virtual";
-import rollupCopy from "rollup-plugin-copy";
 
-import path, { resolve, basename, format } from "node:path";
-import { readFileSync } from "fs";
-import rollupEsbuild from "rollup-plugin-esbuild";
 import rollupPostcss from "rollup-plugin-postcss";
+import postcssUrl from "postcss-url";
+import postcssBanner from "postcss-banner";
+import postcssDiscardComments from "postcss-discard-comments";
+
+import { resolve, parse } from "node:path";
+import rollupEsbuild from "rollup-plugin-esbuild";
+
 import postcss from "postcss";
 import cssnano from "cssnano";
 import { minify } from "terser";
-
-import svgLoader from "svg-inline-loader";
-import fg from "fast-glob";
-import { plugin } from "postcss";
 
 function getOwnBanner(version) {
   return [
@@ -28,32 +26,43 @@ function getOwnBanner(version) {
   ].join("\n");
 }
 
-export async function minifyCSS(code) {
-  return (await postcss([cssnano]).process(code, { from: undefined })).css;
+async function minifyCSS(code) {
+  const result = await postcss([
+    cssnano(),
+    postcssDiscardComments({ removeAllButFirst: true })
+  ]).process(code);
+  return result.css;
+}
+
+async function minifyJS(code) {
+
+  const comments = [];
+
+  const result = await minify(code, {
+    compress: false,
+    format: {
+      comments: (_, { value }) => {
+        if (value.includes("@license") || value.includes("License")) {
+          comments.push(value);
+        }
+        return false;
+      }
+    }
+  });
+
+  return { code: result.code, comments: comments };
 }
 
 function wrapBanner(e) {
   return `/*!\n${e.split("\n").map(str => " * " + str).join("\n")}\n */`;
 }
 
-function omit(fn) {
+function pluginOmit(fn) {
   return {
     generateBundle(_, bundle) {
       for (const file of Object.keys(bundle)) {
         if (fn(file)) {
           delete bundle[file];
-        }
-      }
-    }
-  };
-}
-
-function pluginAddBanner(fn, text) {
-  return {
-    generateBundle(_, bundle) {
-      for (const file of Object.keys(bundle)) {
-        if (fn(file)) {
-          bundle[file].source = text + "\n" + bundle[file].source;
         }
       }
     }
@@ -66,7 +75,7 @@ function pluginMinify() {
       for await (const e of Object.keys(bundle)) {
 
         const item = bundle[e];
-        const { dir, name, ext } = path.parse(e);
+        const { dir, name, ext } = parse(e);
 
         if (e.endsWith(".css")) {
           this.emitFile({
@@ -77,10 +86,19 @@ function pluginMinify() {
         }
 
         if (e.endsWith(".js")) {
+
+          const { code, comments } = await minifyJS(item.code);
+
           this.emitFile({
             type: "asset",
             fileName: `${dir}${name}.min${ext}`,
-            source: (await minify(item.code)).code
+            source: `/*! For license information please see ${name}.min.js.LICENSE.txt */\n${code}`
+          });
+
+          this.emitFile({
+            type: "asset",
+            fileName: `${dir}${name}.min${ext}.LICENSE.txt`,
+            source: comments.map(comment => wrapBanner(comment)).join("\n\n")
           });
         }
       }
@@ -88,9 +106,20 @@ function pluginMinify() {
   };
 }
 
+function pluginIgnoreStyles() {
+  return {
+    name: "ignore-styles",
+    load: (id) => {
+      if (id.endsWith(".css") || id.endsWith(".scss")) {
+        return "";
+      }
+    }
+  };
+}
+
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, onGenerateBundle } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -100,8 +129,7 @@ export function createUmdConfig(options) {
     external,
     plugins: [
       pluginVirtual(virtualModules || {}),
-      nodePolyfills(),
-      nodeResolve(),
+      nodeResolve({ browser: true }),
       commonjs(),
       replace({
         preventAssignment: false,
@@ -121,8 +149,8 @@ export function createUmdConfig(options) {
             declarationDir: declarationDir
           } : {}
         }),
-      rollupPostcss({
-        extract: emitCss || "",
+      emitCss ? rollupPostcss({
+        extract: emitCss || true,
         minimize: false,
         sourceMap: true,
         use: {
@@ -130,16 +158,19 @@ export function createUmdConfig(options) {
             api: "modern",
             silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
           }
+        },
+        plugins: [
+          postcssUrl({ url: "inline" }),
+          postcssBanner({ banner: getOwnBanner(version), important: true }),
+        ],
+      }) : pluginIgnoreStyles(),
+      bannerPlugin({
+        banner: {
+          content: getOwnBanner(version),
+          commentStyle: "ignored",
         }
       }),
-      // pluginAddBanner(e => e.endsWith(".css"), wrapBanner(getOwnBanner(version))),
       emitMinified && pluginMinify(),
-      // bannerPlugin({
-      //   banner: {
-      //     content: getOwnBanner(version),
-      //     commentStyle: "ignored",
-      //   }
-      // }),
     ],
     output: [
       {
@@ -150,47 +181,22 @@ export function createUmdConfig(options) {
         globals: globals,
         entryFileNames: "[name].js",
         sourcemap: true
-      },
-      // emitMinified && {
-      //   ...commonOutput,
-      //   entryFileNames: "[name].min.js",
-      //   sourcemap: false,
-      //   plugins: [
-      //     rollupEsbuildMinify(),
-      //     bannerPlugin({
-      //       banner: {
-      //         content: `For license information please see ${Object.keys(input)[0]}.min.js.LICENSE.txt`,
-      //         commentStyle: "ignored",
-      //       },
-      //       thirdParty: {
-      //         output: {
-      //           file: resolve(dir, `${Object.keys(input)[0]}.min.js.LICENSE.txt`),
-      //           template: (dependencies) => {
-      //             return wrapBanner(getOwnBanner(version)) + "\n\n" + dependencies.map(e => {
-      //               return wrapBanner([
-      //                 `${ e.name } v${e.version } | ${ e.homepage }`,
-      //                 `(c) ${ e.author.name } | Released under the ${ e.license } license`
-      //               ].join("\n"));
-      //             }).join("\n\n");
-      //           }
-      //         }
-      //       }
-      //     }),
-      //   ],
-      // }
+      }
     ],
   };
 }
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, version } = options;
+  const { input, external, dir, tsconfig, sharedFileName, version, emitCss, virtualModules } = options;
 
   return {
     context: "this",
     input,
     plugins: [
-      nodeResolve(),
+      pluginVirtual(virtualModules || {}),
+      nodeResolve({ browser: true }),
+      commonjs(),
       replace({
         preventAssignment: false,
         values: {
@@ -206,6 +212,21 @@ export function createEsmConfig(options) {
           "target": "ES6"
         }
       }),
+      emitCss ? rollupPostcss({
+        extract: emitCss || true,
+        minimize: false,
+        sourceMap: true,
+        use: {
+          sass: {
+            api: "modern",
+            silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
+          }
+        },
+        plugins: [
+          postcssUrl({ url: "inline" }),
+          postcssBanner({ banner: getOwnBanner(version), important: true }),
+        ],
+      }) : pluginIgnoreStyles(),
       bannerPlugin({
         banner: {
           content: getOwnBanner(version),
@@ -252,11 +273,14 @@ export function createCssConfig(options) {
             api: "modern",
             silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
           }
-        }
+        },
+        plugins: [
+          postcssUrl({ url: "inline" }),
+          postcssBanner({ banner: getOwnBanner(version), important: true }),
+        ],
       }),
-      omit(e => e.endsWith(".omitted")),
+      pluginOmit(e => e.endsWith(".omitted")),
       emitMinified && pluginMinify(),
-      pluginAddBanner(e => e.endsWith(".css"), wrapBanner(getOwnBanner(version))),
       onCloseBundle && {
         closeBundle: onCloseBundle,
       }
