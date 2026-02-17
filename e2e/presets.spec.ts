@@ -501,7 +501,7 @@ test.describe(title, () => {
     await page.getByTitle("Quit").click();
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
     await page.getByRole("button", { name: "Save and exit" }).click();
-    await expect(page.locator(".svc-creator-popup")).toContainText("Save current preset as");
+    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
   });
 
 });
