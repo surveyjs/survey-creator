@@ -65,15 +65,6 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-delete-confirmation-dialog.png");
   });
 
-  test("Check presets delete confirmation dialog", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
-    await page.locator(".spg-action-button").nth(1).click();
-    await page.getByText("Edit Presets list", { exact: true }).click();
-    await page.getByTitle("Delete").click();
-    await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-delete-confirmation-dialog.png");
-  });
-
   test("Check presets quit confirmation dialog", async ({ page }) => {
     await page.getByText("Dansk").click();
     await page.getByTitle("Quit").click();
