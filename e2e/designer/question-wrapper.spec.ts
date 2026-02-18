@@ -121,6 +121,8 @@ test.describe(title, () => {
 
     await getToolboxItemByText(page, "Single-Line Input").hover();
     await getToolboxItemByText(page, "Single-Line Input").click();
+    await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(1);
+
     await page.locator(".svc-tab-designer").hover({ position: { x: 150, y: 5 } });
     await page.locator(".svc-tab-designer").click({ position: { x: 150, y: 5 } });
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(0);
@@ -273,6 +275,8 @@ test.describe(title, () => {
 
     await getToolboxItemByText(page, "Rating Scale").hover();
     await getToolboxItemByText(page, "Rating Scale").click();
+    await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(1);
+
     await expect(isrequiredButton).toBeVisible();
     await expect(isrequiredButton.locator(".svc-required-action")).not.toHaveClass(/svc-survey-element-toolbar__item--active/);
     await isrequiredButton.click();
@@ -358,10 +362,13 @@ test.describe(title + " dropdown collapse", () => {
     await expect(questions).toHaveCount(0);
     await getToolboxItemByText(page, "Checkboxes").hover();
     await getToolboxItemByText(page, "Checkboxes").click();
+    await expect(page.locator(".svc-question__content")).toHaveCount(1);
     await getToolboxItemByText(page, "Radio Button Group").hover();
     await getToolboxItemByText(page, "Radio Button Group").click();
+    await expect(page.locator(".svc-question__content")).toHaveCount(2);
     await getToolboxItemByText(page, "Dropdown").hover();
     await getToolboxItemByText(page, "Dropdown").click();
+    await expect(page.locator(".svc-question__content")).toHaveCount(3);
 
     const getSelectedElementName = () => page.evaluate(() => (window as any).creator.selectedElement.name);
     expect(await getSelectedElementName()).toBe("question3");
