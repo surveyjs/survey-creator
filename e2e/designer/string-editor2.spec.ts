@@ -1,3 +1,4 @@
+import { Locator, Page } from "playwright/test";
 import {
   url,
   test,
@@ -11,6 +12,10 @@ import {
 
 const title = "String Editor 2";
 
+function getStringEditorByText(page: Page, text: string): Locator {
+  return page.locator(".sv-string-editor").getByText(text, { exact: true });
+}
+
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
@@ -21,7 +26,7 @@ test.describe(title, () => {
     const json = { "elements": [{ "type": "checkbox", "name": "question1", "choices": ["Item 1"] }] };
     await setJSON(page, json);
 
-    const svItemSelector = page.locator(".sv-string-editor").getByText("Item 1");
+    const svItemSelector = getStringEditorByText(page, "Item 1");
 
     await svItemSelector.click();
     await expect(svItemSelector).toBeFocused();
@@ -37,13 +42,13 @@ test.describe(title, () => {
       });
     });
     await setJSON(page, { "description": "*abc*", "elements": [{ "type": "text", "name": "question1" }] });
-    await page.locator(".sv-string-editor").getByText("$abc$").click();
-    await expect(page.locator(".sv-string-editor").getByText("*abc*")).toBeVisible();
-    await page.locator(".sv-string-editor").getByText("*abc*").click();
+    await getStringEditorByText(page, "$abc$").click();
+    await expect(getStringEditorByText(page, "*abc*")).toBeVisible();
+    await getStringEditorByText(page, "*abc*").click();
     await page.keyboard.press("Home");
     await page.keyboard.type("d");
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("d$abc$")).toBeVisible();
+    await expect(getStringEditorByText(page, "d$abc$")).toBeVisible();
   });
 
   test("Check markdown shift-enter", async ({ page }) => {
@@ -55,8 +60,8 @@ test.describe(title, () => {
     });
 
     await setJSON(page, { "description": "abc", "elements": [{ "type": "text", "name": "question1" }] });
-    await page.locator(".sv-string-editor").getByText("abc").click();
-    await page.locator(".sv-string-editor").getByText("abc").press("ArrowRight");
+    await getStringEditorByText(page, "abc").click();
+    await getStringEditorByText(page, "abc").press("ArrowRight");
     await page.keyboard.type("d");
     await page.keyboard.press("Shift+Enter");
     await expect(page.locator(".sd-title .sd-description .sv-string-editor")).toBeFocused();
@@ -73,13 +78,13 @@ test.describe(title, () => {
     });
 
     await setJSON(page, { "description": "*abc*", "elements": [{ "type": "text", "name": "question1" }] });
-    await page.locator(".sv-string-editor").getByText("$abc$").click();
-    await expect(page.locator(".sv-string-editor").getByText("$abc$")).toBeVisible();
-    await page.locator(".sv-string-editor").getByText("$abc$").click();
+    await getStringEditorByText(page, "$abc$").click();
+    await expect(getStringEditorByText(page, "$abc$")).toBeVisible();
+    await getStringEditorByText(page, "$abc$").click();
     await page.keyboard.press("Home");
     await page.keyboard.type("d");
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("d$abc$")).toBeVisible();
+    await expect(getStringEditorByText(page, "d$abc$")).toBeVisible();
     const getValue = await page.evaluate(() => (window as any).creator.survey.description);
     expect(getValue).toEqual("d*abc*");
   });
@@ -94,22 +99,22 @@ test.describe(title, () => {
     await setJSON(page, { "description": "*a<b>b</b>c*", "elements": [{ "type": "text", "name": "question1" }] });
     let getValue = await page.evaluate(() => (window as any).creator.survey.description);
     expect(getValue).toEqual("*a<b>b</b>c*");
-    await page.locator(".sv-string-editor").getByText("$abc$").click();
-    await expect(page.locator(".sv-string-editor").getByText("*a<b>b</b>c*")).toBeVisible();
-    await page.locator(".sv-string-editor").getByText("*a<b>b</b>c*").click();
+    await getStringEditorByText(page, "$abc$").click();
+    await expect(getStringEditorByText(page, "*a<b>b</b>c*")).toBeVisible();
+    await getStringEditorByText(page, "*a<b>b</b>c*").click();
     // await page.waitForTimeout(100);
     await page.keyboard.press("Escape");
     // await page.waitForTimeout(100);
-    await expect(page.locator(".sv-string-editor").getByText("$abc$")).toBeVisible();
+    await expect(getStringEditorByText(page, "$abc$")).toBeVisible();
     getValue = await page.evaluate(() => (window as any).creator.survey.description);
     expect(getValue).toEqual("*a<b>b</b>c*");
-    await page.locator(".sv-string-editor").getByText("$abc$").click();
-    await expect(page.locator(".sv-string-editor").getByText("*a<b>b</b>c*")).toBeVisible();
-    await page.locator(".sv-string-editor").getByText("*a<b>b</b>c*").click();
+    await getStringEditorByText(page, "$abc$").click();
+    await expect(getStringEditorByText(page, "*a<b>b</b>c*")).toBeVisible();
+    await getStringEditorByText(page, "*a<b>b</b>c*").click();
     await page.keyboard.press("Home");
     await page.keyboard.type("d");
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("d$abc$")).toBeVisible();
+    await expect(getStringEditorByText(page, "d$abc$")).toBeVisible();
     getValue = await page.evaluate(() => (window as any).creator.survey.description);
     expect(getValue).toEqual("d*a<b>b</b>c*");
   });
@@ -122,15 +127,15 @@ test.describe(title, () => {
     });
 
     await setJSON(page, { "elements": [{ "type": "text", "name": "question1" }] });
-    await page.locator(".sv-string-editor").getByText("question1").click();
-    await expect(page.locator(".sv-string-editor").getByText("question1")).toBeFocused();
+    await getStringEditorByText(page, "question1").click();
+    await expect(getStringEditorByText(page, "question1")).toBeFocused();
   });
 
   test("Test selection", async ({ page }) => {
     const json = { "elements": [{ "type": "text", "name": "question1" }] };
     await setJSON(page, json);
 
-    const svItemSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svItemSelector = getStringEditorByText(page, "question1");
 
     await svItemSelector.click();
     let selection = await page.evaluate(() => window.getSelection()!.toString());
@@ -145,7 +150,7 @@ test.describe(title, () => {
     const json = { "elements": [{ "type": "text", "name": "question1" }] };
     await setJSON(page, json);
 
-    const svItemSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svItemSelector = getStringEditorByText(page, "question1");
 
     const userSelect = await svItemSelector.evaluate((el) => getComputedStyle(el).userSelect);
     expect(userSelect).toEqual("text");
@@ -166,7 +171,7 @@ test.describe(title, () => {
 
     await setJSON(page, json);
 
-    const svItemSelector = page.locator(".sv-string-editor").getByText("page_title");
+    const svItemSelector = getStringEditorByText(page, "page_title");
 
     await svItemSelector.click();
     let selection = await page.evaluate(() => window.getSelection()!.toString());
@@ -209,7 +214,7 @@ test.describe(title, () => {
 
   test("Focus on new question", async ({ page }) => {
     await getToolboxItemByText(page, "Radio Button Group").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
   });
 
@@ -219,7 +224,7 @@ test.describe(title, () => {
     const RatingToolboxItem = page.locator("[aria-label='Rating Scale']");
 
     await doDragDrop({ page, element: RatingToolboxItem, target: EmptyPage, options: { steps: 10 } });
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
   });
 
@@ -239,13 +244,13 @@ test.describe(title, () => {
       }
     });
 
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).not.toBeFocused();
   });
 
   test("Focus switch on select base", async ({ page }) => {
     await getToolboxItemByText(page, "Radio Button Group").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.locator(".sv-string-editor[contenteditable=\"true\"]").getByText("Item 1")).toBeFocused();
@@ -289,144 +294,148 @@ test.describe(title, () => {
 
   test("Delete items on backspace", async ({ page }) => {
     await getToolboxItemByText(page, "Radio Button Group").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Item 1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Item 3")).toBeVisible();
+    await expect(getStringEditorByText(page, "Item 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Item 1")).toBeVisible();
+    await expect(getStringEditorByText(page, "Item 2")).toBeVisible();
+    await expect(getStringEditorByText(page, "Item 3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Item 1")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Item 2")).not.toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Item 1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Item 3")).toBeVisible();
+    await expect(getStringEditorByText(page, "Item 1")).toBeFocused();
+    await expect(getStringEditorByText(page, "Item 2")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Item 1")).toBeVisible();
+    await expect(getStringEditorByText(page, "Item 3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Item 3")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Item 1")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Item 3")).toBeFocused();
+    await expect(getStringEditorByText(page, "Item 1")).not.toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Item 3")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Item 3")).not.toBeVisible();
   });
 
   test("Focus switch on multiple text", async ({ page }) => {
     await getToolboxItemByText(page, "Multiple Textboxes").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("text1")).toBeFocused();
+    await expect(getStringEditorByText(page, "text1")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("text2")).toBeFocused();
+    await expect(getStringEditorByText(page, "text2")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("text3")).toBeFocused();
+    await expect(getStringEditorByText(page, "text3")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("text4")).toBeFocused();
+    await expect(getStringEditorByText(page, "text4")).toBeFocused();
     await page.keyboard.press("Control+Enter");
-    await expect(page.locator(".sv-string-editor").getByText("text5")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "text5")).not.toBeVisible();
   });
 
   test("Delete  multiple text items on backspace", async ({ page }) => {
     await getToolboxItemByText(page, "Multiple Textboxes").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await expect(getStringEditorByText(page, "text1")).toBeFocused();
     await page.keyboard.press("Enter");
+    await expect(getStringEditorByText(page, "text2")).toBeFocused();
     await page.keyboard.press("Enter");
+    await expect(getStringEditorByText(page, "text3")).toBeFocused();
     await page.keyboard.press("Shift+Tab");
-    await expect(page.locator(".sv-string-editor").getByText("text2")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("text1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("text2")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("text3")).toBeVisible();
+    await expect(getStringEditorByText(page, "text2")).toBeFocused();
+
+    await expect(getStringEditorByText(page, "text1")).toBeVisible();
+    await expect(getStringEditorByText(page, "text2")).toBeVisible();
+    await expect(getStringEditorByText(page, "text3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("text1")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("text2")).not.toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("text1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("text3")).toBeVisible();
+    await expect(getStringEditorByText(page, "text1")).toBeFocused();
+    await expect(getStringEditorByText(page, "text2")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "text1")).toBeVisible();
+    await expect(getStringEditorByText(page, "text3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("text3")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("text1")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "text3")).toBeFocused();
+    await expect(getStringEditorByText(page, "text1")).not.toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("text3")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "text3")).not.toBeVisible();
   });
 
   test("Focus switch on matrix columns and rows", async ({ page }) => {
     await getToolboxItemByText(page, "Single-Select Matrix").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Column 1")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 1")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Column 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 2")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Column 3")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 3")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Column 4")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 4")).toBeFocused();
     await page.keyboard.press("Control+Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Column 5")).not.toBeVisible();
-    await page.locator(".sv-string-editor").getByText("Row 1").click();
-    await expect(page.locator(".sv-string-editor").getByText("Row 1")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 5")).not.toBeVisible();
+    await getStringEditorByText(page, "Row 1").click();
+    await expect(getStringEditorByText(page, "Row 1")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Row 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Row 2")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Row 3")).toBeFocused();
+    await expect(getStringEditorByText(page, "Row 3")).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Row 4")).toBeFocused();
+    await expect(getStringEditorByText(page, "Row 4")).toBeFocused();
     await page.keyboard.press("Control+Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Row 5")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Row 5")).not.toBeVisible();
   });
 
   test("Delete matrix Columns on backspace", async ({ page }) => {
     await getToolboxItemByText(page, "Single-Select Matrix").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
-    await expect(page.locator(".sv-string-editor").getByText("Column 2")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Column 1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Column 2")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Column 3")).toBeVisible();
+    await expect(getStringEditorByText(page, "Column 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 1")).toBeVisible();
+    await expect(getStringEditorByText(page, "Column 2")).toBeVisible();
+    await expect(getStringEditorByText(page, "Column 3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Column 1")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Column 2")).not.toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Column 1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Column 3")).toBeVisible();
+    await expect(getStringEditorByText(page, "Column 1")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 2")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Column 1")).toBeVisible();
+    await expect(getStringEditorByText(page, "Column 3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Column 3")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Column 1")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Column 3")).toBeFocused();
+    await expect(getStringEditorByText(page, "Column 1")).not.toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Column 3")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Column 3")).not.toBeVisible();
   });
 
   test("Delete matrix rows on backspace", async ({ page }) => {
     await getToolboxItemByText(page, "Single-Select Matrix").click();
-    const svStringSelector = page.locator(".sv-string-editor").getByText("question1");
+    const svStringSelector = getStringEditorByText(page, "question1");
     await expect(svStringSelector).toBeFocused();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
@@ -435,51 +444,52 @@ test.describe(title, () => {
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
     await page.keyboard.press("Shift+Tab");
-    await expect(page.locator(".sv-string-editor").getByText("Row 2")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Row 1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Row 2")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Row 3")).toBeVisible();
+    await expect(getStringEditorByText(page, "Row 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Row 1")).toBeVisible();
+    await expect(getStringEditorByText(page, "Row 2")).toBeVisible();
+    await expect(getStringEditorByText(page, "Row 3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Row 1")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Row 2")).not.toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Row 1")).toBeVisible();
-    await expect(page.locator(".sv-string-editor").getByText("Row 3")).toBeVisible();
+    await expect(getStringEditorByText(page, "Row 1")).toBeFocused();
+    await expect(getStringEditorByText(page, "Row 2")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Row 1")).toBeVisible();
+    await expect(getStringEditorByText(page, "Row 3")).toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Row 3")).toBeFocused();
-    await expect(page.locator(".sv-string-editor").getByText("Row 1")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Row 3")).toBeFocused();
+    await expect(getStringEditorByText(page, "Row 1")).not.toBeVisible();
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
     await page.keyboard.press("Backspace");
     // await page.waitForTimeout(200);
-    await expect(page.locator(".sv-string-editor").getByText("Row 3")).not.toBeVisible();
+    await expect(getStringEditorByText(page, "Row 3")).not.toBeVisible();
   });
 
   test("Paste multiline selectbase", async ({ page }) => {
     await getToolboxItemByText(page, "Radio Button Group").click();
+    await expect(getStringEditorByText(page, "Item 2")).not.toBeFocused();
 
-    await page.locator(".sv-string-editor").getByText("Item 2").hover();
-    await page.locator(".sv-string-editor").getByText("Item 2").click();
+    await getStringEditorByText(page, "Item 2").hover();
+    await getStringEditorByText(page, "Item 2").click({ force: true });
     await page.waitForTimeout(500);
-    await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Item 2")).toBeFocused();
 
     await page.keyboard.press("Home");
     await page.keyboard.press("ArrowRight");
     await page.keyboard.press("ArrowRight");
 
-    await expect(page.locator(".sv-string-editor").getByText("Item 2")).toBeFocused();
+    await expect(getStringEditorByText(page, "Item 2")).toBeFocused();
     await page.evaluate(() => {
       const el = document.activeElement as HTMLElement;
       const event = new ClipboardEvent("paste", { bubbles: true, cancelable: true, clipboardData: new DataTransfer() });
       event.clipboardData!.setData("text/plain", "a\nb\nc");
       el.dispatchEvent(event);
     });
-    await expect(page.locator(".sv-string-editor").getByText("Item 3")).toBeFocused();
+    await expect(getStringEditorByText(page, "Item 3")).toBeFocused();
     const choicesJson = await page.evaluate(() => JSON.stringify((window as any).creator.survey.getAllQuestions()[0].choices.map((c: { text: string }) => c.text)));
     expect(choicesJson).toEqual("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
   });
@@ -490,7 +500,7 @@ test.describe(title, () => {
     // skip test fo react - insecured code
     if (skipIfReact) return;
 
-    await page.locator(".sv-string-editor").getByText("None").click();
+    await getStringEditorByText(page, "None").click();
     await page.evaluate((data: string) => {
       const event = new Event("paste");
       (event as any).clipboardData = { getData: () => data };
@@ -500,7 +510,7 @@ test.describe(title, () => {
     const visibleChoicesJson = await page.evaluate(() => JSON.stringify((window as any).creator.survey.getAllQuestions()[0].visibleChoices.map((c: { text: string }) => c.text)));
     expect(visibleChoicesJson).toEqual("[\"Item 1\",\"Item 2\",\"qwe\",\"Other (describe)\"]");
 
-    await page.locator(".sv-string-editor").getByText("Item 1").click();
+    await getStringEditorByText(page, "Item 1").click();
     await page.evaluate((data: string) => {
       const event = new Event("paste");
       (event as any).clipboardData = { getData: () => data };
@@ -541,7 +551,7 @@ test.describe(title, () => {
     // await page.waitForTimeout(200);
     await page.locator("span").getByText("Sim copy").click();
 
-    await page.locator(".sv-string-editor").getByText("question1").click();
+    await getStringEditorByText(page, "question1").click();
 
     await page.locator("span").getByText("Sim paste").hover();
     const questionTitle = await page.evaluate(() => (window as any).creator.survey.getAllQuestions()[0].title);
@@ -573,7 +583,7 @@ test.describe(title, () => {
         }]
     });
 
-    const svStringSelector = page.locator(".sv-string-editor").getByText("lion");
+    const svStringSelector = getStringEditorByText(page, "lion");
 
     await svStringSelector.click();
     await expect(svStringSelector).toBeFocused();
@@ -633,11 +643,11 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, { "elements": [{ "type": "checkbox", "name": "promoter_features", "colCount": 1, "choices": ["Item 1", "Item 2", "Item 3"] }] });
     await page.locator(".svc-question__content").click();
-    await expect(page.locator(".sv-string-editor").getByText("Item 4", { exact: true })).toHaveCount(1);
-    await expect(page.locator(".sv-string-editor").getByText("Item 5", { exact: true })).toHaveCount(0);
+    await expect(getStringEditorByText(page, "Item 4")).toHaveCount(1);
+    await expect(getStringEditorByText(page, "Item 5")).toHaveCount(0);
 
     await page.locator(".svc-item-value-controls__add").filter({ visible: true }).nth(1).click({ force: true });
-    await expect(page.locator(".sv-string-editor").getByText("Item 5", { exact: true })).toHaveCount(1);
+    await expect(getStringEditorByText(page, "Item 5")).toHaveCount(1);
   });
 
   test("Check string editor composition update events", async ({ page }) => {
