@@ -44,7 +44,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
-import { DragDropSurveyElements } from "./dragdrop-survey-elements";
+import { DragDropSurveyElements, getPathToRootPageElement } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
@@ -2401,9 +2401,12 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       const element = sender.draggedElement;
       isDraggedFromToolbox = !element.parent && !element.isPage;
-      if (!!element && (element.isPage || this.collapseOnDrag)) {
+      if (!!element && !isDraggedFromToolbox && (element.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
         this.designerStateManager?.suspend();
-        this.collapseAllPagesOnDragStart(element);
+        const adorner = SurveyElementAdornerBase.GetAdorner(element);
+        adorner?.saveRelativePosition();
+        this.collapseElementsOnDragStart(element);
+        adorner?.restoreRelativePosition();
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
@@ -2423,20 +2426,31 @@ export class SurveyCreatorModel extends Base
       }
     });
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
-      isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (!!options.draggedElement && (options.draggedElement.isPage || this.collapseOnDrag)) {
-        this.designerStateManager?.release();
-        this.restoreElementsState();
+      if (!!options.draggedElement && !isDraggedFromToolbox && (options.draggedElement.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
+        setTimeout(() => {
+          const adorner = SurveyElementAdornerBase.GetAdorner(options.draggedElement);
+          adorner?.saveRelativePosition();
+          this.designerStateManager?.release();
+          this.restoreElementsStateOnDragEnd();
+          adorner?.restoreRelativePosition();
+        }, 0);
       }
+      isDraggedFromToolbox = false;
       this.onDragClear.fire(this, options);
     });
   }
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-  public collapseAllPagesOnDragStart(element: SurveyElement): void {
-    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
+  public hasScroll: boolean = false;
+  public collapseElementsOnDragStart(element: SurveyElement): void {
+    if (element.isPage || this.collapseOnDrag === "pages") {
+      this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
+    } else if (this.collapseOnDrag === true || this.collapseOnDrag === "all" || this.collapseOnDrag === "adaptive" && this.hasScroll) {
+      const exeptions = getPathToRootPageElement(element);
+      this.collapseAll(exeptions, true);
+    }
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     if (this.expandCollapseButtonVisibility == "never") return false;
@@ -2464,16 +2478,12 @@ export class SurveyCreatorModel extends Base
     }
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
-  public restoreElementsState(): void {
-    this.survey.pages.forEach(element => {
-      if (element["draggedFrom"] !== undefined) {
-        const adorner = SurveyElementAdornerBase.GetAdorner(element);
-        adorner?.blockAnimations();
-        this.restoreState(element);
-        adorner?.releaseAnimations();
-      } else {
-        this.restoreState(element);
-      }
+  public restoreElementsStateOnDragEnd(): void {
+    this.expandCollapseManager?.getCollapsableElements().forEach(element => {
+      const adorner = SurveyElementAdornerBase.GetAdorner(element);
+      adorner?.blockAnimations();
+      this.restoreState(element);
+      adorner?.releaseAnimations();
     });
   }
   private initDragDropChoices() {
@@ -4705,16 +4715,16 @@ export class SurveyCreatorModel extends Base
    * @see expandAll
    * @see collapseElement
    */
-  public collapseAll() {
-    this.expandCollapseManager.expandCollapseElements(null, true);
+  public collapseAll(exceptions?: SurveyElement[], blockAnimations = false) {
+    this.expandCollapseManager.expandCollapseElements(null, true, undefined, exceptions, blockAnimations);
   }
   /**
    * Expands all survey elements on the design surface.
    * @see collapseAll
    * @see expandElement
    */
-  public expandAll() {
-    this.expandCollapseManager.expandCollapseElements(null, false);
+  public expandAll(exceptions?: SurveyElement[], blockAnimations = false) {
+    this.expandCollapseManager.expandCollapseElements(null, false, undefined, exceptions, blockAnimations);
   }
   /**
    * Collapses an individual survey element on the design surface.
@@ -4852,7 +4862,8 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `false`
    */
-  public collapseOnDrag: boolean = false;
+  public collapseOnDrag: true | false | "none" | "pages" | "all" | "adaptive" = false;
+  public collapseOnDragLeft: boolean = false;
   /**
    * Specifies whether to clear translations to other languages when a source language translation is changed.
    *

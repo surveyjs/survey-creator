@@ -1,4 +1,4 @@
-import { PanelModel, Question, QuestionPanelDynamicModel, QuestionTextModel, SurveyModel } from "survey-core";
+import { PanelModel, Question, QuestionMatrixDropdownModel, QuestionPanelDynamicModel, QuestionTextModel, SurveyModel } from "survey-core";
 import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide } from "../src/dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
 import { CreatorTester } from "./creator-tester";
@@ -1783,6 +1783,186 @@ test("drag drop move page shouldn't raise survey onPageAdded", () => {
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(3);
   expect(pageAddedCounter).toBe(0);
+});
+
+test("collapse pages on element drag start", async () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const creator = new CreatorTester();
+  creator.collapseOnDrag = true;
+  creator.JSON = json;
+  const survey = creator.survey;
+  const [p1, p2, p3] = survey.pages;
+  const [q1, q2, q3] = survey.getAllQuestions();
+  const pa = survey.pages.map(p => new PageAdorner(creator, p));
+  const qa = survey.getAllQuestions().map(q => new QuestionAdornerViewModel(creator, q, null as any));
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.parentElement = p3;
+  ddHelper.draggedElement = q3;
+
+  ddHelper["createDraggedElementShortcut"] = () => { };
+  ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
+
+  expect(pa[0].collapsed).toBeTruthy();
+  expect(pa[1].collapsed).toBeTruthy();
+  expect(pa[2].collapsed).toBeFalsy();
+
+  const promise = new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 10);
+  });
+  ddHelper.clear();
+  await promise;
+
+  expect(pa[0].collapsed).toBeFalsy();
+  expect(pa[1].collapsed).toBeFalsy();
+  expect(pa[2].collapsed).toBeFalsy();
+});
+
+test("collapse all containers except parent on element drag start", async () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "panel", "name": "panel1" }, { "type": "panel", "name": "panel2", "elements": [{ "type": "text", "name": "q1" }] }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "panel", "name": "panel3" }, { "type": "panel", "name": "panel4", "elements": [{ "type": "text", "name": "q3" }] }] },
+    ]
+  };
+  const creator = new CreatorTester();
+  creator.collapseOnDrag = true;
+  creator.JSON = json;
+  const survey = creator.survey;
+  const [p1, p2, p3] = survey.pages;
+  const [pn1, pn2, pn3, pn4] = survey.getAllPanels();
+  const [q1, q2, q3] = survey.getAllQuestions();
+  const pa = survey.pages.map(p => new PageAdorner(creator, p));
+  const pna = survey.getAllPanels().map(p => new QuestionAdornerViewModel(creator, p as any, null as any));
+  const qa = survey.getAllQuestions().map(q => new QuestionAdornerViewModel(creator, q, null as any));
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.parentElement = p3;
+  ddHelper.draggedElement = q3;
+
+  ddHelper["createDraggedElementShortcut"] = async () => { };
+  ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
+
+  expect(pa[0].collapsed).toBeTruthy();
+  expect(pna[0].collapsed).toBeTruthy();
+  expect(pna[1].collapsed).toBeTruthy();
+  expect(pa[1].collapsed).toBeTruthy();
+  expect(pa[2].collapsed).toBeFalsy();
+  expect(pna[2].collapsed).toBeTruthy();
+  expect(pna[3].collapsed).toBeFalsy();
+
+  const promise = new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 10);
+  });
+  ddHelper.clear();
+  await promise;
+
+  expect(pa[0].collapsed).toBeFalsy();
+  expect(pna[0].collapsed).toBeFalsy();
+  expect(pna[1].collapsed).toBeFalsy();
+  expect(pa[1].collapsed).toBeFalsy();
+  expect(pa[2].collapsed).toBeFalsy();
+  expect(pna[2].collapsed).toBeFalsy();
+  expect(pna[3].collapsed).toBeFalsy();
+});
+
+test("updatePathToDragOver", () => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [{ "type": "text", "name": "question1" }]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [{ "type": "text", "name": "question2" }]
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "question3",
+            "templateElements": [{ "type": "text", "name": "question4" }]
+          }
+        ]
+      },
+      {
+        "name": "page4",
+        "elements": [
+          {
+            "type": "matrixdropdown",
+            "name": "question5",
+            "columns": [{ "name": "Column 1" }, { "name": "Column 2" }, { "name": "Column 3" }],
+            "detailElements": [{ "type": "text", "name": "question6" }],
+            "detailPanelMode": "underRow",
+            "choices": [1, 2, 3],
+            "rows": ["Row 1", "Row 2"]
+          }
+        ]
+      },
+      {
+        "name": "page5",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "paneldynamic",
+                "name": "question7",
+                "templateElements": [
+                  {
+                    "type": "panel",
+                    "name": "panel3",
+                    "elements": [{ "type": "text", "name": "question8" }]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const creator = new CreatorTester();
+  creator.JSON = json;
+  const survey = creator.survey;
+  const ddHelper: any = creator.dragDropSurveyElements;
+
+  ddHelper.updatePathToDragOver(survey.findQuestionByName("question1"), null);
+  expect(ddHelper.prevDropTargetPath.map(e => e.name)).toStrictEqual(["page1", "question1"]);
+
+  ddHelper.updatePathToDragOver(survey.findQuestionByName("question2"), null);
+  expect(ddHelper.prevDropTargetPath.map(e => e.name)).toStrictEqual(["page2", "panel1", "question2"]);
+
+  ddHelper.updatePathToDragOver((survey.findQuestionByName("question3") as QuestionPanelDynamicModel).template.elements[0], null);
+  expect(ddHelper.prevDropTargetPath.map(e => e.name)).toStrictEqual(["page3", "question3", "question4"]);
+
+  const matrix = survey.findQuestionByName("question5") as QuestionMatrixDropdownModel;
+  matrix.visibleRows[0].showDetailPanel();
+  ddHelper.updatePathToDragOver(matrix.visibleRows[0].detailPanel.elements[0], null);
+  expect(ddHelper.prevDropTargetPath.map(e => e.name)).toStrictEqual(["page4", "question5", "question6"]);
+
+  ddHelper.updatePathToDragOver(((survey.findQuestionByName("question7") as QuestionPanelDynamicModel).template.elements[0] as PanelModel).elements[0], null);
+  expect(ddHelper.prevDropTargetPath.map(e => e.name)).toStrictEqual(["page5", "panel2", "question7", "panel3", "question8"]);
 });
 
 test("SurveyElements: isDropTargetValid && forbiddenNestedElements", () => {

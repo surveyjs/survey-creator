@@ -16,6 +16,16 @@ import { DropIndicatorPosition } from "../drag-drop-enums";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 
+function getOffsetTop(element: HTMLElement, offsetParent: HTMLElement): number {
+  let offsetTop = element.offsetTop;
+  let parent = element.offsetParent as HTMLElement;
+  while(parent && parent !== offsetParent) {
+    offsetTop += parent.offsetTop;
+    parent = parent.offsetParent as HTMLElement;
+  }
+  return offsetTop;
+}
+
 function debounce(func, delay) {
   let timeout;
   return function (...args) {
@@ -36,6 +46,29 @@ const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
 }, 50);
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
+  private initialElementOffsetTop = 0;
+  private initialContainerScrollTop = 0;
+  public saveRelativePosition() {
+    if (!!this.rootElement) {
+      const container = this.rootElement.closest<HTMLElement>(".sv-scroll__container");
+      if (!!container) {
+        this.initialElementOffsetTop = getOffsetTop(this.rootElement, container);
+        this.initialContainerScrollTop = container.parentElement.scrollTop;
+      }
+    }
+  }
+  public restoreRelativePosition() {
+    if (!!this.rootElement) {
+      const container = this.rootElement.closest<HTMLElement>(".sv-scroll__container");
+      if (!!container) {
+        setTimeout(() => {
+          const currentOffsetTop = getOffsetTop(this.rootElement, container);
+          const deltaTop = currentOffsetTop - this.initialElementOffsetTop;
+          container.parentElement.scrollTop = this.initialContainerScrollTop + deltaTop;
+        }, 10);
+      }
+    }
+  }
   public static AdornerValueName = "__sjs_creator_adorner";
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
@@ -215,6 +248,32 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       clearTimeout(this.dragCollapsedTimer);
       this.draggedIn = false;
     }
+  }
+
+  public dragEnter() {
+    if (this.hasDragLeft) {
+      clearTimeout(this.dragCollapsedTimer);
+      this.hasDragLeft = false;
+    }
+  }
+  private hasDragLeft = false;
+  public dragLeave() {
+    if (!this.creator.collapseOnDragLeft) {
+      return;
+    }
+    if (!this.hasDragLeft) {
+      if (this.canExpandOnDrag && !this.collapsed) {
+        this.hasDragLeft = true;
+        this.dragCollapsedTimer = setTimeout(() => {
+          this.collapseWithDragLeave();
+        }, this.creator.expandOnDragTimeOut);
+      }
+    }
+  }
+  protected collapseWithDragLeave() {
+    this.collapsed = true;
+    this.dragCollapsedTimer = undefined;
+    this.hasDragLeft = false;
   }
 
   protected allowExpandCollapseByDblClick(element: any) {

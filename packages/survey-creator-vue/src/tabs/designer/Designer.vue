@@ -11,7 +11,7 @@
     :class="model.getRootCss()"
     @click="model.clickDesigner"
   >
-    <SvComponent :is="'sv-scroll'">
+    <SvComponent :is="'sv-scroll'" :onInnerHeightChanged="model.setHasScroll">
       <div class="svc-tab-designer_content">
         <template v-if="model.showPlaceholder">
           <div
