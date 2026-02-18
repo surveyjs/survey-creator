@@ -1,4 +1,4 @@
-import { DomDocumentHelper } from "./utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 
 export class CreatorDomHelper {
   private static inputFileElement: HTMLInputElement;
