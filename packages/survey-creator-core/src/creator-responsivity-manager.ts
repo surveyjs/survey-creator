@@ -1,7 +1,7 @@
 import { SurveyCreatorModel } from "./creator-base";
 import "./responsivity.scss";
 import { TabbedMenuMode } from "./tabbed-menu";
-import { DomWindowHelper } from "./utils/global_variables_utils";
+import { DomWindowHelper } from "survey-core";
 
 interface IProcessOptions { toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean, narrowSidebar: boolean, tabbedMenuIsCompact: boolean }
 export class CreatorResponsivityManager {
