@@ -114,7 +114,14 @@ describe("CreatorPresetEditableBase", () => {
         onApplyCallback = options.onApply;
         return { dispose: jest.fn() };
       });
-
+      // Overide settings values
+      base["onDetailPanelInPopupApply"] = (data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) => {
+        const index = (matrix.visibleRows as any).findIndex(r => r === row);
+        const newValue = [...matrix.value];
+        const newRowValue = { ...matrix.value[index], ...data };
+        newValue[index] = newRowValue;
+        matrix.value = newValue;
+      };
       // Act
       base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
       const survey = mockShowDialog.mock.calls[0][0].data.survey;
