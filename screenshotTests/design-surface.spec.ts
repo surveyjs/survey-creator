@@ -16,10 +16,17 @@ test.describe(title, () => {
     const root = page.locator(".svc-full-container").nth(1);
     await setJSON(page, {});
     await page.evaluate(() => {
-      const creator = (window as any).creator.rootElement.getRootNode().getElementById("survey-creator");
-      if (creator) {
-        creator.style.bottom = "";
-        creator.style.height = "1px";
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      let creatorNode;
+
+      if (rootNode instanceof ShadowRoot) {
+        creatorNode = rootNode.querySelector("div");
+      } else {
+        creatorNode = rootNode.getElementById("survey-creator");
+      }
+      if (creatorNode) {
+        creatorNode.style.bottom = "";
+        creatorNode.style.height = "1px";
       }
     });
     await compareScreenshot(page, root, "creator-min-height.png");
