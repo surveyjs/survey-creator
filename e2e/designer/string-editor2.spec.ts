@@ -474,7 +474,9 @@ test.describe(title, () => {
     await expect(getStringEditorByText(page, "Item 2")).not.toBeFocused();
 
     await getStringEditorByText(page, "Item 2").hover();
-    await getStringEditorByText(page, "Item 2").click({ force: true });
+    await getStringEditorByText(page, "Item 2").click();
+    await page.waitForTimeout(500);
+    await getStringEditorByText(page, "Item 2").click();
     await page.waitForTimeout(500);
     await expect(getStringEditorByText(page, "Item 2")).toBeFocused();
 
