@@ -206,7 +206,7 @@ test("Add-remove toolbox items, #5271", (): any => {
   creator.addNewQuestionInPage(() => { }, undefined, "dropdown");
   expect(creator.getAddNewQuestionText()).toEqual("Add Question");
 });
-test("Add-remove toolbox items, #5067", (): any => {
+test("Add-remove toolbox items, Bug#5067", (): any => {
   const creator = new CreatorTester();
   const itemName = "custom-item";
   creator.toolbox.addItems([{
@@ -221,7 +221,11 @@ test("Add-remove toolbox items, #5067", (): any => {
   creator.clickToolboxItem(creator.toolbox.getItemByName(itemName).json);
   expect(creator.selectedElement.getType()).toEqual("text");
   const adorner = new QuestionAdornerViewModel(creator, <SurveyElement>creator.selectedElement, undefined);
-  expect(adorner.getConvertToTypesActions()).toHaveLength(0);
+  expect(adorner.getConvertToTypesActions()).toHaveLength(1); //changed from 0 to 1 after fixing Bug#7437. We create adorner different now
+  const convertToAction = adorner.actionContainer.getActionById("convertTo");
+  convertToAction.popupModel.show();
+  expect(convertToAction.data.actions.length).toBe(1);
+  convertToAction.popupModel.hide();
 });
 test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (): any => {
   surveySettings.animationEnabled = false;

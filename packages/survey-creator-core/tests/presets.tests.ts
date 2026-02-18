@@ -3,6 +3,7 @@ import { UIPreset, ICreatorPresetData, registerUIPreset } from "../src/ui-preset
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
+import { QuestionAdornerViewModel } from "../src/components/question";
 export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
@@ -150,6 +151,39 @@ test("set toolbox definition", () => {
   expect(actions[1].name).toEqual("text-date");
   expect(actions[1].title).toEqual("Date");
   expect(actions[1].json.inputType).toEqual("date");
+});
+test("set toolbox definition & question actions, Bug#7437", () => {
+  const creator = new CreatorTester();
+  const preset = new UIPreset({
+    toolbox: {
+      definition: [
+        { name: "text-number", title: "Number", json: { type: "text", inputType: "number" } },
+        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
+        { name: "dropdown" }
+      ],
+      categories: [
+        { category: "general", items: ["text-number", "text-date", "dropdown"] }
+      ]
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  const actions = tb.visibleActions;
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions).toHaveLength(3);
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  convertToAction.popupModel.show();
+  expect(convertToAction.data.actions.length).toBe(3);
+  convertToAction.popupModel.hide();
 });
 
 test("set toolbox definition - no categories", () => {
