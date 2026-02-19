@@ -400,7 +400,7 @@ test.describe(title, () => {
     await setJSON(page, { "elements": [{ "type": "text", "name": "q1" }] });
     await page.locator('button[title="Survey settings"]').click();
     await page.locator('[data-name="locale"]').click();
-    const popupTop = await page.evaluate(() => (rootNode.querySelector('[data-name="locale"] .sv-popup__container') as HTMLElement)?.getBoundingClientRect().top ?? 0);
+    const popupTop = await page.evaluate(() => ((window as any).creator.rootElement.getRootNode().querySelector('[data-name="locale"] .sv-popup__container') as HTMLElement)?.getBoundingClientRect().top ?? 0);
     expect(popupTop).toBeGreaterThanOrEqual(200);
     await setCreatorMarginTop("");
   });
