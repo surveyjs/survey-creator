@@ -168,7 +168,7 @@ test("creator.onSurveyInstanceSetupHandlers event", () => {
   creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
     if (options.area === "property-grid") {
       json = options.survey.toJSON();
-      counter ++;
+      counter++;
     }
   });
   creator.JSON = {
@@ -958,7 +958,7 @@ test("onGetIsStringEditable", (): any => {
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(1);
 
-  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
+  expect(creator.isStringInplacelyEditable({} as any, "")).toBeTruthy();
   expect(lastEditableValue).toBeTruthy();
   expect(callCount).toBe(2);
 
@@ -1009,7 +1009,7 @@ test("Restrict users from adding more than a specified number of questions to a 
   expect(action.enabled).toBeFalsy();
   expect(qDuplicateAction.isVisible).toBeFalsy();
   expect(pAdorner.currentAddQuestionType).toBe("");
-  creator.JSON = { };
+  creator.JSON = {};
   expect(action.enabled).toBeTruthy();
 });
 test("Should not modify expression properties  on copying questions inside the dynamic panel, Bug#7223", (): any => {
@@ -1244,4 +1244,13 @@ test("Do not count non  questions elements as unique, Bug#7398", () => {
   questionName.value = "q2";
   expect(questionName.hasErrors()).toBeTruthy();
   expect(question.name).toEqual("item2");
+});
+test("Do not recreate plugins, Bug#7440", () => {
+  const creator = new CreatorTester();
+  const info = creator.getTabsInfo();
+  const plugin = info["translation"].init();
+  expect(creator.getPlugin("translation")).toBe(plugin);
+  expect(plugin).toBeTruthy();
+  const plugin2 = info["translation"].init();
+  expect(plugin).toBe(plugin2);
 });
