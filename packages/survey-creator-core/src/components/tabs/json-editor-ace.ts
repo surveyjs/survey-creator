@@ -8,7 +8,7 @@ import {
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
 import "./json-editor-ace.scss";
-import { DomWindowHelper } from "../../utils/global_variables_utils";
+import { DomWindowHelper } from "survey-core";
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: any;

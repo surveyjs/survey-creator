@@ -22,7 +22,7 @@ import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { listComponentCss } from "../list-theme";
-import { DomDocumentHelper, DomWindowHelper } from "../../utils/global_variables_utils";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 
 let isLocaleEnableIfExecuting: boolean;

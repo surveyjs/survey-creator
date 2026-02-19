@@ -2,7 +2,7 @@ import { Base, DragOrClickHelper, ActionContainer, ListModel, PopupModel, CssCla
 import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
-import { DomDocumentHelper } from "../../utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
   constructor(

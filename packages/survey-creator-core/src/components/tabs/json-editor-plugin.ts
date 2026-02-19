@@ -4,7 +4,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
-import { DomWindowHelper } from "../../utils/global_variables_utils";
+import { DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 
 const maxErrorLength = 150;
