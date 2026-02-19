@@ -16,12 +16,12 @@ export var presetsCss = {
   bodyNavigationButton: "",
   completedPage: "sps-completedpage",
   navigation: {
-    complete: "sps-btn sps-btn--primary-brand sps-footer__complete-btn",
-    prev: "sps-btn sps-btn--secondary-brand sps-footer__prev-btn",
-    next: "sps-btn sps-btn--primary-brand sps-footer__next-btn",
-    start: "sps-btn sps-footer__start-btn",
-    preview: "sps-btn sps-footer__preview-btn",
-    edit: "sps-btn sps-footer__edit-btn"
+    complete: "sps-btn--primary-brand sps-footer__complete-btn",
+    prev: "sps-btn--secondary-brand sps-footer__prev-btn",
+    next: "sps-btn--primary-brand sps-footer__next-btn",
+    start: "sps-footer__start-btn",
+    preview: "sps-footer__preview-btn",
+    edit: "sps-footer__edit-btn"
   },
   list: JSON.parse(JSON.stringify(listComponentCss)),
   panel: {
@@ -288,5 +288,15 @@ export var presetsCss = {
     itemAsIcon: "sps-action-button--icon",
     itemIcon: "sps-action-button__icon",
     itemTitle: "sps-action-button__title",
-  }
+  },
+  navigationBar: {
+    root: "sps-action-bar ",
+    defaultSizeMode: "",
+    smallSizeMode: "",
+    item: "sps-btn",
+    itemPressed: "",
+    itemAsIcon: "",
+    itemIcon: "",
+    itemTitle: "",
+  },
 };
