@@ -10,8 +10,6 @@ export var translationCss = {
   logo: "st-logo",
   logoImage: "st-logo__image",
   headerText: "st-header__text",
-  navigationButton: "",
-  bodyNavigationButton: "st-navigation-btn",
   completedPage: "st-completedpage",
   navigation: {
     complete: "st-btn st-footer__complete-btn",
@@ -307,5 +305,15 @@ export var translationCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
-  }
+  },
+  navigationBar: {
+    root: "sd-action-bar",
+    item: "sd-action st-navigation-btn",
+    defaultSizeMode: "",
+    smallSizeMode: "",
+    itemPressed: "sd-action--pressed",
+    itemAsIcon: "sd-action--icon",
+    itemIcon: "sd-action__icon",
+    itemTitle: "sd-action__title",
+  },
 };
