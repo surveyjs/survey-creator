@@ -383,6 +383,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                         name: "classes",
                         title: getLocString("presets.propertyGrid.propertyVisibleIn"),
                         colCount: 3,
+                        choicesOrder: "asc",
                         startWithNewLine: false,
                         visible: false
                       }
@@ -618,6 +619,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       const classesQuestion = question.detailPanel.getQuestionByName("classes");
       const propertyName = row.getValue("name");
       classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName).map(c => new ItemValue(c, this.getSelectorItemTitle(c)));
+      classesQuestion.showSelectAllItem = classesQuestion.choices.length > 1;
       const index = (question.visibleRows as any).findIndex(r => r === row);
       if (index >= 0) {
         const value = question.value || [];
