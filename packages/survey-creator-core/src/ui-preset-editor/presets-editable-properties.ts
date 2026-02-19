@@ -598,12 +598,13 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): boolean {
     const pName = row.getValue("name");
     const categories = this.getQuestionCategories(matrix.survey as any);
+    data.classes = data.classes || [];
     categories.value?.forEach(c => c.properties?.forEach(p => {
       if (p.name != pName) return;
       this.currentProperties?.updatePropertyVisibility(data, c.category);
     }));
     let isRemoved = false;
-    if (data.classes?.indexOf(this.currentClassName) == -1) {
+    if (data.classes.indexOf(this.currentClassName) == -1) {
       const index = (matrix.visibleRows as any).findIndex(r => r === row);
       if (index >= 0) {
         matrix.removeRow(index);
