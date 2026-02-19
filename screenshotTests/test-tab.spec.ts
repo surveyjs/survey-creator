@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler } from "./helper";
+import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText } from "./helper";
 
 const title = "Test tab Screenshot";
 
@@ -347,7 +347,7 @@ test.describe(title, () => {
       };
     });
     await page.locator(".svc-tabbed-menu-item", { hasText: "Preview" }).click();
-    await page.locator('input[title="Complete"]').click();
+    await getButtonByText(page, "Complete").click();
     await compareScreenshot(page, page.locator(".svc-creator-tab"), "test-tab-background-image.png");
   });
 
