@@ -1,4 +1,4 @@
-import { DomDocumentHelper } from "../utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 import { CssClassBuilder, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {

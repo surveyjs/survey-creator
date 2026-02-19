@@ -2,7 +2,7 @@ import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 
 import "./simulator.scss";
-import { DomDocumentHelper, DomWindowHelper } from "../utils/global_variables_utils";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export class SurveySimulatorModel extends Base {
   private surveyChanged() {

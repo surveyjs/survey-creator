@@ -2,7 +2,7 @@ import { Action, ComputedUpdater, IElement, Question, SurveyModel, property, set
 import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/creator-utils";
 import { SearchManager } from "../components/search-manager";
-import { DomDocumentHelper } from "../utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 export class SearchManagerPropertyGrid extends SearchManager {
   private highlightedEditorClass = " spg-question--highlighted";
 

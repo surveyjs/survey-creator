@@ -1,4 +1,4 @@
-import { DomDocumentHelper, DomWindowHelper } from "./global_variables_utils";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export class ResizeManager {
   private originalMouseX: number;

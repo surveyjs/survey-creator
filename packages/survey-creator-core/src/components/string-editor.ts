@@ -7,7 +7,7 @@ import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
-import { DomDocumentHelper, DomWindowHelper } from "../utils/global_variables_utils";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }

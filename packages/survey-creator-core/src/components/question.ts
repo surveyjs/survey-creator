@@ -37,7 +37,7 @@ import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
 import { SurveyHelper } from "../survey-helper";
-import { DomDocumentHelper } from "../utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 
 export interface QuestionBannerParams {
   text: string;

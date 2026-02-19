@@ -5,7 +5,7 @@ import "./page-navigator.scss";
 import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
 import { listComponentCss } from "../list-theme";
-import { DomDocumentHelper } from "../../utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;

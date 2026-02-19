@@ -1,4 +1,4 @@
-import { DomWindowHelper } from "./global_variables_utils";
+import { DomWindowHelper } from "survey-core";
 
 export function roundTo2Decimals(number: number): number {
   return Math.round(number * 100) / 100;

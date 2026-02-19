@@ -19,7 +19,7 @@ import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
 import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
 import { SurveyHelper } from "../survey-helper";
-import { DomDocumentHelper } from "../utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 
 const specificChoices = {
   "noneItem": "showNoneItem",

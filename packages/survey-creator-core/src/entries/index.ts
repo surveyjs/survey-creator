@@ -114,7 +114,6 @@ export * from "../ui-presets-creator/presets-properties";
 export * from "../ui-presets-creator/presets-tabs";
 export * from "../ui-presets-creator/presets-toolbox";
 export * from "../dragdrop-survey-elements";
-export * from "../utils/global_variables_utils";
 
 import "../components/search.scss";
 import "../components/component-container/component-container.scss";
