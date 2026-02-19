@@ -10,7 +10,7 @@ import postcssUrl from "postcss-url";
 import postcssBanner from "postcss-banner";
 import postcssDiscardComments from "postcss-discard-comments";
 
-import { resolve, parse } from "node:path";
+import { resolve, parse, format } from "node:path";
 import rollupEsbuild from "rollup-plugin-esbuild";
 
 import postcss from "postcss";
@@ -80,7 +80,7 @@ function pluginMinify() {
         if (e.endsWith(".css")) {
           this.emitFile({
             type: "asset",
-            fileName: `${dir}${name}.min${ext}`,
+            fileName: format({ dir, name, ext: ".min.css" }),
             source: await minifyCSS(item.source)
           });
         }
@@ -91,13 +91,13 @@ function pluginMinify() {
 
           this.emitFile({
             type: "asset",
-            fileName: `${dir}${name}.min${ext}`,
+            fileName: format({ dir, name, ext: ".min.js" }),
             source: `/*! For license information please see ${name}.min.js.LICENSE.txt */\n${code}`
           });
 
           this.emitFile({
             type: "asset",
-            fileName: `${dir}${name}.min${ext}.LICENSE.txt`,
+            fileName: format({ dir, name, ext: ".min.js.LICENSE.txt" }),
             source: comments.map(comment => wrapBanner(comment)).join("\n\n")
           });
         }
@@ -139,7 +139,7 @@ export function createUmdConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig })
+        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
         : typescript({
           tsconfig: tsconfig,
           compilerOptions: declarationDir ? {
@@ -150,7 +150,7 @@ export function createUmdConfig(options) {
           } : {}
         }),
       emitCss ? rollupPostcss({
-        extract: emitCss || true,
+        extract: emitCss,
         minimize: false,
         sourceMap: true,
         use: {
@@ -188,7 +188,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, version, emitCss, virtualModules } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules } = options;
 
   return {
     context: "this",
@@ -204,16 +204,18 @@ export function createEsmConfig(options) {
           "process.env.VERSION": JSON.stringify(version),
         }
       }),
-      typescript({
-        tsconfig: tsconfig,
-        compilerOptions: {
-          declaration: false,
-          declarationDir: null,
-          "target": "ES6"
-        }
-      }),
+      useEsbuild
+        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
+        : typescript({
+          tsconfig: tsconfig,
+          compilerOptions: {
+            declaration: false,
+            declarationDir: null,
+            "target": "ES6"
+          }
+        }),
       emitCss ? rollupPostcss({
-        extract: emitCss || true,
+        extract: emitCss,
         minimize: false,
         sourceMap: true,
         use: {
