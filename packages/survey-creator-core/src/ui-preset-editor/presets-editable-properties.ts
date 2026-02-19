@@ -595,25 +595,23 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       strs = strs[name];
     }
   }
-  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): boolean {
     const pName = row.getValue("name");
     const categories = this.getQuestionCategories(matrix.survey as any);
     categories.value?.forEach(c => c.properties?.forEach(p => {
       if (p.name != pName) return;
       this.currentProperties?.updatePropertyVisibility(data, c.category);
     }));
-    const index = (matrix.visibleRows as any).findIndex(r => r === row);
-    if (index >= 0) {
-      if (data.classes?.indexOf(this.currentClassName) == -1) {
+    let isRemoved = false;
+    if (data.classes?.indexOf(this.currentClassName) == -1) {
+      const index = (matrix.visibleRows as any).findIndex(r => r === row);
+      if (index >= 0) {
         matrix.removeRow(index);
-      } else {
-        const newValue = [...matrix.value];
-        const newRowValue = { ...matrix.value[index], ...data };
-        newValue[index] = newRowValue;
-        matrix.value = newValue;
+        isRemoved = true;
       }
     }
     super.onDetailPanelInPopupApply(data, matrix, row);
+    return !isRemoved;
   }
   protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: { description: string, isNew: boolean }) {
     if (question.name === this.nameInnerMatrix && this.currentProperties) {

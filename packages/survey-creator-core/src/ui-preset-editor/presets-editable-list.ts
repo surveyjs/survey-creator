@@ -243,8 +243,8 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       this.updateRowActions(options.question, options.row, actions);
     }
   }
-  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) { }
-  protected applyDetailPanelInPopup(survey: SurveyModel, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): boolean {
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): boolean { return true; }
+  protected applyDetailPanelInPopup(survey: SurveyModel, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, index: number): boolean {
     if (survey.validate()) {
       const newData: any = {};
       survey.getAllQuestions().forEach(q => {
@@ -252,7 +252,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
           newData[q.name] = survey.data[q.name];
         }
       });
-      this.onDetailPanelInPopupApply(newData, matrix, row);
+      const newValue = [...matrix.value];
+      const newRowValue = { ...matrix.value[index], ...newData };
+      newValue[index] = newRowValue;
+      if (this.onDetailPanelInPopupApply(newData, matrix, row)) {
+        matrix.value = newValue;
+      }
       this.updateMatrixRowActions(matrix.survey as any, matrix);
       return true;
     } else {
@@ -275,7 +280,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         componentName: "survey",
         data: { survey: survey, model: survey },
         onApply: () => {
-          return this.applyDetailPanelInPopup(survey, matrix, row);
+          return this.applyDetailPanelInPopup(survey, matrix, row, index);
         },
         onCancel: () => {
           if (options.removeOnCancel) {
