@@ -199,7 +199,7 @@ export default async (options) => {
       version: pkg.version,
       input: { "survey-creator-core": resolve("./src/entries/index.ts") },
       dir: resolve(buildPath, "fesm"),
-      tsconfig: resolve(__dirname, "./tsconfig.fesm.json"),
+      tsconfig: resolve(__dirname, "./tsconfig.json"),
       external: ["survey-core"],
       virtualModules: {
         "iconsV1": imagesV1,

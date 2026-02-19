@@ -12,7 +12,7 @@
     "build:all": "npm run build && npm run build:i18n && npm run build:themes && npm run build:i18n:presets",
     "build:themes": "rollup -c rollup.themes.config.mjs --environment emitMinified",
     "build:ui-presets": "rollup -c rollup.ui-presets.config.mjs",
-    "build:ui-preset-editor": "webpack --config ./webpack.ui-preset-editor.config.js --env buildType=dev --env emitDeclarations && webpack --config ./webpack.ui-preset-editor.config.js --env buildType=prod && rollup -c rollup.ui-preset-editor.config.js --bundleConfigAsCjs",
+    "build:ui-preset-editor": "rollup -c rollup.ui-preset-editor.config.mjs --environment emitMinified",
     "build:presets": "npm run build:ui-presets && npm run build:ui-preset-editor",
     "build:i18n:presets": "rollup -c rollup.i18n.ui-preset-editor.config.mjs --environment emitMinified",
     "watch:presets": "webpack --config ./webpack.ui-preset-editor.config.js --watch --env buildType=dev --env emitDeclarations && webpack --config ./webpack.ui-preset-editor.config.js --env buildType=prod && rollup -c rollup.ui-preset-editor.config.js --bundleConfigAsCjs",
