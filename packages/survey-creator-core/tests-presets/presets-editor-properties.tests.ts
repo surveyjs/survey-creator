@@ -870,7 +870,7 @@ test("Hide a property from all types Bug#7442", () => {
   const properties = row.detailPanel.getQuestionByName("properties");
   const propertiesPreset = survey.editablePresets.find(p => p.path === "propertyGrid");
   expect(propertiesPreset).toBeTruthy();
-  const data = { classes: undefined, name: "name" };
+  const data = { classes: [], name: "name" };
   expect(properties.visibleRows).toHaveLength(2);
   propertiesPreset["onDetailPanelInPopupApply"](data, properties, properties.visibleRows[0]);
   expect(properties.visibleRows).toHaveLength(1);
