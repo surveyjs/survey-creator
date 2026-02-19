@@ -1953,7 +1953,8 @@ export var enStrings = {
       basic: "Basic",
       advanced: "Advanced",
       expert: "Expert",
-    }
+    },
+    presetApplied: "Preset applied",
   }
 };
 

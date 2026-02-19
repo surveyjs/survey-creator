@@ -795,3 +795,46 @@ test("Move custom properties into another tab", () => {
   expect(properties.value.findIndex(r => r.name == "customProp1") > -1).toBeTruthy();
   Serializer.removeProperty("rating", "customProp1");
 });
+test("Hide a property from several types at once Bug#7439", () => {
+  const editor = new CreatorPresetEditorModel();
+  editor.json = {
+    "propertyGrid": {
+      "definition": {
+        "classes": {
+          "rating": {
+            "properties": [{ "name": "name", "tab": "general" }, { "name": "title", "tab": "general" }],
+            "tabs": [{ name: "general" }]
+          },
+          "dropdown": {
+            "properties": [{ "name": "name", "tab": "general" }, { "name": "title", "tab": "general" }],
+            "tabs": [{ name: "general" }]
+          },
+          "checkbox": {
+            "properties": [{ "name": "name", "tab": "general" }, { "name": "title", "tab": "general" }],
+            "tabs": [{ name: "general" }]
+          }
+        }
+      }
+    }
+  };
+  const survey = editor.model;
+  const categories = survey.getQuestionByName("propertyGrid_categories");
+  const selector = survey.getQuestionByName("propertyGrid_selector");
+  selector.value = "dropdown";
+  const tabIndex = categories.value.findIndex(c => c.category == "general");
+  const row = categories.visibleRows[tabIndex];
+  row.showDetailPanel();
+  const properties = row.detailPanel.getQuestionByName("properties");
+  const propertiesPreset = survey.editablePresets.find(p => p.path === "propertyGrid");
+  expect(propertiesPreset).toBeTruthy();
+  const data = { classes: ["checkbox"], name: "name" };
+  expect(properties.visibleRows).toHaveLength(2);
+  propertiesPreset["onDetailPanelInPopupApply"](data, properties, properties.visibleRows[0]);
+  expect(properties.visibleRows).toHaveLength(1);
+  editor.applyFromSurveyModel();
+  const classes = editor.preset.getJson().propertyGrid?.definition?.classes;
+  expect(classes).toBeTruthy();
+  expect(classes?.dropdown?.properties).toEqual([{ name: "title", tab: "general" }]);
+  expect(classes?.checkbox?.properties).toEqual([{ name: "name", tab: "general" }, { name: "title", tab: "general" }]);
+  expect(classes?.rating?.properties).toEqual([{ name: "title", tab: "general" }]);
+});

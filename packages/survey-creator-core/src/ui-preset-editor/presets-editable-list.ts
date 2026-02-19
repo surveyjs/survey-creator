@@ -10,9 +10,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected hasIcon(_: string) { return false; }
-  public getMainElementNames() : any { return [this.nameItems]; }
+  public getMainElementNames(): any { return [this.nameItems]; }
   protected get iconList() { return Object.keys(SvgRegistry.icons).map(name => "icon-" + name); }
-  protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel) : any { return "name"; }
+  protected getMatrixKeyColumnName(question: QuestionMatrixDynamicModel): any { return "name"; }
   protected getDefaultItems(question?: QuestionMatrixDynamicModel) {
     return this.defaultItems;
   }
@@ -117,7 +117,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     });
   }
 
-  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string, isNew: boolean}) {
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: { description: string, isNew: boolean }) {
     let survey: SurveyModel;
     let resetAction;
     const itemKey = this.getMatrixKeyColumnName(question);
@@ -137,7 +137,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     resetAction = new Action(resetActionParams);
     survey = this.showDetailPanelInPopup(question, row, model.rootElement, { actions: [resetAction], title: options?.description, removeOnCancel: options?.isNew });
     resetAction.enabled = !Helpers.isTwoValueEquals(survey.data, this.getDefaultItem(question, survey.getValue(itemKey)));
-    survey.onValueChanged.add(()=>resetAction.enabled = true);
+    survey.onValueChanged.add(() => resetAction.enabled = true);
     const keyQuestion = survey.getQuestionByName(itemKey);
     if (this.getDefaultItem(question, keyQuestion.value)) {
       keyQuestion.readOnly = true;
@@ -243,8 +243,28 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       this.updateRowActions(options.question, options.row, actions);
     }
   }
-  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) { }
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: {actions?: IAction[], title?: string, removeOnCancel?: boolean}) {
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): boolean { return true; }
+  protected applyDetailPanelInPopup(survey: SurveyModel, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, index: number): boolean {
+    if (survey.validate()) {
+      const newData: any = {};
+      survey.getAllQuestions().forEach(q => {
+        if (q.visible) {
+          newData[q.name] = survey.data[q.name];
+        }
+      });
+      const newValue = [...matrix.value];
+      const newRowValue = { ...matrix.value[index], ...newData };
+      newValue[index] = newRowValue;
+      if (this.onDetailPanelInPopupApply(newData, matrix, row)) {
+        matrix.value = newValue;
+      }
+      this.updateMatrixRowActions(matrix.survey as any, matrix);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, options: { actions?: IAction[], title?: string, removeOnCancel?: boolean }) {
     const index = (matrix.visibleRows as any).findIndex(r => r === row);
     const data = matrix.value[index];
     const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
@@ -260,23 +280,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         componentName: "survey",
         data: { survey: survey, model: survey },
         onApply: () => {
-          if (survey.validate()) {
-            const newValue = [...matrix.value];
-            const newData: any = { };
-            survey.getAllQuestions().forEach(q => {
-              if (q.visible) {
-                newData[q.name] = survey.data[q.name];
-              }
-            });
-            const newRowValue = { ...matrix.value[index], ...newData };
-            newValue[index] = newRowValue;
-            this.onDetailPanelInPopupApply(newData, matrix, row);
-            matrix.value = newValue;
-            this.updateMatrixRowActions(matrix.survey as any, matrix);
-            return true;
-          } else {
-            return false;
-          }
+          return this.applyDetailPanelInPopup(survey, matrix, row, index);
         },
         onCancel: () => {
           if (options.removeOnCancel) {
@@ -313,4 +317,5 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
     return survey;
   }
+  protected;
 }

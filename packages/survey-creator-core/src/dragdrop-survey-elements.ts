@@ -4,7 +4,7 @@ import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { DropIndicatorPosition, ElType } from "./drag-drop-enums";
-import { DomDocumentHelper } from "./utils/global_variables_utils";
+import { DomDocumentHelper } from "survey-core";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
