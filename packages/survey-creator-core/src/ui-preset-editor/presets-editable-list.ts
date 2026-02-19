@@ -249,7 +249,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       const newData: any = {};
       survey.getAllQuestions().forEach(q => {
         if (q.visible) {
-          newData[q.name] = survey.data[q.name];
+          newData[q.name] = q.isEmpty() && q.isDescendantOf("checkbox") ? [] : q.value;
         }
       });
       const newValue = [...matrix.value];
