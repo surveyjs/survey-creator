@@ -86,8 +86,7 @@ import { listComponentCss } from "./components/list-theme";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
-import { DomDocumentHelper } from "./utils/global_variables_utils";
-import { deprecate } from "util";
+import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import { DefaultLight } from "./themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
@@ -320,7 +319,7 @@ export class SurveyCreatorModel extends Base
   set showSurveyTitle(val: boolean) {
     this.allowEditSurveyTitle = val;
   }
-  @property({ defaultValue: {} }) pluginLicenseTexts: {[key: string]: string};
+  @property({ defaultValue: {} }) pluginLicenseTexts: { [key: string]: string };
   private getUnlicensedPluginsNames(): string[] {
     return Object.keys(this.pluginLicenseTexts || {});
   }
@@ -1511,7 +1510,7 @@ export class SurveyCreatorModel extends Base
   set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
 
   public get tabResponsivenessMode(): string { return ""; }
-  public set tabResponsivenessMode(val: string) {}
+  public set tabResponsivenessMode(val: string) { }
   public tabbedMenu: TabbedMenuContainer;
 
   get tabs() {

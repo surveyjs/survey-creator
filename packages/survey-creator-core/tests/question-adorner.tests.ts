@@ -122,6 +122,33 @@ test("Check question converter with removed subitems", (): any => {
 
   surveySettings.animationEnabled = true;
 });
+test("Check question converter with cleard subitems, Bug#7436", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+
+  const textItem = creator.toolbox.getItemByName("text");
+
+  // Remove Default Subitems
+  textItem.clearSubitems();
+
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  expect(convertInputTypeAction).toBeFalsy();
+
+  surveySettings.animationEnabled = true;
+});
 
 test("Check question adorners icons", (): any => {
   const creator = new CreatorTester();
@@ -556,9 +583,11 @@ test("Check question converter selected item for customized rating subitems (jso
 
   creator.JSON = {
     elements: [
-      { type: "rating", name: "q1", "rateType": "stars", title: "5-stars",
+      {
+        type: "rating", name: "q1", "rateType": "stars", title: "5-stars",
         "rateMin": 0,
-        "rateMax": 4, },
+        "rateMax": 4,
+      },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -615,9 +644,11 @@ test("Check question converter - convert to 5 stars", (): any => {
 
   creator.JSON = {
     elements: [
-      { type: "rating", name: "q1", "rateType": "stars",
+      {
+        type: "rating", name: "q1", "rateType": "stars",
         "rateMin": 0,
-        "rateMax": 2, },
+        "rateMax": 2,
+      },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -680,9 +711,11 @@ test("Check question converter - convert to 3 stars", (): any => {
 
   creator.JSON = {
     elements: [
-      { type: "rating", name: "q1", "rateType": "stars",
+      {
+        type: "rating", name: "q1", "rateType": "stars",
         "rateCount": 4,
-        "rateMax": 4, },
+        "rateMax": 4,
+      },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");

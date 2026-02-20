@@ -195,6 +195,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       presetPropertyGridViewModel.setObject(presetModel);
       presetModel.onPresetSelected.add((sender, options) => {
         new UIPreset(options.preset.json).apply(creator);
+        creator.notify(getLocString("preset.presetApplied"), "info");
         this.openCreatorThemeSettings();
       });
       sidebarPageModelElements.unshift(

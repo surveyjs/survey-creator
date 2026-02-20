@@ -22,10 +22,10 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     return ["creator", "locString"];
   }
   protected get locString(): LocalizableString {
-    return this.props.locStr.locStr;
+    return this.props.model.locStr;
   }
   protected get creator(): SurveyCreatorModel {
-    return this.props.locStr.creator;
+    return this.props.model.creator;
   }
   private get style(): any {
     return this.props.style;

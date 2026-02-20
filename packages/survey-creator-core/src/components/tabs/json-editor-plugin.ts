@@ -4,6 +4,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
+import { CreatorDomHelper } from "../../dom-helper";
 
 const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
@@ -122,7 +123,8 @@ export abstract class JsonEditorBaseModel extends Base {
   }
   private createTextWorker(): SurveyTextWorker {
     return new SurveyTextWorker(this.text, {
-      validatePropertyValues: this.creator.validateJsonPropertyValues });
+      validatePropertyValues: this.creator.validateJsonPropertyValues
+    });
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
@@ -130,7 +132,6 @@ export abstract class JsonEditorBaseModel extends Base {
 }
 
 export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
-  private inputFileElement: HTMLInputElement;
   private importAction: Action;
   private exportAction: Action;
   private copyAction: Action;
@@ -181,18 +182,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       component: "sv-action-bar-item",
       needSeparator: true,
       action: () => {
-        if (!document) return;
-        if (!this.inputFileElement) {
-          this.inputFileElement = document.createElement("input");
-          this.inputFileElement.type = "file";
-          this.inputFileElement.style.display = "none";
-          this.inputFileElement.onchange = () => {
-            if (this.inputFileElement.files.length < 1) return;
-            this.importFromFile(this.inputFileElement.files[0]);
-            this.inputFileElement.value = "";
-          };
-        }
-        this.inputFileElement.click();
+        CreatorDomHelper.openFileDialog((file: File) => this.importFromFile(file));
       }
     });
     items.push(this.importAction);
