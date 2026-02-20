@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, getPropertyGridCategory, generalGroupName, logicGroupName } from "../helper";
+import { url, test, expect, setJSON, getPropertyGridCategory, generalGroupName, logicGroupName, getButtonByText } from "../helper";
 
 const title = "Property Grid";
 
@@ -35,7 +35,7 @@ test.describe(title, () => {
   });
 
   test("Add calculated values", async ({ page }) => {
-    const addButton = page.locator("div[data-name=calculatedValues]").locator("button[title='Add new variable']");
+    const addButton = getButtonByText(page.locator("div[data-name=calculatedValues]"), "Add new variable").first();
     const rows = page.locator("div[data-name=calculatedValues]").locator("tbody").locator("tr");
 
     await setJSON(page, json);

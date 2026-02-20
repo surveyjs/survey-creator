@@ -132,4 +132,8 @@ export const explicitErrorHandler = async (page: Page) => {
   });
 };
 
+export function getButtonByText(locator: Locator | Page, text: string) {
+  return locator.getByRole("button", { name: text });
+}
+
 export { expect };

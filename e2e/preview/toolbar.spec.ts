@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, creatorTabPreviewName, getTabbedMenuItemByText, getBarItemByTitle, explicitErrorHandler, getMenuItemByText } from "../helper";
+import { url, test, expect, setJSON, creatorTabPreviewName, getTabbedMenuItemByText, getBarItemByTitle, explicitErrorHandler, getMenuItemByText, getButtonByText } from "../helper";
 
 const title = "Preview tab";
 
@@ -110,7 +110,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator(".sv-action--nextPage").click();
     await page.locator(".sv-action--nextPage").click();
-    await page.locator("input[value='Complete']").click();
+    await getButtonByText(page, "Complete").click();
     await expect(page.locator(".sd-completedpage").getByText("Thank you for completing the survey")).toBeVisible();
     await page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText).click();
     await expect(page.locator(".sd-question__title").getByText("string_editor")).toBeVisible();
@@ -169,7 +169,7 @@ test.describe(title, () => {
     await expect(getMenuItemByText(page, "iPad Air")).toBeVisible();
 
     await getMenuItemByText(page, "iPad Air").click();
-    await page.locator("input[value='Complete']").click();
+    await getButtonByText(page, "Complete").click();
     await expect(orientationAction).not.toHaveAttribute("disabled", "");
     await expect(page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText)).toBeVisible();
 

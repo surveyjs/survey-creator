@@ -157,20 +157,23 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         this.activatePage(model, this.creator, editablePresets);
       }
     });
-    model.onGetQuestionTitleActions.add((_, options) => {
+    model.onGetQuestionTitleActions.add((sender, options) => {
       editablePresets.forEach(item => {
         if (options.question.name == item.getNavigationElementName()) {
           options.question.getTitleToolbar().isResponsivenessDisabled = true;
+          options.question.getTitleToolbar().cssClasses = sender.css.navigationBar;
           options.actions = model.navigationBar.actions;
         }
         item.onGetQuestionTitleActions(model, this.creator, options);
       });
     });
-    model.onGetPanelTitleActions.add((_, options) => {
+    model.onGetPanelTitleActions.add((sender, options) => {
       editablePresets.forEach(item => {
         if (options.panel.name == item.getNavigationElementName()) {
           options.panel.getTitleToolbar().isResponsivenessDisabled = true;
+          options.panel.getTitleToolbar().cssClasses = sender.css.navigationBar;
           options.actions = model.navigationBar.actions;
+
         }
         item.onGetPanelTitleActions(model, this.creator, options);
       });
@@ -217,7 +220,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
           options.cssClasses.row += " sps-table__row--main";
           options.cssClasses.buttonAdd += " sps-matrixdynamic__add-btn--icon";
           options.cssClasses.iconAdd = "sps-matrixdynamic__add-btn-icon";
-          options.cssClasses.iconAddId = "#icon-add-24x24";
+          options.cssClasses.iconAddId = "icon-add-24x24";
         }
       });
     });

@@ -101,15 +101,15 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     actions.forEach(a => {
       if (a.id == "show-detail") {
         a.location = "end";
-        a.iconName = "icon-expand-24x24";
-        a.title = <any>new ComputedUpdater(() => row.isDetailPanelShowing ? getLocString("presets.items.collapse") : getLocString("presets.items.expand"));
-        a.tooltip = getLocString("presets.items.expand");
+        a.title = <any>new ComputedUpdater(() => {
+          return row.isDetailPanelShowing ? getLocString("presets.items.collapse") : getLocString("presets.items.expand");
+        });
         a.visibleIndex = 10;
         a.visible = allowExpand;
       }
       if (a.id == "remove-row") {
         a.visibleIndex = 20;
-        a.component = "sv-action-bar-item";
+        a.showTitle = false;
         a.action = () => question.removeRowUI(row);
         a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
         a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.delete");

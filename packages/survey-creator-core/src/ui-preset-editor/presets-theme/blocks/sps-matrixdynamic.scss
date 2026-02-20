@@ -58,7 +58,7 @@
   flex-direction: column;
   flex-grow: 1;
 
-  .sps-question__title  {
+  .sps-question__title {
     padding: 0;
     line-height: var(--sjs2-typography-line-height-default, 24px); /* 150% */
     color: var(--sjs2-color-fg-basic-primary, #1c1b20);
@@ -128,9 +128,22 @@
   padding: 0 var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px);
   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   display: flex;
+  .sps-action-bar {
+    width: 100%;
+  }
+  .sv-action {
+    width: 100%;
+  }
+  .sv-action__content {
+    width: 100%;
+  }
+  .sps-matrixdynamic__add-btn {
+    width: 100%;
+  }
 }
-.sps-table-wrapper, sv-ng-matrix-table {
-  &~ .sps-matrixdynamic__footer {
+.sps-table-wrapper,
+sv-ng-matrix-table {
+  & ~ .sps-matrixdynamic__footer {
     border-bottom: none;
     margin-bottom: 0;
     padding-top: var(--sjs2-spacing-x075, 6px);
@@ -154,13 +167,10 @@
 }
 
 .sps-matrixdynamic__add-btn--icon {
-  flex-direction: row-reverse;
   background: transparent;
   padding: var(--sjs2-spacing-x100, 8px);
-  justify-content: flex-end;
-  .sv-string-viewer {
-    padding: 0 0 0 var(--sjs2-spacing-x100, 8px);
-  }
+  justify-content: flex-start;
+  gap: var(--sjs2-spacing-x100, 8px);
 }
 
 .sps-matrixdynamic__add-btn-icon {
