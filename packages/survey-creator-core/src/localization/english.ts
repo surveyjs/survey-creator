@@ -171,6 +171,8 @@ export var enStrings = {
     translationNoStrings: "No strings to translate. Please change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
+    yamlExportButton: "Export to YAML",
+    yamlImportButton: "Import from YAML",
     translateUsigAI: "Auto-translate All",
     translateUsigAIFrom: "Translate from: ",
     translationDialogTitle: "Untranslated strings",
