@@ -188,7 +188,7 @@ export class SurveyLogicUI extends SurveyLogic {
     locStr.text = this.getLocString("ed.lg.uncompletedRule_text");
     const popupModel = libSettings.showDialog(<IDialogOptions>{
       componentName: "sv-string-viewer",
-      data: { locStr: locStr, locString: locStr, model: locStr }, //TODO fix in library
+      data: { model: locStr },
       onApply: () => {
         onLeaving();
         return true;
