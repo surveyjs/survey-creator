@@ -1468,7 +1468,7 @@ export class TranslationEditor {
       locStr.text = editorLocalization.getString("ed.translationNoStrings");
       const popup = surveySettings.showDialog(<IDialogOptions>{
         componentName: "sv-string-viewer",
-        data: { locStr: locStr, locString: locStr, model: locStr },
+        data: { model: locStr },
         onApply: (): boolean => { return true; },
         cssClass: "svc-creator-popup",
         cssClasses: listComponentCss,

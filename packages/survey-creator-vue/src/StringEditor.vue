@@ -74,12 +74,12 @@ import {
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useCreatorModel } from "./creator-model";
 
-const props = defineProps<{ locString: any }>();
+const props = defineProps<{ model: any }>();
 const locString = computed<LocalizableString>(() => {
-  return props.locString.locStr;
+  return props.model.locStr;
 });
 const creator = computed<SurveyCreatorModel>(() => {
-  return props.locString.creator;
+  return props.model.creator;
 });
 const root = ref<HTMLElement>();
 
