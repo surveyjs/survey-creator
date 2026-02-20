@@ -114,7 +114,6 @@ describe("CreatorPresetEditableBase", () => {
         onApplyCallback = options.onApply;
         return { dispose: jest.fn() };
       });
-
       // Act
       base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
       const survey = mockShowDialog.mock.calls[0][0].data.survey;

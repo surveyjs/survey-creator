@@ -8,7 +8,8 @@ import { ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
   SurveyQuestionProperties, editorLocalization, PropertyGridModel, getLocString,
-  settings, IPropertyTabInfo, IPropertyEditorInfo } from "survey-creator-core";
+  settings, IPropertyTabInfo, IPropertyEditorInfo
+} from "survey-creator-core";
 
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 import { ISurveyQuestionEditorDefinition } from "../question-editor/definition";
@@ -177,7 +178,7 @@ export class SurveyQuestionPresetPropertiesDetail {
   private createFlatClassProperties(className: string): ISurveyQuestionEditorDefinition {
     const obj = this.createObj(className);
     this.properties = new SurveyQuestionPresetProperties(obj, className, this.currentJson);
-    const res : ISurveyQuestionEditorDefinition = { properties: [] };
+    const res: ISurveyQuestionEditorDefinition = { properties: [] };
     const title = this.currentJson.classes[className]?.title;
     if (!!title) {
       res.title = title;
@@ -365,27 +366,28 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                   titleLocation: "hidden",
                   detailElements:
 
-                  [
-                    {
-                      "type": "panel",
-                      "name": "details",
-                      "maxWidth": "30%",
-                      "elements": [
-                        { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
-                        { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
-                        { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), showSelectAllItem: true, visible: false },
-                      ],
-                      visible: false
-                    },
-                    {
-                      type: "checkbox",
-                      name: "classes",
-                      title: getLocString("presets.propertyGrid.propertyVisibleIn"),
-                      colCount: 3,
-                      startWithNewLine: false,
-                      visible: false
-                    }
-                  ]
+                    [
+                      {
+                        "type": "panel",
+                        "name": "details",
+                        "maxWidth": "30%",
+                        "elements": [
+                          { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
+                          { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },
+                          { type: "comment", name: "description", title: getLocString("presets.propertyGrid.descriptionField"), showSelectAllItem: true, visible: false },
+                        ],
+                        visible: false
+                      },
+                      {
+                        type: "checkbox",
+                        name: "classes",
+                        title: getLocString("presets.propertyGrid.propertyVisibleIn"),
+                        colCount: 3,
+                        choicesOrder: "asc",
+                        startWithNewLine: false,
+                        visible: false
+                      }
+                    ]
                 })
               ]
             },
@@ -594,24 +596,30 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       strs = strs[name];
     }
   }
-  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
-    if (data.classes?.indexOf(this.currentClassName) == -1) {
-      const index = (matrix.visibleRows as any).findIndex(r => r === row);
-      matrix.removeRow(index);
-    }
+  protected onDetailPanelInPopupApply(data: any, matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): boolean {
     const pName = row.getValue("name");
     const categories = this.getQuestionCategories(matrix.survey as any);
     categories.value?.forEach(c => c.properties?.forEach(p => {
       if (p.name != pName) return;
       this.currentProperties?.updatePropertyVisibility(data, c.category);
     }));
+    let isRemoved = false;
+    if (data.classes?.indexOf(this.currentClassName) == -1) {
+      const index = (matrix.visibleRows as any).findIndex(r => r === row);
+      if (index >= 0) {
+        matrix.removeRow(index);
+        isRemoved = true;
+      }
+    }
     super.onDetailPanelInPopupApply(data, matrix, row);
+    return !isRemoved;
   }
-  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: {description: string, isNew: boolean}) {
+  protected editItem(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, options?: { description: string, isNew: boolean }) {
     if (question.name === this.nameInnerMatrix && this.currentProperties) {
       const classesQuestion = question.detailPanel.getQuestionByName("classes");
       const propertyName = row.getValue("name");
       classesQuestion.choices = this.currentProperties.getClassesBySharedProperty(propertyName).map(c => new ItemValue(c, this.getSelectorItemTitle(c)));
+      classesQuestion.showSelectAllItem = classesQuestion.choices.length > 1;
       const index = (question.visibleRows as any).findIndex(r => r === row);
       if (index >= 0) {
         const value = question.value || [];
