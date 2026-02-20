@@ -50,7 +50,9 @@ test.describe(title, () => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
     await page.locator(".spg-action-button").nth(1).click();
+    await page.getByText("Edit Presets list", { exact: true }).hover();
     await page.getByText("Edit Presets list", { exact: true }).click();
+    await page.waitForTimeout(300);
     await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
     await page.getByText("Add new preset...").click();
     await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "presets-select-dialog.png");
