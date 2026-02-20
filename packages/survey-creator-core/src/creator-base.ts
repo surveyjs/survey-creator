@@ -606,10 +606,6 @@ export class SurveyCreatorModel extends Base
       this.tabs.splice(index, 1);
     }
     delete this.plugins[name];
-
-    if (plugin.dispose) {
-      plugin.dispose();
-    }
   }
   private getTabIndex(id: string): number {
     for (let i = 0; i < this.tabs.length; i++) {
@@ -1971,15 +1967,35 @@ export class SurveyCreatorModel extends Base
     this.initPlugins();
     this.initFooterToolbar();
   }
+  private pluginCachedInfo: { [key: string]: ICreatorPlugin } = {};
   public getTabsInfo(): any {
-    return {
-      designer: { iconName: TabDesignerPlugin.iconName, init: () => new TabDesignerPlugin(this) },
-      preview: { iconName: TabTestPlugin.iconName, init: () => new TabTestPlugin(this) },
-      theme: { iconName: ThemeTabPlugin.iconName, init: () => new ThemeTabPlugin(this) }, //TODO change name
-      logic: { iconName: TabLogicPlugin.iconName, init: () => new TabLogicPlugin(this) },
-      json: { iconName: TabJsonEditorBasePlugin.iconName, init: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this) },
-      translation: { iconName: TabTranslationPlugin.iconName, init: () => new TabTranslationPlugin(this) }
+    const classes = {
+      designer: TabDesignerPlugin,
+      preview: TabTestPlugin,
+      theme: ThemeTabPlugin,
+      logic: TabLogicPlugin,
+      json: TabJsonEditorAcePlugin.hasAceEditor() ? TabJsonEditorAcePlugin : TabJsonEditorTextareaPlugin,
+      translation: TabTranslationPlugin
     };
+    const initPlugin = (name: string, pluginClass: any) => {
+      if (!this.pluginCachedInfo[name]) {
+        this.pluginCachedInfo[name] = new pluginClass(this);
+      }
+      const res: any = this.pluginCachedInfo[name];
+      if (this.tabs.filter(t => t.id === name).length == 0) {
+        if (typeof res.addTab === "function") {
+          res.addTab(this);
+        } else {
+          this.addTab({ name, plugin: res, iconName: classes[name].iconName });
+        }
+      }
+      return res;
+    };
+    const res = {};
+    for (let key in classes) {
+      res[key] = { iconName: classes[key].iconName, init: () => initPlugin(key, classes[key]) };
+    }
+    return res;
   }
   public getAvailableTabs(): Array<any> {
     const res = this.tabs.map(t => ({ name: t.id, iconName: t.iconName }));
