@@ -127,6 +127,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.model.editablePresets.forEach(item => item.onLocaleChanged(this.model, json[item.path], this.creator));
   }
 
+  public onJsonChangedCallback: () => void;
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -137,6 +138,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.completeText = getLocString("presets.editor.completeText");
     model.pagePrevText = getLocString("presets.editor.pagePrevText");
     model.enterKeyAction = "loseFocus";
+    model.fitToContainer = false;
 
     editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
     if (!this.defaultJsonValue) {
@@ -149,12 +151,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onCurrentPageChanged.add((sender, options) => {
       this.activatePage(model, this.creator, editablePresets);
     });
-    const questionNames = editablePresets.map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
     model.onValueChanged.add((sender, options) => {
+      const questionNames = editablePresets.filter(item => !item.isSettingUp).map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
       if (questionNames.indexOf(options.name) != -1 && !this.applying) {
         this.applyFromSurveyModel(false);
         this.activatePage(model, this.creator, editablePresets);
+        this.onJsonChangedCallback?.();
       }
     });
     model.onGetQuestionTitleActions.add((_, options) => {

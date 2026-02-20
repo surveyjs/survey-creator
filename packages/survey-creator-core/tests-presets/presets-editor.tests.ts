@@ -293,9 +293,9 @@ test("Preset plugin, menu title should not be changed", () => {
   const creator = new SurveyCreatorModel({});
   const plugin = new UIPresetEditor(creator);
   plugin.activate();
-  expect(plugin.model.navigationBar.actions.map(a => a.id)).toEqual(["presets-pages", "presets-edit", "presets-quit"]);
+  expect(plugin.model.navigationBar.actions.map(a => a.id)).toEqual(["presets-list", "presets-pages", "presets-edit", "presets-status", "presets-quit"]);
   const oldTitle = plugin.model.navigationBar.actions[1].title;
-  const list = plugin.model.navigationBar.actions[1].popupModel.contentComponentData.model;
+  const list = plugin.model.navigationBar.actions[2].popupModel.contentComponentData.model;
   const testAction = list.getActionById("reset");
   testAction.action = () => { };
   list.onItemClick(testAction);

@@ -180,7 +180,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.onThemePropertyGridSurveyCreated(survey);
     };
     const sidebarPageModelElements = [
-      { componentName: "svc-property-grid", componentData: this.themePropertyGridViewModel },
+      { componentName: "svc-property-grid", componentData: { model: this.themePropertyGridViewModel } },
     ];
 
     if (PredefinedCreatorPresets.length > 0) {
@@ -188,7 +188,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       const presetPropertyGridViewModel = this.createSettingsPropertyGridViewModel("preset", creatorPresetsModelPropertyGridDefinition, creator);
       presetPropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
         const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
-        if (!!presetChooser) {
+        if (!!presetChooser && presetChooser.choices.length === 0) {
           presetChooser.choices = PredefinedCreatorPresets.map(preset => ({ value: preset, text: getLocString("preset.names." + preset) }));
         }
       };
@@ -199,7 +199,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         this.openCreatorThemeSettings();
       });
       sidebarPageModelElements.unshift(
-        { componentName: "svc-property-grid", componentData: presetPropertyGridViewModel }
+        { componentName: "svc-property-grid", componentData: { model: presetPropertyGridViewModel } }
       );
     }
 
