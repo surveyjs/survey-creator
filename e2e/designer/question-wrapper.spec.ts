@@ -117,18 +117,15 @@ test.describe(title, () => {
     const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
     const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
 
-    await expect(questions).toHaveCount(0);
+    const json = { elements: [{ type: "text", name: "question1" }] };
+    await setJSON(page, json);
 
-    await getToolboxItemByText(page, "Single-Line Input").hover();
-    await getToolboxItemByText(page, "Single-Line Input").click();
-    await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(1);
-
-    await page.locator(".svc-tab-designer").hover({ position: { x: 150, y: 5 } });
-    await page.locator(".svc-tab-designer").click({ position: { x: 150, y: 5 } });
+    await expect(questions).toHaveCount(1);
+    await expect(page.locator(".svc-question__content input")).toBeVisible();
+    await expect(page.locator(".svc-question__content textarea")).toHaveCount(0);
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(0);
     await page.locator(".svc-question__content").hover({ position: { x: 5, y: 5 } });
     await page.waitForTimeout(500);
-    await expect(page.locator(".svc-question__content").locator("input")).toBeVisible();
     await expect(convertActionButton).toBeVisible();
 
     await convertActionButton.click();
@@ -136,14 +133,16 @@ test.describe(title, () => {
     expect(await popupContent.innerText()).toEqual(convertPopupContent);
 
     await getListItemByText(page, "Long Text").click();
-    await expect(page.locator(".svc-question__content--selected").locator("textarea")).toBeVisible();
+    await expect(page.locator(".svc-question__content textarea")).toBeVisible();
+    await expect(page.locator(".svc-question__content input")).toHaveCount(0);
 
     await page.locator(".svc-question__content--selected .svc-question__content-actions").locator('button[title="Long Text"]').click();
     await expect(listItems).toHaveCount(convertQuestionTypesCount);
     expect(await popupContent.innerText()).toEqual(convertPopupContent);
 
     await getListItemByText(page, "Single-Line Input").click();
-    await expect(page.locator(".svc-question__content--selected input")).toBeVisible();
+    await expect(page.locator(".svc-question__content input")).toBeVisible();
+    await expect(page.locator(".svc-question__content textarea")).toHaveCount(0);
   });
 
   test("Single input question wrapper action duplicate", async ({ page }) => {
@@ -423,9 +422,7 @@ test.describe(title + " dropdown collapse", () => {
 
   test("Question adorner - collapse button in differen modes", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
-    const json: { elements: Array<{ type: string, name: string }> } = {
-      elements: [{ type: "text", name: "question1" }],
-    };
+    const json = { elements: [{ type: "text", name: "question1" }] };
     await setJSON(page, json);
     await getToolboxItemByText(page, "Single-Line Input").hover();
     const qContent = page.locator(".svc-question__content");
@@ -589,9 +586,7 @@ test.describe(title + " dropdown collapse", () => {
 
   test("Page adorner - collapse button in differen modes", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
-    const json: { elements: Array<{ type: string, name: string }> } = {
-      elements: [{ type: "text", name: "question1" }],
-    };
+    const json = { elements: [{ type: "text", name: "question1" }] };
     await setJSON(page, json);
     await getToolboxItemByText(page, "Single-Line Input").hover();
     const pContent = page.locator(".svc-page__content").first();
