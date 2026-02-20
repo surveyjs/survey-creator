@@ -1,7 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "../../../typography-mixins.scss" as *;
 
-
 .svc-creator-confirm-dialog__content-container {
   display: flex;
   padding: 0 16px;
@@ -26,27 +25,29 @@
   height: 24px;
   box-sizing: content-box;
   border-radius: var(--sjs2-radius-round, 9999px);
-  background: var(--sjs2-color-bg-warning-secondary, rgba(255, 152, 20, 0.10));
+  background: var(--sjs2-color-bg-warning-secondary, rgba(255, 152, 20, 0.1));
   margin: 0 auto;
   use {
-    fill: var(--sjs2-color-fg-warning-primary, #FF9814);
+    fill: var(--sjs2-color-fg-warning-primary, #ff9814);
   }
 }
 .svc-creator-confirm-dialog__icon--danger {
-  background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.10));
+  background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.1));
   use {
-    fill: var(--sjs2-color-fg-alert-primary, #C30935);
+    fill: var(--sjs2-color-fg-alert-primary, #c30935);
   }
 }
 .svc-creator-confirm-dialog__title {
   @include sjs2--typography--medium-strong;
-  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
   text-align: center;
+  display: block;
 }
 .svc-creator-confirm-dialog__message {
   @include sjs2--typography--default;
-  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   text-align: center;
+  display: block;
 }
 
 .svc-creator-confirm-dialog {
@@ -58,7 +59,9 @@
     justify-content: stretch;
     flex-grow: 1;
   }
-  .sv-action, .sv-action__content, .sps-btn {
+  .sv-action,
+  .sv-action__content,
+  .sps-btn {
     flex-grow: 1;
     min-width: fit-content;
   }
