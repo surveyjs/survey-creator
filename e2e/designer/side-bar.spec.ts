@@ -319,7 +319,7 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     const getQuestionTopPosition = () => page.evaluate(() => {
-      const el = document.querySelector(".svc-question__content");
+      const el = (window as any).creator.rootElement.getRootNode().querySelector(".svc-question__content");
       return el ? Math.round(el.getBoundingClientRect().top) : 0;
     });
 

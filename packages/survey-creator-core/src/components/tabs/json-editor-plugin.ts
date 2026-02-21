@@ -4,6 +4,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
+import { DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 
 const maxErrorLength = 150;
@@ -39,6 +40,7 @@ export abstract class JsonEditorBaseModel extends Base {
       this.jsonEditorChangedTimeoutId = -1;
     } else {
       const self: JsonEditorBaseModel = this;
+      const window = DomWindowHelper.getWindow();
       if (!!window) {
         this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
           self.jsonEditorChangedTimeoutId = -1;

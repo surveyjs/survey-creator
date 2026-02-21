@@ -7,6 +7,7 @@ import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
@@ -360,6 +361,7 @@ export class StringEditorViewModelBase extends Base {
     this.compostionInProgress = true;
   }
   public onBeforeInput(event: any): void {
+    const window = DomWindowHelper.getWindow();
     if (!this.compostionInProgress && this.maxLength > 0) {
       const currentValue = event.target.innerText;
       const insertedData = event.data || "";
@@ -390,6 +392,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
+    const window = DomWindowHelper.getWindow();
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
@@ -513,12 +516,17 @@ export class StringEditorViewModelBase extends Base {
 
   public onPaste(event: ClipboardEvent): void {
     if (this.editAsText) {
+      const window = DomWindowHelper.getWindow();
+      const document = DomDocumentHelper.getDocument();
       event.preventDefault();
       // get text representation of clipboard
       let text = event.clipboardData.getData("text/plain");
       if (!this.locString.allowLineBreaks && !this.connector?.allowLineBreaksOnEdit) text = clearNewLines(text);
       // insert text manually
-      const selection = window.getSelection();
+
+      const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;
+      const isShadowDom = rootNode instanceof ShadowRoot;
+      const selection = isShadowDom ? (rootNode as any).getSelection() : window.getSelection();
       if (!selection.rangeCount) return;
       selection.deleteFromDocument();
       selection.getRangeAt(0).insertNode(document.createTextNode(text));
@@ -547,18 +555,20 @@ export class StringEditorViewModelBase extends Base {
     return true;
   }
   public onKeyUp(event: KeyboardEvent): boolean {
-    if (event.keyCode === 9 && event.target === document.activeElement) {
-      select(event.target);
+    const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;
+    if (event.keyCode === 9 && event.target === rootNode.activeElement) {
+      select(event.target as HTMLElement);
     }
     return true;
   }
   private justFocused = false;
   public onMouseUp(event: MouseEvent): boolean {
+    const window = DomWindowHelper.getWindow();
     if (this.justFocused) {
       this.justFocused = false;
       if (!window) return false;
       if (window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
-        select(event.target);
+        select(event.target as HTMLElement);
       }
       return false;
     }

@@ -463,7 +463,7 @@ test.describe(title, () => {
 
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
-        const el = document.querySelectorAll(".svc-question__content")[idx];
+        const el = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-question__content")[idx];
         if (remove != "remove") {
           el.classList.add("svc-question__content--" + suffix);
         } else {
@@ -521,7 +521,7 @@ test.describe(title, () => {
 
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
-        const el = document.querySelectorAll(".svc-question__content")[idx];
+        const el = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-question__content")[idx];
         if (!el) return;
 
         if (remove != "remove") {
@@ -609,7 +609,12 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.querySelector("div")?.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      }
     });
 
     await page.setViewportSize({ width: 1600, height: 1000 });
@@ -645,7 +650,12 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.querySelector("div")?.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      }
     });
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
@@ -722,7 +732,12 @@ test.describe("DragDrop custom widget Screenshot", () => {
                     </label>
                   </div>
                 `;
-      document.body.appendChild(widgetTemplateForKo);
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.body.appendChild(widgetTemplateForKo);
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.appendChild(widgetTemplateForKo);
+      }
     });
 
     await hideAllAdornerActions(page);

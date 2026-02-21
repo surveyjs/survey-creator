@@ -1,3 +1,5 @@
+import { DomWindowHelper } from "survey-core";
+
 export function roundTo2Decimals(number: number): number {
   return Math.round(number * 100) / 100;
 }
@@ -75,6 +77,7 @@ export function assign(...inputs: Array<any>) {
 }
 
 export function getOS(): "Mac OS" | "iOS" | "Windows" | "Android" | "Linux" {
+  const window = DomWindowHelper.getWindow();
   const userAgent = window.navigator.userAgent,
     platform = (window.navigator as any)?.userAgentData?.platform || window.navigator.platform,
     macosPlatforms = ["macOS", "Macintosh", "MacIntel", "MacPPC", "Mac68K"],

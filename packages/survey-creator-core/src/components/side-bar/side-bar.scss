@@ -316,7 +316,7 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
   }
 }
 
-[dir="rtl"],
+:dir(rtl),
 [style*="direction:rtl"],
 [style*="direction: rtl"],
 .svc-full-container.svc-creator__side-bar--left {

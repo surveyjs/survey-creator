@@ -194,14 +194,14 @@ test.describe(title, () => {
 
     const isElementInViewport = async () => {
       return await page.evaluate(() => {
-        const element = document.querySelector("[data-name=logo] input") as HTMLElement;
+        const element = (window as any).creator.rootElement.getRootNode().querySelector("[data-name=logo] input") as HTMLElement;
         if (!element) return false;
         const getBoundValues = element.getBoundingClientRect();
 
         const windowHeight = window.innerHeight;
         const windowWidth = window.innerWidth;
 
-        return getBoundValues.bottom > 0 && getBoundValues.right > 0 && getBoundValues.left < (windowWidth || document.documentElement.clientWidth) && getBoundValues.top < (windowHeight || document.documentElement.clientHeight);
+        return getBoundValues.bottom > 0 && getBoundValues.right > 0 && getBoundValues.left < (windowWidth || (window as any).creator.rootElement.getRootNode().documentElement.clientWidth) && getBoundValues.top < (windowHeight || (window as any).creator.rootElement.getRootNode().documentElement.clientHeight);
       });
     };
 

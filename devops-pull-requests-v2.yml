@@ -804,7 +804,7 @@ jobs:
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 Vue"
 
-  - job: CreatorV2JS
+  - job: Preact_ShadowDOM_BoxSizing
     dependsOn: CreatorV2Core
     steps:
       - checkout: self

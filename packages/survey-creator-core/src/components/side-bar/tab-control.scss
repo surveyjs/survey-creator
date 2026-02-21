@@ -32,7 +32,7 @@
   padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
 }
 
-[dir="rtl"],
+:dir(rtl),
 [style*="direction:rtl"],
 [style*="direction: rtl"],
 .svc-creator__side-bar--left {

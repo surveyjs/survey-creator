@@ -214,7 +214,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     await page.evaluate(() => {
-      (document.querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
+      ((window as any).creator.rootElement.getRootNode().querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
     });
     await compareScreenshot(page, page.locator(".svc-question__content"), "surface-matrix-title-editing.png");
   });

@@ -91,6 +91,9 @@ export class PropertyGridViewModel extends Base {
   }
   private onNewSurveyCreated() {
     this.survey = this.propertyGridModel.survey;
+    if (!this.survey.rootElement) {
+      this.survey.rootElement = this.creator.rootElement;
+    }
     this.searchManager.setSurvey(this.survey);
     if (!!this.survey) {
       this.survey.onValueChanged.add((sender: SurveyModel, options: any) => {

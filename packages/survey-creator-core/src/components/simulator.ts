@@ -2,6 +2,7 @@ import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 
 import "./simulator.scss";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export class SurveySimulatorModel extends Base {
   private surveyChanged() {
@@ -90,10 +91,12 @@ export class SurveySimulatorModel extends Base {
     return this.currZoomScale;
   }
   public activateZoom = () => {
+    const document = DomDocumentHelper.getDocument();
     document.addEventListener("keydown", this.listenTryToZoom);
     document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
   };
   public deactivateZoom = () => {
+    const document = DomDocumentHelper.getDocument();
     document.removeEventListener("keydown", this.listenTryToZoom);
     document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
   };
@@ -126,18 +129,19 @@ export class SurveySimulatorModel extends Base {
     this.currZoomScale = type === "zero" ? 1 : this.currZoomScale * multiplier;
   }
   private zoomSimulator(type: "up" | "down" | "zero", event: any) {
+    const root = event.target?.getRootNode() || DomDocumentHelper.getDocument();
+    if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     event.preventDefault();
-
     this.changeZoomScale(type);
-
-    const simulator = document.getElementById("svd-simulator-wrapper");
+    const simulator = <HTMLElement>root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "scale(" + this.currZoomScale + ")";
-
     event.stopPropagation();
   }
   public resetZoomParameters(): void {
+    const root = this.survey.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
+    if (!(root instanceof Document || root instanceof ShadowRoot)) return;
     this.currZoomScale = 1;
-    const simulator = document.getElementById("svd-simulator-wrapper");
+    const simulator = <HTMLElement>root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "";
   }
 
@@ -201,7 +205,7 @@ export class SurveySimulatorModel extends Base {
   }
 }
 
-export var DEFAULT_MONITOR_DPI = (typeof window !== "undefined" ? window.devicePixelRatio : 1) * 96;
+export var DEFAULT_MONITOR_DPI = (typeof DomWindowHelper.getWindow() !== "undefined" ? DomWindowHelper.getWindow().devicePixelRatio : 1) * 96;
 export var simulatorDevices: {
   [index: string]: {
     cssPixelRatio?: number,

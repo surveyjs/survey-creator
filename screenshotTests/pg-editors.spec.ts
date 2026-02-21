@@ -138,7 +138,7 @@ test.describe(title, () => {
     const questionSelector = page.locator("div[data-name='defaultValue']");
 
     await compareScreenshot(page, questionSelector, "default-value-clear-button.png");
-    await page.evaluate(() => { (<HTMLElement>document.querySelector("div[data-name='defaultValue'] .svc-question-link__clear-button"))?.focus(); });
+    await page.evaluate(() => { (<HTMLElement>(window as any).creator.rootElement.getRootNode().querySelector("div[data-name='defaultValue'] .svc-question-link__clear-button"))?.focus(); });
     await compareScreenshot(page, questionSelector, "default-value-clear-button-focus.png");
   });
 
@@ -366,7 +366,7 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator("div[data-name='triggers'] .spg-action-button--icon").nth(1).click();
     await compareScreenshot(page, page.locator("div[data-name='triggers']"), "triggers-editor.png");
-    await page.evaluate(() => (<any>document).querySelector("[aria-label='row 1, column triggerType']").focus());
+    await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector("[aria-label='row 1, column triggerType']").focus());
     await resetHoverToCreator(page);
     await compareScreenshot(page, page.locator("div[data-name='triggers']"), "triggers-editor-focused.png");
   });
