@@ -523,7 +523,10 @@ export class StringEditorViewModelBase extends Base {
       let text = event.clipboardData.getData("text/plain");
       if (!this.locString.allowLineBreaks && !this.connector?.allowLineBreaksOnEdit) text = clearNewLines(text);
       // insert text manually
-      const selection = window.getSelection();
+
+      const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;
+      const isShadowDom = rootNode instanceof ShadowRoot;
+      const selection = isShadowDom ? (rootNode as any).getSelection() : window.getSelection();
       if (!selection.rangeCount) return;
       selection.deleteFromDocument();
       selection.getRangeAt(0).insertNode(document.createTextNode(text));
@@ -552,9 +555,9 @@ export class StringEditorViewModelBase extends Base {
     return true;
   }
   public onKeyUp(event: KeyboardEvent): boolean {
-    const document = DomDocumentHelper.getDocument();
-    if (event.keyCode === 9 && event.target === document.activeElement) {
-      select(event.target);
+    const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;
+    if (event.keyCode === 9 && event.target === rootNode.activeElement) {
+      select(event.target as HTMLElement);
     }
     return true;
   }
@@ -565,7 +568,7 @@ export class StringEditorViewModelBase extends Base {
       this.justFocused = false;
       if (!window) return false;
       if (window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
-        select(event.target);
+        select(event.target as HTMLElement);
       }
       return false;
     }
