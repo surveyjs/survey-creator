@@ -123,7 +123,7 @@ export class SurveyResultsByRow extends CreatorModelElement<any, any> {
               </span>
             ) : null}
 
-            {this.row.question ? <SurveyLocStringViewer locStr={this.row.question.locTitle} /> : <span>{this.row.title}</span>}
+            {this.row.question ? <SurveyLocStringViewer model={this.row.question.locTitle} /> : <span>{this.row.title}</span>}
           </td>
           <td key={2} className={this.row.isNode ? "svd-test-results__node-value" : "svd-dark-border-color"}>
             {this.row.getString(this.row.displayValue)}
