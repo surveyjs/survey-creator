@@ -23,15 +23,17 @@ test("saveSurvey and saveTheme actions integration", (): any => {
   creator.JSON = { headerView: "advanced", elements: [{ type: "text", name: "q1" }] };
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const saveSurveyAction = designerPlugin["saveSurveyAction"] as Action;
-  expect(saveSurveyAction.visible).toBeTruthy();
-  expect(saveSurveyAction.enabled).toBeFalsy();
-  creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   const saveThemeAction = themePlugin["saveThemeAction"] as Action;
 
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(0);
+  expect(saveSurveyAction.visible).toBeTruthy();
+  expect(saveSurveyAction.enabled).toBeFalsy();
+  expect(saveThemeAction.visible).toBeFalsy();
+  expect(saveThemeAction.enabled).toBeFalsy();
 
+  creator.activeTab = "theme";
   expect(saveSurveyAction.visible).toBeFalsy();
   expect(saveSurveyAction.enabled).toBeFalsy();
   expect(saveThemeAction.visible).toBeTruthy();

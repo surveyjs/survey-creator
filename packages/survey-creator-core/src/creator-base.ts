@@ -587,7 +587,7 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !pluginCreator) {
       pluginCreator = () => plugin;
     }
-    this.pluginTabs.push(name);
+    this.pluginTabs.push({ key: name, iconName });
     this.pluginMenuHash[name] = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
     if (!!plugin) {
       this.addPlugin(name, plugin);
@@ -1503,7 +1503,7 @@ export class SurveyCreatorModel extends Base
   public set tabResponsivenessMode(val: string) { }
   public tabbedMenu: TabbedMenuContainer;
   private pluginMenuHash: { [key: string]: TabbedMenuItem } = {};
-  private pluginTabs: Array<string> = [];
+  private pluginTabs: Array<{ key: string, iconName: string }> = [];
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -1961,17 +1961,15 @@ export class SurveyCreatorModel extends Base
   }
   public getTabsInfo(): any {
     const res = {};
-    this.pluginTabs.forEach(tabName => {
-      const tab = this.pluginMenuHash[tabName];
-      res[tabName] = { iconName: tab.iconName };
+    this.pluginTabs.forEach(item => {
+      res[item.key] = { iconName: item.iconName };
     });
     return res;
   }
   public getAvailableTabs(): Array<any> {
     const res = new Array<any>();
-    this.pluginTabs.forEach(tabName => {
-      const tab = this.pluginMenuHash[tabName];
-      res.push({ name: tabName, iconName: tab.iconName });
+    this.pluginTabs.forEach(item => {
+      res.push({ name: item.key, iconName: item.iconName });
     });
     return res;
   }
@@ -2001,7 +1999,8 @@ export class SurveyCreatorModel extends Base
     this.updateFooterToolbar();
   }
   public initialTabs() {
-    const tabs = [].concat(this.pluginTabs);
+    const tabs = [];
+    this.pluginTabs.forEach(item => tabs.push(item.key));
     const removeTab = (tabName: string, isRemove: boolean) => {
       if (isRemove) {
         const index = tabs.indexOf(tabName);
@@ -4327,7 +4326,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({
     defaultValue: false, onSet(val, target: SurveyCreatorModel) {
-      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme", false);
+      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme", val);
       if (!themeTabPlugin) {
         return;
       }
