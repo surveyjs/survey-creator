@@ -533,7 +533,6 @@ export class SurveyCreatorModel extends Base
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
-  private customTabNames: string[] = [];
   /**
    * @deprecated Use the [`addTab(tabOptions)`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#addTab) method instead.
    */
@@ -544,8 +543,7 @@ export class SurveyCreatorModel extends Base
     componentName?: string,
     index?: number
   ) {
-    this.tabbedMenu.addTab(name, plugin, title, undefined, componentName, index);
-    this.addPlugin(name, plugin);
+    this.addTab({ name, plugin, title, componentName, index });
   }
   /**
    * Adds a custom tab to Survey Creator.
@@ -577,17 +575,23 @@ export class SurveyCreatorModel extends Base
     let {
       name,
       plugin,
+      pluginCreator,
       title,
       iconName,
       componentName,
       index
     } = tabOptions;
-    if (!name || !plugin) {
+    if (!name || (!plugin && !pluginCreator)) {
       throw new Error("Plugin or name is not set");
     }
-    this.tabbedMenu.addTab(name, plugin, title, iconName, componentName, index);
-    this.customTabNames.push(name);
-    this.addPlugin(name, plugin);
+    if (!!plugin && !pluginCreator) {
+      pluginCreator = () => plugin;
+    }
+    this.pluginTabs.push(name);
+    this.pluginMenuHash[name] = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    if (!!plugin) {
+      this.addPlugin(name, plugin);
+    }
   }
   public addPlugin(name: string, plugin: ICreatorPlugin): void {
     this.plugins[name] = plugin;
@@ -598,28 +602,14 @@ export class SurveyCreatorModel extends Base
       this.pluginLicenseTexts = licenseTexts;
     }
   }
-  private removePlugin(name: string): void {
-    const plugin = this.getPlugin(name);
-    if (!plugin) return;
-    let index = this.getTabIndex(name);
-    if (index > -1) {
-      this.tabs.splice(index, 1);
+  public getPlugin<P extends ICreatorPlugin = ICreatorPlugin>(name: string, create: boolean = true): P {
+    name = this.fixPluginName(name);
+    if (create && !this.plugins[name] && !!this.pluginMenuHash[name]) {
+      const plugin = this.pluginMenuHash[name].plugin;
+      this.addPlugin(name, plugin);
+      this.updateFooterToolbar();
     }
-    delete this.plugins[name];
-
-    if (plugin.dispose) {
-      plugin.dispose();
-    }
-  }
-  private getTabIndex(id: string): number {
-    for (let i = 0; i < this.tabs.length; i++) {
-      if (this.tabs[i].id === id) return i;
-    }
-    return -1;
-  }
-  public getPlugin<P extends ICreatorPlugin = ICreatorPlugin>(name: string): P {
-    const pluginName = this.fixPluginName(name);
-    return this.plugins[pluginName] as P;
+    return this.plugins[name] as P;
   }
 
   private fixPluginName(pluginName: string) {
@@ -1512,6 +1502,8 @@ export class SurveyCreatorModel extends Base
   public get tabResponsivenessMode(): string { return ""; }
   public set tabResponsivenessMode(val: string) { }
   public tabbedMenu: TabbedMenuContainer;
+  private pluginMenuHash: { [key: string]: TabbedMenuItem } = {};
+  private pluginTabs: Array<string> = [];
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -1741,7 +1733,7 @@ export class SurveyCreatorModel extends Base
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this, true);
     this.updateToolboxIsCompact();
     this.initDragDrop();
-    this.initTabs();
+    this.initPlugins();
     this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
     this.currentOS = getOS();
@@ -1813,7 +1805,7 @@ export class SurveyCreatorModel extends Base
   }
   public setSidebarEnabled(value: boolean) {
     this.setShowSidebar(value, true);
-    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     designerPlugin?.setSidebarEnabled(value);
   }
   public setShowSidebar(value: boolean, isManualMode = false) {
@@ -1967,28 +1959,20 @@ export class SurveyCreatorModel extends Base
     const name: string = SurveyHelper.getNewPageName(this.survey.pages);
     return this.survey.addNewPage(name);
   }
-  protected initTabs() {
-    this.initPlugins();
-    this.initFooterToolbar();
-  }
   public getTabsInfo(): any {
-    return {
-      designer: { iconName: TabDesignerPlugin.iconName, init: () => new TabDesignerPlugin(this) },
-      preview: { iconName: TabTestPlugin.iconName, init: () => new TabTestPlugin(this) },
-      theme: { iconName: ThemeTabPlugin.iconName, init: () => new ThemeTabPlugin(this) }, //TODO change name
-      logic: { iconName: TabLogicPlugin.iconName, init: () => new TabLogicPlugin(this) },
-      json: { iconName: TabJsonEditorBasePlugin.iconName, init: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this) },
-      translation: { iconName: TabTranslationPlugin.iconName, init: () => new TabTranslationPlugin(this) }
-    };
+    const res = {};
+    this.pluginTabs.forEach(tabName => {
+      const tab = this.pluginMenuHash[tabName];
+      res[tabName] = { iconName: tab.iconName };
+    });
+    return res;
   }
   public getAvailableTabs(): Array<any> {
-    const res = this.tabs.map(t => ({ name: t.id, iconName: t.iconName }));
-    const tabInfo = this.getTabsInfo();
-    for (let key in tabInfo) {
-      if (res.filter(t => t.name == key).length == 0) {
-        res.push({ name: key, iconName: tabInfo[key].iconName });
-      }
-    }
+    const res = new Array<any>();
+    this.pluginTabs.forEach(tabName => {
+      const tab = this.pluginMenuHash[tabName];
+      res.push({ name: tabName, iconName: tab.iconName });
+    });
     return res;
   }
   public getTabs(): Array<any> {
@@ -2001,74 +1985,82 @@ export class SurveyCreatorModel extends Base
     });
     return res;
   }
-  //TODO-presets
   public setTabs(tabNames: Array<string>): void {
-    if (!Array.isArray(tabNames)) return;
-    const tabInfo = this.getTabsInfo();
-    // for (let i = tabNames.length - 1; i >= 0; i--) {
-    //   if (!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
-    // }
-    if (tabNames.length === 0) return;
-    for (let i = this.tabs.length - 1; i >= 0; i--) {
-      const tabId = this.tabs[i].id;
-      const id = this.fixPluginName(tabId);
-      if (tabNames.indexOf(id) < 0) {
-        this.removePlugin(tabId);
-      }
-    }
-    tabNames.forEach(id => {
-      if (tabInfo[id] && this.getTabIndex(id) < 0) {
-        tabInfo[id].init();
+    if (!Array.isArray(tabNames) || tabNames.length === 0) return;
+    const tabs = new Array<TabbedMenuItem>();
+    tabNames.forEach(tabName => {
+      const tab = this.pluginMenuHash[tabName];
+      if (!!tab) {
+        tabs.push(tab);
       }
     });
-    for (let i = 0; i < tabNames.length; i++) {
-      const index = this.getTabIndex(tabNames[i]);
-      if (index > -1 && index !== i) {
-        const item = this.tabs[index];
-        this.tabs.splice(index, 1);
-        this.tabs.splice(i, 0, item);
-      }
-    }
+    this.tabs = tabs;
     if (this.tabs.length > 0 && this.tabs.filter(t => t.id == this.activeTab).length == 0) {
       this.switchTab(this.tabs[0].id);
     }
+    this.updateFooterToolbar();
   }
   public initialTabs() {
-    const tabs = [];
-    if (this.showDesignerTab) {
-      tabs.push("designer");
-    }
-    if (this.showPreviewTab) {
-      tabs.push("preview");
-    }
-    if (this.showThemeTab) {
-      tabs.push("theme");
-    }
-    if (this.showLogicTab) {
-      tabs.push("logic");
-    }
-    if (this.showJSONEditorTab) {
-      tabs.push("json");
-    }
-    if (this.showTranslationTab) {
-      tabs.push("translation");
-    }
-    return [...tabs, ...this.customTabNames];
+    const tabs = [].concat(this.pluginTabs);
+    const removeTab = (tabName: string, isRemove: boolean) => {
+      if (isRemove) {
+        const index = tabs.indexOf(tabName);
+        if (index > -1) {
+          tabs.splice(index, 1);
+        }
+      }
+    };
+    removeTab("designer", !this.showDesignerTab);
+    removeTab("preview", !this.showPreviewTab);
+    removeTab("theme", !this.showThemeTab);
+    removeTab("logic", !this.showLogicTab);
+    removeTab("json", !this.showJSONEditorTab);
+    removeTab("translation", !this.showTranslationTab);
+    return tabs;
   }
   private initPlugins(): void {
     this.addPlugin("undoredo", new UndoRedoPlugin(this));
+    this.addTab({ name: "designer", pluginCreator: () => new TabDesignerPlugin(this), iconName: TabDesignerPlugin.iconName });
+    this.addTab({ name: "preview", pluginCreator: () => new TabTestPlugin(this), iconName: TabTestPlugin.iconName });
+    this.addTab({ name: "theme", pluginCreator: () => new ThemeTabPlugin(this), iconName: ThemeTabPlugin.iconName });
+    this.addTab({ name: "logic", pluginCreator: () => new TabLogicPlugin(this), iconName: TabLogicPlugin.iconName });
+    if (TabJsonEditorAcePlugin.hasAceEditor()) {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorAcePlugin(this), iconName: TabJsonEditorAcePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
+    } else {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorTextareaPlugin(this), iconName: TabJsonEditorTextareaPlugin.iconName, componentName: "svc-tab-json-editor-textarea" });
+    }
+    this.addTab({ name: "translation", pluginCreator: () => new TabTranslationPlugin(this), iconName: TabTranslationPlugin.iconName });
     const tabs = this.initialTabs();
     this.setTabs(tabs);
   }
-  private initFooterToolbar(): void {
+  private updateFooterToolbar(): void {
     if (!this.footerToolbar) {
       this.footerToolbar = new FooterToolbarActionContainer();
-      ["designer", "undoredo", "preview", "theme"].forEach((pluginKey: string) => {
-        const plugin = this.getPlugin(pluginKey);
-        if (!!plugin && !!plugin["addFooterActions"]) {
-          plugin["addFooterActions"]();
+    }
+    this.removePluginFooterActions("undoredo");
+    this.tabs.forEach(tab => this.addPluginFooterActions(tab.id));
+    this.addPluginFooterActions("undoredo");
+  }
+  private addPluginFooterActions(id: string): void {
+    const plugin = this.getPlugin(id, false);
+    if (!!plugin && !!plugin.addFooterActions &&
+      this.footerToolbar.actions.filter(a => (<any>a).plugin === id).length === 0) {
+      const beforeActions = {};
+      this.footerToolbar.actions.forEach(a => beforeActions[a.id] = true);
+      plugin.addFooterActions();
+      this.footerToolbar.actions.forEach(a => {
+        if (!beforeActions[a.id]) {
+          (<any>a).plugin = id;
         }
       });
+    }
+  }
+  private removePluginFooterActions(id: string): void {
+    for (let i = this.footerToolbar.actions.length - 1; i >= 0; i--) {
+      const action = this.footerToolbar.actions[i];
+      if ((<any>action).plugin === id) {
+        this.footerToolbar.actions.splice(i, 1);
+      }
     }
   }
   public getOptions(): ICreatorOptions {
@@ -2358,7 +2350,7 @@ export class SurveyCreatorModel extends Base
     this.doOnElementsChanged("");
   }
   private updatePlugin(name: string): void {
-    const plugin = this.getPlugin(this.activeTab);
+    const plugin = this.getPlugin(this.activeTab, false);
     if (!!plugin && !!plugin.update) {
       plugin.update();
     }
@@ -4335,7 +4327,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({
     defaultValue: false, onSet(val, target: SurveyCreatorModel) {
-      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme");
+      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme", false);
       if (!themeTabPlugin) {
         return;
       }
@@ -4796,7 +4788,7 @@ export class SurveyCreatorModel extends Base
    */
   public applyCreatorTheme(theme: ICreatorTheme): void {
     this.syncTheme(theme);
-    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin) {
       designerPlugin.setTheme();
     }
@@ -4819,7 +4811,7 @@ export class SurveyCreatorModel extends Base
     const newCssVariable = {};
     assign(newCssVariable, DefaultLight.cssVariables, theme?.cssVariables);
     this.patchLegacyCSSVariables(newCssVariable);
-    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
     }

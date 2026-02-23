@@ -1532,7 +1532,7 @@ const survey = new SurveyModel({
   ]
 });
 
-test("Reset on changing creator.JSON", () => {
+test("Reset on changing creator.JSON, #1", () => {
   let creator = new CreatorTester({ showTranslationTab: true });
   const json = {
     elements: [
@@ -1589,11 +1589,11 @@ test("Reset on changing creator.JSON", () => {
   expect(cellQuestion1.value).toEqual(null);
 });
 
-test("Reset on changing creator.JSON", () => {
+test("Reset on changing creator.JSON, #2", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
+  creator.activeTab = "translation";
   const action = creator.getActionBarItem("svd-translation-merge_locale_withdefault");
   expect(action).toBeTruthy();
-  creator.activeTab = "translation";
   expect(action.title).toEqual("Merge en with default locale");
   expect(action.tooltip).toEqual("Merge en with default locale");
   if (!editorLocalization.locales["de"]) {
@@ -2264,6 +2264,9 @@ test("Change translation list actions titles on changing locale", (): any => {
   };
   editorLocalization.locales["de"] = deutschStrings;
   const creator = new CreatorTester({ showTranslationTab: true });
+  // Due creating on request we need to set active tab to translation
+  creator.activeTab = "translation";
+  creator.activeTab = "designer";
   const dropdownAction = creator.getActionBarItem("svc-translation-show-all-strings");
   expect(dropdownAction).toBeTruthy();
   expect(dropdownAction.visible).toBeFalsy();
