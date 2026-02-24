@@ -200,6 +200,7 @@ export interface ITabOptions {
   iconName?: string;
   componentName?: string;
   index?: number;
+  isInternal?: boolean;
 }
 
 export interface ISurveyCreatorOptions {

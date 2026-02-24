@@ -579,7 +579,8 @@ export class SurveyCreatorModel extends Base
       title,
       iconName,
       componentName,
-      index
+      index,
+      isInternal
     } = tabOptions;
     if (!name || (!plugin && !pluginCreator)) {
       throw new Error("Plugin or name is not set");
@@ -587,7 +588,7 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !pluginCreator) {
       pluginCreator = () => plugin;
     }
-    this.pluginTabs.push({ key: name, iconName });
+    this.pluginTabs.push({ key: name, iconName, isInternal: isInternal || false });
     this.pluginMenuHash[name] = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
     if (!!plugin) {
       this.addPlugin(name, plugin);
@@ -1503,7 +1504,7 @@ export class SurveyCreatorModel extends Base
   public set tabResponsivenessMode(val: string) { }
   public tabbedMenu: TabbedMenuContainer;
   private pluginMenuHash: { [key: string]: TabbedMenuItem } = {};
-  private pluginTabs: Array<{ key: string, iconName: string }> = [];
+  private pluginTabs: Array<{ key: string, iconName: string, isInternal: boolean }> = [];
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -1960,15 +1961,17 @@ export class SurveyCreatorModel extends Base
     return this.survey.addNewPage(name);
   }
   public getTabsInfo(): any {
+    const tabs = this.getAvailableTabs();
     const res = {};
-    this.pluginTabs.forEach(item => {
-      res[item.key] = { iconName: item.iconName };
+    tabs.forEach(item => {
+      res[item.name] = { iconName: item.iconName };
     });
     return res;
   }
   public getAvailableTabs(): Array<any> {
     const res = new Array<any>();
     this.pluginTabs.forEach(item => {
+      if (item.isInternal) return;
       res.push({ name: item.key, iconName: item.iconName });
     });
     return res;

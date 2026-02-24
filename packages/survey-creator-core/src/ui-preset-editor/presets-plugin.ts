@@ -28,7 +28,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.creator.activeTab = this.activeTab;
   }
 
-  private confirmReset(onApply: ()=>void) {
+  private confirmReset(onApply: () => void) {
     libSettings.confirmActionAsync(getLocString("presets.plugin.resetConfirmation"),
       (confirm) => {
         if (confirm) {
@@ -45,7 +45,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName });
+    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
     creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
@@ -97,12 +97,12 @@ export class UIPresetEditor implements ICreatorPlugin {
       { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(()=>this.model?.resetToDefaults("page_languages")); } },
+      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(() => this.model?.resetToDefaults("page_languages")); } },
       { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.confirmReset(() => this.model?.resetToDefaults()); } },
     ];
 
     presets.forEach(p => {
-      p.action = (item)=>{
+      p.action = (item) => {
         this.presetsList.selectedItem = item;
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
