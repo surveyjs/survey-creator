@@ -2003,7 +2003,7 @@ export class SurveyCreatorModel extends Base
   }
   public initialTabs() {
     const tabs = [];
-    this.pluginTabs.forEach(item => tabs.push(item.key));
+    this.getAvailableTabs().forEach(item => tabs.push(item.name));
     const removeTab = (tabName: string, isRemove: boolean) => {
       if (isRemove) {
         const index = tabs.indexOf(tabName);
