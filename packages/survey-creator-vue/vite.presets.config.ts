@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
             vue: "Vue",
             "survey-core": "Survey",
             "survey-creator-core": "SurveyCreatorCore",
-            "survey-vue3-ui": "SurveyVue3",
+            "survey-vue3-ui": "SurveyVue",
           },
         },
       },
