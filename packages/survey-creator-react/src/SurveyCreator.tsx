@@ -202,7 +202,7 @@ export class SurveyCreator extends SurveyCreatorModel {
       <div key={key}>
         <span className={cssClasses.error.icon} aria-hidden="true" />
         <span className={cssClasses.error.item}>
-          <SurveyLocStringViewer locStr={error.locText} />
+          <SurveyLocStringViewer model={error.locText} />
         </span>
       </div>
     );
