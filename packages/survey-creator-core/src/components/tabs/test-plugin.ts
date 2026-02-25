@@ -91,7 +91,6 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "preview", plugin: this, iconName: TabTestPlugin.iconName });
     this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
