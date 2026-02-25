@@ -1,4 +1,4 @@
-import { urlPresets, test, expect, showPresets, doDragDrop } from "./helper";
+import { urlPresets, test, expect, showPresets, doDragDrop, showCreatorSettings } from "./helper";
 
 const title = "Presets";
 async function getRowsInputValues(matrix: any) {
@@ -7,17 +7,27 @@ async function getRowsInputValues(matrix: any) {
   );
   return values;
 }
-
+async function getTextsBySelector(selector: string, page: any) {
+  return (await page.locator(selector).filter({ visible: true }).allTextContents()).map(t => t.trim());
+}
 async function getTabsTexts(page: any) {
-  return (await page.locator(".svc-tabbed-menu-item").filter({ visible: true }).allTextContents()).map(t => t.trim());
+  return await getTextsBySelector(".svc-tabbed-menu-item", page);
 }
 
 async function getToolboxTexts(page: any) {
-  return (await page.locator(".svc-toolbox__item-title").filter({ visible: true }).allTextContents()).map(t => t.trim());
+  return await getTextsBySelector(".svc-toolbox__item-title", page);
 }
 
 async function getPropertiesTexts(page: any) {
-  return (await page.locator(".spg-checkbox__caption .sv-string-viewer, .spg-question__title .sv-string-viewer").filter({ visible: true }).allTextContents()).map(t => t.trim());
+  return await getTextsBySelector(".spg-checkbox__caption .sv-string-viewer, .spg-question__title .sv-string-viewer", page);
+}
+
+async function getMenuTexts(page: any) {
+  return await getTextsBySelector(".sps-list__item:not(.sps-list__item--disabled)", page);
+}
+
+async function getDropdownTexts(page: any) {
+  return await getTextsBySelector(".svc-list__item", page);
 }
 
 test.describe(title, () => {
@@ -412,6 +422,86 @@ test.describe(title, () => {
 
     await page.locator(".svc-sidebar-tabs").getByTitle("Custom").click();
     expect(await getPropertiesTexts(page)).toEqual(["Pages"]);
+  });
+
+  test("Hide default preset", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.locator(".spg-action-button").nth(1).click();
+
+    await page.getByRole("button", { name: "Save" }).click();
+
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Edit Presets list..."]);
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
+
+    await showCreatorSettings(page);
+    await page.getByText("Expert").click();
+
+    expect(await getDropdownTexts(page)).toEqual(["Basic", "Expert"]);
+  });
+
+  test("Add custom preset", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.getByText("Add new preset...").click();
+    await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
+    await page.getByRole("button", { name: "Add" }).nth(1).click();
+    const items = page.locator(".sv-popup__container table").nth(0);
+    expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert", "MyPreset"]);
+    await page.getByRole("button", { name: "Save" }).click();
+
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Edit Presets list..."]);
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
+
+    await showCreatorSettings(page);
+    await page.getByText("Expert").click();
+
+    expect(await getDropdownTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset"]);
+  });
+
+  test("Delete current custom preset in list editor switches to Basic", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.getByText("Add new preset...").click();
+    await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
+    await page.getByRole("button", { name: "Add" }).nth(1).click();
+    await page.getByRole("button", { name: "Save" }).click();
+
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Edit Presets list..."]);
+    await page.locator(".sps-list__item").filter({ hasText: "MyPreset" }).click();
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "MyPreset" }).click();
+
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    const items = page.locator(".sv-popup__container table").nth(0);
+    expect(await getRowsInputValues(items)).toContain("MyPreset");
+
+    await page.getByTitle("Delete").click();
+
+    await page.getByTitle("Yes, delete").click();
+    expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert"]);
+    await page.getByRole("button", { name: "Save" }).click();
+
+    await expect(page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" })).toBeVisible();
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" }).click();
+    await expect(page.locator(".sps-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
+  });
+
+  test("Check presets quit confirmation dialog", async ({ page }) => {
+    await page.getByText("Dansk").click();
+    await page.getByTitle("Quit").click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
+
+    await page.locator(".sv-popup__close-button").click();
+    await page.getByTitle("Quit").click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
+    await page.getByRole("button", { name: "Save and exit" }).click();
+    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
   });
 
 });

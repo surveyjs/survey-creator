@@ -317,4 +317,5 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     }
     return survey;
   }
+  protected;
 }
