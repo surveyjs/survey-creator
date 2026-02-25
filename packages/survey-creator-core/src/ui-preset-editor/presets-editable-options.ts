@@ -89,7 +89,17 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
           { name: "clearTranslationsOnSourceTextChange", type: "boolean" },
         ] },
       ] },
-
+      {
+        type: "panel",
+        title: " ",
+        name: this.navigationPanelName,
+        elements: [
+          {
+            type: "html",
+            html: "&nbsp"
+          }
+        ]
+      }
     ];
   }
 
@@ -99,6 +109,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
   }
   private patchElements(elements: any[]): any[] {
     return elements.map(element => {
+      if (element.name === this.navigationPanelName) return element;
       if (element.type === "panel") {
         if (element.state == "expanded") {
           element.title = editorLocalization.getString("tabs." + element.name);
@@ -215,6 +226,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
 
   public onGetPanelTitleActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     const prefix = this.fullPath + "_";
+    if (options.panel.name === this.navigationPanelName) return;
     if (options.panel.name.substring(0, prefix.length) !== prefix) return;
     const collapseIcon = "icon-collapsepanel-16x16";
     const expandIcon = "icon-expandpanel-16x16";

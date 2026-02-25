@@ -541,7 +541,7 @@ test("ui preset registration", () => {
   const creator = new CreatorTester();
   const sideBarPageModel = creator.sidebar.pages.filter(page => page.id === "creatorTheme")[0].componentData;
   expect(sideBarPageModel.elements).toHaveLength(2);
-  const survey = sideBarPageModel.elements[0].componentData.survey;
+  const survey = sideBarPageModel.elements[0].componentData.model.survey;
   expect(survey.getQuestionByName("presetName").choices.map(c => [c.value, c.text])).toEqual([["basic", "Basic"], ["advanced", "Advanced"]]);
 
   expect(creator.allowZoom).toBeTruthy();
