@@ -272,6 +272,11 @@
   margin-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
 }
 
+html[dir="rtl"] .sl-question__header--left {
+  margin-right: 0;
+  margin-left: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
+}
+
 .sl-row {
   .sd-rating {
     overflow-x: auto;
