@@ -1,5 +1,4 @@
-// Auto-generated theme: default-dark
-export const DefaultDark = {
+export default {
   "themeName": "default-dark",
   "iconSet": "v2",
   "isLight": false,
@@ -962,6 +961,4 @@ export const DefaultDark = {
     "--sjs2-border-offset-y-elevated-default": "4px",
     "--sjs2-border-offset-y-floating-default": "6px"
   }
-} as const;
-
-export default DefaultDark;
+};

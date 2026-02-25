@@ -1,5 +1,4 @@
-// Auto-generated theme: default-contrast
-export const contrastTheme = {
+export default {
   "themeName": "default-contrast",
   "iconSet": "v2",
   "isLight": true,
@@ -958,6 +957,4 @@ export const contrastTheme = {
     "--sjs2-border-offset-y-elevated-default": "4px",
     "--sjs2-border-offset-y-floating-default": "6px"
   }
-} as const;
-
-export default contrastTheme;
+};

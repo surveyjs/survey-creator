@@ -30,7 +30,7 @@ async function minifyCSS(code) {
   const result = await postcss([
     cssnano(),
     postcssDiscardComments({ removeAllButFirst: true })
-  ]).process(code);
+  ]).process(code, { from: undefined });
   return result.css;
 }
 
