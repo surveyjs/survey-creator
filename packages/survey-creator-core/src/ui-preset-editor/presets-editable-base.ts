@@ -10,6 +10,7 @@ export class CreatorPresetEditableBase {
   public parent: CreatorPresetEditableBase;
   protected get navigationPanelName(): string { return this.path + "_navigation"; }
   public children: Array<CreatorPresetEditableBase> = [];
+  public get isSettingUp() { return false; }
   public constructor(public preset: CreatorPresetBase) {
   }
   public get path() { return this.preset.getPath(); }

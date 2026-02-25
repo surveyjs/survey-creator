@@ -1,22 +1,51 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, LocalizableString, hasLicense, glc, ActionContainer, Action } from "survey-core";
-import { ICreatorPlugin, ICreatorPresetData, SurveyCreatorModel, saveToFileHandler, getLocString, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
+import { ICreatorPlugin, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
+import { PresetsManager, IPresetListItem } from "./presets-manager";
+import { showConfirmDialog } from "./confirm-dialog";
 
 /**
  * A class that instantiates the Preset Editor and provides APIs to manage its elements.
  */
 export class UIPresetEditor implements ICreatorPlugin {
+  static defaultPresetName = "expert";
+
   public model: CreatorPresetEditorModel;
   public static iconName = "icon-settings";
-  private activeTab;
+  private activeTab: string = "designer";
   private currentPresetIndex = 0;
   private currentValue;
   private designerPlugin;
   private toolboxCompact;
   private defaultJson;
 
+  private presetsManager;
+
+  private pagesList: ListModel;
   private presetsList: ListModel;
+
+  private saveAction: Action;
+  private saveCount = 0;
+
+  /**
+   * Custom function to handle preset saving. When set, it is called instead of the default save handler.
+   * @param saveNo The sequential save number (0-based).
+   * @param callback Call this when the custom save is complete to apply the default save behavior.
+   */
+  public savePresetFunc: (saveNo: number, callback: () => void) => void;
+
+  /**
+   * An event raised when the presets list is saved in the Edit Presets List dialog.
+   *
+   * Parameters:
+   *
+   * - `sender`: `UIPresetEditor`\
+   * A `UIPresetEditor` instance that raised the event.
+   * - `options.presets`: `IPresetListItem[]`\
+   * The updated presets list.
+   */
+  public onPresetListSaved = new EventBase<UIPresetEditor, { presets: IPresetListItem[] }>();
 
   private showPresets() {
     this.activeTab = this.creator.activeTab;
@@ -24,24 +53,39 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   private hidePresets() {
+    if (this.presetsManager && !this.presetsManager.isSaved) {
+      this.model.json = this.defaultJson;
+      this.model.applyFromSurveyModel(false);
+    }
+    this.presetsManager.update();
+    this.presetsManager.presetSelector.value = this.presetsList.selectedItem.id;
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
   }
 
-  private confirmReset(onApply: () => void) {
-    libSettings.confirmActionAsync(getLocString("presets.plugin.resetConfirmation"),
-      (confirm) => {
-        if (confirm) {
-          onApply();
-        }
-      },
+  private confirmReset(onApply: ()=>void) {
+    showConfirmDialog(this.creator,
       {
-        applyTitle: getLocString("presets.plugin.resetConfirmationOk"),
-        locale: this.creator.locale,
-        cssClass: "sv-popup--confirm svc-creator-popup"
-      }
-    );
-
+        category: "danger",
+        title: getLocString("presets.plugin.resetConfirmation"),
+        message: getLocString("presets.plugin.resetConfirmationMessage"),
+        applyText: getLocString("presets.plugin.resetConfirmationOk"),
+        cancelText: getLocString("presets.plugin.resetConfirmationCancel"),
+        iconName: "icon-warning-24x24",
+        showCloseButton: false,
+        onApply: () => { onApply(); return true; }, onCancel: () => { return true; }
+      });
+  }
+  private confirmQuit(onApply: ()=>void, onDiscard: ()=>void) {
+    showConfirmDialog(this.creator, {
+      title: getLocString("presets.plugin.quitConfirmation"),
+      message: getLocString("presets.plugin.quitConfirmationMessage"),
+      applyText: getLocString("presets.plugin.quitConfirmationSave"),
+      cancelText: getLocString("presets.plugin.quitConfirmationDiscard"),
+      iconName: "icon-warning-24x24",
+      showCloseButton: true,
+      onApply: () => { onApply(); return true; }, onCancel: () => { onDiscard(); return true; }
+    });
   }
 
   constructor(private creator: SurveyCreatorModel) {
@@ -50,24 +94,102 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
-    settingsPage.componentData.elements[0].componentData.showPresets = () => this.showPresets();
+    settingsPage.componentData.elements[0].componentData.model.showPresets = () => this.showPresets();
     this.toolboxCompact = creator.toolbox.forceCompact;
+    this.presetsManager = new PresetsManager(creator);
+    this.presetsManager.onPresetListSaved = (presets) => {
+      this.onPresetListSaved.fire(this, { presets });
+    };
+    this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
+      this.model.json = preset.json;
+      this.setStatus("initial");
+    };
+    this.creator.onSurveyInstanceCreated.add((_, o) => {
+      if (o.area == "designer-tab:creator-settings:preset") {
+        this.presetsManager.presetSelector = o.survey.getQuestionByName("presetName");
+        //this.presetsManager.addPresetsListEditor(o.survey, (item) => { });
+        this.presetsManager.update();
+      }
+    });
   }
 
   /**
-   * An event raised when a user clicks **Save & Exit** in the Preset Editor.
-   *
-   * Parameters:
-   *
-   * - `sender`: `UIPresetEditor`\
-   * A `UIPresetEditor` instance that raised the event.
-   * - `options.preset`: `ICreatorPresetData`\
-   * A preset configuration that was applied to the Survey Creator.
+   * Adds a new UI preset to UI Preset Editor.
+   * @param preset A [UI preset] to add.
+   * @see removePreset
    */
-  public onPresetSaved = new EventBase<UIPresetEditor, { preset: ICreatorPresetData }>();
+  public addPreset(preset: UIPreset) {
+    this.presetsManager.addPreset({ presetName: preset.name, json: preset.getJson() });
+  }
+  /**
+   * Removes a UI theme from Theme Editor.
+   * @param presetAccessor A [UI preset] to delete or a preset identifier.
+   * @see addPreset
+   */
+  public removePreset(presetAccessor: string | UIPreset): void {
+    this.presetsManager.removePreset(typeof(presetAccessor) === "string" ? presetAccessor : presetAccessor.name);
+  }
 
-  protected saveHandler() {
-    this.onPresetSaved.fire(this, { preset: this.model.json });
+  /**
+   * Returns a preset by name.
+   * @param name The preset identifier.
+   * @returns The preset configuration or undefined if not found.
+   */
+  public getPreset(name: string): ICreatorPresetConfig | undefined {
+    return this.presetsManager.getPreset(name);
+  }
+
+  /**
+   * Returns the currently selected preset.
+   */
+  public getCurrentPreset(): ICreatorPresetConfig | undefined {
+    return this.presetsManager.getCurrentPreset();
+  }
+
+  /**
+   * Mutable array of all presets. Includes presets from register, add, or user-saved.
+   * Each item has: name, visible, removable (true for custom presets), sortable.
+   */
+  public get presets(): IPresetListItem[] {
+    return this.presetsManager.getPresetsArray();
+  }
+
+  private performSave(closeOnSave = false) {
+    if (this.savePresetFunc) {
+      this.setStatus("saving");
+      this.savePresetFunc(this.saveCount, () => {
+        this.saveHandler(closeOnSave);
+      });
+    } else {
+      this.saveHandler(closeOnSave);
+    }
+  }
+
+  private saveOrSaveAs(closeOnSave = false) {
+    const currentName = this.getCurrentPreset()?.presetName;
+    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+      this.performSave(closeOnSave);
+    } else {
+      this.saveAsHandler(closeOnSave);
+    }
+  }
+
+  protected saveHandler(closeOnSave = false) {
+    this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
+    this.saveCount++;
+    this.setStatus("saved");
+    if (closeOnSave) {
+      this.hidePresets();
+    }
+  }
+  protected saveAsHandler(closeOnSave = false) {
+    this.presetsManager.saveAs(this.model.json, ()=> { this.performSave(closeOnSave); });
+  }
+  protected setStatus(status: "saved" | "unsaved" | "saving" | "initial") {
+    this.presetsManager.setStatus(status === "unsaved");
+    const statusAction = this.model.navigationBar.getActionById("presets-status");
+    statusAction.visible = status === "unsaved";
+    statusAction.title = getLocString("presets.plugin.status." + status.toLowerCase());
   }
   public saveToFileHandler = saveToFileHandler;
 
@@ -83,18 +205,16 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.model.model.data = this.currentValue;
     }
     this.designerPlugin.activateSidebar();
-    this.model.model.onComplete.add(() => this.hidePresets());
 
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
     const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
 
-    const defaultPresets = PredefinedCreatorPresets.map(presetName => ({ id: presetName, title: getLocString("preset.names." + presetName), action: (item: IAction) => { this.model.json = CreatorPresets[presetName].json; } })) as IAction[];
-    if (defaultPresets.length > 0) {
-      defaultPresets.unshift({ id: "defaultSettings", title: getLocString("presets.plugin.defaultSettings"), css: "sps-list__item--label", enabled: false });
-    }
+    this.model.model.onComplete.add(() => this.hidePresets());
+    const defaultPresets = this.presetsManager.presetsMenuItems;
 
     const tools = [
-      { id: "save", title: getLocString("presets.plugin.save"), markerIconName: "check-24x24", action: () => this.saveHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveOrSaveAs() }, //locTitleName: "presets.plugin.save"
+      { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAsHandler() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
       { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(() => this.model?.resetToDefaults("page_languages")); } },
@@ -102,8 +222,8 @@ export class UIPresetEditor implements ICreatorPlugin {
     ];
 
     presets.forEach(p => {
-      p.action = (item) => {
-        this.presetsList.selectedItem = item;
+      p.action = (item)=>{
+        this.pagesList.selectedItem = item;
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
     });
@@ -113,9 +233,10 @@ export class UIPresetEditor implements ICreatorPlugin {
       horizontalPosition: "center" as any,
       searchEnabled: false,
       cssClass: "sps-popup-menu sps-popup-menu--dropdown",
-      cssClasses: listComponentCss
+      cssClasses: listComponentCss,
     };
 
+    let curentlySelectedPreset: IAction;
     const listAction = createDropdownActionModel({
       items: [],
       id: "presets-list",
@@ -126,6 +247,15 @@ export class UIPresetEditor implements ICreatorPlugin {
     }, {
       ...popupOptions,
       items: defaultPresets,
+      onSelectionChanged: (selectedItem) => {
+        if (selectedItem.id === "editPresetsList") {
+          this.presetsList.selectedItem = curentlySelectedPreset;
+          if (curentlySelectedPreset?.title) listAction.title = curentlySelectedPreset.title;
+        } else {
+          curentlySelectedPreset = selectedItem;
+        }
+      },
+      onBlur: () =>{ listAction.popupModel.hide(); }
     }, this.model.model);
 
     const pagesAction = createDropdownActionModel({
@@ -138,6 +268,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     }, {
       ...popupOptions,
       items: presets,
+      onBlur: () =>{ pagesAction.popupModel.hide(); }
     }, this.model.model);
 
     const editAction = createDropdownActionModel({
@@ -151,14 +282,29 @@ export class UIPresetEditor implements ICreatorPlugin {
       ...popupOptions,
       onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
       items: tools,
+      onBlur: () =>{ editAction.popupModel.hide(); }
     }, this.model.model);
+
+    const statusAction = new Action({
+      id: "presets-status",
+      enabled: false,
+      visible: false,
+      title: "Saved",
+      css: "sps-navigation-action sps-navigation-action--label sps-navigation-action--large-icon",
+    });
 
     const quitAction = new Action({
       id: "presets-quit",
       iconName: "icon-exit-24x24",
       title: getLocString("presets.plugin.quit"),
       css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
-      action: () => { this.saveHandler(); this.hidePresets(); }
+      action: () => {
+        if (this.presetsManager.isSaved) {
+          this.hidePresets();
+          return;
+        }
+        this.confirmQuit(() => this.saveOrSaveAs(true), () => this.hidePresets());
+      }
     });
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
@@ -166,17 +312,33 @@ export class UIPresetEditor implements ICreatorPlugin {
     if (defaultPresets.length > 0)this.model.navigationBar.addAction(listAction);
     this.model.navigationBar.addAction(pagesAction);
     this.model.navigationBar.addAction(editAction);
+    this.model.navigationBar.addAction(statusAction);
     this.model.navigationBar.addAction(quitAction);
-    this.presetsList = pagesAction.popupModel.contentComponentData.model;
+    this.pagesList = pagesAction.popupModel.contentComponentData.model;
+    this.presetsList = listAction.popupModel.contentComponentData.model;
+    this.presetsManager.presetsList = this.presetsList;
     const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
-    this.presetsList.selectedItem = this.presetsList.actions[0];
-    pagesAction.title = this.presetsList.selectedItem.title || "";
+    this.saveAction = editAction.popupModel.contentComponentData.model.getActionById("save");
+    this.pagesList.selectedItem = this.pagesList.actions[0];
+    pagesAction.title = this.pagesList.selectedItem.title || "";
+
     this.model.model.onCurrentPageChanged.add((_, options) => {
-      this.presetsList.selectedItem = this.presetsList.actions[this.model.model.currentPageNo];
+      this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
+      pagesAction.title = this.pagesList.selectedItem.title || "";
       resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
-      resetCurrentAction.action = () => { this.model?.resetToDefaults(this.presetsList.selectedItem.id); };
+      resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
 
+    this.model.onJsonChangedCallback = () => {
+      this.setStatus("unsaved");
+    };
+
+    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector?.value)[0];
+    curentlySelectedPreset = this.presetsList.selectedItem;
+    if (this.presetsList.selectedItem) {
+      this.presetsList.selectedItem.action(this.presetsList.selectedItem);
+      listAction.title = this.presetsList.selectedItem.title || "";
+    }
     setTimeout(() => {
       presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
     }, 100);

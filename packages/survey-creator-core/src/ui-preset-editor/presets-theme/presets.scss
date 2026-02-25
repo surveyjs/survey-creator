@@ -13,6 +13,7 @@
 @use "blocks/sps-list.scss";
 @use "blocks/sps-popup.scss";
 @use "blocks/sps-navigation.scss";
+@use "blocks/sps-confirmation.scss";
 
 .svc-tab-designer.svc-tab-designer--presets {
   background: white;
@@ -22,7 +23,6 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  height: 0;
   flex-grow: 1;
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
