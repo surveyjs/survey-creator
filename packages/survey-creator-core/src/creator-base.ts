@@ -3107,8 +3107,7 @@ export class SurveyCreatorModel extends Base
     });
     const logic = new SurveyLogic(survey);
     for (let key in this.newQuestionChangedNames) {
-      const newQuestionName = this.newQuestionChangedNames[key];
-      logic.renameQuestion(key, newQuestionName);
+      logic.renameQuestion(key, this.newQuestionChangedNames[key]);
     }
     survey.getAllQuestions(false, true).forEach(q => {
       const valName = q["valueName"];
@@ -3154,10 +3153,10 @@ export class SurveyCreatorModel extends Base
     var elType = element["getType"]();
     var newName = this.getNewName(elType, element.isPanel);
     if (newName != element.name) {
-      element.name = newName;
       if (element.isQuestion) {
         this.newQuestionChangedNames[element.name] = newName;
       }
+      element.name = newName;
     }
     if (element.isPanel || element.isPage) {
       if (element.isPanel) {
