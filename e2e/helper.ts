@@ -57,8 +57,8 @@ export const getJSON = async (page: Page) => {
 };
 
 interface IDragToElementOptions {
-  elementPosition?: {x: number, y: number};
-  targetPosition?: {x: number, y: number};
+  elementPosition?: {x?: number, y?: number};
+  targetPosition?: {x?: number, y?: number};
   steps?: number;
 }
 
@@ -152,6 +152,13 @@ export async function changeToolboxLocation(page: Page, newVal: string) {
 
 export async function getPagesLength(page: Page): Promise<number> {
   return await page.evaluate(() => window["creator"].survey.pages.length);
+}
+export async function getQuestionsLength(page: Page): Promise<number> {
+  return await page.evaluate(() => window["creator"].survey.getAllQuestions().length);
+}
+
+export async function getQuestionNameByIndex(page: Page, index: number): Promise<string> {
+  return await page.evaluate((i) => window["creator"].survey.getAllQuestions()[i].name, index);
 }
 
 export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
