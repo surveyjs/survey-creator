@@ -3095,6 +3095,7 @@ export class SurveyCreatorModel extends Base
     this.updateNewElementExpressions(element);
   }
   private updateNewElementExpressions(element: ISurveyElement) {
+    if (Object.keys(this.newQuestionChangedNames).length === 0) return;
     const survey = this.createSurvey({}, "updateNewElementExpressions", undefined, (survey: SurveyModel): void => {
       survey.setDesignMode(true);
       if (element.isPage) {
@@ -3105,9 +3106,16 @@ export class SurveyCreatorModel extends Base
       }
     });
     const logic = new SurveyLogic(survey);
-    for (var key in this.newQuestionChangedNames) {
-      logic.renameQuestion(key, this.newQuestionChangedNames[key]);
+    for (let key in this.newQuestionChangedNames) {
+      const newQuestionName = this.newQuestionChangedNames[key];
+      logic.renameQuestion(key, newQuestionName);
     }
+    survey.getAllQuestions(false, true).forEach(q => {
+      const valName = q["valueName"];
+      if (valName && this.newQuestionChangedNames[valName]) {
+        q["valueName"] = this.newQuestionChangedNames[valName];
+      }
+    });
   }
 
   protected getAllQuestions(includeNewItems: boolean = true): Array<any> {
@@ -3145,7 +3153,7 @@ export class SurveyCreatorModel extends Base
   protected setNewNamesCore(element: ISurveyElement) {
     var elType = element["getType"]();
     var newName = this.getNewName(elType, element.isPanel);
-    if (newName != element.name) {
+    if (newName != element.name && element.isQuestion) {
       this.newQuestionChangedNames[element.name] = newName;
       element.name = newName;
     }
