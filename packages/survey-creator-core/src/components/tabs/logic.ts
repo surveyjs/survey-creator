@@ -373,7 +373,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   private getValidators(): Array<Base> {
     var res = [];
-    var questions = this.survey.getAllQuestions();
+    var questions = this.survey.getAllQuestions(false, true);
     for (var i = 0; i < questions.length; i++) {
       this.AddElements((<Question>questions[i]).validators, res);
     }
@@ -381,7 +381,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   private getItemValues(): Array<Base> {
     var res = [];
-    var questions = this.survey.getAllQuestions();
+    var questions = this.survey.getAllQuestions(false, true);
     for (var i = 0; i < questions.length; i++) {
       var q = questions[i];
       ["choices", "columns", "rows"].forEach(propName => this.addItemValuesCore(q, propName, res));
