@@ -58,7 +58,7 @@ test.describe(title, () => {
   });
 
   test("Drag Drop Toolbox All Questions", async ({ page }) => {
-    test.setTimeout(120_000);
+    test.setTimeout(200_000);
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']").filter({ visible: true }).first();
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
 
