@@ -3153,9 +3153,11 @@ export class SurveyCreatorModel extends Base
   protected setNewNamesCore(element: ISurveyElement) {
     var elType = element["getType"]();
     var newName = this.getNewName(elType, element.isPanel);
-    if (newName != element.name && element.isQuestion) {
-      this.newQuestionChangedNames[element.name] = newName;
+    if (newName != element.name) {
       element.name = newName;
+      if (element.isQuestion) {
+        this.newQuestionChangedNames[element.name] = newName;
+      }
     }
     if (element.isPanel || element.isPage) {
       if (element.isPanel) {
