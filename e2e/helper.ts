@@ -50,6 +50,12 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+export const setSurveyProp = async (page: Page, propName: string, value: unknown) => {
+  await page.evaluate(({ propName, value }) => {
+    window["creator"].survey[propName] = value;
+  }, { propName, value });
+};
+
 export const getJSON = async (page: Page) => {
   return await page.evaluate(() => {
     return JSON.parse(window["creator"].text);
@@ -110,6 +116,10 @@ export function getBarItemByTitle(page: Page, text: string): Locator {
   return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
 }
 
+export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
+  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+}
+
 export function getListItemByText(page: Page, text: string): Locator {
   return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
 }
@@ -132,6 +142,10 @@ export const explicitErrorHandler = async (page: Page) => {
     });
   });
 };
+
+export function getVisibleElement(page: Page, selector: string) {
+  return page.locator(selector).filter({ visible: true });
+}
 
 export async function changeToolboxScrolling(page: Page, hasScroll: boolean) {
   await page.evaluate((newVal) => {

@@ -255,8 +255,7 @@ test.describe(title, () => {
     const dropdownPopup = page.locator(".svc-logic-question-value .sv-popup__content");
     await expect(dropdownPopup).toBeVisible();
     await expect(dropdownPopup.locator(".sv-list__item").getByText("Item 2")).toBeVisible();
-    await page.screenshot({ path: "test-results/logic/edit-logic-rule.png", fullPage: true });
-    await dropdownPopup.locator(".sv-list__item").getByText("Item 2").filter({ visible: true }).click();
+    await dropdownPopup.locator(".sv-list__item").getByText("Item 2").click();
 
     await expect(logicQuestionSelector(page).last()).toContainText("q2");
     await logicQuestionSelector(page).last().click();
@@ -425,8 +424,7 @@ test.describe(title, () => {
     const dropdownPopup = page.locator(".svc-logic-question-value .sv-popup__content");
     await expect(dropdownPopup).toBeVisible();
     await expect(dropdownPopup.locator(".sv-list__item").getByText("Item 2")).toBeVisible();
-    await page.screenshot({ path: "test-results/logic/modified-rules-without-saving.png", fullPage: true });
-    await dropdownPopup.locator(".sv-list__item").getByText("Item 2").filter({ visible: true }).click();
+    await dropdownPopup.locator(".sv-list__item").getByText("Item 2").click();
 
     await logicActionSelector(page).first().click();
     await listItemClick(page, "Show/hide question");
