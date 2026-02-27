@@ -35,7 +35,8 @@ test.describe(title, () => {
     await page.locator(".svc-json-editor-tab__content").click();
     await page.keyboard.press("Control+a");
     await page.keyboard.press("Delete");
-    expect(await page.getByRole("textbox", { name: "JSON Editor" }).textContent()).toBe("");
+    const jsonEditorContent = (await page.getByRole("textbox", { name: "JSON Editor" }).textContent())?.trim();
+    await expect(jsonEditorContent).toBe("");
 
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
     await expect(pages).toHaveCount(1);

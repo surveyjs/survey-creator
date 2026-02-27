@@ -251,8 +251,11 @@ test.describe(title, () => {
     expect(await logicDropdownValueSelector(page).first().locator(".sv-string-viewer").textContent()).toBe("Item 1");
     await expect(logicDropdownValueSelector(page).first()).toBeVisible();
     await logicDropdownValueSelector(page).first().click();
-    await expect(page.locator(".svc-logic-question-value .sv-popup__content")).toBeVisible();
-    await page.locator(".sv-popup__content .sv-list__item").getByText("Item 2").filter({ visible: true }).click();
+
+    const dropdownPopup = page.locator(".svc-logic-question-value .sv-popup__content");
+    await expect(dropdownPopup).toBeVisible();
+    await expect(dropdownPopup.locator(".sv-list__item").getByText("Item 2")).toBeVisible();
+    await dropdownPopup.locator(".sv-list__item").getByText("Item 2").click();
 
     await expect(logicQuestionSelector(page).last()).toContainText("q2");
     await logicQuestionSelector(page).last().click();
@@ -417,8 +420,11 @@ test.describe(title, () => {
 
     await expect(logicDropdownValueSelector(page).first()).toBeVisible();
     await logicDropdownValueSelector(page).first().click();
-    await expect(page.locator(".svc-logic-question-value .sv-popup__content")).toBeVisible();
-    await page.locator(".sv-popup__content .sv-list__item").getByText("Item 2").filter({ visible: true }).click();
+
+    const dropdownPopup = page.locator(".svc-logic-question-value .sv-popup__content");
+    await expect(dropdownPopup).toBeVisible();
+    await expect(dropdownPopup.locator(".sv-list__item").getByText("Item 2")).toBeVisible();
+    await dropdownPopup.locator(".sv-list__item").getByText("Item 2").click();
 
     await logicActionSelector(page).first().click();
     await listItemClick(page, "Show/hide question");
