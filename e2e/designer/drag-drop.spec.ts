@@ -682,7 +682,7 @@ test.describe(title, () => {
       options: {
         steps: 10,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: item3Width / 2, y: item3Height / 2 + 30 },
+        targetPosition: { x: item3Width / 2, y: 30 },
       },
     });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
@@ -756,7 +756,7 @@ test.describe(title, () => {
       options: {
         steps: 10,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: rankingItem3Width / 2, y: rankingItem3Height / 2 + 30 },
+        targetPosition: { x: rankingItem3Width / 2, y: 30 },
       },
     });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
@@ -799,7 +799,7 @@ test.describe(title, () => {
       options: {
         steps: 10,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: animationItem3Width / 2, y: animationItem3Height / 2 + 30 },
+        targetPosition: { x: animationItem3Width / 2, y: 30 },
       },
     });
 
@@ -915,7 +915,7 @@ test.describe(title, () => {
       options: {
         steps: 20,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: matrixItem1Width / 2 + 5, y: matrixItem1Height / 2 + 5 },
+        targetPosition: { x: 5, y: 5 },
       },
     });
     expect(await getItemValueByIndex(page, "question1", 0)).toEqual("Item 2");
@@ -928,7 +928,7 @@ test.describe(title, () => {
       options: {
         steps: 20,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: matrixItem3Width / 2 + 5, y: matrixItem3Height - 5 },
+        targetPosition: { x: 5, y: matrixItem3Height - 5 },
       },
     });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
@@ -965,7 +965,7 @@ test.describe(title, () => {
       options: {
         steps: 20,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: page1Width / 2 + 5, y: page1Height / 2 + 5 },
+        targetPosition: { x: 5, y: 5 },
       },
     });
 
@@ -996,7 +996,7 @@ test.describe(title, () => {
       options: {
         steps: 20,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: firstRowWidth / 2, y: firstRowHeight / 2 + 25 },
+        targetPosition: { x: firstRowWidth / 2, y: 25 },
       },
     });
     await doDragDrop({
@@ -1026,7 +1026,7 @@ test.describe(title, () => {
       options: {
         steps: 20,
         elementPosition: { x: 5, y: 5 },
-        targetPosition: { x: question3WidthDyn / 2, y: question3HeightDyn / 2 + 1 },
+        targetPosition: { x: question3WidthDyn / 2, y: 1 },
       },
     });
     await doDragDrop({
@@ -1220,7 +1220,7 @@ test.describe(title, () => {
         elementPosition: { x: 5, y: 5 },
         targetPosition: {
           x: panelWidthSameRow - 10,
-          y: panelHeightSameRow / 2 + 100,
+          y: 100,
         },
       },
     });
@@ -1266,8 +1266,8 @@ test.describe(title, () => {
         steps: 10,
         elementPosition: { x: 150, y: 5 },
         targetPosition: {
-          x: panel1WidthSameRowTwo / 2 + 150,
-          y: panel1HeightSameRowTwo / 2 + 150,
+          x: 150,
+          y: 150,
         },
       },
     });
@@ -1308,7 +1308,7 @@ test.describe(title, () => {
         steps: 10,
         elementPosition: { x: 10, y: 10 },
         targetPosition: {
-          x: existingPageWidth / 2 + 150,
+          x: 150,
           y: existingPageHeight - 100,
         },
       },
