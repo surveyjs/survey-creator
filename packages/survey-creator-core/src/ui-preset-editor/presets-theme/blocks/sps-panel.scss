@@ -1,6 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "./variables.scss" as *;
-@use "../fonts" as *;
+@use "../../../typography-mixins.scss" as *;
 
 .sps-panel--with-frame {
   border-radius: var(--sjs2-radius-x250, 20px);

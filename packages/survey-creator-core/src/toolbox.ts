@@ -1345,11 +1345,13 @@ export class QuestionToolbox
 
     for (var i = 0; i < questions.length; i++) {
       const name = questions[i];
-      let question = ElementFactory.Instance.createElement(name, "q1");
-      if (!question) {
-        question = Serializer.createClass(name);
+      const defaultJson = QuestionToolbox.getQuestionDefaultSettings(name);
+      let question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
+      if (!!defaultJson) {
+        question.fromJSON(defaultJson);
       }
-      const json = this.getQuestionJSON(question);
+      const json = question.toJSON();
+      json.type = name;
       delete json.name;
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {

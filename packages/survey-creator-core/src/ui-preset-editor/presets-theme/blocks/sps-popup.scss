@@ -1,6 +1,6 @@
 @use "../../../variables.scss" as *;
 @use "./variables.scss" as *;
-@use "../fonts" as *;
+@use "../../../typography-mixins.scss" as *;
 
 .sps-popup-menu.sv-popup--menu-popup {
   &.sps-popup-menu--always-on-top {
@@ -27,6 +27,7 @@
 }
 
 .sps-popup-menu.sps-popup-menu--dropdown {
+  height: 0;
   .sv-popup__container {
     padding-top: var(--sjs2-spacing-x50, 4px);
   }
@@ -41,6 +42,11 @@
 
 
 .sps-popup {
+  .sv-popup__body-header {
+    @include sjs2--typography--medium-strong;
+    color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  }
+
   &.sv-popup--modal-popup {
     z-index: 3000;
     :has(.sps-page) {
@@ -50,9 +56,6 @@
     .sv-components-row {
       flex-direction: row;
     }
-  }
-  .sps-root-modern {
-    height: initial;
   }
 
   .sv-popup__body-footer .sv-action-bar {
@@ -124,4 +127,13 @@
     gap: var(--sjs2-spacing-x200, 16px);
     padding: 0;
   }
+ 
 }
+
+.sps-popup--level2 {
+  &.sv-popup--modal-popup.svc-property-editor .sv-popup__container {
+      .sv-components-column--expandable {
+        min-width: 540px
+      }
+    } 
+  }

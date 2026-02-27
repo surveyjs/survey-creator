@@ -188,16 +188,19 @@ export interface ICreatorPlugin {
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   onLocaleChanged?: () => void;
   getLicenseText?: (hasCreatorLicense: boolean, creatorKeyDateString: string) => string;
+  addFooterActions?: () => void;
   model: Base;
 }
 
 export interface ITabOptions {
   name: string;
-  plugin: ICreatorPlugin;
+  plugin?: ICreatorPlugin;
+  pluginCreator?: () => ICreatorPlugin;
   title?: string;
   iconName?: string;
   componentName?: string;
   index?: number;
+  isInternal?: boolean;
 }
 
 export interface ISurveyCreatorOptions {

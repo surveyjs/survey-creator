@@ -1,5 +1,5 @@
 {
-  "version": "2.5.9",
+  "version": "2.5.13",
   "name": "survey-creator-core",
   "repository": {
     "type": "git",
@@ -80,7 +80,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "3.3.0",
     "typescript": "^5.7.0",
-    "webpack": "5.98.0",
+    "webpack": "5.104.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
     "webpack-fix-style-only-entries": "^0.6.1",

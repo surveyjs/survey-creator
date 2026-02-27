@@ -22,6 +22,7 @@ import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { listComponentCss } from "../list-theme";
+import { CreatorDomHelper } from "../../dom-helper";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -668,10 +669,8 @@ export class Translation extends Base implements ITranslationLocales {
     this.exportToCSVFileUI = function () {
       self.exportToSCVFile(settings.translation.exportFileName);
     };
-    this.importFromCSVFileUI = function (el) {
-      if (el.files.length < 1) return;
-      self.importFromCSVFile(el.files[0]);
-      el.value = "";
+    this.importFromCSVFileUI = function (file: File) {
+      self.importFromCSVFile(file);
     };
     this.settingsSurveyValue = this.createSettingsSurvey();
     this.surveyValue = survey;
@@ -855,18 +854,8 @@ export class Translation extends Base implements ITranslationLocales {
     }
     return [usedLocales, locales];
   }
-  private inputFileElement: HTMLInputElement;
   public importFromCSVFileDOM(): void {
-    if (!document) return;
-    if (!this.inputFileElement) {
-      this.inputFileElement = document.createElement("input");
-      this.inputFileElement.type = "file";
-      this.inputFileElement.style.display = "none";
-      this.inputFileElement.onchange = () => {
-        this.importFromCSVFileUI(this.inputFileElement);
-      };
-    }
-    this.inputFileElement.click();
+    CreatorDomHelper.openFileDialog((file: File) => this.importFromCSVFileUI(file));
   }
   private updateSettingsSurveyLocales() {
     let [choices, locales] = this.getSurveyLocales();
@@ -1479,7 +1468,7 @@ export class TranslationEditor {
       locStr.text = editorLocalization.getString("ed.translationNoStrings");
       const popup = surveySettings.showDialog(<IDialogOptions>{
         componentName: "sv-string-viewer",
-        data: { locStr: locStr, locString: locStr, model: locStr },
+        data: { model: locStr },
         onApply: (): boolean => { return true; },
         cssClass: "svc-creator-popup",
         cssClasses: listComponentCss,

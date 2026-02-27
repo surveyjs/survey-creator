@@ -147,8 +147,10 @@ svg.sps-icon-item__icon, svg.sps-icon-item__icon use {
     height: var(--sjs2-size-icon-medium, 24px);
     fill: var(--sjs2-color-fg-brand-primary, #19b394);
 }
-.sv-list__item--selected svg.sps-icon-item__icon use {
-    fill: currentColor;
+.svc-list__item--selected {
+    svg.sps-icon-item__icon, svg.sps-icon-item__icon use {
+        fill: currentColor;
+    }
 }
 .sps-icon-item__text {
     white-space: nowrap;

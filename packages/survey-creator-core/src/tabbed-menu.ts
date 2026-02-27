@@ -6,11 +6,21 @@ import { listComponentCss } from "./components/list-theme";
 export interface ITabbedMenuItem extends IAction {
   componentContent: string;
   renderTab?: () => any;
+  pluginCreator: () => ICreatorPlugin;
 }
 
 export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   @property({ defaultValue: false }) showIcon: boolean;
   @property({ defaultValue: true }) showTitle: boolean;
+  private pluginValue: any;
+  public get plugin(): ICreatorPlugin {
+    if (!this.pluginValue && !!this.pluginCreator) {
+      this.pluginValue = this.pluginCreator();
+    }
+    return this.pluginValue;
+  }
+  public get data(): any { return this.plugin; }
+  public pluginCreator: () => ICreatorPlugin;
   constructor(item: ITabbedMenuItem) {
     super(item);
     this.enabled = true;
@@ -66,14 +76,14 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     this.minVisibleItemsCount = 1;
   }
   public addTab(name: string,
-    plugin: ICreatorPlugin,
+    pluginCreator: () => ICreatorPlugin,
     title?: string,
     iconName?: string,
     componentName?: string,
-    index?: number) {
+    index?: number): TabbedMenuItem {
     const tabName = name === "test" ? "preview" : name;
     const locStrName = !title ? "tabs." + tabName : (title.indexOf("ed.") == 0 ? title : "");
-    const actionHandler = function(name) {
+    const actionHandler = function (name) {
       this.creator.switchTab(name);
     };
     const tab = new TabbedMenuItem({
@@ -81,7 +91,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       locTitleName: locStrName,
       title: title,
       componentContent: componentName ? componentName : "svc-tab-" + name,
-      data: plugin,
+      pluginCreator: pluginCreator,
       iconName: iconName || "icon-undefined-24x24",
       action: actionHandler.bind(this, name),
       active: this.creator.viewType === name,
@@ -92,6 +102,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     } else {
       this.actions.push(tab);
     }
+    return tab;
   }
   public setMode(mode: TabbedMenuMode) {
     if (mode !== this.currentMode) {

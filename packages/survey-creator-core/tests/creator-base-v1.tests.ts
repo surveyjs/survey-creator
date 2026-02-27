@@ -1100,6 +1100,61 @@ test("Update expressions on copyElements for panel dynamic", () => {
   expect(newPanel.templateElements[1].name).toBe("question6");
   expect((<Question>newPanel.templateElements[1]).visibleIf).toEqual("{panel.question5} = 'a'");
 });
+test("Dynamic Panel - A field's validation rule is not updated and works unexpectedly after a Dynamic Panel is copied Bug#7456", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            validators: [
+              {
+                type: "expression",
+                expression: "{panel.question2} > 20 and {panel.question3} < 80"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
+  const newPanel = <QuestionPanelDynamicModel>creator.copyElement(panel);
+  expect((<any>newPanel.templateElements[1]).validators[0].expression).toEqual("{panel.question5} > 20 and {panel.question6} < 80");
+});
+test("Dynamic Panel - A valueName question property is not updated when a Dynamic Panel is duplicated Bug#7455", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            valueName: "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
+  const newPanel = <QuestionPanelDynamicModel>creator.copyElement(panel);
+  expect((<any>newPanel.templateElements[1]).valueName).toEqual("question5");
+});
 test("Update expressions on copyElements for matrix dynamic in detail panel", () => {
   const creator = new CreatorTester();
   creator.JSON = {

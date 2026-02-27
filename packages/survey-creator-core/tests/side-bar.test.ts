@@ -10,6 +10,8 @@ test("Sidebar tabs initial", () => {
 });
 test("Sidebar tabs with showTranslationTab: true", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
+  expect(creator.sidebar.pages.length).toEqual(4);
+  creator.activeTab = "translation";
   expect(creator.sidebar.pages.length).toEqual(5);
 });
 
@@ -25,11 +27,12 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[2].visible).toEqual(false); // toolbox
   expect(creator.sidebar.pages[3].id).toEqual("creatorTheme");
   expect(creator.sidebar.pages[3].visible).toEqual(false); // creatorTheme
-  expect(creator.sidebar.pages[4].id).toEqual("translation");
-  expect(creator.sidebar.pages[4].visible).toEqual(false); // translation
 
-  creator.sidebar.activePage = "translation";
-  expect(creator.sidebar.header.title).toEqual("Language Settings");
+  creator.activeTab = "translation";
+  expect(creator.sidebar.activePage).toEqual("translation");
+  expect(creator.sidebar.pages[4].id).toEqual("translation");
+  expect(creator.sidebar.header.title).toEqual("Languages");
+  expect(creator.sidebar.header.subTitle).toEqual("Language Settings");
   expect(creator.sidebar.activePage).toEqual("translation");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGridPlaceholder
   expect(creator.sidebar.pages[1].visible).toEqual(false); // propertyGrid
@@ -38,7 +41,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[4].visible).toEqual(true); // translation
 
   creator.sidebar.activePage = "toolbox";
-  expect(creator.sidebar.header.title).toEqual(undefined);
+  expect(creator.sidebar.header.title).toEqual("Toolbox");
   expect(creator.sidebar.activePage).toEqual("toolbox");
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGridPlaceholder
   expect(creator.sidebar.pages[1].visible).toEqual(false); // propertyGrid

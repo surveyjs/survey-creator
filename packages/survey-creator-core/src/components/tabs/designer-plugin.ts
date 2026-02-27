@@ -86,9 +86,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
       this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
       this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
-    } else if (this.showOneCategoryInPropertyGrid && (activePage === this.propertyGridPlaceholderPage.id
-      || activePage === this.settingsPropertyGridTab.id
-    )) {
+    } else if (this.showOneCategoryInPropertyGrid && (activePage === this.propertyGridPlaceholderPage.id || activePage === this.settingsPropertyGridTab.id || activePage === this.toolboxTab.id)) {
       this.creator.sidebar.header.componentName = "svc-side-bar-header";
       this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
@@ -97,8 +95,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
   }
 
-  public activateSidebar() {
-    this.updateActivePage(false);
+  public activateSidebar(showPlaceholder = false) {
+    this.updateActivePage(showPlaceholder);
     this.updateTabControl();
   }
 
@@ -182,7 +180,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.onThemePropertyGridSurveyCreated(survey);
     };
     const sidebarPageModelElements = [
-      { componentName: "svc-property-grid", componentData: this.themePropertyGridViewModel },
+      { componentName: "svc-property-grid", componentData: { model: this.themePropertyGridViewModel } },
     ];
 
     if (PredefinedCreatorPresets.length > 0) {
@@ -190,17 +188,18 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       const presetPropertyGridViewModel = this.createSettingsPropertyGridViewModel("preset", creatorPresetsModelPropertyGridDefinition, creator);
       presetPropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
         const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
-        if (!!presetChooser) {
+        if (!!presetChooser && presetChooser.choices.length === 0) {
           presetChooser.choices = PredefinedCreatorPresets.map(preset => ({ value: preset, text: getLocString("preset.names." + preset) }));
         }
       };
       presetPropertyGridViewModel.setObject(presetModel);
       presetModel.onPresetSelected.add((sender, options) => {
         new UIPreset(options.preset.json).apply(creator);
+        creator.notify(getLocString("preset.presetApplied"), "info");
         this.openCreatorThemeSettings();
       });
       sidebarPageModelElements.unshift(
-        { componentName: "svc-property-grid", componentData: presetPropertyGridViewModel }
+        { componentName: "svc-property-grid", componentData: { model: presetPropertyGridViewModel } }
       );
     }
 
@@ -257,7 +256,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "designer", plugin: this, iconName: TabDesignerPlugin.iconName });
     this.tabControlModelValue = new TabControlModel(this.creator.sidebar);
     this.tabControlModel.onTopToolbarItemCreated = (bar) => {
       this.setupPropertyGridTabActions(bar);
@@ -297,6 +295,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       }
     });
     this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
+    this.toolboxTab.locTileName = "ed.toolbox";
 
     if (this.creator.showCreatorThemeSettings) {
       this.createCreatorSettingsPage(creator);
@@ -450,7 +449,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       visible: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(this.creator.activeTab === "designer", this.creator.showToolbox, this.creator.toolboxLocation === "sidebar");
       }),
-      title: "Toolbox",
+      locTitleName: "ed.toolbox",
       showTitle: false
     });
 

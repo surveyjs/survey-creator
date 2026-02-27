@@ -3,6 +3,7 @@ import { UIPreset, ICreatorPresetData, registerUIPreset } from "../src/ui-preset
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
+import { QuestionAdornerViewModel } from "../src/components/question";
 export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
@@ -151,6 +152,39 @@ test("set toolbox definition", () => {
   expect(actions[1].title).toEqual("Date");
   expect(actions[1].json.inputType).toEqual("date");
 });
+test("set toolbox definition & question actions, Bug#7437", () => {
+  const creator = new CreatorTester();
+  const preset = new UIPreset({
+    toolbox: {
+      definition: [
+        { name: "text-number", title: "Number", json: { type: "text", inputType: "number" } },
+        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
+        { name: "dropdown" }
+      ],
+      categories: [
+        { category: "general", items: ["text-number", "text-date", "dropdown"] }
+      ]
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  tb.flushUpdates();
+  const actions = tb.visibleActions;
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions).toHaveLength(3);
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  convertToAction.popupModel.show();
+  expect(convertToAction.data.actions.length).toBe(3);
+  convertToAction.popupModel.hide();
+});
 
 test("set toolbox definition - no categories", () => {
   const creator = new CreatorTester();
@@ -254,7 +288,7 @@ test("set property grid defintion", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
+        generateOtherTab: false,
         classes: {
           question: {
             properties: [
@@ -280,6 +314,16 @@ test("set property grid defintion", () => {
   expect(panels[1].name).toBe("logic");
   expect(panels[0].elements).toHaveLength(3);
   expect(panels[1].elements).toHaveLength(2);
+
+  const presetDefault = new UIPreset({
+    propertyGrid: {
+      definition: null as any
+    }
+  });
+  presetDefault.apply(creator);
+  const surveyDefault = creator.propertyGrid;
+  const panelsDefault = surveyDefault.getAllPanels();
+  expect(panelsDefault).toHaveLength(6);
 });
 test("set property grid defintion: make general tab not the first one", () => {
   const creator = new CreatorTester();
@@ -289,7 +333,6 @@ test("set property grid defintion: make general tab not the first one", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
         classes: {
           question: {
             properties: [
@@ -323,7 +366,6 @@ test("set property grid defintion: just one tab for page", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
         classes: {
           panelbase: {
             properties: [
@@ -351,7 +393,6 @@ test("set property grid defintion & icons", () => {
   const preset = new UIPreset({
     propertyGrid: {
       definition: {
-        autoGenerateProperties: false,
         classes: {
           question: {
             properties: [
@@ -500,7 +541,7 @@ test("ui preset registration", () => {
   const creator = new CreatorTester();
   const sideBarPageModel = creator.sidebar.pages.filter(page => page.id === "creatorTheme")[0].componentData;
   expect(sideBarPageModel.elements).toHaveLength(2);
-  const survey = sideBarPageModel.elements[0].componentData.survey;
+  const survey = sideBarPageModel.elements[0].componentData.model.survey;
   expect(survey.getQuestionByName("presetName").choices.map(c => [c.value, c.text])).toEqual([["basic", "Basic"], ["advanced", "Advanced"]]);
 
   expect(creator.allowZoom).toBeTruthy();

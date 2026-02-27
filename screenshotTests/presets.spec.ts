@@ -24,15 +24,53 @@ test.describe(title, () => {
     await page.goto(`${urlPresets}`);
     //await changeToolboxScrolling(page, false);
     //await changeToolboxSearchEnabled(page, false);
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      const presetsPlugin = creator.getPlugin("presets");
+      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic, presetName: "Custom Preset" };
+      presetsPlugin.addPreset(new (window as any).SurveyCreatorCore.UIPreset(customPreset));
+    });
     await page.setViewportSize({ width: 1440, height: 1507 });
     await showPresets(page);
   });
 
   test("Check presets menu", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").nth(0).click();
+    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-list-menu.png");
+    await page.locator(".sps-navigation-bar-item").nth(2).click();
+    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-edit-menu.png");
+
     await page.locator(".sps-navigation-bar-item").nth(1).click();
     await page.locator(".sps-list__container").filter({ visible: true }).locator(".sps-list__item").nth(2).hover();
     await compareScreenshot(page, page.locator(".sps-list__container"), "presets-menu.png");
     await compareScreenshot(page, page.locator(".sps-navigation-bar"), "presets-menu-position.png");
+  });
+
+  test("Check presets list", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.locator(".spg-action-button").nth(1).click();
+    await page.getByText("Edit Presets list", { exact: true }).hover();
+    await page.getByText("Edit Presets list", { exact: true }).click();
+    await page.waitForTimeout(300);
+    await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
+    await page.getByText("Add new preset...").click();
+    await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "presets-select-dialog.png");
+  });
+
+  test("Check presets delete confirmation dialog", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.locator(".spg-action-button").nth(1).click();
+    await page.getByText("Edit Presets list", { exact: true }).click();
+    await page.getByTitle("Delete").click();
+    await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-delete-confirmation-dialog.png");
+  });
+
+  test("Check presets quit confirmation dialog", async ({ page }) => {
+    await page.getByText("Dansk").click();
+    await page.getByTitle("Quit").click();
+    await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-exit-confirmation-dialog.png");
   });
 
   test("Presets pages overview", async ({ page }) => {
@@ -118,6 +156,19 @@ test.describe(title, () => {
     await page.waitForTimeout(300);
     expect(await page.getByText("Text Input Questions")).toBeVisible();
     await compareScreenshot(page, root, "presets-context-menu.png");
+  });
+
+  test("Check presets icon edit popup", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.locator(".sps-navigation-bar-item").nth(1).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+
+    await page.getByRole("row", { name: "Designer" }).hover();
+    await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
+    await page.getByRole("combobox", { name: "Icon name" }).focus();
+    await page.waitForTimeout(500);
+    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await compareScreenshot(page, ".sps-dropdown-popup .svc-list__container", "presets-icon-edit-popup.png");
   });
 
   test("Presets Dialogs", async ({ page }) => {

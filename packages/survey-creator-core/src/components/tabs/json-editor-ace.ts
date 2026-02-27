@@ -112,10 +112,6 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 export class TabJsonEditorAcePlugin
   extends TabJsonEditorBasePlugin
   implements ICreatorPlugin {
-  constructor(creator: SurveyCreatorModel) {
-    super(creator);
-    creator.addTab({ name: "json", plugin: this, iconName: TabJsonEditorBasePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
-  }
   protected createModel(
     creator: SurveyCreatorModel
   ): JsonEditorBaseModel {

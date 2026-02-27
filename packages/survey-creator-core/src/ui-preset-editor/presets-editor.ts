@@ -1,5 +1,5 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions, getLocString } from "survey-creator-core";
-import { UIPreset, ICreatorPresetData } from "survey-creator-core";
+import { UIPreset, ICreatorPresetData, CreatorDomHelper } from "survey-creator-core";
 import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
@@ -102,7 +102,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
   }
 
-  private activatePage (model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {
+  private activatePage(model: SurveyModel, creator: SurveyCreatorModel, editablePresets: CreatorPresetEditableBase[]) {
     const inactivePresets = editablePresets.filter(item => model.currentPage.name !== item.pageName);
     const activePreset = editablePresets.filter(item => model.currentPage.name === item.pageName)[0];
     inactivePresets.forEach(item => item.setupOnCurrentPage(model, this.creator, false));
@@ -127,6 +127,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.model.editablePresets.forEach(item => item.onLocaleChanged(this.model, json[item.path], this.creator));
   }
 
+  public onJsonChangedCallback: () => void;
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
@@ -137,6 +138,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.completeText = getLocString("presets.editor.completeText");
     model.pagePrevText = getLocString("presets.editor.pagePrevText");
     model.enterKeyAction = "loseFocus";
+    model.fitToContainer = false;
 
     editablePresets.forEach(item => item.notifyCallback = (message: string) => this.notify(message));
     if (!this.defaultJsonValue) {
@@ -149,12 +151,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onCurrentPageChanged.add((sender, options) => {
       this.activatePage(model, this.creator, editablePresets);
     });
-    const questionNames = editablePresets.map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
     model.onValueChanged.add((sender, options) => {
+      const questionNames = editablePresets.filter(item => !item.isSettingUp).map(preset => preset.questionNames).reduce((acc, current) => acc.concat(current), []);
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
       if (questionNames.indexOf(options.name) != -1 && !this.applying) {
         this.applyFromSurveyModel(false);
         this.activatePage(model, this.creator, editablePresets);
+        this.onJsonChangedCallback?.();
       }
     });
     model.onGetQuestionTitleActions.add((sender, options) => {
@@ -209,7 +212,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onMatrixCellValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.onMatrixCellValueChanged(model, this.creator, options));
     });
-    model.onUpdateQuestionCssClasses.add(function(_, options) {
+    model.onUpdateQuestionCssClasses.add(function (_, options) {
       editablePresets.forEach(item => {
         const suffix = item.getCustomQuestionCssSuffix(options.question);
         if (suffix) {
@@ -224,14 +227,14 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         }
       });
     });
-    model.onUpdatePanelCssClasses.add(function(_, options) {
+    model.onUpdatePanelCssClasses.add(function (_, options) {
       editablePresets.forEach(item => {
         if (options.panel.name === item.getNavigationElementName()) {
           options.cssClasses.panel.container += " sps-panel--navigation ";
         }
       });
     });
-    model.onUpdatePageCssClasses.add(function(_, options) {
+    model.onUpdatePageCssClasses.add(function (_, options) {
       editablePresets.forEach(item => {
         if (item.pageName === options.page.name) {
           options.cssClasses.page.root += " sps-page--" + item.fullPath;
@@ -296,20 +299,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     elem.click();
     document.body.removeChild(elem);
   }
-  inputFileElement: HTMLInputElement;
   public loadJsonFile(): void {
-    if (!this.inputFileElement) {
-      this.inputFileElement = document.createElement("input");
-      this.inputFileElement.type = "file";
-      this.inputFileElement.accept = ".json";
-      this.inputFileElement.style.display = "none";
-      this.inputFileElement.onchange = () => {
-        if (this.inputFileElement.files.length < 1) return;
-        this.importFromFile(this.inputFileElement.files[0]);
-        this.inputFileElement.value = "";
-      };
-    }
-    this.inputFileElement.click();
+    CreatorDomHelper.openFileDialog((file: File) => this.importFromFile(file), ".json");
   }
   private importFromFile(file: File) {
     let fileReader = new FileReader();
@@ -381,7 +372,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   private validateEditableModel(model: SurveyModel): boolean {
     if (!model.validate(true, true)) return false;
     const editablePresets = model.editablePresets;
-    for (let i = 0; i < editablePresets.length; i ++) {
+    for (let i = 0; i < editablePresets.length; i++) {
       if (!editablePresets[i].validate(model)) return false;
     }
     return true;

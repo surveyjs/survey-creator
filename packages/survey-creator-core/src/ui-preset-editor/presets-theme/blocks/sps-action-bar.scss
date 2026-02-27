@@ -1,5 +1,5 @@
 @use "../../../variables.scss" as *;
-@use "../fonts.scss" as *;
+@use "../../../typography-mixins.scss" as *;
 
 .sps-action-bar {
   display: flex;
@@ -9,6 +9,7 @@
   margin-left: auto;
   overflow: hidden;
   white-space: nowrap;
+  width: fit-content;
 }
 
 .sps-action {
@@ -83,6 +84,30 @@
   }
 }
 
+.sps-btn--primary-neutral {
+  background: var(--sjs2-color-bg-neutral-primary, #1C1B20);
+  color: var(--sjs2-color-fg-neutral-on-primary, #FFF);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-neutral-primary-dim, #424146);
+  }
+  &:active{
+    background: var(--sjs2-color-bg-neutral-primary, #1C1B20);
+  }
+}
+
+.sps-btn--secondary-neutral {
+  background: var(--sjs2-color-bg-neutral-secondary, #F5F5F5);
+  color: var(--sjs2-color-fg-neutral-secondary, #1C1B20);
+  &:hover,
+  &:focus {
+    background: var(--sjs2-color-bg-neutral-secondary-dim, #EDEDED);
+  }
+  &:active{
+    background: var(--sjs2-color-bg-neutral-secondary, #F5F5F5);
+  }
+}
+
 .sps-action-button {
   @include ctrDefaultBoldFont;
   -webkit-appearance: none;
@@ -124,15 +149,22 @@
 
 .sps-action-button--icon {
   padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1));
-}
-.sps-action-button__icon {
   display: block;
-  width: 24px;
-  height: 24px;
 
   use {
     fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     transition: fill $creator-transition-duration;
+  }
+}
+
+.sps-action-button__icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+.sps-action-button__icon--muted {
+  use {
+    fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
   }
 }
 

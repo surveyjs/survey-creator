@@ -1519,7 +1519,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   }
   private hasPreviousElementForGrouping(question: Question): boolean {
     if (!question || !question.parent) return false;
-    const index = question.parent.elements.indexOf(question);
+    const elements = question.parent.elements.filter(el => el.visible);
+    const index = elements.indexOf(question);
     if (index < 1) return;
     const prevElement = question.parent.elements[index - 1];
     const prevPrevElement = question.parent.elements[index - 2];

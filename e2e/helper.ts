@@ -135,5 +135,72 @@ export const explicitErrorHandler = async (page: Page) => {
 export function getButtonByText(locator: Locator | Page, text: string) {
   return locator.getByRole("button", { name: text });
 }
+export async function changeToolboxScrolling(page: Page, hasScroll: boolean) {
+  await page.evaluate((newVal) => {
+    window["creator"].toolbox.overflowBehavior = newVal ? "scroll" : "hideInMenu";
+  }, hasScroll);
+}
+
+export async function changeToolboxSearchEnabled(page: Page, enabled: boolean) {
+  await page.evaluate((newVal) => {
+    window["creator"].toolbox.searchEnabled = newVal;
+  }, enabled);
+}
+
+export async function changeToolboxLocation(page: Page, newVal: string) {
+  await page.evaluate((val) => {
+    window["creator"].toolboxLocation = val;
+  }, newVal);
+}
+
+export async function getPagesLength(page: Page): Promise<number> {
+  return await page.evaluate(() => window["creator"].survey.pages.length);
+}
+
+export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
+  await page.evaluate((val) => {
+    window["creator"].showSurveyHeader = val;
+  }, newVal);
+}
+
+export async function handleShiftEnter(page: Page, selector: string) {
+  await page.evaluate((sel: string) => {
+    const el = document.querySelector(sel);
+    if (el) {
+      el.addEventListener("keypress", function (e: Event) {
+        const ev = e as KeyboardEvent;
+        if (ev.charCode === 13 && ev.shiftKey) {
+          const editorEl = document.querySelector(sel) as HTMLElement;
+          const selection = window.getSelection()!;
+          const range = document.createRange();
+          editorEl.innerHTML += "<div><br/></div>";
+          range.setStart(editorEl, editorEl.childNodes.length);
+          range.setEnd(editorEl, editorEl.childNodes.length);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      });
+    }
+  }, selector);
+}
+
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+
+export async function addQuestionByAddQuestionButton(page: Page, text: string) {
+  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
+  await page.locator(".svc-list__item span").getByText(text, { exact: true }).click();
+}
+
+export function getAddNewQuestionButton(page: Page): Locator {
+  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
+}
+
+export function getToolboxItemByText(page: Page, text: string): Locator {
+  return page.locator(".svc-toolbox__item-title").getByText(text, { exact: true });
+}
+
+export function getSubToolboxItemByText(page: Page, text: string): Locator {
+  return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
+}
 
 export { expect };
