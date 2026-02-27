@@ -338,7 +338,7 @@ test.describe(title, () => {
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
 
     await Panel.click({ position: { x: 1, y: 1 } });
-    await doDrag({ page, element: toolboxToolAction, target: Panel, options: { steps: 25, targetPosition: { x: 100, y: 0 } } });
+    await doDrag({ page, element: toolboxToolAction, target: Panel, options: { steps: 25 } });
     await expect(Panel.locator(".svc-question__content--collapsed")).toBeVisible({ timeout: 15000 });
     await expect(Panel.locator(".svc-question__content--collapsed")).not.toBeVisible({ timeout: 5000 });
     await page.mouse.up();
@@ -436,7 +436,18 @@ test.describe(title, () => {
     const question1 = page.locator("[data-sv-drop-target-survey-element=\"question1\"]").filter({ visible: true }).first();
     const panel1 = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
 
-    await doDragDrop({ page, element: question1, target: panel1, options: { steps: 20, destinationOffsetY: 2 } });
+    const { width: panel1Width, height: panel1Height } = await <any>panel1.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: question1,
+      target: panel1,
+      options: {
+        steps: 20,
+        elementPosition: { x: 2, y: 2 },
+        targetPosition: { x: panel1Width / 2, y: 2 },
+      },
+    });
 
     const expectedJson = {
       pages: [{
@@ -472,17 +483,53 @@ test.describe(title, () => {
     const DragZoneQuestion2 = Question2.locator(".svc-question__drag-element");
     const DragZoneQuestion3 = Question3.locator(".svc-question__drag-element");
 
-    await doDragDrop({ page, element: DragZoneQuestion1, target: Question2, options: { steps: 20, destinationOffsetX: -80 } });
+    await Question1.hover();
+    await DragZoneQuestion1.waitFor({ state: "visible" });
+    const { width: question2Width, height: question2Height } = await <any>Question2.boundingBox();
+    await doDragDrop({
+      page,
+      element: DragZoneQuestion1,
+      target: Question2,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: question2Width - 80, y: question2Height / 2 },
+      },
+    });
     expect(await getQuestionNameByIndex(page, 1)).toEqual("question2");
     expect(await getQuestionNameByIndex(page, 2)).toEqual("question1");
     expect(await getQuestionNameByIndex(page, 3)).toEqual("question3");
 
-    await doDragDrop({ page, element: DragZoneQuestion3, target: Question1, options: { steps: 20, destinationOffsetX: 80 } });
+    await Question3.hover();
+    await DragZoneQuestion3.waitFor({ state: "visible" });
+    const { width: question1Width, height: question1Height } = await <any>Question1.boundingBox();
+    await doDragDrop({
+      page,
+      element: DragZoneQuestion3,
+      target: Question1,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: 80, y: question1Height / 2 },
+      },
+    });
     expect(await getQuestionNameByIndex(page, 1)).toEqual("question2");
     expect(await getQuestionNameByIndex(page, 2)).toEqual("question3");
     expect(await getQuestionNameByIndex(page, 3)).toEqual("question1");
 
-    await doDragDrop({ page, element: DragZoneQuestion2, target: Question4, options: { steps: 20, destinationOffsetY: 80 } });
+    await Question2.hover();
+    await DragZoneQuestion2.waitFor({ state: "visible" });
+    const { width: question4Width, height: question4Height } = await <any>Question4.boundingBox();
+    await doDragDrop({
+      page,
+      element: DragZoneQuestion2,
+      target: Question4,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: question4Width / 2, y: 80 },
+      },
+    });
     expect(await getQuestionNameByIndex(page, 0)).toEqual("question2");
     expect(await getQuestionNameByIndex(page, 1)).toEqual("question4");
     expect(await getQuestionNameByIndex(page, 2)).toEqual("question3");
@@ -512,8 +559,35 @@ test.describe(title, () => {
     const Question5 = page.locator("[data-sv-drop-target-survey-element=\"question5\"]").filter({ visible: true }).first();
     const DragZoneQuestion1 = Question1.locator(".svc-question__drag-element");
 
-    await doDragDrop({ page, element: DragZoneQuestion1, target: Question5, options: { steps: 10, destinationOffsetY: 80 } });
-    await doDragDrop({ page, element: DragZoneQuestion1, target: Question2, options: { steps: 10, destinationOffsetX: 80 } });
+    const { width: question5Width, height: question5Height } = await <any>Question5.boundingBox();
+    const { width: question2WidthOtherPage, height: question2HeightOtherPage } = await <any>Question2.boundingBox();
+
+    await Question5.hover();
+    await Question1.hover();
+    await DragZoneQuestion1.waitFor({ state: "visible" });
+    await doDragDrop({
+      page,
+      element: DragZoneQuestion1,
+      target: Question5,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: question5Width / 2, y: 80 },
+      },
+    });
+
+    await Question1.hover();
+    await DragZoneQuestion1.waitFor({ state: "visible" });
+    await doDragDrop({
+      page,
+      element: DragZoneQuestion1,
+      target: Question2,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: 80, y: question2HeightOtherPage / 2 },
+      },
+    });
 
     const result = await page.evaluate(() => (window as any).creator.survey.getAllQuestions()[1].startWithNewLine);
     expect(result).toEqual(true);
@@ -537,7 +611,20 @@ test.describe(title, () => {
     const Question2 = page.locator("[data-sv-drop-target-survey-element=\"question2\"]").filter({ visible: true }).first();
     const DragZoneQuestion2 = Question2.locator(".svc-question__drag-element");
 
-    await doDragDrop({ page, element: DragZoneQuestion2, target: Question1, options: { steps: 10, destinationOffsetX: -50, destinationOffsetY: -10 } });
+    const { width: question1WidthOut, height: question1HeightOut } = await <any>Question1.boundingBox();
+
+    await Question2.hover();
+    await DragZoneQuestion2.waitFor({ state: "visible" });
+    await doDragDrop({
+      page,
+      element: DragZoneQuestion2,
+      target: Question1,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: question1WidthOut - 50, y: question1HeightOut - 10 },
+      },
+    });
 
     const result = await page.evaluate(() => (window as any).creator.survey.getAllQuestions()[2].startWithNewLine);
     expect(result).toEqual(true);
@@ -568,10 +655,36 @@ test.describe(title, () => {
     const DragZoneItem2 = Item2.locator(".svc-item-value-controls__drag");
 
     await Question1.click();
-    await doDragDrop({ page, element: DragZoneItem2, target: Item1, options: { steps: 10, destinationOffsetY: -40 } });
+    await Item1.hover();
+    await Item2.hover();
+    await Item3.hover();
+    await DragZoneItem2.waitFor({ state: "visible" });
+    const { width: item1Width, height: item1Height } = await <any>Item1.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item1,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: item1Width / 2, y: item1Height - 40 },
+      },
+    });
     expect(await getItemValueByIndex(page, "question1", 0)).toEqual("Item 2");
 
-    await doDragDrop({ page, element: DragZoneItem2, target: Item3, options: { steps: 10, destinationOffsetY: 30 } });
+    const { width: item3Width, height: item3Height } = await <any>Item3.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item3,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: item3Width / 2, y: item3Height / 2 + 30 },
+      },
+    });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
   });
 
@@ -589,7 +702,17 @@ test.describe(title, () => {
 
     await patchDragDropToDisableDrop(page);
     await Question1.click();
-    await doDragDrop({ page, element: DragZoneItem2, target: newGhostPagePage, options: { steps: 10 } });
+    await Item2.hover();
+    await DragZoneItem2.waitFor({ state: "visible" });
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: newGhostPagePage,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+      },
+    });
     await expect(DnDShortcutControls).toHaveCSS("cursor", "not-allowed");
   });
 
@@ -606,10 +729,36 @@ test.describe(title, () => {
     const DragZoneItem2 = Item2.locator(".svc-item-value-controls__drag");
 
     await Question1.click();
-    await doDragDrop({ page, element: DragZoneItem2, target: Item1, options: { steps: 10, destinationOffsetY: -40 } });
+    await Item1.hover();
+    await Item2.hover();
+    await Item3.hover();
+    await DragZoneItem2.waitFor({ state: "visible" });
+    const { width: rankingItem1Width, height: rankingItem1Height } = await <any>Item1.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item1,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: rankingItem1Width / 2, y: rankingItem1Height - 40 },
+      },
+    });
     expect(await getItemValueByIndex(page, "question1", 0)).toEqual("Item 2");
 
-    await doDragDrop({ page, element: DragZoneItem2, target: Item3, options: { steps: 10, destinationOffsetY: 30 } });
+    const { width: rankingItem3Width, height: rankingItem3Height } = await <any>Item3.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item3,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: rankingItem3Width / 2, y: rankingItem3Height / 2 + 30 },
+      },
+    });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
   });
 
@@ -626,8 +775,33 @@ test.describe(title, () => {
     const DragZoneItem2 = Item2.locator(".svc-item-value-controls__drag");
 
     await Question1.click();
-    await doDragDrop({ page, element: DragZoneItem2, target: Item1, options: { steps: 10, destinationOffsetY: -40 } });
-    await doDragDrop({ page, element: DragZoneItem2, target: Item3, options: { steps: 10, destinationOffsetY: 30 } });
+    await Item1.hover();
+    await Item2.hover();
+    await Item3.hover();
+    await DragZoneItem2.waitFor({ state: "visible" });
+    const { width: animationItem1Width, height: animationItem1Height } = await <any>Item1.boundingBox();
+    const { width: animationItem3Width, height: animationItem3Height } = await <any>Item3.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item1,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: animationItem1Width / 2, y: animationItem1Height - 40 },
+      },
+    });
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item3,
+      options: {
+        steps: 10,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: animationItem3Width / 2, y: animationItem3Height / 2 + 30 },
+      },
+    });
 
     const animationClassesCount = await page.evaluate(() => {
       let result = 0;
@@ -666,13 +840,24 @@ test.describe(title, () => {
     const LionItem = page.locator("[data-sv-drop-target-item-value=\"lion\"]").filter({ visible: true }).first();
     const GiraffeItem = page.locator("[data-sv-drop-target-item-value=\"giraffe\"]").filter({ visible: true }).first();
     const PandaItem = page.locator("[data-sv-drop-target-item-value=\"panda\"]").filter({ visible: true }).first();
+    const CamelItem = page.locator("[data-sv-drop-target-item-value=\"camel\"]").filter({ visible: true }).first();
     const DragZoneGiraffeItem = GiraffeItem.locator(".svc-image-item-value-controls__drag-area-indicator").filter({ visible: true }).first();
 
     await Question1.click();
+    await PandaItem.hover();
+    await LionItem.hover();
+    await CamelItem.hover();
+    await GiraffeItem.hover();
+    await DragZoneGiraffeItem.waitFor({ state: "visible" });
     await doDragDrop({ page, element: DragZoneGiraffeItem, target: LionItem, options: { steps: 10 } });
     expect(await getItemValueByIndex(page, "question1", 0)).toEqual("giraffe");
 
     await Question1.click();
+    await PandaItem.hover();
+    await LionItem.hover();
+    await CamelItem.hover();
+    await GiraffeItem.hover();
+    await DragZoneGiraffeItem.waitFor({ state: "visible" });
     await doDragDrop({ page, element: DragZoneGiraffeItem, target: PandaItem, options: { steps: 10 } });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("giraffe");
   });
@@ -716,11 +901,36 @@ test.describe(title, () => {
     const Item2 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
     const Item3 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
     let DragZoneItem2 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).locator(".spg-drag-element__svg");
-    await doDragDrop({ page, element: DragZoneItem2, target: Item1, options: { steps: 20, destinationOffsetX: 5, destinationOffsetY: 5 } });
+    const { width: matrixItem1Width, height: matrixItem1Height } = await <any>Item1.boundingBox();
+    const { width: matrixItem3Width, height: matrixItem3Height } = await <any>Item3.boundingBox();
+
+    await Item1.hover();
+    await Item2.hover();
+    await Item3.hover();
+    await DragZoneItem2.waitFor({ state: "visible" });
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item1,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: matrixItem1Width / 2 + 5, y: matrixItem1Height / 2 + 5 },
+      },
+    });
     expect(await getItemValueByIndex(page, "question1", 0)).toEqual("Item 2");
 
     DragZoneItem2 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).locator(".spg-drag-element__svg");
-    await doDragDrop({ page, element: DragZoneItem2, target: Item3, options: { steps: 20, destinationOffsetX: 5, destinationOffsetY: -5 } });
+    await doDragDrop({
+      page,
+      element: DragZoneItem2,
+      target: Item3,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: matrixItem3Width / 2 + 5, y: matrixItem3Height - 5 },
+      },
+    });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
   });
 
@@ -742,7 +952,22 @@ test.describe(title, () => {
     const Page2 = page.locator("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1);
     const Page3 = page.locator("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(2);
     const DragZonePage2 = page.locator("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).locator(".spg-drag-element__svg");
-    await doDragDrop({ page, element: DragZonePage2, target: Page1, options: { steps: 20, destinationOffsetX: 5, destinationOffsetY: 5 } });
+    const { width: page1Width, height: page1Height } = await <any>Page1.boundingBox();
+
+    await Page1.hover();
+    await Page2.hover();
+    await Page3.hover();
+    await DragZonePage2.waitFor({ state: "visible" });
+    await doDragDrop({
+      page,
+      element: DragZonePage2,
+      target: Page1,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: page1Width / 2 + 5, y: page1Height / 2 + 5 },
+      },
+    });
 
     const pageName = await page.evaluate((i: number) => (window as any).creator.survey.pages[i].name, 0);
     expect(pageName).toEqual("page2");
@@ -760,11 +985,60 @@ test.describe(title, () => {
     const FirstRow = page.locator(".svc-row").filter({ visible: true }).first();
     const RatingToolboxItem = page.locator("[aria-label='Rating Scale']").filter({ visible: true }).first();
 
-    await doDragDrop({ page, element: RatingToolboxItem, target: FirstRow, options: { steps: 20, destinationOffsetY: 25 } });
-    await doDragDrop({ page, element: RatingToolboxItem, target: DynamicPanel, options: { steps: 20, destinationOffsetY: -1 } });
-    await doDragDrop({ page, element: RatingToolboxItem, target: DynamicPanel, options: { steps: 20 } });
-    await doDragDrop({ page, element: RatingToolboxItem, target: Question3, options: { steps: 20, destinationOffsetY: 1 } });
-    await doDragDrop({ page, element: RatingToolboxItem, target: Question3, options: { steps: 20, destinationOffsetY: -10 } });
+    const { width: firstRowWidth, height: firstRowHeight } = await <any>FirstRow.boundingBox();
+    const { width: dynamicPanelWidth, height: dynamicPanelHeight } = await <any>DynamicPanel.boundingBox();
+    const { width: question3WidthDyn, height: question3HeightDyn } = await <any>Question3.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: RatingToolboxItem,
+      target: FirstRow,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: firstRowWidth / 2, y: firstRowHeight / 2 + 25 },
+      },
+    });
+    await doDragDrop({
+      page,
+      element: RatingToolboxItem,
+      target: DynamicPanel,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: dynamicPanelWidth / 2, y: dynamicPanelHeight - 1 },
+      },
+    });
+    await doDragDrop({
+      page,
+      element: RatingToolboxItem,
+      target: DynamicPanel,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: dynamicPanelWidth / 2, y: dynamicPanelHeight / 2 },
+      },
+    });
+    await doDragDrop({
+      page,
+      element: RatingToolboxItem,
+      target: Question3,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: question3WidthDyn / 2, y: question3HeightDyn / 2 + 1 },
+      },
+    });
+    await doDragDrop({
+      page,
+      element: RatingToolboxItem,
+      target: Question3,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: question3WidthDyn / 2, y: question3HeightDyn - 10 },
+      },
+    });
 
     const expectedJson = {
       pages: [{
@@ -797,7 +1071,18 @@ test.describe(title, () => {
     const Rating3 = page.locator("[data-sv-drop-target-survey-element=\"rating3\"]").filter({ visible: true }).first();
 
     await Rating2.click();
-    await doDragDrop({ page, element: DragZoneRating2, target: Rating3, options: { steps: 20, destinationOffsetY: -50 } });
+    const { width: rating3Width, height: rating3Height } = await <any>Rating3.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: DragZoneRating2,
+      target: Rating3,
+      options: {
+        steps: 20,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: rating3Width / 2, y: rating3Height - 50 },
+      },
+    });
 
     const expectedJson = {
       pages: [{
@@ -847,7 +1132,18 @@ test.describe(title, () => {
     const LastPanel = page.locator("[data-sv-drop-target-survey-element=\"panel2\"]").filter({ visible: true }).first();
     const PanelToolboxItem = page.locator("[aria-label='Panel']").filter({ visible: true }).first();
 
-    await doDragDrop({ page, element: PanelToolboxItem, target: LastPanel, options: { steps: 5, destinationOffsetY: -10 } });
+    const { width: lastPanelWidth, height: lastPanelHeight } = await <any>LastPanel.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: PanelToolboxItem,
+      target: LastPanel,
+      options: {
+        steps: 5,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: { x: lastPanelWidth / 2, y: lastPanelHeight - 10 },
+      },
+    });
 
     const expectedJson = {
       logoPosition: "right",
@@ -913,7 +1209,21 @@ test.describe(title, () => {
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
     const SingleInputToolboxItem = page.locator("[aria-label='Single-Line Input']").filter({ visible: true }).first();
 
-    await doDragDrop({ page, element: SingleInputToolboxItem, target: Panel, options: { steps: 5, destinationOffsetY: 100, destinationOffsetX: -10 } });
+    const { width: panelWidthSameRow, height: panelHeightSameRow } = await <any>Panel.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: SingleInputToolboxItem,
+      target: Panel,
+      options: {
+        steps: 5,
+        elementPosition: { x: 5, y: 5 },
+        targetPosition: {
+          x: panelWidthSameRow - 10,
+          y: panelHeightSameRow / 2 + 100,
+        },
+      },
+    });
 
     const expectedJson = {
       logoPosition: "right",
@@ -946,7 +1256,21 @@ test.describe(title, () => {
     const Panel1 = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
     const Panel2 = page.locator("[data-sv-drop-target-survey-element=\"panel2\"]").filter({ visible: true }).first();
 
-    await doDragDrop({ page, element: Panel2, target: Panel1, options: { steps: 10, destinationOffsetY: 150, destinationOffsetX: 150 } });
+    const { width: panel1WidthSameRowTwo, height: panel1HeightSameRowTwo } = await <any>Panel1.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: Panel2,
+      target: Panel1,
+      options: {
+        steps: 10,
+        elementPosition: { x: 150, y: 5 },
+        targetPosition: {
+          x: panel1WidthSameRowTwo / 2 + 150,
+          y: panel1HeightSameRowTwo / 2 + 150,
+        },
+      },
+    });
 
     const expectedJson = {
       logoPosition: "right",
@@ -974,7 +1298,21 @@ test.describe(title, () => {
     await expect(ghostPageSelector).not.toBeVisible();
     await expect(existingPageSelector).toBeVisible({ timeout: 15000 });
 
-    await doDragDrop({ page, element: SingleInputToolboxItem, target: existingPageSelector, options: { steps: 10, destinationOffsetY: -100, destinationOffsetX: 150 } });
+    const { width: existingPageWidth, height: existingPageHeight } = await <any>existingPageSelector.boundingBox();
+
+    await doDragDrop({
+      page,
+      element: SingleInputToolboxItem,
+      target: existingPageSelector,
+      options: {
+        steps: 10,
+        elementPosition: { x: 10, y: 10 },
+        targetPosition: {
+          x: existingPageWidth / 2 + 150,
+          y: existingPageHeight - 100,
+        },
+      },
+    });
 
     const expectedJson = {
       logoPosition: "right",
