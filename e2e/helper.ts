@@ -50,6 +50,12 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+export const setSurveyProp = async (page: Page, propName: string, value: unknown) => {
+  await page.evaluate(({ propName, value }) => {
+    window["creator"].survey[propName] = value;
+  }, { propName, value });
+};
+
 export const getJSON = async (page: Page) => {
   return await page.evaluate(() => {
     return JSON.parse(window["creator"].text);
@@ -95,6 +101,7 @@ export async function showPresets(page) {
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
+export const creatorTabJsonEditorName = "JSON Editor";
 export const creatorTabTranslationName = "Translation";
 export const creatorTabThemeName = "Themes";
 export const generalGroupName = "General";
@@ -102,15 +109,19 @@ export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
-  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) }));
+  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
 }
 
 export function getBarItemByTitle(page: Page, text: string): Locator {
   return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
 }
 
+export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
+  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+}
+
 export function getListItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true });
+  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
 }
 
 export function getMenuItemByText(page: Page, text: string): Locator {
@@ -118,7 +129,7 @@ export function getMenuItemByText(page: Page, text: string): Locator {
 }
 
 export function getPropertyGridCategory(page: Page, categoryName: string): Locator {
-  return page.locator(".spg-panel__title span").getByText(categoryName, { exact: true });
+  return page.locator(".spg-panel__title span").getByText(categoryName, { exact: true }).filter({ visible: true });
 }
 
 export const explicitErrorHandler = async (page: Page) => {
@@ -131,6 +142,10 @@ export const explicitErrorHandler = async (page: Page) => {
     });
   });
 };
+
+export function getVisibleElement(page: Page, selector: string) {
+  return page.locator(selector).filter({ visible: true });
+}
 
 export async function changeToolboxScrolling(page: Page, hasScroll: boolean) {
   await page.evaluate((newVal) => {
@@ -185,7 +200,7 @@ export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-a
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
   await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).click();
+  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {
