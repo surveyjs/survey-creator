@@ -1,5 +1,5 @@
 import { Page } from "playwright/test";
-import { url, test, expect, setJSON } from "./helper";
+import { url, test, expect, setJSON, creatorTabJsonEditorName } from "./helper";
 import { getTabbedMenuItemByText, creatorTabDesignerName } from "../screenshotTests/helper";
 
 const title = "JSON tab";
@@ -67,7 +67,7 @@ test.describe(title, () => {
 
   test("Change title of text question", async ({ page }) => {
     await setJSON(page, json);
-    await getTabbedMenuItemByText(page, "JSON Editor").click();
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 9, 21, 9, 30);
     await page.keyboard.press("Backspace");
@@ -79,7 +79,7 @@ test.describe(title, () => {
 
   test("Check show/hide errors list visibility", async ({ page }) => {
     await setJSON(page, json);
-    await getTabbedMenuItemByText(page, "JSON Editor").click();
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
 
     await expect(page.locator(".svc-json-editor-tab__errros_list")).not.toBeVisible();
 
@@ -95,7 +95,7 @@ test.describe(title, () => {
 
   test("Goto line from error", async ({ page }) => {
     await setJSON(page, json);
-    await getTabbedMenuItemByText(page, "JSON Editor").click();
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area");
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 5, 8, 5, 8);
@@ -112,7 +112,7 @@ test.describe(title, () => {
 
   test("Check deactivating other tabs when json has errors", async ({ page }) => {
     await setJSON(page, json);
-    await getTabbedMenuItemByText(page, "JSON Editor").click();
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area");
     await page.keyboard.press("Backspace");
@@ -124,9 +124,9 @@ test.describe(title, () => {
 
   test("Check search", async ({ page }) => {
     await setJSON(page, json);
-    await getTabbedMenuItemByText(page, "JSON Editor").click();
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
     await page.keyboard.press("ControlOrMeta+f"); // check if there will be no errors
-    await expect(getTabbedMenuItemByText(page, "JSON Editor")).toBeVisible();
+    await expect(getTabbedMenuItemByText(page, creatorTabJsonEditorName)).toBeVisible();
   });
 
   test("Check fix error", async ({ page }) => {
@@ -136,7 +136,7 @@ test.describe(title, () => {
         { type: "text", name: "q2", }
       ]
     });
-    await getTabbedMenuItemByText(page, "JSON Editor").click();
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area");
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 12, 21, 12, 22);

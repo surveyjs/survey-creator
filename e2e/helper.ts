@@ -95,6 +95,7 @@ export async function showPresets(page) {
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
+export const creatorTabJsonEditorName = "JSON Editor";
 export const creatorTabTranslationName = "Translation";
 export const creatorTabThemeName = "Themes";
 export const generalGroupName = "General";

@@ -28,12 +28,6 @@ function getBarItemByText(page: Page, text: string): Locator {
   return page.locator(".sv-action-bar-item").filter({ has: page.locator(".sv-action-bar-item__title").getByText(text) }).filter({ visible: true });
 }
 
-async function setValueIntoDropdownQuestion(page: Page, text: string) {
-  await expect(logicDropdownValueSelector(page).first()).toBeVisible();
-  await logicDropdownValueSelector(page).first().click();
-  await page.locator(".sv-popup__content .sv-list__item").getByText(text).filter({ visible: true }).click();
-}
-
 async function listItemClick(page:Page, text: string) {
   await expect(getListItemByText(page, text)).toBeVisible();
   await getListItemByText(page, text).click();
@@ -255,7 +249,10 @@ test.describe(title, () => {
     await expect(logicOperatorSelector(page).first()).toContainText("Equals");
 
     expect(await logicDropdownValueSelector(page).first().locator(".sv-string-viewer").textContent()).toBe("Item 1");
-    await setValueIntoDropdownQuestion(page, "Item 2");
+    await expect(logicDropdownValueSelector(page).first()).toBeVisible();
+    await logicDropdownValueSelector(page).first().click();
+    await expect(page.locator(".svc-logic-question-value .sv-popup__content")).toBeVisible();
+    await page.locator(".sv-popup__content .sv-list__item").getByText("Item 2").filter({ visible: true }).click();
 
     await expect(logicQuestionSelector(page).last()).toContainText("q2");
     await logicQuestionSelector(page).last().click();
@@ -417,7 +414,12 @@ test.describe(title, () => {
     await logicAddNewRuleButton(page).click();
     await logicQuestionSelector(page).first().click();
     await listItemClick(page, "q1");
-    await setValueIntoDropdownQuestion(page, "Item 2");
+
+    await expect(logicDropdownValueSelector(page).first()).toBeVisible();
+    await logicDropdownValueSelector(page).first().click();
+    await expect(page.locator(".svc-logic-question-value .sv-popup__content")).toBeVisible();
+    await page.locator(".sv-popup__content .sv-list__item").getByText("Item 2").filter({ visible: true }).click();
+
     await logicActionSelector(page).first().click();
     await listItemClick(page, "Show/hide question");
     await logicQuestionSelector(page).nth(1).click();

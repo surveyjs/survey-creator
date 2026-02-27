@@ -191,6 +191,7 @@ test.describe(title, () => {
 
     await requiredActionButton.hover();
     await requiredActionButton.click();
+    await page.waitForTimeout(100);
     titleText = await questionTitle.innerText();
     expect(normalize(titleText)).toBe("question1 *");
     await expect(requiredActionButton).toHaveClass(/svc-survey-element-toolbar__item--active/);
