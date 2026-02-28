@@ -987,7 +987,6 @@ test.describe(title, () => {
 
     const { width: firstRowWidth, height: firstRowHeight } = await <any>FirstRow.boundingBox();
     const { width: dynamicPanelWidth, height: dynamicPanelHeight } = await <any>DynamicPanel.boundingBox();
-    const { width: question3WidthDyn, height: question3HeightDyn } = await <any>Question3.boundingBox();
 
     await doDragDrop({
       page,
@@ -1019,6 +1018,8 @@ test.describe(title, () => {
         targetPosition: { x: dynamicPanelWidth / 2, y: dynamicPanelHeight / 2 },
       },
     });
+    const { width: question3WidthDyn, height: question3HeightDyn } = await <any>Question3.boundingBox();
+
     await doDragDrop({
       page,
       element: RatingToolboxItem,
@@ -1164,6 +1165,7 @@ test.describe(title, () => {
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
     const undoAction = page.locator("button[title=Undo]").filter({ visible: true }).first();
     const SingleInputToolboxItem = page.locator("[aria-label='Single-Line Input']").filter({ visible: true }).first();
+    await setJSON(page, { pages: [{ name: "page1" }] });
 
     await page.setViewportSize({ width: 2560, height: 2000 });
     await page.evaluate(() => {
