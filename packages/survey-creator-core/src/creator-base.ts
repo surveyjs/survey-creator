@@ -88,7 +88,7 @@ import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
-import { DefaultLight } from "./themes/default-light";
+import DefaultLight from "./themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
