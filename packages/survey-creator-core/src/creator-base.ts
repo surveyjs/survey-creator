@@ -3182,9 +3182,9 @@ export class SurveyCreatorModel extends Base
         needNewName = !!this.survey.getPageByName(newElement.name);
       } else {
         if (newElement.isPanel) {
-          needNewName = !!this.survey.getPanelByName(newElement.name);
+          needNewName = this.getAllPanels(false).some(p => p.name === newElement.name);
         } else {
-          needNewName = !!this.survey.getQuestionByName(newElement.name);
+          needNewName = this.getAllQuestions(false).some(q => q.name === newElement.name);
         }
       }
     }
