@@ -33,31 +33,37 @@ test.describe(title, () => {
             "minWidth": "256px",
             "maxWidth": "350px",
             "titleLocation": "hidden",
-            "defaultValue": "https://api.surveyjs.io/private/Surveys/files?name=facda824-2734-478c-90ac-db94ef35c28a",
+            "defaultValue": "Item 3",
             "choices": [
               {
-                "value": "https://api.surveyjs.io/private/Surveys/files?name=e51dcbdf-2f8b-4770-828b-610583587e3f",
-                "imageLink": "https://api.surveyjs.io/private/Surveys/files?name=a9c2e950-4066-4263-bf02-f68f5ba31e62"
+                "value": "Item 1",
+                "text": "",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFFJREFUeNrsz0ENAAAIBCC11fUvZgofbtCATlKfTT0nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG8FGAB8PgErFl1dKwAAAABJRU5ErkJggg=="
               },
               {
-                "value": "https://api.surveyjs.io/private/Surveys/files?name=4446e7d2-9a9b-45af-baae-bc2773331ae0",
-                "imageLink": "https://api.surveyjs.io/private/Surveys/files?name=cc6a36e0-e332-4c46-8637-1e15f1eef229"
+                "value": "Item 2",
+                "text": "",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFRJREFUeNrszzENADAIADCYKQwhEIlTwUHSOmh2TVz24jgBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQGBfV+AAQCkdAHL3L3OHgAAAABJRU5ErkJggg=="
               },
               {
-                "value": "https://api.surveyjs.io/private/Surveys/files?name=facda824-2734-478c-90ac-db94ef35c28a",
-                "imageLink": "https://api.surveyjs.io/private/Surveys/files?name=b44a0a43-7f35-42eb-818e-269881047632"
+                "value": "Item 3",
+                "text": "",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFRJREFUeNrszzENADAIADCYKpTgXwfXVHCQtA6aUx2XvThOQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAYN8XYAAk3gIItMLpbQAAAABJRU5ErkJggg=="
               },
               {
-                "value": "https://api.surveyjs.io/private/Surveys/files?name=9995584c-2cd0-4629-bae8-83deb90de0f8",
-                "imageLink": "https://api.surveyjs.io/private/Surveys/files?name=bf448beb-e73b-4350-a008-d9bc57e9795b"
+                "value": "Item 4",
+                "text": "",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFRJREFUeNrszzENADAIADCYCLShE4VTwUHSOmjWdFz24jgBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQGBfV+AAQCJnAGgQEs8ogAAAABJRU5ErkJggg=="
               },
               {
-                "value": "https://api.surveyjs.io/private/Surveys/files?name=d8da6e40-a7e3-423a-b32b-fa18dc9222d4",
-                "imageLink": "https://api.surveyjs.io/private/Surveys/files?name=a3bc912e-7925-45c7-bf27-4757743e0a60"
+                "value": "Item 5",
+                "text": "",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFNJREFUeNrszzERADAIBLCn/v1hhgEH3blLHKSmc9pLBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAT+VoABAEgyAlNQjV39AAAAAElFTkSuQmCC"
               },
               {
-                "value": "https://api.surveyjs.io/private/Surveys/files?name=60840717-c76b-4eb9-b569-7239daa93616",
-                "imageLink": "https://api.surveyjs.io/private/Surveys/files?name=26138806-03ee-4509-a044-fd876ffd8b6c"
+                "value": "Item 6",
+                "text": "",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFFJREFUeNrsz0ENAAAIBCC1f8lrYgofbtCATlKfTT0nICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG8FGAB73wMjMVeD8AAAAABJRU5ErkJggg=="
               }
             ],
             "imageHeight": 64,
@@ -138,7 +144,7 @@ test.describe(title, () => {
   test("Small questions should look good - https://github.com/surveyjs/survey-creator/issues/4862", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 4080 });
     await setJSON(page, json);
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("load");
 
     let question = page.locator("div[data-name=question1]");
     await compareScreenshot(page, page.locator("div[data-sv-drop-target-survey-element=question1]"), "small-rating-not-selected.png");
