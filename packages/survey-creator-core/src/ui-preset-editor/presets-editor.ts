@@ -222,7 +222,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
           options.cssClasses.mainRoot += " sps-question--main";
           options.cssClasses.row += " sps-table__row--main";
           options.cssClasses.buttonAdd += " sps-matrixdynamic__add-btn--icon";
-          options.cssClasses.iconAdd = "sps-matrixdynamic__add-btn-icon";
           options.cssClasses.iconAddId = "icon-add-24x24";
         }
       });

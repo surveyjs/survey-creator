@@ -257,11 +257,11 @@ export class PresetsManager {
 
       if (options.row.getValue("custom")) {
         removeAction.iconName = "icon-delete-24x24";
-        removeAction.iconSize = "auto",
-        removeAction.component = "sv-action-bar-item",
-        removeAction.innerCss = "sps-action-button sps-action-button--danger",
-        removeAction.tooltip = getLocString("presets.plugin.deletePreset"),
-        removeAction.showTitle = false,
+        removeAction.iconSize = "auto";
+        removeAction.component = "sv-action-bar-item";
+        removeAction.innerCss = "sps-action-button sps-action-button--danger";
+        removeAction.tooltip = getLocString("presets.plugin.deletePreset");
+        removeAction.showTitle = false;
         removeAction.action = () => {
           options.question.removeRowUI(options.row);
         };
@@ -343,15 +343,16 @@ export class PresetsManager {
       pages: [{ name: "page1", elements: [] }]
     });
     this.addPresetsListEditor(survey);
-    survey.css = { ...presetsCss,
+    survey.css = {
+      ...presetsCss,
       actionBar: {
-        ...propertyGridCss.actionBar,
+        ...presetsCss.actionBar,
         itemIcon: presetsCss.actionBar.itemIcon + " sps-action-button__icon--muted",
       },
       matrixdynamic: {
         ...propertyGridCss.matrixdynamic,
         buttonAdd: presetsCss.matrixdynamic.buttonAdd,
-        footer: propertyGridCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
+        footer: presetsCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
       }
     };
     const popupModel = settings.showDialog?.(<IDialogOptions>{

@@ -145,7 +145,8 @@
 .sps-matrixdynamic__footer--in-dialog {
   display: flex;
   margin: 0;
-  padding-top: var(--sjs2-spacing-x150, 12px);
+  padding: var(--sjs2-spacing-x150, 12px) 0 0 0;
+  border-bottom: none;
 }
 
 .sps-table-wrapper,
@@ -179,13 +180,7 @@ sv-ng-matrix-table {
   padding: var(--sjs2-spacing-x100, 8px);
   justify-content: flex-start;
   gap: var(--sjs2-spacing-x100, 8px);
-}
-
-.sps-matrixdynamic__add-btn-icon {
-  display: flex;
-  svg {
-    width: 24px;
-    height: 24px;
+  .sps-action-button__icon {
     fill: var(--sjs2-color-fg-basic-primary-muted, #424146);
   }
 }
