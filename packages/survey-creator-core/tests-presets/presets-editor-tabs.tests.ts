@@ -26,6 +26,7 @@ test("Preset edit model, tabs page with creator, default items", () => {
 test("Preset edit model, tabs page with creator, default items with custom", () => {
   const creator = new CreatorBase();
   creator.addTab({ name: "custom", plugin: { model: creator, activate: () => { } } });
+  creator.addTab({ name: "preview", plugin: { model: creator, activate: () => { } }, isInternal: true });
   const editor = new CreatorPresetEditorModel({}, creator);
   const survey = editor.model;
   const itemsQuestion = survey.getQuestionByName("tabs_items");

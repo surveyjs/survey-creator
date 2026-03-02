@@ -314,7 +314,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     };
   }
   private isCategoriesSame(categories: any, toolboxCategories: any): boolean {
-    if (categories.length !== toolboxCategories.length) return false;
+    if (categories.length !== toolboxCategories?.length) return false;
     for (let i = 0; i < categories.length; i++) {
       if (categories[i].category !== toolboxCategories[i].category) return false;
       //if (categories[i].title !== toolboxCategories[i].title) return false;

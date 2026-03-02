@@ -4,5 +4,6 @@ interface IComponentContainerElement {
 }
 
 export class ComponentContainerModel {
+  public cssClass: string = "svc-component-container";
   public elements: IComponentContainerElement[] = [];
 }

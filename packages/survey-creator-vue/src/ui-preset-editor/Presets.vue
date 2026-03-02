@@ -7,11 +7,13 @@
     />
   </div>
   <div class="svc-tab-designer svc-tab-designer--presets">
-    <SvComponent
-      :is="'sv-action-bar'"
-      :model="navigationBar"
-    ></SvComponent>
-    <SvComponent :is="'survey'" :model="model" />
+    <SvComponent :is="'sv-scroll'">
+      <SvComponent
+        :is="'sv-action-bar'"
+        :model="navigationBar"
+      ></SvComponent>
+      <SvComponent :is="'survey'" :model="model" />
+    </SvComponent>
   </div>
 </template>
 

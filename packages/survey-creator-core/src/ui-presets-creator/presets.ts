@@ -34,6 +34,7 @@ export interface ICreatorPresetData {
 
 export interface ICreatorPresetConfig {
   presetName?: string;
+  visible?: boolean;
   json?: ICreatorPresetData | any;
 }
 
@@ -56,10 +57,16 @@ export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetCon
  * A class that instantiates a UI preset and provides an API to apply it.
  */
 export class UIPreset extends CreatorPresetBase {
-  public constructor(json: ICreatorPresetData) {
+  public constructor(data: ICreatorPresetData | ICreatorPresetConfig) {
     super();
-    this.setJson(json);
+    if ((data?.hasOwnProperty("json"))) {
+      this.setJson((data as ICreatorPresetConfig).json);
+      this.name = (data as ICreatorPresetConfig).presetName || "";
+    } else {
+      this.setJson(data as ICreatorPresetData);
+    }
   }
+  public name = "";
   public getPath(): string { return ""; }
   public getJson(): ICreatorPresetData {
     return <ICreatorPresetData>this.json;
