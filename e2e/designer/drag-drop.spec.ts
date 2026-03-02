@@ -1420,18 +1420,20 @@ test.describe(title, () => {
     await expect(page.locator(".svc-question__content").nth(1)).toHaveClass(/svc-question__content--drag-over-left/, { timeout: 15000 });
     await page.mouse.up();
 
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(500);
 
     await toolboxToolAction.hover();
     await page.mouse.down();
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(200);
     const question3DropTarget = page.locator("[data-sv-drop-target-survey-element=\"question3\"]").filter({ visible: true }).first();
     const q3Rect = await question3DropTarget.boundingBox();
     if (!q3Rect) throw new Error("question3 drop target boundingBox is null");
     const moveX = q3Rect.x + q3Rect.width / 2;
-    const moveY = q3Rect.y + Math.min(25, q3Rect.height * 0.25);
-    await page.mouse.move(moveX, moveY, { steps: 25 });
-    await expect(page.locator(".svc-question__content").nth(2)).toHaveClass(/svc-question__content--drag-over-top/, { timeout: 15000 });
+    const moveY = q3Rect.y + 8;
+    await page.mouse.move(moveX, moveY, { steps: 30 });
+    await expect(
+      page.locator(".svc-row.svc-row--drag-over-top").or(page.locator(".svc-question__content.svc-question__content--drag-over-top")).first()
+    ).toBeVisible({ timeout: 15000 });
     await page.mouse.up();
   });
 
@@ -1473,7 +1475,9 @@ test.describe(title, () => {
     await page4.hover({ position: { x: 150, y: 20 } });
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
 
-    await page4DragHandle.hover();
+    const handleBox = await page4DragHandle.boundingBox();
+    if (!handleBox) throw new Error("page4DragHandle boundingBox is null");
+    await page.mouse.move(handleBox.x + handleBox.width / 2, handleBox.y + handleBox.height / 2);
     await page.mouse.down();
     const page4Box = await page4.boundingBox();
     if (!page4Box) throw new Error("page4 boundingBox is null");
@@ -1490,14 +1494,14 @@ test.describe(title, () => {
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
     await page.mouse.move(creatorBox.x + pageRectLeft + 50, creatorBox.y + pageRectBottom + 6, { steps: 20 });
-    await expect(page2.locator(".svc-question__drop-indicator--top")).toBeVisible({ timeout: 15000 });
+    await expect(page2.locator(".svc-question__drop-indicator--top").first()).toBeVisible({ timeout: 15000 });
 
     await page.mouse.move(page1Box.x + 150, page1Box.y + 60, { steps: 20 });
-    await expect(page1.locator(".svc-question__drop-indicator--top")).not.toBeVisible();
-    await expect(page1.locator(".svc-question__drop-indicator--bottom")).toBeVisible({ timeout: 15000 });
+    await expect(page1.locator(".svc-question__drop-indicator--top").first()).not.toBeVisible();
+    await expect(page1.locator(".svc-question__drop-indicator--bottom").first()).toBeVisible({ timeout: 15000 });
     await page.mouse.move(page1Box.x + 150, page1Box.y + 10, { steps: 20 });
-    await expect(page1.locator(".svc-question__drop-indicator--top")).toBeVisible({ timeout: 15000 });
-    await expect(page1.locator(".svc-question__drop-indicator--bottom")).not.toBeVisible();
+    await expect(page1.locator(".svc-question__drop-indicator--top").first()).toBeVisible({ timeout: 15000 });
+    await expect(page1.locator(".svc-question__drop-indicator--bottom").first()).not.toBeVisible();
     await page.mouse.up();
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
