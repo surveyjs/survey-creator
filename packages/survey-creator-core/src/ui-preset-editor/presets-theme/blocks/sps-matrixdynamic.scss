@@ -240,3 +240,8 @@ sv-ng-matrix-table {
     opacity: 0.25;
   }
 }
+
+.spg-table__cell--actions:last-of-type .sps-action-bar {
+  justify-content: flex-end;
+  padding-inline-end: var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05));
+}
