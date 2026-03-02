@@ -63,8 +63,8 @@ export const getJSON = async (page: Page) => {
 };
 
 interface IDragToElementOptions {
-  elementPosition?: {x: number, y: number};
-  targetPosition?: {x: number, y: number};
+  elementPosition?: {x?: number, y?: number};
+  targetPosition?: {x?: number, y?: number};
   steps?: number;
 }
 
@@ -143,6 +143,27 @@ export const explicitErrorHandler = async (page: Page) => {
   });
 };
 
+export async function patchDragDropToDisableDrop(page: Page) {
+  await page.evaluate(() => {
+    const c = (window as any).creator;
+    if (!c) return;
+
+    if (c.dragDropSurveyElements) {
+      c.dragDropSurveyElements.drop = () => { };
+      if (c.dragDropSurveyElements.domAdapter) {
+        c.dragDropSurveyElements.domAdapter.drop = () => { };
+      }
+    }
+
+    if (c.dragDropChoices) {
+      c.dragDropChoices.drop = () => { };
+      if (c.dragDropChoices.domAdapter) {
+        c.dragDropChoices.domAdapter.drop = () => { };
+      }
+    }
+  });
+}
+
 export function getVisibleElement(page: Page, selector: string) {
   return page.locator(selector).filter({ visible: true });
 }
@@ -167,6 +188,24 @@ export async function changeToolboxLocation(page: Page, newVal: string) {
 
 export async function getPagesLength(page: Page): Promise<number> {
   return await page.evaluate(() => window["creator"].survey.pages.length);
+}
+export async function getQuestionsLength(page: Page): Promise<number> {
+  return await page.evaluate(() => window["creator"].survey.getAllQuestions().length);
+}
+
+export async function getQuestionNameByIndex(page: Page, index: number): Promise<string> {
+  return await page.evaluate((i) => window["creator"].survey.getAllQuestions()[i].name, index);
+}
+
+export async function getItemValueByIndex(page: Page, questionName: string, index: number): Promise<string | undefined> {
+  return await page.evaluate(([qName, i]) => {
+    const creator = (window as any).creator;
+    if (!creator || !creator.survey) return undefined;
+    const question = creator.survey.getQuestionByName(qName);
+    const choices = question && question.visibleChoices ? question.visibleChoices : [];
+    const choice = choices[i];
+    return choice ? choice.value : undefined;
+  }, [questionName, index]);
 }
 
 export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
