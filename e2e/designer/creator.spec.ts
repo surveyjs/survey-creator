@@ -69,7 +69,7 @@ test.describe(title, () => {
     };
 
     const getActionByText = (text: string) => {
-      return page.locator(".svc-question__content--selected .svc-survey-element-toolbar__item").getByText(text).filter({ visible: true }).locator("..");
+      return page.locator(`.svc-question__content--selected button[title="${text}"]`);
     };
     await setJSON(page, json);
     await page.locator(".sv-string-editor").getByText("question2").click();

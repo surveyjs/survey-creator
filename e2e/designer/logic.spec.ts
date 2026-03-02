@@ -417,9 +417,11 @@ test.describe(title, () => {
     await logicAddNewRuleButton(page).click();
     await logicQuestionSelector(page).first().click();
     await listItemClick(page, "q1");
+    await page.waitForTimeout(1000);
 
     await expect(logicDropdownValueSelector(page).first()).toBeVisible();
     await logicDropdownValueSelector(page).first().click();
+    await page.waitForTimeout(1000);
 
     const dropdownPopup = page.locator(".svc-logic-question-value .sv-popup__content");
     await expect(dropdownPopup).toBeVisible();
@@ -430,6 +432,7 @@ test.describe(title, () => {
     await listItemClick(page, "Show/hide question");
     await logicQuestionSelector(page).nth(1).click();
     await listItemClick(page, "q3");
+    await page.waitForTimeout(1000);
     await check2Rule(page);
 
     await tableRulesSelector(page).nth(1).hover();
