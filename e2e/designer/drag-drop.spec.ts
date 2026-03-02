@@ -849,7 +849,7 @@ test.describe(title, () => {
     await CamelItem.hover();
     await GiraffeItem.hover();
     await DragZoneGiraffeItem.waitFor({ state: "visible" });
-    await doDragDrop({ page, element: DragZoneGiraffeItem, target: LionItem, options: { steps: 10 } });
+    await doDragDrop({ page, element: DragZoneGiraffeItem, target: LionItem, options: { steps: 100 } });
     expect(await getItemValueByIndex(page, "question1", 0)).toEqual("giraffe");
 
     await Question1.click();
@@ -858,7 +858,7 @@ test.describe(title, () => {
     await CamelItem.hover();
     await GiraffeItem.hover();
     await DragZoneGiraffeItem.waitFor({ state: "visible" });
-    await doDragDrop({ page, element: DragZoneGiraffeItem, target: PandaItem, options: { steps: 10 } });
+    await doDragDrop({ page, element: DragZoneGiraffeItem, target: PandaItem, options: { steps: 100 } });
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("giraffe");
   });
 
@@ -883,7 +883,9 @@ test.describe(title, () => {
     const ControlsNode = LionItem.locator(".svc-image-item-value-controls").filter({ visible: true }).first();
 
     await Question1.click();
-    await doDragDrop({ page, element: DragZoneLionItem, target: SomeOutsideArea, options: { steps: 10 } });
+    await LionItem.hover();
+    await DragZoneLionItem.waitFor({ state: "visible" });
+    await doDragDrop({ page, element: DragZoneLionItem, target: SomeOutsideArea, options: { steps: 100 } });
     await ControlsNode.hover();
   });
 
@@ -1342,28 +1344,41 @@ test.describe(title, () => {
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
     const rows = page.locator(".svc-row").filter({ visible: true });
 
+    const adorner0 = rows.nth(0).locator(".svc-question__adorner").first();
+    const adorner1 = rows.nth(1).locator(".svc-question__adorner").first();
+
+    const moveToAdorner = async (adorner: ReturnType<typeof page.locator>, offsetX: number, offsetY: number, steps = 20) => {
+      const box = await adorner.boundingBox();
+      if (!box) throw new Error("Adorner boundingBox is null");
+      const x = box.x + offsetX;
+      const y = box.y + offsetY;
+      await page.mouse.move(x, y, { steps });
+    };
+
     await toolboxToolAction.hover();
     await page.mouse.down();
 
-    await rows.nth(0).locator(".svc-question__adorner").hover({ position: { x: 100, y: 5 } });
+    await moveToAdorner(adorner0, 100, 5);
     await expect(rows.nth(0)).toHaveClass(/svc-row--drag-over-top/, { timeout: 15000 });
 
-    await rows.nth(0).locator(".svc-question__adorner").hover({ position: { x: 100, y: 150 } });
+    await moveToAdorner(adorner0, 100, 150);
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-top/);
     await expect(rows.nth(0)).toHaveClass(/svc-row--drag-over-bottom/, { timeout: 15000 });
 
-    await rows.nth(1).locator(".svc-question__adorner").hover({ position: { x: 100, y: 5 } });
+    await moveToAdorner(adorner1, 100, 5);
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-top/);
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-bottom/);
     await expect(rows.nth(1)).toHaveClass(/svc-row--drag-over-top/, { timeout: 15000 });
 
-    await rows.nth(1).locator(".svc-question__adorner").hover({ position: { x: 100, y: 150 } });
+    await moveToAdorner(adorner1, 100, 150);
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-top/);
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-bottom/);
     await expect(rows.nth(1)).not.toHaveClass(/svc-row--drag-over-top/);
     await expect(rows.nth(1)).toHaveClass(/svc-row--drag-over-bottom/, { timeout: 15000 });
 
-    await page.locator(".svc-page__content").nth(1).hover({ position: { x: 100, y: 1 } });
+    const pageContent = page.locator(".svc-page__content").nth(1);
+    const contentBox = await pageContent.boundingBox();
+    if (contentBox) await page.mouse.move(contentBox.x + 100, contentBox.y + 1, { steps: 10 });
     await page.mouse.up();
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-top/);
     await expect(rows.nth(0)).not.toHaveClass(/svc-row--drag-over-bottom/);
@@ -1387,22 +1402,35 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
-    await expect(page.locator(".svc-question__adorner")).toBeVisible({ timeout: 15000 });
+    await expect(page.locator(".svc-question__adorner").first()).toBeVisible({ timeout: 15000 });
 
-    const adorner = page.locator(".svc-question__adorner").filter({ visible: true }).first();
+    const adorner = page.locator(".svc-question__adorner").first().filter({ visible: true }).first();
     const box = await adorner.boundingBox();
-    const questionRectRight = box ? box.x + box.width : 0;
-    const questionRectBottom = box ? box.y + box.height : 0;
+    if (!box) throw new Error("Adorner boundingBox is null");
+    const questionRectRight = box.x + box.width;
+    const questionRectBottom = box.y + box.height;
+
+    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorBox = await creatorEl.boundingBox();
+    if (!creatorBox) throw new Error("survey-creator boundingBox is null");
 
     await toolboxToolAction.hover();
     await page.mouse.down();
-    await page.mouse.move(questionRectRight + 8, questionRectBottom - 100, { steps: 20 });
+    await page.mouse.move(creatorBox.x + questionRectRight + 8, creatorBox.y + questionRectBottom - 100, { steps: 20 });
     await expect(page.locator(".svc-question__content").nth(1)).toHaveClass(/svc-question__content--drag-over-left/, { timeout: 15000 });
     await page.mouse.up();
 
+    await page.waitForTimeout(200);
+
     await toolboxToolAction.hover();
     await page.mouse.down();
-    await page.mouse.move(questionRectRight - 100, questionRectBottom + 8, { steps: 20 });
+    await page.waitForTimeout(100);
+    const question3DropTarget = page.locator("[data-sv-drop-target-survey-element=\"question3\"]").filter({ visible: true }).first();
+    const q3Rect = await question3DropTarget.boundingBox();
+    if (!q3Rect) throw new Error("question3 drop target boundingBox is null");
+    const moveX = q3Rect.x + q3Rect.width / 2;
+    const moveY = q3Rect.y + Math.min(25, q3Rect.height * 0.25);
+    await page.mouse.move(moveX, moveY, { steps: 25 });
     await expect(page.locator(".svc-question__content").nth(2)).toHaveClass(/svc-question__content--drag-over-top/, { timeout: 15000 });
     await page.mouse.up();
   });
@@ -1444,25 +1472,33 @@ test.describe(title, () => {
     await page4.scrollIntoViewIfNeeded();
     await page4.hover({ position: { x: 150, y: 20 } });
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
-    await page4DragHandle.dispatchEvent("pointerdown");
-    await page4.hover();
+
+    await page4DragHandle.hover();
+    await page.mouse.down();
+    const page4Box = await page4.boundingBox();
+    if (!page4Box) throw new Error("page4 boundingBox is null");
+    await page.mouse.move(page4Box.x + page4Box.width / 2, page4Box.y + page4Box.height / 2, { steps: 20 });
     await expect(page4).toHaveClass(/svc-page__content--dragged/, { timeout: 15000 });
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(4);
 
     const page1Box = await page1.boundingBox();
-    const pageRectBottom = page1Box ? page1Box.y + page1Box.height : 0;
-    const pageRectLeft = page1Box ? page1Box.x : 0;
+    if (!page1Box) throw new Error("page1 boundingBox is null");
+    const pageRectBottom = page1Box.y + page1Box.height;
+    const pageRectLeft = page1Box.x;
 
-    await page.locator("#survey-creator").filter({ visible: true }).first().hover({ position: { x: pageRectLeft + 50, y: pageRectBottom + 6 } });
+    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorBox = await creatorEl.boundingBox();
+    if (!creatorBox) throw new Error("survey-creator boundingBox is null");
+    await page.mouse.move(creatorBox.x + pageRectLeft + 50, creatorBox.y + pageRectBottom + 6, { steps: 20 });
     await expect(page2.locator(".svc-question__drop-indicator--top")).toBeVisible({ timeout: 15000 });
 
-    await page1.hover({ position: { x: 150, y: 60 } });
+    await page.mouse.move(page1Box.x + 150, page1Box.y + 60, { steps: 20 });
     await expect(page1.locator(".svc-question__drop-indicator--top")).not.toBeVisible();
     await expect(page1.locator(".svc-question__drop-indicator--bottom")).toBeVisible({ timeout: 15000 });
-    await page1.hover({ position: { x: 150, y: 10 } });
+    await page.mouse.move(page1Box.x + 150, page1Box.y + 10, { steps: 20 });
     await expect(page1.locator(".svc-question__drop-indicator--top")).toBeVisible({ timeout: 15000 });
     await expect(page1.locator(".svc-question__drop-indicator--bottom")).not.toBeVisible();
-    await page4DragHandle.dispatchEvent("pointerup");
+    await page.mouse.up();
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
     expect(await getJSON(page)).toEqual(expectedJson);
