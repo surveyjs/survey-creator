@@ -193,9 +193,10 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "totalText",
       "placeholder",
+      { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "rowTitleWidth", tab: "layout" },
-      { name: "keyDuplicationError", tab: "validation" }
+      { name: "keyDuplicationError", tab: "validation" },
     ]
   },
   matrix: {
