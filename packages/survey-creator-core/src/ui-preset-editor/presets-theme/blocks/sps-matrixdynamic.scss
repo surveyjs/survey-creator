@@ -141,19 +141,16 @@
     width: 100%;
   }
 }
-.sps-table-wrapper,
-sv-ng-matrix-table {
-  & ~ .sps-matrixdynamic__footer {
 
 .sps-matrixdynamic__footer--in-dialog {
   display: flex;
   margin: 0;
   padding-top: var(--sjs2-spacing-x150, 12px);
+}
 
-} 
-
-.sps-table-wrapper, sv-ng-matrix-table {
-  &~ .sps-matrixdynamic__footer {
+.sps-table-wrapper,
+sv-ng-matrix-table {
+  & ~ .sps-matrixdynamic__footer {
     border-bottom: none;
     margin-bottom: 0;
     padding-top: var(--sjs2-spacing-x075, 6px);
