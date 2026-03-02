@@ -1,5 +1,4 @@
-// Auto-generated theme: default-light
-export const DefaultLight = {
+export default {
   "themeName": "default-light",
   "iconSet": "v2",
   "isLight": true,
@@ -962,6 +961,4 @@ export const DefaultLight = {
     "--sjs2-border-offset-y-elevated-default": "4px",
     "--sjs2-border-offset-y-floating-default": "6px"
   }
-} as const;
-
-export default DefaultLight;
+};
