@@ -89,13 +89,14 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const c = (window as any).creator;
       const root = c.rootElement.getRootNode();
-      const el = root.getElementById("survey-creator");
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const el = document.getElementById("survey-creator");
       if (el) {
         el.style.position = "relative";
         (el.style as any).bottom = undefined;
         el.style.height = "15000px";
       }
-      const rootEl = root.getElementsByTagName("app-root")[0];
+      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
       if (rootEl) (rootEl as HTMLElement).style.position = "relative";
     });
 
@@ -1214,9 +1215,10 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const c = (window as any).creator;
       const root = c.rootElement.getRootNode();
-      const el = root.getElementById("survey-creator");
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const el = document.getElementById("survey-creator");
       if (el) { el.style.position = "relative"; (el.style as any).bottom = undefined; el.style.height = "10000px"; }
-      const rootEl = root.getElementsByTagName("app-root")[0];
+      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
       if (rootEl) (rootEl as HTMLElement).style.position = "relative";
     });
 
