@@ -5,7 +5,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
     properties: [
       { name: "header", tab: "header" },
 
-      { name: "--sjs-general-backcolor-dim", tab: "background" },
+      { name: "--sjs2-color-bg-neutral-tertiary-dim", tab: "background" },
       { name: "backgroundImage", tab: "background" },
       { name: "backgroundImageFit", tab: "background" },
       { name: "backgroundImageAttachment", tab: "background" },
@@ -15,15 +15,15 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "panelBackgroundTransparency", tab: "appearancecolor" },
       { name: "questionBackgroundTransparency", tab: "appearancecolor" },
 
-      { name: "--sjs-primary-backcolor", tab: "appearanceprimarycolor" },
-      { name: "--sjs-primary-backcolor-dark", tab: "appearanceprimarycolor" },
-      { name: "--sjs-primary-backcolor-light", tab: "appearanceprimarycolor" },
-      { name: "--sjs-primary-forecolor", tab: "appearanceprimarycolor" },
-      { name: "--sjs-primary-forecolor-light", tab: "appearanceprimarycolor" },
-      { name: "--sjs-special-red", tab: "appearanceprimarycolor" },
-      { name: "--sjs-special-red-light", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-bg-brand-primary", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-bg-brand-primary-dim", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-bg-brand-secondary", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-fg-brand-on-primary", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-fg-brand-primary-disabled", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-bg-alert-primary", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-bg-alert-secondary", tab: "appearanceprimarycolor" },
 
-      { name: "--sjs-font-family", tab: "appearancefont" },
+      { name: "--sjs2-typography-font-family-text", tab: "appearancefont" },
       { name: "fontSize", tab: "appearancefont" },
 
       { name: "scale", tab: "appearanceother" },
@@ -34,16 +34,16 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "pageDescription", tab: "appearancepage" },
 
       { name: "questionPanel", tab: "appearancequestion" },
-      { name: "--sjs-shadow-small", tab: "appearancequestion" },
+      { name: "--sjs2-border-effect-surface-default", tab: "appearancequestion" },
       { name: "questionTitle", tab: "appearancequestion" },
       { name: "questionDescription", tab: "appearancequestion" },
 
       { name: "editorPanel", tab: "appearanceinput" },
-      { name: "--sjs-shadow-inner", tab: "appearanceinput" },
+      { name: "--sjs2-border-effect-component-formbox-default", tab: "appearanceinput" },
       { name: "editorFont", tab: "appearanceinput" },
 
-      { name: "--sjs-border-default", tab: "appearancelines" },
-      { name: "--sjs-border-light", tab: "appearancelines" },
+      { name: "--sjs2-color-component-input-default-line", tab: "appearancelines" },
+      { name: "--sjs2-color-border-basic-secondary", tab: "appearancelines" },
 
     ],
     tabs: [

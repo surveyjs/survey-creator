@@ -121,7 +121,6 @@ export class TabDesignerViewModel extends Base {
     assign(
       cssVariables,
       designTabSurveyThemeJSON.cssVariables,
-      this.creator.creatorTheme?.cssVariables || {},
       this.scaleCssVariables
     );
     this.surfaceCssVariables = cssVariables;
