@@ -5,10 +5,9 @@ import "./simulator.scss";
 
 export class SurveySimulatorModel extends Base {
   private surveyChanged() {
-    const _this = this;
     this.survey.onOpenDropdownMenu.add((_, options) => {
       if (this.surveyProvider.isTouch) return;
-      const device = simulatorDevices[_this.activeDevice];
+      const device = simulatorDevices[this.activeDevice];
       options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
     });
   }
@@ -30,6 +29,9 @@ export class SurveySimulatorModel extends Base {
       } else {
         simulator.style.removeProperty("--sv-popup-overlay-height");
       }
+      setTimeout(() => {
+        this.survey.forceProcessResponsiveness();
+      });
     }
   }
 
