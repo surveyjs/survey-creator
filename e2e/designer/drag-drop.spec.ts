@@ -1443,7 +1443,7 @@ test.describe(title, () => {
     const questionRectRight = box.x + box.width;
     const questionRectBottom = box.y + box.height;
 
-    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorEl = page.locator("#survey-creator").first();
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
 
@@ -1523,7 +1523,7 @@ test.describe(title, () => {
     const pageRectBottom = page1Box.y + page1Box.height;
     const pageRectLeft = page1Box.x;
 
-    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorEl = page.locator("#survey-creator").first();
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
     await page.mouse.move(creatorBox.x + pageRectLeft + 50, creatorBox.y + pageRectBottom + 6, { steps: 20 });
@@ -1574,7 +1574,7 @@ test.describe(title, () => {
     await page2.hover({ position: { x: 150, y: 20 } });
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
     await page2DragHandle.dispatchEvent("pointerdown");
-    await page.locator(".svc-designer-header").filter({ visible: true }).first().hover();
+    await page.locator(".svc-designer-header").filter({ visible: true }).first().hover({ force: true });
     await page2DragHandle.dispatchEvent("pointerup");
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
