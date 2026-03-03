@@ -30,7 +30,7 @@ export class SurveySimulatorModel extends Base {
         simulator.style.removeProperty("--sv-popup-overlay-height");
       }
       setTimeout(() => {
-        this.survey.forceProcessResponsiveness();
+        this.survey?.forceProcessResponsiveness();
       });
     }
   }
