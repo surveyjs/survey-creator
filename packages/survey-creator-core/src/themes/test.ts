@@ -1,5 +1,4 @@
-// Auto-generated theme: test
-export const Test = {
+export default {
   "themeName": "test",
   "iconSet": "v2",
   "isLight": true,
@@ -965,6 +964,4 @@ export const Test = {
     "--sjs2-color-border-basic-secondary-for-tests-only": "#d4d4d4",
     "--sjs2-color-utility-shadow-medium": "#004c441a"
   }
-} as const;
-
-export default Test;
+};
