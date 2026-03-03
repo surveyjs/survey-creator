@@ -404,7 +404,7 @@ export class SurveyQuestionProperties {
           : null;
         if (!isColumn || jsonProp?.availableInMatrixColumn) {
           const jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
-          if (!originalTabName && !!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
+          if ((!originalTabName || this.generateOtherTab) && !!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
             classRes.properties.splice(i, 1);
           } else {
             usedProperties[propName] = true;
@@ -472,6 +472,7 @@ export class SurveyQuestionProperties {
     });
     return res;
   }
+  private get generateOtherTab(): boolean { return this.propertyGridDefinition.generateOtherTab === true; }
   private customGeneratedProperties: Array<string> = [];
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
@@ -479,7 +480,7 @@ export class SurveyQuestionProperties {
   ) {
     const unusedProperties = this.getUnusedProperties(usedProperties, isFormMode);
     const invisibleGeneratedProperties = this.getInvisibleGeneratedProperties(tabs);
-    const generateOther = this.propertyGridDefinition.generateOtherTab;
+    const generateOther = this.generateOtherTab;
     const classRes: any = { properties: [], tabs: [] };
     const tabNames = [];
     this.customGeneratedProperties = [].concat(invisibleGeneratedProperties);

@@ -52,7 +52,7 @@ import {
 } from "../../src/property-grid/values";
 import { PropertyGridEditorMatrixPages, PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matrices";
 import { editorLocalization } from "../../src/editorLocalization";
-import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
+import { SurveyQuestionEditorDefinition, defaultPropertyGridDefinition } from "../../src/question-editor/definition";
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
 import { CreatorTester } from "../creator-tester";
@@ -1748,7 +1748,7 @@ test("DefaultValue editor & matrix dropdown vs rowsVisibleIf, Bug#6902", () => {
   const editQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("defaultValue");
   const property = <JsonObjectProperty>(<any>editQuestion).property;
   const editor = <PropertyGridValueEditor>(
-  PropertyGridEditorCollection.getEditor(property)
+    PropertyGridEditorCollection.getEditor(property)
   );
   const valueEditor = editor.createPropertyEditorSetup(
     question,
@@ -4049,4 +4049,26 @@ test("Choices as function & async function, Bug#7207", () => {
 
   Serializer.removeProperty("dropdown", "func");
   Serializer.removeProperty("dropdown", "asyncFunc");
+});
+test("Move a property into another category by changing the category property if generateOtherTab is true, Bug#7465", () => {
+  const requiredTextProp = Serializer.findProperty("question", "requiredErrorText");
+  expect(requiredTextProp.category).toBeFalsy();
+  requiredTextProp.category = "general";
+
+  expect(defaultPropertyGridDefinition.generateOtherTab).toBeTruthy();
+
+  let propertyGrid = new PropertyGridModelTester(new QuestionTextModel("q1"));
+  let requiredTextQuestion = propertyGrid.survey.getQuestionByName("requiredErrorText");
+  expect(requiredTextQuestion).toBeTruthy();
+  expect(requiredTextQuestion.parent.name).toBe("general");
+
+  defaultPropertyGridDefinition.generateOtherTab = false;
+
+  propertyGrid = new PropertyGridModelTester(new QuestionTextModel("q1"));
+  requiredTextQuestion = propertyGrid.survey.getQuestionByName("requiredErrorText");
+  expect(requiredTextQuestion).toBeTruthy();
+  expect(requiredTextQuestion.parent.name).toBe("validation");
+
+  defaultPropertyGridDefinition.generateOtherTab = true;
+  requiredTextProp.category = "";
 });
