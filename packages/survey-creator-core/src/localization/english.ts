@@ -833,6 +833,7 @@ export var enStrings = {
     valueFalse: "Value to store when \"False\" is selected",
     minErrorText: "\"Value is below minimum\" error message",
     maxErrorText: "\"Value exceeds maximum\" error message",
+    stepErrorText: "\"Value does not match step size\" error message",
     otherErrorText: "\"Empty comment\" error message",
     keyDuplicationError: "Error message for duplicate responses",
     minSelectedChoices: "Minimum choices to select",
