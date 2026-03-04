@@ -1,5 +1,4 @@
-import { ComponentCollection, SurveyModel } from "survey-core";
-import { createBoxShadow, parseBoxShadow } from "../../../src/components/tabs/theme-custom-questions/shadow-effects";
+import { ComponentCollection, SurveyModel, createBoxShadow, parseBoxShadow } from "survey-core";
 
 export * from "../../../src/components/tabs/theme-custom-questions/color-alpha";
 export { QuestionFileEditorModel } from "../../../src/custom-questions/question-file";
@@ -31,6 +30,19 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
   }]);
   createdBoxShadow = createBoxShadow(parsedBoxShadow);
   expect(createdBoxShadow).toBe("2px 3px 4px 6px rgba(103, 50, 65, 0.75)");
+
+  boxShadow = "2px 3px 4px 6px rgba(from #673241 calc(75 * 1%))";
+  parsedBoxShadow = parseBoxShadow(boxShadow);
+  expect(parsedBoxShadow).toEqual([{
+    blur: 4,
+    x: 2,
+    y: 3,
+    spread: 6,
+    isInset: false,
+    color: "rgba(from #673241 calc(75 * 1%))"
+  }]);
+  createdBoxShadow = createBoxShadow(parsedBoxShadow);
+  expect(createdBoxShadow).toBe("2px 3px 4px 6px rgba(from #673241 calc(75 * 1%))");
 
   boxShadow = "inset 2px 3px 4px 6px rgb(103, 50, 65)";
   parsedBoxShadow = parseBoxShadow(boxShadow);
