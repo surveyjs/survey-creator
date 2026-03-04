@@ -88,7 +88,7 @@ import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
-import { DefaultLight } from "./themes/default-light";
+import DefaultLight from "./themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
@@ -3182,9 +3182,9 @@ export class SurveyCreatorModel extends Base
         needNewName = !!this.survey.getPageByName(newElement.name);
       } else {
         if (newElement.isPanel) {
-          needNewName = !!this.survey.getPanelByName(newElement.name);
+          needNewName = this.getAllPanels(false).some(p => p.name === newElement.name);
         } else {
-          needNewName = !!this.survey.getQuestionByName(newElement.name);
+          needNewName = this.getAllQuestions(false).some(q => q.name === newElement.name);
         }
       }
     }
