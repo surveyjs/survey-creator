@@ -202,8 +202,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   matrix: {
     properties: [
       "cellType",
-      { name: "rowOrder", tab: "rows" },
-      { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "columnMinWidth", tab: "layout" },
       { name: "rowTitleWidth", tab: "layout" },
       { name: "showHeader", tab: "layout" },
@@ -216,6 +214,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "eachRowUnique", tab: "validation" },
       { name: "columns", tab: "columns" },
       { name: "rows", tab: "rows" },
+      { name: "rowOrder", tab: "rows" },
+      { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "cells", tab: "cells" }
     ],
     tabs: [

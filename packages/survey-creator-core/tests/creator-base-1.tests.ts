@@ -4500,6 +4500,48 @@ test("Do not select a duplicated question if it is not selected, #5634", (): any
   expect(creator.selectedElementName).toEqual("question1");
   expect(counter).toBe(2);
 });
+test("Panel and inner fields contain original names when a panel which is located inside a dynamic panel is copied Bug#7466", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "q1",
+        templateElements: [
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [
+              { type: "text", name: "q2" },
+              {
+                type: "panel",
+                name: "panel2",
+                elements: [
+                  { type: "text", name: "q3" }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const dynamicPanel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("q1");
+  expect(dynamicPanel.templateElements).toHaveLength(1);
+  const panel1 = <PanelModel>dynamicPanel.templateElements[0];
+  creator.copyQuestion(panel1, true);
+  expect(dynamicPanel.templateElements).toHaveLength(2);
+  const panel3 = <PanelModel>dynamicPanel.templateElements[1];
+  expect(panel3.name).toEqual("panel3");
+  expect(panel3.elements).toHaveLength(2);
+  const q4 = panel3.elements[0];
+  expect(q4.name).toEqual("question1");
+  const panel4 = <PanelModel>panel3.elements[1];
+  expect(panel4.name).toEqual("panel4");
+  expect(panel4.elements).toHaveLength(1);
+  const q5 = panel4.elements[0];
+  expect(q5.name).toEqual("question2");
+});
 test("Do not focus title on mobile", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
