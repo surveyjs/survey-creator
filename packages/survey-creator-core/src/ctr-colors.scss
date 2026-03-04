@@ -10,33 +10,33 @@
   --sjs-layer-3-background-400: var(--sjs2-color-bg-basic-secondary-dim);
   --sjs-layer-3-foreground-100: var(--sjs2-color-fg-basic-primary);
   --sjs-layer-3-foreground-50: var(--sjs2-color-fg-basic-secondary);
-  --sjs-layer-2-background-500: var(--sjs2-color-control-formbox-design-bg);
+  --sjs-layer-2-background-500: var(--sjs2-color-component-formbox-design-bg);
   --sjs-layer-2-background-400: var(--sjs2-color-bg-basic-secondary-dim-for-tests-only, var(--sjs2-color-bg-basic-secondary-dim));
-  --sjs-special-haze: var(--sjs2-color-utility-overlay-screen);
+  --sjs-special-haze: var(--sjs2-color-utility-overlay);
   --sjs-border-25: var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   --sjs-border-10: var(--sjs2-color-border-basic-secondary);
   --sjs-primary-background-500: var(--sjs2-color-bg-brand-primary);
   --sjs-primary-background-10: var(--sjs2-color-bg-brand-secondary);
   --sjs-primary-background-400: var(--sjs2-color-bg-brand-primary-dim);
-  --sjs-primary-foreground-100: var(--sjs2-color-fg-static-main-primary);
+  --sjs-primary-foreground-100: var(--sjs2-color-fg-brand-on-primary);
   --sjs-primary-foreground-25: rgba(from var(--sjs2-color-fg-static-main-primary) r g b / 0.25);
   --sjs-secondary-background-500: var(--sjs2-color-bg-accent-primary);
   --sjs-secondary-background-25: var(--sjs2-color-bg-accent-secondary-dim);
   --sjs-secondary-background-10: var(--sjs2-color-bg-accent-secondary);
-  --sjs-secondary-foreground-100: #ffffffff; //used in license banner
+  --sjs-secondary-foreground-100: var(----sjs2-color-fg-accent-on-primary); //used in license banner
   --sjs-secondary-forecolor-25: #ffffff40; //never used
   --sjs-semantic-red-background-500: var(--sjs2-color-bg-alert-primary);
   --sjs-semantic-red-background-10: var(--sjs2-color-bg-alert-secondary);
-  --sjs-semantic-red-foreground-100: var(--sjs2-color-fg-static-main-primary);
+  --sjs-semantic-red-foreground-100: var(--sjs2-color-fg-alert-on-primary);
   --sjs-semantic-green-background-500: #19b394ff;
   --sjs-semantic-green-background-10: #19b3941a;
-  --sjs-semantic-green-foreground-100: #ffffffff;
+  --sjs-semantic-green-foreground-100: var(--sjs2-color-fg-positive-on-primary);
   --sjs-semantic-blue-background-500: var(--sjs2-color-bg-note-primary);
   --sjs-semantic-blue-background-10: var(--sjs2-color-bg-note-secondary);
-  --sjs-semantic-blue-foreground-100: var(--sjs2-color-fg-static-main-primary);
+  --sjs-semantic-blue-foreground-100: var(--sjs2-color-fg-note-on-primary);
   --sjs-semantic-yellow-background-500: var(--sjs2-color-bg-warning-primary);
   --sjs-semantic-yellow-background-10: var(--sjs2-color-bg-warning-secondary);
-  --sjs-semantic-yellow-foreground-100: var(--sjs2-color-fg-static-main-primary);
+  --sjs-semantic-yellow-foreground-100: var(--sjs2-color-fg-warning-on-primary);
   --sjs-semantic-white-background-500: #ffffffff;
   --sjs-code-gray-700: #b6b6b6ff;
   --sjs-code-blue-500: #326fcaff;
@@ -48,7 +48,7 @@
   --sjs-code-gray-500: #8a8a8aff;
   --sjs-special-background: var(--sjs2-color-utility-surface-designer); //!
   --sjs-layer-1-foreground-75: var(--sjs2-color-fg-basic-primary-muted);
-  --sjs-special-glow: var(--sjs2-color-utility-shadow-medium); //!
+  --sjs-special-glow: var(--sjs2-color-utility-shadow-floating-default); //!
   --sjs-special-shadow: var(--sjs2-color-utility-shadow-surface-default);
   --sjs-layer-3-foreground-75: var(--sjs2-color-fg-basic-primary-muted);
   --sjs-layer-2-foreground-100: var(--sjs2-color-fg-basic-primary);
