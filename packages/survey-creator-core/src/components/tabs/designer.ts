@@ -124,10 +124,45 @@ export class TabDesignerViewModel extends Base {
     this.updateSurfaceCssVariables();
   }
   public updateSurfaceCssVariables() {
-    const cssVariables = {};
+    const cssVariables = { ...Default.cssVariables };
+    const cssVariablesToDelete = [
+      "--sjs2-base-unit-size",
+      "--sjs2-color-bg-brand-primary",
+      "--sjs2-color-bg-brand-secondary",
+      "--sjs2-color-bg-brand-primary-dim",
+      "--sjs2-color-fg-brand-on-primary",
+      "--sjs2-color-fg-brand-primary-disabled",
+      "--sjs2-color-bg-accent-primary",
+      "--sjs2-color-bg-accent-secondary",
+      "--sjs2-color-bg-accent-secondary-dim",
+      "--sjs2-color-fg-accent-on-primary",
+      "--sjs2-color-fg-accent-primary-disabled",
+      "--sjs2-color-bg-basic-primary",
+      "--sjs2-color-bg-basic-primary-dim",
+      "--sjs2-color-fg-basic-primary",
+      "--sjs2-color-fg-basic-secondary",
+      "--sjs2-color-bg-neutral-tertiary-dim",
+      "--sjs2-color-component-formbox-default-bg",
+      "--sjs2-color-bg-basic-secondary-dim",
+      "--sjs2-color-component-input-default-line",
+      "--sjs2-color-border-basic-secondary",
+      "--sjs2-color-border-basic-secondary-overlay",
+      "--sjs2-color-bg-alert-primary",
+      "--sjs2-color-bg-alert-secondary",
+      "--sjs2-color-fg-alert-on-primary",
+      "--sjs2-color-bg-positive-primary",
+      "--sjs2-color-bg-positive-secondary",
+      "--sjs2-color-fg-positive-on-primary",
+      "--sjs2-color-bg-note-primary",
+      "--sjs2-color-bg-note-secondary",
+      "--sjs2-color-fg-note-on-primary",
+      "--sjs2-color-bg-warning-primary",
+      "--sjs2-color-bg-warning-secondary",
+      "--sjs2-color-fg-warning-on-primary"
+    ];
+    cssVariablesToDelete.forEach(variable => delete cssVariables[variable]);
     assign(
       cssVariables,
-      Default.cssVariables,
       designTabSurveyThemeJSON.cssVariables,
       this.scaleCssVariables
     );
