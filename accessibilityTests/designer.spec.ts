@@ -24,26 +24,26 @@ test.describe("designer a11y", () => {
     ],
   };
   test("Check designer tab empty", async ({ page }) => {
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check designer compact toolbox", async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: 1080 });
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check designer tab with multiple pages", async ({ page }) => {
     await setJSON(page, jsonWithMultiplePages);
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check page navigator", async ({ page }) => {
     await setJSON(page, jsonWithMultiplePages);
     await page.click(".svc-page__content--new .svc-add-new-question-action");
     await page.click(".svc-page-navigator__selector");
-    await checkA11y(page, ".svc-tab-designer__page-navigator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer__page-navigator"], { axeOptions });
   });
   test("Check sidebar header", async ({ page }) => {
     await setJSON(page, jsonWithMultiplePages);
     await page.click(".svc-sidebar__header-content .svc-menu-action__button");
-    await checkA11y(page, ".svc-sidebar__header", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-sidebar__header"], { axeOptions });
   });
   test("Check radiogroup, rating and checkbox questions", async ({ page }) => {
     await page.evaluate(() => {
@@ -67,7 +67,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check dropdown and tagbox questions", async ({ page }) => {
@@ -85,7 +85,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check dropdown and tagbox questions with defaults", async ({ page }) => {
@@ -103,7 +103,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check boolean, file and ranking questions", async ({ page }) => {
@@ -121,7 +121,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check imagepicker question", async ({ page }) => {
@@ -148,7 +148,7 @@ test.describe("designer a11y", () => {
       ],
     });
     await page.waitForTimeout(500);
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check inputs questions", async ({ page }) => {
@@ -186,7 +186,7 @@ test.describe("designer a11y", () => {
       (window as any).creator.survey.lazyRenderEnabled = false;
     });
     await page.locator(".svc-tab-designer .sv-scroll__scrollbar").first().evaluate(el => el.scrollBy(0, -1000));
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check panels questions", async ({ page }) => {
@@ -207,7 +207,7 @@ test.describe("designer a11y", () => {
       ],
     });
 
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check matrixes questions", async ({ page }) => {
@@ -248,7 +248,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check image questions", async ({ page }) => {
@@ -280,7 +280,7 @@ test.describe("designer a11y", () => {
       ],
     });
     await page.waitForTimeout(500);
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 
   test("Check html, expression and signaturepad questions", async ({ page }) => {
@@ -300,6 +300,6 @@ test.describe("designer a11y", () => {
       ],
     });
     await page.waitForTimeout(500);
-    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 });
