@@ -12,18 +12,18 @@ const buildPath = resolve(__dirname, "build");
 const buildPlatformJson = {
   name: pkg.name,
   version: pkg.version,
-  description: "A white-label drag-and-drop form builder for React that lets you design complex, interactive forms and surveys without writing code. It generates JSON schemas used by the SurveyJS Form Library to render dynamic forms in your React app.",
+  description: "A white-label drag-and-drop form builder for HTML, CSS, and JavaScript apps. It generates JSON schemas for rendering dynamic forms with SurveyJS Form Library. Design complex, interactive forms and surveys without writing code.",
   author: "DevSoft Baltic OU <info@devsoftbaltic.com>",
   homepage: "https://surveyjs.io/",
   license: "SEE LICENSE IN LICENSE",
   licenseUrl: "https://surveyjs.io/licensing",
   keywords: [
-    "react",
+    "vanilla",
+    "vanilla-js",
     "survey",
     "form",
     "surveyjs",
     "survey-library",
-    "react-component",
     "form-builder",
     "dynamic-form-builder",
     "drag-and-drop-form-builder",
@@ -34,7 +34,7 @@ const buildPlatformJson = {
     "ui-component",
     "json",
     "json-schema",
-    "react-schema-form",
+    "schema-form",
     "survey-creator",
     "survey-builder",
     "client-side",
@@ -45,8 +45,8 @@ const buildPlatformJson = {
   files: [
     "**/*"
   ],
-  module: "fesm/survey-creator-react.mjs",
   main: pkg.name + ".js",
+  module: "fesm/survey-creator-js.mjs",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git"
@@ -54,26 +54,26 @@ const buildPlatformJson = {
   engines: {
     node: ">=0.10.0"
   },
-  typings: "./typings/entries/index.d.ts",
+  typings: "./typings/survey-creator-js/entries/index.d.ts",
+  peerDependencies: {
+    "ace-builds": "^1.4.12",
+    "survey-core": pkg.version,
+    "survey-js-ui": pkg.version,
+    "survey-creator-core": pkg.version,
+    "@types/react-dom": "*",
+    "@types/react": "*",
+  },
   exports: {
     ".": {
-      "types": "./typings/entries/index.d.ts",
-      "import": "./fesm/survey-creator-react.mjs",
-      "require": "./survey-creator-react.js"
+      "types": "./typings/survey-creator-js/entries/index.d.ts",
+      "import": "./fesm/survey-creator-js.mjs",
+      "require": "./survey-creator-js.js"
     },
     "./ui-preset-editor": {
-      "types": "./typings/entries/presets.d.ts",
+      "types": "./typings/survey-creator-js/entries/presets.d.ts",
       "import": "./fesm/ui-preset-editor/index.mjs",
       "require": "./ui-preset-editor/index.js"
     }
-  },
-  peerDependencies: {
-    "ace-builds": "^1.4.12",
-    "react": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
-    "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
-    "survey-core": pkg.version,
-    "survey-react-ui": pkg.version,
-    "survey-creator-core": pkg.version
   },
   peerDependenciesMeta: {
     "ace-builds": {
@@ -86,6 +86,7 @@ const buildPlatformJson = {
 if (process.env.emitNonSourceFiles === "true") {
   fs.mkdirSync(buildPath, { recursive: true });
   fs.copyFileSync("./README.md", resolve(buildPath, "README.md"));
+  fs.copyFileSync("./index.html", resolve(buildPath, "index.html"));
   fs.writeFileSync(
     resolve(buildPath, "package.json"),
     JSON.stringify(buildPlatformJson, null, 2),
@@ -97,23 +98,25 @@ export default async (options) => {
 
   return [
     createUmdConfig({
-      input: { "survey-creator-react": resolve("./src/entries/index.ts") },
+      input: { "survey-creator-js": resolve("./entries/index.ts") },
       dir: buildPath,
       tsconfig: resolve(__dirname, "./tsconfig.json"),
       declarationDir: resolve(buildPath, "./typings"),
       external: [
-        "react",
-        "react-dom",
         "survey-core",
         "survey-creator-core",
-        "survey-react-ui"
+        "survey-js-ui",
+        "survey-react-ui",
+        "react",
+        "react-dom",
       ],
       globals: {
-        "react": "React",
-        "react-dom": "ReactDOM",
         "survey-core": "Survey",
         "survey-creator-core": "SurveyCreatorCore",
-        "survey-react-ui": "SurveyReact",
+        "survey-js-ui": "SurveyUI",
+        "survey-react-ui": "SurveyUI",
+        "react": "SurveyUI",
+        "react-dom": "SurveyUI",
       },
       globalName: "SurveyCreator",
       emitMinified: process.env.emitMinified === "true",
@@ -121,15 +124,16 @@ export default async (options) => {
     }),
     createEsmConfig({
       version: pkg.version,
-      input: { "survey-creator-react": resolve("./src/entries/index.ts") },
+      input: { "survey-creator-js": resolve("./entries/index.ts") },
       dir: resolve(buildPath, "fesm"),
       tsconfig: resolve(__dirname, "./tsconfig.json"),
       external: [
-        "react",
-        "react-dom",
         "survey-core",
         "survey-creator-core",
-        "survey-react-ui"
+        "survey-js-ui",
+        "survey-react-ui",
+        "react",
+        "react-dom",
       ]
     })
   ];
