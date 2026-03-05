@@ -32,9 +32,17 @@ export interface ICreatorPresetData {
   localization?: any;
 }
 
+/**
+ * Describes a UI preset configuration.
+ *
+ * A preset configuration specifies whether a preset is visible in the preset list and contains a JSON object that defines how the preset customizes the Survey Creator UI.
+ */
 export interface ICreatorPresetConfig {
   presetName?: string;
   visible?: boolean;
+  /**
+   * Survey Creator UI configuration associated with the preset.
+   */
   json?: ICreatorPresetData | any;
 }
 
@@ -42,7 +50,7 @@ export const PredefinedCreatorPresets: string[] = [];
 export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
 
 /**
- * Registers UI presets to make them available for customization in the Preset Editor UI.
+ * Registers UI presets to make them available for customization in the UI Preset Editor.
  * @param presets One or more UI preset configuations separated by commas, or an object containing multiple configurations.
  */
 export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {

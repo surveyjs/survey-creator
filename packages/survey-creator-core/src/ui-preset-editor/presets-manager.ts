@@ -4,15 +4,23 @@ import { presetsCss } from "./presets-theme/presets";
 import { get } from "lodash";
 import { showConfirmDialog } from "./confirm-dialog";
 
+/**
+ * Describes an item in the preset list.
+ *
+ * A preset list item controls whether a preset is displayed in the list of available presets.
+ */
 export interface IPresetListItem {
+  /**
+   * The preset's unique name.
+   */
   name: string;
+  /**
+   * Specifies whether the preset is visible in the preset list.
+   */
   visible: boolean;
 }
 
 export class PresetsManager {
-  /**
-   *
-   */
   constructor(private creator?: SurveyCreatorModel) {
 
   }
