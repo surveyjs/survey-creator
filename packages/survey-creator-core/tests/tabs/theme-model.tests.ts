@@ -10,6 +10,7 @@ import { CreatorTester } from "../creator-tester";
 import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-model";
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
+import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -74,6 +75,9 @@ const themeFromFile = {
 };
 
 beforeEach(() => {
+  Themes["default-light"] = DefaultLight;
+  Themes["contrast-light"] = ContrastLight;
+  Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
 });
 
@@ -111,8 +115,6 @@ test("Theme model de/serialization", (): any => {
       "--sjs-general-backcolor-dim-dark": "rgba(243, 243, 243, 1)",
       "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
       "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45)",
-      "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
-      "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)",
       "--sjs-primary-backcolor": "rgba(229, 244, 154, 1)",
       "--sjs-primary-backcolor-light": "rgba(229, 244, 154, 0.1)",
       "--sjs-primary-backcolor-dark": "rgba(215, 229, 145, 1)",
@@ -136,9 +138,9 @@ test("Theme model de/serialization", (): any => {
 
   result = themeModel.cssVariables || {};
   expect(result).toStrictEqual(themeJson.cssVariables || {});
-  expect(result["--sjs-base-unit"]).toBe("6px");
-  expect(result["--sjs-corner-radius"]).toBe("20px");
-  expect(result["--sjs-font-size"]).toBe("17.6px");
+  expect(result["--sjs2-base-unit-size"]).toBe("6px");
+  expect(result["--sjs2-base-unit-radius"]).toBe("20px");
+  expect(result["--sjs2-base-unit-font-size"]).toBe("8.8px");
 });
 
 test("Theme model backgroundImage serialization", (): any => {
@@ -239,13 +241,13 @@ test("Theme builder export value from composite question", (): any => {
   themeModel.initialize();
 
   expect(themeModel.editorPanel.backcolor).toBe("rgba(249, 249, 249, 1)");
-  expect(themeModel.getPropertyValue("--sjs-general-backcolor-dim-light")).toEqual("rgba(249, 249, 249, 1)");
-  expect(themeModel.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
+  expect(themeModel.getPropertyValue("--sjs2-color-component-formbox-default-bg")).toEqual("rgba(249, 249, 249, 1)");
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toBe("rgba(249, 249, 249, 1)");
 
   themeModel.themeName = "contrast";
   expect(themeModel.editorPanel.backcolor).toBe("rgba(255, 216, 77, 1)");
-  expect(themeModel.getPropertyValue("--sjs-general-backcolor-dim-light")).toEqual("rgba(255, 216, 77, 1)");
-  expect(themeModel.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
+  expect(themeModel.getPropertyValue("--sjs2-color-component-formbox-default-bg")).toEqual("rgba(255, 216, 77, 1)");
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toBe("rgba(255, 216, 77, 1)");
 });
 
 test("Theme builder switch themes", (): any => {
@@ -253,29 +255,12 @@ test("Theme builder switch themes", (): any => {
   themeModel.initialize();
 
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
 
   themeModel.colorPalette = "dark";
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(255, 152, 20, 1)");
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(36, 36, 36, 1)");
-});
-
-test("Theme builder switch themes with reset of previous values", (): any => {
-  const themeModel = new ThemeModel();
-  themeModel.initialize();
-
-  expect(themeModel.themeName).toEqual("default");
-  expect(themeModel["--sjs-shadow-inner"]).toEqual("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs-shadow-inner-reset"]).toEqual("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
-
-  themeModel.themeName = "contrast";
-  expect(themeModel["--sjs-shadow-inner"]).toEqual("0px 0px 0px 2px rgba(0, 0, 0, 1),0px -2px 0px 2px rgba(0, 0, 0, 1)");
-  expect(themeModel["--sjs-shadow-inner-reset"]).toEqual("0px 0px 0px 0px rgba(0, 0, 0, 1),0px 0px 0px 0px rgba(0, 0, 0, 1)");
-
-  themeModel.themeName = "default";
-  expect(themeModel["--sjs-shadow-inner"]).toEqual("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs-shadow-inner-reset"]).toEqual("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(255, 152, 20, 1)");
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(36, 36, 36, 1)");
 });
 
 test("Theme builder: composite question font", (): any => {
@@ -285,26 +270,26 @@ test("Theme builder: composite question font", (): any => {
   expect(themeModel["questionTitle"]).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 });
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
 
   themeModel["questionTitle"] = { family: "Arial, sans-serif", weight: "500", size: 40 };
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-font-questiontitle-family"]).toEqual("Arial, sans-serif");
-  expect(cssVariables["--sjs-font-questiontitle-weight"]).toEqual("500");
-  expect(cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
+  expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toEqual("Arial, sans-serif");
+  expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toEqual("500");
+  expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toEqual("40px");
 
   themeModel["questionTitle"] = { family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 };
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
 });
 
 test("Theme builder: composite question backgroundcornerradius", (): any => {
@@ -314,16 +299,16 @@ test("Theme builder: composite question backgroundcornerradius", (): any => {
   expect(themeModel.questionPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 1)", "hovercolor": "rgba(248, 248, 248, 1)", cornerRadius: 4 });
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
-  expect(cssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
-  expect(cssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
 
   themeModel.questionPanel = { backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 };
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-questionpanel-backcolor"]).toEqual("#ff44ff");
-  expect(cssVariables["--sjs-questionpanel-hovercolor"]).toEqual("#969696");
-  expect(cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
+  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toEqual("#ff44ff");
+  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toEqual("#969696");
+  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("5px");
 });
 
 test("Theme builder reset to default", (): any => {
@@ -331,13 +316,13 @@ test("Theme builder reset to default", (): any => {
   themeModel.initialize();
 
   expect(themeModel.questionBackgroundTransparency).toEqual(100);
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toBeUndefined();
 
   themeModel.questionBackgroundTransparency = 60;
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   themeModel.resetTheme();
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toBeUndefined();
 });
 
 test("Theme builder themeMode not change modified values ", (): any => {
@@ -345,15 +330,15 @@ test("Theme builder themeMode not change modified values ", (): any => {
   themeModel.initialize();
 
   expect(themeModel.questionBackgroundTransparency).toEqual(100);
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toBeUndefined();
 
   themeModel.questionBackgroundTransparency = 60;
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toEqual("rgba(249, 249, 249, 0.6)");
   expect(themeModel.isPanelless).toEqual(false);
 
   themeModel.isPanelless = true;
   expect(themeModel.questionBackgroundTransparency).toEqual(60);
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
+  expect(themeModel.cssVariables["--sjs2-color-component-formbox-default-bg"]).toEqual("rgba(249, 249, 249, 0.6)");
 });
 
 test("Theme builder: restore values of backgroundcornerradius from loadTheme", (): any => {
@@ -361,9 +346,9 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   themeModel.initialize();
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
-  expect(cssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
-  expect(cssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
 
   expect(themeModel["questionPanel"]).toStrictEqual({
     "backcolor": "rgba(255, 255, 255, 1)",
@@ -376,9 +361,9 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   themeModel.loadTheme(newTheme as any);
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(253, 255, 148, 0.6)");
-  expect(cssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(237, 238, 186, 1)");
-  expect(cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("6px");
+  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toEqual("rgba(253, 255, 148, 0.6)");
+  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toEqual("rgba(237, 238, 186, 1)");
+  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("6px");
 
   expect(themeModel["questionPanel"]).toStrictEqual({
     "backcolor": "rgba(253, 255, 148, 0.6)",
@@ -391,10 +376,10 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   themeModel.initialize();
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-  expect(cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
 
   expect(themeModel["questionTitle"]).toStrictEqual({
     "family": "Open Sans",
@@ -408,10 +393,10 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   themeModel.loadTheme(newTheme as any);
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs-font-questiontitle-family"]).toEqual("Verdana, sans-serif");
-  expect(cssVariables["--sjs-font-questiontitle-weight"]).toEqual("700");
-  expect(cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(201, 90, 231, 0.91)");
-  expect(cssVariables["--sjs-font-questiontitle-size"]).toEqual("18px");
+  expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toEqual("Verdana, sans-serif");
+  expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toEqual("700");
+  expect(cssVariables["--sjs2-color-component-question-default-title"]).toEqual("rgba(201, 90, 231, 0.91)");
+  expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toEqual("18px");
 
   expect(themeModel["questionTitle"]).toStrictEqual({
     "family": "Verdana, sans-serif",
@@ -467,55 +452,55 @@ test("Keep theme css changes through the different themes choosen", (): any => {
   themeModel.initialize();
 
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-primary-backcolor-light"]).toEqual("rgba(25, 179, 148, 0.1)");
-  expect(themeModel["--sjs-primary-backcolor-dark"]).toEqual("rgba(20, 164, 139, 1)");
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-secondary"]).toEqual("rgba(25, 179, 148, 0.1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toEqual("rgba(20, 164, 139, 1)");
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
-  themeModel["--sjs-primary-backcolor"] = fefefeColor;
+  themeModel["--sjs2-color-bg-brand-primary"] = fefefeColor;
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual(fefefeColor);
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual(fefefeColor);
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
-    "--sjs-primary-backcolor": fefefeColor,
-    "--sjs-primary-backcolor-dark": "rgba(239, 239, 239, 1)",
-    "--sjs-primary-backcolor-light": "rgba(254, 254, 254, 0.1)",
+    "--sjs2-color-bg-brand-primary": fefefeColor,
+    "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
+    "--sjs2-color-bg-brand-secondary": "rgba(254, 254, 254, 0.1)",
   });
 
   themeModel.colorPalette = "dark";
   expect(themeModel.colorPalette).toEqual("dark");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual(fefefeColor);
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(36, 36, 36, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual(fefefeColor);
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(36, 36, 36, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
-    "--sjs-primary-backcolor": fefefeColor,
-    "--sjs-primary-backcolor-dark": "rgba(239, 239, 239, 1)",
-    "--sjs-primary-backcolor-light": "rgba(254, 254, 254, 0.1)",
+    "--sjs2-color-bg-brand-primary": fefefeColor,
+    "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
+    "--sjs2-color-bg-brand-secondary": "rgba(254, 254, 254, 0.1)",
   });
 
   themeModel.resetTheme();
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
 
-test("Update --sjs-primary-backcolor-light && --sjs-primary-backcolor-dark", (): any => {
+test("Update --sjs2-color-bg-brand-secondary && --sjs2-color-bg-brand-primary-dim", (): any => {
   const fefefeColor = "rgba(254, 254, 254, 1)";
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["primaryColor"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-primary-backcolor-light"]).toEqual("rgba(25, 179, 148, 0.1)");
-  expect(themeModel["--sjs-primary-backcolor-dark"]).toEqual("rgba(20, 164, 139, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-secondary"]).toEqual("rgba(25, 179, 148, 0.1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toEqual("rgba(20, 164, 139, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel["primaryColor"] = fefefeColor;
   expect(themeModel.themeCssCustomizations).toStrictEqual({
-    "--sjs-primary-backcolor": fefefeColor,
-    "--sjs-primary-backcolor-dark": "rgba(239, 239, 239, 1)",
-    "--sjs-primary-backcolor-light": "rgba(254, 254, 254, 0.1)",
+    "--sjs2-color-bg-brand-primary": fefefeColor,
+    "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
+    "--sjs2-color-bg-brand-secondary": "rgba(254, 254, 254, 0.1)",
   });
 });
 
@@ -544,51 +529,51 @@ test("getThemeChanges", (): any => {
   let themeChanges = getThemeChanges({
     themeName: "default",
     cssVariables: {
-      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("light");
   expect(themeChanges.isPanelless).toBe(false);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
-  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
 
   themeChanges = getThemeChanges({
     cssVariables: {
-      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("light");
   expect(themeChanges.isPanelless).toBe(false);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
-  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
 
   themeChanges = getThemeChanges({
     themeName: "default_exported",
     cssVariables: {
-      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("light");
   expect(themeChanges.isPanelless).toBe(false);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
-  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
 
   themeChanges = getThemeChanges({
     themeName: "default_exported",
     colorPalette: "dark",
     isPanelless: true,
     cssVariables: {
-      "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("dark");
   expect(themeChanges.isPanelless).toBe(true);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
-  expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
 });
 
 test("selectTheme", (): any => {
@@ -597,15 +582,15 @@ test("selectTheme", (): any => {
 
   expect(themeModel.themeName).toEqual("default");
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel.selectTheme("contrast");
   expect(themeModel.themeName).toEqual("contrast");
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs-primary-backcolor"]).toEqual("rgba(0, 0, 0, 1)");
-  expect(themeModel["--sjs-general-backcolor-dim"]).toEqual("rgba(255, 216, 77, 1)");
+  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(0, 0, 0, 1)");
+  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(255, 216, 77, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
 
@@ -613,29 +598,29 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
-  expect(themeModel["--sjs-shadow-small"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs-shadow-inner"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs2-border-effect-surface-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
-  expect(themeModel.cssVariables["--sjs-shadow-small"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-surface-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
-  themeModel["--sjs-shadow-small"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
-  expect(themeModel.cssVariables["--sjs-shadow-small"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  themeModel["--sjs2-border-effect-surface-default"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
+  expect(themeModel.cssVariables["--sjs2-border-effect-surface-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
-  themeModel["--sjs-shadow-inner"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
-  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  themeModel["--sjs2-border-effect-component-formbox-default"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
-  themeModel["--sjs-shadow-inner"] = "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
-  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  themeModel["--sjs2-border-effect-component-formbox-default"] = "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
-  themeModel["--sjs-shadow-inner"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15),inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
-  expect(themeModel.cssVariables["--sjs-shadow-inner"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15),inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+  themeModel["--sjs2-border-effect-component-formbox-default"] = "0px 1px 2px 0px rgba(0, 0, 0, 0.15),inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)";
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15),inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
+  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 });
