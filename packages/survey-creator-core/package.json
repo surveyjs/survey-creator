@@ -54,6 +54,7 @@
     "papaparse": "^5.5.3",
     "postcss": "8.4.32",
     "rimraf": "2.5.4",
+    "rollup": "^4.59.0",
     "sass": "^1.62.1",
     "standard-version": "^9.5.0",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
