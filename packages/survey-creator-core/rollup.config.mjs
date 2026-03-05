@@ -7,7 +7,7 @@ import svgLoader from "svg-inline-loader";
 
 import process from "process";
 import pkg from "./package.json" assert { type: "json" };
-import { createEsmConfig, createUmdConfig, createCssConfig } from "./rollup.helpers.mjs";
+import { createEsmConfig, createUmdConfig, createCssConfig } from "../../rollup.helpers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
@@ -128,6 +128,7 @@ const buildPlatformJson = {
 };
 
 if (process.env.emitNonSourceFiles === "true") {
+  fs.mkdirSync(buildPath, { recursive: true });
   fs.copyFileSync("./README.md", resolve(buildPath, "README.md"));
   fs.writeFileSync(
     resolve(buildPath, "package.json"),
