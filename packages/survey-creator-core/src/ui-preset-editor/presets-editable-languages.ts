@@ -1,4 +1,4 @@
-import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel, Question } from "survey-core";
+import { Serializer, ItemValue, QuestionCheckboxModel, surveyLocalization, SurveyModel, Question, settings as surveyLibSettings } from "survey-core";
 import { CreatorPresetEditableBase } from "./presets-editable-base";
 import { getLocString, editorLocalization, SurveyCreatorModel } from "survey-creator-core";
 function searchItem(params) {
@@ -46,8 +46,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               colCount: 3,
               showSelectAllItem: surveyLocales.length > 1,
               choices: surveyLocales,
-              choicesEnableIf: "{item} <> \"" + surveyLocalization.defaultLocale + "\"",
-              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', {item}, {" + this.searchLocalesName + "}",
+              choicesEnableIf: surveyLibSettings.expressionVariableStartBrace + "item" + surveyLibSettings.expressionVariableEndBrace + " <> \"" + surveyLocalization.defaultLocale + "\"",
+              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', " + surveyLibSettings.expressionVariableStartBrace + "item" + surveyLibSettings.expressionVariableEndBrace + ", " + surveyLibSettings.expressionVariableStartBrace + this.searchLocalesName + surveyLibSettings.expressionVariableEndBrace,
             }]
         },
         {
@@ -61,10 +61,12 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               title: getLocString("presets.languages.translateToEnglish"),
               titleLocation: "hidden",
               renderAs: "switch"
-            }] }
-      ] };
+            }]
+        }
+      ]
+    };
   }
-  public getMainElementNames() : any { return [this.surveyLocalesName]; }
+  public getMainElementNames(): any { return [this.surveyLocalesName]; }
   public getCustomQuestionCssSuffix(question: Question) {
     return question.name === this.searchLocalesName ? "search" : "";
   }
@@ -105,7 +107,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
       this.updateLocaleNames(model);
     }
   }
-  private get creatorLocaleName() : string { return this.path + "_creator"; }
+  private get creatorLocaleName(): string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
   private get searchLocalesName(): string { return this.path + "_searchLocales"; }
   private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }

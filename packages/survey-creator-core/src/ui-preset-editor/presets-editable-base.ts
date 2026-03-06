@@ -1,4 +1,4 @@
-import { Helpers, Question, SurveyModel } from "survey-core";
+import { Helpers, Question, SurveyModel, settings as surveyLibSettings } from "survey-core";
 import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions, getLocString } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
@@ -26,8 +26,8 @@ export class CreatorPresetEditableBase {
   public getPageTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).title; }
   public getPageShortTitle(model: SurveyModel): string { return model.getPageByName(this.pageName).navigationTitle; }
   protected get mainPanelName() { return this.path + "_mainPanel"; }
-  public getMainElementNames() : any { return [this.mainPanelName]; }
-  public getMainPanelName() : any { return this.mainPanelName; }
+  public getMainElementNames(): any { return [this.mainPanelName]; }
+  public getMainPanelName(): any { return this.mainPanelName; }
   public getCustomQuestionCssSuffix(question: Question) { return ""; }
   public createPages(): Array<any> {
     const res = [];
@@ -44,10 +44,10 @@ export class CreatorPresetEditableBase {
     return res;
   }
   public get questionNames(): string[] { return []; }
-  public notifyCallback = (message: string) => {};
+  public notifyCallback = (message: string) => { };
   public validate(model: SurveyModel): boolean {
     if (!this.validateCore(model)) return false;
-    for (let i = 0; i < this.children.length; i ++) {
+    for (let i = 0; i < this.children.length; i++) {
       if (!this.children[i].validate(model)) return false;
     }
     return true;
@@ -62,11 +62,12 @@ export class CreatorPresetEditableBase {
     }
     return res;
   }
-  protected getBoolVisibleIf(name: string, isTrue: boolean = true): string { return "{" + name + "}=" + (isTrue ? "true" : "false"); }
-  protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val + "'"; }
-  protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
+  protected getBoolVisibleIf(name: string, isTrue: boolean = true): string { return this.getItemWithBrace(name) + "=" + (isTrue ? "true" : "false"); }
+  protected getTextVisibleIf(name: string, val: string): string { return this.getItemWithBrace(name) + "='" + val + "'"; }
+  protected getNotEmptyVisibleIf(name: string): string { return this.getItemWithBrace(name) + " notempty"; }
+  private getItemWithBrace(name: string): string { return surveyLibSettings.expressionVariableStartBrace + name + surveyLibSettings.expressionVariableEndBrace; }
   protected createMainPageCore(): any { return undefined; }
-  public getNavigationElementName() : any { return this.navigationPanelName; }
+  public getNavigationElementName(): any { return this.navigationPanelName; }
   public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {
     const page = model.getPageByName(this.pageName);
     const core = page && page.isVisible ? this.getJsonValueCore(model, creator, defaultJson) : undefined;
@@ -164,17 +165,17 @@ export class CreatorPresetEditableBase {
 
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }
   protected resetToDefaultsCore(model: SurveyModel): void { }
-  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
-  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void { }
+  protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void { }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel, defaultJson: any): any { return undefined; }
   protected getDefaultJsonValueCore(creator: SurveyCreatorModel): any { return {}; }
-  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {}
-  protected updateJsonLocalizationStringsCore(locStrs: any): void {}
-  protected disposeCore(): void {}
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void {}
-  protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
-  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
-  protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void { }
+  protected updateJsonLocalizationStringsCore(locStrs: any): void { }
+  protected disposeCore(): void { }
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel, active: boolean): void { }
+  protected updateOnValueChangedCore(model: SurveyModel, name: string): void { }
+  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
+  protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   protected copyJson(json: any): any {
     return Helpers.getUnbindValue(json);
   }
@@ -191,7 +192,7 @@ export class CreatorPresetEditableBase {
   }
   private static saveTextInLocStrs(locStrs: any, text: string, localizationName: string): void {
     const paths = localizationName.split(".");
-    for (let i = 0; i < paths.length - 1; i ++) {
+    for (let i = 0; i < paths.length - 1; i++) {
       const path = paths[i];
       if (!locStrs[path]) {
         locStrs[path] = {};
