@@ -38,6 +38,13 @@ import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 
 export * from "../../src/components/link-value";
 export * from "../../src/custom-questions/question-text-with-reset";
+
+function setDoubleBraces() {
+  surveySettings.expressionVariableDelimiters = { start: "{{", end: "}}" };
+}
+function resetBraces() {
+  surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
+}
 import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 
@@ -2687,12 +2694,94 @@ test("LogicItemUI readOnly", () => {
 });
 test("wrapTextByCurlyBraces", () => {
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
+  setDoubleBraces();
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{{q1}}");
+  resetBraces();
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
+});
+test("openBracket/closeBracket default to survey-core expressionVariableDelimiters", () => {
+  expect(settings.logic.openBracket).toEqual("{");
+  expect(settings.logic.closeBracket).toEqual("}");
+  setDoubleBraces();
+  expect(settings.logic.openBracket).toEqual("{{");
+  expect(settings.logic.closeBracket).toEqual("}}");
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{{q1}}");
+  resetBraces();
+  expect(settings.logic.openBracket).toEqual("{");
+  expect(settings.logic.closeBracket).toEqual("}");
+});
+test("openBracket/closeBracket can be overridden independently of survey-core settings", () => {
   settings.logic.openBracket = "[";
   settings.logic.closeBracket = "]";
-  expect(wrapTextByCurlyBraces("q1")).toEqual("[q1]");
-  settings.logic.openBracket = "{";
-  settings.logic.closeBracket = "}";
-  expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
+  expect(settings.logic.openBracket).toEqual("[");
+  expect(settings.logic.closeBracket).toEqual("]");
+  setDoubleBraces();
+  expect(settings.logic.openBracket).toEqual("[");
+  expect(settings.logic.closeBracket).toEqual("]");
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{{q1}}");
+  resetBraces();
+  settings.logic.openBracket = "";
+  settings.logic.closeBracket = "";
+  expect(settings.logic.openBracket).toEqual("{");
+  expect(settings.logic.closeBracket).toEqual("}");
+});
+test("Condition expression with double braces", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{{q1}} = 1" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].expression).toEqual("{{q1}} = 1");
+  resetBraces();
+});
+test("Rename question in expression with double braces", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{{q2}} = 1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  logic.renameQuestion("q2", "question2");
+  expect(survey.getQuestionByName("q1").visibleIf).toEqual("{{question2}} = 1");
+  resetBraces();
+});
+test("Filter logic items by question with double braces", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{{q1}} = 1" },
+      { type: "text", name: "q3", visibleIf: "{{q1}} = 2" }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(2);
+  expect(logic.items[0].isSuitable("q1")).toBeTruthy();
+  expect(logic.items[1].isSuitable("q1")).toBeTruthy();
+  expect(logic.items[0].isSuitable("q3")).toBeFalsy();
+  resetBraces();
+});
+test("getDisplayText replaces custom braces with quotes", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{{q1}} = 1" }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const displayText = logic.items[0].getDisplayText();
+  expect(displayText.indexOf("{{")).toBe(-1);
+  expect(displayText.indexOf("}}")).toBe(-1);
+  resetBraces();
 });
 test("Rename the name for matrices", () => {
   var survey = new SurveyModel({

@@ -10,7 +10,8 @@ import {
   QuestionTextModel,
   ComponentCollection,
   QuestionCheckboxModel,
-  QuestionCommentModel
+  QuestionCommentModel,
+  settings as surveySettings
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -18,6 +19,13 @@ import { PropertyGridModelTester } from "./property-grid.base";
 import { ActionContainer } from "survey-core";
 
 export * from "../../src/components/link-value";
+
+function setDoubleBraces() {
+  surveySettings.expressionVariableDelimiters = { start: "{{", end: "}}" };
+}
+function resetBraces() {
+  surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
+}
 
 test("Items Builder, simple test", () => {
   var builder = new ConditionEditorItemsBuilder();
@@ -2217,4 +2225,81 @@ test("expression validation with multiple errors", () => {
   const enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
   expect(enableIfQuestion.errors).toHaveLength(1);
   expect(enableIfQuestion.errors[0].text).toBe("Unknown functions: \"foo, bar\".");
+});
+
+test("Items Builder with double braces", () => {
+  setDoubleBraces();
+  var builder = new ConditionEditorItemsBuilder();
+  var items = builder.build("{{question1}} = 1");
+  expect(items).toHaveLength(1);
+  expect(items[0].questionName).toEqual("question1");
+  expect(items[0].operator).toEqual("equal");
+  expect(items[0].value).toEqual(1);
+  resetBraces();
+});
+
+test("Condition editor toExpression with double braces", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" },
+      { type: "text", name: "question3" }
+    ]
+  });
+  var conditionEditor = new ConditionEditor(
+    survey,
+    survey.getQuestionByName("question3")
+  );
+  conditionEditor.text = "{{question1}} = 2";
+  expect(conditionEditor.panel.panelCount).toEqual(1);
+  expect(conditionEditor.text).toEqual("{{question1}} = 2");
+  resetBraces();
+});
+
+test("Condition editor generates expression with double braces", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  var conditionEditor = new ConditionEditor(
+    survey,
+    survey.getQuestionByName("q3")
+  );
+  conditionEditor.text = "{{q1}} = 1";
+  expect(conditionEditor.panel.panelCount).toEqual(1);
+  var panel = conditionEditor.panel.panels[0];
+  panel.getQuestionByName("questionValue").value = 5;
+  const resultText = conditionEditor.text;
+  expect(resultText).toEqual("{{q1}} = 5");
+  resetBraces();
+});
+
+test("Add condition with double braces", () => {
+  setDoubleBraces();
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  var conditionEditor = new ConditionEditor(
+    survey,
+    survey.getQuestionByName("q3")
+  );
+  conditionEditor.text = "{{q1}} = 1";
+  expect(conditionEditor.panel.panelCount).toEqual(1);
+  conditionEditor.panel.addPanel();
+  expect(conditionEditor.panel.panelCount).toEqual(2);
+  var panel2 = conditionEditor.panel.panels[1];
+  panel2.getQuestionByName("questionName").value = "q2";
+  panel2.getQuestionByName("questionValue").value = 3;
+  const resultText = conditionEditor.text;
+  expect(resultText).toEqual("{{q1}} = 1 and {{q2}} = 3");
+  resetBraces();
 });

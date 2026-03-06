@@ -1,7 +1,8 @@
 import {
   Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
-  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString
+  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString,
+  settings as surveyLibSettings
 } from "survey-core";
 
 /**
@@ -11,6 +12,8 @@ export enum QuestionConvertMode {
   AllTypes,
   CompatibleTypes
 }
+var openBracketValue = "";
+var closeBracketValue = "";
 export var settings = {
   translation: {
     sortByName: false,
@@ -68,8 +71,10 @@ export var settings = {
     visibleActions: new Array<string>(),
     invisibleTriggers: new Array<string>(),
     logicItemTitleMaxChars: 50,
-    openBracket: "{",
-    closeBracket: "}",
+    get openBracket(): string { return openBracketValue || surveyLibSettings.expressionVariableDelimiters.start; },
+    set openBracket(val: string) { openBracketValue = val; },
+    get closeBracket(): string { return closeBracketValue || surveyLibSettings.expressionVariableDelimiters.end; },
+    set closeBracket(val: string) { closeBracketValue = val; },
     /**
      * Set these properties to false if you don't want to update expressions on changing question and column names and on changing choices values
      */

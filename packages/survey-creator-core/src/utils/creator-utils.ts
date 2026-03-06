@@ -1,6 +1,5 @@
 import { defaultCss, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { copyCssClasses } from "./utils";
-import { settings } from "../creator-settings";
 
 const opositeValues = {
   true: "false",
@@ -120,5 +119,5 @@ export function assignDefaultClasses(destination: any, questionType: string) {
 }
 
 export function wrapTextByCurlyBraces(text: string) {
-  return settings.logic.openBracket + text + settings.logic.closeBracket;
+  return surveySettings.expressionVariableDelimiters.start + text + surveySettings.expressionVariableDelimiters.end;
 }
