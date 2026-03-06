@@ -118,5 +118,5 @@ export function assignDefaultClasses(destination: any, questionType: string) {
 }
 
 export function wrapTextByCurlyBraces(text: string) {
-  return surveySettings.expressionVariableStartBrace + text + surveySettings.expressionVariableEndBrace;
+  return surveySettings.expressionVariableDelimiters.start + text + surveySettings.expressionVariableDelimiters.end;
 }

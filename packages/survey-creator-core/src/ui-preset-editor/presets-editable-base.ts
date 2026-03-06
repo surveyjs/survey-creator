@@ -65,7 +65,7 @@ export class CreatorPresetEditableBase {
   protected getBoolVisibleIf(name: string, isTrue: boolean = true): string { return this.getItemWithBrace(name) + "=" + (isTrue ? "true" : "false"); }
   protected getTextVisibleIf(name: string, val: string): string { return this.getItemWithBrace(name) + "='" + val + "'"; }
   protected getNotEmptyVisibleIf(name: string): string { return this.getItemWithBrace(name) + " notempty"; }
-  private getItemWithBrace(name: string): string { return surveyLibSettings.expressionVariableStartBrace + name + surveyLibSettings.expressionVariableEndBrace; }
+  private getItemWithBrace(name: string): string { return surveyLibSettings.expressionVariableDelimiters.start + name + surveyLibSettings.expressionVariableDelimiters.end; }
   protected createMainPageCore(): any { return undefined; }
   public getNavigationElementName(): any { return this.navigationPanelName; }
   public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel, defaultJson?: any): any {

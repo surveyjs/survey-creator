@@ -40,12 +40,10 @@ export * from "../../src/components/link-value";
 export * from "../../src/custom-questions/question-text-with-reset";
 
 function setDoubleBraces() {
-  surveySettings.expressionVariableStartBrace = "{{";
-  surveySettings.expressionVariableEndBrace = "}}";
+  surveySettings.expressionVariableDelimiters = { start: "{{", end: "}}" };
 }
 function resetBraces() {
-  surveySettings.expressionVariableStartBrace = "{";
-  surveySettings.expressionVariableEndBrace = "}";
+  surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
 }
 import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
 import { QuestionLinkValueModel } from "../../src/components/link-value";

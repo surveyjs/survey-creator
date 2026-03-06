@@ -46,8 +46,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               colCount: 3,
               showSelectAllItem: surveyLocales.length > 1,
               choices: surveyLocales,
-              choicesEnableIf: surveyLibSettings.expressionVariableStartBrace + "item" + surveyLibSettings.expressionVariableEndBrace + " <> \"" + surveyLocalization.defaultLocale + "\"",
-              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', " + surveyLibSettings.expressionVariableStartBrace + "item" + surveyLibSettings.expressionVariableEndBrace + ", " + surveyLibSettings.expressionVariableStartBrace + this.searchLocalesName + surveyLibSettings.expressionVariableEndBrace,
+              choicesEnableIf: surveyLibSettings.expressionVariableDelimiters.start + "item" + surveyLibSettings.expressionVariableDelimiters.end + " <> \"" + surveyLocalization.defaultLocale + "\"",
+              choicesVisibleIf: "searchItem('" + this.surveyLocalesName + "', " + surveyLibSettings.expressionVariableDelimiters.start + "item" + surveyLibSettings.expressionVariableDelimiters.end + ", " + surveyLibSettings.expressionVariableDelimiters.start + this.searchLocalesName + surveyLibSettings.expressionVariableDelimiters.end,
             }]
         },
         {

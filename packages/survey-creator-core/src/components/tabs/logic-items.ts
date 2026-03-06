@@ -197,8 +197,8 @@ export class SurveyLogicItem {
 
     if (!!conditionText && !!actionsText) {
       const text = this.ifText + " " + conditionText + actionsText;
-      const ob = this.escapeForRegExp(surveyLibSettings.expressionVariableStartBrace);
-      const cb = this.escapeForRegExp(surveyLibSettings.expressionVariableEndBrace);
+      const ob = this.escapeForRegExp(surveyLibSettings.expressionVariableDelimiters.start);
+      const cb = this.escapeForRegExp(surveyLibSettings.expressionVariableDelimiters.end);
       return text.replace(new RegExp("(" + ob + "|" + cb + ")", "gm"), "'");
     } else {
       return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
@@ -281,7 +281,7 @@ export class SurveyLogicItem {
   public renameQuestion(oldName: string, newName: string): void {
     if (!oldName || !newName || oldName === newName) return;
     ["", "panel.", "row."].forEach(prefix =>
-      this.renameQuestionInExpression(prefix + oldName, prefix + newName, [surveyLibSettings.expressionVariableEndBrace, ".", "["])
+      this.renameQuestionInExpression(prefix + oldName, prefix + newName, [surveyLibSettings.expressionVariableDelimiters.end, ".", "["])
     );
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
@@ -291,7 +291,7 @@ export class SurveyLogicItem {
   public renameColumn(question: Question, column: MatrixDropdownColumn, oldName: string): void {
     if (!this.canUpdateExpressionByQuestion(question)) return;
     if (this.actions[0].parentElement === question) {
-      this.renameQuestionInExpression("row." + oldName, "row." + column.name, [surveyLibSettings.expressionVariableEndBrace]);
+      this.renameQuestionInExpression("row." + oldName, "row." + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
     }
     const rows: Array<ItemValue> = question["rows"];
     if (!Array.isArray(rows) || !this.isQuestionInExpression(question)) return;
@@ -299,7 +299,7 @@ export class SurveyLogicItem {
     for (var i = 0; i < rows.length; i++) {
       if (Helpers.isValueEmpty(rows[i].value)) continue;
       const rowName = rows[i].value.toString() + ".";
-      this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [surveyLibSettings.expressionVariableEndBrace]);
+      this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
     }
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
@@ -331,7 +331,7 @@ export class SurveyLogicItem {
     const matrix: Question = question.parentQuestion;
     if (!this.isQuestionInExpression(matrix)) return;
     const columnPostFix = "." + question.getValueName();
-    if (!this.isStrContainsInExpression(columnPostFix + surveyLibSettings.expressionVariableEndBrace)) return;
+    if (!this.isStrContainsInExpression(columnPostFix + surveyLibSettings.expressionVariableDelimiters.end)) return;
     const questionPrefix = matrix.getValueName() + ".";
     const rows: Array<ItemValue> = matrix["rows"];
     let newExpression = this.expression;
@@ -347,7 +347,7 @@ export class SurveyLogicItem {
   public renameRowValue(question: Question, item: ItemValue, oldValue: any): void {
     if (!this.canUpdateExpressionByQuestion(question) || !this.isQuestionInExpression(question)) return;
     const questionName = this.getItemValueQuestionName(question);
-    this.renameQuestionInExpression(questionName + "." + oldValue.toString(), questionName + "." + item.value.toString(), [surveyLibSettings.expressionVariableEndBrace, "."]);
+    this.renameQuestionInExpression(questionName + "." + oldValue.toString(), questionName + "." + item.value.toString(), [surveyLibSettings.expressionVariableDelimiters.end, "."]);
   }
   private canUpdateExpressionByQuestion(question: Question): boolean {
     return !!this.expression && !!question.name && this.actions.length > 0;
@@ -382,7 +382,7 @@ export class SurveyLogicItem {
   public getContext(): Base {
     const exp = this.expression;
     if (!exp) return null;
-    if (!SurveyHelper.getQuestionContextIndexInfo(exp, surveyLibSettings.expressionVariableStartBrace)) return null;
+    if (!SurveyHelper.getQuestionContextIndexInfo(exp, surveyLibSettings.expressionVariableDelimiters.start)) return null;
     for (var i = 0; i < this.actions.length; i++) {
       const parentEl = this.actions[i].parentElement;
       if (!!parentEl) {
@@ -438,7 +438,7 @@ export class SurveyLogicItem {
     if (!this.expression) return;
     oldName = oldName.toLowerCase();
     if (!this.isStrContainsInExpression(oldName)) return;
-    const ob = surveyLibSettings.expressionVariableStartBrace;
+    const ob = surveyLibSettings.expressionVariableDelimiters.start;
     oldName = ob + oldName;
     newName = ob + newName;
     let newExpression = this.expression;

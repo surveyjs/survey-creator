@@ -21,12 +21,10 @@ import { ActionContainer } from "survey-core";
 export * from "../../src/components/link-value";
 
 function setDoubleBraces() {
-  surveySettings.expressionVariableStartBrace = "{{";
-  surveySettings.expressionVariableEndBrace = "}}";
+  surveySettings.expressionVariableDelimiters = { start: "{{", end: "}}" };
 }
 function resetBraces() {
-  surveySettings.expressionVariableStartBrace = "{";
-  surveySettings.expressionVariableEndBrace = "}";
+  surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
 }
 
 test("Items Builder, simple test", () => {
