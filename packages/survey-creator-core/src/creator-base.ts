@@ -15,6 +15,7 @@ import {
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
+import { SurveyYAML } from "./yaml-utils";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
@@ -3025,6 +3026,118 @@ export class SurveyCreatorModel extends Base
     } else {
       this.initSurveyWithJSON(val, true);
     }
+  }
+
+  /**
+   * A survey YAML schema as a string.
+   *
+   * This property allows you to get or set the YAML schema of a survey being configured.
+   */
+  public get yamlText(): string {
+    try {
+      const json = this.JSON;
+      return SurveyYAML.stringify(json);
+    } catch (error) {
+      throw new Error(`Failed to convert survey to YAML: ${error.message}`);
+    }
+  }
+  public set yamlText(value: string) {
+    try {
+      const obj = SurveyYAML.parse(value);
+      this.JSON = obj;
+    } catch (error) {
+      throw new Error(`Failed to parse YAML: ${error.message}`);
+    }
+  }
+
+  /**
+   * Export survey as YAML string
+   */
+  public toYAML(): string {
+    return this.yamlText;
+  }
+
+  /**
+   * Import survey from YAML string
+   */
+  public fromYAML(yamlString: string): void {
+    this.yamlText = yamlString;
+  }
+
+  /**
+   * Export survey definition to YAML file
+   */
+  public exportToYAMLFile(fileName: string = "survey.yml"): void {
+    try {
+      const yamlData = this.yamlText;
+      if (typeof window === "undefined") return;
+      
+      const blob = new Blob([yamlData], { type: "text/yaml" });
+      
+      if ((window.navigator as any)["msSaveOrOpenBlob"]) {
+        (window.navigator as any)["msSaveBlob"](blob, fileName);
+      } else {
+        const elem = window.document.createElement("a");
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = fileName;
+        document.body.appendChild(elem);
+        elem.click();
+        document.body.removeChild(elem);
+      }
+    } catch (error) {
+      throw new Error(`Failed to export YAML file: ${(error as Error).message}`);
+    }
+  }
+
+  /**
+   * Import survey definition from YAML file
+   */
+  public importFromYAMLFile(file: File): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const reader = new FileReader();
+      
+      reader.onload = (event) => {
+        try {
+          const yamlString = event.target?.result as string;
+          this.yamlText = yamlString;
+          resolve();
+        } catch (error) {
+          reject(new Error(`Failed to parse YAML file: ${(error as Error).message}`));
+        }
+      };
+      
+      reader.onerror = () => {
+        reject(new Error("Failed to read file"));
+      };
+      
+      reader.readAsText(file);
+    });
+  }
+
+  /**
+   * Create DOM file input for YAML import
+   */
+  public importFromYAMLFileDOM(): void {
+    if (typeof document === "undefined") return;
+    
+    const inputElement = document.createElement("input");
+    inputElement.type = "file";
+    inputElement.accept = ".yaml,.yml";
+    inputElement.style.display = "none";
+    
+    inputElement.onchange = () => {
+      if (inputElement.files && inputElement.files.length > 0) {
+        this.importFromYAMLFile(inputElement.files[0]).catch(error => {
+          console.error("Failed to import YAML file:", error);
+          // You could emit an event here for error handling
+        });
+        inputElement.value = ""; // Reset for subsequent imports
+      }
+    };
+    
+    document.body.appendChild(inputElement);
+    inputElement.click();
+    document.body.removeChild(inputElement);
   }
   public loadSurvey(surveyId: string): void {
     // eslint-disable-next-line no-console
