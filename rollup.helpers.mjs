@@ -4,6 +4,7 @@ import replace from "@rollup/plugin-replace";
 import bannerPlugin from "rollup-plugin-license";
 import commonjs from "@rollup/plugin-commonjs";
 import pluginVirtual from "@rollup/plugin-virtual";
+import pluginAlias from "@rollup/plugin-alias";
 
 import rollupPostcss from "rollup-plugin-postcss";
 import postcssUrl from "postcss-url";
@@ -35,26 +36,10 @@ async function minifyCSS(code) {
 }
 
 async function minifyJS(code) {
-
-  const comments = [];
-
   const result = await minify(code, {
-    compress: false,
-    format: {
-      comments: (_, { value }) => {
-        if (value.includes("@license") || value.includes("License")) {
-          comments.push(value);
-        }
-        return false;
-      }
-    }
+    compress: true,
   });
-
-  return { code: result.code, comments: comments };
-}
-
-function wrapBanner(e) {
-  return `/*!\n${e.split("\n").map(str => " * " + str).join("\n")}\n */`;
+  return result.code;
 }
 
 function pluginOmit(fn) {
@@ -75,7 +60,7 @@ function pluginMinify() {
       for await (const e of Object.keys(bundle)) {
 
         const item = bundle[e];
-        const { dir, name, ext } = parse(e);
+        const { dir, name } = parse(e);
 
         if (e.endsWith(".css")) {
           this.emitFile({
@@ -86,19 +71,10 @@ function pluginMinify() {
         }
 
         if (e.endsWith(".js")) {
-
-          const { code, comments } = await minifyJS(item.code);
-
           this.emitFile({
             type: "asset",
             fileName: format({ dir, name, ext: ".min.js" }),
-            source: `/*! For license information please see ${name}.min.js.LICENSE.txt */\n${code}`
-          });
-
-          this.emitFile({
-            type: "asset",
-            fileName: format({ dir, name, ext: ".min.js.LICENSE.txt" }),
-            source: comments.map(comment => wrapBanner(comment)).join("\n\n")
+            source: await minifyJS(item.code)
           });
         }
       }
@@ -119,7 +95,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -129,7 +105,8 @@ export function createUmdConfig(options) {
     external,
     plugins: [
       pluginVirtual(virtualModules || {}),
-      nodeResolve({ browser: true }),
+      pluginAlias({ entries: aliases || {} }),
+      nodeResolve(resolve ? resolve : { browser: true }),
       commonjs(),
       replace({
         preventAssignment: false,
@@ -142,6 +119,7 @@ export function createUmdConfig(options) {
         ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
         : typescript({
           tsconfig: tsconfig,
+          filterRoot: false,
           compilerOptions: declarationDir ? {
             inlineSources: true,
             sourceMap: true,
@@ -188,14 +166,15 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve } = options;
 
   return {
     context: "this",
     input,
     plugins: [
       pluginVirtual(virtualModules || {}),
-      nodeResolve({ browser: true }),
+      pluginAlias({ entries: aliases || {} }),
+      nodeResolve(resolve ? resolve : { browser: true }),
       commonjs(),
       replace({
         preventAssignment: false,
@@ -208,6 +187,7 @@ export function createEsmConfig(options) {
         ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
         : typescript({
           tsconfig: tsconfig,
+          filterRoot: false,
           compilerOptions: {
             declaration: false,
             declarationDir: null,
