@@ -486,7 +486,7 @@ test.describe(title, () => {
 
     await expect(getStringEditorByText(page, "Item 2")).toBeFocused();
     await page.evaluate(() => {
-      const el = document.activeElement as HTMLElement;
+      const el = (window as any).creator.rootElement.getRootNode().activeElement as HTMLElement;
       const event = new ClipboardEvent("paste", { bubbles: true, cancelable: true, clipboardData: new DataTransfer() });
       event.clipboardData!.setData("text/plain", "a\nb\nc");
       el.dispatchEvent(event);
@@ -506,7 +506,7 @@ test.describe(title, () => {
     await page.evaluate((data: string) => {
       const event = new Event("paste");
       (event as any).clipboardData = { getData: () => data };
-      document.activeElement!.dispatchEvent(event);
+      (window as any).creator.rootElement.getRootNode().activeElement!.dispatchEvent(event);
     }, "q\nw\ne");
     await page.keyboard.press("Enter");
     const visibleChoicesJson = await page.evaluate(() => JSON.stringify((window as any).creator.survey.getAllQuestions()[0].visibleChoices.map((c: { text: string }) => c.text)));
@@ -516,7 +516,7 @@ test.describe(title, () => {
     await page.evaluate((data: string) => {
       const event = new Event("paste");
       (event as any).clipboardData = { getData: () => data };
-      document.activeElement!.dispatchEvent(event);
+      (window as any).creator.rootElement.getRootNode().activeElement!.dispatchEvent(event);
     }, "a\nb\nc");
     const choicesJson = await page.evaluate(() => JSON.stringify((window as any).creator.survey.getAllQuestions()[0].choices.map((c: { text: string }) => c.text)));
     expect(choicesJson).toEqual("[\"a\",\"b\",\"c\"]");
@@ -537,16 +537,16 @@ test.describe(title, () => {
     });
 
     await page.evaluate(() => {
-      document.addEventListener("copy", function (e: ClipboardEvent) {
+      (window as any).creator.rootElement.getRootNode().addEventListener("copy", function (e: ClipboardEvent) {
         e.clipboardData!.setData("text/html", "<span>s\nd</span>");
         e.clipboardData!.setData("text/plain", "s d");
       });
 
-      document.getElementById("copy-simulator")?.addEventListener("click", () => {
-        document.execCommand("copy");
+      (window as any).creator.rootElement.getRootNode().getElementById("copy-simulator")?.addEventListener("click", () => {
+        (window as any).creator.rootElement.getRootNode().execCommand("copy");
       });
-      document.getElementById("paste-simulator")?.addEventListener("mouseover", () => {
-        document.execCommand("paste"); // does not work in chrome
+      (window as any).creator.rootElement.getRootNode().getElementById("paste-simulator")?.addEventListener("mouseover", () => {
+        (window as any).creator.rootElement.getRootNode().execCommand("paste"); // does not work in chrome
       });
     });
 
@@ -631,13 +631,13 @@ test.describe(title, () => {
     const htmlMarkupSelector = page.locator(".sv-string-editor--html").getByText("Test");
     await expect(htmlMarkupSelector).toBeVisible();
 
-    let innerHTML = await page.evaluate(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor")!.innerHTML);
+    let innerHTML = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".sd-question[data-name=q1] .sv-string-editor")!.innerHTML);
     expect(innerHTML).toEqual("[p]Test[/p]");
     await htmlMarkupSelector.click();
-    innerHTML = await page.evaluate(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor")!.innerHTML);
+    innerHTML = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".sd-question[data-name=q1] .sv-string-editor")!.innerHTML);
     expect(innerHTML).toEqual("&lt;p&gt;Test&lt;/p&gt;");
     await page.keyboard.press("Enter");
-    innerHTML = await page.evaluate(() => document.querySelector(".sd-question[data-name=q1] .sv-string-editor")!.innerHTML);
+    innerHTML = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".sd-question[data-name=q1] .sv-string-editor")!.innerHTML);
     expect(innerHTML).toEqual("[p]Test[/p]");
   });
 

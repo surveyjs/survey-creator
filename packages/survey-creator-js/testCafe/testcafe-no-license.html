@@ -27,7 +27,7 @@
 </head>
 
 <body spellcheck="false">
-  <div id="survey-creator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
+  <div id="survey-creator"></div>
 </body>
 <script>
   window.surveyJSFramework = "react";
@@ -40,7 +40,40 @@
   creator.showOneCategoryInPropertyGrid = false;
   creator.allowZoom = false;
   window.creator = creator;
-  SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
+
+  const container = document.getElementById("survey-creator");
+  const shadowRoot = container.attachShadow({ mode: "open" });
+  const rootElement = document.createElement("div");
+  rootElement.style.position = "fixed";
+  rootElement.style.top = "0";
+  rootElement.style.left = "0";
+  rootElement.style.right = "0";
+  rootElement.style.bottom = "0";
+  
+
+  const styles = document.createElement("style");
+        styles.textContent = `
+          *,
+          ::after,
+          ::before {
+              box-sizing: border-box;
+          }
+        `;
+  shadowRoot.appendChild(styles);
+
+  const surveyLink = document.createElement("link");
+  surveyLink.setAttribute("rel", "stylesheet");
+  surveyLink.setAttribute("href", "../node_modules/survey-core/survey-core.min.css");
+  shadowRoot.appendChild(surveyLink);
+
+  const creatorLink = document.createElement("link");
+  creatorLink.setAttribute("rel", "stylesheet");
+  creatorLink.setAttribute("href", "../node_modules/survey-creator-core/survey-creator-core.min.css");
+  shadowRoot.appendChild(creatorLink);
+
+  shadowRoot.appendChild(rootElement);
+
+  SurveyCreator.renderSurveyCreator(creator, rootElement);
 </script>
 
 </html>

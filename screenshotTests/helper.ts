@@ -243,7 +243,7 @@ export const explicitErrorHandler = async (page) => {
 // }
 
 export async function resetHoverToCreator(page: Page, offsetX: number = 0, offsetY: number = 0): Promise<void> {
-  await page.locator("#survey-creator").hover({ position: { x: offsetX, y: offsetY } });
+  await page.locator("#survey-creator").hover({ position: { x: offsetX, y: offsetY }, force: true });
 }
 
 export const hideAllAdornerActions = async (page) => {
@@ -260,8 +260,9 @@ export const hideAllAdornerActions = async (page) => {
 
 export async function resetFocusToBody(page: Page): Promise<void> {
   await page.evaluate(() => {
-    if (!!document.activeElement) {
-      document.activeElement.blur();
+    const rootNode = (window as any).creator.rootElement.getRootNode();
+    if (!!rootNode.activeElement) {
+      rootNode.activeElement.blur();
     }
     document.body.focus();
   });

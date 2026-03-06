@@ -16,6 +16,6 @@ test.describe("property grid a11y", () => {
     await page.locator(".svc-list__item-body", { hasText: "question1" }).click();
     await page.click(".svc-menu-action__button[title='Data']");
     await expect(page.getByRole("button", { name: "Set Default Answer" })).toBeVisible();
-    await checkA11y(page, ".spg-page", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".spg-page"], { axeOptions });
   });
 });

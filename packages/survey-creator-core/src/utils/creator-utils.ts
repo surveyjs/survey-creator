@@ -103,9 +103,10 @@ export function getQuestionFromObj(obj: SurveyElement): Question {
   return (obj instanceof MatrixDropdownColumn) ? (<MatrixDropdownColumn>obj).templateQuestion : (obj as Question);
 }
 
-export function scrollElementIntoView(elementId: string) {
-  if (!elementId || typeof surveySettings.environment.root === "undefined") return;
-  const el = surveySettings.environment.root.getElementById(elementId);
+export function scrollElementIntoView(elementId: string, surveyRootElement: HTMLElement) {
+  const root = surveyRootElement?.getRootNode() || surveySettings.environment.root;
+  if (!(root instanceof Document || root instanceof ShadowRoot) || !elementId) return;
+  const el = root.getElementById(elementId);
   if (!el) return;
   el.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
 }

@@ -241,13 +241,13 @@ test.describe(title, () => {
 
     const hasNoScroll = () =>
       page.evaluate(() => {
-        const element = document.querySelector(".svc-toolbox");
+        const element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox");
         return element?.scrollHeight === element?.clientHeight;
       });
 
     const setSize = (size: number) =>
       page.evaluate((s) => {
-        const element = document.querySelector(".svc-creator") as HTMLElement;
+        const element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-creator") as HTMLElement;
         if (element) element.style.height = s + "px";
       }, size);
 

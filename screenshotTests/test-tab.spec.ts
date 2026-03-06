@@ -159,7 +159,7 @@ test.describe(title, () => {
 
   test("Check survey timer", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
-    await setJSON(page, {
+    const json = {
       showQuestionNumbers: true,
       headerView: "basic",
       "autoFocusFirstQuestion": true,
@@ -220,7 +220,8 @@ test.describe(title, () => {
           ]
         }
       ]
-    });
+    };
+    await setJSON(page, json);
 
     // Remove timer animation and disable timer start
     await page.addStyleTag({ content: ".sd-timer__progress--animation { transition: none !important; }" });
