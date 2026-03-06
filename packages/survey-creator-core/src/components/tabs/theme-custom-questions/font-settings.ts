@@ -116,9 +116,18 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
+function normalizeFontCssVariablePropertyName(propertyName: string): string {
+  // HeaderModel has both "basic" (surveyTitle/surveyDescription) and "advanced" (headerTitle/headerDescription)
+  // modes, but design tokens use a single set of header typography/color variables.
+  if (propertyName === "surveyTitle") return "headerTitle";
+  if (propertyName === "surveyDescription") return "headerDescription";
+  return propertyName;
+}
+
 export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
-    const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, key === "color" ? "$1-default-$2" : "$1-$2").toLowerCase();
+    const normalizedName = normalizeFontCssVariablePropertyName(property.name);
+    const propertyNameDashed = normalizedName.replace(/([a-z])([A-Z])/g, key === "color" ? "$1-default-$2" : "$1-$2").toLowerCase();
     const cssVarName = key === "color"
       ? `--sjs2-color-component-${propertyNameDashed}`
       : `--sjs2-typography-font-${key}-component-${propertyNameDashed}`;
@@ -133,8 +142,9 @@ export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectP
 export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
   if (!property) return;
 
-  const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
-  const propertyNameColorDashed = property.name.replace(/([a-z])([A-Z])/g, "$1-default-$2").toLowerCase();
+  const normalizedName = normalizeFontCssVariablePropertyName(property.name);
+  const propertyNameDashed = normalizedName.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+  const propertyNameColorDashed = normalizedName.replace(/([a-z])([A-Z])/g, "$1-default-$2").toLowerCase();
 
   const varNames: { [key: string]: string } = {
     family: `--sjs2-typography-font-family-component-${propertyNameDashed}`,

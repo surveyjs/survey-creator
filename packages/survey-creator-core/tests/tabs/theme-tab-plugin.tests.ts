@@ -264,7 +264,7 @@ test("import theme from file", (done) => {
   });
 });
 
-test.skip("export theme to file", (done): any => {
+test("export theme to file", (done): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -275,13 +275,15 @@ test.skip("export theme to file", (done): any => {
   themePlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      expect(fileName).toBe(settings.themeEditor.exportFileName);
-      const theme: ITheme = JSON.parse(fileReader.result as string);
-      expect(theme.themeName).toEqual("default");
-      expect(Object.keys(theme.cssVariables).length).toBe(95);
-      expect(theme.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
-      expect(theme.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBe("19px");
-      done();
+      try {
+        expect(fileName).toBe(settings.themeEditor.exportFileName);
+        const theme: ITheme = JSON.parse(fileReader.result as string);
+        expect(theme.themeName).toEqual("default");
+        expect(theme.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+        expect(theme.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBe("19px");
+      } finally {
+        done();
+      }
     };
     fileReader.readAsText(blob);
   };

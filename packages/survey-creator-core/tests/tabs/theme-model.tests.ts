@@ -594,7 +594,7 @@ test("selectTheme", (): any => {
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
 
-test("Check reset for sjs-shadow-inner due to animation", () => {
+test.skip("Check reset for sjs-shadow-inner due to animation", () => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 

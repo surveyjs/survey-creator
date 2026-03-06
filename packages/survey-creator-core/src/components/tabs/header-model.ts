@@ -39,7 +39,7 @@ export class HeaderModel extends Base implements IHeader {
       this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
     }
 
-    const backgroundColorValue = cssVariables["--sjs-header-backcolor"];
+    const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
     if (!!backgroundColorValue) {
       this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
@@ -87,11 +87,11 @@ export class HeaderModel extends Base implements IHeader {
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     if (this["backgroundColorSwitch"] === "none") {
-      cssVariables["--sjs-header-backcolor"] = undefined;
+      cssVariables["--sjs2-color-component-header-default-bg"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
-      cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
+      cssVariables["--sjs2-color-component-header-default-bg"] = this["backgroundColor"] ?? "transparent";
     } else {
-      cssVariables["--sjs-header-backcolor"] = HeaderModel.primaryColorStr;
+      cssVariables["--sjs2-color-component-header-default-bg"] = HeaderModel.primaryColorStr;
     }
   }
 
