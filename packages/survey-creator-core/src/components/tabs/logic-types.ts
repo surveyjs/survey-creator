@@ -74,9 +74,9 @@ export class SurveyLogicType {
   public hasNeededTypes(types: Array<string>): boolean {
     if(types.indexOf(this.baseClass) < 0) return false;
     const inCls = this.logicType.incorrectClasses;
-    if(Array.isArray(inCls)) {
-      for(let i = 0; i < inCls.length; i ++) {
-        if(types.indexOf(inCls[i]) > -1) return false;
+    if (Array.isArray(inCls)) {
+      for (let i = 0; i < inCls.length; i++) {
+        if (types.indexOf(inCls[i]) > -1) return false;
       }
     }
     return true;
@@ -208,6 +208,13 @@ export class SurveyLogicType {
     const el = this.getElementByName(name);
     return this.getElementDisplayName(el);
   }
+  public formatValue(questionName: string, value: any): any {
+    if (!this.showTitlesInExpression || !this.survey) return value;
+    const question = <Question>this.survey.getQuestionByName(questionName);
+    if (!question) return value;
+    const displayValue = question.getDisplayValue(true, value);
+    return displayValue !== undefined && displayValue !== null ? displayValue : value;
+  }
   public formatExpression(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(
       this.survey,
@@ -257,7 +264,7 @@ export class SurveyLogicTypes {
       },
       supportContext(context: Base): boolean {
         return Array.isArray(context["templateElements"]) ||
-        (Array.isArray(context["detailElements"]) && context["detailElements"].length > 0);
+          (Array.isArray(context["detailElements"]) && context["detailElements"].length > 0);
       },
       getParentElement(element: Base): Base {
         return !!element ? (<Question>element).parentQuestion : null;
@@ -265,7 +272,7 @@ export class SurveyLogicTypes {
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
         const res = new Array<SurveyElement<any>>();
         const questions = survey.getAllQuestions();
-        const addElement = function(el: any) {
+        const addElement = function (el: any) {
           res.push(el);
           if(el.isPanel) {
             el.elements.forEach(child => addElement(child));
@@ -478,7 +485,7 @@ export class SurveyLogicTypes {
         }
         return formatStr["format"](
           lt.formatElName(element["setToName"]),
-          element["setValue"]
+          lt.formatValue(element["setToName"], element["setValue"])
         );
       },
     },
