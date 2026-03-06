@@ -2651,13 +2651,31 @@ test("wrapTextByCurlyBraces", () => {
   resetBraces();
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
 });
-test("wrapTextByCurlyBraces uses survey-core settings, not creator settings", () => {
-  expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
-  setDoubleBraces();
-  expect(wrapTextByCurlyBraces("q1")).toEqual("{{q1}}");
+test("openBracket/closeBracket default to survey-core expressionVariableDelimiters", () => {
   expect(settings.logic.openBracket).toEqual("{");
   expect(settings.logic.closeBracket).toEqual("}");
+  setDoubleBraces();
+  expect(settings.logic.openBracket).toEqual("{{");
+  expect(settings.logic.closeBracket).toEqual("}}");
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{{q1}}");
   resetBraces();
+  expect(settings.logic.openBracket).toEqual("{");
+  expect(settings.logic.closeBracket).toEqual("}");
+});
+test("openBracket/closeBracket can be overridden independently of survey-core settings", () => {
+  settings.logic.openBracket = "[";
+  settings.logic.closeBracket = "]";
+  expect(settings.logic.openBracket).toEqual("[");
+  expect(settings.logic.closeBracket).toEqual("]");
+  setDoubleBraces();
+  expect(settings.logic.openBracket).toEqual("[");
+  expect(settings.logic.closeBracket).toEqual("]");
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{{q1}}");
+  resetBraces();
+  settings.logic.openBracket = "";
+  settings.logic.closeBracket = "";
+  expect(settings.logic.openBracket).toEqual("{");
+  expect(settings.logic.closeBracket).toEqual("}");
 });
 test("Condition expression with double braces", () => {
   setDoubleBraces();
