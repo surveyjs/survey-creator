@@ -299,16 +299,16 @@ test("Theme builder: composite question backgroundcornerradius", (): any => {
   expect(themeModel.questionPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 1)", "hovercolor": "rgba(248, 248, 248, 1)", cornerRadius: 4 });
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBeUndefined();
-  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toBeUndefined();
-  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-formbox-default-bg"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-check-false-hovered-bg"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-form"]).toBeUndefined();
 
   themeModel.questionPanel = { backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 };
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toEqual("#ff44ff");
-  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toEqual("#969696");
-  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("5px");
+  expect(cssVariables["--sjs2-color-component-formbox-default-bg"]).toEqual("rgba(255, 255, 255, 1)");
+  expect(cssVariables["--sjs2-color-component-check-false-hovered-bg"]).toEqual("#969696");
+  expect(cssVariables["--sjs2-radius-form"]).toEqual("5px");
 });
 
 test("Theme builder reset to default", (): any => {

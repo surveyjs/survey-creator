@@ -126,9 +126,7 @@ test("Check shadow settings editor", () => {
   ];
   cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs2-border-effect-surface-default"]).toBe("0px 2px 3px 0px rgba(0, 0, 0, 0.15)");
-  expect(cssVariables["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel["--sjs2-border-effect-surface-default"]).toBe("0px 2px 3px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
@@ -142,9 +140,7 @@ test("Check shadow settings editor", () => {
   ];
   cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
-  expect(cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
@@ -158,9 +154,7 @@ test("Check shadow settings editor", () => {
   ];
   cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
-  expect(cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 3px 4px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
@@ -183,9 +177,7 @@ test("Check shadow settings editor", () => {
 
   cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15),inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
-  expect(cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default"]).toBe("0px 3px 4px 0px rgba(0, 0, 0, 0.15),inset 0px 5px 6px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel.cssVariables["--sjs2-border-effect-component-formbox-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15),inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 });
 
 test("Check all file edit questions has onChooseFiles callback", (): any => {
@@ -495,8 +487,8 @@ test("disable irrelevant settings", (): any => {
   let groupHeader: any = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
   let headerViewContainer = groupHeader.elements[0].contentPanel;
 
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
 
@@ -535,8 +527,8 @@ test("disable irrelevant settings", (): any => {
   groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header") as any;
   headerViewContainer = groupHeader.elements[0].contentPanel;
 
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
@@ -553,8 +545,8 @@ test("disable page settings if single page mode", (): any => {
   let headerViewContainer = groupHeader.elements[0].contentPanel;
 
   expect(creator.survey.isSinglePage).toBeFalsy();
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
 
@@ -594,8 +586,8 @@ test("disable page settings if single page mode", (): any => {
   groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header") as any;
   headerViewContainer = groupHeader.elements[0].contentPanel;
   expect(creator.survey.isSinglePage).toBeTruthy();
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
@@ -610,8 +602,8 @@ test("disable irrelevant settings (property grid buttons)", (): any => {
   let groupHeader: any = themePlugin.propertyGrid.survey.pages[1];
   let headerViewContainer = groupHeader.elements[0].contentPanel;
 
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
 
@@ -650,8 +642,8 @@ test("disable irrelevant settings (property grid buttons)", (): any => {
   groupHeader = themePlugin.propertyGrid.survey.pages[1];
   headerViewContainer = groupHeader.elements[0].contentPanel;
 
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
@@ -667,8 +659,8 @@ test("disable page settings if single page mode (property grid buttons)", (): an
   let headerViewContainer = groupHeader.elements[0].contentPanel;
 
   expect(creator.survey.isSinglePage).toBeFalsy();
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
 
@@ -708,8 +700,8 @@ test("disable page settings if single page mode (property grid buttons)", (): an
   groupHeader = themePlugin.propertyGrid.survey.pages[1] as any;
   headerViewContainer = groupHeader.elements[0].contentPanel;
   expect(creator.survey.isSinglePage).toBeTruthy();
-  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
-  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("headerDescription").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
@@ -867,16 +859,6 @@ test("headerViewContainer init state", (): any => {
       "size": 32,
       "weight": "700",
     },
-    "surveyDescription": {
-      "family": "Open Sans",
-      "size": 16,
-      "weight": "400",
-    },
-    "surveyTitle": {
-      "family": "Open Sans",
-      "size": 32,
-      "weight": "700",
-    },
   });
 });
 
@@ -890,25 +872,25 @@ test("set headerViewContainer basic", (): any => {
   const themeModel = themePlugin.themeModel as ThemeModel;
   const groupHeader: any = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
-  const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
-  const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
   const header = themeModel.header as HeaderModel;
 
   expect(simulatorSurvey.logoPosition).toEqual("left");
   expect(creator.survey.logoPosition).toEqual("left");
-  expect(header["surveyTitle"]).toStrictEqual({ family: "Open Sans", weight: "700", size: 32 });
-  expect(header["surveyDescription"]).toStrictEqual({ family: "Open Sans", weight: "400", size: 16 });
+  expect(header["headerTitle"]).toStrictEqual({ family: "Open Sans", weight: "700", size: 32 });
+  expect(header["headerDescription"]).toStrictEqual({ family: "Open Sans", weight: "400", size: 20 });
 
   headerViewContainer.getElementByName("logoPosition").value = "right";
-  surveyTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
-  surveyTitleQuestion.contentPanel.getQuestionByName("size").value = 41;
-  surveyTitleQuestion.contentPanel.getQuestionByName("family").value = "Courier New";
-  surveyDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
-  surveyDescriptionQuestion.contentPanel.getQuestionByName("size").value = 21;
-  surveyDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Trebuchet MS";
+  headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
+  headerTitleQuestion.contentPanel.getQuestionByName("size").value = 41;
+  headerTitleQuestion.contentPanel.getQuestionByName("family").value = "Courier New";
+  headerDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
+  headerDescriptionQuestion.contentPanel.getQuestionByName("size").value = 21;
+  headerDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Trebuchet MS";
 
-  expect(header["surveyTitle"]).toStrictEqual({ family: "Courier New", weight: "400", size: 41 });
-  expect(header["surveyDescription"]).toStrictEqual({ family: "Trebuchet MS", weight: "800", size: 21 });
+  expect(header["headerTitle"]).toStrictEqual({ family: "Courier New", weight: "400", size: 41 });
+  expect(header["headerDescription"]).toStrictEqual({ family: "Trebuchet MS", weight: "800", size: 21 });
 
   expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
   expect(creator.survey.logoPosition).toEqual("right");
@@ -1074,16 +1056,6 @@ test("restore basic headerViewContainer values", (): any => {
     "size": 39,
     "weight": "800",
   });
-  expect(headerViewContainer.getQuestionByName("surveyDescription").value).toStrictEqual({
-    "family": "Verdana",
-    "size": 19,
-    "weight": "800",
-  });
-  expect(headerViewContainer.getQuestionByName("surveyTitle").value).toStrictEqual({
-    "family": "Georgia",
-    "size": 39,
-    "weight": "800",
-  });
 });
 
 test("restore advanced headerViewContainer values", (): any => {
@@ -1152,16 +1124,6 @@ test("restore advanced headerViewContainer values", (): any => {
   });
   expect(headerViewContainer.getQuestionByName("headerTitle").value).toStrictEqual({
     "color": "rgba(219, 15, 15, 0.91)",
-    "family": "Georgia",
-    "size": 39,
-    "weight": "800",
-  });
-  expect(headerViewContainer.getQuestionByName("surveyDescription").value).toStrictEqual({
-    "family": "Verdana",
-    "size": 19,
-    "weight": "800",
-  });
-  expect(headerViewContainer.getQuestionByName("surveyTitle").value).toStrictEqual({
     "family": "Georgia",
     "size": 39,
     "weight": "800",
@@ -1358,9 +1320,6 @@ test("header editable after theme changed", (): any => {
 
   themeChooser.value = "flat";
   expect(headerTitleQuestion.isVisible).toBe(true);
-
-  headerViewContainer.getElementByName("headerView").value = "basic";
-  expect(headerTitleQuestion.isVisible).toBe(false);
 });
 
 test("advanced header disable inheritWidthFrom and reset it to 'container' if showTOC is true", (): any => {

@@ -1292,15 +1292,15 @@ test("Modify property grid: add/hide properties", (): any => {
     expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
     expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
 
-    expect(themeModel.cssVariables["--sjs-font-custom-question-title-family"]).toBe("Courier New");
-    expect(themeModel.cssVariables["--sjs-font-custom-question-title-weight"]).toBe("400");
-    expect(themeModel.cssVariables["--sjs-font-custom-question-title-color"]).toBe("#787878");
-    expect(themeModel.cssVariables["--sjs-font-custom-question-title-size"]).toBe("41px");
+    expect(themeModel.cssVariables["--sjs2-typography-font-family-component-custom-question-title"]).toBe("Courier New");
+    expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-custom-question-title"]).toBe("400");
+    expect(themeModel.cssVariables["--sjs2-color-component-custom-question-title"]).toBe("#787878");
+    expect(themeModel.cssVariables["--sjs2-typography-font-size-component-custom-question-title"]).toBe("41px");
 
-    expect(themeModel.cssVariables["--sjs-font-matrix-title-family"]).toBe("Trebuchet MS");
-    expect(themeModel.cssVariables["--sjs-font-matrix-title-weight"]).toBe("800");
-    expect(themeModel.cssVariables["--sjs-font-matrix-title-color"]).toBe("#232323");
-    expect(themeModel.cssVariables["--sjs-font-matrix-title-size"]).toBe("21px");
+    expect(themeModel.cssVariables["--sjs2-typography-font-family-component-matrix-title"]).toBe("Trebuchet MS");
+    expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-matrix-title"]).toBe("800");
+    expect(themeModel.cssVariables["--sjs2-color-component-matrix-title"]).toBe("#232323");
+    expect(themeModel.cssVariables["--sjs2-typography-font-size-component-matrix-title"]).toBe("21px");
   } finally {
     Serializer.getProperty("theme", "questionTitle").visible = true;
     Serializer.removeProperty("theme", "custom-question-title");

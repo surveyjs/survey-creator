@@ -549,8 +549,18 @@ export class ThemeModel extends Base implements ITheme {
       this.cornerRadius = this["--sjs2-base-unit-radius"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-radius"])) : undefined;
       if (!!json["backgroundOpacity"])this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
-      this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs2-color-bg-basic-primary", "--sjs2-color-bg-basic-primary-dim", this.cornerRadius);
-      this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs2-color-component-formbox-default-bg", "--sjs2-color-bg-basic-secondary-dim", this.cornerRadius);
+      this["questionPanel"] = backgroundCornerRadiusFromCssVariable(
+        this.getPropertyByName("questionPanel"),
+        json.cssVariables,
+        "--sjs2-color-component-panel-default-bg",
+        "--sjs2-color-unknown-variable-001",
+        this.cornerRadius);
+      this["editorPanel"] = backgroundCornerRadiusFromCssVariable(
+        this.getPropertyByName("editorPanel"),
+        json.cssVariables,
+        "--sjs2-color-component-formbox-default-bg",
+        "--sjs2-color-component-check-false-hovered-bg",
+        this.cornerRadius);
 
       Serializer.getProperties("theme").forEach(property => {
         if (property.type === "font") {
