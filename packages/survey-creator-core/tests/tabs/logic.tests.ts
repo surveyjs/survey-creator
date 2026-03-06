@@ -478,6 +478,54 @@ test("SurveyLogicItem,  clear setValue value", () => {
   expect(trigger.setValue).toBeFalsy();
   expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, clear question value: 'q2'");
 });
+test("SurveyLogicItem, trigger_setvalue displays choice text instead of value when useElementTitles is true", () => {
+  const creator = new CreatorTester({ useElementTitles: true });
+  creator.JSON = {
+    pages: [
+      {
+        name: "preferences",
+        elements: [
+          {
+            type: "dropdown",
+            name: "country",
+            title: "Select your country",
+            choices: [
+              { value: "c1", text: "United States" },
+              { value: "c2", text: "Canada" },
+              { value: "c3", text: "Germany" },
+              { value: "c4", text: "Japan" }
+            ]
+          },
+          {
+            type: "dropdown",
+            name: "favorite_language",
+            title: "Select your favorite programming language",
+            choices: [
+              { value: "lang_js", text: "JavaScript" },
+              { value: "lang_py", text: "Python" },
+              { value: "lang_cs", text: "C#" },
+              { value: "lang_java", text: "Java" }
+            ]
+          }
+        ]
+      }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{country} = 'c2'",
+        setToName: "favorite_language",
+        setValue: "lang_py"
+      }
+    ]
+  };
+  const logic = new SurveyLogicUI(creator.survey, creator);
+  expect(logic.items).toHaveLength(1);
+  const displayText = logic.items[0].getDisplayText();
+  expect(displayText).toBe(
+    "If 'Select your country' == Canada, set into question: 'Select your favorite programming language' value Python"
+  );
+});
 test("SurveyLogicItem, clone and equals", () => {
   var survey = new SurveyModel({
     elements: [
@@ -2063,7 +2111,8 @@ test("A question with name '0' doesn't appear correctly within a condition edito
   const survey = new SurveyModel({
     elements: [
       {
-        type: "radiogroup", name: "0", choices: ["a", "b", "c", "d"] },
+        type: "radiogroup", name: "0", choices: ["a", "b", "c", "d"]
+      },
       { type: "text", name: "q2" }
     ]
   });
