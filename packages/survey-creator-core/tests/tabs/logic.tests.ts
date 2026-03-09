@@ -474,8 +474,10 @@ test("SurveyLogicItem,  clear setValue value", () => {
   expect(trigger.setValue).toBeFalsy();
   expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, clear question value: 'q2'");
 });
-test("SurveyLogicItem, trigger_setvalue displays choice text instead of value when useElementTitles is true", () => {
-  const creator = new CreatorTester({ useElementTitles: true });
+test("SurveyLogicItem, trigger_setvalue displays choice text instead of value when useElementTitles/showObjectTitles is true", () => {
+  const creator = new CreatorTester();
+  creator.showObjectTitles = true;
+  creator.showTitlesInExpressions = true;
   creator.JSON = {
     pages: [
       {
