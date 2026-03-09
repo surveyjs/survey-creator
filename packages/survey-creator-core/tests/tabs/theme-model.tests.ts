@@ -299,16 +299,16 @@ test("Theme builder: composite question backgroundcornerradius", (): any => {
   expect(themeModel.questionPanel).toStrictEqual({ "backcolor": "rgba(255, 255, 255, 1)", "hovercolor": "rgba(248, 248, 248, 1)", cornerRadius: 4 });
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs2-color-component-formbox-default-bg"]).toBeUndefined();
-  expect(cssVariables["--sjs2-color-component-check-false-hovered-bg"]).toBeUndefined();
-  expect(cssVariables["--sjs2-radius-form"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-unknown-variable-001"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
 
   themeModel.questionPanel = { backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 };
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs2-color-component-formbox-default-bg"]).toEqual("rgba(255, 255, 255, 1)");
-  expect(cssVariables["--sjs2-color-component-check-false-hovered-bg"]).toEqual("#969696");
-  expect(cssVariables["--sjs2-radius-form"]).toEqual("5px");
+  expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toEqual("#ff44ff");
+  expect(cssVariables["--sjs2-color-unknown-variable-001"]).toEqual("#969696");
+  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("5px");
 });
 
 test("Theme builder reset to default", (): any => {
@@ -346,8 +346,8 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   themeModel.initialize();
 
   let cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBeUndefined();
-  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toBeUndefined();
+  expect(cssVariables["--sjs2-color-unknown-variable-001"]).toBeUndefined();
   expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
 
   expect(themeModel["questionPanel"]).toStrictEqual({
@@ -361,8 +361,8 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   themeModel.loadTheme(newTheme as any);
 
   cssVariables = themeModel.cssVariables || {};
-  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toEqual("rgba(253, 255, 148, 0.6)");
-  expect(cssVariables["--sjs2-color-bg-basic-primary-dim"]).toEqual("rgba(237, 238, 186, 1)");
+  expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toEqual("rgba(253, 255, 148, 0.6)");
+  expect(cssVariables["--sjs2-color-unknown-variable-001"]).toEqual("rgba(237, 238, 186, 1)");
   expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("6px");
 
   expect(themeModel["questionPanel"]).toStrictEqual({
@@ -439,7 +439,7 @@ test("Modify property grid: restore new property", (): any => {
       color: "rgba(215, 15, 15, 0.91)"
     });
 
-    expect(themeModel.cssVariables["--sjs-font-matrix-title-color"]).toBe("rgba(215, 15, 15, 0.91)");
+    expect(themeModel.cssVariables["--sjs2-color-component-matrix-title"]).toBe("rgba(215, 15, 15, 0.91)");
 
   } finally {
     Serializer.removeProperty("theme", "matrix-title");

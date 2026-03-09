@@ -142,7 +142,7 @@ export class TabDesignerViewModel extends Base {
       "--sjs2-color-fg-basic-primary",
       "--sjs2-color-fg-basic-secondary",
       "--sjs2-color-bg-neutral-tertiary-dim",
-      "--sjs2-color-component-formbox-default-bg",
+      "--sjs2-color-bg-neutral-secondary",
       "--sjs2-color-bg-basic-secondary-dim",
       "--sjs2-color-component-input-default-line",
       "--sjs2-color-border-basic-secondary",
