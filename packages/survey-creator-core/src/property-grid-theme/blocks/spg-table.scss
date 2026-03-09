@@ -2,7 +2,8 @@
 @use "./variables.scss" as *;
 
 .spg-table-wrapper {
-  border: var(--ctr-data-table-border-width, var(--sjs-stroke-x1)) solid var(--ctr-data-table-border-color, var(--sjs-border-25, #d4d4d4ff));
+  border: var(--ctr-data-table-border-width, var(--sjs-stroke-x1)) solid
+    var(--ctr-data-table-border-color, var(--sjs-border-25, #d4d4d4ff));
   border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
   overflow: hidden;
 }
@@ -13,7 +14,8 @@
   border-collapse: collapse;
 
   tr {
-    border-bottom: var(--ctr-data-table-row-border-width, var(--sjs-stroke-x1)) solid var(--ctr-data-table-row-border-color, var(--sjs-border-10, #dcdcdcff));
+    border-bottom: var(--ctr-data-table-row-border-width, var(--sjs-stroke-x1)) solid
+      var(--ctr-data-table-row-border-color, var(--sjs-border-10, #dcdcdcff));
     background-color: var(--ctr-data-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   }
   tbody > tr:last-of-type {
@@ -23,7 +25,6 @@
 
 .spg-table__cell {
   padding: 0;
-
 }
 
 .spg-table__cell--detail-panel {
@@ -31,6 +32,36 @@
 
   .spg-panel__content {
     box-shadow: none;
+  }
+
+  // Fix for long question names in dropdowns (e.g., trigger setToName)
+  .spg-question {
+    width: 100%;
+  }
+
+  .spg-dropdown {
+    width: 100%;
+
+    .spg-dropdown_select-wrapper {
+      width: 100%;
+    }
+
+    .spg-dropdown__value {
+      flex: 1 1 auto;
+      min-width: 0;
+      margin-right: 0 !important;
+      align-items: flex-start;
+
+      .sv-string-viewer {
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+      }
+    }
+
+    .sd-dropdown-action-bar {
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
   }
 }
 .spg-table__cell:where(:not(.spg-table__cell--detail-panel)) {
@@ -146,7 +177,8 @@
 }
 .spg-table__question-wrapper {
   box-sizing: border-box;
-  padding: var(--ctr-data-table-row-padding-top, var(--sjs-spacing-x05)) var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05))
+  padding: var(--ctr-data-table-row-padding-top, var(--sjs-spacing-x05))
+    var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05))
     var(--ctr-data-table-row-padding-bottom, var(--sjs-spacing-x05)) var(--ctr-data-table-row-padding-left, 0px);
 }
 
@@ -163,7 +195,8 @@
       animation-direction: var(--animation-direction);
       animation-timing-function: var(--animation-timing-function);
       animation-fill-mode: forwards;
-      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-duration:
+        var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
       animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
     }
   }

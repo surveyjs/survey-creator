@@ -371,6 +371,48 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator("div[data-name='triggers']"), "triggers-editor-focused.png");
   });
 
+  test("Check triggers long setToName wrap (react)", async ({ page }) => {
+    const skipIfNotReact = await page.evaluate(() => {
+      return window["creator"].survey.platformName !== "react";
+    });
+    if (skipIfNotReact) return;
+
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "question1adas dad asd sdfdsfdsa fsfdsafds fdsf sdaf sdafsdf ads f",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            }
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "type": "setvalue",
+          "setToName": "question1adas dad asd sdfdsfdsa fsfdsafds fdsf sdaf sdafsdf ads f"
+        }
+      ]
+    });
+
+    await getPropertyGridCategory(page, "Conditions").click();
+
+    // Click "Show Details" button to open the first trigger (Set answer)
+    await page.locator("div[data-name='triggers'] button[title='Show Details']").first().click();
+    await page.waitForTimeout(500); // Wait for detail panel to expand
+
+    // Capture the detail panel which contains the setToName dropdown
+    await compareScreenshot(page, page.locator("div[data-name='triggers'] .spg-table__cell--detail-panel").first(), "triggers-editor-long-setto-wrap.png");
+  });
+
   test("Check question with error", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, { pages: [{ elements: [{ type: "text", name: "question1" }] }] });
