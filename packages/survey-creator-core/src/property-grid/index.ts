@@ -988,10 +988,10 @@ export class PropertyGridModel {
       }
     });
     this.survey.editingObj = this.obj;
-    this.applyErroredValuesToEditors();
     this.survey.getAllQuestions().forEach(q => {
       PropertyGridEditorCollection.onAfterSetValue(this.obj, q, q.property, this.options);
     });
+    this.applyErroredValuesToEditors();
     this.updateDependedPropertiesEditors();
 
     if (this.showOneCategoryInPropertyGrid) {

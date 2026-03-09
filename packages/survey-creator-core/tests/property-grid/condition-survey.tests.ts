@@ -2064,6 +2064,7 @@ test("Keep invalid visibleIf text after switching edited object, Issue#7495", ()
   expect(q1.visibleIf).toBeFalsy();
   expect(visibleIfQuestion.value).toBe(invalidExpression);
   expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Syntax error.");
 
   visibleIfQuestion.value = "{q2} = 1";
   expect(visibleIfQuestion.errors).toHaveLength(0);
