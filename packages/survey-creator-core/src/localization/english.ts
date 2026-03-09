@@ -404,6 +404,12 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    urlconditionitem: {
+      expression: "Expression"
+    },
+    htmlconditionitem: {
+      expression: "Expression"
+    },
     // survey templates
     survey: {
       title: "Survey title",
@@ -1873,7 +1879,7 @@ export var enStrings = {
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
     progressBarInheritWidthFrom: "Progress bar area width",
-    themeName: "Theme name",
+    themeName: "Theme name"
   },
   theme: {
     advancedMode: "Advanced mode",
