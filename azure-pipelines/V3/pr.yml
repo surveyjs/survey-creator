@@ -306,14 +306,6 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run testcafe:ci
-        displayName: "Functional test CreatorV2 React"
-        env:
-          TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V2_REACT)
-          TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 React"
 
@@ -435,11 +427,6 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run testcafe:ci
-        displayName: "Functional test CreatorV2 Angular"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 Angular"
 
@@ -553,11 +540,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run build:example:prod
         displayName: "build example"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run testcafe:ci
-        displayName: "Functional test CreatorV2 Vue"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -723,11 +705,6 @@ jobs:
       #      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
       #      npm run test
       #    displayName: 'Unit test CreatorV2 JS'
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run testcafe:ci
-        displayName: "Functional test CreatorV2 JS"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
