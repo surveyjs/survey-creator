@@ -1,5 +1,5 @@
 // Auto-generated theme: test
-export default {
+const TestCreatorTheme = {
   "themeName": "test",
   "iconSet": "v2",
   "isLight": true,
@@ -965,4 +965,13 @@ export default {
     "--sjs2-border-effect-floating-default": "var(--sjs2-border-offset-x-floating-default) var(--sjs2-border-offset-y-floating-default) var(--sjs2-border-blur-floating-default) var(--sjs2-border-spread-floating-default) var(--sjs2-color-utility-shadow-floating-default), 0px 0px 0px 0px rgba(0,0,0,0)",
     "--sjs2-color-border-basic-secondary-for-tests-only": "#d4d4d4"
   }
+};
+
+export default TestCreatorTheme;
+
+import TestLibraryTheme from "survey-core/themes/test";
+
+export const applyCreatorTestTheme = (creator: any) => {
+  creator.applyCreatorTheme(TestCreatorTheme);
+  creator.getPlugin("designer").model.defaultCssVariables = TestLibraryTheme.cssVariables;
 };

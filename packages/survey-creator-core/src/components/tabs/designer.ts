@@ -123,8 +123,10 @@ export class TabDesignerViewModel extends Base {
     this.initSurvey();
     this.updateSurfaceCssVariables();
   }
+
+  public defaultCssVariables: { [index: string]: string } = Default.cssVariables;
   public updateSurfaceCssVariables() {
-    const cssVariables = { ...Default.cssVariables };
+    const cssVariables = { ...this.defaultCssVariables };
     const cssVariablesToDelete = [
       "--sjs2-base-unit-size",
       "--sjs2-color-bg-brand-primary",

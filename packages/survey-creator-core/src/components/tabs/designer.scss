@@ -55,12 +55,15 @@ svc-tab-designer {
     }
   }
 
-  .sd-description .sv-string-editor {
+  .sd-description {
     @include lbrVariables.lbrDefaultFont;
-    color: var(--ctr-survey-header-text-description-color, var(--sjs-layer-3-foreground-50, rgba(0, 0, 0, 0.5)));
-
-    &[aria-placeholder]:empty:before {
-      color: var(--ctr-survey-header-text-description-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+    .sv-string-editor {
+      @include lbrVariables.lbrDefaultFont;
+      color: var(--ctr-survey-header-text-description-color, var(--sjs-layer-3-foreground-50, rgba(0, 0, 0, 0.5)));
+    
+      &[aria-placeholder]:empty:before {
+        color: var(--ctr-survey-header-text-description-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+      }
     }
   }
 }
