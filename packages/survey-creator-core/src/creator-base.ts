@@ -588,8 +588,11 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !pluginCreator) {
       pluginCreator = () => plugin;
     }
-    this.pluginTabs.push({ key: name, iconName, isInternal: isInternal || false });
-    this.pluginMenuHash[name] = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    isInternal = isInternal || false;
+    this.pluginTabs.push({ key: name, iconName, isInternal });
+    const tab = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    tab.visible = !isInternal;
+    this.pluginMenuHash[name] = tab;
     if (!!plugin) {
       this.addPlugin(name, plugin);
     }
