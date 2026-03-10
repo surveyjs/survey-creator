@@ -145,18 +145,22 @@ export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeC
   };
 
   if (!property.defaultValue) property.defaultValue = {};
-  const defaultColorValue = themeCssVariables[varNames.color] ?? (defaultColorVariableName ? themeCssVariables[defaultColorVariableName] : undefined);
-  const defaultPlaceholderColorValue = themeCssVariables[varNames.placeholdercolor] ?? (!!defaultPlaceholderColorVariableName ? themeCssVariables[defaultPlaceholderColorVariableName] : undefined);
   assign(property.defaultValue, {
-    color: defaultColorValue,
-    placeholdercolor: defaultPlaceholderColorValue,
+    color: themeCssVariables[defaultColorVariableName],
+    placeholdercolor: !!defaultPlaceholderColorVariableName ? themeCssVariables[defaultPlaceholderColorVariableName] : undefined,
   });
   if (!property.defaultValue["size"]) {
     const baseFontSize = themeCssVariables[varNames.size] ?? themeCssVariables["--sjs2-base-unit-font-size"] ?? themeCssVariables["--sjs-font-size"];
     property.defaultValue["size"] = baseFontSize !== undefined ? parseFloat(baseFontSize) : undefined;
   }
 
+  const colorValue = themeCssVariables[varNames.color] ?? property.defaultValue.color;
+  const placeholderColorValue = themeCssVariables[varNames.placeholdercolor] ?? property.defaultValue.placeholdercolor;
   const result = { ...property.defaultValue };
+  assign(result, {
+    color: colorValue,
+    placeholdercolor: placeholderColorValue,
+  });
 
   (Object.keys(varNames) as Array<keyof typeof varNames>).forEach((key) => {
     const cssVarName = varNames[key];

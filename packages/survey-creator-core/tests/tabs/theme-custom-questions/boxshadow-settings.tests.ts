@@ -1,6 +1,7 @@
 import { ComponentCollection, SurveyModel, createBoxShadow, parseBoxShadow } from "survey-core";
 
 export * from "../../../src/components/tabs/theme-custom-questions/color-alpha";
+export * from "../../../src/components/tabs/theme-custom-questions/shadow-effects";
 export { QuestionFileEditorModel } from "../../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../../src/custom-questions/question-color";
