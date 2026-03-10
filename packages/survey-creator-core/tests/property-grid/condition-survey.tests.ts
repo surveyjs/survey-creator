@@ -2038,6 +2038,39 @@ test("Expression validation #7362", () => {
   expect(q1.visibleIf).toBe("age({q2}) > 18");
 });
 
+test("Keep invalid visibleIf text after switching edited object, Issue#7495", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const invalidExpression = "bs+{";
+
+  let visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  visibleIfQuestion.value = invalidExpression;
+
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(q1.visibleIf).toBeFalsy();
+  expect((<any>q1)["errored_visibleIf"]).toBe(invalidExpression);
+
+  propertyGrid.obj = q2;
+  propertyGrid.obj = q1;
+
+  visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  expect(q1.visibleIf).toBeFalsy();
+  expect(visibleIfQuestion.value).toBe(invalidExpression);
+  expect(visibleIfQuestion.errors).toHaveLength(1);
+  expect(visibleIfQuestion.errors[0].text).toBe("Syntax error.");
+
+  visibleIfQuestion.value = "{q2} = 1";
+  expect(visibleIfQuestion.errors).toHaveLength(0);
+  expect((<any>q1)["errored_visibleIf"]).toBeUndefined();
+});
+
 test("Do expression validation onload #7362", () => {
   const survey = new SurveyModel({
     elements: [
