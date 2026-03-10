@@ -70,7 +70,7 @@
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
   SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  creator.applyCreatorTheme(SurveyCreatorTheme.Test);
+  SurveyCreatorTheme.Test.applyCreatorTestTheme(creator);
   creator.tabResponsivenessMode = "menu";
   creator["animationEnabled"] = false;
   creator.showOneCategoryInPropertyGrid = false;
