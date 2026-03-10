@@ -428,7 +428,7 @@ test.describe(title, () => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
-    await page.locator(".spg-action-button").nth(1).click();
+    await page.locator(".sps-action-button").nth(1).click();
 
     await page.getByRole("button", { name: "Save" }).click();
 

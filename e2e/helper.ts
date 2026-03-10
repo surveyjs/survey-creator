@@ -50,6 +50,12 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+export const setSurveyProp = async (page: Page, propName: string, value: unknown) => {
+  await page.evaluate(({ propName, value }) => {
+    window["creator"].survey[propName] = value;
+  }, { propName, value });
+};
+
 export const getJSON = async (page: Page) => {
   return await page.evaluate(() => {
     return JSON.parse(window["creator"].text);
@@ -57,8 +63,8 @@ export const getJSON = async (page: Page) => {
 };
 
 interface IDragToElementOptions {
-  elementPosition?: {x: number, y: number};
-  targetPosition?: {x: number, y: number};
+  elementPosition?: {x?: number, y?: number};
+  targetPosition?: {x?: number, y?: number};
   steps?: number;
 }
 
@@ -95,6 +101,7 @@ export async function showPresets(page) {
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
+export const creatorTabJsonEditorName = "JSON Editor";
 export const creatorTabTranslationName = "Translation";
 export const creatorTabThemeName = "Themes";
 export const generalGroupName = "General";
@@ -102,15 +109,19 @@ export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
-  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) }));
+  return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
 }
 
 export function getBarItemByTitle(page: Page, text: string): Locator {
   return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
 }
 
+export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
+  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+}
+
 export function getListItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true });
+  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
 }
 
 export function getMenuItemByText(page: Page, text: string): Locator {
@@ -118,7 +129,7 @@ export function getMenuItemByText(page: Page, text: string): Locator {
 }
 
 export function getPropertyGridCategory(page: Page, categoryName: string): Locator {
-  return page.locator(".spg-panel__title span").getByText(categoryName, { exact: true });
+  return page.locator(".spg-panel__title span").getByText(categoryName, { exact: true }).filter({ visible: true });
 }
 
 export const explicitErrorHandler = async (page: Page) => {
@@ -135,6 +146,31 @@ export const explicitErrorHandler = async (page: Page) => {
 export function getButtonByText(locator: Locator | Page, text: string) {
   return locator.getByRole("button", { name: text });
 }
+export async function patchDragDropToDisableDrop(page: Page) {
+  await page.evaluate(() => {
+    const c = (window as any).creator;
+    if (!c) return;
+
+    if (c.dragDropSurveyElements) {
+      c.dragDropSurveyElements.drop = () => { };
+      if (c.dragDropSurveyElements.domAdapter) {
+        c.dragDropSurveyElements.domAdapter.drop = () => { };
+      }
+    }
+
+    if (c.dragDropChoices) {
+      c.dragDropChoices.drop = () => { };
+      if (c.dragDropChoices.domAdapter) {
+        c.dragDropChoices.domAdapter.drop = () => { };
+      }
+    }
+  });
+}
+
+export function getVisibleElement(page: Page, selector: string) {
+  return page.locator(selector).filter({ visible: true });
+}
+
 export async function changeToolboxScrolling(page: Page, hasScroll: boolean) {
   await page.evaluate((newVal) => {
     window["creator"].toolbox.overflowBehavior = newVal ? "scroll" : "hideInMenu";
@@ -155,6 +191,24 @@ export async function changeToolboxLocation(page: Page, newVal: string) {
 
 export async function getPagesLength(page: Page): Promise<number> {
   return await page.evaluate(() => window["creator"].survey.pages.length);
+}
+export async function getQuestionsLength(page: Page): Promise<number> {
+  return await page.evaluate(() => window["creator"].survey.getAllQuestions().length);
+}
+
+export async function getQuestionNameByIndex(page: Page, index: number): Promise<string> {
+  return await page.evaluate((i) => window["creator"].survey.getAllQuestions()[i].name, index);
+}
+
+export async function getItemValueByIndex(page: Page, questionName: string, index: number): Promise<string | undefined> {
+  return await page.evaluate(([qName, i]) => {
+    const creator = (window as any).creator;
+    if (!creator || !creator.survey) return undefined;
+    const question = creator.survey.getQuestionByName(qName);
+    const choices = question && question.visibleChoices ? question.visibleChoices : [];
+    const choice = choices[i];
+    return choice ? choice.value : undefined;
+  }, [questionName, index]);
 }
 
 export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
@@ -188,7 +242,7 @@ export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-a
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
   await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).click();
+  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {

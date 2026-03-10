@@ -107,7 +107,7 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await page.locator(".svc-question__content").click();
     await page.locator(".spg-panel__title--expandable").getByText("Choice Options").click();
-    await page.locator(".spg-action-button[title='Add new choice']").click();
+    await page.locator(".spg-action-button[title='Add new choice']").filter({ visible: true }).click();
     await page.locator(".spg-matrixdynamic tr:last-of-type .spg-action-button--danger").click();
     await expect(page.locator(".sd-imagepicker > *:not(svc-image-item-value)")).toHaveCount(6);
   });

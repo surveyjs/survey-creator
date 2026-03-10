@@ -57,5 +57,57 @@ test.describe(title, () => {
     expect(classNames3).toContain(phonePopup);
     expect(classNames3).not.toContain(tabletPopup);
   });
-});
 
+  test("Simulator TOC", async ({ page }) => {
+    await setJSON(page, {
+      "showTOC": true,
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "dropdown",
+              "name": "question1",
+              "choices": ["Item 1", "Item 2", "Item 3"]
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2",
+            }
+          ]
+        }
+      ]
+    });
+    const tocList = page.locator(".sv_progress-toc.sv_progress-toc--left.sv_progress-toc--sticky");
+    const tocMobile = page.locator(".sv_progress-toc.sv_progress-toc--mobile");
+    await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
+    await expect(tocList).toBeVisible();
+    await expect(tocMobile).not.toBeVisible();
+
+    await page.getByRole("button", { name: "Select device type" }).click();
+    await page.getByText("iPhone SE").click();
+    await expect(tocList).toBeVisible();
+    await expect(tocMobile).not.toBeVisible();
+
+    await page.getByRole("button", { name: "Switch to portrait orientation" }).click();
+    await expect(tocList).not.toBeVisible();
+    await expect(tocMobile).toBeVisible();
+
+    await page.getByRole("button", { name: "Switch to landscape" }).click();
+    await expect(tocList).toBeVisible();
+    await expect(tocMobile).not.toBeVisible();
+
+    await page.getByRole("button", { name: "Switch to portrait orientation" }).click();
+    await expect(tocList).not.toBeVisible();
+    await expect(tocMobile).toBeVisible();
+
+    await page.getByRole("button", { name: "Switch to landscape" }).click();
+    await expect(tocList).toBeVisible();
+    await expect(tocMobile).not.toBeVisible();
+  });
+});
