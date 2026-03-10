@@ -3,7 +3,7 @@ import { registerCreatorTheme, SurveyCreatorModel } from "survey-creator-core";
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
 import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
-import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
+import SurveyCreatorTestTheme, { applyCreatorTestTheme } from "survey-creator-core/themes/test";
 import SurveyCreatorUIPreset from "survey-creator-core/ui-presets";
 import { registerUIPreset } from 'survey-creator-core';
 @Component({
@@ -20,7 +20,7 @@ export class PresetsComponent extends TestDefaultComponent {
     registerUIPreset(SurveyCreatorUIPreset);
     registerCreatorTheme(SurveyCreatorTestTheme);
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
-    this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
+    applyCreatorTestTheme(this.creator);
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     settings.animationEnabled = false;
