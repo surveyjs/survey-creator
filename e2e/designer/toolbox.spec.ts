@@ -288,6 +288,8 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 598 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
     await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    // Wait for layout to recalculate visibility after enabling search and viewport change
+    await page.waitForTimeout(100);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(10);
   });
 
