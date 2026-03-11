@@ -745,7 +745,6 @@ export var enStrings = {
     acceptedCategories: "Accepted file categories",
     acceptedTypes: "Additional file extensions",
     waitForUpload: "Wait for upload to complete",
-    needConfirmRemoveFile: "Confirm file deletion",
     detailPanelMode: "Row details alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
@@ -819,7 +818,8 @@ export var enStrings = {
     },
     file: {
       imageHeight: "Image height",
-      imageWidth: "Image width"
+      imageWidth: "Image width",
+      confirmDelete: "Confirm file deletion"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
@@ -1554,7 +1554,8 @@ export var enStrings = {
     file: {
       imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
       imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
-      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
+      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead.",
+      confirmDelete: "Triggers a prompt asking to confirm the file deletion."
     },
     image: {
       contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -1706,7 +1707,6 @@ export var enStrings = {
     valueTrue: "A value to save in survey results when respondents give a positive answer.",
     valueFalse: "A value to save in survey results when respondents give a negative answer.",
     showPreview: "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
-    needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion.",
     selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
