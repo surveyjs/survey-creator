@@ -4808,6 +4808,15 @@ export class SurveyCreatorModel extends Base
 
   }
 
+  public applySurfaceTheme(theme: ITheme): void {
+    this.setSurfaceCssVariables(theme.cssVariables);
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.deactivate();
+      designerPlugin.activate();
+    }
+  }
+
   private patchLegacyCSSVariables(newCssVariable: any) {
     Object.keys(legacyCssVariables).forEach((variable) => {
       if (!!newCssVariable[variable]) {
@@ -4881,6 +4890,11 @@ export class SurveyCreatorModel extends Base
       this.defaultSurveyCssVariables,
       designTabSurveyThemeJSON.cssVariables,
     );
+
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
+    if (designerPlugin && designerPlugin.model) {
+      designerPlugin.model.updateUnitDictionaryFromTheme();
+    }
   }
 
   private _allowDragPages = true;

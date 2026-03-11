@@ -1,5 +1,5 @@
 // Auto-generated theme: test
-const TestCreatorTheme = {
+export default {
   "themeName": "test",
   "iconSet": "v2",
   "isLight": true,
@@ -967,12 +967,3 @@ const TestCreatorTheme = {
   }
 };
 
-export default TestCreatorTheme;
-
-import TestLibraryTheme from "survey-core/themes/test";
-
-export const applyCreatorTestTheme = (creator: any) => {
-  creator.applyCreatorTheme(TestCreatorTheme);
-  creator.setSurfaceCssVariables(TestLibraryTheme.cssVariables);
-  creator.getPlugin("designer").model.updateUnitDictionaryFromTheme(TestLibraryTheme);
-};

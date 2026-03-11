@@ -120,14 +120,14 @@ export class TabDesignerViewModel extends Base {
 
     this.initSurfaceToolbar();
     this.initSurvey();
+    this.updateUnitDictionaryFromTheme();
     this.updateSurfaceCssVariables();
   }
 
-  public updateUnitDictionaryFromTheme(theme: ITheme) {
+  public updateUnitDictionaryFromTheme() {
     Object.keys(this.unitDictionary).forEach(key => {
-      this.unitDictionary[key] = parseFloat(theme.cssVariables[key]) || this.unitDictionary[key];
+      this.unitDictionary[key] = parseFloat(this.creator.defaultSurveyCssVariables[key]) || this.unitDictionary[key];
     });
-    this.updateSurfaceCssVariables();
   }
 
   public updateSurfaceCssVariables() {
