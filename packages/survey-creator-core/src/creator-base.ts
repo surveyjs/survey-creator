@@ -1637,6 +1637,13 @@ export class SurveyCreatorModel extends Base
   public set activeTab(val: string) {
     this.switchTab(val);
   }
+  public get activeTabMenuItem(): TabbedMenuItem {
+    return this.pluginMenuHash[this.activeTab];
+  }
+  public get activeTabId() {
+    const menuItem = this.activeTabMenuItem;
+    return !!menuItem ? menuItem.id : "";
+  }
   /**
    * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.
    * @param tabName A tab that you want to make active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
