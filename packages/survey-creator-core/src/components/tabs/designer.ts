@@ -1,5 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, CssClassBuilder } from "survey-core";
-import Default from "survey-core/themes/default-light";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, CssClassBuilder, ITheme } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -124,51 +123,15 @@ export class TabDesignerViewModel extends Base {
     this.updateSurfaceCssVariables();
   }
 
-  public defaultCssVariables: { [index: string]: string } = Default.cssVariables;
+  public updateUnitDictionaryFromTheme(theme: ITheme) {
+    Object.keys(this.unitDictionary).forEach(key => {
+      this.unitDictionary[key] = parseFloat(theme.cssVariables[key]) || this.unitDictionary[key];
+    });
+    this.updateSurfaceCssVariables();
+  }
+
   public updateSurfaceCssVariables() {
-    const cssVariables = { ...this.defaultCssVariables };
-    const cssVariablesToDelete = [
-      "--sjs2-base-unit-size",
-      "--sjs2-color-bg-brand-primary",
-      "--sjs2-color-bg-brand-secondary",
-      "--sjs2-color-bg-brand-primary-dim",
-      "--sjs2-color-fg-brand-on-primary",
-      "--sjs2-color-fg-brand-primary-disabled",
-      "--sjs2-color-bg-accent-primary",
-      "--sjs2-color-bg-accent-secondary",
-      "--sjs2-color-bg-accent-secondary-dim",
-      "--sjs2-color-fg-accent-on-primary",
-      "--sjs2-color-fg-accent-primary-disabled",
-      "--sjs2-color-bg-basic-primary",
-      "--sjs2-color-bg-basic-primary-dim",
-      "--sjs2-color-fg-basic-primary",
-      "--sjs2-color-fg-basic-secondary",
-      "--sjs2-color-bg-neutral-tertiary-dim",
-      "--sjs2-color-bg-neutral-secondary",
-      "--sjs2-color-bg-basic-secondary-dim",
-      "--sjs2-color-component-input-default-line",
-      "--sjs2-color-border-basic-secondary",
-      "--sjs2-color-border-basic-secondary-overlay",
-      "--sjs2-color-bg-alert-primary",
-      "--sjs2-color-bg-alert-secondary",
-      "--sjs2-color-fg-alert-on-primary",
-      "--sjs2-color-bg-positive-primary",
-      "--sjs2-color-bg-positive-secondary",
-      "--sjs2-color-fg-positive-on-primary",
-      "--sjs2-color-bg-note-primary",
-      "--sjs2-color-bg-note-secondary",
-      "--sjs2-color-fg-note-on-primary",
-      "--sjs2-color-bg-warning-primary",
-      "--sjs2-color-bg-warning-secondary",
-      "--sjs2-color-fg-warning-on-primary"
-    ];
-    cssVariablesToDelete.forEach(variable => delete cssVariables[variable]);
-    assign(
-      cssVariables,
-      designTabSurveyThemeJSON.cssVariables,
-      this.scaleCssVariables
-    );
-    this.surfaceCssVariables = cssVariables;
+    this.surfaceCssVariables = { ...this.creator.defaultSurveyCssVariables, ...this.scaleCssVariables };
   }
 
   private initSurfaceToolbar() {

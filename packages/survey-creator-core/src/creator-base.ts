@@ -89,6 +89,7 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import DefaultLight from "./themes/default-light";
+import Default from "survey-core/themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
@@ -1720,6 +1721,7 @@ export class SurveyCreatorModel extends Base
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
     this.applyCreatorTheme(DefaultLight);
+    this.setSurfaceCssVariables(Default.cssVariables);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
@@ -2778,7 +2780,7 @@ export class SurveyCreatorModel extends Base
     const survey = this.createSurveyCore(json, area, element);
     if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
-      survey.applyTheme(designTabSurveyThemeJSON);
+      survey.applyTheme({ cssVariables: this.defaultSurveyCssVariables });
       survey.gridLayoutEnabled = false;
     }
 
@@ -4834,6 +4836,51 @@ export class SurveyCreatorModel extends Base
     if (isLight !== undefined) {
       this.preferredColorPalette = isLight ? "light" : "dark";
     }
+  }
+
+  public defaultSurveyCssVariables: { [index: string]: string };
+  public setSurfaceCssVariables(newDefaultSurveyCssVariables: { [index: string]: string }) {
+    this.defaultSurveyCssVariables = { ...newDefaultSurveyCssVariables };
+    const cssVariablesToDelete = [
+      "--sjs2-base-unit-size",
+      "--sjs2-color-bg-brand-primary",
+      "--sjs2-color-bg-brand-secondary",
+      "--sjs2-color-bg-brand-primary-dim",
+      "--sjs2-color-fg-brand-on-primary",
+      "--sjs2-color-fg-brand-primary-disabled",
+      "--sjs2-color-bg-accent-primary",
+      "--sjs2-color-bg-accent-secondary",
+      "--sjs2-color-bg-accent-secondary-dim",
+      "--sjs2-color-fg-accent-on-primary",
+      "--sjs2-color-fg-accent-primary-disabled",
+      "--sjs2-color-bg-basic-primary",
+      "--sjs2-color-bg-basic-primary-dim",
+      "--sjs2-color-fg-basic-primary",
+      "--sjs2-color-fg-basic-secondary",
+      "--sjs2-color-bg-neutral-tertiary-dim",
+      "--sjs2-color-bg-neutral-secondary",
+      "--sjs2-color-bg-basic-secondary-dim",
+      "--sjs2-color-component-input-default-line",
+      "--sjs2-color-border-basic-secondary",
+      "--sjs2-color-border-basic-secondary-overlay",
+      "--sjs2-color-bg-alert-primary",
+      "--sjs2-color-bg-alert-secondary",
+      "--sjs2-color-fg-alert-on-primary",
+      "--sjs2-color-bg-positive-primary",
+      "--sjs2-color-bg-positive-secondary",
+      "--sjs2-color-fg-positive-on-primary",
+      "--sjs2-color-bg-note-primary",
+      "--sjs2-color-bg-note-secondary",
+      "--sjs2-color-fg-note-on-primary",
+      "--sjs2-color-bg-warning-primary",
+      "--sjs2-color-bg-warning-secondary",
+      "--sjs2-color-fg-warning-on-primary"
+    ];
+    cssVariablesToDelete.forEach(variable => delete this.defaultSurveyCssVariables[variable]);
+    assign(
+      this.defaultSurveyCssVariables,
+      designTabSurveyThemeJSON.cssVariables,
+    );
   }
 
   private _allowDragPages = true;

@@ -973,5 +973,6 @@ import TestLibraryTheme from "survey-core/themes/test";
 
 export const applyCreatorTestTheme = (creator: any) => {
   creator.applyCreatorTheme(TestCreatorTheme);
-  creator.getPlugin("designer").model.defaultCssVariables = TestLibraryTheme.cssVariables;
+  creator.setSurfaceCssVariables(TestLibraryTheme.cssVariables);
+  creator.getPlugin("designer").model.updateUnitDictionaryFromTheme(TestLibraryTheme);
 };
