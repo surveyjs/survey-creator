@@ -7,9 +7,10 @@
 import { slk } from "survey-core";
 import { registerSurveyTheme, registerCreatorTheme, SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import SurveyThemes from "survey-core/themes";
-import SurveyCreatorTestTheme, { applyCreatorTestTheme } from "survey-creator-core/themes/test";
+import TestCreatorTheme from "survey-creator-core/themes/test";
+import TestLibraryTheme from "survey-core/themes/test";
 registerSurveyTheme(SurveyThemes);
-registerCreatorTheme(SurveyCreatorTestTheme);
+registerCreatorTheme(TestCreatorTheme);
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";
@@ -19,7 +20,8 @@ if (props.useSlk) {
   slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2LDg9MjAzNC0xMC0xNg==");
 }
 const creator = shallowRef(new SurveyCreatorModel(props.options));
-applyCreatorTestTheme(creator.value);
+creator.value.applyCreatorTheme(TestCreatorTheme);
+creator.value.applySurfaceTheme(TestLibraryTheme);
 (window as any).creator = creator.value;
 creator.value.tabResponsivenessMode = "menu";
 creator.value["animationEnabled"] = false;
@@ -32,7 +34,7 @@ creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.
   const newCreator = new SurveyCreatorModel(options);
   newCreator.JSON = json;
   creator.value = newCreator;
-  creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
+  creator.value.applyCreatorTheme(TestCreatorTheme);
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
   if(props.options.propertyGridNavigationMode != 'buttons') {
