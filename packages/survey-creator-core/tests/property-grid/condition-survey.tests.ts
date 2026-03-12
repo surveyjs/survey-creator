@@ -2363,7 +2363,7 @@ test("Prefer question by name over question by valueName in condition editor, bu
     ]
   });
   const question = survey.getQuestionByName("q1");
-  const conditionEditor = new ConditionEditor(survey, question);
+  const conditionEditor = new ConditionEditor(survey, question.validators[0], undefined, "expression");
   conditionEditor.text = "{q1} >= 75";
   const panel = conditionEditor.panel.panels[0];
   const questionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");

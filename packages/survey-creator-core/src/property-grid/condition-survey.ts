@@ -687,6 +687,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         question.addConditionObjectsByContext(res, context);
       }
       this.mergeSelectBasedQuestions(res);
+      this.removeEntriesByValueName(res);
     }
 
     const variableNames = this.survey.getVariableNames();
@@ -773,6 +774,22 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const qs = selectBaseHash[valueName];
       if (qs.length < 2) continue;
       this.replaceQuestions(res, qs);
+    }
+  }
+  private removeEntriesByValueName(res: Array<any>): void {
+    const nameHash: any = {};
+    for (let i = 0; i < res.length; i++) {
+      const q: Question = res[i].question;
+      if (q && !q.valueName) {
+        nameHash[res[i].name] = q;
+      }
+    }
+    for (let i = res.length - 1; i >= 0; i--) {
+      const q: Question = res[i].question;
+      const nameQuestion = nameHash[res[i].name];
+      if (q && !!q.valueName && !!nameQuestion && q.parentQuestion === nameQuestion.parentQuestion) {
+        res.splice(i, 1);
+      }
     }
   }
   private replaceQuestions(res: Array<any>, arr: Array<Question>): void {
