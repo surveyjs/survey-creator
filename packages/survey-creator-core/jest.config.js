@@ -8,13 +8,14 @@ module.exports = {
       "outputName": "junit.xml"
     }]
   ],
-  collectCoverage: true,
+  collectCoverage: false,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],
   roots: ["tests"],
   transform: {
     "^.+\\.(t|j)sx?$": ["ts-jest", {
       diagnostics: false,
-      tsconfig: "tsconfig.test.json"
+      tsconfig: "tsconfig.test.json",
+      isolatedModules: true
     }]
   },
   moduleNameMapper: {
