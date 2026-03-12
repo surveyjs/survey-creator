@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import svgLoader from "svg-inline-loader";
 
 import process from "process";
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json" with { type: "json" };
 import { createEsmConfig, createUmdConfig, createCssConfig } from "../../rollup.helpers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

@@ -3,7 +3,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import process from "process";
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json" with { type: "json" };
 import { createEsmConfig, createUmdConfig } from "../../rollup.helpers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
