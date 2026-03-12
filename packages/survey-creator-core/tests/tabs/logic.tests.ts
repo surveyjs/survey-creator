@@ -3964,4 +3964,52 @@ test("SurveyLogic: Delete completedHtmlOnCondition item instead of removing expr
   logic.removeItem(logic.items[0]);
   expect(survey.completedHtmlOnCondition).toHaveLength(0);
 });
+test("LogicPlugin: question filter shows names when useElementTitles is false, Bug#7502", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "First Question" },
+      { type: "text", name: "q2", title: "Second Question", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", title: "Third Question", visibleIf: "{q1} = 2" },
+    ]
+  };
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const filterQuestion = creator.getActionBarItem("svc-logic-filter-question");
+  new PopupDropdownViewModel(filterQuestion.popupModel);
+  const listActions = filterQuestion.popupModel.contentComponentData.model.actions;
+
+  logicPlugin.activate();
+  filterQuestion.action();
+
+  expect(listActions).toHaveLength(4);
+  expect(listActions[0].title).toEqual("All Questions");
+  expect(listActions[1].title).toEqual("q1");
+  expect(listActions[2].title).toEqual("q2");
+  expect(listActions[3].title).toEqual("q3");
+});
+test("LogicPlugin: question filter shows titles when useElementTitles is true, Bug#7502", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester({ showLogicTab: true, useElementTitles: true });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "First Question" },
+      { type: "text", name: "q2", title: "Second Question", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", title: "Third Question", visibleIf: "{q1} = 2" },
+    ]
+  };
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const filterQuestion = creator.getActionBarItem("svc-logic-filter-question");
+  new PopupDropdownViewModel(filterQuestion.popupModel);
+  const questions = filterQuestion.popupModel.contentComponentData.model.actions;
+
+  logicPlugin.activate();
+  filterQuestion.action();
+
+  expect(questions).toHaveLength(4);
+  expect(questions[0].title).toEqual("All Questions");
+  expect(questions[1].title).toEqual("First Question");
+  expect(questions[2].title).toEqual("Second Question");
+  expect(questions[3].title).toEqual("Third Question");
+});
 
