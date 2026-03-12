@@ -14,8 +14,7 @@ module.exports = {
   transform: {
     "^.+\\.(t|j)sx?$": ["ts-jest", {
       diagnostics: false,
-      tsconfig: "tsconfig.test.json",
-      isolatedModules: true
+      tsconfig: "tsconfig.test.json"
     }]
   },
   moduleNameMapper: {

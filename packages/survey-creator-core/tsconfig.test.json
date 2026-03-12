@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "isolatedModules": true,
     "allowJs": true,
     "declaration": false,
     "declarationDir": null,
