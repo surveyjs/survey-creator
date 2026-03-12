@@ -26,6 +26,7 @@ export class TabDesignerViewModel extends Base {
     "--lbr-spacing-unit": 8,
     "--lbr-corner-radius-unit": 8,
     "--lbr-stroke-unit": 1,
+    "--sjs-base-unit": 8,
     "--sjs2-base-unit-size": 8,
     "--sjs2-base-unit-spacing": 8,
     "--sjs2-base-unit-radius": 8,
