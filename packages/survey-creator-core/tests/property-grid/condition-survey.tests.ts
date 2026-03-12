@@ -2336,3 +2336,39 @@ test("Add condition with double braces", () => {
   expect(resultText).toEqual("{{q1}} = 1 and {{q2}} = 3");
   resetBraces();
 });
+test("Prefer question by name over question by valueName in condition editor, bug#7506", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "slider",
+        name: "q1",
+        title: "Slider Question",
+        validators: [
+          {
+            type: "expression",
+            expression: "{q1} >= 75"
+          }
+        ],
+        min: 70,
+        max: 99,
+        step: 0.1,
+        labelCount: 3
+      },
+      {
+        type: "text",
+        name: "q2",
+        title: "Text Question with valueName q1",
+        valueName: "q1"
+      }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const conditionEditor = new ConditionEditor(survey, question);
+  conditionEditor.text = "{q1} >= 75";
+  const panel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(1);
+  expect(questionName.choices[0].value).toBe("q1");
+  const questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toEqual("slider");
+});

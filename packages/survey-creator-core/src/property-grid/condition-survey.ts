@@ -706,7 +706,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         name = name.replace(unwrappedValueText, "");
         res[i].text = this.getConditionQuestionText(question, name);
       }
-      this.addConditionQuestionsHash[res[i].name] = question;
+      const hashKey = res[i].name;
+      if (!this.addConditionQuestionsHash[hashKey] || question.name === hashKey) {
+        this.addConditionQuestionsHash[hashKey] = question;
+      }
     }
 
     this.addValuesIntoConditionQuestions(variableNames, res);
@@ -898,7 +901,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return false;
   }
   private getConditionQuestion(name: string): Question {
-    return <Question>this.addConditionQuestionsHash[name];
+    const question = <Question>this.addConditionQuestionsHash[name];
+    if (question && question.name !== name) {
+      const directQuestion = <Question>this.survey.getQuestionByName(name);
+      if (directQuestion) return directQuestion;
+    }
+    return question;
   }
   private getQuestionConditionJson(questionName: string, operator?: string): any {
     let path = "";
