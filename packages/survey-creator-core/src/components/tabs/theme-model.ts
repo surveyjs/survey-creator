@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -361,8 +361,19 @@ export class ThemeModel extends Base implements ITheme {
 
       // Replace cssVariables with computed values
       const newCssVariables: { [key: string]: string } = {};
+      const calcProxyProperty = "width";
       for (const key of Object.keys(themeCopyCssVariables)) {
-        newCssVariables[key] = computed.getPropertyValue(key);
+        let value = computed.getPropertyValue(key);
+        // getComputedStyle for custom properties may return calc() unresolved; force computation via a length property
+        if (typeof value === "string" && value.indexOf("calc(") === 0) {
+          div.style.setProperty(calcProxyProperty, value);
+          value = computed.getPropertyValue(calcProxyProperty);
+          div.style.removeProperty(calcProxyProperty);
+        }
+        if (key.indexOf("-color-") !== -1 && value !== "transparent") {
+          value = getRGBaColor(value);
+        }
+        newCssVariables[key] = value;
       }
       themeCopyCssVariables = newCssVariables;
 
