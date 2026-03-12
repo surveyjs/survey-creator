@@ -588,8 +588,11 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !pluginCreator) {
       pluginCreator = () => plugin;
     }
-    this.pluginTabs.push({ key: name, iconName, isInternal: isInternal || false });
-    this.pluginMenuHash[name] = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    isInternal = isInternal || false;
+    this.pluginTabs.push({ key: name, iconName, isInternal });
+    const tab = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    tab.visible = !isInternal;
+    this.pluginMenuHash[name] = tab;
     if (!!plugin) {
       this.addPlugin(name, plugin);
     }
@@ -1633,6 +1636,13 @@ export class SurveyCreatorModel extends Base
   }
   public set activeTab(val: string) {
     this.switchTab(val);
+  }
+  public get activeTabMenuItem(): TabbedMenuItem {
+    return this.pluginMenuHash[this.activeTab];
+  }
+  public get activeTabId() {
+    const menuItem = this.activeTabMenuItem;
+    return !!menuItem ? menuItem.id : "";
   }
   /**
    * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.

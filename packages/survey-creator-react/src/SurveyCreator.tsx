@@ -130,17 +130,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
   renderActiveTab() {
     const creator: SurveyCreatorModel = this.props.creator;
-    for (var i = 0; i < creator.tabs.length; i++) {
-      if (creator.tabs[i].id === creator.activeTab) {
-        return this.renderCreatorTab(creator.tabs[i]);
-      }
-    }
-    return null;
+    return this.renderCreatorTab(creator.activeTabMenuItem);
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
-    if (tab.visible === false) {
-      return null;
-    }
+    if (!tab) return null;
     const creator: SurveyCreatorModel = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()

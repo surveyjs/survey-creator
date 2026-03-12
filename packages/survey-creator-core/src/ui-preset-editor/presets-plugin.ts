@@ -63,7 +63,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.creator.activeTab = this.activeTab;
   }
 
-  private confirmReset(onApply: ()=>void) {
+  private confirmReset(onApply: () => void) {
     showConfirmDialog(this.creator,
       {
         category: "danger",
@@ -76,7 +76,7 @@ export class UIPresetEditor implements ICreatorPlugin {
         onApply: () => { onApply(); return true; }, onCancel: () => { return true; }
       });
   }
-  private confirmQuit(onApply: ()=>void, onDiscard: ()=>void) {
+  private confirmQuit(onApply: () => void, onDiscard: () => void) {
     showConfirmDialog(this.creator, {
       title: getLocString("presets.plugin.quitConfirmation"),
       message: getLocString("presets.plugin.quitConfirmationMessage"),
@@ -90,7 +90,6 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
-    creator.tabs.filter(t => t.id == "presets")[0].css = "svc-tabbed-menu-item-container--presets";
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
@@ -127,7 +126,7 @@ export class UIPresetEditor implements ICreatorPlugin {
    * @see addPreset
    */
   public removePreset(presetAccessor: string | UIPreset): void {
-    this.presetsManager.removePreset(typeof(presetAccessor) === "string" ? presetAccessor : presetAccessor.name);
+    this.presetsManager.removePreset(typeof (presetAccessor) === "string" ? presetAccessor : presetAccessor.name);
   }
 
   /**
@@ -183,7 +182,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     }
   }
   protected saveAsHandler(closeOnSave = false) {
-    this.presetsManager.saveAs(this.model.json, ()=> { this.performSave(closeOnSave); });
+    this.presetsManager.saveAs(this.model.json, () => { this.performSave(closeOnSave); });
   }
   protected setStatus(status: "saved" | "unsaved" | "saving" | "initial") {
     this.presetsManager.setStatus(status === "unsaved");
@@ -222,7 +221,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     ];
 
     presets.forEach(p => {
-      p.action = (item)=>{
+      p.action = (item) => {
         this.pagesList.selectedItem = item;
         this.model.model.currentPage = this.model.model.getPageByName(item.id);
       };
@@ -255,7 +254,7 @@ export class UIPresetEditor implements ICreatorPlugin {
           curentlySelectedPreset = selectedItem;
         }
       },
-      onBlur: () =>{ listAction.popupModel.hide(); }
+      onBlur: () => { listAction.popupModel.hide(); }
     }, this.model.model);
 
     const pagesAction = createDropdownActionModel({
@@ -268,7 +267,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     }, {
       ...popupOptions,
       items: presets,
-      onBlur: () =>{ pagesAction.popupModel.hide(); }
+      onBlur: () => { pagesAction.popupModel.hide(); }
     }, this.model.model);
 
     const editAction = createDropdownActionModel({
@@ -282,7 +281,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       ...popupOptions,
       onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
       items: tools,
-      onBlur: () =>{ editAction.popupModel.hide(); }
+      onBlur: () => { editAction.popupModel.hide(); }
     }, this.model.model);
 
     const statusAction = new Action({
