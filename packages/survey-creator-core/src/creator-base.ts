@@ -89,7 +89,7 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import DefaultLight from "./themes/default-light";
-import Default from "survey-core/themes/default-light";
+import DefaultLibraryLight from "survey-core/themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
@@ -1721,7 +1721,7 @@ export class SurveyCreatorModel extends Base
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
     this.applyCreatorTheme(DefaultLight);
-    this.setSurfaceCssVariables(Default.cssVariables);
+    this.setSurfaceCssVariables(DefaultLibraryLight.cssVariables);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
