@@ -15,13 +15,15 @@ import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";
 import { SurveyCreatorComponent } from "survey-creator-vue";
-const props = defineProps<{options: ICreatorOptions, useSlk: boolean}>()
+const props = defineProps<{options: ICreatorOptions, useSlk: boolean, useTestTheme?: boolean}>()
 if (props.useSlk) {
   slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2LDg9MjAzNC0xMC0xNg==");
 }
 const creator = shallowRef(new SurveyCreatorModel(props.options));
 creator.value.applyCreatorTheme(TestCreatorTheme);
-creator.value.applySurfaceTheme(TestLibraryTheme);
+if(props.useTestTheme !== undefined ? props.useTestTheme : true) {
+  creator.value.applySurfaceTheme(TestLibraryTheme);
+}
 (window as any).creator = creator.value;
 (window as any).SurveyTheme = { Test: TestLibraryTheme };
 creator.value.tabResponsivenessMode = "menu";
