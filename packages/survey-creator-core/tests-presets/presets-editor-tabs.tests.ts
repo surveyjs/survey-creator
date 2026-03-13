@@ -1,9 +1,24 @@
 import { QuestionMatrixDynamicModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { CreatorBase } from "../src/creator-base";
+import { UIPreset } from "../src/ui-presets-creator/presets";
+import { Expert } from "../src/ui-presets/expert";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
+
+test("Expert preset should have all default tabs available including theme", () => {
+  const creator = new CreatorBase();
+  const preset = new UIPreset(Expert);
+  preset.applyTo(creator);
+  const tabIds = creator.tabs.map(t => t.id);
+  expect(tabIds).toContain("designer");
+  expect(tabIds).toContain("preview");
+  expect(tabIds).toContain("theme");
+  expect(tabIds).toContain("logic");
+  expect(tabIds).toContain("json");
+  expect(tabIds).toContain("translation");
+});
 
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({});
