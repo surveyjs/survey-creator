@@ -1,6 +1,8 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
-import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, UIPreset } from "../src/ui-presets-creator/presets";
+import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, UIPreset, registerUIPreset } from "../src/ui-presets-creator/presets";
+import { Basic } from "../src/ui-presets/basic";
+import { Advanced } from "../src/ui-presets/advanced";
 
 const originalCreatorPresets: { [key: string]: ICreatorPresetConfig } = {};
 let originalPredefinedPresets: string[] = [];
@@ -62,6 +64,21 @@ test("UIPresetEditor: check status action on editor model json changed", () => {
   plugin.deactivate();
 });
 
+test("UIPresetEditor: hidePresets should not throw when only Basic and Advanced presets are registered", () => {
+  registerUIPreset(Basic);
+  registerUIPreset(Advanced);
+
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  expect(() => {
+    (plugin as any)["hidePresets"]();
+  }).not.toThrow();
+
+  plugin.deactivate();
+});
+
 describe("UIPresetEditor: saveClicked", () => {
   test("should call performSave for custom preset", () => {
     PredefinedCreatorPresets.push("basic");
@@ -92,4 +109,40 @@ describe("UIPresetEditor: saveClicked", () => {
     plugin.deactivate();
   });
 });
+test("ui preset registration", () => {
+  const creator0 = new CreatorTester();
+  const sideBarPageModel0 = creator0.sidebar.pages.filter(page => page.id === "creatorTheme")[0].componentData;
+  expect(sideBarPageModel0.elements).toHaveLength(1);
+  registerUIPreset(
+    {
+      presetName: "basic",
+      json: {
+        options: {
+          allowZoom: false,
+        }
+      }
+    }
+  );
+  registerUIPreset(
+    {
+      presetName: "advanced",
+      json: {
+        options: {
+          allowZoom: true,
+        }
+      }
+    }
+  );
+  const creator = new CreatorTester();
+  const sideBarPageModel = creator.sidebar.pages.filter(page => page.id === "creatorTheme")[0].componentData;
+  expect(sideBarPageModel.elements).toHaveLength(2);
+  const survey = sideBarPageModel.elements[0].componentData.model.survey;
+  expect(survey.getQuestionByName("presetName").choices.map(c => [c.value, c.text])).toEqual([["basic", "Basic"], ["advanced", "Advanced"]]);
 
+  expect(creator.allowZoom).toBeTruthy();
+  survey.setValue("presetName", "basic");
+  expect(creator.allowZoom).toBeFalsy();
+
+  survey.setValue("presetName", "advanced");
+  expect(creator.allowZoom).toBeTruthy();
+});
