@@ -23,6 +23,7 @@ const creator = shallowRef(new SurveyCreatorModel(props.options));
 creator.value.applyCreatorTheme(TestCreatorTheme);
 creator.value.applySurfaceTheme(TestLibraryTheme);
 (window as any).creator = creator.value;
+(window as any).SurveyTheme = { Test: TestLibraryTheme };
 creator.value.tabResponsivenessMode = "menu";
 creator.value["animationEnabled"] = false;
 if(props.options.propertyGridNavigationMode != 'buttons') {

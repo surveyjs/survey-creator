@@ -32,7 +32,7 @@ export class TestDefaultComponent implements OnInit {
         this.creator.allowZoom = false;
         this.creator.JSON = json;
         this.creator.applyCreatorTheme(TestCreatorTheme);
-    this.creator.applySurfaceTheme(TestLibraryTheme);
+        this.creator.applySurfaceTheme(TestLibraryTheme);
         (<any>window).creator = this.creator;
       });
     };
@@ -41,6 +41,7 @@ export class TestDefaultComponent implements OnInit {
     (<any>window).Survey = Survey;
     (<any>window).SurveyCreatorCore = SurveyCreatorCore;
     (<any>window).SurveyCreatorUIPreset = SurveyCreatorUIPreset;
+    (<any>window).SurveyTheme = { Test: TestLibraryTheme };
   }
   protected getSlk(): boolean { return true; }
   protected createCreator(): void {
