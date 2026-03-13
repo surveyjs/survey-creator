@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor, DomDocumentHelper } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -351,11 +351,11 @@ export class ThemeModel extends Base implements ITheme {
 
     // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
     if (themeCopyCssVariables && typeof window !== "undefined") {
-      const div = document.createElement("div");
+      const div = DomDocumentHelper.createElement("div");
       for (const key of Object.keys(themeCopyCssVariables)) {
         div.style.setProperty(key, themeCopyCssVariables[key] as string);
       }
-      document.body.appendChild(div);
+      DomDocumentHelper.getBody().appendChild(div);
 
       const computed = window.getComputedStyle(div);
 
@@ -377,7 +377,7 @@ export class ThemeModel extends Base implements ITheme {
       }
       themeCopyCssVariables = newCssVariables;
 
-      document.body.removeChild(div);
+      DomDocumentHelper.getBody().removeChild(div);
     }
     return themeCopyCssVariables;
   }
@@ -974,7 +974,7 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-bg-warning-secondary", visible: false },
   { name: "--sjs2-color-fg-warning-on-primary", visible: false },
   {
-    type: "color",
+    type: "coloralpha",
     name: "--sjs2-color-bg-neutral-tertiary-dim",
   },
   {
