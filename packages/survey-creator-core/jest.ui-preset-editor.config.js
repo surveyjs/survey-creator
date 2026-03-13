@@ -8,7 +8,7 @@ module.exports = {
       "outputName": "junit.presets.xml"
     }]
   ],
-  collectCoverage: true,
+  collectCoverage: false,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],
   roots: ["tests-presets"],
   transform: {

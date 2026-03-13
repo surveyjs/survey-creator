@@ -4,15 +4,11 @@ import { settings as creatorSetting } from "../src/creator-settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
 import { QuestionLinkValueModel } from "../src/components/link-value";
-import { QuestionToolbox } from "../src/toolbox";
 
 const dummyQuestion = new QuestionLinkValueModel("q1");
 
 export class CreatorTester extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
-    if (!QuestionToolbox.defaultQuestionJsonCache) {
-      QuestionToolbox.defaultQuestionJsonCache = {};
-    }
     super(options, options2);
     //Reset the locale to the default one from the previous tests
     this.locale = "";
