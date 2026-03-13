@@ -7,20 +7,25 @@
 import { slk } from "survey-core";
 import { registerSurveyTheme, registerCreatorTheme, SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import SurveyThemes from "survey-core/themes";
-import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
+import TestCreatorTheme from "survey-creator-core/themes/test";
+import TestLibraryTheme from "survey-core/themes/test";
 registerSurveyTheme(SurveyThemes);
-registerCreatorTheme(SurveyCreatorTestTheme);
+registerCreatorTheme(TestCreatorTheme);
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";
 import { SurveyCreatorComponent } from "survey-creator-vue";
-const props = defineProps<{options: ICreatorOptions, useSlk: boolean}>()
+const props = defineProps<{options: ICreatorOptions, useSlk: boolean, useOriginalTheme?: boolean}>()
 if (props.useSlk) {
   slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2LDg9MjAzNC0xMC0xNg==");
 }
 const creator = shallowRef(new SurveyCreatorModel(props.options));
-creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
+creator.value.applyCreatorTheme(TestCreatorTheme);
+if(!props.useOriginalTheme) {
+  creator.value.applySurfaceTheme(TestLibraryTheme);
+}
 (window as any).creator = creator.value;
+(window as any).SurveyTheme = { Test: TestLibraryTheme };
 creator.value.tabResponsivenessMode = "menu";
 creator.value["animationEnabled"] = false;
 if(props.options.propertyGridNavigationMode != 'buttons') {
@@ -32,7 +37,7 @@ creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.
   const newCreator = new SurveyCreatorModel(options);
   newCreator.JSON = json;
   creator.value = newCreator;
-  creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
+  creator.value.applyCreatorTheme(TestCreatorTheme);
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
   if(props.options.propertyGridNavigationMode != 'buttons') {

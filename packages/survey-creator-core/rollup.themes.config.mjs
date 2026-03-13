@@ -10,7 +10,7 @@ const buildPath = resolve(__dirname, "build");
 function getEntries() {
   return [
     { filename: "sc2020", path: resolve(__dirname, "./src/themes/sc2020.ts"), globalName: "SurveyCreatorTheme.SC2020", exports: "default" },
-    { filename: "test", path: resolve(__dirname, "./src/themes/test.ts"), globalName: "SurveyCreatorTheme.Test", exports: "default" },
+    { filename: "test", path: resolve(__dirname, "./src/themes/test.ts"), globalName: "SurveyCreatorTheme.Test", exports: "auto" },
     { filename: "default-light", path: resolve(__dirname, "./src/themes/default-light-export.ts"), globalName: "SurveyCreatorTheme.DefaultLight", exports: "default" },
     { filename: "default-dark", path: resolve(__dirname, "./src/themes/default-dark.ts"), globalName: "SurveyCreatorTheme.DefaultDark", exports: "default" },
     { filename: "default-contrast", path: resolve(__dirname, "./src/themes/default-contrast.ts"), globalName: "SurveyCreatorTheme.DefaultContrast", exports: "default" },

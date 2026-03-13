@@ -451,7 +451,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme(this.themeModel.toJSON());
-      if (options.name == "--sjs-base-unit") {
+      if (options.name == "--sjs2-base-unit-size" || options.name == "--sjs2-base-unit-font-size" || options.name == "--sjs2-base-unit-radius") {
         this.model.survey.triggerResponsiveness(true);
       }
       if (options.name == "logoPosition") {
@@ -998,7 +998,7 @@ export function updateThemeEditorsDefaultFontFamily() {
   };
   ["surveyTitle", "headerTitle", "surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
   ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "editorFont"].forEach(getPropertyUpdater("theme"));
-  const fontFamilyProperty = Serializer.getProperty("theme", "--sjs-font-family");
+  const fontFamilyProperty = Serializer.getProperty("theme", "--sjs2-typography-font-family-text");
   if (fontFamilyProperty) {
     fontFamilyProperty.defaultValue = settings.themeEditor.defaultFontFamily;
   }

@@ -1,11 +1,11 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor, DomDocumentHelper } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
-import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
+import { trimBoxShadowValue } from "survey-core";
 import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
 import { assign, roundTo2Decimals } from "../../utils/utils";
@@ -117,7 +117,7 @@ export class ThemeModel extends Base implements ITheme {
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
-  private dependentColorNames = ["--sjs-primary-backcolor-light", "--sjs-primary-backcolor-dark"];
+  private dependentColorNames = ["--sjs2-color-bg-brand-secondary", "--sjs2-color-bg-brand-primary-dim"];
 
   @property() backgroundImage: string;
   @property() backgroundImageFit: "auto" | "contain" | "cover";
@@ -213,7 +213,7 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private initializeColorCalculator(cssVariables: { [index: string]: string }) {
-    const baseColorName = "--sjs-primary-backcolor";
+    const baseColorName = "--sjs2-color-bg-brand-primary";
     const cssValuesExists = this.dependentColorNames.every(name => !!cssVariables[name]);
     if (!cssVariables[baseColorName] || !cssValuesExists) {
       return;
@@ -235,30 +235,26 @@ export class ThemeModel extends Base implements ITheme {
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     let nameProcessed = true;
     if (name === "primaryColor") {
-      this.setPropertyValue("--sjs-primary-backcolor", value);
-      this.setThemeCssVariablesChanges("--sjs-primary-backcolor", value);
+      this.setPropertyValue("--sjs2-color-bg-brand-primary", value);
+      this.setThemeCssVariablesChanges("--sjs2-color-bg-brand-primary", value);
       this.updatePropertiesDependentOnPrimaryColor(value);
-    } else if (name === "--sjs-primary-backcolor") {
+    } else if (name === "--sjs2-color-bg-brand-primary") {
       this["primaryColor"] = value;
       this.updatePropertiesDependentOnPrimaryColor(value);
-    } else if (name === "--sjs-shadow-inner" || name === "--sjs-shadow-small") {
-      const newBoxShadowReset = createBoxShadowReset(value);
-      this.setPropertyValue(name + "-reset", newBoxShadowReset);
-      this.setThemeCssVariablesChanges(name + "-reset", newBoxShadowReset);
     } else if (name == "scale") {
-      this.setThemeCssVariablesChanges("--sjs-base-unit", (value * 8 / 100) + "px");
+      this.setThemeCssVariablesChanges("--sjs2-base-unit-size", (value * 8 / 100) + "px");
     } else if (name == "fontSize") {
-      this.setThemeCssVariablesChanges("--sjs-font-size", (value * 16 / 100) + "px");
+      this.setThemeCssVariablesChanges("--sjs2-base-unit-font-size", (value * 8 / 100) + "px");
     } else if (name == "cornerRadius") {
-      this.setThemeCssVariablesChanges("--sjs-corner-radius", value + "px");
+      this.setThemeCssVariablesChanges("--sjs2-base-unit-radius", value + "px");
     } else if (name === "questionBackgroundTransparency" || name === "editorPanel") {
-      let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor-dim-light")).color;
+      let baseColor = parseColor(this.getPropertyValue("--sjs2-color-component-formbox-default-bg")).color;
       let questionBackgroundTransparencyValue = this.getPropertyValue("questionBackgroundTransparency");
-      this.setThemeCssVariablesChanges("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
+      this.setThemeCssVariablesChanges("--sjs2-color-component-formbox-default-bg", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
     } else if (name === "panelBackgroundTransparency" || name === "questionPanel") {
-      let baseColor = parseColor(this.getPropertyValue("--sjs-general-backcolor")).color;
+      let baseColor = parseColor(this.getPropertyValue("--sjs2-color-bg-basic-primary")).color;
       let panelBackgroundTransparencyValue = this.getPropertyValue("panelBackgroundTransparency");
-      this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
+      this.setThemeCssVariablesChanges("--sjs2-color-bg-basic-primary", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
     } else {
       nameProcessed = false;
     }
@@ -349,6 +345,43 @@ export class ThemeModel extends Base implements ITheme {
   public onAllowModifyTheme = new EventBase<ThemeModel, { theme: ITheme, allow: boolean }>();
 
   private blockThemeChangedNotifications = 0;
+
+  private calculateThemeVariables(cssVariables) {
+    let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables));
+
+    // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
+    if (themeCopyCssVariables && typeof window !== "undefined") {
+      const div = DomDocumentHelper.createElement("div");
+      for (const key of Object.keys(themeCopyCssVariables)) {
+        div.style.setProperty(key, themeCopyCssVariables[key] as string);
+      }
+      DomDocumentHelper.getBody().appendChild(div);
+
+      const computed = window.getComputedStyle(div);
+
+      // Replace cssVariables with computed values
+      const newCssVariables: { [key: string]: string } = {};
+      const calcProxyProperty = "width";
+      for (const key of Object.keys(themeCopyCssVariables)) {
+        let value = computed.getPropertyValue(key);
+        // getComputedStyle for custom properties may return calc() unresolved; force computation via a length property
+        if (typeof value === "string" && value.indexOf("calc(") === 0) {
+          div.style.setProperty(calcProxyProperty, value);
+          value = computed.getPropertyValue(calcProxyProperty);
+          div.style.removeProperty(calcProxyProperty);
+        }
+        if (key.indexOf("-color-") !== -1 && value !== "transparent") {
+          value = getRGBaColor(value);
+        }
+        newCssVariables[key] = value;
+      }
+      themeCopyCssVariables = newCssVariables;
+
+      DomDocumentHelper.getBody().removeChild(div);
+    }
+    return themeCopyCssVariables;
+  }
+
   public loadTheme(theme: ITheme, preferredColorPalette?: string) {
     this.blockThemeChangedNotifications += 1;
     try {
@@ -365,6 +398,8 @@ export class ThemeModel extends Base implements ITheme {
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      patchLegacyCSSVariables(effectiveThemeCssVariables);
+      assign(effectiveThemeCssVariables, this.calculateThemeVariables(effectiveThemeCssVariables));
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
@@ -394,10 +429,10 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   public setTheme(theme: ITheme) {
-    const headerBackgroundColorValue = this.themeCssVariablesChanges["--sjs-header-backcolor"];
+    const headerBackgroundColorValue = this.themeCssVariablesChanges["--sjs2-color-component-header-default-bg"];
     this.themeCssVariablesChanges = {};
     if (headerBackgroundColorValue !== undefined) {
-      this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
+      this.themeCssVariablesChanges["--sjs2-color-component-header-default-bg"] = headerBackgroundColorValue;
     }
 
     try {
@@ -515,40 +550,51 @@ export class ThemeModel extends Base implements ITheme {
     this.header.fromJSON(_headerJson || {});
 
     if (json.cssVariables) {
-      this["primaryColor"] = json.cssVariables["--sjs-primary-backcolor"];
+      patchLegacyCSSVariables(json.cssVariables);
+      this["primaryColor"] = json.cssVariables["--sjs2-color-bg-brand-primary"];
       super.fromJSON(json.cssVariables, options);
       this.header.setCssVariables(json.cssVariables);
 
-      this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
-      this.fontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : undefined;
-      this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : undefined;
+      this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
+      this.fontSize = !!this["--sjs2-base-unit-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-font-size"]) * 100 / 8) : undefined;
+      this.cornerRadius = this["--sjs2-base-unit-radius"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-radius"])) : undefined;
       if (!!json["backgroundOpacity"])this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
-      this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
-      this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
+      this["questionPanel"] = backgroundCornerRadiusFromCssVariable(
+        this.getPropertyByName("questionPanel"),
+        json.cssVariables,
+        "--sjs2-color-bg-basic-primary",
+        "--sjs2-color-bg-basic-primary-dim",
+        this.cornerRadius);
+      this["editorPanel"] = backgroundCornerRadiusFromCssVariable(
+        this.getPropertyByName("editorPanel"),
+        json.cssVariables,
+        "--sjs2-color-bg-neutral-secondary",
+        "--sjs2-color-bg-basic-secondary-dim",
+        this.cornerRadius);
 
       Serializer.getProperties("theme").forEach(property => {
         if (property.type === "font") {
           this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
         }
       });
-      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs-general-dim-forecolor");
-      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs-general-dim-forecolor-light");
-      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs-general-forecolor");
-      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, "--sjs-general-forecolor-light");
-      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, "--sjs-general-forecolor", "--sjs-general-forecolor-light");
+      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
+      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
+      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
+      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
+      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, "--sjs2-color-fg-basic-primary", "--sjs2-color-fg-basic-secondary");
     }
   }
 
   toJSON(options: ISaveToJSONOptions = { storeDefaults: true }): ITheme {
     if (this.scale !== undefined) {
-      this["--sjs-base-unit"] = (this.scale * 8 / 100) + "px";
+      this["--sjs2-base-unit-size"] = (this.scale * 8 / 100) + "px";
     }
     if (this.fontSize !== undefined) {
-      this["--sjs-font-size"] = (this.fontSize * 16 / 100) + "px";
+      this["--sjs2-base-unit-font-size"] = (this.fontSize * 8 / 100) + "px";
     }
     if (this.cornerRadius !== undefined) {
-      this["--sjs-corner-radius"] = this.cornerRadius + "px";
+      this["--sjs2-base-unit-radius"] = this.cornerRadius + "px";
     }
 
     const result = super.toJSON(options);
@@ -778,7 +824,7 @@ Serializer.addProperties("theme",
     name: "primaryColor",
   }, {
     type: "dropdown",
-    name: "--sjs-font-family",
+    name: "--sjs2-typography-font-family-text",
     default: settings.themeEditor.defaultFontFamily,
     choices: [].concat(DefaultFonts),
     onPropertyEditorUpdate: function (obj: any, editor: any) {
@@ -789,12 +835,12 @@ Serializer.addProperties("theme",
     }
   },
   {
-    name: "--sjs-font-size", visible: false,
-    default: "16px",
+    name: "--sjs2-base-unit-font-size", visible: false,
+    default: "8px",
   },
-  { name: "--sjs-corner-radius", visible: false },
-  { name: "--sjs-base-unit", visible: false },
-  { name: "--sjs-corner-radius", visible: false },
+  { name: "--sjs2-base-unit-radius", visible: false },
+  { name: "--sjs2-base-unit-size", visible: false },
+  { name: "--sjs2-base-unit-radius", visible: false },
   {
     type: "font",
     name: "pageTitle",
@@ -813,9 +859,9 @@ Serializer.addProperties("theme",
     },
   }, {
     type: "shadoweffects",
-    name: "--sjs-shadow-small",
+    name: "--sjs2-border-effect-surface-default",
     onSetValue: function (obj: any, value: any) {
-      obj.setPropertyValue("--sjs-shadow-small", trimBoxShadowValue(value));
+      obj.setPropertyValue("--sjs2-border-effect-surface-default", trimBoxShadowValue(value));
     },
   }, {
     type: "font",
@@ -836,9 +882,9 @@ Serializer.addProperties("theme",
   },
   {
     type: "shadoweffects",
-    name: "--sjs-shadow-inner",
+    name: "--sjs2-border-effect-component-formbox-default",
     onSetValue: function (obj: any, value: any) {
-      obj.setPropertyValue("--sjs-shadow-inner", trimBoxShadowValue(value));
+      obj.setPropertyValue("--sjs2-border-effect-component-formbox-default", trimBoxShadowValue(value));
     },
   }, {
     type: "font",
@@ -850,7 +896,7 @@ Serializer.addProperties("theme",
     },
   }, {
     type: "coloralpha",
-    name: "--sjs-border-default",
+    name: "--sjs2-color-component-input-default-line",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.borderDefault");
@@ -860,7 +906,7 @@ Serializer.addProperties("theme",
   },
   {
     type: "coloralpha",
-    name: "--sjs-border-light",
+    name: "--sjs2-color-border-basic-secondary",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -870,109 +916,70 @@ Serializer.addProperties("theme",
     }
   },
 
-  { name: "--sjs-general-backcolor", visible: false },
-  { name: "--sjs-general-backcolor-dark", visible: false },
+  { name: "--sjs2-color-bg-basic-primary", visible: false },
+  { name: "--sjs2-color-bg-basic-primary-dim", visible: false },
 
-  { name: "--sjs-general-backcolor-dim-light", visible: false },
-  { name: "--sjs-general-backcolor-dim-dark", visible: false },
-  { name: "--sjs-general-forecolor", visible: false },
-  { name: "--sjs-general-forecolor-light", visible: false },
-  { name: "--sjs-general-dim-forecolor", visible: false },
-  { name: "--sjs-general-dim-forecolor-light", visible: false },
+  { name: "--sjs2-color-bg-neutral-secondary", visible: false },
+  { name: "--sjs2-color-component-formbox-default-bg", visible: false },
+  { name: "--sjs2-color-bg-basic-secondary-dim", visible: false },
+  { name: "--sjs2-color-fg-basic-primary", visible: false },
+  { name: "--sjs2-color-fg-basic-secondary", visible: false },
+  { name: "--sjs2-color-fg-basic-primary", visible: false },
+  { name: "--sjs2-color-fg-basic-secondary", visible: false },
 
-  { name: "--sjs-secondary-backcolor", visible: false },
-  { name: "--sjs-secondary-backcolor-light", visible: false },
-  { name: "--sjs-secondary-backcolor-semi-light", visible: false },
-  { name: "--sjs-secondary-forecolor", visible: false },
-  { name: "--sjs-secondary-forecolor-light", visible: false },
+  { name: "--sjs2-color-bg-accent-primary", visible: false },
+  { name: "--sjs2-color-bg-accent-secondary", visible: false },
+  { name: "--sjs2-color-bg-accent-secondary-dim", visible: false },
+  { name: "--sjs2-color-fg-accent-on-primary", visible: false },
+  { name: "--sjs2-color-fg-accent-primary-disabled", visible: false },
   {
-    name: "--sjs-shadow-small-reset",
+    name: "--sjs2-border-effect-surface-default-reset",
     visible: false,
     onSetValue: function (obj: any, value: any) {
-      obj.setPropertyValue("--sjs-shadow-small-reset", trimBoxShadowValue(value));
+      obj.setPropertyValue("--sjs2-border-effect-surface-default-reset", trimBoxShadowValue(value));
     },
   },
   {
-    name: "--sjs-shadow-medium",
+    name: "--sjs2-border-effect-floating-default",
     visible: false,
     onSetValue: function (obj: any, value: any) {
-      obj.setPropertyValue("--sjs-shadow-medium", trimBoxShadowValue(value));
+      obj.setPropertyValue("--sjs2-border-effect-floating-default", trimBoxShadowValue(value));
     },
   },
   {
-    name: "--sjs-shadow-large",
+    name: "--sjs2-border-effect-floating-default",
     visible: false,
     onSetValue: function (obj: any, value: any) {
-      obj.setPropertyValue("--sjs-shadow-large", trimBoxShadowValue(value));
+      obj.setPropertyValue("--sjs2-border-effect-floating-default", trimBoxShadowValue(value));
     },
   },
   {
-    name: "--sjs-shadow-inner-reset",
+    name: "--sjs2-border-effect-component-formbox-default-reset",
     visible: false,
     onSetValue: function (obj: any, value: any) {
-      obj.setPropertyValue("--sjs-shadow-inner-reset", trimBoxShadowValue(value));
+      obj.setPropertyValue("--sjs2-border-effect-component-formbox-default-reset", trimBoxShadowValue(value));
     },
   },
-  { name: "--sjs-border-light", visible: false },
-  { name: "--sjs-border-default", visible: false },
-  { name: "--sjs-border-inside", visible: false },
-  { name: "--sjs-special-red-forecolor", visible: false },
-  { name: "--sjs-special-green", visible: false },
-  { name: "--sjs-special-green-light", visible: false },
-  { name: "--sjs-special-green-forecolor", visible: false },
-  { name: "--sjs-special-blue", visible: false },
-  { name: "--sjs-special-blue-light", visible: false },
-  { name: "--sjs-special-blue-forecolor", visible: false },
-  { name: "--sjs-special-yellow", visible: false },
-  { name: "--sjs-special-yellow-light", visible: false },
-  { name: "--sjs-special-yellow-forecolor", visible: false },
-  { name: "--sjs-article-font-xx-large-textDecoration", visible: false },
-  { name: "--sjs-article-font-xx-large-fontWeight", visible: false },
-  { name: "--sjs-article-font-xx-large-fontStyle", visible: false },
-  { name: "--sjs-article-font-xx-large-fontStretch", visible: false },
-  { name: "--sjs-article-font-xx-large-letterSpacing", visible: false },
-  { name: "--sjs-article-font-xx-large-lineHeight", visible: false },
-  { name: "--sjs-article-font-xx-large-paragraphIndent", visible: false },
-  { name: "--sjs-article-font-xx-large-textCase", visible: false },
-  { name: "--sjs-article-font-x-large-textDecoration", visible: false },
-  { name: "--sjs-article-font-x-large-fontWeight", visible: false },
-  { name: "--sjs-article-font-x-large-fontStyle", visible: false },
-  { name: "--sjs-article-font-x-large-fontStretch", visible: false },
-  { name: "--sjs-article-font-x-large-letterSpacing", visible: false },
-  { name: "--sjs-article-font-x-large-lineHeight", visible: false },
-  { name: "--sjs-article-font-x-large-paragraphIndent", visible: false },
-  { name: "--sjs-article-font-x-large-textCase", visible: false },
-  { name: "--sjs-article-font-large-textDecoration", visible: false },
-  { name: "--sjs-article-font-large-fontWeight", visible: false },
-  { name: "--sjs-article-font-large-fontStyle", visible: false },
-  { name: "--sjs-article-font-large-fontStretch", visible: false },
-  { name: "--sjs-article-font-large-letterSpacing", visible: false },
-  { name: "--sjs-article-font-large-lineHeight", visible: false },
-  { name: "--sjs-article-font-large-paragraphIndent", visible: false },
-  { name: "--sjs-article-font-large-textCase", visible: false },
-  { name: "--sjs-article-font-medium-textDecoration", visible: false },
-  { name: "--sjs-article-font-medium-fontWeight", visible: false },
-  { name: "--sjs-article-font-medium-fontStyle", visible: false },
-  { name: "--sjs-article-font-medium-fontStretch", visible: false },
-  { name: "--sjs-article-font-medium-letterSpacing", visible: false },
-  { name: "--sjs-article-font-medium-lineHeight", visible: false },
-  { name: "--sjs-article-font-medium-paragraphIndent", visible: false },
-  { name: "--sjs-article-font-medium-textCase", visible: false },
-  { name: "--sjs-article-font-default-textDecoration", visible: false },
-  { name: "--sjs-article-font-default-fontWeight", visible: false },
-  { name: "--sjs-article-font-default-fontStyle", visible: false },
-  { name: "--sjs-article-font-default-fontStretch", visible: false },
-  { name: "--sjs-article-font-default-letterSpacing", visible: false },
-  { name: "--sjs-article-font-default-lineHeight", visible: false },
-  { name: "--sjs-article-font-default-paragraphIndent", visible: false },
-  { name: "--sjs-article-font-default-textCase", visible: false },
+  { name: "--sjs2-color-border-basic-secondary", visible: false },
+  { name: "--sjs2-color-component-input-default-line", visible: false },
+  { name: "--sjs2-color-border-basic-secondary-overlay", visible: false },
+  { name: "--sjs2-color-fg-alert-on-primary", visible: false },
+  { name: "--sjs2-color-bg-positive-primary", visible: false },
+  { name: "--sjs2-color-bg-positive-secondary", visible: false },
+  { name: "--sjs2-color-fg-positive-on-primary", visible: false },
+  { name: "--sjs2-color-bg-note-primary", visible: false },
+  { name: "--sjs2-color-bg-note-secondary", visible: false },
+  { name: "--sjs2-color-fg-note-on-primary", visible: false },
+  { name: "--sjs2-color-bg-warning-primary", visible: false },
+  { name: "--sjs2-color-bg-warning-secondary", visible: false },
+  { name: "--sjs2-color-fg-warning-on-primary", visible: false },
   {
-    type: "color",
-    name: "--sjs-general-backcolor-dim",
+    type: "coloralpha",
+    name: "--sjs2-color-bg-neutral-tertiary-dim",
   },
   {
     type: "coloralpha",
-    name: "--sjs-primary-backcolor",
+    name: "--sjs2-color-bg-brand-primary",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryDefaultColor");
@@ -981,7 +988,7 @@ Serializer.addProperties("theme",
     }
   }, {
     type: "coloralpha",
-    name: "--sjs-primary-backcolor-dark",
+    name: "--sjs2-color-bg-brand-primary-dim",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -991,7 +998,7 @@ Serializer.addProperties("theme",
     }
   }, {
     type: "coloralpha",
-    name: "--sjs-primary-backcolor-light",
+    name: "--sjs2-color-bg-brand-secondary",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -1001,7 +1008,7 @@ Serializer.addProperties("theme",
     }
   }, {
     type: "coloralpha",
-    name: "--sjs-primary-forecolor",
+    name: "--sjs2-color-fg-brand-on-primary",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryForecolor");
@@ -1010,7 +1017,7 @@ Serializer.addProperties("theme",
     }
   }, {
     type: "coloralpha",
-    name: "--sjs-primary-forecolor-light",
+    name: "--sjs2-color-fg-brand-primary-disabled",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -1020,7 +1027,7 @@ Serializer.addProperties("theme",
     }
   }, {
     type: "coloralpha",
-    name: "--sjs-special-red",
+    name: "--sjs2-color-bg-alert-primary",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.fontColor");
@@ -1029,7 +1036,7 @@ Serializer.addProperties("theme",
     }
   }, {
     type: "coloralpha",
-    name: "--sjs-special-red-light",
+    name: "--sjs2-color-bg-alert-secondary",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {

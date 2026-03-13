@@ -11,7 +11,7 @@ test.describe(title, () => {
   test("Check boxshadow settings", async ({ page }) => {
     await page.setViewportSize({ width: 2000, height: 2000 });
     await setJSON(page, {});
-    const root = page.locator("div[data-name='--sjs-shadow-small']");
+    const root = page.locator("div[data-name='--sjs2-border-effect-surface-default']");
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await getPropertyGridCategory(page, "Appearance").click();
     await page.getByRole("checkbox", { name: "Advanced mode" }).click();
@@ -139,6 +139,7 @@ test.describe(title, () => {
       ]
     });
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
+    await expect(page.locator(".svc-notifier")).not.toBeVisible();
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await expandedGroup.locator(".spg-button-group__item-caption").getByText("Dark").click();
     const simulator = page.locator(".svd-simulator-main").filter({ has: page.locator(":visible") });

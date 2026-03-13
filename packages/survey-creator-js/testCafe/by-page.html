@@ -19,6 +19,7 @@
   <script src="../node_modules/survey-core/survey.core.js"></script>
   <script src="../node_modules/survey-core/survey.i18n.js"></script>
   <script src="../node_modules/survey-core/themes/index.js"></script>
+  <script src="../node_modules/survey-core/themes/test.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
@@ -36,6 +37,7 @@
   SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
   creator.applyCreatorTheme(SurveyCreatorTheme.Test);
+  creator.applySurfaceTheme(SurveyTheme.Test);
   creator.tabResponsivenessMode = "menu";
   creator["animationEnabled"] = false;
   creator.showOneCategoryInPropertyGrid = false;

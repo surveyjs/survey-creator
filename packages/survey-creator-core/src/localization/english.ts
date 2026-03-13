@@ -1008,14 +1008,14 @@ export var enStrings = {
       questionDescription: "Description font",
       editorFont: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
-      "--sjs-font-family": "Survey font family",
-      "--sjs-general-backcolor-dim": "Background color",
-      "--sjs-primary-backcolor": "Accent background colors",
-      "--sjs-primary-forecolor": "Accent foreground colors",
-      "--sjs-special-red": "Error message colors",
-      "--sjs-shadow-small": "Shadow effects",
-      "--sjs-shadow-inner": "Shadow effects",
-      "--sjs-border-default": "Colors"
+      "--sjs2-typography-font-family-text": "Survey font family",
+      "--sjs2-color-bg-neutral-tertiary-dim": "Background color",
+      "--sjs2-color-bg-brand-primary": "Accent background colors",
+      "--sjs2-color-fg-brand-on-primary": "Accent foreground colors",
+      "--sjs2-color-bg-alert-primary": "Error message colors",
+      "--sjs2-border-effect-surface-default": "Shadow effects",
+      "--sjs2-border-effect-component-formbox-default": "Shadow effects",
+      "--sjs2-color-component-input-default-line": "Colors"
     },
     "header@header": {
       headerView: "View",
@@ -1756,7 +1756,7 @@ export var enStrings = {
       panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
       questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
       cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      "--sjs2-color-bg-neutral-tertiary-dim": "Sets the main background color of the survey."
     },
     header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
