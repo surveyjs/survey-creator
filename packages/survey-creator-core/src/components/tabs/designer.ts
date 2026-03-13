@@ -127,12 +127,12 @@ export class TabDesignerViewModel extends Base {
 
   public updateUnitDictionaryFromTheme() {
     Object.keys(this.unitDictionary).forEach(key => {
-      this.unitDictionary[key] = parseFloat(this.creator.defaultSurveyCssVariables[key]) || this.unitDictionary[key];
+      this.unitDictionary[key] = parseFloat(this.creator.defaultSurfaceCssVariables[key]) || this.unitDictionary[key];
     });
   }
 
   public updateSurfaceCssVariables() {
-    this.surfaceCssVariables = { ...this.creator.defaultSurveyCssVariables, ...this.scaleCssVariables };
+    this.surfaceCssVariables = { ...this.creator.defaultSurfaceCssVariables, ...this.scaleCssVariables };
   }
 
   private initSurfaceToolbar() {

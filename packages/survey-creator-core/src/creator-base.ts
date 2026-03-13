@@ -2780,7 +2780,7 @@ export class SurveyCreatorModel extends Base
     const survey = this.createSurveyCore(json, area, element);
     if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
-      survey.applyTheme({ cssVariables: this.defaultSurveyCssVariables });
+      survey.applyTheme({ cssVariables: this.defaultSurfaceCssVariables });
       survey.gridLayoutEnabled = false;
     }
 
@@ -4847,9 +4847,9 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public defaultSurveyCssVariables: { [index: string]: string };
+  public defaultSurfaceCssVariables: { [index: string]: string };
   public setSurfaceCssVariables(newDefaultSurveyCssVariables: { [index: string]: string }) {
-    this.defaultSurveyCssVariables = { ...newDefaultSurveyCssVariables };
+    this.defaultSurfaceCssVariables = { ...newDefaultSurveyCssVariables };
     const cssVariablesToDelete = [
       "--sjs2-base-unit-size",
       "--sjs2-color-bg-brand-primary",
@@ -4886,9 +4886,9 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-bg-warning-secondary",
       "--sjs2-color-fg-warning-on-primary"
     ];
-    cssVariablesToDelete.forEach(variable => delete this.defaultSurveyCssVariables[variable]);
+    cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
     assign(
-      this.defaultSurveyCssVariables,
+      this.defaultSurfaceCssVariables,
       designTabSurveyThemeJSON.cssVariables,
     );
 

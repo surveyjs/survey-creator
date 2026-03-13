@@ -102,7 +102,7 @@ export class MatrixCellWrapperViewModel extends Base {
         data: {
           survey: editSurvey.survey,
           creator: this.creator,
-          style: { ...this.creator.defaultSurveyCssVariables }
+          style: { ...this.creator.defaultSurfaceCssVariables }
         },
         onApply: () => {
           editSurvey.apply();
