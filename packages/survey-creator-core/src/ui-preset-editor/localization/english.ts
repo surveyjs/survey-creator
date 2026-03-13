@@ -195,7 +195,7 @@ export const enStrings = {
     required: "Please enter a value.",
   },
   plugin: {
-    buttonTitle: "UI Configuration Manager",
+    buttonTitle: "UI Preset Editor",
     buttonDescription: "Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset.",
     presetsTab: "Presets",
     creatorPresets: "Creator Presets",
