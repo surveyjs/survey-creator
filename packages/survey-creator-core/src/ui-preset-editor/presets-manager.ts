@@ -189,7 +189,7 @@ export class PresetsManager {
       columns: [
         {
           name: "title",
-          title: "Title",
+          title: getLocString("presets.plugin.title"),
         },
         {
           name: "name",
@@ -282,12 +282,12 @@ export class PresetsManager {
         }, {
           type: "buttongroup",
           name: "template",
-          title: "Template",
+          title: getLocString("presets.plugin.template"),
           defaultValue: "basic",
           choices: [
-            { value: "basic", text: "Basic" },
-            { value: "advanced", text: "Advanced" },
-            { value: "expert", text: "Expert" }
+            { value: "basic", text: getLocString("presets.plugin.basic") },
+            { value: "advanced", text: getLocString("presets.plugin.advanced") },
+            { value: "expert", text: getLocString("presets.plugin.expert") }
           ],
         }]
       });
