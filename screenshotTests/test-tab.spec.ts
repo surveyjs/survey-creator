@@ -6,6 +6,9 @@ const title = "Test tab Screenshot";
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
+    await page.evaluate(() => {
+      window["creator"].applyTheme(window["SurveyTheme"].Test);
+    });
   });
 
   test("toolbar view", async ({ page }) => {

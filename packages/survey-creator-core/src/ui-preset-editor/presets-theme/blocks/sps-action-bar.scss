@@ -30,7 +30,7 @@
     )
     calc(
       var(--sjs2-layout-control-action-medium-box-horizontal, 12px) +
-        var(--sjs2-layout-control-action-medium-label-horizontal, 12px)
+        var(--sjs2-layout-control-action-medium-label-horizontal, 8px)
     );
 
   justify-content: center;

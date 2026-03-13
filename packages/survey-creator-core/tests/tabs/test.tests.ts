@@ -761,7 +761,7 @@ test("Apply theme from theme builder", (): any => {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   creator.theme = <any>{
     "cssVariables": {
-      "--sjs-general-backcolor": "#252525",
+      "--sjs2-color-bg-basic-primary": "#252525",
       "--sjs-general-backcolor-dark": "#606060"
     },
     "themeName": "playful",
@@ -774,7 +774,7 @@ test("Apply theme from theme builder", (): any => {
   expect(testPlugin["changeThemeAction"]).toBeUndefined();
 
   const model: TestSurveyTabViewModel = testPlugin.model;
-  expect(model.survey.themeVariables["--sjs-general-backcolor"]).toBe("#252525");
+  expect(model.survey.themeVariables["--sjs2-color-bg-basic-primary"]).toBe("#252525");
   expect(model.survey["isCompact"]).toBeTruthy();
 });
 
