@@ -32,9 +32,11 @@ export interface ICreatorPresetData {
   localization?: any;
 }
 
-export interface ICreatorPresetConfig {
-  presetName?: string;
+export interface IPresetBase {
+  name: string;
   visible?: boolean;
+}
+export interface IPreset extends IPresetBase {
   json?: ICreatorPresetData | any;
 }
 
@@ -45,11 +47,11 @@ export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
  * Registers UI presets to make them available for customization in the Preset Editor UI.
  * @param presets One or more UI preset configuations separated by commas, or an object containing multiple configurations.
  */
-export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetConfig> | ICreatorPresetConfig>) {
+export function registerUIPreset(...presets: Array<ConfigsHash<IPreset> | IPreset>) {
   const importedPresetNames: string[] = [];
-  registerConfig((preset: ICreatorPresetConfig) => {
-    CreatorPresets[preset.presetName] = preset;
-    importedPresetNames.push(preset.presetName);
+  registerConfig((preset: IPreset) => {
+    CreatorPresets[preset.name] = preset;
+    importedPresetNames.push(preset.name);
   }, ...presets);
   sortDefaultConfigs(defaultCreatorPresetsOrder, importedPresetNames, PredefinedCreatorPresets);
 }
@@ -57,11 +59,11 @@ export function registerUIPreset(...presets: Array<ConfigsHash<ICreatorPresetCon
  * A class that instantiates a UI preset and provides an API to apply it.
  */
 export class UIPreset extends CreatorPresetBase {
-  public constructor(data: ICreatorPresetData | ICreatorPresetConfig) {
+  public constructor(data: ICreatorPresetData | IPreset) {
     super();
     if ((data?.hasOwnProperty("json"))) {
-      this.setJson((data as ICreatorPresetConfig).json);
-      this.name = (data as ICreatorPresetConfig).presetName || "";
+      this.setJson((data as IPreset).json);
+      this.name = (data as IPreset).name || "";
     } else {
       this.setJson(data as ICreatorPresetData);
     }
@@ -99,4 +101,4 @@ export class UIPreset extends CreatorPresetBase {
   }
 }
 
-export const CreatorPresets: { [index: string]: ICreatorPresetConfig } = { };
+export const CreatorPresets: { [index: string]: IPreset } = {};

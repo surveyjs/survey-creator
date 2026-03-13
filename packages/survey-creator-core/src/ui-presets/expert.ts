@@ -1,5 +1,5 @@
 export const Expert = {
-  presetName: "expert",
+  name: "expert",
   json: {
     "propertyGrid": { definition: null }
   }

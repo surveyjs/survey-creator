@@ -520,7 +520,7 @@ test("ui preset registration", () => {
   expect(sideBarPageModel0.elements).toHaveLength(1);
   registerUIPreset(
     {
-      presetName: "basic",
+      name: "basic",
       json: {
         options: {
           allowZoom: false,
@@ -530,7 +530,7 @@ test("ui preset registration", () => {
   );
   registerUIPreset(
     {
-      presetName: "advanced",
+      name: "advanced",
       json: {
         options: {
           allowZoom: true,

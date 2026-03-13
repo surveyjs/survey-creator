@@ -1,8 +1,8 @@
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { CreatorBase } from "../src/creator-base";
-import { UIPreset, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
+import { UIPreset, CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 
-const originalCreatorPresets: { [key: string]: ICreatorPresetConfig } = {};
+const originalCreatorPresets: { [key: string]: IPreset } = {};
 const originalPredefinedPresets: string[] = [];
 
 beforeEach(() => {
@@ -24,21 +24,20 @@ afterEach(() => {
 describe("UIPresetEditor API", () => {
   beforeEach(() => {
     PredefinedCreatorPresets.push("basic", "advanced");
-    CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
-    CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: true };
+    CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+    CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: true };
   });
 
   describe("addPreset", () => {
-    test("should add preset from UIPreset", () => {
+    test("should add preset from IPreset object", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
-      const preset = new UIPreset({ presetName: "custom1", json: { toolbox: { showCategoryTitles: true } } });
 
-      plugin.addPreset(preset);
+      plugin.addPreset({ name: "custom1", json: { toolbox: { showCategoryTitles: true } } });
 
       expect(CreatorPresets["custom1"]).toBeDefined();
       expect(CreatorPresets["custom1"].json).toEqual({ toolbox: { showCategoryTitles: true } });
-      expect(plugin.presets.some(p => p.name === "custom1")).toBe(true);
+      expect(plugin.availablePresets.some(p => p.name === "custom1")).toBe(true);
     });
   });
 
@@ -46,18 +45,18 @@ describe("UIPresetEditor API", () => {
     test("should remove preset by name", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
-      plugin.addPreset(new UIPreset({ presetName: "toRemove", json: {} }));
+      plugin.addPreset({ name: "toRemove", json: {} });
 
       plugin.removePreset("toRemove");
 
       expect(CreatorPresets["toRemove"]).toBeUndefined();
-      expect(plugin.presets.some(p => p.name === "toRemove")).toBe(false);
+      expect(plugin.availablePresets.some(p => p.name === "toRemove")).toBe(false);
     });
 
-    test("should remove preset by UIPreset instance", () => {
+    test("should remove preset by IPreset object", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
-      const preset = new UIPreset({ presetName: "toRemoveByPreset", json: {} });
+      const preset: IPreset = { name: "toRemoveByPreset", json: {} };
       plugin.addPreset(preset);
 
       plugin.removePreset(preset);
@@ -74,7 +73,7 @@ describe("UIPresetEditor API", () => {
       const preset = plugin.getPreset("basic");
 
       expect(preset).toBeDefined();
-      expect(preset.presetName).toBe("basic");
+      expect(preset.name).toBe("basic");
     });
 
     test("should return undefined for non-existent preset", () => {
@@ -87,12 +86,12 @@ describe("UIPresetEditor API", () => {
     });
   });
 
-  describe("getCurrentPreset", () => {
+  describe("preset property", () => {
     test("should return undefined when preset selector is not set", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
 
-      const current = plugin.getCurrentPreset();
+      const current = plugin.preset;
 
       expect(current).toBeUndefined();
     });
@@ -103,21 +102,21 @@ describe("UIPresetEditor API", () => {
       plugin["presetsManager"].presetSelector = { value: "basic" } as any;
       plugin.activate();
 
-      const current = plugin.getCurrentPreset();
+      const current = plugin.preset;
 
       expect(current).toBeDefined();
-      expect(current.presetName).toBe("basic");
+      expect(current.name).toBe("basic");
     });
   });
 
   describe("savePresetFunc", () => {
-    test("should call savePresetFunc when set", () => {
+    test("should call savePresetFunc with saveNo and callback", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
       plugin.activate();
       plugin.savePresetFunc = (saveNo, callback) => {
-        expect(saveNo).toBe(0);
-        callback();
+        expect(saveNo).toBe(1);
+        callback(saveNo, true);
       };
 
       plugin["performSave"]();
@@ -132,22 +131,35 @@ describe("UIPresetEditor API", () => {
       const saveNumbers: number[] = [];
       plugin.savePresetFunc = (saveNo, callback) => {
         saveNumbers.push(saveNo);
-        callback();
+        callback(saveNo, true);
       };
 
       plugin["performSave"]();
       plugin["performSave"]();
 
-      expect(saveNumbers).toEqual([0, 1]);
+      expect(saveNumbers).toEqual([1, 2]);
+    });
+
+    test("savePresetFunc does not proceed on failure", () => {
+      const creator = new CreatorBase();
+      const plugin = new UIPresetEditor(creator);
+      plugin.activate();
+      plugin.savePresetFunc = (saveNo, callback) => {
+        callback(saveNo, false);
+      };
+
+      plugin["performSave"]();
+
+      expect(plugin["saveCount"]).toBe(1);
     });
   });
 
-  describe("presets", () => {
-    test("should return array with name, visible, removable, sortable", () => {
+  describe("availablePresets", () => {
+    test("should return array with name, visible", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
 
-      const presets = plugin.presets;
+      const presets = plugin.availablePresets;
 
       expect(Array.isArray(presets)).toBe(true);
       expect(presets.length).toBeGreaterThan(0);
@@ -157,27 +169,27 @@ describe("UIPresetEditor API", () => {
       });
     });
 
-    test("presets should update when addPreset is called", () => {
+    test("availablePresets should update when addPreset is called", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
-      const initialCount = plugin.presets.length;
+      const initialCount = plugin.availablePresets.length;
 
-      plugin.addPreset(new UIPreset({ presetName: "newPreset", json: {} }));
+      plugin.addPreset({ name: "newPreset", json: {} });
 
-      expect(plugin.presets.length).toBe(initialCount + 1);
-      expect(plugin.presets.some(p => p.name === "newPreset")).toBe(true);
+      expect(plugin.availablePresets.length).toBe(initialCount + 1);
+      expect(plugin.availablePresets.some(p => p.name === "newPreset")).toBe(true);
     });
 
-    test("presets should update when removePreset is called", () => {
+    test("availablePresets should update when removePreset is called", () => {
       const creator = new CreatorBase();
       const plugin = new UIPresetEditor(creator);
-      plugin.addPreset(new UIPreset({ presetName: "tempPreset", json: {} }));
-      const countBefore = plugin.presets.length;
+      plugin.addPreset({ name: "tempPreset", json: {} });
+      const countBefore = plugin.availablePresets.length;
 
       plugin.removePreset("tempPreset");
 
-      expect(plugin.presets.length).toBe(countBefore - 1);
-      expect(plugin.presets.some(p => p.name === "tempPreset")).toBe(false);
+      expect(plugin.availablePresets.length).toBe(countBefore - 1);
+      expect(plugin.availablePresets.some(p => p.name === "tempPreset")).toBe(false);
     });
   });
 

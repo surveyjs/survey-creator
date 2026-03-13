@@ -1,6 +1,6 @@
 import { ListModel, QuestionDropdownModel, SurveyModel, settings, IAction, QuestionMatrixDynamicModel, Action, MatrixDynamicRowModel } from "survey-core";
 import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
-import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
+import { CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { getLocString } from "../src/editorLocalization";
 
 jest.mock("survey-core", () => {
@@ -87,8 +87,8 @@ describe("PresetsManager", () => {
 
   describe("Adding and removing presets", () => {
     test("should add custom preset", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "custom1",
+      const preset: IPreset = {
+        name: "custom1",
         json: { toolbox: { showCategoryTitles: true } }
       };
 
@@ -100,8 +100,8 @@ describe("PresetsManager", () => {
     });
 
     test("should call updateMenu after adding preset", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "custom2",
+      const preset: IPreset = {
+        name: "custom2",
         json: {}
       };
 
@@ -111,8 +111,8 @@ describe("PresetsManager", () => {
     });
 
     test("should remove custom preset", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "custom3",
+      const preset: IPreset = {
+        name: "custom3",
         json: {}
       };
 
@@ -126,8 +126,8 @@ describe("PresetsManager", () => {
     });
 
     test("should call updateMenu after removing preset", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "custom4",
+      const preset: IPreset = {
+        name: "custom4",
         json: {}
       };
 
@@ -147,8 +147,8 @@ describe("PresetsManager", () => {
     });
 
     test("should add multiple presets sequentially", () => {
-      const preset1: ICreatorPresetConfig = { presetName: "preset1", json: {} };
-      const preset2: ICreatorPresetConfig = { presetName: "preset2", json: {} };
+      const preset1: IPreset = { name: "preset1", json: {} };
+      const preset2: IPreset = { name: "preset2", json: {} };
 
       manager.addPreset(preset1);
       manager.addPreset(preset2);
@@ -161,8 +161,8 @@ describe("PresetsManager", () => {
   describe("Updating presets menu", () => {
     beforeEach(() => {
       PredefinedCreatorPresets.push("basic", "advanced");
-      CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
-      CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: false };
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: false };
     });
 
     test("should update menu when update is called", () => {
@@ -189,8 +189,8 @@ describe("PresetsManager", () => {
     });
 
     test("should include custom presets in menu", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "customMenu",
+      const preset: IPreset = {
+        name: "customMenu",
         json: {}
       };
       manager.addPreset(preset);
@@ -216,7 +216,7 @@ describe("PresetsManager", () => {
 
     test("should filter invisible presets", () => {
       CreatorPresets["hidden"] = {
-        presetName: "hidden",
+        name: "hidden",
         json: {},
         visible: false
       };
@@ -320,7 +320,7 @@ describe("PresetsManager", () => {
       const saveCallback = jest.fn();
 
       // Prepare existing custom preset so it is present in the manager's custom list.
-      manager.addPreset({ presetName, json: initialJson });
+      manager.addPreset({ name: presetName, json: initialJson });
 
       const mockAction = { id: presetName } as IAction;
       (manager.presetsList.getActionById as jest.Mock).mockReturnValue(mockAction);
@@ -369,8 +369,8 @@ describe("PresetsManager", () => {
   describe("Editing presets list", () => {
     beforeEach(() => {
       PredefinedCreatorPresets.push("basic", "advanced");
-      CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
-      CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: true };
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: true };
     });
 
     test("should show edit list dialog", () => {
@@ -442,8 +442,8 @@ describe("PresetsManager", () => {
     });
 
     test("should add custom presets from edit list", () => {
-      const customPreset: ICreatorPresetConfig = {
-        presetName: "newCustom",
+      const customPreset: IPreset = {
+        name: "newCustom",
         json: {}
       };
       CreatorPresets["newCustom"] = customPreset;
@@ -484,7 +484,7 @@ describe("PresetsManager", () => {
       const newName = "newPresetName";
       const presetJson = { toolbox: { showCategoryTitles: true } };
       manager.addPreset({
-        presetName: originalName,
+        name: originalName,
         json: presetJson,
         visible: true
       });
@@ -519,7 +519,7 @@ describe("PresetsManager", () => {
 
       expect(CreatorPresets[originalName]).toBeUndefined();
       expect(CreatorPresets[newName]).toBeDefined();
-      expect(CreatorPresets[newName].presetName).toBe(newName);
+      expect(CreatorPresets[newName].name).toBe(newName);
       expect(CreatorPresets[newName].json).toEqual(presetJson);
 
       const presetsArray = manager.getPresetsArray();
@@ -534,8 +534,8 @@ describe("PresetsManager", () => {
 
     beforeEach(() => {
       PredefinedCreatorPresets.push("basic", "advanced");
-      CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
-      CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: false };
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: false };
 
       survey = new SurveyModel({
         pages: [{ name: "page1", elements: [] }]
@@ -742,7 +742,7 @@ describe("PresetsManager", () => {
   describe("Integration with UI components", () => {
     beforeEach(() => {
       PredefinedCreatorPresets.push("basic");
-      CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
     });
 
     test("should call selectPresetCallback when preset is selected", () => {
@@ -800,7 +800,7 @@ describe("PresetsManager", () => {
 
     test("should set initial value in presetsListEditor", () => {
       PredefinedCreatorPresets.push("test");
-      CreatorPresets["test"] = { presetName: "test", json: {}, visible: true };
+      CreatorPresets["test"] = { name: "test", json: {}, visible: true };
 
       const survey = new SurveyModel({
         pages: [{ name: "page1", elements: [] }]
@@ -815,8 +815,8 @@ describe("PresetsManager", () => {
 
     test("should show dialog when adding new row to presets matrix", () => {
       PredefinedCreatorPresets.push("basic", "advanced");
-      CreatorPresets["basic"] = { presetName: "basic", json: { toolbox: {} }, visible: true };
-      CreatorPresets["advanced"] = { presetName: "advanced", json: { toolbox: {} }, visible: true };
+      CreatorPresets["basic"] = { name: "basic", json: { toolbox: {} }, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: { toolbox: {} }, visible: true };
 
       const survey = new SurveyModel({
         pages: [{ name: "page1", elements: [] }]
@@ -843,7 +843,7 @@ describe("PresetsManager", () => {
 
     test("should create dialog with presetName and template fields", () => {
       PredefinedCreatorPresets.push("basic");
-      CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
       const survey = new SurveyModel({
         pages: [{ name: "page1", elements: [] }]
@@ -877,8 +877,8 @@ describe("PresetsManager", () => {
     test("should create new preset from template when dialog is confirmed", () => {
       PredefinedCreatorPresets.push("basic", "advanced");
       const templateJson = { toolbox: { showCategoryTitles: true }, tabs: { items: [] } };
-      CreatorPresets["basic"] = { presetName: "basic", json: templateJson, visible: true };
-      CreatorPresets["advanced"] = { presetName: "advanced", json: {}, visible: true };
+      CreatorPresets["basic"] = { name: "basic", json: templateJson, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: true };
 
       const survey = new SurveyModel({
         pages: [{ name: "page1", elements: [] }]
@@ -1027,7 +1027,7 @@ describe("PresetsManager", () => {
 
     test("should handle presets without visible property", () => {
       PredefinedCreatorPresets.push("noVisible");
-      CreatorPresets["noVisible"] = { presetName: "noVisible", json: {} };
+      CreatorPresets["noVisible"] = { name: "noVisible", json: {} };
 
       manager.update();
 
@@ -1039,7 +1039,7 @@ describe("PresetsManager", () => {
     test("should handle presets with visible: false", () => {
       PredefinedCreatorPresets.push("hiddenPreset");
       CreatorPresets["hiddenPreset"] = {
-        presetName: "hiddenPreset",
+        name: "hiddenPreset",
         json: {},
         visible: false
       };
@@ -1054,7 +1054,7 @@ describe("PresetsManager", () => {
     test("should handle missing selectPresetCallback", () => {
       manager.selectPresetCallback = undefined as any;
       PredefinedCreatorPresets.push("basic");
-      CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
       manager.update();
       const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
@@ -1068,8 +1068,8 @@ describe("PresetsManager", () => {
     });
 
     test("should handle presets with undefined json", () => {
-      const preset: ICreatorPresetConfig = {
-        presetName: "noJson",
+      const preset: IPreset = {
+        name: "noJson",
         json: undefined
       };
 

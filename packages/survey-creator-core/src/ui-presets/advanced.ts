@@ -1,5 +1,5 @@
 export const Advanced = {
-  presetName: "advanced",
+  name: "advanced",
   json: {
     "tabs": {
       "items": [
