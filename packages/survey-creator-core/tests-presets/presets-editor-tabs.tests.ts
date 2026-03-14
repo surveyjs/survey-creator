@@ -20,6 +20,19 @@ test("Expert preset should have all default tabs available including theme", () 
   expect(tabIds).toContain("translation");
 });
 
+test("Expert preset tabs should have titles in editor even when creator options hide them", () => {
+  const creator = new CreatorBase({ showJSONEditorTab: false, showThemeTab: false });
+  const editor = new CreatorPresetEditorModel(Expert, creator);
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const items = JSON.parse(JSON.stringify(itemsQuestion.value));
+  const titles = items.map(t => t.title);
+  expect(titles).not.toContain(undefined);
+  expect(titles).not.toContain("");
+  expect(items.find(t => t.name === "theme").title).toBeTruthy();
+  expect(items.find(t => t.name === "json").title).toBeTruthy();
+});
+
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({});
   const survey = editor.model;
