@@ -27,8 +27,8 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const creator = (window as any).creator;
       const presetsPlugin = creator.getPlugin("presets");
-      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic, presetName: "Custom Preset" };
-      presetsPlugin.addPreset(new (window as any).SurveyCreatorCore.UIPreset(customPreset));
+      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic, name: "Custom Preset" };
+      presetsPlugin.addPreset(customPreset);
     });
     await page.setViewportSize({ width: 1440, height: 1507 });
     await showPresets(page);
