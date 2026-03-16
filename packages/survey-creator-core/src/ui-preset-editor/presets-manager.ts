@@ -97,6 +97,9 @@ export class PresetsManager {
         isRequired: true
       }]
     });
+    survey.onCreateCustomChoiceItem.add((sender, options) => {
+      options.item.text = getLocString("presets.plugin.createNewPreset").replace("{0}", options.item.value);
+    });
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
 
