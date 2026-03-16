@@ -70,7 +70,7 @@ export const Advanced = {
               "sourceType",
               "allowImagesPreview",
               "waitForUpload",
-              "needConfirmRemoveFile",
+              "confirmDelete",
               "acceptedCategories",
               "acceptedTypes",
               "maxSize",
