@@ -1,3 +1,4 @@
+import { create } from "lodash";
 import { getLocaleStrings } from "survey-creator-core";
 export const enStrings = {
   languages: {
@@ -205,6 +206,7 @@ export const enStrings = {
     cancel: "Cancel",
     saveAs: "Save as...",
     saveAsTitle: "Save current preset as...",
+    createNewPreset: "Create {0} preset",
     quit: "Quit",
     quitConfirmation: "Exit to Survey Creator?",
     quitConfirmationMessage: "You will loose all unsaved changes",
