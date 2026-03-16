@@ -22,7 +22,7 @@ async function selectTextAreaContent(page: Page, selector: string, startLine?: n
   if (startLine === undefined) {
     // Select all content
     await page.evaluate((sel) => {
-      const textarea = document.querySelector(sel) as HTMLTextAreaElement;
+      const textarea = (window as any).creator.rootElement.getRootNode().querySelector(sel) as HTMLTextAreaElement;
       if (textarea) {
         textarea.select();
       }
@@ -30,7 +30,7 @@ async function selectTextAreaContent(page: Page, selector: string, startLine?: n
   } else {
     // Select specific range by line and column
     await page.evaluate(([sel, sl, sc, el, ec]) => {
-      const textarea = document.querySelector(sel) as HTMLTextAreaElement;
+      const textarea = (window as any).creator.rootElement.getRootNode().querySelector(sel) as HTMLTextAreaElement;
       if (!textarea) return;
 
       const lines = textarea.value.split("\n");

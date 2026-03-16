@@ -1,6 +1,6 @@
 @use "../../variables" as *;
 .svc-creator__toolbox--right,
-[dir="rtl"],
+:dir(rtl),
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
   .svc-toolbox {

@@ -36,7 +36,7 @@ test.describe(title, () => {
     const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
     await expect(sectionContentElement).toBeVisible();
     await compareScreenshot(page, sectionContentElement, "choices-section-default.png");
-    await page.evaluate(() => (<any>document).querySelector("[data-name='choices'] .spg-input").focus());
+    await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector("[data-name='choices'] .spg-input").focus());
     await compareScreenshot(page, sectionContentElement, "choices-section-default-focused.png");
     await resetFocusToBody(page);
     await sectionContentElement.locator(".spg-action-button").nth(0).hover();

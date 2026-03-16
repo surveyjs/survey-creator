@@ -10,7 +10,7 @@ test.describe("translation a11y", () => {
   });
   test("Check translation tab empty", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabTranslationName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check translation tab with multiple languages", async ({ page }) => {
     await setJSON(page, {
@@ -26,6 +26,6 @@ test.describe("translation a11y", () => {
       ]
     });
     await getTabbedMenuItemByText(page, creatorTabTranslationName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });

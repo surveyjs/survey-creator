@@ -26,7 +26,6 @@ test("Preset edit model, tabs page with creator, default items", () => {
 test("Preset edit model, tabs page with creator, default items with custom", () => {
   const creator = new CreatorBase();
   creator.addTab({ name: "custom", plugin: { model: creator, activate: () => { } } });
-  creator.addTab({ name: "preview", plugin: { model: creator, activate: () => { } }, isInternal: true });
   const editor = new CreatorPresetEditorModel({}, creator);
   const survey = editor.model;
   const itemsQuestion = survey.getQuestionByName("tabs_items");
@@ -37,10 +36,14 @@ test("Preset edit model, tabs page with creator, default items with custom", () 
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   activeTabQuestion.value = "custom";
   editor.applyFromSurveyModel();
-  expect(creator.tabs).toHaveLength(2);
+  creator.addTab({ name: "invisible", plugin: { model: creator, activate: () => { } }, isInternal: true });
+  expect(creator.tabs).toHaveLength(3);
   expect(creator.tabs[0].id).toEqual("preview");
   expect(creator.tabs[1].id).toEqual("custom");
   expect(creator.activeTab).toBe("preview");
+  expect(creator.tabs[2].id).toEqual("invisible");
+  expect(creator.tabs[1].visible).toBeTruthy();
+  expect(creator.tabs[2].visible).toBeFalsy();
 });
 
 test("Preset edit model, tabs page with creator, default items", () => {

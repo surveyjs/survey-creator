@@ -10,7 +10,7 @@ test.describe("json a11y", () => {
   });
   test("Check json tab empty", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabJSONName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test.skip("Check json tab with errors", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabJSONName).click();
@@ -38,6 +38,6 @@ test.describe("json a11y", () => {
       ],
     }));
     await editor.blur();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });

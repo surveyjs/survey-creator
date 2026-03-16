@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { UIPreset, ICreatorPresetData, registerUIPreset } from "../src/ui-presets-creator/presets";
+import { UIPreset, ICreatorPresetData, registerUIPreset, CreatorPresets, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -550,4 +550,8 @@ test("ui preset registration", () => {
 
   survey.setValue("presetName", "advanced");
   expect(creator.allowZoom).toBeTruthy();
+
+  delete CreatorPresets["basic"];
+  delete CreatorPresets["advanced"];
+  PredefinedCreatorPresets.splice(0, PredefinedCreatorPresets.length);
 });

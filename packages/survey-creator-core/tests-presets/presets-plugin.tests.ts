@@ -1,6 +1,8 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
+import { Basic } from "../src/ui-presets/basic";
+import { Expert } from "../src/ui-presets/expert";
 
 const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];
@@ -91,5 +93,34 @@ describe("UIPresetEditor: saveClicked", () => {
     expect(performSaveSpy).toHaveBeenCalledTimes(1); // called
     plugin.deactivate();
   });
+});
+
+test("Selecting Basic preset should update property grid on Property Grid page", () => {
+  PredefinedCreatorPresets.push("expert", "basic");
+  CreatorPresets["expert"] = Expert;
+  CreatorPresets["basic"] = Basic;
+
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  const survey = plugin.model.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "survey");
+
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  const expertCategories = propGridCategories.value;
+  expect(expertCategories.length).toBeGreaterThan(1);
+
+  const presetsManager = (plugin as any)["presetsManager"];
+  presetsManager.selectPresetCallback(CreatorPresets["basic"]);
+
+  const basicCategories = propGridCategories.value;
+  expect(basicCategories).toHaveLength(1);
+  expect(basicCategories[0].properties.map((p: any) => p.name)).toEqual(
+    Basic.json.propertyGrid.definition.classes.survey.properties
+  );
+
+  plugin.deactivate();
 });
 

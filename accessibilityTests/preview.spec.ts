@@ -10,7 +10,7 @@ test.describe("preview a11y", () => {
   });
   test("Check preview tab empty", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check preview tab with page navigator", async ({ page }) => {
     await setJSON(page, {
@@ -36,6 +36,6 @@ test.describe("preview a11y", () => {
       ],
     });
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });

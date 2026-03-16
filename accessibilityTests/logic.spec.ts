@@ -11,12 +11,12 @@ test.describe("logic a11y", () => {
   });
   test("Check logic tab empty", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check logic with new rule", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.getByRole("button", { name: "Add New Rule" }).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check logic with completed rule", async ({ page }) => {
     await setJSON(page, {
@@ -45,6 +45,6 @@ test.describe("logic a11y", () => {
     });
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.locator("button[title='Show Details']").nth(0).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });

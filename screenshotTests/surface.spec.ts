@@ -805,12 +805,12 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.locator(".svc-panel__add-new-question-container .svc-element__question-type-selector").hover();
     await compareScreenshot(page, page.locator(".svc-panel__add-new-question-container"), "question-add-type-selector-button-panel-hover.png");
-    await page.evaluate(() => { (document.querySelector(".svc-panel__add-new-question-container .svc-element__question-type-selector") as HTMLDivElement).focus(); });
+    await page.evaluate(() => { ((window as any).creator.rootElement.getRootNode().querySelector(".svc-panel__add-new-question-container .svc-element__question-type-selector") as HTMLDivElement).focus(); });
     await compareScreenshot(page, page.locator(".svc-panel__add-new-question-container"), "question-add-type-selector-button-panel-focus.png");
 
     await page.locator(".svc-page__footer .svc-element__question-type-selector").first().hover();
     await compareScreenshot(page, page.locator(".svc-page__footer .svc-element__add-new-question"), "question-add-type-selector-button-page-hover.png");
-    await page.evaluate(() => { (document.querySelector(".svc-page__footer .svc-element__question-type-selector") as HTMLDivElement).focus(); });
+    await page.evaluate(() => { ((window as any).creator.rootElement.getRootNode().querySelector(".svc-page__footer .svc-element__question-type-selector") as HTMLDivElement).focus(); });
     await compareScreenshot(page, page.locator(".svc-page__footer .svc-element__add-new-question"), "question-add-type-selector-button-page-focus.png");
   });
 

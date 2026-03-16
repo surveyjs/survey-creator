@@ -41,7 +41,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: CopyFiles@2
@@ -165,7 +165,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: CopyFiles@2
@@ -328,7 +328,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: DownloadBuildArtifacts@0
@@ -449,7 +449,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: DownloadBuildArtifacts@0
@@ -565,7 +565,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: CopyFiles@2
