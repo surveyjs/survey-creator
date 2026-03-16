@@ -44,19 +44,19 @@ test.describe(title, () => {
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "JSON Editor"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await items.locator("tr").nth(1).getByTitle("Delete").click();
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "JSON Editor", "Preview"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual(["Preview"]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
 
-    await hidden.locator("tr").nth(1).getByTitle("Add").click();
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Logic", "Translations", "JSON Editor"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "Preview"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Logic", "Translations", "JSON Editor"]);
+    await hidden.locator("tr").nth(0).getByTitle("Add").click();
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations", "Preview"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations", "Preview"]);
   });
 
   test("Check presets tabs - drag-drop", async ({ page }) => {
@@ -66,24 +66,24 @@ test.describe(title, () => {
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
 
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "JSON Editor"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await doDragDrop({ page, element: items.locator("tr").nth(1).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes", "JSON Editor"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual(["Preview"]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
 
-    await doDragDrop({ page, element: hidden.locator("tr").nth(2).locator(".sd-table__cell--drag"), target: items, options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getRowsInputValues(items)).toEqual(["JSON Editor", "Designer", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes"]);
-    expect(await getTabsTexts(page)).toEqual(["JSON Editor", "Designer", "Logic", "Translations"]);
+    await doDragDrop({ page, element: hidden.locator("tr").nth(0).locator(".sd-table__cell--drag"), target: items, options: { targetPosition: { x: 5, y: 5 } } });
+    expect(await getRowsInputValues(items)).toEqual(["Preview", "Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Preview", "Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await doDragDrop({ page, element: items.locator("tr").nth(1).locator(".sd-table__cell--drag"), target: items.locator("tr").nth(3).locator(".sd-table__cell--drag"), options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getRowsInputValues(items)).toEqual(["JSON Editor", "Logic", "Designer", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes"]);
-    expect(await getTabsTexts(page)).toEqual(["JSON Editor", "Logic", "Designer", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Preview", "Themes", "Designer", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Preview", "Themes", "Designer", "Logic", "JSON Editor", "Translations"]);
   });
 
   test("Check presets tabs - edit", async ({ page }) => {
@@ -91,7 +91,7 @@ test.describe(title, () => {
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
     expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
 
     await page.getByRole("row", { name: "Designer" }).hover();
@@ -103,7 +103,7 @@ test.describe(title, () => {
     await page.getByText("icon-actual-size-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
-    expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await page.getByRole("row", { name: "Designer1" }).hover();
     expect(await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1)).toBeVisible();
@@ -112,7 +112,7 @@ test.describe(title, () => {
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
     expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
   });
 
   test("Check presets toolbox", async ({ page }) => {
