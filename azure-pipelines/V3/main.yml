@@ -595,6 +595,16 @@ jobs:
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 React"
 
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 React"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator React Playwright Tests"
+        condition: always()
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build"
@@ -752,6 +762,17 @@ jobs:
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 Angular"
 
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 Angular"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator Angular Playwright Tests"
+        condition: always()
+
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/build"
@@ -908,6 +929,17 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 Vue"
+
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 Vue"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator Vue Playwright Tests"
+        condition: always()
 
       - task: CopyFiles@2
         inputs:
@@ -1125,6 +1157,17 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 JS"
+
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 JS"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator JS Playwright Tests"
+        condition: always()
 
       - task: CopyFiles@2
         inputs:
