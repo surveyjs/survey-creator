@@ -590,11 +590,6 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 React"
 
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 React"
-
       - task: PublishTestResults@2
         displayName: "Publish Playwright test results CreatorV2 React"
         inputs:
@@ -605,6 +600,11 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: "Creator React Playwright Tests"
         condition: always()
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run test:a11y:ci
+        displayName: "A11Y Functional test CreatorV2 React"
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build"
@@ -757,11 +757,6 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 Angular"
 
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 Angular"
-
       - task: PublishTestResults@2
         displayName: "Publish Playwright test results CreatorV2 Angular"
         inputs:
@@ -772,6 +767,11 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: "Creator Angular Playwright Tests"
         condition: always()
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+          npm run test:a11y:ci
+        displayName: "A11Y Functional test CreatorV2 Angular"
 
       - task: CopyFiles@2
         inputs:
@@ -925,11 +925,6 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 Vue"
 
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 Vue"
-
       - task: PublishTestResults@2
         displayName: "Publish Playwright test results CreatorV2 Vue"
         inputs:
@@ -940,6 +935,11 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: "Creator Vue Playwright Tests"
         condition: always()
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+          npm run test:a11y:ci
+        displayName: "A11Y Functional test CreatorV2 Vue"
 
       - task: CopyFiles@2
         inputs:
@@ -1153,11 +1153,6 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 JS"
 
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 JS"
-
       - task: PublishTestResults@2
         displayName: "Publish Playwright test results CreatorV2 JS"
         inputs:
@@ -1168,6 +1163,11 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: "Creator JS Playwright Tests"
         condition: always()
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+          npm run test:a11y:ci
+        displayName: "A11Y Functional test CreatorV2 JS"
 
       - task: CopyFiles@2
         inputs:
