@@ -77,6 +77,8 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public set json(val: ICreatorPresetData) {
     this.preset.setJson(val);
     this.updateDataFromJson(this.modelValue);
+    this.applyFromSurveyModel(false);
+    this.activatePage(this.modelValue, this.creatorValue, this.modelValue.editablePresets);
     this.upldateResultJson();
   }
   public get jsonText(): string {

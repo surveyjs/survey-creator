@@ -171,7 +171,8 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableList {
       items = defaultItems;
     } else {
       for (let i = 0; i < items.length; i++) {
-        const defaultItem = defaultItems.filter(di => di.name == items[i].name)[0];
+        const defaultItem = defaultItems.filter(di => di.name == items[i].name)[0]
+          || allTabs.filter(di => di.name == items[i].name)[0];
         if (defaultItem) {
           items[i] = { ...defaultItem, ...items[i] };
         }

@@ -1,9 +1,37 @@
 import { QuestionMatrixDynamicModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { CreatorBase } from "../src/creator-base";
+import { UIPreset } from "../src/ui-presets-creator/presets";
+import { Expert } from "../src/ui-presets/expert";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
+
+test("Expert preset should have all default tabs available including theme", () => {
+  const creator = new CreatorBase();
+  const preset = new UIPreset(Expert);
+  preset.applyTo(creator);
+  const tabIds = creator.tabs.map(t => t.id);
+  expect(tabIds).toContain("designer");
+  expect(tabIds).toContain("preview");
+  expect(tabIds).toContain("theme");
+  expect(tabIds).toContain("logic");
+  expect(tabIds).toContain("json");
+  expect(tabIds).toContain("translation");
+});
+
+test("Expert preset tabs should have titles in editor even when creator options hide them", () => {
+  const creator = new CreatorBase({ showJSONEditorTab: false, showThemeTab: false });
+  const editor = new CreatorPresetEditorModel(Expert, creator);
+  const survey = editor.model;
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  const items = JSON.parse(JSON.stringify(itemsQuestion.value));
+  const titles = items.map(t => t.title);
+  expect(titles).not.toContain(undefined);
+  expect(titles).not.toContain("");
+  expect(items.find(t => t.name === "theme").title).toBeTruthy();
+  expect(items.find(t => t.name === "json").title).toBeTruthy();
+});
 
 test("Preset edit model, tabs page with creator, default items", () => {
   const editor = new CreatorPresetEditorModel({});
