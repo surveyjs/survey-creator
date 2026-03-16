@@ -8,7 +8,7 @@ module.exports = {
       "outputName": "junit.xml"
     }]
   ],
-  collectCoverage: true,
+  collectCoverage: false,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],
   roots: ["tests"],
   transform: {
@@ -32,4 +32,5 @@ module.exports = {
   testRegex: "\/tests\/.*\.(tests?|spec)\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   setupFiles: ["<rootDir>/jest.config.js", "jest-canvas-mock"], //see https://github.com/hustcc/jest-canvas-mock/issues/2
+  setupFilesAfterEnv: ["<rootDir>/tests/jest.setup.js"],
 };

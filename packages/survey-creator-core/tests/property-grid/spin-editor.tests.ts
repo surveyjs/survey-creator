@@ -39,7 +39,8 @@ test("Check spin editor question with min/max values", () => {
   expect(question.value).toBe(15.15);
 });
 
-test("Check spin editor question event callbacks", (done) => {
+test("Check spin editor question event callbacks", () => {
+  jest.useFakeTimers();
   const question = new QuestionSpinEditorModel("q1");
   question.value = 16;
 
@@ -73,24 +74,22 @@ test("Check spin editor question event callbacks", (done) => {
 
   question.value = 16;
   question.onDownButtonMouseDown();
-  setTimeout(() => {
-    question.onButtonMouseUp();
-    expect(question.value).toBe(14);
-    question.onUpButtonMouseDown();
-    setTimeout(() => {
-      question.onButtonMouseLeave();
-      expect(question.value).toBe(16);
-      question.onDownButtonMouseDown();
-      setTimeout(() => {
-        question.onButtonMouseUp();
-        expect(question.value).toBe(14);
-        done();
-      }, 200);
-    }, 200);
-  }, 200);
+  jest.advanceTimersByTime(200);
+  question.onButtonMouseUp();
+  expect(question.value).toBe(14);
+  question.onUpButtonMouseDown();
+  jest.advanceTimersByTime(200);
+  question.onButtonMouseLeave();
+  expect(question.value).toBe(16);
+  question.onDownButtonMouseDown();
+  jest.advanceTimersByTime(200);
+  question.onButtonMouseUp();
+  expect(question.value).toBe(14);
+  jest.useRealTimers();
 });
 
-test("Check spin editor question event callbacks if changeValueOnPressing is false", (done) => {
+test("Check spin editor question event callbacks if changeValueOnPressing is false", () => {
+  jest.useFakeTimers();
   const question = new QuestionSpinEditorModel("q1");
   question.changeValueOnPressing = false;
   question.value = 16;
@@ -116,19 +115,16 @@ test("Check spin editor question event callbacks if changeValueOnPressing is fal
 
   question.value = 16;
   question.onDownButtonMouseDown();
-  setTimeout(() => {
-    question.onButtonMouseUp();
-    expect(question.value).toBe(16);
-    question.onUpButtonMouseDown();
-    setTimeout(() => {
-      question.onButtonMouseLeave();
-      expect(question.value).toBe(16);
-      question.onDownButtonMouseDown();
-      setTimeout(() => {
-        question.onButtonMouseUp();
-        expect(question.value).toBe(16);
-        done();
-      }, 200);
-    }, 200);
-  }, 200);
+  jest.advanceTimersByTime(200);
+  question.onButtonMouseUp();
+  expect(question.value).toBe(16);
+  question.onUpButtonMouseDown();
+  jest.advanceTimersByTime(200);
+  question.onButtonMouseLeave();
+  expect(question.value).toBe(16);
+  question.onDownButtonMouseDown();
+  jest.advanceTimersByTime(200);
+  question.onButtonMouseUp();
+  expect(question.value).toBe(16);
+  jest.useRealTimers();
 });

@@ -550,4 +550,8 @@ test("ui preset registration", () => {
 
   survey.setValue("presetName", "advanced");
   expect(creator.allowZoom).toBeTruthy();
+
+  delete CreatorPresets["basic"];
+  delete CreatorPresets["advanced"];
+  PredefinedCreatorPresets.splice(0, PredefinedCreatorPresets.length);
 });

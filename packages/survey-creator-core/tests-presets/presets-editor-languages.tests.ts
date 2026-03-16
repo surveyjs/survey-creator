@@ -85,6 +85,7 @@ test("Preset edit model, Languages tab - default survey language item", () => {
 });
 
 test("Preset edit model, Languages tab - no locales", () => {
+  const savedLocales = surveyLocalization.locales;
   surveyLocalization.locales = {};
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
@@ -96,6 +97,7 @@ test("Preset edit model, Languages tab - no locales", () => {
 
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.languages?.surveyLocales).toBeFalsy();
+  surveyLocalization.locales = savedLocales;
 });
 
 test("Preset edit model, Languages tab - survey language items", () => {
