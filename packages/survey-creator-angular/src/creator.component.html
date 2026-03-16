@@ -20,12 +20,12 @@
           <div class="svc-creator__content-wrapper svc-flex-row"
             [class.svc-creator__content-wrapper--footer-toolbar]="creator.isMobileView">
             <div class="svc-creator__content-holder svc-flex-column">
-              <ng-container *ngFor="let tab of visibleTabs; trackBy: trackTabBy">
-                <div role="tabpanel" class="svc-creator-tab" [attr.id]="'scrollableDiv-' + tab.id"
-                  [attr.aria-labelledby]="'tab-' + tab.id"
+              <ng-container *ngIf="!!activeTab">
+                <div role="tabpanel" class="svc-creator-tab" [attr.id]="'scrollableDiv-' + activeTab.id"
+                  [attr.aria-labelledby]="'tab-' + activeTab.id"
                   [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
                   <ng-template
-                    [component]="{ name: tab.componentContent, data: { data: creator, model: tab.data.model } }"></ng-template>
+                    [component]="{ name: activeTab.componentContent, data: { data: creator, model: activeTab.data.model } }"></ng-template>
                 </div>
               </ng-container>
             </div>

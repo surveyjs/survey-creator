@@ -423,6 +423,7 @@ export class QuestionToolbox
     return ".sv-scroll__scroller";
   }
 
+  public static defaultQuestionJsonCache: { [name: string]: any } | undefined;
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
@@ -1327,7 +1328,7 @@ export class QuestionToolbox
     super.patchAction(action);
     this.actionsHash = undefined;
   }
-  public getActionById(name : string): QuestionToolboxItem {
+  public getActionById(name: string): QuestionToolboxItem {
     if (!this.actionsHash) {
       this.actionsHash = {};
     }
@@ -1343,16 +1344,25 @@ export class QuestionToolbox
     const questions = this.getQuestionTypes(supportedQuestions);
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
+    const jsonCache = QuestionToolbox.defaultQuestionJsonCache;
     for (var i = 0; i < questions.length; i++) {
       const name = questions[i];
       const defaultJson = QuestionToolbox.getQuestionDefaultSettings(name);
-      let question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
-      if (!!defaultJson) {
-        question.fromJSON(defaultJson);
+      let json: any;
+      if (jsonCache && !defaultJson && name in jsonCache) {
+        json = { ...jsonCache[name] };
+      } else {
+        let question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
+        if (!!defaultJson) {
+          question.fromJSON(defaultJson);
+        }
+        json = question.toJSON();
+        json.type = name;
+        delete json.name;
+        if (jsonCache && !defaultJson) {
+          jsonCache[name] = { ...json };
+        }
       }
-      const json = question.toJSON();
-      json.type = name;
-      delete json.name;
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,

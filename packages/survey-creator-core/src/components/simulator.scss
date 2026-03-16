@@ -32,7 +32,6 @@
 }
 
 .svd-simulator-main {
-
   &.svd-simulator-main--desktop {
     min-height: auto;
 
@@ -73,5 +72,10 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background: var(--sjs2-color-bg-basic-primary,#ffffff);
+  background: var(--sjs2-color-bg-basic-primary, #ffffff);
+
+  .sv-popup--modal-popup {
+    width: 100%;
+    height: 100%;
+  }
 }

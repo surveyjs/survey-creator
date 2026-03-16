@@ -241,13 +241,13 @@ test.describe(title, () => {
 
     const hasNoScroll = () =>
       page.evaluate(() => {
-        const element = document.querySelector(".svc-toolbox");
+        const element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox");
         return element?.scrollHeight === element?.clientHeight;
       });
 
     const setSize = (size: number) =>
       page.evaluate((s) => {
-        const element = document.querySelector(".svc-creator") as HTMLElement;
+        const element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-creator") as HTMLElement;
         if (element) element.style.height = s + "px";
       }, size);
 
@@ -288,6 +288,8 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 598 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
     await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    // Wait for layout to recalculate visibility after enabling search and viewport change
+    await page.waitForTimeout(100);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(10);
   });
 

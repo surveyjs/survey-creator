@@ -89,13 +89,14 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const c = (window as any).creator;
       const root = c.rootElement.getRootNode();
-      const el = root.getElementById("survey-creator");
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const el = document.getElementById("survey-creator");
       if (el) {
         el.style.position = "relative";
         (el.style as any).bottom = undefined;
         el.style.height = "15000px";
       }
-      const rootEl = root.getElementsByTagName("app-root")[0];
+      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
       if (rootEl) (rootEl as HTMLElement).style.position = "relative";
     });
 
@@ -1214,9 +1215,10 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const c = (window as any).creator;
       const root = c.rootElement.getRootNode();
-      const el = root.getElementById("survey-creator");
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const el = document.getElementById("survey-creator");
       if (el) { el.style.position = "relative"; (el.style as any).bottom = undefined; el.style.height = "10000px"; }
-      const rootEl = root.getElementsByTagName("app-root")[0];
+      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
       if (rootEl) (rootEl as HTMLElement).style.position = "relative";
     });
 
@@ -1441,7 +1443,7 @@ test.describe(title, () => {
     const questionRectRight = box.x + box.width;
     const questionRectBottom = box.y + box.height;
 
-    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorEl = page.locator("#survey-creator").first();
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
 
@@ -1521,7 +1523,7 @@ test.describe(title, () => {
     const pageRectBottom = page1Box.y + page1Box.height;
     const pageRectLeft = page1Box.x;
 
-    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorEl = page.locator("#survey-creator").first();
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
     await page.mouse.move(creatorBox.x + pageRectLeft + 50, creatorBox.y + pageRectBottom + 6, { steps: 20 });
@@ -1572,7 +1574,7 @@ test.describe(title, () => {
     await page2.hover({ position: { x: 150, y: 20 } });
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
     await page2DragHandle.dispatchEvent("pointerdown");
-    await page.locator(".svc-designer-header").filter({ visible: true }).first().hover();
+    await page.locator(".svc-designer-header").filter({ visible: true }).first().hover({ force: true });
     await page2DragHandle.dispatchEvent("pointerup");
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);

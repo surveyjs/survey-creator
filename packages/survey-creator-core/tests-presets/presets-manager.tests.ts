@@ -798,6 +798,60 @@ describe("PresetsManager", () => {
       expect(survey.pages[0].questions.length).toBe(1);
     });
 
+    test("should have no rows in presets matrix when no presets are registered", () => {
+      Object.keys(CreatorPresets).forEach(key => delete CreatorPresets[key]);
+      PredefinedCreatorPresets.length = 0;
+
+      const survey = new SurveyModel({
+        pages: [{ name: "page1", elements: [] }]
+      });
+
+      manager.addPresetsListEditor(survey);
+
+      const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
+      expect(matrixQuestion.visibleRows.length).toBe(0);
+    });
+
+    test("should create new preset with empty json when no presets are registered, Bug#7520", () => {
+      Object.keys(CreatorPresets).forEach(key => delete CreatorPresets[key]);
+      PredefinedCreatorPresets.length = 0;
+
+      const survey = new SurveyModel({
+        pages: [{ name: "page1", elements: [] }]
+      });
+
+      manager.addPresetsListEditor(survey);
+
+      const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
+
+      let onApplyCallback: (() => boolean) | undefined;
+
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      const options: any = {
+        question: matrixQuestion,
+        allow: true,
+        canAddRow: true
+      };
+      survey.onMatrixRowAdding.fire(survey, options);
+
+      const dialogOptions = mockShowDialog.mock.calls[0][0];
+      const addSurvey = dialogOptions.data.survey as SurveyModel;
+      addSurvey.setValue("presetName", "myPreset");
+      addSurvey.setValue("template", "basic");
+
+      expect(onApplyCallback).toBeDefined();
+      expect(onApplyCallback!()).toBe(true);
+      expect(CreatorPresets["myPreset"]).toBeDefined();
+      expect(CreatorPresets["myPreset"].json).toEqual({});
+      expect(matrixQuestion.value).toHaveLength(1);
+      expect(matrixQuestion.value[0].name).toBe("myPreset");
+      expect(matrixQuestion.value[0].custom).toBe(true);
+    });
+
     test("should set initial value in presetsListEditor", () => {
       PredefinedCreatorPresets.push("test");
       CreatorPresets["test"] = { presetName: "test", json: {}, visible: true };

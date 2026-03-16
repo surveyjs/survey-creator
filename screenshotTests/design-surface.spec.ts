@@ -16,10 +16,17 @@ test.describe(title, () => {
     const root = page.locator(".svc-full-container").nth(1);
     await setJSON(page, {});
     await page.evaluate(() => {
-      const creator = document.getElementById("survey-creator");
-      if (creator) {
-        creator.style.bottom = "";
-        creator.style.height = "1px";
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      let creatorNode;
+
+      if (rootNode instanceof ShadowRoot) {
+        creatorNode = rootNode.querySelector("div");
+      } else {
+        creatorNode = rootNode.getElementById("survey-creator");
+      }
+      if (creatorNode) {
+        creatorNode.style.bottom = "";
+        creatorNode.style.height = "1px";
       }
     });
     await compareScreenshot(page, root, "creator-min-height.png");
@@ -284,7 +291,7 @@ test.describe(title, () => {
     });
     await page.click(".svc-logo-image");
     await page.evaluate(() => {
-      (document.querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
+      ((window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
     });
     await compareScreenshot(page, ".svc-logo-image__loading", "logo-image-loading.png");
   });
@@ -317,7 +324,7 @@ test.describe(title, () => {
     });
 
     await page.evaluate(() => {
-      const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
+      const el: any = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
       if (el) {
         el.style.color = "transparent";
       }

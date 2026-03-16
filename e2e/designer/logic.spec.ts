@@ -510,7 +510,7 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     const compareWidths = await page.evaluate(() => {
-      const scrollableSelector = document.querySelector(".svc-logic-tab__content") as HTMLElement;
+      const scrollableSelector = (window as any).creator.rootElement.getRootNode().querySelector(".svc-logic-tab__content") as HTMLElement;
       return scrollableSelector && scrollableSelector.offsetWidth >= scrollableSelector.scrollWidth;
     });
     expect(compareWidths).toBeTruthy();
