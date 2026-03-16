@@ -118,6 +118,7 @@ export function createUmdConfig(options) {
       useEsbuild
         ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
         : typescript({
+          noEmitOnError: true,
           tsconfig: tsconfig,
           filterRoot: false,
           compilerOptions: declarationDir ? {
@@ -186,6 +187,7 @@ export function createEsmConfig(options) {
       useEsbuild
         ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
         : typescript({
+          noEmitOnError: true,
           tsconfig: tsconfig,
           filterRoot: false,
           compilerOptions: {
