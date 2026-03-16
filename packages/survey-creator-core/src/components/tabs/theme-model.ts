@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor, DomDocumentHelper } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor, DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -350,14 +350,14 @@ export class ThemeModel extends Base implements ITheme {
     let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables));
 
     // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
-    if (themeCopyCssVariables && typeof window !== "undefined") {
+    if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
       const div = DomDocumentHelper.createElement("div");
       for (const key of Object.keys(themeCopyCssVariables)) {
         div.style.setProperty(key, themeCopyCssVariables[key] as string);
       }
       DomDocumentHelper.getBody().appendChild(div);
 
-      const computed = window.getComputedStyle(div);
+      const computed = DomWindowHelper.getWindow().getComputedStyle(div);
 
       // Replace cssVariables with computed values
       const newCssVariables: { [key: string]: string } = {};
