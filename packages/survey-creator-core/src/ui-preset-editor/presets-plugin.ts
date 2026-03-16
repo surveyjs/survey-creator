@@ -143,7 +143,11 @@ export class UIPresetEditor implements ICreatorPlugin {
    * The currently selected preset.
    */
   public get preset(): IPreset | undefined {
-    return this.presetsManager.preset;
+    const p = this.presetsManager.preset;
+    if (p && this.model) {
+      return { ...p, json: this.model.json };
+    }
+    return p;
   }
 
   /**

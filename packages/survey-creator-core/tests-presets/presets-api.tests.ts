@@ -107,6 +107,34 @@ describe("UIPresetEditor API", () => {
       expect(current).toBeDefined();
       expect(current.name).toBe("basic");
     });
+
+    test("preset json reflects editor changes", () => {
+      PredefinedCreatorPresets.push("expert");
+      CreatorPresets["expert"] = { name: "expert", json: {}, visible: true };
+
+      const creator = new CreatorBase();
+      const plugin = new UIPresetEditor(creator);
+
+      (plugin as any)["presetsManager"].presetSelector = { value: "expert" } as any;
+      plugin.activate();
+
+      const survey: any = plugin.model.model;
+      const itemsQuestion: any = survey.getQuestionByName("tabs_items");
+      expect(itemsQuestion).toBeTruthy();
+      const items = [...itemsQuestion.value];
+      expect(items.length).toBeGreaterThan(1);
+
+      items.splice(1, 1);
+      itemsQuestion.value = items;
+
+      const expectedJson = plugin.model.json;
+      const preset = plugin.preset as any;
+
+      expect(preset).toBeTruthy();
+      expect(preset.json).toEqual(expectedJson);
+
+      plugin.deactivate();
+    });
   });
 
   describe("savePresetFunc", () => {
