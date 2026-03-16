@@ -410,7 +410,7 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search-placeholder.png");
     await page.locator(".sv-action--grid-search-close").click();
     await page.evaluate(() => {
-      (document.querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red";
+      ((window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red";
     });
     await compareScreenshot(page, toolboxElement, "toolbox-search-background.png");
   });

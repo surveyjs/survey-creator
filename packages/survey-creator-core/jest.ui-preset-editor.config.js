@@ -8,7 +8,7 @@ module.exports = {
       "outputName": "junit.presets.xml"
     }]
   ],
-  collectCoverage: true,
+  collectCoverage: false,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],
   roots: ["tests-presets"],
   transform: {
@@ -32,4 +32,5 @@ module.exports = {
   testRegex: "\/tests-presets\/.*\.(tests?|spec)\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   setupFiles: ["<rootDir>/jest.config.js", "jest-canvas-mock"],
+  setupFilesAfterEnv: ["<rootDir>/tests/jest.setup.js"],
 };

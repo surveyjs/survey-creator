@@ -796,7 +796,7 @@ export class PropertyJSONGenerator {
     if (isDynamicFunc) {
       const dType = (<any>this.obj).getDynamicType();
       if (dType !== "question" && !Serializer.findProperty(this.obj.getType(), prop.name) &&
-      Serializer.findProperty(dType, prop.name)) {
+        Serializer.findProperty(dType, prop.name)) {
         titleClass = dType;
       }
     }
@@ -991,6 +991,7 @@ export class PropertyGridModel {
     this.survey.getAllQuestions().forEach(q => {
       PropertyGridEditorCollection.onAfterSetValue(this.obj, q, q.property, this.options);
     });
+    this.applyErroredValuesToEditors();
     this.updateDependedPropertiesEditors();
 
     if (this.showOneCategoryInPropertyGrid) {
@@ -1200,6 +1201,32 @@ export class PropertyGridModel {
     var q = options.question;
     if (!q || !q.property) return;
     options.error = this.validateQuestionValue(q.obj || this.obj, q, q.property, options.value);
+    this.updateErroredValueCache(q.obj || this.obj, q.property, options.value, options.error);
+  }
+  private getErroredPropertyName(propertyName: string): string {
+    return "errored_" + propertyName;
+  }
+  private updateErroredValueCache(obj: Base, prop: JsonObjectProperty, value: any, error: string): void {
+    if (!obj || !prop || !prop.type || ["condition", "expression"].indexOf(prop.type) < 0) return;
+    const erroredPropertyName = this.getErroredPropertyName(prop.name);
+    if (!!error) {
+      (<any>obj)[erroredPropertyName] = value;
+    } else {
+      delete (<any>obj)[erroredPropertyName];
+    }
+  }
+  private applyErroredValuesToEditors(): void {
+    if (!this.survey) return;
+    this.survey.getAllQuestions().forEach((question: Question) => {
+      const prop = (<any>question).property as JsonObjectProperty;
+      const obj = (<any>question).obj || this.obj;
+      if (!prop || !obj) return;
+      const erroredPropertyName = this.getErroredPropertyName(prop.name);
+      const erroredValue = (<any>obj)[erroredPropertyName];
+      if (erroredValue !== undefined) {
+        question.value = erroredValue;
+      }
+    });
   }
   private onValueChanging(options: any) {
     var q = options.question;

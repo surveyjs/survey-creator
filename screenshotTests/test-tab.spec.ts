@@ -162,7 +162,7 @@ test.describe(title, () => {
 
   test("Check survey timer", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
-    await setJSON(page, {
+    const json = {
       showQuestionNumbers: true,
       headerView: "basic",
       "autoFocusFirstQuestion": true,
@@ -223,7 +223,8 @@ test.describe(title, () => {
           ]
         }
       ]
-    });
+    };
+    await setJSON(page, json);
 
     // Remove timer animation and disable timer start
     await page.addStyleTag({ content: ".sd-timer__progress--animation { transition: none !important; }" });
@@ -457,5 +458,38 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await questionTagbox.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "test-tab-tagbox-style.png");
+  });
+
+  test("Simulator delete file confirmation popup", async ({ page }) => {
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "file",
+              "name": "question1",
+              "defaultValue": [
+                {}
+              ],
+              "needConfirmRemoveFile": true
+            }
+          ]
+        }
+      ]
+    });
+    const clearButton = page.getByRole("button", { name: "Clear" });
+    const popup = page.locator(".svd-simulator-content .sv-popup");
+    await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
+
+    await page.getByRole("button", { name: "Select device type" }).click();
+    await page.getByText("iPhone SE").click();
+
+    await expect(clearButton).toBeVisible();
+    await expect(popup).not.toBeVisible();
+    await clearButton.click();
+
+    await expect(popup).toBeVisible();
+    await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-popup-delete-file-confirmation.png");
   });
 });

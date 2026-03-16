@@ -1,3 +1,4 @@
+import { DomDocumentHelper } from "survey-core";
 import { CssClassBuilder, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
@@ -90,7 +91,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     this.updateRenderedValue(newValue);
   }
   public onInputChange(event: Event) {
-    if (event.target !== document.activeElement) {
+    if (event.target !== DomDocumentHelper.getDocument().activeElement) {
       this.updateValueFromInputEvent(event);
     }
   }

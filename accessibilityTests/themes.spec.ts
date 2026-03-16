@@ -11,16 +11,16 @@ test.describe("themes a11y", () => {
   });
   test("Check themes tab general tab", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check themes tab header settings", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await page.getByTitle("Header").click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
   test("Check themes tab appearance settings", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await page.getByTitle("Appearance").click();
-    await checkA11y(page, ".svc-creator", { axeOptions });
+    await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });
