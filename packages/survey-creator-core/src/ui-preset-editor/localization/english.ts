@@ -209,7 +209,7 @@ export const enStrings = {
     saveAsTitle: "Save current preset as...",
     quit: "Quit",
     quitConfirmation: "Return to Survey Creator?",
-    quitConfirmationMessage: "You will loose all unsaved changes.",
+    quitConfirmationMessage: "You will lose all unsaved changes.",
     quitConfirmationSave: "Save and exit",
     quitConfirmationDiscard: "Exit without saving",
     deleteConfirmation: "Delete preset \"{0}\"?",
@@ -217,7 +217,7 @@ export const enStrings = {
     deleteConfirmationOk: "Delete",
     deleteConfirmationCancel: "Cancel",
     switchPresetConfirmation: "Switch to another preset?",
-    switchPresetConfirmationMessage: "You will loose all unsaved changes.",
+    switchPresetConfirmationMessage: "You will lose all unsaved changes.",
     switchPresetConfirmationOk: "Switch preset",
     switchPresetConfirmationCancel: "Cancel",
 
