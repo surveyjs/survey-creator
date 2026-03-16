@@ -40,8 +40,8 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
     this.creator.unsubscribeRootElement();
     super.ngOnDestroy();
   }
-  public get visibleTabs(): Array<TabbedMenuItem> {
-    return this.creator.tabs.filter(tab => this.creator.viewType == tab.id && tab.visible);
+  public get activeTab(): TabbedMenuItem {
+    return this.creator.activeTabMenuItem;
   }
   trackTabBy(_: number, tab: TabbedMenuItem) {
     return tab.id;

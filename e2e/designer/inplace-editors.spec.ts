@@ -20,7 +20,7 @@ function getVisibleElement(page: Page, selector: string): Locator {
 
 async function getImageSrc(page: Page, selector: string, index = 0): Promise<string> {
   return page.evaluate(
-    ({ sel, i }) => (document.querySelectorAll(sel)[i] as HTMLImageElement)?.src ?? "",
+    ({ sel, i }) => ((window as any).creator.rootElement.getRootNode().querySelectorAll(sel)[i] as HTMLImageElement)?.src ?? "",
     { sel: selector, i: index }
   );
 }
