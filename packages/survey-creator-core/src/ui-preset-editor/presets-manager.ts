@@ -1,13 +1,10 @@
 import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
-import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
+import { getLocString, SurveyCreatorModel, CreatorPresets, IPreset, PredefinedCreatorPresets, propertyGridCss, IPresetBase } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
 import { get } from "lodash";
 import { showConfirmDialog } from "./confirm-dialog";
 
-export interface IPresetListItem {
-  name: string;
-  visible: boolean;
-}
+export interface IPresetListItem extends IPresetBase { }
 
 export class PresetsManager {
   /**
@@ -17,7 +14,7 @@ export class PresetsManager {
 
   }
   public presetsList: ListModel;
-  public selectPresetCallback: (preset: ICreatorPresetConfig) => void;
+  public selectPresetCallback: (preset: IPreset) => void;
   public presetSelector: QuestionDropdownModel;
   private unsaved = false;
 
@@ -138,7 +135,7 @@ export class PresetsManager {
 
         if (oldName && oldName !== newName && CreatorPresets[oldName]) {
           // Rename: copy config to new name, then remove old
-          CreatorPresets[newName] = { ...CreatorPresets[oldName], presetName: newName };
+          CreatorPresets[newName] = { ...CreatorPresets[oldName], name: newName };
           delete CreatorPresets[oldName];
           renamedPresets[oldName] = newName;
         }
@@ -196,7 +193,7 @@ export class PresetsManager {
       columns: [
         {
           name: "title",
-          title: "Title",
+          title: getLocString("presets.plugin.title"),
         },
         {
           name: "name",
@@ -292,12 +289,12 @@ export class PresetsManager {
         }, {
           type: "buttongroup",
           name: "template",
-          title: "Template",
+          title: getLocString("presets.plugin.template"),
           defaultValue: "basic",
           choices: [
-            { value: "basic", text: "Basic" },
-            { value: "advanced", text: "Advanced" },
-            { value: "expert", text: "Expert" }
+            { value: "basic", text: getLocString("presets.plugin.basic") },
+            { value: "advanced", text: getLocString("presets.plugin.advanced") },
+            { value: "expert", text: getLocString("presets.plugin.expert") }
           ],
         }]
       });
@@ -332,6 +329,7 @@ export class PresetsManager {
   }
 
   private customizePopupButtons(popupModel: any, applyText: string, cancelText: string) {
+    if (!popupModel) return;
     if (popupModel.footerToolbar) {
       const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
       defaultActionBarCss.item = "sps-btn";
@@ -391,16 +389,26 @@ export class PresetsManager {
     this.updateMenu();
   }
 
+  public saveOrSaveAs(json: any, saveCallback: (newName: string) => void) {
+    const currentName = this.preset?.name;
+    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+      this.getPreset(currentName).json = json;
+      saveCallback(currentName);
+    } else {
+      this.saveAs(json, saveCallback);
+    }
+  }
+
   public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
-      this.addPreset({ presetName: newName, json: json });
+      this.addPreset({ name: newName, json: json });
       saveCallback(newName);
       this.presetsList.onItemClick(this.presetsList.getActionById(newName));
     });
   }
 
-  public addPreset(preset: ICreatorPresetConfig) {
-    const presetName = preset?.presetName;
+  public addPreset(preset: IPreset) {
+    const presetName = preset?.name;
     if (!presetName) return;
 
     // Overwrite existing preset config without duplicating it in the list.
@@ -422,11 +430,11 @@ export class PresetsManager {
     this.ensureSelectedPresetAvailable();
   }
 
-  public getPreset(name: string): ICreatorPresetConfig | undefined {
+  public getPreset(name: string): IPreset | undefined {
     return CreatorPresets[name];
   }
 
-  public getCurrentPreset(): ICreatorPresetConfig | undefined {
+  public get preset(): IPreset | undefined {
     const value = this.presetsList?.selectedItem?.id;
     return value ? CreatorPresets[value] : undefined;
   }

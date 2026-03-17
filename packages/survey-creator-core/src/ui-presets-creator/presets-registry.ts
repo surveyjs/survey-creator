@@ -1,2 +1,2 @@
 import { registerTheme, sortDefaultThemes, ThemesHash } from "../utils/themes";
-import { CreatorPresets, ICreatorPresetConfig, ICreatorPresetData } from "../presets-creator/presets";
+import { CreatorPresets, IPreset, ICreatorPresetData } from "../presets-creator/presets";
