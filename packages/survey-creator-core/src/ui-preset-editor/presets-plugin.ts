@@ -1,5 +1,5 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
-import { ICreatorPlugin, UIPreset, SurveyCreatorModel, saveToFileHandler, getLocString, ICreatorPresetConfig, PredefinedCreatorPresets } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
@@ -29,11 +29,11 @@ export class UIPresetEditor implements ICreatorPlugin {
   private saveCount = 0;
 
   /**
-   * Custom function to handle preset saving. When set, it is called instead of the default save handler.
-   * @param saveNo The sequential save number (0-based).
-   * @param callback Call this when the custom save is complete to apply the default save behavior.
+   * A function that is called each time users save a preset to save a preset JSON schema.
+   * @param saveNo The sequential save number.
+   * @param callback A callback function. Call it and pass `saveNo` as the first argument and a Boolean value as the second argument. Set the Boolean value to `true` or `false` based on whether the save operation was successful.
    */
-  public savePresetFunc: (saveNo: number, callback: () => void) => void;
+  public savePresetFunc: (saveNo: number, callback: (no: number, isSuccess: boolean) => void) => void;
 
   /**
    * An event raised when the presets list is saved in the Edit Presets List dialog.
@@ -99,7 +99,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.presetsManager.onPresetListSaved = (presets) => {
       this.onPresetListSaved.fire(this, { presets });
     };
-    this.presetsManager.selectPresetCallback = (preset: ICreatorPresetConfig) => {
+    this.presetsManager.selectPresetCallback = (preset: IPreset) => {
       this.model.json = preset.json;
       this.setStatus("initial");
     };
@@ -114,18 +114,18 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   /**
    * Adds a new UI preset to UI Preset Editor.
-   * @param preset A [UI preset] to add.
+   * @param preset An [`IPreset`] object to add.
    * @see removePreset
    */
-  public addPreset(preset: UIPreset) {
-    this.presetsManager.addPreset({ presetName: preset.name, json: preset.getJson() });
+  public addPreset(preset: IPreset) {
+    this.presetsManager.addPreset(preset);
   }
   /**
-   * Removes a UI theme from Theme Editor.
-   * @param presetAccessor A [UI preset] to delete or a preset identifier.
+   * Removes a UI preset from UI Preset Editor.
+   * @param presetAccessor An [`IPreset`] object to delete or a preset identifier (name).
    * @see addPreset
    */
-  public removePreset(presetAccessor: string | UIPreset): void {
+  public removePreset(presetAccessor: string | IPreset): void {
     this.presetsManager.removePreset(typeof (presetAccessor) === "string" ? presetAccessor : presetAccessor.name);
   }
 
@@ -134,22 +134,26 @@ export class UIPresetEditor implements ICreatorPlugin {
    * @param name The preset identifier.
    * @returns The preset configuration or undefined if not found.
    */
-  public getPreset(name: string): ICreatorPresetConfig | undefined {
+  public getPreset(name: string): IPreset | undefined {
     return this.presetsManager.getPreset(name);
   }
 
   /**
-   * Returns the currently selected preset.
+   * The currently selected preset.
    */
-  public getCurrentPreset(): ICreatorPresetConfig | undefined {
-    return this.presetsManager.getCurrentPreset();
+  public get preset(): IPreset | undefined {
+    const p = this.presetsManager.preset;
+    if (p && this.model) {
+      return { ...p, json: this.model.json };
+    }
+    return p;
   }
 
   /**
-   * Mutable array of all presets. Includes presets from register, add, or user-saved.
+   * Mutable array of all available presets. Includes presets from register, add, or user-saved.
    * Each item has: name, visible, removable (true for custom presets), sortable.
    */
-  public get presets(): IPresetListItem[] {
+  public get availablePresets(): IPresetListItem[] {
     return this.presetsManager.getPresetsArray();
   }
 
@@ -161,16 +165,23 @@ export class UIPresetEditor implements ICreatorPlugin {
   private performSave(closeOnSave = false) {
     if (this.savePresetFunc) {
       this.setStatus("saving");
-      this.savePresetFunc(this.saveCount, () => {
-        this.saveHandler(closeOnSave);
+      this.saveCount++;
+      this.savePresetFunc(this.saveCount, (no: number, isSuccess: boolean) => {
+        if (this.saveCount !== no) return;
+        if (isSuccess) {
+          this.saveHandler(closeOnSave);
+        } else {
+          this.setStatus("unsaved");
+        }
       });
     } else {
+      this.saveCount++;
       this.saveHandler(closeOnSave);
     }
   }
 
   private saveOrSaveAs(closeOnSave = false) {
-    const currentName = this.getCurrentPreset()?.presetName;
+    const currentName = this.preset?.name;
     if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
       this.performSave(closeOnSave);
     } else {
@@ -180,7 +191,6 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   protected saveHandler(closeOnSave = false) {
     this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
-    this.saveCount++;
     this.setStatus("saved");
     if (closeOnSave) {
       this.hidePresets();
