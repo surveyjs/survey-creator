@@ -54,16 +54,17 @@ export class PresetsManager {
     });
   }
 
+  private selectPreset(presetName: string) {
+    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
+    this.selectPresetCallback?.(CreatorPresets[presetName]);
+  }
   private presetListToItems(presets: string[]) {
     return presets
       .filter(presetName => CreatorPresets[presetName].visible !== false)
       .map(presetName => ({
-        id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
-          this.confirmSwitchPreset(() => {
-            this.presetsList.selectedItem = item;
-            this.selectPresetCallback?.(CreatorPresets[presetName]);
-          });
-        }
+        id: presetName,
+        title: this.getPresetTitle(presetName),
+        action: () => this.selectPreset(presetName)
       })) as IAction[];
   }
   private get presetsMenuItems(): IAction[] {
@@ -144,10 +145,7 @@ export class PresetsManager {
     this.updateMenu();
     const selectedId = this.presetsList?.selectedItem?.id;
     if (selectedId && renamedPresets[selectedId]) {
-      const action = this.presetsList?.getActionById?.(renamedPresets[selectedId]);
-      if (action) {
-        this.presetsList.onItemClick(action);
-      }
+      this.selectPreset(renamedPresets[selectedId]);
     }
     this.ensureSelectedPresetAvailable();
   }
@@ -158,10 +156,7 @@ export class PresetsManager {
     if (visibleNames.indexOf(current) >= 0) return;
     const fallback = visibleNames[0];
     if (!fallback || !CreatorPresets[fallback]) return;
-    const action = this.presetsList?.getActionById?.(fallback);
-    if (action) {
-      this.presetsList.onItemClick(action);
-    }
+    this.selectPreset(fallback);
   }
 
   private rebuildPresetsArray() {
@@ -399,8 +394,8 @@ export class PresetsManager {
   public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
       this.addPreset({ name: newName, json: json });
+      this.selectPreset(newName);
       saveCallback(newName);
-      this.presetsList.onItemClick(this.presetsList.getActionById(newName));
     });
   }
 
