@@ -4,6 +4,7 @@ import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UI
 
 import { Basic } from "../src/ui-presets/basic";
 import { Advanced } from "../src/ui-presets/advanced";
+import { Expert } from "../src/ui-presets/expert";
 
 const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];
