@@ -1,5 +1,5 @@
 export const Basic = {
-  presetName: "basic",
+  name: "basic",
   json: {
     "toolbox": {
       "definition": [
