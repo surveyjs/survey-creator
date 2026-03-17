@@ -504,4 +504,15 @@ test.describe(title, () => {
     await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
   });
 
+  test("Check presets import confirmation dialog when unsaved changes exist", async ({ page }) => {
+    await page.getByText("Dansk").click();
+
+    await page.locator(".sps-navigation-bar-item").nth(2).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Import").click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Import a new preset?");
+
+    await page.getByRole("button", { name: "Cancel" }).click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toBeHidden();
+  });
+
 });
