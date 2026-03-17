@@ -326,6 +326,7 @@ export class PresetsManager {
   }
 
   private customizePopupButtons(popupModel: any, applyText: string, cancelText: string) {
+    if (!popupModel) return;
     if (popupModel.footerToolbar) {
       const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
       defaultActionBarCss.item = "sps-btn";
@@ -383,6 +384,16 @@ export class PresetsManager {
 
   public update() {
     this.updateMenu();
+  }
+
+  public saveOrSaveAs(json: any, saveCallback: (newName: string) => void) {
+    const currentName = this.preset?.name;
+    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+      this.getPreset(currentName).json = json;
+      saveCallback(currentName);
+    } else {
+      this.saveAs(json, saveCallback);
+    }
   }
 
   public saveAs(json: any, saveCallback: (newName: string) => void) {

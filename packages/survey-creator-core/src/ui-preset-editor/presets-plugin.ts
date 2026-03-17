@@ -157,7 +157,14 @@ export class UIPresetEditor implements ICreatorPlugin {
     return this.presetsManager.getPresetsArray();
   }
 
-  private performSave(closeOnSave = false) {
+  protected discardUnsaved() {
+    this.model.json = JSON.parse(JSON.stringify(this.defaultJson));
+    this.model.applyFromSurveyModel(false);
+    this.setStatus("initial");
+    this.creator.notify(getLocString("presets.plugin.discarded"));
+  }
+
+  protected performSave(closeOnSave = false) {
     if (this.savePresetFunc) {
       this.setStatus("saving");
       this.saveCount++;
@@ -175,15 +182,6 @@ export class UIPresetEditor implements ICreatorPlugin {
     }
   }
 
-  private saveOrSaveAs(closeOnSave = false) {
-    const currentName = this.preset?.name;
-    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
-      this.performSave(closeOnSave);
-    } else {
-      this.saveAsHandler(closeOnSave);
-    }
-  }
-
   protected saveHandler(closeOnSave = false) {
     this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
     this.setStatus("saved");
@@ -191,7 +189,10 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.hidePresets();
     }
   }
-  protected saveAsHandler(closeOnSave = false) {
+  private saveOrSaveAs(closeOnSave = false) {
+    this.presetsManager.saveOrSaveAs(this.model.json, () => { this.performSave(closeOnSave); });
+  }
+  protected saveAs(closeOnSave = false) {
     this.presetsManager.saveAs(this.model.json, () => { this.performSave(closeOnSave); });
   }
   protected setStatus(status: "saved" | "unsaved" | "saving" | "initial") {
@@ -223,11 +224,10 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     const tools = [
       { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveOrSaveAs() }, //locTitleName: "presets.plugin.save"
-      { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAsHandler() }, //locTitleName: "presets.plugin.save"
+      { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAs() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
-      { id: "reset-current", title: getLocString("presets.plugin.resetLanguages"), needSeparator: true, action: () => { this.confirmReset(() => this.model?.resetToDefaults("page_languages")); } },
-      { id: "reset", title: getLocString("presets.plugin.resetAll"), css: "sps-list__item--alert", action: () => { this.confirmReset(() => this.model?.resetToDefaults()); } },
+      { id: "reset", title: getLocString("presets.plugin.resetAll"), needSeparator: true, css: "sps-list__item--alert", action: () => { this.confirmReset(() => { this.discardUnsaved(); }); } },
     ];
 
     presets.forEach(p => {
@@ -326,7 +326,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.pagesList = pagesAction.popupModel.contentComponentData.model;
     this.presetsList = listAction.popupModel.contentComponentData.model;
     this.presetsManager.presetsList = this.presetsList;
-    const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
+    //const resetCurrentAction = editAction.popupModel.contentComponentData.model.getActionById("reset-current");
     this.saveAction = editAction.popupModel.contentComponentData.model.getActionById("save");
     this.pagesList.selectedItem = this.pagesList.actions[0];
     pagesAction.title = this.pagesList.selectedItem.title || "";
@@ -334,8 +334,8 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.model.model.onCurrentPageChanged.add((_, options) => {
       this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
       pagesAction.title = this.pagesList.selectedItem.title || "";
-      resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
-      resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
+      //resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
+      //resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
 
     this.model.onJsonChangedCallback = () => {
