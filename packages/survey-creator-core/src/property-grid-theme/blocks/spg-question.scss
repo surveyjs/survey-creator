@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
 }
 
 .spg-question.spg-question--disabled {
@@ -143,8 +143,8 @@
   display: flex;
   align-items: center;
   padding-inline-start: var(--ctr-editor-padding-left, var(--sjs-spacing-x05));
-  border-top-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  border-bottom-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-top-left-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
+  border-bottom-left-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
   background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
   box-sizing: border-box;
   box-shadow:
@@ -176,8 +176,8 @@
 
 .spg-question__content--left {
   flex: 2;
-  border-top-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  border-bottom-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-top-right-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
+  border-bottom-right-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
   background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
   box-shadow:
     inset calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0

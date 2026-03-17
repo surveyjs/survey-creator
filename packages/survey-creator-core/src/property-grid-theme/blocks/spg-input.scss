@@ -10,7 +10,7 @@
   box-sizing: border-box;
   width: 100%;
   border: none;
-  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, var(--sjs-stroke-x1)) var(--ctr-editor-border-color, var(--sjs-border-10, #dcdcdcff));
   transition: box-shadow $creator-transition-duration;
 

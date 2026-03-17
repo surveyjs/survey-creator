@@ -10,7 +10,7 @@
   gap: var(--ctr-property-grid-placeholder-image-margin-top, var(--sjs-spacing-x3));
   flex: 1 0 0;
   align-self: stretch;
-  background: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
 }
 .svc-property-grid-placeholder__header {
   display: flex;

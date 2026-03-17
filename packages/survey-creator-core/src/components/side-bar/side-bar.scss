@@ -132,7 +132,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   background-color: transparent;
 }
 .svc-side-bar__container {
-  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-side-bar {

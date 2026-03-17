@@ -40,7 +40,7 @@
 
 .spg-root-modern.spg-root--one-category {
   border-inline-end: unset;
-  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
 
   .spg-page.spg-body__page {
     box-shadow: unset;
