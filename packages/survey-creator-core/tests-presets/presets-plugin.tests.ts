@@ -1,7 +1,9 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
-import { CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
+import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
+
 import { Basic } from "../src/ui-presets/basic";
+import { Advanced } from "../src/ui-presets/advanced";
 import { Expert } from "../src/ui-presets/expert";
 
 const originalCreatorPresets: { [key: string]: IPreset } = {};
@@ -70,6 +72,20 @@ test("UIPresetEditor: check status action on editor model json changed", () => {
   plugin.model.model.getQuestionByName("propertyGrid_categories").value = [];
   expect(statusAcion.visible).toBeTruthy();
   expect(statusAcion.title).toBe("Unsaved changes");
+  plugin.deactivate();
+});
+test("UIPresetEditor: hidePresets should not throw when only Basic and Advanced presets are registered, Bug#7486", () => {
+  registerUIPreset(Basic);
+  registerUIPreset(Advanced);
+
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  expect(() => {
+    (plugin as any)["hidePresets"]();
+  }).not.toThrow();
+
   plugin.deactivate();
 });
 
