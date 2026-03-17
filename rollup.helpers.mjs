@@ -95,7 +95,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -120,28 +120,30 @@ export function createUmdConfig(options) {
         : typescript({
           tsconfig: tsconfig,
           filterRoot: false,
-          compilerOptions: declarationDir ? {
-            inlineSources: true,
+          compilerOptions: {
+            inlineSources: sourceMap,
             sourceMap: sourceMap,
-            declaration: true,
+            declaration: !!declarationDir,
             declarationDir: declarationDir
-          } : {}
-        }),
-      emitCss ? rollupPostcss({
-        extract: emitCss,
-        minimize: false,
-        sourceMap: sourceMap,
-        use: {
-          sass: {
-            api: "modern",
-            silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
           }
-        },
-        plugins: [
-          postcssUrl({ url: "inline" }),
-          postcssBanner({ banner: getOwnBanner(version), important: true }),
-        ],
-      }) : pluginIgnoreStyles(),
+        }),
+      emitCss
+        ? rollupPostcss({
+          extract: emitCss,
+          minimize: false,
+          sourceMap: sourceMap,
+          use: {
+            sass: {
+              api: "modern",
+              silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
+            }
+          },
+          plugins: [
+            postcssUrl({ url: "inline" }),
+            postcssBanner({ banner: getOwnBanner(version), important: true }),
+          ],
+        })
+        : pluginIgnoreStyles(),
       bannerPlugin({
         banner: {
           content: getOwnBanner(version),
@@ -189,26 +191,30 @@ export function createEsmConfig(options) {
           tsconfig: tsconfig,
           filterRoot: false,
           compilerOptions: {
+            inlineSources: sourceMap,
+            sourceMap: sourceMap,
             declaration: false,
             declarationDir: null,
             target: "ES6"
           }
         }),
-      emitCss ? rollupPostcss({
-        extract: emitCss,
-        minimize: false,
-        sourceMap: sourceMap,
-        use: {
-          sass: {
-            api: "modern",
-            silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
-          }
-        },
-        plugins: [
-          postcssUrl({ url: "inline" }),
-          postcssBanner({ banner: getOwnBanner(version), important: true }),
-        ],
-      }) : pluginIgnoreStyles(),
+      emitCss
+        ? rollupPostcss({
+          extract: emitCss,
+          minimize: false,
+          sourceMap: sourceMap,
+          use: {
+            sass: {
+              api: "modern",
+              silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
+            }
+          },
+          plugins: [
+            postcssUrl({ url: "inline" }),
+            postcssBanner({ banner: getOwnBanner(version), important: true }),
+          ],
+        })
+        : pluginIgnoreStyles(),
       bannerPlugin({
         banner: {
           content: getOwnBanner(version),
