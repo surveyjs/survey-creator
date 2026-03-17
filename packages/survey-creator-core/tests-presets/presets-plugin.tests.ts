@@ -1,10 +1,11 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
-import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
+import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
+
 import { Basic } from "../src/ui-presets/basic";
 import { Advanced } from "../src/ui-presets/advanced";
 
-const originalCreatorPresets: { [key: string]: ICreatorPresetConfig } = {};
+const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];
 
 beforeEach(() => {
@@ -80,11 +81,11 @@ test("UIPresetEditor: hidePresets should not throw when only Basic and Advanced 
 describe("UIPresetEditor: saveClicked", () => {
   test("should call performSave for custom preset", () => {
     PredefinedCreatorPresets.push("basic");
-    CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+    CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
     const creator = new CreatorTester();
     const plugin = new UIPresetEditor(creator);
-    plugin.addPreset(new UIPreset({ presetName: "custom1", json: {}, visible: true }));
+    plugin.addPreset({ name: "custom1", json: {}, visible: true });
     (plugin as any)["presetsManager"].presetSelector = { value: "custom1" } as any;
     plugin.activate();
 

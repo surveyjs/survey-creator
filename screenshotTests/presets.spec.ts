@@ -27,8 +27,8 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const creator = (window as any).creator;
       const presetsPlugin = creator.getPlugin("presets");
-      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic, presetName: "Custom Preset" };
-      presetsPlugin.addPreset(new (window as any).SurveyCreatorCore.UIPreset(customPreset));
+      const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic, name: "Custom Preset" };
+      presetsPlugin.addPreset(customPreset);
     });
     await page.setViewportSize({ width: 1440, height: 1507 });
     await showPresets(page);
@@ -48,10 +48,10 @@ test.describe(title, () => {
 
   test("Check presets list", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".sps-action-button").nth(1).click();
-    await page.getByText("Edit Presets list", { exact: true }).hover();
-    await page.getByText("Edit Presets list", { exact: true }).click();
+    await page.getByText("Manage Presets", { exact: true }).hover();
+    await page.getByText("Manage Presets", { exact: true }).click();
     await page.waitForTimeout(300);
     await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
     await page.getByText("Add new preset...").click();
@@ -60,9 +60,9 @@ test.describe(title, () => {
 
   test("Check presets delete confirmation dialog", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".sps-action-button").nth(1).click();
-    await page.getByText("Edit Presets list", { exact: true }).click();
+    await page.getByText("Manage Presets", { exact: true }).click();
     await page.getByTitle("Delete").click();
     await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-delete-confirmation-dialog.png");
   });
