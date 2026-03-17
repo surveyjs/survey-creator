@@ -221,6 +221,10 @@ export const enStrings = {
     switchPresetConfirmationMessage: "You will lose all unsaved changes.",
     switchPresetConfirmationOk: "Switch preset",
     switchPresetConfirmationCancel: "Cancel",
+    importConfirmation: "Import a new preset?",
+    importConfirmationMessage: "You will lose all unsaved changes.",
+    importConfirmationOk: "Import",
+    importConfirmationCancel: "Cancel",
 
     file: "File",
     import: "Import",
