@@ -55,7 +55,9 @@ export class PresetsManager {
   }
 
   private selectPreset(presetName: string) {
-    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
+    if (this.presetsList && this.presetsList.actions) {
+      this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
+    }
     this.selectPresetCallback?.(CreatorPresets[presetName]);
   }
   private presetListToItems(presets: string[]) {
