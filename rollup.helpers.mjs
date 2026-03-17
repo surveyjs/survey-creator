@@ -95,7 +95,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -116,13 +116,13 @@ export function createUmdConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
+        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           tsconfig: tsconfig,
           filterRoot: false,
           compilerOptions: declarationDir ? {
             inlineSources: true,
-            sourceMap: true,
+            sourceMap: sourceMap,
             declaration: true,
             declarationDir: declarationDir
           } : {}
@@ -130,7 +130,7 @@ export function createUmdConfig(options) {
       emitCss ? rollupPostcss({
         extract: emitCss,
         minimize: false,
-        sourceMap: true,
+        sourceMap: sourceMap,
         use: {
           sass: {
             api: "modern",
@@ -158,7 +158,7 @@ export function createUmdConfig(options) {
         name: globalName,
         globals: globals,
         entryFileNames: "[name].js",
-        sourcemap: true
+        sourcemap: sourceMap,
       }
     ],
   };
@@ -166,7 +166,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true } = options;
 
   return {
     context: "this",
@@ -184,7 +184,7 @@ export function createEsmConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8" })
+        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           tsconfig: tsconfig,
           filterRoot: false,
@@ -197,7 +197,7 @@ export function createEsmConfig(options) {
       emitCss ? rollupPostcss({
         extract: emitCss,
         minimize: false,
-        sourceMap: true,
+        sourceMap: sourceMap,
         use: {
           sass: {
             api: "modern",
@@ -223,7 +223,7 @@ export function createEsmConfig(options) {
         entryFileNames: "[name].mjs",
         format: "esm",
         exports: "named",
-        sourcemap: true,
+        sourcemap: sourceMap,
         chunkFileNames: (chunkInfo) => {
           if (!chunkInfo.isEntry) {
             return sharedFileName;
