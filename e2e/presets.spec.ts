@@ -504,4 +504,14 @@ test.describe(title, () => {
     await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
   });
 
+  test("Save as shows 'Create preset' text for new preset name", async ({ page }) => {
+    await page.getByText("Dansk").click();
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Save as..." }).click();
+    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
+
+    const dropdown = page.locator(".svc-creator-popup").filter({ visible: true }).locator("input[role='combobox']");
+    await dropdown.fill("MyNewPreset");
+    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Create \"MyNewPreset\" preset");
+  });
+
 });
