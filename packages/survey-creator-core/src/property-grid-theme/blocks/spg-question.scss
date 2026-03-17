@@ -278,7 +278,7 @@ sv-question-error {
   .spg-matrixdynamic__content.spg-text__content {
     outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
-    border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
+    border-radius: var(--sjs2-radius-form, var(--sjs-corner-radius-x075));
 
     .spg-input {
       box-shadow: none;

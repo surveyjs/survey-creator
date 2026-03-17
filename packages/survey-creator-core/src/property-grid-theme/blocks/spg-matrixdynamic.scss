@@ -58,7 +58,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
   border: 1px solid var(--ctr-survey-placeholder-border-color, var(--sjs-border-25, #d4d4d4ff));
   border-radius: var(--ctr-data-table-placeholder-corner-radius, var(--sjs-corner-radius-x075));
   box-sizing: border-box;

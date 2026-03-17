@@ -2788,7 +2788,7 @@ export class SurveyCreatorModel extends Base
     area = area || this.getSurveyInstanceCreatedArea(reason);
     const element = area === "property-grid" && model ? model.obj : undefined;
     const survey = this.createSurveyCore(json, area, element);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
+    if (["designer", "preview", "theme", "property-grid", "theme-tab:property-grid", "designer-tab:creator-settings:theme"].indexOf(reason) < 0) {
       survey.fitToContainer = false;
       survey.applyTheme({ cssVariables: this.defaultSurfaceCssVariables });
       survey.gridLayoutEnabled = false;

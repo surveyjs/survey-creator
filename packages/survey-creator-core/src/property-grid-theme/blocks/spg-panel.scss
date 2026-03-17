@@ -55,7 +55,7 @@
   padding-bottom: var(--ctr-property-grid-form-padding-bottom, var(--sjs-spacing-x5));
   padding-inline-start: var(--ctr-property-grid-form-padding-left, var(--sjs-spacing-x4));
   box-sizing: border-box;
-  background: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
   box-shadow: inset 0px -1px 0px var(--ctr-property-grid-chapter-caption-border-color, var(--sjs-border-25, #d4d4d4ff));
 }
 

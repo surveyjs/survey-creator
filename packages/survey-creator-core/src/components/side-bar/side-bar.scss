@@ -13,7 +13,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
   max-width: var(--sjs-size-x90);
   height: 100%;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
   border-inline-start: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
     var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
     box-sizing: content-box;
@@ -62,7 +62,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   align-items: flex-start;
   height: 100%;
   overflow-y: auto;
-  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 // .svc-side-bar__container-container {

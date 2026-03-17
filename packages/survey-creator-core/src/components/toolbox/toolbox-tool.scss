@@ -235,10 +235,7 @@
   box-sizing: border-box;
   align-items: center;
   border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, var(--sjs-corner-radius-x05));
-  background-color: var(
-    --ctr-toolbox-item-submenu-button-background-color,
-    var(--sjs-layer-1-background-500, #ffffffff)
-  );
+  background-color: var(--sjs2-color-utility-toolbox, var(--sjs-layer-1-background-500, #ffffffff));
   transition: background-color $creator-transition-duration;
   &:hover {
     background-color: var(
@@ -296,8 +293,10 @@
 .svc-toolbox-subtypes {
   .sv-popup__container {
     margin-top: calc(
-      0px - var(--ctr-toolbox-submenu-group-margin-top, var(--sjs-spacing-x150)) -
-        var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1))
+      0px - var(--ctr-toolbox-submenu-group-margin-top, var(--sjs-spacing-x150)) - var(
+          --ctr-toolbox-item-padding-top,
+          var(--sjs-spacing-x1)
+        )
     );
     padding: 0;
 

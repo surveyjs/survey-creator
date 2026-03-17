@@ -23,7 +23,7 @@
 }
 
 .st-properties {
-  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-utility-property-grid, var(--sjs-layer-1-background-500, #ffffffff));
   flex-grow: 1;
   padding-right: calcSize(4);
   padding-left: calcSize(4);
