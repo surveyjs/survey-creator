@@ -58,7 +58,10 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.model.applyFromSurveyModel(false);
     }
     this.presetsManager.update();
-    this.presetsManager.presetSelector.value = this.presetsList.selectedItem.id;
+    const selItem = this.presetsList?.selectedItem;
+    if (selItem && this.presetsManager.presetSelector) {
+      this.presetsManager.presetSelector.value = selItem.id;
+    }
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
   }
