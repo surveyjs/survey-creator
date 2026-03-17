@@ -8,6 +8,15 @@ import { Advanced } from "../src/ui-presets/advanced";
 const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];
 
+class UIPresetEditorTester extends UIPresetEditor {
+  public performSaveTest() {
+    this.performSave();
+  }
+  public discardUnsavedTest() {
+    this.discardUnsaved();
+  }
+}
+
 beforeEach(() => {
   Object.keys(originalCreatorPresets).forEach(key => delete originalCreatorPresets[key]);
   Object.keys(CreatorPresets).forEach(key => {
@@ -78,35 +87,48 @@ test("UIPresetEditor: hidePresets should not throw when only Basic and Advanced 
 
   plugin.deactivate();
 });
-describe("UIPresetEditor: saveClicked", () => {
-  test("should call performSave for custom preset", () => {
-    PredefinedCreatorPresets.push("basic");
-    CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
-    const creator = new CreatorTester();
-    const plugin = new UIPresetEditor(creator);
-    plugin.addPreset({ name: "custom1", json: {}, visible: true });
-    (plugin as any)["presetsManager"].presetSelector = { value: "custom1" } as any;
-    plugin.activate();
+test("should call performSave for custom preset", () => {
+  PredefinedCreatorPresets.push("basic");
+  CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
-    const performSaveSpy = jest.spyOn(plugin as any, "performSave").mockImplementation(() => { });
-    const saveAsHandlerSpy = jest.spyOn(plugin as any, "saveAsHandler").mockImplementation(() => { });
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.addPreset({ name: "custom1", json: {}, visible: true });
+  const presetsManager = (plugin as any)["presetsManager"];
+  presetsManager.presetSelector = { value: "custom1" } as any;
+  plugin.activate();
 
-    (plugin as any)["saveOrSaveAs"]();
+  const performSaveSpy = jest.spyOn(plugin as any, "performSave").mockImplementation(() => { });
+  const saveAsSpy = jest.spyOn(presetsManager, "saveAs").mockImplementation(() => { });
 
-    expect(performSaveSpy).toHaveBeenCalledTimes(1);
-    expect(saveAsHandlerSpy).not.toHaveBeenCalled();
-    plugin.deactivate();
+  (plugin as any)["saveOrSaveAs"]();
 
-    (plugin as any)["presetsManager"].presetSelector = { value: "basic" } as any;
-    plugin.activate();
+  expect(performSaveSpy).toHaveBeenCalledTimes(1);
+  expect(saveAsSpy).not.toHaveBeenCalled();
+  plugin.deactivate();
 
-    (plugin as any)["saveOrSaveAs"]();
+  presetsManager.presetSelector = { value: "basic" } as any;
+  plugin.activate();
 
-    expect(saveAsHandlerSpy).toHaveBeenCalledTimes(1); //not changed
-    expect(performSaveSpy).toHaveBeenCalledTimes(1); // called
-    plugin.deactivate();
-  });
+  (plugin as any)["saveOrSaveAs"]();
+
+  expect(saveAsSpy).toHaveBeenCalledTimes(1);
+  expect(performSaveSpy).toHaveBeenCalledTimes(1); // called
+  plugin.deactivate();
+});
+
+test("made changes, save, made more changes and discard to saved", () => {
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditorTester(creator);
+  plugin.activate();
+  plugin.model.json = { tabs: { items: [{ name: "designer" }] } };
+  plugin.performSaveTest();
+  expect(plugin.model.json.tabs.items).toEqual([{ name: "designer" }]);
+  plugin.model.json = { tabs: { items: [{ name: "designer" }, { name: "preview" }] } };
+  expect(plugin.model.json.tabs.items).toEqual([{ name: "designer" }, { name: "preview" }]);
+  plugin.discardUnsavedTest();
+  expect(plugin.model.json.tabs.items).toEqual([{ name: "designer" }]);
 });
 
 test("Selecting Basic preset should update property grid on Property Grid page", () => {
