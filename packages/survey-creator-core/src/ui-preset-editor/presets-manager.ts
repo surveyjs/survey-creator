@@ -55,10 +55,13 @@ export class PresetsManager {
   }
 
   private selectPreset(presetName: string) {
-    if (this.presetsList && this.presetsList.actions) {
-      this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
-    }
-    this.selectPresetCallback?.(CreatorPresets[presetName]);
+    this.confirmSwitchPreset(() => {
+      if (this.presetsList && this.presetsList.actions) {
+        this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
+        this.presetsList.onSelectionChanged?.(this.presetsList.selectedItem as any);
+      }
+      this.selectPresetCallback?.(CreatorPresets[presetName]);
+    });
   }
   private presetListToItems(presets: string[]) {
     return presets
@@ -376,7 +379,9 @@ export class PresetsManager {
 
   private updateMenu() {
     this.presetsList?.setItems(this.presetsMenuItems);
-    if (this.presetSelector)this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
+    if (this.presetSelector) {
+      this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
+    }
   }
 
   public update() {
@@ -396,6 +401,7 @@ export class PresetsManager {
   public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
       this.addPreset({ name: newName, json: json });
+      this.unsaved = false;
       this.selectPreset(newName);
       saveCallback(newName);
     });
