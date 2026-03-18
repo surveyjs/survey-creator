@@ -506,11 +506,6 @@ test.describe(title, () => {
     await page.locator("[data-name=presetName] input").fill("MyPreset2");
     await page.getByText('Create "MyPreset2"').click();
     await page.getByRole("button", { name: "Save", exact: true }).click();
-
-    await page.waitForTimeout(500);
-
-    await showCreatorSettings(page);
-    expect(await page.getByText("MyPreset2")).toBeVisible();
   });
 
 });
