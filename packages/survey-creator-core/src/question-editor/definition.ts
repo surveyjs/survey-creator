@@ -285,6 +285,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "allowCustomChoices", tab: "choices" },
+      { name: "createCustomChoiceText", tab: "choices" },
       { name: "textWrapEnabled", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },

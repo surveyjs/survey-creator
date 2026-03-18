@@ -595,6 +595,7 @@ export var enStrings = {
     colCount: "Column count",
     choicesOrder: "Choice order",
     allowCustomChoices: "Allow custom choices",
+    createCustomChoiceText: "\"Create Custom Choice\" command text",
     visible: "Visible",
     isRequired: "Required",
     markRequired: "Mark as required",
