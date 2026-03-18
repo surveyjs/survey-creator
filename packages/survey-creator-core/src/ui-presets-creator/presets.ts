@@ -32,11 +32,29 @@ export interface ICreatorPresetData {
   localization?: any;
 }
 
+/**
+ * A base interface for the [`IPresetListItem`](/survey-creator/documentation/api-reference/IPresetListItem) and [`IPreset`](/survey-creator/documentation/api-reference/IPreset) interfaces.
+ */
 export interface IPresetBase {
+  /**
+   * The preset's unique name.
+   */
   name: string;
+  /**
+   * Specifies whether the preset is visible in the preset list.
+   */
   visible?: boolean;
 }
+
+/**
+ * Describes a UI preset configuration.
+ *
+ * A preset configuration specifies whether a preset is visible in the preset list and contains a JSON object that defines how the preset customizes the Survey Creator UI.
+ */
 export interface IPreset extends IPresetBase {
+  /**
+   * Survey Creator UI configuration associated with the preset.
+   */
   json?: ICreatorPresetData | any;
 }
 
@@ -44,7 +62,7 @@ export const PredefinedCreatorPresets: string[] = [];
 export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
 
 /**
- * Registers UI presets to make them available for customization in the Preset Editor UI.
+ * Registers UI presets to make them available for customization in the UI Preset Editor.
  * @param presets One or more UI preset configuations separated by commas, or an object containing multiple configurations.
  */
 export function registerUIPreset(...presets: Array<ConfigsHash<IPreset> | IPreset>) {

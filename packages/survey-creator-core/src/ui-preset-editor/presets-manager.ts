@@ -4,12 +4,14 @@ import { presetsCss } from "./presets-theme/presets";
 import { get } from "lodash";
 import { showConfirmDialog } from "./confirm-dialog";
 
+/**
+ * Describes an item in the preset list.
+ *
+ * A preset list item controls whether a preset is displayed in the list of available presets.
+ */
 export interface IPresetListItem extends IPresetBase { }
 
 export class PresetsManager {
-  /**
-   *
-   */
   constructor(private creator?: SurveyCreatorModel) {
 
   }
@@ -18,9 +20,6 @@ export class PresetsManager {
   public presetSelector: QuestionDropdownModel;
   private unsaved = false;
 
-  /**
-   * Callback fired when the presets list is saved in the Edit Presets List dialog.
-   */
   public onPresetListSaved: (presets: IPresetListItem[]) => void;
 
   private customPresets = [] as string[];
@@ -174,9 +173,6 @@ export class PresetsManager {
     });
   }
 
-  /**
-   * Returns the presets array. Mutable - includes all presets from register, add, or user-saved.
-   */
   public getPresetsArray(): IPresetListItem[] {
     this.rebuildPresetsArray();
     return this._presetsArray;

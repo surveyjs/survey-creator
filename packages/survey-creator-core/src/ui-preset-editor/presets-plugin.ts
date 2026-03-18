@@ -6,7 +6,7 @@ import { PresetsManager, IPresetListItem } from "./presets-manager";
 import { showConfirmDialog } from "./confirm-dialog";
 
 /**
- * A class that instantiates the Preset Editor and provides APIs to manage its elements.
+ * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
  */
 export class UIPresetEditor implements ICreatorPlugin {
   static defaultPresetName = "expert";
@@ -29,21 +29,23 @@ export class UIPresetEditor implements ICreatorPlugin {
   private saveCount = 0;
 
   /**
-   * A function that is called each time users save a preset to save a preset JSON schema.
-   * @param saveNo The sequential save number.
-   * @param callback A callback function. Call it and pass `saveNo` as the first argument and a Boolean value as the second argument. Set the Boolean value to `true` or `false` based on whether the save operation was successful.
+   * A function that handles saving a preset.
+   *
+   * Use the [`preset`](#preset) property to access the preset being saved.
+   * @param saveNo An incremental number that identifies the current change.
+   * @param callback A callback function. Pass `saveNo` as the first argument. Set the second argument to `true` if the server successfully applied the change or `false` if it was rejected.
    */
   public savePresetFunc: (saveNo: number, callback: (no: number, isSuccess: boolean) => void) => void;
 
   /**
-   * An event raised when the presets list is saved in the Edit Presets List dialog.
+   * An event that is raised when the preset list is saved in the **Manage Presets** dialog.
    *
    * Parameters:
    *
    * - `sender`: `UIPresetEditor`\
    * A `UIPresetEditor` instance that raised the event.
-   * - `options.presets`: `IPresetListItem[]`\
-   * The updated presets list.
+   * - `options.presets`: [`IPresetListItem[]`](/survey-creator/documentation/api-reference/ipresetlistitem)\
+   * The updated preset list.
    */
   public onPresetListSaved = new EventBase<UIPresetEditor, { presets: IPresetListItem[] }>();
 
@@ -138,16 +140,16 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   /**
-   * Adds a new UI preset to UI Preset Editor.
-   * @param preset An [`IPreset`] object to add.
+   * Adds a new preset to the UI Preset Editor.
+   * @param preset An [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/ipreset) object to add.
    * @see removePreset
    */
   public addPreset(preset: IPreset) {
     this.presetsManager.addPreset(preset);
   }
   /**
-   * Removes a UI preset from UI Preset Editor.
-   * @param presetAccessor An [`IPreset`] object to delete or a preset identifier (name).
+   * Removes a preset from the UI Preset Editor.
+   * @param presetAccessor An [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/ipreset) object to delete or a preset name.
    * @see addPreset
    */
   public removePreset(presetAccessor: string | IPreset): void {
@@ -155,16 +157,17 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   /**
-   * Returns a preset by name.
-   * @param name The preset identifier.
-   * @returns The preset configuration or undefined if not found.
+   * Returns a preset with the specified `name`.
+   * @param name The preset name.
+   * @returns An [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/ipreset) object or `undefined` if a preset with this `name` is not found.
    */
   public getPreset(name: string): IPreset | undefined {
     return this.presetsManager.getPreset(name);
   }
 
   /**
-   * The currently selected preset.
+   * A [preset](/survey-creator/documentation/api-reference/ipreset) being configured in the UI Preset Editor.
+   * @see savePresetFunc
    */
   public get preset(): IPreset | undefined {
     const p = this.presetsManager.preset;
@@ -175,8 +178,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   /**
-   * Mutable array of all available presets. Includes presets from register, add, or user-saved.
-   * Each item has: name, visible, removable (true for custom presets), sortable.
+   * A mutable array of presets added to the UI Preset Editor either in code (using `registerUIPreset` or [`addPreset`](#addPreset)) or by the user.
    */
   public get availablePresets(): IPresetListItem[] {
     return this.presetsManager.getPresetsArray();
