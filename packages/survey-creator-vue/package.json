@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-vue",
-  "version": "2.5.15",
+  "version": "2.5.16",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
