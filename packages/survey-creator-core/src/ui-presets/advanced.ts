@@ -170,7 +170,6 @@ export const Advanced = {
               { name: "choicesFromQuestion", tab: "choices" },
               { name: "choicesFromQuestionMode", tab: "choices" },
               { name: "allowCustomChoices", tab: "choices" },
-              { name: "createCustomChoiceText", tab: "choices" },
               { name: "textWrapEnabled", tab: "choices" },
               { name: "showOtherItem", tab: "choices" },
               { name: "showNoneItem", tab: "choices" },
