@@ -14,10 +14,13 @@
 
 .spg-dropdown__value {
     @include ctrDefaultFont;
-    display: flex;
+    // display: flex;
     align-items: center;
     width: 100%;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     margin-top: var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1));
     margin-right: var(--ctr-editor-content-margin-right, var(--sjs-spacing-x150));
