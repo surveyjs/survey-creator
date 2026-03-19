@@ -29,8 +29,9 @@ describe("PresetsManager", () => {
     PredefinedCreatorPresets.length = 0;
 
     mockPresetsList = {
-      setItems: jest.fn() as any,
+      setItems: jest.fn((items: any[]) => { (mockPresetsList as any).actions = items; }) as any,
       selectedItem: null,
+      actions: [] as any,
       onItemClick: jest.fn(),
       getActionById: jest.fn()
     } as any;
@@ -291,13 +292,10 @@ describe("PresetsManager", () => {
       expect(saveCallback).toHaveBeenCalledWith(newName);
     });
 
-    test("should call onItemClick for new preset", () => {
+    test("should select new preset after saveAs", () => {
       const json = {};
       const saveCallback = jest.fn();
       const newName = "clickedPreset";
-
-      const mockAction = { id: newName } as IAction;
-      (manager.presetsList.getActionById as jest.Mock).mockReturnValue(mockAction);
 
       mockShowDialog.mockImplementation((options) => {
         return { dispose: jest.fn() };
@@ -310,7 +308,9 @@ describe("PresetsManager", () => {
       survey.setValue("presetName", newName);
       dialogOptions.onApply();
 
-      expect(manager.presetsList.onItemClick).toHaveBeenCalledWith(mockAction);
+      expect(mockPresetsList.selectedItem).toBeDefined();
+      expect(mockPresetsList.selectedItem!.id).toBe(newName);
+      expect(mockSelectPresetCallback).toHaveBeenCalledWith(CreatorPresets[newName]);
     });
 
     test("should overwrite existing preset when name already exists", () => {
@@ -321,9 +321,6 @@ describe("PresetsManager", () => {
 
       // Prepare existing custom preset so it is present in the manager's custom list.
       manager.addPreset({ name: presetName, json: initialJson });
-
-      const mockAction = { id: presetName } as IAction;
-      (manager.presetsList.getActionById as jest.Mock).mockReturnValue(mockAction);
 
       mockShowDialog.mockImplementation((options) => {
         return { dispose: jest.fn() };
@@ -340,7 +337,9 @@ describe("PresetsManager", () => {
       expect(CreatorPresets[presetName]).toBeDefined();
       expect(CreatorPresets[presetName].json).toEqual(updatedJson);
       expect(saveCallback).toHaveBeenCalledWith(presetName);
-      expect(manager.presetsList.onItemClick).toHaveBeenCalledWith(mockAction);
+      expect(mockPresetsList.selectedItem).toBeDefined();
+      expect(mockPresetsList.selectedItem!.id).toBe(presetName);
+      expect(mockSelectPresetCallback).toHaveBeenCalledWith(CreatorPresets[presetName]);
 
       const occurrences = manager.getPresetsArray().filter(p => p.name === presetName).length;
       expect(occurrences).toBe(1);

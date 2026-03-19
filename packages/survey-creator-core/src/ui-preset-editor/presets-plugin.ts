@@ -125,8 +125,10 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.onPresetListSaved.fire(this, { presets });
     };
     this.presetsManager.selectPresetCallback = (preset: IPreset) => {
-      this.model.json = preset.json;
-      this.setStatus("initial");
+      if (this.model) {
+        this.model.json = preset.json;
+        this.setStatus("initial");
+      }
     };
     this.creator.onSurveyInstanceCreated.add((_, o) => {
       if (o.area == "designer-tab:creator-settings:preset") {
