@@ -1,13 +1,17 @@
 import type { Locator, Page } from "@playwright/test";
 import { expect, test as baseTest } from "@playwright/test";
 
-export const url = "http://127.0.0.1:8080/testCafe/testcafe";
-export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page";
-export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/testCafe/preview-theme-switcher";
-export const urlThemeForPreview = "http://127.0.0.1:8080/testCafe/theme-for-preview-option";
-export const urlDropdownCollapseView = "http://127.0.0.1:8080/testCafe/dropdown-collapse-view";
-export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localized_ui";
-export const urlPresets = "http://127.0.0.1:8080/testCafe/presets";
+export const url = "http://127.0.0.1:8080/test-pages/default";
+export const urlByPage = "http://127.0.0.1:8080/test-pages/by-page";
+export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/test-pages/preview-theme-switcher";
+export const urlThemeForPreview = "http://127.0.0.1:8080/test-pages/theme-for-preview-option";
+export const urlDropdownCollapseView = "http://127.0.0.1:8080/test-pages/dropdown-collapse-view";
+export const urlLocalized_de = "http://127.0.0.1:8080/test-pages/localized_ui";
+export const urlNoLicense = "http://127.0.0.1:8080/test-pages/no-license";
+export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
+export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
+export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
+export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
 export async function compareScreenshot(page: Page, elementSelector: string | Locator | undefined, screenshotName: string, elementIndex = 0) {
   let currentElement = elementSelector;

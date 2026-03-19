@@ -18,17 +18,17 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: "/", component: Example },
-    { path: "/testCafe/testcafe", component: Default },
-    { path: "/testCafe/preview-theme-switcher", component: ThemeSwitcher },
-    { path: "/testCafe/theme-for-preview-option", component: ThemePreview },
-    { path: "/testCafe/by-page", component: ByPage },
-    { path: "/testCafe/testcafe-widget", component: CustomWidget },
-    { path: "/testCafe/testcafe_localized_ui", component: Localization },
-    { path: "/testCafe/dropdown-collapse-view", component: DropdownCollapse },
-    { path: "/testCafe/testcafe-theme-tab", component: ThemeTab },
-    { path: "/testCafe/testcafe-no-license", component: NoLicense },
-    { path: "/testCafe/presets", component: Presets },
-    { path: "/testCafe/creator-themes", component: CreatorThemes }
+    { path: "/test-pages/default", component: Default },
+    { path: "/test-pages/preview-theme-switcher", component: ThemeSwitcher },
+    { path: "/test-pages/theme-for-preview-option", component: ThemePreview },
+    { path: "/test-pages/by-page", component: ByPage },
+    { path: "/test-pages/widget", component: CustomWidget },
+    { path: "/test-pages/localized_ui", component: Localization },
+    { path: "/test-pages/dropdown-collapse-view", component: DropdownCollapse },
+    { path: "/test-pages/theme-tab", component: ThemeTab },
+    { path: "/test-pages/no-license", component: NoLicense },
+    { path: "/test-pages/presets", component: Presets },
+    { path: "/test-pages/creator-themes", component: CreatorThemes }
   ]
 })
 
