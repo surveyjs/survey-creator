@@ -104,11 +104,11 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "presets-items.png");
     await page.locator(".sd-table__cell--drag").first().hover();
     await compareScreenshot(page, root, "presets-items-hover.png");
-    await page.locator(".sps-table__row").first().locator(".sps-input").hover();
+    await page.locator(".sps-table__row").first().locator(".sd-formbox").hover();
     await compareScreenshot(page, root, "presets-items-text-hover.png");
     await page.locator(".sps-table__row").first().locator(".sps-action-button").last().hover();
     await compareScreenshot(page, root, "presets-items-button-hover.png");
-    await page.locator(".sps-table__row").first().locator(".sps-input").click();
+    await page.locator(".sps-table__row").first().locator(".sd-formbox").click();
     await compareScreenshot(page, root, "presets-items-text-click.png");
   });
 
@@ -125,11 +125,11 @@ test.describe(title, () => {
 
     await page.locator(".sd-table__cell--drag").first().hover();
     await compareScreenshot(page, root, "presets-categories-hover.png");
-    await page.locator(".sps-table__row").first().locator(".sps-input").hover();
+    await page.locator(".sps-table__row").first().locator(".sd-formbox").hover();
     await compareScreenshot(page, root, "presets-categories-text-hover.png");
     await page.locator(".sps-table__row").first().locator(".sps-action-button").last().hover();
     await compareScreenshot(page, root, "presets-categories-button-hover.png");
-    await page.locator(".sps-table__row").first().locator(".sps-input").click();
+    await page.locator(".sps-table__row").first().locator(".sd-formbox").click();
     await compareScreenshot(page, root, "categories-text-click.png");
 
     await page.locator(".sps-table__row").first().getByTitle("Expand").click();
@@ -168,7 +168,7 @@ test.describe(title, () => {
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
-    await compareScreenshot(page, ".sps-dropdown-popup .svc-list__container", "presets-icon-edit-popup.png");
+    await compareScreenshot(page, ".sv-dropdown-popup .svc-list__container", "presets-icon-edit-popup.png");
   });
 
   test("Presets Dialogs", async ({ page }) => {

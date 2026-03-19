@@ -176,45 +176,45 @@ export var presetsCss = {
     checkboxItemDecorator: "sps-checkbox__svg",
     checkboxMaterialDecorator: "sps-checkbox__rectangle"
   },
-  text: {
-    root: "sps-input sps-text",
-    controlReadOnly: "sps-input--readonly",
-    small: "sps-row__question--small",
-    content: "sps-question__content sps-text__content",
-    remainingCharacterCounter: "sps-remaining-character-counter",
-    onError: "sps-input--error"
-  },
-  comment: {
-    root: "sps-input sps-comment",
-    content: "sps-question__content sps-comment__content",
-    remainingCharacterCounter: "sps-remaining-character-counter",
-    small: "sps-row__question--small",
-    onError: "sps-input--error"
-  },
-  dropdown: {
-    root: "sps-selectbase",
-    popup: "sps-dropdown-popup svc-creator-popup",
-    small: "sps-row__question--small sd-row__question--small",
-    control: "sps-input sps-dropdown",
-    controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
-    controlValue: "sps-dropdown__value",
-    filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
-    other: "sps-comment sps-question__other",
-    onError: "sps-input--error",
-    selectWrapper: "sv-dropdown_select-wrapper sps-dropdown_select-wrapper",
-    chevronButtonIconId: "icon-chevron",
-    cleanButton: "sps-dropdown__clean-button sps-input__edit-button",
-    controlReadOnly: "sps-input--readonly sd-input--disabled sd-input--readonly",
-    hintPrefix: "sps-dropdown__hint-prefix sd-dropdown__hint-prefix",
-    hintSuffix: "sps-dropdown__hint-suffix sd-dropdown__hint-suffix"
-  },
-  tagbox: {
-    cleanItemButton: "sd-tagbox-item_clean-button sps-tagbox-item_clean-button",
-    cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg sps-tagbox-item_clean-button-svg",
-    control: "sd-input sd-tagbox sd-dropdown sps-tagbox sps-dropdown",
-    controlValue: "sd-tagbox__value sd-dropdown__value sps-tagbox__value",
-    filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
-  },
+  // text: {
+  //   root: "sps-input sps-text",
+  //   controlReadOnly: "sps-input--readonly",
+  //   small: "sps-row__question--small",
+  //   content: "sps-question__content sps-text__content",
+  //   remainingCharacterCounter: "sps-remaining-character-counter",
+  //   onError: "sps-input--error"
+  // },
+  // comment: {
+  //   root: "sps-input sps-comment",
+  //   content: "sps-question__content sps-comment__content",
+  //   remainingCharacterCounter: "sps-remaining-character-counter",
+  //   small: "sps-row__question--small",
+  //   onError: "sps-input--error"
+  // },
+  // dropdown: {
+  //   root: "sps-selectbase",
+  //   popup: "sps-dropdown-popup svc-creator-popup",
+  //   small: "sps-row__question--small sd-row__question--small",
+  //   control: "sps-input sps-dropdown",
+  //   controlEmpty: "sps-dropdown--empty sd-dropdown--empty",
+  //   controlValue: "sps-dropdown__value",
+  //   filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
+  //   other: "sps-comment sps-question__other",
+  //   onError: "sps-input--error",
+  //   selectWrapper: "sv-dropdown_select-wrapper sps-dropdown_select-wrapper",
+  //   chevronButtonIconId: "icon-chevron",
+  //   cleanButton: "sps-dropdown__clean-button sps-input__edit-button",
+  //   controlReadOnly: "sps-input--readonly sd-input--disabled sd-input--readonly",
+  //   hintPrefix: "sps-dropdown__hint-prefix sd-dropdown__hint-prefix",
+  //   hintSuffix: "sps-dropdown__hint-suffix sd-dropdown__hint-suffix"
+  // },
+  // tagbox: {
+  //   cleanItemButton: "sd-tagbox-item_clean-button sps-tagbox-item_clean-button",
+  //   cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg sps-tagbox-item_clean-button-svg",
+  //   control: "sd-input sd-tagbox sd-dropdown sps-tagbox sps-dropdown",
+  //   controlValue: "sd-tagbox__value sd-dropdown__value sps-tagbox__value",
+  //   filterStringInput: "sd-dropdown__filter-string-input sps-dropdown__filter-string-input",
+  // },
   matrix: {
     tableWrapper: "sps-matrix sps-table-wrapper",
     root: "sps-table",
