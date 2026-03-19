@@ -2,6 +2,21 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "paths": {
+      "survey-core": [
+        "./node_modules/survey-core"
+      ],
+      "survey-creator-core": [
+        "./node_modules/survey-creator-core"
+      ],
+      "survey-react-ui": [
+        "./node_modules/survey-js-ui"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
+      ],
       "survey-creator-js": [
         "./build"
       ]
