@@ -45,6 +45,7 @@ export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
 });
 
 export const setJSON = async (page: Page, json: object) => {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((json) => {
     window["creator"].text = JSON.stringify(json);
   }, json);
