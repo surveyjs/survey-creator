@@ -58,11 +58,21 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.model.applyFromSurveyModel(false);
     }
     this.presetsManager.update();
-    this.presetsManager.presetSelector.value = this.presetsList.selectedItem.id;
+    const selItem = this.presetsList?.selectedItem;
+    if (selItem && this.presetsManager.presetSelector) {
+      this.presetsManager.presetSelector.value = selItem.id;
+    }
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
   }
 
+  private checkIfNotSaved(onApply: () => void) {
+    if (this.presetsManager.isSaved) {
+      onApply();
+      return true;
+    }
+    return false;
+  }
   private confirmReset(onApply: () => void) {
     showConfirmDialog(this.creator,
       {
@@ -76,7 +86,22 @@ export class UIPresetEditor implements ICreatorPlugin {
         onApply: () => { onApply(); return true; }, onCancel: () => { return true; }
       });
   }
+  private confirmImport(onApply: () => void) {
+    if (this.checkIfNotSaved(onApply)) return;
+    showConfirmDialog(this.creator,
+      {
+        category: "danger",
+        title: getLocString("presets.plugin.importConfirmation"),
+        message: getLocString("presets.plugin.importConfirmationMessage"),
+        applyText: getLocString("presets.plugin.importConfirmationOk"),
+        cancelText: getLocString("presets.plugin.importConfirmationCancel"),
+        iconName: "icon-warning-24x24",
+        showCloseButton: false,
+        onApply: () => { onApply(); return true; }, onCancel: () => { return true; }
+      });
+  }
   private confirmQuit(onApply: () => void, onDiscard: () => void) {
+    if (this.checkIfNotSaved(onDiscard)) return;
     showConfirmDialog(this.creator, {
       title: getLocString("presets.plugin.quitConfirmation"),
       message: getLocString("presets.plugin.quitConfirmationMessage"),
@@ -227,7 +252,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     const tools = [
       { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveOrSaveAs() }, //locTitleName: "presets.plugin.save"
       { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAs() }, //locTitleName: "presets.plugin.save"
-      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.model?.loadJsonFile(); } },
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.confirmImport(() => { this.model?.loadJsonFile(); }); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
       { id: "reset", title: getLocString("presets.plugin.resetAll"), needSeparator: true, css: "sps-list__item--alert", action: () => { this.confirmReset(() => { this.discardUnsaved(); }); } },
     ];
@@ -310,10 +335,6 @@ export class UIPresetEditor implements ICreatorPlugin {
       title: getLocString("presets.plugin.quit"),
       css: "sps-navigation-action sps-navigation-action--right sps-navigation-action--large-icon",
       action: () => {
-        if (this.presetsManager.isSaved) {
-          this.hidePresets();
-          return;
-        }
         this.confirmQuit(() => this.saveOrSaveAs(true), () => this.hidePresets());
       }
     });
