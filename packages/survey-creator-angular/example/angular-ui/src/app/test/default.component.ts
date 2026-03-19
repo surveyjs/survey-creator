@@ -19,6 +19,9 @@ export class TestDefaultComponent implements OnInit {
   constructor(private zone?: NgZone) {
   }
   ngOnInit(): void {
+    if (this.getSlk()) {
+      Survey.slk("ZG9tYWluczoxMjcuMC4wLjE6ODA4MDsxPTIwMzYtMDMtMTksMj0yMDM2LTAzLTE5LDQ9MjAzNi0wMy0xOSw4PTIwMzYtMDMtMTk=");
+    }
     this.createCreator();
     (<any>window).updateCreatorModel = (options: any, json: any) => {
       this.zone && this.zone.run(() => {
