@@ -20,7 +20,7 @@ export class TestDefaultComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.getSlk()) {
-      Survey.slk("ZG9tYWluczoxMjcuMC4wLjE6ODA4MDsxPTIwMzYtMDMtMTksMj0yMDM2LTAzLTE5LDQ9MjAzNi0wMy0xOSw4PTIwMzYtMDMtMTk=");
+      Survey.slk("ZG9tYWluczoxMjcuMC4wLjE7MT0yMDM2LTAzLTE5LDI9MjAzNi0wMy0xOSw0PTIwMzYtMDMtMTksOD0yMDM2LTAzLTE5");
     }
     this.createCreator();
     (<any>window).updateCreatorModel = (options: any, json: any) => {
