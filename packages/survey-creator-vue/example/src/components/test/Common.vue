@@ -15,9 +15,6 @@ import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";
 import { SurveyCreatorComponent } from "survey-creator-vue";
 const props = defineProps<{options: ICreatorOptions, useSlk: boolean}>()
-if (props.useSlk) {
-  slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2LDg9MjAzNC0xMC0xNg==");
-}
 const creator = shallowRef(new SurveyCreatorModel(props.options));
 creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
 (window as any).creator = creator.value;
