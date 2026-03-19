@@ -182,6 +182,7 @@ export var propertyGridCss = {
   },
   text: {
     ...defaultCss.text,
+    resetButtonIcon: "icon-reset",
     content: "spg-question__content spg-text__content",
   },
   multipletext: {
@@ -304,7 +305,10 @@ export var propertyGridCss = {
     maxText: "spg-rating__max-text",
     readOnly: "spg-rating--disabled"
   },
-  comment: { ...defaultCss.comment },
+  comment: {
+    resetButtonIcon: "icon-reset",
+    ...defaultCss.comment
+  },
   expression: "",
   file: {
     root: "spg-file",
@@ -398,17 +402,6 @@ export var propertyGridCss = {
     colorDropdownIcon: "icon-drop-down-arrow",
     swatchIcon: "icon-color-picker",
     choicesButtonWrapper: "spg-color-editor__button-wrapper"
-  },
-  textwithreset: {
-    root: "spg-input spg-input-container",
-    rootMultiline: "spg-input-container--multiline",
-    control: "spg-input-container__input",
-    controlMultiline: "spg-input-container__input spg-comment",
-    resetButton: "spg-input__edit-button",
-    resetButtonIcon: "icon-reset",
-    content: "spg-question__content spg-text__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    onError: "spg-input--error"
   },
   fileedit: {
     root: "spg-input spg-input-container spg-file-edit",
