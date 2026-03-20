@@ -14,8 +14,11 @@ import { FunctionFactory } from "survey-core";
 FunctionFactory.Instance.register("searchItem", searchItem);
 export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
+    const creatorLocales = this.getCreatorLocales();
     const surveyLocales = this.getSurveyLocales();
-    return {
+    const hasCreatorLocales = creatorLocales.length > 0;
+    const hasSurveyLocales = surveyLocales.length > 1;
+    const res: any = {
       title: getLocString("presets.languages.title"),
       description: getLocString("presets.languages.description"),
       navigationTitle: getLocString("presets.languages.navigationTitle"),
@@ -26,7 +29,8 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
           placeholder: editorLocalization.getLocaleName(""),
           name: this.creatorLocaleName,
           searchEnabled: true,
-          choices: this.getCreatorLocales()
+          visible: hasCreatorLocales,
+          choices: creatorLocales
         },
         {
           type: "panel",
@@ -42,6 +46,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               type: "checkbox",
               name: this.surveyLocalesName,
               titleLocation: "hidden",
+              visible: hasSurveyLocales,
               minSelectedChoices: 1,
               colCount: 3,
               showSelectAllItem: surveyLocales.length > 1,
@@ -61,10 +66,16 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
               title: getLocString("presets.languages.translateToEnglish"),
               titleLocation: "hidden",
               renderAs: "switch"
-            }] }
-      ] };
+            }]
+        }
+      ]
+    };
+    if (!hasCreatorLocales && !hasSurveyLocales) {
+      res.visible = false;
+    }
+    return res;
   }
-  public getMainElementNames() : any { return [this.surveyLocalesName]; }
+  public getMainElementNames(): any { return [this.surveyLocalesName]; }
   public getCustomQuestionCssSuffix(question: Question) {
     return question.name === this.searchLocalesName ? "search" : "";
   }
@@ -105,7 +116,7 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
       this.updateLocaleNames(model);
     }
   }
-  private get creatorLocaleName() : string { return this.path + "_creator"; }
+  private get creatorLocaleName(): string { return this.path + "_creator"; }
   private get surveyLocalesName(): string { return this.path + "_surveyLocales"; }
   private get searchLocalesName(): string { return this.path + "_searchLocales"; }
   private get surveyUseEnglishNames(): string { return this.path + "_surveyUseEnglishNames"; }
