@@ -8,6 +8,13 @@
   border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
 }
 
+.spg-question__content {
+  .sd-formbox__input:read-only,
+  .sd-formbox__input:read-only::placeholder {
+    color: rgb(from var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6)) r g b / var(--ctr-editor-content-text-opacity-disabled, 0.25));
+  }
+}
+
 .spg-question.spg-question--disabled {
   background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
 }
@@ -267,10 +274,10 @@ sv-question-error {
 }
 
 .spg-question--highlighted {
-  .spg-input,
+  .sd-formbox,
   .spg-input-container,
   .spg-question--location--left,
-  .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
+  .spg-table__cell:not(.spg-table__cell--detail-panel) .sd-formbox {
     box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
