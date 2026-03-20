@@ -328,7 +328,7 @@ test.describe(title, () => {
     const question1 = page.locator("[data-name=\"question1\"]");
     await question1.click();
 
-    await page.locator("div[data-name='inputType'] .spg-dropdown").click();
+    await page.locator("div[data-name='inputType'] .sd-dropdown").click();
     await compareScreenshot(page, page.locator(".svc-side-bar"), "pg-dropdown-editor.png");
   });
 
@@ -653,15 +653,15 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1240, height: 870 });
 
     await surveySettingsButtonSelector(page).click();
-    await page.locator(".spg-question[data-name='locale'] .spg-dropdown").click();
+    await page.locator(".spg-question[data-name='locale'] .sd-dropdown").click();
     await page.keyboard.type("ali");
 
-    await compareScreenshot(page, page.locator(".spg-question[data-name='locale'] .spg-dropdown"), "pg-dropdown-editor-input.png");
+    await compareScreenshot(page, page.locator(".spg-question[data-name='locale'] .sd-dropdown"), "pg-dropdown-editor-input.png");
   });
 
   test("Dropdown clean button in property grid", async ({ page }) => {
     await page.setViewportSize({ width: 1240, height: 870 });
-    const dropdownSelector = page.locator(".spg-question[data-name='locale'] .spg-dropdown");
+    const dropdownSelector = page.locator(".spg-question[data-name='locale'] .sd-dropdown");
     await surveySettingsButtonSelector(page).click();
     await dropdownSelector.click();
     await page.keyboard.type("Italiano");
@@ -698,7 +698,7 @@ test.describe(title, () => {
     await addQuestionByAddQuestionButton(page, "Single-Line Input");
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, inputMaskSettingsGroupName).click();
-    await page.locator(".spg-question[data-name='maskType'] .spg-dropdown").click();
+    await page.locator(".spg-question[data-name='maskType'] .sd-dropdown").click();
     await getListItemByText(page, "Pattern").click();
 
     const expandedGroup = page.locator(".spg-root-modern .spg-panel.sd-element--expanded");
@@ -739,7 +739,7 @@ test.describe(title, () => {
 
     await page.locator("div[data-sv-drop-target-survey-element='question1']").click({ position: { x: 200, y: 30 } });
     await getQuestionBarItemByTitle(page, "Open settings").click();
-    await page.locator(".spg-question[data-name='inputType'] .spg-dropdown").click();
+    await page.locator(".spg-question[data-name='inputType'] .sd-dropdown").click();
 
     await compareScreenshot(page, page.locator(".sv-popup").filter({ visible: true }).first(), "pg-overlay-popup.png");
   });
