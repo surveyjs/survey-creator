@@ -249,7 +249,8 @@ svc-tab-designer {
 }
 
 // Temporary fix for disabled formbox buttons in designer
-.svc-tab-designer_content {
+.svc-tab-designer_content,
+.svc-question__content--in-popup {
   .sd-formbox-button:where(:disabled) {
     cursor: default;
     opacity: 1;
