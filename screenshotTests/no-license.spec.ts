@@ -1,11 +1,10 @@
-import { compareScreenshot, test, setJSON, expect } from "./helper";
+import { compareScreenshot, test, setJSON, urlNoLicense } from "./helper";
 
 const title = "No License";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    const url = "http://127.0.0.1:8080/testCafe/testcafe-no-license";
-    await page.goto(`${url}`);
+    await page.goto(urlNoLicense);
   });
 
   test("Check no license banner", async ({ page }) => {
