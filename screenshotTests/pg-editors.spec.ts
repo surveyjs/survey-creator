@@ -307,7 +307,7 @@ test.describe(title, () => {
       }, [prop, value]);
     };
 
-    const input = page.locator("[data-name=\"title\"] .sd-formbox__input");
+    const input = page.locator("[data-name=\"title\"] .sd-formbox");
     await getPropertyGridCategory(page, generalGroupName).click();
 
     await compareScreenshot(page, input, "pg-input-default.png");
@@ -668,7 +668,7 @@ test.describe(title, () => {
     await page.keyboard.press("Enter");
 
     await compareScreenshot(page, dropdownSelector, "pg-dropdown-clean-button.png");
-    await page.locator(".sd-editor-button-item").filter({ hasText: "Clear" }).hover();
+    await page.locator(".sd-formbox-button").filter({ hasText: "Clear" }).hover();
     await compareScreenshot(page, dropdownSelector, "pg-dropdown-clean-button-hover.png");
   });
 
@@ -834,9 +834,9 @@ test.describe(title, () => {
     await page.locator(".svc-question__content").click();
     await showSidebarButton.click();
     await page.locator("[data-name='name']").locator("input").click();
-    await compareScreenshot(page, page.locator(".spg-question__content").first(), "pg-maxLength-text.png");
+    await compareScreenshot(page, page.locator("[data-name='name'] .spg-question__content"), "pg-maxLength-text.png");
 
     await page.locator("[data-name='title']").locator("textarea").click();
-    await compareScreenshot(page, page.locator(".spg-question__content").nth(1), "pg-maxLength-comment.png");
+    await compareScreenshot(page, page.locator("[data-name='title'] .spg-question__content"), "pg-maxLength-comment.png");
   });
 });

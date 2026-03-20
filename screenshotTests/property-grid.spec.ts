@@ -82,7 +82,7 @@ test.describe(title, () => {
       ]
     });
 
-    const tagbox = page.locator(".spg-tagbox");
+    const tagbox = page.locator(".spg-question .sd-tagbox");
     await page.getByText("tagbox").click();
     await compareScreenshot(page, tagbox, "pg-tagbox.png");
 
