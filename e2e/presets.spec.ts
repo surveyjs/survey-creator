@@ -505,10 +505,9 @@ test.describe(title, () => {
   });
 
   test("Save as shows 'Create preset' text for new preset name", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.getByText("Add new preset...").click();
-    await page.getByRole("textbox", { name: "presetName" }).fill("MyNewPreset");
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Edit" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Save as...").click();
+    await page.locator(".sps-dropdown__filter-string-input").nth(-1).fill("MyNewPreset");
     await expect(page.locator(".sps-list__item").filter({ visible: true })).toContainText("Create \"MyNewPreset\" preset");
   });
 
