@@ -244,7 +244,7 @@ export function createEsmConfig(options) {
 
 export function createCssConfig(options) {
 
-  const { input, dir, emitMinified, version, onCloseBundle } = options;
+  const { input, dir, emitMinified, version, onCloseBundle, watchFiles } = options;
 
   if (Object.keys(input).length > 1) throw Error("css config accepts only one input");
 
@@ -254,6 +254,14 @@ export function createCssConfig(options) {
     input: value,
     output: [{ file: resolve(dir, `${name}.omitted`) }],
     plugins: [
+      watchFiles && {
+        name: "watch-extra-files",
+        buildStart() {
+          for (const file of watchFiles) {
+            this.addWatchFile(file);
+          }
+        }
+      },
       rollupPostcss({
         extract: true,
         minimize: false,
