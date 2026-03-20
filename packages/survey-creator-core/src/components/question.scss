@@ -277,8 +277,10 @@ svc-question {
     overflow-x: initial;
   }
 
-  .sd-multipletext__item-container.sd-input:focus-within {
-    // box-shadow: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.149)); // #00000026
+  .sd-multipletext__item-container.sd-formbox:focus-within {
+    box-shadow:
+        var(--sjs2-border-effect-component-formbox-default, 0 1px 2px 0 #d4d4d4 inset),
+        var(--sjs2-border-effect-component-formbox-focused-reset, 0 0 0 0 #19b394 inset);
   }
 
   .sjs_sp_placeholder {

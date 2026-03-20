@@ -45,33 +45,35 @@
 
 .spg-table__cell:not(.spg-table__cell--detail-panel) {
   .sd-formbox {
-    padding: 0;
     box-shadow: none;
     background: none;
+    
+    padding: var(--ctr-data-table-cell-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
 
+    border-radius: var(--ctr-data-table-cell-corner-radius-focused, var(--sjs-corner-radius-x075));
+    background-color: var(--ctr-data-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    
+    &:focus-within {
+      box-shadow: inset 0 0 0 2px
+      var(--ctr-data-table-cell-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+    }
+    
     .sd-formbox__input {
+      padding: 0;
       appearance: none;
       box-shadow: none;
-      border-radius: var(--ctr-data-table-cell-corner-radius-focused, var(--sjs-corner-radius-x075));
-      background-color: var(--ctr-data-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
       height: auto;
-      padding: var(--ctr-data-table-cell-padding-top, var(--sjs-spacing-x1))
-        var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
-        var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
-        var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
+      min-height: auto;
   
       &[type="color"] {
         padding-right: 0;
       }
-  
-      &:focus,
-      &:focus-within {
-        box-shadow: inset 0 0 0 2px
-          var(--ctr-data-table-cell-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-      }
     }
   }
-  .spg-dropdown {
+  .sd-dropdown {
     width: max-content;
     min-height: auto;
   }
@@ -90,11 +92,11 @@
     margin: 0;
   }
 
-  .sd-editor-button-item {
+  .sd-formbox-button {
     padding: 0;
   }
 
-  .sv-editor-button-item__icon {
+  .sd-formbox-button__icon {
     opacity: var(--ctr-data-table-cell-drop-down-arrow-opacity, 0.5);
 
     use {

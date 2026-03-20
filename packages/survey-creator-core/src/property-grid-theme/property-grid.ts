@@ -306,8 +306,8 @@ export var propertyGridCss = {
     readOnly: "spg-rating--disabled"
   },
   comment: {
+    ...defaultCss.comment,
     resetButtonIcon: "icon-reset",
-    ...defaultCss.comment
   },
   expression: "",
   file: {
