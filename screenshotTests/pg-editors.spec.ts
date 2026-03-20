@@ -217,6 +217,7 @@ test.describe(title, () => {
     });
 
     await page.locator(".svc-question__content .sd-question__title").first().click();
+    await page.waitForTimeout(500);
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
