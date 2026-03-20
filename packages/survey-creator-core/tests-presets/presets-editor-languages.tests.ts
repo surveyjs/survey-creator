@@ -160,6 +160,8 @@ test("Preset edit model, Languages tab - hide page and action if both questions 
   const page = survey.getPageByName("page_languages");
   expect(page.visible).toBeFalsy();
   expect(survey.visiblePages.indexOf(page)).toBe(-1);
+  const pageActions = survey.visiblePages.map(p => ({ id: p.name, title: p.navigationTitle }));
+  expect(pageActions.some(a => a.id === "page_languages")).toBeFalsy();
   editorLocalization.locales = savedEditorLocales;
   surveyLocalization.locales = savedLocales;
 });
