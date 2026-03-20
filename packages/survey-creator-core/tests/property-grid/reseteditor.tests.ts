@@ -1,7 +1,5 @@
 import { QuestionTextModel, Serializer, SurveyModel } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
-import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
-import "../../src/custom-questions/question-text-with-reset";
 import { editorLocalization } from "../../src/editorLocalization";
 
 test("Check textwithreset editor", () => {
@@ -15,20 +13,21 @@ test("Check textwithreset editor", () => {
   );
   const survey = new SurveyModel({});
   const propertyGrid = new PropertyGridModelTester(survey);
-  const questionEditor = <QuestionTextWithResetModel>propertyGrid.survey.getQuestionByName("test");
-  expect(questionEditor.getType()).toBe("textwithreset");
+  const questionEditor = <QuestionTextModel>propertyGrid.survey.getQuestionByName("test");
+  expect(questionEditor.getType()).toBe("text");
   expect(questionEditor.value).toBe("default");
-  expect(questionEditor.resetValueAdorner.caption).toBe(editorLocalization.getString("pe.resetToDefaultCaption"));
-  expect(questionEditor.resetValueAdorner.isDisabled).toBeTruthy();
-  expect(questionEditor.resetValueAdorner.resetValueCallback).toBeDefined();
+  const resetAction = questionEditor.inputActionsContainer.getActionById("reset");
+  expect(resetAction.title).toBe(editorLocalization.getString("pe.resetToDefaultCaption"));
+  expect(resetAction.enabled).toBeFalsy();
+  expect(resetAction.action).toBeDefined();
 
   survey.test = "some_value";
   expect(questionEditor.value).toBe("some_value");
-  expect(questionEditor.resetValueAdorner.isDisabled).toBeFalsy();
+  expect(resetAction.enabled).toBeTruthy();
 
-  questionEditor.resetValueAdorner.resetValue();
+  resetAction.action();
   expect(questionEditor.value).toBe("default");
-  expect(questionEditor.resetValueAdorner.isDisabled).toBeTruthy();
+  expect(resetAction.enabled).toBeFalsy();
   Serializer.removeProperty("survey", "test");
 });
 
@@ -38,7 +37,7 @@ test("Check textwithreset editor is not loaded if max length is set", () => {
       name: "test",
       default: "default",
       category: "general",
-      maxLength: "50",
+      maxLength: 50,
       visibleIndex: 1,
     }
   );
@@ -46,6 +45,7 @@ test("Check textwithreset editor is not loaded if max length is set", () => {
   const propertyGrid = new PropertyGridModelTester(survey);
   const questionEditor = <QuestionTextModel>propertyGrid.survey.getQuestionByName("test");
   expect(questionEditor.getType()).toBe("text");
+  expect(questionEditor.inputActionsContainer.getActionById("reset")).toBeNull();
   Serializer.removeProperty("survey", "test");
 });
 
@@ -60,20 +60,21 @@ test("Check commentwithreset editor", () => {
   );
   const survey = new SurveyModel({});
   const propertyGrid = new PropertyGridModelTester(survey);
-  const questionEditor = <QuestionTextWithResetModel>propertyGrid.survey.getQuestionByName("test");
-  expect(questionEditor.getType()).toBe("commentwithreset");
+  const questionEditor = <QuestionTextModel>propertyGrid.survey.getQuestionByName("test");
+  expect(questionEditor.getType()).toBe("comment");
   expect(questionEditor.value).toBe("default");
-  expect(questionEditor.resetValueAdorner.caption).toBe(editorLocalization.getString("pe.resetToDefaultCaption"));
-  expect(questionEditor.resetValueAdorner.isDisabled).toBeTruthy();
-  expect(questionEditor.resetValueAdorner.resetValueCallback).toBeDefined();
+  const resetAction = questionEditor.inputActionsContainer.getActionById("reset");
+  expect(resetAction.title).toBe(editorLocalization.getString("pe.resetToDefaultCaption"));
+  expect(resetAction.enabled).toBeFalsy();
+  expect(resetAction.action).toBeDefined();
 
   survey.test = "some_value";
   expect(questionEditor.value).toBe("some_value");
-  expect(questionEditor.resetValueAdorner.isDisabled).toBeFalsy();
+  expect(resetAction.enabled).toBeTruthy();
 
-  questionEditor.resetValueAdorner.resetValue();
+  resetAction.action();
   expect(questionEditor.value).toBe("default");
-  expect(questionEditor.resetValueAdorner.isDisabled).toBeTruthy();
+  expect(resetAction.enabled).toBeFalsy();
   Serializer.removeProperty("survey", "test");
 
 });
@@ -92,5 +93,6 @@ test("Check commentwithreset editor is not loaded if max length is set", () => {
   const propertyGrid = new PropertyGridModelTester(survey);
   const questionEditor = <QuestionTextModel>propertyGrid.survey.getQuestionByName("test");
   expect(questionEditor.getType()).toBe("comment");
+  expect(questionEditor.inputActionsContainer.getActionById("reset")).toBeNull();
   Serializer.removeProperty("survey", "test");
 });

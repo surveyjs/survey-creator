@@ -288,7 +288,7 @@ export var logicCss = {
   },
   comment: {
     mainRoot: "",
-    root: "spg-input spg-comment sl-comment",
+    root: "sd-formbox sd-comment sl-comment",
     small: ""
   },
   expression: "",

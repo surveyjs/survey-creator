@@ -188,7 +188,7 @@ td.st-table__cell:first-of-type {
   border-spacing: 0;
 }
 
-.st-comment {
+.st-formbox__input {
   @include ctrDefaultFont;
   display: block;
   width: calc(100% - 3 * #{$base-unit});

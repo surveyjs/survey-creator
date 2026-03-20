@@ -74,7 +74,6 @@ export * from "./custom-questions/spin-editor.component";
 export * from "./custom-questions/color-item.component";
 export * from "./custom-questions/color.component";
 export * from "./custom-questions/file.component";
-export * from "./custom-questions/text-with-reset.component";
 export * from "./custom-questions/boolean-switch.component";
 export * from "./question-banner.component";
 export * from "./question-element-content.component";

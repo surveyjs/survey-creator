@@ -45,7 +45,7 @@
 .sd-table__row--expanded {
   & > td {
     & > div {
-      .sps-input {
+      .sd-formbox > .sd-formbox__input {
         @include sjs2--typography--default-strong;
       }
     }
@@ -73,7 +73,7 @@
 
 .spg-table .sps-table__cell {
   padding-bottom: 0;
-  &:not(.sps-table__cell--detail-panel) .sps-input:focus-within {
+  &:not(.sps-table__cell--detail-panel) .sd-formbox > .sd-formbox__input:focus-within {
     margin-left: 0;
   }
 }
@@ -122,39 +122,44 @@
 }
 
 .sps-table__cell:not(.sps-table__cell--detail-panel) {
-  .sps-input {
-    appearance: none;
+  .sd-formbox {
+    padding: 0;
     box-shadow: none;
-    background-color: transparent;
-    height: auto;
-    padding: var(--sjs2-spacing-x100, 8px) 0;
+    background: none;
+    .sd-formbox__input {
+      appearance: none;
+      box-shadow: none;
+      background-color: transparent;
+      height: auto;
+      padding: var(--sjs2-spacing-x100, 8px) 0;
 
-    width: calc(100% + var(--action-container-width));
-    margin-right: calc(-1 * var(--action-container-width));
-    text-overflow: ellipsis;
+      width: calc(100% + var(--action-container-width));
+      margin-right: calc(-1 * var(--action-container-width));
+      text-overflow: ellipsis;
 
-    border-radius: var(--sjs2-radius-semantic-form, 8px);
-    padding: var(--sjs2-spacing-x100, 8px);
-    margin-left: 0;
-    transition: margin-left $creator-transition-duration;
+      border-radius: var(--sjs2-radius-semantic-form, 8px);
+      padding: var(--sjs2-spacing-x100, 8px);
+      margin-left: 0;
+      transition: margin-left $creator-transition-duration;
 
-    &:hover {
-      background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
-      box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
-        var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
-        var(--sjs2-color-control-formbox-hovered-border, #d4d4d4) inset;
-    }
+      &:hover {
+        background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
+        box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
+          var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
+          var(--sjs2-color-control-formbox-hovered-border, #d4d4d4) inset;
+      }
 
-    &:focus,
-    &:focus-within {
-      background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
-      box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
-        var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
-        var(--sjs2-color-control-formbox-focused-border, #19b394) inset;
-      margin-left: var(--sjs2-spacing-x100, 8px);
+      &:focus,
+      &:focus-within {
+        background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
+        box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
+          var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
+          var(--sjs2-color-control-formbox-focused-border, #19b394) inset;
+        margin-left: var(--sjs2-spacing-x100, 8px);
+      }
     }
   }
-  .sps-input--readonly {
+  .sd-formbox--readonly > .sd-formbox__input {
     &:hover,    
     &:focus,
     &:focus-within {
@@ -168,7 +173,7 @@
   .sps-table__cell {
     padding: 0;
   }
-  .sps-input {
+  .sd-formbox {
     pointer-events: none;
   }
   .sps-drag-element__svg {
@@ -192,7 +197,7 @@
   &:hover,
   &:focus-within {
     .sps-table__cell:not(.sps-table__cell--detail-panel) {
-      .sps-input {
+      .sd-formbox__input {
         width: calc(100% - var(--sjs2-spacing-x100, 8px));
         margin-right: 0;
       }

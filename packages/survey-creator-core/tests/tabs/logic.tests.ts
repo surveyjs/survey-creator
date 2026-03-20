@@ -37,7 +37,6 @@ import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 
 export * from "../../src/components/link-value";
-export * from "../../src/custom-questions/question-text-with-reset";
 
 function setDoubleBraces() {
   surveySettings.expressionVariableDelimiters = { start: "{{", end: "}}" };
@@ -45,7 +44,6 @@ function setDoubleBraces() {
 function resetBraces() {
   surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
 }
-import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 
 const questionLogicTypeLength = 5;
@@ -3671,7 +3669,7 @@ test("Custom trigger in logic", () => {
   const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
   const targetCounterQuestion = triggerEditorPanel.getQuestionByName("targetCounter");
   expect(targetCounterQuestion.value).toBe("q2");
-  const initialNumberQuestion = <QuestionTextWithResetModel>triggerEditorPanel.getQuestionByName("initialNumber");
+  const initialNumberQuestion = triggerEditorPanel.getQuestionByName("initialNumber");
   expect(initialNumberQuestion.value).toBe(21);
 
   expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();

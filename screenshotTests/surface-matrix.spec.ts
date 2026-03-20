@@ -239,7 +239,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
-    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click();
+    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click({ position: { x: 10, y: 10 } });
     await expect(page.locator(".svc-question__content--selected")).toBeVisible();
     await compareScreenshot(page, page.locator(".svc-question__content"), "surface-matrix-detail-two-questions-select.png");
   });

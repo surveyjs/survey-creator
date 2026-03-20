@@ -1,3 +1,4 @@
+import { defaultCss } from "survey-core";
 import { listComponentCss } from "../components/list-theme";
 
 export var propertyGridCss = {
@@ -180,11 +181,8 @@ export var propertyGridCss = {
     checkboxMaterialDecorator: "spg-checkbox__rectangle"
   },
   text: {
-    root: "spg-input spg-text",
-    small: "spg-row__question--small",
+    ...defaultCss.text,
     content: "spg-question__content spg-text__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    onError: "spg-input--error"
   },
   multipletext: {
     root: "spg-multipletext",
@@ -194,27 +192,8 @@ export var propertyGridCss = {
     row: "spg-multipletext__row",
     cell: "spg-multipletext__cell"
   },
-  dropdown: {
-    root: "spg-selectbase",
-    popup: "spg-dropdown-popup svc-creator-popup",
-    small: "spg-row__question--small sd-row__question--small",
-    control: "spg-input spg-dropdown sd-input sd-dropdown",
-    controlEmpty: "spg-dropdown--empty sd-dropdown--empty",
-    controlValue: "spg-dropdown__value",
-    filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
-    other: "spg-comment spg-question__other",
-    onError: "spg-input--error",
-    selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
-    chevronButtonIconId: "icon-chevron",
-    cleanButton: "spg-dropdown__clean-button spg-input__edit-button",
-    controlReadOnly: "sd-input--disabled sd-input--readonly"
-  },
-  tagbox: {
-    cleanItemButton: "sd-tagbox-item_clean-button spg-tagbox-item_clean-button",
-    cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg spg-tagbox-item_clean-button-svg",
-    control: "sd-input sd-tagbox sd-dropdown spg-tagbox spg-dropdown",
-    controlValue: "sd-tagbox__value sd-dropdown__value spg-tagbox__value",
-  },
+  dropdown: { ...defaultCss.dropdown, popup: "spg-dropdown-popup svc-creator-popup", },
+  tagbox: { ...defaultCss.tagbox },
   buttongroup: {
     root: "sd-button-group-scrollable-container spg-button-group",
     item: "spg-button-group__item",
@@ -326,11 +305,7 @@ export var propertyGridCss = {
     readOnly: "spg-rating--disabled"
   },
   comment: {
-    root: "spg-input spg-comment",
-    content: "spg-question__content spg-comment__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    small: "spg-row__question--small",
-    onError: "spg-input--error"
+    ...defaultCss.comment,
   },
   expression: "",
   file: {
@@ -425,17 +400,6 @@ export var propertyGridCss = {
     colorDropdownIcon: "icon-drop-down-arrow",
     swatchIcon: "icon-color-picker",
     choicesButtonWrapper: "spg-color-editor__button-wrapper"
-  },
-  textwithreset: {
-    root: "spg-input spg-input-container",
-    rootMultiline: "spg-input-container--multiline",
-    control: "spg-input-container__input",
-    controlMultiline: "spg-input-container__input spg-comment",
-    resetButton: "spg-input__edit-button",
-    resetButtonIcon: "icon-reset",
-    content: "spg-question__content spg-text__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    onError: "spg-input--error"
   },
   fileedit: {
     root: "spg-input spg-input-container spg-file-edit",

@@ -21,7 +21,8 @@ import {
   QuestionTextBase,
   IDialogOptions,
   PageModel,
-  GetMatrixRowActionsEvent
+  GetMatrixRowActionsEvent,
+  QuestionTextModel
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -1675,13 +1676,6 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     }
     return json;
   }
-  protected updateType(prop: JsonObjectProperty, obj: Base, json: any) {
-    if (!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
-      json.type = `${json.type}withreset`;
-      json.renderAs = json.type;
-    }
-    return json;
-  }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     if (question instanceof QuestionTextBase) {
       question.onKeyDownPreprocess = (event: KeyboardEvent) => {
@@ -1702,16 +1696,25 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     if (prop.name === "title") {
       question.allowSpaceAsAnswer = true;
     }
-    if (question.getType() == "textwithreset" || question.getType() == "commentwithreset") {
-      question.resetValueAdorner.resetValueCallback = () => {
-        obj.resetPropertyValue(prop.name);
-      };
-      question.resetValueAdorner.caption = editorLocalization.getString("pe.resetToDefaultCaption");
-      const isDefaultValue = () => !prop.isDefaultValueByObj(obj, prop.getValue(obj));
-      question.resetValueAdorner.allowResetValue = isDefaultValue();
-      obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
-        question.resetValueAdorner.allowResetValue = isDefaultValue();
-      });
+    if (question.getType() == "text" || question.getType() == "comment") {
+      const textQuestion = question as QuestionTextBase;
+      if (!textQuestion.getMaxLength() && obj.hasDefaultPropertyValue(prop.name)) {
+        const isDefaultValue = () => prop.isDefaultValueByObj(obj, prop.getValue(obj));
+        const action = new Action({
+          id: "reset",
+          title: editorLocalization.getString("pe.resetToDefaultCaption"),
+          showTitle: false,
+          iconName: "icon-reset",
+          action: () => {
+            obj.resetPropertyValue(prop.name);
+          },
+          enabled: !isDefaultValue()
+        });
+        obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
+          action.enabled = !isDefaultValue();
+        });
+        textQuestion.inputActionsContainer.addAction(action);
+      }
     }
   }
 }
@@ -1727,7 +1730,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const json = this.updateType(prop, obj, this.updateMaxLength(prop, { type: "text" }));
+    const json = this.updateMaxLength(prop, { type: "text" });
     if (prop.isRequired) {
       json.textUpdateMode = "onBlur";
     }
@@ -1901,10 +1904,10 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateType(prop, obj, this.updateMaxLength(prop, {
+    return this.updateMaxLength(prop, {
       type: "comment",
       rows: 2
-    }));
+    });
   }
 }
 export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
