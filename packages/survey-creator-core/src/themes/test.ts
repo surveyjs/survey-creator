@@ -174,7 +174,7 @@ export default {
     "--sjs2-is-panelless": "false",
     "--sjs2-radius-form": "var(--sjs2-radius-x100)",
     "--sjs2-radius-form-item": "var(--sjs2-radius-x050)",
-    "--sjs2-radius-component-formbox": "var(--sjs2-radius-x050)",
+    "--sjs2-radius-component-formbox": "var(--sjs2-radius-x075)",
     "--sjs2-radius-component-formbox-item": "var(--sjs2-radius-form-item)",
     "--sjs2-radius-component-message": "var(--sjs2-radius-form)",
     "--sjs2-radius-component-action": "var(--sjs2-radius-form)",
