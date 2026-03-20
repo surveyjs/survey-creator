@@ -269,8 +269,7 @@ test.describe(title, () => {
               "type": "comment",
               "name": "disappointing-experience",
               "visible": false,
-              "visibleIf": "{nps-score} <= 5",
-              "maxLength": 300
+              "visibleIf": "{nps-score} <= 5"
             }
           ]
         }
