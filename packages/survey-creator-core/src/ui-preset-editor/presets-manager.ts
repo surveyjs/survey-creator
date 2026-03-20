@@ -97,11 +97,9 @@ export class PresetsManager {
         choices: this.customPresets.map(i => ({ value: i, text: i })),
         titleLocation: "hidden",
         requiredErrorText: getLocString("presets.editor.required"),
+        createCustomChoiceText: getLocString("presets.plugin.createNewPreset"),
         isRequired: true
       }]
-    });
-    survey.onCreateCustomChoiceItem.add((sender, options) => {
-      options.item.text = getLocString("presets.plugin.createNewPreset").replace("{0}", options.item.value);
     });
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";

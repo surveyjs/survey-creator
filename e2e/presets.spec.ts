@@ -512,7 +512,7 @@ test.describe(title, () => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Edit" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Save as...").click();
     await page.locator(".sps-dropdown__filter-string-input").nth(-1).fill("MyNewPreset");
-    await expect(page.locator(".sps-list__item").filter({ visible: true })).toContainText("Create \"MyNewPreset\" preset");
+    await expect(page.getByText("Create \"MyNewPreset\" preset")).toBeVisible();
   });
 
   test("Check presets import confirmation dialog when unsaved changes exist", async ({ page }) => {

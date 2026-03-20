@@ -208,7 +208,7 @@ export const enStrings = {
     cancel: "Cancel",
     saveAs: "Save as...",
     saveAsTitle: "Save current preset as...",
-    createNewPreset: "Create {0} preset",
+    createNewPreset: "Create \"{0}\" preset",
     quit: "Quit",
     quitConfirmation: "Return to Survey Creator?",
     quitConfirmationMessage: "You will lose all unsaved changes.",
