@@ -307,7 +307,7 @@ test.describe(title, () => {
       }, [prop, value]);
     };
 
-    const input = page.locator("[data-name=\"title\"] .spg-input");
+    const input = page.locator("[data-name=\"title\"] .sd-formbox__input");
     await getPropertyGridCategory(page, generalGroupName).click();
 
     await compareScreenshot(page, input, "pg-input-default.png");
