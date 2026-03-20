@@ -97,6 +97,7 @@ export class PresetsManager {
         choices: this.customPresets.map(i => ({ value: i, text: i })),
         titleLocation: "hidden",
         requiredErrorText: getLocString("presets.editor.required"),
+        createCustomChoiceText: getLocString("presets.plugin.createNewPreset"),
         isRequired: true
       }]
     });
