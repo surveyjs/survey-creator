@@ -99,7 +99,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Designer1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
-    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-actual-size-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
@@ -373,7 +373,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Navigation1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
-    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation1", "Question Settings"]);
