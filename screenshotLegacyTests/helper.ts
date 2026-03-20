@@ -10,4 +10,3 @@ export const urlNoLicense = "http://127.0.0.1:8080/test-pages-V2/no-license";
 export const urlWidget = "http://127.0.0.1:8080/test-pages-V2/widget";
 export const urlThemeTab = "http://127.0.0.1:8080/test-pages-V2/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages-V2/creator-themes";
-export const urlPresets = "http://127.0.0.1:8080/test-pages-V2/presets";
