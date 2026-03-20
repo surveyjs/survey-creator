@@ -156,7 +156,8 @@ export var translationCss = {
     slider: "st-boolean__thumb"
   },
   text: {
-    root: "st-input st-text",
+    root: "st-formbox st-text",
+    control: "st-formbox__input",
     small: "st-row__question--small",
     controlDisabled: "st-input--disabled",
     onError: "st-input--error"
@@ -259,7 +260,8 @@ export var translationCss = {
     itemDisabled: "st-rating__item--disabled"
   },
   comment: {
-    root: "st-comment",
+    root: "st-formbox st-comment",
+    control: "st-formbox__input",
     small: "st-row__question--small"
   },
   expression: "",
