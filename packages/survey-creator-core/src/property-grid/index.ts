@@ -1704,7 +1704,7 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
           id: "reset",
           title: editorLocalization.getString("pe.resetToDefaultCaption"),
           showTitle: false,
-          iconName: new ComputedUpdater(() => question.cssClasses.resetButtonIcon) as unknown as string,
+          iconName: "icon-reset",
           action: () => {
             obj.resetPropertyValue(prop.name);
           },
