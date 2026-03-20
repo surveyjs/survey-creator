@@ -62,7 +62,7 @@ test.describe(title, () => {
       ]
     });
 
-    await page.locator(".svc-question__content").click();
+    await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
     await generalTab.click();
     await dataTab.click();
     await page.locator(".svc-action-button.svc-question-link__set-button:has-text('Change Default Answer')").click();
