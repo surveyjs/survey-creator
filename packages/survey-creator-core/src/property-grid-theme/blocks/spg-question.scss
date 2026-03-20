@@ -9,8 +9,8 @@
 }
 
 .spg-question__content {
-  .sd-formbox__input:read-only,
-  .sd-formbox__input:read-only::placeholder {
+  input.sd-formbox__input:read-only,
+  input.sd-formbox__input:read-only::placeholder {
     color: rgb(from var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6)) r g b / var(--ctr-editor-content-text-opacity-disabled, 0.25));
   }
 }
