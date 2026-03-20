@@ -182,7 +182,6 @@ export var propertyGridCss = {
   },
   text: {
     ...defaultCss.text,
-    resetButtonIcon: "icon-reset",
     content: "spg-question__content spg-text__content",
   },
   multipletext: {
@@ -307,7 +306,6 @@ export var propertyGridCss = {
   },
   comment: {
     ...defaultCss.comment,
-    resetButtonIcon: "icon-reset",
   },
   expression: "",
   file: {
