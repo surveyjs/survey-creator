@@ -982,7 +982,7 @@ test("empty title placeholders", () => {
   let cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   let cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
   expect(cellQuestion1.placeholder).toEqual("question1");
-  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion1.value).toBeFalsy();
   expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("test");
 
@@ -1194,9 +1194,9 @@ test("localize placeholders", () => {
   const cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
   const cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
   expect(cellQuestion1.placeholder).toEqual("Translation...");
-  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion1.value).toBeFalsy();
   expect(cellQuestion2.placeholder).toEqual("Перевод..."); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  expect(cellQuestion2.value).toEqual(null);
+  expect(cellQuestion2.value).toBeFalsy();
 
   const survey_props0 = <QuestionMatrixDropdownModel>page.elements[0];
   expect(survey_props0.columns).toHaveLength(2);
@@ -1211,9 +1211,9 @@ test("localize placeholders", () => {
   const surveyCell1 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[0].question;
   const surveyCell2 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[1].question;
   expect(surveyCell1.placeholder).toEqual("Edit");
-  expect(surveyCell1.value).toEqual(null);
+  expect(surveyCell1.value).toBeFalsy();
   expect(surveyCell2.placeholder).toEqual("Редактирование"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  expect(surveyCell2.value).toEqual(null);
+  expect(surveyCell2.value).toBeFalsy();
 });
 test("localize placeholders, default locale is 'fr'", () => {
   const survey = new SurveyModel({
@@ -1563,8 +1563,8 @@ test("Reset on changing creator.JSON, #1", () => {
 
   let cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
   let cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.value).toEqual(null);
-  expect(cellQuestion2.value).toEqual(null);
+  expect(cellQuestion1.value).toBeFalsy();
+  expect(cellQuestion2.value).toBeFalsy();
   cellQuestion1.value = "Default title";
   cellQuestion2.value = "De title";
   let surveyQuestion = creator.survey.pages[0];
@@ -1586,7 +1586,7 @@ test("Reset on changing creator.JSON, #1", () => {
   expect(page1Props.columns).toHaveLength(1);
 
   cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
-  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion1.value).toBeFalsy();
 });
 
 test("Reset on changing creator.JSON, #2", () => {

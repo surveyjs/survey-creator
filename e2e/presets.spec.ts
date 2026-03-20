@@ -502,6 +502,10 @@ test.describe(title, () => {
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Return to Survey Creator?");
     await page.getByRole("button", { name: "Save and exit" }).click();
     await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
+
+    await page.locator("[data-name=presetName] input").fill("MyPreset2");
+    await page.getByText('Create "MyPreset2"').click();
+    await page.getByRole("button", { name: "Save", exact: true }).click();
   });
 
   test("Save as shows 'Create preset' text for new preset name", async ({ page }) => {
