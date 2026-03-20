@@ -193,7 +193,7 @@ export var propertyGridCss = {
     row: "spg-multipletext__row",
     cell: "spg-multipletext__cell"
   },
-  dropdown: { ...defaultCss.dropdown },
+  dropdown: { ...defaultCss.dropdown, popup: "spg-dropdown-popup svc-creator-popup", },
   tagbox: { ...defaultCss.tagbox },
   buttongroup: {
     root: "sd-button-group-scrollable-container spg-button-group",
