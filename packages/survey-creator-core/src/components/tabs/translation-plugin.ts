@@ -43,7 +43,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.sidebarTab = this.creator.sidebar.addPage("translation");
-    this.sidebarTab.locTileName = "ed.translationPropertyGridTitle";
+    this.sidebarTab.locTitleName = "ed.translationPropertyGridTitle";
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {

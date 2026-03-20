@@ -3,7 +3,7 @@ import { SidebarModel } from "./side-bar-model";
 import { editorLocalization } from "../../editorLocalization";
 
 export class SidebarPageModel extends Base {
-  @property() locTileName: string;
+  @property() locTitleName: string;
   @property({
     onSet: (newVal, target: SidebarPageModel) => {
       target.sidePanel.updateHasVisiblePages();
@@ -23,7 +23,7 @@ export class SidebarPageModel extends Base {
     !!componentData && (this.componentData = componentData);
   }
   public get caption(): string {
-    return this.captionValue || editorLocalization.getString(this.locTileName);
+    return this.captionValue || editorLocalization.getString(this.locTitleName);
   }
   public set caption(val: string) {
     this.captionValue = val;
