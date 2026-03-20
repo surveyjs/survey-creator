@@ -454,7 +454,7 @@ test.describe(title, () => {
       ]
     });
 
-    const questionTagbox = page.locator(".sd-input.sd-tagbox");
+    const questionTagbox = page.locator(".sd-formbox.sd-tagbox");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await questionTagbox.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "test-tab-tagbox-style.png");
