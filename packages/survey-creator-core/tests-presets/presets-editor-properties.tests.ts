@@ -838,6 +838,26 @@ test("Hide a property from several types at once Bug#7439", () => {
   expect(classes?.checkbox?.properties).toEqual([{ name: "name", tab: "general" }, { name: "title", tab: "general" }]);
   expect(classes?.rating?.properties).toEqual([{ name: "title", tab: "general" }]);
 });
+test("showRefuseItem and showDontKnowItem should not be available in the property editor for Expert preset, Bug#7564", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "dropdown");
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  const allPropertyNames: string[] = [];
+  for (let i = 0; i < propGridCategories.visibleRows.length; i++) {
+    const row = propGridCategories.visibleRows[i];
+    row.showDetailPanel();
+    const properties = row.detailPanel.getQuestionByName("properties");
+    properties.visibleRows.forEach(r => allPropertyNames.push(r.getValue("name")));
+  }
+  expect(allPropertyNames.indexOf("showNoneItem")).toBeGreaterThan(-1);
+  expect(allPropertyNames.indexOf("noneText")).toBeGreaterThan(-1);
+  expect(allPropertyNames.indexOf("showRefuseItem")).toBe(-1);
+  expect(allPropertyNames.indexOf("showDontKnowItem")).toBe(-1);
+  expect(allPropertyNames.indexOf("refuseText")).toBe(-1);
+  expect(allPropertyNames.indexOf("dontKnowText")).toBe(-1);
+});
 test("Hide a property from all types Bug#7442", () => {
   const editor = new CreatorPresetEditorModel();
   editor.json = {

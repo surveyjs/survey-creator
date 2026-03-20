@@ -20,7 +20,15 @@ export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
     super(obj, null, className, null, null, null, propertyGridDefinition);
   }
   protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
-    return prop.visible !== false;
+    if (prop.visible === false) return false;
+    const deps = prop.dependsOn;
+    if (Array.isArray(deps)) {
+      for (let i = 0; i < deps.length; i++) {
+        const depProp = Serializer.findProperty(prop.classInfo.name, deps[i]);
+        if (depProp && depProp.visible === false) return false;
+      }
+    }
+    return true;
   }
 }
 const presetMatrixColumnName = "matrixdropdowncolumn";
@@ -121,7 +129,7 @@ export class SurveyQuestionPresetPropertiesDetail {
         category: p.name,
         title: p.title,
         iconName: p.iconName,
-        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => {
+        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1 && !!this.propertiesHash[e.name]).map(e => {
           const property: any = {
             name: e.name,
             title: e.title
