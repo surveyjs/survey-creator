@@ -130,6 +130,41 @@ test("Preset edit model, Languages tab - show in English", () => {
 
   surveyLocalization.showNamesInEnglish = false;
 });
+test("Preset edit model, Languages tab - hide creator locale question if choices are empty", () => {
+  const savedEditorLocales = editorLocalization.locales;
+  editorLocalization.locales = {};
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const creatorQuestion = <QuestionDropdownModel>survey.getQuestionByName("languages_creator");
+  expect(creatorQuestion.choices.length).toBe(0);
+  expect(creatorQuestion.visible).toBeFalsy();
+  editorLocalization.locales = savedEditorLocales;
+});
+test("Preset edit model, Languages tab - hide survey locales question if only default language", () => {
+  const savedLocales = surveyLocalization.locales;
+  surveyLocalization.locales = {};
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const surveyLocalesQuestion = <QuestionCheckboxModel>survey.getQuestionByName("languages_surveyLocales");
+  expect(surveyLocalesQuestion.choices.length).toBe(1);
+  expect(surveyLocalesQuestion.visible).toBeFalsy();
+  surveyLocalization.locales = savedLocales;
+});
+test("Preset edit model, Languages tab - hide page and action if both questions are hidden", () => {
+  const savedEditorLocales = editorLocalization.locales;
+  const savedLocales = surveyLocalization.locales;
+  editorLocalization.locales = {};
+  surveyLocalization.locales = {};
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const page = survey.getPageByName("page_languages");
+  expect(page.visible).toBeFalsy();
+  expect(survey.visiblePages.indexOf(page)).toBe(-1);
+  const pageActions = survey.visiblePages.map(p => ({ id: p.name, title: p.navigationTitle }));
+  expect(pageActions.some(a => a.id === "page_languages")).toBeFalsy();
+  editorLocalization.locales = savedEditorLocales;
+  surveyLocalization.locales = savedLocales;
+});
 test("Preset edit model, toolbox categories, restore after creator locale changed", () => {
   addLocales();
   const editor = new CreatorPresetEditorModel();

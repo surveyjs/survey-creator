@@ -67,7 +67,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public get creator(): SurveyCreatorModel { return this.creatorValue; }
   public get model(): SurveyModel { return this.modelValue; }
   public get resultModel(): SurveyModel {
-    this.upldateResultJson();
+    this.updateResultJson();
     return this.resultModelValue;
   }
   public getLocale(): string { return editorLocalization.currentLocale || "en"; }
@@ -79,7 +79,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.updateDataFromJson(this.modelValue);
     this.applyFromSurveyModel(false);
     this.activatePage(this.modelValue, this.creatorValue, this.modelValue.editablePresets);
-    this.upldateResultJson();
+    this.updateResultJson();
   }
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
@@ -313,7 +313,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     };
     fileReader.readAsText(file);
   }
-  private upldateResultJson(): void {
+  private updateResultJson(): void {
     this.resultModelValue.getQuestionByName("json").value = this.jsonText;
   }
   public applyFromSurveyModel(validate = true): boolean {
