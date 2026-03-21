@@ -3661,7 +3661,7 @@ export class SurveyCreatorModel extends Base
       }
       if (!!propertyName) {
         this.sidebar.executeOnExpand(() => {
-          this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+          this.designerPropertyGrid.selectProperty(propertyName, focus && !this.selectFromStringEditor);
         });
       }
       this.expandCategoryIfNeeded();
