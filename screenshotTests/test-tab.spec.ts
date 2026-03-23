@@ -269,8 +269,7 @@ test.describe(title, () => {
               "type": "comment",
               "name": "disappointing-experience",
               "visible": false,
-              "visibleIf": "{nps-score} <= 5",
-              "maxLength": 300
+              "visibleIf": "{nps-score} <= 5"
             }
           ]
         }
@@ -454,7 +453,7 @@ test.describe(title, () => {
       ]
     });
 
-    const questionTagbox = page.locator(".sd-input.sd-tagbox");
+    const questionTagbox = page.locator(".sd-formbox.sd-tagbox");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await questionTagbox.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "test-tab-tagbox-style.png");

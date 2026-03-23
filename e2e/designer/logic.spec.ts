@@ -17,7 +17,7 @@ const logicQuestionSelector = (page: Page) => page.locator(".svc-logic-operator.
 const logicOperatorSelector = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filter({ visible: true });
 const logicActionSelector = (page: Page) => page.locator(".svc-logic-operator--action").filter({ visible: true });
 const logicQuestionValueSelector = (page: Page) => page.locator(".svc-logic-question-value input").filter({ visible: true });
-const logicDropdownValueSelector = (page: Page) => page.locator(".sd-input.sd-dropdown .sd-dropdown__value").filter({ visible: true });
+const logicDropdownValueSelector = (page: Page) => page.locator(".sd-dropdown .sd-dropdown__input").filter({ visible: true });
 const logicOperatorConjuction = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--conjunction").filter({ visible: true });
 const logicActionTriggerEditorElement = (page: Page) => page.locator(".svc-logic_trigger-editor").filter({ visible: true });
 const logicActionTriggerQuestionsElement = (page: Page) => page.locator(".svc-logic_trigger-questions").filter({ visible: true });

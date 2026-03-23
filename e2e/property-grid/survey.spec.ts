@@ -149,7 +149,7 @@ test.describe(title, () => {
     const dataGroup = getPropertyGridCategory(page, "Data");
     await dataGroup.click();
     const panel = page.locator(".spg-panel.sd-element--expanded").first();
-    const dropdown = panel.locator(".spg-dropdown").first();
+    const dropdown = panel.locator(".sd-dropdown").first();
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true }).first();
 
     const clientRectWidth = await dropdown.boundingBox();
@@ -217,7 +217,7 @@ test.describe(title, () => {
       "showTimer": true,
       "headerView": "advanced"
     });
-    const input = page.locator("[data-name='timeLimit'] .spg-input");
+    const input = page.locator("[data-name='timeLimit'] .sd-formbox__input");
     const helpButton = page.locator("[data-name='timeLimit'] .spg-help-action");
     await getPropertyGridCategory(page, "Quiz Mode").click();
     await input.click();

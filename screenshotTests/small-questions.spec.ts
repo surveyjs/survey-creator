@@ -79,7 +79,7 @@ test.describe(title, () => {
             "visibleIf": "{panel.product-type} = 'Sneakers'",
             "width": "20%",
             "minWidth": "128px",
-            "maxWidth": "150px",
+            "maxWidth": "156px",
             "titleLocation": "hidden",
             "description": "Size",
             "setValueIf": "{panel.product-type} = 'Sneakers'",
