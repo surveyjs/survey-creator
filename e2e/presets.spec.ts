@@ -508,6 +508,13 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Save", exact: true }).click();
   });
 
+  test("Save as shows 'Create preset' text for new preset name", async ({ page }) => {
+    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Edit" }).click();
+    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Save as...").click();
+    await page.locator(".sps-dropdown__filter-string-input").nth(-1).fill("MyNewPreset");
+    await expect(page.getByText("Create \"MyNewPreset\" preset")).toBeVisible();
+  });
+
   test("Check presets import confirmation dialog when unsaved changes exist", async ({ page }) => {
     await page.getByText("Dansk").click();
 
