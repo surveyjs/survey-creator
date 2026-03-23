@@ -260,6 +260,7 @@ export var presetsCss = {
     detailIconExpandedId: "icon-collapse-24x24",
     detailIconId: "icon-expand-24x24",
     detailPanelCell: "sps-table__cell sps-table__cell--detail-panel",
+    expandedRow: "sps-table__row--expanded sd-table__row--expanded",
     actionsCell: "sps-table__cell sps-table__cell--actions",
     buttonAdd: "sps-matrixdynamic__add-btn sps-action-button sps-action-button--large",
     buttonRemove: "",
