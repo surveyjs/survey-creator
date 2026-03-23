@@ -288,7 +288,7 @@ sv-question-error {
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
     border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
 
-    .spg-input {
+    .sd-formbox {
       box-shadow: none;
     }
   }
