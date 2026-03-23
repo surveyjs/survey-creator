@@ -306,6 +306,7 @@ export var propertyGridCss = {
   },
   comment: {
     ...defaultCss.comment,
+    content: "spg-question__content",
   },
   expression: "",
   file: {
