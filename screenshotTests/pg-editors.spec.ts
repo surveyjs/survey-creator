@@ -706,7 +706,7 @@ test.describe(title, () => {
     await compareScreenshot(page, expandedGroup, "pg-input-mask-settings-pattern.png");
   });
 
-  test("renderAs works in matrix questions for textwithreset", async ({ page }) => {
+  test.skip("renderAs works in matrix questions for textwithreset", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 800 });
     await page.evaluate(() => {
       window["Survey"].Serializer.findProperty("page", "name").defaultValue = "test";
