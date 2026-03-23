@@ -84,6 +84,10 @@ export class PresetsManager {
 
     return [...defaultPresets, ...customPresets, editItem];
   }
+  private isProtectedPresetName(name: string): boolean {
+    return PredefinedCreatorPresets.indexOf(name) !== -1;
+  }
+
   private setPresetNewName(onSet: (newName: string) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
@@ -103,6 +107,11 @@ export class PresetsManager {
     });
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
+    survey.onValidateQuestion.add((sender, options) => {
+      if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
+        options.error = getLocString("presets.editor.protectedPresetName");
+      }
+    });
 
     const popupModel = settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
@@ -302,6 +311,11 @@ export class PresetsManager {
           ...propertyGridCss.buttongroup,
         }
       };
+      addSurvey.onValidateQuestion.add((sender, options) => {
+        if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
+          options.error = getLocString("presets.editor.protectedPresetName");
+        }
+      });
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: addSurvey, model: addSurvey },
