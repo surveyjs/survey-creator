@@ -247,3 +247,16 @@ svc-tab-designer {
 .sv-action-bar-separator {
   background: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
 }
+
+// Temporary fix for disabled formbox buttons in designer
+.svc-tab-designer_content,
+.svc-question__content--in-popup {
+  .sd-formbox-button:where(:disabled) {
+    cursor: default;
+    opacity: 1;
+    background: var(--sjs2-color-component-formbox-action-default-bg, rgba(95, 94, 97, 0));
+    .sd-formbox-button__icon {
+        fill: var(--sjs2-color-component-formbox-action-default-icon, #424146);
+    }
+  }
+}

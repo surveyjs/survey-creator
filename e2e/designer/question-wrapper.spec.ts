@@ -357,7 +357,7 @@ test.describe(title + " dropdown collapse", () => {
     const questions = page.locator(".svc-question__content");
     const choicesTabTitle = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Choice Options", { exact: true });
     const generalTabTitle = page.locator("div[id$=ariaTitle][id^=sp]").getByText(generalGroupName, { exact: true });
-    const carryForwardEditor = page.locator("div[data-name='choicesFromQuestion'] .spg-dropdown");
+    const carryForwardEditor = page.locator("div[data-name='choicesFromQuestion'] .sd-dropdown");
 
     await expect(questions).toHaveCount(0);
     await getToolboxItemByText(page, "Checkboxes").hover();

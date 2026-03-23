@@ -35,7 +35,7 @@ test.describe(title, () => {
     const editVisibleIf = page.getByRole("button", { name: "Bearbeiten" });
     const popup = page.locator(".sv-popup__body-content");
     const chooseQuestion = popup.locator(".sl-dropdown__value");
-    const question2Text = popup.locator(".sd-input");
+    const question2Text = popup.locator(".sd-formbox__input");
     const applyBtn = page.getByRole("button", { name: "Anwenden" });
 
     await question1.click();

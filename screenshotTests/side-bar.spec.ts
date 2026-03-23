@@ -182,7 +182,7 @@ test.describe(title, () => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     });
     await page.locator(".sv-action--svd-settings").click();
-    await page.locator(".spg-question[data-name='locale'] .spg-dropdown").locator(".sd-editor-chevron-button").click();
+    await page.locator(".spg-question[data-name='locale'] .sd-dropdown").locator(".sd-editor-chevron-button").click();
     await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
     await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");
   });

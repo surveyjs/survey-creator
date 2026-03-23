@@ -9,7 +9,7 @@ test.describe(title, () => {
   });
 
   test("Change survey locale", async ({ page }) => {
-    const dropdownInput = page.locator(".sd-input.sd-dropdown input").first();
+    const dropdownInput = page.locator(".sd-dropdown input").first();
     const json = { elements: [{ type: "dropdown", name: "question1", choices: ["Item 1", "Item 2", "Item 3"] }] };
     await setJSON(page, json);
 
