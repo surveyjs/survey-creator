@@ -167,7 +167,7 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
-    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.getByRole("combobox", { name: "Icon name" }).click({ force: true });
     await compareScreenshot(page, ".sv-dropdown-popup .svc-list__container", "presets-icon-edit-popup.png");
   });
 
