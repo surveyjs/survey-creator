@@ -250,6 +250,8 @@ export const enStrings = {
     basic: "Basic",
     advanced: "Advanced",
     expert: "Expert",
+    defaultConfiguration: "Default configuration",
+    selectPresetPlaceholder: "Select a preset...",
     editPresetsList: "Manage presets...",
     editPresetsListTitle: "Manage Presets",
     addNewPreset: "Add new preset...",

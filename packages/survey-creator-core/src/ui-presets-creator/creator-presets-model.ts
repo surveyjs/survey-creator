@@ -8,7 +8,7 @@ export class CreatorPresetsModel extends Base implements IPreset {
     return "creatorpreset";
   }
 
-  @property() presetName: string = CreatorPresetsModel.defaultPresetName;
+  @property() presetName: string = "";
 
   public get name(): string { return this.presetName; }
   public set name(val: string) { this.presetName = val; }
@@ -17,7 +17,7 @@ export class CreatorPresetsModel extends Base implements IPreset {
   constructor() {
     super();
     this.onPropertyValueChangedCallback = (propName: string) => {
-      if (propName === "presetName") {
+      if (propName === "presetName" && this.presetName) {
         this.onPresetSelected.fire(this, { preset: CreatorPresets[this.presetName] });
       }
     };

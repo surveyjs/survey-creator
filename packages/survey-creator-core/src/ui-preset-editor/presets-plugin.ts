@@ -60,7 +60,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.presetsManager.update();
     const selItem = this.presetsList?.selectedItem;
     if (selItem && this.presetsManager.presetSelector) {
-      this.presetsManager.presetSelector.value = selItem.id;
+      this.presetsManager.presetSelector.value = selItem.id !== PresetsManager.defaultConfigurationId ? selItem.id : "";
     }
     this.creator.onActiveTabChanging.remove(this.preventTabSwitch);
     this.creator.activeTab = this.activeTab;
@@ -366,6 +366,9 @@ export class UIPresetEditor implements ICreatorPlugin {
     };
 
     this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector?.value)[0];
+    if (!this.presetsList.selectedItem) {
+      this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id === PresetsManager.defaultConfigurationId)[0];
+    }
     curentlySelectedPreset = this.presetsList.selectedItem;
     if (this.presetsList.selectedItem) {
       this.presetsList.selectedItem.action(this.presetsList.selectedItem);

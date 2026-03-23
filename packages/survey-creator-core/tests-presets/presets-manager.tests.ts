@@ -1132,4 +1132,86 @@ describe("PresetsManager", () => {
       expect(CreatorPresets["noJson"]).toBeDefined();
     });
   });
+
+  describe("Default configuration", () => {
+    test("should always include default configuration in menu items", () => {
+      manager.update();
+
+      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
+
+      expect(defaultConfigItem).toBeDefined();
+      expect(defaultConfigItem?.title).toBe(getLocString("presets.plugin.defaultConfiguration"));
+    });
+
+    test("should call selectPresetCallback with empty json when default configuration is selected", () => {
+      manager.update();
+
+      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
+
+      expect(defaultConfigItem?.action).toBeDefined();
+      defaultConfigItem!.action!(defaultConfigItem);
+
+      expect(mockSelectPresetCallback).toHaveBeenCalledWith({
+        name: PresetsManager.defaultConfigurationId,
+        json: {}
+      });
+    });
+
+    test("should not include default configuration in presetSelector choices", () => {
+      PredefinedCreatorPresets.push("basic");
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+
+      manager.update();
+
+      const hasDefaultConfig = mockPresetSelector.choices.some(
+        (c: any) => c.value === PresetsManager.defaultConfigurationId
+      );
+      expect(hasDefaultConfig).toBe(false);
+    });
+
+    test("should return default configuration preset from getter when selected", () => {
+      manager.update();
+
+      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
+      defaultConfigItem!.action!(defaultConfigItem);
+
+      const preset = manager.preset;
+      expect(preset).toBeDefined();
+      expect(preset!.name).toBe(PresetsManager.defaultConfigurationId);
+      expect(preset!.json).toEqual({});
+    });
+
+    test("should keep default configuration selected in ensureSelectedPresetAvailable", () => {
+      manager.update();
+
+      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
+      defaultConfigItem!.action!(defaultConfigItem);
+
+      manager.removePreset("nonexistent");
+
+      expect(mockPresetsList.selectedItem?.id).toBe(PresetsManager.defaultConfigurationId);
+    });
+
+    test("should force saveAs when saving from default configuration", () => {
+      manager.update();
+
+      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
+      defaultConfigItem!.action!(defaultConfigItem);
+
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: jest.fn() };
+      });
+
+      const saveCallback = jest.fn();
+      manager.saveOrSaveAs({ toolbox: {} }, saveCallback);
+
+      expect(mockShowDialog).toHaveBeenCalled();
+      expect(saveCallback).not.toHaveBeenCalled();
+    });
+  });
 });

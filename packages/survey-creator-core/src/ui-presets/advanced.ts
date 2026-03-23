@@ -18,7 +18,8 @@ export const Advanced = {
         {
           "name": "theme",
           "iconName": "icon-theme"
-        }
+        },
+        { "name": "logic" },
       ],
       "activeTab": "designer"
     },

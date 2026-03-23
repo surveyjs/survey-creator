@@ -7,6 +7,7 @@ import { showConfirmDialog } from "./confirm-dialog";
 export interface IPresetListItem extends IPresetBase { }
 
 export class PresetsManager {
+  public static defaultConfigurationId = "__defaultConfiguration";
   /**
    *
    */
@@ -60,7 +61,10 @@ export class PresetsManager {
         this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
         this.presetsList.onSelectionChanged?.(this.presetsList.selectedItem as any);
       }
-      this.selectPresetCallback?.(CreatorPresets[presetName]);
+      const preset = presetName === PresetsManager.defaultConfigurationId
+        ? { name: PresetsManager.defaultConfigurationId, json: {} }
+        : CreatorPresets[presetName];
+      this.selectPresetCallback?.(preset);
     });
   }
   private presetListToItems(presets: string[]) {
@@ -75,6 +79,13 @@ export class PresetsManager {
   private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
     const customPresets = this.presetListToItems(this.customPresets);
+    const hasPresets = defaultPresets.length + customPresets.length > 0;
+    const defaultConfigItem = {
+      id: PresetsManager.defaultConfigurationId,
+      needSeparator: hasPresets,
+      title: getLocString("presets.plugin.defaultConfiguration"),
+      action: () => this.selectPreset(PresetsManager.defaultConfigurationId)
+    } as IAction;
     const editItem = {
       id: "editPresetsList",
       needSeparator: customPresets.length + defaultPresets.length > 0,
@@ -82,7 +93,7 @@ export class PresetsManager {
       action: () => this.editPresetsList(this.applyPresetsList.bind(this))
     } as IAction;
 
-    return [...defaultPresets, ...customPresets, editItem];
+    return [...defaultPresets, ...customPresets, defaultConfigItem, editItem];
   }
   private setPresetNewName(onSet: (newName: string) => void) {
     const survey = new SurveyModel({
@@ -158,6 +169,7 @@ export class PresetsManager {
 
   private ensureSelectedPresetAvailable() {
     const current = this.presetsList?.selectedItem?.id;
+    if (current === PresetsManager.defaultConfigurationId) return;
     const visibleNames = this.getPresetsListToEdit().filter(p => p.visible).map(p => p.name);
     if (visibleNames.indexOf(current) >= 0) return;
     const fallback = visibleNames[0];
@@ -391,7 +403,7 @@ export class PresetsManager {
 
   public saveOrSaveAs(json: any, saveCallback: (newName: string) => void) {
     const currentName = this.preset?.name;
-    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+    if (currentName && currentName !== PresetsManager.defaultConfigurationId && PredefinedCreatorPresets.indexOf(currentName) === -1) {
       this.getPreset(currentName).json = json;
       saveCallback(currentName);
     } else {
@@ -437,6 +449,8 @@ export class PresetsManager {
 
   public get preset(): IPreset | undefined {
     const value = this.presetsList?.selectedItem?.id;
-    return value ? CreatorPresets[value] : undefined;
+    if (!value) return undefined;
+    if (value === PresetsManager.defaultConfigurationId) return { name: PresetsManager.defaultConfigurationId, json: {} };
+    return CreatorPresets[value];
   }
 }
