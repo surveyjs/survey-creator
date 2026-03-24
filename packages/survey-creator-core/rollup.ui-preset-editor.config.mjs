@@ -17,11 +17,11 @@ export default () => {
       version: pkg.version
     }),
     createUmdConfig({
-      input: { "ui-preset-editor/index": resolve(__dirname, "./src/ui-preset-editor/index.ts") },
+      input: { "index": resolve(__dirname, "./src/ui-preset-editor/index.ts") },
       tsconfig: resolve(__dirname, "tsconfig.ui-preset-editor.json"),
       external: ["survey-core", "survey-creator-core"],
-      dir: resolve(buildPath),
-      declarationDir: resolve(buildPath),
+      dir: resolve(buildPath, "ui-preset-editor"),
+      declarationDir: resolve(buildPath, "ui-preset-editor"),
       globals: { "survey-core": "Survey", "survey-creator-core": "SurveyCreatorCore" },
       globalName: "SurveyCreatorUIPresetEditorCore",
       emitCss: true,
