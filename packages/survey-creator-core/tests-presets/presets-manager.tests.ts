@@ -1068,6 +1068,86 @@ describe("PresetsManager", () => {
     });
   });
 
+  describe("Protected preset name validation", () => {
+    beforeEach(() => {
+      PredefinedCreatorPresets.push("basic", "advanced");
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: true };
+    });
+
+    test("saveAs should reject a predefined preset name", () => {
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      manager.saveAs({}, jest.fn());
+
+      const survey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      survey.setValue("presetName", "basic");
+
+      expect(onApplyCallback!()).toBe(false);
+    });
+
+    test("saveAs should allow a non-predefined name", () => {
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      manager.saveAs({}, jest.fn());
+
+      const survey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      survey.setValue("presetName", "myCustomPreset");
+
+      expect(onApplyCallback!()).toBe(true);
+    });
+
+    test("addNewPreset dialog should reject a predefined preset name", () => {
+      const survey = new SurveyModel({ pages: [{ name: "page1", elements: [] }] });
+      manager.addPresetsListEditor(survey);
+      const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
+
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      survey.onMatrixRowAdding.fire(survey, { question: matrixQuestion, allow: true, canAddRow: true } as any);
+
+      const addSurvey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      addSurvey.setValue("presetName", "advanced");
+      addSurvey.setValue("template", "basic");
+
+      expect(onApplyCallback!()).toBe(false);
+      expect(CreatorPresets["advanced"].json).toEqual({});
+    });
+
+    test("addNewPreset dialog should allow a non-predefined name", () => {
+      const survey = new SurveyModel({ pages: [{ name: "page1", elements: [] }] });
+      manager.addPresetsListEditor(survey);
+      const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
+
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      survey.onMatrixRowAdding.fire(survey, { question: matrixQuestion, allow: true, canAddRow: true } as any);
+
+      const addSurvey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      addSurvey.setValue("presetName", "brandNewPreset");
+      addSurvey.setValue("template", "basic");
+
+      expect(onApplyCallback!()).toBe(true);
+      expect(CreatorPresets["brandNewPreset"]).toBeDefined();
+    });
+  });
+
   describe("Edge cases handling", () => {
     test("should handle empty presets list", () => {
       manager.update();

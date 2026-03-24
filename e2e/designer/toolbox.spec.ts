@@ -47,7 +47,8 @@ async function setupToolboxProperty(page: Page, propertyName: string, propertyVa
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(url);
+    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => !!window["creator"]);
   });
 
   test("Simple click", async ({ page }) => {

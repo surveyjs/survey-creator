@@ -2422,7 +2422,7 @@ test("Merge undo/redo into one transaction", () => {
 test("Change translation sidebar caption in the code, Bug#7154", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   const sidebar = creator.sidebar.addPage("translation");
-  sidebar.locTileName = "ed.translationPropertyGridTitle";
+  sidebar.locTitleName = "ed.translationPropertyGridTitle";
   expect(sidebar.caption).toBe("Language Settings");
   sidebar.caption = "test title";
   expect(sidebar.caption).toBe("test title");

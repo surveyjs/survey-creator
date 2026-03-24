@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -116,8 +116,7 @@ test.describe(title, () => {
   });
 
   test("tabbed mode", async ({ page }) => {
-    const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
-    await page.goto(themeTabUrl);
+    await page.goto(urlThemeTab);
 
     await page.setViewportSize({ width: 1920, height: 1200 });
     await page.evaluate(() => {
@@ -143,8 +142,7 @@ test.describe(title, () => {
   });
 
   test("boolean switch", async ({ page }) => {
-    const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
-    await page.goto(themeTabUrl);
+    await page.goto(urlThemeTab);
 
     await page.setViewportSize({ width: 1920, height: 1200 });
     await page.evaluate(() => {

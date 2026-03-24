@@ -193,6 +193,7 @@ export const enStrings = {
     completeText: "Save & Exit",
     pagePrevText: "Back",
     required: "Please enter a value.",
+    protectedPresetName: "This name is reserved for a built-in preset. Please choose a different name.",
   },
   plugin: {
     buttonTitle: "UI Preset Editor",

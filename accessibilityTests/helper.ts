@@ -1,6 +1,6 @@
 import type { RunOptions } from "axe-core";
 import type { Page } from "playwright";
-export const url = "http://127.0.0.1:8080/testCafe/testcafe";
+export const url = "http://127.0.0.1:8080/test-pages/default";
 
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
