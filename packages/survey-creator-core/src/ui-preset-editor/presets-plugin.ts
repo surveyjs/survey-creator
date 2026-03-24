@@ -1,5 +1,5 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
-import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets } from "survey-creator-core";
+import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
@@ -234,9 +234,17 @@ export class UIPresetEditor implements ICreatorPlugin {
     options.allow = false;
   };
 
+  private getActivePresetJson(): any {
+    const presetName = this.creator.activePresetName || this.presetsManager.presetSelector?.value;
+    if (presetName && CreatorPresets[presetName]) {
+      return CreatorPresets[presetName].json || {};
+    }
+    return {};
+  }
+
   public activate(): void {
     this.creator.onActiveTabChanging.add(this.preventTabSwitch);
-    this.model = new CreatorPresetEditorModel({}, this.creator, this.defaultJson);
+    this.model = new CreatorPresetEditorModel(this.getActivePresetJson(), this.creator, this.defaultJson);
     this.defaultJson = { ...this.model.defaultJson };
     if (this.currentValue) {
       this.model.model.data = this.currentValue;
@@ -365,13 +373,17 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.setStatus("unsaved");
     };
 
-    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == this.presetsManager.presetSelector?.value)[0];
+    const activePresetId = this.creator.activePresetName || this.presetsManager.presetSelector?.value;
+    this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == activePresetId)[0];
+    const modelAlreadyInitialized = !!this.presetsList.selectedItem;
     if (!this.presetsList.selectedItem) {
       this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id === PresetsManager.defaultConfigurationId)[0];
     }
     curentlySelectedPreset = this.presetsList.selectedItem;
     if (this.presetsList.selectedItem) {
-      this.presetsList.selectedItem.action(this.presetsList.selectedItem);
+      if (!modelAlreadyInitialized) {
+        this.presetsList.selectedItem.action(this.presetsList.selectedItem);
+      }
       listAction.title = this.presetsList.selectedItem.title || "";
     }
     setTimeout(() => {

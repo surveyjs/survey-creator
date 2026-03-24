@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { registerCreatorTheme, SurveyCreatorModel } from "survey-creator-core";
+import { registerCreatorTheme, SurveyCreatorModel, UIPreset } from "survey-creator-core";
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
 import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
@@ -28,6 +28,7 @@ export class PresetsComponent extends TestDefaultComponent {
     settings.animationEnabled = false;
     this.creator.allowZoom = false;
     this.creator.showOneCategoryInPropertyGrid = true;
+    new UIPreset(SurveyCreatorUIPreset.Expert).applyTo(this.creator);
     new UIPresetEditor(this.creator);
   }
 }

@@ -426,14 +426,14 @@ test.describe(title, () => {
 
   test("Hide default preset", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".sps-action-button").nth(1).click();
 
     await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
@@ -444,7 +444,7 @@ test.describe(title, () => {
 
   test("Add custom preset", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.getByText("Add new preset...").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
@@ -454,7 +454,7 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
@@ -472,7 +472,7 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__item").filter({ hasText: "MyPreset" }).click();
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "MyPreset" }).click();
 
@@ -489,7 +489,7 @@ test.describe(title, () => {
     await expect(page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" })).toBeVisible();
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" }).click();
     await expect(page.locator(".sps-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
   });
 
   test("Check presets quit confirmation dialog", async ({ page }) => {

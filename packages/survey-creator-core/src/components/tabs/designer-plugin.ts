@@ -37,6 +37,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public designerStateManager: DesignerStateManager;
   private tabControlModelValue: TabControlModel;
   private prevActivePage: string;
+  private presetModel: CreatorPresetsModel;
 
   public get tabControlModel() {
     return this.tabControlModelValue;
@@ -184,7 +185,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     ];
 
     if (PredefinedCreatorPresets.length > 0) {
-      const presetModel = new CreatorPresetsModel();
+      this.presetModel = new CreatorPresetsModel();
       const presetPropertyGridViewModel = this.createSettingsPropertyGridViewModel("preset", creatorPresetsModelPropertyGridDefinition, creator);
       presetPropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
         const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
@@ -195,11 +196,17 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           }
         }
       };
-      presetPropertyGridViewModel.setObject(presetModel);
-      presetModel.onPresetSelected.add((sender, options) => {
+      presetPropertyGridViewModel.setObject(this.presetModel);
+      this.presetModel.onPresetSelected.add((sender, options) => {
         new UIPreset(options.preset.json).apply(creator);
+        creator.activePresetName = sender.presetName;
         creator.notify(getLocString("preset.presetApplied"), "info");
         this.openCreatorThemeSettings();
+      });
+      creator.onPropertyChanged.add((sender, options) => {
+        if (options.name === "activePresetName" && !!this.presetModel) {
+          this.presetModel.setPresetNameSilent(options.newValue);
+        }
       });
       sidebarPageModelElements.unshift(
         { componentName: "svc-property-grid", componentData: { model: presetPropertyGridViewModel } }
