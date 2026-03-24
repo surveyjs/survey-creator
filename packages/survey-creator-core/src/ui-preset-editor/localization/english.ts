@@ -166,7 +166,7 @@ export const enStrings = {
   },
   items: {
     addNewItem: "Add new item",
-    addNewSubitem: "Add a new subitem",
+    addNewSubitem: "Add new subitem",
     newItem: "New item in",
     addCustomCategory: "New Category",
     newCategory: "New category in",
