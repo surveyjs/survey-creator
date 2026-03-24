@@ -929,6 +929,10 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   protected getChoices(obj: Base): Array<any> {
     return this.getAvailableTriggers().map((tr) => { return { value: tr.name, text: editorLocalization.getTriggerName(tr.name) }; });
   }
+  onUpdateQuestionCssClasses(obj: Base, options: any): void {
+    super.onUpdateQuestionCssClasses(obj, options);
+    options.cssClasses.root += " spg-table--triggers";
+  }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
