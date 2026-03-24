@@ -853,17 +853,29 @@ export class PropertyGridModel {
       this.updateCurrentSurveyWithNewDefinition();
     }
   }
+  private expandPanel(panel: PanelModel): void {
+    panel.blockAnimations();
+    panel.expand();
+    panel.releaseAnimations();
+  }
   public selectProperty(propertyName: string, focus = true) {
     if (!this.survey) return;
     var question = this.survey.getQuestionByName(propertyName);
-    if (!question) return;
+    if (!question) {
+      if (this.currentlySelectedPanel) {
+        const panelName = this.currentlySelectedPanel.name;
+        const panel = <PanelModel>this.survey.getPanelByName(panelName);
+        if (panel) {
+          this.expandPanel(panel);
+        }
+      }
+      return;
+    }
     var panels = this.survey.getAllPanels();
     for (var i = 0; i < panels.length; i++) {
       var panel = <PanelModel>panels[i];
       if (panel === question.parent) {
-        panel.blockAnimations();
-        panel.expand();
-        panel.releaseAnimations();
+        this.expandPanel(panel);
       } else {
         panel.collapse();
       }
@@ -1153,9 +1165,7 @@ export class PropertyGridModel {
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory()) {
       const panel = <PanelModel>this.survey.getPanelByName(expandedTabName);
       if (!!panel) {
-        panel.blockAnimations();
-        panel.expand();
-        panel.releaseAnimations();
+        this.expandPanel(panel);
       }
     }
   }

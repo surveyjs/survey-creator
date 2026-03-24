@@ -176,6 +176,7 @@ export default async (options) => {
       dir: buildPath,
       emitMinified: process.env.emitMinified === "true",
       version: pkg.version,
+      watchFiles: [resolve(buildPath, "survey-creator-core.fontless.css")],
       onCloseBundle: async() => {
         for (const path of [resolve(buildPath, "survey-creator-core.css"), resolve(buildPath, "survey-creator-core.min.css")]) {
           if (fs.existsSync(path)) {

@@ -1,11 +1,11 @@
-import { url, test, expect, setJSON } from "./helper";
+import { urlThemeTab, test, expect, setJSON } from "./helper";
 import { creatorTabThemeName, getPropertyGridCategory, getTabbedMenuItemByText } from "../screenshotTests/helper";
 
 const title = "Theme Editor";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${url}-theme-tab`);
+    await page.goto(urlThemeTab);
   });
 
   test("Editors, loose focus on enter", async ({ page }) => {

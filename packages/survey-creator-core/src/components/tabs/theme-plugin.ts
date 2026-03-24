@@ -252,7 +252,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);
-    this.propertyGridTab.locTileName = "ed.themePropertyGridTitle";
+    this.propertyGridTab.locTitleName = "ed.themePropertyGridTitle";
     this.themeModel = new ThemeModel();
 
     creator.registerShortcut("undo_theme", {

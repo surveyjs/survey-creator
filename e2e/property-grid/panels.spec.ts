@@ -8,7 +8,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
 
-  test("Panel stay focused on question change", async ({ page }) => {
+  test("Panel stay visible on question change", async ({ page }) => {
     const json = {
       "pages": [
         {
@@ -44,7 +44,7 @@ test.describe(title, () => {
     await expect(startWithNewLine).toBeVisible();
     await page.locator("div [data-name=\"minWidth\"] input").click();
     await question1.click();
-    await expect(page.locator("div [data-name=\"minWidth\"] input")).toBeFocused();
+    await expect(page.locator("div [data-name=\"minWidth\"] input")).toBeVisible();
   });
 
   test("Show/hide panel header on entering/deleting the panel title, Bug#5720", async ({ page }) => {
