@@ -446,7 +446,7 @@ test.describe(title, () => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.getByText("Add new preset...").click();
+    await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     const items = page.locator(".sv-popup__container table").nth(0);
@@ -466,7 +466,7 @@ test.describe(title, () => {
   test("Delete current custom preset in list editor switches to Basic", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.getByText("Add new preset...").click();
+    await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     await page.getByRole("button", { name: "Save" }).click();
