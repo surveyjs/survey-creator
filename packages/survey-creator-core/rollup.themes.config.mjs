@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 import { createEsmConfig, createUmdConfig } from "../../rollup.helpers.mjs";
 import process from "process";
 import pkg from "./package.json" with { type: "json" };
-import { Declaration } from "postcss";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
