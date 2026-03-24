@@ -73,8 +73,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "./example/angular-ui/src/favicon.ico",
-              "./example/angular-ui/src/assets",
-              "./example/angular-ui/src/testCafe"
+              "./example/angular-ui/src/assets"
             ],
             "styles": [
               "./node_modules/survey-core/survey-core.css",

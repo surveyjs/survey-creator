@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector } from "./helper";
+import { urlThemeTab, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector } from "./helper";
 
 const title = "Themes tab";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${url.replace(/\/testcafe$/, "/testcafe-theme-tab")}`);
+    await page.goto(urlThemeTab);
   });
 
   test("Check boxshadow settings", async ({ page }) => {

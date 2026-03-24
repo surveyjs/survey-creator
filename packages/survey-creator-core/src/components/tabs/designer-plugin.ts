@@ -206,7 +206,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     const sidebarPageModel = new ComponentContainerModel();
     sidebarPageModel.elements = sidebarPageModelElements;
     this.settingsPropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-component-container", sidebarPageModel);
-    this.settingsPropertyGridTab.locTileName = "ed.creatorSettingTitle";
+    this.settingsPropertyGridTab.locTitleName = "ed.creatorSettingTitle";
     this.settingsPropertyGridTab.activateCallback = () => {
       settingsAction.active = true;
     };
@@ -269,7 +269,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.updateTabControlActions();
     };
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
-    this.propertyGridPlaceholderPage.locTileName = "ed.surveySettings";
+    this.propertyGridPlaceholderPage.locTitleName = "ed.surveySettings";
 
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGrid", "svc-property-grid", this.propertyGridViewModel, () => {
       const result = [];
@@ -295,7 +295,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       }
     });
     this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
-    this.toolboxTab.locTileName = "ed.toolbox";
+    this.toolboxTab.locTitleName = "ed.toolbox";
 
     if (this.creator.showCreatorThemeSettings) {
       this.createCreatorSettingsPage(creator);

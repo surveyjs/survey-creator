@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, getTabbedMenuItemByText, compareScreenshot } from "./helper";
+import { url, setJSON, getTabbedMenuItemByText, compareScreenshot, urlWidget } from "./helper";
 
 const title = "Json tab Screenshot";
 
@@ -73,8 +73,7 @@ test.describe(title, () => {
   });
 
   test("JSON Ace editor", async ({ page }) => {
-    const widgetUrl = url.replace(/\/testcafe$/, "/testcafe-widget");
-    await page.goto(`${widgetUrl}`);
+    await page.goto(urlWidget);
     const skipIfNotReact = await page.evaluate(() => {
       return window["creator"].survey.platformName != "react";
     });
