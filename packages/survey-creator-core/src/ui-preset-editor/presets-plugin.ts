@@ -7,6 +7,10 @@ import { showConfirmDialog } from "./confirm-dialog";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
+ *
+ * [UI Preset Editor Documentation](https://surveyjs.io/survey-creator/documentation/ui-preset-editor (linkStyle))
+ *
+ * [UI Preset Editor Demo](https://surveyjs.io/survey-creator/examples/ui-preset-editor/ (linkStyle))
  */
 export class UIPresetEditor implements ICreatorPlugin {
   static defaultPresetName = "expert";
@@ -32,6 +36,8 @@ export class UIPresetEditor implements ICreatorPlugin {
    * A function that handles saving a preset.
    *
    * Use the [`preset`](#preset) property to access the preset being saved.
+   *
+   * [How to Save and Load Presets](https://surveyjs.io/survey-creator/documentation/ui-preset-editor#save-and-load-custom-presets (linkStyle))
    * @param saveNo An incremental number that identifies the current change.
    * @param callback A callback function. Pass `saveNo` as the first argument. Set the second argument to `true` if the server successfully applied the change or `false` if it was rejected.
    */
@@ -169,6 +175,8 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   /**
    * A [preset](/survey-creator/documentation/api-reference/ipreset) being configured in the UI Preset Editor.
+   *
+   * [UI Preset Editor Demo](https://surveyjs.io/survey-creator/examples/ui-preset-editor/ (linkStyle))
    * @see savePresetFunc
    */
   public get preset(): IPreset | undefined {

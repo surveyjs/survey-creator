@@ -7,7 +7,7 @@ import { showConfirmDialog } from "./confirm-dialog";
 /**
  * Describes an item in the preset list.
  *
- * A preset list item controls whether a preset is displayed in the list of available presets.
+ * A preset list item controls whether a preset is displayed in the list of available presets. Access the collection of preset list items using the [`availablePresets`](/survey-creator/documentation/api-reference/uipreseteditor#availablePresets) property of `UIPresetEditor`.
  */
 export interface IPresetListItem extends IPresetBase { }
 
