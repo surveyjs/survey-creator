@@ -218,7 +218,7 @@
 
     input {
       min-width: calc(max(17 * #{$base-unit}, 100%));
-      width: 0;
+      // width: 0;
     }
   }
 }

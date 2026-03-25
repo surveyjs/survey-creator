@@ -383,10 +383,8 @@ export var propertyGridCss = {
     itemTitle: "spg-action-button__title",
   },
   spinedit: {
-    root: "spg-input spg-spin-editor spg-input-container",
-    control: "spg-spin-editor__input spg-input-container__input",
-    buttonsContainer: "spg-input-container__buttons-container",
-    arrowButton: "spg-input__edit-button",
+    root: "sd-formbox",
+    control: "sd-formbox__input",
     increaseButtonIcon: "icon-arrow-up",
     decreaseButtonIcon: "icon-arrow-down"
   },

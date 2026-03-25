@@ -71,6 +71,7 @@ export * from "./header/logo-image.component";
 export * from "./tabs/json/json-error-item.component";
 
 export * from "./custom-questions/spin-editor.component";
+export * from "./custom-questions/spin-editor-button.component";
 export * from "./custom-questions/color-item.component";
 export * from "./custom-questions/color.component";
 export * from "./custom-questions/file.component";
