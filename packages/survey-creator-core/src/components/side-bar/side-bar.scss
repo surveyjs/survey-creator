@@ -13,9 +13,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
   max-width: var(--sjs-size-x90);
   height: 100%;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
   border-inline-start: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
-    var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
+    var(--sjs2-color-component-input-default-line, #D4D4D4);
     box-sizing: content-box;
 }
 
@@ -48,8 +48,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-side-bar__container-header {
-  background: var(--ctr-property-grid-header-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  box-shadow: inset 0px -2px 0px var(--sjs2-color-fg-brand-primary, #19B394);
   // text-align: right;
   display: flex;
   padding: var(--ctr-property-grid-header-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
@@ -62,7 +62,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   align-items: flex-start;
   height: 100%;
   overflow-y: auto;
-  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-bg-basic-primary, #fff);
 }
 
 // .svc-side-bar__container-container {
@@ -86,7 +86,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
-  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-default-value, #1C1B20);
 }
 
 .svc-side-bar__container-actions {
@@ -105,24 +105,24 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
 
     &:focus {
-      background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+      background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
     }
     
     &:hover {
-      background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+      background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
     }
   }
   
   .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-    background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
   }
   
   .sv-action-bar-item__title {
-    color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+    color: var(--sjs2-color-component-input-default-value, #1C1B20);
   }
   
   .sv-action-bar-item__icon use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
   }
 }
 
@@ -132,7 +132,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   background-color: transparent;
 }
 .svc-side-bar__container {
-  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-bg-basic-primary, #fff);
 }
 
 .svc-side-bar {
@@ -144,7 +144,7 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
 .svc-side-bar--flyout {
   z-index: 1000;
   .svc-side-bar__shadow {
-    background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
+    background-color: var(--sjs2-color-bg-overlay, rgba(204 238 238 / 0.35));
     position: absolute;
     top: 0;
     bottom: 0;

@@ -11,12 +11,12 @@
   position: absolute;
   bottom: calcSize(1);
   left: calcSize(1);
-  background: var(--ctr-notification-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
   opacity: 0;
   padding: calcSize(1) calcSize(2);
-  box-shadow: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
+  box-shadow: 0px 2px 6px 0px var(--sjs2-color-utility-shadow-floating-default, rgba(0 76 68 / 0.15));
   border-radius: calcSize(0.5);
-  color: var(--ctr-notification-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-default-value, #1C1B20);
   min-width: calcSize(30);
   text-align: center;
   z-index: 1600; //todo: should overlap popup
@@ -25,8 +25,8 @@
 }
 
 .svc-notifier.svc-notifier--error {
-  background-color: var(--ctr-notification-background-color-error, var(--sjs-semantic-red-background-500, #e50a3eff));
-  color: var(--ctr-notification-text-color-error, var(--sjs-semantic-red-foreground-100, #ffffffff));
+  background-color: var(--sjs2-color-bg-alert-primary, #E50A3E);
+  color: var(--sjs2-color-fg-alert-on-primary, #fff);
   opacity: var(--ctr-notification-opacity-error, 1);
 }
 

@@ -11,12 +11,12 @@
 .spg-question__content {
   input.sd-formbox__input:read-only,
   input.sd-formbox__input:read-only::placeholder {
-    color: rgb(from var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6)) r g b / var(--ctr-editor-content-text-opacity-disabled, 0.25));
+    color: var(--sjs2-color-component-input-disabled-value, #D4D4D4);
   }
 }
 
 .spg-question.spg-question--disabled {
-  background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-component-formbox-disabled-bg, #fff);
 }
 
 .spg-question__header {
@@ -33,11 +33,11 @@
   margin: 0;
   padding: var(--ctr-label-padding-top, var(--sjs-spacing-x1)) var(--ctr-label-padding-right, 0px)
     var(--ctr-label-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-label-padding-left, 0px);
-  color: var(--ctr-label-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+  color: var(--sjs2-color-component-input-default-label, rgba(28 27 32 / 0.6));
   box-sizing: border-box;
 }
 .spg-question__title.sd-element__title--disabled {
-  color: var(--ctr-caption-with-actions-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-disabled-label, #D4D4D4);
 }
 
 .spg-question__content {
@@ -65,7 +65,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   padding: 0px;
-  color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
+  color: var(--sjs2-color-component-input-default-limit, rgba(28 27 32 / 0.6));
   position: absolute;
   inset-inline-end: calcSize(0.75);
   inset-block-end: calcSize(0.5);
@@ -73,13 +73,13 @@
 
 .spg-question__description {
   @include ctrSmallFont;
-  color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+  color: var(--sjs2-color-component-input-default-description, rgba(28 27 32 / 0.6));
   padding-bottom: calcSize(2);
   white-space: normal;
 }
 
 .spg-question--disabled .spg-question__description {
-  color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+  color: var(--sjs2-color-component-input-disabled-description, #D4D4D4);
 }
 
 .spg-row-narrow__question {
@@ -105,31 +105,31 @@
     .spg-question__content--left {
       box-shadow:
         inset calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+          var(--sjs2-color-component-formbox-focused-border, #19B394),
         inset 0 calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+          var(--sjs2-color-component-formbox-focused-border, #19B394),
         inset 0 calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+          var(--sjs2-color-component-formbox-focused-border, #19B394);
     }
 
     .spg-question__header--location--left {
       box-shadow:
         inset calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+          var(--sjs2-color-component-formbox-focused-border, #19B394),
         inset 0 calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
+          var(--sjs2-color-component-formbox-focused-border, #19B394),
         inset 0 calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+          var(--sjs2-color-component-formbox-focused-border, #19B394);
     }
   }
 
   &.spg-question--disabled {
     .spg-question__content--left {
-      background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, white));
+      background-color: var(--sjs2-color-component-formbox-disabled-bg, #fff);
     }
 
     .spg-question__header--location--left {
-      background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, white));
+      background-color: var(--sjs2-color-component-formbox-disabled-bg, #fff);
     }
   }
 }
@@ -139,7 +139,7 @@
 }
 
 .spg-question--disabled.spg-question--location--left .spg-question__title {
-  color: var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-disabled-value, #D4D4D4);
 }
 
 .spg-question__header--location--left {
@@ -152,15 +152,15 @@
   padding-inline-start: var(--ctr-editor-padding-left, var(--sjs-spacing-x05));
   border-top-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
   border-bottom-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
+  background: var(--sjs2-color-component-formbox-default-bg, #F5F5F5);
   box-sizing: border-box;
   box-shadow:
     inset calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+      var(--sjs2-color-component-input-default-line, #D4D4D4),
     inset 0 calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+      var(--sjs2-color-component-input-default-line, #D4D4D4),
     inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
+      var(--sjs2-color-component-input-default-line, #D4D4D4);
 
   .spg-question__title {
     padding: 
@@ -169,9 +169,9 @@
       var(--ctr-editor-label-padding-bottom, var(--sjs-spacing-x1)) 
       var(--ctr-editor-label-padding-left, var(--sjs-spacing-x150));
     border-inline-end: var(--ctr-editor-label-separator-width, var(--sjs-stroke-x1)) solid
-      var(--ctr-editor-label-separator-color, var(--sjs-border-10, #dcdcdcff));
+      var(--sjs2-color-component-input-default-line, #D4D4D4);
     display: inline-block;
-    color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
+    color: var(--sjs2-color-component-input-default-label, rgba(28 27 32 / 0.6));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -185,14 +185,14 @@
   flex: 2;
   border-top-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
   border-bottom-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
+  background: var(--sjs2-color-component-formbox-default-bg, #F5F5F5);
   box-shadow:
     inset calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+      var(--sjs2-color-component-input-default-line, #D4D4D4),
     inset 0 calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
+      var(--sjs2-color-component-input-default-line, #D4D4D4),
     inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
+      var(--sjs2-color-component-input-default-line, #D4D4D4);
 
   .sd-formbox.sd-formbox.sd-formbox,
   .spg-input.spg-input.spg-input {
@@ -230,8 +230,8 @@
   padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
     var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
 
-  color: var(--ctr-error-message-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
-  background-color: var(--ctr-error-message-background-color, var(--sjs-semantic-red-background-10, #e50a3e1a));
+  color: var(--sjs2-color-component-message-error-text, #1C1B20);
+  background-color: var(--sjs2-color-component-message-error-bg, rgba(229 10 62 / 0.1));
   border-radius: var(--ctr-error-message-corner-radius, var(--sjs-corner-radius-x05));
 }
 
@@ -255,7 +255,7 @@ sv-question-error {
   }
 
   use {
-    fill: var(--ctr-error-message-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
+    fill: var(--sjs2-color-component-message-error-icon, #C30935);
   }
 }
 
@@ -279,12 +279,13 @@ sv-question-error {
   .spg-input-container,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .sd-formbox {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted, inset 0px 0px 0px 2px #1C1B20);
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid
+      var(--sjs2-color-component-formbox-highlighted-border, #1C1B20);
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
     border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
 
@@ -294,20 +295,22 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-actionbar-button-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid
+      var(--sjs2-color-component-formbox-highlighted-border, #1C1B20);
   }
 
   .sv-button-group {
-    box-shadow: 0 0 0 1px var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
-    border-color: var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    box-shadow: 0 0 0 1px var(--sjs2-color-component-formbox-highlighted-border, #1C1B20);
+    border-color: var(--sjs2-color-component-formbox-highlighted-border, #1C1B20);
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid
+      var(--sjs2-color-component-formbox-highlighted-border, #1C1B20);
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
   }
 
   .spg-button-group::after {
-    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted, inset 0px 0px 0px 2px #1C1B20);
   }
 }

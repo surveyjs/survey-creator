@@ -85,20 +85,20 @@
         &:hover,
         &:focus {
             border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
-            background: var(--ctr-editor-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
+            background: var(--sjs2-color-component-formbox-action-hovered-bg, rgba(95 94 97 / 0.1));
             transition: background $creator-transition-duration;
         }
 
         &.sd-editor-button-item--pressed {
             border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
             opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
-            background: var(--ctr-editor-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
+            background: var(--sjs2-color-component-formbox-action-pressed-bg, rgba(95 94 97 / 0.1));
             transition-property: opacity, background-color;
             transition-duration: $creator-transition-duration;
         }
 
         use {
-            fill: var(--ctr-editor-button-icon-color, var(--sjs-layer-3-foreground-75, #000000bf));
+            fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
         }
     }
 
@@ -134,7 +134,7 @@
         background: transparent;
 
         svg {
-            fill: var(--ctr-editor-button-icon-color-disabled, var(--sjs-layer-3-foreground-75, #000000bf));
+            fill: var(--sjs2-color-component-input-disabled-icon, #D4D4D4);
         }
     }
 }

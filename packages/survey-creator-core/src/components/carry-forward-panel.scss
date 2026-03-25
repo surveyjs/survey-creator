@@ -13,9 +13,9 @@
     var(--ctr-survey-info-panel-padding-bottom, var(--lbr-spacing-x4))
     var(--ctr-survey-info-panel-padding-left, var(--lbr-spacing-x8));
   border-radius: var(--ctr-survey-info-panel-corner-radius, var(--lbr-corner-radius-x1));
-  background: var(--ctr-survey-info-panel-background-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
+  background: var(--sjs2-color-bg-basic-dim, #F8F8F8);
   text-align: center;
-  color: var(--ctr-survey-info-panel-text-color, var(--sjs-layer-2-foreground-50, #00000080));
+  color: var(--sjs2-color-component-input-default-description, rgba(28 27 32 / 0.6));
 }
   
 @container (max-width: #{$sd-panel-medium-min-width}) {

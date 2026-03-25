@@ -54,7 +54,7 @@
   }
   .sps-question__description {
     @include ctrSmallFont;
-    color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+    color: var(--sjs2-color-component-input-default-description, rgba(28 27 32 / 0.6));
     padding-bottom: calcSize(2);
     white-space: normal;
   }

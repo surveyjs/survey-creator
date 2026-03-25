@@ -7,7 +7,7 @@
 .svc-flex-row {
   display: flex;
   flex-direction: row;
-  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
+  background: var(--sjs2-color-bg-brand-secondary, rgba(25 179 148 / 0.1));
 }
 
 .svc-full-container {
@@ -62,9 +62,9 @@
 
 .svc-top-bar {
   display: flex;
-  background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
+  box-shadow: inset 0px -1px 0px var(--sjs2-color-component-input-default-line, #D4D4D4);
 
   .svc-toolbar-wrapper {
     flex: 0 0 auto;
@@ -100,7 +100,7 @@
           var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
       }
       .sv-action-bar-item--active {
-        background: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
+        background: var(--sjs2-color-bg-brand-secondary, rgba(25 179 148 / 0.1));
       }
     }
     .sv-action:not(.sv-action--hidden) ~ .sv-action:not(.sv-action--hidden) {
@@ -112,7 +112,7 @@
   }
 
   .sv-action-bar-separator {
-    background-color: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
+    background-color: var(--sjs2-color-component-input-default-line, #D4D4D4);
   }
 
   .sv-action-bar-item-dropdown {
@@ -125,33 +125,33 @@
   @include ctrDefaultFont;
   border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--lbr-corner-radius-x075));
   background-color: transparent;
-  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-default-value, #1C1B20);
   transition: background-color $creator-transition-duration;
   height: auto;
   appearance: none;
   display: flex;
   border: none;
   use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf))
+    fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4))
   }
   //hovered and focused state
   &:hover,
   &:focus {
-    background-color: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    background-color: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
   }
 
   //pressed state
   &:active,
   &.svc-toolbar__item--pressed {
     opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-    background-color: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    background-color: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
   }
 
   //checked state
   &.svc-toolbar__item--active {
-    background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
+    background-color: var(--sjs2-color-bg-brand-secondary, rgba(25 179 148 / 0.1));
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color-selected, var(--sjs-primary-background-500, #19b394ff));
+      fill: var(--sjs2-color-fg-brand-primary, #19B394);
     }
   }
 
@@ -161,7 +161,7 @@
     opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
     cursor: default;
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+      fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
     }
   }
 }
@@ -179,11 +179,11 @@
   height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
 
   use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
   }
 }
 .svc-toolbar-item__title {
-  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-default-value, #1C1B20);
   @include ctrDefaultFont;
 }
 
@@ -196,8 +196,8 @@
       width: 100%;
 
       padding: var(--ctr-menu-toolbar-padding-vertical-mobile, var(--sjs-spacing-x05)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
-      background:  var(--ctr-menu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-      border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
+      background:  var(--sjs2-color-bg-basic-primary, #fff);
+      border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--sjs2-color-component-input-default-line, #D4D4D4);
       box-sizing: border-box;
     }
 

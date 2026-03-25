@@ -18,8 +18,8 @@
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-menu-item-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
-    box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
+    background-color: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
+    box-shadow: inset 0px -1px 0px var(--sjs2-color-component-input-default-line, #D4D4D4);
     outline: none;
   }
 }
@@ -32,13 +32,13 @@
 }
 
 .svc-tabbed-menu-item--selected {
-  background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  box-shadow: inset 0px -2px 0px var(--sjs2-color-fg-brand-primary, #19B394);
 
   &:hover,
   &:focus {
-    background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-    box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, var(--sjs-primary-background-500, #19b394ff));
+    background: var(--sjs2-color-bg-basic-primary, #fff);
+    box-shadow: inset 0px -2px 0px var(--sjs2-color-fg-brand-primary, #19B394);
   }
 }
 
@@ -47,7 +47,7 @@
   opacity: var(--ctr-menu-item-opacity-disabled, 0.25);
 
   &:hover {
-    background-color: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    background-color: var(--sjs2-color-bg-basic-primary, #fff);
   }
 }
 
@@ -59,7 +59,7 @@
   @include ctrDefaultFont;
   white-space: nowrap;
   display: block;
-  color: var(--ctr-menu-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-default-value, #1C1B20);
 }
 
 .svc-tabbed-menu-item--selected .svc-tabbed-menu-item__text {
@@ -69,7 +69,7 @@
 .svc-tabbed-menu-item__icon {
   width: var(--ctr-menu-item-icon-width, var(--sjs-font-size-x3));
   height: var(--ctr-menu-item-icon-height, var(--sjs-font-size-x3));
-  fill: var(--ctr-menu-item-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+  fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
 }
 
 .svc-tabbed-menu-dots__item {
@@ -84,19 +84,19 @@
     height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
   }
   use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, rgba(0, 0, 0, 0.7490196078)));
+    fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
   }
 
   &:hover,
   &:focus {
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
-    background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
   }
 
   &.sv-action-bar-item--pressed {
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
     opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-    background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
   }
 }
 .svc-tabbed-menu-item-container 

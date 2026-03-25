@@ -8,7 +8,7 @@
 
 .svc-switcher__title {
   @include ctrSmallBoldFont;
-  color: var(--ctr-property-grid-switcher-text-color, var(--sjs-layer-1-foreground-75, #000000bf));
+  color: var(--sjs2-color-component-input-default-label, rgba(28 27 32 / 0.6));
 }
 
 .svc-switcher__icon {
@@ -18,11 +18,8 @@
   padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left, var(--sjs-spacing-x05));
   border-radius: var(--ctr-property-grid-switcher-toggle-button-corner-radius, var(--sjs-corner-radius-round));
   border: var(--ctr-property-grid-switcher-toggle-button-border-width, var(--sjs-stroke-x1)) solid
-    var(--ctr-property-grid-switcher-toggle-button-border-color, var(--sjs-border-25, #d4d4d4ff));
-  background: var(
-    --ctr-property-grid-switcher-toggle-button-background-color,
-    var(--sjs-layer-3-background-500, #f4f4f4ff)
-  );
+    var(--sjs2-color-component-toggle-false-default-border, #D4D4D4);
+  background: var(--sjs2-color-component-toggle-false-default-bg, #F5F5F5);
 
   transition-duration: 0.2s;
   transition-property: background, padding-inline-start, padding-inline-end;
@@ -30,20 +27,20 @@
 }
 
 .svc-switcher__icon:hover {
-  border: 1px solid var(--ctr-property-grid-switcher-toggle-button-border-color, var(--sjs-border-25, #d4d4d4ff));
-  background: var(--ctr-property-grid-switcher-toggle-button-background-color-hovered, var(--sjs-layer-1-background-500, #ffffffff));
+  border: 1px solid var(--sjs2-color-component-toggle-false-hovered-border, #D4D4D4);
+  background: var(--sjs2-color-component-toggle-false-hovered-bg, #EDEDED);
 }
 
 .svc-switcher__icon:focus {
   border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
-    var(--ctr-property-grid-switcher-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-  background: var(--ctr-property-grid-switcher-toggle-button-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+    var(--sjs2-color-component-toggle-false-focused-border, #19B394);
+  background: var(--sjs2-color-component-toggle-false-focused-bg, #F5F5F5);
 }
 
 .svc-switcher__icon:focus:hover {
   border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
-    var(--ctr-property-grid-switcher-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-  background: var(--ctr-property-grid-switcher-toggle-button-background-color-hovered, var(--sjs-layer-1-background-500, #ffffffff));
+    var(--sjs2-color-component-toggle-false-focused-border, #19B394);
+  background: var(--sjs2-color-component-toggle-false-hovered-bg, #EDEDED);
 }
 
 .svc-switcher__icon--checked,
@@ -55,21 +52,21 @@
   padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
   padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left-checked, var(--sjs-spacing-x2));
   border: var(--ctr-property-grid-switcher-toggle-button-border-width-checked, 0px) solid
-    var(--ctr-property-grid-switcher-toggle-button-border-color, var(--sjs-border-25, #d4d4d4ff));
-  background: var(--ctr-property-grid-switcher-toggle-button-background-color-checked, var(--sjs-primary-background-500, #19b394ff));
+    var(--sjs2-color-component-toggle-true-default-border, #19B394);
+  background: var(--sjs2-color-component-toggle-true-default-bg, #19B394);
 }
 
 .svc-switcher__icon--checked:focus {
   border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
-    var(--ctr-property-grid-switcher-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-  background: var(--ctr-property-grid-switcher-toggle-button-background-color-checked-focused, var(--sjs-primary-foreground-100, #ffffffff));
+    var(--sjs2-color-component-toggle-true-focused-border, #19B394);
+  background: var(--sjs2-color-component-toggle-true-focused-bg, #fff);
 }
 
 .svc-switcher__icon-thumb {
   width: var(--ctr-property-grid-switcher-toggle-button-thumb-width, var(--sjs-size-x1));
   height: var(--ctr-property-grid-switcher-toggle-button-thumb-height, var(--sjs-size-x1));
   border-radius: var(--ctr-property-grid-switcher-toggle-button-thumb-corner-radius, var(--sjs-corner-radius-round));
-  background-color: var(--ctr-property-grid-switcher-toggle-button-thumb-color, var(--sjs-layer-3-foreground-50, #00000080));
+  background-color: var(--sjs2-color-component-toggle-false-default-thumb, rgba(28 27 32 / 0.6));
 
   transition-duration: 0.2s;
   transition-property: background-color;
@@ -77,13 +74,18 @@
 }
 
 .svc-switcher__icon--checked .svc-switcher__icon-thumb {
-  background-color: var(--ctr-property-grid-switcher-toggle-button-thumb-color-checked, var(--sjs-primary-foreground-100, #ffffffff));
+  background-color: var(--sjs2-color-component-toggle-true-default-thumb, #fff);
 }
 
 .svc-switcher__icon:focus,
-.svc-switcher__icon:hover:focus,
+.svc-switcher__icon:hover:focus {
+  .svc-switcher__icon-thumb {
+    background: var(--sjs2-color-component-toggle-false-focused-thumb, rgba(28 27 32 / 0.6));
+  }
+}
+
 .svc-switcher__icon--checked:focus {
   .svc-switcher__icon-thumb {
-    background: var(--ctr-property-grid-switcher-toggle-button-thumb-color-focused, var(--sjs-primary-background-500, #19b394ff));
+    background: var(--sjs2-color-component-toggle-true-focused-thumb, #19B394);
   }
 }

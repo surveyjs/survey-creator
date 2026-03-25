@@ -120,7 +120,7 @@
     var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
   box-sizing: border-box;
   border: none;
-  color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
+  color: var(--sjs2-color-fg-brand-primary, #19B394);
   border-radius: var(--sjs2-radius-control-action-icon, 8px);
   background: var(--sjs2-color-bg-neutral-tertiary, rgba(28, 27, 32, 0));
   cursor: pointer;
@@ -137,7 +137,7 @@
     background: var(--sjs2-color-bg-neutral-tertiary-dim, rgba(28, 27, 32, 0.05));
 
     use {
-      fill: var(--ctr-actionbar-button-icon-color-hovered, var(--sjs-layer-1-foreground-75, #000000bf));
+      fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
     }
   }
   &:disabled {
@@ -152,7 +152,7 @@
   display: block;
 
   use {
-    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
     transition: fill $creator-transition-duration;
   }
 }
@@ -169,17 +169,14 @@
 }
 
 .sps-action-button--danger {
-  color: var(--ctr-library-action-button-text-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
+  color: var(--sjs2-color-fg-alert-primary, #C30935);
 
   &:hover,
   &:focus {
-    background-color: var(
-      --ctr-library-action-button-background-color-negative-hovered,
-      var(--sjs-semantic-red-background-10, #e50a3e1a)
-    );
+    background-color: var(--sjs2-color-bg-alert-secondary, rgba(229 10 62 / 0.1));
 
     use {
-      fill: var(--ctr-library-action-button-icon-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
+      fill: var(--sjs2-color-fg-alert-primary, #C30935);
     }
   }
 }

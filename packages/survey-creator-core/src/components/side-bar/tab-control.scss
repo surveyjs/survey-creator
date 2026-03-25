@@ -6,8 +6,8 @@
   justify-content: space-between;
   align-items: flex-start;
   border-inline-start: var(--ctr-property-grid-tabs-border-width, var(--sjs-stroke-x1)) solid
-    var(--ctr-property-grid-tabs-border-color, var(--sjs-border-25, #d4d4d4ff));
-  background: var(--ctr-property-grid-tabs-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    var(--sjs2-color-component-input-default-line, #D4D4D4);
+  background: var(--sjs2-color-bg-basic-primary, #fff);
   box-sizing: border-box;
 }
 .svc-sidebar-tabs__top-container {
@@ -53,7 +53,7 @@
 
   & > div {
     height: var(--ctr-separator-width, var(--sjs-size-x0125));
-    background: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
+    background: var(--sjs2-color-component-input-default-line, #D4D4D4);
     width: 100%;
   }
 }
@@ -77,10 +77,10 @@
   align-items: center;
   gap: var(--ctr-menu-toolbar-button-gap, var(--sjs-spacing-x1));
   border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
-  background: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
+  background: var(--sjs2-color-bg-brand-secondary, rgba(25 179 148 / 0.1));
 
   use {
-    fill: var(--ctr-menu-toolbar-button-icon-color-selected, var(--sjs-primary-background-500, #19b394ff));
+    fill: var(--sjs2-color-fg-brand-primary, #19B394);
   }
 }
 
@@ -117,9 +117,9 @@
   flex: 1 0 0;
   align-self: stretch;
 
-  background: var(--ctr-property-grid-header-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
   box-shadow: inset 0px calc(-1 * var(--ctr-property-grid-header-border-width-bottom, var(--sjs-stroke-x2))) 0px
-    var(--ctr-property-grid-header-border-color, var(--sjs-primary-background-500, #19b394ff));
+    var(--sjs2-color-fg-brand-primary, #19B394);
   box-sizing: border-box;
   width: 100%;
 }
@@ -168,18 +168,18 @@
 .svc-menu-action__button:hover,
 .svc-menu-action__button:focus,
 .svc-menu-action__button:focus-within {
-  background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+  background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
   outline: unset;
 }
 .svc-menu-action__button.svc-menu-action__button--pressed {
   opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-  background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+  background: var(--sjs2-color-bg-basic-secondary, #F5F5F5);
 }
 .svc-menu-action__button.svc-menu-action__button--disabled {
   pointer-events: none;
   use {
     opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.25);
-    fill: var(--ctr-toolbox-item-icon-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
+    fill: var(--sjs2-color-fg-basic-primary-disabled, rgba(28 27 32 / 0.4));
   }
 }
 .svc-menu-action__button.svc-menu-action__button--with-subtitle {
@@ -203,7 +203,7 @@
   }
 
   use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
   }
 }
 .svc-sidebar__header-caption {
@@ -214,11 +214,11 @@
 }
 .svc-sidebar__header-title {
   @include ctrDefaultFont;
-  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-component-input-default-value, #1C1B20);
   display: inline-block;
 }
 .svc-sidebar__header-subtitle {
   @include ctrSmallFont;
-  color: var(--ctr-menu-toolbar-button-text-color-secondary, var(--sjs-layer-1-foreground-50, #00000080));
+  color: var(--sjs2-color-component-input-default-label, rgba(28 27 32 / 0.6));
   display: inline-block;
 }

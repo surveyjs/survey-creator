@@ -22,7 +22,7 @@
   position: relative;
   width: 100%;
   border-inline-end: 1px solid transparent;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary, #fff);
   box-sizing: border-box;
   height: 0;
   flex-grow: 1;
@@ -40,7 +40,7 @@
 
 .spg-root-modern.spg-root--one-category {
   border-inline-end: unset;
-  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-bg-basic-primary, #fff);
 
   .spg-page.spg-body__page {
     box-shadow: unset;
@@ -162,7 +162,7 @@
     }
 
     svg {
-      fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+      fill: var(--sjs2-color-component-input-default-icon, rgba(28 27 32 / 0.4));
     }
   }
 }

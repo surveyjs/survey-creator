@@ -74,7 +74,7 @@
 
 .svc-row__drop-indicator {
   position: absolute;
-  background: var(--ctr-survey-drop-indicator-color, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--sjs2-color-bg-brand-primary, #19B394);
   opacity: 0;
   transition: opacity $creator-transition-duration;
 }
