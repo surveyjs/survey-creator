@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector } from "./helper";
+import { urlCreatorThemes, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector } from "./helper";
 
 const title = "Theme settings";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${url.replace(/\/testcafe$/, "/creator-themes")}`);
+    await page.goto(urlCreatorThemes);
   });
   test("Check creator themes", async ({ page }) => {
     await page.setViewportSize({ width: 2000, height: 2000 });

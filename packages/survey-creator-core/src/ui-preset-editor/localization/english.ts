@@ -193,6 +193,7 @@ export const enStrings = {
     completeText: "Save & Exit",
     pagePrevText: "Back",
     required: "Please enter a value.",
+    protectedPresetName: "This name is reserved for a built-in preset. Please choose a different name.",
   },
   plugin: {
     buttonTitle: "UI Preset Editor",
@@ -208,6 +209,7 @@ export const enStrings = {
     cancel: "Cancel",
     saveAs: "Save as...",
     saveAsTitle: "Save current preset as...",
+    createNewPreset: "Create \"{0}\" preset",
     quit: "Quit",
     quitConfirmation: "Return to Survey Creator?",
     quitConfirmationMessage: "You will lose all unsaved changes.",

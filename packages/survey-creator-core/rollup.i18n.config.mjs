@@ -36,12 +36,14 @@ export default () => {
       dir: resolve(buildPath, "fesm"),
       external: ["survey-creator-core"],
       tsconfig: resolve(__dirname, "tsconfig.i18n.json"),
+      sourceMap: false,
       version: pkg.version,
       useEsbuild: true
     }),
     ...Object.entries(inputs).map(([name, path]) => createUmdConfig({
       input: { [name]: path },
       tsconfig: resolve(__dirname, "tsconfig.i18n.json"),
+      sourceMap: false,
       external: ["survey-creator-core"],
       dir: resolve(buildPath),
       emitMinified: process.env.emitMinified === "true",

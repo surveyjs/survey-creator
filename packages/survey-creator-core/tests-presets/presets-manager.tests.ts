@@ -29,8 +29,9 @@ describe("PresetsManager", () => {
     PredefinedCreatorPresets.length = 0;
 
     mockPresetsList = {
-      setItems: jest.fn() as any,
+      setItems: jest.fn((items: any[]) => { (mockPresetsList as any).actions = items; }) as any,
       selectedItem: null,
+      actions: [] as any,
       onItemClick: jest.fn(),
       getActionById: jest.fn()
     } as any;
@@ -291,13 +292,10 @@ describe("PresetsManager", () => {
       expect(saveCallback).toHaveBeenCalledWith(newName);
     });
 
-    test("should call onItemClick for new preset", () => {
+    test("should select new preset after saveAs", () => {
       const json = {};
       const saveCallback = jest.fn();
       const newName = "clickedPreset";
-
-      const mockAction = { id: newName } as IAction;
-      (manager.presetsList.getActionById as jest.Mock).mockReturnValue(mockAction);
 
       mockShowDialog.mockImplementation((options) => {
         return { dispose: jest.fn() };
@@ -310,7 +308,9 @@ describe("PresetsManager", () => {
       survey.setValue("presetName", newName);
       dialogOptions.onApply();
 
-      expect(manager.presetsList.onItemClick).toHaveBeenCalledWith(mockAction);
+      expect(mockPresetsList.selectedItem).toBeDefined();
+      expect(mockPresetsList.selectedItem!.id).toBe(newName);
+      expect(mockSelectPresetCallback).toHaveBeenCalledWith(CreatorPresets[newName]);
     });
 
     test("should overwrite existing preset when name already exists", () => {
@@ -321,9 +321,6 @@ describe("PresetsManager", () => {
 
       // Prepare existing custom preset so it is present in the manager's custom list.
       manager.addPreset({ name: presetName, json: initialJson });
-
-      const mockAction = { id: presetName } as IAction;
-      (manager.presetsList.getActionById as jest.Mock).mockReturnValue(mockAction);
 
       mockShowDialog.mockImplementation((options) => {
         return { dispose: jest.fn() };
@@ -340,7 +337,9 @@ describe("PresetsManager", () => {
       expect(CreatorPresets[presetName]).toBeDefined();
       expect(CreatorPresets[presetName].json).toEqual(updatedJson);
       expect(saveCallback).toHaveBeenCalledWith(presetName);
-      expect(manager.presetsList.onItemClick).toHaveBeenCalledWith(mockAction);
+      expect(mockPresetsList.selectedItem).toBeDefined();
+      expect(mockPresetsList.selectedItem!.id).toBe(presetName);
+      expect(mockSelectPresetCallback).toHaveBeenCalledWith(CreatorPresets[presetName]);
 
       const occurrences = manager.getPresetsArray().filter(p => p.name === presetName).length;
       expect(occurrences).toBe(1);
@@ -1066,6 +1065,86 @@ describe("PresetsManager", () => {
       expect(dialogOptions.title).toBe(getLocString("presets.plugin.addNewPreset"));
       expect(dialogOptions.cssClass).toBe("sps-popup sps-popup--level2 svc-property-editor svc-creator-popup");
       expect(dialogOptions.displayMode).toBe("popup");
+    });
+  });
+
+  describe("Protected preset name validation", () => {
+    beforeEach(() => {
+      PredefinedCreatorPresets.push("basic", "advanced");
+      CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
+      CreatorPresets["advanced"] = { name: "advanced", json: {}, visible: true };
+    });
+
+    test("saveAs should reject a predefined preset name", () => {
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      manager.saveAs({}, jest.fn());
+
+      const survey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      survey.setValue("presetName", "basic");
+
+      expect(onApplyCallback!()).toBe(false);
+    });
+
+    test("saveAs should allow a non-predefined name", () => {
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      manager.saveAs({}, jest.fn());
+
+      const survey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      survey.setValue("presetName", "myCustomPreset");
+
+      expect(onApplyCallback!()).toBe(true);
+    });
+
+    test("addNewPreset dialog should reject a predefined preset name", () => {
+      const survey = new SurveyModel({ pages: [{ name: "page1", elements: [] }] });
+      manager.addPresetsListEditor(survey);
+      const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
+
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      survey.onMatrixRowAdding.fire(survey, { question: matrixQuestion, allow: true, canAddRow: true } as any);
+
+      const addSurvey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      addSurvey.setValue("presetName", "advanced");
+      addSurvey.setValue("template", "basic");
+
+      expect(onApplyCallback!()).toBe(false);
+      expect(CreatorPresets["advanced"].json).toEqual({});
+    });
+
+    test("addNewPreset dialog should allow a non-predefined name", () => {
+      const survey = new SurveyModel({ pages: [{ name: "page1", elements: [] }] });
+      manager.addPresetsListEditor(survey);
+      const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
+
+      let onApplyCallback: (() => boolean) | undefined;
+      mockShowDialog.mockImplementation((options) => {
+        onApplyCallback = options.onApply;
+        return { dispose: jest.fn() };
+      });
+
+      survey.onMatrixRowAdding.fire(survey, { question: matrixQuestion, allow: true, canAddRow: true } as any);
+
+      const addSurvey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
+      addSurvey.setValue("presetName", "brandNewPreset");
+      addSurvey.setValue("template", "basic");
+
+      expect(onApplyCallback!()).toBe(true);
+      expect(CreatorPresets["brandNewPreset"]).toBeDefined();
     });
   });
 

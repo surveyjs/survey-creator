@@ -47,7 +47,6 @@ import Color from "./custom-questions/Color.vue";
 import ColorItem from "./custom-questions/ColorItem.vue";
 import File from "./custom-questions/File.vue";
 import SpinEditor from "./custom-questions/SpinEditor.vue";
-import TextWithReset from "./custom-questions/TextWithReset.vue";
 import BooleanSwitch from "./custom-questions/BooleanSwitch.vue";
 import { editableStringRendererName } from "survey-creator-core";
 
@@ -130,8 +129,6 @@ function registerComponents(
   registerComponent("sv-boolean-switch", BooleanSwitch);
   registerComponent("survey-fileedit", File);
   registerComponent("survey-spinedit", SpinEditor);
-  registerComponent("survey-textwithreset", TextWithReset);
-  registerComponent("survey-commentwithreset", TextWithReset);
   registerComponent("survey-widget", SurveyComponent);
   registerComponent("survey-simulator", Simulator);
   registerComponent("svc-tab-preview", Test);

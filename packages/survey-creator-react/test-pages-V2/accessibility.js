@@ -5,7 +5,7 @@ import { ClientFunction } from "testcafe";
 import { axeCheck, createReport } from "axe-testcafe";
 
 fixture`TestCafe tests with Axe`
-  .page`http://127.0.0.1:8080/testCafe/testcafe.html`;
+  .page`http://127.0.0.1:8080/test-pages/default.html`;
 
 const getDataFromClient = ClientFunction(() => { return {}; });
 

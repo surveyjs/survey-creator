@@ -82,7 +82,11 @@
         height: var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3));
     }
 }
-
+.spg-question__content {
+    .sd-formbox--readonly .sd-dropdown__input {
+        opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+    }
+}
 .spg-dropdown.sd-input--disabled {
     opacity: 1;
 

@@ -191,9 +191,7 @@ test.describe(title, () => {
 
     await requiredActionButton.hover();
     await requiredActionButton.click();
-    await page.waitForTimeout(500);
-    titleText = await questionTitle.innerText();
-    expect(normalize(titleText)).toBe("question1 *");
+    await expect(questionTitle).toHaveText(/question1\s+\*/, { timeout: 3000 });
     await expect(requiredActionButton).toHaveClass(/svc-survey-element-toolbar__item--active/);
   });
 
@@ -357,7 +355,7 @@ test.describe(title + " dropdown collapse", () => {
     const questions = page.locator(".svc-question__content");
     const choicesTabTitle = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Choice Options", { exact: true });
     const generalTabTitle = page.locator("div[id$=ariaTitle][id^=sp]").getByText(generalGroupName, { exact: true });
-    const carryForwardEditor = page.locator("div[data-name='choicesFromQuestion'] .spg-dropdown");
+    const carryForwardEditor = page.locator("div[data-name='choicesFromQuestion'] .sd-dropdown");
 
     await expect(questions).toHaveCount(0);
     await getToolboxItemByText(page, "Checkboxes").hover();

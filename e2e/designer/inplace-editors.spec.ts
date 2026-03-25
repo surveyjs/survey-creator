@@ -816,11 +816,11 @@ test.describe(title, () => {
     await page.locator(".sd-table__row .svc-matrix-cell .sv-string-editor").first().click();
     await page.locator(".sd-table__row .svc-matrix-cell .sv-string-editor").first().pressSequentially("Row header");
     await page.locator("div[id$=ariaTitle][id^=sp].spg-title").first().click();
-    await page.locator("input.spg-input").first().click();
+    await page.locator("input.sd-formbox__input").first().click();
     await page.keyboard.press("Control+a");
     await page.keyboard.press("Delete");
     await page.keyboard.type("300px");
-    await expect(page.locator("input.spg-input").first()).toHaveValue("300px");
+    await expect(page.locator("input.sd-formbox__input").first()).toHaveValue("300px");
   });
 
   test("Checkbox question inplace editor - keyboard navigation", async ({ page }) => {

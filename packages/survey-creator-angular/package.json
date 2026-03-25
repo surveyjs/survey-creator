@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "description": "A white-label drag-and-drop form builder for Angular that lets you design complex, interactive forms and surveys without writing code. It generates JSON schemas used by the SurveyJS Form Library to render dynamic forms in your Angular app.",
   "author": "DevSoft Baltic OU <info@devsoftbaltic.com>",
   "homepage": "https://surveyjs.io/",
@@ -106,8 +106,6 @@
     "serve:example:prod": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint ./ --max-warnings=0 --fix",
-    "testcafe": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --env=angular --config-file .testcaferc.dev.js",
-    "testcafe:ci": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "test": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng test survey-creator-angular",
     "test:single": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\" ",

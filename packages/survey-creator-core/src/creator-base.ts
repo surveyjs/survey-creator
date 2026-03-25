@@ -2788,7 +2788,8 @@ export class SurveyCreatorModel extends Base
     area = area || this.getSurveyInstanceCreatedArea(reason);
     const element = area === "property-grid" && model ? model.obj : undefined;
     const survey = this.createSurveyCore(json, area, element);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
+    if (["designer", "preview", "theme", "property-grid", "theme-tab:property-grid",
+      "designer-tab:creator-settings:theme", "designer-tab:creator-settings:preset"].indexOf(reason) < 0) {
       survey.fitToContainer = false;
       survey.applyTheme({ cssVariables: this.defaultSurfaceCssVariables });
       survey.gridLayoutEnabled = false;
@@ -3449,8 +3450,17 @@ export class SurveyCreatorModel extends Base
               if (!!isNeedScroll) {
                 const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
                 if (!!elementPage) {
-                  this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement, () => {
-                    this.ensurePagesVisibility();
+                  this.survey.scrollElementToTop({
+                    element: selEl,
+                    question: undefined,
+                    page: elementPage,
+                    id: selEl.id,
+                    scrollIfVisible: true,
+                    scrollIntoViewOptions: scrollIntoViewOptions,
+                    passedRootElement: this.rootElement,
+                    onScolledCallback: () => {
+                      this.ensurePagesVisibility();
+                    }
                   });
                 } else {
                   SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
@@ -3654,7 +3664,7 @@ export class SurveyCreatorModel extends Base
       }
       if (!!propertyName) {
         this.sidebar.executeOnExpand(() => {
-          this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+          this.designerPropertyGrid.selectProperty(propertyName, focus && !this.selectFromStringEditor);
         });
       }
       this.expandCategoryIfNeeded();

@@ -247,7 +247,7 @@ test.describe(title, () => {
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-condition-question-value.png");
 
-    await page.fill(".sd-input.sd-input--error", "test");
+    await page.fill(".sd-formbox.sd-formbox--error .sd-formbox__input", "test");
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-action-empty.png");

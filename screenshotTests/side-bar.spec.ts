@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -116,8 +116,7 @@ test.describe(title, () => {
   });
 
   test("tabbed mode", async ({ page }) => {
-    const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
-    await page.goto(themeTabUrl);
+    await page.goto(urlThemeTab);
 
     await page.setViewportSize({ width: 1920, height: 1200 });
     await page.evaluate(() => {
@@ -143,8 +142,7 @@ test.describe(title, () => {
   });
 
   test("boolean switch", async ({ page }) => {
-    const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
-    await page.goto(themeTabUrl);
+    await page.goto(urlThemeTab);
 
     await page.setViewportSize({ width: 1920, height: 1200 });
     await page.evaluate(() => {
@@ -182,7 +180,7 @@ test.describe(title, () => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     });
     await page.locator(".sv-action--svd-settings").click();
-    await page.locator(".spg-question[data-name='locale'] .spg-dropdown").locator(".sd-editor-chevron-button").click();
+    await page.locator(".spg-question[data-name='locale'] .sd-dropdown").locator(".sd-editor-chevron-button").click();
     await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
     await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");
   });

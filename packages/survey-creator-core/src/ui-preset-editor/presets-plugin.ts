@@ -127,8 +127,10 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.onPresetListSaved.fire(this, { presets });
     };
     this.presetsManager.selectPresetCallback = (preset: IPreset) => {
-      this.model.json = preset.json;
-      this.setStatus("initial");
+      if (this.model) {
+        this.model.json = preset.json;
+        this.setStatus("initial");
+      }
     };
     this.creator.onSurveyInstanceCreated.add((_, o) => {
       if (o.area == "designer-tab:creator-settings:preset") {
@@ -244,7 +246,7 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.designerPlugin.activateSidebar();
 
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
-    const presets = this.model?.model.pages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
+    const presets = this.model?.model.visiblePages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
 
     this.model.model.onComplete.add(() => this.hidePresets());
     const defaultPresets = this.presetsManager.presetsMenuItems;

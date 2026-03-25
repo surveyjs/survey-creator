@@ -133,14 +133,13 @@
   display: flex;
   flex-direction: column;
 
-  .sps-question__content,
-  sv-ng-question-comment {
+  .sd-question__content,
+  sv-ng-question-comment,
+  .sd-comment,
+  .sd-comment__input {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-  }
-  .sps-comment {
-    flex-grow: 1;
   }
 }
 

@@ -53,16 +53,22 @@ export class PresetsManager {
     });
   }
 
+  private selectPreset(presetName: string) {
+    this.confirmSwitchPreset(() => {
+      if (this.presetsList && this.presetsList.actions) {
+        this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
+        this.presetsList.onSelectionChanged?.(this.presetsList.selectedItem as any);
+      }
+      this.selectPresetCallback?.(CreatorPresets[presetName]);
+    });
+  }
   private presetListToItems(presets: string[]) {
     return presets
       .filter(presetName => CreatorPresets[presetName].visible !== false)
       .map(presetName => ({
-        id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
-          this.confirmSwitchPreset(() => {
-            this.presetsList.selectedItem = item;
-            this.selectPresetCallback?.(CreatorPresets[presetName]);
-          });
-        }
+        id: presetName,
+        title: this.getPresetTitle(presetName),
+        action: () => this.selectPreset(presetName)
       })) as IAction[];
   }
   private get presetsMenuItems(): IAction[] {
@@ -77,6 +83,10 @@ export class PresetsManager {
 
     return [...defaultPresets, ...customPresets, editItem];
   }
+  private isProtectedPresetName(name: string): boolean {
+    return PredefinedCreatorPresets.indexOf(name) !== -1;
+  }
+
   private setPresetNewName(onSet: (newName: string) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
@@ -90,11 +100,17 @@ export class PresetsManager {
         choices: this.customPresets.map(i => ({ value: i, text: i })),
         titleLocation: "hidden",
         requiredErrorText: getLocString("presets.editor.required"),
+        createCustomChoiceText: getLocString("presets.plugin.createNewPreset"),
         isRequired: true
       }]
     });
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
+    survey.onValidateQuestion.add((sender, options) => {
+      if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
+        options.error = getLocString("presets.editor.protectedPresetName");
+      }
+    });
 
     const popupModel = settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
@@ -143,10 +159,7 @@ export class PresetsManager {
     this.updateMenu();
     const selectedId = this.presetsList?.selectedItem?.id;
     if (selectedId && renamedPresets[selectedId]) {
-      const action = this.presetsList?.getActionById?.(renamedPresets[selectedId]);
-      if (action) {
-        this.presetsList.onItemClick(action);
-      }
+      this.selectPreset(renamedPresets[selectedId]);
     }
     this.ensureSelectedPresetAvailable();
   }
@@ -157,10 +170,7 @@ export class PresetsManager {
     if (visibleNames.indexOf(current) >= 0) return;
     const fallback = visibleNames[0];
     if (!fallback || !CreatorPresets[fallback]) return;
-    const action = this.presetsList?.getActionById?.(fallback);
-    if (action) {
-      this.presetsList.onItemClick(action);
-    }
+    this.selectPreset(fallback);
   }
 
   private rebuildPresetsArray() {
@@ -297,6 +307,11 @@ export class PresetsManager {
           ...propertyGridCss.buttongroup,
         }
       };
+      addSurvey.onValidateQuestion.add((sender, options) => {
+        if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
+          options.error = getLocString("presets.editor.protectedPresetName");
+        }
+      });
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: addSurvey, model: addSurvey },
@@ -375,7 +390,9 @@ export class PresetsManager {
 
   private updateMenu() {
     this.presetsList?.setItems(this.presetsMenuItems);
-    if (this.presetSelector)this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
+    if (this.presetSelector) {
+      this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
+    }
   }
 
   public update() {
@@ -395,8 +412,9 @@ export class PresetsManager {
   public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
       this.addPreset({ name: newName, json: json });
+      this.unsaved = false;
+      this.selectPreset(newName);
       saveCallback(newName);
-      this.presetsList.onItemClick(this.presetsList.getActionById(newName));
     });
   }
 

@@ -195,6 +195,63 @@ test("Create the property grid survey on request", () => {
   expect(model.survey).toBeTruthy();
 });
 
+test("Panel stay focused on question change - Bug#7547", () => {
+  const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "checkbox",
+            name: "question1",
+            title: "question1",
+            choices: ["Item 1", "Item 2", "Item 3"]
+          },
+          {
+            type: "checkbox",
+            name: "question2",
+            title: "question2",
+            choices: ["Item 1", "Item 2", "Item 3"]
+          }
+        ]
+      }
+    ]
+  };
+
+  const question1 = creator.survey.getQuestionByName("question1");
+  const question2 = creator.survey.getQuestionByName("question2");
+  const propertyGrid = creator["designerPropertyGrid"];
+
+  // Select question1 and open the Layout category
+  creator.selectElement(question1);
+  propertyGrid.selectProperty("startWithNewLine", true);
+  const layoutPanel = <PanelModel>propertyGrid.survey.getPanelByName("layout");
+  expect(layoutPanel.isExpanded).toBeTruthy();
+
+  // Select question2 - Layout should stay expanded
+  propertyGrid.currentlySelectedProperty = "startWithNewLine";
+  creator.selectElement(question2);
+  const layoutPanel2 = <PanelModel>propertyGrid.survey.getPanelByName("layout");
+  expect(layoutPanel2.isExpanded).toBeTruthy();
+
+  // Focus on width property in the Layout panel (simulates clicking an input in the Layout category)
+  // In the real app, focusing a sub-property like "minWidth" sets currentlySelectedProperty to "minWidth"
+  // which doesn't exist as a top-level question in the property grid.
+  // onFocusInQuestion also sets currentlySelectedPanel to the Layout panel.
+  // The property grid should still preserve the expanded category (Layout) when switching elements.
+  propertyGrid.currentlySelectedProperty = "minWidth";
+  propertyGrid.currentlySelectedPanel = <PanelModel>propertyGrid.survey.getPanelByName("layout");
+
+  // Switch back to question1 - Layout should remain expanded
+  creator.selectElement(question1);
+  const layoutPanel1 = <PanelModel>propertyGrid.survey.getPanelByName("layout");
+  const generalPanel1 = <PanelModel>propertyGrid.survey.getPanelByName("general");
+  expect(layoutPanel1.isExpanded).toBeTruthy();
+  expect(generalPanel1.isExpanded).toBeFalsy();
+});
+
 test("Object selector's title should be leaved unchanged when changing question's name - Bug#6699", () => {
   const creator = new CreatorTester();
   creator.JSON = {

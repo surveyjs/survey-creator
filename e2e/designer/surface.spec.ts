@@ -413,7 +413,7 @@ test.describe(title, () => {
 
     const questionContentClass = "svc-question__content";
     const questionContent = page.locator(`[data-sv-drop-target-survey-element=${qName}]`).locator(`.${questionContentClass}`);
-    const questionInput = questionContent.locator(".sd-input:disabled");
+    const questionInput = questionContent.locator(".sd-formbox__input:disabled");
 
     await questionInput.click({ force: true });
     await expect(questionContent).toHaveClass(/svc-question__content--selected/);
@@ -426,7 +426,7 @@ test.describe(title, () => {
 
     const questionContentClass = "svc-question__content";
     const questionContent = page.locator(`[data-sv-drop-target-survey-element=${qName}]`).locator(`.${questionContentClass}`);
-    const questionInput = questionContent.locator(".sd-input:disabled");
+    const questionInput = questionContent.locator(".sd-formbox__input:disabled");
 
     await questionInput.click({ force: true });
     await expect(questionContent).toHaveClass(/svc-question__content--selected/);

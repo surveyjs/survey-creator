@@ -30,7 +30,7 @@ test.describe(title, () => {
     });
     await page.waitForTimeout(1000);
 
-    await page.click(".sd-question");
+    await page.click(".svc-question__content");
     await getPropertyGridCategory(page, "Items").click();
     await resetFocusToBody(page);
     await compareScreenshot(page, page.locator(".svc-side-bar .spg-panel").nth(1), "multiple-text-items.png");

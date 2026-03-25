@@ -14,17 +14,17 @@ import { CreatorThemesComponent } from "./test/creator-themes.component";
 import { ExampleComponent } from "./example.component";
 
 const routes = [
-  { path: "testCafe/testcafe", component: TestDefaultComponent },
-  { path: "testCafe/preview-theme-switcher", component: TestThemeSwitcherComponent },
-  { path: "testCafe/theme-for-preview-option", component: ThemePreviewComponent },
-  { path: "testCafe/by-page", component: TestByPageComponent },
-  { path: "testCafe/testcafe-widget", component: TestCustomWidgetComponent },
-  { path: "testCafe/testcafe_localized_ui", component: TestLocalizationComponent },
-  { path: "testCafe/dropdown-collapse-view", component: TestDropdownCollapseComponent },
-  { path: "testCafe/testcafe-theme-tab", component: ThemeTabComponent },
-  { path: "testCafe/testcafe-no-license", component: NoLicenseComponent },
-  { path: "testCafe/presets", component: PresetsComponent },
-  { path: "testCafe/creator-themes", component: CreatorThemesComponent }, 
+  { path: "test-pages/default", component: TestDefaultComponent },
+  { path: "test-pages/preview-theme-switcher", component: TestThemeSwitcherComponent },
+  { path: "test-pages/theme-for-preview-option", component: ThemePreviewComponent },
+  { path: "test-pages/by-page", component: TestByPageComponent },
+  { path: "test-pages/widget", component: TestCustomWidgetComponent },
+  { path: "test-pages/localized_ui", component: TestLocalizationComponent },
+  { path: "test-pages/dropdown-collapse-view", component: TestDropdownCollapseComponent },
+  { path: "test-pages/theme-tab", component: ThemeTabComponent },
+  { path: "test-pages/no-license", component: NoLicenseComponent },
+  { path: "test-pages/presets", component: PresetsComponent },
+  { path: "test-pages/creator-themes", component: CreatorThemesComponent }, 
   { path: "", component: ExampleComponent }
 ];
 
