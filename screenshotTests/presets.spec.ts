@@ -54,7 +54,7 @@ test.describe(title, () => {
     await page.getByText("Manage Presets", { exact: true }).click();
     await page.waitForTimeout(300);
     await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
-    await page.getByText("Add new preset...").click();
+    await page.getByText("Add new preset").click();
     await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "presets-select-dialog.png");
   });
 

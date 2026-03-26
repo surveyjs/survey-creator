@@ -138,7 +138,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         action: () => {
           const newCatRow = this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
           this.editItem(model, null, categoriesQuestion, newCatRow, {
-            description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+            description: this.getCreatePopupTitle(model, categoriesQuestion),
             isNew: true
           });
         }
@@ -242,6 +242,18 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
     return generalCategory;
   }
+  protected getEditPopupTitle(question: QuestionMatrixDynamicModel): string {
+    if (question.name === this.nameCategories) {
+      return getLocString("presets." + this.path + ".editCategoryTitle");
+    }
+    return super.getEditPopupTitle(question);
+  }
+  protected getCreatePopupTitle(model: SurveyModel, question: QuestionMatrixDynamicModel): string {
+    if (question.name === this.nameCategories) {
+      return getLocString("presets." + this.path + ".createCategoryTitle");
+    }
+    return super.getCreatePopupTitle(model, question);
+  }
   protected needToSetActions(name: string) {
     return this.isItemsMatrix(name) || name === this.nameCategories;
   }
@@ -282,7 +294,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (options.question.name == this.nameCategories) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+        description: this.getCreatePopupTitle(model, options.question),
         isNew: true
       });
     }
