@@ -213,7 +213,7 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private initializeColorCalculator(cssVariables: { [index: string]: string }) {
-    const baseColorName = "--sjs2-color-bg-brand-primary";
+    const baseColorName = "--sjs2-color-project-brand-600";
     const cssValuesExists = this.dependentColorNames.every(name => !!cssVariables[name]);
     if (!cssVariables[baseColorName] || !cssValuesExists) {
       return;
@@ -235,10 +235,10 @@ export class ThemeModel extends Base implements ITheme {
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     let nameProcessed = true;
     if (name === "primaryColor") {
-      this.setPropertyValue("--sjs2-color-bg-brand-primary", value);
-      this.setThemeCssVariablesChanges("--sjs2-color-bg-brand-primary", value);
+      this.setPropertyValue("--sjs2-color-project-brand-600", value);
+      this.setThemeCssVariablesChanges("--sjs2-color-project-brand-600", value);
       this.updatePropertiesDependentOnPrimaryColor(value);
-    } else if (name === "--sjs2-color-bg-brand-primary") {
+    } else if (name === "--sjs2-color-project-brand-600") {
       this["primaryColor"] = value;
       this.updatePropertiesDependentOnPrimaryColor(value);
     } else if (name == "scale") {
@@ -551,7 +551,7 @@ export class ThemeModel extends Base implements ITheme {
 
     if (json.cssVariables) {
       patchLegacyCSSVariables(json.cssVariables);
-      this["primaryColor"] = json.cssVariables["--sjs2-color-bg-brand-primary"];
+      this["primaryColor"] = json.cssVariables["--sjs2-color-project-brand-600"];
       super.fromJSON(json.cssVariables, options);
       this.header.setCssVariables(json.cssVariables);
 
@@ -979,7 +979,7 @@ Serializer.addProperties("theme",
   },
   {
     type: "coloralpha",
-    name: "--sjs2-color-bg-brand-primary",
+    name: "--sjs2-color-project-brand-600",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.colorTitle = getLocString("theme.primaryDefaultColor");

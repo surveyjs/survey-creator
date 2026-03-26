@@ -306,7 +306,7 @@ test("header custom background color and theme changes", (): any => {
   let header = themeModel.header as HeaderModel;
   let propertyGridSurvey = themePlugin.propertyGrid.survey;
   let themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
 
   expect(themeChooser.value).toEqual("default");
   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
@@ -324,7 +324,7 @@ test("header custom background color and theme changes", (): any => {
   creator.activeTab = "theme";
   propertyGridSurvey = themePlugin.propertyGrid.survey;
   themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-  primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
 
   expect(themeModel.themeCssCustomizations["--sjs2-color-component-header-default-bg"]).toBe("#ff0000");
   expect(themeChooser.value).toEqual("default");
@@ -345,7 +345,7 @@ test("header custom background color and theme changes", (): any => {
   creator.activeTab = "theme";
   propertyGridSurvey = themePlugin.propertyGrid.survey;
   themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-  primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
 
   expect(themeChooser.value).toEqual("contrast");
   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
