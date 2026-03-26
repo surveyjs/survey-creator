@@ -1,11 +1,10 @@
 import { test } from "@playwright/test";
 import { injectAxe, checkA11y } from "axe-playwright";
-import { axeOptions, creatorTabLogicName, getTabbedMenuItemByText, setJSON, updateCreatorModel, url, waitForCreatorShadowStyles } from "./helper";
+import { axeOptions, creatorTabLogicName, getTabbedMenuItemByText, setJSON, updateCreatorModel, url } from "./helper";
 
 test.describe("logic a11y", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
-    await waitForCreatorShadowStyles(page);
     await updateCreatorModel(page, { showLogicTab: true });
     await injectAxe(page);
     await page.setViewportSize({ width: 1920, height: 1080 });
