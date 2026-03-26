@@ -210,6 +210,8 @@ export var propertyGridCss = {
     controlReadOnly: "sd-input--disabled sd-input--readonly"
   },
   tagbox: {
+    popup: "spg-dropdown-popup svc-creator-popup",
+    filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
     cleanItemButton: "sd-tagbox-item_clean-button spg-tagbox-item_clean-button",
     cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg spg-tagbox-item_clean-button-svg",
     control: "sd-input sd-tagbox sd-dropdown spg-tagbox spg-dropdown",
