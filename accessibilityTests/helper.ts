@@ -12,6 +12,30 @@ export const creatorTabJSONName = "JSON Editor";
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Themes") {
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text);
 }
+
+export async function waitForCreatorShadowStyles(page: Page) {
+  await page.waitForFunction(() => {
+    const container = document.getElementById("survey-creator");
+    const shadowRoot = container && container.shadowRoot;
+    if (!shadowRoot) return false;
+
+    const surveyCoreLink = shadowRoot.querySelector("link[href*='survey-core.min.css']") as HTMLLinkElement | null;
+    const creatorCoreLink = shadowRoot.querySelector("link[href*='survey-creator-core.min.css']") as HTMLLinkElement | null;
+    if (!surveyCoreLink || !creatorCoreLink) return false;
+
+    const isLoaded = (link: HTMLLinkElement) => {
+      const sheet = link.sheet as CSSStyleSheet | null;
+      if (!sheet) return false;
+      try {
+        return !!sheet.cssRules;
+      } catch{
+        return false;
+      }
+    };
+
+    return isLoaded(surveyCoreLink) && isLoaded(creatorCoreLink);
+  }, { timeout: 5000 });
+}
 export async function setJSON(page: Page, json?: any) {
   await page.evaluate(([json]) => {
     (window as any).creator.JSON = json;

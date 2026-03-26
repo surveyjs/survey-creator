@@ -1,10 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { injectAxe, checkA11y } from "axe-playwright";
-import { axeOptions, setJSON, updateCreatorModel, url } from "./helper";
+import { axeOptions, setJSON, updateCreatorModel, url, waitForCreatorShadowStyles } from "./helper";
 
 test.describe("property grid a11y", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
+    await waitForCreatorShadowStyles(page);
     await updateCreatorModel(page, { showOneCategoryInPropertyGrid: true });
     await injectAxe(page);
     await page.setViewportSize({ width: 1920, height: 1080 });
@@ -19,3 +20,4 @@ test.describe("property grid a11y", () => {
     await checkA11y(page, ["#survey-creator", ".spg-page"], { axeOptions });
   });
 });
+
