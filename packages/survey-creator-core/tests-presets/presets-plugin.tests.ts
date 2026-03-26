@@ -1,6 +1,7 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
+import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 
 import { Basic } from "../src/ui-presets/basic";
 import { Advanced } from "../src/ui-presets/advanced";
@@ -157,6 +158,46 @@ test("Selecting Basic preset should update property grid on Property Grid page",
   expect(basicCategories[0].properties.map((p: any) => p.name)).toEqual(
     Basic.json.propertyGrid.definition.classes.survey.properties
   );
+
+  plugin.deactivate();
+});
+
+test("UIPresetEditor.preset should return Advanced name and unsaved edited json", () => {
+  PredefinedCreatorPresets.push("advanced");
+  CreatorPresets["advanced"] = Advanced;
+
+  const creator = new CreatorTester();
+  creator.activePresetName = "advanced";
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  const itemsQuestion = plugin.model.model.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+
+  expect(plugin.preset?.name).toBe("advanced");
+  expect(plugin.preset?.json.tabs.items.map((t: any) => t.name)).toEqual(itemsValue.map((t: any) => t.name));
+  expect(plugin.model.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
+  plugin.deactivate();
+});
+
+test("UIPresetEditor.preset should return Default configuration name and unsaved edited json", () => {
+  PredefinedCreatorPresets.push("advanced");
+  CreatorPresets["advanced"] = Advanced;
+
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  const itemsQuestion = plugin.model.model.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+
+  expect(plugin.preset?.name).toBe(PresetsManager.defaultConfigurationId);
+  expect(plugin.preset?.json.tabs.items.map((t: any) => t.name)).toEqual(itemsValue.map((t: any) => t.name));
+  expect(plugin.model.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
 
   plugin.deactivate();
 });
