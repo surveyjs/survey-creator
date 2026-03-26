@@ -255,11 +255,11 @@ test("Theme builder switch themes", (): any => {
   themeModel.initialize();
 
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
 
   themeModel.colorPalette = "dark";
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(255, 152, 20, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(255, 152, 20, 1)");
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(36, 36, 36, 1)");
 });
 
@@ -452,35 +452,35 @@ test("Keep theme css changes through the different themes choosen", (): any => {
   themeModel.initialize();
 
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toEqual("rgba(25, 179, 148, 0.1)");
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toEqual("rgba(20, 164, 139, 1)");
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
-  themeModel["--sjs2-color-bg-brand-primary"] = fefefeColor;
+  themeModel["--sjs2-color-project-brand-600"] = fefefeColor;
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual(fefefeColor);
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual(fefefeColor);
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
-    "--sjs2-color-bg-brand-primary": fefefeColor,
+    "--sjs2-color-project-brand-600": fefefeColor,
     "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
     "--sjs2-color-bg-brand-secondary": "rgba(254, 254, 254, 0.1)",
   });
 
   themeModel.colorPalette = "dark";
   expect(themeModel.colorPalette).toEqual("dark");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual(fefefeColor);
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual(fefefeColor);
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(36, 36, 36, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
-    "--sjs2-color-bg-brand-primary": fefefeColor,
+    "--sjs2-color-project-brand-600": fefefeColor,
     "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
     "--sjs2-color-bg-brand-secondary": "rgba(254, 254, 254, 0.1)",
   });
 
   themeModel.resetTheme();
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
@@ -490,7 +490,7 @@ test("Update --sjs2-color-bg-brand-secondary && --sjs2-color-bg-brand-primary-di
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["primaryColor"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toEqual("rgba(25, 179, 148, 0.1)");
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toEqual("rgba(20, 164, 139, 1)");
@@ -498,7 +498,7 @@ test("Update --sjs2-color-bg-brand-secondary && --sjs2-color-bg-brand-primary-di
 
   themeModel["primaryColor"] = fefefeColor;
   expect(themeModel.themeCssCustomizations).toStrictEqual({
-    "--sjs2-color-bg-brand-primary": fefefeColor,
+    "--sjs2-color-project-brand-600": fefefeColor,
     "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
     "--sjs2-color-bg-brand-secondary": "rgba(254, 254, 254, 0.1)",
   });
@@ -529,51 +529,51 @@ test("getThemeChanges", (): any => {
   let themeChanges = getThemeChanges({
     themeName: "default",
     cssVariables: {
-      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-project-brand-600": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("light");
   expect(themeChanges.isPanelless).toBe(false);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
-  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-project-brand-600"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
 
   themeChanges = getThemeChanges({
     cssVariables: {
-      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-project-brand-600": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("light");
   expect(themeChanges.isPanelless).toBe(false);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
-  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-project-brand-600"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
 
   themeChanges = getThemeChanges({
     themeName: "default_exported",
     cssVariables: {
-      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-project-brand-600": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("light");
   expect(themeChanges.isPanelless).toBe(false);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
-  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-project-brand-600"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
 
   themeChanges = getThemeChanges({
     themeName: "default_exported",
     colorPalette: "dark",
     isPanelless: true,
     cssVariables: {
-      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-project-brand-600": "rgba(255, 0, 0, 1)"
     }
   });
   expect(themeChanges.themeName).toBe("default");
   expect(themeChanges.colorPalette).toBe("dark");
   expect(themeChanges.isPanelless).toBe(true);
-  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-bg-brand-primary"]);
-  expect(themeChanges.cssVariables!["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-project-brand-600"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
 });
 
 test("selectTheme", (): any => {
@@ -582,14 +582,14 @@ test("selectTheme", (): any => {
 
   expect(themeModel.themeName).toEqual("default");
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(25, 179, 148, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel.selectTheme("contrast");
   expect(themeModel.themeName).toEqual("contrast");
   expect(themeModel.colorPalette).toEqual("light");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toEqual("rgba(0, 0, 0, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(0, 0, 0, 1)");
   expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(255, 216, 77, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
