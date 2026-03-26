@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/color-utils";
 import { listComponentCss } from "../components/list-theme";
 
@@ -82,7 +82,7 @@ export class QuestionColorModel extends QuestionTextModel {
       .append(this.cssClasses.swatchDisabled, this.isInputReadOnly)
       .toString();
   }
-  public getSwatchStyle(): {[index: string]: string} {
+  public getSwatchStyle(): { [index: string]: string } {
     return { backgroundColor: this.renderedValue };
   }
   public get renderedColorValue() {
@@ -95,15 +95,11 @@ export class QuestionColorModel extends QuestionTextModel {
     super.onSurveyValueChanged(newValue);
     this.updateRenderedValue();
   }
-  private _dropdownAction: Action;
-
-  public get dropdownAction (): Action {
-    if (!this._dropdownAction) {
-      this._dropdownAction = this.createDropdownAction();
-    }
-    return this._dropdownAction;
+  protected createInputActions(): Array<Action> {
+    const res = super.createInputActions();
+    res.push(this.dropdownAction);
+    return res;
   }
-
   public get choices(): Array<ItemValue> {
     return this.getPropertyValue("choices");
   }
@@ -120,12 +116,22 @@ export class QuestionColorModel extends QuestionTextModel {
     }
   }
 
-  public get showDropdownAction() {
-    return !this.isValueEmpty(this.choices);
+  private _dropdownAction: Action;
+
+  public get dropdownAction(): Action {
+    if (!this._dropdownAction) {
+      this._dropdownAction = this.createDropdownAction();
+    }
+    return this._dropdownAction;
   }
 
   public createDropdownAction(): Action {
-    const action = createDropdownActionModelAdvanced({ enabled: new ComputedUpdater<boolean>(() => !this.isInputReadOnly) as any }, {
+    const action = createDropdownActionModelAdvanced({
+      id: "chevron",
+      visible: new ComputedUpdater(() => !this.isValueEmpty(this.choices)),
+      iconName: new ComputedUpdater(() => this.cssClasses.colorDropdownIcon) as unknown as string,
+      enabled: new ComputedUpdater<boolean>(() => !this.isInputReadOnly),
+    }, {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },
@@ -143,20 +149,18 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.displayMode = IsTouch ? "overlay" : "popup";
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
-    popupModel.getTargetCallback = undefined;
+    popupModel.getTargetCallback = () => this.rootElement;
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }
-
-  protected calcCssClasses(css: any): void {
-    const classes = super.calcCssClasses(css);
-    const dropdownAction = this.dropdownAction;
-    dropdownAction.cssClasses = { item: classes.colorDropdown };
-    dropdownAction.iconName = classes.colorDropdownIcon;
-    dropdownAction.iconSize = "auto" as any;
-    return classes;
+  private rootElement: HTMLElement;
+  public afterRenderQuestionElement(el: HTMLElement): void {
+    super.afterRenderQuestionElement(el);
+    this.rootElement = el;
+    if (el.tagName === "INPUT") {
+      this.rootElement = el.parentElement;
+    }
   }
-
   private updateChoices() {
     this.dropdownAction.popupModel.contentComponentData.model.setItems(this.choices);
   }

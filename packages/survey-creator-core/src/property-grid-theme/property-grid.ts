@@ -389,16 +389,14 @@ export var propertyGridCss = {
     decreaseButtonIcon: "icon-arrow-down"
   },
   color: {
-    root: "spg-input spg-color-editor spg-input-container",
+    root: "sd-formbox spg-color-editor",
+    control: "sd-formbox__input",
     swatch: "spg-color-editor__color-swatch",
     swatchDefault: "spg-color-editor__color-swatch--default",
     swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
-    control: "spg-color-editor__input spg-input-container__input",
-    colorDropdown: "spg-input__edit-button",
     colorDropdownIcon: "icon-drop-down-arrow",
     swatchIcon: "icon-color-picker",
-    choicesButtonWrapper: "spg-color-editor__button-wrapper"
   },
   fileedit: {
     root: "spg-input spg-input-container spg-file-edit",
