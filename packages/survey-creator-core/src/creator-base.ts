@@ -4872,7 +4872,7 @@ export class SurveyCreatorModel extends Base
     this.defaultSurfaceCssVariables = { ...newDefaultSurveyCssVariables };
     const cssVariablesToDelete = [
       "--sjs2-base-unit-size",
-      "--sjs2-color-bg-brand-primary",
+      "--sjs2-color-project-brand-600",
       "--sjs2-color-bg-brand-secondary",
       "--sjs2-color-bg-brand-primary-dim",
       "--sjs2-color-fg-brand-on-primary",
