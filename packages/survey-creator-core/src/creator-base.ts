@@ -74,7 +74,6 @@ import {
   CollectionItemDeletingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
-import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
@@ -4910,10 +4909,6 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-fg-warning-on-primary"
     ];
     cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
-    assign(
-      this.defaultSurfaceCssVariables,
-      designTabSurveyThemeJSON.cssVariables,
-    );
 
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
