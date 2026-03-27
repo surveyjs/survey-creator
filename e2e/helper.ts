@@ -262,4 +262,10 @@ export function getSubToolboxItemByText(page: Page, text: string): Locator {
   return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
 }
 
+export async function hideElement(page: Page, selector: string) {
+  await page.locator(selector).evaluate((element) => {
+    element.style.visibility = "hidden";
+  });
+}
+
 export { expect };
