@@ -115,6 +115,7 @@ const buildPlatformJson = {
       "import": "./fesm/ui-preset-editor.mjs",
       "require": "./ui-preset-editor.js"
     },
+    "./ui-preset-editor/index.css": "./ui-preset-editor.css",
     "./ui-preset-editor/i18n": {
       "import": "./fesm/ui-preset-editor/i18n/index.mjs",
       "require": "./ui-preset-editor/i18n/index.js"

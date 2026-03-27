@@ -21,7 +21,7 @@ export default () => {
       tsconfig: resolve(__dirname, "tsconfig.ui-preset-editor.json"),
       external: ["survey-core", "survey-creator-core"],
       dir: resolve(buildPath),
-      declarationDir: resolve(buildPath, "ui-preset-editor"),
+      declarationDir: resolve(buildPath),
       globals: { "survey-core": "Survey", "survey-creator-core": "SurveyCreatorCore" },
       globalName: "SurveyCreatorUIPresetEditorCore",
       emitCss: true,
