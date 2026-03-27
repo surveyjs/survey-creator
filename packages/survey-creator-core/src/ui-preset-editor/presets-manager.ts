@@ -13,9 +13,6 @@ export interface IPresetListItem extends IPresetBase { }
 
 export class PresetsManager {
   public static defaultConfigurationId = "default";
-  /**
-   *
-   */
   constructor(private creator?: SurveyCreatorModel) {
 
   }
