@@ -28,7 +28,7 @@ svc-tab-designer {
 }
 
 .svc-designer-header .svc-surface-header {
-  background-color: transparent;
+  background-color: var(--sjs2-color-component-header-default-bg, transparent);
   display: flex;
   padding-block-start: var(--ctr-survey-header-padding-top-advanced, var(--lbr-spacing-x2));
   padding-inline-end: var(--lbr-header-padding-right, var(--lbr-spacing-x3));
@@ -47,10 +47,10 @@ svc-tab-designer {
   .sd-title {
     .sv-string-editor {
       @include lbrVariables.lbrLargeBoldFont;
-      color: var(--ctr-survey-header-text-title-color, var(--sjs-layer-3-foreground-100, rgba(0, 0, 0, 0.9)));
+      color: var(--sjs2-color-component-header-default-title, #1C1B20);
 
       &[aria-placeholder]:empty:before {
-        color: var(--ctr-survey-header-text-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+        color: var(--sjs2-color-component-header-default-title-placeholder, rgba(28, 27, 32, 0.6));
       }
     }
   }
@@ -59,10 +59,10 @@ svc-tab-designer {
     @include lbrVariables.lbrDefaultFont;
     .sv-string-editor {
       @include lbrVariables.lbrDefaultFont;
-      color: var(--ctr-survey-header-text-description-color, var(--sjs-layer-3-foreground-50, rgba(0, 0, 0, 0.5)));
+      color: var(--sjs2-color-component-header-default-description, rgba(28, 27, 32, 0.6));
     
       &[aria-placeholder]:empty:before {
-        color: var(--ctr-survey-header-text-description-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+        color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
       }
     }
   }
