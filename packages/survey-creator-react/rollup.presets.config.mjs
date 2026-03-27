@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { createEsmConfig, createUmdConfig } from "../../rollup.helpers.mjs";
 import process from "process";
 import pkg from "./package.json" with { type: "json" };
+import { decl } from "postcss";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
@@ -10,8 +11,9 @@ const buildPath = resolve(__dirname, "build");
 export default () => {
   return [
     createUmdConfig({
-      input: { "ui-preset-editor/index": resolve(__dirname, "./src/entries/presets.ts") },
+      input: { "ui-preset-editor": resolve(__dirname, "./src/entries/presets.ts") },
       dir: resolve(buildPath),
+      declarationDir: resolve(buildPath, "typings"),
       tsconfig: resolve(__dirname, "./tsconfig.presets.json"),
       external: [
         "react",
@@ -32,8 +34,8 @@ export default () => {
       version: pkg.version,
     }),
     createEsmConfig({
-      input: { "index": resolve(__dirname, "./src/entries/presets.ts") },
-      dir: resolve(buildPath, "fesm/ui-preset-editor"),
+      input: { "ui-preset-editor": resolve(__dirname, "./src/entries/presets.ts") },
+      dir: resolve(buildPath, "fesm"),
       tsconfig: resolve(__dirname, "./tsconfig.presets.json"),
       external: [
         "react",
