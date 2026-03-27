@@ -1,9 +1,9 @@
-import { DomDocumentHelper } from "survey-core";
-import { CssClassBuilder, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, DomDocumentHelper } from "survey-core";
+import { Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
-  protected onChangeQuestionValue(newValue: any): void {}
+  protected onChangeQuestionValue(newValue: any): void { }
   protected setNewValue(newValue: any): void {
     if (typeof newValue === "object") {
       this.stateChanged(this.isEmpty() ? "empty" : "loaded");
@@ -104,9 +104,6 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   public getIsClearButtonDisabled(): boolean {
     return !this.value || this.isInputReadOnly;
   }
-  public getChooseButtonCss(): string {
-    return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
-  }
   public onKeyDown = (event: KeyboardEvent) => {
     if ((<HTMLElement>event.target).tagName === "INPUT") {
       this.onTextKeyDownHandler(event);
@@ -129,6 +126,54 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       this.onChooseFilesCallback(input, (files) => {
         this.loadFiles(files);
       });
+    }
+  }
+  private _inputActionsContainer: ActionContainer;
+  protected createInputActions(): Array<Action> {
+    const clearAction = new Action({
+      id: "clear",
+      locTitle: this.locClearButtonCaption,
+      enabled: new ComputedUpdater(() => !this.getIsClearButtonDisabled()) as unknown as boolean,
+      action: () => this.doClean(),
+      showTitle: false,
+      iconName: new ComputedUpdater(() => this.cssClasses.clearButtonIcon) as unknown as string,
+    });
+    const chooseAction = new Action({
+      id: "choose",
+      css: new ComputedUpdater(() => this.cssClasses.chooseButton) as unknown as string,
+      component: "sv-fileedit-button",
+      data: { question: this },
+      locTitle: this.locChooseButtonCaption,
+      enabled: new ComputedUpdater(() => !this.isInputReadOnly) as unknown as boolean,
+      iconName: new ComputedUpdater(() => this.cssClasses.chooseButtonIcon) as unknown as string,
+    });
+    return [clearAction, chooseAction];
+  }
+  @property() _hasVisibleInputActions: boolean;
+  public get hasVisibleInputActions(): boolean {
+    return this.inputActionsContainer && this._hasVisibleInputActions;
+  }
+  protected createInputActionsContainer(): ActionContainer {
+    const actionBar = new ActionContainer();
+    actionBar.setCssClasses(this.survey?.getCss().inputActionBar);
+    actionBar.actions = this.createInputActions();
+    actionBar.registerFunctionOnPropertyValueChanged("isEmpty", () => {
+      this._hasVisibleInputActions = actionBar.hasVisibleActions;
+    });
+    actionBar.flushUpdates();
+    this._hasVisibleInputActions = actionBar.hasVisibleActions;
+    return actionBar;
+  }
+  public get inputActionsContainer(): ActionContainer {
+    if (!this._inputActionsContainer) {
+      this._inputActionsContainer = this.createInputActionsContainer();
+    }
+    return this._inputActionsContainer;
+  }
+  public updateElementCss(reNew?: boolean): void {
+    super.updateElementCss(reNew);
+    if (!!this._inputActionsContainer) {
+      this._inputActionsContainer.setCssClasses(this.survey?.getCss().inputActionBar);
     }
   }
 }

@@ -399,15 +399,12 @@ export var propertyGridCss = {
     swatchIcon: "icon-color-picker",
   },
   fileedit: {
-    root: "spg-input spg-input-container spg-file-edit",
-    control: "spg-input-container__input",
-    buttonsContainer: "spg-input-container__buttons-container",
+    root: "sd-formbox spg-file-edit",
+    control: "sd-formbox__input",
     chooseButtonIcon: "icon-choosefile",
     clearButtonIcon: "icon-cancel-24x24",
     fileInput: "sd-visuallyhidden",
-    clearButton: "spg-input__edit-button",
-    chooseButton: "spg-input__edit-button spg-file-edit__choose-button",
-    chooseButtonDisabled: "spg-input__edit-button--disabled"
+    chooseButton: "spg-file-edit__choose-button",
   },
   linkvalue: {
     content: "spg-link"

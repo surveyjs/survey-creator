@@ -1,0 +1,12 @@
+<ng-template #template>
+  <div>
+    <label [class]="model.getActionBarItemCss()" [attr.for]="question.inputId" [attr.aria-label]="question.chooseButtonCaption"
+      (click)="question.chooseFiles($event)" [key2click]>
+      <svg [iconName]="model.iconName" size="'auto'" [title]="model.title" [class]="model.cssClasses.itemIcon" sv-ng-svg-icon></svg>
+    </label>
+    <input type="file" [disabled]="model.disabled" [class]="question.cssClasses.fileInput" [attr.id]="question.inputId"
+        [attr.aria-required]="question.ariaRequired" [attr.aria-label]="question.ariaLabel"
+        [attr.aria-invalid]="question.ariaInvalid" [attr.aria-describedby]="question.ariaDescribedBy" [attr.multiple]="false"
+        [title]="question.inputTitle" [accept]="question.acceptedTypes" (change)="question.onFileInputChange($event)" tabindex="-1">
+  </div>
+</ng-template>
