@@ -49,6 +49,7 @@
     window["Survey"].settings.animationEnabled = false;
     creator.allowZoom = false;
     window.creator = creator;
+    new SurveyCreatorCore.UIPreset(SurveyCreatorUIPreset.Expert).applyTo(creator);
     new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
 
     class SurveyCreatorRenderComponent extends SurveyUI.Component {

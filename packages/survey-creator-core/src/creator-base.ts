@@ -202,6 +202,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    */
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  @property() activePresetName: string;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
    *

@@ -103,6 +103,9 @@ export class UIPreset extends CreatorPresetBase {
    */
   public applyTo(creator: SurveyCreatorModel): void {
     super.apply(creator, false);
+    if (this.name && !!creator) {
+      creator.activePresetName = this.name;
+    }
   }
   public apply(creator: SurveyCreatorModel, internal = false): void {
     super.apply(creator, internal);
