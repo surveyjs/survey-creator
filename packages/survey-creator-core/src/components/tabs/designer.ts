@@ -6,7 +6,6 @@ import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
 import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { assign } from "../../utils/utils";
-import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 import "./designer.scss";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
@@ -108,9 +107,7 @@ export class TabDesignerViewModel extends Base {
 
     this.creator.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
       const cssVariables = {};
-      if (this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
-        assign(cssVariables, designTabSurveyThemeJSON.cssVariables);
-      } else {
+      if (!this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
         shortcut.classList.add("svc-surface-drag-drop-choices-shortcut");
         assign(cssVariables, this.surfaceCssVariables);
       }

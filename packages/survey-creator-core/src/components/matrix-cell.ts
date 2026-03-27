@@ -17,7 +17,6 @@ import { SurveyCreatorModel } from "../creator-base";
 import { toggleHovered } from "../utils/html-element-utils";
 import { SurveyHelper } from "../survey-helper";
 import { editorLocalization } from "../editorLocalization";
-import designTabSurveyThemeJSON from "../designTabSurveyThemeJSON";
 
 import "./matrix-cell.scss";
 
