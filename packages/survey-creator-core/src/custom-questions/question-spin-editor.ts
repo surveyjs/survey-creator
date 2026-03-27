@@ -164,26 +164,25 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     const res = super.createInputActions();
     const component = "sv-spinedit-button";
     const question = this;
-    const enabled = new ComputedUpdater(() => !this.isInputReadOnly);
-    res.push(new Action({
-      iconName: new ComputedUpdater(() => this.cssClasses.increaseButtonIcon) as unknown as string,
-      component,
-      enabled,
-      data: {
-        question,
-        onMouseDown: () => {
-          this.onUpButtonMouseDown();
-        }
-      }
-    } as ISpinEditorButton));
     res.push(new Action({
       iconName: new ComputedUpdater(() => this.cssClasses.decreaseButtonIcon) as unknown as string,
       component,
-      enabled,
+      enabled: new ComputedUpdater(() => !this.isInputReadOnly),
       data: {
         question,
         onMouseDown: () => {
           this.onDownButtonMouseDown();
+        }
+      }
+    } as ISpinEditorButton));
+    res.push(new Action({
+      iconName: new ComputedUpdater(() => this.cssClasses.increaseButtonIcon) as unknown as string,
+      component,
+      enabled: new ComputedUpdater(() => !this.isInputReadOnly),
+      data: {
+        question,
+        onMouseDown: () => {
+          this.onUpButtonMouseDown();
         }
       }
     } as ISpinEditorButton));

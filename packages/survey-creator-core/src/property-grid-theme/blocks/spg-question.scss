@@ -216,10 +216,10 @@
   & > div {
     flex-grow: 1;
     min-width: calcSize(25.5);
-
-    input {
+    .sd-formbox__input {
       min-width: calc(max(17 * #{$base-unit}, 100%));
-      // width: 0;
+      width: 0;
+      flex-grow: 1;
     }
   }
 }
