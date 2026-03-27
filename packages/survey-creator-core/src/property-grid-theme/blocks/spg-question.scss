@@ -11,7 +11,10 @@
 .spg-question__content {
   input.sd-formbox__input:read-only,
   input.sd-formbox__input:read-only::placeholder {
-    color: rgb(from var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6)) r g b / var(--ctr-editor-content-text-opacity-disabled, 0.25));
+    color: rgb(
+      from var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6)) r g b /
+        var(--ctr-editor-content-text-opacity-disabled, 0.25)
+    );
   }
 }
 
@@ -163,10 +166,9 @@
       var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
 
   .spg-question__title {
-    padding: 
-      var(--ctr-editor-label-padding-top, var(--sjs-spacing-x1)) 
-      var(--ctr-editor-label-padding-right, var(--sjs-spacing-x2)) 
-      var(--ctr-editor-label-padding-bottom, var(--sjs-spacing-x1)) 
+    padding: var(--ctr-editor-label-padding-top, var(--sjs-spacing-x1))
+      var(--ctr-editor-label-padding-right, var(--sjs-spacing-x2))
+      var(--ctr-editor-label-padding-bottom, var(--sjs-spacing-x1))
       var(--ctr-editor-label-padding-left, var(--sjs-spacing-x150));
     border-inline-end: var(--ctr-editor-label-separator-width, var(--sjs-stroke-x1)) solid
       var(--ctr-editor-label-separator-color, var(--sjs-border-10, #dcdcdcff));
@@ -194,8 +196,7 @@
     inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
       var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
 
-  .sd-formbox.sd-formbox.sd-formbox,
-  .spg-input.spg-input.spg-input {
+  .sd-formbox.sd-formbox.sd-formbox {
     background-color: transparent;
     box-shadow: none;
     border: none;
@@ -227,8 +228,10 @@
   @include ctrDefaultFont;
   width: 100%;
   box-sizing: border-box;
-  padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
-    var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
+  padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
+    var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
 
   color: var(--ctr-error-message-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   background-color: var(--ctr-error-message-background-color, var(--sjs-semantic-red-background-10, #e50a3e1a));
@@ -236,7 +239,7 @@
 }
 
 .spg-question__erbox,
-.spg-question__erbox>svc-question-error,
+.spg-question__erbox > svc-question-error,
 sv-question-error {
   & > div {
     display: flex;
@@ -247,7 +250,7 @@ sv-question-error {
 .spg-question__erbox-icon {
   width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
   height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
-  
+
   .sv-svg-icon {
     vertical-align: top;
     width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
@@ -276,15 +279,16 @@ sv-question-error {
 
 .spg-question--highlighted {
   .sd-formbox,
-  .spg-input-container,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .sd-formbox {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2))
+      var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid
+      var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
     border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
 
@@ -294,7 +298,8 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-actionbar-button-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid
+      var(--ctr-actionbar-button-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .sv-button-group {
@@ -303,11 +308,13 @@ sv-question-error {
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid
+      var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
   }
 
   .spg-button-group::after {
-    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, var(--sjs-stroke-x2))
+      var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
