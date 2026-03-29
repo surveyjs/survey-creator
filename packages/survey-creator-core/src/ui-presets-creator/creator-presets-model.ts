@@ -8,16 +8,20 @@ export class CreatorPresetsModel extends Base implements IPreset {
     return "creatorpreset";
   }
 
-  @property() presetName: string = CreatorPresetsModel.defaultPresetName;
+  @property() presetName: string = "";
 
   public get name(): string { return this.presetName; }
   public set name(val: string) { this.presetName = val; }
+
+  public setPresetNameSilent(val: string): void {
+    this.setPropertyValueDirectly("presetName", val);
+  }
 
   public onPresetSelected = new EventBase<CreatorPresetsModel, { preset: IPreset }>();
   constructor() {
     super();
     this.onPropertyValueChangedCallback = (propName: string) => {
-      if (propName === "presetName") {
+      if (propName === "presetName" && this.presetName) {
         this.onPresetSelected.fire(this, { preset: CreatorPresets[this.presetName] });
       }
     };

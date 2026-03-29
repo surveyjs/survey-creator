@@ -348,7 +348,7 @@ test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
   const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette");
-  const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
   const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-neutral-tertiary-dim");
 
   expect(themeChooser.isReadOnly).toBeFalsy();
@@ -722,7 +722,7 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  expect(propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary").contentPanel.getQuestionByName("opacity").title).toBe("opacity_test");
+  expect(propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600").contentPanel.getQuestionByName("opacity").title).toBe("opacity_test");
   expect(propertyGridSurvey.getQuestionByName("--sjs2-border-effect-surface-default").contentQuestion.panels[0].getQuestionByName("x").title).toBe("boxShadowX_test");
   expect(propertyGridSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").colorTitle).toBe("backcolor_test");
   expect(propertyGridSurvey.getQuestionByName("editorFont").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");

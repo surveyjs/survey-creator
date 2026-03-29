@@ -74,7 +74,6 @@ import {
   CollectionItemDeletingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
-import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
@@ -202,6 +201,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    */
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  @property() activePresetName: string;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
    *
@@ -4872,7 +4872,7 @@ export class SurveyCreatorModel extends Base
     this.defaultSurfaceCssVariables = { ...newDefaultSurveyCssVariables };
     const cssVariablesToDelete = [
       "--sjs2-base-unit-size",
-      "--sjs2-color-bg-brand-primary",
+      "--sjs2-color-project-brand-600",
       "--sjs2-color-bg-brand-secondary",
       "--sjs2-color-bg-brand-primary-dim",
       "--sjs2-color-fg-brand-on-primary",
@@ -4888,9 +4888,11 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-fg-basic-secondary",
       "--sjs2-color-bg-neutral-tertiary-dim",
       "--sjs2-color-bg-neutral-secondary",
+      "--sjs2-color-bg-basic-secondary",
       "--sjs2-color-bg-basic-secondary-dim",
       "--sjs2-color-component-input-default-line",
       "--sjs2-color-component-formbox-default-bg",
+      "--sjs2-color-component-check-false-default-bg",
       "--sjs2-color-border-basic-secondary",
       "--sjs2-color-border-basic-secondary-overlay",
       "--sjs2-color-bg-alert-primary",
@@ -4907,10 +4909,6 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-fg-warning-on-primary"
     ];
     cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
-    assign(
-      this.defaultSurfaceCssVariables,
-      designTabSurveyThemeJSON.cssVariables,
-    );
 
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {

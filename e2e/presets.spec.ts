@@ -240,7 +240,7 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Custom" }).hover();
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
-    await items.getByRole("button", { name: "Add a new item" }).click();
+    await items.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
@@ -256,7 +256,7 @@ test.describe(title, () => {
     expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
     expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
 
-    await hidden.getByRole("button", { name: "Add a new item" }).click();
+    await hidden.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
     await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom 2");
@@ -426,14 +426,14 @@ test.describe(title, () => {
 
   test("Hide default preset", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".sps-action-button").nth(1).click();
 
     await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
@@ -444,9 +444,9 @@ test.describe(title, () => {
 
   test("Add custom preset", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.getByText("Add new preset...").click();
+    await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     const items = page.locator(".sv-popup__container table").nth(0);
@@ -454,7 +454,7 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
@@ -466,13 +466,13 @@ test.describe(title, () => {
   test("Delete current custom preset in list editor switches to Basic", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.getByText("Add new preset...").click();
+    await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     await page.getByRole("button", { name: "Save" }).click();
 
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__item").filter({ hasText: "MyPreset" }).click();
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "MyPreset" }).click();
 
@@ -489,7 +489,7 @@ test.describe(title, () => {
     await expect(page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" })).toBeVisible();
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" }).click();
     await expect(page.locator(".sps-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Manage presets..."]);
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
   });
 
   test("Check presets quit confirmation dialog", async ({ page }) => {
@@ -501,7 +501,7 @@ test.describe(title, () => {
     await page.getByTitle("Quit").click();
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Return to Survey Creator?");
     await page.getByRole("button", { name: "Save and exit" }).click();
-    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
+    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save Preset As");
 
     await page.locator("[data-name=presetName] input").fill("MyPreset2");
     await page.getByText('Create "MyPreset2"').click();

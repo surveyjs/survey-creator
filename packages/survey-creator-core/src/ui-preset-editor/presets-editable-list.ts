@@ -76,6 +76,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     };
   }
 
+  protected getEditPopupTitle(question: QuestionMatrixDynamicModel): string {
+    return getLocString("presets." + this.path + ".editItemTitle");
+  }
+  protected getCreatePopupTitle(model: SurveyModel, question: QuestionMatrixDynamicModel): string {
+    return getLocString("presets." + this.path + ".createItemTitle");
+  }
   protected createEditAction(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): IAction {
     return {
       id: "edit-item",
@@ -83,7 +89,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       tooltip: getLocString("presets.items.edit"),
       location: "end",
       visibleIndex: 13,
-      action: () => { this.editItem(model, creator, question, row); }
+      action: () => { this.editItem(model, creator, question, row, { description: this.getEditPopupTitle(question), isNew: false }); }
     };
   }
 
@@ -229,7 +235,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.items.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model)),
+        description: this.getCreatePopupTitle(model, options.question),
         isNew: true
       });
     }

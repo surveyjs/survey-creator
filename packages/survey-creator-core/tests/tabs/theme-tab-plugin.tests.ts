@@ -550,8 +550,8 @@ test("Keep theme modifications between edit sessions", (): any => {
   let themeModel = themePlugin.themeModel as ThemeModel;
 
   themeModel.themeName = "layered";
-  themeModel["--sjs2-color-bg-brand-primary"] = "#0000ff";
-  expect(savedTheme.cssVariables["--sjs2-color-bg-brand-primary"]).toBe("#0000ff");
+  themeModel["--sjs2-color-project-brand-600"] = "#0000ff";
+  expect(savedTheme.cssVariables["--sjs2-color-project-brand-600"]).toBe("#0000ff");
 
   creator = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
@@ -563,8 +563,8 @@ test("Keep theme modifications between edit sessions", (): any => {
 
   themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   expect(themeModel.themeName).toBe("layered");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toBe("#0000ff");
-  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-bg-brand-primary"]).toBe("#0000ff");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("#0000ff");
+  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-project-brand-600"]).toBe("#0000ff");
 });
 
 test("Set and use custom default theme", (): any => {
@@ -591,16 +591,16 @@ test("Set and use custom default theme", (): any => {
   expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
   expect(themeTabViewModel.survey.themeVariables["--a-var"]).toBe("aVal");
 
-  themeModel["--sjs2-color-bg-brand-primary"] = "#0000ff";
+  themeModel["--sjs2-color-project-brand-600"] = "#0000ff";
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
-  expect(creator.theme.cssVariables["--sjs2-color-bg-brand-primary"]).toBe("#0000ff");
-  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-bg-brand-primary"]).toBe("#0000ff");
+  expect(creator.theme.cssVariables["--sjs2-color-project-brand-600"]).toBe("#0000ff");
+  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-project-brand-600"]).toBe("#0000ff");
 
   themeModel.resetTheme();
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
   expect(themeTabViewModel.survey.themeVariables["--a-var"]).toBe("aVal");
-  expect(creator.theme.cssVariables["--sjs2-color-bg-brand-primary"]).toBe(undefined);
-  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-bg-brand-primary"]).toBe(undefined);
+  expect(creator.theme.cssVariables["--sjs2-color-project-brand-600"]).toBe(undefined);
+  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-project-brand-600"]).toBe(undefined);
 
   themePlugin.deactivate();
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
@@ -794,7 +794,7 @@ test("Theme undo redo calculated questions", (): any => {
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  const accentColorQuestion = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  const accentColorQuestion = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
   const accentColorDarkQuestion = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary-dim");
   const accentColorLightQuestion = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-secondary");
 
@@ -813,7 +813,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorDarkQuestion.value).toBe(initPrimaryBackcolorDark);
   expect(accentColorLightQuestion.value).toBe(initPrimaryBackcolorLight);
   expect(themeModel["primaryColor"]).toBe(initPrimaryBackcolor);
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toBe(initPrimaryBackcolor);
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe(initPrimaryBackcolor);
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toBe(initPrimaryBackcolorDark);
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toBe(initPrimaryBackcolorLight);
 
@@ -826,7 +826,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorDarkQuestion.value).toBe(newPrimaryBackcolorDark);
   expect(accentColorLightQuestion.value).toBe(newPrimaryBackcolorLight);
   expect(themeModel["primaryColor"]).toBe(newPrimaryBackcolor);
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toBe(newPrimaryBackcolor);
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe(newPrimaryBackcolor);
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toBe(newPrimaryBackcolorDark);
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toBe(newPrimaryBackcolorLight);
 
@@ -838,7 +838,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorDarkQuestion.value).toBe("rgba(23, 164, 136, 1)"); // should be "rgba(20, 164, 139, 1)"
   expect(accentColorLightQuestion.value).toBe(initPrimaryBackcolorLight);
   expect(themeModel["primaryColor"]).toBe(initPrimaryBackcolor);
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toBe(initPrimaryBackcolor);
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe(initPrimaryBackcolor);
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toBe("rgba(23, 164, 136, 1)"); // should be "rgba(20, 164, 139, 1)"
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toBe(initPrimaryBackcolorLight);
 
@@ -850,7 +850,7 @@ test("Theme undo redo calculated questions", (): any => {
   expect(accentColorDarkQuestion.value).toBe(newPrimaryBackcolorDark);
   expect(accentColorLightQuestion.value).toBe(newPrimaryBackcolorLight);
   expect(themeModel["primaryColor"]).toBe(newPrimaryBackcolor);
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toBe(newPrimaryBackcolor);
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe(newPrimaryBackcolor);
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toBe(newPrimaryBackcolorDark);
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toBe(newPrimaryBackcolorLight);
 });
@@ -963,7 +963,7 @@ test("Theme builder: trigger responsiveness", (): any => {
   themeTabViewModel.survey.triggerResponsiveness = (hard: boolean) => {
     log += `->called:${hard}`;
   };
-  propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary").value = "#ffffff";
+  propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600").value = "#ffffff";
   expect(log).toBe("");
   propertyGridSurvey.getQuestionByName("scale").value = 90;
   expect(log).toBe("->called:true");
@@ -979,7 +979,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
   const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette");
-  const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
   const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-neutral-tertiary-dim");
   const primaryColor = propertyGridSurvey.getQuestionByName("primaryColor");
 
@@ -1038,7 +1038,7 @@ test("saveTheme action", (): any => {
   expect(themePlugin["saveThemeAction"].visible).toBeTruthy();
   expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary").value = "some val";
+  propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600").value = "some val";
   expect(themePlugin["saveThemeAction"].enabled).toBeTruthy();
   themePlugin["saveThemeAction"].action();
   expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
@@ -1093,14 +1093,14 @@ test("Reset theme action availability", (): any => {
   let isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
   let colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
   let backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
-  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+  let primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
   const updateEditors = () => {
     propertyGridSurvey = themePlugin.propertyGrid.survey;
     themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
     isPanelless = propertyGridSurvey.getQuestionByName("isPanelless") as QuestionButtonGroupModel;
     colorPalette = propertyGridSurvey.getQuestionByName("colorPalette") as QuestionButtonGroupModel;
     backgroundImage = propertyGridSurvey.getQuestionByName("backgroundImage");
-    primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-brand-primary");
+    primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
   };
 
   expect(themeChooser.value).toBe("default");
@@ -1184,18 +1184,18 @@ test("Custom theme assigned to creator", (): any => {
   creator.theme = {
     themeName: "default_exported",
     cssVariables: {
-      "--sjs2-color-bg-brand-primary": "rgba(255, 0, 0, 1)"
+      "--sjs2-color-project-brand-600": "rgba(255, 0, 0, 1)"
     }
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   let themeModel = themePlugin.themeModel as ThemeModel;
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  let primaryBackColorEditor = propertyGridSurvey.findQuestionByName("--sjs2-color-bg-brand-primary");
+  let primaryBackColorEditor = propertyGridSurvey.findQuestionByName("--sjs2-color-project-brand-600");
   const themeChooser = propertyGridSurvey.getQuestionByName("themeName");
   expect(themeModel.themeName).toBe("default");
   expect(themeChooser.value).toBe("default");
-  expect(themeModel["--sjs2-color-bg-brand-primary"]).toBe("rgba(255, 0, 0, 1)");
+  expect(themeModel["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
   expect(primaryBackColorEditor.value).toBe("rgba(255, 0, 0, 1)");
 });
 
@@ -1364,7 +1364,7 @@ test("Theme builder switch custom theme", (): any => {
       "--sjs2-color-fg-basic-secondary": "rgba(0, 0, 0, 0.45)",
       "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
       "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)",
-      "--sjs2-color-bg-brand-primary": "rgba(9, 105, 218, 1)",
+      "--sjs2-color-project-brand-600": "rgba(9, 105, 218, 1)",
       "--sjs2-color-bg-brand-secondary": "rgba(9, 105, 218, 0.1)",
       "--sjs2-color-bg-brand-primary-dim": "rgba(8, 98, 203, 1)",
       "--sjs2-color-fg-brand-on-primary": "rgba(255, 255, 255, 1)",

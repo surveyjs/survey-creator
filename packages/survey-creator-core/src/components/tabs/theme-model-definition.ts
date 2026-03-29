@@ -15,7 +15,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "panelBackgroundTransparency", tab: "appearancecolor" },
       { name: "questionBackgroundTransparency", tab: "appearancecolor" },
 
-      { name: "--sjs2-color-bg-brand-primary", tab: "appearanceprimarycolor" },
+      { name: "--sjs2-color-project-brand-600", tab: "appearanceprimarycolor" },
       { name: "--sjs2-color-bg-brand-primary-dim", tab: "appearanceprimarycolor" },
       { name: "--sjs2-color-bg-brand-secondary", tab: "appearanceprimarycolor" },
       { name: "--sjs2-color-fg-brand-on-primary", tab: "appearanceprimarycolor" },

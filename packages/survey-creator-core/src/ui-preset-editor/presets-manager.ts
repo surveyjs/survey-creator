@@ -4,12 +4,15 @@ import { presetsCss } from "./presets-theme/presets";
 import { get } from "lodash";
 import { showConfirmDialog } from "./confirm-dialog";
 
+/**
+ * Describes an item in the preset list.
+ *
+ * A preset list item controls whether a preset is displayed in the list of available presets. Access the collection of preset list items using the [`availablePresets`](/survey-creator/documentation/api-reference/uipreseteditor#availablePresets) property of `UIPresetEditor`.
+ */
 export interface IPresetListItem extends IPresetBase { }
 
 export class PresetsManager {
-  /**
-   *
-   */
+  public static defaultConfigurationId = "default";
   constructor(private creator?: SurveyCreatorModel) {
 
   }
@@ -18,9 +21,6 @@ export class PresetsManager {
   public presetSelector: QuestionDropdownModel;
   private unsaved = false;
 
-  /**
-   * Callback fired when the presets list is saved in the Edit Presets List dialog.
-   */
   public onPresetListSaved: (presets: IPresetListItem[]) => void;
 
   private customPresets = [] as string[];
@@ -60,7 +60,10 @@ export class PresetsManager {
         this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
         this.presetsList.onSelectionChanged?.(this.presetsList.selectedItem as any);
       }
-      this.selectPresetCallback?.(CreatorPresets[presetName]);
+      const preset = presetName === PresetsManager.defaultConfigurationId
+        ? { name: PresetsManager.defaultConfigurationId, json: {} }
+        : CreatorPresets[presetName];
+      this.selectPresetCallback?.(preset);
     });
   }
   private presetListToItems(presets: string[]) {
@@ -75,6 +78,13 @@ export class PresetsManager {
   private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
     const customPresets = this.presetListToItems(this.customPresets);
+    const hasPresets = defaultPresets.length + customPresets.length > 0;
+    const defaultConfigItem = {
+      id: PresetsManager.defaultConfigurationId,
+      needSeparator: hasPresets,
+      title: getLocString("presets.plugin.defaultConfiguration"),
+      action: () => this.selectPreset(PresetsManager.defaultConfigurationId)
+    } as IAction;
     const editItem = {
       id: "editPresetsList",
       needSeparator: customPresets.length + defaultPresets.length > 0,
@@ -82,7 +92,7 @@ export class PresetsManager {
       action: () => this.editPresetsList(this.applyPresetsList.bind(this))
     } as IAction;
 
-    return [...defaultPresets, ...customPresets, editItem];
+    return [...defaultPresets, ...customPresets, defaultConfigItem, editItem];
   }
   private isProtectedPresetName(name: string): boolean {
     return PredefinedCreatorPresets.indexOf(name) !== -1;
@@ -167,6 +177,7 @@ export class PresetsManager {
 
   private ensureSelectedPresetAvailable() {
     const current = this.presetsList?.selectedItem?.id;
+    if (current === PresetsManager.defaultConfigurationId) return;
     const visibleNames = this.getPresetsListToEdit().filter(p => p.visible).map(p => p.name);
     if (visibleNames.indexOf(current) >= 0) return;
     const fallback = visibleNames[0];
@@ -184,9 +195,6 @@ export class PresetsManager {
     });
   }
 
-  /**
-   * Returns the presets array. Mutable - includes all presets from register, add, or user-saved.
-   */
   public getPresetsArray(): IPresetListItem[] {
     this.rebuildPresetsArray();
     return this._presetsArray;
@@ -405,7 +413,7 @@ export class PresetsManager {
 
   public saveOrSaveAs(json: any, saveCallback: (newName: string) => void) {
     const currentName = this.preset?.name;
-    if (currentName && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+    if (currentName && currentName !== PresetsManager.defaultConfigurationId && PredefinedCreatorPresets.indexOf(currentName) === -1) {
       this.getPreset(currentName).json = json;
       saveCallback(currentName);
     } else {
@@ -451,6 +459,8 @@ export class PresetsManager {
 
   public get preset(): IPreset | undefined {
     const value = this.presetsList?.selectedItem?.id;
-    return value ? CreatorPresets[value] : undefined;
+    if (!value) return undefined;
+    if (value === PresetsManager.defaultConfigurationId) return { name: PresetsManager.defaultConfigurationId, json: {} };
+    return CreatorPresets[value];
   }
 }

@@ -1018,7 +1018,7 @@ export var enStrings = {
       backgroundOpacity: "Opacity", // Auto-generated string
       "--sjs2-typography-font-family-text": "Survey font family",
       "--sjs2-color-bg-neutral-tertiary-dim": "Background color",
-      "--sjs2-color-bg-brand-primary": "Accent background colors",
+      "--sjs2-color-project-brand-600": "Accent background colors",
       "--sjs2-color-fg-brand-on-primary": "Accent foreground colors",
       "--sjs2-color-bg-alert-primary": "Error message colors",
       "--sjs2-border-effect-surface-default": "Shadow effects",
