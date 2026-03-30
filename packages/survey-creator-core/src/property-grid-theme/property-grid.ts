@@ -135,17 +135,12 @@ export var propertyGridCss = {
     itemHover: "spg-checkbox--allowhover",
     itemInline: "spg-selectbase__item--inline",
     label: "spg-selectbase__label",
-    // label: "spg-checkbox",
     itemSvgIconId: "#icon-v2check",
     labelChecked: "",
-    //itemControl: "spg-visuallyhidden spg-item__control",
     itemControl: "spg-checkbox__control",
     itemDecorator: "spg-checkbox__svg",
-    //itemDecorator: "spg-checkbox__hidden",
-    //controlLabel: "spg-item__control-label",
     controlLabel: "spg-checkbox__caption",
     materialDecorator: "spg-checkbox__rectangle",
-    //materialDecorator: "spg-item__decorator spg-checkbox__decorator",
     other: "spg-comment spg-question__other",
     column: "spg-selectbase__column"
   },
@@ -166,20 +161,24 @@ export var propertyGridCss = {
     clearButton: "spg-btn spg-selectbase__clear-btn",
     column: "spg-selectbase__column"
   },
+
   boolean: {
-    mainRoot: "spg-question spg-row__question spg-question--boolean",
-    rootCheckbox: "spg-selectbase",
+    ...defaultCss.boolean,
+
+    // mainRoot: "spg-question spg-row__question spg-question--boolean",
+    // rootCheckbox: "spg-selectbase",
     checkboxItem: "spg-checkbox",
-    checkboxItemChecked: "spg-checkbox--checked",
-    checkboxitemIndeterminate: "spg-checkbox--indeterminate",
-    checkboxItemReadOnly: "spg-checkbox--disabled",
-    svgIconId: "#icon-v2check",
-    checkboxLabel: "spg-selectbase__label",
-    controlCheckbox: "spg-checkbox__control",
-    checkboxControlLabel: "spg-checkbox__caption",
-    checkboxItemDecorator: "spg-checkbox__svg",
-    checkboxMaterialDecorator: "spg-checkbox__rectangle"
+    // checkboxItemChecked: "spg-checkbox--checked",
+    // checkboxitemIndeterminate: "spg-checkbox--indeterminate",
+    // checkboxItemReadOnly: "spg-checkbox--disabled",
+    // svgIconId: "#icon-v2check",
+    // checkboxLabel: "spg-selectbase__label",
+    // controlCheckbox: "spg-checkbox__control",
+    // checkboxControlLabel: "spg-checkbox__caption",
+    // checkboxItemDecorator: "spg-checkbox__svg",
+    // checkboxMaterialDecorator: "spg-checkbox__rectangle"
   },
+
   text: {
     ...defaultCss.text,
     content: "spg-question__content spg-text__content",
