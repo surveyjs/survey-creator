@@ -141,10 +141,7 @@ svc-page {
   @include defaultActionButtonSettings;
   margin: 0 var(--sjs2-spacing-x050, 4px);
   border-radius: var(--sjs2-size-x075, 6px);
-  padding: var(--sjs2-spacing-x150, 12px)
-    var(--sjs2-spacing-x100, 8px)
-    var(--sjs2-spacing-x100, 8px)
-    var(--sjs2-spacing-x100, 8px);
+  padding: var(--sjs2-spacing-x100, 8px);
   justify-content: center;
   align-items: center;
 
@@ -244,7 +241,7 @@ svc-page {
 .svc-page__content--new.svc-page__content--new {
   box-shadow: none;
   background-color: transparent;
-  padding-bottom: var(--sjs2-spacing-x700, 56px);
+  padding-bottom: calc(var(--sjs2-base-unit-spacing) * 9);
   .svc-page-toolbar {
     display: none;
   }
@@ -272,7 +269,7 @@ svc-page {
 
 .svc-page__content--selected.svc-page__content--selected {
   box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) var(--sjs2-color-component-panel-focused-border, #19b394);
-  background: var(--sjs2-color-component-panel-focused-bg, #ffffff);
+  background: var(--sjs2-color-utility-surface-designer);
 }
 
 .svc-page__content--animation-running {
@@ -311,7 +308,7 @@ svc-page {
 
   &.svc-page__content--collapsed-drag-over-inside {
     box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) var(--sjs2-color-component-panel-focused-border, #19b394);
-    background: var(--sjs2-color-component-panel-focused-bg, #ffffff);
+    background: var(--sjs2-color-utility-surface-designer);
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
   }
@@ -337,7 +334,7 @@ svc-page {
 
       box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) inset
         var(--sjs2-color-component-panel-focused-border, #19b394);
-      background: var(--sjs2-color-component-panel-focused-bg, #ffffff);
+        background: var(--sjs2-color-utility-surface-designer);
 
       .svc-page__content-actions {
         display: flex;
@@ -381,7 +378,7 @@ svc-page {
 
 .svc-element__add-new-question {
   height: auto;
-  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x800, 64px);
+  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x2, 16px);
   border-radius: var(--sjs2-size-x050, 4px);
 }
 

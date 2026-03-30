@@ -120,8 +120,8 @@ svc-tab-designer {
 
 .svc-tab-designer--with-surface-tools {
   .svc-tab-designer_content {
-    padding-inline-start: var(--sjs2-spacing-x700, 56px);
-    padding-inline-end: var(--sjs2-spacing-x700, 56px);
+    padding-inline-start: calc(var(--sjs2-base-unit-spacing) * 9.25);
+    padding-inline-end: calc(var(--sjs2-base-unit-spacing) * 9.25);
   }
 }
 
@@ -160,8 +160,7 @@ svc-tab-designer {
   }
 
   .svc-element__add-new-question {
-    padding: var(--sjs2-spacing-x200, 16px)
-      var(--sjs2-spacing-x800, 64px);
+    padding: var(--sjs2-spacing-x200, 16px) calc(var(--sjs2-base-unit-spacing) * 10);
 
     .svc-element__question-type-selector {
       padding: var(--sjs2-spacing-x100, 8px)
@@ -231,7 +230,7 @@ svc-tab-designer {
   flex-direction: column;
 
   .sv-action-bar-separator {
-    height: var(--sjs2-size-x025, 2px);
+    height: var(--sjs2-border-width-x100, 1px);
     width: var(--sjs2-size-x300, 24px);
     padding: var(--sjs2-spacing-x000, 0px) var(--sjs2-spacing-x100, 8px);
     margin-bottom: var(--sjs2-spacing-x100, 8px);
