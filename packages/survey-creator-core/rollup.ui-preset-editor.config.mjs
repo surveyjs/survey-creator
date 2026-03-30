@@ -10,18 +10,18 @@ const buildPath = resolve(__dirname, "build");
 export default () => {
   return [
     createEsmConfig({
-      input: { "index": resolve(__dirname, "./src/ui-preset-editor/index.ts") },
-      dir: resolve(buildPath, "fesm/ui-preset-editor"),
+      input: { "ui-preset-editor": resolve(__dirname, "./src/ui-preset-editor/index.ts") },
+      dir: resolve(buildPath, "fesm"),
       external: ["survey-core", "survey-creator-core"],
       tsconfig: resolve(__dirname, "tsconfig.ui-preset-editor.json"),
       version: pkg.version
     }),
     createUmdConfig({
-      input: { "index": resolve(__dirname, "./src/ui-preset-editor/index.ts") },
+      input: { "ui-preset-editor": resolve(__dirname, "./src/ui-preset-editor/index.ts") },
       tsconfig: resolve(__dirname, "tsconfig.ui-preset-editor.json"),
       external: ["survey-core", "survey-creator-core"],
-      dir: resolve(buildPath, "ui-preset-editor"),
-      declarationDir: resolve(buildPath, "ui-preset-editor"),
+      dir: resolve(buildPath),
+      declarationDir: resolve(buildPath),
       globals: { "survey-core": "Survey", "survey-creator-core": "SurveyCreatorCore" },
       globalName: "SurveyCreatorUIPresetEditorCore",
       emitCss: true,

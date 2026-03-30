@@ -52,8 +52,8 @@
     },
     "./ui-preset-editor": {
       "types": "./types-presets/index.d.ts",
-      "import": "./ui-preset-editor/index.es.js",
-      "require": "./ui-preset-editor/index.umd.js"
+      "import": "./ui-preset-editor.es.js",
+      "require": "./ui-preset-editor.umd.js"
     }
   }
 }

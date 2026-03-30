@@ -10,14 +10,14 @@ export default defineConfig(({ mode }) => {
     build: {
       emptyOutDir: false,
       sourcemap: mode == "development",
-      outDir: "./build/ui-preset-editor",
+      outDir: "./build",
       lib: {
         // Set the entry point for presets
         entry: resolve(__dirname, "src/ui-preset-editor/index.ts"),
         // Name of the library.
         name: "SurveyCreatorUIPresetEditorVue",
         // Generate preset files
-        fileName: (format) => `index.${format}.js`,
+        fileName: (format) => `ui-preset-editor.${format}.js`,
       },
       rollupOptions: {
         // External dependencies
