@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/color-utils";
 import { listComponentCss } from "../components/list-theme";
 
@@ -11,6 +11,7 @@ export class QuestionColorModel extends QuestionTextModel {
     this.registerFunctionOnPropertyValueChanged("choices", () => {
       this.updateChoices();
     });
+    this.createLocalizableString("selectCaption", this, false, true);
   }
 
   private getCorrectedValue(newValue: string): string {
@@ -124,10 +125,14 @@ export class QuestionColorModel extends QuestionTextModel {
     }
     return this._dropdownAction;
   }
-
+  get locSelectCaption(): LocalizableString {
+    return this.getLocalizableString("selectCaption");
+  }
   public createDropdownAction(): Action {
     const action = createDropdownActionModelAdvanced({
       id: "chevron",
+      locTitle: this.locSelectCaption,
+      showTitle: false,
       visible: new ComputedUpdater(() => !this.isValueEmpty(this.choices)),
       iconName: new ComputedUpdater(() => this.cssClasses.colorDropdownIcon) as unknown as string,
       enabled: new ComputedUpdater<boolean>(() => !this.isInputReadOnly),
