@@ -487,7 +487,7 @@ svc-question {
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
   box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px)
     var(--sjs2-color-component-panel-focused-border, #19B394);
-  background: var(--sjs2-color-component-panel-focused-bg, #ffffff);
+  background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
 
   animation: collapsed-drag-over-inside-blinking 1s;
 }
@@ -664,9 +664,9 @@ svc-question {
 .svc-hovered > .svc-question__content--drag-over-inside {
   .svc-panel__placeholder_frame {
     box-shadow: 0 0 0 var(--sjs2-border-width-x100, 1px)
-      var(--sjs2-color-component-panel-dragging-border, rgba(0, 76, 68, 0.15));
-    border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-component-panel-dragging-border, rgba(0, 76, 68, 0.15));
-    background: var(--sjs2-color-component-panel-dragging-bg, #ffffff);
+      var(--sjs2-color-component-panel-focused-border, #19B394);
+    border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-component-panel-focused-border, #19B394);
+    background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
 
     & > .svc-question__content-actions {
       opacity: 1;
