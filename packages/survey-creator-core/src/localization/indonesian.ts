@@ -7,7 +7,7 @@ export var indonesianStrings = {
     edit: "Ubah",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Tonton dan pelajari cara membuat survei",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Silahkan letakkan pertanyaan di sini dari Kotak Perkakas di sebelah kiri.",
@@ -45,8 +45,8 @@ export var indonesianStrings = {
   },
   // Question types
   qt: {
-    // "Default"
-    default: "Default",
+    // [Auto-translated] "Default"
+    default: "Bawaan",
     // "Checkboxes"
     checkbox: "Kotak Centang",
     // "Long Text"
@@ -73,7 +73,7 @@ export var indonesianStrings = {
     matrixdynamic: "Matriks (baris dinamis)",
     // "Multiple Textboxes"
     multipletext: "Teks Ganda",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (panel dinamis)",
@@ -85,8 +85,8 @@ export var indonesianStrings = {
     slider: "Slider",
     // "Single-Line Input"
     text: "Input Tunggal",
-    // "Yes/No (Boolean)"
-    boolean: "Yes/No (Boolean)",
+    // [Auto-translated] "Yes/No (Boolean)"
+    boolean: "Ya/Tidak (Boolean)",
     // "Expression (read-only)"
     expression: "Ekspresi (dibaca saja)",
     // [Auto-translated] "Signature"
@@ -105,12 +105,12 @@ export var indonesianStrings = {
     containers: "Wadah",
     // "Matrix Questions"
     matrix: "Pertanyaan Matriks",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Lain-lain"
   },
   // Strings in SurveyJS Creator
   ed: {
-    // "Default ({0})"
+    // [Auto-translated] "Default ({0})"
     defaultLocale: "Default ({0})",
     // "Survey"
     survey: "Survei",
@@ -166,8 +166,8 @@ export var indonesianStrings = {
     newPageName: "halaman",
     // "question"
     newQuestionName: "pertanyaan",
-    // "panel"
-    newPanelName: "panel",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
     // [Auto-translated] "text"
     newTextItemName: "Teks",
     // [Auto-translated] "Default"
@@ -238,6 +238,18 @@ export var indonesianStrings = {
     options: "Pilihan",
     // "Generate Valid JSON"
     generateValidJSON: "Hasilkan JSON yang Valid",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Fungsi tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Fungsi tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variabel tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variabel tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Kesalahan sintaks.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Kesalahan semantik.",
     // "Generate Readable JSON"
     generateReadableJSON: "Hasilkan JSON yang dapat dibaca",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var indonesianStrings = {
     toolboxFilteredTextPlaceholder: "Ketik untuk mencari...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Tidak ada hasil yang ditemukan",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Tidak ada properti untuk ditampilkan",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Ketik untuk mencari...",
     // [Auto-translated] "No results found"
@@ -258,8 +272,8 @@ export var indonesianStrings = {
     propertyGridPlaceholderTitle: "Mulai mengonfigurasi formulir Anda",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain.",
-    // "Please correct JSON."
-    correctJSON: "Please correct JSON.",
+    // [Auto-translated] "Please correct JSON."
+    correctJSON: "Harap perbaiki JSON.",
     // "Survey Results "
     surveyResults: "Hasil survei: ",
     // "As Table"
@@ -751,6 +765,14 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ekspresi"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ekspresi"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -868,7 +890,7 @@ export var indonesianStrings = {
     inherit: "Mewarisi",
     // "Apply"
     apply: "Terapkan",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // [Auto-translated] "Save"
     save: "Simpan",
@@ -880,8 +902,8 @@ export var indonesianStrings = {
     cancel: "Batal",
     // [Auto-translated] "Set"
     set: "Mengeset",
-    // "Reset"
-    reset: "Reset",
+    // [Auto-translated] "Reset"
+    reset: "Atur ulang",
     // [Auto-translated] "Change"
     change: "Ubah",
     // [Auto-translated] "Refresh"
@@ -1032,7 +1054,7 @@ export var indonesianStrings = {
     columnEdit: "Ubah kolom: {0}",
     // "Edit item: {0}"
     itemEdit: "Ubah item: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Path",
@@ -1098,6 +1120,8 @@ export var indonesianStrings = {
     choicesOrder: "Tentukan urutan pilihan",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Izinkan pilihan khusus",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Teks perintah \"Buat Pilihan Kustom\"",
     // "Visible"
     visible: "Terlihat?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var indonesianStrings = {
     storeDataAsText: "Simpan konten berkas dalam hasil JSON sebagai teks",
     // "Maximum file size (in bytes)"
     maxSize: "Ukuran maksimum berkas dalam byte",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Jumlah file maksimum",
     // "Row count"
     rowCount: "Jumlah baris",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var indonesianStrings = {
     // "Regular expression"
     regex: "Ekspresi reguler",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Pesan validasi",
-      // [Auto-translated] "Validation expression"
-      expression: "Ekspresi validasi",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Pesan pemberitahuan untuk input yang tidak valid",
+      // [Auto-translated] "Valid when"
+      expression: "Berlaku saat",
       // [Auto-translated] "Notification type"
       notificationType: "Jenis notifikasi",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var indonesianStrings = {
     allowMultiple: "Mengaktifkan pengunggahan beberapa file",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Pratinjau gambar yang diunggah",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Jenis file yang diterima",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Kategori file yang diterima",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Ekstensi file tambahan",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Tunggu hingga upload selesai",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var indonesianStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format tooltip"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL Gambar",
+      // [Auto-translated] "Areas"
+      areas: "Daerah",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Izinkan beberapa pilihan",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Nama properti nilai",
+      // [Auto-translated] "Shape"
+      shape: "Bentuk",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Warna isian idle",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Warna goresan menganggur",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lebar goresan menganggur",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Warna isian kursor",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Warna goresan kursor",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lebar goresan kursor",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Warna isian yang dipilih",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Warna goresan yang dipilih",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lebar goresan yang dipilih",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Area maksimum yang dipilih",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Area minimum yang dipilih"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Nilai",
+      // [Auto-translated] "Shape"
+      shape: "Bentuk",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinat",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Warna isian idle",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Warna goresan menganggur",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lebar goresan menganggur",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Warna isian kursor",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Warna goresan kursor",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lebar goresan kursor",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Warna isian yang dipilih",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Warna goresan yang dipilih",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lebar goresan yang dipilih"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Tinggi gambar",
@@ -1504,6 +1592,8 @@ export var indonesianStrings = {
     minErrorText: "Pesan kesalahan \"Nilai di bawah minimum\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Pesan kesalahan \"Nilai melebihi maksimum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Pesan kesalahan \"Nilai tidak cocok dengan ukuran langkah\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Pesan kesalahan \"Komentar kosong\"",
     // "Error message for duplicate responses"
@@ -1686,8 +1776,8 @@ export var indonesianStrings = {
       expression: "Ekspresi",
       // [Auto-translated] "Question Settings"
       questionSettings: "Pengaturan Pertanyaan",
-      // "Header"
-      header: "Header",
+      // [Auto-translated] "Header"
+      header: "Tajuk",
       // "Background"
       background: "Latar",
       // "Appearance"
@@ -1727,8 +1817,8 @@ export var indonesianStrings = {
     titleKeyboardAdornerTip: "Tekan tombol enter untuk mengedit",
     // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
     keyboardAdornerTip: "Tekan tombol enter untuk mengedit item, tekan tombol hapus untuk menghapus item, tekan alt plus panah ke atas atau panah ke bawah untuk memindahkan item",
-    // "On "
-    triggerOn: "On ",
+    // [Auto-translated] "On "
+    triggerOn: "Aktif ",
     // "Make pages visible"
     triggerMakePagesVisible: "Buat halaman terlihat:",
     // "Make elements visible"
@@ -2082,6 +2172,20 @@ export var indonesianStrings = {
       // [Auto-translated] "Informational"
       info: "Informasi"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Gambar",
+      // [Auto-translated] "Videos"
+      video: "Video",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Dokumen",
+      // [Auto-translated] "Archives"
+      archive: "Arsip",
+      // [Auto-translated] "Custom"
+      custom: "Kustom"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nama lengkap",
@@ -2264,8 +2368,8 @@ export var indonesianStrings = {
     underRow: "Di bawah baris",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
-    // "Auto"
-    auto: "Auto",
+    // [Auto-translated] "Auto"
+    auto: "Otomatis",
     timerInfoMode: {
       // "Both"
       combined: "Keduanya"
@@ -2495,6 +2599,8 @@ export var indonesianStrings = {
     notcontains: "tidak mengandung",
     // [Auto-translated] "Any of"
     anyof: "Salah satu dari",
+    // [Auto-translated] "None of"
+    noneof: "Tidak ada",
     // [Auto-translated] "All of"
     allof: "Semua",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var indonesianStrings = {
     loadFromServer: "Muat survei JSON dari server",
     // "Scripts and styles"
     titleScript: "Skrip dan gaya",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,8 +3194,10 @@ export var indonesianStrings = {
     storeOthersAsComment: "Pilih untuk menyimpan nilai opsi \"Lainnya\" sebagai properti terpisah dalam hasil survei.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Gunakan {0} sebagai placeholder untuk nilai aktual.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Lihat deskripsi atribut [accept](https://www.w3schools.com/tags/att_input_accept.asp) untuk informasi selengkapnya.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Pilih \"Kustom\" untuk menambahkan ekstensi file Anda sendiri di atas kategori yang telah ditentukan sebelumnya.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Masukkan ekstensi file yang dipisahkan oleh koma (misalnya, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Hanya berlaku untuk kolom dengan \"Jenis input sel\" yang diatur ke Grup Tombol Radio atau Kotak Centang.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3507,6 +3615,18 @@ export var indonesianStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontras"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Dasar",
+      // [Auto-translated] "Advanced"
+      advanced: "Lanjutan",
+      // [Auto-translated] "Expert"
+      expert: "Ahli"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Preset diterapkan"
   }
 };
 

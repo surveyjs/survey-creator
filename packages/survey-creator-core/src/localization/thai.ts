@@ -7,7 +7,7 @@ export const thStrings = {
     edit: "แก้ไข",
     // "Watch and learn how to create surveys"
     externalHelpLink: "ชมและเรียนรู้วิธีสร้างแบบสำรวจ",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "กรุณาวางคำถามที่นี่จากกล่องเครื่องมือ",
@@ -63,7 +63,7 @@ export const thStrings = {
     tagbox: "เมนูดรอปดาวน์หลายตัวเลือก",
     // "File Upload"
     file: "อัปโหลดไฟล์",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "เมทริกซ์เลือกเดียว",
@@ -238,6 +238,18 @@ export const thStrings = {
     options: "ตัวเลือก",
     // "Generate Valid JSON"
     generateValidJSON: "สร้าง JSON ที่ถูกต้อง",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "ฟังก์ชันที่ไม่รู้จัก: \"{0}\"",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "ฟังก์ชันที่ไม่รู้จัก: \"{0}\"",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "ตัวแปรที่ไม่รู้จัก: \"{0}\"",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "ตัวแปรที่ไม่รู้จัก: \"{0}\"",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "ข้อผิดพลาดทางไวยากรณ์",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "ข้อผิดพลาดทางความหมาย",
     // "Generate Readable JSON"
     generateReadableJSON: "สร้าง JSON ที่อ่านง่าย",
     // "Toolbox"
@@ -250,6 +262,8 @@ export const thStrings = {
     toolboxFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
     // "No results found"
     toolboxNoResultsFound: "ไม่พบผลลัพธ์",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "ไม่มีคุณสมบัติให้แสดง",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "พิมพ์เพื่อค้นหา...",
     // "No results found"
@@ -751,6 +765,14 @@ export const thStrings = {
       // "Expression"
       expression: "นิพจน์"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "การแสดงออก"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "การแสดงออก"
+    },
     // survey templates
     survey: {
       // "Survey title"
@@ -1032,8 +1054,8 @@ export const thStrings = {
     columnEdit: "แก้ไขคอลัมน์: {0}",
     // "Edit item: {0}"
     itemEdit: "แก้ไขรายการ: {0}",
-    // "URL"
-    url: "URL",
+    // [Auto-translated] "URL"
+    url: "เว็บไซต์",
     // "Path to data"
     path: "เส้นทางข้อมูล",
     choicesbyurl: {
@@ -1098,6 +1120,8 @@ export const thStrings = {
     choicesOrder: "ลำดับตัวเลือก",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "อนุญาตตัวเลือกที่กําหนดเอง",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "ข้อความคําสั่ง \"สร้างตัวเลือกที่กําหนดเอง\"",
     // "Visible"
     visible: "มองเห็นได้",
     // "Required"
@@ -1126,6 +1150,8 @@ export const thStrings = {
     storeDataAsText: "จัดเก็บเนื้อหาไฟล์ในผลลัพธ์ JSON เป็นข้อความ",
     // "Maximum file size (in bytes)"
     maxSize: "ขนาดไฟล์สูงสุด (เป็นไบต์)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "จํานวนไฟล์สูงสุด",
     // "Row count"
     rowCount: "จำนวนแถว",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export const thStrings = {
     // "Regular expression"
     regex: "นิพจน์ปกติ",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "ข้อความการตรวจสอบความถูกต้อง",
-      // [Auto-translated] "Validation expression"
-      expression: "นิพจน์การตรวจสอบความถูกต้อง",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "ข้อความแจ้งเตือนสําหรับการป้อนข้อมูลที่ไม่ถูกต้อง",
+      // [Auto-translated] "Valid when"
+      expression: "ใช้ได้เมื่อ",
       // [Auto-translated] "Notification type"
       notificationType: "ประเภทการแจ้งเตือน",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,6 +1426,8 @@ export const thStrings = {
     allowMultiple: "เปิดใช้งานการอัปโหลดไฟล์หลายไฟล์",
     // "Preview uploaded images"
     allowImagesPreview: "แสดงตัวอย่างรูปภาพที่อัปโหลด",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "ประเภทไฟล์ที่ยอมรับ",
     // "Accepted file types"
     acceptedTypes: "ประเภทไฟล์ที่ยอมรับ",
     // "Wait for upload to complete"
@@ -1474,6 +1502,66 @@ export const thStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "รูปแบบคําแนะนําเครื่องมือ"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL ของรูปภาพ",
+      // [Auto-translated] "Areas"
+      areas: "พื้นที่",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "อนุญาตให้เลือกได้หลายรายการ",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "ชื่อคุณสมบัติค่า",
+      // [Auto-translated] "Shape"
+      shape: "รูปร่าง",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "สีเติมที่ไม่ได้ใช้งาน",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "สีจังหวะที่ไม่ได้ใช้งาน",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "ความกว้างของจังหวะเดินเบา",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "โฮเวอร์สีเติม",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "โฮเวอร์สีจังหวะ",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "ความกว้างของจังหวะโฮเวอร์",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "สีเติมที่เลือก",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "สีจังหวะที่เลือก",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "ความกว้างของจังหวะที่เลือก",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "พื้นที่ที่เลือกสูงสุด",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "พื้นที่ขั้นต่ําที่เลือก"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "ความคุ้มค่า",
+      // [Auto-translated] "Shape"
+      shape: "รูปร่าง",
+      // [Auto-translated] "Coordinates"
+      coords: "พิกัด",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "สีเติมที่ไม่ได้ใช้งาน",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "สีจังหวะที่ไม่ได้ใช้งาน",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "ความกว้างของจังหวะเดินเบา",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "โฮเวอร์สีเติม",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "โฮเวอร์สีจังหวะ",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "ความกว้างของจังหวะโฮเวอร์",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "สีเติมที่เลือก",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "สีจังหวะที่เลือก",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "ความกว้างของจังหวะที่เลือก"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "ความสูงของภาพ",
@@ -1504,6 +1592,8 @@ export const thStrings = {
     minErrorText: "ข้อความข้อผิดพลาด \"ค่าต่ำกว่าขั้นต่ำ\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "ข้อความข้อผิดพลาด \"ค่าสูงกว่าขั้นสูงสุด\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "ข้อความแสดงข้อผิดพลาด \"ค่าไม่ตรงกับขนาดขั้นตอน\"",
     // "\"Empty comment\" error message"
     otherErrorText: "ข้อความข้อผิดพลาด \"ความคิดเห็นว่าง\"",
     // "Error message for duplicate responses"
@@ -2055,8 +2145,8 @@ export const thStrings = {
       text: "ข้อความ",
       // "Time"
       time: "เวลา",
-      // "URL"
-      url: "URL",
+      // [Auto-translated] "URL"
+      url: "เว็บไซต์",
       // "Week"
       week: "สัปดาห์"
     },
@@ -2081,6 +2171,20 @@ export const thStrings = {
       warning: "คำเตือน",
       // [Auto-translated] "Informational"
       info: "ข้อมูล"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "ภาพ",
+      // [Auto-translated] "Videos"
+      video: "วิดีโอ",
+      // [Auto-translated] "Audio"
+      audio: "��สียง",
+      // [Auto-translated] "Documents"
+      document: "เอกสาร",
+      // [Auto-translated] "Archives"
+      archive: "หอจดหมายเหตุ",
+      // [Auto-translated] "Custom"
+      custom: "กําหนดเอง"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2295,8 +2399,8 @@ export const thStrings = {
       image: "รูปภาพ",
       // "Video"
       video: "วิดีโอ",
-      // "YouTube"
-      youtube: "YouTube"
+      // [Auto-translated] "YouTube"
+      youtube: "ยูทูบ"
     },
     displayMode: {
       // "Buttons"
@@ -2495,6 +2599,8 @@ export const thStrings = {
     notcontains: "ไม่มี",
     // "Any of"
     anyof: "ใดๆ ของ",
+    // [Auto-translated] "None of"
+    noneof: "ไม่มี",
     // "All of"
     allof: "ทั้งหมดของ",
     // "Greater than"
@@ -2548,10 +2654,10 @@ export const thStrings = {
     loadFromServer: "โหลด JSON แบบสำรวจจากเซิร์ฟเวอร์",
     // "Scripts and styles"
     titleScript: "สคริปต์และสไตล์",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
-    titleJavaScript: "JavaScript"
+    // [Auto-translated] "JavaScript"
+    titleJavaScript: "จาวาสคริปต์"
   },
   // Preview (Survey)
   ts: {
@@ -3088,6 +3194,8 @@ export const thStrings = {
     storeOthersAsComment: "เลือกเพื่อบันทึกค่าตัวเลือก \"อื่น\" เป็นคุณสมบัติแยกต่างหากในผลลัพธ์แบบสำรวจ",
     // "Use {0} as a placeholder for the actual value."
     format: "ใช้ {0} เป็นตัวแทนสำหรับค่าจริง",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "เลือก \"กําหนดเอง\" เพื่อเพิ่มนามสกุลไฟล์ของคุณเองที่ด้านบนของหมวดหมู่ที่กําหนดไว้ล่วงหน้า",
     // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "ดูคำอธิบายคุณสมบัติ [accept](https://www.w3schools.com/tags/att_input_accept.asp) สำหรับข้อมูลเพิ่มเติม",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
@@ -3164,8 +3272,8 @@ export const thStrings = {
   // Properties
   p: {
     title: {
-      // "title"
-      name: "title",
+      // [Auto-translated] "title"
+      name: "ชื่อเรื่อง",
       // "Leave it empty, if it is the same as 'Name'"
       title: "ทิ้งว่างไว้ถ้าเหมือนกับ 'ชื่อ'"
     },
@@ -3429,9 +3537,9 @@ export const thStrings = {
     size: "ขนาด",
     // "Opacity"
     opacity: "ความโปร่งใส",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // "Add Shadow Effect"
     boxShadowAddRule: "เพิ่มเอฟเฟกต์เงา",
@@ -3507,6 +3615,18 @@ export const thStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "ความแตกต่าง"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "พื้นฐาน",
+      // [Auto-translated] "Advanced"
+      advanced: "ขั้นสูง",
+      // [Auto-translated] "Expert"
+      expert: "ผู้เชี่ยวชาญ"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "ใช้ค่าที่ตั้งไว้ล่วงหน้า"
   }
 };
 

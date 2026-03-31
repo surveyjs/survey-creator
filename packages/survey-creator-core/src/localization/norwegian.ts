@@ -7,7 +7,7 @@ export var nbStrings = {
     edit: "Rediger",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Se og lær hvordan å opprette nye skjema",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Dra og slipp et spørsmål her fra Verktøylisten til venstre.",
@@ -73,7 +73,7 @@ export var nbStrings = {
     matrixdynamic: "Matrise (dynamiske rader)",
     // "Multiple Textboxes"
     multipletext: "Flerlinjetekst",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dynamiske paneler)",
@@ -85,8 +85,8 @@ export var nbStrings = {
     slider: "Glidebryter",
     // "Single-Line Input"
     text: "Enkel tekst",
-    // "Yes/No (Boolean)"
-    boolean: "Yes/No (Boolean)",
+    // [Auto-translated] "Yes/No (Boolean)"
+    boolean: "Ja/Nei (Boolesk)",
     // "Expression (read-only)"
     expression: "Formel",
     // "Signature"
@@ -105,8 +105,8 @@ export var nbStrings = {
     containers: "Beholdere",
     // "Matrix Questions"
     matrix: "Matrise Spørsmål",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Diverse"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -166,8 +166,8 @@ export var nbStrings = {
     newPageName: "side",
     // "question"
     newQuestionName: "spørsmål",
-    // "panel"
-    newPanelName: "panel",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
     // "text"
     newTextItemName: "tekst",
     // [Auto-translated] "Default"
@@ -238,6 +238,18 @@ export var nbStrings = {
     options: "Alternativer",
     // "Generate Valid JSON"
     generateValidJSON: "Lag gyldig JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Ukjent funksjon: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Ukjente funksjoner: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Ukjent variabel: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Ukjente variabler: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Syntaksfeil.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semantisk feil.",
     // "Generate Readable JSON"
     generateReadableJSON: "Lag lesbar JSON",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var nbStrings = {
     toolboxFilteredTextPlaceholder: "Skriv for å søke ...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Fant ingen resultater",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Ingen egenskaper å vise",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var nbStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttrykk"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Uttrykk"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Uttrykk"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -868,7 +890,7 @@ export var nbStrings = {
     inherit: "Arve",
     // "Apply"
     apply: "Bruk",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // "Save"
     save: "Lagre",
@@ -1032,7 +1054,7 @@ export var nbStrings = {
     columnEdit: "Rediger kolonne: {0}",
     // "Edit item: {0}"
     itemEdit: "Rediger element: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Sti",
@@ -1098,6 +1120,8 @@ export var nbStrings = {
     choicesOrder: "Velg rekkefølge på valg",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Tillat egendefinerte valg",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Create Custom Choice\" kommandotekst",
     // "Visible"
     visible: "Er synlig?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var nbStrings = {
     storeDataAsText: "Lagre filinnhold i JSON-resultat som tekst",
     // "Maximum file size (in bytes)"
     maxSize: "Maksimum filstørrelse i bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maksimalt antall filer",
     // "Row count"
     rowCount: "Antall rader",
     // "Columns layout"
@@ -1310,17 +1336,17 @@ export var nbStrings = {
     minLength: "Minimum lengde",
     // "Allow digits"
     allowDigits: "Tillat tall",
-    // "Minimum count"
-    minCount: "Minimum count",
-    // "Maximum count"
-    maxCount: "Maximum count",
-    // "Regular expression"
-    regex: "Regular expression",
+    // [Auto-translated] "Minimum count"
+    minCount: "Minimumsantall",
+    // [Auto-translated] "Maximum count"
+    maxCount: "Maksimalt antall",
+    // [Auto-translated] "Regular expression"
+    regex: "Regulært uttrykk",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Melding om validering",
-      // [Auto-translated] "Validation expression"
-      expression: "Uttrykk for validering",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Varslingsmelding for ugyldig input",
+      // [Auto-translated] "Valid when"
+      expression: "Gyldig når",
       // [Auto-translated] "Notification type"
       notificationType: "Type varsling",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var nbStrings = {
     allowMultiple: "Aktiver opplasting av flere filer",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Forhåndsvis opplastede bilder",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Godkjente filtyper",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Aksepterte filkategorier",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Ytterligere filendelser",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vent til opplastingen er fullført",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var nbStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format for verktøytips"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Bilde-URL",
+      // [Auto-translated] "Areas"
+      areas: "Områder",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Tillat flere valg",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Verdieiendomsnavn",
+      // [Auto-translated] "Shape"
+      shape: "Form",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-farge",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle stroke-farge",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Bredde på tomgangsslag",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill-farge",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Farge på svevestreken",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hoverstrekbredde",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Valgt fyllfarge",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Valgt penselfarge",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Valgt strekbredde",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maksimalt utvalgte områder",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimum utvalgte områder"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Verdi",
+      // [Auto-translated] "Shape"
+      shape: "Form",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinater",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-farge",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle stroke-farge",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Bredde på tomgangsslag",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill-farge",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Farge på svevestreken",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hoverstrekbredde",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Valgt fyllfarge",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Valgt penselfarge",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Valgt strekbredde"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Høyde på bildet",
@@ -1504,6 +1592,8 @@ export var nbStrings = {
     minErrorText: "Feilmeldingen «Verdien er under minimum»",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Feilmeldingen \"Verdien overskrider maksimum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Verdi stemmer ikke med steglengde\" feilmelding",
     // "\"Empty comment\" error message"
     otherErrorText: "Feilmeldingen «Tom kommentar»",
     // "Error message for duplicate responses"
@@ -1670,7 +1760,7 @@ export var nbStrings = {
         // [Auto-translated] "Layout"
         base: "Oppsett"
       },
-      // "Data"
+      // [Auto-translated] "Data"
       data: "Data",
       // "Validation"
       validation: "Validering",
@@ -1680,7 +1770,7 @@ export var nbStrings = {
       showOnCompleted: "Vis når ferdig",
       // "Logo in the Survey Header"
       logo: "Logo i skjematittel",
-      // "Slider"
+      // [Auto-translated] "Slider"
       slider: "Slider",
       // [Auto-translated] "Expression"
       expression: "Uttrykk",
@@ -1797,10 +1887,10 @@ export var nbStrings = {
     minWidth_placeholder: "Eksempel: 600 piksler",
     // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Eks.: 50%",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Eks.: 100px",
     theme: {
@@ -2082,6 +2172,20 @@ export var nbStrings = {
       // [Auto-translated] "Informational"
       info: "Informativ"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Bilder",
+      // [Auto-translated] "Videos"
+      video: "Videoer",
+      // [Auto-translated] "Audio"
+      audio: "Lyd",
+      // [Auto-translated] "Documents"
+      document: "Dokumenter",
+      // [Auto-translated] "Archives"
+      archive: "Arkiver",
+      // [Auto-translated] "Custom"
+      custom: "Skikk"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Fullt navn",
@@ -2264,7 +2368,7 @@ export var nbStrings = {
     underRow: "Under raden",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Under raden viser du bare én inndeling",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2495,6 +2599,8 @@ export var nbStrings = {
     notcontains: "inneholder ikke",
     // "Any of"
     anyof: "noen av",
+    // [Auto-translated] "None of"
+    noneof: "Ingen av",
     // "All of"
     allof: "alle av",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var nbStrings = {
     loadFromServer: "Last skjemadefinisjon som JSON fra server",
     // "Scripts and styles"
     titleScript: "Skript og stiler",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,8 +3194,10 @@ export var nbStrings = {
     storeOthersAsComment: "Velg dette alternativet hvis du vil lagre alternativverdien «Annet» som en egen egenskap i undersøkelsesresultatene.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Bruk {0} som plassholder for den faktiske verdien.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Se attributtbeskrivelsen [accept](https://www.w3schools.com/tags/att_input_accept.asp) hvis du vil ha mer informasjon.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Velg \"Custom\" for å legge til dine egne filendelser oppå de forhåndsdefinerte kategoriene.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Skriv inn filendelser adskilt av kommaer (f.eks. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Gjelder bare for kolonner med \"Celleinndatatype\" satt til Alternativknappgruppe eller avkrysningsbokser.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3164,8 +3272,8 @@ export var nbStrings = {
   // Properties
   p: {
     title: {
-      // "title"
-      name: "title",
+      // [Auto-translated] "title"
+      name: "Tittel",
       // "Leave it empty, if it is the same as 'Name'"
       title: "La den være tom, dersom den skal være samme som navnet"
     },
@@ -3507,6 +3615,18 @@ export var nbStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Grunnleggende",
+      // [Auto-translated] "Advanced"
+      advanced: "Avansert",
+      // [Auto-translated] "Expert"
+      expert: "Ekspert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Forhåndsinnstilling anvendt"
   }
 };
 

@@ -47,8 +47,8 @@ export let svStrings = {
   qt: {
     // "Default"
     default: "Standard",
-    // "Checkboxes"
-    checkbox: "Checkboxes",
+    // [Auto-translated] "Checkboxes"
+    checkbox: "Kryssrutor",
     // "Long Text"
     comment: "Kommentar",
     // "Image Picker"
@@ -73,7 +73,7 @@ export let svStrings = {
     matrixdynamic: "Matris (dynamiska rader)",
     // "Multiple Textboxes"
     multipletext: "Flera texter",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dynamisk panel)",
@@ -85,8 +85,8 @@ export let svStrings = {
     slider: "Skjutreglage",
     // "Single-Line Input"
     text: "Enkel text",
-    // "Yes/No (Boolean)"
-    boolean: "Yes/No (Boolean)",
+    // [Auto-translated] "Yes/No (Boolean)"
+    boolean: "Ja/Nej (Boolesk)",
     // "Expression (read-only)"
     expression: "Formel",
     // [Auto-translated] "Signature"
@@ -105,8 +105,8 @@ export let svStrings = {
     containers: "Behållare",
     // "Matrix Questions"
     matrix: "Matris frågor",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Diverse"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -166,10 +166,10 @@ export let svStrings = {
     newPageName: "sida",
     // "question"
     newQuestionName: "fråga",
-    // "panel"
-    newPanelName: "panel",
-    // "text"
-    newTextItemName: "text",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
+    // [Auto-translated] "text"
+    newTextItemName: "Text",
     // [Auto-translated] "Default"
     defaultV2Theme: "Standard",
     // [Auto-translated] "Modern"
@@ -238,6 +238,18 @@ export let svStrings = {
     options: "Alternativ",
     // "Generate Valid JSON"
     generateValidJSON: "Generera giltig JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Okänd funktion: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Okända funktioner: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Okänd variabel: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Okända variabler: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Syntaxfel.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semantiskt fel.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generera läsbar JSON",
     // "Toolbox"
@@ -754,6 +766,14 @@ export let svStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttryck"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Uttryck"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Uttryck"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -871,8 +891,8 @@ export let svStrings = {
     inherit: "Ärva",
     // "Apply"
     apply: "Faställ",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "Okej",
     // [Auto-translated] "Save"
     save: "Spara",
     // [Auto-translated] "Clear"
@@ -1025,7 +1045,7 @@ export let svStrings = {
     expressionIsEmpty: "Uttrycket är tomt",
     // "Value"
     value: "Värde",
-    // "Text"
+    // [Auto-translated] "Text"
     text: "Text",
     // "Row ID"
     rowid: "Rad ID",
@@ -1035,7 +1055,7 @@ export let svStrings = {
     columnEdit: "Redigera kolumn: {0}",
     // "Edit item: {0}"
     itemEdit: "Redigera element: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Sökväg",
@@ -1101,6 +1121,8 @@ export let svStrings = {
     choicesOrder: "Välj ordning på valet",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Tillåt anpassade val",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Create Custom Choice\"-kommandotext",
     // "Visible"
     visible: "Synlig?",
     // "Required"
@@ -1481,6 +1503,66 @@ export let svStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format för knappbeskrivningar"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Bild-URL",
+      // [Auto-translated] "Areas"
+      areas: "Områden",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Tillåt flera val",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Värdefastighetens namn",
+      // [Auto-translated] "Shape"
+      shape: "Form",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-färg",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle stroke-färg",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Viloslagbredd",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill-färg",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Svepfärg",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Svevedragbredd",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Vald fyllnadsfärg",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Vald penselfärg",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Vald streckbredd",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maximalt utvalda områden",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimum utvalda områden"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Värde",
+      // [Auto-translated] "Shape"
+      shape: "Form",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinater",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-färg",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle stroke-färg",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Viloslagbredd",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill-färg",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Svepfärg",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Svevedragbredd",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Vald fyllnadsfärg",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Vald penselfärg",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Vald streckbredd"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Bildens höjd",
@@ -1511,6 +1593,8 @@ export let svStrings = {
     minErrorText: "Felmeddelandet \"Värdet är under minimum\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Felmeddelandet \"Värdet överskrider max\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Värdet matchar inte steglängden\" felmeddelande",
     // "\"Empty comment\" error message"
     otherErrorText: "Felmeddelandet \"Tom kommentar\"",
     // "Error message for duplicate responses"
@@ -2058,7 +2142,7 @@ export let svStrings = {
       range: "Sortiment",
       // [Auto-translated] "Phone Number"
       tel: "Telefonnummer",
-      // "Text"
+      // [Auto-translated] "Text"
       text: "Text",
       // [Auto-translated] "Time"
       time: "Tid",
@@ -2571,9 +2655,9 @@ export let svStrings = {
     loadFromServer: "Hämta enkäten som JSON från servern",
     // "Scripts and styles"
     titleScript: "Scripts och styles",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2619,7 +2703,7 @@ export let svStrings = {
   },
   peplaceholder: {
     patternmask: {
-      // "Ex.: +1(999)-999-99-99"
+      // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
@@ -2627,20 +2711,20 @@ export let svStrings = {
       pattern: "Ex.: mm/dd/åååå"
     },
     currencymask: {
-      // "Ex.: $"
+      // [Auto-translated] "Ex.: $"
       prefix: "Ex.: $",
-      // "Ex.: USD"
-      suffix: "Ex.: USD"
+      // [Auto-translated] "Ex.: USD"
+      suffix: "Exempel: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
     },
     panellayoutcolumn: {
-      // "Ex.: 30%"
-      effectiveWidth: "Ex.: 30%",
-      // "Ex.: 200px"
-      questionTitleWidth: "Ex.: 200px"
+      // [Auto-translated] "Ex.: 30%"
+      effectiveWidth: "Exempel: 30 %",
+      // [Auto-translated] "Ex.: 200px"
+      questionTitleWidth: "Exempel: 200px"
     }
   },
   pehelp: {
@@ -3189,8 +3273,8 @@ export let svStrings = {
   // Properties
   p: {
     title: {
-      // "title"
-      name: "title",
+      // [Auto-translated] "title"
+      name: "Titel",
       // "Leave it empty, if it is the same as 'Name'"
       title: "Lämna den tom, ifall det är samma som 'Name'"
     },
@@ -3532,6 +3616,18 @@ export let svStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Grundläggande",
+      // [Auto-translated] "Advanced"
+      advanced: "Avancerad",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Förinställning applicerad"
   }
 };
 

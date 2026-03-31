@@ -7,7 +7,7 @@ export var skStrings = {
     edit: "Upraviť",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Sledovať a zistiť, ako vytvárať prieskumy",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Sem zadajte otázku zo súpravy nástrojov.",
@@ -73,7 +73,7 @@ export var skStrings = {
     matrixdynamic: "Matica (dynamické riadky)",
     // "Multiple Textboxes"
     multipletext: "Text pri viacerých možnostiach",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dynamické panely)",
@@ -85,8 +85,8 @@ export var skStrings = {
     slider: "Jazdec",
     // "Single-Line Input"
     text: "Jeden vstup",
-    // "Yes/No (Boolean)"
-    boolean: "Yes/No (Boolean)",
+    // [Auto-translated] "Yes/No (Boolean)"
+    boolean: "Áno/Nie (Boolean)",
     // "Expression (read-only)"
     expression: "Výraz (iba na čítanie)",
     // "Signature"
@@ -105,8 +105,8 @@ export var skStrings = {
     containers: "Kontajnery",
     // "Matrix Questions"
     matrix: "Maticové otázky",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Rôzne"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -166,10 +166,10 @@ export var skStrings = {
     newPageName: "stránka",
     // "question"
     newQuestionName: "otázka",
-    // "panel"
-    newPanelName: "panel",
-    // "text"
-    newTextItemName: "text",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
+    // [Auto-translated] "text"
+    newTextItemName: "Text",
     // [Auto-translated] "Default"
     defaultV2Theme: "Predvolený",
     // [Auto-translated] "Modern"
@@ -238,6 +238,18 @@ export var skStrings = {
     options: "Možnosti",
     // "Generate Valid JSON"
     generateValidJSON: "Vygenerovať platný JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Neznáma funkcia: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Neznáme funkcie: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Neznáma premenná: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Neznáme premenné: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Syntaktická chyba.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Sémantická chyba.",
     // "Generate Readable JSON"
     generateReadableJSON: "Vygenerovať načítateľný JSON",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var skStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Vyjadrenie"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Vyjadrenie"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -870,8 +890,8 @@ export var skStrings = {
     inherit: "Zdediť",
     // "Apply"
     apply: "Použiť",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "Dobre",
     // "Save"
     save: "Uložiť",
     // [Auto-translated] "Clear"
@@ -928,7 +948,7 @@ export var skStrings = {
     showChoices: "Zobraziť možnosti",
     // "Move"
     move: "Presunúť",
-    // "<empty>"
+    // [Auto-translated] "<empty>"
     empty: "<empty>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Hodnota je prázdna",
@@ -1024,7 +1044,7 @@ export var skStrings = {
     expressionIsEmpty: "Výraz je prázdny",
     // "Value"
     value: "Hodnota",
-    // "Text"
+    // [Auto-translated] "Text"
     text: "Text",
     // "Row ID"
     rowid: "ID riadka",
@@ -1034,7 +1054,7 @@ export var skStrings = {
     columnEdit: "Upraviť stĺpec: {0}",
     // "Edit item: {0}"
     itemEdit: "Upraviť položku: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Cesta",
@@ -1100,6 +1120,8 @@ export var skStrings = {
     choicesOrder: "Poradie vybratých možností",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Povolenie vlastných volieb",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Text príkazu \"Create Custom Choice\"",
     // "Visible"
     visible: "Je viditeľné?",
     // "Required"
@@ -1480,6 +1502,66 @@ export var skStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formát popisu"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL obrázka",
+      // [Auto-translated] "Areas"
+      areas: "Oblasti",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Povoľte viacero výberov",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Názov hodnotovej nehnuteľnosti",
+      // [Auto-translated] "Shape"
+      shape: "Tvar",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Nečinná farba vyplňovania",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Farba voľnobežného ťahu",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Šírka zdvihu na voľnobeh",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Farba vyplňovania myšou",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Farba ťahu myšou",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Šírka ťahu myšou",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Vybraná farba výplne",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Vybraná farba ťahov",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Zvolená šírka ťahu",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maximálny počet vybraných oblastí",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimálne vybrané oblasti"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Hodnota",
+      // [Auto-translated] "Shape"
+      shape: "Tvar",
+      // [Auto-translated] "Coordinates"
+      coords: "Súradnice",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Nečinná farba vyplňovania",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Farba voľnobežného ťahu",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Šírka zdvihu na voľnobeh",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Farba vyplňovania myšou",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Farba ťahu myšou",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Šírka ťahu myšou",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Vybraná farba výplne",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Vybraná farba ťahov",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Zvolená šírka ťahu"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Výška obrázka",
@@ -1510,6 +1592,8 @@ export var skStrings = {
     minErrorText: "Chybové hlásenie \"Hodnota je nižšia ako minimum\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Chybové hlásenie \"Hodnota prekračuje maximum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Chybové hlásenie \"Hodnota sa nezhoduje s veľkosťou kroku\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Chybové hlásenie \"Prázdny komentár\"",
     // "Error message for duplicate responses"
@@ -1803,10 +1887,10 @@ export var skStrings = {
     minWidth_placeholder: "Napríklad: 600px",
     // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Napríklad: 50%",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Príklad: 100px",
     theme: {
@@ -2284,7 +2368,7 @@ export var skStrings = {
     underRow: "Pod riadkom",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Pod riadkom zobrazte iba jednu sekciu",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2570,9 +2654,9 @@ export var skStrings = {
     loadFromServer: "Načítať JSON prieskumu zo servera",
     // "Scripts and styles"
     titleScript: "Skripty a štýly",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3531,6 +3615,18 @@ export var skStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Základné",
+      // [Auto-translated] "Advanced"
+      advanced: "Pokročilé",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Použitá predsada"
   }
 };
 

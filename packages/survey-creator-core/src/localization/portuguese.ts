@@ -418,7 +418,7 @@ export var portugueseTranslation = {
     imageChooseImage: "Escolha a imagem",
     // "Add {0}"
     addNewTypeQuestion: "Adicionar {0}", // {0} is localizable question type
-    // "[LOGO]"
+    // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
     // [Auto-translated] "Item "
     choices_Item: "Item ",
@@ -765,6 +765,14 @@ export var portugueseTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expressão"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Expressão"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Expressão"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -882,7 +890,7 @@ export var portugueseTranslation = {
     inherit: "Herdar",
     // "Apply"
     apply: "Aplicar",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // "Save"
     save: "Guardar",
@@ -1046,7 +1054,7 @@ export var portugueseTranslation = {
     columnEdit: "Editar coluna: {0}",
     // "Edit item: {0}"
     itemEdit: "Editar item: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Caminho",
@@ -1112,6 +1120,8 @@ export var portugueseTranslation = {
     choicesOrder: "Selecione a ordem das alternativas",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Permitir escolhas personalizadas",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Texto do comando \"Criar Escolha Personalizada\"",
     // "Visible"
     visible: "É visível?",
     // "Required"
@@ -1294,8 +1304,8 @@ export var portugueseTranslation = {
     removePanelText: "Texto de remover painel",
     // "Show all elements on one page"
     isSinglePage: "Mostrar todos elementos em uma página",
-    // "HTML markup"
-    html: "HTML markup",
+    // [Auto-translated] "HTML markup"
+    html: "Marcação HTML",
     // "Answer"
     setValue: "Responder",
     // "Storage format"
@@ -1410,8 +1420,8 @@ export var portugueseTranslation = {
     maximumFractionDigits: "Máximo de dígitos fracionários",
     // "Minimum fractional digits"
     minimumFractionDigits: "Mínimo de dígitos fracionários",
-    // "Display grouping separators"
-    useGrouping: "Display grouping separators",
+    // [Auto-translated] "Display grouping separators"
+    useGrouping: "Separadores de agrupamento de exibição",
     // "Enable multiple file upload"
     allowMultiple: "Permitir vários arquivos",
     // "Preview uploaded images"
@@ -1582,6 +1592,8 @@ export var portugueseTranslation = {
     minErrorText: "\"O valor está abaixo do mínimo\" mensagem de erro",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"O valor excede o máximo\" mensagem de erro",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Mensagem de erro \"O valor não corresponde ao tamanho do passo\"",
     // "\"Empty comment\" error message"
     otherErrorText: "\"Comentário vazio\" mensagem de erro",
     // "Error message for duplicate responses"
@@ -1730,8 +1742,8 @@ export var portugueseTranslation = {
       timer: "Cronômetro/Quiz",
       // "Calculated Values"
       calculatedValues: "Valores Calculados",
-      // "Triggers"
-      triggers: "Triggers",
+      // [Auto-translated] "Triggers"
+      triggers: "Gatilhos",
       // "Title template"
       templateTitle: "Título do template",
       // "Totals"
@@ -1748,8 +1760,8 @@ export var portugueseTranslation = {
         // [Auto-translated] "Layout"
         base: "Layout"
       },
-      // "Data"
-      data: "Data",
+      // [Auto-translated] "Data"
+      data: "Dados",
       // "Validation"
       validation: "Validação",
       // "Individual Cell Texts"
@@ -1758,7 +1770,7 @@ export var portugueseTranslation = {
       showOnCompleted: "Questionário Completo",
       // "Logo in the Survey Header"
       logo: "Logo no Título de Questionário",
-      // "Slider"
+      // [Auto-translated] "Slider"
       slider: "Slider",
       // "Expression"
       expression: "Expressão",
@@ -1875,10 +1887,10 @@ export var portugueseTranslation = {
     minWidth_placeholder: "Ex.: 600px",
     // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Ex.: 50%",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
@@ -2006,8 +2018,8 @@ export var portugueseTranslation = {
     selected: "Selecionado",
     // [Auto-translated] "Unselected"
     unselected: "Desmarcado",
-    // "decimal"
-    decimal: "decimal",
+    // [Auto-translated] "decimal"
+    decimal: "Decimal",
     // "currency"
     currency: "moeda",
     // "percent"
@@ -2064,18 +2076,18 @@ export var portugueseTranslation = {
     month: "mês",
     // "number"
     number: "número",
-    // "password"
-    password: "password",
+    // [Auto-translated] "password"
+    password: "senha",
     // "range"
     range: "intervalo",
-    // "tel"
+    // [Auto-translated] "tel"
     tel: "tel",
     // "text"
     text: "texto",
     // "time"
     time: "tempo",
-    // "url"
-    url: "url",
+    // [Auto-translated] "url"
+    url: "URL",
     // "week"
     week: "semana",
     // "Hidden"
@@ -2385,9 +2397,9 @@ export var portugueseTranslation = {
     contentMode: {
       // "Image"
       image: "Imagem",
-      // "Video"
-      video: "Video",
-      // "YouTube"
+      // [Auto-translated] "Video"
+      video: "Vídeo",
+      // [Auto-translated] "YouTube"
       youtube: "YouTube"
     },
     displayMode: {
@@ -2642,9 +2654,9 @@ export var portugueseTranslation = {
     loadFromServer: "Carregar JSON da pesquisa de um servidor",
     // "Scripts and styles"
     titleScript: "Scripts e estilos",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2690,7 +2702,7 @@ export var portugueseTranslation = {
   },
   peplaceholder: {
     patternmask: {
-      // "Ex.: +1(999)-999-99-99"
+      // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
@@ -2698,9 +2710,9 @@ export var portugueseTranslation = {
       pattern: "Ex.: dd/mm/aaaa HH:MM:ss"
     },
     currencymask: {
-      // "Ex.: $"
+      // [Auto-translated] "Ex.: $"
       prefix: "Ex.: $",
-      // "Ex.: USD"
+      // [Auto-translated] "Ex.: USD"
       suffix: "Ex.: USD"
     },
     panelbase: {
@@ -2708,9 +2720,9 @@ export var portugueseTranslation = {
       questionTitleWidth: "Ex.: 200px"
     },
     panellayoutcolumn: {
-      // "Ex.: 30%"
+      // [Auto-translated] "Ex.: 30%"
       effectiveWidth: "Ex.: 30%",
-      // "Ex.: 200px"
+      // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
     }
   },
@@ -3612,7 +3624,9 @@ export var portugueseTranslation = {
       advanced: "Avançado",
       // [Auto-translated] "Expert"
       expert: "Especialista"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Pré-definição aplicada"
   }
 };
 

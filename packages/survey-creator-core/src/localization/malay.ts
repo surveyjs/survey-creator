@@ -3,11 +3,11 @@ import { setupLocale } from "survey-creator-core";
 export var msStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Edit",
+    // [Auto-translated] "Edit"
+    edit: "Suntingan",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Tonton dan belajar cara mencipta tinjauan",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Sila letakkan soalan di sini daripada Kotak Alat",
@@ -63,7 +63,7 @@ export var msStrings = {
     tagbox: "Juntai Bawah Berbilang Pilihan",
     // "File Upload"
     file: "Fail",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Matriks (pilihan tunggal)",
@@ -73,7 +73,7 @@ export var msStrings = {
     matrixdynamic: "Matriks (baris dinamik)",
     // "Multiple Textboxes"
     multipletext: "Teks Berbilang",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (panel dinamik)",
@@ -85,8 +85,8 @@ export var msStrings = {
     slider: "Penggelongsor",
     // "Single-Line Input"
     text: "Input Tunggal",
-    // "Yes/No (Boolean)"
-    boolean: "Yes/No (Boolean)",
+    // [Auto-translated] "Yes/No (Boolean)"
+    boolean: "Ya/Tidak (Boolean)",
     // "Expression (read-only)"
     expression: "Ekspresi (baca sahaja)",
     // "Signature"
@@ -105,8 +105,8 @@ export var msStrings = {
     containers: "Bekas",
     // "Matrix Questions"
     matrix: "Soalan Matriks",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Pelbagai"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -160,14 +160,14 @@ export var msStrings = {
     deletePage: "Padamkan Halaman",
     // "Edit Page"
     editPage: "Edit Halaman",
-    // "Edit"
-    edit: "Edit",
+    // [Auto-translated] "Edit"
+    edit: "Suntingan",
     // "page"
     newPageName: "halaman",
     // "question"
     newQuestionName: "soalan",
-    // "panel"
-    newPanelName: "panel",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
     // "text"
     newTextItemName: "teks",
     // [Auto-translated] "Default"
@@ -238,6 +238,18 @@ export var msStrings = {
     options: "Pilihan",
     // "Generate Valid JSON"
     generateValidJSON: "Jana JSON yang Sah",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Fungsi tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Fungsi tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Pembolehubah tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Pembolehubah tidak diketahui: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Ralat sintaks.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Ralat semantik.",
     // "Generate Readable JSON"
     generateReadableJSON: "Jana JSON yang Boleh Dibaca",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var msStrings = {
       // [Auto-translated] "Expression"
       expression: "Ungkapan"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ungkapan"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ungkapan"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -870,7 +890,7 @@ export var msStrings = {
     inherit: "Mewarisi",
     // "Apply"
     apply: "Guna",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // "Save"
     save: "Simpan",
@@ -910,8 +930,8 @@ export var msStrings = {
     addNone: "Tiada",
     // "Remove All"
     removeAll: "Alih Keluar Semua",
-    // "Edit"
-    edit: "Edit",
+    // [Auto-translated] "Edit"
+    edit: "Suntingan",
     // "Return without saving"
     back: "Kembali tanpa menyimpan",
     // "Return without saving"
@@ -928,7 +948,7 @@ export var msStrings = {
     showChoices: "Tunjukkan Pilihan",
     // "Move"
     move: "Alih",
-    // "<empty>"
+    // [Auto-translated] "<empty>"
     empty: "<empty>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Nilai kosong",
@@ -1032,9 +1052,9 @@ export var msStrings = {
     imageLink: "Pautan Imej",
     // "Edit column: {0}"
     columnEdit: "Edit lajur: {0}",
-    // "Edit item: {0}"
+    // [Auto-translated] "Edit item: {0}"
     itemEdit: "Edit item: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Laluan",
@@ -1100,6 +1120,8 @@ export var msStrings = {
     choicesOrder: "Pilih susunan pilihan",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Benarkan pilihan tersuai",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Teks arahan \"Buat Pilihan Tersuai\"",
     // "Visible"
     visible: "Boleh dilihat?",
     // "Required"
@@ -1162,14 +1184,14 @@ export var msStrings = {
     cellsDefaultRow: "Teks sel lalai",
     // "Edit survey settings"
     surveyEditorTitle: "Edit tetapan tinjauan",
-    // "Edit: {0}"
-    qEditorTitle: "Edit: {0}",
+    // [Auto-translated] "Edit: {0}"
+    qEditorTitle: "Suntingan: {0}",
     // "Maximum character limit"
     maxLength: "Panjang maksimum",
     // "Build"
     buildExpression: "Bina",
-    // "Edit"
-    editExpression: "Edit",
+    // [Auto-translated] "Edit"
+    editExpression: "Suntingan",
     // [Auto-translated] "and"
     and: "Dan",
     // [Auto-translated] "or"
@@ -1480,6 +1502,66 @@ export var msStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format petua alat"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL Imej",
+      // [Auto-translated] "Areas"
+      areas: "Kawasan",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Benarkan berbilang pilihan",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Nama harta nilai",
+      // [Auto-translated] "Shape"
+      shape: "Bentuk",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Warna isian terbiar",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Warna strok terbiar",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lebar strok terbiar",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Warna isian tuding",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Warna strok tuding",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lebar strok hover",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Warna isian yang dipilih",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Warna strok terpilih",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lebar strok yang dipilih",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Kawasan maksimum yang dipilih",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Kawasan terpilih minimum"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Nilai",
+      // [Auto-translated] "Shape"
+      shape: "Bentuk",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinat",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Warna isian terbiar",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Warna strok terbiar",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lebar strok terbiar",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Warna isian tuding",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Warna strok tuding",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lebar strok hover",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Warna isian yang dipilih",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Warna strok terpilih",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lebar strok yang dipilih"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Ketinggian imej",
@@ -1510,6 +1592,8 @@ export var msStrings = {
     minErrorText: "Mesej ralat \"Nilai adalah di bawah minimum\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Mesej ralat \"Nilai melebihi maksimum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Mesej ralat \"Nilai tidak sepadan dengan saiz langkah\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Mesej ralat \"komen kosong\"",
     // "Error message for duplicate responses"
@@ -1676,7 +1760,7 @@ export var msStrings = {
         // [Auto-translated] "Layout"
         base: "Susun atur"
       },
-      // "Data"
+      // [Auto-translated] "Data"
       data: "Data",
       // "Validation"
       validation: "Pengesahan",
@@ -2284,7 +2368,7 @@ export var msStrings = {
     underRow: "Di bawah baris",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Di bawah baris, paparkan satu bahagian sahaja",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2570,9 +2654,9 @@ export var msStrings = {
     loadFromServer: "Muatkan Tinjauan JSON daripada pelayan",
     // "Scripts and styles"
     titleScript: "Skrip dan gaya",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2618,18 +2702,18 @@ export var msStrings = {
   },
   peplaceholder: {
     patternmask: {
-      // "Ex.: +1(999)-999-99-99"
-      pattern: "Ex.: +1(999)-999-99-99"
+      // [Auto-translated] "Ex.: +1(999)-999-99-99"
+      pattern: "Cth.: +1(999)-999-99-99"
     },
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Cth.: mm/dd/yyyy HH:MM:ss"
     },
     currencymask: {
-      // "Ex.: $"
-      prefix: "Ex.: $",
-      // "Ex.: USD"
-      suffix: "Ex.: USD"
+      // [Auto-translated] "Ex.: $"
+      prefix: "Cth.: $",
+      // [Auto-translated] "Ex.: USD"
+      suffix: "Cth.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -3540,7 +3624,9 @@ export var msStrings = {
       advanced: "Lanjutan",
       // [Auto-translated] "Expert"
       expert: "Pakar"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Pratetap digunakan"
   }
 };
 

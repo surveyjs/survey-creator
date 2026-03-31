@@ -7,7 +7,7 @@ export var arStrings = {
     edit: "تعديل",
     // "Watch and learn how to create surveys"
     externalHelpLink: "شاهد وتعلم كيف يتم إنشاء إستبيان",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "الرجاء إفلات السؤال هنا من صندوق الأدوات",
@@ -38,8 +38,8 @@ export var arStrings = {
     translation: "Translation",
     // "Designer"
     designer: "تصميم الإستبيان",
-    // "JSON Editor"
-    json: "JSON Editor",
+    // [Auto-translated] "JSON Editor"
+    json: "محرر JSON",
     // "Logic"
     logic: "منطق الإستبيان"
   },
@@ -132,10 +132,10 @@ export var arStrings = {
     showPanel: "إظهار اللوحة",
     // "Hide Panel"
     hidePanel: "إخفاء اللوحة",
-    // "Select previous"
-    prevSelected: "Select previous",
-    // "Select next"
-    nextSelected: "Select next",
+    // [Auto-translated] "Select previous"
+    prevSelected: "اختر سابقا",
+    // [Auto-translated] "Select next"
+    nextSelected: "اختر التالي",
     // [Auto-translated] "Focus previous"
     prevFocus: "التركيز السابق",
     // [Auto-translated] "Focus next"
@@ -148,18 +148,18 @@ export var arStrings = {
     panelTypeName: "اللوحة",
     // "Question"
     questionTypeName: "السؤال",
-    // "Column"
-    columnTypeName: "Column",
-    // "Add New Page"
-    addNewPage: "Add New Page",
-    // "Scroll to the Right"
-    moveRight: "Scroll to the Right",
-    // "Scroll to the Left"
-    moveLeft: "Scroll to the Left",
-    // "Delete Page"
-    deletePage: "Delete Page",
-    // "Edit Page"
-    editPage: "Edit Page",
+    // [Auto-translated] "Column"
+    columnTypeName: "العمود",
+    // [Auto-translated] "Add New Page"
+    addNewPage: "إضافة صفحة جديدة",
+    // [Auto-translated] "Scroll to the Right"
+    moveRight: "انزل إلى اليمين",
+    // [Auto-translated] "Scroll to the Left"
+    moveLeft: "انزل إلى اليسار",
+    // [Auto-translated] "Delete Page"
+    deletePage: "حذف الصفحة",
+    // [Auto-translated] "Edit Page"
+    editPage: "تحرير الصفحة",
     // "Edit"
     edit: "التعديل",
     // "page"
@@ -168,8 +168,8 @@ export var arStrings = {
     newQuestionName: "السؤال",
     // "panel"
     newPanelName: "اللوحة",
-    // "text"
-    newTextItemName: "text",
+    // [Auto-translated] "text"
+    newTextItemName: "النص",
     // [Auto-translated] "Default"
     defaultV2Theme: "افتراضي",
     // [Auto-translated] "Modern"
@@ -178,30 +178,30 @@ export var arStrings = {
     defaultTheme: "الافتراضي (القديم)",
     // "Preview Survey Again"
     testSurveyAgain: "Test Survey Again",
-    // "Survey width: "
-    testSurveyWidth: "Survey width: ",
+    // [Auto-translated] "Survey width: "
+    testSurveyWidth: "عرض المسح: ",
     // "You had to navigate to"
     navigateToMsg: "You had to navigate to:",
-    // "Save Survey"
-    saveSurvey: "Save Survey",
-    // "Save Survey"
-    saveSurveyTooltip: "Save Survey",
+    // [Auto-translated] "Save Survey"
+    saveSurvey: "حفظ المسح",
+    // [Auto-translated] "Save Survey"
+    saveSurveyTooltip: "حفظ المسح",
     // [Auto-translated] "Save Theme"
     saveTheme: "حفظ السمة",
     // [Auto-translated] "Save Theme"
     saveThemeTooltip: "حفظ السمة",
-    // "Hide errors"
-    jsonHideErrors: "Hide errors",
-    // "Show errors"
-    jsonShowErrors: "Show errors",
-    // "Undo"
-    undo: "Undo",
-    // "Redo"
-    redo: "Redo",
-    // "Undo last change"
-    undoTooltip: "Undo last change",
-    // "Redo the change"
-    redoTooltip: "Redo the change",
+    // [Auto-translated] "Hide errors"
+    jsonHideErrors: "إخفاء الأخطاء",
+    // [Auto-translated] "Show errors"
+    jsonShowErrors: "أخطاء العرض",
+    // [Auto-translated] "Undo"
+    undo: "التراجع",
+    // [Auto-translated] "Redo"
+    redo: "إعادة الترتيب",
+    // [Auto-translated] "Undo last change"
+    undoTooltip: "التراجع عن آخر تغيير",
+    // [Auto-translated] "Redo the change"
+    redoTooltip: "أعد التغيير",
     // [Auto-translated] "Expand"
     expandTooltip: "ستوسع",
     // [Auto-translated] "Collapse"
@@ -222,58 +222,72 @@ export var arStrings = {
     showMoreChoices: "استعراض المزيد",
     // [Auto-translated] "Show less"
     showLessChoices: "عرض أقل",
-    // "Copy"
-    copy: "Copy",
-    // "Cut"
-    cut: "Cut",
-    // "Paste"
-    paste: "Paste",
-    // "Copy selection to clipboard"
-    copyTooltip: "Copy selection to clipboard",
-    // "Cut selection to clipboard"
-    cutTooltip: "Cut selection to clipboard",
-    // "Paste from clipboard"
-    pasteTooltip: "Paste from clipboard",
-    // "Options"
-    options: "Options",
-    // "Generate Valid JSON"
-    generateValidJSON: "Generate Valid JSON",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Generate Readable JSON",
-    // "Toolbox"
-    toolbox: "Toolbox",
-    // "Properties"
-    "property-grid": "Properties",
+    // [Auto-translated] "Copy"
+    copy: "نسخة",
+    // [Auto-translated] "Cut"
+    cut: "قطع",
+    // [Auto-translated] "Paste"
+    paste: "المعجون",
+    // [Auto-translated] "Copy selection to clipboard"
+    copyTooltip: "اختيار النسخ إلى الحافظة",
+    // [Auto-translated] "Cut selection to clipboard"
+    cutTooltip: "قطع الاختيار إلى لوحة الكتابة",
+    // [Auto-translated] "Paste from clipboard"
+    pasteTooltip: "لصق من الحافظة",
+    // [Auto-translated] "Options"
+    options: "الخيارات",
+    // [Auto-translated] "Generate Valid JSON"
+    generateValidJSON: "توليد JSON صالح",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "وظيفة غير معروفة: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "وظائف غير معروفة: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "متغير غير معروف: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "المتغيرات غير المعروفة: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "خطأ في النحو.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "خطأ دلالي.",
+    // [Auto-translated] "Generate Readable JSON"
+    generateReadableJSON: "توليد JSON قابل للقراءة",
+    // [Auto-translated] "Toolbox"
+    toolbox: "صندوق الأدوات",
+    // [Auto-translated] "Properties"
+    "property-grid": "الخصائص",
     // [Auto-translated] "Search"
     toolboxSearch: "بحث",
     // [Auto-translated] "Type to search..."
     toolboxFilteredTextPlaceholder: "اكتب للبحث...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "لم يتم العثور على نتائج",
-    // "Type to search..."
-    propertyGridFilteredTextPlaceholder: "Type to search...",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "لا توجد خصائص للعرض",
+    // [Auto-translated] "Type to search..."
+    propertyGridFilteredTextPlaceholder: "اكتب للبحث...",
     // [Auto-translated] "No results found"
     propertyGridNoResultsFound: "لم يتم العثور على نتائج",
     // [Auto-translated] "Start configuring your form"
     propertyGridPlaceholderTitle: "بدء تكوين النموذج الخاص بك",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "انقر فوق أي رمز فئة لاستكشاف إعدادات الاستطلاع. ستتوفر إعدادات إضافية بمجرد إضافة عنصر استطلاع إلى سطح التصميم.",
-    // "Please correct JSON."
-    correctJSON: "Please correct JSON.",
-    // "Survey Results "
-    surveyResults: "Survey Results ",
-    // "As Table"
-    surveyResultsTable: "As Table",
-    // "As JSON"
-    surveyResultsJson: "As JSON",
-    // "Question Title"
-    resultsTitle: "Question Title",
-    // "Question Name"
-    resultsName: "Question Name",
-    // "Answer Value"
-    resultsValue: "Answer Value",
-    // "Display Value"
-    resultsDisplayValue: "Display Value",
+    // [Auto-translated] "Please correct JSON."
+    correctJSON: "يرجى تصحيح JSON.",
+    // [Auto-translated] "Survey Results "
+    surveyResults: "نتائج الاستطلاع ",
+    // [Auto-translated] "As Table"
+    surveyResultsTable: "كطاولة",
+    // [Auto-translated] "As JSON"
+    surveyResultsJson: "ك JSON",
+    // [Auto-translated] "Question Title"
+    resultsTitle: "عنوان السؤال",
+    // [Auto-translated] "Question Name"
+    resultsName: "اسم السؤال",
+    // [Auto-translated] "Answer Value"
+    resultsValue: "قيمة الإجابة",
+    // [Auto-translated] "Display Value"
+    resultsDisplayValue: "قيمة العرض",
     // "Modified"
     modified: "هناك تعديل جديد",
     // "Saving"
@@ -282,20 +296,20 @@ export var arStrings = {
     saved: "تم الحفظ",
     // "Error"
     propertyEditorError: "خطأ:",
-    // "Error! Editor content is not saved."
-    saveError: "Error! Editor content is not saved.",
-    // "Language Settings"
-    translationPropertyGridTitle: "Language Settings",
+    // [Auto-translated] "Error! Editor content is not saved."
+    saveError: "خطأ! محتوى المحرر لا يتم حفظه.",
+    // [Auto-translated] "Language Settings"
+    translationPropertyGridTitle: "إعدادات اللغة",
     // [Auto-translated] "Theme Settings"
     themePropertyGridTitle: "إعدادات النسق",
     // [Auto-translated] "Add Language"
     addLanguageTooltip: "إضافة لغة",
-    // "Languages"
-    translationLanguages: "Languages",
+    // [Auto-translated] "Languages"
+    translationLanguages: "اللغات",
     // [Auto-translated] "Are you certain you wish to delete all strings for this language?"
     translationDeleteLanguage: "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟",
-    // "Select language to translate"
-    translationAddLanguage: "Select language to translate",
+    // [Auto-translated] "Select language to translate"
+    translationAddLanguage: "اختر اللغة للترجمة",
     // "All Strings"
     translationShowAllStrings: "Show all strings",
     // [Auto-translated] "Used Strings Only"
@@ -304,20 +318,20 @@ export var arStrings = {
     translationShowAllPages: "Show all pages",
     // "No strings to translate. Please change the filter."
     translationNoStrings: "No strings to translate. Please, change the filter.",
-    // "Export to CSV"
-    translationExportToSCVButton: "Export to CSV",
-    // "Import from CSV"
-    translationImportFromSCVButton: "Import from CSV",
+    // [Auto-translated] "Export to CSV"
+    translationExportToSCVButton: "التصدير إلى CSV",
+    // [Auto-translated] "Import from CSV"
+    translationImportFromSCVButton: "استيراد من CSV",
     // [Auto-translated] "Auto-translate All"
     translateUsigAI: "ترجمة تلقائية للكل",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "ترجمة من: ",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "النصوص غير المترجمة",
-    // "Merge {0} with default locale"
-    translationMergeLocaleWithDefault: "Merge {0} with default locale",
-    // "Translation..."
-    translationPlaceHolder: "Translation...",
+    // [Auto-translated] "Merge {0} with default locale"
+    translationMergeLocaleWithDefault: "دمج {0} مع الموقع الافتراضي",
+    // [Auto-translated] "Translation..."
+    translationPlaceHolder: "الترجمة...",
     // [Auto-translated] "Source: "
     translationSource: "مصدر: ",
     // [Auto-translated] "Target: "
@@ -340,16 +354,16 @@ export var arStrings = {
     themeResetConfirmation: "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
-    // "Bold"
-    bold: "Bold",
-    // "Italic"
-    italic: "Italic",
-    // "Underline"
-    underline: "Underline",
-    // "Add Question"
-    addNewQuestion: "Add Question",
-    // "Select page..."
-    selectPage: "Select page...",
+    // [Auto-translated] "Bold"
+    bold: "جريئة",
+    // [Auto-translated] "Italic"
+    italic: "خط ما��ل",
+    // [Auto-translated] "Underline"
+    underline: "خط تحت",
+    // [Auto-translated] "Add Question"
+    addNewQuestion: "إضافة سؤال",
+    // [Auto-translated] "Select page..."
+    selectPage: "اختر صفحة...",
     // [Auto-translated] "Choices are copied from"
     carryForwardChoicesCopied: "يتم نسخ الاختيارات من",
     // [Auto-translated] "Choices are loaded from a web service."
@@ -402,8 +416,8 @@ export var arStrings = {
     imagePlaceHolderMobile: "انقر فوق الزر أدناه واختر صورة لتحميلها",
     // [Auto-translated] "Choose Image"
     imageChooseImage: "اختر صورة",
-    // "Add {0}"
-    addNewTypeQuestion: "Add {0}", // {0} is localizable question type
+    // [Auto-translated] "Add {0}"
+    addNewTypeQuestion: "أضف {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[الشعار]",
     // [Auto-translated] "Item "
@@ -545,10 +559,10 @@ export var arStrings = {
       showAllQuestions: "عرض كل الأسئلة",
       // "All Action Types"
       showAllActionTypes: "عرض كل أنواع الإجراءات",
-      // "Condition(s)"
-      conditions: "Condition(s)",
-      // "Action(s)"
-      actions: "Action(s)",
+      // [Auto-translated] "Condition(s)"
+      conditions: "الحالة أو الحالات",
+      // [Auto-translated] "Action(s)"
+      actions: "الفعل أو الأفعال",
       // "Define condition(s)"
       expressionEditorTitle: "تعريف شرط(إشتراطات)",
       // "Define action(s)"
@@ -751,6 +765,14 @@ export var arStrings = {
       // [Auto-translated] "Expression"
       expression: "تعبير"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "التعبير"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "التعبير"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -880,12 +902,12 @@ export var arStrings = {
     cancel: "إلغاء",
     // "Set"
     set: "تثبيت",
-    // "Reset"
-    reset: "Reset",
+    // [Auto-translated] "Reset"
+    reset: "إعادة التعيين",
     // "Change"
     change: "تغيير",
-    // "Refresh"
-    refresh: "Refresh",
+    // [Auto-translated] "Refresh"
+    refresh: "تحديث",
     // "Close"
     close: "إغلاق",
     // "Delete"
@@ -894,92 +916,92 @@ export var arStrings = {
     add: "إضافة",
     // "Add New"
     addNew: "إضافة إرتباط جديد",
-    // "Click to add an item..."
-    addItem: "Click to add an item...",
-    // "Click to remove the item..."
-    removeItem: "Click to remove the item...",
-    // "Drag the item"
-    dragItem: "Drag the item",
-    // "Other"
-    addOther: "Other",
-    // "Select All"
-    addSelectAll: "Select All",
-    // "None"
-    addNone: "None",
-    // "Remove All"
-    removeAll: "Remove All",
+    // [Auto-translated] "Click to add an item..."
+    addItem: "انقر لإضافة عنصر...",
+    // [Auto-translated] "Click to remove the item..."
+    removeItem: "انقر لإزالة العنصر...",
+    // [Auto-translated] "Drag the item"
+    dragItem: "سحب العنصر",
+    // [Auto-translated] "Other"
+    addOther: "أخرى",
+    // [Auto-translated] "Select All"
+    addSelectAll: "اختر الجميع",
+    // [Auto-translated] "None"
+    addNone: "لا شيء",
+    // [Auto-translated] "Remove All"
+    removeAll: "إزالة الكل",
     // "Edit"
     edit: "التعديل",
-    // "Return without saving"
-    back: "Return without saving",
-    // "Return without saving"
-    backTooltip: "Return without saving",
-    // "Save and return"
-    saveAndBack: "Save and return",
-    // "Save and return"
-    saveAndBackTooltip: "Save and return",
+    // [Auto-translated] "Return without saving"
+    back: "العودة دون حفظ",
+    // [Auto-translated] "Return without saving"
+    backTooltip: "العودة دون حفظ",
+    // [Auto-translated] "Save and return"
+    saveAndBack: "الحفظ والعودة",
+    // [Auto-translated] "Save and return"
+    saveAndBackTooltip: "الحفظ والعودة",
     // "Done"
     doneEditing: "إضافة",
-    // "Edit Choices"
-    editChoices: "Edit Choices",
-    // "Show Choices"
-    showChoices: "Show Choices",
-    // "Move"
-    move: "Move",
-    // "<empty>"
+    // [Auto-translated] "Edit Choices"
+    editChoices: "خيارات التعديل",
+    // [Auto-translated] "Show Choices"
+    showChoices: "اختيارات العرض",
+    // [Auto-translated] "Move"
+    move: "تحرك",
+    // [Auto-translated] "<empty>"
     empty: "<empty>",
     // "Value is empty"
     emptyValue: "القيمة فارغة",
     // "Manual Entry"
     fastEntry: "إدخالات سريعة",
-    // "Value '{0}' is not unique"
-    fastEntryNonUniqueError: "Value '{0}' is not unique",
-    // "Please limit the number of items from {0} to {1}"
-    fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
+    // [Auto-translated] "Value '{0}' is not unique"
+    fastEntryNonUniqueError: "القيمة '{0}' ليست فريدة",
+    // [Auto-translated] "Please limit the number of items from {0} to {1}"
+    fastEntryChoicesCountError: "يرجى تحديد عدد العناصر من {0} إلى {1}",
     // [Auto-translated] "Please enter at least {0} items"
     fastEntryChoicesMinCountError: "الرجاء إدخال {0} العناصر على الأقل",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "أدخل قائمة خيارات الاختيار ومعرفاتها بالتنسيق التالي:\n\nمعرف |خيار\n\nمعرف خيار الاختيار غير مرئي للمستجيبين ويمكن استخدامه في القواعد الشرطية.",
-    // "Form Entry"
-    formEntry: "Form Entry",
-    // "Test the service"
-    testService: "Test the service",
-    // "Please select the element"
-    itemSelectorEmpty: "Please select the element",
-    // "Please select the action"
-    conditionActionEmpty: "Please select the action",
+    // [Auto-translated] "Form Entry"
+    formEntry: "إدخال النموذج",
+    // [Auto-translated] "Test the service"
+    testService: "اختبار الخدمة",
+    // [Auto-translated] "Please select the element"
+    itemSelectorEmpty: "يرجى اختيار العنصر",
+    // [Auto-translated] "Please select the action"
+    conditionActionEmpty: "يرجى اختيار الإجراء",
     // "Select a question..."
     conditionSelectQuestion: "إختر السؤال...",
     // "Select a page..."
     conditionSelectPage: "Select page...",
     // "Select a panel..."
     conditionSelectPanel: "Select panel...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Please enter/select the value",
-    // "Press ctrl+space to get expression completion hint"
-    aceEditorHelp: "Press ctrl+space to get expression completion hint",
-    // "Current row"
-    aceEditorRowTitle: "Current row",
-    // "Current panel"
-    aceEditorPanelTitle: "Current panel",
-    // "For more details please check the documentation"
-    showMore: "For more details please check the documentation",
+    // [Auto-translated] "Please enter/select the value"
+    conditionValueQuestionTitle: "يرجى إدخال/اختيار القيمة",
+    // [Auto-translated] "Press ctrl+space to get expression completion hint"
+    aceEditorHelp: "اضغط على ctrl+space للحصول على تلميح إكمال التعبير",
+    // [Auto-translated] "Current row"
+    aceEditorRowTitle: "الصف الحالي",
+    // [Auto-translated] "Current panel"
+    aceEditorPanelTitle: "اللجنة الحالية",
+    // [Auto-translated] "For more details please check the documentation"
+    showMore: "لمزيد من التفاصيل يرجى مراجعة الوثائق",
     // "Available questions"
     assistantTitle: "Available questions:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "There is should be at least one column or row",
+    // [Auto-translated] "There is should be at least one column or row"
+    cellsEmptyRowsColumns: "يجب أن يكون هناك عمود أو صف واحد على الأقل",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "مراجعة قبل الإرسال",
     // [Auto-translated] "Enabled by a condition"
     overridingPropertyPrefix: "ممكن بواسطة شرط",
     // [Auto-translated] "Reset"
     resetToDefaultCaption: "اعاده تعيين",
-    // "Please enter a value"
-    propertyIsEmpty: "Please enter a value",
-    // "Please enter a unique value"
-    propertyIsNoUnique: "Please enter a unique value",
-    // "Please enter a unique name"
-    propertyNameIsNotUnique: "Please enter a unique name",
+    // [Auto-translated] "Please enter a value"
+    propertyIsEmpty: "يرجى إدخال قيمة",
+    // [Auto-translated] "Please enter a unique value"
+    propertyIsNoUnique: "يرجى إدخال قيمة فريدة",
+    // [Auto-translated] "Please enter a unique name"
+    propertyNameIsNotUnique: "يرجى إدخال اسم فريد",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "لا تستخدم الكلمات المحجوزة: \"عنصر\" ، \"اختيار\" ، \"لوحة\" ، \"صف\".",
     // "You don't have any items yet"
@@ -1018,20 +1040,20 @@ export var arStrings = {
     "addNew@navigateToUrlOnCondition": "إضافة عنوان URL جديد",
     // [Auto-translated] "Add new page"
     "addNew@pages": "إضافة صفحة جديدة",
-    // "Expression is empty"
-    expressionIsEmpty: "Expression is empty",
+    // [Auto-translated] "Expression is empty"
+    expressionIsEmpty: "التعبير فارغ",
     // "Value"
     value: "القيمة",
     // "Text"
     text: "النص",
-    // "Row ID"
-    rowid: "Row ID",
+    // [Auto-translated] "Row ID"
+    rowid: "معرف الصف",
     // "Image or video file URL"
     imageLink: "رابط الصورة",
-    // "Edit column: {0}"
-    columnEdit: "Edit column: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Edit item: {0}",
+    // [Auto-translated] "Edit column: {0}"
+    columnEdit: "عمود تعديل: {0}",
+    // [Auto-translated] "Edit item: {0}"
+    itemEdit: "عنصر تعديل: {0}",
     // "URL"
     url: "رابط إلكتروني URL",
     // "Path to data"
@@ -1098,6 +1120,8 @@ export var arStrings = {
     choicesOrder: "إختر ترتيب الإختيارات",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "السماح بالخيارات المخصصة",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "نص أمر \"إنشاء اختيار مخصص\"",
     // "Visible"
     visible: "مرئي؟",
     // "Required"
@@ -1158,14 +1182,14 @@ export var arStrings = {
     defaultValue: "القيمة الإفتراضية",
     // "Default texts"
     cellsDefaultRow: "Default cells texts",
-    // "Edit survey settings"
-    surveyEditorTitle: "Edit survey settings",
-    // "Edit: {0}"
-    qEditorTitle: "Edit: {0}",
+    // [Auto-translated] "Edit survey settings"
+    surveyEditorTitle: "تعديل إعدادات الاستبيان",
+    // [Auto-translated] "Edit: {0}"
+    qEditorTitle: "تعديل: {0}",
     // "Maximum character limit"
     maxLength: "أقصى طول",
-    // "Build"
-    buildExpression: "Build",
+    // [Auto-translated] "Build"
+    buildExpression: "البناء",
     // "Edit"
     editExpression: "التعديل",
     // [Auto-translated] "and"
@@ -1188,14 +1212,14 @@ export var arStrings = {
     fromName: "from",
     // [Auto-translated] "Question to skip to"
     gotoName: "سؤال للتخطي إليه",
-    // "Rule is incorrect"
-    ruleIsNotSet: "Rule is incorrect",
+    // [Auto-translated] "Rule is incorrect"
+    ruleIsNotSet: "القاعدة غير صحيحة",
     // [Auto-translated] "Add to the survey results"
     includeIntoResult: "أضف إلى نتائج الاستطلاع",
     // "Make the title and description visible"
     showTitle: "إظهار/إخفاء العنوان",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Expand/collapse title",
+    // [Auto-translated] "Expand/collapse title"
+    expandCollapseTitle: "عنوان التوسعة/الانهيار",
     // "Select a survey language"
     locale: "اللغة الإفتراضية",
     // "Select device type"
@@ -1252,8 +1276,8 @@ export var arStrings = {
     questionTitleWidth: "عرض عنوان السؤال",
     // "Required symbol(s)"
     requiredMark: "رمز السؤال مطلوب",
-    // "Question title template, default is: '{no}. {require} {title}'"
-    questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
+    // [Auto-translated] "Question title template, default is: '{no}. {require} {title}'"
+    questionTitleTemplate: "قالب عنوان السؤال، الافتراضي هو: '{لا}. {مطلوب} {عنوان}'",
     // "Error message alignment"
     questionErrorLocation: "موقع خطأ في السؤال",
     // "Focus first question on a new page"
@@ -1278,8 +1302,8 @@ export var arStrings = {
     addPanelText: "نص إضافة لوحة",
     // "\"Remove Entry\" button text"
     removePanelText: "نص إزالة لوحة",
-    // "Show all elements on one page"
-    isSinglePage: "Show all elements on one page",
+    // [Auto-translated] "Show all elements on one page"
+    isSinglePage: "عرض جميع العناصر في صفحة واحدة",
     // "HTML markup"
     html: "صفحة ويب HTML",
     // [Auto-translated] "Answer"
@@ -1310,19 +1334,19 @@ export var arStrings = {
     caseInsensitive: "غير حساس لحالة الأحرف",
     // "Minimum length (in characters)"
     minLength: "Minimum length",
-    // "Allow digits"
-    allowDigits: "Allow digits",
-    // "Minimum count"
-    minCount: "Minimum count",
-    // "Maximum count"
-    maxCount: "Maximum count",
-    // "Regular expression"
-    regex: "Regular expression",
+    // [Auto-translated] "Allow digits"
+    allowDigits: "السماح بالأرقام",
+    // [Auto-translated] "Minimum count"
+    minCount: "الحد الأدنى للعدد",
+    // [Auto-translated] "Maximum count"
+    maxCount: "أقصى عدد",
+    // [Auto-translated] "Regular expression"
+    regex: "التعبير النمطي",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "رسالة التحقق من الصحة",
-      // [Auto-translated] "Validation expression"
-      expression: "تعبير التحقق من الصحة",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "رسالة إشعار لإدخال غير صالح",
+      // [Auto-translated] "Valid when"
+      expression: "صحيح عندما",
       // [Auto-translated] "Notification type"
       notificationType: "نوع الإشعار",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1402,8 +1426,10 @@ export var arStrings = {
     allowMultiple: "تمكين تحميل ملفات متعددة",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "معاينة الصور التي تم تحميلها",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "أنواع الملفات المقبولة",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "فئات الملفات المقبولة",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "امتدادات ملفات إض��فية",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "انتظر حتى يكتمل التحميل",
     // [Auto-translated] "Confirm file deletion"
@@ -1476,6 +1502,66 @@ export var arStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "تنسيق تلميح الأداة"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "رابط الصورة",
+      // [Auto-translated] "Areas"
+      areas: "المناطق",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "السماح بعدة اختيارات",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "اسم عقار القيمة",
+      // [Auto-translated] "Shape"
+      shape: "الشكل",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "لون تعبئة الخمول",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "لون ضربة الخمول",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "عرض ضربة الخمول",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "لون تعبئة الطائرات",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "لون ضربة التحويم",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "عرض ضربة التحويم",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "لون تعبئة مختار",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "لون الضربة المختار",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "عرض الضربة المختار",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "أقصى مناطق مختارة",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "الحد الأدنى للمجالات المختارة"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "القيمة",
+      // [Auto-translated] "Shape"
+      shape: "الشكل",
+      // [Auto-translated] "Coordinates"
+      coords: "الإحداثيات",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "لون تعبئة الخمول",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "لون ضربة الخمول",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "عرض ضربة الخمول",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "لون تعبئة الطائرات",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "لون ضربة التحويم",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "عرض ضربة التحويم",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "لون تعبئة مختار",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "لون الضربة المختار",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "عرض الضربة المختار"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "ارتفاع الصورة",
@@ -1506,6 +1592,8 @@ export var arStrings = {
     minErrorText: "رسالة الخطأ \"القيمة أقل من الحد الأدنى\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "رسالة الخطأ \"القيمة تتجاوز الحد الأقصى\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "رسالة خطأ \"القيمة لا تطابق حجم الخطوة\"",
     // "\"Empty comment\" error message"
     otherErrorText: "رسالة الخطأ \"تعليق فارغ\"",
     // "Error message for duplicate responses"
@@ -1578,10 +1666,10 @@ export var arStrings = {
     },
     // "Logo alignment"
     logoPosition: "Logo position",
-    // "Add logo..."
-    addLogo: "Add logo...",
-    // "Change logo..."
-    changeLogo: "Change logo...",
+    // [Auto-translated] "Add logo..."
+    addLogo: "أضف الشعار...",
+    // [Auto-translated] "Change logo..."
+    changeLogo: "غير الشعار...",
     logoPositions: {
       // "Remove logo"
       none: "حذف الشعار",
@@ -1636,10 +1724,10 @@ export var arStrings = {
       sliderSettings: "إعدادات شريط التمرير",
       // "Choices from a Web Service"
       choicesByUrl: "خيارات من الإنترنت",
-      // "Default Choices"
-      matrixChoices: "Default Choices",
-      // "Text Inputs"
-      multipleTextItems: "Text Inputs",
+      // [Auto-translated] "Default Choices"
+      matrixChoices: "الخيارات الافتراضية",
+      // [Auto-translated] "Text Inputs"
+      multipleTextItems: "مدخلات النص",
       // "Numbering"
       numbering: "الترقيم",
       // "Validators"
@@ -1652,14 +1740,14 @@ export var arStrings = {
       pages: "الصفحات",
       // "Quiz Mode"
       timer: "مؤقت/إختبار قصير",
-      // "Calculated Values"
-      calculatedValues: "Calculated Values",
-      // "Triggers"
-      triggers: "Triggers",
+      // [Auto-translated] "Calculated Values"
+      calculatedValues: "القيم المحسوبة",
+      // [Auto-translated] "Triggers"
+      triggers: "المحفزات",
       // "Title template"
       templateTitle: "عنوان القالب",
-      // "Totals"
-      totals: "Totals",
+      // [Auto-translated] "Totals"
+      totals: "الإجماليات",
       // "Conditions"
       logic: "المنطق",
       // [Auto-translated] "Input Mask Settings"
@@ -1682,8 +1770,8 @@ export var arStrings = {
       showOnCompleted: "عند الإنتهاء من الإستبيان",
       // "Logo in the Survey Header"
       logo: "الشعار في عنوان الإستبيان",
-      // "Slider"
-      slider: "Slider",
+      // [Auto-translated] "Slider"
+      slider: "السلايدر",
       // [Auto-translated] "Expression"
       expression: "تعبير",
       // [Auto-translated] "Question Settings"
@@ -1703,10 +1791,10 @@ export var arStrings = {
       // "Others"
       others: "غير ذلك"
     },
-    // "Edit property '{0}'"
-    editProperty: "Edit property '{0}'",
-    // "Items"
-    items: "Items",
+    // [Auto-translated] "Edit property '{0}'"
+    editProperty: "تعديل خاصية '{0}'",
+    // [Auto-translated] "Items"
+    items: "العناصر",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "اجعل الخيارات مرئية إذا",
     // [Auto-translated] "Make choices selectable if"
@@ -1723,38 +1811,38 @@ export var arStrings = {
     enterNewValue: "Please, enter the value.",
     // "There are no questions in the survey."
     noquestions: "There is no any question in the survey.",
-    // "Please create a trigger"
-    createtrigger: "Please create a trigger",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Press enter button to edit",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
-    // "On "
-    triggerOn: "On ",
+    // [Auto-translated] "Please create a trigger"
+    createtrigger: "يرجى إنشاء محفز",
+    // [Auto-translated] "Press enter button to edit"
+    titleKeyboardAdornerTip: "اضغط زر Enter للتعديل",
+    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
+    keyboardAdornerTip: "اضغط زر Enter لتحرير العنصر، اضغط زر الحذف لحذف العنصر، اضغط Alt Plus سهم للأعلى أو سهم للأسفل لتحريك العنصر",
+    // [Auto-translated] "On "
+    triggerOn: "شغلوا ",
     // "Make pages visible"
     triggerMakePagesVisible: "Make pages visible:",
     // "Make elements visible"
     triggerMakeQuestionsVisible: "Make elements visible:",
     // "Complete the survey if successful."
     triggerCompleteText: "Complete the survey if succeed.",
-    // "The trigger is not set"
-    triggerNotSet: "The trigger is not set",
-    // "Run if"
-    triggerRunIf: "Run if",
-    // "Change value of: "
-    triggerSetToName: "Change value of: ",
-    // "Copy value from: "
-    triggerFromName: "Copy value from: ",
+    // [Auto-translated] "The trigger is not set"
+    triggerNotSet: "الزناد غير مضبوط",
+    // [Auto-translated] "Run if"
+    triggerRunIf: "شغل إذا",
+    // [Auto-translated] "Change value of: "
+    triggerSetToName: "قيمة التغيير ل: ",
+    // [Auto-translated] "Copy value from: "
+    triggerFromName: "قيمة النسخ: ",
     // "Run this Expression"
     triggerRunExpression: "Run this Expression:",
-    // "to: "
-    triggerSetValue: "to: ",
+    // [Auto-translated] "to: "
+    triggerSetValue: "إلى: ",
     // "Go to the question"
     triggerGotoName: "Go to the question:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Do not put the variable into the survey result.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Please enter a valid expression",
+    // [Auto-translated] "Do not put the variable into the survey result."
+    triggerIsVariable: "لا تضع المتغير في نتيجة الاستبيان.",
+    // [Auto-translated] "Please enter a valid expression"
+    triggerRunExpressionEmpty: "يرجى إدخال تعبير صحيح",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "اكتب التعبير هنا...",
     // "No file chosen"
@@ -2083,6 +2171,20 @@ export var arStrings = {
       warning: "تحذير",
       // [Auto-translated] "Informational"
       info: "اعلاميه"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "الصور",
+      // [Auto-translated] "Videos"
+      video: "الفيديوهات",
+      // [Auto-translated] "Audio"
+      audio: "الصوت",
+      // [Auto-translated] "Documents"
+      document: "الوثائق",
+      // [Auto-translated] "Archives"
+      archive: "الأرشيفات",
+      // [Auto-translated] "Custom"
+      custom: "العرف"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2497,6 +2599,8 @@ export var arStrings = {
     notcontains: "لا تحتوي",
     // "Any of"
     anyof: "أي من",
+    // [Auto-translated] "None of"
+    noneof: "لا شيء من ذلك",
     // "All of"
     allof: "كلاً من",
     // "Greater than"
@@ -2514,46 +2618,46 @@ export var arStrings = {
   },
   // Embed window
   ew: {
-    // "Use Angular version"
-    angular: "Use Angular version",
-    // "Use jQuery version"
-    jquery: "Use jQuery version",
-    // "Use Knockout version"
-    knockout: "Use Knockout version",
-    // "Use React version"
-    react: "Use React version",
-    // "Use Vue version"
-    vue: "Use Vue version",
-    // "For bootstrap framework"
-    bootstrap: "For bootstrap framework",
-    // "Modern theme"
-    modern: "Modern theme",
-    // "Default theme"
-    default: "Default theme",
-    // "Orange theme"
-    orange: "Orange theme",
-    // "Darkblue theme"
-    darkblue: "Darkblue theme",
-    // "Darkrose theme"
-    darkrose: "Darkrose theme",
-    // "Stone theme"
-    stone: "Stone theme",
-    // "Winter theme"
-    winter: "Winter theme",
-    // "Winter-Stone theme"
-    winterstone: "Winter-Stone theme",
-    // "Show survey on a page"
-    showOnPage: "Show survey on a page",
-    // "Show survey in a window"
-    showInWindow: "Show survey in a window",
-    // "Load Survey JSON from server"
-    loadFromServer: "Load Survey JSON from server",
-    // "Scripts and styles"
-    titleScript: "Scripts and styles",
-    // "HTML"
+    // [Auto-translated] "Use Angular version"
+    angular: "استخدم النسخة الزاوية",
+    // [Auto-translated] "Use jQuery version"
+    jquery: "استخدم نسخة jQuery",
+    // [Auto-translated] "Use Knockout version"
+    knockout: "استخدم نسخة Knockout",
+    // [Auto-translated] "Use React version"
+    react: "استخدم نسخة React",
+    // [Auto-translated] "Use Vue version"
+    vue: "استخدم نسخة Vue",
+    // [Auto-translated] "For bootstrap framework"
+    bootstrap: "إطار عمل bootstrap",
+    // [Auto-translated] "Modern theme"
+    modern: "الموضوع الحديث",
+    // [Auto-translated] "Default theme"
+    default: "الموضوع الافتراضي",
+    // [Auto-translated] "Orange theme"
+    orange: "موضوع برتقالي",
+    // [Auto-translated] "Darkblue theme"
+    darkblue: "موضوع الأزرق الداكن",
+    // [Auto-translated] "Darkrose theme"
+    darkrose: "موضوع داركروز",
+    // [Auto-translated] "Stone theme"
+    stone: "موضوع الحجر",
+    // [Auto-translated] "Winter theme"
+    winter: "موضوع الشتاء",
+    // [Auto-translated] "Winter-Stone theme"
+    winterstone: "موضوع حجر الشتاء",
+    // [Auto-translated] "Show survey on a page"
+    showOnPage: "عرض المسح على صفحة",
+    // [Auto-translated] "Show survey in a window"
+    showInWindow: "عرض المسح في نافذة",
+    // [Auto-translated] "Load Survey JSON from server"
+    loadFromServer: "تحميل مسح JSON من الخادم",
+    // [Auto-translated] "Scripts and styles"
+    titleScript: "النصوص والأساليب",
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
-    titleJavaScript: "JavaScript"
+    // [Auto-translated] "JavaScript"
+    titleJavaScript: "جافا سكريبت"
   },
   // Preview (Survey)
   ts: {
@@ -3090,8 +3194,10 @@ export var arStrings = {
     storeOthersAsComment: "حدد لتخزين قيمة الخيار \"أخرى\" كخاصية منفصلة في نتائج الاستطلاع.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "استخدم {0} كعنصر نائب للقيمة الفعلية.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "يرجى الرجوع إلى وصف السمة [قبول] (https://www.w3schools.com/tags/att_input_accept.asp) للحصول على مزيد من المعلومات.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "اختر \"مخصص\" لإضافة امتدادات ملفك الخاصة فوق الفئات المحددة مسبقا.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "أدخل امتدادات الملفات المفصولة بفواصل (مثل .csv، .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. ينطبق فقط على الأعمدة التي تم تعيين \"نوع إدخال الخلية\" عليها على مجموعة أزرار الاختيار أو خانات الاختيار.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3166,10 +3272,10 @@ export var arStrings = {
   // Properties
   p: {
     title: {
-      // "title"
-      name: "title",
-      // "Leave it empty, if it is the same as 'Name'"
-      title: "Leave it empty, if it is the same as 'Name'"
+      // [Auto-translated] "title"
+      name: "العنوان",
+      // [Auto-translated] "Leave it empty, if it is the same as 'Name'"
+      title: "اتركه فارغا إذا كان هو نفسه 'الاسم'"
     },
     // "Allow multiple selection"
     multiSelect: "متعدد الإختيار",
@@ -3509,6 +3615,18 @@ export var arStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "تباين"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "أساسي",
+      // [Auto-translated] "Advanced"
+      advanced: "متقدمة",
+      // [Auto-translated] "Expert"
+      expert: "خبير"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "تطبيق الإعداد المسبق"
   }
 };
 

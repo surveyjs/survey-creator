@@ -368,10 +368,43 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
+  /**
+   * Specifies whether to validate property values against their definitions.
+   *
+   * Default value: `true`
+   *
+   * > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
+   */
   public validateJsonPropertyValues: boolean = true;
+  /**
+   * Specifies whether to validate that functions referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
   public expressionsValidateFunctions: boolean = true;
+  /**
+   * Specifies whether to validate that variables and question, panel, or page names referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `false`
+   */
   public expressionsValidateVariables: boolean = false;
+  /**
+   * Specifies whether to validate the expression syntax (for example, unmatched parentheses, missing operands, or invalid operators).
+   *
+   * Default value: `true`
+   */
   public expressionsValidateSyntax: boolean = true;
+  /**
+   * Specifies whether to validate expressions that are syntactically valid but have no meaningful effect because they always evaluate to the same value.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
   public expressionsValidateSemantics: boolean = true;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**

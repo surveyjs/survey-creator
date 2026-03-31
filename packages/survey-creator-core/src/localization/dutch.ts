@@ -7,7 +7,7 @@ export var nlStrings = {
     edit: "Bewerk",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Bekijk en leer hoe u enquêtes maakt",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Stel hier een vraag vanuit de Toolbox.",
@@ -85,8 +85,8 @@ export var nlStrings = {
     slider: "Schuifregelaar",
     // "Single-Line Input"
     text: "Tekstvak",
-    // "Yes/No (Boolean)"
-    boolean: "Yes/No (Boolean)",
+    // [Auto-translated] "Yes/No (Boolean)"
+    boolean: "Ja/Nee (Booleaans)",
     // "Expression (read-only)"
     expression: "Berekening",
     // "Signature"
@@ -101,7 +101,7 @@ export var nlStrings = {
     choice: "Keuzevragen",
     // "Text Input Questions"
     text: "Vragen over tekstinvoer",
-    // "Containers"
+    // [Auto-translated] "Containers"
     containers: "Containers",
     // "Matrix Questions"
     matrix: "Matrix vragen",
@@ -238,6 +238,18 @@ export var nlStrings = {
     options: "Opties",
     // "Generate Valid JSON"
     generateValidJSON: "Genereer geldige JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Onbekende functie: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Onbekende functies: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Onbekende variabele: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Onbekende variabelen: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Syntaxisfout.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semantische fout.",
     // "Generate Readable JSON"
     generateReadableJSON: "Genereer leesbare JSON",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var nlStrings = {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Uitdrukking"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Uitdrukking"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -870,8 +890,8 @@ export var nlStrings = {
     inherit: "Erven",
     // "Apply"
     apply: "Van toepassing zijn",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "Oké",
     // "Save"
     save: "Opslaan",
     // [Auto-translated] "Clear"
@@ -1034,7 +1054,7 @@ export var nlStrings = {
     columnEdit: "Kolom bewerken: {0}",
     // "Edit item: {0}"
     itemEdit: "Bewerk item: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Pad",
@@ -1100,6 +1120,8 @@ export var nlStrings = {
     choicesOrder: "Volgorde opties",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Aangepaste keuzes toestaan",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Commandotekst \"Create Custom Choice\"",
     // "Visible"
     visible: "Is zichtbaar?",
     // "Required"
@@ -1480,6 +1502,66 @@ export var nlStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Tooltip formaat"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Afbeeldings-URL",
+      // [Auto-translated] "Areas"
+      areas: "Gebieden",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Sta meerdere selecties toe",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Naam van waarde-eigendom",
+      // [Auto-translated] "Shape"
+      shape: "Vorm",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-kleur",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle streekkleur",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Breedte van de inactieve slag",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill kleur",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Kleur van de zweefstreek",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hover-streekbreedte",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Geselecteerde vulkleur",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Geselecteerde streekkleur",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Geselecteerde streekbreedte",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maximaal geselecteerde gebieden",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimaal geselecteerde gebieden"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Waarde",
+      // [Auto-translated] "Shape"
+      shape: "Vorm",
+      // [Auto-translated] "Coordinates"
+      coords: "Coördinaten",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Idle fill-kleur",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Idle streekkleur",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Breedte van de inactieve slag",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill kleur",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Kleur van de zweefstreek",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hover-streekbreedte",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Geselecteerde vulkleur",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Geselecteerde streekkleur",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Geselecteerde streekbreedte"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Hoogte afbeelding",
@@ -1510,6 +1592,8 @@ export var nlStrings = {
     minErrorText: "Foutbericht 'Waarde is onder het minimum'",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Foutbericht 'Waarde overschrijdt maximum'",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Waarde komt niet overeen met stapgrootte\" foutmelding",
     // "\"Empty comment\" error message"
     otherErrorText: "Foutbericht 'Lege opmerking'",
     // "Error message for duplicate responses"
@@ -1646,7 +1730,7 @@ export var nlStrings = {
       multipleTextItems: "Tekstinvoer",
       // "Numbering"
       numbering: "Nummering",
-      // "Validators"
+      // [Auto-translated] "Validators"
       validators: "Validators",
       // "Navigation"
       navigation: "Navigatie",
@@ -1658,7 +1742,7 @@ export var nlStrings = {
       timer: "Timer/Quiz",
       // "Calculated Values"
       calculatedValues: "Berekende waardes",
-      // "Triggers"
+      // [Auto-translated] "Triggers"
       triggers: "Triggers",
       // "Title template"
       templateTitle: "Sjabloontitel",
@@ -1709,7 +1793,7 @@ export var nlStrings = {
     },
     // "Edit property '{0}'"
     editProperty: "Eigenschap '{0}' bewerken",
-    // "Items"
+    // [Auto-translated] "Items"
     items: "Items",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Maak keuzes zichtbaar als",
@@ -1960,7 +2044,7 @@ export var nlStrings = {
     horizontal: "Horizontaal",
     // "Vertical"
     vertical: "Verticaal",
-    // "Top"
+    // [Auto-translated] "Top"
     top: "Top",
     // "Bottom"
     bottom: "Beneden",
@@ -2057,8 +2141,8 @@ export var nlStrings = {
       range: "Bereik",
       // [Auto-translated] "Phone Number"
       tel: "Telefoonnummer",
-      // "Text"
-      text: "Text",
+      // [Auto-translated] "Text"
+      text: "Tekst",
       // [Auto-translated] "Time"
       time: "Tijd",
       // [Auto-translated] "URL"
@@ -2284,7 +2368,7 @@ export var nlStrings = {
     underRow: "Onder de rij",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Geef onder de rij slechts één sectie weer",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2570,9 +2654,9 @@ export var nlStrings = {
     loadFromServer: "Laad Survey JSON vanaf de server",
     // "Scripts and styles"
     titleScript: "Scripts en stijlen",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2597,7 +2681,7 @@ export var nlStrings = {
     expressionvalidator: "Uitdrukking",
     // "Number"
     numericvalidator: "Numeriek",
-    // "Regex"
+    // [Auto-translated] "Regex"
     regexvalidator: "Regex",
     // "Text"
     textvalidator: "Tekst"
@@ -3217,7 +3301,7 @@ export var nlStrings = {
     pages: "Bladzijden", // Auto-generated string
     // [Auto-translated] "Questions"
     questions: "Vragen", // Auto-generated string
-    // "Triggers"
+    // [Auto-translated] "Triggers"
     triggers: "Triggers",
     // [Auto-translated] "Custom variables"
     calculatedValues: "Aangepaste variabelen",
@@ -3531,6 +3615,18 @@ export var nlStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Tegenstelling"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Basis",
+      // [Auto-translated] "Advanced"
+      advanced: "Geavanceerd",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Preset toegepast"
   }
 };
 setupLocale({ localeCode: "nl", strings: nlStrings });

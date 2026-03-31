@@ -123,6 +123,13 @@ export interface ICreatorOptions {
    * Refer to the following MDN topic for information on differences between JSON and JavaScript objects: [JavaScript and JSON Differences](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#javascript_and_json_differences)
    */
   generateValidJSON?: boolean;
+  /**
+   * Specifies whether to validate property values against their definitions.
+   *
+   * Default value: `true`
+   *
+   * > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
+   */
   validateJsonPropertyValues?: boolean;
   /**
    * Enables the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
