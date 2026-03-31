@@ -38,8 +38,8 @@ export var danishStrings = {
     translation: "Oversættelse",
     // "Designer"
     designer: "Undersøgelsesdesigner",
-    // "JSON Editor"
-    json: "JSON Editor",
+    // [Auto-translated] "JSON Editor"
+    json: "JSON-redaktør",
     // [Auto-translated] "Logic"
     logic: "Logik"
   },
@@ -57,7 +57,7 @@ export var danishStrings = {
     ranking: "Rangering",
     // [Auto-translated] "Image"
     image: "Billede",
-    // "Dropdown"
+    // [Auto-translated] "Dropdown"
     dropdown: "Dropdown",
     // [Auto-translated] "Multi-Select Dropdown"
     tagbox: "Rullemenu med flere valg",
@@ -73,7 +73,7 @@ export var danishStrings = {
     matrixdynamic: "Matrice (dynamiske rækker)",
     // "Multiple Textboxes"
     multipletext: "Flere tekstfelter",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dynamiske paneler)",
@@ -105,8 +105,8 @@ export var danishStrings = {
     containers: "Containere",
     // "Matrix Questions"
     matrix: "Matrix spørgsmål",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Diverse"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -166,8 +166,8 @@ export var danishStrings = {
     newPageName: "side",
     // "question"
     newQuestionName: "spørgsmål",
-    // "panel"
-    newPanelName: "panel",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
     // [Auto-translated] "text"
     newTextItemName: "Tekst",
     // [Auto-translated] "Default"
@@ -248,6 +248,8 @@ export var danishStrings = {
     expressionUnknownVariables: "Ukendte variable: \"{0}\".",
     // [Auto-translated] "Syntax error."
     expressionSyntaxError: "Syntaksfejl.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semantisk fejl.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generer læsbar JSON",
     // "Toolbox"
@@ -764,6 +766,14 @@ export var danishStrings = {
       // [Auto-translated] "Expression"
       expression: "Udtryk"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Udtryk"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Udtryk"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -881,7 +891,7 @@ export var danishStrings = {
     inherit: "Arve",
     // "Apply"
     apply: "Anvend",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // [Auto-translated] "Save"
     save: "Spare",
@@ -953,10 +963,10 @@ export var danishStrings = {
     fastEntryChoicesMinCountError: "Indtast mindst {0} punkter",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Angiv listen over valgmuligheder og deres id'er i følgende format:\n\nid|mulighed\n\nEt id for valgmulighed er ikke synligt for svarpersoner og kan bruges i betingede regler.",
-    // "Form Entry"
-    formEntry: "Form Entry",
-    // "Test the service"
-    testService: "Test the service",
+    // [Auto-translated] "Form Entry"
+    formEntry: "Formularindtastning",
+    // [Auto-translated] "Test the service"
+    testService: "Test tjenesten",
     // [Auto-translated] "Please select the element"
     itemSelectorEmpty: "Vælg elementet",
     // [Auto-translated] "Please select the action"
@@ -1045,7 +1055,7 @@ export var danishStrings = {
     columnEdit: "Rediger kolonne: {0}",
     // "Edit item: {0}"
     itemEdit: "Redigér: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Sti",
@@ -1111,6 +1121,8 @@ export var danishStrings = {
     choicesOrder: "Vælg rækkefølge på valg",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Tillad brugerdefinerede valg",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Opret Custom Choice\" kommandotekst",
     // "Visible"
     visible: "Er synlig?",
     // "Required"
@@ -1581,6 +1593,8 @@ export var danishStrings = {
     minErrorText: "Fejlmeddelelsen \"Værdien er under minimum\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Fejlmeddelelsen \"Værdien overstiger maksimum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Værdien matcher ikke skridtlængde\"-fejlmeddelelse",
     // "\"Empty comment\" error message"
     otherErrorText: "Fejlmeddelelsen \"Tom kommentar\"",
     // "Error message for duplicate responses"
@@ -1719,7 +1733,7 @@ export var danishStrings = {
       numbering: "Nummerering",
       // "Validators"
       validators: "Valideringer",
-      // "Navigation"
+      // [Auto-translated] "Navigation"
       navigation: "Navigation",
       // "Question Settings"
       question: "Spørgsmål",
@@ -1763,8 +1777,8 @@ export var danishStrings = {
       expression: "Udtryk",
       // [Auto-translated] "Question Settings"
       questionSettings: "Indstillinger for spørgsmål",
-      // "Header"
-      header: "Header",
+      // [Auto-translated] "Header"
+      header: "Overskrift",
       // "Background"
       background: "Baggrund",
       // "Appearance"
@@ -1874,10 +1888,10 @@ export var danishStrings = {
     minWidth_placeholder: "Eks.: 600px",
     // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Eks.: 50%",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Eks.: 100px",
     theme: {
@@ -2355,7 +2369,7 @@ export var danishStrings = {
     underRow: "Under rækken",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Under rækken skal du kun få vist én sektion",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2615,8 +2629,8 @@ export var danishStrings = {
     react: "Benyt React version",
     // "Use Vue version"
     vue: "Benyt Vue version",
-    // "For bootstrap framework"
-    bootstrap: "For bootstrap framework",
+    // [Auto-translated] "For bootstrap framework"
+    bootstrap: "For bootstrap-rammeværket",
     // [Auto-translated] "Modern theme"
     modern: "Moderne tema",
     // [Auto-translated] "Default theme"
@@ -2641,9 +2655,9 @@ export var danishStrings = {
     loadFromServer: "Hent undersøgelsen som JSON fra serveren",
     // "Scripts and styles"
     titleScript: "Scripts og styles",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2689,18 +2703,18 @@ export var danishStrings = {
   },
   peplaceholder: {
     patternmask: {
-      // "Ex.: +1(999)-999-99-99"
-      pattern: "Ex.: +1(999)-999-99-99"
+      // [Auto-translated] "Ex.: +1(999)-999-99-99"
+      pattern: "Eksempel: +1(999)-999-99-99"
     },
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Eks.: mm / dd / åååå HH: MM: ss"
     },
     currencymask: {
-      // "Ex.: $"
-      prefix: "Ex.: $",
-      // "Ex.: USD"
-      suffix: "Ex.: USD"
+      // [Auto-translated] "Ex.: $"
+      prefix: "F.eks.: $",
+      // [Auto-translated] "Ex.: USD"
+      suffix: "F.eks.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -3472,8 +3486,8 @@ export var danishStrings = {
     pageTitle: "Sidetitel skrifttype",
     // "Question box"
     questionTitle: "Skrifttype for spørgsmålstitel",
-    // "Input element"
-    editorPanel: "Input element",
+    // [Auto-translated] "Input element"
+    editorPanel: "Inputelement",
     // [Auto-translated] "Lines"
     lines: "Linjer",
     // [Auto-translated] "Default"
@@ -3611,7 +3625,9 @@ export var danishStrings = {
       advanced: "Avanceret",
       // [Auto-translated] "Expert"
       expert: "Ekspert"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Forudindstilling anvendt"
   }
 };
 setupLocale({ localeCode: "da", strings: danishStrings });

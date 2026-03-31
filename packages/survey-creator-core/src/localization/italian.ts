@@ -7,7 +7,7 @@ export var italianTranslation = {
     edit: "Modifica",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Guarda e impara come creare sondaggio",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Aggiungi una domanda qui",
@@ -45,8 +45,8 @@ export var italianTranslation = {
   },
   // Question types
   qt: {
-    // "Default"
-    default: "Default",
+    // [Auto-translated] "Default"
+    default: "Predefinito",
     // "Checkboxes"
     checkbox: "Casella di controllo",
     // "Long Text"
@@ -61,8 +61,8 @@ export var italianTranslation = {
     dropdown: "Tendina",
     // [Auto-translated] "Multi-Select Dropdown"
     tagbox: "Menù a discesa a selezione multipla",
-    // "File Upload"
-    file: "File Upload",
+    // [Auto-translated] "File Upload"
+    file: "Caricamento file",
     // "HTML"
     html: "Html",
     // "Single-Select Matrix"
@@ -110,8 +110,8 @@ export var italianTranslation = {
   },
   // Strings in SurveyJS Creator
   ed: {
-    // "Default ({0})"
-    defaultLocale: "Default ({0})",
+    // [Auto-translated] "Default ({0})"
+    defaultLocale: "Predefinito ({0})",
     // "Survey"
     survey: "Sondaggio",
     // "Settings"
@@ -170,12 +170,12 @@ export var italianTranslation = {
     newPanelName: "Pannello",
     // "text"
     newTextItemName: "Testo",
-    // "Default"
-    defaultV2Theme: "Default",
+    // [Auto-translated] "Default"
+    defaultV2Theme: "Predefinito",
     // "Modern"
     modernTheme: "Tema Moderno",
-    // "Default (legacy)"
-    defaultTheme: "Default (legacy)",
+    // [Auto-translated] "Default (legacy)"
+    defaultTheme: "Predefinito (legacy)",
     // "Preview Survey Again"
     testSurveyAgain: "Prova il sondaggio di nuovo",
     // "Survey width: "
@@ -238,10 +238,22 @@ export var italianTranslation = {
     options: "Opzioni",
     // "Generate Valid JSON"
     generateValidJSON: "Genera JSON Valido",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Funzione sconosciuta: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Funzioni sconosciute: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variabile sconosciuta: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variabili sconosciute: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Errore di sintassi.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Errore semantico.",
     // "Generate Readable JSON"
     generateReadableJSON: "Genera JSON Leggibile",
-    // "Toolbox"
-    toolbox: "Toolbox",
+    // [Auto-translated] "Toolbox"
+    toolbox: "Cassetta degli attrezzi",
     // "Properties"
     "property-grid": "Proprietà",
     // [Auto-translated] "Search"
@@ -250,6 +262,8 @@ export var italianTranslation = {
     toolboxFilteredTextPlaceholder: "Digita per cercare...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nessun risultato trovato",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Nessuna proprietà da mostrare",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Digita per cercare...",
     // [Auto-translated] "No results found"
@@ -404,7 +418,7 @@ export var italianTranslation = {
     imageChooseImage: "Scegli immagine",
     // "Add {0}"
     addNewTypeQuestion: "Aggiungi {0}", // {0} is localizable question type
-    // "[LOGO]"
+    // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
     // [Auto-translated] "Item "
     choices_Item: "Articolo ",
@@ -751,6 +765,14 @@ export var italianTranslation = {
       // [Auto-translated] "Expression"
       expression: "Espressione"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Espressione"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Espressione"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -868,7 +890,7 @@ export var italianTranslation = {
     inherit: "Ereditare",
     // "Apply"
     apply: "Applica",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // "Save"
     save: "Salva",
@@ -926,7 +948,7 @@ export var italianTranslation = {
     showChoices: "Mostra Scelte",
     // "Move"
     move: "Muovi",
-    // "<empty>"
+    // [Auto-translated] "<empty>"
     empty: "<empty>",
     // "Value is empty"
     emptyValue: "Il valore è vuoto",
@@ -1032,7 +1054,7 @@ export var italianTranslation = {
     columnEdit: "Modifica colonna: {0}",
     // "Edit item: {0}"
     itemEdit: "Modifica elemento: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Percorso",
@@ -1098,6 +1120,8 @@ export var italianTranslation = {
     choicesOrder: "Ordinamento delle scelte",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Consenti scelte personalizzate",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Testo del comando \"Crea Scelta Personalizzata\"",
     // "Visible"
     visible: "Visibile",
     // "Required"
@@ -1126,6 +1150,8 @@ export var italianTranslation = {
     storeDataAsText: "Vedi il contenuto JSON come testo",
     // "Maximum file size (in bytes)"
     maxSize: "Dimensione massima (in bytes)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Numero massimo di file",
     // "Row count"
     rowCount: "Numero delle righe",
     // "Columns layout"
@@ -1162,7 +1188,7 @@ export var italianTranslation = {
     qEditorTitle: "Modifica domanda: {0}",
     // "Maximum character limit"
     maxLength: "Lunghezza massima (in caratteri)",
-    // "Build"
+    // [Auto-translated] "Build"
     buildExpression: "Build",
     // "Edit"
     editExpression: "Modifica",
@@ -1317,10 +1343,10 @@ export var italianTranslation = {
     // "Regular expression"
     regex: "Espressione regolare",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Messaggio di convalida",
-      // [Auto-translated] "Validation expression"
-      expression: "Espressione di convalida",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Messaggio di notifica per input non valido",
+      // [Auto-translated] "Valid when"
+      expression: "Valido quando",
       // [Auto-translated] "Notification type"
       notificationType: "Tipo di notifica",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,6 +1426,8 @@ export var italianTranslation = {
     allowMultiple: "Consenti più file",
     // "Preview uploaded images"
     allowImagesPreview: "Anteprima immagini",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Categorie di file accettate",
     // "Accepted file types"
     acceptedTypes: "Tipi di file accettati",
     // "Wait for upload to complete"
@@ -1474,6 +1502,66 @@ export var italianTranslation = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formato della descrizione comando"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL immagine",
+      // [Auto-translated] "Areas"
+      areas: "Aree",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Consentire selezioni multiple",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Valore del nome della proprietà",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Colore di riempimento idle",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Colore della corsa al minimo",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Larghezza della corsa al minimo",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Colore di riempimento con l'elevato",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Colore del tratto di sospensione",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Larghezza della corsa di hover",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Colore di riempimento selezionato",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Colore del tratto selezionato",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Larghezza di corsa selezionata",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Aree selezionate al massimo",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Aree minime selezionate"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valore",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Coordinates"
+      coords: "Coordinate",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Colore di riempimento idle",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Colore della corsa al minimo",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Larghezza della corsa al minimo",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Colore di riempimento con l'elevato",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Colore del tratto di sospensione",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Larghezza della corsa di hover",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Colore di riempimento selezionato",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Colore del tratto selezionato",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Larghezza di corsa selezionata"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Altezza dell'immagine",
@@ -1504,6 +1592,8 @@ export var italianTranslation = {
     minErrorText: "\"Valore inferiore al minimo\" messaggio di errore",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"Valore superiore al massimo\" messaggio di errore",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Messaggio di errore \"Il valore non corrisponde alla dimensione del passo\"",
     // "\"Empty comment\" error message"
     otherErrorText: "\"Commento vuoto\" messaggio di errore",
     // "Error message for duplicate responses"
@@ -1910,8 +2000,8 @@ export var italianTranslation = {
     default: "Default",
     // "Initial"
     initial: "Iniziale",
-    // "Random"
-    random: "Random",
+    // [Auto-translated] "Random"
+    random: "Casuale",
     // "Collapsed"
     collapsed: "Ridotto",
     // "Expanded"
@@ -2081,6 +2171,20 @@ export var italianTranslation = {
       warning: "Avvertimento",
       // [Auto-translated] "Informational"
       info: "Informativo"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Immagini",
+      // [Auto-translated] "Videos"
+      video: "Video",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Documenti",
+      // [Auto-translated] "Archives"
+      archive: "Archivi",
+      // [Auto-translated] "Custom"
+      custom: "Consuetudine"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2495,6 +2599,8 @@ export var italianTranslation = {
     notcontains: "non contiene",
     // "Any of"
     anyof: "Qualsiasi",
+    // [Auto-translated] "None of"
+    noneof: "Nessuno di",
     // "All of"
     allof: "Tutti",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var italianTranslation = {
     loadFromServer: "Carica JSON dal server",
     // "Scripts and styles"
     titleScript: "Scripts e stili",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2575,7 +2681,7 @@ export var italianTranslation = {
     expressionvalidator: "Espressione",
     // "Number"
     numericvalidator: "Numerico",
-    // "Regex"
+    // [Auto-translated] "Regex"
     regexvalidator: "Regex",
     // "Text"
     textvalidator: "Testo"
@@ -3088,6 +3194,8 @@ export var italianTranslation = {
     storeOthersAsComment: "Selezionare questa opzione per memorizzare il valore dell'opzione \"Altro\" come proprietà separata nei risultati del rilevamento.",
     // "Use {0} as a placeholder for the actual value."
     format: "Usa {0} come segnaposto per il valore effettivo.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Seleziona \"Personalizzato\" per aggiungere le tue estensioni di file sopra le categorie predefinite.",
     // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Per ulteriori informazioni, consultare la descrizione dell'attributo [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
@@ -3193,8 +3301,8 @@ export var italianTranslation = {
     pages: "Pagine", // Auto-generated string
     // [Auto-translated] "Questions"
     questions: "Domande", // Auto-generated string
-    // "Triggers"
-    triggers: "Triggers",
+    // [Auto-translated] "Triggers"
+    triggers: "Trigger",
     // "Custom variables"
     calculatedValues: "Valori calcolati",
     // [Auto-translated] "Survey id"
@@ -3507,6 +3615,18 @@ export var italianTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contrasto"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Base",
+      // [Auto-translated] "Advanced"
+      advanced: "Avanzato",
+      // [Auto-translated] "Expert"
+      expert: "Esperto"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Presetto applicato"
   }
 };
 
