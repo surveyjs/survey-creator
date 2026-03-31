@@ -290,6 +290,19 @@ export class SurveyCreatorModel extends Base
     this.showOneCategoryInPropertyGrid = newValue === "buttons";
   }
   public trimValues: boolean = false;
+  /**
+   * Specifies whether to display locale names in English.
+   *
+   * Default value: `false`
+   *
+   * Enable this property if you want the Property Grid to show language names in English, regardless of the current locale.
+   */
+  get showNamesInEnglish(): boolean {
+    return surveyLocalization.showNamesInEnglish;
+  }
+  set showNamesInEnglish(val: boolean) {
+    surveyLocalization.showNamesInEnglish = val;
+  }
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
