@@ -1126,23 +1126,23 @@ test("Test maximumChoicesCount <> maxChoices compatibility", () => {
   expect(creator.maximumChoicesCount).toEqual(3);
 });
 
-test("Test showNamesInEnglish property get/set", () => {
-  surveyLocalization.showNamesInEnglish = false;
+test("Test useEnglishNames property get/set", () => {
+  surveyLocalization.useEnglishNames = false;
   const creator = new CreatorTester();
-  expect(creator.showNamesInEnglish).toBeFalsy();
-  creator.showNamesInEnglish = true;
-  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
-  expect(creator.showNamesInEnglish).toBeTruthy();
-  creator.showNamesInEnglish = false;
-  expect(surveyLocalization.showNamesInEnglish).toBeFalsy();
+  expect(creator.useEnglishLanguageNames).toBeFalsy();
+  creator.useEnglishLanguageNames = true;
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
+  expect(creator.useEnglishLanguageNames).toBeTruthy();
+  creator.useEnglishLanguageNames = false;
+  expect(surveyLocalization.useEnglishNames).toBeFalsy();
 });
 
-test("Test showNamesInEnglish via creator options", () => {
-  surveyLocalization.showNamesInEnglish = false;
-  const creator = new CreatorTester({ showNamesInEnglish: true });
-  expect(creator.showNamesInEnglish).toBeTruthy();
-  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
-  surveyLocalization.showNamesInEnglish = false;
+test("Test useEnglishNames via creator options", () => {
+  surveyLocalization.useEnglishNames = false;
+  const creator = new CreatorTester({ useEnglishLanguageNames: true });
+  expect(creator.useEnglishLanguageNames).toBeTruthy();
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
+  surveyLocalization.useEnglishNames = false;
 });
 
 test("Test minimumChoicesCount <> minChoices compatibility", () => {

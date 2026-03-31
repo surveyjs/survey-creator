@@ -544,11 +544,9 @@ export interface ICreatorOptions {
    */
   expressionsValidateSemantics?: boolean;
   /**
-   * Specifies whether to display locale names in English.
+   * Specifies whether to display language names in English rather than in their native form.
    *
-   * Default value: `false`
-   *
-   * Enable this property if you want the Property Grid to show language names in English, regardless of the current locale.
+   * Default value: `false` (language names are displayed in their native form)
    */
-  showNamesInEnglish?: boolean;
+  useEnglishLanguageNames?: boolean;
 }
