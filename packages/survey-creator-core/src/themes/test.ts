@@ -698,7 +698,7 @@ export default {
     "--sjs2-color-component-check-false-design-border": "var(--sjs2-color-border-basic-secondary)",
     "--sjs2-color-component-check-true-default-bg": "#ffffff",
     "--sjs2-color-component-check-true-default-border": "#d4d4d4",
-    "--sjs2-color-component-check-true-default-icon": "#19B394)",
+    "--sjs2-color-component-check-true-default-icon": "#19B394",
     "--sjs2-color-component-check-true-disabled-bg": "var(--sjs2-color-bg-basic-primary)",
     "--sjs2-color-component-check-true-disabled-border": "var(--sjs2-color-border-basic-secondary)",
     "--sjs2-color-component-check-true-disabled-icon": "var(--sjs2-palette-gray-400)",
