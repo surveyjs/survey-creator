@@ -412,7 +412,7 @@ test("Maxlen and required", (): any => {
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
-  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  var target = { innerText: "t", focus: () => { }, parentElement: { click: () => { } } };
   stringEditorSurveyTitle.onFocus({ target: target });
   target.innerText = "title";
   stringEditorSurveyTitle.onInput({ target: target });
@@ -438,7 +438,7 @@ test("Maxlen and EOL", (): any => {
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
-  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  var target = { innerText: "t", focus: () => { }, parentElement: { click: () => { } } };
 
   stringEditorSurveyTitle.onFocus({ target: target });
   target.innerText = "\n";
@@ -719,6 +719,33 @@ test("StringEditorConnector for matrixdropdown questions (columns)", (): any => 
 
     connectorItem3.onBackspaceEmptyString.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual([]);
+  }
+});
+
+test("StringEditorConnector for matrixdropdown - auto generate title on adding column", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "col1", title: "Column 1" }, { name: "col2", title: "Column 2" }], rows: ["Row 1"] },
+      { type: "matrixdynamic", name: "q2", columns: [{ name: "col1", title: "Column 1" }, { name: "col2", title: "Column 2" }] }
+    ]
+  };
+  const allQuestions = creator.survey.getAllQuestions();
+
+  for (var i = 0; i < allQuestions.length; i++) {
+    const question = allQuestions[i] as any;
+    creator.selectElement(question);
+
+    const questionAdorner = new QuestionAdornerViewModel(
+      creator,
+      question,
+      <any>undefined
+    );
+    var connectorItem2 = StringEditorConnector.get(question.columns[1].locTitle);
+    connectorItem2.onEditComplete.fire(null, {});
+    expect(question.columns).toHaveLength(3);
+    expect(question.columns[2].name).toEqual("col3");
+    expect(question.columns[2].title).toEqual("Column 3");
   }
 });
 

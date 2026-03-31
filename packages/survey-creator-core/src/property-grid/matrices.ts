@@ -1,12 +1,14 @@
-import { Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
+import {
+  Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
   JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase,
   MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase,
   QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel,
-  renamedIcons, Serializer, SurveyElement } from "survey-core";
+  renamedIcons, Serializer, SurveyElement
+} from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
-import { getNextItemText, getNextValue, getQuestionFromObj } from "../utils/creator-utils";
+import { getNextColumnTitle, getNextItemText, getNextValue, getQuestionFromObj } from "../utils/creator-utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
@@ -192,6 +194,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const arr = obj[prop.name];
     if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
       item.text = getNextItemText(arr);
+    }
+    if (Serializer.isDescendantOf(item.getType(), "matrixdropdowncolumn")) {
+      item.title = getNextColumnTitle(arr);
     }
     arr.push(item);
     if (arr != matrix.value) {

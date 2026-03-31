@@ -2,7 +2,7 @@ import { Base, LocalizableString, Serializer, JsonObjectProperty, property, Item
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
-import { getNextItemValue, getNextValue } from "../utils/creator-utils";
+import { getNextColumnTitle, getNextItemValue, getNextValue } from "../utils/creator-utils";
 import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
@@ -195,6 +195,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) {
       if (creator.maxColumns && items.length >= creator.maxColumns) return;
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
+      column.title = getNextColumnTitle(items);
       this.question.columns.push(column);
       creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
     }
