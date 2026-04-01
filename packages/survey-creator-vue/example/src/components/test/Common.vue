@@ -38,6 +38,9 @@ creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.
   newCreator.JSON = json;
   creator.value = newCreator;
   creator.value.applyCreatorTheme(TestCreatorTheme);
+  if(!props.useOriginalTheme) {
+    creator.value.applySurfaceTheme(TestLibraryTheme);
+  }
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
   if(props.options.propertyGridNavigationMode != 'buttons') {
