@@ -11,6 +11,6 @@ export class CreatorPresetLanguages extends CreatorPresetBase {
     const useEnglishNames = this.json?.useEnglishNames;
     creator.locale = locale;
     surveyLocalization.supportedLocales = supportedLocales;
-    surveyLocalization.showNamesInEnglish = useEnglishNames === true;
+    surveyLocalization.useEnglishNames = useEnglishNames === true;
   }
 }

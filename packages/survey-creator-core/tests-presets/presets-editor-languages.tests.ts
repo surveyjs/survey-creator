@@ -126,9 +126,9 @@ test("Preset edit model, Languages tab - show in English", () => {
   expect(item.text).toBe("DE-English");
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.languages?.useEnglishNames).toBeTruthy();
-  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
 
-  surveyLocalization.showNamesInEnglish = false;
+  surveyLocalization.useEnglishNames = false;
 });
 test("Preset edit model, Languages tab - hide creator locale question if choices are empty", () => {
   const savedEditorLocales = editorLocalization.locales;

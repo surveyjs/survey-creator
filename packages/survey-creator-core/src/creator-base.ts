@@ -272,6 +272,17 @@ export class SurveyCreatorModel extends Base
     this.showOneCategoryInPropertyGrid = newValue === "buttons";
   }
   public trimValues: boolean = false;
+  /**
+   * Specifies whether to display language names in English rather than in their native form.
+   *
+   * Default value: `false` (language names are displayed in their native form)
+   */
+  get useEnglishLanguageNames(): boolean {
+    return surveyLocalization.useEnglishNames;
+  }
+  set useEnglishLanguageNames(val: boolean) {
+    surveyLocalization.useEnglishNames = val;
+  }
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);

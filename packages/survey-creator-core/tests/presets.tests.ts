@@ -496,12 +496,12 @@ test("apply supported locales", () => {
 
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr", "it"]);
-  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
 
   preset.setJson({});
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
-  expect(surveyLocalization.showNamesInEnglish).toBeFalsy();
+  expect(surveyLocalization.useEnglishNames).toBeFalsy();
 });
 test("set creator options", () => {
   const creator = new CreatorTester();

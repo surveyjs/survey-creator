@@ -543,4 +543,10 @@ export interface ICreatorOptions {
    * Default value: `true`
    */
   expressionsValidateSemantics?: boolean;
+  /**
+   * Specifies whether to display language names in English rather than in their native form.
+   *
+   * Default value: `false` (language names are displayed in their native form)
+   */
+  useEnglishLanguageNames?: boolean;
 }

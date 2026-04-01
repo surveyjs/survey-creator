@@ -26,6 +26,7 @@ import {
   Question,
   SurveyElement,
   hasLicense,
+  surveyLocalization,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -168,7 +169,7 @@ test("creator.onSurveyInstanceSetupHandlers event", () => {
   creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
     if (options.area === "property-grid") {
       json = options.survey.toJSON();
-      counter ++;
+      counter++;
     }
   });
   creator.JSON = {
@@ -958,7 +959,7 @@ test("onGetIsStringEditable", (): any => {
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(1);
 
-  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
+  expect(creator.isStringInplacelyEditable({} as any, "")).toBeTruthy();
   expect(lastEditableValue).toBeTruthy();
   expect(callCount).toBe(2);
 
@@ -1009,7 +1010,7 @@ test("Restrict users from adding more than a specified number of questions to a 
   expect(action.enabled).toBeFalsy();
   expect(qDuplicateAction.isVisible).toBeFalsy();
   expect(pAdorner.currentAddQuestionType).toBe("");
-  creator.JSON = { };
+  creator.JSON = {};
   expect(action.enabled).toBeTruthy();
 });
 test("Should not modify expression properties  on copying questions inside the dynamic panel, Bug#7223", (): any => {
@@ -1123,6 +1124,25 @@ test("Test maximumChoicesCount <> maxChoices compatibility", () => {
   expect(creator.maxChoices).toEqual(5);
   creator.maxChoices = 3;
   expect(creator.maximumChoicesCount).toEqual(3);
+});
+
+test("Test useEnglishNames property get/set", () => {
+  surveyLocalization.useEnglishNames = false;
+  const creator = new CreatorTester();
+  expect(creator.useEnglishLanguageNames).toBeFalsy();
+  creator.useEnglishLanguageNames = true;
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
+  expect(creator.useEnglishLanguageNames).toBeTruthy();
+  creator.useEnglishLanguageNames = false;
+  expect(surveyLocalization.useEnglishNames).toBeFalsy();
+});
+
+test("Test useEnglishNames via creator options", () => {
+  surveyLocalization.useEnglishNames = false;
+  const creator = new CreatorTester({ useEnglishLanguageNames: true });
+  expect(creator.useEnglishLanguageNames).toBeTruthy();
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
+  surveyLocalization.useEnglishNames = false;
 });
 
 test("Test minimumChoicesCount <> minChoices compatibility", () => {
