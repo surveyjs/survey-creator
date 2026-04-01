@@ -21,44 +21,7 @@
       :value="question.renderedValue"
       :class="question.cssClasses.control"
     />
-    <span :class="question.cssClasses.buttonsContainer">
-      <button
-        :aria-hidden="'true'"
-        :disabled="question.isInputReadOnly"
-        :class="question.cssClasses.arrowButton"
-        @click="question.onDownButtonClick"
-        @mousedown="question.onDownButtonMouseDown"
-        @mouseup="question.onButtonMouseUp"
-        @mouseleave="question.onButtonMouseLeave"
-        @blur="question.onBlur"
-        @focus="question.onFocus"
-        tabindex="-1"
-      >
-        <SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="question.cssClasses.decreaseButtonIcon"
-          :size="'auto'"
-        ></SvComponent>
-      </button>
-      <button
-        :aria-hidden="'true'"
-        :disabled="question.isInputReadOnly"
-        :class="question.cssClasses.arrowButton"
-        @click="question.onUpButtonClick"
-        @mousedown="question.onUpButtonMouseDown"
-        @mouseup="question.onButtonMouseUp"
-        @mouseleave="question.onButtonMouseLeave"
-        @blur="question.onBlur"
-        @focus="question.onFocus"
-        tabindex="-1"
-      >
-        <SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="question.cssClasses.increaseButtonIcon"
-          :size="'auto'"
-        ></SvComponent>
-      </button>
-    </span>
+    <SvComponent :is="'sv-action-bar'" :model="question.inputActionsContainer"></SvComponent>
   </div>
 </template>
 <script lang="ts" setup>

@@ -1,5 +1,11 @@
-import { QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
+import { Action, ComputedUpdater, IAction, QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
 
+export interface ISpinEditorButton extends IAction {
+  data: {
+    question: QuestionSpinEditorModel,
+    onMouseDown: () => void,
+  };
+}
 export class QuestionSpinEditorModel extends QuestionTextModel {
   @property() public unit: string;
   @property() public changeValueOnPressing: boolean;
@@ -152,6 +158,35 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   }
   public get isInputTextUpdate(): boolean {
     return false;
+  }
+
+  protected createInputActions(): Array<Action> {
+    const res = super.createInputActions();
+    const component = "sv-spinedit-button";
+    const question = this;
+    res.push(new Action({
+      iconName: new ComputedUpdater(() => this.cssClasses.decreaseButtonIcon) as unknown as string,
+      component,
+      enabled: new ComputedUpdater(() => !this.isInputReadOnly),
+      data: {
+        question,
+        onMouseDown: () => {
+          this.onDownButtonMouseDown();
+        }
+      }
+    } as ISpinEditorButton));
+    res.push(new Action({
+      iconName: new ComputedUpdater(() => this.cssClasses.increaseButtonIcon) as unknown as string,
+      component,
+      enabled: new ComputedUpdater(() => !this.isInputReadOnly),
+      data: {
+        question,
+        onMouseDown: () => {
+          this.onUpButtonMouseDown();
+        }
+      }
+    } as ISpinEditorButton));
+    return res;
   }
 }
 Serializer.addClass("spinedit", [
