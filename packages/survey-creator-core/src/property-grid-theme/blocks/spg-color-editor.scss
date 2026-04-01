@@ -60,7 +60,3 @@
     opacity: 1;
   }
 }
-
-.spg-color-editor .spg-color-editor__button-wrapper + * {
-  margin-inline-end: calc(0px - var(--ctr-editor-gap, var(--sjs-spacing-x05)));
-}

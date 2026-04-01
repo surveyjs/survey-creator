@@ -1,3 +1,11 @@
 .spg-file-edit__choose-button {
   position: relative;
 }
+.spg-file-edit__choose-button:where(:has(input:disabled)) .sd-formbox__button {
+  cursor: default;
+  opacity: var(--sjs2-opacity-disabled, 0.25);
+  background: var(--sjs2-color-component-formbox-action-disabled-bg, rgba(95, 94, 97, 0));
+  .sd-formbox-button__icon {
+    fill: var(--sjs2-color-component-formbox-action-disabled-icon, rgba(28, 27, 32, 0.4));
+  }
+}

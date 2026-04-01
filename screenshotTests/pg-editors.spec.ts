@@ -414,13 +414,13 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "color-editor-disabled.png");
     await page.evaluate(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false);
     await compareScreenshot(page, questionSelector, "color-editor.png");
-    await questionSelector.locator(".spg-input__edit-button").hover();
+    await questionSelector.locator(".sd-formbox-button").hover();
     await compareScreenshot(page, questionSelector, "color-editor-button-hover.png");
-    await questionSelector.locator(".spg-input__edit-button").click();
+    await questionSelector.locator(".sd-formbox-button").click();
     await resetHoverToCreator(page);
     await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "color-editor-choices.png");
     await page.keyboard.press("Escape");
-    await questionSelector.locator(".spg-color-editor__input").click();
+    await questionSelector.locator(".sd-formbox__input").click();
     await compareScreenshot(page, questionSelector, "color-editor-focus.png");
     await page.evaluate(() => {
       (<any>window).creator.propertyGrid.getQuestionByName("fontColor").titleLocation = "left";
@@ -481,9 +481,9 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "spin-editor-disabled.png");
     await page.evaluate(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false);
     await compareScreenshot(page, questionSelector, "spin-editor.png");
-    await questionSelector.locator(".spg-input__edit-button").first().hover();
+    await questionSelector.locator(".sd-formbox-button").first().hover();
     await compareScreenshot(page, questionSelector, "spin-editor-button-hover.png");
-    await questionSelector.locator(".spg-spin-editor__input").click();
+    await questionSelector.locator(".sd-formbox__input").click();
     await compareScreenshot(page, questionSelector, "spin-editor-focus.png");
     await page.evaluate(() => {
       (<any>window).creator.propertyGrid.getQuestionByName("fontSize").titleLocation = "left";

@@ -363,35 +363,28 @@ export var propertyGridCss = {
     itemTitle: "spg-action-button__title",
   },
   spinedit: {
-    root: "spg-input spg-spin-editor spg-input-container",
-    control: "spg-spin-editor__input spg-input-container__input",
-    buttonsContainer: "spg-input-container__buttons-container",
-    arrowButton: "spg-input__edit-button",
+    root: "sd-formbox spg-spin-editor",
+    control: "sd-formbox__input",
     increaseButtonIcon: "icon-arrow-up",
     decreaseButtonIcon: "icon-arrow-down"
   },
   color: {
-    root: "spg-input spg-color-editor spg-input-container",
+    root: "sd-formbox spg-color-editor",
+    control: "sd-formbox__input",
     swatch: "spg-color-editor__color-swatch",
     swatchDefault: "spg-color-editor__color-swatch--default",
     swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
-    control: "spg-color-editor__input spg-input-container__input",
-    colorDropdown: "spg-input__edit-button",
     colorDropdownIcon: "icon-drop-down-arrow",
     swatchIcon: "icon-color-picker",
-    choicesButtonWrapper: "spg-color-editor__button-wrapper"
   },
   fileedit: {
-    root: "spg-input spg-input-container spg-file-edit",
-    control: "spg-input-container__input",
-    buttonsContainer: "spg-input-container__buttons-container",
+    root: "sd-formbox spg-file-edit",
+    control: "sd-formbox__input",
     chooseButtonIcon: "icon-choosefile",
     clearButtonIcon: "icon-cancel-24x24",
     fileInput: "sd-visuallyhidden",
-    clearButton: "spg-input__edit-button",
-    chooseButton: "spg-input__edit-button spg-file-edit__choose-button",
-    chooseButtonDisabled: "spg-input__edit-button--disabled"
+    chooseButton: "spg-file-edit__choose-button",
   },
   linkvalue: {
     content: "spg-link"
