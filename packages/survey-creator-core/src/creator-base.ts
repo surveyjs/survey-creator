@@ -3468,6 +3468,7 @@ export class SurveyCreatorModel extends Base
       doFocus();
     }
   }
+
   private focusElementCore(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, onCallback: () => void = null) {
     const elementPage = this.getPageByElement(selEl);
     clearInterval(this.currentFocusInterval);
@@ -3489,23 +3490,7 @@ export class SurveyCreatorModel extends Base
             if (!!el) {
               const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
               if (!!isNeedScroll) {
-                const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
-                if (!!elementPage) {
-                  this.survey.scrollElementToTop({
-                    element: selEl,
-                    question: undefined,
-                    page: elementPage,
-                    id: selEl.id,
-                    scrollIfVisible: true,
-                    scrollIntoViewOptions: scrollIntoViewOptions,
-                    passedRootElement: this.rootElement,
-                    onScolledCallback: () => {
-                      this.ensurePagesVisibility();
-                    }
-                  });
-                } else {
-                  SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
-                }
+                this.scrollToElement(elementPage, selEl, el);
               }
               if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
                 let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
@@ -3523,6 +3508,26 @@ export class SurveyCreatorModel extends Base
       }, 100);
     }, 50);
   }
+  public scrollToElement(elementPage: PageModel, selEl: any, el: HTMLElement) {
+    const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+    if (!!elementPage) {
+      this.survey.scrollElementToTop({
+        element: selEl,
+        question: undefined,
+        page: elementPage,
+        id: selEl.id,
+        scrollIfVisible: true,
+        scrollIntoViewOptions: scrollIntoViewOptions,
+        passedRootElement: this.rootElement,
+        onScolledCallback: () => {
+          this.ensurePagesVisibility();
+        }
+      });
+    } else {
+      SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+    }
+  }
+
   private getChoiceItemQuestionToExpand(element: any): Question {
     const panel = SurveyHelper.getChoiceIItemPanel(element);
     const item: ChoiceItem = panel["choiceItem"];
