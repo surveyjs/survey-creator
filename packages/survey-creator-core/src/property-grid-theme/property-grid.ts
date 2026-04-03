@@ -136,16 +136,8 @@ export var propertyGridCss = {
     ...defaultCss.boolean,
 
     mainRoot: "spg-question spg-row__question spg-question--boolean",
+    rootCheckbox: "spg-selectbase",
     checkboxItem: "spg-checkbox",
-    // checkboxItemChecked: "spg-checkbox--checked",
-    // checkboxitemIndeterminate: "spg-checkbox--indeterminate",
-    // checkboxItemReadOnly: "spg-checkbox--disabled",
-    // svgIconId: "#icon-v2check",
-    // checkboxLabel: "spg-selectbase__label",
-    // controlCheckbox: "spg-checkbox__control",
-    // checkboxControlLabel: "spg-checkbox__caption",
-    // checkboxItemDecorator: "spg-checkbox__svg",
-    // checkboxMaterialDecorator: "spg-checkbox__rectangle"
   },
 
   text: {
