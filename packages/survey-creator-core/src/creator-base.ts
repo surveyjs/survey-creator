@@ -2793,6 +2793,8 @@ export class SurveyCreatorModel extends Base
       survey.fitToContainer = false;
       survey.applyTheme({ cssVariables: this.defaultSurfaceCssVariables });
       survey.gridLayoutEnabled = false;
+    } else {
+      survey["cssVariables"] = {};
     }
 
     if (reason === "theme") {

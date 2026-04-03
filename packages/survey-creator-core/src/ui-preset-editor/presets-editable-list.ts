@@ -277,6 +277,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     survey.fitToContainer = false;
     survey.showNavigationButtons = false;
     survey.data = data;
+    survey["cssVariables"] = {};
     survey.css = presetsCss;
     survey.enterKeyAction = "loseFocus";
     survey.questionErrorLocation = "bottom";
