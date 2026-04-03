@@ -38,7 +38,7 @@
 
   .spg-row--multiple {
     .spg-spin-editor {
-      .spg-input-container__buttons-container {
+      .sd-formbox__group {
         display: none;
       }
     }
@@ -55,10 +55,6 @@
 
       .spg-question--location--left {
         box-sizing: border-box;
-
-        .spg-input {
-          height: auto;
-        }
       }
     }
   }

@@ -1,6 +1,7 @@
 import * as React from "react";
+import { Action, Base } from "survey-core";
 import { QuestionFileEditorModel } from "survey-creator-core";
-import { ReactQuestionFactory, SurveyQuestionText, SvgIcon, attachKey2click } from "survey-react-ui";
+import { ReactElementFactory, ReactQuestionFactory, SurveyActionBar, SurveyElementBase, SurveyQuestionText, SvgIcon, attachKey2click } from "survey-react-ui";
 
 export class SurveyQuestionFileEditor extends SurveyQuestionText {
   constructor(props: any) {
@@ -28,54 +29,8 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
       </>
     );
   }
-  protected renderFileInput(): React.JSX.Element {
-    return (
-      <input
-        type="file"
-        disabled={this.isDisplayMode}
-        className={this.questionFile.cssClasses.fileInput}
-        id={this.questionFile.inputId}
-        aria-required={this.questionFile.ariaRequired}
-        aria-label={this.questionFile.ariaLabel}
-        aria-invalid={this.questionFile.ariaInvalid}
-        aria-describedby={this.questionFile.ariaDescribedBy}
-        multiple={false} title={this.questionFile.inputTitle}
-        accept={this.questionFile.acceptedTypes}
-        tabIndex={-1}
-        onChange={(event) => this.questionFile.onFileInputChange(event.nativeEvent)} />
-    );
-  }
   protected renderButtons(): React.JSX.Element {
-    return (
-      <div className={this.questionFile.cssClasses.buttonsContainer}>
-        {this.renderClearButton()}
-        {this.renderChooseButton()}
-      </div>
-    );
-  }
-  protected renderClearButton(): React.JSX.Element {
-    return attachKey2click((
-      <button
-        className={this.questionFile.cssClasses.clearButton}
-        title={this.questionFile.clearButtonCaption}
-        disabled={this.questionFile.getIsClearButtonDisabled()}
-        onClick={this.questionFile.doClean}>
-        <SvgIcon iconName={this.questionFile.cssClasses.clearButtonIcon} size={"auto"}></SvgIcon>
-      </button>
-    ));
-  }
-  protected renderChooseButton(): React.JSX.Element {
-    return (
-      attachKey2click(
-        <label
-          onClick={event => this.questionFile.chooseFiles(event.nativeEvent)}
-          className={this.questionFile.getChooseButtonCss()}
-          htmlFor={this.questionFile.inputId}
-          aria-label={this.questionFile.chooseButtonCaption}>
-          <SvgIcon iconName={this.questionFile.cssClasses.chooseButtonIcon} size={"auto"} title={this.questionFile.chooseButtonCaption}></SvgIcon>
-        </label>
-      )
-    );
+    return this.question.hasVisibleInputActions ? <SurveyActionBar model={this.questionFile.inputActionsContainer}></SurveyActionBar> : null;
   }
   protected renderElement(): React.JSX.Element {
     return (
@@ -88,13 +43,57 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         onDragLeave={this.questionFile.onDragLeave}
         onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         {this.renderInput()}
-        {this.renderFileInput()}
         {this.renderButtons()}
       </div>
     );
   }
 }
 
+export class SurveyQuestionFileEditorButton extends SurveyElementBase<{ item: Action }, any> {
+  protected get item(): Action {
+    return this.props.item;
+  }
+  protected get question(): QuestionFileEditorModel {
+    return this.props.item.data.question as QuestionFileEditorModel;
+  }
+  protected getStateElement(): Base | null {
+    return this.item;
+  }
+  protected renderElement(): React.JSX.Element | null {
+    return (
+      <div>
+        {attachKey2click(
+          <label
+            onClick={event => this.question.chooseFiles(event.nativeEvent)}
+            className={this.item.getActionBarItemCss()}
+            htmlFor={this.question.inputId}
+            aria-label={this.question.chooseButtonCaption}>
+            <SvgIcon iconName={this.item.iconName} size={"auto"} title={this.item.title} className={this.item.cssClasses.itemIcon}></SvgIcon>
+          </label>
+        )}
+        <input
+          type="file"
+          disabled={this.item.disabled}
+          className={this.question.cssClasses.fileInput}
+          id={this.question.inputId}
+          aria-required={this.question.ariaRequired}
+          aria-label={this.question.ariaLabel}
+          aria-invalid={this.question.ariaInvalid}
+          aria-describedby={this.question.ariaDescribedBy}
+          multiple={false} title={this.question.inputTitle}
+          accept={this.question.acceptedTypes}
+          tabIndex={-1}
+          onChange={(event) => this.question.onFileInputChange(event.nativeEvent)}
+        />
+      </div>
+
+    );
+  }
+}
+
 ReactQuestionFactory.Instance.registerQuestion("fileedit", (props) => {
   return React.createElement(SurveyQuestionFileEditor, props);
+});
+ReactElementFactory.Instance.registerElement("sv-fileedit-button", (props) => {
+  return React.createElement(SurveyQuestionFileEditorButton, props);
 });

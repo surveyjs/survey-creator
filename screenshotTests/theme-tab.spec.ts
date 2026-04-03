@@ -73,11 +73,11 @@ test.describe(title, () => {
 
     await getPropertyGridCategory(page, "General").click();
     await getPropertyGridCategory(page, "Header").click();
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Basic").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Basic").click();
     await resetFocusToBody(page);
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group.png");
 
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Advanced").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Advanced").click();
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group-advanced.png");
 
     await getPropertyGridCategory(page, "Header").click();
@@ -116,7 +116,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await getPropertyGridCategory(page, "General").click();
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Dark").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Dark").click();
     await page.click(".sv-action--reset-theme .svc-toolbar__item");
     const popup = page.locator(".sv-popup__body-content").filter({ has: page.locator(":visible") });
     await hideElement(page, ".svc-surface-placeholder");
@@ -142,7 +142,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await expect(page.locator(".svc-notifier")).not.toBeVisible();
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Dark").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Dark").click();
     const simulator = page.locator(".svd-simulator-main").filter({ has: page.locator(":visible") });
     await simulator.hover();
     await compareScreenshot(page, simulator, "theme-tab-scrollbar.png");

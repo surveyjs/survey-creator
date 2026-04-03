@@ -1,9 +1,7 @@
 @use "../variables" as *;
 @use "blocks/spg-action-bar.scss";
 @use "blocks/spg-question.scss";
-@use "blocks/spg-input.scss";
 @use "blocks/spg-dropdown.scss";
-@use "blocks/spg-tagbox.scss";
 @use "blocks/spg-comment.scss";
 @use "blocks/spg-panel.scss";
 @use "blocks/spg-checkbox.scss";
@@ -16,7 +14,6 @@
 @use "blocks/spg-theme-builder.scss";
 @use "blocks/spg-overriding.scss";
 @use "blocks/spg-search-editor.scss";
-@use "blocks/spg-buttongroup.scss";
 
 .spg-root-modern {
   position: relative;

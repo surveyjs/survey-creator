@@ -3672,10 +3672,10 @@ test("Custom trigger in logic", () => {
   const initialNumberQuestion = triggerEditorPanel.getQuestionByName("initialNumber");
   expect(initialNumberQuestion.value).toBe(21);
 
-  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
-  expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeTruthy();
-  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
-  expect(initialNumberQuestion.getControlClass().indexOf("spg-input-container__input")).toBeTruthy();
+  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeGreaterThanOrEqual(0);
+  expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeGreaterThanOrEqual(0);
+  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeGreaterThanOrEqual(0);
+  expect(initialNumberQuestion.getControlClass().indexOf("sd-formbox__input")).toBeGreaterThanOrEqual(0);
 
   delete SurveyLogic.types["increment_counter"];
   Serializer.removeClass("incrementcountertrigger");

@@ -115,6 +115,7 @@ export class PresetsManager {
         isRequired: true
       }]
     });
+    survey["cssVariables"] = {};
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
     survey.onValidateQuestion.add((sender, options) => {
@@ -319,6 +320,7 @@ export class PresetsManager {
           ...propertyGridCss.buttongroup,
         }
       };
+      addSurvey["cssVariables"] = {};
       addSurvey.onValidateQuestion.add((sender, options) => {
         if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
           options.error = getLocString("presets.editor.protectedPresetName");
@@ -373,6 +375,7 @@ export class PresetsManager {
       pages: [{ name: "page1", elements: [] }]
     });
     this.addPresetsListEditor(survey);
+    survey["cssVariables"] = {};
     survey.css = {
       ...presetsCss,
       actionBar: {

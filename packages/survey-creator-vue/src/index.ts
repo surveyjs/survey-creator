@@ -82,6 +82,8 @@ import QuestionDropdown from "./adorners/QuestionDropdown.vue";
 import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
 import QuestionBanner from "./adorners/QuestionBanner.vue";
+import SpinEditorButton from "./custom-questions/SpinEditorButton.vue";
+import FileEditorButton from "./custom-questions/FileEditorButton.vue";
 
 function registerComponentWithFunction(
   registerFunc: (name: string, component: any) => void,
@@ -183,6 +185,8 @@ function registerComponents(
   registerComponent("svc-dropdown-question-adorner", Dropdown);
   registerComponent("svc-widget-question", CustomWidget);
   registerComponent("svc-question-banner", QuestionBanner);
+  registerComponent("sv-spinedit-button", SpinEditorButton);
+  registerComponent("sv-fileedit-button", FileEditorButton);
 }
 
 registerComponents((name, component) =>

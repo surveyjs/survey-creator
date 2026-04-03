@@ -134,6 +134,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
+    model["cssVariables"] = {};
     model.css = presetsCss;
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
