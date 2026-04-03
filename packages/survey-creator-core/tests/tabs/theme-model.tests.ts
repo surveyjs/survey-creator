@@ -1,4 +1,4 @@
-import { ITheme, Serializer } from "survey-core";
+import { DefaultTheme, ITheme, Serializer } from "survey-core";
 import { Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -74,11 +74,17 @@ const themeFromFile = {
   }
 };
 
+const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
+  DefaultTheme.cssVariables = {} as any;
+});
+
+afterEach(() => {
+  DefaultTheme.cssVariables = cssVariables;
 });
 
 test("assign function", (): any => {

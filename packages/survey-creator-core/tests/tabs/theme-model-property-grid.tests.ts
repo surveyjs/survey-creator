@@ -1,4 +1,4 @@
-import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
+import { DefaultTheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -18,11 +18,18 @@ import SurveyThemes from "survey-core/themes";
 export * from "../../src/localization/french";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
 registerSurveyTheme(SurveyThemes);
+
+const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
+  DefaultTheme.cssVariables = {} as any;
+});
+
+afterEach(() => {
+  DefaultTheme.cssVariables = cssVariables;
 });
 
 test("Theme builder initialization", (): any => {
