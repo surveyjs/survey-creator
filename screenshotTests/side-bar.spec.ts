@@ -99,7 +99,7 @@ test.describe(title, () => {
       ]
     });
     await changeToolboxSearchEnabled(page, false);
-    await page.locator(".sd-question").click();
+    await page.locator(".svc-designer-surface .sd-question").click();
     await page.setViewportSize({ width: 1920, height: 900 });
 
     await page.locator(".svc-search__input").type("choices");
