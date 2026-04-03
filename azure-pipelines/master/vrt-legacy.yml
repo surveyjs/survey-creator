@@ -31,7 +31,7 @@ trigger:
 pr: none
 
 pool:
-  vmImage: "windows-latest"
+  name: main-selfhosted
 
 jobs:
   - job: CreatorV2Core
