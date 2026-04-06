@@ -51,23 +51,6 @@
       .spg-checkbox {
         margin: 0;
       }
-
-      .spg-selectbase__label {
-        gap: 0;
-      }
-    }
-
-    .spg-checkbox--disabled {
-      .spg-checkbox__caption {
-        color: var(--ctr-checkbox-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
-      }
-
-      .spg-checkbox__rectangle,
-      .spg-checkbox__rectangle:hover {
-        border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid
-          var(--ctr-checkbox-border-color-disabled, var(--sjs-border-10, #dcdcdcff));
-        background: var(--ctr-checkbox-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
-      }
     }
   }
 
