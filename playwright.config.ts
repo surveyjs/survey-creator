@@ -5,7 +5,7 @@ const shardIndex = process.env.PLAYWRIGHT_SHARD_INDEX || "results";
 
 export default defineConfig({
   retries: 2,
-  maxFailures: 5,
+  //maxFailures: 5,
   fullyParallel: true,
   webServer: {
     command: "",
