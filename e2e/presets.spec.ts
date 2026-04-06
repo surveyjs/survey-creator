@@ -19,7 +19,7 @@ async function getToolboxTexts(page: any) {
 }
 
 async function getPropertiesTexts(page: any) {
-  return await getTextsBySelector(".spg-checkbox__caption .sv-string-viewer, .spg-question__title .sv-string-viewer", page);
+  return await getTextsBySelector(".spg-checkbox .sd-selectbase__label .sv-string-viewer, .spg-question__title .sv-string-viewer", page);
 }
 
 async function getMenuTexts(page: any) {

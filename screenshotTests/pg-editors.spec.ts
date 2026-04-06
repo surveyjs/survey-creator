@@ -274,23 +274,27 @@ test.describe(title, () => {
 
     await setCheckboxProperty("value", false);
     await setCheckboxProperty("readOnly", false);
-    await checkbox.locator(".spg-checkbox__caption").hover();
+    await checkbox.locator(".sd-selectbase__label").hover();
     await compareScreenshot(page, checkbox, "pg-checkbox-unchecked-hover.png");
 
     await setCheckboxProperty("value", true);
     await setCheckboxProperty("readOnly", false);
-    await checkbox.locator(".spg-checkbox__caption").hover();
+    await checkbox.locator(".sd-selectbase__label").hover();
     await compareScreenshot(page, checkbox, "pg-checkbox-checked-hover.png");
 
     await setCheckboxProperty("value", true);
     await setCheckboxProperty("readOnly", false);
     await checkbox.click();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
     await page.locator(".sv-string-viewer").filter({ hasText: "Make the title and description visible" }).hover();
     await compareScreenshot(page, checkbox, "pg-checkbox-unchecked-focused.png");
 
     await setCheckboxProperty("value", false);
     await setCheckboxProperty("readOnly", false);
     await checkbox.click();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
     await page.locator(".sv-string-viewer").filter({ hasText: "Make the title and description visible" }).hover();
     await compareScreenshot(page, checkbox, "pg-checkbox-checked-focused.png");
 
