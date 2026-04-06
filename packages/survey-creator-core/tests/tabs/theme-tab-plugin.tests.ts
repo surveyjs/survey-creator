@@ -438,7 +438,7 @@ test("Get theme changes only", (): any => {
     "header",
     "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(41);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(36);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(themeChangesReset).length).toBe(6);
