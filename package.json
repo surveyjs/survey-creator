@@ -33,6 +33,7 @@
         "@vue/eslint-config-typescript": "^11.0.0",
         "axe-playwright": "^2.1.0",
         "concurrently": "^7",
+        "cross-env": "^10.1.0",
         "devextreme-screenshot-comparer": "^2.0.11",
         "eslint": "^8.57.0",
         "eslint-plugin-react": "^7.33.0",

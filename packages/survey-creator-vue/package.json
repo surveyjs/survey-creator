@@ -29,7 +29,7 @@
     "e2e": "playwright test --project e2e --ui",
     "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
-    "test:scr:ci": "playwright test --project scr"
+    "test:scr:ci": "cross-env DEBUG=pw:browser playwright test --project scr"
   },
   "devDependencies": {
     "@babel/types": "^7.20.2",
