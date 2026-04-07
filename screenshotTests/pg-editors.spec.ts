@@ -229,7 +229,9 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-rating.png");
   });
 
-  test("Logic popup mobile", async ({ page }) => {
+  test("Logic popup mobile", async ({ page, browser }) => {
+    // eslint-disable-next-line no-console
+    console.log("Browser version:", await browser.version());
     await page.setViewportSize({ width: 1240, height: 870 });
     await getAddNewQuestionButton(page).click();
     await page.setViewportSize({ width: 500, height: 870 });
