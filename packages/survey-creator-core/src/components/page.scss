@@ -234,7 +234,7 @@ svc-page {
 .svc-page__content:focus,
 .svc-hovered.svc-page__content {
   box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px)
-    var(--sjs2-color-component-panel-hovered-border, rgba(25, 179, 148, 0.4));
+    var(--sjs2-color-utility-shadow-surface-hovered, rgba(25, 179, 148, 0.4));
   background: var(--sjs2-color-utility-surface-designer);
 }
 
@@ -268,7 +268,7 @@ svc-page {
 }
 
 .svc-page__content--selected.svc-page__content--selected {
-  box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) var(--sjs2-color-component-panel-focused-border, #19b394);
+  box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) var(--sjs2-color-utility-shadow-surface-focused, #19b394);
   background: var(--sjs2-color-utility-surface-designer);
 }
 
@@ -307,7 +307,7 @@ svc-page {
   }
 
   &.svc-page__content--collapsed-drag-over-inside {
-    box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) var(--sjs2-color-component-panel-focused-border, #19b394);
+    box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) var(--sjs2-color-utility-shadow-surface-focused, #19b394);
     background: var(--sjs2-color-bg-brand-secondary, rgba(25, 179, 148, 0.1));
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
@@ -333,7 +333,7 @@ svc-page {
       box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) inset var(--sjs-secondary-background-500, #19b394ff);
 
       box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) inset
-        var(--sjs2-color-component-panel-focused-border, #19b394);
+        var(--sjs2-color-utility-shadow-surface-focused, #19b394);
         background: var(--sjs2-color-utility-surface-designer);
 
       .svc-page__content-actions {
@@ -345,7 +345,7 @@ svc-page {
   .svc-page__content:not(.svc-page__content--new):focus,
   .svc-hovered.svc-page__content:not(.svc-page__content--new) {
     box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) inset
-      var(--sjs2-color-component-panel-hovered-border, rgba(25, 179, 148, 0.4));
+      var(--sjs2-color-utility-shadow-surface-hovered, rgba(25, 179, 148, 0.4));
   }
 }
 
