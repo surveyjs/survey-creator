@@ -147,7 +147,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       if (question.name === CreatorThemeModel.varColorUtilitySurface) {
         (question as any).choices = this.themeModel && this.themeModel.isLight ? getPredefinedBackgoundColorsChoices() : [];
       }
-      if (question.name === CreatorThemeModel.varColorProjectBrand || question.name === CreatorThemeModel.varColorProjectAccent) {
+      if (question.name === CreatorThemeModel.varColorProjectBrand) {
         (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
       }
     });

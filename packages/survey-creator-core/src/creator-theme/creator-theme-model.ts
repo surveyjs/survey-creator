@@ -18,7 +18,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   static varBaseUnitBorderWidth = "--sjs2-base-unit-border-width";
 
   static varColorProjectBrand = "--sjs2-color-project-brand-600";
-  static varColorProjectAccent = "--sjs2-color-project-accent-600";
   static varColorUtilitySurface = "--sjs2-color-utility-surface-designer";
 
   initialCssVariables: { [index: string]: string } = {};
@@ -133,7 +132,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.setThemeCssVariablesChanges(name, newValue);
       this.setPropertyValue(name, newValue);
       this.updateBackgroundColor(newValue, oldValue);
-    } else if (name === CreatorThemeModel.varColorProjectAccent || name === CreatorThemeModel.varColorUtilitySurface) {
+    } else if (name === CreatorThemeModel.varColorUtilitySurface) {
       this.setThemeCssVariablesChanges(name, newValue);
       this.setPropertyValue(name, newValue);
     } else if (name.indexOf("--") === 0) {
@@ -300,17 +299,6 @@ Serializer.addProperties("creatortheme", [
       if (!!editor) {
         editor.titleLocation = "left";
         editor.title = getLocString("creatortheme.--sjs-primary-background-500");
-      }
-    },
-  }, {
-    type: "color",
-    name: CreatorThemeModel.varColorProjectAccent,
-    default: "#19B394",
-    displayName: "",
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.titleLocation = "left";
-        editor.title = getLocString("creatortheme.--sjs-secondary-background-500");
       }
     },
   }, {

@@ -927,11 +927,6 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-fg-basic-primary", visible: false },
   { name: "--sjs2-color-fg-basic-secondary", visible: false },
 
-  { name: "--sjs2-color-bg-accent-primary", visible: false },
-  { name: "--sjs2-color-bg-accent-secondary", visible: false },
-  { name: "--sjs2-color-bg-accent-secondary-dim", visible: false },
-  { name: "--sjs2-color-fg-accent-on-primary", visible: false },
-  { name: "--sjs2-color-fg-accent-primary-disabled", visible: false },
   {
     name: "--sjs2-border-effect-surface-default-reset",
     visible: false,
