@@ -696,7 +696,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!requiredAction) return;
     const isRequired = (this.surveyElement as Question)?.isRequired;
     requiredAction.ariaChecked = isRequired;
-    requiredAction.active = isRequired;
+    requiredAction.pressed = isRequired;
     requiredAction.innerItem.title = isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
   }
 

@@ -259,3 +259,20 @@ svc-tab-designer {
     }
   }
 }
+
+// TODO: remove this vvvvvv
+.svc-survey-element-toolbar, .svc-page-toolbar {
+  .sd-action__icon use {
+    fill: #19b394ff;
+  }
+  .sd-action__title {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .sd-action-bar__separator {
+    height: 32px;
+    margin-right: 12px;
+    margin-left: 4px;
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^

@@ -115,22 +115,6 @@ svc-page {
   .sd-action {
     pointer-events: all;
   }
-  use {
-    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
-  }
-  & > .sv-dots {
-    width: auto;
-    .sv-dots__item {
-      width: auto;
-    }
-    &.sd-action-bar__item--hidden {
-      width: 0;
-    }
-    .svc-list__item-icon {
-      width: var(--sjs2-size-x200, 16px);
-      height: var(--sjs2-size-x200, 16px);
-    }
-  }
 }
 
 .svc-page-toolbar--collapse {
