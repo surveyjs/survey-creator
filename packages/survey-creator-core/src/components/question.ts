@@ -21,7 +21,8 @@ import {
   classesToSelector,
   QuestionFactory,
   PopupModel,
-  QuestionCompositeModel
+  QuestionCompositeModel,
+  defaultActionBarCss
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -305,19 +306,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected createActionContainer(): SurveyElementActionContainer {
     const actionContainer = super.createActionContainer();
+
     const defaultCssClasses = {
-      root: "svc-survey-element-toolbar sv-action-bar",
-      item: "svc-survey-element-toolbar__item",
-      itemWithTitle: "svc-survey-element-toolbar__item--with-text",
-      itemAsIcon: "svc-survey-element-toolbar__item--icon",
-      itemActive: "svc-survey-element-toolbar__item--active",
-      itemPressed: "svc-survey-element-toolbar__item--pressed",
-      itemIcon: "svc-survey-element-toolbar-item__icon",
-      itemTitle: "svc-survey-element-toolbar-item__title",
-      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+      ...defaultActionBarCss,
+      root: "svc-survey-element-toolbar " + defaultActionBarCss.root,
     };
 
     actionContainer.sizeMode = "small";
+    actionContainer.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
     return actionContainer;

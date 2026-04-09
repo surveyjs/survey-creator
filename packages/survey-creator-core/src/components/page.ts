@@ -8,6 +8,7 @@ import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
+import { defaultActionBarCss } from "survey-core";
 
 import "./page.scss";
 
@@ -208,6 +209,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const container = super.createActionContainer();
     container.alwaysShrink = this.creator.isMobileView;
     container.sizeMode = "small";
+    container.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     container.cssClasses = this.containerCssClasses();
     container.dotsItem.iconSize = "auto";
     return container;
@@ -215,20 +217,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected createTopActionContainer(): ActionContainer {
     const container = super.createTopActionContainer();
+    container.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     container.cssClasses = { ...this.containerCssClasses() };
     container.cssClasses.root += " svc-page-toolbar--collapse";
     return container;
   }
   private containerCssClasses(): any {
     return {
-      root: "svc-page-toolbar sv-action-bar",
-      item: "svc-page-toolbar__item",
-      itemWithTitle: "svc-page-toolbar__item--with-text",
-      itemActive: "svc-page-toolbar__item--active",
-      itemPressed: "svc-page-toolbar__item--pressed",
-      itemIcon: "svc-page-toolbar-item__icon",
-      itemTitle: "svc-page-toolbar-item__title",
-      itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
+      ...defaultActionBarCss,
+      root: "svc-page-toolbar " + defaultActionBarCss.root,
     };
   }
   protected allowExpandCollapseByDblClick(element: any) {
