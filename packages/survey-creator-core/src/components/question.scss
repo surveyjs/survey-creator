@@ -396,10 +396,10 @@ svc-question {
   .sd-action {
     flex-direction: row-reverse;
   }
-  .sd-action__icon {
-    width: var(--sjs2-size-x300, 24px);
-    height: var(--sjs2-size-x300, 24px);
-  }
+  // .sd-action__icon {
+  //   width: var(--sjs2-size-x300, 24px);
+  //   height: var(--sjs2-size-x300, 24px);
+  // }
   .svc-survey-element-toolbar__item {
     flex-direction: row-reverse;
   }
