@@ -341,10 +341,6 @@ svc-page {
   margin-top: var(--sjs2-spacing-x200, 16px);
   gap: var(--sjs2-spacing-x200, 16px);
 
-  .sv-action {
-    flex: 1 1 0;
-  }
-
   .svc-btn {
     flex-grow: 1;
     border: none;
@@ -352,6 +348,7 @@ svc-page {
 
   .svc-add-new-question-action {
     position: relative;
+    flex: 1 1 0;
   }
 }
 
