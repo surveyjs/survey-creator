@@ -47,13 +47,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
   }
-  private get activePageIsNotPropertyGridPlaceholder(): boolean {
-    return this.creator.sidebar.activePage !== this.propertyGridPlaceholderPage.id;
+  private get activePageIsPropertyGridPlaceholder(): boolean {
+    return this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id;
   }
   private get isSettingsActive(): boolean {
     return notShortCircuitAnd(this.creator.showSidebar,
       this.isSurveySelected,
-      this.activePageIsNotPropertyGridPlaceholder);
+      !this.activePageIsPropertyGridPlaceholder,
+      this.activePageIsPropertyGrid);
   }
   private get activePageIsPropertyGrid(): boolean {
     return this.creator.sidebar.activePage === this.propertyGridTab.id;
