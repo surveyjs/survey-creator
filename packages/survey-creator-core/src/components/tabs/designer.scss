@@ -226,10 +226,11 @@ svc-tab-designer {
 }
 
 .svc-tab-designer__surface-toolbar {
-  gap: var(--sjs2-spacing-x100, 8px);
+  display: flex;
+  --sd-action-bar-gap: var(--sjs2-spacing-x100, 8px);
   flex-direction: column;
 
-  .sv-action-bar-separator {
+  .sd-action-bar__separator {
     height: var(--sjs2-border-width-x100, 1px);
     width: var(--sjs2-size-x300, 24px);
     padding: var(--sjs2-spacing-x000, 0px) var(--sjs2-spacing-x100, 8px);
@@ -238,7 +239,7 @@ svc-tab-designer {
     box-sizing: content-box;
   }
 
-  .sv-action__content {
+  .sd-action-bar__item-content {
     flex-direction: column;
   }
 }
