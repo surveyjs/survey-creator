@@ -144,12 +144,6 @@ jobs:
 
   - job: CreatorV2React
     dependsOn: CreatorV2Core
-    strategy:
-      matrix:
-        Shard_1: { SHARD_INDEX: 1, SHARD_TOTAL: 4 }
-        Shard_2: { SHARD_INDEX: 2, SHARD_TOTAL: 4 }
-        Shard_3: { SHARD_INDEX: 3, SHARD_TOTAL: 4 }
-        Shard_4: { SHARD_INDEX: 4, SHARD_TOTAL: 4 }
     steps:
       - checkout: self
       - checkout: EmptyRepo
@@ -159,12 +153,6 @@ jobs:
         artifact: SurveyJSLibraryBuildReact
       - download: LibraryMain
         artifact: SurveyJSLibraryBuildCore
-
-      # - task: PowerShell@2
-      #   displayName: "update Google Chrome to latest"
-      #   inputs:
-      #     targetType: "inline"
-      #     script: '$Path = $env:TEMP; $Installer = ''chrome_installer.exe''; Invoke-WebRequest -Uri ''http://dl.google.com/chrome/install/375.126/chrome_installer.exe'' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args ''/silent /install'' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer'
 
       - task: NodeTool@0
         inputs:
@@ -299,10 +287,8 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run test:scr:ci -- --shard=$(SHARD_INDEX)/$(SHARD_TOTAL)
+          npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 React"
-        env:
-          PLAYWRIGHT_SHARD_INDEX: $(SHARD_INDEX)
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -317,7 +303,7 @@ jobs:
         inputs:
           searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
           testResultsFormat: "JUnit"
-          testResultsFiles: "e2e-junit-$(SHARD_INDEX).xml"
+          testResultsFiles: "e2e-junit-results.xml"
           mergeTestResults: true
           failTaskOnFailedTests: true
           testRunTitle: "Creator React SCR Tests"
@@ -326,12 +312,6 @@ jobs:
   # ======================= CreatorV2Angular ======================= #
   - job: CreatorV2Angular
     dependsOn: CreatorV2Core
-    strategy:
-      matrix:
-        Shard_1: { SHARD_INDEX: 1, SHARD_TOTAL: 4 }
-        Shard_2: { SHARD_INDEX: 2, SHARD_TOTAL: 4 }
-        Shard_3: { SHARD_INDEX: 3, SHARD_TOTAL: 4 }
-        Shard_4: { SHARD_INDEX: 4, SHARD_TOTAL: 4 }
     steps:
       - checkout: self
       - checkout: EmptyRepo
@@ -341,12 +321,6 @@ jobs:
         artifact: SurveyJSLibraryBuildAngular
       - download: LibraryMain
         artifact: SurveyJSLibraryBuildCore
-
-      # - task: PowerShell@2
-      #   displayName: "update Google Chrome to latest"
-      #   inputs:
-      #     targetType: "inline"
-      #     script: '$Path = $env:TEMP; $Installer = ''chrome_installer.exe''; Invoke-WebRequest -Uri ''http://dl.google.com/chrome/install/375.126/chrome_installer.exe'' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args ''/silent /install'' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer'
 
       - task: NodeTool@0
         inputs:
@@ -442,10 +416,8 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run test:scr:ci -- --shard=$(SHARD_INDEX)/$(SHARD_TOTAL)
+          npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 Angular"
-        env:
-          PLAYWRIGHT_SHARD_INDEX: $(SHARD_INDEX)
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -460,7 +432,7 @@ jobs:
         inputs:
           searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/test-results"
           testResultsFormat: "JUnit"
-          testResultsFiles: "e2e-junit-$(SHARD_INDEX).xml"
+          testResultsFiles: "e2e-junit-results.xml"
           mergeTestResults: true
           failTaskOnFailedTests: true
           testRunTitle: "Creator Angular SCR Tests"
@@ -469,12 +441,6 @@ jobs:
   # ======================= CreatorV2Vue ======================= #
   - job: CreatorV2Vue
     dependsOn: CreatorV2Core
-    strategy:
-      matrix:
-        Shard_1: { SHARD_INDEX: 1, SHARD_TOTAL: 4 }
-        Shard_2: { SHARD_INDEX: 2, SHARD_TOTAL: 4 }
-        Shard_3: { SHARD_INDEX: 3, SHARD_TOTAL: 4 }
-        Shard_4: { SHARD_INDEX: 4, SHARD_TOTAL: 4 }
     steps:
       - checkout: self
       - checkout: EmptyRepo
@@ -484,12 +450,6 @@ jobs:
         artifact: SurveyJSLibraryBuildVue3
       - download: LibraryMain
         artifact: SurveyJSLibraryBuildCore
-
-      # - task: PowerShell@2
-      #   displayName: "update Google Chrome to latest"
-      #   inputs:
-      #     targetType: "inline"
-      #     script: '$Path = $env:TEMP; $Installer = ''chrome_installer.exe''; Invoke-WebRequest -Uri ''http://dl.google.com/chrome/install/375.126/chrome_installer.exe'' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args ''/silent /install'' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer'
 
       - task: NodeTool@0
         inputs:
@@ -585,10 +545,8 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run test:scr:ci -- --shard=$(SHARD_INDEX)/$(SHARD_TOTAL)
+          npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 Vue"
-        env:
-          PLAYWRIGHT_SHARD_INDEX: $(SHARD_INDEX)
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -603,7 +561,7 @@ jobs:
         inputs:
           searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/test-results"
           testResultsFormat: "JUnit"
-          testResultsFiles: "e2e-junit-$(SHARD_INDEX).xml"
+          testResultsFiles: "e2e-junit-results.xml"
           mergeTestResults: true
           failTaskOnFailedTests: true
           testRunTitle: "Creator Vue SCR Tests"
@@ -611,12 +569,6 @@ jobs:
 
   - job: Preact_ShadowDOM_BoxSizing
     dependsOn: CreatorV2Core
-    strategy:
-      matrix:
-        Shard_1: { SHARD_INDEX: 1, SHARD_TOTAL: 4 }
-        Shard_2: { SHARD_INDEX: 2, SHARD_TOTAL: 4 }
-        Shard_3: { SHARD_INDEX: 3, SHARD_TOTAL: 4 }
-        Shard_4: { SHARD_INDEX: 4, SHARD_TOTAL: 4 }
     steps:
       - checkout: self
       - checkout: EmptyRepo
@@ -626,12 +578,6 @@ jobs:
         artifact: SurveyJSLibraryBuildSurveyUI
       - download: LibraryMain
         artifact: SurveyJSLibraryBuildCore
-
-      # - task: PowerShell@2
-      #   displayName: "update Google Chrome to latest"
-      #   inputs:
-      #     targetType: "inline"
-      #     script: '$Path = $env:TEMP; $Installer = ''chrome_installer.exe''; Invoke-WebRequest -Uri ''http://dl.google.com/chrome/install/375.126/chrome_installer.exe'' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args ''/silent /install'' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer'
 
       - task: NodeTool@0
         inputs:
@@ -765,10 +711,8 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run test:scr:ci -- --shard=$(SHARD_INDEX)/$(SHARD_TOTAL)
+          npm run test:scr:ci
         displayName: "Screenshot Tests CreatorV2 JS"
-        env:
-          PLAYWRIGHT_SHARD_INDEX: $(SHARD_INDEX)
 
       - task: PublishBuildArtifacts@1
         inputs:
@@ -783,7 +727,7 @@ jobs:
         inputs:
           searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/test-results"
           testResultsFormat: "JUnit"
-          testResultsFiles: "e2e-junit-$(SHARD_INDEX).xml"
+          testResultsFiles: "e2e-junit-results.xml"
           mergeTestResults: true
           failTaskOnFailedTests: true
           testRunTitle: "Creator JS SCR Tests"
