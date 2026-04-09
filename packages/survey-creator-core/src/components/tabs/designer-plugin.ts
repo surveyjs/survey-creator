@@ -47,9 +47,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
   }
-  private get activePageIsPropertyGridPlaceholder(): boolean {
-    return this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id;
-  }
   private get isSettingsActive(): boolean {
     return notShortCircuitAnd(this.creator.showSidebar,
       this.isSurveySelected,
@@ -58,6 +55,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private get activePageIsPropertyGrid(): boolean {
     return this.creator.sidebar.activePage === this.propertyGridTab.id;
+  }
+  private get activePageIsPropertyGridPlaceholder(): boolean {
+    return this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id;
   }
   private createSelectedUpdater() {
     return <any>new ComputedUpdater<boolean>(() => {
@@ -88,7 +88,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.showOneCategoryInPropertyGrid && this.activePageIsPropertyGrid) {
       this.creator.sidebar.header.componentName = "svc-side-bar-property-grid-header";
       this.creator.sidebar.header.componentData = this.propertyGridViewModel.objectSelectionAction;
-    } else if (!this.activePageIsPropertyGrid) {
+    } else if (this.showOneCategoryInPropertyGrid && !this.activePageIsPropertyGrid) {
       this.creator.sidebar.header.componentName = "svc-side-bar-header";
       this.creator.sidebar.header.componentData = this.creator.sidebar.header;
     } else {
