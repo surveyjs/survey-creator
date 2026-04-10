@@ -745,7 +745,7 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, json);
-    await page.locator("button.sv-action-bar-item[title=\"Survey\"]").click({ position: { x: 5, y: 5 } });
+    await page.locator("button.sd-action[title=\"Survey\"]").click({ position: { x: 5, y: 5 } });
     await getListItemByText(page, "question5").filter({ visible: true }).click({ position: { x: 5, y: 5 } });
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
