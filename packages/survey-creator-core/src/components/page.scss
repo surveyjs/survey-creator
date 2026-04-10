@@ -335,6 +335,7 @@ svc-page {
 }
 
 .svc-page__footer {
+  position: relative;
   overflow: visible;
   margin-left: var(--sjs2-spacing-x300, 24px);
   margin-right: var(--sjs2-spacing-x300, 24px);
