@@ -155,7 +155,8 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
   protected createInputActionsContainer(): ActionContainer {
     const actionBar = new ActionContainer();
-    actionBar.setCssClasses(this.survey?.getCss().inputActionBar);
+    actionBar.containerCss = this.cssClasses.group;
+    actionBar.setActionsAppearance({ mode: "tertiary", style: "neutral", size: "small" });
     actionBar.actions = this.createInputActions();
     actionBar.registerFunctionOnPropertyValueChanged("isEmpty", () => {
       this._hasVisibleInputActions = actionBar.hasVisibleActions;

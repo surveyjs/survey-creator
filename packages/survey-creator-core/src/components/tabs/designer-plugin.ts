@@ -479,7 +479,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           });
         }
       },
-      active: this.createSelectedUpdater(),
+      appearance: { style: "brand" },
+      pressed: this.createSelectedUpdater(),
       visible: this.createVisibleUpdater(() => {
         return this.creator.removeSidebar !== true;
       }),
@@ -509,7 +510,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconName: "icon-config",
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
-      active: true,
+      pressed: true,
+      appearance: { style: "brand" },
       locTitleName: "ed.designer",
       showTitle: false,
       action: () => { }
@@ -525,7 +527,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       },
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
-      showTitle: false
+      showTitle: false,
+      appearance: { style: "brand" }
     });
 
     items.push(this.saveSurveyAction);

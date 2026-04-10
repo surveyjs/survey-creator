@@ -187,7 +187,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
         .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))
         .append("svc-toolbox__tool--disabled", this.enabled === false)
-        .append("sv-action--hidden", !this.isVisible)
+        .append("svc-toolbox__tool--hidden", !this.isVisible)
         .toString();
     }) as any;
   }
@@ -608,6 +608,9 @@ export class QuestionToolbox
     this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
+    this.cssClasses = {
+      containerItemHidden: "svc-toolbox__tool--hidden",
+    };
     this.searchItem = new Action({
       id: "searchItem-id",
       css: "svc-toolbox__tool svc-toolbox__search-button",
@@ -634,7 +637,7 @@ export class QuestionToolbox
     this.dotsItem.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
         .append("svc-toolbox__tool svc-toolbox__tool--dots")
-        .append("sv-action--hidden", !this.dotsItem.isVisible)
+        .append("svc-toolbox__tool--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
 

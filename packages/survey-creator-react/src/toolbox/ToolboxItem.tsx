@@ -82,7 +82,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
-        <div className="svc-toolbox__tool-content sv-action__content"
+        <div className="svc-toolbox__tool-content"
           onPointerDown={(event: any) => {
             event.persist();
             this.model.onPointerDown(event);

@@ -76,7 +76,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.active = this.model.showInvisibleElements;
+      this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
     if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
@@ -200,9 +200,10 @@ export class TabTestPlugin implements ICreatorPlugin {
         }),
         locTitleName: "ts.showInvisibleElements",
         visible: false,
+        appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
+          this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
@@ -240,6 +241,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
+      appearance: { style: "brand" },
       showTitle: false
     });
 
@@ -248,7 +250,8 @@ export class TabTestPlugin implements ICreatorPlugin {
       css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
-      active: true,
+      pressed: true,
+      appearance: { style: "brand" },
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
