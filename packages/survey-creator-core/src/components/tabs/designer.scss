@@ -251,12 +251,14 @@ svc-tab-designer {
 // Temporary fix for disabled formbox buttons in designer
 .svc-tab-designer_content,
 .svc-question__content--in-popup {
-  .sd-editor-chevron-button .sd-action {
-    cursor: default;
-    --sd-action-disabled-background: var(--sjs2-color-component-action-neutral-tertiary-default-bg, rgba(95, 94, 97, 0));
-    --sd-action-disabled-title-color: var(--sjs2-color-component-action-neutral-tertiary-default-label, #1c1b20);
-    --sd-action-disabled-icon-color: var(--sjs2-color-component-action-neutral-tertiary-default-icon, #424146);
-  }
+  .sd-editor-chevron-button, .sd-editor-clean-button{
+    .sd-action {
+      cursor: default;
+      --sd-action-disabled-background: var(--sjs2-color-component-action-neutral-tertiary-default-bg, rgba(95, 94, 97, 0));
+      --sd-action-disabled-title-color: var(--sjs2-color-component-action-neutral-tertiary-default-label, #1c1b20);
+      --sd-action-disabled-icon-color: var(--sjs2-color-component-action-neutral-tertiary-default-icon, #424146);
+    }
+  } 
 }
 
 // TODO: remove this vvvvvv
