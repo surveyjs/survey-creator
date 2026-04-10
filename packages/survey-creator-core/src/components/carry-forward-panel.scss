@@ -19,14 +19,14 @@
   text-align: center;
   color: var(--ctr-survey-info-panel-text-color, var(--sjs-layer-2-foreground-50, #00000080));
 }
-  
+
 @container (max-width: #{$sd-panel-medium-min-width}) {
     .svc-carry-forward-panel {
       display: none;
     }
   }
-  
-@container (max-width: #{$sd-panel-normal-min-width}) {
+
+@container (min-width: #{$sd-panel-medium-min-width}) and (max-width: #{$sd-panel-normal-min-width}) {
   .svc-carry-forward-panel {
     padding: calcSize(4) calcSize(3);
     display: flex;
