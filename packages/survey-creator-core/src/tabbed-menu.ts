@@ -75,6 +75,12 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     this.hiddenItemsListModel.cssClasses = listComponentCss;
     this.minVisibleItemsCount = 1;
   }
+  protected getDefaultCssClasses() {
+    const res = super.getDefaultCssClasses();
+    return Object.assign({}, res, {
+      containerItemHidden: "svc-tabbed-menu-container--hidden",
+    });
+  }
   public addTab(name: string,
     pluginCreator: () => ICreatorPlugin,
     title?: string,

@@ -2,6 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
+    "lib": [
+      "DOM",
+      "ES6"
+    ],
     "sourceMap": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
