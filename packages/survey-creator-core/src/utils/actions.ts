@@ -35,11 +35,11 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
 }
 
 export function updateMatrixLogicRemoveAction(question: QuestionMatrixDynamicModel, actions: Array<IAction>, row: MatrixDynamicRowModel) {
-  updateMatrixRemoveAction(question, actions, row);
   const action = findAction(actions, "remove-row");
   if (!action) return;
-  action.iconSize = "auto";
   action.css = "sl-table__action-button sl-table__remove-button";
+  action.iconName = "icon-delete";
+  action.showTitle = false;
 }
 export function updateMatrixRemoveAction(
   question: QuestionMatrixDynamicModel,
