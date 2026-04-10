@@ -608,6 +608,9 @@ export class QuestionToolbox
     this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
+    this.cssClasses = {
+      containerItemHidden: "svc-toolbox__tool--hidden",
+    };
     this.searchItem = new Action({
       id: "searchItem-id",
       css: "svc-toolbox__tool svc-toolbox__search-button",
