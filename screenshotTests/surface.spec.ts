@@ -1027,6 +1027,35 @@ test.describe(title, () => {
     await compareScreenshot(page, propsSelector, "restful-properties.png");
   });
 
+  test("Choices-by-URL info panel in narrow question (wrapped layout)", async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await setJSON(page, {
+      showQuestionNumbers: true,
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "dropdown",
+              name: "q1",
+              title: "Narrow dropdown",
+              minWidth: "280px",
+              maxWidth: "280px",
+              choicesByUrl: {
+                url: "#",
+                valueName: "name"
+              }
+            }
+          ]
+        }
+      ]
+    });
+    await resetHoverToCreator(page);
+    const panel = page.locator(".svc-carry-forward-panel");
+    await expect(panel).toBeVisible();
+    await compareScreenshot(page, panel, "restful-choices-by-url-panel-narrow.png");
+  });
+
   test("Question adorners - popup", async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 900 });
     const json = {
