@@ -1545,7 +1545,7 @@ test.describe(title, () => {
         "headerView": "advanced"
       };
     });
-    await compareScreenshot(page, ".sv-action-bar.svc-page__footer", "dots-type-selector-custom-button.png");
+    await compareScreenshot(page, ".sd-action-bar.svc-page__footer", "dots-type-selector-custom-button.png");
   });
   test("Multiple questions in one row, row content has scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 900 });
