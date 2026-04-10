@@ -112,6 +112,7 @@ svc-page {
   flex-grow: 1;
   justify-content: flex-end;
   pointer-events: none;
+  overflow: hidden;
   .sd-action {
     pointer-events: all;
   }
@@ -448,7 +449,7 @@ svc-page {
 }
 
 .svc-page__content--collapsed {
-  & > .sv-action-bar {
+  & > .svc-page__footer {
     display: none;
   }
 
