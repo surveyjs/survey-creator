@@ -92,6 +92,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 .svc-side-bar__container-actions {
   width: 100%;
   box-sizing: border-box;
+  .sd-action__title {
+    @include ctrDefaultFont;
+  }
   .sv-action-bar {
     justify-content: flex-end;
     padding: 0;
