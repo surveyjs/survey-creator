@@ -71,9 +71,6 @@
   .svc-toolbar-wrapper {
     flex: 0 0 auto;
     display: flex;
-    .sd-action-bar {
-      --sd-action-bar-gap: var(--sjs2-spacing-x200, 16px);
-    }
 
     .svc-toolbar {
       padding: var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
