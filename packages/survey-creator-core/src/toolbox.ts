@@ -1488,12 +1488,6 @@ export class QuestionToolbox
   public createResponsivityManager(container: HTMLDivElement): VerticalResponsivityManager {
     return new VerticalResponsivityManager(container, this);
   }
-  protected getDefaultCssClasses() {
-    const res = super.getDefaultCssClasses();
-    return Object.assign({}, res, {
-      containerItemHidden: "svc-toolbox__tool--hidden",
-    });
-  }
   public afterRender(container: HTMLDivElement) {
     this.setRootElement(container);
     this.initResponsivityManager(this.containerElement as HTMLDivElement);
