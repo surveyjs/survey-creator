@@ -1030,21 +1030,35 @@ test.describe(title, () => {
   test("Choices-by-URL info panel in narrow question (wrapped layout)", async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await setJSON(page, {
-      showQuestionNumbers: true,
       pages: [
         {
           name: "page1",
           elements: [
             {
-              type: "dropdown",
-              name: "q1",
-              title: "Narrow dropdown",
-              minWidth: "280px",
-              maxWidth: "280px",
-              choicesByUrl: {
-                url: "#",
-                valueName: "name"
-              }
+              type: "paneldynamic",
+              name: "question4",
+              templateElements: [
+                {
+                  type: "dropdown",
+                  name: "q1",
+                  minWidth: "",
+                  title: "Narrow dropdown",
+                  choicesByUrl: {
+                    url: "#",
+                    valueName: "name"
+                  }
+                },
+                {
+                  type: "text",
+                  name: "question1",
+                  startWithNewLine: false
+                },
+                {
+                  type: "text",
+                  name: "question2",
+                  startWithNewLine: false
+                }
+              ]
             }
           ]
         }
