@@ -463,10 +463,10 @@ test.describe(title, () => {
   });
 
   test("check button hover/focus state", async ({ page }) => {
-    const removeButtonIcon = page.locator(".sl-table__remove-button .sv-action-bar-item__icon");
-    const detailButtonIcon = page.locator(".sl-table__detail-button .sv-action-bar-item__icon");
-    const removeButtonRow = page.locator(".sl-table__remove-button .sv-action-bar-item");
-    const detailButtonRow = page.locator(".sl-table__detail-button.sv-action-bar-item");
+    const removeButtonIcon = page.locator(".sl-table__remove-button .sd-action__icon");
+    const detailButtonIcon = page.locator(".sl-table__detail-button .sd-action__icon");
+    const removeButtonRow = page.locator(".sl-table__remove-button .sd-action");
+    const detailButtonRow = page.locator(".sl-table__detail-button.sd-action");
     const focusedClassName = "sv-focused--by-key";
 
     await setJSON(page, surveyJSON);
