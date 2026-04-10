@@ -134,7 +134,12 @@ export default async (options) => {
         "survey-react-ui",
         "react",
         "react-dom",
-      ]
+      ],
+      paths: {
+        "react": "survey-js-ui",
+        "react-dom": "survey-js-ui",
+        "survey-react-ui": "survey-js-ui",
+      },
     })
   ];
 };

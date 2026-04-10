@@ -50,6 +50,11 @@ export default () => {
         "survey-creator-core",
         "survey-react-ui"
       ],
+      paths: {
+        "react": "survey-js-ui",
+        "react-dom": "survey-js-ui",
+        "survey-react-ui": "survey-js-ui",
+      },
       version: pkg.version,
     }),
   ];

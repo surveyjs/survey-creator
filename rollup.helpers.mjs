@@ -169,7 +169,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, paths } = options;
 
   return {
     context: "this",
@@ -232,6 +232,7 @@ export function createEsmConfig(options) {
         format: "esm",
         exports: "named",
         sourcemap: sourceMap,
+        paths,
         chunkFileNames: (chunkInfo) => {
           if (!chunkInfo.isEntry) {
             return sharedFileName;
