@@ -76,6 +76,12 @@
       padding: var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
       justify-content: flex-end;
     }
+    .sd-action-bar__separator {
+      display: none;
+    }
+    .sd-action-bar > .sd-action-bar__item:where(:not(.sd-action-bar__item--hidden)) ~ .sd-action-bar__item .sd-action-bar__separator {
+      display: inline-block;
+    }
   }
 
   .sv-action-bar-separator {

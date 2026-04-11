@@ -535,10 +535,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
     this.creator.onElementSelected.add((sender, options) => {
-      this.surveySettingsAction.active = this.isSettingsActive;
+      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
-      this.surveySettingsAction.active = this.isSettingsActive;
+      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     return items;
   }
