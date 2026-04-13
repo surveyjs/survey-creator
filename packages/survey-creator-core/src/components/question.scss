@@ -142,7 +142,6 @@ svc-question {
 
 .svc-survey-element-toolbar {
   --sd-action-bar-gap: var(--sjs2-spacing-x100, 8px);
-  overflow: hidden;
   .sv-action:last-of-type .svc-survey-element-toolbar__item {
     margin-inline-end: 0;
   }
