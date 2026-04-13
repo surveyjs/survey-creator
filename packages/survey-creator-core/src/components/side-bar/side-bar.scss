@@ -289,13 +289,18 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
 .sv-action--object-selector {
   max-width: 70%;
 
-  .sv-action-bar-item {
-    flex-shrink: 1;
-    height: auto;
+  .sd-action-bar__item-content {
+    width: 100%;
   }
 
-  .sv-action-bar-item__title {
-    @include ctrDefaultFont;
+  .sd-action {
+    flex-shrink: 1;
+    height: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sd-action__title {
     overflow: hidden;
     text-overflow: ellipsis;
   }
