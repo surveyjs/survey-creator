@@ -28,6 +28,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       if (a.id == "remove-row") {
         a.iconName = "icon-delete_24x24";
         a.tooltip = getLocString("presets.items.delete");
+        a.appearance = { style: "alert" as any, mode: "tertiary-muted" as any };
       }
       if (a.id == "reset-to-default") {
         a.action = () => { this.resetCategory(model, row); };
@@ -174,6 +175,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         iconName: "more-circle-24x24",
         tooltip: getLocString("presets.items.more"),
         location: "end",
+        appearance: { mode: "tertiary" as any },
         visibleIndex: 20
       }, {
         items: [],

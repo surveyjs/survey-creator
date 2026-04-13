@@ -53,6 +53,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   }
 
   protected updateRowAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rowData: any, keyColumn: string, action: IAction) {
+    action.appearance = { mode: "tertiary" as any };
     if (action.id == "icon-action") {
       action.iconName = rowData.iconName || this.defaultIcon;
     }
@@ -119,6 +120,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         a.action = () => question.removeRowUI(row);
         a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
         a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.delete");
+        a.appearance = { mode: "tertiary-muted" as any };
       }
     });
   }

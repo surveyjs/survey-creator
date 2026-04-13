@@ -376,6 +376,7 @@ export class PresetsManager {
       ...presetsCss,
       matrixdynamic: {
         ...propertyGridCss.matrixdynamic,
+        actionsCell: propertyGridCss.matrixdynamic.actionsCell + " sps-table__cell--actions",
         buttonAdd: presetsCss.matrixdynamic.buttonAdd,
         footer: presetsCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
       }

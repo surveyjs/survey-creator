@@ -125,7 +125,7 @@
   padding: 0 var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px);
   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   display: flex;
-  .spg-action-bar {
+  .sd-action-bar {
     width: 100%;
   }
   .sd-action-bar__item {
@@ -158,17 +158,20 @@
   }
 }
 .sps-matrixdynamic__add-btn {
-  @include sjs2--typography--default;
   //display: none;
   appearance: none;
   border: none;
   background: var(--sjs2-color-bg-neutral-secondary, rgba(95, 94, 97, 0.1));
-  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
   text-align: center;
   flex-grow: 1;
   justify-content: center;
+  box-sizing: border-box;
   &:hover {
     background: var(--sjs2-color-bg-neutral-secondary-dim, rgba(95, 94, 97, 0.1));
+  }
+  .sd-action__title {
+    color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+    @include sjs2--typography--default;
   }
 }
 
@@ -176,8 +179,7 @@
   background: transparent;
   padding: var(--sjs2-spacing-x100, 8px);
   justify-content: flex-start;
-  gap: var(--sjs2-spacing-x100, 8px);
-  .sps-action-button__icon {
+  .sd-action__icon use {
     fill: var(--sjs2-color-fg-basic-primary-muted, #424146);
   }
 }
