@@ -144,6 +144,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       component: "sv-fileedit-button",
       data: { question: this },
       locTitle: this.locChooseButtonCaption,
+      innerCss: new ComputedUpdater(() => this.isInputReadOnly ? this.cssClasses.chooseButtonDisabled : "") as unknown as string,
       enabled: new ComputedUpdater(() => !this.isInputReadOnly) as unknown as boolean,
       iconName: new ComputedUpdater(() => this.cssClasses.chooseButtonIcon) as unknown as string,
     });

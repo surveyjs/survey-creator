@@ -347,6 +347,7 @@ export var propertyGridCss = {
     clearButtonIcon: "icon-cancel-24x24",
     fileInput: "sd-visuallyhidden",
     chooseButton: "spg-file-edit__choose-button",
+    chooseButtonDisabled: "sd-action--disabled",
     group: "sd-formbox__group"
   },
   linkvalue: {
