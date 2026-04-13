@@ -110,7 +110,7 @@ test.describe(title, () => {
     await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".svc-image-item-value")?.classList.toggle("svc-image-item-value--file-dragging"));
     await compareScreenshot(page, imagePicker, "image-picker-single-new-item-dragging.png");
     await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".svc-image-item-value")?.classList.toggle("svc-image-item-value--file-dragging"));
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls").getByRole("button", { name: "Choose Image" }).click();
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
     });
@@ -137,7 +137,7 @@ test.describe(title, () => {
 
     const imagePicker = page.locator(".sd-imagepicker");
     await imagePicker.click();
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls").getByRole("button", { name: "Select a file" }).click();
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
     });
