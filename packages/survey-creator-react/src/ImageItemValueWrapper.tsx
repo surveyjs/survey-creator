@@ -1,7 +1,7 @@
 import { ImageItemValueWrapperViewModel } from "survey-creator-core";
 import * as React from "react";
 import { QuestionSelectBase, Base, ImageItemValue, QuestionImagePickerModel } from "survey-core";
-import { LoadingIndicatorComponent, ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { LoadingIndicatorComponent, ReactElementFactory, SvgIcon, SurveyActionBar } from "survey-react-ui";
 import {
   attachKey2click,
 } from "survey-react-ui";
@@ -63,19 +63,11 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
   }
 
   renderNewItemControls() {
-    const addButton = attachKey2click(
-      <span className={this.model.addButtonCss}
-        onClick={() => this.model.chooseNewFile(this.model)}>
-        {this.model.showChooseButtonAsIcon ?
-          <SvgIcon size={"auto"} iconName={"icon-add-lg"}
-            title={this.model.addFileTitle}></SvgIcon> :
-          <span>{this.model.chooseImageText}</span>
-        }
-      </span>);
+    const controls = <SurveyActionBar model={this.model.actionsContainer}></SurveyActionBar>;
     const placeholder = this.model.showPlaceholder ? <span className="svc-image-item-value__placeholder">{this.model.placeholderText}</span> : null;
     return <>
       {placeholder}
-      {addButton}
+      {controls}
     </>;
   }
 
