@@ -13,6 +13,7 @@ import {
   changeToolboxScrolling,
   changeToolboxSearchEnabled,
   doDragDrop,
+  objectSelectorButton,
 } from "../helper";
 
 const title = "Side bar";
@@ -74,7 +75,6 @@ test.describe(title, () => {
   test("SelectObject", async ({ page }) => {
     await setJSON(page, { pages: [{ name: "page1" }] });
 
-    const objectSelectorButton = page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
     const objectSelectorPopup = page.locator(".sv-popup.svc-object-selector .svc-list__container");
     const pageContent = page.locator(".svc-page__content").first();
 
@@ -83,7 +83,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
     await expect(objectSelectorPopup).toHaveCount(0);
 
-    await objectSelectorButton.click();
+    await objectSelectorButton(page).click();
     await expect(objectSelectorPopup).toBeVisible();
     await expect(objectSelectorPopup.locator(".svc-list__item").first()).toBeFocused();
     await expect(pageContent).not.toHaveClass(/svc-page__content--selected/);

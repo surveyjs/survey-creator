@@ -12,6 +12,7 @@ import {
   creatorTabPreviewName,
   generalGroupName,
   selectedObjectTextSelector,
+  objectSelectorButton,
 } from "../helper";
 import type { Locator, Page } from "@playwright/test";
 
@@ -318,19 +319,18 @@ test.describe(title, () => {
     const expandButtonSelector = page.locator(".sv-action-bar-item[title=\"Show Panel\"]");
     const collapseButtonSelector = page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
     const surveySettingsButtonSelector = page.locator(".sv-action-bar-item[title=\"Survey settings\"]");
-    const objectSelectorButton = page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
 
     await page.setViewportSize({ width: 900, height: 700 });
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await expandButtonSelector.click();
     await expect(propertyGridSelector).toBeVisible();
     await expect(flyoutPropertyGrid).toHaveCount(1);
-    await expect(objectSelectorButton.getByText("page1")).toBeVisible();
+    await expect(objectSelectorButton(page).getByText("page1")).toBeVisible();
     await collapseButtonSelector.click();
     await surveySettingsButtonSelector.click();
-    await expect(objectSelectorButton.getByText("Survey")).toBeVisible();
+    await expect(objectSelectorButton(page).getByText("Survey")).toBeVisible();
     await page.locator(".svc-creator").click({ position: { x: 237, y: 273 } });
 
-    await expect(objectSelectorButton.getByText("page1")).not.toBeVisible();
+    await expect(objectSelectorButton(page).getByText("page1")).not.toBeVisible();
   });
 });

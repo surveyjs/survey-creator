@@ -161,7 +161,7 @@ test.describe(title, () => {
 
   test("toolbox inside sidebar", async ({ page }) => {
     const toolboxItem = page.locator(".svc-toolbox__item");
-    const toolboxButtonSelector = page.locator('.sv-action-bar-item[title="Toolbox"]');
+    const toolboxButtonSelector = page.getByRole("button", { name: "Toolbox" });
 
     await changeToolboxLocation(page, "sidebar");
     await page.setViewportSize({ width: 1240, height: 870 });
