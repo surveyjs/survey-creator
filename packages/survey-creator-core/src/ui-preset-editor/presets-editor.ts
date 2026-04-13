@@ -168,7 +168,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => {
         if (options.question.name == item.getNavigationElementName()) {
           options.question.getTitleToolbar().isResponsivenessDisabled = true;
-          options.question.getTitleToolbar().cssClasses = sender.css.navigationBar;
+          options.question.getTitleToolbar().setActionsAppearance({ size: "medium", style: "brand", mode: "secondary" });
+          //model.navigationBar.getActionById("sv-nav-next").appearance.mode = "primary";
+          //model.navigationBar.getActionById("sv-nav-prev").appearance.mode = "secondary";
           options.actions = model.navigationBar.actions;
         }
         item.onGetQuestionTitleActions(model, this.creator, options);
@@ -178,9 +180,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => {
         if (options.panel.name == item.getNavigationElementName()) {
           options.panel.getTitleToolbar().isResponsivenessDisabled = true;
-          options.panel.getTitleToolbar().cssClasses = sender.css.navigationBar;
+          options.panel.getTitleToolbar().setActionsAppearance({ size: "medium", style: "brand", mode: "secondary" });
+          //model.navigationBar.getActionById("sv-nav-next").appearance.mode = "primary";
+          //model.navigationBar.getActionById("sv-nav-prev").appearance.mode = "secondary";
           options.actions = model.navigationBar.actions;
-
         }
         item.onGetPanelTitleActions(model, this.creator, options);
       });

@@ -13,14 +13,14 @@
 
   & > tbody > tr {
     background-color: var(--sjs2-color-bg-basic-primary, #fff);
-    & > td:last-of-type > .sps-action-bar .sps-action-button {
+    & > td:last-of-type > .sd-action-bar .sd-action {
       opacity: 0;
     }
     &:hover {
       & > td > div {
         background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
       }
-      & > td:last-of-type > .sps-action-bar .sps-action-button {
+      & > td:last-of-type > .sd-action-bar .sd-action {
         opacity: 1;
       }
     }
@@ -210,6 +210,9 @@
 }
 .sps-table__cell--actions {
   width: 0;
+  .sd-action-bar {
+    --sd-action-bar-gap: 0px;
+  }
 }
 
 // .sps-table__cell--actions > .sps-matrixdynamic__drag-element {

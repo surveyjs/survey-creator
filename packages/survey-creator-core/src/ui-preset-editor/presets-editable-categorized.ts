@@ -28,7 +28,6 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       if (a.id == "remove-row") {
         a.iconName = "icon-delete_24x24";
         a.tooltip = getLocString("presets.items.delete");
-        a.innerCss = "sps-action-button sps-action-button--icon sps-action-button--danger";
       }
       if (a.id == "reset-to-default") {
         a.action = () => { this.resetCategory(model, row); };

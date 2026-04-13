@@ -57,15 +57,12 @@ export function showConfirmDialog(creator: SurveyCreatorModel, options: IConfirm
     displayMode: "popup",
     showCloseButton: options.showCloseButton,
   }, creator.rootElement);
-  const defaultActionBarCss = dialogModel.footerToolbar.cssClasses;
-  defaultActionBarCss.item = "sps-btn";
-  dialogModel.footerToolbar.cssClasses = defaultActionBarCss;
   const applyAction = dialogModel.footerToolbar.getActionById("apply");
   const cancelAction = dialogModel.footerToolbar.getActionById("cancel");
   applyAction.title = options.applyText;
-  applyAction.innerCss = options.category === "danger" ? "sps-btn--secondary-alert" : "sps-btn--primary-neutral";
+  applyAction.appearance.style = options.category === "danger" ? "alert" : "neutral";
   cancelAction.title = options.cancelText;
-  cancelAction.innerCss = "sps-btn--secondary-neutral";
+  cancelAction.appearance.style = "neutral";
 
   return dialogModel;
 }

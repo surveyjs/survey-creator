@@ -131,7 +131,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       id: "reset-to-default",
       title: getLocString("presets.editor.resetToDefault"),
       css: "sps-action--grow",
-      innerCss: "sps-btn sps-btn--secondary-alert",
+      appearance: { style: "alert" as any },
       visibleIndex: 15,
       action: (a) => {
         const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
@@ -304,12 +304,6 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       }
 
       if (popupModel.footerToolbar) {
-        const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-        defaultActionBarCss.item = "sps-btn";
-        popupModel.footerToolbar.cssClasses = defaultActionBarCss;
-        popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
-        popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
-
         if (options.actions) {
           popupModel.footerToolbar.actions.unshift(...options.actions);
         }
