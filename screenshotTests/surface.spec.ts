@@ -1064,6 +1064,7 @@ test.describe(title, () => {
         }
       ]
     });
+    await setShowSidebar(page, false);
     await resetHoverToCreator(page);
     const panel = page.locator(".svc-carry-forward-panel");
     await expect(panel).toBeVisible();
