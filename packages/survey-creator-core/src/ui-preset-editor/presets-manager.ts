@@ -359,6 +359,7 @@ export class PresetsManager {
       applyAction.title = applyText || getLocString("buttons.apply");
       cancelAction.css += " sps-action--grow";
       cancelAction.title = cancelText || getLocString("buttons.cancel");
+      cancelAction.appearance.mode = "secondary";
     }
   }
 
