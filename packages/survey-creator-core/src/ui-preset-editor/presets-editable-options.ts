@@ -214,6 +214,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
       //locTooltipName: new ComputedUpdater<string>(() => options.panel.isCollapsed ? "ed.expandTooltip" : "ed.collapseTooltip") as any,
       iconName: new ComputedUpdater<string>(() => options.question.description ? collapseIcon : expandIcon) as any,
       iconSize: "auto",
+      appearance: { size: "xx-small" as any, mode: "quaternary" as any },
       action: () => {
         if (options.question.description) {
           options.question.description = "";
@@ -236,6 +237,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
       locTooltipName: new ComputedUpdater<string>(() => options.panel.isCollapsed ? "ed.expandTooltip" : "ed.collapseTooltip") as any,
       iconName: new ComputedUpdater<string>(() => options.panel.isCollapsed ? expandIcon : collapseIcon) as any,
       iconSize: "auto",
+      appearance: { size: "xx-small" as any, mode: "quaternary" as any },
       action: () => {
         if (options.panel.isCollapsed) {
           options.panel.expand();

@@ -655,7 +655,7 @@ describe("PresetsManager", () => {
       expect(removeAction.iconName).toBe("icon-delete-24x24");
       expect(removeAction.iconSize).toBe("auto");
       expect(removeAction.component).toBe("sv-action-bar-item");
-      expect(removeAction.innerCss).toBe("sps-action-button sps-action-button--danger");
+      expect(removeAction.appearance.style).toBe("alert");
       expect(removeAction.showTitle).toBe(false);
       expect(removeAction.action).toBeDefined();
     });

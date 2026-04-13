@@ -127,6 +127,15 @@
     gap: var(--sjs2-spacing-x200, 16px);
     padding: 0;
   }
+  &.svc-creator-confirm-dialog .sv-modal-footer-action-bar {
+    justify-content: stretch;
+    .sd-action-bar__item, .sv-popup__body-footer-item {
+      flex-grow: 1;
+    }
+  }
+  .sv-popup__close-button {
+    padding: var(--sjs2-spacing-x100, 8px);
+  }
  
 }
 

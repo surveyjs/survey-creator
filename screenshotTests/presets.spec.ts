@@ -49,7 +49,7 @@ test.describe(title, () => {
   test("Check presets list", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.locator(".sps-action-button").nth(1).click();
+    await page.locator(".spg-table__cell--actions .sd-action").nth(1).click();
     await page.getByText("Manage Presets", { exact: true }).hover();
     await page.getByText("Manage Presets", { exact: true }).click();
     await page.waitForTimeout(300);
@@ -61,7 +61,7 @@ test.describe(title, () => {
   test("Check presets delete confirmation dialog", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.locator(".sps-action-button").nth(1).click();
+    await page.locator(".spg-table__cell--actions .sd-action").nth(1).click();
     await page.getByText("Manage Presets", { exact: true }).click();
     await page.getByTitle("Delete").click();
     await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-delete-confirmation-dialog.png");
@@ -106,7 +106,7 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "presets-items-hover.png");
     await page.locator(".sps-table__row").first().locator(".sd-formbox").hover();
     await compareScreenshot(page, root, "presets-items-text-hover.png");
-    await page.locator(".sps-table__row").first().locator(".sps-action-button").last().hover();
+    await page.locator(".sps-table__row").first().locator(".sps-table__cell--actions .sd-action").last().hover();
     await compareScreenshot(page, root, "presets-items-button-hover.png");
     await page.locator(".sps-table__row").first().locator(".sd-formbox").click();
     await compareScreenshot(page, root, "presets-items-text-click.png");
@@ -127,7 +127,7 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "presets-categories-hover.png");
     await page.locator(".sps-table__row").first().locator(".sd-formbox").hover();
     await compareScreenshot(page, root, "presets-categories-text-hover.png");
-    await page.locator(".sps-table__row").first().locator(".sps-action-button").last().hover();
+    await page.locator(".sps-table__row").first().locator(".sps-table__cell--actions .sd-action").last().hover();
     await compareScreenshot(page, root, "presets-categories-button-hover.png");
     await page.locator(".sps-table__row").first().locator(".sd-formbox").click();
     await compareScreenshot(page, root, "categories-text-click.png");
@@ -194,8 +194,8 @@ test.describe(title, () => {
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     await page.locator(".sv-action-bar-item--collapse").nth(0).click();
-    await page.locator(".sps-checkbox__caption .sps-action-button").filter({ visible: true }).nth(0).click();
-    await page.locator(".sps-question__title .sps-action-button").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-checkbox__caption .sd-action").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-question__title .sd-action").filter({ visible: true }).nth(0).click();
     await page.locator(".sps-panel .sv-string-viewer", { hasText: "Show toggle for hidden elements" })
       .evaluate(node => node.innerHTML = node.innerHTML + " (text to make the title longer to check the hint button)");
     await compareScreenshot(page, page.locator(".sps-panel").nth(1), "presets-options-hints.png");
