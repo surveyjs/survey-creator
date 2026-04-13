@@ -129,7 +129,7 @@ export function getPropertyGridCategory(page, categoryName) {
 }
 
 export function getBarItemByTitle(page, text: string) {
-  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+  return page.locator(".sd-action-bar-item[title=\"" + text + "\"]");
 }
 export function getQuestionBarItemByTitle(page, text: string) {
   return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");

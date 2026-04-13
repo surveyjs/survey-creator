@@ -79,3 +79,11 @@
     height: 100%;
   }
 }
+
+// TODO: remove this vvvvvv
+.svd-simulator-content {
+  .sd-body__navigation .sd-action {
+    padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x600, 48px);
+  }
+}
+// ^^^^^^^^^^^^^^^^^^^^^^^^

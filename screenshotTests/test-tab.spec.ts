@@ -316,7 +316,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator('[title="Select device type"]').click();
     await page.locator("span", { hasText: "iPhone SE" }).click();
-    await getBarItemByTitle(page, "Switch to portrait orientation").click();
+    await page.getByRole("button", { name: "Switch to portrait orientation" }).click();
     await page.locator('[data-name="nps-score"]').click();
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-opened-dropdown-mobile.png");
   });
