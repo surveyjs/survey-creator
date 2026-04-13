@@ -211,8 +211,10 @@
   width: 0;
   .sd-action-bar {
     --sd-action-bar-gap: 0px;
+  }
+  &.spg-table__cell--actions:last-of-type .sd-action-bar {
     justify-content: flex-end;
-    //padding-inline-end: var(--sjs2-spacing-x050, 4px);
+    padding-inline-end: var(--sjs2-spacing-x050, 4px);
   }
 }
 
