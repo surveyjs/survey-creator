@@ -36,7 +36,7 @@
     }
   }
 }
-
+.sl-paneldynamic__add-btn .sd-action__title,
 .sl-panel .sd-action__title {
   padding: 0; // TODO remove
 }
@@ -174,17 +174,17 @@
     background-color: var(--ctr-expression-item-background-color-button, var(--sjs-primary-background-10, #19b3941a));
     border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
     padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
-    var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
-    
+      var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
+      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
+      var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
+
     display: flex;
     align-items: center;
-    
+
     user-select: none;
-    
+
     transition: background-color $creator-transition-duration;
-    
+
     .sd-action__title {
       @include ctrDefaultBoldFont;
       color: var(--ctr-expression-item-text-color-button, var(--sjs-primary-background-500, #19b394ff));
@@ -368,7 +368,8 @@ $sl-matrix-detail-row-move-out-delay: var(--sjs-sl-matrix-detail-row-move-out-de
       animation-direction: var(--animation-direction);
       animation-timing-function: var(--animation-timing-function);
       animation-fill-mode: forwards;
-      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-duration:
+        var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
       animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
     }
   }
@@ -428,7 +429,8 @@ $sl-row-fade-in-animation-delay: var(--sjs-sl-row-fade-in-animation-delay, 400ms
 .sl-row--delayed-enter {
   overflow: hidden;
   height: 0;
-  animation-delay: calc(#{$sl-row-fade-in-delay} + #{$sl-row-fade-in-animation-delay}), $sl-row-fade-in-animation-delay,
+  animation-delay:
+    calc(#{$sl-row-fade-in-delay} + #{$sl-row-fade-in-animation-delay}), $sl-row-fade-in-animation-delay,
     $sl-row-fade-in-animation-delay;
 }
 
