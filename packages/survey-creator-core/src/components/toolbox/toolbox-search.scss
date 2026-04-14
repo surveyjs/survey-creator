@@ -20,14 +20,6 @@
   .svc-search__input::placeholder {
     color: var(--ctr-toolbox-search-text-color-placeholder, var(--sjs-layer-1-foreground-50, #00000080));
   }
-  .svc-search__bar-item {
-    &:hover:enabled {
-      background-color: var(--ctr-toolbox-search-clear-button-background-color-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
-      svg use {
-        fill: var(--ctr-toolbox-search-clear-button-icon-color-hovered, var(--sjs-semantic-red-background-500, #e50a3eff));
-      }
-    }
-  }
 
   .svc-search__search-icon {
     width: var(--ctr-toolbox-search-icon-width, var(--sjs-font-size-x3));

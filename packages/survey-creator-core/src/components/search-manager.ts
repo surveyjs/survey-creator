@@ -26,7 +26,6 @@ export abstract class SearchManager extends Base {
     })];
   }
   initActionBar() {
-    this.searchActionBar.setActionsAppearance({ style: "neutral", mode: "tertiary-muted", size: "xx-small" });
     this.searchActionBar.setItems(this.getSearchActions());
   }
   public clearFilterString(): void {
