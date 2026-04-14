@@ -1479,6 +1479,7 @@ test.describe(title, () => {
           title: "Required",
           enabled: false,
           iconName: "icon-required",
+          iconSize: "auto",
           action: () => { }
         });
       });
@@ -1505,6 +1506,7 @@ test.describe(title, () => {
     await compareScreenshot(page, buttonDisabled, "question-button-disabled.png");
     await buttonDisabled.hover();
     await compareScreenshot(page, buttonDisabled, "question-button-disabled-hover.png");
+    await page.keyboard.press("Shift+Tab");
     await page.evaluate(() => {
       const question = window["creator"].survey.getQuestionByName("q1");
       const adorner = window["SurveyCreatorCore"].QuestionAdornerViewModel.GetAdorner(question);
