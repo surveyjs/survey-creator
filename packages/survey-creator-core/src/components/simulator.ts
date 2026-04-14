@@ -5,54 +5,6 @@ import "./simulator.scss";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export class SurveySimulatorModel extends Base {
-  private simulatorDomObserver: MutationObserver | undefined;
-
-  private getSimulatorContentElement(): HTMLElement | undefined {
-    return this.surveyProvider.rootElement?.getElementsByClassName("svd-simulator-content")[0] as HTMLElement | undefined;
-  }
-
-  private detachSimulatorDomObserver(): void {
-    if (!this.simulatorDomObserver) return;
-    this.simulatorDomObserver.disconnect();
-    this.simulatorDomObserver = undefined;
-  }
-
-  private deviceUsesSimulatorOverlayHeight(): boolean {
-    const device = simulatorDevices[this.activeDevice];
-    return device.deviceType === "tablet" || device.deviceType === "phone";
-  }
-
-  /**
-   * When `.svd-simulator-content` is not mounted yet (e.g. preview tab still rendering), observe the creator root
-   * and apply overlay styles as soon as the simulator shell appears.
-   */
-  private attachSimulatorDomObserverIfNeeded(): void {
-    if (!this.deviceUsesSimulatorOverlayHeight()) return;
-    const root = this.surveyProvider.rootElement;
-    if (!root || typeof MutationObserver === "undefined") return;
-    if (!!this.getSimulatorContentElement()) {
-      this.updateSimulatorStyle();
-      return;
-    }
-    if (!!this.simulatorDomObserver) return;
-    if (this.isDisposed) return;
-
-    const onDomChange = () => {
-      if (this.isDisposed) {
-        this.detachSimulatorDomObserver();
-        return;
-      }
-      if (!!this.getSimulatorContentElement()) {
-        this.detachSimulatorDomObserver();
-        this.updateSimulatorStyle();
-      }
-    };
-
-    this.simulatorDomObserver = new MutationObserver(onDomChange);
-    this.simulatorDomObserver.observe(root, { childList: true, subtree: true });
-    onDomChange();
-  }
-
   private surveyChanged() {
     this.survey.onOpenDropdownMenu.add((_, options) => {
       if (this.surveyProvider.isTouch) return;
@@ -62,54 +14,21 @@ export class SurveySimulatorModel extends Base {
   }
 
   /**
-   * `landscape` / `device` onSet runs in the same synchronous turn as the UI update that resizes the simulator frame.
-   * `forceProcessResponsiveness` reads survey root `offsetWidth`; defer to the next frame so layout matches the new frame.
+   * Value for CSS custom property `--sv-popup-overlay-height` on `.svd-simulator-content` (bound by framework views).
+   * Empty string when not used (desktop).
    */
-  private scheduleSurveyResponsiveness(): void {
-    if (!this.survey || this.isDisposed) return;
-    const schedule = () => {
-      if (this.isDisposed) return;
-      this.survey?.forceProcessResponsiveness();
-    };
-    if (DomWindowHelper.isAvailable()) {
-      DomWindowHelper.requestAnimationFrame(schedule);
-    } else {
-      schedule();
-    }
-  }
+  @property({ defaultValue: "" }) popupOverlayHeight: string;
 
-  private updateSimulatorStyle(): void {
+  private syncPopupOverlayHeight(): void {
     const device = simulatorDevices[this.activeDevice];
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
-
-    const simulator = this.getSimulatorContentElement();
-    if (!!simulator) {
-      this.detachSimulatorDomObserver();
-      let overlayHeight = undefined;
-      if (device.deviceType === "tablet") {
-        overlayHeight = `${deviceHeight * this.scale}px`;
-      } else if (device.deviceType === "phone") {
-        overlayHeight = "100%";
-      }
-
-      if (!!overlayHeight) {
-        simulator.style.setProperty("--sv-popup-overlay-height", overlayHeight);
-      } else {
-        simulator.style.removeProperty("--sv-popup-overlay-height");
-      }
-      this.scheduleSurveyResponsiveness();
-    } else {
-      if (!this.deviceUsesSimulatorOverlayHeight()) {
-        this.detachSimulatorDomObserver();
-      } else {
-        this.attachSimulatorDomObserverIfNeeded();
-      }
+    let value = "";
+    if (device.deviceType === "tablet") {
+      value = `${deviceHeight * this.scale}px`;
+    } else if (device.deviceType === "phone") {
+      value = "100%";
     }
-  }
-
-  public dispose(): void {
-    this.detachSimulatorDomObserver();
-    super.dispose();
+    this.popupOverlayHeight = value;
   }
 
   constructor(private surveyProvider: SurveyCreatorModel) {
@@ -147,15 +66,18 @@ export class SurveySimulatorModel extends Base {
 
   @property({ defaultValue: true,
     onSet: (newVal:string, targer: SurveySimulatorModel) => {
-      targer.updateSimulatorStyle();
+      targer.syncPopupOverlayHeight();
     }
   }) landscape: boolean;
   @property({
-    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => {
+      target.surveyChanged();
+      target.syncPopupOverlayHeight();
+    }
   }) survey: SurveyModel;
   @property({ defaultValue: "desktop",
     onSet: (newVal:string, targer: SurveySimulatorModel) => {
-      targer.updateSimulatorStyle();
+      targer.syncPopupOverlayHeight();
     }
   }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
