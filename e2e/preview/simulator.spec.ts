@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, creatorTabPreviewName, getTabbedMenuItemByText, getBarItemByTitle, getListItemByText } from "../helper";
+import { url, test, expect, setJSON, recreateCreatorWithOptions, creatorTabPreviewName, getTabbedMenuItemByText, getBarItemByTitle, getListItemByText } from "../helper";
 
 const title = "Preview tab simulator";
 
@@ -6,6 +6,36 @@ test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(url);
     await page.setViewportSize({ width: 1920, height: 1080 });
+  });
+
+  test("Phone preview with initial previewDevice: overlay height and OK/Cancel on first open", async ({ page }) => {
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "tagbox",
+              name: "question1",
+              choices: ["Item 1", "Item 2", "Item 3"]
+            }
+          ]
+        }
+      ]
+    };
+    await recreateCreatorWithOptions(page, { previewDevice: "androidPhone" }, json);
+
+    await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
+
+    const simulatorShell = page.locator(".svd-simulator-content").first();
+    await expect(simulatorShell).toBeVisible();
+    await expect(simulatorShell).toHaveCSS("--sv-popup-overlay-height", "100%");
+
+    await page.locator('[data-name="question1"]').click();
+    const phonePopup = page.locator(".svd-simulator-content .sv-popup--menu-phone").filter({ visible: true });
+    await expect(phonePopup).toBeVisible();
+    await expect(phonePopup.getByRole("button", { name: "OK" })).toBeVisible();
+    await expect(phonePopup.getByRole("button", { name: "Cancel" })).toBeVisible();
   });
 
   test("Simulator popups", async ({ page }) => {

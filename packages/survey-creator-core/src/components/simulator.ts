@@ -5,6 +5,54 @@ import "./simulator.scss";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export class SurveySimulatorModel extends Base {
+  private simulatorDomObserver: MutationObserver | undefined;
+
+  private getSimulatorContentElement(): HTMLElement | undefined {
+    return this.surveyProvider.rootElement?.getElementsByClassName("svd-simulator-content")[0] as HTMLElement | undefined;
+  }
+
+  private detachSimulatorDomObserver(): void {
+    if (!this.simulatorDomObserver) return;
+    this.simulatorDomObserver.disconnect();
+    this.simulatorDomObserver = undefined;
+  }
+
+  private deviceUsesSimulatorOverlayHeight(): boolean {
+    const device = simulatorDevices[this.activeDevice];
+    return device.deviceType === "tablet" || device.deviceType === "phone";
+  }
+
+  /**
+   * When `.svd-simulator-content` is not mounted yet (e.g. preview tab still rendering), observe the creator root
+   * and apply overlay styles as soon as the simulator shell appears.
+   */
+  private attachSimulatorDomObserverIfNeeded(): void {
+    if (!this.deviceUsesSimulatorOverlayHeight()) return;
+    const root = this.surveyProvider.rootElement;
+    if (!root || typeof MutationObserver === "undefined") return;
+    if (!!this.getSimulatorContentElement()) {
+      this.updateSimulatorStyle();
+      return;
+    }
+    if (!!this.simulatorDomObserver) return;
+    if (this.isDisposed) return;
+
+    const onDomChange = () => {
+      if (this.isDisposed) {
+        this.detachSimulatorDomObserver();
+        return;
+      }
+      if (!!this.getSimulatorContentElement()) {
+        this.detachSimulatorDomObserver();
+        this.updateSimulatorStyle();
+      }
+    };
+
+    this.simulatorDomObserver = new MutationObserver(onDomChange);
+    this.simulatorDomObserver.observe(root, { childList: true, subtree: true });
+    onDomChange();
+  }
+
   private surveyChanged() {
     this.survey.onOpenDropdownMenu.add((_, options) => {
       if (this.surveyProvider.isTouch) return;
@@ -12,12 +60,14 @@ export class SurveySimulatorModel extends Base {
       options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
     });
   }
+
   private updateSimulatorStyle(): void {
     const device = simulatorDevices[this.activeDevice];
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
 
-    const simulator = this.surveyProvider.rootElement?.getElementsByClassName("svd-simulator-content")[0] as HTMLElement;
+    const simulator = this.getSimulatorContentElement();
     if (!!simulator) {
+      this.detachSimulatorDomObserver();
       let overlayHeight = undefined;
       if (device.deviceType === "tablet") {
         overlayHeight = `${deviceHeight * this.scale}px`;
@@ -30,10 +80,19 @@ export class SurveySimulatorModel extends Base {
       } else {
         simulator.style.removeProperty("--sv-popup-overlay-height");
       }
-      setTimeout(() => {
-        this.survey?.forceProcessResponsiveness();
-      });
+      this.survey?.forceProcessResponsiveness();
+    } else {
+      if (!this.deviceUsesSimulatorOverlayHeight()) {
+        this.detachSimulatorDomObserver();
+      } else {
+        this.attachSimulatorDomObserverIfNeeded();
+      }
     }
+  }
+
+  public dispose(): void {
+    this.detachSimulatorDomObserver();
+    super.dispose();
   }
 
   constructor(private surveyProvider: SurveyCreatorModel) {
@@ -75,7 +134,9 @@ export class SurveySimulatorModel extends Base {
     }
   }) landscape: boolean;
   @property({
-    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => {
+      target.surveyChanged();
+    }
   }) survey: SurveyModel;
   @property({ defaultValue: "desktop",
     onSet: (newVal:string, targer: SurveySimulatorModel) => {
