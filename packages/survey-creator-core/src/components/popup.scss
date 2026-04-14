@@ -208,10 +208,6 @@
     .sv-popup__body-footer {
       background-color: var(--ctr-popup-menu-footer-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
       border-top: 1px solid var(--ctr-popup-menu-footer-border-color, var(--sjs-border-25, #d4d4d4ff));
-      padding: var(--ctr-popup-menu-footer-padding-top, var(--sjs-spacing-x05))
-        var(--ctr-popup-menu-footer-padding-right, var(--sjs-spacing-x1))
-        var(--ctr-popup-menu-footer-padding-bottom, var(--sjs-spacing-x05))
-        var(--ctr-popup-menu-footer-padding-left, var(--sjs-spacing-x1));
     }
 
     .sv-menu-popup__button:disabled {

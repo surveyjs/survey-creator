@@ -1,9 +1,4 @@
 @use "../variables" as *;
-.svc-search {
-  // TODO remove v2
-  --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
-  --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
-}
 
 .svc-search {
   display: flex;
@@ -36,7 +31,7 @@
 
 .svc-search__toolbar {
   display: flex;
-  gap: var(--ctr-search-toolbar-gap, var(--sjs-spacing-x05));
+  gap: var(--sjs-spacing-x05);
   justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
