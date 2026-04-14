@@ -640,6 +640,7 @@ export class QuestionToolbox
         .append("svc-toolbox__tool--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
+    this.dotsItem.appearance = { style: "brand" };
 
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
