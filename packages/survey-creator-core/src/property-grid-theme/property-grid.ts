@@ -321,6 +321,7 @@ export var propertyGridCss = {
     itemAsIcon: "spg-action-button--icon",
     itemIcon: "spg-action-button__icon",
     itemTitle: "spg-action-button__title",
+    defaultSizeMode: "",
   },
   spinedit: {
     root: "sd-formbox spg-spin-editor",

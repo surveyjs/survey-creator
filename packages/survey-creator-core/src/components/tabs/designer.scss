@@ -263,13 +263,17 @@ svc-tab-designer {
 
 // TODO: remove this vvvvvv
 .svc-survey-element-toolbar, .svc-page-toolbar {
-  .sd-action:not(.sd-action--pressed) {
-    --sd-action-icon-color: var(--sjs2-color-component-action-brand-tertiary-muted-hovered-icon, #19b394);
-    --sd-action-hover-title-color: var(--sjs2-color-component-action-brand-tertiary-muted-default-label, #1c1b20);
-  }
-  .sd-action__title {
-    padding-left: var(--sjs2-spacing-x050, 4px);
-    padding-right: var(--sjs2-spacing-x050, 4px);
+  & > .sd-action-bar__item > .sd-action-bar__item-content {
+    & > .sd-action {
+      .sd-action__title {
+        padding-left: var(--sjs2-spacing-x050, 4px);
+        padding-right: var(--sjs2-spacing-x050, 4px);
+      }
+    }
+    & > .sd-action:not(.sd-action--pressed) {
+      --sd-action-icon-color: var(--sjs2-color-component-action-brand-tertiary-muted-hovered-icon, #19b394);
+      --sd-action-hover-title-color: var(--sjs2-color-component-action-brand-tertiary-muted-default-label, #1c1b20);
+    }
   }
   .sd-action-bar__separator {
     height: var(--sjs2-size-x400, 32px);
