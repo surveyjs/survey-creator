@@ -645,7 +645,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: row,
         actions: [
-          { id: "remove-row", visible: true, iconName: "default-icon" }
+          { id: "remove-row", visible: true, iconName: "default-icon", appearance: {} }
         ]
       };
 
@@ -673,7 +673,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: row,
         actions: [
-          { id: "remove-row", visible: true }
+          { id: "remove-row", visible: true, appearance: {} }
         ]
       };
 
@@ -711,7 +711,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: predefinedRow,
         actions: [
-          { id: "remove-row", visible: true }
+          { id: "remove-row", visible: true, appearance: {} }
         ]
       };
 
@@ -719,7 +719,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: customRow,
         actions: [
-          { id: "remove-row", visible: true }
+          { id: "remove-row", visible: true, appearance: {} }
         ]
       };
 

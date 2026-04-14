@@ -71,8 +71,8 @@ test("Creator footer action bar: only theme tab", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeTruthy();
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();
@@ -92,9 +92,9 @@ test("Theme invisibleToggleAction state change", (): any => {
   creator.previewAllowHiddenElements = true;
   creator.switchTab("theme");
   const action = creator.footerToolbar.getActionById("showInvisible") as Action;
-  expect(action.active).toBeFalsy();
+  expect(action.pressed).toBeFalsy();
   action.action();
-  expect(action.active).toBeTruthy();
+  expect(action.pressed).toBeTruthy();
 });
 
 test("Creator footer action bar: all tabs", (): any => {
@@ -115,24 +115,24 @@ test("Creator footer action bar: all tabs", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeFalsy();
 
   creator.activeTab = "test";
   creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(testTabButtonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeTruthy();
 
   creator.activeTab = "theme";
   creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(themeTabButtonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeTruthy();
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();

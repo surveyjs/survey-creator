@@ -1184,7 +1184,6 @@ test("LogicItemEditorUI: check remove row action", () => {
   const actions = <AdaptiveActionContainer>cell.item.value;
   expect(actions.actions).toHaveLength(1);
   const action = actions.actions[0];
-  expect(action.component).toEqual("sv-action-bar-item");
   expect(action.iconName).toEqual("icon-delete");
   expect(action.title).toEqual("Remove");
   expect(action.showTitle).toBeFalsy();
