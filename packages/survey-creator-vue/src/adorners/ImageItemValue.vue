@@ -54,7 +54,6 @@
           >
             <SvComponent
               :is="'sv-svg-icon'"
-              role="button"
               :iconName="'icon-choosefile'"
               :size="'auto'"
               :title="adorner.selectFileTitle"
@@ -69,7 +68,6 @@
           >
             <SvComponent
               :is="'sv-svg-icon'"
-              role="button"
               :iconName="'icon-delete'"
               :size="'auto'"
               :title="adorner.removeFileTitle"
