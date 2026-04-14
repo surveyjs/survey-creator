@@ -412,6 +412,9 @@
 .svc-toolbox__item--dots {
   padding-inline-end: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
   margin-top: calcSize(0.5);
+  &.sd-action--pressed {
+    opacity: 0.5;
+  }
 }
 .svc-toolbox--compact {
   .svc-toolbox__item-submenu-button {
