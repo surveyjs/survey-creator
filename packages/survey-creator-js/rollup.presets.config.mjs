@@ -44,13 +44,11 @@ export default () => {
       dir: resolve(buildPath, "fesm"),
       tsconfig: resolve(__dirname, "./tsconfig.presets.json"),
       external: [
-        "react",
-        "react-dom",
         "survey-core",
         "survey-creator-core",
-        "survey-react-ui"
+        "survey-js-ui",
       ],
-      paths: {
+      aliases: {
         "react": "survey-js-ui",
         "react-dom": "survey-js-ui",
         "survey-react-ui": "survey-js-ui",
