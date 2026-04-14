@@ -95,7 +95,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -118,7 +118,7 @@ export function createUmdConfig(options) {
       useEsbuild
         ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
         : typescript({
-          noEmitOnError: true,
+          noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
           filterRoot: false,
           compilerOptions: {
@@ -169,7 +169,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, paths } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, paths, noEmitOnError = true } = options;
 
   return {
     context: "this",
@@ -189,7 +189,7 @@ export function createEsmConfig(options) {
       useEsbuild
         ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
         : typescript({
-          noEmitOnError: true,
+          noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
           filterRoot: false,
           compilerOptions: {

@@ -121,6 +121,7 @@ export default async (options) => {
       globalName: "SurveyCreator",
       emitMinified: process.env.emitMinified === "true",
       version: pkg.version,
+      noEmitOnError: !options.watch,
     }),
     createEsmConfig({
       version: pkg.version,
@@ -140,6 +141,7 @@ export default async (options) => {
         "react-dom": "survey-js-ui",
         "survey-react-ui": "survey-js-ui",
       },
+      noEmitOnError: !options.watch,
     })
   ];
 };
