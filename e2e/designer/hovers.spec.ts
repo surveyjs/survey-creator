@@ -84,7 +84,7 @@ test.describe(title, () => {
     });
 
     const questionTitle = page.locator(".svc-string-editor").filter({ hasText: "string_editor" });
-    const action = page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered .svc-survey-element-toolbar__item[title=Delete]");
+    const action = page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered .sd-action[title=Delete]");
 
     await questionTitle.hover({ position: { x: 5, y: 5 } });
     await page.waitForTimeout(300);

@@ -355,7 +355,7 @@ test.describe(title, () => {
     await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
 
     await page.locator(".svc-question__content--text").click({ position: { x: 200, y: 20 } });
-    await page.locator(".svc-survey-element-toolbar-item__title").getByText("Save as Toolbox Item").click();
+    await page.locator(".sd-action__title").getByText("Save as Toolbox Item").click();
 
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
     const scrollContainerHeight2 = await page.locator(".sv-scroll__container").first().evaluate((el) => el.clientHeight);

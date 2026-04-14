@@ -1003,11 +1003,11 @@ test("Create new page, recreate designer survey via JSON", (): any => {
 test("Check survey settings button ", (): any => {
   const creator = new CreatorTester();
   const item = creator.getActionBarItem("svd-settings");
-  expect(item.active).toBeFalsy();
+  expect(item.pressed).toBeFalsy();
   creator.selectElement(creator.survey.pages[0]);
-  expect(item.active).toBeFalsy();
+  expect(item.pressed).toBeFalsy();
   creator.selectElement(creator.survey);
-  expect(item.active).toBeTruthy();
+  expect(item.pressed).toBeTruthy();
 });
 
 test("fast copy tests, copy a question and check the index", (): any => {
@@ -1917,18 +1917,18 @@ test("Show/hide property grid and settings button active state", (): any => {
   creator.showSidebar = false;
   const settingsBarItem = creator.getActionBarItem("svd-settings");
   expect(creator.showSidebar).toBeFalsy();
-  expect(settingsBarItem.active).toBeFalsy();
+  expect(settingsBarItem.pressed).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
-  expect(settingsBarItem.active).toBeFalsy();
+  expect(settingsBarItem.pressed).toBeFalsy();
   expect(creator.sidebar.visible).toBeFalsy();
 
   settingsBarItem.action();
   expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
   expect(creator.selectedElementName).toEqual("survey");
-  expect(settingsBarItem.active).toBeTruthy();
+  expect(settingsBarItem.pressed).toBeTruthy();
 
   const hidePropertyModelBarItem = creator.sidebar.header.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
@@ -1936,7 +1936,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.showSidebar).toBeFalsy();
   expect(creator.sidebar.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
-  expect(settingsBarItem.active).toBeFalsy();
+  expect(settingsBarItem.pressed).toBeFalsy();
 });
 test("set showSidebar is equivalent to action", (): any => {
   const creator = new CreatorTester();
@@ -4603,8 +4603,8 @@ test("Creator footer action bar: only designer tab", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeFalsy();
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();
@@ -4651,16 +4651,16 @@ test("Creator footer action bar: add custom action", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(6);
   let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeFalsy();
 
   creator.activeTab = "test";
   creator.footerToolbar.flushUpdates();
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(testTabButtonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeTruthy();
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();

@@ -1489,7 +1489,7 @@ test.describe(title, () => {
       "elements": [{ type: "boolean", name: "q1", title: "Question Title" }]
     });
     const button = page.locator(".svc-required-action");
-    const buttonDisabled = page.locator(".svc-survey-element-toolbar__item:disabled");
+    const buttonDisabled = page.locator(".svc-survey-element-toolbar .sd-action:disabled");
     await page.locator(".svc-question__content").click();
     await compareScreenshot(page, button, "question-button.png");
     await button.hover();

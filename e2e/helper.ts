@@ -120,7 +120,7 @@ export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview"
 }
 
 export function getBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+  return page.locator(".sd-action[title=\"" + text + "\"]");
 }
 
 export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
@@ -245,7 +245,7 @@ export async function handleShiftEnter(page: Page, selector: string) {
   }, selector);
 }
 
-export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
   await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();

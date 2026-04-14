@@ -25,11 +25,11 @@ test.describe(title, () => {
 
     await getToolboxItemByText(page, "Single-Line Input").hover();
     await getToolboxItemByText(page, "Single-Line Input").click();
-    expect(await convertActionButton.locator(".svc-survey-element-toolbar-item__title").textContent()).toEqual("Single-Line Input");
+    expect(await convertActionButton.locator(".sd-action__title").textContent()).toEqual("Single-Line Input");
 
     await convertActionButton.click();
     await getListItemByText(page, "Multiple Textboxes").click();
-    expect(await convertActionButton.locator(".svc-survey-element-toolbar-item__title").textContent()).toEqual("Multiple Textboxes");
+    expect(await convertActionButton.locator(".sd-action__title").textContent()).toEqual("Multiple Textboxes");
 
     await textItemEditor.hover();
     await textItemEditor.click();

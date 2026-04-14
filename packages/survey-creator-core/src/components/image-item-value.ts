@@ -69,6 +69,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         id: "add",
         title: new ComputedUpdater(() => this.showChooseButtonAsIcon ? this.addFileTitle : this.chooseImageText) as unknown as string,
         iconName: new ComputedUpdater(() => this.showChooseButtonAsIcon ? "icon-add-lg" : undefined) as unknown as string,
+        innerCss: "svc-image-item-value-controls__add",
         showTitle: new ComputedUpdater(() => !this.showChooseButtonAsIcon) as unknown as boolean,
         appearance: { style: "brand", mode: "tertiary", size: "small" },
         action: () => {

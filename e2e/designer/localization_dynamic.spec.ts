@@ -16,6 +16,6 @@ test.describe(title, () => {
       window["creator"].locale = "de";
     });
     await page.waitForTimeout(500);
-    expect(await page.locator(".svc-survey-element-toolbar-item__title--with-icon").first().textContent()).toBe(checkboxText);
+    expect(await page.locator(".svc-question__content-actions .sd-action__title").first().textContent()).toBe(checkboxText);
   });
 });

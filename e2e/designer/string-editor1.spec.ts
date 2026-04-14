@@ -181,12 +181,12 @@ test.describe(title, () => {
 
     await svStringSelector.click();
     await expect(svStringSelector).toBeFocused();
-    await expect(page.locator(".svc-side-bar__container-header .sv-action-bar-item__title").getByText("string_editor")).toBeVisible();
+    await expect(page.locator(".svc-side-bar__container-header .sd-action__title").getByText("string_editor")).toBeVisible();
     await page.keyboard.press("Tab");
     await expect(page.locator(".sv-string-editor").getByText("desc").first()).toBeFocused();
-    await expect(page.locator(".svc-side-bar__container-header .sv-action-bar-item__title").getByText("string_editor")).toBeVisible();
+    await expect(page.locator(".svc-side-bar__container-header .sd-action__title").getByText("string_editor")).toBeVisible();
     await svItemSelector.click();
-    await expect(page.locator(".svc-side-bar__container-header .sv-action-bar-item__title").getByText("string_editor")).toBeVisible();
+    await expect(page.locator(".svc-side-bar__container-header .sd-action__title").getByText("string_editor")).toBeVisible();
     await expect(svItemSelector).toBeFocused();
   });
 

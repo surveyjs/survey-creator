@@ -83,36 +83,6 @@
   transition: background-color $creator-transition-duration;
 }
 
-.svc-image-item-value-controls__add {
-  border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
-  background: var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  transition: background-color $creator-transition-duration;
-
-  use {
-    fill: var(--ctr-survey-contextual-button-icon-color-positive, var(--sjs-primary-background-500, #19b394ff));
-    transition: fill $creator-transition-duration;
-  }
-
-  &:hover,
-  &:focus {
-    border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
-    background: linear-gradient(
-        0deg,
-        var(
-            --ctr-survey-contextual-button-background-color-hovered-positive,
-            var(--sjs-primary-background-10, #19b3941a)
-          )
-          0%,
-        var(
-            --ctr-survey-contextual-button-background-color-hovered-positive,
-            var(--sjs-primary-background-10, #19b3941a)
-          )
-          100%
-      ),
-      var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  }
-}
-
 .svc-choose-file-input {
   position: absolute;
   opacity: 0;

@@ -92,7 +92,7 @@ test.describe(title, () => {
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
-    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
+    expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
 
     await page.getByRole("row", { name: "Designer" }).hover();
     await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
@@ -102,7 +102,7 @@ test.describe(title, () => {
     await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-actual-size-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
-    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
+    expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
     expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await page.getByRole("row", { name: "Designer1" }).hover();
@@ -111,7 +111,7 @@ test.describe(title, () => {
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
-    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
+    expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
     expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
   });
 
@@ -268,7 +268,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
-    expect(await hidden.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
+    expect(await hidden.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
   });
 
   test("Check presets Property Grid", async ({ page }) => {
@@ -428,7 +428,7 @@ test.describe(title, () => {
     await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
-    await page.locator(".sps-action-button").nth(1).click();
+    await page.locator(".sps-table__cell--actions .sd-action").nth(1).click();
 
     await page.getByRole("button", { name: "Save" }).click();
 
