@@ -420,9 +420,9 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "color-editor-disabled.png");
     await page.evaluate(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false);
     await compareScreenshot(page, questionSelector, "color-editor.png");
-    await questionSelector.locator(".sd-formbox-button").hover();
+    await questionSelector.locator(".sd-formbox .sd-action").hover();
     await compareScreenshot(page, questionSelector, "color-editor-button-hover.png");
-    await questionSelector.locator(".sd-formbox-button").click();
+    await questionSelector.locator(".sd-formbox .sd-action").click();
     await resetHoverToCreator(page);
     await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "color-editor-choices.png");
     await page.keyboard.press("Escape");
@@ -487,7 +487,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "spin-editor-disabled.png");
     await page.evaluate(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false);
     await compareScreenshot(page, questionSelector, "spin-editor.png");
-    await questionSelector.locator(".sd-formbox-button").first().hover();
+    await questionSelector.locator(".sd-formbox .sd-action").first().hover();
     await compareScreenshot(page, questionSelector, "spin-editor-button-hover.png");
     await questionSelector.locator(".sd-formbox__input").click();
     await compareScreenshot(page, questionSelector, "spin-editor-focus.png");
@@ -676,7 +676,7 @@ test.describe(title, () => {
     await page.keyboard.press("Enter");
 
     await compareScreenshot(page, dropdownSelector, "pg-dropdown-clean-button.png");
-    await page.locator(".sd-formbox-button").filter({ hasText: "Clear" }).hover();
+    await page.locator(".sd-formbox .sd-action").filter({ hasText: "Clear" }).hover();
     await compareScreenshot(page, dropdownSelector, "pg-dropdown-clean-button-hover.png");
   });
 
