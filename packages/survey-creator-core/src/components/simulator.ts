@@ -134,9 +134,7 @@ export class SurveySimulatorModel extends Base {
     }
   }) landscape: boolean;
   @property({
-    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => {
-      target.surveyChanged();
-    }
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
   }) survey: SurveyModel;
   @property({ defaultValue: "desktop",
     onSet: (newVal:string, targer: SurveySimulatorModel) => {
