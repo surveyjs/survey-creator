@@ -144,7 +144,7 @@ test.describe(title, () => {
   });
 
   test("Add New Question with sub type", async ({ page }) => {
-    const questionContentActions = getVisibleElement(page, ".svc-question__content-actions .svc-survey-element-toolbar-item__title");
+    const questionContentActions = getVisibleElement(page, ".svc-question__content-actions .sd-action__title");
 
     await page.locator(".svc-element__add-new-question button").click();
     await getListItemByText(page, "Rating Scale").hover();

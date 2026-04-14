@@ -96,7 +96,7 @@ test.describe(title, () => {
   test("toolboxLocation sidebar", async ({ page }) => {
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
-    const toolboxButtonSelector = page.locator(".sv-action-bar-item[title=\"Toolbox\"]");
+    const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
     const propertyGridSelector = page.locator(".spg-root-modern");
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']");
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
@@ -213,7 +213,7 @@ test.describe(title, () => {
 
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
-    const toolboxButtonSelector = page.locator(".sv-action-bar-item[title=\"Toolbox\"]");
+    const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
     const toolboxItemCount = 22;
     const itemsInToolboxInDesigner = toolboxInDesigner.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
     const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filter({ visible: true });

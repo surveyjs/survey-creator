@@ -131,7 +131,7 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, json);
 
-    const orientationAction = page.locator(".sv-action--orientationSelector .sv-action-bar-item");
+    const orientationAction = page.locator(".sv-action--orientationSelector .sd-action");
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect(orientationAction).toHaveAttribute("disabled", "");
@@ -158,10 +158,10 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, json);
 
-    const orientationAction = page.locator(".sv-action--orientationSelector .sv-action-bar-item");
+    const orientationAction = page.locator(".sv-action--orientationSelector .sd-action");
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await expect(page.locator(".svc-top-bar .sv-action-bar-item").filter({ visible: true })).toHaveCount(3);
+    await expect(page.locator(".svc-top-bar .sd-action").filter({ visible: true })).toHaveCount(3);
     await expect(orientationAction).toHaveAttribute("disabled", "");
     await expect(getBarItemByTitle(page, "Show invisible elements")).toBeVisible();
 
@@ -189,10 +189,10 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, json);
 
-    const orientationAction = page.locator(".sv-action--orientationSelector .sv-action-bar-item");
+    const orientationAction = page.locator(".sv-action--orientationSelector .sd-action");
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await expect(page.locator(".svc-top-bar .sv-action-bar-item").filter({ visible: true })).toHaveCount(3);
+    await expect(page.locator(".svc-top-bar .sd-action").filter({ visible: true })).toHaveCount(3);
     await expect(orientationAction).toHaveAttribute("disabled", "");
     await expect(getBarItemByTitle(page, "Show invisible elements")).toBeVisible();
 
