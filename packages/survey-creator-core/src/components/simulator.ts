@@ -61,6 +61,23 @@ export class SurveySimulatorModel extends Base {
     });
   }
 
+  /**
+   * `landscape` / `device` onSet runs in the same synchronous turn as the UI update that resizes the simulator frame.
+   * `forceProcessResponsiveness` reads survey root `offsetWidth`; defer to the next frame so layout matches the new frame.
+   */
+  private scheduleSurveyResponsiveness(): void {
+    if (!this.survey || this.isDisposed) return;
+    const schedule = () => {
+      if (this.isDisposed) return;
+      this.survey?.forceProcessResponsiveness();
+    };
+    if (DomWindowHelper.isAvailable()) {
+      DomWindowHelper.requestAnimationFrame(schedule);
+    } else {
+      schedule();
+    }
+  }
+
   private updateSimulatorStyle(): void {
     const device = simulatorDevices[this.activeDevice];
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
@@ -80,7 +97,7 @@ export class SurveySimulatorModel extends Base {
       } else {
         simulator.style.removeProperty("--sv-popup-overlay-height");
       }
-      this.survey?.forceProcessResponsiveness();
+      this.scheduleSurveyResponsiveness();
     } else {
       if (!this.deviceUsesSimulatorOverlayHeight()) {
         this.detachSimulatorDomObserver();
