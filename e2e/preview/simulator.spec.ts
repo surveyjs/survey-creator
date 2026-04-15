@@ -27,12 +27,12 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
 
-    const simulatorShell = page.locator(".svd-simulator-content").first();
+    const simulatorShell = page.locator(".svc-test-tab__content .svd-simulator-content").first();
     await expect(simulatorShell).toBeVisible();
     await expect(simulatorShell).toHaveCSS("--sv-popup-overlay-height", "100%");
 
     await page.locator('[data-name="question1"]').click();
-    const phonePopup = page.locator(".svd-simulator-content .sv-popup--menu-phone").filter({ visible: true });
+    const phonePopup = page.locator(".svc-test-tab__content .svd-simulator-content .sv-popup--menu-phone").filter({ visible: true });
     await expect(phonePopup).toBeVisible();
     await expect(phonePopup.getByRole("button", { name: "OK" })).toBeVisible();
     await expect(phonePopup.getByRole("button", { name: "Cancel" })).toBeVisible();

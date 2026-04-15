@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewContainerRef } from "@angular/core";
 import { BaseAngular } from "survey-angular-ui";
 import { SurveySimulatorModel } from "survey-creator-core";
 
@@ -12,23 +12,29 @@ export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implem
   private layoutRafId = 0;
   private simulatorLayoutRefreshDisposed = false;
 
-  private readonly onSimulatorPropertyChanged = (_sender: unknown, options: { name: string }): void => {
-    const n = options.name;
-    if (n !== "popupOverlayHeight" && n !== "landscape" && n !== "device" && n !== "survey") {
-      return;
-    }
-    this.queueSurveyLayoutRefresh();
-  };
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    viewContainerRef: ViewContainerRef
+  ) {
+    super(changeDetectorRef, viewContainerRef);
+  }
+
+  /**
+   * `BaseAngular` defers updates while `model.isRendering` is true during `ngDoCheck`, so
+   * `popupOverlayHeight` (and frame-driving props) would not refresh the embedded template in time.
+   * These properties must run synchronous `detectChanges` so `[style.--sv-popup-overlay-height]` applies.
+   */
+  protected override getPropertiesToUpdateSync(): Array<string> {
+    return ["popupOverlayHeight", "landscape", "device", "survey"];
+  }
 
   ngAfterViewInit(): void {
     this.simulatorLayoutRefreshDisposed = false;
-    this.model.onPropertyChanged.add(this.onSimulatorPropertyChanged);
     this.queueSurveyLayoutRefresh();
   }
 
   override ngOnDestroy(): void {
     this.simulatorLayoutRefreshDisposed = true;
-    this.model?.onPropertyChanged.remove(this.onSimulatorPropertyChanged);
     this.cancelLayoutRaf();
     super.ngOnDestroy();
   }
@@ -44,7 +50,7 @@ export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implem
 
   /**
    * Survey responsiveness uses root width after the simulator shell layout updates.
-   * Run after the current frame (and once more on the next) so Angular has applied [ngStyle] and frame sizes.
+   * Defer to the next frame so Angular has applied frame sizes and CSS bindings.
    */
   private queueSurveyLayoutRefresh(): void {
     if (this.simulatorLayoutRefreshDisposed) return;
@@ -61,11 +67,13 @@ export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implem
     this.layoutRafId = raf(() => {
       this.layoutRafId = 0;
       if (this.simulatorLayoutRefreshDisposed) return;
-      raf(() => {
-        if (this.simulatorLayoutRefreshDisposed) return;
-        this.model?.survey?.forceProcessResponsiveness();
-      });
+      this.model?.survey?.forceProcessResponsiveness();
     });
+  }
+
+  protected override afterUpdate(isSync: boolean = false): void {
+    super.afterUpdate(isSync);
+    this.queueSurveyLayoutRefresh();
   }
 
   protected getModel(): SurveySimulatorModel {
@@ -73,10 +81,6 @@ export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implem
   }
   public get simulatorFrame(): any {
     return this.model.simulatorFrame;
-  }
-  public get simulatorShellStyle(): { [key: string]: string } | null {
-    const h = this.model.popupOverlayHeight;
-    return h ? { "--sv-popup-overlay-height": h } : null;
   }
   activateZoom() {
     if (this.model.device !== "desktop") {
