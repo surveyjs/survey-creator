@@ -21,7 +21,7 @@ describe("TabDesignerComponent", () => {
     const tabDesigner = new TabDesignerViewModel(creator);
     const designer = new TabDesignerComponent({ data: tabDesigner });
 
-    const renderedPages = designer["getRenderedPages"]();
+    const renderedPages = designer.surfaceData["getRenderedPages"]();
     expect(renderedPages).toEqual([]);
   });
 });
