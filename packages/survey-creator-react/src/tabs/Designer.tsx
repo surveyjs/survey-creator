@@ -10,13 +10,14 @@ import {
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
-interface ITabDesignerComponentProps {
-  data: TabDesignerViewModel;
+
+interface IDesignSurfaceComponentProps {
+  model: TabDesignerViewModel;
 }
 
-export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponentProps, any> {
-  private get model(): TabDesignerViewModel {
-    return this.props.data;
+export class DesignSurfaceComponent extends SurveyElementBase<IDesignSurfaceComponentProps, any> {
+  protected get model(): TabDesignerViewModel {
+    return this.props.model;
   }
   protected get creator(): SurveyCreatorModel {
     return this.model.creator;
@@ -75,22 +76,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   protected createRenderedPage(page: PageModel | undefined, className: string, isGhostPage?: boolean): any {
     return <PageWrapperComponent key={page?.id} page={page} isGhost={isGhostPage} creator={this.creator} className={className}></PageWrapperComponent>;
   }
-  renderElement(): React.JSX.Element {
-    const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
 
+  renderElement(): React.JSX.Element {
     return (
-      <React.Fragment>
-        <div className="svc-flex-column">
-          {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
-        </div>
-        <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
-          <Scroll>
-            <div className="svc-tab-designer_content">
-              {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
-            </div>
-          </Scroll>
-        </div>
-      </React.Fragment>
+      <div className="svc-tab-designer_content">
+        { this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent() }
+      </div>
     );
   }
 
@@ -129,13 +120,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return (<React.Fragment>
       <div className={this.model.designerCss} style={style} >
         {surveyHeader}
-        {/* <SurveyNavigation survey={survey} location="top" /> */}
         {this.getRenderedPages()}
-        {/* <SurveyNavigation
-          survey={survey}
-          location="bottom"
-          css={survey.css}
-        /> */}
       </div>
       {tabTools}
     </React.Fragment>);
@@ -158,6 +143,47 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       {pageNavigator}
       {surfaceToolbar}
     </div>;
+  }
+}
+
+ReactElementFactory.Instance.registerElement("svc-designer-surface", (props) => {
+  return React.createElement(
+    DesignSurfaceComponent,
+    props as IDesignSurfaceComponentProps
+  );
+});
+
+interface ITabDesignerComponentProps {
+  data: TabDesignerViewModel;
+}
+
+export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponentProps, any> {
+  private get model(): TabDesignerViewModel {
+    return this.props.data;
+  }
+  protected get creator(): SurveyCreatorModel {
+    return this.model.creator;
+  }
+
+  protected getStateElements(): Array<Base> {
+    return [this.model, this.model.survey];
+  }
+
+  renderElement(): React.JSX.Element {
+    const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
+
+    return (
+      <React.Fragment>
+        <div className="svc-flex-column">
+          {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
+        </div>
+        <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
+          <Scroll>
+            {ReactElementFactory.Instance.createElement(this.model.surfaceComponentName, { model: this.model.surfaceData || this.model })}
+          </Scroll>
+        </div>
+      </React.Fragment>
+    );
   }
 }
 

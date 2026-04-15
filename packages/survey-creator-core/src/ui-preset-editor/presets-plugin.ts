@@ -1,9 +1,11 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer, LocalizableString } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
 import { showConfirmDialog } from "./confirm-dialog";
+import { ComponentContainerModel } from "survey-creator-core";
+import { TabDesignerViewModel } from "../components/tabs/designer";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
@@ -15,7 +17,9 @@ import { showConfirmDialog } from "./confirm-dialog";
 export class UIPresetEditor implements ICreatorPlugin {
   static defaultPresetName = "expert";
 
-  public model: CreatorPresetEditorModel;
+  public editor: CreatorPresetEditorModel;
+  public model: TabDesignerViewModel | undefined;
+  private surfaceModel: ComponentContainerModel;
   public static iconName = "icon-settings";
   private activeTab: string = "designer";
   private currentPresetIndex = 0;
@@ -62,8 +66,8 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   private hidePresets() {
     if (this.presetsManager && !this.presetsManager.isSaved) {
-      this.model.json = this.defaultJson;
-      this.model.applyFromSurveyModel(false);
+      this.editor.json = this.defaultJson;
+      this.editor.applyFromSurveyModel(false);
     }
     this.presetsManager.update();
     const selItem = this.presetsList?.selectedItem;
@@ -122,7 +126,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
+    creator.addTab({ name: "presets", componentName: "svc-tab-designer", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
@@ -133,8 +137,8 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.onPresetListSaved.fire(this, { presets });
     };
     this.presetsManager.selectPresetCallback = (preset: IPreset) => {
-      if (this.model) {
-        this.model.json = preset.json;
+      if (this.editor) {
+        this.editor.json = preset.json;
         this.setStatus("initial");
       }
     };
@@ -181,8 +185,8 @@ export class UIPresetEditor implements ICreatorPlugin {
    */
   public get preset(): IPreset | undefined {
     const p = this.presetsManager.preset;
-    if (p && this.model) {
-      return { ...p, json: this.model.json };
+    if (p && this.editor) {
+      return { ...p, json: this.editor.json };
     }
     return p;
   }
@@ -195,8 +199,8 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   protected discardUnsaved() {
-    this.model.json = JSON.parse(JSON.stringify(this.defaultJson));
-    this.model.applyFromSurveyModel(false);
+    this.editor.json = JSON.parse(JSON.stringify(this.defaultJson));
+    this.editor.applyFromSurveyModel(false);
     this.setStatus("initial");
     this.creator.notify(getLocString("presets.plugin.discarded"));
   }
@@ -220,21 +224,21 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   protected saveHandler(closeOnSave = false) {
-    this.defaultJson = JSON.parse(JSON.stringify(this.model.json));
+    this.defaultJson = JSON.parse(JSON.stringify(this.editor.json));
     this.setStatus("saved");
     if (closeOnSave) {
       this.hidePresets();
     }
   }
   private saveOrSaveAs(closeOnSave = false) {
-    this.presetsManager.saveOrSaveAs(this.model.json, () => { this.performSave(closeOnSave); });
+    this.presetsManager.saveOrSaveAs(this.editor.json, () => { this.performSave(closeOnSave); });
   }
   protected saveAs(closeOnSave = false) {
-    this.presetsManager.saveAs(this.model.json, () => { this.performSave(closeOnSave); });
+    this.presetsManager.saveAs(this.editor.json, () => { this.performSave(closeOnSave); });
   }
   protected setStatus(status: "saved" | "unsaved" | "saving" | "initial") {
     this.presetsManager.setStatus(status === "unsaved");
-    const statusAction = this.model.navigationBar.getActionById("presets-status");
+    const statusAction = this.editor.navigationBar.getActionById("presets-status");
     statusAction.visible = status === "unsaved";
     statusAction.title = getLocString("presets.plugin.status." + status.toLowerCase());
   }
@@ -253,32 +257,43 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   public activate(): void {
+    this.editor = new CreatorPresetEditorModel(this.getActivePresetJson(), this.creator, this.defaultJson);
+    const survey = this.editor.model;
+    this.surfaceModel = new ComponentContainerModel();
+    this.surfaceModel.elements = [
+      { componentName: "sv-action-bar", componentData: { model: this.editor.navigationBar } },
+      { componentName: "survey", componentData: { survey: survey, model: survey } }
+    ];
+    this.model = new TabDesignerViewModel(this.creator as any);
+    this.model.surfaceComponentName = "svc-component-container";
+    this.model.surfaceData = this.surfaceModel;
+    this.model.rootCssCustom = "svc-tab-designer--presets";
     this.creator.onActiveTabChanging.add(this.preventTabSwitch);
-    this.model = new CreatorPresetEditorModel(this.getActivePresetJson(), this.creator, this.defaultJson);
-    this.defaultJson = { ...this.model.defaultJson };
+
+    this.defaultJson = { ...this.editor.defaultJson };
     if (this.currentValue) {
-      this.model.model.data = this.currentValue;
+      this.editor.model.data = this.currentValue;
     }
     this.designerPlugin.activateSidebar();
 
     //const presets = this.model?.model.editablePresets.map(p => <IAction>{ id: p.pageName, locTitleName: "presets." + p.fullPath + ".navigationTitle" });
-    const presets = this.model?.model.visiblePages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
+    const presets = this.editor?.model.visiblePages.map(p => <IAction>{ id: p.name, title: p.navigationTitle });
 
-    this.model.model.onComplete.add(() => this.hidePresets());
+    this.editor.model.onComplete.add(() => this.hidePresets());
     const defaultPresets = this.presetsManager.presetsMenuItems;
 
     const tools = [
       { id: "save", title: getLocString("presets.plugin.save"), action: () => this.saveOrSaveAs() }, //locTitleName: "presets.plugin.save"
       { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAs() }, //locTitleName: "presets.plugin.save"
-      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.confirmImport(() => { this.model?.loadJsonFile(); }); } },
-      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.model?.downloadJsonFile(); } },
+      { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.confirmImport(() => { this.editor?.loadJsonFile(); }); } },
+      { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.editor?.downloadJsonFile(); } },
       { id: "reset", title: getLocString("presets.plugin.resetAll"), needSeparator: true, css: "sps-list__item--alert", action: () => { this.confirmReset(() => { this.discardUnsaved(); }); } },
     ];
 
     presets.forEach(p => {
       p.action = (item) => {
         this.pagesList.selectedItem = item;
-        this.model.model.currentPage = this.model.model.getPageByName(item.id);
+        this.editor.model.currentPage = this.editor.model.getPageByName(item.id);
       };
     });
     const popupOptions = {
@@ -310,7 +325,7 @@ export class UIPresetEditor implements ICreatorPlugin {
         }
       },
       onBlur: () => { listAction.popupModel.hide(); }
-    }, this.model.model);
+    }, this.editor.model);
 
     const pagesAction = createDropdownActionModel({
       items: [],
@@ -323,7 +338,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       ...popupOptions,
       items: presets,
       onBlur: () => { pagesAction.popupModel.hide(); }
-    }, this.model.model);
+    }, this.editor.model);
 
     const editAction = createDropdownActionModel({
       items: [],
@@ -337,7 +352,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       onSelectionChanged: () => { editAction.title = getLocString("presets.plugin.edit"); },
       items: tools,
       onBlur: () => { editAction.popupModel.hide(); }
-    }, this.model.model);
+    }, this.editor.model);
 
     const statusAction = new Action({
       id: "presets-status",
@@ -359,11 +374,11 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
-    if (defaultPresets.length > 0)this.model.navigationBar.addAction(listAction);
-    this.model.navigationBar.addAction(pagesAction);
-    this.model.navigationBar.addAction(editAction);
-    this.model.navigationBar.addAction(statusAction);
-    this.model.navigationBar.addAction(quitAction);
+    if (defaultPresets.length > 0)this.editor.navigationBar.addAction(listAction);
+    this.editor.navigationBar.addAction(pagesAction);
+    this.editor.navigationBar.addAction(editAction);
+    this.editor.navigationBar.addAction(statusAction);
+    this.editor.navigationBar.addAction(quitAction);
     this.pagesList = pagesAction.popupModel.contentComponentData.model;
     this.presetsList = listAction.popupModel.contentComponentData.model;
     this.presetsManager.presetsList = this.presetsList;
@@ -372,14 +387,14 @@ export class UIPresetEditor implements ICreatorPlugin {
     this.pagesList.selectedItem = this.pagesList.actions[0];
     pagesAction.title = this.pagesList.selectedItem.title || "";
 
-    this.model.model.onCurrentPageChanged.add((_, options) => {
-      this.pagesList.selectedItem = this.pagesList.actions[this.model.model.currentPageNo];
+    this.editor.model.onCurrentPageChanged.add((_, options) => {
+      this.pagesList.selectedItem = this.pagesList.actions[this.editor.model.currentPageNo];
       pagesAction.title = this.pagesList.selectedItem.title || "";
       //resetCurrentAction.title = getLocString("presets.plugin.resetToDefaults").replace("{0}", this.model.model.currentPage.navigationTitle);
       //resetCurrentAction.action = () => { this.model?.resetToDefaults(this.pagesList.selectedItem.id); };
     });
 
-    this.model.onJsonChangedCallback = () => {
+    this.editor.onJsonChangedCallback = () => {
       this.setStatus("unsaved");
     };
 
@@ -403,10 +418,14 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   public deactivate(): boolean {
     this.creator.toolbox.forceCompact = this.toolboxCompact;
-    this.currentValue = this.model?.model.data;
+    this.currentValue = this.editor?.model.data;
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = true);
-    this.currentPresetIndex = this.model?.model.currentPageNo || 0;
+    this.currentPresetIndex = this.editor?.model.currentPageNo || 0;
+    if (this.editor) {
+      this.editor.dispose();
+    }
+    this.editor = undefined;
     if (this.model) {
       this.model.dispose();
     }
@@ -416,8 +435,8 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   public onLocaleChanged() {
     //this.presetsList.actions.forEach(a => a.locStrsChanged());
-    if (this.model) {
-      this.model.onLocaleChanged();
+    if (this.editor) {
+      this.editor.onLocaleChanged();
     }
   }
 

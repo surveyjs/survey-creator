@@ -118,7 +118,7 @@ describe("UIPresetEditor API", () => {
       (plugin as any)["presetsManager"].presetSelector = { value: "expert" } as any;
       plugin.activate();
 
-      const survey: any = plugin.model.model;
+      const survey: any = plugin.editor.model;
       const itemsQuestion: any = survey.getQuestionByName("tabs_items");
       expect(itemsQuestion).toBeTruthy();
       const items = [...itemsQuestion.value];
@@ -127,7 +127,7 @@ describe("UIPresetEditor API", () => {
       items.splice(1, 1);
       itemsQuestion.value = items;
 
-      const expectedJson = plugin.model.json;
+      const expectedJson = plugin.editor.json;
       const preset = plugin.preset as any;
 
       expect(preset).toBeTruthy();
