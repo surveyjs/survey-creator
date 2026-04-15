@@ -26,7 +26,7 @@ test.describe(title, () => {
     await getToolboxItemByText(page, "Single-Line Input").click();
     await getVisibleElement(page, ".svc-question__content").click({ position: { x: 100, y: 100 } });
     await expect(page.locator(".sv-string-viewer").getByText("Visible", { exact: true })).toHaveCount(1);
-    await page.locator(".svc-question__content--selected .svc-question__content-actions .sv-action").locator('button[title="Delete"]').click();
+    await page.locator(".svc-question__content--selected .svc-question__content-actions").locator('.sd-action[title="Delete"]').click();
     await page.waitForTimeout(2000);
     await expect(page.locator(".sv-string-viewer").getByText("Show the title", { exact: true })).toHaveCount(0);
   });

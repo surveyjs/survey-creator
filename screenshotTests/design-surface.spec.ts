@@ -225,8 +225,8 @@ test.describe(title, () => {
       "logoPosition": "right",
       "elements": [{ type: "text", name: "q1", title: "Question Title" }]
     });
-    const button = page.locator(".svc-page-toolbar__item").first();
-    const buttonDisabled = page.locator(".svc-page-toolbar__item:disabled").first();
+    const button = page.locator(".svc-page-toolbar .sd-action").first();
+    const buttonDisabled = page.locator(".svc-page-toolbar .sd-action:disabled").first();
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await compareScreenshot(page, button, "page-button.png");
     await button.hover();

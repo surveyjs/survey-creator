@@ -113,16 +113,18 @@ export const generalGroupName = "General";
 export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
 
+export const objectSelectorButton = (page) => page.locator(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
+
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
 }
 
 export function getBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+  return page.locator(".sd-action[title=\"" + text + "\"]");
 }
 
 export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+  return page.locator(".svc-question__content-actions .sd-action[title=\"" + text + "\"]");
 }
 
 export function getListItemByText(page: Page, text: string): Locator {
@@ -243,7 +245,7 @@ export async function handleShiftEnter(page: Page, selector: string) {
   }, selector);
 }
 
-export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
   await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();

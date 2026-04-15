@@ -25,7 +25,7 @@ const logicDetailButtonElement = (page: Page) => page.locator(".sl-table__detail
 const tableRulesSelector = (page: Page) => page.locator(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filter({ visible: true });
 
 function getBarItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-action-bar-item").filter({ has: page.locator(".sv-action-bar-item__title").getByText(text) }).filter({ visible: true });
+  return page.locator(".sd-action").filter({ has: page.locator(".sd-action__title").getByText(text) }).filter({ visible: true });
 }
 
 async function listItemClick(page:Page, text: string) {
@@ -321,17 +321,17 @@ test.describe(title, () => {
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await fastEntryAction.click();
     await expect(conditionBuilder).toHaveCount(0);
     await expect(conditionTextEdit).toHaveCount(1);
-    await expect(fastEntryAction).toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).toHaveClass(/sd-action--active/);
 
     await fastEntryAction.click();
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await fastEntryAction.click();
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
@@ -344,14 +344,14 @@ test.describe(title, () => {
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await tableRulesSelector(page).first().hover();
     await logicDetailButtonElement(page).first().click();
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await tableRulesSelector(page).nth(1).hover();
     await removeRuleButton(page).nth(1).click();
@@ -463,10 +463,10 @@ test.describe(title, () => {
   });
 
   test("check button hover/focus state", async ({ page }) => {
-    const removeButtonIcon = page.locator(".sl-table__remove-button .sv-action-bar-item__icon");
-    const detailButtonIcon = page.locator(".sl-table__detail-button .sv-action-bar-item__icon");
-    const removeButtonRow = page.locator(".sl-table__remove-button .sv-action-bar-item");
-    const detailButtonRow = page.locator(".sl-table__detail-button.sv-action-bar-item");
+    const removeButtonIcon = page.locator(".sl-table__remove-button .sd-action__icon");
+    const detailButtonIcon = page.locator(".sl-table__detail-button .sd-action__icon");
+    const removeButtonRow = page.locator(".sl-table__remove-button .sd-action");
+    const detailButtonRow = page.locator(".sl-table__detail-button.sd-action");
     const focusedClassName = "sv-focused--by-key";
 
     await setJSON(page, surveyJSON);
@@ -616,8 +616,8 @@ test.describe(title, () => {
   });
 
   test("Confirm dialog on leaving tab with an incorrect rule", async ({ page }) => {
-    const cancelButton = page.locator(".sv-modal-popup__button").getByText("I want to complete the rules");
-    const applyButton = page.locator(".sv-modal-popup__button").getByText("Yes");
+    const cancelButton = page.locator(".sv-popup__button").getByText("I want to complete the rules");
+    const applyButton = page.locator(".sv-popup__button").getByText("Yes");
 
     await setJSON(page, json2);
 

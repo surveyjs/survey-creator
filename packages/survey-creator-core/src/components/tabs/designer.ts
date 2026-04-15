@@ -136,7 +136,7 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar = new ActionContainer();
 
     let defaultActionBarCss = {
-      root: "sv-action-bar svc-tab-designer__surface-toolbar",
+      root: "sd-action-bar svc-tab-designer__surface-toolbar",
       defaultSizeMode: "",
       smallSizeMode: "",
       item: "svc-page-navigator__button",

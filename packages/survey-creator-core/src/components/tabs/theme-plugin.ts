@@ -419,7 +419,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updateSimulatorTheme(this.creator.theme);
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.active = this.model.showInvisibleElements;
+      this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
 
@@ -534,6 +534,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
+      appearance: { style: "brand" },
       showTitle: false
     });
 
@@ -547,7 +548,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
-      visible: false
+      visible: false,
     });
 
     this.nextPageAction = new Action({
@@ -565,10 +566,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
-      active: true,
+      pressed: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
+      appearance: { style: "brand" },
       action: () => { }
     });
 
@@ -715,9 +717,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         mode: "small",
         locTitleName: "ts.showInvisibleElements",
         visible: false,
+        appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
+          this.invisibleToggleAction.pressed = !this.invisibleToggleAction.active;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });

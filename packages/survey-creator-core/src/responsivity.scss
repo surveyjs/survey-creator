@@ -114,7 +114,7 @@
   }
 
   .svc-question__content-actions {
-    width: calc(100% + 3 * #{$base-unit});
+    width: calc(100% + 2.5 * #{$base-unit});
 
     .svc-survey-element-toolbar__item {
       border: 0;

@@ -49,7 +49,7 @@ test.describe(title, () => {
     await expect(page.locator("div [data-name=\"imageWidth\"] input")).toHaveValue("");
     await expect(page.locator("div [data-name=\"imageWidth\"] input").getAttribute("placeholder")).resolves.toEqual("auto");
 
-    await page.locator(".sv-action-bar-item[title=\"Hide Panel\"]").click();
+    await page.locator(".sd-action[title=\"Hide Panel\"]").click();
     await expect(imageQuestionSelector).toHaveCount(1);
     await expect(imageQuestionSelector).toHaveClass(/sd-image__image--adaptive/);
     await expect(await imageQuestionSelector.evaluate((el: HTMLElement) => el.clientWidth)).toEqual(624);
@@ -374,7 +374,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const duplicateAction = page.locator(".svc-page__content-actions .sv-action--duplicate .svc-page-toolbar-item__title--with-icon");
+    const duplicateAction = page.locator(".svc-page__content-actions .sv-action--duplicate .sd-action__title");
     await page.locator(".svc-page").first().click({ position: { x: 3, y: 3 } });
     await expect(duplicateAction).toBeVisible();
 
@@ -539,9 +539,9 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1000, height: 800 });
     await page.setViewportSize({ width: 1600, height: 800 });
     const settingsButton = page.locator('button[title="Survey settings"]');
-    await expect(settingsButton).not.toHaveClass(/svc-toolbar__item--active/);
+    await expect(settingsButton).not.toHaveClass(/sd-action--pressed/);
 
     await page.locator('.svc-menu-action__button[title="General"]').click();
-    await expect(settingsButton).toHaveClass(/svc-toolbar__item--active/);
+    await expect(settingsButton).toHaveClass(/sd-action--pressed/);
   });
 });

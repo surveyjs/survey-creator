@@ -54,7 +54,6 @@
           >
             <SvComponent
               :is="'sv-svg-icon'"
-              role="button"
               :iconName="'icon-choosefile'"
               :size="'auto'"
               :title="adorner.selectFileTitle"
@@ -69,7 +68,6 @@
           >
             <SvComponent
               :is="'sv-svg-icon'"
-              role="button"
               :iconName="'icon-delete'"
               :size="'auto'"
               :title="adorner.removeFileTitle"
@@ -101,16 +99,7 @@
           v-if="adorner.allowAdd && !adorner.isUploading"
         >
           <span class="svc-image-item-value__placeholder" v-if="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
-          <span :class="adorner.addButtonCss" @click="adorner.chooseNewFile(adorner)" v-key2click>
-              <SvComponent
-                :is="'sv-svg-icon'"
-                :iconName="'icon-add-lg'"
-                :size="'auto'"
-                :title="adorner.addFileTitle"
-                v-if="adorner.showChooseButtonAsIcon"
-              />
-              <span v-else>{{adorner.chooseImageText}}</span>
-          </span>
+          <SvComponent :is="'sv-action-bar'" :model="adorner.actionsContainer"></SvComponent>
         </div>
       </template>
     </div>

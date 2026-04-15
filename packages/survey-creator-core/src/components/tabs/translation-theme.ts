@@ -307,15 +307,5 @@ export var translationCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
-  },
-  navigationBar: {
-    root: "sd-action-bar",
-    item: "sd-action st-navigation-btn",
-    defaultSizeMode: "",
-    smallSizeMode: "",
-    itemPressed: "sd-action--pressed",
-    itemAsIcon: "sd-action--icon",
-    itemIcon: "sd-action__icon",
-    itemTitle: "sd-action__title",
-  },
+  }
 };

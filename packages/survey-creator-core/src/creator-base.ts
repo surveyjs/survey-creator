@@ -102,27 +102,8 @@ export interface IKeyboardShortcut {
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
 }
-//Obsolete
-export class CreatorAction extends Action {
-}
 
-export class FooterToolbarActionContainer extends ActionContainer {
-  protected getDefaultCssClasses() {
-    const defaultCss = super.getDefaultCssClasses();
-    return {
-      root: defaultCss.root + " svc-toolbar sv-action-bar sv-action-bar--default-size-mode",
-      item: defaultCss.item + " svc-toolbar__item",
-      itemWithTitle: defaultCss.itemWithTitle + " svc-toolbar__item--with-text",
-      itemAsIcon: defaultCss.itemAsIcon + " svc-toolbar__item--icon",
-      itemActive: defaultCss.itemActive + " svc-toolbar__item--active",
-      itemPressed: defaultCss.itemPressed + " svc-toolbar__item--pressed",
-      itemIcon: defaultCss.itemIcon + " svc-toolbar-item__icon",
-      itemTitle: defaultCss.itemTitle + " svc-toolbar-item__title",
-      itemTitleWithIcon: defaultCss.itemTitleWithIcon + " svc-toolbar-item__title--with-icon",
-    };
-  }
-}
-export class ToolbarActionContainer extends FooterToolbarActionContainer {
+export class ToolbarActionContainer extends ActionContainer {
   constructor(private creator: SurveyCreatorModel) {
     super();
   }
@@ -1735,6 +1716,7 @@ export class SurveyCreatorModel extends Base
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
+    this.updateToolbar(this.toolbarValue);
     this.toolbarValue.locOwner = this;
     this.tabbedMenu = new TabbedMenuContainer(this);
     this.tabbedMenu.locOwner = this;
@@ -2047,9 +2029,14 @@ export class SurveyCreatorModel extends Base
     const tabs = this.initialTabs();
     this.setTabs(tabs);
   }
+  private updateToolbar(toolbar: ActionContainer) {
+    toolbar.containerCss = "svc-toolbar";
+    toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "tertiary-muted" });
+  }
   private updateFooterToolbar(): void {
     if (!this.footerToolbar) {
-      this.footerToolbar = new FooterToolbarActionContainer();
+      this.footerToolbar = new ActionContainer();
+      this.updateToolbar(this.footerToolbar);
     }
     this.removePluginFooterActions("undoredo");
     this.tabs.forEach(tab => this.addPluginFooterActions(tab.id));
@@ -4892,6 +4879,7 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-fg-basic-secondary",
       "--sjs2-color-bg-neutral-tertiary-dim",
       "--sjs2-color-bg-neutral-secondary",
+      "--sjs2-color-fg-neutral-primary",
       "--sjs2-color-bg-basic-secondary",
       "--sjs2-color-bg-basic-secondary-dim",
       "--sjs2-color-component-input-default-line",

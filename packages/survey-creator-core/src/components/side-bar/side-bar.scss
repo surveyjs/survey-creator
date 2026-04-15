@@ -92,6 +92,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 .svc-side-bar__container-actions {
   width: 100%;
   box-sizing: border-box;
+  .sd-action__title {
+    @include ctrDefaultFont;
+  }
   .sv-action-bar {
     justify-content: flex-end;
     padding: 0;
@@ -286,13 +289,18 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
 .sv-action--object-selector {
   max-width: 70%;
 
-  .sv-action-bar-item {
-    flex-shrink: 1;
-    height: auto;
+  .sd-action-bar__item-content {
+    width: 100%;
   }
 
-  .sv-action-bar-item__title {
-    @include ctrDefaultFont;
+  .sd-action {
+    flex-shrink: 1;
+    height: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sd-action__title {
     overflow: hidden;
     text-overflow: ellipsis;
   }

@@ -645,7 +645,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: row,
         actions: [
-          { id: "remove-row", visible: true, iconName: "default-icon" }
+          { id: "remove-row", visible: true, iconName: "default-icon", appearance: {} }
         ]
       };
 
@@ -655,7 +655,7 @@ describe("PresetsManager", () => {
       expect(removeAction.iconName).toBe("icon-delete-24x24");
       expect(removeAction.iconSize).toBe("auto");
       expect(removeAction.component).toBe("sv-action-bar-item");
-      expect(removeAction.innerCss).toBe("sps-action-button sps-action-button--danger");
+      expect(removeAction.appearance.style).toBe("alert");
       expect(removeAction.showTitle).toBe(false);
       expect(removeAction.action).toBeDefined();
     });
@@ -673,7 +673,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: row,
         actions: [
-          { id: "remove-row", visible: true }
+          { id: "remove-row", visible: true, appearance: {} }
         ]
       };
 
@@ -711,7 +711,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: predefinedRow,
         actions: [
-          { id: "remove-row", visible: true }
+          { id: "remove-row", visible: true, appearance: {} }
         ]
       };
 
@@ -719,7 +719,7 @@ describe("PresetsManager", () => {
         question: matrixQuestion,
         row: customRow,
         actions: [
-          { id: "remove-row", visible: true }
+          { id: "remove-row", visible: true, appearance: {} }
         ]
       };
 

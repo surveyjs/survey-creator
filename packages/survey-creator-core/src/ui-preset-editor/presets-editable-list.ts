@@ -53,6 +53,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   }
 
   protected updateRowAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rowData: any, keyColumn: string, action: IAction) {
+    action.appearance = { mode: "tertiary" as any };
     if (action.id == "icon-action") {
       action.iconName = rowData.iconName || this.defaultIcon;
     }
@@ -119,6 +120,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         a.action = () => question.removeRowUI(row);
         a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
         a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.delete");
+        a.appearance = { mode: "tertiary-muted" as any };
       }
     });
   }
@@ -131,7 +133,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       id: "reset-to-default",
       title: getLocString("presets.editor.resetToDefault"),
       css: "sps-action--grow",
-      innerCss: "sps-btn sps-btn--secondary-alert",
+      appearance: { style: "alert" as any },
       visibleIndex: 15,
       action: (a) => {
         const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
@@ -304,12 +306,6 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       }
 
       if (popupModel.footerToolbar) {
-        const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-        defaultActionBarCss.item = "sps-btn";
-        popupModel.footerToolbar.cssClasses = defaultActionBarCss;
-        popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
-        popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
-
         if (options.actions) {
           popupModel.footerToolbar.actions.unshift(...options.actions);
         }

@@ -73,13 +73,9 @@ export class PreviewViewModel extends Base {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
     this.pages.cssClasses = {
-      root: "sv-action-bar svc-pages-toolbar",
-      item: "svc-preview-pager__item",
-      itemActive: "svc-preview-pager__item--active",
-      itemPressed: "svc-preview-pager__item--pressed",
-      itemAsIcon: "svc-preview-pager__item--icon",
-      itemIcon: "svc-preview-pager-item__icon",
-      itemTitle: "svc-preview-pager-item__title",
+      root: "sd-action-bar svc-pages-toolbar",
+      item: "sd-action svc-preview-pager__item",
+      itemPressed: "sd-action--pressed svc-preview-pager__item--pressed",
     };
   }
 
@@ -313,6 +309,7 @@ export class PreviewViewModel extends Base {
       pageActions.push(this.nextPageAction);
     }
     this.pages.actions = pageActions;
+    this.pages.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     this.pages.containerCss = "sv-action-bar--pages";
     this.updatePrevNextPageActionState();
   }

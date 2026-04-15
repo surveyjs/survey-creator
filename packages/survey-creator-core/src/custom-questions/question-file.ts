@@ -144,6 +144,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       component: "sv-fileedit-button",
       data: { question: this },
       locTitle: this.locChooseButtonCaption,
+      innerCss: new ComputedUpdater(() => this.isInputReadOnly ? this.cssClasses.chooseButtonDisabled : "") as unknown as string,
       enabled: new ComputedUpdater(() => !this.isInputReadOnly) as unknown as boolean,
       iconName: new ComputedUpdater(() => this.cssClasses.chooseButtonIcon) as unknown as string,
     });
@@ -155,7 +156,8 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
   protected createInputActionsContainer(): ActionContainer {
     const actionBar = new ActionContainer();
-    actionBar.setCssClasses(this.survey?.getCss().inputActionBar);
+    actionBar.containerCss = this.cssClasses.group;
+    actionBar.setActionsAppearance({ mode: "tertiary", style: "neutral", size: "small" });
     actionBar.actions = this.createInputActions();
     actionBar.registerFunctionOnPropertyValueChanged("isEmpty", () => {
       this._hasVisibleInputActions = actionBar.hasVisibleActions;

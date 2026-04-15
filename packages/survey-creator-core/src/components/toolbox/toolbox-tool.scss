@@ -40,6 +40,17 @@
   flex-direction: column;
   align-items: var(--ctr-toolbox-item-align, stretch);
   position: relative;
+  & > * {
+    flex: 0 0 auto;
+  }
+}
+.svc-toolbox__tool--hidden {
+  height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+  .svc-toolbox__tool-content {
+    min-width: fit-content;
+  }
 }
 
 .svc-toolbox__item--has-subitems {
@@ -296,8 +307,10 @@
 .svc-toolbox-subtypes {
   .sv-popup__container {
     margin-top: calc(
-      0px - var(--ctr-toolbox-submenu-group-margin-top, var(--sjs-spacing-x150)) -
-        var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1))
+      0px - var(--ctr-toolbox-submenu-group-margin-top, var(--sjs-spacing-x150)) - var(
+          --ctr-toolbox-item-padding-top,
+          var(--sjs-spacing-x1)
+        )
     );
     padding: 0;
 
@@ -398,6 +411,9 @@
 .svc-toolbox__item--dots {
   padding-inline-end: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
   margin-top: calcSize(0.5);
+  &.sd-action--pressed {
+    opacity: 0.5;
+  }
 }
 .svc-toolbox--compact {
   .svc-toolbox__item-submenu-button {

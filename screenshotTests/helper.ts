@@ -84,12 +84,12 @@ export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 // export const creatorContentSelector = Selector(".svc-creator__content-holder");
 
-export const expandButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Show Panel\"]");
-export const collapseButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
-export const surveySettingsButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Survey settings\"]");
-export const themeSettingsButtonSelector = (page) => page.locator(".sv-action-bar-item[title=\"Theme settings\"]");
+export const expandButtonSelector = (page) => page.getByRole("button", { name: "Show Panel" });
+export const collapseButtonSelector = (page) => page.getByRole("button", { name: "Hide Panel" });
+export const surveySettingsButtonSelector = (page) => page.getByRole("button", { name: "Survey settings" });
+export const themeSettingsButtonSelector = (page) => page.getByRole("button", { name: "Theme settings" });
 // export const propertyGridSelector = Selector(".svc-side-bar__container");
-// export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
+// export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
 // export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
 // export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 
@@ -129,10 +129,7 @@ export function getPropertyGridCategory(page, categoryName) {
 }
 
 export function getBarItemByTitle(page, text: string) {
-  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
-}
-export function getQuestionBarItemByTitle(page, text: string) {
-  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+  return page.locator(".sd-action-bar-item[title=\"" + text + "\"]");
 }
 export function getListItemByText(page, text) {
   return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text);

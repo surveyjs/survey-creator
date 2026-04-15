@@ -1,4 +1,4 @@
-import { CssClassBuilder, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IActionAppearance, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -58,12 +58,32 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   public get showPlaceholder(): boolean {
     return this.getIsNewItemSingle();
   }
-  public get addButtonCss(): string {
-    return new CssClassBuilder()
-      .append("svc-image-item-value-controls__add")
-      .append("svc-context-button", this.showChooseButtonAsIcon)
-      .append("sd-action", !this.showChooseButtonAsIcon)
-      .toString();
+  protected createActionsContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.setItems(this.createActions());
+    return container;
+  }
+  protected createActions(): Array<Action> {
+    return [
+      new Action({
+        id: "add",
+        title: new ComputedUpdater(() => this.showChooseButtonAsIcon ? this.addFileTitle : this.chooseImageText) as unknown as string,
+        iconName: new ComputedUpdater(() => this.showChooseButtonAsIcon ? "icon-add-lg" : undefined) as unknown as string,
+        innerCss: "svc-image-item-value-controls__add",
+        showTitle: new ComputedUpdater(() => !this.showChooseButtonAsIcon) as unknown as boolean,
+        appearance: { style: "brand", mode: "tertiary", size: "small" },
+        action: () => {
+          this.chooseNewFile(this);
+        }
+      })
+    ];
+  }
+  private actionsContainerValue?: ActionContainer;
+  public get actionsContainer() {
+    if (!this.actionsContainerValue) {
+      this.actionsContainerValue = this.createActionsContainer();
+    }
+    return this.actionsContainerValue;
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {

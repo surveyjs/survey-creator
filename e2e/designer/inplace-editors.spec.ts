@@ -8,6 +8,7 @@ import {
   getToolboxItemByText,
   addQuestionByAddQuestionButton,
   doDragDrop,
+  objectSelectorButton,
 } from "../helper";
 
 const title = "Inplace editors";
@@ -791,8 +792,7 @@ test.describe(title, () => {
 
     await page.locator(".sv-popup__button--cancel").click();
     await expect(page.locator(".svc-question__content--in-popup")).toHaveCount(0);
-    const objectSelectorButton = page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
-    await expect(objectSelectorButton.getByText("Column 1")).toBeVisible();
+    await expect(objectSelectorButton(page).getByText("Column 1")).toBeVisible();
   });
 
   test("Rating question inplace editor", async ({ page }) => {

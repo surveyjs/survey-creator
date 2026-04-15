@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab, objectSelectorButton, expandButtonSelector } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -15,8 +15,8 @@ test.describe(title, () => {
       pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 750, height: 700 });
-    await page.locator(".sv-action-bar-item[title=\"Show Panel\"]").click();
-    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
+    await expandButtonSelector(page).click();
+    await objectSelectorButton(page).click();
 
     await compareScreenshot(page, ".svc-side-bar__container", "side-bar-object-selector.png");
   });
@@ -29,7 +29,7 @@ test.describe(title, () => {
     await page.locator(".svc-page-navigator__selector").click();
     await getListItemByText(page, "educationalNeeds").click();
     await page.locator(".svc-string-editor__input").filter({ hasText: "Patient Name" }).click();
-    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
+    await objectSelectorButton(page).click();
     await page.waitForTimeout(1000);
 
     await compareScreenshot(page, objectSelectorContent, "side-bar-object-selector-with-selected-item.png");

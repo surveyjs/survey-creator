@@ -13,6 +13,7 @@ import {
   changeToolboxScrolling,
   changeToolboxSearchEnabled,
   doDragDrop,
+  objectSelectorButton,
 } from "../helper";
 
 const title = "Side bar";
@@ -74,7 +75,6 @@ test.describe(title, () => {
   test("SelectObject", async ({ page }) => {
     await setJSON(page, { pages: [{ name: "page1" }] });
 
-    const objectSelectorButton = page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
     const objectSelectorPopup = page.locator(".sv-popup.svc-object-selector .svc-list__container");
     const pageContent = page.locator(".svc-page__content").first();
 
@@ -83,7 +83,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
     await expect(objectSelectorPopup).toHaveCount(0);
 
-    await objectSelectorButton.click();
+    await objectSelectorButton(page).click();
     await expect(objectSelectorPopup).toBeVisible();
     await expect(objectSelectorPopup.locator(".svc-list__item").first()).toBeFocused();
     await expect(pageContent).not.toHaveClass(/svc-page__content--selected/);
@@ -96,7 +96,7 @@ test.describe(title, () => {
   test("toolboxLocation sidebar", async ({ page }) => {
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
-    const toolboxButtonSelector = page.locator(".sv-action-bar-item[title=\"Toolbox\"]");
+    const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
     const propertyGridSelector = page.locator(".spg-root-modern");
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']");
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']");
@@ -213,7 +213,7 @@ test.describe(title, () => {
 
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
-    const toolboxButtonSelector = page.locator(".sv-action-bar-item[title=\"Toolbox\"]");
+    const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
     const toolboxItemCount = 22;
     const itemsInToolboxInDesigner = toolboxInDesigner.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
     const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filter({ visible: true });

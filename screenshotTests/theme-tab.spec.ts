@@ -117,7 +117,7 @@ test.describe(title, () => {
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await getPropertyGridCategory(page, "General").click();
     await expandedGroup.locator(".sv-button-group__item-caption").getByText("Dark").click();
-    await page.click(".sv-action--reset-theme .svc-toolbar__item");
+    await page.getByRole("button", { name: "Reset theme settings to" }).click();
     const popup = page.locator(".sv-popup__body-content").filter({ has: page.locator(":visible") });
     await hideElement(page, ".svc-surface-placeholder");
     await compareScreenshot(page, popup, "theme-tab-reset-popup-dialog.png");

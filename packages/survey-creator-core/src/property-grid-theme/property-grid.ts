@@ -321,12 +321,14 @@ export var propertyGridCss = {
     itemAsIcon: "spg-action-button--icon",
     itemIcon: "spg-action-button__icon",
     itemTitle: "spg-action-button__title",
+    defaultSizeMode: "",
   },
   spinedit: {
     root: "sd-formbox spg-spin-editor",
     control: "sd-formbox__input",
     increaseButtonIcon: "icon-arrow-up",
-    decreaseButtonIcon: "icon-arrow-down"
+    decreaseButtonIcon: "icon-arrow-down",
+    group: "sd-formbox__group"
   },
   color: {
     root: "sd-formbox spg-color-editor",
@@ -337,6 +339,7 @@ export var propertyGridCss = {
     colorInput: "spg-color-editor__color-input",
     colorDropdownIcon: "icon-drop-down-arrow",
     swatchIcon: "icon-color-picker",
+    group: "sd-formbox__group"
   },
   fileedit: {
     root: "sd-formbox spg-file-edit",
@@ -345,6 +348,8 @@ export var propertyGridCss = {
     clearButtonIcon: "icon-cancel-24x24",
     fileInput: "sd-visuallyhidden",
     chooseButton: "spg-file-edit__choose-button",
+    chooseButtonDisabled: "sd-action--disabled",
+    group: "sd-formbox__group"
   },
   linkvalue: {
     content: "spg-link"

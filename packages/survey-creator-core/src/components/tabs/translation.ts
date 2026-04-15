@@ -1587,6 +1587,7 @@ export class TranslationEditor {
     survey.showNavigationButtons = true;
     survey.navigationButtonsLocation = "top";
     navigationBar.allowResponsiveness();
+    navigationBar.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
     navigationBar.addAction(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {

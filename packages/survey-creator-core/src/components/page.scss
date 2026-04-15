@@ -81,13 +81,10 @@ svc-page {
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding: 0 var(--sjs2-spacing-x100, 8px) 0 var(--sjs2-size-x300, 24px);
+  padding: 0 var(--sjs2-spacing-x150, 12px) 0 var(--sjs2-size-x300, 24px);
   transition: opacity $creator-transition-duration;
   white-space: nowrap;
-
-  .sv-action-bar-separator {
-    margin: 0 var(--sjs2-spacing-x100, 8px);
-  }
+  gap: var(--sjs2-spacing-x100, 8px);
 
   h4.sd-title {
     .sv-string-editor {
@@ -111,24 +108,13 @@ svc-page {
 }
 
 .svc-page-toolbar {
+  --sd-action-bar-gap: var(--sjs2-spacing-x100, 8px);
   flex-grow: 1;
   justify-content: flex-end;
   pointer-events: none;
-  .sv-action {
+  overflow: hidden;
+  .sd-action {
     pointer-events: all;
-  }
-  & > .sv-dots {
-    width: auto;
-    .sv-dots__item {
-      width: auto;
-    }
-    &.sv-action--hidden {
-      width: 0;
-    }
-    .svc-list__item-icon {
-      width: var(--sjs2-size-x200, 16px);
-      height: var(--sjs2-size-x200, 16px);
-    }
   }
 }
 
@@ -350,15 +336,12 @@ svc-page {
 }
 
 .svc-page__footer {
+  position: relative;
   overflow: visible;
   margin-left: var(--sjs2-spacing-x300, 24px);
   margin-right: var(--sjs2-spacing-x300, 24px);
   margin-top: var(--sjs2-spacing-x200, 16px);
   gap: var(--sjs2-spacing-x200, 16px);
-
-  .sv-action {
-    flex: 1 1 0;
-  }
 
   .svc-btn {
     flex-grow: 1;
@@ -367,6 +350,7 @@ svc-page {
 
   .svc-add-new-question-action {
     position: relative;
+    flex: 1 1 0;
   }
 }
 
@@ -465,7 +449,7 @@ svc-page {
 }
 
 .svc-page__content--collapsed {
-  & > .sv-action-bar {
+  & > .svc-page__footer {
     display: none;
   }
 

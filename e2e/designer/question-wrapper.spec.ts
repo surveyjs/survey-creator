@@ -18,7 +18,7 @@ function normalize(str: string) {
 
 const convertQuestionTypesCount = 22;
 const convertTextQuestionInputTypesCount = 13;
-const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 const convertPopupContent = "Radio Button Group\nRating Scale\nSlider\nCheckboxes\nDropdown\nMulti-Select Dropdown\nYes/No (Boolean)\nFile Upload\nImage Picker\nRanking\nSingle-Line Input\nLong Text\nMultiple Textboxes\nPanel\nDynamic Panel\nSingle-Select Matrix\nMulti-Select Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature";
 const convertInputTypePopupContent = "Color\nDate\nDate and Time\nEmail\nMonth\nNumber\nPassword\nRange\nPhone Number\nText\nTime\nURL\nWeek";
 
@@ -30,13 +30,13 @@ test.describe(title, () => {
 
   test("Single input question wrapper actions", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sv-action:not(.sv-dots)");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item:not(.sv-dots)");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
     const convertInputTypeActionButton = questionToolbarActions.locator('button[title="Text"]');
     const duplicateActionButton = questionToolbarActions.locator('button[title="Duplicate"]');
     const requiredActionButton = questionToolbarActions.locator('button[title="Required"]');
     const deleteActionButton = questionToolbarActions.locator('button[title="Delete"]');
-    const dotsButton = page.locator(".svc-question__content-actions .sv-action.sv-dots");
+    const dotsButton = page.locator(".svc-question__content-actions .sd-action-bar__item.sv-dots");
 
     await expect(questions).toHaveCount(0);
 
@@ -56,7 +56,7 @@ test.describe(title, () => {
 
   test("Single input question wrapper action convert", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sv-action");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
     const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
     const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
@@ -86,7 +86,7 @@ test.describe(title, () => {
 
   test("Single input question wrapper action convert inputType", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sv-action");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const convertInputTypeActionButton = questionToolbarActions.locator('button[title="Text"]');
     const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
     const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
@@ -112,7 +112,7 @@ test.describe(title, () => {
 
   test("Single input question wrapper action convert on hover", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const unselectedQuestionToolbarActions = page.locator(".svc-question__content-actions").locator(".sv-action");
+    const unselectedQuestionToolbarActions = page.locator(".svc-question__content-actions").locator(".sd-action-bar__item");
     const convertActionButton = unselectedQuestionToolbarActions.locator('button[title="Single-Line Input"]');
     const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
     const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
@@ -147,7 +147,7 @@ test.describe(title, () => {
 
   test("Single input question wrapper action duplicate", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sv-action");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const duplicateActionButton = questionToolbarActions.locator('button[title="Duplicate"]');
 
     await expect(questions).toHaveCount(0);
@@ -172,7 +172,7 @@ test.describe(title, () => {
 
   test("Single input question wrapper action change require", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sv-action");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const requiredActionButton = questionToolbarActions.locator('button[title="Required"]');
     const questionTitle = page.locator(".sd-question__title");
 
@@ -187,17 +187,17 @@ test.describe(title, () => {
 
     let titleText = await questionTitle.innerText();
     expect(normalize(titleText)).toBe("question1");
-    await expect(requiredActionButton).not.toHaveClass(/svc-survey-element-toolbar__item--active/);
+    await expect(requiredActionButton).not.toHaveClass(/sd-action--pressed/);
 
     await requiredActionButton.hover();
     await requiredActionButton.click();
     await expect(questionTitle).toHaveText(/question1\s+\*/, { timeout: 3000 });
-    await expect(requiredActionButton).toHaveClass(/svc-survey-element-toolbar__item--active/);
+    await expect(requiredActionButton).toHaveClass(/sd-action--pressed/);
   });
 
   test("Single input question wrapper action delete", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sv-action");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const deleteActionButton = questionToolbarActions.locator('button[title="Delete"]');
 
     await expect(questions).toHaveCount(0);
@@ -243,7 +243,7 @@ test.describe(title, () => {
     });
     await expect(page.locator(".sd-question[data-name=question1] .svc-panel__placeholder").getByText("Drop a question")).toBeVisible();
     await doDragDrop({ page, element: SingleInputToolboxItem, target, options: { steps: 10 } });
-    await expect(page.locator(".sd-question[data-name=question1] .sd-table__row").nth(1).locator(".svc-dropdown-action--convertTo .svc-survey-element-toolbar-item__title").getByText("Single-Line Input")).toBeVisible();
+    await expect(page.locator(".sd-question[data-name=question1] .sd-table__row").nth(1).locator(".svc-dropdown-action--convertTo .sd-action__title").getByText("Single-Line Input")).toBeVisible();
   });
 
   test("Matrix dropdown with detail panel - add question button", async ({ page }) => {
@@ -259,7 +259,7 @@ test.describe(title, () => {
     await expect(page.locator(".sd-question[data-name=question1] .svc-panel__placeholder").getByText("Drop a question")).toBeVisible();
     await expect(page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question")).toBeVisible();
     await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question").click();
-    await expect(page.locator(".sd-question[data-name=question1] .sd-table__row").nth(1).locator(".svc-dropdown-action--convertTo .svc-survey-element-toolbar-item__title").getByText("Single-Line Input")).toBeVisible();
+    await expect(page.locator(".sd-question[data-name=question1] .sd-table__row").nth(1).locator(".svc-dropdown-action--convertTo .sd-action__title").getByText("Single-Line Input")).toBeVisible();
     await expect(page.locator(".sd-question[data-name=question2]")).toBeVisible();
     await page.locator(".sd-question[data-name=question1] .svc-element__add-new-question").click();
     await expect(page.locator(".sd-question[data-name=question3]")).toBeVisible();
@@ -276,9 +276,9 @@ test.describe(title, () => {
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(1);
 
     await expect(isrequiredButton).toBeVisible();
-    await expect(isrequiredButton.locator(".svc-required-action")).not.toHaveClass(/svc-survey-element-toolbar__item--active/);
+    await expect(isrequiredButton.locator(".svc-required-action")).not.toHaveClass(/sd-action--pressed/);
     await isrequiredButton.click();
-    await expect(isrequiredButton.locator(".svc-required-action")).toHaveClass(/svc-survey-element-toolbar__item--active/);
+    await expect(isrequiredButton.locator(".svc-required-action")).toHaveClass(/sd-action--pressed/);
   });
 });
 
@@ -415,8 +415,8 @@ test.describe(title + " dropdown collapse", () => {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
 
-    expect(await page.locator(".svc-question__content--selected > .svc-question__content-actions .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item").innerText()).toEqual("Panel");
-    await expect(page.locator(".svc-question__content--selected > .svc-question__content-actions .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item")).toBeFocused();
+    expect(await page.locator(".svc-question__content--selected > .svc-question__content-actions .svc-dropdown-action--convertTo .sd-action").innerText()).toEqual("Panel");
+    await expect(page.locator(".svc-question__content--selected > .svc-question__content-actions .svc-dropdown-action--convertTo .sd-action")).toBeFocused();
   });
 
   test("Question adorner - collapse button in differen modes", async ({ page }) => {

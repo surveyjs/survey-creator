@@ -640,7 +640,7 @@ test.describe(title, () => {
     await panel.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.filter({ visible: true }).first().click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: panel });
     await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-page__content"), "drag-drop-in-collapsed-panel.png");
@@ -683,7 +683,7 @@ test.describe(title, () => {
     await pageElement.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: pageElement });
     await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-tab-designer_content"), "drag-drop-in-collapsed-page.png");

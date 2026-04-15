@@ -269,10 +269,12 @@ export class PresetsManager {
         id: "visible",
         iconName: getRowIconName(options.row),
         location: "end",
+        appearance: { mode: "quaternary" as any },
         css: options.row.getValue("visible") ? "" : "sps-action--invisible",
         action: () => {
           options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
           visibleAction.iconName = getRowIconName(options.row);
+          visibleAction.appearance.mode = "quaternary";
           visibleAction.css = options.row.getValue("visible") ? "" : "sps-action--invisible";
         }
       });
@@ -282,7 +284,7 @@ export class PresetsManager {
         removeAction.iconName = "icon-delete-24x24";
         removeAction.iconSize = "auto";
         removeAction.component = "sv-action-bar-item";
-        removeAction.innerCss = "sps-action-button sps-action-button--danger";
+        removeAction.appearance.style = "alert";
         removeAction.tooltip = getLocString("presets.plugin.deletePreset");
         removeAction.showTitle = false;
         removeAction.action = () => {
@@ -353,16 +355,12 @@ export class PresetsManager {
   private customizePopupButtons(popupModel: any, applyText: string, cancelText: string) {
     if (!popupModel) return;
     if (popupModel.footerToolbar) {
-      const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-      defaultActionBarCss.item = "sps-btn";
-      popupModel.footerToolbar.cssClasses = defaultActionBarCss;
       const applyAction = popupModel.footerToolbar.getActionById("apply");
       const cancelAction = popupModel.footerToolbar.getActionById("cancel");
-      applyAction.innerCss = "sps-btn--primary-brand";
       applyAction.title = applyText || getLocString("buttons.apply");
-      cancelAction.innerCss = "sps-btn--secondary-brand";
       cancelAction.css += " sps-action--grow";
       cancelAction.title = cancelText || getLocString("buttons.cancel");
+      cancelAction.appearance.mode = "secondary";
     }
   }
 
@@ -378,12 +376,9 @@ export class PresetsManager {
     survey["cssVariables"] = {};
     survey.css = {
       ...presetsCss,
-      actionBar: {
-        ...presetsCss.actionBar,
-        itemIcon: presetsCss.actionBar.itemIcon + " sps-action-button__icon--muted",
-      },
       matrixdynamic: {
         ...propertyGridCss.matrixdynamic,
+        actionsCell: propertyGridCss.matrixdynamic.actionsCell + " sps-table__cell--actions",
         buttonAdd: presetsCss.matrixdynamic.buttonAdd,
         footer: presetsCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
       }

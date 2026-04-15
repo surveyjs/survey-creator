@@ -479,7 +479,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           });
         }
       },
-      active: this.createSelectedUpdater(),
+      appearance: { style: "brand" },
+      pressed: this.createSelectedUpdater(),
       visible: this.createVisibleUpdater(() => {
         return this.creator.removeSidebar !== true;
       }),
@@ -509,7 +510,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconName: "icon-config",
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
-      active: true,
+      pressed: true,
+      appearance: { style: "brand" },
       locTitleName: "ed.designer",
       showTitle: false,
       action: () => { }
@@ -525,17 +527,18 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       },
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
-      showTitle: false
+      showTitle: false,
+      appearance: { style: "brand" }
     });
 
     items.push(this.saveSurveyAction);
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
     this.creator.onElementSelected.add((sender, options) => {
-      this.surveySettingsAction.active = this.isSettingsActive;
+      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
-      this.surveySettingsAction.active = this.isSettingsActive;
+      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     return items;
   }

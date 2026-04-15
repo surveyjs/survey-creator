@@ -227,9 +227,9 @@ test.describe(title, () => {
     const tabbedMenuItemSelector = page.locator(".svc-toolbox .svc-toolbox__tool:nth-of-type(18)").first();
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(150);
-    await expect(tabbedMenuItemSelector).not.toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).not.toHaveClass(/svc-toolbox__tool--hidden/);
     await page.setViewportSize({ width: 970, height: 632 });
-    await expect(tabbedMenuItemSelector).toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).toHaveClass(/svc-toolbox__tool--hidden/);
     await page.locator(".svc-toolbox__tool--dots").filter({ visible: true }).first().click();
 
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
@@ -347,7 +347,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
 
     await doDrag({ page, element: toolboxToolAction, target: Panel, options: { steps: 25 } });
     await expect(Panel.locator(".svc-question__content--collapsed-drag-over-inside")).toBeVisible({ timeout: 15000 });
@@ -384,7 +384,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
 
     await Panel.click({ position: { x: 1, y: 1 } });
     await doDrag({ page, element: toolboxToolAction, target: Panel,
@@ -418,7 +418,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     await toolboxToolAction.hover();
     await page.mouse.down();
     await Panel.scrollIntoViewIfNeeded();
@@ -451,7 +451,7 @@ test.describe(title, () => {
     await pCollapseButton.click();
 
     const Page = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     const expectedJson = {
       pages: [{
         name: "page1",
@@ -1373,7 +1373,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     const rows = page.locator(".svc-row").filter({ visible: true });
 
     const adorner0 = rows.nth(0).locator(".svc-question__adorner").first();
@@ -1434,7 +1434,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     await expect(page.locator(".svc-question__adorner").first()).toBeVisible({ timeout: 15000 });
 
     const adorner = page.locator(".svc-question__adorner").first().filter({ visible: true }).first();

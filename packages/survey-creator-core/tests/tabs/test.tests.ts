@@ -489,9 +489,9 @@ test("invisibleToggleAction state change", (): any => {
   };
   creator.switchTab("test");
   const action = creator.getActionBarItem("showInvisible") as Action;
-  expect(action.active).toBeFalsy();
+  expect(action.pressed).toBeFalsy();
   action.action();
-  expect(action.active).toBeTruthy();
+  expect(action.pressed).toBeTruthy();
 });
 
 test("Test correct survey results node levels", (): any => {
@@ -813,8 +813,8 @@ test("Creator footer action bar: only preview tab", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[0].pressed).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].pressed).toBeTruthy();
 
   creator.activeTab = "logic";
   creator.footerToolbar.flushUpdates();

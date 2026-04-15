@@ -3,7 +3,8 @@
 @use "../../typography-mixins.scss" as *;
 
 .spg-table-wrapper {
-  border: var(--ctr-data-table-border-width, var(--sjs-stroke-x1)) solid var(--ctr-data-table-border-color, var(--sjs-border-25, #d4d4d4ff));
+  border: var(--ctr-data-table-border-width, var(--sjs-stroke-x1)) solid
+    var(--ctr-data-table-border-color, var(--sjs-border-25, #d4d4d4ff));
   border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
   overflow: hidden;
 }
@@ -13,8 +14,8 @@
   border-collapse: collapse;
 
   tr {
-    border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
-    background: var(--sjs2-color-bg-basic-primary, #FFF);
+    border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+    background: var(--sjs2-color-bg-basic-primary, #fff);
   }
   tbody > tr:last-of-type {
     border-bottom: 0px;
@@ -23,7 +24,6 @@
 
 .spg-table__cell {
   padding: 0;
-
 }
 
 .spg-table__cell--detail-panel {
@@ -49,16 +49,16 @@
     background: none;
 
     padding: var(--ctr-data-table-cell-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
+      var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
+      var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
+      var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
 
     border-radius: var(--ctr-data-table-cell-corner-radius-focused, var(--sjs-corner-radius-x075));
     background-color: var(--ctr-data-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 
     &:focus-within {
       box-shadow: inset 0 0 0 2px
-      var(--ctr-data-table-cell-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+        var(--ctr-data-table-cell-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
     }
 
     .sd-formbox__input {
@@ -91,16 +91,14 @@
   .spg-dropdown__value {
     margin: 0;
   }
-
-  .sd-formbox-button {
-    padding: 0;
-  }
-
-  .sd-formbox-button__icon {
-    opacity: var(--ctr-data-table-cell-drop-down-arrow-opacity, 0.5);
-
-    use {
-      fill: var(--ctr-data-table-cell-drop-down-arrow-color, var(--sjs-layer-1-foreground-50, #00000080));
+  .sd-formbox__group {
+    .sd-action {
+      --sd-action-padding: 0;
+      --sd-action-icon-color: color-mix(
+        in srgb,
+        var(--ctr-data-table-cell-drop-down-arrow-color, var(--sjs-layer-1-foreground-50, #00000080)),
+        transparent calc(var(--ctr-data-table-cell-drop-down-arrow-opacity, 0.5) * 100%)
+      );
     }
   }
 }
@@ -151,7 +149,8 @@
 }
 .spg-table__question-wrapper {
   box-sizing: border-box;
-  padding: var(--ctr-data-table-row-padding-top, var(--sjs-spacing-x05)) var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05))
+  padding: var(--ctr-data-table-row-padding-top, var(--sjs-spacing-x05))
+    var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05))
     var(--ctr-data-table-row-padding-bottom, var(--sjs-spacing-x05)) var(--ctr-data-table-row-padding-left, 0px);
 }
 
@@ -168,7 +167,8 @@
       animation-direction: var(--animation-direction);
       animation-timing-function: var(--animation-timing-function);
       animation-fill-mode: forwards;
-      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-duration:
+        var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
       animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
     }
   }

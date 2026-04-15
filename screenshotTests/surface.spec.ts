@@ -745,7 +745,7 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, json);
-    await page.locator("button.sv-action-bar-item[title=\"Survey\"]").click({ position: { x: 5, y: 5 } });
+    await page.locator("button.sd-action[title=\"Survey\"]").click({ position: { x: 5, y: 5 } });
     await getListItemByText(page, "question5").filter({ visible: true }).click({ position: { x: 5, y: 5 } });
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
@@ -1479,6 +1479,7 @@ test.describe(title, () => {
           title: "Required",
           enabled: false,
           iconName: "icon-required",
+          iconSize: "auto",
           action: () => { }
         });
       });
@@ -1489,7 +1490,7 @@ test.describe(title, () => {
       "elements": [{ type: "boolean", name: "q1", title: "Question Title" }]
     });
     const button = page.locator(".svc-required-action");
-    const buttonDisabled = page.locator(".svc-survey-element-toolbar__item:disabled");
+    const buttonDisabled = page.locator(".svc-survey-element-toolbar .sd-action:disabled");
     await page.locator(".svc-question__content").click();
     await compareScreenshot(page, button, "question-button.png");
     await button.hover();
@@ -1505,6 +1506,7 @@ test.describe(title, () => {
     await compareScreenshot(page, buttonDisabled, "question-button-disabled.png");
     await buttonDisabled.hover();
     await compareScreenshot(page, buttonDisabled, "question-button-disabled-hover.png");
+    await page.keyboard.press("Shift+Tab");
     await page.evaluate(() => {
       const question = window["creator"].survey.getQuestionByName("q1");
       const adorner = window["SurveyCreatorCore"].QuestionAdornerViewModel.GetAdorner(question);
@@ -1545,7 +1547,7 @@ test.describe(title, () => {
         "headerView": "advanced"
       };
     });
-    await compareScreenshot(page, ".sv-action-bar.svc-page__footer", "dots-type-selector-custom-button.png");
+    await compareScreenshot(page, ".sd-action-bar.svc-page__footer", "dots-type-selector-custom-button.png");
   });
   test("Multiple questions in one row, row content has scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 900 });

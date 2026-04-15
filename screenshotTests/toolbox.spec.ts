@@ -161,7 +161,7 @@ test.describe(title, () => {
 
   test("toolbox inside sidebar", async ({ page }) => {
     const toolboxItem = page.locator(".svc-toolbox__item");
-    const toolboxButtonSelector = page.locator('.sv-action-bar-item[title="Toolbox"]');
+    const toolboxButtonSelector = page.getByRole("button", { name: "Toolbox" });
 
     await changeToolboxLocation(page, "sidebar");
     await page.setViewportSize({ width: 1240, height: 870 });
@@ -179,7 +179,7 @@ test.describe(title, () => {
     await changeToolboxSearchEnabled(page, false);
     await page.setViewportSize({ width: 2560, height: 1440 });
     const toolboxTool = page.locator(".svc-toolbox__tool");
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
 
     await toolboxToolAction.dispatchEvent("pointerdown");
     await compareScreenshot(page, toolboxTool, "toolbox-tool-pressed-state.png");

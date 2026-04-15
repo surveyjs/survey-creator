@@ -29,11 +29,11 @@ test.describe("Top Menu Screenshot", () => {
     await page.hover(".sv-action--action-redo");
     await compareScreenshot(page, topBarElement, "top-menu-redo-inactive-hovered.png");
 
-    await page.click(".sv-action--action-undo .sv-action-bar-item");
+    await page.click(".sv-action--action-undo .sd-action");
     await page.click(".svc-side-bar .spg-row >> nth=1");
     await compareScreenshot(page, topBarElement, "top-menu-undo-and-redo-active.png");
 
-    await page.click(".sv-action--action-undo .sv-action-bar-item");
+    await page.click(".sv-action--action-undo .sd-action");
     await page.click(".svc-side-bar .spg-row >> nth=1");
     await compareScreenshot(page, topBarElement, "top-menu-redo-active.png");
 

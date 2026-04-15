@@ -139,10 +139,11 @@ export class SearchManagerPropertyGrid extends SearchManager {
     return searchActions;
   }
 
-  constructor() {
-    super();
-    this.initActionBar();
+  initActionBar() {
+    super.initActionBar();
+    this.searchActionBar.setActionsAppearance({ style: "neutral", mode: "tertiary-muted", size: "xx-small" });
   }
+
   public setSurvey(newSurvey: SurveyModel) {
     this.clearFilterString();
     this.survey = newSurvey;
