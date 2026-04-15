@@ -78,9 +78,11 @@ test.describe(title, () => {
     await compareScreenshot(page, ".spg-container_search", "side-bar-search-general-group.png");
 
     await page.locator(".svc-search__bar-item").first().click(); // prev
+    await page.waitForTimeout(500);
     await compareScreenshot(page, ".spg-container_search", "side-bar-search-question-group.png");
 
     await page.locator(".svc-search__bar-item").nth(1).click(); // next
+    await page.waitForTimeout(500);
     await compareScreenshot(page, ".spg-container_search", "side-bar-search-general-group-after-next.png");
 
     await page.locator(".svc-search__bar-item").nth(2).click(); // clear
