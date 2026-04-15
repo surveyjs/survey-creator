@@ -269,6 +269,7 @@ export class PresetsManager {
         id: "visible",
         iconName: getRowIconName(options.row),
         location: "end",
+        appearance: { mode: "quaternary" as any },
         css: options.row.getValue("visible") ? "" : "sps-action--invisible",
         action: () => {
           options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
