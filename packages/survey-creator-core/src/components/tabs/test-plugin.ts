@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization, IActionAppearance } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -265,6 +265,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconSize: "auto",
       title: getLocString("ts.prevPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -278,6 +281,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconSize: "auto",
       title: getLocString("ts.nextPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       visible: false
     });
     return items;

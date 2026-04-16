@@ -72,11 +72,8 @@ export class PreviewViewModel extends Base {
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
-    this.pages.cssClasses = {
-      root: "sd-action-bar svc-pages-toolbar",
-      item: "sd-action svc-preview-pager__item",
-      itemPopupActive: "sd-action--popup-active svc-preview-pager__item--popup-active",
-    };
+    this.pages.setActionsAppearance({ style: "neutral", mode: "tertiary", size: "x-small" });
+    this.pages.containerCss = "svc-pages-toolbar";
   }
 
   public get isMobileView() {
@@ -309,8 +306,6 @@ export class PreviewViewModel extends Base {
       pageActions.push(this.nextPageAction);
     }
     this.pages.actions = pageActions;
-    this.pages.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
-    this.pages.containerCss = "sv-action-bar--pages";
     this.updatePrevNextPageActionState();
   }
   private setActivePageItem(page: PageModel, val: boolean) {

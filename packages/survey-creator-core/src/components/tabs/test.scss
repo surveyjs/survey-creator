@@ -10,7 +10,7 @@
   display: flex;
   flex-grow: 1;
   flex-shrink: 0;
-  
+
   .svc-preview__test-again {
     width: calcSize(33);
     box-sizing: border-box;
@@ -28,7 +28,7 @@
   flex-grow: 0;
   flex-shrink: 0;
 
-  .sv-action-bar--pages {
+  .svc-pages-toolbar {
     padding: var(--sjs-spacing-x1) 0px;
     box-shadow: inset 0 var(--sjs-stroke-x1) 0 0 var(--sjs-border-25, #d4d4d4ff);
     background: var(--sjs-layer-1-background-500, #ffffffff);
@@ -57,49 +57,10 @@
 }
 .svc-test-tab__content .sd-body--empty {
   @include ctrDefaultFont;
-  color: var(--sjs-layer-1-foreground-100, #000000E6);
+  color: var(--sjs-layer-1-foreground-100, #000000e6);
   text-align: center;
   overflow: hidden;
   position: static;
   display: flex;
   flex-direction: column;
 }
-
-.svc-preview-pager__item {
-  max-width: 100%;
-  box-sizing: border-box;
-
-  .sd-action__title {
-    @include textEllipsis;
-  }
-
-  &:disabled {
-    fill: var(--sd-action-disabled-icon-color);
-  }
-
-  &.svc-preview-pager__item--pressed {
-    opacity: 0.5;
-  }
-}
-
-// mobile toolbar
-.svc-footer-bar .svc-preview-pager__item {
-  --sd-action-padding: var(--sjs-spacing-x1, 8px);
-
-  .sd-action__icon {
-    --sd-action-icon-size: var(--sjs2-line-height-x300, 24px);
-    --sd-action-icon-padding: 0;
-  }
-}
-
-// TODO: remove this vvvvvv
-.svc-pages-toolbar {
-  .svc-preview-pager__item {
-    --sd-action-icon-color: var(--sjs2-color-component-action-brand-tertiary-muted-hovered-icon, #19b394);
-    --sd-action-hover-title-color: var(--sjs2-color-component-action-brand-tertiary-muted-default-label, #1c1b20);
-    --sd-action-padding:  var(--sjs2-spacing-x100, 8px);
-    --sd-action-title-padding: 0;
-    --sd-action-icon-padding: 0;
-  }
-}
-// ^^^^^^^^^^^^^^^^^^^^^^^^

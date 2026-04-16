@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent, IActionAppearance } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -542,6 +542,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-arrow-left_16x16",
       title: getLocString("ts.prevPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
@@ -554,6 +557,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       css: "sv-action--nextPage",
       iconName: "icon-arrow-right_16x16",
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       title: getLocString("ts.nextPage"),
       iconSize: "auto",
       visible: false
