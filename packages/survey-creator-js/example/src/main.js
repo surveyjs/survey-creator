@@ -6,7 +6,6 @@ import "survey-creator-core/ui-preset-editor/index.css"
 // Import survey modules
 import "survey-core/survey.i18n"
 import "survey-creator-core/survey-creator-core.i18n"
-import "survey-creator-js/ui-preset-editor"
 
 // Import SurveyCreator and related modules
 import { SurveyCreator } from "survey-creator-js"
