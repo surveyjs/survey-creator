@@ -477,7 +477,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           });
         }
       },
-      appearance: { style: "brand" },
       active: this.createSelectedUpdater(),
       visible: this.createVisibleUpdater(() => {
         return this.creator.removeSidebar !== true;
