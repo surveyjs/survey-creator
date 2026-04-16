@@ -238,6 +238,7 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
     await page.waitForTimeout(500);
+    await resetFocusToBody(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay"), "pg-logic-popup-mobile.png");
   });
 
