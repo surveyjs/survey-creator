@@ -12,7 +12,6 @@ export default defineConfig({
   },
   snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}{ext}",
   reporter: [["line"], ["junit", { outputFile: `test-results/e2e-junit-${shardIndex}.xml` }], ["html", { open: "never", printSteps: false }]],
-  outputDir: resolve(__dirname, "/tmp/test-results"),
   use: {
     launchOptions: {
       ignoreDefaultArgs: ["--hide-scrollbars"],
