@@ -507,7 +507,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
       active: true,
-      appearance: { style: "brand" },
       locTitleName: "ed.designer",
       showTitle: false,
       action: () => { }
@@ -524,7 +523,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
-      appearance: { style: "brand" }
     });
 
     items.push(this.saveSurveyAction);

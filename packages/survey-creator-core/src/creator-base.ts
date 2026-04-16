@@ -2075,7 +2075,7 @@ export class SurveyCreatorModel extends Base
   }
   private updateToolbar(toolbar: ActionContainer) {
     toolbar.containerCss = "svc-toolbar";
-    toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "tertiary-muted" });
+    toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "tertiary" });
   }
   private updateFooterToolbar(): void {
     if (!this.footerToolbar) {

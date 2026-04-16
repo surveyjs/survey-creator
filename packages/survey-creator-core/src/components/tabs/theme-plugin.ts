@@ -532,7 +532,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
-      appearance: { style: "brand" },
       showTitle: false
     });
 
@@ -574,7 +573,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
-      appearance: { style: "brand" },
       action: () => { }
     });
 
@@ -720,7 +718,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         mode: "small",
         locTitleName: "ts.showInvisibleElements",
         visible: false,
-        appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
           this.invisibleToggleAction.active = !this.invisibleToggleAction.active;

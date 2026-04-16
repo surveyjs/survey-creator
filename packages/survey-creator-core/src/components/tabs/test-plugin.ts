@@ -200,7 +200,6 @@ export class TabTestPlugin implements ICreatorPlugin {
         }),
         locTitleName: "ts.showInvisibleElements",
         visible: false,
-        appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
           this.invisibleToggleAction.active = this.model.showInvisibleElements;
@@ -241,7 +240,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
-      appearance: { style: "brand" },
       showTitle: false
     });
 
@@ -251,7 +249,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconName: "icon-preview",
       iconSize: "auto",
       active: true,
-      appearance: { style: "brand" },
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
