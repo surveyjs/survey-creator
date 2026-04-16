@@ -75,7 +75,7 @@ export class PreviewViewModel extends Base {
     this.pages.cssClasses = {
       root: "sd-action-bar svc-pages-toolbar",
       item: "sd-action svc-preview-pager__item",
-      itemPressed: "sd-action--pressed svc-preview-pager__item--pressed",
+      itemPopupActive: "sd-action--popup-active svc-preview-pager__item--popup-active",
     };
   }
 

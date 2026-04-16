@@ -240,7 +240,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       locTooltipName: "ed.creatorSettingTitle",
       iconName: "gear-24x24",
       iconSize: "auto",
-      pressed: false,
       visible: new ComputedUpdater(() => { return this.creator.showCreatorThemeSettings; }),
       action: () => {
         if (settingsAction.active) {
@@ -390,7 +389,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         iconName: p["iconName"],
         iconSize: "auto",
         active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
-        pressed: false,
         visible: p.isVisible,
         action: () => {
           this.creator.sidebar.expandSidebar();
@@ -480,7 +478,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         }
       },
       appearance: { style: "brand" },
-      pressed: this.createSelectedUpdater(),
+      active: this.createSelectedUpdater(),
       visible: this.createVisibleUpdater(() => {
         return this.creator.removeSidebar !== true;
       }),
@@ -510,7 +508,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconName: "icon-config",
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
-      pressed: true,
+      active: true,
       appearance: { style: "brand" },
       locTitleName: "ed.designer",
       showTitle: false,
@@ -535,10 +533,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
     this.creator.onElementSelected.add((sender, options) => {
-      this.surveySettingsAction.pressed = this.isSettingsActive;
+      this.surveySettingsAction.active = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
-      this.surveySettingsAction.pressed = this.isSettingsActive;
+      this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
   }

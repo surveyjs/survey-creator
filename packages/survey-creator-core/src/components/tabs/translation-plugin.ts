@@ -158,7 +158,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         tooltip: languagesString,
         iconName: "pg-general-24x24",
         active: true,
-        pressed: false,
         action: () => {
           this.creator.sidebar.expandSidebar();
           this.creator.sidebar.header.title = languagesString;

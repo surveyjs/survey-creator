@@ -174,9 +174,9 @@ export class PropertyGridViewModel extends Base {
     this.selectorPopupModel.getTargetCallback = getActionDropdownButtonTarget;
     this.selectorPopupModel.registerPropertyChangedHandlers(["isVisible"], () => {
       if (!this.selectorPopupModel.isVisible) {
-        this.objectSelectionAction.pressed = false;
+        this.objectSelectionAction.popupActive = false;
       } else {
-        this.objectSelectionAction.pressed = true;
+        this.objectSelectionAction.popupActive = true;
       }
     });
     this.objectSelectionAction = new MenuButton({
@@ -185,7 +185,6 @@ export class PropertyGridViewModel extends Base {
       css: "sv-action--object-selector",
       component: "sv-action-bar-item-dropdown",
       disableHide: true,
-      pressed: false,
       action: () => {
         selectorModel.show(
           this.selectionController.creator.survey,

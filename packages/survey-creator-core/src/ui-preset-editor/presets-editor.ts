@@ -22,7 +22,7 @@ export class NavigationBar extends ActionContainer {
       itemWithTitle: "",
       itemAsIcon: "",
       itemActive: "sps-navigation-bar-item--active",
-      itemPressed: "sps-navigation-bar-item--pressed",
+      itemPopupActive: "sps-navigation-bar-item--popup-active",
       itemIcon: "sps-navigation-bar-item__icon",
       itemTitle: "sps-navigation-bar-item__title",
       itemTitleWithIcon: "",

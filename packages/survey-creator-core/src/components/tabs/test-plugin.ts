@@ -76,7 +76,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
+      this.invisibleToggleAction.active = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
     if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
@@ -203,7 +203,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
+          this.invisibleToggleAction.active = this.model.showInvisibleElements;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
@@ -250,7 +250,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
-      pressed: true,
+      active: true,
       appearance: { style: "brand" },
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",

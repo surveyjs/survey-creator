@@ -19,7 +19,6 @@ export class TabControlModel extends Base {
       showTitle: false,
       visible: true,
       enabled: true,
-      pressed: false,
       action: () => {
         if (!this.expandCollapseAction.enabled) return;
         if (this.sidePanel.visible) {
@@ -41,7 +40,6 @@ export class TabControlModel extends Base {
       itemWithTitle: "",
       itemAsIcon: "",
       itemActive: "svc-menu-action__button--selected",
-      itemPressed: "",
       itemIcon: "svc-menu-action__icon",
       itemTitleWithIcon: "",
     };

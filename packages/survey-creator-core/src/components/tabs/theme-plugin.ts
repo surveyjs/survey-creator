@@ -380,7 +380,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           iconName: p["iconName"],
           iconSize: "auto",
           active: p.name === this.propertyGrid.survey.currentPage.name,
-          pressed: false,
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
@@ -419,7 +418,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updateSimulatorTheme(this.creator.theme);
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
+      this.invisibleToggleAction.active = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
 
@@ -566,7 +565,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
-      pressed: true,
+      active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
@@ -670,7 +669,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return this.creator.activeTab === "theme" && (isMobileView || !isShowOneCategoryInPropertyGrid);
       }),
       active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
-      pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       locTitleName: "ed.themeSettings",
       locTooltipName: "ed.themeSettingsTooltip",
       showTitle: false
@@ -720,7 +718,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.pressed = !this.invisibleToggleAction.active;
+          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });

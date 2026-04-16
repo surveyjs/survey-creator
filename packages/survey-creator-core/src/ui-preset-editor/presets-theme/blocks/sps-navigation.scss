@@ -34,7 +34,7 @@
 
   //pressed state
   &:active,
-  &.sps-navigation-bar-item--pressed {
+  &.sps-navigation-bar-item--popup-active {
     background: var(--sjs2-color-bg-basic-primary, #fff);
   }
 
@@ -79,7 +79,7 @@
   .sps-navigation-bar-item {
     padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x075, 6px);
     align-items: center;
-    gap: var(--sjs2-spacing-x075, 6px); 
+    gap: var(--sjs2-spacing-x075, 6px);
     background: initial;
     border: none;
     opacity: initial;
@@ -94,13 +94,13 @@
       aspect-ratio: 1/1;
 
       border-radius: var(--sjs2-radius-round, 9999px);
-      background: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+      background: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
     }
   }
   .sps-navigation-bar-item__title {
-    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
+    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
     padding: 0;
-   }
+  }
 }
 
 .sps-navigation-action--large-icon {

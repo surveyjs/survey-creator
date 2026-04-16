@@ -317,7 +317,7 @@ export var propertyGridCss = {
   actionBar: {
     root: "spg-action-bar",
     item: "spg-action-button",
-    itemPressed: "spg-action-button--pressed",
+    itemPopupActive: "spg-action-button--popup-active",
     itemAsIcon: "spg-action-button--icon",
     itemIcon: "spg-action-button__icon",
     itemTitle: "spg-action-button__title",

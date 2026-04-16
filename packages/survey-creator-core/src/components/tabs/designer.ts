@@ -143,7 +143,7 @@ export class TabDesignerViewModel extends Base {
       itemWithTitle: "",
       itemAsIcon: "",
       itemActive: "svc-page-navigator__button--active",
-      itemPressed: "",
+      itemPopupActive: "",
       itemIcon: "svc-page-navigator__button-icon",
       itemTitleWithIcon: "",
     };
