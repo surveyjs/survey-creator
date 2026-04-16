@@ -505,6 +505,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
+        appearance: { style: "alert" },
         iconSize: "auto",
         action: () => {
           this.delete();
