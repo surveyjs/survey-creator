@@ -40,6 +40,7 @@ export * from "../side-bar/SideBarDefaultHeader";
 export * from "../side-bar/SideBarPropertyGridHeader";
 export * from "../side-bar/SideBarHeader";
 export * from "../side-bar/SideBar";
+export * from "../side-bar/SideBarLaunchCard";
 export * from "../tabs/translation/TranslationLineSkeleton";
 export * from "../tabs/translation/TranslateFromAction";
 export * from "../ActionButton";
@@ -62,6 +63,7 @@ export * from "../side-bar/ObjectSelector";
 export * from "../side-bar/PropertyGrid";
 export * from "../components/Search";
 export * from "../components/ComponentContainer";
+export * from "../components/IconItem";
 export * from "../Switcher";
 
 export * from "../tabs/JsonErrorItem";

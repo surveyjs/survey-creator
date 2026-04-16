@@ -129,8 +129,16 @@ export class UIPresetEditor implements ICreatorPlugin {
     creator.addTab({ name: "presets", componentName: "svc-tab-designer", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
-    settingsPage.componentData.elements[0].componentName = "svc-presets-property-grid";
-    settingsPage.componentData.elements[0].componentData.model.showPresets = () => this.showPresets();
+    settingsPage.componentData.elements.unshift({
+      componentName: "svc-side-bar-launch-card",
+      componentData: {
+        model: {
+          onClick: () => this.showPresets(),
+          title: getLocString("presets.plugin.buttonTitle"),
+          description: getLocString("presets.plugin.buttonDescription")
+        }
+      }
+    });
     this.toolboxCompact = creator.toolbox.forceCompact;
     this.presetsManager = new PresetsManager(creator);
     this.presetsManager.onPresetListSaved = (presets) => {

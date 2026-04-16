@@ -116,6 +116,7 @@ export * from "../dragdrop-survey-elements";
 
 import "../components/search.scss";
 import "../components/component-container/component-container.scss";
+import "../components/icon-item.scss";
 import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";
