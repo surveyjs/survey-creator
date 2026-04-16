@@ -3,7 +3,6 @@
 </template>
 <script lang="ts" setup>
 import Common from './Common.vue';
-import "survey-creator-vue/ui-preset-editor";
 import "survey-creator-core/ui-preset-editor/index.css";
 import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
 import SurveyCreatorUIPreset from "survey-creator-core/ui-presets";

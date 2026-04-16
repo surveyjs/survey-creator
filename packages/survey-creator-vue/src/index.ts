@@ -59,6 +59,9 @@ import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
 import ToolboxList from "./toolbox/ToolboxList.vue";
 
 import Designer from "./tabs/designer/Designer.vue";
+import DesignSurface from "./tabs/designer/DesignSurface.vue";
+import SideBarLaunchCard from "./side-bar/SideBarLaunchCard.vue";
+import IconItem from "./components/IconItem.vue";
 import Page from "./tabs/designer/Page.vue";
 import AddQuestion from "./tabs/designer/AddQuestion.vue";
 import AddQuestionTypeSelector from "./tabs/designer/AddQuestionTypeSelector.vue";
@@ -162,6 +165,9 @@ function registerComponents(
   registerComponent(editableStringRendererName, StringEditor);
 
   registerComponent("svc-tab-designer", Designer);
+  registerComponent("svc-designer-surface", DesignSurface);
+  registerComponent("svc-side-bar-launch-card", SideBarLaunchCard);
+  registerComponent("svc-presets-icon-item", IconItem);
   registerComponent("svc-page-navigator", PageNavigator);
   registerComponent("svc-page-navigator-item", PageNavigatorItem);
   registerComponent("svc-page", Page);

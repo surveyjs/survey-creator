@@ -3,12 +3,12 @@ import { ItemValue } from "survey-core";
 import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
 
 @Component({
-  selector: "svc-presets-icon-item",
-  templateUrl: "./presets-icon-item.component.html",
+  selector: "svc-icon-item",
+  templateUrl: "./icon-item.component.html",
   styles: [":host { display: none; }"]
 })
-export class PresetsIconItemComponent extends EmbeddedViewContentComponent {
+export class IconItemComponent extends EmbeddedViewContentComponent {
   @Input() model!: ItemValue;
 }
 
-AngularComponentFactory.Instance.registerComponent("svc-presets-icon-item", PresetsIconItemComponent);
+AngularComponentFactory.Instance.registerComponent("svc-presets-icon-item", IconItemComponent);

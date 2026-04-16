@@ -1,12 +1,12 @@
 <template>
-  <div v-if="item" class="sps-icon-item" style="display: flex">
+  <div v-if="item" class="svc-icon-item">
     <SvComponent
       :is="'sv-svg-icon'"
-      class="sps-icon-item__icon"
+      class="svc-icon-item__icon"
       size="auto"
       :iconName="item.value"
     />
-    <span class="sps-icon-item__text">{{ item.title }}</span>
+    <span class="svc-icon-item__text">{{ item.title }}</span>
   </div>
 </template>
 
