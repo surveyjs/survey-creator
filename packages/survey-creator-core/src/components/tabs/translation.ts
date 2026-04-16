@@ -19,7 +19,7 @@ import "./translation.scss";
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsAppearance, findAction } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { listComponentCss } from "../list-theme";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
@@ -790,7 +790,7 @@ export class Translation extends Base implements ITranslationLocales {
           }));
         }
       }
-      updateMatixActionsClasses(options.actions);
+      updateMatixActionsAppearance(options.actions);
     });
     return res;
   }

@@ -136,31 +136,5 @@
 
   .spg-help-action {
     margin-inline-end: auto;
-
-    .spg-action-button--icon {
-      padding: var(--ctr-actionbar-button-padding-top-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-right-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-bottom-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-left-small-icon, var(--sjs-spacing-x05));
-      opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
-    }
-
-    .spg-action-button--icon:focus,
-    .spg-action-button--icon:hover {
-      opacity: 1;
-    }
-
-    .spg-action-button:active {
-      opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
-    }
-
-    .spg-action-button__icon {
-      width: var(--ctr-actionbar-button-icon-width-small, var(--sjs-font-size-x2));
-      height: var(--ctr-actionbar-button-icon-height-small, var(--sjs-font-size-x2));
-    }
-
-    svg {
-      fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-    }
   }
 }

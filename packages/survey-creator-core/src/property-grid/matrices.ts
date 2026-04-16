@@ -1,8 +1,10 @@
-import { Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
+import {
+  Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
   JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase,
   MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase,
   QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel,
-  renamedIcons, Serializer, SurveyElement } from "survey-core";
+  renamedIcons, Serializer, SurveyElement
+} from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
@@ -14,7 +16,7 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
 } from "./index";
-import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
+import { updateMatixActionsAppearance, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyHelper } from "../survey-helper";
@@ -130,7 +132,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         showDetailAction.ariaExpanded = row.isDetailPanelShowing;
       };
     }
-    updateMatixActionsClasses(actions);
+    updateMatixActionsAppearance(actions);
   }
   private showHideDetailPanel(row: MatrixDynamicRowModel, options: ISurveyCreatorOptions) {
     const hasDetail = !!row.detailPanel;

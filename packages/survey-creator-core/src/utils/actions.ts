@@ -51,7 +51,7 @@ export function updateMatrixRemoveAction(
   action.component = "sv-action-bar-item";
   action.iconName = "icon-delete";
   action.iconSize = "auto";
-  action.innerCss = "spg-action-button spg-action-button--danger";
+  action.innerCss = "";
   action.title = question.removeRowText;
   action.showTitle = false;
   action.visibleIndex = 10;
@@ -59,8 +59,16 @@ export function updateMatrixRemoveAction(
     question.removeRowUI(row);
   };
 }
-export function updateMatixActionsClasses(actions: Array<IAction>) {
-  actions.forEach(action => {
-    action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
+export function updateMatixActionsAppearance(actions: Array<IAction>) {
+  (actions as Array<Action>).forEach((action) => {
+    action.setPredefinedAppearance({ style: "neutral", mode: "quaternary", size: "small" });
   });
+  const detailAction = findAction(actions, "show-detail") as Action;
+  if (detailAction) {
+    detailAction.appearance = { style: "neutral" };
+  }
+  const removeRowAction = findAction(actions, "remove-row") as Action;
+  if (removeRowAction) {
+    removeRowAction.appearance = { style: "alert" };
+  }
 }

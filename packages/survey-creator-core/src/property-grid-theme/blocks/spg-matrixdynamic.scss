@@ -84,15 +84,7 @@
 }
 
 .spg-matrixdynamic__add-btn {
-  @include sjs2--typography--default-strong;
   display: none;
-  appearance: none;
-  border: none;
-  background: transparent;
-  color: var(--sjs2-color-fg-brand-primary, #19b394);
-  &:hover {
-    background: var(--sjs2-color-bg-neutral-secondary-dim, rgba(95, 94, 97, 0.1));
-  }
 }
 
 .spg-smiley-icon {
