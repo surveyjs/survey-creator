@@ -331,4 +331,21 @@ export class PageNavigatorViewModel extends Base {
       this.setScrollableContainer(scrollableContainer);
     }
   }
+  private selectorActionValue: Action;
+  public get selectorAction(): Action {
+    if (!this.selectorActionValue) {
+      this.selectorActionValue = new Action({
+        id: "select-page",
+        title: this.pageSelectorCaption,
+        appearance: { style: "brand", mode: "tertiary-muted", size: "small" },
+        innerCss: "svc-page-navigator__selector",
+        iconName: this.icon,
+        iconSize: "auto",
+        showTitle: false,
+        popupModel: this.popupModel,
+        action: () => this.togglePageSelector()
+      });
+    }
+    return this.selectorActionValue;
+  }
 }

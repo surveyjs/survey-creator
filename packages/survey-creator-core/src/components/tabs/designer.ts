@@ -137,16 +137,8 @@ export class TabDesignerViewModel extends Base {
 
     let defaultActionBarCss = {
       root: "sd-action-bar svc-tab-designer__surface-toolbar",
-      defaultSizeMode: "",
-      smallSizeMode: "",
-      item: "svc-page-navigator__button",
-      itemWithTitle: "",
-      itemAsIcon: "",
-      itemActive: "svc-page-navigator__button--active",
-      itemPopupActive: "",
-      itemIcon: "svc-page-navigator__button-icon",
-      itemTitleWithIcon: "",
     };
+    this.surfaceToolbar.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "small" });
     this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
     const surfaceToolbarItems: Array<IAction> = [];
