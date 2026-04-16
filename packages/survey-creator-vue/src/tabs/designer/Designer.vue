@@ -14,7 +14,7 @@
     <SvComponent :is="'sv-scroll'">
       <SvComponent
         :is="model.surfaceComponentName"
-        :model="model.surfaceData || model"
+        :model="model.surfaceData"
       />
     </SvComponent>
   </div>
