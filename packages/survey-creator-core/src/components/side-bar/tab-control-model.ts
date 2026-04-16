@@ -1,11 +1,10 @@
-import { ActionContainer, Base, CssClassBuilder } from "survey-core";
+import { Action, ActionContainer, Base, CssClassBuilder } from "survey-core";
 import { SidebarModel } from "./side-bar-model";
-import { MenuButton } from "../../utils/actions";
 
 export class TabControlModel extends Base {
-  public bottomToolbar: ActionContainer<MenuButton> = new ActionContainer<MenuButton>();
-  public expandCollapseAction: MenuButton;
-  public onTopToolbarItemCreated: (bar: ActionContainer<MenuButton>) => void;
+  public bottomToolbar: ActionContainer = new ActionContainer();
+  public expandCollapseAction: Action;
+  public onTopToolbarItemCreated: (bar: ActionContainer) => void;
 
   private updateExpandCollapseAction() {
     this.expandCollapseAction.iconName = this.sidePanel.visible ? "icon-collapse-panel" : "icon-expand-panel";
@@ -14,7 +13,7 @@ export class TabControlModel extends Base {
   }
 
   private createToggleAction() {
-    this.expandCollapseAction = new MenuButton({
+    this.expandCollapseAction = new Action({
       id: "svd-grid-hide",
       showTitle: false,
       visible: true,
@@ -32,31 +31,19 @@ export class TabControlModel extends Base {
 
   constructor(public sidePanel: SidebarModel) {
     super();
-    let bottomActionBarCss = {
-      root: "sv-action-bar",
-      defaultSizeMode: "",
-      smallSizeMode: "",
-      item: "svc-menu-action__button",
-      itemWithTitle: "",
-      itemAsIcon: "",
-      itemActive: "svc-menu-action__button--selected",
-      itemIcon: "svc-menu-action__icon",
-      itemTitleWithIcon: "",
-    };
-    this.bottomToolbar.cssClasses = bottomActionBarCss;
     this.createToggleAction();
     this.updateExpandCollapseAction();
     this.sidePanel.registerFunctionOnPropertyValueChanged("_visible", () => {
       this.updateExpandCollapseAction();
     });
   }
-  private topToolbarValue: ActionContainer<MenuButton>;
+  private topToolbarValue: ActionContainer;
   public get isTopToolbarCreated(): boolean {
     return !!this.topToolbarValue;
   }
-  public get topToolbar(): ActionContainer<MenuButton> {
+  public get topToolbar(): ActionContainer {
     if (!this.topToolbarValue) {
-      this.topToolbarValue = new ActionContainer<MenuButton>();
+      this.topToolbarValue = new ActionContainer();
       if (!!this.onTopToolbarItemCreated) {
         this.onTopToolbarItemCreated(this.topToolbarValue);
       }

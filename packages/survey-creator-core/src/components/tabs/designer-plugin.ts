@@ -8,7 +8,6 @@ import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { TabDesignerViewModel } from "./designer";
 import { DesignerStateManager } from "./designer-state-manager";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { MenuButton } from "../../utils/actions";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { creatorPresetsModelPropertyGridDefinition } from "../../ui-presets-creator/creator-presets-model-definition";
@@ -235,7 +234,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.onCreatorThemePropertyChanged.fire(this.creator, options);
     });
 
-    const settingsAction = new MenuButton({
+    const settingsAction = new Action({
       id: "theme-settings",
       locTooltipName: "ed.creatorSettingTitle",
       iconName: "gear-24x24",
@@ -364,7 +363,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.propertyGridViewModel.objectSelectionAction.title = this.propertyGrid.survey.currentPage?.title;
     }
   }
-  private setupPropertyGridTabActions(topToolbar: ActionContainer<MenuButton>) {
+  private setupPropertyGridTabActions(topToolbar: ActionContainer) {
     const pgTabs = this.getPropertyGridTabActions();
     topToolbar.setItems(pgTabs);
     this.propertyGridTab.activateCallback = () => {
@@ -383,7 +382,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.pages.forEach(p => {
       if (p.elements.length === 0) return;
 
-      const action = new MenuButton({
+      const action = new Action({
         id: p.name,
         tooltip: p.title,
         iconName: p["iconName"],

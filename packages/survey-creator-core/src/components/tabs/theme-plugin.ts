@@ -15,7 +15,6 @@ import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { MenuButton } from "../../utils/actions";
 import { CreatorDomHelper } from "../../dom-helper";
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
@@ -374,7 +373,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
-        const action = new MenuButton({
+        const action = new Action({
           id: p.name,
           tooltip: p.title,
           iconName: p["iconName"],

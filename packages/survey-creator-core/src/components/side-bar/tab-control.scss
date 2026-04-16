@@ -66,35 +66,8 @@
   padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
   padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
 }
-
-.svc-sidebar-tabs:not(.svc-sidebar-tabs--collapsed) .svc-menu-action__button--selected {
-  display: flex;
-  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
-  justify-content: center;
-  align-items: center;
-  gap: var(--ctr-menu-toolbar-button-gap, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
-  background: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
-
-  use {
-    fill: var(--ctr-menu-toolbar-button-icon-color-selected, var(--sjs-primary-background-500, #19b394ff));
-  }
-}
-
 .svc-creator--mobile .svc-sidebar-tabs--collapsed {
   display: none;
-}
-
-.svc-menu-action {
-  display: flex;
-  align-items: center;
-}
-.svc-menu-action__icon-container {
-  flex: 1 0 0;
-  align-self: stretch;
 }
 .svc-sidebar-tabs__bottom-container {
   display: flex;
@@ -150,62 +123,6 @@
   display: flex;
   align-items: center;
 }
-
-.svc-menu-action__button {
-  display: flex;
-  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
-  justify-content: center;
-  align-items: center;
-  gap: var(--ctr-menu-toolbar-button-gap, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
-  cursor: pointer;
-  border: unset;
-  background: unset;
-}
-.svc-menu-action__button:hover,
-.svc-menu-action__button:focus,
-.svc-menu-action__button:focus-within {
-  background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
-  outline: unset;
-}
-.svc-menu-action__button.svc-menu-action__button--popup-active {
-  opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-  background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
-}
-.svc-menu-action__button.svc-menu-action__button--disabled {
-  pointer-events: none;
-  use {
-    opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.25);
-    fill: var(--ctr-toolbox-item-icon-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
-  }
-}
-.svc-menu-action__button.svc-menu-action__button--with-subtitle {
-  padding: var(--ctr-menu-toolbar-button-padding-top-with-description, var(--sjs-spacing-x05))
-    var(--ctr-menu-toolbar-button-padding-right-with-description, var(--sjs-spacing-x150))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-left-with-description, var(--sjs-spacing-x150));
-}
-
-.svc-menu-action__icon {
-  display: flex;
-  width: var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
-  justify-content: center;
-  align-items: center;
-
-  .sv-svg-icon {
-    width: var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
-    display: block;
-  }
-
-  use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-  }
-}
 .svc-sidebar__header-caption {
   display: flex;
   flex-direction: column;
@@ -221,4 +138,10 @@
   @include ctrSmallFont;
   color: var(--ctr-menu-toolbar-button-text-color-secondary, var(--sjs-layer-1-foreground-50, #00000080));
   display: inline-block;
+}
+.svc-sidebar__header-object-selector {
+  padding: var(--ctr-menu-toolbar-button-padding-top-with-description, var(--sjs-spacing-x05))
+    var(--ctr-menu-toolbar-button-padding-right-with-description, var(--sjs-spacing-x150))
+    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-left-with-description, var(--sjs-spacing-x150));
 }

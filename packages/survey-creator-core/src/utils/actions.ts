@@ -64,17 +64,3 @@ export function updateMatixActionsClasses(actions: Array<IAction>) {
     action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
   });
 }
-
-export class MenuButton extends Action {
-  @property({ defaultValue: "icon" }) contentType: "icon" | "text-description-vertical";
-
-  public get buttonClassName(): string {
-    return new CssClassBuilder()
-      .append("svc-menu-action__button")
-      .append("svc-menu-action__button--with-subtitle", this.contentType === "text-description-vertical")
-      .append("svc-menu-action__button--disabled", this.disabled)
-      .append("svc-menu-action__button--popup-active", !!this.popupActive)
-      .append("svc-menu-action__button--selected", !!this.active)
-      .toString();
-  }
-}
