@@ -172,14 +172,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     const actionContainer = new ActionContainer();
     actionContainer.sizeMode = "small";
     if (this.creator.expandCollapseButtonVisibility != "never") {
+      actionContainer.setActionsAppearance({ style: "brand", size: "xx-small", mode: "quaternary" });
       actionContainer.setItems([this.expandCollapseAction]);
-      actionContainer.cssClasses = {
-        root: "svc-survey-element-top-toolbar sv-action-bar",
-        item: "svc-survey-element-top-toolbar__item",
-        itemIcon: "svc-survey-element-toolbar-item__icon",
-        itemTitle: "svc-survey-element-toolbar-item__title",
-        itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
-      };
+      actionContainer.containerCss = "svc-survey-element-top-toolbar";
     }
     return actionContainer;
   }
