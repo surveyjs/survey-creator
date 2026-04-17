@@ -84,7 +84,7 @@ svc-page {
   padding: 0 var(--sjs2-spacing-x150, 12px) 0 var(--sjs2-size-x300, 24px);
   transition: opacity $creator-transition-duration;
   white-space: nowrap;
-  gap: var(--sjs2-spacing-x100, 8px);
+  gap: var(--sjs2-spacing-x150, 12px);
 
   h4.sd-title {
     .sv-string-editor {
@@ -121,6 +121,7 @@ svc-page {
 .svc-page-toolbar--collapse {
   flex-grow: 0;
   flex-shrink: 0;
+  --sd-action-bar-gap: var(--sjs2-spacing-x150, 12px);
 }
 
 .svc-page__content-actions {
