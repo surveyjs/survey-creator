@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div *ngIf="model.visible" class="svc-menu-action">
+  <div *ngIf="model.visible" class="svc-sidebar-tabs__item">
       <ng-template [component]="{ name: model.component, data: { model }, default: 'sv-action-bar-item'}"></ng-template>
   </div>
 </ng-template>
