@@ -59,8 +59,8 @@ test.describe(title, () => {
     await setJSON(page, json);
     const question1 = page.locator("[data-name=\"question1\"]");
     const choicesTabTitle = getPropertyGridCategory(page, "Choice Options");
-    const clearButton = page.locator(".spg-action-button[title='Clear']");
-    const addButton = page.locator(".spg-action-button[title='Add new choice']").first();
+    const clearButton = page.locator(".spg-title .sd-action[title='Clear']");
+    const addButton = page.locator(".spg-title .sd-action[title='Add new choice']").first();
 
     await question1.click();
     await choicesTabTitle.click();
@@ -102,7 +102,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     const question1 = page.locator("[data-name=\"question1\"]");
     const choicesTabTitle = getPropertyGridCategory(page, "Choice Options");
-    const fastEntryButton = page.locator(".spg-action-button[title='Edit']");
+    const fastEntryButton = page.locator(".spg-title .sd-action[title='Edit']");
     const setItemsButton = page.getByRole("button", { name: "Set Items" });
     const applyButton = page.getByRole("button", { name: "Apply" });
     const item5Text = page.locator("input[placeholder='custom-3']");
@@ -153,7 +153,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     const question1 = page.locator("[data-name=\"question1\"]");
     const choicesTabTitle = getPropertyGridCategory(page, "Choice Options");
-    const addButton = page.locator(".spg-action-button[title='Add new choice']").first();
+    const addButton = page.locator(".spg-title .sd-action[title='Add new choice']").first();
     const input = page.getByRole("textbox", { name: "row 5, column Image or video" });
 
     await question1.click();
