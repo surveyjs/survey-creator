@@ -4,11 +4,8 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
 import { showConfirmDialog } from "./confirm-dialog";
-import { ComponentContainerModel, TabDesignerViewModel } from "survey-creator-core";
+import { ComponentContainerModel, TabContainerViewModel } from "survey-creator-core";
 
-class UIPresetEditorModel extends Base {
-  public container: ComponentContainerModel;
-}
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
  *
@@ -20,7 +17,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   static defaultPresetName = "expert";
 
   public editor: CreatorPresetEditorModel;
-  public model: UIPresetEditorModel;
+  public model: TabContainerViewModel;
   public static iconName = "icon-settings";
   private activeTab: string = "designer";
   private currentPresetIndex = 0;
@@ -127,8 +124,8 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    this.model = new UIPresetEditorModel();
-    creator.addTab({ name: "presets", componentName: "svc-component-container", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
+    this.model = new TabContainerViewModel();
+    creator.addTab({ name: "presets", componentName: "svc-tab-container", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.elements.unshift({
@@ -286,7 +283,7 @@ export class UIPresetEditor implements ICreatorPlugin {
           elements: [{ componentName: "svc-toolbox", componentData: { model: this.creator } }] } } },
       { componentName: "svc-component-container", componentData: { model: surfaceContainer } }
     ];
-    this.model.container = presetsContainer;
+    this.model.containerModel = presetsContainer;
     this.creator.onActiveTabChanging.add(this.preventTabSwitch);
 
     this.defaultJson = { ...this.editor.defaultJson };
