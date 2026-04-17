@@ -96,7 +96,7 @@ export async function doDragDrop({ page, element, target, options }: { page: Pag
 }
 
 export async function showCreatorSettings(page) {
-  await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
+  await page.locator(".svc-sidebar-tabs__bottom-container .sd-action").click();
 }
 export async function showPresets(page) {
   await showCreatorSettings(page);

@@ -60,15 +60,15 @@ export function updateMatrixRemoveAction(
   };
 }
 export function updateMatixActionsAppearance(actions: Array<IAction>) {
-  (actions as Array<Action>).forEach((action) => {
-    action.setPredefinedAppearance({ style: "neutral", mode: "quaternary", size: "small" });
+  actions.forEach((action) => {
+    action.appearance = { style: "neutral", mode: "quaternary", size: "small" };
   });
   const detailAction = findAction(actions, "show-detail") as Action;
   if (detailAction) {
-    detailAction.appearance = { style: "neutral" };
+    detailAction.appearance = { style: "neutral", mode: "quaternary", size: "small" };
   }
   const removeRowAction = findAction(actions, "remove-row") as Action;
   if (removeRowAction) {
-    removeRowAction.appearance = { style: "alert" };
+    removeRowAction.appearance = { style: "alert", mode: "quaternary", size: "small" };
   }
 }

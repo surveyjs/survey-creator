@@ -173,7 +173,7 @@ test.describe(title, () => {
     await question1.click();
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Choice Options").click();
-    await page.locator(".spg-action-button").filter({ hasText: "Edit" }).first().click();
+    await page.locator(".sd-action").filter({ hasText: "Edit" }).first().click();
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-choices-fast-entry-popup.png");
   });
 
@@ -372,7 +372,7 @@ test.describe(title, () => {
   test("Check triggers question", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await getPropertyGridCategory(page, "Conditions").click();
-    await page.locator("div[data-name='triggers'] .spg-action-button--icon").nth(1).click();
+    await page.locator("div[data-name='triggers'] .sd-action").nth(1).click();
     await compareScreenshot(page, page.locator("div[data-name='triggers']"), "triggers-editor.png");
     await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector("[aria-label='row 1, column triggerType']").focus());
     await resetHoverToCreator(page);
@@ -696,7 +696,7 @@ test.describe(title, () => {
     });
     await page.locator("div[data-sv-drop-target-survey-element='question1']").click({ position: { x: 200, y: 30 } });
     await compareScreenshot(page, page.locator("[data-name='visible']"), "pg-checkbox-hint.png");
-    await page.locator("[data-name='visible'] .spg-action-button").click();
+    await page.locator("[data-name='visible'] .sd-action").click();
     await compareScreenshot(page, page.locator("[data-name='visible']"), "pg-checkbox-hint-opened.png");
   });
 
@@ -764,7 +764,7 @@ test.describe(title, () => {
       target: westResizer,
       options: { targetPosition: { x: -60, y: 0 } }
     });
-    await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
+    await page.locator(".svc-sidebar-tabs__bottom-container .sd-action").click();
     const popup = page.locator(".spg-body").filter({ visible: true }).first();
     await compareScreenshot(page, popup, "creator-theme-settings.png");
   });

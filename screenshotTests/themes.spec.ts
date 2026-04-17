@@ -35,7 +35,7 @@ test.describe(title, () => {
     });
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.getByText("question1").click();
-    await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
+    await page.locator(".svc-sidebar-tabs__bottom-container .sd-action").click();
 
     await page.getByRole("combobox", { name: "Theme name" }).focus();
 
