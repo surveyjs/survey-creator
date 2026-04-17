@@ -78,8 +78,9 @@ export class DesignSurfaceComponent extends SurveyElementBase<IDesignSurfaceComp
   }
 
   renderElement(): React.JSX.Element {
+    const designerTabContentClassName = "svc-tab-designer_content " + this.model.getRootCss();
     return (
-      <div className="svc-tab-designer_content">
+      <div className={designerTabContentClassName} onClick={() => this.model.clickDesigner()}>
         { this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent() }
       </div>
     );
@@ -170,14 +171,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
 
   renderElement(): React.JSX.Element {
-    const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
-
     return (
       <React.Fragment>
         <div className="svc-flex-column">
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
         </div>
-        <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
+        <div className="svc-tab-designer">
           <Scroll>
             {ReactElementFactory.Instance.createElement(this.model.surfaceComponentName, { model: this.model.surfaceData || this.model })}
           </Scroll>

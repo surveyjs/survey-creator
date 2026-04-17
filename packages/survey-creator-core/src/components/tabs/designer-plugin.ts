@@ -407,7 +407,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   public activate(): void {
     this.model = new TabDesignerViewModel(this.creator);
-    this.model.surfaceScale = this.creator.survey.widthScale;
+    this.model.surfaceData.surfaceScale = this.creator.survey.widthScale;
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.updateActivePage();
     this.updateTabControl();

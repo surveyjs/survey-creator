@@ -10,7 +10,7 @@ import "./designer.scss";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
 
-export class TabDesignerViewModel extends Base {
+export class DesignerSurfaceModel extends Base {
   private minSurfaceScaling = 20;
   private maxSurfaceScaling = 100;
   private stepSurfaceScaling = 10;
@@ -39,7 +39,7 @@ export class TabDesignerViewModel extends Base {
   @property() pageCount: number;
   @property() designerCss: string;
   @property({
-    onSet: (val, objectInstance: TabDesignerViewModel, prevVal) => {
+    onSet: (val, objectInstance: DesignerSurfaceModel, prevVal) => {
       objectInstance.updateSurveyScaleStartDimensions();
     },
   }) showPlaceholder: boolean;
@@ -244,9 +244,6 @@ export class TabDesignerViewModel extends Base {
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
   }
-  public get isToolboxVisible(): boolean {
-    return this.creator.showToolbox && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
-  }
   public get placeholderText(): string {
     if (this.creator.isMobileView)
       return getLocString("ed.surveyPlaceHolderMobile");
@@ -439,5 +436,16 @@ export class TabDesignerViewModel extends Base {
     }
     rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;
+  }
+}
+
+export class TabDesignerViewModel extends Base {
+  surfaceData: DesignerSurfaceModel;
+  public get isToolboxVisible(): boolean {
+    return this.creator.showToolbox && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
+  }
+  constructor(public creator: SurveyCreatorModel) {
+    super();
+    this.surfaceData = new DesignerSurfaceModel(creator);
   }
 }
