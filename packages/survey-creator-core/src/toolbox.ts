@@ -618,6 +618,7 @@ export class QuestionToolbox
       iconName: "icon-search",
       iconSize: "auto",
       component: "sv-action-bar-item",
+      appearance: { mode: "quaternary", style: "neutral" },
       title: surveyLocalization.getString("ed.toolboxSearch"),
       showTitle: false,
       action: () => {
@@ -640,7 +641,7 @@ export class QuestionToolbox
         .append("svc-toolbox__tool--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
-    this.dotsItem.appearance = { style: "brand" };
+    this.dotsItem.appearance = { style: "brand", mode: "quaternary" };
 
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
