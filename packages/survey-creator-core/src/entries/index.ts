@@ -39,6 +39,7 @@ export * from "../components/tabs/designer-plugin";
 export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/logic-plugin";
 export * from "../components/tabs/logic-theme";
+export * from "../components/tabs/container-tab";
 
 export * from "../components/toolbox/toolbox-tool";
 export * from "../components/toolbox/toolbox-search-manager";

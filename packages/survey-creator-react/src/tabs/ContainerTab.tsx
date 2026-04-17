@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { ComponentContainerModel } from "survey-creator-core";
+import { TabContainerViewModel } from "survey-creator-core";
 import { ComponentContainer } from "../components/ComponentContainer";
 
 interface ITabContainerComponentProps {
-  data: ComponentContainerModel;
+  data: TabContainerViewModel;
 }
 
 export class TabContainerComponent extends SurveyElementBase<
@@ -18,11 +18,11 @@ export class TabContainerComponent extends SurveyElementBase<
   protected getStateElement(): Base {
     return this.model;
   }
-  private get model(): ComponentContainerModel {
+  private get model(): TabContainerViewModel {
     return this.props.data;
   }
   renderElement(): React.JSX.Element {
-    return <ComponentContainer model={this.model} />;
+    return <ComponentContainer model={this.model.containerModel} />;
   }
 }
 
