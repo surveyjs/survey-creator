@@ -67,7 +67,7 @@ export * from "../components/IconItem";
 export * from "../Switcher";
 
 export * from "../tabs/JsonErrorItem";
-
+export * from "../tabs/ContainerTab";
 //custom questions
 export * from "../custom-questions/SpinEditor";
 export * from "../custom-questions/ColorItem";
