@@ -64,3 +64,12 @@
   display: flex;
   flex-direction: column;
 }
+.svc-page-selector {
+  .sd-action {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .sd-action__title {
+    @include textEllipsis;
+  }
+}
