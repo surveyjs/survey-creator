@@ -12,10 +12,7 @@
     @click="model.clickDesigner"
   >
     <SvComponent :is="'sv-scroll'">
-      <SvComponent
-        :is="model.surfaceComponentName"
-        :model="model.surfaceData"
-      />
+      <SvComponent :is="'svc-designer-surface'" :model="model" />
     </SvComponent>
   </div>
 </template>

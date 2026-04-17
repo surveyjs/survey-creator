@@ -1,10 +1,10 @@
-import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, ActionContainer, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer, LocalizableString } from "survey-core";
+import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, Base, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer, LocalizableString } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
 import { showConfirmDialog } from "./confirm-dialog";
-import { ComponentContainerModel, TabDesignerViewModel } from "survey-creator-core";
+import { ComponentContainerModel, TabContainerViewModel } from "survey-creator-core";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
@@ -17,8 +17,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   static defaultPresetName = "expert";
 
   public editor: CreatorPresetEditorModel;
-  public model: TabDesignerViewModel | undefined;
-  private surfaceModel: ComponentContainerModel;
+  public model: TabContainerViewModel;
   public static iconName = "icon-settings";
   private activeTab: string = "designer";
   private currentPresetIndex = 0;
@@ -125,7 +124,8 @@ export class UIPresetEditor implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addTab({ name: "presets", componentName: "svc-tab-designer", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
+    this.model = new TabContainerViewModel();
+    creator.addTab({ name: "presets", componentName: "svc-tab-container", title: getLocString("presets.plugin.presetsTab"), plugin: this, iconName: UIPresetEditor.iconName, isInternal: true });
     this.designerPlugin = creator.getPlugin("designer");
     const settingsPage = this.creator.sidebar.getPageById("creatorTheme");
     settingsPage.componentData.elements.unshift({
@@ -266,15 +266,24 @@ export class UIPresetEditor implements ICreatorPlugin {
   public activate(): void {
     this.editor = new CreatorPresetEditorModel(this.getActivePresetJson(), this.creator, this.defaultJson);
     const survey = this.editor.model;
-    this.surfaceModel = new ComponentContainerModel();
-    this.surfaceModel.elements = [
+    const presetsTabClassName = "svc-tab-designer svc-tab-designer--presets";
+
+    const surfaceContainer = new ComponentContainerModel();
+    surfaceContainer.cssClass = presetsTabClassName;
+    surfaceContainer.elements = [
       { componentName: "sv-action-bar", componentData: { model: this.editor.navigationBar } },
       { componentName: "survey", componentData: { survey: survey, model: survey } }
     ];
-    this.model = new TabDesignerViewModel(this.creator as any);
-    this.model.surfaceComponentName = "svc-component-container";
-    this.model.surfaceData = this.surfaceModel;
-    this.model.rootCssCustom = "svc-tab-designer--presets";
+    const presetsContainer = new ComponentContainerModel();
+    presetsContainer.wrapped = false;
+    presetsContainer.elements = [
+      { componentName: "svc-component-container", componentData: {
+        model: {
+          cssClass: "svc-flex-column",
+          elements: [{ componentName: "svc-toolbox", componentData: { model: this.creator } }] } } },
+      { componentName: "svc-component-container", componentData: { model: surfaceContainer } }
+    ];
+    this.model.containerModel = presetsContainer;
     this.creator.onActiveTabChanging.add(this.preventTabSwitch);
 
     this.defaultJson = { ...this.editor.defaultJson };

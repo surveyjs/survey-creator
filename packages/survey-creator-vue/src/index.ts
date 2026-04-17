@@ -23,6 +23,7 @@ import Switcher from "./components/Switcher.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
 import Test from "./tabs/preview/Test.vue";
+import ContainerTab from "./tabs/ContainerTab.vue";
 
 import TestAgain from "./tabs/preview/TestAgain.vue";
 import SurveyResults from "./tabs/preview/SurveyResults.vue";
@@ -154,6 +155,7 @@ function registerComponents(
   registerComponent("svc-tab-theme", Theme);
 
   registerComponent("svc-component-container", ComponentContainer);
+  registerComponent("svc-tab-container", ContainerTab);
 
   registerComponent("svc-toolbox", AdaptiveToolbox);
   registerComponent("svc-toolbox-list", ToolboxList);

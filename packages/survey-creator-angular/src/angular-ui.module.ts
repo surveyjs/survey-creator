@@ -86,6 +86,7 @@ import { TranslateFromAction } from "./tabs/translation/translate-from-action.co
 import { QuestionElementContentComponent } from "./question-element-content.component";
 import { PageElementContentComponent } from "./page-element-content.component";
 import { PageWrapperComponent } from "./page-wrapper.component";
+import { ContainerTabComponent } from "./tabs/container/container-tab.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarPageComponent, SidebarDefaultHeaderComponent, ObjectSelectorComponent, SidebarPropertyGridHeaderComponent, PropertyGridPlaceholderComponent, SidebarHeaderComponent, TabControlComponent, TabsComponent, TabButtonComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, QuestionPgErrorComponent, SurfacePlaceholderComponent, SwitcherComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
@@ -94,7 +95,7 @@ import { PageWrapperComponent } from "./page-wrapper.component";
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent,
     BooleanSwitchComponent, TranslateFromAction, AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent, ComponentContainerComponent,
-    IconItemComponent, SideBarLaunchCardComponent, DesignSurfaceComponent],
+    IconItemComponent, SideBarLaunchCardComponent, DesignSurfaceComponent, ContainerTabComponent],
 
   imports: [
     CommonModule, FormsModule, SurveyModule
@@ -106,7 +107,7 @@ import { PageWrapperComponent } from "./page-wrapper.component";
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, BooleanSwitchComponent, TranslateFromAction,
     AddQuestionTypeSelectorComponent, QuestionElementContentComponent, PageElementContentComponent, ComponentContainerComponent,
-    IconItemComponent, SideBarLaunchCardComponent, DesignSurfaceComponent],
+    IconItemComponent, SideBarLaunchCardComponent, DesignSurfaceComponent, ContainerTabComponent],
   providers: [],
 })
 export class SurveyCreatorModule { }

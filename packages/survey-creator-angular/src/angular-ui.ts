@@ -2,6 +2,7 @@ export * from "./angular-ui.module";
 export * from "./creator.component";
 export * from "./creator.component";
 export * from "./tabs/designer/designer.component";
+export * from "./tabs/container/container-tab.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu-item-wrapper.component";

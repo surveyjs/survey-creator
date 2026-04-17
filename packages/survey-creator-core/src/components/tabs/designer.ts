@@ -45,8 +45,6 @@ export class TabDesignerViewModel extends Base {
   }) showPlaceholder: boolean;
   @property() surfaceScale = 100;
   @property() surfaceCssVariables: { [index: string]: string } = {};
-  @property() surfaceComponentName: string = "svc-designer-surface";
-  public surfaceData: any;
   public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
@@ -427,9 +425,7 @@ export class TabDesignerViewModel extends Base {
   public clickDesigner() {
     this.creator.selectedElement = this.creator.survey;
   }
-  public rootCssCustom: string;
   public getRootCss(): string {
-    if (this.rootCssCustom) return this.rootCssCustom;
     let rootCss = this.survey.css.root;
     if (this.showSurfaceTools) {
       rootCss += " svc-tab-designer--with-surface-tools";

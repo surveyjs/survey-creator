@@ -6,7 +6,7 @@
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
     <sv-scroll>
-      <ng-template [component]="{name: model.surfaceComponentName, data: { model: model.surfaceData || model }}"></ng-template>
+      <ng-template [component]="{name: 'svc-designer-surface', data: { model: model }}"></ng-template>
     </sv-scroll>
   </div>
 </ng-template>
