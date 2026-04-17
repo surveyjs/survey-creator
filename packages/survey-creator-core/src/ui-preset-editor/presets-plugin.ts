@@ -442,10 +442,6 @@ export class UIPresetEditor implements ICreatorPlugin {
       this.editor.dispose();
     }
     this.editor = undefined;
-    if (this.model) {
-      this.model.dispose();
-    }
-    this.model = undefined;
     return true;
   }
 
