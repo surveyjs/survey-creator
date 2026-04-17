@@ -172,6 +172,7 @@
   .sd-action__title {
     color: var(--sjs2-color-fg-basic-primary, #1c1b20);
     @include sjs2--typography--default;
+    padding: 0 var(--sjs2-spacing-x100, 8px);
   }
 }
 
