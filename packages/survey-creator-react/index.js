@@ -1210,7 +1210,7 @@ creator.saveSurveyFunc = (no, callback) => {
 };
 
 if(window.SurveyCreatorUIPresetEditorCore) {
-  //window.editor = new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
+  window.editor = new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
   //window.editor.addPreset(new SurveyCreatorCore.UIPreset({ presetName: "Custom Preset", json: {} }));
 }
 

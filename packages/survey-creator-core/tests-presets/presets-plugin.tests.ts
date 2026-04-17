@@ -42,14 +42,14 @@ test("UIPresetEditor: pagesAction.title falls back to empty string when selected
 
   plugin.activate();
 
-  const pagesAction: any = plugin.model.navigationBar.getActionById("presets-pages");
+  const pagesAction: any = plugin.editor.navigationBar.getActionById("presets-pages");
   expect(pagesAction).toBeTruthy();
 
   const pagesList: any = (plugin as any)["pagesList"];
   expect(pagesList).toBeTruthy();
   expect(pagesList.actions.length).toBeGreaterThan(0);
 
-  const surveyModel: any = plugin.model.model;
+  const surveyModel: any = plugin.editor.model;
   surveyModel.currentPage = surveyModel.pages[1];
 
   expect(pagesAction.title).toBe(surveyModel.currentPage.navigationTitle);
@@ -62,15 +62,15 @@ test("UIPresetEditor: check status action on editor model json changed", () => {
 
   plugin.activate();
 
-  const statusAcion: any = plugin.model.navigationBar.getActionById("presets-status");
+  const statusAcion: any = plugin.editor.navigationBar.getActionById("presets-status");
   expect(statusAcion).toBeTruthy();
   expect(statusAcion.visible).toBeFalsy();
 
-  expect(plugin.model.model.getQuestionByName("propertyGrid_selector").value).toBe("survey");
-  plugin.model.model.getQuestionByName("propertyGrid_selector").value = "page";
+  expect(plugin.editor.model.getQuestionByName("propertyGrid_selector").value).toBe("survey");
+  plugin.editor.model.getQuestionByName("propertyGrid_selector").value = "page";
   expect(statusAcion.visible).toBeFalsy();
 
-  plugin.model.model.getQuestionByName("propertyGrid_categories").value = [];
+  plugin.editor.model.getQuestionByName("propertyGrid_categories").value = [];
   expect(statusAcion.visible).toBeTruthy();
   expect(statusAcion.title).toBe("Unsaved changes");
   plugin.deactivate();
@@ -124,13 +124,13 @@ test("made changes, save, made more changes and discard to saved", () => {
   const creator = new CreatorTester();
   const plugin = new UIPresetEditorTester(creator);
   plugin.activate();
-  plugin.model.json = { tabs: { items: [{ name: "designer" }] } };
+  plugin.editor.json = { tabs: { items: [{ name: "designer" }] } };
   plugin.performSaveTest();
-  expect(plugin.model.json.tabs.items).toEqual([{ name: "designer" }]);
-  plugin.model.json = { tabs: { items: [{ name: "designer" }, { name: "preview" }] } };
-  expect(plugin.model.json.tabs.items).toEqual([{ name: "designer" }, { name: "preview" }]);
+  expect(plugin.editor.json.tabs.items).toEqual([{ name: "designer" }]);
+  plugin.editor.json = { tabs: { items: [{ name: "designer" }, { name: "preview" }] } };
+  expect(plugin.editor.json.tabs.items).toEqual([{ name: "designer" }, { name: "preview" }]);
   plugin.discardUnsavedTest();
-  expect(plugin.model.json.tabs.items).toEqual([{ name: "designer" }]);
+  expect(plugin.editor.json.tabs.items).toEqual([{ name: "designer" }]);
 });
 
 test("Selecting Basic preset should update property grid on Property Grid page", () => {
@@ -142,7 +142,7 @@ test("Selecting Basic preset should update property grid on Property Grid page",
   const plugin = new UIPresetEditor(creator);
   plugin.activate();
 
-  const survey = plugin.model.model;
+  const survey = plugin.editor.model;
   survey.currentPage = survey.getPageByName("page_propertyGrid");
   survey.setValue("propertyGrid_selector", "survey");
 
@@ -171,14 +171,14 @@ test("UIPresetEditor.preset should return Advanced name and unsaved edited json"
   const plugin = new UIPresetEditor(creator);
   plugin.activate();
 
-  const itemsQuestion = plugin.model.model.getQuestionByName("tabs_items");
+  const itemsQuestion = plugin.editor.model.getQuestionByName("tabs_items");
   const itemsValue = [...itemsQuestion.value];
   itemsValue.splice(itemsValue.length - 1, 1);
   itemsQuestion.value = itemsValue;
 
   expect(plugin.preset?.name).toBe("advanced");
   expect(plugin.preset?.json.tabs.items.map((t: any) => t.name)).toEqual(itemsValue.map((t: any) => t.name));
-  expect(plugin.model.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
+  expect(plugin.editor.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
   plugin.deactivate();
 });
 
@@ -190,14 +190,14 @@ test("UIPresetEditor.preset should return Default configuration name and unsaved
   const plugin = new UIPresetEditor(creator);
   plugin.activate();
 
-  const itemsQuestion = plugin.model.model.getQuestionByName("tabs_items");
+  const itemsQuestion = plugin.editor.model.getQuestionByName("tabs_items");
   const itemsValue = [...itemsQuestion.value];
   itemsValue.splice(itemsValue.length - 1, 1);
   itemsQuestion.value = itemsValue;
 
   expect(plugin.preset?.name).toBe(PresetsManager.defaultConfigurationId);
   expect(plugin.preset?.json.tabs.items.map((t: any) => t.name)).toEqual(itemsValue.map((t: any) => t.name));
-  expect(plugin.model.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
+  expect(plugin.editor.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
 
   plugin.deactivate();
 });

@@ -39,6 +39,7 @@ export * from "../components/tabs/designer-plugin";
 export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/logic-plugin";
 export * from "../components/tabs/logic-theme";
+export * from "../components/tabs/container-tab";
 
 export * from "../components/toolbox/toolbox-tool";
 export * from "../components/toolbox/toolbox-search-manager";
@@ -116,6 +117,7 @@ export * from "../dragdrop-survey-elements";
 
 import "../components/search.scss";
 import "../components/component-container/component-container.scss";
+import "../components/icon-item.scss";
 import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";

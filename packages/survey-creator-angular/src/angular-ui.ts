@@ -2,6 +2,7 @@ export * from "./angular-ui.module";
 export * from "./creator.component";
 export * from "./creator.component";
 export * from "./tabs/designer/designer.component";
+export * from "./tabs/container/container-tab.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
 export * from "./tabbed-menu/tabbed-menu/tabbed-menu-item-wrapper.component";
@@ -19,6 +20,8 @@ export * from "./side-bar/object-selector.component";
 export * from "./side-bar/property-grid.component";
 
 export * from "./components/component-container.component";
+export * from "./components/icon-item.component";
+export * from "./side-bar/side-bar-launch-card.component";
 export * from "./components/search.component";
 export * from "./tabs/json/json-editor-textarea.component";
 export * from "./tabs/json/json-editor-ace.component";

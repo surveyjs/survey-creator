@@ -13,7 +13,6 @@ import "survey-creator-core/ui-preset-editor/index.css"
 // Import survey modules
 import "survey-core/survey.i18n"
 import "survey-creator-core/survey-creator-core.i18n"
-import "survey-creator-react/ui-preset-editor"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>

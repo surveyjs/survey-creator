@@ -100,7 +100,7 @@ export async function showCreatorSettings(page) {
 }
 export async function showPresets(page) {
   await showCreatorSettings(page);
-  await page.locator(".sps-launch__card").click();
+  await page.locator(".spg-launch__card").click();
 }
 
 export const creatorTabDesignerName = "Designer";
