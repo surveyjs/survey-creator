@@ -12,9 +12,9 @@ test.describe("property grid a11y", () => {
 
   test("Check data category", async ({ page }) => {
     await setJSON(page, { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "question1" }] }], });
-    await page.click(".svc-sidebar__header-content .svc-menu-action__button");
+    await page.click(".svc-sidebar__header-content .svc-sidebar__header-object-selector");
     await page.locator(".svc-list__item-body", { hasText: "question1" }).click();
-    await page.click(".svc-menu-action__button[title='Data']");
+    await page.click(".svc-sidebar-tabs__item .sd-action[title='Data']");
     await expect(page.getByRole("button", { name: "Set Default Answer" })).toBeVisible();
     await checkA11y(page, ["#survey-creator", ".spg-page"], { axeOptions });
   });
