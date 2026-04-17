@@ -19,11 +19,11 @@ test("Check required action", (): any => {
     <any>undefined
   );
   const requiredAction = questionAdorner.actionContainer.getActionById("isrequired");
-  expect(requiredAction.pressed).toBe(false);
+  expect(requiredAction.active).toBe(false);
   question.isRequired = true;
-  expect(requiredAction.pressed).toBe(true);
+  expect(requiredAction.active).toBe(true);
   question.isRequired = false;
-  expect(requiredAction.pressed).toBe(false);
+  expect(requiredAction.active).toBe(false);
   expect(requiredAction.title).toBe("Required");
 
   const requiredActionInPopup = requiredAction.innerItem;
