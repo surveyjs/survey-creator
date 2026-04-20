@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder, classesToSelector } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder, classesToSelector, ActionContainer, Action, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -113,6 +113,33 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     }
     return super.getAnimatedElement();
 
+  }
+  protected createImageActionsContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.containerCss = "svc-image-question-controls";
+    container.setItems(this.createImageActions());
+    return container;
+  }
+  protected createImageActions(): Array<Action> {
+    return [new Action({
+      id: "choose",
+      iconName: "icon-choosefile",
+      showTitle: false,
+      needSpace: true,
+      visible: new ComputedUpdater(() => this.allowEdit) as unknown as boolean,
+      appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+      action: () => {
+        this.chooseFile(this);
+      }
+    })
+    ];
+  }
+  private imageActionsContainerValue?: ActionContainer;
+  public get imageActionsContainer() {
+    if (!this.imageActionsContainerValue) {
+      this.imageActionsContainerValue = this.createImageActionsContainer();
+    }
+    return this.imageActionsContainerValue;
   }
   public css() {
     return new CssClassBuilder()
