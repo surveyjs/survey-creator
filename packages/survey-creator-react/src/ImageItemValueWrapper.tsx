@@ -1,7 +1,7 @@
 import { ImageItemValueWrapperViewModel } from "survey-creator-core";
 import * as React from "react";
-import { QuestionSelectBase, Base, ImageItemValue, QuestionImagePickerModel } from "survey-core";
-import { LoadingIndicatorComponent, ReactElementFactory, SvgIcon, SurveyActionBar } from "survey-react-ui";
+import { QuestionSelectBase, Base, ImageItemValue, QuestionImagePickerModel, Action } from "survey-core";
+import { LoadingIndicatorComponent, ReactElementFactory, SvgIcon, SurveyActionBar, SurveyElementBase } from "survey-react-ui";
 import {
   attachKey2click,
 } from "survey-react-ui";
@@ -102,35 +102,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
           <div className={"svc-image-item-value__item"}>
             {this.props.element}
           </div>
-
-          {
-            this.model.isDraggable && this.model.canRenderControls ?
-              <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
-                onPointerDown={(event: any) => this.model.onPointerDown(event)}
-              >
-                <SvgIcon size={"auto"} iconName={"icon-drag-24x24"}></SvgIcon>
-              </span>
-              : null
-          }
-
-          {
-            this.model.canRenderControls ?
-              <div className="svc-context-container svc-image-item-value-controls">
-                {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
-                  className="svc-context-button"
-                  onClick={() => this.model.chooseFile(this.model)}
-                >
-                  <SvgIcon role="button" size={"auto"} iconName={"icon-choosefile"} title={this.model.selectFileTitle}></SvgIcon>
-                </span>) : null}
-                {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
-                  className="svc-context-button svc-context-button--danger"
-                  onClick={() => this.model.remove(this.model)}
-                >
-                  <SvgIcon role="button" size={"auto"} iconName={"icon-delete"} title={this.model.removeFileTitle}></SvgIcon>
-                </span>) : null}
-              </div>
-              : null
-          }
+          { this.model.canRenderControls ? <SurveyActionBar model={this.model.topActionsContainer}></SurveyActionBar> : null }
         </>
       );
     }
@@ -172,6 +144,23 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     );
   }
 }
+
+class ImageItemDragAction extends SurveyElementBase<{ item: Action }, any> {
+  renderElement() {
+    return <span className={this.props.item.getActionBarItemCss()}
+      onPointerDown={(event: any) => this.props.item.data.model.onPointerDown(event)}
+    >
+      <SvgIcon size={"auto"} iconName={this.props.item.iconName} className={this.props.item.cssClasses.itemIcon}></SvgIcon>
+    </span>;
+  }
+}
+
+ReactElementFactory.Instance.registerElement(
+  "svc-image-item-drag-action",
+  (props: { item: Action }) => {
+    return React.createElement(ImageItemDragAction, props);
+  }
+);
 
 ReactElementFactory.Instance.registerElement(
   "svc-image-item-value",
