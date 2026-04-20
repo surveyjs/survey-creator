@@ -1105,7 +1105,7 @@ SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
 SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
 //SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
 const creator = new SurveyCreator.SurveyCreator(options);
-creator.applyCreatorTheme(SurveyCreatorTheme.Test);
+//creator.applyCreatorTheme(SurveyCreatorTheme.Test);
   creator.applySurfaceTheme(SurveyTheme.Test);
   //creator.applyTheme(SurveyTheme.Test);
   //creator.theme = SurveyTheme.Test;

@@ -2,10 +2,10 @@
 @use "../../typography-mixins.scss" as *;
 @use "blocks/sps-action-bar.scss";
 @use "blocks/sps-question.scss";
-@use "blocks/sps-input.scss";
-@use "blocks/sps-dropdown.scss";
+//@use "blocks/sps-input.scss";
+//@use "blocks/sps-dropdown.scss";
 @use "blocks/sps-panel.scss";
-@use "blocks/sps-checkbox.scss";
+//@use "blocks/sps-checkbox.scss";
 @use "blocks/sps-matrixdynamic.scss";
 @use "blocks/sps-table.scss";
 @use "blocks/sps-list.scss";
@@ -179,5 +179,27 @@
     use {
       fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
     }
+  }
+}
+
+.sps-selectbase {
+  .sd-selectbase__column {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: var(--sjs2-spacing-x200, 16px);
+    padding-top: var(--sjs2-spacing-x200, 16px);
+  }
+  .sd-item {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .sv-title-actions {
+    gap: var(--sjs2-spacing-x050, 4px);
+    align-items: flex-start;
+  }
+  .sd-action-title-bar {
+    justify-content: flex-start;
   }
 }

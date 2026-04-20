@@ -28,7 +28,7 @@
 
 .sps-checkbox__caption {
   @include sjs2--typography--default;
-  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
 
   .sv-title-actions {
     gap: var(--sjs2-spacing-x050, 4px);
@@ -38,7 +38,7 @@
 
 .sps-checkbox__rectangle {
   border-radius: var(--sjs2-radius-control-checkbox, 4px);
-  border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-false-default-border, #D4D4D4);
+  border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-false-default-border, #d4d4d4);
   background: var(--sjs2-color-control-check-false-default-bg, rgba(28, 27, 32, 0.05));
 
   /* sjs2/shadow/inner */
@@ -65,13 +65,13 @@
 
 .sps-checkbox:hover {
   .sps-checkbox__rectangle {
-    background: var(--sjs2-color-control-check-false-hovered-bg, rgba(28, 27, 32, 0.10));
+    background: var(--sjs2-color-control-check-false-hovered-bg, rgba(28, 27, 32, 0.1));
   }
 }
 
 .sps-checkbox.sps-checkbox--checked:hover {
   .sps-checkbox__rectangle {
-    background: var(--sjs2-color-control-check-true-hovered-bg, #15987E);
+    background: var(--sjs2-color-control-check-true-hovered-bg, #15987e);
   }
 }
 
@@ -100,8 +100,8 @@
 
 .sps-checkbox--checked {
   .sps-checkbox__rectangle {
-    background: var(--sjs2-color-control-check-true-default-bg, #19B394);
-    border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-true-default-border, #19B394);
+    background: var(--sjs2-color-control-check-true-default-bg, #19b394);
+    border: var(--sjs2-border-width-default, 1px) solid var(--sjs2-color-control-check-true-default-border, #19b394);
   }
 
   .sps-checkbox__svg {

@@ -270,6 +270,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     const surfaceContainer = new ComponentContainerModel();
     surfaceContainer.cssClass = presetsTabClassName;
+    surfaceContainer.scrollable = true;
     surfaceContainer.elements = [
       { componentName: "sv-action-bar", componentData: { model: this.editor.navigationBar } },
       { componentName: "survey", componentData: { survey: survey, model: survey } }

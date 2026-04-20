@@ -194,7 +194,7 @@ test.describe(title, () => {
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     await page.locator(".sv-action-bar-item--collapse").nth(0).click();
-    await page.locator(".sps-checkbox__caption .sd-action").filter({ visible: true }).nth(0).click();
+    await page.locator(".sps-selectbase .sd-selectbase__label .sd-action").filter({ visible: true }).nth(0).click();
     await page.locator(".sps-question__title .sd-action").filter({ visible: true }).nth(0).click();
     await page.locator(".sps-panel .sv-string-viewer", { hasText: "Show toggle for hidden elements" })
       .evaluate(node => node.innerHTML = node.innerHTML + " (text to make the title longer to check the hint button)");
