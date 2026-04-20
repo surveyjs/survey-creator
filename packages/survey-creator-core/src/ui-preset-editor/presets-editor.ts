@@ -16,16 +16,6 @@ export class NavigationBar extends ActionContainer {
     super();
     this.cssClasses = {
       root: "sps-navigation-bar",
-      defaultSizeMode: "",
-      smallSizeMode: "",
-      item: "sps-navigation-bar__item sps-navigation-bar-item",
-      itemWithTitle: "",
-      itemAsIcon: "",
-      itemActive: "sps-navigation-bar-item--active",
-      itemPopupActive: "sps-navigation-bar-item--popup-active",
-      itemIcon: "sps-navigation-bar-item__icon",
-      itemTitle: "sps-navigation-bar-item__title",
-      itemTitleWithIcon: "",
     };
   }
 }
@@ -47,6 +37,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locTitle = new LocalizableString(undefined, false);
     this.locTitle.text = getLocString("presets.editor.title");
     this.navigationBarValue = new NavigationBar();
+    this.navigationBarValue.setActionsAppearance({ size: "small", style: "neutral", mode: "tertiary-surface" });
     const firstTabName = "preset";
     this.preset.setJson(this.getJsonFromSurveyModel());
   }

@@ -1,6 +1,6 @@
 @use "../../variables" as *;
 @use "../../typography-mixins.scss" as *;
-@use "blocks/sps-action-bar.scss";
+//@use "blocks/sps-action-bar.scss";
 @use "blocks/sps-question.scss";
 //@use "blocks/sps-input.scss";
 //@use "blocks/sps-dropdown.scss";
@@ -10,7 +10,7 @@
 @use "blocks/sps-table.scss";
 @use "blocks/sps-list.scss";
 @use "blocks/sps-popup.scss";
-@use "blocks/sps-navigation.scss";
+//@use "blocks/sps-navigation.scss";
 @use "blocks/sps-confirmation.scss";
 
 .svc-tab-designer.svc-tab-designer--presets {
@@ -181,7 +181,7 @@
     }
   }
 }
-
+//--------------------------------------
 .sps-selectbase {
   .sd-selectbase__column {
     display: flex;
@@ -201,5 +201,35 @@
   }
   .sd-action-title-bar {
     justify-content: flex-start;
+  }
+}
+
+.sps-action--grow {
+  flex-grow: 1;
+}
+
+.sps-navigation-bar {
+  display: flex;
+  padding: var(--sjs2-spacing-x150, 12px);
+  align-items: center;
+  gap: var(--sjs2-spacing-x100, 8px);
+  align-self: stretch;
+  border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  background: var(--sjs2-color-utility-surface-muted, rgba(28, 27, 32, 0.05));
+
+  .sd-action {
+    flex-direction: row-reverse;
+    border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+  }
+
+  .sd-action__icon {
+    padding: var(--sjs2-spacing-x050, 4px);
+  }
+}
+
+.sps-navigation-action--right {
+  margin-left: auto;
+  .sd-action__icon {
+    padding: 0;
   }
 }
