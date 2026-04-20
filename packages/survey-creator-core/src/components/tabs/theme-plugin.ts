@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent, IActionAppearance } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -15,7 +15,6 @@ import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { MenuButton } from "../../utils/actions";
 import { CreatorDomHelper } from "../../dom-helper";
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
@@ -374,13 +373,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
-        const action = new MenuButton({
+        const action = new Action({
           id: p.name,
           tooltip: p.title,
           iconName: p["iconName"],
           iconSize: "auto",
           active: p.name === this.propertyGrid.survey.currentPage.name,
-          pressed: false,
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
@@ -419,7 +417,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updateSimulatorTheme(this.creator.theme);
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
+      this.invisibleToggleAction.active = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
 
@@ -534,7 +532,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
-      appearance: { style: "brand" },
       showTitle: false
     });
 
@@ -544,6 +541,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-arrow-left_16x16",
       title: getLocString("ts.prevPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
@@ -556,6 +556,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       css: "sv-action--nextPage",
       iconName: "icon-arrow-right_16x16",
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       title: getLocString("ts.nextPage"),
       iconSize: "auto",
       visible: false
@@ -566,11 +569,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
-      pressed: true,
+      active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
-      appearance: { style: "brand" },
       action: () => { }
     });
 
@@ -670,7 +672,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return this.creator.activeTab === "theme" && (isMobileView || !isShowOneCategoryInPropertyGrid);
       }),
       active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
-      pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       locTitleName: "ed.themeSettings",
       locTooltipName: "ed.themeSettingsTooltip",
       showTitle: false
@@ -717,10 +718,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         mode: "small",
         locTitleName: "ts.showInvisibleElements",
         visible: false,
-        appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.pressed = !this.invisibleToggleAction.active;
+          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });

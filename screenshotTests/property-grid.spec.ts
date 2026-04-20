@@ -26,7 +26,7 @@ test.describe(title, () => {
     });
     await page.click(".svc-question__content");
     await page.getByRole("button", { name: "Choice Options" }).click();
-    await page.click(".spg-action-button[title='Show Details']");
+    await page.click(".sd-action[title='Show Details']");
     await compareScreenshot(page, ".spg-table__cell.spg-table__cell--detail-panel", "pg-checkbox-detail-panel.png");
   });
   test("PG: check dropdown inside matrix", async ({ page }) => {

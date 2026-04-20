@@ -6,12 +6,12 @@ import {
 import {
   SvgIcon,
   Popup,
-  attachKey2click
+  attachKey2click,
+  ReactElementFactory,
 } from "survey-react-ui";
 import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
 import * as React from "react";
 import { CreatorModelElement } from "./ModelElement";
-
 interface ISurveyPageNavigatorProps {
   pagesController: PagesController;
   pageEditMode: string;
@@ -56,29 +56,10 @@ export class SurveyPageNavigator extends CreatorModelElement<
     this.model.setScrollableContainer(undefined);
   }
   renderElement(): React.JSX.Element {
-    let className = "svc-page-navigator__selector svc-page-navigator__button";
-    if (this.model.isPopupOpened)
-      className += " svc-page-navigator__button--pressed";
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
         <div>
-          {attachKey2click(<div
-            role="button"
-            className={className}
-            onClick={() => this.model.togglePageSelector()}
-            title={this.model.pageSelectorCaption}
-          >
-            <SvgIcon
-              className="svc-page-navigator__button-icon"
-              iconName={this.model.icon}
-              size={"auto"}
-              title={this.model.pageSelectorCaption}
-            ></SvgIcon>
-          </div>)}
-          <Popup
-            model={this.model.popupModel}
-          //className="svc-page-navigator__popup"
-          ></Popup>
+          { ReactElementFactory.Instance.createElement("sv-action-bar-item-dropdown", { item: this.model.selectorAction }) }
         </div>
         <div>
           {this.model.visibleItems.map((item) => (

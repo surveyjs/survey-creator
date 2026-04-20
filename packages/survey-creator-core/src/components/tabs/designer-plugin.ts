@@ -8,7 +8,6 @@ import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { TabDesignerViewModel } from "./designer";
 import { DesignerStateManager } from "./designer-state-manager";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { MenuButton } from "../../utils/actions";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { creatorPresetsModelPropertyGridDefinition } from "../../ui-presets-creator/creator-presets-model-definition";
@@ -235,12 +234,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.onCreatorThemePropertyChanged.fire(this.creator, options);
     });
 
-    const settingsAction = new MenuButton({
+    const settingsAction = new Action({
       id: "theme-settings",
       locTooltipName: "ed.creatorSettingTitle",
       iconName: "gear-24x24",
       iconSize: "auto",
-      pressed: false,
       visible: new ComputedUpdater(() => { return this.creator.showCreatorThemeSettings; }),
       action: () => {
         if (settingsAction.active) {
@@ -365,7 +363,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.propertyGridViewModel.objectSelectionAction.title = this.propertyGrid.survey.currentPage?.title;
     }
   }
-  private setupPropertyGridTabActions(topToolbar: ActionContainer<MenuButton>) {
+  private setupPropertyGridTabActions(topToolbar: ActionContainer) {
     const pgTabs = this.getPropertyGridTabActions();
     topToolbar.setItems(pgTabs);
     this.propertyGridTab.activateCallback = () => {
@@ -384,13 +382,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.propertyGrid.survey.pages.forEach(p => {
       if (p.elements.length === 0) return;
 
-      const action = new MenuButton({
+      const action = new Action({
         id: p.name,
         tooltip: p.title,
         iconName: p["iconName"],
         iconSize: "auto",
         active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
-        pressed: false,
         visible: p.isVisible,
         action: () => {
           this.creator.sidebar.expandSidebar();
@@ -479,8 +476,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           });
         }
       },
-      appearance: { style: "brand" },
-      pressed: this.createSelectedUpdater(),
+      active: this.createSelectedUpdater(),
       visible: this.createVisibleUpdater(() => {
         return this.creator.removeSidebar !== true;
       }),
@@ -510,8 +506,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconName: "icon-config",
       iconSize: "auto",
       visible: this.createVisibleUpdater(),
-      pressed: true,
-      appearance: { style: "brand" },
+      active: true,
       locTitleName: "ed.designer",
       showTitle: false,
       action: () => { }
@@ -528,17 +523,16 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
-      appearance: { style: "brand" }
     });
 
     items.push(this.saveSurveyAction);
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
     this.creator.onElementSelected.add((sender, options) => {
-      this.surveySettingsAction.pressed = this.isSettingsActive;
+      this.surveySettingsAction.active = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
-      this.surveySettingsAction.pressed = this.isSettingsActive;
+      this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
   }

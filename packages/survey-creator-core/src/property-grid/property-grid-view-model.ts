@@ -7,12 +7,11 @@ import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 import { SearchManagerPropertyGrid } from "./search-manager";
-import { MenuButton } from "../utils/actions";
 
 export class PropertyGridViewModel extends Base {
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
-  public objectSelectionAction: MenuButton;
+  public objectSelectionAction: Action;
   public searchManager = new SearchManagerPropertyGrid();
   public onNewSurveyCreatedCallback: (survey: SurveyModel) => void;
   private selectorPopupModel: PopupModel;
@@ -174,18 +173,17 @@ export class PropertyGridViewModel extends Base {
     this.selectorPopupModel.getTargetCallback = getActionDropdownButtonTarget;
     this.selectorPopupModel.registerPropertyChangedHandlers(["isVisible"], () => {
       if (!this.selectorPopupModel.isVisible) {
-        this.objectSelectionAction.pressed = false;
+        this.objectSelectionAction.popupActive = false;
       } else {
-        this.objectSelectionAction.pressed = true;
+        this.objectSelectionAction.popupActive = true;
       }
     });
-    this.objectSelectionAction = new MenuButton({
+    this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
       title: this.selectedElementName,
       css: "sv-action--object-selector",
       component: "sv-action-bar-item-dropdown",
       disableHide: true,
-      pressed: false,
       action: () => {
         selectorModel.show(
           this.selectionController.creator.survey,
@@ -200,7 +198,6 @@ export class PropertyGridViewModel extends Base {
       },
       popupModel: this.selectorPopupModel
     });
-    this.objectSelectionAction.contentType = "text-description-vertical";
   }
 
   dispose() {

@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization, IActionAppearance } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -76,7 +76,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
+      this.invisibleToggleAction.active = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
     if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
@@ -200,10 +200,9 @@ export class TabTestPlugin implements ICreatorPlugin {
         }),
         locTitleName: "ts.showInvisibleElements",
         visible: false,
-        appearance: { style: "brand" },
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.pressed = this.model.showInvisibleElements;
+          this.invisibleToggleAction.active = this.model.showInvisibleElements;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
@@ -241,7 +240,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
-      appearance: { style: "brand" },
       showTitle: false
     });
 
@@ -250,8 +248,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       css: "sv-action--svd-preview",
       iconName: "icon-preview",
       iconSize: "auto",
-      pressed: true,
-      appearance: { style: "brand" },
+      active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
       showTitle: false,
@@ -265,6 +262,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconSize: "auto",
       title: getLocString("ts.prevPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -278,6 +278,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconSize: "auto",
       title: getLocString("ts.nextPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       visible: false
     });
     return items;

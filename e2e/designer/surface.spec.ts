@@ -107,8 +107,8 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await page.locator(".svc-question__content").click();
     await page.locator(".spg-panel__title--expandable").getByText("Choice Options").click();
-    await page.locator(".spg-action-button[title='Add new choice']").filter({ visible: true }).click();
-    await page.locator(".spg-matrixdynamic tr:last-of-type .spg-action-button--danger").click();
+    await page.locator(".sd-action[title='Add new choice']").filter({ visible: true }).click();
+    await page.locator(".spg-matrixdynamic tr:last-of-type .sd-action--alert").click();
     await expect(page.locator(".sd-imagepicker > *:not(svc-image-item-value)")).toHaveCount(6);
   });
 
@@ -539,9 +539,9 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1000, height: 800 });
     await page.setViewportSize({ width: 1600, height: 800 });
     const settingsButton = page.locator('button[title="Survey settings"]');
-    await expect(settingsButton).not.toHaveClass(/sd-action--pressed/);
+    await expect(settingsButton).not.toHaveClass(/sd-action--active/);
 
-    await page.locator('.svc-menu-action__button[title="General"]').click();
-    await expect(settingsButton).toHaveClass(/sd-action--pressed/);
+    await page.locator('.sd-action[title="General"]').click();
+    await expect(settingsButton).toHaveClass(/sd-action--active/);
   });
 });

@@ -66,9 +66,9 @@ test.describe(title, () => {
   test("tranlation property grid", async ({ page }) => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await getTabbedMenuItemByText(page, "Translation").click();
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Bahasa Indonesia" }).click();
     await compareScreenshot(page, page.locator(".spg-root-modern.st-properties"), "translation-property-grid.png");
   });
@@ -105,14 +105,14 @@ test.describe(title, () => {
     });
     const translationDialog = page.locator(".st-translation-dialog .sv-popup__body-content");
     await getTabbedMenuItemByText(page, "Translation").click();
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     await page.locator("button[title='Auto-translate All']").click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await page.locator("button[title='Apply']").click();
     await page.waitForTimeout(1000);
     await page.locator("textarea").nth(1).type("translated");
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
     await page.locator("button[title='Auto-translate All']").nth(1).click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");

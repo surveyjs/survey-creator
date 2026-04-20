@@ -97,7 +97,6 @@ export * from "../utils/utils";
 export * from "../utils/html-element-utils";
 export * from "../utils/color-utils";
 export * from "../utils/creator-utils";
-export { MenuButton } from "../utils/actions";
 export * from "../question-editor/definition";
 export * from "../question-editor/properties";
 export * from "../survey-helper";

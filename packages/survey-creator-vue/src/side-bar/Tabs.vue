@@ -5,10 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { ActionContainer } from "survey-core";
-import { MenuButton } from "survey-creator-core";
+import type { ActionContainer, Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
-const props = defineProps<{ model: ActionContainer<MenuButton> }>();
+const props = defineProps<{ model: ActionContainer<Action> }>();
 useBase(() => props.model);
 </script>

@@ -313,8 +313,8 @@ test.describe(title, () => {
   test("Check presets Property Grid - drag-drop categories", async ({ page }) => {
     await page.locator(".sps-navigation-bar-item").nth(1).click();
     await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(1).getAttribute("title")).toBe("General");
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(2).getAttribute("title")).toBe("Logo in the Survey Header");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(1).getAttribute("title")).toBe("General");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(2).getAttribute("title")).toBe("Logo in the Survey Header");
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
@@ -333,8 +333,8 @@ test.describe(title, () => {
       "Logo in the Survey Header",
       "Question Settings",]);
     expect(await getRowsInputValues(hidden)).toEqual([]);
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(1).getAttribute("title")).toBe("Navigation");
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(2).getAttribute("title")).toBe("General");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(1).getAttribute("title")).toBe("Navigation");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(2).getAttribute("title")).toBe("General");
   });
 
   test("Check presets Property Grid - drag-drop items", async ({ page }) => {
@@ -378,7 +378,7 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Apply" }).click();
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation1", "Question Settings"]);
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-more-24x24");
-    expect(await page.locator(".svc-menu-action__icon svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-more-24x24");
+    expect(await page.locator(".svc-sidebar-tabs__item svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-more-24x24");
 
     await page.getByRole("row", { name: "Navigation1" }).hover();
     expect(await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1)).toBeVisible();
@@ -388,7 +388,7 @@ test.describe(title, () => {
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
-    expect(await page.locator(".svc-menu-action__icon svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
+    expect(await page.locator(".svc-sidebar-tabs__item svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
   });
 
   test("Check presets Property Grid - custom category", async ({ page }) => {

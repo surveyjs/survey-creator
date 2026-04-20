@@ -52,7 +52,7 @@ test.describe(title, () => {
 
   test("Check survey settings button", async ({ page }) => {
     const question1 = page.locator("[data-name=\"q1\"]");
-    const maskPage = page.locator('.svc-menu-action__button[title="Input Mask Settings"]');
+    const maskPage = page.locator('.svc-sidebar-tabs__item .sd-action[title="Input Mask Settings"]');
     await page.evaluate(() => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     });

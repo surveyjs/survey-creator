@@ -22,7 +22,8 @@ import {
   IDialogOptions,
   PageModel,
   GetMatrixRowActionsEvent,
-  QuestionTextModel
+  QuestionTextModel,
+  IAction
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -408,14 +409,14 @@ export class PropertyGridTitleActionsCreator {
     property: JsonObjectProperty,
     question: Question,
     enabled: boolean
-  ): any {
+  ): IAction {
     return {
       id: "property-grid-clear",
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
       iconSize: "auto",
-      innerCss: "spg-action-button--danger",
+      appearance: { style: "alert", mode: "tertiary-muted" },
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const propertyValue = (<any>question).obj[property.name];
@@ -464,6 +465,7 @@ export class PropertyGridTitleActionsCreator {
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
       iconSize: "auto",
+      appearance: { size: "xx-small", mode: "quaternary", style: "neutral" },
       css: "spg-help-action",
       showTitle: false,
       disableHide: true,
@@ -954,6 +956,10 @@ export class PropertyGridModel {
       this.onGetQuestionTitleActions(options, this.options);
       const q = options.question;
       this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
+      options.actions.forEach(action => {
+        if (!action.appearance)
+          action.appearance = { style: "neutral", mode: "tertiary", size: "small" };
+      });
     });
     this.survey.onGetPanelTitleActions.add((sender, options) => {
       options.actions.splice(0, options.actions.length);

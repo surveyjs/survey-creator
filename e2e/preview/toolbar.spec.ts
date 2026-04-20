@@ -86,7 +86,7 @@ test.describe(title, () => {
     await expect(page.locator(".sv-action--prevPage button")).not.toHaveAttribute("disabled", "");
     await expect(page.locator(".sv-action--nextPage button")).toHaveAttribute("disabled", "");
 
-    await page.locator(".svc-preview-pager__item[title='Page 3']").click();
+    await page.locator(".svc-pages-toolbar .sd-action[title='Page 3']").click();
     await expect(getMenuItemByText(page, "Second page")).toBeVisible();
     await expect(getMenuItemByText(page, "First page")).not.toHaveClass(selectedClassName);
     await expect(getMenuItemByText(page, "Second page")).not.toHaveClass(selectedClassName);
@@ -96,7 +96,7 @@ test.describe(title, () => {
     await expect(page.locator(".svc-page-selector")).toContainText("Second page");
     await expect(page.locator(".sv-action--prevPage button")).not.toHaveAttribute("disabled", "");
     await expect(page.locator(".sv-action--nextPage button")).not.toHaveAttribute("disabled", "");
-    await page.locator(".svc-preview-pager__item[title='Second page']").click();
+    await page.locator(".svc-pages-toolbar .sd-action[title='Second page']").click();
     await expect(getMenuItemByText(page, "First page")).not.toHaveClass(selectedClassName);
     await expect(getMenuItemByText(page, "Second page")).toHaveClass(selectedClassName);
     await expect(getMenuItemByText(page, "Page 3")).not.toHaveClass(selectedClassName);

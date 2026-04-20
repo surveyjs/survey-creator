@@ -187,12 +187,12 @@ test.describe(title, () => {
 
     let titleText = await questionTitle.innerText();
     expect(normalize(titleText)).toBe("question1");
-    await expect(requiredActionButton).not.toHaveClass(/sd-action--pressed/);
+    await expect(requiredActionButton).not.toHaveClass(/sd-action--active/);
 
     await requiredActionButton.hover();
     await requiredActionButton.click();
     await expect(questionTitle).toHaveText(/question1\s+\*/, { timeout: 3000 });
-    await expect(requiredActionButton).toHaveClass(/sd-action--pressed/);
+    await expect(requiredActionButton).toHaveClass(/sd-action--active/);
   });
 
   test("Single input question wrapper action delete", async ({ page }) => {
@@ -276,9 +276,9 @@ test.describe(title, () => {
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(1);
 
     await expect(isrequiredButton).toBeVisible();
-    await expect(isrequiredButton.locator(".svc-required-action")).not.toHaveClass(/sd-action--pressed/);
+    await expect(isrequiredButton.locator(".svc-required-action")).not.toHaveClass(/sd-action--active/);
     await isrequiredButton.click();
-    await expect(isrequiredButton.locator(".svc-required-action")).toHaveClass(/sd-action--pressed/);
+    await expect(isrequiredButton.locator(".svc-required-action")).toHaveClass(/sd-action--active/);
   });
 });
 

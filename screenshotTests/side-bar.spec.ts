@@ -129,7 +129,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-general.png");
 
-    await page.locator(".svc-menu-action__button").filter({ visible: true }).nth(4).click();
+    await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png");
 
     await page.locator(".spg-boolean-switch").filter({ visible: true }).click();
@@ -151,7 +151,7 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
 
-    await page.locator(".svc-menu-action__button").filter({ visible: true }).nth(4).click();
+    await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-default.png");
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-hover.png");

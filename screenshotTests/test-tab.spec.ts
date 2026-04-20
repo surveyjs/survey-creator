@@ -36,7 +36,7 @@ test.describe(title, () => {
 
     await page.waitForTimeout(300);
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await compareScreenshot(page, page.locator(".svc-test-tab__content .sv-action-bar--pages"), "test-tab-toolbar.png");
+    await compareScreenshot(page, page.locator(".svc-test-tab__content .svc-pages-toolbar"), "test-tab-toolbar.png");
 
     await page.setViewportSize({ width: 380, height: 600 });
     await page.waitForTimeout(300);
@@ -229,7 +229,7 @@ test.describe(title, () => {
     // Remove timer animation and disable timer start
     await page.addStyleTag({ content: ".sd-timer__progress--animation { transition: none !important; }" });
     await page.evaluate(() => {
-      (window as any).Survey.SurveyTimer.instance.start = () => {};
+      (window as any).Survey.SurveyTimer.instance.start = () => { };
     });
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();

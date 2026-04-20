@@ -210,7 +210,7 @@ test.describe(title, () => {
 
   test("test tab for mobile devices", async ({ page }) => {
     await setJSON(page, { pages: [{ elements: [{ type: "text", name: "question1" }] }] });
-    const testTabToolbar = page.locator(".sv-action-bar--pages");
+    const testTabToolbar = page.locator(".svc-pages-toolbar");
     const creatorFooterToolbar = page.locator(".svc-footer-bar .svc-toolbar-wrapper");
     const creatorFooterToolbarActions = creatorFooterToolbar.locator(".sd-action-bar__item").filter({ visible: true });
 
@@ -243,14 +243,14 @@ test.describe(title, () => {
     await expect(creatorFooterToolbarActions.nth(0)).toHaveClass(/sv-action--svd-designer/);
     await expect(creatorFooterToolbarActions.nth(1)).toHaveClass(/sv-action--svd-preview/);
     await expect(creatorFooterToolbarActions.nth(2)).toHaveClass(/sv-action--prevPage/);
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(0)).toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(2).locator(".sd-action")).toHaveAttribute("disabled", "");
     await expect(creatorFooterToolbarActions.nth(3)).toHaveClass(/sv-action--nextPage/);
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(1)).not.toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(3).locator(".sd-action")).not.toHaveAttribute("disabled", "");
     await expect(creatorFooterToolbarActions.nth(4)).toHaveClass(/sv-action--showInvisible/);
 
     await creatorFooterToolbarActions.nth(3).click();
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(0)).not.toHaveAttribute("disabled", "");
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(1)).toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(2).locator(".sd-action")).not.toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(3).locator(".sd-action")).toHaveAttribute("disabled", "");
 
     await page.setViewportSize({ width: 1920, height: 900 });
     await expect(testTabToolbar).toHaveCount(1);
