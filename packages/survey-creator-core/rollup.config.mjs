@@ -168,7 +168,8 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: resolve(buildPath, "survey-creator-core.fontless.css")
+      emitCss: resolve(buildPath, "survey-creator-core.fontless.css"),
+      noEmitOnError: !options.watch
     }),
     createCssConfig({
       input: {
@@ -208,7 +209,8 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: false
+      emitCss: false,
+      noEmitOnError: !options.watch
     })
   ];
 };
