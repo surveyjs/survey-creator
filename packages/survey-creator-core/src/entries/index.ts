@@ -97,6 +97,7 @@ export * from "../utils/utils";
 export * from "../utils/html-element-utils";
 export * from "../utils/color-utils";
 export * from "../utils/creator-utils";
+export * from "../utils/confirm-dialog";
 export * from "../question-editor/definition";
 export * from "../question-editor/properties";
 export * from "../survey-helper";
@@ -132,6 +133,7 @@ import "../components/side-bar/tab-control.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/layout.scss";
 import "../custom-questions/boolean-switch.scss";
+import "../utils/confirmation.scss";
 
 import { settings, checkLibraryVersion } from "survey-core";
 

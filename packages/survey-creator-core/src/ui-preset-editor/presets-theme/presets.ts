@@ -1,5 +1,5 @@
 import { defaultCss } from "survey-core";
-import { listComponentCss } from "survey-creator-core";
+import { listComponentCss, propertyGridCss } from "survey-creator-core";
 
 export var presetsCss = {
   root: "sps-root-modern",

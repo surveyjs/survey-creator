@@ -3,8 +3,7 @@ import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IP
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
-import { showConfirmDialog } from "./confirm-dialog";
-import { ComponentContainerModel, TabContainerViewModel } from "survey-creator-core";
+import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog } from "survey-creator-core";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.

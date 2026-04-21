@@ -1,8 +1,6 @@
 import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
-import { getLocString, SurveyCreatorModel, CreatorPresets, IPreset, PredefinedCreatorPresets, propertyGridCss, IPresetBase } from "survey-creator-core";
+import { getLocString, SurveyCreatorModel, showConfirmDialog, CreatorPresets, IPreset, PredefinedCreatorPresets, propertyGridCss, IPresetBase } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
-import { get } from "lodash";
-import { showConfirmDialog } from "./confirm-dialog";
 
 /**
  * Describes an item in the preset list.

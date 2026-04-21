@@ -1,4 +1,3 @@
-export * from "./confirm-dialog";
 export * from "./presets-editable-toolbox";
 export * from "./presets-editor";
 export * from "./presets-plugin";
