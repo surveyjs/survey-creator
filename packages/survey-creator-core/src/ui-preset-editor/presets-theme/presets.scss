@@ -8,7 +8,7 @@
 //@use "blocks/sps-checkbox.scss";
 @use "blocks/sps-matrixdynamic.scss";
 @use "blocks/sps-table.scss";
-@use "blocks/sps-list.scss";
+//@use "blocks/sps-list.scss";
 @use "blocks/sps-popup.scss";
 //@use "blocks/sps-navigation.scss";
 //@use "blocks/sps-confirmation.scss";
@@ -219,7 +219,7 @@
 
   .sd-action {
     flex-direction: row-reverse;
-    border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+    border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   }
 
   .sd-action__icon {
@@ -229,6 +229,7 @@
   .svc-list-item__marker-icon {
     width: var(--sjs2-size-x300, 24px);
     height: var(--sjs2-size-x300, 24px);
+    padding: 0;
   }
 
   .svc-list__container {
@@ -251,15 +252,22 @@
   opacity: 1;
   .svc-list__item-body {
     display: flex;
-    padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x150, 8px) var(--sjs2-spacing-x050, 4px) var(--sjs2-spacing-x200, 16px);
+    padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x150, 8px) var(--sjs2-spacing-x050, 4px)
+      var(--sjs2-spacing-x200, 16px);
     align-items: center;
     gap: 8px;
     align-self: stretch;
 
     overflow: hidden;
-    color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
+    color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
 
     @include sjs2--typography--small-strong;
   }
   padding-bottom: var(--sjs2-spacing-x050, 4px);
-} 
+}
+
+.sps-list__item--alert {
+  .svc-list__item-body {
+    color: var(--sjs2-color-fg-alert-primary, #c30935);
+  }
+}
