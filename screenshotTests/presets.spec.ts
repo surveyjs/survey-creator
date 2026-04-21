@@ -36,19 +36,19 @@ test.describe(title, () => {
 
   test("Check presets menu", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(0).click();
-    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-list-menu.png");
+    await compareScreenshot(page, page.locator(".svc-list__container"), "presets-list-menu.png");
     await page.locator(".sps-navigation-bar .sd-action").nth(2).click();
-    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-edit-menu.png");
+    await compareScreenshot(page, page.locator(".svc-list__container"), "presets-edit-menu.png");
 
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).locator(".sps-list__item").nth(2).hover();
-    await compareScreenshot(page, page.locator(".sps-list__container"), "presets-menu.png");
+    await page.locator(".svc-list__container").filter({ visible: true }).locator(".svc-list__item").nth(2).hover();
+    await compareScreenshot(page, page.locator(".svc-list__container"), "presets-menu.png");
     await compareScreenshot(page, page.locator(".sps-navigation-bar"), "presets-menu-position.png");
   });
 
   test("Check presets list", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".spg-table__cell--actions .sd-action").nth(1).click();
     await page.getByText("Manage Presets", { exact: true }).hover();
     await page.getByText("Manage Presets", { exact: true }).click();
@@ -60,7 +60,7 @@ test.describe(title, () => {
 
   test("Check presets delete confirmation dialog", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".spg-table__cell--actions .sd-action").nth(1).click();
     await page.getByText("Manage Presets", { exact: true }).click();
     await page.getByTitle("Delete").click();
@@ -97,7 +97,7 @@ test.describe(title, () => {
 
   test("Presets Items", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Tabs").click();
     expect(await page.locator(".sps-page__title").getByText("Tabs")).toBeVisible();
 
     const root = page.locator(".sps-question--matrixdynamic").first();
@@ -114,7 +114,7 @@ test.describe(title, () => {
 
   test("Presets Categories", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
 
     const root = page.locator(".sps-question--matrixdynamic").first();
@@ -142,7 +142,7 @@ test.describe(title, () => {
 
   test("Presets Context Menu", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
 
     const root = page.locator(".sps-panel").first();
@@ -161,7 +161,7 @@ test.describe(title, () => {
   test("Check presets icon edit popup", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     await page.getByRole("row", { name: "Designer" }).hover();
     await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
@@ -173,7 +173,7 @@ test.describe(title, () => {
 
   test("Presets Dialogs", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect(await page.locator(".sps-page__title").getByText("Toolbox")).toBeVisible();
 
     const root = page.locator(".sps-panel").first();
@@ -190,7 +190,7 @@ test.describe(title, () => {
 
   test("Presets options hints", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Options").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Options").click();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     await page.locator(".sv-action-bar-item--collapse").nth(0).click();
@@ -203,7 +203,7 @@ test.describe(title, () => {
 
   test("Presets options background", async ({ page }) => {
     await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Options").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Options").click();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     expect(await page.locator(".sps-page__title").getByText("Options")).toBeVisible();
     await page.locator(".sv-action-bar-item--collapse").nth(0).click();

@@ -1,9 +1,8 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, Base, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer, LocalizableString } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
-import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
-import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog } from "survey-creator-core";
+import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog, listComponentCss } from "survey-creator-core";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.

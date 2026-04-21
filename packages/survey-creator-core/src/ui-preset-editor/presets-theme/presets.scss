@@ -225,6 +225,19 @@
   .sd-action__icon {
     padding: var(--sjs2-spacing-x050, 4px);
   }
+
+  .svc-list-item__marker-icon {
+    width: var(--sjs2-size-x300, 24px);
+    height: var(--sjs2-size-x300, 24px);
+  }
+
+  .svc-list__container {
+    width: 288px;
+  }
+
+  .svc-list__item-body {
+    padding-inline-end: var(--sjs2-spacing-x200, 16px);
+  }
 }
 
 .sps-navigation-action--right {
@@ -233,3 +246,20 @@
     padding: 0;
   }
 }
+
+.sps-list__item--label {
+  opacity: 1;
+  .svc-list__item-body {
+    display: flex;
+    padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x150, 8px) var(--sjs2-spacing-x050, 4px) var(--sjs2-spacing-x200, 16px);
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+
+    overflow: hidden;
+    color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
+
+    @include sjs2--typography--small-strong;
+  }
+  padding-bottom: var(--sjs2-spacing-x050, 4px);
+} 
