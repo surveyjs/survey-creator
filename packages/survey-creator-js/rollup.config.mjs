@@ -132,11 +132,8 @@ export default async (options) => {
         "survey-core",
         "survey-creator-core",
         "survey-js-ui",
-        "survey-react-ui",
-        "react",
-        "react-dom",
       ],
-      paths: {
+      aliases: {
         "react": "survey-js-ui",
         "react-dom": "survey-js-ui",
         "survey-react-ui": "survey-js-ui",
