@@ -39,6 +39,7 @@
   top: var(--sjs-spacing-x100, 8px);
   padding: 0 var(--sjs-spacing-x100, 8px);
   z-index: 2;
+  gap: var(--sjs-spacing-x100, 8px);
   --sd-action-bar-gap: var(--sjs-spacing-x100, 8px);
 }
 
