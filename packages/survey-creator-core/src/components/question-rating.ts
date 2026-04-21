@@ -8,7 +8,10 @@ import {
   ItemValue,
   Base,
   CssClassBuilder,
-  MatrixDropdownColumn
+  MatrixDropdownColumn,
+  Action,
+  ComputedUpdater,
+  ActionContainer
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { getLocString } from "../editorLocalization";
@@ -106,12 +109,6 @@ export class QuestionRatingAdornerViewModel extends Base {
   public get enableAdd(): boolean {
     return this.allowAdd && QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maxRateValues);
   }
-  public get addClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-item-value-controls__button")
-      .append("svc-item-value-controls__button--disabled", !this.enableAdd)
-      .append("svc-item-value-controls__add").toString();
-  }
   public static allowRemoveForElement(element: QuestionRatingModel): boolean {
     return element.rateCount > 2;
   }
@@ -127,17 +124,54 @@ export class QuestionRatingAdornerViewModel extends Base {
   public get enableRemove(): boolean {
     return this.allowRemove && QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);
   }
-  public get removeClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-item-value-controls__button")
-      .append("svc-item-value-controls__button--disabled", !this.enableRemove)
-      .append("svc-item-value-controls__remove").toString();
-  }
 
+  protected createRateActions() {
+    return [
+      new Action({
+        id: "remove",
+        showTitle: false,
+        iconName: "icon-remove_16x16",
+        appearance: { size: "x-small", style: "alert", mode: "tertiary" },
+        iconSize: "auto",
+        visible: new ComputedUpdater(() => this.allowRemove) as unknown as boolean,
+        enabled: new ComputedUpdater(() => this.enableRemove) as unknown as boolean,
+        title: new ComputedUpdater(() => this.removeTooltip) as unknown as string,
+        action: () => {
+          this.removeItem(this);
+        }
+      }),
+      new Action({
+        id: "add",
+        iconName: "icon-add_16x16",
+        iconSize: "auto",
+        showTitle: false,
+        appearance: { size: "x-small", style: "brand", mode: "tertiary" },
+        visible: new ComputedUpdater(() => this.allowAdd) as unknown as boolean,
+        enabled: new ComputedUpdater(() => this.enableAdd) as unknown as boolean,
+        title: new ComputedUpdater(() => this.addTooltip) as unknown as string,
+        action: () => {
+          this.addItem(this);
+        }
+      })
+    ];
+  }
+  protected createRateActiosnContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.containerCss = this.controlsClassNames;
+    container.setItems(this.createRateActions());
+    return container;
+  }
+  private rateActionsContainerValue?: ActionContainer;
+  public get rateActionsContainer() {
+    if (!this.rateActionsContainerValue) {
+      this.rateActionsContainerValue = this.createRateActiosnContainer();
+    }
+    return this.rateActionsContainerValue;
+  }
   public get hasTopLabel(): boolean {
     return (this.element.rateDescriptionLocation == "top" ||
-            this.element.rateDescriptionLocation == "topBottom") &&
-            !!this.element.minRateDescription;
+      this.element.rateDescriptionLocation == "topBottom") &&
+      !!this.element.minRateDescription;
   }
   public get controlsClassNames(): string {
     return new CssClassBuilder()
