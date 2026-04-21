@@ -8,7 +8,6 @@ export * from "./presets-editable-options";
 export * from "./presets-editable-base";
 export * from "./preset-question-json";
 import { checkLibraryVersion } from "survey-core";
-import "../ui-preset-editor/presets-theme/presets.scss";
 export let Version: string;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore

@@ -1,5 +1,5 @@
 import { defaultCss } from "survey-core";
-import { listComponentCss, propertyGridCss } from "survey-creator-core";
+import { listComponentCss } from "survey-creator-core";
 
 export var presetsCss = {
   root: "sps-root-modern",
@@ -204,32 +204,32 @@ export var presetsCss = {
   //   hintPrefix: "sps-dropdown__hint-prefix sd-dropdown__hint-prefix",
   //   hintSuffix: "sps-dropdown__hint-suffix sd-dropdown__hint-suffix"
   // },
-  matrix: {
-    tableWrapper: "sps-matrix sps-table-wrapper",
-    root: "sps-table",
-    rowError: "sps-matrix__row--error",
-    cell: "sps-table__cell sps-matrix__cell",
-    headerCell: "sps-table__cell sps-table__cell--header",
-    label: "sps-item sps-radio sps-matrix__label",
-    itemValue: "sps-visuallyhidden sps-item__control sps-radio__control",
-    itemChecked: "sps-radio--checked",
-    itemReadOnly: "sps-item--disabled sps-radio--disabled",
-    itemHover: "sps-radio--allowhover",
-    materialDecorator: "sps-item__decorator sps-radio__decorator",
-    itemDecorator: "sps-item__svg sps-radio__svg",
-    cellText: "sps-matrix__text",
-    cellTextSelected: "sps-matrix__text--checked",
-    cellTextReadOnly: "sps-matrix__text--disabled",
-  },
-  matrixdropdown: {
-    tableWrapper: "sps-table-wrapper",
-    root: "sps-table",
-    cell: "sps-table__cell",
-    headerCell: "sps-table__cell sps-table__cell--header",
-    emptyCell: "sps-table__cell--empty",
-    rowEnter: "sps-table__row--enter",
-    rowLeave: "sps-table__row--leave",
-  },
+  // matrix: {
+  //   tableWrapper: "sps-matrix sps-table-wrapper",
+  //   root: "sps-table",
+  //   rowError: "sps-matrix__row--error",
+  //   cell: "sps-table__cell sps-matrix__cell",
+  //   headerCell: "sps-table__cell sps-table__cell--header",
+  //   label: "sps-item sps-radio sps-matrix__label",
+  //   itemValue: "sps-visuallyhidden sps-item__control sps-radio__control",
+  //   itemChecked: "sps-radio--checked",
+  //   itemReadOnly: "sps-item--disabled sps-radio--disabled",
+  //   itemHover: "sps-radio--allowhover",
+  //   materialDecorator: "sps-item__decorator sps-radio__decorator",
+  //   itemDecorator: "sps-item__svg sps-radio__svg",
+  //   cellText: "sps-matrix__text",
+  //   cellTextSelected: "sps-matrix__text--checked",
+  //   cellTextReadOnly: "sps-matrix__text--disabled",
+  // },
+  // matrixdropdown: {
+  //   tableWrapper: "sps-table-wrapper",
+  //   root: "sps-table",
+  //   cell: "sps-table__cell",
+  //   headerCell: "sps-table__cell sps-table__cell--header",
+  //   emptyCell: "sps-table__cell--empty",
+  //   rowEnter: "sps-table__row--enter",
+  //   rowLeave: "sps-table__row--leave",
+  // },
   matrixdynamic: {
     mainRoot: "sps-question sps-question--matrixdynamic sd-element sd-question sd-row__question sd-element--complex sd-question--complex sd-question--table",
     tableWrapper: "sps-table-wrapper",

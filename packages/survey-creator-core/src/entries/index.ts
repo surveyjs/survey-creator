@@ -135,6 +135,8 @@ import "../utils/layout.scss";
 import "../custom-questions/boolean-switch.scss";
 import "../utils/confirmation.scss";
 
+import "../presets-theme/presets.scss";
+
 import { settings, checkLibraryVersion } from "survey-core";
 
 checkLibraryVersion(`${process.env.VERSION}`, "survey-creator-core");
