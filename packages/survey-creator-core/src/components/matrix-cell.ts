@@ -156,7 +156,7 @@ export class MatrixCellWrapperViewModel extends Base {
         iconName: "icon-edit_16x16",
         innerCss: "svc-matrix-cell__question-controls-button",
         appearance: { style: "brand", size: "medium", mode: "quaternary-surface", showBorder: true },
-        action: (model) => this.editQuestion(model)
+        action: () => this.editQuestion(this)
       });
     }
     return this.editActionValue;
