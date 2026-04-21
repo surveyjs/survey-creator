@@ -1,6 +1,6 @@
 import { ItemValueWrapperViewModel, SurveyCreatorModel } from "survey-creator-core";
 import * as React from "react";
-import { QuestionSelectBase, Base, ItemValue, PanelModel, SurveyModel } from "survey-core";
+import { QuestionSelectBase, Base, ItemValue, PanelModel, SurveyModel, Action } from "survey-core";
 import {
   attachKey2click,
   ReactElementFactory,
@@ -60,38 +60,27 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     this.props.item.setRootElement(undefined);
   }
 
+  renderButton(action: Action) {
+    return ReactElementFactory.Instance.createElement("sv-action-bar-item", {
+      item: action,
+    });
+  }
+
   render(): React.JSX.Element {
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
-      attachKey2click(<span
-        role="button"
-        className="svc-item-value-controls__button svc-item-value-controls__add"
-        aria-label={this.model.tooltip}
-        onClick={() => {
-          this.model.add(this.model);
-          this.model.isNew = false;
-        }}
-      >
-        <SvgIcon size={"auto"} iconName={"icon-add_16x16"} title={this.model.tooltip}></SvgIcon>
-      </span>)
+      this.renderButton(this.model.addAction)
     ) : (
       <>
         {" "}
         {this.model.isDraggable ? (
           <span
-            className="svc-item-value-controls__button svc-item-value-controls__drag"
+            className="svc-item-value-controls__drag"
           >
             <SvgIcon className="svc-item-value-controls__drag-icon" size={"auto"} iconName={"icon-drag-24x24"} title={this.model.dragTooltip}></SvgIcon>
           </span>
         ) : null}
-        {this.model.allowRemove ? attachKey2click(<span
-          role="button"
-          className="svc-item-value-controls__button svc-item-value-controls__remove"
-          aria-label={this.model.tooltip}
-          onClick={() => this.model.remove(this.model)}
-        >
-          <SvgIcon size={"auto"} iconName={"icon-remove_16x16"} title={this.model.tooltip}></SvgIcon>
-        </span>) : null}
+        {this.model.allowRemove ? this.renderButton(this.model.removeAction) : null}
       </>
     );
 
