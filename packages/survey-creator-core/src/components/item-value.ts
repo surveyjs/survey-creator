@@ -279,6 +279,24 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     }
     return this.removeActionValue;
   }
+  private expandPanelActionValue?: Action;
+  public get expandPanelAction(): Action {
+    if (!this.expandPanelActionValue) {
+      this.expandPanelActionValue = new Action({
+        id: "expandPanel",
+        showTitle: false,
+        iconName: new ComputedUpdater(() => this.showPanel ? "icon-collapsepanel-16x16" : "icon-expandpanel-16x16") as unknown as string,
+        innerCss: "svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button",
+        appearance: { style: "brand", size: "x-small", mode: "tertiary" },
+        iconSize: "auto",
+        title: new ComputedUpdater(() => this.dragTooltip) as unknown as string,
+        action: () => {
+          this.togglePanel();
+        }
+      });
+    }
+    return this.expandPanelActionValue;
+  }
 
   get allowRemove() {
     const minChoices = this.creator.minChoices;
